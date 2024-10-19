@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://oa22m2ia7nea"]
+
+[ext_resource type="Script" path="res://Scripts/supply_cache.gd" id="1_wx47k"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_5aomk"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_dhy22"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_gwcla"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_euwtj"]
+albedo_color = Color(0.722072, 0.367132, 0.164543, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fv85y"]
+size = Vector3(2, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ilvk4"]
+
+[node name="SupplyContainer" type="Node3D"]
+script = ExtResource("1_wx47k")
+ItemDrop = Array[ExtResource("2_5aomk")]([ExtResource("3_dhy22"), ExtResource("5_gwcla")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_euwtj")
+mesh = SubResource("BoxMesh_fv85y")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ilvk4")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

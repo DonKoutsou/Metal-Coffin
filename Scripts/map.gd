@@ -1,0 +1,97 @@
+extends Control
+class_name Map
+
+@export var SpotScene: PackedScene
+@export var MapSpotTypes : Array[MapSpotType]
+@export var FinalSpotType : MapSpotType
+@export var MapSize = 20
+
+signal StageSellected(st : MapSpotType)
+signal StageSearched(Drops : Array[Item])
+var PlayingStage = false
+
+var SpotList : Array[MapSpot]
+var currentstage = 0
+
+func _ready() -> void:
+	GenerateMap()
+	pass # Replace with function body.
+
+func _process(_delta: float) -> void:
+	if (PlayingStage):
+		return
+	if (Input.is_action_pressed("MapLeft")):
+		if ($MapSpots.position.x >= 50):
+			return
+		var spots = get_node("MapSpots") as Control
+		spots.position.x += 5
+	if (Input.is_action_pressed("MapRight")):
+		if (SpotList[SpotList.size() - 1].global_position.x + 150 <= $MapSpots.size.x):
+			return
+		var spots = get_node("MapSpots") as Control
+		spots.position.x -= 5
+	pass
+func GenerateMap() -> void:
+	var ran = RandomNumberGenerator.new()
+	var VP= $MapSpots.size
+	VP.x /= 10
+	var locse :Dictionary
+	for g in MapSize :
+		var sc = SpotScene.instantiate() as MapSpot
+		get_node("MapSpots").add_child(sc)
+		sc.connect("MapPressed", StartStage)
+		sc.connect("SpotSearched", SpotSearched)
+		var type = MapSpotTypes.pick_random() as MapSpotType
+		if (g == MapSize - 1):
+			type = FinalSpotType
+		if (type.Mat != null):
+			type.Model.surface_set_material(0, type.Mat)
+		sc.SetSpotData(type)
+
+		var pos = Vector2(ran.randf_range(VP.x *g, VP.x * g + 1) + 50, ran.randf_range(20, VP.y - 80))
+		while (HasClose(pos)):
+			pos =Vector2(ran.randf_range(VP.x * g,VP.x * g + 1) + 50, ran.randf_range(20, VP.y -80))
+		sc.position = pos
+		locse[pos] = sc
+		SpotList.insert(g, sc)
+		
+		var line = Line2D.new()
+		line.points = [locse.keys()[max(0, g -1)], pos]
+		$MapSpots/Lines.add_child(line)
+		line.antialiased = true
+		line.default_color = Color.AQUA
+		if (currentstage != g):
+			sc.ToggleButton(false)
+		
+	pass
+func StageCleared(st : int)	-> void:
+	PlayingStage = false
+	if (st -1 >= 0):
+		var spotprev = SpotList[st - 1] as MapSpot
+		spotprev.ToggleButton(false)
+	var spot = SpotList[st] as MapSpot
+	spot.OnSpotVisited()
+	currentstage += 1
+	if (currentstage >= SpotList.size()):
+		return
+	var nextspot = SpotList[currentstage] as MapSpot
+	nextspot.ToggleButton(true)
+	pass
+func StageFailed() -> void:
+	PlayingStage = false
+func StartStage(stage :MapSpot) -> void:
+	var stagenum = SpotList.find(stage)
+	StageSellected.emit(stage, stagenum)
+	PlayingStage = true
+	pass
+func SpotSearched(stage : MapSpot, sups : Array[Item]):
+	stage.ToggleButton(false)
+	StageSearched.emit(sups)
+	pass
+	
+func HasClose(pos : Vector2) -> bool:
+	var b= false
+	for z in SpotList.size():
+		if (pos.distance_to(SpotList[z].position) < 80):
+			b = true
+	return b

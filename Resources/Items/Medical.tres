@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bqclpdfwg8s6j"]
+
+[ext_resource type="Texture2D" uid="uid://5nruswfvv0g0" path="res://Assets/Items/hospital-cross.png" id="1_qxhdb"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_twii0"]
+
+[resource]
+script = ExtResource("2_twii0")
+ItemIcon = ExtResource("1_qxhdb")
+ItemName = "Medical"
+MaxStackCount = 50

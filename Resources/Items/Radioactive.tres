@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c62pqy44otdor"]
+
+[ext_resource type="Texture2D" uid="uid://br1e4n8wtq4kv" path="res://Assets/Items/radioactive.png" id="1_eqrny"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_ius4u"]
+
+[resource]
+script = ExtResource("2_ius4u")
+ItemIcon = ExtResource("1_eqrny")
+ItemName = "Radioactive"
+MaxStackCount = 50

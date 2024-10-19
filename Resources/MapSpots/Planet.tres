@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://sew43a75jovn"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_5nol8"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_ij3bt"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_qgik8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_374xw"]
+seed = 100
+frequency = 0.112
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xpelm"]
+seamless = true
+noise = SubResource("FastNoiseLite_374xw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jw6kb"]
+albedo_color = Color(0.778318, 0.882104, 0.211563, 1)
+albedo_texture = SubResource("NoiseTexture2D_xpelm")
+emission = Color(0, 0.69719, 0.69728, 1)
+emission_energy_multiplier = 120.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1f2gj"]
+material = SubResource("StandardMaterial3D_jw6kb")
+radius = 20.0
+height = 40.0
+
+[resource]
+script = ExtResource("1_5nol8")
+Model = SubResource("SphereMesh_1f2gj")
+Name = "Planet"
+PossibleDrops = Array[ExtResource("1_ij3bt")]([ExtResource("2_qgik8")])

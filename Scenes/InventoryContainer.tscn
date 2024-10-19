@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://cti0geea0pj57"]
+
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_c3amd"]
+[ext_resource type="Script" path="res://Scenes/Inventory_Box.gd" id="1_igs2u"]
+[ext_resource type="Texture2D" uid="uid://dgk6qcppifpnk" path="res://Assets/Items/cubeforce.png" id="2_52kf5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrijd"]
+bg_color = Color(0.193154, 0.193154, 0.193153, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="InventoryBox" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_igs2u")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_52kf5")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hrijd")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.480082, 0.947566, 0.548911, 1)
+theme_override_fonts/font = ExtResource("1_c3amd")
+text = "1"

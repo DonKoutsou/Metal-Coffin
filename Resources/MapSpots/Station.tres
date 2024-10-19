@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://b1levfg3rcd16"]
+
+[ext_resource type="ArrayMesh" uid="uid://br4fay0c1ss0j" path="res://Assets/Station/SpaceStation.obj" id="1_mcniy"]
+[ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_w87ay"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_jvrwr"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_j0x84"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="4_2hjms"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5w0p"]
+albedo_color = Color(0.500127, 0.376724, 0.265091, 1)
+metallic = 1.0
+roughness = 0.5
+
+[resource]
+script = ExtResource("1_w87ay")
+Model = ExtResource("1_mcniy")
+Mat = SubResource("StandardMaterial3D_e5w0p")
+Name = "Space Station"
+PossibleDrops = Array[ExtResource("2_jvrwr")]([ExtResource("3_j0x84"), ExtResource("4_2hjms")])

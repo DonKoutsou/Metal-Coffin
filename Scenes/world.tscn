@@ -1,0 +1,131 @@
+[gd_scene load_steps=14 format=3 uid="uid://doahe8bm2ac5r"]
+
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
+[ext_resource type="Script" path="res://Scripts/PlayerData.gd" id="2_cw2r8"]
+[ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
+[ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/game.tscn" id="2_sl3gr"]
+[ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/BattleScene.tscn" id="3_fvwv6"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
+[ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="7_s4cw5"]
+[ext_resource type="Script" path="res://Scripts/inventory.gd" id="9_0pxmw"]
+
+[sub_resource type="Resource" id="Resource_t0ell"]
+script = ExtResource("2_cw2r8")
+HP = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbar6"]
+bg_color = Color(0.389287, 0.389287, 0.389286, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
+bg_color = Color(0.275636, 0.275636, 0.275636, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vml5t"]
+bg_color = Color(0.219508, 0.477555, 9.62615e-08, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r24pv"]
+bg_color = Color(0.781105, 0.651497, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_lg538")
+PlayerDat = SubResource("Resource_t0ell")
+scene = ExtResource("2_sl3gr")
+BattleScene = ExtResource("3_fvwv6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Map" parent="CanvasLayer" instance=ExtResource("2_dh8se")]
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer3"]
+layout_mode = 2
+
+[node name="Inventory" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("9_0pxmw")
+InventoryBoxScene = ExtResource("7_s4cw5")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer3"]
+layout_mode = 2
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/PanelContainer3/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 47
+text = "HP:"
+horizontal_alignment = 1
+
+[node name="PlayerHP" type="ProgressBar" parent="CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vml5t")
+step = 1.0
+value = 84.0
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/PanelContainer3/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer3"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 47
+text = "Fuel:"
+horizontal_alignment = 1
+
+[node name="Fuel" type="ProgressBar" parent="CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r24pv")
+step = 1.0
+value = 84.0

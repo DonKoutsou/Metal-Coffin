@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://tucv7faum217"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_aflge"]
+[ext_resource type="ArrayMesh" uid="uid://d0g25ewvmqv4c" path="res://Assets/Rocks/Rock2_Lod2.tres" id="2_cu8qf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ps3gg"]
+frequency = 0.0125
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v5lr5"]
+seamless = true
+noise = SubResource("FastNoiseLite_ps3gg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5hj6"]
+albedo_texture = SubResource("NoiseTexture2D_v5lr5")
+metallic_specular = 0.41
+uv1_triplanar = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmuha"]
+height = 1.3
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_aflge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.294859, 0, 0, 0, 0.294859, 0, 0, 0, 0.294859, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_y5hj6")
+mesh = ExtResource("2_cu8qf")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_xmuha")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdisf4wscxmw5"]
+
+[ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
+[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
+[ext_resource type="PackedScene" uid="uid://dd0ax3exqiu17" path="res://Scenes/button.tscn" id="3_2ct80"]
+[ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="3_8foxp"]
+[ext_resource type="Resource" uid="uid://sew43a75jovn" path="res://Resources/MapSpots/Planet.tres" id="4_laxnu"]
+[ext_resource type="Resource" uid="uid://cj8ebb6k6xjb0" path="res://Resources/MapSpots/Star.tres" id="5_cl201"]
+[ext_resource type="Resource" uid="uid://b1levfg3rcd16" path="res://Resources/MapSpots/Station.tres" id="6_bd3x3"]
+[ext_resource type="Texture2D" uid="uid://bcbx7v0iikakr" path="res://Assets/SpaceBG.png" id="6_ttv3p"]
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mq604")
+SpotScene = ExtResource("2_csmts")
+MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201")])
+FinalSpotType = ExtResource("6_bd3x3")
+MapSize = 40
+
+[node name="ColorRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -134.0
+offset_right = 14.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_ttv3p")
+expand_mode = 1
+
+[node name="MapSpots" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Lines" type="Control" parent="MapSpots"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" parent="." instance=ExtResource("3_2ct80")]
+position = Vector2(88, 305)
+action = "MapLeft"
+buttontext = "<"
+
+[node name="Button2" parent="." instance=ExtResource("3_2ct80")]
+position = Vector2(1045, 305)
+action = "MapRight"
+buttontext = ">"

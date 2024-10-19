@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dosurqfr722oq"]
+
+[ext_resource type="ArrayMesh" uid="uid://byus7qmd0hep7" path="res://Assets/Spaceship/Ship.obj" id="1_pfpqp"]
+[ext_resource type="Script" path="res://Scripts/character.gd" id="2_w2wc2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f1vo"]
+diffuse_mode = 3
+specular_mode = 1
+roughness = 0.31
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t2lwm"]
+size = Vector3(2.35376, 0.330078, 1)
+
+[node name="SpaceShip" type="MeshInstance3D"]
+transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2f1vo")
+mesh = ExtResource("1_pfpqp")
+script = ExtResource("2_w2wc2")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0262331, 0)
+shape = SubResource("BoxShape3D_t2lwm")
