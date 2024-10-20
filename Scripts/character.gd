@@ -1,5 +1,6 @@
 
 extends  MeshInstance3D
+class_name Character
 @export var ManuverSpeed = 4
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,7 +13,9 @@ func Jump() ->void:
 	tw.tween_property(self, "position:y", 3,1)
 	tw.set_ease(Tween.EASE_OUT)
 	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func Damage() -> void:
+	$AnimationPlayer.play("Damage")
+	
 func _physics_process(_delta: float) -> void:
 	if (Input.is_action_pressed("MoveLeft") and position.x > -5):
 		rotation.z = deg_to_rad(max(rad_to_deg(rotation.z) - ManuverSpeed, -30))

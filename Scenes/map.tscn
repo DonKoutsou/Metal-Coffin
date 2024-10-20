@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=11 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -8,6 +8,21 @@
 [ext_resource type="Resource" uid="uid://cj8ebb6k6xjb0" path="res://Resources/MapSpots/Star.tres" id="5_cl201"]
 [ext_resource type="Resource" uid="uid://b1levfg3rcd16" path="res://Resources/MapSpots/Station.tres" id="6_bd3x3"]
 [ext_resource type="Texture2D" uid="uid://bcbx7v0iikakr" path="res://Assets/SpaceBG.png" id="6_ttv3p"]
+[ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="8_joyah"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrm2y"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.781105, 0.651497, 0, 1)
+border_blend = true
+corner_radius_top_left = 1024
+corner_radius_top_right = 1024
+corner_radius_bottom_right = 1024
+corner_radius_bottom_left = 1024
+corner_detail = 20
 
 [node name="Map" type="Control"]
 layout_mode = 3
@@ -42,11 +57,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 250.0
+offset_right = 250.0
 offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Lines" type="Control" parent="MapSpots"]
+[node name="SpotSpot" type="Control" parent="MapSpots"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,12 +71,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PlayerShip" type="Sprite2D" parent="MapSpots"]
+position = Vector2(-171, 311)
+rotation = 1.5708
+texture = ExtResource("8_joyah")
+
+[node name="Panel" type="Panel" parent="MapSpots/PlayerShip"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -432.0
+offset_top = -432.0
+offset_right = 368.0
+offset_bottom = 368.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rrm2y")
+
 [node name="Button" parent="." instance=ExtResource("3_2ct80")]
-position = Vector2(88, 305)
+position = Vector2(88, 95)
 action = "MapLeft"
 buttontext = "<"
 
 [node name="Button2" parent="." instance=ExtResource("3_2ct80")]
-position = Vector2(1045, 305)
+position = Vector2(1060, 95)
 action = "MapRight"
 buttontext = ">"

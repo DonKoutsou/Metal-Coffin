@@ -2,23 +2,26 @@ extends Node3D
 class_name  TravelMinigameGame
 
 @export var EnemyShapes : Array[Mesh]
-@export var Enemy : PackedScene
+@export var Obstacle : PackedScene
 @export var SuuplyScene : PackedScene
-
 @export var EnemyGoal : int
 @export var EnemySpawnRate : float
+
 @onready var planet_pivot: Node3D = $PlanetPivot
+@onready var character: Character = $Character
 
 signal OnGameEnded(Renault : bool)
 
 var Supplies : Array[Item]
 var enemies = 0
-# Called when the node enters the scene tree for the first time.
+var Hull : int
+
 func _ready() -> void:
+	$PanelContainer2/HBoxContainer/HullHp.value = Hull
 	var fintrans = -50;
-	var SuppliesList = [0, 0, 0, 0]
-	for g in 4:
-		SuppliesList[g] = randi_range(0, EnemyGoal)
+	var SuppliesList = []
+	for g in EnemyGoal/10:
+		SuppliesList.insert(g, randi_range(0, EnemyGoal))
 	for g in EnemyGoal :
 		if (SuppliesList.has(g)):
 			var sup = SuuplyScene.instantiate()
@@ -29,7 +32,7 @@ func _ready() -> void:
 			sup.position.x = rand.randf_range(-5, 5)
 			sup.position.y = rand.randf_range(-3, 3)
 
-		var enemy = Enemy.instantiate()
+		var enemy = Obstacle.instantiate() as Enemy
 		add_child(enemy)
 		enemy.SetMesh(EnemyShapes.pick_random())
 		var ran = RandomNumberGenerator.new()
@@ -37,13 +40,14 @@ func _ready() -> void:
 		enemy.position.z = fintrans
 		enemy.position.x = ran.randf_range(-5, 5)
 		enemy.position.y = ran.randf_range(-3, 3)
+		enemy.PlayerTouched.connect(EnemyHit)
 	planet_pivot.position.z = fintrans -10
 
 func SetDestinationMesh(Model : Mesh) -> void:
 	$PlanetPivot/MeshInstance3D7.mesh = Model
 
 func GameFinished(fin : bool) -> void:
-	OnGameEnded.emit(fin, Supplies)
+	OnGameEnded.emit(fin, Supplies, Hull)
 	queue_free()
 	
 func EnemyKilled() -> void:
@@ -51,6 +55,13 @@ func EnemyKilled() -> void:
 	if (enemies >= EnemyGoal):
 		GameFinished(true)
 		
+func EnemyHit():
+	Hull -= 10
+	$PanelContainer2/HBoxContainer/HullHp.value = Hull
+	character.Damage()
+	if (Hull == 0):
+		GameFinished(false)
+	
 func SupplyGathered(supplycontents : Array[Item]) -> void:
 	for g in supplycontents.size() :
 		Supplies.insert(g, supplycontents[g])

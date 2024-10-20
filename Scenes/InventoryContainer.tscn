@@ -21,12 +21,13 @@ corner_radius_bottom_left = 2
 custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 script = ExtResource("1_igs2u")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="Button" parent="."]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("2_52kf5")
+icon = ExtResource("2_52kf5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -41,3 +42,5 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.480082, 0.947566, 0.548911, 1)
 theme_override_fonts/font = ExtResource("1_c3amd")
 text = "1"
+
+[connection signal="pressed" from="TextureRect" to="." method="_on_texture_rect_pressed"]

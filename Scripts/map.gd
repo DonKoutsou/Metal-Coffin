@@ -5,8 +5,10 @@ class_name Map
 @export var MapSpotTypes : Array[MapSpotType]
 @export var FinalSpotType : MapSpotType
 @export var MapSize = 20
+@onready var player_ship: Sprite2D = $MapSpots/PlayerShip
+@onready var world: World = $"../.."
 
-signal StageSellected(st : MapSpotType)
+signal StageSellected(st : MapSpotType, stNum : int, fuelcons : float)
 signal StageSearched(Drops : Array[Item])
 var PlayingStage = false
 
@@ -21,7 +23,7 @@ func _process(_delta: float) -> void:
 	if (PlayingStage):
 		return
 	if (Input.is_action_pressed("MapLeft")):
-		if ($MapSpots.position.x >= 50):
+		if ($MapSpots.position.x >= 250):
 			return
 		var spots = get_node("MapSpots") as Control
 		spots.position.x += 5
@@ -38,7 +40,7 @@ func GenerateMap() -> void:
 	var locse :Dictionary
 	for g in MapSize :
 		var sc = SpotScene.instantiate() as MapSpot
-		get_node("MapSpots").add_child(sc)
+		$MapSpots/SpotSpot.add_child(sc)
 		sc.connect("MapPressed", StartStage)
 		sc.connect("SpotSearched", SpotSearched)
 		var type = MapSpotTypes.pick_random() as MapSpotType
@@ -55,38 +57,43 @@ func GenerateMap() -> void:
 		locse[pos] = sc
 		SpotList.insert(g, sc)
 		
-		var line = Line2D.new()
-		line.points = [locse.keys()[max(0, g -1)], pos]
-		$MapSpots/Lines.add_child(line)
-		line.antialiased = true
-		line.default_color = Color.AQUA
-		if (currentstage != g):
-			sc.ToggleButton(false)
+		#var line = Line2D.new()
+		#line.points = [locse.keys()[max(0, g -1)], pos]
+		#$MapSpots/Lines.add_child(line)
+		#line.antialiased = true
+		#line.default_color = Color.AQUA
+		
+	ToggleClose()
+	UpdateFuelRange(world.PlayerDat.FUEL)
 		
 	pass
 func StageCleared(st : int)	-> void:
 	PlayingStage = false
-	if (st -1 >= 0):
-		var spotprev = SpotList[st - 1] as MapSpot
-		spotprev.ToggleButton(false)
+	if (currentstage >= 0):
+		var spotprev = SpotList[currentstage] as MapSpot
+		spotprev.ToggleLandButton(false)
+		
 	var spot = SpotList[st] as MapSpot
-	spot.OnSpotVisited()
-	currentstage += 1
+	currentstage = st
 	if (currentstage >= SpotList.size()):
 		return
-	var nextspot = SpotList[currentstage] as MapSpot
-	nextspot.ToggleButton(true)
-	pass
+	if (!spot.Visited):
+		spot.ToggleLandButton(true)
+	player_ship.global_position = spot.global_position
+	ToggleClose()
+	
 func StageFailed() -> void:
 	PlayingStage = false
 func StartStage(stage :MapSpot) -> void:
 	var stagenum = SpotList.find(stage)
-	StageSellected.emit(stage, stagenum)
+	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10
+	StageSellected.emit(stage, stagenum, fuel)
 	PlayingStage = true
 	pass
 func SpotSearched(stage : MapSpot, sups : Array[Item]):
-	stage.ToggleButton(false)
+	stage.ToggleLandButton(false)
 	StageSearched.emit(sups)
+	stage.OnSpotVisited()
 	pass
 	
 func HasClose(pos : Vector2) -> bool:
@@ -95,3 +102,13 @@ func HasClose(pos : Vector2) -> bool:
 		if (pos.distance_to(SpotList[z].position) < 80):
 			b = true
 	return b
+func UpdateFuelRange(fuel : float):
+	var distall = fuel * 10
+	$MapSpots/PlayerShip/Panel.size = Vector2(distall, distall) * 2
+	$MapSpots/PlayerShip/Panel.position = Vector2(-(distall), -(distall))
+
+func ToggleClose() -> void:
+	var distall = world.PlayerDat.FUEL * 10
+	for z in SpotList.size():
+		var dist = player_ship.global_position.distance_to(SpotList[z].global_position)
+		SpotList[z].ToggleVisitButton(dist < distall and dist > 0)

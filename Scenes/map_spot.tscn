@@ -1265,9 +1265,15 @@ theme_override_fonts/font = ExtResource("2_uoroi")
 text = "map name"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="VisitButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
 text = "Visit"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="LandButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_uoroi")
+text = "Land"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VisitButton" to="." method="_on_visit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/LandButton" to="." method="_on_land_button_pressed"]

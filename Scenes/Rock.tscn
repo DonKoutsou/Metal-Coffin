@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://tucv7faum217"]
+[gd_scene load_steps=9 format=3 uid="uid://tucv7faum217"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_aflge"]
 [ext_resource type="ArrayMesh" uid="uid://d0g25ewvmqv4c" path="res://Assets/Rocks/Rock2_Lod2.tres" id="2_cu8qf"]
+[ext_resource type="ArrayMesh" uid="uid://c1o27w2a67o55" path="res://Assets/Rocks/Rock3_Lod2.tres" id="3_6xlcg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ps3gg"]
 frequency = 0.0125
@@ -18,7 +19,21 @@ uv1_triplanar = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmuha"]
 height = 1.3
 
-[node name="Enemy" type="Node3D"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4qt5w"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 720.0
+direction = Vector3(0, 0, 0)
+radial_velocity_min = 0.0999776
+radial_velocity_max = 0.299978
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 23.68
+scale_min = 0.05
+scale_max = 0.2
+
+[node name="Rock" type="Node3D"]
 script = ExtResource("1_aflge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -28,8 +43,23 @@ mesh = ExtResource("2_cu8qf")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_xmuha")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_y5hj6")
+emitting = false
+amount = 5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 24
+local_coords = true
+draw_order = 3
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_4qt5w")
+draw_pass_1 = ExtResource("3_6xlcg")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

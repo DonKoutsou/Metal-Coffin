@@ -7,9 +7,14 @@ signal SpotSearched(Pos : MapSpot, Drops : Array[Item])
 var SpotItems : Array[Item]
 var SpotNameSt : String
 var SpotMesh : Mesh
+var Visited = false
+func _ready() -> void:
+	$PanelContainer/VBoxContainer/VisitButton.visible = false
+	$PanelContainer/VBoxContainer/LandButton.visible = false
 
 func ToggleVisited(t : bool) -> void:
 	$Panel/Panel.visible = t
+	Visited = true
 
 func SetSpotData(Data : MapSpotType) -> void:
 	SetSpotName(Data.Name)
@@ -17,8 +22,7 @@ func SetSpotData(Data : MapSpotType) -> void:
 	SetSpotDrop(Data.PossibleDrops.pick_random())
 
 func SetSpotName(SpotName : String) -> void:
-	var b = get_node("PanelContainer/VBoxContainer/Label") as Label
-	b.text = SpotName
+	$PanelContainer/VBoxContainer/Label.text = SpotName
 	SpotNameSt = SpotName
 
 func SetSpotMesh(SpetMesh : Mesh) -> void:
@@ -30,18 +34,16 @@ func SetSpotDrop(SpotDrop : Item) -> void:
 	for g in DropAmm :
 		SpotItems.insert(g, SpotDrop)
 
-func ToggleButton(tog : bool) -> void:
-	var b = get_node("PanelContainer/VBoxContainer/Button") as Button
-	b.visible = tog
+func ToggleVisitButton(tog : bool) -> void:
+	$PanelContainer/VBoxContainer/VisitButton.visible = tog
+func ToggleLandButton(tog : bool) -> void:
+	$PanelContainer/VBoxContainer/LandButton.visible = tog
 	
 func OnSpotVisited() -> void:
-	var but = get_node("PanelContainer/VBoxContainer/Button") as Button
-	but.text = "Land"
 	ToggleVisited(true)
 
-func _on_button_pressed() -> void:
-	var but = get_node("PanelContainer/VBoxContainer/Button") as Button
-	if (but.text == "Visit"):
-		MapPressed.emit(self)
-	else:
-		SpotSearched.emit(self, SpotItems)
+func _on_visit_button_pressed() -> void:
+	MapPressed.emit(self)
+
+func _on_land_button_pressed() -> void:
+	SpotSearched.emit(self, SpotItems)

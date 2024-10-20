@@ -4,12 +4,11 @@ class_name Battle
 @export var DamageFloaterScene : PackedScene
 @export var DamageFloaterPLScene : PackedScene
 
-
 @onready var EnHp = $VBoxContainer2/EnemyHp as ProgressBar
 @onready var PlHp = $VBoxContainer/PlayerHP as ProgressBar
-
 @onready var AtTimer = $AtackTimer as Timer
 @onready var ToffTimee = $TurnOffTimer as Timer
+@onready var enemy_attack_timer: Timer = $EnemyAttackTimer
 
 signal OnBattleEnded(Resault : bool, RemainingHP : int, Supplies : int)
 
@@ -29,9 +28,7 @@ func _ready() -> void:
 	EnHp.value = EnemyHp
 	PlHp.max_value = 100
 	PlHp.value = PlayerHp
-	
-	pass # Replace with function body.
-
+	enemy_attack_timer.wait_time = randf_range(0.5, 3)
 
 func _on_atack_pressed() -> void:
 	if (Attacking or PlayerDead):
@@ -46,35 +43,30 @@ func _on_atack_pressed() -> void:
 	else :
 		AtTimer.start()
 	SpawnFloater(10)
-	pass # Replace with function body.
 
 
 func _on_atack_timer_timeout() -> void:
 	Attacking = false
-	pass # Replace with function body.
-
 
 func _on_turn_off_timer_timeout() -> void:
 	OnBattleEnded.emit(BattleResault, PlayerHp, SupplyReward)
 	queue_free()
-	pass # Replace with function body.
 	
 func SpawnFloater(Num : int) -> void:
 	var floater = DamageFloaterScene.instantiate() as Label
 	floater.text = var_to_str(Num)
 	add_child(floater)
-	pass
+
 func SpawnPlayerFloater(Num : int) -> void:
 	var floater = DamageFloaterPLScene.instantiate() as Label
 	floater.text = var_to_str(Num)
 	add_child(floater)
 	floater.position.y +=  200
-	pass
 
 func _on_enemy_attack_timer_timeout() -> void:
 	if (EnemyDead or PlayerDead):
 		return
-		
+	enemy_attack_timer.wait_time = randf_range(0.5, 3)
 	var damage = 10
 	if (Defending):
 		damage = 0
@@ -87,14 +79,10 @@ func _on_enemy_attack_timer_timeout() -> void:
 		PlayerDead = true
 		ToffTimee.start()
 		BattleResault = false
-	pass # Replace with function body.
 
 
 func _on_def_button_down() -> void:
 	Defending = true
-	pass # Replace with function body.
-
 
 func _on_def_button_up() -> void:
 	Defending = false
-	pass # Replace with function body.

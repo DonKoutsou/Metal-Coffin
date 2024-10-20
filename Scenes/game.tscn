@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://civ710rd6srtr"]
+[gd_scene load_steps=24 format=3 uid="uid://civ710rd6srtr"]
 
 [ext_resource type="Script" path="res://Scripts/TravelMinigameGame.gd" id="1_6jml3"]
 [ext_resource type="ArrayMesh" uid="uid://c3r8p45nush07" path="res://Assets/Rocks/Rock1_Lod2.tres" id="2_7fbvq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/planet_pivot.gd" id="7_7j074"]
 [ext_resource type="PackedScene" uid="uid://oa22m2ia7nea" path="res://Scenes/SupplyCache.tscn" id="8_jxkch"]
 [ext_resource type="ArrayMesh" uid="uid://br4fay0c1ss0j" path="res://Assets/Station/SpaceStation.obj" id="12_hk1xh"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="14_vwqn1"]
 
 [sub_resource type="Gradient" id="Gradient_jo0lo"]
 
@@ -55,18 +56,42 @@ dof_blur_near_distance = 128.03
 dof_blur_near_transition = 501.54
 dof_blur_amount = 0.45
 
-[sub_resource type="QuadMesh" id="QuadMesh_tehhk"]
-size = Vector2(1000, 1000)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nv7ds"]
+bg_color = Color(0.389287, 0.389287, 0.389286, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7lbm"]
+bg_color = Color(0.275636, 0.275636, 0.275636, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0mwf"]
+bg_color = Color(0.185246, 0.444447, 0.512501, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
 
 [node name="Game" type="Node3D"]
+process_mode = 1
 script = ExtResource("1_6jml3")
 EnemyShapes = Array[Mesh]([ExtResource("2_7fbvq"), ExtResource("3_llaub"), ExtResource("4_2iueu"), ExtResource("5_kdrwu"), ExtResource("6_expmw")])
-Enemy = ExtResource("2_mp2ca")
+Obstacle = ExtResource("2_mp2ca")
 SuuplyScene = ExtResource("8_jxkch")
 EnemyGoal = 40
 EnemySpawnRate = 0.5
 
-[node name="MeshInstance3D" parent="." instance=ExtResource("3_q3swo")]
+[node name="Character" parent="." instance=ExtResource("3_q3swo")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.497)
@@ -75,11 +100,6 @@ fov = 22.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jrnrp")
 camera_attributes = SubResource("CameraAttributesPractical_3siew")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.508, 0)
-visible = false
-mesh = SubResource("QuadMesh_tehhk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.708384, -0.705764, 0.00945509, 0.27753, 0.290827, 0.91564, -0.648975, -0.646001, 0.401888, 0, 0, 0)
@@ -105,3 +125,35 @@ action_left = "MoveLeft"
 action_right = "MoveRight"
 action_up = "MoveUp"
 action_down = "MoveDown"
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -66.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nv7ds")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="PanelContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("14_vwqn1")
+theme_override_font_sizes/font_size = 47
+text = "Hull:"
+horizontal_alignment = 1
+
+[node name="HullHp" type="ProgressBar" parent="PanelContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_e7lbm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y0mwf")
+step = 1.0
+value = 84.0
