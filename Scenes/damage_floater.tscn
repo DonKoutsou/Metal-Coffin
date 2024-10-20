@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://mxfnm7hywo4f"]
 
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_elilk"]
-[ext_resource type="Script" path="res://damage_floater.gd" id="1_nmcop"]
+[ext_resource type="Script" path="res://Scripts/damage_floater.gd" id="1_nmcop"]
 
 [node name="DamageFloater" type="Label"]
 anchors_preset = 8

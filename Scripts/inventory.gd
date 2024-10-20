@@ -37,3 +37,5 @@ func UseItem(It : Item):
 
 func _on_inventory_button_pressed() -> void:
 	$InvContents.visible = !$InvContents.visible
+func _on_upgrades_button_pressed() -> void:
+	$UpgradesContainer.visible = !$UpgradesContainer.visible

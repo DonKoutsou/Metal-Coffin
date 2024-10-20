@@ -8,3 +8,4 @@ script = ExtResource("1_4aeu6")
 ItemIcon = ExtResource("1_3f7co")
 ItemName = "Supply"
 MaxStackCount = 50
+RandomFindMaxCount = 6

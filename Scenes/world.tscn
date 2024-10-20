@@ -1,20 +1,37 @@
-[gd_scene load_steps=16 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=19 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="Script" path="res://Scripts/PlayerData.gd" id="2_cw2r8"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
-[ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/game.tscn" id="2_sl3gr"]
+[ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/TravelMinigameGame.tscn" id="2_sl3gr"]
 [ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/BattleScene.tscn" id="3_fvwv6"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
 [ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="7_s4cw5"]
+[ext_resource type="Texture2D" uid="uid://cnbvw27mfvx12" path="res://Assets/Items/materials-science_smol.png" id="8_hvdcp"]
 [ext_resource type="Texture2D" uid="uid://b17tyissn80pu" path="res://Assets/Items/lockers.png" id="8_jyf5m"]
 [ext_resource type="Script" path="res://Scripts/inventory.gd" id="9_0pxmw"]
+[ext_resource type="Texture2D" uid="uid://dunmrj6hw2yft" path="res://Assets/upgrade.png" id="10_ayjou"]
 
 [sub_resource type="Resource" id="Resource_t0ell"]
 script = ExtResource("2_cw2r8")
 HP = 100
 HULLHP = 100
 FUEL = 100.0
+VIZ_RANGE = 500
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvjqw"]
+bg_color = Color(0.326971, 0.291565, 0.274615, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbar6"]
 bg_color = Color(0.389287, 0.389287, 0.389286, 1)
@@ -72,6 +89,7 @@ process_mode = 1
 layer = 2
 
 [node name="Map" parent="CanvasLayer" instance=ExtResource("2_dh8se")]
+MapSize = 150
 
 [node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 12
@@ -82,6 +100,7 @@ offset_top = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uvjqw")
 
 [node name="Inventory" type="VBoxContainer" parent="CanvasLayer/PanelContainer3"]
 layout_mode = 2
@@ -90,14 +109,94 @@ alignment = 2
 script = ExtResource("9_0pxmw")
 InventoryBoxScene = ExtResource("7_s4cw5")
 
+[node name="UpgradesContainer" type="PanelContainer" parent="CanvasLayer/PanelContainer3/Inventory"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Radar Range
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 28.03)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 10.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Button" type="Button" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cost :"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_hvdcp")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Fuel Efficiency"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 28.03)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 10.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Button" type="Button" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "+"
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Cost :"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer3/Inventory/UpgradesContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("8_hvdcp")
+
 [node name="InvContents" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/Inventory"]
+visible = false
 layout_mode = 2
 
-[node name="InventoryButton" type="Button" parent="CanvasLayer/PanelContainer3/Inventory"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/Inventory"]
+layout_mode = 2
+
+[node name="InventoryButton" type="Button" parent="CanvasLayer/PanelContainer3/Inventory/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 icon = ExtResource("8_jyf5m")
+
+[node name="UpgradesButton" type="Button" parent="CanvasLayer/PanelContainer3/Inventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+icon = ExtResource("10_ayjou")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer3"]
 layout_mode = 2
@@ -238,6 +337,7 @@ theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 26
 text = "OK"
 
-[connection signal="pressed" from="CanvasLayer/PanelContainer3/Inventory/InventoryButton" to="CanvasLayer/PanelContainer3/Inventory" method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer3/Inventory/HBoxContainer/InventoryButton" to="CanvasLayer/PanelContainer3/Inventory" method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer3/Inventory/HBoxContainer/UpgradesButton" to="CanvasLayer/PanelContainer3/Inventory" method="_on_upgrades_button_pressed"]
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer2/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

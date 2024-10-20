@@ -1160,11 +1160,12 @@ Button/styles/normal = SubResource("StyleBoxFlat_8bbj1")
 Button/styles/pressed = SubResource("StyleBoxFlat_4dooe")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_001u6"]
-bg_color = Color(0.229683, 0.229683, 0.229683, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+bg_color = Color(0.29051, 0.250084, 0.244035, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.217101, 0.217101, 0.217101, 1)
 border_blend = true
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -1185,17 +1186,17 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h8a6"]
-bg_color = Color(0.225449, 0.22545, 0.225449, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.00428469, 0.0492505, 0.0645272, 1)
+bg_color = Color(0.316628, 0.270089, 0.292582, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.0936694, 0.0936694, 0.0936694, 1)
 border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 corner_detail = 1
 expand_margin_left = 5.0
 expand_margin_top = 5.0
@@ -1242,21 +1243,20 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_gu3gc")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = 18.939
-offset_right = 46.5
-offset_bottom = 90.617
+offset_left = -6.5
+offset_top = 31.0
+offset_right = 6.5
+offset_bottom = 41.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3h8a6")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 alignment = 1
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]

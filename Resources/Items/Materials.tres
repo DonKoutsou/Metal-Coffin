@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://clyeusyxaqgda"]
+
+[ext_resource type="Texture2D" uid="uid://cw7pry6dv5w2k" path="res://Assets/Items/materials-science.png" id="1_pfi5x"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_yyjv6"]
+
+[resource]
+script = ExtResource("2_yyjv6")
+ItemIcon = ExtResource("1_pfi5x")
+ItemName = "Materials"
+MaxStackCount = 50
+RandomFindMaxCount = 1

@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://sew43a75jovn" path="res://Resources/MapSpots/Planet.tres" id="4_laxnu"]
 [ext_resource type="Resource" uid="uid://cj8ebb6k6xjb0" path="res://Resources/MapSpots/Star.tres" id="5_cl201"]
 [ext_resource type="Resource" uid="uid://b1levfg3rcd16" path="res://Resources/MapSpots/Station.tres" id="6_bd3x3"]
-[ext_resource type="Texture2D" uid="uid://bcbx7v0iikakr" path="res://Assets/SpaceBG.png" id="6_ttv3p"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="8_joyah"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrm2y"]
@@ -17,6 +16,20 @@ border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
 border_color = Color(0.781105, 0.651497, 0, 1)
+border_blend = true
+corner_radius_top_left = 1024
+corner_radius_top_right = 1024
+corner_radius_bottom_right = 1024
+corner_radius_bottom_left = 1024
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qg31g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
 border_blend = true
 corner_radius_top_left = 1024
 corner_radius_top_right = 1024
@@ -36,21 +49,6 @@ SpotScene = ExtResource("2_csmts")
 MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201")])
 FinalSpotType = ExtResource("6_bd3x3")
 MapSize = 40
-
-[node name="ColorRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -13.0
-offset_top = -134.0
-offset_right = 14.0
-offset_bottom = 161.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("6_ttv3p")
-expand_mode = 1
 
 [node name="MapSpots" type="Control" parent="."]
 layout_mode = 1
@@ -91,6 +89,22 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rrm2y")
+
+[node name="Panel2" type="Panel" parent="MapSpots/PlayerShip"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = -234.0
+offset_right = 171.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qg31g")
 
 [node name="Button" parent="." instance=ExtResource("3_2ct80")]
 position = Vector2(88, 95)

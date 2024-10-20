@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 			return
 		var spots = get_node("MapSpots") as Control
 		spots.position.x -= 5
-	pass
+		
 func GenerateMap() -> void:
 	var ran = RandomNumberGenerator.new()
 	var VP= $MapSpots.size
@@ -50,9 +50,9 @@ func GenerateMap() -> void:
 			type.Model.surface_set_material(0, type.Mat)
 		sc.SetSpotData(type)
 
-		var pos = Vector2(ran.randf_range(VP.x *g, VP.x * g + 1) + 50, ran.randf_range(20, VP.y - 80))
+		var pos = Vector2(ran.randf_range(VP.x *g, VP.x * (g + 2)) + 50, ran.randf_range(20, VP.y - 80))
 		while (HasClose(pos)):
-			pos =Vector2(ran.randf_range(VP.x * g,VP.x * g + 1) + 50, ran.randf_range(20, VP.y -80))
+			pos =Vector2(ran.randf_range(VP.x * g,VP.x * (g + 2)) + 50, ran.randf_range(20, VP.y -80))
 		sc.position = pos
 		locse[pos] = sc
 		SpotList.insert(g, sc)
@@ -65,7 +65,7 @@ func GenerateMap() -> void:
 		
 	ToggleClose()
 	UpdateFuelRange(world.PlayerDat.FUEL)
-		
+	UpdateVizRange(world.PlayerDat.VIZ_RANGE)
 	pass
 func StageCleared(st : int)	-> void:
 	PlayingStage = false
@@ -106,9 +106,14 @@ func UpdateFuelRange(fuel : float):
 	var distall = fuel * 10
 	$MapSpots/PlayerShip/Panel.size = Vector2(distall, distall) * 2
 	$MapSpots/PlayerShip/Panel.position = Vector2(-(distall), -(distall))
-
+func UpdateVizRange(rang : int):
+	$MapSpots/PlayerShip/Panel2.size = Vector2(rang, rang) * 2
+	$MapSpots/PlayerShip/Panel2.position = Vector2(-(rang), -(rang))
 func ToggleClose() -> void:
 	var distall = world.PlayerDat.FUEL * 10
 	for z in SpotList.size():
 		var dist = player_ship.global_position.distance_to(SpotList[z].global_position)
 		SpotList[z].ToggleVisitButton(dist < distall and dist > 0)
+		if (dist <= world.PlayerDat.VIZ_RANGE):
+			SpotList[z].OnSpotSeen()
+		

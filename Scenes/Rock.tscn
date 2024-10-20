@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://tucv7faum217"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_aflge"]
+[ext_resource type="Script" path="res://Scripts/Obstacle.gd" id="1_aflge"]
 [ext_resource type="ArrayMesh" uid="uid://d0g25ewvmqv4c" path="res://Assets/Rocks/Rock2_Lod2.tres" id="2_cu8qf"]
 [ext_resource type="ArrayMesh" uid="uid://c1o27w2a67o55" path="res://Assets/Rocks/Rock3_Lod2.tres" id="3_6xlcg"]
 

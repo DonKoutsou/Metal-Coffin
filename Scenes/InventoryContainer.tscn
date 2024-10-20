@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cti0geea0pj57"]
 
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_c3amd"]
-[ext_resource type="Script" path="res://Scenes/Inventory_Box.gd" id="1_igs2u"]
+[ext_resource type="Script" path="res://Scripts/Inventory_Box.gd" id="1_igs2u"]
 [ext_resource type="Texture2D" uid="uid://dgk6qcppifpnk" path="res://Assets/Items/cubeforce.png" id="2_52kf5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrijd"]

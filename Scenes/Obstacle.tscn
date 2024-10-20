@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b33lgeho3p6qr"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_hx33i"]
+[ext_resource type="Script" path="res://Scripts/Obstacle.gd" id="1_hx33i"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5t8ew"]
 height = 3.0

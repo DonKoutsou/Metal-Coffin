@@ -2,7 +2,7 @@ extends Node3D
 class_name  TravelMinigameGame
 
 @export var EnemyShapes : Array[Mesh]
-@export var Obstacle : PackedScene
+@export var Obst : PackedScene
 @export var SuuplyScene : PackedScene
 @export var EnemyGoal : int
 @export var EnemySpawnRate : float
@@ -24,23 +24,23 @@ func _ready() -> void:
 		SuppliesList.insert(g, randi_range(0, EnemyGoal))
 	for g in EnemyGoal :
 		if (SuppliesList.has(g)):
-			var sup = SuuplyScene.instantiate()
-			add_child(sup)
-			var rand = RandomNumberGenerator.new()
-			fintrans += -10
-			sup.position.z = fintrans
-			sup.position.x = rand.randf_range(-5, 5)
-			sup.position.y = rand.randf_range(-3, 3)
-
-		var enemy = Obstacle.instantiate() as Enemy
-		add_child(enemy)
-		enemy.SetMesh(EnemyShapes.pick_random())
-		var ran = RandomNumberGenerator.new()
+				var sup = SuuplyScene.instantiate()
+				add_child(sup)
+				var rand = RandomNumberGenerator.new()
+				fintrans += -10
+				sup.position.z = fintrans
+				sup.position.x = rand.randf_range(-5, 5)
+				sup.position.y = rand.randf_range(-3, 3)
+		for z in 4:
+			var enemy = Obst.instantiate() as Obstacle
+			add_child(enemy)
+			enemy.SetMesh(EnemyShapes.pick_random())
+			var ran = RandomNumberGenerator.new()
+			enemy.position.z = fintrans
+			enemy.position.x = ran.randf_range(-5, 5)
+			enemy.position.y = ran.randf_range(-3, 3)
+			enemy.PlayerTouched.connect(EnemyHit)
 		fintrans += -10
-		enemy.position.z = fintrans
-		enemy.position.x = ran.randf_range(-5, 5)
-		enemy.position.y = ran.randf_range(-3, 3)
-		enemy.PlayerTouched.connect(EnemyHit)
 	planet_pivot.position.z = fintrans -10
 
 func SetDestinationMesh(Model : Mesh) -> void:
@@ -52,7 +52,7 @@ func GameFinished(fin : bool) -> void:
 	
 func EnemyKilled() -> void:
 	enemies += 1
-	if (enemies >= EnemyGoal):
+	if (enemies >= EnemyGoal * 4):
 		GameFinished(true)
 		
 func EnemyHit():
