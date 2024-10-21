@@ -6,7 +6,7 @@ signal SpotSearched(Pos : MapSpot, Drops : Array[Item])
 
 var SpotItems : Array[Item]
 var SpotNameSt : String
-var SpotMesh : Mesh
+var SpotSC : PackedScene
 var Visited = false
 var Seen = false
 
@@ -17,18 +17,21 @@ func _ready() -> void:
 
 func SetSpotData(Data : MapSpotType) -> void:
 	SetSpotName(Data.Name)
-	SetSpotMesh(Data.Model)
-	SetSpotDrop(Data.PossibleDrops.pick_random())
+	SetSpotScene(Data.Scene)
+	SetSpotDrop(Data.PossibleDrops)
 func SetSpotName(SpotName : String) -> void:
 	$PanelContainer/VBoxContainer/Label.text = SpotName
 	SpotNameSt = SpotName
-func SetSpotMesh(SpetMesh : Mesh) -> void:
-	SpotMesh = SpetMesh
-func SetSpotDrop(SpotDrop : Item) -> void:
+func SetSpotScene(SpetScene : PackedScene) -> void:
+	SpotSC = SpetScene
+func SetSpotDrop(ItList : Array[Item]) -> void:
+	if (ItList.size() == 0):
+		return
+	var it = ItList.pick_random()
 	var rng = RandomNumberGenerator.new()
-	var DropAmm = rng.randi_range(1, SpotDrop.RandomFindMaxCount)
+	var DropAmm = rng.randi_range(1, it.RandomFindMaxCount)
 	for g in DropAmm :
-		SpotItems.insert(g, SpotDrop)
+		SpotItems.insert(g, it)
 
 func ToggleVisitButton(tog : bool) -> void:
 	$PanelContainer/VBoxContainer/VisitButton.visible = tog

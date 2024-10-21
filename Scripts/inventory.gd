@@ -2,6 +2,8 @@ extends Control
 class_name Inventory
 
 @export var InventoryBoxScene : PackedScene
+@export var Upgrades : Array[Upgrade]
+@export var Upgrade_Tab_Scene : PackedScene
 var InventoryContents : Array[Inventory_Box] = []
 @onready var world: World = $"../../.."
 
@@ -9,6 +11,28 @@ signal OnItemAdded(It : Item)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$InvContents.visible = false
+	for g in Upgrades.size():
+		var Tab = Upgrade_Tab_Scene.instantiate() as UpgradeTab
+		$UpgradesContainer/VBoxContainer.add_child(Tab)
+		Tab.SetData(Upgrades[g].UpgradeName, Upgrades[g].UpgradeItem.ItemIconSmol)
+		Tab.connect("OnUgradePressed", TryUpgrade)
+func TryUpgrade(UpTab : UpgradeTab) -> void:
+	print("Trying to upgrade " + UpTab.Upgradename)
+	var upgrade : Upgrade
+	for g in Upgrades.size():
+		if (Upgrades[g].UpgradeName == UpTab.Upgradename):
+			upgrade = Upgrades[g]
+			break
+	var UpgradeCost = upgrade.UpgradeItem
+	for g in InventoryContents.size():
+		if (InventoryContents[g].ItemC.ItemType == UpgradeCost and InventoryContents[g].ItemC.Ammount > 0):
+			InventoryContents[g].UpdateAmm(-1)
+			UpTab.UpgradeSuccess()
+			world.Upgrage(UpTab.Upgradename)
+			
+	print("No Materials for Upgrade")
+	
+	
 func AddItem(It : Item) -> void:
 	OnItemAdded.emit(It)
 	for g in InventoryContents.size() :
@@ -33,8 +57,6 @@ func UseItem(It : Item):
 			if (box.ItemC.ItemType == It):
 				box.UpdateAmm(-1)
 				return
-
-
 func _on_inventory_button_pressed() -> void:
 	$InvContents.visible = !$InvContents.visible
 func _on_upgrades_button_pressed() -> void:

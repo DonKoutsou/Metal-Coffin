@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://s2efu6ihvxtq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8aime"]
+albedo_color = Color(0.632812, 0.321199, 0.783097, 1)
+emission_enabled = true
+emission = Color(0.593673, 0.232913, 0.722511, 1)
+emission_energy_multiplier = 16.0
+uv1_scale = Vector3(0.52, 0.52, 0.52)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jcdv8"]
+flip_faces = true
+radius = 2.0
+height = 4.0
+radial_segments = 12
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx8rk"]
+shading_mode = 0
+albedo_color = Color(0.644038, 0.231465, 0.852037, 1)
+uv1_scale = Vector3(0.52, 0.52, 0.52)
+
+[sub_resource type="SphereMesh" id="SphereMesh_yrcqu"]
+flip_faces = true
+radial_segments = 12
+rings = 6
+
+[sub_resource type="SphereMesh" id="SphereMesh_6ylph"]
+radial_segments = 8
+rings = 4
+
+[sub_resource type="Curve" id="Curve_n6jgx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.249057, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="MapSpot" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.924902, 0.161821, 0.344051, -0.358845, 0.670578, 0.649273, -0.125647, -0.723975, 0.678287, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_8aime")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_jcdv8")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.924902, 0.161821, 0.344051, -0.358845, 0.670578, 0.649273, -0.125647, -0.723975, 0.678287, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_dx8rk")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_yrcqu")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.839762, -0.542955, 0, 0.542955, 0.839762, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_8aime")
+amount = 200
+speed_scale = 0.5
+randomness = 1.0
+local_coords = true
+mesh = SubResource("SphereMesh_6ylph")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 1.5
+emission_ring_inner_radius = 1.5
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+orbit_velocity_curve = null
+tangential_accel_min = 50.0
+tangential_accel_max = 50.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_n6jgx")

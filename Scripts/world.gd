@@ -4,6 +4,7 @@ class_name World
 @export var scene :PackedScene
 @export var BattleScene : PackedScene
 
+
 @onready var Mapz = $CanvasLayer/Map as Map
 @onready var player_hp: ProgressBar = $CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer/HBoxContainer/PlayerHP
 @onready var fuel: ProgressBar = $CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer3/HBoxContainer/Fuel
@@ -17,10 +18,22 @@ var Runningstage = 0
 func _ready() -> void:
 	Mapz.connect("StageSellected", PrepareForJourney)
 	Mapz.connect("StageSearched", StageSearch)
+	player_hp.max_value = PlayerDat.HP
 	player_hp.value = PlayerDat.HP
+	fuel.max_value = PlayerDat.FUEL
 	fuel.value = PlayerDat.FUEL
+	hull_hp.max_value = PlayerDat.HULLHP
 	hull_hp.value = PlayerDat.HULLHP
 	set_physics_process(false)
+	
+func Upgrage(UpName : String) -> void:
+	if (UpName == "VIZ_RANGE"):
+		PlayerDat.VIZ_RANGE += 100
+		Mapz.UpdateVizRange(PlayerDat.VIZ_RANGE)
+	if (UpName == "FUEL_TANK_SIZE"):
+		PlayerDat.FUEL_TANK_SIZE += 20
+		$CanvasLayer/PanelContainer3/HBoxContainer2/PanelContainer3/HBoxContainer/Fuel.max_value = PlayerDat.FUEL_TANK_SIZE
+	
 	
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Pause")):
@@ -85,7 +98,7 @@ func StartStage() -> void:
 	sc.Hull = PlayerDat.HULLHP
 	sc.connect("OnGameEnded", StageDone)
 	add_child(sc)
-	sc.SetDestinationMesh(StopToFlyTo.SpotMesh)
+	sc.SetDestinationScene(StopToFlyTo.SpotSC)
 	Mapz.visible = false
 	$CanvasLayer.visible = false
 	
@@ -97,6 +110,7 @@ func StageDone(victory : bool, supplies : Array[Item], HullHP : int) -> void:
 	if (victory):
 		UpdateSupplies(supplies)
 		Mapz.StageCleared(Runningstage)
+		
 	else :
 		Mapz.StageFailed()
 		GameLost("Your ship got destroyed")
@@ -115,7 +129,7 @@ func UseItem(It : Item) -> bool:
 		if (PlayerDat.FUEL == 100):
 			return false
 		else :
-			UpdateFuel(min(100, PlayerDat.FUEL + 20))
+			UpdateFuel(min(PlayerDat.FUEL_TANK_SIZE, PlayerDat.FUEL + 20))
 			return true
 	else : if (It.ItemName == "Supply"):
 		if (PlayerDat.HULLHP == 100):

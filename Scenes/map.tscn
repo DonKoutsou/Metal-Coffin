@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=12 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://sew43a75jovn" path="res://Resources/MapSpots/Planet.tres" id="4_laxnu"]
 [ext_resource type="Resource" uid="uid://cj8ebb6k6xjb0" path="res://Resources/MapSpots/Star.tres" id="5_cl201"]
 [ext_resource type="Resource" uid="uid://b1levfg3rcd16" path="res://Resources/MapSpots/Station.tres" id="6_bd3x3"]
+[ext_resource type="Resource" uid="uid://f558luvn25o2" path="res://Resources/MapSpots/BlackWhole.tres" id="6_culgw"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="8_joyah"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrm2y"]
@@ -46,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mq604")
 SpotScene = ExtResource("2_csmts")
-MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201")])
+MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201"), ExtResource("6_culgw")])
 FinalSpotType = ExtResource("6_bd3x3")
 MapSize = 40
 

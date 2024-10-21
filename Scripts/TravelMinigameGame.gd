@@ -6,6 +6,7 @@ class_name  TravelMinigameGame
 @export var SuuplyScene : PackedScene
 @export var EnemyGoal : int
 @export var EnemySpawnRate : float
+@export var Difficulty : int = 3
 
 @onready var planet_pivot: Node3D = $PlanetPivot
 @onready var character: Character = $Character
@@ -31,7 +32,7 @@ func _ready() -> void:
 				sup.position.z = fintrans
 				sup.position.x = rand.randf_range(-5, 5)
 				sup.position.y = rand.randf_range(-3, 3)
-		for z in 4:
+		for z in Difficulty:
 			var enemy = Obst.instantiate() as Obstacle
 			add_child(enemy)
 			enemy.SetMesh(EnemyShapes.pick_random())
@@ -43,8 +44,8 @@ func _ready() -> void:
 		fintrans += -10
 	planet_pivot.position.z = fintrans -10
 
-func SetDestinationMesh(Model : Mesh) -> void:
-	$PlanetPivot/MeshInstance3D7.mesh = Model
+func SetDestinationScene(Model : PackedScene) -> void:
+	$PlanetPivot/MeshInstance3D7.add_child(Model.instantiate())
 
 func GameFinished(fin : bool) -> void:
 	OnGameEnded.emit(fin, Supplies, Hull)
@@ -52,7 +53,7 @@ func GameFinished(fin : bool) -> void:
 	
 func EnemyKilled() -> void:
 	enemies += 1
-	if (enemies >= EnemyGoal * 4):
+	if (enemies >= EnemyGoal * Difficulty):
 		GameFinished(true)
 		
 func EnemyHit():

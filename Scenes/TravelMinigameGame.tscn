@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://civ710rd6srtr"]
+[gd_scene load_steps=23 format=3 uid="uid://civ710rd6srtr"]
 
 [ext_resource type="Script" path="res://Scripts/TravelMinigameGame.gd" id="1_6jml3"]
 [ext_resource type="ArrayMesh" uid="uid://c3r8p45nush07" path="res://Assets/Rocks/Rock1_Lod2.tres" id="2_7fbvq"]
@@ -12,26 +12,25 @@
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="6_prunb"]
 [ext_resource type="Script" path="res://Scripts/planet_pivot.gd" id="7_7j074"]
 [ext_resource type="PackedScene" uid="uid://oa22m2ia7nea" path="res://Scenes/SupplyCache.tscn" id="8_jxkch"]
-[ext_resource type="ArrayMesh" uid="uid://br4fay0c1ss0j" path="res://Assets/Station/SpaceStation.obj" id="12_hk1xh"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="14_vwqn1"]
 
 [sub_resource type="Gradient" id="Gradient_jo0lo"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_op5qh"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vxoyq"]
 gradient = SubResource("Gradient_jo0lo")
 fill_from = Vector2(0.17853, 0.0436064)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c5kss"]
 panorama = ExtResource("6_iqhyt")
 
-[sub_resource type="Sky" id="Sky_0psyg"]
+[sub_resource type="Sky" id="Sky_s367o"]
 sky_material = SubResource("PanoramaSkyMaterial_c5kss")
 radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_jrnrp"]
 background_mode = 2
 background_color = Color(0.265361, 0.265361, 0.26536, 1)
-sky = SubResource("Sky_0psyg")
+sky = SubResource("Sky_s367o")
 sky_custom_fov = 41.7
 sky_rotation = Vector3(0, 2.06298, 0)
 ambient_light_source = 3
@@ -39,7 +38,8 @@ ambient_light_color = Color(0.282407, 0.282407, 0.282407, 1)
 ambient_light_energy = 0.65
 reflected_light_source = 2
 tonemap_mode = 2
-glow_intensity = 8.0
+glow_enabled = true
+glow_intensity = 0.59
 glow_blend_mode = 1
 fog_light_color = Color(0.112255, 0.104348, 0.102446, 1)
 fog_sun_scatter = 18.4
@@ -47,7 +47,7 @@ fog_depth_curve = 0.59763
 fog_depth_begin = 67.4
 fog_depth_end = 196.0
 adjustment_enabled = true
-adjustment_color_correction = SubResource("GradientTexture2D_op5qh")
+adjustment_color_correction = SubResource("GradientTexture2D_vxoyq")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3siew"]
 dof_blur_far_distance = 38.87
@@ -113,10 +113,8 @@ directional_shadow_mode = 0
 [node name="PlanetPivot" type="Node3D" parent="."]
 script = ExtResource("7_7j074")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="PlanetPivot"]
+[node name="MeshInstance3D7" type="Node3D" parent="PlanetPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
-mesh = ExtResource("12_hk1xh")
-skeleton = NodePath("../..")
 
 [node name="Virtual Joystick" parent="." instance=ExtResource("6_prunb")]
 joystick_mode = 1

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://baqkih8jaj7of"]
+
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="1_5cbpw"]
+[ext_resource type="Script" path="res://Scripts/Upgrade.gd" id="1_u2cru"]
+
+[resource]
+script = ExtResource("1_u2cru")
+UpgradeName = "VIZ_RANGE"
+UpgradeItem = ExtResource("1_5cbpw")

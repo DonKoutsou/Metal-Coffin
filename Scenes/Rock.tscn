@@ -39,6 +39,8 @@ script = ExtResource("1_aflge")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.294859, 0, 0, 0, 0.294859, 0, 0, 0, 0.294859, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_y5hj6")
+cast_shadow = 0
+lod_bias = 0.4
 mesh = ExtResource("2_cu8qf")
 
 [node name="Area3D" type="Area3D" parent="."]

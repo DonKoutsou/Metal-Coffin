@@ -1,2 +1,3 @@
+Upgrade
 Item
 MapSpotType

@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://d18pkbgxyppsu"]
+
+[ext_resource type="Script" path="res://Scripts/upgrade_tab.gd" id="1_6lo63"]
+[ext_resource type="Texture2D" uid="uid://cnbvw27mfvx12" path="res://Assets/Items/materials-science_smol.png" id="1_jaitb"]
+
+[node name="UpgradeTab" type="HBoxContainer"]
+size_flags_horizontal = 0
+script = ExtResource("1_6lo63")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Radar Range
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(150, 28.03)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 10.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "+"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+text = "Cost :"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_jaitb")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

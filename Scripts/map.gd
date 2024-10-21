@@ -26,12 +26,12 @@ func _process(_delta: float) -> void:
 		if ($MapSpots.position.x >= 250):
 			return
 		var spots = get_node("MapSpots") as Control
-		spots.position.x += 5
+		spots.position.x += 15
 	if (Input.is_action_pressed("MapRight")):
 		if (SpotList[SpotList.size() - 1].global_position.x + 150 <= $MapSpots.size.x):
 			return
 		var spots = get_node("MapSpots") as Control
-		spots.position.x -= 5
+		spots.position.x -= 15
 		
 func GenerateMap() -> void:
 	var ran = RandomNumberGenerator.new()
@@ -46,8 +46,6 @@ func GenerateMap() -> void:
 		var type = MapSpotTypes.pick_random() as MapSpotType
 		if (g == MapSize - 1):
 			type = FinalSpotType
-		if (type.Mat != null):
-			type.Model.surface_set_material(0, type.Mat)
 		sc.SetSpotData(type)
 
 		var pos = Vector2(ran.randf_range(VP.x *g, VP.x * (g + 2)) + 50, ran.randf_range(20, VP.y - 80))
@@ -74,6 +72,8 @@ func StageCleared(st : int)	-> void:
 		spotprev.ToggleLandButton(false)
 		
 	var spot = SpotList[st] as MapSpot
+	while spot.SpotNameSt == "Black Whole":
+		spot = SpotList.pick_random()
 	currentstage = st
 	if (currentstage >= SpotList.size()):
 		return
@@ -106,9 +106,11 @@ func UpdateFuelRange(fuel : float):
 	var distall = fuel * 10
 	$MapSpots/PlayerShip/Panel.size = Vector2(distall, distall) * 2
 	$MapSpots/PlayerShip/Panel.position = Vector2(-(distall), -(distall))
+	ToggleClose()
 func UpdateVizRange(rang : int):
 	$MapSpots/PlayerShip/Panel2.size = Vector2(rang, rang) * 2
 	$MapSpots/PlayerShip/Panel2.position = Vector2(-(rang), -(rang))
+	ToggleClose()
 func ToggleClose() -> void:
 	var distall = world.PlayerDat.FUEL * 10
 	for z in SpotList.size():
