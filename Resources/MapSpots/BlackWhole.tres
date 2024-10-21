@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="MapSpotType" load_steps=4 format=3 uid="uid://f558luvn25o2"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_xl8fd"]
-[ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="3_3bwxw"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="3_3bwxw"]
 [ext_resource type="PackedScene" uid="uid://s2efu6ihvxtq" path="res://Scenes/MapSpotScenes/BlackWhole.tscn" id="3_t3iyd"]
 
 [resource]
 script = ExtResource("3_3bwxw")
 Scene = ExtResource("3_t3iyd")
-Name = "Black Whole"
+Name = "Star"
 PossibleDrops = Array[ExtResource("1_xl8fd")]([])
+FullName = "Black Whole"
+Description = ""

@@ -9,7 +9,7 @@ seamless = true
 noise = SubResource("FastNoiseLite_374xw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jw6kb"]
-albedo_color = Color(0.778318, 0.882104, 0.211563, 1)
+albedo_color = Color(0.938014, 0.76197, 0.660621, 1)
 albedo_texture = SubResource("NoiseTexture2D_xpelm")
 emission = Color(0, 0.69719, 0.69728, 1)
 emission_energy_multiplier = 120.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://djtjqkmdep3dh"]
 
-[ext_resource type="Script" path="res://Scripts/map_spot.gd" id="1_x7uyn"]
+[ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_uoroi"]
 
 [sub_resource type="Image" id="Image_vp57u"]
@@ -1253,27 +1253,36 @@ offset_bottom = 41.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3h8a6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
 text = "map name"
 horizontal_alignment = 1
 
-[node name="VisitButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="VisitButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
 text = "Visit"
 
-[node name="LandButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="LandButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
 text = "Land"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/VisitButton" to="." method="_on_visit_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/LandButton" to="." method="_on_land_button_pressed"]
+[node name="AnalyzeButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_uoroi")
+text = "Analyze"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/VisitButton" to="." method="_on_visit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/LandButton" to="." method="_on_land_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/AnalyzeButton" to="." method="_on_analyze_button_pressed"]

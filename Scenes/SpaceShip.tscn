@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dosurqfr722oq"]
 
 [ext_resource type="ArrayMesh" uid="uid://byus7qmd0hep7" path="res://Assets/Spaceship/Ship.obj" id="1_pfpqp"]
-[ext_resource type="Script" path="res://Scripts/character.gd" id="2_w2wc2"]
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="2_w2wc2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f1vo"]
 diffuse_mode = 3

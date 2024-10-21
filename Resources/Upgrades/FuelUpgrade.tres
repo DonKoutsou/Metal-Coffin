@@ -7,3 +7,4 @@
 script = ExtResource("2_bfbhh")
 UpgradeName = "FUEL_TANK_SIZE"
 UpgradeItem = ExtResource("1_u4ubw")
+UpgradeStep = 10.0

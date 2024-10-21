@@ -64,5 +64,5 @@ func EnemyHit():
 		GameFinished(false)
 	
 func SupplyGathered(supplycontents : Array[Item]) -> void:
-	for g in supplycontents.size() :
-		Supplies.insert(g, supplycontents[g])
+	Supplies.append_array(supplycontents)
+		

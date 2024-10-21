@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1utv5btptm7c"]
+
+[ext_resource type="Script" path="res://Scenes/DropContainer.gd" id="1_rc1ox"]
+[ext_resource type="Texture2D" uid="uid://bd1hamn6rh765" path="res://Assets/Items/Oxygen_Smol.png" id="2_g1oh1"]
+
+[node name="DropContainer" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_rc1ox")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_g1oh1")

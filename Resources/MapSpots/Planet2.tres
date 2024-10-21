@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://bhr3r5wyfgdjn"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_taxsv"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_ex3si"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_bceod"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="4_3172f"]
+[ext_resource type="PackedScene" uid="uid://cjwc0ua2g5bf7" path="res://Scenes/MapSpotScenes/Planet2.tscn" id="4_ukqqe"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_2fomt"]
+
+[resource]
+script = ExtResource("5_2fomt")
+Scene = ExtResource("4_ukqqe")
+Name = "Planet"
+PossibleDrops = Array[ExtResource("1_taxsv")]([ExtResource("2_ex3si"), ExtResource("3_bceod"), ExtResource("4_3172f")])
+FullName = "Terrestrial Planet"
+Description = "blah blah"

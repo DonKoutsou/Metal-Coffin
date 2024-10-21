@@ -1,15 +1,20 @@
 extends Node3D
 
 @export var ItemDrop : Array[Item]
-
+@export var MaxDrops : int = 5
 var RotationDirection : Vector3
 var Reward : Array[Item]
 
 func _ready() -> void:
-	var it = ItemDrop.pick_random() as Item
-	var RewardAmmount = randi_range(1, it.RandomFindMaxCount)
-	for g in RewardAmmount :
-		Reward.insert(g, it)
+	var Drops = 0
+	for z in 3:
+		var it = ItemDrop.pick_random() as Item
+		var RewardAmmount = min(MaxDrops - Drops,randi_range(1, it.RandomFindMaxCount))
+		Drops += RewardAmmount
+		for g in RewardAmmount :
+			Reward.insert(g, it)
+		if (Drops >= 5):
+			break
 
 	var randomscale = randf_range(0.8, 1.2)
 	scale = Vector3(randomscale,randomscale,randomscale)

@@ -3,12 +3,12 @@ class_name UpgradeTab
 
 signal OnUgradePressed(UpName : String)
 
-var Upgradename : String
+var UpgradeData : Upgrade
 
-func SetData(Name : String, Textr : Texture) -> void:
-	Upgradename = Name
-	$Label.text = Name
-	$TextureRect.texture = Textr
+func SetData(Data : Upgrade) -> void:
+	UpgradeData = Data
+	$Label.text = Data.UpgradeName
+	$TextureRect.texture = Data.UpgradeItem.ItemIconSmol
 
 func UpgradeSuccess() -> void:
 	$ProgressBar.value += 1

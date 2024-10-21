@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://cuirrj6s52dyf"]
+
+[ext_resource type="StyleBox" uid="uid://dt1eg01fwu0kd" path="res://Theme/PanelGreyStyleBox.tres" id="1_f3dej"]
+[ext_resource type="Script" path="res://Scripts/planet_analyzer.gd" id="2_tdmua"]
+[ext_resource type="PackedScene" uid="uid://d1utv5btptm7c" path="res://Scenes/DropContainer.tscn" id="3_eb51e"]
+[ext_resource type="Texture2D" uid="uid://6lcw3avodr51" path="res://Assets/SpaceBG2.png" id="4_tbw4n"]
+
+[sub_resource type="Gradient" id="Gradient_jo0lo"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vxoyq"]
+gradient = SubResource("Gradient_jo0lo")
+fill_from = Vector2(0.17853, 0.0436064)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c5kss"]
+panorama = ExtResource("4_tbw4n")
+
+[sub_resource type="Sky" id="Sky_s367o"]
+sky_material = SubResource("PanoramaSkyMaterial_c5kss")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_1c4u5"]
+background_mode = 2
+background_color = Color(0.265361, 0.265361, 0.26536, 1)
+sky = SubResource("Sky_s367o")
+sky_custom_fov = 41.7
+sky_rotation = Vector3(0, 2.06298, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0.282407, 0.282407, 0.282407, 1)
+ambient_light_energy = 0.65
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.59
+glow_blend_mode = 1
+fog_light_color = Color(0.112255, 0.104348, 0.102446, 1)
+fog_sun_scatter = 18.4
+fog_depth_curve = 0.59763
+fog_depth_begin = 67.4
+fog_depth_end = 196.0
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture2D_vxoyq")
+
+[node name="Planet_Analyzer" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -281.0
+offset_top = -232.0
+offset_right = 282.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_f3dej")
+script = ExtResource("2_tdmua")
+DropContainerScene = ExtResource("3_eb51e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(299, 454)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 168.881)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_1c4u5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.839697, -0.226566, -0.493535, -0.0814587, -0.84598, 0.526956, -0.536911, 0.482686, 0.691911, 0, 0, 0)
+directional_shadow_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+text = "x"
+
+[node name="PlanetName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Gas Giant"
+horizontal_alignment = 1
+
+[node name="PlanetDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+text = "blah igahiegheighaeiveaniefawwfawfwafwafawfwafwafwafwa"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Possible Drops :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

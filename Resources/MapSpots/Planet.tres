@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://sew43a75jovn"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_5nol8"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="1_5nol8"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_ij3bt"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_qgik8"]
 [ext_resource type="PackedScene" uid="uid://2krvxe18ieej" path="res://Scenes/MapSpotScenes/Planet.tscn" id="3_iogk1"]
@@ -11,3 +11,5 @@ script = ExtResource("1_5nol8")
 Scene = ExtResource("3_iogk1")
 Name = "Planet"
 PossibleDrops = Array[ExtResource("1_ij3bt")]([ExtResource("2_qgik8"), ExtResource("3_p7a3m")])
+FullName = "Gas Giant"
+Description = "blah blah"

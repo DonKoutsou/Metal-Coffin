@@ -7,3 +7,4 @@
 script = ExtResource("1_u2cru")
 UpgradeName = "VIZ_RANGE"
 UpgradeItem = ExtResource("1_5cbpw")
+UpgradeStep = 100.0

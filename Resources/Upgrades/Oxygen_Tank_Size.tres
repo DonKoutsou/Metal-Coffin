@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://dqsxe6tt8giyb"]
+
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="1_wcqrn"]
+[ext_resource type="Script" path="res://Scripts/Upgrade.gd" id="2_ttilc"]
+
+[resource]
+script = ExtResource("2_ttilc")
+UpgradeName = "OXYGEN_TANK_SIZE"
+UpgradeItem = ExtResource("1_wcqrn")
+UpgradeStep = 10.0

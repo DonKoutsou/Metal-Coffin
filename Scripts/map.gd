@@ -5,10 +5,11 @@ class_name Map
 @export var MapSpotTypes : Array[MapSpotType]
 @export var FinalSpotType : MapSpotType
 @export var MapSize = 20
+@export var AnalyzerScene : PackedScene
 @onready var player_ship: Sprite2D = $MapSpots/PlayerShip
-@onready var world: World = $"../.."
 
-signal StageSellected(st : MapSpotType, stNum : int, fuelcons : float)
+
+signal StageSellected(st : MapSpotType, stNum : int, fuelcons : float, o2Cons : float)
 signal StageSearched(Drops : Array[Item])
 var PlayingStage = false
 
@@ -17,7 +18,11 @@ var currentstage = 0
 
 func _ready() -> void:
 	GenerateMap()
-	pass # Replace with function body.
+	ToggleClose()
+	var pldata = PlayerData.GetInstance()
+	UpdateFuelRange(pldata.FUEL, pldata.FUEL_EFFICIENCY)
+	UpdateVizRange(pldata.VIZ_RANGE)
+	UpdateAnalyzerRange(pldata.ANALYZE_RANGE)
 
 func _process(_delta: float) -> void:
 	if (PlayingStage):
@@ -43,6 +48,7 @@ func GenerateMap() -> void:
 		$MapSpots/SpotSpot.add_child(sc)
 		sc.connect("MapPressed", StartStage)
 		sc.connect("SpotSearched", SpotSearched)
+		sc.connect("SpotAnalazyed", AnalyzeStage)
 		var type = MapSpotTypes.pick_random() as MapSpotType
 		if (g == MapSize - 1):
 			type = FinalSpotType
@@ -54,25 +60,14 @@ func GenerateMap() -> void:
 		sc.position = pos
 		locse[pos] = sc
 		SpotList.insert(g, sc)
-		
-		#var line = Line2D.new()
-		#line.points = [locse.keys()[max(0, g -1)], pos]
-		#$MapSpots/Lines.add_child(line)
-		#line.antialiased = true
-		#line.default_color = Color.AQUA
-		
-	ToggleClose()
-	UpdateFuelRange(world.PlayerDat.FUEL)
-	UpdateVizRange(world.PlayerDat.VIZ_RANGE)
-	pass
+	
 func StageCleared(st : int)	-> void:
 	PlayingStage = false
 	if (currentstage >= 0):
 		var spotprev = SpotList[currentstage] as MapSpot
 		spotprev.ToggleLandButton(false)
-		
 	var spot = SpotList[st] as MapSpot
-	while spot.SpotNameSt == "Black Whole":
+	while spot.SpotType.Name == "Black Whole":
 		spot = SpotList.pick_random()
 	currentstage = st
 	if (currentstage >= SpotList.size()):
@@ -86,15 +81,19 @@ func StageFailed() -> void:
 	PlayingStage = false
 func StartStage(stage :MapSpot) -> void:
 	var stagenum = SpotList.find(stage)
-	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10
-	StageSellected.emit(stage, stagenum, fuel)
+	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10 / PlayerData.GetInstance().FUEL_EFFICIENCY
+	var o2 = player_ship.global_position.distance_to(stage.global_position) / 20
+	StageSellected.emit(stage, stagenum, fuel, o2)
 	PlayingStage = true
 	pass
+func AnalyzeStage(Type : MapSpotType):
+	var analyzer = AnalyzerScene.instantiate() as PlanetAnalyzer
+	analyzer.SetVisuals(Type)
+	add_child(analyzer)
 func SpotSearched(stage : MapSpot, sups : Array[Item]):
 	stage.ToggleLandButton(false)
 	StageSearched.emit(sups)
 	stage.OnSpotVisited()
-	pass
 	
 func HasClose(pos : Vector2) -> bool:
 	var b= false
@@ -102,20 +101,26 @@ func HasClose(pos : Vector2) -> bool:
 		if (pos.distance_to(SpotList[z].position) < 80):
 			b = true
 	return b
-func UpdateFuelRange(fuel : float):
-	var distall = fuel * 10
-	$MapSpots/PlayerShip/Panel.size = Vector2(distall, distall) * 2
-	$MapSpots/PlayerShip/Panel.position = Vector2(-(distall), -(distall))
+func UpdateFuelRange(fuel : float, fuel_ef : float):
+	var distall = fuel * 10 * fuel_ef
+	$MapSpots/PlayerShip/Fuel_Range.size = Vector2(distall, distall) * 2
+	$MapSpots/PlayerShip/Fuel_Range.position = Vector2(-(distall), -(distall))
 	ToggleClose()
 func UpdateVizRange(rang : int):
-	$MapSpots/PlayerShip/Panel2.size = Vector2(rang, rang) * 2
-	$MapSpots/PlayerShip/Panel2.position = Vector2(-(rang), -(rang))
+	$MapSpots/PlayerShip/Radar_Range.size = Vector2(rang, rang) * 2
+	$MapSpots/PlayerShip/Radar_Range.position = Vector2(-(rang), -(rang))
+	ToggleClose()
+func UpdateAnalyzerRange(rang : int):
+	$MapSpots/PlayerShip/Analyzer_Range.size = Vector2(rang, rang) * 2
+	$MapSpots/PlayerShip/Analyzer_Range.position = Vector2(-(rang), -(rang))
 	ToggleClose()
 func ToggleClose() -> void:
-	var distall = world.PlayerDat.FUEL * 10
+	var pldata = PlayerData.GetInstance()
+	var distall = pldata.FUEL * 10 * pldata.FUEL_EFFICIENCY
 	for z in SpotList.size():
 		var dist = player_ship.global_position.distance_to(SpotList[z].global_position)
-		SpotList[z].ToggleVisitButton(dist < distall and dist > 0)
-		if (dist <= world.PlayerDat.VIZ_RANGE):
+		SpotList[z].ToggleVisitButton(dist < distall and dist > 4)
+		if (dist <= pldata.VIZ_RANGE):
 			SpotList[z].OnSpotSeen()
+		SpotList[z].ToggleAnalyzeButton(dist <= pldata.ANALYZE_RANGE)
 		

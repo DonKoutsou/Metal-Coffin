@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnqsm0atjsr8o"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_374xw"]
+seed = 100
+frequency = 0.112
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xpelm"]
+seamless = true
+noise = SubResource("FastNoiseLite_374xw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jw6kb"]
+albedo_color = Color(0.561394, 0.882985, 0.92359, 1)
+albedo_texture = SubResource("NoiseTexture2D_xpelm")
+emission = Color(0, 0.69719, 0.69728, 1)
+emission_energy_multiplier = 120.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_xieaa"]
+material = SubResource("StandardMaterial3D_jw6kb")
+radius = 20.0
+height = 40.0
+
+[node name="MapSpot" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xieaa")

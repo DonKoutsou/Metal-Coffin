@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://4xe4s4fgncrm"]
 
-[ext_resource type="Script" path="res://Scripts/damage_floater.gd" id="1_s185f"]
+[ext_resource type="Script" path="res://Scripts/Damage_Floater.gd" id="1_s185f"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_v6dda"]
 
 [node name="DamageFloater" type="Label"]
