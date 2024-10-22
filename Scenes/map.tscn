@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=19 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -12,6 +12,18 @@
 [ext_resource type="Resource" uid="uid://da3ti0o0734tr" path="res://Resources/MapSpots/Planet3.tres" id="8_1wj05"]
 [ext_resource type="PackedScene" uid="uid://cuirrj6s52dyf" path="res://Scenes/PlanetAnalyzer.tscn" id="8_7ajvg"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="8_joyah"]
+[ext_resource type="Resource" uid="uid://cqpnbtjo5crg0" path="res://Resources/MapSpots/Planet4.tres" id="9_n201g"]
+[ext_resource type="Shader" path="res://Scenes/Galaxy.gdshader" id="12_7uph2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a20qu"]
+shader = ExtResource("12_7uph2")
+shader_parameter/thing = 0.05
+shader_parameter/star_brightness = 0.006
+shader_parameter/dist_fade = 0.648
+shader_parameter/quantization_levels = 256
+shader_parameter/saturation = 0.536
+shader_parameter/layers = 5.175
+shader_parameter/iterations = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrm2y"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -62,12 +74,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_mq604")
 SpotScene = ExtResource("2_csmts")
-MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201"), ExtResource("6_culgw"), ExtResource("7_ow8y0"), ExtResource("8_1wj05")])
+MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201"), ExtResource("6_culgw"), ExtResource("7_ow8y0"), ExtResource("8_1wj05"), ExtResource("9_n201g")])
 FinalSpotType = ExtResource("6_bd3x3")
 MapSize = 40
 AnalyzerScene = ExtResource("8_7ajvg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_a20qu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="MapSpots" type="Control" parent="."]
 layout_mode = 1
@@ -79,6 +102,7 @@ offset_right = 250.0
 offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="SpotSpot" type="Control" parent="MapSpots"]
 layout_mode = 1
@@ -87,9 +111,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PlayerShip" type="Sprite2D" parent="MapSpots"]
-position = Vector2(-171, 311)
+position = Vector2(-156, 324)
 rotation = 1.5708
 texture = ExtResource("8_joyah")
 
@@ -142,11 +167,11 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fa3bn")
 
 [node name="Button" parent="." instance=ExtResource("3_2ct80")]
-position = Vector2(88, 480)
+position = Vector2(88, 504)
 action = "MapLeft"
 buttontext = "<"
 
 [node name="Button2" parent="." instance=ExtResource("3_2ct80")]
-position = Vector2(1060, 480)
+position = Vector2(1042, 504)
 action = "MapRight"
 buttontext = ">"

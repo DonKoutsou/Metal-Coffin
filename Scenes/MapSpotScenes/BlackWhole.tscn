@@ -32,12 +32,8 @@ rings = 4
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.249057, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="MapSpot" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.924902, 0.161821, 0.344051, -0.358845, 0.670578, 0.649273, -0.125647, -0.723975, 0.678287, 0, 0, 0)
+[node name="MapSpot" type="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_8aime")
-cast_shadow = 0
 mesh = SubResource("SphereMesh_jcdv8")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
@@ -47,7 +43,7 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_yrcqu")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.839762, -0.542955, 0, 0.542955, 0.839762, 0, 0, 0)
+transform = Transform3D(0.79915, 0.441083, -0.408418, -0.16912, 0.816943, 0.551363, 0.576851, -0.37155, 0.727456, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_8aime")
 amount = 200
 speed_scale = 0.5

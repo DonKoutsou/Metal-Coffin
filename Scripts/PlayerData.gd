@@ -11,6 +11,7 @@ class_name PlayerData
 @export var ANALYZE_RANGE = 300
 @export var OXYGEN = 100
 @export var OXYGEN_TANK_SIZE = 100
+@export var INVENTORY_CAPACITY = 3
 
 static var Instance
 

@@ -15,6 +15,7 @@ var PlayingStage = false
 
 var SpotList : Array[MapSpot]
 var currentstage = 0
+var GalaxyMat :ShaderMaterial
 
 func _ready() -> void:
 	GenerateMap()
@@ -23,6 +24,7 @@ func _ready() -> void:
 	UpdateFuelRange(pldata.FUEL, pldata.FUEL_EFFICIENCY)
 	UpdateVizRange(pldata.VIZ_RANGE)
 	UpdateAnalyzerRange(pldata.ANALYZE_RANGE)
+	GalaxyMat = $ColorRect.material
 
 func _process(_delta: float) -> void:
 	if (PlayingStage):
@@ -32,11 +34,15 @@ func _process(_delta: float) -> void:
 			return
 		var spots = get_node("MapSpots") as Control
 		spots.position.x += 15
+		var val = GalaxyMat.get_shader_parameter("thing")
+		GalaxyMat.set_shader_parameter("thing", val - 0.02)
 	if (Input.is_action_pressed("MapRight")):
 		if (SpotList[SpotList.size() - 1].global_position.x + 150 <= $MapSpots.size.x):
 			return
 		var spots = get_node("MapSpots") as Control
 		spots.position.x -= 15
+		var val = GalaxyMat.get_shader_parameter("thing")
+		GalaxyMat.set_shader_parameter("thing", val + 0.02)
 		
 func GenerateMap() -> void:
 	var ran = RandomNumberGenerator.new()
@@ -67,8 +73,10 @@ func StageCleared(st : int)	-> void:
 		var spotprev = SpotList[currentstage] as MapSpot
 		spotprev.ToggleLandButton(false)
 	var spot = SpotList[st] as MapSpot
-	while spot.SpotType.Name == "Black Whole":
+	while spot.SpotType.FullName == "Black Whole":
 		spot = SpotList.pick_random()
+		while abs(SpotList.find(spot) - currentstage) > 25 :
+			spot = SpotList.pick_random()
 	currentstage = st
 	if (currentstage >= SpotList.size()):
 		return

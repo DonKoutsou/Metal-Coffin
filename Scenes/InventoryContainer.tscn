@@ -18,7 +18,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="InventoryBox" type="PanelContainer"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(72, 72)
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 4
@@ -29,6 +29,7 @@ script = ExtResource("1_igs2u")
 [node name="TextureRect" type="Button" parent="."]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+action_mode = 0
 icon = ExtResource("2_52kf5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

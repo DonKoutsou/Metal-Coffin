@@ -2,7 +2,7 @@ extends PanelContainer
 class_name ItemNotif
 
 @export var InventoryBoxScene : PackedScene
-var InventoryContents : Array[Inventory_Box] = []
+var InventoryContents : Array[ItemNotifContainer] = []
 
 func AddItems(It : Array[Item]) -> void:
 	for z in It.size():
@@ -14,7 +14,7 @@ func AddItems(It : Array[Item]) -> void:
 				placed = true
 		if (placed):
 			continue
-		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
+		var newbox = InventoryBoxScene.instantiate() as ItemNotifContainer
 		$VBoxContainer/HBoxContainer.add_child(newbox)
 		var newcont = ItemContainer.new()
 		newcont.ItemType = It[z]
@@ -22,7 +22,6 @@ func AddItems(It : Array[Item]) -> void:
 		newbox.ItemC = newcont
 		newbox.UpdateAmm(1)
 		InventoryContents.append(newbox)
-
 
 func _on_button_pressed() -> void:
 	queue_free()

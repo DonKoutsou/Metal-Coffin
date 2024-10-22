@@ -1,6 +1,7 @@
 [gd_scene load_steps=15 format=4 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
+[ext_resource type="Texture2D" uid="uid://cpja8yfly0giw" path="res://Assets/polar-star(1).png" id="2_4mnmm"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_uoroi"]
 
 [sub_resource type="Image" id="Image_vp57u"]
@@ -1159,19 +1160,6 @@ Button/styles/hover = SubResource("StyleBoxFlat_a7h8q")
 Button/styles/normal = SubResource("StyleBoxFlat_8bbj1")
 Button/styles/pressed = SubResource("StyleBoxFlat_4dooe")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_001u6"]
-bg_color = Color(0.29051, 0.250084, 0.244035, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.217101, 0.217101, 0.217101, 1)
-border_blend = true
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu3gc"]
 bg_color = Color(100, 0, 0, 1)
 border_width_left = 5
@@ -1214,7 +1202,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x7uyn")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1227,8 +1215,10 @@ offset_right = 25.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = SubResource("Theme_icwjr")
-theme_override_styles/panel = SubResource("StyleBoxFlat_001u6")
+texture = ExtResource("2_4mnmm")
+expand_mode = 1
 
 [node name="Panel" type="Panel" parent="Panel"]
 visible = false
@@ -1239,6 +1229,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gu3gc")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -1259,6 +1250,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
+theme_override_font_sizes/font_size = 24
 text = "map name"
 horizontal_alignment = 1
 
@@ -1271,16 +1263,19 @@ alignment = 1
 [node name="VisitButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
+theme_override_font_sizes/font_size = 22
 text = "Visit"
 
 [node name="LandButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
+theme_override_font_sizes/font_size = 22
 text = "Land"
 
 [node name="AnalyzeButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uoroi")
+theme_override_font_sizes/font_size = 22
 text = "Analyze"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/VisitButton" to="." method="_on_visit_button_pressed"]

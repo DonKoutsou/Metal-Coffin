@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="1_5nol8"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_ij3bt"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_qgik8"]
-[ext_resource type="PackedScene" uid="uid://2krvxe18ieej" path="res://Scenes/MapSpotScenes/Planet.tscn" id="3_iogk1"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_p7a3m"]
+[ext_resource type="PackedScene" uid="uid://c1ml4yvlgnbbv" path="res://Scenes/MapSpotScenes/planet_gaseous.tscn" id="4_1aeus"]
 
 [resource]
 script = ExtResource("1_5nol8")
-Scene = ExtResource("3_iogk1")
+Scene = ExtResource("4_1aeus")
 Name = "Planet"
 PossibleDrops = Array[ExtResource("1_ij3bt")]([ExtResource("2_qgik8"), ExtResource("3_p7a3m")])
 FullName = "Gas Giant"

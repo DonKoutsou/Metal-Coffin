@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=29 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="Script" path="res://Scripts/PlayerData.gd" id="2_cw2r8"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
 [ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="7_s4cw5"]
 [ext_resource type="Texture2D" uid="uid://b17tyissn80pu" path="res://Assets/Items/lockers.png" id="8_jyf5m"]
+[ext_resource type="PackedScene" uid="uid://c6ktwn6uih1hm" path="res://Scenes/InventoryTrader.tscn" id="8_tif6p"]
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="9_0pxmw"]
 [ext_resource type="Resource" uid="uid://dgwatdkb3af5i" path="res://Resources/Upgrades/AnalyzerUpgrade.tres" id="9_q8gvi"]
 [ext_resource type="Texture2D" uid="uid://dunmrj6hw2yft" path="res://Assets/upgrade.png" id="10_ayjou"]
@@ -32,6 +33,7 @@ VIZ_RANGE = 600
 ANALYZE_RANGE = 300
 OXYGEN = 100
 OXYGEN_TANK_SIZE = 100
+INVENTORY_CAPACITY = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbar6"]
 bg_color = Color(0.389287, 0.389287, 0.389286, 1)
@@ -125,7 +127,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 1
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node"]
 process_mode = 3
 script = ExtResource("1_lg538")
 PlayerDat = SubResource("Resource_t0ell")
@@ -137,6 +139,7 @@ process_mode = 1
 layer = 2
 
 [node name="Map" parent="CanvasLayer" instance=ExtResource("2_dh8se")]
+mouse_filter = 2
 MapSize = 150
 
 [node name="Inventory" type="VBoxContainer" parent="CanvasLayer"]
@@ -150,6 +153,7 @@ size_flags_vertical = 2
 mouse_filter = 2
 script = ExtResource("9_0pxmw")
 InventoryBoxScene = ExtResource("7_s4cw5")
+InventoryTradeScene = ExtResource("8_tif6p")
 Upgrades = Array[ExtResource("5_u1mvh")]([ExtResource("9_q8gvi"), ExtResource("10_q32ud"), ExtResource("11_f7wwu"), ExtResource("12_msji4"), ExtResource("6_7v25k")])
 Upgrade_Tab_Scene = ExtResource("10_rf4vs")
 ItemNotifScene = ExtResource("14_86ke4")
@@ -173,9 +177,11 @@ size_flags_vertical = 4
 focus_mode = 0
 icon = ExtResource("8_jyf5m")
 
-[node name="InvContents" type="HBoxContainer" parent="CanvasLayer/Inventory/HBoxContainer"]
+[node name="InvContents" type="GridContainer" parent="CanvasLayer/Inventory"]
 visible = false
 layout_mode = 2
+mouse_filter = 2
+columns = 5
 
 [node name="UpgradesContainer" type="PanelContainer" parent="CanvasLayer/Inventory"]
 visible = false
@@ -183,11 +189,13 @@ custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory/UpgradesContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 2
 alignment = 1
 
 [node name="Stat_Panel" type="PanelContainer" parent="CanvasLayer"]

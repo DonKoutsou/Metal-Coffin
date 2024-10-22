@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_mvpjh"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_q426e"]
-[ext_resource type="PackedScene" uid="uid://bnqsm0atjsr8o" path="res://Scenes/MapSpotScenes/Planet3.tscn" id="4_hlmwd"]
+[ext_resource type="PackedScene" uid="uid://biy37ccrqck53" path="res://Scenes/MapSpotScenes/planet_ice.tscn" id="4_04pb2"]
 [ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="4_lc2rf"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="6_rn2sw"]
 
 [resource]
 script = ExtResource("6_rn2sw")
-Scene = ExtResource("4_hlmwd")
+Scene = ExtResource("4_04pb2")
 Name = "Planet"
 PossibleDrops = Array[ExtResource("1_mvpjh")]([ExtResource("4_lc2rf"), ExtResource("3_q426e")])
 FullName = "Ice Giant"

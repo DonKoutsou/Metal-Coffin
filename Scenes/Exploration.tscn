@@ -1,0 +1,141 @@
+[gd_scene load_steps=6 format=3 uid="uid://6bkyk5dp55yc"]
+
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_p3816"]
+[ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="2_absqw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw4lt"]
+bg_color = Color(0.389287, 0.389287, 0.389286, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bs2b"]
+bg_color = Color(0.275636, 0.275636, 0.275636, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wi5b"]
+bg_color = Color(0.317053, 0.353, 0.750049, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[node name="Exploration" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Oxygen_Container" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_rw4lt")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Oxygen_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="Oxygen_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_p3816")
+theme_override_font_sizes/font_size = 28
+text = "Oxygen:"
+horizontal_alignment = 1
+
+[node name="Oxygen_Bar" type="ProgressBar" parent="Oxygen_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_1bs2b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7wi5b")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Oxygen_Container/HBoxContainer/Oxygen_Bar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exploration Description"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="Panel" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Items Found
+"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="InventoryBox" parent="PanelContainer/VBoxContainer/GridContainer" instance=ExtResource("2_absqw")]
+layout_mode = 2
+
+[node name="InventoryBox2" parent="PanelContainer/VBoxContainer/GridContainer" instance=ExtResource("2_absqw")]
+layout_mode = 2
+
+[node name="InventoryBox3" parent="PanelContainer/VBoxContainer/GridContainer" instance=ExtResource("2_absqw")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Keep Exploring"
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Leave"

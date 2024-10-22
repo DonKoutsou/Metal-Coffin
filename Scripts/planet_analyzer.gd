@@ -6,8 +6,8 @@ class_name PlanetAnalyzer
 var Drops : Array[DropContainer] = []
 
 func SetVisuals(Spot : MapSpotType) -> void:
-	var viz = Spot.Scene.instantiate() as Node3D
-	var abb = (viz.get_node("MeshInstance3D")as MeshInstance3D).get_aabb().get_longest_axis_size()
+	var viz = Spot.Scene.instantiate() as MeshInstance3D
+	var abb = viz.get_aabb().get_longest_axis_size() * viz.scale.x
 	$VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport.add_child(viz)
 	$VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Camera3D.position.z = abb * 2
 	$VBoxContainer/HBoxContainer/VBoxContainer/PlanetName.text = Spot.FullName

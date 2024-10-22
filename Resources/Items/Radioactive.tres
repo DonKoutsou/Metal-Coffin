@@ -7,5 +7,5 @@
 script = ExtResource("2_ius4u")
 ItemIcon = ExtResource("1_eqrny")
 ItemName = "Radioactive"
-MaxStackCount = 50
+MaxStackCount = 10
 RandomFindMaxCount = 4

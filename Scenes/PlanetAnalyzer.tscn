@@ -72,7 +72,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(299, 454)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
@@ -88,12 +88,6 @@ directional_shadow_mode = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 0
-text = "x"
 
 [node name="PlanetName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -119,5 +113,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+text = "Back"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

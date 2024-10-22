@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 class_name World
 @export var PlayerDat : PlayerData
 @export var scene :PackedScene
@@ -41,12 +41,12 @@ func Upgrage(UpgradeData : Upgrade) -> void:
 		Mapz.UpdateAnalyzerRange(PlayerDat.ANALYZE_RANGE)
 	else :if (UpgradeData.UpgradeName == "FUEL_TANK_SIZE"):
 		fuel_bar.max_value = PlayerDat.FUEL_TANK_SIZE
-		(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.FUEL)) + "/" + var_to_str(PlayerDat.FUEL_TANK_SIZE)
+		(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.FUEL)) + "/" + var_to_str(roundi(PlayerDat.FUEL_TANK_SIZE))
 	else :if (UpgradeData.UpgradeName == "FUEL_EFFICIENCY"):
 		Mapz.UpdateFuelRange(PlayerDat.FUEL, PlayerDat.FUEL_EFFICIENCY)
 	else :if (UpgradeData.UpgradeName == "OXYGEN_TANK_SIZE"):
 		oxygen_bar.max_value = PlayerDat.OXYGEN_TANK_SIZE
-		(oxygen_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.OXYGEN)) + "/" + var_to_str(PlayerDat.OXYGEN_TANK_SIZE)
+		(oxygen_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.OXYGEN)) + "/" + var_to_str(roundi(PlayerDat.OXYGEN_TANK_SIZE))
 		
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Pause")):
@@ -78,17 +78,17 @@ func UpdateHP(NewHP : int) -> void:
 func UpdateHullHP(NewHP : int) -> void:
 	PlayerDat.HULLHP = NewHP
 	hull_hp.value = NewHP
-	(hull_hp.get_child(0) as Label).text = var_to_str(PlayerDat.HULLHP) + "/" + var_to_str(PlayerDat.HULL_MAX_HP)
+	(hull_hp.get_child(0) as Label).text = var_to_str(PlayerDat.HULLHP) + "/" + var_to_str((roundi(PlayerDat.HULL_MAX_HP)))
 func UpdateFuel(NewFuel : float) -> void:
 	PlayerDat.FUEL = NewFuel
 	fuel_bar.value = NewFuel
-	(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.FUEL)) + "/" + var_to_str(PlayerDat.FUEL_TANK_SIZE)
+	(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.FUEL)) + "/" + var_to_str((roundi(PlayerDat.FUEL_TANK_SIZE)))
 	Mapz.ToggleClose()
 	Mapz.UpdateFuelRange(PlayerDat.FUEL, PlayerDat.FUEL_EFFICIENCY)
 func UpdateOxygen(NewO2 : float) -> void:
 	PlayerDat.OXYGEN = NewO2
 	oxygen_bar.value = NewO2
-	(oxygen_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.OXYGEN)) + "/" + var_to_str(PlayerDat.OXYGEN_TANK_SIZE)
+	(oxygen_bar.get_child(0) as Label).text = var_to_str(roundi(PlayerDat.OXYGEN)) + "/" + var_to_str((roundi(PlayerDat.OXYGEN_TANK_SIZE)))
 var fueltoConsume
 var StopToFlyTo
 func PrepareForJourney(st : MapSpot, stagenum : int, FuelToUse : float, O2ToUse : float):
@@ -116,10 +116,17 @@ func _physics_process(_delta: float) -> void:
 	var newfuel = PlayerDat.FUEL + ((timer.time_left/timer.wait_time)  * fueltoConsume)
 	Mapz.UpdateFuelRange(newfuel, PlayerDat.FUEL_EFFICIENCY)
 	fuel_bar.value = newfuel
-	(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(newfuel) ) + "/" + var_to_str(PlayerDat.FUEL_TANK_SIZE)
+	(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(newfuel) ) + "/" + var_to_str((roundi(PlayerDat.FUEL_TANK_SIZE)))
 
 func StageSearch(supplies : Array[Item])-> void:
-	StartFight(supplies)
+	inventory.AddItems(supplies)
+	UpdateHP(PlayerDat.HP - 20)
+	UpdateOxygen(PlayerDat.OXYGEN - 10)
+	if (PlayerDat.HP == 0):
+		GameLost("You have died")
+	if (PlayerDat.OXYGEN == 0):
+		GameLost("You have run out of oxygen")
+	#StartFight(supplies)
 	
 func StageDone(victory : bool, supplies : Array[Item], HullHP : int) -> void:
 	if (victory):
@@ -128,9 +135,12 @@ func StageDone(victory : bool, supplies : Array[Item], HullHP : int) -> void:
 	else :
 		Mapz.StageFailed()
 		GameLost("Your ship got destroyed")
+		return
 	UpdateHullHP(HullHP)
 	Mapz.visible = true
 	$CanvasLayer.visible = true
+	if (PlayerDat.OXYGEN == 0):
+		GameLost("You have run out of oxygen")
 
 func UseItem(It : Item) -> bool:
 	if (It.ItemName == "Medical"):

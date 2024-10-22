@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=5 format=3 uid="uid://d14wweum23fh2"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_6osum"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_3vits"]
+[ext_resource type="PackedScene" uid="uid://eno8cr7xyixu" path="res://Scenes/MapSpotScenes/star2.tscn" id="3_4vcu8"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="4_fsvad"]
+
+[resource]
+script = ExtResource("4_fsvad")
+Scene = ExtResource("3_4vcu8")
+Name = "Star"
+PossibleDrops = Array[ExtResource("1_6osum")]([ExtResource("2_3vits")])
+FullName = "Supernova"
+Description = "blah blag"

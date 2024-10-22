@@ -7,8 +7,6 @@ albedo_color = Color(0.500127, 0.376724, 0.265091, 1)
 metallic = 1.0
 roughness = 0.5
 
-[node name="MapSpot" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MapSpot" type="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_yrytl")
 mesh = ExtResource("1_6km2u")

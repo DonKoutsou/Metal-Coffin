@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6ktwn6uih1hm"]
+
+[ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="1_8segk"]
+[ext_resource type="Script" path="res://Scenes/inventory_trader.gd" id="1_wwxb2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mrm2"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="InventoryTrade" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8mrm2")
+script = ExtResource("1_wwxb2")
+InventoryBoxScene = ExtResource("1_8segk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Your Inventory Is Full
+Choose what items to keep"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InvContents" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(224, 0)
+layout_mode = 2
+mouse_filter = 2
+columns = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Drops"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DropContents" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(224, 0)
+layout_mode = 2
+mouse_filter = 2
+columns = 3
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "Finished"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
