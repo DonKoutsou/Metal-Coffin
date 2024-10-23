@@ -57,7 +57,7 @@ func ItemBuffStat(UpName : String, UPvalue : float) -> void:
 			UpdateFuel(FuelTankSize)
 		(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("FUEL").GetCurrentValue())) + "/" + var_to_str(roundi(FuelTankSize))
 	else :if (UpName == "FUEL_EFFICIENCY"):
-		Mapz.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetCurrentValue())
+		Mapz.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 	else :if (UpName == "OXYGEN"):
 		var Oxygentank = ShipDat.GetStat("OXYGEN").GetStat()
 		oxygen_bar.max_value = Oxygentank

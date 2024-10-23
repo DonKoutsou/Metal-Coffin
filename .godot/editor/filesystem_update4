@@ -94,3 +94,10 @@ res://Shaders/TerainDetail.gdshader
 res://Shaders/DetailMeshSheder.gdshader
 res://Scenes/TravelMinigameGame.tscn
 res://Scripts/TravelMinigameGame.gd
+res://Scenes/damage_floater_pl.tscn
+res://Scenes/button.tscn
+res://Scenes/Obstacle.tscn
+res://Scenes/Rock.tscn
+res://Scenes/SpaceShip.tscn
+res://Scenes/SupplyCache.tscn
+res://Scenes/UpgradeTab.tscn

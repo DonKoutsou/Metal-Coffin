@@ -1,23 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://6bkyk5dp55yc"]
+[gd_scene load_steps=7 format=3 uid="uid://6bkyk5dp55yc"]
 
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_p3816"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="2_64on1"]
+[ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="2_absqw"]
 [ext_resource type="PackedScene" uid="uid://c08f77fnaa310" path="res://Scenes/Planet_Surface.tscn" id="3_xurd7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw4lt"]
-bg_color = Color(0.389287, 0.389287, 0.389286, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bs2b"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vposf"]
 bg_color = Color(0.275636, 0.275636, 0.275636, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -25,19 +13,21 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wi5b"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kok0o"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 bg_color = Color(0.317053, 0.353, 0.750049, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="Exploration" type="PanelContainer"]
 anchors_preset = 15
@@ -61,10 +51,12 @@ render_target_update_mode = 4
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_rw4lt")
+theme_override_styles/panel = ExtResource("2_64on1")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Oxygen_Container"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 alignment = 2
 
 [node name="Label2" type="Label" parent="Oxygen_Container/HBoxContainer"]
@@ -78,8 +70,8 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(228, 23)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_1bs2b")
-theme_override_styles/fill = SubResource("StyleBoxFlat_7wi5b")
+theme_override_styles/background = SubResource("StyleBoxFlat_vposf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kok0o")
 step = 1.0
 value = 84.0
 show_percentage = false
@@ -127,6 +119,15 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 3
+
+[node name="InventoryBox" parent="PanelContainer/VBoxContainer/GridContainer" instance=ExtResource("2_absqw")]
+layout_mode = 2
+
+[node name="InventoryBox2" parent="PanelContainer/VBoxContainer/GridContainer" instance=ExtResource("2_absqw")]
+layout_mode = 2
+
+[node name="InventoryBox3" parent="PanelContainer/VBoxContainer/GridContainer" instance=ExtResource("2_absqw")]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

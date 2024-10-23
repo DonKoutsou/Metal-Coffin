@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d18pkbgxyppsu"]
 
 [ext_resource type="Script" path="res://Scripts/upgrade_tab.gd" id="1_6lo63"]
-[ext_resource type="Texture2D" uid="uid://cnbvw27mfvx12" path="res://Assets/Items/materials-science_smol.png" id="1_jaitb"]
+[ext_resource type="Texture2D" uid="uid://com40xglelaik" path="res://Assets/Items/materials-science_smol.png" id="1_jaitb"]
 [ext_resource type="Theme" uid="uid://b4d0fkv3cv5bs" path="res://Theme/ButtonTheme.tres" id="2_sjyst"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7np7e"]
