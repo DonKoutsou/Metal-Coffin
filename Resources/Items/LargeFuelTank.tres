@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=4 format=3 uid="uid://bwwby1vknkefj"]
+
+[ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_cbem7"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_6e4v5"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_lu011"]
+
+[resource]
+script = ExtResource("3_lu011")
+UpgradeName = "FUEL"
+UpgradeAmm = 300.0
+UpgradeItems = Array[ExtResource("2_6e4v5")]([])
+ItemIcon = ExtResource("1_cbem7")
+ItemName = "Large Fuel Tank"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

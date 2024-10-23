@@ -17,8 +17,8 @@ class_name World
 
 var Runningstage = 0
 func _enter_tree() -> void:
-	
 	ShipDat.ApplyShipStats(StartingShip.Buffs)
+	ShipDat.GetStat("HP").CurrentVelue = ShipDat.GetStat("HP").GetStat()
 func _ready() -> void:
 	Mapz.connect("StageSellected", PrepareForJourney)
 	Mapz.connect("StageSearched", StageSearch)

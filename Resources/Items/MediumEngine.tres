@@ -1,14 +1,17 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=4 format=3 uid="uid://k0unclveytur"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://k0unclveytur"]
 
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_7w3sd"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_c8mfa"]
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_qr78f"]
+[ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/LargeEngine.tres" id="3_u0cql"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_ujtx2"]
 
 [resource]
 script = ExtResource("3_qr78f")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
-UpgradeItems = Array[ExtResource("2_c8mfa")]([])
+UpgradeVersion = ExtResource("3_u0cql")
+UpgradeItems = Array[ExtResource("2_c8mfa")]([ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2")])
 ItemIcon = ExtResource("1_7w3sd")
 ItemName = "Medium Efficiency Engine"
 ItemDesc = "ItemDesc"

@@ -9,4 +9,4 @@ ItemIcon = ExtResource("1_eqrny")
 ItemName = "Radioactive"
 ItemDesc = "Used as fuel by certain ships"
 MaxStackCount = 10
-RandomFindMaxCount = 4
+RandomFindMaxCount = 2

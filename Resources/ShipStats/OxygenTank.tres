@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_j8hys")
 StatName = "OXYGEN"
-StatMax = 600.0
+StatMax = 500.0
 StatBase = 0.0

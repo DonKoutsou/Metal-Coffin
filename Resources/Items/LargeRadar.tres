@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=4 format=3 uid="uid://c16lcf8swpkjk"]
+
+[ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="1_7dimj"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_5w58m"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_ypyoy"]
+
+[resource]
+script = ExtResource("3_ypyoy")
+UpgradeName = "VIZ_RANGE"
+UpgradeAmm = 1200.0
+UpgradeItems = Array[ExtResource("2_5w58m")]([])
+ItemIcon = ExtResource("1_7dimj")
+ItemName = "High Range Radar"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

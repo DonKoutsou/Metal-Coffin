@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://c08f77fnaa310"]
 
-[ext_resource type="Shader" path="res://Terain.gdshader" id="1_gbmyu"]
+[ext_resource type="Shader" path="res://Shaders/Terain.gdshader" id="1_gbmyu"]
 [ext_resource type="ArrayMesh" uid="uid://byus7qmd0hep7" path="res://Assets/Spaceship/Ship.obj" id="2_3s24m"]
 [ext_resource type="Shader" path="res://Shaders/TerainDetail.gdshader" id="3_p7yox"]
 [ext_resource type="Shader" path="res://Shaders/DetailMeshSheder.gdshader" id="4_6ypw4"]

@@ -10,5 +10,5 @@ ItemIcon = ExtResource("1_mkclw")
 ItemIconSmol = ExtResource("2_71kk0")
 ItemName = "Oxygen"
 ItemDesc = "Replanishes Ships Oxygen Supply"
-MaxStackCount = 50
+MaxStackCount = 20
 RandomFindMaxCount = 4
