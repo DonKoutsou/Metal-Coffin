@@ -56,6 +56,14 @@ func ItemMoveInv(it : Item) -> void:
 			box.UpdateAmm(1)
 			placed = true
 			break
+	if (!placed):
+		for g in DropBoxes.size() :
+			var box = DropBoxes[g]
+			if (box.IsEmpty()):
+				box.UpdateAmm(1)
+				box.RegisterItem(it)
+				placed = true
+				break
 	if (placed):
 		return
 	
@@ -76,13 +84,14 @@ func ItemMoveDrop(it : Item) -> void:
 			box.UpdateAmm(1)
 			placed = true
 			break
-	for g in InventoryBoxes.size() :
-		var box = InventoryBoxes[g]
-		if (box.IsEmpty()):
-			box.UpdateAmm(1)
-			box.RegisterItem(it)
-			placed = true
-			break	
+	if (!placed):
+		for g in InventoryBoxes.size() :
+			var box = InventoryBoxes[g]
+			if (box.IsEmpty()):
+				box.UpdateAmm(1)
+				box.RegisterItem(it)
+				placed = true
+				break	
 	if (!placed):
 		return
 	for z in DropBoxes.size():

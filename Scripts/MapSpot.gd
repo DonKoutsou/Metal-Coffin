@@ -6,7 +6,6 @@ class_name MapSpot
 @onready var analyze_button: Button = $PanelContainer/VBoxContainer2/VBoxContainer/AnalyzeButton
 @onready var label: Label = $PanelContainer/VBoxContainer2/Label
 
-
 signal MapPressed(Pos : MapSpot)
 signal SpotSearched(Pos : MapSpot, Drops : Array[Item])
 signal SpotAnalazyed(Type : MapSpotType)
@@ -26,9 +25,11 @@ func SetSpotData(Data : MapSpotType) -> void:
 	SpotType = Data
 	SetSpotName(Data.Name)
 	SetSpotDrop(Data.PossibleDrops)
+	##SetSpotIcon(Data.MapIcon)
 func SetSpotName(SpotName : String) -> void:
 	label.text = SpotName
-
+func SetSpotIcon(Icon : Texture) -> void:
+	$Panel.texture = Icon
 func SetSpotDrop(ItList : Array[Item]) -> void:
 	if (ItList.size() == 0):
 		return
@@ -48,7 +49,9 @@ func OnSpotVisited() -> void:
 	$Panel/Panel.visible = true
 	Visited = true
 func OnSpotSeen() -> void:
-	label.visible = true
+	#label.visible = true
+	##visible = true
+	SetSpotIcon(SpotType.MapIcon)
 	Seen = true
 
 func _on_visit_button_pressed() -> void:

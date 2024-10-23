@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://r8hnhjq1f0q0"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStatContainer.gd" id="1_30hhs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6mq6a"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nasb0"]
+bg_color = Color(0.421311, 0.88706, 0.915024, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[node name="ShipStatContainer" type="VBoxContainer"]
+script = ExtResource("1_30hhs")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "stat"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
+value = 19.17
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="ProgressBar"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_nasb0")
+value = 43.54
+show_percentage = false

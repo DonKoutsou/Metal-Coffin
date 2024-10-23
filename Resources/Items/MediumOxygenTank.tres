@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=4 format=3 uid="uid://chxr32lry75bx"]
+
+[ext_resource type="Texture2D" uid="uid://coh3ud4i7ph3f" path="res://Assets/Items/cannister.png" id="1_22nwi"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_cp3in"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_sogaj"]
+
+[resource]
+script = ExtResource("5_sogaj")
+UpgradeName = "OXYGEN"
+UpgradeAmm = 200.0
+UpgradeItems = Array[ExtResource("2_cp3in")]([])
+ItemIcon = ExtResource("1_22nwi")
+ItemName = "Medium Oxygen Tank"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

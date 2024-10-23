@@ -7,5 +7,6 @@
 script = ExtResource("1_4aeu6")
 ItemIcon = ExtResource("1_3f7co")
 ItemName = "Supply"
+ItemDesc = "Used to repair damages to the hull of the ship"
 MaxStackCount = 50
 RandomFindMaxCount = 6

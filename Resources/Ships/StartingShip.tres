@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="BaseShip" load_steps=8 format=3 uid="uid://dcw4b2h3xa0no"]
+
+[ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="1_3yt53"]
+[ext_resource type="Script" path="res://Scripts/BaseShipStat.gd" id="1_rx5mn"]
+[ext_resource type="Script" path="res://Scripts/BaseShip.gd" id="1_vob0b"]
+
+[sub_resource type="Resource" id="Resource_cjlo5"]
+script = ExtResource("1_rx5mn")
+StatName = "INVENTORY_CAPACITY"
+StatBuff = 9.0
+
+[sub_resource type="Resource" id="Resource_adwa7"]
+script = ExtResource("1_rx5mn")
+StatName = "FUEL"
+StatBuff = 20.0
+
+[sub_resource type="Resource" id="Resource_1o3qw"]
+script = ExtResource("1_rx5mn")
+StatName = "OXYGEN"
+StatBuff = 20.0
+
+[sub_resource type="Resource" id="Resource_jfgsq"]
+script = ExtResource("1_rx5mn")
+StatName = "HULL"
+StatBuff = 100.0
+
+[resource]
+script = ExtResource("1_vob0b")
+Icon = ExtResource("1_3yt53")
+Buffs = Array[ExtResource("1_rx5mn")]([SubResource("Resource_cjlo5"), SubResource("Resource_adwa7"), SubResource("Resource_1o3qw"), SubResource("Resource_jfgsq")])

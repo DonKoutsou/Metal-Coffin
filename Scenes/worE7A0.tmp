@@ -1,0 +1,360 @@
+[gd_scene load_steps=16 format=3 uid="uid://doahe8bm2ac5r"]
+
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
+[ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
+[ext_resource type="Resource" uid="uid://b5b3q5ta3whql" path="res://Resources/ShipData.tres" id="2_e0ks1"]
+[ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/TravelMinigameGame.tscn" id="2_sl3gr"]
+[ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/BattleScene.tscn" id="3_fvwv6"]
+[ext_resource type="PackedScene" uid="uid://dqisqmi1gj7sn" path="res://Scenes/inventory.tscn" id="6_82nvh"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
+[ext_resource type="StyleBox" uid="uid://dt1eg01fwu0kd" path="res://Theme/PanelGreyStyleBox.tres" id="18_5y6ce"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvjqw"]
+bg_color = Color(0.326971, 0.291565, 0.274615, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbar6"]
+bg_color = Color(0.389287, 0.389287, 0.389286, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
+bg_color = Color(0.275636, 0.275636, 0.275636, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_er65r"]
+bg_color = Color(0.317053, 0.353, 0.750049, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vml5t"]
+bg_color = Color(0.219508, 0.477555, 9.62615e-08, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p5xdg"]
+bg_color = Color(0.185246, 0.444447, 0.512501, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r24pv"]
+bg_color = Color(0.781105, 0.651497, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[node name="World" type="Node"]
+process_mode = 3
+script = ExtResource("1_lg538")
+ShipDat = ExtResource("2_e0ks1")
+scene = ExtResource("2_sl3gr")
+BattleScene = ExtResource("3_fvwv6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 1
+layer = 2
+
+[node name="Map" parent="CanvasLayer" instance=ExtResource("2_dh8se")]
+mouse_filter = 2
+MapSize = 150
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_82nvh")]
+
+[node name="Stat_Panel" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -81.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uvjqw")
+
+[node name="Stat_H_Container" type="HBoxContainer" parent="CanvasLayer/Stat_Panel"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Oxygen_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "Oxygen:"
+horizontal_alignment = 1
+
+[node name="Oxygen_Bar" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_er65r")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HP_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("18_5y6ce")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "HP:"
+horizontal_alignment = 1
+
+[node name="PlayerHP" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vml5t")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer/PlayerHP"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hull_HP_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "Hull:"
+horizontal_alignment = 1
+
+[node name="HullHp" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p5xdg")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer/HullHp"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fuel_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "Fuel:"
+horizontal_alignment = 1
+
+[node name="Fuel_Bar" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r24pv")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="CanvasLayer"]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="PauseLabel" type="Label" parent="CanvasLayer2"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 131
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2"]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -100.0
+offset_right = 144.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 41
+text = "Game Lost"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 26
+text = "OK"
+
+[connection signal="OnItemAdded" from="CanvasLayer/Inventory" to="." method="OnItemAdded"]
+[connection signal="OnItemRemoved" from="CanvasLayer/Inventory" to="." method="OnItemRemoved"]
+[connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer2/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

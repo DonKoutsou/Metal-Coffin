@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=4 format=3 uid="uid://k0unclveytur"]
+
+[ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_7w3sd"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_c8mfa"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_qr78f"]
+
+[resource]
+script = ExtResource("3_qr78f")
+UpgradeName = "FUEL_EFFICIENCY"
+UpgradeAmm = 1.25
+UpgradeItems = Array[ExtResource("2_c8mfa")]([])
+ItemIcon = ExtResource("1_7w3sd")
+ItemName = "Medium Efficiency Engine"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

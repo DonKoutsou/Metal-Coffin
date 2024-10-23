@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://dggrnmd2ynjmr"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_bwxge"]
+
+[resource]
+script = ExtResource("1_bwxge")
+StatName = "FUEL"
+StatMax = 600.0
+StatBase = 0.0

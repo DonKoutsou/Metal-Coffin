@@ -1,0 +1,452 @@
+[gd_scene load_steps=36 format=3 uid="uid://doahe8bm2ac5r"]
+
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
+[ext_resource type="Script" path="res://Scripts/ShipData.gd" id="2_cw2r8"]
+[ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
+[ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/TravelMinigameGame.tscn" id="2_sl3gr"]
+[ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/BattleScene.tscn" id="3_fvwv6"]
+[ext_resource type="Script" path="res://Scripts/Upgrade.gd" id="5_u1mvh"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="7_bbp8x"]
+[ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="7_s4cw5"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="8_4lxw4"]
+[ext_resource type="Texture2D" uid="uid://b17tyissn80pu" path="res://Assets/Items/lockers.png" id="8_jyf5m"]
+[ext_resource type="PackedScene" uid="uid://c6ktwn6uih1hm" path="res://Scenes/InventoryTrader.tscn" id="8_tif6p"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="9_0pxmw"]
+[ext_resource type="Resource" uid="uid://btkhdlejysqw1" path="res://Resources/Items/ShortAnalyzer.tres" id="9_1mfkj"]
+[ext_resource type="Texture2D" uid="uid://dunmrj6hw2yft" path="res://Assets/upgrade.png" id="10_ayjou"]
+[ext_resource type="Resource" uid="uid://dtpmuvbd1mevx" path="res://Resources/Upgrades/FuelUpgrade.tres" id="10_q32ud"]
+[ext_resource type="PackedScene" uid="uid://d18pkbgxyppsu" path="res://Scenes/UpgradeTab.tscn" id="10_rf4vs"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="10_wymxi"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="11_am17p"]
+[ext_resource type="Resource" uid="uid://bwlfc5ltw6ygn" path="res://Resources/Upgrades/Fuel_EfficiencyUpgrade.tres" id="11_f7wwu"]
+[ext_resource type="PackedScene" uid="uid://chka5s8jthteo" path="res://Scenes/ItemDescriptor.tscn" id="12_1s5x7"]
+[ext_resource type="Resource" uid="uid://dqsxe6tt8giyb" path="res://Resources/Upgrades/Oxygen_Tank_Size.tres" id="12_msji4"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="12_x4hrt"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="13_rnwx3"]
+[ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/ItemsAddedNotif.tscn" id="14_86ke4"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="14_p4xlq"]
+[ext_resource type="StyleBox" uid="uid://dt1eg01fwu0kd" path="res://Theme/PanelGreyStyleBox.tres" id="18_5y6ce"]
+
+[sub_resource type="Resource" id="Resource_0kftl"]
+script = ExtResource("2_cw2r8")
+HP = 100
+HULLHP = 100
+HULL_MAX_HP = 100
+FUEL_TANK_SIZE = 0
+FUEL = 0
+FUEL_EFFICIENCY = 0.0
+VIZ_RANGE = 100
+ANALYZE_RANGE = 0
+OXYGEN = 100
+OXYGEN_TANK_SIZE = 100
+INVENTORY_CAPACITY = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbar6"]
+bg_color = Color(0.389287, 0.389287, 0.389286, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvjqw"]
+bg_color = Color(0.326971, 0.291565, 0.274615, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
+bg_color = Color(0.275636, 0.275636, 0.275636, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_er65r"]
+bg_color = Color(0.317053, 0.353, 0.750049, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vml5t"]
+bg_color = Color(0.219508, 0.477555, 9.62615e-08, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p5xdg"]
+bg_color = Color(0.185246, 0.444447, 0.512501, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r24pv"]
+bg_color = Color(0.781105, 0.651497, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[node name="World" type="Node"]
+process_mode = 3
+script = ExtResource("1_lg538")
+ShipDat = SubResource("Resource_0kftl")
+scene = ExtResource("2_sl3gr")
+BattleScene = ExtResource("3_fvwv6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 1
+layer = 2
+
+[node name="Map" parent="CanvasLayer" instance=ExtResource("2_dh8se")]
+mouse_filter = 2
+MapSize = 150
+
+[node name="Inventory" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_0pxmw")
+StartingItems = Array[ExtResource("7_bbp8x")]([ExtResource("8_4lxw4"), ExtResource("9_1mfkj"), ExtResource("10_wymxi"), ExtResource("11_am17p"), ExtResource("12_x4hrt"), ExtResource("12_x4hrt"), ExtResource("12_x4hrt"), ExtResource("12_x4hrt"), ExtResource("13_rnwx3"), ExtResource("13_rnwx3"), ExtResource("14_p4xlq")])
+InventoryBoxScene = ExtResource("7_s4cw5")
+InventoryTradeScene = ExtResource("8_tif6p")
+ItemDescriptorScene = ExtResource("12_1s5x7")
+Upgrades = Array[ExtResource("5_u1mvh")]([ExtResource("10_q32ud"), ExtResource("11_f7wwu"), ExtResource("12_msji4")])
+Upgrade_Tab_Scene = ExtResource("10_rf4vs")
+ItemNotifScene = ExtResource("14_86ke4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Inventory"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="UpgradesButton" type="Button" parent="CanvasLayer/Inventory/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+icon = ExtResource("10_ayjou")
+
+[node name="InventoryButton" type="Button" parent="CanvasLayer/Inventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+icon = ExtResource("8_jyf5m")
+
+[node name="InvContents" type="GridContainer" parent="CanvasLayer/Inventory"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+columns = 5
+
+[node name="UpgradesContainer" type="PanelContainer" parent="CanvasLayer/Inventory"]
+visible = false
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory/UpgradesContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+alignment = 1
+
+[node name="Stat_Panel" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -81.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uvjqw")
+
+[node name="Stat_H_Container" type="HBoxContainer" parent="CanvasLayer/Stat_Panel"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Oxygen_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "Oxygen:"
+horizontal_alignment = 1
+
+[node name="Oxygen_Bar" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_er65r")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HP_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("18_5y6ce")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "HP:"
+horizontal_alignment = 1
+
+[node name="PlayerHP" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vml5t")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer/PlayerHP"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hull_HP_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "Hull:"
+horizontal_alignment = 1
+
+[node name="HullHp" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p5xdg")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer/HullHp"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fuel_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 28
+text = "Fuel:"
+horizontal_alignment = 1
+
+[node name="Fuel_Bar" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r24pv")
+step = 1.0
+value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="CanvasLayer"]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="PauseLabel" type="Label" parent="CanvasLayer2"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 131
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2"]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -100.0
+offset_right = 144.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 41
+text = "Game Lost"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_xx17t")
+theme_override_font_sizes/font_size = 26
+text = "OK"
+
+[connection signal="OnItemAdded" from="CanvasLayer/Inventory" to="." method="OnItemAdded"]
+[connection signal="OnItemRemoved" from="CanvasLayer/Inventory" to="." method="OnItemRemoved"]
+[connection signal="pressed" from="CanvasLayer/Inventory/HBoxContainer/UpgradesButton" to="CanvasLayer/Inventory" method="_on_upgrades_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Inventory/HBoxContainer/InventoryButton" to="CanvasLayer/Inventory" method="_on_inventory_button_pressed"]
+[connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer2/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

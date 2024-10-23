@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://dod4ugx85516y"]
+
+[ext_resource type="Texture2D" uid="uid://coh3ud4i7ph3f" path="res://Assets/Items/cannister.png" id="1_wv375"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_8wxr6"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_uc4jg"]
+[ext_resource type="Resource" uid="uid://chxr32lry75bx" path="res://Resources/Items/MediumOxygenTank.tres" id="4_vu7bk"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_itj14"]
+
+[resource]
+script = ExtResource("5_itj14")
+UpgradeName = "OXYGEN"
+UpgradeAmm = 100.0
+UpgradeVersion = ExtResource("4_vu7bk")
+UpgradeItems = Array[ExtResource("2_8wxr6")]([ExtResource("3_uc4jg"), ExtResource("3_uc4jg"), ExtResource("3_uc4jg"), ExtResource("3_uc4jg")])
+ItemIcon = ExtResource("1_wv375")
+ItemName = "Oxygen Tank"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

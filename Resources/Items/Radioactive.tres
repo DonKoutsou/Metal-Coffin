@@ -7,5 +7,6 @@
 script = ExtResource("2_ius4u")
 ItemIcon = ExtResource("1_eqrny")
 ItemName = "Radioactive"
+ItemDesc = "Used as fuel by certain ships"
 MaxStackCount = 10
 RandomFindMaxCount = 4

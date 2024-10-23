@@ -27,6 +27,10 @@ project/assembly_name="test"
 
 enabled=PackedStringArray("res://addons/virtual_joystick/plugin.cfg")
 
+[global_group]
+
+ItemDescriptor=""
+
 [input]
 
 MoveLeft={

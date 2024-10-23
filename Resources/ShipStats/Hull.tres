@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://mnkq2e86fvd2"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_lu11s"]
+
+[resource]
+script = ExtResource("1_lu11s")
+StatName = "HULL"
+StatMax = 600.0
+StatBase = 0.0

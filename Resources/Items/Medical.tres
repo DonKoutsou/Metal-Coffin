@@ -7,5 +7,6 @@
 script = ExtResource("2_twii0")
 ItemIcon = ExtResource("1_qxhdb")
 ItemName = "Medical"
-MaxStackCount = 50
+ItemDesc = "Replenishes HP"
+MaxStackCount = 20
 RandomFindMaxCount = 5

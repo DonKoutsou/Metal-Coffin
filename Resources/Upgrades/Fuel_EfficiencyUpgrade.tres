@@ -7,4 +7,4 @@
 script = ExtResource("2_1wopo")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeItem = ExtResource("1_f3ohe")
-UpgradeStep = 0.1
+UpgradeStep = 0.05

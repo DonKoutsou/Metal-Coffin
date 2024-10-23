@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=5 format=3 uid="uid://cj8ebb6k6xjb0"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://cj8ebb6k6xjb0"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_1vmij"]
+[ext_resource type="Texture2D" uid="uid://cpja8yfly0giw" path="res://Assets/polar-star(1).png" id="1_rvdc2"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="1_x7itr"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_vypaa"]
 [ext_resource type="PackedScene" uid="uid://c1lxtdgeggnej" path="res://Scenes/MapSpotScenes/star.tscn" id="3_41hyr"]
 
 [resource]
 script = ExtResource("1_x7itr")
+MapIcon = ExtResource("1_rvdc2")
 Scene = ExtResource("3_41hyr")
 Name = "Star"
 PossibleDrops = Array[ExtResource("1_1vmij")]([ExtResource("2_vypaa")])

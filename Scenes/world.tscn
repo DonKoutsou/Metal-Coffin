@@ -1,39 +1,86 @@
-[gd_scene load_steps=29 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=16 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
-[ext_resource type="Script" path="res://Scripts/PlayerData.gd" id="2_cw2r8"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
+[ext_resource type="Resource" uid="uid://b5b3q5ta3whql" path="res://Resources/ShipData.tres" id="2_e0ks1"]
 [ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/TravelMinigameGame.tscn" id="2_sl3gr"]
 [ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/BattleScene.tscn" id="3_fvwv6"]
-[ext_resource type="Script" path="res://Scripts/Upgrade.gd" id="5_u1mvh"]
-[ext_resource type="Resource" uid="uid://baqkih8jaj7of" path="res://Resources/Upgrades/RadarUpgrade.tres" id="6_7v25k"]
+[ext_resource type="Resource" uid="uid://dcw4b2h3xa0no" path="res://Resources/Ships/StartingShip.tres" id="5_e0oyh"]
+[ext_resource type="PackedScene" uid="uid://dqisqmi1gj7sn" path="res://Scenes/inventory.tscn" id="6_82nvh"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
-[ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="7_s4cw5"]
-[ext_resource type="Texture2D" uid="uid://b17tyissn80pu" path="res://Assets/Items/lockers.png" id="8_jyf5m"]
-[ext_resource type="PackedScene" uid="uid://c6ktwn6uih1hm" path="res://Scenes/InventoryTrader.tscn" id="8_tif6p"]
-[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="9_0pxmw"]
-[ext_resource type="Resource" uid="uid://dgwatdkb3af5i" path="res://Resources/Upgrades/AnalyzerUpgrade.tres" id="9_q8gvi"]
-[ext_resource type="Texture2D" uid="uid://dunmrj6hw2yft" path="res://Assets/upgrade.png" id="10_ayjou"]
-[ext_resource type="Resource" uid="uid://dtpmuvbd1mevx" path="res://Resources/Upgrades/FuelUpgrade.tres" id="10_q32ud"]
-[ext_resource type="PackedScene" uid="uid://d18pkbgxyppsu" path="res://Scenes/UpgradeTab.tscn" id="10_rf4vs"]
-[ext_resource type="Resource" uid="uid://bwlfc5ltw6ygn" path="res://Resources/Upgrades/Fuel_EfficiencyUpgrade.tres" id="11_f7wwu"]
-[ext_resource type="Resource" uid="uid://dqsxe6tt8giyb" path="res://Resources/Upgrades/Oxygen_Tank_Size.tres" id="12_msji4"]
-[ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/ItemsAddedNotif.tscn" id="14_86ke4"]
-[ext_resource type="StyleBox" uid="uid://dt1eg01fwu0kd" path="res://Theme/PanelGreyStyleBox.tres" id="18_5y6ce"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="8_47nki"]
 
-[sub_resource type="Resource" id="Resource_t0ell"]
-script = ExtResource("2_cw2r8")
-HP = 100
-HULLHP = 100
-HULL_MAX_HP = 100
-FUEL_TANK_SIZE = 80
-FUEL = 80
-FUEL_EFFICIENCY = 1.0
-VIZ_RANGE = 600
-ANALYZE_RANGE = 300
-OXYGEN = 100
-OXYGEN_TANK_SIZE = 100
-INVENTORY_CAPACITY = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
+bg_color = Color(0.275636, 0.275636, 0.275636, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d48tj"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.317053, 0.353, 0.750049, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t3yq"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0509804, 0.533333, 0.0901961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dcv0"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1691, 0.428105, 0.62117, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67ikh"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.781105, 0.651497, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbar6"]
 bg_color = Color(0.389287, 0.389287, 0.389286, 1)
@@ -49,90 +96,13 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvjqw"]
-bg_color = Color(0.326971, 0.291565, 0.274615, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
-bg_color = Color(0.275636, 0.275636, 0.275636, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_er65r"]
-bg_color = Color(0.317053, 0.353, 0.750049, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.162354, 0.162355, 0.162354, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vml5t"]
-bg_color = Color(0.219508, 0.477555, 9.62615e-08, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.162354, 0.162355, 0.162354, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p5xdg"]
-bg_color = Color(0.185246, 0.444447, 0.512501, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.162354, 0.162355, 0.162354, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r24pv"]
-bg_color = Color(0.781105, 0.651497, 0, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.162354, 0.162355, 0.162354, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
-
 [node name="World" type="Node"]
 process_mode = 3
 script = ExtResource("1_lg538")
-PlayerDat = SubResource("Resource_t0ell")
+ShipDat = ExtResource("2_e0ks1")
 scene = ExtResource("2_sl3gr")
 BattleScene = ExtResource("3_fvwv6")
+StartingShip = ExtResource("5_e0oyh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 1
@@ -142,61 +112,7 @@ layer = 2
 mouse_filter = 2
 MapSize = 150
 
-[node name="Inventory" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
-mouse_filter = 2
-script = ExtResource("9_0pxmw")
-InventoryBoxScene = ExtResource("7_s4cw5")
-InventoryTradeScene = ExtResource("8_tif6p")
-Upgrades = Array[ExtResource("5_u1mvh")]([ExtResource("9_q8gvi"), ExtResource("10_q32ud"), ExtResource("11_f7wwu"), ExtResource("12_msji4"), ExtResource("6_7v25k")])
-Upgrade_Tab_Scene = ExtResource("10_rf4vs")
-ItemNotifScene = ExtResource("14_86ke4")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="UpgradesButton" type="Button" parent="CanvasLayer/Inventory/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-focus_mode = 0
-icon = ExtResource("10_ayjou")
-
-[node name="InventoryButton" type="Button" parent="CanvasLayer/Inventory/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-focus_mode = 0
-icon = ExtResource("8_jyf5m")
-
-[node name="InvContents" type="GridContainer" parent="CanvasLayer/Inventory"]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-columns = 5
-
-[node name="UpgradesContainer" type="PanelContainer" parent="CanvasLayer/Inventory"]
-visible = false
-custom_minimum_size = Vector2(460, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory/UpgradesContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-mouse_filter = 2
-alignment = 1
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_82nvh")]
 
 [node name="Stat_Panel" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 12
@@ -207,7 +123,7 @@ offset_top = -81.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uvjqw")
+theme_override_styles/panel = ExtResource("8_47nki")
 
 [node name="Stat_H_Container" type="HBoxContainer" parent="CanvasLayer/Stat_Panel"]
 layout_mode = 2
@@ -218,7 +134,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+theme_override_styles/panel = ExtResource("8_47nki")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container"]
 layout_mode = 2
@@ -236,7 +152,7 @@ custom_minimum_size = Vector2(228, 23)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_er65r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d48tj")
 step = 1.0
 value = 84.0
 show_percentage = false
@@ -259,7 +175,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("18_5y6ce")
+theme_override_styles/panel = ExtResource("8_47nki")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container"]
 layout_mode = 2
@@ -277,7 +193,7 @@ custom_minimum_size = Vector2(228, 23)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_vml5t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5t3yq")
 step = 1.0
 value = 84.0
 show_percentage = false
@@ -300,7 +216,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+theme_override_styles/panel = ExtResource("8_47nki")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container"]
 layout_mode = 2
@@ -318,7 +234,7 @@ custom_minimum_size = Vector2(228, 23)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_p5xdg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2dcv0")
 step = 1.0
 value = 84.0
 show_percentage = false
@@ -341,7 +257,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_hbar6")
+theme_override_styles/panel = ExtResource("8_47nki")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container"]
 layout_mode = 2
@@ -359,7 +275,7 @@ custom_minimum_size = Vector2(228, 23)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_r24pv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_67ikh")
 step = 1.0
 value = 84.0
 show_percentage = false
@@ -434,7 +350,7 @@ theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 26
 text = "OK"
 
-[connection signal="pressed" from="CanvasLayer/Inventory/HBoxContainer/UpgradesButton" to="CanvasLayer/Inventory" method="_on_upgrades_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Inventory/HBoxContainer/InventoryButton" to="CanvasLayer/Inventory" method="_on_inventory_button_pressed"]
+[connection signal="OnItemAdded" from="CanvasLayer/Inventory" to="." method="OnItemAdded"]
+[connection signal="OnItemRemoved" from="CanvasLayer/Inventory" to="." method="OnItemRemoved"]
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer2/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

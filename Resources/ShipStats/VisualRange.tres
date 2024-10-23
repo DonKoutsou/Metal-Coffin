@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://c5c8gjoxlagpy"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_cvkpt"]
+
+[resource]
+script = ExtResource("1_cvkpt")
+StatName = "VIZ_RANGE"
+StatMax = 1000.0
+StatBase = 100.0

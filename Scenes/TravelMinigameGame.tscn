@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="6_prunb"]
 [ext_resource type="Script" path="res://Scripts/planet_pivot.gd" id="7_7j074"]
 [ext_resource type="PackedScene" uid="uid://oa22m2ia7nea" path="res://Scenes/SupplyCache.tscn" id="8_jxkch"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="14_tw24j"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="14_vwqn1"]
 
 [sub_resource type="Gradient" id="Gradient_jo0lo"]
@@ -56,31 +57,29 @@ dof_blur_near_distance = 128.03
 dof_blur_near_transition = 501.54
 dof_blur_amount = 0.45
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nv7ds"]
-bg_color = Color(0.389287, 0.389287, 0.389286, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1hgv"]
+bg_color = Color(0.275636, 0.275636, 0.275636, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 corner_detail = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7lbm"]
-bg_color = Color(0.275636, 0.275636, 0.275636, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0mwf"]
-bg_color = Color(0.185246, 0.444447, 0.512501, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.162354, 0.162355, 0.162354, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mr7uo"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1691, 0.428105, 0.62117, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="TravelMinigameGame" type="Node3D"]
 process_mode = 1
@@ -124,34 +123,51 @@ action_right = "MoveRight"
 action_up = "MoveUp"
 action_down = "MoveDown"
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="Hull_HP_Container" type="PanelContainer" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -265.0
-offset_top = -66.0
+offset_left = -244.0
+offset_top = -77.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_nv7ds")
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("14_tw24j")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Hull_HP_Container"]
 layout_mode = 2
 alignment = 2
 
-[node name="Label2" type="Label" parent="PanelContainer2/HBoxContainer"]
+[node name="Label2" type="Label" parent="Hull_HP_Container/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("14_vwqn1")
-theme_override_font_sizes/font_size = 47
+theme_override_font_sizes/font_size = 28
 text = "Hull:"
 horizontal_alignment = 1
 
-[node name="HullHp" type="ProgressBar" parent="PanelContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+[node name="HullHp" type="ProgressBar" parent="Hull_HP_Container/HBoxContainer"]
+custom_minimum_size = Vector2(228, 23)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_e7lbm")
-theme_override_styles/fill = SubResource("StyleBoxFlat_y0mwf")
+theme_override_styles/background = SubResource("StyleBoxFlat_y1hgv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mr7uo")
 step = 1.0
 value = 84.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Hull_HP_Container/HBoxContainer/HullHp"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1

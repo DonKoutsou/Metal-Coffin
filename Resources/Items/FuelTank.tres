@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://33sxgbk0di7b"]
+
+[ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_2e0sy"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_rbprg"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="2_sc66u"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_s26i3"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/MediumFuelTank.tres" id="4_ox6xo"]
+
+[resource]
+script = ExtResource("2_sc66u")
+UpgradeName = "FUEL"
+UpgradeAmm = 100.0
+UpgradeVersion = ExtResource("4_ox6xo")
+UpgradeItems = Array[ExtResource("2_rbprg")]([ExtResource("3_s26i3"), ExtResource("3_s26i3"), ExtResource("3_s26i3"), ExtResource("3_s26i3")])
+ItemIcon = ExtResource("1_2e0sy")
+ItemName = "Fuel Tank"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

@@ -3,6 +3,7 @@ class_name Map
 
 @export var SpotScene: PackedScene
 @export var MapSpotTypes : Array[MapSpotType]
+@export var SpecialMapSpotTypes : Array[MapSpotType]
 @export var FinalSpotType : MapSpotType
 @export var MapSize = 20
 @export var AnalyzerScene : PackedScene
@@ -20,10 +21,10 @@ var GalaxyMat :ShaderMaterial
 func _ready() -> void:
 	GenerateMap()
 	ToggleClose()
-	var pldata = PlayerData.GetInstance()
-	UpdateFuelRange(pldata.FUEL, pldata.FUEL_EFFICIENCY)
-	UpdateVizRange(pldata.VIZ_RANGE)
-	UpdateAnalyzerRange(pldata.ANALYZE_RANGE)
+	var shipdata = ShipData.GetInstance()
+	UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
+	UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
+	UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	GalaxyMat = $ColorRect.material
 
 func _process(_delta: float) -> void:
@@ -45,24 +46,30 @@ func _process(_delta: float) -> void:
 		GalaxyMat.set_shader_parameter("thing", val + 0.02)
 		
 func GenerateMap() -> void:
-	var ran = RandomNumberGenerator.new()
 	var VP= $MapSpots.size
 	VP.x /= 10
 	var locse :Dictionary
+	var SpecialSpots : Array[int] = []
+	for z in SpecialMapSpotTypes.size():
+		SpecialSpots.append(randi_range(5, MapSize - 1))
 	for g in MapSize :
 		var sc = SpotScene.instantiate() as MapSpot
 		$MapSpots/SpotSpot.add_child(sc)
 		sc.connect("MapPressed", StartStage)
 		sc.connect("SpotSearched", SpotSearched)
 		sc.connect("SpotAnalazyed", AnalyzeStage)
-		var type = MapSpotTypes.pick_random() as MapSpotType
+		var type
+		if (SpecialSpots.has(g)):
+			type = SpecialMapSpotTypes[SpecialSpots.find(g)] as MapSpotType
+		else:
+			type = MapSpotTypes.pick_random() as MapSpotType
 		if (g == MapSize - 1):
 			type = FinalSpotType
 		sc.SetSpotData(type)
 
-		var pos = Vector2(ran.randf_range(VP.x *g, VP.x * (g + 2)) + 50, ran.randf_range(20, VP.y - 80))
+		var pos = Vector2(randf_range(VP.x *g, VP.x * (g + 2)) + 50, randf_range(20, VP.y - 80))
 		while (HasClose(pos)):
-			pos =Vector2(ran.randf_range(VP.x * g,VP.x * (g + 2)) + 50, ran.randf_range(20, VP.y -80))
+			pos =Vector2(randf_range(VP.x * g,VP.x * (g + 2)) + 50, randf_range(20, VP.y -80))
 		sc.position = pos
 		locse[pos] = sc
 		SpotList.insert(g, sc)
@@ -89,8 +96,8 @@ func StageFailed() -> void:
 	PlayingStage = false
 func StartStage(stage :MapSpot) -> void:
 	var stagenum = SpotList.find(stage)
-	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10 / PlayerData.GetInstance().FUEL_EFFICIENCY
-	var o2 = player_ship.global_position.distance_to(stage.global_position) / 20
+	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
+	var o2 = player_ship.global_position.distance_to(stage.global_position) / 40
 	StageSellected.emit(stage, stagenum, fuel, o2)
 	PlayingStage = true
 	pass
@@ -114,21 +121,21 @@ func UpdateFuelRange(fuel : float, fuel_ef : float):
 	$MapSpots/PlayerShip/Fuel_Range.size = Vector2(distall, distall) * 2
 	$MapSpots/PlayerShip/Fuel_Range.position = Vector2(-(distall), -(distall))
 	ToggleClose()
-func UpdateVizRange(rang : int):
+func UpdateVizRange(rang : float):
 	$MapSpots/PlayerShip/Radar_Range.size = Vector2(rang, rang) * 2
 	$MapSpots/PlayerShip/Radar_Range.position = Vector2(-(rang), -(rang))
 	ToggleClose()
-func UpdateAnalyzerRange(rang : int):
+func UpdateAnalyzerRange(rang : float):
 	$MapSpots/PlayerShip/Analyzer_Range.size = Vector2(rang, rang) * 2
 	$MapSpots/PlayerShip/Analyzer_Range.position = Vector2(-(rang), -(rang))
 	ToggleClose()
 func ToggleClose() -> void:
-	var pldata = PlayerData.GetInstance()
-	var distall = pldata.FUEL * 10 * pldata.FUEL_EFFICIENCY
+	var pldata = ShipData.GetInstance()
+	var distall = pldata.GetStat("FUEL").GetCurrentValue() * 10 * pldata.GetStat("FUEL_EFFICIENCY").GetStat()
 	for z in SpotList.size():
 		var dist = player_ship.global_position.distance_to(SpotList[z].global_position)
 		SpotList[z].ToggleVisitButton(dist < distall and dist > 4)
-		if (dist <= pldata.VIZ_RANGE):
+		if (dist <= pldata.GetStat("VIZ_RANGE").GetStat()):
 			SpotList[z].OnSpotSeen()
-		SpotList[z].ToggleAnalyzeButton(dist <= pldata.ANALYZE_RANGE)
+		SpotList[z].ToggleAnalyzeButton(dist <= pldata.GetStat("ANALYZE_RANGE").GetStat())
 		

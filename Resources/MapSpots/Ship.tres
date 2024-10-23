@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://dac7bh3qrgvtt"]
+
+[ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="1_nt7ka"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_ajqlo"]
+[ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/MediumRadar.tres" id="3_yfr1x"]
+[ext_resource type="Resource" uid="uid://dg5y13hfhdyjs" path="res://Resources/Items/MediumAnalyzer.tres" id="4_xdbb3"]
+[ext_resource type="PackedScene" uid="uid://ckpstbcetam0" path="res://Scenes/MapSpotScenes/LostShip.tscn" id="4_ya1ik"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_16bjy"]
+[ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/MediumEngine.tres" id="5_nqpip"]
+
+[resource]
+script = ExtResource("5_16bjy")
+MapIcon = ExtResource("1_nt7ka")
+Scene = ExtResource("4_ya1ik")
+Name = "Lost Ship"
+PossibleDrops = Array[ExtResource("2_ajqlo")]([ExtResource("3_yfr1x"), ExtResource("4_xdbb3"), ExtResource("5_nqpip")])
+FullName = "Supernova"
+Description = "blah blag"

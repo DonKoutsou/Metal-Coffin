@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://4i6hdm0q8a57"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_j8hys"]
+
+[resource]
+script = ExtResource("1_j8hys")
+StatName = "OXYGEN"
+StatMax = 600.0
+StatBase = 0.0

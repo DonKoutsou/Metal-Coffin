@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=4 format=3 uid="uid://dg5y13hfhdyjs"]
+
+[ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_g5w7o"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_bwlbw"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="4_3f2mw"]
+
+[resource]
+script = ExtResource("4_3f2mw")
+UpgradeName = "ANALYZE_RANGE"
+UpgradeAmm = 600.0
+UpgradeItems = Array[ExtResource("2_bwlbw")]([])
+ItemIcon = ExtResource("1_g5w7o")
+ItemName = "Medium Range Analyzer"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

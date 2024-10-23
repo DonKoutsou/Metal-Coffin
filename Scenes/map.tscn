@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=20 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -11,9 +11,10 @@
 [ext_resource type="Resource" uid="uid://bhr3r5wyfgdjn" path="res://Resources/MapSpots/Planet2.tres" id="7_ow8y0"]
 [ext_resource type="Resource" uid="uid://da3ti0o0734tr" path="res://Resources/MapSpots/Planet3.tres" id="8_1wj05"]
 [ext_resource type="PackedScene" uid="uid://cuirrj6s52dyf" path="res://Scenes/PlanetAnalyzer.tscn" id="8_7ajvg"]
-[ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="8_joyah"]
 [ext_resource type="Resource" uid="uid://cqpnbtjo5crg0" path="res://Resources/MapSpots/Planet4.tres" id="9_n201g"]
-[ext_resource type="Shader" path="res://Scenes/Galaxy.gdshader" id="12_7uph2"]
+[ext_resource type="Resource" uid="uid://dac7bh3qrgvtt" path="res://Resources/MapSpots/Ship.tres" id="10_brf7w"]
+[ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="12_7uph2"]
+[ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="13_2ck5b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a20qu"]
 shader = ExtResource("12_7uph2")
@@ -78,6 +79,7 @@ mouse_filter = 1
 script = ExtResource("1_mq604")
 SpotScene = ExtResource("2_csmts")
 MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201"), ExtResource("6_culgw"), ExtResource("7_ow8y0"), ExtResource("8_1wj05"), ExtResource("9_n201g")])
+SpecialMapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("10_brf7w")])
 FinalSpotType = ExtResource("6_bd3x3")
 MapSize = 40
 AnalyzerScene = ExtResource("8_7ajvg")
@@ -115,8 +117,8 @@ mouse_filter = 2
 
 [node name="PlayerShip" type="Sprite2D" parent="MapSpots"]
 position = Vector2(-156, 324)
-rotation = 1.5708
-texture = ExtResource("8_joyah")
+rotation = -1.5708
+texture = ExtResource("13_2ck5b")
 
 [node name="Fuel_Range" type="Panel" parent="MapSpots/PlayerShip"]
 anchors_preset = 8
@@ -124,10 +126,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -432.0
-offset_top = -432.0
-offset_right = 368.0
-offset_bottom = 368.0
+offset_left = -528.0
+offset_top = -528.0
+offset_right = 272.0
+offset_bottom = 272.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -140,10 +142,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -234.0
-offset_top = -234.0
-offset_right = 171.0
-offset_bottom = 171.0
+offset_left = -330.5
+offset_top = -330.5
+offset_right = 74.5
+offset_bottom = 74.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -156,10 +158,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -132.0
-offset_top = -132.0
-offset_right = 68.0
-offset_bottom = 68.0
+offset_left = -228.0
+offset_top = -228.0
+offset_right = -28.0
+offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4

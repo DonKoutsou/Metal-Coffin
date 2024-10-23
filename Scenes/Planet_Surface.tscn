@@ -1,0 +1,167 @@
+[gd_scene load_steps=25 format=3 uid="uid://c08f77fnaa310"]
+
+[ext_resource type="Shader" path="res://Terain.gdshader" id="1_gbmyu"]
+[ext_resource type="ArrayMesh" uid="uid://byus7qmd0hep7" path="res://Assets/Spaceship/Ship.obj" id="2_3s24m"]
+[ext_resource type="Shader" path="res://Shaders/TerainDetail.gdshader" id="3_p7yox"]
+[ext_resource type="Shader" path="res://Shaders/DetailMeshSheder.gdshader" id="4_6ypw4"]
+[ext_resource type="Texture2D" uid="uid://d33jg4pbqfq3j" path="res://Assets/sprite_0052.png" id="5_61vve"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r5dwy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7k0l3"]
+seamless = true
+noise = SubResource("FastNoiseLite_r5dwy")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ukh4m"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_r5dwy")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yxq6x"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c70q5"]
+noise = SubResource("FastNoiseLite_yxq6x")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jps4x"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dqjk1"]
+seamless = true
+noise = SubResource("FastNoiseLite_jps4x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wilng"]
+render_priority = 0
+shader = ExtResource("1_gbmyu")
+shader_parameter/heightmap_normals_intensity = 1.0
+shader_parameter/heightmap_scale = 2.0
+shader_parameter/heightmap_height_scale = 75.54
+shader_parameter/heightmap = SubResource("NoiseTexture2D_7k0l3")
+shader_parameter/heightmap_normals = SubResource("NoiseTexture2D_ukh4m")
+shader_parameter/splatmap = SubResource("NoiseTexture2D_dqjk1")
+shader_parameter/slope_edge_1 = 0.346
+shader_parameter/slope_edge_2 = 0.234
+shader_parameter/slope_edge_3 = 0.193
+shader_parameter/slope_edge_noise_scale = 1.92
+shader_parameter/slope_edge_noise_intensity = 1.0
+shader_parameter/slope_edge_noise = SubResource("NoiseTexture2D_c70q5")
+shader_parameter/slope_color_remap_top = Color(0.327296, 0.329809, 0.30192, 1)
+shader_parameter/slope_color_remap_bottom = Color(0.62763, 0.363364, 0.124567, 1)
+shader_parameter/flat_color_remap_top = Color(0.824301, 0.61447, 0.329303, 1)
+shader_parameter/flat_color_remap_bottom = Color(0.445644, 0.456701, 0.388836, 1)
+shader_parameter/flat_uv_scale = 2.735
+shader_parameter/flat_normal_scale = 1.0
+shader_parameter/slope_uv_scale = 6.395
+shader_parameter/slope_normal_scale = 1.0
+shader_parameter/flat_specular = 0.0
+shader_parameter/flat_roughness = 0.0
+shader_parameter/flat_metallic = null
+shader_parameter/flat_normal_intensity = 0.0
+shader_parameter/slope_specular = null
+shader_parameter/slope_roughness = 0.0
+shader_parameter/slope_metallic = 0.0
+shader_parameter/slope_normal_intensity = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lrdym"]
+size = Vector2(200, 200)
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4jydn"]
+energy_multiplier = 11.08
+
+[sub_resource type="Sky" id="Sky_c38fh"]
+sky_material = SubResource("PhysicalSkyMaterial_4jydn")
+
+[sub_resource type="Environment" id="Environment_efwbu"]
+background_mode = 2
+sky = SubResource("Sky_c38fh")
+sky_rotation = Vector3(0, 1.97746, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3vj7l"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_r5dwy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4m1ye"]
+shader = ExtResource("3_p7yox")
+shader_parameter/instance_rows = -80
+shader_parameter/instance_spacing = 2.555
+shader_parameter/density_adjust = 1.27
+shader_parameter/orient_to_normal = true
+shader_parameter/orient_up_with_normal = true
+shader_parameter/random_spacing = 0.0
+shader_parameter/min_scale = Vector3(1, 2, 1)
+shader_parameter/max_scale = Vector3(1, 0.1, 1)
+shader_parameter/heightmap_scale = 2.0
+shader_parameter/heightmap_height_scale = 75.54
+shader_parameter/heightmap = SubResource("NoiseTexture2D_7k0l3")
+shader_parameter/heightmap_normals = SubResource("NoiseTexture2D_3vj7l")
+shader_parameter/foliage_map = SubResource("NoiseTexture2D_7k0l3")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nhvg7"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_r5dwy")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bns57"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rkm6t"]
+invert = true
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_bns57")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hm4li"]
+render_priority = 0
+shader = ExtResource("4_6ypw4")
+shader_parameter/specular = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/fadeout_envelope = Vector2(0.585, 0.405)
+shader_parameter/top_color = Color(0.870914, 0.786325, 0.510211, 1)
+shader_parameter/bottom_color = Color(0.184979, 0.17706, 0.0584657, 1)
+shader_parameter/noise_color = Color(0.93027, 0.37818, 0.388681, 1)
+shader_parameter/heightmap_scale = 75.54
+shader_parameter/color_noise_scale = 6.83
+shader_parameter/color_noise_intensity = 0.426
+shader_parameter/foliage_texture = ExtResource("5_61vve")
+shader_parameter/heightmap_normals = SubResource("NoiseTexture2D_nhvg7")
+shader_parameter/color_noise = SubResource("NoiseTexture2D_7k0l3")
+shader_parameter/wind = true
+shader_parameter/wind_scale = 1.085
+shader_parameter/wind_intensity = 0.155
+shader_parameter/wind_speed = 0.34
+shader_parameter/wind_darken = 0.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_rkm6t")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tq8wg"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("ShaderMaterial_hm4li")
+size = Vector2(2, 2)
+subdivide_width = 1
+subdivide_depth = 1
+orientation = 0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_wilng")
+mesh = SubResource("PlaneMesh_lrdym")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.970063, 0.242853, 0, -0.242853, 0.970063, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.847891, 0, 0.530171, 0, 1, 0, -0.530171, 0, -0.847891, -30.1752, 32.8625, 74.4624)
+mesh = ExtResource("2_3s24m")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.863862, 0, -0.503729, 0, 1, 0, 0.503729, 0, -0.863862, -1.34854, 0.333801, -0.431442)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_efwbu")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 5000
+visibility_aabb = AABB(-4, -4, -4, 500, 500, 500)
+process_material = SubResource("ShaderMaterial_4m1ye")
+draw_pass_1 = SubResource("QuadMesh_tq8wg")

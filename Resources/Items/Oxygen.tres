@@ -9,5 +9,6 @@ script = ExtResource("3_85k2s")
 ItemIcon = ExtResource("1_mkclw")
 ItemIconSmol = ExtResource("2_71kk0")
 ItemName = "Oxygen"
+ItemDesc = "Replanishes Ships Oxygen Supply"
 MaxStackCount = 50
 RandomFindMaxCount = 4

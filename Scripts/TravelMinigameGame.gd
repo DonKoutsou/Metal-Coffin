@@ -18,7 +18,7 @@ var enemies = 0
 var Hull : int
 
 func _ready() -> void:
-	$PanelContainer2/HBoxContainer/HullHp.value = Hull
+	$Hull_HP_Container/HBoxContainer/HullHp.value = Hull
 	var fintrans = -50;
 	var SuppliesList = []
 	for g in EnemyGoal/10:
@@ -58,7 +58,7 @@ func EnemyKilled() -> void:
 		
 func EnemyHit():
 	Hull -= 10
-	$PanelContainer2/HBoxContainer/HullHp.value = Hull
+	$Hull_HP_Container/HBoxContainer/HullHp.value = Hull
 	character.Damage()
 	if (Hull == 0):
 		GameFinished(false)

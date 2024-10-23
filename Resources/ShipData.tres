@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=12 format=3 uid="uid://b5b3q5ta3whql"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_ko0ft"]
+[ext_resource type="Script" path="res://Scripts/ShipData.gd" id="2_5r8b6"]
+[ext_resource type="Resource" uid="uid://dm0s4m8iysdxb" path="res://Resources/ShipStats/AnalyzeRange.tres" id="2_oy5rl"]
+[ext_resource type="Resource" uid="uid://dggrnmd2ynjmr" path="res://Resources/ShipStats/FuelTank.tres" id="3_j2d45"]
+[ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="4_rfyiw"]
+[ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="5_1sp3w"]
+[ext_resource type="Resource" uid="uid://4i6hdm0q8a57" path="res://Resources/ShipStats/OxygenTank.tres" id="6_tftnj"]
+[ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="7_cib35"]
+[ext_resource type="Resource" uid="uid://b0siggrirrhru" path="res://Resources/ShipStats/Cryo.tres" id="8_2ckim"]
+[ext_resource type="Resource" uid="uid://b0nulfa1cfwc8" path="res://Resources/ShipStats/HP.tres" id="9_yeueh"]
+[ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="10_suyqr"]
+
+[resource]
+script = ExtResource("2_5r8b6")
+Stats = Array[ExtResource("1_ko0ft")]([ExtResource("2_oy5rl"), ExtResource("3_j2d45"), ExtResource("4_rfyiw"), ExtResource("5_1sp3w"), ExtResource("6_tftnj"), ExtResource("7_cib35"), ExtResource("8_2ckim"), ExtResource("9_yeueh"), ExtResource("10_suyqr")])
