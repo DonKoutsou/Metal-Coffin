@@ -20,6 +20,11 @@ func _ready() -> void:
 	land_button.visible = false
 	label.visible = false
 	analyze_button.visible = false
+func GetSaveData() -> Resource:
+	var datas = MapSpotSaveData.new()
+	datas.SpotLoc = position
+	datas.SpotType = SpotType
+	return datas
 #//////////////////////////////////////////////////////////////////
 func SetSpotData(Data : MapSpotType) -> void:
 	SpotType = Data

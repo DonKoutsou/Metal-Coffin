@@ -7,14 +7,16 @@ signal ItemUpgraded(Part : ShipPart)
 signal ItemDropped(It : Item)
 
 var DescribedItem : Item
-
-func SetData(It : Item) -> void:
+var OwnedAmm : int
+var UsingAmm : int = 1
+func SetData(It : Item, Amm : int) -> void:
 	DescribedItem = It
+	OwnedAmm = Amm
 	$VBoxContainer/HBoxContainer/TextureRect.texture = It.ItemIcon
 	$VBoxContainer/HBoxContainer/VBoxContainer/ItemName.text = It.ItemName
 	if (It is ShipPart):
 		$VBoxContainer/HBoxContainer/VBoxContainer/ItemDesc.text = It.ItemDesc + "\nProvides " + var_to_str(It.UpgradeAmm)+ " of "  + It.UpgradeName 
-		$VBoxContainer/HBoxContainer/VBoxContainer/Use.visible = false
+		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = false
 		if (It.UpgradeVersion == null):
 			$VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer.visible = false
 		else:
@@ -53,6 +55,15 @@ func ConfirmDrop() -> void:
 	ItemDropped.emit(DescribedItem)
 	queue_free()
 func ConfirmUse() -> void:
-	ItemUsed.emit(DescribedItem)
+	ItemUsed.emit(DescribedItem, UsingAmm)
 func ConfirmUpgrade() -> void:
 	ItemUpgraded.emit(DescribedItem)
+
+
+func _on_use_more_pressed() -> void:
+	UsingAmm = min(UsingAmm + 1, OwnedAmm)
+	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use.text = "Use :" + var_to_str(UsingAmm) + "x"
+
+func _on_use_less_pressed() -> void:
+	UsingAmm = max(UsingAmm - 1, 1)
+	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use.text = "Use :" + var_to_str(UsingAmm) + "x"

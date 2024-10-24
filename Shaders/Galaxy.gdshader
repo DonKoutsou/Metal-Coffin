@@ -21,7 +21,7 @@ uniform int iterations : hint_range(1, 16) = 12;
 
 //constants
 const float formuparam2 = 0.79;
-const float zoom = 2.0;
+const float zoom = 3.0;
 const float tile = 0.850;
 const float stepsize = 0.29;
 

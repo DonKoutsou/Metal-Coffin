@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://delsjvmgmdgcn"]
+
+[ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_y40tw"]
+[ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="2_imjs0"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_ropp1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1lp7n"]
+shader = ExtResource("2_imjs0")
+shader_parameter/thing = 0.05
+shader_parameter/star_brightness = 0.006
+shader_parameter/dist_fade = 0.648
+shader_parameter/quantization_levels = 256
+shader_parameter/saturation = 0.536
+shader_parameter/layers = 5.175
+shader_parameter/iterations = 3
+
+[node name="StartingMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 96
+follow_viewport_enabled = true
+script = ExtResource("1_y40tw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1lp7n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 470.0
+offset_top = 237.0
+offset_right = 682.0
+offset_bottom = 411.0
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ropp1")
+theme_override_font_sizes/font_size = 34
+text = "Into The Void"
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ropp1")
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+text = "Play"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ropp1")
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -27,13 +27,12 @@ shader_parameter/layers = 5.175
 shader_parameter/iterations = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrm2y"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0.781105, 0.651497, 0, 1)
-border_blend = true
 corner_radius_top_left = 1024
 corner_radius_top_right = 1024
 corner_radius_bottom_right = 1024
@@ -41,13 +40,12 @@ corner_radius_bottom_left = 1024
 corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qg31g"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
-border_blend = true
 corner_radius_top_left = 1024
 corner_radius_top_right = 1024
 corner_radius_bottom_right = 1024
@@ -55,13 +53,12 @@ corner_radius_bottom_left = 1024
 corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fa3bn"]
-bg_color = Color(0.131177, 0.636693, 0.930589, 0)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0.185887, 0.412258, 0.630426, 1)
-border_blend = true
 corner_radius_top_left = 1024
 corner_radius_top_right = 1024
 corner_radius_bottom_right = 1024

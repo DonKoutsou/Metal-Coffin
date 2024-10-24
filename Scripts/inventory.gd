@@ -18,6 +18,14 @@ var InventoryContents : Array[Inventory_Box] = []
 signal OnItemAdded(It : Item)
 signal OnItemRemoved(It : Item)
 # Called when the node enters the scene tree for the first time.
+func GetSaveData() ->SaveData:
+	var dat = SaveData.new()
+	dat.DataName = "InventoryContents"
+	var Datas : Array[Resource] = []
+	for g in InventoryContents.size():
+		Datas.append(InventoryContents[g].GetSaveData())
+	dat.Datas = Datas
+	return dat
 func _ready() -> void:
 	set_process(false)
 	$PanelContainer.visible = false
@@ -125,7 +133,7 @@ func TradeFinished(itms : Array[Item]) -> void:
 				ItmsToAdd.append(itms[g])
 	AddItems(ItmsToAdd, false)
 
-func OnItemSelected(It :Item) -> void:
+func OnItemSelected(It :Item, Amm : int) -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
@@ -134,7 +142,7 @@ func OnItemSelected(It :Item) -> void:
 			return
 		descriptors[0].queue_free()
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
-	Descriptor.SetData(It)
+	Descriptor.SetData(It, Amm)
 	get_parent().add_child(Descriptor)
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
@@ -149,7 +157,7 @@ func UpgradeItem(Part : ShipPart) -> void:
 				for z in Part.UpgradeItems.size():
 					RemoveItem(UpItem)
 				AddItems([Part.UpgradeVersion], false)
-				OnItemSelected(Part.UpgradeVersion)
+				OnItemSelected(Part.UpgradeVersion, 1)
 				UpgradeSuccess = true
 	if (!UpgradeSuccess) :
 		var pop = AcceptDialog.new()
@@ -164,18 +172,21 @@ func RemoveItem(It : Item):
 			OnItemRemoved.emit(It)
 			inventory_ship_stats.UpdateValues()
 			return
-func UseItem(It : Item):
-	if (world.UseItem(It)):
-		for g in InventoryContents.size():
-			var box = InventoryContents[g]
-			if (box.ItemC.ItemType == It):
-				box.UpdateAmm(-1)
-				OnItemRemoved.emit(It)
-				if (box.ItemC.Ammount == 0):
-					var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-					if (descriptors.size() > 0):
-						descriptors[0].queue_free()
-				return
+func UseItem(It : Item, Times : int = 1):
+	for z in Times:
+		if (world.UseItem(It)):
+			for g in InventoryContents.size():
+				var box = InventoryContents[g]
+				if (box.ItemC.ItemType == It):
+					box.UpdateAmm(-1)
+					OnItemRemoved.emit(It)
+					if (box.ItemC.Ammount == 0):
+						var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+						if (descriptors.size() > 0):
+							descriptors[0].queue_free()
+					break
+		else :
+			return
 	#Icon = TextureRect.new()
 	#Icon.texture = It.ItemIcon
 	#get_parent().add_child(Icon)
@@ -193,7 +204,7 @@ func _on_inventory_button_pressed() -> void:
 	$PanelContainer.visible = IsOpening
 	if (IsOpening):
 		inventory_ship_stats.UpdateValues()
-	if (IsOpening):
+	if (!IsOpening):
 		var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 		if (descriptors.size() > 0):
 			descriptors[0].queue_free()

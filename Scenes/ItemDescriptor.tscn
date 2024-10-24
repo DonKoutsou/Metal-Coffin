@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://chka5s8jthteo"]
+[gd_scene load_steps=6 format=3 uid="uid://chka5s8jthteo"]
 
 [ext_resource type="Script" path="res://Scripts/ItemDescriptor.gd" id="1_sw40a"]
 [ext_resource type="Texture2D" uid="uid://dt8n5xbi0y8lh" path="res://Assets/Items/microchip.png" id="1_wvpe4"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_yjbet"]
 [ext_resource type="Texture2D" uid="uid://com40xglelaik" path="res://Assets/Items/materials-science_smol.png" id="3_v5dpc"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_dsmol"]
 
 [node name="ItemDesc" type="PanelContainer" groups=["ItemDescriptor"]]
 anchors_preset = 8
@@ -52,21 +53,47 @@ alignment = 1
 
 [node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 28
 text = "Item Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ItemDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Use"
+alignment = 1
+
+[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "-"
+
+[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "Use :1x"
+
+[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "+"
 
 [node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
 text = "Drop"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -75,6 +102,8 @@ alignment = 1
 
 [node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
 text = "Upgrade"
 
 [node name="UpgradeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
@@ -83,6 +112,8 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/UpgradeContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
 text = "Cost : 4x
 "
 horizontal_alignment = 1
@@ -94,9 +125,13 @@ texture = ExtResource("3_v5dpc")
 
 [node name="Close" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
 text = "Close"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/UseLess" to="." method="_on_use_less_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/UseMore" to="." method="_on_use_more_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Drop" to="." method="_on_drop_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="VBoxContainer/Close" to="." method="_on_close_pressed"]

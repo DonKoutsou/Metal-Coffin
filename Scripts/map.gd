@@ -26,7 +26,14 @@ func _ready() -> void:
 	UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	GalaxyMat = $ColorRect.material
-
+func GetSaveData() ->SaveData:
+	var dat = SaveData.new()
+	dat.DataName = "MapSpots"
+	var Datas : Array[Resource] = []
+	for g in SpotList.size():
+		Datas.append(SpotList[g].GetSaveData())
+	dat.Datas = Datas
+	return dat
 func _process(_delta: float) -> void:
 	if (PlayingStage):
 		return

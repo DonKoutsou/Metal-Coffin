@@ -7,7 +7,7 @@ class_name World
 
 @onready var Mapz = $CanvasLayer/Map as Map
 @onready var timer: Timer = $CanvasLayer/Timer
-@onready var pause_label: Label = $CanvasLayer2/PauseLabel
+@onready var pause_container: PanelContainer = $CanvasLayer2/PauseContainer
 
 @onready var oxygen_bar: ProgressBar = $CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar
 @onready var player_hp: ProgressBar = $CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer/PlayerHP
@@ -15,6 +15,11 @@ class_name World
 @onready var fuel_bar: ProgressBar = $CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar
 @onready var inventory: Inventory = $CanvasLayer/Inventory
 
+signal OnGameEnded()
+func GetInventory() -> Inventory:
+	return inventory
+func GetMap() -> Map:
+	return Mapz
 var Runningstage = 0
 func _enter_tree() -> void:
 	ShipDat.ApplyShipStats(StartingShip.Buffs)
@@ -69,7 +74,7 @@ func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Pause")):
 		var paused = get_tree().paused
 		get_tree().paused = !paused
-		pause_label.visible = !paused
+		pause_container.visible = !paused
 		
 func StartFight(PossibleReward : Array[Item]) -> void:
 	var BScene = BattleScene.instantiate() as Battle
@@ -218,4 +223,8 @@ func GameLost(reason : String):
 
 
 func _on_button_pressed() -> void:
-	get_tree().quit()
+	OnGameEnded.emit()
+
+
+func _on_save_pressed() -> void:
+	SaveLoadManager.GetInstance().Save(self)
