@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://bhr3r5wyfgdjn"]
+
+[ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_ephb5"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_taxsv"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_ex3si"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_bceod"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="4_3172f"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_2fomt"]
+[ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://Scenes/MapSpotScenes/Terrestrial/T2.tscn" id="5_5i7t5"]
+
+[resource]
+script = ExtResource("5_2fomt")
+MapIcon = ExtResource("1_ephb5")
+Scene = ExtResource("5_5i7t5")
+Name = "Planet"
+PossibleDrops = Array[ExtResource("1_taxsv")]([ExtResource("2_ex3si"), ExtResource("3_bceod"), ExtResource("4_3172f")])
+FullName = "Terrestrial Planet"
+Description = "blah blah"

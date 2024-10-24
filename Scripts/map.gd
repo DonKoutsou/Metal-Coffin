@@ -7,6 +7,7 @@ class_name Map
 @export var FinalSpotType : MapSpotType
 @export var MapSize = 20
 @export var AnalyzerScene : PackedScene
+
 @onready var player_ship: Sprite2D = $MapSpots/PlayerShip
 
 
@@ -18,8 +19,13 @@ var SpotList : Array[MapSpot]
 var currentstage = 0
 var GalaxyMat :ShaderMaterial
 
+func GetPlayerPos() -> Vector2:
+	return $MapSpots/PlayerShip.position
+func SetPlayerPos(pos : Vector2) -> void:
+	$MapSpots/PlayerShip.position = pos
 func _ready() -> void:
-	GenerateMap()
+	if (SpotList.size() == 0):
+		GenerateMap()
 	ToggleClose()
 	var shipdata = ShipData.GetInstance()
 	UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
@@ -27,13 +33,30 @@ func _ready() -> void:
 	UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	GalaxyMat = $ColorRect.material
 func GetSaveData() ->SaveData:
-	var dat = SaveData.new()
+	var dat = SaveData.new().duplicate()
 	dat.DataName = "MapSpots"
 	var Datas : Array[Resource] = []
 	for g in SpotList.size():
 		Datas.append(SpotList[g].GetSaveData())
 	dat.Datas = Datas
 	return dat
+func LoadSaveData(Data : Array[Resource]) -> void:
+	for g in Data.size():
+		var dat = Data[g] as MapSpotSaveData
+		var sc = SpotScene.instantiate() as MapSpot
+		$MapSpots/SpotSpot.add_child(sc)
+		sc.connect("MapPressed", StartStage)
+		sc.connect("SpotSearched", SpotSearched)
+		sc.connect("SpotAnalazyed", AnalyzeStage)
+		var type = dat.SpotType
+		sc.SetSpotData(type)
+		sc.Pos = dat.SpotLoc
+		SpotList.insert(g, sc)
+		if (dat.Seen):
+			sc.OnSpotSeen()
+		if (dat.Visited):
+			sc.OnSpotVisited()
+		
 func _process(_delta: float) -> void:
 	if (PlayingStage):
 		return
@@ -55,7 +78,6 @@ func _process(_delta: float) -> void:
 func GenerateMap() -> void:
 	var VP= $MapSpots.size
 	VP.x /= 10
-	var locse :Dictionary
 	var SpecialSpots : Array[int] = []
 	for z in SpecialMapSpotTypes.size():
 		SpecialSpots.append(randi_range(5, MapSize - 1))
@@ -78,8 +100,7 @@ func GenerateMap() -> void:
 		while (HasClose(pos)):
 			pos =Vector2(randf_range(VP.x * g,VP.x * (g + 2)) + 50, randf_range(20, VP.y -80))
 		sc.position = pos
-		locse[pos] = sc
-		SpotList.insert(g, sc)
+		SpotList.append(sc)
 	
 func StageCleared(st : int)	-> void:
 	PlayingStage = false

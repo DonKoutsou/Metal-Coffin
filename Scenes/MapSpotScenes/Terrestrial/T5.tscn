@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=3 uid="uid://cpj77xlku6ufa"]
+
+[ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/clouds.gdshader" id="1_l20ke"]
+[ext_resource type="Texture2D" uid="uid://b4nta4b1auodv" path="res://addons/naejimer_3d_planet_generator/noises/planet_terrestrial.tres" id="2_rsywy"]
+[ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/body.gdshader" id="3_3ltue"]
+[ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/atmosphere.gdshader" id="4_wfh3w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8avg"]
+render_priority = 0
+shader = ExtResource("1_l20ke")
+shader_parameter/speed = 0.005
+shader_parameter/brightness = 0.5
+shader_parameter/threshold = 1.2
+shader_parameter/fluffiness = 0.1
+shader_parameter/noise_texture = ExtResource("2_rsywy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0a0i"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_c8avg")
+shader = ExtResource("3_3ltue")
+shader_parameter/emit = 0.0
+shader_parameter/color_1 = Color(0.463799, 0.567227, 0.687748, 1)
+shader_parameter/color_1_treshold = 0.585
+shader_parameter/color_1_roughness = 0.1
+shader_parameter/color_1_emit = false
+shader_parameter/color_2 = Color(1, 0.94, 0.76, 1)
+shader_parameter/color_2_treshold = 0.668
+shader_parameter/color_3 = Color(0.34, 0.74, 0.5, 1)
+shader_parameter/color_3_treshold = 0.6
+shader_parameter/color_4 = Color(0.398776, 0.585981, 0.511668, 1)
+shader_parameter/color_4_treshold = 0.828
+shader_parameter/color_5 = Color(1, 1, 1, 1)
+shader_parameter/color_5_treshold = 1.0
+shader_parameter/noise_gaseous = false
+shader_parameter/noise_gaseous_speed = 0.0025
+shader_parameter/noise_scale = 1.0
+shader_parameter/noise = ExtResource("2_rsywy")
+
+[sub_resource type="SphereMesh" id="SphereMesh_h4ifb"]
+material = SubResource("ShaderMaterial_d0a0i")
+radial_segments = 12
+rings = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmd1c"]
+render_priority = 0
+shader = ExtResource("4_wfh3w")
+shader_parameter/color_1 = Color(0, 0.12, 0.27, 1)
+shader_parameter/color_2 = Color(0.63, 0.78, 1, 1)
+shader_parameter/alpha = 0.3
+shader_parameter/amount = 4.5
+shader_parameter/intensity = 4.0
+shader_parameter/emit = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_lk7tp"]
+material = SubResource("ShaderMaterial_nmd1c")
+radial_segments = 12
+rings = 12
+
+[sub_resource type="Animation" id="Animation_2yx44"]
+resource_name = "Rotation"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_37sus"]
+_data = {
+"Rotation": SubResource("Animation_2yx44")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_udpb3"]
+animation = &"Rotation"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ji6rl"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wujo7"]
+graph_offset = Vector2(-274.692, 86.5361)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_udpb3")
+nodes/Animation/position = Vector2(-20, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ji6rl")
+nodes/TimeScale/position = Vector2(140, 140)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="PlanetTerrestrial" type="MeshInstance3D"]
+transform = Transform3D(39.2014, 0, 7.95284, 0, 40, 0, -7.95284, 0, 39.2014, 0, 0, 0)
+mesh = SubResource("SphereMesh_h4ifb")
+skeleton = NodePath(".")
+
+[node name="Atmosphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02, 0, 0, 0, 1.02, 0, 0, 0, 1.02, 0, 0, 0)
+sorting_offset = 5.0
+cast_shadow = 0
+mesh = SubResource("SphereMesh_lk7tp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_37sus")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_wujo7")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 0.08

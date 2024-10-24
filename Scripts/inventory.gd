@@ -26,6 +26,18 @@ func GetSaveData() ->SaveData:
 		Datas.append(InventoryContents[g].GetSaveData())
 	dat.Datas = Datas
 	return dat
+func LoadSaveData(Data : Array[Resource]) -> void:
+	
+	var Items : Array[Item] = []
+	for g in Data.size():
+		var dat = Data[g] as ItemContainer
+		for z in dat.Ammount:
+			Items.append(dat.ItemType)
+	StartingItems.clear()
+	StartingUseItems.clear()
+	StartingItems.append_array(Items)
+func _exit_tree() -> void:
+	FlushInventory()
 func _ready() -> void:
 	set_process(false)
 	$PanelContainer.visible = false
@@ -39,9 +51,9 @@ func _ready() -> void:
 		$UpgradesContainer/VBoxContainer.add_child(Tab)
 		Tab.SetData(Upgrades[g])
 		Tab.connect("OnUgradePressed", TryUpgrade)
-	call_deferred("AddItems", StartingItems, false)
+	AddItems(StartingItems, false)
 	for g in StartingUseItems.size():
-		call_deferred("UseItem", StartingUseItems[g])
+		UseItem(StartingUseItems[g])
 		
 func TryUpgrade(UpTab : UpgradeTab) -> void:
 	print("Trying to upgrade " + UpTab.UpgradeData.UpgradeName)

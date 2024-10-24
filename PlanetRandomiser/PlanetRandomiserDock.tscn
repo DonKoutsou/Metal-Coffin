@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://37lh3gt8np10"]
+
+[ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_5kq0j"]
+[ext_resource type="Texture2D" uid="uid://bg2mrx7knbq7e" path="res://Assets/jupiter.png" id="2_yxtym"]
+[ext_resource type="Texture2D" uid="uid://cpja8yfly0giw" path="res://Assets/polar-star(1).png" id="3_7lhrp"]
+
+[node name="PlanetRandomiserDock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "Terrestial"
+popup/item_0/icon = ExtResource("1_5kq0j")
+popup/item_1/text = "Gas"
+popup/item_1/icon = ExtResource("2_yxtym")
+popup/item_1/id = 1
+popup/item_2/text = "Star"
+popup/item_2/icon = ExtResource("3_7lhrp")
+popup/item_2/id = 2
+popup/item_3/text = "Sand"
+popup/item_3/icon = ExtResource("1_5kq0j")
+popup/item_3/id = 3
+popup/item_4/text = "Lava"
+popup/item_4/icon = ExtResource("2_yxtym")
+popup/item_4/id = 4
+popup/item_5/text = "Ice"
+popup/item_5/icon = ExtResource("2_yxtym")
+popup/item_5/id = 5
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Make planet"

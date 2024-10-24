@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://di1wq2x222a8c"]
+
+[ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_ephb5"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_taxsv"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="4_3172f"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_lg75w"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_2fomt"]
+[ext_resource type="PackedScene" uid="uid://m27ulb4qsfpv" path="res://Scenes/MapSpotScenes/Terrestrial/T3.tscn" id="5_5i7t5"]
+
+[resource]
+script = ExtResource("5_2fomt")
+MapIcon = ExtResource("1_ephb5")
+Scene = ExtResource("5_5i7t5")
+PossibleDrops = Array[ExtResource("1_taxsv")]([ExtResource("4_3172f"), ExtResource("4_lg75w")])
+FullName = "Terrestrial Planet"
+Description = ""

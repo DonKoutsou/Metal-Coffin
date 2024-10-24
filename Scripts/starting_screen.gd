@@ -1,6 +1,7 @@
 extends Node
 
 class_name StartingScreen
+@onready var save_load_manager: SaveLoadManager = $SaveLoadManager
 
 @export var StartingMenuScene : PackedScene
 @export var GameScene : PackedScene
@@ -13,9 +14,17 @@ func SpawnMenu() -> void:
 	add_child(startmen)
 	startmen.connect("GameStart", StartGame)
 	
-func StartGame() -> void:
-	get_child(1).queue_free()
+func StartGame(Load : bool) -> void:
+	
 	var wor = GameScene.instantiate() as World
+	if (Load):
+		if (!save_load_manager.Load(wor)):
+			var window = AcceptDialog.new()
+			add_child(window)
+			window.dialog_text = "No Save File Found"
+			window.popup_centered()
+			return
+	get_child(1).queue_free()
 	add_child(wor)
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false

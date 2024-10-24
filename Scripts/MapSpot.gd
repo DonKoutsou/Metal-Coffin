@@ -4,7 +4,7 @@ class_name MapSpot
 @onready var visit_button: Button = $PanelContainer/VBoxContainer2/VBoxContainer/VisitButton
 @onready var land_button: Button = $PanelContainer/VBoxContainer2/VBoxContainer/LandButton
 @onready var analyze_button: Button = $PanelContainer/VBoxContainer2/VBoxContainer/AnalyzeButton
-@onready var label: Label = $PanelContainer/VBoxContainer2/Label
+#@onready var label: Label = $PanelContainer/VBoxContainer2/Label
 
 signal MapPressed(Pos : MapSpot)
 signal SpotSearched(Pos : MapSpot, Drops : Array[Item])
@@ -12,27 +12,29 @@ signal SpotAnalazyed(Type : MapSpotType)
 
 var SpotType : MapSpotType
 var SpotItems : Array[Item]
+var Pos : Vector2
 var Visited = false
 var Seen = false
 
 func _ready() -> void:
 	visit_button.visible = false
 	land_button.visible = false
-	label.visible = false
 	analyze_button.visible = false
+	if (Pos != Vector2.ZERO):
+		position = Pos
 func GetSaveData() -> Resource:
-	var datas = MapSpotSaveData.new()
+	var datas = MapSpotSaveData.new().duplicate()
 	datas.SpotLoc = position
 	datas.SpotType = SpotType
+	datas.Seen = Seen
+	datas.Visited = Visited
 	return datas
 #//////////////////////////////////////////////////////////////////
 func SetSpotData(Data : MapSpotType) -> void:
 	SpotType = Data
-	SetSpotName(Data.Name)
 	SetSpotDrop(Data.PossibleDrops)
 	##SetSpotIcon(Data.MapIcon)
-func SetSpotName(SpotName : String) -> void:
-	label.text = SpotName
+
 func SetSpotIcon(Icon : Texture) -> void:
 	$Panel.texture = Icon
 func SetSpotDrop(ItList : Array[Item]) -> void:

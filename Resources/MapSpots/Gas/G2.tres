@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://sew43a75jovn"]
+
+[ext_resource type="Texture2D" uid="uid://bg2mrx7knbq7e" path="res://Assets/jupiter.png" id="1_mt5pi"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_kymwr"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_5y5jl"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="4_m3u58"]
+[ext_resource type="PackedScene" uid="uid://c1ml4yvlgnbbv" path="res://Scenes/MapSpotScenes/Gas/G2.tscn" id="5_nl6rj"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="6_dxl0c"]
+
+[resource]
+script = ExtResource("6_dxl0c")
+MapIcon = ExtResource("1_mt5pi")
+Scene = ExtResource("5_nl6rj")
+Name = "Planet"
+PossibleDrops = Array[ExtResource("2_kymwr")]([ExtResource("3_5y5jl"), ExtResource("4_m3u58")])
+FullName = "Gas Giant"
+Description = "blah blah"

@@ -17,17 +17,28 @@ class_name World
 
 signal OnGameEnded()
 func GetInventory() -> Inventory:
-	return inventory
+	return $CanvasLayer/Inventory as Inventory
 func GetMap() -> Map:
-	return Mapz
+	return $CanvasLayer/Map as Map
 var Runningstage = 0
 func _enter_tree() -> void:
 	ShipDat.ApplyShipStats(StartingShip.Buffs)
 	ShipDat.GetStat("HP").CurrentVelue = ShipDat.GetStat("HP").GetStat()
+func ResetState() -> void:
+	for g in ShipDat.Stats.size():
+		ShipDat.Stats[g].CurrentVelue = 0
+		ShipDat.Stats[g].StatItemBuff = 0
+		ShipDat.Stats[g].StatShipBuff = 0
+func LoadData(Data : Resource) -> void:
+	var dat = Data as StatSave
+	UpdateHP(dat.Value[0])
+	UpdateHullHP(dat.Value[1])
+	UpdateOxygen(dat.Value[2])
+	UpdateFuel(dat.Value[3])
+
 func _ready() -> void:
 	Mapz.connect("StageSellected", PrepareForJourney)
 	Mapz.connect("StageSearched", StageSearch)
-	
 	player_hp.max_value = ShipDat.GetStat("HP").GetStat()
 	player_hp.value = ShipDat.GetStat("HP").GetCurrentValue()
 	(player_hp.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("HP").GetCurrentValue())) + "/" + var_to_str(roundi(ShipDat.GetStat("HP").GetStat()))
@@ -52,30 +63,31 @@ func OnItemRemoved(It : Item) -> void:
 func ItemBuffStat(UpName : String, UPvalue : float) -> void:
 	ShipDat.GetStat(UpName).StatItemBuff += UPvalue
 	if (UpName == "VIZ_RANGE"):
-		Mapz.UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
+		$CanvasLayer/Map.UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
 	if (UpName == "ANALYZE_RANGE"):
-		Mapz.UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetCurrentValue())
+		$CanvasLayer/Map.UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
 	else :if (UpName == "FUEL"):
 		var FuelTankSize = ShipDat.GetStat("FUEL").GetStat()
-		fuel_bar.max_value = FuelTankSize
+		$CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar.max_value = FuelTankSize
 		if (FuelTankSize < ShipDat.GetStat("FUEL").GetCurrentValue()):
 			UpdateFuel(FuelTankSize)
-		(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("FUEL").GetCurrentValue())) + "/" + var_to_str(roundi(FuelTankSize))
+		($CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("FUEL").GetCurrentValue())) + "/" + var_to_str(roundi(FuelTankSize))
 	else :if (UpName == "FUEL_EFFICIENCY"):
-		Mapz.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
+		$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 	else :if (UpName == "OXYGEN"):
 		var Oxygentank = ShipDat.GetStat("OXYGEN").GetStat()
-		oxygen_bar.max_value = Oxygentank
+		$CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar.max_value = Oxygentank
 		if (Oxygentank < ShipDat.GetStat("OXYGEN").GetCurrentValue()):
 			UpdateOxygen(ShipDat.GetStat("OXYGEN").GetStat())
-		(oxygen_bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("OXYGEN").GetCurrentValue())) + "/" + var_to_str(roundi(Oxygentank))
+		($CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("OXYGEN").GetCurrentValue())) + "/" + var_to_str(roundi(Oxygentank))
 		
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Pause")):
-		var paused = get_tree().paused
-		get_tree().paused = !paused
-		pause_container.visible = !paused
-		
+		Pause()
+func Pause() -> void:
+	var paused = get_tree().paused
+	get_tree().paused = !paused
+	pause_container.visible = !paused
 func StartFight(PossibleReward : Array[Item]) -> void:
 	var BScene = BattleScene.instantiate() as Battle
 	BScene.SupplyReward = PossibleReward
@@ -103,14 +115,14 @@ func UpdateHullHP(NewHP : int) -> void:
 	(hull_hp.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("HULL").GetCurrentValue())) + "/" + var_to_str((roundi(ShipDat.GetStat("HULL").GetStat())))
 func UpdateFuel(NewFuel : float) -> void:
 	ShipDat.GetStat("FUEL").CurrentVelue = NewFuel
-	fuel_bar.value = NewFuel
-	(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("FUEL").GetCurrentValue())) + "/" + var_to_str((roundi(ShipDat.GetStat("FUEL").GetStat())))
-	Mapz.ToggleClose()
-	Mapz.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
+	$CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar.value = NewFuel
+	($CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("FUEL").GetCurrentValue())) + "/" + var_to_str((roundi(ShipDat.GetStat("FUEL").GetStat())))
+	$CanvasLayer/Map.ToggleClose()
+	$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 func UpdateOxygen(NewO2 : float) -> void:
 	ShipDat.GetStat("OXYGEN").CurrentVelue = NewO2
-	oxygen_bar.value = NewO2
-	(oxygen_bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("OXYGEN").GetCurrentValue())) + "/" + var_to_str((roundi(ShipDat.GetStat("OXYGEN").GetStat())))
+	$CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar.value = NewO2
+	($CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("OXYGEN").GetCurrentValue())) + "/" + var_to_str((roundi(ShipDat.GetStat("OXYGEN").GetStat())))
 var fueltoConsume
 var StopToFlyTo
 func PrepareForJourney(st : MapSpot, stagenum : int, FuelToUse : float, O2ToUse : float):
@@ -221,10 +233,22 @@ func GameLost(reason : String):
 	$CanvasLayer2/PanelContainer.visible = true
 	$CanvasLayer2/PanelContainer/VBoxContainer/Label.text = reason
 
-
 func _on_button_pressed() -> void:
 	OnGameEnded.emit()
 
 
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save(self)
+	var window = AcceptDialog.new()
+	add_child(window)
+	window.dialog_text = "Save successful"
+	window.popup_centered()
+func _on_exit_pressed() -> void:
+	ResetState()
+	OnGameEnded.emit()
+
+func _on_pause_pressed() -> void:
+	Pause()
+
+func _on_return_pressed() -> void:
+	Pause()

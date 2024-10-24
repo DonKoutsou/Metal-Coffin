@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://cdjwdnw7xjy2t"]
+
+[ext_resource type="Texture2D" uid="uid://cpja8yfly0giw" path="res://Assets/polar-star(1).png" id="1_k2xuf"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_2f7wa"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="3_l1cbr"]
+[ext_resource type="PackedScene" uid="uid://b65ra1pregrxe" path="res://Scenes/MapSpotScenes/Star/S1.tscn" id="3_s1ipm"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="4_br3xk"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_fbd0t"]
+
+[resource]
+script = ExtResource("4_br3xk")
+MapIcon = ExtResource("1_k2xuf")
+Scene = ExtResource("3_s1ipm")
+Name = "Star"
+PossibleDrops = Array[ExtResource("2_2f7wa")]([ExtResource("3_l1cbr"), ExtResource("4_fbd0t")])
+FullName = "Star"
+Description = ""

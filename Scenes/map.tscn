@@ -1,20 +1,32 @@
-[gd_scene load_steps=20 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=32 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
 [ext_resource type="PackedScene" uid="uid://dd0ax3exqiu17" path="res://Scenes/button.tscn" id="3_2ct80"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="3_8foxp"]
-[ext_resource type="Resource" uid="uid://sew43a75jovn" path="res://Resources/MapSpots/Planet.tres" id="4_laxnu"]
-[ext_resource type="Resource" uid="uid://cj8ebb6k6xjb0" path="res://Resources/MapSpots/Star.tres" id="5_cl201"]
+[ext_resource type="Resource" uid="uid://sew43a75jovn" path="res://Resources/MapSpots/Gas/G2.tres" id="4_laxnu"]
+[ext_resource type="Resource" uid="uid://cj8ebb6k6xjb0" path="res://Resources/MapSpots/Star/S3.tres" id="5_cl201"]
 [ext_resource type="Resource" uid="uid://b1levfg3rcd16" path="res://Resources/MapSpots/Station.tres" id="6_bd3x3"]
 [ext_resource type="Resource" uid="uid://f558luvn25o2" path="res://Resources/MapSpots/BlackWhole.tres" id="6_culgw"]
-[ext_resource type="Resource" uid="uid://bhr3r5wyfgdjn" path="res://Resources/MapSpots/Planet2.tres" id="7_ow8y0"]
-[ext_resource type="Resource" uid="uid://da3ti0o0734tr" path="res://Resources/MapSpots/Planet3.tres" id="8_1wj05"]
+[ext_resource type="Resource" uid="uid://bhr3r5wyfgdjn" path="res://Resources/MapSpots/Terrestrial/T2.tres" id="7_ow8y0"]
+[ext_resource type="Resource" uid="uid://da3ti0o0734tr" path="res://Resources/MapSpots/Ice/I1.tres" id="7_vi3ba"]
+[ext_resource type="Resource" uid="uid://2l2v1rv0i6tf" path="res://Resources/MapSpots/Gas/G3.tres" id="8_1wj05"]
 [ext_resource type="PackedScene" uid="uid://cuirrj6s52dyf" path="res://Scenes/PlanetAnalyzer.tscn" id="8_7ajvg"]
-[ext_resource type="Resource" uid="uid://cqpnbtjo5crg0" path="res://Resources/MapSpots/Planet4.tres" id="9_n201g"]
+[ext_resource type="Resource" uid="uid://cqpnbtjo5crg0" path="res://Resources/MapSpots/Lava/L1.tres" id="9_n201g"]
+[ext_resource type="Resource" uid="uid://dey268tkmexmx" path="res://Resources/MapSpots/NoArmosphere/NA1.tres" id="10_3ok41"]
 [ext_resource type="Resource" uid="uid://dac7bh3qrgvtt" path="res://Resources/MapSpots/Ship.tres" id="10_brf7w"]
+[ext_resource type="Resource" uid="uid://dx2abc2gi0o5s" path="res://Resources/MapSpots/Terrestrial/T1.tres" id="10_eeu5v"]
+[ext_resource type="Resource" uid="uid://b8iyigsdefw0x" path="res://Resources/MapSpots/Lava/L2.tres" id="11_jfn3v"]
 [ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="12_7uph2"]
+[ext_resource type="Resource" uid="uid://j7s27fyb4a25" path="res://Resources/MapSpots/Sand/S2.tres" id="12_ukiar"]
+[ext_resource type="Resource" uid="uid://cdjwdnw7xjy2t" path="res://Resources/MapSpots/Star/S1.tres" id="12_v2m3t"]
 [ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="13_2ck5b"]
+[ext_resource type="Resource" uid="uid://cva6b4ff20rlh" path="res://Resources/MapSpots/Sand/S1.tres" id="13_exvok"]
+[ext_resource type="Resource" uid="uid://dsawaejhg7uav" path="res://Resources/MapSpots/Gas/G1.tres" id="14_h38v5"]
+[ext_resource type="Resource" uid="uid://d14wweum23fh2" path="res://Resources/MapSpots/Star/S2.tres" id="14_xaq81"]
+[ext_resource type="Resource" uid="uid://di1wq2x222a8c" path="res://Resources/MapSpots/Terrestrial/T3.tres" id="18_ohf4c"]
+[ext_resource type="Resource" uid="uid://b13j2xqabxdpi" path="res://Resources/MapSpots/Terrestrial/T4.tres" id="19_0ncbx"]
+[ext_resource type="Resource" uid="uid://ddnaihvphx67w" path="res://Resources/MapSpots/Terrestrial/T5.tres" id="20_qlrmv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a20qu"]
 shader = ExtResource("12_7uph2")
@@ -75,7 +87,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_mq604")
 SpotScene = ExtResource("2_csmts")
-MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("4_laxnu"), ExtResource("5_cl201"), ExtResource("6_culgw"), ExtResource("7_ow8y0"), ExtResource("8_1wj05"), ExtResource("9_n201g")])
+MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("14_h38v5"), ExtResource("4_laxnu"), ExtResource("8_1wj05"), ExtResource("7_vi3ba"), ExtResource("9_n201g"), ExtResource("11_jfn3v"), ExtResource("10_3ok41"), ExtResource("13_exvok"), ExtResource("12_ukiar"), ExtResource("12_v2m3t"), ExtResource("14_xaq81"), ExtResource("5_cl201"), ExtResource("10_eeu5v"), ExtResource("7_ow8y0"), ExtResource("18_ohf4c"), ExtResource("19_0ncbx"), ExtResource("20_qlrmv"), ExtResource("6_culgw")])
 SpecialMapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("10_brf7w")])
 FinalSpotType = ExtResource("6_bd3x3")
 MapSize = 40
