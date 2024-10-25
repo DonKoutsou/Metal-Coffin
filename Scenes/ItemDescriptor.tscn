@@ -1,17 +1,21 @@
 [gd_scene load_steps=7 format=3 uid="uid://chka5s8jthteo"]
 
 [ext_resource type="Script" path="res://Scripts/ItemDescriptor.gd" id="1_sw40a"]
-[ext_resource type="Texture2D" uid="uid://dt8n5xbi0y8lh" path="res://Assets/Items/microchip.png" id="1_wvpe4"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_yjbet"]
 [ext_resource type="Texture2D" uid="uid://com40xglelaik" path="res://Assets/Items/materials-science_smol.png" id="3_v5dpc"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_dsmol"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_kaurm"]
+[ext_resource type="Texture2D" uid="uid://5nruswfvv0g0" path="res://Assets/Items/hospital-cross.png" id="6_3lvdp"]
 
 [node name="ItemDesc" type="PanelContainer" groups=["ItemDescriptor"]]
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 571.0
-grow_vertical = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -730.0
+offset_top = 7.5
+offset_right = -8.0
+offset_bottom = 263.5
+grow_horizontal = 0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 mouse_filter = 2
@@ -27,39 +31,21 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-texture = ExtResource("1_wvpe4")
-stretch_mode = 2
-
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(265, 80)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 30
 alignment = 1
 
 [node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 7.07)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_dsmol")
 theme_override_font_sizes/font_size = 28
-text = "Item Name"
+text = "Item"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ItemDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
-vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -70,14 +56,15 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "-"
 
 [node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Use :1x"
 
 [node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
@@ -85,14 +72,14 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "+"
 
 [node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Drop"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -103,23 +90,51 @@ alignment = 1
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Upgrade"
 
-[node name="UpgradeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("1_yjbet")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("6_3lvdp")
+stretch_mode = 2
+
+[node name="ItemDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 3.51)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UpgradeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/UpgradeContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 32
-text = "Cost : 4x
+theme_override_font_sizes/font_size = 24
+text = "Upgrade Cost : 4x
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/UpgradeContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer"]
 layout_mode = 2
 texture = ExtResource("3_v5dpc")
 

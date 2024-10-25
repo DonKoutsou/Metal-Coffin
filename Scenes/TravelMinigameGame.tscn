@@ -89,8 +89,7 @@ Obst = ExtResource("2_mp2ca")
 SuuplyScene = ExtResource("8_jxkch")
 EnemyGoal = 40
 EnemySpawnRate = 0.5
-
-[node name="Character" parent="." instance=ExtResource("3_q3swo")]
+CharacterScene = ExtResource("3_q3swo")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.497)

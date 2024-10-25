@@ -9,6 +9,7 @@
 
 [resource]
 script = ExtResource("6_0u3g7")
+SpotK = 4
 MapIcon = ExtResource("1_ebpg7")
 Scene = ExtResource("5_1m0o7")
 PossibleDrops = Array[ExtResource("2_8v4hu")]([ExtResource("3_doupc"), ExtResource("4_o5vu2")])

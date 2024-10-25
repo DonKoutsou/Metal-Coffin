@@ -22,6 +22,3 @@ func GetCurrentValue()-> float:
 	return CurrentVelue
 func RefilCurrentVelue(RefAmmount : float) -> void:
 	CurrentVelue = clamp(CurrentVelue + RefAmmount, 0, GetStat())
-func SetShipBuff(value : float) -> void:
-	StatShipBuff = value;
-	CurrentVelue += value

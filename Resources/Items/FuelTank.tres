@@ -10,6 +10,7 @@
 script = ExtResource("2_sc66u")
 UpgradeName = "FUEL"
 UpgradeAmm = 100.0
+CurrentVal = 100.0
 UpgradeVersion = ExtResource("4_ox6xo")
 UpgradeItems = Array[ExtResource("2_rbprg")]([ExtResource("3_s26i3"), ExtResource("3_s26i3"), ExtResource("3_s26i3"), ExtResource("3_s26i3")])
 ItemIcon = ExtResource("1_2e0sy")

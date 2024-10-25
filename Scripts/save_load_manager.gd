@@ -17,7 +17,7 @@ func Save(world : World) -> void:
 	DataArray.append(Mapz.GetSaveData())
 	DataArray.append(Inv.GetSaveData())
 	DataArray.append(world.ShipDat.GetSaveData())
-	
+	DataArray.append(world.GetShipSaveData())
 	var pldata = PlayerSaveData.new()
 	pldata.Pos = Mapz.GetPlayerPos()
 	DataArray.append(pldata)
@@ -38,6 +38,8 @@ func Load(world : World) ->bool:
 	var mapdata : Array[Resource] = (sav.GetData("MapSpots") as SaveData).Datas
 	var InvData : Array[Resource] = (sav.GetData("InventoryContents") as SaveData).Datas
 	var StatData : Resource = sav.GetData("Stats")
+	var ShipDat : BaseShip = (sav.GetData("Ship") as SaveData).Datas[0]
+	world.StartingShip = ShipDat
 	Mapz.LoadSaveData(mapdata)
 	Inv.LoadSaveData(InvData)
 	Mapz.SetPlayerPos(sav.GetData("PLData").Pos)

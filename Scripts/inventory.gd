@@ -2,7 +2,6 @@ extends Control
 class_name Inventory
 
 @export var StartingItems : Array[Item]
-@export var StartingUseItems : Array[Item]
 @export var InventoryBoxScene : PackedScene
 @export var InventoryTradeScene : PackedScene
 @export var ItemDescriptorScene : PackedScene
@@ -27,17 +26,31 @@ func GetSaveData() ->SaveData:
 	dat.Datas = Datas
 	return dat
 func LoadSaveData(Data : Array[Resource]) -> void:
-	
 	var Items : Array[Item] = []
 	for g in Data.size():
 		var dat = Data[g] as ItemContainer
 		for z in dat.Ammount:
 			Items.append(dat.ItemType)
 	StartingItems.clear()
-	StartingUseItems.clear()
 	StartingItems.append_array(Items)
 func _exit_tree() -> void:
 	FlushInventory()
+func UpdateSize() -> void:
+	var Itms : Array[Item] = []
+	for g in InventoryContents.size():
+		for z in InventoryContents[g].ItemC.Ammount:
+			Itms.append(InventoryContents[g].ItemC.ItemType)
+			OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
+			InventoryContents[g].UpdateAmm(-1)
+	for g in inv_contents.get_child_count():
+		inv_contents.get_child(g).queue_free()
+	InventoryContents.clear()
+	for g in ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat():
+		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
+		inv_contents.add_child(newbox)
+		InventoryContents.append(newbox)
+		newbox.connect("ItemUse", OnItemSelected)
+	AddItems(Itms, false)
 func _ready() -> void:
 	set_process(false)
 	$PanelContainer.visible = false
@@ -52,9 +65,9 @@ func _ready() -> void:
 	#	Tab.SetData(Upgrades[g])
 	#	Tab.connect("OnUgradePressed", TryUpgrade)
 	AddItems(StartingItems, false)
-	for g in StartingUseItems.size():
-		UseItem(StartingUseItems[g])
-		
+
+
+
 func TryUpgrade(UpTab : UpgradeTab) -> void:
 	print("Trying to upgrade " + UpTab.UpgradeData.UpgradeName)
 	var upgrade : Upgrade
@@ -83,6 +96,7 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 					continue
 				box.UpdateAmm(1)
 				placed = true
+				break
 		if (placed):
 			continue
 		for g in InventoryContents.size() :
@@ -113,8 +127,9 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 		get_parent().add_child(notif)
 func FlushInventory() -> void:
 	for g in InventoryContents.size():
-		InventoryContents[g].UpdateAmm(-InventoryContents[g].ItemC.Ammount)
-		OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
+		for z in InventoryContents[g].ItemC.Ammount:
+			OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
+			InventoryContents[g].UpdateAmm(-1)
 func TradeFinished(itms : Array[Item]) -> void:
 	##FlushInventory()
 	var ItmsToAdd : Array[Item] = []
@@ -203,7 +218,10 @@ func UseItem(It : Item, Times : int = 1):
 	#Icon.texture = It.ItemIcon
 	#get_parent().add_child(Icon)
 	#set_process(true)
-
+func UpdateShipInfo(ship : BaseShip) -> void:
+	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/TextureRect.texture = ship.Icon
+	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = ship.ShipName
+	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2.text = ship.ShipDesc
 #var Icon : TextureRect
 #func _process(delta: float) -> void:
 #	if (Input.is_action_pressed("Click")):

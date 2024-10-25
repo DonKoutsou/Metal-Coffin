@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=26 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/TravelMinigameGame.tscn" id="2_sl3gr"]
 [ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/BattleScene.tscn" id="3_fvwv6"]
 [ext_resource type="Resource" uid="uid://dcw4b2h3xa0no" path="res://Resources/Ships/StartingShip.tres" id="5_e0oyh"]
+[ext_resource type="PackedScene" uid="uid://hs6mpykyuklx" path="res://Scenes/Shiptrade.tscn" id="6_0vqqp"]
 [ext_resource type="PackedScene" uid="uid://dqisqmi1gj7sn" path="res://Scenes/inventory.tscn" id="6_82nvh"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="8_47nki"]
@@ -99,6 +100,7 @@ ShipDat = ExtResource("2_e0ks1")
 scene = ExtResource("2_sl3gr")
 BattleScene = ExtResource("3_fvwv6")
 StartingShip = ExtResource("5_e0oyh")
+ShipTradeShip = ExtResource("6_0vqqp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 1
@@ -116,7 +118,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -81.0
+offset_top = -93.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2

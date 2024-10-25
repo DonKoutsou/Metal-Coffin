@@ -7,9 +7,9 @@
 
 [resource]
 script = ExtResource("3_3bwxw")
+SpotK = 7
 MapIcon = ExtResource("1_q3mdy")
 Scene = ExtResource("3_t3iyd")
-Name = "Star"
 PossibleDrops = Array[ExtResource("1_xl8fd")]([])
 FullName = "Black Whole"
 Description = ""

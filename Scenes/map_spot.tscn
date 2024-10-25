@@ -1207,6 +1207,7 @@ expand_mode = 1
 [node name="Panel" type="Panel" parent="Panel"]
 visible = false
 modulate = Color(100, 0.95, 0.943, 1)
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

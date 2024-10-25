@@ -4,10 +4,14 @@ class_name World
 @export var scene :PackedScene
 @export var BattleScene : PackedScene
 @export var StartingShip : BaseShip
+@export var ShipTradeShip : PackedScene
+
 
 @onready var Mapz = $CanvasLayer/Map as Map
 @onready var timer: Timer = $CanvasLayer/Timer
 @onready var pause_container: PanelContainer = $CanvasLayer2/PauseContainer
+
+var CurrentShip : BaseShip
 
 @onready var oxygen_bar: ProgressBar = $CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar
 @onready var player_hp: ProgressBar = $CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer/PlayerHP
@@ -22,13 +26,41 @@ func GetMap() -> Map:
 	return $CanvasLayer/Map as Map
 var Runningstage = 0
 func _enter_tree() -> void:
+	GetInventory().UpdateShipInfo(StartingShip)
 	ShipDat.ApplyShipStats(StartingShip.Buffs)
+	$CanvasLayer/Map.UpdateShipIcon(StartingShip.TopIcon)
+	CurrentShip = StartingShip
 	ShipDat.GetStat("HP").CurrentVelue = ShipDat.GetStat("HP").GetStat()
+func StartShipTrade(NewShip : BaseShip) -> void:
+	var tradesc = ShipTradeShip.instantiate() as ShipTrade
+	$CanvasLayer.add_child(tradesc)
+	tradesc.StartTrade(CurrentShip, NewShip)
+	tradesc.connect("OnTradeFinished", ChangeShip)
+func ChangeShip(NewShip : BaseShip) -> void:
+	if (NewShip == CurrentShip):
+		return
+	GetInventory().UpdateShipInfo(NewShip)
+	ShipDat.RemoveShipStats(CurrentShip.Buffs)
+	ShipDat.ApplyShipStats(NewShip.Buffs)
+	UpdateShipInventorySice()
+	CurrentShip = NewShip
+	UpdateBars()
+	Mapz.UpdateShipIcon(NewShip.TopIcon)
+func UpdateShipInventorySice() -> void:
+	GetInventory().UpdateSize()
+	pass
 func ResetState() -> void:
 	for g in ShipDat.Stats.size():
 		ShipDat.Stats[g].CurrentVelue = 0
 		ShipDat.Stats[g].StatItemBuff = 0
 		ShipDat.Stats[g].StatShipBuff = 0
+func GetShipSaveData() -> SaveData:
+	var dat = SaveData.new()
+	dat.DataName = "Ship"
+	var Datas : Array[Resource]
+	Datas.append(CurrentShip)
+	dat.Datas = Datas
+	return dat
 func LoadData(Data : Resource) -> void:
 	var dat = Data as StatSave
 	UpdateHP(dat.Value[0])
@@ -39,6 +71,11 @@ func LoadData(Data : Resource) -> void:
 func _ready() -> void:
 	Mapz.connect("StageSellected", PrepareForJourney)
 	Mapz.connect("StageSearched", StageSearch)
+	Mapz.connect("ShipSearched", ShipSearched)
+	UpdateBars()
+	set_physics_process(false)
+	#call_deferred("TestTrade")
+func UpdateBars()-> void:
 	player_hp.max_value = ShipDat.GetStat("HP").GetStat()
 	player_hp.value = ShipDat.GetStat("HP").GetCurrentValue()
 	(player_hp.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("HP").GetCurrentValue())) + "/" + var_to_str(roundi(ShipDat.GetStat("HP").GetStat()))
@@ -51,17 +88,19 @@ func _ready() -> void:
 	oxygen_bar.max_value = ShipDat.GetStat("OXYGEN").GetStat()
 	oxygen_bar.value = ShipDat.GetStat("OXYGEN").GetCurrentValue()
 	(oxygen_bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("OXYGEN").GetCurrentValue())) + "/" + var_to_str(roundi(ShipDat.GetStat("OXYGEN").GetStat()))
-	set_physics_process(false)
+func TestTrade() -> void:
+	StartShipTrade(load("res://Resources/Ships/Ship2.tres") as BaseShip)
 	
 func OnItemAdded(It : Item) -> void:
 	if (It is ShipPart):
-		ItemBuffStat(It.UpgradeName, It.UpgradeAmm)
+		ShipDat.ApplyShipPartStat(It)
+		ItemBuffStat(It.UpgradeName)
 func OnItemRemoved(It : Item) -> void:
 	if (It is ShipPart):
-		ItemBuffStat(It.UpgradeName, -It.UpgradeAmm)
+		ShipDat.RemoveShipPartStat(It)
+		ItemBuffStat(It.UpgradeName)
 		
-func ItemBuffStat(UpName : String, UPvalue : float) -> void:
-	ShipDat.GetStat(UpName).StatItemBuff += UPvalue
+func ItemBuffStat(UpName : String) -> void:
 	if (UpName == "VIZ_RANGE"):
 		$CanvasLayer/Map.UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
 	if (UpName == "ANALYZE_RANGE"):
@@ -137,8 +176,10 @@ func PrepareForJourney(st : MapSpot, stagenum : int, FuelToUse : float, O2ToUse 
 	
 func StartStage() -> void:
 	var sc = scene.instantiate() as TravelMinigameGame
+	sc.CharacterScene = CurrentShip.ShipScene
 	sc.EnemyGoal = fueltoConsume
 	sc.Hull = ShipDat.GetStat("HULL").GetCurrentValue()
+	sc.HullMax = ShipDat.GetStat("HULL").GetStat()
 	sc.connect("OnGameEnded", StageDone)
 	add_child(sc)
 	sc.SetDestinationScene(StopToFlyTo.SpotType.Scene)
@@ -156,7 +197,8 @@ func _physics_process(_delta: float) -> void:
 	Mapz.UpdateFuelRange(newfuel, ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 	fuel_bar.value = newfuel
 	(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(newfuel) ) + "/" + var_to_str((roundi(ShipDat.GetStat("FUEL").GetStat())))
-
+func ShipSearched(Ship : BaseShip):
+	StartShipTrade(Ship)
 func StageSearch(supplies : Array[Item])-> void:
 	inventory.AddItems(supplies)
 	UpdateHP(ShipDat.GetStat("HP").GetCurrentValue() - 10)
@@ -244,7 +286,7 @@ func _on_save_pressed() -> void:
 	window.dialog_text = "Save successful"
 	window.popup_centered()
 func _on_exit_pressed() -> void:
-	ResetState()
+	#ResetState()
 	OnGameEnded.emit()
 
 func _on_pause_pressed() -> void:

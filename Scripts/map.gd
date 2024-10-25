@@ -13,6 +13,7 @@ class_name Map
 
 signal StageSellected(st : MapSpotType, stNum : int, fuelcons : float, o2Cons : float)
 signal StageSearched(Drops : Array[Item])
+signal ShipSearched(Ship : BaseShip)
 var PlayingStage = false
 
 var SpotList : Array[MapSpot]
@@ -32,6 +33,8 @@ func _ready() -> void:
 	UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	GalaxyMat = $ColorRect.material
+func UpdateShipIcon(Tex : Texture) -> void:
+	$MapSpots/PlayerShip.texture = Tex
 func GetSaveData() ->SaveData:
 	var dat = SaveData.new().duplicate()
 	dat.DataName = "MapSpots"
@@ -135,7 +138,10 @@ func AnalyzeStage(Type : MapSpotType):
 	add_child(analyzer)
 func SpotSearched(stage : MapSpot, sups : Array[Item]):
 	stage.ToggleLandButton(false)
-	StageSearched.emit(sups)
+	if (stage.SpotType is Ship_MapSpotType):
+		ShipSearched.emit(stage.SpotType.Ship)
+	else:	
+		StageSearched.emit(sups)
 	stage.OnSpotVisited()
 	
 func HasClose(pos : Vector2) -> bool:

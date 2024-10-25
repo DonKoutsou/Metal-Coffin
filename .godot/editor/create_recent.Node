@@ -1,12 +1,12 @@
+VBoxContainer
+HBoxContainer
+Label
+Button
 Control
 CanvasLayer
 OptionButton
-Button
-Label
 TextEdit
-VBoxContainer
 PanelContainer
-HBoxContainer
 Node
 ProgressBar
 Panel

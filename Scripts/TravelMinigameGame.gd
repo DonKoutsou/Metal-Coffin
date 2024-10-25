@@ -7,18 +7,21 @@ class_name  TravelMinigameGame
 @export var EnemyGoal : int
 @export var EnemySpawnRate : float
 @export var Difficulty : int = 3
+@export var CharacterScene : PackedScene
 
 @onready var planet_pivot: Node3D = $PlanetPivot
-@onready var character: Character = $Character
+var character: Character
 
 signal OnGameEnded(Renault : bool)
 
 var Supplies : Array[Item]
 var enemies = 0
-var Hull : int
-
+var Hull : float
+var HullMax : float
 func _ready() -> void:
+	$Hull_HP_Container/HBoxContainer/HullHp.max_value = HullMax
 	$Hull_HP_Container/HBoxContainer/HullHp.value = Hull
+	$Hull_HP_Container/HBoxContainer/HullHp/Label.text = var_to_str(roundi(Hull)) + "/" + var_to_str(roundi(HullMax))
 	var fintrans = -50;
 	var SuppliesList = []
 	for g in EnemyGoal/10:
@@ -43,6 +46,8 @@ func _ready() -> void:
 			enemy.PlayerTouched.connect(EnemyHit)
 		fintrans += -10
 	planet_pivot.position.z = fintrans -10
+	character = CharacterScene.instantiate()
+	add_child(character)
 
 func SetDestinationScene(Model : PackedScene) -> void:
 	$PlanetPivot/MeshInstance3D7.add_child(Model.instantiate())
@@ -59,6 +64,7 @@ func EnemyKilled() -> void:
 func EnemyHit():
 	Hull -= 10
 	$Hull_HP_Container/HBoxContainer/HullHp.value = Hull
+	$Hull_HP_Container/HBoxContainer/HullHp/Label.text = var_to_str(roundi(Hull)) + "/" + var_to_str(roundi(HullMax))
 	character.Damage()
 	if (Hull == 0):
 		GameFinished(false)

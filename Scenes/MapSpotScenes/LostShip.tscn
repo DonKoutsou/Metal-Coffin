@@ -1,6 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckpstbcetam0"]
+[gd_scene load_steps=11 format=3 uid="uid://ckpstbcetam0"]
 
-[ext_resource type="ArrayMesh" uid="uid://byus7qmd0hep7" path="res://Assets/Spaceship/Ship.obj" id="1_w8538"]
+[ext_resource type="ArrayMesh" uid="uid://52yp1fyvsuom" path="res://Assets/Spaceship2/2.obj" id="1_hbfmr"]
+[ext_resource type="Texture2D" uid="uid://c88huwho65yyo" path="res://Assets/Spaceship2/2_Spaceship2_BaseColor.png" id="1_xwg2o"]
+[ext_resource type="Texture2D" uid="uid://c5ey3vgl2f3yb" path="res://Assets/Spaceship2/2_Spaceship2_OcclusionRoughnessMetallic.png" id="2_aqvfy"]
+[ext_resource type="Texture2D" uid="uid://dq0pyxn8n8pv5" path="res://Assets/Spaceship2/2_Spaceship2_Normal.png" id="3_s7m3v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4mwk"]
+albedo_texture = ExtResource("1_xwg2o")
+metallic = 1.0
+metallic_texture = ExtResource("2_aqvfy")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_aqvfy")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_s7m3v")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_aqvfy")
 
 [sub_resource type="Animation" id="Animation_eqom4"]
 resource_name = "Rotation"
@@ -37,9 +53,10 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="Star" type="MeshInstance3D"]
-transform = Transform3D(0.901559, -0.432285, 0.017922, 0.362255, 0.776857, 0.515038, -0.236566, -0.457845, 0.85698, 0, 0, 0)
+transform = Transform3D(0.928694, -0.253779, -0.270414, 0.362254, 0.776857, 0.515038, 0.079367, -0.576271, 0.813396, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_s4mwk")
 cast_shadow = 0
-mesh = ExtResource("1_w8538")
+mesh = ExtResource("1_hbfmr")
 
 [node name="Atmosphere" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.04, 0, 0, 0, 1.04, 0, 0, 0, 1.04, 0, 0, 0)

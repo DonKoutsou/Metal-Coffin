@@ -8,8 +8,8 @@
 
 [resource]
 script = ExtResource("1_w87ay")
+SpotK = 8
 Scene = ExtResource("4_y2xnd")
-Name = "Space Station"
 PossibleDrops = Array[ExtResource("2_jvrwr")]([ExtResource("3_j0x84"), ExtResource("4_2hjms")])
 FullName = "Space Station"
 Description = "blah blah"

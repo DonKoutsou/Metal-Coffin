@@ -1,0 +1,170 @@
+[gd_scene load_steps=16 format=3 uid="uid://hs6mpykyuklx"]
+
+[ext_resource type="Script" path="res://Scripts/shiptrade.gd" id="1_3qth4"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_qc4an"]
+[ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="2_h4ab3"]
+[ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="4_b2tlx"]
+[ext_resource type="Script" path="res://Scripts/TradeShipStats.gd" id="4_pdg0k"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="5_ufwk3"]
+[ext_resource type="Resource" uid="uid://dggrnmd2ynjmr" path="res://Resources/ShipStats/FuelTank.tres" id="6_5k12v"]
+[ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="7_s2dfm"]
+[ext_resource type="Resource" uid="uid://4i6hdm0q8a57" path="res://Resources/ShipStats/OxygenTank.tres" id="8_xtndt"]
+[ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="9_egkkt"]
+[ext_resource type="Resource" uid="uid://dm0s4m8iysdxb" path="res://Resources/ShipStats/AnalyzeRange.tres" id="10_ute8f"]
+[ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="11_tefe2"]
+[ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="12_golkg"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_binu6"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="15_duasl"]
+
+[node name="ShipTradeScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3qth4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MyShip" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MyShip"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MyShip/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_h4ab3")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("15_duasl")
+theme_override_font_sizes/font_size = 32
+text = "Ship Name"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 6.095)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("15_duasl")
+theme_override_font_sizes/font_size = 24
+text = "Ship desc"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 2
+script = ExtResource("4_pdg0k")
+ShipStatScene = ExtResource("4_b2tlx")
+StatsToShow = Array[ExtResource("5_ufwk3")]([ExtResource("6_5k12v"), ExtResource("7_s2dfm"), ExtResource("8_xtndt"), ExtResource("9_egkkt"), ExtResource("10_ute8f"), ExtResource("11_tefe2"), ExtResource("12_golkg")])
+
+[node name="MyShipButton" type="Button" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_binu6")
+theme_override_fonts/font = ExtResource("15_duasl")
+theme_override_font_sizes/font_size = 21
+text = "Keep Ship"
+
+[node name="Ship2trade" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Ship2trade"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Ship2trade/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_h4ab3")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("15_duasl")
+theme_override_font_sizes/font_size = 32
+text = "Ship Name"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1.875)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("15_duasl")
+theme_override_font_sizes/font_size = 24
+text = "Ship desc"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 2
+script = ExtResource("4_pdg0k")
+ShipStatScene = ExtResource("4_b2tlx")
+StatsToShow = Array[ExtResource("5_ufwk3")]([ExtResource("6_5k12v"), ExtResource("7_s2dfm"), ExtResource("8_xtndt"), ExtResource("9_egkkt"), ExtResource("10_ute8f"), ExtResource("11_tefe2"), ExtResource("12_golkg")])
+
+[node name="Ship2TradeButton" type="Button" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_binu6")
+theme_override_fonts/font = ExtResource("15_duasl")
+theme_override_font_sizes/font_size = 21
+text = "Take Ship"
+
+[connection signal="pressed" from="HBoxContainer/MyShip/HBoxContainer/VBoxContainer/MyShipButton" to="." method="_on_my_ship_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer/Ship2TradeButton" to="." method="_on_ship_2_trade_button_pressed"]

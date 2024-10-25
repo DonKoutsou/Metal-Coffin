@@ -10,9 +10,9 @@
 
 [resource]
 script = ExtResource("5_2fomt")
+SpotK = 1
 MapIcon = ExtResource("1_ephb5")
 Scene = ExtResource("5_5i7t5")
-Name = "Planet"
 PossibleDrops = Array[ExtResource("1_taxsv")]([ExtResource("2_ex3si"), ExtResource("3_bceod"), ExtResource("4_3172f")])
 FullName = "Terrestrial Planet"
 Description = "blah blah"

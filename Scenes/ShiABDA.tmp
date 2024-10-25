@@ -1,0 +1,121 @@
+[gd_scene load_steps=14 format=3 uid="uid://hs6mpykyuklx"]
+
+[ext_resource type="Script" path="res://Scripts/shiptrade.gd" id="1_3qth4"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_qc4an"]
+[ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="2_h4ab3"]
+[ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="4_b2tlx"]
+[ext_resource type="Script" path="res://Scripts/TradeShipStats.gd" id="4_pdg0k"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="5_ufwk3"]
+[ext_resource type="Resource" uid="uid://dggrnmd2ynjmr" path="res://Resources/ShipStats/FuelTank.tres" id="6_5k12v"]
+[ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="7_s2dfm"]
+[ext_resource type="Resource" uid="uid://4i6hdm0q8a57" path="res://Resources/ShipStats/OxygenTank.tres" id="8_xtndt"]
+[ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="9_egkkt"]
+[ext_resource type="Resource" uid="uid://dm0s4m8iysdxb" path="res://Resources/ShipStats/AnalyzeRange.tres" id="10_ute8f"]
+[ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="11_tefe2"]
+[ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="12_golkg"]
+
+[node name="ShipTradeScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3qth4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MyShip" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MyShip"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MyShip/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_h4ab3")
+stretch_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/MyShip/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 2
+script = ExtResource("4_pdg0k")
+ShipStatScene = ExtResource("4_b2tlx")
+StatsToShow = Array[ExtResource("5_ufwk3")]([ExtResource("6_5k12v"), ExtResource("7_s2dfm"), ExtResource("8_xtndt"), ExtResource("9_egkkt"), ExtResource("10_ute8f"), ExtResource("11_tefe2"), ExtResource("12_golkg")])
+
+[node name="Panel" type="Panel" parent="HBoxContainer/MyShip/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="InvContents" type="GridContainer" parent="HBoxContainer/MyShip/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+columns = 3
+
+[node name="Ship2trade" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Ship2trade"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Ship2trade/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_h4ab3")
+stretch_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/Ship2trade/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 2
+script = ExtResource("4_pdg0k")
+ShipStatScene = ExtResource("4_b2tlx")
+StatsToShow = Array[ExtResource("5_ufwk3")]([ExtResource("6_5k12v"), ExtResource("7_s2dfm"), ExtResource("8_xtndt"), ExtResource("9_egkkt"), ExtResource("10_ute8f"), ExtResource("11_tefe2"), ExtResource("12_golkg")])
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Ship2trade/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_qc4an")
+
+[node name="InvContents" type="GridContainer" parent="HBoxContainer/Ship2trade/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+columns = 3

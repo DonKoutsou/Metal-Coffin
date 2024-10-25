@@ -40,7 +40,7 @@ script = ExtResource("1_30hhs")
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("2_tpg0b")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 22
 text = "stat"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]

@@ -43,7 +43,7 @@ func StartTrade(InventoryContents : Array[Item], Drops : Array[Item]) -> void:
 		newbox.UpdateAmm(1)
 		DropBoxes.append(newbox)
 		newbox.connect("ItemUse", ItemMoveDrop)
-func ItemMoveInv(it : Item) -> void:
+func ItemMoveInv(it : Item, _Amm : int) -> void:
 	for z in InventoryBoxes.size():
 		var box = InventoryBoxes[z]
 		if (box.ItemC.ItemType == it):
@@ -74,7 +74,7 @@ func ItemMoveInv(it : Item) -> void:
 	DropBoxes.append(newbox)
 	newbox.connect("ItemUse", ItemMoveDrop)
 	
-func ItemMoveDrop(it : Item) -> void:
+func ItemMoveDrop(it : Item, _Amm : int) -> void:
 	var placed = false
 	for g in InventoryBoxes.size() :
 		var box = InventoryBoxes[g]

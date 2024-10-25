@@ -26,6 +26,7 @@ func IsEmpty() -> bool:
 	return ItemC.Ammount == 0
 	
 func UpdateAmm(Amm : int) -> void:
+	
 	ItemC.Ammount += Amm
 	$PanelContainer/Label.text = var_to_str(ItemC.Ammount)
 	var bollthing = ItemC.Ammount > 0
@@ -36,4 +37,4 @@ func UpdateAmm(Amm : int) -> void:
 func _on_texture_rect_pressed() -> void:
 	if (ItemC.Ammount <= 0):
 		return
-	ItemUse.emit(ItemC.ItemType)
+	ItemUse.emit(ItemC.ItemType, ItemC.Ammount)

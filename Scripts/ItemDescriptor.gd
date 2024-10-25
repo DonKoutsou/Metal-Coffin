@@ -12,19 +12,21 @@ var UsingAmm : int = 1
 func SetData(It : Item, Amm : int) -> void:
 	DescribedItem = It
 	OwnedAmm = Amm
-	$VBoxContainer/HBoxContainer/TextureRect.texture = It.ItemIcon
+	$VBoxContainer/HBoxContainer/VBoxContainer2/TextureRect.texture = It.ItemIcon
 	$VBoxContainer/HBoxContainer/VBoxContainer/ItemName.text = It.ItemName
 	if (It is ShipPart):
-		$VBoxContainer/HBoxContainer/VBoxContainer/ItemDesc.text = It.ItemDesc + "\nProvides " + var_to_str(It.UpgradeAmm)+ " of "  + It.UpgradeName 
+		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = It.ItemDesc + "\nProvides " + var_to_str(It.UpgradeAmm)+ " of "  + It.UpgradeName 
 		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = false
 		if (It.UpgradeVersion == null):
 			$VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer.visible = false
+			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer.visible = false
 		else:
-			$VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/UpgradeContainer/TextureRect.texture = (It.UpgradeItems[0] as Item).ItemIconSmol
-			$VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "Upgrade Cost : " + var_to_str(It.UpgradeItems.size()) + "x"
+			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer/TextureRect.texture = (It.UpgradeItems[0] as Item).ItemIconSmol
+			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer/Label.text = "Upgrade Cost : " + var_to_str(It.UpgradeItems.size()) + "x"
 	else :
-		$VBoxContainer/HBoxContainer/VBoxContainer/ItemDesc.text = It.ItemDesc
+		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = It.ItemDesc
 		$VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer.visible = false
+		$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer.visible = false
 func _on_close_pressed() -> void:
 	queue_free()
 	
