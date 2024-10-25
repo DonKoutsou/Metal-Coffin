@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=7 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="2_imjs0"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_gfag0"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_ropp1"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_ahffl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1lp7n"]
 shader = ExtResource("2_imjs0")
@@ -56,6 +57,7 @@ text = "Into The Void"
 
 [node name="Play" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_ahffl")
 theme_override_fonts/font = ExtResource("4_ropp1")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
@@ -63,6 +65,7 @@ text = "Play"
 
 [node name="Load" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_ahffl")
 theme_override_fonts/font = ExtResource("4_ropp1")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
@@ -70,6 +73,7 @@ text = "Load"
 
 [node name="Exit" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_ahffl")
 theme_override_fonts/font = ExtResource("4_ropp1")
 theme_override_font_sizes/font_size = 24
 action_mode = 0

@@ -1,3 +1,5 @@
+Control
+CanvasLayer
 OptionButton
 Button
 Label
@@ -6,10 +8,7 @@ VBoxContainer
 PanelContainer
 HBoxContainer
 Node
-CanvasLayer
-Control
 ProgressBar
 Panel
 TextureRect
 SubViewport
-SubViewportContainer

@@ -32,16 +32,20 @@ corner_radius_bottom_left = 1
 corner_detail = 1
 
 [node name="ShipStatContainer" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_30hhs")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("2_tpg0b")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 28
 text = "stat"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
 value = 19.17
 show_percentage = false

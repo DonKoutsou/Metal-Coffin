@@ -36,4 +36,4 @@ func UpdateAmm(Amm : int) -> void:
 func _on_texture_rect_pressed() -> void:
 	if (ItemC.Ammount <= 0):
 		return
-	ItemUse.emit(ItemC.ItemType, ItemC.Ammount)
+	ItemUse.emit(ItemC.ItemType)

@@ -10,7 +10,6 @@
 script = ExtResource("1_x7itr")
 MapIcon = ExtResource("1_rvdc2")
 Scene = ExtResource("3_41hyr")
-Name = "Star"
 PossibleDrops = Array[ExtResource("1_1vmij")]([ExtResource("2_vypaa")])
 FullName = "Supernova"
 Description = "blah blag"

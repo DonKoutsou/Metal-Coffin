@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=25 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="14_hcul8"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="15_3wesg"]
 [ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="16_i8tgp"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="19_o3uo1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
 bg_color = Color(0.275636, 0.275636, 0.275636, 1)
@@ -305,6 +306,7 @@ grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
+theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 46
 text = "||"
@@ -343,6 +345,7 @@ vertical_alignment = 1
 
 [node name="Return" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 34
 text = "Return
@@ -350,12 +353,14 @@ text = "Return
 
 [node name="Save" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 34
 text = "Save"
 
 [node name="Exit" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 34
 text = "Exit"
@@ -391,6 +396,7 @@ horizontal_alignment = 1
 [node name="Button" type="Button" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 26
 text = "OK"

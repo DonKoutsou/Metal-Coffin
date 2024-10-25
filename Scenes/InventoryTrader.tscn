@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6ktwn6uih1hm"]
+[gd_scene load_steps=5 format=3 uid="uid://c6ktwn6uih1hm"]
 
 [ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="1_8segk"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_e2f6x"]
 [ext_resource type="Script" path="res://Scripts/inventory_trader.gd" id="1_wwxb2"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_iyr8n"]
 
 [node name="InventoryTrade" type="PanelContainer"]
 anchors_preset = 15
@@ -71,6 +72,7 @@ columns = 3
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_iyr8n")
 action_mode = 0
 text = "Finished"
 

@@ -46,11 +46,11 @@ func _ready() -> void:
 		inv_contents.add_child(newbox)
 		InventoryContents.append(newbox)
 		newbox.connect("ItemUse", OnItemSelected)
-	for g in Upgrades.size():
-		var Tab = Upgrade_Tab_Scene.instantiate() as UpgradeTab
-		$UpgradesContainer/VBoxContainer.add_child(Tab)
-		Tab.SetData(Upgrades[g])
-		Tab.connect("OnUgradePressed", TryUpgrade)
+	#for g in Upgrades.size():
+	#	var Tab = Upgrade_Tab_Scene.instantiate() as UpgradeTab
+	#	$UpgradesContainer/VBoxContainer.add_child(Tab)
+	#	Tab.SetData(Upgrades[g])
+	#	Tab.connect("OnUgradePressed", TryUpgrade)
 	AddItems(StartingItems, false)
 	for g in StartingUseItems.size():
 		UseItem(StartingUseItems[g])
@@ -155,7 +155,7 @@ func OnItemSelected(It :Item, Amm : int) -> void:
 		descriptors[0].queue_free()
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
 	Descriptor.SetData(It, Amm)
-	get_parent().add_child(Descriptor)
+	$DescSpot.add_child(Descriptor)
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
 	Descriptor.connect("ItemDropped", RemoveItem)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=4 uid="uid://djtjqkmdep3dh"]
+[gd_scene load_steps=16 format=4 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
 [ext_resource type="Texture2D" uid="uid://xvsfs1dbo6f7" path="res://Assets/uncertainty.png" id="2_mt6at"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_uoroi"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_rw3e8"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_1yydb"]
 
 [sub_resource type="Image" id="Image_vp57u"]
 data = {
@@ -1238,18 +1239,21 @@ alignment = 1
 
 [node name="VisitButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_1yydb")
 theme_override_fonts/font = ExtResource("2_uoroi")
 theme_override_font_sizes/font_size = 22
 text = "Visit"
 
 [node name="LandButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_1yydb")
 theme_override_fonts/font = ExtResource("2_uoroi")
 theme_override_font_sizes/font_size = 22
 text = "Land"
 
 [node name="AnalyzeButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_1yydb")
 theme_override_fonts/font = ExtResource("2_uoroi")
 theme_override_font_sizes/font_size = 22
 text = "Analyze"
