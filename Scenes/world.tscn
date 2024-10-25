@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=17 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
@@ -10,15 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dqisqmi1gj7sn" path="res://Scenes/inventory.tscn" id="6_82nvh"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="8_47nki"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="8_kug0t"]
-[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="9_ynyrc"]
-[ext_resource type="Resource" uid="uid://fuxqtjwxm8px" path="res://Resources/Items/CryoChamber.tres" id="10_iemuk"]
-[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="11_l7mu0"]
-[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="12_a6qrx"]
-[ext_resource type="Resource" uid="uid://btkhdlejysqw1" path="res://Resources/Items/ShortAnalyzer.tres" id="13_38dd3"]
-[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="14_hcul8"]
-[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="15_3wesg"]
-[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="16_i8tgp"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="19_o3uo1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
@@ -111,7 +102,6 @@ mouse_filter = 2
 MapSize = 150
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_82nvh")]
-StartingItems = Array[ExtResource("8_kug0t")]([ExtResource("9_ynyrc"), ExtResource("10_iemuk"), ExtResource("11_l7mu0"), ExtResource("12_a6qrx"), ExtResource("13_38dd3"), ExtResource("14_hcul8"), ExtResource("14_hcul8"), ExtResource("14_hcul8"), ExtResource("14_hcul8"), ExtResource("15_3wesg"), ExtResource("15_3wesg"), ExtResource("16_i8tgp"), ExtResource("16_i8tgp"), ExtResource("16_i8tgp")])
 
 [node name="Stat_Panel" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 12
@@ -298,7 +288,11 @@ process_callback = 0
 wait_time = 2.0
 one_shot = true
 
-[node name="Pause" type="Button" parent="CanvasLayer"]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="Pause" type="Button" parent="CanvasLayer2"]
+process_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -312,9 +306,6 @@ theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 46
 text = "||"
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 6
 
 [node name="PauseContainer" type="PanelContainer" parent="CanvasLayer2"]
 process_mode = 3
@@ -406,7 +397,7 @@ text = "OK"
 [connection signal="OnItemAdded" from="CanvasLayer/Inventory" to="." method="OnItemAdded"]
 [connection signal="OnItemRemoved" from="CanvasLayer/Inventory" to="." method="OnItemRemoved"]
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="CanvasLayer/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="CanvasLayer2/PauseContainer/HBoxContainer/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="CanvasLayer2/PauseContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="CanvasLayer2/PauseContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]

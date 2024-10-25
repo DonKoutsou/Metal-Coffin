@@ -183,6 +183,7 @@ func UpgradeItem(Part : ShipPart) -> void:
 				RemoveItem(Part)
 				for z in Part.UpgradeItems.size():
 					RemoveItem(UpItem)
+				Part.UpgradeVersion.CurrentVal = Part.CurrentVal
 				AddItems([Part.UpgradeVersion], false)
 				OnItemSelected(Part.UpgradeVersion, 1)
 				UpgradeSuccess = true

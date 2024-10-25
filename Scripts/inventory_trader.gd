@@ -17,6 +17,7 @@ func StartTrade(InventoryContents : Array[Item], Drops : Array[Item]) -> void:
 					continue
 				box.UpdateAmm(1)
 				placed = true
+				break
 		if (placed):
 			continue
 		
@@ -34,6 +35,7 @@ func StartTrade(InventoryContents : Array[Item], Drops : Array[Item]) -> void:
 			if (box.ItemC.ItemType == Drops[z]):
 				box.UpdateAmm(1)
 				placed = true
+				break
 		if (placed):
 			continue
 		

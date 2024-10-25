@@ -10,6 +10,7 @@
 script = ExtResource("5_itj14")
 UpgradeName = "OXYGEN"
 UpgradeAmm = 100.0
+CurrentVal = 0.0
 UpgradeVersion = ExtResource("4_vu7bk")
 UpgradeItems = Array[ExtResource("2_8wxr6")]([ExtResource("3_uc4jg"), ExtResource("3_uc4jg"), ExtResource("3_uc4jg"), ExtResource("3_uc4jg")])
 ItemIcon = ExtResource("1_wv375")

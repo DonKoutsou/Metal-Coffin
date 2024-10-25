@@ -107,7 +107,9 @@ func ItemBuffStat(UpName : String) -> void:
 		$CanvasLayer/Map.UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
 	else :if (UpName == "FUEL"):
 		var FuelTankSize = ShipDat.GetStat("FUEL").GetStat()
+		var FuelCurrent = ShipDat.GetStat("FUEL").GetCurrentValue()
 		$CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar.max_value = FuelTankSize
+		$CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar.value = FuelCurrent
 		if (FuelTankSize < ShipDat.GetStat("FUEL").GetCurrentValue()):
 			UpdateFuel(FuelTankSize)
 		($CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar.get_child(0) as Label).text = var_to_str(roundi(ShipDat.GetStat("FUEL").GetCurrentValue())) + "/" + var_to_str(roundi(FuelTankSize))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dqisqmi1gj7sn"]
+[gd_scene load_steps=36 format=3 uid="uid://dqisqmi1gj7sn"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="1_n6t4k"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_bxhcq"]
@@ -6,11 +6,12 @@
 [ext_resource type="Resource" uid="uid://fuxqtjwxm8px" path="res://Resources/Items/CryoChamber.tres" id="4_pk0y7"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="5_1lqnb"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="6_mnl6q"]
-[ext_resource type="Resource" uid="uid://dod4ugx85516y" path="res://Resources/Items/OxygenTank.tres" id="7_g7imh"]
+[ext_resource type="Resource" uid="uid://btkhdlejysqw1" path="res://Resources/Items/ShortAnalyzer.tres" id="7_p3stx"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_2etv7"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="9_pd8ds"]
 [ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="10_okepu"]
 [ext_resource type="PackedScene" uid="uid://cti0geea0pj57" path="res://Scenes/InventoryContainer.tscn" id="11_717g5"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="11_fxx2r"]
 [ext_resource type="PackedScene" uid="uid://c6ktwn6uih1hm" path="res://Scenes/InventoryTrader.tscn" id="12_xwryu"]
 [ext_resource type="PackedScene" uid="uid://chka5s8jthteo" path="res://Scenes/ItemDescriptor.tscn" id="13_rdpkg"]
 [ext_resource type="Script" path="res://Scripts/Upgrade.gd" id="14_ng1lm"]
@@ -47,7 +48,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_n6t4k")
-StartingItems = Array[ExtResource("2_bxhcq")]([ExtResource("3_aga30"), ExtResource("4_pk0y7"), ExtResource("5_1lqnb"), ExtResource("6_mnl6q"), ExtResource("7_g7imh"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("9_pd8ds"), ExtResource("9_pd8ds"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("10_okepu")])
+StartingItems = Array[ExtResource("2_bxhcq")]([ExtResource("3_aga30"), ExtResource("4_pk0y7"), ExtResource("5_1lqnb"), ExtResource("6_mnl6q"), ExtResource("7_p3stx"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("9_pd8ds"), ExtResource("9_pd8ds"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 InventoryBoxScene = ExtResource("11_717g5")
 InventoryTradeScene = ExtResource("12_xwryu")
 ItemDescriptorScene = ExtResource("13_rdpkg")
