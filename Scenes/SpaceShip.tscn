@@ -65,7 +65,7 @@ emission = Color(0.792764, 0.399099, 0.145685, 1)
 emission_energy_multiplier = 16.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_chej4"]
-size = Vector3(0.05, 0.05, 1)
+size = Vector3(0.05, 0.05, 0.5)
 
 [sub_resource type="Curve" id="Curve_0i8mp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -93,7 +93,7 @@ libraries = {
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.05349e-08, 0.0777948, -0.692438)
 material_override = SubResource("StandardMaterial3D_4ur1r")
 cast_shadow = 0
-amount = 32
+amount = 64
 mesh = SubResource("BoxMesh_chej4")
 direction = Vector3(0, 0, 1)
 spread = 4.0

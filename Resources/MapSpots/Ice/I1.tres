@@ -15,3 +15,4 @@ Scene = ExtResource("5_1m0o7")
 PossibleDrops = Array[ExtResource("2_8v4hu")]([ExtResource("3_doupc"), ExtResource("4_o5vu2")])
 FullName = "Ice Giant"
 Description = "blah blah"
+CanLand = true

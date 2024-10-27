@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxog70dwnkaal"]
+[gd_scene load_steps=6 format=3 uid="uid://bxog70dwnkaal"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_uriw3"]
 [ext_resource type="Script" path="res://Scripts/ItemNotification.gd" id="1_xgnwe"]
 [ext_resource type="PackedScene" uid="uid://bd47qsxg6jka3" path="res://Scenes/ItemNotifContainer.tscn" id="2_2upok"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_qqedk"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_3tmtq"]
 
 [node name="Items Found Notif" type="PanelContainer"]
 anchors_preset = 8
@@ -41,6 +42,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("5_3tmtq")
 theme_override_fonts/font = ExtResource("4_qqedk")
 theme_override_font_sizes/font_size = 22
 text = "OK"

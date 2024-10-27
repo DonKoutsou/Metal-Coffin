@@ -7,9 +7,11 @@
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_ujtx2"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("3_qr78f")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
+CurrentVal = 0.0
 UpgradeVersion = ExtResource("3_u0cql")
 UpgradeItems = Array[ExtResource("2_c8mfa")]([ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2"), ExtResource("3_ujtx2")])
 ItemIcon = ExtResource("1_7w3sd")

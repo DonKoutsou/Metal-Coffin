@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cf3nxx0s2bsn5"]
+[gd_resource type="Resource" script_class="UsableItem" load_steps=3 format=3 uid="uid://cf3nxx0s2bsn5"]
 
 [ext_resource type="Texture2D" uid="uid://dgk6qcppifpnk" path="res://Assets/Items/cubeforce.png" id="1_3f7co"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_4aeu6"]
+[ext_resource type="Script" path="res://Scripts/UsableItem.gd" id="1_xupee"]
 
 [resource]
-script = ExtResource("1_4aeu6")
+script = ExtResource("1_xupee")
+StatUseName = "HULL"
 ItemIcon = ExtResource("1_3f7co")
+ItemIconSmol = ExtResource("1_3f7co")
 ItemName = "Supply"
 ItemDesc = "Used to repair damages to the hull of the ship"
-MaxStackCount = 20
+MaxStackCount = 10
 RandomFindMaxCount = 5

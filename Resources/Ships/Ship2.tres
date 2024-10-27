@@ -13,18 +13,21 @@ StatName = "INVENTORY_CAPACITY"
 StatBuff = 16.0
 
 [sub_resource type="Resource" id="Resource_124t7"]
+resource_local_to_scene = true
 script = ExtResource("2_b4dg8")
 StatCurrentVal = 80.0
 StatName = "FUEL"
 StatBuff = 80.0
 
 [sub_resource type="Resource" id="Resource_jstfg"]
+resource_local_to_scene = true
 script = ExtResource("2_b4dg8")
 StatCurrentVal = 30.0
 StatName = "OXYGEN"
 StatBuff = 30.0
 
 [sub_resource type="Resource" id="Resource_ynnat"]
+resource_local_to_scene = true
 script = ExtResource("2_b4dg8")
 StatCurrentVal = 400.0
 StatName = "HULL"

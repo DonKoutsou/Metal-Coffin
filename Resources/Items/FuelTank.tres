@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/MediumFuelTank.tres" id="4_ox6xo"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_sc66u")
 UpgradeName = "FUEL"
 UpgradeAmm = 100.0

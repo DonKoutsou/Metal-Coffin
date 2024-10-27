@@ -13,10 +13,11 @@ func SpawnMenu() -> void:
 	var startmen = StartingMenuScene.instantiate() as StartingMenu
 	add_child(startmen)
 	startmen.connect("GameStart", StartGame)
+	UISoundMan.GetInstance().Refresh()
 	
 func StartGame(Load : bool) -> void:
-	
 	var wor = GameScene.instantiate() as World
+	#wor.Load
 	if (Load):
 		if (!save_load_manager.Load(wor)):
 			var window = AcceptDialog.new()
@@ -24,7 +25,7 @@ func StartGame(Load : bool) -> void:
 			window.dialog_text = "No Save File Found"
 			window.popup_centered()
 			return
-	get_child(1).queue_free()
+	get_child(2).queue_free()
 	add_child(wor)
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
@@ -32,5 +33,5 @@ func StartGame(Load : bool) -> void:
 
 func OnGameEnded() -> void:
 	get_tree().paused = false
-	get_child(1).queue_free()
+	get_child(2).queue_free()
 	SpawnMenu()

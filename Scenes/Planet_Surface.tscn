@@ -1,12 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://c08f77fnaa310"]
+[gd_scene load_steps=29 format=3 uid="uid://c08f77fnaa310"]
 
+[ext_resource type="Script" path="res://Scenes/planet_surface.gd" id="1_6l3t7"]
 [ext_resource type="Shader" path="res://Shaders/Terain.gdshader" id="1_gbmyu"]
-[ext_resource type="ArrayMesh" uid="uid://byus7qmd0hep7" path="res://Assets/Spaceship/Ship.obj" id="2_3s24m"]
 [ext_resource type="Shader" path="res://Shaders/TerainDetail.gdshader" id="3_p7yox"]
 [ext_resource type="Shader" path="res://Shaders/DetailMeshSheder.gdshader" id="4_6ypw4"]
 [ext_resource type="Texture2D" uid="uid://d33jg4pbqfq3j" path="res://Assets/sprite_0052.png" id="5_61vve"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r5dwy"]
+offset = Vector3(51.6, 219, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7k0l3"]
 seamless = true
@@ -38,8 +39,8 @@ shader_parameter/heightmap = SubResource("NoiseTexture2D_7k0l3")
 shader_parameter/heightmap_normals = SubResource("NoiseTexture2D_ukh4m")
 shader_parameter/splatmap = SubResource("NoiseTexture2D_dqjk1")
 shader_parameter/slope_edge_1 = 0.346
-shader_parameter/slope_edge_2 = 0.234
-shader_parameter/slope_edge_3 = 0.193
+shader_parameter/slope_edge_2 = 0.274
+shader_parameter/slope_edge_3 = 0.168
 shader_parameter/slope_edge_noise_scale = 1.92
 shader_parameter/slope_edge_noise_intensity = 1.0
 shader_parameter/slope_edge_noise = SubResource("NoiseTexture2D_c70q5")
@@ -61,12 +62,13 @@ shader_parameter/slope_metallic = 0.0
 shader_parameter/slope_normal_intensity = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lrdym"]
-size = Vector2(200, 200)
+size = Vector2(500, 500)
 subdivide_width = 50
 subdivide_depth = 50
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4jydn"]
-energy_multiplier = 11.08
+turbidity = 0.7
+energy_multiplier = 8.88
 
 [sub_resource type="Sky" id="Sky_c38fh"]
 sky_material = SubResource("PhysicalSkyMaterial_4jydn")
@@ -75,6 +77,27 @@ sky_material = SubResource("PhysicalSkyMaterial_4jydn")
 background_mode = 2
 sky = SubResource("Sky_c38fh")
 sky_rotation = Vector3(0, 1.97746, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.606626, 0.606626, 0.606626, 1)
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 1.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.868074, 0.830542, 0.799144, 1)
+fog_sun_scatter = 0.15
+fog_density = 1.0
+fog_aerial_perspective = 0.88
+fog_depth_curve = 0.732043
+fog_depth_begin = 0.0
+fog_depth_end = 274.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_etqyt"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 122.19
+dof_blur_near_enabled = true
+dof_blur_near_distance = 7.6
+dof_blur_near_transition = 9.65
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3vj7l"]
 seamless = true
@@ -141,27 +164,102 @@ subdivide_width = 1
 subdivide_depth = 1
 orientation = 0
 
+[sub_resource type="Animation" id="Animation_uvfev"]
+resource_name = "Takeoff"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D2/ShipPivot:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(5.56462, 3.37247, 2.20538), Vector3(5.56462, 3.37247, 52.6049), Vector3(5.56461, 81.707, 115.484)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2/ShipPivot:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.03333, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, 0), Vector3(0.785398, 3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cae2b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D2/ShipPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(5.56462, 3.37247, 2.20538)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2/ShipPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_htrxt"]
+_data = {
+"RESET": SubResource("Animation_cae2b"),
+"Takeoff": SubResource("Animation_uvfev")
+}
+
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_6l3t7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_wilng")
 mesh = SubResource("PlaneMesh_lrdym")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.970063, 0.242853, 0, -0.242853, 0.970063, 0, 0, 0)
+transform = Transform3D(0.0472217, 0.998744, -0.0167256, -0.997786, 0.0479479, 0.0460939, 0.0468376, 0.0145121, 0.998797, 0, 0, 0)
+light_bake_mode = 0
+directional_shadow_mode = 0
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.847891, 0, 0.530171, 0, 1, 0, -0.530171, 0, -0.847891, -30.1752, 32.8625, 74.4624)
-mesh = ExtResource("2_3s24m")
+[node name="MeshInstance3D2" type="Node3D" parent="."]
+transform = Transform3D(-0.847891, 0, 0.530171, 0, 1, 0, -0.530171, 0, -0.847891, 26.2794, 52.9542, 109.958)
 
 [node name="Camera3D" type="Camera3D" parent="MeshInstance3D2"]
 transform = Transform3D(-0.863862, 0, -0.503729, 0, 1, 0, 0.503729, 0, -0.863862, -1.34854, 0.333801, -0.431442)
+far = 500.0
+
+[node name="ShipPivot" type="Node3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.56462, 3.37247, 2.20538)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_efwbu")
+camera_attributes = SubResource("CameraAttributesPractical_etqyt")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 5000
 visibility_aabb = AABB(-4, -4, -4, 500, 500, 500)
 process_material = SubResource("ShaderMaterial_4m1ye")
 draw_pass_1 = SubResource("QuadMesh_tq8wg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_htrxt")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="AnimFinished"]

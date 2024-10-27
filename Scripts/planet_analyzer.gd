@@ -5,6 +5,9 @@ class_name PlanetAnalyzer
 @export var DropContainerScene : PackedScene
 var Drops : Array[DropContainer] = []
 
+func _ready() -> void:
+	UISoundMan.GetInstance().Refresh()
+
 func SetVisuals(Spot : MapSpotType) -> void:
 	var viz = Spot.Scene.instantiate() as MeshInstance3D
 	var abb = viz.get_aabb().get_longest_axis_size() * viz.scale.x
@@ -12,6 +15,7 @@ func SetVisuals(Spot : MapSpotType) -> void:
 	$VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Camera3D.position.z = abb * 2
 	$VBoxContainer/HBoxContainer/VBoxContainer/PlanetName.text = Spot.FullName
 	$VBoxContainer/HBoxContainer/VBoxContainer/PlanetDesc.text = Spot.Description
+	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CheckBox.button_pressed = Spot.CanLand
 	AddItems(Spot.PossibleDrops)
 func _on_button_pressed() -> void:
 	queue_free()

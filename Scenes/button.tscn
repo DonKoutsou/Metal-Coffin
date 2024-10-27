@@ -1,17 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd0ax3exqiu17"]
+[gd_scene load_steps=4 format=3 uid="uid://dd0ax3exqiu17"]
 
 [ext_resource type="Script" path="res://Scripts/button.gd" id="1_eo80u"]
+[ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="1_xocgx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hv3q"]
 radius = 84.64
 
 [node name="Button" type="TouchScreenButton"]
 position = Vector2(102, 537)
+texture_normal = ExtResource("1_xocgx")
+texture_pressed = ExtResource("1_xocgx")
 shape = SubResource("CircleShape2D_3hv3q")
 action = "MoveLeft"
 script = ExtResource("1_eo80u")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

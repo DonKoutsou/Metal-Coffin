@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_lu011"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("3_lu011")
 UpgradeName = "FUEL"
 UpgradeAmm = 300.0
+CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("2_6e4v5")]([])
 ItemIcon = ExtResource("1_cbem7")
 ItemName = "Large Fuel Tank"

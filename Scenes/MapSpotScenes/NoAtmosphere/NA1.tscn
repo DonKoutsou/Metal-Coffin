@@ -7,11 +7,11 @@
 render_priority = 0
 shader = ExtResource("1_iimql")
 shader_parameter/emit = 0.0
-shader_parameter/color_1 = Color(0.192157, 0.188235, 0.180392, 1)
-shader_parameter/color_1_treshold = 0.257
+shader_parameter/color_1 = Color(0.520167, 0.512685, 0.49772, 1)
+shader_parameter/color_1_treshold = 0.261
 shader_parameter/color_1_roughness = 0.0
 shader_parameter/color_1_emit = false
-shader_parameter/color_2 = Color(0.580392, 0.564706, 0.552941, 1)
+shader_parameter/color_2 = Color(0.708199, 0.694268, 0.683833, 1)
 shader_parameter/color_2_treshold = 0.332
 shader_parameter/color_3 = Color(0.854902, 0.85098, 0.843137, 1)
 shader_parameter/color_3_treshold = 0.44
@@ -26,8 +26,8 @@ shader_parameter/noise = ExtResource("2_1gur5")
 
 [sub_resource type="SphereMesh" id="SphereMesh_wxhma"]
 material = SubResource("ShaderMaterial_l4rno")
-radial_segments = 23
-rings = 23
+radial_segments = 12
+rings = 12
 
 [sub_resource type="Animation" id="Animation_rs8cm"]
 resource_name = "Rotation"
@@ -64,7 +64,7 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="PlanetNoAtmosphere" type="MeshInstance3D"]
-transform = Transform3D(40, 0, 0.000178655, 0, 40, 0, -0.000178655, 0, 40, 0, 0, 0)
+transform = Transform3D(25.3029, 0, 30.98, 0, 40, 0, -30.98, 0, 25.3029, 0, 0, 0)
 mesh = SubResource("SphereMesh_wxhma")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

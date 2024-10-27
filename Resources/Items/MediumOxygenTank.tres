@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_sogaj"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("5_sogaj")
 UpgradeName = "OXYGEN"
 UpgradeAmm = 200.0

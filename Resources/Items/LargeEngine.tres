@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_s64vj"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("3_s64vj")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.5
+CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("2_11t01")]([])
 ItemIcon = ExtResource("1_cxl4y")
 ItemName = "High Efficiency Engine"

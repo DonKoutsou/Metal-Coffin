@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_laauu"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("3_laauu")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 900.0
+CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("2_otoms")]([])
 ItemIcon = ExtResource("1_2hlw3")
 ItemName = "High Range Analyzer"

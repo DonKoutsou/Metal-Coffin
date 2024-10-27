@@ -7,9 +7,11 @@
 [ext_resource type="Resource" uid="uid://c16lcf8swpkjk" path="res://Resources/Items/LargeRadar.tres" id="4_6ok2g"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("3_r1wno")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 800.0
+CurrentVal = 0.0
 UpgradeVersion = ExtResource("4_6ok2g")
 UpgradeItems = Array[ExtResource("2_52jbd")]([ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1")])
 ItemIcon = ExtResource("1_e2od7")

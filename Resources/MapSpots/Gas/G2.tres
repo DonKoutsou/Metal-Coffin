@@ -15,3 +15,4 @@ Scene = ExtResource("5_nl6rj")
 PossibleDrops = Array[ExtResource("2_kymwr")]([ExtResource("3_5y5jl"), ExtResource("4_m3u58")])
 FullName = "Gas Giant"
 Description = "blah blah"
+CanLand = true

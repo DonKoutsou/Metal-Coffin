@@ -58,7 +58,12 @@ func NewPlanetScene() -> void:
 		Name = "I"
 		ScenePath = "res://Scenes/MapSpotScenes/Ice/"
 		ResPath = "res://Resources/MapSpots/Ice/"
-
+	if (index == 6):
+		Baseplanet = (load("res://Scenes/MapSpotScenes/Ringed/R1.tscn") as PackedScene).duplicate()
+		BaseRes = (load("res://Resources/MapSpots/Ringed/R1.tres") as Resource).duplicate()
+		Name = "R"
+		ScenePath = "res://Scenes/MapSpotScenes/Ringed/"
+		ResPath = "res://Resources/MapSpots/Ringed/"
 	var amm = AmmountOfFilesInDir(ScenePath)
 	var scpath = ScenePath + Name + var_to_str(amm) + ".tscn"
 	ResourceSaver.save(Baseplanet, scpath) 

@@ -89,7 +89,7 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="PlanetGaseous" type="MeshInstance3D"]
-transform = Transform3D(38.1981, 0, 11.8703, 0, 40, 0, -11.8703, 0, 38.1981, 0, 0, 0)
+transform = Transform3D(39.8783, 0, 3.1173, 0, 40, 0, -3.1173, 0, 39.8783, 0, 0, 0)
 mesh = SubResource("SphereMesh_mt6w6")
 
 [node name="Atmosphere" type="MeshInstance3D" parent="."]

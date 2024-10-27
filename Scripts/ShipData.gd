@@ -2,57 +2,68 @@ extends Resource
 class_name ShipData
 
 @export var Stats : Array[ShipStat]
-
 static var Instance
+
+signal StatsUpdated(StName : String)
 
 func _init() -> void:
 	Instance = self
 	
 static func GetInstance() -> ShipData:
 	return Instance
-
+	
+func UpdateStatCurrentValue(StatN : String, StatVal : float):
+	GetStat(StatN).CurrentVelue = StatVal
+	StatsUpdated.emit(StatN)
+func AddToStatCurrentValue(StatN : String, StatVal : float):
+	var stat = GetStat(StatN)
+	stat.CurrentVelue = min(stat.CurrentVelue + StatVal, stat.GetStat())
+	StatsUpdated.emit(StatN)
+func UpdateStatShipBuff(StatN : String, StatVal : float):
+	GetStat(StatN).StatShipBuff = StatVal
+	StatsUpdated.emit(StatN)
+func AddToStatShipBuff(StatN : String, StatVal : float):
+	GetStat(StatN).StatShipBuff += StatVal
+	StatsUpdated.emit(StatN)
+func UpdateStatItemBuff(StatN : String, StatVal : float):
+	GetStat(StatN).StatItemBuff = StatVal
+	StatsUpdated.emit(StatN)
+func AddToStatItemBuff(StatN : String, StatVal : float):
+	GetStat(StatN).StatItemBuff += StatVal
+	StatsUpdated.emit(StatN)
+	
 func ApplyShipStats(ShipStats : Array[BaseShipStat]) -> void:
-	for j in Stats.size():
-		var st = Stats[j]
 		for g in ShipStats.size():
 			var shipst = ShipStats[g] as BaseShipStat
-			if (st.StatName == shipst.StatName):
-				st.StatShipBuff = shipst.StatBuff
-				if (shipst is FluidShipStat):
-					st.CurrentVelue = min(st.CurrentVelue + shipst.StatCurrentVal, st.GetStat())
+			AddToStatShipBuff(shipst.StatName ,shipst.StatBuff)
+			if (shipst is FluidShipStat):
+				AddToStatCurrentValue(shipst.StatName, shipst.StatCurrentVal)
 func RemoveShipStats(ShipStats : Array[BaseShipStat]) -> void:
-	for j in Stats.size():
-		var st = Stats[j]
 		for g in ShipStats.size():
 			var shipst = ShipStats[g] as BaseShipStat
-			if (st.StatName == shipst.StatName):
-				st.StatShipBuff = 0
-				if (shipst is FluidShipStat):
-					var newstat = st.GetStat()
-					if (st.CurrentVelue > newstat):
-						var dif = st.CurrentVelue - newstat
-						st.CurrentVelue = newstat
-						shipst.StatCurrentVal = dif
-					else:
-						shipst.StatCurrentVal = 0
+			AddToStatShipBuff(shipst.StatName, -shipst.StatBuff)
+			#if (shipst is FluidShipStat):
+				#var st = GetStat(shipst.StatName)
+				#var newstat = st.GetStat()
+				#f (st.CurrentVelue > newstat):
+				#var dif = st.CurrentVelue - newstat
+				#UpdateStatCurrentValue(st.StatName, newstat)
+				#shipst.StatCurrentVal = dif
+					
 func ApplyShipPartStat(Part : ShipPart) -> void:
-	for j in Stats.size():
-		var st = Stats[j]
-		if (st.StatName == Part.UpgradeName):
-			st.StatItemBuff += Part.UpgradeAmm
-			st.CurrentVelue = min(st.CurrentVelue + Part.CurrentVal, st.GetStat())
+	var st = GetStat(Part.UpgradeName)
+	AddToStatItemBuff(Part.UpgradeName ,Part.UpgradeAmm)
+	AddToStatCurrentValue(st.StatName, Part.CurrentVal)
 func RemoveShipPartStat(Part : ShipPart) -> void:
-	for j in Stats.size():
-		var st = Stats[j]
-		if (st.StatName == Part.UpgradeName):
-			st.StatItemBuff -= Part.UpgradeAmm
-			var newstat = st.GetStat()
-			if (st.CurrentVelue > newstat):
-				var dif = st.CurrentVelue - newstat
-				st.CurrentVelue = newstat
-				Part.CurrentVal = dif
-			else:
-				Part.CurrentVal = 0
+	var st = GetStat(Part.UpgradeName)
+	AddToStatItemBuff(Part.UpgradeName ,-Part.UpgradeAmm)
+	var newstat = st.GetStat()
+	if (st.CurrentVelue > newstat):
+		var dif = st.CurrentVelue - newstat
+		UpdateStatCurrentValue(st.StatName, newstat)
+		Part.CurrentVal = dif
+	else:
+		Part.CurrentVal = 0
 				
 			
 func GetStat(Name : String) -> ShipStat:

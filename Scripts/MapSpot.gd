@@ -7,11 +7,10 @@ class_name MapSpot
 #@onready var label: Label = $PanelContainer/VBoxContainer2/Label
 
 signal MapPressed(Pos : MapSpot)
-signal SpotSearched(Pos : MapSpot, Drops : Array[Item])
+signal SpotSearched(Pos : MapSpot)
 signal SpotAnalazyed(Type : MapSpotType)
 
 var SpotType : MapSpotType
-var SpotItems : Array[Item]
 var Pos : Vector2
 var Visited = false
 var Seen = false
@@ -22,6 +21,7 @@ func _ready() -> void:
 	analyze_button.visible = false
 	if (Pos != Vector2.ZERO):
 		position = Pos
+		
 func GetSaveData() -> Resource:
 	var datas = MapSpotSaveData.new().duplicate()
 	datas.SpotLoc = position
@@ -32,19 +32,16 @@ func GetSaveData() -> Resource:
 #//////////////////////////////////////////////////////////////////
 func SetSpotData(Data : MapSpotType) -> void:
 	SpotType = Data
-	SetSpotDrop(Data.PossibleDrops)
-	##SetSpotIcon(Data.MapIcon)
+	#SetSpotDrop(Data.PossibleDrops)
 
-func SetSpotIcon(Icon : Texture) -> void:
-	$Panel.texture = Icon
-func SetSpotDrop(ItList : Array[Item]) -> void:
-	if (ItList.size() == 0):
-		return
-	var it = ItList.pick_random()
-	var rng = RandomNumberGenerator.new()
-	var DropAmm = rng.randi_range(1, it.RandomFindMaxCount)
-	for g in DropAmm :
-		SpotItems.insert(g, it)
+#func SetSpotDrop(ItList : Array[Item]) -> void:
+#	if (ItList.size() == 0):
+#		return
+#	var it = ItList.pick_random()
+##	var rng = RandomNumberGenerator.new()
+#	var DropAmm = rng.randi_range(1, it.RandomFindMaxCount)
+	#for g in DropAmm :
+		#SpotItems.insert(g, it)
 #//////////////////////////////////////////////////////////////////
 func ToggleVisitButton(tog : bool) -> void:
 	visit_button.visible = tog
@@ -56,14 +53,12 @@ func OnSpotVisited() -> void:
 	$Panel/Panel.visible = true
 	Visited = true
 func OnSpotSeen() -> void:
-	#label.visible = true
-	##visible = true
-	SetSpotIcon(SpotType.MapIcon)
+	$Panel.texture = SpotType.MapIcon
 	Seen = true
 
 func _on_visit_button_pressed() -> void:
 	MapPressed.emit(self)
 func _on_land_button_pressed() -> void:
-	SpotSearched.emit(self, SpotItems)
+	SpotSearched.emit(self)
 func _on_analyze_button_pressed() -> void:
 	SpotAnalazyed.emit(SpotType)

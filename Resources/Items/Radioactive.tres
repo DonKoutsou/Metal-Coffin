@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c62pqy44otdor"]
+[gd_resource type="Resource" script_class="UsableItem" load_steps=3 format=3 uid="uid://c62pqy44otdor"]
 
 [ext_resource type="Texture2D" uid="uid://br1e4n8wtq4kv" path="res://Assets/Items/radioactive.png" id="1_eqrny"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_ius4u"]
+[ext_resource type="Script" path="res://Scripts/UsableItem.gd" id="1_n7ex3"]
 
 [resource]
-script = ExtResource("2_ius4u")
+script = ExtResource("1_n7ex3")
+StatUseName = "FUEL"
 ItemIcon = ExtResource("1_eqrny")
+ItemIconSmol = ExtResource("1_eqrny")
 ItemName = "Radioactive"
 ItemDesc = "Used as fuel by certain ships"
 MaxStackCount = 10

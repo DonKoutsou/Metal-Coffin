@@ -14,3 +14,4 @@ Scene = ExtResource("4_87k22")
 PossibleDrops = Array[ExtResource("2_to5ap")]([ExtResource("3_8m6e2")])
 FullName = "Stelar body"
 Description = "blah blag"
+CanLand = true

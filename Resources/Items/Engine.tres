@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/MediumEngine.tres" id="4_adnd2"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_w2xra")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0

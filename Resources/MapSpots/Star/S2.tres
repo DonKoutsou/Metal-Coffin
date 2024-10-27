@@ -14,3 +14,4 @@ Scene = ExtResource("3_4vcu8")
 PossibleDrops = Array[ExtResource("1_6osum")]([ExtResource("2_3vits")])
 FullName = "Supernova"
 Description = "blah blag"
+CanLand = false

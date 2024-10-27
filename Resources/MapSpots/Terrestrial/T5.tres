@@ -16,3 +16,4 @@ Scene = ExtResource("6_cduxr")
 PossibleDrops = Array[ExtResource("2_78btc")]([ExtResource("3_y732i"), ExtResource("4_k8k3a"), ExtResource("5_m3yp5")])
 FullName = "Terrestrial Planet"
 Description = ""
+CanLand = true

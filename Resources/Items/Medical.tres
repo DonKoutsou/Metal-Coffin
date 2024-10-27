@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bqclpdfwg8s6j"]
+[gd_resource type="Resource" script_class="UsableItem" load_steps=3 format=3 uid="uid://bqclpdfwg8s6j"]
 
 [ext_resource type="Texture2D" uid="uid://5nruswfvv0g0" path="res://Assets/Items/hospital-cross.png" id="1_qxhdb"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_twii0"]
+[ext_resource type="Script" path="res://Scripts/UsableItem.gd" id="1_x4alj"]
 
 [resource]
-script = ExtResource("2_twii0")
+script = ExtResource("1_x4alj")
+StatUseName = "HP"
 ItemIcon = ExtResource("1_qxhdb")
+ItemIconSmol = ExtResource("1_qxhdb")
 ItemName = "Medical"
 ItemDesc = "Replenishes HP"
-MaxStackCount = 20
+MaxStackCount = 10
 RandomFindMaxCount = 5

@@ -7,9 +7,11 @@
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_85il0"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("5_85il0")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 400.0
+CurrentVal = 0.0
 UpgradeVersion = ExtResource("4_f476b")
 UpgradeItems = Array[ExtResource("2_ys63s")]([ExtResource("3_xkutv"), ExtResource("3_xkutv"), ExtResource("3_xkutv"), ExtResource("3_xkutv")])
 ItemIcon = ExtResource("1_8iuvr")

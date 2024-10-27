@@ -1,0 +1,119 @@
+[gd_scene load_steps=15 format=3 uid="uid://b07b6o55qw5d"]
+
+[ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/body.gdshader" id="1_jd014"]
+[ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/atmosphere.gdshader" id="2_4nsox"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lo7c6"]
+seed = 22
+fractal_lacunarity = 3.55
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mgvlq"]
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_lo7c6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3sgxv"]
+render_priority = 0
+shader = ExtResource("1_jd014")
+shader_parameter/emit = 0.0
+shader_parameter/color_1 = Color(0.558442, 0.61374, 0.611051, 1)
+shader_parameter/color_1_treshold = 0.422
+shader_parameter/color_1_roughness = 0.0
+shader_parameter/color_1_emit = false
+shader_parameter/color_2 = Color(0.549056, 0.683484, 0.687176, 1)
+shader_parameter/color_2_treshold = 0.505
+shader_parameter/color_3 = Color(0.736779, 0.829832, 0.874131, 1)
+shader_parameter/color_3_treshold = 0.529
+shader_parameter/color_4 = Color(0.592625, 0.650753, 0.649749, 1)
+shader_parameter/color_4_treshold = 0.574
+shader_parameter/color_5 = Color(0.425714, 0.514202, 0.501294, 1)
+shader_parameter/color_5_treshold = 1.0
+shader_parameter/noise_gaseous = true
+shader_parameter/noise_gaseous_speed = 0.0025
+shader_parameter/noise_scale = 1.425
+shader_parameter/noise = SubResource("NoiseTexture2D_mgvlq")
+
+[sub_resource type="SphereMesh" id="SphereMesh_mt6w6"]
+material = SubResource("ShaderMaterial_3sgxv")
+radial_segments = 12
+rings = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0baun"]
+render_priority = 0
+shader = ExtResource("2_4nsox")
+shader_parameter/color_1 = Color(0.154553, 0.17071, 0.171818, 1)
+shader_parameter/color_2 = Color(0.78872, 0.782713, 0.804847, 1)
+shader_parameter/alpha = 0.8
+shader_parameter/amount = 4.5
+shader_parameter/intensity = 4.0
+shader_parameter/emit = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_k2gpb"]
+material = SubResource("ShaderMaterial_0baun")
+radial_segments = 12
+rings = 12
+
+[sub_resource type="Animation" id="Animation_ai08c"]
+resource_name = "Rotation"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.139626, 0, -0.139626), Vector3(0.139626, 6.28319, -0.139626)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vymfv"]
+_data = {
+"Rotation": SubResource("Animation_ai08c")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wdmtw"]
+animation = &"Rotation"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_t8t6j"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fm5i7"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_wdmtw")
+nodes/Animation/position = Vector2(-20, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_t8t6j")
+nodes/TimeScale/position = Vector2(140, 140)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_d4psn"]
+inner_radius = 0.583
+outer_radius = 1.15
+rings = 32
+ring_segments = 3
+
+[node name="PlanetGaseous" type="MeshInstance3D"]
+transform = Transform3D(39.0226, 5.56691, 6.80078, -4.47509, 39.2252, -6.43073, -7.56403, 5.51273, 38.8895, 0, 0, 0)
+rotation_order = 1
+mesh = SubResource("SphereMesh_mt6w6")
+
+[node name="Atmosphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.04, 0, 0, 0, 1.04, 0, 0, 0, 1.04, 0, 0, 0)
+sorting_offset = 5.0
+mesh = SubResource("SphereMesh_k2gpb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vymfv")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_fm5i7")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999727, 0, -0.0233807, 0, 0.01, 0, 0.0233807, 0, 0.999727, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_3sgxv")
+mesh = SubResource("TorusMesh_d4psn")

@@ -1238,21 +1238,21 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="VisitButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+[node name="VisitButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("4_1yydb")
 theme_override_fonts/font = ExtResource("2_uoroi")
 theme_override_font_sizes/font_size = 22
 text = "Visit"
 
-[node name="LandButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+[node name="LandButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("4_1yydb")
 theme_override_fonts/font = ExtResource("2_uoroi")
 theme_override_font_sizes/font_size = 22
 text = "Land"
 
-[node name="AnalyzeButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+[node name="AnalyzeButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("4_1yydb")
 theme_override_fonts/font = ExtResource("2_uoroi")

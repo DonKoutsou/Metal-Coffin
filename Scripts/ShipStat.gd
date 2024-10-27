@@ -8,8 +8,6 @@ var StatShipBuff : float
 var StatItemBuff : float
 var CurrentVelue : float
 
-func _init() -> void:
-	CurrentVelue = StatBase
 func GetBaseStat()-> float:
 	return StatBase
 func GetShipBuff()-> float:

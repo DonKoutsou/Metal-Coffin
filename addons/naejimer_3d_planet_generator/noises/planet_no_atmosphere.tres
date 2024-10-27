@@ -3,8 +3,8 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gwguk"]
 noise_type = 2
 seed = 24835
-frequency = 0.008
-fractal_type = 0
+frequency = 0.013
+fractal_octaves = 3
 fractal_ping_pong_strength = 0.1
 
 [resource]

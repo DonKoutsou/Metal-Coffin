@@ -25,9 +25,8 @@ background_color = Color(0.265361, 0.265361, 0.26536, 1)
 sky = SubResource("Sky_s367o")
 sky_custom_fov = 41.7
 sky_rotation = Vector3(0, 2.06298, 0)
-ambient_light_source = 3
-ambient_light_color = Color(0.282407, 0.282407, 0.282407, 1)
-ambient_light_energy = 0.65
+ambient_light_source = 2
+ambient_light_color = Color(0.339095, 0.339095, 0.339095, 1)
 reflected_light_source = 2
 tonemap_mode = 2
 glow_enabled = true
@@ -115,7 +114,19 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Can Land :"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

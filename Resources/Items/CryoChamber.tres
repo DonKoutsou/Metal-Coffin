@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_2i8jy"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("5_2i8jy")
 UpgradeName = "CRYO"
 UpgradeAmm = 1.0
+CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("2_37ma6")]([])
 ItemIcon = ExtResource("1_cgi5c")
 ItemName = "Cryochamber"

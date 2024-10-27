@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 //starfield customization
 uniform float thing = 0.0;
+uniform float thing2 = 0.0;
 uniform float star_brightness : hint_range(0.0, 0.5) = 0.05;
 
 uniform float dist_fade : hint_range(0.0, 1.0) = 0.35;
@@ -54,6 +55,7 @@ vec3 quantizeColor(vec3 color, int levels) {
 void fragment() {
     vec2 uv2 = FRAGCOORD.xy / vec2(512);
 	uv2.x += thing;
+	uv2.y += thing2;
     vec2 uvs = uv2 * vec2(512) / 512.0;
 
     float time = TIME;

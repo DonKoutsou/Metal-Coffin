@@ -51,7 +51,7 @@ autowrap_mode = 2
 layout_mode = 2
 alignment = 1
 
-[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" groups=["Buttons"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("5_kaurm")
@@ -59,7 +59,7 @@ theme_override_fonts/font = ExtResource("4_dsmol")
 theme_override_font_sizes/font_size = 24
 text = "-"
 
-[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_kaurm")
@@ -67,7 +67,7 @@ theme_override_fonts/font = ExtResource("4_dsmol")
 theme_override_font_sizes/font_size = 24
 text = "Use :1x"
 
-[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" groups=["Buttons"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("5_kaurm")
@@ -75,7 +75,7 @@ theme_override_fonts/font = ExtResource("4_dsmol")
 theme_override_font_sizes/font_size = 24
 text = "+"
 
-[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
@@ -86,7 +86,7 @@ text = "Drop"
 layout_mode = 2
 alignment = 1
 
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
@@ -138,7 +138,7 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("3_v5dpc")
 
-[node name="Close" type="Button" parent="VBoxContainer"]
+[node name="Close" type="Button" parent="VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")

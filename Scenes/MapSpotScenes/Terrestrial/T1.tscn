@@ -92,7 +92,7 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="PlanetTerrestrial" type="MeshInstance3D"]
-transform = Transform3D(39.9872, 0, 1.01134, 0, 40, 0, -1.01134, 0, 39.9872, 0, 0, 0)
+transform = Transform3D(32.9566, 0, 22.6685, 0, 40, 0, -22.6685, 0, 32.9566, 0, 0, 0)
 mesh = SubResource("SphereMesh_h4ifb")
 skeleton = NodePath(".")
 

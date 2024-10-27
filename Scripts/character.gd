@@ -1,9 +1,7 @@
-
 extends  MeshInstance3D
 class_name Character
 @export var ManuverSpeed : float = 4
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 		

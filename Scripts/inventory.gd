@@ -2,6 +2,8 @@ extends Control
 class_name Inventory
 
 @export var StartingItems : Array[Item]
+@export var LoadedItems :Array[Item]
+
 @export var InventoryBoxScene : PackedScene
 @export var InventoryTradeScene : PackedScene
 @export var ItemDescriptorScene : PackedScene
@@ -16,6 +18,7 @@ var InventoryContents : Array[Inventory_Box] = []
 
 signal OnItemAdded(It : Item)
 signal OnItemRemoved(It : Item)
+var Loading = false
 # Called when the node enters the scene tree for the first time.
 func GetSaveData() ->SaveData:
 	var dat = SaveData.new()
@@ -31,8 +34,8 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		var dat = Data[g] as ItemContainer
 		for z in dat.Ammount:
 			Items.append(dat.ItemType)
-	StartingItems.clear()
-	StartingItems.append_array(Items)
+	LoadedItems.append_array(Items)
+	Loading = true
 func _exit_tree() -> void:
 	FlushInventory()
 func UpdateSize() -> void:
@@ -64,8 +67,10 @@ func _ready() -> void:
 	#	$UpgradesContainer/VBoxContainer.add_child(Tab)
 	#	Tab.SetData(Upgrades[g])
 	#	Tab.connect("OnUgradePressed", TryUpgrade)
-	AddItems(StartingItems, false)
-
+	if (Loading):
+		AddItems(LoadedItems, false)
+	else :
+		AddItems(StartingItems, false)
 
 
 func TryUpgrade(UpTab : UpgradeTab) -> void:
@@ -92,7 +97,7 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 		for g in InventoryContents.size() :
 			var box = InventoryContents[g]
 			if (box.ItemC.ItemType == It[z]):
-				if (box.ItemC.ItemType.MaxStackCount == box.ItemC.Ammount):
+				if (box.ItemC.Ammount >= box.ItemC.ItemType.MaxStackCount):
 					continue
 				box.UpdateAmm(1)
 				placed = true
@@ -131,36 +136,38 @@ func FlushInventory() -> void:
 			OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
 			InventoryContents[g].UpdateAmm(-1)
 func TradeFinished(itms : Array[Item]) -> void:
-	##FlushInventory()
-	var ItmsToAdd : Array[Item] = []
+	FlushInventory()
+	##var ItmsToAdd : Array[Item] = []
 	# itterate through items already in inventory
-	for g in InventoryContents.size():
+	#for g in InventoryContents.size():
 		#if box empty skip it
-		if (InventoryContents[g].ItemC.Ammount == 0):
-			continue
+	#	if (InventoryContents[g].ItemC.Ammount == 0):
+	#		continue
 		#save the item on the specific item box
-		var ItToCount = InventoryContents[g].ItemC.ItemType
+	#	var ItToCount = InventoryContents[g].ItemC.ItemType
 		#see how many of the item exist in the incomming
-		var ItAmm = itms.count(ItToCount)
+	#	var ItAmm = itms.count(ItToCount)
 		#if inventory has the same ammoun of items we skipp this item
-		if (ItAmm == InventoryContents[g].ItemC.Ammount):
-			for j in ItAmm:
-				itms.erase(ItToCount)
-			continue
-		else : if (ItAmm > InventoryContents[g].ItemC.Ammount):
-			for j in ItAmm - InventoryContents[g].ItemC.Ammount:
-				ItmsToAdd.append(ItToCount)
-		else : if (ItAmm < InventoryContents[g].ItemC.Ammount):
-			for j in InventoryContents[g].ItemC.Ammount - ItAmm:
-				RemoveItem(ItToCount)
+	#	if (ItAmm == InventoryContents[g].ItemC.Ammount):
+	#		for j in ItAmm:
+	#			itms.erase(ItToCount)
+	#		continue
+	#	else : if (ItAmm > InventoryContents[g].ItemC.Ammount):
+	#		for j in ItAmm - InventoryContents[g].ItemC.Ammount:
+	#			ItmsToAdd.append(ItToCount)
+	#	else : if (ItAmm < InventoryContents[g].ItemC.Ammount):
+	#		for j in InventoryContents[g].ItemC.Ammount - ItAmm:
+	#			RemoveItem(ItToCount)
 	
-	for g in itms.size():
-		if (ItmsToAdd.count(itms[g]) == 0):
-			for i in itms.count(itms[g]):
-				ItmsToAdd.append(itms[g])
-	AddItems(ItmsToAdd, false)
+	#for g in itms.size():
+	#	if (ItmsToAdd.count(itms[g]) == 0):
+	#		for i in itms.count(itms[g]):
+	#			ItmsToAdd.append(itms[g])
+	AddItems(itms, false)
 
-func OnItemSelected(It :Item, Amm : int) -> void:
+func OnItemSelected(ItCo : ItemContainer) -> void:
+	var It = ItCo.ItemType as Item
+	var Amm = ItCo.Ammount
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
@@ -185,7 +192,10 @@ func UpgradeItem(Part : ShipPart) -> void:
 					RemoveItem(UpItem)
 				Part.UpgradeVersion.CurrentVal = Part.CurrentVal
 				AddItems([Part.UpgradeVersion], false)
-				OnItemSelected(Part.UpgradeVersion, 1)
+				#OnItemSelected(InventoryContents[g].ItemC)
+				var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+				if (descriptors.size() > 0):
+					descriptors[0].queue_free()
 				UpgradeSuccess = true
 	if (!UpgradeSuccess) :
 		var pop = AcceptDialog.new()

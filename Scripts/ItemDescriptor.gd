@@ -2,13 +2,16 @@ extends PanelContainer
 
 class_name ItemDescriptor
 
-signal ItemUsed(It : Item)
+signal ItemUsed(It : UsableItem)
 signal ItemUpgraded(Part : ShipPart)
 signal ItemDropped(It : Item)
 
 var DescribedItem : Item
 var OwnedAmm : int
 var UsingAmm : int = 1
+
+func _ready() -> void:
+	UISoundMan.GetInstance().Refresh()
 func SetData(It : Item, Amm : int) -> void:
 	DescribedItem = It
 	OwnedAmm = Amm
@@ -58,6 +61,8 @@ func ConfirmDrop() -> void:
 	queue_free()
 func ConfirmUse() -> void:
 	ItemUsed.emit(DescribedItem, UsingAmm)
+	UsingAmm = 1
+	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use.text = "Use :" + var_to_str(UsingAmm) + "x"
 func ConfirmUpgrade() -> void:
 	ItemUpgraded.emit(DescribedItem)
 
@@ -65,7 +70,7 @@ func ConfirmUpgrade() -> void:
 func _on_use_more_pressed() -> void:
 	UsingAmm = min(UsingAmm + 1, OwnedAmm)
 	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use.text = "Use :" + var_to_str(UsingAmm) + "x"
-
+	
 func _on_use_less_pressed() -> void:
 	UsingAmm = max(UsingAmm - 1, 1)
 	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use.text = "Use :" + var_to_str(UsingAmm) + "x"

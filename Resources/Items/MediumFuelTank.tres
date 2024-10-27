@@ -7,9 +7,11 @@
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/LargeFuelTank.tres" id="4_eq04c"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("3_4o074")
 UpgradeName = "FUEL"
 UpgradeAmm = 200.0
+CurrentVal = 0.0
 UpgradeVersion = ExtResource("4_eq04c")
 UpgradeItems = Array[ExtResource("2_7rfwq")]([ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc")])
 ItemIcon = ExtResource("1_3ytf2")

@@ -8,7 +8,7 @@
 script = ExtResource("2_yyjv6")
 ItemIcon = ExtResource("1_pfi5x")
 ItemIconSmol = ExtResource("2_s3yb4")
-ItemName = "Materials"
+ItemName = "Material"
 ItemDesc = "ItemDesc"
 MaxStackCount = 10
 RandomFindMaxCount = 1

@@ -70,7 +70,7 @@ layout_mode = 2
 mouse_filter = 2
 columns = 3
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("4_iyr8n")
 action_mode = 0

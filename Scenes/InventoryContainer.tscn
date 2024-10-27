@@ -35,7 +35,7 @@ mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_mngpq")
 script = ExtResource("1_igs2u")
 
-[node name="TextureRect" type="Button" parent="."]
+[node name="TextureRect" type="Button" parent="." groups=["Buttons"]]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = ExtResource("3_et2aa")
@@ -47,6 +47,7 @@ icon_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_708pr")
 
 [node name="Label" type="Label" parent="PanelContainer"]
@@ -54,6 +55,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("1_c3amd")
+theme_override_font_sizes/font_size = 24
 text = "1"
 
 [connection signal="pressed" from="TextureRect" to="." method="_on_texture_rect_pressed"]

@@ -1,88 +1,206 @@
-[gd_scene load_steps=17 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=38 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
 [ext_resource type="Resource" uid="uid://b5b3q5ta3whql" path="res://Resources/ShipData.tres" id="2_e0ks1"]
 [ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/TravelMinigameGame.tscn" id="2_sl3gr"]
 [ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/BattleScene.tscn" id="3_fvwv6"]
+[ext_resource type="PackedScene" uid="uid://6bkyk5dp55yc" path="res://Scenes/Exploration.tscn" id="5_8yn38"]
 [ext_resource type="Resource" uid="uid://dcw4b2h3xa0no" path="res://Resources/Ships/StartingShip.tres" id="5_e0oyh"]
 [ext_resource type="PackedScene" uid="uid://hs6mpykyuklx" path="res://Scenes/Shiptrade.tscn" id="6_0vqqp"]
 [ext_resource type="PackedScene" uid="uid://dqisqmi1gj7sn" path="res://Scenes/inventory.tscn" id="6_82nvh"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_xx17t"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="8_47nki"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="9_7fm4g"]
+[ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="10_vufmu"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="12_rf2td"]
+[ext_resource type="Texture2D" uid="uid://csif76k5337h5" path="res://Assets/Items/cryo-chamber.png" id="13_ohgvo"]
+[ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="14_24pwn"]
+[ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="15_exmjr"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="15_lvvfi"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="16_hw203"]
+[ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="16_jmu5m"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="17_rcqyo"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="18_7gxhx"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="19_o3uo1"]
+[ext_resource type="PackedScene" uid="uid://crwbxcbj81jvc" path="res://Scenes/stat_panel.tscn" id="21_101j1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2lo2"]
-bg_color = Color(0.275636, 0.275636, 0.275636, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
+[sub_resource type="Resource" id="Resource_xqiss"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "VIZ_RANGE"
+UpgradeAmm = 1200.0
+CurrentVal = 0.0
+UpgradeItems = Array[ExtResource("9_7fm4g")]([])
+ItemIcon = ExtResource("10_vufmu")
+ItemName = "High Range Radar"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d48tj"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.317053, 0.353, 0.750049, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+[sub_resource type="Resource" id="Resource_x3rxy"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "VIZ_RANGE"
+UpgradeAmm = 800.0
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_xqiss")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("10_vufmu")
+ItemName = "Medium Range Radar"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t3yq"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0509804, 0.533333, 0.0901961, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+[sub_resource type="Resource" id="Resource_q2omo"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "VIZ_RANGE"
+UpgradeAmm = 400.0
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_x3rxy")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("10_vufmu")
+ItemName = "Short Range Radar"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dcv0"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.1691, 0.428105, 0.62117, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+[sub_resource type="Resource" id="Resource_xbv52"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "CRYO"
+UpgradeAmm = 1.0
+CurrentVal = 0.0
+UpgradeItems = Array[ExtResource("9_7fm4g")]([])
+ItemIcon = ExtResource("13_ohgvo")
+ItemName = "Cryochamber"
+ItemDesc = "Allows for travel without oxygen loss"
+MaxStackCount = 1
+RandomFindMaxCount = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67ikh"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.781105, 0.651497, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+[sub_resource type="Resource" id="Resource_ur3gt"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL"
+UpgradeAmm = 300.0
+CurrentVal = 0.0
+UpgradeItems = Array[ExtResource("9_7fm4g")]([])
+ItemIcon = ExtResource("14_24pwn")
+ItemName = "Large Fuel Tank"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_fp4co"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL"
+UpgradeAmm = 200.0
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_ur3gt")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("14_24pwn")
+ItemName = "Medium Fuel Tank"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_eru2t"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL"
+UpgradeAmm = 100.0
+CurrentVal = 100.0
+UpgradeVersion = SubResource("Resource_fp4co")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("14_24pwn")
+ItemName = "Fuel Tank"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_oi6mn"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL_EFFICIENCY"
+UpgradeAmm = 1.5
+CurrentVal = 0.0
+UpgradeItems = Array[ExtResource("9_7fm4g")]([])
+ItemIcon = ExtResource("15_exmjr")
+ItemName = "High Efficiency Engine"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_8x3j1"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL_EFFICIENCY"
+UpgradeAmm = 1.25
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_oi6mn")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("15_exmjr")
+ItemName = "Medium Efficiency Engine"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_o4j3o"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL_EFFICIENCY"
+UpgradeAmm = 1.0
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_8x3j1")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("15_exmjr")
+ItemName = "Engine"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_a6oya"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "ANALYZE_RANGE"
+UpgradeAmm = 900.0
+CurrentVal = 0.0
+UpgradeItems = Array[ExtResource("9_7fm4g")]([])
+ItemIcon = ExtResource("16_jmu5m")
+ItemName = "High Range Analyzer"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_f57fd"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "ANALYZE_RANGE"
+UpgradeAmm = 600.0
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_a6oya")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("16_jmu5m")
+ItemName = "Medium Range Analyzer"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_mirbx"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "ANALYZE_RANGE"
+UpgradeAmm = 300.0
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_f57fd")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("16_jmu5m")
+ItemName = "Short Range Analyzer"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
 
 [node name="World" type="Node"]
 process_mode = 3
@@ -90,6 +208,7 @@ script = ExtResource("1_lg538")
 ShipDat = ExtResource("2_e0ks1")
 scene = ExtResource("2_sl3gr")
 BattleScene = ExtResource("3_fvwv6")
+ExplorationScene = ExtResource("5_8yn38")
 StartingShip = ExtResource("5_e0oyh")
 ShipTradeShip = ExtResource("6_0vqqp")
 
@@ -102,186 +221,9 @@ mouse_filter = 2
 MapSize = 150
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_82nvh")]
+StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_q2omo"), SubResource("Resource_xbv52"), SubResource("Resource_eru2t"), SubResource("Resource_o4j3o"), SubResource("Resource_mirbx"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("16_hw203"), ExtResource("16_hw203"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo")])
 
-[node name="Stat_Panel" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -93.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("8_47nki")
-
-[node name="Stat_H_Container" type="HBoxContainer" parent="CanvasLayer/Stat_Panel"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Oxygen_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("8_47nki")
-
-[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container"]
-layout_mode = 2
-alignment = 2
-
-[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xx17t")
-theme_override_font_sizes/font_size = 28
-text = "Oxygen:"
-horizontal_alignment = 1
-
-[node name="Oxygen_Bar" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer"]
-custom_minimum_size = Vector2(228, 23)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_d48tj")
-step = 1.0
-value = 84.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Oxygen_Container/HBoxContainer/Oxygen_Bar"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "10/10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HP_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("8_47nki")
-
-[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container"]
-layout_mode = 2
-alignment = 2
-
-[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xx17t")
-theme_override_font_sizes/font_size = 28
-text = "HP:"
-horizontal_alignment = 1
-
-[node name="PlayerHP" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer"]
-custom_minimum_size = Vector2(228, 23)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_5t3yq")
-step = 1.0
-value = 84.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/HP_Container/HBoxContainer/PlayerHP"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "10/10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Hull_HP_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("8_47nki")
-
-[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container"]
-layout_mode = 2
-alignment = 2
-
-[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xx17t")
-theme_override_font_sizes/font_size = 28
-text = "Hull:"
-horizontal_alignment = 1
-
-[node name="HullHp" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer"]
-custom_minimum_size = Vector2(228, 23)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_2dcv0")
-step = 1.0
-value = 84.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Hull_HP_Container/HBoxContainer/HullHp"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "10/10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Fuel_Container" type="PanelContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("8_47nki")
-
-[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container"]
-layout_mode = 2
-alignment = 2
-
-[node name="Label2" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xx17t")
-theme_override_font_sizes/font_size = 28
-text = "Fuel:"
-horizontal_alignment = 1
-
-[node name="Fuel_Bar" type="ProgressBar" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer"]
-custom_minimum_size = Vector2(228, 23)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_n2lo2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_67ikh")
-step = 1.0
-value = 84.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="CanvasLayer/Stat_Panel/Stat_H_Container/Fuel_Container/HBoxContainer/Fuel_Bar"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "10/10"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Stat_Panel" parent="CanvasLayer" instance=ExtResource("21_101j1")]
 
 [node name="Timer" type="Timer" parent="CanvasLayer"]
 process_callback = 0
@@ -291,7 +233,7 @@ one_shot = true
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 6
 
-[node name="Pause" type="Button" parent="CanvasLayer2"]
+[node name="Pause" type="Button" parent="CanvasLayer2" groups=["Buttons"]]
 process_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -336,7 +278,7 @@ text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Return" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer"]
+[node name="Return" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
@@ -344,14 +286,14 @@ theme_override_font_sizes/font_size = 34
 text = "Return
 "
 
-[node name="Save" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer"]
+[node name="Save" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 34
 text = "Save"
 
-[node name="Exit" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer"]
+[node name="Exit" type="Button" parent="CanvasLayer2/PauseContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("19_o3uo1")
 theme_override_fonts/font = ExtResource("6_xx17t")
@@ -386,7 +328,7 @@ theme_override_font_sizes/font_size = 41
 text = "Game Lost"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="CanvasLayer2/PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("19_o3uo1")
