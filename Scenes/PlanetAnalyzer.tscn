@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuirrj6s52dyf"]
+[gd_scene load_steps=12 format=3 uid="uid://cuirrj6s52dyf"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_gvy3k"]
 [ext_resource type="Script" path="res://Scripts/planet_analyzer.gd" id="2_tdmua"]
 [ext_resource type="PackedScene" uid="uid://d1utv5btptm7c" path="res://Scenes/DropContainer.tscn" id="3_eb51e"]
 [ext_resource type="Texture2D" uid="uid://6lcw3avodr51" path="res://Assets/SpaceBG2.png" id="4_tbw4n"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="5_c6tdo"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_imqdv"]
 
 [sub_resource type="Gradient" id="Gradient_jo0lo"]
@@ -41,15 +42,10 @@ adjustment_enabled = true
 adjustment_color_correction = SubResource("GradientTexture2D_vxoyq")
 
 [node name="Planet_Analyzer" type="PanelContainer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -281.0
-offset_top = -232.0
-offset_right = 282.0
-offset_bottom = 232.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -93.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -72,7 +68,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(293, 448)
+size = Vector2i(566, 539)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
@@ -88,22 +84,31 @@ directional_shadow_mode = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
 [node name="PlanetName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("5_c6tdo")
+theme_override_font_sizes/font_size = 46
 text = "Gas Giant"
 horizontal_alignment = 1
 
 [node name="PlanetDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+size_flags_vertical = 6
 text = "blah igahiegheighaeiveaniefawwfawfwafwafawfwafwafwafwa"
 horizontal_alignment = 1
 autowrap_mode = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("5_c6tdo")
+theme_override_font_sizes/font_size = 26
 text = "Possible Drops :"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -111,26 +116,33 @@ vertical_alignment = 1
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 columns = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 6
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_c6tdo")
+theme_override_font_sizes/font_size = 26
 text = "Can Land :"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 button_pressed = true
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 theme = ExtResource("5_imqdv")
+theme_override_fonts/font = ExtResource("5_c6tdo")
 theme_override_font_sizes/font_size = 30
 text = "Back"
 

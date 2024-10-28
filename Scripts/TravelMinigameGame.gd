@@ -28,13 +28,13 @@ func _ready() -> void:
 		SuppliesList.insert(g, randi_range(0, EnemyGoal))
 	for g in EnemyGoal :
 		if (SuppliesList.has(g)):
-				var sup = SuuplyScene.instantiate()
-				add_child(sup)
-				var rand = RandomNumberGenerator.new()
-				fintrans += -10
-				sup.position.z = fintrans
-				sup.position.x = rand.randf_range(-5, 5)
-				sup.position.y = rand.randf_range(-3, 3)
+			var sup = SuuplyScene.instantiate()
+			add_child(sup)
+			var rand = RandomNumberGenerator.new()
+			fintrans += -10
+			sup.position.z = fintrans
+			sup.position.x = rand.randf_range(-5, 5)
+			sup.position.y = rand.randf_range(-3, 3)
 		for z in Difficulty:
 			var enemy = Obst.instantiate() as Obstacle
 			add_child(enemy)

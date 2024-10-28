@@ -2,7 +2,7 @@ extends PanelContainer
 
 class_name Exploration
 
-@onready var items_found_notif: ItemNotif = $"PanelContainer/VBoxContainer/Items Found Notif"
+@onready var items_found_notif: ItemNotif = $"VBoxContainer/PanelContainer/VBoxContainer/Items Found Notif"
 @onready var planet_surface: PlanetSurface = $SubViewportContainer/SubViewport/PlanetSurface
 var SpotT : MapSpotType
 var PlayerHp = 100
@@ -18,11 +18,13 @@ func StartExploration(Spot : MapSpotType, Playership : BaseShip) -> void:
 	var Col1 = mat.get_shader_parameter("color_2")
 	var Col2 = mat.get_shader_parameter("color_3")
 	planet_surface.ApplySurfaceColors(Col1, Col2)
-	$Stat_Panel.StatsUpCust("HP", PlayerHp)
-	$Stat_Panel.StatsUpCust("OXYGEN", PlayerOxy)
+	$VBoxContainer/Stat_Panel.StatsUpCust("HP", PlayerHp)
+	$VBoxContainer/Stat_Panel.StatsUpCust("OXYGEN", PlayerOxy)
 	planet_surface.SetShipVisuals(Playership.ShipScene)
 	
 func Explore() -> void:
+	if (planet_surface.Exploring):
+		return
 	if (PlayerHp <= 10):
 		DoPopUp("Not enough HP to complete action.")
 		return
@@ -31,11 +33,12 @@ func Explore() -> void:
 		return
 	PlayerHp -= 10
 	PlayerOxy -= 5
-	$Stat_Panel.StatsUpCust("HP", PlayerHp)
-	$Stat_Panel.StatsUpCust("OXYGEN", PlayerOxy)
+	$VBoxContainer/Stat_Panel.StatsUpCust("HP", PlayerHp)
+	$VBoxContainer/Stat_Panel.StatsUpCust("OXYGEN", PlayerOxy)
 	var itms = SpotT.GetSpotDrop()
 	Findings.append_array(itms)
 	items_found_notif.AddItems(itms)
+	planet_surface.MoveLocs()
 func DoPopUp(Text : String):
 	var dig = AcceptDialog.new()
 	add_child(dig)
@@ -44,8 +47,9 @@ func DoPopUp(Text : String):
 	
 func _on_leave_pressed() -> void:
 	planet_surface.Takeoff()
-	$PanelContainer/VBoxContainer/HBoxContainer/Explore.disabled = true
-	$PanelContainer/VBoxContainer/HBoxContainer/Leave.disabled = true
+	
+	$VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/Explore.disabled = true
+	$VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/Leave.disabled = true
 func _on_explore_pressed() -> void:
 	Explore()
 	

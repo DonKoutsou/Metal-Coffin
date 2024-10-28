@@ -137,46 +137,19 @@ func FlushInventory() -> void:
 			InventoryContents[g].UpdateAmm(-1)
 func TradeFinished(itms : Array[Item]) -> void:
 	FlushInventory()
-	##var ItmsToAdd : Array[Item] = []
-	# itterate through items already in inventory
-	#for g in InventoryContents.size():
-		#if box empty skip it
-	#	if (InventoryContents[g].ItemC.Ammount == 0):
-	#		continue
-		#save the item on the specific item box
-	#	var ItToCount = InventoryContents[g].ItemC.ItemType
-		#see how many of the item exist in the incomming
-	#	var ItAmm = itms.count(ItToCount)
-		#if inventory has the same ammoun of items we skipp this item
-	#	if (ItAmm == InventoryContents[g].ItemC.Ammount):
-	#		for j in ItAmm:
-	#			itms.erase(ItToCount)
-	#		continue
-	#	else : if (ItAmm > InventoryContents[g].ItemC.Ammount):
-	#		for j in ItAmm - InventoryContents[g].ItemC.Ammount:
-	#			ItmsToAdd.append(ItToCount)
-	#	else : if (ItAmm < InventoryContents[g].ItemC.Ammount):
-	#		for j in InventoryContents[g].ItemC.Ammount - ItAmm:
-	#			RemoveItem(ItToCount)
-	
-	#for g in itms.size():
-	#	if (ItmsToAdd.count(itms[g]) == 0):
-	#		for i in itms.count(itms[g]):
-	#			ItmsToAdd.append(itms[g])
 	AddItems(itms, false)
 
 func OnItemSelected(ItCo : ItemContainer) -> void:
 	var It = ItCo.ItemType as Item
-	var Amm = ItCo.Ammount
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
-		if (desc.DescribedItem == It):
+		if (desc.DescribedContainer.ItemType == It):
 			descriptors[0].queue_free()
 			return
 		descriptors[0].queue_free()
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
-	Descriptor.SetData(It, Amm)
+	Descriptor.SetData(ItCo)
 	$DescSpot.add_child(Descriptor)
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
@@ -210,36 +183,25 @@ func RemoveItem(It : Item):
 			OnItemRemoved.emit(It)
 			inventory_ship_stats.UpdateValues()
 			return
-func UseItem(It : Item, Times : int = 1):
+func UseItem(Cont : ItemContainer, Times : int = 1):
 	for z in Times:
-		if (world.UseItem(It)):
+		if (world.UseItem(Cont.ItemType)):
 			for g in InventoryContents.size():
-				var box = InventoryContents[g]
-				if (box.ItemC.ItemType == It):
+				if (InventoryContents[g].ItemC == Cont):
+					var box = InventoryContents[g]
 					box.UpdateAmm(-1)
-					OnItemRemoved.emit(It)
+					OnItemRemoved.emit(Cont.ItemType)
 					if (box.ItemC.Ammount == 0):
 						var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 						if (descriptors.size() > 0):
 							descriptors[0].queue_free()
 					break
-		else :
-			return
-	#Icon = TextureRect.new()
-	#Icon.texture = It.ItemIcon
-	#get_parent().add_child(Icon)
-	#set_process(true)
+			
 func UpdateShipInfo(ship : BaseShip) -> void:
 	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/TextureRect.texture = ship.Icon
 	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = ship.ShipName
 	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2.text = ship.ShipDesc
-#var Icon : TextureRect
-#func _process(delta: float) -> void:
-#	if (Input.is_action_pressed("Click")):
-#		Icon.global_position = get_global_mouse_position()
-#	else:
-#		set_process(false)
-#		Icon.queue_free()
+
 func _on_inventory_button_pressed() -> void:
 	var IsOpening = !$PanelContainer.visible
 	$PanelContainer.visible = IsOpening

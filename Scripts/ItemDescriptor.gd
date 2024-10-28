@@ -2,32 +2,34 @@ extends PanelContainer
 
 class_name ItemDescriptor
 
-signal ItemUsed(It : UsableItem)
+signal ItemUsed(Cont : ItemContainer, Amm : int)
 signal ItemUpgraded(Part : ShipPart)
 signal ItemDropped(It : Item)
 
-var DescribedItem : Item
-var OwnedAmm : int
+var DescribedContainer : ItemContainer
+#var DescribedItem : Item
+#var OwnedAmm : int
 var UsingAmm : int = 1
 
 func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
-func SetData(It : Item, Amm : int) -> void:
-	DescribedItem = It
-	OwnedAmm = Amm
-	$VBoxContainer/HBoxContainer/VBoxContainer2/TextureRect.texture = It.ItemIcon
-	$VBoxContainer/HBoxContainer/VBoxContainer/ItemName.text = It.ItemName
-	if (It is ShipPart):
-		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = It.ItemDesc + "\nProvides " + var_to_str(It.UpgradeAmm)+ " of "  + It.UpgradeName 
+func SetData(Cont : ItemContainer) -> void:
+	DescribedContainer = Cont
+	#DescribedItem = It
+	#OwnedAmm = Amm
+	$VBoxContainer/HBoxContainer/VBoxContainer2/TextureRect.texture = DescribedContainer.ItemType.ItemIcon
+	$VBoxContainer/HBoxContainer/VBoxContainer/ItemName.text = DescribedContainer.ItemType.ItemName
+	if (DescribedContainer.ItemType is ShipPart):
+		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = DescribedContainer.ItemType.ItemDesc + "\nProvides " + var_to_str(DescribedContainer.ItemType.UpgradeAmm)+ " of "  + DescribedContainer.ItemType.UpgradeName 
 		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = false
-		if (It.UpgradeVersion == null):
+		if (DescribedContainer.ItemType.UpgradeVersion == null):
 			$VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer.visible = false
 			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer.visible = false
 		else:
-			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer/TextureRect.texture = (It.UpgradeItems[0] as Item).ItemIconSmol
-			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer/Label.text = "Upgrade Cost : " + var_to_str(It.UpgradeItems.size()) + "x"
+			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer/TextureRect.texture = (DescribedContainer.ItemType.UpgradeItems[0] as Item).ItemIconSmol
+			$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer/Label.text = "Upgrade Cost : " + var_to_str(DescribedContainer.ItemType.UpgradeItems.size()) + "x"
 	else :
-		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = It.ItemDesc
+		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = DescribedContainer.ItemType.ItemDesc
 		$VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer.visible = false
 		$VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer.visible = false
 func _on_close_pressed() -> void:
@@ -57,18 +59,18 @@ func _on_drop_pressed() -> void:
 	dig.ok_button_text = "Drop"
 	dig.popup_centered()
 func ConfirmDrop() -> void:
-	ItemDropped.emit(DescribedItem)
+	ItemDropped.emit(DescribedContainer.ItemType)
 	queue_free()
 func ConfirmUse() -> void:
-	ItemUsed.emit(DescribedItem, UsingAmm)
+	ItemUsed.emit(DescribedContainer, UsingAmm)
 	UsingAmm = 1
 	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use.text = "Use :" + var_to_str(UsingAmm) + "x"
 func ConfirmUpgrade() -> void:
-	ItemUpgraded.emit(DescribedItem)
+	ItemUpgraded.emit(DescribedContainer.ItemType)
 
 
 func _on_use_more_pressed() -> void:
-	UsingAmm = min(UsingAmm + 1, OwnedAmm)
+	UsingAmm = min(UsingAmm + 1, DescribedContainer.Ammount)
 	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use.text = "Use :" + var_to_str(UsingAmm) + "x"
 	
 func _on_use_less_pressed() -> void:

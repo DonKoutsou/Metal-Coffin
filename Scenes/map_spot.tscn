@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=4 uid="uid://djtjqkmdep3dh"]
+[gd_scene load_steps=22 format=4 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
 [ext_resource type="Texture2D" uid="uid://xvsfs1dbo6f7" path="res://Assets/uncertainty.png" id="2_mt6at"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_uoroi"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_rw3e8"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_1yydb"]
+[ext_resource type="AudioStream" uid="uid://hrwbq66p4fq8" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="6_l7sme"]
 
 [sub_resource type="Image" id="Image_vp57u"]
 data = {
@@ -1175,6 +1176,183 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
+radius = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1suc"]
+resource_local_to_scene = true
+bg_color = Color(0.252517, 0.622353, 0.846633, 1)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.572225, 0.290914, 1)
+border_blend = true
+corner_radius_top_left = 1024
+corner_radius_top_right = 1024
+corner_radius_bottom_right = 1024
+corner_radius_bottom_left = 1024
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="Animation" id="Animation_pxthd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_bottom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PanelContainer2:theme_override_styles/panel:border_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.572225, 0.290914, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fxdlk"]
+resource_name = "SpotFound"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.76667, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_left")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 200.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_top")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 200.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_right")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 200.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_margin_bottom")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 200.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PanelContainer2:theme_override_styles/panel:border_color")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.06667, 2.73333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.252517, 0.622353, 0.846633, 1), Color(0.252517, 0.622353, 0.846633, 1), Color(0.253, 0.622, 0.847, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4iew2"]
+_data = {
+"RESET": SubResource("Animation_pxthd"),
+"SpotFound": SubResource("Animation_fxdlk")
+}
+
 [node name="MapSpot" type="Control"]
 layout_mode = 3
 anchors_preset = 8
@@ -1187,6 +1365,7 @@ grow_vertical = 2
 script = ExtResource("1_x7uyn")
 
 [node name="Panel" type="TextureRect" parent="."]
+modulate = Color(0.252517, 0.622353, 0.846633, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1259,6 +1438,59 @@ theme_override_fonts/font = ExtResource("2_uoroi")
 theme_override_font_sizes/font_size = 22
 text = "Analyze"
 
+[node name="VisibilityNotif" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibilityNotif"]
+shape = SubResource("CircleShape2D_4ymfd")
+
+[node name="FuelNotif" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FuelNotif"]
+shape = SubResource("CircleShape2D_4ymfd")
+
+[node name="AlanyzeNotif" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlanyzeNotif"]
+shape = SubResource("CircleShape2D_4ymfd")
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n1suc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4iew2")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_l7sme")
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/VisitButton" to="." method="_on_visit_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/LandButton" to="." method="_on_land_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/AnalyzeButton" to="." method="_on_analyze_button_pressed"]
+[connection signal="area_entered" from="VisibilityNotif" to="." method="_on_visibility_notif_area_entered"]
+[connection signal="area_exited" from="VisibilityNotif" to="." method="_on_visibility_notif_area_exited"]
+[connection signal="area_entered" from="FuelNotif" to="." method="_on_fuel_notif_area_entered"]
+[connection signal="area_exited" from="FuelNotif" to="." method="_on_fuel_notif_area_exited"]
+[connection signal="area_entered" from="AlanyzeNotif" to="." method="_on_alanyze_notif_area_entered"]
+[connection signal="area_exited" from="AlanyzeNotif" to="." method="_on_alanyze_notif_area_exited"]

@@ -25,48 +25,48 @@
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="19_o3uo1"]
 [ext_resource type="PackedScene" uid="uid://crwbxcbj81jvc" path="res://Scenes/stat_panel.tscn" id="21_101j1"]
 
-[sub_resource type="Resource" id="Resource_xqiss"]
+[sub_resource type="Resource" id="Resource_dknfh"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 1200.0
 CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("9_7fm4g")]([])
-ItemIcon = ExtResource("10_vufmu")
+ItemIcon = ExtResource("16_jmu5m")
 ItemName = "High Range Radar"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_x3rxy"]
+[sub_resource type="Resource" id="Resource_6p8tg"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 800.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_xqiss")
+UpgradeVersion = SubResource("Resource_dknfh")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
-ItemIcon = ExtResource("10_vufmu")
+ItemIcon = ExtResource("16_jmu5m")
 ItemName = "Medium Range Radar"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_q2omo"]
+[sub_resource type="Resource" id="Resource_n8pao"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 400.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_x3rxy")
+UpgradeVersion = SubResource("Resource_6p8tg")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
-ItemIcon = ExtResource("10_vufmu")
+ItemIcon = ExtResource("16_jmu5m")
 ItemName = "Short Range Radar"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_xbv52"]
+[sub_resource type="Resource" id="Resource_k1umm"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "CRYO"
@@ -79,7 +79,7 @@ ItemDesc = "Allows for travel without oxygen loss"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_ur3gt"]
+[sub_resource type="Resource" id="Resource_uvstk"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
@@ -92,13 +92,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_fp4co"]
+[sub_resource type="Resource" id="Resource_rpa5b"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 200.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_ur3gt")
+UpgradeVersion = SubResource("Resource_uvstk")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("14_24pwn")
 ItemName = "Medium Fuel Tank"
@@ -106,13 +106,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_eru2t"]
+[sub_resource type="Resource" id="Resource_25vic"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 100.0
 CurrentVal = 100.0
-UpgradeVersion = SubResource("Resource_fp4co")
+UpgradeVersion = SubResource("Resource_rpa5b")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("14_24pwn")
 ItemName = "Fuel Tank"
@@ -120,7 +120,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_oi6mn"]
+[sub_resource type="Resource" id="Resource_aqtri"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -133,13 +133,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_8x3j1"]
+[sub_resource type="Resource" id="Resource_xf35m"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_oi6mn")
+UpgradeVersion = SubResource("Resource_aqtri")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("15_exmjr")
 ItemName = "Medium Efficiency Engine"
@@ -147,13 +147,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_o4j3o"]
+[sub_resource type="Resource" id="Resource_uutoc"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_8x3j1")
+UpgradeVersion = SubResource("Resource_xf35m")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("15_exmjr")
 ItemName = "Engine"
@@ -161,42 +161,42 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_a6oya"]
+[sub_resource type="Resource" id="Resource_ga4uv"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 900.0
 CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("9_7fm4g")]([])
-ItemIcon = ExtResource("16_jmu5m")
+ItemIcon = ExtResource("10_vufmu")
 ItemName = "High Range Analyzer"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_f57fd"]
+[sub_resource type="Resource" id="Resource_j0jhx"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 600.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_a6oya")
+UpgradeVersion = SubResource("Resource_ga4uv")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
-ItemIcon = ExtResource("16_jmu5m")
+ItemIcon = ExtResource("10_vufmu")
 ItemName = "Medium Range Analyzer"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_mirbx"]
+[sub_resource type="Resource" id="Resource_cewrj"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_f57fd")
+UpgradeVersion = SubResource("Resource_j0jhx")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
-ItemIcon = ExtResource("16_jmu5m")
+ItemIcon = ExtResource("10_vufmu")
 ItemName = "Short Range Analyzer"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
@@ -218,16 +218,16 @@ layer = 2
 
 [node name="Map" parent="CanvasLayer" instance=ExtResource("2_dh8se")]
 mouse_filter = 2
-MapSize = 150
+MapSize = 240
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_82nvh")]
-StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_q2omo"), SubResource("Resource_xbv52"), SubResource("Resource_eru2t"), SubResource("Resource_o4j3o"), SubResource("Resource_mirbx"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("16_hw203"), ExtResource("16_hw203"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo")])
+StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_n8pao"), SubResource("Resource_k1umm"), SubResource("Resource_25vic"), SubResource("Resource_uutoc"), SubResource("Resource_cewrj"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("16_hw203"), ExtResource("16_hw203"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo")])
 
 [node name="Stat_Panel" parent="CanvasLayer" instance=ExtResource("21_101j1")]
 
 [node name="Timer" type="Timer" parent="CanvasLayer"]
 process_callback = 0
-wait_time = 2.0
+wait_time = 10.0
 one_shot = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]

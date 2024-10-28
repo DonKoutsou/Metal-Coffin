@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://dxg1gr0twgav3"]
 
-[ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="1_e2od7"]
+[ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_oa86g"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_52jbd"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_m1dc1"]
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_r1wno"]
@@ -14,7 +14,7 @@ UpgradeAmm = 800.0
 CurrentVal = 0.0
 UpgradeVersion = ExtResource("4_6ok2g")
 UpgradeItems = Array[ExtResource("2_52jbd")]([ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1"), ExtResource("3_m1dc1")])
-ItemIcon = ExtResource("1_e2od7")
+ItemIcon = ExtResource("1_oa86g")
 ItemName = "Medium Range Radar"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1

@@ -104,11 +104,12 @@ func OnItemRemoved(It : Item) -> void:
 func ItemBuffStat(UpName : String) -> void:
 	if (UpName == "VIZ_RANGE"):
 		$CanvasLayer/Map.UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
-	if (UpName == "ANALYZE_RANGE"):
+	else :if (UpName == "ANALYZE_RANGE"):
 		$CanvasLayer/Map.UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
-	else :if (UpName == "FUEL_EFFICIENCY"):
+	else :if (UpName == "FUEL_EFFICIENCY" or UpName == "FUEL"):
 		$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
-	
+	#else :if  (UpName == "FUEL"):
+		#$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Pause")):
 		Pause()
@@ -148,14 +149,20 @@ func UpdateStat(NewStat : float, StatN : String):
 	ShipDat.UpdateStatCurrentValue(StatN, NewStat)
 	StatsUpdated.emit(StatN)
 	if (StatN == "FUEL"):
-		$CanvasLayer/Map.ToggleClose()
+		#$CanvasLayer/Map.ToggleClose()
 		$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 ##Need to gather this around, its shit
 var fueltoConsume
-var StopToFlyTo
+var FuelOnDepart
+var StopToFlyTo : MapSpot
+var PlPos : Vector2
+var Traveling = false
 func PrepareForJourney(st : MapSpot, stagenum : int, FuelToUse : float, O2ToUse : float):
 	StopToFlyTo = st
+	PlPos = GetMap().GetPlayerPos()
+	GetMap().PlayerLookAt(StopToFlyTo.position)
 	Runningstage = stagenum
+	timer.wait_time = PlPos.distance_to(StopToFlyTo.position) / 20
 	if (ShipDat.GetStat("CRYO").GetStat() == 0):
 		if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= O2ToUse):
 			DoPopUp("Not enough oxygen to do action.")
@@ -167,8 +174,8 @@ func PrepareForJourney(st : MapSpot, stagenum : int, FuelToUse : float, O2ToUse 
 	if (ShipDat.GetStat("FUEL").CurrentVelue < FuelToUse):
 		DoPopUp("Not enough fuel to do action.")
 		return
-		
 	ConsumeFuel(FuelToUse)
+	Traveling = true
 func DoPopUp(Text : String):
 	var dig = AcceptDialog.new()
 	add_child(dig)
@@ -185,17 +192,24 @@ func StartStage() -> void:
 	sc.SetDestinationScene(StopToFlyTo.SpotType.Scene)
 	Mapz.visible = false
 	$CanvasLayer.visible = false
+	Mapz.set_process(false)
+	Mapz.set_process_input(false)
 	
 func ConsumeFuel(Fuel : float) -> void:
+	await Mapz.OnLookAtEnded
 	fueltoConsume = Fuel
+	FuelOnDepart = ShipDat.GetStat("FUEL").GetCurrentValue()
 	ShipDat.AddToStatCurrentValue("FUEL", -Fuel)
-	Mapz.ToggleClose()
 	set_physics_process(true)
 	timer.start()
 
 func _physics_process(_delta: float) -> void:
-	var newfuel = ShipDat.GetStat("FUEL").GetCurrentValue() + ((timer.time_left/timer.wait_time)  * fueltoConsume)
+	var timething = timer.time_left/timer.wait_time
+	var timething2 = (timer.wait_time - timer.time_left) / timer.wait_time
+	var newfuel = (FuelOnDepart - fueltoConsume) + (timething  * fueltoConsume)
+	ShipDat.UpdateStatCurrentValue("FUEL", newfuel)
 	Mapz.UpdateFuelRange(newfuel, ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
+	GetMap().SetPlayerPos(PlPos +  (timething2 * (StopToFlyTo.position - PlPos)))
 	#fuel_bar.value = newfuel
 	#(fuel_bar.get_child(0) as Label).text = var_to_str(roundi(newfuel) ) + "/" + var_to_str((roundi(ShipDat.GetStat("FUEL").GetStat())))
 #/////////////////////////////////////////////////////////////////////////////////////
@@ -226,7 +240,7 @@ var Runningstage = 0
 func StageDone(victory : bool, supplies : Array[Item], HullHP : int) -> void:
 	if (victory):
 		GetInventory().AddItems(supplies)
-		Mapz.StageCleared(Runningstage)
+		Mapz.Arrival(Runningstage)
 	else :
 		Mapz.StageFailed()
 		GameLost("Your ship got destroyed")
@@ -238,6 +252,9 @@ func StageDone(victory : bool, supplies : Array[Item], HullHP : int) -> void:
 		GameLost("You have run out of oxygen")
 
 func UseItem(It : UsableItem) -> bool:
+	if (Traveling):
+		DoPopUp("Cant use items when traveling.")
+		return false
 	var statname = It.StatUseName
 	if (ShipDat.GetStat(statname).GetCurrentValue() == ShipDat.GetStat(statname).GetStat()):
 		DoPopUp(statname + " is already full")
@@ -249,6 +266,7 @@ func UseItem(It : UsableItem) -> bool:
 func _on_timer_timeout() -> void:
 	set_physics_process(false)
 	StartStage()
+	Traveling = false
 	
 func GameLost(reason : String):
 	get_tree().paused = true
