@@ -1,3 +1,4 @@
+ShaderMaterial
 BaseShip
 ShipData
 ShipStat

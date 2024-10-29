@@ -4,15 +4,17 @@ class_name Map
 @export var SpotScene: PackedScene
 @export var MapSpotTypes : Array[MapSpotType]
 @export var SpecialMapSpotTypes : Array[MapSpotType]
+@export var CommetMapSpot : MapSpotType
 @export var FinalSpotType : MapSpotType
 @export var MapSize = 20
 @export var AnalyzerScene : PackedScene
 
-@onready var player_ship: Node2D = $MapSpots/PlayerShip
+@onready var player_ship: PlayerShip = $MapSpots/PlayerShip
+
 
 var Travelling = false
 
-signal StageSellected(st : MapSpotType, stNum : int, fuelcons : float, o2Cons : float)
+signal AsteroidBeltArrival()
 signal StageSearched(Spt : MapSpotType)
 signal ShipSearched(Ship : BaseShip)
 
@@ -24,10 +26,11 @@ func _ready() -> void:
 	if (SpotList.size() == 0):
 		GenerateMap()
 	var shipdata = ShipData.GetInstance()
-	UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
-	UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
-	UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
+	player_ship.UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
+	player_ship.UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
+	player_ship.UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	GalaxyMat = $ColorRect.material
+	set_physics_process(false)
 
 func GetPlayerPos() -> Vector2:
 	return $MapSpots/PlayerShip.position
@@ -38,14 +41,17 @@ func PlayerLookAt(LookPos : Vector2) -> void:
 	var tw = create_tween()
 	tw.tween_property(player_ship, "rotation", player_ship.position.angle_to_point(LookPos), 1)
 	tw.connect("finished", LookAtEnded)
-	
+func PlayerRotate(Rotation : float) -> void:
+	var tw = create_tween()
+	tw.tween_property(player_ship, "rotation", Rotation, 1)
 func SetPlayerPos(pos : Vector2) -> void:
 	$MapSpots/PlayerShip.position = pos
-	
 func UpdateShipIcon(Tex : Texture) -> void:
 	$MapSpots/PlayerShip/PlayerShipSpr.texture = Tex
 	
 func _input(event: InputEvent) -> void:
+	if (ChangingCourse or MouseInUI):
+		return
 	if (event is InputEventScreenDrag):
 		var maxposX = $MapSpots/SpotSpot.get_child($MapSpots/SpotSpot.get_child_count()-1).position.x - ($MapSpots.size.x - 400)
 		var rel = event.relative
@@ -94,7 +100,7 @@ func GenerateMap() -> void:
 	for g in MapSize :
 		var sc = SpotScene.instantiate() as MapSpot
 		$MapSpots/SpotSpot.add_child(sc)
-		sc.connect("MapPressed", DepartForLocation)
+		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
 		var type
@@ -111,52 +117,66 @@ func GenerateMap() -> void:
 			pos =Vector2(randf_range(VP.x * g,VP.x * (g + 2)) + 50, randf_range(-500, VP.y  +500))
 		sc.position = pos
 		SpotList.append(sc)
+		
+		var asteroidscene = SpotScene.instantiate() as MapSpot
+		$MapSpots/SpotSpot.add_child(asteroidscene)
+		asteroidscene.connect("SpotAproached", Arrival)
+		asteroidscene.connect("SpotSearched", SearchLocation)
+		asteroidscene.connect("SpotAnalazyed", AnalyzeLocation)
+		asteroidscene.SetSpotData(CommetMapSpot)
+
+		var ateroidpos = Vector2(randf_range(VP.x *g, VP.x * (g + 2)) + 50, randf_range(-500, VP.y +500))
+		while (HasClose(ateroidpos)):
+			ateroidpos =Vector2(randf_range(VP.x * g,VP.x * (g + 2)) + 50, randf_range(-500, VP.y  +500))
+		asteroidscene.position = ateroidpos
+		SpotList.append(asteroidscene)
+		
+func HasClose(pos : Vector2) -> bool:
+	var b= false
+	for z in SpotList.size():
+		if (pos.distance_to(SpotList[z].position) < 80):
+			b = true
+	return b	
 	
 #called by World after stage is finished and we have reached the new planet
-func Arrival(st : int)	-> void:
-	# enable inputs
-	Travelling = false
-	set_process(true)
-	set_process_input(true)
-	var spot = SpotList[st] as MapSpot
-	while spot.SpotType.FullName == "Black Whole":
-		spot = SpotList.pick_random()
-		while abs(SpotList.find(spot) - currentstage) > 25 :
-			spot = SpotList.pick_random()
-	currentstage = st
-	if (currentstage >= SpotList.size()):
-		return
-	if (!spot.Visited):
-		spot.ToggleLandButton(true)
-	spot.ToggleVisitButton(false)
-	
+func Arrival(Spot : MapSpot)	-> void:
+	if Spot.SpotType.FullName == "Black Whole":
+		var randspot = SpotList.pick_random() as MapSpot
+		while abs(SpotList.find(randspot) - SpotList.find(Spot)) > 25 or randspot.SpotType.FullName == "Black Whole":
+			randspot = SpotList.pick_random() as MapSpot
+		player_ship.global_position = randspot.global_position
+		PopUpManager.GetInstance().DoPopUp("You've entered a black whole and have been teleported away")
+		HaltShip()
+	if Spot.SpotType.GetEnumString() == "ASTEROID_BELT":
+		Spot.queue_free()
+		AsteroidBeltArrival.emit()
+		HaltShip()
 func StageFailed() -> void:
 	# enable inputs
 	set_process(true)
 	set_process_input(true)
 	Travelling = false
 	
-func DepartForLocation(stage :MapSpot) -> void:
-	if (Travelling):
-		return
-	var spotprev = SpotList[currentstage] as MapSpot
-	spotprev.ToggleVisitButton(true)
-	spotprev.ToggleLandButton(false)
-	Travelling = true
-	var stagenum = SpotList.find(stage)
-	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
-	var o2 = player_ship.global_position.distance_to(stage.global_position) / 40
-	StageSellected.emit(stage, stagenum, fuel, o2)
+#func DepartForLocation(stage :MapSpot) -> void:
+#	if (Travelling):
+#		return
+	#var spotprev = SpotList[currentstage] as MapSpot
+#	Travelling = true
+#	var stagenum = SpotList.find(stage)
+#	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
+#	var o2 = player_ship.global_position.distance_to(stage.global_position) / 40
+#	StageSellected.emit(stage, stagenum, fuel, o2)
 	# enable inputs
 	#set_process(false)
 	
-func AnalyzeLocation(Type : MapSpotType):
+func AnalyzeLocation(Spot : MapSpot):
 	var analyzer = AnalyzerScene.instantiate() as PlanetAnalyzer
-	analyzer.SetVisuals(Type)
-	add_child(analyzer)
+	analyzer.SetVisuals(Spot)
+	get_parent().add_child(analyzer)
 	
 func SearchLocation(stage : MapSpot):
 	if (Travelling):
+		PopUpManager.GetInstance().DoPopUp("Stop the ship to land.")
 		return
 	#stage.ToggleLandButton(false)
 	if (stage.SpotType is Ship_MapSpotType):
@@ -164,32 +184,6 @@ func SearchLocation(stage : MapSpot):
 	else:
 		StageSearched.emit(stage)
 	stage.OnSpotVisited()
-	
-func HasClose(pos : Vector2) -> bool:
-	var b= false
-	for z in SpotList.size():
-		if (pos.distance_to(SpotList[z].position) < 80):
-			b = true
-	return b
-	
-func UpdateFuelRange(fuel : float, fuel_ef : float):
-	var distall = fuel * 10 * fuel_ef
-	($MapSpots/PlayerShip/Fuel/CollisionShape2D.shape as CircleShape2D).radius = distall
-	$MapSpots/PlayerShip/Fuel/Fuel_Range.size = Vector2(distall, distall) * 2
-	$MapSpots/PlayerShip/Fuel/Fuel_Range/Label.visible = distall > 100
-	$MapSpots/PlayerShip/Fuel/Fuel_Range.position = Vector2(-(distall), -(distall))
-
-func UpdateVizRange(rang : float):
-	($MapSpots/PlayerShip/Radar/CollisionShape2D.shape as CircleShape2D).radius = rang
-	$MapSpots/PlayerShip/Radar/Radar_Range.size = Vector2(rang, rang) * 2
-	$MapSpots/PlayerShip/Radar/Radar_Range/Label2.visible = rang > 100
-	$MapSpots/PlayerShip/Radar/Radar_Range.position = Vector2(-(rang), -(rang))
-
-func UpdateAnalyzerRange(rang : float):
-	($MapSpots/PlayerShip/Analyzer/CollisionShape2D.shape as CircleShape2D).radius = rang
-	$MapSpots/PlayerShip/Analyzer/Analyzer_Range.size = Vector2(rang, rang) * 2
-	$MapSpots/PlayerShip/Analyzer/Analyzer_Range/Label2.visible = rang > 100
-	$MapSpots/PlayerShip/Analyzer/Analyzer_Range.position = Vector2(-(rang), -(rang))
 
 #Save/Load///////////////////////////////////////////
 func GetSaveData() ->SaveData:
@@ -197,6 +191,8 @@ func GetSaveData() ->SaveData:
 	dat.DataName = "MapSpots"
 	var Datas : Array[Resource] = []
 	for g in SpotList.size():
+		if (SpotList[g] == null):
+			continue
 		Datas.append(SpotList[g].GetSaveData())
 	dat.Datas = Datas
 	return dat
@@ -205,7 +201,8 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		var dat = Data[g] as MapSpotSaveData
 		var sc = SpotScene.instantiate() as MapSpot
 		$MapSpots/SpotSpot.add_child(sc)
-		sc.connect("MapPressed", Arrival)
+		#sc.connect("MapPressed", Arrival)
+		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
 		var type = dat.SpotType
@@ -213,13 +210,70 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		sc.Pos = dat.SpotLoc
 		SpotList.insert(g, sc)
 		if (dat.Seen):
-			sc.OnSpotSeen()
+			sc.OnSpotSeen(false)
 		if (dat.Visited):
 			sc.OnSpotVisited()
+		if (dat.Analyzed):
+			sc.OnSpotAnalyzed()
 #//////////////////////////////////////////////////////////
-func _on_player_viz_notifier_screen_entered() -> void:
+func PlayerEnteredScreen() -> void:
 	$ArrowSprite.visible = false
 
 
-func _on_player_viz_notifier_screen_exited() -> void:
+func PlayerExitedScreen() -> void:
 	$ArrowSprite.visible = true
+
+var ChangingCourse = false
+var MouseInUI = false
+func _on_steer_slider_value_changed(value: float) -> void:
+	#ChangingCourse = true
+	#var slidersize = $SteerSlider.size.x
+	#$SteerSlider/Label.text = var_to_str(value) + "°"
+	#$SteerSlider/Label.position.x = (slidersize / 360) * value + (slidersize/2) - ($SteerSlider/Label.size.x / 2)
+	PlayerRotate(deg_to_rad(value))
+var speed = 0.0
+func _physics_process(_delta: float) -> void:
+	var fuel = player_ship.global_position.distance_to($MapSpots/PlayerShip/Node2D.global_position) / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
+	if (ShipData.GetInstance().GetStat("FUEL").GetCurrentValue() < fuel):
+		$PanelContainer/HBoxContainer/AccellerationSlider.value = 0
+		PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
+		set_physics_process(false)
+		return
+	player_ship.global_position = $MapSpots/PlayerShip/Node2D.global_position
+	var shdat = ShipData.GetInstance()
+	shdat.AddToStatCurrentValue("FUEL", -fuel)
+	player_ship.UpdateFuelRange(shdat.GetStat("FUEL").GetCurrentValue(), shdat.GetStat("FUEL_EFFICIENCY").GetStat())
+func HaltShip():
+	speed = 0
+	Travelling = false
+	set_physics_process(false)
+	ChangingCourse = false
+	$MapSpots/PlayerShip/Node2D.position.x = speed / 100
+	var slidersize = $PanelContainer/HBoxContainer/AccellerationSlider.size.y
+	$PanelContainer/HBoxContainer/AccellerationSlider.set_value_no_signal(0)
+	$PanelContainer/HBoxContainer/AccellerationSlider/Label.position.y = -(slidersize / 50) * speed + (slidersize) - ($PanelContainer/HBoxContainer/AccellerationSlider/Label.size.y / 2)
+	$PanelContainer/HBoxContainer/AccellerationSlider/Label.text = var_to_str(roundi(speed))
+func _on_accelleration_slider_value_changed(value: float) -> void:
+	ChangingCourse = true
+	speed = value
+	if (speed == 0):
+		Travelling = false
+		set_physics_process(false)
+	else:
+		Travelling = true
+		set_physics_process(true)
+	$MapSpots/PlayerShip/Node2D.position.x = value / 100
+	var slidersize = $PanelContainer/HBoxContainer/AccellerationSlider.size.y
+	$PanelContainer/HBoxContainer/AccellerationSlider/Label.position.y = -(slidersize / 50) * value + (slidersize) - ($PanelContainer/HBoxContainer/AccellerationSlider/Label.size.y / 2)
+	$PanelContainer/HBoxContainer/AccellerationSlider/Label.text = var_to_str(roundi(value))
+	
+func _on_accelleration_slider_mouse_entered() -> void:
+	MouseInUI = true
+func _on_accelleration_slider_mouse_exited() -> void:
+	MouseInUI = false
+func _on_steer_slider_mouse_entered() -> void:
+	MouseInUI = true
+func _on_steer_slider_mouse_exited() -> void:
+	MouseInUI = false
+func _on_accelleration_slider_drag_ended(_value_changed: bool) -> void:
+	ChangingCourse = false

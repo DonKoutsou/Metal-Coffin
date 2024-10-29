@@ -8,7 +8,7 @@
 resource_local_to_scene = true
 script = ExtResource("3_ypyoy")
 UpgradeName = "VIZ_RANGE"
-UpgradeAmm = 1200.0
+UpgradeAmm = 800.0
 CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("2_5w58m")]([])
 ItemIcon = ExtResource("1_2a3m1")

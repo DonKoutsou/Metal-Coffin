@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://bddhd7ec0loxy"]
+
+[ext_resource type="ArrayMesh" uid="uid://c3r8p45nush07" path="res://Assets/Rocks/Rock1_Lod2.tres" id="1_sllop"]
+[ext_resource type="ArrayMesh" uid="uid://d0g25ewvmqv4c" path="res://Assets/Rocks/Rock2_Lod2.tres" id="2_r1eut"]
+[ext_resource type="ArrayMesh" uid="uid://c1o27w2a67o55" path="res://Assets/Rocks/Rock3_Lod2.tres" id="3_rmawo"]
+[ext_resource type="ArrayMesh" uid="uid://bboo48m72ko2t" path="res://Assets/Rocks/Rock4_Lod2.tres" id="4_l0vuj"]
+[ext_resource type="ArrayMesh" uid="uid://cyueo4jl36y8r" path="res://Assets/Rocks/Rock5_Lod2.tres" id="5_2667t"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ps3gg"]
+frequency = 0.0125
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v5lr5"]
+seamless = true
+noise = SubResource("FastNoiseLite_ps3gg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljbjk"]
+albedo_texture = SubResource("NoiseTexture2D_v5lr5")
+metallic_specular = 0.41
+uv1_triplanar = true
+
+[node name="Star" type="MeshInstance3D"]
+transform = Transform3D(0.786802, -0.551115, 0.277874, 0.362254, 0.776857, 0.515038, -0.499713, -0.304572, 0.810878, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ljbjk")
+cast_shadow = 0
+mesh = ExtResource("1_sllop")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.372947, -7.45058e-09, -1.49012e-08, -2.6077e-08, 0.372947, 0, -4.47035e-08, -2.98023e-08, 0.372947, 0.985837, 4.04027, -0.231656)
+material_override = SubResource("StandardMaterial3D_ljbjk")
+mesh = ExtResource("1_sllop")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.372947, -1.86265e-08, -1.49012e-08, -4.09782e-08, 0.372947, 0, -4.47035e-08, -5.21541e-08, 0.372947, -2.40682, -2.80007, 2.45006)
+material_override = SubResource("StandardMaterial3D_ljbjk")
+mesh = ExtResource("2_r1eut")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0576264, -0.0546236, -0.14295, -0.013745, 0.15398, -0.0532973, 0.152412, -0.00676659, -0.0588552, -2.66299, 1.16895, -1.57077)
+material_override = SubResource("StandardMaterial3D_ljbjk")
+mesh = ExtResource("3_rmawo")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0909479, -0.0862089, -0.225609, -0.0216928, 0.243016, -0.0841155, 0.240542, -0.0106793, -0.0928873, 1.36479, 2.15287, 1.15034)
+material_override = SubResource("StandardMaterial3D_ljbjk")
+mesh = ExtResource("3_rmawo")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0979426, -0.0928391, -0.24296, -0.0233612, 0.261706, -0.0905848, 0.259042, -0.0115006, -0.100031, 1.71041, -0.497142, 3.07923)
+material_override = SubResource("StandardMaterial3D_ljbjk")
+mesh = ExtResource("4_l0vuj")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0979426, -0.0928391, -0.24296, -0.0233612, 0.261706, -0.0905848, 0.259042, -0.0115006, -0.100031, -2.36724, -1.49689, -2.5017)
+material_override = SubResource("StandardMaterial3D_ljbjk")
+mesh = ExtResource("5_2667t")

@@ -18,6 +18,8 @@ func SetData(Cont : ItemContainer) -> void:
 	#DescribedItem = It
 	#OwnedAmm = Amm
 	$VBoxContainer/HBoxContainer/VBoxContainer2/TextureRect.texture = DescribedContainer.ItemType.ItemIcon
+	if (DescribedContainer.ItemType is UsableItem):
+		$VBoxContainer/HBoxContainer/VBoxContainer2/TextureRect.modulate = DescribedContainer.ItemType.ItecColor
 	$VBoxContainer/HBoxContainer/VBoxContainer/ItemName.text = DescribedContainer.ItemType.ItemName
 	if (DescribedContainer.ItemType is ShipPart):
 		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = DescribedContainer.ItemType.ItemDesc + "\nProvides " + var_to_str(DescribedContainer.ItemType.UpgradeAmm)+ " of "  + DescribedContainer.ItemType.UpgradeName 
@@ -36,28 +38,13 @@ func _on_close_pressed() -> void:
 	queue_free()
 	
 func _on_use_pressed() -> void:
-	var dig = ConfirmationDialog.new()
-	dig.connect("confirmed", ConfirmUse)
-	add_child(dig)
-	dig.dialog_text = "Are you sure you want to use this item ?"
-	dig.ok_button_text = "Use"
-	dig.popup_centered()
+	PopUpManager.GetInstance().DoConfirm("Are you sure you want to use this item ?", "Use", ConfirmUse)
 
 func _on_upgrade_pressed() -> void:
-	var dig = ConfirmationDialog.new()
-	dig.connect("confirmed", ConfirmUpgrade)
-	add_child(dig)
-	dig.dialog_text = "Are you sure you want to upgrade this item ?"
-	dig.ok_button_text = "Upgrade"
-	dig.popup_centered()
+	PopUpManager.GetInstance().DoConfirm("Are you sure you want to upgrade this item ?", "Upgrade", ConfirmUpgrade)
 
 func _on_drop_pressed() -> void:
-	var dig = ConfirmationDialog.new()
-	dig.connect("confirmed", ConfirmDrop)
-	add_child(dig)
-	dig.dialog_text = "Are you sure you want to drop this item ?"
-	dig.ok_button_text = "Drop"
-	dig.popup_centered()
+	PopUpManager.GetInstance().DoConfirm("Are you sure you want to drop this item ?", "Drop", ConfirmDrop)
 func ConfirmDrop() -> void:
 	ItemDropped.emit(DescribedContainer.ItemType)
 	queue_free()

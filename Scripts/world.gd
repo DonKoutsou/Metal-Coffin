@@ -72,7 +72,8 @@ func LoadData(Data : Resource) -> void:
 	UpdateStat(dat.Value[3], "FUEL")
 
 func _ready() -> void:
-	Mapz.connect("StageSellected", PrepareForJourney)
+	Mapz.connect("AsteroidBeltArrival", StartStage)
+	#Mapz.connect("StageSellected", PrepareForJourney)
 	Mapz.connect("StageSearched", StageSearch)
 	Mapz.connect("ShipSearched", ShipSearched)
 	set_physics_process(false)
@@ -103,11 +104,11 @@ func OnItemRemoved(It : Item) -> void:
 		
 func ItemBuffStat(UpName : String) -> void:
 	if (UpName == "VIZ_RANGE"):
-		$CanvasLayer/Map.UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
+		$CanvasLayer/Map.player_ship.UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
 	else :if (UpName == "ANALYZE_RANGE"):
-		$CanvasLayer/Map.UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
+		$CanvasLayer/Map.player_ship.UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
 	else :if (UpName == "FUEL_EFFICIENCY" or UpName == "FUEL"):
-		$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
+		$CanvasLayer/Map.player_ship.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 	#else :if  (UpName == "FUEL"):
 		#$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 func _input(event: InputEvent) -> void:
@@ -125,6 +126,7 @@ func StartFight(PossibleReward : Array[Item]) -> void:
 	BScene.PlayerHp = ShipDat.HP
 	$CanvasLayer.add_child(BScene)
 	BScene.connect("OnBattleEnded", BattleEnded)
+	
 func StartExploration(Spot : MapSpot) -> void:
 	var Escene = ExplorationScene.instantiate() as Exploration
 	Escene.PlayerHp = ShipDat.GetStat("HP").CurrentVelue
@@ -132,6 +134,9 @@ func StartExploration(Spot : MapSpot) -> void:
 	$CanvasLayer.add_child(Escene)
 	Escene.StartExploration(Spot.SpotType, CurrentShip)
 	Escene.connect("OnExplorationEnded", ExplorationEnded)
+	if (Spot.SpotType.HasAtmoshere):
+		ShipData.GetInstance().UpdateStatCurrentValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
+		PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
 
 func ExplorationEnded(RemainingHP : int, RemainingOxy : int, SupplyRew : Array[Item]) -> void:
 	UpdateStat(RemainingHP, "HP")
@@ -150,7 +155,7 @@ func UpdateStat(NewStat : float, StatN : String):
 	StatsUpdated.emit(StatN)
 	if (StatN == "FUEL"):
 		#$CanvasLayer/Map.ToggleClose()
-		$CanvasLayer/Map.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
+		$CanvasLayer/Map.player_ship.UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 ##Need to gather this around, its shit
 var fueltoConsume
 var FuelOnDepart
@@ -165,31 +170,27 @@ func PrepareForJourney(st : MapSpot, stagenum : int, FuelToUse : float, O2ToUse 
 	timer.wait_time = PlPos.distance_to(StopToFlyTo.position) / 20
 	if (ShipDat.GetStat("CRYO").GetStat() == 0):
 		if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= O2ToUse):
-			DoPopUp("Not enough oxygen to do action.")
+			PopUpManager.GetInstance().DoPopUp("Not enough oxygen to do action.")
 			return
 		UpdateStat(ShipDat.GetStat("OXYGEN").GetCurrentValue() - O2ToUse, "OXYGEN")
 		#if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 0):
 			#GameLost("You have run out of oxygen")
 			#return
 	if (ShipDat.GetStat("FUEL").CurrentVelue < FuelToUse):
-		DoPopUp("Not enough fuel to do action.")
+		PopUpManager.GetInstance().DoPopUp("Not enough fuel to do action.")
 		return
 	ConsumeFuel(FuelToUse)
 	Traveling = true
-func DoPopUp(Text : String):
-	var dig = AcceptDialog.new()
-	add_child(dig)
-	dig.dialog_text = Text
-	dig.popup_centered()
+
 func StartStage() -> void:
 	var sc = scene.instantiate() as TravelMinigameGame
 	sc.CharacterScene = CurrentShip.ShipScene
-	sc.EnemyGoal = fueltoConsume
+	#sc.EnemyGoal = fueltoConsume
 	sc.Hull = ShipDat.GetStat("HULL").GetCurrentValue()
 	sc.HullMax = ShipDat.GetStat("HULL").GetStat()
 	sc.connect("OnGameEnded", StageDone)
 	add_child(sc)
-	sc.SetDestinationScene(StopToFlyTo.SpotType.Scene)
+	#sc.SetDestinationScene(StopToFlyTo.SpotType.Scene)
 	Mapz.visible = false
 	$CanvasLayer.visible = false
 	Mapz.set_process(false)
@@ -219,10 +220,10 @@ func ShipSearched(Ship : BaseShip):
 	
 func StageSearch(Spt : MapSpot)-> void:
 	if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
-		DoPopUp("Not enough oxygen to complete action")
+		PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
 		return
 	if (ShipDat.GetStat("HP").GetCurrentValue() <= 10):
-		DoPopUp("Not enough HP to complete action")
+		PopUpManager.GetInstance().DoPopUp("Not enough HP to complete action")
 		return
 	if (!Spt.SpotType.CanLand):
 		inventory.AddItems(Spt.SpotType.GetSpotDrop())
@@ -240,12 +241,14 @@ var Runningstage = 0
 func StageDone(victory : bool, supplies : Array[Item], HullHP : int) -> void:
 	if (victory):
 		GetInventory().AddItems(supplies)
-		Mapz.Arrival(Runningstage)
+		#Mapz.Arrival(Runningstage)
 	else :
 		Mapz.StageFailed()
 		GameLost("Your ship got destroyed")
 		return
 	UpdateStat(HullHP, "HULL")
+	Mapz.set_process(true)
+	Mapz.set_process_input(true)
 	Mapz.visible = true
 	$CanvasLayer.visible = true
 	if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 0):
@@ -253,11 +256,11 @@ func StageDone(victory : bool, supplies : Array[Item], HullHP : int) -> void:
 
 func UseItem(It : UsableItem) -> bool:
 	if (Traveling):
-		DoPopUp("Cant use items when traveling.")
+		PopUpManager.GetInstance().DoPopUp("Cant use items when traveling.")
 		return false
 	var statname = It.StatUseName
 	if (ShipDat.GetStat(statname).GetCurrentValue() == ShipDat.GetStat(statname).GetStat()):
-		DoPopUp(statname + " is already full")
+		PopUpManager.GetInstance().DoPopUp(statname + " is already full")
 		return false
 	else :
 		UpdateStat(min(ShipDat.GetStat(statname).GetStat(), ShipDat.GetStat(statname).GetCurrentValue() + 20), statname)
@@ -278,7 +281,7 @@ func _on_button_pressed() -> void:
 
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save(self)
-	DoPopUp("Save successful")
+	PopUpManager.GetInstance().DoPopUp("Save successful")
 	
 func _on_exit_pressed() -> void:
 	#ResetState()

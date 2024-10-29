@@ -1,0 +1,68 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://de7fb8k462lxb"]
+
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_xgg1l"]
+[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="2_pusc7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqxuj"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_detail = 1
+expand_margin_left = 15.0
+expand_margin_top = 35.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+shadow_size = 5
+shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1n88"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.119449, 0.14793, 0.185182, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_detail = 1
+shadow_size = 5
+shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2snv7"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.180343, 0.218266, 0.267873, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_detail = 1
+shadow_size = 5
+shadow_offset = Vector2(-2, 2)
+
+[resource]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/colors/title_outline_modulate = Color(0, 0, 0, 1)
+AcceptDialog/constants/buttons_separation = 10
+AcceptDialog/font_sizes/title_font_size = 24
+AcceptDialog/fonts/title_font = ExtResource("1_xgg1l")
+AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_dqxuj")
+AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_dqxuj")
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_dqxuj")
+Button/styles/hover = SubResource("StyleBoxFlat_c1n88")
+Button/styles/normal = ExtResource("2_pusc7")
+Button/styles/pressed = SubResource("StyleBoxFlat_2snv7")
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_xgg1l")

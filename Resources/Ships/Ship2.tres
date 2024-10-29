@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_cjlo5"]
 script = ExtResource("1_0hv8o")
 StatName = "INVENTORY_CAPACITY"
-StatBuff = 16.0
+StatBuff = 12.0
 
 [sub_resource type="Resource" id="Resource_124t7"]
 resource_local_to_scene = true
@@ -29,9 +29,9 @@ StatBuff = 30.0
 [sub_resource type="Resource" id="Resource_ynnat"]
 resource_local_to_scene = true
 script = ExtResource("2_b4dg8")
-StatCurrentVal = 400.0
+StatCurrentVal = 250.0
 StatName = "HULL"
-StatBuff = 400.0
+StatBuff = 250.0
 
 [resource]
 script = ExtResource("3_qff5y")

@@ -37,7 +37,7 @@
 [ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="29_0aup1"]
 [ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="30_hyn75"]
 
-[sub_resource type="Resource" id="Resource_xqiss"]
+[sub_resource type="Resource" id="Resource_1whjc"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "VIZ_RANGE"
@@ -50,13 +50,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_x3rxy"]
+[sub_resource type="Resource" id="Resource_316ak"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 800.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_xqiss")
+UpgradeVersion = SubResource("Resource_1whjc")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("3_v32x7")
 ItemName = "Medium Range Radar"
@@ -64,13 +64,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_q2omo"]
+[sub_resource type="Resource" id="Resource_1ptum"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 400.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_x3rxy")
+UpgradeVersion = SubResource("Resource_316ak")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("3_v32x7")
 ItemName = "Short Range Radar"
@@ -78,7 +78,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_xbv52"]
+[sub_resource type="Resource" id="Resource_4e1h3"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "CRYO"
@@ -91,7 +91,7 @@ ItemDesc = "Allows for travel without oxygen loss"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_ur3gt"]
+[sub_resource type="Resource" id="Resource_nshff"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL"
@@ -104,13 +104,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_fp4co"]
+[sub_resource type="Resource" id="Resource_7org2"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL"
 UpgradeAmm = 200.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_ur3gt")
+UpgradeVersion = SubResource("Resource_nshff")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("7_xr35n")
 ItemName = "Medium Fuel Tank"
@@ -118,13 +118,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_eru2t"]
+[sub_resource type="Resource" id="Resource_jppqp"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL"
 UpgradeAmm = 100.0
 CurrentVal = 100.0
-UpgradeVersion = SubResource("Resource_fp4co")
+UpgradeVersion = SubResource("Resource_7org2")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("7_xr35n")
 ItemName = "Fuel Tank"
@@ -132,7 +132,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_oi6mn"]
+[sub_resource type="Resource" id="Resource_tgrjc"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -145,13 +145,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_8x3j1"]
+[sub_resource type="Resource" id="Resource_kr7x7"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_oi6mn")
+UpgradeVersion = SubResource("Resource_tgrjc")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("8_rjj03")
 ItemName = "Medium Efficiency Engine"
@@ -159,13 +159,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_o4j3o"]
+[sub_resource type="Resource" id="Resource_2jirj"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_8x3j1")
+UpgradeVersion = SubResource("Resource_kr7x7")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("8_rjj03")
 ItemName = "Engine"
@@ -173,7 +173,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_a6oya"]
+[sub_resource type="Resource" id="Resource_34iec"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "ANALYZE_RANGE"
@@ -186,13 +186,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_f57fd"]
+[sub_resource type="Resource" id="Resource_meiv4"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 600.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_a6oya")
+UpgradeVersion = SubResource("Resource_34iec")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("9_lrbk4")
 ItemName = "Medium Range Analyzer"
@@ -200,13 +200,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_mirbx"]
+[sub_resource type="Resource" id="Resource_snyrk"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_f57fd")
+UpgradeVersion = SubResource("Resource_meiv4")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 ItemIcon = ExtResource("9_lrbk4")
 ItemName = "Short Range Analyzer"
@@ -219,14 +219,14 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -93.0
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_n6t4k")
-StartingItems = Array[ExtResource("2_bxhcq")]([SubResource("Resource_q2omo"), SubResource("Resource_xbv52"), SubResource("Resource_eru2t"), SubResource("Resource_o4j3o"), SubResource("Resource_mirbx"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("9_pd8ds"), ExtResource("9_pd8ds"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("10_okepu")])
+StartingItems = Array[ExtResource("2_bxhcq")]([SubResource("Resource_1ptum"), SubResource("Resource_4e1h3"), SubResource("Resource_jppqp"), SubResource("Resource_2jirj"), SubResource("Resource_snyrk"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("9_pd8ds"), ExtResource("9_pd8ds"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("10_okepu")])
 InventoryBoxScene = ExtResource("11_717g5")
 InventoryTradeScene = ExtResource("12_xwryu")
 ItemDescriptorScene = ExtResource("13_rdpkg")
@@ -250,6 +250,7 @@ custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 
 [node name="InvContents" type="GridContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(396, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

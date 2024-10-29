@@ -81,7 +81,7 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="PlanetLava" type="MeshInstance3D"]
-transform = Transform3D(39.7507, 0, 4.45962, 0, 40, 0, -4.45962, 0, 39.7507, 0, 0, 0)
+transform = Transform3D(-2.61974, 0, -39.9142, 0, 40, 0, 39.9142, 0, -2.61974, 0, 0, 0)
 mesh = SubResource("SphereMesh_621es")
 skeleton = NodePath(".")
 

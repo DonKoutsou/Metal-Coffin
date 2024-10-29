@@ -19,6 +19,8 @@ func AddItems(It : Array[Item]) -> void:
 		var newcont = ItemContainer.new()
 		newcont.ItemType = It[z]
 		newbox.AddIcon(newcont.ItemType.ItemIcon)
+		if (newcont.ItemType is UsableItem):
+			newbox.UpdateIcontColor(newcont.ItemType.ItecColor)
 		newbox.ItemC = newcont
 		newbox.UpdateAmm(1)
 		InventoryContents.append(newbox)

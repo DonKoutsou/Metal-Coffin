@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=10 format=3 uid="uid://bfffrxqe7m652"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_tg43p"]
+[ext_resource type="Texture2D" uid="uid://bfbodho7880gj" path="res://Assets/Commets.png" id="1_tlbyg"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_g6jfr"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="3_p3q1b"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="4_orwim"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_1j2au"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="5_jontd"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="6_eqqvc"]
+[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="8_5ot2h"]
+
+[resource]
+script = ExtResource("5_1j2au")
+SpotK = 10
+MapIcon = ExtResource("1_tlbyg")
+Scene = ExtResource("8_5ot2h")
+PossibleDrops = Array[ExtResource("1_tg43p")]([ExtResource("2_g6jfr"), ExtResource("3_p3q1b"), ExtResource("4_orwim"), ExtResource("5_jontd"), ExtResource("6_eqqvc")])
+FullName = "Asteroid Belt"
+Description = "blah blah"
+CanLand = false

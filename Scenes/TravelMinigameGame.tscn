@@ -62,7 +62,7 @@ script = ExtResource("1_6jml3")
 EnemyShapes = Array[Mesh]([ExtResource("2_7fbvq"), ExtResource("3_llaub"), ExtResource("4_2iueu"), ExtResource("5_kdrwu"), ExtResource("6_expmw")])
 Obst = ExtResource("2_mp2ca")
 SuuplyScene = ExtResource("8_jxkch")
-EnemyGoal = 40
+EnemyGoal = 60
 EnemySpawnRate = 0.5
 CharacterScene = ExtResource("3_q3swo")
 
@@ -99,6 +99,7 @@ action_down = "MoveDown"
 
 [node name="Stat_Panel" parent="." instance=ExtResource("13_fping")]
 anchors_preset = 2
+anchor_left = 0.0
 anchor_right = 0.0
 offset_right = 16.0
 grow_horizontal = 1

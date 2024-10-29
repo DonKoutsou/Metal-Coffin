@@ -5,12 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://carxyijo0mekn" path="res://Scenes/UISTatContainer.tscn" id="3_6v150"]
 
 [node name="Stat_Panel" type="PanelContainer"]
-anchors_preset = 12
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -93.0
-grow_horizontal = 2
+offset_left = -16.0
+offset_top = -16.0
+grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_vg2hb")
@@ -18,7 +20,6 @@ script = ExtResource("2_3iuan")
 StatScene = ExtResource("3_6v150")
 StatsToShow = Array[String](["OXYGEN", "HP", "HULL", "FUEL"])
 
-[node name="Stat_H_Container" type="HBoxContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
-mouse_filter = 2
-alignment = 1
+columns = 2

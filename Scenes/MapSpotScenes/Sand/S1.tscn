@@ -94,7 +94,7 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="PlanetSand" type="MeshInstance3D"]
-transform = Transform3D(32.0216, 0, 23.9711, 0, 40, 0, -23.9711, 0, 32.0216, 0, 0, 0)
+transform = Transform3D(21.2022, 0, 33.9185, 0, 40, 0, -33.9185, 0, 21.2022, 0, 0, 0)
 mesh = SubResource("SphereMesh_31s4g")
 skeleton = NodePath(".")
 

@@ -104,3 +104,4 @@ MapDown={
 
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+environment/glow/upscale_mode=0

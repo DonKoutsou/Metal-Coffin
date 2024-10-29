@@ -53,7 +53,7 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="Star" type="MeshInstance3D"]
-transform = Transform3D(0.718537, -0.584718, 0.376575, 0.362254, 0.776857, 0.515038, -0.593697, -0.233658, 0.770018, 0, 0, 0)
+transform = Transform3D(-0.0977083, -0.517873, 0.849859, 0.362254, 0.776857, 0.515038, -0.926944, 0.358188, 0.111697, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_s4mwk")
 cast_shadow = 0
 mesh = ExtResource("1_hbfmr")

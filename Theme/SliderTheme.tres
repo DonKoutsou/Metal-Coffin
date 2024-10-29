@@ -1,0 +1,44 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://r7u6a0gc7qc1"]
+
+[ext_resource type="Texture2D" uid="uid://vcpw7ewfxnx1" path="res://Assets/UIPiecies/UISlider.png" id="1_3plv2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ox1sk"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.430582, 0.496132, 0.581994, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0p3v"]
+bg_color = Color(0.138341, 0.169799, 0.210945, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 10.0
+expand_margin_top = 2.0
+expand_margin_right = 10.0
+expand_margin_bottom = 2.0
+shadow_size = 5
+shadow_offset = Vector2(-2, 2)
+
+[resource]
+VSlider/constants/center_grabber = 1
+VSlider/icons/grabber = ExtResource("1_3plv2")
+VSlider/icons/grabber_disabled = ExtResource("1_3plv2")
+VSlider/icons/grabber_highlight = ExtResource("1_3plv2")
+VSlider/styles/grabber_area = SubResource("StyleBoxFlat_ox1sk")
+VSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_ox1sk")
+VSlider/styles/slider = SubResource("StyleBoxFlat_v0p3v")

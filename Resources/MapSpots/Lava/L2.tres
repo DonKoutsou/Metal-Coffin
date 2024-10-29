@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://b8iyigsdefw0x"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://b8iyigsdefw0x"]
 
 [ext_resource type="Texture2D" uid="uid://bg2mrx7knbq7e" path="res://Assets/jupiter.png" id="1_60yxy"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_v4f6c"]
-[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="3_y0ci2"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_mkykr"]
 [ext_resource type="PackedScene" uid="uid://6v56xne60qvh" path="res://Scenes/MapSpotScenes/Lava/L2.tscn" id="5_qfxln"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="6_n6fes"]
@@ -12,7 +11,7 @@ script = ExtResource("6_n6fes")
 SpotK = 3
 MapIcon = ExtResource("1_60yxy")
 Scene = ExtResource("5_qfxln")
-PossibleDrops = Array[ExtResource("2_v4f6c")]([ExtResource("3_y0ci2"), ExtResource("4_mkykr")])
+PossibleDrops = Array[ExtResource("2_v4f6c")]([ExtResource("4_mkykr")])
 FullName = "Lava Giant"
 Description = ""
 CanLand = true

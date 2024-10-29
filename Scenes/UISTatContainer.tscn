@@ -11,6 +11,8 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 1
+shadow_size = 5
+shadow_offset = Vector2(-2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_he86a"]
 resource_local_to_scene = true
@@ -30,6 +32,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="Oxygen_Container" type="PanelContainer"]
+custom_minimum_size = Vector2(281, 0)
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("1_3buw3")
@@ -42,7 +45,7 @@ alignment = 2
 [node name="Label2" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_wh5m6")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "Oxygen:"
 horizontal_alignment = 1
 

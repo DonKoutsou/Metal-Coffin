@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=43 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -19,7 +19,6 @@
 [ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="12_7uph2"]
 [ext_resource type="Resource" uid="uid://j7s27fyb4a25" path="res://Resources/MapSpots/Sand/S2.tres" id="12_ukiar"]
 [ext_resource type="Resource" uid="uid://cdjwdnw7xjy2t" path="res://Resources/MapSpots/Star/S1.tres" id="12_v2m3t"]
-[ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="13_2ck5b"]
 [ext_resource type="Resource" uid="uid://cva6b4ff20rlh" path="res://Resources/MapSpots/Sand/S1.tres" id="13_exvok"]
 [ext_resource type="Resource" uid="uid://dsawaejhg7uav" path="res://Resources/MapSpots/Gas/G1.tres" id="14_h38v5"]
 [ext_resource type="Resource" uid="uid://d14wweum23fh2" path="res://Resources/MapSpots/Star/S2.tres" id="14_xaq81"]
@@ -28,9 +27,16 @@
 [ext_resource type="Resource" uid="uid://ddnaihvphx67w" path="res://Resources/MapSpots/Terrestrial/T5.tres" id="20_qlrmv"]
 [ext_resource type="Resource" uid="uid://dm6x6mhrv8uxw" path="res://Resources/MapSpots/Ringed/R1.tres" id="22_elqan"]
 [ext_resource type="Resource" uid="uid://dt2a146xanrnq" path="res://Resources/MapSpots/Ringed/R2.tres" id="23_inpld"]
+[ext_resource type="Resource" uid="uid://bfffrxqe7m652" path="res://Resources/MapSpots/AsteroidBelt.tres" id="25_mp38i"]
+[ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="28_kxshb"]
-[ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="28_lnu71"]
+[ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
+[ext_resource type="Theme" uid="uid://r7u6a0gc7qc1" path="res://Theme/SliderTheme.tres" id="32_aeogt"]
+[ext_resource type="PackedScene" uid="uid://cvw53vgn44h3v" path="res://Scenes/SteeringWheel.tscn" id="33_gpac8"]
+[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="33_krk8r"]
+[ext_resource type="Shader" path="res://Scenes/gauge.gdshader" id="33_ssjx5"]
+[ext_resource type="Texture2D" uid="uid://vwam4yijxln1" path="res://Assets/UITest.png" id="34_twtl7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a20qu"]
 shader = ExtResource("12_7uph2")
@@ -43,50 +49,64 @@ shader_parameter/saturation = 0.536
 shader_parameter/layers = 5.175
 shader_parameter/iterations = 3
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
-radius = 200.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f561"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 42
+corner_radius_bottom_left = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4syn2"]
-shader = ExtResource("28_lnu71")
-shader_parameter/line_color = Color(0.252517, 0.622353, 0.846633, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 1.0
-shader_parameter/line_width = 0.01
-shader_parameter/beam_angle = 0.2
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 1.0
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = true
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpdjg"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+corner_detail = 20
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
-radius = 400.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8eave"]
+shader = ExtResource("33_ssjx5")
+shader_parameter/indicator_color = Color(0, 0.8, 1, 1)
+shader_parameter/border_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/centre_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/region1_color = Color(0, 1, 0, 1)
+shader_parameter/region2_color = Color(1, 0.6, 0, 1)
+shader_parameter/region3_color = Color(1, 0.2, 0.2, 1)
+shader_parameter/scale_mark_color = Color(0.0267215, 0.0267215, 0.0267215, 1)
+shader_parameter/show_edges = false
+shader_parameter/indicator_angle = 0.485
+shader_parameter/indicator_length = 0.781
+shader_parameter/indicator_width = 0.003
+shader_parameter/border_width = 0.0
+shader_parameter/centre_width = 0.078
+shader_parameter/region1 = 0.25
+shader_parameter/region2 = 0.555
+shader_parameter/region3 = 0.745
+shader_parameter/regions_end = 1.0
+shader_parameter/scale_marks = 20.0
+shader_parameter/major_scale_marks = 8.0
+shader_parameter/scale_mark_width = 0.01
+shader_parameter/scale_minor_outer = 0.769
+shader_parameter/scale_major_outer = 0.93
+shader_parameter/scale_inner = 0.642
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
-shader = ExtResource("28_lnu71")
-shader_parameter/line_color = Color(0.781105, 0.651497, 0, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 1.0
-shader_parameter/line_width = 0.01
-shader_parameter/beam_angle = 0.2
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.5
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = false
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mqnhq"]
-radius = 100.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_edf5x"]
-shader = ExtResource("28_lnu71")
-shader_parameter/line_color = Color(0.0486369, 0.645335, 0.0400367, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 1.0
-shader_parameter/line_width = 0.01
-shader_parameter/beam_angle = 0.2
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 1.0
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufcxd"]
 
 [node name="Map" type="Control"]
 layout_mode = 3
@@ -100,6 +120,7 @@ script = ExtResource("1_mq604")
 SpotScene = ExtResource("2_csmts")
 MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("14_h38v5"), ExtResource("4_laxnu"), ExtResource("8_1wj05"), ExtResource("7_vi3ba"), ExtResource("9_n201g"), ExtResource("11_jfn3v"), ExtResource("10_3ok41"), ExtResource("13_exvok"), ExtResource("12_ukiar"), ExtResource("12_v2m3t"), ExtResource("14_xaq81"), ExtResource("5_cl201"), ExtResource("10_eeu5v"), ExtResource("7_ow8y0"), ExtResource("18_ohf4c"), ExtResource("19_0ncbx"), ExtResource("20_qlrmv"), ExtResource("6_culgw"), ExtResource("22_elqan"), ExtResource("23_inpld")])
 SpecialMapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("10_brf7w")])
+CommetMapSpot = ExtResource("25_mp38i")
 FinalSpotType = ExtResource("6_bd3x3")
 MapSize = 40
 AnalyzerScene = ExtResource("8_7ajvg")
@@ -126,147 +147,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="PlayerShip" type="Node2D" parent="MapSpots"]
-position = Vector2(-156, 324)
-
-[node name="Radar" type="Area2D" parent="MapSpots/PlayerShip"]
-rotation = -0.282025
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MapSpots/PlayerShip/Radar"]
-shape = SubResource("CircleShape2D_42dgb")
-
-[node name="Radar_Range" type="ColorRect" parent="MapSpots/PlayerShip/Radar"]
-material = SubResource("ShaderMaterial_4syn2")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-
-[node name="Label2" type="Label" parent="MapSpots/PlayerShip/Radar/Radar_Range"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -90.02
-offset_top = 2.5
-offset_right = -5.01999
-offset_bottom = 20.5
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.252517, 0.622353, 0.846633, 1)
-theme_override_fonts/font = ExtResource("28_kxshb")
-theme_override_font_sizes/font_size = 14
-text = "Radar Range"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Fuel" type="Area2D" parent="MapSpots/PlayerShip"]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MapSpots/PlayerShip/Fuel"]
-shape = SubResource("CircleShape2D_rjoek")
-
-[node name="Fuel_Range" type="ColorRect" parent="MapSpots/PlayerShip/Fuel"]
-material = SubResource("ShaderMaterial_1i26u")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -400.0
-offset_right = 400.0
-offset_bottom = 400.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="MapSpots/PlayerShip/Fuel/Fuel_Range"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -98.73
-offset_right = -13.73
-offset_bottom = 23.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.781105, 0.651497, 0, 1)
-theme_override_fonts/font = ExtResource("28_kxshb")
-theme_override_font_sizes/font_size = 14
-text = "Fuel Range"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Analyzer" type="Area2D" parent="MapSpots/PlayerShip"]
-rotation = 0.368904
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MapSpots/PlayerShip/Analyzer"]
-shape = SubResource("CircleShape2D_mqnhq")
-
-[node name="Analyzer_Range" type="ColorRect" parent="MapSpots/PlayerShip/Analyzer"]
-material = SubResource("ShaderMaterial_edf5x")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -99.6817
-offset_top = -99.7675
-offset_right = 100.318
-offset_bottom = 100.233
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-
-[node name="Label2" type="Label" parent="MapSpots/PlayerShip/Analyzer/Analyzer_Range"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -106.845
-offset_top = -3.0
-offset_right = -3.845
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.0486369, 0.645335, 0.0400367, 1)
-theme_override_fonts/font = ExtResource("28_kxshb")
-theme_override_font_sizes/font_size = 14
-text = "Analyzer Range"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="MapSpots/PlayerShip"]
-
-[node name="PlayerShipSpr" type="Sprite2D" parent="MapSpots/PlayerShip"]
-rotation = -1.5708
-texture = ExtResource("13_2ck5b")
-
 [node name="SpotSpot" type="Control" parent="MapSpots"]
 layout_mode = 1
 anchors_preset = 15
@@ -275,6 +155,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="PlayerShip" parent="MapSpots" instance=ExtResource("28_7rdua")]
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = ExtResource("29_q8i0i")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("34_twtl7")
+
+[node name="SteeringWheel" parent="." instance=ExtResource("33_gpac8")]
+layout_mode = 1
+offset_left = -286.0
+offset_top = 381.0
+offset_right = -286.0
+offset_bottom = 381.0
 
 [node name="ArrowSprite" type="Node2D" parent="."]
 modulate = Color(0.770444, 0.040374, 0.0224221, 1)
@@ -285,5 +199,161 @@ modulate = Color(0.770444, 0.040374, 0.0224221, 1)
 rotation = -1.5708
 texture = ExtResource("30_g5v37")
 
-[connection signal="screen_entered" from="MapSpots/PlayerShip/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
-[connection signal="screen_exited" from="MapSpots/PlayerShip/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 1011.0
+offset_top = 81.0
+offset_right = 1152.0
+offset_bottom = 199.0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_1f561")
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -55.0
+offset_right = 55.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_dpdjg")
+
+[node name="ColorRect" type="ColorRect" parent="Panel/Panel"]
+material = SubResource("ShaderMaterial_8eave")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.5
+offset_top = 5.0
+offset_right = -5.5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -125.0
+offset_bottom = 159.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("33_krk8r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 268.585)
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("28_kxshb")
+text = "Cruise"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("28_kxshb")
+text = "Loiter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("28_kxshb")
+text = "Air Stop
+"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
+
+[node name="AccellerationSlider" type="VSlider" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(45, 250)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("32_aeogt")
+max_value = 50.0
+tick_count = 6
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/AccellerationSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = 113.0
+offset_right = 1.5
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10.08, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_kxshb")
+text = "THRUST"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[connection signal="ScreenEnter" from="MapSpots/PlayerShip" to="." method="PlayerEnteredScreen"]
+[connection signal="ScreenExit" from="MapSpots/PlayerShip" to="." method="PlayerExitedScreen"]
+[connection signal="MouseEntered" from="SteeringWheel" to="." method="_on_steer_slider_mouse_entered"]
+[connection signal="MouseExited" from="SteeringWheel" to="." method="_on_steer_slider_mouse_exited"]
+[connection signal="SteeringDitChanged" from="SteeringWheel" to="." method="_on_steer_slider_value_changed"]
+[connection signal="drag_ended" from="PanelContainer/HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_drag_ended"]
+[connection signal="mouse_entered" from="PanelContainer/HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_mouse_exited"]
+[connection signal="value_changed" from="PanelContainer/HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_value_changed"]

@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_q5iso")
 StatName = "ANALYZE_RANGE"
-StatMax = 800.0
+StatMax = 600.0
 StatBase = 0.0

@@ -16,3 +16,4 @@ PossibleDrops = Array[ExtResource("2_8v4hu")]([ExtResource("3_doupc"), ExtResour
 FullName = "Ice Giant"
 Description = "blah blah"
 CanLand = true
+HasAtmoshere = true

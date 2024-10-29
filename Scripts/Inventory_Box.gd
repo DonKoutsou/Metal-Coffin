@@ -24,7 +24,11 @@ func ToggleVisuals(t : bool) -> void:
 
 func RegisterItem(it : Item) -> void:
 	ItemC.ItemType = it
-	$TextureRect.icon = it.ItemIcon
+	$TextureRect/TextureRect.texture = it.ItemIcon
+	if (it is UsableItem):
+		$TextureRect/TextureRect.modulate = it.ItecColor
+	else:
+		$TextureRect/TextureRect.modulate = Color.WHITE
 
 func IsEmpty() -> bool:
 	return ItemC.Ammount == 0

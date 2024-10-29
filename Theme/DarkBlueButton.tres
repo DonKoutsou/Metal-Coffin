@@ -12,12 +12,8 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.252517, 0.622353, 0.846633, 1)
 border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0oqe"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6pr5"]
 content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
@@ -29,10 +25,6 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.252517, 0.622353, 0.846633, 1)
 border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldhnu"]
 content_margin_left = 8.0
@@ -46,12 +38,8 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.252517, 0.622353, 0.846633, 1)
 border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [resource]
 Button/styles/hover = SubResource("StyleBoxFlat_ph6w3")
-Button/styles/normal = SubResource("StyleBoxFlat_s0oqe")
+Button/styles/normal = SubResource("StyleBoxFlat_l6pr5")
 Button/styles/pressed = SubResource("StyleBoxFlat_ldhnu")

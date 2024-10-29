@@ -18,6 +18,8 @@ var InventoryContents : Array[Inventory_Box] = []
 
 signal OnItemAdded(It : Item)
 signal OnItemRemoved(It : Item)
+signal OnInventoryOpened()
+signal OnInvencotyClosed()
 var Loading = false
 # Called when the node enters the scene tree for the first time.
 func GetSaveData() ->SaveData:
@@ -54,6 +56,10 @@ func UpdateSize() -> void:
 		InventoryContents.append(newbox)
 		newbox.connect("ItemUse", OnItemSelected)
 	AddItems(Itms, false)
+	if ((ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int) % 2 != 0):
+		inv_contents.columns = 3
+	else :
+		inv_contents.columns = 4
 func _ready() -> void:
 	set_process(false)
 	$PanelContainer.visible = false
@@ -62,6 +68,8 @@ func _ready() -> void:
 		inv_contents.add_child(newbox)
 		InventoryContents.append(newbox)
 		newbox.connect("ItemUse", OnItemSelected)
+	if ((ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int) % 2 != 0):
+		inv_contents.columns = 3
 	#for g in Upgrades.size():
 	#	var Tab = Upgrade_Tab_Scene.instantiate() as UpgradeTab
 	#	$UpgradesContainer/VBoxContainer.add_child(Tab)
@@ -206,8 +214,10 @@ func _on_inventory_button_pressed() -> void:
 	var IsOpening = !$PanelContainer.visible
 	$PanelContainer.visible = IsOpening
 	if (IsOpening):
+		OnInventoryOpened.emit()
 		inventory_ship_stats.UpdateValues()
 	if (!IsOpening):
+		OnInvencotyClosed.emit()
 		var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 		if (descriptors.size() > 0):
 			descriptors[0].queue_free()

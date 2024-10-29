@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://b13j2xqabxdpi"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://b13j2xqabxdpi"]
 
 [ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_x4oud"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_t3d1n"]
-[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="3_kdi8c"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_8i7ly"]
 [ext_resource type="PackedScene" uid="uid://crjhjlwu7fsoj" path="res://Scenes/MapSpotScenes/Terrestrial/T4.tscn" id="5_ijd8h"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="6_g3j5p"]
@@ -12,7 +11,8 @@ script = ExtResource("6_g3j5p")
 SpotK = 1
 MapIcon = ExtResource("1_x4oud")
 Scene = ExtResource("5_ijd8h")
-PossibleDrops = Array[ExtResource("2_t3d1n")]([ExtResource("3_kdi8c"), ExtResource("4_8i7ly")])
+PossibleDrops = Array[ExtResource("2_t3d1n")]([ExtResource("4_8i7ly")])
 FullName = "Terrestrial Planet"
 Description = ""
 CanLand = true
+HasAtmoshere = true

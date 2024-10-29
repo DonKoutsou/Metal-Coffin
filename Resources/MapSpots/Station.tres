@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://b1levfg3rcd16"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://b1levfg3rcd16"]
 
+[ext_resource type="Texture2D" uid="uid://dalsx16l4o46d" path="res://Assets/defense-satellite.png" id="1_f7d4u"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="1_w87ay"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_jvrwr"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_j0x84"]
@@ -9,7 +10,9 @@
 [resource]
 script = ExtResource("1_w87ay")
 SpotK = 8
+MapIcon = ExtResource("1_f7d4u")
 Scene = ExtResource("4_y2xnd")
 PossibleDrops = Array[ExtResource("2_jvrwr")]([ExtResource("3_j0x84"), ExtResource("4_2hjms")])
 FullName = "Space Station"
 Description = "blah blah"
+CanLand = false

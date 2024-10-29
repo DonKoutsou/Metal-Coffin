@@ -1,93 +1,79 @@
 extends Control
 class_name MapSpot
 
-@onready var visit_button: Button = $PanelContainer/VBoxContainer2/VBoxContainer/VisitButton
-@onready var land_button: Button = $PanelContainer/VBoxContainer2/VBoxContainer/LandButton
-@onready var analyze_button: Button = $PanelContainer/VBoxContainer2/VBoxContainer/AnalyzeButton
-#@onready var label: Label = $PanelContainer/VBoxContainer2/Label
+@onready var land_button_container: PanelContainer = $LandButtonContainer
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-signal MapPressed(Pos : MapSpot)
+
+#signal MapPressed(Pos : MapSpot)
 signal SpotSearched(Pos : MapSpot)
 signal SpotAnalazyed(Type : MapSpotType)
+signal SpotAproached(Type :MapSpotType)
 
 var SpotType : MapSpotType
 var Pos : Vector2
 var Visited = false
 var Seen = false
+var Analyzed = false
 
 func _ready() -> void:
-	visit_button.visible = false
-	land_button.visible = false
-	analyze_button.visible = false
+	visible = Seen
+	land_button_container.visible = false
 	if (Pos != Vector2.ZERO):
 		position = Pos
-		
+
+#//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
 	var datas = MapSpotSaveData.new().duplicate()
 	datas.SpotLoc = position
 	datas.SpotType = SpotType
 	datas.Seen = Seen
 	datas.Visited = Visited
+	datas.Analyzed = Analyzed
 	return datas
-#//////////////////////////////////////////////////////////////////
+
 func SetSpotData(Data : MapSpotType) -> void:
 	SpotType = Data
 	if (!Data.CanLand):
-		$PanelContainer/VBoxContainer2/VBoxContainer/LandButton.text = "Harvest"
-	
-	#SetSpotDrop(Data.PossibleDrops)
-
-#func SetSpotDrop(ItList : Array[Item]) -> void:
-#	if (ItList.size() == 0):
-#		return
-#	var it = ItList.pick_random()
-##	var rng = RandomNumberGenerator.new()
-#	var DropAmm = rng.randi_range(1, it.RandomFindMaxCount)
-	#for g in DropAmm :
-		#SpotItems.insert(g, it)
+		$LandButtonContainer/LandButton.text = "Harvest"
+	if (Data.FullName == "Black Whole"):
+		$LandButtonContainer/LandButton.text = "Enter"
 #//////////////////////////////////////////////////////////////////
-func ToggleVisitButton(tog : bool) -> void:
-	visit_button.visible = tog
-func ToggleLandButton(tog : bool) -> void:
-	land_button.visible = tog
+
 func OnSpotVisited() -> void:
-	$Panel/Panel.visible = true
 	Visited = true
-func OnSpotSeen() -> void:
-	if (!Seen):
-		$AnimationPlayer.play("SpotFound")
-		$AudioStreamPlayer2D.play()
-	$Panel.texture = SpotType.MapIcon
+	
+func OnSpotSeen(PlayAnim : bool = true) -> void:
+	visible = true
+	if (!Seen and PlayAnim):
+		animation_player.play("SpotFound")
+		audio_stream_player_2d.play()
+	$AnalyzeButton.icon = SpotType.MapIcon
 	Seen = true
 
-func _on_visit_button_pressed() -> void:
-	MapPressed.emit(self)
 func _on_land_button_pressed() -> void:
 	SpotSearched.emit(self)
+	
 func _on_analyze_button_pressed() -> void:
-	SpotAnalazyed.emit(SpotType)
-
+	SpotAnalazyed.emit(self)
 
 func _on_visibility_notif_area_entered(_area: Area2D) -> void:
 	OnSpotSeen()
 
-
-func _on_visibility_notif_area_exited(_area: Area2D) -> void:
-	pass # Replace with function body.
-
-
-func _on_fuel_notif_area_entered(_area: Area2D) -> void:
-	visit_button.visible = true
-	#pass # Replace with function body.
-
-
-func _on_fuel_notif_area_exited(_area: Area2D) -> void:
-	visit_button.visible = false
-
-
 func _on_alanyze_notif_area_entered(_area: Area2D) -> void:
-	analyze_button.visible = true
+	if (!Analyzed):
+		animation_player.play("SpotAnalyzed")
+		audio_stream_player_2d.play()
+	OnSpotAnalyzed()
+	
+func OnSpotAnalyzed() ->void:
+	Analyzed = true
 
+func _on_land_notif_area_entered(_area: Area2D) -> void:
+	if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
+		land_button_container.visible = true
+	SpotAproached.emit(self)
 
-func _on_alanyze_notif_area_exited(_area: Area2D) -> void:
-	analyze_button.visible = false
+func _on_land_notif_area_exited(_area: Area2D) -> void:
+	land_button_container.visible = false

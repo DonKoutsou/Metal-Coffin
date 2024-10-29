@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 script = ExtResource("4_3f2mw")
 UpgradeName = "ANALYZE_RANGE"
-UpgradeAmm = 600.0
+UpgradeAmm = 450.0
 CurrentVal = 0.0
 UpgradeVersion = ExtResource("3_xmrhu")
 UpgradeItems = Array[ExtResource("2_bwlbw")]([ExtResource("3_3p1ei"), ExtResource("3_3p1ei"), ExtResource("3_3p1ei"), ExtResource("3_3p1ei"), ExtResource("3_3p1ei"), ExtResource("3_3p1ei"), ExtResource("3_3p1ei"), ExtResource("3_3p1ei")])

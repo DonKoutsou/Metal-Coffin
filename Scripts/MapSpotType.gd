@@ -8,7 +8,7 @@ class_name MapSpotType
 @export var FullName : String
 @export var Description : String
 @export var CanLand : bool = false
-
+@export var HasAtmoshere : bool = false
 func GetSpotDrop() -> Array[Item]:
 	var Drops : Array[Item] = []
 	var it = PossibleDrops.pick_random()
@@ -17,7 +17,8 @@ func GetSpotDrop() -> Array[Item]:
 	for g in DropAmm :
 		Drops.append(it)
 	return Drops
-
+func GetEnumString() -> String:
+	return SpotKind.keys()[SpotK]
 
 enum SpotKind{
 SHIP,
@@ -29,5 +30,6 @@ NO_ATMO,
 SAND,
 STAR,
 STATION,
-RINGED
+RINGED,
+ASTEROID_BELT
 }

@@ -31,8 +31,10 @@ func Explore() -> void:
 	if (PlayerOxy <= 5):
 		DoPopUp("Not enough oxygen to complete action.")
 		return
+		
 	PlayerHp -= 10
-	PlayerOxy -= 5
+	if (!SpotT.HasAtmoshere):
+		PlayerOxy -= 5
 	$VBoxContainer/Stat_Panel.StatsUpCust("HP", PlayerHp)
 	$VBoxContainer/Stat_Panel.StatsUpCust("OXYGEN", PlayerOxy)
 	var itms = SpotT.GetSpotDrop()

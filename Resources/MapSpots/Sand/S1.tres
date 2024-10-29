@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://cva6b4ff20rlh"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://cva6b4ff20rlh"]
 
 [ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_ks4jl"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_05voo"]
-[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="3_qw0ka"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_1xctn"]
 [ext_resource type="PackedScene" uid="uid://c3wupn8y8nhii" path="res://Scenes/MapSpotScenes/Sand/S1.tscn" id="5_prn14"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="6_gb05p"]
@@ -12,7 +11,8 @@ script = ExtResource("6_gb05p")
 SpotK = 6
 MapIcon = ExtResource("1_ks4jl")
 Scene = ExtResource("5_prn14")
-PossibleDrops = Array[ExtResource("2_05voo")]([ExtResource("3_qw0ka"), ExtResource("4_1xctn")])
+PossibleDrops = Array[ExtResource("2_05voo")]([ExtResource("4_1xctn")])
 FullName = "Sand Giant"
 Description = ""
 CanLand = true
+HasAtmoshere = true

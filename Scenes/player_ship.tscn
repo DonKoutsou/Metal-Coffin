@@ -1,0 +1,199 @@
+[gd_scene load_steps=11 format=3 uid="uid://dhr5epkvjl588"]
+
+[ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
+[ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="2_2w4bb"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_c5u4x"]
+[ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="4_ckmuy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
+radius = 200.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4syn2"]
+shader = ExtResource("2_2w4bb")
+shader_parameter/line_color = Color(0.252517, 0.622353, 0.846633, 1)
+shader_parameter/range_lines = 1.0
+shader_parameter/sector_lines = 1.0
+shader_parameter/line_width = 0.01
+shader_parameter/beam_angle = 0.2
+shader_parameter/beam_width = 0.003
+shader_parameter/trail_width = 1.0
+shader_parameter/sector_rotation = 0.5
+shader_parameter/ShowRadat = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
+radius = 34.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
+shader = ExtResource("2_2w4bb")
+shader_parameter/line_color = Color(0.781105, 0.651497, 0, 1)
+shader_parameter/range_lines = 1.0
+shader_parameter/sector_lines = 1.0
+shader_parameter/line_width = 0.01
+shader_parameter/beam_angle = 0.2
+shader_parameter/beam_width = 0.003
+shader_parameter/trail_width = 0.5
+shader_parameter/sector_rotation = 0.5
+shader_parameter/ShowRadat = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqnhq"]
+radius = 100.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edf5x"]
+shader = ExtResource("2_2w4bb")
+shader_parameter/line_color = Color(0.0486369, 0.645335, 0.0400367, 1)
+shader_parameter/range_lines = 1.0
+shader_parameter/sector_lines = 1.0
+shader_parameter/line_width = 0.01
+shader_parameter/beam_angle = 0.2
+shader_parameter/beam_width = 0.003
+shader_parameter/trail_width = 1.0
+shader_parameter/sector_rotation = 0.5
+shader_parameter/ShowRadat = false
+
+[node name="PlayerShip" type="Node2D"]
+position = Vector2(-90, 324)
+script = ExtResource("1_ekbhy")
+
+[node name="Radar" type="Area2D" parent="."]
+rotation = -0.282025
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
+shape = SubResource("CircleShape2D_42dgb")
+
+[node name="Radar_Range" type="ColorRect" parent="Radar"]
+material = SubResource("ShaderMaterial_4syn2")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="Radar/Radar_Range"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -90.02
+offset_top = 2.5
+offset_right = -5.01999
+offset_bottom = 20.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.252517, 0.622353, 0.846633, 1)
+theme_override_fonts/font = ExtResource("3_c5u4x")
+theme_override_font_sizes/font_size = 14
+text = "Radar Range"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Fuel" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fuel"]
+shape = SubResource("CircleShape2D_rjoek")
+
+[node name="Fuel_Range" type="ColorRect" parent="Fuel"]
+material = SubResource("ShaderMaterial_1i26u")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Fuel/Fuel_Range"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -98.73
+offset_right = -13.73
+offset_bottom = 23.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.781105, 0.651497, 0, 1)
+theme_override_fonts/font = ExtResource("3_c5u4x")
+theme_override_font_sizes/font_size = 14
+text = "Fuel Range"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Analyzer" type="Area2D" parent="."]
+rotation = 0.368904
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Analyzer"]
+shape = SubResource("CircleShape2D_mqnhq")
+
+[node name="Analyzer_Range" type="ColorRect" parent="Analyzer"]
+material = SubResource("ShaderMaterial_edf5x")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.6817
+offset_top = -99.7675
+offset_right = 100.318
+offset_bottom = 100.233
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="Analyzer/Analyzer_Range"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -106.845
+offset_top = -3.0
+offset_right = -3.845
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0486369, 0.645335, 0.0400367, 1)
+theme_override_fonts/font = ExtResource("3_c5u4x")
+theme_override_font_sizes/font_size = 14
+text = "Analyzer Range"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="PlayerShipSpr" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("4_ckmuy")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(100, 0)
+
+[connection signal="screen_entered" from="Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
+[connection signal="screen_exited" from="Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]
