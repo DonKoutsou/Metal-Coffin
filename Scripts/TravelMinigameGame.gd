@@ -3,7 +3,7 @@ class_name  TravelMinigameGame
 
 @export var EnemyShapes : Array[Mesh]
 @export var Obst : PackedScene
-@export var SuuplyScene : PackedScene
+@export var SuuplyScenes : Array[PackedScene]
 @export var EnemyGoal : int
 @export var EnemySpawnRate : float
 @export var Difficulty : int = 3
@@ -18,17 +18,33 @@ var Supplies : Array[Item]
 var enemies = 0
 var Hull : float
 var HullMax : float
+
+var shakestr = 0.0
+func applyshake():
+	shakestr = 0.5
+func _process(delta: float) -> void:
+	if shakestr > 0.0:
+		shakestr = lerpf(shakestr, 0, 5.0 * delta)
+		var of = RandomOffset()
+		$Camera3D.h_offset = of.x
+		$Camera3D.v_offset = of.y
+func RandomOffset()-> Vector2:
+	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 func _ready() -> void:
 	#$Hull_HP_Container/HBoxContainer/HullHp.max_value = HullMax
 	#$Hull_HP_Container/HBoxContainer/HullHp.value = Hull
 	#$Hull_HP_Container/HBoxContainer/HullHp/Label.text = var_to_str(roundi(Hull)) + "/" + var_to_str(roundi(HullMax))
 	var fintrans = -50;
 	var SuppliesList = []
-	for g in EnemyGoal/10:
+	for g in EnemyGoal/50:
 		SuppliesList.insert(g, randi_range(0, EnemyGoal))
 	for g in EnemyGoal :
 		if (SuppliesList.has(g)):
-			var sup = SuuplyScene.instantiate()
+			var sup
+			if (g < 100):
+				sup = SuuplyScenes[0].instantiate()
+			else :
+				sup = SuuplyScenes.pick_random().instantiate()
 			add_child(sup)
 			var rand = RandomNumberGenerator.new()
 			fintrans += -10
@@ -60,8 +76,9 @@ func EnemyKilled() -> void:
 	enemies += 1
 	if (enemies >= EnemyGoal * Difficulty):
 		GameFinished(true)
-		
+
 func EnemyHit():
+	applyshake()
 	Hull -= 10
 	$Stat_Panel.StatsUpCust("HULL", Hull)
 	#$Hull_HP_Container/HBoxContainer/HullHp.value = Hull

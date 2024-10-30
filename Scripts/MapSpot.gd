@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 class_name MapSpot
 
 @onready var land_button_container: PanelContainer = $LandButtonContainer
@@ -63,6 +63,8 @@ func _on_visibility_notif_area_entered(_area: Area2D) -> void:
 
 func _on_alanyze_notif_area_entered(_area: Area2D) -> void:
 	if (!Analyzed):
+		var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
+		add_child(notif)
 		animation_player.play("SpotAnalyzed")
 		audio_stream_player_2d.play()
 	OnSpotAnalyzed()

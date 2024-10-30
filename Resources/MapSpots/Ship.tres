@@ -19,3 +19,4 @@ PossibleDrops = Array[ExtResource("2_ajqlo")]([ExtResource("3_yfr1x"), ExtResour
 FullName = "Supernova"
 Description = "blah blag"
 CanLand = false
+HasAtmoshere = false

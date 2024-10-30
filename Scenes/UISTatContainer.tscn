@@ -1,38 +1,35 @@
 [gd_scene load_steps=6 format=3 uid="uid://carxyijo0mekn"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_3buw3"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_wh5m6"]
 [ext_resource type="Script" path="res://Scripts/ui_Stat_container.gd" id="2_yw81g"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_ooo48"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6euwv"]
 bg_color = Color(0.275636, 0.275636, 0.275636, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 shadow_size = 5
 shadow_offset = Vector2(-2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_he86a"]
 resource_local_to_scene = true
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
 bg_color = Color(0.317053, 0.353, 0.750049, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
 border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [node name="Oxygen_Container" type="PanelContainer"]
 custom_minimum_size = Vector2(281, 0)
+offset_right = 281.0
+offset_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("1_3buw3")
@@ -40,17 +37,31 @@ script = ExtResource("2_yw81g")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-alignment = 2
+size_flags_vertical = 4
+alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_wh5m6")
+alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_ooo48")
 theme_override_font_sizes/font_size = 24
 text = "Oxygen:"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_ooo48")
+theme_override_font_sizes/font_size = 24
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Bar" type="ProgressBar" parent="HBoxContainer"]
-custom_minimum_size = Vector2(228, 23)
+custom_minimum_size = Vector2(228, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_6euwv")
@@ -58,17 +69,3 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_he86a")
 step = 1.0
 value = 84.0
 show_percentage = false
-
-[node name="Label" type="Label" parent="HBoxContainer/Bar"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "10/10"
-horizontal_alignment = 1
-vertical_alignment = 1

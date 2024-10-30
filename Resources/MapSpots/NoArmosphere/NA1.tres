@@ -15,3 +15,4 @@ PossibleDrops = Array[ExtResource("2_to5ap")]([ExtResource("3_8m6e2")])
 FullName = "Stelar body"
 Description = "blah blag"
 CanLand = true
+HasAtmoshere = false

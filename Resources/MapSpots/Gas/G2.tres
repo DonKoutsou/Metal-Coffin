@@ -16,3 +16,4 @@ PossibleDrops = Array[ExtResource("2_kymwr")]([ExtResource("3_5y5jl"), ExtResour
 FullName = "Gas Giant"
 Description = "blah blah"
 CanLand = true
+HasAtmoshere = false

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dosurqfr722oq"]
+[gd_scene load_steps=15 format=3 uid="uid://dosurqfr722oq"]
 
 [ext_resource type="Texture2D" uid="uid://bnxct8xe7ru8r" path="res://Assets/Spaceship/spaceship_Ship_BaseColor.png" id="1_0h41f"]
 [ext_resource type="ArrayMesh" uid="uid://byus7qmd0hep7" path="res://Assets/Spaceship/Ship.obj" id="1_pfpqp"]
 [ext_resource type="Texture2D" uid="uid://pavvvan3jbkv" path="res://Assets/Spaceship/spaceship_Ship_OcclusionRoughnessMetallic.png" id="2_53xb3"]
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="2_w2wc2"]
 [ext_resource type="Texture2D" uid="uid://hvxje02nt5nk" path="res://Assets/Spaceship/spaceship_Ship_Normal.png" id="3_6k10l"]
+[ext_resource type="AudioStream" uid="uid://dxipr2c6rvgvf" path="res://Assets/Sounds/spacecraft-engine-loop-01-58205.mp3" id="6_e67x5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f1vo"]
 albedo_texture = ExtResource("1_0h41f")
@@ -102,3 +103,8 @@ initial_velocity_min = 6.0
 initial_velocity_max = 6.0
 scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_0i8mp")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_e67x5")
+volume_db = -5.0
+autoplay = true

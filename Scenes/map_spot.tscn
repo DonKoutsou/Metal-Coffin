@@ -105,7 +105,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_ph3na"]
 resource_name = "SpotAnalyzed"
-length = 3.0
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -113,7 +113,7 @@ tracks/0/path = NodePath("PanelContainer2:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.76667, 3),
+"times": PackedFloat32Array(0, 4.76667, 5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
@@ -125,10 +125,10 @@ tracks/1/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -137,10 +137,10 @@ tracks/2/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -149,10 +149,10 @@ tracks/3/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -161,10 +161,10 @@ tracks/4/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -173,7 +173,7 @@ tracks/5/path = NodePath("PanelContainer2:theme_override_styles/panel:border_col
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 2.06667, 2.73333),
+"times": PackedFloat32Array(0, 4.06667, 4.73333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0.0486369, 0.645335, 0.0400367, 1), Color(0.0486369, 0.645335, 0.0400367, 1), Color(0.049, 0.645, 0.04, 0)]
@@ -181,7 +181,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_fxdlk"]
 resource_name = "SpotFound"
-length = 3.0
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -189,7 +189,7 @@ tracks/0/path = NodePath("PanelContainer2:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.76667, 3),
+"times": PackedFloat32Array(0, 4.76667, 5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
@@ -201,10 +201,10 @@ tracks/1/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -213,10 +213,10 @@ tracks/2/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -225,10 +225,10 @@ tracks/3/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -237,10 +237,10 @@ tracks/4/path = NodePath("PanelContainer2:theme_override_styles/panel:expand_mar
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.73333),
+"times": PackedFloat32Array(0, 4.73333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 200.0]
+"values": [0.0, 500.0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -249,7 +249,7 @@ tracks/5/path = NodePath("PanelContainer2:theme_override_styles/panel:border_col
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 2.06667, 2.73333),
+"times": PackedFloat32Array(0, 4.06667, 4.73333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0.252517, 0.622353, 0.846633, 1), Color(0.252517, 0.622353, 0.846633, 1), Color(0.253, 0.622, 0.847, 0)]
@@ -262,20 +262,11 @@ _data = {
 "SpotFound": SubResource("Animation_fxdlk")
 }
 
-[node name="MapSpot" type="Control"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MapSpot" type="Node2D"]
 script = ExtResource("1_x7uyn")
 
 [node name="AnalyzeButton" type="Button" parent="." groups=["Buttons"]]
 show_behind_parent = true
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -292,7 +283,6 @@ theme_override_font_sizes/font_size = 22
 icon = ExtResource("2_mt6at")
 
 [node name="LandButtonContainer" type="PanelContainer" parent="."]
-layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -336,7 +326,6 @@ shape = SubResource("CircleShape2D_4ymfd")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -358,6 +347,8 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_l7sme")
+volume_db = 10.0
+bus = &"MapSounds"
 
 [connection signal="pressed" from="AnalyzeButton" to="." method="_on_analyze_button_pressed"]
 [connection signal="pressed" from="LandButtonContainer/LandButton" to="." method="_on_land_button_pressed"]

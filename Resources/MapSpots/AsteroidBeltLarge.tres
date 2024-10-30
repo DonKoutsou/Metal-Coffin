@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=13 format=3 uid="uid://du36ueeucbc1u"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_bmjq7"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_Bool.gd" id="2_aicf6"]
+[ext_resource type="Texture2D" uid="uid://bfbodho7880gj" path="res://Assets/Commets.png" id="3_fryqt"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="4_f5krc"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_n6oj7"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="6_ord7q"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="7_q46lh"]
+[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="8_nmm4r"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="9_7vlrd"]
+[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="10_rq3ka"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="11_i7vdd"]
+
+[sub_resource type="Resource" id="Resource_6kp37"]
+script = ExtResource("2_aicf6")
+Value = true
+DataName = "IsLarge"
+
+[resource]
+script = ExtResource("11_i7vdd")
+SpotK = 10
+MapIcon = ExtResource("3_fryqt")
+Scene = ExtResource("10_rq3ka")
+PossibleDrops = Array[ExtResource("4_f5krc")]([ExtResource("5_n6oj7"), ExtResource("6_ord7q"), ExtResource("7_q46lh"), ExtResource("8_nmm4r"), ExtResource("9_7vlrd")])
+FullName = "Asteroid Belt"
+Description = "blah blah"
+CanLand = false
+HasAtmoshere = false
+CustomData = Array[ExtResource("1_bmjq7")]([SubResource("Resource_6kp37")])

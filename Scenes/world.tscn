@@ -18,7 +18,6 @@
 [ext_resource type="Resource" uid="uid://sew43a75jovn" path="res://Resources/MapSpots/Gas/G2.tres" id="11_c1xht"]
 [ext_resource type="Resource" uid="uid://2l2v1rv0i6tf" path="res://Resources/MapSpots/Gas/G3.tres" id="12_qm8jg"]
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="12_rf2td"]
-[ext_resource type="Texture2D" uid="uid://csif76k5337h5" path="res://Assets/Items/cryo-chamber.png" id="13_ohgvo"]
 [ext_resource type="Resource" uid="uid://da3ti0o0734tr" path="res://Resources/MapSpots/Ice/I1.tres" id="13_papg5"]
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="14_24pwn"]
 [ext_resource type="Resource" uid="uid://cqpnbtjo5crg0" path="res://Resources/MapSpots/Lava/L1.tres" id="14_dvqje"]
@@ -47,10 +46,12 @@
 [ext_resource type="Resource" uid="uid://dm6x6mhrv8uxw" path="res://Resources/MapSpots/Ringed/R1.tres" id="28_irhw0"]
 [ext_resource type="Resource" uid="uid://dt2a146xanrnq" path="res://Resources/MapSpots/Ringed/R2.tres" id="29_5n1kq"]
 [ext_resource type="Resource" uid="uid://bfffrxqe7m652" path="res://Resources/MapSpots/AsteroidBelt.tres" id="30_qewwn"]
+[ext_resource type="Script" path="res://Scripts/ingame_ui_manager.gd" id="31_5kch8"]
+[ext_resource type="Resource" uid="uid://du36ueeucbc1u" path="res://Resources/MapSpots/AsteroidBeltLarge.tres" id="31_wplf2"]
 [ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/CustomPopUp.tscn" id="48_7p5jv"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/CustomConfirm.tscn" id="49_sgtub"]
 
-[sub_resource type="Resource" id="Resource_w8yqv"]
+[sub_resource type="Resource" id="Resource_7cnjl"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
@@ -63,13 +64,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_0gnls"]
+[sub_resource type="Resource" id="Resource_xa6ji"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 800.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_w8yqv")
+UpgradeVersion = SubResource("Resource_7cnjl")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("16_jmu5m")
 ItemName = "Medium Range Radar"
@@ -77,13 +78,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_mymrc"]
+[sub_resource type="Resource" id="Resource_surlp"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 400.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_0gnls")
+UpgradeVersion = SubResource("Resource_xa6ji")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("16_jmu5m")
 ItemName = "Short Range Radar"
@@ -91,20 +92,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_jfjmm"]
-resource_local_to_scene = true
-script = ExtResource("12_rf2td")
-UpgradeName = "CRYO"
-UpgradeAmm = 1.0
-CurrentVal = 0.0
-UpgradeItems = Array[ExtResource("9_7fm4g")]([])
-ItemIcon = ExtResource("13_ohgvo")
-ItemName = "Cryochamber"
-ItemDesc = "Allows for travel without oxygen loss"
-MaxStackCount = 1
-RandomFindMaxCount = 1
-
-[sub_resource type="Resource" id="Resource_x1k0n"]
+[sub_resource type="Resource" id="Resource_v7bl7"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
@@ -117,13 +105,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_k0ko1"]
+[sub_resource type="Resource" id="Resource_r1gsr"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 200.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_x1k0n")
+UpgradeVersion = SubResource("Resource_v7bl7")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("14_24pwn")
 ItemName = "Medium Fuel Tank"
@@ -131,13 +119,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_7avb1"]
+[sub_resource type="Resource" id="Resource_m8wrk"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 100.0
 CurrentVal = 100.0
-UpgradeVersion = SubResource("Resource_k0ko1")
+UpgradeVersion = SubResource("Resource_r1gsr")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("14_24pwn")
 ItemName = "Fuel Tank"
@@ -145,48 +133,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_kxkj0"]
-resource_local_to_scene = true
-script = ExtResource("12_rf2td")
-UpgradeName = "FUEL_EFFICIENCY"
-UpgradeAmm = 1.5
-CurrentVal = 0.0
-UpgradeItems = Array[ExtResource("9_7fm4g")]([])
-ItemIcon = ExtResource("15_exmjr")
-ItemName = "High Efficiency Engine"
-ItemDesc = "ItemDesc"
-MaxStackCount = 1
-RandomFindMaxCount = 1
-
-[sub_resource type="Resource" id="Resource_pxtjv"]
-resource_local_to_scene = true
-script = ExtResource("12_rf2td")
-UpgradeName = "FUEL_EFFICIENCY"
-UpgradeAmm = 1.25
-CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_kxkj0")
-UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
-ItemIcon = ExtResource("15_exmjr")
-ItemName = "Medium Efficiency Engine"
-ItemDesc = "ItemDesc"
-MaxStackCount = 1
-RandomFindMaxCount = 1
-
-[sub_resource type="Resource" id="Resource_7cyt5"]
-resource_local_to_scene = true
-script = ExtResource("12_rf2td")
-UpgradeName = "FUEL_EFFICIENCY"
-UpgradeAmm = 1.0
-CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_pxtjv")
-UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
-ItemIcon = ExtResource("15_exmjr")
-ItemName = "Engine"
-ItemDesc = "ItemDesc"
-MaxStackCount = 1
-RandomFindMaxCount = 1
-
-[sub_resource type="Resource" id="Resource_w8xmm"]
+[sub_resource type="Resource" id="Resource_v8om1"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
@@ -199,13 +146,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_djovn"]
+[sub_resource type="Resource" id="Resource_8ytxr"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 600.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_w8xmm")
+UpgradeVersion = SubResource("Resource_v8om1")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("10_vufmu")
 ItemName = "Medium Range Analyzer"
@@ -213,13 +160,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_o7c1t"]
+[sub_resource type="Resource" id="Resource_kr1pm"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_djovn")
+UpgradeVersion = SubResource("Resource_8ytxr")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 ItemIcon = ExtResource("10_vufmu")
 ItemName = "Short Range Analyzer"
@@ -227,7 +174,48 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[node name="World" type="Node"]
+[sub_resource type="Resource" id="Resource_jjshv"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL_EFFICIENCY"
+UpgradeAmm = 1.5
+CurrentVal = 0.0
+UpgradeItems = Array[ExtResource("9_7fm4g")]([])
+ItemIcon = ExtResource("15_exmjr")
+ItemName = "High Efficiency Engine"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_vjydy"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL_EFFICIENCY"
+UpgradeAmm = 1.25
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_jjshv")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("15_exmjr")
+ItemName = "Medium Efficiency Engine"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[sub_resource type="Resource" id="Resource_55o6e"]
+resource_local_to_scene = true
+script = ExtResource("12_rf2td")
+UpgradeName = "FUEL_EFFICIENCY"
+UpgradeAmm = 1.0
+CurrentVal = 0.0
+UpgradeVersion = SubResource("Resource_vjydy")
+UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
+ItemIcon = ExtResource("15_exmjr")
+ItemName = "Engine"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1
+
+[node name="World" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_lg538")
 ShipDat = ExtResource("2_e0ks1")
@@ -237,21 +225,22 @@ ExplorationScene = ExtResource("5_8yn38")
 StartingShip = ExtResource("5_e0oyh")
 ShipTradeShip = ExtResource("6_0vqqp")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Map" parent="." instance=ExtResource("2_dh8se")]
+process_mode = 1
+MapSpotTypes = Array[ExtResource("9_tkvk6")]([ExtResource("10_08c4o"), ExtResource("11_c1xht"), ExtResource("12_qm8jg"), ExtResource("13_papg5"), ExtResource("14_dvqje"), ExtResource("15_35kde"), ExtResource("16_bx2d3"), ExtResource("17_qj2bx"), ExtResource("18_j8gmy"), ExtResource("19_f0xxk"), ExtResource("20_yvo1d"), ExtResource("21_mqd8m"), ExtResource("22_esum1"), ExtResource("23_q6mm6"), ExtResource("24_xhtnb"), ExtResource("25_7py8n"), ExtResource("26_tbdsc"), ExtResource("27_2vjke"), ExtResource("28_irhw0"), ExtResource("29_5n1kq"), ExtResource("30_qewwn"), ExtResource("31_wplf2")])
+CommetMapSpots = Array[ExtResource("9_tkvk6")]([ExtResource("30_qewwn"), ExtResource("31_wplf2")])
+
+[node name="Ingame_UIManager" type="CanvasLayer" parent="."]
 process_mode = 1
 layer = 2
+script = ExtResource("31_5kch8")
 
-[node name="Map" parent="CanvasLayer" instance=ExtResource("2_dh8se")]
-mouse_filter = 2
-MapSpotTypes = Array[ExtResource("9_tkvk6")]([ExtResource("10_08c4o"), ExtResource("11_c1xht"), ExtResource("12_qm8jg"), ExtResource("13_papg5"), ExtResource("14_dvqje"), ExtResource("15_35kde"), ExtResource("16_bx2d3"), ExtResource("17_qj2bx"), ExtResource("18_j8gmy"), ExtResource("19_f0xxk"), ExtResource("20_yvo1d"), ExtResource("21_mqd8m"), ExtResource("22_esum1"), ExtResource("23_q6mm6"), ExtResource("24_xhtnb"), ExtResource("25_7py8n"), ExtResource("26_tbdsc"), ExtResource("27_2vjke"), ExtResource("28_irhw0"), ExtResource("29_5n1kq"), ExtResource("30_qewwn")])
-MapSize = 240
+[node name="Inventory" parent="Ingame_UIManager" instance=ExtResource("6_82nvh")]
+StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_surlp"), SubResource("Resource_m8wrk"), SubResource("Resource_kr1pm"), SubResource("Resource_55o6e"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("16_hw203"), ExtResource("16_hw203"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo")])
 
-[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_82nvh")]
-StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_mymrc"), SubResource("Resource_jfjmm"), SubResource("Resource_7avb1"), SubResource("Resource_7cyt5"), SubResource("Resource_o7c1t"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("16_hw203"), ExtResource("16_hw203"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo")])
+[node name="Stat_Panel" parent="Ingame_UIManager" instance=ExtResource("21_101j1")]
 
-[node name="Stat_Panel" parent="CanvasLayer" instance=ExtResource("21_101j1")]
-
-[node name="Timer" type="Timer" parent="CanvasLayer"]
+[node name="Timer" type="Timer" parent="Ingame_UIManager"]
 process_callback = 0
 wait_time = 10.0
 one_shot = true
@@ -369,11 +358,11 @@ script = ExtResource("22_xsiwt")
 CustomPop = ExtResource("48_7p5jv")
 CustomConfirm = ExtResource("49_sgtub")
 
-[connection signal="OnInvencotyClosed" from="CanvasLayer/Inventory" to="CanvasLayer/Stat_Panel" method="OnInventoryClosed"]
-[connection signal="OnInventoryOpened" from="CanvasLayer/Inventory" to="CanvasLayer/Stat_Panel" method="OnInventoryOpened"]
-[connection signal="OnItemAdded" from="CanvasLayer/Inventory" to="." method="OnItemAdded"]
-[connection signal="OnItemRemoved" from="CanvasLayer/Inventory" to="." method="OnItemRemoved"]
-[connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_timer_timeout"]
+[connection signal="OnInvencotyClosed" from="Ingame_UIManager/Inventory" to="Ingame_UIManager/Stat_Panel" method="OnInventoryClosed"]
+[connection signal="OnInventoryOpened" from="Ingame_UIManager/Inventory" to="Ingame_UIManager/Stat_Panel" method="OnInventoryOpened"]
+[connection signal="OnItemAdded" from="Ingame_UIManager/Inventory" to="." method="OnItemAdded"]
+[connection signal="OnItemRemoved" from="Ingame_UIManager/Inventory" to="." method="OnItemRemoved"]
+[connection signal="timeout" from="Ingame_UIManager/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer2/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="CanvasLayer2/PauseContainer/HBoxContainer/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="CanvasLayer2/PauseContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]

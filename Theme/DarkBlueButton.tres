@@ -10,7 +10,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.252517, 0.622353, 0.846633, 1)
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6pr5"]
@@ -23,7 +23,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.252517, 0.622353, 0.846633, 1)
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldhnu"]
@@ -36,7 +36,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.252517, 0.622353, 0.846633, 1)
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
 
 [resource]

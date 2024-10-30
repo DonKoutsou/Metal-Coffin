@@ -7,7 +7,7 @@ var Reward : Array[Item]
 
 func _ready() -> void:
 	var Drops = 0
-	for z in 3:
+	for z in 2:
 		var it = ItemDrop.pick_random() as Item
 		var RewardAmmount = min(MaxDrops - Drops,randi_range(1, it.RandomFindMaxCount))
 		Drops += RewardAmmount

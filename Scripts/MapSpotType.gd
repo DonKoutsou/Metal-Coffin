@@ -9,6 +9,15 @@ class_name MapSpotType
 @export var Description : String
 @export var CanLand : bool = false
 @export var HasAtmoshere : bool = false
+
+@export var CustomData : Array[MapSpotCustomData]
+
+func GetCustomData(datname : String):
+	var returnval 
+	for g in CustomData.size():
+		if (CustomData[g].DataName == datname):
+			returnval = CustomData[g].Value
+	return returnval
 func GetSpotDrop() -> Array[Item]:
 	var Drops : Array[Item] = []
 	var it = PossibleDrops.pick_random()

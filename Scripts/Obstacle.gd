@@ -17,7 +17,7 @@ func SetMesh(Model : Mesh) -> void:
 func _physics_process(_delta: float) -> void:
 	rotation += RotationDirection
 	position.z += 0.4
-	if (position.z > 10):
+	if (position.z > 50):
 		if (!MarkedDead):
 			get_parent().EnemyKilled()
 			MarkedDead = true
@@ -28,3 +28,4 @@ func _on_area_3d_area_entered(_area: Area3D) -> void:
 	$GPUParticles3D.emitting = true
 	$Area3D.set_deferred("monitoring", false)
 	$MeshInstance3D.visible = false
+	$AudioStreamPlayer3D.play()

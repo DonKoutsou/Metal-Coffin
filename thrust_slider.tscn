@@ -1,0 +1,134 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn356hqaf372p"]
+
+[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="1_6tdf3"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_b2aop"]
+[ext_resource type="Script" path="res://Scripts/thrust_slider.gd" id="2_pg28l"]
+[ext_resource type="Theme" uid="uid://r7u6a0gc7qc1" path="res://Theme/SliderTheme.tres" id="3_qcmiu"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="5_5nlh1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufcxd"]
+
+[node name="ThrustSlider" type="PanelContainer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -142.0
+offset_bottom = 142.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("1_6tdf3")
+script = ExtResource("2_pg28l")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 268.585)
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_5nlh1")
+theme_override_fonts/font = ExtResource("2_b2aop")
+theme_override_font_sizes/font_size = 16
+text = "Cruise"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_5nlh1")
+theme_override_fonts/font = ExtResource("2_b2aop")
+theme_override_font_sizes/font_size = 16
+text = "Loiter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_5nlh1")
+theme_override_fonts/font = ExtResource("2_b2aop")
+theme_override_font_sizes/font_size = 16
+text = "Air Stop
+"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
+
+[node name="AccellerationSlider" type="VSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(45, 250)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("3_qcmiu")
+max_value = 50.0
+step = 5.0
+tick_count = 6
+
+[node name="Label" type="Label" parent="HBoxContainer/AccellerationSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = 113.0
+offset_right = 1.5
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_5nlh1")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(10.08, 0)
+layout_mode = 2
+theme = ExtResource("5_5nlh1")
+theme_override_fonts/font = ExtResource("2_b2aop")
+theme_override_font_sizes/font_size = 0
+text = "THRUST"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[connection signal="drag_ended" from="HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_value_changed"]

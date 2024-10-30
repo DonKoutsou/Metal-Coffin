@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://tucv7faum217"]
+[gd_scene load_steps=10 format=3 uid="uid://tucv7faum217"]
 
 [ext_resource type="Script" path="res://Scripts/Obstacle.gd" id="1_aflge"]
 [ext_resource type="ArrayMesh" uid="uid://d0g25ewvmqv4c" path="res://Assets/Rocks/Rock2_Lod2.tres" id="2_cu8qf"]
 [ext_resource type="ArrayMesh" uid="uid://c1o27w2a67o55" path="res://Assets/Rocks/Rock3_Lod2.tres" id="3_6xlcg"]
+[ext_resource type="AudioStream" uid="uid://oh36nqshyp2y" path="res://Assets/Sounds/small-rock-break-194553.mp3" id="4_huwrt"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ps3gg"]
 frequency = 0.0125
@@ -63,5 +64,12 @@ draw_order = 3
 transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_4qt5w")
 draw_pass_1 = ExtResource("3_6xlcg")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_huwrt")
+volume_db = -20.0
+unit_size = 33.08
+max_db = -9.827
+max_distance = 4096.0
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

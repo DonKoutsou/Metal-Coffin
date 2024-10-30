@@ -25,7 +25,7 @@ func StartGame(Load : bool) -> void:
 			window.dialog_text = "No Save File Found"
 			window.popup_centered()
 			return
-	get_child(2).queue_free()
+	get_child(3).queue_free()
 	add_child(wor)
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
@@ -33,5 +33,5 @@ func StartGame(Load : bool) -> void:
 
 func OnGameEnded() -> void:
 	get_tree().paused = false
-	get_child(2).queue_free()
+	get_child(3).queue_free()
 	SpawnMenu()

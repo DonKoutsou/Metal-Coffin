@@ -1,0 +1,18 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cy5dqs7uj5j5x"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_4chtb"]
+resource_name = "Reverb"
+room_size = 1.0
+damping = 0.33
+spread = 0.31
+hipass = 0.2
+
+[resource]
+bus/1/name = &"MapSounds"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_4chtb")
+bus/1/effect/0/enabled = true

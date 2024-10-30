@@ -1,22 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvw53vgn44h3v"]
+[gd_scene load_steps=6 format=3 uid="uid://cvw53vgn44h3v"]
 
 [ext_resource type="Script" path="res://Scripts/steering_wheel.gd" id="1_308sd"]
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="2_cdrhc"]
+[ext_resource type="StyleBox" uid="uid://cqvxsqe7hceth" path="res://Theme/Darkblue_Circle.tres" id="2_fg6hg"]
+[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="3_g42pt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lfya3"]
 radius = 255.002
 
-[node name="SteeringWheel" type="Control"]
-layout_mode = 3
+[node name="SteeringWheel" type="Node2D"]
+script = ExtResource("1_308sd")
+
+[node name="Panel" type="Panel" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -287.0
+offset_top = -287.0
+offset_right = 287.0
+offset_bottom = 287.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_308sd")
+theme_override_styles/panel = ExtResource("2_fg6hg")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2147483648
@@ -25,21 +33,14 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_lfya3")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_cdrhc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g42pt")
+volume_db = -15.0
+pitch_scale = 0.76
+bus = &"MapSounds"
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_texture_rect_mouse_entered"]

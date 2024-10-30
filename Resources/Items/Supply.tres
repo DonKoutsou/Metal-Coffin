@@ -12,4 +12,4 @@ ItemIconSmol = ExtResource("1_3f7co")
 ItemName = "Supply"
 ItemDesc = "Used to repair damages to the hull of the ship"
 MaxStackCount = 10
-RandomFindMaxCount = 5
+RandomFindMaxCount = 3

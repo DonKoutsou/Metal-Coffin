@@ -4,3 +4,4 @@
 
 [resource]
 shader = ExtResource("1_7ug1e")
+shader_parameter/line_color = Color(2.2, 0.569, 0.52, 1)

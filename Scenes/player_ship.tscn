@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=14 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="2_2w4bb"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_c5u4x"]
 [ext_resource type="Texture2D" uid="uid://n7ekf8tb0n1e" path="res://Assets/ShipIcon.png" id="4_ckmuy"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_vt3yq"]
+[ext_resource type="AudioStream" uid="uid://dxipr2c6rvgvf" path="res://Assets/Sounds/spacecraft-engine-loop-01-58205.mp3" id="5_c80ql"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
@@ -50,6 +52,15 @@ shader_parameter/trail_width = 1.0
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = false
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qn4ww"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 7.178
+initial_velocity_max = 70.34
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 2.0
+
 [node name="PlayerShip" type="Node2D"]
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
@@ -91,6 +102,7 @@ offset_right = -5.01999
 offset_bottom = 20.5
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("4_vt3yq")
 theme_override_colors/font_color = Color(0.252517, 0.622353, 0.846633, 1)
 theme_override_fonts/font = ExtResource("3_c5u4x")
 theme_override_font_sizes/font_size = 14
@@ -134,6 +146,7 @@ offset_right = -13.73
 offset_bottom = 23.0
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("4_vt3yq")
 theme_override_colors/font_color = Color(0.781105, 0.651497, 0, 1)
 theme_override_fonts/font = ExtResource("3_c5u4x")
 theme_override_font_sizes/font_size = 14
@@ -157,10 +170,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -99.6817
-offset_top = -99.7675
-offset_right = 100.318
-offset_bottom = 100.233
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -179,6 +192,7 @@ offset_right = -3.845
 offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("4_vt3yq")
 theme_override_colors/font_color = Color(0.0486369, 0.645335, 0.0400367, 1)
 theme_override_fonts/font = ExtResource("3_c5u4x")
 theme_override_font_sizes/font_size = 14
@@ -186,14 +200,25 @@ text = "Analyzer Range"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="."]
-
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
 texture = ExtResource("4_ckmuy")
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(100, 0)
+[node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="PlayerShipSpr"]
+rotation = 1.5708
 
-[connection signal="screen_entered" from="Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
-[connection signal="screen_exited" from="Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_c80ql")
+volume_db = -20.0
+bus = &"MapSounds"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-16, 0)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_qn4ww")
+lifetime = 2.0
+
+[connection signal="screen_entered" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
+[connection signal="screen_exited" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]

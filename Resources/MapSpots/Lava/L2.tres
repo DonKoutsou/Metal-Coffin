@@ -15,3 +15,4 @@ PossibleDrops = Array[ExtResource("2_v4f6c")]([ExtResource("4_mkykr")])
 FullName = "Lava Giant"
 Description = ""
 CanLand = true
+HasAtmoshere = false
