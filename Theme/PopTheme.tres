@@ -1,5 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://de7fb8k462lxb"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://de7fb8k462lxb"]
 
+[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="1_7bjd6"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_xgg1l"]
 [ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="2_pusc7"]
 
@@ -65,6 +66,7 @@ AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_dqxuj")
 AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_dqxuj")
 AcceptDialog/styles/panel = SubResource("StyleBoxFlat_dqxuj")
 Button/constants/outline_size = 5
+Button/fonts/font = ExtResource("1_7bjd6")
 Button/styles/hover = SubResource("StyleBoxFlat_c1n88")
 Button/styles/normal = ExtResource("2_pusc7")
 Button/styles/pressed = SubResource("StyleBoxFlat_2snv7")

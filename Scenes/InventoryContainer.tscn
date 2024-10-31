@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cti0geea0pj57"]
+[gd_scene load_steps=8 format=3 uid="uid://cti0geea0pj57"]
 
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_c3amd"]
 [ext_resource type="Script" path="res://Scripts/Inventory_Box.gd" id="1_igs2u"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_mngpq"]
 [ext_resource type="Texture2D" uid="uid://dgk6qcppifpnk" path="res://Assets/Items/cubeforce.png" id="2_52kf5"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="3_et2aa"]
+[ext_resource type="Texture2D" uid="uid://dcwvf3of7pu8g" path="res://Assets/hazard-sign.png" id="5_s4jhf"]
+[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="6_k60u4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_708pr"]
 content_margin_left = 2.0
@@ -57,6 +58,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_52kf5")
 
+[node name="TextureRect2" type="TextureRect" parent="TextureRect"]
+modulate = Color(0.999799, 0.87683, 7.70092e-07, 1)
+layout_mode = 1
+offset_right = 31.0
+offset_bottom = 31.0
+texture = ExtResource("5_s4jhf")
+expand_mode = 1
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -68,7 +77,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_708pr")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("1_c3amd")
+theme_override_fonts/font = ExtResource("6_k60u4")
 theme_override_font_sizes/font_size = 24
 text = "1"
 

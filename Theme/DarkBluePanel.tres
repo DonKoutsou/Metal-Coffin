@@ -12,3 +12,4 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
+corner_detail = 1

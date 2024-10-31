@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=11 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="2_imjs0"]
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_gfag0"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_ropp1"]
+[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
+[ext_resource type="StyleBox" uid="uid://cqvxsqe7hceth" path="res://Theme/Darkblue_Circle.tres" id="4_cytht"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_ahffl"]
+[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="5_wa6ro"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1lp7n"]
 shader = ExtResource("2_imjs0")
@@ -16,6 +17,44 @@ shader_parameter/quantization_levels = 256
 shader_parameter/saturation = 0.536
 shader_parameter/layers = 5.175
 shader_parameter/iterations = 3
+
+[sub_resource type="Animation" id="Animation_lf1n0"]
+resource_name = "Rotate"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_gaja2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d3p0b"]
+_data = {
+"RESET": SubResource("Animation_gaja2"),
+"Rotate": SubResource("Animation_lf1n0")
+}
 
 [node name="StartingMenu" type="CanvasLayer"]
 process_mode = 3
@@ -32,6 +71,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(255, 256)
+texture = ExtResource("3_vcxot")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d3p0b")
+}
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,27 +98,29 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -114.0
-offset_top = -128.5
+offset_top = -176.5
 offset_right = 114.0
-offset_bottom = 128.5
+offset_bottom = 176.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("3_gfag0")
+theme_override_styles/panel = ExtResource("4_cytht")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
+alignment = 1
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ropp1")
+theme_override_colors/font_outline_color = Color(0.615304, 0.57196, 0.322451, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("5_wa6ro")
 theme_override_font_sizes/font_size = 34
 text = "Into The Void"
 
 [node name="Play" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("5_ahffl")
-theme_override_fonts/font = ExtResource("4_ropp1")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Play"
@@ -67,7 +128,6 @@ text = "Play"
 [node name="Load" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("5_ahffl")
-theme_override_fonts/font = ExtResource("4_ropp1")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Load"
@@ -75,7 +135,6 @@ text = "Load"
 [node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("5_ahffl")
-theme_override_fonts/font = ExtResource("4_ropp1")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Exit"

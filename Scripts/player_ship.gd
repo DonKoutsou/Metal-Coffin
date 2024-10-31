@@ -53,7 +53,9 @@ func _on_player_viz_notifier_screen_exited() -> void:
 	ScreenExit.emit()
 
 func _physics_process(_delta: float) -> void:
-	var fuel = global_position.distance_to($Node2D.global_position) / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
+	if ($Node2D.position.x == 0):
+		return
+	var fuel = $Node2D.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
 	var Dat = ShipData.GetInstance()
 	if (Dat.GetStat("FUEL").GetCurrentValue() < fuel):
 		HaltShip()

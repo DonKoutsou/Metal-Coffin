@@ -11,10 +11,10 @@
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -730.0
-offset_top = 7.5
+offset_left = -715.0
+offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 263.5
+offset_bottom = 284.0
 grow_horizontal = 0
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -29,6 +29,7 @@ alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 9
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
@@ -47,85 +48,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" groups=["Buttons"]]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme = ExtResource("5_kaurm")
-theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 24
-text = "-"
-
-[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("5_kaurm")
-theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 24
-text = "Use :1x"
-
-[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" groups=["Buttons"]]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme = ExtResource("5_kaurm")
-theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 24
-text = "+"
-
-[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("5_kaurm")
-theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 24
-text = "Drop"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("5_kaurm")
-theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 24
-text = "Upgrade"
-
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/panel = ExtResource("1_yjbet")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 3
 texture = ExtResource("6_3lvdp")
 stretch_mode = 2
 
-[node name="ItemDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 3.51)
+[node name="UpgradeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("4_dsmol")
-theme_override_font_sizes/font_size = 24
-text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="UpgradeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_dsmol")
 theme_override_font_sizes/font_size = 24
@@ -134,20 +69,98 @@ text = "Upgrade Cost : 4x
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/UpgradeContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("3_v5dpc")
+stretch_mode = 2
 
-[node name="Close" type="Button" parent="VBoxContainer" groups=["Buttons"]]
+[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_kaurm")
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "Upgrade"
+
+[node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_kaurm")
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "Repair"
+
+[node name="UsableItemsActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["Buttons"]]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme = ExtResource("5_kaurm")
 theme_override_fonts/font = ExtResource("4_dsmol")
 theme_override_font_sizes/font_size = 24
-text = "Close"
+text = "-"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/UseLess" to="." method="_on_use_less_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Use" to="." method="_on_use_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/UseMore" to="." method="_on_use_more_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Drop" to="." method="_on_drop_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/Close" to="." method="_on_close_pressed"]
+[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_kaurm")
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "Use :1x"
+
+[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["Buttons"]]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("5_kaurm")
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "+"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("1_yjbet")
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ItemDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("5_kaurm")
+theme_override_fonts/font = ExtResource("4_dsmol")
+theme_override_font_sizes/font_size = 24
+text = "Drop"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions/UseLess" to="." method="_on_use_less_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions/Use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions/UseMore" to="." method="_on_use_more_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Drop" to="." method="_on_drop_pressed"]

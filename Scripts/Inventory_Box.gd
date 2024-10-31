@@ -29,6 +29,7 @@ func RegisterItem(it : Item) -> void:
 		$TextureRect/TextureRect.modulate = it.ItecColor
 	else:
 		$TextureRect/TextureRect.modulate = Color.WHITE
+	$TextureRect/TextureRect2.visible = it is ShipPart and it.IsDamaged
 
 func IsEmpty() -> bool:
 	return ItemC.Ammount == 0
@@ -38,6 +39,9 @@ func UpdateAmm(Amm : int) -> void:
 	$PanelContainer/Label.text = var_to_str(ItemC.Ammount)
 	var bollthing = ItemC.Ammount > 0
 	ToggleVisuals(bollthing)
+
+func UpdateDamaged(Damaged : bool) -> void:
+	$TextureRect/TextureRect2.visible = Damaged
 
 func HasSpace() -> bool:
 	return ItemC.Ammount < ItemC.ItemType.MaxStackCount

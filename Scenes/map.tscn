@@ -220,8 +220,8 @@ grow_vertical = 2
 pivot_offset = Vector2(50, 50)
 
 [node name="ThrustSlider" parent="CanvasLayer" instance=ExtResource("34_sn67k")]
-offset_top = -84.0
-offset_bottom = 200.0
+offset_top = -87.0
+offset_bottom = 197.0
 
 [node name="SteeringWheel" parent="CanvasLayer" instance=ExtResource("33_gpac8")]
 position = Vector2(-5, 652)

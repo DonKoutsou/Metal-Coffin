@@ -21,7 +21,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="PlanetSurface" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_xurd7")]
@@ -30,6 +30,7 @@ render_target_update_mode = 4
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/separation = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -62,12 +63,14 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_ie564")
+theme_override_font_sizes/font_size = 22
 text = "Keep Exploring"
 
 [node name="Leave" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_ie564")
+theme_override_font_sizes/font_size = 22
 text = "Leave"
 
 [node name="Stat_Panel" parent="VBoxContainer" instance=ExtResource("5_lkmji")]

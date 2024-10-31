@@ -23,9 +23,9 @@ script = ExtResource("5_8b602")
 ClickSound = ExtResource("6_h4tjh")
 HoverShound = ExtResource("7_p3e15")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundManager"]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_y0dhp")
 volume_db = 8.0
 autoplay = true
+stream_paused = true
+bus = &"Music"

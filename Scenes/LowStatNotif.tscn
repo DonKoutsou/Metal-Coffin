@@ -108,7 +108,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_75w15")
-volume_db = -10.0
+volume_db = -15.0
 pitch_scale = 1.4
 autoplay = true
 bus = &"MapSounds"

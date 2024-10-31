@@ -1,13 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn356hqaf372p"]
+[gd_scene load_steps=7 format=3 uid="uid://dn356hqaf372p"]
 
 [ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="1_6tdf3"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_b2aop"]
 [ext_resource type="Script" path="res://Scripts/thrust_slider.gd" id="2_pg28l"]
 [ext_resource type="Theme" uid="uid://r7u6a0gc7qc1" path="res://Theme/SliderTheme.tres" id="3_qcmiu"]
-[ext_resource type="StyleBox" uid="uid://be0hqc16sla2m" path="res://Theme/Panel_Brown.tres" id="3_swfkb"]
+[ext_resource type="FontFile" uid="uid://dim2iqnwjiswx" path="res://Fonts/Caudex-Bold.ttf" id="4_vkl6g"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="5_5nlh1"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufcxd"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="5_06vry"]
 
 [node name="ThrustSlider" type="PanelContainer"]
 anchors_preset = 6
@@ -27,119 +25,81 @@ script = ExtResource("2_pg28l")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 27
+size_flags_horizontal = 8
+theme_override_constants/separation = 17
 alignment = 1
 
 [node name="Panel" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 14)
+custom_minimum_size = Vector2(90, 14)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("3_swfkb")
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
 
 [node name="Panel2" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(85, 14)
+custom_minimum_size = Vector2(80, 14)
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = ExtResource("3_swfkb")
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
 
 [node name="Panel3" type="Panel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(70, 14)
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = ExtResource("3_swfkb")
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
 
 [node name="Panel4" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(55, 14)
+custom_minimum_size = Vector2(60, 14)
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = ExtResource("3_swfkb")
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
 
 [node name="Panel5" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(40, 14)
+custom_minimum_size = Vector2(50, 14)
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = ExtResource("3_swfkb")
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
 
 [node name="Panel6" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(25, 14)
+custom_minimum_size = Vector2(40, 14)
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = ExtResource("3_swfkb")
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
 
 [node name="Panel7" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(30, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
+
+[node name="Panel8" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(20, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
+
+[node name="Panel9" type="Panel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(10, 14)
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = ExtResource("3_swfkb")
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_6tdf3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = -5
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 268.585)
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
-alignment = 1
+theme_override_styles/panel = ExtResource("5_06vry")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer"]
 layout_mode = 2
-alignment = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("5_5nlh1")
-theme_override_fonts/font = ExtResource("2_b2aop")
-theme_override_font_sizes/font_size = 16
-text = "Cruise"
-horizontal_alignment = 1
-
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 3)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("5_5nlh1")
-theme_override_fonts/font = ExtResource("2_b2aop")
-theme_override_font_sizes/font_size = 16
-text = "Loiter"
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_vkl6g")
+text = "THRUST"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(20, 3)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("5_5nlh1")
-theme_override_fonts/font = ExtResource("2_b2aop")
-theme_override_font_sizes/font_size = 16
-text = "Air Stop
-"
-horizontal_alignment = 1
-
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(20, 3)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_ufcxd")
+autowrap_mode = 1
 
 [node name="AccellerationSlider" type="VSlider" parent="HBoxContainer"]
 custom_minimum_size = Vector2(45, 250)
@@ -148,26 +108,68 @@ size_flags_vertical = 4
 theme = ExtResource("3_qcmiu")
 max_value = 50.0
 step = 25.0
-tick_count = 6
 
-[node name="Label" type="Label" parent="HBoxContainer/AccellerationSlider"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -38.5
-offset_top = 113.0
-offset_right = 1.5
-offset_bottom = 136.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 268.585)
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("5_06vry")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("5_5nlh1")
+theme_override_fonts/font = ExtResource("4_vkl6g")
 theme_override_font_sizes/font_size = 16
-text = "0"
+text = "Cruise"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("5_06vry")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_5nlh1")
+theme_override_fonts/font = ExtResource("4_vkl6g")
+theme_override_font_sizes/font_size = 16
+text = "Loiter"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 3)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("5_06vry")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_5nlh1")
+theme_override_fonts/font = ExtResource("4_vkl6g")
+theme_override_font_sizes/font_size = 16
+text = "Air Stop
+"
+horizontal_alignment = 1
 
 [connection signal="drag_ended" from="HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_drag_ended"]
 [connection signal="value_changed" from="HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_value_changed"]

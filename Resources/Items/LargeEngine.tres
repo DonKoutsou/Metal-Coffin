@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=4 format=3 uid="uid://cxum5qaw20d1q"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=5 format=3 uid="uid://cxum5qaw20d1q"]
 
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_cxl4y"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_11t01"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_rflth"]
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_s64vj"]
 
 [resource]
@@ -11,6 +12,8 @@ UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.5
 CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("2_11t01")]([])
+IsDamaged = false
+RepairItems = Array[ExtResource("2_11t01")]([ExtResource("3_rflth"), ExtResource("3_rflth")])
 ItemIcon = ExtResource("1_cxl4y")
 ItemName = "High Efficiency Engine"
 ItemDesc = "ItemDesc"

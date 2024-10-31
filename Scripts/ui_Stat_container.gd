@@ -13,10 +13,10 @@ func UpdateStat(StatN : String):
 	MyTween.tween_property($HBoxContainer/Bar, "value", CurStat, 0.1)
 	$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
-	$HBoxContainer/HBoxContainer/Label.text = var_to_str(roundi(CurStat)) + "/" + var_to_str((roundi(MaxValue)))
+	$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(CurStat)) + "/" + var_to_str((roundi(MaxValue)))
 	if (!$AnimationPlayer.is_playing()):
-		$HBoxContainer/HBoxContainer/TextureRect2.visible = CurStat < MaxValue * 0.2
-		$HBoxContainer/HBoxContainer/TextureRect3.visible = CurStat < MaxValue * 0.2
+		$HBoxContainer/Bar/HBoxContainer/TextureRect2.visible = CurStat < MaxValue * 0.2
+		$HBoxContainer/Bar/HBoxContainer/TextureRect3.visible = CurStat < MaxValue * 0.2
 	#if (CurStat < 20):
 		#$AnimationPlayer.play("StatLow")
 # Called when the node enters the scene tree for the first time.
@@ -34,7 +34,7 @@ func UpdateStatCust(StatN : String, Val : float):
 	tw.play()
 	$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
-	$HBoxContainer/HBoxContainer/Label.text = var_to_str(roundi(Val)) + "/" + var_to_str((roundi(MaxValue)))
+	$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(Val)) + "/" + var_to_str((roundi(MaxValue)))
 func _enter_tree() -> void:
 	if (Stat == "HP"):
 		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.051, 0.533, 0.09)
@@ -45,4 +45,4 @@ func _enter_tree() -> void:
 	if (Stat == "FUEL"):
 		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.781, 0.651, 0)
 	UpdateStat(Stat)
-	$HBoxContainer/HBoxContainer/Label2.text = Stat
+	$HBoxContainer/Bar/HBoxContainer/Label2.text = Stat

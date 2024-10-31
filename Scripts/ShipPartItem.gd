@@ -6,6 +6,7 @@ class_name ShipPart
 @export var CurrentVal : float
 @export var UpgradeVersion : ShipPart
 @export var UpgradeItems : Array[Item]
-
+@export var IsDamaged : bool = false
+@export var RepairItems : Array[Item]
 func _setup_local_to_scene() -> void:
 	CurrentVal = UpgradeAmm

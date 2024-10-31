@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dq0pyxn8n8pv5" path="res://Assets/Spaceship2/2_Spaceship2_Normal.png" id="3_2f7id"]
 [ext_resource type="ArrayMesh" uid="uid://52yp1fyvsuom" path="res://Assets/Spaceship2/2.obj" id="4_hcr45"]
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="5_undfp"]
-[ext_resource type="AudioStream" uid="uid://dxipr2c6rvgvf" path="res://Assets/Sounds/spacecraft-engine-loop-01-58205.mp3" id="6_rgbku"]
+[ext_resource type="AudioStream" uid="uid://my47ckjtdbg5" path="res://Assets/Sounds/thrusters_loopwav-14699.mp3" id="6_yreke"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6032"]
 albedo_texture = ExtResource("1_h8oyn")
@@ -106,6 +106,7 @@ scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_0i8mp")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("6_rgbku")
-volume_db = -5.0
+stream = ExtResource("6_yreke")
+volume_db = 5.0
 autoplay = true
+bus = &"MapSounds"

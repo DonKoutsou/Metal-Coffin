@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://n1uvu44r7eyd"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://n1uvu44r7eyd"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_3ytf2"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_7rfwq"]
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_4o074"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_bltra"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_nxxfc"]
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/LargeFuelTank.tres" id="4_eq04c"]
 
@@ -14,6 +15,8 @@ UpgradeAmm = 200.0
 CurrentVal = 0.0
 UpgradeVersion = ExtResource("4_eq04c")
 UpgradeItems = Array[ExtResource("2_7rfwq")]([ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc"), ExtResource("3_nxxfc")])
+IsDamaged = false
+RepairItems = Array[ExtResource("2_7rfwq")]([ExtResource("3_bltra"), ExtResource("3_bltra")])
 ItemIcon = ExtResource("1_3ytf2")
 ItemName = "Medium Fuel Tank"
 ItemDesc = "ItemDesc"

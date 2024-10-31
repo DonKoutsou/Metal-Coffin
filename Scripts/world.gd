@@ -96,14 +96,19 @@ func TestTrade() -> void:
 	StartShipTrade(load("res://Resources/Ships/Ship2.tres") as BaseShip)
 	
 func OnItemAdded(It : Item) -> void:
-	if (It is ShipPart):
+	if (It is ShipPart and !It.IsDamaged):
 		ShipDat.ApplyShipPartStat(It)
 		ItemBuffStat(It.UpgradeName)
 func OnItemRemoved(It : Item) -> void:
-	if (It is ShipPart):
+	if (It is ShipPart and !It.IsDamaged):
 		ShipDat.RemoveShipPartStat(It)
 		ItemBuffStat(It.UpgradeName)
-		
+func OnItemRepaired(Part : ShipPart) -> void:
+	ShipDat.ApplyShipPartStat(Part)
+	ItemBuffStat(Part.UpgradeName)
+func OnItemDamaged(Part : ShipPart) -> void:
+	ShipDat.RemoveShipPartStat(Part)
+	ItemBuffStat(Part.UpgradeName)
 func ItemBuffStat(UpName : String) -> void:
 	if (UpName == "VIZ_RANGE"):
 		$Map.player_ship.UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
@@ -139,7 +144,7 @@ func FightEnded(Resault : bool, RemainingHP : int, SupplyRew : Array[Item]) -> v
 func StartExploration(Spot : MapSpot) -> void:
 	var Escene = ExplorationScene.instantiate() as Exploration
 	if (Spot.SpotType.HasAtmoshere):
-		ShipData.GetInstance().UpdateStatCurrentValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
+		ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
 		PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
 	Escene.PlayerHp = ShipDat.GetStat("HP").CurrentVelue
 	Escene.PlayerOxy = ShipDat.GetStat("OXYGEN").CurrentVelue
@@ -205,6 +210,7 @@ func UseItem(It : UsableItem) -> bool:
 		return false
 	else :
 		ShipDat.RefilResource(statname, 20)
+		ItemBuffStat(statname)
 		return true
 	
 func GameLost(reason : String):

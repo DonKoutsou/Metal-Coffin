@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cgma68ateq86o"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cgma68ateq86o"]
+
+[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="1_3ukfs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ph6w3"]
 content_margin_left = 8.0
@@ -9,9 +11,14 @@ bg_color = Color(0.318049, 0.374525, 0.448438, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
-border_width_bottom = 2
+border_width_bottom = 60
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6pr5"]
 content_margin_left = 8.0
@@ -19,12 +26,17 @@ content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.161404, 0.19644, 0.24227, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldhnu"]
 content_margin_left = 8.0
@@ -38,8 +50,15 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
 
 [resource]
+Button/constants/outline_size = 6
+Button/fonts/font = ExtResource("1_3ukfs")
 Button/styles/hover = SubResource("StyleBoxFlat_ph6w3")
 Button/styles/normal = SubResource("StyleBoxFlat_l6pr5")
 Button/styles/pressed = SubResource("StyleBoxFlat_ldhnu")
