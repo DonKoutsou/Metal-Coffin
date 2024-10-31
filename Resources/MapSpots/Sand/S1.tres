@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://cva6b4ff20rlh"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://cva6b4ff20rlh"]
 
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_1lyf0"]
 [ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_ks4jl"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_05voo"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_1xctn"]
@@ -16,3 +17,4 @@ FullName = "Sand Giant"
 Description = ""
 CanLand = true
 HasAtmoshere = true
+CustomData = Array[ExtResource("1_1lyf0")]([])

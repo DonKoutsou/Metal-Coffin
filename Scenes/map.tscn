@@ -229,6 +229,7 @@ position = Vector2(-5, 652)
 [connection signal="ScreenEnter" from="MapSpots/PlayerShip" to="." method="PlayerEnteredScreen"]
 [connection signal="ScreenExit" from="MapSpots/PlayerShip" to="." method="PlayerExitedScreen"]
 [connection signal="ShipAccelerating" from="MapSpots/PlayerShip" to="." method="ShipStartedMoving"]
+[connection signal="ShipForceStopped" from="MapSpots/PlayerShip" to="." method="ShipForcedStop"]
 [connection signal="ShipStopped" from="MapSpots/PlayerShip" to="." method="ShipStoppedMoving"]
 [connection signal="AccelerationChangeEnded" from="CanvasLayer/ThrustSlider" to="MapSpots/PlayerShip" method="AccelerationEnded"]
 [connection signal="AccelerationChanged" from="CanvasLayer/ThrustSlider" to="MapSpots/PlayerShip" method="AccelerationChanged"]

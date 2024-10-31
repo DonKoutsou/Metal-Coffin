@@ -36,7 +36,7 @@ func _ready() -> void:
 	#$Hull_HP_Container/HBoxContainer/HullHp/Label.text = var_to_str(roundi(Hull)) + "/" + var_to_str(roundi(HullMax))
 	var fintrans = -50;
 	var SuppliesList = []
-	for g in EnemyGoal/50:
+	for g in EnemyGoal/20:
 		SuppliesList.insert(g, randi_range(0, EnemyGoal))
 	for g in EnemyGoal :
 		if (SuppliesList.has(g)):

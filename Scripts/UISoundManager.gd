@@ -10,10 +10,13 @@ static var Instance : UISoundMan
 func _ready() -> void:
 	var player1 = AudioStreamPlayer.new()
 	player1.stream = ClickSound
+	player1.bus = "UI"
 	add_child(player1)
 	Sounds.append(player1)
 	var player2 = AudioStreamPlayer.new()
+	player2.volume_db = -5
 	player2.stream = HoverShound
+	player2.bus = "UI"
 	add_child(player2)
 	Sounds.append(player2)
 	Instance = self

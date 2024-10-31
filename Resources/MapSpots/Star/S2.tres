@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://d14wweum23fh2"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://d14wweum23fh2"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_6osum"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_hb5cn"]
 [ext_resource type="Texture2D" uid="uid://cpja8yfly0giw" path="res://Assets/polar-star(1).png" id="1_pje42"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_3vits"]
 [ext_resource type="PackedScene" uid="uid://eno8cr7xyixu" path="res://Scenes/MapSpotScenes/Star/S2.tscn" id="3_4vcu8"]
@@ -16,3 +17,4 @@ FullName = "Supernova"
 Description = "blah blag"
 CanLand = false
 HasAtmoshere = false
+CustomData = Array[ExtResource("1_hb5cn")]([])

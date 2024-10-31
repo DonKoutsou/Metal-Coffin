@@ -64,6 +64,7 @@ scale_max = 2.0
 [node name="PlayerShip" type="Node2D"]
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
+LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 
 [node name="Radar" type="Area2D" parent="."]
 rotation = -0.282025
@@ -219,6 +220,8 @@ position = Vector2(-16, 0)
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_qn4ww")
 lifetime = 2.0
+
+[node name="Notifications" type="Node2D" parent="."]
 
 [connection signal="screen_entered" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
 [connection signal="screen_exited" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]

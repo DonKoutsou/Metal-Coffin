@@ -2,6 +2,8 @@ extends Node2D
 
 class_name PlayerShip
 
+@export var LowStatsToNotifyAbout : Array[String]
+
 var Travelling = false
 var ChangingCourse = false
 
@@ -10,6 +12,7 @@ signal ScreenExit()
 
 signal ShipStopped
 signal ShipAccelerating
+signal ShipForceStopped
 
 func _ready() -> void:
 	#set_physics_process(false)
@@ -32,7 +35,17 @@ func UpdateAnalyzerRange(rang : float):
 	$Analyzer/Analyzer_Range/Label2.visible = rang > 100
 	$Analyzer/Analyzer_Range.position = Vector2(-(rang), -(rang))
 	#($Analyzer/Analyzer_Range.material as ShaderMaterial).set_shader_parameter("line_width", rang * 0.000017)
-
+func ShowingNotif() -> bool:
+	return $Notifications.get_child_count() > 0
+func OnStatLow(StatName : String) -> void:
+	if (!LowStatsToNotifyAbout.has(StatName)):
+		return
+	var notif = (load("res://Scenes/LowStatNotif.tscn") as PackedScene).instantiate() as LowStatNotif
+	notif.SetStatData(StatName)
+	notif.rotation = -rotation
+	$Notifications.add_child(notif)
+func UpdateShipIcon(Tex : Texture) -> void:
+	$PlayerShipSpr.texture = Tex
 func _on_player_viz_notifier_screen_entered() -> void:
 	ScreenEnter.emit()
 
@@ -54,9 +67,9 @@ func _physics_process(_delta: float) -> void:
 			PopUpManager.GetInstance().DoPopUp("You have run out of oxygen.")
 			#set_physics_process(false)
 			return
-		Dat.AddToStatCurrentValue("OXYGEN", -oxy)
+		Dat.RefilResource("OXYGEN", -oxy)
 	global_position = $Node2D.global_position
-	Dat.AddToStatCurrentValue("FUEL", -fuel)
+	Dat.ConsumeResource("FUEL", fuel)
 	UpdateFuelRange(Dat.GetStat("FUEL").GetCurrentValue(), Dat.GetStat("FUEL_EFFICIENCY").GetStat())
 
 func HaltShip():
@@ -65,7 +78,7 @@ func HaltShip():
 	ChangingCourse = false
 	$Node2D.position.x = 0
 	$AudioStreamPlayer2D.stop()
-	ShipStopped.emit()
+	ShipForceStopped.emit()
 	
 func SteerChanged(value: float) -> void:
 	Steer(deg_to_rad(value))

@@ -44,9 +44,9 @@ func GetPlayerPos() -> Vector2:
 
 func SetPlayerPos(pos : Vector2) -> void:
 	$MapSpots/PlayerShip.position = pos
-func UpdateShipIcon(Tex : Texture) -> void:
-	$MapSpots/PlayerShip/PlayerShipSpr.texture = Tex
 
+func GetPlayerShip() -> PlayerShip:
+	return $MapSpots/PlayerShip
 #var touch_points: Dictionary = {}
 #var start_zoom: Vector2
 #var start_dist: float
@@ -189,7 +189,7 @@ func Arrival(Spot : MapSpot)	-> void:
 		player_ship.global_position = randspot.global_position
 		PopUpManager.GetInstance().DoPopUp("You've entered a black whole and have been teleported away")
 		player_ship.HaltShip()
-		thrust_slider.ZeroAcceleration()
+		
 	if Spot.SpotType.GetEnumString() == "ASTEROID_BELT":
 		Spot.queue_free()
 		var val = Spot.SpotType.GetCustomData("IsLarge") as bool
@@ -198,7 +198,7 @@ func Arrival(Spot : MapSpot)	-> void:
 		else:
 			AsteroidBeltArrival.emit(60)
 		player_ship.HaltShip()
-		thrust_slider.ZeroAcceleration()
+		
 func StageFailed() -> void:
 	# enable inputs
 	set_process(true)
@@ -217,6 +217,7 @@ func StageFailed() -> void:
 	# enable inputs
 	#set_process(false)
 	
+# Called when clicked on a planet
 func AnalyzeLocation(Spot : MapSpot):
 	var analyzer = AnalyzerScene.instantiate() as PlanetAnalyzer
 	analyzer.SetVisuals(Spot)
@@ -302,3 +303,5 @@ func ShipStartedMoving():
 	
 func ShipStoppedMoving():
 	pass
+func ShipForcedStop():
+	thrust_slider.ZeroAcceleration()

@@ -1,6 +1,6 @@
 extends Control
 
-
+class_name AnalyzeNotif
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimationPlayer.play("Show")

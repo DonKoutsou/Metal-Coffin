@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://dx2abc2gi0o5s"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://dx2abc2gi0o5s"]
 
 [ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_mkv5e"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_tvew1"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_cs877"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_7clno"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="4_dii0p"]
@@ -17,3 +18,4 @@ FullName = "Terrestrial Planet"
 Description = ""
 CanLand = true
 HasAtmoshere = true
+CustomData = Array[ExtResource("1_tvew1")]([])

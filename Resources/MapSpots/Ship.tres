@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Ship_MapSpotType" load_steps=9 format=3 uid="uid://dac7bh3qrgvtt"]
+[gd_resource type="Resource" script_class="Ship_MapSpotType" load_steps=10 format=3 uid="uid://dac7bh3qrgvtt"]
 
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_cer4m"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="1_hxk2f"]
 [ext_resource type="Script" path="res://Scripts/Ship_MapSpotType.gd" id="2_6ewyf"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_ajqlo"]
@@ -20,3 +21,4 @@ FullName = "Supernova"
 Description = "blah blag"
 CanLand = false
 HasAtmoshere = false
+CustomData = Array[ExtResource("1_cer4m")]([])

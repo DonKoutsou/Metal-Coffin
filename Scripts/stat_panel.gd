@@ -8,6 +8,7 @@ var StatPanels : Array[UIStat] = []
 
 signal OnStatsUpdated(StatN : String)
 signal OnStatsUpdatedCust(StatN : String, Val : float)
+signal OnStatLow(StatN : String)
 # Called when the node enters the scene tree for the first time.
 func _enter_tree() -> void:
 	for g in StatsToShow.size():
@@ -17,12 +18,15 @@ func _enter_tree() -> void:
 		get_child(0).add_child(stat)
 		#if (!StatsToShowOnMap.has(StatsToShow[g])):
 			#stat.visible = false
+		connect("OnStatLow", stat.AlarmLow)
 		if (!SupportCustomValues):
 			connect("OnStatsUpdated", stat.UpdateStat)
 		else :
 			connect("OnStatsUpdatedCust", stat.UpdateStatCust)
 func StatsUp(StatN : String):
 	OnStatsUpdated.emit(StatN)
+func StatsLow(StatN : String):
+	OnStatLow.emit(StatN)
 func StatsUpCust(StatN : String, Val : float):
 	OnStatsUpdatedCust.emit(StatN, Val)
 func OnInventoryOpened():

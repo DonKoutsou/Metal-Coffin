@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://dey268tkmexmx"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://dey268tkmexmx"]
 
 [ext_resource type="Texture2D" uid="uid://da6luptf21a1n" path="res://Assets/earth-america.png" id="1_bkcjf"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_ugmcq"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_to5ap"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_8m6e2"]
 [ext_resource type="PackedScene" uid="uid://tnvbntvduo2b" path="res://Scenes/MapSpotScenes/NoAtmosphere/NA1.tscn" id="4_87k22"]
@@ -16,3 +17,4 @@ FullName = "Stelar body"
 Description = "blah blag"
 CanLand = true
 HasAtmoshere = false
+CustomData = Array[ExtResource("1_ugmcq")]([])
