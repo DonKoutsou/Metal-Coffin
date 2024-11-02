@@ -66,6 +66,7 @@ AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_dqxuj")
 AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_dqxuj")
 AcceptDialog/styles/panel = SubResource("StyleBoxFlat_dqxuj")
 Button/constants/outline_size = 5
+Button/font_sizes/font_size = 24
 Button/fonts/font = ExtResource("1_7bjd6")
 Button/styles/hover = SubResource("StyleBoxFlat_c1n88")
 Button/styles/normal = ExtResource("2_pusc7")

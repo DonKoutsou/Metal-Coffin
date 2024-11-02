@@ -75,7 +75,6 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("3_v5dpc")
-stretch_mode = 2
 
 [node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

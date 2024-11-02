@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://6bkyk5dp55yc"]
+[gd_scene load_steps=6 format=3 uid="uid://6bkyk5dp55yc"]
 
 [ext_resource type="Script" path="res://Scripts/exploration.gd" id="1_uardu"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="2_64on1"]
 [ext_resource type="PackedScene" uid="uid://c08f77fnaa310" path="res://Scenes/Planet_Surface.tscn" id="3_xurd7"]
 [ext_resource type="PackedScene" uid="uid://c6dxishyvp2cf" path="res://Scenes/ExporationItemsAddedNotif.tscn" id="4_38u2b"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_ie564"]
-[ext_resource type="PackedScene" uid="uid://crwbxcbj81jvc" path="res://Scenes/stat_panel.tscn" id="5_lkmji"]
 
 [node name="Exploration" type="PanelContainer"]
 anchors_preset = 15
@@ -18,10 +17,11 @@ script = ExtResource("1_uardu")
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 2
 stretch = true
+stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(576, 324)
 render_target_update_mode = 4
 
 [node name="PlanetSurface" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_xurd7")]
@@ -72,13 +72,6 @@ size_flags_horizontal = 3
 theme = ExtResource("4_ie564")
 theme_override_font_sizes/font_size = 22
 text = "Leave"
-
-[node name="Stat_Panel" parent="VBoxContainer" instance=ExtResource("5_lkmji")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-StatsToShow = Array[String](["OXYGEN", "HP"])
-SupportCustomValues = true
 
 [connection signal="TakeoffFinished" from="SubViewportContainer/SubViewport/PlanetSurface" to="." method="_on_planet_surface_takeoff_finished"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/Explore" to="." method="_on_explore_pressed"]

@@ -10,6 +10,9 @@ signal SteeringDitChanged(NewValue : float)
 signal MouseEntered()
 signal MouseExited()
 
+func _ready() -> void:
+	position = Vector2(-5 , get_viewport_rect().size.y + 8)
+
 func _on_texture_rect_mouse_entered() -> void:
 	MouseIn = true
 	MouseEntered.emit()

@@ -43,6 +43,7 @@ func Load(world : World) ->bool:
 	Mapz.LoadSaveData(mapdata)
 	Inv.LoadSaveData(InvData)
 	Mapz.SetPlayerPos(sav.GetData("PLData").Pos)
+	world.Loading = true
 	call_deferred("LoadStats", world, StatData)
 	return true
 	#world.LoadData(StatData)

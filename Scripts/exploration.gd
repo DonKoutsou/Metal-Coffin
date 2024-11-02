@@ -5,11 +5,9 @@ class_name Exploration
 @onready var items_found_notif: ItemNotif = $"VBoxContainer/PanelContainer/VBoxContainer/Items Found Notif"
 @onready var planet_surface: PlanetSurface = $SubViewportContainer/SubViewport/PlanetSurface
 var SpotT : MapSpotType
-var PlayerHp = 100
-var PlayerOxy = 100
 var Findings : Array[Item] = []
 
-signal OnExplorationEnded(RemainingHP : int, RemainingOxygen : int, Supplies : Array[Item])
+signal OnExplorationEnded(Supplies : Array[Item])
 
 func StartExploration(Spot : MapSpotType, Playership : BaseShip) -> void:
 	SpotT = Spot
@@ -18,25 +16,23 @@ func StartExploration(Spot : MapSpotType, Playership : BaseShip) -> void:
 	var Col1 = mat.get_shader_parameter("color_2")
 	var Col2 = mat.get_shader_parameter("color_3")
 	planet_surface.ApplySurfaceColors(Col1, Col2)
-	$VBoxContainer/Stat_Panel.StatsUpCust("HP", PlayerHp)
-	$VBoxContainer/Stat_Panel.StatsUpCust("OXYGEN", PlayerOxy)
+
 	planet_surface.SetShipVisuals(Playership.ShipScene)
 	
 func Explore() -> void:
 	if (planet_surface.Exploring):
 		return
-	if (PlayerHp <= 10):
+	if (ShipData.GetInstance().GetStat("HP").CurrentVelue <= 10):
 		DoPopUp("Not enough HP to complete action.")
 		return
-	if (PlayerOxy <= 5):
+	if (ShipData.GetInstance().GetStat("OXYGEN").CurrentVelue <= 5):
 		DoPopUp("Not enough oxygen to complete action.")
 		return
 		
-	PlayerHp -= 10
+	ShipData.GetInstance().ConsumeResource("HP", 10)
 	if (!SpotT.HasAtmoshere):
-		PlayerOxy -= 5
-	$VBoxContainer/Stat_Panel.StatsUpCust("HP", PlayerHp)
-	$VBoxContainer/Stat_Panel.StatsUpCust("OXYGEN", PlayerOxy)
+		ShipData.GetInstance().ConsumeResource("OXYGEN", 5)
+	
 	var itms = SpotT.GetSpotDrop()
 	Findings.append_array(itms)
 	items_found_notif.AddItems(itms)
@@ -56,5 +52,5 @@ func _on_explore_pressed() -> void:
 	Explore()
 	
 func _on_planet_surface_takeoff_finished() -> void:
-	OnExplorationEnded.emit(PlayerHp, PlayerOxy, Findings)
+	OnExplorationEnded.emit(Findings)
 	queue_free()

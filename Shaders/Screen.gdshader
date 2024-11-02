@@ -2,7 +2,7 @@
 shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
-//uniform vec4 line_color : source_color = vec4(0.0, 0.4, 0.0, 1.0);
+uniform vec4 line_color : source_color = vec4(0.0, 0.4, 0.0, 1.0);
 vec2 curve(vec2 uv)
 {
 	uv = (uv - 0.5) * 2.1;
@@ -34,8 +34,8 @@ void fragment(  )
 
     float vig = (0.0 + 1.0*16.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y));
 	col *= vec3(pow(vig,0.8));
-
-   //col *= line_color.rgb;
+	
+	col *= line_color.rgb;
 	col *= 2.8;
 
 	float scans = clamp( 0.35+0.35*sin(3.5*TIME+uv.y*iResolution.y*2.5), 0.0, 1.0);

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq5q56emis016"
-path="res://.godot/imported/Oxygen.png-a7ee88271bfa6c4ad91315ce63ea5dda.ctex"
+uid="uid://d2m66tlt5cl4b"
+path="res://.godot/imported/artificial-hive.png-f5b1716530633ccf372759c9bb59acf6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/Oxygen.png"
-dest_files=["res://.godot/imported/Oxygen.png-a7ee88271bfa6c4ad91315ce63ea5dda.ctex"]
+source_file="res://Assets/artificial-hive.png"
+dest_files=["res://.godot/imported/artificial-hive.png-f5b1716530633ccf372759c9bb59acf6.ctex"]
 
 [params]
 

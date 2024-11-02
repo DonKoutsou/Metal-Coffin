@@ -12,9 +12,9 @@ class_name Inventory
 @export var ItemNotifScene : PackedScene
 
 var InventoryContents : Array[Inventory_Box] = []
-@onready var world: World = $"../.."
-@onready var inv_contents: GridContainer = $PanelContainer/HBoxContainer/InvContents
-@onready var inventory_ship_stats: InventoryShipStats = $PanelContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats
+@onready var world: World = $"../../.."
+@onready var inv_contents: GridContainer = $HBoxContainer/InvContents
+@onready var inventory_ship_stats: InventoryShipStats = $HBoxContainer/VBoxContainer/Panel/InventoryShipStats
 
 signal OnItemAdded(It : Item)
 signal OnItemRemoved(It : Item)
@@ -65,7 +65,7 @@ func UpdateSize() -> void:
 		
 func _ready() -> void:
 	set_process(false)
-	$PanelContainer.visible = false
+	visible = false
 	for g in ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat():
 		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
 		inv_contents.add_child(newbox)
@@ -125,7 +125,7 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 			Unplaced.append(It[z])
 	if (Unplaced.size() > 0):
 		var TradeScene = InventoryTradeScene.instantiate() as InventoryTrade
-		get_parent().add_child(TradeScene)
+		Ingame_UIManager.GetInstance().AddUI(TradeScene, false)
 		var InvItems : Array[Item] = []
 		for g in InventoryContents.size():
 			var it = InventoryContents[g].ItemC.ItemType
@@ -139,7 +139,7 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 			return
 		var notif = ItemNotifScene.instantiate() as ItemNotif
 		notif.AddItems(It)
-		get_parent().add_child(notif)
+		Ingame_UIManager.GetInstance().AddUI(notif)
 		
 func FlushInventory() -> void:
 	for g in InventoryContents.size():
@@ -157,14 +157,14 @@ func OnItemSelected(ItCo : ItemContainer) -> void:
 		var desc = descriptors[0] as ItemDescriptor
 		if (desc.DescribedContainer == ItCo):
 			descriptors[0].queue_free()
-			$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = true
+			$HBoxContainer/VBoxContainer/HBoxContainer.visible = true
 			return
 		descriptors[0].queue_free()
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
 	Descriptor.SetData(ItCo)
-	$PanelContainer/HBoxContainer/VBoxContainer.add_child(Descriptor)
-	$PanelContainer/HBoxContainer/VBoxContainer.move_child(Descriptor, 0)
-	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = false
+	$HBoxContainer/VBoxContainer.add_child(Descriptor)
+	$HBoxContainer/VBoxContainer.move_child(Descriptor, 0)
+	$HBoxContainer/VBoxContainer/HBoxContainer.visible = false
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
 	Descriptor.connect("ItemDropped", RemoveItem)
@@ -173,7 +173,7 @@ func FindAndDissableDescriptors() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		descriptors[0].queue_free()
-	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = true
+	$HBoxContainer/VBoxContainer/HBoxContainer.visible = true
 func UpgradeItem(Cont : ItemContainer) -> void:
 	var UpgradeSuccess = false
 	var Part = Cont.ItemType
@@ -243,13 +243,13 @@ func BreakPart(Part : ShipPart) -> void:
 	OnShipPartDamaged.emit(Part)
 	
 func UpdateShipInfo(ship : BaseShip) -> void:
-	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/TextureRect.texture = ship.Icon
-	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = ship.ShipName
-	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2.text = ship.ShipDesc
+	$HBoxContainer/VBoxContainer/HBoxContainer/TextureRect.texture = ship.Icon
+	$HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = ship.ShipName
+	$HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2.text = ship.ShipDesc
 
 func _on_inventory_button_pressed() -> void:
-	var IsOpening = !$PanelContainer.visible
-	$PanelContainer.visible = IsOpening
+	var IsOpening = !visible
+	visible = IsOpening
 	if (IsOpening):
 		OnInventoryOpened.emit()
 		inventory_ship_stats.UpdateValues()

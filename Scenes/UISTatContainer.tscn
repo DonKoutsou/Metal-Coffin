@@ -132,7 +132,7 @@ _data = {
 }
 
 [node name="Oxygen_Container" type="PanelContainer"]
-custom_minimum_size = Vector2(208, 64)
+custom_minimum_size = Vector2(200, 64)
 offset_right = 242.0
 offset_bottom = 64.0
 size_flags_horizontal = 3

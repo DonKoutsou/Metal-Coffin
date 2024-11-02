@@ -9,9 +9,9 @@ class_name Map
 @export var MapSize : int = 20
 @export var AnalyzerScene : PackedScene
 @export var MapGenerationDistanceCurve : Curve
-@onready var player_ship: PlayerShip = $MapSpots/PlayerShip
 @onready var thrust_slider: ThrustSlider = $CanvasLayer/ThrustSlider
-@onready var camera_2d: Camera2D = $Camera2D
+@onready var camera_2d: Camera2D = $CanvasLayer/SubViewportContainer/SubViewport/Camera2D
+
 
 
 #var Travelling = false
@@ -29,24 +29,31 @@ func ToggleVis(t : bool ):
 	$CanvasLayer.visible = t
 
 func _ready() -> void:
+	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
 	if (SpotList.size() == 0):
 		GenerateMap()
 	var shipdata = ShipData.GetInstance()
-	player_ship.UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
-	player_ship.UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
-	player_ship.UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
-	GalaxyMat = $Control/ColorRect.material
+	GetPlayerShip().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
+	GetPlayerShip().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
+	GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
+	GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
 	
 	camera_2d.make_current()
+	$CanvasLayer/SubViewportContainer/SubViewport.handle_input_locally = true
 
 func GetPlayerPos() -> Vector2:
-	return $MapSpots/PlayerShip.position
+	return $CanvasLayer/SubViewportContainer/SubViewport/MapSpots/PlayerShip.position
 
 func SetPlayerPos(pos : Vector2) -> void:
-	$MapSpots/PlayerShip.position = pos
+	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots/PlayerShip.position = pos
 
 func GetPlayerShip() -> PlayerShip:
-	return $MapSpots/PlayerShip
+	return $CanvasLayer/SubViewportContainer/SubViewport/MapSpots/PlayerShip
+	
+func ToggleUIForIntro(t : bool):
+	GetPlayerShip().ToggleUI(t)
+	$CanvasLayer/ThrustSlider.visible = t
+	$CanvasLayer/SteeringWheel.visible = t
 #var touch_points: Dictionary = {}
 #var start_zoom: Vector2
 #var start_dist: float
@@ -72,7 +79,7 @@ func GetPlayerShip() -> PlayerShip:
 ##		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.5,0.5), Vector2(2,2))
 
 func UpdateCameraPos(relativeMovement : Vector2):
-	var maxposX = $MapSpots/SpotSpot.get_child($MapSpots/SpotSpot.get_child_count()-1).position.x
+	var maxposX = $CanvasLayer/SubViewportContainer/SubViewport/MapSpots/SpotSpot.get_child($CanvasLayer/SubViewportContainer/SubViewport/MapSpots/SpotSpot.get_child_count()-1).position.x
 	var vpsizehalf = (get_viewport_rect().size.y / 2)
 	var maxposY = Vector2(vpsizehalf - 900 * camera_2d.zoom.x, vpsizehalf + 900 * camera_2d.zoom.x)
 	var rel = relativeMovement
@@ -86,8 +93,8 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		var val2 = GalaxyMat.get_shader_parameter("thing2")
 		GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 500) * camera_2d.zoom.x)
 		
-func _input(event: InputEvent) -> void:
-	pass
+#func _input(event: InputEvent) -> void:
+	#pass
 		
 func _process(_delta: float) -> void:
 	#if (Input.is_action_pressed("MapLeft")):
@@ -114,7 +121,7 @@ func _process(_delta: float) -> void:
 	#		spots.position.y += 15
 	#		var val = GalaxyMat.get_shader_parameter("thing2")
 	#		GalaxyMat.set_shader_parameter("thing2", val - 0.02)
-	$Camera2D/ArrowSprite.look_at(player_ship.global_position)
+	$CanvasLayer/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.look_at(GetPlayerShip().global_position)
 
 func GenerateMap() -> void:
 	var SpecialSpots : Array[int] = []
@@ -123,7 +130,7 @@ func GenerateMap() -> void:
 	var Prevpos : Vector2 = Vector2(250,250)
 	for g in MapSize :
 		var sc = SpotScene.instantiate() as MapSpot
-		$MapSpots/SpotSpot.add_child(sc)
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
@@ -145,7 +152,7 @@ func GenerateMap() -> void:
 		SpotList.append(sc)
 		
 		var asteroidscene = SpotScene.instantiate() as MapSpot
-		$MapSpots/SpotSpot.add_child(asteroidscene)
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(asteroidscene)
 		asteroidscene.connect("SpotAproached", Arrival)
 		asteroidscene.connect("SpotSearched", SearchLocation)
 		asteroidscene.connect("SpotAnalazyed", AnalyzeLocation)
@@ -174,9 +181,9 @@ func Arrival(Spot : MapSpot)	-> void:
 		var randspot = SpotList.pick_random() as MapSpot
 		while abs(SpotList.find(randspot) - SpotList.find(Spot)) > 25 or randspot.SpotType.FullName == "Black Whole":
 			randspot = SpotList.pick_random() as MapSpot
-		player_ship.global_position = randspot.global_position
+		GetPlayerShip().global_position = randspot.global_position
 		PopUpManager.GetInstance().DoPopUp("You've entered a black whole and have been teleported away")
-		player_ship.HaltShip()
+		GetPlayerShip().HaltShip()
 		
 	if Spot.SpotType.GetEnumString() == "ASTEROID_BELT":
 		Spot.queue_free()
@@ -185,7 +192,7 @@ func Arrival(Spot : MapSpot)	-> void:
 			AsteroidBeltArrival.emit(120)
 		else:
 			AsteroidBeltArrival.emit(60)
-		player_ship.HaltShip()
+		GetPlayerShip().HaltShip()
 		
 func StageFailed() -> void:
 	# enable inputs
@@ -212,7 +219,7 @@ func AnalyzeLocation(Spot : MapSpot):
 	Ingame_UIManager.GetInstance().add_child(analyzer)
 	
 func SearchLocation(stage : MapSpot):
-	if (player_ship.Travelling):
+	if (GetPlayerShip().Travelling):
 		PopUpManager.GetInstance().DoPopUp("Stop the ship to land.")
 		return
 	#stage.ToggleLandButton(false)
@@ -237,7 +244,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 	for g in Data.size():
 		var dat = Data[g] as MapSpotSaveData
 		var sc = SpotScene.instantiate() as MapSpot
-		$MapSpots/SpotSpot.add_child(sc)
+		$SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
 		#sc.connect("MapPressed", Arrival)
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
@@ -254,10 +261,10 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 			sc.OnSpotAnalyzed()
 #//////////////////////////////////////////////////////////
 func PlayerEnteredScreen() -> void:
-	$Camera2D/ArrowSprite.visible = false
+	$CanvasLayer/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = false
 
 func PlayerExitedScreen() -> void:
-	$Camera2D/ArrowSprite.visible = true
+	$CanvasLayer/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = true
 	
 var MouseInUI = false
 
@@ -294,12 +301,16 @@ func ShipStoppedMoving():
 func ShipForcedStop():
 	thrust_slider.ZeroAcceleration()
 
-func _on_screen_gui_input(event: InputEvent) -> void:
+
+func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("ZoomIn")):
-		camera_2d.zoom = clamp(camera_2d.zoom * Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
+		var prevzoom = camera_2d.zoom
+		camera_2d.zoom = clamp(prevzoom * Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
+		#camera_2d.position *= Vector2(1.1, 1.1)
 	if (event.is_action_pressed("ZoomOut")):
-		camera_2d.zoom = clamp(camera_2d.zoom / Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
-	if (player_ship.ChangingCourse or MouseInUI):
+		var prevzoom = camera_2d.zoom
+		camera_2d.zoom = clamp(prevzoom / Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
+	if (GetPlayerShip().ChangingCourse or MouseInUI):
 		return
 #	if (event is InputEventScreenTouch):
 #		_handle_touch(event)

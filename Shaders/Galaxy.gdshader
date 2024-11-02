@@ -26,9 +26,6 @@ const float zoom = 3.0;
 const float tile = 0.850;
 const float stepsize = 0.29;
 
-float triangle(float x, float a) {
-    return 2.0 * abs(3.0 * ((x / a) - floor((x / a) + 0.5))) - 1.0;
-}
 
 float field(in vec3 p) {
     float strength = 7.0 + 0.03 * log(1.e-6 + fract(sin(TIME) * 373.11));
@@ -51,8 +48,8 @@ float field(in vec3 p) {
 vec3 quantizeColor(vec3 color, int levels) {
     return floor(color * float(levels)) / float(levels);
 }
-
 void fragment() {
+	
     vec2 uv2 = FRAGCOORD.xy / vec2(512);
 	uv2.x += thing;
 	uv2.y += thing2;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://civ710rd6srtr"]
+[gd_scene load_steps=20 format=3 uid="uid://civ710rd6srtr"]
 
 [ext_resource type="Script" path="res://Scripts/TravelMinigameGame.gd" id="1_6jml3"]
 [ext_resource type="ArrayMesh" uid="uid://c3r8p45nush07" path="res://Assets/Rocks/Rock1_Lod2.tres" id="2_7fbvq"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://Scripts/planet_pivot.gd" id="7_7j074"]
 [ext_resource type="PackedScene" uid="uid://oa22m2ia7nea" path="res://Scenes/SupplyCache.tscn" id="8_jxkch"]
 [ext_resource type="PackedScene" uid="uid://c22kbrr2llw68" path="res://Scenes/SupplyCacheRare.tscn" id="9_lakrg"]
-[ext_resource type="PackedScene" uid="uid://crwbxcbj81jvc" path="res://Scenes/stat_panel.tscn" id="13_fping"]
 
 [sub_resource type="Gradient" id="Gradient_jo0lo"]
 
@@ -59,29 +58,50 @@ dof_blur_near_distance = 128.03
 dof_blur_near_transition = 501.54
 dof_blur_amount = 0.45
 
-[node name="TravelMinigameGame" type="Node3D"]
-process_mode = 1
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_6jml3")
 EnemyShapes = Array[Mesh]([ExtResource("2_7fbvq"), ExtResource("3_llaub"), ExtResource("4_2iueu"), ExtResource("5_kdrwu"), ExtResource("6_expmw")])
 Obst = ExtResource("2_mp2ca")
 SuuplyScenes = Array[PackedScene]([ExtResource("8_jxkch"), ExtResource("9_lakrg")])
-EnemyGoal = 60
-EnemySpawnRate = 0.5
 CharacterScene = ExtResource("3_q3swo")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="TravelMinigameGame" type="Node3D" parent="SubViewportContainer/SubViewport"]
+process_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.497)
 fov = 22.0
 
-[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+[node name="AudioListener3D" type="AudioListener3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.16325)
 current = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
 environment = SubResource("Environment_jrnrp")
 camera_attributes = SubResource("CameraAttributesPractical_3siew")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
 transform = Transform3D(0.729176, -0.621132, -0.287224, 0.674297, 0.580545, 0.456389, -0.116731, -0.526462, 0.842147, 0, 0, 0)
 light_color = Color(0.897161, 0.86143, 0.827484, 1)
 light_energy = 0.352
@@ -90,13 +110,14 @@ light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 directional_shadow_mode = 0
 
-[node name="PlanetPivot" type="Node3D" parent="."]
+[node name="PlanetPivot" type="Node3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
 script = ExtResource("7_7j074")
 
-[node name="MeshInstance3D7" type="Node3D" parent="PlanetPivot"]
+[node name="MeshInstance3D7" type="Node3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame/PlanetPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
 
 [node name="Virtual Joystick" parent="." instance=ExtResource("6_prunb")]
+layout_mode = 1
 offset_left = 58.0
 offset_top = -259.0
 offset_right = 259.0
@@ -107,9 +128,3 @@ action_left = "MoveLeft"
 action_right = "MoveRight"
 action_up = "MoveUp"
 action_down = "MoveDown"
-
-[node name="Stat_Panel" parent="." instance=ExtResource("13_fping")]
-offset_left = -32.0
-size_flags_horizontal = 0
-StatsToShow = Array[String](["HULL"])
-SupportCustomValues = true

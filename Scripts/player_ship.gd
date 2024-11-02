@@ -122,3 +122,8 @@ func PlayerLookAt(LookPos : Vector2) -> void:
 func Steer(Rotation : float) -> void:
 	var tw = create_tween()
 	tw.tween_property(self, "rotation", Rotation, 1)
+
+func ToggleUI(t : bool):
+	$Radar/Radar_Range.visible = t
+	$Fuel/Fuel_Range.visible = t
+	$Analyzer/Analyzer_Range.visible = t

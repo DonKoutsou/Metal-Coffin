@@ -1,4 +1,4 @@
-extends Node3D
+extends Control
 class_name  TravelMinigameGame
 
 @export var EnemyShapes : Array[Mesh]
@@ -9,15 +9,14 @@ class_name  TravelMinigameGame
 @export var Difficulty : int = 3
 @export var CharacterScene : PackedScene
 
-@onready var planet_pivot: Node3D = $PlanetPivot
+#@onready var planet_pivot: Node3D = $SubViewport/TravelMinigameGame/PlanetPivot
+
 var character: Character
 
 signal OnGameEnded(Renault : bool)
 
 var Supplies : Array[Item]
 var enemies = 0
-var Hull : float
-var HullMax : float
 
 var shakestr = 0.0
 func applyshake():
@@ -26,8 +25,8 @@ func _process(delta: float) -> void:
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
 		var of = RandomOffset()
-		$Camera3D.h_offset = of.x
-		$Camera3D.v_offset = of.y
+		$SubViewportContainer/SubViewport/TravelMinigameGame/Camera3D.h_offset = of.x
+		$SubViewportContainer/SubViewport/TravelMinigameGame/Camera3D.v_offset = of.y
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 func _ready() -> void:
@@ -61,15 +60,15 @@ func _ready() -> void:
 			enemy.position.y = ran.randf_range(-3, 3)
 			enemy.PlayerTouched.connect(EnemyHit)
 		fintrans += -10
-	planet_pivot.position.z = fintrans -10
+	#planet_pivot.position.z = fintrans -10
 	character = CharacterScene.instantiate()
 	add_child(character)
 
 func SetDestinationScene(Model : PackedScene) -> void:
-	$PlanetPivot/MeshInstance3D7.add_child(Model.instantiate())
+	$SubViewportContainer/SubViewport/TravelMinigameGame/PlanetPivot/MeshInstance3D7.add_child(Model.instantiate())
 
 func GameFinished(fin : bool) -> void:
-	OnGameEnded.emit(fin, Supplies, Hull)
+	OnGameEnded.emit(fin, Supplies)
 	queue_free()
 	
 func EnemyKilled() -> void:
@@ -79,12 +78,13 @@ func EnemyKilled() -> void:
 
 func EnemyHit():
 	applyshake()
-	Hull -= 10
-	$Stat_Panel.StatsUpCust("HULL", Hull)
+	#Hull -= 10
+	#$Stat_Panel.StatsUpCust("HULL", Hull)
 	#$Hull_HP_Container/HBoxContainer/HullHp.value = Hull
 	#$Hull_HP_Container/HBoxContainer/HullHp/Label.text = var_to_str(roundi(Hull)) + "/" + var_to_str(roundi(HullMax))
+	ShipData.GetInstance().ConsumeResource("HULL", 10)
 	character.Damage()
-	if (Hull == 0):
+	if (ShipData.GetInstance().GetStat("HULL").CurrentVelue == 0):
 		GameFinished(false)
 	
 func SupplyGathered(supplycontents : Array[Item]) -> void:

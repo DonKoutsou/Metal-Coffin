@@ -4,6 +4,7 @@ class_name ThrustSlider
 signal AccelerationChangeEnded(value_changed : float)
 signal AccelerationChanged(value : float)
 
+
 func _on_accelleration_slider_drag_ended(value_changed: bool) -> void:
 	AccelerationChangeEnded.emit(value_changed)
 func _on_accelleration_slider_value_changed(value: float) -> void:

@@ -22,4 +22,6 @@ StatsToShow = Array[String](["OXYGEN", "HP", "HULL", "FUEL"])
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 0
 columns = 4
