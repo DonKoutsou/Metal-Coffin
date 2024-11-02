@@ -30,11 +30,13 @@ func StatsLow(StatN : String):
 func StatsUpCust(StatN : String, Val : float):
 	OnStatsUpdatedCust.emit(StatN, Val)
 func OnInventoryOpened():
-	$GridContainer.columns = 4
+	pass
+	#$GridContainer.columns = 4
 	#for g in StatPanels.size():
 		#StatPanels[g].visible = true
 func OnInventoryClosed():
-	$GridContainer.columns = 2
+	pass
+	#$GridContainer.columns = 2
 	#for g in StatPanels.size():
 		#var nam = StatPanels[g].Stat
 		#if (!StatsToShowOnMap.has(nam)):

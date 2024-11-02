@@ -77,8 +77,8 @@ void fragment() {
 //	float inv_steepness = (steepness * -1.0) + 1.0;
 	float slope_edge_noise_remap = mix(1, texture(slope_edge_noise, world_position * slope_edge_noise_scale).r, slope_edge_noise_intensity);
 	float slope = texture(splatmap, world_position).r * slope_edge_noise_remap;
-	
-	
+
+
 	float edge_1 = step(slope_edge_1, slope);
 	float edge_2 = step(slope_edge_2, slope);
 	float edge_3 = step(slope_edge_3, slope);
@@ -90,7 +90,7 @@ void fragment() {
 
 	vec3 slope_normal_scaled = mix(vec3(0.5, 0.5, 1), triplanarized_slope_normal, slope_normal_scale);
 	vec3 flat_normal_scaled = mix(vec3(0.5, 0.5, 1), triplanarized_flat_normal, flat_normal_scale);
-	
+
 	ALBEDO = mix(slope_color, flat_color, slope_mask_inverted);
 	//ALBEDO = vec3(slope_mask);
 	SPECULAR = mix(slope_specular, flat_specular, slope_mask_inverted);
@@ -105,12 +105,12 @@ void vertex() {
 	vec2 half_pixel_offset = vec2(pixel_size, pixel_size) / 2.0;
 
 	float heightmap_size = float(textureSize(heightmap, 0).x);
-	
-	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz * 1.0 / (heightmap_size * heightmap_scale) + vec2(0.5) + half_pixel_offset; 
+
+	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz * 1.0 / (heightmap_size * heightmap_scale) + vec2(0.5) + half_pixel_offset;
 	VERTEX.y += texture(heightmap, world_position).r * heightmap_height_scale;
-	
+
 	vec3 total_normal = unpack_normalmap(texture(heightmap_normals, world_position));
 	vert_normal = mix(vec3(0.5, 0.5, 1.0), total_normal, heightmap_normals_intensity);
-	
+
 	NORMAL = vert_normal;
 }

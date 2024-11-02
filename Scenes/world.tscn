@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=65 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
@@ -52,7 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/CustomPopUp.tscn" id="48_7p5jv"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/CustomConfirm.tscn" id="49_sgtub"]
 
-[sub_resource type="Resource" id="Resource_hwfcs"]
+[sub_resource type="Resource" id="Resource_fqnv2"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
@@ -67,13 +67,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_x0m1q"]
+[sub_resource type="Resource" id="Resource_ww1jn"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 600.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_hwfcs")
+UpgradeVersion = SubResource("Resource_fqnv2")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -83,13 +83,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_l3klh"]
+[sub_resource type="Resource" id="Resource_a2fin"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 400.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_x0m1q")
+UpgradeVersion = SubResource("Resource_ww1jn")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -99,7 +99,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_0w3jb"]
+[sub_resource type="Resource" id="Resource_4prl6"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
@@ -114,13 +114,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_2k5yk"]
+[sub_resource type="Resource" id="Resource_2fl11"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 200.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_0w3jb")
+UpgradeVersion = SubResource("Resource_4prl6")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -130,13 +130,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_vg4ks"]
+[sub_resource type="Resource" id="Resource_6tsx4"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 100.0
 CurrentVal = 100.0
-UpgradeVersion = SubResource("Resource_2k5yk")
+UpgradeVersion = SubResource("Resource_2fl11")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -146,7 +146,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_y2jgv"]
+[sub_resource type="Resource" id="Resource_doehp"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
@@ -161,13 +161,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_4rxtp"]
+[sub_resource type="Resource" id="Resource_5gerk"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 450.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_y2jgv")
+UpgradeVersion = SubResource("Resource_doehp")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -177,13 +177,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_nxsdl"]
+[sub_resource type="Resource" id="Resource_rcb1j"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_4rxtp")
+UpgradeVersion = SubResource("Resource_5gerk")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -193,7 +193,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_benwu"]
+[sub_resource type="Resource" id="Resource_q1bh6"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -208,13 +208,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_jbfjy"]
+[sub_resource type="Resource" id="Resource_016c1"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_benwu")
+UpgradeVersion = SubResource("Resource_q1bh6")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -224,13 +224,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_fec3w"]
+[sub_resource type="Resource" id="Resource_wf0gs"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_jbfjy")
+UpgradeVersion = SubResource("Resource_016c1")
 UpgradeItems = Array[ExtResource("9_7fm4g")]([ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx"), ExtResource("18_7gxhx")])
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -240,64 +240,28 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ph6w3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0838"]
 content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
-bg_color = Color(0.318049, 0.374525, 0.448438, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 60
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6pr5"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.161404, 0.19644, 0.24227, 1)
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldhnu"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0766064, 0.0982225, 0.126494, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-
-[sub_resource type="Theme" id="Theme_damda"]
-Button/styles/hover = SubResource("StyleBoxFlat_ph6w3")
-Button/styles/normal = SubResource("StyleBoxFlat_l6pr5")
-Button/styles/pressed = SubResource("StyleBoxFlat_ldhnu")
+corner_radius_top_left = 176
+corner_radius_top_right = 176
+corner_radius_bottom_right = 176
+corner_radius_bottom_left = 176
+corner_detail = 20
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 4
 
 [node name="World" type="Node2D"]
 process_mode = 3
@@ -320,9 +284,17 @@ layer = 2
 script = ExtResource("31_5kch8")
 
 [node name="Inventory" parent="Ingame_UIManager" instance=ExtResource("6_82nvh")]
-StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_l3klh"), SubResource("Resource_vg4ks"), SubResource("Resource_nxsdl"), SubResource("Resource_fec3w"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("16_hw203"), ExtResource("16_hw203"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
+StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_a2fin"), SubResource("Resource_6tsx4"), SubResource("Resource_rcb1j"), SubResource("Resource_wf0gs"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("15_lvvfi"), ExtResource("16_hw203"), ExtResource("16_hw203"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("17_rcqyo"), ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
 
 [node name="Stat_Panel" parent="Ingame_UIManager" instance=ExtResource("21_101j1")]
+anchors_preset = 1
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = -96.0
+offset_top = 0.0
+offset_right = -80.0
+offset_bottom = 16.0
+grow_vertical = 1
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 6
@@ -332,13 +304,13 @@ process_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -72.0
-offset_bottom = 72.0
+offset_left = -80.0
+offset_bottom = 80.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
-theme = SubResource("Theme_damda")
+theme = ExtResource("19_o3uo1")
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("6_xx17t")
 theme_override_font_sizes/font_size = 46
@@ -354,23 +326,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -228.0
-offset_top = -76.0
-offset_right = 228.0
-offset_bottom = 76.0
+offset_left = -175.0
+offset_top = -242.0
+offset_right = 175.0
+offset_bottom = 242.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 1
-theme_override_styles/panel = ExtResource("8_47nki")
+theme_override_styles/panel = SubResource("StyleBoxFlat_m0838")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer2/PauseContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="PauseLabel" type="Label" parent="CanvasLayer2/PauseContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_xx17t")
-theme_override_font_sizes/font_size = 131
+theme_override_font_sizes/font_size = 96
 text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1

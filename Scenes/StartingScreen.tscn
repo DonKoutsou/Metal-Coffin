@@ -27,5 +27,4 @@ HoverShound = ExtResource("7_p3e15")
 stream = ExtResource("8_y0dhp")
 volume_db = 8.0
 autoplay = true
-stream_paused = true
 bus = &"Music"

@@ -14,7 +14,7 @@ class_name Map
 @onready var camera_2d: Camera2D = $Camera2D
 
 
-var Travelling = false
+#var Travelling = false
 
 signal AsteroidBeltArrival(Size : int)
 signal StageSearched(Spt : MapSpotType)
@@ -87,19 +87,7 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 500) * camera_2d.zoom.x)
 		
 func _input(event: InputEvent) -> void:
-	if (event.is_action_pressed("ZoomIn")):
-		camera_2d.zoom = clamp(camera_2d.zoom * Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
-	if (event.is_action_pressed("ZoomOut")):
-		camera_2d.zoom = clamp(camera_2d.zoom / Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
-	if (player_ship.ChangingCourse or MouseInUI):
-		return
-#	if (event is InputEventScreenTouch):
-#		_handle_touch(event)
-	if (event is InputEventScreenDrag):
-#		_handle_drag(event)
-		UpdateCameraPos(event.relative)
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		UpdateCameraPos(event.relative)
+	pass
 		
 func _process(_delta: float) -> void:
 	#if (Input.is_action_pressed("MapLeft")):
@@ -203,7 +191,7 @@ func StageFailed() -> void:
 	# enable inputs
 	set_process(true)
 	set_process_input(true)
-	Travelling = false
+	#Travelling = false
 	
 #func DepartForLocation(stage :MapSpot) -> void:
 #	if (Travelling):
@@ -224,7 +212,7 @@ func AnalyzeLocation(Spot : MapSpot):
 	Ingame_UIManager.GetInstance().add_child(analyzer)
 	
 func SearchLocation(stage : MapSpot):
-	if (Travelling):
+	if (player_ship.Travelling):
 		PopUpManager.GetInstance().DoPopUp("Stop the ship to land.")
 		return
 	#stage.ToggleLandButton(false)
@@ -305,3 +293,18 @@ func ShipStoppedMoving():
 	pass
 func ShipForcedStop():
 	thrust_slider.ZeroAcceleration()
+
+func _on_screen_gui_input(event: InputEvent) -> void:
+	if (event.is_action_pressed("ZoomIn")):
+		camera_2d.zoom = clamp(camera_2d.zoom * Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
+	if (event.is_action_pressed("ZoomOut")):
+		camera_2d.zoom = clamp(camera_2d.zoom / Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
+	if (player_ship.ChangingCourse or MouseInUI):
+		return
+#	if (event is InputEventScreenTouch):
+#		_handle_touch(event)
+	if (event is InputEventScreenDrag):
+#		_handle_drag(event)
+		UpdateCameraPos(event.relative)
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		UpdateCameraPos(event.relative)

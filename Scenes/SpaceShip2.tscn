@@ -105,6 +105,20 @@ initial_velocity_max = 6.0
 scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_0i8mp")
 
+[node name="GPUParticles3D2" type="CPUParticles3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.445172, -0.357749, -1.39545)
+material_override = SubResource("StandardMaterial3D_jq4g6")
+cast_shadow = 0
+amount = 32
+mesh = SubResource("BoxMesh_oke1n")
+direction = Vector3(0, 0, 1)
+spread = 4.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 6.0
+initial_velocity_max = 6.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_0i8mp")
+
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_yreke")
 volume_db = 5.0

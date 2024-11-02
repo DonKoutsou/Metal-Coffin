@@ -22,10 +22,10 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 	var prevsteer = SteeringDir
 
 	if (EvPos.x < position.x):
-		rotation += rel.x + -rel.y
+		$Sprite2D.rotation += rel.x + -rel.y
 		SteeringDir += (rel.x + -rel.y) * 10
 	else :
-		rotation += rel.x + rel.y
+		$Sprite2D.rotation += rel.x + rel.y
 		SteeringDir += (rel.x + rel.y) * 10
 	if (SteeringDir != prevsteer):
 		SteeringDitChanged.emit(SteeringDir)

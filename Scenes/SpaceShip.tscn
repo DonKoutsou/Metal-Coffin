@@ -109,5 +109,4 @@ scale_amount_curve = SubResource("Curve_0i8mp")
 stream = ExtResource("6_j7bdf")
 volume_db = 5.0
 autoplay = true
-stream_paused = true
 bus = &"MapSounds"

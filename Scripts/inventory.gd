@@ -157,16 +157,23 @@ func OnItemSelected(ItCo : ItemContainer) -> void:
 		var desc = descriptors[0] as ItemDescriptor
 		if (desc.DescribedContainer == ItCo):
 			descriptors[0].queue_free()
+			$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = true
 			return
 		descriptors[0].queue_free()
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
 	Descriptor.SetData(ItCo)
-	$DescSpot.add_child(Descriptor)
+	$PanelContainer/HBoxContainer/VBoxContainer.add_child(Descriptor)
+	$PanelContainer/HBoxContainer/VBoxContainer.move_child(Descriptor, 0)
+	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = false
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
 	Descriptor.connect("ItemDropped", RemoveItem)
 	Descriptor.connect("ItemRepaired", RepairPart)
-	
+func FindAndDissableDescriptors() -> void:
+	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+	if (descriptors.size() > 0):
+		descriptors[0].queue_free()
+	$PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer.visible = true
 func UpgradeItem(Cont : ItemContainer) -> void:
 	var UpgradeSuccess = false
 	var Part = Cont.ItemType
@@ -180,9 +187,7 @@ func UpgradeItem(Cont : ItemContainer) -> void:
 				Part.UpgradeVersion.CurrentVal = Part.CurrentVal
 				AddItems([Part.UpgradeVersion], false)
 				#OnItemSelected(InventoryContents[g].ItemC)
-				var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-				if (descriptors.size() > 0):
-					descriptors[0].queue_free()
+				FindAndDissableDescriptors()
 				UpgradeSuccess = true
 				break
 	if (!UpgradeSuccess) :
@@ -206,9 +211,7 @@ func UseItem(Cont : ItemContainer, Times : int = 1):
 					OnItemRemoved.emit(Cont.ItemType)
 					box.UpdateAmm(-1)
 					if (box.ItemC.Ammount == 0):
-						var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-						if (descriptors.size() > 0):
-							descriptors[0].queue_free()
+						FindAndDissableDescriptors()
 					break
 					
 func RepairPart(Cont : ItemContainer) -> void:
@@ -221,9 +224,7 @@ func RepairPart(Cont : ItemContainer) -> void:
 				for z in Part.RepairItems.size():
 					RemoveItem(InventoryContents[g].ItemC)
 				Part.IsDamaged = false
-				var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-				if (descriptors.size() > 0):
-					descriptors[0].queue_free()
+				FindAndDissableDescriptors()
 				RepairSuccess = true
 				OnShipPartFixed.emit(Part)
 				break
@@ -254,9 +255,7 @@ func _on_inventory_button_pressed() -> void:
 		inventory_ship_stats.UpdateValues()
 	if (!IsOpening):
 		OnInvencotyClosed.emit()
-		var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-		if (descriptors.size() > 0):
-			descriptors[0].queue_free()
+		FindAndDissableDescriptors()
 			
 func _on_upgrades_button_pressed() -> void:
 	$UpgradesContainer.visible = !$UpgradesContainer.visible

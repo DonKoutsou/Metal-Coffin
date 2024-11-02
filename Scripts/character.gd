@@ -1,22 +1,23 @@
 extends  MeshInstance3D
 class_name Character
 @export var ManuverSpeed : float = 4
+@export var IsDeco = false
 
 func _ready() -> void:
-	pass
+	set_physics_process(!IsDeco)
 		
 var GoingUp = false
 var Jumpspot = 0
+
 func Jump() ->void:
 	var tw = get_tree().create_tween()
 	tw.tween_property(self, "position:y", 3,1)
 	tw.set_ease(Tween.EASE_OUT)
-	pass
+	
 func Damage() -> void:
 	$AnimationPlayer.play("Damage")
 	
 func _physics_process(_delta: float) -> void:
-
 	if (Input.is_action_pressed("MoveLeft") and position.x > -5):
 		rotation.z = deg_to_rad(max(rad_to_deg(rotation.z) - ManuverSpeed * Input.get_action_strength("MoveLeft"), -10 * ManuverSpeed))
 		position.x = max(-5, position.x - (0.025 * ManuverSpeed * Input.get_action_strength("MoveLeft")))

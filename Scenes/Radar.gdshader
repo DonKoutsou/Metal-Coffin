@@ -18,7 +18,7 @@ void fragment() {
     vec2 uv = UV * 2.0 - 1.0;
     float a = (atan(uv.y, uv.x) + 3.141592656) / 6.283185312;
     float l = length(uv);
-	
+
 	 a = mod(a + sector_rotation, 1.0);
     // Set base color to fully transparent
     COLOR = vec4(0.0, 0.0, 0.0, 0.0);
@@ -45,7 +45,7 @@ void fragment() {
 	    COLOR.rgb = mix(COLOR.rgb, line_color.rgb, beam_alpha);
 	    COLOR.a = max(COLOR.a, beam_alpha);
 	}
-    
+
 
     // Ensure only the circle area of the radar is visible
     COLOR.a *= greater_than(1.0, l) + float(0.0);

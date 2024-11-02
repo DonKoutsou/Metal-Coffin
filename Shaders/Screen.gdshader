@@ -6,7 +6,7 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 vec2 curve(vec2 uv)
 {
 	uv = (uv - 0.5) * 2.1;
-	uv *= 1.1;	
+	uv *= 1.1;
 	uv.x *= 1.0 + pow((abs(uv.y) / 5.0), 2.0);
 	uv.y *= 1.0 + pow((abs(uv.x) / 4.0), 2.0);
 	uv  = (uv / 2.0) + 0.5;
@@ -39,7 +39,7 @@ void fragment(  )
 	col *= 2.8;
 
 	float scans = clamp( 0.35+0.35*sin(3.5*TIME+uv.y*iResolution.y*2.5), 0.0, 1.0);
-	
+
 	float s = pow(scans,1);
 	col = col*vec3( 0.4+0.7*s) ;
 
@@ -48,11 +48,11 @@ void fragment(  )
 		col *= 0.0;
 	if (uv.y < 0.0 || uv.y > 1.0)
 		col *= 0.0;
-	
+
 	col*=1.0-0.65*vec3(clamp((mod(FRAGCOORD.x, 2.0)-1.0)*2.0,0.0,1.0));
-	
+
     //float comp = smoothstep( 0.1, 0.9, sin(TIME) );
- 
+
 
     COLOR = vec4(col,1.0);
 }

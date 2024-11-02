@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=40 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -50,6 +50,22 @@ shader_parameter/quantization_levels = 256
 shader_parameter/saturation = 0.536
 shader_parameter/layers = 5.175
 shader_parameter/iterations = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06tb0"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_blend = true
+corner_detail = 1
+shadow_size = 5
+shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f561"]
 content_margin_left = 8.0
@@ -165,14 +181,48 @@ texture = ExtResource("30_g5v37")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+[node name="Screen" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource("29_q8i0i")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+
+[node name="Panel2" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+offset_bottom = 0.0449829
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_06tb0")
+
+[node name="Panel3" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 38.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_06tb0")
+
+[node name="Panel4" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_06tb0")
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 visible = false
@@ -220,17 +270,17 @@ grow_vertical = 2
 pivot_offset = Vector2(50, 50)
 
 [node name="ThrustSlider" parent="CanvasLayer" instance=ExtResource("34_sn67k")]
-offset_top = -87.0
-offset_bottom = 197.0
+offset_left = -152.0
 
 [node name="SteeringWheel" parent="CanvasLayer" instance=ExtResource("33_gpac8")]
-position = Vector2(-5, 652)
+position = Vector2(-43, 651)
 
 [connection signal="ScreenEnter" from="MapSpots/PlayerShip" to="." method="PlayerEnteredScreen"]
 [connection signal="ScreenExit" from="MapSpots/PlayerShip" to="." method="PlayerExitedScreen"]
 [connection signal="ShipAccelerating" from="MapSpots/PlayerShip" to="." method="ShipStartedMoving"]
 [connection signal="ShipForceStopped" from="MapSpots/PlayerShip" to="." method="ShipForcedStop"]
 [connection signal="ShipStopped" from="MapSpots/PlayerShip" to="." method="ShipStoppedMoving"]
+[connection signal="gui_input" from="CanvasLayer/Screen" to="." method="_on_screen_gui_input"]
 [connection signal="AccelerationChangeEnded" from="CanvasLayer/ThrustSlider" to="MapSpots/PlayerShip" method="AccelerationEnded"]
 [connection signal="AccelerationChanged" from="CanvasLayer/ThrustSlider" to="MapSpots/PlayerShip" method="AccelerationChanged"]
 [connection signal="mouse_entered" from="CanvasLayer/ThrustSlider" to="." method="_on_accelleration_slider_mouse_entered"]

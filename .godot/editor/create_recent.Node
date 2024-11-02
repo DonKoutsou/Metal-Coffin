@@ -1,14 +1,14 @@
+Panel
+Control
+Container
 HBoxContainer
 PanelContainer
 Label
 GPUParticlesAttractorVectorField3D
 AnimationPlayer
 TextureRect
-Panel
 VBoxContainer
 AudioStreamPlayer
 Node2D
-Control
 CanvasModulate
 Line2D
-MeshInstance3D

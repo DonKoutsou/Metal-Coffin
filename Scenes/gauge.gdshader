@@ -48,12 +48,12 @@ void fragment() {
     COLOR.rgb = mix(COLOR.rgb, centre_color.rgb, centre_color.a * greater_than(centre_width, radius));
 
     // Scale marks
-    COLOR.rgb = mix(COLOR.rgb, scale_mark_color.rgb, scale_mark_color.a * greater_than(angle, 0.0 - scale_mark_width) * greater_than(1.0 + scale_mark_width, angle) * 
-        greater_than(abs(mod(angle, 1.0 / scale_marks) * scale_marks * 2.0 - 1.0), 1.0 - (scale_mark_width / 2.0 / radius) * scale_marks) * 
+    COLOR.rgb = mix(COLOR.rgb, scale_mark_color.rgb, scale_mark_color.a * greater_than(angle, 0.0 - scale_mark_width) * greater_than(1.0 + scale_mark_width, angle) *
+        greater_than(abs(mod(angle, 1.0 / scale_marks) * scale_marks * 2.0 - 1.0), 1.0 - (scale_mark_width / 2.0 / radius) * scale_marks) *
         (greater_than(scale_minor_outer, radius) * greater_than(radius, scale_inner)));
 
-    COLOR.rgb = mix(COLOR.rgb, scale_mark_color.rgb, scale_mark_color.a * greater_than(angle, 0.0 - scale_mark_width) * greater_than(1.0 + scale_mark_width, angle) * 
-        greater_than(abs(mod(angle, 1.0 / major_scale_marks) * major_scale_marks * 2.0 - 1.0), 1.0 - (scale_mark_width / 2.0 / radius) * major_scale_marks) * 
+    COLOR.rgb = mix(COLOR.rgb, scale_mark_color.rgb, scale_mark_color.a * greater_than(angle, 0.0 - scale_mark_width) * greater_than(1.0 + scale_mark_width, angle) *
+        greater_than(abs(mod(angle, 1.0 / major_scale_marks) * major_scale_marks * 2.0 - 1.0), 1.0 - (scale_mark_width / 2.0 / radius) * major_scale_marks) *
         (greater_than(scale_major_outer, radius) * greater_than(radius, scale_minor_outer)));
 
     // Border

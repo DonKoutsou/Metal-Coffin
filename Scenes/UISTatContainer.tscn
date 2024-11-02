@@ -1,10 +1,55 @@
-[gd_scene load_steps=10 format=3 uid="uid://carxyijo0mekn"]
+[gd_scene load_steps=11 format=3 uid="uid://carxyijo0mekn"]
 
 [ext_resource type="Script" path="res://Scripts/ui_Stat_container.gd" id="2_yw81g"]
 [ext_resource type="Texture2D" uid="uid://dcwvf3of7pu8g" path="res://Assets/hazard-sign.png" id="3_hqq08"]
-[ext_resource type="StyleBox" uid="uid://cqvxsqe7hceth" path="res://Theme/Darkblue_Circle.tres" id="4_3i3j6"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_ooo48"]
 [ext_resource type="AudioStream" uid="uid://1m0dd6hxjs7v" path="res://Assets/Sounds/Alarm.mp3" id="5_sh16h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xniyh"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_blend = true
+corner_radius_top_left = 34
+corner_radius_top_right = 34
+corner_radius_bottom_right = 34
+corner_radius_bottom_left = 34
+corner_detail = 20
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im2fd"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 20
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_he86a"]
 resource_local_to_scene = true
@@ -19,10 +64,10 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [sub_resource type="Animation" id="Animation_c62a3"]
 length = 0.001
@@ -87,12 +132,12 @@ _data = {
 }
 
 [node name="Oxygen_Container" type="PanelContainer"]
-custom_minimum_size = Vector2(281, 0)
-offset_right = 281.0
-offset_bottom = 41.0
+custom_minimum_size = Vector2(208, 64)
+offset_right = 242.0
+offset_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("4_3i3j6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xniyh")
 script = ExtResource("2_yw81g")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
@@ -101,10 +146,10 @@ size_flags_vertical = 4
 alignment = 1
 
 [node name="Bar" type="ProgressBar" parent="HBoxContainer"]
-custom_minimum_size = Vector2(228, 30)
+custom_minimum_size = Vector2(225, 30)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/background = ExtResource("4_3i3j6")
+theme_override_styles/background = SubResource("StyleBoxFlat_im2fd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_he86a")
 step = 1.0
 value = 84.0
@@ -117,9 +162,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -132.5
+offset_left = -55.0
 offset_top = -16.0
-offset_right = 132.5
+offset_right = 56.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2

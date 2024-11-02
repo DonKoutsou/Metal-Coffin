@@ -8,15 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://5nruswfvv0g0" path="res://Assets/Items/hospital-cross.png" id="6_3lvdp"]
 
 [node name="ItemDesc" type="PanelContainer" groups=["ItemDescriptor"]]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -715.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = 284.0
-grow_horizontal = 0
-size_flags_horizontal = 4
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -353.5
+offset_top = -138.0
+offset_right = 353.5
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_yjbet")

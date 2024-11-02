@@ -17,7 +17,9 @@ func ApplySurfaceColors(Col1 : Color, Col2 : Color) -> void:
 	mat2.set_shader_parameter("top_color", Col1)
 	mat2.set_shader_parameter("bottom_color", Col2)
 func SetShipVisuals(ShipScene : PackedScene):
-	$MeshInstance3D2/ShipPivot.add_child(ShipScene.instantiate())
+	var ship = ShipScene.instantiate() as Character
+	ship.IsDeco = true
+	$MeshInstance3D2/ShipPivot.add_child(ship)
 	
 func Takeoff():
 	$AnimationPlayer.play("Takeoff")
