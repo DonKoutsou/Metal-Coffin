@@ -1,7 +1,10 @@
-AudioStreamPlayer
 AnimationPlayer
-ColorRect
+AudioStreamPlayer2D
 Node
+SpotLight3D
+Button
+AudioStreamPlayer
+ColorRect
 Timer
 TextureRect
 Control
@@ -9,7 +12,3 @@ PanelContainer
 Label
 VBoxContainer
 SubViewportContainer
-SubViewport
-CanvasLayer
-HBoxContainer
-Panel

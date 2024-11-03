@@ -9,25 +9,33 @@ class_name MapSpotType
 @export var Description : String
 @export var CanLand : bool = false
 @export var HasAtmoshere : bool = false
+@export var VisibleOnStart : bool = false
+@export var DropAmmount : int = 1
 
 @export var CustomData : Array[MapSpotCustomData]
 
-func GetCustomData(datname : String):
-	var returnval 
+func GetCustomData(datname : String) -> Array[MapSpotCustomData]:
+	var returnval : Array[MapSpotCustomData] = []
 	for g in CustomData.size():
 		if (CustomData[g].DataName == datname):
-			returnval = CustomData[g].Value
+			returnval.append(CustomData[g])
 	return returnval
-func GetSpotDrop() -> Array[Item]:
-	var Drops : Array[Item] = []
-	var it = PossibleDrops.pick_random()
-	var rng = RandomNumberGenerator.new()
-	var DropAmm = rng.randi_range(1, it.RandomFindMaxCount)
-	for g in DropAmm :
-		Drops.append(it)
-	return Drops
+func ClearCustomData(Dat : MapSpotCustomData):
+	for g in CustomData.size():
+		if (CustomData[g] == Dat):
+			CustomData.remove_at(g)
+			return
 func GetEnumString() -> String:
 	return SpotKind.keys()[SpotK]
+	
+func GetSpotDrop() -> Array[Item]:
+	var Drops : Array[Item] = []
+	for z in DropAmmount:
+		var it = PossibleDrops.pick_random()
+		var DropAmm = randi_range(1, it.RandomFindMaxCount)
+		for g in DropAmm :
+			Drops.append(it)
+	return Drops
 
 enum SpotKind{
 SHIP,
@@ -40,5 +48,6 @@ SAND,
 STAR,
 STATION,
 RINGED,
-ASTEROID_BELT
+ASTEROID_BELT,
+SUB_STATION
 }

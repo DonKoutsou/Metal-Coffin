@@ -7,12 +7,10 @@ class_name Inventory
 @export var InventoryBoxScene : PackedScene
 @export var InventoryTradeScene : PackedScene
 @export var ItemDescriptorScene : PackedScene
-@export var Upgrades : Array[Upgrade]
-@export var Upgrade_Tab_Scene : PackedScene
 @export var ItemNotifScene : PackedScene
 
 var InventoryContents : Array[Inventory_Box] = []
-@onready var world: World = $"../../.."
+
 @onready var inv_contents: GridContainer = $HBoxContainer/InvContents
 @onready var inventory_ship_stats: InventoryShipStats = $HBoxContainer/VBoxContainer/Panel/InventoryShipStats
 
@@ -22,6 +20,7 @@ signal OnShipPartDamaged(Part : ShipPart)
 signal OnShipPartFixed(Part : ShipPart)
 signal OnInventoryOpened()
 signal OnInvencotyClosed()
+signal OnItemUsed(It : UsableItem)
 var Loading = false
 # Called when the node enters the scene tree for the first time.
 func GetSaveData() ->SaveData:
@@ -56,13 +55,12 @@ func UpdateSize() -> void:
 		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
 		inv_contents.add_child(newbox)
 		InventoryContents.append(newbox)
-		newbox.connect("ItemUse", OnItemSelected)
+		newbox.connect("ItemUse", _OnItemSelected)
 	AddItems(Itms, false)
 	if ((ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int) % 2 != 0):
 		inv_contents.columns = 3
 	else :
 		inv_contents.columns = 4
-		
 func _ready() -> void:
 	set_process(false)
 	visible = false
@@ -70,7 +68,7 @@ func _ready() -> void:
 		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
 		inv_contents.add_child(newbox)
 		InventoryContents.append(newbox)
-		newbox.connect("ItemUse", OnItemSelected)
+		newbox.connect("ItemUse", _OnItemSelected)
 	if ((ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int) % 2 != 0):
 		inv_contents.columns = 3
 	#for g in Upgrades.size():
@@ -82,23 +80,6 @@ func _ready() -> void:
 		AddItems(LoadedItems, false)
 	else :
 		AddItems(StartingItems, false)
-
-func TryUpgrade(UpTab : UpgradeTab) -> void:
-	print("Trying to upgrade " + UpTab.UpgradeData.UpgradeName)
-	var upgrade : Upgrade
-	for g in Upgrades.size():
-		if (Upgrades[g].UpgradeName == UpTab.UpgradeData.UpgradeName):
-			upgrade = Upgrades[g]
-			break
-	var UpgradeCost = upgrade.UpgradeItem
-	for g in InventoryContents.size():
-		if (InventoryContents[g].ItemC.ItemType == UpgradeCost and InventoryContents[g].ItemC.Ammount > 0):
-			InventoryContents[g].UpdateAmm(-1)
-			UpTab.UpgradeSuccess()
-			world.UpgradeStat(UpTab.UpgradeData.UpgradeName, UpTab.UpgradeData.UpgradeStep)
-			break
-	print("No Materials for Upgrade")
-
 func AddItems(It : Array[Item], Notif = true) -> void:
 	var Unplaced : Array[Item] = []
 	for z in It.size():
@@ -132,7 +113,7 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 			for z in InventoryContents[g].ItemC.Ammount:
 				InvItems.append(it)
 		TradeScene.StartTrade(InvItems, Unplaced)
-		TradeScene.connect("TradeFinished", TradeFinished)
+		TradeScene.connect("TradeFinished", _TradeFinished)
 	inventory_ship_stats.UpdateValues()
 	if (Notif):
 		if (It.size() == 0):
@@ -140,18 +121,15 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 		var notif = ItemNotifScene.instantiate() as ItemNotif
 		notif.AddItems(It)
 		Ingame_UIManager.GetInstance().AddUI(notif)
-		
 func FlushInventory() -> void:
 	for g in InventoryContents.size():
 		for z in InventoryContents[g].ItemC.Ammount:
 			OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
 			InventoryContents[g].UpdateAmm(-1)
-			
-func TradeFinished(itms : Array[Item]) -> void:
+func _TradeFinished(itms : Array[Item]) -> void:
 	FlushInventory()
 	AddItems(itms, false)
-
-func OnItemSelected(ItCo : ItemContainer) -> void:
+func _OnItemSelected(ItCo : ItemContainer) -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
@@ -186,13 +164,11 @@ func UpgradeItem(Cont : ItemContainer) -> void:
 					RemoveItem(InventoryContents[g].ItemC)
 				Part.UpgradeVersion.CurrentVal = Part.CurrentVal
 				AddItems([Part.UpgradeVersion], false)
-				#OnItemSelected(InventoryContents[g].ItemC)
 				FindAndDissableDescriptors()
 				UpgradeSuccess = true
 				break
 	if (!UpgradeSuccess) :
 		PopUpManager.GetInstance().DoPopUp("Not enough upgrade materials to complete action")
-		
 func RemoveItem(Cont : ItemContainer):
 	for g in InventoryContents.size():
 		var box = InventoryContents[g]
@@ -201,10 +177,9 @@ func RemoveItem(Cont : ItemContainer):
 			inventory_ship_stats.UpdateValues()
 			box.UpdateAmm(-1)
 			return
-			
 func UseItem(Cont : ItemContainer, Times : int = 1):
 	for z in Times:
-		if (world.UseItem(Cont.ItemType)):
+		if (TryUseItem(Cont.ItemType)):
 			for g in InventoryContents.size():
 				if (InventoryContents[g].ItemC == Cont):
 					var box = InventoryContents[g]
@@ -213,7 +188,16 @@ func UseItem(Cont : ItemContainer, Times : int = 1):
 					if (box.ItemC.Ammount == 0):
 						FindAndDissableDescriptors()
 					break
-					
+func TryUseItem(It : UsableItem) -> bool:
+	var statname = It.StatUseName
+	var dat = ShipData.GetInstance()
+	if (dat.GetStat(statname).GetCurrentValue() == dat.GetStat(statname).GetStat()):
+		PopUpManager.GetInstance().DoPopUp(statname + " is already full")
+		return false
+	else :
+		
+		OnItemUsed.emit(It)
+		return true
 func RepairPart(Cont : ItemContainer) -> void:
 	var RepairSuccess = false
 	var Part = Cont.ItemType
@@ -234,19 +218,16 @@ func RepairPart(Cont : ItemContainer) -> void:
 		for g in InventoryContents.size():
 			if (InventoryContents[g].ItemC == Cont):
 				InventoryContents[g].UpdateDamaged(false)
-				
 func BreakPart(Part : ShipPart) -> void:
 	for g in InventoryContents.size():
 			if (InventoryContents[g].ItemC.ItemType == Part):
 				InventoryContents[g].UpdateDamaged(true)
 	Part.IsDamaged = false
 	OnShipPartDamaged.emit(Part)
-	
 func UpdateShipInfo(ship : BaseShip) -> void:
 	$HBoxContainer/VBoxContainer/HBoxContainer/TextureRect.texture = ship.Icon
 	$HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = ship.ShipName
 	$HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2.text = ship.ShipDesc
-
 func _on_inventory_button_pressed() -> void:
 	var IsOpening = !visible
 	visible = IsOpening
@@ -256,6 +237,11 @@ func _on_inventory_button_pressed() -> void:
 	if (!IsOpening):
 		OnInvencotyClosed.emit()
 		FindAndDissableDescriptors()
-			
+func ForceCloseInv():
+	if (!visible):
+		return
+	visible = false
+	OnInvencotyClosed.emit()
+	FindAndDissableDescriptors()
 func _on_upgrades_button_pressed() -> void:
 	$UpgradesContainer.visible = !$UpgradesContainer.visible

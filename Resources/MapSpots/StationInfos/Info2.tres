@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MapSpotCustomDataStringArray" load_steps=2 format=3 uid="uid://sl10v0mtwt5v"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_StringArray.gd" id="1_12you"]
+
+[resource]
+script = ExtResource("1_12you")
+Value = Array[String](["Info2", "Info2.2"])
+DataName = "StationInfo"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djtjqkmdep3dh"]
+[gd_scene load_steps=13 format=3 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
 [ext_resource type="Texture2D" uid="uid://xvsfs1dbo6f7" path="res://Assets/uncertainty.png" id="2_mt6at"]
@@ -6,7 +6,6 @@
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_rw3e8"]
 [ext_resource type="Theme" uid="uid://blxde2llpapdx" path="res://Theme/DarkBlueButtonCirlce.tres" id="3_yi1as"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_1yydb"]
-[ext_resource type="AudioStream" uid="uid://hrwbq66p4fq8" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="6_l7sme"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
 radius = 4.0
@@ -301,27 +300,12 @@ theme_override_fonts/font = ExtResource("2_uoroi")
 theme_override_font_sizes/font_size = 22
 text = "Land"
 
-[node name="VisibilityNotif" type="Area2D" parent="."]
+[node name="AreaNotif" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 7
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibilityNotif"]
-shape = SubResource("CircleShape2D_4ymfd")
-
-[node name="LandNotif" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LandNotif"]
-shape = SubResource("CircleShape2D_4ymfd")
-
-[node name="AlanyzeNotif" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AlanyzeNotif"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaNotif"]
 shape = SubResource("CircleShape2D_4ymfd")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
@@ -345,14 +329,7 @@ libraries = {
 "": SubResource("AnimationLibrary_4iew2")
 }
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_l7sme")
-volume_db = 10.0
-bus = &"MapSounds"
-
 [connection signal="pressed" from="AnalyzeButton" to="." method="_on_analyze_button_pressed"]
 [connection signal="pressed" from="LandButtonContainer/LandButton" to="." method="_on_land_button_pressed"]
-[connection signal="area_entered" from="VisibilityNotif" to="." method="_on_visibility_notif_area_entered"]
-[connection signal="area_entered" from="LandNotif" to="." method="_on_land_notif_area_entered"]
-[connection signal="area_exited" from="LandNotif" to="." method="_on_land_notif_area_exited"]
-[connection signal="area_entered" from="AlanyzeNotif" to="." method="_on_alanyze_notif_area_entered"]
+[connection signal="area_entered" from="AreaNotif" to="." method="AreaEntered"]
+[connection signal="area_exited" from="AreaNotif" to="." method="AreaExited"]

@@ -18,4 +18,6 @@ FullName = "Terrestrial Planet"
 Description = ""
 CanLand = true
 HasAtmoshere = true
+VisibleOnStart = false
+DropAmmount = 1
 CustomData = Array[ExtResource("1_tvew1")]([])

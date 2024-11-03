@@ -17,4 +17,6 @@ FullName = "Sand Giant"
 Description = ""
 CanLand = true
 HasAtmoshere = true
+VisibleOnStart = false
+DropAmmount = 1
 CustomData = Array[ExtResource("1_8fsy4")]([])

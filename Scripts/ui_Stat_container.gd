@@ -14,10 +14,11 @@ func UpdateStat(StatN : String):
 	$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
 	$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(CurStat)) + "/" + var_to_str((roundi(MaxValue)))
-	if ($AnimationPlayer.is_playing()):
-		$AnimationPlayer.stop()
-		$HBoxContainer/Bar/HBoxContainer/TextureRect2.visible = CurStat < MaxValue * 0.2
-		$HBoxContainer/Bar/HBoxContainer/TextureRect3.visible = CurStat < MaxValue * 0.2
+	if (CurStat > MaxValue * 0.2):
+		if ($AnimationPlayer.is_playing()):
+			$AnimationPlayer.stop()
+		$HBoxContainer/Bar/HBoxContainer/TextureRect2.visible = false
+		$HBoxContainer/Bar/HBoxContainer/TextureRect3.visible = false
 	#if (CurStat < 20):
 		#$AnimationPlayer.play("StatLow")
 # Called when the node enters the scene tree for the first time.

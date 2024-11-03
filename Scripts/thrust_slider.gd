@@ -13,3 +13,6 @@ func _on_accelleration_slider_value_changed(value: float) -> void:
 func ZeroAcceleration():
 	#var slidersize = accelleration_slider.size.y
 	accelleration_slider.set_value_no_signal(0)
+
+func ToggleSlider():
+	pass

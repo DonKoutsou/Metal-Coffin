@@ -59,3 +59,10 @@ func _physics_process(delta: float) -> void:
 		CharactersShowing = 0
 		return
 	CharactersShowing += 1
+
+
+func _on_skip_pressed() -> void:
+	DialoguePlayed.emit()
+	if (Callback != Callable()):
+		Callback.call()
+	queue_free()

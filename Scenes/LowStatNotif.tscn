@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/LowStatNotif.gd" id="1_8yqsu"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_pyhix"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_ycyhy"]
-[ext_resource type="AudioStream" uid="uid://1m0dd6hxjs7v" path="res://Assets/Sounds/Alarm.mp3" id="4_75w15"]
+[ext_resource type="AudioStream" uid="uid://bfi3w55ap7hs7" path="res://Assets/Sounds/alarm_01.wav" id="4_i71vm"]
 
 [sub_resource type="Animation" id="Animation_b3nvo"]
 length = 0.001
@@ -72,7 +72,6 @@ clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_top = -108.0
-offset_right = 233.0
 offset_bottom = -18.0
 pivot_offset = Vector2(0, 90)
 script = ExtResource("1_8yqsu")
@@ -107,7 +106,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_75w15")
+stream = ExtResource("4_i71vm")
 volume_db = -15.0
 pitch_scale = 1.4
 autoplay = true

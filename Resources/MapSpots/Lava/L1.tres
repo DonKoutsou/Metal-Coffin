@@ -17,4 +17,6 @@ FullName = "Lava Giant"
 Description = "blah blah"
 CanLand = true
 HasAtmoshere = false
+VisibleOnStart = false
+DropAmmount = 1
 CustomData = Array[ExtResource("1_nyeak")]([])

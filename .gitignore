@@ -48,3 +48,4 @@ Assets/hazard-sign.png.import
 /.godot
 /.godot
 *.cfg
+/addons/imgui-godot

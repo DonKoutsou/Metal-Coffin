@@ -9,7 +9,7 @@
 resource_local_to_scene = true
 script = ExtResource("3_lu011")
 UpgradeName = "FUEL"
-UpgradeAmm = 300.0
+UpgradeAmm = 350.0
 CurrentVal = 0.0
 UpgradeItems = Array[ExtResource("2_6e4v5")]([])
 IsDamaged = false

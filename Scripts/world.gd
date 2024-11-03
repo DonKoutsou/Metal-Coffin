@@ -31,10 +31,21 @@ func _ready() -> void:
 	#call_deferred("TestTrade")
 
 func PlayIntro():
-	Ingame_UIManager.GetInstance().CallbackDiag(["Operator.....", "Are you awake ?...", "We've drifted away, i am not sure where we are.", "Let me run a background check on the ship's systems...", "... ... ... ...", "Cockpit controlls are offline..", "Monitoring controlls are offline...", "Restarting mainframe..."], EnableBackUI)
+	GetMap().PlayIntroFadeInt()
+	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've drifted away, i am not sure where we are.", "Let me run a background check on the ship's systems...", "... ... ... ...", "Cockpit controlls are offline..", "Monitoring controlls are offline...", "Restarting mainframe..."]
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ShowStation, true)
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/InventoryButton.visible = false
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
 	GetMap().ToggleUIForIntro(false)
+func ShowStation():
+	var DiagText : Array[String]  = ["Operator, I have found the station.", "Setting course for station, lets head back.", "I am also seeing other stations on our way there, i've marked them on your map.", "I dont know if they are friendly but we have no choice. We will need to stop and refuel"]
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ReturnCamToPlayer, true)
+	GetMap().ShowStation()
+func ReturnCamToPlayer():
+	#var DiagText = []
+	#Ingame_UIManager.GetInstance().CallbackDiag(DiagText, EnableBackUI)
+	EnableBackUI()
+	GetMap().FrameCamToPlayer()
 func EnableBackUI():
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/InventoryButton.visible = true
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
@@ -99,6 +110,9 @@ func LoadData(Data : Resource) -> void:
 func GetInventory() -> Inventory:
 	return $Ingame_UIManager/VBoxContainer/Inventory
 	
+func GetDialogueProgress() -> DialogueProgressHolder:
+	return 	$DialogueProgressHolder
+	
 func GetMap() -> Map:
 	return $Map
 
@@ -122,6 +136,10 @@ func OnItemRepaired(Part : ShipPart) -> void:
 func OnItemDamaged(Part : ShipPart) -> void:
 	ShipDat.RemoveShipPartStat(Part)
 	ItemBuffStat(Part.UpgradeName)
+func OnItemUsed(It : UsableItem) -> void:
+	ShipDat.RefilResource(It.StatUseName, 20)
+	ItemBuffStat(It.StatUseName)
+	
 func ItemBuffStat(UpName : String) -> void:
 	if (UpName == "VIZ_RANGE"):
 		GetMap().GetPlayerShip().UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
@@ -164,18 +182,21 @@ func StartExploration(Spot : MapSpot) -> void:
 	Ingame_UIManager.GetInstance().AddUI(Escene)
 	Escene.StartExploration(Spot.SpotType, CurrentShip)
 	Escene.connect("OnExplorationEnded", ExplorationEnded)
-	
+	GetInventory().ForceCloseInv()
 func ExplorationEnded(SupplyRew : Array[Item]) -> void:
 	GetInventory().AddItems(SupplyRew)
 	
 func StartStage(Size : int) -> void:
+	
 	var sc = TraveMinigameScene.instantiate() as TravelMinigameGame
 	sc.EnemyGoal = Size
 	sc.CharacterScene = CurrentShip.ShipScene
 	#sc.Hull = ShipDat.GetStat("HULL").GetCurrentValue()
 	#sc.HullMax = ShipDat.GetStat("HULL").GetStat()
 	sc.connect("OnGameEnded", StageDone)
-	$Ingame_UIManager.add_child(sc)
+	$Ingame_UIManager.AddUI(sc)
+	GetInventory().ForceCloseInv()
+	$Ingame_UIManager.ToggleInventoryButton(false)
 	var map = GetMap()
 	map.ToggleVis(false)
 	#$Ingame_UIManager.visible = false
@@ -193,36 +214,36 @@ func StageDone(victory : bool, supplies : Array[Item]) -> void:
 	map.set_process(true)
 	map.set_process_input(true)
 	map.ToggleVis(true)
+	$Ingame_UIManager.ToggleInventoryButton(true)
 	#$Ingame_UIManager.visible = true
 #/////////////////////////////////////////////////////////////////////////////////////
 
 func ShipSearched(Ship : BaseShip):
 	StartShipTrade(Ship)
-	
+
+
+
 func StageSearch(Spt : MapSpot)-> void:
 	if (Spt.SpotType.CanLand):
 		StartExploration(Spt)
 	else:
-		if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
-			PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
-			return
+		if (Spt.SpotType.HasAtmoshere):
+			if (ShipData.GetInstance().GetStat("OXYGEN").GetCurrentValue() < ShipData.GetInstance().GetStat("OXYGEN").GetStat()):
+				ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
+				PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
+		else:
+			if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
+				PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
+				return
+			ShipDat.ConsumeResource("OXYGEN", 5)
 		if (ShipDat.GetStat("HP").GetCurrentValue() <= 10):
 			PopUpManager.GetInstance().DoPopUp("Not enough HP to complete action")
 			return
+			
+		
 		GetInventory().AddItems(Spt.SpotType.GetSpotDrop())
 		ShipDat.ConsumeResource("HP", 10)
-		ShipDat.ConsumeResource("OXYGEN", 5)
-
-func UseItem(It : UsableItem) -> bool:
-	var statname = It.StatUseName
-	if (ShipDat.GetStat(statname).GetCurrentValue() == ShipDat.GetStat(statname).GetStat()):
-		PopUpManager.GetInstance().DoPopUp(statname + " is already full")
-		return false
-	else :
-		ShipDat.RefilResource(statname, 20)
-		ItemBuffStat(statname)
-		return true
-	
+		
 func GameLost(reason : String):
 	get_tree().paused = true
 	$Ingame_UIManager/PanelContainer.visible = true

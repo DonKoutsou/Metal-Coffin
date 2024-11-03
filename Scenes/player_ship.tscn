@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_c5u4x"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_vt3yq"]
 [ext_resource type="Texture2D" uid="uid://dbqdy31whtto3" path="res://Assets/ShipIcon_Main Camera.png" id="5_1veyv"]
-[ext_resource type="AudioStream" uid="uid://my47ckjtdbg5" path="res://Assets/Sounds/thrusters_loopwav-14699.mp3" id="6_26c8w"]
+[ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
@@ -69,7 +69,7 @@ LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 [node name="Radar" type="Area2D" parent="."]
 rotation = -0.282025
 collision_mask = 0
-monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_42dgb")
@@ -114,7 +114,7 @@ vertical_alignment = 1
 [node name="Fuel" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
-monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fuel"]
 shape = SubResource("CircleShape2D_rjoek")
@@ -159,7 +159,7 @@ vertical_alignment = 1
 rotation = 0.368904
 collision_layer = 2
 collision_mask = 0
-monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Analyzer"]
 shape = SubResource("CircleShape2D_mqnhq")
@@ -211,7 +211,8 @@ rotation = 1.5708
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_26c8w")
+stream = ExtResource("6_0t4kc")
+volume_db = -5.0
 bus = &"MapSounds"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

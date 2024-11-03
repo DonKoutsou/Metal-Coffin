@@ -17,4 +17,6 @@ FullName = "Stelar body"
 Description = "blah blag"
 CanLand = true
 HasAtmoshere = false
+VisibleOnStart = false
+DropAmmount = 1
 CustomData = Array[ExtResource("1_ugmcq")]([])

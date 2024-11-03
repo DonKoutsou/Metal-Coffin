@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=11 format=3 uid="uid://bfiyo48spg0nu"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_roimo"]
+[ext_resource type="Texture2D" uid="uid://dalsx16l4o46d" path="res://Assets/defense-satellite.png" id="2_3qd4v"]
+[ext_resource type="Resource" uid="uid://8wxhykbrf5b4" path="res://Resources/MapSpots/StationInfos/Info1.tres" id="2_swo4m"]
+[ext_resource type="Resource" uid="uid://sl10v0mtwt5v" path="res://Resources/MapSpots/StationInfos/Info2.tres" id="3_nvnjd"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_v7frp"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_w6ygq"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_yncjh"]
+[ext_resource type="PackedScene" uid="uid://wwlqqlwtekfe" path="res://Scenes/MapSpotScenes/Station.tscn" id="6_2jsnp"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="6_vhxrh"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="7_qs4uk"]
+
+[resource]
+script = ExtResource("7_qs4uk")
+SpotK = 11
+MapIcon = ExtResource("2_3qd4v")
+Scene = ExtResource("6_2jsnp")
+PossibleDrops = Array[ExtResource("3_v7frp")]([ExtResource("4_w6ygq"), ExtResource("5_yncjh"), ExtResource("6_vhxrh")])
+FullName = "Sub-Station"
+Description = "blah blah"
+CanLand = null
+HasAtmoshere = true
+VisibleOnStart = true
+DropAmmount = 4
+CustomData = Array[ExtResource("1_roimo")]([ExtResource("2_swo4m"), ExtResource("3_nvnjd")])

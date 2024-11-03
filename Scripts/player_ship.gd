@@ -77,25 +77,28 @@ func _physics_process(_delta: float) -> void:
 func HaltShip():
 	Travelling = false
 	set_physics_process(false)
-	ChangingCourse = false
+	
 	$Node2D.position.x = 0
-	$AudioStreamPlayer2D.stop()
+	#$AudioStreamPlayer2D.stop()
+	AccelerationChanged(0)
+	ChangingCourse = false
 	ShipForceStopped.emit()
 	
 func SteerChanged(value: float) -> void:
 	Steer(deg_to_rad(value))
 
 func AccelerationChanged(value: float) -> void:
+	
+	var Audioween = create_tween()
+	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 100), 2)
+	ChangingCourse = true
 	if (!$AudioStreamPlayer2D.playing):
 		$AudioStreamPlayer2D.play()
-	var Audioween = create_tween()
-	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 50), 2)
-	ChangingCourse = true
 
 	if (value <= 0):
 		Travelling = false
 		#set_physics_process(false)
-		$AudioStreamPlayer2D.stop()
+		#$AudioStreamPlayer2D.stop()
 		$GPUParticles2D.emitting = false
 		ShipStopped.emit()
 		#return
@@ -124,6 +127,9 @@ func Steer(Rotation : float) -> void:
 	tw.tween_property(self, "rotation", Rotation, 1)
 
 func ToggleUI(t : bool):
+	$Fuel.monitorable = t
+	$Analyzer.monitorable = t
+	$Radar.monitorable = t
 	$Radar/Radar_Range.visible = t
 	$Fuel/Fuel_Range.visible = t
 	$Analyzer/Analyzer_Range.visible = t

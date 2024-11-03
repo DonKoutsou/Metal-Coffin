@@ -21,7 +21,7 @@ func Save(world : World) -> void:
 	var pldata = PlayerSaveData.new()
 	pldata.Pos = Mapz.GetPlayerPos()
 	DataArray.append(pldata)
-	
+	DataArray.append(DialogueProgressHolder.GetInstance().ToldDialogues)
 	var sav = SaveData.new()
 	sav.DataName = "Save"
 	sav.Datas = DataArray
@@ -35,10 +35,12 @@ func Load(world : World) ->bool:
 	var sav = load("user://SavedGame.tres") as SaveData
 	var Mapz = world.GetMap() as Map
 	var Inv = world.GetInventory() as Inventory
+	var DiagHolder = world.GetDialogueProgress()
 	var mapdata : Array[Resource] = (sav.GetData("MapSpots") as SaveData).Datas
 	var InvData : Array[Resource] = (sav.GetData("InventoryContents") as SaveData).Datas
 	var StatData : Resource = sav.GetData("Stats")
 	var ShipDat : BaseShip = (sav.GetData("Ship") as SaveData).Datas[0]
+	DiagHolder.ToldDialogues =  sav.GetData("SpokenDiags") as SpokenDialogueEntry
 	world.StartingShip = ShipDat
 	Mapz.LoadSaveData(mapdata)
 	Inv.LoadSaveData(InvData)

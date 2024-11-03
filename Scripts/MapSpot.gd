@@ -2,7 +2,6 @@ extends Node2D
 class_name MapSpot
 
 @onready var land_button_container: PanelContainer = $LandButtonContainer
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
@@ -35,20 +34,51 @@ func GetSaveData() -> Resource:
 
 func SetSpotData(Data : MapSpotType) -> void:
 	SpotType = Data
-	if (!Data.CanLand):
+	if (Data.GetEnumString() == "SUB_STATION"):
+		$LandButtonContainer/LandButton.text = "Search"
+	else :if (Data.GetEnumString() == "STATION"):
+		$LandButtonContainer/LandButton.text = "Dock"
+	else :if (!Data.CanLand):
 		$LandButtonContainer/LandButton.text = "Harvest"
-	if (Data.FullName == "Black Whole"):
-		$LandButtonContainer/LandButton.text = "Enter"
+		
+	if (SpotType.VisibleOnStart):
+		OnSpotSeen(false)
+		OnSpotAnalyzed()
+	
+	add_to_group(Data.GetEnumString())
 #//////////////////////////////////////////////////////////////////
-
+#todo find better way for dialogue from station
 func OnSpotVisited() -> void:
 	Visited = true
-	
+	if (SpotType.GetEnumString() == "SUB_STATION"):
+		var diags = SpotType.GetCustomData("StationInfo")
+		var diag : MapSpotCustomDataStringArray = diags.pick_random()
+		while (DialogueProgressHolder.GetInstance().IsDialogueSpoken(diag.Value[0])):
+			if (diags.size() == 0):
+				diag = null
+				break
+			diag = diags.pick_random()
+			diags.erase(diag)
+		var Dialogue : Array[String] = ["Operator, it seems like the station was under collapse.", "Our visit has destabilised the station even more and it's been completely destroyed."]
+		if (diag == null):
+			Ingame_UIManager.GetInstance().PlayDiag(Dialogue)
+		else:
+			Dialogue.append_array(diag.Value)
+			Dialogue.append("Entry ended.")
+			DialogueProgressHolder.GetInstance().OnDialogueSpoken(diag.Value[0])
+			Ingame_UIManager.GetInstance().PlayDiag(Dialogue)
+		
+		#SpotType.ClearCustomData(diag)
+		queue_free()
+
 func OnSpotSeen(PlayAnim : bool = true) -> void:
 	visible = true
-	if (!Seen and PlayAnim):
-		animation_player.play("SpotFound")
-		audio_stream_player_2d.play()
+	if (PlayAnim):
+		if (SpotType.GetEnumString() == "SUB_STATION"):
+			Ingame_UIManager.GetInstance().PlayDiag(["Operator, we are aproaching a sub-station.","I'd recomend visiting it to look for supplies or any clues regarding the collapse."])
+		if (!Seen):
+			animation_player.play("SpotFound")
+			PlaySound()
 	$AnalyzeButton.icon = SpotType.MapIcon
 	Seen = true
 
@@ -58,24 +88,33 @@ func _on_land_button_pressed() -> void:
 func _on_analyze_button_pressed() -> void:
 	SpotAnalazyed.emit(self)
 
-func _on_visibility_notif_area_entered(_area: Area2D) -> void:
-	OnSpotSeen()
 
-func _on_alanyze_notif_area_entered(_area: Area2D) -> void:
-	if (!Analyzed):
-		var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
-		add_child(notif)
-		animation_player.play("SpotAnalyzed")
-		audio_stream_player_2d.play()
-	OnSpotAnalyzed()
 	
 func OnSpotAnalyzed() ->void:
 	Analyzed = true
 
-func _on_land_notif_area_entered(_area: Area2D) -> void:
-	if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
-		land_button_container.visible = true
-	SpotAproached.emit(self)
-
-func _on_land_notif_area_exited(_area: Area2D) -> void:
-	land_button_container.visible = false
+func PlaySound():
+	var sound = AudioStreamPlayer2D.new()
+	sound.bus = "MapSounds"
+	sound.volume_db = 10
+	sound.stream = load("res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3")
+	add_child(sound)
+	sound.play()
+func AreaEntered(area: Area2D):
+	if (area.get_collision_layer_value(1)):
+		OnSpotSeen()
+	if (area.get_collision_layer_value(2)):
+		if (!Analyzed):
+			var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
+			add_child(notif)
+			animation_player.play("SpotAnalyzed")
+			
+			PlaySound()
+		OnSpotAnalyzed()
+	if (area.get_collision_layer_value(3)):
+		if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
+			land_button_container.visible = true
+		SpotAproached.emit(self)
+func AreaExited(area: Area2D):
+	if (area.get_collision_layer_value(3)):
+		land_button_container.visible = false

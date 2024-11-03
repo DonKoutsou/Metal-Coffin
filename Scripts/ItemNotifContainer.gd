@@ -4,6 +4,7 @@ class_name ItemNotifContainer
 
 @export var ItemC : ItemContainer
 
+
 func AddIcon(text : Texture) -> void:
 	$TextureRect.texture = text
 func UpdateIcontColor(Col : Color) -> void:
