@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://4pq5t6l3c55k"]
+
+[ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
+[ext_resource type="Texture2D" uid="uid://dbqdy31whtto3" path="res://Assets/ShipIcon_Main Camera.png" id="4_8ppwl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6yyl"]
+radius = 15.2971
+
+[node name="Drone" type="Node2D"]
+script = ExtResource("1_vfr1e")
+
+[node name="Radar" type="Area2D" parent="."]
+rotation = -0.282025
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
+shape = SubResource("CircleShape2D_e6yyl")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 30)
+width = 2.0
+default_color = Color(0.699743, 0.151314, 0.114649, 1)
+
+[node name="Node2D2" type="Node2D" parent="."]
+
+[node name="PlayerShipSpr" type="Sprite2D" parent="Node2D2"]
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_8ppwl")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1, 0)
+
+[connection signal="area_entered" from="Radar" to="." method="_on_radar_area_entered"]

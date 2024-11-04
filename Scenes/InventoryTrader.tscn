@@ -68,7 +68,7 @@ corner_detail = 1
 shadow_size = 5
 shadow_offset = Vector2(-2, 2)
 
-[node name="InventoryTrade" type="PanelContainer"]
+[node name="InventoryTrade" type="PanelContainer" groups=["InventoryTrade"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

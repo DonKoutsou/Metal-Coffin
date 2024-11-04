@@ -1,5 +1,7 @@
 res://default_bus_layout.tres
-res://Scenes/map.tscn
+res://Scripts/DroneTab.gd
+res://Scenes/DroneTab.tscn
+res://Scenes/Radar.gdshader
 res://Theme/DarkBlueContShadow.tres
 res://Theme/PopTheme.tres
 res://Theme/DarkBluePanel.tres
@@ -41,7 +43,6 @@ res://Resources/MapSpots/Terrestrial/T5.tres
 res://Resources/MapSpots/StationInfos/Info1.tres
 res://Resources/MapSpots/StationInfos/Info2.tres
 res://Resources/MapSpots/StationMinor.tres
-res://Scenes/Radar.gdshader
 res://Shaders/Screen.gdshader
 res://Shaders/Screen.tres
 res://Scenes/gauge.gdshader
@@ -63,3 +64,12 @@ res://Resources/Ships/StartingShip.tres
 res://Resources/MapSpots/AsteroidBelt.tres
 res://Resources/MapSpots/AsteroidBeltLarge.tres
 res://Scenes/Static.gdshader
+res://Scenes/drone.tscn
+res://Scenes/player_ship.tscn
+res://Scenes/map.tscn
+res://Scenes/map_spot.tscn
+res://Scenes/world.tscn
+res://Scenes/ItemNotifContainer.tscn
+res://Scenes/ItemsAddedNotif.tscn
+res://Scenes/InventoryTrader.tscn
+res://Scenes/SteeringWheel.tscn

@@ -4,6 +4,7 @@ class_name PlayerShip
 
 @export var LowStatsToNotifyAbout : Array[String]
 
+
 var Travelling = false
 var ChangingCourse = false
 
@@ -14,9 +15,15 @@ signal ShipStopped
 signal ShipAccelerating
 signal ShipForceStopped
 
+static var Instance : PlayerShip
+
 func _ready() -> void:
-	#set_physics_process(false)
-	pass
+	Instance = self
+
+func GetDroneDock() -> DroneDock:
+	return $DroneDock
+static func GetInstance() -> PlayerShip:
+	return Instance
 func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var distall = fuel * 10 * fuel_ef
 	$Fuel/Fuel_Range.size = Vector2(distall, distall) * 2
@@ -63,7 +70,7 @@ func _physics_process(_delta: float) -> void:
 		#set_physics_process(false)
 		return
 	if (Dat.GetStat("CRYO").GetStat() == 0):
-		var oxy = global_position.distance_to($Node2D.global_position) / 100
+		var oxy = $Node2D.position.x / 100
 		if (Dat.GetStat("OXYGEN").GetCurrentValue() < oxy):
 			HaltShip()
 			PopUpManager.GetInstance().DoPopUp("You have run out of oxygen.")
@@ -73,6 +80,11 @@ func _physics_process(_delta: float) -> void:
 	global_position = $Node2D.global_position
 	Dat.ConsumeResource("FUEL", fuel)
 	UpdateFuelRange(Dat.GetStat("FUEL").GetCurrentValue(), Dat.GetStat("FUEL_EFFICIENCY").GetStat())
+
+func GetShipSpeed() -> float:
+	return $Node2D.position.x
+func GetShipSpeedVec() -> Vector2:
+	return $Node2D.global_position - global_position
 
 func HaltShip():
 	Travelling = false

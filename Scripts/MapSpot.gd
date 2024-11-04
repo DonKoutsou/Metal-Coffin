@@ -82,6 +82,16 @@ func OnSpotSeen(PlayAnim : bool = true) -> void:
 	$AnalyzeButton.icon = SpotType.MapIcon
 	Seen = true
 
+func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
+	visible = true
+	if (PlayAnim):
+		if (SpotType.GetEnumString() == "SUB_STATION"):
+			Ingame_UIManager.GetInstance().PlayDiag(["Operator, one of the drones found a sub-station.","I'd recomend visiting it to look for supplies or any clues regarding the collapse."])
+		if (!Seen):
+			animation_player.play("SpotFound")
+			PlaySound()
+	$AnalyzeButton.icon = SpotType.MapIcon
+	Seen = true
 func _on_land_button_pressed() -> void:
 	SpotSearched.emit(self)
 	
@@ -101,20 +111,21 @@ func PlaySound():
 	add_child(sound)
 	sound.play()
 func AreaEntered(area: Area2D):
-	if (area.get_collision_layer_value(1)):
-		OnSpotSeen()
-	if (area.get_collision_layer_value(2)):
-		if (!Analyzed):
-			var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
-			add_child(notif)
-			animation_player.play("SpotAnalyzed")
-			
-			PlaySound()
-		OnSpotAnalyzed()
-	if (area.get_collision_layer_value(3)):
-		if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
-			land_button_container.visible = true
-		SpotAproached.emit(self)
+	if (area.get_parent() is PlayerShip):
+		if (area.get_collision_layer_value(1)):
+			OnSpotSeen()
+		else: if (area.get_collision_layer_value(2)):
+			if (!Analyzed):
+				var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
+				add_child(notif)
+				animation_player.play("SpotAnalyzed")
+				
+				PlaySound()
+			OnSpotAnalyzed()
+		else: if (area.get_collision_layer_value(3)):
+			if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
+				land_button_container.visible = true
+			SpotAproached.emit(self)
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):
 		land_button_container.visible = false

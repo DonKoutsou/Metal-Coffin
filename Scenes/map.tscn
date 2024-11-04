@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=45 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cvw53vgn44h3v" path="res://Scenes/SteeringWheel.tscn" id="33_gpac8"]
 [ext_resource type="Shader" path="res://Scenes/gauge.gdshader" id="33_ssjx5"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
+[ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
@@ -369,6 +370,12 @@ pivot_offset = Vector2(50, 50)
 
 [node name="SteeringWheel" parent="CanvasLayer" instance=ExtResource("33_gpac8")]
 position = Vector2(-7, 657)
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("35_k6hjp")]
+offset_left = 210.0
+offset_top = 193.0
+offset_right = 250.0
+offset_bottom = 233.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

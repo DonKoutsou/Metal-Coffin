@@ -57,7 +57,57 @@ func StartTrade(InventoryContents : Array[Item], Drops : Array[Item]) -> void:
 		newbox.UpdateAmm(1)
 		DropBoxes.append(newbox)
 		newbox.connect("ItemUse", ItemMoveDrop)
+func UpdateDrops(Drops : Array[Item]) -> void:
+	for g in Drops.size():
+		var it = Drops[g]
 		
+		var placed = false
+		for z in DropBoxes.size() :
+			var box = DropBoxes[z]
+			if (box.ItemC.ItemType == it):
+				box.UpdateAmm(1)
+				placed = true
+				break
+		if (placed):
+			continue
+		for z in DropBoxes.size() :
+			var box = DropBoxes[z]
+			if (box.IsEmpty()):
+				box.UpdateAmm(1)
+				box.RegisterItem(it)
+				placed = true
+				break
+		if (placed):
+			continue
+		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
+		$VBoxContainer/HBoxContainer/VBoxContainer2/DropContents.add_child(newbox)
+		newbox.RegisterItem(it)
+		newbox.UpdateAmm(1)
+		DropBoxes.append(newbox)
+		newbox.connect("ItemUse", ItemMoveDrop)
+func UpdateInventoryContents(Contents : Array[Item]) -> void:
+	var Unplaced : Array[Item] = []
+	for z in Contents.size():
+		var it = Contents[z]
+		var placed = false
+		for g in InventoryBoxes.size() :
+			var box = InventoryBoxes[g]
+			if (box.ItemC.ItemType == it and box.HasSpace()):
+				box.UpdateAmm(1)
+				placed = true
+				break
+		if (!placed):
+			for g in InventoryBoxes.size() :
+				var box = InventoryBoxes[g]
+				if (box.IsEmpty()):
+					box.UpdateAmm(1)
+					box.RegisterItem(it)
+					placed = true
+					break	
+		if (!placed):
+			Unplaced.append(it)
+	if (Unplaced.size() > 0):
+		UpdateDrops(Unplaced)
 func ItemMoveInv(ItCo : ItemContainer) -> void:
 	var it = ItCo.ItemType as Item
 	for z in InventoryBoxes.size():
@@ -65,9 +115,7 @@ func ItemMoveInv(ItCo : ItemContainer) -> void:
 		if (box.ItemC == ItCo):
 			box.UpdateAmm(-1)
 			break
-			
-	
-		
+
 	for g in DropBoxes.size() :
 		var box = DropBoxes[g]
 		if (box.ItemC.ItemType == it):

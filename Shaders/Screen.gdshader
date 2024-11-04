@@ -34,7 +34,7 @@ void fragment(  )
 
     float vig = (0.0 + 1.0*16.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y));
 	col *= vec3(pow(vig,0.8));
-	
+
 	col *= line_color.rgb;
 	col *= 2.8;
 

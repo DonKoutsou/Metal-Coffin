@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_1yydb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
-radius = 4.0
+radius = 34.0588
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1suc"]
 resource_local_to_scene = true
@@ -301,9 +301,8 @@ theme_override_font_sizes/font_size = 22
 text = "Land"
 
 [node name="AreaNotif" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 7
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaNotif"]
 shape = SubResource("CircleShape2D_4ymfd")

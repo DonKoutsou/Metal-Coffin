@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_qqedk"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_3tmtq"]
 
-[node name="Items Found Notif" type="PanelContainer"]
+[node name="Items Found Notif" type="PanelContainer" groups=["ItemNotification"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -38,7 +38,7 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
