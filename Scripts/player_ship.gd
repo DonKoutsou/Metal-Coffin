@@ -2,6 +2,7 @@ extends Node2D
 
 class_name PlayerShip
 
+@export var Notif : PackedScene
 @export var LowStatsToNotifyAbout : Array[String]
 
 
@@ -10,7 +11,6 @@ var ChangingCourse = false
 
 signal ScreenEnter()
 signal ScreenExit()
-
 signal ShipStopped
 signal ShipAccelerating
 signal ShipForceStopped
@@ -25,23 +25,43 @@ func GetDroneDock() -> DroneDock:
 static func GetInstance() -> PlayerShip:
 	return Instance
 func UpdateFuelRange(fuel : float, fuel_ef : float):
+	var FuelRangeIndicator = $Fuel/Fuel_Range
+	var FuelRangeIndicatorDescriptor = $Fuel/Fuel_Range/Label
+	#calculate the range taking fuel efficiency in mind
 	var distall = fuel * 10 * fuel_ef
-	$Fuel/Fuel_Range.size = Vector2(distall, distall) * 2
-	$Fuel/Fuel_Range/Label.visible = distall > 100
-	$Fuel/Fuel_Range.position = Vector2(-(distall), -(distall))
-	#($Fuel/Fuel_Range.material as ShaderMaterial).set_shader_parameter("line_width", distall * 0.000017)
+	#scalling of collor rect
+	var tw = create_tween()
+	tw.tween_property(FuelRangeIndicator, "size", Vector2(distall, distall) * 2, 0.5)
+	#centering of color rect
+	var tw2 = create_tween()
+	tw2.tween_property(FuelRangeIndicator, "position", Vector2(-(distall), -(distall)), 0.5)
+	#dissable descriptor when indicator gets to small
+	FuelRangeIndicatorDescriptor.visible = distall > 100
 func UpdateVizRange(rang : float):
-	($Radar/CollisionShape2D.shape as CircleShape2D).radius = rang
-	$Radar/Radar_Range.size = Vector2(rang, rang) * 2
-	$Radar/Radar_Range/Label2.visible = rang > 100
-	$Radar/Radar_Range.position = Vector2(-(rang), -(rang))
-	#($Radar/Radar_Range.material as ShaderMaterial).set_shader_parameter("line_width", rang * 0.000017)
+	var RadarRangeIndicator = $Radar/Radar_Range
+	var RadarRangeCollisionShape = $Radar/CollisionShape2D
+	var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
+	#scalling collision
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
+	#scalling of collor rect
+	RadarRangeIndicator.size = Vector2(rang, rang) * 2
+	#centering of color rect
+	RadarRangeIndicator.position = Vector2(-(rang), -(rang))
+	#dissable descriptor when indicator gets to small
+	RadarRangeIndicatorDescriptor.visible = rang > 100
 func UpdateAnalyzerRange(rang : float):
-	($Analyzer/CollisionShape2D.shape as CircleShape2D).radius = rang
-	$Analyzer/Analyzer_Range.size = Vector2(rang, rang) * 2
-	$Analyzer/Analyzer_Range/Label2.visible = rang > 100
-	$Analyzer/Analyzer_Range.position = Vector2(-(rang), -(rang))
-	#($Analyzer/Analyzer_Range.material as ShaderMaterial).set_shader_parameter("line_width", rang * 0.000017)
+	var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
+	var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
+	var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
+	#scalling collision
+	(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
+	#scalling of collor rect
+	AnalyzerRangeIndicator.size = Vector2(rang, rang) * 2
+	#centering of color rect
+	AnalyzerRangeIndicator.position = Vector2(-(rang), -(rang))
+	#dissable descriptor when indicator gets to small
+	AnalyzerRangeIndicatorDescriptor.visible = rang > 100
+	
 func ShowingNotif() -> bool:
 	return $Notifications.get_child_count() > 0
 func OnStatLow(StatName : String) -> void:
@@ -51,13 +71,7 @@ func OnStatLow(StatName : String) -> void:
 	notif.SetStatData(StatName)
 	notif.rotation = -rotation
 	$Notifications.add_child(notif)
-func UpdateShipIcon(Tex : Texture) -> void:
-	$PlayerShipSpr.texture = Tex
-func _on_player_viz_notifier_screen_entered() -> void:
-	ScreenEnter.emit()
 
-func _on_player_viz_notifier_screen_exited() -> void:
-	ScreenExit.emit()
 
 func _physics_process(_delta: float) -> void:
 	if ($Node2D.position.x == 0):
@@ -100,13 +114,12 @@ func SteerChanged(value: float) -> void:
 	Steer(deg_to_rad(value))
 
 func AccelerationChanged(value: float) -> void:
-	
 	var Audioween = create_tween()
+	Audioween.set_trans(Tween.TRANS_EXPO)
 	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 100), 2)
 	ChangingCourse = true
 	if (!$AudioStreamPlayer2D.playing):
 		$AudioStreamPlayer2D.play()
-
 	if (value <= 0):
 		Travelling = false
 		#set_physics_process(false)
@@ -120,22 +133,24 @@ func AccelerationChanged(value: float) -> void:
 		set_physics_process(true)
 		ShipAccelerating.emit()
 	var postween = create_tween()
-	postween.tween_property($Node2D, "position", Vector2(max(0,value / 100), 0), 2)
+	postween.set_trans(Tween.TRANS_EXPO)
+	postween.tween_property($Node2D, "position", Vector2(max(0,value / 300), 0), 2)
 	
 func AccelerationEnded(_value_changed: bool) -> void:
-	ChangingCourse = false	
+	ChangingCourse = false
 	
 signal OnLookAtEnded()
 func LookAtEnded():
 	OnLookAtEnded.emit()
-	
 func PlayerLookAt(LookPos : Vector2) -> void:
 	var tw = create_tween()
 	tw.tween_property(self, "rotation", position.angle_to_point(LookPos), 1)
+	#tw.set_trans(Tween.TRANS_EXPO)
 	tw.connect("finished", LookAtEnded)
 	
 func Steer(Rotation : float) -> void:
 	var tw = create_tween()
+	#tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(self, "rotation", Rotation, 1)
 
 func ToggleUI(t : bool):
@@ -145,3 +160,11 @@ func ToggleUI(t : bool):
 	$Radar/Radar_Range.visible = t
 	$Fuel/Fuel_Range.visible = t
 	$Analyzer/Analyzer_Range.visible = t
+
+func UpdateShipIcon(Tex : Texture) -> void:
+	$PlayerShipSpr.texture = Tex	
+
+func _on_player_viz_notifier_screen_entered() -> void:
+	ScreenEnter.emit()
+func _on_player_viz_notifier_screen_exited() -> void:
+	ScreenExit.emit()

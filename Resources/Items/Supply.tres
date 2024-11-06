@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_xupee")
 StatUseName = "HULL"
-ItecColor = Color(0.252517, 0.622353, 0.846633, 1)
+ItecColor = Color(0.218372, 0.419103, 0.575975, 1)
 ItemIcon = ExtResource("1_3f7co")
 ItemIconSmol = ExtResource("1_3f7co")
 ItemName = "Supply"

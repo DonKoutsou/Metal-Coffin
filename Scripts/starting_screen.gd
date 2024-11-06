@@ -33,7 +33,7 @@ func StartGame(Load : bool) -> void:
 	add_child(wor)
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
-	wor.connect("OnGameEnded", OnGameEnded)
+	wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
 	
 

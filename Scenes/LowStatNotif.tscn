@@ -74,6 +74,7 @@ anchors_preset = 0
 offset_top = -108.0
 offset_bottom = -18.0
 pivot_offset = Vector2(0, 90)
+mouse_filter = 2
 script = ExtResource("1_8yqsu")
 
 [node name="Line2D" type="Line2D" parent="."]

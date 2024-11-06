@@ -1,7 +1,10 @@
 extends PanelContainer
 class_name UIStat
 
+var AutoRefill = true
+
 var Stat : String
+
 func UpdateStat(StatN : String):
 	if (Stat != StatN):
 		return
@@ -10,6 +13,7 @@ func UpdateStat(StatN : String):
 	var MaxValue = dat.GetStat(Stat).GetStat()
 
 	var MyTween = create_tween()
+	#MyTween.set_trans(Tween.TRANS_EXPO)
 	MyTween.tween_property($HBoxContainer/Bar, "value", CurStat, 0.1)
 	$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
@@ -31,20 +35,24 @@ func UpdateStatCust(StatN : String, Val : float):
 		return
 	var dat = ShipData.GetInstance()
 	var MaxValue = dat.GetStat(Stat).GetStat()
+	#MaxValue.set_trans(Tween.TRANS_EXPO)
 	var tw = create_tween()
 	tw.tween_property($HBoxContainer/Bar, "value", Val, 0.1)
-	tw.play()
+	#tw.play()
 	$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
 	$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(Val)) + "/" + var_to_str((roundi(MaxValue)))
 func _enter_tree() -> void:
 	if (Stat == "HP"):
-		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.051, 0.533, 0.09)
+		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.229, 0.48, 0.376)
 	if (Stat == "OXYGEN"):
-		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.317, 0.353, 0.75)
+		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.371, 0.411, 0.64)
 	if (Stat == "HULL"):
-		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.169, 0.428, 0.621)
+		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.218, 0.419, 0.576)
 	if (Stat == "FUEL"):
-		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.781, 0.651, 0)
+		($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.635, 0.592, 0.323)
 	UpdateStat(Stat)
 	$HBoxContainer/Bar/HBoxContainer/Label2.text = Stat
+
+func _on_auto_refill_toggled(toggled_on: bool) -> void:
+	AutoRefill = toggled_on

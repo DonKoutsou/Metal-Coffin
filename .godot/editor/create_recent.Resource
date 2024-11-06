@@ -1,3 +1,4 @@
+DroneDockEventHandler
 ShaderMaterial
 BaseShip
 ShipData

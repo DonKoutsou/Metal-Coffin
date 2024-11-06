@@ -64,7 +64,7 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 60.0333),
+"times": PackedFloat32Array(0, 60),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.139626, 0, -0.139626), Vector3(0.139626, 6.28319, -0.139626)]
@@ -95,7 +95,7 @@ rings = 32
 ring_segments = 3
 
 [node name="PlanetGaseous" type="MeshInstance3D"]
-transform = Transform3D(39.6107, 5.56692, 0, -5.51274, 39.2252, -5.56692, -0.774766, 5.51275, 39.6107, 0, 0, 0)
+transform = Transform3D(39.3344, 5.56691, 4.66999, -4.81796, 39.2252, -6.17802, -5.43935, 5.51273, 39.2431, 0, 0, 0)
 rotation_order = 1
 mesh = SubResource("SphereMesh_mt6w6")
 

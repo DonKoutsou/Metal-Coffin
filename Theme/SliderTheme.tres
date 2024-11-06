@@ -1,6 +1,48 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://r7u6a0gc7qc1"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://r7u6a0gc7qc1"]
 
+[ext_resource type="Texture2D" uid="uid://dy5rk5txpvlh4" path="res://Assets/UIPiecies/UISliderBigVert.png" id="1_glbtg"]
 [ext_resource type="Texture2D" uid="uid://dfky4sa7x12ef" path="res://Assets/UIPiecies/UISliderBig.png" id="1_sjmhr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gn3eg"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.430582, 0.496132, 0.581994, 1)
+border_width_left = 1024
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0509804, 0.0705882, 0.0901961, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_my15w"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.138341, 0.169799, 0.210945, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 81
+border_width_bottom = 1
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+expand_margin_left = 2.0
+expand_margin_top = 10.0
+expand_margin_right = 2.0
+expand_margin_bottom = 10.0
+shadow_size = 5
+shadow_offset = Vector2(-2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ox1sk"]
 content_margin_left = 8.0
@@ -44,6 +86,12 @@ shadow_size = 5
 shadow_offset = Vector2(-2, 2)
 
 [resource]
+HSlider/icons/grabber = ExtResource("1_glbtg")
+HSlider/icons/grabber_disabled = ExtResource("1_glbtg")
+HSlider/icons/grabber_highlight = ExtResource("1_glbtg")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_gn3eg")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_gn3eg")
+HSlider/styles/slider = SubResource("StyleBoxFlat_my15w")
 VSlider/constants/center_grabber = 1
 VSlider/icons/grabber = ExtResource("1_sjmhr")
 VSlider/icons/grabber_disabled = ExtResource("1_sjmhr")

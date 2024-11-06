@@ -39,6 +39,7 @@ ItemDescriptor=""
 Buttons=""
 ItemNotification=""
 InventoryTrade=""
+MapShipVizualiser=""
 
 [input]
 

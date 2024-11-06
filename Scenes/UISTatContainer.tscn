@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://carxyijo0mekn"]
+[gd_scene load_steps=13 format=3 uid="uid://carxyijo0mekn"]
 
 [ext_resource type="Script" path="res://Scripts/ui_Stat_container.gd" id="2_yw81g"]
 [ext_resource type="Texture2D" uid="uid://dcwvf3of7pu8g" path="res://Assets/hazard-sign.png" id="3_hqq08"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_cy8my"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_ooo48"]
 [ext_resource type="AudioStream" uid="uid://1m0dd6hxjs7v" path="res://Assets/Sounds/Alarm.mp3" id="5_sh16h"]
 
@@ -28,6 +29,8 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 shadow_size = 4
 
+[sub_resource type="Theme" id="Theme_gg2ld"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im2fd"]
 content_margin_left = 8.0
 content_margin_top = 8.0
@@ -40,15 +43,15 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 corner_detail = 20
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_he86a"]
@@ -57,7 +60,7 @@ content_margin_left = 2.0
 content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
-bg_color = Color(0.317053, 0.353, 0.750049, 1)
+bg_color = Color(0.600628, 0.545974, 0.321666, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -132,23 +135,25 @@ _data = {
 }
 
 [node name="Oxygen_Container" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 64)
+custom_minimum_size = Vector2(200, 50)
 offset_right = 242.0
-offset_bottom = 64.0
+offset_bottom = 50.0
 size_flags_horizontal = 3
-size_flags_vertical = 8
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_xniyh")
 script = ExtResource("2_yw81g")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Bar" type="ProgressBar" parent="HBoxContainer"]
-custom_minimum_size = Vector2(225, 30)
+custom_minimum_size = Vector2(225, 25)
 layout_mode = 2
 size_flags_vertical = 4
+theme = SubResource("Theme_gg2ld")
 theme_override_styles/background = SubResource("StyleBoxFlat_im2fd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_he86a")
 step = 1.0
@@ -200,6 +205,23 @@ layout_mode = 2
 texture = ExtResource("3_hqq08")
 expand_mode = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_cy8my")
+theme_override_font_sizes/font_size = 13
+text = "Auto-refil resource :"
+
+[node name="AutoRefill" type="CheckButton" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+button_pressed = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gpl14")
@@ -209,3 +231,5 @@ libraries = {
 stream = ExtResource("5_sh16h")
 pitch_scale = 1.4
 bus = &"MapSounds"
+
+[connection signal="toggled" from="HBoxContainer/HBoxContainer/AutoRefill" to="." method="_on_auto_refill_toggled"]

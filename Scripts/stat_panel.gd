@@ -6,9 +6,9 @@ class_name StatPanel
 
 var StatPanels : Array[UIStat] = []
 
-signal OnStatsUpdated(StatN : String)
-signal OnStatsUpdatedCust(StatN : String, Val : float)
-signal OnStatLow(StatN : String)
+signal STPAN_OnStatsUpdated(StatN : String)
+signal STPAN_OnStatsUpdatedCust(StatN : String, Val : float)
+signal STPAN_OnStatLow(StatN : String)
 # Called when the node enters the scene tree for the first time.
 func _enter_tree() -> void:
 	for g in StatsToShow.size():
@@ -18,24 +18,32 @@ func _enter_tree() -> void:
 		get_child(0).add_child(stat)
 		#if (!StatsToShowOnMap.has(StatsToShow[g])):
 			#stat.visible = false
-		connect("OnStatLow", stat.AlarmLow)
+		connect("STPAN_OnStatLow", stat.AlarmLow)
 		if (!SupportCustomValues):
-			connect("OnStatsUpdated", stat.UpdateStat)
+			connect("STPAN_OnStatsUpdated", stat.UpdateStat)
 		else :
-			connect("OnStatsUpdatedCust", stat.UpdateStatCust)
+			connect("STPAN_OnStatsUpdatedCust", stat.UpdateStatCust)
 func StatsUp(StatN : String):
-	OnStatsUpdated.emit(StatN)
+	STPAN_OnStatsUpdated.emit(StatN)
 func StatsLow(StatN : String):
-	OnStatLow.emit(StatN)
+	STPAN_OnStatLow.emit(StatN)
 func StatsUpCust(StatN : String, Val : float):
-	OnStatsUpdatedCust.emit(StatN, Val)
-func OnInventoryOpened():
-	pass
+	STPAN_OnStatsUpdatedCust.emit(StatN, Val)
+func StatAutoRefil(statn : String) -> bool:
+	var stat : UIStat
+	for g in StatPanels:
+		if (g.Stat == statn):
+			stat = g
+	if (stat == null):
+		return false
+	return stat.AutoRefill
+#func OnInventoryOpened():
+	#pass
 	#$GridContainer.columns = 4
 	#for g in StatPanels.size():
 		#StatPanels[g].visible = true
-func OnInventoryClosed():
-	pass
+#func OnInventoryClosed():
+	#pass
 	#$GridContainer.columns = 2
 	#for g in StatPanels.size():
 		#var nam = StatPanels[g].Stat

@@ -15,6 +15,7 @@ var Pos : Vector2
 var Visited = false
 var Seen = false
 var Analyzed = false
+var CurrentlyVisiting = false
 
 func _ready() -> void:
 	visible = Seen
@@ -49,7 +50,6 @@ func SetSpotData(Data : MapSpotType) -> void:
 #//////////////////////////////////////////////////////////////////
 #todo find better way for dialogue from station
 func OnSpotVisited() -> void:
-	Visited = true
 	if (SpotType.GetEnumString() == "SUB_STATION"):
 		var diags = SpotType.GetCustomData("StationInfo")
 		var diag : MapSpotCustomDataStringArray = diags.pick_random()
@@ -70,7 +70,7 @@ func OnSpotVisited() -> void:
 		
 		#SpotType.ClearCustomData(diag)
 		queue_free()
-
+	Visited = true
 func OnSpotSeen(PlayAnim : bool = true) -> void:
 	visible = true
 	if (PlayAnim):
@@ -81,7 +81,6 @@ func OnSpotSeen(PlayAnim : bool = true) -> void:
 			PlaySound()
 	$AnalyzeButton.icon = SpotType.MapIcon
 	Seen = true
-
 func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
 	visible = true
 	if (PlayAnim):
@@ -113,7 +112,8 @@ func PlaySound():
 func AreaEntered(area: Area2D):
 	if (area.get_parent() is PlayerShip):
 		if (area.get_collision_layer_value(1)):
-			OnSpotSeen()
+			if (!Seen):
+				OnSpotSeen()
 		else: if (area.get_collision_layer_value(2)):
 			if (!Analyzed):
 				var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
@@ -126,6 +126,8 @@ func AreaEntered(area: Area2D):
 			if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
 				land_button_container.visible = true
 			SpotAproached.emit(self)
+			CurrentlyVisiting = true
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):
 		land_button_container.visible = false
+		CurrentlyVisiting = false

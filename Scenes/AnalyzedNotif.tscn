@@ -96,8 +96,8 @@ clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_top = -108.0
-offset_right = 233.0
 offset_bottom = -18.0
+mouse_filter = 2
 script = ExtResource("1_pb8l4")
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -131,7 +131,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_pnijm")
-volume_db = -40.0
+volume_db = -25.0
 pitch_scale = 0.8
 bus = &"MapSounds"
 

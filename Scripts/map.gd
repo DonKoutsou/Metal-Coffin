@@ -10,6 +10,9 @@ class_name Map
 @export var MapSize : int = 20
 @export var AnalyzerScene : PackedScene
 @export var MapGenerationDistanceCurve : Curve
+
+@export var DroneDockEventH : DroneDockEventHandler
+
 @onready var thrust_slider: ThrustSlider = $CanvasLayer/ThrustSlider
 @onready var camera_2d: Camera2D = $CanvasLayer/SubViewportContainer/SubViewport/Camera2D
 
@@ -17,9 +20,9 @@ class_name Map
 
 #var Travelling = false
 
-signal AsteroidBeltArrival(Size : int)
-signal StageSearched(Spt : MapSpotType)
-signal ShipSearched(Ship : BaseShip)
+signal MAP_AsteroidBeltArrival(Size : int)
+signal MAP_StageSearched(Spt : MapSpotType)
+signal MAP_ShipSearched(Ship : BaseShip)
 
 var SpotList : Array[MapSpot]
 var currentstage = 0
@@ -40,6 +43,8 @@ func _ready() -> void:
 	GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
 	
 	camera_2d.make_current()
+	DroneDockEventH.connect("MouseEntered", OnMouseInDroneDock)
+	DroneDockEventH.connect("MouseLeft", OnMouseLeftDroneDock)
 	
 
 func GetPlayerPos() -> Vector2:
@@ -66,32 +71,32 @@ func ShowStation():
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(camera_2d, "global_position", stationpos, 6)
 	
-	var mattw = create_tween()
-	mattw.set_trans(Tween.TRANS_EXPO)
-	mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 500, 6)
+	#var mattw = create_tween()
+	##mattw.set_trans(Tween.TRANS_EXPO)
+	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 500, 6)
 	
 func FrameCamToPlayer():
 	var tw = create_tween()
 	var plpos = GetPlayerShip().global_position
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(camera_2d, "global_position", plpos,6)
-	var mattw = create_tween()
-	mattw.set_trans(Tween.TRANS_EXPO)
-	mattw.tween_property(GalaxyMat, "shader_parameter/thing", plpos.x / 500,6)
+	#var mattw = create_tween()
+	#mattw.set_trans(Tween.TRANS_EXPO)
+	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", plpos.x / 500,6)
 func UpdateCameraPos(relativeMovement : Vector2):
 	var maxposX = get_tree().get_nodes_in_group("STATION")[0].position.x
 	var vpsizehalf = (get_viewport_rect().size.y / 2)
-	var maxposY = Vector2(vpsizehalf - 900 * camera_2d.zoom.x, vpsizehalf + 900 * camera_2d.zoom.x)
-	var rel = relativeMovement
+	var maxposY = Vector2(vpsizehalf - 900, vpsizehalf + 900)
+	var rel = relativeMovement / camera_2d.zoom
 	var newpos = Vector2(clamp(camera_2d.position.x - rel.x, 0, maxposX), clamp(camera_2d.position.y - rel.y, maxposY.x, maxposY.y))
 	if (newpos.x != camera_2d.position.x):
 		camera_2d.position.x = newpos.x
-		var val = GalaxyMat.get_shader_parameter("thing")
-		GalaxyMat.set_shader_parameter("thing", val - (rel.x / 500) * camera_2d.zoom.x)
+		#var val = GalaxyMat.get_shader_parameter("thing")
+		#GalaxyMat.set_shader_parameter("thing", val - (rel.x / 1000))
 	if (newpos.y != camera_2d.position.y):
 		camera_2d.position.y = newpos.y
-		var val2 = GalaxyMat.get_shader_parameter("thing2")
-		GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 500) * camera_2d.zoom.x)
+		#var val2 = GalaxyMat.get_shader_parameter("thing2")
+		#GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 1000))
 		
 #func _input(event: InputEvent) -> void:
 	#pass
@@ -132,9 +137,9 @@ func GenerateMap() -> void:
 		StationSpots.append(10 * z)
 	var Prevpos : Vector2 = Vector2(250,250)
 	
-	var line = Line2D.new()
-	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(line)
-	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.move_child(line, 0)
+	#var line = Line2D.new()
+	#$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(line)
+	#$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.move_child(line, 0)
 	for g in MapSize :
 		var sc = SpotScene.instantiate() as MapSpot
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
@@ -142,17 +147,17 @@ func GenerateMap() -> void:
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
 		
-		var AddingStation = false
+		#var AddingStation = false
 		var type
 		
 		if (g == MapSize - 1):
 			type = FinalSpotType
-			AddingStation = true
+			#AddingStation = true
 		else :if (SpecialSpots.has(g)):
 			type = SpecialMapSpotTypes[SpecialSpots.find(g)] as MapSpotType
 		else : if (StationSpots.has(g)):
 			type = MinorStationSpotType as MapSpotType
-			AddingStation = true
+			#AddingStation = true
 		else:
 			type = MapSpotTypes.pick_random() as MapSpotType
 		
@@ -165,8 +170,8 @@ func GenerateMap() -> void:
 			pos = GetNextRandomPos(Prevpos, Distanceval)
 		sc.position = pos
 		SpotList.append(sc)
-		if (AddingStation):
-			line.add_point(pos)
+		#if (AddingStation):
+			#line.add_point(pos)
 		var asteroidscene = SpotScene.instantiate() as MapSpot
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(asteroidscene)
 		asteroidscene.connect("SpotAproached", Arrival)
@@ -207,9 +212,9 @@ func Arrival(Spot : MapSpot)	-> void:
 		Spot.queue_free()
 		var val = Spot.SpotType.GetCustomData("IsLarge")[0].Value as bool
 		if (val):
-			AsteroidBeltArrival.emit(120)
+			MAP_AsteroidBeltArrival.emit(120)
 		else:
-			AsteroidBeltArrival.emit(60)
+			MAP_AsteroidBeltArrival.emit(60)
 		GetPlayerShip().HaltShip()
 		
 func StageFailed() -> void:
@@ -242,9 +247,9 @@ func SearchLocation(stage : MapSpot):
 		return
 	#stage.ToggleLandButton(false)
 	if (stage.SpotType is Ship_MapSpotType):
-		ShipSearched.emit(stage.SpotType.Ship)
+		MAP_ShipSearched.emit(stage.SpotType.Ship)
 	else:
-		StageSearched.emit(stage)
+		MAP_StageSearched.emit(stage)
 	stage.OnSpotVisited()
 
 #Save/Load///////////////////////////////////////////
@@ -273,8 +278,9 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		SpotList.insert(g, sc)
 		if (dat.Seen):
 			sc.OnSpotSeen(false)
-		if (dat.Visited):
-			sc.OnSpotVisited()
+		
+		sc.Visited = dat.Visited
+		
 		if (dat.Analyzed):
 			sc.OnSpotAnalyzed()
 #//////////////////////////////////////////////////////////
@@ -295,7 +301,10 @@ func _on_steer_slider_mouse_entered() -> void:
 	MouseInUI = true
 func _on_steer_slider_mouse_exited() -> void:
 	MouseInUI = false
-
+func OnMouseInDroneDock() -> void:
+	MouseInUI = true
+func OnMouseLeftDroneDock() -> void:
+	MouseInUI = false
 
 var shakestr = 0.0
 
@@ -340,17 +349,22 @@ func _handle_drag(event: InputEventScreenDrag):
 		var touch_point_positions = touch_points.values()
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
-		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.5,0.5), Vector2(2,2))
+		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.25,0.25), Vector2(2,2))
 	else:
 		UpdateCameraPos(event.relative)
 func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("ZoomIn")):
 		var prevzoom = camera_2d.zoom
-		camera_2d.zoom = clamp(prevzoom * Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
+		camera_2d.zoom = clamp(prevzoom * Vector2(1.1, 1.1), Vector2(0.25,0.25), Vector2(2,2))
+		for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
+			g.visible = camera_2d.zoom < Vector2(1, 1)
+		
 		#camera_2d.position *= Vector2(1.1, 1.1)
 	if (event.is_action_pressed("ZoomOut")):
 		var prevzoom = camera_2d.zoom
-		camera_2d.zoom = clamp(prevzoom / Vector2(1.1, 1.1), Vector2(0.5,0.5), Vector2(2,2))
+		camera_2d.zoom = clamp(prevzoom / Vector2(1.1, 1.1), Vector2(0.25,0.25), Vector2(2,2))
+		for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
+			g.visible = camera_2d.zoom < Vector2(1, 1)
 	if (GetPlayerShip().ChangingCourse or MouseInUI):
 		return
 	if (event is InputEventScreenTouch):

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_x4alj")
 StatUseName = "HP"
-ItecColor = Color(0, 0.572225, 0.290914, 1)
+ItecColor = Color(0.228742, 0.479661, 0.375646, 1)
 ItemIcon = ExtResource("1_qxhdb")
 ItemIconSmol = ExtResource("1_qxhdb")
 ItemName = "Medical"

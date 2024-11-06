@@ -14,17 +14,15 @@ var CurrentShip : BaseShip
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 
-signal OnGameEnded()
-signal StatsUpdated(StatN : String)
-signal StatGotLow(StatN : String)
+signal WRLD_OnGameEnded()
+signal WRLD_StatsUpdated(StatN : String)
+signal WRLD_StatGotLow(StatN : String)
 
 var Loading = false
 
 func _ready() -> void:
-	var map = GetMap()
-	map.connect("AsteroidBeltArrival", StartStage)
-	map.connect("StageSearched", StageSearch)
-	map.connect("ShipSearched", ShipSearched)
+	
+	
 	UISoundMan.GetInstance().Refresh()
 	if (!Loading):
 		PlayIntro()
@@ -51,10 +49,23 @@ func EnableBackUI():
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
 	GetMap().ToggleUIForIntro(true)
 func _enter_tree() -> void:
-	connect("StatsUpdated", $Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.StatsUp)
-	connect("StatGotLow", $Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.StatsLow)
+	var map = GetMap()
+	map.connect("MAP_AsteroidBeltArrival", StartStage)
+	map.connect("MAP_StageSearched", StageSearch)
+	map.connect("MAP_ShipSearched", ShipSearched)
 	
-	ShipDat.connect("StatsUpdated", OnStatsUpdated)
+	var inventory = GetInventory()
+	inventory.connect("INV_OnItemAdded", OnItemAdded)
+	inventory.connect("INV_OnItemRemoved", OnItemRemoved)
+	inventory.connect("INV_OnItemUsed", OnItemUsed)
+	inventory.connect("INV_OnShipPartDamaged", OnItemDamaged)
+	inventory.connect("INV_OnShipPartFixed", OnItemRepaired)
+	
+	var statp = GetStatPanel()
+	connect("WRLD_StatsUpdated", statp.StatsUp)
+	connect("WRLD_StatGotLow", statp.StatsLow)
+	
+	ShipDat.connect("SD_StatsUpdated", OnStatsUpdated)
 	
 	GetInventory().UpdateShipInfo(StartingShip)
 	ShipDat.ApplyShipStats(StartingShip.Buffs)
@@ -66,15 +77,19 @@ func _exit_tree() -> void:
 	ShipDat.RemoveShipStats(CurrentShip.Buffs)
 	
 func OnStatsUpdated(StatName : String):
+	if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() - 20):
+		var it = GetInventory().GetItemForStat(StatName)
+		if (GetStatPanel().StatAutoRefil(StatName) and it != null):
+			GetInventory().UseItem(it)
 	if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() * 0.2):
 		if (!StatsNotifiedLow.has(StatName) and !GetMap().GetPlayerShip().ShowingNotif()):
 			StatsNotifiedLow.append(StatName)
 			GetMap().GetPlayerShip().OnStatLow(StatName)
-			StatGotLow.emit(StatName)
+			WRLD_StatGotLow.emit(StatName)
 	else:
 		if (StatsNotifiedLow.has(StatName)):
 			StatsNotifiedLow.remove_at(StatsNotifiedLow.find(StatName))
-	StatsUpdated.emit(StatName)
+	WRLD_StatsUpdated.emit(StatName)
 	
 func StartShipTrade(NewShip : BaseShip) -> void:
 	var tradesc = ShipTradeScene.instantiate() as ShipTrade
@@ -221,8 +236,6 @@ func StageDone(victory : bool, supplies : Array[Item]) -> void:
 func ShipSearched(Ship : BaseShip):
 	StartShipTrade(Ship)
 
-
-
 func StageSearch(Spt : MapSpot)-> void:
 	if (Spt.SpotType.CanLand):
 		StartExploration(Spt)
@@ -250,14 +263,14 @@ func GameLost(reason : String):
 	$Ingame_UIManager/PanelContainer/VBoxContainer/Label.text = reason
 
 func _on_button_pressed() -> void:
-	OnGameEnded.emit()
+	WRLD_OnGameEnded.emit()
 
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save(self)
 	PopUpManager.GetInstance().DoPopUp("Save successful")
 	
 func _on_exit_pressed() -> void:
-	OnGameEnded.emit()
+	WRLD_OnGameEnded.emit()
 
 func _on_pause_pressed() -> void:
 	Pause()

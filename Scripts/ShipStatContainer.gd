@@ -6,7 +6,7 @@ var STName
 
 func SetData(Stat : ShipStat) -> void:
 	STName = Stat.StatName
-	$Label.text = Stat.StatName
+	$HBoxContainer/Label.text = Stat.StatName
 	$ProgressBar.max_value = Stat.StatMax
 	$ProgressBar.value = Stat.GetShipBuff()
 	$ProgressBar/ProgressBar.max_value = Stat.StatMax
@@ -22,3 +22,4 @@ func SetTradeData(Stat : BaseShipStat) -> void:
 func UpdateStatValue(StatVal : float, ShipVar : float) -> void:
 	$ProgressBar.value = ShipVar
 	$ProgressBar/ProgressBar.value = StatVal
+	$HBoxContainer/Label2.text = var_to_str(roundi(StatVal))

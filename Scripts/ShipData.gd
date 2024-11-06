@@ -4,7 +4,7 @@ class_name ShipData
 @export var Stats : Array[ShipStat]
 static var Instance
 
-signal StatsUpdated(StName : String)
+signal SD_StatsUpdated(StName : String)
 
 func _init() -> void:
 	Instance = self
@@ -34,20 +34,20 @@ func _AddToStatItemBuff(StatN : String, StatVal : float):
 	
 func ConsumeResource(StatN : String, Amm : float) -> void:
 	_AddToStatCurrentValue(StatN, -Amm)
-	StatsUpdated.emit(StatN)
+	SD_StatsUpdated.emit(StatN)
 func RefilResource(StatN : String, Amm : float) -> void:
 	_AddToStatCurrentValue(StatN, Amm)
-	StatsUpdated.emit(StatN)
+	SD_StatsUpdated.emit(StatN)
 func SetStatValue(StatN : String, Amm : float) -> void:
 	_UpdateStatCurrentValue(StatN, Amm)
-	StatsUpdated.emit(StatN)
+	SD_StatsUpdated.emit(StatN)
 func ApplyShipStats(ShipStats : Array[BaseShipStat]) -> void:
 		for g in ShipStats.size():
 			var shipst = ShipStats[g] as BaseShipStat
 			_AddToStatShipBuff(shipst.StatName ,shipst.StatBuff)
 			if (shipst is FluidShipStat):
 				_AddToStatCurrentValue(shipst.StatName, shipst.StatCurrentVal)
-			StatsUpdated.emit(shipst.StatName)
+			SD_StatsUpdated.emit(shipst.StatName)
 func RemoveShipStats(ShipStats : Array[BaseShipStat]) -> void:
 		for g in ShipStats.size():
 			var shipst = ShipStats[g] as BaseShipStat
@@ -59,12 +59,12 @@ func RemoveShipStats(ShipStats : Array[BaseShipStat]) -> void:
 				#var dif = st.CurrentVelue - newstat
 				#UpdateStatCurrentValue(st.StatName, newstat)
 				#shipst.StatCurrentVal = dif
-			StatsUpdated.emit(shipst.StatName)
+			SD_StatsUpdated.emit(shipst.StatName)
 func ApplyShipPartStat(Part : ShipPart) -> void:
 	var st = GetStat(Part.UpgradeName)
 	_AddToStatItemBuff(Part.UpgradeName ,Part.UpgradeAmm)
 	_AddToStatCurrentValue(st.StatName, Part.CurrentVal)
-	StatsUpdated.emit(st.StatName)
+	SD_StatsUpdated.emit(st.StatName)
 func RemoveShipPartStat(Part : ShipPart) -> void:
 	var st = GetStat(Part.UpgradeName)
 	_AddToStatItemBuff(Part.UpgradeName ,-Part.UpgradeAmm)
@@ -76,7 +76,7 @@ func RemoveShipPartStat(Part : ShipPart) -> void:
 	else:
 		Part.CurrentVal = 0
 		
-	StatsUpdated.emit(st.StatName)
+	SD_StatsUpdated.emit(st.StatName)
 				
 			
 func GetStat(Name : String) -> ShipStat:

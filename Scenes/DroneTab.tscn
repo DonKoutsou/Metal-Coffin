@@ -1,13 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1q7brpw8cc2p"]
+[gd_scene load_steps=22 format=3 uid="uid://b1q7brpw8cc2p"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_762dg"]
 [ext_resource type="Script" path="res://Scripts/DroneTab.gd" id="1_v0de6"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="2_35lsn"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="2_xe1ep"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="3_dpf2p"]
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="4_6wjfy"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_da8fq"]
 [ext_resource type="Texture2D" uid="uid://ct884nxo5yiva" path="res://Assets/plane_Wheel_BaseColor_Mid.png" id="7_uh8qa"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="8_nr8c2"]
+[ext_resource type="Theme" uid="uid://r7u6a0gc7qc1" path="res://Theme/SliderTheme.tres" id="9_01onh"]
+[ext_resource type="Texture2D" uid="uid://cba3crf7vyc2x" path="res://Assets/Off.png" id="11_obe1i"]
 
 [sub_resource type="Animation" id="Animation_brgwl"]
 resource_name = "Hide"
@@ -21,7 +24,22 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -223), Vector2(0, 80)]
+"values": [Vector2(0, 0), Vector2(0, 173)]
+}
+
+[sub_resource type="Animation" id="Animation_uci4u"]
+resource_name = "HideSteer"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Node2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(21, -82), Vector2(21, 3)]
 }
 
 [sub_resource type="Animation" id="Animation_wlayh"]
@@ -36,7 +54,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 80)]
+"values": [Vector2(0, 173)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -63,7 +81,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 80), Vector2(0, -223)]
+"values": [Vector2(0, 173), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_6inlh"]
@@ -78,22 +96,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(21, 178), Vector2(21, 64)]
-}
-
-[sub_resource type="Animation" id="Animation_uci4u"]
-resource_name = "HideSteer"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Node2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(21, 64), Vector2(21, 178)]
+"values": [Vector2(21, 5), Vector2(21, -82)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kt4fa"]
@@ -104,6 +107,29 @@ _data = {
 "Show": SubResource("Animation_stsyt"),
 "ShowSteer": SubResource("Animation_6inlh")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_275a1"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_blend = true
+corner_radius_top_left = 500
+corner_radius_top_right = 500
+corner_radius_bottom_right = 500
+corner_radius_bottom_left = 500
+corner_detail = 20
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x6702"]
 radius = 126.5
@@ -123,7 +149,7 @@ border_blend = true
 corner_radius_top_left = 30
 corner_detail = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6ctl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vg71d"]
 content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
@@ -132,12 +158,10 @@ bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
-border_width_bottom = 56
+border_width_bottom = 156
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
 corner_detail = 1
-shadow_size = 5
-shadow_offset = Vector2(-2, 2)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -151,7 +175,9 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("1_v0de6")
+DroneDockEventH = ExtResource("2_35lsn")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -160,23 +186,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -54.5
+offset_left = 84.0
 offset_top = -56.0
-offset_right = 54.5
+offset_right = 217.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("1_762dg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_da8fq")
-theme_override_font_sizes/font_size = 20
-text = "Drone Tab"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ToggleDroneTab" type="Button" parent="PanelContainer2/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
@@ -192,14 +210,37 @@ libraries = {
 }
 
 [node name="Control" type="Control" parent="."]
-anchors_preset = 0
-offset_top = 80.0
-offset_right = 40.0
-offset_bottom = 120.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 133.0
+offset_right = 20.0
+offset_bottom = 173.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 
 [node name="Node2D" type="Node2D" parent="Control"]
 position = Vector2(21, 178)
+
+[node name="Panel" type="Panel" parent="Control/Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -130.0
+offset_right = 130.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_275a1")
 
 [node name="Area2D" type="Area2D" parent="Control/Node2D"]
 collision_layer = 2147483648
@@ -224,22 +265,25 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -143.5
-offset_top = 2.0
-offset_right = 143.5
-offset_bottom = 223.0
+offset_left = -215.0
+offset_top = -173.0
+offset_right = 217.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_tu4yf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="LooterDroneButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" groups=["Buttons"]]
@@ -268,11 +312,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(22.71, 0)
+visible = false
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_i6ctl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vg71d")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ReconDronButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" groups=["Buttons"]]
@@ -299,7 +345,13 @@ text = "Ammount : 3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_da8fq")
 theme_override_font_sizes/font_size = 20
@@ -307,12 +359,11 @@ text = "Armed Drone : Looter"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
-size_flags_vertical = 3
 alignment = 1
 
-[node name="ArmDroneButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer2" groups=["Buttons"]]
+[node name="ArmDroneButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_xe1ep")
@@ -320,14 +371,73 @@ theme_override_font_sizes/font_size = 16
 text = "Arm Drone
 "
 
-[node name="DeployDroneButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer2" groups=["Buttons"]]
+[node name="DissarmDroneButton2" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_xe1ep")
 theme_override_font_sizes/font_size = 16
 disabled = true
+text = "Dissarm Drone
+"
+
+[node name="DeployDroneButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_xe1ep")
+theme_override_font_sizes/font_size = 16
+disabled = true
 text = "Deploy Drone
 "
+
+[node name="DroneRangeSlider" type="VSlider" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 49.515)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("9_01onh")
+min_value = 1.0
+value = 3.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+text = "Fuel Cost"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TurnOffButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4" groups=["Buttons"]]
+custom_minimum_size = Vector2(29.165, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_xe1ep")
+theme_override_font_sizes/font_size = 12
+icon = ExtResource("11_obe1i")
+autowrap_mode = 3
+icon_alignment = 1
+
+[node name="Control" type="Control" parent="Control/PanelContainer"]
+layout_mode = 2
+
+[node name="Notifications" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
 
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/ToggleDroneTab" to="." method="_on_toggle_drone_tab_pressed"]
 [connection signal="input_event" from="Control/Node2D/Area2D" to="." method="_on_area_2d_input_event"]
@@ -335,5 +445,8 @@ text = "Deploy Drone
 [connection signal="mouse_exited" from="Control/Node2D/Area2D" to="." method="_on_texture_rect_mouse_exited"]
 [connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/LooterDroneButton" to="." method="_on_looter_drone_button_pressed"]
 [connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ReconDronButton" to="." method="_on_recon_dron_button_pressed"]
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer2/ArmDroneButton" to="." method="_on_arm_drone_button_pressed"]
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer2/DeployDroneButton" to="." method="_on_deploy_drone_button_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton" to="." method="_on_arm_drone_button_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/DissarmDroneButton2" to="." method="_on_dissarm_drone_button_2_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/DeployDroneButton" to="." method="_on_deploy_drone_button_pressed"]
+[connection signal="value_changed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/DroneRangeSlider" to="." method="_on_drone_range_slider_value_changed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4/TurnOffButton" to="." method="_on_turn_off_button_pressed"]

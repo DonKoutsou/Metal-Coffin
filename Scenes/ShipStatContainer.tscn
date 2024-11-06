@@ -37,12 +37,22 @@ size_flags_vertical = 3
 theme_override_constants/separation = 0
 script = ExtResource("1_30hhs")
 
-[node name="Label" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("2_tpg0b")
 theme_override_font_sizes/font_size = 22
 text = "stat"
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_tpg0b")
+theme_override_font_sizes/font_size = 22
+text = "10"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 2

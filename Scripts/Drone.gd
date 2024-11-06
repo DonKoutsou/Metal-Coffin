@@ -2,8 +2,12 @@ extends Node2D
 
 class_name Drone
 
+@export var DroneNotifScene : PackedScene
+
 var CommingBack = false
 var Docked = true
+
+var Fuel = 0
 
 var StoredItem : Array[Item] = []
 
@@ -15,14 +19,22 @@ func EnableDrone():
 	Docked = false
 	set_physics_process(true)
 	$Radar.monitoring = true
-	#$Line2D.visible = false
+	$Line2D.visible = true
 	
 func _physics_process(_delta: float) -> void:
 	if (CommingBack):
 		var interceptionpoint = calculateinterceptionpoint()
 		updatedronecourse(interceptionpoint)
 	else:
+		Fuel -= $Node2D.position.x
 		global_position = $Node2D.global_position
+		$Line2D.set_point_position(1, Vector2(Fuel, 0))
+		if (Fuel <= 0):
+			rotation = 0.0
+			CommingBack = true
+			Notify("Drone returning to base")
+			Docked = false
+			#$Line2D.visible = true
 
 func calculateinterceptionpoint() -> Vector2:
 	var plship = PlayerShip.GetInstance()
@@ -47,20 +59,31 @@ func updatedronecourse(interception_point: Vector2):
 	position += direction * $Node2D.position.x
 	$Line2D.set_point_position(1, interception_point - position)
 
+func Notify(NotificationText : String)-> void:
+	var notif = DroneNotifScene.instantiate() as DroneNotif
+	notif.SetNotifText(NotificationText)
+	add_child(notif)
+
 func _on_radar_area_entered(area: Area2D) -> void:
 	if (Docked):
 		return
 	if (area.get_parent() is MapSpot and !CommingBack):
+		var spot = area.get_parent() as MapSpot
+		if (spot.CurrentlyVisiting):
+			return
+		if (spot.SpotType.FullName != "Black Whole"):
+			StoredItem = spot.SpotType.GetSpotDrop()
 		rotation = 0.0
 		CommingBack = true
 		Docked = false
-		$Line2D.visible = true
-		var spot = area.get_parent() as MapSpot
-		StoredItem = spot.SpotType.GetSpotDrop()
-		spot.OnSpotSeen()
+		Notify("Drone returning to base")
+		#$Line2D.visible = true
+		if (!spot.Seen):
+			spot.OnSpotSeenByDrone()
+		spot.Visited = true
 	else : if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
-		plship.GetDroneDock().DockDrone(self)
+		plship.GetDroneDock().DockDrone(self, true)
 		CommingBack = false
 		Docked = true
 		$Line2D.visible = false
@@ -71,3 +94,9 @@ func _on_radar_area_entered(area: Area2D) -> void:
 		
 func DissableMonitoring():
 	$Radar.monitoring = false
+
+
+func _on_radar_2_area_entered(area: Area2D) -> void:
+	if (area.get_parent() is PlayerShip and CommingBack):
+		var plship = area.get_parent() as PlayerShip
+		plship.GetDroneDock().PlayReturnSound()

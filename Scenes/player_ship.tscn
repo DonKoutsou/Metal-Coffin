@@ -1,13 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=29 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="2_2w4bb"]
-[ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/drone.tscn" id="2_qeqr4"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_c5u4x"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_vt3yq"]
 [ext_resource type="Texture2D" uid="uid://dbqdy31whtto3" path="res://Assets/ShipIcon_Main Camera.png" id="5_1veyv"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="6_layd2"]
+[ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/drone.tscn" id="6_pmuiv"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="7_8gcrc"]
+[ext_resource type="AudioStream" uid="uid://5fvite02ickv" path="res://Assets/VoiceLines/radio_landing_end_02.wav" id="8_ws5qi"]
+[ext_resource type="AudioStream" uid="uid://cxp410y4qjnl8" path="res://Assets/VoiceLines/radio_landing_end_03.wav" id="9_lowu5"]
+[ext_resource type="AudioStream" uid="uid://q5nbj1ayjnk0" path="res://Assets/VoiceLines/radio_landing_touch_01.wav" id="10_a03el"]
+[ext_resource type="AudioStream" uid="uid://bjciqjm0fqhx6" path="res://Assets/VoiceLines/radio_landing_touch_02.wav" id="11_kcejq"]
+[ext_resource type="AudioStream" uid="uid://xmqqcc6y27wo" path="res://Assets/VoiceLines/radio_landing_start_01.wav" id="12_g8gwu"]
+[ext_resource type="AudioStream" uid="uid://du8mtleur57ie" path="res://Assets/VoiceLines/radio_landing_start_02.wav" id="13_2bb3a"]
+[ext_resource type="AudioStream" uid="uid://ck7gmg6alt1i1" path="res://Assets/VoiceLines/radio_go0_01.wav" id="14_7lrl2"]
+[ext_resource type="AudioStream" uid="uid://dfli1oc6q60bc" path="res://Assets/VoiceLines/radio_go1_01.wav" id="15_pptn2"]
+[ext_resource type="AudioStream" uid="uid://dxj88bvyii2hx" path="res://Assets/VoiceLines/radio_go2_01.wav" id="16_01x11"]
+[ext_resource type="AudioStream" uid="uid://cj8t5fkujexdw" path="res://Assets/VoiceLines/radio_go3_01.wav" id="17_louuf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
@@ -55,7 +66,7 @@ shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
-radius = 22.2036
+radius = 6.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qn4ww"]
 particle_flag_disable_z = true
@@ -66,17 +77,17 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.2
 scale_max = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_087im"]
-shader = ExtResource("2_2w4bb")
-shader_parameter/line_color = Color(0.908948, 0.280129, 0.164634, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 1.0
-shader_parameter/line_width = 0.01
-shader_parameter/beam_angle = 0.3
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.07
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73pil"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.969432, 0.527551, 0.201925, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="PlayerShip" type="Node2D"]
 position = Vector2(-90, 324)
@@ -223,7 +234,11 @@ collision_layer = 8
 collision_mask = 0
 monitoring = false
 script = ExtResource("6_layd2")
-DroneScene = ExtResource("2_qeqr4")
+DroneScene = ExtResource("6_pmuiv")
+DroneDockEventH = ExtResource("7_8gcrc")
+LandedVoiceLines = Array[AudioStream]([ExtResource("8_ws5qi"), ExtResource("9_lowu5"), ExtResource("10_a03el"), ExtResource("11_kcejq")])
+ReturnVoiceLines = Array[AudioStream]([ExtResource("12_g8gwu"), ExtResource("13_2bb3a")])
+TakeoffVoiceLines = Array[AudioStream]([ExtResource("14_7lrl2"), ExtResource("15_pptn2"), ExtResource("16_01x11"), ExtResource("17_louuf")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroneDock"]
 shape = SubResource("CircleShape2D_oemyy")
@@ -233,23 +248,31 @@ shape = SubResource("CircleShape2D_oemyy")
 [node name="DroneSpot1" type="Node2D" parent="DroneDock/DroneSpots"]
 position = Vector2(-30, -30)
 
-[node name="DroneSpot2" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-60, -60)
-
-[node name="DroneSpot3" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-90, -90)
-
 [node name="DroneSpot4" type="Node2D" parent="DroneDock/DroneSpots"]
 position = Vector2(-30, 30)
+
+[node name="DroneSpot2" type="Node2D" parent="DroneDock/DroneSpots"]
+position = Vector2(-60, -60)
 
 [node name="DroneSpot5" type="Node2D" parent="DroneDock/DroneSpots"]
 position = Vector2(-60, 60)
 
+[node name="DroneSpot3" type="Node2D" parent="DroneDock/DroneSpots"]
+position = Vector2(-90, -90)
+
 [node name="DroneSpot6" type="Node2D" parent="DroneDock/DroneSpots"]
 position = Vector2(-90, 90)
 
+[node name="Line2D" type="Line2D" parent="DroneDock"]
+points = PackedVector2Array(0, 0, 10, 0)
+width = 2.0
+default_color = Color(0.908948, 0.280129, 0.164634, 1)
+
+[node name="Sounds" type="Node" parent="DroneDock"]
+
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_1veyv")
 
 [node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="PlayerShipSpr"]
@@ -260,52 +283,32 @@ rotation = 1.5708
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_0t4kc")
 volume_db = -5.0
+pitch_scale = 0.01
 bus = &"MapSounds"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(-16, 0)
+position = Vector2(-7, 0)
+emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_qn4ww")
 lifetime = 2.0
 
 [node name="Notifications" type="Node2D" parent="."]
 
-[node name="Drone_Range" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_087im")
+[node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -234.0
-offset_top = -234.0
-offset_right = 234.0
-offset_bottom = 234.0
+offset_left = -27.0
+offset_top = -27.0
+offset_right = 27.0
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
 mouse_filter = 2
-
-[node name="Label2" type="Label" parent="Drone_Range"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -106.845
-offset_top = -3.0
-offset_right = -3.845
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-theme = ExtResource("4_vt3yq")
-theme_override_colors/font_color = Color(0.908948, 0.280129, 0.164634, 1)
-theme_override_fonts/font = ExtResource("3_c5u4x")
-theme_override_font_sizes/font_size = 14
-text = "Drone Range"
-horizontal_alignment = 2
-vertical_alignment = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_73pil")
 
 [connection signal="screen_entered" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
 [connection signal="screen_exited" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]
