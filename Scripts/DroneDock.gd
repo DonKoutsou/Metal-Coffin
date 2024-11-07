@@ -28,6 +28,7 @@ func PlayLandingSound()-> void:
 	sound.bus = "UI"
 	add_child(sound, true)
 	sound.connect("finished", SoundEnded)
+	sound.volume_db = -10
 	sound.play()
 func PlayReturnSound() -> void:
 	var sound = AudioStreamPlayer.new()
@@ -35,6 +36,7 @@ func PlayReturnSound() -> void:
 	sound.bus = "UI"
 	add_child(sound, true)
 	sound.connect("finished", SoundEnded)
+	sound.volume_db = -10
 	sound.play()	
 
 func PlayTakeoffSound() -> void:
@@ -43,6 +45,7 @@ func PlayTakeoffSound() -> void:
 	sound.bus = "UI"
 	add_child(sound, true)
 	sound.connect("finished", SoundEnded)
+	sound.volume_db = -10
 	sound.play()	
 	
 func SoundEnded() -> void:

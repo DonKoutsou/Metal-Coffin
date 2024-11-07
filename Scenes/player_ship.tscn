@@ -28,12 +28,13 @@ shader = ExtResource("2_2w4bb")
 shader_parameter/line_color = Color(0.252517, 0.622353, 0.846633, 1)
 shader_parameter/range_lines = 1.0
 shader_parameter/sector_lines = 1.0
-shader_parameter/line_width = 0.01
+shader_parameter/line_width = 0.0011
 shader_parameter/beam_angle = 0.2
 shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.054
+shader_parameter/trail_width = 0.5
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
+shader_parameter/scale_factor = 0.053
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
 radius = 34.0
@@ -43,12 +44,13 @@ shader = ExtResource("2_2w4bb")
 shader_parameter/line_color = Color(0.781105, 0.651497, 0, 1)
 shader_parameter/range_lines = 1.0
 shader_parameter/sector_lines = 1.0
-shader_parameter/line_width = 0.01
+shader_parameter/line_width = 0.002
 shader_parameter/beam_angle = 0.2
 shader_parameter/beam_width = 0.003
 shader_parameter/trail_width = 0.5
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = false
+shader_parameter/scale_factor = 0.08
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqnhq"]
 radius = 100.0
@@ -58,12 +60,13 @@ shader = ExtResource("2_2w4bb")
 shader_parameter/line_color = Color(0.0486369, 0.645335, 0.0400367, 1)
 shader_parameter/range_lines = 1.0
 shader_parameter/sector_lines = 1.0
-shader_parameter/line_width = 0.01
+shader_parameter/line_width = 0.002
 shader_parameter/beam_angle = 0.3
 shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.07
+shader_parameter/trail_width = 0.5
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
+shader_parameter/scale_factor = 0.062
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
 radius = 6.0
@@ -102,17 +105,17 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_42dgb")
 
-[node name="Radar_Range" type="ColorRect" parent="Radar"]
+[node name="Radar_Range" type="ColorRect" parent="Radar" groups=["MapLines"]]
 material = SubResource("ShaderMaterial_4syn2")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = 200.0
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -120,16 +123,15 @@ mouse_filter = 2
 
 [node name="Label2" type="Label" parent="Radar/Radar_Range"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -90.02
-offset_top = 2.5
-offset_right = -5.01999
-offset_bottom = 20.5
-grow_horizontal = 0
+offset_left = 42.7451
+offset_right = 127.745
+offset_bottom = 18.0
+grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_vt3yq")
 theme_override_colors/font_color = Color(0.252517, 0.622353, 0.846633, 1)
@@ -147,17 +149,17 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fuel"]
 shape = SubResource("CircleShape2D_rjoek")
 
-[node name="Fuel_Range" type="ColorRect" parent="Fuel"]
+[node name="Fuel_Range" type="ColorRect" parent="Fuel" groups=["MapLines"]]
 material = SubResource("ShaderMaterial_1i26u")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -400.0
-offset_right = 400.0
-offset_bottom = 400.0
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -165,15 +167,15 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="Fuel/Fuel_Range"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.73
-offset_right = -13.73
-offset_bottom = 23.0
-grow_horizontal = 0
+offset_left = 108.0
+offset_right = 193.0
+offset_bottom = 18.0
+grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_vt3yq")
 theme_override_colors/font_color = Color(0.781105, 0.651497, 0, 1)
@@ -192,17 +194,17 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Analyzer"]
 shape = SubResource("CircleShape2D_mqnhq")
 
-[node name="Analyzer_Range" type="ColorRect" parent="Analyzer"]
+[node name="Analyzer_Range" type="ColorRect" parent="Analyzer" groups=["MapLines"]]
 material = SubResource("ShaderMaterial_edf5x")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -210,16 +212,16 @@ mouse_filter = 2
 
 [node name="Label2" type="Label" parent="Analyzer/Analyzer_Range"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -106.845
-offset_top = -3.0
-offset_right = -3.845
-offset_bottom = 20.0
-grow_horizontal = 0
+offset_left = 514.417
+offset_top = -0.53125
+offset_right = 617.417
+offset_bottom = 22.4688
+grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_vt3yq")
 theme_override_colors/font_color = Color(0.0486369, 0.645335, 0.0400367, 1)

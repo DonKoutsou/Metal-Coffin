@@ -1,6 +1,7 @@
 extends PanelContainer
 class_name ThrustSlider
 @onready var accelleration_slider: VSlider = $HBoxContainer/AccellerationSlider
+
 signal AccelerationChangeEnded(value_changed : float)
 signal AccelerationChanged(value : float)
 

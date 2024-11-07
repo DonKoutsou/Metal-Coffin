@@ -20,6 +20,7 @@ func EnableDrone():
 	set_physics_process(true)
 	$Radar.monitoring = true
 	$Line2D.visible = true
+	$AudioStreamPlayer2D.play()
 	
 func _physics_process(_delta: float) -> void:
 	if (CommingBack):
@@ -90,6 +91,7 @@ func _on_radar_area_entered(area: Area2D) -> void:
 		$Node2D2.rotation = 0.0
 		Inventory.GetInstance().AddItems(StoredItem)
 		StoredItem.clear()
+		$AudioStreamPlayer2D.stop()
 		set_physics_process(false)
 		
 func DissableMonitoring():

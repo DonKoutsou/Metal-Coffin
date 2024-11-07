@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dtbujuyxlrxmx"
+path="res://.godot/imported/plane_Wheel_BaseColorMask.png-cf2068ad58ddc785f5ea5f4c6e3496a7.res"
+
+[deps]
+
+source_file="res://Assets/plane_Wheel_BaseColorMask.png"
+dest_files=["res://.godot/imported/plane_Wheel_BaseColorMask.png-cf2068ad58ddc785f5ea5f4c6e3496a7.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

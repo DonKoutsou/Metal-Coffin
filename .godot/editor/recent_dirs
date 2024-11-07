@@ -1,6 +1,7 @@
 E:/Godot_Project/TestAndroidExport
-res://Resources
+res://Assets/Items
 res://Scripts
+res://Resources
 res://Scenes
 res://Resources/MapSpots/StationInfos
 res://Assets
@@ -19,4 +20,3 @@ C:/Users/Admin/AppData/Local/Android/Sdk
 C:/Program Files/Android/Android Studio/plugins
 C:/Users/Admin/Downloads/openjdk-23.0.1_windows-x64_bin/jdk-23.0.1
 C:/Program Files/Android/Android Studio
-C:/Users/Admin/Downloads/openjdk-23.0.1_windows-x64_bin

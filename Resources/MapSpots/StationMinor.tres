@@ -21,6 +21,6 @@ FullName = "Sub-Station"
 Description = "blah blah"
 CanLand = null
 HasAtmoshere = true
-VisibleOnStart = false
+VisibleOnStart = true
 DropAmmount = 4
 CustomData = Array[ExtResource("1_roimo")]([ExtResource("2_swo4m"), ExtResource("3_nvnjd")])

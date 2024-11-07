@@ -46,6 +46,7 @@ action_mode = 0
 icon_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureRect"]
+texture_filter = 6
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -62,6 +63,7 @@ texture = ExtResource("2_52kf5")
 
 [node name="TextureRect2" type="TextureRect" parent="TextureRect"]
 modulate = Color(0.999799, 0.87683, 7.70092e-07, 1)
+texture_filter = 6
 layout_mode = 1
 offset_right = 31.0
 offset_bottom = 31.0

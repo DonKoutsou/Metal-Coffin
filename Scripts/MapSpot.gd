@@ -63,6 +63,7 @@ func OnSpotVisited() -> void:
 		if (diag == null):
 			Ingame_UIManager.GetInstance().PlayDiag(Dialogue)
 		else:
+			Dialogue.append("I managed to find some of the crew logs. This entry seems to be just before the collapse. Take a listen operator.")
 			Dialogue.append_array(diag.Value)
 			Dialogue.append("Entry ended.")
 			DialogueProgressHolder.GetInstance().OnDialogueSpoken(diag.Value[0])

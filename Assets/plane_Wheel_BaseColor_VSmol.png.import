@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgk6qcppifpnk"
-path="res://.godot/imported/cubeforce.png-2af8958ef8068f1991cca5015a7c57a0.ctex"
+uid="uid://u6pb6xsxvfj5"
+path="res://.godot/imported/plane_Wheel_BaseColor_VSmol.png-80a557ca02e0bd47c5556c734d29b434.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/cubeforce.png"
-dest_files=["res://.godot/imported/cubeforce.png-2af8958ef8068f1991cca5015a7c57a0.ctex"]
+source_file="res://Assets/plane_Wheel_BaseColor_VSmol.png"
+dest_files=["res://.godot/imported/plane_Wheel_BaseColor_VSmol.png-80a557ca02e0bd47c5556c734d29b434.ctex"]
 
 [params]
 
@@ -30,5 +30,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=64
+process/size_limit=128
 detect_3d/compress_to=1

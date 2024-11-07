@@ -30,7 +30,7 @@
 [ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="29_0aup1"]
 [ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="30_hyn75"]
 
-[sub_resource type="Resource" id="Resource_0s123"]
+[sub_resource type="Resource" id="Resource_lbe7u"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "VIZ_RANGE"
@@ -45,13 +45,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_hu8db"]
+[sub_resource type="Resource" id="Resource_qbq5h"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 700.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_0s123")
+UpgradeVersion = SubResource("Resource_lbe7u")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -61,13 +61,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_63b8r"]
+[sub_resource type="Resource" id="Resource_t8bg5"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 500.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_hu8db")
+UpgradeVersion = SubResource("Resource_qbq5h")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -77,7 +77,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_plj5d"]
+[sub_resource type="Resource" id="Resource_q7fpg"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL"
@@ -92,13 +92,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_0c0a5"]
+[sub_resource type="Resource" id="Resource_yx33g"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL"
 UpgradeAmm = 250.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_plj5d")
+UpgradeVersion = SubResource("Resource_q7fpg")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -108,13 +108,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_e7mfj"]
+[sub_resource type="Resource" id="Resource_bpemt"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL"
 UpgradeAmm = 150.0
 CurrentVal = 100.0
-UpgradeVersion = SubResource("Resource_0c0a5")
+UpgradeVersion = SubResource("Resource_yx33g")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -124,7 +124,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_3jenj"]
+[sub_resource type="Resource" id="Resource_gfsj3"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "ANALYZE_RANGE"
@@ -139,13 +139,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_48d4e"]
+[sub_resource type="Resource" id="Resource_kua3a"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 450.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_3jenj")
+UpgradeVersion = SubResource("Resource_gfsj3")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -155,13 +155,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_5uope"]
+[sub_resource type="Resource" id="Resource_3dbo6"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "ANALYZE_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_48d4e")
+UpgradeVersion = SubResource("Resource_kua3a")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -171,7 +171,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_kvd5c"]
+[sub_resource type="Resource" id="Resource_jc4gd"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -186,13 +186,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_0esoi"]
+[sub_resource type="Resource" id="Resource_8liom"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_kvd5c")
+UpgradeVersion = SubResource("Resource_jc4gd")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -202,13 +202,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_5pe18"]
+[sub_resource type="Resource" id="Resource_ngjva"]
 resource_local_to_scene = true
 script = ExtResource("5_3lub8")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_0esoi")
+UpgradeVersion = SubResource("Resource_8liom")
 UpgradeItems = Array[ExtResource("2_bxhcq")]([ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r"), ExtResource("11_fxx2r")])
 IsDamaged = false
 RepairItems = Array[ExtResource("2_bxhcq")]([ExtResource("5_4uere"), ExtResource("5_4uere")])
@@ -257,7 +257,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("22_uw0vs")
 script = ExtResource("1_n6t4k")
-StartingItems = Array[ExtResource("2_bxhcq")]([SubResource("Resource_63b8r"), SubResource("Resource_e7mfj"), SubResource("Resource_5uope"), SubResource("Resource_5pe18"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("9_pd8ds"), ExtResource("9_pd8ds"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("5_4uere"), ExtResource("5_4uere")])
+StartingItems = Array[ExtResource("2_bxhcq")]([SubResource("Resource_t8bg5"), SubResource("Resource_bpemt"), SubResource("Resource_3dbo6"), SubResource("Resource_ngjva"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("8_2etv7"), ExtResource("9_pd8ds"), ExtResource("9_pd8ds"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("10_okepu"), ExtResource("5_4uere"), ExtResource("5_4uere")])
 InventoryBoxScene = ExtResource("11_717g5")
 InventoryTradeScene = ExtResource("12_xwryu")
 ItemDescriptorScene = ExtResource("13_rdpkg")

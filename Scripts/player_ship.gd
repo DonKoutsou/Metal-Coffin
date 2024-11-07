@@ -27,41 +27,58 @@ static func GetInstance() -> PlayerShip:
 func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var FuelRangeIndicator = $Fuel/Fuel_Range
 	var FuelRangeIndicatorDescriptor = $Fuel/Fuel_Range/Label
+	var FuelMat = FuelRangeIndicator.material as ShaderMaterial
 	#calculate the range taking fuel efficiency in mind
-	var distall = fuel * 10 * fuel_ef
+	var distall = (fuel * 10 * fuel_ef) * 2
 	#scalling of collor rect
 	var tw = create_tween()
-	tw.tween_property(FuelRangeIndicator, "size", Vector2(distall, distall) * 2, 0.5)
+	#tw.tween_property(FuelRangeIndicator, "size", Vector2(distall, distall) * 2, 0.5)
+	tw.tween_method(SetFuelShaderRange, FuelMat.get_shader_parameter("scale_factor"), (distall/2) / 10000, 0.5)
 	#centering of color rect
 	var tw2 = create_tween()
-	tw2.tween_property(FuelRangeIndicator, "position", Vector2(-(distall), -(distall)), 0.5)
+	tw2.tween_property(FuelRangeIndicatorDescriptor, "position", Vector2(9900 + (distall/2), 10000), 0.5)
 	#dissable descriptor when indicator gets to small
 	FuelRangeIndicatorDescriptor.visible = distall > 100
+func SetFuelShaderRange(val : float):
+	var FuelMat = $Fuel/Fuel_Range.material as ShaderMaterial
+	FuelMat.set_shader_parameter("scale_factor", val)
 func UpdateVizRange(rang : float):
 	var RadarRangeIndicator = $Radar/Radar_Range
 	var RadarRangeCollisionShape = $Radar/CollisionShape2D
 	var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
+	var RadarMat = RadarRangeIndicator.material as ShaderMaterial
+	RadarMat.set_shader_parameter("scale_factor", rang/10000)
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 	#scalling of collor rect
-	RadarRangeIndicator.size = Vector2(rang, rang) * 2
+	#RadarRangeIndicator.size = Vector2(rang, rang) * 2
 	#centering of color rect
-	RadarRangeIndicator.position = Vector2(-(rang), -(rang))
+	#RadarRangeIndicator.position = Vector2(-(rang), -(rang))
+	
 	#dissable descriptor when indicator gets to small
+	RadarRangeIndicatorDescriptor.position.x = 9900 + rang
 	RadarRangeIndicatorDescriptor.visible = rang > 100
+func SetRadarShaderRange(val : float):
+	var RadarMat = $Radar/Radar_Range.material as ShaderMaterial
+	RadarMat.set_shader_parameter("scale_factor", val)
 func UpdateAnalyzerRange(rang : float):
 	var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
 	var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
 	var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
+	var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
+	AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
 	#scalling collision
 	(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
 	#scalling of collor rect
-	AnalyzerRangeIndicator.size = Vector2(rang, rang) * 2
+	#AnalyzerRangeIndicator.size = Vector2(rang, rang) * 2
 	#centering of color rect
-	AnalyzerRangeIndicator.position = Vector2(-(rang), -(rang))
+	#AnalyzerRangeIndicator.position = Vector2(-(rang), -(rang))
 	#dissable descriptor when indicator gets to small
+	AnalyzerRangeIndicatorDescriptor.position.x = 9900 + rang
 	AnalyzerRangeIndicatorDescriptor.visible = rang > 100
-	
+func SetAnalyzerShaderRange(val : float):
+	var AnalyzerMat = $Analyzer/Analyzer_Range.material as ShaderMaterial
+	AnalyzerMat.set_shader_parameter("scale_factor", val)
 func ShowingNotif() -> bool:
 	return $Notifications.get_child_count() > 0
 func OnStatLow(StatName : String) -> void:
@@ -115,7 +132,7 @@ func SteerChanged(value: float) -> void:
 
 func AccelerationChanged(value: float) -> void:
 	var Audioween = create_tween()
-	Audioween.set_trans(Tween.TRANS_EXPO)
+	#Audioween.set_trans(Tween.TRANS_EXPO)
 	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 100), 2)
 	ChangingCourse = true
 	if (!$AudioStreamPlayer2D.playing):

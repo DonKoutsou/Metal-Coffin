@@ -5,8 +5,6 @@ class_name DroneDockEventHandler
 signal OnDroneArmed
 signal OnDroneDissarmed
 signal OnDroneDirectionChanged(NewDir : float)
-signal MouseEntered
-signal MouseLeft
 signal DroneLaunched
 signal DroneAdded(Dr : Drone)
 signal DroneDocked(Dr : Drone)
@@ -19,10 +17,6 @@ func DroneArmed() -> void:
 	OnDroneArmed.emit()
 func DroneDissarmed() -> void:
 	OnDroneDissarmed.emit()
-func MouseEnteredWheel() -> void:
-	MouseEntered.emit()
-func MouseExitedWheel() -> void:
-	MouseLeft.emit()
 func OnDroneLaunched() -> void:
 	DroneLaunched.emit()
 func OnDroneAdded(Dr : Drone) -> void:

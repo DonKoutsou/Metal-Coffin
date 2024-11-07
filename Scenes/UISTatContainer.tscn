@@ -43,10 +43,10 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 corner_detail = 20
 expand_margin_left = 1.0
 expand_margin_top = 1.0
@@ -67,10 +67,10 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
 
 [sub_resource type="Animation" id="Animation_c62a3"]
 length = 0.001
@@ -218,6 +218,7 @@ theme_override_font_sizes/font_size = 13
 text = "Auto-refil resource :"
 
 [node name="AutoRefill" type="CheckButton" parent="HBoxContainer/HBoxContainer"]
+texture_filter = 6
 layout_mode = 2
 size_flags_vertical = 3
 button_pressed = true

@@ -28,7 +28,7 @@ func _on_arm_drone_button_pressed() -> void:
 	Armed = true
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton.disabled = true
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/DissarmDroneButton2.disabled = false
-	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/DeployDroneButton.disabled = false
+	$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton/DeployDroneButton.disabled = false
 	$AnimationPlayer.play("ShowSteer")
 	DroneDockEventH.DroneArmed()
 	
@@ -36,7 +36,7 @@ func _on_dissarm_drone_button_2_pressed() -> void:
 	Armed = false
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton.disabled = false
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/DissarmDroneButton2.disabled = true
-	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/DeployDroneButton.disabled = true
+	$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton/DeployDroneButton.disabled = true
 	$AnimationPlayer.play("HideSteer")
 	DroneDockEventH.DroneDissarmed()
 
@@ -51,33 +51,19 @@ func _on_recon_dron_button_pressed() -> void:
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Label.text = "Armed Drone : Recon"
 
 func _on_toggle_drone_tab_pressed() -> void:
-	$Control/PanelContainer/Control.mouse_filter = MOUSE_FILTER_IGNORE
+	$Control/PanelContainer/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 	$AnimationPlayer.play("Show")
 
-var MouseIn : bool
-
 var SteeringDir : float = 0.0
-
-var previous_mouse_angle = 0.0
-
 #signal SteeringDitChanged(NewValue : float)
 #signal MouseEntered()
 #signal MouseExited()
 
-func _on_texture_rect_mouse_entered() -> void:
-	MouseIn = true
-	DroneDockEventH.MouseEnteredWheel()
-	#MouseEntered.emit()
-func _on_texture_rect_mouse_exited() -> void:
-	MouseIn = false
-	DroneDockEventH.MouseExitedWheel()
-	#MouseExited.emit()
-
 func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
 	var prevsteer = SteeringDir
-
-	if (EvPos.x < $Control/Node2D/Area2D.position.x):
+	
+	if (EvPos.x < $Control/Node2D.position.x):
 		$Control/Node2D/Sprite2D.rotation += rel.x + -rel.y
 		SteeringDir += (rel.x + -rel.y) * 10
 	else :
@@ -88,17 +74,38 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 	if (!$Control/Node2D/AudioStreamPlayer.playing):
 		$Control/Node2D/AudioStreamPlayer.playing = true
 
-func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if (!MouseIn):
-		return
+var RangeDir : float = 0.0
+func UpdateRange(RelativeRot : Vector2, EvPos : Vector2):
+	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
+	var prevrange = RangeDir
+	
+	if (EvPos.x < $Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.position.x + 64):
+		$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.rotation += rel.x -rel.y
+		RangeDir = clamp(RangeDir + ((rel.x -rel.y) * 10), 0 , 100)
+	else :
+		$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.rotation += rel.x + rel.y
+		RangeDir = clamp(RangeDir + ((rel.x + rel.y) * 10), 0, 100)
+	if (RangeDir != prevrange):
+		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
+	if (!$Control/Node2D/AudioStreamPlayer.playing):
+		$Control/Node2D/AudioStreamPlayer.playing = true
+	print(RangeDir)
+	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/PanelContainer/VBoxContainer/Label2.text = var_to_str(roundi(RangeDir / 2))
+
+func _on_area_2d_input_event(event: InputEvent) -> void:
 	if (event is InputEventScreenDrag):
 		UpdateSteer(event.relative, event.position)
-
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		UpdateSteer(event.relative, event.position)
-
+		
+func On_Drone_Range_Input(event: InputEvent) -> void:
+	if (event is InputEventScreenDrag):
+		UpdateRange(event.relative, event.position)
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		UpdateRange(event.relative, event.position)
+		
 func _on_turn_off_button_pressed() -> void:
-	$Control/PanelContainer/Control.mouse_filter = MOUSE_FILTER_STOP
+	$Control/PanelContainer/TouchStopper.mouse_filter = MOUSE_FILTER_STOP
 	if (Armed):
 		_on_dissarm_drone_button_2_pressed()
 		await $AnimationPlayer.animation_finished
