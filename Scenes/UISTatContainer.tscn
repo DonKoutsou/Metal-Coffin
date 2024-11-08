@@ -1,132 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://carxyijo0mekn"]
+[gd_scene load_steps=9 format=3 uid="uid://carxyijo0mekn"]
 
 [ext_resource type="Script" path="res://Scripts/ui_Stat_container.gd" id="2_yw81g"]
-[ext_resource type="Texture2D" uid="uid://dcwvf3of7pu8g" path="res://Assets/hazard-sign.png" id="3_hqq08"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_cy8my"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_ooo48"]
 [ext_resource type="AudioStream" uid="uid://1m0dd6hxjs7v" path="res://Assets/Sounds/Alarm.mp3" id="5_sh16h"]
+[ext_resource type="Texture2D" uid="uid://baxgqhhihton1" path="res://Assets/UIPiecies/Display.png" id="6_b66p8"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xniyh"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 33
-corner_radius_top_right = 33
-corner_radius_bottom_right = 33
-corner_radius_bottom_left = 33
-corner_detail = 20
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-shadow_size = 4
-
-[sub_resource type="Theme" id="Theme_gg2ld"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im2fd"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 20
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_he86a"]
-resource_local_to_scene = true
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.600628, 0.545974, 0.321666, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 11
-corner_radius_top_right = 11
-corner_radius_bottom_right = 11
-corner_radius_bottom_left = 11
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxbbu"]
+draw_center = false
+shadow_size = 2
 
 [sub_resource type="Animation" id="Animation_c62a3"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HBoxContainer/Bar/HBoxContainer/TextureRect3:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HBoxContainer/Bar/HBoxContainer/TextureRect2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_f4d0d"]
 resource_name = "StatLow"
 length = 4.2
 step = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HBoxContainer/Bar/HBoxContainer/TextureRect3:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3, 3.3, 3.6, 3.9, 4.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false, true, false, true, false, true, false, true, false, true, false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HBoxContainer/Bar/HBoxContainer/TextureRect2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3, 3.3, 3.6, 3.9, 4.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false, true, false, true, false, true, false, true, false, true, false, true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gpl14"]
 _data = {
@@ -135,93 +24,12 @@ _data = {
 }
 
 [node name="Oxygen_Container" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 50)
 offset_right = 242.0
 offset_bottom = 50.0
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_xniyh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_sxbbu")
 script = ExtResource("2_yw81g")
-
-[node name="HBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Bar" type="ProgressBar" parent="HBoxContainer"]
-custom_minimum_size = Vector2(225, 25)
-layout_mode = 2
-size_flags_vertical = 4
-theme = SubResource("Theme_gg2ld")
-theme_override_styles/background = SubResource("StyleBoxFlat_im2fd")
-theme_override_styles/fill = SubResource("StyleBoxFlat_he86a")
-step = 1.0
-value = 84.0
-show_percentage = false
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Bar"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = -16.0
-offset_right = 56.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Bar/HBoxContainer"]
-visible = false
-modulate = Color(0.920609, 0.734218, 0, 1)
-layout_mode = 2
-texture = ExtResource("3_hqq08")
-expand_mode = 2
-
-[node name="Label2" type="Label" parent="HBoxContainer/Bar/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("4_ooo48")
-theme_override_font_sizes/font_size = 16
-text = "Oxygen:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="HBoxContainer/Bar/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("4_ooo48")
-theme_override_font_sizes/font_size = 16
-text = "10/10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Bar/HBoxContainer"]
-visible = false
-modulate = Color(0.920609, 0.734218, 0, 1)
-layout_mode = 2
-texture = ExtResource("3_hqq08")
-expand_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_cy8my")
-theme_override_font_sizes/font_size = 13
-text = "Auto-refil resource :"
-
-[node name="AutoRefill" type="CheckButton" parent="HBoxContainer/HBoxContainer"]
-texture_filter = 6
-layout_mode = 2
-size_flags_vertical = 3
-button_pressed = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -233,4 +41,36 @@ stream = ExtResource("5_sh16h")
 pitch_scale = 1.4
 bus = &"MapSounds"
 
-[connection signal="toggled" from="HBoxContainer/HBoxContainer/AutoRefill" to="." method="_on_auto_refill_toggled"]
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(256.545, 76.755)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -124.0
+offset_right = 135.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_b66p8")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Control/TextureRect"]
+layout_mode = 2
+offset_left = 131.0
+offset_top = 107.0
+offset_right = 214.0
+offset_bottom = 142.0
+theme = ExtResource("4_ooo48")
+theme_override_font_sizes/font_size = 20
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1

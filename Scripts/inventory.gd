@@ -42,7 +42,11 @@ func _ready() -> void:
 		AddItems(LoadedItems, false)
 	else :
 		AddItems(StartingItems, false)
-		
+
+func ToggleShipPausing(t : bool):
+	$"../HBoxContainer/InventoryButton".disabled = t
+	get_tree().call_group("Ships", "TogglePause", t)
+	
 func _exit_tree() -> void:
 	FlushInventory()
 	
@@ -95,71 +99,89 @@ func GetItemForStat(StatN : String) -> ItemContainer:
 func AddItems(It : Array[Item], Notif = true) -> void:
 	var Unplaced : Array[Item] = []
 	var Placed : Array[Item] = []
-	for z in It.size():
-		var placed = false
-		for g in InventoryContents.size():
-			var box = InventoryContents[g]
-			if (box.ItemC.ItemType == It[z]):
-				if (box.ItemC.Ammount >= box.ItemC.ItemType.MaxStackCount):
-					continue
-				box.UpdateAmm(1)
-				placed = true
-				break
+	for Itm in It:
+		var placed = FindMatchingBoxForItAndPlace(Itm)
 		if (placed):
-			Placed.append(It[z])
+			Placed.append(Itm)
 			continue
-		for g in InventoryContents.size():
-			var box = InventoryContents[g]
-			if (box.IsEmpty()):
-				box.RegisterItem(It[z])
-				box.UpdateAmm(1)
-				placed = true
-				break
+		placed = FindEmptyBoxForItAndPlace(Itm)
 		if (!placed):
-			Unplaced.append(It[z])
-		else:
-			INV_OnItemAdded.emit(It[z])
-
+			Unplaced.append(Itm)
+	#HANDLE ITEMS THAT COULDN'T BE PLACED IN INVENTORY BY INITIALIZING A TRADE TO PLAYER CAN CHOOSE WHAT TO KEEP
 	if (Unplaced.size() > 0):
 		if (visible):
 			visible = false
 			INV_OnInvencotyClosed.emit()
 			FindAndDissableDescriptors()
-		if (get_tree().get_nodes_in_group("InventoryTrade").size() > 0):
-			var trade = get_tree().get_nodes_in_group("InventoryTrade")[0] as InventoryTrade
-			trade.UpdateDrops(Unplaced)
-		else : 
-			var TradeScene = InventoryTradeScene.instantiate() as InventoryTrade
-			Ingame_UIManager.GetInstance().AddUI(TradeScene, false)
-			var InvItems : Array[Item] = []
-			for g in InventoryContents.size():
-				var it = InventoryContents[g].ItemC.ItemType
-				for z in InventoryContents[g].ItemC.Ammount:
-					InvItems.append(it)
-			TradeScene.StartTrade(InvItems, Unplaced)
-			TradeScene.connect("TradeFinished", _TradeFinished)
-	if (Placed.size() > 0 and get_tree().get_nodes_in_group("InventoryTrade").size() > 0):
-		var trade = get_tree().get_nodes_in_group("InventoryTrade")[0] as InventoryTrade
-		trade.UpdateInventoryContents(Placed)
+		#COMMENTED OUT OF UPDATING TRADE SCENE WITH NEW ITEMS SINCE SIMULATION IS PAUSED WHEN TRADING 
+		#SO NO NEW ITEMS SHOULD BE AQCIRED WHILE TRADING
+		#if (get_tree().get_nodes_in_group("InventoryTrade").size() > 0):
+			#var trade = get_tree().get_nodes_in_group("InventoryTrade")[0] as InventoryTrade
+			#trade.UpdateDrops(Unplaced)
+		#else :
+		InitiateTrade(Unplaced)
+	#if (Placed.size() > 0 and get_tree().get_nodes_in_group("InventoryTrade").size() > 0):
+		#var trade = get_tree().get_nodes_in_group("InventoryTrade")[0] as InventoryTrade
+		#trade.UpdateInventoryContents(Placed)
 		
 	inventory_ship_stats.UpdateValues()
 	if (Notif):
-		if (It.size() == 0):
+		DoItemNotif(Placed)
+#////////////////////////////////////////////////////
+func FindMatchingBoxForItAndPlace(it : Item) -> bool:
+	for content in InventoryContents:
+		var box = content
+		if (box.ItemC.Ammount == 0):
+			continue
+		#check if box has same items as us
+		if (box.ItemC.ItemType.ItemName == it.ItemName):
+			#check if box can fit more
+			if (box.ItemC.Ammount >= box.ItemC.ItemType.MaxStackCount):
+				continue
+			box.UpdateAmm(1)
+			INV_OnItemAdded.emit(it)
+			return true
+	return false
+func FindEmptyBoxForItAndPlace(it : Item) -> bool:
+	for content in InventoryContents:
+		var box = content
+		if (box.IsEmpty()):
+			box.RegisterItem(it)
+			box.UpdateAmm(1)
+			INV_OnItemAdded.emit(it)
+			return true
+	return false
+#////////////////////////////////////////////////////
+func InitiateTrade(UnplacedItms : Array[Item]):
+	var TradeScene = InventoryTradeScene.instantiate() as InventoryTrade
+	Ingame_UIManager.GetInstance().AddUI(TradeScene, false)
+	var InvItems : Array[Item] = []
+	for g in InventoryContents.size():
+		var it = InventoryContents[g].ItemC.ItemType
+		for z in InventoryContents[g].ItemC.Ammount:
+			InvItems.append(it)
+	ToggleShipPausing(true)
+	TradeScene.StartTrade(InvItems, UnplacedItms)
+	TradeScene.connect("TradeFinished", _TradeFinished)
+
+func DoItemNotif(its : Array[Item]):
+	if (its.size() == 0):
 			return
-		var notif
-		if (get_tree().get_nodes_in_group("ItemNotification").size() == 0):
-			notif = ItemNotifScene.instantiate() as ItemNotif
-			Ingame_UIManager.GetInstance().AddUI(notif)
-		else :
-			notif = get_tree().get_nodes_in_group("ItemNotification")[0]
-		notif.AddItems(It)
-		
+	var notif
+	if (get_tree().get_nodes_in_group("ItemNotification").size() == 0):
+		notif = ItemNotifScene.instantiate() as ItemNotif
+		Ingame_UIManager.GetInstance().AddUI(notif, false, true)
+	else :
+		notif = get_tree().get_nodes_in_group("ItemNotification")[0]
+	notif.AddItems(its)
+
 func FlushInventory() -> void:
 	for g in InventoryContents.size():
 		for z in InventoryContents[g].ItemC.Ammount:
 			INV_OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
 			InventoryContents[g].UpdateAmm(-1)
 func _TradeFinished(itms : Array[Item]) -> void:
+	ToggleShipPausing(false)
 	FlushInventory()
 	AddItems(itms, false)
 	

@@ -20,9 +20,10 @@ signal WRLD_StatGotLow(StatN : String)
 
 var Loading = false
 
+func ToggleShipPausing(t : bool):
+	get_tree().call_group("Ships", "TogglePause", t)
+
 func _ready() -> void:
-	
-	
 	UISoundMan.GetInstance().Refresh()
 	if (!Loading):
 		PlayIntro()
@@ -32,7 +33,7 @@ func PlayIntro():
 	GetMap().PlayIntroFadeInt()
 	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've drifted away, i am not sure where we are.", "Let me run a background check on the ship's systems...", "... ... ... ...", "Cockpit controlls are offline..", "Monitoring controlls are offline...", "Restarting mainframe..."]
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ShowStation, true)
-	$Ingame_UIManager/VBoxContainer/HBoxContainer/InventoryButton.visible = false
+	$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
 	GetMap().ToggleUIForIntro(false)
 func ShowStation():
@@ -45,7 +46,7 @@ func ReturnCamToPlayer():
 	EnableBackUI()
 	GetMap().FrameCamToPlayer()
 func EnableBackUI():
-	$Ingame_UIManager/VBoxContainer/HBoxContainer/InventoryButton.visible = true
+	$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = true
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
 	GetMap().ToggleUIForIntro(true)
 func _enter_tree() -> void:
@@ -92,12 +93,14 @@ func OnStatsUpdated(StatName : String):
 	WRLD_StatsUpdated.emit(StatName)
 	
 func StartShipTrade(NewShip : BaseShip) -> void:
+	ToggleShipPausing(true)
 	var tradesc = ShipTradeScene.instantiate() as ShipTrade
 	$Ingame_UIManager.add_child(tradesc)
 	tradesc.StartTrade(CurrentShip, NewShip)
 	tradesc.connect("OnTradeFinished", ChangeShip)
 	
 func ChangeShip(NewShip : BaseShip) -> void:
+	ToggleShipPausing(false)
 	if (NewShip == CurrentShip):
 		return
 	GetInventory().UpdateShipInfo(NewShip)
@@ -171,7 +174,7 @@ func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused
 	$Ingame_UIManager/PauseContainer.visible = !paused
-	
+
 func StartFight(PossibleReward : Array[Item]) -> void:
 	var BScene = BattleScene.instantiate() as Battle
 	BScene.SupplyReward = PossibleReward
@@ -186,11 +189,11 @@ func FightEnded(Resault : bool, RemainingHP : int, SupplyRew : Array[Item]) -> v
 		ShipDat.SetStatValue("HP", RemainingHP)
 	else :
 		GameLost("You have died")
-		
+#Exploration---------------------------------------------
 func StartExploration(Spot : MapSpot) -> void:
 	var Escene = ExplorationScene.instantiate() as Exploration
 	if (Spot.SpotType.HasAtmoshere):
-		ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
+		ShipDat.SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
 		PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
 	#Escene.PlayerHp = ShipDat.GetStat("HP").CurrentVelue
 	#Escene.PlayerOxy = ShipDat.GetStat("OXYGEN").CurrentVelue
@@ -198,39 +201,50 @@ func StartExploration(Spot : MapSpot) -> void:
 	Escene.StartExploration(Spot.SpotType, CurrentShip)
 	Escene.connect("OnExplorationEnded", ExplorationEnded)
 	GetInventory().ForceCloseInv()
+	
 func ExplorationEnded(SupplyRew : Array[Item]) -> void:
 	GetInventory().AddItems(SupplyRew)
-	
+#--------------------------------------------------------
 func StartStage(Size : int) -> void:
-	
+	#spawn scene
 	var sc = TraveMinigameScene.instantiate() as TravelMinigameGame
+	#set leangth of stage
 	sc.EnemyGoal = Size
+	#set player ship
 	sc.CharacterScene = CurrentShip.ShipScene
-	#sc.Hull = ShipDat.GetStat("HULL").GetCurrentValue()
-	#sc.HullMax = ShipDat.GetStat("HULL").GetStat()
+	#set stage end signal
 	sc.connect("OnGameEnded", StageDone)
+	#add to hierarchy
 	$Ingame_UIManager.AddUI(sc)
+	#make sure that inventory is closed
 	GetInventory().ForceCloseInv()
+	#make sure player wont be able to open inventory durring gameplay
 	$Ingame_UIManager.ToggleInventoryButton(false)
+	#make sure ships dont keep working on map to avoid any UI poping
+	ToggleShipPausing(true)
+	#turn off map
 	var map = GetMap()
 	map.ToggleVis(false)
-	#$Ingame_UIManager.visible = false
 	map.set_process(false)
 	map.set_process_input(false)
-
+# called by signalonce stage is done, returns if player died, and supplies they found
 func StageDone(victory : bool, supplies : Array[Item]) -> void:
-	if (victory):
-		GetInventory().AddItems(supplies)
-	else :
+	#if player died, let them know why and kill game
+	if (!victory):
 		GetMap().StageFailed()
 		GameLost("Your ship got destroyed")
 		return
+	#if player didnt die add the supplies he found in the inventory
+	GetInventory().AddItems(supplies)
+	#enable map again
 	var map = GetMap()
 	map.set_process(true)
 	map.set_process_input(true)
 	map.ToggleVis(true)
+	#enable ship movement
+	ToggleShipPausing(false)
+	#enable inventory button
 	$Ingame_UIManager.ToggleInventoryButton(true)
-	#$Ingame_UIManager.visible = true
 #/////////////////////////////////////////////////////////////////////////////////////
 
 func ShipSearched(Ship : BaseShip):
@@ -252,8 +266,6 @@ func StageSearch(Spt : MapSpot)-> void:
 		if (ShipDat.GetStat("HP").GetCurrentValue() <= 10):
 			PopUpManager.GetInstance().DoPopUp("Not enough HP to complete action")
 			return
-			
-		
 		GetInventory().AddItems(Spt.SpotType.GetSpotDrop())
 		ShipDat.ConsumeResource("HP", 10)
 		
@@ -261,9 +273,6 @@ func GameLost(reason : String):
 	get_tree().paused = true
 	$Ingame_UIManager/PanelContainer.visible = true
 	$Ingame_UIManager/PanelContainer/VBoxContainer/Label.text = reason
-
-func _on_button_pressed() -> void:
-	WRLD_OnGameEnded.emit()
 
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save(self)
@@ -277,3 +286,6 @@ func _on_pause_pressed() -> void:
 
 func _on_return_pressed() -> void:
 	Pause()
+
+func On_Game_Lost_Button_Pressed() -> void:
+	WRLD_OnGameEnded.emit()

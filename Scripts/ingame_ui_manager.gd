@@ -35,5 +35,4 @@ func CallbackDiag (Diags : Array[String], Callback : Callable, StopInput : bool 
 	diag.Callback = Callback
 
 func ToggleInventoryButton(t : bool):
-	
-	$VBoxContainer/HBoxContainer/InventoryButton.disabled = !t
+	$VBoxContainer/HBoxContainer/Panel/InventoryButton.disabled = !t

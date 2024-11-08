@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b1q7brpw8cc2p"]
+[gd_scene load_steps=25 format=3 uid="uid://b1q7brpw8cc2p"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_762dg"]
 [ext_resource type="Script" path="res://Scripts/DroneTab.gd" id="1_v0de6"]
@@ -172,8 +172,6 @@ border_width_bottom = 1
 border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
 corner_detail = 1
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_46hqo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -470,10 +468,8 @@ offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(64, 64)
-disabled = true
 action_mode = 0
 texture_normal = ExtResource("6_cl6at")
-texture_disabled = SubResource("AtlasTexture_46hqo")
 texture_click_mask = ExtResource("5_vvi5k")
 ignore_texture_size = true
 stretch_mode = 0

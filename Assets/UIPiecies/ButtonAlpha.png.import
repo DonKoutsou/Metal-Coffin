@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://bws1mu52unesf"
+path="res://.godot/imported/ButtonAlpha.png-87508f687e56d51f0f0b52f6cc13f2e9.res"
+
+[deps]
+
+source_file="res://Assets/UIPiecies/ButtonAlpha.png"
+dest_files=["res://.godot/imported/ButtonAlpha.png-87508f687e56d51f0f0b52f6cc13f2e9.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

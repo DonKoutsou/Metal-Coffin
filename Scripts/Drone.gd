@@ -11,10 +11,18 @@ var Fuel = 0
 
 var StoredItem : Array[Item] = []
 
+var Paused = false
+
 func  _ready() -> void:
 	set_physics_process(false)
 	$Radar.monitoring = false
 	$Line2D.visible = false
+
+func TogglePause(t : bool):
+	Paused = t
+	if ($AudioStreamPlayer2D.playing):
+		$AudioStreamPlayer2D.stop()
+	
 func EnableDrone():
 	Docked = false
 	set_physics_process(true)
@@ -23,6 +31,8 @@ func EnableDrone():
 	$AudioStreamPlayer2D.play()
 	
 func _physics_process(_delta: float) -> void:
+	if (Paused):
+		return
 	if (CommingBack):
 		var interceptionpoint = calculateinterceptionpoint()
 		updatedronecourse(interceptionpoint)

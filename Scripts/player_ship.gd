@@ -8,6 +8,7 @@ class_name PlayerShip
 
 var Travelling = false
 var ChangingCourse = false
+var Paused = false
 
 signal ScreenEnter()
 signal ScreenExit()
@@ -24,9 +25,15 @@ func GetDroneDock() -> DroneDock:
 	return $DroneDock
 static func GetInstance() -> PlayerShip:
 	return Instance
+	
+func TogglePause(t : bool):
+	Paused = t
+	if ($AudioStreamPlayer2D.playing):
+		$AudioStreamPlayer2D.stop()
+	
 func UpdateFuelRange(fuel : float, fuel_ef : float):
-	var FuelRangeIndicator = $Fuel/Fuel_Range
-	var FuelRangeIndicatorDescriptor = $Fuel/Fuel_Range/Label
+	var FuelRangeIndicator = $Fuel_Range
+	var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
 	var FuelMat = FuelRangeIndicator.material as ShaderMaterial
 	#calculate the range taking fuel efficiency in mind
 	var distall = (fuel * 10 * fuel_ef) * 2
@@ -37,10 +44,10 @@ func UpdateFuelRange(fuel : float, fuel_ef : float):
 	#centering of color rect
 	var tw2 = create_tween()
 	tw2.tween_property(FuelRangeIndicatorDescriptor, "position", Vector2(9900 + (distall/2), 10000), 0.5)
-	#dissable descriptor when indicator gets to small
+	#DISSABLE DESCRIPTOR WHEN INDICATOR GETS TO SMALL
 	FuelRangeIndicatorDescriptor.visible = distall > 100
 func SetFuelShaderRange(val : float):
-	var FuelMat = $Fuel/Fuel_Range.material as ShaderMaterial
+	var FuelMat = $Fuel_Range.material as ShaderMaterial
 	FuelMat.set_shader_parameter("scale_factor", val)
 func UpdateVizRange(rang : float):
 	var RadarRangeIndicator = $Radar/Radar_Range
@@ -66,21 +73,20 @@ func UpdateAnalyzerRange(rang : float):
 	var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
 	var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
 	var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
+	#CHANGING SIZE OF RADAR
 	AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
-	#scalling collision
+	#SCALLING COLLISION
 	(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
-	#scalling of collor rect
-	#AnalyzerRangeIndicator.size = Vector2(rang, rang) * 2
-	#centering of color rect
-	#AnalyzerRangeIndicator.position = Vector2(-(rang), -(rang))
-	#dissable descriptor when indicator gets to small
+	
 	AnalyzerRangeIndicatorDescriptor.position.x = 9900 + rang
+	#DISSABLE DESCRIPTOR WHEN INDICATOR GETS TO SMALL
 	AnalyzerRangeIndicatorDescriptor.visible = rang > 100
 func SetAnalyzerShaderRange(val : float):
 	var AnalyzerMat = $Analyzer/Analyzer_Range.material as ShaderMaterial
 	AnalyzerMat.set_shader_parameter("scale_factor", val)
 func ShowingNotif() -> bool:
 	return $Notifications.get_child_count() > 0
+
 func OnStatLow(StatName : String) -> void:
 	if (!LowStatsToNotifyAbout.has(StatName)):
 		return
@@ -91,6 +97,8 @@ func OnStatLow(StatName : String) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if (Paused):
+		return
 	if ($Node2D.position.x == 0):
 		return
 	var fuel = $Node2D.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
@@ -171,11 +179,11 @@ func Steer(Rotation : float) -> void:
 	tw.tween_property(self, "rotation", Rotation, 1)
 
 func ToggleUI(t : bool):
-	$Fuel.monitorable = t
+	$ShipRange.monitorable = t
 	$Analyzer.monitorable = t
 	$Radar.monitorable = t
 	$Radar/Radar_Range.visible = t
-	$Fuel/Fuel_Range.visible = t
+	$Fuel_Range.visible = t
 	$Analyzer/Analyzer_Range.visible = t
 
 func UpdateShipIcon(Tex : Texture) -> void:

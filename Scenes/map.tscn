@@ -32,6 +32,7 @@
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
 [ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="29_v8gwn"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
+[ext_resource type="Texture2D" uid="uid://bbjtbbojr48wo" path="res://Assets/UIPiecies/BORDER_Main Camera 2.png" id="33_002en"]
 [ext_resource type="Shader" path="res://Shaders/gauge.gdshader" id="33_ssjx5"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
@@ -53,22 +54,6 @@ shader_parameter/quantization_levels = 256
 shader_parameter/saturation = 1.0
 shader_parameter/layers = 5.189
 shader_parameter/iterations = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06tb0"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_detail = 1
-shadow_size = 5
-shadow_offset = Vector2(0, -2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f561"]
 content_margin_left = 8.0
@@ -234,6 +219,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1162.0
+offset_top = 287.0
+offset_right = -1162.0
+offset_bottom = 287.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -303,41 +292,56 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Panel2" type="Panel" parent="CanvasLayer/UIMaster"]
+[node name="Panel2" type="TextureRect" parent="CanvasLayer/UIMaster"]
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -38.045
+offset_left = -289.0
+offset_top = -36.0
+offset_right = 279.0
+offset_bottom = 2.04498
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_06tb0")
+texture = ExtResource("33_002en")
+expand_mode = 1
 
-[node name="Panel3" type="Panel" parent="CanvasLayer/UIMaster"]
-custom_minimum_size = Vector2(38, 38.045)
+[node name="Panel3" type="TextureRect" parent="CanvasLayer/UIMaster"]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 38.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -860.0
+offset_right = 1756.0
+offset_bottom = -821.955
 grow_vertical = 2
+rotation = 1.5708
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_06tb0")
+texture = ExtResource("33_002en")
+expand_mode = 1
 
-[node name="Panel4" type="Panel" parent="CanvasLayer/UIMaster"]
+[node name="Panel4" type="TextureRect" parent="CanvasLayer/UIMaster"]
 custom_minimum_size = Vector2(38, 38.045)
 layout_mode = 1
-anchors_preset = 11
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -38.0
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = 846.0
+offset_right = 1684.0
+offset_bottom = 884.045
 grow_horizontal = 0
 grow_vertical = 2
+rotation = -1.5708
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_06tb0")
+texture = ExtResource("33_002en")
+expand_mode = 1
 
 [node name="Panel" type="Panel" parent="CanvasLayer/UIMaster"]
 visible = false
@@ -412,7 +416,7 @@ libraries = {
 "": SubResource("AnimationLibrary_il0tn")
 }
 
-[connection signal="gui_input" from="CanvasLayer/UIMaster" to="." method="_on_sub_viewport_container_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/UIMaster" to="." method="_MAP_INPUT"]
 [connection signal="ScreenEnter" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="PlayerEnteredScreen"]
 [connection signal="ScreenExit" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="PlayerExitedScreen"]
 [connection signal="ShipAccelerating" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="ShipStartedMoving"]
@@ -421,5 +425,3 @@ libraries = {
 [connection signal="SteeringDitChanged" from="CanvasLayer/UIMaster/SteeringWheel" to="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" method="SteerChanged"]
 [connection signal="AccelerationChangeEnded" from="CanvasLayer/UIMaster/ThrustSlider" to="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" method="AccelerationEnded"]
 [connection signal="AccelerationChanged" from="CanvasLayer/UIMaster/ThrustSlider" to="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" method="AccelerationChanged"]
-[connection signal="mouse_entered" from="CanvasLayer/UIMaster/ThrustSlider" to="." method="_on_accelleration_slider_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UIMaster/ThrustSlider" to="." method="_on_accelleration_slider_mouse_exited"]

@@ -120,7 +120,6 @@ func AreaEntered(area: Area2D):
 				var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
 				add_child(notif)
 				animation_player.play("SpotAnalyzed")
-				
 				PlaySound()
 			OnSpotAnalyzed()
 		else: if (area.get_collision_layer_value(3)):

@@ -1,12 +1,12 @@
+TextureRect
+Control
+TextureButton
 Panel
 PanelContainer
-TextureButton
 VBoxContainer
 CenterContainer
 AspectRatioContainer
-Control
 AudioStreamPlayer
-TextureRect
 HBoxContainer
 Label
 CheckButton

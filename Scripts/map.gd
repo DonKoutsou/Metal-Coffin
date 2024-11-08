@@ -16,11 +16,6 @@ class_name Map
 @onready var thrust_slider: ThrustSlider = $CanvasLayer/UIMaster/ThrustSlider
 @onready var camera_2d: Camera2D = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D
 
-
-
-
-#var Travelling = false
-
 signal MAP_AsteroidBeltArrival(Size : int)
 signal MAP_StageSearched(Spt : MapSpotType)
 signal MAP_ShipSearched(Ship : BaseShip)
@@ -28,10 +23,6 @@ signal MAP_ShipSearched(Ship : BaseShip)
 var SpotList : Array[MapSpot]
 var currentstage = 0
 var GalaxyMat :ShaderMaterial
-
-func ToggleVis(t : bool ):
-	visible = t
-	$CanvasLayer.visible = t
 
 func _ready() -> void:
 	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
@@ -42,18 +33,21 @@ func _ready() -> void:
 	GetPlayerShip().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	GalaxyMat = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control/ColorRect.material
-	
-	camera_2d.make_current()
+
+
 
 func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
+func GetPlayerShip() -> PlayerShip:
+	return $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip
 
 func SetPlayerPos(pos : Vector2) -> void:
 	GetPlayerShip().position = pos
-
-func GetPlayerShip() -> PlayerShip:
-	return $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip
 	
+func ToggleVis(t : bool ):
+	visible = t
+	$CanvasLayer.visible = t
+
 func PlayIntroFadeInt():
 	$AnimationPlayer.play("FadeIn")
 	camera_2d.global_position = GetPlayerShip().global_position
@@ -68,7 +62,6 @@ func ShowStation():
 	var stationpos = get_tree().get_nodes_in_group("STATION")[0].global_position
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(camera_2d, "global_position", stationpos, 6)
-	
 	var mattw = create_tween()
 	mattw.set_trans(Tween.TRANS_EXPO)
 	mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
@@ -98,54 +91,36 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		
 #func _input(event: InputEvent) -> void:
 	#pass
-		
-func _process(_delta: float) -> void:
-	#if (Input.is_action_pressed("MapLeft")):
-	#	if ($MapSpots.position.x < 250):
-	#		var spots = get_node("MapSpots") as Control
-	#		spots.position.x += 15
-	#		var val = GalaxyMat.get_shader_parameter("thing")
-	#		GalaxyMat.set_shader_parameter("thing", val - 0.02)
-	#if (Input.is_action_pressed("MapRight")):
-	#	if (SpotList[SpotList.size() - 1].global_position.x + 150 > $MapSpots.size.x):
-	#		var spots = get_node("MapSpots") as Control
-	#		spots.position.x -= 15
-	#		var val = GalaxyMat.get_shader_parameter("thing")
-	#		GalaxyMat.set_shader_parameter("thing", val + 0.02)
-	#if (Input.is_action_pressed("MapDown")):
-	#	if (-$MapSpots.position.y  < $MapSpots.size.y):
-	#		var spots = get_node("MapSpots") as Control
-	#		spots.position.y -= 15
-	#		var val = GalaxyMat.get_shader_parameter("thing2")
-	#		GalaxyMat.set_shader_parameter("thing2", val + 0.02)
-	#if (Input.is_action_pressed("MapUp")):
-	#	if ($MapSpots.position.y  < $MapSpots.size.y):
-	#		var spots = get_node("MapSpots") as Control
-	#		spots.position.y += 15
-	#		var val = GalaxyMat.get_shader_parameter("thing2")
-	#		GalaxyMat.set_shader_parameter("thing2", val - 0.02)
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.look_at(GetPlayerShip().global_position)
 
 func GenerateMap() -> void:
+	#DECIDE ON PLECEMENT OF SPECIAL SPOTS
 	var SpecialSpots : Array[int] = []
 	for z in SpecialMapSpotTypes.size():
 		SpecialSpots.append(randi_range(5, MapSize - 1))
+	#DECIDE ON PLECEMENT OF STATIONS
 	var StationSpots : Array[int] = []
 	for z in MapSize / 10:
 		StationSpots.append(10 * z)
+		
+	#LOCATION OF PREVIUSLY PLACED MAP SPOT
 	var Prevpos : Vector2 = Vector2(250,250)
 	
 	#var line = Line2D.new()
 	#$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(line)
 	#$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.move_child(line, 0)
+	
+	#SPAWN ON SPOT AND 1 ASTEROID FIELD FOR EACH VALUE OF MAPSIZE
 	for g in MapSize :
+		#SPAWN GENERIC MAP SPOT SCENE
 		var sc = SpotScene.instantiate() as MapSpot
 		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
+		#CONNECT ALL RELEVANT SIGNALS TO IT
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
 		
 		#var AddingStation = false
+		#DECIDE ON TYPE
 		var type
 		
 		if (g == MapSize - 1):
@@ -158,18 +133,23 @@ func GenerateMap() -> void:
 			#AddingStation = true
 		else:
 			type = MapSpotTypes.pick_random() as MapSpotType
-		
+		#SET THE TYPE
 		sc.SetSpotData(type)
 		
+		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
-		
+		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
 		var pos = GetNextRandomPos(Prevpos, Distanceval)
+		#MAKE SURE WE DONT PLACE IT TO CLOSE TO ANOTHER TIME
+		#HASCLOSE COULD BE DONE BETTER TO NOT ITTERATE OVER ALL MAP SPOTS PLACED
 		while (HasClose(pos)):
 			pos = GetNextRandomPos(Prevpos, Distanceval)
+		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
 		sc.position = pos
 		SpotList.append(sc)
 		#if (AddingStation):
 			#line.add_point(pos)
+		#REPEAT PROCESS FOR ASTEROID FIELD
 		var asteroidscene = SpotScene.instantiate() as MapSpot
 		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(asteroidscene)
 		asteroidscene.connect("SpotAproached", Arrival)
@@ -182,12 +162,12 @@ func GenerateMap() -> void:
 			ateroidpos = GetNextRandomPos(Prevpos, Distanceval)
 		asteroidscene.position = ateroidpos
 		SpotList.append(asteroidscene)
-		
+		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 		
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
 	return Vector2(randf_range(PrevPos.x, PrevPos.x + (800 * Distance)), randf_range(-800, +800))
-	
+#TODO IMPROVE
 func HasClose(pos : Vector2) -> bool:
 	var b= false
 	for z in SpotList.size():
@@ -196,7 +176,7 @@ func HasClose(pos : Vector2) -> bool:
 			break
 	return b	
 	
-#called by World after stage is finished and we have reached the new planet
+#CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
 func Arrival(Spot : MapSpot)	-> void:
 	if Spot.SpotType.FullName == "Black Whole":
 		var randspot = SpotList.pick_random() as MapSpot
@@ -233,12 +213,12 @@ func StageFailed() -> void:
 	# enable inputs
 	#set_process(false)
 	
-# Called when clicked on a planet
+# CALLED WHEN CLICKED ON A PLANET
 func AnalyzeLocation(Spot : MapSpot):
 	var analyzer = AnalyzerScene.instantiate() as PlanetAnalyzer
 	analyzer.SetVisuals(Spot)
 	Ingame_UIManager.GetInstance().add_child(analyzer)
-	
+
 func SearchLocation(stage : MapSpot):
 	if (GetPlayerShip().Travelling):
 		PopUpManager.GetInstance().DoPopUp("Stop the ship to land.")
@@ -281,39 +261,55 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		
 		if (dat.Analyzed):
 			sc.OnSpotAnalyzed()
-#//////////////////////////////////////////////////////////
-func PlayerEnteredScreen() -> void:
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = false
 
-func PlayerExitedScreen() -> void:
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = true
-
+#SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
-
 func applyshake():
 	shakestr = 1
-	
 func _physics_process(delta: float) -> void:
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
 		var of = RandomOffset()
 		camera_2d.offset = of
-
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
-	
+#////////////////////////////////////////////	
+#SIGNALS COMMING FROM PLAYER SHIP
 func ShipStartedMoving():
 	applyshake()
 	
 func ShipStoppedMoving():
-	pass
+	applyshake()
+	
 func ShipForcedStop():
 	thrust_slider.ZeroAcceleration()
-
+#INPUT HANDLING////////////////////////////
+func _MAP_INPUT(event: InputEvent) -> void:
+	if (event.is_action_pressed("ZoomIn")):
+		_HANDLE_ZOOM(1.1)
+	if (event.is_action_pressed("ZoomOut")):
+		_HANDLE_ZOOM(0.9)
+	if (GetPlayerShip().ChangingCourse):
+		return
+	if (event is InputEventScreenTouch):
+		_HANDLE_TOUCH(event)
+	if (event is InputEventScreenDrag):
+		_HANDLE_DRAG(event)
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		UpdateCameraPos(event.relative)
+#////////////////////////////
+func _HANDLE_ZOOM(zoomval : float):
+	var prevzoom = camera_2d.zoom
+	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.25,0.25), Vector2(2,2))
+	for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
+		g.visible = camera_2d.zoom < Vector2(1, 1)
+	for g in get_tree().get_nodes_in_group("MapLines"):
+		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
+#////////////////////////////
 var touch_points: Dictionary = {}
 var start_zoom: Vector2
 var start_dist: float
-func _handle_touch(event: InputEventScreenTouch):
+func _HANDLE_TOUCH(event: InputEventScreenTouch):
 	if event.pressed:
 		touch_points[event.index] = event.position
 	else:
@@ -324,38 +320,24 @@ func _handle_touch(event: InputEventScreenTouch):
 		start_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		start_zoom = camera_2d.zoom
 		#start_dist = 0
-func _handle_drag(event: InputEventScreenDrag):
+#////////////////////////////
+func _HANDLE_DRAG(event: InputEventScreenDrag):
 	touch_points[event.index] = event.position
-
 	if touch_points.size() == 2 :
 		var touch_point_positions = touch_points.values()
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
 		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.25,0.25), Vector2(2,2))
 	else:
-		UpdateCameraPos(event.relative)
-func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
-	if (event.is_action_pressed("ZoomIn")):
-		var prevzoom = camera_2d.zoom
-		camera_2d.zoom = clamp(prevzoom * Vector2(1.1, 1.1), Vector2(0.25,0.25), Vector2(2,2))
-		for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
-			g.visible = camera_2d.zoom < Vector2(1, 1)
-		for g in get_tree().get_nodes_in_group("MapLines"):
-			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
-		#camera_2d.position *= Vector2(1.1, 1.1)
-	if (event.is_action_pressed("ZoomOut")):
-		var prevzoom = camera_2d.zoom
-		camera_2d.zoom = clamp(prevzoom / Vector2(1.1, 1.1), Vector2(0.25,0.25), Vector2(2,2))
-		for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
-			g.visible = camera_2d.zoom < Vector2(1, 1)
-		for g in get_tree().get_nodes_in_group("MapLines"):
-			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
-	if (GetPlayerShip().ChangingCourse):
-		return
-	if (event is InputEventScreenTouch):
-		_handle_touch(event)
-	if (event is InputEventScreenDrag):
-		_handle_drag(event)
-		
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		UpdateCameraPos(event.relative)
+		UpdateCameraPos(event.relative)	
+#//////////////////////////////////////////////////////////
+#ARROW FOR LOCATING PLAYER SHIP
+func _process(_delta: float) -> void:
+	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.look_at(GetPlayerShip().global_position)
+func PlayerEnteredScreen() -> void:
+	set_process(false)
+	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = false
+func PlayerExitedScreen() -> void:
+	set_process(true)
+	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = true
+#//////////////////////////////////////////////////////////

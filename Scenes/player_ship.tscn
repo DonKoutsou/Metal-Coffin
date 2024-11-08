@@ -36,9 +36,6 @@ shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
 shader_parameter/scale_factor = 0.053
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
-radius = 34.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
 shader = ExtResource("2_2w4bb")
 shader_parameter/line_color = Color(0.781105, 0.651497, 0, 1)
@@ -51,6 +48,9 @@ shader_parameter/trail_width = 0.5
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = false
 shader_parameter/scale_factor = 0.08
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
+radius = 34.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqnhq"]
 radius = 100.0
@@ -92,7 +92,7 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[node name="PlayerShip" type="Node2D"]
+[node name="PlayerShip" type="Node2D" groups=["Ships"]]
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
@@ -141,15 +141,7 @@ text = "Radar Range"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Fuel" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fuel"]
-shape = SubResource("CircleShape2D_rjoek")
-
-[node name="Fuel_Range" type="ColorRect" parent="Fuel" groups=["MapLines"]]
+[node name="Fuel_Range" type="ColorRect" parent="." groups=["MapLines"]]
 material = SubResource("ShaderMaterial_1i26u")
 anchors_preset = 8
 anchor_left = 0.5
@@ -165,7 +157,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Fuel/Fuel_Range"]
+[node name="Label" type="Label" parent="Fuel_Range"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,6 +176,14 @@ theme_override_font_sizes/font_size = 14
 text = "Fuel Range"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="ShipRange" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipRange"]
+shape = SubResource("CircleShape2D_rjoek")
 
 [node name="Analyzer" type="Area2D" parent="."]
 rotation = 0.368904
