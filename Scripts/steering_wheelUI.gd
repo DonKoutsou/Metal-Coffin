@@ -15,17 +15,17 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 	var prevsteer = SteeringDir
 	if (EvPos.x < position.x):
 		$TextureRect.rotation += (rel.x - rel.y) /20
-		SteeringDir += (rel.x -rel.y) * 10
+		SteeringDir += (rel.x -rel.y) * 2
 	else :
 		$TextureRect.rotation += rel.x + rel.y /20
-		SteeringDir += (rel.x + rel.y) * 10
+		SteeringDir += (rel.x + rel.y) * 2
 	if (SteeringDir != prevsteer):
 		SteeringDitChanged.emit(SteeringDir)
 	else:
 		return
 	if (!$AudioStreamPlayer.playing):
 		$AudioStreamPlayer.playing = true
-	Input.vibrate_handheld(10)
+	Input.vibrate_handheld(5)
 
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	

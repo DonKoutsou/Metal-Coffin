@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=44 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
@@ -30,10 +30,9 @@
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
-[ext_resource type="Shader" path="res://Shaders/Galaxy.gdshader" id="29_v8gwn"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
+[ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
 [ext_resource type="Shader" path="res://Shaders/gauge.gdshader" id="33_ssjx5"]
-[ext_resource type="Texture2D" uid="uid://dhtc6whtxq625" path="res://Assets/UIPiecies/BORDER_Camera 1_001.png" id="33_vheql"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="35_y1n03"]
@@ -43,21 +42,6 @@ min_value = 1.0
 max_value = 10.0
 _data = [Vector2(0, 1), 0.0, 3.3398, 0, 0, Vector2(1, 6.7), 10.2257, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aodej"]
-shader = ExtResource("29_v8gwn")
-shader_parameter/thing = 0.0
-shader_parameter/thing2 = 0.0
-shader_parameter/star_brightness = 0.05
-shader_parameter/dist_fade = 0.35
-shader_parameter/quantization_levels = 256
-shader_parameter/saturation = 1.0
-shader_parameter/layers = 5.189
-shader_parameter/iterations = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_st76y"]
-draw_center = false
-shadow_size = 30
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f561"]
 content_margin_left = 8.0
@@ -233,7 +217,6 @@ size_flags_horizontal = 4
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control"]
-material = SubResource("ShaderMaterial_aodej")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -296,103 +279,38 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Panel5" type="Panel" parent="CanvasLayer/UIMaster"]
-custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -289.0
-offset_top = -36.0
-offset_right = 279.0
-offset_bottom = 2.04498
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_st76y")
-
 [node name="Panel2" type="TextureRect" parent="CanvasLayer/UIMaster"]
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -289.0
-offset_top = -36.0
-offset_right = 279.0
-offset_bottom = 2.04498
+offset_left = -97.0
+offset_top = -39.0
+offset_right = 106.0
+offset_bottom = 105.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("33_vheql")
+texture = ExtResource("33_4takp")
 expand_mode = 1
 
-[node name="Panel6" type="Panel" parent="CanvasLayer/UIMaster"]
+[node name="Panel3" type="TextureRect" parent="CanvasLayer/UIMaster/Panel2"]
+modulate = Color(0, 0, 0, 0.328)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 36.0
-offset_top = -860.0
-offset_right = 1756.0
-offset_bottom = -821.955
-grow_vertical = 2
-rotation = 1.5708
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_st76y")
-
-[node name="Panel3" type="TextureRect" parent="CanvasLayer/UIMaster"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 36.0
-offset_top = -860.0
-offset_right = 1756.0
-offset_bottom = -821.955
-grow_vertical = 2
-rotation = 1.5708
-mouse_filter = 2
-texture = ExtResource("33_vheql")
-expand_mode = 1
-
-[node name="Panel4" type="Panel" parent="CanvasLayer/UIMaster"]
-custom_minimum_size = Vector2(38, 38.045)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = 846.0
-offset_right = 1684.0
-offset_bottom = 884.045
-grow_horizontal = 0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 26.0
+offset_right = -31.0
+offset_bottom = -24.0
+grow_horizontal = 2
 grow_vertical = 2
-rotation = -1.5708
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_st76y")
-
-[node name="Panel7" type="TextureRect" parent="CanvasLayer/UIMaster"]
-custom_minimum_size = Vector2(38, 38.045)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = 846.0
-offset_right = 1684.0
-offset_bottom = 884.045
-grow_horizontal = 0
-grow_vertical = 2
-rotation = -1.5708
-mouse_filter = 2
-texture = ExtResource("33_vheql")
+texture = ExtResource("33_4takp")
 expand_mode = 1
 
 [node name="Panel" type="Panel" parent="CanvasLayer/UIMaster"]
@@ -460,7 +378,9 @@ anchors_preset = 3
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -404.0
+offset_top = -41.0
 offset_right = -364.0
+offset_bottom = -1.0
 grow_horizontal = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

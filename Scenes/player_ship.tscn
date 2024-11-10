@@ -4,7 +4,6 @@
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="2_2w4bb"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_c5u4x"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_vt3yq"]
-[ext_resource type="Texture2D" uid="uid://dbqdy31whtto3" path="res://Assets/ShipIcon_Main Camera.png" id="5_1veyv"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="6_layd2"]
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/drone.tscn" id="6_pmuiv"]
@@ -19,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://dfli1oc6q60bc" path="res://Assets/VoiceLines/radio_go1_01.wav" id="15_pptn2"]
 [ext_resource type="AudioStream" uid="uid://dxj88bvyii2hx" path="res://Assets/VoiceLines/radio_go2_01.wav" id="16_01x11"]
 [ext_resource type="AudioStream" uid="uid://cj8t5fkujexdw" path="res://Assets/VoiceLines/radio_go3_01.wav" id="17_louuf"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="18_elnvx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
@@ -267,7 +267,7 @@ position = Vector2(-90, 90)
 
 [node name="Line2D" type="Line2D" parent="DroneDock"]
 points = PackedVector2Array(0, 0, 10, 0)
-width = 2.0
+width = 8.0
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="Sounds" type="Node" parent="DroneDock"]
@@ -275,7 +275,7 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_1veyv")
+texture = ExtResource("18_elnvx")
 
 [node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="PlayerShipSpr"]
 rotation = 1.5708

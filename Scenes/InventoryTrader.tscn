@@ -156,6 +156,7 @@ columns = 3
 [node name="Button" type="Button" parent="VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("4_iyr8n")
+theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Finished"
 

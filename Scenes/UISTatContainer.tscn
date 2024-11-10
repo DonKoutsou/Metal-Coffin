@@ -59,6 +59,24 @@ grow_vertical = 2
 texture = ExtResource("3_5vvs3")
 expand_mode = 1
 
+[node name="TextureRect2" type="TextureRect" parent="Control/TextureRect"]
+modulate = Color(0, 0, 0, 0.364)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -38.5
+offset_right = 136.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_5vvs3")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="Control/TextureRect"]
 layout_mode = 1
 anchors_preset = 8

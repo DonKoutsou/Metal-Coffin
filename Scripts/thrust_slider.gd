@@ -41,7 +41,24 @@ func _on_handle_gui_input(event: InputEvent) -> void:
 		$TextureRect/Handle.position.y = newpos
 		accumulatedrelative = 0
 		$AudioStreamPlayer.play()
-		Input.vibrate_handheld(50)
+		Input.vibrate_handheld(10)
+		var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
+		AccelerationChanged.emit(newval)
+		$TextureRect/Light3.Toggle(newval > 0.7)
+	if (event is InputEventScreenDrag):
+		var step = ( MinVelocityLoc - MaxVelocityLoc ) / StepCOunt
+		accumulatedrelative += event.relative.y
+		if (abs(accumulatedrelative) < step * 0.8):
+			return
+		var newpos
+		if (accumulatedrelative > 0):
+			newpos = clamp($TextureRect/Handle.position.y + step, MaxVelocityLoc, MinVelocityLoc)
+		else:
+			newpos = clamp($TextureRect/Handle.position.y - step, MaxVelocityLoc, MinVelocityLoc)
+		$TextureRect/Handle.position.y = newpos
+		accumulatedrelative = 0
+		$AudioStreamPlayer.play()
+		Input.vibrate_handheld(10)
 		var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 		AccelerationChanged.emit(newval)
 		$TextureRect/Light3.Toggle(newval > 0.7)

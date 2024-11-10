@@ -76,10 +76,10 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 		$Control/Node2D/Sprite2D.rotation += rel.x + rel.y
 		SteeringDir += (rel.x + rel.y) * 10
 	if (SteeringDir != prevsteer):
-		DroneDockEventH.DroneDirectionChanged(SteeringDir)
+		DroneDockEventH.DroneDirectionChanged(SteeringDir / 10)
 	if (!$Control/Node2D/AudioStreamPlayer.playing):
 		$Control/Node2D/AudioStreamPlayer.playing = true
-
+	Input.vibrate_handheld(5)
 var RangeDir : float = 0.0
 func UpdateRange(RelativeRot : Vector2, EvPos : Vector2):
 	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
@@ -95,12 +95,12 @@ func UpdateRange(RelativeRot : Vector2, EvPos : Vector2):
 		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
 	if (!$Control/Node2D/AudioStreamPlayer.playing):
 		$Control/Node2D/AudioStreamPlayer.playing = true
-	print(RangeDir)
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/PanelContainer/VBoxContainer/Label2.text = var_to_str(roundi(RangeDir / 2))
 func UpdateDroneRange(Rang : float):
 	RangeDir = clamp(RangeDir + Rang, 0, 100)
 	DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
 	$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 2))
+	
 func _on_area_2d_input_event(event: InputEvent) -> void:
 	if (event is InputEventScreenDrag):
 		UpdateSteer(event.relative, event.position)

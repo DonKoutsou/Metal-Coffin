@@ -159,7 +159,7 @@ func AccelerationChanged(value: float) -> void:
 		ShipAccelerating.emit()
 	var postween = create_tween()
 	postween.set_trans(Tween.TRANS_EXPO)
-	postween.tween_property($Node2D, "position", Vector2(max(0,value / 10), 0), 2)
+	postween.tween_property($Node2D, "position", Vector2(max(0,value / 3), 0), 2)
 	
 func AccelerationEnded(_value_changed: bool) -> void:
 	pass

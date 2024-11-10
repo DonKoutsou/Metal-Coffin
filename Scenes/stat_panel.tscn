@@ -1,16 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://crwbxcbj81jvc"]
+[gd_scene load_steps=3 format=3 uid="uid://crwbxcbj81jvc"]
 
-[ext_resource type="Texture2D" uid="uid://dhtc6whtxq625" path="res://Assets/UIPiecies/BORDER_Camera 1_001.png" id="1_188dh"]
 [ext_resource type="Script" path="res://Scripts/stat_panel.gd" id="2_3iuan"]
 [ext_resource type="PackedScene" uid="uid://carxyijo0mekn" path="res://Scenes/UISTatContainer.tscn" id="3_6v150"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ldga0"]
-texture = ExtResource("1_188dh")
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-region_rect = Rect2(-1, 17, 7202, 165)
-
 [node name="Stat_Panel" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -21,7 +15,6 @@ offset_top = -16.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_ldga0")
 script = ExtResource("2_3iuan")
 StatScene = ExtResource("3_6v150")
 StatsToShow = Array[String](["OXYGEN", "HP", "HULL", "FUEL"])

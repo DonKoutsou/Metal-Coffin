@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="PackedScene" uid="uid://bakbjn5qbsc2l" path="res://Scenes/DroneNotif.tscn" id="2_1dqnw"]
-[ext_resource type="Texture2D" uid="uid://dbqdy31whtto3" path="res://Assets/ShipIcon_Main Camera.png" id="4_8ppwl"]
+[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7khp2"]
@@ -45,15 +45,15 @@ shape = SubResource("CircleShape2D_e6yyl")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 30)
-width = 2.0
-default_color = Color(0.699743, 0.151314, 0.114649, 1)
+width = 8.0
+default_color = Color(0.969432, 0.527551, 0.201925, 1)
 
 [node name="Node2D2" type="Node2D" parent="."]
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="Node2D2"]
 rotation = -1.5708
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_8ppwl")
+texture = ExtResource("3_4y2i6")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0.5, 0)

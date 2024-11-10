@@ -234,6 +234,8 @@ func StageDone(victory : bool, supplies : Array[Item]) -> void:
 		GetMap().StageFailed()
 		GameLost("Your ship got destroyed")
 		return
+	
+	ToggleShipPausing(false)
 	#if player didnt die add the supplies he found in the inventory
 	GetInventory().AddItems(supplies)
 	#enable map again
@@ -242,7 +244,7 @@ func StageDone(victory : bool, supplies : Array[Item]) -> void:
 	map.set_process_input(true)
 	map.ToggleVis(true)
 	#enable ship movement
-	ToggleShipPausing(false)
+	
 	#enable inventory button
 	$Ingame_UIManager.ToggleInventoryButton(true)
 #/////////////////////////////////////////////////////////////////////////////////////

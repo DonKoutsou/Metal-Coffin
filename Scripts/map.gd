@@ -22,7 +22,7 @@ signal MAP_ShipSearched(Ship : BaseShip)
 
 var SpotList : Array[MapSpot]
 var currentstage = 0
-var GalaxyMat :ShaderMaterial
+#var GalaxyMat :ShaderMaterial
 
 func _ready() -> void:
 	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
@@ -32,7 +32,7 @@ func _ready() -> void:
 	GetPlayerShip().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
 	GetPlayerShip().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
-	GalaxyMat = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control/ColorRect.material
+	#GalaxyMat = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control/ColorRect.material
 
 
 
@@ -62,18 +62,18 @@ func ShowStation():
 	var stationpos = get_tree().get_nodes_in_group("STATION")[0].global_position
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(camera_2d, "global_position", stationpos, 6)
-	var mattw = create_tween()
-	mattw.set_trans(Tween.TRANS_EXPO)
-	mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
+	#var mattw = create_tween()
+	#mattw.set_trans(Tween.TRANS_EXPO)
+	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
 	
 func FrameCamToPlayer():
 	var tw = create_tween()
 	var plpos = GetPlayerShip().global_position
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(camera_2d, "global_position", plpos,6)
-	var mattw = create_tween()
-	mattw.set_trans(Tween.TRANS_EXPO)
-	mattw.tween_property(GalaxyMat, "shader_parameter/thing", plpos.x / 500,6)
+	#var mattw = create_tween()
+	#mattw.set_trans(Tween.TRANS_EXPO)
+	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", plpos.x / 500,6)
 func UpdateCameraPos(relativeMovement : Vector2):
 	var maxposX = get_tree().get_nodes_in_group("STATION")[0].position.x
 	var vpsizehalf = (get_viewport_rect().size.y / 2)
@@ -82,12 +82,12 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	var newpos = Vector2(clamp(camera_2d.position.x - rel.x, 0, maxposX), clamp(camera_2d.position.y - rel.y, maxposY.x, maxposY.y))
 	if (newpos.x != camera_2d.position.x):
 		camera_2d.position.x = newpos.x
-		var val = GalaxyMat.get_shader_parameter("thing")
-		GalaxyMat.set_shader_parameter("thing", val - (rel.x / 1800))
+		#var val = GalaxyMat.get_shader_parameter("thing")
+		#GalaxyMat.set_shader_parameter("thing", val - (rel.x / 1800))
 	if (newpos.y != camera_2d.position.y):
 		camera_2d.position.y = newpos.y
-		var val2 = GalaxyMat.get_shader_parameter("thing2")
-		GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 1800))
+		#var val2 = GalaxyMat.get_shader_parameter("thing2")
+		#GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 1800))
 		
 #func _input(event: InputEvent) -> void:
 	#pass
@@ -265,7 +265,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():
-	shakestr = 1
+	shakestr = 2
 func _physics_process(delta: float) -> void:
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
@@ -328,6 +328,8 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
 		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.25,0.25), Vector2(2,2))
+		for g in get_tree().get_nodes_in_group("MapLines"):
+			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
 	else:
 		UpdateCameraPos(event.relative)	
 #//////////////////////////////////////////////////////////

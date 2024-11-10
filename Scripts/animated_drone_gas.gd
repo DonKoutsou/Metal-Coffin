@@ -16,12 +16,14 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		if (accumulatedrel > 0):
 			RangeChanged.emit(1)
 			$AudioStreamPlayer.play()
+			Input.vibrate_handheld(30)
 			if (frame + 1 == framecount):
 				frame = 0
 			else:
 				frame += 1
 		else: if (accumulatedrel < 0):
 			$AudioStreamPlayer.play()
+			Input.vibrate_handheld(30)
 			RangeChanged.emit(-1)
 			if (frame == 0):
 				frame = framecount - 1
@@ -37,12 +39,14 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		if (accumulatedrel > 0):
 			RangeChanged.emit(1)
 			$AudioStreamPlayer.play()
+			Input.vibrate_handheld(30)
 			if (frame + 1 == framecount):
 				frame = 0
 			else:
 				frame += 1
 		else: if (accumulatedrel < 0):
 			$AudioStreamPlayer.play()
+			Input.vibrate_handheld(30)
 			RangeChanged.emit(-1)
 			if (frame == 0):
 				frame = framecount - 1

@@ -1,3 +1,4 @@
+TextureRect
 AudioStreamPlayer
 Control
 AnimatedSprite2D
@@ -5,7 +6,6 @@ Sprite2D
 AnimationPlayer
 Panel
 TextureButton
-TextureRect
 VSlider
 AnimationTree
 TextEdit

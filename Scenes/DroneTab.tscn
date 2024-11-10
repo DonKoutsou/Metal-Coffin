@@ -240,6 +240,19 @@ offset_left = -289.0
 offset_top = -90.0
 offset_right = 182.0
 offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("15_43a6j")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect"]
+modulate = Color(0, 0, 0, 0.518)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 460.0
+offset_bottom = 154.0
+mouse_filter = 2
 texture = ExtResource("15_43a6j")
 expand_mode = 1
 
