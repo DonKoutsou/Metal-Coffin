@@ -65,6 +65,7 @@ func DroneAimDirChanged(NewDir : float) -> void:
 	
 func DroneRangeChanged(NewRange : float) -> void:
 	$Line2D.set_point_position(1, Vector2(NewRange * 80, 0))
+	print(NewRange)
 	
 func LaunchDrone() -> void:
 	if (DockedDrones.size() == 0):

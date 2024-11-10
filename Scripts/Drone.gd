@@ -20,8 +20,7 @@ func  _ready() -> void:
 
 func TogglePause(t : bool):
 	Paused = t
-	if ($AudioStreamPlayer2D.playing):
-		$AudioStreamPlayer2D.stop()
+	$AudioStreamPlayer2D.stream_paused = t
 	
 func EnableDrone():
 	Docked = false

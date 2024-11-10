@@ -27,7 +27,7 @@ radius = 200.0
 shader = ExtResource("2_2w4bb")
 shader_parameter/line_color = Color(0.252517, 0.622353, 0.846633, 1)
 shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 1.0
+shader_parameter/sector_lines = 0.0
 shader_parameter/line_width = 0.0011
 shader_parameter/beam_angle = 0.2
 shader_parameter/beam_width = 0.003
@@ -284,7 +284,7 @@ rotation = 1.5708
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_0t4kc")
-volume_db = -5.0
+volume_db = -10.0
 pitch_scale = 0.01
 bus = &"MapSounds"
 

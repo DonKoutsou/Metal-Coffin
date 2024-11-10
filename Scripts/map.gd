@@ -289,8 +289,8 @@ func _MAP_INPUT(event: InputEvent) -> void:
 		_HANDLE_ZOOM(1.1)
 	if (event.is_action_pressed("ZoomOut")):
 		_HANDLE_ZOOM(0.9)
-	if (GetPlayerShip().ChangingCourse):
-		return
+	#if (GetPlayerShip().ChangingCourse):
+		#return
 	if (event is InputEventScreenTouch):
 		_HANDLE_TOUCH(event)
 	if (event is InputEventScreenDrag):

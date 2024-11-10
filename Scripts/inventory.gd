@@ -44,7 +44,7 @@ func _ready() -> void:
 		AddItems(StartingItems, false)
 
 func ToggleShipPausing(t : bool):
-	$"../HBoxContainer/InventoryButton".disabled = t
+	$"../HBoxContainer/Panel/InventoryButton".disabled = t
 	get_tree().call_group("Ships", "TogglePause", t)
 	
 func _exit_tree() -> void:
@@ -139,6 +139,7 @@ func FindMatchingBoxForItAndPlace(it : Item) -> bool:
 			if (box.ItemC.Ammount >= box.ItemC.ItemType.MaxStackCount):
 				continue
 			box.UpdateAmm(1)
+			print("Added item : " + it.ItemName)
 			INV_OnItemAdded.emit(it)
 			return true
 	return false
@@ -148,6 +149,7 @@ func FindEmptyBoxForItAndPlace(it : Item) -> bool:
 		if (box.IsEmpty()):
 			box.RegisterItem(it)
 			box.UpdateAmm(1)
+			print("Added item : " + it.ItemName)
 			INV_OnItemAdded.emit(it)
 			return true
 	return false
@@ -179,6 +181,7 @@ func FlushInventory() -> void:
 	for g in InventoryContents.size():
 		for z in InventoryContents[g].ItemC.Ammount:
 			INV_OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
+			print("Removed item : " + InventoryContents[g].ItemC.ItemType.ItemName)
 			InventoryContents[g].UpdateAmm(-1)
 func _TradeFinished(itms : Array[Item]) -> void:
 	ToggleShipPausing(false)
@@ -233,6 +236,7 @@ func RemoveItem(Cont : ItemContainer):
 		var box = InventoryContents[g]
 		if (box.ItemC == Cont):
 			INV_OnItemRemoved.emit(Cont.ItemType)
+			print("Removed item : " + Cont.ItemType.ItemName)
 			inventory_ship_stats.UpdateValues()
 			box.UpdateAmm(-1)
 			return
@@ -240,14 +244,15 @@ func RemoveItem(Cont : ItemContainer):
 func UseItem(Cont : ItemContainer, Times : int = 1):
 	for z in Times:
 		if (TryUseItem(Cont.ItemType)):
-			for g in InventoryContents.size():
-				if (InventoryContents[g].ItemC == Cont):
-					var box = InventoryContents[g]
-					INV_OnItemRemoved.emit(Cont.ItemType)
-					box.UpdateAmm(-1)
-					if (box.ItemC.Ammount == 0):
-						FindAndDissableDescriptors()
-					break
+			RemoveItem(Cont)
+			#for g in InventoryContents.size():
+			#	if (InventoryContents[g].ItemC == Cont):
+			#		var box = InventoryContents[g]	
+			#		INV_OnItemRemoved.emit(Cont.ItemType)
+			#		box.UpdateAmm(-1)
+			#		if (box.ItemC.Ammount == 0):
+			#			FindAndDissableDescriptors()
+			#		break
 					
 func TryUseItem(It : UsableItem) -> bool:
 	var statname = It.StatUseName
@@ -257,6 +262,7 @@ func TryUseItem(It : UsableItem) -> bool:
 		return false
 	else :
 		INV_OnItemUsed.emit(It)
+		print("Used item : " + It.ItemName)
 		return true
 		
 func RepairPart(Cont : ItemContainer) -> void:

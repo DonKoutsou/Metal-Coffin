@@ -1,28 +1,14 @@
 [gd_scene load_steps=8 format=3 uid="uid://dn356hqaf372p"]
 
 [ext_resource type="Script" path="res://Scripts/thrust_slider.gd" id="1_pmd3c"]
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="2_3v7xl"]
-[ext_resource type="FontFile" uid="uid://dim2iqnwjiswx" path="res://Fonts/Caudex-Bold.ttf" id="3_tcfbp"]
-[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="4_ykd81"]
-[ext_resource type="Theme" uid="uid://r7u6a0gc7qc1" path="res://Theme/SliderTheme.tres" id="5_b8yfu"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_35hes"]
+[ext_resource type="Texture2D" uid="uid://b7uf4103bd05b" path="res://Assets/UIPiecies/panel_Camera 3.png" id="2_c6hf5"]
+[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/light.tscn" id="3_pgc6o"]
+[ext_resource type="Texture2D" uid="uid://cppak6y6wit6" path="res://Assets/UIPiecies/handle_Camera 3.png" id="4_yj1xw"]
+[ext_resource type="Texture2D" uid="uid://c2f4quec7hbw0" path="res://Assets/UIPiecies/handleshadow_Camera 3.png" id="5_pwxcd"]
+[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="6_hkc0e"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkd3v"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 55
-corner_detail = 20
-shadow_size = 5
-shadow_offset = Vector2(-2, 2)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u6pk"]
+draw_center = false
 
 [node name="ThrustSlider" type="PanelContainer"]
 anchors_preset = 3
@@ -30,167 +16,69 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -201.0
-offset_top = -284.0
+offset_left = -211.0
+offset_top = -450.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_gkd3v")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4u6pk")
 script = ExtResource("1_pmd3c")
+MaxVelocityLoc = 157.0
+MinVelocityLoc = 367.0
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("2_3v7xl")
+mouse_filter = 2
+texture = ExtResource("2_c6hf5")
+expand_mode = 1
 
-[node name="Label" type="Label" parent="PanelContainer"]
-custom_minimum_size = Vector2(4.895, 7.335)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("3_tcfbp")
-text = "THRUST"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
+[node name="Light" parent="TextureRect" instance=ExtResource("3_pgc6o")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 325.0
+offset_right = 41.0
+offset_bottom = 365.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/separation = 17
-alignment = 1
+[node name="Light2" parent="TextureRect" instance=ExtResource("3_pgc6o")]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 325.0
+offset_right = 62.0
+offset_bottom = 365.0
 
-[node name="Panel" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(90, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
+[node name="Light3" parent="TextureRect" instance=ExtResource("3_pgc6o")]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 325.0
+offset_right = 83.0
+offset_bottom = 365.0
 
-[node name="Panel2" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(80, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
+[node name="Handle" type="TextureRect" parent="TextureRect"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 366.0
+offset_right = 197.0
+offset_bottom = 472.0
+mouse_filter = 0
+texture = ExtResource("4_yj1xw")
+expand_mode = 1
 
-[node name="Panel3" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(70, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
+[node name="Handle2" type="TextureRect" parent="TextureRect/Handle"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -8.0
+offset_top = 10.0
+offset_right = 98.0
+offset_bottom = 116.0
+mouse_filter = 2
+texture = ExtResource("5_pwxcd")
+expand_mode = 1
 
-[node name="Panel4" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(60, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hkc0e")
+volume_db = -10.0
+pitch_scale = 1.38
+bus = &"MapSounds"
 
-[node name="Panel5" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(50, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
-
-[node name="Panel6" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(40, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
-
-[node name="Panel7" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(30, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
-
-[node name="Panel8" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(20, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
-
-[node name="Panel9" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(10, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("4_ykd81")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-theme_override_constants/separation = 1
-alignment = 1
-
-[node name="AccellerationSlider" type="VSlider" parent="HBoxContainer"]
-custom_minimum_size = Vector2(99.06, 250)
-layout_mode = 2
-size_flags_horizontal = 1
-size_flags_vertical = 4
-theme = ExtResource("5_b8yfu")
-max_value = 50.0
-step = 5.0
-tick_count = 10
-ticks_on_borders = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 268.585)
-layout_mode = 2
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 3)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_3v7xl")
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("6_35hes")
-theme_override_fonts/font = ExtResource("3_tcfbp")
-theme_override_font_sizes/font_size = 16
-text = "Cruise"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(20, 3)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_3v7xl")
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("6_35hes")
-theme_override_fonts/font = ExtResource("3_tcfbp")
-theme_override_font_sizes/font_size = 16
-text = "Loiter"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(20, 3)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_3v7xl")
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("6_35hes")
-theme_override_fonts/font = ExtResource("3_tcfbp")
-theme_override_font_sizes/font_size = 16
-text = "Air Stop
-"
-horizontal_alignment = 1
-
-[connection signal="drag_ended" from="HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_drag_ended"]
-[connection signal="value_changed" from="HBoxContainer/AccellerationSlider" to="." method="_on_accelleration_slider_value_changed"]
+[connection signal="gui_input" from="TextureRect/Handle" to="." method="_on_handle_gui_input"]

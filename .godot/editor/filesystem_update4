@@ -1,5 +1,5 @@
 res://default_bus_layout.tres
-res://Scenes/UISTatContainer.tscn
+res://Scenes/DroneTab.tscn
 res://Theme/DarkBluePanel.tres
 res://Resources/DroneDockEventH.tres
 res://Theme/DarkBlueButton.tres
@@ -47,7 +47,6 @@ res://Shaders/Screen.gdshader
 res://Shaders/Screen.tres
 res://Shaders/Galaxy.gdshader
 res://Shaders/gauge.gdshader
-res://Theme/SliderTheme.tres
 res://Resources/ShipStats/AnalyzeRange.tres
 res://Assets/Rocks/Rock1_Lod2.tres
 res://Assets/Rocks/Rock2_Lod2.tres
@@ -65,8 +64,8 @@ res://Resources/Ships/StartingShip.tres
 res://Resources/MapSpots/AsteroidBelt.tres
 res://Resources/MapSpots/AsteroidBeltLarge.tres
 res://Shaders/Static.gdshader
+res://Scenes/UISTatContainer.tscn
 res://Scenes/SteeringWheelUI.tscn
-res://Scenes/DroneTab.tscn
 res://Scenes/map.tscn
 res://Scenes/map_spot.tscn
 res://Scenes/InventoryContainer.tscn
@@ -77,3 +76,14 @@ res://Scenes/world.tscn
 res://Scenes/inventory.tscn
 res://Scenes/buttontest.tscn
 res://Scenes/stat_panel.tscn
+res://Scenes/light.tscn
+res://Scenes/thrust_slider.tscn
+res://Scripts/ui_Stat_container.gd
+res://Scripts/DroneTab.gd
+res://Scenes/AnimatedButton.tscn
+res://Scripts/animated_button.gd
+res://Scenes/AnimatedDroneGas.tscn
+res://Scripts/animated_drone_gas.gd
+res://Scripts/DroneDock.gd
+res://Scripts/player_ship.gd
+res://Scripts/Drone.gd

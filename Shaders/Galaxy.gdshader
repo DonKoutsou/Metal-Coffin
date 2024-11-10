@@ -49,7 +49,7 @@ vec3 quantizeColor(vec3 color, int levels) {
     return floor(color * float(levels)) / float(levels);
 }
 void fragment() {
-	
+
     vec2 uv2 = FRAGCOORD.xy / vec2(512);
 	uv2.x += thing;
 	uv2.y += thing2;

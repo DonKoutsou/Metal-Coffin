@@ -7,7 +7,7 @@ class_name PlayerShip
 
 
 var Travelling = false
-var ChangingCourse = false
+#var ChangingCourse = false
 var Paused = false
 
 signal ScreenEnter()
@@ -28,8 +28,8 @@ static func GetInstance() -> PlayerShip:
 	
 func TogglePause(t : bool):
 	Paused = t
-	if ($AudioStreamPlayer2D.playing):
-		$AudioStreamPlayer2D.stop()
+	$AudioStreamPlayer2D.stream_paused = t
+		
 	
 func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var FuelRangeIndicator = $Fuel_Range
@@ -132,7 +132,7 @@ func HaltShip():
 	$Node2D.position.x = 0
 	#$AudioStreamPlayer2D.stop()
 	AccelerationChanged(0)
-	ChangingCourse = false
+	#ChangingCourse = false
 	ShipForceStopped.emit()
 	
 func SteerChanged(value: float) -> void:
@@ -141,8 +141,8 @@ func SteerChanged(value: float) -> void:
 func AccelerationChanged(value: float) -> void:
 	var Audioween = create_tween()
 	#Audioween.set_trans(Tween.TRANS_EXPO)
-	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 100), 2)
-	ChangingCourse = true
+	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 2), 2)
+	#ChangingCourse = true
 	if (!$AudioStreamPlayer2D.playing):
 		$AudioStreamPlayer2D.play()
 	if (value <= 0):
@@ -159,10 +159,11 @@ func AccelerationChanged(value: float) -> void:
 		ShipAccelerating.emit()
 	var postween = create_tween()
 	postween.set_trans(Tween.TRANS_EXPO)
-	postween.tween_property($Node2D, "position", Vector2(max(0,value / 300), 0), 2)
+	postween.tween_property($Node2D, "position", Vector2(max(0,value / 10), 0), 2)
 	
 func AccelerationEnded(_value_changed: bool) -> void:
-	ChangingCourse = false
+	pass
+	#ChangingCourse = false
 	
 signal OnLookAtEnded()
 func LookAtEnded():
