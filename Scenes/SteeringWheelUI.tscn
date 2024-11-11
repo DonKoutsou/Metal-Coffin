@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://hiw68h8srifm"]
+[gd_scene load_steps=6 format=3 uid="uid://hiw68h8srifm"]
 
 [ext_resource type="Script" path="res://Scripts/steering_wheelUI.gd" id="1_akv35"]
 [ext_resource type="Texture2D" uid="uid://brrfictufcbr6" path="res://Assets/UIPiecies/steer_Camera 1.png" id="3_7k57k"]
+[ext_resource type="Texture2D" uid="uid://cwl51wjxss6oj" path="res://Assets/UIPiecies/steer_2_Camera 1.png" id="3_baxy7"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="3_py1nb"]
 [ext_resource type="BitMap" uid="uid://dtbujuyxlrxmx" path="res://Assets/plane_Wheel_BaseColorMask.png" id="5_30b70"]
 
@@ -49,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(299, 299)
 mouse_filter = 2
-texture = ExtResource("3_7k57k")
+texture = ExtResource("3_baxy7")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="TextureRect"]

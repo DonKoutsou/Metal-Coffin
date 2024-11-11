@@ -78,10 +78,10 @@ func _exit_tree() -> void:
 	ShipDat.RemoveShipStats(CurrentShip.Buffs)
 	
 func OnStatsUpdated(StatName : String):
-	if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() - 20):
-		var it = GetInventory().GetItemForStat(StatName)
-		if (GetStatPanel().StatAutoRefil(StatName) and it != null):
-			GetInventory().UseItem(it)
+	#if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() - 20):
+		#var it = GetInventory().GetItemForStat(StatName)
+		#if (GetStatPanel().StatAutoRefil(StatName) and it != null):
+			#GetInventory().UseItem(it)
 	if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() * 0.2):
 		if (!StatsNotifiedLow.has(StatName) and !GetMap().GetPlayerShip().ShowingNotif()):
 			StatsNotifiedLow.append(StatName)

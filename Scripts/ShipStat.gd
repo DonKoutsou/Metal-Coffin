@@ -7,6 +7,7 @@ class_name ShipStat
 var StatShipBuff : float = 0
 var StatItemBuff : float = 0
 var CurrentVelue : float = 0
+@export var AllowAutoRefil : bool = false
 
 func GetBaseStat()-> float:
 	return StatBase

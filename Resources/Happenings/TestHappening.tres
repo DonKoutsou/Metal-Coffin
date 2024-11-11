@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=11 format=3 uid="uid://ctrks6dd72fda"]
+
+[ext_resource type="Script" path="res://Scripts/HappeningOption.gd" id="1_jd7ju"]
+[ext_resource type="Script" path="res://Scripts/ResourceHappeningOption.gd" id="2_dqww5"]
+[ext_resource type="Script" path="res://Scripts/Happening.gd" id="2_etprd"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_nsq7x"]
+[ext_resource type="Resource" uid="uid://dod4ugx85516y" path="res://Resources/Items/OxygenTank.tres" id="4_j0vhq"]
+[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/LargeFuelTank.tres" id="5_7d1g5"]
+[ext_resource type="Script" path="res://Scripts/ItemHappeningOption.gd" id="5_ofmhk"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="6_w8ef2"]
+
+[sub_resource type="Resource" id="Resource_3g034"]
+script = ExtResource("2_dqww5")
+ResourceAmm = 5
+ResourceName = "FUEL"
+RandomiseResourceAmm = false
+OptionName = "Option1"
+
+[sub_resource type="Resource" id="Resource_jkooc"]
+script = ExtResource("5_ofmhk")
+HapItems = Array[ExtResource("3_nsq7x")]([ExtResource("4_j0vhq"), ExtResource("4_j0vhq"), ExtResource("5_7d1g5"), ExtResource("6_w8ef2")])
+OptionName = "Take shit"
+
+[resource]
+script = ExtResource("2_etprd")
+HappeningName = "Happening1"
+HappeningText = "The happening has happened and some stuff is happening. What do you do?"
+Options = Array[ExtResource("1_jd7ju")]([SubResource("Resource_3g034"), SubResource("Resource_jkooc")])

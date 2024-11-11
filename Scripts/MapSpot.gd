@@ -16,6 +16,7 @@ var Visited = false
 var Seen = false
 var Analyzed = false
 var CurrentlyVisiting = false
+var Evnt : Happening
 
 func _ready() -> void:
 	visible = Seen
@@ -47,6 +48,16 @@ func SetSpotData(Data : MapSpotType) -> void:
 		OnSpotAnalyzed()
 	
 	add_to_group(Data.GetEnumString())
+func GetSpotName() -> String:
+	return SpotType.FullName if Analyzed else "?"
+func GetSpotDescriptio() -> String:
+	return SpotType.Description if Analyzed else "?"
+func CanLand() -> bool:
+	return SpotType.CanLand if Visited or Analyzed else false
+func HasAtmosphere() -> bool:
+	return SpotType.HasAtmoshere if Visited or Analyzed else false
+func GetPossibleDrops() -> Array:
+	return SpotType.PossibleDrops if Visited or Analyzed else []
 #//////////////////////////////////////////////////////////////////
 #todo find better way for dialogue from station
 func OnSpotVisited() -> void:
@@ -68,10 +79,10 @@ func OnSpotVisited() -> void:
 			Dialogue.append("Entry ended.")
 			DialogueProgressHolder.GetInstance().OnDialogueSpoken(diag.Value[0])
 			Ingame_UIManager.GetInstance().PlayDiag(Dialogue)
-		
 		#SpotType.ClearCustomData(diag)
 		queue_free()
 	Visited = true
+#Called when radar sees a mapspot
 func OnSpotSeen(PlayAnim : bool = true) -> void:
 	visible = true
 	if (PlayAnim):
@@ -82,6 +93,7 @@ func OnSpotSeen(PlayAnim : bool = true) -> void:
 			PlaySound()
 	$AnalyzeButton.icon = SpotType.MapIcon
 	Seen = true
+#Called when drone visits a mapspot
 func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
 	visible = true
 	if (PlayAnim):
@@ -92,14 +104,15 @@ func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
 			PlaySound()
 	$AnalyzeButton.icon = SpotType.MapIcon
 	Seen = true
+func OnSpotVisitedByDrone() -> void:
+	visible = true
+	
 func _on_land_button_pressed() -> void:
 	SpotSearched.emit(self)
 	
 func _on_analyze_button_pressed() -> void:
 	SpotAnalazyed.emit(self)
 
-
-	
 func OnSpotAnalyzed() ->void:
 	Analyzed = true
 
@@ -110,6 +123,7 @@ func PlaySound():
 	sound.stream = load("res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3")
 	add_child(sound)
 	sound.play()
+	
 func AreaEntered(area: Area2D):
 	if (area.get_parent() is PlayerShip):
 		if (area.get_collision_layer_value(1)):

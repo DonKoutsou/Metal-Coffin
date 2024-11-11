@@ -14,9 +14,11 @@ func UpdateStat(StatN : String):
 	if (Stat != StatN):
 		return
 	var dat = ShipData.GetInstance()
-	var CurStat = roundi(dat.GetStat(Stat).GetCurrentValue())
-	var MaxValue = dat.GetStat(Stat).GetStat()
-
+	var stat = dat.GetStat(Stat)
+	var CurStat = roundi(stat.GetCurrentValue())
+	var MaxValue = stat.GetStat()
+	AutoRefill = stat.AllowAutoRefil
+	$Control/AutoRefil.visible = stat.AllowAutoRefil
 	#var MyTween = create_tween()
 	#MyTween.set_trans(Tween.TRANS_EXPO)
 	#MyTween.tween_property($HBoxContainer/Bar, "value", CurStat, 0.1)

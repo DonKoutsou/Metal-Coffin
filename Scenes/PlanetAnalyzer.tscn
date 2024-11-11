@@ -78,7 +78,7 @@ stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/Control/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(283, 316)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="VBoxContainer/HBoxContainer/Control/SubViewportContainer/SubViewport"]
@@ -188,12 +188,12 @@ text = "Can Land :"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="CanLandCheck" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 button_pressed = true
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="CanLandUnKnown" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c6tdo")
 theme_override_font_sizes/font_size = 24
@@ -207,12 +207,12 @@ text = "Has Atmosphere :"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CheckBox2" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="AtmoCheck" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 button_pressed = true
 
-[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="HasAtmoUnKnown" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c6tdo")
 theme_override_font_sizes/font_size = 24
