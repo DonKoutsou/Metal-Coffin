@@ -1,36 +1,22 @@
-[gd_scene load_steps=44 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=33 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
-[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_csmts"]
-[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="3_8foxp"]
-[ext_resource type="Resource" uid="uid://sew43a75jovn" path="res://Resources/MapSpots/Gas/G2.tres" id="4_laxnu"]
-[ext_resource type="Resource" uid="uid://cj8ebb6k6xjb0" path="res://Resources/MapSpots/Star/S3.tres" id="5_cl201"]
-[ext_resource type="Resource" uid="uid://b1levfg3rcd16" path="res://Resources/MapSpots/Station.tres" id="6_bd3x3"]
-[ext_resource type="Resource" uid="uid://f558luvn25o2" path="res://Resources/MapSpots/BlackWhole.tres" id="6_culgw"]
-[ext_resource type="Resource" uid="uid://bhr3r5wyfgdjn" path="res://Resources/MapSpots/Terrestrial/T2.tres" id="7_ow8y0"]
-[ext_resource type="Resource" uid="uid://da3ti0o0734tr" path="res://Resources/MapSpots/Ice/I1.tres" id="7_vi3ba"]
-[ext_resource type="Resource" uid="uid://2l2v1rv0i6tf" path="res://Resources/MapSpots/Gas/G3.tres" id="8_1wj05"]
-[ext_resource type="PackedScene" uid="uid://cuirrj6s52dyf" path="res://Scenes/PlanetAnalyzer.tscn" id="8_7ajvg"]
-[ext_resource type="Resource" uid="uid://cqpnbtjo5crg0" path="res://Resources/MapSpots/Lava/L1.tres" id="9_n201g"]
-[ext_resource type="Resource" uid="uid://dey268tkmexmx" path="res://Resources/MapSpots/NoArmosphere/NA1.tres" id="10_3ok41"]
-[ext_resource type="Resource" uid="uid://dac7bh3qrgvtt" path="res://Resources/MapSpots/Ship.tres" id="10_brf7w"]
-[ext_resource type="Resource" uid="uid://dx2abc2gi0o5s" path="res://Resources/MapSpots/Terrestrial/T1.tres" id="10_eeu5v"]
-[ext_resource type="Resource" uid="uid://b8iyigsdefw0x" path="res://Resources/MapSpots/Lava/L2.tres" id="11_jfn3v"]
-[ext_resource type="Resource" uid="uid://j7s27fyb4a25" path="res://Resources/MapSpots/Sand/S2.tres" id="12_ukiar"]
-[ext_resource type="Resource" uid="uid://cdjwdnw7xjy2t" path="res://Resources/MapSpots/Star/S1.tres" id="12_v2m3t"]
-[ext_resource type="Resource" uid="uid://cva6b4ff20rlh" path="res://Resources/MapSpots/Sand/S1.tres" id="13_exvok"]
-[ext_resource type="Resource" uid="uid://dsawaejhg7uav" path="res://Resources/MapSpots/Gas/G1.tres" id="14_h38v5"]
-[ext_resource type="Resource" uid="uid://d14wweum23fh2" path="res://Resources/MapSpots/Star/S2.tres" id="14_xaq81"]
-[ext_resource type="Resource" uid="uid://di1wq2x222a8c" path="res://Resources/MapSpots/Terrestrial/T3.tres" id="18_ohf4c"]
-[ext_resource type="Resource" uid="uid://b13j2xqabxdpi" path="res://Resources/MapSpots/Terrestrial/T4.tres" id="19_0ncbx"]
-[ext_resource type="Resource" uid="uid://ddnaihvphx67w" path="res://Resources/MapSpots/Terrestrial/T5.tres" id="20_qlrmv"]
-[ext_resource type="Resource" uid="uid://dm6x6mhrv8uxw" path="res://Resources/MapSpots/Ringed/R1.tres" id="22_elqan"]
-[ext_resource type="Resource" uid="uid://dt2a146xanrnq" path="res://Resources/MapSpots/Ringed/R2.tres" id="23_inpld"]
-[ext_resource type="Resource" uid="uid://bfiyo48spg0nu" path="res://Resources/MapSpots/StationMinor.tres" id="25_ml3vp"]
+[ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
+[ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town1.tscn" id="3_hkdr3"]
+[ext_resource type="PackedScene" uid="uid://dd1rqlkx1y832" path="res://Scenes/Towns/Town3.tscn" id="4_nd2h0"]
+[ext_resource type="PackedScene" uid="uid://dcxd3udf7434a" path="res://Scenes/Towns/Town4.tscn" id="5_t2blr"]
+[ext_resource type="PackedScene" uid="uid://yupxf3b2xhjq" path="res://Scenes/Towns/Town5.tscn" id="6_ruf57"]
+[ext_resource type="PackedScene" uid="uid://cw0fmxei1f6xx" path="res://Scenes/Towns/Town6.tscn" id="7_w57pf"]
+[ext_resource type="PackedScene" uid="uid://bd0jdxi35y3ex" path="res://Scenes/PlanetAnalyzer.tscn" id="8_7ajvg"]
+[ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="8_kpprx"]
+[ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
+[ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
+[ext_resource type="Texture2D" uid="uid://ba67hhfb6sdb5" path="res://Assets/Sand/Rock053_1K-PNG_Color.png" id="29_s08yn"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
+[ext_resource type="Texture2D" uid="uid://cad2gsiytpugg" path="res://Assets/Sand/Rock053_1K-PNG_NormalGL.png" id="30_mlb2h"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
 [ext_resource type="Shader" path="res://Shaders/gauge.gdshader" id="33_ssjx5"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
@@ -42,6 +28,16 @@ min_value = 1.0
 max_value = 10.0
 _data = [Vector2(0, 1), 0.0, 3.3398, 0, 0, Vector2(1, 6.7), 10.2257, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
+diffuse_texture = ExtResource("29_s08yn")
+normal_texture = ExtResource("30_mlb2h")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_krkog"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2v8bx"]
+light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f561"]
 content_margin_left = 8.0
@@ -163,15 +159,15 @@ _data = {
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_mq604")
-SpotScene = ExtResource("2_csmts")
-MapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("14_h38v5"), ExtResource("4_laxnu"), ExtResource("8_1wj05"), ExtResource("7_vi3ba"), ExtResource("9_n201g"), ExtResource("11_jfn3v"), ExtResource("10_3ok41"), ExtResource("13_exvok"), ExtResource("12_ukiar"), ExtResource("12_v2m3t"), ExtResource("14_xaq81"), ExtResource("5_cl201"), ExtResource("10_eeu5v"), ExtResource("7_ow8y0"), ExtResource("18_ohf4c"), ExtResource("19_0ncbx"), ExtResource("20_qlrmv"), ExtResource("6_culgw"), ExtResource("22_elqan"), ExtResource("23_inpld")])
-SpecialMapSpotTypes = Array[ExtResource("3_8foxp")]([ExtResource("10_brf7w")])
-MinorStationSpotType = ExtResource("25_ml3vp")
-FinalSpotType = ExtResource("6_bd3x3")
+TownTypes = Array[PackedScene]([ExtResource("3_hkdr3"), ExtResource("3_3kbr0"), ExtResource("4_nd2h0"), ExtResource("5_t2blr"), ExtResource("6_ruf57"), ExtResource("7_w57pf"), ExtResource("8_kpprx")])
+SpecialTownTypes = Array[PackedScene]([ExtResource("3_hkdr3")])
+MinorCityType = ExtResource("9_yqugh")
+FinalCity = ExtResource("9_yqugh")
 MapSize = 150
 AnalyzerScene = ExtResource("8_7ajvg")
 MapGenerationDistanceCurve = SubResource("Curve_rghuw")
 DroneDockEventH = ExtResource("28_tg7n1")
+HappeningUI = ExtResource("12_5ifa8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -202,7 +198,6 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Control" type="Control" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport"]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,7 +211,22 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2500.0
+offset_top = -5000.0
+offset_right = 9.99963e+07
+offset_bottom = 4352.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_nb103")
+stretch_mode = 1
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -233,10 +243,21 @@ color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 [node name="MapSpots" type="Node2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport"]
 position = Vector2(0, 279)
 
+[node name="StationLine" type="Line2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots"]
+visible = false
+material = SubResource("CanvasItemMaterial_krkog")
+width = 8.0
+default_color = Color(1, 1, 1, 0.201)
+joint_mode = 2
+antialiased = true
+
 [node name="SpotSpot" type="Node2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots"]
 
 [node name="PlayerShip" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots" instance=ExtResource("28_7rdua")]
 position = Vector2(0, 0)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots"]
+color = Color(0, 0, 0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport"]
 position = Vector2(576, 324)
@@ -249,10 +270,12 @@ modulate = Color(0.770444, 0.040374, 0.0224221, 1)
 
 [node name="ArrowSprite2" type="Sprite2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite"]
 modulate = Color(0.770444, 0.040374, 0.0224221, 1)
+material = SubResource("CanvasItemMaterial_2v8bx")
 rotation = -1.5708
 texture = ExtResource("30_g5v37")
 
 [node name="Screen" type="ColorRect" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D"]
+visible = false
 material = ExtResource("29_q8i0i")
 anchors_preset = 15
 anchor_right = 1.0

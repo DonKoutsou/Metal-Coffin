@@ -1,40 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://biy37ccrqck53"]
+[gd_scene load_steps=14 format=3 uid="uid://biy37ccrqck53"]
 
 [ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/clouds.gdshader" id="1_v41dj"]
-[ext_resource type="Texture2D" uid="uid://dubbc0h804fot" path="res://addons/naejimer_3d_planet_generator/noises/planet_ice.tres" id="2_ip8pe"]
 [ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/body.gdshader" id="3_pupuq"]
 [ext_resource type="Shader" path="res://addons/naejimer_3d_planet_generator/shaders/atmosphere.gdshader" id="4_pfre3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xtehg"]
 render_priority = 0
 shader = ExtResource("1_v41dj")
-shader_parameter/speed = 0.005
-shader_parameter/brightness = 0.728
-shader_parameter/threshold = 1.102
-shader_parameter/fluffiness = 0.376
-shader_parameter/noise_texture = ExtResource("2_ip8pe")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rin7o"]
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_xtehg")
 shader = ExtResource("3_pupuq")
-shader_parameter/emit = 0.0
-shader_parameter/color_1 = Color(0.309804, 0.611765, 0.784314, 1)
-shader_parameter/color_1_treshold = 0.287
-shader_parameter/color_1_roughness = 0.0
-shader_parameter/color_1_emit = false
-shader_parameter/color_2 = Color(0.470588, 0.678431, 0.807843, 1)
-shader_parameter/color_2_treshold = 0.374
-shader_parameter/color_3 = Color(0.615686, 0.745098, 0.831373, 1)
-shader_parameter/color_3_treshold = 0.472
-shader_parameter/color_4 = Color(0.92549, 0.937255, 0.972549, 1)
-shader_parameter/color_4_treshold = 0.573
-shader_parameter/color_5 = Color(0.819608, 0.847059, 0.886275, 1)
-shader_parameter/color_5_treshold = 1.0
-shader_parameter/noise_gaseous = false
-shader_parameter/noise_gaseous_speed = 0.0025
-shader_parameter/noise_scale = 1.0
-shader_parameter/noise = ExtResource("2_ip8pe")
 
 [sub_resource type="SphereMesh" id="SphereMesh_5tvr0"]
 material = SubResource("ShaderMaterial_rin7o")
@@ -84,7 +61,6 @@ animation = &"Rotation"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ji6rl"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wujo7"]
-graph_offset = Vector2(-274.692, 86.5361)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_udpb3")
 nodes/Animation/position = Vector2(-20, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ji6rl")
@@ -92,7 +68,7 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [node name="PlanetIce" type="MeshInstance3D"]
-transform = Transform3D(38.1023, 0, 12.1741, 0, 40, 0, -12.1741, 0, 38.1023, 0, 0, 0)
+transform = Transform3D(39.9999, 0, 0, 0, 40, 0, 0, 0, 39.9999, 0, 0, 0)
 mesh = SubResource("SphereMesh_5tvr0")
 skeleton = NodePath(".")
 

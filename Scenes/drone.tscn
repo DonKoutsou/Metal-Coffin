@@ -1,15 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=11 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="PackedScene" uid="uid://bakbjn5qbsc2l" path="res://Scenes/DroneNotif.tscn" id="2_1dqnw"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7khp2"]
 radius = 258.136
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6yyl"]
 radius = 3.16228
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2le8a"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_liav1"]
+light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ku2rg"]
 draw_center = false
@@ -44,6 +51,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_e6yyl")
 
 [node name="Line2D" type="Line2D" parent="."]
+material = SubResource("CanvasItemMaterial_2le8a")
 points = PackedVector2Array(0, 0, 0, 30)
 width = 8.0
 default_color = Color(0.969432, 0.527551, 0.201925, 1)
@@ -52,13 +60,14 @@ default_color = Color(0.969432, 0.527551, 0.201925, 1)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="Node2D2"]
 rotation = -1.5708
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_4y2i6")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0.5, 0)
 
 [node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
+material = SubResource("CanvasItemMaterial_liav1")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -78,6 +87,15 @@ stream = ExtResource("4_g6qkr")
 volume_db = -15.0
 pitch_scale = 0.5
 bus = &"MapSounds"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(7.97656, 7.97656)
+energy = 0.5
+blend_mode = 2
+shadow_color = Color(0.919342, 0, 0.452291, 0)
+texture = ExtResource("5_k2uly")
+texture_scale = 0.25
+height = 100.0
 
 [connection signal="area_entered" from="Radar2" to="." method="_on_radar_2_area_entered"]
 [connection signal="area_entered" from="Radar" to="." method="_on_radar_area_entered"]

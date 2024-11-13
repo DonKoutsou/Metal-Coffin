@@ -1,17 +1,20 @@
 extends Node2D
 class_name Map
 
-@export var SpotScene: PackedScene
-@export var MapSpotTypes : Array[MapSpotType]
-@export var SpecialMapSpotTypes : Array[MapSpotType]
-@export var CommetMapSpots : Array[MapSpotType]
-@export var MinorStationSpotType : MapSpotType
-@export var FinalSpotType : MapSpotType
+#@export var SpotScene: PackedScene
+@export var TownTypes : Array[PackedScene]
+#@export var MapSpotTypes : Array[MapSpotType]
+@export var SpecialTownTypes : Array[PackedScene]
+#@export var CommetMapSpots : Array[MapSpotType]
+@export var MinorCityType : PackedScene
+@export var FinalCity : PackedScene
 @export var MapSize : int = 20
 @export var AnalyzerScene : PackedScene
 @export var MapGenerationDistanceCurve : Curve
 
 @export var DroneDockEventH : DroneDockEventHandler
+
+@export var HappeningUI : PackedScene
 
 @onready var thrust_slider: ThrustSlider = $CanvasLayer/UIMaster/ThrustSlider
 @onready var camera_2d: Camera2D = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D
@@ -20,7 +23,7 @@ signal MAP_AsteroidBeltArrival(Size : int)
 signal MAP_StageSearched(Spt : MapSpotType)
 signal MAP_ShipSearched(Ship : BaseShip)
 
-var SpotList : Array[MapSpot]
+var SpotList : Array[Town]
 var currentstage = 0
 #var GalaxyMat :ShaderMaterial
 
@@ -59,7 +62,8 @@ func ToggleUIForIntro(t : bool):
 	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite/ArrowSprite2.visible = t
 func ShowStation():
 	var tw = create_tween()
-	var stationpos = get_tree().get_nodes_in_group("STATION")[0].global_position
+	var stations = get_tree().get_nodes_in_group("Capital City Center")
+	var stationpos = stations[stations.size()-1].global_position
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(camera_2d, "global_position", stationpos, 6)
 	#var mattw = create_tween()
@@ -75,9 +79,9 @@ func FrameCamToPlayer():
 	#mattw.set_trans(Tween.TRANS_EXPO)
 	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", plpos.x / 500,6)
 func UpdateCameraPos(relativeMovement : Vector2):
-	var maxposX = get_tree().get_nodes_in_group("STATION")[0].position.x
+	var maxposX = 999999
 	var vpsizehalf = (get_viewport_rect().size.y / 2)
-	var maxposY = Vector2(vpsizehalf - 900, vpsizehalf + 900)
+	var maxposY = Vector2(vpsizehalf - 2500, vpsizehalf + 2500)
 	var rel = relativeMovement / camera_2d.zoom
 	var newpos = Vector2(clamp(camera_2d.position.x - rel.x, 0, maxposX), clamp(camera_2d.position.y - rel.y, maxposY.x, maxposY.y))
 	if (newpos.x != camera_2d.position.x):
@@ -95,7 +99,7 @@ func UpdateCameraPos(relativeMovement : Vector2):
 func GenerateMap() -> void:
 	#DECIDE ON PLECEMENT OF SPECIAL SPOTS
 	var SpecialSpots : Array[int] = []
-	for z in SpecialMapSpotTypes.size():
+	for z in SpecialTownTypes.size():
 		SpecialSpots.append(randi_range(5, MapSize - 1))
 	#DECIDE ON PLECEMENT OF STATIONS
 	var StationSpots : Array[int] = []
@@ -105,37 +109,37 @@ func GenerateMap() -> void:
 	#LOCATION OF PREVIUSLY PLACED MAP SPOT
 	var Prevpos : Vector2 = Vector2(250,250)
 	
-	#var line = Line2D.new()
-	#$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(line)
-	#$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.move_child(line, 0)
+	#var line = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/StationLine
 	
 	#SPAWN ON SPOT AND 1 ASTEROID FIELD FOR EACH VALUE OF MAPSIZE
 	for g in MapSize :
 		#SPAWN GENERIC MAP SPOT SCENE
-		var sc = SpotScene.instantiate() as MapSpot
-		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
+		var sc
+		
 		#CONNECT ALL RELEVANT SIGNALS TO IT
+		
+		
+		var AddingStation = false
+		#DECIDE ON TYPE
+		var type : PackedScene
+		
+		if (g == MapSize - 1):
+			type = FinalCity
+			#AddingStation = true
+		else :if (SpecialSpots.has(g)):
+			type = SpecialTownTypes[SpecialSpots.find(g)]
+		else : if (StationSpots.has(g)):
+			type = MinorCityType
+			#AddingStation = true
+		else:
+			type = TownTypes.pick_random()
+		#SET THE TYPE
+		#sc.SetSpotData(type)
+		sc = type.instantiate()
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
-		
-		#var AddingStation = false
-		#DECIDE ON TYPE
-		var type
-		
-		if (g == MapSize - 1):
-			type = FinalSpotType
-			#AddingStation = true
-		else :if (SpecialSpots.has(g)):
-			type = SpecialMapSpotTypes[SpecialSpots.find(g)] as MapSpotType
-		else : if (StationSpots.has(g)):
-			type = MinorStationSpotType as MapSpotType
-			#AddingStation = true
-		else:
-			type = MapSpotTypes.pick_random() as MapSpotType
-		#SET THE TYPE
-		sc.SetSpotData(type)
-		
+		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
 		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
 		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
@@ -150,28 +154,133 @@ func GenerateMap() -> void:
 		#if (AddingStation):
 			#line.add_point(pos)
 		#REPEAT PROCESS FOR ASTEROID FIELD
-		var asteroidscene = SpotScene.instantiate() as MapSpot
-		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(asteroidscene)
-		asteroidscene.connect("SpotAproached", Arrival)
-		asteroidscene.connect("SpotSearched", SearchLocation)
-		asteroidscene.connect("SpotAnalazyed", AnalyzeLocation)
-		asteroidscene.SetSpotData(CommetMapSpots.pick_random())
-
-		var ateroidpos = GetNextRandomPos(Prevpos, Distanceval)
-		while (HasClose(ateroidpos)):
-			ateroidpos = GetNextRandomPos(Prevpos, Distanceval)
-		asteroidscene.position = ateroidpos
-		SpotList.append(asteroidscene)
+		#var asteroidscene = SpotScene.instantiate() as MapSpot
+		#$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(asteroidscene)
+		#asteroidscene.connect("SpotAproached", Arrival)
+		#asteroidscene.connect("SpotSearched", SearchLocation)
+		#asteroidscene.connect("SpotAnalazyed", AnalyzeLocation)
+		#asteroidscene.SetSpotData(CommetMapSpots.pick_random())
+#
+		#var ateroidpos = GetNextRandomPos(Prevpos, Distanceval)
+		#while (HasClose(ateroidpos)):
+			#ateroidpos = GetNextRandomPos(Prevpos, Distanceval)
+		#asteroidscene.position = ateroidpos
+		#SpotList.append(asteroidscene)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
+	
+	var cities = get_tree().get_nodes_in_group("City Center")
+	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
+	var cityloc : Array[Vector2]
+	for g in cities:
+		cityloc.append($CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
+	
+	var lines = prim_mst_optimized(cityloc)
+	var mat = CanvasItemMaterial.new()
+	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+	for l in lines:
+		var lne = Line2D.new()
+		lne.default_color = Color(1,1,1,0.2)
+		lne.material = mat
+		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
+		for g in l:
+			lne.add_point(g)
+	#print(lines)
+		#var cit1 = g as MapSpot
+		#var ln = Line2D.new()
+		#g.add_child(ln)
+		#
+		#var mat = CanvasItemMaterial.new()
+		#mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+		#ln.material = mat
+		#
+		#ln.add_point(Vector2.ZERO)
+		#for z in cities:
+			#var cit = z as MapSpot
+			#if (z == g):
+				#continue
+			#if (z.global_position.distance_to(g.global_position) < 4000):
+				#ln.add_point(cit1.to_local(cit.global_position))
+func swap(arr: Array, i: int, j: int):
+	var tmp = arr[i]
+	arr[i] = arr[j]
+	arr[j] = tmp
+
+# Helper function: Push an element to the heap
+func heap_push(heap: Array, element: Array):
+	heap.append(element)
+	var i = heap.size() - 1
+	while i > 0:
+		var parent = (i - 1)
+		if heap[i][0] >= heap[parent][0]:
+			break
+		swap(heap, i, parent)
+		i = parent
+
+# Helper function: Pop an element from the heap
+func heap_pop(heap: Array) -> Array:
+	swap(heap, 0, heap.size() - 1)
+	var result = heap.pop_back()
+	var i = 0
+	while i < heap.size():
+		var left_child = 2 * i + 1
+		var right_child = 2 * i + 2
+
+		var smallest = i
+		if left_child < heap.size() and heap[left_child][0] < heap[smallest][0]:
+			smallest = left_child
+		if right_child < heap.size() and heap[right_child][0] < heap[smallest][0]:
+			smallest = right_child
 		
+		if smallest == i:
+			break
+		swap(heap, i, smallest)
+		i = smallest
+	
+	return result
+
+func prim_mst_optimized(cities: Array) -> Array:
+	var num_cities = cities.size()
+	if num_cities <= 1:
+		return []
+	
+	var connected = PackedInt32Array()
+	connected.append(0)  # Start with the first city connected
+	
+	var edge_min_heap = []
+	var mst_edges = []
+
+	# Add all edges from city 0 to the heap
+	for i in range(1, num_cities):
+		var distance = cities[0].distance_to(cities[i])
+		heap_push(edge_min_heap, [distance, 0, i])
+
+	while connected.size() < num_cities:
+		# Pop the smallest edge from the heap
+		var min_edge = heap_pop(edge_min_heap)
+		var dist = min_edge[0]
+		var u = min_edge[1]
+		var v = min_edge[2]
+
+		if not connected.has(v):
+			connected.append(v)
+			mst_edges.append([cities[u], cities[v]])
+
+			# Add all edges from this newly connected city to the heap
+			for j in range(num_cities):
+				if not connected.has(j):
+					var new_distance = cities[v].distance_to(cities[j])
+					heap_push(edge_min_heap, [new_distance, v, j])
+
+	return mst_edges
+	
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
-	return Vector2(randf_range(PrevPos.x, PrevPos.x + (800 * Distance)), randf_range(-800, +800))
+	return Vector2(randf_range(PrevPos.x, PrevPos.x + (800 * Distance)), randf_range(-2000, +2000))
 #TODO IMPROVE
 func HasClose(pos : Vector2) -> bool:
 	var b= false
 	for z in SpotList.size():
-		if (pos.distance_to(SpotList[z].position) < 50):
+		if (pos.distance_to(SpotList[z].position) < 800):
 			b = true
 			break
 	return b	
@@ -193,6 +302,11 @@ func Arrival(Spot : MapSpot)	-> void:
 			MAP_AsteroidBeltArrival.emit(120)
 		else:
 			MAP_AsteroidBeltArrival.emit(60)
+		GetPlayerShip().HaltShip()
+	if (Spot.Evnt != null):
+		var happeningui = HappeningUI.instantiate() as HappeningInstance
+		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
+		happeningui.PresentHappening(Spot.Evnt)
 		GetPlayerShip().HaltShip()
 		
 func StageFailed() -> void:
@@ -233,7 +347,7 @@ func SearchLocation(stage : MapSpot):
 #Save/Load///////////////////////////////////////////
 func GetSaveData() ->SaveData:
 	var dat = SaveData.new().duplicate()
-	dat.DataName = "MapSpots"
+	dat.DataName = "Towns"
 	var Datas : Array[Resource] = []
 	for g in SpotList.size():
 		if (SpotList[g] == null):
@@ -243,24 +357,27 @@ func GetSaveData() ->SaveData:
 	return dat
 func LoadSaveData(Data : Array[Resource]) -> void:
 	for g in Data.size():
-		var dat = Data[g] as MapSpotSaveData
-		var sc = SpotScene.instantiate() as MapSpot
+		var dat = Data[g] as TownSaveData
+		
+		var sc = load(dat.TownScene).instantiate() as Town
+		sc.LoadingData = true
 		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
 		#sc.connect("MapPressed", Arrival)
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
-		var type = dat.SpotType
-		sc.SetSpotData(type)
-		sc.Pos = dat.SpotLoc
+		#var type = dat.SpotType
+		#sc.SetSpotData(type)
+		
+		sc.LoadSaveData(dat)
 		SpotList.insert(g, sc)
-		if (dat.Seen):
-			sc.OnSpotSeen(false)
-		
-		sc.Visited = dat.Visited
-		
-		if (dat.Analyzed):
-			sc.OnSpotAnalyzed()
+		#if (dat.Seen):
+			#sc.OnSpotSeen(false)
+		#
+		#sc.Visited = dat.Visited
+		#
+		#if (dat.Analyzed):
+			#sc.OnSpotAnalyzed()
 
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
@@ -300,7 +417,7 @@ func _MAP_INPUT(event: InputEvent) -> void:
 #////////////////////////////
 func _HANDLE_ZOOM(zoomval : float):
 	var prevzoom = camera_2d.zoom
-	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.25,0.25), Vector2(2,2))
+	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.3,0.3), Vector2(3,3))
 	for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
 		g.visible = camera_2d.zoom < Vector2(1, 1)
 	for g in get_tree().get_nodes_in_group("MapLines"):

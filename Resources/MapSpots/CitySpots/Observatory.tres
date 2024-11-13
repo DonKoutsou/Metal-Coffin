@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=11 format=3 uid="uid://dsia5ebkwvf6p"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_gvacd"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_Names.gd" id="2_o4ed3"]
+[ext_resource type="Texture2D" uid="uid://b68abpq2k8t0e" path="res://Assets/observatory.png" id="2_uplcd"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_ps428"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_nfek2"]
+[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_ty6p5"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_mnl5k"]
+[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_dloeg"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_kv61i"]
+
+[sub_resource type="Resource" id="Resource_7m0k3"]
+script = ExtResource("2_o4ed3")
+PossibleNames = Array[String](["Aker Observatory", "Ankara Observatory", "Badlands Observatory", "Boswell Observatory", "Calais Observatory", "Custer Observatory", "Ellis Observatory", "Euclid Telescope", "Gemini Observatory", "Godlee Observatory", "Hobbs Observatory", "Hoober Observatory", "Insperity Observatory", "Jantar Observatory", "Lee Observatory"])
+DataName = ""
+
+[resource]
+script = ExtResource("10_kv61i")
+SpotK = 16
+MapIcon = ExtResource("2_uplcd")
+Scene = ExtResource("9_dloeg")
+PossibleDrops = Array[ExtResource("3_ps428")]([ExtResource("4_nfek2"), ExtResource("5_ty6p5"), ExtResource("6_mnl5k")])
+FullName = "Observatory"
+Description = "blah blah"
+CanLand = false
+HasAtmoshere = false
+VisibleOnStart = false
+DropAmmount = 1
+CustomData = Array[ExtResource("1_gvacd")]([SubResource("Resource_7m0k3")])

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://d13yx8yfnji63"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_rempu"]
+[ext_resource type="Texture2D" uid="uid://dhrvf4akuqgbb" path="res://Assets/nuclear-plant.png" id="2_6imlj"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_3anq6"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_der3o"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_sgpjx"]
+[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_dfhab"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_cghtq"]
+
+[resource]
+script = ExtResource("10_cghtq")
+SpotK = 14
+MapIcon = ExtResource("2_6imlj")
+Scene = ExtResource("9_dfhab")
+PossibleDrops = Array[ExtResource("3_3anq6")]([ExtResource("6_der3o"), ExtResource("8_sgpjx")])
+FullName = "Nuclear Power Plant"
+Description = "blah blah"
+CanLand = false
+HasAtmoshere = false
+VisibleOnStart = false
+DropAmmount = 1
+CustomData = Array[ExtResource("1_rempu")]([])

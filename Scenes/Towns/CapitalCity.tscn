@@ -1,0 +1,64 @@
+[gd_scene load_steps=15 format=3 uid="uid://cohc2ixfcnsjq"]
+
+[ext_resource type="Script" path="res://Scripts/Town.gd" id="1_6k08a"]
+[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_ihubk"]
+[ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/city.png" id="3_lvvcp"]
+[ext_resource type="Script" path="res://Scripts/CitySpot.gd" id="4_1dybe"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_vutws"]
+[ext_resource type="Resource" uid="uid://dyvpncg7tolc7" path="res://Resources/MapSpots/CitySpots/CapitalCityCenter.tres" id="6_ypttb"]
+[ext_resource type="Resource" uid="uid://dsrgr23xe4wc2" path="res://Resources/MapSpots/CitySpots/Hospital.tres" id="7_eq2pt"]
+[ext_resource type="Resource" uid="uid://blkdxjlya62h4" path="res://Resources/MapSpots/CitySpots/Oil_Rig.tres" id="8_gg50p"]
+[ext_resource type="Resource" uid="uid://d13yx8yfnji63" path="res://Resources/MapSpots/CitySpots/PowerPlant.tres" id="9_l6x53"]
+[ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Village.tres" id="10_d72em"]
+[ext_resource type="Resource" uid="uid://cis331ptb82pb" path="res://Resources/MapSpots/CitySpots/Airport.tres" id="11_lmopi"]
+[ext_resource type="Resource" uid="uid://dno0yq1eqewjt" path="res://Resources/MapSpots/CitySpots/Military_Base.tres" id="12_7msq2"]
+[ext_resource type="Resource" uid="uid://dsia5ebkwvf6p" path="res://Resources/MapSpots/CitySpots/Observatory.tres" id="13_5ipkk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0gm80"]
+
+[node name="Town" type="Node2D"]
+position = Vector2(608, 338)
+script = ExtResource("1_6k08a")
+SpotScene = ExtResource("2_ihubk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_0gm80")
+scale = Vector2(2, 2)
+texture = ExtResource("3_lvvcp")
+
+[node name="CitySpots" type="Node2D" parent="."]
+
+[node name="CitySpot1" type="Node2D" parent="CitySpots"]
+position = Vector2(-148, 42)
+script = ExtResource("4_1dybe")
+MapSpotTypes = Array[ExtResource("5_vutws")]([ExtResource("6_ypttb")])
+
+[node name="CitySpot2" type="Node2D" parent="CitySpots"]
+position = Vector2(-232, -80)
+script = ExtResource("4_1dybe")
+MapSpotTypes = Array[ExtResource("5_vutws")]([ExtResource("7_eq2pt")])
+
+[node name="CitySpot3" type="Node2D" parent="CitySpots"]
+position = Vector2(-412, -399)
+script = ExtResource("4_1dybe")
+MapSpotTypes = Array[ExtResource("5_vutws")]([ExtResource("8_gg50p"), ExtResource("9_l6x53"), ExtResource("10_d72em"), ExtResource("11_lmopi"), ExtResource("12_7msq2"), ExtResource("13_5ipkk")])
+
+[node name="CitySpot4" type="Node2D" parent="CitySpots"]
+position = Vector2(339, -283)
+script = ExtResource("4_1dybe")
+MapSpotTypes = Array[ExtResource("5_vutws")]([ExtResource("8_gg50p"), ExtResource("9_l6x53"), ExtResource("10_d72em"), ExtResource("11_lmopi"), ExtResource("12_7msq2"), ExtResource("13_5ipkk")])
+
+[node name="CitySpot5" type="Node2D" parent="CitySpots"]
+position = Vector2(273, -32)
+script = ExtResource("4_1dybe")
+MapSpotTypes = Array[ExtResource("5_vutws")]([ExtResource("8_gg50p"), ExtResource("9_l6x53"), ExtResource("10_d72em"), ExtResource("11_lmopi"), ExtResource("12_7msq2"), ExtResource("13_5ipkk")])
+
+[node name="CitySpot6" type="Node2D" parent="CitySpots"]
+position = Vector2(65, 227)
+script = ExtResource("4_1dybe")
+MapSpotTypes = Array[ExtResource("5_vutws")]([ExtResource("8_gg50p"), ExtResource("9_l6x53"), ExtResource("10_d72em"), ExtResource("11_lmopi"), ExtResource("12_7msq2"), ExtResource("13_5ipkk")])
+
+[node name="CitySpot7" type="Node2D" parent="CitySpots"]
+position = Vector2(107, 383)
+script = ExtResource("4_1dybe")
+MapSpotTypes = Array[ExtResource("5_vutws")]([ExtResource("8_gg50p"), ExtResource("9_l6x53"), ExtResource("10_d72em"), ExtResource("11_lmopi"), ExtResource("12_7msq2"), ExtResource("13_5ipkk")])

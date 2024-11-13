@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ppxrnerwnufn"]
+[gd_scene load_steps=9 format=3 uid="uid://ppxrnerwnufn"]
 
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_d4uo5"]
 [ext_resource type="Script" path="res://Scripts/analyzed_notif.gd" id="1_pb8l4"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_o448t"]
 [ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="3_pnijm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
+light_mode = 1
 
 [sub_resource type="Animation" id="Animation_b3nvo"]
 length = 0.001
@@ -92,6 +95,7 @@ _data = {
 }
 
 [node name="Control" type="Control"]
+material = SubResource("CanvasItemMaterial_k1nir")
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
@@ -101,6 +105,7 @@ mouse_filter = 2
 script = ExtResource("1_pb8l4")
 
 [node name="Line2D" type="Line2D" parent="."]
+use_parent_material = true
 position = Vector2(0, 87)
 points = PackedVector2Array(152, -60, 42, -60, 0, 0)
 width = 2.0
@@ -110,6 +115,7 @@ end_cap_mode = 2
 
 [node name="Label" type="Label" parent="."]
 modulate = Color(0.0486369, 0.645335, 0.0400367, 1)
+use_parent_material = true
 layout_mode = 0
 offset_left = 142.0
 offset_top = 13.0

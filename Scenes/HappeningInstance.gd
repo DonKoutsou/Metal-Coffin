@@ -5,7 +5,9 @@ class_name HappeningInstance
 var Hp : Happening
 
 func _ready() -> void:
-	PresentHappening(load("res://Resources/Happenings/TestHappening.tres"))
+	set_physics_process(false)
+	$VBoxContainer/ProgressBar.visible = false
+	#PresentHappening(load("res://Resources/Happenings/TestHappening.tres"))
 
 func PresentHappening(Hap : Happening):
 	Hp = Hap
@@ -22,12 +24,26 @@ func PresentHappening(Hap : Happening):
 
 func _on_option_1_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[0].OptionResault()
+	OnActionSelected()
 
 func _on_option_2_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[1].OptionResault()
-
+	OnActionSelected()
 func _on_option_3_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[2].OptionResault()
-
+	OnActionSelected()
 func _on_option_4_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[3].OptionResault()
+	OnActionSelected()
+func OnActionSelected():
+	$VBoxContainer/ProgressBar.visible = true
+	$VBoxContainer/HBoxContainer.visible = false
+	$Timer.start()
+	set_physics_process(true)
+	
+func _physics_process(delta: float) -> void:
+	$VBoxContainer/ProgressBar.value = $Timer.time_left
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

@@ -17,9 +17,11 @@ var Seen = false
 var Analyzed = false
 var CurrentlyVisiting = false
 var Evnt : Happening
+var SpotName : String
 
 func _ready() -> void:
 	visible = Seen
+	global_rotation = 0
 	land_button_container.visible = false
 	if (Pos != Vector2.ZERO):
 		position = Pos
@@ -32,6 +34,8 @@ func GetSaveData() -> Resource:
 	datas.Seen = Seen
 	datas.Visited = Visited
 	datas.Analyzed = Analyzed
+	datas.SpotName = SpotName
+	datas.Evnt = Evnt
 	return datas
 
 func SetSpotData(Data : MapSpotType) -> void:
@@ -41,15 +45,26 @@ func SetSpotData(Data : MapSpotType) -> void:
 	else :if (Data.GetEnumString() == "STATION"):
 		$LandButtonContainer/LandButton.text = "Dock"
 	else :if (!Data.CanLand):
-		$LandButtonContainer/LandButton.text = "Harvest"
+		$LandButtonContainer/LandButton.text = "Search"
 		
 	if (SpotType.VisibleOnStart):
 		OnSpotSeen(false)
 		OnSpotAnalyzed()
 	
-	add_to_group(Data.GetEnumString())
+	if (Data.CustomData.size() > 0):
+		for g in Data.CustomData:
+			if (g is MapSpotCustomData_CompleteInfo):
+				var IDs = g as MapSpotCustomData_CompleteInfo
+				if (IDs.PossibleIds.size() == 0):
+					continue
+				var ID = IDs.PossibleIds.pick_random() as MapSpotCompleteInfo
+				SpotName = ID.SpotName
+				Evnt = ID.Event
+				IDs.PossibleIds.erase(ID)
+				
+	add_to_group(Data.FullName)
 func GetSpotName() -> String:
-	return SpotType.FullName if Analyzed else "?"
+	return SpotName if Analyzed else "?"
 func GetSpotDescriptio() -> String:
 	return SpotType.Description if Analyzed else "?"
 func CanLand() -> bool:
@@ -57,7 +72,7 @@ func CanLand() -> bool:
 func HasAtmosphere() -> bool:
 	return SpotType.HasAtmoshere if Visited or Analyzed else false
 func GetPossibleDrops() -> Array:
-	return SpotType.PossibleDrops if Visited or Analyzed else []
+	return SpotType.PossibleDrops if Analyzed else []
 #//////////////////////////////////////////////////////////////////
 #todo find better way for dialogue from station
 func OnSpotVisited() -> void:
@@ -91,7 +106,7 @@ func OnSpotSeen(PlayAnim : bool = true) -> void:
 		if (!Seen):
 			animation_player.play("SpotFound")
 			PlaySound()
-	$AnalyzeButton.icon = SpotType.MapIcon
+	$TextureRect.texture = SpotType.MapIcon
 	Seen = true
 #Called when drone visits a mapspot
 func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
@@ -102,7 +117,7 @@ func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
 		if (!Seen):
 			animation_player.play("SpotFound")
 			PlaySound()
-	$AnalyzeButton.icon = SpotType.MapIcon
+	$TextureRect.texture = SpotType.MapIcon
 	Seen = true
 func OnSpotVisitedByDrone() -> void:
 	visible = true

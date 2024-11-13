@@ -198,6 +198,7 @@ grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
 texture_click_mask = ExtResource("5_vvi5k")
+stretch_mode = 0
 
 [node name="Sprite2D" type="TextureRect" parent="Control/Node2D"]
 texture_filter = 6

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=34 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="2_2w4bb"]
@@ -19,26 +19,52 @@
 [ext_resource type="AudioStream" uid="uid://dxj88bvyii2hx" path="res://Assets/VoiceLines/radio_go2_01.wav" id="16_01x11"]
 [ext_resource type="AudioStream" uid="uid://cj8t5fkujexdw" path="res://Assets/VoiceLines/radio_go3_01.wav" id="17_louuf"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="18_elnvx"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="20_8n1nj"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="20_hn8tc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_gn3pm"]
+_data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rlrpj"]
+curve = SubResource("Curve_gn3pm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qn4ww"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 1.244
+initial_velocity_max = 1.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 308.99
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.05
+scale_curve = SubResource("CurveTexture_rlrpj")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4syn2"]
 shader = ExtResource("2_2w4bb")
-shader_parameter/line_color = Color(0.252517, 0.622353, 0.846633, 1)
+shader_parameter/line_color = Color(0.253, 0.622, 0.847, 1)
 shader_parameter/range_lines = 1.0
 shader_parameter/sector_lines = 0.0
 shader_parameter/line_width = 0.0011
 shader_parameter/beam_angle = 0.2
 shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.5
+shader_parameter/trail_width = 0.1
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
 shader_parameter/scale_factor = 0.053
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
 shader = ExtResource("2_2w4bb")
-shader_parameter/line_color = Color(0.781105, 0.651497, 0, 1)
+shader_parameter/line_color = Color(0.762818, 0.658854, 0.0822073, 1)
 shader_parameter/range_lines = 1.0
 shader_parameter/sector_lines = 1.0
 shader_parameter/line_width = 0.002
@@ -57,28 +83,19 @@ radius = 100.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edf5x"]
 shader = ExtResource("2_2w4bb")
-shader_parameter/line_color = Color(0.0486369, 0.645335, 0.0400367, 1)
+shader_parameter/line_color = Color(0.319048, 0.619537, 0.0555898, 1)
 shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 1.0
+shader_parameter/sector_lines = 0.0
 shader_parameter/line_width = 0.002
 shader_parameter/beam_angle = 0.3
 shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.5
+shader_parameter/trail_width = 0.1
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
 shader_parameter/scale_factor = 0.062
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
 radius = 6.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qn4ww"]
-particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-spread = 7.178
-initial_velocity_max = 70.34
-gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73pil"]
 draw_center = false
@@ -93,9 +110,17 @@ corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [node name="PlayerShip" type="Node2D" groups=["Ships"]]
+material = SubResource("CanvasItemMaterial_vppi8")
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-7, 0)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_qn4ww")
+texture = ExtResource("20_8n1nj")
+lifetime = 20.0
 
 [node name="Radar" type="Area2D" parent="."]
 rotation = -0.282025
@@ -121,26 +146,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="Label2" type="Label" parent="Radar/Radar_Range"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 42.7451
-offset_right = 127.745
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_vt3yq")
-theme_override_colors/font_color = Color(0.252517, 0.622353, 0.846633, 1)
-theme_override_fonts/font = ExtResource("3_c5u4x")
-theme_override_font_sizes/font_size = 14
-text = "Radar Range"
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="Fuel_Range" type="ColorRect" parent="." groups=["MapLines"]]
 material = SubResource("ShaderMaterial_1i26u")
 anchors_preset = 8
@@ -158,6 +163,7 @@ size_flags_horizontal = 4
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Fuel_Range"]
+material = SubResource("CanvasItemMaterial_vppi8")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,7 +176,7 @@ offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_vt3yq")
-theme_override_colors/font_color = Color(0.781105, 0.651497, 0, 1)
+theme_override_colors/font_color = Color(0.762818, 0.658854, 0.0822073, 1)
 theme_override_fonts/font = ExtResource("3_c5u4x")
 theme_override_font_sizes/font_size = 14
 text = "Fuel Range"
@@ -196,8 +202,7 @@ shape = SubResource("CircleShape2D_mqnhq")
 
 [node name="Analyzer_Range" type="ColorRect" parent="Analyzer" groups=["MapLines"]]
 material = SubResource("ShaderMaterial_edf5x")
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
@@ -209,27 +214,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
-
-[node name="Label2" type="Label" parent="Analyzer/Analyzer_Range"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 514.417
-offset_top = -0.53125
-offset_right = 617.417
-offset_bottom = 22.4688
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_vt3yq")
-theme_override_colors/font_color = Color(0.0486369, 0.645335, 0.0400367, 1)
-theme_override_fonts/font = ExtResource("3_c5u4x")
-theme_override_font_sizes/font_size = 14
-text = "Analyzer Range"
-horizontal_alignment = 2
-vertical_alignment = 1
 
 [node name="DroneDock" type="Area2D" parent="."]
 collision_layer = 8
@@ -266,6 +250,7 @@ position = Vector2(-90, -90)
 position = Vector2(-90, 90)
 
 [node name="Line2D" type="Line2D" parent="DroneDock"]
+material = SubResource("CanvasItemMaterial_vppi8")
 points = PackedVector2Array(0, 0, 10, 0)
 width = 8.0
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
@@ -274,7 +259,7 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("18_elnvx")
 
 [node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="PlayerShipSpr"]
@@ -288,16 +273,10 @@ volume_db = -10.0
 pitch_scale = 0.01
 bus = &"MapSounds"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(-7, 0)
-emitting = false
-amount = 16
-process_material = SubResource("ParticleProcessMaterial_qn4ww")
-lifetime = 2.0
-
 [node name="Notifications" type="Node2D" parent="."]
 
 [node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
+use_parent_material = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -311,6 +290,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_73pil")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(7.97656, 7.97656)
+energy = 0.25
+blend_mode = 2
+shadow_color = Color(0.919342, 0, 0.452291, 0)
+texture = ExtResource("20_hn8tc")
+height = 500.0
 
 [connection signal="screen_entered" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
 [connection signal="screen_exited" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]

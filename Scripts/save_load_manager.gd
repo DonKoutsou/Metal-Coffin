@@ -36,7 +36,7 @@ func Load(world : World) ->bool:
 	var Mapz = world.GetMap() as Map
 	var Inv = world.GetInventory() as Inventory
 	var DiagHolder = world.GetDialogueProgress()
-	var mapdata : Array[Resource] = (sav.GetData("MapSpots") as SaveData).Datas
+	var mapdata : Array[Resource] = (sav.GetData("Towns") as SaveData).Datas
 	var InvData : Array[Resource] = (sav.GetData("InventoryContents") as SaveData).Datas
 	var StatData : Resource = sav.GetData("Stats")
 	var ShipDat : BaseShip = (sav.GetData("Ship") as SaveData).Datas[0]

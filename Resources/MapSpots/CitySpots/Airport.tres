@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://cis331ptb82pb"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_tujyv"]
+[ext_resource type="Texture2D" uid="uid://oi7dcafqr3rt" path="res://Assets/control-tower.png" id="2_5pdsa"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_1khm3"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_b4kvc"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_1rjhy"]
+[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_s2xae"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_20h4t"]
+
+[resource]
+script = ExtResource("10_20h4t")
+SpotK = 15
+MapIcon = ExtResource("2_5pdsa")
+Scene = ExtResource("9_s2xae")
+PossibleDrops = Array[ExtResource("3_1khm3")]([ExtResource("4_b4kvc"), ExtResource("6_1rjhy")])
+FullName = "Airport"
+Description = "blah blah"
+CanLand = false
+HasAtmoshere = false
+VisibleOnStart = false
+DropAmmount = 1
+CustomData = Array[ExtResource("1_tujyv")]([])

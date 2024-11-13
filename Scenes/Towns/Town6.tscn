@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://cw0fmxei1f6xx"]
+
+[ext_resource type="Script" path="res://Scripts/Town.gd" id="1_v3yde"]
+[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_nnxyi"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="3_g4ulr"]
+[ext_resource type="Script" path="res://Scripts/CitySpot.gd" id="4_r8ttb"]
+[ext_resource type="Texture2D" uid="uid://fh8lcmlyffxn" path="res://Assets/city7.png" id="5_xc7kn"]
+[ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Village.tres" id="6_jus8y"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ve7mp"]
+blend_mode = 1
+
+[node name="Town" type="Node2D"]
+position = Vector2(608, 338)
+script = ExtResource("1_v3yde")
+SpotScene = ExtResource("2_nnxyi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_ve7mp")
+scale = Vector2(2, 2)
+texture = ExtResource("5_xc7kn")
+
+[node name="CitySpots" type="Node2D" parent="."]
+
+[node name="CitySpot1" type="Node2D" parent="CitySpots"]
+position = Vector2(-2, -19)
+script = ExtResource("4_r8ttb")
+MapSpotTypes = Array[ExtResource("3_g4ulr")]([ExtResource("6_jus8y")])

@@ -52,7 +52,7 @@ func SetFuelShaderRange(val : float):
 func UpdateVizRange(rang : float):
 	var RadarRangeIndicator = $Radar/Radar_Range
 	var RadarRangeCollisionShape = $Radar/CollisionShape2D
-	var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
+	#var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
 	var RadarMat = RadarRangeIndicator.material as ShaderMaterial
 	RadarMat.set_shader_parameter("scale_factor", rang/10000)
 	#scalling collision
@@ -63,24 +63,24 @@ func UpdateVizRange(rang : float):
 	#RadarRangeIndicator.position = Vector2(-(rang), -(rang))
 	
 	#dissable descriptor when indicator gets to small
-	RadarRangeIndicatorDescriptor.position.x = 9900 + rang
-	RadarRangeIndicatorDescriptor.visible = rang > 100
+	#RadarRangeIndicatorDescriptor.position.x = 9900 + rang
+	#RadarRangeIndicatorDescriptor.visible = rang > 100
 func SetRadarShaderRange(val : float):
 	var RadarMat = $Radar/Radar_Range.material as ShaderMaterial
 	RadarMat.set_shader_parameter("scale_factor", val)
 func UpdateAnalyzerRange(rang : float):
 	var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
 	var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
-	var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
+	#var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
 	var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
 	#CHANGING SIZE OF RADAR
 	AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
 	#SCALLING COLLISION
 	(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
 	
-	AnalyzerRangeIndicatorDescriptor.position.x = 9900 + rang
+	#AnalyzerRangeIndicatorDescriptor.position.x = 9900 + rang
 	#DISSABLE DESCRIPTOR WHEN INDICATOR GETS TO SMALL
-	AnalyzerRangeIndicatorDescriptor.visible = rang > 100
+	#AnalyzerRangeIndicatorDescriptor.visible = rang > 100
 func SetAnalyzerShaderRange(val : float):
 	var AnalyzerMat = $Analyzer/Analyzer_Range.material as ShaderMaterial
 	AnalyzerMat.set_shader_parameter("scale_factor", val)
