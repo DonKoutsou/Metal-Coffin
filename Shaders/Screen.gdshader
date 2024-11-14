@@ -36,7 +36,7 @@ void fragment(  )
 	col *= vec3(pow(vig,0.8));
 
 	col *= line_color.rgb;
-	col *= 2.8;
+	col *= 15.0;
 
 	float scans = clamp( 0.35+0.35*sin(3.5*TIME+uv.y*iResolution.y*2.5), 0.0, 1.0);
 

@@ -54,6 +54,7 @@ size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
 theme_override_font_sizes/font_size = 32
 text = "Option 1"
+expand_icon = true
 
 [node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

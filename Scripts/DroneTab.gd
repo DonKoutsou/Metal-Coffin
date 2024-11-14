@@ -8,17 +8,27 @@ var Armed = false
 
 var DockedDrones : Array[Drone] = []
 
+var CurrentlySelectedDrone : Drone
+
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", DroneDocked)
 	DroneDockEventH.connect("DroneUndocked", DroneUnDocked)
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
+	visible = false
 
 func DroneDocked(Dr : Drone) -> void:
 	DockedDrones.append(Dr)
+	visible = DockedDrones.size() > 0
+	
 
 func DroneUnDocked(Dr : Drone) -> void:
+	if (Dr == CurrentlySelectedDrone):
+		CurrentlySelectedDrone = null
+		UpdateCrewSelect()
+	
 	DockedDrones.erase(Dr)
+	visible = DockedDrones.size() > 0
 
 func _on_deploy_drone_button_pressed() -> void:
 	DroneDockEventH.OnDroneLaunched()
@@ -59,7 +69,8 @@ func _on_recon_dron_button_pressed() -> void:
 func _on_toggle_drone_tab_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 	$AnimationPlayer.play("Show")
-
+	UpdateCrewSelect()
+		
 var SteeringDir : float = 0.0
 #signal SteeringDitChanged(NewValue : float)
 #signal MouseEntered()
@@ -97,9 +108,12 @@ func UpdateRange(RelativeRot : Vector2, EvPos : Vector2):
 		$Control/Node2D/AudioStreamPlayer.playing = true
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/PanelContainer/VBoxContainer/Label2.text = var_to_str(roundi(RangeDir / 2))
 func UpdateDroneRange(Rang : float):
-	RangeDir = clamp(RangeDir + Rang, 0, 100)
-	DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
-	$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 2))
+	if (Armed):
+		RangeDir = clamp(RangeDir + Rang, 0, 100)
+		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
+		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 2))
+	else:
+		ProgressCrewSelect()
 	
 func _on_area_2d_input_event(event: InputEvent) -> void:
 	if (event is InputEventScreenDrag):
@@ -107,12 +121,37 @@ func _on_area_2d_input_event(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		UpdateSteer(event.relative, event.position)
 		
+func UpdateCrewSelect(Select : int = 0):
+	if (DockedDrones.size() > Select):
+		CurrentlySelectedDrone = DockedDrones[Select]
+		$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
+	else:
+		$Control/TextureRect/Label2.text = "No Drones"
+func ProgressCrewSelect():
+	if (DockedDrones.size() == 0):
+		$Control/TextureRect/Label2.text = "No Drones"
+		return
+	if (CurrentlySelectedDrone == null):
+		CurrentlySelectedDrone = DockedDrones[0]
+		return
+		
+	var i = DockedDrones.find(CurrentlySelectedDrone) + 1
+	if (i >= DockedDrones.size()):
+		i = 0
+	
+	CurrentlySelectedDrone = DockedDrones[i]
+	$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
 func On_Drone_Range_Input(event: InputEvent) -> void:
 	if (event is InputEventScreenDrag):
-		UpdateRange(event.relative, event.position)
+		if (Armed):
+			UpdateRange(event.relative, event.position)
+		else:
+			ProgressCrewSelect()
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		UpdateRange(event.relative, event.position)
-		
+		if (Armed):
+			UpdateRange(event.relative, event.position)
+		else:
+			ProgressCrewSelect()
 func _on_turn_off_button_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_STOP
 	if (Armed):

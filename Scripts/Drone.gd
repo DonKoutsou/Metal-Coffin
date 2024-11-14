@@ -3,6 +3,11 @@ extends Node2D
 class_name Drone
 
 @export var DroneNotifScene : PackedScene
+@export var Speed : float = 0.5
+@export var RadarRange : float = 0
+@export var AnalyzeRange : float = 0
+@export var Cpt : Captain
+@export var InventorySpace : int = 1
 
 var CommingBack = false
 var Docked = true
@@ -14,13 +19,41 @@ var StoredItem : Array[Item] = []
 var Paused = false
 
 func  _ready() -> void:
+	$Node2D.position.x = Speed
 	set_physics_process(false)
 	$Radar.monitoring = false
 	$Line2D.visible = false
-
+	UpdateVizRange(RadarRange)
+	UpdateAnalyzerRange(AnalyzeRange)
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
+	
+func UpdateVizRange(rang : float):
+	if (rang == 0):
+		$Radar2.queue_free()
+	var RadarRangeIndicator = $Radar2/Radar_Range
+	var RadarRangeCollisionShape = $Radar2/CollisionShape2D
+	#var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
+	var RadarMat = RadarRangeIndicator.material as ShaderMaterial
+	RadarMat.set_shader_parameter("scale_factor", rang/10000)
+	#scalling collision
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
+	$PointLight2D.texture_scale = rang / 600
+	$Radar2/Radar_Range.visible = false
+	
+func UpdateAnalyzerRange(rang : float):
+	if (rang == 0):
+		$Analyzer.queue_free()
+	var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
+	var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
+	#var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
+	var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
+	#CHANGING SIZE OF RADAR
+	AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
+	#SCALLING COLLISION
+	(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
+	AnalyzerRangeIndicator.visible = false
 	
 func EnableDrone():
 	Docked = false
@@ -28,6 +61,12 @@ func EnableDrone():
 	$Radar.monitoring = true
 	$Line2D.visible = true
 	$AudioStreamPlayer2D.play()
+	var rad = get_node_or_null("Radar2/Radar_Range")
+	if (rad != null):
+		rad.visible = true
+	var an = get_node_or_null("Analyzer/Analyzer_Range")
+	if (an != null):
+		an.visible = true
 	
 func _physics_process(_delta: float) -> void:
 	if (Paused):
@@ -72,6 +111,7 @@ func updatedronecourse(interception_point: Vector2):
 func Notify(NotificationText : String)-> void:
 	var notif = DroneNotifScene.instantiate() as DroneNotif
 	notif.SetNotifText(NotificationText)
+	notif.EntityToFollow = self
 	add_child(notif)
 
 func _on_radar_area_entered(area: Area2D) -> void:
@@ -82,7 +122,8 @@ func _on_radar_area_entered(area: Area2D) -> void:
 		if (spot.CurrentlyVisiting):
 			return
 		if (spot.SpotType.FullName != "Black Whole"):
-			StoredItem = spot.SpotType.GetSpotDrop()
+			for g in InventorySpace:
+				StoredItem = spot.SpotType.GetSpotDrop()
 		rotation = 0.0
 		CommingBack = true
 		Docked = false
@@ -102,12 +143,17 @@ func _on_radar_area_entered(area: Area2D) -> void:
 		StoredItem.clear()
 		$AudioStreamPlayer2D.stop()
 		set_physics_process(false)
+		var rad = get_node_or_null("Radar2/Radar_Range")
+		if (rad != null):
+			rad.visible = false
+		var an = get_node_or_null("Analyzer/Analyzer_Range")
+		if (an != null):
+			an.visible = false
 		
 func DissableMonitoring():
 	$Radar.monitoring = false
 
-
-func _on_radar_2_area_entered(area: Area2D) -> void:
+func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
 		plship.GetDroneDock().PlayReturnSound()

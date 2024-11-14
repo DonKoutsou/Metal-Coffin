@@ -17,7 +17,7 @@ class_name Map
 @export var HappeningUI : PackedScene
 
 @onready var thrust_slider: ThrustSlider = $CanvasLayer/UIMaster/ThrustSlider
-@onready var camera_2d: Camera2D = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D
+@onready var camera_2d: ShipCamera = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera
 
 signal MAP_AsteroidBeltArrival(Size : int)
 signal MAP_StageSearched(Spt : MapSpotType)
@@ -59,7 +59,7 @@ func ToggleUIForIntro(t : bool):
 	GetPlayerShip().ToggleUI(t)
 	$CanvasLayer/UIMaster/ThrustSlider.visible = t
 	$CanvasLayer/UIMaster/SteeringWheel.visible = t
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite/ArrowSprite2.visible = t
+	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = t
 func ShowStation():
 	var tw = create_tween()
 	var stations = get_tree().get_nodes_in_group("Capital City Center")
@@ -119,7 +119,7 @@ func GenerateMap() -> void:
 		#CONNECT ALL RELEVANT SIGNALS TO IT
 		
 		
-		var AddingStation = false
+		#var AddingStation = false
 		#DECIDE ON TYPE
 		var type : PackedScene
 		
@@ -169,22 +169,7 @@ func GenerateMap() -> void:
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 	
-	var cities = get_tree().get_nodes_in_group("City Center")
-	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
-	var cityloc : Array[Vector2]
-	for g in cities:
-		cityloc.append($CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
-	
-	var lines = prim_mst_optimized(cityloc)
-	var mat = CanvasItemMaterial.new()
-	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
-	for l in lines:
-		var lne = Line2D.new()
-		lne.default_color = Color(1,1,1,0.2)
-		lne.material = mat
-		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
-		for g in l:
-			lne.add_point(g)
+	DrawCityLines()
 	#print(lines)
 		#var cit1 = g as MapSpot
 		#var ln = Line2D.new()
@@ -314,7 +299,23 @@ func StageFailed() -> void:
 	set_process(true)
 	set_process_input(true)
 	#Travelling = false
+func DrawCityLines():
+	var cities = get_tree().get_nodes_in_group("City Center")
+	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
+	var cityloc : Array[Vector2]
+	for g in cities:
+		cityloc.append($CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
 	
+	var lines = prim_mst_optimized(cityloc)
+	var mat = CanvasItemMaterial.new()
+	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+	for l in lines:
+		var lne = Line2D.new()
+		lne.default_color = Color(1,1,1,0.2)
+		lne.material = mat
+		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
+		for g in l:
+			lne.add_point(g)
 #func DepartForLocation(stage :MapSpot) -> void:
 #	if (Travelling):
 #		return
@@ -378,6 +379,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		#
 		#if (dat.Analyzed):
 			#sc.OnSpotAnalyzed()
+	call_deferred("DrawCityLines")
 
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
@@ -452,11 +454,11 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 #//////////////////////////////////////////////////////////
 #ARROW FOR LOCATING PLAYER SHIP
 func _process(_delta: float) -> void:
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.look_at(GetPlayerShip().global_position)
+	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.look_at(GetPlayerShip().global_position)
 func PlayerEnteredScreen() -> void:
 	set_process(false)
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = false
+	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = false
 func PlayerExitedScreen() -> void:
 	set_process(true)
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Camera2D/ArrowSprite.visible = true
+	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
 #//////////////////////////////////////////////////////////

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Captain" load_steps=3 format=3 uid="uid://b1e5ovklwmp7v"]
+
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_phe2p"]
+[ext_resource type="Texture2D" uid="uid://cjg61awbfrku4" path="res://Assets/CaptainPortraits/Captain1.png" id="1_rabqn"]
+
+[resource]
+script = ExtResource("1_phe2p")
+CaptainName = "George"
+CaptainBio = "Shithead"
+CaptainPortrait = ExtResource("1_rabqn")

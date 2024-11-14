@@ -4,7 +4,7 @@ class_name UIStat
 @export var FuelTex : Texture
 @export var HullTex : Texture
 @export var HPTex : Texture
-@export var OxygenTex : Texture
+#@export var OxygenTex : Texture
 
 var AutoRefill = true
 
@@ -53,8 +53,8 @@ func _enter_tree() -> void:
 	if (Stat == "HP"):
 		$Control/TextureRect.texture = HPTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.229, 0.48, 0.376)
-	if (Stat == "OXYGEN"):
-		$Control/TextureRect.texture = OxygenTex
+	#if (Stat == "OXYGEN"):
+		#$Control/TextureRect.texture = OxygenTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.371, 0.411, 0.64)
 	if (Stat == "HULL"):
 		$Control/TextureRect.texture = HullTex

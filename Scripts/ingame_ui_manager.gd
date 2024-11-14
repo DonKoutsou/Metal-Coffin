@@ -36,3 +36,7 @@ func CallbackDiag (Diags : Array[String], Callback : Callable, StopInput : bool 
 
 func ToggleInventoryButton(t : bool):
 	$VBoxContainer/HBoxContainer/Panel/InventoryButton.disabled = !t
+
+#func CameraZoomChanged(NewZoom : float):
+	#var scalables = get_tree().get_nodes_in_group("Scalables")
+	

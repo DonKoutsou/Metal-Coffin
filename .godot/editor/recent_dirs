@@ -1,8 +1,11 @@
 E:/Godot_Project/TestAndroidExport
-res://Resources/Happenings
-res://Scripts
-res://Scenes/Towns
 res://Scenes
+res://Resources/Cities
+res://Scenes/Drones
+res://Resources/Captains
+res://Scripts
+res://Resources/Happenings
+res://Scenes/Towns
 res://Assets/Items
 res://Resources
 res://Resources/MapSpots/StationInfos
@@ -17,6 +20,3 @@ res://Resources/Items
 res://Assets/Rocks
 res://Resources/MapSpots
 C:/Users/Admin/Downloads/openjdk-23.0.1_windows-x64_bin/jdk-23.0.1/bin
-C:/Users/Admin/AppData/Roaming/Godot/keystores
-C:/Users/Admin/AppData/Local/Android/Sdk
-C:/Program Files/Android/Android Studio/plugins

@@ -100,7 +100,8 @@ clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_top = -108.0
-offset_bottom = -18.0
+offset_bottom = -35.0
+pivot_offset = Vector2(0, 73)
 mouse_filter = 2
 script = ExtResource("1_pb8l4")
 

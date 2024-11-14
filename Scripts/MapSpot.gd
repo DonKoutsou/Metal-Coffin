@@ -140,14 +140,15 @@ func PlaySound():
 	sound.play()
 	
 func AreaEntered(area: Area2D):
-	if (area.get_parent() is PlayerShip):
+	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		if (area.get_collision_layer_value(1)):
 			if (!Seen):
 				OnSpotSeen()
 		else: if (area.get_collision_layer_value(2)):
 			if (!Analyzed):
-				var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate()
+				var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate() as AnalyzeNotif
 				add_child(notif)
+				notif.EntityToFollow = self
 				animation_player.play("SpotAnalyzed")
 				PlaySound()
 			OnSpotAnalyzed()

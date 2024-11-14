@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=16 format=3 uid="uid://dyvpncg7tolc7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=15 format=3 uid="uid://dyvpncg7tolc7"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_qkgba"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_khihf"]
 [ext_resource type="Texture2D" uid="uid://c33retp6uur1y" path="res://Assets/modern-city.png" id="2_x2sra"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_fnfii"]
-[ext_resource type="Resource" uid="uid://bi5laknt8ktr6" path="res://Resources/Happenings/Robbery.tres" id="3_l6m2o"]
+[ext_resource type="Resource" uid="uid://dijsq004n7ouw" path="res://Resources/Happenings/CrewRecruitHappening2.tres" id="3_jaugf"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_1jm82"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_xevlw"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_fpar0"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_82ny1"]
-[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="7_kr31j"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_2bkel"]
 [ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_xfgoe"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_jgsae"]
@@ -17,11 +16,11 @@
 [sub_resource type="Resource" id="Resource_gcm1y"]
 script = ExtResource("2_khihf")
 SpotName = "Quifsa"
-Event = ExtResource("3_l6m2o")
+Event = ExtResource("3_jaugf")
 
 [sub_resource type="Resource" id="Resource_k4o2w"]
 script = ExtResource("4_xevlw")
-PossibleIds = Array[ExtResource("2_khihf")]([SubResource("Resource_gcm1y")])
+PossibleIds = Array[ExtResource("2_khihf")]([SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y")])
 DataName = ""
 
 [resource]
@@ -29,10 +28,10 @@ script = ExtResource("10_jgsae")
 SpotK = 12
 MapIcon = ExtResource("2_x2sra")
 Scene = ExtResource("9_xfgoe")
-PossibleDrops = Array[ExtResource("3_fnfii")]([ExtResource("4_1jm82"), ExtResource("5_fpar0"), ExtResource("6_82ny1"), ExtResource("7_kr31j"), ExtResource("8_2bkel")])
+PossibleDrops = Array[ExtResource("3_fnfii")]([ExtResource("4_1jm82"), ExtResource("5_fpar0"), ExtResource("6_82ny1"), ExtResource("8_2bkel")])
 FullName = "Capital City Center"
 Description = "blah blah"
-CanLand = false
+CanLand = true
 HasAtmoshere = false
 VisibleOnStart = true
 DropAmmount = 1

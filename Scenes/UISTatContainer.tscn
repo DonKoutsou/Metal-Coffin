@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://carxyijo0mekn"]
+[gd_scene load_steps=12 format=3 uid="uid://carxyijo0mekn"]
 
 [ext_resource type="Script" path="res://Scripts/ui_Stat_container.gd" id="2_yw81g"]
 [ext_resource type="Texture2D" uid="uid://dmmqxl5mf2mjn" path="res://Assets/UIPiecies/Display_Camera 1.png" id="3_5vvs3"]
 [ext_resource type="Texture2D" uid="uid://dbbyrubuyg3dd" path="res://Assets/UIPiecies/Displayhull_Camera 1.png" id="3_qtl3w"]
 [ext_resource type="Texture2D" uid="uid://cye4t0alpngvt" path="res://Assets/UIPiecies/healthdiplay_Camera 1.png" id="4_0ywco"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_ooo48"]
-[ext_resource type="Texture2D" uid="uid://dqmrcuqhhv2s4" path="res://Assets/UIPiecies/OXYGENdiplay_Camera 1.png" id="5_d4rvv"]
 [ext_resource type="AudioStream" uid="uid://1m0dd6hxjs7v" path="res://Assets/Sounds/Alarm.mp3" id="5_sh16h"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/light.tscn" id="8_6hshm"]
 [ext_resource type="Texture2D" uid="uid://da27xfif878pc" path="res://Assets/UIPiecies/Autofill_button_Camera 1.png" id="9_644ma"]
@@ -30,7 +29,6 @@ script = ExtResource("2_yw81g")
 FuelTex = ExtResource("3_5vvs3")
 HullTex = ExtResource("3_qtl3w")
 HPTex = ExtResource("4_0ywco")
-OxygenTex = ExtResource("5_d4rvv")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_sh16h")

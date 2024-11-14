@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b1q7brpw8cc2p"]
+[gd_scene load_steps=28 format=3 uid="uid://b1q7brpw8cc2p"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_762dg"]
 [ext_resource type="Script" path="res://Scripts/DroneTab.gd" id="1_v0de6"]
@@ -17,6 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://cfqj4sicmtmfi" path="res://Assets/UIPiecies/offbutton_Camera 1.png" id="15_n75nu"]
 [ext_resource type="Texture2D" uid="uid://ckuoofhsmdwhc" path="res://Assets/UIPiecies/offbuttonon_Camera 1.png" id="16_moali"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="17_hhbqw"]
+[ext_resource type="PackedScene" uid="uid://0vtujl68ditn" path="res://Scenes/CrewButton.tscn" id="18_kuev1"]
+[ext_resource type="Texture2D" uid="uid://dift04metc6c5" path="res://Assets/UIPiecies/CrewDisplay_Camera 1.png" id="19_tyd36"]
+[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="20_gso6j"]
+[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/light.tscn" id="21_yhe8d"]
 
 [sub_resource type="Animation" id="Animation_brgwl"]
 resource_name = "Hide"
@@ -30,7 +34,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 163)]
+"values": [Vector2(0, 0), Vector2(0, 216)]
 }
 
 [sub_resource type="Animation" id="Animation_uci4u"]
@@ -60,7 +64,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 163)]
+"values": [Vector2(0, 216)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -87,7 +91,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 163), Vector2(0, 0)]
+"values": [Vector2(0, 215), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_6inlh"]
@@ -169,9 +173,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = 123.0
+offset_top = 176.0
 offset_right = 20.0
-offset_bottom = 163.0
+offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -225,6 +229,54 @@ volume_db = -15.0
 pitch_scale = 0.76
 bus = &"MapSounds"
 
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -303.0
+offset_right = 142.0
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="PanelContainer" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer2" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer3" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer4" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer5" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer6" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer7" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer8" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
+[node name="PanelContainer9" parent="Control/PanelContainer/GridContainer" instance=ExtResource("18_kuev1")]
+layout_mode = 2
+
 [node name="Control" type="Control" parent="Control"]
 layout_mode = 2
 anchors_preset = 0
@@ -241,7 +293,7 @@ offset_left = -289.0
 offset_top = -90.0
 offset_right = 182.0
 offset_bottom = 74.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("15_43a6j")
 expand_mode = 1
 
@@ -323,6 +375,45 @@ offset_left = -156.0
 offset_top = -121.0
 offset_right = 198.0
 offset_bottom = 35.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = -176.0
+offset_right = 203.0
+offset_bottom = -123.0
+mouse_filter = 2
+texture = ExtResource("19_tyd36")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="Control/TextureRect"]
+texture_filter = 6
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.5
+offset_top = -13.5
+offset_right = 58.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.349675, 0.25028, 1)
+theme_override_fonts/font = ExtResource("20_gso6j")
+theme_override_font_sizes/font_size = 14
+text = "George"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Light" parent="Control/TextureRect" instance=ExtResource("21_yhe8d")]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 6.0
+offset_right = 71.0
+offset_bottom = 46.0
 
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/ToggleDroneTab" to="." method="_on_toggle_drone_tab_pressed"]
 [connection signal="gui_input" from="Control/Node2D/TextureButton" to="." method="_on_area_2d_input_event"]

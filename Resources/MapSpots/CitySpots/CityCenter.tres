@@ -1,26 +1,33 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=11 format=3 uid="uid://du24ilvkea51x"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=14 format=3 uid="uid://du24ilvkea51x"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_ig8qa"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_npnnf"]
+[ext_resource type="Resource" uid="uid://cymxwbov1pdsm" path="res://Resources/Cities/TsardiCity.tres" id="3_2nme6"]
 [ext_resource type="Texture2D" uid="uid://c33retp6uur1y" path="res://Assets/modern-city.png" id="3_c6nwh"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="4_b4xno"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_u8h8q"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_clk2i"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="6_qx5jb"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="7_kj2h8"]
-[ext_resource type="Resource" uid="uid://curvwwi8duux1" path="res://Resources/Items/Oxygen.tres" id="8_2sgpx"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="9_3hiyq"]
 [ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="10_xiw54"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="11_2pbl6"]
+
+[sub_resource type="Resource" id="Resource_m1q4d"]
+script = ExtResource("4_u8h8q")
+PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6")])
+DataName = ""
 
 [resource]
 script = ExtResource("11_2pbl6")
 SpotK = 12
 MapIcon = ExtResource("3_c6nwh")
 Scene = ExtResource("10_xiw54")
-PossibleDrops = Array[ExtResource("4_b4xno")]([ExtResource("5_clk2i"), ExtResource("6_qx5jb"), ExtResource("7_kj2h8"), ExtResource("8_2sgpx"), ExtResource("9_3hiyq")])
+PossibleDrops = Array[ExtResource("4_b4xno")]([ExtResource("5_clk2i"), ExtResource("6_qx5jb"), ExtResource("7_kj2h8"), ExtResource("9_3hiyq")])
 FullName = "City Center"
 Description = "blah blah"
-CanLand = false
+CanLand = true
 HasAtmoshere = false
 VisibleOnStart = true
 DropAmmount = 1
-CustomData = Array[ExtResource("1_ig8qa")]([])
+CustomData = Array[ExtResource("1_ig8qa")]([SubResource("Resource_m1q4d")])

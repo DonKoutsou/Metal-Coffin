@@ -57,6 +57,8 @@ func UpdateVizRange(rang : float):
 	RadarMat.set_shader_parameter("scale_factor", rang/10000)
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
+	
+	$PointLight2D.texture_scale = rang / 600
 	#scalling of collor rect
 	#RadarRangeIndicator.size = Vector2(rang, rang) * 2
 	#centering of color rect
@@ -93,7 +95,11 @@ func OnStatLow(StatName : String) -> void:
 	var notif = (load("res://Scenes/LowStatNotif.tscn") as PackedScene).instantiate() as LowStatNotif
 	notif.SetStatData(StatName)
 	notif.rotation = -rotation
+	notif.EntityToFollow = self
+	#notif.camera = $"../../Camera2D"
 	$Notifications.add_child(notif)
+	
+	#Ingame_UIManager.GetInstance().AddUI(notif)
 
 
 func _physics_process(_delta: float) -> void:
@@ -108,14 +114,14 @@ func _physics_process(_delta: float) -> void:
 		PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
 		#set_physics_process(false)
 		return
-	if (Dat.GetStat("CRYO").GetStat() == 0):
-		var oxy = $Node2D.position.x / 100
-		if (Dat.GetStat("OXYGEN").GetCurrentValue() < oxy):
-			HaltShip()
-			PopUpManager.GetInstance().DoPopUp("You have run out of oxygen.")
-			#set_physics_process(false)
-			return
-		Dat.RefilResource("OXYGEN", -oxy)
+	#if (Dat.GetStat("CRYO").GetStat() == 0):
+		#var oxy = $Node2D.position.x / 100
+		#if (Dat.GetStat("OXYGEN").GetCurrentValue() < oxy):
+			#HaltShip()
+			#PopUpManager.GetInstance().DoPopUp("You have run out of oxygen.")
+			##set_physics_process(false)
+			#return
+		#Dat.RefilResource("OXYGEN", -oxy)
 	global_position = $Node2D.global_position
 	Dat.ConsumeResource("FUEL", fuel)
 	UpdateFuelRange(Dat.GetStat("FUEL").GetCurrentValue(), Dat.GetStat("FUEL_EFFICIENCY").GetStat())

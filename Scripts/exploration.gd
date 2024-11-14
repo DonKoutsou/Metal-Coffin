@@ -11,11 +11,11 @@ signal OnExplorationEnded(Supplies : Array[Item])
 
 func StartExploration(Spot : MapSpotType, Playership : BaseShip) -> void:
 	SpotT = Spot
-	var sc = Spot.Scene.instantiate() as MeshInstance3D
-	var mat = sc.get_active_material(0) as ShaderMaterial
-	var Col1 = mat.get_shader_parameter("color_2")
-	var Col2 = mat.get_shader_parameter("color_3")
-	planet_surface.ApplySurfaceColors(Col1, Col2)
+	#var sc = Spot.Scene.instantiate() as MeshInstance3D
+	#var mat = sc.get_active_material(0) as ShaderMaterial
+	#var Col1 = mat.get_shader_parameter("color_2")
+	#var Col2 = mat.get_shader_parameter("color_3")
+	#planet_surface.ApplySurfaceColors(Col1, Col2)
 
 	planet_surface.SetShipVisuals(Playership.ShipScene)
 	
@@ -25,13 +25,13 @@ func Explore() -> void:
 	if (ShipData.GetInstance().GetStat("HP").CurrentVelue <= 10):
 		DoPopUp("Not enough HP to complete action.")
 		return
-	if (ShipData.GetInstance().GetStat("OXYGEN").CurrentVelue <= 5):
-		DoPopUp("Not enough oxygen to complete action.")
-		return
+	#if (ShipData.GetInstance().GetStat("OXYGEN").CurrentVelue <= 5):
+		#DoPopUp("Not enough oxygen to complete action.")
+		#return
 		
 	ShipData.GetInstance().ConsumeResource("HP", 10)
-	if (!SpotT.HasAtmoshere):
-		ShipData.GetInstance().ConsumeResource("OXYGEN", 5)
+	#if (!SpotT.HasAtmoshere):
+		#ShipData.GetInstance().ConsumeResource("OXYGEN", 5)
 	
 	var itms = SpotT.GetSpotDrop()
 	Findings.append_array(itms)

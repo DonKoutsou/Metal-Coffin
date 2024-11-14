@@ -124,7 +124,6 @@ ShootDrone={
 
 [rendering]
 
-renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 textures/default_filters/anisotropic_filtering_level=3
 environment/glow/upscale_mode=0

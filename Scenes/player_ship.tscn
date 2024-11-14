@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=35 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="2_2w4bb"]
@@ -25,11 +25,14 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
 light_mode = 1
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bweje"]
+blend_mode = 1
+
 [sub_resource type="Curve" id="Curve_gn3pm"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_rlrpj"]
+[sub_resource type="CurveTexture" id="CurveTexture_be001"]
 curve = SubResource("Curve_gn3pm")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qn4ww"]
@@ -44,7 +47,7 @@ radial_velocity_max = -2.23517e-05
 gravity = Vector3(0, 0, 0)
 scale_min = 0.05
 scale_max = 0.05
-scale_curve = SubResource("CurveTexture_rlrpj")
+scale_curve = SubResource("CurveTexture_be001")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
@@ -116,6 +119,7 @@ script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bweje")
 position = Vector2(-7, 0)
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_qn4ww")

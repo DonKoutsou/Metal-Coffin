@@ -51,6 +51,9 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 	for g in Dat.Spots.size():
 		var spotdat = Dat.Spots[g] as MapSpotSaveData
 		var sc = SpotScene.instantiate() as MapSpot
+		sc.connect("SpotAproached", TownSpotApreached)
+		sc.connect("SpotSearched", TownSpotSearched)
+		sc.connect("SpotAnalazyed", TownSpotAnalyzed)
 		var type = spotdat.SpotType
 		sc.SetSpotData(type)
 

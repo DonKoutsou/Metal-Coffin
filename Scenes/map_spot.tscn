@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djtjqkmdep3dh"]
+[gd_scene load_steps=18 format=3 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_uoroi"]
@@ -8,7 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="4_poyhe"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="7_fu61o"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lj723"]
+light_mode = 1
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ic8cr"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i403d"]
 light_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
@@ -274,6 +280,7 @@ script = ExtResource("1_x7uyn")
 [node name="AnalyzeButton" type="Button" parent="." groups=["Buttons"]]
 show_behind_parent = true
 texture_filter = 6
+material = SubResource("CanvasItemMaterial_lj723")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -298,18 +305,20 @@ offset_bottom = -36.0
 texture = ExtResource("4_poyhe")
 
 [node name="LandButtonContainer" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_i403d")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -6.5
+offset_left = -42.0
 offset_top = 31.0
-offset_right = 6.5
-offset_bottom = 41.0
+offset_right = 42.0
+offset_bottom = 89.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("3_rw3e8")
 
 [node name="LandButton" type="Button" parent="LandButtonContainer" groups=["Buttons"]]
+use_parent_material = true
 layout_mode = 2
 theme = ExtResource("4_1yydb")
 theme_override_fonts/font = ExtResource("2_uoroi")
@@ -346,6 +355,7 @@ libraries = {
 }
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 scale = Vector2(0.75, 0.75)
 energy = 0.5
 blend_mode = 2

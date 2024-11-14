@@ -122,8 +122,8 @@ func LoadData(Data : Resource) -> void:
 	var dat = Data as StatSave
 	ShipDat.SetStatValue("HP", dat.Value[0])
 	ShipDat.SetStatValue("HULL", dat.Value[1])
-	ShipDat.SetStatValue("OXYGEN", dat.Value[2])
-	ShipDat.SetStatValue("FUEL", dat.Value[3])
+	#ShipDat.SetStatValue("OXYGEN", dat.Value[2])
+	ShipDat.SetStatValue("FUEL", dat.Value[2])
 	
 func GetInventory() -> Inventory:
 	return $Ingame_UIManager/VBoxContainer/Inventory
@@ -192,9 +192,9 @@ func FightEnded(Resault : bool, RemainingHP : int, SupplyRew : Array[Item]) -> v
 #Exploration---------------------------------------------
 func StartExploration(Spot : MapSpot) -> void:
 	var Escene = ExplorationScene.instantiate() as Exploration
-	if (Spot.SpotType.HasAtmoshere):
-		ShipDat.SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
-		PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
+	#if (Spot.SpotType.HasAtmoshere):
+		#ShipDat.SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
+		#PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
 	#Escene.PlayerHp = ShipDat.GetStat("HP").CurrentVelue
 	#Escene.PlayerOxy = ShipDat.GetStat("OXYGEN").CurrentVelue
 	Ingame_UIManager.GetInstance().AddUI(Escene)
@@ -256,15 +256,15 @@ func StageSearch(Spt : MapSpot)-> void:
 	if (Spt.SpotType.CanLand):
 		StartExploration(Spt)
 	else:
-		if (Spt.SpotType.HasAtmoshere):
-			if (ShipData.GetInstance().GetStat("OXYGEN").GetCurrentValue() < ShipData.GetInstance().GetStat("OXYGEN").GetStat()):
-				ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
-				PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
-		else:
-			if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
-				PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
-				return
-			ShipDat.ConsumeResource("OXYGEN", 5)
+		#if (Spt.SpotType.HasAtmoshere):
+			#if (ShipData.GetInstance().GetStat("OXYGEN").GetCurrentValue() < ShipData.GetInstance().GetStat("OXYGEN").GetStat()):
+				#ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
+				#PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
+		#else:
+			#if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
+				#PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
+				#return
+			#ShipDat.ConsumeResource("OXYGEN", 5)
 		if (ShipDat.GetStat("HP").GetCurrentValue() <= 10):
 			PopUpManager.GetInstance().DoPopUp("Not enough HP to complete action")
 			return

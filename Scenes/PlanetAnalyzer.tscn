@@ -140,11 +140,11 @@ text = "Possible Drops :"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
+[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-columns = 3
+alignment = 1
 
 [node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 visible = false
@@ -254,7 +254,7 @@ stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/Control/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(283, 316)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="VBoxContainer/HBoxContainer/Control/SubViewportContainer/SubViewport"]

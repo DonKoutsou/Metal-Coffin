@@ -1,10 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=21 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="PackedScene" uid="uid://bakbjn5qbsc2l" path="res://Scenes/DroneNotif.tscn" id="2_1dqnw"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
+[ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/George.tres" id="3_fw0pf"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
+[ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="6_x7c6h"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="8_bbjow"]
+
+[sub_resource type="Curve" id="Curve_qk12j"]
+_data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rlrpj"]
+curve = SubResource("Curve_qk12j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kyfni"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 1.244
+initial_velocity_max = 1.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 308.99
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.05
+scale_curve = SubResource("CurveTexture_rlrpj")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7khp2"]
 radius = 258.136
@@ -30,17 +54,58 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
+radius = 150.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
+shader = ExtResource("6_x7c6h")
+shader_parameter/line_color = Color(0.253, 0.622, 0.847, 1)
+shader_parameter/range_lines = 1.0
+shader_parameter/sector_lines = 0.0
+shader_parameter/line_width = 0.0011
+shader_parameter/beam_angle = 0.2
+shader_parameter/beam_width = 0.003
+shader_parameter/trail_width = 0.1
+shader_parameter/sector_rotation = 0.5
+shader_parameter/ShowRadat = true
+shader_parameter/scale_factor = 0.015
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_si61q"]
+radius = 100.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqscw"]
+shader = ExtResource("6_x7c6h")
+shader_parameter/line_color = Color(0.319048, 0.619537, 0.0555898, 1)
+shader_parameter/range_lines = 1.0
+shader_parameter/sector_lines = 0.0
+shader_parameter/line_width = 0.002
+shader_parameter/beam_angle = 0.3
+shader_parameter/beam_width = 0.003
+shader_parameter/trail_width = 0.1
+shader_parameter/sector_rotation = 0.5
+shader_parameter/ShowRadat = true
+shader_parameter/scale_factor = 0.008
+
 [node name="Drone" type="Node2D" groups=["Ships"]]
 script = ExtResource("1_vfr1e")
 DroneNotifScene = ExtResource("2_1dqnw")
+Cpt = ExtResource("3_fw0pf")
 
-[node name="Radar2" type="Area2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-7, 0)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_kyfni")
+texture = ExtResource("8_bbjow")
+lifetime = 20.0
+
+[node name="ReturnSoundTrigger" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSoundTrigger"]
 shape = SubResource("CircleShape2D_7khp2")
+debug_color = Color(0.718534, 0.251914, 1, 0.42)
 
 [node name="Radar" type="Area2D" parent="."]
 collision_layer = 0
@@ -49,6 +114,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_e6yyl")
+debug_color = Color(0.745105, 0.130026, 1.92523e-07, 0.42)
 
 [node name="Line2D" type="Line2D" parent="."]
 material = SubResource("CanvasItemMaterial_2le8a")
@@ -97,5 +163,54 @@ texture = ExtResource("5_k2uly")
 texture_scale = 0.25
 height = 100.0
 
-[connection signal="area_entered" from="Radar2" to="." method="_on_radar_2_area_entered"]
+[node name="Radar2" type="Area2D" parent="."]
+rotation = -0.282025
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar2"]
+shape = SubResource("CircleShape2D_63pb3")
+
+[node name="Radar_Range" type="ColorRect" parent="Radar2" groups=["MapLines"]]
+material = SubResource("ShaderMaterial_v4ssc")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Analyzer" type="Area2D" parent="."]
+rotation = 0.368904
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Analyzer"]
+shape = SubResource("CircleShape2D_si61q")
+debug_color = Color(4.81308e-08, 0.640532, 0.348463, 0.42)
+
+[node name="Analyzer_Range" type="ColorRect" parent="Analyzer" groups=["MapLines"]]
+material = SubResource("ShaderMaterial_xqscw")
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]
 [connection signal="area_entered" from="Radar" to="." method="_on_radar_area_entered"]

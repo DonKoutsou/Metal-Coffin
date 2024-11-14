@@ -16,11 +16,14 @@ func PresentHappening(Hap : Happening):
 	
 	var OptionAmm = Hap.GetOptionsCount()
 	for g in $VBoxContainer/HBoxContainer.get_child_count():
-		var but = $VBoxContainer/HBoxContainer.get_child(g)
+		var but = $VBoxContainer/HBoxContainer.get_child(g) as Button
 		if (g >= OptionAmm):
 			but.visible = false
 			continue
 		but.text = Hap.Options[g].OptionName
+		if (Hap.Options[g] is Drone_Happening_Option):
+			var Dronehap = Hap.Options[g] as Drone_Happening_Option
+			but.icon = Dronehap.Cpt.CaptainPortrait
 
 func _on_option_1_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[0].OptionResault()
@@ -41,7 +44,7 @@ func OnActionSelected():
 	$Timer.start()
 	set_physics_process(true)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	$VBoxContainer/ProgressBar.value = $Timer.time_left
 
 

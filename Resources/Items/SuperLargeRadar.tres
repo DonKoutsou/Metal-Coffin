@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=5 format=3 uid="uid://cgigq707wifrf"]
+
+[ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_q4wll"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_pp1bp"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_eumis"]
+[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="4_6tjws"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("4_6tjws")
+UpgradeName = "VIZ_RANGE"
+UpgradeAmm = 90.0
+CurrentVal = 0.0
+UpgradeItems = Array[ExtResource("2_pp1bp")]([])
+IsDamaged = false
+RepairItems = Array[ExtResource("2_pp1bp")]([ExtResource("3_eumis"), ExtResource("3_eumis")])
+ItemIcon = ExtResource("1_q4wll")
+ItemName = "Super HighRange Radar"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
+RandomFindMaxCount = 1

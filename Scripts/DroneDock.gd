@@ -18,10 +18,14 @@ func _ready() -> void:
 	DroneDockEventH.connect("OnDroneDissarmed", DroneDissarmed)
 	DroneDockEventH.connect("DroneLaunched", LaunchDrone)
 	DroneDockEventH.connect("DroneRangeChanged", DroneRangeChanged)
-	for g in 2:
-		var drone = DroneScene.instantiate()
-		call_deferred("AddDroneToHierarchy",drone)
-		
+	#for g in 2:
+		#var drone = DroneScene.instantiate()
+		#call_deferred("AddDroneToHierarchy",drone)
+
+func AddDrone(Drne : Drone) -> void:
+	#var drone = DroneScene.instantiate()
+
+	AddDroneToHierarchy(Drne)
 func PlayLandingSound()-> void:
 	var sound = AudioStreamPlayer.new()
 	sound.stream = LandedVoiceLines.pick_random()
