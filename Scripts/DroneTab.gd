@@ -10,33 +10,47 @@ var DockedDrones : Array[Drone] = []
 
 var CurrentlySelectedDrone : Drone
 
+var SteerShowing : bool = false
+
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", DroneDocked)
 	DroneDockEventH.connect("DroneUndocked", DroneUnDocked)
+	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
-	visible = false
+	#visible = false
 
-func DroneDocked(Dr : Drone) -> void:
-	DockedDrones.append(Dr)
-	visible = DockedDrones.size() > 0
-	
 
-func DroneUnDocked(Dr : Drone) -> void:
+func DroneDisharged(Dr : Drone):
+	if (DockedDrones.has(Dr)):
+		DockedDrones.erase(Dr)
 	if (Dr == CurrentlySelectedDrone):
 		CurrentlySelectedDrone = null
 		UpdateCrewSelect()
-	
+
+func DroneDocked(Dr : Drone) -> void:
+	DockedDrones.append(Dr)
+	#visible = DockedDrones.size() > 0
+	if (CurrentlySelectedDrone == null):
+		UpdateCrewSelect()
+
+func DroneUnDocked(Dr : Drone) -> void:
+
 	DockedDrones.erase(Dr)
-	visible = DockedDrones.size() > 0
+	#visible = DockedDrones.size() > 0
+	
+	if (Dr == CurrentlySelectedDrone):
+		CurrentlySelectedDrone = null
+		UpdateCrewSelect()
 
 func _on_deploy_drone_button_pressed() -> void:
-	DroneDockEventH.OnDroneLaunched()
+	DroneDockEventH.OnDroneLaunched(CurrentlySelectedDrone)
 	_on_dissarm_drone_button_2_pressed()
 	
 func _on_arm_drone_button_pressed(t : bool) -> void:
 	
 	if (DockedDrones.size() == 0):
+		_on_dissarm_drone_button_2_pressed()
 		return
 	if (!t):
 		_on_dissarm_drone_button_2_pressed()
@@ -45,7 +59,9 @@ func _on_arm_drone_button_pressed(t : bool) -> void:
 	#$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton.disabled = true
 	$Control/Control/Dissarm.ToggleDissable(false)
 	$Control/Control/Launch.ToggleDissable(false)
-	$AnimationPlayer.play("ShowSteer")
+	if (!SteerShowing):
+		$AnimationPlayer.play("ShowSteer")
+		SteerShowing = true
 	DroneDockEventH.DroneArmed()
 	
 func _on_dissarm_drone_button_2_pressed() -> void:
@@ -53,7 +69,9 @@ func _on_dissarm_drone_button_2_pressed() -> void:
 	$Control/Control/Arm.button_pressed = false
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
-	$AnimationPlayer.play("HideSteer")
+	if (SteerShowing):
+		$AnimationPlayer.play("HideSteer")
+		SteerShowing = false
 	DroneDockEventH.DroneDissarmed()
 
 func _on_looter_drone_button_pressed() -> void:
@@ -127,9 +145,11 @@ func UpdateCrewSelect(Select : int = 0):
 		$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
 	else:
 		$Control/TextureRect/Label2.text = "No Drones"
+		$Control/TextureRect/Light.Toggle(true)
 func ProgressCrewSelect():
 	if (DockedDrones.size() == 0):
 		$Control/TextureRect/Label2.text = "No Drones"
+		$Control/TextureRect/Light.Toggle(true)
 		return
 	if (CurrentlySelectedDrone == null):
 		CurrentlySelectedDrone = DockedDrones[0]
@@ -140,6 +160,7 @@ func ProgressCrewSelect():
 		i = 0
 	
 	CurrentlySelectedDrone = DockedDrones[i]
+	$Control/TextureRect/Light.Toggle(true, true)
 	$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
 func On_Drone_Range_Input(event: InputEvent) -> void:
 	if (event is InputEventScreenDrag):

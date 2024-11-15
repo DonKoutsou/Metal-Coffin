@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Captain" load_steps=8 format=3 uid="uid://cga5buofwr6yr"]
+
+[ext_resource type="Texture2D" uid="uid://bs2wyurwdkx0j" path="res://Assets/CaptainPortraits/Captain5.png" id="1_tm2wa"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_dedqt"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_ujmk0"]
+
+[sub_resource type="Resource" id="Resource_wdy4b"]
+script = ExtResource("2_ujmk0")
+StatName = "SPEED"
+StatMax = 3.0
+StatBase = 0.5
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_8m37w"]
+script = ExtResource("2_ujmk0")
+StatName = "RADAR_RANGE"
+StatMax = 300.0
+StatBase = 150.0
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_bsryr"]
+script = ExtResource("2_ujmk0")
+StatName = "ANALYZE_RANGE"
+StatMax = 150.0
+StatBase = 0.0
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_fckyd"]
+script = ExtResource("2_ujmk0")
+StatName = "INVENTORY_SPACE"
+StatMax = 3.0
+StatBase = 3.0
+AllowAutoRefil = false
+
+[resource]
+script = ExtResource("2_dedqt")
+CaptainName = "Tsakas"
+CaptainBio = "Shithead"
+CaptainPortrait = ExtResource("1_tm2wa")
+CaptainStats = Array[ExtResource("2_ujmk0")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_bsryr"), SubResource("Resource_fckyd")])

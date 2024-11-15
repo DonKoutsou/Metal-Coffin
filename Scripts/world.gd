@@ -23,10 +23,14 @@ var Loading = false
 func ToggleShipPausing(t : bool):
 	get_tree().call_group("Ships", "TogglePause", t)
 
+static var Instance : World
+static func GetInstance() -> World:
+	return Instance
 func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
-	if (!Loading):
-		PlayIntro()
+	Instance = self
+	#if (!Loading):
+		#PlayIntro()
 	#call_deferred("TestTrade")
 
 func PlayIntro():
@@ -91,6 +95,7 @@ func OnStatsUpdated(StatName : String):
 		if (StatsNotifiedLow.has(StatName)):
 			StatsNotifiedLow.remove_at(StatsNotifiedLow.find(StatName))
 	WRLD_StatsUpdated.emit(StatName)
+	#ItemBuffStat(StatName)
 	
 func StartShipTrade(NewShip : BaseShip) -> void:
 	ToggleShipPausing(true)
@@ -124,6 +129,7 @@ func LoadData(Data : Resource) -> void:
 	ShipDat.SetStatValue("HULL", dat.Value[1])
 	#ShipDat.SetStatValue("OXYGEN", dat.Value[2])
 	ShipDat.SetStatValue("FUEL", dat.Value[2])
+	ItemBuffStat("FUEL")
 	
 func GetInventory() -> Inventory:
 	return $Ingame_UIManager/VBoxContainer/Inventory

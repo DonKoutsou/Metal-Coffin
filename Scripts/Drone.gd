@@ -3,11 +3,8 @@ extends Node2D
 class_name Drone
 
 @export var DroneNotifScene : PackedScene
-@export var Speed : float = 0.5
-@export var RadarRange : float = 0
-@export var AnalyzeRange : float = 0
 @export var Cpt : Captain
-@export var InventorySpace : int = 1
+
 
 var CommingBack = false
 var Docked = true
@@ -19,16 +16,16 @@ var StoredItem : Array[Item] = []
 var Paused = false
 
 func  _ready() -> void:
-	$Node2D.position.x = Speed
+	$Node2D.position.x = Cpt.GetStatValue("SPEED")
 	set_physics_process(false)
 	$Radar.monitoring = false
 	$Line2D.visible = false
-	UpdateVizRange(RadarRange)
-	UpdateAnalyzerRange(AnalyzeRange)
+	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
+	UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
-	
+
 func UpdateVizRange(rang : float):
 	if (rang == 0):
 		$Radar2.queue_free()
@@ -122,8 +119,8 @@ func _on_radar_area_entered(area: Area2D) -> void:
 		if (spot.CurrentlyVisiting):
 			return
 		if (spot.SpotType.FullName != "Black Whole"):
-			for g in InventorySpace:
-				StoredItem = spot.SpotType.GetSpotDrop()
+			for g in Cpt.GetStatValue("INVENTORY_SPACE"):
+				StoredItem.append_array(spot.SpotType.GetSpotDrop())
 		rotation = 0.0
 		CommingBack = true
 		Docked = false

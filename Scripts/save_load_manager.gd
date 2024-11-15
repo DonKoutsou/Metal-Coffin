@@ -20,6 +20,7 @@ func Save(world : World) -> void:
 	DataArray.append(world.GetShipSaveData())
 	var pldata = PlayerSaveData.new()
 	pldata.Pos = Mapz.GetPlayerPos()
+	pldata.Captains = PlayerShip.GetInstance().GetDroneDock().GetCaptains()
 	DataArray.append(pldata)
 	DataArray.append(DialogueProgressHolder.GetInstance().ToldDialogues)
 	var sav = SaveData.new()
@@ -47,7 +48,12 @@ func Load(world : World) ->bool:
 	Mapz.SetPlayerPos(sav.GetData("PLData").Pos)
 	world.Loading = true
 	call_deferred("LoadStats", world, StatData)
+	call_deferred("LoadCaptains", sav.GetData("PLData").Captains)
 	return true
 	#world.LoadData(StatData)
 func LoadStats(world : World, StatData : Resource) -> void:
 	world.LoadData(StatData)
+func LoadCaptains(Cptns : Array[Captain]):
+	var dock = PlayerShip.GetInstance().GetDroneDock()
+	for g in Cptns:
+		dock.AddCaptain(g)

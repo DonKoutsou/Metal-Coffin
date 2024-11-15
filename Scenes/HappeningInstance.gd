@@ -22,8 +22,13 @@ func PresentHappening(Hap : Happening):
 			continue
 		but.text = Hap.Options[g].OptionName
 		if (Hap.Options[g] is Drone_Happening_Option):
+			var hasspave = PlayerShip.GetInstance().GetDroneDock().HasSpace()
+			but.disabled = !hasspave
+			if (!hasspave):
+				but.text += " No space in drone dock"
 			var Dronehap = Hap.Options[g] as Drone_Happening_Option
 			but.icon = Dronehap.Cpt.CaptainPortrait
+			
 
 func _on_option_1_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[0].OptionResault()

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh861bc6qssti"]
+
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_ebbol"]
+[ext_resource type="Script" path="res://Scripts/CaptainUI.gd" id="2_laeyy"]
+[ext_resource type="PackedScene" uid="uid://dm3id5wa2s86y" path="res://Scenes/CaptainStatPanel.tscn" id="2_vvwym"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="3_m05qx"]
+[ext_resource type="PackedScene" uid="uid://deigffag2eaqb" path="res://Scenes/CaptainUIEmptySlot.tscn" id="5_1igqk"]
+
+[node name="CaptainUI" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_ebbol")
+script = ExtResource("2_laeyy")
+DroneDockEvH = ExtResource("3_m05qx")
+CaptainStatpScene = ExtResource("2_vvwym")
+EmptySlotScene = ExtResource("5_1igqk")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 6
+
+[node name="PanelContainer" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer2" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer3" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer4" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer5" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer6" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2

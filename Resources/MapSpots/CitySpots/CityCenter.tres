@@ -15,7 +15,7 @@
 
 [sub_resource type="Resource" id="Resource_m1q4d"]
 script = ExtResource("4_u8h8q")
-PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6"), ExtResource("3_2nme6")])
+PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_2nme6")])
 DataName = ""
 
 [resource]

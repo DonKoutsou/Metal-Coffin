@@ -302,6 +302,7 @@ func _on_inventory_button_pressed() -> void:
 	var IsOpening = !visible
 	visible = IsOpening
 	if (IsOpening):
+		$"../CaptainUI".visible = false
 		INV_OnInventoryOpened.emit()
 		inventory_ship_stats.UpdateValues()
 	if (!IsOpening):

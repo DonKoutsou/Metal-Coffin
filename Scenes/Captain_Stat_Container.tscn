@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://vb68ip76lkb"]
+
+[ext_resource type="Script" path="res://Scripts/CaptainStatContainer.gd" id="1_a3cnf"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_dxumj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6mq6a"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.162354, 0.162355, 0.162354, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[node name="ShipStatContainer" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+script = ExtResource("1_a3cnf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_dxumj")
+theme_override_font_sizes/font_size = 22
+text = "stat"
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_dxumj")
+theme_override_font_sizes/font_size = 22
+text = "10"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
+value = 19.17
+show_percentage = false

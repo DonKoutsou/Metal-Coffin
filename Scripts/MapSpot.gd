@@ -156,6 +156,7 @@ func AreaEntered(area: Area2D):
 			if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
 				land_button_container.visible = true
 			SpotAproached.emit(self)
+			OnSpotVisited()
 			CurrentlyVisiting = true
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):

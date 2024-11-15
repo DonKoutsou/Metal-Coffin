@@ -1,12 +1,45 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://cis331ptb82pb"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=20 format=3 uid="uid://cis331ptb82pb"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_tujyv"]
 [ext_resource type="Texture2D" uid="uid://oi7dcafqr3rt" path="res://Assets/control-tower.png" id="2_5pdsa"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_by1cj"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_1khm3"]
+[ext_resource type="Script" path="res://Scripts/HappeningOption.gd" id="3_npq0v"]
+[ext_resource type="Script" path="res://Scripts/ShipHappeningOption.gd" id="4_365tn"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_b4kvc"]
+[ext_resource type="Resource" uid="uid://dvsp0jjfpsys" path="res://Resources/Ships/Ship2.tres" id="4_fljnd"]
+[ext_resource type="Script" path="res://Scripts/Happening.gd" id="4_os7x7"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="5_vypep"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_1rjhy"]
+[ext_resource type="Script" path="res://Scripts/StringHappeningOption.gd" id="6_hjotj"]
 [ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_s2xae"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_20h4t"]
+
+[sub_resource type="Resource" id="Resource_gdket"]
+script = ExtResource("4_365tn")
+ShipScene = ExtResource("4_fljnd")
+OptionName = "Trade ship"
+
+[sub_resource type="Resource" id="Resource_h3i4f"]
+script = ExtResource("6_hjotj")
+StringReply = "You leave the ship behind"
+OptionName = "Leave"
+
+[sub_resource type="Resource" id="Resource_2wqaq"]
+script = ExtResource("4_os7x7")
+HappeningName = "New ship"
+HappeningText = "You found a new ship, take it?"
+Options = Array[ExtResource("3_npq0v")]([SubResource("Resource_gdket"), SubResource("Resource_h3i4f")])
+
+[sub_resource type="Resource" id="Resource_0pfup"]
+script = ExtResource("2_by1cj")
+SpotName = "Airport"
+Event = SubResource("Resource_2wqaq")
+
+[sub_resource type="Resource" id="Resource_bo2qf"]
+script = ExtResource("5_vypep")
+PossibleIds = Array[ExtResource("2_by1cj")]([SubResource("Resource_0pfup")])
+DataName = ""
 
 [resource]
 script = ExtResource("10_20h4t")
@@ -20,4 +53,4 @@ CanLand = true
 HasAtmoshere = false
 VisibleOnStart = false
 DropAmmount = 1
-CustomData = Array[ExtResource("1_tujyv")]([])
+CustomData = Array[ExtResource("1_tujyv")]([SubResource("Resource_bo2qf")])

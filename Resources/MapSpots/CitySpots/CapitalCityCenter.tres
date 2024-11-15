@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_khihf"]
 [ext_resource type="Texture2D" uid="uid://c33retp6uur1y" path="res://Assets/modern-city.png" id="2_x2sra"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_fnfii"]
-[ext_resource type="Resource" uid="uid://dijsq004n7ouw" path="res://Resources/Happenings/CrewRecruitHappening2.tres" id="3_jaugf"]
+[ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/Cities/QuifsaCity.tres" id="3_y4ldg"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_1jm82"]
+[ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/Cities/Curd.tres" id="4_taycf"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_xevlw"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_fpar0"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_82ny1"]
@@ -13,14 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_xfgoe"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_jgsae"]
 
-[sub_resource type="Resource" id="Resource_gcm1y"]
-script = ExtResource("2_khihf")
-SpotName = "Quifsa"
-Event = ExtResource("3_jaugf")
-
 [sub_resource type="Resource" id="Resource_k4o2w"]
 script = ExtResource("4_xevlw")
-PossibleIds = Array[ExtResource("2_khihf")]([SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y"), SubResource("Resource_gcm1y")])
+PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_y4ldg"), ExtResource("4_taycf")])
 DataName = ""
 
 [resource]

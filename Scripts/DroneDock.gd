@@ -4,6 +4,8 @@ class_name DroneDock
 
 @export var DroneDockEventH : DroneDockEventHandler
 
+@export var CaptainNotif : PackedScene
+
 @export var LandedVoiceLines : Array[AudioStream]
 @export var ReturnVoiceLines : Array[AudioStream]
 @export var TakeoffVoiceLines : Array[AudioStream]
@@ -18,13 +20,34 @@ func _ready() -> void:
 	DroneDockEventH.connect("OnDroneDissarmed", DroneDissarmed)
 	DroneDockEventH.connect("DroneLaunched", LaunchDrone)
 	DroneDockEventH.connect("DroneRangeChanged", DroneRangeChanged)
+	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
 	#for g in 2:
 		#var drone = DroneScene.instantiate()
 		#call_deferred("AddDroneToHierarchy",drone)
-
+func HasSpace() -> bool:
+	return DockedDrones.size() + FlyingDrones.size() < 6
+func GetCaptains() -> Array[Captain]:
+	var cptns : Array[Captain]
+	for g in DockedDrones:
+		cptns.append(g.Cpt)
+	for g in FlyingDrones:
+		cptns.append(g.Cpt)
+	return cptns
+func DroneDisharged(Dr : Drone):
+	if (DockedDrones.has(Dr)):
+		DockedDrones.erase(Dr)
+	if (FlyingDrones.has(Dr)):
+		FlyingDrones.erase(Dr)
+	Dr.queue_free()
+func AddCaptain(Cpt : Captain) -> void:
+	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
+	ship.Cpt = Cpt
+	AddDrone(ship)
 func AddDrone(Drne : Drone) -> void:
 	#var drone = DroneScene.instantiate()
-
+	var notif = CaptainNotif.instantiate() as CaptainNotification
+	notif.SetCaptain(Drne.Cpt)
+	Ingame_UIManager.GetInstance().AddUI(notif, false, true)
 	AddDroneToHierarchy(Drne)
 func PlayLandingSound()-> void:
 	var sound = AudioStreamPlayer.new()
@@ -71,21 +94,17 @@ func DroneRangeChanged(NewRange : float) -> void:
 	$Line2D.set_point_position(1, Vector2(NewRange * 80, 0))
 	print(NewRange)
 	
-func LaunchDrone() -> void:
-	if (DockedDrones.size() == 0):
-		return
+func LaunchDrone(Dr : Drone) -> void:
 	var fueltoconsume = $Line2D.get_point_position(1).x / 160
 	if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < fueltoconsume):
 		return
 	ShipData.GetInstance().ConsumeResource("FUEL", fueltoconsume)
 	PlayTakeoffSound()
-	var drone = DockedDrones[0]
-	UndockDrone(drone)
-	drone.global_rotation = $Line2D.global_rotation
-	drone.global_position = global_position
-	drone.Fuel = $Line2D.get_point_position(1).x
-	
-	drone.EnableDrone()
+	UndockDrone(Dr)
+	Dr.global_rotation = $Line2D.global_rotation
+	Dr.global_position = global_position
+	Dr.Fuel = $Line2D.get_point_position(1).x
+	Dr.EnableDrone()
 func AddDroneToHierarchy(drone : Drone):
 	get_parent().get_parent().add_child(drone)
 	DockDrone(drone)

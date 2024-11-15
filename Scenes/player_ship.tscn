@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=36 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="2_2w4bb"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="7_8gcrc"]
 [ext_resource type="AudioStream" uid="uid://5fvite02ickv" path="res://Assets/VoiceLines/radio_landing_end_02.wav" id="8_ws5qi"]
 [ext_resource type="AudioStream" uid="uid://cxp410y4qjnl8" path="res://Assets/VoiceLines/radio_landing_end_03.wav" id="9_lowu5"]
+[ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/NewCaptainNotif.tscn" id="9_ur853"]
 [ext_resource type="AudioStream" uid="uid://q5nbj1ayjnk0" path="res://Assets/VoiceLines/radio_landing_touch_01.wav" id="10_a03el"]
 [ext_resource type="AudioStream" uid="uid://bjciqjm0fqhx6" path="res://Assets/VoiceLines/radio_landing_touch_02.wav" id="11_kcejq"]
 [ext_resource type="AudioStream" uid="uid://xmqqcc6y27wo" path="res://Assets/VoiceLines/radio_landing_start_01.wav" id="12_g8gwu"]
@@ -226,6 +227,7 @@ monitoring = false
 script = ExtResource("6_layd2")
 DroneScene = ExtResource("6_pmuiv")
 DroneDockEventH = ExtResource("7_8gcrc")
+CaptainNotif = ExtResource("9_ur853")
 LandedVoiceLines = Array[AudioStream]([ExtResource("8_ws5qi"), ExtResource("9_lowu5"), ExtResource("10_a03el"), ExtResource("11_kcejq")])
 ReturnVoiceLines = Array[AudioStream]([ExtResource("12_g8gwu"), ExtResource("13_2bb3a")])
 TakeoffVoiceLines = Array[AudioStream]([ExtResource("14_7lrl2"), ExtResource("15_pptn2"), ExtResource("16_01x11"), ExtResource("17_louuf")])

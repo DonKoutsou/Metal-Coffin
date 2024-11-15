@@ -1,12 +1,14 @@
 extends Happening_Option
 class_name Drone_Happening_Option
 
-@export var DroneScene : PackedScene
+var DroneScene : String = "res://Scenes/drone.tscn"
 @export var Cpt : Captain
 
 #func _init() -> void:
 	#Dron = DroneScene.instantiate()
 
 func OptionResault() -> String:
-	PlayerShip.GetInstance().GetDroneDock().AddDrone(DroneScene.instantiate())
+	var ship = (load(DroneScene) as PackedScene).instantiate() as Drone
+	ship.Cpt = Cpt
+	PlayerShip.GetInstance().GetDroneDock().AddDrone(ship)
 	return "A new ship has joined your fleet."

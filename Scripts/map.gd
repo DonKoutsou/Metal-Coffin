@@ -288,7 +288,7 @@ func Arrival(Spot : MapSpot)	-> void:
 		else:
 			MAP_AsteroidBeltArrival.emit(60)
 		GetPlayerShip().HaltShip()
-	if (Spot.Evnt != null):
+	if (Spot.Evnt != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
 		happeningui.PresentHappening(Spot.Evnt)
@@ -343,7 +343,7 @@ func SearchLocation(stage : MapSpot):
 		MAP_ShipSearched.emit(stage.SpotType.Ship)
 	else:
 		MAP_StageSearched.emit(stage)
-	stage.OnSpotVisited()
+	
 
 #Save/Load///////////////////////////////////////////
 func GetSaveData() ->SaveData:
@@ -419,7 +419,7 @@ func _MAP_INPUT(event: InputEvent) -> void:
 #////////////////////////////
 func _HANDLE_ZOOM(zoomval : float):
 	var prevzoom = camera_2d.zoom
-	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.3,0.3), Vector2(3,3))
+	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.3,0.3), Vector2(2.1,2.1))
 	for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
 		g.visible = camera_2d.zoom < Vector2(1, 1)
 	for g in get_tree().get_nodes_in_group("MapLines"):
