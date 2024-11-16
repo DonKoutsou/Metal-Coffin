@@ -80,7 +80,7 @@ shader_parameter/ShowRadat = false
 shader_parameter/scale_factor = 0.08
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
-radius = 34.0
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqnhq"]
 radius = 100.0
@@ -300,8 +300,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_73pil")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(7.97656, 7.97656)
 energy = 0.25
-blend_mode = 2
-shadow_color = Color(0.919342, 0, 0.452291, 0)
+shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
 height = 500.0
 

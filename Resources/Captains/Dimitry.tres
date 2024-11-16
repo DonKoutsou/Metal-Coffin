@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=8 format=3 uid="uid://bkfcg5rwf7vhu"]
+[gd_resource type="Resource" script_class="Captain" load_steps=9 format=3 uid="uid://bkfcg5rwf7vhu"]
 
 [ext_resource type="Texture2D" uid="uid://bqkwoke2degse" path="res://Assets/CaptainPortraits/Captain8.png" id="1_63sci"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_mv381"]
@@ -27,9 +27,16 @@ AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_g5q3n"]
 script = ExtResource("2_rura2")
-StatName = "INVENTORY_SPACE"
+StatName = "INVENTORY_CAPACITY"
 StatMax = 3.0
 StatBase = 2.0
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_qsyx2"]
+script = ExtResource("2_rura2")
+StatName = "FIREPOWER"
+StatMax = 10.0
+StatBase = 8.0
 AllowAutoRefil = false
 
 [resource]
@@ -37,4 +44,4 @@ script = ExtResource("2_mv381")
 CaptainName = "Dimitry"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_63sci")
-CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), SubResource("Resource_v6t2m"), SubResource("Resource_3epi5"), SubResource("Resource_g5q3n")])
+CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), SubResource("Resource_v6t2m"), SubResource("Resource_3epi5"), SubResource("Resource_g5q3n"), SubResource("Resource_qsyx2")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=33 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -35,9 +35,6 @@ diffuse_texture = ExtResource("29_s08yn")
 normal_texture = ExtResource("30_mlb2h")
 texture_filter = 5
 texture_repeat = 2
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_krkog"]
-light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2v8bx"]
 light_mode = 1
@@ -245,14 +242,6 @@ color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 
 [node name="MapSpots" type="Node2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport"]
 position = Vector2(0, 279)
-
-[node name="StationLine" type="Line2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots"]
-visible = false
-material = SubResource("CanvasItemMaterial_krkog")
-width = 8.0
-default_color = Color(1, 1, 1, 0.201)
-joint_mode = 2
-antialiased = true
 
 [node name="SpotSpot" type="Node2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots"]
 

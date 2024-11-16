@@ -4,6 +4,8 @@ class_name HappeningInstance
 
 var Hp : Happening
 
+var SelectedOption : int
+
 func _ready() -> void:
 	set_physics_process(false)
 	$VBoxContainer/ProgressBar.visible = false
@@ -33,16 +35,20 @@ func PresentHappening(Hap : Happening):
 func _on_option_1_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[0].OptionResault()
 	OnActionSelected()
+	SelectedOption = 0
 
 func _on_option_2_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[1].OptionResault()
 	OnActionSelected()
+	SelectedOption = 1
 func _on_option_3_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[2].OptionResault()
 	OnActionSelected()
+	SelectedOption = 2
 func _on_option_4_pressed() -> void:
 	$VBoxContainer/Label2.text = Hp.Options[3].OptionResault()
 	OnActionSelected()
+	SelectedOption = 3
 func OnActionSelected():
 	$VBoxContainer/ProgressBar.visible = true
 	$VBoxContainer/HBoxContainer.visible = false
@@ -54,4 +60,5 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
+	Hp.Options[SelectedOption].OptionOutCome()
 	queue_free()

@@ -119,7 +119,7 @@ func _on_radar_area_entered(area: Area2D) -> void:
 		if (spot.CurrentlyVisiting):
 			return
 		if (spot.SpotType.FullName != "Black Whole"):
-			for g in Cpt.GetStatValue("INVENTORY_SPACE"):
+			for g in Cpt.GetStatValue("INVENTORY_CAPACITY"):
 				StoredItem.append_array(spot.SpotType.GetSpotDrop())
 		rotation = 0.0
 		CommingBack = true
@@ -128,7 +128,7 @@ func _on_radar_area_entered(area: Area2D) -> void:
 		#$Line2D.visible = true
 		if (!spot.Seen):
 			spot.OnSpotSeenByDrone()
-		spot.Visited = true
+		spot.OnSpotVisitedByDrone()
 	else : if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
 		plship.GetDroneDock().DockDrone(self, true)

@@ -5,3 +5,5 @@ class_name Happening_Option
 
 func OptionResault() -> String:
 	return ""
+func OptionOutCome()-> void:
+	return

@@ -39,12 +39,14 @@ func _ready() -> void:
 	if ((ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int) % 2 != 0):
 		inv_contents.columns = 3
 	if (Loading):
-		AddItems(LoadedItems, false)
+		# calling later to make sure inventory size buffs from captains are applied beforehand
+		call_deferred("AddItems", LoadedItems, false)
+		#AddItems(LoadedItems, false)
 	else :
 		AddItems(StartingItems, false)
 
 func ToggleShipPausing(t : bool):
-	$"../HBoxContainer/Panel/InventoryButton".disabled = t
+	$"../HBoxContainer/Panel3/InventoryButton".disabled = t
 	get_tree().call_group("Ships", "TogglePause", t)
 	
 func _exit_tree() -> void:
@@ -156,7 +158,7 @@ func FindEmptyBoxForItAndPlace(it : Item) -> bool:
 #////////////////////////////////////////////////////
 func InitiateTrade(UnplacedItms : Array[Item]):
 	var TradeScene = InventoryTradeScene.instantiate() as InventoryTrade
-	Ingame_UIManager.GetInstance().AddUI(TradeScene, false)
+	Ingame_UIManager.GetInstance().AddUI(TradeScene, false, true)
 	var InvItems : Array[Item] = []
 	for g in InventoryContents.size():
 		var it = InventoryContents[g].ItemC.ItemType

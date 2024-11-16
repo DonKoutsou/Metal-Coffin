@@ -46,6 +46,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_q877l")
 script = ExtResource("1_u3k42")
+StatScene = ExtResource("4_7yqdf")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -74,18 +75,6 @@ theme_override_styles/normal = ExtResource("3_babv5")
 text = "George"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ShipStatContainer" parent="VBoxContainer" instance=ExtResource("4_7yqdf")]
-layout_mode = 2
-
-[node name="ShipStatContainer2" parent="VBoxContainer" instance=ExtResource("4_7yqdf")]
-layout_mode = 2
-
-[node name="ShipStatContainer3" parent="VBoxContainer" instance=ExtResource("4_7yqdf")]
-layout_mode = 2
-
-[node name="ShipStatContainer4" parent="VBoxContainer" instance=ExtResource("4_7yqdf")]
-layout_mode = 2
 
 [node name="Button" type="Button" parent="VBoxContainer" groups=["Buttons"]]
 layout_mode = 2

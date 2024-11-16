@@ -80,7 +80,7 @@ func _enter_tree() -> void:
 	
 func _exit_tree() -> void:
 	ShipDat.RemoveShipStats(CurrentShip.Buffs)
-	
+	GetMap().GetPlayerShip().GetDroneDock().ClearAllDrones()
 func OnStatsUpdated(StatName : String):
 	#if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() - 20):
 		#var it = GetInventory().GetItemForStat(StatName)

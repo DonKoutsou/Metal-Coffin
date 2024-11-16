@@ -120,7 +120,9 @@ theme_override_styles/panel = ExtResource("2_edtct")
 
 [node name="Label" type="Label" parent="PanelContainer2"]
 layout_mode = 2
-theme_override_constants/outline_size = 15
+theme_override_colors/font_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+theme_override_colors/font_outline_color = Color(0.615304, 0.57196, 0.322451, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_2wijr")
 theme_override_font_sizes/font_size = 31
 text = "New Captain Recruited

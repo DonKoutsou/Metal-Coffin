@@ -143,6 +143,7 @@ func UpdateCrewSelect(Select : int = 0):
 	if (DockedDrones.size() > Select):
 		CurrentlySelectedDrone = DockedDrones[Select]
 		$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
+		$Control/TextureRect/Light.Toggle(true, true)
 	else:
 		$Control/TextureRect/Label2.text = "No Drones"
 		$Control/TextureRect/Light.Toggle(true)
@@ -153,13 +154,11 @@ func ProgressCrewSelect():
 		return
 	if (CurrentlySelectedDrone == null):
 		CurrentlySelectedDrone = DockedDrones[0]
-		return
-		
-	var i = DockedDrones.find(CurrentlySelectedDrone) + 1
-	if (i >= DockedDrones.size()):
-		i = 0
-	
-	CurrentlySelectedDrone = DockedDrones[i]
+	else:
+		var i = DockedDrones.find(CurrentlySelectedDrone) + 1
+		if (i >= DockedDrones.size()):
+			i = 0
+		CurrentlySelectedDrone = DockedDrones[i]
 	$Control/TextureRect/Light.Toggle(true, true)
 	$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
 func On_Drone_Range_Input(event: InputEvent) -> void:

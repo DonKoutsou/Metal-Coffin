@@ -25,6 +25,6 @@ func SetStatData(Stat : String) -> void:
 	$Label.text = Stat + " bellow 20%"
 	$Line2D.default_color = col
 	$Label.modulate = col
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	rotation = -EntityToFollow.rotation
 	scale = Vector2(1,1) / camera.zoom

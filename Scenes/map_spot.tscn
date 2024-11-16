@@ -6,39 +6,25 @@
 [ext_resource type="Theme" uid="uid://blxde2llpapdx" path="res://Theme/DarkBlueButtonCirlce.tres" id="3_yi1as"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_1yydb"]
 [ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="4_poyhe"]
-[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="7_fu61o"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lj723"]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ic8cr"]
-light_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i403d"]
-light_mode = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nw85"]
+bg_color = Color(0.161404, 0.19644, 0.24227, 1)
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.91364, 0.862952, 7.70092e-07, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
 radius = 34.0588
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ea5qq"]
-light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1suc"]
-resource_local_to_scene = true
-bg_color = Color(0.252517, 0.622353, 0.846633, 1)
-draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0.572225, 0.290914, 1)
-border_blend = true
-corner_radius_top_left = 1024
-corner_radius_top_right = 1024
-corner_radius_bottom_right = 1024
-corner_radius_bottom_left = 1024
-corner_detail = 20
-anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_pxthd"]
 length = 0.001
@@ -274,10 +260,36 @@ _data = {
 "SpotFound": SubResource("Animation_fxdlk")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ea5qq"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1suc"]
+resource_local_to_scene = true
+bg_color = Color(0.252517, 0.622353, 0.846633, 1)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.572225, 0.290914, 1)
+border_blend = true
+corner_radius_top_left = 1024
+corner_radius_top_right = 1024
+corner_radius_bottom_right = 1024
+corner_radius_bottom_left = 1024
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ic8cr"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i403d"]
+light_mode = 1
+
 [node name="MapSpot" type="Node2D"]
 script = ExtResource("1_x7uyn")
 
-[node name="AnalyzeButton" type="Button" parent="." groups=["Buttons"]]
+[node name="AnalyzeButton" type="Panel" parent="."]
 show_behind_parent = true
 texture_filter = 6
 material = SubResource("CanvasItemMaterial_lj723")
@@ -290,40 +302,9 @@ offset_right = 34.0
 offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-theme = ExtResource("3_yi1as")
-theme_override_fonts/font = ExtResource("2_uoroi")
-theme_override_font_sizes/font_size = 22
-
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.3)
-material = SubResource("CanvasItemMaterial_ic8cr")
-offset_left = -32.0
-offset_top = -100.0
-offset_right = 32.0
-offset_bottom = -36.0
-texture = ExtResource("4_poyhe")
-
-[node name="LandButtonContainer" type="PanelContainer" parent="."]
-material = SubResource("CanvasItemMaterial_i403d")
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -42.0
-offset_top = 31.0
-offset_right = 42.0
-offset_bottom = 89.0
-grow_horizontal = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_rw3e8")
-
-[node name="LandButton" type="Button" parent="LandButtonContainer" groups=["Buttons"]]
-use_parent_material = true
-layout_mode = 2
-theme = ExtResource("4_1yydb")
-theme_override_fonts/font = ExtResource("2_uoroi")
-theme_override_font_sizes/font_size = 22
-text = "Land"
+theme = ExtResource("3_yi1as")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8nw85")
 
 [node name="AreaNotif" type="Area2D" parent="."]
 collision_layer = 8
@@ -331,6 +312,11 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaNotif"]
 shape = SubResource("CircleShape2D_4ymfd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4iew2")
+}
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 visible = false
@@ -349,20 +335,70 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_n1suc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_4iew2")
-}
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+material = SubResource("CanvasItemMaterial_ic8cr")
+custom_minimum_size = Vector2(180, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.5
+offset_top = -221.0
+offset_right = 57.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = -4
+alignment = 2
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-scale = Vector2(0.75, 0.75)
-energy = 0.5
-blend_mode = 2
-shadow_color = Color(0.919342, 0, 0.452291, 0)
-texture = ExtResource("7_fu61o")
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0.3)
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_poyhe")
+stretch_mode = 3
 
-[connection signal="pressed" from="AnalyzeButton" to="." method="_on_analyze_button_pressed"]
-[connection signal="pressed" from="LandButtonContainer/LandButton" to="." method="_on_land_button_pressed"]
+[node name="TextureRect2" type="Label" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0.3)
+use_parent_material = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Curdaw"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="LandButtonContainer" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_i403d")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_top = 31.0
+offset_right = 42.0
+offset_bottom = 89.0
+grow_horizontal = 2
+pivot_offset = Vector2(42, 0)
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_rw3e8")
+
+[node name="LandButton" type="Button" parent="LandButtonContainer" groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 2
+theme = ExtResource("4_1yydb")
+theme_override_fonts/font = ExtResource("2_uoroi")
+theme_override_font_sizes/font_size = 22
+text = "Land"
+
 [connection signal="area_entered" from="AreaNotif" to="." method="AreaEntered"]
 [connection signal="area_exited" from="AreaNotif" to="." method="AreaExited"]
+[connection signal="pressed" from="LandButtonContainer/LandButton" to="." method="_on_land_button_pressed"]

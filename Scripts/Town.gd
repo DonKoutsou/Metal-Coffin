@@ -18,16 +18,23 @@ func _ready() -> void:
 	
 func GenerateCity() -> void:
 	var spots = $CitySpots.get_children()
+	var centername : String = ""
 	for g in spots:
 		var spt = g as CitySpot
-		var spottype = spt.MapSpotTypes.pick_random()
-		var sc = SpotScene.instantiate() as MapSpot
-		
+		var sc = SpotScene.instantiate() as MapSpot 
+		var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
+
 		sc.connect("SpotAproached", TownSpotApreached)
 		sc.connect("SpotSearched", TownSpotSearched)
 		sc.connect("SpotAnalazyed", TownSpotAnalyzed)
 		
 		sc.SetSpotData(spottype)
+		if (spottype.GetEnumString() == "CITY_CENTER"):
+			centername = sc.SpotName + " City"
+		else : if (spottype.FullName == "Chora"):
+			centername = sc.SpotName
+		else :if (centername != ""):
+			sc.SpotName = centername + " " + spottype.FullName
 		var pos = g.position
 		g.replace_by(sc)
 		sc.position = pos

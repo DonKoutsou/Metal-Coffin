@@ -117,8 +117,6 @@ func GenerateMap() -> void:
 		var sc
 		
 		#CONNECT ALL RELEVANT SIGNALS TO IT
-		
-		
 		#var AddingStation = false
 		#DECIDE ON TYPE
 		var type : PackedScene
@@ -151,25 +149,11 @@ func GenerateMap() -> void:
 		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
 		sc.position = pos
 		SpotList.append(sc)
-		#if (AddingStation):
-			#line.add_point(pos)
-		#REPEAT PROCESS FOR ASTEROID FIELD
-		#var asteroidscene = SpotScene.instantiate() as MapSpot
-		#$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(asteroidscene)
-		#asteroidscene.connect("SpotAproached", Arrival)
-		#asteroidscene.connect("SpotSearched", SearchLocation)
-		#asteroidscene.connect("SpotAnalazyed", AnalyzeLocation)
-		#asteroidscene.SetSpotData(CommetMapSpots.pick_random())
-#
-		#var ateroidpos = GetNextRandomPos(Prevpos, Distanceval)
-		#while (HasClose(ateroidpos)):
-			#ateroidpos = GetNextRandomPos(Prevpos, Distanceval)
-		#asteroidscene.position = ateroidpos
-		#SpotList.append(asteroidscene)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 	
 	DrawCityLines()
+	DrawVillageLines()
 	#print(lines)
 		#var cit1 = g as MapSpot
 		#var ln = Line2D.new()
@@ -243,7 +227,7 @@ func prim_mst_optimized(cities: Array) -> Array:
 	while connected.size() < num_cities:
 		# Pop the smallest edge from the heap
 		var min_edge = heap_pop(edge_min_heap)
-		var dist = min_edge[0]
+		#var dist = min_edge[0]
 		var u = min_edge[1]
 		var v = min_edge[2]
 
@@ -299,6 +283,44 @@ func StageFailed() -> void:
 	set_process(true)
 	set_process_input(true)
 	#Travelling = false
+func DrawVillageLines():
+	var cities = get_tree().get_nodes_in_group("Chora")
+	#cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
+	var cityloc : Array[Vector2]
+	for g in cities:
+		cityloc.append($CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
+	
+	var lines = prim_mst_optimized(cityloc)
+	#var mat = CanvasItemMaterial.new()
+	#mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+	var paintedlines : Array[Line2D]
+	for l in lines:
+		var lne = Line2D.new()
+		lne.width = 5
+		lne.joint_mode = Line2D.LINE_JOINT_ROUND
+		paintedlines.append(lne)
+		lne.default_color = Color(1,1,1,0.3)
+		#lne.material = mat
+		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
+		for g in l:
+			lne.add_point(g)
+	
+	for l in paintedlines:
+		var point1 = l.get_point_position(0)
+		var point2 = l.get_point_position(1)
+		l.remove_point(1)
+		
+		var dir = point1.direction_to(point2)
+		
+		var dist = point1.distance_to(point2)
+		var pointamm = roundi(dist / 50)
+		var offsetperpoint = dist/pointamm
+		for g in pointamm:
+			var offset = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+			l.add_point(point1 + offset)
+		
+		l.add_point(point2)
+		
 func DrawCityLines():
 	var cities = get_tree().get_nodes_in_group("City Center")
 	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
@@ -309,13 +331,32 @@ func DrawCityLines():
 	var lines = prim_mst_optimized(cityloc)
 	var mat = CanvasItemMaterial.new()
 	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+	#var paintedlines : Array[Line2D]
 	for l in lines:
 		var lne = Line2D.new()
+		lne.joint_mode = Line2D.LINE_JOINT_ROUND
+		#paintedlines.append(lne)
 		lne.default_color = Color(1,1,1,0.2)
 		lne.material = mat
 		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
 		for g in l:
 			lne.add_point(g)
+	
+	#for l in paintedlines:
+		#var point1 = l.get_point_position(0)
+		#var point2 = l.get_point_position(1)
+		#l.remove_point(1)
+		#
+		#var dir = point1.direction_to(point2)
+		#
+		#var dist = point1.distance_to(point2)
+		#var pointamm = roundi(dist / 50)
+		#var offsetperpoint = dist/pointamm
+		#for g in pointamm:
+			#var offset = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+			#l.add_point(point1 + offset)
+		#
+		#l.add_point(point2)
 #func DepartForLocation(stage :MapSpot) -> void:
 #	if (Travelling):
 #		return
@@ -380,7 +421,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		#if (dat.Analyzed):
 			#sc.OnSpotAnalyzed()
 	call_deferred("DrawCityLines")
-
+	call_deferred("DrawVillageLines")
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():

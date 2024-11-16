@@ -41,6 +41,18 @@ func RefilResource(StatN : String, Amm : float) -> void:
 func SetStatValue(StatN : String, Amm : float) -> void:
 	_UpdateStatCurrentValue(StatN, Amm)
 	SD_StatsUpdated.emit(StatN)
+func ApplyCaptainStats(CptStats : Array[ShipStat]) -> void:
+	for g in CptStats:
+			_AddToStatShipBuff(g.StatName ,g.StatBase)
+			#if (g is FluidShipStat):
+				#_AddToStatCurrentValue(g.StatName, g.StatCurrentVal)
+			SD_StatsUpdated.emit(g.StatName)
+func RemoveCaptainStats(CptStats : Array[ShipStat]) -> void:
+	for g in CptStats:
+			_AddToStatShipBuff(g.StatName , - g.StatBase)
+			#if (g is FluidShipStat):
+				#_AddToStatCurrentValue(g.StatName, g.StatCurrentVal)
+			SD_StatsUpdated.emit(g.StatName)
 func ApplyShipStats(ShipStats : Array[BaseShipStat]) -> void:
 		for g in ShipStats.size():
 			var shipst = ShipStats[g] as BaseShipStat

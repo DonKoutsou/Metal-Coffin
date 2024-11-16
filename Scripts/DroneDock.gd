@@ -26,6 +26,11 @@ func _ready() -> void:
 		#call_deferred("AddDroneToHierarchy",drone)
 func HasSpace() -> bool:
 	return DockedDrones.size() + FlyingDrones.size() < 6
+func ClearAllDrones() -> void:
+	for g in DockedDrones:
+		DroneDisharged(g)
+	for g in FlyingDrones:
+		DroneDisharged(g)
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
 	for g in DockedDrones:
@@ -38,6 +43,8 @@ func DroneDisharged(Dr : Drone):
 		DockedDrones.erase(Dr)
 	if (FlyingDrones.has(Dr)):
 		FlyingDrones.erase(Dr)
+	ShipData.GetInstance().RemoveCaptainStats([Dr.Cpt.GetStat("INVENTORY_CAPACITY")])
+	Inventory.GetInstance().UpdateSize()
 	Dr.queue_free()
 func AddCaptain(Cpt : Captain) -> void:
 	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
@@ -47,6 +54,8 @@ func AddDrone(Drne : Drone) -> void:
 	#var drone = DroneScene.instantiate()
 	var notif = CaptainNotif.instantiate() as CaptainNotification
 	notif.SetCaptain(Drne.Cpt)
+	ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
+	Inventory.GetInstance().UpdateSize()
 	Ingame_UIManager.GetInstance().AddUI(notif, false, true)
 	AddDroneToHierarchy(Drne)
 func PlayLandingSound()-> void:
