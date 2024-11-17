@@ -1,0 +1,156 @@
+[gd_scene load_steps=15 format=3 uid="uid://cxnqcu1fgkujm"]
+
+[ext_resource type="Script" path="res://Scenes/PLfightShip.gd" id="1_au7kq"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="1_m24iq"]
+[ext_resource type="Texture2D" uid="uid://ba67hhfb6sdb5" path="res://Assets/Sand/Rock053_1K-PNG_Color.png" id="1_r61gv"]
+[ext_resource type="PackedScene" uid="uid://b2jnb8e6subyj" path="res://Scenes/Bullet.tscn" id="2_emh64"]
+[ext_resource type="Texture2D" uid="uid://cad2gsiytpugg" path="res://Assets/Sand/Rock053_1K-PNG_NormalGL.png" id="2_vpufr"]
+[ext_resource type="Script" path="res://Scenes/enemy_ship.gd" id="4_2182e"]
+[ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/city.png" id="5_rngj7"]
+[ext_resource type="PackedScene" uid="uid://0hgppu4so3to" path="res://Scenes/explostion.tscn" id="8_1wjhv"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="8_m1m56"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_67hb2"]
+diffuse_texture = ExtResource("1_r61gv")
+normal_texture = ExtResource("2_vpufr")
+texture_filter = 5
+texture_repeat = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_233h4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6qa60"]
+radius = 19.105
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hij26"]
+size = Vector2(791, 56)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5xihq"]
+light_mode = 1
+
+[node name="BattleArena" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2500.0
+offset_top = -5000.0
+offset_right = 9.99963e+07
+offset_bottom = 4352.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_67hb2")
+stretch_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_233h4")
+position = Vector2(609, 366)
+scale = Vector2(4.56641, 4.56641)
+texture = ExtResource("5_rngj7")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2(609, 366)
+scale = Vector2(4.56641, 4.56641)
+color = Color(0, 0, 0, 1)
+
+[node name="PlShip" type="Area2D" parent="."]
+position = Vector2(222, 295)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_au7kq")
+BulletScene = ExtResource("2_emh64")
+
+[node name="Guns" type="Node2D" parent="PlShip"]
+
+[node name="Gun" type="Node2D" parent="PlShip/Guns"]
+position = Vector2(10, 25)
+
+[node name="Gun2" type="Node2D" parent="PlShip/Guns"]
+position = Vector2(10, -25)
+
+[node name="Sprite2D" type="Sprite2D" parent="PlShip"]
+rotation = -1.5708
+texture = ExtResource("1_m24iq")
+
+[node name="Node2D" type="Node2D" parent="PlShip"]
+position = Vector2(4, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlShip"]
+shape = SubResource("CircleShape2D_6qa60")
+
+[node name="PointLight2D" type="PointLight2D" parent="PlShip"]
+scale = Vector2(7.97656, 7.97656)
+energy = 0.5
+blend_mode = 2
+shadow_color = Color(0.919342, 0, 0.452291, 0)
+texture = ExtResource("8_m1m56")
+texture_scale = 0.11
+height = 100.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="PlShip"]
+
+[node name="GPUParticles2D" parent="PlShip" instance=ExtResource("8_1wjhv")]
+
+[node name="EnemyShip" type="Area2D" parent="."]
+position = Vector2(905, 329)
+rotation = 3.14159
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_2182e")
+BulletScene = ExtResource("2_emh64")
+
+[node name="PointLight2D" type="PointLight2D" parent="EnemyShip"]
+scale = Vector2(7.97656, 7.97656)
+energy = 0.5
+blend_mode = 2
+shadow_color = Color(0.919342, 0, 0.452291, 0)
+texture = ExtResource("8_m1m56")
+texture_scale = 0.11
+height = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyShip"]
+rotation = -1.5708
+texture = ExtResource("1_m24iq")
+
+[node name="Node2D" type="Node2D" parent="EnemyShip"]
+position = Vector2(4, 0)
+
+[node name="Orientator" type="Node2D" parent="EnemyShip"]
+
+[node name="PlLocator" type="Area2D" parent="EnemyShip"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyShip/PlLocator"]
+position = Vector2(426.5, -0.000183105)
+shape = SubResource("RectangleShape2D_hij26")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyShip"]
+shape = SubResource("CircleShape2D_6qa60")
+
+[node name="Gun" type="Node2D" parent="EnemyShip"]
+position = Vector2(30, 0)
+
+[node name="GPUParticles2D" parent="EnemyShip" instance=ExtResource("8_1wjhv")]
+material = SubResource("CanvasItemMaterial_5xihq")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="EnemyShip"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(582, 331)
+scale = Vector2(7.97656, 7.97656)
+energy = 0.5
+blend_mode = 2
+shadow_color = Color(0.919342, 0, 0.452291, 0)
+texture = ExtResource("8_m1m56")
+texture_scale = 0.88
+height = 485.0
+
+[connection signal="screen_exited" from="PlShip/VisibleOnScreenNotifier2D" to="PlShip" method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="EnemyShip/PlLocator" to="EnemyShip" method="_on_pl_locator_area_entered"]
+[connection signal="area_exited" from="EnemyShip/PlLocator" to="EnemyShip" method="_on_pl_locator_area_exited"]
+[connection signal="screen_exited" from="EnemyShip/VisibleOnScreenNotifier2D" to="EnemyShip" method="_on_visible_on_screen_notifier_2d_screen_exited"]

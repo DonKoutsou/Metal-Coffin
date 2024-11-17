@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://bhxtp3ianhg1v"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_w1eu0"]
+
+[resource]
+script = ExtResource("1_w1eu0")
+SpotName = "Tauza"

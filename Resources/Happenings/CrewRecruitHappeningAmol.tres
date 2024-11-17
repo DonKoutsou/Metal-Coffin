@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://r5k7lwi7y3wa"]
+
+[ext_resource type="Script" path="res://Scripts/HappeningOption.gd" id="1_084du"]
+[ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/Amol.tres" id="2_v6565"]
+[ext_resource type="Script" path="res://Scripts/DroneHappeningOption.gd" id="3_6dwv7"]
+[ext_resource type="Script" path="res://Scripts/StringHappeningOption.gd" id="4_ioldp"]
+[ext_resource type="Script" path="res://Scripts/Happening.gd" id="5_vub4e"]
+
+[sub_resource type="Resource" id="Resource_qxdql"]
+script = ExtResource("3_6dwv7")
+Cpt = ExtResource("2_v6565")
+OptionName = "Accept them into your fleet"
+
+[sub_resource type="Resource" id="Resource_lqhcv"]
+script = ExtResource("4_ioldp")
+StringReply = "They depart."
+OptionName = "Reject them"
+
+[resource]
+script = ExtResource("5_vub4e")
+HappeningName = "Crew Recruit"
+HappeningText = "In the city you meet someone who is interested in joining your fleet. What do you say?"
+Options = Array[ExtResource("1_084du")]([SubResource("Resource_qxdql"), SubResource("Resource_lqhcv")])

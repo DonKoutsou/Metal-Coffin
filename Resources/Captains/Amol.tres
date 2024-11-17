@@ -41,7 +41,7 @@ AllowAutoRefil = false
 
 [resource]
 script = ExtResource("1_phe2p")
-CaptainName = "George"
+CaptainName = "Amol"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_rabqn")
 CaptainStats = Array[ExtResource("2_vd7a0")]([SubResource("Resource_d5fgy"), SubResource("Resource_bf8ot"), SubResource("Resource_10bwx"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0")])

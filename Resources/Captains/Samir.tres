@@ -1,47 +1,47 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=9 format=3 uid="uid://disqw5cbdncos"]
 
-[ext_resource type="Texture2D" uid="uid://dvqqaec67k16b" path="res://Assets/CaptainPortraits/Captain6.png" id="1_c5wr2"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_088m5"]
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_v3e0h"]
+[ext_resource type="Texture2D" uid="uid://dvqqaec67k16b" path="res://Assets/CaptainPortraits/Captain6.png" id="1_1scjo"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_ufoo0"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="3_3cbbo"]
 
 [sub_resource type="Resource" id="Resource_ju8ek"]
-script = ExtResource("2_v3e0h")
+script = ExtResource("2_ufoo0")
 StatName = "SPEED"
 StatMax = 3.0
 StatBase = 0.5
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_w0tur"]
-script = ExtResource("2_v3e0h")
+script = ExtResource("2_ufoo0")
 StatName = "RADAR_RANGE"
 StatMax = 300.0
 StatBase = 150.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_jbxwi"]
-script = ExtResource("2_v3e0h")
+script = ExtResource("2_ufoo0")
 StatName = "ANALYZE_RANGE"
 StatMax = 150.0
 StatBase = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_34f4w"]
-script = ExtResource("2_v3e0h")
+script = ExtResource("2_ufoo0")
 StatName = "INVENTORY_CAPACITY"
 StatMax = 3.0
 StatBase = 3.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_hjfxs"]
-script = ExtResource("2_v3e0h")
+script = ExtResource("2_ufoo0")
 StatName = "FIREPOWER"
 StatMax = 10.0
 StatBase = 2.0
 AllowAutoRefil = false
 
 [resource]
-script = ExtResource("2_088m5")
-CaptainName = "Cokakias"
+script = ExtResource("3_3cbbo")
+CaptainName = "Samir"
 CaptainBio = "Shithead"
-CaptainPortrait = ExtResource("1_c5wr2")
-CaptainStats = Array[ExtResource("2_v3e0h")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_jbxwi"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs")])
+CaptainPortrait = ExtResource("1_1scjo")
+CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_jbxwi"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs")])

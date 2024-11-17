@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://djtjqkmdep3dh"]
+[gd_scene load_steps=19 format=3 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/EnemyShip.tscn" id="2_iw3q7"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_uoroi"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_rw3e8"]
 [ext_resource type="Theme" uid="uid://blxde2llpapdx" path="res://Theme/DarkBlueButtonCirlce.tres" id="3_yi1as"]
@@ -288,6 +289,7 @@ light_mode = 1
 
 [node name="MapSpot" type="Node2D"]
 script = ExtResource("1_x7uyn")
+HostileShipScene = ExtResource("2_iw3q7")
 
 [node name="AnalyzeButton" type="Panel" parent="."]
 show_behind_parent = true
@@ -354,6 +356,7 @@ theme_override_constants/separation = -4
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+visible = false
 modulate = Color(1, 1, 1, 0.3)
 use_parent_material = true
 layout_mode = 2

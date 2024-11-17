@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://b67ax85vkrox"]
+
+[ext_resource type="Resource" uid="uid://r5k7lwi7y3wa" path="res://Resources/Happenings/CrewRecruitHappeningAmol.tres" id="1_33een"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_wscmt"]
+
+[resource]
+script = ExtResource("2_wscmt")
+SpotName = "Cardan"
+Event = ExtResource("1_33een")

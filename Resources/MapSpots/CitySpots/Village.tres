@@ -1,42 +1,28 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=16 format=3 uid="uid://df37gonu46vbl"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=15 format=3 uid="uid://df37gonu46vbl"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_jl7m7"]
 [ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="2_sgbgx"]
+[ext_resource type="Resource" uid="uid://eemvne8otjn4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Armak.tres" id="3_b6ce5"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_hhy72"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_i4484"]
-[ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/Villages/Cardi.tres" id="3_snnyn"]
+[ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_snnyn"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_ha07c"]
+[ext_resource type="Resource" uid="uid://cj1ic1tc1y86i" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Sazma.tres" id="5_6lban"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_vmkke"]
+[ext_resource type="Resource" uid="uid://ck7jx6746yvdp" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Sirkan.tres" id="6_65daw"]
+[ext_resource type="Resource" uid="uid://d0f35jq2otwcu" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Zarikada.tres" id="7_0pbcu"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_jh1el"]
-[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_8rmgo"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_ex7ij"]
-
-[sub_resource type="Resource" id="Resource_i0qwa"]
-script = ExtResource("3_i4484")
-SpotName = "Samothrake"
-
-[sub_resource type="Resource" id="Resource_frucv"]
-script = ExtResource("3_i4484")
-SpotName = "Kazan"
-
-[sub_resource type="Resource" id="Resource_y2cpb"]
-script = ExtResource("3_i4484")
-SpotName = "Curd"
-
-[sub_resource type="Resource" id="Resource_gjm2h"]
-script = ExtResource("3_i4484")
-SpotName = "Hijaz"
 
 [sub_resource type="Resource" id="Resource_3mffu"]
 script = ExtResource("4_ha07c")
-PossibleIds = Array[ExtResource("3_i4484")]([ExtResource("3_snnyn"), SubResource("Resource_i0qwa"), SubResource("Resource_frucv"), SubResource("Resource_y2cpb"), SubResource("Resource_gjm2h")])
+PossibleIds = Array[ExtResource("3_i4484")]([ExtResource("3_b6ce5"), ExtResource("3_snnyn"), ExtResource("5_6lban"), ExtResource("6_65daw"), ExtResource("7_0pbcu")])
 DataName = ""
 
 [resource]
 script = ExtResource("10_ex7ij")
 SpotK = 13
 MapIcon = ExtResource("2_sgbgx")
-Scene = ExtResource("9_8rmgo")
 PossibleDrops = Array[ExtResource("3_hhy72")]([ExtResource("5_vmkke"), ExtResource("8_jh1el")])
 FullName = "Village"
 Description = "blah blah"

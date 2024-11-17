@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://dymr3kp27n5to"]
 
-[ext_resource type="Resource" uid="uid://r5k7lwi7y3wa" path="res://Resources/Happenings/CrewRecruitHappening.tres" id="1_3u8gj"]
+[ext_resource type="Resource" uid="uid://byx81bxds55dv" path="res://Resources/Happenings/CrewRecruitHappeningSamir.tres" id="1_vw7nb"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_ycksc"]
 
 [resource]
 script = ExtResource("2_ycksc")
 SpotName = "Cardi"
-Event = ExtResource("1_3u8gj")
+Event = ExtResource("1_vw7nb")

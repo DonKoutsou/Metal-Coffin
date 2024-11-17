@@ -1,28 +1,36 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=14 format=3 uid="uid://du24ilvkea51x"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=23 format=3 uid="uid://du24ilvkea51x"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_ig8qa"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_npnnf"]
-[ext_resource type="Resource" uid="uid://cymxwbov1pdsm" path="res://Resources/Cities/TsardiCity.tres" id="3_2nme6"]
+[ext_resource type="Resource" uid="uid://cymxwbov1pdsm" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Tsard.tres" id="3_ag8h5"]
 [ext_resource type="Texture2D" uid="uid://c33retp6uur1y" path="res://Assets/modern-city.png" id="3_c6nwh"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="4_b4xno"]
+[ext_resource type="Resource" uid="uid://dm38q3okq43cs" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Ziliniara.tres" id="4_jl05r"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_u8h8q"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_clk2i"]
+[ext_resource type="Resource" uid="uid://b67ax85vkrox" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Cardan.tres" id="5_f2xt1"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="6_qx5jb"]
+[ext_resource type="Resource" uid="uid://dt51jwok5axck" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Corvakia.tres" id="6_tqj8y"]
+[ext_resource type="Resource" uid="uid://cwljum7t44hf8" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Gorgan.tres" id="7_ahngf"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="7_kj2h8"]
+[ext_resource type="Resource" uid="uid://61l3882cpx5c" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Horkak.tres" id="8_mj5gy"]
+[ext_resource type="Resource" uid="uid://7by32q5oqc6b" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Ilizia.tres" id="9_1qn8w"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="9_3hiyq"]
-[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="10_xiw54"]
+[ext_resource type="Resource" uid="uid://bhxtp3ianhg1v" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Tauza.tres" id="10_6n0um"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="11_2pbl6"]
+[ext_resource type="Resource" uid="uid://dfv7w4reu4ulx" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Tzidiza.tres" id="11_glwy5"]
+[ext_resource type="Resource" uid="uid://o5qlnq6nohu2" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Ulmak.tres" id="12_h17fg"]
+[ext_resource type="Resource" uid="uid://kndh3yrjjlpd" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Zilidana.tres" id="13_7rbke"]
 
 [sub_resource type="Resource" id="Resource_m1q4d"]
 script = ExtResource("4_u8h8q")
-PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_2nme6")])
+PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_ag8h5"), ExtResource("6_tqj8y"), ExtResource("7_ahngf"), ExtResource("8_mj5gy"), ExtResource("9_1qn8w"), ExtResource("5_f2xt1"), ExtResource("10_6n0um"), ExtResource("11_glwy5"), ExtResource("4_jl05r"), ExtResource("12_h17fg"), ExtResource("13_7rbke")])
 DataName = ""
 
 [resource]
 script = ExtResource("11_2pbl6")
 SpotK = 12
 MapIcon = ExtResource("3_c6nwh")
-Scene = ExtResource("10_xiw54")
 PossibleDrops = Array[ExtResource("4_b4xno")]([ExtResource("5_clk2i"), ExtResource("6_qx5jb"), ExtResource("7_kj2h8"), ExtResource("9_3hiyq")])
 FullName = "City Center"
 Description = "blah blah"
@@ -30,4 +38,6 @@ CanLand = false
 HasAtmoshere = false
 VisibleOnStart = true
 DropAmmount = 1
+EnemyCity = true
+SpawnHostileShip = false
 CustomData = Array[ExtResource("1_ig8qa")]([SubResource("Resource_m1q4d")])

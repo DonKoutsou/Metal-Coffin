@@ -3,7 +3,7 @@ class_name MapSpotType
 
 @export var SpotK : SpotKind
 @export var MapIcon : Texture
-@export var Scene : PackedScene
+#@export var Scene : PackedScene
 @export var PossibleDrops : Array[Item]
 @export var FullName : String
 @export var Description : String
@@ -11,6 +11,8 @@ class_name MapSpotType
 @export var HasAtmoshere : bool = false
 @export var VisibleOnStart : bool = false
 @export var DropAmmount : int = 1
+@export var EnemyCity : bool = false
+@export var SpawnHostileShip : bool = false
 
 @export var CustomData : Array[MapSpotCustomData]
 

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://dfv7w4reu4ulx"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_um8ae"]
+
+[resource]
+script = ExtResource("1_um8ae")
+SpotName = "Ulmak"

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="PackedScene" uid="uid://bakbjn5qbsc2l" path="res://Scenes/DroneNotif.tscn" id="2_1dqnw"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
-[ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/George.tres" id="3_fw0pf"]
+[ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/Amol.tres" id="3_fw0pf"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="6_x7c6h"]
@@ -34,6 +34,7 @@ scale_curve = SubResource("CurveTexture_rlrpj")
 radius = 258.136
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6yyl"]
+resource_local_to_scene = true
 radius = 3.16228
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2le8a"]
@@ -55,9 +56,11 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
+resource_local_to_scene = true
 radius = 150.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
+resource_local_to_scene = true
 shader = ExtResource("6_x7c6h")
 shader_parameter/line_color = Color(0.253, 0.622, 0.847, 1)
 shader_parameter/range_lines = 1.0
@@ -71,9 +74,11 @@ shader_parameter/ShowRadat = true
 shader_parameter/scale_factor = 0.015
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_si61q"]
+resource_local_to_scene = true
 radius = 100.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xqscw"]
+resource_local_to_scene = true
 shader = ExtResource("6_x7c6h")
 shader_parameter/line_color = Color(0.319048, 0.619537, 0.0555898, 1)
 shader_parameter/range_lines = 1.0

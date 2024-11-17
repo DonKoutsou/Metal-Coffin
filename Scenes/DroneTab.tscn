@@ -147,6 +147,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="TextureButton"]
+modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -161,7 +162,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
 theme_override_fonts/font = ExtResource("5_wmv0e")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 12
 text = "Deploy Drone"
 horizontal_alignment = 1
 vertical_alignment = 1

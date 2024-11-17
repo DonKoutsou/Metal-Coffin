@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://cwljum7t44hf8"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_5cebh"]
+
+[resource]
+script = ExtResource("1_5cebh")
+SpotName = "Gorgan"

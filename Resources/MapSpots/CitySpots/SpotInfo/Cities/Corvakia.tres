@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://dt51jwok5axck"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_7qkd6"]
+
+[resource]
+script = ExtResource("1_7qkd6")
+SpotName = "Corvakia"

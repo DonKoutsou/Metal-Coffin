@@ -63,14 +63,6 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.connect("SpotAnalazyed", TownSpotAnalyzed)
 		var type = spotdat.SpotType
 		sc.SetSpotData(type)
-
-		if (spotdat.Seen):
-			sc.OnSpotSeen(false)
-		
-		sc.Visited = spotdat.Visited
-		
-		if (spotdat.Analyzed):
-			sc.OnSpotAnalyzed()
 		
 		var spt = $CitySpots.get_child(g)
 		var sptpos = spt.position
@@ -79,6 +71,16 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.SpotName = spotdat.SpotName
 		sc.Evnt = spotdat.Evnt
 		spt.free()
+
+		if (spotdat.Seen):
+			sc.OnSpotSeen(false)
+		
+		#sc.Visited = spotdat.Visited
+		if (spotdat.Visited):
+			sc.OnSpotVisited(false)
+			
+		if (spotdat.Analyzed):
+			sc.OnSpotAnalyzed(false)
 		
 func TownSpotApreached(spot : MapSpot):
 	SpotAproached.emit(spot)

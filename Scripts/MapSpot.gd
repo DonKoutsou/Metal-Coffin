@@ -3,7 +3,7 @@ class_name MapSpot
 
 @onready var land_button_container: PanelContainer = $LandButtonContainer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@export var HostileShipScene : PackedScene
 
 #signal MapPressed(Pos : MapSpot)
 signal SpotSearched(Pos : MapSpot)
@@ -15,6 +15,7 @@ var Pos : Vector2
 var Visited = false
 var Seen = false
 var Analyzed = false
+#bool to avoid sent drones colliding with current visited spot
 var CurrentlyVisiting = false
 var Evnt : Happening
 var SpotName : String
@@ -27,7 +28,17 @@ func _ready() -> void:
 	if (Pos != Vector2.ZERO):
 		position = Pos
 	set_physics_process(false)
-
+	#if (SpotType.EnemyCity):
+		#add_to_group("EnemyDestinations")
+	#if (SpotType.SpawnHostileShip):
+		#call_deferred("SpawnEnemyShip")
+		
+		
+func SpawnEnemyShip():
+	var host = HostileShipScene.instantiate() as HostileShip
+	host.DestinationCity = self
+	get_parent().get_parent().get_parent().get_parent().add_child(host)
+	host.global_position = global_position
 func _physics_process(_delta: float) -> void:
 	var cam = ShipCamera.GetInstance()
 	$LandButtonContainer.scale = Vector2(1,1) /  cam.zoom
@@ -97,7 +108,7 @@ func GetPossibleDrops() -> Array:
 	return SpotType.PossibleDrops if Analyzed else []
 #//////////////////////////////////////////////////////////////////
 #todo find better way for dialogue from station
-func OnSpotVisited() -> void:
+func OnSpotVisited(PlayAnim : bool = true) -> void:
 	#if (SpotType.GetEnumString() == "SUB_STATION"):
 		#var diags = SpotType.GetCustomData("StationInfo")
 		#var diag : MapSpotCustomDataStringArray = diags.pick_random()
@@ -119,7 +130,7 @@ func OnSpotVisited() -> void:
 		##SpotType.ClearCustomData(diag)
 		#queue_free()
 	if (!Analyzed):
-		OnSpotAnalyzed()
+		OnSpotAnalyzed(PlayAnim)
 	Visited = true
 #Called when radar sees a mapspot
 func OnSpotSeen(PlayAnim : bool = true) -> void:
@@ -182,9 +193,9 @@ func AreaEntered(area: Area2D):
 			if (!Analyzed):
 				OnSpotAnalyzed()
 		else: if (area.get_collision_layer_value(3)):
-			if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
-				land_button_container.visible = true
-				set_physics_process(true)
+			#if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
+			land_button_container.visible = true
+			set_physics_process(true)
 			SpotAproached.emit(self)
 			OnSpotVisited()
 			CurrentlyVisiting = true

@@ -1,29 +1,31 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=15 format=3 uid="uid://dyvpncg7tolc7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=18 format=3 uid="uid://dyvpncg7tolc7"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_qkgba"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_khihf"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_fnfii"]
-[ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/Cities/QuifsaCity.tres" id="3_y4ldg"]
+[ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Alivia.tres" id="3_u02hr"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_1jm82"]
-[ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/Cities/Curd.tres" id="4_taycf"]
+[ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Curd.tres" id="4_mjh1h"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_xevlw"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_fpar0"]
+[ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Dormak.tres" id="5_fuxam"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_82ny1"]
+[ext_resource type="Resource" uid="uid://dobir15ooa8uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Cirkari.tres" id="6_esr4f"]
 [ext_resource type="Texture2D" uid="uid://cjs06ul2657jw" path="res://Assets/block-house.png" id="6_ixavb"]
+[ext_resource type="Resource" uid="uid://kjwdfwc0h4uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Kalicard.tres" id="7_bot42"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_2bkel"]
-[ext_resource type="PackedScene" uid="uid://bddhd7ec0loxy" path="res://Scenes/MapSpotScenes/AsteroidBelt.tscn" id="9_xfgoe"]
+[ext_resource type="Resource" uid="uid://ltonn44hg1kq" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Krokaria.tres" id="8_2jrjj"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_jgsae"]
 
 [sub_resource type="Resource" id="Resource_k4o2w"]
 script = ExtResource("4_xevlw")
-PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_y4ldg"), ExtResource("4_taycf")])
+PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_u02hr"), ExtResource("6_esr4f"), ExtResource("7_bot42"), ExtResource("4_mjh1h"), ExtResource("8_2jrjj"), ExtResource("5_fuxam")])
 DataName = ""
 
 [resource]
 script = ExtResource("10_jgsae")
 SpotK = 12
 MapIcon = ExtResource("6_ixavb")
-Scene = ExtResource("9_xfgoe")
 PossibleDrops = Array[ExtResource("3_fnfii")]([ExtResource("4_1jm82"), ExtResource("5_fpar0"), ExtResource("6_82ny1"), ExtResource("8_2bkel")])
 FullName = "Capital City Center"
 Description = "blah blah"
@@ -31,4 +33,6 @@ CanLand = false
 HasAtmoshere = false
 VisibleOnStart = true
 DropAmmount = 1
+EnemyCity = true
+SpawnHostileShip = true
 CustomData = Array[ExtResource("1_qkgba")]([SubResource("Resource_k4o2w")])
