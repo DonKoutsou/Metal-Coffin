@@ -28,10 +28,9 @@ func _ready() -> void:
 	if (Pos != Vector2.ZERO):
 		position = Pos
 	set_physics_process(false)
-	#if (SpotType.EnemyCity):
-		#add_to_group("EnemyDestinations")
-	#if (SpotType.SpawnHostileShip):
-		#call_deferred("SpawnEnemyShip")
+	if (SpotType.EnemyCity):
+		add_to_group("EnemyDestinations")
+	
 		
 		
 func SpawnEnemyShip():
@@ -185,7 +184,7 @@ func PlaySound():
 	sound.play()
 	
 func AreaEntered(area: Area2D):
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+	if (area.get_parent() is PlayerShip or area.get_parent()  is Drone):
 		if (area.get_collision_layer_value(1)):
 			if (!Seen):
 				OnSpotSeen()

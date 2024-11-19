@@ -1,11 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=13 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/HostileShip.gd" id="1_lwgul"]
+[ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_8smby"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="4_7dmjl"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="5_hvgmw"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_fr12v"]
-[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="7_bismj"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="8_4pdha"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2wcmb"]
+radius = 3.0
 
 [sub_resource type="Curve" id="Curve_qk12j"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -28,21 +31,6 @@ scale_min = 0.05
 scale_max = 0.05
 scale_curve = SubResource("CurveTexture_rlrpj")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_liav1"]
-light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ku2rg"]
-draw_center = false
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.969432, 0.527551, 0.201925, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true
 radius = 150.0
@@ -61,15 +49,17 @@ shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
 shader_parameter/scale_factor = 0.015
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2wcmb"]
-radius = 2.0
-
-[node name="HostileShip" type="Node2D" groups=["Ships"]]
+[node name="HostileShip" type="Area2D" groups=["Enemy", "Ships"]]
+collision_layer = 0
+collision_mask = 13
 script = ExtResource("1_lwgul")
-RadarRange = 800
+EnemyLocatedNotifScene = ExtResource("2_8smby")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2wcmb")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(-7, 0)
+position = Vector2(-1, 0)
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_kyfni")
 texture = ExtResource("4_7dmjl")
@@ -78,28 +68,12 @@ lifetime = 20.0
 [node name="Node2D2" type="Node2D" parent="."]
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="Node2D2"]
-rotation = -1.5708
+rotation = 1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_hvgmw")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0.5, 0)
-
-[node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
-material = SubResource("CanvasItemMaterial_liav1")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -17.0
-offset_top = -17.0
-offset_right = 17.0
-offset_bottom = 17.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ku2rg")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_fr12v")
@@ -107,17 +81,7 @@ volume_db = -15.0
 pitch_scale = 0.5
 bus = &"MapSounds"
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(7.97656, 7.97656)
-energy = 0.5
-blend_mode = 2
-shadow_color = Color(0.919342, 0, 0.452291, 0)
-texture = ExtResource("7_bismj")
-texture_scale = 0.25
-height = 100.0
-
 [node name="Radar2" type="Area2D" parent="."]
-rotation = -0.282025
 collision_layer = 0
 collision_mask = 4
 monitorable = false
@@ -126,6 +90,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_63pb3")
 
 [node name="Radar_Range" type="ColorRect" parent="Radar2" groups=["MapLines"]]
+visible = false
 material = SubResource("ShaderMaterial_v4ssc")
 anchors_preset = 8
 anchor_left = 0.5
@@ -141,13 +106,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="ShipBody" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
-shape = SubResource("CircleShape2D_2wcmb")
-
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="area_entered" from="Radar2" to="." method="_on_radar_2_area_entered"]
-[connection signal="area_entered" from="ShipBody" to="." method="_on_ship_body_area_entered"]

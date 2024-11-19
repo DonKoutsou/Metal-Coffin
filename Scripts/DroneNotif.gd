@@ -16,4 +16,5 @@ func SetNotifText(Stat : String) -> void:
 
 func _physics_process(_delta: float) -> void:
 	rotation = -EntityToFollow.rotation
+	#global_position = EntityToFollow.global_position
 	scale = Vector2(1,1) / camera.zoom

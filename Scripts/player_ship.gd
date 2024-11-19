@@ -5,6 +5,7 @@ class_name PlayerShip
 @export var Notif : PackedScene
 @export var LowStatsToNotifyAbout : Array[String]
 
+var ShipType : BaseShip
 
 var Travelling = false
 #var ChangingCourse = false
@@ -19,6 +20,7 @@ signal ShipForceStopped
 static var Instance : PlayerShip
 
 func _ready() -> void:
+	MapPointerManager.GetInstance().AddShip(self, true)
 	Instance = self
 
 func GetDroneDock() -> DroneDock:
@@ -124,7 +126,7 @@ func _physics_process(_delta: float) -> void:
 		#Dat.RefilResource("OXYGEN", -oxy)
 	global_position = $Node2D.global_position
 	Dat.ConsumeResource("FUEL", fuel)
-	UpdateFuelRange(Dat.GetStat("FUEL").GetCurrentValue(), Dat.GetStat("FUEL_EFFICIENCY").GetStat())
+	
 
 func GetShipSpeed() -> float:
 	return $Node2D.position.x
@@ -193,7 +195,19 @@ func ToggleUI(t : bool):
 	$Fuel_Range.visible = t
 	$Analyzer/Analyzer_Range.visible = t
 
-func UpdateShipIcon(Tex : Texture) -> void:
+func SetShipType(Ship : BaseShip):
+	ShipType = Ship
+	_UpdateShipIcon(Ship.TopIcon)
+
+func GetBattleStats() -> BattleShipStats:
+	var stats = BattleShipStats.new()
+	stats.Hull = ShipType.GetStat("Hull")
+	stats.FirePower = 1
+	stats.Icon = ShipType.TopIcon
+	stats.Name = "Player"
+	return stats
+
+func _UpdateShipIcon(Tex : Texture) -> void:
 	$PlayerShipSpr.texture = Tex	
 
 func _on_player_viz_notifier_screen_entered() -> void:

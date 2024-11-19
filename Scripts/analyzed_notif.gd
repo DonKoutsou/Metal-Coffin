@@ -13,5 +13,5 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	queue_free()
 
 func _physics_process(_delta: float) -> void:
-	#rotation = -EntityToFollow.rotation
+	rotation = -get_parent().rotation
 	scale = Vector2(1,1) / camera.zoom

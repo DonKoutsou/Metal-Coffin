@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs75lsmpw4kvx"]
+
+[ext_resource type="Script" path="res://Scripts/deletable_sound.gd" id="1_qlh0u"]
+
+[node name="DeletableSound" type="AudioStreamPlayer2D"]
+script = ExtResource("1_qlh0u")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

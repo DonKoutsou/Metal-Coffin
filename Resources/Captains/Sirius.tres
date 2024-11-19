@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=9 format=3 uid="uid://cga5buofwr6yr"]
+[gd_resource type="Resource" script_class="Captain" load_steps=11 format=3 uid="uid://cga5buofwr6yr"]
 
 [ext_resource type="Texture2D" uid="uid://bs2wyurwdkx0j" path="res://Assets/CaptainPortraits/Captain5.png" id="1_qhdyr"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_ot5w6"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="3_5m53b"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_kc55u"]
 
 [sub_resource type="Resource" id="Resource_wdy4b"]
 script = ExtResource("2_ot5w6")
@@ -39,9 +40,17 @@ StatMax = 10.0
 StatBase = 4.0
 AllowAutoRefil = false
 
+[sub_resource type="Resource" id="Resource_41ee3"]
+script = ExtResource("2_ot5w6")
+StatName = "HULL"
+StatMax = 300.0
+StatBase = 100.0
+AllowAutoRefil = false
+
 [resource]
 script = ExtResource("3_5m53b")
 CaptainName = "Sirius"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_qhdyr")
-CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_bsryr"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa")])
+ShipIcon = ExtResource("3_kc55u")
+CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_bsryr"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3")])

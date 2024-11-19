@@ -15,7 +15,7 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b86gk"]
 
-[node name="Town" type="Node2D"]
+[node name="Town2" type="Node2D"]
 position = Vector2(608, 338)
 script = ExtResource("1_3nxd6")
 SpotScene = ExtResource("3_woqxo")

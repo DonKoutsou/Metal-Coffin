@@ -1,7 +1,13 @@
 extends Area2D
 
+@export var BulletSound : AudioStream
+
 func _ready() -> void:
-	$AudioStreamPlayer2D.pitch_scale = randf_range(0.9, 1.1)
+	var stream = DeletableSound.new()
+	stream.autoplay = true
+	stream.stream = BulletSound
+	get_parent().add_child(stream)
+	stream.pitch_scale = randf_range(0.9, 1.1)
 
 func _physics_process(delta: float) -> void:
 	global_position = $Node2D.global_position

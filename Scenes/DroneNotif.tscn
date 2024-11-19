@@ -95,11 +95,13 @@ _data = {
 }
 
 [node name="Control" type="Control"]
+modulate = Color(0.908948, 0.280129, 0.164634, 1)
 material = SubResource("CanvasItemMaterial_qtvug")
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_top = -108.0
+offset_right = 233.0
 offset_bottom = -18.0
 pivot_offset = Vector2(0, 90)
 mouse_filter = 2
@@ -110,12 +112,10 @@ use_parent_material = true
 position = Vector2(0, 87)
 points = PackedVector2Array(152, -60, 42, -60, 0, 0)
 width = 2.0
-default_color = Color(0.908948, 0.280129, 0.164634, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="."]
-modulate = Color(0.908948, 0.280129, 0.164634, 1)
 use_parent_material = true
 layout_mode = 0
 offset_left = 142.0

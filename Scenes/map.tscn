@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=36 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="16_4wqve"]
+[ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
+[ext_resource type="PackedScene" uid="uid://1j0ghufup7v" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_qxruq"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
@@ -37,6 +39,9 @@ texture_filter = 5
 texture_repeat = 2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2v8bx"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f561"]
@@ -102,7 +107,7 @@ length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/UIMaster/Screen2:color")
+tracks/0/path = NodePath("UI/Screen2:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -114,7 +119,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/UIMaster/Screen2:visible")
+tracks/1/path = NodePath("UI/Screen2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -129,7 +134,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/UIMaster/Screen2:color")
+tracks/0/path = NodePath("UI/Screen2:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -141,7 +146,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/UIMaster/Screen2:visible")
+tracks/1/path = NodePath("UI/Screen2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -157,7 +162,15 @@ _data = {
 "RESET": SubResource("Animation_wryq0")
 }
 
-[node name="Map" type="Node2D"]
+[node name="Map" type="Control"]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_mq604")
 TownTypes = Array[PackedScene]([ExtResource("3_hkdr3"), ExtResource("3_3kbr0"), ExtResource("4_nd2h0"), ExtResource("5_t2blr"), ExtResource("6_ruf57"), ExtResource("7_w57pf"), ExtResource("8_kpprx")])
 SpecialTownTypes = Array[PackedScene]([ExtResource("3_hkdr3")])
@@ -170,18 +183,10 @@ DroneDockEventH = ExtResource("28_tg7n1")
 HappeningUI = ExtResource("12_5ifa8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = -1
+follow_viewport_enabled = true
 
-[node name="UIMaster" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/UIMaster"]
-layout_mode = 1
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -191,13 +196,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/UIMaster/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
 audio_listener_enable_2d = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Control" type="Control" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport"]
+[node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,7 +216,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SubViewportContainer/SubViewport/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,7 +230,7 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_nb103")
 stretch_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/Control"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -240,35 +245,44 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 
-[node name="MapSpots" type="Node2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport"]
-position = Vector2(0, 279)
+[node name="MapSpots" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 
-[node name="SpotSpot" type="Node2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots"]
-
-[node name="PlayerShip" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots" instance=ExtResource("28_7rdua")]
+[node name="PlayerShip" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("28_7rdua")]
 position = Vector2(0, 0)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots"]
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
 
-[node name="ShipCamera" type="Camera2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport"]
+[node name="ShipCamera" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_speed = 1.0
 script = ExtResource("16_4wqve")
 
-[node name="ArrowSprite" type="Node2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera"]
+[node name="ArrowSprite" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"]
 modulate = Color(0.770444, 0.040374, 0.0224221, 1)
 
-[node name="ArrowSprite2" type="Sprite2D" parent="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite"]
+[node name="ArrowSprite2" type="Sprite2D" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite"]
 modulate = Color(0.770444, 0.040374, 0.0224221, 1)
 material = SubResource("CanvasItemMaterial_2v8bx")
 rotation = -1.5708
 texture = ExtResource("30_g5v37")
 
-[node name="Screen" type="ColorRect" parent="CanvasLayer/UIMaster"]
-visible = false
-material = ExtResource("29_q8i0i")
+[node name="MapPointerManager" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+material = SubResource("CanvasItemMaterial_w8yg2")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("18_ahli7")
+MarkerScene = ExtResource("19_qxruq")
+FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
+EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
+
+[node name="UI" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -277,10 +291,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Screen2" type="ColorRect" parent="CanvasLayer/UIMaster"]
+[node name="Screen" type="ColorRect" parent="UI"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
+material = ExtResource("29_q8i0i")
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Screen2" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -1924.0
@@ -292,10 +315,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Panel2" type="TextureRect" parent="CanvasLayer/UIMaster"]
+[node name="Panel2" type="TextureRect" parent="UI"]
 custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
-anchors_preset = 15
+layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -97.0
@@ -308,7 +330,7 @@ mouse_filter = 2
 texture = ExtResource("33_4takp")
 expand_mode = 1
 
-[node name="Panel3" type="TextureRect" parent="CanvasLayer/UIMaster/Panel2"]
+[node name="Panel3" type="TextureRect" parent="UI/Panel2"]
 modulate = Color(0, 0, 0, 0.328)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 38.045)
@@ -326,10 +348,9 @@ mouse_filter = 2
 texture = ExtResource("33_4takp")
 expand_mode = 1
 
-[node name="Panel" type="Panel" parent="CanvasLayer/UIMaster"]
+[node name="Panel" type="Panel" parent="UI"]
 visible = false
-layout_mode = 1
-anchors_preset = 6
+layout_mode = 2
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -342,7 +363,7 @@ grow_vertical = 2
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_1f561")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/UIMaster/Panel"]
+[node name="Panel" type="Panel" parent="UI/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -358,7 +379,7 @@ grow_vertical = 2
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_dpdjg")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/UIMaster/Panel/Panel"]
+[node name="ColorRect" type="ColorRect" parent="UI/Panel/Panel"]
 material = SubResource("ShaderMaterial_8eave")
 layout_mode = 1
 anchors_preset = 15
@@ -372,9 +393,9 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(50, 50)
 
-[node name="SteeringWheel" parent="CanvasLayer/UIMaster" instance=ExtResource("35_y1n03")]
-layout_mode = 1
-anchors_preset = 2
+[node name="SteeringWheel" parent="UI" instance=ExtResource("35_y1n03")]
+layout_mode = 2
+anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
@@ -382,12 +403,12 @@ anchor_bottom = 1.0
 grow_horizontal = 1
 grow_vertical = 0
 
-[node name="ThrustSlider" parent="CanvasLayer/UIMaster" instance=ExtResource("34_sn67k")]
+[node name="ThrustSlider" parent="UI" instance=ExtResource("34_sn67k")]
 layout_mode = 1
 
-[node name="Control" parent="CanvasLayer/UIMaster" instance=ExtResource("35_k6hjp")]
-layout_mode = 1
-anchors_preset = 3
+[node name="Control" parent="UI" instance=ExtResource("35_k6hjp")]
+layout_mode = 2
+anchors_preset = 0
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -404.0
@@ -401,12 +422,12 @@ libraries = {
 "": SubResource("AnimationLibrary_il0tn")
 }
 
-[connection signal="gui_input" from="CanvasLayer/UIMaster" to="." method="_MAP_INPUT"]
-[connection signal="ScreenEnter" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="PlayerEnteredScreen"]
-[connection signal="ScreenExit" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="PlayerExitedScreen"]
-[connection signal="ShipAccelerating" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="ShipStartedMoving"]
-[connection signal="ShipForceStopped" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="ShipForcedStop"]
-[connection signal="ShipStopped" from="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" to="." method="ShipStoppedMoving"]
-[connection signal="SteeringDitChanged" from="CanvasLayer/UIMaster/SteeringWheel" to="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" method="SteerChanged"]
-[connection signal="AccelerationChangeEnded" from="CanvasLayer/UIMaster/ThrustSlider" to="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" method="AccelerationEnded"]
-[connection signal="AccelerationChanged" from="CanvasLayer/UIMaster/ThrustSlider" to="CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip" method="AccelerationChanged"]
+[connection signal="gui_input" from="CanvasLayer/SubViewportContainer" to="." method="_MAP_INPUT"]
+[connection signal="ScreenEnter" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="PlayerEnteredScreen"]
+[connection signal="ScreenExit" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="PlayerExitedScreen"]
+[connection signal="ShipAccelerating" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStartedMoving"]
+[connection signal="ShipForceStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipForcedStop"]
+[connection signal="ShipStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStoppedMoving"]
+[connection signal="SteeringDitChanged" from="UI/SteeringWheel" to="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" method="SteerChanged"]
+[connection signal="AccelerationChangeEnded" from="UI/ThrustSlider" to="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" method="AccelerationEnded"]
+[connection signal="AccelerationChanged" from="UI/ThrustSlider" to="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" method="AccelerationChanged"]

@@ -1,11 +1,12 @@
-extends Node2D
+extends Area2D
 
 class_name HostileShip
 
 @export var Speed = 0.5
 @export var RadarRange = 300
-@export var DroneNotifScene : PackedScene
 @export var Direction = -1
+@export var EnemyLocatedNotifScene : PackedScene
+@export var ShipIcon : Texture
 #var Pursuing = false
 var PursuingShip : Node2D
 
@@ -13,7 +14,13 @@ var Paused = false
 
 var DestinationCity : MapSpot
 
+var VisibleBy : Array[Node2D] = []
+
+signal OnShipMet(FriendlyShips : Array[BattleShipStats] , EnemyShips : Array[BattleShipStats])
+
 func  _ready() -> void:
+	#visible = false
+
 	$Node2D.position.x = Speed
 	#set_physics_process(false)
 	UpdateVizRange(RadarRange)
@@ -24,10 +31,20 @@ func  _ready() -> void:
 		Direction *= -1
 		nextcity = cities.find(DestinationCity) + Direction
 	DestinationCity = cities[nextcity]
+	call_deferred("AimForCiry")
+func AimForCiry():
 	look_at(DestinationCity.global_position)
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
+
+func GetBattleStats() -> BattleShipStats:
+	var stats = BattleShipStats.new()
+	stats.Hull = 100
+	stats.FirePower = 1
+	stats.Icon = ShipIcon
+	stats.Name = "Enemy"
+	return stats
 
 func UpdateVizRange(rang : float):
 	if (rang == 0):
@@ -39,10 +56,11 @@ func UpdateVizRange(rang : float):
 	RadarMat.set_shader_parameter("scale_factor", rang/10000)
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
-	$PointLight2D.texture_scale = rang / 600
+	#$PointLight2D.texture_scale = rang / 600
 	#$Radar2/Radar_Range.visible = false
 
-	
+func GetSpeed():
+	return $Node2D.position.x
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
@@ -69,7 +87,7 @@ func calculateinterceptionpoint() -> Vector2:
 func updatedronecourse(interception_point: Vector2):
 	# Calculate the direction vector from the drone to the interception point
 	var direction = (interception_point - position).normalized()
-	$Node2D2.look_at(to_global(interception_point - position))
+	$Node2D2.look_at(to_global(interception_point ))
 	# Move the drone towards the interception point
 	position += direction * $Node2D.position.x
 	#$Line2D.set_point_position(1, interception_point - position)
@@ -78,8 +96,20 @@ func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		PursuingShip = area.get_parent()
 
-
-func _on_ship_body_area_entered(area: Area2D) -> void:
+func OnShipSeen(SeenBy : Node2D):
+	#visible = true
+	if (VisibleBy.has(SeenBy)):
+		return
+	VisibleBy.append(SeenBy)
+	if (VisibleBy.size() > 1):
+		return
+	MapPointerManager.GetInstance().AddShip(self, false)
+	var notif = EnemyLocatedNotifScene.instantiate()
+	add_child(notif)
+func OnShipUnseen(UnSeenBy : Node2D):
+	VisibleBy.erase(UnSeenBy)
+func _on_area_entered(area: Area2D) -> void:
+	
 	if (area.get_parent() == DestinationCity):
 		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 		
@@ -89,4 +119,26 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 			nextcity = cities.find(DestinationCity) + Direction
 		DestinationCity = cities[nextcity]
 		look_at(DestinationCity.global_position)
+	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+		var bit = area.get_collision_mask_value(3)
+		if (bit):
+			if (area.get_parent() is PlayerShip):
+				var player = area.get_parent() as PlayerShip
+				var ships : Array[BattleShipStats] = []
+				ships.append(player.GetBattleStats())
+				for g in player.GetDroneDock().DockedDrones:
+					ships.append(g.GetBattleStats())
+				OnShipMet.emit(ships, [GetBattleStats()])
+			else:
+				var drn = area.get_parent() as Drone
+				OnShipMet.emit([drn.GetBattleStats()], [GetBattleStats()])
+		else:
+			OnShipSeen(area.get_parent())
+
+func _on_area_exited(area: Area2D) -> void:
+	
+	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+		OnShipUnseen(area.get_parent())
 		
+func free() -> void:
+	MapPointerManager.GetInstance().RemoveShip(self)

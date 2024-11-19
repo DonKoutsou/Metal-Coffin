@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name World
 
 @export var ShipDat : ShipData
@@ -8,6 +8,7 @@ class_name World
 @export var ExplorationScene : PackedScene
 @export var StartingShip : BaseShip
 @export var ShipTradeScene : PackedScene
+@export var DogfightScene : PackedScene
 
 #ship player is currently using
 var CurrentShip : BaseShip
@@ -56,6 +57,7 @@ func EnableBackUI():
 func _enter_tree() -> void:
 	var map = GetMap()
 	map.connect("MAP_AsteroidBeltArrival", StartStage)
+	map.connect("MAP_EnemyArrival", StartDogfight)
 	map.connect("MAP_StageSearched", StageSearch)
 	map.connect("MAP_ShipSearched", ShipSearched)
 	
@@ -74,7 +76,8 @@ func _enter_tree() -> void:
 	
 	GetInventory().UpdateShipInfo(StartingShip)
 	ShipDat.ApplyShipStats(StartingShip.Buffs)
-	GetMap().GetPlayerShip().UpdateShipIcon(StartingShip.TopIcon)
+	
+	GetMap().GetPlayerShip().SetShipType(StartingShip)
 	CurrentShip = StartingShip
 	ShipDat._UpdateStatCurrentValue("HP", ShipDat.GetStat("HP").GetStat())
 	
@@ -95,7 +98,7 @@ func OnStatsUpdated(StatName : String):
 		if (StatsNotifiedLow.has(StatName)):
 			StatsNotifiedLow.remove_at(StatsNotifiedLow.find(StatName))
 	WRLD_StatsUpdated.emit(StatName)
-	#ItemBuffStat(StatName)
+	ItemBuffStat(StatName)
 	
 func StartShipTrade(NewShip : BaseShip) -> void:
 	ToggleShipPausing(true)
@@ -112,7 +115,7 @@ func ChangeShip(NewShip : BaseShip) -> void:
 	ShipDat.RemoveShipStats(CurrentShip.Buffs)
 	ShipDat.ApplyShipStats(NewShip.Buffs)
 	GetInventory().UpdateSize()
-	GetMap().GetPlayerShip().UpdateShipIcon(NewShip.TopIcon)
+	GetMap().GetPlayerShip().SetShipType(NewShip)
 	CurrentShip = NewShip
 		
 func GetShipSaveData() -> SaveData:
@@ -195,6 +198,11 @@ func FightEnded(Resault : bool, RemainingHP : int, SupplyRew : Array[Item]) -> v
 		ShipDat.SetStatValue("HP", RemainingHP)
 	else :
 		GameLost("You have died")
+		
+#Dogfight-----------------------------------------------
+func StartDogFight(Friendlies : Array[BattleShipStats], Enemies : Array[BattleShipStats]):
+	var Dscene = DogfightScene.instantiate() as BattleArena
+	Ingame_UIManager.GetInstance().AddUI(Dscene, false, true)
 #Exploration---------------------------------------------
 func StartExploration(Spot : MapSpot) -> void:
 	var Escene = ExplorationScene.instantiate() as Exploration

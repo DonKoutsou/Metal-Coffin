@@ -1,36 +1,70 @@
 extends Area2D
 
+@export var SpaceshipNorm : Texture
+@export var SpaceshipR : Texture
+@export var SpaceshipL : Texture
 @export var BulletScene : PackedScene
 @export var FireRpm = 0.05
+@export var HP = 20
+@export var Ammo : int = 10
 var rpm = 0.0
-
+var currentAmmo = Ammo
 var Guns : Array[Node2D]
 
+var Enem : Area2D
+
 func _ready() -> void:
+	$Control/ProgressBar.max_value = HP
+	$Control/ProgressBar.value = HP
+	$Control/ProgressBar2.max_value = Ammo
 	for g in $Guns.get_children():
 		Guns.append(g)
 
 func _physics_process(delta: float) -> void:
-	global_position = $Node2D.global_position
+	
 	if (Input.is_action_pressed("MoveLeft")) :
-		rotation -= 0.05
-	if (Input.is_action_pressed("MoveRight")) :
-		rotation += 0.05
+		$Sprite2D.texture = SpaceshipR
+		rotation -= 0.06
+		
+	else: if (Input.is_action_pressed("MoveRight")) :
+		$Sprite2D.texture = SpaceshipL
+		rotation += 0.06
+	
+	else:
+		$Sprite2D.texture = SpaceshipNorm
+	$Control.rotation = - global_rotation
+	global_position = $Node2D.global_position
 	rpm -= delta
 	if (rpm > 0):
 		return
 	rpm = FireRpm
+	
 	if (Input.is_action_pressed("Fire")) :
+		if (currentAmmo == 0):
+			return
+		currentAmmo -= 1
+		$Control/ProgressBar2.value = currentAmmo
 		for g in Guns:
+			if (Enem != null):
+				g.look_at(Enem.global_position)
+			else:
+				g.rotation = 0
 			var bul = BulletScene.instantiate() as Node2D
 			get_parent().add_child(bul)
 			bul.global_position = g.global_position
 			bul.global_rotation = g.global_rotation
 			bul.global_rotation += randf_range(-0.1,0.1)
+	else :
+		currentAmmo = min(Ammo, currentAmmo + 1)
+		$Control/ProgressBar2.value = currentAmmo
 
 func Damage():
+	HP -= 1
+	$Control/ProgressBar.value = HP
+	if (HP <= 0):
+		free()
 	$GPUParticles2D.emitting = true
-func _on_pl_locator_area_entered(area: Area2D) -> void:
+func _on_pl_locator_area_entered(_area: Area2D) -> void:
 	pass # Replace with function body.
 
 
@@ -49,3 +83,11 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	if (position.y > screensize.y):
 		position.y = 0
 		position.x = screensize.x- position.x
+
+
+func _on_enemy_locator_area_entered(area: Area2D) -> void:
+	Enem = area
+
+
+func _on_enemy_locator_area_exited(area: Area2D) -> void:
+	Enem = null

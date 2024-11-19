@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name Map
 
 #@export var SpotScene: PackedScene
@@ -16,10 +16,11 @@ class_name Map
 
 @export var HappeningUI : PackedScene
 
-@onready var thrust_slider: ThrustSlider = $CanvasLayer/UIMaster/ThrustSlider
-@onready var camera_2d: ShipCamera = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera
+@onready var thrust_slider: ThrustSlider = $UI/ThrustSlider
+@onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
 signal MAP_AsteroidBeltArrival(Size : int)
+signal MAP_EnemyArrival(FriendlyShips : Array[BattleShipStats] , EnemyShips : Array[BattleShipStats])
 signal MAP_StageSearched(Spt : MapSpotType)
 signal MAP_ShipSearched(Ship : BaseShip)
 
@@ -28,22 +29,21 @@ var currentstage = 0
 #var GalaxyMat :ShaderMaterial
 
 func _ready() -> void:
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
+	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
 	if (SpotList.size() == 0):
 		GenerateMap()
 	var shipdata = ShipData.GetInstance()
 	GetPlayerShip().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
 	GetPlayerShip().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
-	#GalaxyMat = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/Control/ColorRect.material
-
-
+	#GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
 
 func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
-	return $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/PlayerShip
-
+	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
+func EnemyMet(FriendlyShips : Array[BattleShipStats] , EnemyShips : Array[BattleShipStats]):
+	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
 func SetPlayerPos(pos : Vector2) -> void:
 	GetPlayerShip().position = pos
 	
@@ -57,9 +57,9 @@ func PlayIntroFadeInt():
 	
 func ToggleUIForIntro(t : bool):
 	GetPlayerShip().ToggleUI(t)
-	$CanvasLayer/UIMaster/ThrustSlider.visible = t
-	$CanvasLayer/UIMaster/SteeringWheel.visible = t
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = t
+	$ThrustSlider.visible = t
+	$SteeringWheel.visible = t
+	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = t
 func ShowStation():
 	var tw = create_tween()
 	var stations = get_tree().get_nodes_in_group("Capital City Center")
@@ -109,7 +109,7 @@ func GenerateMap() -> void:
 	#LOCATION OF PREVIUSLY PLACED MAP SPOT
 	var Prevpos : Vector2 = Vector2(250,250)
 	
-	#var line = $CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/StationLine
+	#var line = $CanvasLayer/SubViewportContainer/SubViewport/MapSpots/StationLine
 	
 	#SPAWN ON SPOT AND 1 ASTEROID FIELD FOR EACH VALUE OF MAPSIZE
 	for g in MapSize :
@@ -137,7 +137,7 @@ func GenerateMap() -> void:
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
 		sc.connect("SpotAnalazyed", AnalyzeLocation)
-		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
 		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
 		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
@@ -151,7 +151,10 @@ func GenerateMap() -> void:
 		SpotList.append(sc)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
-	
+	for g in SpotList:
+		g.SpawnEnemies()
+	for g in get_tree().get_nodes_in_group("Enemy"):
+		g.connect("OnShipMet", EnemyMet)
 	DrawCityLines()
 	DrawVillageLines()
 	#print(lines)
@@ -288,7 +291,7 @@ func DrawVillageLines():
 	#cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
 	var cityloc : Array[Vector2]
 	for g in cities:
-		cityloc.append($CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
+		cityloc.append($CanvasLayer/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
 	
 	var lines = prim_mst_optimized(cityloc)
 	#var mat = CanvasItemMaterial.new()
@@ -301,7 +304,7 @@ func DrawVillageLines():
 		paintedlines.append(lne)
 		lne.default_color = Color(1,1,1,0.3)
 		#lne.material = mat
-		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
 		for g in l:
 			lne.add_point(g)
 	
@@ -326,7 +329,7 @@ func DrawCityLines():
 	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
 	var cityloc : Array[Vector2]
 	for g in cities:
-		cityloc.append($CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
+		cityloc.append($CanvasLayer/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
 	
 	var lines = prim_mst_optimized(cityloc)
 	var mat = CanvasItemMaterial.new()
@@ -338,7 +341,7 @@ func DrawCityLines():
 		#paintedlines.append(lne)
 		lne.default_color = Color(1,1,1,0.2)
 		lne.material = mat
-		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
 		for g in l:
 			lne.add_point(g)
 	
@@ -403,7 +406,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		
 		var sc = load(dat.TownScene).instantiate() as Town
 		sc.LoadingData = true
-		$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/MapSpots/SpotSpot.add_child(sc)
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
 		#sc.connect("MapPressed", Arrival)
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
@@ -426,6 +429,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 var shakestr = 0.0
 func applyshake():
 	shakestr = 2
+
 func _physics_process(delta: float) -> void:
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
@@ -491,15 +495,17 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		for g in get_tree().get_nodes_in_group("MapLines"):
 			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
 	else:
-		UpdateCameraPos(event.relative)	
+		UpdateCameraPos(event.relative)
 #//////////////////////////////////////////////////////////
 #ARROW FOR LOCATING PLAYER SHIP
 func _process(_delta: float) -> void:
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.look_at(GetPlayerShip().global_position)
+	#var plpos = GetPlayerShip().global_position
+	#$CanvasLayer/SubViewportContainer/SubViewport/MapPointers/Panel.global_position = plpos
+	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.look_at(GetPlayerShip().global_position)
 func PlayerEnteredScreen() -> void:
-	set_process(false)
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = false
+	#set_process(false)
+	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = false
 func PlayerExitedScreen() -> void:
-	set_process(true)
-	$CanvasLayer/UIMaster/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
+	#set_process(true)
+	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
 #//////////////////////////////////////////////////////////

@@ -3,7 +3,6 @@ class_name Town
 
 @export var SpotScene: PackedScene
 
-
 var LoadingData : bool = false
 
 signal SpotAproached(spot : MapSpot)
@@ -40,7 +39,11 @@ func GenerateCity() -> void:
 		sc.position = pos
 		g.free()
 	pass
-
+func SpawnEnemies():
+	for g in $CitySpots.get_children() :
+		var spot = g as MapSpot
+		if (spot.SpotType.SpawnHostileShip):
+			spot.SpawnEnemyShip()
 func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
 	datas.TownLoc = position

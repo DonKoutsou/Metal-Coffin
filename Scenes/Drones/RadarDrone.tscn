@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfnm2e7p0t3kv"]
-
-[ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/drone.tscn" id="1_g3ptq"]
-[ext_resource type="Resource" uid="uid://cnqhhk0a4yp6e" path="res://Resources/Captains/Corkan.tres" id="2_3birv"]
-
-[node name="Drone" instance=ExtResource("1_g3ptq")]
-Cpt = ExtResource("2_3birv")

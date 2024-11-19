@@ -14,7 +14,7 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oo6l4"]
 blend_mode = 1
 
-[node name="Town" type="Node2D"]
+[node name="Town2" type="Node2D"]
 position = Vector2(608, 338)
 script = ExtResource("1_117rc")
 SpotScene = ExtResource("2_ik5a8")
