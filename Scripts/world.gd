@@ -57,7 +57,7 @@ func EnableBackUI():
 func _enter_tree() -> void:
 	var map = GetMap()
 	map.connect("MAP_AsteroidBeltArrival", StartStage)
-	map.connect("MAP_EnemyArrival", StartDogfight)
+	map.connect("MAP_EnemyArrival", StartDogFight)
 	map.connect("MAP_StageSearched", StageSearch)
 	map.connect("MAP_ShipSearched", ShipSearched)
 	

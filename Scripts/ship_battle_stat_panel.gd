@@ -1,0 +1,35 @@
+extends PanelContainer
+
+class_name ShipBattleStatPanel
+
+@export var StatScene : PackedScene
+
+signal OnShipSelected(Ship : ShipBattleStatPanel)
+
+var stats
+
+func SetShip(Ship : BattleShipStats):
+	stats = Ship
+	$VBoxContainer/PanelContainer/Label.text = Ship.Name
+	$PanelContainer/TextureRect.texture = Ship.Icon
+	var stats = ["Hull", "Firepower"]
+	for g in stats:
+		var sc = StatScene.instantiate() as ShipBattleStatContainer
+		$VBoxContainer.add_child(sc)
+		#$VBoxContainer.move_child(sc, $VBoxContainer.get_child_count() - 2)
+		sc.SetData(g, Ship.Hull, 100.0)
+	#$VBoxContainer/ShipStatContainer.SetData(cpt.GetStat("SPEED"))
+	#$VBoxContainer/ShipStatContainer2.SetData(cpt.GetStat("RADAR_RANGE"))
+	#$VBoxContainer/ShipStatContainer3.SetData(cpt.GetStat("ANALYZE_RANGE"))
+	#$VBoxContainer/ShipStatContainer4.SetData(cpt.GetStat("INVENTORY_CAPACITY"))
+
+
+func _on_button_pressed() -> void:
+	OnShipSelected.emit(self)
+
+func SetNumber(Num : int):
+	$Label.text = var_to_str(Num)
+	$Label.visible = true
+
+func RedactNumber():
+	$Label.visible = false

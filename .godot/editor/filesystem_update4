@@ -92,3 +92,10 @@ res://Resources/Captains/Jor.tres
 res://Resources/Captains/Karkan.tres
 res://Resources/Captains/Sirius.tres
 res://Scripts/Captain.gd
+res://Scripts/analyzed_notif.gd
+res://Scenes/ShipBattleStatPanel.tscn
+res://Scripts/ship_battle_stat_panel.gd
+res://Scenes/Ship_Battler_Stat_Container.tscn
+res://Scripts/ShipBattleStatContainer.gd
+res://Scenes/ShipStatContainer.tscn
+res://Scenes/Captain_Stat_Container.tscn

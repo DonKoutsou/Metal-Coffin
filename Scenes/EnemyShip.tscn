@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/HostileShip.gd" id="1_lwgul"]
 [ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_8smby"]
+[ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_yure7"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="4_7dmjl"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="4_h41dt"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="5_hvgmw"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_fr12v"]
 [ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="8_4pdha"]
@@ -54,6 +56,8 @@ collision_layer = 0
 collision_mask = 13
 script = ExtResource("1_lwgul")
 EnemyLocatedNotifScene = ExtResource("2_8smby")
+EnemyLocatedSound = ExtResource("3_yure7")
+ShipIcon = ExtResource("4_h41dt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2wcmb")

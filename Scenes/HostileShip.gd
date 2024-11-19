@@ -6,6 +6,7 @@ class_name HostileShip
 @export var RadarRange = 300
 @export var Direction = -1
 @export var EnemyLocatedNotifScene : PackedScene
+@export var EnemyLocatedSound : AudioStream
 @export var ShipIcon : Texture
 #var Pursuing = false
 var PursuingShip : Node2D
@@ -105,6 +106,12 @@ func OnShipSeen(SeenBy : Node2D):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	var notif = EnemyLocatedNotifScene.instantiate()
+	var sound = DeletableSound.new()
+	sound.stream = EnemyLocatedSound
+	sound.volume_db = -10
+	sound.bus = "UI"
+	sound.autoplay = true
+	add_child(sound)
 	add_child(notif)
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
