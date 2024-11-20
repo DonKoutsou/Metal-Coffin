@@ -36,6 +36,8 @@ func TogglePause(t : bool):
 	$AudioStreamPlayer2D.stream_paused = t
 func GetSpeed():
 	return $Aceleration.position.x
+func GetShipSpeedVec():
+	return $Aceleration.global_position - global_position
 func UpdateVizRange(rang : float):
 	if (rang == 0):
 		GetShipRadarArea().queue_free()
@@ -82,9 +84,10 @@ func EnableDrone():
 
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStat("HULL")
-	stats.FirePower = Cpt.GetStat("FIREPOWER")
-	stats.Icon = Cpt.ShipIcon
+	stats.Hull = Cpt.GetStatValue("HULL")
+	stats.FirePower = Cpt.GetStatValue("FIREPOWER")
+	stats.ShipIcon = Cpt.ShipIcon
+	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = Cpt.CaptainName
 	return stats
 

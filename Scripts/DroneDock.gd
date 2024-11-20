@@ -45,6 +45,7 @@ func DroneDisharged(Dr : Drone):
 		FlyingDrones.erase(Dr)
 	ShipData.GetInstance().RemoveCaptainStats([Dr.Cpt.GetStat("INVENTORY_CAPACITY")])
 	Inventory.GetInstance().UpdateSize()
+	MapPointerManager.GetInstance().RemoveShip(Dr)
 	Dr.queue_free()
 func AddCaptain(Cpt : Captain) -> void:
 	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone

@@ -7,10 +7,13 @@ class_name CaptainUI
 
 var Drones : Array[Drone]
 
+static var Instance : CaptainUI
+
 func _ready() -> void:
 	DroneDockEvH.connect("DroneAdded", AddCaptain)
-	
-
+	Instance = self
+static func GetInstance() -> CaptainUI:
+	return Instance
 func AddCaptain(Dr : Drone):
 	var Position : Control
 	for g in $GridContainer.get_children():
@@ -32,6 +35,11 @@ func _on_captain_button_pressed() -> void:
 	visible = !visible
 
 func OnCaptainDischarged(C : Captain):
+	for g in $GridContainer.get_children():
+		if (g is CaptainPanel):
+			if (g.Capt == C):
+				g.queue_free()
+				break
 	for g in Drones:
 		if (g.Cpt == C):
 			DroneDockEvH.OnDroneDischarged(g)

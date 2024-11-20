@@ -19,7 +19,7 @@ func SetMarkerDetails(ShipName : String, ShipSpeed : float):
 	$Control/VBoxContainer/ShipName.text = ShipName
 	$Control/VBoxContainer/ShipName2.text = "Speed " + var_to_str((ShipSpeed * 60) * 3.6) + "km/h"
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	$Control.scale = Vector2(1,1) / camera.zoom
 
 func UpdateSpeed(Spd : float):

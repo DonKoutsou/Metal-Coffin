@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://vh8rhgbsau6p"]
+[gd_scene load_steps=11 format=3 uid="uid://vh8rhgbsau6p"]
 
 [ext_resource type="Script" path="res://Scripts/ship_battle_stat_panel.gd" id="1_ej5y3"]
 [ext_resource type="PackedScene" uid="uid://cuuug5x356c6s" path="res://Scenes/Ship_Battler_Stat_Container.tscn" id="2_k8pgq"]
@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="5_dksgb"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="6_04y46"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_g7ycl"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="7_ljglu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q877l"]
 bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
@@ -86,6 +87,11 @@ theme_override_styles/normal = ExtResource("5_dksgb")
 text = "George"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_ljglu")
+stretch_mode = 3
 
 [node name="Label" type="Label" parent="."]
 visible = false

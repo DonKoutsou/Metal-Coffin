@@ -8,6 +8,7 @@ class_name HostileShip
 @export var EnemyLocatedNotifScene : PackedScene
 @export var EnemyLocatedSound : AudioStream
 @export var ShipIcon : Texture
+@export var CaptainIcon : Texture
 #var Pursuing = false
 var PursuingShip : Node2D
 
@@ -17,7 +18,7 @@ var DestinationCity : MapSpot
 
 var VisibleBy : Array[Node2D] = []
 
-signal OnShipMet(FriendlyShips : Array[BattleShipStats] , EnemyShips : Array[BattleShipStats])
+signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 
 func  _ready() -> void:
 	#visible = false
@@ -41,9 +42,10 @@ func TogglePause(t : bool):
 
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = 100
+	stats.Hull = 30
 	stats.FirePower = 1
-	stats.Icon = ShipIcon
+	stats.ShipIcon = ShipIcon
+	stats.CaptainIcon = CaptainIcon
 	stats.Name = "Enemy"
 	return stats
 
@@ -62,6 +64,7 @@ func UpdateVizRange(rang : float):
 
 func GetSpeed():
 	return $Node2D.position.x
+	
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
@@ -113,10 +116,11 @@ func OnShipSeen(SeenBy : Node2D):
 	sound.autoplay = true
 	add_child(sound)
 	add_child(notif)
+	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
-func _on_area_entered(area: Area2D) -> void:
 	
+func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == DestinationCity):
 		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 		
@@ -127,25 +131,28 @@ func _on_area_entered(area: Area2D) -> void:
 		DestinationCity = cities[nextcity]
 		look_at(DestinationCity.global_position)
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		var bit = area.get_collision_mask_value(3)
+		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
 		if (bit):
 			if (area.get_parent() is PlayerShip):
 				var player = area.get_parent() as PlayerShip
-				var ships : Array[BattleShipStats] = []
-				ships.append(player.GetBattleStats())
+				var ships : Array[Node2D] = []
+				ships.append(player)
 				for g in player.GetDroneDock().DockedDrones:
-					ships.append(g.GetBattleStats())
-				OnShipMet.emit(ships, [GetBattleStats()])
+					ships.append(g)
+				var hostships : Array[Node2D] = []
+				hostships.append(self)
+				OnShipMet.emit(ships, hostships)
 			else:
 				var drn = area.get_parent() as Drone
-				OnShipMet.emit([drn.GetBattleStats()], [GetBattleStats()])
+				var plships : Array[Node2D] = []
+				plships.append(drn)
+				
+				var hostships : Array[Node2D] = []
+				hostships.append(self)
+				OnShipMet.emit(plships, hostships)
 		else:
 			OnShipSeen(area.get_parent())
 
 func _on_area_exited(area: Area2D) -> void:
-	
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		OnShipUnseen(area.get_parent())
-		
-func free() -> void:
-	MapPointerManager.GetInstance().RemoveShip(self)

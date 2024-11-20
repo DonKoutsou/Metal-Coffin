@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqvwo77ckbu65"]
+
+[ext_resource type="Script" path="res://Scenes/PLfightShip.gd" id="1_ei8ga"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="2_bgkja"]
+[ext_resource type="Texture2D" uid="uid://cd1whfy18ccqk" path="res://Assets/Spaceship/Spaceship_top_LeanL_Main Camera.png" id="3_pwe7q"]
+[ext_resource type="Texture2D" uid="uid://clnx4yn8pmfhh" path="res://Assets/Spaceship/Spaceship_top_LeanR_Main Camera.png" id="4_d2kdj"]
+[ext_resource type="PackedScene" uid="uid://b2jnb8e6subyj" path="res://Scenes/Bullet.tscn" id="5_va7hk"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="6_xh1g6"]
+[ext_resource type="PackedScene" uid="uid://0hgppu4so3to" path="res://Scenes/explostion.tscn" id="7_ajj8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7shtk"]
+size = Vector2(16, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7us2"]
+size = Vector2(718, 48.0004)
+
+[node name="PlShip" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_ei8ga")
+SpaceshipNorm = ExtResource("2_bgkja")
+SpaceshipR = ExtResource("3_pwe7q")
+SpaceshipL = ExtResource("4_d2kdj")
+BulletScene = ExtResource("5_va7hk")
+HP = 50
+
+[node name="Guns" type="Node2D" parent="."]
+
+[node name="Gun3" type="Node2D" parent="Guns"]
+position = Vector2(19, 0)
+
+[node name="Gun" type="Node2D" parent="Guns"]
+position = Vector2(10, 25)
+rotation = -0.15708
+
+[node name="Gun2" type="Node2D" parent="Guns"]
+position = Vector2(10, -25)
+rotation = 0.15708
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("2_bgkja")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(5, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7shtk")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(7.97656, 7.97656)
+energy = 0.5
+blend_mode = 2
+shadow_color = Color(0.919342, 0, 0.452291, 0)
+texture = ExtResource("6_xh1g6")
+texture_scale = 0.11
+height = 100.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("7_ajj8i")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = 37.0
+offset_right = 41.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = 55.0
+offset_right = 41.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="Enemy Locator" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Locator"]
+position = Vector2(463, -0.000183105)
+shape = SubResource("RectangleShape2D_m7us2")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Enemy Locator" to="." method="_on_enemy_locator_area_entered"]
+[connection signal="area_exited" from="Enemy Locator" to="." method="_on_enemy_locator_area_exited"]

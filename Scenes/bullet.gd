@@ -9,7 +9,7 @@ func _ready() -> void:
 	get_parent().add_child(stream)
 	stream.pitch_scale = randf_range(0.9, 1.1)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	global_position = $Node2D.global_position
 
 func _on_area_entered(area: Area2D) -> void:

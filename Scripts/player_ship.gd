@@ -4,6 +4,7 @@ class_name PlayerShip
 
 @export var Notif : PackedScene
 @export var LowStatsToNotifyAbout : Array[String]
+@export var CaptainIcon : Texture
 
 var ShipType : BaseShip
 
@@ -201,9 +202,10 @@ func SetShipType(Ship : BaseShip):
 
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = ShipType.GetStat("Hull")
+	stats.Hull = ShipType.GetStat("HULL").StatBuff
 	stats.FirePower = 1
-	stats.Icon = ShipType.TopIcon
+	stats.ShipIcon = ShipType.TopIcon
+	stats.CaptainIcon = CaptainIcon
 	stats.Name = "Player"
 	return stats
 

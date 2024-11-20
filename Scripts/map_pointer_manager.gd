@@ -40,7 +40,7 @@ func RemoveShip(Ship : Node2D) -> void:
 	Markers[index].queue_free()
 	Markers.remove_at(index)
 	Ships.remove_at(index)
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for g in Markers.size():
 		var ship = Ships[g]
 		var Marker = Markers[g]

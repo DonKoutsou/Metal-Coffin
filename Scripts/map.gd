@@ -20,7 +20,7 @@ class_name Map
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
 signal MAP_AsteroidBeltArrival(Size : int)
-signal MAP_EnemyArrival(FriendlyShips : Array[BattleShipStats] , EnemyShips : Array[BattleShipStats])
+signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_StageSearched(Spt : MapSpotType)
 signal MAP_ShipSearched(Ship : BaseShip)
 
@@ -42,7 +42,7 @@ func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
 	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
-func EnemyMet(FriendlyShips : Array[BattleShipStats] , EnemyShips : Array[BattleShipStats]):
+func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
 func SetPlayerPos(pos : Vector2) -> void:
 	GetPlayerShip().position = pos

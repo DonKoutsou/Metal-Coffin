@@ -1,3 +1,8 @@
+AudioStreamPlayer
+AudioListener2D
+TextureRect
+Sprite2D
+Node2D
 Button
 VBoxContainer
 SubViewport
@@ -6,9 +11,5 @@ Control
 Label
 HBoxContainer
 PanelContainer
-Sprite2D
 TouchScreenButton
-Node2D
 Area2D
-TextureRect
-AudioStreamPlayer2D

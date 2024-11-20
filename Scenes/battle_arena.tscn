@@ -1,17 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://cxnqcu1fgkujm"]
+[gd_scene load_steps=19 format=3 uid="uid://cxnqcu1fgkujm"]
 
 [ext_resource type="Script" path="res://Scripts/battle_arena.gd" id="1_46m1h"]
-[ext_resource type="Script" path="res://Scenes/PLfightShip.gd" id="1_au7kq"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="1_m24iq"]
 [ext_resource type="Texture2D" uid="uid://ba67hhfb6sdb5" path="res://Assets/Sand/Rock053_1K-PNG_Color.png" id="1_r61gv"]
-[ext_resource type="PackedScene" uid="uid://b2jnb8e6subyj" path="res://Scenes/Bullet.tscn" id="2_emh64"]
 [ext_resource type="Texture2D" uid="uid://cad2gsiytpugg" path="res://Assets/Sand/Rock053_1K-PNG_NormalGL.png" id="2_vpufr"]
-[ext_resource type="Script" path="res://Scripts/BattleShipStats.gd" id="3_pusn1"]
-[ext_resource type="Script" path="res://Scenes/enemy_ship.gd" id="4_2182e"]
 [ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/city.png" id="5_rngj7"]
-[ext_resource type="Texture2D" uid="uid://cd1whfy18ccqk" path="res://Assets/Spaceship/Spaceship_top_LeanL_Main Camera.png" id="6_efbss"]
-[ext_resource type="Texture2D" uid="uid://clnx4yn8pmfhh" path="res://Assets/Spaceship/Spaceship_top_LeanR_Main Camera.png" id="7_4ovt8"]
-[ext_resource type="PackedScene" uid="uid://0hgppu4so3to" path="res://Scenes/explostion.tscn" id="8_1wjhv"]
+[ext_resource type="PackedScene" uid="uid://16guv4jukonu" path="res://Scenes/Dogfight/DogfightEnemyDrone.tscn" id="6_xebw5"]
+[ext_resource type="PackedScene" uid="uid://dqvwo77ckbu65" path="res://Scenes/Dogfight/DogfightPlayerDrone.tscn" id="7_gyo7x"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="8_m1m56"]
 [ext_resource type="Script" path="res://Scripts/button.gd" id="12_lo7ia"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="13_ywgov"]
@@ -19,24 +13,6 @@
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="16_o6ber"]
 [ext_resource type="PackedScene" uid="uid://vh8rhgbsau6p" path="res://Scenes/ShipBattleStatPanel.tscn" id="17_nvmm5"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="19_qmiuc"]
-
-[sub_resource type="Resource" id="Resource_ixo1k"]
-script = ExtResource("3_pusn1")
-
-[sub_resource type="Resource" id="Resource_t6f4e"]
-script = ExtResource("3_pusn1")
-
-[sub_resource type="Resource" id="Resource_dkpag"]
-script = ExtResource("3_pusn1")
-
-[sub_resource type="Resource" id="Resource_28xrg"]
-script = ExtResource("3_pusn1")
-
-[sub_resource type="Resource" id="Resource_63vgc"]
-script = ExtResource("3_pusn1")
-
-[sub_resource type="Resource" id="Resource_6c2b5"]
-script = ExtResource("3_pusn1")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_67hb2"]
 diffuse_texture = ExtResource("1_r61gv")
@@ -46,20 +22,8 @@ texture_repeat = 2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_233h4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6qa60"]
-radius = 19.105
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7us2"]
-size = Vector2(718, 48.0004)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hij26"]
-size = Vector2(791, 56)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5xihq"]
-light_mode = 1
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_q0ww8"]
-radius = 40.0
+radius = 80.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3h7nd"]
 light_mode = 1
@@ -76,8 +40,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_46m1h")
 ShipStatPanel = ExtResource("17_nvmm5")
-playerships = Array[ExtResource("3_pusn1")]([SubResource("Resource_ixo1k"), SubResource("Resource_t6f4e"), SubResource("Resource_dkpag"), SubResource("Resource_28xrg"), SubResource("Resource_63vgc")])
-EnemyShips = Array[ExtResource("3_pusn1")]([SubResource("Resource_6c2b5")])
+PlayerShipScene = ExtResource("7_gyo7x")
+EnemyShipScene = ExtResource("6_xebw5")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -89,7 +53,9 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
@@ -107,195 +73,15 @@ texture = SubResource("CanvasTexture_67hb2")
 stretch_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
-visible = false
 material = SubResource("CanvasItemMaterial_233h4")
 position = Vector2(609, 366)
-scale = Vector2(4.56641, 4.56641)
+scale = Vector2(1.196, 1.196)
 texture = ExtResource("5_rngj7")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
 position = Vector2(609, 366)
 scale = Vector2(4.56641, 4.56641)
 color = Color(0, 0, 0, 1)
-
-[node name="PlShip" type="Area2D" parent="SubViewportContainer/SubViewport"]
-position = Vector2(222, 295)
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-script = ExtResource("1_au7kq")
-SpaceshipNorm = ExtResource("1_m24iq")
-SpaceshipR = ExtResource("6_efbss")
-SpaceshipL = ExtResource("7_4ovt8")
-BulletScene = ExtResource("2_emh64")
-HP = 50
-
-[node name="Guns" type="Node2D" parent="SubViewportContainer/SubViewport/PlShip"]
-
-[node name="Gun" type="Node2D" parent="SubViewportContainer/SubViewport/PlShip/Guns"]
-position = Vector2(10, 25)
-rotation = -0.15708
-
-[node name="Gun2" type="Node2D" parent="SubViewportContainer/SubViewport/PlShip/Guns"]
-position = Vector2(10, -25)
-rotation = 0.15708
-
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/PlShip"]
-rotation = -1.5708
-texture = ExtResource("1_m24iq")
-
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/PlShip"]
-position = Vector2(5, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/PlShip"]
-shape = SubResource("CircleShape2D_6qa60")
-
-[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport/PlShip"]
-scale = Vector2(7.97656, 7.97656)
-energy = 0.5
-blend_mode = 2
-shadow_color = Color(0.919342, 0, 0.452291, 0)
-texture = ExtResource("8_m1m56")
-texture_scale = 0.11
-height = 100.0
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="SubViewportContainer/SubViewport/PlShip"]
-
-[node name="GPUParticles2D" parent="SubViewportContainer/SubViewport/PlShip" instance=ExtResource("8_1wjhv")]
-
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/PlShip"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ProgressBar" type="ProgressBar" parent="SubViewportContainer/SubViewport/PlShip/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -41.0
-offset_top = 37.0
-offset_right = 41.0
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-show_percentage = false
-
-[node name="ProgressBar2" type="ProgressBar" parent="SubViewportContainer/SubViewport/PlShip/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -41.0
-offset_top = 55.0
-offset_right = 41.0
-offset_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
-show_percentage = false
-
-[node name="Enemy Locator" type="Area2D" parent="SubViewportContainer/SubViewport/PlShip"]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/PlShip/Enemy Locator"]
-position = Vector2(463, -0.000183105)
-shape = SubResource("RectangleShape2D_m7us2")
-
-[node name="EnemyShip" type="Area2D" parent="SubViewportContainer/SubViewport"]
-position = Vector2(905, 329)
-rotation = 3.14159
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-script = ExtResource("4_2182e")
-BulletScene = ExtResource("2_emh64")
-HP = 50
-
-[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-scale = Vector2(7.97656, 7.97656)
-energy = 0.5
-blend_mode = 2
-shadow_color = Color(0.919342, 0, 0.452291, 0)
-texture = ExtResource("8_m1m56")
-texture_scale = 0.11
-height = 100.0
-
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-rotation = -1.5708
-texture = ExtResource("1_m24iq")
-
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-position = Vector2(5, 0)
-
-[node name="Orientator" type="Node2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-
-[node name="PlLocator" type="Area2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/EnemyShip/PlLocator"]
-position = Vector2(426.5, -0.000183105)
-shape = SubResource("RectangleShape2D_hij26")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-shape = SubResource("CircleShape2D_6qa60")
-
-[node name="Gun" type="Node2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-position = Vector2(30, 0)
-
-[node name="GPUParticles2D" parent="SubViewportContainer/SubViewport/EnemyShip" instance=ExtResource("8_1wjhv")]
-material = SubResource("CanvasItemMaterial_5xihq")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="SubViewportContainer/SubViewport/EnemyShip"]
-
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/EnemyShip"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 12.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 3.14159
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ProgressBar" type="ProgressBar" parent="SubViewportContainer/SubViewport/EnemyShip/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -41.0002
-offset_top = 34.9998
-offset_right = 40.9998
-offset_bottom = 47.9998
-grow_horizontal = 2
-show_percentage = false
-
-[node name="ProgressBar2" type="ProgressBar" parent="SubViewportContainer/SubViewport/EnemyShip/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -41.0003
-offset_top = 50.9998
-offset_right = 40.9997
-offset_bottom = 63.9998
-grow_horizontal = 2
-show_percentage = false
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(582, 331)
@@ -308,7 +94,7 @@ texture_scale = 0.88
 height = 485.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="SubViewportContainer/SubViewport"]
-position = Vector2(78, 575)
+position = Vector2(87.475, 556.915)
 shape = SubResource("CircleShape2D_q0ww8")
 action = "MoveLeft"
 script = ExtResource("12_lo7ia")
@@ -329,13 +115,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("13_ywgov")
-theme_override_font_sizes/font_size = 109
+theme_override_font_sizes/font_size = 234
 text = "<"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TouchScreenButton2" type="TouchScreenButton" parent="SubViewportContainer/SubViewport"]
-position = Vector2(167, 575)
+position = Vector2(274.86, 555.615)
 shape = SubResource("CircleShape2D_q0ww8")
 action = "MoveRight"
 script = ExtResource("12_lo7ia")
@@ -356,26 +142,37 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("13_ywgov")
-theme_override_font_sizes/font_size = 109
+theme_override_font_sizes/font_size = 234
 text = "<"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TouchScreenButton3" type="TouchScreenButton" parent="SubViewportContainer/SubViewport"]
-position = Vector2(1078, 574)
+position = Vector2(1059.44, 554.765)
 shape = SubResource("CircleShape2D_q0ww8")
 action = "Fire"
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/TouchScreenButton3"]
 material = SubResource("CanvasItemMaterial_rdink")
-scale = Vector2(1.3125, 1.3125)
+position = Vector2(-2.125, -1.305)
+scale = Vector2(2.513, 2.513)
+texture = ExtResource("15_v5476")
+
+[node name="PlSpawnPoint" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(-30, 366)
+texture = ExtResource("15_v5476")
+
+[node name="EnemySpawnPoint" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(1200, 366)
 texture = ExtResource("15_v5476")
 
 [node name="Control2" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Control2"]
 layout_mode = 1
@@ -401,7 +198,7 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="Control2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "FightingUnits"
+text = "Fleet"
 horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -415,7 +212,7 @@ size_flags_horizontal = 6
 
 [node name="Label" type="Label" parent="Control2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
-text = "FightingUnits"
+text = "Enemy Ships"
 horizontal_alignment = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Control2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
@@ -429,10 +226,4 @@ size_flags_vertical = 3
 theme = ExtResource("19_qmiuc")
 text = "Start Fight"
 
-[connection signal="screen_exited" from="SubViewportContainer/SubViewport/PlShip/VisibleOnScreenNotifier2D" to="SubViewportContainer/SubViewport/PlShip" method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="area_entered" from="SubViewportContainer/SubViewport/PlShip/Enemy Locator" to="SubViewportContainer/SubViewport/PlShip" method="_on_enemy_locator_area_entered"]
-[connection signal="area_exited" from="SubViewportContainer/SubViewport/PlShip/Enemy Locator" to="SubViewportContainer/SubViewport/PlShip" method="_on_enemy_locator_area_exited"]
-[connection signal="area_entered" from="SubViewportContainer/SubViewport/EnemyShip/PlLocator" to="SubViewportContainer/SubViewport/EnemyShip" method="_on_pl_locator_area_entered"]
-[connection signal="area_exited" from="SubViewportContainer/SubViewport/EnemyShip/PlLocator" to="SubViewportContainer/SubViewport/EnemyShip" method="_on_pl_locator_area_exited"]
-[connection signal="screen_exited" from="SubViewportContainer/SubViewport/EnemyShip/VisibleOnScreenNotifier2D" to="SubViewportContainer/SubViewport/EnemyShip" method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="pressed" from="Control2/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -184,6 +184,7 @@ func Pause() -> void:
 	get_tree().paused = !paused
 	$Ingame_UIManager/PauseContainer.visible = !paused
 
+
 func StartFight(PossibleReward : Array[Item]) -> void:
 	var BScene = BattleScene.instantiate() as Battle
 	BScene.SupplyReward = PossibleReward
@@ -200,9 +201,47 @@ func FightEnded(Resault : bool, RemainingHP : int, SupplyRew : Array[Item]) -> v
 		GameLost("You have died")
 		
 #Dogfight-----------------------------------------------
-func StartDogFight(Friendlies : Array[BattleShipStats], Enemies : Array[BattleShipStats]):
+var FighingFriendlyUnits : Array[Node2D]
+var FighingEnemyUnits : Array[Node2D]
+func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
+	FighingFriendlyUnits = Friendlies
+	FighingEnemyUnits = Enemies
+	
+	var FBattleStats : Array[BattleShipStats] = []
+	for g in Friendlies:
+		FBattleStats.append(g.GetBattleStats())
+	var EBattleStats : Array[BattleShipStats] = []
+	for g in Enemies:
+		EBattleStats.append(g.GetBattleStats())
 	var Dscene = DogfightScene.instantiate() as BattleArena
+	Dscene.connect("OnBattleEnded", DogFightEnded)
+	ToggleShipPausing(true)
+	Dscene.SetBattleData(FBattleStats, EBattleStats)
 	Ingame_UIManager.GetInstance().AddUI(Dscene, false, true)
+func DogFightEnded(Survivors : Array[BattleShipStats]) -> void:
+	
+	for g in Survivors:
+		var nam = g.Name
+		var ship
+		for z in FighingFriendlyUnits:
+			if z is PlayerShip and nam == "Player":
+				ShipDat.GetInstance().SetStatValue("HULL", g.Hull)
+				FighingFriendlyUnits.erase(z)
+				break
+			if z is Drone and nam == z.Cpt.CaptainName:
+				FighingFriendlyUnits.erase(z)
+				break
+	for g in FighingFriendlyUnits:
+		if (g is PlayerShip):
+			GetMap().StageFailed()
+			GameLost("Your ship got destroyed")
+			return
+		if (g is Drone):
+			CaptainUI.GetInstance().OnCaptainDischarged(g.Cpt)
+	for g in FighingEnemyUnits:
+		MapPointerManager.GetInstance().RemoveShip(g)
+		g.queue_free()
+	ToggleShipPausing(false)
 #Exploration---------------------------------------------
 func StartExploration(Spot : MapSpot) -> void:
 	var Escene = ExplorationScene.instantiate() as Exploration

@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name DF_PlayerShip
+
 @export var SpaceshipNorm : Texture
 @export var SpaceshipR : Texture
 @export var SpaceshipL : Texture
@@ -13,10 +15,21 @@ var Guns : Array[Node2D]
 
 var Enem : Area2D
 
-func _ready() -> void:
-	$Control/ProgressBar.max_value = HP
-	$Control/ProgressBar.value = HP
+signal OnShipDestroyed(ship : DF_PlayerShip)
+
+func SetShipStats(Stats : BattleShipStats) -> void:
+	$Control/ProgressBar.max_value = Stats.Hull
+	$Control/ProgressBar.value = Stats.Hull
+	HP = Stats.Hull
 	$Control/ProgressBar2.max_value = Ammo
+	
+	if (Stats.FirePower == 1):
+		$Guns.get_child(2).free()
+		$Guns.get_child(1).free()
+		
+	else :if (Stats.FirePower == 2):
+		$Guns.get_child(0).free()
+		
 	for g in $Guns.get_children():
 		Guns.append(g)
 
@@ -62,7 +75,8 @@ func Damage():
 	HP -= 1
 	$Control/ProgressBar.value = HP
 	if (HP <= 0):
-		free()
+		queue_free()
+		OnShipDestroyed.emit(self)
 	$GPUParticles2D.emitting = true
 func _on_pl_locator_area_entered(_area: Area2D) -> void:
 	pass # Replace with function body.
@@ -89,5 +103,5 @@ func _on_enemy_locator_area_entered(area: Area2D) -> void:
 	Enem = area
 
 
-func _on_enemy_locator_area_exited(area: Area2D) -> void:
+func _on_enemy_locator_area_exited(_area: Area2D) -> void:
 	Enem = null

@@ -24,4 +24,4 @@ func SetCap(cpt : Captain):
 
 func DischargeCaprain():
 	OnCaptainDischarged.emit(Capt)
-	queue_free()
+	#queue_free()
