@@ -12,12 +12,12 @@ var Docked = true
 var Fuel = 0
 
 var StoredItem : Array[Item] = []
-
+var Speed : float
 var Paused = false
 
 func  _ready() -> void:
 	#Set ships speed
-	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
+	Speed = Cpt.GetStatValue("SPEED")
 	#Make sure drone wont be walking unless sent
 	set_physics_process(false)
 	#Turn off areas to not get events while drone is docked
@@ -81,7 +81,7 @@ func EnableDrone():
 	if (an != null):
 		an.visible = true
 		GetShipAnalayzerArea().monitorable = true
-
+	GetShipAcelerationNode().position.x = Speed
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -181,7 +181,7 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		if (an != null):
 			GetShipAnalayzerArea().monitorable = false
 			an.visible = false
-
+		GetShipAcelerationNode().position.x = 0
 func GetShipBodyArea() -> Area2D:
 	return $ShipBody
 func GetShipRadarArea() -> Area2D:

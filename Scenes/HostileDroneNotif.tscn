@@ -95,6 +95,7 @@ _data = {
 }
 
 [node name="Control" type="Control"]
+z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
 clip_contents = true
 layout_mode = 3

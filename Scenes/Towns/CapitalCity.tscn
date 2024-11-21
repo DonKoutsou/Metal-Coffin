@@ -13,15 +13,17 @@
 [ext_resource type="Resource" uid="uid://dno0yq1eqewjt" path="res://Resources/MapSpots/CitySpots/Military_Base.tres" id="12_7msq2"]
 [ext_resource type="Resource" uid="uid://dsia5ebkwvf6p" path="res://Resources/MapSpots/CitySpots/Observatory.tres" id="13_5ipkk"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0gm80"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ustqo"]
+blend_mode = 1
 
 [node name="Town" type="Node2D"]
 position = Vector2(608, 338)
 script = ExtResource("1_6k08a")
 SpotScene = ExtResource("2_ihubk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_0gm80")
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_ustqo")
 scale = Vector2(2, 2)
 texture = ExtResource("3_lvvcp")
 

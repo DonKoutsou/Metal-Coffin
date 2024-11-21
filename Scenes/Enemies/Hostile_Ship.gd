@@ -10,7 +10,8 @@ class_name HostileShip
 @export var ShipIcon : Texture
 @export var CaptainIcon : Texture
 #var Pursuing = false
-var PursuingShip : Node2D
+var PursuingShips : Array[Node2D]
+var LastKnownPosition : Vector2
 
 var Paused = false
 
@@ -22,7 +23,6 @@ signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 
 func  _ready() -> void:
 	#visible = false
-
 	$Node2D.position.x = Speed
 	#set_physics_process(false)
 	UpdateVizRange(RadarRange)
@@ -33,9 +33,20 @@ func  _ready() -> void:
 		Direction *= -1
 		nextcity = cities.find(DestinationCity) + Direction
 	DestinationCity = cities[nextcity]
-	call_deferred("AimForCiry")
-func AimForCiry():
+	call_deferred("AimForCity")
+func AimForCity():
 	look_at(DestinationCity.global_position)
+	
+func GetCity(CityName : String) -> MapSpot:
+	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
+	var CorrectCity : MapSpot
+	for g in cities:
+		var cit = g as MapSpot
+		if (cit.GetSpotName() == CityName):
+			CorrectCity = cit
+			break
+	return CorrectCity
+	
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
@@ -68,7 +79,7 @@ func GetSpeed():
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
-	if (PursuingShip != null):
+	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
 		var interceptionpoint = calculateinterceptionpoint()
 		updatedronecourse(interceptionpoint)
 	else:
@@ -77,9 +88,16 @@ func _physics_process(_delta: float) -> void:
 func calculateinterceptionpoint() -> Vector2:
 	#var plship = PlayerShip.GetInstance()
 	# Get the current position and velocity of the ship
-	var ship_position = PursuingShip.position
-	var ship_velocity = PursuingShip.GetShipSpeedVec()
-
+	var ship_position
+	var ship_velocity
+	if (PursuingShips.size() > 0):
+		ship_position = PursuingShips[0].position
+		ship_velocity = PursuingShips[0].GetShipSpeedVec()
+	else : if (LastKnownPosition != Vector2.ZERO):
+		ship_position = LastKnownPosition
+		if (LastKnownPosition.distance_to(global_position) < 10):
+			LastKnownPosition = Vector2.ZERO
+		ship_velocity = Vector2.ZERO
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (position.distance_to(ship_position)) / $Node2D.position.x
 
@@ -91,15 +109,19 @@ func calculateinterceptionpoint() -> Vector2:
 func updatedronecourse(interception_point: Vector2):
 	# Calculate the direction vector from the drone to the interception point
 	var direction = (interception_point - position).normalized()
-	$Node2D2.look_at(to_global(interception_point ))
+	$Node2D2.look_at(to_global(interception_point - position))
 	# Move the drone towards the interception point
 	position += direction * $Node2D.position.x
 	#$Line2D.set_point_position(1, interception_point - position)
 
 func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		PursuingShip = area.get_parent()
-
+		PursuingShips.append(area.get_parent())
+		
+func _on_radar_2_area_exited(area: Area2D) -> void:
+	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+		PursuingShips.erase(area.get_parent())
+		LastKnownPosition = area.get_parent().global_position
 func OnShipSeen(SeenBy : Node2D):
 	#visible = true
 	if (VisibleBy.has(SeenBy)):
@@ -119,7 +141,7 @@ func OnShipSeen(SeenBy : Node2D):
 	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
-	
+
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == DestinationCity):
 		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
@@ -137,15 +159,19 @@ func _on_area_entered(area: Area2D) -> void:
 				var player = area.get_parent() as PlayerShip
 				var ships : Array[Node2D] = []
 				ships.append(player)
-				for g in player.GetDroneDock().DockedDrones:
-					ships.append(g)
+				ships.append_array(player.GetDroneDock().DockedDrones)
 				var hostships : Array[Node2D] = []
 				hostships.append(self)
 				OnShipMet.emit(ships, hostships)
 			else:
-				var drn = area.get_parent() as Drone
 				var plships : Array[Node2D] = []
-				plships.append(drn)
+				var drn = area.get_parent() as Drone
+				if (drn.Docked):
+					var player = PlayerShip.GetInstance()
+					plships.append(player)
+					plships.append_array(player.GetDroneDock().DockedDrones)
+				else:
+					plships.append(drn)
 				
 				var hostships : Array[Node2D] = []
 				hostships.append(self)
@@ -156,3 +182,21 @@ func _on_area_entered(area: Area2D) -> void:
 func _on_area_exited(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		OnShipUnseen(area.get_parent())
+
+func GetSaveData() -> SD_HostileShip:
+	var dat = SD_HostileShip.new()
+	dat.DestinationCityName = DestinationCity.GetSpotName()
+	dat.Direction = Direction
+	dat.LastKnownPosition = LastKnownPosition
+	dat.Position = global_position
+	dat.RadarRange = RadarRange
+	dat.Speed = Speed
+	dat.Scene = scene_file_path
+	return dat
+func LoadSaveData(Dat : SD_HostileShip) -> void:
+	DestinationCity = GetCity(Dat.DestinationCityName)
+	Direction = Dat.Direction
+	LastKnownPosition = Dat.LastKnownPosition
+	global_position = Dat.Position
+	RadarRange = Dat.RadarRange
+	Speed = Dat.Speed

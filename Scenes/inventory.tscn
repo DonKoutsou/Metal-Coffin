@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dqisqmi1gj7sn"]
+[gd_scene load_steps=43 format=3 uid="uid://dqisqmi1gj7sn"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="1_n6t4k"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_bxhcq"]
@@ -23,7 +23,6 @@
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="24_tis4p"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="25_0pvyv"]
 [ext_resource type="Resource" uid="uid://dggrnmd2ynjmr" path="res://Resources/ShipStats/FuelTank.tres" id="26_uxy24"]
-[ext_resource type="Resource" uid="uid://4i6hdm0q8a57" path="res://Resources/ShipStats/OxygenTank.tres" id="27_avipm"]
 [ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="27_bfas4"]
 [ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="28_6g5bi"]
 [ext_resource type="Resource" uid="uid://dm0s4m8iysdxb" path="res://Resources/ShipStats/AnalyzeRange.tres" id="28_73fl5"]
@@ -330,4 +329,4 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_r1153")
 layout_mode = 2
 script = ExtResource("24_g68id")
 ShipStatScene = ExtResource("23_73e43")
-StatsToShow = Array[ExtResource("25_0pvyv")]([ExtResource("26_uxy24"), ExtResource("27_bfas4"), ExtResource("27_avipm"), ExtResource("28_6g5bi"), ExtResource("28_73fl5"), ExtResource("29_0aup1"), ExtResource("30_hyn75")])
+StatsToShow = Array[ExtResource("25_0pvyv")]([ExtResource("26_uxy24"), ExtResource("27_bfas4"), ExtResource("28_6g5bi"), ExtResource("28_73fl5"), ExtResource("29_0aup1"), ExtResource("30_hyn75")])

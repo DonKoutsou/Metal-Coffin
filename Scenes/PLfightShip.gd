@@ -17,6 +17,11 @@ var Enem : Area2D
 
 signal OnShipDestroyed(ship : DF_PlayerShip)
 
+func _ready() -> void:
+	$ShipSpriteNormal.texture = SpaceshipNorm
+	$ShipSpriteLeft.texture = SpaceshipL
+	$ShipSpriteRight.texture = SpaceshipR
+
 func SetShipStats(Stats : BattleShipStats) -> void:
 	$Control/ProgressBar.max_value = Stats.Hull
 	$Control/ProgressBar.value = Stats.Hull
@@ -36,15 +41,24 @@ func SetShipStats(Stats : BattleShipStats) -> void:
 func _physics_process(delta: float) -> void:
 	
 	if (Input.is_action_pressed("MoveLeft")) :
-		$Sprite2D.texture = SpaceshipR
+		#$Sprite2D.texture = SpaceshipR
+		$ShipSpriteRight.visible = true
+		$ShipSpriteLeft.visible = false
+		$ShipSpriteNormal.visible = false
 		rotation -= 0.06
 		
 	else: if (Input.is_action_pressed("MoveRight")) :
-		$Sprite2D.texture = SpaceshipL
+		#$Sprite2D.texture = SpaceshipL
+		$ShipSpriteRight.visible = false
+		$ShipSpriteLeft.visible = true
+		$ShipSpriteNormal.visible = false
 		rotation += 0.06
 	
 	else:
-		$Sprite2D.texture = SpaceshipNorm
+		#$Sprite2D.texture = SpaceshipNorm
+		$ShipSpriteRight.visible = false
+		$ShipSpriteLeft.visible = false
+		$ShipSpriteNormal.visible = true
 	$Control.rotation = - global_rotation
 	global_position = $Node2D.global_position
 	rpm -= delta

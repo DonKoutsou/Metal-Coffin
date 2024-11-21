@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://16guv4jukonu"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_ship.gd" id="1_pbv0c"]
-[ext_resource type="PackedScene" uid="uid://b2jnb8e6subyj" path="res://Scenes/Bullet.tscn" id="2_wlnar"]
+[ext_resource type="PackedScene" uid="uid://b2jnb8e6subyj" path="res://Scenes/Projectiles/Bullet.tscn" id="2_wlnar"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="3_3j6tl"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="4_hej72"]
 [ext_resource type="PackedScene" uid="uid://0hgppu4so3to" path="res://Scenes/explostion.tscn" id="5_348d4"]

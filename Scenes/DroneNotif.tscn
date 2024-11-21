@@ -96,6 +96,7 @@ _data = {
 
 [node name="Control" type="Control"]
 modulate = Color(0.908948, 0.280129, 0.164634, 1)
+z_index = 2
 material = SubResource("CanvasItemMaterial_qtvug")
 clip_contents = true
 layout_mode = 3

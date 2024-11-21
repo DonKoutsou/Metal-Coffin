@@ -1,14 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
 
-[ext_resource type="Script" path="res://Scenes/HostileShip.gd" id="1_lwgul"]
-[ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_8smby"]
-[ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_yure7"]
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="4_7dmjl"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="4_h41dt"]
-[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="5_hvgmw"]
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="5_jagw8"]
-[ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_fr12v"]
-[ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="8_4pdha"]
+[ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
+[ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_8yau7"]
+[ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_qen6x"]
+[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_xxp8j"]
+[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="5_1sucu"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_jqji2"]
+[ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_x18j0"]
+[ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="8_h26ro"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2wcmb"]
 radius = 3.0
@@ -40,7 +39,7 @@ radius = 150.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
 resource_local_to_scene = true
-shader = ExtResource("8_4pdha")
+shader = ExtResource("8_h26ro")
 shader_parameter/line_color = Color(0.253, 0.622, 0.847, 1)
 shader_parameter/range_lines = 1.0
 shader_parameter/sector_lines = 0.0
@@ -55,11 +54,11 @@ shader_parameter/scale_factor = 0.015
 [node name="HostileShip" type="Area2D" groups=["Enemy", "Ships"]]
 collision_layer = 0
 collision_mask = 13
-script = ExtResource("1_lwgul")
-EnemyLocatedNotifScene = ExtResource("2_8smby")
-EnemyLocatedSound = ExtResource("3_yure7")
-ShipIcon = ExtResource("4_h41dt")
-CaptainIcon = ExtResource("5_jagw8")
+script = ExtResource("1_dinuw")
+EnemyLocatedNotifScene = ExtResource("2_8yau7")
+EnemyLocatedSound = ExtResource("3_qen6x")
+ShipIcon = ExtResource("4_xxp8j")
+CaptainIcon = ExtResource("5_1sucu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2wcmb")
@@ -68,21 +67,21 @@ shape = SubResource("CircleShape2D_2wcmb")
 position = Vector2(-1, 0)
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_kyfni")
-texture = ExtResource("4_7dmjl")
+texture = ExtResource("6_jqji2")
 lifetime = 20.0
 
 [node name="Node2D2" type="Node2D" parent="."]
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="Node2D2"]
-rotation = 1.5708
+rotation = -1.5708
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_hvgmw")
+texture = ExtResource("4_xxp8j")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0.5, 0)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_fr12v")
+stream = ExtResource("7_x18j0")
 volume_db = -15.0
 pitch_scale = 0.5
 bus = &"MapSounds"
@@ -115,3 +114,4 @@ mouse_filter = 2
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="area_entered" from="Radar2" to="." method="_on_radar_2_area_entered"]
+[connection signal="area_exited" from="Radar2" to="." method="_on_radar_2_area_exited"]

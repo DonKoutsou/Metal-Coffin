@@ -222,10 +222,9 @@ func DogFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	
 	for g in Survivors:
 		var nam = g.Name
-		var ship
 		for z in FighingFriendlyUnits:
 			if z is PlayerShip and nam == "Player":
-				ShipDat.GetInstance().SetStatValue("HULL", g.Hull)
+				ShipData.GetInstance().SetStatValue("HULL", g.Hull)
 				FighingFriendlyUnits.erase(z)
 				break
 			if z is Drone and nam == z.Cpt.CaptainName:
@@ -240,7 +239,7 @@ func DogFightEnded(Survivors : Array[BattleShipStats]) -> void:
 			CaptainUI.GetInstance().OnCaptainDischarged(g.Cpt)
 	for g in FighingEnemyUnits:
 		MapPointerManager.GetInstance().RemoveShip(g)
-		g.queue_free()
+		g.free()
 	ToggleShipPausing(false)
 #Exploration---------------------------------------------
 func StartExploration(Spot : MapSpot) -> void:

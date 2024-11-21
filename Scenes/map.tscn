@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=38 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -31,6 +31,12 @@ min_value = 1.0
 max_value = 10.0
 _data = [Vector2(0, 1), 0.0, 3.3398, 0, 0, Vector2(1, 6.7), 10.2257, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0a4hg"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ms5"]
+bg_color = Color(0.3162, 0.49708, 0.51, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
 diffuse_texture = ExtResource("29_s08yn")
@@ -182,6 +188,10 @@ MapGenerationDistanceCurve = SubResource("Curve_rghuw")
 DroneDockEventH = ExtResource("28_tg7n1")
 HappeningUI = ExtResource("12_5ifa8")
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -1
+visible = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 follow_viewport_enabled = true
@@ -197,12 +207,39 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
 handle_input_locally = false
+snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="Control2" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2000.0
+offset_top = -3000.0
+offset_right = 96847.0
+offset_bottom = 96351.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/Control2"]
+z_index = 1
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_0a4hg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
+
+[node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport" groups=["DissapearingMap"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,11 +288,13 @@ color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 position = Vector2(0, 0)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="ShipCamera" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 position = Vector2(576, 324)
 process_callback = 0
+limit_smoothed = true
 position_smoothing_speed = 1.0
 script = ExtResource("16_4wqve")
 
@@ -269,6 +308,7 @@ rotation = -1.5708
 texture = ExtResource("30_g5v37")
 
 [node name="MapPointerManager" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+z_index = 100
 material = SubResource("CanvasItemMaterial_w8yg2")
 layout_mode = 3
 anchors_preset = 15

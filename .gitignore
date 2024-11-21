@@ -49,3 +49,5 @@ Assets/hazard-sign.png.import
 /.godot
 *.cfg
 /addons/imgui-godot
+/.godot/exported
+/.godot/editor

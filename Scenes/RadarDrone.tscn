@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_usnof"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="2_vsxnj"]
-[ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="3_7uay3"]
+[ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="3_7uay3"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_gjkv5"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="5_0m56j"]
 

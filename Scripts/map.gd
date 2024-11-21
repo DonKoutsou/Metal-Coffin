@@ -173,6 +173,20 @@ func GenerateMap() -> void:
 				#continue
 			#if (z.global_position.distance_to(g.global_position) < 4000):
 				#ln.add_point(cit1.to_local(cit.global_position))
+func RespawnEnemies(EnemyData : Array[Resource]) -> void:
+	for g in EnemyData:
+		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
+		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
+		ship.LoadSaveData(g)
+func GetEnemySaveData() ->SaveData:
+	var dat = SaveData.new()
+	dat.DataName = "Enemies"
+	var Datas : Array[Resource] = []
+	for g in get_tree().get_nodes_in_group("Enemy"):
+		var enem = g as HostileShip
+		Datas.append(enem.GetSaveData())
+	dat.Datas = Datas
+	return dat
 func swap(arr: Array, i: int, j: int):
 	var tmp = arr[i]
 	arr[i] = arr[j]
@@ -307,7 +321,7 @@ func DrawVillageLines():
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
 		for g in l:
 			lne.add_point(g)
-	
+		#lne.z_index = 2
 	for l in paintedlines:
 		var point1 = l.get_point_position(0)
 		var point2 = l.get_point_position(1)
@@ -344,7 +358,7 @@ func DrawCityLines():
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
 		for g in l:
 			lne.add_point(g)
-	
+		lne.z_index = 2
 	#for l in paintedlines:
 		#var point1 = l.get_point_position(0)
 		#var point2 = l.get_point_position(1)
@@ -469,6 +483,9 @@ func _HANDLE_ZOOM(zoomval : float):
 		g.visible = camera_2d.zoom < Vector2(1, 1)
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
+	$CanvasLayer/SubViewportContainer/SubViewport/Control2.visible = camera_2d.zoom.x < 0.5
+	#for g in get_tree().get_nodes_in_group("DissapearingMap"):
+		#g.modulate.a = mod
 #////////////////////////////
 var touch_points: Dictionary = {}
 var start_zoom: Vector2
@@ -494,6 +511,7 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.25,0.25), Vector2(2,2))
 		for g in get_tree().get_nodes_in_group("MapLines"):
 			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
+		$CanvasLayer/SubViewportContainer/SubViewport/Control2.visible = camera_2d.zoom.x < 0.5
 	else:
 		UpdateCameraPos(event.relative)
 #//////////////////////////////////////////////////////////

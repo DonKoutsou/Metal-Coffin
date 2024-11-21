@@ -15,7 +15,7 @@ position = Vector2(608, 338)
 script = ExtResource("1_55o70")
 SpotScene = ExtResource("2_veptg")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
 material = SubResource("CanvasItemMaterial_x44r1")
 scale = Vector2(2, 2)
 texture = ExtResource("5_y50gx")

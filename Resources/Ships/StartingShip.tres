@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BaseShip" load_steps=11 format=3 uid="uid://dcw4b2h3xa0no"]
+[gd_resource type="Resource" script_class="BaseShip" load_steps=10 format=3 uid="uid://dcw4b2h3xa0no"]
 
 [ext_resource type="Script" path="res://Scripts/BaseShipStat.gd" id="1_rx5mn"]
 [ext_resource type="Script" path="res://Scripts/BaseShip.gd" id="1_vob0b"]
@@ -18,12 +18,6 @@ StatCurrentVal = 20.0
 StatName = "FUEL"
 StatBuff = 20.0
 
-[sub_resource type="Resource" id="Resource_yektl"]
-script = ExtResource("2_uwov3")
-StatCurrentVal = 30.0
-StatName = "OXYGEN"
-StatBuff = 30.0
-
 [sub_resource type="Resource" id="Resource_12ake"]
 script = ExtResource("2_uwov3")
 StatCurrentVal = 100.0
@@ -37,4 +31,4 @@ ShipDesc = "Original model was designed for racing, its light and fast, but lack
 ShipScene = ExtResource("4_mbctq")
 Icon = ExtResource("3_cbndh")
 TopIcon = ExtResource("5_8aws1")
-Buffs = Array[ExtResource("1_rx5mn")]([SubResource("Resource_cjlo5"), SubResource("Resource_nsfy5"), SubResource("Resource_yektl"), SubResource("Resource_12ake")])
+Buffs = Array[ExtResource("1_rx5mn")]([SubResource("Resource_cjlo5"), SubResource("Resource_nsfy5"), SubResource("Resource_12ake")])

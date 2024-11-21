@@ -71,6 +71,7 @@ _data = {
 }
 
 [node name="Control" type="Control"]
+z_index = 2
 material = SubResource("CanvasItemMaterial_kbl4x")
 clip_contents = true
 layout_mode = 3

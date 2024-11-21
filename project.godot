@@ -42,6 +42,7 @@ MapShipVizualiser=""
 MapLines=""
 Ships=""
 Enemy=""
+DissapearingMap=""
 
 [input]
 

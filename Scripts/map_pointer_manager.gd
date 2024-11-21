@@ -32,8 +32,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	
 	if (Ship is Drone):
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, Ship.GetSpeed())
-		
-	
+
 	Markers.append(marker)
 func RemoveShip(Ship : Node2D) -> void:
 	var index = Ships.find(Ship)

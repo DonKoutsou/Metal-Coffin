@@ -75,7 +75,7 @@ stretch_mode = 1
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
 material = SubResource("CanvasItemMaterial_233h4")
 position = Vector2(609, 366)
-scale = Vector2(1.196, 1.196)
+scale = Vector2(0.671, 0.671)
 texture = ExtResource("5_rngj7")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
@@ -91,7 +91,7 @@ blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("8_m1m56")
 texture_scale = 0.88
-height = 485.0
+height = 40.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="SubViewportContainer/SubViewport"]
 position = Vector2(87.475, 556.915)

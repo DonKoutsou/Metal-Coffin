@@ -15,6 +15,7 @@ func Save(world : World) -> void:
 	var Inv = world.GetInventory() as Inventory
 	var DataArray : Array[Resource] = []
 	DataArray.append(Mapz.GetSaveData())
+	DataArray.append(Mapz.GetEnemySaveData())
 	DataArray.append(Inv.GetSaveData())
 	DataArray.append(world.ShipDat.GetSaveData())
 	DataArray.append(world.GetShipSaveData())
@@ -46,9 +47,12 @@ func Load(world : World) ->bool:
 	Mapz.LoadSaveData(mapdata)
 	Inv.LoadSaveData(InvData)
 	Mapz.SetPlayerPos(sav.GetData("PLData").Pos)
+	
+	var enems : Array[Resource] = (sav.GetData("Enemies") as SaveData).Datas
 	world.Loading = true
 	call_deferred("LoadStats", world, StatData)
 	call_deferred("LoadCaptains", sav.GetData("PLData").Captains)
+	call_deferred("RespawnEnems", Mapz,enems )
 	return true
 	#world.LoadData(StatData)
 func LoadStats(world : World, StatData : Resource) -> void:
@@ -57,3 +61,5 @@ func LoadCaptains(Cptns : Array[Captain]):
 	var dock = PlayerShip.GetInstance().GetDroneDock()
 	for g in Cptns:
 		dock.AddCaptain(g)
+func RespawnEnems(Mp : Map, Enems : Array[Resource]):
+	Mp.RespawnEnemies( Enems )

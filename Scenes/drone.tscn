@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/Amol.tres" id="3_fw0pf"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
-[ext_resource type="Shader" path="res://Scenes/Radar.gdshader" id="6_x7c6h"]
+[ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="6_x7c6h"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="8_bbjow"]
 
 [sub_resource type="Curve" id="Curve_qk12j"]
@@ -106,6 +106,7 @@ shape = SubResource("CircleShape2D_7khp2")
 debug_color = Color(0.718534, 0.251914, 1, 0.42)
 
 [node name="ShipTrajectory" type="Line2D" parent="."]
+z_index = 2
 material = SubResource("CanvasItemMaterial_2le8a")
 points = PackedVector2Array(0, 0, 0, 30)
 width = 8.0
@@ -119,7 +120,6 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_4y2i6")
 
 [node name="Aceleration" type="Node2D" parent="."]
-position = Vector2(0.5, 0)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_g6qkr")
@@ -145,6 +145,7 @@ monitoring = false
 shape = SubResource("CircleShape2D_63pb3")
 
 [node name="Radar_Range" type="ColorRect" parent="Radar" groups=["MapLines"]]
+z_index = 2
 material = SubResource("ShaderMaterial_v4ssc")
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,6 +172,7 @@ shape = SubResource("CircleShape2D_si61q")
 debug_color = Color(4.81308e-08, 0.640532, 0.348463, 0.42)
 
 [node name="Analyzer_Range" type="ColorRect" parent="Analyzer" groups=["MapLines"]]
+z_index = 2
 material = SubResource("ShaderMaterial_xqscw")
 anchors_preset = -1
 anchor_top = 0.5
