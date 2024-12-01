@@ -1,7 +1,7 @@
 extends Node2D
 class_name MapSpot
 
-@onready var land_button_container: PanelContainer = $LandButtonContainer
+#@onready var land_button_container: PanelContainer = $LandButtonContainer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var HostileShipScene : PackedScene
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 	$VBoxContainer.visible = Analyzed
 	visible = Seen
 	global_rotation = 0
-	land_button_container.visible = false
+	#land_button_container.visible = false
 	if (Pos != Vector2.ZERO):
 		position = Pos
 	set_physics_process(false)
@@ -105,6 +105,24 @@ func HasAtmosphere() -> bool:
 	return SpotType.HasAtmoshere if Visited or Analyzed else false
 func GetPossibleDrops() -> Array:
 	return SpotType.PossibleDrops if Analyzed else []
+func HasFuel() -> bool:
+	var hasf = false
+	
+	for g in SpotType.PossibleDrops:
+		if g is UsableItem and g.StatUseName == "FUEL":
+			hasf = true
+			break
+	
+	return hasf
+func HasRepair() -> bool:
+	var hasf = false
+	
+	for g in SpotType.PossibleDrops:
+		if g is UsableItem and g.StatUseName == "HULL":
+			hasf = true
+			break
+	
+	return hasf
 #//////////////////////////////////////////////////////////////////
 #todo find better way for dialogue from station
 func OnSpotVisited(PlayAnim : bool = true) -> void:
@@ -130,6 +148,8 @@ func OnSpotVisited(PlayAnim : bool = true) -> void:
 		#queue_free()
 	if (!Analyzed):
 		OnSpotAnalyzed(PlayAnim)
+	if (!Visited):
+		SpotAproached.emit(self)
 	Visited = true
 #Called when radar sees a mapspot
 func OnSpotSeen(PlayAnim : bool = true) -> void:
@@ -193,13 +213,17 @@ func AreaEntered(area: Area2D):
 				OnSpotAnalyzed()
 		else: if (area.get_collision_layer_value(3)):
 			#if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
-			land_button_container.visible = true
-			set_physics_process(true)
-			SpotAproached.emit(self)
-			OnSpotVisited()
+			#land_button_container.visible = true
+			#set_physics_process(true)
+			
+			#OnSpotVisited()
 			CurrentlyVisiting = true
+			var ship = area.get_parent() as PlayerShip
+			ship.SetCurrentPort(self)
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):
-		land_button_container.visible = false
-		set_physics_process(false)
+		#land_button_container.visible = false
+		#set_physics_process(false)
 		CurrentlyVisiting = false
+		var ship = area.get_parent() as PlayerShip
+		ship.RemovePort()

@@ -360,7 +360,6 @@ alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 visible = false
-modulate = Color(1, 1, 1, 0.3)
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
@@ -368,9 +367,11 @@ texture = ExtResource("4_poyhe")
 stretch_mode = 3
 
 [node name="TextureRect2" type="Label" parent="VBoxContainer"]
-modulate = Color(1, 1, 1, 0.3)
+texture_filter = 5
 use_parent_material = true
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 31
 text = "Curdaw"
 horizontal_alignment = 1
@@ -384,6 +385,7 @@ mouse_filter = 2
 alignment = 1
 
 [node name="LandButtonContainer" type="PanelContainer" parent="."]
+visible = false
 z_index = 2
 material = SubResource("CanvasItemMaterial_i403d")
 anchors_preset = 5

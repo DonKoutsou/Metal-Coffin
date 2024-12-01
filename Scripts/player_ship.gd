@@ -2,21 +2,26 @@ extends Node2D
 
 class_name PlayerShip
 
-@export var Notif : PackedScene
 @export var LowStatsToNotifyAbout : Array[String]
 @export var CaptainIcon : Texture
+@export var LowleftNotif : PackedScene
 
 var ShipType : BaseShip
 
 var Travelling = false
 #var ChangingCourse = false
 var Paused = false
+var CurrentPort : MapSpot
+var CanRefuel = false
+var CanRepair = false
+var IsRefueling = false
 
 signal ScreenEnter()
 signal ScreenExit()
 signal ShipStopped
 signal ShipAccelerating
 signal ShipForceStopped
+signal ShipDeparted()
 
 static var Instance : PlayerShip
 
@@ -33,7 +38,14 @@ func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
 		
-	
+		
+func SetCurrentPort(Port : MapSpot):
+	CurrentPort = Port
+	CanRefuel = Port.HasFuel()
+	CanRepair = Port.HasRepair()
+func RemovePort():
+	ShipDeparted.emit()
+	CurrentPort = null
 func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var FuelRangeIndicator = $Fuel_Range
 	var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
@@ -103,12 +115,36 @@ func OnStatLow(StatName : String) -> void:
 	$Notifications.add_child(notif)
 	
 	#Ingame_UIManager.GetInstance().AddUI(notif)
-
+func ToggleShowRefuel(Stats : String, t : bool):
+	var notif : LowLeftNotif
+	for g in $Notifications.get_children():
+		if g is LowLeftNotif:
+			g.ToggleStat(Stats, t)
+			return
+	if (t):
+		notif = LowleftNotif.instantiate() as LowLeftNotif
+		notif.ToggleStat(Stats, t)
+		connect("ShipDeparted", notif.OnShipDeparted)
+		$Notifications.add_child(notif)
 
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
 	if ($Node2D.position.x == 0):
+		if (CurrentPort != null):
+			CurrentPort.OnSpotVisited()
+			if (CanRefuel):
+				if (!ShipData.GetInstance().IsResourceFull("FUEL")):
+					ToggleShowRefuel("Refueling", true)
+					ShipData.GetInstance().RefilResource("FUEL", 0.05)
+				else:
+					ToggleShowRefuel("Refueling", false)
+			if (CanRepair):
+				if (!ShipData.GetInstance().IsResourceFull("HULL")):
+					ToggleShowRefuel("Repairing", true)
+					ShipData.GetInstance().RefilResource("HULL", 0.05)
+				else:
+					ToggleShowRefuel("Repairing", false)
 		return
 	var fuel = $Node2D.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
 	var Dat = ShipData.GetInstance()
@@ -136,7 +172,7 @@ func GetShipSpeedVec() -> Vector2:
 
 func HaltShip():
 	Travelling = false
-	set_physics_process(false)
+	#set_physics_process(false)
 	
 	$Node2D.position.x = 0
 	#$AudioStreamPlayer2D.stop()
@@ -164,7 +200,7 @@ func AccelerationChanged(value: float) -> void:
 	else:
 		$GPUParticles2D.emitting = true
 		Travelling = true
-		set_physics_process(true)
+		#set_physics_process(true)
 		ShipAccelerating.emit()
 	var postween = create_tween()
 	postween.set_trans(Tween.TRANS_EXPO)

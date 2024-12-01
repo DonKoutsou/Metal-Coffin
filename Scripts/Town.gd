@@ -80,7 +80,7 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		
 		#sc.Visited = spotdat.Visited
 		if (spotdat.Visited):
-			sc.OnSpotVisited(false)
+			sc.Visited = true
 			
 		if (spotdat.Analyzed):
 			sc.OnSpotAnalyzed(false)

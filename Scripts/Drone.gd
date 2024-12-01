@@ -151,13 +151,13 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		var spot = area.get_parent() as MapSpot
 		if (spot.CurrentlyVisiting):
 			return
-		if (spot.SpotType.FullName != "Black Whole"):
-			for g in Cpt.GetStatValue("INVENTORY_CAPACITY"):
-				StoredItem.append_array(spot.SpotType.GetSpotDrop())
-		rotation = 0.0
-		CommingBack = true
-		Docked = false
-		Notify("Drone returning to base")
+		#if (spot.SpotType.FullName != "Black Whole"):
+			#for g in Cpt.GetStatValue("INVENTORY_CAPACITY"):
+				#StoredItem.append_array(spot.SpotType.GetSpotDrop())
+		#rotation = 0.0
+		#CommingBack = true
+		#Docked = false
+		#Notify("Drone returning to base")
 		#$Line2D.visible = true
 		if (!spot.Seen):
 			spot.OnSpotSeenByDrone()
@@ -175,11 +175,11 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		set_physics_process(false)
 		var rad = get_node_or_null("Radar/Radar_Range")
 		if (rad != null):
-			GetShipRadarArea().monitorable = false
+			GetShipRadarArea().set_deferred("monitorable", false)
 			rad.visible = false
 		var an = get_node_or_null("Analyzer/Analyzer_Range")
 		if (an != null):
-			GetShipAnalayzerArea().monitorable = false
+			GetShipAnalayzerArea().set_deferred("monitorable", false)
 			an.visible = false
 		GetShipAcelerationNode().position.x = 0
 func GetShipBodyArea() -> Area2D:

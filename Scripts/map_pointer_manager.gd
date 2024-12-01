@@ -6,7 +6,7 @@ class_name MapPointerManager
 @export var FriendlyColor : Color
 @export var EnemyColor : Color
 var Ships : Array[Node2D] = []
-var Markers : Array[ShipMarker] = []
+var _ShipMarkers : Array[ShipMarker] = []
 
 static var Instance : MapPointerManager
 
@@ -33,16 +33,16 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	if (Ship is Drone):
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, Ship.GetSpeed())
 
-	Markers.append(marker)
+	_ShipMarkers.append(marker)
 func RemoveShip(Ship : Node2D) -> void:
 	var index = Ships.find(Ship)
-	Markers[index].queue_free()
-	Markers.remove_at(index)
+	_ShipMarkers[index].queue_free()
+	_ShipMarkers.remove_at(index)
 	Ships.remove_at(index)
 func _physics_process(_delta: float) -> void:
-	for g in Markers.size():
+	for g in _ShipMarkers.size():
 		var ship = Ships[g]
-		var Marker = Markers[g]
+		var Marker = _ShipMarkers[g]
 		if (ship is HostileShip):
 			if (ship.VisibleBy.size() > 0):
 				Marker.global_position = ship.global_position

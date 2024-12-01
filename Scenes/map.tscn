@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=37 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -7,19 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://dcxd3udf7434a" path="res://Scenes/Towns/Town4.tscn" id="5_t2blr"]
 [ext_resource type="PackedScene" uid="uid://yupxf3b2xhjq" path="res://Scenes/Towns/Town5.tscn" id="6_ruf57"]
 [ext_resource type="PackedScene" uid="uid://cw0fmxei1f6xx" path="res://Scenes/Towns/Town6.tscn" id="7_w57pf"]
-[ext_resource type="PackedScene" uid="uid://bd0jdxi35y3ex" path="res://Scenes/PlanetAnalyzer.tscn" id="8_7ajvg"]
 [ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="8_kpprx"]
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
+[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ax28q"]
+[ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_00g78"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="16_4wqve"]
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
 [ext_resource type="PackedScene" uid="uid://1j0ghufup7v" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_qxruq"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
-[ext_resource type="Texture2D" uid="uid://ba67hhfb6sdb5" path="res://Assets/Sand/Rock053_1K-PNG_Color.png" id="29_s08yn"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
-[ext_resource type="Texture2D" uid="uid://cad2gsiytpugg" path="res://Assets/Sand/Rock053_1K-PNG_NormalGL.png" id="30_mlb2h"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
 [ext_resource type="Shader" path="res://Shaders/gauge.gdshader" id="33_ssjx5"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
@@ -39,8 +38,8 @@ light_mode = 1
 bg_color = Color(0.3162, 0.49708, 0.51, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
-diffuse_texture = ExtResource("29_s08yn")
-normal_texture = ExtResource("30_mlb2h")
+diffuse_texture = ExtResource("13_ax28q")
+normal_texture = ExtResource("14_00g78")
 texture_filter = 5
 texture_repeat = 2
 
@@ -183,14 +182,9 @@ SpecialTownTypes = Array[PackedScene]([ExtResource("3_hkdr3")])
 MinorCityType = ExtResource("9_yqugh")
 FinalCity = ExtResource("9_yqugh")
 MapSize = 150
-AnalyzerScene = ExtResource("8_7ajvg")
 MapGenerationDistanceCurve = SubResource("Curve_rghuw")
 DroneDockEventH = ExtResource("28_tg7n1")
 HappeningUI = ExtResource("12_5ifa8")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = -1
-visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -220,10 +214,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2000.0
-offset_top = -3000.0
-offset_right = 96847.0
-offset_bottom = 96351.0
+offset_left = -6000.0
+offset_top = -6000.0
+offset_right = 92847.0
+offset_bottom = 93351.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -282,13 +276,14 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 
+[node name="MapLines" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+
 [node name="MapSpots" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 
 [node name="PlayerShip" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("28_7rdua")]
 position = Vector2(0, 0)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="ShipCamera" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]

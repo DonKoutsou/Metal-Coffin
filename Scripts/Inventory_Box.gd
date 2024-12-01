@@ -39,6 +39,7 @@ func UpdateAmm(Amm : int) -> void:
 	$PanelContainer/Label.text = var_to_str(ItemC.Ammount)
 	var bollthing = ItemC.Ammount > 0
 	ToggleVisuals(bollthing)
+	$PanelContainer.visible = ItemC.Ammount > 1
 
 func UpdateDamaged(Damaged : bool) -> void:
 	$TextureRect/TextureRect2.visible = Damaged

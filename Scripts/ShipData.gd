@@ -19,6 +19,10 @@ func _AddToStatCurrentValue(StatN : String, StatVal : float):
 	var stat = GetStat(StatN)
 	stat.CurrentVelue = min(stat.CurrentVelue + StatVal, stat.GetStat())
 
+func IsResourceFull(StatN : String) -> bool:
+	var stat = GetStat(StatN)
+	return stat.CurrentVelue == stat.GetStat()
+
 func _UpdateStatShipBuff(StatN : String, StatVal : float):
 	GetStat(StatN).StatShipBuff = StatVal
 

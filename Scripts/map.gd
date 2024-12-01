@@ -9,7 +9,7 @@ class_name Map
 @export var MinorCityType : PackedScene
 @export var FinalCity : PackedScene
 @export var MapSize : int = 20
-@export var AnalyzerScene : PackedScene
+#@export var AnalyzerScene : PackedScene
 @export var MapGenerationDistanceCurve : Curve
 
 @export var DroneDockEventH : DroneDockEventHandler
@@ -136,7 +136,7 @@ func GenerateMap() -> void:
 		sc = type.instantiate()
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
-		sc.connect("SpotAnalazyed", AnalyzeLocation)
+		#sc.connect("SpotAnalazyed", AnalyzeLocation)
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
 		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
@@ -155,8 +155,8 @@ func GenerateMap() -> void:
 		g.SpawnEnemies()
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
-	DrawCityLines()
-	DrawVillageLines()
+	_DrawCityLines()
+	_DrawVillageLines()
 	#print(lines)
 		#var cit1 = g as MapSpot
 		#var ln = Line2D.new()
@@ -187,78 +187,12 @@ func GetEnemySaveData() ->SaveData:
 		Datas.append(enem.GetSaveData())
 	dat.Datas = Datas
 	return dat
-func swap(arr: Array, i: int, j: int):
+func _swap(arr: Array, i: int, j: int):
 	var tmp = arr[i]
 	arr[i] = arr[j]
 	arr[j] = tmp
 
-# Helper function: Push an element to the heap
-func heap_push(heap: Array, element: Array):
-	heap.append(element)
-	var i = heap.size() - 1
-	while i > 0:
-		var parent = (i - 1)
-		if heap[i][0] >= heap[parent][0]:
-			break
-		swap(heap, i, parent)
-		i = parent
 
-# Helper function: Pop an element from the heap
-func heap_pop(heap: Array) -> Array:
-	swap(heap, 0, heap.size() - 1)
-	var result = heap.pop_back()
-	var i = 0
-	while i < heap.size():
-		var left_child = 2 * i + 1
-		var right_child = 2 * i + 2
-
-		var smallest = i
-		if left_child < heap.size() and heap[left_child][0] < heap[smallest][0]:
-			smallest = left_child
-		if right_child < heap.size() and heap[right_child][0] < heap[smallest][0]:
-			smallest = right_child
-		
-		if smallest == i:
-			break
-		swap(heap, i, smallest)
-		i = smallest
-	
-	return result
-
-func prim_mst_optimized(cities: Array) -> Array:
-	var num_cities = cities.size()
-	if num_cities <= 1:
-		return []
-	
-	var connected = PackedInt32Array()
-	connected.append(0)  # Start with the first city connected
-	
-	var edge_min_heap = []
-	var mst_edges = []
-
-	# Add all edges from city 0 to the heap
-	for i in range(1, num_cities):
-		var distance = cities[0].distance_to(cities[i])
-		heap_push(edge_min_heap, [distance, 0, i])
-
-	while connected.size() < num_cities:
-		# Pop the smallest edge from the heap
-		var min_edge = heap_pop(edge_min_heap)
-		#var dist = min_edge[0]
-		var u = min_edge[1]
-		var v = min_edge[2]
-
-		if not connected.has(v):
-			connected.append(v)
-			mst_edges.append([cities[u], cities[v]])
-
-			# Add all edges from this newly connected city to the heap
-			for j in range(num_cities):
-				if not connected.has(j):
-					var new_distance = cities[v].distance_to(cities[j])
-					heap_push(edge_min_heap, [new_distance, v, j])
-
-	return mst_edges
 	
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
 	return Vector2(randf_range(PrevPos.x, PrevPos.x + (800 * Distance)), randf_range(-2000, +2000))
@@ -300,80 +234,10 @@ func StageFailed() -> void:
 	set_process(true)
 	set_process_input(true)
 	#Travelling = false
-func DrawVillageLines():
-	var cities = get_tree().get_nodes_in_group("Chora")
-	#cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
-	var cityloc : Array[Vector2]
-	for g in cities:
-		cityloc.append($CanvasLayer/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
-	
-	var lines = prim_mst_optimized(cityloc)
-	#var mat = CanvasItemMaterial.new()
-	#mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
-	var paintedlines : Array[Line2D]
-	for l in lines:
-		var lne = Line2D.new()
-		lne.width = 5
-		lne.joint_mode = Line2D.LINE_JOINT_ROUND
-		paintedlines.append(lne)
-		lne.default_color = Color(1,1,1,0.3)
-		#lne.material = mat
-		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
-		for g in l:
-			lne.add_point(g)
-		#lne.z_index = 2
-	for l in paintedlines:
-		var point1 = l.get_point_position(0)
-		var point2 = l.get_point_position(1)
-		l.remove_point(1)
+
 		
-		var dir = point1.direction_to(point2)
-		
-		var dist = point1.distance_to(point2)
-		var pointamm = roundi(dist / 50)
-		var offsetperpoint = dist/pointamm
-		for g in pointamm:
-			var offset = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
-			l.add_point(point1 + offset)
-		
-		l.add_point(point2)
-		
-func DrawCityLines():
-	var cities = get_tree().get_nodes_in_group("City Center")
-	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
-	var cityloc : Array[Vector2]
-	for g in cities:
-		cityloc.append($CanvasLayer/SubViewportContainer/SubViewport/MapSpots.to_local(g.global_position))
-	
-	var lines = prim_mst_optimized(cityloc)
-	var mat = CanvasItemMaterial.new()
-	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
-	#var paintedlines : Array[Line2D]
-	for l in lines:
-		var lne = Line2D.new()
-		lne.joint_mode = Line2D.LINE_JOINT_ROUND
-		#paintedlines.append(lne)
-		lne.default_color = Color(1,1,1,0.2)
-		lne.material = mat
-		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(lne)
-		for g in l:
-			lne.add_point(g)
-		lne.z_index = 2
-	#for l in paintedlines:
-		#var point1 = l.get_point_position(0)
-		#var point2 = l.get_point_position(1)
-		#l.remove_point(1)
-		#
-		#var dir = point1.direction_to(point2)
-		#
-		#var dist = point1.distance_to(point2)
-		#var pointamm = roundi(dist / 50)
-		#var offsetperpoint = dist/pointamm
-		#for g in pointamm:
-			#var offset = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
-			#l.add_point(point1 + offset)
-		#
-		#l.add_point(point2)
+
+
 #func DepartForLocation(stage :MapSpot) -> void:
 #	if (Travelling):
 #		return
@@ -387,10 +251,10 @@ func DrawCityLines():
 	#set_process(false)
 	
 # CALLED WHEN CLICKED ON A PLANET
-func AnalyzeLocation(Spot : MapSpot):
-	var analyzer = AnalyzerScene.instantiate() as PlanetAnalyzer
-	analyzer.SetVisuals(Spot)
-	Ingame_UIManager.GetInstance().add_child(analyzer)
+#func AnalyzeLocation(Spot : MapSpot):
+	#var analyzer = AnalyzerScene.instantiate() as PlanetAnalyzer
+	#analyzer.SetVisuals(Spot)
+	#Ingame_UIManager.GetInstance().add_child(analyzer)
 
 func SearchLocation(stage : MapSpot):
 	if (GetPlayerShip().Travelling):
@@ -424,7 +288,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		#sc.connect("MapPressed", Arrival)
 		sc.connect("SpotAproached", Arrival)
 		sc.connect("SpotSearched", SearchLocation)
-		sc.connect("SpotAnalazyed", AnalyzeLocation)
+		#sc.connect("SpotAnalazyed", AnalyzeLocation)
 		#var type = dat.SpotType
 		#sc.SetSpotData(type)
 		
@@ -437,8 +301,8 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		#
 		#if (dat.Analyzed):
 			#sc.OnSpotAnalyzed()
-	call_deferred("DrawCityLines")
-	call_deferred("DrawVillageLines")
+	call_deferred("_DrawCityLines")
+	call_deferred("_DrawVillageLines")
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():
@@ -478,12 +342,12 @@ func _MAP_INPUT(event: InputEvent) -> void:
 #////////////////////////////
 func _HANDLE_ZOOM(zoomval : float):
 	var prevzoom = camera_2d.zoom
-	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.3,0.3), Vector2(2.1,2.1))
+	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.1,0.1), Vector2(2.1,2.1))
 	for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
 		g.visible = camera_2d.zoom < Vector2(1, 1)
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
-	$CanvasLayer/SubViewportContainer/SubViewport/Control2.visible = camera_2d.zoom.x < 0.5
+	_UpdateMapGridVisibility()
 	#for g in get_tree().get_nodes_in_group("DissapearingMap"):
 		#g.modulate.a = mod
 #////////////////////////////
@@ -508,12 +372,20 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		var touch_point_positions = touch_points.values()
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
-		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.25,0.25), Vector2(2,2))
+		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.1,0.1), Vector2(2.1,2.1))
 		for g in get_tree().get_nodes_in_group("MapLines"):
 			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
-		$CanvasLayer/SubViewportContainer/SubViewport/Control2.visible = camera_2d.zoom.x < 0.5
+		_UpdateMapGridVisibility()
 	else:
 		UpdateCameraPos(event.relative)
+		
+func _UpdateMapGridVisibility():
+	if (camera_2d.zoom.x < 0.25):
+		var tw = create_tween()
+		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/Control2, "modulate", Color(1,1,1,1), 0.5)
+	else:
+		var tw = create_tween()
+		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/Control2, "modulate", Color(1,1,1,0), 0.5)
 #//////////////////////////////////////////////////////////
 #ARROW FOR LOCATING PLAYER SHIP
 func _process(_delta: float) -> void:
@@ -527,3 +399,130 @@ func PlayerExitedScreen() -> void:
 	#set_process(true)
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
 #//////////////////////////////////////////////////////////
+
+#Map Line generation
+func _DrawCityLines():
+	var cities = get_tree().get_nodes_in_group("City Center")
+	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
+	var cityloc : Array[Vector2]
+	for g in cities:
+		cityloc.append(g.global_position)
+	
+	var lines = _prim_mst_optimized(cityloc)
+	var mat = CanvasItemMaterial.new()
+	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+	#var paintedlines : Array[Line2D]
+	for l in lines:
+		var lne = Line2D.new()
+		lne.joint_mode = Line2D.LINE_JOINT_ROUND
+		#paintedlines.append(lne)
+		lne.default_color = Color(1,1,1,0.2)
+		lne.material = mat
+		$CanvasLayer/SubViewportContainer/SubViewport/MapLines.add_child(lne)
+		for g in l:
+			lne.add_point(g)
+		lne.z_index = 2
+func _DrawVillageLines():
+	var cities = get_tree().get_nodes_in_group("Chora")
+	#cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
+	var cityloc : Array[Vector2]
+	for g in cities:
+		cityloc.append(g.global_position)
+	
+	var lines = _prim_mst_optimized(cityloc)
+	#var mat = CanvasItemMaterial.new()
+	#mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+	var paintedlines : Array[Line2D]
+	for l in lines:
+		var lne = Line2D.new()
+		lne.width = 5
+		lne.joint_mode = Line2D.LINE_JOINT_ROUND
+		paintedlines.append(lne)
+		lne.default_color = Color(1,1,1,0.3)
+		#lne.material = mat
+		$CanvasLayer/SubViewportContainer/SubViewport/MapLines.add_child(lne)
+		for g in l:
+			lne.add_point(g)
+		#lne.z_index = 2
+	for l in paintedlines:
+		var point1 = l.get_point_position(0)
+		var point2 = l.get_point_position(1)
+		l.remove_point(1)
+		
+		var dir = point1.direction_to(point2)
+		
+		var dist = point1.distance_to(point2)
+		var pointamm = roundi(dist / 50)
+		var offsetperpoint = dist/pointamm
+		for g in pointamm:
+			var offset = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+			l.add_point(point1 + offset)
+		
+		l.add_point(point2)
+# Helper function: Push an element to the heap
+func _heap_push(heap: Array, element: Array):
+	heap.append(element)
+	var i = heap.size() - 1
+	while i > 0:
+		var parent = (i - 1)
+		if heap[i][0] >= heap[parent][0]:
+			break
+		_swap(heap, i, parent)
+		i = parent
+
+# Helper function: Pop an element from the heap
+func _heap_pop(heap: Array) -> Array:
+	_swap(heap, 0, heap.size() - 1)
+	var result = heap.pop_back()
+	var i = 0
+	while i < heap.size():
+		var left_child = 2 * i + 1
+		var right_child = 2 * i + 2
+
+		var smallest = i
+		if left_child < heap.size() and heap[left_child][0] < heap[smallest][0]:
+			smallest = left_child
+		if right_child < heap.size() and heap[right_child][0] < heap[smallest][0]:
+			smallest = right_child
+		
+		if smallest == i:
+			break
+		_swap(heap, i, smallest)
+		i = smallest
+	
+	return result
+
+func _prim_mst_optimized(cities: Array) -> Array:
+	var num_cities = cities.size()
+	if num_cities <= 1:
+		return []
+	
+	var connected = PackedInt32Array()
+	connected.append(0)  # Start with the first city connected
+	
+	var edge_min_heap = []
+	var mst_edges = []
+
+	# Add all edges from city 0 to the heap
+	for i in range(1, num_cities):
+		var distance = cities[0].distance_to(cities[i])
+		_heap_push(edge_min_heap, [distance, 0, i])
+
+	while connected.size() < num_cities:
+		# Pop the smallest edge from the heap
+		var min_edge = _heap_pop(edge_min_heap)
+		#var dist = min_edge[0]
+		var u = min_edge[1]
+		var v = min_edge[2]
+
+		if not connected.has(v):
+			connected.append(v)
+			mst_edges.append([cities[u], cities[v]])
+
+			# Add all edges from this newly connected city to the heap
+			for j in range(num_cities):
+				if not connected.has(j):
+					var new_distance = cities[v].distance_to(cities[j])
+					_heap_push(edge_min_heap, [new_distance, v, j])
+
+	return mst_edges

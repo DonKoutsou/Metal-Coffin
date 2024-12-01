@@ -11,6 +11,7 @@ signal STPAN_OnStatsUpdatedCust(StatN : String, Val : float)
 signal STPAN_OnStatLow(StatN : String)
 # Called when the node enters the scene tree for the first time.
 func _enter_tree() -> void:
+	$GridContainer.columns = StatsToShow.size()
 	for g in StatsToShow.size():
 		var stat = StatScene.instantiate() as UIStat
 		stat.Stat = StatsToShow[g]
