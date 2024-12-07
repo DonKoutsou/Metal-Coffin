@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://blkdxjlya62h4"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://blkdxjlya62h4"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_goghs"]
 [ext_resource type="Texture2D" uid="uid://dsbfvbom3h575" path="res://Assets/oil-rig.png" id="2_y8lri"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_m4m06"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_x2fgy"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_166lm"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_13m4u"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_ffelc"]
 
@@ -12,13 +10,11 @@
 script = ExtResource("10_ffelc")
 SpotK = 17
 MapIcon = ExtResource("2_y8lri")
-PossibleDrops = Array[ExtResource("3_m4m06")]([ExtResource("4_x2fgy"), ExtResource("6_166lm"), ExtResource("8_13m4u")])
+PossibleDrops = Array[ExtResource("3_m4m06")]([ExtResource("8_13m4u")])
 FullName = "Oil_Rig"
 Description = "blah blah"
 CanLand = false
 HasAtmoshere = false
 VisibleOnStart = false
 DropAmmount = 1
-EnemyCity = false
-SpawnHostileShip = false
 CustomData = Array[ExtResource("1_goghs")]([])

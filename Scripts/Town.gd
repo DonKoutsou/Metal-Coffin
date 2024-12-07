@@ -5,10 +5,10 @@ class_name Town
 
 var LoadingData : bool = false
 
-signal SpotAproached(spot : MapSpot)
-signal SpotSearched(spot : MapSpot)
-signal SpotAnalazyed(spot : MapSpot)
-
+signal TownSpotAproached(spot : MapSpot)
+#signal SpotSearched(spot : MapSpot)
+signal TownSpotAnalazyed(spot : MapSpot)
+signal TownSpotLanded(spot : MapSpot)
 
 func _ready() -> void:
 	if (!LoadingData):
@@ -23,9 +23,10 @@ func GenerateCity() -> void:
 		var sc = SpotScene.instantiate() as MapSpot 
 		var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
 
-		sc.connect("SpotAproached", TownSpotApreached)
-		sc.connect("SpotSearched", TownSpotSearched)
-		sc.connect("SpotAnalazyed", TownSpotAnalyzed)
+		sc.connect("SpotAproached", _TownSpotApreached)
+		#sc.connect("SpotSearched", TownSpotSearched)
+		sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
+		sc.connect("SpotLanded", _TownSpotLanded)
 		
 		sc.SetSpotData(spottype)
 		if (spottype.GetEnumString() == "CITY_CENTER"):
@@ -42,7 +43,7 @@ func GenerateCity() -> void:
 func SpawnEnemies():
 	for g in $CitySpots.get_children() :
 		var spot = g as MapSpot
-		if (spot.SpotType.SpawnHostileShip):
+		if (spot.HostilePatrolToSpawn != null):
 			spot.SpawnEnemyShip()
 func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
@@ -61,9 +62,10 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 	for g in Dat.Spots.size():
 		var spotdat = Dat.Spots[g] as MapSpotSaveData
 		var sc = SpotScene.instantiate() as MapSpot
-		sc.connect("SpotAproached", TownSpotApreached)
-		sc.connect("SpotSearched", TownSpotSearched)
-		sc.connect("SpotAnalazyed", TownSpotAnalyzed)
+		sc.connect("SpotAproached", _TownSpotApreached)
+		#sc.connect("SpotSearched", TownSpotSearched)
+		sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
+		sc.connect("SpotLanded", _TownSpotLanded)
 		var type = spotdat.SpotType
 		sc.SetSpotData(type)
 		
@@ -85,9 +87,11 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		if (spotdat.Analyzed):
 			sc.OnSpotAnalyzed(false)
 		
-func TownSpotApreached(spot : MapSpot):
-	SpotAproached.emit(spot)
-func TownSpotSearched(spot : MapSpot):
-	SpotSearched.emit(spot)
-func TownSpotAnalyzed(spot : MapSpot):
-	SpotAnalazyed.emit(spot)
+func _TownSpotApreached(spot : MapSpot):
+	TownSpotAproached.emit(spot)
+#func TownSpotSearched(spot : MapSpot):
+	#SpotSearched.emit(spot)
+func _TownSpotAnalyzed(spot : MapSpot):
+	TownSpotAnalazyed.emit(spot)
+func _TownSpotLanded(spot : MapSpot):
+	TownSpotLanded.emit(spot)

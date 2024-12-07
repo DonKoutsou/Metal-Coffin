@@ -137,7 +137,7 @@ DroneDockEventH = ExtResource("2_35lsn")
 
 [node name="TextureButton" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 0
-offset_left = 70.0
+offset_left = 52.0
 offset_top = -14.0
 offset_right = 203.0
 offset_bottom = 42.0
@@ -154,9 +154,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -58.5
+offset_left = -59.5
 offset_top = -19.0
-offset_right = 37.5
+offset_right = 36.5
 offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -174,6 +174,7 @@ libraries = {
 }
 
 [node name="Control" type="Control" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

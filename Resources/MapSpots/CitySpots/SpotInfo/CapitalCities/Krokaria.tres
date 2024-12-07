@@ -1,7 +1,11 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://ltonn44hg1kq"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://ltonn44hg1kq"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_0i2ro"]
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_lu1yb"]
 
 [resource]
 script = ExtResource("1_0i2ro")
 SpotName = "Krokaria"
+EnemyCity = true
+HostileShipScene = ExtResource("1_lu1yb")
+HostileShipName = "Calist"

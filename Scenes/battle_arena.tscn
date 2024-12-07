@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://cxnqcu1fgkujm"]
 
 [ext_resource type="Script" path="res://Scripts/battle_arena.gd" id="1_46m1h"]
-[ext_resource type="Texture2D" uid="uid://ba67hhfb6sdb5" path="res://Assets/Sand/Rock053_1K-PNG_Color.png" id="1_r61gv"]
-[ext_resource type="Texture2D" uid="uid://cad2gsiytpugg" path="res://Assets/Sand/Rock053_1K-PNG_NormalGL.png" id="2_vpufr"]
+[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="5_638jo"]
 [ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/city.png" id="5_rngj7"]
+[ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="6_7bd0e"]
 [ext_resource type="PackedScene" uid="uid://16guv4jukonu" path="res://Scenes/Dogfight/DogfightEnemyDrone.tscn" id="6_xebw5"]
 [ext_resource type="PackedScene" uid="uid://dqvwo77ckbu65" path="res://Scenes/Dogfight/DogfightPlayerDrone.tscn" id="7_gyo7x"]
-[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="8_m1m56"]
+[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="10_hb3gi"]
 [ext_resource type="Script" path="res://Scripts/button.gd" id="12_lo7ia"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="13_ywgov"]
 [ext_resource type="Texture2D" uid="uid://df6y86wcp0d7r" path="res://Assets/targeted.png" id="15_v5476"]
@@ -15,8 +15,8 @@
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="19_qmiuc"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_67hb2"]
-diffuse_texture = ExtResource("1_r61gv")
-normal_texture = ExtResource("2_vpufr")
+diffuse_texture = ExtResource("5_638jo")
+normal_texture = ExtResource("6_7bd0e")
 texture_filter = 5
 texture_repeat = 2
 
@@ -48,6 +48,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -56,7 +57,7 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(1152, 648)
+size = Vector2i(1152, 504)
 render_target_update_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
@@ -73,9 +74,10 @@ texture = SubResource("CanvasTexture_67hb2")
 stretch_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+visible = false
 material = SubResource("CanvasItemMaterial_233h4")
 position = Vector2(609, 366)
-scale = Vector2(0.671, 0.671)
+scale = Vector2(0.451, 0.451)
 texture = ExtResource("5_rngj7")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
@@ -83,80 +85,13 @@ position = Vector2(609, 366)
 scale = Vector2(4.56641, 4.56641)
 color = Color(0, 0, 0, 1)
 
-[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport"]
-position = Vector2(582, 331)
+[node name="PointLight2D" type="DirectionalLight2D" parent="SubViewportContainer/SubViewport"]
+rotation = -0.0523599
 scale = Vector2(7.97656, 7.97656)
-energy = 0.5
+energy = 0.32
 blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
-texture = ExtResource("8_m1m56")
-texture_scale = 0.88
-height = 40.0
-
-[node name="TouchScreenButton" type="TouchScreenButton" parent="SubViewportContainer/SubViewport"]
-position = Vector2(87.475, 556.915)
-shape = SubResource("CircleShape2D_q0ww8")
-action = "MoveLeft"
-script = ExtResource("12_lo7ia")
-buttontext = "<"
-
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/TouchScreenButton"]
-material = SubResource("CanvasItemMaterial_3h7nd")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = -69.0
-offset_right = 31.5
-offset_bottom = 58.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("13_ywgov")
-theme_override_font_sizes/font_size = 234
-text = "<"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TouchScreenButton2" type="TouchScreenButton" parent="SubViewportContainer/SubViewport"]
-position = Vector2(274.86, 555.615)
-shape = SubResource("CircleShape2D_q0ww8")
-action = "MoveRight"
-script = ExtResource("12_lo7ia")
-buttontext = ">"
-
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/TouchScreenButton2"]
-material = SubResource("CanvasItemMaterial_3h7nd")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = -69.0
-offset_right = 31.5
-offset_bottom = 58.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("13_ywgov")
-theme_override_font_sizes/font_size = 234
-text = "<"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TouchScreenButton3" type="TouchScreenButton" parent="SubViewportContainer/SubViewport"]
-position = Vector2(1059.44, 554.765)
-shape = SubResource("CircleShape2D_q0ww8")
-action = "Fire"
-
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/TouchScreenButton3"]
-material = SubResource("CanvasItemMaterial_rdink")
-position = Vector2(-2.125, -1.305)
-scale = Vector2(2.513, 2.513)
-texture = ExtResource("15_v5476")
+height = 0.1
 
 [node name="PlSpawnPoint" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(-30, 366)
@@ -164,6 +99,82 @@ texture = ExtResource("15_v5476")
 
 [node name="EnemySpawnPoint" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(1200, 366)
+texture = ExtResource("15_v5476")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -144.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("10_hb3gi")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(87.475, 581.15)
+shape = SubResource("CircleShape2D_q0ww8")
+action = "MoveLeft"
+script = ExtResource("12_lo7ia")
+buttontext = "<"
+
+[node name="Label" type="Label" parent="TouchScreenButton"]
+material = SubResource("CanvasItemMaterial_3h7nd")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -69.0
+offset_right = 31.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("13_ywgov")
+theme_override_font_sizes/font_size = 234
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="."]
+position = Vector2(274.86, 579.85)
+shape = SubResource("CircleShape2D_q0ww8")
+action = "MoveRight"
+script = ExtResource("12_lo7ia")
+buttontext = ">"
+
+[node name="Label" type="Label" parent="TouchScreenButton2"]
+material = SubResource("CanvasItemMaterial_3h7nd")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -69.0
+offset_right = 31.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("13_ywgov")
+theme_override_font_sizes/font_size = 234
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TouchScreenButton3" type="TouchScreenButton" parent="."]
+position = Vector2(1059.44, 579)
+shape = SubResource("CircleShape2D_q0ww8")
+action = "Fire"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchScreenButton3"]
+material = SubResource("CanvasItemMaterial_rdink")
+position = Vector2(-2.125, -1.305)
+scale = Vector2(2.513, 2.513)
 texture = ExtResource("15_v5476")
 
 [node name="Control2" type="Control" parent="."]

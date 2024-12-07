@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_cjlo5"]
 script = ExtResource("1_rx5mn")
 StatName = "INVENTORY_CAPACITY"
-StatBuff = 3.0
+StatBuff = 4.0
 
 [sub_resource type="Resource" id="Resource_nsfy5"]
 script = ExtResource("2_uwov3")

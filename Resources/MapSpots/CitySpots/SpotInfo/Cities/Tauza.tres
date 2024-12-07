@@ -5,3 +5,5 @@
 [resource]
 script = ExtResource("1_w1eu0")
 SpotName = "Tauza"
+EnemyCity = true
+SpawnHostileShip = false

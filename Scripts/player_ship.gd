@@ -5,6 +5,7 @@ class_name PlayerShip
 @export var LowStatsToNotifyAbout : Array[String]
 @export var CaptainIcon : Texture
 @export var LowleftNotif : PackedScene
+#@export var Missile : PackedScene
 
 var ShipType : BaseShip
 
@@ -14,6 +15,7 @@ var Paused = false
 var CurrentPort : MapSpot
 var CanRefuel = false
 var CanRepair = false
+var CanUpgrade = false
 var IsRefueling = false
 
 signal ScreenEnter()
@@ -25,6 +27,8 @@ signal ShipDeparted()
 
 static var Instance : PlayerShip
 
+var Detectable = true
+
 func _ready() -> void:
 	MapPointerManager.GetInstance().AddShip(self, true)
 	Instance = self
@@ -34,18 +38,39 @@ func GetDroneDock() -> DroneDock:
 static func GetInstance() -> PlayerShip:
 	return Instance
 	
+#func FireMissile():
+	#var m = Missile.instantiate()
+	#get_parent().add_child(m)
+	#m.global_rotation = global_rotation
+	#m.global_position = global_position
+	
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
-		
-		
+	$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
+	$Analyzer/Analyzer_Range.material.set_shader_parameter("Paused", t)
+func ToggleRadar():
+	Detectable = !Detectable
+	$Radar/CollisionShape2D.disabled = !$Radar/CollisionShape2D.disabled
+	$Radar/Radar_Range.visible = !$Radar/Radar_Range.visible
+	
+	$Analyzer.monitorable = !$Analyzer.monitorable
+	$Analyzer/Analyzer_Range.visible = !$Analyzer/Analyzer_Range.visible
+	var tw = create_tween()
+	if ($PointLight2D.energy < 0.25):
+		tw.tween_property($PointLight2D, "energy", 0.25, 0.5)
+	else :
+		tw.tween_property($PointLight2D, "energy", 0, 0.5)
+	#$PointLight2D.visible = !$PointLight2D.visible
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	CanRefuel = Port.HasFuel()
 	CanRepair = Port.HasRepair()
+	CanUpgrade = Port.HasUpgrade()
 func RemovePort():
 	ShipDeparted.emit()
 	CurrentPort = null
+	Inventory.GetInstance().CancelUpgrades()
 func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var FuelRangeIndicator = $Fuel_Range
 	var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
@@ -115,15 +140,15 @@ func OnStatLow(StatName : String) -> void:
 	$Notifications.add_child(notif)
 	
 	#Ingame_UIManager.GetInstance().AddUI(notif)
-func ToggleShowRefuel(Stats : String, t : bool):
+func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 	var notif : LowLeftNotif
 	for g in $Notifications.get_children():
 		if g is LowLeftNotif:
-			g.ToggleStat(Stats, t)
+			g.ToggleStat(Stats, t, timel)
 			return
 	if (t):
 		notif = LowleftNotif.instantiate() as LowLeftNotif
-		notif.ToggleStat(Stats, t)
+		notif.ToggleStat(Stats, t, timel)
 		connect("ShipDeparted", notif.OnShipDeparted)
 		$Notifications.add_child(notif)
 
@@ -135,16 +160,24 @@ func _physics_process(_delta: float) -> void:
 			CurrentPort.OnSpotVisited()
 			if (CanRefuel):
 				if (!ShipData.GetInstance().IsResourceFull("FUEL")):
-					ToggleShowRefuel("Refueling", true)
+					var timeleft = (ShipData.GetInstance().GetStat("FUEL").GetStat() - ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()) / 0.05 / 60
+					ToggleShowRefuel("Refueling", true, roundi(timeleft))
 					ShipData.GetInstance().RefilResource("FUEL", 0.05)
 				else:
 					ToggleShowRefuel("Refueling", false)
 			if (CanRepair):
 				if (!ShipData.GetInstance().IsResourceFull("HULL")):
-					ToggleShowRefuel("Repairing", true)
+					var timeleft = (ShipData.GetInstance().GetStat("HULL").GetStat() - ShipData.GetInstance().GetStat("HULL").GetCurrentValue()) / 0.05 / 60
+					ToggleShowRefuel("Repairing", true, roundi(timeleft))
 					ShipData.GetInstance().RefilResource("HULL", 0.05)
 				else:
 					ToggleShowRefuel("Repairing", false)
+			if (CanUpgrade):
+				var inv = Inventory.GetInstance()
+				if (inv.UpgradedItem != null):
+					ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+				else:
+					ToggleShowRefuel("Upgrading", false)
 		return
 	var fuel = $Node2D.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
 	var Dat = ShipData.GetInstance()
@@ -184,12 +217,6 @@ func SteerChanged(value: float) -> void:
 	Steer(deg_to_rad(value))
 
 func AccelerationChanged(value: float) -> void:
-	var Audioween = create_tween()
-	#Audioween.set_trans(Tween.TRANS_EXPO)
-	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 2), 2)
-	#ChangingCourse = true
-	if (!$AudioStreamPlayer2D.playing):
-		$AudioStreamPlayer2D.play()
 	if (value <= 0):
 		Travelling = false
 		#set_physics_process(false)
@@ -198,10 +225,29 @@ func AccelerationChanged(value: float) -> void:
 		ShipStopped.emit()
 		#return
 	else:
+		if (Paused):
+			return
+		var Dat = ShipData.GetInstance()
+		if (Dat.GetStat("FUEL").GetCurrentValue() <= 0):
+			HaltShip()
+			PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
+			return
+			#set_physics_process(false)
+			
 		$GPUParticles2D.emitting = true
 		Travelling = true
 		#set_physics_process(true)
 		ShipAccelerating.emit()
+	
+	
+	var Audioween = create_tween()
+	#Audioween.set_trans(Tween.TRANS_EXPO)
+	var ef = AudioServer.get_bus_effect(4, 0)
+	Audioween.tween_property(ef, "pitch_scale", max(0.1,value / 2), 2)
+	#ChangingCourse = true
+	if (!$AudioStreamPlayer2D.playing):
+		$AudioStreamPlayer2D.play()
+	
 	var postween = create_tween()
 	postween.set_trans(Tween.TRANS_EXPO)
 	postween.tween_property($Node2D, "position", Vector2(max(0,value / 3), 0), 2)
@@ -225,7 +271,7 @@ func Steer(Rotation : float) -> void:
 	tw.tween_property(self, "rotation", Rotation, 1)
 
 func ToggleUI(t : bool):
-	$ShipRange.monitorable = t
+	$ShipBody.monitorable = t
 	$Analyzer.monitorable = t
 	$Radar.monitorable = t
 	$Radar/Radar_Range.visible = t

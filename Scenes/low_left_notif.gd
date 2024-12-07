@@ -4,7 +4,7 @@ class_name LowLeftNotif
 
 @export var Rotate : bool = false
 
-var ShowingStats : Array[String]
+var ShowingStats : Dictionary
 
 var EntityToFollow : Node2D
 var camera : Camera2D
@@ -14,11 +14,10 @@ func _ready() -> void:
 	$AnimationPlayer.play("ShowStat")
 	
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	$AnimationPlayer.play("Blink")
-func ToggleStat(Stat: String, t : bool):
+	pass
+func ToggleStat(Stat: String, t : bool, timel : float = 0):
 	if (t):
-		if (!ShowingStats.has(Stat)):
-			ShowingStats.append(Stat)
+		ShowingStats[Stat] = timel
 	else :
 		ShowingStats.erase(Stat)
 	
@@ -28,7 +27,7 @@ func ToggleStat(Stat: String, t : bool):
 	
 	var statstring : String
 	for g in ShowingStats:
-		statstring += g + "\n"
+		statstring += g + " " + var_to_str(ShowingStats[g]).replace(".0", "") + "\n" 
 	$Label.text = statstring
 func OnShipDeparted():
 	queue_free()

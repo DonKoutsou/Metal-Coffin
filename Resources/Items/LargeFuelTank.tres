@@ -9,9 +9,9 @@
 resource_local_to_scene = true
 script = ExtResource("3_lu011")
 UpgradeName = "FUEL"
-UpgradeAmm = 350.0
+UpgradeAmm = 500.0
 CurrentVal = 0.0
-UpgradeItems = Array[ExtResource("2_6e4v5")]([])
+UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("2_6e4v5")]([ExtResource("3_11ept"), ExtResource("3_11ept")])
 ItemIcon = ExtResource("1_cbem7")

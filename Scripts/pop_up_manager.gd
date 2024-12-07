@@ -3,6 +3,7 @@ extends Control
 class_name PopUpManager
 @export var CustomPop : PackedScene
 @export var CustomConfirm : PackedScene
+@export var FadNot : PackedScene
 static var Instance : PopUpManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,3 +25,7 @@ func DoConfirm(Text : String, ConfirmText : String, Method : Callable):
 	dig.dialog_text = Text
 	dig.ok_button_text = ConfirmText
 	dig.popup_centered()
+func DoFadeNotif(Text : String):
+	var dig = FadNot.instantiate() as FadeNotif
+	add_child(dig)
+	dig.SetText(Text)

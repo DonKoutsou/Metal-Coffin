@@ -1,11 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://djtjqkmdep3dh"]
+[gd_scene load_steps=14 format=3 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
-[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Ship.tscn" id="2_iw3q7"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_uoroi"]
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_rw3e8"]
 [ext_resource type="Theme" uid="uid://blxde2llpapdx" path="res://Theme/DarkBlueButtonCirlce.tres" id="3_yi1as"]
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="4_1yydb"]
 [ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="4_poyhe"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lj723"]
@@ -19,10 +15,11 @@ border_width_top = 6
 border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0.91364, 0.862952, 7.70092e-07, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+corner_radius_top_left = 33
+corner_radius_top_right = 33
+corner_radius_bottom_right = 33
+corner_radius_bottom_left = 33
+corner_detail = 12
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
 radius = 34.0588
@@ -284,12 +281,8 @@ anti_aliasing = false
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ic8cr"]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i403d"]
-light_mode = 1
-
 [node name="MapSpot" type="Node2D"]
 script = ExtResource("1_x7uyn")
-HostileShipScene = ExtResource("2_iw3q7")
 
 [node name="AnalyzeButton" type="Panel" parent="."]
 show_behind_parent = true
@@ -348,9 +341,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -57.5
-offset_top = -221.0
-offset_right = 57.5
+offset_left = -90.0
+offset_top = -135.0
+offset_right = 90.0
 offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -384,30 +377,5 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="LandButtonContainer" type="PanelContainer" parent="."]
-visible = false
-z_index = 2
-material = SubResource("CanvasItemMaterial_i403d")
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -42.0
-offset_top = 31.0
-offset_right = 42.0
-offset_bottom = 89.0
-grow_horizontal = 2
-pivot_offset = Vector2(42, 0)
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_rw3e8")
-
-[node name="LandButton" type="Button" parent="LandButtonContainer" groups=["Buttons"]]
-use_parent_material = true
-layout_mode = 2
-theme = ExtResource("4_1yydb")
-theme_override_fonts/font = ExtResource("2_uoroi")
-theme_override_font_sizes/font_size = 22
-text = "Land"
-
 [connection signal="area_entered" from="AreaNotif" to="." method="AreaEntered"]
 [connection signal="area_exited" from="AreaNotif" to="." method="AreaExited"]
-[connection signal="pressed" from="LandButtonContainer/LandButton" to="." method="_on_land_button_pressed"]

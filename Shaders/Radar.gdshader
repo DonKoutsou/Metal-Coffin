@@ -9,7 +9,10 @@ uniform float beam_width : hint_range(0.0, 0.05) = 0.003;
 uniform float trail_width : hint_range(0.0, 1.0) = 0.5;
 uniform float sector_rotation : hint_range(0.0, 1.0) = 0.0;
 uniform bool ShowRadat = false;
+uniform bool Paused = false;
 uniform float scale_factor : hint_range(0, 2.0) = 1.0; // New scaling uniform
+
+varying float lastangle;
 
 float greater_than(float x, float y) {
   return max(sign(x - y), 0.0);
@@ -36,7 +39,12 @@ void fragment() {
     COLOR.a = max(COLOR.a, combined_alpha);
 
     if (ShowRadat) {
-        float current_beam_angle = mod(beam_angle * TIME, 1.0);
+        float current_beam_angle;
+		if (Paused){
+			current_beam_angle = mod(beam_angle , 1.0);}
+		else{
+			current_beam_angle = mod(beam_angle * TIME, 1.0);
+		}
         a = a - 1.0 * greater_than(a, current_beam_angle);
 
         // Apply trail with transparency

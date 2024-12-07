@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://cau8rjgorpmtu"]
 
-[ext_resource type="Resource" uid="uid://dijsq004n7ouw" path="res://Resources/Happenings/CrewRecruitHappeningCraden.tres" id="1_sdjl2"]
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_vg6a8"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_1p1c1"]
 
 [resource]
 script = ExtResource("2_1p1c1")
 SpotName = "Alivia"
-Event = ExtResource("1_sdjl2")
+EnemyCity = true
+HostileShipScene = ExtResource("1_vg6a8")
+HostileShipName = "Jonji"

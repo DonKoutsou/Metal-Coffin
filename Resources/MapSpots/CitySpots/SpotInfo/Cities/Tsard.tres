@@ -7,3 +7,5 @@
 script = ExtResource("2_p81b1")
 SpotName = "Tsard"
 Event = ExtResource("1_j0aub")
+EnemyCity = true
+SpawnHostileShip = false

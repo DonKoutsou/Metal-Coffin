@@ -9,6 +9,7 @@ func _ready() -> void:
 	camera = ShipCamera.GetInstance()
 	$Control.visible = false
 	$Control/VBoxContainer/TimeSeen .visible = false
+	$Control/VBoxContainer/Threat.visible = false
 	set_physics_process(false)
 
 func ToggleShipDetails(T : bool):
@@ -24,7 +25,16 @@ func _physics_process(_delta: float) -> void:
 
 func UpdateSpeed(Spd : float):
 	$Control/VBoxContainer/ShipName2.text = "Speed " + var_to_str((Spd * 60) * 3.6) + "km/h"
+	
+func ToggleThreat(T : bool):
+	$Control/VBoxContainer/Threat.visible = T
+	
+func UpdateThreatLevel(Level : float):
+	$Control/VBoxContainer/Threat.text = "Threat Level : " + var_to_str(Level)
+	
 func ToggleTimeLastSeend(T : bool):
+	if (!T):
+		TimeLastSeen = 0
 	$Control/VBoxContainer/TimeSeen.visible = T
 
 func UpdateTime():

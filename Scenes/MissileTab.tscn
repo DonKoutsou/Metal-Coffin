@@ -1,0 +1,336 @@
+[gd_scene load_steps=24 format=3 uid="uid://cwnxxystgxrjm"]
+
+[ext_resource type="Script" path="res://Scripts/MissileTab.gd" id="1_3wcnd"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="2_lb1ah"]
+[ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="3_ibmi6"]
+[ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="4_4c4v7"]
+[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="5_kgdfx"]
+[ext_resource type="PackedScene" uid="uid://0vtujl68ditn" path="res://Scenes/CrewButton.tscn" id="9_jyl4h"]
+[ext_resource type="Texture2D" uid="uid://dw307mqrdgntf" path="res://Assets/UIPiecies/dronetab_Camera 1.png" id="10_okn0a"]
+[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="11_gsihk"]
+[ext_resource type="PackedScene" uid="uid://bl1t8w4ot467w" path="res://Scenes/AnimatedButton.tscn" id="12_cxvvo"]
+[ext_resource type="Texture2D" uid="uid://bjkm8sbw8g0st" path="res://Assets/UIPiecies/dissarm_on_Camera 1.png" id="13_ycwvk"]
+[ext_resource type="Texture2D" uid="uid://bj2r2y882vpmo" path="res://Assets/UIPiecies/dissarmButton_Camera 1.png" id="14_cm273"]
+[ext_resource type="Texture2D" uid="uid://c4typshdm7o6m" path="res://Assets/UIPiecies/launchbuttonon_Camera 1.png" id="15_k7kk5"]
+[ext_resource type="Texture2D" uid="uid://38xapu6ybfup" path="res://Assets/UIPiecies/Launchbutton_Camera 1.png" id="16_unqge"]
+[ext_resource type="Texture2D" uid="uid://ckuoofhsmdwhc" path="res://Assets/UIPiecies/offbuttonon_Camera 1.png" id="17_gifwe"]
+[ext_resource type="Texture2D" uid="uid://cfqj4sicmtmfi" path="res://Assets/UIPiecies/offbutton_Camera 1.png" id="18_dhll4"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="19_bexkj"]
+[ext_resource type="Texture2D" uid="uid://dift04metc6c5" path="res://Assets/UIPiecies/CrewDisplay_Camera 1.png" id="20_x7uai"]
+[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="21_e1dqm"]
+[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/light.tscn" id="22_yc7om"]
+
+[sub_resource type="Animation" id="Animation_brgwl"]
+resource_name = "Hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 216)]
+}
+
+[sub_resource type="Animation" id="Animation_wlayh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 216)]
+}
+
+[sub_resource type="Animation" id="Animation_stsyt"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 215), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kt4fa"]
+_data = {
+"Hide": SubResource("Animation_brgwl"),
+"RESET": SubResource("Animation_wlayh"),
+"Show": SubResource("Animation_stsyt")
+}
+
+[node name="Missile Tab" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_3wcnd")
+MissileDockEventH = ExtResource("2_lb1ah")
+
+[node name="TextureButton" type="TextureButton" parent="." groups=["Buttons"]]
+layout_mode = 0
+offset_left = 53.0
+offset_top = -67.0
+offset_right = 204.0
+offset_bottom = -11.0
+texture_normal = ExtResource("3_ibmi6")
+texture_pressed = ExtResource("4_4c4v7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextureButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -19.0
+offset_right = 36.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("5_kgdfx")
+theme_override_font_sizes/font_size = 12
+text = "Fire Missile"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kt4fa")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 176.0
+offset_right = 20.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -303.0
+offset_right = 142.0
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="PanelContainer" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer2" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer3" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer4" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer5" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer6" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer7" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer8" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="PanelContainer9" parent="Control/PanelContainer/GridContainer" instance=ExtResource("9_jyl4h")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 20.0
+offset_top = -34.0
+offset_right = 20.0
+offset_bottom = -34.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control"]
+layout_mode = 0
+offset_left = -289.0
+offset_top = -90.0
+offset_right = 182.0
+offset_bottom = 74.0
+mouse_filter = 0
+texture = ExtResource("10_okn0a")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect"]
+modulate = Color(0, 0, 0, 0.518)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 460.0
+offset_bottom = 154.0
+mouse_filter = 2
+texture = ExtResource("10_okn0a")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Control/Control"]
+texture_filter = 6
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+offset_left = -180.0
+offset_top = 13.0
+offset_right = -56.0
+offset_bottom = 55.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("11_gsihk")
+text = "Range : 1000km"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Arm" parent="Control/Control" instance=ExtResource("12_cxvvo")]
+layout_mode = 1
+offset_left = -161.0
+offset_top = -81.0
+offset_right = -53.0
+offset_bottom = -48.0
+
+[node name="Dissarm" parent="Control/Control" instance=ExtResource("12_cxvvo")]
+layout_mode = 1
+offset_left = -161.0
+offset_top = -36.0
+offset_right = -53.0
+offset_bottom = -3.0
+toggle_mode = false
+texture_pressed = ExtResource("13_ycwvk")
+OffTexture = ExtResource("14_cm273")
+OnTexture = ExtResource("13_ycwvk")
+
+[node name="Launch" parent="Control/Control" instance=ExtResource("12_cxvvo")]
+layout_mode = 1
+offset_left = -18.0
+offset_top = -5.0
+offset_right = 82.0
+offset_bottom = 52.0
+toggle_mode = false
+texture_pressed = ExtResource("15_k7kk5")
+OffTexture = ExtResource("16_unqge")
+OnTexture = ExtResource("15_k7kk5")
+
+[node name="off" parent="Control/Control" instance=ExtResource("12_cxvvo")]
+layout_mode = 1
+offset_left = 107.0
+offset_top = -5.0
+offset_right = 169.0
+offset_bottom = 52.0
+toggle_mode = false
+texture_pressed = ExtResource("17_gifwe")
+OffTexture = ExtResource("18_dhll4")
+OnTexture = ExtResource("17_gifwe")
+
+[node name="DroneGas" parent="Control/Control" instance=ExtResource("19_bexkj")]
+position = Vector2(72, -54)
+scale = Vector2(0.799999, 0.799999)
+
+[node name="TouchStopper" type="Control" parent="Control"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = -156.0
+offset_top = -121.0
+offset_right = 198.0
+offset_bottom = 35.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -176.0
+offset_right = 195.0
+offset_bottom = -123.0
+mouse_filter = 2
+texture = ExtResource("20_x7uai")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="Control/TextureRect"]
+texture_filter = 6
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.5
+offset_top = -13.5
+offset_right = 58.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.349675, 0.25028, 1)
+theme_override_fonts/font = ExtResource("21_e1dqm")
+theme_override_font_sizes/font_size = 14
+text = "Cruise Missile"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Light" parent="Control/TextureRect" instance=ExtResource("22_yc7om")]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 6.0
+offset_right = 71.0
+offset_bottom = 46.0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_toggle_drone_tab_pressed"]
+[connection signal="toggled" from="Control/Control/Arm" to="." method="_on_arm_drone_button_pressed"]
+[connection signal="pressed" from="Control/Control/Dissarm" to="." method="_on_dissarm_drone_button_2_pressed"]
+[connection signal="toggled" from="Control/Control/Dissarm" to="." method="_on_arm_drone_button_pressed"]
+[connection signal="pressed" from="Control/Control/Launch" to="." method="_on_deploy_drone_button_pressed"]
+[connection signal="pressed" from="Control/Control/off" to="." method="_on_turn_off_button_pressed"]
+[connection signal="RangeChanged" from="Control/Control/DroneGas" to="." method="UpdateSteer"]

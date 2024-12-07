@@ -9,3 +9,4 @@ class_name SD_HostileShip
 @export var Position : Vector2
 @export var DestinationCityName : String
 @export var Scene : String
+@export var ShipName : String

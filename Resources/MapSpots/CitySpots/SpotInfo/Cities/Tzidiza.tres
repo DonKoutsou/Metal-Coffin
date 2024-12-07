@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_um8ae")
-SpotName = "Ulmak"
+SpotName = "Tzidiza"
+EnemyCity = true
+SpawnHostileShip = false

@@ -1,6 +1,6 @@
 extends Area2D
 class_name DroneDock
-@export var DroneScene : PackedScene
+#@export var DroneScene : PackedScene
 
 @export var DroneDockEventH : DroneDockEventHandler
 

@@ -11,33 +11,43 @@ class_name Map
 @export var MapSize : int = 20
 #@export var AnalyzerScene : PackedScene
 @export var MapGenerationDistanceCurve : Curve
-
 @export var DroneDockEventH : DroneDockEventHandler
-
 @export var HappeningUI : PackedScene
 
 @onready var thrust_slider: ThrustSlider = $UI/ThrustSlider
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
-signal MAP_AsteroidBeltArrival(Size : int)
+#signal MAP_AsteroidBeltArrival(Size : int)
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_StageSearched(Spt : MapSpotType)
 signal MAP_ShipSearched(Ship : BaseShip)
 
 var SpotList : Array[Town]
 var currentstage = 0
+var ShowingTutorial = false
 #var GalaxyMat :ShaderMaterial
 
 func _ready() -> void:
 	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
 	if (SpotList.size() == 0):
 		GenerateMap()
+		_InitialPlayerPlacament()
+		#call_deferred("")
+		ShowingTutorial = true
 	var shipdata = ShipData.GetInstance()
 	GetPlayerShip().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
 	GetPlayerShip().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
+	
 	#GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
-
+func _InitialPlayerPlacament():
+	var firstvilage = get_tree().get_nodes_in_group("Chora")[0] as MapSpot
+	firstvilage.OnSpotSeen(false)
+	firstvilage.OnSpotAnalyzed(false)
+	var pos = firstvilage.global_position
+	pos.x -= 500
+	GetPlayerShip().global_position = pos
+	camera_2d.global_position = GetPlayerShip().global_position
 func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
@@ -57,9 +67,13 @@ func PlayIntroFadeInt():
 	
 func ToggleUIForIntro(t : bool):
 	GetPlayerShip().ToggleUI(t)
-	$ThrustSlider.visible = t
-	$SteeringWheel.visible = t
+	$UI/ThrustSlider.visible = t
+	$UI/SteeringWheel.visible = t
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = t
+	$UI/RadarButton.visible = t
+	$UI/DroneTab.visible = t
+	$"UI/Missile Tab".visible = t
+	$UI/SimulationButton.visible = t
 func ShowStation():
 	var tw = create_tween()
 	var stations = get_tree().get_nodes_in_group("Capital City Center")
@@ -85,14 +99,16 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	var rel = relativeMovement / camera_2d.zoom
 	var newpos = Vector2(clamp(camera_2d.position.x - rel.x, 0, maxposX), clamp(camera_2d.position.y - rel.y, maxposY.x, maxposY.y))
 	if (newpos.x != camera_2d.position.x):
+		#$CanvasLayer/SubViewportContainer/SubViewport/Control2.position.x = newpos.x - ($CanvasLayer/SubViewportContainer/SubViewport/Control2.size.x /2)
 		camera_2d.position.x = newpos.x
 		#var val = GalaxyMat.get_shader_parameter("thing")
 		#GalaxyMat.set_shader_parameter("thing", val - (rel.x / 1800))
 	if (newpos.y != camera_2d.position.y):
+		
 		camera_2d.position.y = newpos.y
 		#var val2 = GalaxyMat.get_shader_parameter("thing2")
 		#GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 1800))
-		
+	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2/Panel3.material.set_shader_parameter("pan_offset", camera_2d.position * camera_2d.zoom)
 #func _input(event: InputEvent) -> void:
 	#pass
 
@@ -134,8 +150,9 @@ func GenerateMap() -> void:
 		#SET THE TYPE
 		#sc.SetSpotData(type)
 		sc = type.instantiate()
-		sc.connect("SpotAproached", Arrival)
-		sc.connect("SpotSearched", SearchLocation)
+		sc.connect("TownSpotAproached", Arrival)
+		sc.connect("TownSpotLanded", Land)
+		#sc.connect("SpotSearched", SearchLocation)
 		#sc.connect("SpotAnalazyed", AnalyzeLocation)
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
 		#DECIDE ON ITS PLACEMENT
@@ -204,31 +221,41 @@ func HasClose(pos : Vector2) -> bool:
 			b = true
 			break
 	return b	
-	
-#CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
-func Arrival(Spot : MapSpot)	-> void:
-	if Spot.SpotType.FullName == "Black Whole":
-		var randspot = SpotList.pick_random() as MapSpot
-		while abs(SpotList.find(randspot) - SpotList.find(Spot)) > 25 or randspot.SpotType.FullName == "Black Whole":
-			randspot = SpotList.pick_random() as MapSpot
-		GetPlayerShip().global_position = randspot.global_position
-		PopUpManager.GetInstance().DoPopUp("You've entered a black whole and have been teleported away")
-		GetPlayerShip().HaltShip()
-		
-	if Spot.SpotType.GetEnumString() == "ASTEROID_BELT":
-		Spot.queue_free()
-		var val = Spot.SpotType.GetCustomData("IsLarge")[0].Value as bool
-		if (val):
-			MAP_AsteroidBeltArrival.emit(120)
-		else:
-			MAP_AsteroidBeltArrival.emit(60)
-		GetPlayerShip().HaltShip()
+
+func Land(Spot : MapSpot) -> void:
 	if (Spot.Evnt != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
 		happeningui.PresentHappening(Spot.Evnt)
-		GetPlayerShip().HaltShip()
-		
+		#GetPlayerShip().HaltShip()
+#CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
+func Arrival(_Spot : MapSpot)	-> void:
+	if (ShowingTutorial):
+		SimulationManager.GetInstance().TogglePause(true)
+		var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
+		Ingame_UIManager.GetInstance().CallbackDiag(DiagText, LandTutorialShown, false)
+	#print("Arrived on spot")
+	#if Spot.SpotType.FullName == "Black Whole":
+		#var randspot = SpotList.pick_random() as MapSpot
+		#while abs(SpotList.find(randspot) - SpotList.find(Spot)) > 25 or randspot.SpotType.FullName == "Black Whole":
+			#randspot = SpotList.pick_random() as MapSpot
+		#GetPlayerShip().global_position = randspot.global_position
+		#PopUpManager.GetInstance().DoPopUp("You've entered a black whole and have been teleported away")
+		#GetPlayerShip().HaltShip()
+		#
+	#if Spot.SpotType.GetEnumString() == "ASTEROID_BELT":
+		#Spot.queue_free()
+		#var val = Spot.SpotType.GetCustomData("IsLarge")[0].Value as bool
+		#if (val):
+			#MAP_AsteroidBeltArrival.emit(120)
+		#else:
+			#MAP_AsteroidBeltArrival.emit(60)
+		##GetPlayerShip().HaltShip()
+	
+func LandTutorialShown():
+	SimulationManager.GetInstance().TogglePause(false)
+	ShowingTutorial = false
+
 func StageFailed() -> void:
 	# enable inputs
 	set_process(true)
@@ -258,7 +285,7 @@ func StageFailed() -> void:
 
 func SearchLocation(stage : MapSpot):
 	if (GetPlayerShip().Travelling):
-		PopUpManager.GetInstance().DoPopUp("Stop the ship to land.")
+		PopUpManager.GetInstance().DoFadeNotif("Stop the ship to land.")
 		return
 	#stage.ToggleLandButton(false)
 	if (stage.SpotType is Ship_MapSpotType):
@@ -382,10 +409,12 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 func _UpdateMapGridVisibility():
 	if (camera_2d.zoom.x < 0.25):
 		var tw = create_tween()
-		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/Control2, "modulate", Color(1,1,1,1), 0.5)
+		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2, "modulate", Color(1,1,1,1), 0.5)
 	else:
 		var tw = create_tween()
-		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/Control2, "modulate", Color(1,1,1,0), 0.5)
+		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2, "modulate", Color(1,1,1,0), 0.5)
+	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2/Panel3.material.set_shader_parameter("zoom", camera_2d.zoom.x * 2)
+	#print("Zoom changed to " + var_to_str(camera_2d.zoom.x))
 #//////////////////////////////////////////////////////////
 #ARROW FOR LOCATING PLAYER SHIP
 func _process(_delta: float) -> void:
@@ -526,3 +555,17 @@ func _prim_mst_optimized(cities: Array) -> Array:
 					_heap_push(edge_min_heap, [new_distance, v, j])
 
 	return mst_edges
+
+
+func _on_radar_button_pressed() -> void:
+	GetPlayerShip().ToggleRadar()
+
+
+func _on_missile_button_pressed() -> void:
+	GetPlayerShip().FireMissile()
+
+var simmulationPaused = false
+func _on_simulation_button_pressed() -> void:
+	simmulationPaused = !simmulationPaused
+	SimulationManager.GetInstance().TogglePause(simmulationPaused)
+	

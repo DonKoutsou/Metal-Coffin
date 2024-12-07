@@ -28,10 +28,10 @@ static func GetInstance() -> UISoundMan:
 func Refresh():
 	var buttons = get_tree().get_nodes_in_group("Buttons")
 	for g in buttons.size():
-		if (buttons[g].is_connected("mouse_entered", OnButtonHovered)):
+		if (buttons[g].is_connected("button_down", OnButtonClicked)):
 			continue
-		buttons[g].connect("mouse_entered", OnButtonHovered);
-		buttons[g].connect("focus_entered", OnButtonHovered);
+		#buttons[g].connect("mouse_entered", OnButtonHovered);
+		#buttons[g].connect("focus_entered", OnButtonHovered);
 		buttons[g].connect("button_down", OnButtonClicked);
 func OnButtonHovered():
 	Sounds[1].playing = true

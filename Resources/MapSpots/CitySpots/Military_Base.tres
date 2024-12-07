@@ -1,19 +1,16 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=9 format=3 uid="uid://dno0yq1eqewjt"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://dno0yq1eqewjt"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_0yych"]
 [ext_resource type="Texture2D" uid="uid://btagt34t2urjj" path="res://Assets/barracks.png" id="2_3vbfk"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_1nr0o"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_jeieq"]
-[ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_yp5x5"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_86542"]
-[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_pwcg8"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_epl8d"]
 
 [resource]
 script = ExtResource("10_epl8d")
 SpotK = 18
 MapIcon = ExtResource("2_3vbfk")
-PossibleDrops = Array[ExtResource("3_1nr0o")]([ExtResource("4_jeieq"), ExtResource("5_yp5x5"), ExtResource("6_86542"), ExtResource("8_pwcg8")])
+PossibleDrops = Array[ExtResource("3_1nr0o")]([ExtResource("4_jeieq")])
 FullName = "Miitary Base"
 Description = "blah blah"
 CanLand = false

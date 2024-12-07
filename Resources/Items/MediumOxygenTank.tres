@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://chxr32lry75bx"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://chxr32lry75bx"]
 
 [ext_resource type="Texture2D" uid="uid://coh3ud4i7ph3f" path="res://Assets/Items/cannister.png" id="1_22nwi"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_cp3in"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_8t864"]
 [ext_resource type="Resource" uid="uid://bky83js31le74" path="res://Resources/Items/LargeOxygenTank.tres" id="3_bbia4"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_c7cl3"]
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_sogaj"]
 
 [resource]
@@ -14,7 +13,7 @@ UpgradeName = "OXYGEN"
 UpgradeAmm = 200.0
 CurrentVal = 0.0
 UpgradeVersion = ExtResource("3_bbia4")
-UpgradeItems = Array[ExtResource("2_cp3in")]([ExtResource("3_c7cl3"), ExtResource("3_c7cl3"), ExtResource("3_c7cl3"), ExtResource("3_c7cl3"), ExtResource("3_c7cl3"), ExtResource("3_c7cl3"), ExtResource("3_c7cl3"), ExtResource("3_c7cl3")])
+UpgradeTime = 0.0
 IsDamaged = false
 RepairItems = Array[ExtResource("2_cp3in")]([ExtResource("3_8t864"), ExtResource("3_8t864")])
 ItemIcon = ExtResource("1_22nwi")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=38 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="2_2w4bb"]
@@ -8,9 +8,10 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_vt3yq"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="6_layd2"]
-[ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/drone.tscn" id="6_pmuiv"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="7_8gcrc"]
 [ext_resource type="AudioStream" uid="uid://5fvite02ickv" path="res://Assets/VoiceLines/radio_landing_end_02.wav" id="8_ws5qi"]
+[ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="9_jx5d0"]
 [ext_resource type="AudioStream" uid="uid://cxp410y4qjnl8" path="res://Assets/VoiceLines/radio_landing_end_03.wav" id="9_lowu5"]
 [ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/NewCaptainNotif.tscn" id="9_ur853"]
 [ext_resource type="AudioStream" uid="uid://q5nbj1ayjnk0" path="res://Assets/VoiceLines/radio_landing_touch_01.wav" id="10_a03el"]
@@ -53,7 +54,6 @@ scale_max = 0.05
 scale_curve = SubResource("CurveTexture_be001")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
-radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
@@ -69,6 +69,7 @@ shader_parameter/beam_width = 0.003
 shader_parameter/trail_width = 0.1
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
+shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.053
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
@@ -82,6 +83,7 @@ shader_parameter/beam_width = 0.003
 shader_parameter/trail_width = 0.5
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = false
+shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.08
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqnhq"]
@@ -98,10 +100,11 @@ shader_parameter/beam_width = 0.003
 shader_parameter/trail_width = 0.1
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
+shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.062
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
-radius = 6.0
+radius = 10.0499
 
 [node name="PlayerShip" type="Node2D" groups=["Ships"]]
 material = SubResource("CanvasItemMaterial_vppi8")
@@ -128,6 +131,7 @@ monitoring = false
 shape = SubResource("CircleShape2D_rjoek")
 
 [node name="Radar" type="Area2D" parent="."]
+disable_mode = 2
 collision_mask = 0
 monitoring = false
 
@@ -214,12 +218,21 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
+[node name="MissileDock" type="Node2D" parent="."]
+script = ExtResource("9_dl1n1")
+MissileDockEventH = ExtResource("9_jx5d0")
+
+[node name="MissileLine" type="Line2D" parent="MissileDock"]
+z_index = 2
+material = SubResource("CanvasItemMaterial_vppi8")
+points = PackedVector2Array(0, 0, 10, 0)
+default_color = Color(0.908948, 0.280129, 0.164634, 1)
+
 [node name="DroneDock" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 0
 monitoring = false
 script = ExtResource("6_layd2")
-DroneScene = ExtResource("6_pmuiv")
 DroneDockEventH = ExtResource("7_8gcrc")
 CaptainNotif = ExtResource("9_ur853")
 LandedVoiceLines = Array[AudioStream]([ExtResource("8_ws5qi"), ExtResource("9_lowu5"), ExtResource("10_a03el"), ExtResource("11_kcejq")])
@@ -260,7 +273,7 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("18_elnvx")
 
 [node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="PlayerShipSpr"]
@@ -271,8 +284,7 @@ rotation = 1.5708
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_0t4kc")
 volume_db = -10.0
-pitch_scale = 0.01
-bus = &"MapSounds"
+bus = &"Engine"
 
 [node name="Notifications" type="Node2D" parent="."]
 

@@ -14,6 +14,7 @@ var Fuel = 0
 var StoredItem : Array[Item] = []
 var Speed : float
 var Paused = false
+var Detectable = true
 
 func  _ready() -> void:
 	#Set ships speed
@@ -82,6 +83,7 @@ func EnableDrone():
 		an.visible = true
 		GetShipAnalayzerArea().monitorable = true
 	GetShipAcelerationNode().position.x = Speed
+	$ShipBody/CollisionShape2D.disabled = false
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -167,6 +169,7 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		plship.GetDroneDock().DockDrone(self, true)
 		CommingBack = false
 		Docked = true
+		$ShipBody/CollisionShape2D.disabled = true
 		GetShipTrajecoryLine().visible = false
 		GetShipIconPivot().rotation = 0.0
 		Inventory.GetInstance().AddItems(StoredItem)

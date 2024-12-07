@@ -3,7 +3,7 @@ class_name Inventory
 
 @export var StartingItems : Array[Item]
 @export var LoadedItems :Array[Item]
-
+@export var MissileDockEventH : MissileDockEventHandler
 @export var InventoryBoxScene : PackedScene
 @export var InventoryTradeScene : PackedScene
 @export var ItemDescriptorScene : PackedScene
@@ -27,7 +27,12 @@ var Loading = false
 static func GetInstance() -> Inventory:
 	return Instance
 	
+
+func OnSimulationPaused(t : bool) -> void:
+	$UpgradeTimer.paused = t
+
 func _ready() -> void:
+	MissileDockEventH.connect("MissileLaunched", RemoveItemSimp)
 	set_process(false)
 	visible = false
 	Instance = self
@@ -143,6 +148,8 @@ func FindMatchingBoxForItAndPlace(it : Item) -> bool:
 			box.UpdateAmm(1)
 			print("Added item : " + it.ItemName)
 			INV_OnItemAdded.emit(it)
+			if (it is MissileItem):
+				MissileDockEventH.emit_signal("MissileAdded", it)
 			return true
 	return false
 func FindEmptyBoxForItAndPlace(it : Item) -> bool:
@@ -153,6 +160,8 @@ func FindEmptyBoxForItAndPlace(it : Item) -> bool:
 			box.UpdateAmm(1)
 			print("Added item : " + it.ItemName)
 			INV_OnItemAdded.emit(it)
+			if (it is MissileItem):
+				MissileDockEventH.emit_signal("MissileAdded", it)
 			return true
 	return false
 #////////////////////////////////////////////////////
@@ -198,12 +207,13 @@ func _OnItemSelected(ItCo : ItemContainer) -> void:
 			descriptors[0].queue_free()
 			$HBoxContainer/VBoxContainer/HBoxContainer.visible = true
 			return
-		descriptors[0].queue_free()
+		descriptors[0].SetData(ItCo)
+		return
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
-	Descriptor.SetData(ItCo)
 	$HBoxContainer/VBoxContainer.add_child(Descriptor)
 	$HBoxContainer/VBoxContainer.move_child(Descriptor, 0)
 	$HBoxContainer/VBoxContainer/HBoxContainer.visible = false
+	Descriptor.SetData(ItCo)
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
 	Descriptor.connect("ItemDropped", RemoveItem)
@@ -214,25 +224,54 @@ func FindAndDissableDescriptors() -> void:
 	if (descriptors.size() > 0):
 		descriptors[0].queue_free()
 	$HBoxContainer/VBoxContainer/HBoxContainer.visible = true
-	
+
+var UpgradedItem : ItemContainer
+func CancelUpgrades() -> void:
+	UpgradedItem = null
+	$UpgradeTimer.stop()
 func UpgradeItem(Cont : ItemContainer) -> void:
-	var UpgradeSuccess = false
-	var Part = Cont.ItemType
-	var UpItem = Part.UpgradeItems[0]
-	for g in InventoryContents.size():
-		if (InventoryContents[g].ItemC.ItemType == UpItem):
-			if (InventoryContents[g].ItemC.Ammount >= Part.UpgradeItems.size()):
-				RemoveItem(Cont)
-				for z in Part.UpgradeItems.size():
-					RemoveItem(InventoryContents[g].ItemC)
-				Part.UpgradeVersion.CurrentVal = Part.CurrentVal
-				AddItems([Part.UpgradeVersion], false)
-				FindAndDissableDescriptors()
-				UpgradeSuccess = true
-				break
-	if (!UpgradeSuccess) :
-		PopUpManager.GetInstance().DoPopUp("Not enough upgrade materials to complete action")
-		
+	#var UpgradeSuccess = false
+	if (UpgradedItem != null):
+		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part. Wait for it to finish first.")
+		return
+	if (PlayerShip.GetInstance().CurrentPort == null):
+		PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
+		return
+	else :if (!PlayerShip.GetInstance().CanUpgrade):
+		PopUpManager.GetInstance().DoFadeNotif("Cant upgrade ship in current port.")
+		return
+	var Part = Cont.ItemType as ShipPart
+	var UpTime = Part.UpgradeTime
+	$UpgradeTimer.wait_time = UpTime
+	$UpgradeTimer.start()
+	UpgradedItem = Cont
+	FindAndDissableDescriptors()
+	#for g in InventoryContents.size():
+		#if (InventoryContents[g].ItemC.ItemType == UpItem):
+			#if (InventoryContents[g].ItemC.Ammount >= Part.UpgradeItems.size()):
+				#RemoveItem(Cont)
+				#for z in Part.UpgradeItems.size():
+					#RemoveItem(InventoryContents[g].ItemC)
+				#Part.UpgradeVersion.CurrentVal = Part.CurrentVal
+				#AddItems([Part.UpgradeVersion], false)
+				#FindAndDissableDescriptors()
+				#UpgradeSuccess = true
+				#break
+	#if (!UpgradeSuccess) :
+		#PopUpManager.GetInstance().DoPopUp("Not enough upgrade materials to complete action")
+func ItemUpgradeFinished() -> void:
+	var Part = UpgradedItem.ItemType as ShipPart
+	#for z in Part.UpgradeItems.size():
+		#RemoveItem(InventoryContents[g].ItemC)
+	RemoveItem(UpgradedItem)
+	Part.UpgradeVersion.CurrentVal = Part.CurrentVal
+	AddItems([Part.UpgradeVersion], false)
+	UpgradedItem = null
+	#FindAndDissableDescriptors()
+
+func GetUpgradeTimeLeft() -> float:
+	return $UpgradeTimer.time_left
+
 func RemoveItem(Cont : ItemContainer):
 	for g in InventoryContents.size():
 		var box = InventoryContents[g]
@@ -241,8 +280,20 @@ func RemoveItem(Cont : ItemContainer):
 			print("Removed item : " + Cont.ItemType.ItemName)
 			inventory_ship_stats.UpdateValues()
 			box.UpdateAmm(-1)
+			if (Cont.ItemType is MissileItem):
+				MissileDockEventH.emit("MissileRemoved")
 			return
-			
+func RemoveItemSimp(It : Item):
+	for g in InventoryContents.size():
+		var box = InventoryContents[g]
+		if (box.ItemC.ItemType == It):
+			INV_OnItemRemoved.emit(It)
+			print("Removed item : " + It.ItemName)
+			inventory_ship_stats.UpdateValues()
+			box.UpdateAmm(-1)
+			if (It is MissileItem):
+				MissileDockEventH.emit_signal("MissileRemoved", It)
+			return
 func UseItem(Cont : ItemContainer, Times : int = 1):
 	for z in Times:
 		if (TryUseItem(Cont.ItemType)):

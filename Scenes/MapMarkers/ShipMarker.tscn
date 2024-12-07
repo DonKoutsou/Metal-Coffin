@@ -88,6 +88,17 @@ horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Threat" type="Label" parent="Control/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("2_mmvkc")
+theme_override_font_sizes/font_size = 16
+text = "Threat Level : 10"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
 use_parent_material = true
 layout_mode = 1

@@ -15,12 +15,16 @@ var UsingAmm : int = 1
 func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
 func SetData(Cont : ItemContainer) -> void:
+	set_physics_process(false)
 	DescribedContainer = Cont
 	#DescribedItem = It
 	#OwnedAmm = Amm
 	$VBoxContainer/HBoxContainer/VBoxContainer/TextureRect.texture = DescribedContainer.ItemType.ItemIcon
 	if (DescribedContainer.ItemType is UsableItem):
+		$VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions.visible = true
 		$VBoxContainer/HBoxContainer/VBoxContainer/TextureRect.modulate = DescribedContainer.ItemType.ItecColor
+	else :
+		$VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions.visible = false
 	$VBoxContainer/HBoxContainer/VBoxContainer/ItemName.text = DescribedContainer.ItemType.ItemName
 	#Ship Parts
 	if (DescribedContainer.ItemType is ShipPart):
@@ -34,8 +38,13 @@ func SetData(Cont : ItemContainer) -> void:
 			$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade.visible = false
 			$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer.visible = false
 		else:
-			$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/TextureRect.texture = (DescribedContainer.ItemType.UpgradeItems[0] as Item).ItemIconSmol
-			$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "Upgrade Cost : " + var_to_str(DescribedContainer.ItemType.UpgradeItems.size()) + "x"
+			var inv = Inventory.GetInstance()
+			if (inv.UpgradedItem == Cont):
+				set_physics_process(true)
+				$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade.visible = false
+			else:
+				#$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/TextureRect.texture = (DescribedContainer.ItemType.UpgradeItems[0] as Item).ItemIconSmol
+				$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "Upgrade Time : " + var_to_str(DescribedContainer.ItemType.UpgradeTime)
 	else :
 		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = DescribedContainer.ItemType.ItemDesc
 		$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions.visible = false
@@ -67,3 +76,7 @@ func _on_use_less_pressed() -> void:
 	$VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions/Use.text = "Use :" + var_to_str(UsingAmm) + "x"
 func _on_repair_pressed() -> void:
 	ItemRepaired.emit(DescribedContainer)
+
+func _physics_process(_delta: float) -> void:
+	var inv = Inventory.GetInstance()
+	$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "Upgrade time left : " + var_to_str(roundi(inv.GetUpgradeTimeLeft()))

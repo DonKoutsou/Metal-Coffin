@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=43 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -10,13 +10,18 @@
 [ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="8_kpprx"]
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
+[ext_resource type="Shader" path="res://Shaders/GridMap.gdshader" id="12_ivvec"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ax28q"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_00g78"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="16_4wqve"]
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
 [ext_resource type="PackedScene" uid="uid://1j0ghufup7v" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_qxruq"]
+[ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="26_y7o3o"]
+[ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
+[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="28_8jvry"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
+[ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="29_jt4kw"]
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
@@ -31,12 +36,6 @@ max_value = 10.0
 _data = [Vector2(0, 1), 0.0, 3.3398, 0, 0, Vector2(1, 6.7), 10.2257, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0a4hg"]
-light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ms5"]
-bg_color = Color(0.3162, 0.49708, 0.51, 1)
-
 [sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
 diffuse_texture = ExtResource("13_ax28q")
 normal_texture = ExtResource("14_00g78")
@@ -45,6 +44,21 @@ texture_repeat = 2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2v8bx"]
 light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0a4hg"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ms5"]
+bg_color = Color(0.0229965, 0.0616206, 0.0645667, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qkgl"]
+shader = ExtResource("12_ivvec")
+shader_parameter/grid_size = Vector2(50, 50)
+shader_parameter/line_color = Color(0.601, 0.546, 0.322, 0.057)
+shader_parameter/line_thickness = 0.855
+shader_parameter/zoom = 1.0
+shader_parameter/pan_offset = Vector2(0, 0)
+shader_parameter/view_size = Vector2(100, 100)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -209,30 +223,6 @@ audio_listener_enable_2d = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Control2" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -6000.0
-offset_top = -6000.0
-offset_right = 92847.0
-offset_bottom = 93351.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel2" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/Control2"]
-z_index = 1
-z_as_relative = false
-material = SubResource("CanvasItemMaterial_0a4hg")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
-
 [node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport" groups=["DissapearingMap"]]
 layout_mode = 3
 anchors_preset = 15
@@ -302,6 +292,38 @@ material = SubResource("CanvasItemMaterial_2v8bx")
 rotation = -1.5708
 texture = ExtResource("30_g5v37")
 
+[node name="Control2" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -7500.0
+offset_top = -7500.0
+offset_right = 7500.0
+offset_bottom = 7500.0
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2"]
+z_index = 1
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_0a4hg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
+
+[node name="Panel3" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2"]
+z_index = 1
+z_as_relative = false
+material = SubResource("ShaderMaterial_4qkgl")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="MapPointerManager" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 z_index = 100
 material = SubResource("CanvasItemMaterial_w8yg2")
@@ -356,9 +378,9 @@ layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -97.0
-offset_top = -39.0
+offset_top = -61.0
 offset_right = 106.0
-offset_bottom = 105.0
+offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -441,7 +463,85 @@ grow_vertical = 0
 [node name="ThrustSlider" parent="UI" instance=ExtResource("34_sn67k")]
 layout_mode = 1
 
-[node name="Control" parent="UI" instance=ExtResource("35_k6hjp")]
+[node name="RadarButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = -155.0
+grow_vertical = 2
+texture_normal = ExtResource("26_y7o3o")
+texture_pressed = ExtResource("27_x5hrs")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Label" type="Label" parent="UI/RadarButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.5
+offset_top = -19.0
+offset_right = 60.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 12
+text = "Toggle Radar
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SimulationButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -158.0
+offset_right = 150.0
+offset_bottom = -102.0
+grow_vertical = 2
+texture_normal = ExtResource("26_y7o3o")
+texture_pressed = ExtResource("27_x5hrs")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Label" type="Label" parent="UI/SimulationButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -19.0
+offset_right = 58.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 12
+text = "Pause Simulation
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DroneTab" parent="UI" instance=ExtResource("35_k6hjp")]
 layout_mode = 2
 anchors_preset = 0
 anchor_left = 1.0
@@ -449,6 +549,17 @@ anchor_right = 1.0
 offset_left = -404.0
 offset_top = -41.0
 offset_right = -364.0
+offset_bottom = -1.0
+grow_horizontal = 0
+
+[node name="Missile Tab" parent="UI" instance=ExtResource("29_jt4kw")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -405.0
+offset_top = -41.0
+offset_right = -365.0
 offset_bottom = -1.0
 grow_horizontal = 0
 
@@ -466,3 +577,5 @@ libraries = {
 [connection signal="SteeringDitChanged" from="UI/SteeringWheel" to="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" method="SteerChanged"]
 [connection signal="AccelerationChangeEnded" from="UI/ThrustSlider" to="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" method="AccelerationEnded"]
 [connection signal="AccelerationChanged" from="UI/ThrustSlider" to="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" method="AccelerationChanged"]
+[connection signal="pressed" from="UI/RadarButton" to="." method="_on_radar_button_pressed"]
+[connection signal="pressed" from="UI/SimulationButton" to="." method="_on_simulation_button_pressed"]

@@ -51,3 +51,6 @@ Assets/hazard-sign.png.import
 /addons/imgui-godot
 /.godot/exported
 /.godot/editor
+/android/build/.gradle
+/android/build
+/.godot/editor

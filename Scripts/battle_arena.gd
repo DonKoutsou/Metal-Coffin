@@ -21,9 +21,9 @@ func SetBattleData(PlShips : Array[BattleShipStats], EnemShips : Array[BattleShi
 func _ready() -> void:
 	#$SubViewportContainer/SubViewport/PlShip.set_physics_process(false)
 	#$SubViewportContainer/SubViewport/EnemyShip.set_physics_process(false)
-	$SubViewportContainer/SubViewport/TouchScreenButton.visible = OS.get_name() != "Windows"
-	$SubViewportContainer/SubViewport/TouchScreenButton2.visible = OS.get_name() != "Windows"
-	$SubViewportContainer/SubViewport/TouchScreenButton3.visible = OS.get_name() != "Windows"
+	$TouchScreenButton.visible = OS.get_name() != "Windows"
+	$TouchScreenButton2.visible = OS.get_name() != "Windows"
+	$TouchScreenButton3.visible = OS.get_name() != "Windows"
 	
 	for g in playerships:
 		var panel = ShipStatPanel.instantiate() as ShipBattleStatPanel

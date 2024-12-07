@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://c16lcf8swpkjk"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://c16lcf8swpkjk"]
 
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_2a3m1"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_5w58m"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_0quoj"]
 [ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_ypyoy"]
 [ext_resource type="Resource" uid="uid://cgigq707wifrf" path="res://Resources/Items/SuperLargeRadar.tres" id="4_nra5m"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="4_qxqhk"]
 
 [resource]
 resource_local_to_scene = true
@@ -14,7 +13,7 @@ UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 700.0
 CurrentVal = 0.0
 UpgradeVersion = ExtResource("4_nra5m")
-UpgradeItems = Array[ExtResource("2_5w58m")]([ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk"), ExtResource("4_qxqhk")])
+UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("2_5w58m")]([ExtResource("3_0quoj"), ExtResource("3_0quoj")])
 ItemIcon = ExtResource("1_2a3m1")

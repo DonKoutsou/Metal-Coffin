@@ -1,7 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://dobir15ooa8uf"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://dobir15ooa8uf"]
 
+[ext_resource type="Resource" uid="uid://dijsq004n7ouw" path="res://Resources/Happenings/CrewRecruitHappeningCraden.tres" id="1_fg3oa"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_ldj7b"]
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="2_cff7w"]
 
 [resource]
 script = ExtResource("1_ldj7b")
 SpotName = "Cirkari"
+Event = ExtResource("1_fg3oa")
+EnemyCity = true
+HostileShipScene = ExtResource("2_cff7w")
+HostileShipName = "Karkhan"

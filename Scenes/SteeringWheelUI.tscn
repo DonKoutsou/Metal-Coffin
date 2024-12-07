@@ -76,8 +76,8 @@ expand_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_py1nb")
-volume_db = -10.0
-pitch_scale = 0.76
+volume_db = -5.0
+pitch_scale = 1.03
 bus = &"MapSounds"
 
 [connection signal="gui_input" from="TextureButton" to="." method="_on_texture_rect_gui_input"]

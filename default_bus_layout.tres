@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cy5dqs7uj5j5x"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://cy5dqs7uj5j5x"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_4chtb"]
 resource_name = "Reverb"
@@ -11,6 +11,10 @@ resource_name = "PitchShift"
 pitch_scale = 0.75
 oversampling = 6
 fft_size = 0
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_6ig65"]
+resource_name = "PitchShift"
+pitch_scale = 0.1
 
 [resource]
 bus/1/name = &"MapSounds"
@@ -35,3 +39,11 @@ bus/3/volume_db = 0.00282288
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectPitchShift_oia26")
 bus/3/effect/0/enabled = true
+bus/4/name = &"Engine"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"MapSounds"
+bus/4/effect/0/effect = SubResource("AudioEffectPitchShift_6ig65")
+bus/4/effect/0/enabled = true

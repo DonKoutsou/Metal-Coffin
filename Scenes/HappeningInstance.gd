@@ -12,6 +12,7 @@ func _ready() -> void:
 	#PresentHappening(load("res://Resources/Happenings/TestHappening.tres"))
 
 func PresentHappening(Hap : Happening):
+	SimulationManager.GetInstance().TogglePause(true)
 	Hp = Hap
 	$VBoxContainer/Label.text = Hap.HappeningName
 	$VBoxContainer/Label2.text = Hap.HappeningText
@@ -62,3 +63,4 @@ func _physics_process(_delta: float) -> void:
 func _on_timer_timeout() -> void:
 	Hp.Options[SelectedOption].OptionOutCome()
 	queue_free()
+	SimulationManager.GetInstance().TogglePause(false)

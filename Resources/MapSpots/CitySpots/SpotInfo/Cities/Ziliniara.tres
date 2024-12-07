@@ -7,3 +7,5 @@
 script = ExtResource("2_puyyb")
 SpotName = "Ziliniara"
 Event = ExtResource("1_nep70")
+EnemyCity = true
+SpawnHostileShip = false

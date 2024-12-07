@@ -34,6 +34,8 @@ Options = Array[ExtResource("3_npq0v")]([SubResource("Resource_gdket"), SubResou
 script = ExtResource("2_by1cj")
 SpotName = "Airport"
 Event = SubResource("Resource_2wqaq")
+EnemyCity = false
+HostileShipName = ""
 
 [sub_resource type="Resource" id="Resource_bo2qf"]
 script = ExtResource("5_vypep")
@@ -51,6 +53,4 @@ CanLand = false
 HasAtmoshere = false
 VisibleOnStart = false
 DropAmmount = 1
-EnemyCity = false
-SpawnHostileShip = false
 CustomData = Array[ExtResource("1_tujyv")]([SubResource("Resource_bo2qf")])

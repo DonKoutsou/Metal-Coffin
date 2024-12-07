@@ -3,22 +3,27 @@ class_name MapSpot
 
 #@onready var land_button_container: PanelContainer = $LandButtonContainer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@export var HostileShipScene : PackedScene
+
 
 #signal MapPressed(Pos : MapSpot)
-signal SpotSearched(Pos : MapSpot)
+#signal SpotSearched(Pos : MapSpot)
 signal SpotAnalazyed(Type : MapSpotType)
 signal SpotAproached(Type :MapSpotType)
+signal SpotLanded(Type : MapSpotType)
 
 var SpotType : MapSpotType
 var Pos : Vector2
 var Visited = false
 var Seen = false
 var Analyzed = false
+var EnemyCity = false
 #bool to avoid sent drones colliding with current visited spot
 var CurrentlyVisiting = false
 var Evnt : Happening
 var SpotName : String
+
+var HostilePatrolToSpawn : PackedScene
+var HostilePatrolName : String
 
 func _ready() -> void:
 	$VBoxContainer.visible = Analyzed
@@ -27,20 +32,17 @@ func _ready() -> void:
 	#land_button_container.visible = false
 	if (Pos != Vector2.ZERO):
 		position = Pos
-	set_physics_process(false)
-	if (SpotType.EnemyCity):
-		add_to_group("EnemyDestinations")
-	
-		
-		
+	#set_physics_process(false)
+
 func SpawnEnemyShip():
-	var host = HostileShipScene.instantiate() as HostileShip
+	var host = HostilePatrolToSpawn.instantiate() as HostileShip
 	host.DestinationCity = self
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
-func _physics_process(_delta: float) -> void:
-	var cam = ShipCamera.GetInstance()
-	$LandButtonContainer.scale = Vector2(1,1) /  cam.zoom
+	host.ShipName = HostilePatrolName
+#func _physics_process(_delta: float) -> void:
+	#var cam = ShipCamera.GetInstance()
+	#$LandButtonContainer.scale = Vector2(1,1) /  cam.zoom
 
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
@@ -62,7 +64,7 @@ func SetSpotData(Data : MapSpotType) -> void:
 		#$LandButtonContainer/LandButton.text = "Dock"
 	#else :if (!Data.CanLand):
 	
-	$LandButtonContainer/LandButton.text = "Search"
+	#$LandButtonContainer/LandButton.text = "Search"
 	
 	for g in Data.PossibleDrops:
 		var text = TextureRect.new()
@@ -81,12 +83,19 @@ func SetSpotData(Data : MapSpotType) -> void:
 				for z in IDs.PossibleIds:
 					if (z.PickedBy != null):
 						continue
+					var spotid = z as MapSpotCompleteInfo
 					#if (ID.PickedBy != null):
 					#continue
-					SpotName = z.SpotName
-					Evnt = z.Event
+					SpotName = spotid.SpotName
+					Evnt = spotid.Event
+					EnemyCity = spotid.EnemyCity
+					#SpawnHostileShip = spotid.SpawnHostileShip
+					HostilePatrolToSpawn = spotid.HostileShipScene
+					HostilePatrolName = spotid.HostileShipName
+					if (spotid.EnemyCity):
+						add_to_group("EnemyDestinations")
 					#IDs.PossibleIds.erase(ID)
-					z.PickedBy = self
+					spotid.PickedBy = self
 					break
 				
 		
@@ -116,13 +125,18 @@ func HasFuel() -> bool:
 	return hasf
 func HasRepair() -> bool:
 	var hasf = false
-	
 	for g in SpotType.PossibleDrops:
 		if g is UsableItem and g.StatUseName == "HULL":
 			hasf = true
 			break
-	
 	return hasf
+func HasUpgrade() -> bool:
+	var hasu = false
+	for g in SpotType.PossibleDrops:
+		if g.ItemName == "Material":
+			hasu = true
+			break
+	return hasu
 #//////////////////////////////////////////////////////////////////
 #todo find better way for dialogue from station
 func OnSpotVisited(PlayAnim : bool = true) -> void:
@@ -149,7 +163,7 @@ func OnSpotVisited(PlayAnim : bool = true) -> void:
 	if (!Analyzed):
 		OnSpotAnalyzed(PlayAnim)
 	if (!Visited):
-		SpotAproached.emit(self)
+		SpotLanded.emit(self)
 	Visited = true
 #Called when radar sees a mapspot
 func OnSpotSeen(PlayAnim : bool = true) -> void:
@@ -176,10 +190,12 @@ func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
 func OnSpotVisitedByDrone() -> void:
 	if (!Analyzed):
 		OnSpotAnalyzed()
+	#if (!Visited):
+		#SpotAproached.emit(self)
 	visible = true
 	
-func _on_land_button_pressed() -> void:
-	SpotSearched.emit(self)
+#func _on_land_button_pressed() -> void:
+	#SpotSearched.emit(self)
 	
 func _on_analyze_button_pressed() -> void:
 	SpotAnalazyed.emit(self)
@@ -220,6 +236,7 @@ func AreaEntered(area: Area2D):
 			CurrentlyVisiting = true
 			var ship = area.get_parent() as PlayerShip
 			ship.SetCurrentPort(self)
+			SpotAproached.emit(self)
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):
 		#land_button_container.visible = false

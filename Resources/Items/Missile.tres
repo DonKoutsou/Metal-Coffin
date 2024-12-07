@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MissileItem" load_steps=5 format=3 uid="uid://brv8sagucvpb2"]
+
+[ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="1_evrf7"]
+[ext_resource type="Script" path="res://Scripts/MissileItem.gd" id="1_ov1vt"]
+[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_w8n63"]
+[ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="2_87bbv"]
+
+[resource]
+script = ExtResource("1_ov1vt")
+MissileScene = ExtResource("1_evrf7")
+MissileName = "Cruise Missile"
+Distance = 1500
+Speed = 1.0
+ItemIcon = ExtResource("1_w8n63")
+ItemIconSmol = ExtResource("2_87bbv")
+ItemName = "Cruise Missile"
+ItemDesc = "Medium range High speed missile"
+MaxStackCount = 10
+RandomFindMaxCount = 1

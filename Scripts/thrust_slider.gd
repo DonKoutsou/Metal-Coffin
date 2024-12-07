@@ -30,8 +30,8 @@ var accumulatedrelative : float = 0
 func _on_handle_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		var step = ( MinVelocityLoc - MaxVelocityLoc ) / StepCOunt
-		accumulatedrelative += event.relative.y
-		if (abs(accumulatedrelative) < step * 0.8):
+		accumulatedrelative += event.relative.y * 1.5
+		if (abs(accumulatedrelative) < step):
 			return
 		var newpos
 		if (accumulatedrelative > 0):
@@ -47,8 +47,8 @@ func _on_handle_gui_input(event: InputEvent) -> void:
 		$TextureRect/Light3.Toggle(newval > 0.7)
 	if (event is InputEventScreenDrag):
 		var step = ( MinVelocityLoc - MaxVelocityLoc ) / StepCOunt
-		accumulatedrelative += event.relative.y
-		if (abs(accumulatedrelative) < step * 0.8):
+		accumulatedrelative += event.relative.y * 1.5
+		if (abs(accumulatedrelative) < step):
 			return
 		var newpos
 		if (accumulatedrelative > 0):

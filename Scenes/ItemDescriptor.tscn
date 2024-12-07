@@ -72,6 +72,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("3_v5dpc")

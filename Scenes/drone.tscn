@@ -32,7 +32,7 @@ scale_curve = SubResource("CurveTexture_rlrpj")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6yyl"]
 resource_local_to_scene = true
-radius = 3.16228
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7khp2"]
 radius = 258.136
@@ -56,6 +56,7 @@ shader_parameter/beam_width = 0.003
 shader_parameter/trail_width = 0.1
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
+shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.015
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_si61q"]
@@ -74,6 +75,7 @@ shader_parameter/beam_width = 0.003
 shader_parameter/trail_width = 0.1
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
+shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.008
 
 [node name="Drone" type="Node2D" groups=["Ships"]]
@@ -89,11 +91,13 @@ texture = ExtResource("8_bbjow")
 lifetime = 20.0
 
 [node name="ShipBody" type="Area2D" parent="."]
+disable_mode = 2
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_e6yyl")
+disabled = true
 debug_color = Color(0.745105, 0.130026, 1.92523e-07, 0.42)
 
 [node name="ReturnSoundTrigger" type="Area2D" parent="."]
@@ -116,7 +120,7 @@ default_color = Color(0.969432, 0.527551, 0.201925, 1)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="ShipIconPivot"]
 rotation = -1.5708
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_4y2i6")
 
 [node name="Aceleration" type="Node2D" parent="."]

@@ -5,6 +5,8 @@ class_name DF_EnemyShip
 
 var pl_ship: DF_PlayerShip
 @export var BulletScene : PackedScene
+@export var BulletScene2 : PackedScene
+@export var BulletScene3 : PackedScene
 @export var HP = 20
 @export var FireRpm = 0.05
 @export var Ammo : int = 10
@@ -13,7 +15,7 @@ var currentAmmo = Ammo
 var rpm = 0.0
 var plin = false
 var Guns : Array[Node2D]
-
+var bulletscene : PackedScene
 signal OnShipDestroyed(ship : DF_EnemyShip)
 
 
@@ -23,11 +25,21 @@ func SetShipStats(Stats : BattleShipStats) -> void:
 	HP = Stats.Hull
 	$Control/ProgressBar2.max_value = Ammo
 	
-	if (Stats.FirePower == 1):
+	var firep = Stats.FirePower
+	
+	if (firep > 6):
+		bulletscene = BulletScene3
+		firep -= 6
+	else : if (firep > 3):
+		bulletscene = BulletScene2
+		firep -= 3
+	else :
+		bulletscene = BulletScene
+	if (firep == 1):
 		$Guns.get_child(2).free()
 		$Guns.get_child(1).free()
 		
-	else :if (Stats.FirePower == 2):
+	else :if (firep == 2):
 		$Guns.get_child(0).free()
 		
 	for g in $Guns.get_children():
@@ -49,7 +61,8 @@ func _physics_process(delta: float) -> void:
 		$Control/ProgressBar2.value = currentAmmo
 		for g in Guns:
 			g.look_at(pl_ship.global_position)
-			var bul = BulletScene.instantiate() as Node2D
+			var bul = bulletscene.instantiate() as Bullet
+			bul.set_collision_mask_value(5, true)
 			get_parent().add_child(bul)
 			bul.global_position = g.global_position
 			bul.global_rotation = g.global_rotation 
@@ -57,8 +70,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		currentAmmo = min(Ammo, currentAmmo + 1)
 		$Control/ProgressBar2.value = currentAmmo
-func Damage():
-	HP -= 1
+func Damage(amm : float):
+	HP -= amm
 	$Control/ProgressBar.value = HP
 	if (HP <= 0):
 		queue_free()

@@ -5,3 +5,5 @@
 [resource]
 script = ExtResource("1_5cebh")
 SpotName = "Gorgan"
+EnemyCity = true
+HostileShipName = ""

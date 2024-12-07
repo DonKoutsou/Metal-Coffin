@@ -5,3 +5,5 @@
 [resource]
 script = ExtResource("2_el5ca")
 SpotName = "Zilidana"
+EnemyCity = true
+SpawnHostileShip = false

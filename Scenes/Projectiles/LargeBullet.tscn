@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://84udk2eias6x"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/bullet.gd" id="1_upovt"]
+[ext_resource type="AudioStream" uid="uid://bwdnrcljb1014" path="res://Assets/Sounds/shell_out_tiny_01.wav" id="2_i6w8k"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="3_2gwi0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_44es8"]
+radius = 6.0
+
+[sub_resource type="Gradient" id="Gradient_euube"]
+offsets = PackedFloat32Array(0, 0.513369, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.0437528, 0.668074, 9.62615e-07, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_benii"]
+gradient = SubResource("Gradient_euube")
+
+[sub_resource type="Curve" id="Curve_kplji"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.492754, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bno7n"]
+curve = SubResource("Curve_kplji")
+
+[sub_resource type="Curve" id="Curve_t1fha"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.531401, 0.510712), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0wlxv"]
+curve = SubResource("Curve_t1fha")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_naw1s"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_0wlxv")
+color_ramp = SubResource("GradientTexture1D_benii")
+emission_curve = SubResource("CurveTexture_bno7n")
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+script = ExtResource("1_upovt")
+BulletSound = ExtResource("2_i6w8k")
+BulletDamage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_44es8")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(15, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.6, 0.6)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_naw1s")
+texture = ExtResource("3_2gwi0")
+local_coords = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

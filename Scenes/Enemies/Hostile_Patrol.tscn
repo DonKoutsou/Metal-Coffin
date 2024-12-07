@@ -10,7 +10,6 @@
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="8_h26ro"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2wcmb"]
-radius = 3.0
 
 [sub_resource type="Curve" id="Curve_qk12j"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -40,7 +39,7 @@ radius = 150.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
 resource_local_to_scene = true
 shader = ExtResource("8_h26ro")
-shader_parameter/line_color = Color(0.253, 0.622, 0.847, 1)
+shader_parameter/line_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 shader_parameter/range_lines = 1.0
 shader_parameter/sector_lines = 0.0
 shader_parameter/line_width = 0.0011
@@ -49,10 +48,11 @@ shader_parameter/beam_width = 0.003
 shader_parameter/trail_width = 0.1
 shader_parameter/sector_rotation = 0.5
 shader_parameter/ShowRadat = true
+shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.015
 
 [node name="HostileShip" type="Area2D" groups=["Enemy", "Ships"]]
-collision_layer = 0
+collision_layer = 512
 collision_mask = 13
 script = ExtResource("1_dinuw")
 EnemyLocatedNotifScene = ExtResource("2_8yau7")
@@ -74,7 +74,7 @@ lifetime = 20.0
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="Node2D2"]
 rotation = -1.5708
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_xxp8j")
 
 [node name="Node2D" type="Node2D" parent="."]

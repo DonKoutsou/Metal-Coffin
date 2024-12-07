@@ -9,6 +9,8 @@ class_name HostileShip
 @export var EnemyLocatedSound : AudioStream
 @export var ShipIcon : Texture
 @export var CaptainIcon : Texture
+@export var ShipName : String
+@export var Hull : float = 30
 #var Pursuing = false
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
@@ -17,10 +19,17 @@ var Paused = false
 
 var DestinationCity : MapSpot
 
-var VisibleBy : Array[Node2D] = []
+var VisibleBt : Dictionary
+#var VisibleBy : Array[Node2D] = []
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
-
+func SeenShips() -> bool:
+	for g in VisibleBt:
+		if (g == null):
+			continue
+		if (g is PlayerShip or g is Drone):
+			return true
+	return false
 func  _ready() -> void:
 	#visible = false
 	$Node2D.position.x = Speed
@@ -50,10 +59,15 @@ func GetCity(CityName : String) -> MapSpot:
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
-
+	$Radar2/Radar_Range.material.set_shader_parameter("Paused", t)
+func Damage(amm : float) -> void:
+	Hull -= amm
+	if (Hull <= 0):
+		MapPointerManager.GetInstance().RemoveShip(self)
+		queue_free()
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = 30
+	stats.Hull = Hull
 	stats.FirePower = 1
 	stats.ShipIcon = ShipIcon
 	stats.CaptainIcon = CaptainIcon
@@ -75,7 +89,8 @@ func UpdateVizRange(rang : float):
 
 func GetSpeed():
 	return $Node2D.position.x
-	
+func GetShipSpeedVec() -> Vector2:
+	return $Node2D.global_position - global_position
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
@@ -84,19 +99,33 @@ func _physics_process(_delta: float) -> void:
 		updatedronecourse(interceptionpoint)
 	else:
 		global_position = $Node2D.global_position
-
+	for g in VisibleBt:
+		if (g == null):
+			continue
+		if (g is Missile):
+			continue
+		VisibleBt[g] = min(VisibleBt[g] + 0.05, 10)
+		if (VisibleBt[g] == 10 and !PursuingShips.has(g)):
+			LastKnownPosition = g.global_position
 func calculateinterceptionpoint() -> Vector2:
 	#var plship = PlayerShip.GetInstance()
 	# Get the current position and velocity of the ship
 	var ship_position
 	var ship_velocity
 	if (PursuingShips.size() > 0):
+		#var ship = 0
+		#while (!PursuingShips[ship].Detectable):
+			#ship += 1
+			#if (ship > PursuingShips.size() - 1):
+				#
+				#break
 		ship_position = PursuingShips[0].position
 		ship_velocity = PursuingShips[0].GetShipSpeedVec()
 	else : if (LastKnownPosition != Vector2.ZERO):
 		ship_position = LastKnownPosition
 		if (LastKnownPosition.distance_to(global_position) < 10):
 			LastKnownPosition = Vector2.ZERO
+			return DestinationCity.global_position
 		ship_velocity = Vector2.ZERO
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (position.distance_to(ship_position)) / $Node2D.position.x
@@ -123,15 +152,16 @@ func _on_radar_2_area_exited(area: Area2D) -> void:
 		PursuingShips.erase(area.get_parent())
 		LastKnownPosition = area.get_parent().global_position
 func OnShipSeen(SeenBy : Node2D):
+	$Radar2/Radar_Range.visible = true
 	#visible = true
-	if (VisibleBy.has(SeenBy)):
+	if (VisibleBt.has(SeenBy)):
 		return
-	VisibleBy.append(SeenBy)
-	if (VisibleBy.size() > 1):
+	VisibleBt[SeenBy] = 0
+	if (VisibleBt.keys().size() > 1):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	var notif = EnemyLocatedNotifScene.instantiate()
-	var sound = DeletableSound.new()
+	var sound = DeletableSoundGlobal.new()
 	sound.stream = EnemyLocatedSound
 	sound.volume_db = -10
 	sound.bus = "UI"
@@ -140,7 +170,8 @@ func OnShipSeen(SeenBy : Node2D):
 	add_child(notif)
 	
 func OnShipUnseen(UnSeenBy : Node2D):
-	VisibleBy.erase(UnSeenBy)
+	VisibleBt.erase(UnSeenBy)
+	$Radar2/Radar_Range.visible = VisibleBt.size() == 0
 
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == DestinationCity):
@@ -192,6 +223,7 @@ func GetSaveData() -> SD_HostileShip:
 	dat.RadarRange = RadarRange
 	dat.Speed = Speed
 	dat.Scene = scene_file_path
+	dat.ShipName = ShipName
 	return dat
 func LoadSaveData(Dat : SD_HostileShip) -> void:
 	DestinationCity = GetCity(Dat.DestinationCityName)
@@ -200,3 +232,4 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	global_position = Dat.Position
 	RadarRange = Dat.RadarRange
 	Speed = Dat.Speed
+	ShipName = Dat.ShipName

@@ -21,28 +21,25 @@ signal WRLD_StatGotLow(StatN : String)
 
 var Loading = false
 
-func ToggleShipPausing(t : bool):
-	get_tree().call_group("Ships", "TogglePause", t)
-
 static var Instance : World
 static func GetInstance() -> World:
 	return Instance
 func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
 	Instance = self
-	#if (!Loading):
-		#PlayIntro()
+	if (!Loading):
+		PlayIntro()
 	#call_deferred("TestTrade")
 
 func PlayIntro():
 	GetMap().PlayIntroFadeInt()
-	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've drifted away, i am not sure where we are.", "Let me run a background check on the ship's systems...", "... ... ... ...", "Cockpit controlls are offline..", "Monitoring controlls are offline...", "Restarting mainframe..."]
+	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."]
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ShowStation, true)
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
 	GetMap().ToggleUIForIntro(false)
 func ShowStation():
-	var DiagText : Array[String]  = ["Operator, I have found the station.", "Setting course for station, lets head back.", "I am also seeing other stations on our way there, i've marked them on your map.", "I dont know if they are friendly but we have no choice. We will need to stop and refuel"]
+	var DiagText : Array[String]  = ["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."]
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ReturnCamToPlayer, true)
 	GetMap().ShowStation()
 func ReturnCamToPlayer():
@@ -56,7 +53,7 @@ func EnableBackUI():
 	GetMap().ToggleUIForIntro(true)
 func _enter_tree() -> void:
 	var map = GetMap()
-	map.connect("MAP_AsteroidBeltArrival", StartStage)
+	#map.connect("MAP_AsteroidBeltArrival", StartStage)
 	map.connect("MAP_EnemyArrival", StartDogFight)
 	map.connect("MAP_StageSearched", StageSearch)
 	map.connect("MAP_ShipSearched", ShipSearched)
@@ -101,14 +98,14 @@ func OnStatsUpdated(StatName : String):
 	ItemBuffStat(StatName)
 	
 func StartShipTrade(NewShip : BaseShip) -> void:
-	ToggleShipPausing(true)
+	SimulationManager.GetInstance().TogglePause(true)
 	var tradesc = ShipTradeScene.instantiate() as ShipTrade
 	$Ingame_UIManager.add_child(tradesc)
 	tradesc.StartTrade(CurrentShip, NewShip)
 	tradesc.connect("OnTradeFinished", ChangeShip)
 	
 func ChangeShip(NewShip : BaseShip) -> void:
-	ToggleShipPausing(false)
+	SimulationManager.GetInstance().TogglePause(false)
 	if (NewShip == CurrentShip):
 		return
 	GetInventory().UpdateShipInfo(NewShip)
@@ -215,7 +212,7 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 		EBattleStats.append(g.GetBattleStats())
 	var Dscene = DogfightScene.instantiate() as BattleArena
 	Dscene.connect("OnBattleEnded", DogFightEnded)
-	ToggleShipPausing(true)
+	SimulationManager.GetInstance().TogglePause(true)
 	Dscene.SetBattleData(FBattleStats, EBattleStats)
 	Ingame_UIManager.GetInstance().AddUI(Dscene, false, true)
 func DogFightEnded(Survivors : Array[BattleShipStats]) -> void:
@@ -240,7 +237,7 @@ func DogFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	for g in FighingEnemyUnits:
 		MapPointerManager.GetInstance().RemoveShip(g)
 		g.free()
-	ToggleShipPausing(false)
+	SimulationManager.GetInstance().TogglePause(false)
 #Exploration---------------------------------------------
 func StartExploration(Spot : MapSpot) -> void:
 	var Escene = ExplorationScene.instantiate() as Exploration
@@ -273,7 +270,7 @@ func StartStage(Size : int) -> void:
 	#make sure player wont be able to open inventory durring gameplay
 	$Ingame_UIManager.ToggleInventoryButton(false)
 	#make sure ships dont keep working on map to avoid any UI poping
-	ToggleShipPausing(true)
+	SimulationManager.GetInstance().TogglePause(true)
 	#turn off map
 	var map = GetMap()
 	map.ToggleVis(false)
@@ -287,7 +284,7 @@ func StageDone(victory : bool, supplies : Array[Item]) -> void:
 		GameLost("Your ship got destroyed")
 		return
 	
-	ToggleShipPausing(false)
+	SimulationManager.GetInstance().TogglePause(false)
 	#if player didnt die add the supplies he found in the inventory
 	GetInventory().AddItems(supplies)
 	#enable map again
@@ -330,7 +327,7 @@ func GameLost(reason : String):
 
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save(self)
-	PopUpManager.GetInstance().DoPopUp("Save successful")
+	PopUpManager.GetInstance().DoFadeNotif("Save successful")
 	
 func _on_exit_pressed() -> void:
 	WRLD_OnGameEnded.emit()
