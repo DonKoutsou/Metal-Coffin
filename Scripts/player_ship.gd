@@ -73,7 +73,7 @@ func RemovePort():
 	Inventory.GetInstance().CancelUpgrades()
 func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var FuelRangeIndicator = $Fuel_Range
-	var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
+	#var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
 	var FuelMat = FuelRangeIndicator.material as ShaderMaterial
 	#calculate the range taking fuel efficiency in mind
 	var distall = (fuel * 10 * fuel_ef) * 2
@@ -82,10 +82,10 @@ func UpdateFuelRange(fuel : float, fuel_ef : float):
 	#tw.tween_property(FuelRangeIndicator, "size", Vector2(distall, distall) * 2, 0.5)
 	tw.tween_method(SetFuelShaderRange, FuelMat.get_shader_parameter("scale_factor"), (distall/2) / 10000, 0.5)
 	#centering of color rect
-	var tw2 = create_tween()
-	tw2.tween_property(FuelRangeIndicatorDescriptor, "position", Vector2(9900 + (distall/2), 10000), 0.5)
+	#var tw2 = create_tween()
+	#tw2.tween_property(FuelRangeIndicatorDescriptor, "position", Vector2(9900 + (distall/2), 10000), 0.5)
 	#DISSABLE DESCRIPTOR WHEN INDICATOR GETS TO SMALL
-	FuelRangeIndicatorDescriptor.visible = distall > 100
+	#FuelRangeIndicatorDescriptor.visible = distall > 100
 func SetFuelShaderRange(val : float):
 	var FuelMat = $Fuel_Range.material as ShaderMaterial
 	FuelMat.set_shader_parameter("scale_factor", val)

@@ -1,8 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=13 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
-[ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_8yau7"]
-[ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_qen6x"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_xxp8j"]
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="5_1sucu"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_jqji2"]
@@ -55,8 +53,6 @@ shader_parameter/scale_factor = 0.015
 collision_layer = 512
 collision_mask = 13
 script = ExtResource("1_dinuw")
-EnemyLocatedNotifScene = ExtResource("2_8yau7")
-EnemyLocatedSound = ExtResource("3_qen6x")
 ShipIcon = ExtResource("4_xxp8j")
 CaptainIcon = ExtResource("5_1sucu")
 

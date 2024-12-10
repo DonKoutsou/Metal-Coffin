@@ -1,7 +1,9 @@
+VisibleOnScreenNotifier2D
+Control
+Panel
 Node2D
 Line2D
 Label
-Control
 AudioStreamPlayer
 AudioStreamPlayer2D
 CanvasGroup
@@ -10,5 +12,3 @@ AudioListener2D
 CollisionShape2D
 Area2D
 CollisionPolygon2D
-TileMapLayer
-Polygon2D

@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://1j0ghufup7v"]
+[gd_scene load_steps=6 format=3 uid="uid://1j0ghufup7v"]
 
 [ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_xgfcr"]
+[ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_bq8aw"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_mmvkc"]
+[ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gah6h"]
 bg_color = Color(1, 1, 1, 1)
@@ -33,6 +35,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xgfcr")
+EnemyLocatedNotifScene = ExtResource("2_bq8aw")
+EnemyLocatedSound = ExtResource("3_6yg5x")
 
 [node name="Control" type="Control" parent="."]
 use_parent_material = true
@@ -99,6 +103,10 @@ horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Control"]
+position = Vector2(-235.5, -29)
+scale = Vector2(7.95, 5)
+
 [node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
 use_parent_material = true
 layout_mode = 1
@@ -115,3 +123,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gah6h")
+
+[node name="ShipSymbol" type="Label" parent="."]
+use_parent_material = true
+offset_top = -35.0
+offset_right = 1.0
+offset_bottom = -16.0
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("2_mmvkc")
+theme_override_font_sizes/font_size = 16
+text = "P"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="screen_entered" from="Control/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="Control/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

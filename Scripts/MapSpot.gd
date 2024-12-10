@@ -1,13 +1,7 @@
 extends Node2D
 class_name MapSpot
 
-#@onready var land_button_container: PanelContainer = $LandButtonContainer
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-
-
-#signal MapPressed(Pos : MapSpot)
-#signal SpotSearched(Pos : MapSpot)
-signal SpotAnalazyed(Type : MapSpotType)
+signal SpotAnalazyed(PlayAnim : bool)
 signal SpotAproached(Type :MapSpotType)
 signal SpotLanded(Type : MapSpotType)
 
@@ -24,26 +18,27 @@ var SpotName : String
 
 var HostilePatrolToSpawn : PackedScene
 var HostilePatrolName : String
+var HostileGarison : PackedScene
+var HostileGarisonName : String
+
 
 func _ready() -> void:
-	$VBoxContainer.visible = Analyzed
-	visible = Seen
 	global_rotation = 0
-	#land_button_container.visible = false
 	if (Pos != Vector2.ZERO):
 		position = Pos
-	#set_physics_process(false)
 
-func SpawnEnemyShip():
+func SpawnEnemyPatrol():
 	var host = HostilePatrolToSpawn.instantiate() as HostileShip
 	host.DestinationCity = self
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
 	host.ShipName = HostilePatrolName
-#func _physics_process(_delta: float) -> void:
-	#var cam = ShipCamera.GetInstance()
-	#$LandButtonContainer.scale = Vector2(1,1) /  cam.zoom
-
+func SpawnEnemyGarison():
+	var host = HostileGarison.instantiate() as HostileShip
+	#host.DestinationCity = self
+	get_parent().get_parent().get_parent().get_parent().add_child(host)
+	host.global_position = global_position
+	host.ShipName = HostileGarisonName
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
 	var datas = MapSpotSaveData.new().duplicate()
@@ -58,21 +53,6 @@ func GetSaveData() -> Resource:
 
 func SetSpotData(Data : MapSpotType) -> void:
 	SpotType = Data
-	#if (Data.GetEnumString() == "SUB_STATION"):
-		#$LandButtonContainer/LandButton.text = "Search"
-	#else :if (Data.GetEnumString() == "STATION"):
-		#$LandButtonContainer/LandButton.text = "Dock"
-	#else :if (!Data.CanLand):
-	
-	#$LandButtonContainer/LandButton.text = "Search"
-	
-	for g in Data.PossibleDrops:
-		var text = TextureRect.new()
-		text.texture = g.ItemIconSmol
-		if (g is UsableItem):
-			text.self_modulate = g.ItecColor
-		text.use_parent_material = true
-		$VBoxContainer/HBoxContainer.add_child(text)
 	if (Data.CustomData.size() > 0):
 		for g in Data.CustomData:
 			if (g is MapSpotCustomData_CompleteInfo):
@@ -90,8 +70,10 @@ func SetSpotData(Data : MapSpotType) -> void:
 					Evnt = spotid.Event
 					EnemyCity = spotid.EnemyCity
 					#SpawnHostileShip = spotid.SpawnHostileShip
-					HostilePatrolToSpawn = spotid.HostileShipScene
-					HostilePatrolName = spotid.HostileShipName
+					HostilePatrolToSpawn = spotid.HostilePatrolShipScene
+					HostilePatrolName = spotid.HostilePatrolShipName
+					HostileGarison = spotid.HostileShipScene
+					HostileGarisonName = spotid.HostileShipName
 					if (spotid.EnemyCity):
 						add_to_group("EnemyDestinations")
 					#IDs.PossibleIds.erase(ID)
@@ -138,28 +120,7 @@ func HasUpgrade() -> bool:
 			break
 	return hasu
 #//////////////////////////////////////////////////////////////////
-#todo find better way for dialogue from station
 func OnSpotVisited(PlayAnim : bool = true) -> void:
-	#if (SpotType.GetEnumString() == "SUB_STATION"):
-		#var diags = SpotType.GetCustomData("StationInfo")
-		#var diag : MapSpotCustomDataStringArray = diags.pick_random()
-		#while (DialogueProgressHolder.GetInstance().IsDialogueSpoken(diag.Value[0])):
-			#if (diags.size() == 0):
-				#diag = null
-				#break
-			#diag = diags.pick_random()
-			#diags.erase(diag)
-		#var Dialogue : Array[String] = ["Operator, it seems like the station was under collapse.", "Our visit has destabilised the station even more and it's been completely destroyed."]
-		#if (diag == null):
-			#Ingame_UIManager.GetInstance().PlayDiag(Dialogue)
-		#else:
-			#Dialogue.append("I managed to find some of the crew logs. This entry seems to be just before the collapse. Take a listen operator.")
-			#Dialogue.append_array(diag.Value)
-			#Dialogue.append("Entry ended.")
-			#DialogueProgressHolder.GetInstance().OnDialogueSpoken(diag.Value[0])
-			#Ingame_UIManager.GetInstance().PlayDiag(Dialogue)
-		##SpotType.ClearCustomData(diag)
-		#queue_free()
 	if (!Analyzed):
 		OnSpotAnalyzed(PlayAnim)
 	if (!Visited):
@@ -167,49 +128,24 @@ func OnSpotVisited(PlayAnim : bool = true) -> void:
 	Visited = true
 #Called when radar sees a mapspot
 func OnSpotSeen(PlayAnim : bool = true) -> void:
-	visible = true
-	if (PlayAnim):
-		if (SpotType.GetEnumString() == "SUB_STATION"):
-			Ingame_UIManager.GetInstance().PlayDiag(["Operator, we are aproaching a sub-station.","I'd recomend visiting it to look for supplies or any clues regarding the collapse."])
-		if (!Seen):
-			animation_player.play("SpotFound")
-			PlaySound()
-	$VBoxContainer/TextureRect.texture = SpotType.MapIcon
+	call_deferred("AddMapSpot", PlayAnim)
+	
+func AddMapSpot(PlayAnim : bool) -> void:
+	MapPointerManager.GetInstance().AddSpot( self, PlayAnim)
 	Seen = true
 #Called when drone visits a mapspot
 func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
-	visible = true
-	if (PlayAnim):
-		if (SpotType.GetEnumString() == "SUB_STATION"):
-			Ingame_UIManager.GetInstance().PlayDiag(["Operator, one of the drones found a sub-station.","I'd recomend visiting it to look for supplies or any clues regarding the collapse."])
-		if (!Seen):
-			animation_player.play("SpotFound")
-			PlaySound()
-	$VBoxContainer/TextureRect.texture = SpotType.MapIcon
-	Seen = true
+	call_deferred("AddMapSpot", PlayAnim)
+	
 func OnSpotVisitedByDrone() -> void:
 	if (!Analyzed):
 		OnSpotAnalyzed()
-	#if (!Visited):
-		#SpotAproached.emit(self)
-	visible = true
-	
-#func _on_land_button_pressed() -> void:
-	#SpotSearched.emit(self)
-	
-func _on_analyze_button_pressed() -> void:
-	SpotAnalazyed.emit(self)
-
 func OnSpotAnalyzed(PlayAnim : bool = true) ->void:
-	if (PlayAnim):
-		var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate() as AnalyzeNotif
-		add_child(notif)
-		notif.EntityToFollow = self
-		animation_player.play("SpotAnalyzed")
-		PlaySound()
-	$VBoxContainer.visible = true
-	$VBoxContainer/TextureRect2.text = SpotName
+	call_deferred("SpotAnalyzedSignal", PlayAnim)
 	Analyzed = true
+	
+func SpotAnalyzedSignal(PlayAnim: bool)-> void:
+	SpotAnalazyed.emit(PlayAnim)
 
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
@@ -228,19 +164,12 @@ func AreaEntered(area: Area2D):
 			if (!Analyzed):
 				OnSpotAnalyzed()
 		else: if (area.get_collision_layer_value(3)):
-			#if (SpotType.GetEnumString() != "ASTEROID_BELT" or SpotType.FullName != "Black Whole"):
-			#land_button_container.visible = true
-			#set_physics_process(true)
-			
-			#OnSpotVisited()
 			CurrentlyVisiting = true
 			var ship = area.get_parent() as PlayerShip
 			ship.SetCurrentPort(self)
 			SpotAproached.emit(self)
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):
-		#land_button_container.visible = false
-		#set_physics_process(false)
 		CurrentlyVisiting = false
 		var ship = area.get_parent() as PlayerShip
 		ship.RemovePort()

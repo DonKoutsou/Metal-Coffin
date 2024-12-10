@@ -13,24 +13,28 @@
 script = ExtResource("2_1vnci")
 SpotName = "Samothrake"
 EnemyCity = false
+HostilePatrolShipName = ""
 HostileShipName = ""
 
 [sub_resource type="Resource" id="Resource_frucv"]
 script = ExtResource("2_1vnci")
 SpotName = "Kazan"
 EnemyCity = false
+HostilePatrolShipName = ""
 HostileShipName = ""
 
 [sub_resource type="Resource" id="Resource_y2cpb"]
 script = ExtResource("2_1vnci")
 SpotName = "Curd"
 EnemyCity = false
+HostilePatrolShipName = ""
 HostileShipName = ""
 
 [sub_resource type="Resource" id="Resource_gjm2h"]
 script = ExtResource("2_1vnci")
 SpotName = "Hijaz"
 EnemyCity = false
+HostilePatrolShipName = ""
 HostileShipName = ""
 
 [sub_resource type="Resource" id="Resource_3mffu"]

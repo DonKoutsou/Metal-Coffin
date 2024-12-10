@@ -5,12 +5,13 @@ class_name HostileShip
 @export var Speed = 0.5
 @export var RadarRange = 300
 @export var Direction = -1
-@export var EnemyLocatedNotifScene : PackedScene
-@export var EnemyLocatedSound : AudioStream
+
 @export var ShipIcon : Texture
 @export var CaptainIcon : Texture
 @export var ShipName : String
 @export var Hull : float = 30
+@export var Patrol : bool = true
+@export var ShipCallsign : String = "P"
 #var Pursuing = false
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
@@ -36,7 +37,8 @@ func  _ready() -> void:
 	#set_physics_process(false)
 	UpdateVizRange(RadarRange)
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-	
+	if (!Patrol):
+		return
 	var nextcity = cities.find(DestinationCity) + Direction
 	if (nextcity < 0 or nextcity > cities.size() - 1):
 		Direction *= -1
@@ -97,7 +99,7 @@ func _physics_process(_delta: float) -> void:
 	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
 		var interceptionpoint = calculateinterceptionpoint()
 		updatedronecourse(interceptionpoint)
-	else:
+	else : if (Patrol):
 		global_position = $Node2D.global_position
 	for g in VisibleBt:
 		if (g == null):
@@ -160,21 +162,14 @@ func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBt.keys().size() > 1):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
-	var notif = EnemyLocatedNotifScene.instantiate()
-	var sound = DeletableSoundGlobal.new()
-	sound.stream = EnemyLocatedSound
-	sound.volume_db = -10
-	sound.bus = "UI"
-	sound.autoplay = true
-	add_child(sound)
-	add_child(notif)
+	
 	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBt.erase(UnSeenBy)
-	$Radar2/Radar_Range.visible = VisibleBt.size() == 0
+	$Radar2/Radar_Range.visible = VisibleBt.size() > 0
 
 func _on_area_entered(area: Area2D) -> void:
-	if (area.get_parent() == DestinationCity):
+	if (area.get_parent() == DestinationCity and Patrol):
 		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 		
 		var nextcity = cities.find(DestinationCity) + Direction

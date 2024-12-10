@@ -1,5 +1,7 @@
 extends Control
 
+@export var PositionOnStart : bool = true
+
 var SteeringDir : float = 0.0
 
 var previous_mouse_angle = 0.0
@@ -9,7 +11,8 @@ signal SteeringDitChanged(NewValue : float)
 var DistanceTraveled = 0
 
 func _ready() -> void:
-	position = Vector2(-5 , get_viewport_rect().size.y + 8)
+	if (PositionOnStart):
+		position = Vector2(-5 , get_viewport_rect().size.y + 8)
 
 func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))

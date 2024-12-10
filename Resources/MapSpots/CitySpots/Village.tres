@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=15 format=3 uid="uid://df37gonu46vbl"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=26 format=3 uid="uid://df37gonu46vbl"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_jl7m7"]
 [ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="2_sgbgx"]
@@ -11,12 +11,23 @@
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_vmkke"]
 [ext_resource type="Resource" uid="uid://ck7jx6746yvdp" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Sirkan.tres" id="6_65daw"]
 [ext_resource type="Resource" uid="uid://d0f35jq2otwcu" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Zarikada.tres" id="7_0pbcu"]
+[ext_resource type="Resource" uid="uid://64ow5fed2qca" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Zastan.tres" id="8_7g68p"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_jh1el"]
+[ext_resource type="Resource" uid="uid://cy8jghy0roqqn" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Kiva.tres" id="9_i5pti"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_ex7ij"]
+[ext_resource type="Resource" uid="uid://dyh1g0mso2lw2" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Kordan.tres" id="10_jk2bs"]
+[ext_resource type="Resource" uid="uid://ckwax188raj57" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Kaliza.tres" id="11_xaq2r"]
+[ext_resource type="Resource" uid="uid://cdo0equ5nufta" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Varuda.tres" id="12_gewg4"]
+[ext_resource type="Resource" uid="uid://cgjwtpwl48q47" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Brokanta.tres" id="13_mr6b2"]
+[ext_resource type="Resource" uid="uid://cj7fvkh62wscs" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Jiveria.tres" id="14_egjsd"]
+[ext_resource type="Resource" uid="uid://c6a7qps57qllf" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Zakri.tres" id="15_2pkn4"]
+[ext_resource type="Resource" uid="uid://1ha1dp4lfskf" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Lament.tres" id="16_hubos"]
+[ext_resource type="Resource" uid="uid://cijjnpnnmoigc" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Regan.tres" id="17_a77xt"]
+[ext_resource type="Resource" uid="uid://doq7bspt0uqb4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Moldi.tres" id="18_tsgiu"]
 
 [sub_resource type="Resource" id="Resource_3mffu"]
 script = ExtResource("4_ha07c")
-PossibleIds = Array[ExtResource("3_i4484")]([ExtResource("3_b6ce5"), ExtResource("3_snnyn"), ExtResource("5_6lban"), ExtResource("6_65daw"), ExtResource("7_0pbcu")])
+PossibleIds = Array[ExtResource("3_i4484")]([ExtResource("3_b6ce5"), ExtResource("3_snnyn"), ExtResource("5_6lban"), ExtResource("6_65daw"), ExtResource("7_0pbcu"), ExtResource("8_7g68p"), ExtResource("9_i5pti"), ExtResource("10_jk2bs"), ExtResource("11_xaq2r"), ExtResource("12_gewg4"), ExtResource("13_mr6b2"), ExtResource("14_egjsd"), ExtResource("15_2pkn4"), ExtResource("16_hubos"), ExtResource("17_a77xt"), ExtResource("18_tsgiu")])
 DataName = ""
 
 [resource]

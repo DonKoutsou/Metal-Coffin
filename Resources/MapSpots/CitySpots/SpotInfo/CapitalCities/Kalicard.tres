@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://kjwdfwc0h4uf"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://kjwdfwc0h4uf"]
 
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_5djak"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_jmsga"]
+[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="2_ec803"]
 
 [resource]
 script = ExtResource("1_jmsga")
 SpotName = "Kalicard"
 EnemyCity = true
-HostileShipScene = ExtResource("1_5djak")
-HostileShipName = "Karmuk"
+HostilePatrolShipScene = ExtResource("1_5djak")
+HostilePatrolShipName = "Karmuk"
+HostileShipScene = ExtResource("2_ec803")
+HostileShipName = "Kriz"

@@ -149,12 +149,12 @@ func GenerateMap() -> void:
 			type = TownTypes.pick_random()
 		#SET THE TYPE
 		#sc.SetSpotData(type)
-		sc = type.instantiate()
+		sc = type.instantiate() as Town
 		sc.connect("TownSpotAproached", Arrival)
 		sc.connect("TownSpotLanded", Land)
 		#sc.connect("SpotSearched", SearchLocation)
 		#sc.connect("SpotAnalazyed", AnalyzeLocation)
-		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
+		
 		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
 		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
@@ -164,7 +164,9 @@ func GenerateMap() -> void:
 		while (HasClose(pos)):
 			pos = GetNextRandomPos(Prevpos, Distanceval)
 		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
-		sc.position = pos
+		sc.Pos = pos
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
+		
 		SpotList.append(sc)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
@@ -313,8 +315,8 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		sc.LoadingData = true
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
 		#sc.connect("MapPressed", Arrival)
-		sc.connect("SpotAproached", Arrival)
-		sc.connect("SpotSearched", SearchLocation)
+		sc.connect("TownSpotAproached", Arrival)
+		sc.connect("TownSpotLanded", Land)
 		#sc.connect("SpotAnalazyed", AnalyzeLocation)
 		#var type = dat.SpotType
 		#sc.SetSpotData(type)

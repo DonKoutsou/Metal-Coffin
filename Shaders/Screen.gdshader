@@ -32,13 +32,13 @@ void fragment(  )
 
     //col = clamp(col*0.6+0.4*col*col*1.0,0.0,1.0);
 
-    float vig = (0.0 + 1.0*16.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y));
-	col *= vec3(pow(vig,0.8));
+    float vig = (16.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y));
+	col *= vec3(pow(vig,2));
 
 	col *= line_color.rgb;
 	col *= 15.0;
 
-	float scans = clamp( 0.35+0.35*sin(3.5*TIME+uv.y*iResolution.y*2.5), 0.0, 1.0);
+	float scans = clamp( 0.35+0.35*sin(3.5*TIME+uv.y*iResolution.y*3.0), 0.0, 1.0);
 
 	float s = pow(scans,1);
 	col = col*vec3( 0.4+0.7*s) ;

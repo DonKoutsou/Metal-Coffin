@@ -4,14 +4,15 @@ class_name Town
 @export var SpotScene: PackedScene
 
 var LoadingData : bool = false
-
+var Pos : Vector2
 signal TownSpotAproached(spot : MapSpot)
 #signal SpotSearched(spot : MapSpot)
-signal TownSpotAnalazyed(spot : MapSpot)
+#signal TownSpotAnalazyed(spot : MapSpot)
 signal TownSpotLanded(spot : MapSpot)
 
 func _ready() -> void:
 	if (!LoadingData):
+		position = Pos
 		rotation = randf_range(0, 360)
 		GenerateCity()
 	
@@ -25,9 +26,11 @@ func GenerateCity() -> void:
 
 		sc.connect("SpotAproached", _TownSpotApreached)
 		#sc.connect("SpotSearched", TownSpotSearched)
-		sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
+		#sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
 		sc.connect("SpotLanded", _TownSpotLanded)
-		
+		var pos = g.position
+		sc.position = pos
+		g.replace_by(sc)
 		sc.SetSpotData(spottype)
 		if (spottype.GetEnumString() == "CITY_CENTER"):
 			centername = sc.SpotName + " City"
@@ -35,16 +38,17 @@ func GenerateCity() -> void:
 			centername = sc.SpotName
 		else :if (centername != ""):
 			sc.SpotName = centername + " " + spottype.FullName
-		var pos = g.position
-		g.replace_by(sc)
-		sc.position = pos
+		
+		
 		g.free()
 	pass
 func SpawnEnemies():
 	for g in $CitySpots.get_children() :
 		var spot = g as MapSpot
 		if (spot.HostilePatrolToSpawn != null):
-			spot.SpawnEnemyShip()
+			spot.SpawnEnemyPatrol()
+		if (spot.HostileGarison != null):
+			spot.SpawnEnemyGarison()
 func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
 	datas.TownLoc = position
@@ -64,7 +68,7 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		var sc = SpotScene.instantiate() as MapSpot
 		sc.connect("SpotAproached", _TownSpotApreached)
 		#sc.connect("SpotSearched", TownSpotSearched)
-		sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
+		#sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
 		sc.connect("SpotLanded", _TownSpotLanded)
 		var type = spotdat.SpotType
 		sc.SetSpotData(type)
@@ -91,7 +95,7 @@ func _TownSpotApreached(spot : MapSpot):
 	TownSpotAproached.emit(spot)
 #func TownSpotSearched(spot : MapSpot):
 	#SpotSearched.emit(spot)
-func _TownSpotAnalyzed(spot : MapSpot):
-	TownSpotAnalazyed.emit(spot)
+#func _TownSpotAnalyzed(spot : MapSpot):
+	#TownSpotAnalazyed.emit(spot)
 func _TownSpotLanded(spot : MapSpot):
 	TownSpotLanded.emit(spot)

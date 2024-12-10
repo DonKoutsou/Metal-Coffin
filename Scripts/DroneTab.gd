@@ -94,21 +94,21 @@ var SteeringDir : float = 0.0
 #signal MouseEntered()
 #signal MouseExited()
 
-func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
-	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
-	var prevsteer = SteeringDir
+func UpdateSteer(RelativeRot : float):
+	#var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
+	#var prevsteer = SteeringDir
 	
-	if (EvPos.x < $Control/Node2D.position.x):
-		$Control/Node2D/Sprite2D.rotation += rel.x + -rel.y
-		SteeringDir += (rel.x + -rel.y) * 10
-	else :
-		$Control/Node2D/Sprite2D.rotation += rel.x + rel.y
-		SteeringDir += (rel.x + rel.y) * 10
-	if (SteeringDir != prevsteer):
-		DroneDockEventH.DroneDirectionChanged(SteeringDir / 10)
-	if (!$Control/Node2D/AudioStreamPlayer.playing):
-		$Control/Node2D/AudioStreamPlayer.playing = true
-	Input.vibrate_handheld(5)
+	#if (EvPos.x < $Control/Node2D.position.x):
+		#$Control/Node2D/Sprite2D.rotation += rel.x + -rel.y
+		#SteeringDir += (rel.x + -rel.y) * 10
+	#else :
+		#$Control/Node2D/Sprite2D.rotation += rel.x + rel.y
+		#SteeringDir += (rel.x + rel.y) * 10
+	#if (SteeringDir != prevsteer):
+	DroneDockEventH.DroneDirectionChanged(RelativeRot / 10)
+	#if (!$Control/Node2D/AudioStreamPlayer.playing):
+		#$Control/Node2D/AudioStreamPlayer.playing = true
+	Input.vibrate_handheld(50)
 var RangeDir : float = 0.0
 func UpdateRange(RelativeRot : Vector2, EvPos : Vector2):
 	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
@@ -133,11 +133,11 @@ func UpdateDroneRange(Rang : float):
 	else:
 		ProgressCrewSelect()
 	
-func _on_area_2d_input_event(event: InputEvent) -> void:
-	if (event is InputEventScreenDrag):
-		UpdateSteer(event.relative, event.position)
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		UpdateSteer(event.relative, event.position)
+#func _on_area_2d_input_event(event: InputEvent) -> void:
+	#if (event is InputEventScreenDrag):
+		#UpdateSteer(event.relative, event.position)
+	#if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		#UpdateSteer(event.relative, event.position)
 		
 func UpdateCrewSelect(Select : int = 0):
 	if (DockedDrones.size() > Select):

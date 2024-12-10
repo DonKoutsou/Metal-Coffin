@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=40 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="16_4wqve"]
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
 [ext_resource type="PackedScene" uid="uid://1j0ghufup7v" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_qxruq"]
+[ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="20_4fmmi"]
 [ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="26_y7o3o"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
@@ -25,7 +26,6 @@
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
-[ext_resource type="Shader" path="res://Shaders/gauge.gdshader" id="33_ssjx5"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="35_y1n03"]
@@ -63,117 +63,12 @@ shader_parameter/view_size = Vector2(100, 100)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f561"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 42
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpdjg"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 80
-corner_radius_top_right = 80
-corner_radius_bottom_right = 80
-corner_radius_bottom_left = 80
-corner_detail = 20
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8eave"]
-shader = ExtResource("33_ssjx5")
-shader_parameter/indicator_color = Color(0, 0.8, 1, 1)
-shader_parameter/border_color = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/centre_color = Color(0.1, 0.1, 0.1, 1)
-shader_parameter/region1_color = Color(0, 1, 0, 1)
-shader_parameter/region2_color = Color(1, 0.6, 0, 1)
-shader_parameter/region3_color = Color(1, 0.2, 0.2, 1)
-shader_parameter/scale_mark_color = Color(0.0267215, 0.0267215, 0.0267215, 1)
-shader_parameter/show_edges = false
-shader_parameter/indicator_angle = 0.069
-shader_parameter/indicator_length = 0.781
-shader_parameter/indicator_width = 0.003
-shader_parameter/border_width = 0.0
-shader_parameter/centre_width = 0.078
-shader_parameter/region1 = 0.25
-shader_parameter/region2 = 0.555
-shader_parameter/region3 = 0.745
-shader_parameter/regions_end = 1.0
-shader_parameter/scale_marks = 20.0
-shader_parameter/major_scale_marks = 8.0
-shader_parameter/scale_mark_width = 0.01
-shader_parameter/scale_minor_outer = 0.769
-shader_parameter/scale_major_outer = 0.93
-shader_parameter/scale_inner = 0.642
-
 [sub_resource type="Animation" id="Animation_2vpkr"]
 resource_name = "FadeIn"
 length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/Screen2:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.366667, 0.666667, 1, 1.5, 1.83333, 2.76667, 4.96667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UI/Screen2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_wryq0"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/Screen2:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UI/Screen2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_il0tn"]
 _data = {
@@ -251,21 +146,6 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_nb103")
 stretch_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2500.0
-offset_top = -2500.0
-offset_right = 9.99963e+07
-offset_bottom = 1852.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-
 [node name="MapLines" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 
 [node name="MapSpots" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
@@ -336,6 +216,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("18_ahli7")
 MarkerScene = ExtResource("19_qxruq")
+MapSpotMarkerScene = ExtResource("20_4fmmi")
 FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
 EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 
@@ -349,28 +230,14 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Screen" type="ColorRect" parent="UI"]
-visible = false
 material = ExtResource("29_q8i0i")
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="Screen2" type="ColorRect" parent="UI"]
-visible = false
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1924.0
-offset_top = -1176.0
-offset_right = 3076.0
-offset_bottom = 3824.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
 
 [node name="Panel2" type="TextureRect" parent="UI"]
 custom_minimum_size = Vector2(0, 38.045)
@@ -378,77 +245,14 @@ layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -97.0
-offset_top = -61.0
-offset_right = 106.0
+offset_top = -50.0
+offset_right = 101.0
 offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("33_4takp")
 expand_mode = 1
-
-[node name="Panel3" type="TextureRect" parent="UI/Panel2"]
-modulate = Color(0, 0, 0, 0.328)
-show_behind_parent = true
-custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 29.0
-offset_top = 26.0
-offset_right = -31.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("33_4takp")
-expand_mode = 1
-
-[node name="Panel" type="Panel" parent="UI"]
-visible = false
-layout_mode = 2
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -260.0
-offset_bottom = -142.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_1f561")
-
-[node name="Panel" type="Panel" parent="UI/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = -55.0
-offset_right = 55.0
-offset_bottom = 55.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_dpdjg")
-
-[node name="ColorRect" type="ColorRect" parent="UI/Panel/Panel"]
-material = SubResource("ShaderMaterial_8eave")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.5
-offset_top = 5.0
-offset_right = -5.5
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(50, 50)
 
 [node name="SteeringWheel" parent="UI" instance=ExtResource("35_y1n03")]
 layout_mode = 2

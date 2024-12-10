@@ -115,8 +115,8 @@ grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_mtsvb")
-volume_db = -10.0
-pitch_scale = 1.28
+volume_db = -5.0
+pitch_scale = 1.03
 bus = &"MapSounds"
 
 [connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

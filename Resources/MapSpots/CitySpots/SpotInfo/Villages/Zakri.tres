@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://c6a7qps57qllf"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_h67cn"]
+
+[resource]
+script = ExtResource("1_h67cn")
+SpotName = "Zakri"
+EnemyCity = false
+HostileShipName = ""

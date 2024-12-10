@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://cj7fvkh62wscs"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_p1i17"]
+
+[resource]
+script = ExtResource("1_p1i17")
+SpotName = "Jiveria"
+EnemyCity = false
+HostileShipName = ""

@@ -1,13 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://b1q7brpw8cc2p"]
+[gd_scene load_steps=27 format=3 uid="uid://b1q7brpw8cc2p"]
 
 [ext_resource type="Script" path="res://Scripts/DroneTab.gd" id="1_v0de6"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="2_35lsn"]
 [ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="3_1jdl8"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="4_cq5o4"]
-[ext_resource type="BitMap" uid="uid://ce2ule7t3nylb" path="res://Assets/plane_Wheel_BaseColorMaskSmol.png" id="5_vvi5k"]
 [ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="5_wmv0e"]
-[ext_resource type="Texture2D" uid="uid://brrfictufcbr6" path="res://Assets/UIPiecies/steer_Camera 1.png" id="6_oohfm"]
-[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="8_nr8c2"]
+[ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="9_etxkl"]
 [ext_resource type="PackedScene" uid="uid://bl1t8w4ot467w" path="res://Scenes/AnimatedButton.tscn" id="10_igd2c"]
 [ext_resource type="Texture2D" uid="uid://bj2r2y882vpmo" path="res://Assets/UIPiecies/dissarmButton_Camera 1.png" id="11_fddnp"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="11_k3wxo"]
@@ -192,51 +190,14 @@ mouse_filter = 2
 [node name="Node2D" type="Control" parent="Control"]
 anchors_preset = 0
 offset_left = 21.0
-offset_top = 178.0
+offset_top = 73.0
 offset_right = 21.0
-offset_bottom = 178.0
+offset_bottom = 73.0
 
-[node name="TextureButton" type="TextureButton" parent="Control/Node2D"]
+[node name="SteeringWheel" parent="Control/Node2D" instance=ExtResource("9_etxkl")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -180.0
-offset_right = 180.0
-offset_bottom = 180.0
-grow_horizontal = 2
-grow_vertical = 2
-action_mode = 0
-texture_click_mask = ExtResource("5_vvi5k")
-stretch_mode = 0
-
-[node name="Sprite2D" type="TextureRect" parent="Control/Node2D"]
-texture_filter = 6
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -180.0
-offset_right = 180.0
-offset_bottom = 180.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(180, 180)
-mouse_filter = 2
-texture = ExtResource("6_oohfm")
-expand_mode = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/Node2D"]
-stream = ExtResource("8_nr8c2")
-volume_db = -15.0
-pitch_scale = 0.76
-bus = &"MapSounds"
+scale = Vector2(0.6, 0.6)
+PositionOnStart = false
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
 visible = false
@@ -425,7 +386,7 @@ offset_right = 71.0
 offset_bottom = 46.0
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_toggle_drone_tab_pressed"]
-[connection signal="gui_input" from="Control/Node2D/TextureButton" to="." method="_on_area_2d_input_event"]
+[connection signal="SteeringDitChanged" from="Control/Node2D/SteeringWheel" to="." method="UpdateSteer"]
 [connection signal="toggled" from="Control/Control/Arm" to="." method="_on_arm_drone_button_pressed"]
 [connection signal="pressed" from="Control/Control/Dissarm" to="." method="_on_dissarm_drone_button_2_pressed"]
 [connection signal="toggled" from="Control/Control/Dissarm" to="." method="_on_arm_drone_button_pressed"]

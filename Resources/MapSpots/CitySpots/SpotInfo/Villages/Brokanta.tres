@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://cgjwtpwl48q47"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_o5q8o"]
+
+[resource]
+script = ExtResource("1_o5q8o")
+SpotName = "Brokanta"
+EnemyCity = false
+HostileShipName = ""

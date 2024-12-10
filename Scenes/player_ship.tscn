@@ -1,11 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=36 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="2_2w4bb"]
 [ext_resource type="Texture2D" uid="uid://sulgpuieqkg0" path="res://Assets/CaptainPortraits/Captain7.png" id="2_lgcv4"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/LowLeftNotif.tscn" id="3_2nyf5"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_c5u4x"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_vt3yq"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="6_layd2"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="7_8gcrc"]
@@ -171,27 +169,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
-
-[node name="Label" type="Label" parent="Fuel_Range"]
-material = SubResource("CanvasItemMaterial_vppi8")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 108.0
-offset_right = 193.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_vt3yq")
-theme_override_colors/font_color = Color(0.762818, 0.658854, 0.0822073, 1)
-theme_override_fonts/font = ExtResource("3_c5u4x")
-theme_override_font_sizes/font_size = 14
-text = "Fuel Range"
-horizontal_alignment = 2
-vertical_alignment = 1
 
 [node name="Analyzer" type="Area2D" parent="."]
 rotation = 0.368904

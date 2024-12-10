@@ -35,6 +35,7 @@ script = ExtResource("2_by1cj")
 SpotName = "Airport"
 Event = SubResource("Resource_2wqaq")
 EnemyCity = false
+HostilePatrolShipName = ""
 HostileShipName = ""
 
 [sub_resource type="Resource" id="Resource_bo2qf"]

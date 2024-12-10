@@ -84,6 +84,7 @@ func EnableDrone():
 		GetShipAnalayzerArea().monitorable = true
 	GetShipAcelerationNode().position.x = Speed
 	$ShipBody/CollisionShape2D.disabled = false
+	$PointLight2D.visible = true
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -153,14 +154,7 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		var spot = area.get_parent() as MapSpot
 		if (spot.CurrentlyVisiting):
 			return
-		#if (spot.SpotType.FullName != "Black Whole"):
-			#for g in Cpt.GetStatValue("INVENTORY_CAPACITY"):
-				#StoredItem.append_array(spot.SpotType.GetSpotDrop())
-		#rotation = 0.0
-		#CommingBack = true
-		#Docked = false
-		#Notify("Drone returning to base")
-		#$Line2D.visible = true
+
 		if (!spot.Seen):
 			spot.OnSpotSeenByDrone()
 		spot.OnSpotVisitedByDrone()
@@ -170,6 +164,7 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		CommingBack = false
 		Docked = true
 		$ShipBody/CollisionShape2D.disabled = true
+		$PointLight2D.visible = false
 		GetShipTrajecoryLine().visible = false
 		GetShipIconPivot().rotation = 0.0
 		Inventory.GetInstance().AddItems(StoredItem)

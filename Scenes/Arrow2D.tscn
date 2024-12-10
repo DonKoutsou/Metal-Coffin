@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://duuajeflpkuue"]
+
+[ext_resource type="Script" path="res://Arrow2D.gd" id="1_u1n72"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(418, 349)
+script = ExtResource("1_u1n72")
+target = Vector2(80, 50)
