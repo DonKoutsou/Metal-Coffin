@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ppxrnerwnufn"]
+[gd_scene load_steps=8 format=3 uid="uid://cr5oh7xn6oug6"]
 
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_d4uo5"]
-[ext_resource type="Script" path="res://Scripts/analyzed_notif.gd" id="1_pb8l4"]
-[ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="3_pnijm"]
+[ext_resource type="Script" path="res://Scripts/analyzed_notif.gd" id="1_qlnai"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_n6bc5"]
+[ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="4_ahysi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
 light_mode = 1
@@ -12,26 +12,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Label:visible")
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("Control/Label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_w7jjx"]
@@ -41,26 +41,26 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Label:visible")
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false, true, false, true, false, true, false, true, false, true, false, true]
+"values": [true, false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("Control/Label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [false, true, false]
+"values": [true, false, true, false, true, false, true, false, true, false, true, false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_he68h"]
@@ -75,13 +75,12 @@ material = SubResource("CanvasItemMaterial_k1nir")
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
-script = ExtResource("1_pb8l4")
+script = ExtResource("1_qlnai")
 
 [node name="Line2D" type="Line2D" parent="."]
 use_parent_material = true
-points = PackedVector2Array(0, -160, 0, -50)
+points = PackedVector2Array(0, -162, 0, 0)
 width = 2.0
-default_color = Color(0.0486369, 0.645335, 0.0400367, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
@@ -90,7 +89,6 @@ use_parent_material = true
 anchors_preset = 0
 
 [node name="Label" type="Label" parent="Control" groups=["MapInfo"]]
-modulate = Color(0.0486369, 0.645335, 0.0400367, 1)
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -98,17 +96,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -39.0
+offset_left = -65.0
 offset_top = -200.0
-offset_right = 39.0
-offset_bottom = -159.0
+offset_right = 65.0
+offset_bottom = -153.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("1_d4uo5")
+theme_override_fonts/font = ExtResource("3_n6bc5")
 theme_override_font_sizes/font_size = 16
-text = "Location Analyzed"
+text = "Drone Returning To Base"
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -116,7 +115,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_pnijm")
+stream = ExtResource("4_ahysi")
 volume_db = -25.0
 pitch_scale = 0.8
 bus = &"MapSounds"

@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://1j0ghufup7v"]
+[gd_scene load_steps=9 format=3 uid="uid://c3l8v8l2e2pkt"]
 
-[ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_xgfcr"]
+[ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_bq8aw"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_mmvkc"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
+[ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
+[ext_resource type="PackedScene" uid="uid://cr5oh7xn6oug6" path="res://Scenes/DroneReturnNotif.tscn" id="4_yqhjs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1v2q8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gah6h"]
 bg_color = Color(1, 1, 1, 1)
@@ -34,78 +38,87 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_xgfcr")
+script = ExtResource("1_y30vi")
 EnemyLocatedNotifScene = ExtResource("2_bq8aw")
 EnemyLocatedSound = ExtResource("3_6yg5x")
+DroneReturnNotif = ExtResource("4_yqhjs")
+LowleftNotif = ExtResource("3_74srq")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-4, -5)
+scale = Vector2(3, 2.9)
+
+[node name="Line2D" type="Line2D" parent="."]
+use_parent_material = true
+points = PackedVector2Array(0, -94, 0, -38)
+width = 4.0
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Control" type="Control" parent="."]
 use_parent_material = true
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="Line2D" type="Line2D" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
 use_parent_material = true
-position = Vector2(-7, -8)
-points = PackedVector2Array(-152, -60, -42, -60, 0, 0)
-width = 2.0
-begin_cap_mode = 2
-end_cap_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.465
+offset_top = -200.0
+offset_right = 69.535
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1v2q8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
 use_parent_material = true
-layout_mode = 0
-offset_left = -330.0
-offset_top = -77.0
-offset_right = -161.0
-offset_bottom = -12.0
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
 
-[node name="ShipName" type="Label" parent="Control/VBoxContainer"]
+[node name="ShipName" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("2_mmvkc")
+theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 16
 text = "Quifsa"
-horizontal_alignment = 2
 vertical_alignment = 1
-autowrap_mode = 2
 
-[node name="ShipName2" type="Label" parent="Control/VBoxContainer"]
+[node name="ShipName2" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("2_mmvkc")
+theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 16
 text = "SPEED 100"
-horizontal_alignment = 2
 vertical_alignment = 1
-autowrap_mode = 2
 
-[node name="TimeSeen" type="Label" parent="Control/VBoxContainer"]
+[node name="TimeSeen" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("2_mmvkc")
+theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 16
 text = "Last Seen 1h ago"
-horizontal_alignment = 2
 vertical_alignment = 1
-autowrap_mode = 2
 
-[node name="Threat" type="Label" parent="Control/VBoxContainer"]
+[node name="Threat" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("2_mmvkc")
+theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 16
 text = "Threat Level : 10"
-horizontal_alignment = 2
 vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Control"]
-position = Vector2(-235.5, -29)
-scale = Vector2(7.95, 5)
 
 [node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
 use_parent_material = true
@@ -126,16 +139,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_gah6h")
 
 [node name="ShipSymbol" type="Label" parent="."]
 use_parent_material = true
+layout_mode = 0
 offset_top = -35.0
 offset_right = 1.0
 offset_bottom = -16.0
 theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("2_mmvkc")
+theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 16
 text = "P"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[connection signal="screen_entered" from="Control/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="Control/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -4,7 +4,7 @@ class_name PlayerShip
 
 @export var LowStatsToNotifyAbout : Array[String]
 @export var CaptainIcon : Texture
-@export var LowleftNotif : PackedScene
+
 #@export var Missile : PackedScene
 
 var ShipType : BaseShip
@@ -24,6 +24,8 @@ signal ShipStopped
 signal ShipAccelerating
 signal ShipForceStopped
 signal ShipDeparted()
+signal ShipDockActions(Stats : String, t : bool, timel : float)
+signal StatLow(StatName : String)
 
 static var Instance : PlayerShip
 
@@ -132,25 +134,7 @@ func ShowingNotif() -> bool:
 func OnStatLow(StatName : String) -> void:
 	if (!LowStatsToNotifyAbout.has(StatName)):
 		return
-	var notif = (load("res://Scenes/LowStatNotif.tscn") as PackedScene).instantiate() as LowStatNotif
-	notif.SetStatData(StatName)
-	notif.rotation = -rotation
-	notif.EntityToFollow = self
-	#notif.camera = $"../../Camera2D"
-	$Notifications.add_child(notif)
-	
-	#Ingame_UIManager.GetInstance().AddUI(notif)
-func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
-	var notif : LowLeftNotif
-	for g in $Notifications.get_children():
-		if g is LowLeftNotif:
-			g.ToggleStat(Stats, t, timel)
-			return
-	if (t):
-		notif = LowleftNotif.instantiate() as LowLeftNotif
-		notif.ToggleStat(Stats, t, timel)
-		connect("ShipDeparted", notif.OnShipDeparted)
-		$Notifications.add_child(notif)
+	StatLow.emit(StatName)
 
 func _physics_process(_delta: float) -> void:
 	if (Paused):
@@ -161,23 +145,29 @@ func _physics_process(_delta: float) -> void:
 			if (CanRefuel):
 				if (!ShipData.GetInstance().IsResourceFull("FUEL")):
 					var timeleft = (ShipData.GetInstance().GetStat("FUEL").GetStat() - ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()) / 0.05 / 60
-					ToggleShowRefuel("Refueling", true, roundi(timeleft))
+					ShipDockActions.emit("Refueling", true, roundi(timeleft))
+					#ToggleShowRefuel("Refueling", true, roundi(timeleft))
 					ShipData.GetInstance().RefilResource("FUEL", 0.05)
 				else:
-					ToggleShowRefuel("Refueling", false)
+					ShipDockActions.emit("Refueling", false, 0)
+					#ToggleShowRefuel("Refueling", false)
 			if (CanRepair):
 				if (!ShipData.GetInstance().IsResourceFull("HULL")):
 					var timeleft = (ShipData.GetInstance().GetStat("HULL").GetStat() - ShipData.GetInstance().GetStat("HULL").GetCurrentValue()) / 0.05 / 60
-					ToggleShowRefuel("Repairing", true, roundi(timeleft))
+					ShipDockActions.emit("Repairing", true, roundi(timeleft))
+					#ToggleShowRefuel("Repairing", true, roundi(timeleft))
 					ShipData.GetInstance().RefilResource("HULL", 0.05)
 				else:
-					ToggleShowRefuel("Repairing", false)
+					ShipDockActions.emit("Repairing", false, 0)
+					#ToggleShowRefuel("Repairing", false)
 			if (CanUpgrade):
 				var inv = Inventory.GetInstance()
 				if (inv.UpgradedItem != null):
-					ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+					#ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+					ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
 				else:
-					ToggleShowRefuel("Upgrading", false)
+					ShipDockActions.emit("Upgrading", false, 0)
+					#ToggleShowRefuel("Upgrading", false)
 		return
 	var fuel = $Node2D.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
 	var Dat = ShipData.GetInstance()

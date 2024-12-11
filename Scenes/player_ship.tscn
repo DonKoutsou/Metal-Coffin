@@ -1,9 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=35 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="2_2w4bb"]
 [ext_resource type="Texture2D" uid="uid://sulgpuieqkg0" path="res://Assets/CaptainPortraits/Captain7.png" id="2_lgcv4"]
-[ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/LowLeftNotif.tscn" id="3_2nyf5"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="6_layd2"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="7_8gcrc"]
@@ -110,7 +109,6 @@ position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 CaptainIcon = ExtResource("2_lgcv4")
-LowleftNotif = ExtResource("3_2nyf5")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_bweje")

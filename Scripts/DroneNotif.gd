@@ -1,7 +1,6 @@
 extends Control
 
 class_name DroneNotif
-var EntityToFollow : Node2D
 var camera : Camera2D
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +14,6 @@ func SetNotifText(Stat : String) -> void:
 	$Label.text = Stat
 
 func _physics_process(_delta: float) -> void:
-	rotation = -EntityToFollow.rotation
+	#rotation = -EntityToFollow.rotation
 	#global_position = EntityToFollow.global_position
 	scale = Vector2(1,1) / camera.zoom

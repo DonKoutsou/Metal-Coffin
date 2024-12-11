@@ -16,6 +16,8 @@ var Speed : float
 var Paused = false
 var Detectable = true
 
+signal DroneReturning
+
 func  _ready() -> void:
 	#Set ships speed
 	Speed = Cpt.GetStatValue("SPEED")
@@ -107,7 +109,7 @@ func _physics_process(_delta: float) -> void:
 		if (Fuel <= 0):
 			rotation = 0.0
 			CommingBack = true
-			Notify("Drone returning to base")
+			DroneReturning.emit()
 			Docked = false
 			#$Line2D.visible = true
 
@@ -132,12 +134,6 @@ func updatedronecourse(interception_point: Vector2):
 	# Move the drone towards the interception point
 	position += direction * GetShipAcelerationNode().position.x
 	GetShipTrajecoryLine().set_point_position(1, interception_point - position)
-
-func Notify(NotificationText : String)-> void:
-	var notif = DroneNotifScene.instantiate() as DroneNotif
-	notif.SetNotifText(NotificationText)
-	notif.EntityToFollow = self
-	add_child(notif)
 
 func DissableMonitoring():
 	GetShipBodyArea().monitoring = false

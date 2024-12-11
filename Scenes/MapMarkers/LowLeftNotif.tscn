@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://c54mqk4mcr360"]
+
+[ext_resource type="Script" path="res://Scenes/low_left_notif.gd" id="1_er3bd"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_ok2n5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
+light_mode = 1
+
+[node name="Control" type="Control"]
+z_index = 2
+material = SubResource("CanvasItemMaterial_k1nir")
+layout_mode = 3
+anchors_preset = 0
+offset_bottom = 90.0
+size_flags_horizontal = 0
+mouse_filter = 2
+script = ExtResource("1_er3bd")
+
+[node name="Line2D" type="Line2D" parent="."]
+use_parent_material = true
+points = PackedVector2Array(0, -162, 0, 0)
+width = 2.0
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Control" type="Control" parent="."]
+use_parent_material = true
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="Control" groups=["MapInfo"]]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -200.0
+offset_right = 39.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("3_ok2n5")
+theme_override_font_sizes/font_size = 16
+text = "Location Analyzed"
+vertical_alignment = 1

@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://uxdjefxtg38h"]
+[gd_scene load_steps=8 format=3 uid="uid://uxdjefxtg38h"]
 
 [ext_resource type="Script" path="res://Scripts/analyzed_notif.gd" id="1_atnt8"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_bf78q"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_cdcep"]
 [ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="4_8fbfj"]
 
@@ -13,19 +12,19 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:size")
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 73)]
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:visible")
+tracks/1/path = NodePath("Control/Label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,58 +33,34 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_w7jjx"]
 resource_name = "Show"
-length = 4.0
+length = 2.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:size")
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 90), Vector2(233, 90), Vector2(233, 90), Vector2(0, 90)]
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:visible")
+tracks/1/path = NodePath("Control/Label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [true, false, true, false, true, false, true, false, true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.9, 1, 3.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
+"values": [true, false, true, false, true, false, true, false, true, false, true, false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_he68h"]
@@ -97,34 +72,36 @@ _data = {
 [node name="Control" type="Control"]
 z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
-clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_top = -90.0
-offset_bottom = -17.0
-pivot_offset = Vector2(0, 90)
 mouse_filter = 2
 script = ExtResource("1_atnt8")
-Rotate = true
 
 [node name="Line2D" type="Line2D" parent="."]
 use_parent_material = true
-position = Vector2(0, 87)
-points = PackedVector2Array(152, -60, 42, -60, 0, 0)
+points = PackedVector2Array(0, -162, 0, 0)
 width = 2.0
-default_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="."]
-modulate = Color(0.983526, 0.0936426, 7.70092e-07, 1)
+[node name="Control" type="Control" parent="."]
 use_parent_material = true
-layout_mode = 0
-offset_left = 155.0
-offset_top = 13.0
-offset_right = 233.0
-offset_bottom = 60.0
-theme = ExtResource("2_bf78q")
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="Control" groups=["MapInfo"]]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -200.0
+offset_right = 49.0
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("3_cdcep")
 theme_override_font_sizes/font_size = 16

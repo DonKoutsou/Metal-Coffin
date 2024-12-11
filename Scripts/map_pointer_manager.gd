@@ -36,12 +36,18 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	else:
 		marker.modulate = EnemyColor
 	
+	if (Ship is PlayerShip):
+		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
+		Ship.connect("ShipDeparted", marker.OnShipDeparted)
+		Ship.connect("StatLow", marker.OnStatLow)
+	
 	if (Ship is HostileShip):
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.ShipName, Ship.ShipCallsign ,Ship.GetSpeed())
 		marker.PlayHostileShipNotif()
 	
 	if (Ship is Drone):
+		Ship.connect("DroneReturning", marker.DroneReturning)
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetSpeed())
 	
 	if (Ship is Missile):
@@ -77,25 +83,26 @@ func RemoveShip(Ship : Node2D) -> void:
 	Ships.remove_at(index)
 var d = 0.1
 func _physics_process(delta: float) -> void:
-	#var Mapinfos = get_tree().get_nodes_in_group("MapInfo")
-	
-	#for g in Mapinfos:
-		#for z in Mapinfos:
-			#if (g == z):
-				#continue
-			#var control1 = g as Control
-			#if (!control1.visible):
-				#continue
-			#var r1 = control1.get_rect()
+	var Mapinfos = get_tree().get_nodes_in_group("MapInfo")
+	var AllMapInfos = get_tree().get_nodes_in_group("UnmovableMapInfo")
+	AllMapInfos.append_array(Mapinfos)
+	for g in Mapinfos:
+		for z in AllMapInfos:
+			if (g == z):
+				continue
+			var control1 = g as Control
+			if (!control1.visible):
+				continue
+			var r1 = control1.get_global_rect()
 			#r1.position = control1.global_position
-			#var control2 = z as Control
-			#if (!control2.visible):
-				#continue
-			#var r2 = control2.get_rect()
+			var control2 = z as Control
+			if (!control2.visible):
+				continue
+			var r2 = control2.get_global_rect()
 			#r2.position = control2.global_position
-			#if (r1.intersects(r2)):
-				#control1.rotation -= 1
-				#control1.get_parent().rotation += 1
+			if (r1.intersects(r2)):
+				control1.owner.UpdateSignRotation()
+				return
 	d -= delta
 	if (d > 0):
 		return

@@ -1,5 +1,8 @@
-VisibleOnScreenNotifier2D
 Control
+PanelContainer
+AspectRatioContainer
+VBoxContainer
+VisibleOnScreenNotifier2D
 Panel
 Node2D
 Line2D
@@ -9,6 +12,3 @@ AudioStreamPlayer2D
 CanvasGroup
 DeletableSound
 AudioListener2D
-CollisionShape2D
-Area2D
-CollisionPolygon2D
