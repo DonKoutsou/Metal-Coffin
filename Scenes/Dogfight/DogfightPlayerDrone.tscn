@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://dqvwo77ckbu65"]
 
-[ext_resource type="Script" path="res://Scenes/PLfightShip.gd" id="1_ei8ga"]
+[ext_resource type="Script" path="res://Scripts/PLfightShip.gd" id="1_ei8ga"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="2_bgkja"]
 [ext_resource type="Texture2D" uid="uid://cd1whfy18ccqk" path="res://Assets/Spaceship/Spaceship_top_LeanL_Main Camera.png" id="3_pwe7q"]
 [ext_resource type="Texture2D" uid="uid://clnx4yn8pmfhh" path="res://Assets/Spaceship/Spaceship_top_LeanR_Main Camera.png" id="4_d2kdj"]

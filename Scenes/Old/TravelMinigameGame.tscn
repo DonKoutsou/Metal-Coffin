@@ -1,0 +1,130 @@
+[gd_scene load_steps=20 format=3 uid="uid://civ710rd6srtr"]
+
+[ext_resource type="Script" path="res://Scripts/TravelMinigameGame.gd" id="1_ern3a"]
+[ext_resource type="ArrayMesh" uid="uid://c3r8p45nush07" path="res://Assets/Rocks/Rock1_Lod2.tres" id="2_ehyat"]
+[ext_resource type="ArrayMesh" uid="uid://d0g25ewvmqv4c" path="res://Assets/Rocks/Rock2_Lod2.tres" id="3_mdv0u"]
+[ext_resource type="ArrayMesh" uid="uid://c1o27w2a67o55" path="res://Assets/Rocks/Rock3_Lod2.tres" id="4_miju0"]
+[ext_resource type="ArrayMesh" uid="uid://bboo48m72ko2t" path="res://Assets/Rocks/Rock4_Lod2.tres" id="5_2k1ax"]
+[ext_resource type="ArrayMesh" uid="uid://cyueo4jl36y8r" path="res://Assets/Rocks/Rock5_Lod2.tres" id="6_p5px5"]
+[ext_resource type="PackedScene" uid="uid://tucv7faum217" path="res://Scenes/Old/Rock.tscn" id="7_g7y2n"]
+[ext_resource type="PackedScene" uid="uid://oa22m2ia7nea" path="res://Scenes/Old/SupplyCache.tscn" id="8_bpgxd"]
+[ext_resource type="PackedScene" uid="uid://c22kbrr2llw68" path="res://Scenes/Old/SupplyCacheRare.tscn" id="9_75kpj"]
+[ext_resource type="PackedScene" uid="uid://dosurqfr722oq" path="res://Scenes/SpaceShip.tscn" id="10_5fr41"]
+[ext_resource type="Texture2D" uid="uid://6lcw3avodr51" path="res://Assets/SpaceBG2.png" id="11_jlauy"]
+[ext_resource type="Script" path="res://Scripts/planet_pivot.gd" id="12_kitkq"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="13_6whgc"]
+
+[sub_resource type="Gradient" id="Gradient_jo0lo"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vxoyq"]
+gradient = SubResource("Gradient_jo0lo")
+fill_from = Vector2(0.0854701, 0)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c5kss"]
+panorama = ExtResource("11_jlauy")
+
+[sub_resource type="Sky" id="Sky_s367o"]
+sky_material = SubResource("PanoramaSkyMaterial_c5kss")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_jrnrp"]
+background_mode = 2
+background_color = Color(0.0781565, 0.0781565, 0.078156, 1)
+sky = SubResource("Sky_s367o")
+sky_custom_fov = 41.7
+sky_rotation = Vector3(0, 2.06298, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.272655, 0.272655, 0.272655, 1)
+ambient_light_energy = 0.37
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.59
+glow_blend_mode = 1
+fog_mode = 1
+fog_light_color = Color(0.112255, 0.104348, 0.102446, 1)
+fog_sun_scatter = 18.4
+fog_density = 1.0
+fog_depth_curve = 0.59763
+fog_depth_begin = 67.4
+fog_depth_end = 196.0
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture2D_vxoyq")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3siew"]
+dof_blur_far_distance = 38.87
+dof_blur_far_transition = 57.69
+dof_blur_near_distance = 128.03
+dof_blur_near_transition = 501.54
+dof_blur_amount = 0.45
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ern3a")
+EnemyShapes = Array[Mesh]([ExtResource("2_ehyat"), ExtResource("3_mdv0u"), ExtResource("4_miju0"), ExtResource("5_2k1ax"), ExtResource("6_p5px5")])
+Obst = ExtResource("7_g7y2n")
+SuuplyScenes = Array[PackedScene]([ExtResource("8_bpgxd"), ExtResource("9_75kpj")])
+CharacterScene = ExtResource("10_5fr41")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="TravelMinigameGame" type="Node3D" parent="SubViewportContainer/SubViewport"]
+process_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.497)
+fov = 22.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.16325)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
+environment = SubResource("Environment_jrnrp")
+camera_attributes = SubResource("CameraAttributesPractical_3siew")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
+transform = Transform3D(0.729176, -0.621132, -0.287224, 0.674297, 0.580545, 0.456389, -0.116731, -0.526462, 0.842147, 0, 0, 0)
+light_color = Color(0.897161, 0.86143, 0.827484, 1)
+light_energy = 0.352
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+directional_shadow_mode = 0
+
+[node name="PlanetPivot" type="Node3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame"]
+script = ExtResource("12_kitkq")
+
+[node name="MeshInstance3D7" type="Node3D" parent="SubViewportContainer/SubViewport/TravelMinigameGame/PlanetPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("13_6whgc")]
+layout_mode = 1
+offset_left = 58.0
+offset_top = -259.0
+offset_right = 259.0
+offset_bottom = -58.0
+joystick_mode = 1
+visibility_mode = 1
+action_left = "MoveLeft"
+action_right = "MoveRight"
+action_up = "MoveUp"
+action_down = "MoveDown"

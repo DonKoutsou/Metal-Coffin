@@ -2,7 +2,6 @@ extends Node2D
 
 class_name Drone
 
-@export var DroneNotifScene : PackedScene
 @export var Cpt : Captain
 
 
@@ -14,6 +13,7 @@ var Fuel = 0
 var StoredItem : Array[Item] = []
 var Speed : float
 var Paused = false
+var SimulationSpeed : int = 1
 var Detectable = true
 
 signal DroneReturning
@@ -37,6 +37,8 @@ func free() -> void:
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
+func ChangeSimulationSpeed(i : int):
+	SimulationSpeed = i
 func GetSpeed():
 	return $Aceleration.position.x
 func GetShipSpeedVec():
@@ -103,8 +105,9 @@ func _physics_process(_delta: float) -> void:
 		var interceptionpoint = calculateinterceptionpoint()
 		updatedronecourse(interceptionpoint)
 	else:
-		Fuel -= GetShipAcelerationNode().position.x
-		global_position = GetShipAcelerationNode().global_position
+		for g in SimulationSpeed:
+			Fuel -= GetShipAcelerationNode().position.x
+			global_position = GetShipAcelerationNode().global_position
 		GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
 		if (Fuel <= 0):
 			rotation = 0.0

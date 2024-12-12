@@ -11,9 +11,12 @@ var Damage : float = 100
 @export var MissileKillSound : AudioStream
 var FoundShip : HostileShip
 var Paused = false
+var SimulationSpeed : int = 1
 
 func TogglePause(t : bool):
 	Paused = t
+func ChangeSimulationSpeed(i : int):
+	SimulationSpeed = i
 
 func GetSpeed() -> float:
 	return Speed
@@ -36,10 +39,10 @@ func _physics_process(_delta: float) -> void:
 		return
 	if (FoundShip != null):
 		HoneAtEnemy()
-
-	global_position = $AccelPosition.global_position
-	Distance -= $AccelPosition.position.x
-	if (Distance == 0):
+	for g in SimulationSpeed:
+		global_position = $AccelPosition.global_position
+		Distance -= $AccelPosition.position.x
+	if (Distance <= 0):
 		MapPointerManager.GetInstance().RemoveShip(self)
 		if (FoundShip):
 			MapPointerManager.GetInstance().RemoveShip(FoundShip)

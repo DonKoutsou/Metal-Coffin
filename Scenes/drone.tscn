@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=18 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
-[ext_resource type="PackedScene" uid="uid://bakbjn5qbsc2l" path="res://Scenes/DroneNotif.tscn" id="2_1dqnw"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/Amol.tres" id="3_fw0pf"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
@@ -80,7 +79,6 @@ shader_parameter/scale_factor = 0.008
 
 [node name="Drone" type="Node2D" groups=["Ships"]]
 script = ExtResource("1_vfr1e")
-DroneNotifScene = ExtResource("2_1dqnw")
 Cpt = ExtResource("3_fw0pf")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

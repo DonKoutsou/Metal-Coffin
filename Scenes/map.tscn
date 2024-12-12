@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=41 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="29_jt4kw"]
 [ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
+[ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="30_vu87k"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
@@ -345,6 +346,98 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="SpeedSimulation" type="TextureButton" parent="UI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -105.0
+offset_right = 150.0
+offset_bottom = -49.0
+grow_vertical = 2
+texture_normal = ExtResource("26_y7o3o")
+texture_pressed = ExtResource("27_x5hrs")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Label" type="Label" parent="UI/SpeedSimulation"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -19.0
+offset_right = 58.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 12
+text = "Speed Simulation
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LandButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -52.0
+offset_right = 150.0
+offset_bottom = 4.0
+grow_vertical = 2
+texture_normal = ExtResource("26_y7o3o")
+texture_pressed = ExtResource("27_x5hrs")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Label" type="Label" parent="UI/LandButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -19.0
+offset_right = 58.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 12
+text = "Land
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Clock" parent="UI" instance=ExtResource("30_vu87k")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -197.0
+offset_top = -191.0
+offset_right = -139.0
+offset_bottom = -135.0
+grow_horizontal = 0
+grow_vertical = 0
+
 [node name="DroneTab" parent="UI" instance=ExtResource("35_k6hjp")]
 layout_mode = 2
 anchors_preset = 0
@@ -383,3 +476,6 @@ libraries = {
 [connection signal="AccelerationChanged" from="UI/ThrustSlider" to="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" method="AccelerationChanged"]
 [connection signal="pressed" from="UI/RadarButton" to="." method="_on_radar_button_pressed"]
 [connection signal="pressed" from="UI/SimulationButton" to="." method="_on_simulation_button_pressed"]
+[connection signal="button_down" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_down"]
+[connection signal="button_up" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_up"]
+[connection signal="pressed" from="UI/LandButton" to="." method="_on_land_button_pressed"]

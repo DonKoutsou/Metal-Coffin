@@ -328,8 +328,3 @@ layout_mode = 2
 script = ExtResource("24_g68id")
 ShipStatScene = ExtResource("23_73e43")
 StatsToShow = Array[ExtResource("25_0pvyv")]([ExtResource("26_uxy24"), ExtResource("27_bfas4"), ExtResource("28_6g5bi"), ExtResource("28_73fl5"), ExtResource("29_0aup1"), ExtResource("30_hyn75")])
-
-[node name="UpgradeTimer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="UpgradeTimer" to="." method="ItemUpgradeFinished"]

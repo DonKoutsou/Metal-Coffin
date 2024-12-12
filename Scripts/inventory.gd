@@ -23,17 +23,22 @@ signal INV_OnInventoryOpened()
 signal INV_OnInvencotyClosed()
 signal INV_OnItemUsed(It : UsableItem)
 var Loading = false
+var UpgradeTime : float = 0
+var SimPaused : bool = false
+var SimSpeed : int = 1
 
 static func GetInstance() -> Inventory:
 	return Instance
-	
 
 func OnSimulationPaused(t : bool) -> void:
-	$UpgradeTimer.paused = t
+	SimPaused = t
+func OnSimulationSpeedChanged(i : int) -> void:
+	SimSpeed = i
 
 func _ready() -> void:
 	MissileDockEventH.connect("MissileLaunched", RemoveItemSimp)
-	set_process(false)
+	#set_process(false)
+	set_physics_process(false)
 	visible = false
 	Instance = self
 	for g in ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat():
@@ -228,7 +233,8 @@ func FindAndDissableDescriptors() -> void:
 var UpgradedItem : ItemContainer
 func CancelUpgrades() -> void:
 	UpgradedItem = null
-	$UpgradeTimer.stop()
+	UpgradeTime = 0
+	set_physics_process(false)
 func UpgradeItem(Cont : ItemContainer) -> void:
 	#var UpgradeSuccess = false
 	if (UpgradedItem != null):
@@ -242,8 +248,8 @@ func UpgradeItem(Cont : ItemContainer) -> void:
 		return
 	var Part = Cont.ItemType as ShipPart
 	var UpTime = Part.UpgradeTime
-	$UpgradeTimer.wait_time = UpTime
-	$UpgradeTimer.start()
+	UpgradeTime = UpTime
+	set_physics_process(true)
 	UpgradedItem = Cont
 	FindAndDissableDescriptors()
 	#for g in InventoryContents.size():
@@ -259,6 +265,14 @@ func UpgradeItem(Cont : ItemContainer) -> void:
 				#break
 	#if (!UpgradeSuccess) :
 		#PopUpManager.GetInstance().DoPopUp("Not enough upgrade materials to complete action")
+func _physics_process(delta: float) -> void:
+	if (SimPaused):
+		return
+	UpgradeTime -= (delta * 10) * SimSpeed
+	if (UpgradeTime <= 0):
+		ItemUpgradeFinished()
+		set_physics_process(false)
+		
 func ItemUpgradeFinished() -> void:
 	var Part = UpgradedItem.ItemType as ShipPart
 	#for z in Part.UpgradeItems.size():
@@ -270,7 +284,7 @@ func ItemUpgradeFinished() -> void:
 	#FindAndDissableDescriptors()
 
 func GetUpgradeTimeLeft() -> float:
-	return $UpgradeTimer.time_left
+	return UpgradeTime
 
 func RemoveItem(Cont : ItemContainer):
 	for g in InventoryContents.size():

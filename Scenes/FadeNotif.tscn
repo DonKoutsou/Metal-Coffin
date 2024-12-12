@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://1vnrpn8q4byq"]
 
-[ext_resource type="Script" path="res://Scenes/fade_notif.gd" id="2_k1b3j"]
+[ext_resource type="Script" path="res://Scripts/fade_notif.gd" id="2_k1b3j"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_n0ir2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrba1"]

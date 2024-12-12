@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgsgcnyyv1gxm"]
+[gd_scene load_steps=14 format=3 uid="uid://bgsgcnyyv1gxm"]
 
 [ext_resource type="Script" path="res://Scripts/map_spot_marker.gd" id="1_5x46s"]
+[ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
 [ext_resource type="Theme" uid="uid://blxde2llpapdx" path="res://Theme/DarkBlueButtonCirlce.tres" id="2_rp140"]
 [ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="3_p38gw"]
 
@@ -270,6 +271,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_5x46s")
+NofiticationScene = ExtResource("2_b0564")
 
 [node name="AnalyzeButton" type="Panel" parent="."]
 show_behind_parent = true

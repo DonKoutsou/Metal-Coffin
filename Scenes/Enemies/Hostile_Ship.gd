@@ -17,6 +17,7 @@ var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
 
 var Paused = false
+var SimulationSpeed : int = 1
 
 var DestinationCity : MapSpot
 
@@ -61,7 +62,10 @@ func GetCity(CityName : String) -> MapSpot:
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
-	$Radar2/Radar_Range.material.set_shader_parameter("Paused", t)
+	$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
+func ChangeSimulationSpeed(i : int):
+	SimulationSpeed = i
+	
 func Damage(amm : float) -> void:
 	Hull -= amm
 	if (Hull <= 0):
@@ -78,9 +82,10 @@ func GetBattleStats() -> BattleShipStats:
 
 func UpdateVizRange(rang : float):
 	if (rang == 0):
-		$Radar2.queue_free()
-	var RadarRangeIndicator = $Radar2/Radar_Range
-	var RadarRangeCollisionShape = $Radar2/CollisionShape2D
+		$Radar.queue_free()
+		return
+	var RadarRangeIndicator = $Radar/Radar_Range
+	var RadarRangeCollisionShape = $Radar/CollisionShape2D
 	#var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
 	var RadarMat = RadarRangeIndicator.material as ShaderMaterial
 	RadarMat.set_shader_parameter("scale_factor", rang/10000)
@@ -100,7 +105,8 @@ func _physics_process(_delta: float) -> void:
 		var interceptionpoint = calculateinterceptionpoint()
 		updatedronecourse(interceptionpoint)
 	else : if (Patrol):
-		global_position = $Node2D.global_position
+		for g in  SimulationSpeed:
+			global_position = $Node2D.global_position
 	for g in VisibleBt:
 		if (g == null):
 			continue
@@ -142,7 +148,7 @@ func updatedronecourse(interception_point: Vector2):
 	var direction = (interception_point - position).normalized()
 	$Node2D2.look_at(to_global(interception_point - position))
 	# Move the drone towards the interception point
-	position += direction * $Node2D.position.x
+	position += (direction * $Node2D.position.x) * SimulationSpeed
 	#$Line2D.set_point_position(1, interception_point - position)
 
 func _on_radar_2_area_entered(area: Area2D) -> void:
@@ -153,8 +159,10 @@ func _on_radar_2_area_exited(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		PursuingShips.erase(area.get_parent())
 		LastKnownPosition = area.get_parent().global_position
+		
+#whan this ship gets seen by player or friendly drone
 func OnShipSeen(SeenBy : Node2D):
-	$Radar2/Radar_Range.visible = true
+	$Radar/Radar_Range.visible = true
 	#visible = true
 	if (VisibleBt.has(SeenBy)):
 		return
@@ -163,10 +171,10 @@ func OnShipSeen(SeenBy : Node2D):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	
-	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBt.erase(UnSeenBy)
-	$Radar2/Radar_Range.visible = VisibleBt.size() > 0
+	$Radar/Radar_Range.visible = VisibleBt.size() > 0
+
 
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == DestinationCity and Patrol):

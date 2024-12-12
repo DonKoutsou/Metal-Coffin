@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cq8y4l8uapojy"]
 
 [ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="1_57nkx"]
-[ext_resource type="Script" path="res://Scenes/Dialogue_Player.gd" id="1_xcud3"]
+[ext_resource type="Script" path="res://Scripts/Dialogue_Player.gd" id="1_xcud3"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="2_tpi4a"]
 [ext_resource type="Texture2D" uid="uid://d2m66tlt5cl4b" path="res://Assets/artificial-hive.png" id="4_kc08c"]
 [ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="5_p12ba"]

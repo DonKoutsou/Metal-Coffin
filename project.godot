@@ -45,6 +45,7 @@ Enemy=""
 DissapearingMap=""
 MapInfo=""
 UnmovableMapInfo=""
+Clock=""
 
 [input]
 

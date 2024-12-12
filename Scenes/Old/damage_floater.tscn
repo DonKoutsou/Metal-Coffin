@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://mxfnm7hywo4f"]
+
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_elilk"]
+[ext_resource type="Script" path="res://Scripts/Damage_Floater.gd" id="1_nmcop"]
+
+[node name="DamageFloater" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.5
+offset_top = -11.5
+offset_right = 9.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.939836, 0.0734603, 0.0456407, 1)
+theme_override_fonts/font = ExtResource("1_elilk")
+theme_override_font_sizes/font_size = 78
+text = "10"
+script = ExtResource("1_nmcop")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

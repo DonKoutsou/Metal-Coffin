@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c54mqk4mcr360"]
 
-[ext_resource type="Script" path="res://Scenes/low_left_notif.gd" id="1_er3bd"]
+[ext_resource type="Script" path="res://Scripts/low_left_notif.gd" id="1_er3bd"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_ok2n5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
@@ -11,7 +11,6 @@ z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
 layout_mode = 3
 anchors_preset = 0
-offset_bottom = 90.0
 size_flags_horizontal = 0
 mouse_filter = 2
 script = ExtResource("1_er3bd")

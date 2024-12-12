@@ -79,4 +79,4 @@ func _on_repair_pressed() -> void:
 
 func _physics_process(_delta: float) -> void:
 	var inv = Inventory.GetInstance()
-	$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "Upgrade time left : " + var_to_str(roundi(inv.GetUpgradeTimeLeft()))
+	$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "Upgrade time left : " + var_to_str(roundi(inv.GetUpgradeTimeLeft())) + " minutes"

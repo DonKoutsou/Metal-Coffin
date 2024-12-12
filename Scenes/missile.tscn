@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvdaxeaw05g4k"]
 
 [ext_resource type="Script" path="res://Scripts/missile.gd" id="1_dxfkf"]
-[ext_resource type="Shader" path="res://Scenes/missileCone.gdshader" id="1_hg5k0"]
+[ext_resource type="Shader" path="res://Shaders/missileCone.gdshader" id="1_hg5k0"]
 [ext_resource type="AudioStream" uid="uid://d3v3dtlxv1yim" path="res://Assets/VoiceLines/radio_kill_03.wav" id="3_ja3ei"]
 [ext_resource type="AudioStream" uid="uid://mii1rhqfjkwv" path="res://Assets/Sounds/missile_launch_02.ogg" id="4_v3idv"]
 

@@ -37,9 +37,11 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.modulate = EnemyColor
 	
 	if (Ship is PlayerShip):
+		marker.call_deferred("ToggleShipDetails", true)
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		Ship.connect("StatLow", marker.OnStatLow)
+		marker.SetMarkerDetails("Flagship", "P",Ship.GetShipSpeed())
 	
 	if (Ship is HostileShip):
 		marker.ToggleShipDetails(true)
@@ -51,6 +53,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetSpeed())
 	
 	if (Ship is Missile):
+		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 	
 	_ShipMarkers.append(marker)
@@ -81,19 +84,19 @@ func RemoveShip(Ship : Node2D) -> void:
 	_ShipMarkers[index].queue_free()
 	_ShipMarkers.remove_at(index)
 	Ships.remove_at(index)
-var d = 0.1
-func _physics_process(delta: float) -> void:
+
+func FixLabelClipping() -> void:
 	var Mapinfos = get_tree().get_nodes_in_group("MapInfo")
 	var AllMapInfos = get_tree().get_nodes_in_group("UnmovableMapInfo")
 	AllMapInfos.append_array(Mapinfos)
 	for g in Mapinfos:
+		var control1 = g as Control
+		if (!control1.visible):
+			continue
+		var r1 = control1.get_global_rect()
 		for z in AllMapInfos:
 			if (g == z):
 				continue
-			var control1 = g as Control
-			if (!control1.visible):
-				continue
-			var r1 = control1.get_global_rect()
 			#r1.position = control1.global_position
 			var control2 = z as Control
 			if (!control2.visible):
@@ -103,6 +106,10 @@ func _physics_process(delta: float) -> void:
 			if (r1.intersects(r2)):
 				control1.owner.UpdateSignRotation()
 				return
+
+var d = 0.1
+func _physics_process(delta: float) -> void:
+	FixLabelClipping()
 	d -= delta
 	if (d > 0):
 		return
@@ -112,7 +119,7 @@ func _physics_process(delta: float) -> void:
 		var Marker = _ShipMarkers[g]
 		if (ship is HostileShip):
 			if (ship.VisibleBt.size() > 0):
-				Marker.global_position = ship.global_position
+				#Marker.global_position = ship.global_position
 				Marker.UpdateSpeed(ship.GetSpeed())
 				if (ship.SeenShips()):
 					Marker.UpdateThreatLevel(ship.VisibleBt[ship.VisibleBt.keys()[0]])
@@ -128,10 +135,11 @@ func _physics_process(delta: float) -> void:
 			if (ship is Drone):
 				Marker.ToggleShipDetails(!ship.Docked)
 				Marker.UpdateSpeed(ship.GetSpeed())
-			if (ship is Missile):
-				Marker.ToggleShipDetails(true)
+			
+			if (ship is PlayerShip):
+				Marker.UpdateSpeed(ship.GetShipSpeed())
 				#Marker.UpdateSpeed(ship.GetSpeed())
-			Marker.global_position = ship.global_position
+		Marker.global_position = ship.global_position
 	
 	
 		

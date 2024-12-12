@@ -570,4 +570,12 @@ var simmulationPaused = false
 func _on_simulation_button_pressed() -> void:
 	simmulationPaused = !simmulationPaused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
-	
+
+func _on_land_button_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_speed_simulation_button_down() -> void:
+	SimulationManager.GetInstance().SpeedToggle(true)
+
+func _on_speed_simulation_button_up() -> void:
+	SimulationManager.GetInstance().SpeedToggle(false)

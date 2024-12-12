@@ -12,6 +12,7 @@ var ShipType : BaseShip
 var Travelling = false
 #var ChangingCourse = false
 var Paused = false
+var SimulationSpeed : int = 1
 var CurrentPort : MapSpot
 var CanRefuel = false
 var CanRepair = false
@@ -51,6 +52,8 @@ func TogglePause(t : bool):
 	$AudioStreamPlayer2D.stream_paused = t
 	$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
 	$Analyzer/Analyzer_Range.material.set_shader_parameter("Paused", t)
+func ChangeSimulationSpeed(i : int):
+	SimulationSpeed = i
 func ToggleRadar():
 	Detectable = !Detectable
 	$Radar/CollisionShape2D.disabled = !$Radar/CollisionShape2D.disabled
@@ -144,19 +147,19 @@ func _physics_process(_delta: float) -> void:
 			CurrentPort.OnSpotVisited()
 			if (CanRefuel):
 				if (!ShipData.GetInstance().IsResourceFull("FUEL")):
-					var timeleft = (ShipData.GetInstance().GetStat("FUEL").GetStat() - ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()) / 0.05 / 60
+					var timeleft = ((ShipData.GetInstance().GetStat("FUEL").GetStat() - ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()) / 0.05 / 6)
 					ShipDockActions.emit("Refueling", true, roundi(timeleft))
 					#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-					ShipData.GetInstance().RefilResource("FUEL", 0.05)
+					ShipData.GetInstance().RefilResource("FUEL", 0.05 * SimulationSpeed)
 				else:
 					ShipDockActions.emit("Refueling", false, 0)
 					#ToggleShowRefuel("Refueling", false)
 			if (CanRepair):
 				if (!ShipData.GetInstance().IsResourceFull("HULL")):
-					var timeleft = (ShipData.GetInstance().GetStat("HULL").GetStat() - ShipData.GetInstance().GetStat("HULL").GetCurrentValue()) / 0.05 / 60
+					var timeleft = ((ShipData.GetInstance().GetStat("HULL").GetStat() - ShipData.GetInstance().GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
 					ShipDockActions.emit("Repairing", true, roundi(timeleft))
 					#ToggleShowRefuel("Repairing", true, roundi(timeleft))
-					ShipData.GetInstance().RefilResource("HULL", 0.05)
+					ShipData.GetInstance().RefilResource("HULL", 0.05 * SimulationSpeed)
 				else:
 					ShipDockActions.emit("Repairing", false, 0)
 					#ToggleShowRefuel("Repairing", false)
@@ -184,8 +187,10 @@ func _physics_process(_delta: float) -> void:
 			##set_physics_process(false)
 			#return
 		#Dat.RefilResource("OXYGEN", -oxy)
-	global_position = $Node2D.global_position
-	Dat.ConsumeResource("FUEL", fuel)
+	for g in SimulationSpeed:
+		global_position = $Node2D.global_position
+		
+	Dat.ConsumeResource("FUEL", fuel * SimulationSpeed)
 	
 
 func GetShipSpeed() -> float:

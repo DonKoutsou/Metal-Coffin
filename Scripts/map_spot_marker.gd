@@ -2,6 +2,8 @@ extends Control
 
 class_name SpotMarker
 
+@export var NofiticationScene : PackedScene
+
 var camera : Camera2D
 var TimeLastSeen : float
 
@@ -34,7 +36,8 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	
 func OnSpotAnalyzed(PlayAnim : bool = true) ->void:
 	if (PlayAnim):
-		var notif = (load("res://Scenes/AnalyzedNotif.tscn") as PackedScene).instantiate() as AnalyzeNotif
+		var notif = NofiticationScene.instantiate() as ShipMarkerNotif
+		notif.SetText("Location Analyzed")
 		add_child(notif)
 		#notif.EntityToFollow = self
 		$AnimationPlayer.play("SpotAnalyzed")

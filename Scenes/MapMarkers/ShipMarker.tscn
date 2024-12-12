@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=8 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
-[ext_resource type="PackedScene" uid="uid://uxdjefxtg38h" path="res://Scenes/HostileDroneNotif.tscn" id="2_bq8aw"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
-[ext_resource type="PackedScene" uid="uid://cr5oh7xn6oug6" path="res://Scenes/DroneReturnNotif.tscn" id="4_yqhjs"]
+[ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1v2q8"]
 
@@ -39,10 +38,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_y30vi")
-EnemyLocatedNotifScene = ExtResource("2_bq8aw")
 EnemyLocatedSound = ExtResource("3_6yg5x")
-DroneReturnNotif = ExtResource("4_yqhjs")
-LowleftNotif = ExtResource("3_74srq")
+ResuplyNotificationScene = ExtResource("3_74srq")
+NotificationScene = ExtResource("4_xcqif")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-4, -5)

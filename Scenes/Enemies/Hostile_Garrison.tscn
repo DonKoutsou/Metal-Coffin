@@ -84,15 +84,15 @@ volume_db = -15.0
 pitch_scale = 0.5
 bus = &"MapSounds"
 
-[node name="Radar2" type="Area2D" parent="."]
+[node name="Radar" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 12
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
 
-[node name="Radar_Range" type="ColorRect" parent="Radar2" groups=["MapLines"]]
+[node name="Radar_Range" type="ColorRect" parent="Radar" groups=["MapLines"]]
 visible = false
 material = SubResource("ShaderMaterial_v4ssc")
 anchors_preset = 8
@@ -111,5 +111,5 @@ mouse_filter = 2
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
-[connection signal="area_entered" from="Radar2" to="." method="_on_radar_2_area_entered"]
-[connection signal="area_exited" from="Radar2" to="." method="_on_radar_2_area_exited"]
+[connection signal="area_entered" from="Radar" to="." method="_on_radar_2_area_entered"]
+[connection signal="area_exited" from="Radar" to="." method="_on_radar_2_area_exited"]
