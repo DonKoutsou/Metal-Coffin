@@ -322,30 +322,30 @@ z_index = 100
 texture_filter = 4
 material = SubResource("CanvasItemMaterial_bwde2")
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -89.0
+anchor_bottom = 0.5
+offset_left = -32.0
 offset_top = -321.0
-offset_right = 91.0
+offset_right = 34.0
 offset_bottom = -46.0
 grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(90, 275)
+grow_vertical = 2
+pivot_offset = Vector2(33, 275)
 mouse_filter = 2
 theme_override_constants/separation = -4
 alignment = 2
 
-[node name="TextureRect2" type="Label" parent="VBoxContainer" groups=["UnmovableMapInfo"]]
+[node name="TextureRect2" type="Label" parent="VBoxContainer"]
 texture_filter = 5
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_p38gw")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
 text = "Curdawa"
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -357,3 +357,25 @@ use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -32.5)
+scale = Vector2(7, 7.05)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Fuel resrves = 0"
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

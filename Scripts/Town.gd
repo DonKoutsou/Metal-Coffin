@@ -79,6 +79,8 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.position = sptpos
 		sc.SpotName = spotdat.SpotName
 		sc.Evnt = spotdat.Evnt
+		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
+		sc.CityFuelReserves = spotdat.CityFuelReserves
 		spt.free()
 
 		if (spotdat.Seen):

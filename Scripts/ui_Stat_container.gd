@@ -24,7 +24,7 @@ func UpdateStat(StatN : String):
 	#MyTween.tween_property($HBoxContainer/Bar, "value", CurStat, 0.1)
 	#$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
-	$Control/TextureRect/Label.text = var_to_str(roundi(CurStat)) + "/" + var_to_str((roundi(MaxValue)))
+	$Control/TextureRect/Label.text = var_to_str(roundi(CurStat))
 	if (CurStat > MaxValue * 0.2):
 		$Control/Light.Toggle(false)
 		#$HBoxContainer/Bar/HBoxContainer/TextureRect2.visible = false
@@ -61,6 +61,8 @@ func _enter_tree() -> void:
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.218, 0.419, 0.576)
 	if (Stat == "FUEL"):
 		$Control/TextureRect.texture = FuelTex
+	if (Stat == "FUNDS"):
+		$Control/TextureRect.texture = HPTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.635, 0.592, 0.323)
 	UpdateStat(Stat)
 	$Control/AutoRefil.button_pressed = AutoRefill

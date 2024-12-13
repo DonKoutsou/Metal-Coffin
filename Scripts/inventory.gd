@@ -50,7 +50,7 @@ func _ready() -> void:
 		inv_contents.columns = 3
 	if (Loading):
 		# calling later to make sure inventory size buffs from captains are applied beforehand
-		call_deferred("AddItems", LoadedItems, false)
+		AddItems(LoadedItems, false)
 		#AddItems(LoadedItems, false)
 	else :
 		AddItems(StartingItems, false)
@@ -58,10 +58,7 @@ func _ready() -> void:
 func ToggleShipPausing(t : bool):
 	$"../HBoxContainer/Panel3/InventoryButton".disabled = t
 	get_tree().call_group("Ships", "TogglePause", t)
-	
-func _exit_tree() -> void:
-	FlushInventory()
-	
+
 func GetSaveData() ->SaveData:
 	var dat = SaveData.new()
 	dat.DataName = "InventoryContents"
@@ -196,9 +193,7 @@ func DoItemNotif(its : Array[Item]):
 func FlushInventory() -> void:
 	for g in InventoryContents.size():
 		for z in InventoryContents[g].ItemC.Ammount:
-			INV_OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
-			print("Removed item : " + InventoryContents[g].ItemC.ItemType.ItemName)
-			InventoryContents[g].UpdateAmm(-1)
+			RemoveItem(InventoryContents[g].ItemC)
 func _TradeFinished(itms : Array[Item]) -> void:
 	ToggleShipPausing(false)
 	FlushInventory()
@@ -295,7 +290,7 @@ func RemoveItem(Cont : ItemContainer):
 			inventory_ship_stats.UpdateValues()
 			box.UpdateAmm(-1)
 			if (Cont.ItemType is MissileItem):
-				MissileDockEventH.emit("MissileRemoved")
+				MissileDockEventH.emit_signal("MissileRemoved", Cont.ItemType)
 			return
 func RemoveItemSimp(It : Item):
 	for g in InventoryContents.size():

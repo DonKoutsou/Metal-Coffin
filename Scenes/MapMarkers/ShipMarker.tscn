@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=7 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1v2q8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gah6h"]
 bg_color = Color(1, 1, 1, 1)
@@ -66,19 +64,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -69.465
-offset_top = -200.0
-offset_right = 69.535
-offset_bottom = -102.0
+offset_left = 1.0
+offset_top = -150.0
+offset_right = 1.0
+offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_1v2q8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = -4
 alignment = 1
 
 [node name="ShipName" type="Label" parent="Control/PanelContainer/VBoxContainer"]
@@ -86,7 +84,7 @@ use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("4_sgdeo")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Quifsa"
 vertical_alignment = 1
 
@@ -96,7 +94,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("4_sgdeo")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "SPEED 100"
 vertical_alignment = 1
 
@@ -105,7 +103,7 @@ use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("4_sgdeo")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Last Seen 1h ago"
 vertical_alignment = 1
 
@@ -114,8 +112,26 @@ use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("4_sgdeo")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Threat Level : 10"
+vertical_alignment = 1
+
+[node name="Fuel" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("4_sgdeo")
+theme_override_font_sizes/font_size = 14
+text = "Fuel : 10 / 250 Tons"
+vertical_alignment = 1
+
+[node name="Hull" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("4_sgdeo")
+theme_override_font_sizes/font_size = 14
+text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
@@ -132,6 +148,7 @@ offset_right = 17.0
 offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gah6h")
 
@@ -141,6 +158,7 @@ layout_mode = 0
 offset_top = -35.0
 offset_right = 1.0
 offset_bottom = -16.0
+pivot_offset = Vector2(0, 35)
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 16

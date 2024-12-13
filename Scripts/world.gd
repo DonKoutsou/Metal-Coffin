@@ -76,11 +76,13 @@ func _enter_tree() -> void:
 	
 	GetMap().GetPlayerShip().SetShipType(StartingShip)
 	CurrentShip = StartingShip
-	ShipDat._UpdateStatCurrentValue("HP", ShipDat.GetStat("HP").GetStat())
-	
-func _exit_tree() -> void:
+	#ShipDat._UpdateStatCurrentValue("HP", ShipDat.GetStat("HP").GetStat())
+
+func TerminateWorld() -> void:
 	ShipDat.RemoveShipStats(CurrentShip.Buffs)
+	GetInventory().FlushInventory()
 	GetMap().GetPlayerShip().GetDroneDock().ClearAllDrones()
+
 func OnStatsUpdated(StatName : String):
 	#if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() - 20):
 		#var it = GetInventory().GetItemForStat(StatName)
@@ -125,7 +127,7 @@ func GetShipSaveData() -> SaveData:
 	
 func LoadData(Data : Resource) -> void:
 	var dat = Data as StatSave
-	ShipDat.SetStatValue("HP", dat.Value[0])
+	ShipDat.SetStatValue("FUNDS", dat.Value[0])
 	ShipDat.SetStatValue("HULL", dat.Value[1])
 	#ShipDat.SetStatValue("OXYGEN", dat.Value[2])
 	ShipDat.SetStatValue("FUEL", dat.Value[2])

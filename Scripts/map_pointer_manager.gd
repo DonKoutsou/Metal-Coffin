@@ -38,6 +38,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	
 	if (Ship is PlayerShip):
 		marker.call_deferred("ToggleShipDetails", true)
+		marker.call_deferred("ToggleFriendlyShipDetails", true)
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		Ship.connect("StatLow", marker.OnStatLow)
@@ -50,6 +51,8 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	
 	if (Ship is Drone):
 		Ship.connect("DroneReturning", marker.DroneReturning)
+		marker.ToggleShipDetails(true)
+		marker.ToggleFriendlyShipDetails(true)
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetSpeed())
 	
 	if (Ship is Missile):
@@ -97,15 +100,16 @@ func FixLabelClipping() -> void:
 		for z in AllMapInfos:
 			if (g == z):
 				continue
-			#r1.position = control1.global_position
 			var control2 = z as Control
 			if (!control2.visible):
 				continue
 			var r2 = control2.get_global_rect()
-			#r2.position = control2.global_position
-			if (r1.intersects(r2)):
+			var tries = 0
+			while (r1.intersects(r2)):
 				control1.owner.UpdateSignRotation()
-				return
+				tries += 1
+				if (tries > 10):
+					return
 
 var d = 0.1
 func _physics_process(delta: float) -> void:
@@ -133,11 +137,14 @@ func _physics_process(delta: float) -> void:
 			
 		else:
 			if (ship is Drone):
-				Marker.ToggleShipDetails(!ship.Docked)
 				Marker.UpdateSpeed(ship.GetSpeed())
+				Marker.UpdateDroneFuel(roundi(ship.Fuel / 160))
+				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
 			
 			if (ship is PlayerShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
+				Marker.UpdateFuel()
+				Marker.UpdateHull()
 				#Marker.UpdateSpeed(ship.GetSpeed())
 		Marker.global_position = ship.global_position
 	

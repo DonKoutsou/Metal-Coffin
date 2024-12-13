@@ -103,7 +103,7 @@ func GetStat(Name : String) -> ShipStat:
 	return stat
 func GetSaveData() -> Resource:
 	var CurrentStats : Array[float] = []
-	CurrentStats.append(GetStat("HP").CurrentVelue)
+	CurrentStats.append(GetStat("FUNDS").CurrentVelue)
 	CurrentStats.append(GetStat("HULL").CurrentVelue)
 	#CurrentStats.append(GetStat("OXYGEN").CurrentVelue)
 	CurrentStats.append(GetStat("FUEL").CurrentVelue)

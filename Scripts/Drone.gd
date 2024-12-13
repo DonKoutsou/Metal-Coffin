@@ -40,6 +40,8 @@ func TogglePause(t : bool):
 func ChangeSimulationSpeed(i : int):
 	SimulationSpeed = i
 func GetSpeed():
+	if (Docked):
+		return PlayerShip.GetInstance().GetShipSpeed()
 	return $Aceleration.position.x
 func GetShipSpeedVec():
 	return $Aceleration.global_position - global_position
@@ -106,7 +108,7 @@ func _physics_process(_delta: float) -> void:
 		updatedronecourse(interceptionpoint)
 	else:
 		for g in SimulationSpeed:
-			Fuel -= GetShipAcelerationNode().position.x
+			Fuel = max(0, Fuel - GetShipAcelerationNode().position.x)
 			global_position = GetShipAcelerationNode().global_position
 		GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
 		if (Fuel <= 0):
@@ -135,7 +137,7 @@ func updatedronecourse(interception_point: Vector2):
 	var direction = (interception_point - position).normalized()
 	GetShipIconPivot().look_at(to_global(interception_point - position))
 	# Move the drone towards the interception point
-	position += direction * GetShipAcelerationNode().position.x
+	position += (direction * GetShipAcelerationNode().position.x) * SimulationSpeed
 	GetShipTrajecoryLine().set_point_position(1, interception_point - position)
 
 func DissableMonitoring():

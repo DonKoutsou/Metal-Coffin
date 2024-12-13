@@ -57,7 +57,10 @@ func _physics_process(_delta: float) -> void:
 	$VBoxContainer.scale = Vector2(1,1) / camera.zoom
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	$Control/VBoxContainer.add_to_group("MapInfo")
+	$AnalyzeButton.add_to_group("UnmovableMapInfo")
+	$VBoxContainer/TextureRect2.add_to_group("UnmovableMapInfo")
+	
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	$Control/VBoxContainer.remove_from_group("MapInfo")
+	$AnalyzeButton.remove_from_group("UnmovableMapInfo")
+	$VBoxContainer/TextureRect2.remove_from_group("UnmovableMapInfo")

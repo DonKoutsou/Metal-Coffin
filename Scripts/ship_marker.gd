@@ -29,6 +29,8 @@ func _ready() -> void:
 	$Line2D.visible = false
 	$Control/PanelContainer/VBoxContainer/TimeSeen .visible = false
 	$Control/PanelContainer/VBoxContainer/Threat.visible = false
+	$Control/PanelContainer/VBoxContainer/Fuel.visible = false
+	$Control/PanelContainer/VBoxContainer/Hull.visible = false
 	set_physics_process(false)
 func PlayHostileShipNotif() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
@@ -65,7 +67,9 @@ func ToggleShipDetails(T : bool):
 	$Control.visible = T
 	$Line2D.visible = T
 	set_physics_process(T)
-
+func ToggleFriendlyShipDetails(T : bool):
+	$Control/PanelContainer/VBoxContainer/Fuel.visible = T
+	$Control/PanelContainer/VBoxContainer/Hull.visible = T
 func OnStatLow(StatName : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText(StatName + " bellow 20%")
@@ -81,6 +85,8 @@ func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : flo
 	
 func _physics_process(_delta: float) -> void:
 	$Control.scale = Vector2(1,1) / camera.zoom
+	#$Panel.scale = Vector2(1,1) / camera.zoom
+	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine()
 	$Line2D.width =  2 / camera.zoom.x
 
@@ -93,14 +99,22 @@ func UpdateLine()-> void:
 func UpdateSpeed(Spd : float):
 	var spd = roundi((Spd * 60) * 3.6)
 	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(spd) + "km/h"
-
-	
+func UpdateFuel():
+	var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL").GetCurrentValue())
+	var maxf = ShipData.GetInstance().GetStat("FUEL").GetStat()
+	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxf])
+func UpdateDroneFuel(amm : float):
+	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} Tons".format([amm])
+func UpdateHull():
+	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
+func UpdateDroneHull(amm : float, maxamm : float):
+	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([amm, maxamm])
 func ToggleThreat(T : bool):
 	$Control/PanelContainer/VBoxContainer/Threat.visible = T
 
 	
 func UpdateThreatLevel(Level : float):
-	$Control/PanelContainer/VBoxContainer/Threat.text = "Threat Level : " + var_to_str(Level)
+	$Control/PanelContainer/VBoxContainer/Threat.text = "Threat Level : " + var_to_str(roundi(Level))
 
 	
 func ToggleTimeLastSeend(T : bool):
@@ -122,9 +136,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func UpdateSignRotation() -> void:
 	var c = $Control as Control
-	c.rotation += 0.1
+	c.rotation += 0.01
 	$Control/PanelContainer.pivot_offset = $Control/PanelContainer.size / 2
-	$Control/PanelContainer.rotation -= 0.1
+	$Control/PanelContainer.rotation -= 0.01
 	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), c.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)

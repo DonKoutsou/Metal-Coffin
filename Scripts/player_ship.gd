@@ -72,6 +72,7 @@ func SetCurrentPort(Port : MapSpot):
 	CanRefuel = Port.HasFuel()
 	CanRepair = Port.HasRepair()
 	CanUpgrade = Port.HasUpgrade()
+	
 func RemovePort():
 	ShipDeparted.emit()
 	CurrentPort = null
@@ -144,18 +145,21 @@ func _physics_process(_delta: float) -> void:
 		return
 	if ($Node2D.position.x == 0):
 		if (CurrentPort != null):
-			CurrentPort.OnSpotVisited()
+			#CurrentPort.OnSpotVisited()
 			if (CanRefuel):
-				if (!ShipData.GetInstance().IsResourceFull("FUEL")):
-					var timeleft = ((ShipData.GetInstance().GetStat("FUEL").GetStat() - ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()) / 0.05 / 6)
+				if (!ShipData.GetInstance().IsResourceFull("FUEL") and CurrentPort.PlayerFuelReserves > 0):
+					var maxfuelcap = ShipData.GetInstance().GetStat("FUEL").GetStat()
+					var currentfuel = ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()
+					var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
 					ShipDockActions.emit("Refueling", true, roundi(timeleft))
 					#ToggleShowRefuel("Refueling", true, roundi(timeleft))
 					ShipData.GetInstance().RefilResource("FUEL", 0.05 * SimulationSpeed)
+					CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
 				else:
 					ShipDockActions.emit("Refueling", false, 0)
 					#ToggleShowRefuel("Refueling", false)
 			if (CanRepair):
-				if (!ShipData.GetInstance().IsResourceFull("HULL")):
+				if (!ShipData.GetInstance().IsResourceFull("HULL") and CurrentPort.PlayerRepairReserves):
 					var timeleft = ((ShipData.GetInstance().GetStat("HULL").GetStat() - ShipData.GetInstance().GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
 					ShipDockActions.emit("Repairing", true, roundi(timeleft))
 					#ToggleShowRefuel("Repairing", true, roundi(timeleft))

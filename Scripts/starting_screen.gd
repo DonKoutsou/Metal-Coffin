@@ -39,5 +39,6 @@ func StartGame(Load : bool) -> void:
 
 func OnGameEnded() -> void:
 	get_tree().paused = false
+	get_child(3).TerminateWorld()
 	get_child(3).queue_free()
 	SpawnMenu()

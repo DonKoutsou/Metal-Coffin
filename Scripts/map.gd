@@ -74,21 +74,25 @@ func ToggleUIForIntro(t : bool):
 	$UI/DroneTab.visible = t
 	$"UI/Missile Tab".visible = t
 	$UI/SimulationButton.visible = t
+
+var stattween : Tween
 func ShowStation():
-	var tw = create_tween()
+	stattween = create_tween()
 	var stations = get_tree().get_nodes_in_group("Capital City Center")
 	var stationpos = stations[stations.size()-1].global_position
-	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(camera_2d, "global_position", stationpos, 6)
+	stattween.set_trans(Tween.TRANS_EXPO)
+	stattween.tween_property(camera_2d, "global_position", stationpos, 6)
 	#var mattw = create_tween()
 	#mattw.set_trans(Tween.TRANS_EXPO)
 	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
 	
 func FrameCamToPlayer():
+	if (stattween != null):
+		stattween.kill()
 	var tw = create_tween()
 	var plpos = GetPlayerShip().global_position
 	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(camera_2d, "global_position", plpos,6)
+	tw.tween_property(camera_2d, "global_position", plpos, plpos.distance_to(camera_2d.global_position) / 1000)
 	#var mattw = create_tween()
 	#mattw.set_trans(Tween.TRANS_EXPO)
 	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", plpos.x / 500,6)
@@ -151,7 +155,7 @@ func GenerateMap() -> void:
 		#sc.SetSpotData(type)
 		sc = type.instantiate() as Town
 		sc.connect("TownSpotAproached", Arrival)
-		sc.connect("TownSpotLanded", Land)
+		#sc.connect("TownSpotLanded", Land)
 		#sc.connect("SpotSearched", SearchLocation)
 		#sc.connect("SpotAnalazyed", AnalyzeLocation)
 		
@@ -197,6 +201,8 @@ func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
 		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
 		ship.LoadSaveData(g)
+	for g in get_tree().get_nodes_in_group("Enemy"):
+		g.connect("OnShipMet", EnemyMet)
 func GetEnemySaveData() ->SaveData:
 	var dat = SaveData.new()
 	dat.DataName = "Enemies"
@@ -229,6 +235,7 @@ func Land(Spot : MapSpot) -> void:
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
 		happeningui.PresentHappening(Spot.Evnt)
+	Spot.OnSpotVisited()
 		#GetPlayerShip().HaltShip()
 #CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
 func Arrival(_Spot : MapSpot)	-> void:
@@ -316,7 +323,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
 		#sc.connect("MapPressed", Arrival)
 		sc.connect("TownSpotAproached", Arrival)
-		sc.connect("TownSpotLanded", Land)
+		#sc.connect("TownSpotLanded", Land)
 		#sc.connect("SpotAnalazyed", AnalyzeLocation)
 		#var type = dat.SpotType
 		#sc.SetSpotData(type)
@@ -332,6 +339,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 			#sc.OnSpotAnalyzed()
 	call_deferred("_DrawCityLines")
 	call_deferred("_DrawVillageLines")
+	call_deferred("FrameCamToPlayer")
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():
@@ -572,7 +580,36 @@ func _on_simulation_button_pressed() -> void:
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
 
 func _on_land_button_pressed() -> void:
-	pass # Replace with function body.
+	var spot = GetPlayerShip().CurrentPort as MapSpot
+	if (spot == null):
+		PopUpManager.GetInstance().DoFadeNotif("No port to land to")
+		return
+	else:
+		var sc = spot.FuelTradeScene as PackedScene
+		var fuel = sc.instantiate() as TownScene
+		fuel.HasFuel = spot.HasFuel()
+		fuel.HasRepair = spot.HasRepair()
+		fuel.TownFuel = spot.CityFuelReserves
+		fuel.BoughtFuel = spot.PlayerFuelReserves
+		fuel.BoughtRepairs = spot.PlayerRepairReserves
+		fuel.connect("TransactionFinished", FuelTransactionFinished)
+		Ingame_UIManager.GetInstance().AddUI(fuel, false, true)
+		SimulationManager.GetInstance().TogglePause(true)
+	Land(GetPlayerShip().CurrentPort)
+
+func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float):
+	ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
+	var spot = GetPlayerShip().CurrentPort as MapSpot
+	if (spot.PlayerFuelReserves != BFuel):
+		spot.CityFuelReserves -= BFuel
+	if (BFuel < 0):
+		ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
+
+	spot.PlayerFuelReserves = max(0 , BFuel)
+	spot.PlayerRepairReserves = max(0, BRepair)
+	
+	SimulationManager.GetInstance().TogglePause(false)
+	
 
 func _on_speed_simulation_button_down() -> void:
 	SimulationManager.GetInstance().SpeedToggle(true)

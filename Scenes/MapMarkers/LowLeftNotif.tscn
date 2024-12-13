@@ -26,7 +26,7 @@ end_cap_mode = 2
 use_parent_material = true
 anchors_preset = 0
 
-[node name="Label" type="Label" parent="Control" groups=["MapInfo"]]
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -34,14 +34,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -39.0
-offset_top = -200.0
-offset_right = 39.0
-offset_bottom = -159.0
+offset_left = -69.0
+offset_top = -189.0
+offset_right = 70.0
+offset_bottom = -170.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer" groups=["MapInfo"]]
+use_parent_material = true
+layout_mode = 2
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("3_ok2n5")
 theme_override_font_sizes/font_size = 16
-text = "Location Analyzed"
+text = "Location Analyzed
+"
 vertical_alignment = 1

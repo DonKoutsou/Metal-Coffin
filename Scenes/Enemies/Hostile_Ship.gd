@@ -219,7 +219,8 @@ func _on_area_exited(area: Area2D) -> void:
 
 func GetSaveData() -> SD_HostileShip:
 	var dat = SD_HostileShip.new()
-	dat.DestinationCityName = DestinationCity.GetSpotName()
+	if (DestinationCity != null):
+		dat.DestinationCityName = DestinationCity.GetSpotName()
 	dat.Direction = Direction
 	dat.LastKnownPosition = LastKnownPosition
 	dat.Position = global_position

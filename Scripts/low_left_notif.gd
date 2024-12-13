@@ -25,7 +25,7 @@ func ToggleStat(Stat: String, t : bool, timel : float = 0):
 	var statstring : String
 	for g in ShowingStats:
 		statstring += g + " " + var_to_str(ShowingStats[g]).replace(".0", "") + " minutes left" + "\n" 
-	$Control/Label.text = statstring
+	$Control/PanelContainer/Label.text = statstring
 	
 func OnShipDeparted():
 	queue_free()
@@ -38,17 +38,17 @@ func _physics_process(_delta: float) -> void:
 
 func UpdateLine()-> void:
 	var c = $Control as Control
-	var locp = get_closest_point_on_rect($Control/Label.get_global_rect(), c.global_position)
+	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
 	
 func UpdateSignRotation() -> void:
 	var c = $Control as Control
-	c.rotation += 0.1
-	$Control/Label.pivot_offset = $Control/Label.size / 2
-	$Control/Label.rotation -= 0.1
+	c.rotation += 0.01
+	$Control/PanelContainer/Label.pivot_offset = $Control/PanelContainer/Label.size / 2
+	$Control/PanelContainer.rotation -= 0.01
 	#$Control/PanelContainer/VBoxContainer.pivot_offset = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), c.global_position) - $Control/PanelContainer/VBoxContainer.global_position
-	var locp = get_closest_point_on_rect($Control/Label.get_global_rect(), c.global_position)
+	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
 

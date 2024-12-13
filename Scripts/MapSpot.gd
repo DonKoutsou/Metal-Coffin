@@ -1,6 +1,10 @@
 extends Node2D
 class_name MapSpot
 
+@export var FuelTradeScene : PackedScene
+@export var CityFuelReserves : float = 1000
+var PlayerFuelReserves : float = 0
+var PlayerRepairReserves : float = 0
 signal SpotAnalazyed(PlayAnim : bool)
 signal SpotAproached(Type :MapSpotType)
 signal SpotLanded(Type : MapSpotType)
@@ -20,6 +24,7 @@ var HostilePatrolToSpawn : PackedScene
 var HostilePatrolName : String
 var HostileGarison : PackedScene
 var HostileGarisonName : String
+
 
 
 func _ready() -> void:
@@ -49,6 +54,8 @@ func GetSaveData() -> Resource:
 	datas.Analyzed = Analyzed
 	datas.SpotName = SpotName
 	datas.Evnt = Evnt
+	datas.CityFuelReserves = CityFuelReserves
+	datas.PlayerFuelReserves = PlayerFuelReserves
 	return datas
 
 func SetSpotData(Data : MapSpotType) -> void:
