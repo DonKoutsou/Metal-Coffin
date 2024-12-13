@@ -12,7 +12,7 @@ class_name Map
 #@export var AnalyzerScene : PackedScene
 @export var MapGenerationDistanceCurve : Curve
 @export var DroneDockEventH : DroneDockEventHandler
-@export var HappeningUI : PackedScene
+
 
 @onready var thrust_slider: ThrustSlider = $UI/ThrustSlider
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
@@ -26,8 +26,11 @@ var SpotList : Array[Town]
 var currentstage = 0
 var ShowingTutorial = false
 #var GalaxyMat :ShaderMaterial
-
+#var SelectedDrone : Drone
+#func OnDroneLaucned(D : Drone):
+	#SelectedDrone = D
 func _ready() -> void:
+	#DroneDockEventH.connect("DroneLaunched", OnDroneLaucned)
 	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
 	if (SpotList.size() == 0):
 		GenerateMap()
@@ -230,12 +233,6 @@ func HasClose(pos : Vector2) -> bool:
 			break
 	return b	
 
-func Land(Spot : MapSpot) -> void:
-	if (Spot.Evnt != null and !Spot.Visited):
-		var happeningui = HappeningUI.instantiate() as HappeningInstance
-		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
-		happeningui.PresentHappening(Spot.Evnt)
-	Spot.OnSpotVisited()
 		#GetPlayerShip().HaltShip()
 #CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
 func Arrival(_Spot : MapSpot)	-> void:
@@ -567,48 +564,17 @@ func _prim_mst_optimized(cities: Array) -> Array:
 	return mst_edges
 
 
-func _on_radar_button_pressed() -> void:
-	GetPlayerShip().ToggleRadar()
+
 
 
 func _on_missile_button_pressed() -> void:
 	GetPlayerShip().FireMissile()
 
 var simmulationPaused = false
+
 func _on_simulation_button_pressed() -> void:
 	simmulationPaused = !simmulationPaused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
-
-func _on_land_button_pressed() -> void:
-	var spot = GetPlayerShip().CurrentPort as MapSpot
-	if (spot == null):
-		PopUpManager.GetInstance().DoFadeNotif("No port to land to")
-		return
-	else:
-		var sc = spot.FuelTradeScene as PackedScene
-		var fuel = sc.instantiate() as TownScene
-		fuel.HasFuel = spot.HasFuel()
-		fuel.HasRepair = spot.HasRepair()
-		fuel.TownFuel = spot.CityFuelReserves
-		fuel.BoughtFuel = spot.PlayerFuelReserves
-		fuel.BoughtRepairs = spot.PlayerRepairReserves
-		fuel.connect("TransactionFinished", FuelTransactionFinished)
-		Ingame_UIManager.GetInstance().AddUI(fuel, false, true)
-		SimulationManager.GetInstance().TogglePause(true)
-	Land(GetPlayerShip().CurrentPort)
-
-func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float):
-	ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
-	var spot = GetPlayerShip().CurrentPort as MapSpot
-	if (spot.PlayerFuelReserves != BFuel):
-		spot.CityFuelReserves -= BFuel
-	if (BFuel < 0):
-		ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
-
-	spot.PlayerFuelReserves = max(0 , BFuel)
-	spot.PlayerRepairReserves = max(0, BRepair)
-	
-	SimulationManager.GetInstance().TogglePause(false)
 	
 
 func _on_speed_simulation_button_down() -> void:

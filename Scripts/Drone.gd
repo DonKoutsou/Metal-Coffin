@@ -1,37 +1,23 @@
-extends Node2D
+extends MapShip
 
 class_name Drone
 
 @export var Cpt : Captain
 
-
 var CommingBack = false
 var Docked = true
-
 var Fuel = 0
-
-var StoredItem : Array[Item] = []
-var Speed : float
-var Paused = false
-var SimulationSpeed : int = 1
-var Detectable = true
 
 signal DroneReturning
 
 func  _ready() -> void:
-	#Set ships speed
-	Speed = Cpt.GetStatValue("SPEED")
-	#Make sure drone wont be walking unless sent
-	set_physics_process(false)
-	#Turn off areas to not get events while drone is docked
-	GetShipBodyArea().monitoring = false
-	GetShipTrajecoryLine().visible = false
+	super()
 	#Set range of radar and alanyzer
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
-	MapPointerManager.GetInstance().AddShip(self, true)
+	#MapPointerManager.GetInstance().AddShip(self, true)
 
-func free() -> void:
+func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 
 func TogglePause(t : bool):
@@ -39,41 +25,20 @@ func TogglePause(t : bool):
 	$AudioStreamPlayer2D.stream_paused = t
 func ChangeSimulationSpeed(i : int):
 	SimulationSpeed = i
-func GetSpeed():
-	if (Docked):
-		return PlayerShip.GetInstance().GetShipSpeed()
-	return $Aceleration.position.x
-func GetShipSpeedVec():
-	return $Aceleration.global_position - global_position
-func UpdateVizRange(rang : float):
-	if (rang == 0):
-		GetShipRadarArea().queue_free()
+
+func GetShipMaxSpeed() -> float:
+	return Cpt.GetStatValue("SPEED")
+
+func Steer(Rotation : float) -> void:
+	if (CommingBack):
 		return
-	var RadarRangeIndicator = GetShipRadarArea().get_node("Radar_Range")
-	var RadarRangeCollisionShape = GetShipRadarArea().get_node("CollisionShape2D")
-	#var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
-	var RadarMat = RadarRangeIndicator.material as ShaderMaterial
-	RadarMat.set_shader_parameter("scale_factor", rang/10000)
-	#scalling collision
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
-	$PointLight2D.texture_scale = rang / 600
-	GetShipRadarArea().get_node("Radar_Range").visible = false
-	GetShipRadarArea().monitorable = false
-	
-func UpdateAnalyzerRange(rang : float):
-	if (rang == 0):
-		GetShipAnalayzerArea().queue_free()
+	super(Rotation)
+
+func AccelerationChanged(value: float) -> void:
+	if (CommingBack):
 		return
-	var AnalyzerRangeIndicator = GetShipAnalayzerArea().get_node("Analyzer_Range")
-	var AnalyzerRangeCollisionShape =GetShipAnalayzerArea().get_node("CollisionShape2D")
-	#var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
-	var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
-	#CHANGING SIZE OF RADAR
-	AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
-	#SCALLING COLLISION
-	(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
-	AnalyzerRangeIndicator.visible = false
-	
+	super(value)
+
 func EnableDrone():
 	Docked = false
 	set_physics_process(true)
@@ -88,9 +53,30 @@ func EnableDrone():
 	if (an != null):
 		an.visible = true
 		GetShipAnalayzerArea().monitorable = true
-	GetShipAcelerationNode().position.x = Speed
+	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
 	$ShipBody/CollisionShape2D.disabled = false
 	$PointLight2D.visible = true
+	
+func DissableDrone():
+	Docked = true
+	$ShipBody/CollisionShape2D.disabled = true
+	$PointLight2D.visible = false
+	GetShipTrajecoryLine().visible = false
+	GetShipIconPivot().rotation = 0.0
+	#Inventory.GetInstance().AddItems(StoredItem)
+	#StoredItem.clear()
+	$AudioStreamPlayer2D.stop()
+	set_physics_process(false)
+	var rad = get_node_or_null("Radar/Radar_Range")
+	if (rad != null):
+		GetShipRadarArea().set_deferred("monitorable", false)
+		rad.visible = false
+	var an = get_node_or_null("Analyzer/Analyzer_Range")
+	if (an != null):
+		GetShipAnalayzerArea().set_deferred("monitorable", false)
+		an.visible = false
+	GetShipAcelerationNode().position.x = 0
+	
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -139,10 +125,7 @@ func updatedronecourse(interception_point: Vector2):
 	# Move the drone towards the interception point
 	position += (direction * GetShipAcelerationNode().position.x) * SimulationSpeed
 	GetShipTrajecoryLine().set_point_position(1, interception_point - position)
-
-func DissableMonitoring():
-	GetShipBodyArea().monitoring = false
-
+	
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
@@ -155,7 +138,6 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		var spot = area.get_parent() as MapSpot
 		if (spot.CurrentlyVisiting):
 			return
-
 		if (!spot.Seen):
 			spot.OnSpotSeenByDrone()
 		spot.OnSpotVisitedByDrone()
@@ -163,24 +145,8 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		var plship = area.get_parent() as PlayerShip
 		plship.GetDroneDock().DockDrone(self, true)
 		CommingBack = false
-		Docked = true
-		$ShipBody/CollisionShape2D.disabled = true
-		$PointLight2D.visible = false
-		GetShipTrajecoryLine().visible = false
-		GetShipIconPivot().rotation = 0.0
-		Inventory.GetInstance().AddItems(StoredItem)
-		StoredItem.clear()
-		$AudioStreamPlayer2D.stop()
-		set_physics_process(false)
-		var rad = get_node_or_null("Radar/Radar_Range")
-		if (rad != null):
-			GetShipRadarArea().set_deferred("monitorable", false)
-			rad.visible = false
-		var an = get_node_or_null("Analyzer/Analyzer_Range")
-		if (an != null):
-			GetShipAnalayzerArea().set_deferred("monitorable", false)
-			an.visible = false
-		GetShipAcelerationNode().position.x = 0
+		
+		
 func GetShipBodyArea() -> Area2D:
 	return $ShipBody
 func GetShipRadarArea() -> Area2D:

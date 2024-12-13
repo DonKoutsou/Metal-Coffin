@@ -7,9 +7,9 @@
 
 [sub_resource type="Resource" id="Resource_bf8ot"]
 script = ExtResource("2_vd7a0")
-StatName = "RADAR_RANGE"
-StatMax = 300.0
-StatBase = 0.0
+StatName = "SPEED"
+StatMax = 3.0
+StatBase = 1.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_10bwx"]

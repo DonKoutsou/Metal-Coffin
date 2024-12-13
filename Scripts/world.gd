@@ -89,7 +89,7 @@ func OnStatsUpdated(StatName : String):
 		#if (GetStatPanel().StatAutoRefil(StatName) and it != null):
 			#GetInventory().UseItem(it)
 	if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() * 0.2):
-		if (!StatsNotifiedLow.has(StatName) and !GetMap().GetPlayerShip().ShowingNotif()):
+		if (!StatsNotifiedLow.has(StatName)):
 			StatsNotifiedLow.append(StatName)
 			GetMap().GetPlayerShip().OnStatLow(StatName)
 			WRLD_StatGotLow.emit(StatName)

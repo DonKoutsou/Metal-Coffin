@@ -24,6 +24,12 @@ func TogglePause(t : bool) -> void:
 	$"../VBoxContainer/Inventory".OnSimulationPaused(t)
 	get_tree().call_group("Clock", "ToggleSimulation", t)
 
+func SetSimulationSpeed(Speed : int) -> void:
+	SimulationSpeed = Speed
+	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
+	$"../VBoxContainer/Inventory".OnSimulationSpeedChanged(SimulationSpeed)
+	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)
+
 func SpeedToggle(t : bool) -> void:
 	if (t):
 		SimulationSpeed = 10

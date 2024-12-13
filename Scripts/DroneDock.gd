@@ -126,7 +126,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		PlayLandingSound()
 	FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
-	
+	drone.DissableDrone()
 	if (drone.Fuel > 0):
 		ShipData.GetInstance().RefilResource("FUEL", drone.Fuel / 160)
 		drone.Fuel = 0
@@ -142,6 +142,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		dock.add_child(trans)
 		trans.remote_path = drone.get_path()
 		return
+	
 
 func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)
@@ -154,12 +155,3 @@ func UndockDrone(drone : Drone):
 			if (trans.remote_path == drone.get_path()):
 				trans.free()
 				return
-
-func _input(event: InputEvent) -> void:
-	if (event.is_action_pressed("ShootDrone")):
-		if (DockedDrones.size() == 0):
-			return
-		var drone = DockedDrones[0]
-		UndockDrone(drone)
-		drone.look_at(get_global_mouse_position())
-		drone.EnableDrone()

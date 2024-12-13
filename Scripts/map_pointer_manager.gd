@@ -53,7 +53,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		Ship.connect("DroneReturning", marker.DroneReturning)
 		marker.ToggleShipDetails(true)
 		marker.ToggleFriendlyShipDetails(true)
-		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetSpeed())
+		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
 	
 	if (Ship is Missile):
 		marker.ToggleShipDetails(true)
@@ -137,7 +137,7 @@ func _physics_process(delta: float) -> void:
 			
 		else:
 			if (ship is Drone):
-				Marker.UpdateSpeed(ship.GetSpeed())
+				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateDroneFuel(roundi(ship.Fuel / 160))
 				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
 			
