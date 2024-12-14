@@ -104,7 +104,7 @@ func UpdateFuel():
 	var maxf = ShipData.GetInstance().GetStat("FUEL").GetStat()
 	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxf])
 func UpdateDroneFuel(amm : float):
-	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} Tons".format([amm])
+	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1}  Tons".format([amm, 50])
 func UpdateHull():
 	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
 func UpdateDroneHull(amm : float, maxamm : float):

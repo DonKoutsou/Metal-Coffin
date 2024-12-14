@@ -32,7 +32,7 @@ func _ready() -> void:
 			SetFuelData()
 		else :
 			SetDroneFuelData()
-		$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds))
+		$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 		$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm.text = var_to_str(roundi(PlFuel + BoughtFuel))
 		$VBoxContainer2/VBoxContainer/ProgressBar.max_value = PlMaxFuel
 		$VBoxContainer2/VBoxContainer/ProgressBar.value = PlFuel + BoughtFuel
@@ -55,13 +55,18 @@ func _ready() -> void:
 func SetFuelData():
 	PlFuel = ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()
 	PlMaxFuel = ShipData.GetInstance().GetStat("FUEL").GetStat()
+	var plship = LandedShip as PlayerShip
+	var dd = plship.GetDroneDock()
+	for g in dd.DockedDrones:
+		PlMaxFuel += 50
+		PlFuel += g.Fuel
 	
 func SetHullData():
 	PlHull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
 	PlMaxHull = ShipData.GetInstance().GetStat("HULL").GetStat()
 
 func SetDroneFuelData():
-	PlFuel = LandedShip.Fuel / 160
+	PlFuel = LandedShip.Fuel
 	PlMaxFuel = 50
 func SetDroneHullData():
 	PlHull = LandedShip.Cpt.GetStat("HULL").GetBaseStat()
@@ -102,7 +107,7 @@ func UpdateFuelBar(AddedFuel : float):
 	BoughtFuel += AddedFuel
 	PlFunds -= AddedFuel * FuelPricePerTon
 	$VBoxContainer2/VBoxContainer/ProgressBar.value = PlFuel + BoughtFuel
-	$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds))
+	$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm.text = var_to_str(roundi(PlFuel + BoughtFuel))
 	
 func UpdateRepairBar(AddedRepair : float):
@@ -124,7 +129,7 @@ func UpdateRepairBar(AddedRepair : float):
 	BoughtRepairs += AddedRepair
 	PlFunds -= AddedRepair * RepairpricePerRepairValue
 	$VBoxContainer2/VBoxContainer2/ProgressBar.value = PlHull + BoughtRepairs
-	$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds))
+	$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm.text = var_to_str(roundi(PlHull + BoughtRepairs))
 func _on_button_pressed() -> void:
 	TransactionFinished.emit(BoughtFuel, BoughtRepairs, PlFunds)

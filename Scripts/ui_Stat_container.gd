@@ -3,7 +3,10 @@ class_name UIStat
 
 @export var FuelTex : Texture
 @export var HullTex : Texture
-@export var HPTex : Texture
+@export var FundsTex : Texture
+@export var FuelThing : String
+@export var HullThing : String
+@export var FundsThing : String
 #@export var OxygenTex : Texture
 
 var AutoRefill = true
@@ -25,6 +28,14 @@ func UpdateStat(StatN : String):
 	#$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
 	$Control/TextureRect/Label.text = var_to_str(roundi(CurStat))
+	if (StatN == "HP"):
+		$Control/TextureRect/Label.text += " " + FundsThing
+	if (StatN == "HULL"):
+		$Control/TextureRect/Label.text += " " + HullThing
+	if (StatN == "FUEL"):
+		$Control/TextureRect/Label.text += " " + FuelThing
+	if (StatN == "FUNDS"):
+		$Control/TextureRect/Label.text += " " + FundsThing
 	if (CurStat > MaxValue * 0.2):
 		$Control/Light.Toggle(false)
 		#$HBoxContainer/Bar/HBoxContainer/TextureRect2.visible = false
@@ -51,7 +62,7 @@ func UpdateStatCust(StatN : String, Val : float):
 	$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(Val)) + "/" + var_to_str((roundi(MaxValue)))
 func _enter_tree() -> void:
 	if (Stat == "HP"):
-		$Control/TextureRect.texture = HPTex
+		$Control/TextureRect.texture = FundsTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.229, 0.48, 0.376)
 	#if (Stat == "OXYGEN"):
 		#$Control/TextureRect.texture = OxygenTex
@@ -62,7 +73,7 @@ func _enter_tree() -> void:
 	if (Stat == "FUEL"):
 		$Control/TextureRect.texture = FuelTex
 	if (Stat == "FUNDS"):
-		$Control/TextureRect.texture = HPTex
+		$Control/TextureRect.texture = FundsTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.635, 0.592, 0.323)
 	UpdateStat(Stat)
 	$Control/AutoRefil.button_pressed = AutoRefill

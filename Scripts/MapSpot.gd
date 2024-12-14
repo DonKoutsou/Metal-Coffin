@@ -163,7 +163,7 @@ func PlaySound():
 	sound.play()
 	
 func AreaEntered(area: Area2D):
-	if (area.get_parent() is PlayerShip or area.get_parent()  is Drone):
+	if (area.get_parent() is MapShip):
 		if (area.get_collision_layer_value(1)):
 			if (!Seen):
 				OnSpotSeen()
@@ -172,16 +172,16 @@ func AreaEntered(area: Area2D):
 				OnSpotAnalyzed()
 		else: if (area.get_collision_layer_value(3)):
 			CurrentlyVisiting = true
-			var ship = area.get_parent() as PlayerShip
+			var ship = area.get_parent()
 			ship.SetCurrentPort(self)
 			SpotAproached.emit(self)
-		else: if (area.get_collision_layer_value(4)):
-			CurrentlyVisiting = true
-			var ship = area.get_parent() as Drone
-			ship.SetCurrentPort(self)
-			SpotAproached.emit(self)
+		#else: if (area.get_collision_layer_value(4)):
+			#CurrentlyVisiting = true
+			#var ship = area.get_parent() as Drone
+			#ship.SetCurrentPort(self)
+			#SpotAproached.emit(self)
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):
 		CurrentlyVisiting = false
-		var ship = area.get_parent() as PlayerShip
+		var ship = area.get_parent() 
 		ship.RemovePort()

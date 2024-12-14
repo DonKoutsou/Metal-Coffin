@@ -102,8 +102,8 @@ lifetime = 20.0
 
 [node name="ShipBody" type="Area2D" parent="."]
 disable_mode = 2
-collision_layer = 8
-collision_mask = 8
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_e6yyl")
@@ -132,7 +132,7 @@ texture = ExtResource("3_4y2i6")
 stream = ExtResource("4_g6qkr")
 volume_db = -15.0
 pitch_scale = 0.5
-bus = &"MapSounds"
+bus = &"Engine"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false

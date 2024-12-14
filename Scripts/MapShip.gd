@@ -110,61 +110,7 @@ func OnStatLow(StatName : String) -> void:
 		return
 	StatLow.emit(StatName)
 
-func _physics_process(_delta: float) -> void:
-	if (Paused):
-		return
-	if ($Aceleration.position.x == 0):
-		if (CurrentPort != null):
-			#CurrentPort.OnSpotVisited()
-			if (CanRefuel):
-				if (!ShipData.GetInstance().IsResourceFull("FUEL") and CurrentPort.PlayerFuelReserves > 0):
-					var maxfuelcap = ShipData.GetInstance().GetStat("FUEL").GetStat()
-					var currentfuel = ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()
-					var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
-					ShipDockActions.emit("Refueling", true, roundi(timeleft))
-					#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-					ShipData.GetInstance().RefilResource("FUEL", 0.05 * SimulationSpeed)
-					CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
-				else:
-					ShipDockActions.emit("Refueling", false, 0)
-					#ToggleShowRefuel("Refueling", false)
-			if (CanRepair):
-				if (!ShipData.GetInstance().IsResourceFull("HULL") and CurrentPort.PlayerRepairReserves):
-					var timeleft = ((ShipData.GetInstance().GetStat("HULL").GetStat() - ShipData.GetInstance().GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
-					ShipDockActions.emit("Repairing", true, roundi(timeleft))
-					#ToggleShowRefuel("Repairing", true, roundi(timeleft))
-					ShipData.GetInstance().RefilResource("HULL", 0.05 * SimulationSpeed)
-				else:
-					ShipDockActions.emit("Repairing", false, 0)
-					#ToggleShowRefuel("Repairing", false)
-			if (CanUpgrade):
-				var inv = Inventory.GetInstance()
-				if (inv.UpgradedItem != null):
-					#ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-					ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-				else:
-					ShipDockActions.emit("Upgrading", false, 0)
-					#ToggleShowRefuel("Upgrading", false)
-		return
-	var fuel = $Aceleration.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
-	var Dat = ShipData.GetInstance()
-	if (Dat.GetStat("FUEL").GetCurrentValue() < fuel):
-		HaltShip()
-		PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
-		#set_physics_process(false)
-		return
-	#if (Dat.GetStat("CRYO").GetStat() == 0):
-		#var oxy = $Node2D.position.x / 100
-		#if (Dat.GetStat("OXYGEN").GetCurrentValue() < oxy):
-			#HaltShip()
-			#PopUpManager.GetInstance().DoPopUp("You have run out of oxygen.")
-			##set_physics_process(false)
-			#return
-		#Dat.RefilResource("OXYGEN", -oxy)
-	for g in SimulationSpeed:
-		global_position = $Aceleration.global_position
-		
-	Dat.ConsumeResource("FUEL", fuel * SimulationSpeed)
+
 	
 
 func GetShipSpeed() -> float:

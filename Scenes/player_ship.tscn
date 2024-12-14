@@ -205,7 +205,7 @@ points = PackedVector2Array(0, 0, 10, 0)
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="DroneDock" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("6_layd2")

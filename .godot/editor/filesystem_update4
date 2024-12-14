@@ -53,8 +53,6 @@ res://Shaders/missileCone.gdshader
 res://Shaders/Static.gdshader
 res://Shaders/Screen2.gdshader
 res://Shaders/Arrow2D.gdshader
-res://Scenes/ship_controller.gd
-res://Scripts/Drone.gd
 res://Scenes/Clock.tscn
 res://Scenes/MapMarkers/ShipMarker.tscn
 res://Scenes/player_ship.tscn
@@ -63,11 +61,10 @@ res://Scenes/DroneTab.tscn
 res://Scenes/AnimatedDroneGas.tscn
 res://Scenes/map_spot.tscn
 res://Scenes/world.tscn
-res://Scripts/town_scene.gd
-res://Scripts/map_pointer_manager.gd
 res://Scenes/thrust_slider.tscn
-res://Scripts/thrust_slider.gd
-res://Scripts/DroneDock.gd
-res://Scripts/DroneTab.gd
-res://Scripts/MapShip.gd
-res://Scripts/steering_wheelUI.gd
+res://Scenes/stat_panel.tscn
+res://Scenes/UISTatContainer.tscn
+res://Scenes/TownScene.tscn
+res://Scenes/MissileTab.tscn
+res://Scenes/MapMarkers/MapSpotMarker.tscn
+res://Scripts/Map.gd

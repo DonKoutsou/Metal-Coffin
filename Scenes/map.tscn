@@ -255,10 +255,10 @@ custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -73.0
-offset_top = -50.0
-offset_right = 77.0
-offset_bottom = 106.0
+offset_left = -58.0
+offset_top = -61.0
+offset_right = 62.0
+offset_bottom = 95.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -428,6 +428,85 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="DroneButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = -56.0
+offset_right = -201.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("26_y7o3o")
+texture_pressed = ExtResource("27_x5hrs")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/DroneButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -19.0
+offset_right = 36.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 12
+text = "Deploy Drone"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MissileButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = -109.0
+offset_right = -201.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("26_y7o3o")
+texture_pressed = ExtResource("27_x5hrs")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/MissileButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -19.0
+offset_right = 36.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 12
+text = "Fire Missile"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Clock" parent="UI" instance=ExtResource("30_vu87k")]
 layout_mode = 1
 anchors_preset = 3
@@ -471,12 +550,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -86.0
-offset_right = 76.0
-offset_bottom = -6.0
+offset_left = -6.0
+offset_top = -132.0
+offset_right = 74.0
+offset_bottom = -52.0
 grow_vertical = 2
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.8, 0.8)
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
@@ -495,12 +574,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -37.0
-offset_right = 76.0
-offset_bottom = 43.0
+offset_left = -6.0
+offset_top = -68.0
+offset_right = 74.0
+offset_bottom = 12.0
 grow_vertical = 2
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.8, 0.8)
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
@@ -529,5 +608,7 @@ libraries = {
 [connection signal="button_down" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_down"]
 [connection signal="button_up" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_up"]
 [connection signal="pressed" from="UI/LandButton" to="ShipController" method="_on_land_button_pressed"]
+[connection signal="pressed" from="UI/DroneButton" to="UI/DroneTab" method="_on_toggle_drone_tab_pressed"]
+[connection signal="pressed" from="UI/MissileButton" to="UI/Missile Tab" method="_on_toggle_drone_tab_pressed"]
 [connection signal="pressed" from="UI/ControlledShipSwitch" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]
 [connection signal="pressed" from="UI/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]

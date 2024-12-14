@@ -93,8 +93,8 @@ func _physics_process(_delta: float) -> void:
 		if (CurrentPort != null):
 			#CurrentPort.OnSpotVisited()
 			if (CanRefuel):
-				if (Fuel < 100 and CurrentPort.PlayerFuelReserves > 0):
-					var maxfuelcap = 100
+				if (Fuel < 50 and CurrentPort.PlayerFuelReserves > 0):
+					var maxfuelcap = 50
 					var currentfuel = Fuel
 					var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
 					ShipDockActions.emit("Refueling", true, roundi(timeleft))
@@ -132,16 +132,16 @@ func _physics_process(_delta: float) -> void:
 		global_position = GetShipAcelerationNode().global_position
 	UpdateFuelRange(Fuel, 2)
 	#GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
-	if (Fuel <= global_position.distance_to(PlayerShip.GetInstance().global_position) / 10 / 2):
-		ReturnToBase()
+	#if (Fuel <= global_position.distance_to(PlayerShip.GetInstance().global_position) / 10 / 2):
+		#ReturnToBase()
 		#$Line2D.visible = true
 
 func ReturnToBase():
 	$Aceleration.position.x = GetShipMaxSpeed()
-	rotation = 0.0
+	#rotation = 0.0
 	CommingBack = true
 	DroneReturning.emit()
-	Docked = false
+	#Docked = false
 
 func updatedronecourse():
 	var plship = PlayerShip.GetInstance()
@@ -151,7 +151,7 @@ func updatedronecourse():
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / GetShipAcelerationNode().position.x
+	var time_to_interception = (position.distance_to(ship_position)) / GetShipSpeed()
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception

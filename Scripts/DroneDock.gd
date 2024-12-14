@@ -24,6 +24,37 @@ func _ready() -> void:
 	#for g in 2:
 		#var drone = DroneScene.instantiate()
 		#call_deferred("AddDroneToHierarchy",drone)
+
+func AnyDroneNeedsFuel() -> bool:
+	for g in DockedDrones:
+		if (g.Fuel < 50):
+			return true
+	return false
+
+func DronesHaveFuel(f : float) -> bool:
+	var fuelneeded = f
+	for g in DockedDrones:
+		fuelneeded -= g.Fuel
+		if (fuelneeded <= 0):
+			return true
+	return false
+
+func SyphonFuelFromDrones(amm : float) -> void:
+	for g in DockedDrones:
+		if (g.Fuel > amm):
+			g.Fuel -= amm
+			return
+		else:
+			amm -= g.Fuel
+			g.Fuel = 0
+
+func GetDroneFuel() -> float:
+	var fuel : float
+	for g in DockedDrones:
+		fuel += g.Fuel
+	
+	return fuel
+
 func HasSpace() -> bool:
 	return DockedDrones.size() + FlyingDrones.size() < 6
 func ClearAllDrones() -> void:
@@ -106,9 +137,11 @@ func DroneRangeChanged(NewRange : float) -> void:
 	
 func LaunchDrone(Dr : Drone) -> void:
 	var fueltoconsume = $Line2D.get_point_position(1).x / 10 / 2
-	if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < fueltoconsume):
-		return
-	ShipData.GetInstance().ConsumeResource("FUEL", fueltoconsume)
+	var neededfuel = fueltoconsume - Dr.Fuel
+	if (neededfuel > 0):
+		if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
+			return
+		ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
 	PlayTakeoffSound()
 	UndockDrone(Dr)
 	Dr.global_rotation = $Line2D.global_rotation
@@ -127,9 +160,9 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
 	drone.DissableDrone()
-	if (drone.Fuel > 0):
-		ShipData.GetInstance().RefilResource("FUEL", drone.Fuel / 160)
-		drone.Fuel = 0
+	#if (drone.Fuel > 0):
+		#ShipData.GetInstance().RefilResource("FUEL", drone.Fuel)
+		#drone.Fuel = 0
 	
 	DroneDockEventH.OnDroneDocked(drone)
 	

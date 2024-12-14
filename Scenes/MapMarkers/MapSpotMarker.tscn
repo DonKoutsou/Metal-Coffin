@@ -15,7 +15,6 @@ border_width_left = 6
 border_width_top = 6
 border_width_right = 6
 border_width_bottom = 6
-border_color = Color(1, 1, 1, 0.3)
 corner_radius_top_left = 33
 corner_radius_top_right = 33
 corner_radius_bottom_right = 33
@@ -361,21 +360,6 @@ alignment = 1
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -32.5)
 scale = Vector2(7, 7.05)
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = 30.0
-offset_right = 60.0
-offset_bottom = 53.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Fuel resrves = 0"
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

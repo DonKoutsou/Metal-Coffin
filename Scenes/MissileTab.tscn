@@ -1,10 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://cwnxxystgxrjm"]
+[gd_scene load_steps=21 format=3 uid="uid://cwnxxystgxrjm"]
 
 [ext_resource type="Script" path="res://Scripts/MissileTab.gd" id="1_3wcnd"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="2_lb1ah"]
-[ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="3_ibmi6"]
-[ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="4_4c4v7"]
-[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="5_kgdfx"]
 [ext_resource type="PackedScene" uid="uid://0vtujl68ditn" path="res://Scenes/CrewButton.tscn" id="9_jyl4h"]
 [ext_resource type="Texture2D" uid="uid://dw307mqrdgntf" path="res://Assets/UIPiecies/dronetab_Camera 1.png" id="10_okn0a"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="11_gsihk"]
@@ -87,39 +84,6 @@ grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_3wcnd")
 MissileDockEventH = ExtResource("2_lb1ah")
-
-[node name="TextureButton" type="TextureButton" parent="." groups=["Buttons"]]
-layout_mode = 0
-offset_left = 53.0
-offset_top = -67.0
-offset_right = 204.0
-offset_bottom = -11.0
-texture_normal = ExtResource("3_ibmi6")
-texture_pressed = ExtResource("4_4c4v7")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="TextureButton"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -19.0
-offset_right = 36.5
-offset_bottom = 19.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("5_kgdfx")
-theme_override_font_sizes/font_size = 12
-text = "Fire Missile"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -327,7 +291,6 @@ offset_top = 6.0
 offset_right = 71.0
 offset_bottom = 46.0
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_toggle_drone_tab_pressed"]
 [connection signal="toggled" from="Control/Control/Arm" to="." method="_on_arm_drone_button_pressed"]
 [connection signal="pressed" from="Control/Control/Dissarm" to="." method="_on_dissarm_drone_button_2_pressed"]
 [connection signal="toggled" from="Control/Control/Dissarm" to="." method="_on_arm_drone_button_pressed"]

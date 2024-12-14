@@ -142,13 +142,14 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateDroneFuel(roundi(ship.Fuel))
 				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
-				Marker.global_position = ship.global_position
+				#Marker.global_position = ship.global_position
 			if (ship is PlayerShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateFuel()
 				Marker.UpdateHull()
-				Marker.global_position = ship.global_position
+				#Marker.global_position = ship.global_position
 				#Marker.UpdateSpeed(ship.GetSpeed())
+			Marker.global_position = ship.global_position
 		
 	
 	

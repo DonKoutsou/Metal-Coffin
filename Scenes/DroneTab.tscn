@@ -1,10 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://b1q7brpw8cc2p"]
+[gd_scene load_steps=24 format=3 uid="uid://b1q7brpw8cc2p"]
 
 [ext_resource type="Script" path="res://Scripts/DroneTab.gd" id="1_v0de6"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="2_35lsn"]
-[ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="3_1jdl8"]
-[ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="4_cq5o4"]
-[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="5_wmv0e"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="9_etxkl"]
 [ext_resource type="PackedScene" uid="uid://bl1t8w4ot467w" path="res://Scenes/AnimatedButton.tscn" id="10_igd2c"]
 [ext_resource type="Texture2D" uid="uid://bj2r2y882vpmo" path="res://Assets/UIPiecies/dissarmButton_Camera 1.png" id="11_fddnp"]
@@ -133,39 +130,6 @@ mouse_filter = 2
 script = ExtResource("1_v0de6")
 DroneDockEventH = ExtResource("2_35lsn")
 
-[node name="TextureButton" type="TextureButton" parent="." groups=["Buttons"]]
-layout_mode = 0
-offset_left = 52.0
-offset_top = -14.0
-offset_right = 203.0
-offset_bottom = 42.0
-texture_normal = ExtResource("3_1jdl8")
-texture_pressed = ExtResource("4_cq5o4")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="TextureButton"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -19.0
-offset_right = 36.5
-offset_bottom = 19.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("5_wmv0e")
-theme_override_font_sizes/font_size = 12
-text = "Deploy Drone"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kt4fa")
@@ -190,9 +154,9 @@ mouse_filter = 2
 [node name="Node2D" type="Control" parent="Control"]
 anchors_preset = 0
 offset_left = 21.0
-offset_top = 73.0
+offset_top = 178.0
 offset_right = 21.0
-offset_bottom = 73.0
+offset_bottom = 178.0
 
 [node name="SteeringWheel" parent="Control/Node2D" instance=ExtResource("9_etxkl")]
 layout_mode = 1
@@ -385,7 +349,6 @@ offset_top = 6.0
 offset_right = 71.0
 offset_bottom = 46.0
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_toggle_drone_tab_pressed"]
 [connection signal="SteeringDitChanged" from="Control/Node2D/SteeringWheel" to="." method="UpdateSteer"]
 [connection signal="toggled" from="Control/Control/Arm" to="." method="_on_arm_drone_button_pressed"]
 [connection signal="pressed" from="Control/Control/Dissarm" to="." method="_on_dissarm_drone_button_2_pressed"]

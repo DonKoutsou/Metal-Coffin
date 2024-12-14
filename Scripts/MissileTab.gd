@@ -60,60 +60,14 @@ func _on_toggle_drone_tab_pressed() -> void:
 	UpdateCrewSelect()
 		
 var SteeringDir : float = 0.0
-#signal SteeringDitChanged(NewValue : float)
-#signal MouseEntered()
-#signal MouseExited()
 
 func UpdateSteer(RelativeRot : float):
 	if (Armed):
-		#var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
-		#var prevsteer = SteeringDir
 		SteeringDir = RelativeRot
-		
-		#if (EvPos.x < $Control/Node2D.position.x):
-		#	$Control/Node2D/Sprite2D.rotation += rel.x + -rel.y
-		#	SteeringDir += (rel.x + -rel.y) * 10
-		#else :
-		#	$Control/Node2D/Sprite2D.rotation += rel.x + rel.y
-		#	SteeringDir += (rel.x + rel.y) * 10
-		#if (SteeringDir != prevsteer):
 		MissileDockEventH.MissileDirectionChanged(SteeringDir / 50)
-		#if (!$Control/Node2D/AudioStreamPlayer.playing):
-			#$Control/Node2D/AudioStreamPlayer.playing = true
-		#Input.vibrate_handheld(5)
-	
 	else:
 		ProgressCrewSelect()
-#var RangeDir : float = 0.0
-#func UpdateRange(RelativeRot : Vector2, EvPos : Vector2):
-	#var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
-	#var prevrange = RangeDir
-	#
-	#if (EvPos.x < $Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.position.x + 64):
-		#$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.rotation += rel.x -rel.y
-		#RangeDir = clamp(RangeDir + ((rel.x -rel.y) * 10), 0 , 100)
-	#else :
-		#$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.rotation += rel.x + rel.y
-		#RangeDir = clamp(RangeDir + ((rel.x + rel.y) * 10), 0, 100)
-	#if (RangeDir != prevrange):
-		#DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
-	#if (!$Control/Node2D/AudioStreamPlayer.playing):
-		#$Control/Node2D/AudioStreamPlayer.playing = true
-	#$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/PanelContainer/VBoxContainer/Label2.text = var_to_str(roundi(RangeDir / 2))
-#func UpdateDroneRange(Rang : float):
-	#if (Armed):
-		#RangeDir = clamp(RangeDir + Rang, 0, 100)
-		#DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
-		#$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 2))
-	#else:
-		#ProgressCrewSelect()
-	
-#func _on_area_2d_input_event(event: InputEvent) -> void:
-	#if (event is InputEventScreenDrag):
-		#UpdateSteer(event.relative, event.position)
-	#if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		#UpdateSteer(event.relative, event.position)
-		
+
 func UpdateCrewSelect(Select : int = 0):
 	if (Missiles.size() > Select):
 		CurrentlySelectedMissile = Missiles[Select]

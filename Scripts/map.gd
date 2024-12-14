@@ -452,7 +452,7 @@ func _DrawCityLines():
 		var lne = Line2D.new()
 		lne.joint_mode = Line2D.LINE_JOINT_ROUND
 		#paintedlines.append(lne)
-		lne.default_color = Color(1,1,1,0.2)
+		#lne.default_color = Color(1,1,1,0.2)
 		lne.material = mat
 		$CanvasLayer/SubViewportContainer/SubViewport/MapLines.add_child(lne)
 		for g in l:
@@ -474,7 +474,7 @@ func _DrawVillageLines():
 		lne.width = 5
 		lne.joint_mode = Line2D.LINE_JOINT_ROUND
 		paintedlines.append(lne)
-		lne.default_color = Color(1,1,1,0.3)
+		#lne.default_color = Color(1,1,1,0.3)
 		#lne.material = mat
 		$CanvasLayer/SubViewportContainer/SubViewport/MapLines.add_child(lne)
 		for g in l:
