@@ -101,11 +101,11 @@ func DroneAimDirChanged(NewDir : float) -> void:
 	$Line2D.rotation = NewDir / 10
 	
 func DroneRangeChanged(NewRange : float) -> void:
-	$Line2D.set_point_position(1, Vector2(NewRange * 80, 0))
-	print(NewRange)
+	$Line2D.set_point_position(1, Vector2(NewRange, 0))
+	#print(NewRange)
 	
 func LaunchDrone(Dr : Drone) -> void:
-	var fueltoconsume = $Line2D.get_point_position(1).x / 160
+	var fueltoconsume = $Line2D.get_point_position(1).x / 10 / 2
 	if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < fueltoconsume):
 		return
 	ShipData.GetInstance().ConsumeResource("FUEL", fueltoconsume)
@@ -113,7 +113,7 @@ func LaunchDrone(Dr : Drone) -> void:
 	UndockDrone(Dr)
 	Dr.global_rotation = $Line2D.global_rotation
 	Dr.global_position = global_position
-	Dr.Fuel = $Line2D.get_point_position(1).x
+	Dr.Fuel = $Line2D.get_point_position(1).x / 10 / 2
 	Dr.EnableDrone()
 func AddDroneToHierarchy(drone : Drone):
 	get_parent().get_parent().add_child(drone)

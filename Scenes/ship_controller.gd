@@ -2,9 +2,10 @@ extends Node
 
 @export var DroneDockEventH : DroneDockEventHandler
 @onready var player_ship: PlayerShip = $"../CanvasLayer/SubViewportContainer/SubViewport/PlayerShip"
+@onready var ship_camera: ShipCamera = $"../CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"
 @export var HappeningUI : PackedScene
 
-var AvailableShips : Array[Drone] = []
+var AvailableShips : Array[MapShip] = []
 
 var ControlledShip : MapShip
 
@@ -12,13 +13,18 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	ControlledShip = player_ship
+	AvailableShips.append(player_ship)
 
 func OnDroneDocked(D : Drone) -> void:
 	AvailableShips.erase(D)
+	D.ToggleFuelRangeVisibility(false)
+	if (D == ControlledShip):
+		_on_controlled_ship_swtich_range_changed()
+	
 	
 func OnDroneUnDocked(D : Drone) -> void:
 	AvailableShips.append(D)
-	ControlledShip = D
+	#ControlledShip = D
 
 func _on_radar_button_pressed() -> void:
 	ControlledShip.ToggleRadar()
@@ -37,6 +43,7 @@ func _on_land_button_pressed() -> void:
 		fuel.BoughtFuel = spot.PlayerFuelReserves
 		fuel.BoughtRepairs = spot.PlayerRepairReserves
 		fuel.connect("TransactionFinished", FuelTransactionFinished)
+		fuel.LandedShip = ControlledShip
 		Ingame_UIManager.GetInstance().AddUI(fuel, false, true)
 		SimulationManager.GetInstance().TogglePause(true)
 	Land(spot)
@@ -47,7 +54,10 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float)
 	if (spot.PlayerFuelReserves != BFuel):
 		spot.CityFuelReserves -= BFuel
 	if (BFuel < 0):
-		ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
+		if (ControlledShip is PlayerShip):
+			ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
+		else:
+			ControlledShip.Fuel -= -BFuel
 
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)
@@ -64,8 +74,37 @@ func Land(Spot : MapSpot) -> void:
 func AccelerationChanged(value: float) -> void:
 	ControlledShip.AccelerationChanged(value)
 
-func AccelerationEnded(value_changed: float) -> void:
-	pass # Replace with function body.
-
 func SteerChanged(value: float) -> void:
 	ControlledShip.Steer(deg_to_rad(value))
+
+
+func _on_controlled_ship_swtich_range_changed() -> void:
+	var currentcontrolled = AvailableShips.find(ControlledShip)
+	
+	if (currentcontrolled + 1 > AvailableShips.size() - 1):
+		var newcont = 0
+		if (newcont == currentcontrolled):
+			return
+		ControlledShip.ToggleFuelRangeVisibility(false)
+		ControlledShip = AvailableShips[newcont]
+	else:
+		ControlledShip.ToggleFuelRangeVisibility(false)
+		ControlledShip = AvailableShips[currentcontrolled + 1]
+	
+	$"../UI/ThrustSlider".ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	$"../UI/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
+	ControlledShip.ToggleFuelRangeVisibility(true)
+	FrameCamToShip()
+var camtw : Tween
+func FrameCamToShip():
+	if (camtw != null):
+		camtw.kill()
+	camtw = create_tween()
+	var plpos = ControlledShip.global_position
+	camtw.set_trans(Tween.TRANS_EXPO)
+	camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
+
+
+func _on_controlled_ship_return_pressed() -> void:
+	if (ControlledShip is Drone and !ControlledShip.CommingBack):
+		ControlledShip.ReturnToBase()

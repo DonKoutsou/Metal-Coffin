@@ -50,6 +50,8 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.PlayHostileShipNotif()
 	
 	if (Ship is Drone):
+		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
+		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		Ship.connect("DroneReturning", marker.DroneReturning)
 		marker.ToggleShipDetails(true)
 		marker.ToggleFriendlyShipDetails(true)
@@ -123,7 +125,7 @@ func _physics_process(delta: float) -> void:
 		var Marker = _ShipMarkers[g]
 		if (ship is HostileShip):
 			if (ship.VisibleBt.size() > 0):
-				#Marker.global_position = ship.global_position
+				Marker.global_position = ship.global_position
 				Marker.UpdateSpeed(ship.GetSpeed())
 				if (ship.SeenShips()):
 					Marker.UpdateThreatLevel(ship.VisibleBt[ship.VisibleBt.keys()[0]])
@@ -138,15 +140,16 @@ func _physics_process(delta: float) -> void:
 		else:
 			if (ship is Drone):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				Marker.UpdateDroneFuel(roundi(ship.Fuel / 160))
+				Marker.UpdateDroneFuel(roundi(ship.Fuel))
 				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
-			
+				Marker.global_position = ship.global_position
 			if (ship is PlayerShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateFuel()
 				Marker.UpdateHull()
+				Marker.global_position = ship.global_position
 				#Marker.UpdateSpeed(ship.GetSpeed())
-		Marker.global_position = ship.global_position
+		
 	
 	
 		

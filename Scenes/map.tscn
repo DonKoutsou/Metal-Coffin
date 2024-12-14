@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=47 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -28,9 +28,14 @@
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="30_vu87k"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
+[ext_resource type="Texture2D" uid="uid://b2spr3t4g1h0u" path="res://Assets/UIPiecies/ButtonPressed_Camera 1.png" id="33_gixko"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="33_j3iuy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
+[ext_resource type="Texture2D" uid="uid://dsjug6qiyxhlp" path="res://Assets/UIPiecies/PauseButton_Camera 1.png" id="34_tjywe"]
+[ext_resource type="Texture2D" uid="uid://dkrff8dnglv30" path="res://Assets/UIPiecies/PauseButtonPressed_Camera 1.png" id="35_bmto3"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="35_y1n03"]
+[ext_resource type="BitMap" uid="uid://bws1mu52unesf" path="res://Assets/UIPiecies/ButtonAlpha.png" id="36_j6qw0"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
@@ -250,9 +255,9 @@ custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -97.0
+offset_left = -73.0
 offset_top = -50.0
-offset_right = 101.0
+offset_right = 77.0
 offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -459,6 +464,53 @@ offset_right = -365.0
 offset_bottom = -1.0
 grow_horizontal = 0
 
+[node name="ControlledShipSwitch" type="TextureButton" parent="UI" groups=["Buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -86.0
+offset_right = 76.0
+offset_bottom = -6.0
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("33_j3iuy")
+texture_normal = ExtResource("33_gixko")
+texture_pressed = ExtResource("33_gixko")
+texture_click_mask = ExtResource("36_j6qw0")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="ControlledShipReturn" type="TextureButton" parent="UI" groups=["Buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -37.0
+offset_right = 76.0
+offset_bottom = 43.0
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("33_j3iuy")
+texture_normal = ExtResource("34_tjywe")
+texture_pressed = ExtResource("35_bmto3")
+texture_click_mask = ExtResource("36_j6qw0")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_il0tn")
@@ -471,10 +523,11 @@ libraries = {
 [connection signal="ShipForceStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipForcedStop"]
 [connection signal="ShipStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStoppedMoving"]
 [connection signal="SteeringDitChanged" from="UI/SteeringWheel" to="ShipController" method="SteerChanged"]
-[connection signal="AccelerationChangeEnded" from="UI/ThrustSlider" to="ShipController" method="AccelerationEnded"]
 [connection signal="AccelerationChanged" from="UI/ThrustSlider" to="ShipController" method="AccelerationChanged"]
 [connection signal="pressed" from="UI/RadarButton" to="ShipController" method="_on_radar_button_pressed"]
 [connection signal="pressed" from="UI/SimulationButton" to="." method="_on_simulation_button_pressed"]
 [connection signal="button_down" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_down"]
 [connection signal="button_up" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_up"]
 [connection signal="pressed" from="UI/LandButton" to="ShipController" method="_on_land_button_pressed"]
+[connection signal="pressed" from="UI/ControlledShipSwitch" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]
+[connection signal="pressed" from="UI/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]

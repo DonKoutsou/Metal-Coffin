@@ -70,6 +70,7 @@ shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.053
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
+resource_local_to_scene = true
 shader = ExtResource("2_2w4bb")
 shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
 shader_parameter/range_lines = 1.0

@@ -36,9 +36,6 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7khp2"]
 radius = 258.136
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2le8a"]
-light_mode = 1
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true
 radius = 150.0
@@ -77,6 +74,21 @@ shader_parameter/ShowRadat = true
 shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.008
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y742n"]
+resource_local_to_scene = true
+shader = ExtResource("6_x7c6h")
+shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
+shader_parameter/range_lines = 1.0
+shader_parameter/sector_lines = 1.0
+shader_parameter/line_width = 0.002
+shader_parameter/beam_angle = 0.2
+shader_parameter/beam_width = 0.003
+shader_parameter/trail_width = 0.5
+shader_parameter/sector_rotation = 0.5
+shader_parameter/ShowRadat = false
+shader_parameter/Paused = false
+shader_parameter/scale_factor = 0.08
+
 [node name="Drone" type="Node2D" groups=["Ships"]]
 script = ExtResource("1_vfr1e")
 Cpt = ExtResource("3_fw0pf")
@@ -106,13 +118,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSoundTrigger"]
 shape = SubResource("CircleShape2D_7khp2")
 debug_color = Color(0.718534, 0.251914, 1, 0.42)
-
-[node name="ShipTrajectory" type="Line2D" parent="."]
-z_index = 2
-material = SubResource("CanvasItemMaterial_2le8a")
-points = PackedVector2Array(0, 0, 0, 30)
-width = 8.0
-default_color = Color(0.969432, 0.527551, 0.201925, 1)
 
 [node name="ShipIconPivot" type="Node2D" parent="."]
 
@@ -178,6 +183,23 @@ debug_color = Color(4.81308e-08, 0.640532, 0.348463, 0.42)
 z_index = 2
 material = SubResource("ShaderMaterial_xqscw")
 anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Fuel_Range" type="ColorRect" parent="." groups=["MapLines"]]
+z_index = 2
+material = SubResource("ShaderMaterial_y742n")
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5

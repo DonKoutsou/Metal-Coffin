@@ -88,56 +88,21 @@ func _on_toggle_drone_tab_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 	$AnimationPlayer.play("Show")
 	UpdateCrewSelect()
-		
-var SteeringDir : float = 0.0
-#signal SteeringDitChanged(NewValue : float)
-#signal MouseEntered()
-#signal MouseExited()
 
 func UpdateSteer(RelativeRot : float):
-	#var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
-	#var prevsteer = SteeringDir
-	
-	#if (EvPos.x < $Control/Node2D.position.x):
-		#$Control/Node2D/Sprite2D.rotation += rel.x + -rel.y
-		#SteeringDir += (rel.x + -rel.y) * 10
-	#else :
-		#$Control/Node2D/Sprite2D.rotation += rel.x + rel.y
-		#SteeringDir += (rel.x + rel.y) * 10
-	#if (SteeringDir != prevsteer):
 	DroneDockEventH.DroneDirectionChanged(RelativeRot / 10)
-	#if (!$Control/Node2D/AudioStreamPlayer.playing):
-		#$Control/Node2D/AudioStreamPlayer.playing = true
+
 	Input.vibrate_handheld(50)
 var RangeDir : float = 0.0
-func UpdateRange(RelativeRot : Vector2, EvPos : Vector2):
-	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
-	var prevrange = RangeDir
-	
-	if (EvPos.x < $Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.position.x + 64):
-		$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.rotation += rel.x -rel.y
-		RangeDir = clamp(RangeDir + ((rel.x -rel.y) * 10), 0 , 100)
-	else :
-		$Control/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureButton.rotation += rel.x + rel.y
-		RangeDir = clamp(RangeDir + ((rel.x + rel.y) * 10), 0, 100)
-	if (RangeDir != prevrange):
-		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
-	if (!$Control/Node2D/AudioStreamPlayer.playing):
-		$Control/Node2D/AudioStreamPlayer.playing = true
-	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/PanelContainer/VBoxContainer/Label2.text = var_to_str(roundi(RangeDir / 2))
+
 func UpdateDroneRange(Rang : float):
 	if (Armed):
-		RangeDir = clamp(RangeDir + Rang, 0, 100)
-		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
-		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 2))
+		#TODO figure out this filthy math
+		RangeDir = clamp((RangeDir + Rang), 0, 100)
+		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir * 80))
+		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir * 80 / 10 / 2))
 	else:
 		ProgressCrewSelect()
-	
-#func _on_area_2d_input_event(event: InputEvent) -> void:
-	#if (event is InputEventScreenDrag):
-		#UpdateSteer(event.relative, event.position)
-	#if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		#UpdateSteer(event.relative, event.position)
 		
 func UpdateCrewSelect(Select : int = 0):
 	if (DockedDrones.size() > Select):
@@ -161,17 +126,7 @@ func ProgressCrewSelect():
 		CurrentlySelectedDrone = DockedDrones[i]
 	$Control/TextureRect/Light.Toggle(true, true)
 	$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
-func On_Drone_Range_Input(event: InputEvent) -> void:
-	if (event is InputEventScreenDrag):
-		if (Armed):
-			UpdateRange(event.relative, event.position)
-		else:
-			ProgressCrewSelect()
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		if (Armed):
-			UpdateRange(event.relative, event.position)
-		else:
-			ProgressCrewSelect()
+
 func _on_turn_off_button_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_STOP
 	if (Armed):

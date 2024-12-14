@@ -10,8 +10,8 @@ void fragment() {
 	mat2 rotation = mat2(vec2(cos(angle), -sin(angle)), vec2(sin(angle), cos(angle)));
 	vec2 uv = (UV-vec2(.5))*rotation + vec2(.5);
 
-	COLOR.a = max(smoothstep(line_width,.0,abs(uv.x-.5)), 
-				+ max(smoothstep(line_width,.0, abs(uv.x-.5-uv.y)), 
+	COLOR.a = max(smoothstep(line_width,.0,abs(uv.x-.5)),
+				+ max(smoothstep(line_width,.0, abs(uv.x-.5-uv.y)),
 				+ smoothstep(line_width,.0, abs(uv.y-.5+uv.x))));
 	COLOR.a -= smoothstep(.5,.52, length(uv - vec2(.5)));
 }

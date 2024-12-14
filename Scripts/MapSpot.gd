@@ -175,6 +175,11 @@ func AreaEntered(area: Area2D):
 			var ship = area.get_parent() as PlayerShip
 			ship.SetCurrentPort(self)
 			SpotAproached.emit(self)
+		else: if (area.get_collision_layer_value(4)):
+			CurrentlyVisiting = true
+			var ship = area.get_parent() as Drone
+			ship.SetCurrentPort(self)
+			SpotAproached.emit(self)
 func AreaExited(area: Area2D):
 	if (area.get_collision_layer_value(3)):
 		CurrentlyVisiting = false

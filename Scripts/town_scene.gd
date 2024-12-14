@@ -19,6 +19,8 @@ var BoughtRepairs : float = 0
 
 signal TransactionFinished(BFuel : float, BRepair : float, NewCurrency : float)
 
+var LandedShip : MapShip
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	PlFunds = ShipData.GetInstance().GetStat("FUNDS").GetCurrentValue()
@@ -26,7 +28,10 @@ func _ready() -> void:
 	if (!HasFuel):
 		$VBoxContainer2/VBoxContainer.visible = false
 	else:
-		SetFuelData()
+		if (LandedShip is PlayerShip):
+			SetFuelData()
+		else :
+			SetDroneFuelData()
 		$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds))
 		$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm.text = var_to_str(roundi(PlFuel + BoughtFuel))
 		$VBoxContainer2/VBoxContainer/ProgressBar.max_value = PlMaxFuel
@@ -35,7 +40,10 @@ func _ready() -> void:
 	if (!HasRepair):
 		$VBoxContainer2/VBoxContainer2.visible = false
 	else:
-		SetHullData()
+		if (LandedShip is PlayerShip):
+			SetHullData()
+		else :
+			SetDroneHullData()
 		$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm.text = var_to_str(roundi(PlHull))
 		$VBoxContainer2/VBoxContainer2/ProgressBar.max_value = PlMaxHull
 		$VBoxContainer2/VBoxContainer2/ProgressBar.value = PlHull + BoughtRepairs
@@ -51,7 +59,13 @@ func SetFuelData():
 func SetHullData():
 	PlHull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
 	PlMaxHull = ShipData.GetInstance().GetStat("HULL").GetStat()
-	
+
+func SetDroneFuelData():
+	PlFuel = LandedShip.Fuel / 160
+	PlMaxFuel = 50
+func SetDroneHullData():
+	PlHull = LandedShip.Cpt.GetStat("HULL").GetBaseStat()
+	PlMaxHull = LandedShip.Cpt.GetStat("HULL").GetStat()
 	
 func FuelBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

@@ -24,7 +24,10 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 	else :
 		#$TextureRect.rotation += rel.x + rel.y /20
 		SteeringDir += (rel.x + rel.y) * 2
-	
+
+func ForceSteer(st : float) -> void:
+	$TextureRect.rotation = st
+
 func _physics_process(_delta: float) -> void:
 	$TextureRect.rotation += SteeringDir
 	DistanceTraveled += abs(SteeringDir)

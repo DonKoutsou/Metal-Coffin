@@ -43,7 +43,7 @@ func EnableDrone():
 	Docked = false
 	set_physics_process(true)
 	GetShipBodyArea().monitoring = true
-	GetShipTrajecoryLine().visible = true
+	#$Fuel_Range.visible = true
 	$AudioStreamPlayer2D.play()
 	var rad = get_node_or_null("Radar/Radar_Range")
 	if (rad != null):
@@ -61,7 +61,7 @@ func DissableDrone():
 	Docked = true
 	$ShipBody/CollisionShape2D.disabled = true
 	$PointLight2D.visible = false
-	GetShipTrajecoryLine().visible = false
+	#$Fuel_Range.visible = false
 	GetShipIconPivot().rotation = 0.0
 	#Inventory.GetInstance().AddItems(StoredItem)
 	#StoredItem.clear()
@@ -89,24 +89,64 @@ func GetBattleStats() -> BattleShipStats:
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
+	if ($Aceleration.position.x == 0):
+		if (CurrentPort != null):
+			#CurrentPort.OnSpotVisited()
+			if (CanRefuel):
+				if (Fuel < 100 and CurrentPort.PlayerFuelReserves > 0):
+					var maxfuelcap = 100
+					var currentfuel = Fuel
+					var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
+					ShipDockActions.emit("Refueling", true, roundi(timeleft))
+					#ToggleShowRefuel("Refueling", true, roundi(timeleft))
+					Fuel +=  0.05 * SimulationSpeed
+					CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
+				else:
+					ShipDockActions.emit("Refueling", false, 0)
+					#ToggleShowRefuel("Refueling", false)
+			if (CanRepair):
+				if (Cpt.GetStat("HULL").GetBaseStat() < Cpt.GetStat("HULL").GetStat() and CurrentPort.PlayerRepairReserves):
+					var timeleft = ((Cpt.GetStat("HULL").GetStat() - Cpt.GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
+					ShipDockActions.emit("Repairing", true, roundi(timeleft))
+					#ToggleShowRefuel("Repairing", true, roundi(timeleft))
+					Cpt.GetStat("HULL").RefilCurrentVelue(0.05 * SimulationSpeed)
+				else:
+					ShipDockActions.emit("Repairing", false, 0)
+					#ToggleShowRefuel("Repairing", false)
+			#if (CanUpgrade):
+				#var inv = Inventory.GetInstance()
+				#if (inv.UpgradedItem != null):
+					##ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+					#ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+				#else:
+					#ShipDockActions.emit("Upgrading", false, 0)
+					##ToggleShowRefuel("Upgrading", false)
+	if (Fuel <= 0):
+		return
 	if (CommingBack):
-		var interceptionpoint = calculateinterceptionpoint()
-		updatedronecourse(interceptionpoint)
-	else:
-		for g in SimulationSpeed:
-			Fuel = max(0, Fuel - GetShipAcelerationNode().position.x)
-			global_position = GetShipAcelerationNode().global_position
-		GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
-		if (Fuel <= 0):
-			rotation = 0.0
-			CommingBack = true
-			DroneReturning.emit()
-			Docked = false
-			#$Line2D.visible = true
+		updatedronecourse()
+		
+	for g in SimulationSpeed:
+		var ftoconsume = $Aceleration.position.x / 10 / 2
+		Fuel -= ftoconsume
+		global_position = GetShipAcelerationNode().global_position
+	UpdateFuelRange(Fuel, 2)
+	#GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
+	if (Fuel <= global_position.distance_to(PlayerShip.GetInstance().global_position) / 10 / 2):
+		ReturnToBase()
+		#$Line2D.visible = true
 
-func calculateinterceptionpoint() -> Vector2:
+func ReturnToBase():
+	$Aceleration.position.x = GetShipMaxSpeed()
+	rotation = 0.0
+	CommingBack = true
+	DroneReturning.emit()
+	Docked = false
+
+func updatedronecourse():
 	var plship = PlayerShip.GetInstance()
 	# Get the current position and velocity of the ship
+	
 	var ship_position = plship.position
 	var ship_velocity = plship.GetShipSpeedVec()
 
@@ -115,17 +155,13 @@ func calculateinterceptionpoint() -> Vector2:
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
+	look_at(predicted_position)
+	
+func GetShipSpeed() -> float:
+	if (Docked):
+		return PlayerShip.GetInstance().GetShipSpeed()
+	return super()
 
-	return predicted_position
-	
-func updatedronecourse(interception_point: Vector2):
-	# Calculate the direction vector from the drone to the interception point
-	var direction = (interception_point - position).normalized()
-	GetShipIconPivot().look_at(to_global(interception_point - position))
-	# Move the drone towards the interception point
-	position += (direction * GetShipAcelerationNode().position.x) * SimulationSpeed
-	GetShipTrajecoryLine().set_point_position(1, interception_point - position)
-	
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
@@ -146,7 +182,6 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		plship.GetDroneDock().DockDrone(self, true)
 		CommingBack = false
 		
-		
 func GetShipBodyArea() -> Area2D:
 	return $ShipBody
 func GetShipRadarArea() -> Area2D:
@@ -157,5 +192,3 @@ func GetShipAcelerationNode() -> Node2D:
 	return $Aceleration
 func GetShipIconPivot() -> Node2D:
 	return $ShipIconPivot
-func GetShipTrajecoryLine() -> Line2D:
-	return $ShipTrajectory
