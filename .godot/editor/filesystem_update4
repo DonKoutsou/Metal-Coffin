@@ -1,4 +1,3 @@
-res://default_bus_layout.tres
 res://Scenes/map.tscn
 res://Theme/DarkBluePanel.tres
 res://Theme/DarkBlueContShadow.tres
@@ -53,6 +52,9 @@ res://Shaders/missileCone.gdshader
 res://Shaders/Static.gdshader
 res://Shaders/Screen2.gdshader
 res://Shaders/Arrow2D.gdshader
+res://Scripts/Map.gd
+res://Scripts/ship_camera.gd
+res://Scripts/world.gd
 res://Scenes/Clock.tscn
 res://Scenes/MapMarkers/ShipMarker.tscn
 res://Scenes/player_ship.tscn
@@ -67,4 +69,12 @@ res://Scenes/UISTatContainer.tscn
 res://Scenes/TownScene.tscn
 res://Scenes/MissileTab.tscn
 res://Scenes/MapMarkers/MapSpotMarker.tscn
-res://Scripts/Map.gd
+res://Scripts/DroneSaveData.gd
+res://Scripts/DroneDock.gd
+res://Scripts/Drone.gd
+res://Scripts/SD_Player.gd
+res://Scripts/save_load_manager.gd
+res://Scripts/MissileTab.gd
+res://Scripts/MissileSaveData.gd
+res://Scripts/missile.gd
+res://Scenes/missile.tscn

@@ -81,3 +81,13 @@ func HoneAtEnemy():
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 
 	look_at(predicted_position)
+
+func GetSaveData() -> MissileSaveData:
+	var dat = MissileSaveData.new()
+	dat.Pos = global_position
+	dat.Rot = global_rotation
+	dat.MisName = MissileName
+	dat.MisSpeed = Speed
+	dat.Distance = Distance
+	dat.Scene = scene_file_path
+	return dat

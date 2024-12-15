@@ -21,9 +21,6 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneLaunched", LaunchDrone)
 	DroneDockEventH.connect("DroneRangeChanged", DroneRangeChanged)
 	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
-	#for g in 2:
-		#var drone = DroneScene.instantiate()
-		#call_deferred("AddDroneToHierarchy",drone)
 
 func AnyDroneNeedsFuel() -> bool:
 	for g in DockedDrones:
@@ -52,16 +49,36 @@ func GetDroneFuel() -> float:
 	var fuel : float
 	for g in DockedDrones:
 		fuel += g.Fuel
-	
 	return fuel
 
 func HasSpace() -> bool:
 	return DockedDrones.size() + FlyingDrones.size() < 6
+	
 func ClearAllDrones() -> void:
 	for g in DockedDrones:
 		DroneDisharged(g)
 	for g in FlyingDrones:
 		DroneDisharged(g)
+
+func GetSaveData() -> Array[DroneSaveData]:
+	var saved : Array[DroneSaveData]
+	for g in DockedDrones:
+		saved.append(g.GetSaveData())
+	for g in FlyingDrones:
+		saved.append(g.GetSaveData())
+	return saved
+	
+func LoadSaveData( Dat : Array[DroneSaveData]) -> void:
+	for g in Dat:
+		var dr = AddCaptain(g.Cpt)
+		dr.Fuel = g.Fuel
+		if (!g.Docked):
+			UndockDrone(dr)
+			dr.EnableDrone()
+			dr.global_position = g.Pos
+			dr.global_rotation = g.Rot
+			dr.CommingBack = g.CommingBack
+	
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
 	for g in DockedDrones:
@@ -69,6 +86,7 @@ func GetCaptains() -> Array[Captain]:
 	for g in FlyingDrones:
 		cptns.append(g.Cpt)
 	return cptns
+	
 func DroneDisharged(Dr : Drone):
 	if (DockedDrones.has(Dr)):
 		DockedDrones.erase(Dr)
@@ -78,10 +96,13 @@ func DroneDisharged(Dr : Drone):
 	Inventory.GetInstance().UpdateSize()
 	MapPointerManager.GetInstance().RemoveShip(Dr)
 	Dr.queue_free()
-func AddCaptain(Cpt : Captain) -> void:
+
+func AddCaptain(Cpt : Captain) -> Drone:
 	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
 	ship.Cpt = Cpt
 	AddDrone(ship)
+	return ship
+	
 func AddDrone(Drne : Drone) -> void:
 	#var drone = DroneScene.instantiate()
 	var notif = CaptainNotif.instantiate() as CaptainNotification
@@ -90,6 +111,7 @@ func AddDrone(Drne : Drone) -> void:
 	Inventory.GetInstance().UpdateSize()
 	Ingame_UIManager.GetInstance().AddUI(notif, false, true)
 	AddDroneToHierarchy(Drne)
+	
 func PlayLandingSound()-> void:
 	var sound = AudioStreamPlayer.new()
 	sound.stream = LandedVoiceLines.pick_random()
@@ -98,6 +120,7 @@ func PlayLandingSound()-> void:
 	sound.connect("finished", SoundEnded)
 	sound.volume_db = -10
 	sound.play()
+	
 func PlayReturnSound() -> void:
 	var sound = AudioStreamPlayer.new()
 	sound.stream = ReturnVoiceLines.pick_random()
@@ -105,7 +128,7 @@ func PlayReturnSound() -> void:
 	add_child(sound, true)
 	sound.connect("finished", SoundEnded)
 	sound.volume_db = -10
-	sound.play()	
+	sound.play()
 
 func PlayTakeoffSound() -> void:
 	var sound = AudioStreamPlayer.new()
@@ -148,11 +171,11 @@ func LaunchDrone(Dr : Drone) -> void:
 	Dr.global_position = global_position
 	Dr.Fuel = $Line2D.get_point_position(1).x / 10 / 2
 	Dr.EnableDrone()
+	
 func AddDroneToHierarchy(drone : Drone):
 	get_parent().get_parent().add_child(drone)
 	DockDrone(drone)
 	DroneDockEventH.OnDroneAdded(drone)
-
 
 func DockDrone(drone : Drone, playsound : bool = false):
 	if (playsound):
@@ -175,7 +198,6 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		dock.add_child(trans)
 		trans.remote_path = drone.get_path()
 		return
-	
 
 func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)

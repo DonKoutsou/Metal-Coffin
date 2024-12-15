@@ -17,7 +17,7 @@ shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahj0"]
 radius = 4.0
 
-[node name="Missile" type="Node2D" groups=["Ships"]]
+[node name="Missile" type="Node2D" groups=["Missiles", "Ships"]]
 script = ExtResource("1_dxfkf")
 MissileLaunchSound = ExtResource("4_v3idv")
 MissileKillSound = ExtResource("3_ja3ei")

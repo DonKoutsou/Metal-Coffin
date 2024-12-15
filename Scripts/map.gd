@@ -1,19 +1,12 @@
 extends Control
 class_name Map
 
-#@export var SpotScene: PackedScene
 @export var TownTypes : Array[PackedScene]
-#@export var MapSpotTypes : Array[MapSpotType]
 @export var SpecialTownTypes : Array[PackedScene]
-#@export var CommetMapSpots : Array[MapSpotType]
 @export var MinorCityType : PackedScene
 @export var FinalCity : PackedScene
 @export var MapSize : int = 20
-#@export var AnalyzerScene : PackedScene
 @export var MapGenerationDistanceCurve : Curve
-@export var DroneDockEventH : DroneDockEventHandler
-
-
 @onready var thrust_slider: ThrustSlider = $UI/ThrustSlider
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
@@ -23,14 +16,9 @@ signal MAP_StageSearched(Spt : MapSpotType)
 signal MAP_ShipSearched(Ship : BaseShip)
 
 var SpotList : Array[Town]
-var currentstage = 0
 var ShowingTutorial = false
-#var GalaxyMat :ShaderMaterial
-#var SelectedDrone : Drone
-#func OnDroneLaucned(D : Drone):
-	#SelectedDrone = D
+
 func _ready() -> void:
-	#DroneDockEventH.connect("DroneLaunched", OnDroneLaucned)
 	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
 	if (SpotList.size() == 0):
 		GenerateMap()
@@ -78,47 +66,6 @@ func ToggleUIForIntro(t : bool):
 	$"UI/Missile Tab".visible = t
 	$UI/SimulationButton.visible = t
 
-var stattween : Tween
-func ShowStation():
-	stattween = create_tween()
-	var stations = get_tree().get_nodes_in_group("Capital City Center")
-	var stationpos = stations[stations.size()-1].global_position
-	stattween.set_trans(Tween.TRANS_EXPO)
-	stattween.tween_property(camera_2d, "global_position", stationpos, 6)
-	#var mattw = create_tween()
-	#mattw.set_trans(Tween.TRANS_EXPO)
-	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
-	
-func FrameCamToPlayer():
-	if (stattween != null):
-		stattween.kill()
-	var tw = create_tween()
-	var plpos = GetPlayerShip().global_position
-	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(camera_2d, "global_position", plpos, plpos.distance_to(camera_2d.global_position) / 1000)
-	#var mattw = create_tween()
-	#mattw.set_trans(Tween.TRANS_EXPO)
-	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", plpos.x / 500,6)
-func UpdateCameraPos(relativeMovement : Vector2):
-	var maxposX = 999999
-	var vpsizehalf = (get_viewport_rect().size.y / 2)
-	var maxposY = Vector2(vpsizehalf - 2500, vpsizehalf + 2500)
-	var rel = relativeMovement / camera_2d.zoom
-	var newpos = Vector2(clamp(camera_2d.position.x - rel.x, 0, maxposX), clamp(camera_2d.position.y - rel.y, maxposY.x, maxposY.y))
-	if (newpos.x != camera_2d.position.x):
-		#$CanvasLayer/SubViewportContainer/SubViewport/Control2.position.x = newpos.x - ($CanvasLayer/SubViewportContainer/SubViewport/Control2.size.x /2)
-		camera_2d.position.x = newpos.x
-		#var val = GalaxyMat.get_shader_parameter("thing")
-		#GalaxyMat.set_shader_parameter("thing", val - (rel.x / 1800))
-	if (newpos.y != camera_2d.position.y):
-		
-		camera_2d.position.y = newpos.y
-		#var val2 = GalaxyMat.get_shader_parameter("thing2")
-		#GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 1800))
-	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2/Panel3.material.set_shader_parameter("pan_offset", camera_2d.position * camera_2d.zoom)
-#func _input(event: InputEvent) -> void:
-	#pass
-
 func GenerateMap() -> void:
 	#DECIDE ON PLECEMENT OF SPECIAL SPOTS
 	var SpecialSpots : Array[int] = []
@@ -155,13 +102,8 @@ func GenerateMap() -> void:
 		else:
 			type = TownTypes.pick_random()
 		#SET THE TYPE
-		#sc.SetSpotData(type)
 		sc = type.instantiate() as Town
 		sc.connect("TownSpotAproached", Arrival)
-		#sc.connect("TownSpotLanded", Land)
-		#sc.connect("SpotSearched", SearchLocation)
-		#sc.connect("SpotAnalazyed", AnalyzeLocation)
-		
 		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
 		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
@@ -181,29 +123,26 @@ func GenerateMap() -> void:
 		g.SpawnEnemies()
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
-	_DrawCityLines()
-	_DrawVillageLines()
-	#print(lines)
-		#var cit1 = g as MapSpot
-		#var ln = Line2D.new()
-		#g.add_child(ln)
-		#
-		#var mat = CanvasItemMaterial.new()
-		#mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
-		#ln.material = mat
-		#
-		#ln.add_point(Vector2.ZERO)
-		#for z in cities:
-			#var cit = z as MapSpot
-			#if (z == g):
-				#continue
-			#if (z.global_position.distance_to(g.global_position) < 4000):
-				#ln.add_point(cit1.to_local(cit.global_position))
+	
+	_DrawMapLines(["City Center", "Capital City Center"])
+	_DrawMapLines(["Chora"], true, false)
+
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
 		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
 		ship.LoadSaveData(g)
+func RespawnMissiles(MissileData : Array[Resource]) -> void:
+	for g in MissileData:
+		var dat = g as MissileSaveData
+		var missile = (load(dat.Scene) as PackedScene).instantiate() as Missile
+		missile.Distance = dat.Distance
+		missile.MissileName = dat.MisName
+		missile.Speed = dat.MisSpeed
+		$CanvasLayer/SubViewportContainer/SubViewport.add_child(missile)
+		missile.global_position = dat.Pos
+		missile.global_rotation = dat.Rot
+		
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
 func GetEnemySaveData() ->SaveData:
@@ -215,13 +154,20 @@ func GetEnemySaveData() ->SaveData:
 		Datas.append(enem.GetSaveData())
 	dat.Datas = Datas
 	return dat
+func GetMissileSaveData() -> SaveData:
+	var dat = SaveData.new()
+	dat.DataName = "Missiles"
+	var Datas : Array[Resource] = []
+	for g in get_tree().get_nodes_in_group("Missiles"):
+		var mis = g as Missile
+		Datas.append(mis.GetSaveData())
+	dat.Datas = Datas
+	return dat
 func _swap(arr: Array, i: int, j: int):
 	var tmp = arr[i]
 	arr[i] = arr[j]
 	arr[j] = tmp
 
-
-	
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
 	return Vector2(randf_range(PrevPos.x, PrevPos.x + (800 * Distance)), randf_range(-2000, +2000))
 #TODO IMPROVE
@@ -240,23 +186,6 @@ func Arrival(_Spot : MapSpot)	-> void:
 		SimulationManager.GetInstance().TogglePause(true)
 		var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
 		Ingame_UIManager.GetInstance().CallbackDiag(DiagText, LandTutorialShown, false)
-	#print("Arrived on spot")
-	#if Spot.SpotType.FullName == "Black Whole":
-		#var randspot = SpotList.pick_random() as MapSpot
-		#while abs(SpotList.find(randspot) - SpotList.find(Spot)) > 25 or randspot.SpotType.FullName == "Black Whole":
-			#randspot = SpotList.pick_random() as MapSpot
-		#GetPlayerShip().global_position = randspot.global_position
-		#PopUpManager.GetInstance().DoPopUp("You've entered a black whole and have been teleported away")
-		#GetPlayerShip().HaltShip()
-		#
-	#if Spot.SpotType.GetEnumString() == "ASTEROID_BELT":
-		#Spot.queue_free()
-		#var val = Spot.SpotType.GetCustomData("IsLarge")[0].Value as bool
-		#if (val):
-			#MAP_AsteroidBeltArrival.emit(120)
-		#else:
-			#MAP_AsteroidBeltArrival.emit(60)
-		##GetPlayerShip().HaltShip()
 	
 func LandTutorialShown():
 	SimulationManager.GetInstance().TogglePause(false)
@@ -267,27 +196,6 @@ func StageFailed() -> void:
 	set_process(true)
 	set_process_input(true)
 	#Travelling = false
-
-		
-
-
-#func DepartForLocation(stage :MapSpot) -> void:
-#	if (Travelling):
-#		return
-	#var spotprev = SpotList[currentstage] as MapSpot
-#	Travelling = true
-#	var stagenum = SpotList.find(stage)
-#	var fuel = player_ship.global_position.distance_to(stage.global_position) / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
-#	var o2 = player_ship.global_position.distance_to(stage.global_position) / 40
-#	StageSellected.emit(stage, stagenum, fuel, o2)
-	# enable inputs
-	#set_process(false)
-	
-# CALLED WHEN CLICKED ON A PLANET
-#func AnalyzeLocation(Spot : MapSpot):
-	#var analyzer = AnalyzerScene.instantiate() as PlanetAnalyzer
-	#analyzer.SetVisuals(Spot)
-	#Ingame_UIManager.GetInstance().add_child(analyzer)
 
 func SearchLocation(stage : MapSpot):
 	if (GetPlayerShip().Travelling):
@@ -318,109 +226,41 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		var sc = load(dat.TownScene).instantiate() as Town
 		sc.LoadingData = true
 		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
-		#sc.connect("MapPressed", Arrival)
 		sc.connect("TownSpotAproached", Arrival)
-		#sc.connect("TownSpotLanded", Land)
-		#sc.connect("SpotAnalazyed", AnalyzeLocation)
-		#var type = dat.SpotType
-		#sc.SetSpotData(type)
 		
 		sc.LoadSaveData(dat)
 		SpotList.insert(g, sc)
-		#if (dat.Seen):
-			#sc.OnSpotSeen(false)
-		#
-		#sc.Visited = dat.Visited
-		#
-		#if (dat.Analyzed):
-			#sc.OnSpotAnalyzed()
-	call_deferred("_DrawCityLines")
-	call_deferred("_DrawVillageLines")
-	call_deferred("FrameCamToPlayer")
-#SCREEN SHAKE///////////////////////////////////
-var shakestr = 0.0
-func applyshake():
-	shakestr = 2
 
-func _physics_process(delta: float) -> void:
-	if shakestr > 0.0:
-		shakestr = lerpf(shakestr, 0, 5.0 * delta)
-		var of = RandomOffset()
-		camera_2d.offset = of
-func RandomOffset()-> Vector2:
-	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
+
+	call_deferred("_DrawMapLines", ["City Center", "Capital City Center"])
+	call_deferred("_DrawMapLines", ["Chora"], true, false)
+	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera.call_deferred("FrameCamToPlayer")
+
 #////////////////////////////////////////////	
 #SIGNALS COMMING FROM PLAYER SHIP
 func ShipStartedMoving():
-	applyshake()
+	camera_2d.applyshake()
 	
 func ShipStoppedMoving():
-	applyshake()
+	camera_2d.applyshake()
 	
 func ShipForcedStop():
 	thrust_slider.ZeroAcceleration()
 #INPUT HANDLING////////////////////////////
 func _MAP_INPUT(event: InputEvent) -> void:
 	if (event.is_action_pressed("ZoomIn")):
-		_HANDLE_ZOOM(1.1)
+		camera_2d._HANDLE_ZOOM(1.1)
 	if (event.is_action_pressed("ZoomOut")):
-		_HANDLE_ZOOM(0.9)
+		camera_2d._HANDLE_ZOOM(0.9)
 	#if (GetPlayerShip().ChangingCourse):
 		#return
 	if (event is InputEventScreenTouch):
-		_HANDLE_TOUCH(event)
+		camera_2d._HANDLE_TOUCH(event)
 	if (event is InputEventScreenDrag):
-		_HANDLE_DRAG(event)
+		camera_2d._HANDLE_DRAG(event)
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		UpdateCameraPos(event.relative)
-#////////////////////////////
-func _HANDLE_ZOOM(zoomval : float):
-	var prevzoom = camera_2d.zoom
-	camera_2d.zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.1,0.1), Vector2(2.1,2.1))
-	for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
-		g.visible = camera_2d.zoom < Vector2(1, 1)
-	for g in get_tree().get_nodes_in_group("MapLines"):
-		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
-	_UpdateMapGridVisibility()
-	#for g in get_tree().get_nodes_in_group("DissapearingMap"):
-		#g.modulate.a = mod
-#////////////////////////////
-var touch_points: Dictionary = {}
-var start_zoom: Vector2
-var start_dist: float
-func _HANDLE_TOUCH(event: InputEventScreenTouch):
-	if event.pressed:
-		touch_points[event.index] = event.position
-	else:
-		touch_points.erase(event.index)
+		camera_2d.UpdateCameraPos(event.relative)
 
-	if touch_points.size() == 2:
-		var touch_point_positions = touch_points.values()
-		start_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
-		start_zoom = camera_2d.zoom
-		#start_dist = 0
-#////////////////////////////
-func _HANDLE_DRAG(event: InputEventScreenDrag):
-	touch_points[event.index] = event.position
-	if touch_points.size() == 2 :
-		var touch_point_positions = touch_points.values()
-		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
-		var zoom_factor = (start_dist / current_dist)
-		camera_2d.zoom = clamp(start_zoom / zoom_factor, Vector2(0.1,0.1), Vector2(2.1,2.1))
-		for g in get_tree().get_nodes_in_group("MapLines"):
-			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, camera_2d.zoom.x / 2))
-		_UpdateMapGridVisibility()
-	else:
-		UpdateCameraPos(event.relative)
-		
-func _UpdateMapGridVisibility():
-	if (camera_2d.zoom.x < 0.25):
-		var tw = create_tween()
-		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2, "modulate", Color(1,1,1,1), 0.5)
-	else:
-		var tw = create_tween()
-		tw.tween_property($CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2, "modulate", Color(1,1,1,0), 0.5)
-	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2/Panel3.material.set_shader_parameter("zoom", camera_2d.zoom.x * 2)
 	#print("Zoom changed to " + var_to_str(camera_2d.zoom.x))
 #//////////////////////////////////////////////////////////
 #ARROW FOR LOCATING PLAYER SHIP
@@ -436,50 +276,32 @@ func PlayerExitedScreen() -> void:
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
 #//////////////////////////////////////////////////////////
 
-#Map Line generation
-func _DrawCityLines():
-	var cities = get_tree().get_nodes_in_group("City Center")
-	cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
+func _DrawMapLines(SpotNames : Array, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
+	var Spots : Array
+	for g in SpotNames:
+		Spots.append_array(get_tree().get_nodes_in_group(g))
 	var cityloc : Array[Vector2]
-	for g in cities:
+	for g in Spots:
 		cityloc.append(g.global_position)
 	
 	var lines = _prim_mst_optimized(cityloc)
 	var mat = CanvasItemMaterial.new()
 	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
-	#var paintedlines : Array[Line2D]
-	for l in lines:
-		var lne = Line2D.new()
-		lne.joint_mode = Line2D.LINE_JOINT_ROUND
-		#paintedlines.append(lne)
-		#lne.default_color = Color(1,1,1,0.2)
-		lne.material = mat
-		$CanvasLayer/SubViewportContainer/SubViewport/MapLines.add_child(lne)
-		for g in l:
-			lne.add_point(g)
-		lne.z_index = 2
-func _DrawVillageLines():
-	var cities = get_tree().get_nodes_in_group("Chora")
-	#cities.append_array(get_tree().get_nodes_in_group("Capital City Center"))
-	var cityloc : Array[Vector2]
-	for g in cities:
-		cityloc.append(g.global_position)
-	
-	var lines = _prim_mst_optimized(cityloc)
-	#var mat = CanvasItemMaterial.new()
-	#mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
 	var paintedlines : Array[Line2D]
 	for l in lines:
 		var lne = Line2D.new()
-		lne.width = 5
 		lne.joint_mode = Line2D.LINE_JOINT_ROUND
 		paintedlines.append(lne)
-		#lne.default_color = Color(1,1,1,0.3)
-		#lne.material = mat
+		#lne.default_color = Color(1,1,1,0.2)
+		if (Unshaded):
+			lne.material = mat
 		$CanvasLayer/SubViewportContainer/SubViewport/MapLines.add_child(lne)
 		for g in l:
 			lne.add_point(g)
-		#lne.z_index = 2
+		if (Unshaded):
+			lne.z_index = 2
+	if (!RandomiseLines):
+		return 
 	for l in paintedlines:
 		var point1 = l.get_point_position(0)
 		var point2 = l.get_point_position(1)
@@ -563,10 +385,6 @@ func _prim_mst_optimized(cities: Array) -> Array:
 
 	return mst_edges
 
-
-
-
-
 func _on_missile_button_pressed() -> void:
 	GetPlayerShip().FireMissile()
 
@@ -575,7 +393,6 @@ var simmulationPaused = false
 func _on_simulation_button_pressed() -> void:
 	simmulationPaused = !simmulationPaused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
-	
 
 func _on_speed_simulation_button_down() -> void:
 	SimulationManager.GetInstance().SpeedToggle(true)

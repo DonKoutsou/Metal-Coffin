@@ -15,15 +15,11 @@ func _ready() -> void:
 
 func MissileAdded(MIs : MissileItem) -> void:
 	Missiles.append(MIs)
-	#visible = DockedDrones.size() > 0
 	if (CurrentlySelectedMissile == null):
 		UpdateCrewSelect()
 
 func MissileRemoved(MIs : MissileItem) -> void:
-
 	Missiles.erase(MIs)
-	#visible = DockedDrones.size() > 0
-	
 	if (MIs == CurrentlySelectedMissile):
 		CurrentlySelectedMissile = null
 		UpdateCrewSelect()
@@ -33,7 +29,6 @@ func _on_deploy_drone_button_pressed() -> void:
 	_on_dissarm_drone_button_2_pressed()
 	
 func _on_arm_drone_button_pressed(t : bool) -> void:
-	
 	if (Missiles.size() == 0):
 		_on_dissarm_drone_button_2_pressed()
 		return
@@ -77,6 +72,7 @@ func UpdateCrewSelect(Select : int = 0):
 	else:
 		$Control/TextureRect/Label2.text = "No Missiles"
 		$Control/TextureRect/Light.Toggle(true)
+		
 func ProgressCrewSelect():
 	if (Missiles.size() == 0):
 		$Control/TextureRect/Label2.text = "No Missiles"

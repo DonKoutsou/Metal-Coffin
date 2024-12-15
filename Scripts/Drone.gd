@@ -17,6 +17,16 @@ func  _ready() -> void:
 	UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
 	#MapPointerManager.GetInstance().AddShip(self, true)
 
+func GetSaveData() -> DroneSaveData:
+	var dat = DroneSaveData.new()
+	dat.CommingBack = CommingBack
+	dat.Cpt = Cpt
+	dat.Fuel = Fuel
+	dat.Docked = Docked
+	dat.Pos = global_position
+	dat.Rot = global_rotation
+	return dat
+
 func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 

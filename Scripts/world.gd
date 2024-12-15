@@ -41,12 +41,12 @@ func PlayIntro():
 func ShowStation():
 	var DiagText : Array[String]  = ["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."]
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ReturnCamToPlayer, true)
-	GetMap().ShowStation()
+	GetMap().camera_2d.ShowStation()
 func ReturnCamToPlayer():
 	#var DiagText = []
 	#Ingame_UIManager.GetInstance().CallbackDiag(DiagText, EnableBackUI)
 	EnableBackUI()
-	GetMap().FrameCamToPlayer()
+	GetMap().camera_2d.FrameCamToPlayer()
 func EnableBackUI():
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = true
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true

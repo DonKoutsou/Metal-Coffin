@@ -46,6 +46,7 @@ DissapearingMap=""
 MapInfo=""
 UnmovableMapInfo=""
 Clock=""
+Missiles=""
 
 [input]
 

@@ -16,12 +16,13 @@ func Save(world : World) -> void:
 	var DataArray : Array[Resource] = []
 	DataArray.append(Mapz.GetSaveData())
 	DataArray.append(Mapz.GetEnemySaveData())
+	DataArray.append(Mapz.GetMissileSaveData())
 	DataArray.append(Inv.GetSaveData())
 	DataArray.append(world.ShipDat.GetSaveData())
 	DataArray.append(world.GetShipSaveData())
 	var pldata = PlayerSaveData.new()
 	pldata.Pos = Mapz.GetPlayerPos()
-	pldata.Captains = PlayerShip.GetInstance().GetDroneDock().GetCaptains()
+	pldata.DroneDat = PlayerShip.GetInstance().GetDroneDock().GetSaveData()
 	DataArray.append(pldata)
 	DataArray.append(DialogueProgressHolder.GetInstance().ToldDialogues)
 	var sav = SaveData.new()
@@ -49,17 +50,20 @@ func Load(world : World) ->bool:
 	Mapz.SetPlayerPos(sav.GetData("PLData").Pos)
 	
 	var enems : Array[Resource] = (sav.GetData("Enemies") as SaveData).Datas
+	var misses : Array[Resource] = (sav.GetData("Missiles") as SaveData).Datas
 	world.Loading = true
 	call_deferred("LoadStats", world, StatData)
-	call_deferred("LoadCaptains", sav.GetData("PLData").Captains)
-	call_deferred("RespawnEnems", Mapz,enems )
+	call_deferred("LoadCaptains", sav.GetData("PLData").DroneDat)
+	call_deferred("RespawnEnems", Mapz,enems)
+	call_deferred("RespawnMissiles", Mapz,misses)
 	return true
 	#world.LoadData(StatData)
 func LoadStats(world : World, StatData : Resource) -> void:
 	world.LoadData(StatData)
-func LoadCaptains(Cptns : Array[Captain]):
+func LoadCaptains(DroneDat : Array[DroneSaveData]):
 	var dock = PlayerShip.GetInstance().GetDroneDock()
-	for g in Cptns:
-		dock.AddCaptain(g)
+	dock.LoadSaveData(DroneDat)
 func RespawnEnems(Mp : Map, Enems : Array[Resource]):
 	Mp.RespawnEnemies( Enems )
+func RespawnMissiles(Mp : Map, Missiles : Array[Resource]):
+	Mp.RespawnMissiles( Missiles )

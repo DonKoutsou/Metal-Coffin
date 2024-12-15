@@ -99,7 +99,6 @@ MinorCityType = ExtResource("9_yqugh")
 FinalCity = ExtResource("9_yqugh")
 MapSize = 150
 MapGenerationDistanceCurve = SubResource("Curve_rghuw")
-DroneDockEventH = ExtResource("28_tg7n1")
 
 [node name="ShipController" type="Node" parent="."]
 script = ExtResource("12_e8tb5")
