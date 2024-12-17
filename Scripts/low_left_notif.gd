@@ -22,7 +22,7 @@ func ToggleStat(Stat: String, t : bool, timel : float = 0):
 		queue_free()
 		return
 	
-	var statstring : String
+	var statstring : String = ""
 	for g in ShowingStats:
 		statstring += g + " " + var_to_str(ShowingStats[g]).replace(".0", "") + " minutes left" + "\n" 
 	$Control/PanelContainer/Label.text = statstring

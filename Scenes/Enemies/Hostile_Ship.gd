@@ -170,6 +170,8 @@ func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBt.keys().size() > 1):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
+
+
 	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBt.erase(UnSeenBy)

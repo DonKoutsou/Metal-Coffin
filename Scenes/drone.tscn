@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=19 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -35,6 +35,9 @@ radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7khp2"]
 radius = 258.136
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mk6wy"]
+radius = 1000.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true
@@ -107,7 +110,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_e6yyl")
-disabled = true
 debug_color = Color(0.745105, 0.130026, 1.92523e-07, 0.42)
 
 [node name="ReturnSoundTrigger" type="Area2D" parent="."]
@@ -135,14 +137,21 @@ pitch_scale = 0.5
 bus = &"Engine"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 scale = Vector2(7.97656, 7.97656)
-energy = 0.5
-blend_mode = 2
+energy = 0.25
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
 texture_scale = 0.25
-height = 100.0
+height = 500.0
+
+[node name="Elint" type="Area2D" parent="."]
+rotation = 0.368904
+collision_layer = 0
+collision_mask = 16384
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+shape = SubResource("CircleShape2D_mk6wy")
 
 [node name="Radar" type="Area2D" parent="."]
 rotation = -0.282025

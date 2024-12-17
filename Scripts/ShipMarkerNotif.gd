@@ -4,10 +4,13 @@ class_name ShipMarkerNotif
 
 var EntityToFollow : Node2D
 var camera : Camera2D
+
+var Blink : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	camera = ShipCamera.GetInstance()
-	$AnimationPlayer.play("Show")
+	if (Blink):
+		$AnimationPlayer.play("Show")
 	
 func SetText(Txt : String) -> void:
 	$Control/PanelContainer/Label.text = Txt

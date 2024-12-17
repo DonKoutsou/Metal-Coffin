@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=36 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="2_2w4bb"]
@@ -101,6 +101,9 @@ shader_parameter/ShowRadat = true
 shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.062
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
+radius = 1000.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
 radius = 10.0499
 
@@ -193,6 +196,15 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
+
+[node name="Elint" type="Area2D" parent="."]
+rotation = 0.368904
+collision_layer = 0
+collision_mask = 16384
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+shape = SubResource("CircleShape2D_utfkb")
 
 [node name="MissileDock" type="Node2D" parent="."]
 script = ExtResource("9_dl1n1")

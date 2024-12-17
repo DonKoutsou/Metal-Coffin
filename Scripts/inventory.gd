@@ -52,6 +52,7 @@ func _ready() -> void:
 		# calling later to make sure inventory size buffs from captains are applied beforehand
 		AddItems(LoadedItems, false)
 		#AddItems(LoadedItems, false)
+		#AddItems(LoadedItems, false)
 	else :
 		AddItems(StartingItems, false)
 
@@ -81,11 +82,12 @@ func UpdateSize() -> void:
 	for g in InventoryContents.size():
 		for z in InventoryContents[g].ItemC.Ammount:
 			Itms.append(InventoryContents[g].ItemC.ItemType)
-			INV_OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
-			InventoryContents[g].UpdateAmm(-1)
-	for g in inv_contents.get_child_count():
-		inv_contents.get_child(g).queue_free()
-	InventoryContents.clear()
+			#INV_OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
+			#InventoryContents[g].UpdateAmm(-1)
+	#for g in inv_contents.get_child_count():
+		#inv_contents.get_child(g).queue_free()
+	#InventoryContents.clear()
+	FlushInventory()
 	for g in ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat():
 		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
 		inv_contents.add_child(newbox)
@@ -288,9 +290,20 @@ func RemoveItem(Cont : ItemContainer):
 			INV_OnItemRemoved.emit(Cont.ItemType)
 			print("Removed item : " + Cont.ItemType.ItemName)
 			inventory_ship_stats.UpdateValues()
-			box.UpdateAmm(-1)
 			if (Cont.ItemType is MissileItem):
 				MissileDockEventH.emit_signal("MissileRemoved", Cont.ItemType)
+			box.UpdateAmm(-1)
+			return
+func FlushContainer(Cont : ItemContainer):
+	for g in InventoryContents.size():
+		var box = InventoryContents[g]
+		if (box.ItemC == Cont):
+			INV_OnItemRemoved.emit(Cont.ItemType)
+			print("Removed item : " + Cont.ItemType.ItemName)
+			inventory_ship_stats.UpdateValues()
+			if (Cont.ItemType is MissileItem):
+				MissileDockEventH.emit_signal("MissileRemoved", Cont.ItemType)
+			box.UpdateAmm(-1)
 			return
 func RemoveItemSimp(It : Item):
 	for g in InventoryContents.size():
@@ -299,9 +312,9 @@ func RemoveItemSimp(It : Item):
 			INV_OnItemRemoved.emit(It)
 			print("Removed item : " + It.ItemName)
 			inventory_ship_stats.UpdateValues()
-			box.UpdateAmm(-1)
 			if (It is MissileItem):
 				MissileDockEventH.emit_signal("MissileRemoved", It)
+			box.UpdateAmm(-1)
 			return
 func UseItem(Cont : ItemContainer, Times : int = 1):
 	for z in Times:

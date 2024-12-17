@@ -43,6 +43,8 @@ func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
 	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
+func GetMissileTab() -> MissileTab:
+	return $"UI/Missile Tab"
 func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
 func SetPlayerPos(pos : Vector2) -> void:

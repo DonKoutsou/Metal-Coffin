@@ -98,11 +98,11 @@ var RangeDir : float = 0.0
 func UpdateDroneRange(Rang : float):
 	if (Armed):
 		#TODO figure out this filthy math
+		var eff = CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_EFFICIENCY")
+		RangeDir = clamp((RangeDir + (Rang * 20)), CurrentlySelectedDrone.Fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_TANK") * 10 * eff)
 		
-		RangeDir = clamp((RangeDir + Rang), CurrentlySelectedDrone.Fuel / 4, 50 / 4)
-		
-		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir * 80))
-		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir * 4))
+		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
+		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))
 	else:
 		ProgressCrewSelect()
 		

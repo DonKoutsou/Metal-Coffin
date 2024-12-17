@@ -1,5 +1,11 @@
-Node
+DirectionalLight2D
+PointLight2D
+TextureRect
+AudioStreamPlayer
+Control
+TextureProgressBar
 Panel
+Node
 VBoxContainer
 HBoxContainer
 Label
@@ -7,9 +13,3 @@ Button
 PanelContainer
 VisibleOnScreenNotifier2D
 ProgressBar
-Control
-Line2D
-TextureRect
-AspectRatioContainer
-Node2D
-AudioStreamPlayer

@@ -14,6 +14,7 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	ControlledShip = player_ship
 	AvailableShips.append(player_ship)
+	$"../UI/Elint".UpdateConnectedShip(player_ship)
 
 func OnDroneDocked(D : Drone) -> void:
 	AvailableShips.erase(D)
@@ -95,6 +96,7 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	$"../UI/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
+	$"../UI/Elint".UpdateConnectedShip(ControlledShip)
 var camtw : Tween
 func FrameCamToShip():
 	if (camtw != null):

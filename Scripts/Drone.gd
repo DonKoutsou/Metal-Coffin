@@ -50,43 +50,17 @@ func AccelerationChanged(value: float) -> void:
 	super(value)
 
 func EnableDrone():
-	Docked = false
 	set_physics_process(true)
-	GetShipBodyArea().monitoring = true
-	#$Fuel_Range.visible = true
 	$AudioStreamPlayer2D.play()
-	var rad = get_node_or_null("Radar/Radar_Range")
-	if (rad != null):
-		rad.visible = true
-		GetShipRadarArea().monitorable = true
-	var an = get_node_or_null("Analyzer/Analyzer_Range")
-	if (an != null):
-		an.visible = true
-		GetShipAnalayzerArea().monitorable = true
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
+	ToggleRadar()
 	$ShipBody/CollisionShape2D.disabled = false
-	$PointLight2D.visible = true
-	
 func DissableDrone():
-	Docked = true
-	$ShipBody/CollisionShape2D.disabled = true
-	$PointLight2D.visible = false
-	#$Fuel_Range.visible = false
 	GetShipIconPivot().rotation = 0.0
-	#Inventory.GetInstance().AddItems(StoredItem)
-	#StoredItem.clear()
 	$AudioStreamPlayer2D.stop()
 	set_physics_process(false)
-	var rad = get_node_or_null("Radar/Radar_Range")
-	if (rad != null):
-		GetShipRadarArea().set_deferred("monitorable", false)
-		rad.visible = false
-	var an = get_node_or_null("Analyzer/Analyzer_Range")
-	if (an != null):
-		GetShipAnalayzerArea().set_deferred("monitorable", false)
-		an.visible = false
-	GetShipAcelerationNode().position.x = 0
-	
+	ToggleRadar()
+	$ShipBody/CollisionShape2D.disabled = true
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -99,12 +73,13 @@ func GetBattleStats() -> BattleShipStats:
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
+	super(_delta)
 	if ($Aceleration.position.x == 0):
 		if (CurrentPort != null):
 			#CurrentPort.OnSpotVisited()
 			if (CanRefuel):
-				if (Fuel < 50 and CurrentPort.PlayerFuelReserves > 0):
-					var maxfuelcap = 50
+				if (Fuel < Cpt.GetStatValue("FUEL_TANK") and CurrentPort.PlayerFuelReserves > 0):
+					var maxfuelcap = Cpt.GetStatValue("FUEL_TANK")
 					var currentfuel = Fuel
 					var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
 					ShipDockActions.emit("Refueling", true, roundi(timeleft))
@@ -137,10 +112,10 @@ func _physics_process(_delta: float) -> void:
 		updatedronecourse()
 		
 	for g in SimulationSpeed:
-		var ftoconsume = $Aceleration.position.x / 10 / 2
+		var ftoconsume = $Aceleration.position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY")
 		Fuel -= ftoconsume
 		global_position = GetShipAcelerationNode().global_position
-	UpdateFuelRange(Fuel, 2)
+	UpdateFuelRange(Fuel, Cpt.GetStatValue("FUEL_EFFICIENCY"))
 	#GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
 	#if (Fuel <= global_position.distance_to(PlayerShip.GetInstance().global_position) / 10 / 2):
 		#ReturnToBase()

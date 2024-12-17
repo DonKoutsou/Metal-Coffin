@@ -1,0 +1,110 @@
+[gd_scene load_steps=23 format=3 uid="uid://c2tp3xgyap8ar"]
+
+[ext_resource type="Script" path="res://Scenes/e_lint.gd" id="1_n0goy"]
+[ext_resource type="Texture2D" uid="uid://37uwys7ju1kb" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1.png" id="3_wclfw"]
+[ext_resource type="Texture2D" uid="uid://cb14164lv0llj" path="res://Assets/UIPiecies/Elint/transparent/Opacity5.png" id="3_wx2vp"]
+[ext_resource type="Texture2D" uid="uid://bup8en533m0y3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="4_1dajb"]
+[ext_resource type="Texture2D" uid="uid://dkcij7ny4cu7b" path="res://Assets/UIPiecies/Elint/transparent/Opacity6.png" id="4_bj32c"]
+[ext_resource type="Texture2D" uid="uid://cxhs4w0i7xmty" path="res://Assets/UIPiecies/Elint/transparent/Opacity2.png" id="4_h0jj8"]
+[ext_resource type="Texture2D" uid="uid://bbq0mj44rwwoi" path="res://Assets/UIPiecies/Elint/transparent/Opacity4.png" id="5_2ueie"]
+[ext_resource type="Texture2D" uid="uid://bg3txpouwra6w" path="res://Assets/UIPiecies/Elint/transparent/Opacity17.png" id="5_fn607"]
+[ext_resource type="Texture2D" uid="uid://dxcvcpth4mg0a" path="res://Assets/UIPiecies/Elint/transparent/Opacity7.png" id="5_kw5sy"]
+[ext_resource type="Texture2D" uid="uid://btqsxpt5xj7wp" path="res://Assets/UIPiecies/Elint/transparent/Opacity10.png" id="5_op54w"]
+[ext_resource type="Texture2D" uid="uid://bltupetrpqvj6" path="res://Assets/UIPiecies/Elint/transparent/Opacity16.png" id="6_heli2"]
+[ext_resource type="Texture2D" uid="uid://clxcchncooddj" path="res://Assets/UIPiecies/Elint/transparent/Opacity8.png" id="6_m61b5"]
+[ext_resource type="Texture2D" uid="uid://ciwckxd5dtjjf" path="res://Assets/UIPiecies/Elint/transparent/Opacity9.png" id="7_8juqy"]
+[ext_resource type="Texture2D" uid="uid://dcjmtvcx08q8m" path="res://Assets/UIPiecies/Elint/transparent/Opacity11.png" id="9_n1ofx"]
+[ext_resource type="Texture2D" uid="uid://bty7v8rw58vvr" path="res://Assets/UIPiecies/Elint/transparent/Opacity12.png" id="10_pyudk"]
+[ext_resource type="Texture2D" uid="uid://diood1a6g4jfl" path="res://Assets/UIPiecies/Elint/transparent/Opacity13.png" id="11_ck10t"]
+[ext_resource type="Texture2D" uid="uid://dnk3n5kdplvhn" path="res://Assets/UIPiecies/Elint/transparent/Opacity14.png" id="12_lbulf"]
+[ext_resource type="Texture2D" uid="uid://dt2affdst26uo" path="res://Assets/UIPiecies/Elint/transparent/Opacity15.png" id="13_8vbyf"]
+[ext_resource type="Texture2D" uid="uid://c0cpyej1sex21" path="res://Assets/UIPiecies/Elint/transparent/Opacity.png" id="14_qls7h"]
+[ext_resource type="Texture2D" uid="uid://c5lkgugikfk31" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1.png" id="17_bmwmt"]
+[ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]
+[ext_resource type="AudioStream" uid="uid://bfi3w55ap7hs7" path="res://Assets/Sounds/alarm_01.wav" id="21_w3va6"]
+
+[node name="Elint" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -84.0
+offset_right = 84.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n0goy")
+DirectionMasks = {
+0: ExtResource("11_ck10t"),
+30: ExtResource("12_lbulf"),
+60: ExtResource("13_8vbyf"),
+90: ExtResource("5_2ueie"),
+120: ExtResource("3_wx2vp"),
+150: ExtResource("4_bj32c"),
+180: ExtResource("5_kw5sy"),
+210: ExtResource("6_m61b5"),
+240: ExtResource("7_8juqy"),
+270: ExtResource("5_op54w"),
+300: ExtResource("9_n1ofx"),
+330: ExtResource("10_pyudk")
+}
+DistanceMasks = Array[Texture2D]([ExtResource("14_qls7h"), ExtResource("4_h0jj8"), ExtResource("4_1dajb")])
+OnOffTextures = Array[Texture2D]([ExtResource("3_wclfw"), ExtResource("17_bmwmt")])
+Alarm = ExtResource("21_w3va6")
+Beep = ExtResource("20_7y4w8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wclfw")
+expand_mode = 1
+
+[node name="RangeIndicator" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(83.8, 83.8)
+color = Color(0.811384, 0.567062, 0.119301, 1)
+texture = ExtResource("4_h0jj8")
+texture_scale = 0.65
+
+[node name="AlertLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(83.8, 83.8)
+color = Color(0.979746, 0.18299, 7.70092e-07, 1)
+energy = 4.0
+texture = ExtResource("5_fn607")
+texture_scale = 0.65
+
+[node name="DangerCloseLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(83.8, 83.8)
+color = Color(0.855231, 0.38363, 0, 1)
+texture = ExtResource("6_heli2")
+texture_scale = 0.65
+
+[node name="DirectionLight" type="PointLight2D" parent="."]
+position = Vector2(83.8, 83.8)
+color = Color(0.811384, 0.567062, 0.119301, 1)
+texture = ExtResource("5_2ueie")
+texture_scale = 0.65
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_7y4w8")
+volume_db = -20.0
+bus = &"MapSounds"

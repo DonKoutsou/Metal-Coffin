@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=11 format=3 uid="uid://cga5buofwr6yr"]
+[gd_resource type="Resource" script_class="Captain" load_steps=12 format=3 uid="uid://cga5buofwr6yr"]
 
 [ext_resource type="Texture2D" uid="uid://bs2wyurwdkx0j" path="res://Assets/CaptainPortraits/Captain5.png" id="1_qhdyr"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_ot5w6"]
@@ -47,10 +47,17 @@ StatMax = 300.0
 StatBase = 100.0
 AllowAutoRefil = false
 
+[sub_resource type="Resource" id="Resource_367st"]
+script = ExtResource("2_ot5w6")
+StatName = "FUEL_EFFICIENCY"
+StatMax = 5.0
+StatBase = 3.0
+AllowAutoRefil = false
+
 [resource]
 script = ExtResource("3_5m53b")
 CaptainName = "Sirius"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_qhdyr")
 ShipIcon = ExtResource("3_kc55u")
-CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_bsryr"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3")])
+CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_bsryr"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), null])

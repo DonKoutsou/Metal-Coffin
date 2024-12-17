@@ -14,21 +14,11 @@ func _ready() -> void:
 	MissileDockEventH.connect("MissileLaunched", LaunchMissile)
 	MissileDockEventH.connect("MissileAdded", AddMissile)
 	MissileDockEventH.connect("MissileRemoved", MissileRemoved)
-	#for g in 2:
-		#var drone = DroneScene.instantiate()
-		#call_deferred("AddDroneToHierarchy",drone)
 
 func ClearAllMissiles() -> void:
 	for g in Missiles:
 		MissileRemoved(g)
-		
-#func GetCaptains() -> Array[Captain]:
-	#var cptns : Array[Captain]
-	#for g in DockedDrones:
-		#cptns.append(g.Cpt)
-	#for g in FlyingDrones:
-		#cptns.append(g.Cpt)
-	#return cptns
+
 func MissileRemoved(Mis : MissileItem):
 	if (Missiles.has(Mis)):
 		Missiles.erase(Mis)

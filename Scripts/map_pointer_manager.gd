@@ -42,6 +42,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		Ship.connect("StatLow", marker.OnStatLow)
+		Ship.connect("Elint", marker.ToggleShowElint)
 		marker.SetMarkerDetails("Flagship", "P",Ship.GetShipSpeed())
 	
 	if (Ship is HostileShip):
@@ -53,6 +54,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		Ship.connect("DroneReturning", marker.DroneReturning)
+		Ship.connect("Elint", marker.ToggleShowElint)
 		marker.ToggleShipDetails(true)
 		marker.ToggleFriendlyShipDetails(true)
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
@@ -140,7 +142,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			if (ship is Drone):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				Marker.UpdateDroneFuel(roundi(ship.Fuel))
+				Marker.UpdateDroneFuel(roundi(ship.Fuel), ship.Cpt.GetStatValue("FUEL_TANK"))
 				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
 				#Marker.global_position = ship.global_position
 			if (ship is PlayerShip):

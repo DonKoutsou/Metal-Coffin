@@ -15,6 +15,7 @@ static func GetInstance() -> PlayerShip:
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
+	super(_delta)
 	if ($Aceleration.position.x == 0):
 		if (CurrentPort != null):
 			#CurrentPort.OnSpotVisited()
@@ -32,9 +33,9 @@ func _physics_process(_delta: float) -> void:
 				if (CurrentPort.PlayerFuelReserves > 0):
 					var dr = GetDroneDock().DockedDrones
 					for g in dr:
-						if (g.Fuel < 50):
+						if (g.Fuel < g.Cpt.GetStatValue("FUEL_TANK")):
 							g.Fuel += 0.05 * SimulationSpeed
-							var timeleft = (min(50, g.Fuel + CurrentPort.PlayerFuelReserves) - g.Fuel) / 0.05 / 6
+							var timeleft = (min(g.Cpt.GetStatValue("FUEL_TANK"), g.Fuel + CurrentPort.PlayerFuelReserves) - g.Fuel) / 0.05 / 6
 							g.ShipDockActions.emit("Refueling", true, roundi(timeleft))
 							CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
 						else:
@@ -66,7 +67,7 @@ func _physics_process(_delta: float) -> void:
 			GetDroneDock().SyphonFuelFromDrones(fuel)
 		else:
 			HaltShip()
-			PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
+			PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
 			#set_physics_process(false)
 			return
 	else:

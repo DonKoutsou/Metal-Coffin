@@ -63,6 +63,23 @@ func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 		connect("ShipDeparted", notif.OnShipDeparted)
 		add_child(notif)
 
+func ToggleShowElint( t : bool, ElingLevel : int):
+	var notif : ShipMarkerNotif
+	for g in get_children():
+		if g is ShipMarkerNotif and !g.Blink:
+			if (t):
+				g.SetText("ELINT : " + var_to_str(ElingLevel))
+				return
+			else :
+				g.queue_free()
+				return
+	if (t):
+		notif = NotificationScene.instantiate() as ShipMarkerNotif
+		notif.SetText("ELINT : " + var_to_str(ElingLevel))
+		notif.Blink = false
+		#connect("ShipDeparted", notif.OnShipDeparted)
+		add_child(notif)
+
 func ToggleShipDetails(T : bool):
 	$Control.visible = T
 	$Line2D.visible = T
@@ -101,10 +118,10 @@ func UpdateSpeed(Spd : float):
 	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(spd) + "km/h"
 func UpdateFuel():
 	var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL").GetCurrentValue())
-	var maxf = ShipData.GetInstance().GetStat("FUEL").GetStat()
-	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxf])
-func UpdateDroneFuel(amm : float):
-	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1}  Tons".format([amm, 50])
+	var maxfuel = ShipData.GetInstance().GetStat("FUEL").GetStat()
+	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxfuel])
+func UpdateDroneFuel(amm : float, maxamm : float):
+	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1}  Tons".format([amm, maxamm])
 func UpdateHull():
 	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
 func UpdateDroneHull(amm : float, maxamm : float):

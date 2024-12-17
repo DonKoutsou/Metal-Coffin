@@ -28,9 +28,14 @@ signal ShipDeparted()
 signal ShipDockActions(Stats : String, t : bool, timel : float)
 signal StatLow(StatName : String)
 
+signal Elint(T : bool, Lvl : int)
+var ElintContacts : Dictionary
+
 var Detectable = true
 
 func _ready() -> void:
+	$Elint.connect("area_entered", _on_elint_area_entered)
+	$Elint.connect("area_exited", _on_elint_area_exited)
 	MapPointerManager.GetInstance().AddShip(self, true)
 	
 func TogglePause(t : bool):
@@ -53,12 +58,56 @@ func ToggleRadar():
 	else :
 		tw.tween_property($PointLight2D, "energy", 0, 0.5)
 	#$PointLight2D.visible = !$PointLight2D.visible
+
+func ToggleElint():
+	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
+
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	CanRefuel = Port.HasFuel()
 	CanRepair = Port.HasRepair()
 	CanUpgrade = Port.HasUpgrade()
+
+var d = 0.4
+func _physics_process(delta: float) -> void:
+	d -= delta
+	if (d > 0):
+		return
+	d = 0.4
+	var BiggestLevel = 0
+	for g in ElintContacts.size():
+		var ship = ElintContacts.keys()[g]
+		var lvl = ElintContacts.values()[g]
+		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position))
+		if (Newlvl != lvl):
+			if (Newlvl > BiggestLevel):
+				Elint.emit(true, Newlvl)
+				BiggestLevel = Newlvl
+			ElintContacts[ship] = Newlvl
+			
+
+func GetElintLevel(Dist : float) -> int:
+	var Lvl = 1
+	if (Dist < 300):
+		Lvl = 3
+	else : if(Dist < 600):
+		Lvl = 2
+	else :
+		Lvl = 1
+	return Lvl
+
+func GetClosestElint() -> Vector2:
+	var closest : Vector2 = Vector2.ZERO
+	var closestdist : float = 999999999999
+	for g in ElintContacts.size():
+		var ship = ElintContacts.keys()[g]
+		var dist = global_position.distance_to(ship.global_position)
+		if (closestdist > dist):
+			closest = ship.global_position
+			closestdist = dist
 	
+	return closest
+
 func RemovePort():
 	ShipDeparted.emit()
 	CurrentPort = null
@@ -90,7 +139,7 @@ func UpdateVizRange(rang : float):
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 	
-	$PointLight2D.texture_scale = rang / 600
+	$PointLight2D.texture_scale = rang / 800
 
 func UpdateAnalyzerRange(rang : float):
 	var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
@@ -218,3 +267,10 @@ func _on_player_viz_notifier_screen_entered() -> void:
 	ScreenEnter.emit()
 func _on_player_viz_notifier_screen_exited() -> void:
 	ScreenExit.emit()
+
+func _on_elint_area_entered(area: Area2D) -> void:
+	ElintContacts[area.get_parent()] = 0
+	#Elint.emit(true, 1)
+func _on_elint_area_exited(area: Area2D) -> void:
+	ElintContacts.erase(area.get_parent())
+	Elint.emit(false, 0)

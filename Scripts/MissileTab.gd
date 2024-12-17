@@ -24,6 +24,11 @@ func MissileRemoved(MIs : MissileItem) -> void:
 		CurrentlySelectedMissile = null
 		UpdateCrewSelect()
 
+func LoadMissiles(Its : Array[Item]) -> void:
+	#for g in Its:
+		#if (g is MissileItem):
+			#MissileAdded(g)
+	pass
 func _on_deploy_drone_button_pressed() -> void:
 	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile)
 	_on_dissarm_drone_button_2_pressed()

@@ -46,7 +46,7 @@ func SyphonFuelFromDrones(amm : float) -> void:
 			g.Fuel = 0
 
 func GetDroneFuel() -> float:
-	var fuel : float
+	var fuel : float = 0
 	for g in DockedDrones:
 		fuel += g.Fuel
 	return fuel
@@ -70,7 +70,7 @@ func GetSaveData() -> Array[DroneSaveData]:
 	
 func LoadSaveData( Dat : Array[DroneSaveData]) -> void:
 	for g in Dat:
-		var dr = AddCaptain(g.Cpt)
+		var dr = AddCaptain(g.Cpt, false)
 		dr.Fuel = g.Fuel
 		if (!g.Docked):
 			UndockDrone(dr)
@@ -97,19 +97,20 @@ func DroneDisharged(Dr : Drone):
 	MapPointerManager.GetInstance().RemoveShip(Dr)
 	Dr.queue_free()
 
-func AddCaptain(Cpt : Captain) -> Drone:
+func AddCaptain(Cpt : Captain, Notify : bool = true) -> Drone:
 	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
 	ship.Cpt = Cpt
-	AddDrone(ship)
+	AddDrone(ship, Notify)
 	return ship
 	
-func AddDrone(Drne : Drone) -> void:
+func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#var drone = DroneScene.instantiate()
-	var notif = CaptainNotif.instantiate() as CaptainNotification
-	notif.SetCaptain(Drne.Cpt)
+	if (Notify):
+		var notif = CaptainNotif.instantiate() as CaptainNotification
+		notif.SetCaptain(Drne.Cpt)
+		Ingame_UIManager.GetInstance().AddUI(notif, false, true)
 	ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
 	Inventory.GetInstance().UpdateSize()
-	Ingame_UIManager.GetInstance().AddUI(notif, false, true)
 	AddDroneToHierarchy(Drne)
 	
 func PlayLandingSound()-> void:
@@ -159,7 +160,7 @@ func DroneRangeChanged(NewRange : float) -> void:
 	#print(NewRange)
 	
 func LaunchDrone(Dr : Drone) -> void:
-	var fueltoconsume = $Line2D.get_point_position(1).x / 10 / 2
+	var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
 	var neededfuel = fueltoconsume - Dr.Fuel
 	if (neededfuel > 0):
 		if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
@@ -169,7 +170,7 @@ func LaunchDrone(Dr : Drone) -> void:
 	UndockDrone(Dr)
 	Dr.global_rotation = $Line2D.global_rotation
 	Dr.global_position = global_position
-	Dr.Fuel = $Line2D.get_point_position(1).x / 10 / 2
+	Dr.Fuel = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
 	Dr.EnableDrone()
 	
 func AddDroneToHierarchy(drone : Drone):
@@ -197,6 +198,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		var trans = RemoteTransform2D.new()
 		dock.add_child(trans)
 		trans.remote_path = drone.get_path()
+		drone.Docked = true
 		return
 
 func UndockDrone(drone : Drone):
@@ -209,4 +211,5 @@ func UndockDrone(drone : Drone):
 			var trans = docks[g].get_child(0) as RemoteTransform2D
 			if (trans.remote_path == drone.get_path()):
 				trans.free()
+				drone.Docked = false
 				return
