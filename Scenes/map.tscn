@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=51 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -35,7 +35,6 @@
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="35_y1n03"]
-[ext_resource type="BitMap" uid="uid://bws1mu52unesf" path="res://Assets/UIPiecies/ButtonAlpha.png" id="36_j6qw0"]
 [ext_resource type="Texture2D" uid="uid://6rqpwwu1hdxb" path="res://Assets/UIPiecies/Button_Camera 1_Green.png" id="36_nbab4"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ELint.tscn" id="37_i8qtm"]
 
@@ -606,7 +605,6 @@ focus_mode = 0
 theme = ExtResource("33_j3iuy")
 texture_normal = ExtResource("34_mfdce")
 texture_pressed = ExtResource("34_mfdce")
-texture_click_mask = ExtResource("36_j6qw0")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
@@ -651,7 +649,6 @@ focus_mode = 0
 theme = ExtResource("33_j3iuy")
 texture_normal = ExtResource("36_nbab4")
 texture_pressed = ExtResource("36_nbab4")
-texture_click_mask = ExtResource("36_j6qw0")
 ignore_texture_size = true
 stretch_mode = 0
 flip_h = true

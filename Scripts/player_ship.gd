@@ -2,6 +2,8 @@ extends MapShip
 
 class_name PlayerShip
 
+@export var CaptainIcon : Texture
+
 static var Instance : PlayerShip
 
 func _ready() -> void:
@@ -94,3 +96,12 @@ func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var tw = create_tween()
 
 	tw.tween_method(SetFuelShaderRange, FuelMat.get_shader_parameter("scale_factor"), (distall/2) / 10000, 0.5)
+
+func GetBattleStats() -> BattleShipStats:
+	var stats = BattleShipStats.new()
+	stats.Hull = ShipType.GetStat("HULL").StatBuff
+	stats.FirePower = 1
+	stats.ShipIcon = ShipType.TopIcon
+	stats.CaptainIcon = CaptainIcon
+	stats.Name = "Player"
+	return stats

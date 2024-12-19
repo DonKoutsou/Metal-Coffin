@@ -3,7 +3,7 @@ extends Node2D
 class_name MapShip
 
 @export var LowStatsToNotifyAbout : Array[String]
-@export var CaptainIcon : Texture
+
 
 #@export var Missile : PackedScene
 
@@ -139,7 +139,9 @@ func UpdateVizRange(rang : float):
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 	
-	$PointLight2D.texture_scale = rang / 800
+	var l = get_node_or_null("PointLight2D")
+	if (l != null):
+		l.texture_scale = rang / 800
 #
 #func UpdateAnalyzerRange(rang : float):
 	#var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
@@ -250,14 +252,9 @@ func ToggleUI(t : bool):
 func SetShipType(Ship : BaseShip):
 	ShipType = Ship
 	_UpdateShipIcon(Ship.TopIcon)
-
+	
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = ShipType.GetStat("HULL").StatBuff
-	stats.FirePower = 1
-	stats.ShipIcon = ShipType.TopIcon
-	stats.CaptainIcon = CaptainIcon
-	stats.Name = "Player"
 	return stats
 
 func _UpdateShipIcon(Tex : Texture) -> void:
@@ -265,6 +262,7 @@ func _UpdateShipIcon(Tex : Texture) -> void:
 
 func _on_player_viz_notifier_screen_entered() -> void:
 	ScreenEnter.emit()
+	
 func _on_player_viz_notifier_screen_exited() -> void:
 	ScreenExit.emit()
 
@@ -274,3 +272,13 @@ func _on_elint_area_entered(area: Area2D) -> void:
 func _on_elint_area_exited(area: Area2D) -> void:
 	ElintContacts.erase(area.get_parent())
 	Elint.emit(false, 0)
+func GetShipBodyArea() -> Area2D:
+	return $ShipBody
+func GetShipRadarArea() -> Area2D:
+	return $Radar
+#func GetShipAnalayzerArea() -> Area2D:
+	#return $Analyzer
+func GetShipAcelerationNode() -> Node2D:
+	return $Aceleration
+func GetShipIcon() -> Node2D:
+	return $PlayerShipSpr

@@ -102,9 +102,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_7khp2")
 debug_color = Color(0.718534, 0.251914, 1, 0.42)
 
-[node name="ShipIconPivot" type="Node2D" parent="."]
-
-[node name="PlayerShipSpr" type="Sprite2D" parent="ShipIconPivot"]
+[node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_4y2i6")

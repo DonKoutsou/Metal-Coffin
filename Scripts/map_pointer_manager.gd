@@ -47,7 +47,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	
 	if (Ship is HostileShip):
 		marker.ToggleShipDetails(true)
-		marker.SetMarkerDetails(Ship.ShipName, Ship.ShipCallsign ,Ship.GetSpeed())
+		marker.SetMarkerDetails(Ship.ShipName, Ship.ShipCallsign ,Ship.GetShipSpeed())
 		marker.PlayHostileShipNotif()
 	
 	if (Ship is Drone):
@@ -127,7 +127,7 @@ func _physics_process(delta: float) -> void:
 		if (ship is HostileShip):
 			if (ship.VisibleBt.size() > 0):
 				Marker.global_position = ship.global_position
-				Marker.UpdateSpeed(ship.GetSpeed())
+				Marker.UpdateSpeed(ship.GetShipSpeed())
 				if (ship.SeenShips()):
 					Marker.UpdateThreatLevel(ship.VisibleBt[ship.VisibleBt.keys()[0]])
 				#Marker.UpdateSeenTime()

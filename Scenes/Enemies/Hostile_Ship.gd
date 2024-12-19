@@ -1,23 +1,17 @@
-extends Area2D
+extends MapShip
 
 class_name HostileShip
 
-@export var Speed = 0.5
-@export var RadarRange = 300
 @export var Direction = -1
 
-@export var ShipIcon : Texture
-@export var CaptainIcon : Texture
+@export var Cpt : Captain
+
 @export var ShipName : String
-@export var Hull : float = 30
 @export var Patrol : bool = true
 @export var ShipCallsign : String = "P"
 #var Pursuing = false
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
-
-var Paused = false
-var SimulationSpeed : int = 1
 
 var DestinationCity : MapSpot
 
@@ -25,6 +19,7 @@ var VisibleBt : Dictionary
 #var VisibleBy : Array[Node2D] = []
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
+
 func SeenShips() -> bool:
 	for g in VisibleBt:
 		if (g == null):
@@ -34,12 +29,12 @@ func SeenShips() -> bool:
 	return false
 func  _ready() -> void:
 	#visible = false
-	$Node2D.position.x = Speed
+	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
 	#set_physics_process(false)
-	UpdateVizRange(RadarRange)
+	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	if (!Patrol):
-		return
+		GetShipAcelerationNode().position.x = 0
 	var nextcity = cities.find(DestinationCity) + Direction
 	if (nextcity < 0 or nextcity > cities.size() - 1):
 		Direction *= -1
@@ -49,6 +44,8 @@ func  _ready() -> void:
 func AimForCity():
 	look_at(DestinationCity.global_position)
 	
+func GetShipMaxSpeed() -> float:
+	return Cpt.GetStatValue("SPEED")
 func GetCity(CityName : String) -> MapSpot:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var CorrectCity : MapSpot
@@ -59,45 +56,21 @@ func GetCity(CityName : String) -> MapSpot:
 			break
 	return CorrectCity
 	
-func TogglePause(t : bool):
-	Paused = t
-	$AudioStreamPlayer2D.stream_paused = t
-	$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
-func ChangeSimulationSpeed(i : int):
-	SimulationSpeed = i
-	
 func Damage(amm : float) -> void:
-	Hull -= amm
-	if (Hull <= 0):
+	Cpt.GetStat("HULL").CurrentVelue -= amm
+	if (Cpt.GetStatValue("HULL") <= 0):
 		MapPointerManager.GetInstance().RemoveShip(self)
 		queue_free()
+		
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = Hull
-	stats.FirePower = 1
-	stats.ShipIcon = ShipIcon
-	stats.CaptainIcon = CaptainIcon
+	stats.Hull = Cpt.GetStatValue("HULL")
+	stats.FirePower = Cpt.GetStatValue("FIREPOWER")
+	stats.ShipIcon = Cpt.ShipIcon
+	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = "Enemy"
 	return stats
 
-func UpdateVizRange(rang : float):
-	if (rang == 0):
-		$Radar.queue_free()
-		return
-	var RadarRangeIndicator = $Radar/Radar_Range
-	var RadarRangeCollisionShape = $Radar/CollisionShape2D
-	#var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
-	var RadarMat = RadarRangeIndicator.material as ShaderMaterial
-	RadarMat.set_shader_parameter("scale_factor", rang/10000)
-	#scalling collision
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
-	#$PointLight2D.texture_scale = rang / 600
-	#$Radar2/Radar_Range.visible = false
-
-func GetSpeed():
-	return $Node2D.position.x
-func GetShipSpeedVec() -> Vector2:
-	return $Node2D.global_position - global_position
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
@@ -105,7 +78,7 @@ func _physics_process(_delta: float) -> void:
 		updatedronecourse()
 	else : if (Patrol):
 		for g in  SimulationSpeed:
-			global_position = $Node2D.global_position
+			global_position = GetShipAcelerationNode().global_position
 	for g in VisibleBt:
 		if (g == null):
 			continue
@@ -126,13 +99,14 @@ func updatedronecourse():
 		ship_position = LastKnownPosition
 		ship_velocity = Vector2.ZERO
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / GetSpeed()
+	var time_to_interception = (position.distance_to(ship_position)) / GetShipSpeed()
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	look_at(predicted_position)
-	$Node2D.position.x = Speed
-	global_position = $Node2D.global_position
+	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
+	global_position = GetShipAcelerationNode().global_position
+	
 func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		PursuingShips.append(area.get_parent())
@@ -153,7 +127,6 @@ func OnShipSeen(SeenBy : Node2D):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	SimulationManager.GetInstance().TogglePause(true)
-
 	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBt.erase(UnSeenBy)
@@ -170,7 +143,7 @@ func _on_area_entered(area: Area2D) -> void:
 			nextcity = cities.find(DestinationCity) + Direction
 		DestinationCity = cities[nextcity]
 		look_at(DestinationCity.global_position)
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
 		if (bit):
 			if (area.get_parent() is PlayerShip):
@@ -208,8 +181,7 @@ func GetSaveData() -> SD_HostileShip:
 	dat.Direction = Direction
 	dat.LastKnownPosition = LastKnownPosition
 	dat.Position = global_position
-	dat.RadarRange = RadarRange
-	dat.Speed = Speed
+	dat.Cpt = Cpt
 	dat.Scene = scene_file_path
 	dat.ShipName = ShipName
 	return dat
@@ -218,6 +190,5 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	Direction = Dat.Direction
 	LastKnownPosition = Dat.LastKnownPosition
 	global_position = Dat.Position
-	RadarRange = Dat.RadarRange
-	Speed = Dat.Speed
+	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName

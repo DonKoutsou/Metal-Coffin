@@ -50,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (FoundShip == null):
-		FoundShip = area
+		FoundShip = area.get_parent()
 		FoundShip.OnShipSeen(self)
 
 func _on_missile_body_area_entered(area: Area2D) -> void:

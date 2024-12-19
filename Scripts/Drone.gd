@@ -56,7 +56,7 @@ func EnableDrone():
 	ToggleRadar()
 	$ShipBody/CollisionShape2D.disabled = false
 func DissableDrone():
-	GetShipIconPivot().rotation = 0.0
+	GetShipIcon().rotation = 0.0
 	$AudioStreamPlayer2D.stop()
 	set_physics_process(false)
 	ToggleRadar()
@@ -167,13 +167,3 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		plship.GetDroneDock().DockDrone(self, true)
 		CommingBack = false
 		
-func GetShipBodyArea() -> Area2D:
-	return $ShipBody
-func GetShipRadarArea() -> Area2D:
-	return $Radar
-#func GetShipAnalayzerArea() -> Area2D:
-	#return $Analyzer
-func GetShipAcelerationNode() -> Node2D:
-	return $Aceleration
-func GetShipIconPivot() -> Node2D:
-	return $ShipIconPivot

@@ -1,13 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://dorwtx3kdq1md"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_t35kf"]
+[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_3fotg"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_21j58"]
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="5_suaty"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_htfi0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_6kls6"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="8_8fagq"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2wcmb"]
 
 [sub_resource type="Curve" id="Curve_qk12j"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -30,6 +28,8 @@ scale_min = 0.05
 scale_max = 0.05
 scale_curve = SubResource("CurveTexture_rlrpj")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxthp"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true
 radius = 150.0
@@ -49,17 +49,11 @@ shader_parameter/ShowRadat = true
 shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.015
 
-[node name="HostileShip" type="Area2D" groups=["Enemy", "Ships"]]
-collision_layer = 512
-collision_mask = 13
+[node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
 script = ExtResource("1_t35kf")
-ShipIcon = ExtResource("4_21j58")
-CaptainIcon = ExtResource("5_suaty")
+Cpt = ExtResource("2_3fotg")
 Patrol = false
 ShipCallsign = "G"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2wcmb")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(-1, 0)
@@ -68,14 +62,12 @@ process_material = SubResource("ParticleProcessMaterial_kyfni")
 texture = ExtResource("6_htfi0")
 lifetime = 20.0
 
-[node name="Node2D2" type="Node2D" parent="."]
-
-[node name="PlayerShipSpr" type="Sprite2D" parent="Node2D2"]
+[node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_21j58")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Aceleration" type="Node2D" parent="."]
 position = Vector2(0.5, 0)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -83,6 +75,13 @@ stream = ExtResource("7_6kls6")
 volume_db = -15.0
 pitch_scale = 0.5
 bus = &"MapSounds"
+
+[node name="ShipBody" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
+shape = SubResource("CircleShape2D_dxthp")
 
 [node name="Radar" type="Area2D" parent="."]
 collision_layer = 16384
@@ -108,7 +107,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]
 [connection signal="area_entered" from="Radar" to="." method="_on_radar_2_area_entered"]
 [connection signal="area_exited" from="Radar" to="." method="_on_radar_2_area_exited"]
