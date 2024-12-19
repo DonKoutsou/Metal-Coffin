@@ -54,3 +54,4 @@ Assets/hazard-sign.png.import
 /android/build/.gradle
 /android/build
 /.godot/editor
+*.import
