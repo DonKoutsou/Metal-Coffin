@@ -46,6 +46,9 @@ func PlayHostileShipNotif() -> void:
 func OnShipDeparted() -> void:
 	ShipDeparted.emit()
 
+func UpdateTrajectory(Dir : float) -> void:
+	$Direction.rotation = Dir
+
 func DroneReturning() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText("Drone Returning To Base")
@@ -106,6 +109,8 @@ func _physics_process(_delta: float) -> void:
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine()
 	$Line2D.width =  2 / camera.zoom.x
+	
+	
 
 func UpdateLine()-> void:
 	var c = $Control as Control
@@ -133,15 +138,16 @@ func ToggleThreat(T : bool):
 func UpdateThreatLevel(Level : float):
 	$Control/PanelContainer/VBoxContainer/Threat.text = "Threat Level : " + var_to_str(roundi(Level))
 
-	
 func ToggleTimeLastSeend(T : bool):
 	if (!T):
 		TimeLastSeen = 0
+	else: if (TimeLastSeen == 0):
+		TimeLastSeen = Clock.GetInstance().GetTimeInHours()
 	$Control/PanelContainer/VBoxContainer/TimeSeen.visible = T
 
 func UpdateTime():
-	TimeLastSeen += 0.01
-	$Control/PanelContainer/VBoxContainer/TimeSeen.text = "Last Seen " + var_to_str(snappedf((TimeLastSeen / 60) , 0.01)) + "h ago"
+	var timepast = Clock.GetInstance().GetHoursSince(TimeLastSeen)
+	$Control/PanelContainer/VBoxContainer/TimeSeen.text = "Last Seen " + var_to_str(snappedf((timepast) , 0.01)) + "h ago"
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")

@@ -9,7 +9,7 @@ var TimeLastSeen : float
 
 func _ready() -> void:
 	camera = ShipCamera.GetInstance()
-	$VBoxContainer.visible = false
+	#$VBoxContainer.visible = false
 	#set_physics_process(false)
 
 #func ToggleShipDetails(T : bool):
@@ -34,16 +34,16 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		$VBoxContainer/HBoxContainer.add_child(text)
 	$VBoxContainer.pivot_offset.y = $VBoxContainer.size.y
 	
-func OnSpotAnalyzed(PlayAnim : bool = true) ->void:
-	if (PlayAnim):
-		var notif = NofiticationScene.instantiate() as ShipMarkerNotif
-		notif.SetText("Location Analyzed")
-		add_child(notif)
-		#notif.EntityToFollow = self
-		$AnimationPlayer.play("SpotAnalyzed")
-		PlaySound()
-	$VBoxContainer.visible = true
-	$VBoxContainer.pivot_offset.y = $VBoxContainer.size.y
+#func OnSpotAnalyzed(PlayAnim : bool = true) ->void:
+	#if (PlayAnim):
+		#var notif = NofiticationScene.instantiate() as ShipMarkerNotif
+		#notif.SetText("Location Analyzed")
+		#add_child(notif)
+		##notif.EntityToFollow = self
+		#$AnimationPlayer.play("SpotAnalyzed")
+		#PlaySound()
+	#$VBoxContainer.visible = true
+	#$VBoxContainer.pivot_offset.y = $VBoxContainer.size.y
 	
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()

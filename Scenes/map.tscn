@@ -1,6 +1,6 @@
-[gd_scene load_steps=49 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=52 format=3 uid="uid://bdisf4wscxmw5"]
 
-[ext_resource type="Script" path="res://Scripts/Map.gd" id="1_mq604"]
+[ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town1.tscn" id="3_hkdr3"]
 [ext_resource type="PackedScene" uid="uid://dd1rqlkx1y832" path="res://Scenes/Towns/Town3.tscn" id="4_nd2h0"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_mn7nq"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="20_4fmmi"]
+[ext_resource type="Shader" path="res://Scenes/Crt.gdshader" id="22_56xmu"]
 [ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="26_y7o3o"]
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="27_0t7uv"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
@@ -26,7 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="28_sirob"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="29_jt4kw"]
-[ext_resource type="Material" uid="uid://bnymd18yxjcws" path="res://Shaders/Screen.tres" id="29_q8i0i"]
 [ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="30_vu87k"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
@@ -68,6 +68,33 @@ shader_parameter/line_thickness = 0.855
 shader_parameter/zoom = 1.0
 shader_parameter/pan_offset = Vector2(0, 0)
 shader_parameter/view_size = Vector2(100, 100)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qsdd3"]
+noise_type = 4
+frequency = 1.0
+fractal_octaves = 10
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6kihg"]
+seamless = true
+normalize = false
+noise = SubResource("FastNoiseLite_qsdd3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndluk"]
+shader = ExtResource("22_56xmu")
+shader_parameter/curvature = 2.0
+shader_parameter/skip = 0.01
+shader_parameter/image_flicker = 0.05
+shader_parameter/vignette_flicker_speed = 0.0
+shader_parameter/vignette_strength = 1.5
+shader_parameter/small_scanlines_speed = 1.0
+shader_parameter/small_scanlines_proximity = 2.0
+shader_parameter/small_scanlines_opacity = 1.17
+shader_parameter/scanlines_opacity = 0.08
+shader_parameter/scanlines_speed = 1.0
+shader_parameter/scanline_thickness = 0.55
+shader_parameter/scanlines_spacing = 1.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_6kihg")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -115,6 +142,10 @@ follow_viewport_enabled = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 63.0
+offset_top = 86.0
+offset_right = -45.0
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -123,11 +154,11 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 disable_3d = true
-transparent_bg = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
-size = Vector2i(1152, 648)
+positional_shadow_atlas_size = 512
+size = Vector2i(1044, 520)
 render_target_update_mode = 4
 
 [node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport" groups=["DissapearingMap"]]
@@ -216,6 +247,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Screen" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"]
+z_index = 120
+material = SubResource("ShaderMaterial_ndluk")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5500.0
+offset_top = -2500.0
+offset_right = -4420.0
+offset_bottom = -1960.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
+mouse_filter = 2
+
 [node name="MapPointerManager" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 z_index = 100
 material = SubResource("CanvasItemMaterial_w8yg2")
@@ -233,16 +281,6 @@ FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
 EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 
 [node name="UI" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Screen" type="ColorRect" parent="UI"]
-material = ExtResource("29_q8i0i")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -281,9 +319,9 @@ layout_mode = 1
 
 [node name="RadarButton" type="TextureButton" parent="UI" groups=["Buttons"]]
 layout_mode = 1
-offset_left = 387.0
+offset_left = 388.0
 offset_top = -14.0
-offset_right = 493.0
+offset_right = 494.0
 offset_bottom = 100.0
 rotation = 1.57079
 texture_normal = ExtResource("36_nbab4")
@@ -312,9 +350,9 @@ expand_mode = 1
 
 [node name="SimulationButton" type="TextureButton" parent="UI" groups=["Buttons"]]
 layout_mode = 1
-offset_left = 387.0
+offset_left = 388.0
 offset_top = 92.0
-offset_right = 493.0
+offset_right = 494.0
 offset_bottom = 206.0
 rotation = -1.57079
 texture_normal = ExtResource("34_mfdce")
@@ -350,9 +388,9 @@ autowrap_mode = 2
 
 [node name="SpeedSimulation" type="TextureButton" parent="UI" groups=["Buttons"]]
 layout_mode = 1
-offset_left = 615.0
+offset_left = 616.0
 offset_top = -14.0
-offset_right = 721.0
+offset_right = 722.0
 offset_bottom = 100.0
 rotation = 1.57079
 texture_normal = ExtResource("34_mfdce")
@@ -387,9 +425,9 @@ autowrap_mode = 2
 
 [node name="LandButton" type="TextureButton" parent="UI" groups=["Buttons"]]
 layout_mode = 1
-offset_left = 273.0
+offset_left = 274.0
 offset_top = -14.0
-offset_right = 379.0
+offset_right = 380.0
 offset_bottom = 100.0
 rotation = 1.57079
 texture_normal = ExtResource("28_sirob")
@@ -558,9 +596,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = -10.0
-offset_top = -165.0
+offset_top = -164.0
 offset_right = 70.0
-offset_bottom = -79.0
+offset_bottom = -78.0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -603,9 +641,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = -11.0
-offset_top = -79.0
+offset_top = -78.0
 offset_right = 69.0
-offset_bottom = 7.0
+offset_bottom = 8.0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4

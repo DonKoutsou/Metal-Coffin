@@ -24,7 +24,7 @@ func ToggleStat(Stat: String, t : bool, timel : float = 0):
 	
 	var statstring : String = ""
 	for g in ShowingStats:
-		statstring += g + " " + var_to_str(ShowingStats[g]).replace(".0", "") + " minutes left" + "\n" 
+		statstring += g + " " + var_to_str(ShowingStats[g]).replace(".0", "") + " minutes left" + "\n"
 	$Control/PanelContainer/Label.text = statstring
 	
 func OnShipDeparted():

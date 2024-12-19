@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=17 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -46,9 +46,9 @@ radius = 150.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
 resource_local_to_scene = true
 shader = ExtResource("6_x7c6h")
-shader_parameter/line_color = Color(0.253, 0.622, 0.847, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 0.0
+shader_parameter/line_color = Color(1, 1, 1, 0.61)
+shader_parameter/range_lines = 2.0
+shader_parameter/sector_lines = 10.0
 shader_parameter/line_width = 0.0011
 shader_parameter/beam_angle = 0.2
 shader_parameter/beam_width = 0.003
@@ -58,31 +58,12 @@ shader_parameter/ShowRadat = true
 shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.015
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_si61q"]
-resource_local_to_scene = true
-radius = 100.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqscw"]
-resource_local_to_scene = true
-shader = ExtResource("6_x7c6h")
-shader_parameter/line_color = Color(0.319048, 0.619537, 0.0555898, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 0.0
-shader_parameter/line_width = 0.002
-shader_parameter/beam_angle = 0.3
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.1
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = true
-shader_parameter/Paused = false
-shader_parameter/scale_factor = 0.008
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y742n"]
 resource_local_to_scene = true
 shader = ExtResource("6_x7c6h")
 shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
 shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 1.0
+shader_parameter/sector_lines = 0.0
 shader_parameter/line_width = 0.002
 shader_parameter/beam_angle = 0.2
 shader_parameter/beam_width = 0.003
@@ -166,32 +147,6 @@ z_index = 2
 material = SubResource("ShaderMaterial_v4ssc")
 anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-
-[node name="Analyzer" type="Area2D" parent="."]
-rotation = 0.368904
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Analyzer"]
-shape = SubResource("CircleShape2D_si61q")
-debug_color = Color(4.81308e-08, 0.640532, 0.348463, 0.42)
-
-[node name="Analyzer_Range" type="ColorRect" parent="Analyzer" groups=["MapLines"]]
-z_index = 2
-material = SubResource("ShaderMaterial_xqscw")
-anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5

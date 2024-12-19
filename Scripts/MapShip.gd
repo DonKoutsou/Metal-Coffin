@@ -42,7 +42,7 @@ func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
 	$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
-	$Analyzer/Analyzer_Range.material.set_shader_parameter("Paused", t)
+	#$Analyzer/Analyzer_Range.material.set_shader_parameter("Paused", t)
 func ChangeSimulationSpeed(i : int):
 	SimulationSpeed = i
 func ToggleRadar():
@@ -50,8 +50,8 @@ func ToggleRadar():
 	$Radar/CollisionShape2D.disabled = !$Radar/CollisionShape2D.disabled
 	$Radar/Radar_Range.visible = !$Radar/Radar_Range.visible
 	
-	$Analyzer.monitorable = !$Analyzer.monitorable
-	$Analyzer/Analyzer_Range.visible = !$Analyzer/Analyzer_Range.visible
+	#$Analyzer.monitorable = !$Analyzer.monitorable
+	#$Analyzer/Analyzer_Range.visible = !$Analyzer/Analyzer_Range.visible
 	var tw = create_tween()
 	if ($PointLight2D.energy < 0.25):
 		tw.tween_property($PointLight2D, "energy", 0.25, 0.5)
@@ -140,16 +140,16 @@ func UpdateVizRange(rang : float):
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 	
 	$PointLight2D.texture_scale = rang / 800
-
-func UpdateAnalyzerRange(rang : float):
-	var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
-	var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
-	#var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
-	var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
-	#CHANGING SIZE OF RADAR
-	AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
-	#SCALLING COLLISION
-	(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
+#
+#func UpdateAnalyzerRange(rang : float):
+	#var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
+	#var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
+	##var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
+	#var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
+	##CHANGING SIZE OF RADAR
+	#AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
+	##SCALLING COLLISION
+	#(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
 
 func ShowingNotif() -> bool:
 	return $Notifications.get_child_count() > 0
@@ -241,11 +241,11 @@ func GetSteer() -> float:
 
 func ToggleUI(t : bool):
 	$ShipBody.monitorable = t
-	$Analyzer.monitorable = t
+	#$Analyzer.monitorable = t
 	$Radar.monitorable = t
 	$Radar/Radar_Range.visible = t
 	$Fuel_Range.visible = t
-	$Analyzer/Analyzer_Range.visible = t
+	#$Analyzer/Analyzer_Range.visible = t
 
 func SetShipType(Ship : BaseShip):
 	ShipType = Ship

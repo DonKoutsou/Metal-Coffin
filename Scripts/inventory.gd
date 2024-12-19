@@ -46,8 +46,9 @@ func _ready() -> void:
 		inv_contents.add_child(newbox)
 		InventoryContents.append(newbox)
 		newbox.connect("ItemUse", _OnItemSelected)
-	if ((ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int) % 2 != 0):
-		inv_contents.columns = 3
+		
+	SetCollumns(ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int)
+	
 	if (Loading):
 		# calling later to make sure inventory size buffs from captains are applied beforehand
 		AddItems(LoadedItems, false)
@@ -84,20 +85,33 @@ func UpdateSize() -> void:
 			Itms.append(InventoryContents[g].ItemC.ItemType)
 			#INV_OnItemRemoved.emit(InventoryContents[g].ItemC.ItemType)
 			#InventoryContents[g].UpdateAmm(-1)
-	#for g in inv_contents.get_child_count():
-		#inv_contents.get_child(g).queue_free()
-	#InventoryContents.clear()
+	
 	FlushInventory()
-	for g in ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat():
+	for g in inv_contents.get_child_count():
+		inv_contents.get_child(g).queue_free()
+	InventoryContents.clear()
+	var invsts = ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int
+	for g in invsts:
 		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
 		inv_contents.add_child(newbox)
 		InventoryContents.append(newbox)
 		newbox.connect("ItemUse", _OnItemSelected)
 	AddItems(Itms, false)
-	if ((ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int) % 2 != 0):
-		inv_contents.columns = 3
-	else :
-		inv_contents.columns = 4
+	
+	SetCollumns(invsts)
+	#if (invsts as int % 3 != 0):
+		#inv_contents.columns = 3
+	#else :
+		#inv_contents.columns = 4
+
+func SetCollumns(invsts : int):
+	var num_columns: int = 1
+	
+	# Start from 1 to total_items, find a suitable column count
+	for i in range(1, invsts):
+		if invsts % i == 0:
+			num_columns = i
+	inv_contents.columns = num_columns
 
 func GetItemForStat(StatN : String) -> ItemContainer:
 	for g in InventoryContents:

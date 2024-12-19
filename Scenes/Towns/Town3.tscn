@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dd1rqlkx1y832"]
+[gd_scene load_steps=12 format=3 uid="uid://dd1rqlkx1y832"]
 
 [ext_resource type="Script" path="res://Scripts/Town.gd" id="1_3uy6m"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_6jcn4"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/CitySpot.gd" id="4_pdne5"]
 [ext_resource type="Texture2D" uid="uid://dcyw50yty24hn" path="res://Assets/city4.png" id="5_5367q"]
 [ext_resource type="Resource" uid="uid://djaoab8knkpvx" path="res://Resources/MapSpots/CitySpots/VillageChora.tres" id="6_vp4sg"]
-[ext_resource type="Resource" uid="uid://dsrgr23xe4wc2" path="res://Resources/MapSpots/CitySpots/Hospital.tres" id="7_iwj3g"]
 [ext_resource type="Resource" uid="uid://dno0yq1eqewjt" path="res://Resources/MapSpots/CitySpots/Military_Base.tres" id="8_t1hj8"]
 [ext_resource type="Resource" uid="uid://dsia5ebkwvf6p" path="res://Resources/MapSpots/CitySpots/Observatory.tres" id="9_3esc4"]
 [ext_resource type="Resource" uid="uid://blkdxjlya62h4" path="res://Resources/MapSpots/CitySpots/Oil_Rig.tres" id="10_0hnho"]
@@ -35,4 +34,4 @@ MapSpotTypes = Array[ExtResource("3_vssc1")]([ExtResource("6_vp4sg")])
 [node name="CitySpot2" type="Node2D" parent="CitySpots"]
 position = Vector2(205, -219)
 script = ExtResource("4_pdne5")
-MapSpotTypes = Array[ExtResource("3_vssc1")]([ExtResource("7_iwj3g"), ExtResource("8_t1hj8"), ExtResource("9_3esc4"), ExtResource("10_0hnho"), ExtResource("11_2vsop")])
+MapSpotTypes = Array[ExtResource("3_vssc1")]([ExtResource("8_t1hj8"), ExtResource("9_3esc4"), ExtResource("10_0hnho"), ExtResource("11_2vsop")])

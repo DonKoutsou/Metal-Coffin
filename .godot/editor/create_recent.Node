@@ -1,3 +1,4 @@
+Label
 DirectionalLight2D
 PointLight2D
 TextureRect
@@ -8,8 +9,6 @@ Panel
 Node
 VBoxContainer
 HBoxContainer
-Label
 Button
 PanelContainer
 VisibleOnScreenNotifier2D
-ProgressBar

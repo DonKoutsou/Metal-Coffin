@@ -36,8 +36,8 @@ func GenerateCity() -> void:
 			centername = sc.SpotName + " City"
 		else : if (spottype.FullName == "Chora"):
 			centername = sc.SpotName
-		else :if (centername != ""):
-			sc.SpotName = centername + " " + spottype.FullName
+		else :
+			sc.SpotName = spottype.FullName
 		
 		
 		g.free()
@@ -90,8 +90,8 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		if (spotdat.Visited):
 			sc.Visited = true
 			
-		if (spotdat.Analyzed):
-			sc.OnSpotAnalyzed(false)
+		#if (spotdat.Analyzed):
+			#sc.OnSpotAnalyzed(false)
 		
 func _TownSpotApreached(spot : MapSpot):
 	TownSpotAproached.emit(spot)

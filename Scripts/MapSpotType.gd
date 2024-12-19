@@ -7,8 +7,6 @@ class_name MapSpotType
 @export var PossibleDrops : Array[Item]
 @export var FullName : String
 @export var Description : String
-@export var CanLand : bool = false
-@export var HasAtmoshere : bool = false
 @export var VisibleOnStart : bool = false
 @export var DropAmmount : int = 1
 

@@ -102,8 +102,7 @@ func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
 	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
-		var interceptionpoint = calculateinterceptionpoint()
-		updatedronecourse(interceptionpoint)
+		updatedronecourse()
 	else : if (Patrol):
 		for g in  SimulationSpeed:
 			global_position = $Node2D.global_position
@@ -115,42 +114,25 @@ func _physics_process(_delta: float) -> void:
 		VisibleBt[g] = min(VisibleBt[g] + 0.05, 10)
 		if (VisibleBt[g] == 10 and !PursuingShips.has(g)):
 			LastKnownPosition = g.global_position
-func calculateinterceptionpoint() -> Vector2:
-	#var plship = PlayerShip.GetInstance()
+
+func updatedronecourse():
 	# Get the current position and velocity of the ship
 	var ship_position
 	var ship_velocity
 	if (PursuingShips.size() > 0):
-		#var ship = 0
-		#while (!PursuingShips[ship].Detectable):
-			#ship += 1
-			#if (ship > PursuingShips.size() - 1):
-				#
-				#break
 		ship_position = PursuingShips[0].position
 		ship_velocity = PursuingShips[0].GetShipSpeedVec()
-	else : if (LastKnownPosition != Vector2.ZERO):
+	else:
 		ship_position = LastKnownPosition
-		if (LastKnownPosition.distance_to(global_position) < 10):
-			LastKnownPosition = Vector2.ZERO
-			return DestinationCity.global_position
 		ship_velocity = Vector2.ZERO
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / $Node2D.position.x
+	var time_to_interception = (position.distance_to(ship_position)) / GetSpeed()
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
-
-	return predicted_position
-	
-func updatedronecourse(interception_point: Vector2):
-	# Calculate the direction vector from the drone to the interception point
-	var direction = (interception_point - position).normalized()
-	$Node2D2.look_at(to_global(interception_point - position))
-	# Move the drone towards the interception point
-	position += (direction * $Node2D.position.x) * SimulationSpeed
-	#$Line2D.set_point_position(1, interception_point - position)
-
+	look_at(predicted_position)
+	$Node2D.position.x = Speed
+	global_position = $Node2D.global_position
 func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		PursuingShips.append(area.get_parent())
@@ -170,7 +152,7 @@ func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBt.keys().size() > 1):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
-
+	SimulationManager.GetInstance().TogglePause(true)
 
 	
 func OnShipUnseen(UnSeenBy : Node2D):

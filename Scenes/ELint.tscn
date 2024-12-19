@@ -1,7 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://c2tp3xgyap8ar"]
 
 [ext_resource type="Script" path="res://Scenes/e_lint.gd" id="1_n0goy"]
-[ext_resource type="Texture2D" uid="uid://37uwys7ju1kb" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1.png" id="3_wclfw"]
 [ext_resource type="Texture2D" uid="uid://cb14164lv0llj" path="res://Assets/UIPiecies/Elint/transparent/Opacity5.png" id="3_wx2vp"]
 [ext_resource type="Texture2D" uid="uid://bup8en533m0y3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="4_1dajb"]
 [ext_resource type="Texture2D" uid="uid://dkcij7ny4cu7b" path="res://Assets/UIPiecies/Elint/transparent/Opacity6.png" id="4_bj32c"]
@@ -19,8 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://dnk3n5kdplvhn" path="res://Assets/UIPiecies/Elint/transparent/Opacity14.png" id="12_lbulf"]
 [ext_resource type="Texture2D" uid="uid://dt2affdst26uo" path="res://Assets/UIPiecies/Elint/transparent/Opacity15.png" id="13_8vbyf"]
 [ext_resource type="Texture2D" uid="uid://c0cpyej1sex21" path="res://Assets/UIPiecies/Elint/transparent/Opacity.png" id="14_qls7h"]
-[ext_resource type="Texture2D" uid="uid://c5lkgugikfk31" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1.png" id="17_bmwmt"]
+[ext_resource type="Texture2D" uid="uid://caq853r3telqr" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1_FullQuality.png" id="17_bii6e"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]
+[ext_resource type="Texture2D" uid="uid://u6qd6o0jhpg4" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="21_h2hwe"]
 [ext_resource type="AudioStream" uid="uid://bfi3w55ap7hs7" path="res://Assets/Sounds/alarm_01.wav" id="21_w3va6"]
 
 [node name="Elint" type="Control"]
@@ -52,7 +52,7 @@ DirectionMasks = {
 330: ExtResource("10_pyudk")
 }
 DistanceMasks = Array[Texture2D]([ExtResource("14_qls7h"), ExtResource("4_h0jj8"), ExtResource("4_1dajb")])
-OnOffTextures = Array[Texture2D]([ExtResource("3_wclfw"), ExtResource("17_bmwmt")])
+OnOffTextures = Array[Texture2D]([ExtResource("17_bii6e"), ExtResource("21_h2hwe")])
 Alarm = ExtResource("21_w3va6")
 Beep = ExtResource("20_7y4w8")
 
@@ -63,7 +63,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_wclfw")
+texture = ExtResource("17_bii6e")
 expand_mode = 1
 
 [node name="RangeIndicator" type="PointLight2D" parent="."]

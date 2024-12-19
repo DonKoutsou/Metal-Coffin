@@ -63,7 +63,7 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float)
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)
 	
-	SimulationManager.GetInstance().TogglePause(false)
+	#SimulationManager.GetInstance().TogglePause(false)
 
 func Land(Spot : MapSpot) -> void:
 	if (Spot.Evnt != null and !Spot.Visited):

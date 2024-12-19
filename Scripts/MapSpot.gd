@@ -13,7 +13,7 @@ var SpotType : MapSpotType
 var Pos : Vector2
 var Visited = false
 var Seen = false
-var Analyzed = false
+#var Analyzed = false
 var EnemyCity = false
 #bool to avoid sent drones colliding with current visited spot
 var CurrentlyVisiting = false
@@ -51,7 +51,7 @@ func GetSaveData() -> Resource:
 	datas.SpotType = SpotType
 	datas.Seen = Seen
 	datas.Visited = Visited
-	datas.Analyzed = Analyzed
+	#datas.Analyzed = Analyzed
 	datas.SpotName = SpotName
 	datas.Evnt = Evnt
 	datas.CityFuelReserves = CityFuelReserves
@@ -90,19 +90,15 @@ func SetSpotData(Data : MapSpotType) -> void:
 		
 	if (SpotType.VisibleOnStart):
 		OnSpotSeen(false)
-		OnSpotAnalyzed(false)
+		#OnSpotAnalyzed(false)
 
 	add_to_group(Data.FullName)
 func GetSpotName() -> String:
-	return SpotName if Analyzed else "?"
+	return SpotName
 func GetSpotDescriptio() -> String:
-	return SpotType.Description if Analyzed else "?"
-func CanLand() -> bool:
-	return SpotType.CanLand if Visited or Analyzed else false
-func HasAtmosphere() -> bool:
-	return SpotType.HasAtmoshere if Visited or Analyzed else false
+	return SpotType.Description
 func GetPossibleDrops() -> Array:
-	return SpotType.PossibleDrops if Analyzed else []
+	return SpotType.PossibleDrops
 func HasFuel() -> bool:
 	var hasf = false
 	
@@ -128,8 +124,8 @@ func HasUpgrade() -> bool:
 	return hasu
 #//////////////////////////////////////////////////////////////////
 func OnSpotVisited(PlayAnim : bool = true) -> void:
-	if (!Analyzed):
-		OnSpotAnalyzed(PlayAnim)
+	#if (!Analyzed):
+		#OnSpotAnalyzed(PlayAnim)
 	if (!Visited):
 		SpotLanded.emit(self)
 	Visited = true
@@ -140,19 +136,20 @@ func OnSpotSeen(PlayAnim : bool = true) -> void:
 func AddMapSpot(PlayAnim : bool) -> void:
 	MapPointerManager.GetInstance().AddSpot( self, PlayAnim)
 	Seen = true
+	SimulationManager.GetInstance().TogglePause(true)
 #Called when drone visits a mapspot
 func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
 	call_deferred("AddMapSpot", PlayAnim)
 	
-func OnSpotVisitedByDrone() -> void:
-	if (!Analyzed):
-		OnSpotAnalyzed()
-func OnSpotAnalyzed(PlayAnim : bool = true) ->void:
-	call_deferred("SpotAnalyzedSignal", PlayAnim)
-	Analyzed = true
+#func OnSpotVisitedByDrone() -> void:
+	#if (!Analyzed):
+		#OnSpotAnalyzed()
+#func OnSpotAnalyzed(PlayAnim : bool = true) ->void:
+	#call_deferred("SpotAnalyzedSignal", PlayAnim)
+	#Analyzed = true
 	
-func SpotAnalyzedSignal(PlayAnim: bool)-> void:
-	SpotAnalazyed.emit(PlayAnim)
+#func SpotAnalyzedSignal(PlayAnim: bool)-> void:
+	#SpotAnalazyed.emit(PlayAnim)
 
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
@@ -167,14 +164,18 @@ func AreaEntered(area: Area2D):
 		if (area.get_collision_layer_value(1)):
 			if (!Seen):
 				OnSpotSeen()
-		else: if (area.get_collision_layer_value(2)):
-			if (!Analyzed):
-				OnSpotAnalyzed()
+				#OnSpotAnalyzed()
+		#else: if (area.get_collision_layer_value(2)):
+			#if (!Analyzed):
+				#OnSpotAnalyzed()
 		else: if (area.get_collision_layer_value(3)):
 			CurrentlyVisiting = true
 			var ship = area.get_parent()
 			ship.SetCurrentPort(self)
 			SpotAproached.emit(self)
+			if (!Seen):
+				OnSpotSeen()
+				#OnSpotAnalyzed()
 		#else: if (area.get_collision_layer_value(4)):
 			#CurrentlyVisiting = true
 			#var ship = area.get_parent() as Drone

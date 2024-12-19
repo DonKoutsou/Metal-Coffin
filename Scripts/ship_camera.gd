@@ -19,6 +19,7 @@ func _HANDLE_ZOOM(zoomval : float):
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
 	_UpdateMapGridVisibility()
+	#$Screen.scale = zoom / 2
 	#for g in get_tree().get_nodes_in_group("DissapearingMap"):
 		#g.modulate.a = mod
 #////////////////////////////

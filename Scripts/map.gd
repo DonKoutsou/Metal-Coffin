@@ -28,13 +28,13 @@ func _ready() -> void:
 	var shipdata = ShipData.GetInstance()
 	GetPlayerShip().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
 	GetPlayerShip().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
-	GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
+	#GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	
 	#GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
 func _InitialPlayerPlacament():
 	var firstvilage = get_tree().get_nodes_in_group("Chora")[0] as MapSpot
 	firstvilage.OnSpotSeen(false)
-	firstvilage.OnSpotAnalyzed(false)
+	#firstvilage.OnSpotAnalyzed(false)
 	var pos = firstvilage.global_position
 	pos.x -= 500
 	GetPlayerShip().global_position = pos
@@ -393,7 +393,7 @@ func _on_missile_button_pressed() -> void:
 var simmulationPaused = false
 
 func _on_simulation_button_pressed() -> void:
-	simmulationPaused = !simmulationPaused
+	simmulationPaused = !SimulationManager.GetInstance().Paused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
 
 func _on_speed_simulation_button_down() -> void:

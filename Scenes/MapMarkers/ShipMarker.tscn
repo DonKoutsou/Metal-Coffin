@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=8 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
+[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="6_ju0yw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gah6h"]
 bg_color = Color(1, 1, 1, 1)
@@ -166,6 +167,23 @@ text = "P"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Direction" type="Label" parent="."]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_right = 111.0
+offset_bottom = 40.0
+grow_vertical = 2
+pivot_offset = Vector2(0, 40)
+theme_override_fonts/font = ExtResource("6_ju0yw")
+theme_override_font_sizes/font_size = 61
+text = "->"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

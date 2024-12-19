@@ -62,7 +62,6 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	if (Ship is Missile):
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
-	
 	_ShipMarkers.append(marker)
 	
 func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
@@ -78,7 +77,7 @@ func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	#marker.ToggleShipDetails(true)
 	marker.SetMarkerDetails(Spot, PlayAnim)
 	
-	Spot.connect("SpotAnalazyed", marker.OnSpotAnalyzed)
+	#Spot.connect("SpotAnalazyed", marker.OnSpotAnalyzed)
 	
 	_SpotMarkers.append(marker)
 	
@@ -134,6 +133,7 @@ func _physics_process(delta: float) -> void:
 				#Marker.UpdateSeenTime()
 				Marker.ToggleTimeLastSeend(false)
 				Marker.ToggleThreat(true)
+				Marker.UpdateTrajectory(ship.global_rotation)
 			else :
 				Marker.ToggleThreat(false)
 				Marker.ToggleTimeLastSeend(true)
@@ -144,13 +144,17 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateDroneFuel(roundi(ship.Fuel), ship.Cpt.GetStatValue("FUEL_TANK"))
 				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
+				Marker.UpdateTrajectory(ship.global_rotation)
 				#Marker.global_position = ship.global_position
 			if (ship is PlayerShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateFuel()
 				Marker.UpdateHull()
+				Marker.UpdateTrajectory(ship.global_rotation)
 				#Marker.global_position = ship.global_position
 				#Marker.UpdateSpeed(ship.GetSpeed())
+			if (ship is Missile):
+				Marker.UpdateTrajectory(ship.global_rotation)
 			Marker.global_position = ship.global_position
 		
 	

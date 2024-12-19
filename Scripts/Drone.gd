@@ -14,7 +14,7 @@ func  _ready() -> void:
 	super()
 	#Set range of radar and alanyzer
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
-	UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
+	#UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
 	#MapPointerManager.GetInstance().AddShip(self, true)
 
 func GetSaveData() -> DroneSaveData:
@@ -171,8 +171,8 @@ func GetShipBodyArea() -> Area2D:
 	return $ShipBody
 func GetShipRadarArea() -> Area2D:
 	return $Radar
-func GetShipAnalayzerArea() -> Area2D:
-	return $Analyzer
+#func GetShipAnalayzerArea() -> Area2D:
+	#return $Analyzer
 func GetShipAcelerationNode() -> Node2D:
 	return $Aceleration
 func GetShipIconPivot() -> Node2D:

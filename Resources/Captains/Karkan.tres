@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://c6f3bxpe2rsxd"]
+[gd_resource type="Resource" script_class="Captain" load_steps=12 format=3 uid="uid://c6f3bxpe2rsxd"]
 
 [ext_resource type="Texture2D" uid="uid://sulgpuieqkg0" path="res://Assets/CaptainPortraits/Captain7.png" id="1_w0gjd"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_4a58b"]
@@ -17,13 +17,6 @@ script = ExtResource("2_4a58b")
 StatName = "RADAR_RANGE"
 StatMax = 300.0
 StatBase = 150.0
-AllowAutoRefil = false
-
-[sub_resource type="Resource" id="Resource_nvocc"]
-script = ExtResource("2_4a58b")
-StatName = "ANALYZE_RANGE"
-StatMax = 150.0
-StatBase = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_an27y"]
@@ -67,4 +60,4 @@ CaptainName = "Karkan"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_w0gjd")
 ShipIcon = ExtResource("3_7dora")
-CaptainStats = Array[ExtResource("2_4a58b")]([SubResource("Resource_w8w27"), SubResource("Resource_134fm"), SubResource("Resource_nvocc"), SubResource("Resource_an27y"), SubResource("Resource_15w3p"), SubResource("Resource_pasmb"), SubResource("Resource_s1ct5"), SubResource("Resource_8yg4b")])
+CaptainStats = Array[ExtResource("2_4a58b")]([SubResource("Resource_w8w27"), SubResource("Resource_134fm"), SubResource("Resource_an27y"), SubResource("Resource_15w3p"), SubResource("Resource_pasmb"), SubResource("Resource_s1ct5"), SubResource("Resource_8yg4b")])
