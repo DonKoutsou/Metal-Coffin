@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cj5f5f7y85dfw"]
+
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_sd0j0"]
+[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="2_iqsrt"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_ynv1t"]
+
+[resource]
+script = ExtResource("3_ynv1t")
+SpotName = "Formak"
+EnemyCity = true
+HostilePatrolShipScene = ExtResource("1_sd0j0")
+HostilePatrolShipName = "Karmuk"
+HostileShipScene = ExtResource("2_iqsrt")
+HostileShipName = "Kriz"

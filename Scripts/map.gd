@@ -1,8 +1,8 @@
 extends Control
 class_name Map
 
-@export var TownTypes : Array[PackedScene]
-@export var City : PackedScene
+@export var Villages : Array[PackedScene]
+@export var Cities : Array[PackedScene]
 @export var CapitalCity : PackedScene
 @export var FinalCity : PackedScene
 @export var MapSize : int
@@ -105,10 +105,10 @@ func GenerateMap() -> void:
 		else : if (CapitalCitySpots.has(g)):
 			type = CapitalCity
 		else :if (VillageSpots.has(g)):
-			type = TownTypes.pick_random()
+			type = Villages.pick_random()
 			#AddingStation = true
 		else:
-			type = City
+			type = Cities.pick_random()
 			
 		#SET THE TYPE
 		sc = type.instantiate() as Town
@@ -179,7 +179,7 @@ func _swap(arr: Array, i: int, j: int):
 	arr[j] = tmp
 
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
-	return Vector2(randf_range(-3000, +3000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
+	return Vector2(randf_range(-5000, +5000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
 #TODO IMPROVE
 func HasClose(pos : Vector2) -> bool:
 	var b= false
@@ -244,26 +244,6 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 	call_deferred("GenerateRoads")
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera.call_deferred("FrameCamToPlayer")
 
-func GenerateRoads() -> void:
-	var CityGroups = ["City Center", "Capital City Center"]
-	var AllSpotGroups = ["City Center", "Capital City Center","Chora"]
-	var Spots : Array
-	for g in CityGroups:
-		Spots.append_array(get_tree().get_nodes_in_group(g))
-	var cityloc : Array[Vector2]
-	for g in Spots:
-		cityloc.append(g.global_position)
-		
-	var Spots2 : Array
-	for g in AllSpotGroups:
-		Spots2.append_array(get_tree().get_nodes_in_group(g))
-	var cityloc2 : Array[Vector2]
-	for g in Spots2:
-		cityloc2.append(g.global_position)
-	var t = Thread.new()
-	t.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines))
-	var t2 = Thread.new()
-	t2.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/MapLines, true, false))
 
 #////////////////////////////////////////////	
 #SIGNALS COMMING FROM PLAYER SHIP
@@ -304,7 +284,26 @@ func PlayerExitedScreen() -> void:
 	#set_process(true)
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
 #//////////////////////////////////////////////////////////
-
+func GenerateRoads() -> void:
+	var CityGroups = ["City Center", "Capital City Center"]
+	var AllSpotGroups = ["City Center", "Capital City Center","Chora"]
+	var Spots : Array
+	for g in CityGroups:
+		Spots.append_array(get_tree().get_nodes_in_group(g))
+	var cityloc : Array[Vector2]
+	for g in Spots:
+		cityloc.append(g.global_position)
+		
+	var Spots2 : Array
+	for g in AllSpotGroups:
+		Spots2.append_array(get_tree().get_nodes_in_group(g))
+	var cityloc2 : Array[Vector2]
+	for g in Spots2:
+		cityloc2.append(g.global_position)
+	var t = Thread.new()
+	t.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines))
+	var t2 = Thread.new()
+	t2.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/MapLines, true, false))
 func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
 	
 	
@@ -314,6 +313,7 @@ func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bo
 	var paintedlines : Array[Line2D]
 	for l in lines:
 		var lne = Line2D.new()
+		lne.width = 20
 		lne.joint_mode = Line2D.LINE_JOINT_ROUND
 		paintedlines.append(lne)
 		#lne.default_color = Color(1,1,1,0.2)

@@ -13,11 +13,11 @@ static func GetInstance() -> ShipCamera:
 #////////////////////////////
 func _HANDLE_ZOOM(zoomval : float):
 	var prevzoom = zoom
-	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.1,0.1), Vector2(2.1,2.1))
-	for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
-		g.visible = zoom < Vector2(1, 1)
+	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.07,0.07), Vector2(2.1,2.1))
+	#for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
+		#g.visible = zoom < Vector2(1, 1)
 	for g in get_tree().get_nodes_in_group("MapLines"):
-		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
+		g.material.set_shader_parameter("line_width", lerp(0.02, 0.001, zoom.x / 2))
 	_UpdateMapGridVisibility()
 	#$Screen.scale = zoom / 2
 	#for g in get_tree().get_nodes_in_group("DissapearingMap"):
@@ -63,9 +63,9 @@ func _UpdateMapGridVisibility():
 func UpdateCameraPos(relativeMovement : Vector2):
 	var maxposY = 999999
 	var vpsizehalf = (get_viewport_rect().size.x / 2)
-	var maxposX = Vector2(vpsizehalf - 2500, vpsizehalf + 2500)
+	var maxposX = Vector2(vpsizehalf - 6000, vpsizehalf + 6000)
 	var rel = relativeMovement / zoom
-	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,0 ) )
+	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,300) )
 	if (newpos.x != position.x):
 		#$CanvasLayer/SubViewportContainer/SubViewport/Control2.position.x = newpos.x - ($CanvasLayer/SubViewportContainer/SubViewport/Control2.size.x /2)
 		position.x = newpos.x

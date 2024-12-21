@@ -1,12 +1,12 @@
 [gd_scene load_steps=53 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
-[ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
+[ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_5r2qd"]
+[ext_resource type="PackedScene" uid="uid://yupxf3b2xhjq" path="res://Scenes/Towns/Village1.tscn" id="3_fcwsx"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town1.tscn" id="3_hkdr3"]
+[ext_resource type="PackedScene" uid="uid://cw0fmxei1f6xx" path="res://Scenes/Towns/Village2.tscn" id="4_ib41j"]
 [ext_resource type="PackedScene" uid="uid://dd1rqlkx1y832" path="res://Scenes/Towns/Town3.tscn" id="4_nd2h0"]
-[ext_resource type="PackedScene" uid="uid://dcxd3udf7434a" path="res://Scenes/Towns/Town4.tscn" id="5_t2blr"]
-[ext_resource type="PackedScene" uid="uid://yupxf3b2xhjq" path="res://Scenes/Towns/Town5.tscn" id="6_ruf57"]
-[ext_resource type="PackedScene" uid="uid://cw0fmxei1f6xx" path="res://Scenes/Towns/Town6.tscn" id="7_w57pf"]
+[ext_resource type="PackedScene" uid="uid://dcxd3udf7434a" path="res://Scenes/Towns/Village3.tscn" id="5_0khmx"]
 [ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="8_kpprx"]
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
 [ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_3nbu5"]
@@ -43,7 +43,7 @@
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
 max_value = 10.0
-_data = [Vector2(0, 2.84639), 0.0, 3.3398, 0, 0]
+_data = [Vector2(0, 5.5), 0.0, 3.3398, 0, 0]
 point_count = 1
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
@@ -123,8 +123,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_mq604")
-TownTypes = Array[PackedScene]([ExtResource("3_3kbr0"), ExtResource("4_nd2h0"), ExtResource("5_t2blr"), ExtResource("6_ruf57"), ExtResource("7_w57pf"), ExtResource("8_kpprx")])
-City = ExtResource("3_hkdr3")
+Villages = Array[PackedScene]([ExtResource("2_5r2qd"), ExtResource("3_fcwsx"), ExtResource("4_ib41j"), ExtResource("5_0khmx")])
+Cities = Array[PackedScene]([ExtResource("3_hkdr3"), ExtResource("4_nd2h0"), ExtResource("8_kpprx")])
 CapitalCity = ExtResource("9_yqugh")
 FinalCity = ExtResource("10_3nbu5")
 MapSize = 100
@@ -181,9 +181,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2500.0
+offset_left = -20000.0
 offset_top = -9e+07
-offset_right = 6456.0
+offset_right = 18956.0
 offset_bottom = 9.99932e+06
 grow_horizontal = 2
 grow_vertical = 2
@@ -233,6 +233,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -10000.0
+offset_right = 15000.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
@@ -245,6 +247,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -8000.0
+offset_right = 2000.0
+offset_bottom = 5000.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -256,13 +261,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5500.0
-offset_top = -2500.0
-offset_right = -4420.0
-offset_bottom = -1960.0
+offset_left = -15000.0
+offset_top = -8000.0
+offset_right = -13920.0
+offset_bottom = -7460.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(10, 10)
+scale = Vector2(50, 50)
 mouse_filter = 2
 
 [node name="MapPointerManager" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]

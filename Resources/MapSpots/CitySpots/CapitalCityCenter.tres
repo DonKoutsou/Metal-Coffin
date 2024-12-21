@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=16 format=3 uid="uid://dyvpncg7tolc7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=26 format=3 uid="uid://dyvpncg7tolc7"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_qkgba"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_khihf"]
@@ -13,11 +13,21 @@
 [ext_resource type="Resource" uid="uid://kjwdfwc0h4uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Kalicard.tres" id="7_bot42"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_2bkel"]
 [ext_resource type="Resource" uid="uid://ltonn44hg1kq" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Krokaria.tres" id="8_2jrjj"]
+[ext_resource type="Resource" uid="uid://bscbp2mebv4e4" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Jud.tres" id="8_xhovg"]
+[ext_resource type="Resource" uid="uid://doth1htx3jgkk" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Xenda.tres" id="9_ye5xf"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_jgsae"]
+[ext_resource type="Resource" uid="uid://c3ugcyn5f6t" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Zirmak.tres" id="10_n2cne"]
+[ext_resource type="Resource" uid="uid://tj0mcbsdf01i" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Uil.tres" id="11_3f67x"]
+[ext_resource type="Resource" uid="uid://cj5f5f7y85dfw" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Tisk.tres" id="12_pf3wa"]
+[ext_resource type="Resource" uid="uid://dc2y7cobojo8k" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Formak.tres" id="13_67tdm"]
+[ext_resource type="Resource" uid="uid://25aprsc0nfje" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Trast.tres" id="13_l2gax"]
+[ext_resource type="Resource" uid="uid://dclt8xw084fal" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Elp.tres" id="14_m0i82"]
+[ext_resource type="Resource" uid="uid://cixdtluk2fh7m" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Loksia.tres" id="16_gt6sk"]
+[ext_resource type="Resource" uid="uid://cfnebyfygsrw6" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Radi.tres" id="17_4mqq2"]
 
 [sub_resource type="Resource" id="Resource_k4o2w"]
 script = ExtResource("4_xevlw")
-PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_u02hr"), ExtResource("6_esr4f"), ExtResource("7_bot42"), ExtResource("4_mjh1h"), ExtResource("8_2jrjj")])
+PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_u02hr"), ExtResource("6_esr4f"), ExtResource("7_bot42"), ExtResource("4_mjh1h"), ExtResource("8_2jrjj"), ExtResource("11_3f67x"), ExtResource("8_xhovg"), ExtResource("12_pf3wa"), ExtResource("9_ye5xf"), ExtResource("16_gt6sk"), ExtResource("17_4mqq2"), ExtResource("14_m0i82"), ExtResource("10_n2cne"), ExtResource("13_l2gax"), ExtResource("13_67tdm")])
 DataName = ""
 
 [resource]

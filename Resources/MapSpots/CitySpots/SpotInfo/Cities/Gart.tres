@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://bdmgdubj6nbwg"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_m8nxg"]
+
+[resource]
+script = ExtResource("1_m8nxg")
+SpotName = "Ulmak"
+EnemyCity = true
+HostilePatrolShipName = ""
+HostileShipName = ""

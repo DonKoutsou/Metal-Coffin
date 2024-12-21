@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://25aprsc0nfje"]
+
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_m7i8o"]
+[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="2_agcy2"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_1i1ae"]
+
+[resource]
+script = ExtResource("3_1i1ae")
+SpotName = "Tisk"
+EnemyCity = true
+HostilePatrolShipScene = ExtResource("1_m7i8o")
+HostilePatrolShipName = "Karmuk"
+HostileShipScene = ExtResource("2_agcy2")
+HostileShipName = "Kriz"

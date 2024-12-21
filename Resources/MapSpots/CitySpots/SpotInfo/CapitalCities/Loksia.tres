@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cixdtluk2fh7m"]
+
+[ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="1_8p75j"]
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="2_i8d1w"]
+[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="3_p53rt"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="4_6nopb"]
+
+[resource]
+script = ExtResource("4_6nopb")
+SpotName = "Elp"
+Event = ExtResource("1_8p75j")
+EnemyCity = true
+HostilePatrolShipScene = ExtResource("2_i8d1w")
+HostilePatrolShipName = "Meyer"
+HostileShipScene = ExtResource("3_p53rt")
+HostileShipName = "Sarma"

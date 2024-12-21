@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://bscbp2mebv4e4"]
+
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_470n4"]
+[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="2_461kl"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_7vs1a"]
+
+[resource]
+script = ExtResource("3_7vs1a")
+SpotName = "Xenda"
+EnemyCity = true
+HostilePatrolShipScene = ExtResource("1_470n4")
+HostilePatrolShipName = "Horkin"
+HostileShipScene = ExtResource("2_461kl")
+HostileShipName = "Krimak"

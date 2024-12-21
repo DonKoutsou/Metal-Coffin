@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_q0xbj"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="6_3skxr"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="7_en220"]
-[ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Dormak.tres" id="8_16bcg"]
+[ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/Dormak.tres" id="8_16bcg"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="9_w7njc"]
 [ext_resource type="Texture2D" uid="uid://cjs06ul2657jw" path="res://Assets/block-house.png" id="10_qt1a1"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="11_7vp1d"]

@@ -19,9 +19,13 @@ static func IsPaused() -> bool:
 	
 func TogglePause(t : bool) -> void:
 	$Label.visible = t
+	if (t):
+		$AnimationPlayer.play("FadeinOut")
+	else :
+		$AnimationPlayer.stop()
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
-	$"../VBoxContainer/Inventory".OnSimulationPaused(t)
+	Inventory.GetInstance().OnSimulationPaused(t)
 	get_tree().call_group("Clock", "ToggleSimulation", t)
 
 func SetSimulationSpeed(Speed : int) -> void:

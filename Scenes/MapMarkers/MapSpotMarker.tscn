@@ -335,8 +335,12 @@ mouse_filter = 2
 theme_override_constants/separation = -4
 alignment = 2
 
-[node name="TextureRect2" type="Label" parent="VBoxContainer"]
-texture_filter = 5
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="TextureRect2" type="Label" parent="VBoxContainer/PanelContainer"]
+texture_filter = 6
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 1
