@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=16 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -43,33 +43,11 @@ radius = 1000.0
 resource_local_to_scene = true
 radius = 150.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
-resource_local_to_scene = true
-shader = ExtResource("6_x7c6h")
-shader_parameter/line_color = Color(1, 1, 1, 0.61)
-shader_parameter/range_lines = 2.0
-shader_parameter/sector_lines = 10.0
-shader_parameter/line_width = 0.0011
-shader_parameter/beam_angle = 0.2
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.1
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = true
-shader_parameter/Paused = false
-shader_parameter/scale_factor = 0.015
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y742n"]
 resource_local_to_scene = true
 shader = ExtResource("6_x7c6h")
 shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 0.0
 shader_parameter/line_width = 0.002
-shader_parameter/beam_angle = 0.2
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.5
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = false
 shader_parameter/Paused = false
 shader_parameter/scale_factor = 0.08
 
@@ -139,23 +117,6 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
-
-[node name="Radar_Range" type="ColorRect" parent="Radar" groups=["MapLines"]]
-z_index = 2
-material = SubResource("ShaderMaterial_v4ssc")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
 
 [node name="Fuel_Range" type="ColorRect" parent="." groups=["MapLines"]]
 z_index = 2

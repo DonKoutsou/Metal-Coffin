@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgf0r7r507qef"]
+[gd_scene load_steps=8 format=3 uid="uid://dgf0r7r507qef"]
 
 [ext_resource type="Script" path="res://Scripts/Town.gd" id="1_3nxd6"]
 [ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/city.png" id="2_5a7gx"]
@@ -6,11 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="3_xx0ea"]
 [ext_resource type="Resource" uid="uid://du24ilvkea51x" path="res://Resources/MapSpots/CitySpots/CityCenter.tres" id="6_1ol82"]
 [ext_resource type="Script" path="res://Scripts/CitySpot.gd" id="6_qw32s"]
-[ext_resource type="Resource" uid="uid://blkdxjlya62h4" path="res://Resources/MapSpots/CitySpots/Oil_Rig.tres" id="8_rgku4"]
-[ext_resource type="Resource" uid="uid://d13yx8yfnji63" path="res://Resources/MapSpots/CitySpots/PowerPlant.tres" id="9_qnk2d"]
-[ext_resource type="Resource" uid="uid://cis331ptb82pb" path="res://Resources/MapSpots/CitySpots/Airport.tres" id="11_7hskc"]
-[ext_resource type="Resource" uid="uid://dno0yq1eqewjt" path="res://Resources/MapSpots/CitySpots/Military_Base.tres" id="12_sx855"]
-[ext_resource type="Resource" uid="uid://dsia5ebkwvf6p" path="res://Resources/MapSpots/CitySpots/Observatory.tres" id="13_rw5bx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b86gk"]
 
@@ -30,28 +25,3 @@ texture = ExtResource("2_5a7gx")
 position = Vector2(-157, -55)
 script = ExtResource("6_qw32s")
 MapSpotTypes = Array[ExtResource("3_xx0ea")]([ExtResource("6_1ol82")])
-
-[node name="CitySpot2" type="Node2D" parent="CitySpots"]
-position = Vector2(-412, -399)
-script = ExtResource("6_qw32s")
-MapSpotTypes = Array[ExtResource("3_xx0ea")]([ExtResource("8_rgku4"), ExtResource("9_qnk2d"), ExtResource("11_7hskc"), ExtResource("12_sx855"), ExtResource("13_rw5bx")])
-
-[node name="CitySpot3" type="Node2D" parent="CitySpots"]
-position = Vector2(339, -283)
-script = ExtResource("6_qw32s")
-MapSpotTypes = Array[ExtResource("3_xx0ea")]([ExtResource("8_rgku4"), ExtResource("9_qnk2d"), ExtResource("11_7hskc"), ExtResource("12_sx855"), ExtResource("13_rw5bx")])
-
-[node name="CitySpot4" type="Node2D" parent="CitySpots"]
-position = Vector2(273, -32)
-script = ExtResource("6_qw32s")
-MapSpotTypes = Array[ExtResource("3_xx0ea")]([ExtResource("8_rgku4"), ExtResource("9_qnk2d"), ExtResource("11_7hskc"), ExtResource("12_sx855"), ExtResource("13_rw5bx")])
-
-[node name="CitySpot5" type="Node2D" parent="CitySpots"]
-position = Vector2(65, 227)
-script = ExtResource("6_qw32s")
-MapSpotTypes = Array[ExtResource("3_xx0ea")]([ExtResource("8_rgku4"), ExtResource("9_qnk2d"), ExtResource("11_7hskc"), ExtResource("12_sx855"), ExtResource("13_rw5bx")])
-
-[node name="CitySpot6" type="Node2D" parent="CitySpots"]
-position = Vector2(107, 383)
-script = ExtResource("6_qw32s")
-MapSpotTypes = Array[ExtResource("3_xx0ea")]([ExtResource("8_rgku4"), ExtResource("9_qnk2d"), ExtResource("11_7hskc"), ExtResource("12_sx855"), ExtResource("13_rw5bx")])

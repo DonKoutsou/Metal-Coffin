@@ -169,8 +169,8 @@ func OnItemUsed(It : UsableItem) -> void:
 func ItemBuffStat(UpName : String) -> void:
 	if (UpName == "VIZ_RANGE"):
 		GetMap().GetPlayerShip().UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
-	else :if (UpName == "ANALYZE_RANGE"):
-		GetMap().GetPlayerShip().UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
+	#else :if (UpName == "ANALYZE_RANGE"):
+		#GetMap().GetPlayerShip().UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
 	else :if (UpName == "FUEL_EFFICIENCY" or UpName == "FUEL"):
 		GetMap().GetPlayerShip().UpdateFuelRange(ShipDat.GetStat("FUEL").GetCurrentValue(), ShipDat.GetStat("FUEL_EFFICIENCY").GetStat())
 		

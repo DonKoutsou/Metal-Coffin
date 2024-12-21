@@ -1,0 +1,53 @@
+[gd_scene load_steps=18 format=3 uid="uid://bk5qdfealbiie"]
+
+[ext_resource type="Script" path="res://Scripts/Town.gd" id="1_ove43"]
+[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_5m8np"]
+[ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/city.png" id="3_yc03l"]
+[ext_resource type="Script" path="res://Scripts/CitySpot.gd" id="4_2dmtt"]
+[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_q0xbj"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="6_3skxr"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="7_en220"]
+[ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Dormak.tres" id="8_16bcg"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="9_w7njc"]
+[ext_resource type="Texture2D" uid="uid://cjs06ul2657jw" path="res://Assets/block-house.png" id="10_qt1a1"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="11_7vp1d"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="12_6lqdd"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="13_2vuu3"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="14_y50ce"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ustqo"]
+blend_mode = 1
+
+[sub_resource type="Resource" id="Resource_pf7mu"]
+script = ExtResource("9_w7njc")
+PossibleIds = Array[ExtResource("7_en220")]([ExtResource("8_16bcg")])
+DataName = ""
+
+[sub_resource type="Resource" id="Resource_um16y"]
+script = ExtResource("5_q0xbj")
+SpotK = 12
+MapIcon = ExtResource("10_qt1a1")
+PossibleDrops = Array[ExtResource("11_7vp1d")]([ExtResource("12_6lqdd"), ExtResource("13_2vuu3"), ExtResource("14_y50ce")])
+FullName = "Capital City Center"
+Description = "blah blah"
+VisibleOnStart = true
+DropAmmount = 1
+CustomData = Array[ExtResource("6_3skxr")]([SubResource("Resource_pf7mu")])
+
+[node name="Town" type="Node2D"]
+position = Vector2(608, 338)
+script = ExtResource("1_ove43")
+SpotScene = ExtResource("2_5m8np")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_ustqo")
+scale = Vector2(2, 2)
+texture = ExtResource("3_yc03l")
+
+[node name="CitySpots" type="Node2D" parent="."]
+
+[node name="CitySpot1" type="Node2D" parent="CitySpots"]
+position = Vector2(-148, 42)
+script = ExtResource("4_2dmtt")
+MapSpotTypes = Array[ExtResource("5_q0xbj")]([SubResource("Resource_um16y")])

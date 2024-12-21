@@ -18,6 +18,8 @@ var CanRefuel = false
 var CanRepair = false
 var CanUpgrade = false
 var IsRefueling = false
+var RadarWorking = true
+var FuelVis = true
 
 signal ScreenEnter()
 signal ScreenExit()
@@ -41,14 +43,15 @@ func _ready() -> void:
 func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
-	$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
+	#$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
 	#$Analyzer/Analyzer_Range.material.set_shader_parameter("Paused", t)
 func ChangeSimulationSpeed(i : int):
 	SimulationSpeed = i
 func ToggleRadar():
 	Detectable = !Detectable
+	RadarWorking = !RadarWorking
 	$Radar/CollisionShape2D.disabled = !$Radar/CollisionShape2D.disabled
-	$Radar/Radar_Range.visible = !$Radar/Radar_Range.visible
+	#$Radar/Radar_Range.visible = !$Radar/Radar_Range.visible
 	
 	#$Analyzer.monitorable = !$Analyzer.monitorable
 	#$Analyzer/Analyzer_Range.visible = !$Analyzer/Analyzer_Range.visible
@@ -131,11 +134,11 @@ func SetFuelShaderRange(val : float):
 	FuelMat.set_shader_parameter("scale_factor", val)
 	
 func UpdateVizRange(rang : float):
-	var RadarRangeIndicator = $Radar/Radar_Range
+	#var RadarRangeIndicator = $Radar/Radar_Range
 	var RadarRangeCollisionShape = $Radar/CollisionShape2D
 	#var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
-	var RadarMat = RadarRangeIndicator.material as ShaderMaterial
-	RadarMat.set_shader_parameter("scale_factor", rang/10000)
+	#var RadarMat = RadarRangeIndicator.material as ShaderMaterial
+	#RadarMat.set_shader_parameter("scale_factor", rang/10000)
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 	
@@ -245,7 +248,7 @@ func ToggleUI(t : bool):
 	$ShipBody.monitorable = t
 	#$Analyzer.monitorable = t
 	$Radar.monitorable = t
-	$Radar/Radar_Range.visible = t
+	#$Radar/Radar_Range.visible = t
 	$Fuel_Range.visible = t
 	#$Analyzer/Analyzer_Range.visible = t
 
@@ -282,3 +285,5 @@ func GetShipAcelerationNode() -> Node2D:
 	return $Aceleration
 func GetShipIcon() -> Node2D:
 	return $PlayerShipSpr
+func GetFuelReserves() -> float:
+	return 0

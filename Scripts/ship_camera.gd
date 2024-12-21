@@ -61,11 +61,11 @@ func _UpdateMapGridVisibility():
 	$Control2/Panel3.material.set_shader_parameter("zoom", zoom.x * 2)
 
 func UpdateCameraPos(relativeMovement : Vector2):
-	var maxposX = 999999
-	var vpsizehalf = (get_viewport_rect().size.y / 2)
-	var maxposY = Vector2(vpsizehalf - 2500, vpsizehalf + 2500)
+	var maxposY = 999999
+	var vpsizehalf = (get_viewport_rect().size.x / 2)
+	var maxposX = Vector2(vpsizehalf - 2500, vpsizehalf + 2500)
 	var rel = relativeMovement / zoom
-	var newpos = Vector2(clamp(position.x - rel.x, 0, maxposX), clamp(position.y - rel.y, maxposY.x, maxposY.y))
+	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,0 ) )
 	if (newpos.x != position.x):
 		#$CanvasLayer/SubViewportContainer/SubViewport/Control2.position.x = newpos.x - ($CanvasLayer/SubViewportContainer/SubViewport/Control2.size.x /2)
 		position.x = newpos.x

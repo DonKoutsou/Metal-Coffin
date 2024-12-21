@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=53 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Town2.tscn" id="3_3kbr0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cw0fmxei1f6xx" path="res://Scenes/Towns/Town6.tscn" id="7_w57pf"]
 [ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="8_kpprx"]
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
+[ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_3nbu5"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
 [ext_resource type="Script" path="res://Scenes/ship_controller.gd" id="12_e8tb5"]
 [ext_resource type="Shader" path="res://Shaders/GridMap.gdshader" id="12_ivvec"]
@@ -18,7 +19,8 @@
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_mn7nq"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="20_4fmmi"]
-[ext_resource type="Shader" path="res://Scenes/Crt.gdshader" id="22_56xmu"]
+[ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="22_56xmu"]
+[ext_resource type="Script" path="res://Scripts/CircleDrawer.gd" id="23_q5rq1"]
 [ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="26_y7o3o"]
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="27_0t7uv"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
@@ -41,8 +43,8 @@
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
 max_value = 10.0
-_data = [Vector2(0, 1), 0.0, 3.3398, 0, 0, Vector2(1, 6.7), 10.2257, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 2.84639), 0.0, 3.3398, 0, 0]
+point_count = 1
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
 diffuse_texture = ExtResource("13_ax28q")
@@ -121,11 +123,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_mq604")
-TownTypes = Array[PackedScene]([ExtResource("3_hkdr3"), ExtResource("3_3kbr0"), ExtResource("4_nd2h0"), ExtResource("5_t2blr"), ExtResource("6_ruf57"), ExtResource("7_w57pf"), ExtResource("8_kpprx")])
-SpecialTownTypes = Array[PackedScene]([ExtResource("3_hkdr3")])
-MinorCityType = ExtResource("9_yqugh")
-FinalCity = ExtResource("9_yqugh")
-MapSize = 150
+TownTypes = Array[PackedScene]([ExtResource("3_3kbr0"), ExtResource("4_nd2h0"), ExtResource("5_t2blr"), ExtResource("6_ruf57"), ExtResource("7_w57pf"), ExtResource("8_kpprx")])
+City = ExtResource("3_hkdr3")
+CapitalCity = ExtResource("9_yqugh")
+FinalCity = ExtResource("10_3nbu5")
+MapSize = 100
 MapGenerationDistanceCurve = SubResource("Curve_rghuw")
 
 [node name="ShipController" type="Node" parent="."]
@@ -180,9 +182,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2500.0
-offset_top = -5000.0
-offset_right = 9.99963e+07
-offset_bottom = 4352.0
+offset_top = -9e+07
+offset_right = 6456.0
+offset_bottom = 9.99932e+06
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_nb103")
@@ -278,6 +280,11 @@ MarkerScene = ExtResource("19_mn7nq")
 MapSpotMarkerScene = ExtResource("20_4fmmi")
 FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
 EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
+
+[node name="CircleDrawer" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager"]
+use_parent_material = true
+script = ExtResource("23_q5rq1")
+Col = Color(0.721279, 0.395459, 0.144425, 1)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 1

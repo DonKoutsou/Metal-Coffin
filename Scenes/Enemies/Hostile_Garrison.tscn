@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dorwtx3kdq1md"]
+[gd_scene load_steps=11 format=3 uid="uid://dorwtx3kdq1md"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_t35kf"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_3fotg"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_21j58"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_htfi0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_6kls6"]
-[ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="8_8fagq"]
 
 [sub_resource type="Curve" id="Curve_qk12j"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -33,21 +32,6 @@ scale_curve = SubResource("CurveTexture_rlrpj")
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true
 radius = 150.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
-resource_local_to_scene = true
-shader = ExtResource("8_8fagq")
-shader_parameter/line_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
-shader_parameter/range_lines = 1.0
-shader_parameter/sector_lines = 0.0
-shader_parameter/line_width = 0.0011
-shader_parameter/beam_angle = 0.2
-shader_parameter/beam_width = 0.003
-shader_parameter/trail_width = 0.1
-shader_parameter/sector_rotation = 0.5
-shader_parameter/ShowRadat = true
-shader_parameter/Paused = false
-shader_parameter/scale_factor = 0.015
 
 [node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
 script = ExtResource("1_t35kf")
@@ -89,23 +73,6 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
-
-[node name="Radar_Range" type="ColorRect" parent="Radar" groups=["MapLines"]]
-visible = false
-material = SubResource("ShaderMaterial_v4ssc")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

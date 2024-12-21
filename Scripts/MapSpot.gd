@@ -88,8 +88,8 @@ func SetSpotData(Data : MapSpotType) -> void:
 					break
 				
 		
-	if (SpotType.VisibleOnStart):
-		OnSpotSeen(false)
+	#if (SpotType.VisibleOnStart):
+	OnSpotSeen(false)
 		#OnSpotAnalyzed(false)
 
 	add_to_group(Data.FullName)

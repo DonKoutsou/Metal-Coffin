@@ -14,6 +14,7 @@ func  _ready() -> void:
 	super()
 	#Set range of radar and alanyzer
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
+	FuelVis = false
 	#UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
 	#MapPointerManager.GetInstance().AddShip(self, true)
 
@@ -56,7 +57,8 @@ func EnableDrone():
 	ToggleRadar()
 	$ShipBody/CollisionShape2D.disabled = false
 func DissableDrone():
-	GetShipIcon().rotation = 0.0
+	#GetShipIcon().rotation = 0.0
+	rotation = 0
 	$AudioStreamPlayer2D.stop()
 	set_physics_process(false)
 	ToggleRadar()

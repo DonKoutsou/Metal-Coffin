@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=17 format=3 uid="uid://dyvpncg7tolc7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=16 format=3 uid="uid://dyvpncg7tolc7"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_qkgba"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_khihf"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_1jm82"]
 [ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Curd.tres" id="4_mjh1h"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_xevlw"]
-[ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Dormak.tres" id="5_fuxam"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_82ny1"]
 [ext_resource type="Resource" uid="uid://dobir15ooa8uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Cirkari.tres" id="6_esr4f"]
 [ext_resource type="Texture2D" uid="uid://cjs06ul2657jw" path="res://Assets/block-house.png" id="6_ixavb"]
@@ -18,7 +17,7 @@
 
 [sub_resource type="Resource" id="Resource_k4o2w"]
 script = ExtResource("4_xevlw")
-PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_u02hr"), ExtResource("6_esr4f"), ExtResource("7_bot42"), ExtResource("4_mjh1h"), ExtResource("8_2jrjj"), ExtResource("5_fuxam")])
+PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_u02hr"), ExtResource("6_esr4f"), ExtResource("7_bot42"), ExtResource("4_mjh1h"), ExtResource("8_2jrjj")])
 DataName = ""
 
 [resource]

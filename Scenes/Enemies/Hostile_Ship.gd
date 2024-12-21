@@ -118,7 +118,7 @@ func _on_radar_2_area_exited(area: Area2D) -> void:
 		
 #whan this ship gets seen by player or friendly drone
 func OnShipSeen(SeenBy : Node2D):
-	$Radar/Radar_Range.visible = true
+	#$Radar/Radar_Range.visible = true
 	#visible = true
 	if (VisibleBt.has(SeenBy)):
 		return
@@ -130,7 +130,7 @@ func OnShipSeen(SeenBy : Node2D):
 	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBt.erase(UnSeenBy)
-	$Radar/Radar_Range.visible = VisibleBt.size() > 0
+	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
 
 
 func _on_area_entered(area: Area2D) -> void:

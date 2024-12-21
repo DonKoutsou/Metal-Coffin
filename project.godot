@@ -128,8 +128,8 @@ Fire={
 
 [layer_names]
 
-2d_physics/layer_1="Visibility"
-2d_physics/layer_2="Analyze"
+2d_physics/layer_1="ShipBody"
+2d_physics/layer_2="Radar"
 2d_physics/layer_3="Fuel"
 
 [rendering]

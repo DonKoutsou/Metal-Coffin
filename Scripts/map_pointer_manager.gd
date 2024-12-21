@@ -115,12 +115,15 @@ func FixLabelClipping() -> void:
 					return
 
 var d = 0.1
+var Circles : Array[PackedVector2Array] = []
 func _physics_process(delta: float) -> void:
 	FixLabelClipping()
+	$CircleDrawer.UpdateCircles(Circles)
 	d -= delta
 	if (d > 0):
 		return
 	d = 0.1
+	Circles.clear()
 	for g in _ShipMarkers.size():
 		var ship = Ships[g]
 		var Marker = _ShipMarkers[g]
@@ -145,12 +148,16 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateDroneFuel(roundi(ship.Fuel), ship.Cpt.GetStatValue("FUEL_TANK"))
 				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
 				Marker.UpdateTrajectory(ship.global_rotation)
+				if (ship.RadarWorking):
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(ship.Cpt.GetStatValue("RADAR_RANGE"), 0)]))
 				#Marker.global_position = ship.global_position
 			if (ship is PlayerShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateFuel()
 				Marker.UpdateHull()
 				Marker.UpdateTrajectory(ship.global_rotation)
+				if (ship.RadarWorking):
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(ShipData.GetInstance().GetStat("VIZ_RANGE").GetStat(), 0)]))
 				#Marker.global_position = ship.global_position
 				#Marker.UpdateSpeed(ship.GetSpeed())
 			if (ship is Missile):
