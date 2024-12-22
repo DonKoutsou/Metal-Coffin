@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://de7fb8k462lxb"]
 
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="1_7bjd6"]
+[ext_resource type="FontFile" uid="uid://bjr6n1igm78ms" path="res://Fonts/Caudex-Regular.ttf" id="1_7bjd6"]
 [ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="2_pusc7"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_ud4oh"]
+[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="3_ud4oh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqxuj"]
 content_margin_left = 8.0

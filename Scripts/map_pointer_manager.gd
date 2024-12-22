@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 class_name MapPointerManager
 
@@ -156,7 +156,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			if (ship is Drone):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				Marker.UpdateDroneFuel(roundi(ship.Fuel), ship.Cpt.GetStatValue("FUEL_TANK"))
+				Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
 				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").GetBaseStat(), ship.Cpt.GetStat("HULL").GetStat())
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):

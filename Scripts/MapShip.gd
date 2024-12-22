@@ -85,14 +85,16 @@ func Landed() -> bool:
 
 var d = 0.4
 func _physics_process(delta: float) -> void:
+	if (Paused):
+		return
 	if (Landing):
-		Altitude -= 50
+		Altitude -= 20 * SimulationSpeed
 		if (Altitude <= 0):
 			Altitude = 0
 			LandingEnded.emit(self)
 			Landing = false
 	if (TakingOff):
-		Altitude += 50
+		Altitude += 20 * SimulationSpeed
 		if (Altitude >= 10000):
 			Altitude = 10000
 			TakeoffEnded.emit(self)
@@ -278,6 +280,18 @@ func Steer(Rotation : float) -> void:
 	var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(self, "rotation", Rotation, 1)
+	var piv = $PlayerShipSpr/ShadowPivot as Node2D
+	piv.global_rotation = deg_to_rad(-90)
+	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
+	shadow.rotation = rotation
+func ShipLookAt(pos : Vector2) -> void:
+	look_at(pos)
+	var piv = $PlayerShipSpr/ShadowPivot as Node2D
+	piv.global_rotation = deg_to_rad(-90)
+	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
+	shadow.rotation = rotation
+	
+	
 
 func GetSteer() -> float:
 	return rotation
@@ -299,7 +313,8 @@ func GetBattleStats() -> BattleShipStats:
 	return stats
 
 func _UpdateShipIcon(Tex : Texture) -> void:
-	$PlayerShipSpr.texture = Tex	
+	$PlayerShipSpr.texture = Tex
+	$PlayerShipSpr/ShadowPivot/Shadow.texture = Tex
 
 func _on_player_viz_notifier_screen_entered() -> void:
 	ScreenEnter.emit()

@@ -29,6 +29,8 @@ func SeenShips() -> bool:
 	return false
 func  _ready() -> void:
 	#visible = false
+	for g in Cpt.CaptainStats:
+		g.CurrentVelue = g.GetStat()
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
 	#set_physics_process(false)
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
@@ -42,7 +44,7 @@ func  _ready() -> void:
 	DestinationCity = cities[nextcity]
 	call_deferred("AimForCity")
 func AimForCity():
-	look_at(DestinationCity.global_position)
+	ShipLookAt(DestinationCity.global_position)
 	
 func GetShipMaxSpeed() -> float:
 	return Cpt.GetStatValue("SPEED")
@@ -58,10 +60,11 @@ func GetCity(CityName : String) -> MapSpot:
 	
 func Damage(amm : float) -> void:
 	Cpt.GetStat("HULL").CurrentVelue -= amm
-	if (Cpt.GetStatValue("HULL") <= 0):
+	if (Cpt.GetStat("HULL").CurrentVelue <= 0):
 		MapPointerManager.GetInstance().RemoveShip(self)
 		queue_free()
-		
+func IsDead() -> bool:
+	return Cpt.GetStat("HULL").CurrentVelue <= 0
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -103,7 +106,7 @@ func updatedronecourse():
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
-	look_at(predicted_position)
+	ShipLookAt(predicted_position)
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
 	#global_position = GetShipAcelerationNode().global_position
 	
@@ -142,7 +145,7 @@ func _on_area_entered(area: Area2D) -> void:
 			Direction *= -1
 			nextcity = cities.find(DestinationCity) + Direction
 		DestinationCity = cities[nextcity]
-		look_at(DestinationCity.global_position)
+		ShipLookAt(DestinationCity.global_position)
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
 		if (bit):

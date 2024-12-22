@@ -59,7 +59,7 @@ func SetFuelData():
 	var dd = plship.GetDroneDock()
 	for g in dd.DockedDrones:
 		PlMaxFuel += g.Cpt.GetStatValue("FUEL_TANK")
-		PlFuel += g.Fuel
+		PlFuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
 	
 func SetHullData():
 	PlHull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()

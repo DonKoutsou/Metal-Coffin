@@ -25,6 +25,25 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
 light_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
+radius = 200.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
+resource_local_to_scene = true
+shader = ExtResource("2_2w4bb")
+shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
+shader_parameter/line_width = 0.002
+shader_parameter/Paused = false
+shader_parameter/scale_factor = 0.08
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
+radius = 1000.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
+radius = 10.0499
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bweje"]
 blend_mode = 1
 
@@ -49,38 +68,11 @@ scale_min = 0.05
 scale_max = 0.05
 scale_curve = SubResource("CurveTexture_be001")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
-radius = 200.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
-resource_local_to_scene = true
-shader = ExtResource("2_2w4bb")
-shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
-shader_parameter/line_width = 0.002
-shader_parameter/Paused = false
-shader_parameter/scale_factor = 0.08
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
-radius = 1000.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
-radius = 10.0499
-
 [node name="PlayerShip" type="Node2D" groups=["Ships"]]
 material = SubResource("CanvasItemMaterial_vppi8")
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_bweje")
-position = Vector2(-7, 0)
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_qn4ww")
-texture = ExtResource("20_8n1nj")
-lifetime = 20.0
 
 [node name="ShipBody" type="Area2D" parent="."]
 collision_layer = 4
@@ -182,8 +174,22 @@ rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("18_elnvx")
 
-[node name="Player_Viz_Notifier" type="VisibleOnScreenNotifier2D" parent="PlayerShipSpr"]
-rotation = 1.5708
+[node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+
+[node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+position = Vector2(-13.9999, -14.0001)
+texture = ExtResource("18_elnvx")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bweje")
+position = Vector2(-7, 0)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_qn4ww")
+texture = ExtResource("20_8n1nj")
+lifetime = 20.0
 
 [node name="Aceleration" type="Node2D" parent="."]
 
@@ -200,6 +206,3 @@ energy = 0.25
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
 height = 500.0
-
-[connection signal="screen_entered" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_entered"]
-[connection signal="screen_exited" from="PlayerShipSpr/Player_Viz_Notifier" to="." method="_on_player_viz_notifier_screen_exited"]

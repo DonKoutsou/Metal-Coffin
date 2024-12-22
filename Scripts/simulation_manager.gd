@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 class_name SimulationManager
 
@@ -9,7 +9,9 @@ static  var Instance : SimulationManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	$Label.visible = false
+	var notif = SimulationNotification.GetInstance()
+	notif.visible = false
+	notif.set_physics_process(false)
 
 static func GetInstance() -> SimulationManager:
 	return Instance
@@ -18,11 +20,9 @@ static func IsPaused() -> bool:
 	return Paused
 	
 func TogglePause(t : bool) -> void:
-	$Label.visible = t
-	if (t):
-		$AnimationPlayer.play("FadeinOut")
-	else :
-		$AnimationPlayer.stop()
+	var notif = SimulationNotification.GetInstance()
+	notif.visible = t
+	notif.set_physics_process(t)
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
 	Inventory.GetInstance().OnSimulationPaused(t)
@@ -40,5 +40,5 @@ func SpeedToggle(t : bool) -> void:
 	else:
 		SimulationSpeed = 1
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
-	$"../VBoxContainer/Inventory".OnSimulationSpeedChanged(SimulationSpeed)
+	$"../Inventory".OnSimulationSpeedChanged(SimulationSpeed)
 	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)

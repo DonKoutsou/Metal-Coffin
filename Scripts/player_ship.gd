@@ -61,8 +61,8 @@ func _physics_process(_delta: float) -> void:
 			else:
 				ShipDockActions.emit("Upgrading", false, 0)
 				#ToggleShowRefuel("Upgrading", false)
-	if (TakingOff):
-		return
+	#if (TakingOff):
+		#return
 	var fuel = ($Aceleration.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
 	var Dat = ShipData.GetInstance()
 	if (Dat.GetStat("FUEL").GetCurrentValue() < fuel):

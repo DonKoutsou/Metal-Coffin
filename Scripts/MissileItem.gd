@@ -5,3 +5,4 @@ class_name MissileItem
 @export var MissileName : String
 @export var Distance : int = 1500
 @export var Speed : float = 1
+@export var Damage : int = 30

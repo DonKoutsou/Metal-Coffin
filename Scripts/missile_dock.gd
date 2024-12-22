@@ -37,9 +37,7 @@ func MissileAimDirChanged(NewDir : float) -> void:
 	
 func LaunchMissile(Mis : MissileItem) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
-	missile.MissileName = Mis.MissileName
-	missile.Speed = Mis.Speed
-	missile.Distance = Mis.Distance
+	missile.SetData(Mis)
 	missile.global_rotation = $MissileLine.global_rotation
 	missile.global_position = global_position
 	get_parent().get_parent().add_child(missile)

@@ -6,13 +6,19 @@ class_name Missile
 var MissileName : String
 var Distance : int = 1500
 var Speed : float = 1
-var Damage : float = 100
+var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
 @export var MissileKillSound : AudioStream
 var FoundShip : HostileShip
 var Paused = false
 var SimulationSpeed : int = 1
 
+func SetData(Dat : MissileItem) -> void:
+	Speed = Dat.Speed
+	MissileName = Dat.MissileName
+	Damage = Dat.Damage
+	Distance = Dat.Distance
+	
 func TogglePause(t : bool):
 	Paused = t
 func ChangeSimulationSpeed(i : int):
@@ -57,7 +63,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 	#MapPointerManager.GetInstance().RemoveShip(area)
 	#area.queue_free()
 	area.get_parent().Damage(Damage)
-	if (area.get_parent().Hull <= 0):
+	if (area.get_parent().IsDead()):
 		var s = DeletableSoundGlobal.new()
 		s.stream = MissileKillSound
 		s.volume_db = -10

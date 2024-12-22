@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=12 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_lpij7"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_xxp8j"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_q8roo"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_jqji2"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_x18j0"]
-[ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="8_h26ro"]
 
 [sub_resource type="Curve" id="Curve_qk12j"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -34,14 +34,6 @@ scale_curve = SubResource("CurveTexture_rlrpj")
 resource_local_to_scene = true
 radius = 150.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ssc"]
-resource_local_to_scene = true
-shader = ExtResource("8_h26ro")
-shader_parameter/line_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
-shader_parameter/line_width = 0.0011
-shader_parameter/Paused = false
-shader_parameter/scale_factor = 0.015
-
 [node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
 script = ExtResource("1_dinuw")
 Cpt = ExtResource("2_lpij7")
@@ -57,6 +49,15 @@ lifetime = 20.0
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_xxp8j")
+
+[node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+
+[node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+position = Vector2(-13.9999, -14.0001)
+texture = ExtResource("5_q8roo")
 
 [node name="ShipBody" type="Area2D" parent="."]
 collision_layer = 512
@@ -80,23 +81,6 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
-
-[node name="Radar_Range" type="ColorRect" parent="Radar" groups=["MapLines"]]
-visible = false
-material = SubResource("ShaderMaterial_v4ssc")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

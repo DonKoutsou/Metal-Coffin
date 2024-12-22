@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode unshaded;
+
 uniform vec2 grid_size = vec2(50.0, 50.0); // Base size of each grid cell
 uniform vec4 line_color : source_color = vec4(0.0, 0.0, 0.0, 1.0); // Color of the grid lines
 uniform float line_thickness = 1.0; // Thickness of the grid lines

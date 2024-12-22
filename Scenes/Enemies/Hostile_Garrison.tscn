@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dorwtx3kdq1md"]
+[gd_scene load_steps=12 format=3 uid="uid://dorwtx3kdq1md"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_t35kf"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_3fotg"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_21j58"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_no0qs"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_htfi0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_6kls6"]
 
@@ -50,6 +51,15 @@ lifetime = 20.0
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_21j58")
+
+[node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+
+[node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+position = Vector2(-13.9999, -14.0001)
+texture = ExtResource("5_no0qs")
 
 [node name="Aceleration" type="Node2D" parent="."]
 position = Vector2(0.5, 0)

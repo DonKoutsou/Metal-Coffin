@@ -11,6 +11,7 @@ MissileScene = ExtResource("1_evrf7")
 MissileName = "Cruise Missile"
 Distance = 1500
 Speed = 1.0
+Damage = 30
 ItemIcon = ExtResource("1_w8n63")
 ItemIconSmol = ExtResource("2_87bbv")
 ItemName = "Cruise Missile"

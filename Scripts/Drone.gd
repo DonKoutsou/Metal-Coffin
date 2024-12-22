@@ -6,15 +6,17 @@ class_name Drone
 
 var CommingBack = false
 var Docked = true
-var Fuel = 0
 
 signal DroneReturning
 
 func  _ready() -> void:
 	super()
+	for g in Cpt.CaptainStats:
+		g.CurrentVelue = g.GetStat()
 	#Set range of radar and alanyzer
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	FuelVis = false
+	
 	#UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
 	#MapPointerManager.GetInstance().AddShip(self, true)
 
@@ -22,7 +24,6 @@ func GetSaveData() -> DroneSaveData:
 	var dat = DroneSaveData.new()
 	dat.CommingBack = CommingBack
 	dat.Cpt = Cpt
-	dat.Fuel = Fuel
 	dat.Docked = Docked
 	dat.Pos = global_position
 	dat.Rot = global_rotation
@@ -80,13 +81,13 @@ func _physics_process(_delta: float) -> void:
 	if (CurrentPort != null):
 		#CurrentPort.OnSpotVisited()
 		if (CanRefuel):
-			if (Fuel < Cpt.GetStatValue("FUEL_TANK") and CurrentPort.PlayerFuelReserves > 0):
+			if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStatValue("FUEL_TANK") and CurrentPort.PlayerFuelReserves > 0):
 				var maxfuelcap = Cpt.GetStatValue("FUEL_TANK")
-				var currentfuel = Fuel
+				var currentfuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
 				var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
 				ShipDockActions.emit("Refueling", true, roundi(timeleft))
 				#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-				Fuel +=  0.05 * SimulationSpeed
+				Cpt.GetStat("FUEL_TANK").CurrentVelue +=  0.05 * SimulationSpeed
 				CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
 			else:
 				ShipDockActions.emit("Refueling", false, 0)
@@ -108,16 +109,16 @@ func _physics_process(_delta: float) -> void:
 			#else:
 				#ShipDockActions.emit("Upgrading", false, 0)
 				##ToggleShowRefuel("Upgrading", false)
-	if (Fuel <= 0 or Docked):
+	if (Cpt.GetStat("FUEL_TANK").CurrentVelue <= 0 or Docked):
 		return
 	if (CommingBack):
 		updatedronecourse()
 		
 	for g in SimulationSpeed:
 		var ftoconsume = $Aceleration.position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY")
-		Fuel -= ftoconsume
+		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
 		global_position = GetShipAcelerationNode().global_position
-	UpdateFuelRange(Fuel, Cpt.GetStatValue("FUEL_EFFICIENCY"))
+	UpdateFuelRange(Cpt.GetStat("FUEL_TANK").CurrentVelue, Cpt.GetStatValue("FUEL_EFFICIENCY"))
 	#GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
 	#if (Fuel <= global_position.distance_to(PlayerShip.GetInstance().global_position) / 10 / 2):
 		#ReturnToBase()
@@ -142,7 +143,7 @@ func updatedronecourse():
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
-	look_at(predicted_position)
+	ShipLookAt(predicted_position)
 	
 func GetShipSpeed() -> float:
 	if (Docked):

@@ -32,7 +32,7 @@ func _ready() -> void:
 	#call_deferred("TestTrade")
 
 func PlayIntro():
-	GetMap().PlayIntroFadeInt()
+	#GetMap().PlayIntroFadeInt()
 	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."]
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ShowStation, true)
 	$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
@@ -71,7 +71,7 @@ func _enter_tree() -> void:
 	
 	ShipDat.connect("SD_StatsUpdated", OnStatsUpdated)
 	
-	GetInventory().UpdateShipInfo(StartingShip)
+	GetInventory().call_deferred("UpdateShipInfo",StartingShip)
 	ShipDat.ApplyShipStats(StartingShip.Buffs)
 	
 	GetMap().GetPlayerShip().SetShipType(StartingShip)
@@ -91,7 +91,10 @@ func OnStatsUpdated(StatName : String):
 	if (ShipDat.GetStat(StatName).GetCurrentValue() < ShipDat.GetStat(StatName).GetStat() * 0.2):
 		if (!StatsNotifiedLow.has(StatName)):
 			StatsNotifiedLow.append(StatName)
-			GetMap().GetPlayerShip().OnStatLow(StatName)
+			#TODO
+			var plship = PlayerShip.GetInstance()
+			if (plship != null):
+				plship.OnStatLow(StatName)
 			WRLD_StatGotLow.emit(StatName)
 	else:
 		if (StatsNotifiedLow.has(StatName)):
@@ -134,7 +137,7 @@ func LoadData(Data : Resource) -> void:
 	ItemBuffStat("FUEL")
 	
 func GetInventory() -> Inventory:
-	return $Ingame_UIManager/VBoxContainer/Inventory
+	return $Ingame_UIManager/Inventory
 	
 func GetDialogueProgress() -> DialogueProgressHolder:
 	return 	$DialogueProgressHolder
@@ -342,3 +345,7 @@ func _on_return_pressed() -> void:
 
 func On_Game_Lost_Button_Pressed() -> void:
 	WRLD_OnGameEnded.emit()
+
+
+func _on_captain_button_pressed() -> void:
+	CaptainUI.GetInstance()._on_captain_button_pressed()

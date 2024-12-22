@@ -1,7 +1,7 @@
 extends Node
 
 @export var DroneDockEventH : DroneDockEventHandler
-@onready var player_ship: PlayerShip = $"../CanvasLayer/SubViewportContainer/SubViewport/PlayerShip"
+
 @onready var ship_camera: ShipCamera = $"../CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"
 @export var HappeningUI : PackedScene
 
@@ -12,9 +12,9 @@ var ControlledShip : MapShip
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
-	ControlledShip = player_ship
-	AvailableShips.append(player_ship)
-	$"../UI/Elint".UpdateConnectedShip(player_ship)
+	ControlledShip = $"../CanvasLayer/SubViewportContainer/SubViewport/PlayerShip"
+	AvailableShips.append(PlayerShip.GetInstance())
+	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
 
 func OnDroneDocked(D : Drone) -> void:
 	AvailableShips.erase(D)

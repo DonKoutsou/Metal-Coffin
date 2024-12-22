@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://deigffag2eaqb"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_h37sa"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_tr7yf"]
+[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="2_tr7yf"]
 
 [node name="PanelContainer" type="PanelContainer"]
 size_flags_horizontal = 3
@@ -16,7 +16,7 @@ theme_override_colors/font_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 theme_override_colors/font_outline_color = Color(0.615304, 0.57196, 0.322451, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_tr7yf")
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 32
 text = "EMPTY SLOT"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -34,6 +34,7 @@ StatBase = 30.0
 AllowAutoRefil = false
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("4_621fm")
 CaptainName = "Grunt"
 CaptainBio = "Shithead"

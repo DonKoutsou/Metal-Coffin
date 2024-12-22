@@ -28,10 +28,16 @@ func AddCaptain(Dr : Drone):
 	Position.replace_by(cptscene)
 	Position.free()
 	cptscene.SetCap(Dr.Cpt)
-	
+
+func ToggleUI(t : bool) -> void:
+	$"../../../../../../..".OnScreenUiToggled(t)
 func _on_captain_button_pressed() -> void:
+	
 	if (!visible):
-		$"../Inventory".visible = false
+		$"../../../../../../..".OnScreenUiToggled(false)
+		InventoryUI.GetInstance().visible = false
+	else:
+		$"../../../../../../..".OnScreenUiToggled(true)
 	visible = !visible
 
 func OnCaptainDischarged(C : Captain):

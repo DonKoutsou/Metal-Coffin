@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=17 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/Amol.tres" id="3_fw0pf"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="6_x7c6h"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="8_bbjow"]
 
@@ -84,6 +85,15 @@ debug_color = Color(0.718534, 0.251914, 1, 0.42)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_4y2i6")
+
+[node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+
+[node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+position = Vector2(-13.9999, -14.0001)
+texture = ExtResource("5_r8oj1")
 
 [node name="Aceleration" type="Node2D" parent="."]
 

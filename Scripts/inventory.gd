@@ -1,4 +1,4 @@
-extends Control
+extends Node
 class_name Inventory
 
 @export var StartingItems : Array[Item]
@@ -12,8 +12,8 @@ class_name Inventory
 var InventoryContents : Array[Inventory_Box] = []
 static var Instance : Inventory
 
-@onready var inv_contents: GridContainer = $HBoxContainer/InvContents
-@onready var inventory_ship_stats: InventoryShipStats = $HBoxContainer/VBoxContainer/Panel/InventoryShipStats
+#@onready var inv_contents: GridContainer = $HBoxContainer/InvContents
+#@onready var inventory_ship_stats: InventoryShipStats = $HBoxContainer/VBoxContainer/Panel/InventoryShipStats
 
 signal INV_OnItemAdded(It : Item)
 signal INV_OnItemRemoved(It : Item)
@@ -39,11 +39,11 @@ func _ready() -> void:
 	MissileDockEventH.connect("MissileLaunched", RemoveItemSimp)
 	#set_process(false)
 	set_physics_process(false)
-	visible = false
+	InventoryUI.GetInstance().ToggleUI(false)
 	Instance = self
 	for g in ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat():
 		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
-		inv_contents.add_child(newbox)
+		InventoryUI.GetInstance().get_node("HBoxContainer/InvContents").add_child(newbox)
 		InventoryContents.append(newbox)
 		newbox.connect("ItemUse", _OnItemSelected)
 		
@@ -87,13 +87,14 @@ func UpdateSize() -> void:
 			#InventoryContents[g].UpdateAmm(-1)
 	
 	FlushInventory()
-	for g in inv_contents.get_child_count():
-		inv_contents.get_child(g).queue_free()
+	var invcontents = InventoryUI.GetInstance().get_node("HBoxContainer/InvContents")
+	for g in invcontents.get_child_count():
+		invcontents.get_child(g).queue_free()
 	InventoryContents.clear()
 	var invsts = ShipData.GetInstance().GetStat("INVENTORY_CAPACITY").GetStat() as int
 	for g in invsts:
 		var newbox = InventoryBoxScene.instantiate() as Inventory_Box
-		inv_contents.add_child(newbox)
+		invcontents.add_child(newbox)
 		InventoryContents.append(newbox)
 		newbox.connect("ItemUse", _OnItemSelected)
 	AddItems(Itms, false)
@@ -111,7 +112,7 @@ func SetCollumns(invsts : int):
 	for i in range(1, invsts):
 		if invsts % i == 0:
 			num_columns = i
-	inv_contents.columns = num_columns
+	InventoryUI.GetInstance().get_node("HBoxContainer/InvContents").columns = num_columns
 
 func GetItemForStat(StatN : String) -> ItemContainer:
 	for g in InventoryContents:
@@ -134,8 +135,8 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 			Unplaced.append(Itm)
 	#HANDLE ITEMS THAT COULDN'T BE PLACED IN INVENTORY BY INITIALIZING A TRADE TO PLAYER CAN CHOOSE WHAT TO KEEP
 	if (Unplaced.size() > 0):
-		if (visible):
-			visible = false
+		if (InventoryUI.GetInstance().visible):
+			InventoryUI.GetInstance().ToggleUI(false)
 			INV_OnInvencotyClosed.emit()
 			FindAndDissableDescriptors()
 		#COMMENTED OUT OF UPDATING TRADE SCENE WITH NEW ITEMS SINCE SIMULATION IS PAUSED WHEN TRADING 
@@ -148,8 +149,8 @@ func AddItems(It : Array[Item], Notif = true) -> void:
 	#if (Placed.size() > 0 and get_tree().get_nodes_in_group("InventoryTrade").size() > 0):
 		#var trade = get_tree().get_nodes_in_group("InventoryTrade")[0] as InventoryTrade
 		#trade.UpdateInventoryContents(Placed)
-		
-	inventory_ship_stats.UpdateValues()
+	
+	InventoryUI.GetInstance().get_node("HBoxContainer/VBoxContainer/Panel/InventoryShipStats").UpdateValues()
 	if (Notif):
 		DoItemNotif(Placed)
 #////////////////////////////////////////////////////
@@ -216,19 +217,21 @@ func _TradeFinished(itms : Array[Item]) -> void:
 	AddItems(itms, false)
 	
 func _OnItemSelected(ItCo : ItemContainer) -> void:
+	var ui = InventoryUI.GetInstance()
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
 		if (desc.DescribedContainer == ItCo):
 			descriptors[0].queue_free()
-			$HBoxContainer/VBoxContainer/HBoxContainer.visible = true
+			ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer").visible = true
 			return
 		descriptors[0].SetData(ItCo)
 		return
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
-	$HBoxContainer/VBoxContainer.add_child(Descriptor)
-	$HBoxContainer/VBoxContainer.move_child(Descriptor, 0)
-	$HBoxContainer/VBoxContainer/HBoxContainer.visible = false
+	
+	ui.get_node("HBoxContainer/VBoxContainer").add_child(Descriptor)
+	ui.get_node("HBoxContainer/VBoxContainer").move_child(Descriptor, 0)
+	ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer").visible = false
 	Descriptor.SetData(ItCo)
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
@@ -239,7 +242,7 @@ func FindAndDissableDescriptors() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		descriptors[0].queue_free()
-	$HBoxContainer/VBoxContainer/HBoxContainer.visible = true
+	InventoryUI.GetInstance().get_node("HBoxContainer/VBoxContainer/HBoxContainer").visible = true
 
 var UpgradedItem : ItemContainer
 func CancelUpgrades() -> void:
@@ -303,7 +306,7 @@ func RemoveItem(Cont : ItemContainer):
 		if (box.ItemC == Cont):
 			INV_OnItemRemoved.emit(Cont.ItemType)
 			print("Removed item : " + Cont.ItemType.ItemName)
-			inventory_ship_stats.UpdateValues()
+			InventoryUI.GetInstance().get_node("HBoxContainer/VBoxContainer/Panel/InventoryShipStats").UpdateValues()
 			if (Cont.ItemType is MissileItem):
 				MissileDockEventH.emit_signal("MissileRemoved", Cont.ItemType)
 			box.UpdateAmm(-1)
@@ -314,7 +317,7 @@ func FlushContainer(Cont : ItemContainer):
 		if (box.ItemC == Cont):
 			INV_OnItemRemoved.emit(Cont.ItemType)
 			print("Removed item : " + Cont.ItemType.ItemName)
-			inventory_ship_stats.UpdateValues()
+			InventoryUI.GetInstance().get_node("HBoxContainer/VBoxContainer/Panel/InventoryShipStats").UpdateValues()
 			if (Cont.ItemType is MissileItem):
 				MissileDockEventH.emit_signal("MissileRemoved", Cont.ItemType)
 			box.UpdateAmm(-1)
@@ -325,7 +328,7 @@ func RemoveItemSimp(It : Item):
 		if (box.ItemC.ItemType == It):
 			INV_OnItemRemoved.emit(It)
 			print("Removed item : " + It.ItemName)
-			inventory_ship_stats.UpdateValues()
+			InventoryUI.GetInstance().get_node("HBoxContainer/VBoxContainer/Panel/InventoryShipStats").UpdateValues()
 			if (It is MissileItem):
 				MissileDockEventH.emit_signal("MissileRemoved", It)
 			box.UpdateAmm(-1)
@@ -383,27 +386,31 @@ func BreakPart(Part : ShipPart) -> void:
 	INV_OnShipPartDamaged.emit(Part)
 	
 func UpdateShipInfo(ship : BaseShip) -> void:
-	$HBoxContainer/VBoxContainer/HBoxContainer/TextureRect.texture = ship.Icon
-	$HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = ship.ShipName
-	$HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2.text = ship.ShipDesc
+	var ui = InventoryUI.GetInstance()
+	ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer/TextureRect").texture = ship.Icon
+	ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label").text = ship.ShipName
+	ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2").text = ship.ShipDesc
 	
 func _on_inventory_button_pressed() -> void:
-	var IsOpening = !visible
-	visible = IsOpening
+	var ui = InventoryUI.GetInstance()
+	var IsOpening = !ui.visible
+	ui.ToggleUI(IsOpening)
 	if (IsOpening):
-		$"../CaptainUI".visible = false
+		CaptainUI.GetInstance().visible = false
 		INV_OnInventoryOpened.emit()
-		inventory_ship_stats.UpdateValues()
+		InventoryUI.GetInstance().get_node("HBoxContainer/VBoxContainer/Panel/InventoryShipStats").UpdateValues()
 	if (!IsOpening):
 		INV_OnInvencotyClosed.emit()
 		FindAndDissableDescriptors()
 		
 func ForceCloseInv():
-	if (!visible):
+	var ui = InventoryUI.GetInstance()
+	if (!ui.visible):
 		return
-	visible = false
+	ui.visible = false
 	INV_OnInvencotyClosed.emit()
 	FindAndDissableDescriptors()
 	
 func _on_upgrades_button_pressed() -> void:
-	$UpgradesContainer.visible = !$UpgradesContainer.visible
+	var ui = InventoryUI.GetInstance()
+	ui.get_node("UpgradesContainer").visible = !ui.get_node("UpgradesContainer").visible

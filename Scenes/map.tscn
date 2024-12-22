@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=54 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_5r2qd"]
@@ -21,18 +21,20 @@
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="20_4fmmi"]
 [ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="22_56xmu"]
 [ext_resource type="Script" path="res://Scripts/CircleDrawer.gd" id="23_q5rq1"]
+[ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/simulation_notification.tscn" id="25_ux7bi"]
+[ext_resource type="PackedScene" uid="uid://b7owbjefasxhp" path="res://Scenes/InventoryUI.tscn" id="26_wbn50"]
 [ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="26_y7o3o"]
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="27_0t7uv"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
-[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="28_8jvry"]
+[ext_resource type="FontFile" uid="uid://cn7w3x8fi0o58" path="res://Fonts/Play-Regular.ttf" id="28_8jvry"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="28_sirob"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="29_jt4kw"]
-[ext_resource type="Texture2D" uid="uid://cegvm80l0mh4a" path="res://Assets/plain-arrow.png" id="30_g5v37"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="30_vu87k"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="33_4takp"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="33_j3iuy"]
+[ext_resource type="PackedScene" uid="uid://bh861bc6qssti" path="res://Scenes/CaptainUI.tscn" id="34_jwdde"]
 [ext_resource type="Texture2D" uid="uid://b6q1pf3tujd60" path="res://Assets/UIPiecies/Button_Camera 1_Red.png" id="34_mfdce"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="34_sn67k"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="35_k6hjp"]
@@ -52,10 +54,11 @@ normal_texture = ExtResource("14_00g78")
 texture_filter = 5
 texture_repeat = 2
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2v8bx"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0a4hg"]
+blend_mode = 1
 light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ms5"]
@@ -64,7 +67,7 @@ bg_color = Color(0.0229965, 0.0616206, 0.0645667, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4qkgl"]
 shader = ExtResource("12_ivvec")
 shader_parameter/grid_size = Vector2(50, 50)
-shader_parameter/line_color = Color(0.601, 0.546, 0.322, 0.057)
+shader_parameter/line_color = Color(0.6, 0.545098, 0.321569, 0.215686)
 shader_parameter/line_thickness = 0.855
 shader_parameter/zoom = 1.0
 shader_parameter/pan_offset = Vector2(0, 0)
@@ -83,11 +86,11 @@ noise = SubResource("FastNoiseLite_qsdd3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ndluk"]
 shader = ExtResource("22_56xmu")
-shader_parameter/curvature = 2.0
+shader_parameter/curvature = 0.28
 shader_parameter/skip = 0.01
 shader_parameter/image_flicker = 0.05
 shader_parameter/vignette_flicker_speed = 0.0
-shader_parameter/vignette_strength = 1.5
+shader_parameter/vignette_strength = 0.71
 shader_parameter/small_scanlines_speed = 1.0
 shader_parameter/small_scanlines_proximity = 2.0
 shader_parameter/small_scanlines_opacity = 1.17
@@ -96,9 +99,6 @@ shader_parameter/scanlines_speed = 1.0
 shader_parameter/scanline_thickness = 0.55
 shader_parameter/scanlines_spacing = 1.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_6kihg")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
-light_mode = 1
 
 [sub_resource type="Animation" id="Animation_2vpkr"]
 resource_name = "FadeIn"
@@ -143,10 +143,10 @@ follow_viewport_enabled = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 63.0
-offset_top = 86.0
-offset_right = -45.0
-offset_bottom = -42.0
+offset_left = 77.0
+offset_top = 95.0
+offset_right = -61.0
+offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -159,7 +159,7 @@ handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(1044, 520)
+size = Vector2i(1014, 504)
 render_target_update_mode = 4
 
 [node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport" groups=["DissapearingMap"]]
@@ -195,7 +195,7 @@ stretch_mode = 1
 [node name="MapSpots" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 
 [node name="PlayerShip" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("28_7rdua")]
-position = Vector2(0, 0)
+position = Vector2(163, 60)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
@@ -207,79 +207,9 @@ limit_smoothed = true
 position_smoothing_speed = 1.0
 script = ExtResource("16_4wqve")
 
-[node name="ArrowSprite" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"]
-modulate = Color(0.770444, 0.040374, 0.0224221, 1)
-
-[node name="ArrowSprite2" type="Sprite2D" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite"]
-modulate = Color(0.770444, 0.040374, 0.0224221, 1)
-material = SubResource("CanvasItemMaterial_2v8bx")
-rotation = -1.5708
-texture = ExtResource("30_g5v37")
-
-[node name="Control2" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 3
-anchors_preset = 0
-offset_left = -7500.0
-offset_top = -7500.0
-offset_right = 7500.0
-offset_bottom = 7500.0
-
-[node name="Panel2" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2"]
-z_index = 1
-z_as_relative = false
-material = SubResource("CanvasItemMaterial_0a4hg")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -10000.0
-offset_right = 15000.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
-
-[node name="Panel3" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/Control2"]
-z_index = 1
-z_as_relative = false
-material = SubResource("ShaderMaterial_4qkgl")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8000.0
-offset_right = 2000.0
-offset_bottom = 5000.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Screen" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"]
-z_index = 120
-material = SubResource("ShaderMaterial_ndluk")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15000.0
-offset_top = -8000.0
-offset_right = -13920.0
-offset_bottom = -7460.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(50, 50)
-mouse_filter = 2
-
-[node name="MapPointerManager" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="MapPointerManager" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 z_index = 100
 material = SubResource("CanvasItemMaterial_w8yg2")
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("18_ahli7")
 MarkerScene = ExtResource("19_mn7nq")
 MapSpotMarkerScene = ExtResource("20_4fmmi")
@@ -290,6 +220,82 @@ EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 use_parent_material = true
 script = ExtResource("23_q5rq1")
 Col = Color(0.721279, 0.395459, 0.144425, 1)
+
+[node name="InScreenUI" type="CanvasLayer" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+
+[node name="Control3" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rulers" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Rulers"]
+material = SubResource("CanvasItemMaterial_0a4hg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
+
+[node name="Panel3" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Rulers"]
+z_as_relative = false
+material = SubResource("ShaderMaterial_4qkgl")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SimulationNotification" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3" instance=ExtResource("25_ux7bi")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 100.785
+offset_bottom = 187.785
+grow_vertical = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryUI" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Control" instance=ExtResource("26_wbn50")]
+visible = false
+layout_mode = 1
+offset_top = -1.0
+offset_bottom = 1.0
+
+[node name="CaptainUI" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Control" instance=ExtResource("34_jwdde")]
+visible = false
+layout_mode = 1
+
+[node name="Screen" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
+material = SubResource("ShaderMaterial_ndluk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(50, 50)
+mouse_filter = 2
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 1
@@ -315,9 +321,18 @@ mouse_filter = 2
 texture = ExtResource("33_4takp")
 expand_mode = 1
 
-[node name="SteeringWheel" parent="UI" instance=ExtResource("35_y1n03")]
-layout_mode = 2
-anchors_preset = 0
+[node name="ScreenUi" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SteeringWheel" parent="UI/ScreenUi" instance=ExtResource("35_y1n03")]
+layout_mode = 1
+anchors_preset = 2
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
@@ -325,10 +340,10 @@ anchor_bottom = 1.0
 grow_horizontal = 1
 grow_vertical = 0
 
-[node name="ThrustSlider" parent="UI" instance=ExtResource("34_sn67k")]
+[node name="ThrustSlider" parent="UI/ScreenUi" instance=ExtResource("34_sn67k")]
 layout_mode = 1
 
-[node name="RadarButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="RadarButton" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 layout_mode = 1
 offset_left = 388.0
 offset_top = -14.0
@@ -341,7 +356,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="Label" type="TextureRect" parent="UI/RadarButton"]
+[node name="Label" type="TextureRect" parent="UI/ScreenUi/RadarButton"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -359,7 +374,7 @@ rotation = -1.5708
 texture = ExtResource("27_0t7uv")
 expand_mode = 1
 
-[node name="SimulationButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="SimulationButton" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 layout_mode = 1
 offset_left = 388.0
 offset_top = 92.0
@@ -373,7 +388,7 @@ stretch_mode = 0
 flip_h = true
 flip_v = true
 
-[node name="Label" type="Label" parent="UI/SimulationButton"]
+[node name="Label" type="Label" parent="UI/ScreenUi/SimulationButton"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -397,7 +412,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="SpeedSimulation" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="SpeedSimulation" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 layout_mode = 1
 offset_left = 616.0
 offset_top = -14.0
@@ -410,7 +425,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="Label" type="Label" parent="UI/SpeedSimulation"]
+[node name="Label" type="Label" parent="UI/ScreenUi/SpeedSimulation"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -434,7 +449,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="LandButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="LandButton" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 layout_mode = 1
 offset_left = 274.0
 offset_top = -14.0
@@ -446,7 +461,7 @@ texture_pressed = ExtResource("28_sirob")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UI/LandButton"]
+[node name="Label" type="Label" parent="UI/ScreenUi/LandButton"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -470,16 +485,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="DroneButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="DroneButton" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -352.0
-offset_top = -56.0
-offset_right = -201.0
+offset_left = -353.0
+offset_top = -110.0
+offset_right = -202.0
+offset_bottom = -54.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("26_y7o3o")
@@ -487,7 +503,7 @@ texture_pressed = ExtResource("27_x5hrs")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UI/DroneButton"]
+[node name="Label" type="Label" parent="UI/ScreenUi/DroneButton"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -509,17 +525,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="MissileButton" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="MissileButton" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -352.0
-offset_top = -109.0
-offset_right = -201.0
-offset_bottom = -53.0
+offset_left = -353.0
+offset_top = -56.0
+offset_right = -202.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("26_y7o3o")
@@ -527,7 +542,7 @@ texture_pressed = ExtResource("27_x5hrs")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UI/MissileButton"]
+[node name="Label" type="Label" parent="UI/ScreenUi/MissileButton"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -549,7 +564,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Clock" parent="UI" instance=ExtResource("30_vu87k")]
+[node name="Clock" parent="UI/ScreenUi" instance=ExtResource("30_vu87k")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -557,35 +572,31 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -197.0
-offset_top = -192.0
+offset_top = -191.0
 offset_right = -139.0
-offset_bottom = -136.0
+offset_bottom = -135.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="DroneTab" parent="UI" instance=ExtResource("35_k6hjp")]
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -404.0
-offset_top = -41.0
-offset_right = -364.0
-offset_bottom = -1.0
-grow_horizontal = 0
-
-[node name="Missile Tab" parent="UI" instance=ExtResource("29_jt4kw")]
+[node name="DroneTab" parent="UI/ScreenUi" instance=ExtResource("35_k6hjp")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -405.0
-offset_top = -41.0
-offset_right = -365.0
-offset_bottom = -1.0
+offset_left = -404.0
+offset_right = -364.0
 grow_horizontal = 0
 
-[node name="Elint" parent="UI" instance=ExtResource("37_i8qtm")]
+[node name="Missile Tab" parent="UI/ScreenUi" instance=ExtResource("29_jt4kw")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -404.0
+offset_right = -364.0
+grow_horizontal = 0
+
+[node name="Elint" parent="UI/ScreenUi" instance=ExtResource("37_i8qtm")]
 layout_mode = 1
 anchors_preset = 0
 anchor_left = 0.0
@@ -599,17 +610,17 @@ offset_bottom = 163.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="ControlledShipSwitch" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="ControlledShipSwitch" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 process_mode = 3
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -164.0
-offset_right = 70.0
-offset_bottom = -78.0
+offset_left = -9.0
+offset_top = -149.0
+offset_right = 71.0
+offset_bottom = -63.0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -621,7 +632,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="Label" type="Label" parent="UI/ControlledShipSwitch"]
+[node name="Label" type="Label" parent="UI/ScreenUi/ControlledShipSwitch"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -643,17 +654,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ControlledShipReturn" type="TextureButton" parent="UI" groups=["Buttons"]]
+[node name="ControlledShipReturn" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
 process_mode = 3
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -78.0
-offset_right = 69.0
-offset_bottom = 8.0
+offset_left = -10.0
+offset_top = -63.0
+offset_right = 70.0
+offset_bottom = 23.0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -665,7 +676,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="Label" type="Label" parent="UI/ControlledShipReturn"]
+[node name="Label" type="Label" parent="UI/ScreenUi/ControlledShipReturn"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -698,14 +709,14 @@ libraries = {
 [connection signal="ShipAccelerating" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStartedMoving"]
 [connection signal="ShipForceStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipForcedStop"]
 [connection signal="ShipStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStoppedMoving"]
-[connection signal="SteeringDitChanged" from="UI/SteeringWheel" to="ShipController" method="SteerChanged"]
-[connection signal="AccelerationChanged" from="UI/ThrustSlider" to="ShipController" method="AccelerationChanged"]
-[connection signal="pressed" from="UI/RadarButton" to="ShipController" method="_on_radar_button_pressed"]
-[connection signal="pressed" from="UI/SimulationButton" to="." method="_on_simulation_button_pressed"]
-[connection signal="button_down" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_down"]
-[connection signal="button_up" from="UI/SpeedSimulation" to="." method="_on_speed_simulation_button_up"]
-[connection signal="pressed" from="UI/LandButton" to="ShipController" method="_on_land_button_pressed"]
-[connection signal="pressed" from="UI/DroneButton" to="UI/DroneTab" method="_on_toggle_drone_tab_pressed"]
-[connection signal="pressed" from="UI/MissileButton" to="UI/Missile Tab" method="_on_toggle_drone_tab_pressed"]
-[connection signal="pressed" from="UI/ControlledShipSwitch" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]
-[connection signal="pressed" from="UI/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]
+[connection signal="SteeringDitChanged" from="UI/ScreenUi/SteeringWheel" to="ShipController" method="SteerChanged"]
+[connection signal="AccelerationChanged" from="UI/ScreenUi/ThrustSlider" to="ShipController" method="AccelerationChanged"]
+[connection signal="pressed" from="UI/ScreenUi/RadarButton" to="ShipController" method="_on_radar_button_pressed"]
+[connection signal="pressed" from="UI/ScreenUi/SimulationButton" to="." method="_on_simulation_button_pressed"]
+[connection signal="button_down" from="UI/ScreenUi/SpeedSimulation" to="." method="_on_speed_simulation_button_down"]
+[connection signal="button_up" from="UI/ScreenUi/SpeedSimulation" to="." method="_on_speed_simulation_button_up"]
+[connection signal="pressed" from="UI/ScreenUi/LandButton" to="ShipController" method="_on_land_button_pressed"]
+[connection signal="pressed" from="UI/ScreenUi/DroneButton" to="UI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]
+[connection signal="pressed" from="UI/ScreenUi/MissileButton" to="UI/ScreenUi/Missile Tab" method="_on_toggle_drone_tab_pressed"]
+[connection signal="pressed" from="UI/ScreenUi/ControlledShipSwitch" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]
+[connection signal="pressed" from="UI/ScreenUi/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]

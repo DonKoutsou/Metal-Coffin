@@ -7,7 +7,8 @@ class_name Map
 @export var FinalCity : PackedScene
 @export var MapSize : int
 @export var MapGenerationDistanceCurve : Curve
-@onready var thrust_slider: ThrustSlider = $UI/ThrustSlider
+@onready var thrust_slider: ThrustSlider = $UI/ScreenUi/ThrustSlider
+
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
 #signal MAP_AsteroidBeltArrival(Size : int)
@@ -26,8 +27,8 @@ func _ready() -> void:
 		#call_deferred("")
 		ShowingTutorial = true
 	var shipdata = ShipData.GetInstance()
-	GetPlayerShip().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
-	GetPlayerShip().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
+	PlayerShip.GetInstance().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
+	PlayerShip.GetInstance().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	#GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	
 	#GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
@@ -37,37 +38,39 @@ func _InitialPlayerPlacament():
 	#firstvilage.OnSpotAnalyzed(false)
 	var pos = firstvilage.global_position
 	pos.x -= 500
-	GetPlayerShip().global_position = pos
-	camera_2d.global_position = GetPlayerShip().global_position
-func GetPlayerPos() -> Vector2:
-	return GetPlayerShip().position
-func GetPlayerShip() -> PlayerShip:
-	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
+	PlayerShip.GetInstance().global_position = pos
+	camera_2d.global_position = PlayerShip.GetInstance().global_position
+#func GetPlayerPos() -> Vector2:
+	#return GetPlayerShip().position
 func GetMissileTab() -> MissileTab:
 	return $"UI/Missile Tab"
 func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
-func SetPlayerPos(pos : Vector2) -> void:
-	GetPlayerShip().position = pos
+#func SetPlayerPos(pos : Vector2) -> void:
+	#GetPlayerShip().position = pos
 	
 func ToggleVis(t : bool ):
 	visible = t
 	$CanvasLayer.visible = t
 
-func PlayIntroFadeInt():
-	$AnimationPlayer.play("FadeIn")
-	camera_2d.global_position = GetPlayerShip().global_position
+#func PlayIntroFadeInt():
+	#$AnimationPlayer.play("FadeIn")
+	#camera_2d.global_position = GetPlayerShip().global_position
 	
 func ToggleUIForIntro(t : bool):
-	GetPlayerShip().ToggleUI(t)
-	$UI/ThrustSlider.visible = t
-	$UI/SteeringWheel.visible = t
-	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = t
-	$UI/RadarButton.visible = t
-	$UI/DroneTab.visible = t
-	$"UI/Missile Tab".visible = t
-	$UI/SimulationButton.visible = t
-
+	PlayerShip.GetInstance().ToggleUI(t)
+	$UI/ScreenUi.visible = t
+	#$UI/ThrustSlider.visible = t
+	#$UI/SteeringWheel.visible = t
+	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = t
+	#$UI/RadarButton.visible = t
+	#$UI/DroneTab.visible = t
+	#$"UI/Missile Tab".visible = t
+	#$UI/SimulationButton.visible = t
+func GetPlayerPos() -> Vector2:
+	return GetPlayerShip().position
+func GetPlayerShip() -> PlayerShip:
+	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
 func GenerateMap() -> void:
 	#DECIDE ON PLECEMENT OF SPECIAL SPOTS
 	
@@ -207,16 +210,16 @@ func StageFailed() -> void:
 	set_process_input(true)
 	#Travelling = false
 
-func SearchLocation(stage : MapSpot):
-	if (GetPlayerShip().Travelling):
-		PopUpManager.GetInstance().DoFadeNotif("Stop the ship to land.")
-		return
-	#stage.ToggleLandButton(false)
-	if (stage.SpotType is Ship_MapSpotType):
-		MAP_ShipSearched.emit(stage.SpotType.Ship)
-	else:
-		MAP_StageSearched.emit(stage)
-	
+#func SearchLocation(stage : MapSpot):
+	#if (GetPlayerShip().Travelling):
+		#PopUpManager.GetInstance().DoFadeNotif("Stop the ship to land.")
+		#return
+	##stage.ToggleLandButton(false)
+	#if (stage.SpotType is Ship_MapSpotType):
+		#MAP_ShipSearched.emit(stage.SpotType.Ship)
+	#else:
+		#MAP_StageSearched.emit(stage)
+	#
 
 #Save/Load///////////////////////////////////////////
 func GetSaveData() ->SaveData:
@@ -252,7 +255,8 @@ func ShipStartedMoving():
 	
 func ShipStoppedMoving():
 	camera_2d.applyshake()
-	
+func OnScreenUiToggled(t : bool) -> void:
+	$UI/ScreenUi.visible = t
 func ShipForcedStop():
 	thrust_slider.ZeroAcceleration()
 #INPUT HANDLING////////////////////////////
@@ -273,19 +277,20 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	#print("Zoom changed to " + var_to_str(camera_2d.zoom.x))
 #//////////////////////////////////////////////////////////
 #ARROW FOR LOCATING PLAYER SHIP
-func _process(_delta: float) -> void:
-	#var plpos = GetPlayerShip().global_position
-	#$CanvasLayer/SubViewportContainer/SubViewport/MapPointers/Panel.global_position = plpos
-	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.look_at(GetPlayerShip().global_position)
-func PlayerEnteredScreen() -> void:
-	#set_process(false)
-	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = false
-func PlayerExitedScreen() -> void:
-	#set_process(true)
-	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
+#func _process(_delta: float) -> void:
+	##var plpos = GetPlayerShip().global_position
+	##$CanvasLayer/SubViewportContainer/SubViewport/MapPointers/Panel.global_position = plpos
+	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.look_at(PlayerShip.GetInstance().global_position)
+#func PlayerEnteredScreen() -> void:
+	##set_process(false)
+	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = false
+#func PlayerExitedScreen() -> void:
+	##set_process(true)
+	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = true
 #//////////////////////////////////////////////////////////
 var Maplt : Thread
 var Roadt : Thread
+var Mut : Mutex
 func GenerateRoads() -> void:
 	var CityGroups = ["City Center", "Capital City Center"]
 	var AllSpotGroups = ["City Center", "Capital City Center","Chora"]
@@ -302,6 +307,7 @@ func GenerateRoads() -> void:
 	var cityloc2 : Array[Vector2]
 	for g in Spots2:
 		cityloc2.append(g.global_position)
+	Mut = Mutex.new()
 	Maplt = Thread.new()
 	Maplt.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines))
 	Roadt = Thread.new()
@@ -340,8 +346,9 @@ func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bo
 		var offsetperpoint = dist/pointamm
 		for g in pointamm:
 			var offset = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+			Mut.lock()
 			l.add_point(point1 + offset)
-		
+			Mut.unlock()
 		l.add_point(point2)
 	if (RandomiseLines):
 		call_deferred("RoadFinished")
@@ -427,7 +434,7 @@ func _prim_mst_optimized(cities: Array) -> Array:
 	return mst_edges
 
 func _on_missile_button_pressed() -> void:
-	GetPlayerShip().FireMissile()
+	PlayerShip.GetInstance().FireMissile()
 
 var simmulationPaused = false
 

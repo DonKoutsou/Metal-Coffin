@@ -48,7 +48,7 @@ func SyphonFuelFromDrones(amm : float) -> void:
 func GetDroneFuel() -> float:
 	var fuel : float = 0
 	for g in DockedDrones:
-		fuel += g.Fuel
+		fuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
 	return fuel
 
 func HasSpace() -> bool:
@@ -164,7 +164,7 @@ func DroneRangeChanged(NewRange : float) -> void:
 	
 func LaunchDrone(Dr : Drone) -> void:
 	var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
-	var neededfuel = fueltoconsume - Dr.Fuel
+	var neededfuel = fueltoconsume - Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue
 	if (neededfuel > 0):
 		if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
 			return
@@ -173,7 +173,7 @@ func LaunchDrone(Dr : Drone) -> void:
 	UndockDrone(Dr)
 	Dr.global_rotation = $Line2D.global_rotation
 	Dr.global_position = global_position
-	Dr.Fuel = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
+	Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
 	Dr.EnableDrone()
 	
 func AddDroneToHierarchy(drone : Drone):
