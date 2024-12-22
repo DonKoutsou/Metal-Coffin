@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c2tp3xgyap8ar"]
+[gd_scene load_steps=24 format=3 uid="uid://c2tp3xgyap8ar"]
 
 [ext_resource type="Script" path="res://Scenes/e_lint.gd" id="1_n0goy"]
 [ext_resource type="Texture2D" uid="uid://cb14164lv0llj" path="res://Assets/UIPiecies/Elint/transparent/Opacity5.png" id="3_wx2vp"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]
 [ext_resource type="Texture2D" uid="uid://u6qd6o0jhpg4" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="21_h2hwe"]
 [ext_resource type="AudioStream" uid="uid://bfi3w55ap7hs7" path="res://Assets/Sounds/alarm_01.wav" id="21_w3va6"]
+[ext_resource type="AudioStream" uid="uid://c383tvo4hv3s6" path="res://Assets/VoiceLines/mapmode_contact_elint_01.wav" id="23_unhwr"]
 
 [node name="Elint" type="Control"]
 layout_mode = 3
@@ -108,3 +109,8 @@ grow_vertical = 2
 stream = ExtResource("20_7y4w8")
 volume_db = -20.0
 bus = &"MapSounds"
+
+[node name="DetectionWarning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_unhwr")
+volume_db = -10.0
+bus = &"UI"

@@ -31,7 +31,18 @@ func _on_radar_button_pressed() -> void:
 	ControlledShip.ToggleRadar()
 
 func _on_land_button_pressed() -> void:
-	var spot = ControlledShip.CurrentPort as MapSpot
+	ControlledShip.StartLanding()
+	ControlledShip.connect("LandingEnded", OnShipLanded)
+	ControlledShip.connect("LandingCanceled", OnLandingCanceled)
+
+func OnLandingCanceled(Ship : MapShip) -> void:
+	Ship.disconnect("LandingEnded", OnShipLanded)
+	Ship.disconnect("LandingCanceled", OnLandingCanceled)
+
+func OnShipLanded(Ship : MapShip) -> void:
+	Ship.disconnect("LandingEnded", OnShipLanded)
+	Ship.disconnect("LandingCanceled", OnLandingCanceled)
+	var spot = Ship.CurrentPort as MapSpot
 	if (spot == null):
 		PopUpManager.GetInstance().DoFadeNotif("No port to land to")
 		return
@@ -44,11 +55,11 @@ func _on_land_button_pressed() -> void:
 		fuel.BoughtFuel = spot.PlayerFuelReserves
 		fuel.BoughtRepairs = spot.PlayerRepairReserves
 		fuel.connect("TransactionFinished", FuelTransactionFinished)
-		fuel.LandedShip = ControlledShip
+		fuel.LandedShip = Ship
 		Ingame_UIManager.GetInstance().AddUI(fuel, false, true)
 		SimulationManager.GetInstance().TogglePause(true)
 	Land(spot)
-	
+
 func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float):
 	ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
 	var spot = ControlledShip.CurrentPort as MapSpot

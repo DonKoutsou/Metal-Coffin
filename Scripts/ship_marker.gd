@@ -20,6 +20,9 @@ var DetailInitialPos : Vector2
 
 var Showspeed : bool = false
 
+var ElintNotif : ShipMarkerNotif
+var LandingNotif : ShipMarkerNotif
+
 signal ShipDeparted
 
 func _ready() -> void:
@@ -45,6 +48,9 @@ func PlayHostileShipNotif() -> void:
 	
 func OnShipDeparted() -> void:
 	ShipDeparted.emit()
+	ToggleShowRefuel("Refueling", false, 0)
+	ToggleShowRefuel("Repairing", false, 0)
+	ToggleShowRefuel("Upgrading", false, 0)
 
 func UpdateTrajectory(Dir : float) -> void:
 	$Direction.rotation = Dir
@@ -67,21 +73,30 @@ func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 		add_child(notif)
 
 func ToggleShowElint( t : bool, ElingLevel : int):
-	var notif : ShipMarkerNotif
-	for g in get_children():
-		if g is ShipMarkerNotif and !g.Blink:
-			if (t):
-				g.SetText("ELINT : " + var_to_str(ElingLevel))
-				return
-			else :
-				g.queue_free()
-				return
+	if ElintNotif != null:
+		if (t):
+			ElintNotif.SetText("ELINT : " + var_to_str(ElingLevel))
+			return
+		else :
+			ElintNotif.queue_free()
+			ElintNotif = null
+			return
 	if (t):
-		notif = NotificationScene.instantiate() as ShipMarkerNotif
-		notif.SetText("ELINT : " + var_to_str(ElingLevel))
-		notif.Blink = false
+		ElintNotif = NotificationScene.instantiate() as ShipMarkerNotif
+		ElintNotif.SetText("ELINT : " + var_to_str(ElingLevel))
+		ElintNotif.Blink = false
 		#connect("ShipDeparted", notif.OnShipDeparted)
-		add_child(notif)
+		add_child(ElintNotif)
+
+func OnLandingStarted():
+	LandingNotif = NotificationScene.instantiate() as ShipMarkerNotif
+	#LandingNotif.SetText("ELINT : " + var_to_str(ElingLevel))
+	LandingNotif.Blink = false
+	#connect("ShipDeparted", notif.OnShipDeparted)
+	add_child(LandingNotif)
+func OnLandingEnded(Ship : MapShip):
+	LandingNotif.queue_free()
+	LandingNotif = null
 
 func ToggleShipDetails(T : bool):
 	$Control.visible = T
@@ -125,6 +140,8 @@ func UpdateFuel():
 	var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL").GetCurrentValue())
 	var maxfuel = ShipData.GetInstance().GetStat("FUEL").GetStat()
 	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxfuel])
+func UpdateAltitude(Alt : float):
+	LandingNotif.SetText("Altitude : " + var_to_str(Alt))
 func UpdateDroneFuel(amm : float, maxamm : float):
 	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1}  Tons".format([amm, maxamm])
 func UpdateHull():

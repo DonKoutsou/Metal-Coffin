@@ -11,6 +11,8 @@ var Lights : Array[Light2D] = []
 
 var ConnectedShip : MapShip
 
+var FoundContact : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for g in get_children():
@@ -25,6 +27,7 @@ func ToggleElint(t : bool) -> void:
 	if (t):
 		$TextureRect.texture = OnOffTextures[0]
 		set_physics_process(true)
+		
 	else:
 		$TextureRect.texture = OnOffTextures[1]
 		set_physics_process(false)
@@ -46,10 +49,14 @@ func _physics_process(delta: float) -> void:
 	
 	var Elint = ConnectedShip.GetClosestElint()
 	if (Elint == Vector2.ZERO):
+		FoundContact = false
 		for g in Lights:
 			g.visible = false
 		return
 	else :
+		if (!FoundContact):
+			FoundContact = true
+			$DetectionWarning.play()
 		SetDirection(rad_to_deg(ConnectedShip.global_position.angle_to_point(Elint)) + 180)
 		SetDistance(ConnectedShip.global_position.distance_to(Elint))
 	

@@ -51,7 +51,7 @@ func AccelerationChanged(value: float) -> void:
 	super(value)
 
 func EnableDrone():
-	set_physics_process(true)
+	#set_physics_process(true)
 	$AudioStreamPlayer2D.play()
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
 	ToggleRadar()
@@ -60,7 +60,7 @@ func DissableDrone():
 	#GetShipIcon().rotation = 0.0
 	rotation = 0
 	$AudioStreamPlayer2D.stop()
-	set_physics_process(false)
+	#set_physics_process(false)
 	ToggleRadar()
 	$ShipBody/CollisionShape2D.disabled = true
 func GetBattleStats() -> BattleShipStats:
@@ -76,39 +76,39 @@ func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
 	super(_delta)
-	if ($Aceleration.position.x == 0):
-		if (CurrentPort != null):
-			#CurrentPort.OnSpotVisited()
-			if (CanRefuel):
-				if (Fuel < Cpt.GetStatValue("FUEL_TANK") and CurrentPort.PlayerFuelReserves > 0):
-					var maxfuelcap = Cpt.GetStatValue("FUEL_TANK")
-					var currentfuel = Fuel
-					var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
-					ShipDockActions.emit("Refueling", true, roundi(timeleft))
-					#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-					Fuel +=  0.05 * SimulationSpeed
-					CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
-				else:
-					ShipDockActions.emit("Refueling", false, 0)
-					#ToggleShowRefuel("Refueling", false)
-			if (CanRepair):
-				if (Cpt.GetStat("HULL").GetBaseStat() < Cpt.GetStat("HULL").GetStat() and CurrentPort.PlayerRepairReserves):
-					var timeleft = ((Cpt.GetStat("HULL").GetStat() - Cpt.GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
-					ShipDockActions.emit("Repairing", true, roundi(timeleft))
-					#ToggleShowRefuel("Repairing", true, roundi(timeleft))
-					Cpt.GetStat("HULL").RefilCurrentVelue(0.05 * SimulationSpeed)
-				else:
-					ShipDockActions.emit("Repairing", false, 0)
-					#ToggleShowRefuel("Repairing", false)
-			#if (CanUpgrade):
-				#var inv = Inventory.GetInstance()
-				#if (inv.UpgradedItem != null):
-					##ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-					#ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-				#else:
-					#ShipDockActions.emit("Upgrading", false, 0)
-					##ToggleShowRefuel("Upgrading", false)
-	if (Fuel <= 0):
+	#if ($Aceleration.position.x == 0):
+	if (CurrentPort != null):
+		#CurrentPort.OnSpotVisited()
+		if (CanRefuel):
+			if (Fuel < Cpt.GetStatValue("FUEL_TANK") and CurrentPort.PlayerFuelReserves > 0):
+				var maxfuelcap = Cpt.GetStatValue("FUEL_TANK")
+				var currentfuel = Fuel
+				var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
+				ShipDockActions.emit("Refueling", true, roundi(timeleft))
+				#ToggleShowRefuel("Refueling", true, roundi(timeleft))
+				Fuel +=  0.05 * SimulationSpeed
+				CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
+			else:
+				ShipDockActions.emit("Refueling", false, 0)
+				#ToggleShowRefuel("Refueling", false)
+		if (CanRepair):
+			if (Cpt.GetStat("HULL").GetBaseStat() < Cpt.GetStat("HULL").GetStat() and CurrentPort.PlayerRepairReserves):
+				var timeleft = ((Cpt.GetStat("HULL").GetStat() - Cpt.GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
+				ShipDockActions.emit("Repairing", true, roundi(timeleft))
+				#ToggleShowRefuel("Repairing", true, roundi(timeleft))
+				Cpt.GetStat("HULL").RefilCurrentVelue(0.05 * SimulationSpeed)
+			else:
+				ShipDockActions.emit("Repairing", false, 0)
+				#ToggleShowRefuel("Repairing", false)
+		#if (CanUpgrade):
+			#var inv = Inventory.GetInstance()
+			#if (inv.UpgradedItem != null):
+				##ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+				#ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+			#else:
+				#ShipDockActions.emit("Upgrading", false, 0)
+				##ToggleShowRefuel("Upgrading", false)
+	if (Fuel <= 0 or Docked):
 		return
 	if (CommingBack):
 		updatedronecourse()

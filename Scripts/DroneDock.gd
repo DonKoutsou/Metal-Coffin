@@ -112,6 +112,9 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
 	Inventory.GetInstance().UpdateSize()
 	AddDroneToHierarchy(Drne)
+	var pl = get_parent() as PlayerShip
+	if (pl.CurrentPort != null):
+		Drne.SetCurrentPort(pl.CurrentPort)
 	
 func PlayLandingSound()-> void:
 	var sound = AudioStreamPlayer.new()

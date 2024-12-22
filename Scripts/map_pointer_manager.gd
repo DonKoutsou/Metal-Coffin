@@ -43,6 +43,12 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		Ship.connect("StatLow", marker.OnStatLow)
 		Ship.connect("Elint", marker.ToggleShowElint)
+		Ship.connect("LandingStarted", marker.OnLandingStarted)
+		Ship.connect("LandingCanceled", marker.OnLandingEnded)
+		Ship.connect("LandingEnded", marker.OnLandingEnded)
+		Ship.connect("TakeoffStarted", marker.OnLandingStarted)
+		Ship.connect("TakeoffEnded", marker.OnLandingEnded)
+		
 		marker.SetMarkerDetails("Flagship", "P",Ship.GetShipSpeed())
 	
 	if (Ship is HostileShip):
@@ -55,6 +61,11 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		Ship.connect("DroneReturning", marker.DroneReturning)
 		Ship.connect("Elint", marker.ToggleShowElint)
+		Ship.connect("LandingStarted", marker.OnLandingStarted)
+		Ship.connect("LandingCanceled", marker.OnLandingEnded)
+		Ship.connect("LandingEnded", marker.OnLandingEnded)
+		Ship.connect("TakeoffStarted", marker.OnLandingStarted)
+		Ship.connect("TakeoffEnded", marker.OnLandingEnded)
 		marker.ToggleShipDetails(true)
 		marker.ToggleFriendlyShipDetails(true)
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
@@ -150,6 +161,8 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
 					Circles.append(PackedVector2Array([ship.global_position, Vector2(ship.Cpt.GetStatValue("RADAR_RANGE"), 0)]))
+				if (ship.Landing or ship.TakingOff):
+					Marker.UpdateAltitude(ship.Altitude)
 				#Marker.global_position = ship.global_position
 			if (ship is PlayerShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
@@ -158,6 +171,8 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
 					Circles.append(PackedVector2Array([ship.global_position, Vector2(ShipData.GetInstance().GetStat("VIZ_RANGE").GetStat(), 0)]))
+				if (ship.Landing or ship.TakingOff):
+					Marker.UpdateAltitude(ship.Altitude)
 				#Marker.global_position = ship.global_position
 				#Marker.UpdateSpeed(ship.GetSpeed())
 			if (ship is Missile):

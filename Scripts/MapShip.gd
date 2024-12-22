@@ -20,6 +20,7 @@ var CanUpgrade = false
 var IsRefueling = false
 var RadarWorking = true
 var FuelVis = true
+var Altitude = 10000
 
 signal ScreenEnter()
 signal ScreenExit()
@@ -29,6 +30,14 @@ signal ShipForceStopped
 signal ShipDeparted()
 signal ShipDockActions(Stats : String, t : bool, timel : float)
 signal StatLow(StatName : String)
+
+var Landing : bool = false
+signal LandingStarted
+signal LandingCanceled(Ship : MapShip)
+signal LandingEnded(Ship : MapShip)
+var TakingOff : bool = false
+signal TakeoffStarted
+signal TakeoffEnded(Ship : MapShip)
 
 signal Elint(T : bool, Lvl : int)
 var ElintContacts : Dictionary
@@ -65,14 +74,29 @@ func ToggleRadar():
 func ToggleElint():
 	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
 
-func SetCurrentPort(Port : MapSpot):
-	CurrentPort = Port
-	CanRefuel = Port.HasFuel()
-	CanRepair = Port.HasRepair()
-	CanUpgrade = Port.HasUpgrade()
+
+
+func StartLanding() -> void:
+	LandingStarted.emit()
+	Landing = true
+
+func Landed() -> bool:
+	return Altitude == 0
 
 var d = 0.4
 func _physics_process(delta: float) -> void:
+	if (Landing):
+		Altitude -= 50
+		if (Altitude <= 0):
+			Altitude = 0
+			LandingEnded.emit(self)
+			Landing = false
+	if (TakingOff):
+		Altitude += 50
+		if (Altitude >= 10000):
+			Altitude = 10000
+			TakeoffEnded.emit(self)
+			TakingOff = false
 	d -= delta
 	if (d > 0):
 		return
@@ -111,10 +135,17 @@ func GetClosestElint() -> Vector2:
 	
 	return closest
 
+func SetCurrentPort(Port : MapSpot):
+	CurrentPort = Port
+	CanRefuel = Port.HasFuel()
+	CanRepair = Port.HasRepair()
+	CanUpgrade = Port.HasUpgrade()
+
 func RemovePort():
 	ShipDeparted.emit()
 	CurrentPort = null
 	Inventory.GetInstance().CancelUpgrades()
+	
 func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var FuelRangeIndicator = $Fuel_Range
 	#var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
@@ -193,8 +224,15 @@ func AccelerationChanged(value: float) -> void:
 		ShipStopped.emit()
 		#return
 	else:
-		if (Paused):
-			return
+		if (Landing):
+			LandingCanceled.emit(self)
+			Landing = false
+			Altitude = 10000
+		if (Altitude == 0):
+			TakeoffStarted.emit()
+			TakingOff = true
+		#if (Paused):
+			#return
 		var Dat = ShipData.GetInstance()
 		if (Dat.GetStat("FUEL").GetCurrentValue() <= 0):
 			HaltShip()
@@ -210,8 +248,8 @@ func AccelerationChanged(value: float) -> void:
 	
 	var Audioween = create_tween()
 	#Audioween.set_trans(Tween.TRANS_EXPO)
-	var ef = AudioServer.get_bus_effect(4, 0)
-	Audioween.tween_property(ef, "pitch_scale", max(0.1,value / 2), 2)
+	#var ef = AudioServer.get_bus_effect(4, 0)
+	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 2), 2)
 	#ChangingCourse = true
 	if (!$AudioStreamPlayer2D.playing):
 		$AudioStreamPlayer2D.play()

@@ -46,4 +46,4 @@ bus/4/bypass_fx = false
 bus/4/volume_db = 0.0
 bus/4/send = &"MapSounds"
 bus/4/effect/0/effect = SubResource("AudioEffectPitchShift_6ig65")
-bus/4/effect/0/enabled = true
+bus/4/effect/0/enabled = false

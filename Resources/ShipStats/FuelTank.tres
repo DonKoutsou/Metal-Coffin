@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_bwxge")
 StatName = "FUEL"
-StatMax = 500.0
+StatMax = 1000.0
 StatBase = 0.0
 AllowAutoRefil = false
