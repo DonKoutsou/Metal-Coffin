@@ -284,6 +284,8 @@ func PlayerExitedScreen() -> void:
 	#set_process(true)
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite.visible = true
 #//////////////////////////////////////////////////////////
+var Maplt : Thread
+var Roadt : Thread
 func GenerateRoads() -> void:
 	var CityGroups = ["City Center", "Capital City Center"]
 	var AllSpotGroups = ["City Center", "Capital City Center","Chora"]
@@ -300,10 +302,10 @@ func GenerateRoads() -> void:
 	var cityloc2 : Array[Vector2]
 	for g in Spots2:
 		cityloc2.append(g.global_position)
-	var t = Thread.new()
-	t.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines))
-	var t2 = Thread.new()
-	t2.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/MapLines, true, false))
+	Maplt = Thread.new()
+	Maplt.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines))
+	Roadt = Thread.new()
+	Roadt.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/MapLines, true, false))
 func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
 	
 	
@@ -341,6 +343,21 @@ func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bo
 			l.add_point(point1 + offset)
 		
 		l.add_point(point2)
+	if (RandomiseLines):
+		call_deferred("RoadFinished")
+	else:
+		call_deferred("MapLineFinished")
+func RoadFinished() -> void:
+	Roadt.wait_to_finish()
+	Roadt = null
+func MapLineFinished() -> void:
+	Maplt.wait_to_finish()
+	Maplt = null
+func _exit_tree() -> void:
+	if (Roadt != null):
+		Roadt.wait_to_finish()
+	if (Maplt != null):
+		Maplt.wait_to_finish()
 # Helper function: Push an element to the heap
 func _heap_push(heap: Array, element: Array):
 	heap.append(element)

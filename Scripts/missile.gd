@@ -56,8 +56,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_missile_body_area_entered(area: Area2D) -> void:
 	#MapPointerManager.GetInstance().RemoveShip(area)
 	#area.queue_free()
-	area.Damage(Damage)
-	if (area.Hull <= 0):
+	area.get_parent().Damage(Damage)
+	if (area.get_parent().Hull <= 0):
 		var s = DeletableSoundGlobal.new()
 		s.stream = MissileKillSound
 		s.volume_db = -10

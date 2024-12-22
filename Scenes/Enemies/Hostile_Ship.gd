@@ -76,9 +76,9 @@ func _physics_process(_delta: float) -> void:
 		return
 	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
 		updatedronecourse()
-	else : if (Patrol):
-		for g in  SimulationSpeed:
-			global_position = GetShipAcelerationNode().global_position
+	for g in  SimulationSpeed:
+		var ac = GetShipAcelerationNode().global_position
+		global_position = ac
 	for g in VisibleBt:
 		if (g == null):
 			continue
@@ -99,13 +99,13 @@ func updatedronecourse():
 		ship_position = LastKnownPosition
 		ship_velocity = Vector2.ZERO
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / GetShipSpeed()
+	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatValue("SPEED")
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	look_at(predicted_position)
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
-	global_position = GetShipAcelerationNode().global_position
+	#global_position = GetShipAcelerationNode().global_position
 	
 func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):

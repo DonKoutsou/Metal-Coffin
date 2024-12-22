@@ -31,6 +31,8 @@ func _on_radar_button_pressed() -> void:
 	ControlledShip.ToggleRadar()
 
 func _on_land_button_pressed() -> void:
+	if (ControlledShip.Landing):
+		return
 	ControlledShip.StartLanding()
 	ControlledShip.connect("LandingEnded", OnShipLanded)
 	ControlledShip.connect("LandingCanceled", OnLandingCanceled)
