@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Captain" load_steps=9 format=3 uid="uid://cf4b4c1bssfsr"]
+
+[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_p5hk0"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_safcr"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_tvmhy"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_1r0e4"]
+
+[sub_resource type="Resource" id="Resource_k7kt8"]
+script = ExtResource("2_safcr")
+StatName = "SPEED"
+StatMax = 3.0
+StatBase = 0.2
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_nn3aw"]
+script = ExtResource("2_safcr")
+StatName = "RADAR_RANGE"
+StatMax = 500.0
+StatBase = 0.0
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_0a6up"]
+script = ExtResource("2_safcr")
+StatName = "FIREPOWER"
+StatMax = 10.0
+StatBase = 1.0
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_he0oc"]
+script = ExtResource("2_safcr")
+StatName = "HULL"
+StatMax = 300.0
+StatBase = 200.0
+AllowAutoRefil = false
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("4_1r0e4")
+CaptainName = "Grunt"
+CaptainBio = "Shithead"
+CaptainPortrait = ExtResource("1_p5hk0")
+ShipIcon = ExtResource("3_tvmhy")
+CaptainStats = Array[ExtResource("2_safcr")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc")])

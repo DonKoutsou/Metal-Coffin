@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
+[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="6_ju0yw"]
+[ext_resource type="FontFile" uid="uid://bjr6n1igm78ms" path="res://Fonts/Caudex-Regular.ttf" id="6_ju0yw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gah6h"]
 bg_color = Color(1, 1, 1, 1)

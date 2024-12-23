@@ -1,23 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=19 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="2_2w4bb"]
+[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
-[ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="6_layd2"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="7_8gcrc"]
-[ext_resource type="AudioStream" uid="uid://5fvite02ickv" path="res://Assets/VoiceLines/radio_landing_end_02.wav" id="8_ws5qi"]
 [ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="9_jx5d0"]
-[ext_resource type="AudioStream" uid="uid://cxp410y4qjnl8" path="res://Assets/VoiceLines/radio_landing_end_03.wav" id="9_lowu5"]
-[ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/NewCaptainNotif.tscn" id="9_ur853"]
-[ext_resource type="AudioStream" uid="uid://q5nbj1ayjnk0" path="res://Assets/VoiceLines/radio_landing_touch_01.wav" id="10_a03el"]
-[ext_resource type="AudioStream" uid="uid://bjciqjm0fqhx6" path="res://Assets/VoiceLines/radio_landing_touch_02.wav" id="11_kcejq"]
-[ext_resource type="AudioStream" uid="uid://xmqqcc6y27wo" path="res://Assets/VoiceLines/radio_landing_start_01.wav" id="12_g8gwu"]
-[ext_resource type="AudioStream" uid="uid://du8mtleur57ie" path="res://Assets/VoiceLines/radio_landing_start_02.wav" id="13_2bb3a"]
-[ext_resource type="AudioStream" uid="uid://ck7gmg6alt1i1" path="res://Assets/VoiceLines/radio_go0_01.wav" id="14_7lrl2"]
-[ext_resource type="AudioStream" uid="uid://dfli1oc6q60bc" path="res://Assets/VoiceLines/radio_go1_01.wav" id="15_pptn2"]
-[ext_resource type="AudioStream" uid="uid://dxj88bvyii2hx" path="res://Assets/VoiceLines/radio_go2_01.wav" id="16_01x11"]
-[ext_resource type="AudioStream" uid="uid://cj8t5fkujexdw" path="res://Assets/VoiceLines/radio_go3_01.wav" id="17_louuf"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="18_elnvx"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="20_8n1nj"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="20_hn8tc"]
@@ -40,9 +28,6 @@ shader_parameter/scale_factor = 0.08
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
 radius = 1000.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
-radius = 10.0499
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bweje"]
 blend_mode = 1
@@ -125,48 +110,7 @@ material = SubResource("CanvasItemMaterial_vppi8")
 points = PackedVector2Array(0, 0, 10, 0)
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
-[node name="DroneDock" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-script = ExtResource("6_layd2")
-DroneDockEventH = ExtResource("7_8gcrc")
-CaptainNotif = ExtResource("9_ur853")
-LandedVoiceLines = Array[AudioStream]([ExtResource("8_ws5qi"), ExtResource("9_lowu5"), ExtResource("10_a03el"), ExtResource("11_kcejq")])
-ReturnVoiceLines = Array[AudioStream]([ExtResource("12_g8gwu"), ExtResource("13_2bb3a")])
-TakeoffVoiceLines = Array[AudioStream]([ExtResource("14_7lrl2"), ExtResource("15_pptn2"), ExtResource("16_01x11"), ExtResource("17_louuf")])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DroneDock"]
-shape = SubResource("CircleShape2D_oemyy")
-
-[node name="DroneSpots" type="Node2D" parent="DroneDock"]
-
-[node name="DroneSpot1" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-30, -30)
-
-[node name="DroneSpot4" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-30, 30)
-
-[node name="DroneSpot2" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-60, -60)
-
-[node name="DroneSpot5" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-60, 60)
-
-[node name="DroneSpot3" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-90, -90)
-
-[node name="DroneSpot6" type="Node2D" parent="DroneDock/DroneSpots"]
-position = Vector2(-90, 90)
-
-[node name="Line2D" type="Line2D" parent="DroneDock"]
-z_index = 2
-material = SubResource("CanvasItemMaterial_vppi8")
-points = PackedVector2Array(0, 0, 10, 0)
-width = 8.0
-default_color = Color(0.908948, 0.280129, 0.164634, 1)
-
-[node name="Sounds" type="Node" parent="DroneDock"]
+[node name="DroneDock" parent="." instance=ExtResource("5_vcup0")]
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708

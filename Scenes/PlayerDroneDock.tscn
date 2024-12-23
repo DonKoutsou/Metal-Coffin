@@ -1,0 +1,64 @@
+[gd_scene load_steps=16 format=3 uid="uid://cw6nos06km7b3"]
+
+[ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="1_fmftw"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="2_42hgf"]
+[ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/NewCaptainNotif.tscn" id="3_62xl3"]
+[ext_resource type="AudioStream" uid="uid://5fvite02ickv" path="res://Assets/VoiceLines/radio_landing_end_02.wav" id="4_tsdwq"]
+[ext_resource type="AudioStream" uid="uid://cxp410y4qjnl8" path="res://Assets/VoiceLines/radio_landing_end_03.wav" id="5_0vdpa"]
+[ext_resource type="AudioStream" uid="uid://q5nbj1ayjnk0" path="res://Assets/VoiceLines/radio_landing_touch_01.wav" id="6_ecahh"]
+[ext_resource type="AudioStream" uid="uid://bjciqjm0fqhx6" path="res://Assets/VoiceLines/radio_landing_touch_02.wav" id="7_lvbr7"]
+[ext_resource type="AudioStream" uid="uid://xmqqcc6y27wo" path="res://Assets/VoiceLines/radio_landing_start_01.wav" id="8_u5sou"]
+[ext_resource type="AudioStream" uid="uid://du8mtleur57ie" path="res://Assets/VoiceLines/radio_landing_start_02.wav" id="9_yht0w"]
+[ext_resource type="AudioStream" uid="uid://ck7gmg6alt1i1" path="res://Assets/VoiceLines/radio_go0_01.wav" id="10_pytwo"]
+[ext_resource type="AudioStream" uid="uid://dfli1oc6q60bc" path="res://Assets/VoiceLines/radio_go1_01.wav" id="11_2f5wg"]
+[ext_resource type="AudioStream" uid="uid://dxj88bvyii2hx" path="res://Assets/VoiceLines/radio_go2_01.wav" id="12_deme3"]
+[ext_resource type="AudioStream" uid="uid://cj8t5fkujexdw" path="res://Assets/VoiceLines/radio_go3_01.wav" id="13_ykrdc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
+radius = 10.0499
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
+light_mode = 1
+
+[node name="DroneDock" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_fmftw")
+DroneDockEventH = ExtResource("2_42hgf")
+CaptainNotif = ExtResource("3_62xl3")
+LandedVoiceLines = Array[AudioStream]([ExtResource("4_tsdwq"), ExtResource("5_0vdpa"), ExtResource("6_ecahh"), ExtResource("7_lvbr7")])
+ReturnVoiceLines = Array[AudioStream]([ExtResource("8_u5sou"), ExtResource("9_yht0w")])
+TakeoffVoiceLines = Array[AudioStream]([ExtResource("10_pytwo"), ExtResource("11_2f5wg"), ExtResource("12_deme3"), ExtResource("13_ykrdc")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oemyy")
+
+[node name="DroneSpots" type="Node2D" parent="."]
+
+[node name="DroneSpot1" type="Node2D" parent="DroneSpots"]
+position = Vector2(-30, -30)
+
+[node name="DroneSpot4" type="Node2D" parent="DroneSpots"]
+position = Vector2(-30, 30)
+
+[node name="DroneSpot2" type="Node2D" parent="DroneSpots"]
+position = Vector2(-60, -60)
+
+[node name="DroneSpot5" type="Node2D" parent="DroneSpots"]
+position = Vector2(-60, 60)
+
+[node name="DroneSpot3" type="Node2D" parent="DroneSpots"]
+position = Vector2(-90, -90)
+
+[node name="DroneSpot6" type="Node2D" parent="DroneSpots"]
+position = Vector2(-90, 90)
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 2
+material = SubResource("CanvasItemMaterial_vppi8")
+points = PackedVector2Array(0, 0, 10, 0)
+width = 8.0
+default_color = Color(0.908948, 0.280129, 0.164634, 1)
+
+[node name="Sounds" type="Node" parent="."]

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://cgma68ateq86o"]
 
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="1_3ukfs"]
+[ext_resource type="FontFile" uid="uid://bjr6n1igm78ms" path="res://Fonts/Caudex-Regular.ttf" id="1_3ukfs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3k43"]
 content_margin_left = 8.0

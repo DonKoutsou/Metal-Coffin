@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv64iu4t4ja87"]
+
+[ext_resource type="Script" path="res://Scripts/HostileDroneDock.gd" id="1_civqe"]
+
+[node name="DroneDock" type="Node2D"]
+script = ExtResource("1_civqe")
+
+[node name="DroneSpots" type="Node2D" parent="."]
+
+[node name="DroneSpot1" type="Node2D" parent="DroneSpots"]
+position = Vector2(-30, -30)
+
+[node name="DroneSpot4" type="Node2D" parent="DroneSpots"]
+position = Vector2(-30, 30)
+
+[node name="DroneSpot2" type="Node2D" parent="DroneSpots"]
+position = Vector2(-60, -60)
+
+[node name="DroneSpot5" type="Node2D" parent="DroneSpots"]
+position = Vector2(-60, 60)
+
+[node name="DroneSpot3" type="Node2D" parent="DroneSpots"]
+position = Vector2(-90, -90)
+
+[node name="DroneSpot6" type="Node2D" parent="DroneSpots"]
+position = Vector2(-90, 90)

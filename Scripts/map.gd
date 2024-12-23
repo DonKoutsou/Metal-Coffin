@@ -307,7 +307,7 @@ func GenerateRoads() -> void:
 	Maplt = Thread.new()
 	Maplt.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines))
 	Roadt = Thread.new()
-	Roadt.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/MapLines, true, false))
+	Roadt.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/Roads, true, false))
 func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
 	
 	
