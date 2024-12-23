@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=12 format=3 uid="uid://disqw5cbdncos"]
+[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://disqw5cbdncos"]
 
 [ext_resource type="Texture2D" uid="uid://dvqqaec67k16b" path="res://Assets/CaptainPortraits/Captain6.png" id="1_1scjo"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_ufoo0"]
@@ -54,10 +54,17 @@ StatMax = 500.0
 StatBase = 150.0
 AllowAutoRefil = false
 
+[sub_resource type="Resource" id="Resource_fwmht"]
+script = ExtResource("2_ufoo0")
+StatName = "ELINT"
+StatMax = 3000.0
+StatBase = 1500.0
+AllowAutoRefil = false
+
 [resource]
 script = ExtResource("3_3cbbo")
 CaptainName = "Samir"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_1scjo")
 ShipIcon = ExtResource("3_8he85")
-CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs"), SubResource("Resource_wxl3a"), SubResource("Resource_haf7u"), SubResource("Resource_knqm1")])
+CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs"), SubResource("Resource_wxl3a"), SubResource("Resource_haf7u"), SubResource("Resource_knqm1"), SubResource("Resource_fwmht")])

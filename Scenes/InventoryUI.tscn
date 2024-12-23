@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7owbjefasxhp"]
+[gd_scene load_steps=16 format=3 uid="uid://b7owbjefasxhp"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_fqeaq"]
 [ext_resource type="Texture2D" uid="uid://dwhs3o3bmu88" path="res://Assets/Spaceship/Spaceship_top_Rend_Main Camera 1.png" id="1_pwxaw"]
 [ext_resource type="Script" path="res://Scenes/inventory_ui.gd" id="2_481me"]
-[ext_resource type="FontFile" uid="uid://bjr6n1igm78ms" path="res://Fonts/Caudex-Regular.ttf" id="2_xks4o"]
+[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="2_xks4o"]
 [ext_resource type="Script" path="res://Scripts/InventoryShipStats.gd" id="3_jtr6h"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="4_mdouc"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="5_7fa5c"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="8_ac41u"]
 [ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="9_a73jk"]
 [ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="10_72dl8"]
+[ext_resource type="Resource" uid="uid://caakr00uaqhjj" path="res://Resources/ShipStats/Elint.tres" id="13_mhp77"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_351ay"]
 content_margin_left = 8.0
@@ -117,4 +118,4 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_r1153")
 layout_mode = 2
 script = ExtResource("3_jtr6h")
 ShipStatScene = ExtResource("4_mdouc")
-StatsToShow = Array[ExtResource("5_7fa5c")]([ExtResource("6_vt07v"), ExtResource("7_q1ex4"), ExtResource("8_ac41u"), ExtResource("9_a73jk"), ExtResource("10_72dl8")])
+StatsToShow = Array[ExtResource("5_7fa5c")]([ExtResource("6_vt07v"), ExtResource("7_q1ex4"), ExtResource("8_ac41u"), ExtResource("9_a73jk"), ExtResource("10_72dl8"), ExtResource("13_mhp77")])

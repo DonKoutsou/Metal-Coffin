@@ -35,7 +35,7 @@ func ToggleElint(t : bool) -> void:
 func UpdateConnectedShip(Sh : MapShip) -> void:
 	ConnectedShip = Sh
 	if Sh is Drone:
-		ToggleElint(false)
+		ToggleElint(Sh.Cpt.GetStat("ELINT").GetStat() > 0)
 	else :
 		ToggleElint(true)
 		
@@ -81,14 +81,19 @@ func SetDirection(dir : float):
 		return
 	
 func SetDistance(dist : float):
-	if (dist < 300):
+	var maxdist
+	if (ConnectedShip is Drone):
+		maxdist = ConnectedShip.Cpt.GetStat("ELINT").GetStat()
+	else:
+		maxdist = ShipData.GetInstance().GetStat("ELINT").GetStat()
+	if (dist < maxdist * 0.3):
 		if ($RangeIndicator.texture != DistanceMasks[2]):
 			$RangeIndicator.texture = DistanceMasks[2]
 			Lights.append($DangerCloseLight)
 			$DangerCloseLight.visible = $DirectionLight.visible
 			$AudioStreamPlayer.stream = Alarm
 			$AudioStreamPlayer.pitch_scale = 4
-	else : if (dist < 600):
+	else : if (dist < maxdist * 0.6):
 		if ( $RangeIndicator.texture != DistanceMasks[1]):
 			$RangeIndicator.texture = DistanceMasks[1]
 			Lights.erase($DangerCloseLight)

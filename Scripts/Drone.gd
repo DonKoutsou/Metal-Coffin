@@ -15,8 +15,9 @@ func  _ready() -> void:
 		g.CurrentVelue = g.GetStat()
 	#Set range of radar and alanyzer
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
+	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
 	FuelVis = false
-	
+	Paused = SimulationManager.GetInstance().IsPaused()
 	#UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
 	#MapPointerManager.GetInstance().AddShip(self, true)
 
@@ -27,6 +28,7 @@ func GetSaveData() -> DroneSaveData:
 	dat.Docked = Docked
 	dat.Pos = global_position
 	dat.Rot = global_rotation
+	dat.Fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
 	return dat
 
 func _exit_tree() -> void:
@@ -53,17 +55,20 @@ func AccelerationChanged(value: float) -> void:
 
 func EnableDrone():
 	#set_physics_process(true)
+	if (Altitude != 10000):
+		TakeoffStarted.emit()
+		TakingOff = true
 	$AudioStreamPlayer2D.play()
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
 	ToggleRadar()
-	$ShipBody/CollisionShape2D.disabled = false
+	$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 func DissableDrone():
 	#GetShipIcon().rotation = 0.0
 	rotation = 0
 	$AudioStreamPlayer2D.stop()
 	#set_physics_process(false)
 	ToggleRadar()
-	$ShipBody/CollisionShape2D.disabled = true
+	$ShipBody/CollisionShape2D.set_deferred("disabled", true)
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -72,7 +77,15 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = Cpt.CaptainName
 	return stats
-
+func GetElintLevel(Dist : float) -> int:
+	var Lvl = 1
+	if (Dist < Cpt.GetStat("ELINT").GetStat() * 0.3):
+		Lvl = 3
+	else : if(Dist < Cpt.GetStat("ELINT").GetStat() * 0.6):
+		Lvl = 2
+	else :
+		Lvl = 1
+	return Lvl
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return

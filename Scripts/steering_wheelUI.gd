@@ -11,6 +11,7 @@ signal SteeringDitChanged(NewValue : float)
 var DistanceTraveled = 0
 
 func _ready() -> void:
+	set_physics_process(false)
 	if (PositionOnStart):
 		position = Vector2(-5 , get_viewport_rect().size.y + 8)
 

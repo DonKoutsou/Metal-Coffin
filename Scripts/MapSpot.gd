@@ -5,7 +5,7 @@ class_name MapSpot
 @export var CityFuelReserves : float = 1000
 var PlayerFuelReserves : float = 0
 var PlayerRepairReserves : float = 0
-signal SpotAnalazyed(PlayAnim : bool)
+#signal SpotAnalazyed(PlayAnim : bool)
 signal SpotAproached(Type :MapSpotType)
 signal SpotLanded(Type : MapSpotType)
 
@@ -128,6 +128,8 @@ func OnSpotVisited(PlayAnim : bool = true) -> void:
 		#OnSpotAnalyzed(PlayAnim)
 	if (!Visited):
 		SpotLanded.emit(self)
+	if (!Seen):
+		OnSpotSeen(PlayAnim)
 	Visited = true
 #Called when radar sees a mapspot
 func OnSpotSeen(PlayAnim : bool = true) -> void:

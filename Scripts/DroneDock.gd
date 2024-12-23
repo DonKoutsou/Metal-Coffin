@@ -31,19 +31,19 @@ func AnyDroneNeedsFuel() -> bool:
 func DronesHaveFuel(f : float) -> bool:
 	var fuelneeded = f
 	for g in DockedDrones:
-		fuelneeded -= g.Fuel
+		fuelneeded -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
 		if (fuelneeded <= 0):
 			return true
 	return false
 
 func SyphonFuelFromDrones(amm : float) -> void:
 	for g in DockedDrones:
-		if (g.Fuel > amm):
-			g.Fuel -= amm
+		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > amm):
+			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= amm
 			return
 		else:
-			amm -= g.Fuel
-			g.Fuel = 0
+			amm -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+			g.Cpt.GetStat("FUEL_TANK").CurrentVelue = 0
 
 func GetDroneFuel() -> float:
 	var fuel : float = 0
@@ -71,7 +71,7 @@ func GetSaveData() -> Array[DroneSaveData]:
 func LoadSaveData( Dat : Array[DroneSaveData]) -> void:
 	for g in Dat:
 		var dr = AddCaptain(g.Cpt, false)
-		dr.Fuel = g.Fuel
+		dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = g.Fuel
 		if (!g.Docked):
 			UndockDrone(dr)
 			dr.EnableDrone()
@@ -199,9 +199,13 @@ func DockDrone(drone : Drone, playsound : bool = false):
 			continue
 		var dock = docks[g]
 		var trans = RemoteTransform2D.new()
+		trans.update_rotation = false
 		dock.add_child(trans)
 		trans.remote_path = drone.get_path()
 		drone.Docked = true
+		if ($"..".Landing or $"..".Landed()):
+			drone.LandingStarted.emit()
+			drone.Landing = true
 		return
 
 func UndockDrone(drone : Drone):

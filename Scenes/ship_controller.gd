@@ -13,7 +13,7 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	ControlledShip = $"../CanvasLayer/SubViewportContainer/SubViewport/PlayerShip"
-	AvailableShips.append(PlayerShip.GetInstance())
+	AvailableShips.append(ControlledShip)
 	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
 
 func OnDroneDocked(D : Drone) -> void:
@@ -105,11 +105,11 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 		ControlledShip.ToggleFuelRangeVisibility(false)
 		ControlledShip = AvailableShips[currentcontrolled + 1]
 	
-	$"../UI/ThrustSlider".ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	$"../UI/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
+	$"../UI/ScreenUi/ThrustSlider".ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	$"../UI/ScreenUi/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
-	$"../UI/Elint".UpdateConnectedShip(ControlledShip)
+	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
 var camtw : Tween
 func FrameCamToShip():
 	if (camtw != null):

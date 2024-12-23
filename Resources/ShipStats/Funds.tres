@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://c1ou3r4u80eqj"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_rlg4s"]
+
+[resource]
+script = ExtResource("1_rlg4s")
+StatName = "FUNDS"
+StatMax = 1e+11
+StatBase = 1e+11
+AllowAutoRefil = false

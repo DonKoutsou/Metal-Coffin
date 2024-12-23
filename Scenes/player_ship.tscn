@@ -108,7 +108,6 @@ size_flags_horizontal = 4
 mouse_filter = 2
 
 [node name="Elint" type="Area2D" parent="."]
-rotation = 0.368904
 collision_layer = 0
 collision_mask = 16384
 monitorable = false
@@ -171,16 +170,15 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("18_elnvx")
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
 show_behind_parent = true
 
 [node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
-position = Vector2(-13.9999, -14.0001)
+position = Vector2(-20, -20)
 texture = ExtResource("18_elnvx")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

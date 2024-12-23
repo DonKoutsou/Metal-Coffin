@@ -94,7 +94,7 @@ func OnLandingStarted():
 	LandingNotif.Blink = false
 	#connect("ShipDeparted", notif.OnShipDeparted)
 	add_child(LandingNotif)
-func OnLandingEnded(Ship : MapShip):
+func OnLandingEnded(_Ship : MapShip):
 	LandingNotif.queue_free()
 	LandingNotif = null
 

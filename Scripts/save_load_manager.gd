@@ -49,7 +49,7 @@ func Load(world : World) ->bool:
 	Mapz.LoadSaveData(mapdata)
 	Inv.LoadSaveData(InvData)
 	#Miss.LoadMissiles(Inv.LoadedItems)
-	Mapz.SetPlayerPos(sav.GetData("PLData").Pos)
+	Mapz.GetPlayerShip().global_position = sav.GetData("PLData").Pos
 	
 	var enems : Array[Resource] = (sav.GetData("Enemies") as SaveData).Datas
 	var misses : Array[Resource] = (sav.GetData("Missiles") as SaveData).Datas

@@ -55,8 +55,8 @@ func _enter_tree() -> void:
 	var map = GetMap()
 	#map.connect("MAP_AsteroidBeltArrival", StartStage)
 	map.connect("MAP_EnemyArrival", StartDogFight)
-	map.connect("MAP_StageSearched", StageSearch)
-	map.connect("MAP_ShipSearched", ShipSearched)
+	#map.connect("MAP_StageSearched", StageSearch)
+	#map.connect("MAP_ShipSearched", ShipSearched)
 	
 	var inventory = GetInventory()
 	inventory.connect("INV_OnItemAdded", OnItemAdded)
@@ -172,6 +172,8 @@ func OnItemUsed(It : UsableItem) -> void:
 func ItemBuffStat(UpName : String) -> void:
 	if (UpName == "VIZ_RANGE"):
 		GetMap().GetPlayerShip().UpdateVizRange(ShipDat.GetStat("VIZ_RANGE").GetStat())
+	if UpName == "ELINT":
+		GetMap().GetPlayerShip().UpdateELINTTRange(ShipDat.GetStat("ELINT").GetStat())
 	#else :if (UpName == "ANALYZE_RANGE"):
 		#GetMap().GetPlayerShip().UpdateAnalyzerRange(ShipDat.GetStat("ANALYZE_RANGE").GetStat())
 	else :if (UpName == "FUEL_EFFICIENCY" or UpName == "FUEL"):
@@ -303,27 +305,27 @@ func StageDone(victory : bool, supplies : Array[Item]) -> void:
 	$Ingame_UIManager.ToggleInventoryButton(true)
 #/////////////////////////////////////////////////////////////////////////////////////
 
-func ShipSearched(Ship : BaseShip):
-	StartShipTrade(Ship)
+#func ShipSearched(Ship : BaseShip):
+	#StartShipTrade(Ship)
 
-func StageSearch(Spt : MapSpot)-> void:
-	if (Spt.SpotType.CanLand):
-		StartExploration(Spt)
-	else:
-		#if (Spt.SpotType.HasAtmoshere):
-			#if (ShipData.GetInstance().GetStat("OXYGEN").GetCurrentValue() < ShipData.GetInstance().GetStat("OXYGEN").GetStat()):
-				#ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
-				#PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
-		#else:
-			#if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
-				#PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
-				#return
-			#ShipDat.ConsumeResource("OXYGEN", 5)
-		if (ShipDat.GetStat("HP").GetCurrentValue() <= 10):
-			PopUpManager.GetInstance().DoPopUp("Not enough HP to complete action")
-			return
-		GetInventory().AddItems(Spt.SpotType.GetSpotDrop())
-		ShipDat.ConsumeResource("HP", 10)
+#func StageSearch(Spt : MapSpot)-> void:
+	#if (Spt.SpotType.CanLand):
+		#StartExploration(Spt)
+	#else:
+		##if (Spt.SpotType.HasAtmoshere):
+			##if (ShipData.GetInstance().GetStat("OXYGEN").GetCurrentValue() < ShipData.GetInstance().GetStat("OXYGEN").GetStat()):
+				##ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
+				##PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
+		##else:
+			##if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
+				##PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
+				##return
+			##ShipDat.ConsumeResource("OXYGEN", 5)
+		#if (ShipDat.GetStat("HP").GetCurrentValue() <= 10):
+			#PopUpManager.GetInstance().DoPopUp("Not enough HP to complete action")
+			#return
+		#GetInventory().AddItems(Spt.SpotType.GetSpotDrop())
+		#ShipDat.ConsumeResource("HP", 10)
 		
 func GameLost(reason : String):
 	get_tree().paused = true

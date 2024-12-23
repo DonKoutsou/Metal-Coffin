@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipData" load_steps=9 format=3 uid="uid://b5b3q5ta3whql"]
+[gd_resource type="Resource" script_class="ShipData" load_steps=10 format=3 uid="uid://b5b3q5ta3whql"]
 
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_ko0ft"]
 [ext_resource type="Script" path="res://Scripts/ShipData.gd" id="2_5r8b6"]
@@ -6,15 +6,10 @@
 [ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="4_rfyiw"]
 [ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="5_1sp3w"]
 [ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="7_cib35"]
+[ext_resource type="Resource" uid="uid://c1ou3r4u80eqj" path="res://Resources/ShipStats/Funds.tres" id="7_qq20m"]
+[ext_resource type="Resource" uid="uid://caakr00uaqhjj" path="res://Resources/ShipStats/Elint.tres" id="8_cwnra"]
 [ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="10_suyqr"]
-
-[sub_resource type="Resource" id="Resource_1u534"]
-script = ExtResource("1_ko0ft")
-StatName = "FUNDS"
-StatMax = 1e+11
-StatBase = 1e+11
-AllowAutoRefil = false
 
 [resource]
 script = ExtResource("2_5r8b6")
-Stats = Array[ExtResource("1_ko0ft")]([ExtResource("3_j2d45"), ExtResource("4_rfyiw"), ExtResource("5_1sp3w"), ExtResource("7_cib35"), ExtResource("10_suyqr"), SubResource("Resource_1u534")])
+Stats = Array[ExtResource("1_ko0ft")]([ExtResource("3_j2d45"), ExtResource("4_rfyiw"), ExtResource("5_1sp3w"), ExtResource("7_cib35"), ExtResource("10_suyqr"), ExtResource("7_qq20m"), ExtResource("8_cwnra")])

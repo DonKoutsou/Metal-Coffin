@@ -83,14 +83,13 @@ debug_color = Color(0.718534, 0.251914, 1, 0.42)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_4y2i6")
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
 show_behind_parent = true
 
 [node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 position = Vector2(-13.9999, -14.0001)
 texture = ExtResource("5_r8oj1")
@@ -115,7 +114,7 @@ height = 500.0
 rotation = 0.368904
 collision_layer = 0
 collision_mask = 16384
-monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
 shape = SubResource("CircleShape2D_mk6wy")

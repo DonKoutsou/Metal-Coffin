@@ -13,33 +13,35 @@ class_name Map
 
 #signal MAP_AsteroidBeltArrival(Size : int)
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
-signal MAP_StageSearched(Spt : MapSpotType)
-signal MAP_ShipSearched(Ship : BaseShip)
+#signal MAP_StageSearched(Spt : MapSpotType)
+#signal MAP_ShipSearched(Ship : BaseShip)
 
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
 func _ready() -> void:
-	$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.position = Vector2(0, get_viewport_rect().size.y / 2)
+	# spotlist empty means we are not loading and starting new game
 	if (SpotList.size() == 0):
 		GenerateMap()
 		_InitialPlayerPlacament()
-		#call_deferred("")
 		ShowingTutorial = true
-	var shipdata = ShipData.GetInstance()
-	PlayerShip.GetInstance().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
-	PlayerShip.GetInstance().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
+	#var shipdata = ShipData.GetInstance()
+	#PlayerShip.GetInstance().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
+	#PlayerShip.GetInstance().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
 	#GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
 	
 	#GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
 func _InitialPlayerPlacament():
+	#find first village and make sure its visible
 	var firstvilage = get_tree().get_nodes_in_group("Chora")[0] as MapSpot
 	firstvilage.OnSpotSeen(false)
-	#firstvilage.OnSpotAnalyzed(false)
+	#place player close to first village
 	var pos = firstvilage.global_position
-	pos.x -= 500
-	PlayerShip.GetInstance().global_position = pos
-	camera_2d.global_position = PlayerShip.GetInstance().global_position
+	pos.y += 500
+	var PlShip = GetPlayerShip()
+	PlShip.global_position = pos
+	camera_2d.global_position = PlShip.global_position
+	PlShip.ShipLookAt(firstvilage.global_position)
 #func GetPlayerPos() -> Vector2:
 	#return GetPlayerShip().position
 func GetMissileTab() -> MissileTab:
@@ -246,8 +248,6 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 	
 	call_deferred("GenerateRoads")
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera.call_deferred("FrameCamToPlayer")
-
-
 #////////////////////////////////////////////	
 #SIGNALS COMMING FROM PLAYER SHIP
 func ShipStartedMoving():
@@ -265,16 +265,12 @@ func _MAP_INPUT(event: InputEvent) -> void:
 		camera_2d._HANDLE_ZOOM(1.1)
 	if (event.is_action_pressed("ZoomOut")):
 		camera_2d._HANDLE_ZOOM(0.9)
-	#if (GetPlayerShip().ChangingCourse):
-		#return
 	if (event is InputEventScreenTouch):
 		camera_2d._HANDLE_TOUCH(event)
 	if (event is InputEventScreenDrag):
 		camera_2d._HANDLE_DRAG(event)
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		camera_2d.UpdateCameraPos(event.relative)
-
-	#print("Zoom changed to " + var_to_str(camera_2d.zoom.x))
 #//////////////////////////////////////////////////////////
 #ARROW FOR LOCATING PLAYER SHIP
 #func _process(_delta: float) -> void:
@@ -354,6 +350,9 @@ func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bo
 		call_deferred("RoadFinished")
 	else:
 		call_deferred("MapLineFinished")
+func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
+	for g in Points:
+		Lne.add_point(g)
 func RoadFinished() -> void:
 	Roadt.wait_to_finish()
 	Roadt = null

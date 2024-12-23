@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=51 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_5r2qd"]
@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="27_0t7uv"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
-[ext_resource type="FontFile" uid="uid://cn7w3x8fi0o58" path="res://Fonts/Play-Regular.ttf" id="28_8jvry"]
+[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="28_8jvry"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="28_sirob"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="29_jt4kw"]
@@ -100,19 +100,6 @@ shader_parameter/scanline_thickness = 0.55
 shader_parameter/scanlines_spacing = 1.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_6kihg")
 
-[sub_resource type="Animation" id="Animation_2vpkr"]
-resource_name = "FadeIn"
-length = 5.0
-
-[sub_resource type="Animation" id="Animation_wryq0"]
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_il0tn"]
-_data = {
-"FadeIn": SubResource("Animation_2vpkr"),
-"RESET": SubResource("Animation_wryq0")
-}
-
 [node name="Map" type="Control"]
 process_mode = 1
 layout_mode = 3
@@ -157,6 +144,8 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
+msaa_2d = 1
+screen_space_aa = 1
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(1014, 504)
@@ -698,14 +687,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_il0tn")
-}
-
 [connection signal="gui_input" from="CanvasLayer/SubViewportContainer" to="." method="_MAP_INPUT"]
-[connection signal="ScreenEnter" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="PlayerEnteredScreen"]
-[connection signal="ScreenExit" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="PlayerExitedScreen"]
 [connection signal="ShipAccelerating" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStartedMoving"]
 [connection signal="ShipForceStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipForcedStop"]
 [connection signal="ShipStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStoppedMoving"]

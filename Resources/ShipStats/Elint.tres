@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://caakr00uaqhjj"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_11o37"]
+
+[resource]
+script = ExtResource("1_11o37")
+StatName = "ELINT"
+StatMax = 3000.0
+StatBase = 0.0
+AllowAutoRefil = false

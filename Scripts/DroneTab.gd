@@ -56,6 +56,12 @@ func _on_arm_drone_button_pressed(t : bool) -> void:
 		_on_dissarm_drone_button_2_pressed()
 		return
 	Armed = true
+	var eff = CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_EFFICIENCY")
+	var fuel = CurrentlySelectedDrone.Cpt.GetStat("FUEL_TANK").CurrentVelue
+	RangeDir = clamp(RangeDir, fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_TANK") * 10 * eff)
+	
+	DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
+	$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))
 	#$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton.disabled = true
 	$Control/Control/Dissarm.ToggleDissable(false)
 	$Control/Control/Launch.ToggleDissable(false)

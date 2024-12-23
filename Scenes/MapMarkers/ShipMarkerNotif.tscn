@@ -85,10 +85,12 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Control" type="Control" parent="."]
+z_index = 3
 use_parent_material = true
 anchors_preset = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
+z_index = 225
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -96,10 +98,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -65.0
-offset_top = -179.0
-offset_right = 65.0
-offset_bottom = -179.0
+offset_left = -9.0
+offset_top = -188.0
+offset_right = 9.0
+offset_bottom = -169.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -109,9 +111,8 @@ layout_mode = 2
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("2_ait7u")
 theme_override_font_sizes/font_size = 16
-text = "Drone Returning To Base"
+text = "Dr"
 vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

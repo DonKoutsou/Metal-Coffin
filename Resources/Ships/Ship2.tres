@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BaseShip" load_steps=11 format=3 uid="uid://dvsp0jjfpsys"]
+[gd_resource type="Resource" script_class="BaseShip" load_steps=12 format=3 uid="uid://dvsp0jjfpsys"]
 
 [ext_resource type="Script" path="res://Scripts/BaseShipStat.gd" id="1_0hv8o"]
 [ext_resource type="Script" path="res://Scripts/FluidShipStat.gd" id="2_b4dg8"]
@@ -32,6 +32,11 @@ StatCurrentVal = 100000.0
 StatName = "FUNDS"
 StatBuff = 100000.0
 
+[sub_resource type="Resource" id="Resource_1ddco"]
+script = ExtResource("1_0hv8o")
+StatName = "ELINT"
+StatBuff = 1000.0
+
 [resource]
 script = ExtResource("3_qff5y")
 ShipName = "Tanker"
@@ -39,4 +44,4 @@ ShipDesc = "Used for transpotting huge volumes of parcels around the galaxy, stu
 ShipScene = ExtResource("4_nmkvy")
 Icon = ExtResource("3_ocl2o")
 TopIcon = ExtResource("4_vulfq")
-Buffs = Array[ExtResource("1_0hv8o")]([SubResource("Resource_cjlo5"), SubResource("Resource_124t7"), SubResource("Resource_ynnat"), SubResource("Resource_twp1b")])
+Buffs = Array[ExtResource("1_0hv8o")]([SubResource("Resource_cjlo5"), SubResource("Resource_124t7"), SubResource("Resource_ynnat"), SubResource("Resource_twp1b"), SubResource("Resource_1ddco")])

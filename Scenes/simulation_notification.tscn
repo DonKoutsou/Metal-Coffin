@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccmqbt58qk8rv"]
 
-[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="1_cguwq"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_cguwq"]
 [ext_resource type="Script" path="res://Scenes/simulation_notification.gd" id="2_jnlvy"]
 
 [node name="SimulationNotification" type="Label"]

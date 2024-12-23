@@ -273,7 +273,6 @@ NofiticationScene = ExtResource("2_b0564")
 
 [node name="AnalyzeButton" type="Panel" parent="."]
 show_behind_parent = true
-z_index = 2
 texture_filter = 4
 material = SubResource("CanvasItemMaterial_q03p8")
 layout_mode = 1

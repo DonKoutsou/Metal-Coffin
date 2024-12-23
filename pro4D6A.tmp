@@ -15,10 +15,6 @@ run/main_scene="res://Scenes/StartingScreen.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://Assets/plane_Wheel_BaseColor_smol.png"
 
-[autoload]
-
-PlanetRandomiser="*res://PlanetRandomiser/PlanetRandomiser.gd"
-
 [display]
 
 window/stretch/mode="canvas_items"

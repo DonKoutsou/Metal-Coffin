@@ -59,16 +59,16 @@ func ChangeSimulationSpeed(i : int):
 func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
-	$Radar/CollisionShape2D.disabled = !$Radar/CollisionShape2D.disabled
+	$Radar/CollisionShape2D.set_deferred("distabled", !$Radar/CollisionShape2D.disabled)
 	#$Radar/Radar_Range.visible = !$Radar/Radar_Range.visible
 	
 	#$Analyzer.monitorable = !$Analyzer.monitorable
 	#$Analyzer/Analyzer_Range.visible = !$Analyzer/Analyzer_Range.visible
-	var tw = create_tween()
+	#var tw = create_tween()
 	if ($PointLight2D.energy < 0.25):
-		tw.tween_property($PointLight2D, "energy", 0.25, 0.5)
+		$PointLight2D.energy = 0.25
 	else :
-		tw.tween_property($PointLight2D, "energy", 0, 0.5)
+		$PointLight2D.energy = 0
 	#$PointLight2D.visible = !$PointLight2D.visible
 
 func ToggleElint():
@@ -83,18 +83,22 @@ func StartLanding() -> void:
 func Landed() -> bool:
 	return Altitude == 0
 
+func UpdateAltitude(NewAlt : float) -> void:
+	Altitude = NewAlt
+	$PlayerShipSpr.scale = Vector2(lerp(0.3, 1.0, Altitude / 10000.0), lerp(0.3, 1.0, Altitude / 10000.0))
+	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -20, Altitude / 10000.0), lerp(0, -20, Altitude / 10000.0))
 var d = 0.4
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
 	if (Landing):
-		Altitude -= 20 * SimulationSpeed
+		UpdateAltitude(Altitude - (20 * SimulationSpeed))
 		if (Altitude <= 0):
 			Altitude = 0
 			LandingEnded.emit(self)
 			Landing = false
 	if (TakingOff):
-		Altitude += 20 * SimulationSpeed
+		UpdateAltitude(Altitude + (20 * SimulationSpeed))
 		if (Altitude >= 10000):
 			Altitude = 10000
 			TakeoffEnded.emit(self)
@@ -108,12 +112,14 @@ func _physics_process(delta: float) -> void:
 		var ship = ElintContacts.keys()[g]
 		var lvl = ElintContacts.values()[g]
 		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position))
-		if (Newlvl != lvl):
-			if (Newlvl > BiggestLevel):
-				Elint.emit(true, Newlvl)
-				BiggestLevel = Newlvl
-			ElintContacts[ship] = Newlvl
+		if (Newlvl > BiggestLevel):
 			
+			BiggestLevel = Newlvl
+		if (Newlvl != lvl):
+			
+			ElintContacts[ship] = Newlvl
+	if (BiggestLevel > 0):
+		Elint.emit(true, BiggestLevel)
 
 func GetElintLevel(Dist : float) -> int:
 	var Lvl = 1
@@ -153,11 +159,11 @@ func UpdateFuelRange(fuel : float, fuel_ef : float):
 	#var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
 	var FuelMat = FuelRangeIndicator.material as ShaderMaterial
 	#calculate the range taking fuel efficiency in mind
-	var distall = (fuel * 10 * fuel_ef) * 2
+	var distall = fuel * 10 * fuel_ef
 	#scalling of collor rect
 	var tw = create_tween()
 
-	tw.tween_method(SetFuelShaderRange, FuelMat.get_shader_parameter("scale_factor"), (distall/2) / 10000, 0.5)
+	tw.tween_method(SetFuelShaderRange, FuelMat.get_shader_parameter("scale_factor"), distall / 10000, 0.5)
 
 func ToggleFuelRangeVisibility(t : bool) -> void:
 	$Fuel_Range.visible = t
@@ -167,17 +173,17 @@ func SetFuelShaderRange(val : float):
 	FuelMat.set_shader_parameter("scale_factor", val)
 	
 func UpdateVizRange(rang : float):
-	#var RadarRangeIndicator = $Radar/Radar_Range
 	var RadarRangeCollisionShape = $Radar/CollisionShape2D
-	#var RadarRangeIndicatorDescriptor = $Radar/Radar_Range/Label2
-	#var RadarMat = RadarRangeIndicator.material as ShaderMaterial
-	#RadarMat.set_shader_parameter("scale_factor", rang/10000)
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 	
 	var l = get_node_or_null("PointLight2D")
 	if (l != null):
 		l.texture_scale = rang / 800
+func UpdateELINTTRange(rang : float):
+	var ElintRangeCollisionShape = $Elint/CollisionShape2D
+	#scalling collision
+	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
 #
 #func UpdateAnalyzerRange(rang : float):
 	#var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
@@ -229,8 +235,8 @@ func AccelerationChanged(value: float) -> void:
 		if (Landing):
 			LandingCanceled.emit(self)
 			Landing = false
-			Altitude = 10000
-		if (Altitude == 0):
+			UpdateAltitude(10000)
+		if (Altitude != 10000 and !TakingOff):
 			TakeoffStarted.emit()
 			TakingOff = true
 		#if (Paused):
@@ -267,14 +273,14 @@ func AccelerationEnded(_value_changed: bool) -> void:
 func GetShipMaxSpeed() -> float:
 	return 0.3
 
-signal OnLookAtEnded()
-func LookAtEnded():
-	OnLookAtEnded.emit()
-func PlayerLookAt(LookPos : Vector2) -> void:
-	var tw = create_tween()
-	tw.tween_property(self, "rotation", position.angle_to_point(LookPos), 1)
-	#tw.set_trans(Tween.TRANS_EXPO)
-	tw.connect("finished", LookAtEnded)
+#signal OnLookAtEnded()
+#func LookAtEnded():
+	#OnLookAtEnded.emit()
+#func PlayerLookAt(LookPos : Vector2) -> void:
+	#var tw = create_tween()
+	#tw.tween_property(self, "rotation", position.angle_to_point(LookPos), 1)
+	##tw.set_trans(Tween.TRANS_EXPO)
+	#tw.connect("finished", LookAtEnded)
 	
 func Steer(Rotation : float) -> void:
 	var tw = create_tween()
