@@ -103,7 +103,6 @@ pitch_scale = 0.5
 bus = &"Engine"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(7.97656, 7.97656)
 energy = 0.25
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")

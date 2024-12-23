@@ -56,6 +56,9 @@ func AccelerationChanged(value: float) -> void:
 func EnableDrone():
 	#set_physics_process(true)
 	if (Altitude != 10000):
+		if (Landing):
+			LandingCanceled.emit()
+			Landing = false
 		TakeoffStarted.emit()
 		TakingOff = true
 	$AudioStreamPlayer2D.play()

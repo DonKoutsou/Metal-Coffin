@@ -199,7 +199,6 @@ bus = &"Engine"
 [node name="Notifications" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(7.97656, 7.97656)
 energy = 0.25
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")

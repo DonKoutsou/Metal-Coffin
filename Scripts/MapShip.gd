@@ -77,6 +77,9 @@ func ToggleElint():
 
 
 func StartLanding() -> void:
+	if (TakingOff):
+		TakeoffEnded.emit()
+		TakingOff = false
 	LandingStarted.emit()
 	Landing = true
 
@@ -179,7 +182,7 @@ func UpdateVizRange(rang : float):
 	
 	var l = get_node_or_null("PointLight2D")
 	if (l != null):
-		l.texture_scale = rang / 800
+		l.texture_scale = rang / 100
 func UpdateELINTTRange(rang : float):
 	var ElintRangeCollisionShape = $Elint/CollisionShape2D
 	#scalling collision
@@ -235,7 +238,7 @@ func AccelerationChanged(value: float) -> void:
 		if (Landing):
 			LandingCanceled.emit(self)
 			Landing = false
-			UpdateAltitude(10000)
+			#UpdateAltitude(10000)
 		if (Altitude != 10000 and !TakingOff):
 			TakeoffStarted.emit()
 			TakingOff = true
