@@ -8,7 +8,6 @@ class_name Map
 @export var MapSize : int
 @export var MapGenerationDistanceCurve : Curve
 @onready var thrust_slider: ThrustSlider = $UI/ScreenUi/ThrustSlider
-
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
 #signal MAP_AsteroidBeltArrival(Size : int)
@@ -25,12 +24,7 @@ func _ready() -> void:
 		GenerateMap()
 		_InitialPlayerPlacament()
 		ShowingTutorial = true
-	#var shipdata = ShipData.GetInstance()
-	#PlayerShip.GetInstance().UpdateFuelRange(shipdata.GetStat("FUEL").GetCurrentValue(), shipdata.GetStat("FUEL_EFFICIENCY").GetStat())
-	#PlayerShip.GetInstance().UpdateVizRange(shipdata.GetStat("VIZ_RANGE").GetStat())
-	#GetPlayerShip().UpdateAnalyzerRange(shipdata.GetStat("ANALYZE_RANGE").GetStat())
-	
-	#GalaxyMat = $CanvasLayer/SubViewportContainer/SubViewport/Control/ColorRect.material
+
 func _InitialPlayerPlacament():
 	#find first village and make sure its visible
 	var firstvilage = get_tree().get_nodes_in_group("Chora")[0] as MapSpot
@@ -42,105 +36,23 @@ func _InitialPlayerPlacament():
 	PlShip.global_position = pos
 	camera_2d.global_position = PlShip.global_position
 	PlShip.ShipLookAt(firstvilage.global_position)
-#func GetPlayerPos() -> Vector2:
-	#return GetPlayerShip().position
-func GetMissileTab() -> MissileTab:
-	return $"UI/Missile Tab"
+
+#Called when enemy ship touches friendly one to strart a fight
 func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
-#func SetPlayerPos(pos : Vector2) -> void:
-	#GetPlayerShip().position = pos
-	
+
 func ToggleVis(t : bool ):
 	visible = t
 	$CanvasLayer.visible = t
 
-#func PlayIntroFadeInt():
-	#$AnimationPlayer.play("FadeIn")
-	#camera_2d.global_position = GetPlayerShip().global_position
-	
 func ToggleUIForIntro(t : bool):
 	PlayerShip.GetInstance().ToggleUI(t)
 	$UI/ScreenUi.visible = t
-	#$UI/ThrustSlider.visible = t
-	#$UI/SteeringWheel.visible = t
-	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = t
-	#$UI/RadarButton.visible = t
-	#$UI/DroneTab.visible = t
-	#$"UI/Missile Tab".visible = t
-	#$UI/SimulationButton.visible = t
+
 func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
 	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
-func GenerateMap() -> void:
-	#DECIDE ON PLECEMENT OF SPECIAL SPOTS
-	
-	#DECIDE ON PLECEMENT OF STATIONS
-	var CapitalCitySpots : Array[int] = []
-	for z in MapSize / 3:
-		if (z == 0):
-			continue
-		CapitalCitySpots.append(z * 6)
-		
-	var VillageSpots : Array[int] = []
-	
-	for z in MapSize/10:
-		var spot = z * 10
-		if (CapitalCitySpots.has(spot)):
-			spot += 1
-		VillageSpots.append(spot)
-	#LOCATION OF PREVIUSLY PLACED MAP SPOT
-	var Prevpos : Vector2 = Vector2(250,250)
-	
-	#var line = $CanvasLayer/SubViewportContainer/SubViewport/MapSpots/StationLine
-
-	for g in MapSize :
-		#SPAWN GENERIC MAP SPOT SCENE
-		var sc
-		
-		#CONNECT ALL RELEVANT SIGNALS TO IT
-		#var AddingStation = false
-		#DECIDE ON TYPE
-		var type : PackedScene
-		
-		if (g == MapSize - 10):
-			type = FinalCity
-			#AddingStation = true
-		else : if (CapitalCitySpots.has(g)):
-			type = CapitalCity
-		else :if (VillageSpots.has(g)):
-			type = Villages.pick_random()
-			#AddingStation = true
-		else:
-			type = Cities.pick_random()
-			
-		#SET THE TYPE
-		sc = type.instantiate() as Town
-		sc.connect("TownSpotAproached", Arrival)
-		#DECIDE ON ITS PLACEMENT
-		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
-		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
-		var pos = GetNextRandomPos(Prevpos, Distanceval)
-		#MAKE SURE WE DONT PLACE IT TO CLOSE TO ANOTHER TIME
-		#HASCLOSE COULD BE DONE BETTER TO NOT ITTERATE OVER ALL MAP SPOTS PLACED
-		while (HasClose(pos)):
-			pos = GetNextRandomPos(Prevpos, Distanceval)
-		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
-		sc.Pos = pos
-		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
-		
-		SpotList.append(sc)
-		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
-		Prevpos = pos
-	for g in SpotList:
-		g.SpawnEnemies()
-	for g in get_tree().get_nodes_in_group("Enemy"):
-		g.connect("OnShipMet", EnemyMet)
-	
-	GenerateRoads()
-	#_DrawMapLines(["City Center", "Capital City Center"])
-	#_DrawMapLines(["City Center", "Capital City Center","Chora"], true, false)
 
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
@@ -211,18 +123,6 @@ func StageFailed() -> void:
 	set_process(true)
 	set_process_input(true)
 	#Travelling = false
-
-#func SearchLocation(stage : MapSpot):
-	#if (GetPlayerShip().Travelling):
-		#PopUpManager.GetInstance().DoFadeNotif("Stop the ship to land.")
-		#return
-	##stage.ToggleLandButton(false)
-	#if (stage.SpotType is Ship_MapSpotType):
-		#MAP_ShipSearched.emit(stage.SpotType.Ship)
-	#else:
-		#MAP_StageSearched.emit(stage)
-	#
-
 #Save/Load///////////////////////////////////////////
 func GetSaveData() ->SaveData:
 	var dat = SaveData.new().duplicate()
@@ -252,7 +152,6 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 #SIGNALS COMMING FROM PLAYER SHIP
 func ShipStartedMoving():
 	camera_2d.applyshake()
-	
 func ShipStoppedMoving():
 	camera_2d.applyshake()
 func OnScreenUiToggled(t : bool) -> void:
@@ -272,18 +171,76 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		camera_2d.UpdateCameraPos(event.relative)
 #//////////////////////////////////////////////////////////
-#ARROW FOR LOCATING PLAYER SHIP
-#func _process(_delta: float) -> void:
-	##var plpos = GetPlayerShip().global_position
-	##$CanvasLayer/SubViewportContainer/SubViewport/MapPointers/Panel.global_position = plpos
-	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.look_at(PlayerShip.GetInstance().global_position)
-#func PlayerEnteredScreen() -> void:
-	##set_process(false)
-	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = false
-#func PlayerExitedScreen() -> void:
-	##set_process(true)
-	#$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera/ArrowSprite/ArrowSprite2.visible = true
-#//////////////////////////////////////////////////////////
+#MAP GENERARION
+func GenerateMap() -> void:
+	#DECIDE ON PLECEMENT OF SPECIAL SPOTS
+	
+	#DECIDE ON PLECEMENT OF STATIONS
+	var CapitalCitySpots : Array[int] = []
+	for z in MapSize / 3:
+		if (z == 0):
+			continue
+		CapitalCitySpots.append(z * 6)
+		
+	var VillageSpots : Array[int] = []
+	
+	for z in MapSize/10:
+		var spot = z * 10
+		if (CapitalCitySpots.has(spot)):
+			spot += 1
+		VillageSpots.append(spot)
+	#LOCATION OF PREVIUSLY PLACED MAP SPOT
+	var Prevpos : Vector2 = Vector2(250,250)
+	
+	#var line = $CanvasLayer/SubViewportContainer/SubViewport/MapSpots/StationLine
+
+	for g in MapSize :
+		#SPAWN GENERIC MAP SPOT SCENE
+		var sc
+		
+		#CONNECT ALL RELEVANT SIGNALS TO IT
+		#var AddingStation = false
+		#DECIDE ON TYPE
+		var type : PackedScene
+		
+		if (g == MapSize - 10):
+			type = FinalCity
+			#AddingStation = true
+		else : if (CapitalCitySpots.has(g)):
+			type = CapitalCity
+		else :if (VillageSpots.has(g)):
+			type = Villages.pick_random()
+			#AddingStation = true
+		else:
+			type = Cities.pick_random()
+			
+		#SET THE TYPE
+		sc = type.instantiate() as Town
+		sc.connect("TownSpotAproached", Arrival)
+		#DECIDE ON ITS PLACEMENT
+		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
+		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
+		var pos = GetNextRandomPos(Prevpos, Distanceval)
+		#MAKE SURE WE DONT PLACE IT TO CLOSE TO ANOTHER TIME
+		#HASCLOSE COULD BE DONE BETTER TO NOT ITTERATE OVER ALL MAP SPOTS PLACED
+		while (HasClose(pos)):
+			pos = GetNextRandomPos(Prevpos, Distanceval)
+		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
+		sc.Pos = pos
+		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
+		
+		SpotList.append(sc)
+		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
+		Prevpos = pos
+	for g in SpotList:
+		g.SpawnEnemies()
+	for g in get_tree().get_nodes_in_group("Enemy"):
+		g.connect("OnShipMet", EnemyMet)
+	
+	GenerateRoads()
+	#_DrawMapLines(["City Center", "Capital City Center"])
+	#_DrawMapLines(["City Center", "Capital City Center","Chora"], true, false)
+#ROAD GENERATION
 var Maplt : Thread
 var Roadt : Thread
 var Mut : Mutex
@@ -309,8 +266,6 @@ func GenerateRoads() -> void:
 	Roadt = Thread.new()
 	Roadt.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/Roads, true, false))
 func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
-	
-	
 	var lines = _prim_mst_optimized(SpotLocs)
 	var mat = CanvasItemMaterial.new()
 	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
@@ -374,7 +329,6 @@ func _heap_push(heap: Array, element: Array):
 			break
 		_swap(heap, i, parent)
 		i = parent
-
 # Helper function: Pop an element from the heap
 func _heap_pop(heap: Array) -> Array:
 	_swap(heap, 0, heap.size() - 1)
@@ -396,7 +350,6 @@ func _heap_pop(heap: Array) -> Array:
 		i = smallest
 	
 	return result
-
 func _prim_mst_optimized(cities: Array) -> Array:
 	var num_cities = cities.size()
 	if num_cities <= 1:
@@ -431,10 +384,10 @@ func _prim_mst_optimized(cities: Array) -> Array:
 					_heap_push(edge_min_heap, [new_distance, v, j])
 
 	return mst_edges
-
 func _on_missile_button_pressed() -> void:
 	PlayerShip.GetInstance().FireMissile()
-
+#//////////////////////////////////////////////////////////
+#SIMULTATION
 var simmulationPaused = false
 
 func _on_simulation_button_pressed() -> void:

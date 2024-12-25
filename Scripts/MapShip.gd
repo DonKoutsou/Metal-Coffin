@@ -30,6 +30,7 @@ signal ShipForceStopped
 signal ShipDeparted()
 signal ShipDockActions(Stats : String, t : bool, timel : float)
 signal StatLow(StatName : String)
+signal OnShipDestroyed(Sh : MapShip)
 
 var Landing : bool = false
 signal LandingStarted
@@ -60,16 +61,10 @@ func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
 	$Radar/CollisionShape2D.set_deferred("distabled", !$Radar/CollisionShape2D.disabled)
-	#$Radar/Radar_Range.visible = !$Radar/Radar_Range.visible
-	
-	#$Analyzer.monitorable = !$Analyzer.monitorable
-	#$Analyzer/Analyzer_Range.visible = !$Analyzer/Analyzer_Range.visible
-	#var tw = create_tween()
 	if ($PointLight2D.energy < 0.25):
 		$PointLight2D.energy = 0.25
 	else :
 		$PointLight2D.energy = 0
-	#$PointLight2D.visible = !$PointLight2D.visible
 
 func ToggleElint():
 	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
@@ -133,7 +128,13 @@ func GetElintLevel(Dist : float) -> int:
 	else :
 		Lvl = 1
 	return Lvl
-
+func Damage(amm : float) -> void:
+	if (IsDead()):
+		MapPointerManager.GetInstance().RemoveShip(self)
+		OnShipDestroyed.emit(self)
+		queue_free()
+func IsDead() -> bool:
+	return false
 func GetClosestElint() -> Vector2:
 	var closest : Vector2 = Vector2.ZERO
 	var closestdist : float = 999999999999
@@ -300,7 +301,7 @@ func ShipLookAt(pos : Vector2) -> void:
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
 	
-	
+
 
 func GetSteer() -> float:
 	return rotation

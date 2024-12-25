@@ -11,7 +11,7 @@ shader_parameter/angle = 54.0
 shader_parameter/range = 0.011
 shader_parameter/cone_origin = Vector2(0.5, 0.5)
 shader_parameter/edge_softness = 0.005
-shader_parameter/boundary_thickness = 1.0
+shader_parameter/boundary_thickness = 0.9
 shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahj0"]
@@ -44,15 +44,15 @@ mouse_filter = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 512
+collision_mask = 4
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(0, 0, 200, 100, 220, 0, 200, -100)
+polygon = PackedVector2Array(22, 0, 200, 100, 220, 0, 200, -100)
 
 [node name="MissileBody" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 512
+collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MissileBody"]

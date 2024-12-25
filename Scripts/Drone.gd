@@ -52,7 +52,11 @@ func AccelerationChanged(value: float) -> void:
 	if (CommingBack):
 		return
 	super(value)
-
+func Damage(amm : float) -> void:
+	Cpt.GetStat("HULL").CurrentVelue -= amm
+	super(amm)
+func IsDead() -> bool:
+	return Cpt.GetStat("HULL").CurrentVelue <= 0
 func EnableDrone():
 	#set_physics_process(true)
 	if (Altitude != 10000):
@@ -63,14 +67,14 @@ func EnableDrone():
 		TakingOff = true
 	$AudioStreamPlayer2D.play()
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
-	ToggleRadar()
+	#ToggleRadar()
 	$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 func DissableDrone():
 	#GetShipIcon().rotation = 0.0
 	rotation = 0
 	$AudioStreamPlayer2D.stop()
 	#set_physics_process(false)
-	ToggleRadar()
+	#ToggleRadar()
 	$ShipBody/CollisionShape2D.set_deferred("disabled", true)
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()

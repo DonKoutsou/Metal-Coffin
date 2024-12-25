@@ -82,6 +82,12 @@ func _physics_process(_delta: float) -> void:
 		#Dat.RefilResource("OXYGEN", -oxy)
 	for g in SimulationSpeed:
 		global_position = $Aceleration.global_position
+
+func ToggleRadar():
+	super()
+	for g in GetDroneDock().DockedDrones:
+		g.ToggleRadar()
+
 func SetCurrentPort(Port : MapSpot):
 	super(Port)
 	var dr = GetDroneDock().DockedDrones
@@ -92,6 +98,13 @@ func RemovePort():
 	var dr = GetDroneDock().DockedDrones
 	for g in dr:
 		g.RemovePort()
+func Damage(amm : float) -> void:
+	ShipData.GetInstance().GetStat("HULL").CurrentVelue -= amm
+	if (IsDead()):
+		MapPointerManager.GetInstance().RemoveShip(self)
+		queue_free()
+func IsDead() -> bool:
+	return ShipData.GetInstance().GetStat("HULL").CurrentVelue <= 0
 func UpdateAltitude(NewAlt : float) -> void:
 	super(NewAlt)
 	for g in GetDroneDock().DockedDrones:

@@ -14,8 +14,10 @@ var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
 
 var DestinationCity : MapSpot
-
+var Docked : bool = false
 var VisibleBt : Dictionary
+
+@export var FleetShips : Array[PackedScene]
 #var VisibleBy : Array[Node2D] = []
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
@@ -28,6 +30,10 @@ func SeenShips() -> bool:
 			return true
 	return false
 func  _ready() -> void:
+	for g in FleetShips:
+		var s = g.instantiate() as HostileShip
+		#get_parent().add_child(s)
+		$ShipDock.AddShip(s)
 	#visible = false
 	for g in Cpt.CaptainStats:
 		g.CurrentVelue = g.GetStat()
@@ -60,9 +66,7 @@ func GetCity(CityName : String) -> MapSpot:
 	
 func Damage(amm : float) -> void:
 	Cpt.GetStat("HULL").CurrentVelue -= amm
-	if (Cpt.GetStat("HULL").CurrentVelue <= 0):
-		MapPointerManager.GetInstance().RemoveShip(self)
-		queue_free()
+	super(amm)
 func IsDead() -> bool:
 	return Cpt.GetStat("HULL").CurrentVelue <= 0
 func GetBattleStats() -> BattleShipStats:
@@ -75,7 +79,7 @@ func GetBattleStats() -> BattleShipStats:
 	return stats
 
 func _physics_process(_delta: float) -> void:
-	if (Paused):
+	if (Paused or Docked):
 		return
 	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
 		updatedronecourse()

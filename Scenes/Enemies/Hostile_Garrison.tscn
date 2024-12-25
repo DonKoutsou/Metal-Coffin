@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dorwtx3kdq1md"]
+[gd_scene load_steps=13 format=3 uid="uid://dorwtx3kdq1md"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_t35kf"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_3fotg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_no0qs"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_htfi0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_6kls6"]
+[ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/HostileDroneDock.tscn" id="7_i8h36"]
 
 [sub_resource type="Curve" id="Curve_qk12j"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -71,7 +72,7 @@ pitch_scale = 0.5
 bus = &"MapSounds"
 
 [node name="ShipBody" type="Area2D" parent="."]
-collision_layer = 512
+collision_layer = 4
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
@@ -83,6 +84,8 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
+
+[node name="ShipDock" parent="." instance=ExtResource("7_i8h36")]
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

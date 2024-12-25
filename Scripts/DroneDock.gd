@@ -21,7 +21,6 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneLaunched", LaunchDrone)
 	DroneDockEventH.connect("DroneRangeChanged", DroneRangeChanged)
 	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
-
 func AnyDroneNeedsFuel() -> bool:
 	for g in DockedDrones:
 		if (g.Fuel < 50):
@@ -109,13 +108,15 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 		var notif = CaptainNotif.instantiate() as CaptainNotification
 		notif.SetCaptain(Drne.Cpt)
 		Ingame_UIManager.GetInstance().AddUI(notif, false, true)
+	Drne.connect("OnShipDestroyed", DroneDisharged)
 	ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
 	Inventory.GetInstance().UpdateSize()
 	AddDroneToHierarchy(Drne)
 	var pl = get_parent() as PlayerShip
 	if (pl.CurrentPort != null):
 		Drne.SetCurrentPort(pl.CurrentPort)
-	
+	if (!pl.Detectable):
+		Drne.ToggleRadar()
 func PlayLandingSound()-> void:
 	var sound = AudioStreamPlayer.new()
 	sound.stream = LandedVoiceLines.pick_random()

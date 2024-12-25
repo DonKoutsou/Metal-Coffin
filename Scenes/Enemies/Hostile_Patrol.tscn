@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=13 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_lpij7"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_xxp8j"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_q8roo"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_jqji2"]
+[ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/HostileDroneDock.tscn" id="7_hahnw"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_x18j0"]
 
 [sub_resource type="Curve" id="Curve_qk12j"]
@@ -29,6 +30,7 @@ scale_max = 0.05
 scale_curve = SubResource("CurveTexture_rlrpj")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jc744"]
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true
@@ -60,7 +62,7 @@ position = Vector2(-13.9999, -14.0001)
 texture = ExtResource("5_q8roo")
 
 [node name="ShipBody" type="Area2D" parent="."]
-collision_layer = 512
+collision_layer = 4
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
@@ -81,6 +83,8 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
+
+[node name="ShipDock" parent="." instance=ExtResource("7_hahnw")]
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

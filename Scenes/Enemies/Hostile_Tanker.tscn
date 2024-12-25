@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dx5knna60tl4q"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_g83c8"]
-[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_o30et"]
+[ext_resource type="Resource" uid="uid://cf4b4c1bssfsr" path="res://Resources/Captains/EnemyCaptains/EnemyTanker.tres" id="2_oo283"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_uohkb"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_f3fcn"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_0wv3k"]
@@ -36,7 +36,7 @@ radius = 150.0
 
 [node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
 script = ExtResource("1_g83c8")
-Cpt = ExtResource("2_o30et")
+Cpt = ExtResource("2_oo283")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(-1, 0)

@@ -13,11 +13,13 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	ControlledShip = $"../CanvasLayer/SubViewportContainer/SubViewport/PlayerShip"
+	ControlledShip.connect("OnShipDestroyed", _on_controlled_ship_swtich_range_changed)
 	AvailableShips.append(ControlledShip)
 	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
 
 func OnDroneDocked(D : Drone) -> void:
 	AvailableShips.erase(D)
+	D.disconnect("OnShipDestroyed", OnShipDestroyed)
 	D.ToggleFuelRangeVisibility(false)
 	if (D == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
@@ -25,6 +27,7 @@ func OnDroneDocked(D : Drone) -> void:
 	
 func OnDroneUnDocked(D : Drone) -> void:
 	AvailableShips.append(D)
+	D.connect("OnShipDestroyed", OnShipDestroyed)
 	#ControlledShip = D
 
 func _on_radar_button_pressed() -> void:
@@ -48,8 +51,11 @@ func OnLandingCanceled(Ship : MapShip) -> void:
 func OnShipLanded(Ship : MapShip) -> void:
 	Ship.disconnect("LandingEnded", OnShipLanded)
 	Ship.disconnect("LandingCanceled", OnLandingCanceled)
+	SimulationManager.GetInstance().TogglePause(true)
 	var spot = Ship.CurrentPort as MapSpot
-
+	var PlayedEvent = Land(spot)
+	if (PlayedEvent):
+		return
 	var sc = spot.FuelTradeScene as PackedScene
 	var fuel = sc.instantiate() as TownScene
 	fuel.HasFuel = spot.HasFuel()
@@ -60,8 +66,6 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
 	fuel.LandedShip = Ship
 	Ingame_UIManager.GetInstance().AddUI(fuel, false, true)
-	SimulationManager.GetInstance().TogglePause(true)
-	Land(spot)
 
 func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float):
 	ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
@@ -79,23 +83,31 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float)
 	
 	#SimulationManager.GetInstance().TogglePause(false)
 
-func Land(Spot : MapSpot) -> void:
+func Land(Spot : MapSpot) -> bool:
+	var PlayedEvent = false
 	if (Spot.Evnt != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
 		happeningui.PresentHappening(Spot.Evnt)
+		PlayedEvent = true
 	Spot.OnSpotVisited()
+	return PlayedEvent
 	
+#Called from accelerator UI to change acceleration of currently controlled ship
 func AccelerationChanged(value: float) -> void:
 	ControlledShip.AccelerationChanged(value)
-
+#Called from steering wheel to change tragectory of currently controlled ship
 func SteerChanged(value: float) -> void:
 	ControlledShip.Steer(deg_to_rad(value))
 
+func OnShipDestroyed(Sh : MapShip):
+	if (Sh == ControlledShip):
+		_on_controlled_ship_swtich_range_changed()
+	AvailableShips.erase(Sh)
 
 func _on_controlled_ship_swtich_range_changed() -> void:
 	var currentcontrolled = AvailableShips.find(ControlledShip)
-	
+	#ControlledShip.disconnect("OnShipDestroyed", OnShipDestroyed)
 	if (currentcontrolled + 1 > AvailableShips.size() - 1):
 		var newcont = 0
 		if (newcont == currentcontrolled):
@@ -105,12 +117,13 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	else:
 		ControlledShip.ToggleFuelRangeVisibility(false)
 		ControlledShip = AvailableShips[currentcontrolled + 1]
-	
+	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	$"../UI/ScreenUi/ThrustSlider".ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
 	$"../UI/ScreenUi/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
 	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
+
 var camtw : Tween
 func FrameCamToShip():
 	if (camtw != null):

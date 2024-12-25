@@ -1,11 +1,8 @@
-[gd_scene load_steps=48 format=3 uid="uid://doahe8bm2ac5r"]
+[gd_scene load_steps=45 format=3 uid="uid://doahe8bm2ac5r"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_lg538"]
 [ext_resource type="PackedScene" uid="uid://bdisf4wscxmw5" path="res://Scenes/map.tscn" id="2_dh8se"]
 [ext_resource type="Resource" uid="uid://b5b3q5ta3whql" path="res://Resources/ShipData.tres" id="2_e0ks1"]
-[ext_resource type="PackedScene" uid="uid://civ710rd6srtr" path="res://Scenes/Old/TravelMinigameGame.tscn" id="2_sl3gr"]
-[ext_resource type="PackedScene" uid="uid://cq01udctw5edc" path="res://Scenes/Old/BattleScene.tscn" id="3_fvwv6"]
-[ext_resource type="PackedScene" uid="uid://6bkyk5dp55yc" path="res://Scenes/Old/Exploration.tscn" id="5_8yn38"]
 [ext_resource type="PackedScene" uid="uid://hs6mpykyuklx" path="res://Scenes/Shiptrade.tscn" id="6_0vqqp"]
 [ext_resource type="Resource" uid="uid://dvsp0jjfpsys" path="res://Resources/Ships/Ship2.tres" id="6_4sol3"]
 [ext_resource type="PackedScene" uid="uid://dqisqmi1gj7sn" path="res://Scenes/inventory.tscn" id="6_82nvh"]
@@ -37,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/CustomPopUp.tscn" id="48_7p5jv"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/CustomConfirm.tscn" id="49_sgtub"]
 
-[sub_resource type="Resource" id="Resource_i1n27"]
+[sub_resource type="Resource" id="Resource_abgta"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
@@ -52,13 +49,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_cdh7i"]
+[sub_resource type="Resource" id="Resource_wv0ph"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 700.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_i1n27")
+UpgradeVersion = SubResource("Resource_abgta")
 UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -68,13 +65,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_wjgdx"]
+[sub_resource type="Resource" id="Resource_msj1b"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 500.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_cdh7i")
+UpgradeVersion = SubResource("Resource_wv0ph")
 UpgradeTime = 0.0
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -84,13 +81,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_vjtid"]
+[sub_resource type="Resource" id="Resource_0k6a2"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_wjgdx")
+UpgradeVersion = SubResource("Resource_msj1b")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -100,7 +97,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_y7a57"]
+[sub_resource type="Resource" id="Resource_2lq2x"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
@@ -115,13 +112,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_wvhxc"]
+[sub_resource type="Resource" id="Resource_3op41"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 450.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_y7a57")
+UpgradeVersion = SubResource("Resource_2lq2x")
 UpgradeTime = 400.0
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -131,13 +128,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_88n4t"]
+[sub_resource type="Resource" id="Resource_swcde"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL"
 UpgradeAmm = 300.0
 CurrentVal = 300.0
-UpgradeVersion = SubResource("Resource_wvhxc")
+UpgradeVersion = SubResource("Resource_3op41")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -147,7 +144,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_ar75v"]
+[sub_resource type="Resource" id="Resource_ycwcs"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -162,13 +159,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_p2cyr"]
+[sub_resource type="Resource" id="Resource_blgpl"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_ar75v")
+UpgradeVersion = SubResource("Resource_ycwcs")
 UpgradeTime = 200.0
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -178,13 +175,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_48h80"]
+[sub_resource type="Resource" id="Resource_jwdeh"]
 resource_local_to_scene = true
 script = ExtResource("12_rf2td")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_p2cyr")
+UpgradeVersion = SubResource("Resource_blgpl")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("9_7fm4g")]([ExtResource("44_lmw0n"), ExtResource("44_lmw0n")])
@@ -228,9 +225,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_lg538")
 ShipDat = ExtResource("2_e0ks1")
-TraveMinigameScene = ExtResource("2_sl3gr")
-BattleScene = ExtResource("3_fvwv6")
-ExplorationScene = ExtResource("5_8yn38")
 StartingShip = ExtResource("6_4sol3")
 ShipTradeScene = ExtResource("6_0vqqp")
 DogfightScene = ExtResource("8_xo51v")
@@ -286,7 +280,7 @@ expand_mode = 1
 script = ExtResource("30_h70po")
 
 [node name="Inventory" parent="Ingame_UIManager" instance=ExtResource("6_82nvh")]
-StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_vjtid"), SubResource("Resource_88n4t"), SubResource("Resource_48h80"), ExtResource("29_uppco"), ExtResource("29_uppco"), ExtResource("29_uppco"), ExtResource("29_uppco")])
+StartingItems = Array[ExtResource("9_7fm4g")]([SubResource("Resource_0k6a2"), SubResource("Resource_swcde"), SubResource("Resource_jwdeh"), ExtResource("29_uppco"), ExtResource("29_uppco"), ExtResource("29_uppco"), ExtResource("29_uppco")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Ingame_UIManager"]
 process_mode = 1

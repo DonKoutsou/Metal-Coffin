@@ -9,7 +9,7 @@ var Speed : float = 1
 var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
 @export var MissileKillSound : AudioStream
-var FoundShip : HostileShip
+var FoundShip : MapShip
 var Paused = false
 var SimulationSpeed : int = 1
 
@@ -57,9 +57,12 @@ func _physics_process(_delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (FoundShip == null):
 		FoundShip = area.get_parent()
-		FoundShip.OnShipSeen(self)
+		if (FoundShip is HostileShip):
+			FoundShip.OnShipSeen(self)
 
 func _on_missile_body_area_entered(area: Area2D) -> void:
+	if (FoundShip == null):
+		return
 	#MapPointerManager.GetInstance().RemoveShip(area)
 	#area.queue_free()
 	area.get_parent().Damage(Damage)

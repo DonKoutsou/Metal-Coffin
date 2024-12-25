@@ -38,7 +38,6 @@ func Load(world : World) ->bool:
 	var sav = load("user://SavedGame.tres") as SaveData
 	var Mapz = world.GetMap() as Map
 	var Inv = world.GetInventory() as Inventory
-	#var Miss = Mapz.GetMissileTab() as MissileTab
 	var DiagHolder = world.GetDialogueProgress()
 	var mapdata : Array[Resource] = (sav.GetData("Towns") as SaveData).Datas
 	var InvData : Array[Resource] = (sav.GetData("InventoryContents") as SaveData).Datas

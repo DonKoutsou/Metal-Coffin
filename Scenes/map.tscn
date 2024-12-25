@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="27_0t7uv"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="28_7rdua"]
-[ext_resource type="FontFile" uid="uid://cn7w3x8fi0o58" path="res://Fonts/Play-Regular.ttf" id="28_8jvry"]
+[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="28_8jvry"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="28_sirob"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="28_tg7n1"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="29_jt4kw"]
@@ -149,7 +149,7 @@ positional_shadow_atlas_size = 512
 size = Vector2i(1014, 504)
 render_target_update_mode = 4
 
-[node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport" groups=["DissapearingMap"]]
+[node name="Ground" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,7 +163,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SubViewportContainer/SubViewport/Control"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SubViewportContainer/SubViewport/Ground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,7 +186,7 @@ stretch_mode = 1
 [node name="PlayerShip" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("28_7rdua")]
 position = Vector2(163, 60)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="Darkness" type="CanvasModulate" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
 
 [node name="ShipCamera" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
