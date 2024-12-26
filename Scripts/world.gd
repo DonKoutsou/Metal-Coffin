@@ -131,10 +131,10 @@ func LoadData(Data : Resource) -> void:
 	ItemBuffStat("FUEL")
 	
 func GetInventory() -> Inventory:
-	return $Ingame_UIManager/Inventory
+	return $Inventory
 	
 func GetDialogueProgress() -> DialogueProgressHolder:
-	return 	$DialogueProgressHolder
+	return $DialogueProgressHolder
 	
 func GetMap() -> Map:
 	return $Map
