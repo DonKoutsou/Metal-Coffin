@@ -15,7 +15,7 @@
 [ext_resource type="Shader" path="res://Shaders/GridMap.gdshader" id="12_ivvec"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ax28q"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_00g78"]
-[ext_resource type="Script" path="res://Scripts/commander.gd" id="14_bfgu5"]
+[ext_resource type="Script" path="res://Scripts/EnemyAi/commander.gd" id="14_bfgu5"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="16_4wqve"]
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_mn7nq"]

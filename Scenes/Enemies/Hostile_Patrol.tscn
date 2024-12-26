@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=14 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_lpij7"]
@@ -35,6 +35,9 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true
 radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
+radius = 1000.0
 
 [node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
 script = ExtResource("1_dinuw")
@@ -85,6 +88,14 @@ collision_mask = 12
 shape = SubResource("CircleShape2D_63pb3")
 
 [node name="ShipDock" parent="." instance=ExtResource("7_hahnw")]
+
+[node name="Elint" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16384
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+shape = SubResource("CircleShape2D_t084r")
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

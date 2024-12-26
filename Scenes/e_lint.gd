@@ -79,6 +79,14 @@ func SetDirection(dir : float):
 			continue
 		$DirectionLight.texture = DirectionMasks.values()[g]
 		return
+
+static func DegreesToElintAngle(Deg : float) -> int:
+	var dirs = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+	for g in dirs:
+		if (abs(dirs[g] - Deg) > 15):
+			continue
+		return dirs[g]
+	return 0
 	
 func SetDistance(dist : float):
 	var maxdist

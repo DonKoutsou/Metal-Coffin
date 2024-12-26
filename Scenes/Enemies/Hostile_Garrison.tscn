@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dorwtx3kdq1md"]
+[gd_scene load_steps=14 format=3 uid="uid://dorwtx3kdq1md"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_t35kf"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_3fotg"]
@@ -35,6 +35,9 @@ scale_curve = SubResource("CurveTexture_rlrpj")
 resource_local_to_scene = true
 radius = 150.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ml0rx"]
+radius = 1000.0
+
 [node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
 script = ExtResource("1_t35kf")
 Cpt = ExtResource("2_3fotg")
@@ -62,6 +65,13 @@ show_behind_parent = true
 position = Vector2(-13.9999, -14.0001)
 texture = ExtResource("5_no0qs")
 
+[node name="ShipBody" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
+shape = SubResource("CircleShape2D_dxthp")
+
 [node name="Aceleration" type="Node2D" parent="."]
 position = Vector2(0.5, 0)
 
@@ -71,13 +81,6 @@ volume_db = -15.0
 pitch_scale = 0.5
 bus = &"MapSounds"
 
-[node name="ShipBody" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 13
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
-shape = SubResource("CircleShape2D_dxthp")
-
 [node name="Radar" type="Area2D" parent="."]
 collision_layer = 16384
 collision_mask = 12
@@ -86,6 +89,14 @@ collision_mask = 12
 shape = SubResource("CircleShape2D_63pb3")
 
 [node name="ShipDock" parent="." instance=ExtResource("7_i8h36")]
+
+[node name="Elint" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16384
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+shape = SubResource("CircleShape2D_ml0rx")
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

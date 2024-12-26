@@ -60,7 +60,7 @@ func ChangeSimulationSpeed(i : int):
 func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
-	$Radar/CollisionShape2D.set_deferred("distabled", !$Radar/CollisionShape2D.disabled)
+	$Radar/CollisionShape2D.set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
 	if ($PointLight2D.energy < 0.25):
 		$PointLight2D.energy = 0.25
 	else :
@@ -68,8 +68,6 @@ func ToggleRadar():
 
 func ToggleElint():
 	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
-
-
 
 func StartLanding() -> void:
 	if (TakingOff):
@@ -101,6 +99,9 @@ func _physics_process(delta: float) -> void:
 			Altitude = 10000
 			TakeoffEnded.emit(self)
 			TakingOff = false
+	UpdateElint(delta)
+
+func UpdateElint(delta: float) -> void:
 	d -= delta
 	if (d > 0):
 		return
@@ -111,14 +112,13 @@ func _physics_process(delta: float) -> void:
 		var lvl = ElintContacts.values()[g]
 		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position))
 		if (Newlvl > BiggestLevel):
-			
 			BiggestLevel = Newlvl
 		if (Newlvl != lvl):
 			
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > 0):
 		Elint.emit(true, BiggestLevel)
-
+	
 func GetElintLevel(Dist : float) -> int:
 	var Lvl = 1
 	if (Dist < 300):
@@ -132,6 +132,7 @@ func Damage(amm : float) -> void:
 	if (IsDead()):
 		MapPointerManager.GetInstance().RemoveShip(self)
 		OnShipDestroyed.emit(self)
+		#$Radar/CollisionShape2D.set_deferred("disabled", true)
 		queue_free()
 func IsDead() -> bool:
 	return false
@@ -207,8 +208,8 @@ func OnStatLow(StatName : String) -> void:
 		return
 	StatLow.emit(StatName)
 
-
-	
+func GetShipName() -> String:
+	return ""
 
 func GetShipSpeed() -> float:
 	return $Aceleration.position.x
@@ -301,8 +302,6 @@ func ShipLookAt(pos : Vector2) -> void:
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
 	
-
-
 func GetSteer() -> float:
 	return rotation
 
@@ -333,9 +332,13 @@ func _on_player_viz_notifier_screen_exited() -> void:
 	ScreenExit.emit()
 
 func _on_elint_area_entered(area: Area2D) -> void:
+	if (area.get_parent() == self):
+		return
 	ElintContacts[area.get_parent()] = 0
 	#Elint.emit(true, 1)
 func _on_elint_area_exited(area: Area2D) -> void:
+	if (area.get_parent() == self):
+		return
 	ElintContacts.erase(area.get_parent())
 	Elint.emit(false, 0)
 func GetShipBodyArea() -> Area2D:

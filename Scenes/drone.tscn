@@ -65,8 +65,8 @@ lifetime = 20.0
 
 [node name="ShipBody" type="Area2D" parent="."]
 disable_mode = 2
-collision_layer = 4
-collision_mask = 4
+collision_layer = 4100
+collision_mask = 4100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_e6yyl")
@@ -110,7 +110,6 @@ texture_scale = 0.25
 height = 500.0
 
 [node name="Elint" type="Area2D" parent="."]
-rotation = 0.368904
 collision_layer = 0
 collision_mask = 16384
 monitorable = false
@@ -120,6 +119,7 @@ shape = SubResource("CircleShape2D_mk6wy")
 
 [node name="Radar" type="Area2D" parent="."]
 rotation = -0.282025
+collision_layer = 16385
 collision_mask = 0
 monitoring = false
 

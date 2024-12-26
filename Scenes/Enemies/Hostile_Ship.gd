@@ -21,7 +21,32 @@ var VisibleBt : Dictionary
 #var VisibleBy : Array[Node2D] = []
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
+signal OnDestinationReached(Ship : HostileShip)
+signal OnEnemyVisualContact(Ship : MapShip)
+signal OnEnemyVisualLost(Ship : MapShip)
+signal OnPositionInvestigated(Pos : Vector2)
+signal ElintContact(Ship : MapShip, t : bool)
 
+func UpdateElint(delta: float) -> void:
+	d -= delta
+	if (d > 0):
+		return
+	d = 0.4
+	var BiggestLevel = 0
+	var ClosestShip : MapShip
+	for g in ElintContacts.size():
+		var ship = ElintContacts.keys()[g]
+		var lvl = ElintContacts.values()[g]
+		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position))
+		if (Newlvl > BiggestLevel):
+			BiggestLevel = Newlvl
+			ClosestShip = ship
+		if (Newlvl != lvl):
+			
+			ElintContacts[ship] = Newlvl
+	if (BiggestLevel > 0):
+		ElintContact.emit(ClosestShip ,true)
+		
 func SeenShips() -> bool:
 	for g in VisibleBt:
 		if (g == null):
@@ -30,6 +55,7 @@ func SeenShips() -> bool:
 			return true
 	return false
 func  _ready() -> void:
+	Commander.GetInstance().RegisterSelf(self)
 	for g in FleetShips:
 		var s = g.instantiate() as HostileShip
 		#get_parent().add_child(s)
@@ -38,7 +64,7 @@ func  _ready() -> void:
 	for g in Cpt.CaptainStats:
 		g.CurrentVelue = g.GetStat()
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
-	#set_physics_process(false)
+	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	if (!Patrol):
@@ -49,11 +75,15 @@ func  _ready() -> void:
 		nextcity = cities.find(DestinationCity) + Direction
 	DestinationCity = cities[nextcity]
 	call_deferred("AimForCity")
+	
+	$Elint.connect("area_entered", _on_elint_area_entered)
+	$Elint.connect("area_exited", _on_elint_area_exited)
 func AimForCity():
 	ShipLookAt(DestinationCity.global_position)
 	
 func GetShipMaxSpeed() -> float:
 	return Cpt.GetStatValue("SPEED")
+	
 func GetCity(CityName : String) -> MapSpot:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var CorrectCity : MapSpot
@@ -67,8 +97,10 @@ func GetCity(CityName : String) -> MapSpot:
 func Damage(amm : float) -> void:
 	Cpt.GetStat("HULL").CurrentVelue -= amm
 	super(amm)
+	
 func IsDead() -> bool:
 	return Cpt.GetStat("HULL").CurrentVelue <= 0
+	
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
@@ -78,7 +110,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Name = "Enemy"
 	return stats
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if (Paused or Docked):
 		return
 	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
@@ -94,6 +126,7 @@ func _physics_process(_delta: float) -> void:
 		VisibleBt[g] = min(VisibleBt[g] + 0.05, 10)
 		if (VisibleBt[g] == 10 and !PursuingShips.has(g)):
 			LastKnownPosition = g.global_position
+	UpdateElint(delta)
 
 func updatedronecourse():
 	# Get the current position and velocity of the ship
@@ -105,6 +138,8 @@ func updatedronecourse():
 	else:
 		ship_position = LastKnownPosition
 		ship_velocity = Vector2.ZERO
+		if (ship_position.distance_to(global_position) < 10):
+			OnPositionInvestigated.emit(LastKnownPosition)
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatValue("SPEED")
 
@@ -116,12 +151,14 @@ func updatedronecourse():
 	
 func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		PursuingShips.append(area.get_parent())
+		OnEnemyVisualContact.emit(area.get_parent())
+		#PursuingShips.append(area.get_parent())
 		
 func _on_radar_2_area_exited(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		PursuingShips.erase(area.get_parent())
-		LastKnownPosition = area.get_parent().global_position
+		OnEnemyVisualLost.emit(area.get_parent())
+		#PursuingShips.erase(area.get_parent())
+		#LastKnownPosition = area.get_parent().global_position
 		
 #whan this ship gets seen by player or friendly drone
 func OnShipSeen(SeenBy : Node2D):
@@ -142,14 +179,7 @@ func OnShipUnseen(UnSeenBy : Node2D):
 
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == DestinationCity and Patrol):
-		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-		
-		var nextcity = cities.find(DestinationCity) + Direction
-		if (nextcity < 0 or nextcity > cities.size() - 1):
-			Direction *= -1
-			nextcity = cities.find(DestinationCity) + Direction
-		DestinationCity = cities[nextcity]
-		ShipLookAt(DestinationCity.global_position)
+		OnDestinationReached.emit(self)
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
 		if (bit):
@@ -199,3 +229,15 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	global_position = Dat.Position
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
+func _on_elint_area_entered(area: Area2D) -> void:
+	if (area.get_parent() is HostileShip):
+		return
+	super(area)
+func _on_elint_area_exited(area: Area2D) -> void:
+	if (area.get_parent() is HostileShip):
+		return
+	if (area.get_parent() == self):
+		return
+	ElintContacts.erase(area.get_parent())
+	ElintContact.emit(area.get_parent(), false)
+	

@@ -154,3 +154,13 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CaptainIcon = CaptainIcon
 	stats.Name = "Player"
 	return stats
+func GetShipName() -> String:
+	return "Player"
+func _on_elint_area_entered(area: Area2D) -> void:
+	if (area.get_parent() is Drone):
+		return
+	super(area)
+func _on_elint_area_exited(area: Area2D) -> void:
+	if (area.get_parent() is Drone):
+		return
+	super(area)
