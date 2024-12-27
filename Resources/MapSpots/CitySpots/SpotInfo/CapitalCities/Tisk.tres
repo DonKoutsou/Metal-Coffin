@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("3_ynv1t")
-SpotName = "Formak"
+SpotName = "Tisk"
 EnemyCity = true
 HostilePatrolShipScene = ExtResource("1_sd0j0")
-HostilePatrolShipName = "Karmuk"
+HostilePatrolShipName = "Hos"
 HostileShipScene = ExtResource("2_iqsrt")
-HostileShipName = "Kriz"
+HostileShipName = "Vozi"

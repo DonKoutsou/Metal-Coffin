@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_5vm73")
-SpotName = "Ziliniara"
+SpotName = "Saf"
 Event = ExtResource("1_wqunj")
 EnemyCity = true
 HostilePatrolShipName = ""

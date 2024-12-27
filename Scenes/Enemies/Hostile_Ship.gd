@@ -14,7 +14,7 @@ var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
 
 var DestinationCity : MapSpot
-var EmergencyLandingSpot : MapSpot
+var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
 
@@ -55,6 +55,39 @@ func SeenShips() -> bool:
 		if (g is PlayerShip or g is Drone):
 			return true
 	return false
+
+func CanReachDestination() -> bool:
+	var dist = Cpt.GetStat("FUEL_TANK").CurrentVelue * 10 * Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var actualdistance = global_position.distance_to(GetCurrentDestination())
+	return dist >= actualdistance
+
+func GetCurrentDestination() -> Vector2:
+	var destination
+	if (PursuingShips.size() > 0):
+		destination = PursuingShips[0].global_position
+	else : if(LastKnownPosition != Vector2.ZERO):
+		destination = LastKnownPosition
+	else : if (RefuelSpot != null):
+		destination = RefuelSpot.global_position
+	else :
+		destination = DestinationCity.global_position
+	return destination
+	
+func FindRefuelSpot() -> void:
+	var dist = Cpt.GetStat("FUEL_TANK").CurrentVelue * 10 * Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
+	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
+		var spot = g as MapSpot
+		if (spot.global_position.distance_to(global_position) >= dist):
+			continue
+		if (spot.global_position.distance_to(GetCurrentDestination()) > DistanceToDestination):
+			continue
+		if (spot == CurrentPort):
+			continue
+		RefuelSpot = spot
+		print(ShipName + " will take a detour through " + RefuelSpot.SpotName + " to refuel")
+		return
+
 func  _ready() -> void:
 	Commander.GetInstance().RegisterSelf(self)
 	for g in FleetShips:
@@ -124,7 +157,14 @@ func _physics_process(delta: float) -> void:
 		Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
 		if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
 			GetShipAcelerationNode().position.x = Cpt.GetStat("SPEED").GetStat()
-	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
+			
+		else :
+			return
+	if (!CanReachDestination()):
+		FindRefuelSpot()
+	if (RefuelSpot != null):
+		ShipLookAt(RefuelSpot.global_position)
+	else : if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
 		updatedronecourse()
 	for g in  SimulationSpeed:
 		var ac = GetShipAcelerationNode().global_position
@@ -196,6 +236,12 @@ func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == DestinationCity and Patrol):
 		OnDestinationReached.emit(self)
 		CurrentPort = DestinationCity
+		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
+			GetShipAcelerationNode().position.x = 0
+	if (area.get_parent() == RefuelSpot and Patrol):
+		CurrentPort = RefuelSpot
+		RefuelSpot = null
+		ShipLookAt(DestinationCity.global_position)
 		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
 			GetShipAcelerationNode().position.x = 0
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):

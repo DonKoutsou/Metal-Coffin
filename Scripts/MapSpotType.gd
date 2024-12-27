@@ -36,6 +36,9 @@ func GetSpotDrop() -> Array[Item]:
 			Drops.append(it)
 	return Drops
 
+func GetSpotEnumString(S : SpotKind) -> String:
+	return SpotKind.keys()[S]
+
 enum SpotKind{
 SHIP,
 TERRESTRIAL_PLANET,

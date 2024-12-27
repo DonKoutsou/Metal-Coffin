@@ -97,7 +97,7 @@ func RandomOffset()-> Vector2:
 var stattween : Tween
 func ShowStation():
 	stattween = create_tween()
-	var stations = get_tree().get_nodes_in_group("Capital City Center")
+	var stations = get_tree().get_nodes_in_group("CITY_CENTER")
 	var stationpos = stations[stations.size()-1].global_position
 	stattween.set_trans(Tween.TRANS_EXPO)
 	stattween.tween_property(self, "global_position", stationpos, 6)

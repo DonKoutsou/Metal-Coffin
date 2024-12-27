@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_7jdan")
-SpotName = "Krokaria"
+SpotName = "Zirmak"
 EnemyCity = true
 HostilePatrolShipScene = ExtResource("1_ycid2")
 HostilePatrolShipName = "Calist"

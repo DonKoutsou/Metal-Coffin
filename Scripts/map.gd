@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _InitialPlayerPlacament():
 	#find first village and make sure its visible
-	var firstvilage = get_tree().get_nodes_in_group("Chora")[0] as MapSpot
+	var firstvilage = get_tree().get_nodes_in_group("VILLAGE")[0] as MapSpot
 	firstvilage.OnSpotSeen(false)
 	#place player close to first village
 	var pos = firstvilage.global_position
@@ -245,8 +245,8 @@ var Maplt : Thread
 var Roadt : Thread
 var Mut : Mutex
 func GenerateRoads() -> void:
-	var CityGroups = ["City Center", "Capital City Center"]
-	var AllSpotGroups = ["City Center", "Capital City Center","Chora"]
+	var CityGroups = ["CITY_CENTER"]
+	var AllSpotGroups = ["CITY_CENTER", "VILLAGE"]
 	var Spots : Array
 	for g in CityGroups:
 		Spots.append_array(get_tree().get_nodes_in_group(g))

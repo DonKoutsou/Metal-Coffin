@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=20 format=3 uid="uid://du24ilvkea51x"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=25 format=3 uid="uid://du24ilvkea51x"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_ig8qa"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_npnnf"]
@@ -18,10 +18,15 @@
 [ext_resource type="Resource" uid="uid://dfv7w4reu4ulx" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Tzidiza.tres" id="11_glwy5"]
 [ext_resource type="Resource" uid="uid://o5qlnq6nohu2" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Ulmak.tres" id="12_h17fg"]
 [ext_resource type="Resource" uid="uid://kndh3yrjjlpd" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Zilidana.tres" id="13_7rbke"]
+[ext_resource type="Resource" uid="uid://bdmgdubj6nbwg" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Gart.tres" id="14_vaem1"]
+[ext_resource type="Resource" uid="uid://cnk72n2i7e5uk" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Opl.tres" id="15_01qsy"]
+[ext_resource type="Resource" uid="uid://bgjt5dxvletq4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Saf.tres" id="16_kg810"]
+[ext_resource type="Resource" uid="uid://dx7f71dbu0e4l" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Trunka.tres" id="17_814d0"]
+[ext_resource type="Resource" uid="uid://dlbywka0hm43a" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Zarta.tres" id="18_afsen"]
 
 [sub_resource type="Resource" id="Resource_m1q4d"]
 script = ExtResource("4_u8h8q")
-PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_ag8h5"), ExtResource("6_tqj8y"), ExtResource("7_ahngf"), ExtResource("8_mj5gy"), ExtResource("9_1qn8w"), ExtResource("5_f2xt1"), ExtResource("10_6n0um"), ExtResource("11_glwy5"), ExtResource("4_jl05r"), ExtResource("12_h17fg"), ExtResource("13_7rbke")])
+PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_ag8h5"), ExtResource("6_tqj8y"), ExtResource("7_ahngf"), ExtResource("8_mj5gy"), ExtResource("9_1qn8w"), ExtResource("5_f2xt1"), ExtResource("10_6n0um"), ExtResource("11_glwy5"), ExtResource("4_jl05r"), ExtResource("12_h17fg"), ExtResource("13_7rbke"), ExtResource("14_vaem1"), ExtResource("15_01qsy"), ExtResource("16_kg810"), ExtResource("17_814d0"), ExtResource("18_afsen")])
 DataName = ""
 
 [resource]

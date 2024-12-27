@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_kr6y8")
-SpotName = "Gorgan"
+SpotName = "Zarta"
 EnemyCity = true
 HostilePatrolShipName = ""
 HostileShipName = ""

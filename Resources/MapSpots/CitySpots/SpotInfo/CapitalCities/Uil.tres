@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("4_2c4jn")
-SpotName = "Elp"
+SpotName = "Uil"
 Event = ExtResource("1_r7cs8")
 EnemyCity = true
 HostilePatrolShipScene = ExtResource("2_ndi6v")

@@ -35,15 +35,16 @@ func _ready() -> void:
 func SpawnEnemyPatrol():
 	var host = HostilePatrolToSpawn.instantiate() as HostileShip
 	host.DestinationCity = self
+	host.ShipName = HostilePatrolName
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
-	host.ShipName = HostilePatrolName
+	
 func SpawnEnemyGarison():
 	var host = HostileGarison.instantiate() as HostileShip
 	#host.DestinationCity = self
+	host.ShipName = HostileGarisonName
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
-	host.ShipName = HostileGarisonName
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
 	var datas = MapSpotSaveData.new().duplicate()
@@ -92,7 +93,7 @@ func SetSpotData(Data : MapSpotType) -> void:
 		OnSpotSeen(false)
 		#OnSpotAnalyzed(false)
 
-	add_to_group(Data.FullName)
+	add_to_group(Data.GetSpotEnumString(Data.SpotK))
 func GetSpotName() -> String:
 	return SpotName
 func GetSpotDescriptio() -> String:

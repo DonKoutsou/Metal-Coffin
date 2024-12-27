@@ -7,10 +7,10 @@
 
 [resource]
 script = ExtResource("4_6nopb")
-SpotName = "Elp"
+SpotName = "Loksia"
 Event = ExtResource("1_8p75j")
 EnemyCity = true
 HostilePatrolShipScene = ExtResource("2_i8d1w")
-HostilePatrolShipName = "Meyer"
+HostilePatrolShipName = "Los"
 HostileShipScene = ExtResource("3_p53rt")
-HostileShipName = "Sarma"
+HostileShipName = "Sas"
