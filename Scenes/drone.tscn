@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=18 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -9,14 +9,17 @@
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="6_x7c6h"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="8_bbjow"]
 
-[sub_resource type="Curve" id="Curve_qk12j"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ewj1d"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_yig51"]
 _data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_rlrpj"]
-curve = SubResource("Curve_qk12j")
+[sub_resource type="CurveTexture" id="CurveTexture_mbk8k"]
+curve = SubResource("Curve_yig51")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kyfni"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s3yar"]
 particle_flag_disable_z = true
 direction = Vector3(-1, 0, 0)
 spread = 1.244
@@ -28,7 +31,7 @@ radial_velocity_max = -2.23517e-05
 gravity = Vector3(0, 0, 0)
 scale_min = 0.05
 scale_max = 0.05
-scale_curve = SubResource("CurveTexture_rlrpj")
+scale_curve = SubResource("CurveTexture_mbk8k")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6yyl"]
 resource_local_to_scene = true
@@ -56,10 +59,11 @@ shader_parameter/scale_factor = 0.08
 script = ExtResource("1_vfr1e")
 Cpt = ExtResource("3_fw0pf")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="SmokeParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ewj1d")
 position = Vector2(-7, 0)
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_kyfni")
+process_material = SubResource("ParticleProcessMaterial_s3yar")
 texture = ExtResource("8_bbjow")
 lifetime = 20.0
 
@@ -106,7 +110,7 @@ bus = &"Engine"
 energy = 0.25
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
-texture_scale = 0.25
+texture_scale = 2.0
 height = 500.0
 
 [node name="Elint" type="Area2D" parent="."]

@@ -53,7 +53,7 @@ func PursuitOrderCompleted(TargetShip : MapShip) -> void:
 func PursuitOrderCanceled(TargetShip : MapShip) -> void:
 	for g in PursuitOrders:
 		if (g.Target == TargetShip):
-			for z in PursuitOrders[g].Receivers:
+			for z in g.Receivers:
 				z.PursuingShips.clear()
 			PursuitOrders.erase(g)
 			TargetShip.disconnect("OnShipDestroyed", PursuitOrderCompleted)
@@ -81,15 +81,19 @@ func UpdateInvestigationPos(newpos : Vector2, originship : MapShip) -> void:
 			g.Target = newpos
 			for z in g.Receivers:
 				z.LastKnownPosition = newpos
-
+	print("Investigation position updated to : " + var_to_str(newpos))
 func InvestigationOrderComplete(Pos : Vector2) -> void:
 	for g in InvestigationOrders:
 		if (g.Target == Pos):
-			for z in InvestigationOrders[g].Receivers:
+			for z in g.Receivers:
 				z.disconnect("OnPositionInvestigated", InvestigationOrderComplete)
 				z.LastKnownPosition = Vector2.ZERO
+				z.ShipLookAt(z.DestinationCity.global_position)
 			InvestigationOrders.erase(g)
+			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
+			print("Position : " + var_to_str(Pos) + "has been investigated.")
 			return
+			
 #SIGNAL RECEIVERS///////////////////////////////////////////////////
 func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
@@ -142,10 +146,11 @@ func OnDestinationReached(Ship : HostileShip) -> void:
 	Ship.ShipLookAt(Ship.DestinationCity.global_position)
 
 func OnElintHit(Ship : MapShip ,t : bool) -> void:
-	print(Ship.GetShipName() + " has triggered an Elint sensor")
-	EnemyPositionsToInvestigate[Ship] = Ship.global_position
-	if (IsShipsPositionUnderInvestigation(Ship)):
-		UpdateInvestigationPos(Ship.global_position, Ship)
+	if (t):
+		print(Ship.GetShipName() + " has triggered an Elint sensor")
+		EnemyPositionsToInvestigate[Ship] = Ship.global_position
+		if (IsShipsPositionUnderInvestigation(Ship)):
+			UpdateInvestigationPos(Ship.global_position, Ship)
 #HELPER FUNCTIONS/////////////////////////////////////////////////
 func IsShipsPositionUnderInvestigation(Ship : MapShip) -> bool:
 	for g in InvestigationOrders:

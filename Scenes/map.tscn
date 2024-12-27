@@ -243,6 +243,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
 
 [node name="Panel3" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Rulers"]
+visible = false
 z_as_relative = false
 material = SubResource("ShaderMaterial_4qkgl")
 layout_mode = 1

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=10 format=3 uid="uid://y1ohb6oss4v0"]
+[gd_resource type="Resource" script_class="Captain" load_steps=12 format=3 uid="uid://y1ohb6oss4v0"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_avlug"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_sr6bq"]
@@ -27,6 +27,7 @@ StatBase = 1.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_cx83o"]
+resource_local_to_scene = true
 script = ExtResource("2_sr6bq")
 StatName = "HULL"
 StatMax = 300.0
@@ -40,6 +41,21 @@ StatMax = 3000.0
 StatBase = 1000.0
 AllowAutoRefil = false
 
+[sub_resource type="Resource" id="Resource_kxkd2"]
+script = ExtResource("2_sr6bq")
+StatName = "FUEL_EFFICIENCY"
+StatMax = 5.0
+StatBase = 3.0
+AllowAutoRefil = false
+
+[sub_resource type="Resource" id="Resource_hkfj7"]
+resource_local_to_scene = true
+script = ExtResource("2_sr6bq")
+StatName = "FUEL_TANK"
+StatMax = 500.0
+StatBase = 300.0
+AllowAutoRefil = false
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_08lax")
@@ -47,4 +63,4 @@ CaptainName = "Grunt"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_avlug")
 ShipIcon = ExtResource("3_v7x56")
-CaptainStats = Array[ExtResource("2_sr6bq")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y")])
+CaptainStats = Array[ExtResource("2_sr6bq")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7")])

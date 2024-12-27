@@ -189,6 +189,13 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		var plship = area.get_parent() as PlayerShip
 		plship.GetDroneDock().DockDrone(self, true)
 		CommingBack = false
-
+func _on_elint_area_entered(area: Area2D) -> void:
+	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+		return
+	super(area)
+func _on_elint_area_exited(area: Area2D) -> void:
+	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+		return
+	super(area)
 func GetShipName() -> String:
 	return Cpt.CaptainName

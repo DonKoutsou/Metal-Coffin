@@ -61,10 +61,10 @@ func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
 	$Radar/CollisionShape2D.set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
-	if ($PointLight2D.energy < 0.25):
-		$PointLight2D.energy = 0.25
-	else :
-		$PointLight2D.energy = 0
+	#if ($PointLight2D.energy < 0.25):
+		#$PointLight2D.energy = 0.25
+	#else :
+		#$PointLight2D.energy = 0
 
 func ToggleElint():
 	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
@@ -165,7 +165,6 @@ func UpdateFuelRange(fuel : float, fuel_ef : float):
 	var FuelMat = FuelRangeIndicator.material as ShaderMaterial
 	#calculate the range taking fuel efficiency in mind
 	var distall = fuel * 10 * fuel_ef
-	#scalling of collor rect
 	var tw = create_tween()
 
 	tw.tween_method(SetFuelShaderRange, FuelMat.get_shader_parameter("scale_factor"), distall / 10000, 0.5)
@@ -182,9 +181,9 @@ func UpdateVizRange(rang : float):
 	#scalling collision
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 	
-	var l = get_node_or_null("PointLight2D")
-	if (l != null):
-		l.texture_scale = rang / 100
+	#var l = get_node_or_null("PointLight2D")
+	#if (l != null):
+		#l.texture_scale = rang / 100
 func UpdateELINTTRange(rang : float):
 	var ElintRangeCollisionShape = $Elint/CollisionShape2D
 	#scalling collision
@@ -233,7 +232,7 @@ func AccelerationChanged(value: float) -> void:
 		Travelling = false
 		#set_physics_process(false)
 		#$AudioStreamPlayer2D.stop()
-		$GPUParticles2D.emitting = false
+		$SmokeParticles.emitting = false
 		ShipStopped.emit()
 		#return
 	else:
@@ -253,7 +252,7 @@ func AccelerationChanged(value: float) -> void:
 			return
 			#set_physics_process(false)
 			
-		$GPUParticles2D.emitting = true
+		$SmokeParticles.emitting = true
 		Travelling = true
 		#set_physics_process(true)
 		ShipAccelerating.emit()

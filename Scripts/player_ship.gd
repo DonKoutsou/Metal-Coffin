@@ -63,6 +63,7 @@ func _physics_process(_delta: float) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
 		#set_physics_process(false)
 		return
+	#TODO fix drones not being able to syphon gas, once at 0 all fleet is not able to move
 	for g in GetDroneDock().DockedDrones:
 		var dronefuel = ($Aceleration.position.x / 10 / g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
 		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > dronefuel):

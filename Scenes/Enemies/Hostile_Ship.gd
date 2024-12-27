@@ -14,8 +14,9 @@ var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
 
 var DestinationCity : MapSpot
+var EmergencyLandingSpot : MapSpot
 var Docked : bool = false
-var VisibleBt : Dictionary
+var VisibleBy : Array[Node2D]
 
 @export var FleetShips : Array[PackedScene]
 #var VisibleBy : Array[Node2D] = []
@@ -48,7 +49,7 @@ func UpdateElint(delta: float) -> void:
 		ElintContact.emit(ClosestShip ,true)
 		
 func SeenShips() -> bool:
-	for g in VisibleBt:
+	for g in VisibleBy:
 		if (g == null):
 			continue
 		if (g is PlayerShip or g is Drone):
@@ -75,7 +76,7 @@ func  _ready() -> void:
 		nextcity = cities.find(DestinationCity) + Direction
 	DestinationCity = cities[nextcity]
 	call_deferred("AimForCity")
-	
+	MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
 func AimForCity():
@@ -113,20 +114,33 @@ func GetBattleStats() -> BattleShipStats:
 func _physics_process(delta: float) -> void:
 	if (Paused or Docked):
 		return
+	
+	UpdateElint(delta)
+	
+	if (!Patrol):
+		return
+	
+	if (CurrentPort != null and Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
+		Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
+		if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
+			GetShipAcelerationNode().position.x = Cpt.GetStat("SPEED").GetStat()
 	if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
 		updatedronecourse()
 	for g in  SimulationSpeed:
 		var ac = GetShipAcelerationNode().global_position
 		global_position = ac
-	for g in VisibleBt:
-		if (g == null):
-			continue
-		if (g is Missile):
-			continue
-		VisibleBt[g] = min(VisibleBt[g] + 0.05, 10)
-		if (VisibleBt[g] == 10 and !PursuingShips.has(g)):
-			LastKnownPosition = g.global_position
-	UpdateElint(delta)
+		var ftoconsume =  GetShipAcelerationNode().position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY")
+		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
+		
+	#for g in VisibleBy:
+		#if (g == null):
+			#continue
+		#if (g is Missile):
+			#continue
+		#VisibleBt[g] = min(VisibleBt[g] + 0.05, 10)
+		#if (VisibleBt[g] == 10 and !PursuingShips.has(g)):
+			#LastKnownPosition = g.global_position
+	
 
 func updatedronecourse():
 	# Get the current position and velocity of the ship
@@ -140,6 +154,7 @@ func updatedronecourse():
 		ship_velocity = Vector2.ZERO
 		if (ship_position.distance_to(global_position) < 10):
 			OnPositionInvestigated.emit(LastKnownPosition)
+			return
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatValue("SPEED")
 
@@ -164,22 +179,25 @@ func _on_radar_2_area_exited(area: Area2D) -> void:
 func OnShipSeen(SeenBy : Node2D):
 	#$Radar/Radar_Range.visible = true
 	#visible = true
-	if (VisibleBt.has(SeenBy)):
+	if (VisibleBy.has(SeenBy)):
 		return
-	VisibleBt[SeenBy] = 0
-	if (VisibleBt.keys().size() > 1):
+	#VisibleBy[SeenBy] = 0
+	if (VisibleBy.size() > 1):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	SimulationManager.GetInstance().TogglePause(true)
 	
 func OnShipUnseen(UnSeenBy : Node2D):
-	VisibleBt.erase(UnSeenBy)
+	VisibleBy.erase(UnSeenBy)
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
 
 
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == DestinationCity and Patrol):
 		OnDestinationReached.emit(self)
+		CurrentPort = DestinationCity
+		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
+			GetShipAcelerationNode().position.x = 0
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
 		if (bit):
@@ -208,6 +226,8 @@ func _on_area_entered(area: Area2D) -> void:
 			OnShipSeen(area.get_parent())
 
 func _on_area_exited(area: Area2D) -> void:
+	if (area.get_parent() == CurrentPort):
+		CurrentPort = null
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		OnShipUnseen(area.get_parent())
 

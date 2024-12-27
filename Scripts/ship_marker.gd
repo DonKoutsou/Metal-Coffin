@@ -31,7 +31,7 @@ func _ready() -> void:
 	$Control.visible = false
 	$Line2D.visible = false
 	$Control/PanelContainer/VBoxContainer/TimeSeen .visible = false
-	$Control/PanelContainer/VBoxContainer/Threat.visible = false
+	#$Control/PanelContainer/VBoxContainer/Threat.visible = false
 	$Control/PanelContainer/VBoxContainer/Fuel.visible = false
 	$Control/PanelContainer/VBoxContainer/Hull.visible = false
 	set_physics_process(false)
@@ -53,7 +53,7 @@ func OnShipDeparted() -> void:
 	ToggleShowRefuel("Upgrading", false, 0)
 
 func UpdateTrajectory(Dir : float) -> void:
-	$Direction.rotation = Dir
+	$Panel/Direction.rotation = Dir
 
 func DroneReturning() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
@@ -116,11 +116,11 @@ func OnStatLow(StatName : String) -> void:
 func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : float):
 	$Control/PanelContainer/VBoxContainer/ShipName.text = ShipName
 	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str((ShipSpeed * 60) * 3.6) + "km/h"
-	$ShipSymbol.text = ShipCasllSign
+	$Panel/ShipSymbol.text = ShipCasllSign
 	
 func _physics_process(_delta: float) -> void:
 	$Control.scale = Vector2(1,1) / camera.zoom
-	#$Panel.scale = Vector2(1,1) / camera.zoom
+	$Panel.scale = (Vector2(1,1) / camera.zoom) * 0.5
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine()
 	$Line2D.width =  2 / camera.zoom.x
@@ -148,12 +148,12 @@ func UpdateHull():
 	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
 func UpdateDroneHull(amm : float, maxamm : float):
 	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([amm, maxamm])
-func ToggleThreat(T : bool):
-	$Control/PanelContainer/VBoxContainer/Threat.visible = T
+#func ToggleThreat(T : bool):
+	#$Control/PanelContainer/VBoxContainer/Threat.visible = T
 
 	
-func UpdateThreatLevel(Level : float):
-	$Control/PanelContainer/VBoxContainer/Threat.text = "Threat Level : " + var_to_str(roundi(Level))
+#func UpdateThreatLevel(Level : float):
+	#$Control/PanelContainer/VBoxContainer/Threat.text = "Threat Level : " + var_to_str(roundi(Level))
 
 func ToggleTimeLastSeend(T : bool):
 	if (!T):
@@ -169,7 +169,7 @@ func UpdateTime():
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
 	$Panel.add_to_group("UnmovableMapInfo")
-
+	
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
 	$Panel.remove_from_group("UnmovableMapInfo")

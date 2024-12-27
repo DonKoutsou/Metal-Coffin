@@ -37,22 +37,22 @@ shape = SubResource("CircleShape2D_oemyy")
 [node name="DroneSpots" type="Node2D" parent="."]
 
 [node name="DroneSpot1" type="Node2D" parent="DroneSpots"]
-position = Vector2(-30, -30)
+position = Vector2(-50, -50)
 
 [node name="DroneSpot4" type="Node2D" parent="DroneSpots"]
-position = Vector2(-30, 30)
+position = Vector2(-50, 50)
 
 [node name="DroneSpot2" type="Node2D" parent="DroneSpots"]
-position = Vector2(-60, -60)
+position = Vector2(-100, -100)
 
 [node name="DroneSpot5" type="Node2D" parent="DroneSpots"]
-position = Vector2(-60, 60)
+position = Vector2(-100, 100)
 
 [node name="DroneSpot3" type="Node2D" parent="DroneSpots"]
-position = Vector2(-90, -90)
+position = Vector2(-150, -150)
 
 [node name="DroneSpot6" type="Node2D" parent="DroneSpots"]
-position = Vector2(-90, 90)
+position = Vector2(-150, 150)
 
 [node name="Line2D" type="Line2D" parent="."]
 z_index = 2
