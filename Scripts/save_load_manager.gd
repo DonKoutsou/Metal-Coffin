@@ -15,6 +15,7 @@ func Save(world : World) -> void:
 	var Inv = world.GetInventory() as Inventory
 	var DataArray : Array[Resource] = []
 	DataArray.append(Mapz.GetSaveData())
+	DataArray.append(Mapz.GetMapMarkerEditorSaveData())
 	DataArray.append(Mapz.GetEnemySaveData())
 	DataArray.append(Mapz.GetMissileSaveData())
 	DataArray.append(Inv.GetSaveData())
@@ -52,11 +53,13 @@ func Load(world : World) ->bool:
 	
 	var enems : Array[Resource] = (sav.GetData("Enemies") as SaveData).Datas
 	var misses : Array[Resource] = (sav.GetData("Missiles") as SaveData).Datas
+	var MarkerEditorData : SD_MapMarkerEditor = (sav.GetData("MarkerEditor") as SaveData).Datas[0]
 	world.Loading = true
 	call_deferred("LoadStats", world, StatData)
 	call_deferred("LoadCaptains", sav.GetData("PLData").DroneDat)
 	call_deferred("RespawnEnems", Mapz,enems)
 	call_deferred("RespawnMissiles", Mapz,misses)
+	call_deferred("LoadMarkerEditorData", Mapz, MarkerEditorData)
 	return true
 	#world.LoadData(StatData)
 func LoadStats(world : World, StatData : Resource) -> void:
@@ -68,3 +71,5 @@ func RespawnEnems(Mp : Map, Enems : Array[Resource]):
 	Mp.RespawnEnemies( Enems )
 func RespawnMissiles(Mp : Map, Missiles : Array[Resource]):
 	Mp.RespawnMissiles( Missiles )
+func LoadMarkerEditorData(Mp : Map, Data : SD_MapMarkerEditor):
+	Mp.LoadMapMarkerEditorSaveData(Data)

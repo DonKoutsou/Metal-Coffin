@@ -14,7 +14,7 @@ var KnownEnemies : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# check for known enemies and see if an order can be created
 	for g in KnownEnemies:
 		if (!IsShipBeingPursued(g)):
@@ -98,13 +98,24 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
 	#DissconnectSignals(Ship)
+	var POrdersToErase : Array[PursuitOrder] = []
 	if (Ship.PursuingShips.size() > 0):
 		for g in PursuitOrders:
 			if (g.Receivers.has(Ship)):
 				g.Receivers.erase(Ship)
 				if (g.Receivers.size() == 0):
-					PursuitOrders.erase(g)
-
+					POrdersToErase.append(g)
+	var IOrdersToErase : Array[PursuitOrder] = []
+	if (Ship.LastKnownPosition != Vector2.ZERO):
+		for g in InvestigationOrders:
+			if (g.Receivers.has(Ship)):
+				g.Receivers.erase(Ship)
+				if (g.Receivers.size() == 0):
+					IOrdersToErase.append(g)
+	for g in POrdersToErase:
+		PursuitOrders.erase(g)
+	for g in IOrdersToErase:
+		InvestigationOrders.erase(g)
 func OnEnemySeen(Ship : MapShip) -> void:
 	#if an enemy that had its location investigated is seen 
 	#make sure to call of all investigation on its previusly known location

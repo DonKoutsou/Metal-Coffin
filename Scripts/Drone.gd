@@ -17,7 +17,7 @@ func  _ready() -> void:
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
 	FuelVis = false
-	Paused = SimulationManager.GetInstance().IsPaused()
+	Paused = SimulationManager.IsPaused()
 	#UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
 	#MapPointerManager.GetInstance().AddShip(self, true)
 

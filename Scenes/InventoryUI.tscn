@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_fqeaq"]
 [ext_resource type="Texture2D" uid="uid://dwhs3o3bmu88" path="res://Assets/Spaceship/Spaceship_top_Rend_Main Camera 1.png" id="1_pwxaw"]
-[ext_resource type="Script" path="res://Scenes/inventory_ui.gd" id="2_481me"]
+[ext_resource type="Script" path="res://Scripts/UI/inventory_ui.gd" id="2_481me"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="2_xks4o"]
 [ext_resource type="Script" path="res://Scripts/InventoryShipStats.gd" id="3_jtr6h"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="4_mdouc"]

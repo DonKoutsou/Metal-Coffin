@@ -115,7 +115,7 @@ func OnStatLow(StatName : String) -> void:
 	
 func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : float):
 	$Control/PanelContainer/VBoxContainer/ShipName.text = ShipName
-	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str((ShipSpeed * 60) * 3.6) + "km/h"
+	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(ShipSpeed * 360) + "km/h"
 	$Panel/ShipSymbol.text = ShipCasllSign
 	
 func _physics_process(_delta: float) -> void:
@@ -134,7 +134,7 @@ func UpdateLine()-> void:
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
 
 func UpdateSpeed(Spd : float):
-	var spd = roundi((Spd * 60) * 3.6)
+	var spd = roundi(Spd * 360)
 	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(spd) + "km/h"
 func UpdateFuel():
 	var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL").GetCurrentValue())

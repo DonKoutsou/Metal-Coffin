@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
 [ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_3nbu5"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
-[ext_resource type="Script" path="res://Scenes/ship_controller.gd" id="12_e8tb5"]
+[ext_resource type="Script" path="res://Scripts/ship_controller.gd" id="12_e8tb5"]
 [ext_resource type="Shader" path="res://Shaders/GridMap.gdshader" id="12_ivvec"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ax28q"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_00g78"]
@@ -93,7 +93,7 @@ shader_parameter/curvature = 0.28
 shader_parameter/skip = 0.01
 shader_parameter/image_flicker = 0.05
 shader_parameter/vignette_flicker_speed = 0.0
-shader_parameter/vignette_strength = 0.71
+shader_parameter/vignette_strength = 1.2
 shader_parameter/small_scanlines_speed = 1.0
 shader_parameter/small_scanlines_proximity = 2.0
 shader_parameter/small_scanlines_opacity = 1.17
@@ -216,6 +216,9 @@ use_parent_material = true
 script = ExtResource("23_q5rq1")
 Col = Color(0.721279, 0.395459, 0.144425, 1)
 
+[node name="Lines" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager"]
+use_parent_material = true
+
 [node name="InScreenUI" type="CanvasLayer" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 
 [node name="Control3" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI"]
@@ -263,9 +266,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_top = 100.785
-offset_bottom = 187.785
+offset_top = 54.0
+offset_bottom = 141.0
 grow_vertical = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="Control" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
 layout_mode = 1
@@ -750,33 +754,36 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="YGas" parent="UI/MapMarkerControls" instance=ExtResource("43_6k4iy")]
-position = Vector2(218, 11)
+position = Vector2(299, 11)
 scale = Vector2(1, 1)
 
 [node name="XGas" parent="UI/MapMarkerControls" instance=ExtResource("43_6k4iy")]
-position = Vector2(-178, 12)
+position = Vector2(-264, 12)
 scale = Vector2(1, 1)
 
-[node name="DroneButton" type="TextureButton" parent="UI/MapMarkerControls" groups=["Buttons"]]
+[node name="ExitMapMarker" type="TextureButton" parent="UI/MapMarkerControls" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -75.5
-offset_top = -56.0
-offset_right = 75.5
+offset_left = -81.0
+offset_top = -65.0
+offset_right = -7.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("26_y7o3o")
-texture_pressed = ExtResource("27_x5hrs")
+rotation = 1.57079
+texture_normal = ExtResource("28_sirob")
+texture_pressed = ExtResource("28_sirob")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UI/MapMarkerControls/DroneButton"]
+[node name="Label" type="Label" parent="UI/MapMarkerControls/ExitMapMarker"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -784,16 +791,145 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -19.0
-offset_right = 36.5
-offset_bottom = 19.0
+offset_left = -19.0
+offset_top = 6.5
+offset_right = 19.0
+offset_bottom = 42.5
 grow_horizontal = 2
 grow_vertical = 2
+rotation = -1.5708
 theme_override_constants/line_spacing = -3
 theme_override_fonts/font = ExtResource("28_8jvry")
-theme_override_font_sizes/font_size = 12
-text = "DrawLine"
+theme_override_font_sizes/font_size = 24
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ClearLines" type="TextureButton" parent="UI/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -65.0
+offset_right = 72.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.57079
+texture_normal = ExtResource("28_sirob")
+texture_pressed = ExtResource("28_sirob")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="Label" parent="UI/MapMarkerControls/ClearLines"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0002
+offset_top = 30.5001
+offset_right = 18.9998
+offset_bottom = 66.5001
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 16
+text = "Clear"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DrawLine" type="TextureButton" parent="UI/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = -65.0
+offset_right = 151.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.57079
+texture_normal = ExtResource("28_sirob")
+texture_pressed = ExtResource("28_sirob")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/MapMarkerControls/DrawLine"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = 6.50012
+offset_right = 19.0
+offset_bottom = 42.5001
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 16
+text = "Line"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DrawText" type="TextureButton" parent="UI/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 156.0
+offset_top = -65.0
+offset_right = 230.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.57079
+texture_normal = ExtResource("28_sirob")
+texture_pressed = ExtResource("28_sirob")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="Label" parent="UI/MapMarkerControls/DrawText"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0002
+offset_top = 31.5001
+offset_right = 18.9998
+offset_bottom = 67.5001
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 16
+text = "Text"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -816,4 +952,7 @@ autowrap_mode = 2
 [connection signal="pressed" from="UI/ScreenUi/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]
 [connection signal="RangeChanged" from="UI/MapMarkerControls/YGas" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_on_y_gas_range_changed"]
 [connection signal="RangeChanged" from="UI/MapMarkerControls/XGas" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_on_x_gas_range_changed"]
-[connection signal="pressed" from="UI/MapMarkerControls/DroneButton" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_on_drone_button_pressed"]
+[connection signal="pressed" from="UI/MapMarkerControls/ExitMapMarker" to="." method="_on_exit_map_marker_pressed"]
+[connection signal="pressed" from="UI/MapMarkerControls/ClearLines" to="." method="_on_clear_lines_pressed"]
+[connection signal="pressed" from="UI/MapMarkerControls/DrawLine" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_on_drone_button_pressed"]
+[connection signal="pressed" from="UI/MapMarkerControls/DrawText" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_OnTextButtonPressed"]

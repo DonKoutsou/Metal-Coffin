@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 func GenerateCity() -> void:
 	var spots = $CitySpots.get_children()
-	var centername : String = ""
+	#var centername : String = ""
 	for g in spots:
 		var spt = g as CitySpot
 		var sc = SpotScene.instantiate() as MapSpot 
@@ -79,6 +79,8 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.position = sptpos
 		sc.SpotName = spotdat.SpotName
 		sc.Evnt = spotdat.Evnt
+		sc.EnemyCity = spotdat.EnemyCity
+		sc.PossibleDrops = spotdat.PossibleDrops
 		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
 		sc.CityFuelReserves = spotdat.CityFuelReserves
 		spt.free()

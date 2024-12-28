@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dclt8xw084fal"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=9 format=3 uid="uid://dclt8xw084fal"]
 
 [ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="1_fc6nb"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="2_a3xwc"]
 [ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="3_0bfsr"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="4_bc7ui"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="4_u7sym"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_t2yuh"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="6_rsk4r"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="7_moet6"]
 
 [resource]
 script = ExtResource("4_bc7ui")
@@ -12,5 +16,6 @@ Event = ExtResource("1_fc6nb")
 EnemyCity = true
 HostilePatrolShipScene = ExtResource("2_a3xwc")
 HostilePatrolShipName = "Lement"
+PossibleDrops = Array[ExtResource("4_u7sym")]([ExtResource("5_t2yuh"), ExtResource("6_rsk4r"), ExtResource("7_moet6")])
 HostileShipScene = ExtResource("3_0bfsr")
 HostileShipName = "Epsilon"

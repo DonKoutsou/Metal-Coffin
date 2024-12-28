@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://cj1ic1tc1y86i"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cj1ic1tc1y86i"]
 
 [ext_resource type="Resource" uid="uid://gvu43lp4i4y6" path="res://Resources/Happenings/CrewRecruitHappeningKarkan.tres" id="1_as7hy"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_2vb63"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_6whgx"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_dkf8w"]
 
 [resource]
 script = ExtResource("2_6whgx")
@@ -9,4 +11,5 @@ SpotName = "Sazma"
 Event = ExtResource("1_as7hy")
 EnemyCity = false
 HostilePatrolShipName = ""
+PossibleDrops = Array[ExtResource("2_2vb63")]([ExtResource("3_dkf8w")])
 HostileShipName = ""

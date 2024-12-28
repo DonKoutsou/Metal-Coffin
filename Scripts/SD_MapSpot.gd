@@ -10,3 +10,5 @@ class_name  MapSpotSaveData
 @export var Evnt : Happening
 @export var CityFuelReserves : float
 @export var PlayerFuelReserves : float
+@export var EnemyCity : bool
+@export var PossibleDrops : Array[Item]

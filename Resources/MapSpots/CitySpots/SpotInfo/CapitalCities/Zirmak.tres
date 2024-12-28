@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://c3ugcyn5f6t"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=8 format=3 uid="uid://c3ugcyn5f6t"]
 
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_ycid2"]
 [ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="2_isr3c"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_7jdan"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_m5ofm"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_i6lxx"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_fu7s4"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_6yd26"]
 
 [resource]
 script = ExtResource("3_7jdan")
@@ -10,5 +14,6 @@ SpotName = "Zirmak"
 EnemyCity = true
 HostilePatrolShipScene = ExtResource("1_ycid2")
 HostilePatrolShipName = "Calist"
+PossibleDrops = Array[ExtResource("3_m5ofm")]([ExtResource("4_i6lxx"), ExtResource("5_fu7s4"), ExtResource("6_6yd26")])
 HostileShipScene = ExtResource("2_isr3c")
 HostileShipName = "Zasta"

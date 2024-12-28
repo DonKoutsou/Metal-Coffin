@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dd26j51u4ni6g"]
 
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_05yfd"]
-[ext_resource type="Script" path="res://Scenes/map_marker_line.gd" id="1_bk68g"]
+[ext_resource type="Script" path="res://Scripts/MapMarkerEditor/map_marker_line.gd" id="1_bk68g"]
 
 [node name="MapMarkerLine" type="Line2D"]
 use_parent_material = true

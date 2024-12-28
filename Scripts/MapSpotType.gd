@@ -4,7 +4,7 @@ class_name MapSpotType
 @export var SpotK : SpotKind
 @export var MapIcon : Texture
 #@export var Scene : PackedScene
-@export var PossibleDrops : Array[Item]
+#@export var PossibleDrops : Array[Item]
 @export var FullName : String
 @export var Description : String
 @export var VisibleOnStart : bool = false
@@ -27,14 +27,14 @@ func ClearCustomData(Dat : MapSpotCustomData):
 func GetEnumString() -> String:
 	return SpotKind.keys()[SpotK]
 	
-func GetSpotDrop() -> Array[Item]:
-	var Drops : Array[Item] = []
-	for z in DropAmmount:
-		var it = PossibleDrops.pick_random()
-		var DropAmm = randi_range(1, it.RandomFindMaxCount)
-		for g in DropAmm :
-			Drops.append(it)
-	return Drops
+#func GetSpotDrop() -> Array[Item]:
+	#var Drops : Array[Item] = []
+	#for z in DropAmmount:
+		#var it = PossibleDrops.pick_random()
+		#var DropAmm = randi_range(1, it.RandomFindMaxCount)
+		#for g in DropAmm :
+			#Drops.append(it)
+	#return Drops
 
 func GetSpotEnumString(S : SpotKind) -> String:
 	return SpotKind.keys()[S]

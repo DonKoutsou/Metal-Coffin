@@ -6,7 +6,7 @@ class_name MapSpotCompleteInfo
 
 @export var HostilePatrolShipScene : PackedScene
 @export var HostilePatrolShipName : String
-
+@export var PossibleDrops : Array[Item]
 @export var HostileShipScene : PackedScene
 @export var HostileShipName : String
 var PickedBy : MapSpot

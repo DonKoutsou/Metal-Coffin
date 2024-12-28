@@ -140,20 +140,20 @@ func _physics_process(delta: float) -> void:
 		var ship = Ships[g]
 		var Marker = _ShipMarkers[g]
 		if (ship is HostileShip):
-			#if (ship.VisibleBy.size() > 0):
-			Marker.global_position = ship.global_position
-			Marker.UpdateSpeed(ship.GetShipSpeed())
-			#if (ship.SeenShips()):
-				#Marker.UpdateThreatLevel(ship.VisibleBt[ship.VisibleBt.keys()[0]])
-			#Marker.UpdateSeenTime()
-			Marker.ToggleTimeLastSeend(false)
-			#Marker.ToggleThreat(true)
-			#Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
-			Marker.UpdateTrajectory(ship.global_rotation)
-			#else :
+			if (ship.VisibleBy.size() > 0):
+				Marker.global_position = ship.global_position
+				Marker.UpdateSpeed(ship.GetShipSpeed())
+				#if (ship.SeenShips()):
+					#Marker.UpdateThreatLevel(ship.VisibleBt[ship.VisibleBt.keys()[0]])
+				#Marker.UpdateSeenTime()
+				Marker.ToggleTimeLastSeend(false)
+				#Marker.ToggleThreat(true)
+				#Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
+				Marker.UpdateTrajectory(ship.global_rotation)
+			else :
 				#Marker.ToggleThreat(false)
-				#Marker.ToggleTimeLastSeend(true)
-				#Marker.UpdateTime()
+				Marker.ToggleTimeLastSeend(true)
+				Marker.UpdateTime()
 			
 		else:
 			if (ship is Drone):

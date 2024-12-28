@@ -1,17 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=26 format=3 uid="uid://dyvpncg7tolc7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=22 format=3 uid="uid://dyvpncg7tolc7"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_qkgba"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_khihf"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_fnfii"]
 [ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Alivia.tres" id="3_u02hr"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_1jm82"]
 [ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Curd.tres" id="4_mjh1h"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_xevlw"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_82ny1"]
 [ext_resource type="Resource" uid="uid://dobir15ooa8uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Cirkari.tres" id="6_esr4f"]
 [ext_resource type="Texture2D" uid="uid://cjs06ul2657jw" path="res://Assets/block-house.png" id="6_ixavb"]
 [ext_resource type="Resource" uid="uid://kjwdfwc0h4uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Kalicard.tres" id="7_bot42"]
-[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_2bkel"]
 [ext_resource type="Resource" uid="uid://ltonn44hg1kq" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Krokaria.tres" id="8_2jrjj"]
 [ext_resource type="Resource" uid="uid://bscbp2mebv4e4" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Jud.tres" id="8_xhovg"]
 [ext_resource type="Resource" uid="uid://doth1htx3jgkk" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Xenda.tres" id="9_ye5xf"]
@@ -34,7 +30,6 @@ DataName = ""
 script = ExtResource("10_jgsae")
 SpotK = 12
 MapIcon = ExtResource("6_ixavb")
-PossibleDrops = Array[ExtResource("3_fnfii")]([ExtResource("4_1jm82"), ExtResource("6_82ny1"), ExtResource("8_2bkel")])
 FullName = "City Center"
 Description = "blah blah"
 VisibleOnStart = true

@@ -25,7 +25,7 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 			PlaySound()
 	#$VBoxContainer/TextureRect.texture = Spot.SpotType.MapIcon
 	$VBoxContainer/PanelContainer/TextureRect2.text = Spot.SpotName
-	for g in Spot.SpotType.PossibleDrops:
+	for g in Spot.PossibleDrops:
 		var text = TextureRect.new()
 		text.texture = g.ItemIconSmol
 		if (g is UsableItem):

@@ -144,6 +144,19 @@ func GetSaveData() ->SaveData:
 		Datas.append(SpotList[g].GetSaveData())
 	dat.Datas = Datas
 	return dat
+func GetMapMarkerEditorSaveData() -> SaveData:
+	var dat = SaveData.new().duplicate()
+	dat.DataName = "MarkerEditor"
+	var EditorData = SD_MapMarkerEditor.new()
+	for g in $CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager/Lines.get_children():
+		if (g is MapMarkerLine):
+			EditorData.AddLine(g)
+		else : if (g is MapMarkerText):
+			EditorData.AddText(g)
+	dat.Datas.append(EditorData)
+	return dat
+func LoadMapMarkerEditorSaveData(Data : SD_MapMarkerEditor) -> void:
+	$CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor.LoadData(Data)
 func LoadSaveData(Data : Array[Resource]) -> void:
 	for g in Data.size():
 		var dat = Data[g] as TownSaveData
@@ -411,3 +424,12 @@ func _on_speed_simulation_button_up() -> void:
 
 func _on_marker_plecement_pressed() -> void:
 	ToggleMapMarkerPlecement(true)
+
+
+func _on_exit_map_marker_pressed() -> void:
+	ToggleMapMarkerPlecement(false)
+
+
+func _on_clear_lines_pressed() -> void:
+	for g in $CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager/Lines.get_children():
+		g.queue_free()

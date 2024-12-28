@@ -131,7 +131,7 @@ func UpdateFuelRange(fuel : float, fuel_ef : float):
 		#if (minfuelef > ship_efficiency):
 			#minfuelef = ship_efficiency
 	var effective_efficiency = fleetsize / inverse_ef_sum
-	var total_distance = total_fuel * 10 * inverse_ef_sum
+	#var total_distance = total_fuel * 10 * inverse_ef_sum
 	# Calculate average efficiency for the group
 	#var fleetsize = 1 + GetDroneDock().DockedDrones.size()
 	var distall = (total_fuel * 10 * effective_efficiency) / fleetsize

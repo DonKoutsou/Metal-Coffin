@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy41ui65qkhmb"]
+[gd_scene load_steps=9 format=3 uid="uid://dy41ui65qkhmb"]
 
-[ext_resource type="Script" path="res://Scenes/map_marker_editor.gd" id="1_8dwjq"]
+[ext_resource type="Script" path="res://Scripts/MapMarkerEditor/map_marker_editor.gd" id="1_8dwjq"]
 [ext_resource type="PackedScene" uid="uid://dd26j51u4ni6g" path="res://Scenes/MapMarkerLine.tscn" id="2_5eayg"]
+[ext_resource type="PackedScene" uid="uid://dvnr81a8uogh4" path="res://Scenes/TextMarker.tscn" id="3_ikfwh"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_j0o20"]
+[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_jc86s"]
+[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="5_ucevc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0ok87"]
 light_mode = 1
@@ -13,10 +17,11 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1.61238e-06, 0.670085, 0.156774, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+corner_detail = 6
 
 [node name="MapMarkerEditor" type="Control"]
 material = SubResource("CanvasItemMaterial_0ok87")
@@ -29,25 +34,71 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_8dwjq")
 LineScene = ExtResource("2_5eayg")
+TextScene = ExtResource("3_ikfwh")
 
 [node name="YLine" type="Line2D" parent="."]
 use_parent_material = true
-position = Vector2(0, 213)
+position = Vector2(0, 290)
 points = PackedVector2Array(-1000, 0, 2000, 0)
 width = 2.0
 default_color = Color(1.61238e-06, 0.670085, 0.156774, 1)
 
 [node name="XLine" type="Line2D" parent="."]
 use_parent_material = true
-position = Vector2(366, 0)
+position = Vector2(595, 0)
 points = PackedVector2Array(0, -2000, 0, 2000)
 width = 2.0
 default_color = Color(1.61238e-06, 0.670085, 0.156774, 1)
 
+[node name="Linetemp" type="Node2D" parent="."]
+
 [node name="Panel" type="Panel" parent="."]
 use_parent_material = true
 layout_mode = 0
-offset_right = 29.0
-offset_bottom = 29.0
+offset_left = 581.0
+offset_top = 276.0
+offset_right = 610.0
+offset_bottom = 305.0
 pivot_offset = Vector2(11, 11)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aurdw")
+
+[node name="MarkerTextEditor" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_j0o20")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarkerTextEditor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -88.0
+offset_right = 171.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextEdit" type="TextEdit" parent="MarkerTextEditor/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("5_ucevc")
+theme_override_styles/focus = ExtResource("5_ucevc")
+theme_override_styles/read_only = ExtResource("5_ucevc")
+placeholder_text = "Marker Text"
+wrap_mode = 1
+caret_blink = true
+
+[node name="TextConfirm" type="Button" parent="MarkerTextEditor/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_jc86s")
+text = "Done"
+
+[connection signal="pressed" from="MarkerTextEditor/VBoxContainer/TextConfirm" to="." method="_on_text_confirm_pressed"]

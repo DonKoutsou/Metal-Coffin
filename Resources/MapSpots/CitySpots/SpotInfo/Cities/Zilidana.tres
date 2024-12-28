@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://kndh3yrjjlpd"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://kndh3yrjjlpd"]
 
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_mdil8"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_el5ca"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_hv1xc"]
 
 [resource]
 script = ExtResource("2_el5ca")
 SpotName = "Zilidana"
 EnemyCity = true
-SpawnHostileShip = false
+HostilePatrolShipName = ""
+PossibleDrops = Array[ExtResource("1_mdil8")]([ExtResource("2_hv1xc")])
+HostileShipName = ""

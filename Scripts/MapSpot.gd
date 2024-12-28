@@ -19,7 +19,7 @@ var EnemyCity = false
 var CurrentlyVisiting = false
 var Evnt : Happening
 var SpotName : String
-
+var PossibleDrops : Array[Item]
 var HostilePatrolToSpawn : PackedScene
 var HostilePatrolName : String
 var HostileGarison : PackedScene
@@ -55,6 +55,8 @@ func GetSaveData() -> Resource:
 	#datas.Analyzed = Analyzed
 	datas.SpotName = SpotName
 	datas.Evnt = Evnt
+	datas.EnemyCity = EnemyCity
+	datas.PossibleDrops = PossibleDrops
 	datas.CityFuelReserves = CityFuelReserves
 	datas.PlayerFuelReserves = PlayerFuelReserves
 	return datas
@@ -78,6 +80,7 @@ func SetSpotData(Data : MapSpotType) -> void:
 					Evnt = spotid.Event
 					EnemyCity = spotid.EnemyCity
 					#SpawnHostileShip = spotid.SpawnHostileShip
+					PossibleDrops = spotid.PossibleDrops
 					HostilePatrolToSpawn = spotid.HostilePatrolShipScene
 					HostilePatrolName = spotid.HostilePatrolShipName
 					HostileGarison = spotid.HostileShipScene
@@ -99,11 +102,11 @@ func GetSpotName() -> String:
 func GetSpotDescriptio() -> String:
 	return SpotType.Description
 func GetPossibleDrops() -> Array:
-	return SpotType.PossibleDrops
+	return PossibleDrops
 func HasFuel() -> bool:
 	var hasf = false
 	
-	for g in SpotType.PossibleDrops:
+	for g in PossibleDrops:
 		if g is UsableItem and g.StatUseName == "FUEL":
 			hasf = true
 			break
@@ -111,14 +114,14 @@ func HasFuel() -> bool:
 	return hasf
 func HasRepair() -> bool:
 	var hasf = false
-	for g in SpotType.PossibleDrops:
+	for g in PossibleDrops:
 		if g is UsableItem and g.StatUseName == "HULL":
 			hasf = true
 			break
 	return hasf
 func HasUpgrade() -> bool:
 	var hasu = false
-	for g in SpotType.PossibleDrops:
+	for g in PossibleDrops:
 		if g.ItemName == "Material":
 			hasu = true
 			break

@@ -224,6 +224,7 @@ func OnShipSeen(SeenBy : Node2D):
 	#VisibleBy[SeenBy] = 0
 	if (VisibleBy.size() > 1):
 		return
+	VisibleBy.append(SeenBy)
 	MapPointerManager.GetInstance().AddShip(self, false)
 	SimulationManager.GetInstance().TogglePause(true)
 	

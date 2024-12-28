@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://cymxwbov1pdsm"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cymxwbov1pdsm"]
 
 [ext_resource type="Resource" uid="uid://cewy7vds2cnh8" path="res://Resources/Happenings/CrewRecruitHappeningDimitry.tres" id="1_j0aub"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_e67pm"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_p81b1"]
+[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_synvh"]
 
 [resource]
 script = ExtResource("2_p81b1")
 SpotName = "Tsard"
 Event = ExtResource("1_j0aub")
 EnemyCity = true
-SpawnHostileShip = false
+HostilePatrolShipName = ""
+PossibleDrops = Array[ExtResource("2_e67pm")]([ExtResource("3_synvh")])
+HostileShipName = ""
