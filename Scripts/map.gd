@@ -20,6 +20,8 @@ var ShowingTutorial = false
 
 func _ready() -> void:
 	# spotlist empty means we are not loading and starting new game
+	GetMapMarkerEditor().visible = false
+	$UI/MapMarkerControls.visible = false
 	if (SpotList.size() == 0):
 		GenerateMap()
 		_InitialPlayerPlacament()
@@ -48,6 +50,14 @@ func ToggleVis(t : bool ):
 func ToggleUIForIntro(t : bool):
 	PlayerShip.GetInstance().ToggleUI(t)
 	$UI/ScreenUi.visible = t
+
+func ToggleMapMarkerPlecement(t : bool) -> void:
+	$UI/ScreenUi.visible = !t
+	$UI/MapMarkerControls.visible = t
+	GetMapMarkerEditor().visible = t
+
+func GetMapMarkerEditor() -> MapMarkerEditor:
+	return $CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor
 
 func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
@@ -397,3 +407,7 @@ func _on_speed_simulation_button_down() -> void:
 
 func _on_speed_simulation_button_up() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
+
+
+func _on_marker_plecement_pressed() -> void:
+	ToggleMapMarkerPlecement(true)

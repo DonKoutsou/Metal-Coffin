@@ -18,6 +18,7 @@ func _HANDLE_ZOOM(zoomval : float):
 		#g.visible = zoom < Vector2(1, 1)
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.02, 0.001, zoom.x / 2))
+	get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
 	_UpdateMapGridVisibility()
 	#$Screen.scale = zoom / 2
 	#for g in get_tree().get_nodes_in_group("DissapearingMap"):

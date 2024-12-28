@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=54 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_5r2qd"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="20_4fmmi"]
 [ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="22_56xmu"]
 [ext_resource type="Script" path="res://Scripts/CircleDrawer.gd" id="23_q5rq1"]
+[ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/Map_Marker_Editor.tscn" id="23_vhdnp"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/simulation_notification.tscn" id="25_ux7bi"]
 [ext_resource type="PackedScene" uid="uid://b7owbjefasxhp" path="res://Scenes/InventoryUI.tscn" id="26_wbn50"]
 [ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="26_y7o3o"]
@@ -42,6 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="35_y1n03"]
 [ext_resource type="Texture2D" uid="uid://6rqpwwu1hdxb" path="res://Assets/UIPiecies/Button_Camera 1_Green.png" id="36_nbab4"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ELint.tscn" id="37_i8qtm"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="43_6k4iy"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
@@ -223,6 +225,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Rulers" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
 layout_mode = 1
@@ -231,6 +234,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Panel2" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Rulers"]
 material = SubResource("CanvasItemMaterial_0a4hg")
@@ -240,6 +244,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
 
 [node name="Panel3" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Rulers"]
@@ -269,6 +274,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="InventoryUI" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Control" instance=ExtResource("26_wbn50")]
 visible = false
@@ -278,6 +284,9 @@ offset_bottom = 1.0
 
 [node name="CaptainUI" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Control" instance=ExtResource("34_jwdde")]
 visible = false
+layout_mode = 1
+
+[node name="MapMarkerEditor" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3" instance=ExtResource("23_vhdnp")]
 layout_mode = 1
 
 [node name="Screen" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
@@ -438,6 +447,43 @@ theme_override_constants/line_spacing = -3
 theme_override_fonts/font = ExtResource("28_8jvry")
 theme_override_font_sizes/font_size = 34
 text = ">>
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarkerPlecement" type="TextureButton" parent="UI/ScreenUi" groups=["Buttons"]]
+layout_mode = 1
+offset_left = 730.0
+offset_top = -14.0
+offset_right = 836.0
+offset_bottom = 100.0
+rotation = 1.57079
+texture_normal = ExtResource("34_mfdce")
+texture_pressed = ExtResource("34_mfdce")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="Label" parent="UI/ScreenUi/MarkerPlecement"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 45.0
+offset_right = 27.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.57079
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 34
+text = "M
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -692,6 +738,66 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="MapMarkerControls" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="YGas" parent="UI/MapMarkerControls" instance=ExtResource("43_6k4iy")]
+position = Vector2(218, 11)
+scale = Vector2(1, 1)
+
+[node name="XGas" parent="UI/MapMarkerControls" instance=ExtResource("43_6k4iy")]
+position = Vector2(-178, 12)
+scale = Vector2(1, 1)
+
+[node name="DroneButton" type="TextureButton" parent="UI/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.5
+offset_top = -56.0
+offset_right = 75.5
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("26_y7o3o")
+texture_pressed = ExtResource("27_x5hrs")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/MapMarkerControls/DroneButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -19.0
+offset_right = 36.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("28_8jvry")
+theme_override_font_sizes/font_size = 12
+text = "DrawLine"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="gui_input" from="CanvasLayer/SubViewportContainer" to="." method="_MAP_INPUT"]
 [connection signal="ShipAccelerating" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipStartedMoving"]
 [connection signal="ShipForceStopped" from="CanvasLayer/SubViewportContainer/SubViewport/PlayerShip" to="." method="ShipForcedStop"]
@@ -702,8 +808,12 @@ autowrap_mode = 2
 [connection signal="pressed" from="UI/ScreenUi/SimulationButton" to="." method="_on_simulation_button_pressed"]
 [connection signal="button_down" from="UI/ScreenUi/SpeedSimulation" to="." method="_on_speed_simulation_button_down"]
 [connection signal="button_up" from="UI/ScreenUi/SpeedSimulation" to="." method="_on_speed_simulation_button_up"]
+[connection signal="pressed" from="UI/ScreenUi/MarkerPlecement" to="." method="_on_marker_plecement_pressed"]
 [connection signal="pressed" from="UI/ScreenUi/LandButton" to="ShipController" method="_on_land_button_pressed"]
 [connection signal="pressed" from="UI/ScreenUi/DroneButton" to="UI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]
 [connection signal="pressed" from="UI/ScreenUi/MissileButton" to="UI/ScreenUi/Missile Tab" method="_on_toggle_drone_tab_pressed"]
 [connection signal="pressed" from="UI/ScreenUi/ControlledShipSwitch" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]
 [connection signal="pressed" from="UI/ScreenUi/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]
+[connection signal="RangeChanged" from="UI/MapMarkerControls/YGas" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_on_y_gas_range_changed"]
+[connection signal="RangeChanged" from="UI/MapMarkerControls/XGas" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_on_x_gas_range_changed"]
+[connection signal="pressed" from="UI/MapMarkerControls/DroneButton" to="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor" method="_on_drone_button_pressed"]

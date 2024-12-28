@@ -42,6 +42,7 @@ MapInfo=""
 UnmovableMapInfo=""
 Clock=""
 Missiles=""
+LineMarkers=""
 
 [input]
 
