@@ -109,7 +109,7 @@ func  _ready() -> void:
 		nextcity = cities.find(DestinationCity) + Direction
 	DestinationCity = cities[nextcity]
 	call_deferred("AimForCity")
-	MapPointerManager.GetInstance().AddShip(self, false)
+	#MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
 func AimForCity():

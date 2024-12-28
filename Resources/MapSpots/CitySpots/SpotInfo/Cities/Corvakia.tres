@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://dt51jwok5axck"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://dt51jwok5axck"]
 
-[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="1_5o6mw"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_7qkd6"]
 
 [resource]
@@ -8,5 +7,4 @@ script = ExtResource("1_7qkd6")
 SpotName = "Corvakia"
 EnemyCity = true
 HostilePatrolShipName = ""
-HostileShipScene = ExtResource("1_5o6mw")
-HostileShipName = "s"
+HostileShipName = ""

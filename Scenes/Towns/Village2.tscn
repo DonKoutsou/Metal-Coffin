@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://fh8lcmlyffxn" path="res://Assets/city7.png" id="3_jwmj6"]
 [ext_resource type="Script" path="res://Scripts/CitySpot.gd" id="4_1l0wk"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_12gji"]
-[ext_resource type="Resource" uid="uid://djaoab8knkpvx" path="res://Resources/MapSpots/CitySpots/VillageChora.tres" id="6_38gcv"]
+[ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Village.tres" id="6_8bk2d"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ve7mp"]
 blend_mode = 1
@@ -25,4 +25,4 @@ texture = ExtResource("3_jwmj6")
 [node name="CitySpot1" type="Node2D" parent="CitySpots"]
 position = Vector2(-2, -19)
 script = ExtResource("4_1l0wk")
-MapSpotTypes = Array[ExtResource("5_12gji")]([ExtResource("6_38gcv")])
+MapSpotTypes = Array[ExtResource("5_12gji")]([ExtResource("6_8bk2d")])

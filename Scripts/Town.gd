@@ -32,12 +32,12 @@ func GenerateCity() -> void:
 		sc.position = pos
 		g.replace_by(sc)
 		sc.SetSpotData(spottype)
-		if (spottype.GetEnumString() == "CITY_CENTER"):
-			centername = sc.SpotName + " City"
-		else : if (spottype.FullName == "Chora"):
-			centername = sc.SpotName
-		else :
-			sc.SpotName = spottype.FullName
+		#if (spottype.GetEnumString() == "CITY_CENTER"):
+			#centername = sc.SpotName + " City"
+		#else : if (spottype.FullName == "Village"):
+			#centername = sc.SpotName
+		#else :
+			#sc.SpotName = spottype.FullName
 		
 		
 		g.free()

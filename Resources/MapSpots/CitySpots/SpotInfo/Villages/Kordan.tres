@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_tkf35")
-SpotName = "Kiva"
+SpotName = "Kordan"
 EnemyCity = false
+HostilePatrolShipName = ""
 HostileShipName = ""

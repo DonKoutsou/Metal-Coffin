@@ -7,6 +7,7 @@ var SteeringDir : float = 0.0
 var previous_mouse_angle = 0.0
 
 signal SteeringDitChanged(NewValue : float)
+signal SteeringOffseted(Offset : float)
 
 var DistanceTraveled = 0
 
@@ -33,6 +34,7 @@ func _physics_process(_delta: float) -> void:
 	$TextureRect.rotation += SteeringDir
 	DistanceTraveled += abs(SteeringDir)
 	SteeringDir = lerp(SteeringDir, 0.0, 0.2)
+	SteeringOffseted.emit(SteeringDir)
 	SteeringDitChanged.emit($TextureRect.rotation)
 	if (abs(SteeringDir) < 0.001):
 		set_physics_process(false)

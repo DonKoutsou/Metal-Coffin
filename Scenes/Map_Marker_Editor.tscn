@@ -1,0 +1,155 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy41ui65qkhmb"]
+
+[ext_resource type="Script" path="res://Scenes/map_marker_editor.gd" id="1_8dwjq"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="2_4hcky"]
+[ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="3_bvmkg"]
+[ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="4_dwi7k"]
+[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="5_wrrqh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aurdw"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.61238e-06, 0.670085, 0.156774, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="MapMarkerEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8dwjq")
+LineColor = Color(0.762349, 0.274485, 0.16293, 1)
+
+[node name="YLine" type="Line2D" parent="."]
+position = Vector2(0, 213)
+points = PackedVector2Array(0, 0, 1152, 0)
+width = 2.0
+default_color = Color(1.61238e-06, 0.670085, 0.156774, 1)
+
+[node name="XLine" type="Line2D" parent="."]
+position = Vector2(366, 0)
+points = PackedVector2Array(0, 0, 0, 648)
+width = 2.0
+default_color = Color(1.61238e-06, 0.670085, 0.156774, 1)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 29.0
+pivot_offset = Vector2(11, 11)
+theme_override_styles/panel = SubResource("StyleBoxFlat_aurdw")
+
+[node name="DroneButton" type="TextureButton" parent="." groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.5
+offset_top = -56.0
+offset_right = 75.5
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_bvmkg")
+texture_pressed = ExtResource("4_dwi7k")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="DroneButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -19.0
+offset_right = 36.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("5_wrrqh")
+theme_override_font_sizes/font_size = 12
+text = "DrawLine"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TextButton" type="TextureButton" parent="." groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.5
+offset_top = -113.0
+offset_right = 75.5
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_bvmkg")
+texture_pressed = ExtResource("4_dwi7k")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -19.0
+offset_right = 36.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("5_wrrqh")
+theme_override_font_sizes/font_size = 12
+text = "PlaceMarker"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="YGas" parent="Control" instance=ExtResource("2_4hcky")]
+position = Vector2(218, 11)
+scale = Vector2(1, 1)
+
+[node name="XGas" parent="Control" instance=ExtResource("2_4hcky")]
+position = Vector2(-178, 12)
+scale = Vector2(1, 1)
+
+[connection signal="pressed" from="DroneButton" to="." method="_on_drone_button_pressed"]
+[connection signal="pressed" from="TextButton" to="." method="_on_drone_button_pressed"]
+[connection signal="RangeChanged" from="Control/YGas" to="." method="_on_y_gas_range_changed"]
+[connection signal="RangeChanged" from="Control/XGas" to="." method="_on_x_gas_range_changed"]

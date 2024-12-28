@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://cpwv1r0qllb0x"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_lrjfs"]
+
+[resource]
+script = ExtResource("1_lrjfs")
+SpotName = "Vitr"
+EnemyCity = true
+HostilePatrolShipName = ""
+HostileShipName = ""

@@ -52,7 +52,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.SetMarkerDetails("Flagship", "P",Ship.GetShipSpeed())
 	
 	if (Ship is HostileShip):
-		marker.ToggleFriendlyShipDetails(true)
+		#marker.ToggleFriendlyShipDetails(true)
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.ShipName, Ship.ShipCallsign ,Ship.GetShipSpeed())
 		marker.PlayHostileShipNotif()
@@ -148,7 +148,7 @@ func _physics_process(delta: float) -> void:
 			#Marker.UpdateSeenTime()
 			Marker.ToggleTimeLastSeend(false)
 			#Marker.ToggleThreat(true)
-			Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
+			#Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
 			Marker.UpdateTrajectory(ship.global_rotation)
 			#else :
 				#Marker.ToggleThreat(false)

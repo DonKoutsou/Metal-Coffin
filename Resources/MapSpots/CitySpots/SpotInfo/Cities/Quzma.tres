@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://b2xj3cft337xu"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_303nk"]
+
+[resource]
+script = ExtResource("2_303nk")
+SpotName = "Quzma"
+EnemyCity = true
+HostilePatrolShipName = ""
+HostileShipName = ""

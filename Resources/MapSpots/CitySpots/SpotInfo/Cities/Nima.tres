@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://et2b7y7bgmlq"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_lxwsx"]
+
+[resource]
+script = ExtResource("1_lxwsx")
+SpotName = "Nima"
+EnemyCity = true
+HostilePatrolShipName = ""
+HostileShipName = ""

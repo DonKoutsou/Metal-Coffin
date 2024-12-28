@@ -173,8 +173,6 @@ func _MAP_INPUT(event: InputEvent) -> void:
 #//////////////////////////////////////////////////////////
 #MAP GENERARION
 func GenerateMap() -> void:
-	#DECIDE ON PLECEMENT OF SPECIAL SPOTS
-	
 	#DECIDE ON PLECEMENT OF STATIONS
 	var CapitalCitySpots : Array[int] = []
 	for z in MapSize / 3:

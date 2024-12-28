@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=25 format=3 uid="uid://du24ilvkea51x"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=49 format=3 uid="uid://du24ilvkea51x"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_ig8qa"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_npnnf"]
@@ -23,10 +23,34 @@
 [ext_resource type="Resource" uid="uid://bgjt5dxvletq4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Saf.tres" id="16_kg810"]
 [ext_resource type="Resource" uid="uid://dx7f71dbu0e4l" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Trunka.tres" id="17_814d0"]
 [ext_resource type="Resource" uid="uid://dlbywka0hm43a" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Zarta.tres" id="18_afsen"]
+[ext_resource type="Resource" uid="uid://biv3ovn8vkcv2" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Fjorka.tres" id="19_sxhmp"]
+[ext_resource type="Resource" uid="uid://brjbdpjkgge8y" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Amarta.tres" id="20_1iex0"]
+[ext_resource type="Resource" uid="uid://it5tt0w0wspq" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Ikta.tres" id="21_hoeoy"]
+[ext_resource type="Resource" uid="uid://c6dh3pyx12srk" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Izamia.tres" id="22_70rm0"]
+[ext_resource type="Resource" uid="uid://d4mupgxh3rxa3" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Krasty.tres" id="23_ff2ip"]
+[ext_resource type="Resource" uid="uid://suyqy6nynjo0" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Makta.tres" id="24_4va3m"]
+[ext_resource type="Resource" uid="uid://et2b7y7bgmlq" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Nima.tres" id="24_bt0t3"]
+[ext_resource type="Resource" uid="uid://c5xopw26suysu" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Rotos.tres" id="25_famtp"]
+[ext_resource type="Resource" uid="uid://y637ffnqtrca" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Potlom.tres" id="26_4cwk1"]
+[ext_resource type="Resource" uid="uid://c6gcac2damco4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Tort.tres" id="27_8yqns"]
+[ext_resource type="Resource" uid="uid://cbyjupye1mn88" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Vorkla.tres" id="29_qgork"]
+[ext_resource type="Resource" uid="uid://dfh1fbmcu0ikm" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Yorka.tres" id="30_okb20"]
+[ext_resource type="Resource" uid="uid://6aofr7rhpq23" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Xiva.tres" id="31_vac3m"]
+[ext_resource type="Resource" uid="uid://w54vmrcnh51j" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Blanst.tres" id="32_1cfk8"]
+[ext_resource type="Resource" uid="uid://dj4dmbvqdeuiv" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Bosma.tres" id="32_eih60"]
+[ext_resource type="Resource" uid="uid://ypeef7vlfcl7" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Azimva.tres" id="33_k0fjb"]
+[ext_resource type="Resource" uid="uid://b7cfe1e6i2knc" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Histor.tres" id="34_4el3t"]
+[ext_resource type="Resource" uid="uid://8uwgyn4gvj1n" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Monpi.tres" id="36_3dmxa"]
+[ext_resource type="Resource" uid="uid://crqakca0ing2x" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Nordam.tres" id="36_aptn8"]
+[ext_resource type="Resource" uid="uid://b2xj3cft337xu" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Quzma.tres" id="37_ututg"]
+[ext_resource type="Resource" uid="uid://302wmg6u0ntr" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Poltra.tres" id="38_7fr85"]
+[ext_resource type="Resource" uid="uid://c8nx6yix2h6q1" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Rokta.tres" id="40_fd016"]
+[ext_resource type="Resource" uid="uid://cpwv1r0qllb0x" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Vitr.tres" id="41_2j024"]
+[ext_resource type="Resource" uid="uid://bxq7oeqflej2y" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Witra.tres" id="42_kf2x7"]
 
 [sub_resource type="Resource" id="Resource_m1q4d"]
 script = ExtResource("4_u8h8q")
-PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_ag8h5"), ExtResource("6_tqj8y"), ExtResource("7_ahngf"), ExtResource("8_mj5gy"), ExtResource("9_1qn8w"), ExtResource("5_f2xt1"), ExtResource("10_6n0um"), ExtResource("11_glwy5"), ExtResource("4_jl05r"), ExtResource("12_h17fg"), ExtResource("13_7rbke"), ExtResource("14_vaem1"), ExtResource("15_01qsy"), ExtResource("16_kg810"), ExtResource("17_814d0"), ExtResource("18_afsen")])
+PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("3_ag8h5"), ExtResource("6_tqj8y"), ExtResource("7_ahngf"), ExtResource("8_mj5gy"), ExtResource("9_1qn8w"), ExtResource("5_f2xt1"), ExtResource("10_6n0um"), ExtResource("11_glwy5"), ExtResource("4_jl05r"), ExtResource("12_h17fg"), ExtResource("13_7rbke"), ExtResource("14_vaem1"), ExtResource("15_01qsy"), ExtResource("16_kg810"), ExtResource("17_814d0"), ExtResource("18_afsen"), ExtResource("19_sxhmp"), ExtResource("20_1iex0"), ExtResource("21_hoeoy"), ExtResource("22_70rm0"), ExtResource("23_ff2ip"), ExtResource("24_bt0t3"), ExtResource("25_famtp"), ExtResource("24_4va3m"), ExtResource("27_8yqns"), ExtResource("26_4cwk1"), ExtResource("29_qgork"), ExtResource("30_okb20"), ExtResource("31_vac3m"), ExtResource("32_eih60"), ExtResource("32_1cfk8"), ExtResource("34_4el3t"), ExtResource("33_k0fjb"), ExtResource("36_aptn8"), ExtResource("37_ututg"), ExtResource("36_3dmxa"), ExtResource("38_7fr85"), ExtResource("40_fd016"), ExtResource("41_2j024"), ExtResource("42_kf2x7")])
 DataName = ""
 
 [resource]

@@ -5,5 +5,8 @@
 
 [resource]
 script = ExtResource("2_7slje")
-SpotName = "Cardi"
+SpotName = "Zarikada"
 Event = ExtResource("1_o88qn")
+EnemyCity = false
+HostilePatrolShipName = ""
+HostileShipName = ""
