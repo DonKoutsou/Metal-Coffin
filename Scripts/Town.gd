@@ -60,6 +60,14 @@ func GetSaveData() -> TownSaveData:
 		spotdata.append(spot.GetSaveData())
 	datas.Spots = spotdata
 	return datas
+
+#TODO get rid of cities, useless
+func GetCityName() -> String:
+	var CityName
+	for g in $CitySpots.get_children():
+		var cit = g as MapSpot
+		CityName = cit.SpotName
+	return CityName
 func LoadSaveData(Dat : TownSaveData) -> void:
 	position = Dat.TownLoc
 	rotation = Dat.TownRot

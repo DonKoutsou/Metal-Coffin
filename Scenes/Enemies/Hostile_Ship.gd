@@ -109,7 +109,7 @@ func  _ready() -> void:
 		nextcity = cities.find(DestinationCity) + Direction
 	DestinationCity = cities[nextcity]
 	call_deferred("AimForCity")
-	#MapPointerManager.GetInstance().AddShip(self, false)
+	MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
 func AimForCity():
@@ -307,4 +307,42 @@ func _on_elint_area_exited(area: Area2D) -> void:
 		return
 	ElintContacts.erase(area.get_parent())
 	ElintContact.emit(area.get_parent(), false)
+
+
+func find_path(start_city: String, end_city: String) -> Array:
+	#var cities = get_tree().get_nodes_in_group("EnemyDestinations")
+	var queue = []
+	var visited = {}
+	var parent = {}
 	
+	# Initialize the BFS
+	queue.append(start_city)
+	visited[start_city] = true
+	parent[start_city] = null
+	
+	# Perform the BFS
+	while queue.size() > 0:
+		var current_city = queue.pop_front()
+		
+		# If we reached the end_city, reconstruct the path
+		if current_city == end_city:
+			return reconstruct_path(parent, start_city, end_city)
+		
+		# Explore neighboring cities
+		for neighbor in GetCity(current_city).NeighboringCities:
+			if not visited.has(neighbor):
+				queue.append(neighbor)
+				visited[neighbor] = true
+				parent[neighbor] = current_city
+	
+	# If no path is found, return an empty array
+	return []
+func reconstruct_path(parent: Dictionary, start_city: String, end_city: String) -> Array:
+	var path = []
+	var current_city = end_city
+	while current_city != null:
+		path.append(current_city)
+		current_city = parent[current_city]
+		
+	path.reverse()  # Reverse the path to get it from start to end
+	return path

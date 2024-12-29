@@ -59,13 +59,13 @@ func _UpdateMapGridVisibility():
 		mtw.tween_property($"../MapLines", "modulate", Color(1,1,1,1), 0.5)
 		#$"../MapLines".visible = true
 		var tw = create_tween()
-		tw.tween_property($"../InScreenUI/Control3/Rulers", "modulate", Color(1,1,1,1), 0.5)
+		tw.tween_property($"../InScreenUI/Control3/DarkBlueBackground", "modulate", Color(1,1,1,1), 0.5)
 	else:
 		var tw = create_tween()
-		tw.tween_property($"../InScreenUI/Control3/Rulers", "modulate", Color(1,1,1,0), 0.5)
+		tw.tween_property($"../InScreenUI/Control3/DarkBlueBackground", "modulate", Color(1,1,1,0), 0.5)
 		var mtw = create_tween()
 		mtw.tween_property($"../MapLines", "modulate", Color(1,1,1,0), 0.5)
-	$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
+	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 
 func UpdateCameraPos(relativeMovement : Vector2):
 	var maxposY = 999999
@@ -83,7 +83,7 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		position.y = newpos.y
 		#var val2 = GalaxyMat.get_shader_parameter("thing2")
 		#GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 1800))
-	$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("pan_offset", position * zoom)
+	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("pan_offset", position * zoom)
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():

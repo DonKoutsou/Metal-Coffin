@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=52 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_5r2qd"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_3nbu5"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
 [ext_resource type="Script" path="res://Scripts/ship_controller.gd" id="12_e8tb5"]
-[ext_resource type="Shader" path="res://Shaders/GridMap.gdshader" id="12_ivvec"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ax28q"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_00g78"]
 [ext_resource type="Script" path="res://Scripts/EnemyAi/commander.gd" id="14_bfgu5"]
@@ -66,15 +65,6 @@ light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ms5"]
 bg_color = Color(0.0229965, 0.0616206, 0.0645667, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qkgl"]
-shader = ExtResource("12_ivvec")
-shader_parameter/grid_size = Vector2(50, 50)
-shader_parameter/line_color = Color(0.6, 0.545098, 0.321569, 0.215686)
-shader_parameter/line_thickness = 0.855
-shader_parameter/zoom = 1.0
-shader_parameter/pan_offset = Vector2(0, 0)
-shader_parameter/view_size = Vector2(100, 100)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qsdd3"]
 noise_type = 4
@@ -230,16 +220,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Rulers" type="Control" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Panel2" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Rulers"]
+[node name="DarkBlueBackground" type="Panel" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3"]
 material = SubResource("CanvasItemMaterial_0a4hg")
 layout_mode = 1
 anchors_preset = 15
@@ -249,17 +230,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
-
-[node name="Panel3" type="ColorRect" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Rulers"]
-visible = false
-z_as_relative = false
-material = SubResource("ShaderMaterial_4qkgl")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="SimulationNotification" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3" instance=ExtResource("25_ux7bi")]
 layout_mode = 1

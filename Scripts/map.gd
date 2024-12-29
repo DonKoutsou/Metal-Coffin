@@ -100,23 +100,7 @@ func GetMissileSaveData() -> SaveData:
 		Datas.append(mis.GetSaveData())
 	dat.Datas = Datas
 	return dat
-func _swap(arr: Array, i: int, j: int):
-	var tmp = arr[i]
-	arr[i] = arr[j]
-	arr[j] = tmp
 
-func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
-	return Vector2(randf_range(-5000, +5000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
-#TODO IMPROVE
-func HasClose(pos : Vector2) -> bool:
-	var b= false
-	for z in SpotList.size():
-		if (pos.distance_to(SpotList[z].position) < 800):
-			b = true
-			break
-	return b	
-
-		#GetPlayerShip().HaltShip()
 #CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
 func Arrival(_Spot : MapSpot)	-> void:
 	if (ShowingTutorial):
@@ -194,6 +178,9 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		camera_2d.UpdateCameraPos(event.relative)
 #//////////////////////////////////////////////////////////
+var Maplt : Thread
+var Roadt : Thread
+var Mut : Mutex
 #MAP GENERARION
 func GenerateMap() -> void:
 	#DECIDE ON PLECEMENT OF STATIONS
@@ -262,9 +249,6 @@ func GenerateMap() -> void:
 	#_DrawMapLines(["City Center", "Capital City Center"])
 	#_DrawMapLines(["City Center", "Capital City Center","Chora"], true, false)
 #ROAD GENERATION
-var Maplt : Thread
-var Roadt : Thread
-var Mut : Mutex
 func GenerateRoads() -> void:
 	var CityGroups = ["CITY_CENTER"]
 	var AllSpotGroups = ["CITY_CENTER", "VILLAGE"]
@@ -283,11 +267,30 @@ func GenerateRoads() -> void:
 		cityloc2.append(g.global_position)
 	Mut = Mutex.new()
 	Maplt = Thread.new()
-	Maplt.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines))
+	Maplt.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines, true))
 	Roadt = Thread.new()
-	Roadt.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/Roads, true, false))
-func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
+	Roadt.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/Roads, false, true, false))
+func GeneratePathsFromLines(Lines : Array):
+	var Cits = get_tree().get_nodes_in_group("CITY_CENTER")
+	for g in Cits:
+		var SpotPos = g.global_position
+		for z in Lines:
+			if (z.has(SpotPos)):
+				for v in Cits:
+					if (v == g):
+						continue
+					var SpotPos2 = v.global_position
+					if (z.has(SpotPos2)):
+						g.NeighboringCities.append(v.SpotName)
+						break
+	print(find_path("Amarta", "Blanst"))
+	print(find_path("Tsard", "Witra"))
+func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, GenerateNeighbors : bool, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
+	var time = Time.get_ticks_msec()
 	var lines = _prim_mst_optimized(SpotLocs)
+	if (GenerateNeighbors):
+		call_deferred("GeneratePathsFromLines", lines)
+	print("Figuring out lines took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 	var mat = CanvasItemMaterial.new()
 	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
 	var paintedlines : Array[Line2D]
@@ -322,6 +325,7 @@ func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, RandomiseLines : bo
 			l.add_point(point1 + offset)
 			Mut.unlock()
 		l.add_point(point2)
+
 	if (RandomiseLines):
 		call_deferred("RoadFinished")
 	else:
@@ -335,11 +339,6 @@ func RoadFinished() -> void:
 func MapLineFinished() -> void:
 	Maplt.wait_to_finish()
 	Maplt = null
-func _exit_tree() -> void:
-	if (Roadt != null):
-		Roadt.wait_to_finish()
-	if (Maplt != null):
-		Maplt.wait_to_finish()
 # Helper function: Push an element to the heap
 func _heap_push(heap: Array, element: Array):
 	heap.append(element)
@@ -350,6 +349,10 @@ func _heap_push(heap: Array, element: Array):
 			break
 		_swap(heap, i, parent)
 		i = parent
+func _swap(arr: Array, i: int, j: int):
+	var tmp = arr[i]
+	arr[i] = arr[j]
+	arr[j] = tmp
 # Helper function: Pop an element from the heap
 func _heap_pop(heap: Array) -> Array:
 	_swap(heap, 0, heap.size() - 1)
@@ -405,8 +408,21 @@ func _prim_mst_optimized(cities: Array) -> Array:
 					_heap_push(edge_min_heap, [new_distance, v, j])
 
 	return mst_edges
-func _on_missile_button_pressed() -> void:
-	PlayerShip.GetInstance().FireMissile()
+func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
+	return Vector2(randf_range(-5000, +5000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
+#TODO IMPROVE
+func HasClose(pos : Vector2) -> bool:
+	var b= false
+	for z in SpotList.size():
+		if (pos.distance_to(SpotList[z].position) < 800):
+			b = true
+			break
+	return b	
+func _exit_tree() -> void:
+	if (Roadt != null):
+		Roadt.wait_to_finish()
+	if (Maplt != null):
+		Maplt.wait_to_finish()
 #//////////////////////////////////////////////////////////
 #SIMULTATION
 var simmulationPaused = false
@@ -421,14 +437,14 @@ func _on_speed_simulation_button_down() -> void:
 func _on_speed_simulation_button_up() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
 
+func _on_missile_button_pressed() -> void:
+	PlayerShip.GetInstance().FireMissile()
 
 func _on_marker_plecement_pressed() -> void:
 	ToggleMapMarkerPlecement(true)
 
-
 func _on_exit_map_marker_pressed() -> void:
 	ToggleMapMarkerPlecement(false)
-
 
 func _on_clear_lines_pressed() -> void:
 	for g in $CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager/Lines.get_children():

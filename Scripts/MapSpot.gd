@@ -24,8 +24,8 @@ var HostilePatrolToSpawn : PackedScene
 var HostilePatrolName : String
 var HostileGarison : PackedScene
 var HostileGarisonName : String
-
-
+var NeighboringCities : Array[String]
+var Connected
 
 func _ready() -> void:
 	global_rotation = 0

@@ -52,7 +52,9 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.SetMarkerDetails("Flagship", "P",Ship.GetShipSpeed())
 	
 	if (Ship is HostileShip):
-		#marker.ToggleFriendlyShipDetails(true)
+		#HOSTILE_SHIP_DEBUG
+		marker.ToggleFriendlyShipDetails(true)
+		#////
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.ShipName, Ship.ShipCallsign ,Ship.GetShipSpeed())
 		marker.PlayHostileShipNotif()
@@ -140,20 +142,22 @@ func _physics_process(delta: float) -> void:
 		var ship = Ships[g]
 		var Marker = _ShipMarkers[g]
 		if (ship is HostileShip):
-			if (ship.VisibleBy.size() > 0):
-				Marker.global_position = ship.global_position
-				Marker.UpdateSpeed(ship.GetShipSpeed())
-				#if (ship.SeenShips()):
-					#Marker.UpdateThreatLevel(ship.VisibleBt[ship.VisibleBt.keys()[0]])
-				#Marker.UpdateSeenTime()
-				Marker.ToggleTimeLastSeend(false)
-				#Marker.ToggleThreat(true)
-				#Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
-				Marker.UpdateTrajectory(ship.global_rotation)
-			else :
-				#Marker.ToggleThreat(false)
-				Marker.ToggleTimeLastSeend(true)
-				Marker.UpdateTime()
+			#HOSTILE_SHIP_DEBUG
+			#if (ship.VisibleBy.size() > 0):
+			Marker.global_position = ship.global_position
+			Marker.UpdateSpeed(ship.GetShipSpeed())
+			
+			#if (ship.SeenShips()):
+				#Marker.UpdateThreatLevel(ship.VisibleBt[ship.VisibleBt.keys()[0]])
+			#Marker.UpdateSeenTime()
+			Marker.ToggleTimeLastSeend(false)
+			Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").CurrentVelue, ship.Cpt.GetStat("HULL").GetStat())
+			Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
+			Marker.UpdateTrajectory(ship.global_rotation)
+			#else :
+				##Marker.ToggleThreat(false)
+				#Marker.ToggleTimeLastSeend(true)
+				#Marker.UpdateTime()
 			
 		else:
 			if (ship is Drone):
