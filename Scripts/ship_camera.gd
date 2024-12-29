@@ -48,6 +48,7 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		zoom = clamp(start_zoom / zoom_factor, Vector2(0.1,0.1), Vector2(2.1,2.1))
 		for g in get_tree().get_nodes_in_group("MapLines"):
 			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
+		get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
 		_UpdateMapGridVisibility()
 	else:
 		UpdateCameraPos(event.relative)
