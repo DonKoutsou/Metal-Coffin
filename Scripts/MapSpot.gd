@@ -3,27 +3,20 @@ class_name MapSpot
 
 @export var FuelTradeScene : PackedScene
 @export var CityFuelReserves : float = 1000
+
 var PlayerFuelReserves : float = 0
 var PlayerRepairReserves : float = 0
-#signal SpotAnalazyed(PlayAnim : bool)
+
 signal SpotAproached(Type :MapSpotType)
 signal SpotLanded(Type : MapSpotType)
 
 var SpotType : MapSpotType
+var SpotInfo : MapSpotCompleteInfo
 var Pos : Vector2
 var Visited = false
 var Seen = false
-#var Analyzed = false
-var EnemyCity = false
 #bool to avoid sent drones colliding with current visited spot
 var CurrentlyVisiting = false
-var Evnt : Happening
-var SpotName : String
-var PossibleDrops : Array[Item]
-var HostilePatrolToSpawn : PackedScene
-var HostilePatrolName : String
-var HostileGarison : PackedScene
-var HostileGarisonName : String
 var NeighboringCities : Array[String]
 var Connected
 
@@ -33,32 +26,28 @@ func _ready() -> void:
 		position = Pos
 
 func SpawnEnemyPatrol():
-	var host = HostilePatrolToSpawn.instantiate() as HostileShip
+	var host = SpotInfo.HostilePatrolShipScene.instantiate() as HostileShip
 	host.DestinationCity = self
-	host.ShipName = HostilePatrolName
+	host.ShipName = SpotInfo.HostilePatrolShipName
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
 	
 func SpawnEnemyGarison():
-	var host = HostileGarison.instantiate() as HostileShip
+	var host = SpotInfo.HostileShipScene.instantiate() as HostileShip
 	#host.DestinationCity = self
-	host.ShipName = HostileGarisonName
+	host.ShipName = SpotInfo.HostileShipName
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
 	var datas = MapSpotSaveData.new().duplicate()
-	datas.SpotLoc = position
 	datas.SpotType = SpotType
+	datas.SpotLoc = position
 	datas.Seen = Seen
 	datas.Visited = Visited
-	#datas.Analyzed = Analyzed
-	datas.SpotName = SpotName
-	datas.Evnt = Evnt
-	datas.EnemyCity = EnemyCity
-	datas.PossibleDrops = PossibleDrops
 	datas.CityFuelReserves = CityFuelReserves
 	datas.PlayerFuelReserves = PlayerFuelReserves
+	datas.SpotInfo = SpotInfo
 	return datas
 
 func SetSpotData(Data : MapSpotType) -> void:
@@ -73,40 +62,39 @@ func SetSpotData(Data : MapSpotType) -> void:
 				for z in IDs.PossibleIds:
 					if (z.PickedBy != null):
 						continue
-					var spotid = z as MapSpotCompleteInfo
+					SpotInfo = z as MapSpotCompleteInfo
 					#if (ID.PickedBy != null):
 					#continue
-					SpotName = spotid.SpotName
-					Evnt = spotid.Event
-					EnemyCity = spotid.EnemyCity
+					#SpotName = spotid.SpotName
+					#Evnt = spotid.Event
+					#EnemyCity = spotid.EnemyCity
 					#SpawnHostileShip = spotid.SpawnHostileShip
-					PossibleDrops = spotid.PossibleDrops
-					HostilePatrolToSpawn = spotid.HostilePatrolShipScene
-					HostilePatrolName = spotid.HostilePatrolShipName
-					HostileGarison = spotid.HostileShipScene
-					HostileGarisonName = spotid.HostileShipName
-					if (spotid.EnemyCity):
+					#PossibleDrops = spotid.PossibleDrops
+					#HostilePatrolToSpawn = spotid.HostilePatrolShipScene
+					#HostilePatrolName = spotid.HostilePatrolShipName
+					#HostileGarison = spotid.HostileShipScene
+					#HostileGarisonName = spotid.HostileShipName
+					
+					if (SpotInfo.EnemyCity):
 						add_to_group("EnemyDestinations")
 					#IDs.PossibleIds.erase(ID)
-					spotid.PickedBy = self
+					SpotInfo.PickedBy = self
 					break
 				
 		
-	if (SpotType.VisibleOnStart):
+	if (Data.VisibleOnStart):
 		OnSpotSeen(false)
 		#OnSpotAnalyzed(false)
 
 	add_to_group(Data.GetSpotEnumString(Data.SpotK))
 func GetSpotName() -> String:
-	return SpotName
-func GetSpotDescriptio() -> String:
-	return SpotType.Description
+	return SpotInfo.SpotName
 func GetPossibleDrops() -> Array:
-	return PossibleDrops
+	return SpotInfo.PossibleDrops
 func HasFuel() -> bool:
 	var hasf = false
 	
-	for g in PossibleDrops:
+	for g in SpotInfo.PossibleDrops:
 		if g is UsableItem and g.StatUseName == "FUEL":
 			hasf = true
 			break
@@ -114,14 +102,14 @@ func HasFuel() -> bool:
 	return hasf
 func HasRepair() -> bool:
 	var hasf = false
-	for g in PossibleDrops:
+	for g in SpotInfo.PossibleDrops:
 		if g is UsableItem and g.StatUseName == "HULL":
 			hasf = true
 			break
 	return hasf
 func HasUpgrade() -> bool:
 	var hasu = false
-	for g in PossibleDrops:
+	for g in SpotInfo.PossibleDrops:
 		if g.ItemName == "Material":
 			hasu = true
 			break

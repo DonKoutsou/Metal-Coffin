@@ -281,10 +281,10 @@ func GeneratePathsFromLines(Lines : Array):
 						continue
 					var SpotPos2 = v.global_position
 					if (z.has(SpotPos2)):
-						g.NeighboringCities.append(v.SpotName)
+						g.NeighboringCities.append(v.SpotInfo.SpotName)
 						break
-	print(find_path("Amarta", "Blanst"))
-	print(find_path("Tsard", "Witra"))
+	#print(find_path("Amarta", "Blanst"))
+	#print(find_path("Tsard", "Witra"))
 func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, GenerateNeighbors : bool, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
 	var time = Time.get_ticks_msec()
 	var lines = _prim_mst_optimized(SpotLocs)

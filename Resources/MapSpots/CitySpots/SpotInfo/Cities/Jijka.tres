@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://d7rsc1j336wt"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_s22og"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_t26eo"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_obv2u"]
+
+[resource]
+script = ExtResource("3_obv2u")
+SpotName = "Jijka"
+EnemyCity = true
+HostilePatrolShipName = ""
+PossibleDrops = Array[ExtResource("1_s22og")]([ExtResource("2_t26eo")])
+HostileShipName = ""

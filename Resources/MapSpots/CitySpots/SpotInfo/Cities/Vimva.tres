@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://4oys7wvuy0lu"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_i864j"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_uxxmr"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_i77yh"]
+
+[resource]
+script = ExtResource("3_i77yh")
+SpotName = "Vimva"
+EnemyCity = true
+HostilePatrolShipName = ""
+PossibleDrops = Array[ExtResource("1_i864j")]([ExtResource("2_uxxmr")])
+HostileShipName = ""

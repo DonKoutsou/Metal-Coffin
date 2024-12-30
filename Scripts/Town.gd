@@ -45,9 +45,9 @@ func GenerateCity() -> void:
 func SpawnEnemies():
 	for g in $CitySpots.get_children() :
 		var spot = g as MapSpot
-		if (spot.HostilePatrolToSpawn != null):
+		if (spot.SpotInfo.HostilePatrolShipScene != null):
 			spot.SpawnEnemyPatrol()
-		if (spot.HostileGarison != null):
+		if (spot.SpotInfo.HostileShipScene != null):
 			spot.SpawnEnemyGarison()
 func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
@@ -75,20 +75,15 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		var spotdat = Dat.Spots[g] as MapSpotSaveData
 		var sc = SpotScene.instantiate() as MapSpot
 		sc.connect("SpotAproached", _TownSpotApreached)
-		#sc.connect("SpotSearched", TownSpotSearched)
-		#sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
 		sc.connect("SpotLanded", _TownSpotLanded)
-		var type = spotdat.SpotType
-		sc.SetSpotData(type)
+		
+		sc.SetSpotData(spotdat.SpotType)
 		
 		var spt = $CitySpots.get_child(g)
-		var sptpos = spt.position
 		spt.replace_by(sc)
-		sc.position = sptpos
-		sc.SpotName = spotdat.SpotName
-		sc.Evnt = spotdat.Evnt
-		sc.EnemyCity = spotdat.EnemyCity
-		sc.PossibleDrops = spotdat.PossibleDrops
+		
+		sc.position = spt.position
+		sc.SpotInfo = spt.SpotInfo
 		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
 		sc.CityFuelReserves = spotdat.CityFuelReserves
 		spt.free()

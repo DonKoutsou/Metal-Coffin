@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://bnh656pwdeyks"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_ahswc"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_os1ov"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_bo4jp"]
+
+[resource]
+script = ExtResource("3_bo4jp")
+SpotName = "Civo"
+EnemyCity = true
+HostilePatrolShipName = ""
+PossibleDrops = Array[ExtResource("1_ahswc")]([ExtResource("2_os1ov")])
+HostileShipName = ""

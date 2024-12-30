@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cphwc10ye3ddr"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_ps5ad"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_8yu52"]
+[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_qmjm8"]
+
+[resource]
+script = ExtResource("3_qmjm8")
+SpotName = "Gigila"
+EnemyCity = true
+HostilePatrolShipName = ""
+PossibleDrops = Array[ExtResource("1_ps5ad")]([ExtResource("2_8yu52")])
+HostileShipName = ""
