@@ -13,7 +13,9 @@ class_name HostileShip
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
 
-var DestinationCity : MapSpot
+#var DestinationCity : MapSpot
+var Path : Array = []
+var PathPart : int = 0
 var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
@@ -70,7 +72,7 @@ func GetCurrentDestination() -> Vector2:
 	else : if (RefuelSpot != null):
 		destination = RefuelSpot.global_position
 	else :
-		destination = DestinationCity.global_position
+		destination = GetCity(Path[PathPart]).global_position
 	return destination
 	
 func FindRefuelSpot() -> void:
@@ -85,7 +87,7 @@ func FindRefuelSpot() -> void:
 		if (spot == CurrentPort):
 			continue
 		RefuelSpot = spot
-		print(ShipName + " will take a detour through " + RefuelSpot.SpotName + " to refuel")
+		print(ShipName + " will take a detour through " + RefuelSpot.SpotInfo.SpotName + " to refuel")
 		return
 
 func  _ready() -> void:
@@ -103,18 +105,40 @@ func  _ready() -> void:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	if (!Patrol):
 		GetShipAcelerationNode().position.x = 0
-	var nextcity = cities.find(DestinationCity) + Direction
-	if (nextcity < 0 or nextcity > cities.size() - 1):
-		Direction *= -1
-		nextcity = cities.find(DestinationCity) + Direction
-	DestinationCity = cities[nextcity]
-	call_deferred("AimForCity")
+	else:
+		var nextcity = cities.find(CurrentPort) + Direction
+		if (nextcity < 0 or nextcity > cities.size() - 1):
+			Direction *= -1
+			nextcity = cities.find(CurrentPort) + Direction
+		
+		#If path is full it means we are loading so skip path generation
+		if (Path.size() == 0):
+			if (CurrentPort.NeighboringCities.size() == 0):
+				set_physics_process(false)
+				await Map.GetInstance().MAP_NeighborsSet
+				set_physics_process(true)
+			Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
+			if (Path.size() == 0):
+				Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
+			PathPart = 1
+		call_deferred("AimForCity")
+	
 	MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
-func AimForCity():
-	ShipLookAt(DestinationCity.global_position)
 	
+
+func SetNewDestination(DistName : String) -> void:
+	Path = find_path(CurrentPort.GetSpotName(), DistName)
+	PathPart = 1
+	AimForCity()
+
+func AimForCity():
+	ShipLookAt(GetCity(Path[PathPart]).global_position)
+
+func GetShipName() -> String:
+	return ShipName
+
 func GetShipMaxSpeed() -> float:
 	return Cpt.GetStatValue("SPEED")
 	
@@ -157,7 +181,6 @@ func _physics_process(delta: float) -> void:
 		Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
 		if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
 			GetShipAcelerationNode().position.x = Cpt.GetStat("SPEED").GetStat()
-			
 		else :
 			return
 	if (!CanReachDestination()):
@@ -234,15 +257,22 @@ func OnShipUnseen(UnSeenBy : Node2D):
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if (area.get_parent() == DestinationCity and Patrol):
-		OnDestinationReached.emit(self)
-		CurrentPort = DestinationCity
-		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
-			GetShipAcelerationNode().position.x = 0
-	if (area.get_parent() == RefuelSpot and Patrol):
-		CurrentPort = RefuelSpot
-		RefuelSpot = null
-		ShipLookAt(DestinationCity.global_position)
+	if (area.get_parent() is MapSpot):
+		var spot = area.get_parent() as MapSpot
+		if (Path.has(spot.GetSpotName()) and Patrol):
+			CurrentPort = spot
+			PathPart = Path.find(spot.GetSpotName())
+			if (PathPart == Path.size() - 1):
+				OnDestinationReached.emit(self)
+			else :
+				ShipLookAt(GetCity(Path[PathPart + 1]).global_position)
+			CurrentPort = GetCity(Path[Path.size() - 1])
+			if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
+				GetShipAcelerationNode().position.x = 0
+		if (area.get_parent() == RefuelSpot and Patrol):
+			CurrentPort = RefuelSpot
+			RefuelSpot = null
+			ShipLookAt(GetCurrentDestination())
 		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
 			GetShipAcelerationNode().position.x = 0
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
@@ -280,8 +310,10 @@ func _on_area_exited(area: Area2D) -> void:
 
 func GetSaveData() -> SD_HostileShip:
 	var dat = SD_HostileShip.new()
-	if (DestinationCity != null):
-		dat.DestinationCityName = DestinationCity.GetSpotName()
+	#if (DestinationCity != null):
+		#dat.DestinationCityName = DestinationCity.GetSpotName()
+	dat.Path = Path
+	dat.PathPart = PathPart
 	dat.Direction = Direction
 	dat.LastKnownPosition = LastKnownPosition
 	dat.Position = global_position
@@ -290,10 +322,12 @@ func GetSaveData() -> SD_HostileShip:
 	dat.ShipName = ShipName
 	return dat
 func LoadSaveData(Dat : SD_HostileShip) -> void:
-	DestinationCity = GetCity(Dat.DestinationCityName)
+	#DestinationCity = GetCity(Dat.DestinationCityName)
+	Path = Dat.Path
+	PathPart = Dat.PathPart
 	Direction = Dat.Direction
 	LastKnownPosition = Dat.LastKnownPosition
-	global_position = Dat.Position
+	#global_position = Dat.Position
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
 func _on_elint_area_entered(area: Area2D) -> void:
@@ -329,13 +363,17 @@ func find_path(start_city: String, end_city: String) -> Array:
 			return reconstruct_path(parent, start_city, end_city)
 		
 		# Explore neighboring cities
-		for neighbor in GetCity(current_city).NeighboringCities:
+		var Cit = GetCity(current_city)
+		if (Cit.NeighboringCities.size() == 0):
+			printerr(Cit.GetSpotName + " has no neighboring cities. Seems sus.")
+		for neighbor in Cit.NeighboringCities:
 			if not visited.has(neighbor):
 				queue.append(neighbor)
 				visited[neighbor] = true
 				parent[neighbor] = current_city
 	
 	# If no path is found, return an empty array
+	print(GetShipName() + " has failed to find a path from " + start_city + " to " + end_city)
 	return []
 func reconstruct_path(parent: Dictionary, start_city: String, end_city: String) -> Array:
 	var path = []

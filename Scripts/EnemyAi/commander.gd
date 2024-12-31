@@ -88,7 +88,7 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 			for z in g.Receivers:
 				z.disconnect("OnPositionInvestigated", InvestigationOrderComplete)
 				z.LastKnownPosition = Vector2.ZERO
-				z.ShipLookAt(z.DestinationCity.global_position)
+				z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
 			print("Position : " + var_to_str(Pos) + "has been investigated.")
@@ -148,13 +148,13 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 
 func OnDestinationReached(Ship : HostileShip) -> void:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-	var nextcity = cities.find(Ship.DestinationCity) + Ship.Direction
+	var nextcity = cities.find(Ship.CurrentPort) + Ship.Direction
 	if (nextcity < 0 or nextcity > cities.size() - 1):
 		Ship.Direction *= -1
-		nextcity = cities.find(Ship.DestinationCity) + Ship.Direction
-	print(Ship.ShipName + " has reached " + Ship.DestinationCity.SpotName + "|| Rerouting ship towards " + cities[nextcity].SpotName)
-	Ship.DestinationCity = cities[nextcity]
-	Ship.ShipLookAt(Ship.DestinationCity.global_position)
+		nextcity = cities.find(Ship.CurrentPort) + Ship.Direction
+	print(Ship.ShipName + " has reached " + Ship.CurrentPort.SpotInfo.SpotName + "|| Rerouting ship towards " + cities[nextcity].SpotInfo.SpotName)
+	Ship.SetNewDestination(cities[nextcity].GetSpotName())
+	#Ship.ShipLookAt(Ship.DestinationCity.global_position)
 
 func OnElintHit(Ship : MapShip ,t : bool) -> void:
 	if (t):

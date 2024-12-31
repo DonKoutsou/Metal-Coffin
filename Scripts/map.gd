@@ -12,13 +12,20 @@ class_name Map
 
 #signal MAP_AsteroidBeltArrival(Size : int)
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
+signal MAP_NeighborsSet
 #signal MAP_StageSearched(Spt : MapSpotType)
 #signal MAP_ShipSearched(Ship : BaseShip)
 
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
+static var Instance : Map
+
+static func GetInstance() -> Map:
+	return Instance
+
 func _ready() -> void:
+	Instance = self
 	# spotlist empty means we are not loading and starting new game
 	GetMapMarkerEditor().visible = false
 	$UI/MapMarkerControls.visible = false
@@ -67,8 +74,9 @@ func GetPlayerShip() -> PlayerShip:
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
-		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
 		ship.LoadSaveData(g)
+		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
+		ship.global_position = g.Position
 func RespawnMissiles(MissileData : Array[Resource]) -> void:
 	for g in MissileData:
 		var dat = g as MissileSaveData
@@ -274,15 +282,20 @@ func GeneratePathsFromLines(Lines : Array):
 	var Cits = get_tree().get_nodes_in_group("CITY_CENTER")
 	for g in Cits:
 		var SpotPos = g.global_position
-		for z in Lines:
-			if (z.has(SpotPos)):
+		var Neighbors : Array[String] = []
+		for Line in Lines:
+			if (Line.has(SpotPos)):
 				for v in Cits:
 					if (v == g):
 						continue
+					if (Neighbors.has(v)):
+						continue
 					var SpotPos2 = v.global_position
-					if (z.has(SpotPos2)):
-						g.NeighboringCities.append(v.SpotInfo.SpotName)
+					if (Line.has(SpotPos2)):
+						Neighbors.append(v.SpotInfo.SpotName)
 						break
+		g.SetNeighbord(Neighbors)
+	MAP_NeighborsSet.emit()
 	#print(find_path("Amarta", "Blanst"))
 	#print(find_path("Tsard", "Witra"))
 func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, GenerateNeighbors : bool, RandomiseLines : bool = false, Unshaded : bool = true) -> void:

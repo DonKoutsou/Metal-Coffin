@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_x4ha5")
-SpotName = "Hitra"
+SpotName = "Gidow"
 EnemyCity = true
 HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("1_kr1sd")]([])

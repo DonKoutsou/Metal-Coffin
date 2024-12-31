@@ -83,7 +83,7 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		spt.replace_by(sc)
 		
 		sc.position = spt.position
-		sc.SpotInfo = spt.SpotInfo
+		sc.SpotInfo = spotdat.SpotInfo
 		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
 		sc.CityFuelReserves = spotdat.CityFuelReserves
 		spt.free()

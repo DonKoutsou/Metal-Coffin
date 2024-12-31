@@ -4,9 +4,9 @@ class_name ShipStat
 @export var StatName : String
 @export var StatMax : float
 @export var StatBase : float
-var StatShipBuff : float = 0
-var StatItemBuff : float = 0
-var CurrentVelue : float = 0
+@export var StatShipBuff : float = 0
+@export var StatItemBuff : float = 0
+@export var CurrentVelue : float = 0
 @export var AllowAutoRefil : bool = false
 
 func GetBaseStat()-> float:

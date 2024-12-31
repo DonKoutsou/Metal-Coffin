@@ -8,16 +8,12 @@
 light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
-bg_color = Color(0.161404, 0.19644, 0.24227, 1)
-draw_center = false
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 corner_detail = 6
 anti_aliasing = false
 
@@ -280,10 +276,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -34.0
-offset_top = -34.0
-offset_right = 34.0
-offset_bottom = 34.0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

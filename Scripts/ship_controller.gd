@@ -16,7 +16,7 @@ func _ready() -> void:
 	ControlledShip.connect("OnShipDestroyed", _on_controlled_ship_swtich_range_changed)
 	AvailableShips.append(ControlledShip)
 	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
-
+	
 func OnDroneDocked(D : Drone) -> void:
 	AvailableShips.erase(D)
 	D.disconnect("OnShipDestroyed", OnShipDestroyed)

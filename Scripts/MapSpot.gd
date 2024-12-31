@@ -25,16 +25,20 @@ func _ready() -> void:
 	if (Pos != Vector2.ZERO):
 		position = Pos
 
+func SetNeighbord(N : Array) -> void:
+	NeighboringCities = N
+	print(GetSpotName() + " get their neighbors || " + var_to_str(NeighboringCities))
+	
 func SpawnEnemyPatrol():
 	var host = SpotInfo.HostilePatrolShipScene.instantiate() as HostileShip
-	host.DestinationCity = self
+	host.CurrentPort = self
 	host.ShipName = SpotInfo.HostilePatrolShipName
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
 	
 func SpawnEnemyGarison():
 	var host = SpotInfo.HostileShipScene.instantiate() as HostileShip
-	#host.DestinationCity = self
+	host.CurrentPort = self
 	host.ShipName = SpotInfo.HostileShipName
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
