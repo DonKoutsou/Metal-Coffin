@@ -85,10 +85,10 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float)
 
 func Land(Spot : MapSpot) -> bool:
 	var PlayedEvent = false
-	if (Spot.Evnt != null and !Spot.Visited):
+	if (Spot.SpotInfo.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
-		happeningui.PresentHappening(Spot.Evnt)
+		happeningui.PresentHappening(Spot.SpotInfo.Event)
 		PlayedEvent = true
 	Spot.OnSpotVisited()
 	return PlayedEvent

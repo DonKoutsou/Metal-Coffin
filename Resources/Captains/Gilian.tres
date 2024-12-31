@@ -10,6 +10,9 @@ script = ExtResource("2_mq2gw")
 StatName = "SPEED"
 StatMax = 3.0
 StatBase = 0.5
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_ebi2g"]
@@ -17,6 +20,9 @@ script = ExtResource("2_mq2gw")
 StatName = "RADAR_RANGE"
 StatMax = 300.0
 StatBase = 150.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_owwtk"]
@@ -24,6 +30,9 @@ script = ExtResource("2_mq2gw")
 StatName = "INVENTORY_CAPACITY"
 StatMax = 3.0
 StatBase = 3.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_5chah"]
@@ -31,6 +40,9 @@ script = ExtResource("2_mq2gw")
 StatName = "FIREPOWER"
 StatMax = 10.0
 StatBase = 10.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_4qmer"]
@@ -38,6 +50,9 @@ script = ExtResource("2_mq2gw")
 StatName = "HULL"
 StatMax = 300.0
 StatBase = 100.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_i1lsy"]
@@ -45,6 +60,9 @@ script = ExtResource("2_mq2gw")
 StatName = "FUEL_EFFICIENCY"
 StatMax = 5.0
 StatBase = 3.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_fpklk"]
@@ -52,6 +70,9 @@ script = ExtResource("2_mq2gw")
 StatName = "FUEL_TANK"
 StatMax = 500.0
 StatBase = 150.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_g0xbp"]
@@ -59,6 +80,9 @@ script = ExtResource("2_mq2gw")
 StatName = "ELINT"
 StatMax = 3000.0
 StatBase = 0.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [resource]

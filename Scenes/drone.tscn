@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=19 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
 [ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="6_x7c6h"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="8_bbjow"]
+[ext_resource type="PackedScene" uid="uid://bpdjsljrku63t" path="res://Scenes/cloudring.tscn" id="9_rm2bs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ewj1d"]
 blend_mode = 1
@@ -110,7 +111,7 @@ bus = &"Engine"
 energy = 0.25
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
-texture_scale = 2.0
+texture_scale = 4.0
 height = 500.0
 
 [node name="Elint" type="Area2D" parent="."]
@@ -146,6 +147,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("9_rm2bs")]
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_ship_body_area_entered"]
 [connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]
