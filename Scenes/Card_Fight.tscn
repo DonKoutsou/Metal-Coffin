@@ -1,27 +1,68 @@
-[gd_scene load_steps=4 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=16 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" path="res://Scripts/CardFight.gd" id="1_defjt"]
-[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card.tscn" id="2_5q24q"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_mhnyb"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
+[ext_resource type="Script" path="res://Scripts/CardStats.gd" id="3_3dpfm"]
+[ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_5p8hw"]
+[ext_resource type="Texture2D" uid="uid://ce1u7jwrtjhcy" path="res://Assets/fire-extinguisher.png" id="4_kkenf"]
 [ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="4_lojl1"]
+[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="5_mmrnh"]
+[ext_resource type="Texture2D" uid="uid://deebf2ubnl2nc" path="res://Assets/avoidance.png" id="6_e7eej"]
+[ext_resource type="Texture2D" uid="uid://bohrip6avkdjp" path="res://Assets/hydra-shot.png" id="7_jkgha"]
+[ext_resource type="Theme" uid="uid://v4mw3n57sksp" path="res://Theme/Bar.tres" id="11_a65yd"]
 
-[node name="CardFight" type="Control"]
-layout_mode = 3
+[sub_resource type="Resource" id="Resource_sv1rr"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("4_kkenf")
+CardName = "Extinguish fires"
+CardDescription = "Extinguishes fires on ship"
+Energy = 2
+Options = Array[String]([])
+Offensive = false
+
+[sub_resource type="Resource" id="Resource_vi5ka"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("5_mmrnh")
+CardName = "Missile"
+CardDescription = "Throws a missile to enemy."
+Energy = 2
+Options = Array[String]([])
+Offensive = true
+
+[sub_resource type="Resource" id="Resource_rk6fc"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("6_e7eej")
+CardName = "Evasive Maneuvers"
+CardDescription = "Avoid an incomming barragge"
+Energy = 1
+Options = Array[String]([])
+Offensive = false
+
+[sub_resource type="Resource" id="Resource_wkm8m"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("7_jkgha")
+CardName = "Barragge"
+CardDescription = "Throws a barragge on the enemy ship"
+Energy = 1
+Options = Array[String](["Normal", "AP", "Fire"])
+Offensive = true
+
+[node name="CardFight" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_mhnyb")
 script = ExtResource("1_defjt")
 CardScene = ExtResource("2_5q24q")
+ShipVizScene = ExtResource("3_5p8hw")
+Cards = Array[ExtResource("3_3dpfm")]([SubResource("Resource_sv1rr"), SubResource("Resource_vi5ka"), SubResource("Resource_rk6fc"), SubResource("Resource_wkm8m")])
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 alignment = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer4"]
@@ -46,7 +87,7 @@ text = "Selected Cards"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
+[node name="SelectedCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
@@ -69,7 +110,7 @@ text = "Offensive"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Offensive"]
+[node name="OffensiveCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Offensive"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
@@ -86,7 +127,7 @@ text = "Deffensive"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Deffensive"]
+[node name="DeffensiveCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Deffensive"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
@@ -95,10 +136,22 @@ alignment = 1
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
+theme = ExtResource("11_a65yd")
 max_value = 4.0
 step = 1.0
 value = 3.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1/4"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer4"]
 layout_mode = 2

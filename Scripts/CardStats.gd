@@ -1,8 +1,9 @@
 extends Resource
 class_name CardStats
 
-var Icon : Texture
-var CardName : String
-var CardDescription : String
-var Energy : int
-var Options : Array[String]
+@export var Icon : Texture
+@export var CardName : String
+@export var CardDescription : String
+@export var Energy : int
+@export var Options : Array[String]
+@export var Offensive : bool

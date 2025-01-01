@@ -1,8 +1,16 @@
-extends Node
+extends PanelContainer
 
 class_name Card_Fight
 
 @export var CardScene : PackedScene
+@export var ShipVizScene : PackedScene
+@export var Cards : Array[CardStats]
+
+@onready var offensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/Offensive/OffensiveCardPlecements
+@onready var deffensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/Deffensive/DeffensiveCardPlecements
+@onready var selected_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/HBoxContainer2/SelectedCardPlecements
+
+var Energy : int = 4
 
 var ShipTurns : Array[BattleShipStats]
 
@@ -17,14 +25,14 @@ func _ready() -> void:
 	for g in 3:
 		EnemyShips.append(GenerateRandomisedShip())
 	for g in PlayerShips:
-		AddShipIcon(g.ShipIcon, true)
+		AddShip(g, true)
 	for g in EnemyShips:
-		AddShipIcon(g.ShipIcon, false)
+		AddShip(g, false)
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
 	ShipTurns.sort_custom(speed_comparator)
 	print("init done")
-
+	UpdateCards(ShipTurns[0])
 #function to sort battle ships based on their speed
 static func speed_comparator(a, b):
 	if a.Speed > b.Speed:
@@ -33,16 +41,14 @@ static func speed_comparator(a, b):
 		return false  # 1 means 'b' should appear before 'a'
 	return true
 	
-func AddShipIcon(Ic : Texture, Friendly : bool) -> void:
-	var t = TextureRect.new()
-	t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	t.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-	t.texture = Ic
+func AddShip(BattleS : BattleShipStats, Friendly : bool) -> void:
+	var t = ShipVizScene.instantiate() as CardFightShipViz
+	t.SetStats(BattleS, Friendly)
 	if (Friendly):
 		$VBoxContainer4/VBoxContainer.add_child(t)
 	else :
 		$VBoxContainer4/VBoxContainer2.add_child(t)
-		t.flip_v = true
+		
 
 func GenerateRandomisedShip() -> BattleShipStats:
 	var Stats = BattleShipStats.new()
@@ -54,11 +60,36 @@ func GenerateRandomisedShip() -> BattleShipStats:
 	return Stats
 
 func UpdateCards(Ship : BattleShipStats) -> void:
-	#missile
-	var card = CardScene.instantiate() as Card
-	var CStats = CardStats.new()
-	CStats.CardName = "Missile"
-	CStats.Energy = 1
-	CStats.Icon = load("res://Assets/Items/rocket.png")
-	card.SetCardStats(CStats)
-	
+	for g in offensive_card_plecements.get_children():
+		g.queue_free()
+	for g in deffensive_card_plecements.get_children():
+		g.queue_free()
+	Energy = 4
+	UpdateEnergy()
+	for g in Cards:
+		var c = CardScene.instantiate() as Card
+		c.SetCardStats(g)
+		c.connect("OnCardPressed", OnCardSelected)
+		if (g.Offensive):
+			offensive_card_plecements.add_child(c)
+		else :
+			deffensive_card_plecements.add_child(c)
+
+func OnCardSelected(C : Card) -> void:
+	if (Energy < C.Cost):
+		return
+	Energy -= C.Cost
+	UpdateEnergy()
+	var c = CardScene.instantiate() as Card
+	c.SetCardStats(C.CStats)
+	c.connect("OnCardPressed", RemoveCard)
+	selected_card_plecements.add_child(c)
+
+func RemoveCard(C : Card) -> void:
+	C.queue_free()
+	Energy += C.Cost
+	UpdateEnergy()
+
+func UpdateEnergy() -> void:
+	$VBoxContainer4/VBoxContainer4/ProgressBar.value = Energy
+	$VBoxContainer4/VBoxContainer4/ProgressBar/Label.text = var_to_str(Energy) + " / 4"

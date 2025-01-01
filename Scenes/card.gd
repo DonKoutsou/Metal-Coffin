@@ -4,6 +4,12 @@ class_name Card
 
 signal OnCardPressed(C : Card)
 
+var CStats : CardStats
+
+var Option : String
+
+var Cost : int
+
 func _ready() -> void:
 	$PanelContainer.visible = false
 	#var st = CardStats.new()
@@ -14,10 +20,12 @@ func _ready() -> void:
 	#SetCardStats(st)
 
 func SetCardStats(Stats : CardStats) -> void:
+	CStats = Stats
 	$VBoxContainer/CardName.text = Stats.CardName
 	$VBoxContainer/CardIcon.texture = Stats.Icon
 	$VBoxContainer/CardDesc.text = Stats.CardDescription
 	$VBoxContainer/CardCost.text = var_to_str(Stats.Energy)
+	Cost = Stats.Energy
 	for g in Stats.Options:
 		var OptionBut = Button.new()
 		OptionBut.text = g
@@ -31,5 +39,7 @@ func OnButtonPressed() -> void:
 		OnCardPressed.emit(self)
 
 func OnOptionSelected() -> void:
+	var but = get_viewport().gui_get_focus_owner() as Button
+	Option = but.text
 	$PanelContainer.visible = false
 	OnCardPressed.emit(self)
