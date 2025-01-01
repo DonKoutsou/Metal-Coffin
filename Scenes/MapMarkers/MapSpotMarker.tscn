@@ -2,19 +2,22 @@
 
 [ext_resource type="Script" path="res://Scripts/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
-[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="3_p38gw"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q03p8"]
-light_mode = 1
+[ext_resource type="FontFile" uid="uid://cn7w3x8fi0o58" path="res://Fonts/Play-Regular.ttf" id="3_p38gw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-corner_detail = 6
+corner_radius_top_left = 45
+corner_radius_top_right = 45
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 45
+corner_detail = 10
+shadow_size = 10
 anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_pxthd"]
@@ -250,6 +253,14 @@ anti_aliasing = false
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bwde2"]
 light_mode = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldbeq"]
+bg_color = Color(0.158472, 0.158472, 0.158472, 0.760784)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_size = 4
+
 [node name="SpotMarker" type="Control"]
 use_parent_material = true
 layout_mode = 3
@@ -271,7 +282,7 @@ NofiticationScene = ExtResource("2_b0564")
 [node name="AnalyzeButton" type="Panel" parent="."]
 show_behind_parent = true
 texture_filter = 4
-material = SubResource("CanvasItemMaterial_q03p8")
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -284,6 +295,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gjj15")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -343,6 +368,7 @@ size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_p38gw")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ldbeq")
 text = "Curdawa"
 horizontal_alignment = 1
 vertical_alignment = 2

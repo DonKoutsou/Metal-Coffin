@@ -288,7 +288,7 @@ func GeneratePathsFromLines(Lines : Array):
 				for v in Cits:
 					if (v == g):
 						continue
-					if (Neighbors.has(v)):
+					if (Neighbors.has(v.SpotInfo.SpotName)):
 						continue
 					var SpotPos2 = v.global_position
 					if (Line.has(SpotPos2)):

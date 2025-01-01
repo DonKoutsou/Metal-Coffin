@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="1_gnsfh"]
 
 [sub_resource type="Gradient" id="Gradient_itxm5"]
-offsets = PackedFloat32Array(0, 0.0841284, 0.535993, 0.960104, 1)
-colors = PackedColorArray(0.958, 0.958, 0.958, 0, 0.998573, 0.998573, 0.998573, 0.966019, 1, 1, 1, 1, 1, 1, 1, 0.964486, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.315, 0.535993, 0.775, 1)
+colors = PackedColorArray(0.958, 0.958, 0.958, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gsb7r"]
 gradient = SubResource("Gradient_itxm5")
@@ -18,8 +18,9 @@ point_count = 1
 curve = SubResource("Curve_1cx2g")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ooyv3"]
+particle_flag_rotate_y = true
 particle_flag_disable_z = true
-emission_shape_offset = Vector3(-100, 0, 0)
+particle_flag_damping_as_friction = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
@@ -34,22 +35,25 @@ initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
 tangential_accel_min = 0.0299978
 tangential_accel_max = 0.709998
+damping_min = 30.909
+damping_max = 100.0
 color_ramp = SubResource("GradientTexture1D_gsb7r")
 emission_curve = SubResource("CurveTexture_ejgp5")
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
+collision_mode = 2
 collision_use_scale = true
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvtr6"]
-cull_mode = 1
-polygon = PackedVector2Array(-6, -6, 4, -6, 3, 5, -6, 6)
+polygon = PackedVector2Array(0, -95, 77, -77, 95, 0, 77, 77, 0, 95, -77, 77, -95, 0, -77, -77)
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
+process_mode = 3
+z_as_relative = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_ooyv3")
 texture = ExtResource("1_gnsfh")
-lifetime = 12.0
+preprocess = 5.0
+randomness = 0.62
+draw_order = 0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(1, -2)

@@ -109,6 +109,7 @@ bus = &"Engine"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.25
+blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
 texture_scale = 4.0
