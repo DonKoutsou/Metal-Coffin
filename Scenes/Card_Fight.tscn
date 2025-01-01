@@ -1,0 +1,105 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg4oh7r4qnxy8"]
+
+[ext_resource type="Script" path="res://Scripts/CardFight.gd" id="1_defjt"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card.tscn" id="2_5q24q"]
+[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="4_lojl1"]
+
+[node name="CardFight" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_defjt")
+CardScene = ExtResource("2_5q24q")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer4"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_lojl1")
+text = "Selected Cards"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="VBoxContainer3" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Offensive" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Offensive"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_lojl1")
+theme_override_font_sizes/font_size = 20
+text = "Offensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Offensive"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Deffensive" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Deffensive"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_lojl1")
+theme_override_font_sizes/font_size = 20
+text = "Deffensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3/Deffensive"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer4/VBoxContainer4"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+max_value = 4.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer4"]
+layout_mode = 2
+alignment = 1

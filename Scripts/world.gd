@@ -3,9 +3,6 @@ class_name World
 
 @export var ShipDat : ShipData
 
-#@export var TraveMinigameScene :PackedScene
-#@export var BattleScene : PackedScene
-#@export var ExplorationScene : PackedScene
 @export var StartingShip : BaseShip
 @export var ShipTradeScene : PackedScene
 @export var DogfightScene : PackedScene
@@ -15,7 +12,7 @@ var CurrentShip : BaseShip
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 
-signal WRLD_OnGameEnded()
+signal WRLD_OnGameEnded
 signal WRLD_StatsUpdated(StatN : String)
 signal WRLD_StatGotLow(StatN : String)
 
@@ -182,21 +179,6 @@ func Pause() -> void:
 	get_tree().paused = !paused
 	$Ingame_UIManager/PauseContainer.visible = !paused
 
-
-#func StartFight(PossibleReward : Array[Item]) -> void:
-	#var BScene = BattleScene.instantiate() as Battle
-	#BScene.SupplyReward = PossibleReward
-	#BScene.PlayerHp = ShipDat.HP
-	#$Ingame_UIManager.add_child(BScene)
-	#BScene.connect("OnBattleEnded", FightEnded)
-	#
-#func FightEnded(Resault : bool, RemainingHP : int, SupplyRew : Array[Item]) -> void:
-	#ShipDat.HP = RemainingHP
-	#if (Resault):
-		#GetInventory().AddItems(SupplyRew)
-		#ShipDat.SetStatValue("HP", RemainingHP)
-	#else :
-		#GameLost("You have died")
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[Node2D]
 var FighingEnemyUnits : Array[Node2D]
@@ -238,88 +220,8 @@ func DogFightEnded(Survivors : Array[BattleShipStats]) -> void:
 		MapPointerManager.GetInstance().RemoveShip(g)
 		g.free()
 	SimulationManager.GetInstance().TogglePause(false)
-#Exploration---------------------------------------------
-#func StartExploration(Spot : MapSpot) -> void:
-	#var Escene = ExplorationScene.instantiate() as Exploration
-	##if (Spot.SpotType.HasAtmoshere):
-		##ShipDat.SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
-		##PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
-	##Escene.PlayerHp = ShipDat.GetStat("HP").CurrentVelue
-	##Escene.PlayerOxy = ShipDat.GetStat("OXYGEN").CurrentVelue
-	#Ingame_UIManager.GetInstance().AddUI(Escene)
-	#Escene.StartExploration(Spot.SpotType, CurrentShip)
-	#Escene.connect("OnExplorationEnded", ExplorationEnded)
-	#GetInventory().ForceCloseInv()
-	
-func ExplorationEnded(SupplyRew : Array[Item]) -> void:
-	GetInventory().AddItems(SupplyRew)
+
 #--------------------------------------------------------
-#func StartStage(Size : int) -> void:
-	##spawn scene
-	#var sc = TraveMinigameScene.instantiate() as TravelMinigameGame
-	##set leangth of stage
-	#sc.EnemyGoal = Size
-	##set player ship
-	#sc.CharacterScene = CurrentShip.ShipScene
-	##set stage end signal
-	#sc.connect("OnGameEnded", StageDone)
-	##add to hierarchy
-	#$Ingame_UIManager.AddUI(sc)
-	##make sure that inventory is closed
-	#GetInventory().ForceCloseInv()
-	##make sure player wont be able to open inventory durring gameplay
-	#$Ingame_UIManager.ToggleInventoryButton(false)
-	##make sure ships dont keep working on map to avoid any UI poping
-	#SimulationManager.GetInstance().TogglePause(true)
-	##turn off map
-	#var map = GetMap()
-	#map.ToggleVis(false)
-	#map.set_process(false)
-	#map.set_process_input(false)
-# called by signalonce stage is done, returns if player died, and supplies they found
-#func StageDone(victory : bool, supplies : Array[Item]) -> void:
-	##if player died, let them know why and kill game
-	#if (!victory):
-		#GetMap().StageFailed()
-		#GameLost("Your ship got destroyed")
-		#return
-	#
-	#SimulationManager.GetInstance().TogglePause(false)
-	##if player didnt die add the supplies he found in the inventory
-	#GetInventory().AddItems(supplies)
-	##enable map again
-	#var map = GetMap()
-	#map.set_process(true)
-	#map.set_process_input(true)
-	#map.ToggleVis(true)
-	##enable ship movement
-	#
-	##enable inventory button
-	#$Ingame_UIManager.ToggleInventoryButton(true)
-#/////////////////////////////////////////////////////////////////////////////////////
-
-#func ShipSearched(Ship : BaseShip):
-	#StartShipTrade(Ship)
-
-#func StageSearch(Spt : MapSpot)-> void:
-	#if (Spt.SpotType.CanLand):
-		#StartExploration(Spt)
-	#else:
-		##if (Spt.SpotType.HasAtmoshere):
-			##if (ShipData.GetInstance().GetStat("OXYGEN").GetCurrentValue() < ShipData.GetInstance().GetStat("OXYGEN").GetStat()):
-				##ShipData.GetInstance().SetStatValue("OXYGEN", ShipData.GetInstance().GetStat("OXYGEN").GetStat())
-				##PopUpManager.GetInstance().DoPopUp("You oxygen tanks have been refilled when entering the atmopshere")
-		##else:
-			##if (ShipDat.GetStat("OXYGEN").GetCurrentValue() <= 5):
-				##PopUpManager.GetInstance().DoPopUp("Not enough oxygen to complete action")
-				##return
-			##ShipDat.ConsumeResource("OXYGEN", 5)
-		#if (ShipDat.GetStat("HP").GetCurrentValue() <= 10):
-			#PopUpManager.GetInstance().DoPopUp("Not enough HP to complete action")
-			#return
-		#GetInventory().AddItems(Spt.SpotType.GetSpotDrop())
-		#ShipDat.ConsumeResource("HP", 10)
-		
 func GameLost(reason : String):
 	get_tree().paused = true
 	$Ingame_UIManager/PanelContainer.visible = true

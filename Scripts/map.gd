@@ -50,10 +50,6 @@ func _InitialPlayerPlacament():
 func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
 
-func ToggleVis(t : bool ):
-	visible = t
-	$CanvasLayer.visible = t
-
 func ToggleUIForIntro(t : bool):
 	PlayerShip.GetInstance().ToggleUI(t)
 	$UI/ScreenUi.visible = t
@@ -207,16 +203,8 @@ func GenerateMap() -> void:
 		VillageSpots.append(spot)
 	#LOCATION OF PREVIUSLY PLACED MAP SPOT
 	var Prevpos : Vector2 = Vector2(250,250)
-	
-	#var line = $CanvasLayer/SubViewportContainer/SubViewport/MapSpots/StationLine
 
 	for g in MapSize :
-		#SPAWN GENERIC MAP SPOT SCENE
-		var sc
-		
-		#CONNECT ALL RELEVANT SIGNALS TO IT
-		#var AddingStation = false
-		#DECIDE ON TYPE
 		var type : PackedScene
 		
 		if (g == MapSize - 10):
@@ -231,7 +219,7 @@ func GenerateMap() -> void:
 			type = Cities.pick_random()
 			
 		#SET THE TYPE
-		sc = type.instantiate() as Town
+		var sc = type.instantiate() as Town
 		sc.connect("TownSpotAproached", Arrival)
 		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))

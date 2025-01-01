@@ -7,3 +7,4 @@ class_name BattleShipStats
 @export var FirePower : float
 @export var ShipIcon : Texture
 @export var CaptainIcon : Texture
+@export var Speed : float
