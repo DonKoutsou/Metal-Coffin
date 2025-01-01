@@ -37,6 +37,8 @@ tangential_accel_min = 0.0299978
 tangential_accel_max = 0.709998
 damping_min = 30.909
 damping_max = 100.0
+scale_min = 3.0
+scale_max = 3.0
 color_ramp = SubResource("GradientTexture1D_gsb7r")
 emission_curve = SubResource("CurveTexture_ejgp5")
 collision_mode = 2
@@ -47,7 +49,6 @@ polygon = PackedVector2Array(0, -95, 77, -77, 95, 0, 77, 77, 0, 95, -77, 77, -95
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
 process_mode = 3
-z_as_relative = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_ooyv3")
 texture = ExtResource("1_gnsfh")

@@ -7,6 +7,7 @@ class_name CircleDrawer
 var circles = []
 var clusters = []
 var intersections = {}
+var CamZoom = 1
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#$AnimationPlayer.play("loop")
@@ -24,7 +25,6 @@ func find_or_create_cluster(circle_index):
 		return new_cluster
 
 func _physics_process(_delta: float) -> void:
-
 	#circles.clear()
 	clusters.clear()
 	#$Area2D3.global_position = get_global_mouse_position()
@@ -71,6 +71,9 @@ func get_circle_polygon(center: Vector2, rad : float) -> PackedVector2Array:
 	points.append(points[0])
 	return points
 
+func CamZoomUpdated(NewVal : float) -> void:
+	CamZoom = NewVal
+
 func _draw():
 	var intersectingcircles = []
 	if (intersections.size() > 0):
@@ -96,11 +99,11 @@ func _draw():
 				newpolygon = Geometry2D.merge_polygons(newpolygon[0],polyg[f])
 			for f in newpolygon.size():
 				newpolygon[f].append(newpolygon[f][0])
-				draw_polyline(newpolygon[f], Col, 8, true)
+				draw_polyline(newpolygon[f], Col, 2 / CamZoom, true)
 	for g in circles.size():
 		if (intersectingcircles.has(g)):
 			continue
-		draw_polyline(get_circle_polygon(circles[g][0], circles[g][1].x), Col, 8, true)
+		draw_polyline(get_circle_polygon(circles[g][0], circles[g][1].x), Col, 2 / CamZoom, true)
 func merge_cluster_polygons(cluster: Array) :
 	var merged_polygon = PackedVector2Array()
 	for circ in cluster:

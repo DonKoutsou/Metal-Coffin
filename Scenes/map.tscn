@@ -201,7 +201,7 @@ MapSpotMarkerScene = ExtResource("20_4fmmi")
 FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
 EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 
-[node name="CircleDrawer" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager"]
+[node name="CircleDrawer" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager" groups=["LineMarkers"]]
 use_parent_material = true
 script = ExtResource("23_q5rq1")
 Col = Color(0.721279, 0.395459, 0.144425, 1)
