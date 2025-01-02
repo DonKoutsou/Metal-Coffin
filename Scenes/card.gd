@@ -2,7 +2,7 @@ extends PanelContainer
 
 class_name Card
 
-signal OnCardPressed(C : Card)
+signal OnCardPressed(C : Card, Options : String)
 
 var CStats : CardStats
 
@@ -19,9 +19,10 @@ func _ready() -> void:
 	#st.Options.append_array(["FIRE", "AP", "NORMAL"])
 	#SetCardStats(st)
 
-func SetCardStats(Stats : CardStats) -> void:
+func SetCardStats(Stats : CardStats, Option : String = "") -> void:
 	CStats = Stats
-	$VBoxContainer/CardName.text = Stats.CardName
+
+	$VBoxContainer/CardName.text = Option + " " + Stats.CardName
 	$VBoxContainer/CardIcon.texture = Stats.Icon
 	$VBoxContainer/CardDesc.text = Stats.CardDescription
 	$VBoxContainer/CardCost.text = var_to_str(Stats.Energy)
@@ -36,10 +37,10 @@ func OnButtonPressed() -> void:
 	if ($PanelContainer/HBoxContainer.get_child_count() > 0):
 		$PanelContainer.visible = true
 	else:
-		OnCardPressed.emit(self)
+		OnCardPressed.emit(self, "")
 
 func OnOptionSelected() -> void:
 	var but = get_viewport().gui_get_focus_owner() as Button
 	Option = but.text
 	$PanelContainer.visible = false
-	OnCardPressed.emit(self)
+	OnCardPressed.emit(self, but.text)

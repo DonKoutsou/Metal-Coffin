@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_hl4dw")
 CounteredBy = ExtResource("1_6i3qa")
-Damage = 20.0
+Damage = 10.0
 Icon = ExtResource("1_hi7ya")
 CardName = "Missile"
 CardDescription = "Throws a missile to enemy. DMG = 10 * Firepower"

@@ -5,9 +5,10 @@ class_name Card_Fight
 @export var CardScene : PackedScene
 @export var ShipVizScene : PackedScene
 @export var Cards : Array[CardStats]
+@export var ActionAnim : PackedScene
 
-@onready var offensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/Offensive/OffensiveCardPlecements
-@onready var deffensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/Deffensive/DeffensiveCardPlecements
+@onready var offensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/OffensiveCardPlecements
+@onready var deffensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/DeffensiveCardPlecements
 @onready var selected_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/HBoxContainer2/SelectedCardPlecements
 
 var Energy : int = 4
@@ -87,6 +88,7 @@ func EndActionPickPhase() -> void:
 	StartActionPerformPhase()
 
 func StartActionPerformPhase() -> void:
+	$VBoxContainer4/VBoxContainer4.visible = false
 	for g in Actions:
 		var Ship = g as BattleShipStats
 		for z in Actions[Ship]:
@@ -101,18 +103,29 @@ func StartActionPerformPhase() -> void:
 				
 				var HasDeff = Actions[Target].has(Action.CounteredBy)
 				
+				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
+				anim.OriginIcon = Ship.ShipIcon
+				anim.OriginShip = Ship
+				anim.TargetIcon = Target.ShipIcon
+				anim.AtackCard = Action
+				
 				if (HasDeff):
-					Actions[Target].erase(Action)
+					Actions[Target].erase(Action.CounteredBy)
 					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
-					continue
-				
-				Target.Hull -= Action.Damage
-				if (Target.Hull <= 0):
-					ShipDestroyed(Target)
+					anim.DefCard = Action.CounteredBy
 				else:
-					UpdateShipStats(Target)
+					Target.Hull -= Action.Damage
+					if (Target.Hull <= 0):
+						ShipDestroyed(Target)
+					else:
+						UpdateShipStats(Target)
+					
+					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
 				
-				print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
+				$VBoxContainer4.add_child(anim)
+				$VBoxContainer4.move_child(anim, 1)
+				await(anim.AnimationFinished)
+	$VBoxContainer4/VBoxContainer4.visible = true
 	EndActionPerformPhase()
 
 func ShipDestroyed(Ship : BattleShipStats):
@@ -177,7 +190,7 @@ func ClearCards() -> void:
 	for g in selected_card_plecements.get_children():
 		g.queue_free()
 
-func OnCardSelected(C : Card) -> void:
+func OnCardSelected(C : Card, Option : String) -> void:
 	if (Energy < C.Cost):
 		return
 	
@@ -188,7 +201,7 @@ func OnCardSelected(C : Card) -> void:
 	Energy -= C.Cost
 	UpdateEnergy()
 	var c = CardScene.instantiate() as Card
-	c.SetCardStats(C.CStats)
+	c.SetCardStats(C.CStats, Option)
 	c.connect("OnCardPressed", RemoveCard)
 	selected_card_plecements.add_child(c)
 	Actions[CurrentShip].append(Action)
