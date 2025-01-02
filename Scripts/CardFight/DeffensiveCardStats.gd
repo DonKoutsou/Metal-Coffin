@@ -1,0 +1,2 @@
+extends CardStats
+class_name Deffensive

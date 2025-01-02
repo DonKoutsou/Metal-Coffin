@@ -1,9 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmq4aarkkp044"]
+[gd_scene load_steps=11 format=3 uid="uid://dmq4aarkkp044"]
 
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_kj8d5"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="2_5pxfv"]
-[ext_resource type="Script" path="res://Scripts/card_fight_ship_viz.gd" id="2_qce1f"]
-[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="3_4gmqt"]
+[ext_resource type="Script" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="2_qce1f"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_4gmqt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v77k"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
+bg_color = Color(0.231024, 0.490544, 0.236315, 1)
+
+[sub_resource type="Gradient" id="Gradient_iq4iy"]
+offsets = PackedFloat32Array(0, 0.998435)
+colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.96597, 0.782513, 7.70092e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x4s8m"]
+gradient = SubResource("Gradient_iq4iy")
+
+[sub_resource type="Curve" id="Curve_e1h5p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0604554), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tsd2f"]
+curve = SubResource("Curve_e1h5p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_on4wq"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 34.529
+initial_velocity_min = 35.93
+initial_velocity_max = 35.93
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_tsd2f")
+color_ramp = SubResource("GradientTexture1D_x4s8m")
 
 [node name="CardFightShipViz" type="PanelContainer"]
 anchors_preset = 8
@@ -11,14 +53,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -66.0
+offset_top = -34.0
+offset_right = 68.0
+offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_kj8d5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3v77k")
 script = ExtResource("2_qce1f")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -30,18 +76,33 @@ stretch_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4gmqt")
+theme_override_font_sizes/font_size = 14
 text = "HL : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4gmqt")
+theme_override_font_sizes/font_size = 14
 text = "SPD : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label4" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4gmqt")
+theme_override_font_sizes/font_size = 14
 text = "FP : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(39.5, 38.5)
+process_material = SubResource("ParticleProcessMaterial_on4wq")

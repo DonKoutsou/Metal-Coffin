@@ -1,18 +1,52 @@
-[gd_scene load_steps=14 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=16 format=3 uid="uid://bg4oh7r4qnxy8"]
 
-[ext_resource type="Script" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
+[ext_resource type="Script" path="res://Scripts/CardFight.gd" id="1_defjt"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_mhnyb"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="3_3dpfm"]
+[ext_resource type="Script" path="res://Scripts/CardStats.gd" id="3_3dpfm"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_5p8hw"]
+[ext_resource type="Texture2D" uid="uid://bcsiopa768823" path="res://Assets/fire-extinguisher.png" id="4_kkenf"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_lojl1"]
-[ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Scenes/Cards/Flares.tres" id="10_084tn"]
-[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Scenes/Cards/Extringuish.tres" id="11_5vvva"]
+[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="5_mmrnh"]
+[ext_resource type="Texture2D" uid="uid://uhj6cppdu5b6" path="res://Assets/avoidance.png" id="6_e7eej"]
+[ext_resource type="Texture2D" uid="uid://dgj0w64wb7mmy" path="res://Assets/hydra-shot.png" id="7_jkgha"]
 [ext_resource type="Theme" uid="uid://v4mw3n57sksp" path="res://Theme/Bar.tres" id="11_a65yd"]
-[ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Scenes/Cards/Missile.tres" id="12_a2cqf"]
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="12_dxiib"]
-[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Scenes/Cards/Evasive.tres" id="13_pchum"]
-[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Scenes/Cards/Barrage.tres" id="14_ll7ew"]
+
+[sub_resource type="Resource" id="Resource_sv1rr"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("4_kkenf")
+CardName = "Extinguish fires"
+CardDescription = "Extinguishes fires on ship"
+Energy = 2
+Options = Array[String]([])
+Offensive = false
+
+[sub_resource type="Resource" id="Resource_vi5ka"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("5_mmrnh")
+CardName = "Missile"
+CardDescription = "Throws a missile to enemy. DMG = 10 * Firepower"
+Energy = 2
+Options = Array[String]([])
+Offensive = true
+
+[sub_resource type="Resource" id="Resource_rk6fc"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("6_e7eej")
+CardName = "Evasive Maneuvers"
+CardDescription = "Avoid an incomming barragge"
+Energy = 1
+Options = Array[String]([])
+Offensive = false
+
+[sub_resource type="Resource" id="Resource_wkm8m"]
+script = ExtResource("3_3dpfm")
+Icon = ExtResource("7_jkgha")
+CardName = "Barragge"
+CardDescription = "Throws a barragge on the enemy. DMG = 6 * Firepower ship"
+Energy = 1
+Options = Array[String](["Normal", "AP", "Fire"])
+Offensive = true
 
 [node name="CardFight" type="PanelContainer"]
 anchors_preset = 15
@@ -25,7 +59,7 @@ theme_override_styles/panel = ExtResource("1_mhnyb")
 script = ExtResource("1_defjt")
 CardScene = ExtResource("2_5q24q")
 ShipVizScene = ExtResource("3_5p8hw")
-Cards = Array[ExtResource("3_3dpfm")]([ExtResource("11_5vvva"), ExtResource("12_a2cqf"), ExtResource("13_pchum"), ExtResource("14_ll7ew"), ExtResource("10_084tn")])
+Cards = Array[ExtResource("3_3dpfm")]([SubResource("Resource_sv1rr"), SubResource("Resource_vi5ka"), SubResource("Resource_rk6fc"), SubResource("Resource_wkm8m")])
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -33,7 +67,6 @@ alignment = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer4"]
 layout_mode = 2
-size_flags_vertical = 2
 alignment = 1
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer4"]
@@ -48,7 +81,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("4_lojl1")
 text = "Selected Cards"
 horizontal_alignment = 1
@@ -58,12 +91,6 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
-
-[node name="Button" type="Button" parent="VBoxContainer4/VBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("12_dxiib")
-text = "End Turn"
 
 [node name="VBoxContainer3" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
 layout_mode = 2
@@ -130,7 +157,4 @@ vertical_alignment = 1
 
 [node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer4"]
 layout_mode = 2
-size_flags_vertical = 10
 alignment = 1
-
-[connection signal="pressed" from="VBoxContainer4/VBoxContainer4/Button" to="." method="PlayerActionSelectionEnded"]

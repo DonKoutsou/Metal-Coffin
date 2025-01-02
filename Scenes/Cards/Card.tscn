@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_24a6o"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="1_fola4"]
 [ext_resource type="Script" path="res://Scenes/card.gd" id="1_vr3r8"]
-[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="3_d5d7j"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_d5d7j"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="5_lvjg3"]
 
 [node name="Card" type="PanelContainer"]
@@ -13,13 +13,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.0
+offset_left = -109.0
 offset_top = -97.0
-offset_right = 92.0
+offset_right = 108.0
 offset_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 4
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_vr3r8")
 
@@ -49,7 +49,7 @@ stretch_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_d5d7j")
-text = "afwfa fw aw faw faw f fwa aw faw faw faw fwa fwa fw a f"
+text = "afwfa fw aw faw faw f fwa aw fa"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

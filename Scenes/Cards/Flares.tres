@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Deffensive" load_steps=3 format=3 uid="uid://bcyedao3gvdki"]
+
+[ext_resource type="Texture2D" uid="uid://cpdoprpxpx58d" path="res://Assets/eclipse-flare.png" id="1_qrasw"]
+[ext_resource type="Script" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_lxvii"]
+
+[resource]
+script = ExtResource("2_lxvii")
+Icon = ExtResource("1_qrasw")
+CardName = "Flare"
+CardDescription = "Avoid incomming missiles"
+Energy = 1
+Options = Array[String]([])
+AllowDuplicates = true

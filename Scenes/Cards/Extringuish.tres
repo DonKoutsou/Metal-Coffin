@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Deffensive" load_steps=3 format=3 uid="uid://bihbbkeg0k2sc"]
+
+[ext_resource type="Texture2D" uid="uid://bcsiopa768823" path="res://Assets/fire-extinguisher.png" id="1_5ywxj"]
+[ext_resource type="Script" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_kfy2h"]
+
+[resource]
+script = ExtResource("2_kfy2h")
+Icon = ExtResource("1_5ywxj")
+CardName = "Extinguish fires"
+CardDescription = "Extinguishes fires on ship"
+Energy = 2
+Options = Array[String]([])
+AllowDuplicates = false

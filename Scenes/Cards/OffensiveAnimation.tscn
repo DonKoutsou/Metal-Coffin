@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbdyafmynts2u"]
+
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="1_h50ls"]
+[ext_resource type="Script" path="res://Scenes/Cards/offensive_animation.gd" id="1_jaurs"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_jp0up"]
+
+[node name="CardOffensiveAnimation" type="Control"]
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -137.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+script = ExtResource("1_jaurs")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -32.0
+offset_right = -42.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.5708
+texture = ExtResource("1_h50ls")
+
+[node name="OffensiveCard" parent="." instance=ExtResource("2_jp0up")]
+layout_mode = 1
+offset_left = -430.0
+offset_top = -97.5
+offset_right = -213.0
+offset_bottom = 97.5
+
+[node name="DeffensiveCard" parent="." instance=ExtResource("2_jp0up")]
+layout_mode = 1
+offset_left = -108.5
+offset_top = -97.5
+offset_right = 108.5
+offset_bottom = 97.5

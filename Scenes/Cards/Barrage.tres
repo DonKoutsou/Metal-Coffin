@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=4 format=3 uid="uid://b03hciwbxqb2s"]
+
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Scenes/Cards/Evasive.tres" id="1_nk8d7"]
+[ext_resource type="Texture2D" uid="uid://dgj0w64wb7mmy" path="res://Assets/hydra-shot.png" id="1_r44bb"]
+[ext_resource type="Script" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="2_itxpj"]
+
+[resource]
+script = ExtResource("2_itxpj")
+CounteredBy = ExtResource("1_nk8d7")
+Damage = 10.0
+Icon = ExtResource("1_r44bb")
+CardName = "Barragge"
+CardDescription = "Throws a barragge on the enemy. DMG = 6 * Firepower ship"
+Energy = 1
+Options = Array[String](["Normal", "AP", "Fire"])
+AllowDuplicates = true

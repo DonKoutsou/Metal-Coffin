@@ -26,12 +26,12 @@ void fragment() {
 
     float n = texture(Noise, uv).x;
     n = smoothstep(cloud_density, 1.0, n);
-	
+
 	// If the current UV is within a hole, set n (density) to 0
     if (is_within_hole(uv)) {
         n = 0.0;
     }
-	
+
     vec4 color = vec4(cloud_color.rgb * n, n * cloud_color.a);
     COLOR = color;
 }

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://duns2geut7ygv"]
+
+[sub_resource type="Curve" id="Curve_wmbnf"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_sawyn"]
+curve = SubResource("Curve_wmbnf")
+
+[sub_resource type="Curve" id="Curve_vv7kf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0530191, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_esewx"]
+curve = SubResource("Curve_vv7kf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uvf0q"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 38.92
+initial_velocity_max = 62.87
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_esewx")
+color = Color(0.780418, 0.651306, 0.319687, 1)
+emission_curve = SubResource("CurveTexture_sawyn")
+turbulence_enabled = true
+turbulence_noise_strength = 0.19
+turbulence_noise_scale = 4.568
+turbulence_noise_speed_random = 3.96
+
+[node name="Flare" type="GPUParticles2D"]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_uvf0q")
+lifetime = 2.0
+explosiveness = 0.84
+trail_lifetime = 0.17
+trail_sections = 4
+trail_section_subdivisions = 1

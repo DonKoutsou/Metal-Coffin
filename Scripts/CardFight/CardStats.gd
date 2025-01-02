@@ -6,4 +6,4 @@ class_name CardStats
 @export var CardDescription : String
 @export var Energy : int
 @export var Options : Array[String]
-@export var Offensive : bool
+@export var AllowDuplicates : bool

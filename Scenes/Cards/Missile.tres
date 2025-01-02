@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=4 format=3 uid="uid://ducl6q2qs8a4d"]
+
+[ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Scenes/Cards/Flares.tres" id="1_6i3qa"]
+[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_hi7ya"]
+[ext_resource type="Script" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="2_hl4dw"]
+
+[resource]
+script = ExtResource("2_hl4dw")
+CounteredBy = ExtResource("1_6i3qa")
+Damage = 20.0
+Icon = ExtResource("1_hi7ya")
+CardName = "Missile"
+CardDescription = "Throws a missile to enemy. DMG = 10 * Firepower"
+Energy = 2
+Options = Array[String]([])
+AllowDuplicates = true
