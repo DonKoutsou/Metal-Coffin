@@ -209,6 +209,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 				FighingFriendlyUnits.erase(z)
 				break
 			if z is Drone and nam == z.Cpt.CaptainName:
+				z.Damage(z.Cpt.GetStatValue("HULL") - g.Hull)
 				FighingFriendlyUnits.erase(z)
 				break
 	for g in FighingFriendlyUnits:

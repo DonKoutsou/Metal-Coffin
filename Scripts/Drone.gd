@@ -15,12 +15,9 @@ func  _ready() -> void:
 	super()
 	for g in Cpt.CaptainStats:
 		g.CurrentVelue = g.GetStat()
-	#Set range of radar and alanyzer
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
 	Paused = SimulationManager.IsPaused()
-	#UpdateAnalyzerRange(Cpt.GetStatValue("ANALYZE_RANGE"))
-	#MapPointerManager.GetInstance().AddShip(self, true)
 	
 func _physics_process(_delta: float) -> void:
 	super(_delta)
@@ -58,14 +55,38 @@ func _physics_process(_delta: float) -> void:
 			#else:
 				#ShipDockActions.emit("Upgrading", false, 0)
 				##ToggleShowRefuel("Upgrading", false)
-	if (Cpt.GetStat("FUEL_TANK").CurrentVelue <= 0 or Docked):
+	if (Docked):
 		return
+	
+	var FuelConsumtion = $Aceleration.position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY") * SimulationSpeed
+	
+	#Consume fuel on shif if enough
+	if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= FuelConsumtion):
+		Cpt.GetStat("FUEL_TANK").CurrentVelue -= FuelConsumtion
+	# If not enough on ship syphoon some from drones in dock
+	else: if (GetDroneDock().DronesHaveFuel(FuelConsumtion)):
+		GetDroneDock().SyphonFuelFromDrones(FuelConsumtion)
+		#SetFuelShaderRange(GetFuelRange())
+	else:
+		HaltShip()
+		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
+		return
+	#if (Cpt.GetStat("FUEL_TANK").CurrentVelue <= 0)
+	
 	if (CommingBack):
 		updatedronecourse()
-		
+	
+	for g in GetDroneDock().DockedDrones:
+		var dronefuel = ($Aceleration.position.x / 10 / g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
+		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > dronefuel):
+			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
+		else : if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
+			Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
+		else:
+			HaltShip()
+			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
+	
 	for g in SimulationSpeed:
-		var ftoconsume = $Aceleration.position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY")
-		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
 		global_position = GetShipAcelerationNode().global_position
 	#GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
 	#if (Fuel <= global_position.distance_to(PlayerShip.GetInstance().global_position) / 10 / 2):
@@ -79,6 +100,8 @@ func Steer(Rotation : float) -> void:
 	if (CommingBack):
 		return
 	super(Rotation)
+	for g in GetDroneDock().DockedDrones:
+		g.Steer(Rotation)
 
 func AccelerationChanged(value: float) -> void:
 	if (CommingBack):
@@ -110,7 +133,6 @@ func DissableDrone():
 	#set_physics_process(false)
 	#ToggleRadar()
 	$ShipBody/CollisionShape2D.set_deferred("disabled", true)
-
 func ReturnToBase():
 	$Aceleration.position.x = GetShipMaxSpeed()
 	#rotation = 0.0
@@ -131,7 +153,16 @@ func updatedronecourse():
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	ShipLookAt(predicted_position)
-
+func SetCurrentPort(Port : MapSpot):
+	super(Port)
+	var dr = GetDroneDock().DockedDrones
+	for g in dr:
+		g.SetCurrentPort(Port)
+func RemovePort():
+	super()
+	var dr = GetDroneDock().DockedDrones
+	for g in dr:
+		g.RemovePort()
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
@@ -199,5 +230,3 @@ func GetElintLevel(Dist : float) -> int:
 	return Lvl
 func GetShipMaxSpeed() -> float:
 	return Cpt.GetStatValue("SPEED")
-func GetDroneDock() -> DroneDock:
-	return $DroneDock

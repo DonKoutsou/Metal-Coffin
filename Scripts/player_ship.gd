@@ -154,7 +154,3 @@ func _on_elint_area_exited(area: Area2D) -> void:
 	if (area.get_parent() is Drone):
 		return
 	super(area)
-func GetDroneDock() -> DroneDock:
-	return $DroneDock
-#static func GetInstance() -> PlayerShip:
-	#return Instance

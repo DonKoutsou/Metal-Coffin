@@ -67,13 +67,28 @@ func SetFuelData():
 func SetHullData():
 	PlHull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
 	PlMaxHull = ShipData.GetInstance().GetStat("HULL").GetStat()
+	var plship = LandedShip as PlayerShip
+	var dd = plship.GetDroneDock()
+	for g in dd.DockedDrones:
+		PlMaxHull += g.Cpt.GetStatValue("HULL")
+		PlHull += g.Cpt.GetStat("HULL").CurrentVelue
 
 func SetDroneFuelData():
 	PlFuel = LandedShip.Cpt.GetStat("FUEL_TANK").CurrentVelue
 	PlMaxFuel = LandedShip.Cpt.GetStatValue("FUEL_TANK")
+	var plship = LandedShip as Drone
+	var dd = plship.GetDroneDock()
+	for g in dd.DockedDrones:
+		PlMaxFuel += g.Cpt.GetStatValue("FUEL_TANK")
+		PlFuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
 func SetDroneHullData():
 	PlHull = LandedShip.Cpt.GetStat("HULL").GetBaseStat()
 	PlMaxHull = LandedShip.Cpt.GetStat("HULL").GetStat()
+	var plship = LandedShip as Drone
+	var dd = plship.GetDroneDock()
+	for g in dd.DockedDrones:
+		PlMaxHull += g.Cpt.GetStatValue("HULL")
+		PlHull += g.Cpt.GetStat("HULL").CurrentVelue
 	
 func FuelBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

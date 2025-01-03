@@ -305,3 +305,5 @@ func GetElintLevel(Dist : float) -> int:
 	else :
 		Lvl = 1
 	return Lvl
+func GetDroneDock() -> DroneDock:
+	return $DroneDock

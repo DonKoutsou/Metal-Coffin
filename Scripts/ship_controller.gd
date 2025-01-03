@@ -77,7 +77,7 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float)
 		if (ControlledShip is PlayerShip):
 			ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
 		else:
-			ControlledShip.Fuel -= -BFuel
+			ControlledShip.Cpt.GetStat("FUEL_TANK").CurrentVelue -= -BFuel
 
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)
