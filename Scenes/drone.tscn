@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=18 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="8_bbjow"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="9_82ju4"]
-[ext_resource type="PackedScene" uid="uid://bpdjsljrku63t" path="res://Scenes/cloudring.tscn" id="9_rm2bs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p3smt"]
 light_mode = 1
@@ -55,6 +54,7 @@ radius = 150.0
 material = SubResource("CanvasItemMaterial_p3smt")
 script = ExtResource("1_vfr1e")
 Cpt = ExtResource("3_fw0pf")
+LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 
 [node name="SmokeParticles" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_ewj1d")
@@ -63,24 +63,6 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_s3yar")
 texture = ExtResource("8_bbjow")
 lifetime = 20.0
-
-[node name="ShipBody" type="Area2D" parent="."]
-disable_mode = 2
-collision_layer = 4100
-collision_mask = 4100
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
-shape = SubResource("CircleShape2D_e6yyl")
-debug_color = Color(0.745105, 0.130026, 1.92523e-07, 0.42)
-
-[node name="ReturnSoundTrigger" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSoundTrigger"]
-shape = SubResource("CircleShape2D_7khp2")
-debug_color = Color(0.718534, 0.251914, 1, 0.42)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
@@ -111,6 +93,24 @@ texture = ExtResource("5_k2uly")
 texture_scale = 4.0
 height = 500.0
 
+[node name="ShipBody" type="Area2D" parent="."]
+disable_mode = 2
+collision_layer = 4100
+collision_mask = 4100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
+shape = SubResource("CircleShape2D_e6yyl")
+debug_color = Color(0.745105, 0.130026, 1.92523e-07, 0.42)
+
+[node name="ReturnSoundTrigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSoundTrigger"]
+shape = SubResource("CircleShape2D_7khp2")
+debug_color = Color(0.718534, 0.251914, 1, 0.42)
+
 [node name="Elint" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16384
@@ -127,8 +127,6 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
-
-[node name="GPUParticles2D" parent="." instance=ExtResource("9_rm2bs")]
 
 [node name="DroneDock" parent="." instance=ExtResource("9_82ju4")]
 collision_layer = 4096

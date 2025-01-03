@@ -72,15 +72,17 @@ func _physics_process(delta: float) -> void:
 	
 	if (!Patrol):
 		return
-	
-	if (CurrentPort != null and Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
-		Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
-		if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
-			GetShipAcelerationNode().position.x = Cpt.GetStat("SPEED").GetStat()
-		else :
-			return
+
 	if (!CanReachDestination()):
-		FindRefuelSpot()
+		if (CurrentPort != null):
+			if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
+				Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
+				if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
+					GetShipAcelerationNode().position.x = Cpt.GetStat("SPEED").GetStat()
+				else :
+					return
+		else:
+			FindRefuelSpot()
 	if (RefuelSpot != null):
 		ShipLookAt(RefuelSpot.global_position)
 	else : if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
@@ -200,8 +202,6 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Name = "Enemy"
 	return stats
 
-
-
 func updatedronecourse():
 	# Get the current position and velocity of the ship
 	var ship_position
@@ -228,13 +228,11 @@ func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		OnEnemyVisualContact.emit(area.get_parent())
 		#PursuingShips.append(area.get_parent())
-		
 func _on_radar_2_area_exited(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		OnEnemyVisualLost.emit(area.get_parent())
 		#PursuingShips.erase(area.get_parent())
 		#LastKnownPosition = area.get_parent().global_position
-		
 #whan this ship gets seen by player or friendly drone
 func OnShipSeen(SeenBy : Node2D):
 	#$Radar/Radar_Range.visible = true
@@ -242,17 +240,14 @@ func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBy.has(SeenBy)):
 		return
 	#VisibleBy[SeenBy] = 0
-	if (VisibleBy.size() > 1):
+	if (VisibleBy.size() > 0):
 		return
 	VisibleBy.append(SeenBy)
 	MapPointerManager.GetInstance().AddShip(self, false)
 	SimulationManager.GetInstance().TogglePause(true)
-	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
-
-
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is MapSpot):
 		var spot = area.get_parent() as MapSpot
@@ -298,13 +293,11 @@ func _on_area_entered(area: Area2D) -> void:
 				OnShipMet.emit(plships, hostships)
 		else:
 			OnShipSeen(area.get_parent())
-
 func _on_area_exited(area: Area2D) -> void:
 	if (area.get_parent() == CurrentPort):
 		CurrentPort = null
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		OnShipUnseen(area.get_parent())
-
 func GetSaveData() -> SD_HostileShip:
 	var dat = SD_HostileShip.new()
 	#if (DestinationCity != null):
@@ -338,8 +331,6 @@ func _on_elint_area_exited(area: Area2D) -> void:
 		return
 	ElintContacts.erase(area.get_parent())
 	ElintContact.emit(area.get_parent(), false)
-
-
 func find_path(start_city: String, end_city: String) -> Array:
 	#var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var queue = []

@@ -30,7 +30,7 @@ func RegisterShip(Target : MapShip) -> void:
 
 func UpdateConnectedShip(Ship : MapShip) -> void:
 	ConnectedShip = Ship
-	
+	call_deferred("UpdateCrewSelect")
 
 func DroneDisharged(Dr : Drone):
 	if (DockedDrones.has(Dr)):

@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=17 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="9_jx5d0"]
-[ext_resource type="PackedScene" uid="uid://bpdjsljrku63t" path="res://Scenes/cloudring.tscn" id="10_kivc1"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="18_elnvx"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="20_8n1nj"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="20_hn8tc"]
@@ -124,5 +123,3 @@ shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
 texture_scale = 4.0
 height = 1000.0
-
-[node name="GPUParticles2D" parent="." instance=ExtResource("10_kivc1")]

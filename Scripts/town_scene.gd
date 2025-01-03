@@ -82,7 +82,7 @@ func SetDroneFuelData():
 		PlMaxFuel += g.Cpt.GetStatValue("FUEL_TANK")
 		PlFuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
 func SetDroneHullData():
-	PlHull = LandedShip.Cpt.GetStat("HULL").GetBaseStat()
+	PlHull = LandedShip.Cpt.GetStat("HULL").CurrentVelue
 	PlMaxHull = LandedShip.Cpt.GetStat("HULL").GetStat()
 	var plship = LandedShip as Drone
 	var dd = plship.GetDroneDock()

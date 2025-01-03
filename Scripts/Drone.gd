@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 			ShipDockActions.emit("Refueling", false, 0)
 				#ToggleShowRefuel("Refueling", false)
 		#if (CanRepair):
-		if (Cpt.GetStat("HULL").GetBaseStat() < Cpt.GetStat("HULL").GetStat() and CurrentPort.PlayerRepairReserves):
+		if (Cpt.GetStat("HULL").GetCurrentValue() < Cpt.GetStat("HULL").GetStat() and CurrentPort.PlayerRepairReserves > 0):
 			var timeleft = ((Cpt.GetStat("HULL").GetStat() - Cpt.GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
 			ShipDockActions.emit("Repairing", true, roundi(timeleft))
 			#ToggleShowRefuel("Repairing", true, roundi(timeleft))
@@ -192,11 +192,22 @@ func _on_elint_area_exited(area: Area2D) -> void:
 func GetShipName() -> String:
 	return Cpt.CaptainName
 func GetFuelRange() -> float:
-	var fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
+	var fuel = Cpt.GetStat("FUEL_TANK").GetCurrentValue()
 	var fuel_ef = Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
+	var total_fuel = fuel
+	var inverse_ef_sum = 1.0 / fuel_ef
+	
+	# Group ships fuel and efficiency calculations
+	for g in GetDroneDock().DockedDrones:
+		var ship_fuel = g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		var ship_efficiency = g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+		total_fuel += ship_fuel
+		inverse_ef_sum += 1.0 / ship_efficiency
 
-	#calculate the range taking fuel efficiency in mind
-	return fuel * 10 * fuel_ef
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	return (total_fuel * 10 * effective_efficiency) / fleetsize
 func GetShipSpeed() -> float:
 	if (Docked):
 		return Command.GetShipSpeed()

@@ -21,6 +21,9 @@ static func GetInstance() -> MapPointerManager:
 func _draw() -> void:
 	pass
 
+func DrawLines() -> void:
+	pass
+
 func AddShip(Ship : Node2D, Friend : bool) -> void:
 	if (Ships.has(Ship)):
 		if (Ship is HostileShip):
@@ -163,7 +166,7 @@ func _physics_process(delta: float) -> void:
 			if (ship is Drone):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
-				Marker.UpdateDroneHull(ship.Cpt.GetStat("HULL").CurrentVelue, ship.Cpt.GetStat("HULL").GetStat())
+				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStat("HULL").CurrentVelue), ship.Cpt.GetStat("HULL").GetStat())
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
 					Circles.append(PackedVector2Array([ship.global_position, Vector2(ship.Cpt.GetStatValue("RADAR_RANGE"), 0)]))
