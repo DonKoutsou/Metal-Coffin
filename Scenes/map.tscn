@@ -173,6 +173,12 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_nb103")
 stretch_mode = 1
 
+[node name="ShipCamera" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+position = Vector2(576, 324)
+process_callback = 0
+position_smoothing_speed = 1.0
+script = ExtResource("16_4wqve")
+
 [node name="MapLines" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 
 [node name="Roads" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
@@ -184,13 +190,6 @@ position = Vector2(163, 60)
 
 [node name="Darkness" type="CanvasModulate" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
-
-[node name="ShipCamera" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-position = Vector2(576, 324)
-process_callback = 0
-limit_smoothed = true
-position_smoothing_speed = 1.0
-script = ExtResource("16_4wqve")
 
 [node name="MapPointerManager" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 z_index = 100
