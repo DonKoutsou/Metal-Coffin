@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=18 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
-[ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="2_2w4bb"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
@@ -43,14 +42,6 @@ scale_curve = SubResource("CurveTexture_pgv80")
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i26u"]
-resource_local_to_scene = true
-shader = ExtResource("2_2w4bb")
-shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
-shader_parameter/line_width = 0.002
-shader_parameter/Paused = false
-shader_parameter/scale_factor = 0.08
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
 radius = 1000.0
 
@@ -84,23 +75,6 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_42dgb")
-
-[node name="Fuel_Range" type="ColorRect" parent="." groups=["MapLines"]]
-z_index = 2
-material = SubResource("ShaderMaterial_1i26u")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
 
 [node name="Elint" type="Area2D" parent="."]
 collision_layer = 0

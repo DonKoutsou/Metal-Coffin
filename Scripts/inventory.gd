@@ -9,6 +9,8 @@ class_name Inventory
 @export var ItemDescriptorScene : PackedScene
 @export var ItemNotifScene : PackedScene
 
+var Player : PlayerShip
+
 var InventoryContents : Array[Inventory_Box] = []
 static var Instance : Inventory
 
@@ -254,10 +256,10 @@ func UpgradeItem(Cont : ItemContainer) -> void:
 	if (UpgradedItem != null):
 		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part. Wait for it to finish first.")
 		return
-	if (PlayerShip.GetInstance().CurrentPort == null):
+	if (Player.CurrentPort == null):
 		PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
 		return
-	else :if (!PlayerShip.GetInstance().CanUpgrade):
+	else :if (!Player.CanUpgrade):
 		PopUpManager.GetInstance().DoFadeNotif("Cant upgrade ship in current port.")
 		return
 	var Part = Cont.ItemType as ShipPart

@@ -14,7 +14,7 @@ func _ready() -> void:
 	Instance = self
 static func GetInstance() -> CaptainUI:
 	return Instance
-func AddCaptain(Dr : Drone):
+func AddCaptain(Dr : Drone, Target : MapShip):
 	var Position : Control
 	for g in $GridContainer.get_children():
 		if (g is CaptainPanel):

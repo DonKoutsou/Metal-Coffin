@@ -9,11 +9,10 @@ class_name HostileShip
 @export var ShipName : String
 @export var Patrol : bool = true
 @export var ShipCallsign : String = "P"
-#var Pursuing = false
+
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
 
-#var DestinationCity : MapSpot
 var Path : Array = []
 var PathPart : int = 0
 var RefuelSpot : MapSpot
@@ -21,7 +20,6 @@ var Docked : bool = false
 var VisibleBy : Array[Node2D]
 
 @export var FleetShips : Array[PackedScene]
-#var VisibleBy : Array[Node2D] = []
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
@@ -30,6 +28,78 @@ signal OnEnemyVisualLost(Ship : MapShip)
 signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 
+func  _ready() -> void:
+	Commander.GetInstance().RegisterSelf(self)
+	for g in FleetShips:
+		var s = g.instantiate() as HostileShip
+		#get_parent().add_child(s)
+		$ShipDock.AddShip(s)
+	#visible = false
+	for g in Cpt.CaptainStats:
+		g.CurrentVelue = g.GetStat()
+	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
+	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
+	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
+	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
+	if (!Patrol):
+		GetShipAcelerationNode().position.x = 0
+	else:
+		var nextcity = cities.find(CurrentPort) + Direction
+		if (nextcity < 0 or nextcity > cities.size() - 1):
+			Direction *= -1
+			nextcity = cities.find(CurrentPort) + Direction
+		
+		#If path is full it means we are loading so skip path generation
+		if (Path.size() == 0):
+			if (CurrentPort.NeighboringCities.size() == 0):
+				set_physics_process(false)
+				await Map.GetInstance().MAP_NeighborsSet
+				set_physics_process(true)
+			Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
+			if (Path.size() == 0):
+				Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
+			PathPart = 1
+		call_deferred("AimForCity")
+	
+	#MapPointerManager.GetInstance().AddShip(self, false)
+	$Elint.connect("area_entered", _on_elint_area_entered)
+	$Elint.connect("area_exited", _on_elint_area_exited)
+func _physics_process(delta: float) -> void:
+	if (Paused or Docked):
+		return
+	
+	UpdateElint(delta)
+	
+	if (!Patrol):
+		return
+	
+	if (CurrentPort != null and Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
+		Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
+		if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
+			GetShipAcelerationNode().position.x = Cpt.GetStat("SPEED").GetStat()
+		else :
+			return
+	if (!CanReachDestination()):
+		FindRefuelSpot()
+	if (RefuelSpot != null):
+		ShipLookAt(RefuelSpot.global_position)
+	else : if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
+		updatedronecourse()
+	for g in  SimulationSpeed:
+		var ac = GetShipAcelerationNode().global_position
+		global_position = ac
+		var ftoconsume =  GetShipAcelerationNode().position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY")
+		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
+		
+	#for g in VisibleBy:
+		#if (g == null):
+			#continue
+		#if (g is Missile):
+			#continue
+		#VisibleBt[g] = min(VisibleBt[g] + 0.05, 10)
+		#if (VisibleBt[g] == 10 and !PursuingShips.has(g)):
+			#LastKnownPosition = g.global_position
+	
 func UpdateElint(delta: float) -> void:
 	d -= delta
 	if (d > 0):
@@ -45,11 +115,10 @@ func UpdateElint(delta: float) -> void:
 			BiggestLevel = Newlvl
 			ClosestShip = ship
 		if (Newlvl != lvl):
-			
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > 0):
 		ElintContact.emit(ClosestShip ,true)
-		
+	
 func SeenShips() -> bool:
 	for g in VisibleBy:
 		if (g == null):
@@ -90,44 +159,6 @@ func FindRefuelSpot() -> void:
 		print(ShipName + " will take a detour through " + RefuelSpot.SpotInfo.SpotName + " to refuel")
 		return
 
-func  _ready() -> void:
-	Commander.GetInstance().RegisterSelf(self)
-	for g in FleetShips:
-		var s = g.instantiate() as HostileShip
-		#get_parent().add_child(s)
-		$ShipDock.AddShip(s)
-	#visible = false
-	for g in Cpt.CaptainStats:
-		g.CurrentVelue = g.GetStat()
-	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
-	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
-	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
-	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-	if (!Patrol):
-		GetShipAcelerationNode().position.x = 0
-	else:
-		var nextcity = cities.find(CurrentPort) + Direction
-		if (nextcity < 0 or nextcity > cities.size() - 1):
-			Direction *= -1
-			nextcity = cities.find(CurrentPort) + Direction
-		
-		#If path is full it means we are loading so skip path generation
-		if (Path.size() == 0):
-			if (CurrentPort.NeighboringCities.size() == 0):
-				set_physics_process(false)
-				await Map.GetInstance().MAP_NeighborsSet
-				set_physics_process(true)
-			Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
-			if (Path.size() == 0):
-				Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
-			PathPart = 1
-		call_deferred("AimForCity")
-	
-	#MapPointerManager.GetInstance().AddShip(self, false)
-	$Elint.connect("area_entered", _on_elint_area_entered)
-	$Elint.connect("area_exited", _on_elint_area_exited)
-	
-
 func SetNewDestination(DistName : String) -> void:
 	Path = find_path(CurrentPort.GetSpotName(), DistName)
 	PathPart = 1
@@ -163,47 +194,13 @@ func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatValue("HULL")
 	stats.FirePower = Cpt.GetStatValue("FIREPOWER")
+	stats.Speed = Cpt.GetStatValue("SPEED")
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = "Enemy"
 	return stats
 
-func _physics_process(delta: float) -> void:
-	if (Paused or Docked):
-		return
-	
-	UpdateElint(delta)
-	
-	if (!Patrol):
-		return
-	
-	if (CurrentPort != null and Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
-		Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
-		if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
-			GetShipAcelerationNode().position.x = Cpt.GetStat("SPEED").GetStat()
-		else :
-			return
-	if (!CanReachDestination()):
-		FindRefuelSpot()
-	if (RefuelSpot != null):
-		ShipLookAt(RefuelSpot.global_position)
-	else : if (PursuingShips.size() > 0 or LastKnownPosition != Vector2.ZERO):
-		updatedronecourse()
-	for g in  SimulationSpeed:
-		var ac = GetShipAcelerationNode().global_position
-		global_position = ac
-		var ftoconsume =  GetShipAcelerationNode().position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY")
-		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
-		
-	#for g in VisibleBy:
-		#if (g == null):
-			#continue
-		#if (g is Missile):
-			#continue
-		#VisibleBt[g] = min(VisibleBt[g] + 0.05, 10)
-		#if (VisibleBt[g] == 10 and !PursuingShips.has(g)):
-			#LastKnownPosition = g.global_position
-	
+
 
 func updatedronecourse():
 	# Get the current position and velocity of the ship
@@ -290,7 +287,7 @@ func _on_area_entered(area: Area2D) -> void:
 				var plships : Array[Node2D] = []
 				var drn = area.get_parent() as Drone
 				if (drn.Docked):
-					var player = PlayerShip.GetInstance()
+					var player = drn.Command
 					plships.append(player)
 					plships.append_array(player.GetDroneDock().DockedDrones)
 				else:

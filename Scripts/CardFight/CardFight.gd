@@ -24,11 +24,13 @@ var ShipsViz : Array[CardFightShipViz]
 
 var Actions : Dictionary
 
+signal CardFightEnded(Survivors : Array[BattleShipStats])
+
 func _ready() -> void:
-	for g in 3:
-		PlayerShips.append(GenerateRandomisedShip("Player" + var_to_str(g)))
-	for g in 3:
-		EnemyShips.append(GenerateRandomisedShip("Enemy" + var_to_str(g)))
+	#for g in 3:
+		#PlayerShips.append(GenerateRandomisedShip("Player" + var_to_str(g), false))
+	#for g in 3:
+		#EnemyShips.append(GenerateRandomisedShip("Enemy" + var_to_str(g), true))
 	
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
@@ -39,6 +41,7 @@ func _ready() -> void:
 		AddShip(g)
 	print("init done")
 	StartActionPickPhase()
+
 #function to sort battle ships based on their speed
 static func speed_comparator(a, b):
 	if a.Speed > b.Speed:
@@ -70,13 +73,16 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 	PlayerShips.erase(Ship)
 	EnemyShips.erase(Ship)
 
-func GenerateRandomisedShip(Name : String) -> BattleShipStats:
+func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	var Stats = BattleShipStats.new()
 	Stats.Name = Name
 	Stats.FirePower = randf_range(0.5, 3)
 	Stats.Hull = randf_range(10, 800)
 	Stats.Speed = randf_range(0.5, 3)
-	Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_2_Main Camera.png")
+	if (!enemy):
+		Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_2_Main Camera.png")
+	else:
+		Stats.ShipIcon = load("res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png")
 	return Stats
 
 func StartActionPickPhase() -> void:
@@ -114,9 +120,10 @@ func StartActionPerformPhase() -> void:
 					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
 					anim.DefCard = Action.CounteredBy
 				else:
-					Target.Hull -= Action.Damage
+					Target.Hull -= Action.Damage * Ship.FirePower
 					if (Target.Hull <= 0):
-						ShipDestroyed(Target)
+						if (ShipDestroyed(Target)):
+							return
 					else:
 						UpdateShipStats(Target)
 					
@@ -128,9 +135,17 @@ func StartActionPerformPhase() -> void:
 	$VBoxContainer4/VBoxContainer4.visible = true
 	EndActionPerformPhase()
 
-func ShipDestroyed(Ship : BattleShipStats):
+func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	RemoveShip(Ship)
-
+	if (EnemyShips.size() == 0):
+		CardFightEnded.emit(PlayerShips)
+		queue_free()
+		return true
+	if (PlayerShips.size() == 0):
+		CardFightEnded.emit(EnemyShips)
+		queue_free()
+		return true
+	return false
 func EndActionPerformPhase() -> void:
 	Actions.clear()
 	StartActionPickPhase()

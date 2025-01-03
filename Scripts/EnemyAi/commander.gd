@@ -113,7 +113,7 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 				if (g.Receivers.size() == 0):
 					IOrdersToErase.append(g)
 	for g in POrdersToErase:
-		PursuitOrders.erase(g)
+		PursuitOrderCanceled(g.Target)
 	for g in IOrdersToErase:
 		InvestigationOrders.erase(g)
 func OnEnemySeen(Ship : MapShip) -> void:

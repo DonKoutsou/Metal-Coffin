@@ -24,30 +24,33 @@ var LandedShip : MapShip
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	PlFunds = ShipData.GetInstance().GetStat("FUNDS").GetCurrentValue()
-	
+	$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	if (!HasFuel):
-		$VBoxContainer2/VBoxContainer.visible = false
+		FuelPricePerTon = 200
 	else:
-		if (LandedShip is PlayerShip):
-			SetFuelData()
-		else :
-			SetDroneFuelData()
-		$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
-		$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm.text = var_to_str(roundi(PlFuel + BoughtFuel))
-		$VBoxContainer2/VBoxContainer/ProgressBar.max_value = PlMaxFuel
-		$VBoxContainer2/VBoxContainer/ProgressBar.value = PlFuel + BoughtFuel
-		$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice.text = var_to_str(FuelPricePerTon)
+		FuelPricePerTon = 100
+
+	if (LandedShip is PlayerShip):
+		SetFuelData()
+	else :
+		SetDroneFuelData()
+	$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm.text = var_to_str(roundi(PlFuel + BoughtFuel))
+	$VBoxContainer2/VBoxContainer/ProgressBar.max_value = PlMaxFuel
+	$VBoxContainer2/VBoxContainer/ProgressBar.value = PlFuel + BoughtFuel
+	$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice.text = var_to_str(FuelPricePerTon)
 	if (!HasRepair):
-		$VBoxContainer2/VBoxContainer2.visible = false
+		RepairpricePerRepairValue = 200
 	else:
-		if (LandedShip is PlayerShip):
-			SetHullData()
-		else :
-			SetDroneHullData()
-		$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm.text = var_to_str(roundi(PlHull))
-		$VBoxContainer2/VBoxContainer2/ProgressBar.max_value = PlMaxHull
-		$VBoxContainer2/VBoxContainer2/ProgressBar.value = PlHull + BoughtRepairs
-		$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer2/RepairPrice.text = var_to_str(RepairpricePerRepairValue)
+		RepairpricePerRepairValue = 100
+	
+	if (LandedShip is PlayerShip):
+		SetHullData()
+	else :
+		SetDroneHullData()
+	$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm.text = var_to_str(roundi(PlHull))
+	$VBoxContainer2/VBoxContainer2/ProgressBar.max_value = PlMaxHull
+	$VBoxContainer2/VBoxContainer2/ProgressBar.value = PlHull + BoughtRepairs
+	$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer2/RepairPrice.text = var_to_str(RepairpricePerRepairValue)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass

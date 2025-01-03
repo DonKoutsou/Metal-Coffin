@@ -2,31 +2,31 @@ extends Resource
 
 class_name DroneDockEventHandler
 
-signal OnDroneArmed
-signal OnDroneDissarmed
-signal OnDroneDirectionChanged(NewDir : float)
-signal DroneLaunched(Dr : Drone)
-signal DroneAdded(Dr : Drone)
+signal OnDroneArmed(Target : MapShip)
+signal OnDroneDissarmed(Target : MapShip)
+signal OnDroneDirectionChanged(NewDir : float, Target : MapShip)
+signal DroneLaunched(Dr : Drone, Target : MapShip)
+signal DroneAdded(Dr : Drone, Target : MapShip)
 signal DroneDischarged(Dr : Drone)
-signal DroneDocked(Dr : Drone)
+signal DroneDocked(Dr : Drone, Target : MapShip)
 signal DroneUndocked(Dr : Drone)
-signal DroneRangeChanged(NewRange : float)
+signal DroneRangeChanged(NewRange : float, Target : MapShip)
 
-func DroneDirectionChanged(Dir : float) -> void:
-	OnDroneDirectionChanged.emit(Dir)
-func DroneArmed() -> void:
-	OnDroneArmed.emit()
-func DroneDissarmed() -> void:
-	OnDroneDissarmed.emit()
-func OnDroneLaunched(Dr : Drone) -> void:
-	DroneLaunched.emit(Dr)
-func OnDroneAdded(Dr : Drone) -> void:
-	DroneAdded.emit(Dr)
+func DroneDirectionChanged(Dir : float, Target : MapShip) -> void:
+	OnDroneDirectionChanged.emit(Dir, Target)
+func DroneArmed(Target : MapShip) -> void:
+	OnDroneArmed.emit(Target)
+func DroneDissarmed(Target : MapShip) -> void:
+	OnDroneDissarmed.emit(Target)
+func OnDroneLaunched(Dr : Drone, Target : MapShip) -> void:
+	DroneLaunched.emit(Dr, Target)
+func OnDroneAdded(Dr : Drone, Target : MapShip) -> void:
+	DroneAdded.emit(Dr, Target)
 func OnDroneDischarged(Dr : Drone) -> void:
 	DroneDischarged.emit(Dr)
-func OnDronRangeChanged(NewRange : float) -> void:
-	DroneRangeChanged.emit(NewRange)
-func OnDroneDocked(Dr : Drone) -> void:
-	DroneDocked.emit(Dr)
-func OnDroneUnDocked(Dr : Drone) -> void:
-	DroneUndocked.emit(Dr)
+func OnDronRangeChanged(NewRange : float,Target : MapShip) -> void:
+	DroneRangeChanged.emit(NewRange, Target)
+func OnDroneDocked(Dr : Drone, Target : MapShip) -> void:
+	DroneDocked.emit(Dr, Target)
+func OnDroneUnDocked(Dr : Drone, Target : MapShip) -> void:
+	DroneUndocked.emit(Dr, Target)

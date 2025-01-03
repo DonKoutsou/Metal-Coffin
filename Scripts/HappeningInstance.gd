@@ -6,6 +6,8 @@ var Hp : Happening
 
 var SelectedOption : int
 
+var HappeningInstigator : MapShip
+
 func _ready() -> void:
 	set_physics_process(false)
 	$VBoxContainer/ProgressBar.visible = false
@@ -25,7 +27,7 @@ func PresentHappening(Hap : Happening):
 			continue
 		but.text = Hap.Options[g].OptionName
 		if (Hap.Options[g] is Drone_Happening_Option):
-			var hasspave = PlayerShip.GetInstance().GetDroneDock().HasSpace()
+			var hasspave = HappeningInstigator.GetDroneDock().HasSpace()
 			but.disabled = !hasspave
 			if (!hasspave):
 				but.text += " No space in drone dock"
@@ -59,8 +61,7 @@ func OnActionSelected():
 func _physics_process(_delta: float) -> void:
 	$VBoxContainer/ProgressBar.value = $Timer.time_left
 
-
 func _on_timer_timeout() -> void:
-	Hp.Options[SelectedOption].OptionOutCome()
+	Hp.Options[SelectedOption].OptionOutCome(HappeningInstigator)
 	queue_free()
 	SimulationManager.GetInstance().TogglePause(false)

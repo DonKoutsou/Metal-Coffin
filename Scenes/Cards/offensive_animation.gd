@@ -55,7 +55,7 @@ func TweenEnded() -> void:
 	if (DefC == null):
 		var d = DamageFloater.instantiate()
 		d.modulate = Color(1,0,0,1)
-		d.text = var_to_str(OriginShip.FirePower * AtackCard.Damage)
+		d.text = var_to_str(roundi(OriginShip.FirePower * AtackCard.Damage))
 		add_child(d)
 		d.global_position = (Ic2.global_position + (Ic2.size / 2)) - d.size / 2.
 		d.connect("Ended", AnimEnded)

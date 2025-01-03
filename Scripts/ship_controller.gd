@@ -16,8 +16,9 @@ func _ready() -> void:
 	ControlledShip.connect("OnShipDestroyed", _on_controlled_ship_swtich_range_changed)
 	AvailableShips.append(ControlledShip)
 	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
+	$"../UI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
 	
-func OnDroneDocked(D : Drone) -> void:
+func OnDroneDocked(D : Drone, Target : MapShip) -> void:
 	AvailableShips.erase(D)
 	D.disconnect("OnShipDestroyed", OnShipDestroyed)
 	D.ToggleFuelRangeVisibility(false)
@@ -25,7 +26,7 @@ func OnDroneDocked(D : Drone) -> void:
 		_on_controlled_ship_swtich_range_changed()
 	
 	
-func OnDroneUnDocked(D : Drone) -> void:
+func OnDroneUnDocked(D : Drone, Target : MapShip) -> void:
 	AvailableShips.append(D)
 	D.connect("OnShipDestroyed", OnShipDestroyed)
 	#ControlledShip = D
@@ -87,6 +88,7 @@ func Land(Spot : MapSpot) -> bool:
 	var PlayedEvent = false
 	if (Spot.SpotInfo.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
+		happeningui.HappeningInstigator = ControlledShip
 		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
 		happeningui.PresentHappening(Spot.SpotInfo.Event)
 		PlayedEvent = true
@@ -123,6 +125,8 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
 	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
+	$"../UI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
+	$"../UI/ScreenUi/DroneTab".ConnectedShip = ControlledShip
 
 var camtw : Tween
 func FrameCamToShip():

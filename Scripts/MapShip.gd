@@ -19,11 +19,12 @@ var CanRepair = false
 var CanUpgrade = false
 var IsRefueling = false
 var RadarWorking = true
-var FuelVis = true
 var Altitude = 10000
 
-signal ScreenEnter()
-signal ScreenExit()
+var ShowFuelRange = true
+
+var CamZoom = 1
+
 signal ShipStopped
 signal ShipAccelerating
 signal ShipForceStopped
@@ -49,42 +50,13 @@ func _ready() -> void:
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
 	MapPointerManager.GetInstance().AddShip(self, true)
-	
-func TogglePause(t : bool):
-	Paused = t
-	$AudioStreamPlayer2D.stream_paused = t
-	#$Radar/Radar_Range.material.set_shader_parameter("Paused", t)
-	#$Analyzer/Analyzer_Range.material.set_shader_parameter("Paused", t)
-func ChangeSimulationSpeed(i : int):
-	SimulationSpeed = i
-func ToggleRadar():
-	Detectable = !Detectable
-	RadarWorking = !RadarWorking
-	$Radar/CollisionShape2D.set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
-	#if ($PointLight2D.energy < 0.25):
-		#$PointLight2D.energy = 0.25
-	#else :
-		#$PointLight2D.energy = 0
 
-func ToggleElint():
-	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
+func _draw() -> void:
+	if (ShowFuelRange):
+		draw_circle(Vector2.ZERO, GetFuelRange(), Color(0.763, 0.659, 0.082), false, 2 / CamZoom)
 
-func StartLanding() -> void:
-	if (TakingOff):
-		TakeoffEnded.emit()
-		TakingOff = false
-	LandingStarted.emit()
-	Landing = true
-
-func Landed() -> bool:
-	return Altitude == 0
-
-func UpdateAltitude(NewAlt : float) -> void:
-	Altitude = NewAlt
-	$PlayerShipSpr.scale = Vector2(lerp(0.3, 1.0, Altitude / 10000.0), lerp(0.3, 1.0, Altitude / 10000.0))
-	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -20, Altitude / 10000.0), lerp(0, -20, Altitude / 10000.0))
-var d = 0.4
 func _physics_process(delta: float) -> void:
+	queue_redraw()
 	if (Paused):
 		return
 	if (Landing):
@@ -100,7 +72,37 @@ func _physics_process(delta: float) -> void:
 			TakeoffEnded.emit(self)
 			TakingOff = false
 	UpdateElint(delta)
+	
+func TogglePause(t : bool):
+	Paused = t
+	$AudioStreamPlayer2D.stream_paused = t
 
+func ChangeSimulationSpeed(i : int):
+	SimulationSpeed = i
+
+func ToggleRadar():
+	Detectable = !Detectable
+	RadarWorking = !RadarWorking
+	$Radar/CollisionShape2D.set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
+func ToggleElint():
+	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
+func ToggleFuelRangeVisibility(t : bool) -> void:
+	ShowFuelRange = t
+
+func StartLanding() -> void:
+	if (TakingOff):
+		TakeoffEnded.emit()
+		TakingOff = false
+	LandingStarted.emit()
+	Landing = true
+func Landed() -> bool:
+	return Altitude == 0
+
+func UpdateAltitude(NewAlt : float) -> void:
+	Altitude = NewAlt
+	$PlayerShipSpr.scale = Vector2(lerp(0.3, 1.0, Altitude / 10000.0), lerp(0.3, 1.0, Altitude / 10000.0))
+	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -20, Altitude / 10000.0), lerp(0, -20, Altitude / 10000.0))
+var d = 0.4
 func UpdateElint(delta: float) -> void:
 	d -= delta
 	if (d > 0):
@@ -118,16 +120,16 @@ func UpdateElint(delta: float) -> void:
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > 0):
 		Elint.emit(true, BiggestLevel)
-	
-func GetElintLevel(Dist : float) -> int:
-	var Lvl = 1
-	if (Dist < 300):
-		Lvl = 3
-	else : if(Dist < 600):
-		Lvl = 2
-	else :
-		Lvl = 1
-	return Lvl
+func UpdateVizRange(rang : float):
+	var RadarRangeCollisionShape = $Radar/CollisionShape2D
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
+func UpdateELINTTRange(rang : float):
+	var ElintRangeCollisionShape = $Elint/CollisionShape2D
+	#scalling collision
+	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
+func UpdateCameraZoom(NewZoom : float) -> void:
+	CamZoom = NewZoom
+
 func Damage(amm : float) -> void:
 	if (IsDead()):
 		MapPointerManager.GetInstance().RemoveShip(self)
@@ -136,17 +138,6 @@ func Damage(amm : float) -> void:
 		queue_free()
 func IsDead() -> bool:
 	return false
-func GetClosestElint() -> Vector2:
-	var closest : Vector2 = Vector2.ZERO
-	var closestdist : float = 999999999999
-	for g in ElintContacts.size():
-		var ship = ElintContacts.keys()[g]
-		var dist = global_position.distance_to(ship.global_position)
-		if (closestdist > dist):
-			closest = ship.global_position
-			closestdist = dist
-	
-	return closest
 
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
@@ -158,46 +149,6 @@ func RemovePort():
 	ShipDeparted.emit()
 	CurrentPort = null
 	Inventory.GetInstance().CancelUpgrades()
-	
-func UpdateFuelRange(fuel : float, fuel_ef : float):
-	var FuelRangeIndicator = $Fuel_Range
-	#var FuelRangeIndicatorDescriptor = $Fuel_Range/Label
-	var FuelMat = FuelRangeIndicator.material as ShaderMaterial
-	#calculate the range taking fuel efficiency in mind
-	var distall = fuel * 10 * fuel_ef
-	var tw = create_tween()
-
-	tw.tween_method(SetFuelShaderRange, FuelMat.get_shader_parameter("scale_factor"), distall / 10000, 0.5)
-
-func ToggleFuelRangeVisibility(t : bool) -> void:
-	$Fuel_Range.visible = t
-
-func SetFuelShaderRange(val : float):
-	var FuelMat = $Fuel_Range.material as ShaderMaterial
-	FuelMat.set_shader_parameter("scale_factor", val)
-	
-func UpdateVizRange(rang : float):
-	var RadarRangeCollisionShape = $Radar/CollisionShape2D
-	#scalling collision
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
-	
-	#var l = get_node_or_null("PointLight2D")
-	#if (l != null):
-		#l.texture_scale = rang / 100
-func UpdateELINTTRange(rang : float):
-	var ElintRangeCollisionShape = $Elint/CollisionShape2D
-	#scalling collision
-	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
-#
-#func UpdateAnalyzerRange(rang : float):
-	#var AnalyzerRangeIndicator = $Analyzer/Analyzer_Range
-	#var AnalyzerRangeCollisionShape = $Analyzer/CollisionShape2D
-	##var AnalyzerRangeIndicatorDescriptor = $Analyzer/Analyzer_Range/Label2
-	#var AnalyzerMat = AnalyzerRangeIndicator.material as ShaderMaterial
-	##CHANGING SIZE OF RADAR
-	#AnalyzerMat.set_shader_parameter("scale_factor", rang/10000)
-	##SCALLING COLLISION
-	#(AnalyzerRangeCollisionShape.shape as CircleShape2D).radius = rang
 
 func ShowingNotif() -> bool:
 	return $Notifications.get_child_count() > 0
@@ -206,15 +157,6 @@ func OnStatLow(StatName : String) -> void:
 	if (!LowStatsToNotifyAbout.has(StatName)):
 		return
 	StatLow.emit(StatName)
-
-func GetShipName() -> String:
-	return ""
-
-func GetShipSpeed() -> float:
-	return $Aceleration.position.x
-func GetShipSpeedVec() -> Vector2:
-	return $Aceleration.global_position - global_position
-
 func HaltShip():
 	Travelling = false
 	#set_physics_process(false)
@@ -224,8 +166,6 @@ func HaltShip():
 	AccelerationChanged(0)
 	#ChangingCourse = false
 	ShipForceStopped.emit()
-	
-
 
 func AccelerationChanged(value: float) -> void:
 	if (value <= 0):
@@ -269,13 +209,11 @@ func AccelerationChanged(value: float) -> void:
 	var postween = create_tween()
 	postween.set_trans(Tween.TRANS_EXPO)
 	postween.tween_property($Aceleration, "position", Vector2(max(0,value * GetShipMaxSpeed()), 0), 2)
-
 func AccelerationEnded(_value_changed: bool) -> void:
 	pass
 	#ChangingCourse = false
 
-func GetShipMaxSpeed() -> float:
-	return 0.3
+
 
 #signal OnLookAtEnded()
 #func LookAtEnded():
@@ -304,31 +242,13 @@ func ShipLookAt(pos : Vector2) -> void:
 func GetSteer() -> float:
 	return rotation
 
-func ToggleUI(t : bool):
-	$ShipBody.monitorable = t
-	#$Analyzer.monitorable = t
-	$Radar.monitorable = t
-	#$Radar/Radar_Range.visible = t
-	$Fuel_Range.visible = t
-	#$Analyzer/Analyzer_Range.visible = t
-
 func SetShipType(Ship : BaseShip):
 	ShipType = Ship
 	_UpdateShipIcon(Ship.TopIcon)
-	
-func GetBattleStats() -> BattleShipStats:
-	var stats = BattleShipStats.new()
-	return stats
 
 func _UpdateShipIcon(Tex : Texture) -> void:
 	$PlayerShipSpr.texture = Tex
 	$PlayerShipSpr/ShadowPivot/Shadow.texture = Tex
-
-func _on_player_viz_notifier_screen_entered() -> void:
-	ScreenEnter.emit()
-	
-func _on_player_viz_notifier_screen_exited() -> void:
-	ScreenExit.emit()
 
 func _on_elint_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == self):
@@ -352,3 +272,36 @@ func GetShipIcon() -> Node2D:
 	return $PlayerShipSpr
 func GetFuelReserves() -> float:
 	return 0
+func GetFuelRange() -> float:
+	return 0
+func GetBattleStats() -> BattleShipStats:
+	var stats = BattleShipStats.new()
+	return stats
+func GetShipMaxSpeed() -> float:
+	return 0.3
+func GetShipName() -> String:
+	return ""
+func GetShipSpeed() -> float:
+	return $Aceleration.position.x
+func GetShipSpeedVec() -> Vector2:
+	return $Aceleration.global_position - global_position
+func GetClosestElint() -> Vector2:
+	var closest : Vector2 = Vector2.ZERO
+	var closestdist : float = 999999999999
+	for g in ElintContacts.size():
+		var ship = ElintContacts.keys()[g]
+		var dist = global_position.distance_to(ship.global_position)
+		if (closestdist > dist):
+			closest = ship.global_position
+			closestdist = dist
+	
+	return closest
+func GetElintLevel(Dist : float) -> int:
+	var Lvl = 1
+	if (Dist < 300):
+		Lvl = 3
+	else : if(Dist < 600):
+		Lvl = 2
+	else :
+		Lvl = 1
+	return Lvl

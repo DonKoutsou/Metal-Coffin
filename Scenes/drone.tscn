@@ -6,9 +6,12 @@
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
-[ext_resource type="Shader" path="res://Shaders/Radar.gdshader" id="6_x7c6h"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="8_bbjow"]
+[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="9_82ju4"]
 [ext_resource type="PackedScene" uid="uid://bpdjsljrku63t" path="res://Scenes/cloudring.tscn" id="9_rm2bs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p3smt"]
+light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ewj1d"]
 blend_mode = 1
@@ -48,15 +51,8 @@ radius = 1000.0
 resource_local_to_scene = true
 radius = 150.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y742n"]
-resource_local_to_scene = true
-shader = ExtResource("6_x7c6h")
-shader_parameter/line_color = Color(0.763, 0.659, 0.082, 1)
-shader_parameter/line_width = 0.002
-shader_parameter/Paused = false
-shader_parameter/scale_factor = 0.08
-
 [node name="Drone" type="Node2D" groups=["Ships"]]
+material = SubResource("CanvasItemMaterial_p3smt")
 script = ExtResource("1_vfr1e")
 Cpt = ExtResource("3_fw0pf")
 
@@ -132,24 +128,10 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
 
-[node name="Fuel_Range" type="ColorRect" parent="." groups=["MapLines"]]
-z_index = 2
-material = SubResource("ShaderMaterial_y742n")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-
 [node name="GPUParticles2D" parent="." instance=ExtResource("9_rm2bs")]
+
+[node name="DroneDock" parent="." instance=ExtResource("9_82ju4")]
+collision_layer = 4096
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_ship_body_area_entered"]
 [connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]

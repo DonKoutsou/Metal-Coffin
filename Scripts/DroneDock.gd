@@ -112,7 +112,7 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
 	Inventory.GetInstance().UpdateSize()
 	AddDroneToHierarchy(Drne)
-	var pl = get_parent() as PlayerShip
+	var pl = get_parent() as MapShip
 	if (pl.CurrentPort != null):
 		Drne.SetCurrentPort(pl.CurrentPort)
 	if (!pl.Detectable):
@@ -142,45 +142,50 @@ func PlayTakeoffSound() -> void:
 	add_child(sound, true)
 	sound.connect("finished", SoundEnded)
 	sound.volume_db = -10
-	sound.play()	
-	
+	sound.play()
+
 func SoundEnded() -> void:
 	for g in $Sounds.get_child_count():
 		if (!($Sounds.get_child(g) as AudioStreamPlayer).playing):
 			$Sounds.get_child(g).queue_free()
 			return
 		
-func DroneArmed() -> void:
-	$Line2D.visible = true
+func DroneArmed(Target : MapShip) -> void:
+	if (Target == get_parent()):
+		$Line2D.visible = true
 
-func DroneDissarmed() -> void:
-	$Line2D.visible = false
+func DroneDissarmed(Target : MapShip) -> void:
+	if (Target == get_parent()):
+		$Line2D.visible = false
 
-func DroneAimDirChanged(NewDir : float) -> void:
-	$Line2D.rotation = NewDir / 10
+func DroneAimDirChanged(NewDir : float, Target : MapShip) -> void:
+	if (Target == get_parent()):
+		$Line2D.rotation = NewDir / 10
 	
-func DroneRangeChanged(NewRange : float) -> void:
-	$Line2D.set_point_position(1, Vector2(NewRange, 0))
-	#print(NewRange)
+func DroneRangeChanged(NewRange : float, Target : MapShip) -> void:
+	if (Target == get_parent()):
+		$Line2D.set_point_position(1, Vector2(NewRange, 0))
 	
-func LaunchDrone(Dr : Drone) -> void:
-	var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
-	var neededfuel = fueltoconsume - Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue
-	if (neededfuel > 0):
-		if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
-			return
-		ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
-	PlayTakeoffSound()
-	UndockDrone(Dr)
-	Dr.global_rotation = $Line2D.global_rotation
-	Dr.global_position = global_position
-	Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
-	Dr.EnableDrone()
+func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
+	if (Target == get_parent()):
+		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
+		var neededfuel = fueltoconsume - Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		if (neededfuel > 0):
+			if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
+				return
+			ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
+		PlayTakeoffSound()
+		UndockDrone(Dr)
+		Dr.global_rotation = $Line2D.global_rotation
+		Dr.global_position = global_position
+		Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
+		Dr.EnableDrone()
 	
 func AddDroneToHierarchy(drone : Drone):
+	drone.Command = get_parent()
 	get_parent().get_parent().add_child(drone)
 	DockDrone(drone)
-	DroneDockEventH.OnDroneAdded(drone)
+	DroneDockEventH.OnDroneAdded(drone, get_parent())
 
 func DockDrone(drone : Drone, playsound : bool = false):
 	if (playsound):
@@ -188,11 +193,8 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
 	drone.DissableDrone()
-	#if (drone.Fuel > 0):
-		#ShipData.GetInstance().RefilResource("FUEL", drone.Fuel)
-		#drone.Fuel = 0
 	
-	DroneDockEventH.OnDroneDocked(drone)
+	DroneDockEventH.OnDroneDocked(drone, get_parent())
 	
 	var docks = $DroneSpots.get_children()
 	for g in docks.size():
@@ -212,7 +214,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)
 	FlyingDrones.append(drone)
-	DroneDockEventH.OnDroneUnDocked(drone)
+	DroneDockEventH.OnDroneUnDocked(drone, get_parent())
 	var docks = $DroneSpots.get_children()
 	for g in docks.size():
 		if (docks[g].get_child_count() > 0):

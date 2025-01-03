@@ -6,7 +6,9 @@ class_name DroneTab
 
 var Armed = false
 
-var DockedDrones : Array[Drone] = []
+var ConnectedShip : MapShip
+
+var DockedDrones : Dictionary
 
 var CurrentlySelectedDrone : Drone
 
@@ -20,6 +22,10 @@ func _ready() -> void:
 	$Control/Control/Launch.ToggleDissable(true)
 	#visible = false
 
+func UpdateConnectedShip(Ship : MapShip) -> void:
+	ConnectedShip = Ship
+	if (!DockedDrones.keys().has(Ship)):
+		DockedDrones[Ship] = []
 
 func DroneDisharged(Dr : Drone):
 	if (DockedDrones.has(Dr)):
@@ -28,15 +34,15 @@ func DroneDisharged(Dr : Drone):
 		CurrentlySelectedDrone = null
 		UpdateCrewSelect()
 
-func DroneDocked(Dr : Drone) -> void:
-	DockedDrones.append(Dr)
+func DroneDocked(Dr : Drone, Target : MapShip) -> void:
+	DockedDrones[Target].append(Dr)
+	#DockedDrones.append(Dr)
 	#visible = DockedDrones.size() > 0
 	if (CurrentlySelectedDrone == null):
 		UpdateCrewSelect()
 
-func DroneUnDocked(Dr : Drone) -> void:
-
-	DockedDrones.erase(Dr)
+func DroneUnDocked(Dr : Drone, Target : MapShip) -> void:
+	DockedDrones[Target].erase(Dr)
 	#visible = DockedDrones.size() > 0
 	
 	if (Dr == CurrentlySelectedDrone):
@@ -44,12 +50,12 @@ func DroneUnDocked(Dr : Drone) -> void:
 		UpdateCrewSelect()
 
 func _on_deploy_drone_button_pressed() -> void:
-	DroneDockEventH.OnDroneLaunched(CurrentlySelectedDrone)
+	DroneDockEventH.OnDroneLaunched(CurrentlySelectedDrone, ConnectedShip)
 	_on_dissarm_drone_button_2_pressed()
 	
 func _on_arm_drone_button_pressed(t : bool) -> void:
 	
-	if (DockedDrones.size() == 0):
+	if (DockedDrones[ConnectedShip].size() == 0):
 		_on_dissarm_drone_button_2_pressed()
 		return
 	if (!t):
@@ -60,7 +66,7 @@ func _on_arm_drone_button_pressed(t : bool) -> void:
 	var fuel = CurrentlySelectedDrone.Cpt.GetStat("FUEL_TANK").CurrentVelue
 	RangeDir = clamp(RangeDir, fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_TANK") * 10 * eff)
 	
-	DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
+	DroneDockEventH.OnDronRangeChanged(roundi(RangeDir), ConnectedShip)
 	$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))
 	#$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton.disabled = true
 	$Control/Control/Dissarm.ToggleDissable(false)
@@ -68,7 +74,7 @@ func _on_arm_drone_button_pressed(t : bool) -> void:
 	if (!SteerShowing):
 		$AnimationPlayer.play("ShowSteer")
 		SteerShowing = true
-	DroneDockEventH.DroneArmed()
+	DroneDockEventH.DroneArmed(ConnectedShip)
 	
 func _on_dissarm_drone_button_2_pressed() -> void:
 	Armed = false
@@ -78,7 +84,7 @@ func _on_dissarm_drone_button_2_pressed() -> void:
 	if (SteerShowing):
 		$AnimationPlayer.play("HideSteer")
 		SteerShowing = false
-	DroneDockEventH.DroneDissarmed()
+	DroneDockEventH.DroneDissarmed(ConnectedShip)
 
 func _on_looter_drone_button_pressed() -> void:
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/LooterDroneButton.ToggleDissable(true)
@@ -96,7 +102,7 @@ func _on_toggle_drone_tab_pressed() -> void:
 	UpdateCrewSelect()
 
 func UpdateSteer(RelativeRot : float):
-	DroneDockEventH.DroneDirectionChanged(RelativeRot / 10)
+	DroneDockEventH.DroneDirectionChanged(RelativeRot / 10, ConnectedShip)
 
 	Input.vibrate_handheld(50)
 var RangeDir : float = 0.0
@@ -108,31 +114,31 @@ func UpdateDroneRange(Rang : float):
 		var fuel = CurrentlySelectedDrone.Cpt.GetStat("FUEL_TANK").CurrentVelue
 		RangeDir = clamp((RangeDir + (Rang * 20)), fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_TANK") * 10 * eff)
 		
-		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir))
+		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir), ConnectedShip)
 		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))
 	else:
 		ProgressCrewSelect()
 		
 func UpdateCrewSelect(Select : int = 0):
-	if (DockedDrones.size() > Select):
-		CurrentlySelectedDrone = DockedDrones[Select]
+	if (DockedDrones[ConnectedShip].size() > Select):
+		CurrentlySelectedDrone = DockedDrones[ConnectedShip][Select]
 		$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
 		$Control/TextureRect/Light.Toggle(true, true)
 	else:
 		$Control/TextureRect/Label2.text = "No Drones"
 		$Control/TextureRect/Light.Toggle(true)
 func ProgressCrewSelect():
-	if (DockedDrones.size() == 0):
+	if (DockedDrones[ConnectedShip].size() == 0):
 		$Control/TextureRect/Label2.text = "No Drones"
 		$Control/TextureRect/Light.Toggle(true)
 		return
 	if (CurrentlySelectedDrone == null):
-		CurrentlySelectedDrone = DockedDrones[0]
+		CurrentlySelectedDrone = DockedDrones[ConnectedShip][0]
 	else:
-		var i = DockedDrones.find(CurrentlySelectedDrone) + 1
+		var i = DockedDrones[ConnectedShip].find(CurrentlySelectedDrone) + 1
 		if (i >= DockedDrones.size()):
 			i = 0
-		CurrentlySelectedDrone = DockedDrones[i]
+		CurrentlySelectedDrone = DockedDrones[ConnectedShip][i]
 	$Control/TextureRect/Light.Toggle(true, true)
 	$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
 
@@ -145,4 +151,4 @@ func _on_turn_off_button_pressed() -> void:
 
 func _on_drone_range_slider_value_changed(value: float) -> void:
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4/Label2.text = var_to_str(value / 2)
-	DroneDockEventH.OnDronRangeChanged(value)
+	DroneDockEventH.OnDronRangeChanged(value, ConnectedShip)

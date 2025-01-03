@@ -10,11 +10,8 @@ class_name Map
 @onready var thrust_slider: ThrustSlider = $UI/ScreenUi/ThrustSlider
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
-#signal MAP_AsteroidBeltArrival(Size : int)
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_NeighborsSet
-#signal MAP_StageSearched(Spt : MapSpotType)
-#signal MAP_ShipSearched(Ship : BaseShip)
 
 var SpotList : Array[Town]
 var ShowingTutorial = false
@@ -51,7 +48,7 @@ func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
 
 func ToggleUIForIntro(t : bool):
-	PlayerShip.GetInstance().ToggleUI(t)
+	#PlayerShip.GetInstance().ToggleUI(t)
 	$UI/ScreenUi.visible = t
 
 func ToggleMapMarkerPlecement(t : bool) -> void:
@@ -73,6 +70,7 @@ func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 		ship.LoadSaveData(g)
 		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
 		ship.global_position = g.Position
+
 func RespawnMissiles(MissileData : Array[Resource]) -> void:
 	for g in MissileData:
 		var dat = g as MissileSaveData
@@ -83,9 +81,9 @@ func RespawnMissiles(MissileData : Array[Resource]) -> void:
 		$CanvasLayer/SubViewportContainer/SubViewport.add_child(missile)
 		missile.global_position = dat.Pos
 		missile.global_rotation = dat.Rot
-		
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
+
 func GetEnemySaveData() ->SaveData:
 	var dat = SaveData.new()
 	dat.DataName = "Enemies"
@@ -95,6 +93,7 @@ func GetEnemySaveData() ->SaveData:
 		Datas.append(enem.GetSaveData())
 	dat.Datas = Datas
 	return dat
+
 func GetMissileSaveData() -> SaveData:
 	var dat = SaveData.new()
 	dat.DataName = "Missiles"
@@ -132,6 +131,7 @@ func GetSaveData() ->SaveData:
 		Datas.append(SpotList[g].GetSaveData())
 	dat.Datas = Datas
 	return dat
+
 func GetMapMarkerEditorSaveData() -> SaveData:
 	var dat = SaveData.new().duplicate()
 	dat.DataName = "MarkerEditor"
@@ -143,8 +143,10 @@ func GetMapMarkerEditorSaveData() -> SaveData:
 			EditorData.AddText(g)
 	dat.Datas.append(EditorData)
 	return dat
+
 func LoadMapMarkerEditorSaveData(Data : SD_MapMarkerEditor) -> void:
 	$CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor.LoadData(Data)
+
 func LoadSaveData(Data : Array[Resource]) -> void:
 	for g in Data.size():
 		var dat = Data[g] as TownSaveData
@@ -158,6 +160,8 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		SpotList.insert(g, sc)
 	
 	call_deferred("GenerateRoads")
+	#call_deferred("accept_event")
+	#call_deferred(accept_event())
 	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera.call_deferred("FrameCamToPlayer")
 #////////////////////////////////////////////	
 #SIGNALS COMMING FROM PLAYER SHIP
@@ -439,7 +443,7 @@ func _on_speed_simulation_button_up() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
 
 func _on_missile_button_pressed() -> void:
-	PlayerShip.GetInstance().FireMissile()
+	GetPlayerShip().FireMissile()
 
 func _on_marker_plecement_pressed() -> void:
 	ToggleMapMarkerPlecement(true)
