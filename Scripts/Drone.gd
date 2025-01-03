@@ -177,8 +177,8 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		if (!spot.Seen):
 			spot.OnSpotSeenByDrone()
 		spot.OnSpotVisitedByDrone()
-	else : if (area.get_parent() is PlayerShip and CommingBack):
-		var plship = area.get_parent() as PlayerShip
+	else : if (area.get_parent() == Command and CommingBack):
+		var plship = area.get_parent() as MapShip
 		plship.GetDroneDock().DockDrone(self, true)
 		CommingBack = false
 func _on_elint_area_entered(area: Area2D) -> void:
@@ -209,6 +209,10 @@ func GetSaveData() -> DroneSaveData:
 	dat.Pos = global_position
 	dat.Rot = global_rotation
 	dat.Fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
+	for g in GetDroneDock().DockedDrones:
+		dat.DockedDrones.append(g.GetSaveData())
+	for g in GetDroneDock().FlyingDrones:
+		dat.DockedDrones.append(g.GetSaveData())
 	return dat
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()

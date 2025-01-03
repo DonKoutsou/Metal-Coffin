@@ -8,3 +8,4 @@ class_name DroneSaveData
 @export var Fuel : float
 @export var Pos : Vector2
 @export var Rot : float
+@export var DockedDrones : Array[DroneSaveData]

@@ -11,6 +11,7 @@ signal DroneDischarged(Dr : Drone)
 signal DroneDocked(Dr : Drone, Target : MapShip)
 signal DroneUndocked(Dr : Drone)
 signal DroneRangeChanged(NewRange : float, Target : MapShip)
+signal OnDroneDockInstantiated(Target : MapShip)
 
 func DroneDirectionChanged(Dir : float, Target : MapShip) -> void:
 	OnDroneDirectionChanged.emit(Dir, Target)
@@ -30,3 +31,5 @@ func OnDroneDocked(Dr : Drone, Target : MapShip) -> void:
 	DroneDocked.emit(Dr, Target)
 func OnDroneUnDocked(Dr : Drone, Target : MapShip) -> void:
 	DroneUndocked.emit(Dr, Target)
+func OnDockInstanced(Target : MapShip) -> void:
+	OnDroneDockInstantiated.emit(Target)

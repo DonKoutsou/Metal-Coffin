@@ -15,6 +15,7 @@ var FlyingDrones : Array[Drone]
 
 func _ready() -> void:
 	$Line2D.visible = false
+	DroneDockEventH.OnDockInstanced(get_parent())
 	DroneDockEventH.connect("OnDroneDirectionChanged", DroneAimDirChanged)
 	DroneDockEventH.connect("OnDroneArmed", DroneArmed)
 	DroneDockEventH.connect("OnDroneDissarmed", DroneDissarmed)
@@ -77,6 +78,7 @@ func LoadSaveData( Dat : Array[DroneSaveData]) -> void:
 			dr.global_position = g.Pos
 			dr.global_rotation = g.Rot
 			dr.CommingBack = g.CommingBack
+		dr.GetDroneDock().LoadSaveData(g.DockedDrones)
 	
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
@@ -171,9 +173,14 @@ func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
 		var neededfuel = fueltoconsume - Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue
 		if (neededfuel > 0):
-			if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
-				return
-			ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
+			if (Target is Drone):
+				if (Target.Cpt.GetStat("FUEL_TANK").CurrentVelue < neededfuel):
+					return
+				Target.Cpt.GetStat("FUEL_TANK").CurrentVelue -= neededfuel
+			if (Target is PlayerShip):
+				if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
+					return
+				ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
 		PlayTakeoffSound()
 		UndockDrone(Dr)
 		Dr.global_rotation = $Line2D.global_rotation

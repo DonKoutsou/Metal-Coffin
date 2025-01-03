@@ -14,18 +14,23 @@ var CurrentlySelectedDrone : Drone
 
 var SteerShowing : bool = false
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	DroneDockEventH.connect("DroneDocked", DroneDocked)
 	DroneDockEventH.connect("DroneUndocked", DroneUnDocked)
 	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
+	DroneDockEventH.connect("OnDroneDockInstantiated", RegisterShip)
+func _ready() -> void:
+
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
 	#visible = false
 
+func RegisterShip(Target : MapShip) -> void:
+	DockedDrones[Target] = []
+
 func UpdateConnectedShip(Ship : MapShip) -> void:
 	ConnectedShip = Ship
-	if (!DockedDrones.keys().has(Ship)):
-		DockedDrones[Ship] = []
+	
 
 func DroneDisharged(Dr : Drone):
 	if (DockedDrones.has(Dr)):
