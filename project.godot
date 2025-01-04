@@ -13,6 +13,7 @@ config_version=5
 config/name="Into The Void"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
+run/max_fps=60
 config/icon="res://Assets/plane_Wheel_BaseColor_smol.png"
 
 [display]
@@ -131,8 +132,7 @@ Fire={
 [rendering]
 
 occlusion_culling/bvh_build_quality=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/size=2048
 lights_and_shadows/directional_shadow/size.mobile=1024

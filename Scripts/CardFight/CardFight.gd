@@ -221,7 +221,7 @@ func OnCardSelected(C : Card, Option : String) -> void:
 	selected_card_plecements.add_child(c)
 	Actions[CurrentShip].append(Action)
 
-func RemoveCard(C : Card) -> void:
+func RemoveCard(C : Card, Options : String) -> void:
 	C.queue_free()
 	var CurrentShip = ShipTurns[CurrentTurn]
 	Actions[CurrentShip].erase(C.CStats)

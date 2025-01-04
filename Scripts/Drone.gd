@@ -180,6 +180,12 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 	else : if (area.get_parent() == Command and CommingBack):
 		var plship = area.get_parent() as MapShip
 		plship.GetDroneDock().DockDrone(self, true)
+		var MyDroneDock = GetDroneDock()
+		for g in MyDroneDock.DockedDrones:
+			MyDroneDock.UndockDrone(g, false)
+			plship.GetDroneDock().DockDrone(g, false)
+		for g in MyDroneDock.FlyingDrones:
+			g.Command = plship
 		CommingBack = false
 func _on_elint_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
@@ -240,8 +246,10 @@ func GetElintLevel(Dist : float) -> int:
 		Lvl = 3
 	else : if(Dist < Cpt.GetStat("ELINT").GetStat() * 0.6):
 		Lvl = 2
-	else :
+	else : if(Dist < Cpt.GetStat("ELINT").GetStat()):
 		Lvl = 1
+	else :
+		Lvl = 0
 	return Lvl
 func GetShipMaxSpeed() -> float:
 	return Cpt.GetStatValue("SPEED")

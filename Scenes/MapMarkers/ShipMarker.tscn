@@ -174,7 +174,6 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gah6h")
 
 [node name="Direction" type="Label" parent="Panel"]
-texture_filter = 5
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 4
@@ -193,7 +192,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ShipSymbol" type="Label" parent="Panel"]
-texture_filter = 5
 use_parent_material = true
 layout_mode = 0
 offset_left = 17.0

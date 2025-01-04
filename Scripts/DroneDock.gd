@@ -218,9 +218,10 @@ func DockDrone(drone : Drone, playsound : bool = false):
 			drone.Landing = true
 		return
 
-func UndockDrone(drone : Drone):
+func UndockDrone(drone : Drone, Keep : bool = true):
 	DockedDrones.erase(drone)
-	FlyingDrones.append(drone)
+	if (Keep):
+		FlyingDrones.append(drone)
 	DroneDockEventH.OnDroneUnDocked(drone, get_parent())
 	var docks = $DroneSpots.get_children()
 	for g in docks.size():

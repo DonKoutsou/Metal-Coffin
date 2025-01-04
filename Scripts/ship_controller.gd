@@ -20,7 +20,8 @@ func _ready() -> void:
 	
 func OnDroneDocked(D : Drone, Target : MapShip) -> void:
 	AvailableShips.erase(D)
-	D.disconnect("OnShipDestroyed", OnShipDestroyed)
+	if (D.is_connected("OnShipDestroyed", OnShipDestroyed)):
+		D.disconnect("OnShipDestroyed", OnShipDestroyed)
 	D.ToggleFuelRangeVisibility(false)
 	if (D == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
@@ -85,6 +86,7 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float)
 	#SimulationManager.GetInstance().TogglePause(false)
 
 func Land(Spot : MapSpot) -> bool:
+	ControlledShip.HaltShip()
 	var PlayedEvent = false
 	if (Spot.SpotInfo.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance

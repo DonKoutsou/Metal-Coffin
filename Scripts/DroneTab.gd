@@ -141,7 +141,7 @@ func ProgressCrewSelect():
 		CurrentlySelectedDrone = DockedDrones[ConnectedShip][0]
 	else:
 		var i = DockedDrones[ConnectedShip].find(CurrentlySelectedDrone) + 1
-		if (i >= DockedDrones.size()):
+		if (i >= DockedDrones[ConnectedShip].size()):
 			i = 0
 		CurrentlySelectedDrone = DockedDrones[ConnectedShip][i]
 	$Control/TextureRect/Light.Toggle(true, true)

@@ -132,8 +132,10 @@ func GetElintLevel(Dist : float) -> int:
 		Lvl = 3
 	else : if(Dist < ShipData.GetInstance().GetStat("ELINT").GetStat() * 0.6):
 		Lvl = 2
-	else :
+	else : if(Dist < ShipData.GetInstance().GetStat("ELINT").GetStat()):
 		Lvl = 1
+	else :
+		Lvl = 0
 	return Lvl
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()

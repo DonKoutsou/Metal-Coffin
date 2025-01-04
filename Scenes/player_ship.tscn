@@ -121,3 +121,4 @@ energy = 0.25
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
 texture_scale = 4.0
+height = 200.0
