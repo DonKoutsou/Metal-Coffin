@@ -21,6 +21,7 @@ func Save(world : World) -> void:
 	DataArray.append(Inv.GetSaveData())
 	DataArray.append(world.ShipDat.GetSaveData())
 	DataArray.append(world.GetShipSaveData())
+	DataArray.append(Mapz.GetCommander().GetSaveData())
 	var pldata = PlayerSaveData.new()
 	pldata.Pos = Mapz.GetPlayerPos()
 	pldata.DroneDat = Mapz.GetPlayerShip().GetDroneDock().GetSaveData()
@@ -54,16 +55,18 @@ func Load(world : World) ->bool:
 	var enems : Array[Resource] = (sav.GetData("Enemies") as SaveData).Datas
 	var misses : Array[Resource] = (sav.GetData("Missiles") as SaveData).Datas
 	var MarkerEditorData : SD_MapMarkerEditor = (sav.GetData("MarkerEditor") as SaveData).Datas[0]
+	var InvestigationPositions = sav.GetData("PositionsToInvestigate") as SaveData
 	world.Loading = true
 	call_deferred("LoadStats", world, StatData)
-	call_deferred("LoadMapDat", Mapz ,sav.GetData("PLData").DroneDat, enems, misses, MarkerEditorData)
+	call_deferred("LoadMapDat", Mapz ,sav.GetData("PLData").DroneDat, enems, misses, MarkerEditorData, InvestigationPositions)
 	return true
 	#world.LoadData(StatData)
 func LoadStats(world : World, StatData : Resource) -> void:
 	world.LoadData(StatData)
 
-func LoadMapDat(Mp : Map, DroneDat : Array[DroneSaveData], Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor) -> void:
+func LoadMapDat(Mp : Map, DroneDat : Array[DroneSaveData], Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData) -> void:
 	Mp.GetPlayerShip().GetDroneDock().LoadSaveData(DroneDat)
 	Mp.RespawnEnemies( Enems )
 	Mp.RespawnMissiles( Missiles )
 	Mp.LoadMapMarkerEditorSaveData(Data)
+	Mp.GetCommander().LoadSaveData(InvestigationData)

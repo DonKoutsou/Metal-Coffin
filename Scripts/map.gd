@@ -63,7 +63,8 @@ func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
 	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
-
+func GetCommander() -> Commander:
+	return $Commander
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip

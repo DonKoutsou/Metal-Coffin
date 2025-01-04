@@ -88,7 +88,7 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 			for z in g.Receivers:
 				z.disconnect("OnPositionInvestigated", InvestigationOrderComplete)
 				z.LastKnownPosition = Vector2.ZERO
-				z.ShipLookAt(z.GetCurrentDestination())
+				#z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
 			print("Position : " + var_to_str(Pos) + "has been investigated.")
@@ -174,7 +174,7 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 	var ClosestShip : HostileShip
 	for g in Fleet:
 		if (free):
-			if (g.PursuingShips.size() > 0 or g.LastKnownPosition != Vector2.ZERO):
+			if (g.PursuingShips.size() > 0 or g.LastKnownPosition != Vector2.ZERO or !g.CanReachPosition(Pos)):
 				continue
 		if (patrol):
 			if (!g.Patrol):
@@ -207,3 +207,23 @@ func ConnectSignals(Ship : HostileShip) -> void:
 	Ship.connect("OnEnemyVisualContact", OnEnemySeen)
 	Ship.connect("OnEnemyVisualLost", OnEnemyVisualLost)
 	Ship.connect("ElintContact", OnElintHit)
+	
+
+func GetSaveData() -> SaveData:
+	var Save = SaveData.new()
+	Save.DataName = "PositionsToInvestigate"
+	var SavedData = SD_PositionsToInvestigate.new()
+	var Poses : Dictionary
+	for g in EnemyPositionsToInvestigate:
+		Poses[g.GetShipName()] = EnemyPositionsToInvestigate[g]
+	SavedData.Pos = Poses
+	Save.Datas.append(SavedData)
+	return Save
+	
+func LoadSaveData(Save : SaveData) -> void:
+	var ships = get_tree().get_nodes_in_group("Ships")
+	var Pos = (Save.Datas[0] as SD_PositionsToInvestigate).Pos
+	for g in ships:
+		var ShipName = g.GetShipName()
+		if (Pos.has(ShipName)):
+			EnemyPositionsToInvestigate[g] = Pos[ShipName]

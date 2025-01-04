@@ -11,7 +11,7 @@ var ShipType : BaseShip
 
 var Travelling = false
 #var ChangingCourse = false
-var Paused = false
+var Paused = true
 var SimulationSpeed : int = 1
 var CurrentPort : MapSpot
 var CanRefuel = false
@@ -144,7 +144,8 @@ func SetCurrentPort(Port : MapSpot):
 	CanRefuel = Port.HasFuel()
 	CanRepair = Port.HasRepair()
 	CanUpgrade = Port.HasUpgrade()
-
+func SetSpeed(Spd : float) -> void:
+	GetShipAcelerationNode().position.x = Spd
 func RemovePort():
 	ShipDeparted.emit()
 	CurrentPort = null
