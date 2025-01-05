@@ -9,7 +9,7 @@ var Speed : float = 1
 var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
 @export var MissileKillSound : AudioStream
-var FoundShip : MapShip
+var FoundShips : Array[Node2D] = []
 var Paused = false
 var SimulationSpeed : int = 1
 
@@ -43,28 +43,32 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
-	if (FoundShip != null):
+	if (FoundShips.size() > 0):
 		HoneAtEnemy()
 	for g in SimulationSpeed:
 		global_position = $AccelPosition.global_position
 		Distance -= $AccelPosition.position.x
-	if (Distance <= 0):
-		MapPointerManager.GetInstance().RemoveShip(self)
-		if (FoundShip):
-			MapPointerManager.GetInstance().RemoveShip(FoundShip)
-		queue_free()
+	#if (Distance <= 0):
+		#MapPointerManager.GetInstance().RemoveShip(self)
+		#if (FoundShip):
+			#MapPointerManager.GetInstance().RemoveShip(FoundShip)
+		#queue_free()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if (FoundShip == null):
-		FoundShip = area.get_parent()
-		if (FoundShip is HostileShip):
-			FoundShip.OnShipSeen(self)
+	if (!FoundShips.has(area.get_parent())):
+		FoundShips.append(area.get_parent())
+		if (area.get_parent() is HostileShip):
+			area.get_parent().OnShipSeen(self)
 
 func _on_missile_body_area_entered(area: Area2D) -> void:
-	if (FoundShip == null):
+	if (FoundShips.size() == 0):
 		return
 	#MapPointerManager.GetInstance().RemoveShip(area)
 	#area.queue_free()
+	if (area.get_parent() is Missile):
+		area.get_parent().queue_free()
+		queue_free()
+		return
 	area.get_parent().Damage(Damage)
 	if (area.get_parent().IsDead()):
 		var s = DeletableSoundGlobal.new()
@@ -74,14 +78,21 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		s.autoplay = true
 		#s.max_distance = 20000
 		get_parent().add_child(s)
-	MapPointerManager.GetInstance().RemoveShip(self)
 	
 	queue_free()
-	
+
+func _exit_tree() -> void:
+	MapPointerManager.GetInstance().RemoveShip(self)
+
 func HoneAtEnemy():
+	var Ship
+	for g in FoundShips:
+		if (g != null):
+			Ship = g
+			break
 	# Get the current position and velocity of the ship
-	var ship_position = FoundShip.global_position
-	var ship_velocity = FoundShip.GetShipSpeedVec()
+	var ship_position = Ship.global_position
+	var ship_velocity = Ship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (global_position.distance_to(ship_position) / $AccelPosition.position.x) / 60
@@ -90,6 +101,9 @@ func HoneAtEnemy():
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 
 	look_at(predicted_position)
+
+func GetShipSpeedVec() -> Vector2:
+	return $AccelPosition.global_position - global_position
 
 func GetSaveData() -> MissileSaveData:
 	var dat = MissileSaveData.new()

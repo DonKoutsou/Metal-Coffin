@@ -123,14 +123,14 @@ func EnableDrone():
 	$AudioStreamPlayer2D.play()
 	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
 	#ToggleRadar()
-	$ShipBody/CollisionShape2D.set_deferred("disabled", false)
+	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 func DissableDrone():
 	#GetShipIcon().rotation = 0.0
 	rotation = 0
 	$AudioStreamPlayer2D.stop()
 	#set_physics_process(false)
 	#ToggleRadar()
-	$ShipBody/CollisionShape2D.set_deferred("disabled", true)
+	#$ShipBody/CollisionShape2D.set_deferred("disabled", true)
 func ReturnToBase():
 	$Aceleration.position.x = GetShipMaxSpeed()
 	#rotation = 0.0
@@ -231,7 +231,7 @@ func GetSaveData() -> DroneSaveData:
 	return dat
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStatValue("HULL")
+	stats.Hull = Cpt.GetStat("HULL").CurrentVelue
 	stats.FirePower = Cpt.GetStatValue("FIREPOWER")
 	stats.Speed = Cpt.GetStatValue("SPEED")
 	stats.ShipIcon = Cpt.ShipIcon

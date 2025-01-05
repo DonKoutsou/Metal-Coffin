@@ -92,9 +92,7 @@ func RemovePort():
 		
 func Damage(amm : float) -> void:
 	ShipData.GetInstance().GetStat("HULL").CurrentVelue -= amm
-	if (IsDead()):
-		MapPointerManager.GetInstance().RemoveShip(self)
-		queue_free()
+	super(amm)
 		
 func IsDead() -> bool:
 	return ShipData.GetInstance().GetStat("HULL").CurrentVelue <= 0
@@ -139,7 +137,7 @@ func GetElintLevel(Dist : float) -> int:
 	return Lvl
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = ShipType.GetStat("HULL").StatBuff
+	stats.Hull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
 	stats.Speed = GetShipMaxSpeed()
 	stats.FirePower = 1
 	stats.ShipIcon = ShipType.TopIcon

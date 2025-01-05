@@ -50,7 +50,8 @@ DirectionMasks = {
 240: ExtResource("7_8juqy"),
 270: ExtResource("5_op54w"),
 300: ExtResource("9_n1ofx"),
-330: ExtResource("10_pyudk")
+330: ExtResource("10_pyudk"),
+350: ExtResource("10_pyudk")
 }
 DistanceMasks = Array[Texture2D]([ExtResource("14_qls7h"), ExtResource("4_h0jj8"), ExtResource("4_1dajb")])
 OnOffTextures = Array[Texture2D]([ExtResource("17_bii6e"), ExtResource("21_h2hwe")])

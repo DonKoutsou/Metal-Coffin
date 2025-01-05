@@ -2,6 +2,8 @@ extends Node
 
 class_name Commander
 
+@export var Armaments : Dictionary
+
 static var Instance : Commander
 
 var Fleet : Array[HostileShip] = []
@@ -20,6 +22,9 @@ func _physics_process(_delta: float) -> void:
 		if (!IsShipBeingPursued(g)):
 			var closestship = FindClosestFleetToPosition(g.global_position, true, true)
 			OrderShipToPursue(closestship, g)
+		var Carrier = FindMissileCarrierAbleToFireToPosition(g.global_position)
+		if (Carrier != null):
+			OrderShipToAtack(Carrier, g)
 	for g in EnemyPositionsToInvestigate.size():
 		var investigatedship = EnemyPositionsToInvestigate.keys()[g]
 		var investigatedpos = EnemyPositionsToInvestigate.values()[g]
@@ -28,7 +33,10 @@ func _physics_process(_delta: float) -> void:
 
 #ORDER MANAGEMENT////////////////////////////////////////////////////////////////
 func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
-	pass
+	var Armament = GetCheapestArmamentForDistance(Ship.global_position.distance_to(Target.global_position))
+	Ship.Cpt.GetStat("MISSILE_SPACE").CurrentVelue -= Armaments[Armament]
+	Ship.LaunchMissile(Armament, Target.global_position)
+	
 func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
 	Ship.PursuingShips.append(Target)
 	for g in PursuitOrders:
@@ -46,9 +54,10 @@ func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
 func PursuitOrderCompleted(TargetShip : MapShip) -> void:
 	for g in PursuitOrders:
 		if (g.Target == TargetShip):
-			for z in PursuitOrders[g].Receivers:
+			for z in g.Receivers:
 				z.PursuingShips.clear()
 			PursuitOrders.erase(g)
+			TargetShip.disconnect("OnShipDestroyed", PursuitOrderCompleted)
 			return
 
 func PursuitOrderCanceled(TargetShip : MapShip) -> void:
@@ -94,10 +103,21 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
 			print("Position : " + var_to_str(Pos) + "has been investigated.")
 			return
+	
 #SIGNAL RECEIVERS///////////////////////////////////////////////////
 func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
 	#DissconnectSignals(Ship)
+	if (Ship.GetDroneDock().DockedDrones.size() > 0):
+		var NewCommander = Ship.GetDroneDock().DockedDrones[0]
+		var DockedDrones = []
+		DockedDrones.append_array(Ship.GetDroneDock().DockedDrones)
+		for g in DockedDrones:
+			Ship.GetDroneDock().UndockShip(g)
+			if (g != NewCommander):
+				NewCommander.GetDroneDock().DockShip(g)
+		
+		
 	var POrdersToErase : Array[PursuitOrder] = []
 	if (Ship.PursuingShips.size() > 0):
 		for g in PursuitOrders:
@@ -105,7 +125,7 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 				g.Receivers.erase(Ship)
 				if (g.Receivers.size() == 0):
 					POrdersToErase.append(g)
-	var IOrdersToErase : Array[PursuitOrder] = []
+	var IOrdersToErase : Array[InvestigationOrder] = []
 	if (Ship.LastKnownPosition != Vector2.ZERO):
 		for g in InvestigationOrders:
 			if (g.Receivers.has(Ship)):
@@ -120,7 +140,7 @@ func OnEnemySeen(Ship : MapShip) -> void:
 	#if an enemy that had its location investigated is seen 
 	#make sure to call of all investigation on its previusly known location
 	print(Ship.GetShipName() + " has been located.")
-	if (EnemyPositionsToInvestigate.has(Ship)):
+	if (EnemyPositionsToInvestigate.keys().has(Ship)):
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			print(Ship.GetShipName() + "'s position was under investigation, investigation order has been canceled")
 			InvestigationOrderComplete(EnemyPositionsToInvestigate[Ship])
@@ -138,7 +158,8 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 		KnownEnemies.erase(Ship)
 		if (IsShipBeingPursued(Ship)):
 			PursuitOrderCanceled(Ship)
-		EnemyPositionsToInvestigate[Ship] = Ship.global_position
+		if (!Ship.IsDead()):
+			EnemyPositionsToInvestigate[Ship] = Ship.global_position
 
 #func OnPositionInvestigated(Pos : Vector2) -> void:
 	#for g in EnemyPositionsToInvestigate.size():
@@ -158,6 +179,8 @@ func OnDestinationReached(Ship : HostileShip) -> void:
 
 func OnElintHit(Ship : MapShip ,t : bool) -> void:
 	if (t):
+		if (KnownEnemies.keys().has(Ship) or Ship.IsDead()):
+			return
 		print(Ship.GetShipName() + " has triggered an Elint sensor")
 		EnemyPositionsToInvestigate[Ship] = Ship.global_position
 		if (IsShipsPositionUnderInvestigation(Ship)):
@@ -168,7 +191,6 @@ func IsShipsPositionUnderInvestigation(Ship : MapShip) -> bool:
 		if (g.ShipTrigger == Ship):
 			return true
 	return false
-
 func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : bool = false) -> HostileShip:
 	var closestdistance : float = 999999999999999
 	var ClosestShip : HostileShip
@@ -186,19 +208,30 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 			closestdistance = dist
 			ClosestShip = g
 	return ClosestShip
-
-func FindClosestMissileCarrierToPosition(Pos : Vector2) -> HostileShip:
-	var closestdistance : float = 999999999999999
-	var ClosestShip : HostileShip
+func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
+	var Carrier : HostileShip
 	for g in Fleet:
-		if (g.WeaponInventory == 0):
+		if g.Reloading > 0:
 			continue
 		var dist = Pos.distance_to(g.global_position)
-		if (dist < closestdistance):
-			closestdistance = dist
-			ClosestShip = g
-	return ClosestShip
-
+		var PossibleArmament = GetCheapestArmamentForDistance(dist)
+		if (PossibleArmament == null):
+			continue
+		if (g.Cpt.GetStat("MISSILE_SPACE").CurrentVelue < Armaments[PossibleArmament]):
+			continue
+		Carrier = g
+		break
+	return Carrier
+func GetCheapestArmamentForDistance(Dist : float) -> MissileItem:
+	var CheapestPrice = 10000
+	var CheapestArmament
+	for g in Armaments:
+		if (Dist > g.Distance):
+			continue
+		if (Armaments[g] < CheapestPrice):
+			CheapestArmament = g
+			CheapestPrice = Armaments[g]
+	return CheapestArmament
 func IsShipBeingPursued(Ship : MapShip) -> bool:
 	for g in PursuitOrders:
 		if (g.Target == Ship):

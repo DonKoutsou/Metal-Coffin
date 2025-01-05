@@ -11,4 +11,5 @@ class_name SD_HostileShip
 @export var ShipName : String
 @export var Path : Array
 @export var PathPart : int
-@export var WeaponInventory : int
+@export var CommandName : String
+#@export var WeaponInventory : int

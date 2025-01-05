@@ -13,7 +13,7 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	ControlledShip = $"../CanvasLayer/SubViewportContainer/SubViewport/PlayerShip"
-	ControlledShip.connect("OnShipDestroyed", _on_controlled_ship_swtich_range_changed)
+	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	AvailableShips.append(ControlledShip)
 	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
 	$"../UI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
@@ -105,6 +105,22 @@ func SteerChanged(value: float) -> void:
 	ControlledShip.Steer(deg_to_rad(value))
 
 func OnShipDestroyed(Sh : MapShip):
+	var NewCommander
+	if (Sh.GetDroneDock().DockedDrones > 0):
+		NewCommander = Sh.GetDroneDock().DockedDrones[0]
+		NewCommander.Command = null
+	else : if (Sh.GetDroneDock().FlyingDrones > 0):
+		NewCommander = Sh.GetDroneDock().FlyingDrones[0]
+		NewCommander.Command = null
+	var Drones = []
+	Drones.append_array(Sh.GetDroneDock().DockedDrones)
+	for g in Drones:
+		Sh.GetDroneDock().UndockDrone(g, false)
+		if (g != NewCommander):
+			NewCommander.GetDroneDock().DockDrone(g)
+	for g in Sh.GetDroneDock().FlyingDrones:
+		if (g != NewCommander):
+			g.Command = NewCommander
 	if (Sh == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
 	AvailableShips.erase(Sh)

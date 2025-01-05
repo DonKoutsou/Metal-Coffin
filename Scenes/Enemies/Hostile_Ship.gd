@@ -12,13 +12,13 @@ class_name HostileShip
 
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
-
+var Reloading : float = 0
 var Path : Array = []
 var PathPart : int = 0
 var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
-var WeaponInventory : int = 0
+
 
 @export var FleetShips : Array[PackedScene]
 
@@ -30,6 +30,7 @@ signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 
 func  _ready() -> void:
+	ToggleFuelRangeVisibility(false)
 	Commander.GetInstance().RegisterSelf(self)
 	for g in FleetShips:
 		var s = g.instantiate() as HostileShip
@@ -38,7 +39,8 @@ func  _ready() -> void:
 	#visible = false
 	for g in Cpt.CaptainStats:
 		g.CurrentVelue = g.GetStat()
-		
+	
+	_UpdateShipIcon(Cpt.ShipIcon)
 	SetSpeed(GetShipMaxSpeed())
 	
 	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
@@ -54,7 +56,7 @@ func  _ready() -> void:
 			nextcity = cities.find(CurrentPort) + Direction
 		
 		#If path is full it means we are loading so skip path generation
-		if (Path.size() == 0):
+		if (Path.size() == 0 and CurrentPort != null):
 			if (CurrentPort.NeighboringCities.size() == 0):
 				set_physics_process(false)
 				await Map.GetInstance().MAP_NeighborsSet
@@ -73,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	UpdateElint(delta)
-	
+	Reloading -= delta
 	if (!Patrol):
 		return
 
@@ -110,6 +112,17 @@ func _physics_process(delta: float) -> void:
 		global_position = ac
 		
 		#Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
+
+func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
+	var missile = Mis.MissileScene.instantiate() as Missile
+	missile.SetData(Mis)
+	get_parent().add_child(missile)
+	if (Command != null):
+		missile.global_position = Command.global_position
+	else:
+		missile.global_position = global_position
+	missile.look_at(Pos)
+	Reloading = 4
 
 func UpdateElint(delta: float) -> void:
 	d -= delta
@@ -183,7 +196,7 @@ func SetNewDestination(DistName : String) -> void:
 
 func SetCurrentPort(P : MapSpot) -> void:
 	CurrentPort = P
-	WeaponInventory = Cpt.GetStat("MISSILE_SPACE").GetStat()
+	Cpt.GetStat("MISSILE_SPACE").CurrentVelue = Cpt.GetStat("MISSILE_SPACE").GetStat()
 	if (P == RefuelSpot):
 		RefuelSpot = null
 	for g in GetDroneDock().DockedDrones:
@@ -355,8 +368,10 @@ func GetCurrentDestination() -> Vector2:
 		destination = LastKnownPosition
 		if (LastKnownPosition.distance_to(global_position) < 10):
 			OnPositionInvestigated.emit(LastKnownPosition)
-	else :
+	else : if (Path.size() > 0):
 		destination = GetCity(Path[PathPart]).global_position
+	else : 
+		destination = global_position
 	return destination
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
@@ -389,7 +404,6 @@ func GetShipMaxSpeed() -> float:
 	return Spd
 func GetSaveData() -> SD_HostileShip:
 	var dat = SD_HostileShip.new()
-
 	dat.Path = Path
 	dat.PathPart = PathPart
 	dat.Direction = Direction
@@ -397,7 +411,9 @@ func GetSaveData() -> SD_HostileShip:
 	dat.Cpt = Cpt
 	dat.Scene = scene_file_path
 	dat.ShipName = ShipName
-	dat.WeaponInventory = WeaponInventory
+	if (Command != null):
+		dat.CommandName = Command.GetShipName()
+	#dat.WeaponInventory = WeaponInventory
 	return dat
 func LoadSaveData(Dat : SD_HostileShip) -> void:
 	#DestinationCity = GetCity(Dat.DestinationCityName)
@@ -408,4 +424,4 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	#global_position = Dat.Position
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
-	WeaponInventory = Dat.WeaponInventory 
+	#WeaponInventory = Dat.WeaponInventory 

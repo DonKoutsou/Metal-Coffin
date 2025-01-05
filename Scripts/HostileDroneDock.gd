@@ -44,16 +44,16 @@ func DockShip(Ship : HostileShip):
 		Ship.Command = get_parent()
 		return
 
-func UndockDrone(drone : Drone):
-	DockedDrones.erase(drone)
+func UndockShip(Ship : HostileShip):
+	DockedDrones.erase(Ship)
+	Ship.Docked = false
+	Ship.Command = null
 	var docks = $DroneSpots.get_children()
 	for g in docks.size():
 		if (docks[g].get_child_count() > 0):
 			var trans = docks[g].get_child(0) as RemoteTransform2D
-			if (trans.remote_path == drone.get_path()):
+			if (trans.remote_path == Ship.get_path()):
 				trans.free()
-				drone.Docked = false
-				drone.Command = null
 				return
 
 func DronesHaveFuel(f : float) -> bool:

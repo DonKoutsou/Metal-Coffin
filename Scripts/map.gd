@@ -69,9 +69,19 @@ func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
 		ship.LoadSaveData(g)
+		if (g.CommandName != ""):
+			var com = FindEnemyByName(g.CommandName)
+			ship.Docked = true
+			ship.Command = com
+			com.GetDroneDock().call_deferred("DockShip", ship)
 		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
 		ship.global_position = g.Position
 
+func FindEnemyByName(Name : String) -> HostileShip:
+	for g in get_tree().get_nodes_in_group("Enemy"):
+		if (g.GetShipName() == Name):
+			return g
+	return null
 func RespawnMissiles(MissileData : Array[Resource]) -> void:
 	for g in MissileData:
 		var dat = g as MissileSaveData
