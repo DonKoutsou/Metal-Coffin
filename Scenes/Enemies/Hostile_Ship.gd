@@ -18,6 +18,7 @@ var PathPart : int = 0
 var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
+var WeaponInventory : Array[MissileItem]
 
 @export var FleetShips : Array[PackedScene]
 
@@ -38,14 +39,14 @@ func  _ready() -> void:
 	for g in Cpt.CaptainStats:
 		g.CurrentVelue = g.GetStat()
 		
-	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
+	SetSpeed(GetShipMaxSpeed())
 	
 	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	if (!Patrol):
-		GetShipAcelerationNode().position.x = 0
+		SetSpeed(0)
 	else:
 		var nextcity = cities.find(CurrentPort) + Direction
 		if (nextcity < 0 or nextcity > cities.size() - 1):
@@ -63,7 +64,7 @@ func  _ready() -> void:
 				Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
 			PathPart = 1
 	
-	MapPointerManager.GetInstance().AddShip(self, false)
+	#MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
 	
@@ -73,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)
 	
-	if (!Patrol or Docked):
+	if (!Patrol):
 		return
 
 	if (CurrentPort != null):
@@ -81,18 +82,34 @@ func _physics_process(delta: float) -> void:
 			SetSpeed(0)
 			Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
 			if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
-				SetSpeed(Cpt.GetStat("SPEED").GetStat())
+				SetSpeed(GetShipMaxSpeed())
 	else:
 		if (!CanReachDestination() or ToFarFromRefuel()):
 			FindRefuelSpot()
-
+	
+	if (Docked):
+		return
+	
+	for g in GetDroneDock().DockedDrones:
+		var dronefuel = ($Aceleration.position.x / 10 / g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
+		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > dronefuel):
+			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
+		else : if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
+			Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
+	
+	var ftoconsume =  GetShipAcelerationNode().position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY") * SimulationSpeed
+	if (Cpt.GetStat("FUEL_TANK").CurrentVelue > ftoconsume):
+		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
+	else: if (GetDroneDock().DronesHaveFuel(ftoconsume)):
+		GetDroneDock().SyphonFuelFromDrones(ftoconsume)
+		
 	ShipLookAt(GetCurrentDestination())
 	
 	for g in  SimulationSpeed:
 		var ac = GetShipAcelerationNode().global_position
 		global_position = ac
-		var ftoconsume =  GetShipAcelerationNode().position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY")
-		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
+		
+		#Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
 
 func UpdateElint(delta: float) -> void:
 	d -= delta
@@ -112,17 +129,33 @@ func UpdateElint(delta: float) -> void:
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > 0):
 		ElintContact.emit(ClosestShip ,true)
+func GetFuelRange() -> float:
+	var fuel = Cpt.GetStat("FUEL_TANK").GetCurrentValue()
+	var fuel_ef = Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
+	var total_fuel = fuel
+	var inverse_ef_sum = 1.0 / fuel_ef
+	
+	# Group ships fuel and efficiency calculations
+	for g in GetDroneDock().DockedDrones:
+		var ship_fuel = g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		var ship_efficiency = g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+		total_fuel += ship_fuel
+		inverse_ef_sum += 1.0 / ship_efficiency
 
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	return (total_fuel * 10 * effective_efficiency) / fleetsize
 func CanReachDestination() -> bool:
-	var dist = Cpt.GetStat("FUEL_TANK").CurrentVelue * 10 * Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var dist = GetFuelRange()
 	var actualdistance = global_position.distance_to(GetCurrentDestination())
 	return dist >= actualdistance
 func CanReachPosition(Pos : Vector2) -> bool:
-	var dist = Cpt.GetStat("FUEL_TANK").CurrentVelue * 10 * Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var dist = GetFuelRange()
 	var actualdistance = global_position.distance_to(Pos)
 	return dist >= actualdistance
 func ToFarFromRefuel() -> bool:
-	var dist = Cpt.GetStat("FUEL_TANK").CurrentVelue * 10 * Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var dist = GetFuelRange()
 	var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot
@@ -130,7 +163,7 @@ func ToFarFromRefuel() -> bool:
 			return false
 	return true
 func FindRefuelSpot() -> void:
-	var dist = Cpt.GetStat("FUEL_TANK").CurrentVelue * 10 * Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var dist = GetFuelRange()
 	var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot
@@ -147,6 +180,22 @@ func FindRefuelSpot() -> void:
 func SetNewDestination(DistName : String) -> void:
 	Path = find_path(CurrentPort.GetSpotName(), DistName)
 	PathPart = 1
+
+func SetCurrentPort(P : MapSpot) -> void:
+	CurrentPort = P
+	if (P == RefuelSpot):
+		RefuelSpot = null
+	for g in GetDroneDock().DockedDrones:
+		g.CurrentPort = P
+
+func RemovePort():
+	if (Docked):
+		return
+	if (CurrentPort == RefuelSpot):
+		RefuelSpot = null
+	CurrentPort = null
+	for g in GetDroneDock().DockedDrones:
+		g.CurrentPort = null
 
 func Damage(amm : float) -> void:
 	Cpt.GetStat("HULL").CurrentVelue -= amm
@@ -182,21 +231,22 @@ func OnShipUnseen(UnSeenBy : Node2D):
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
 func _on_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is MapSpot):
+		if (Docked):
+			return
 		var spot = area.get_parent() as MapSpot
 		if (Path.has(spot.GetSpotName()) and Patrol):
-			CurrentPort = spot
+			SetCurrentPort(spot)
 			PathPart = Path.find(spot.GetSpotName())
 			if (PathPart == Path.size() - 1):
 				OnDestinationReached.emit(self)
 			else :
 				PathPart += 1
 				#ShipLookAt(GetCity(Path[PathPart + 1]).global_position)
-			CurrentPort = GetCity(Path[Path.size() - 1])
+			#SetCurrentPort(GetCity(Path[Path.size() - 1]))
 			if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
-				GetShipAcelerationNode().position.x = 0
+				SetSpeed(0)
 		if (area.get_parent() == RefuelSpot and Patrol):
-			CurrentPort = RefuelSpot
-			RefuelSpot = null
+			SetCurrentPort(RefuelSpot)
 		#if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
 			#GetShipAcelerationNode().position.x = 0
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
@@ -227,7 +277,8 @@ func _on_area_entered(area: Area2D) -> void:
 			OnShipSeen(area.get_parent())
 func _on_area_exited(area: Area2D) -> void:
 	if (area.get_parent() == CurrentPort):
-		CurrentPort = null
+		if (!Docked):
+			RemovePort()
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		OnShipUnseen(area.get_parent())
 func _on_elint_area_entered(area: Area2D) -> void:
@@ -327,7 +378,14 @@ func GetCity(CityName : String) -> MapSpot:
 func GetShipName() -> String:
 	return ShipName
 func GetShipMaxSpeed() -> float:
-	return Cpt.GetStatValue("SPEED")
+	var Spd = Cpt.GetStatValue("SPEED")
+	if (Docked):
+		Spd = Command.GetShipMaxSpeed()
+	for g in GetDroneDock().DockedDrones:
+		var DroneSpd = g.Cpt.GetStatValue("SPEED")
+		if (DroneSpd < Spd):
+			Spd = DroneSpd
+	return Spd
 func GetSaveData() -> SD_HostileShip:
 	var dat = SD_HostileShip.new()
 
@@ -338,6 +396,7 @@ func GetSaveData() -> SD_HostileShip:
 	dat.Cpt = Cpt
 	dat.Scene = scene_file_path
 	dat.ShipName = ShipName
+	dat.WeaponInventory = WeaponInventory
 	return dat
 func LoadSaveData(Dat : SD_HostileShip) -> void:
 	#DestinationCity = GetCity(Dat.DestinationCityName)
@@ -348,3 +407,4 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	#global_position = Dat.Position
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
+	WeaponInventory = Dat.WeaponInventory 

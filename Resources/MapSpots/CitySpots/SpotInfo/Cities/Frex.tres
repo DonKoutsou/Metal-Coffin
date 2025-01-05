@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://c61p2sn8f460h"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://c61p2sn8f460h"]
 
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_e1n4s"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_ir33d"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_rh3ij"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_l22vi"]
@@ -8,6 +9,8 @@
 script = ExtResource("3_l22vi")
 SpotName = "Frex"
 EnemyCity = true
-HostilePatrolShipName = ""
+HostilePatrol = Array[ExtResource("1_e1n4s")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("1_ir33d")]([ExtResource("2_rh3ij")])
-HostileShipName = ""
+HostileGarrisson = Array[ExtResource("1_e1n4s")]([])
+HostileGarrissonShipNames = Array[String]([])

@@ -4,9 +4,9 @@ class_name MapSpotCompleteInfo
 @export var Event : Happening
 @export var EnemyCity : bool = false
 
-@export var HostilePatrolShipScene : PackedScene
-@export var HostilePatrolShipName : String
+@export var HostilePatrol : Array[Captain]
+@export var HostilePatrolShipNames : Array[String]
 @export var PossibleDrops : Array[Item]
-@export var HostileShipScene : PackedScene
-@export var HostileShipName : String
+@export var HostileGarrisson : Array[Captain]
+@export var HostileGarrissonShipNames : Array[String]
 var PickedBy : MapSpot

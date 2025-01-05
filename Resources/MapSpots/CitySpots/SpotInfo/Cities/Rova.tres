@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://bwchuknjjh8j5"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://bwchuknjjh8j5"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_qcwkr"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_x3al6"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_vgme0"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_fj4e6"]
 
@@ -8,6 +9,8 @@
 script = ExtResource("3_fj4e6")
 SpotName = "Rova"
 EnemyCity = true
-HostilePatrolShipName = ""
+HostilePatrol = Array[ExtResource("1_x3al6")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("1_qcwkr")]([ExtResource("2_vgme0")])
-HostileShipName = ""
+HostileGarrisson = Array[ExtResource("1_x3al6")]([])
+HostileGarrissonShipNames = Array[String]([])

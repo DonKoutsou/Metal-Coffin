@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=8 format=3 uid="uid://cj5f5f7y85dfw"]
 
-[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_sd0j0"]
-[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="2_iqsrt"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_kg7gd"]
+[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_eg5vs"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_mnd7c"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_ynv1t"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_sy2kx"]
@@ -12,8 +12,8 @@
 script = ExtResource("3_ynv1t")
 SpotName = "Tisk"
 EnemyCity = true
-HostilePatrolShipScene = ExtResource("1_sd0j0")
-HostilePatrolShipName = "Hos"
+HostilePatrol = Array[ExtResource("1_kg7gd")]([ExtResource("2_eg5vs")])
+HostilePatrolShipNames = Array[String](["Hos"])
 PossibleDrops = Array[ExtResource("3_mnd7c")]([ExtResource("4_sy2kx"), ExtResource("5_62iae"), ExtResource("6_es2sb")])
-HostileShipScene = ExtResource("2_iqsrt")
-HostileShipName = "Vozi"
+HostileGarrisson = Array[ExtResource("1_kg7gd")]([ExtResource("2_eg5vs")])
+HostileGarrissonShipNames = Array[String](["Vozi"])

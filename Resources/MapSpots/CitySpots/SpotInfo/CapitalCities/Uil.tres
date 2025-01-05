@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=9 format=3 uid="uid://tj0mcbsdf01i"]
 
 [ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="1_r7cs8"]
-[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="2_ndi6v"]
-[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="3_erxnj"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_pi8kp"]
+[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="3_5puwa"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="4_2c4jn"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="4_lvenl"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_oachf"]
@@ -14,8 +14,8 @@ script = ExtResource("4_2c4jn")
 SpotName = "Uil"
 Event = ExtResource("1_r7cs8")
 EnemyCity = true
-HostilePatrolShipScene = ExtResource("2_ndi6v")
-HostilePatrolShipName = "Meyer"
+HostilePatrol = Array[ExtResource("2_pi8kp")]([ExtResource("3_5puwa")])
+HostilePatrolShipNames = Array[String](["Meyer"])
 PossibleDrops = Array[ExtResource("4_lvenl")]([ExtResource("5_oachf"), ExtResource("6_jq03q"), ExtResource("7_h3j08")])
-HostileShipScene = ExtResource("3_erxnj")
-HostileShipName = "Sarma"
+HostileGarrisson = Array[ExtResource("2_pi8kp")]([ExtResource("3_5puwa")])
+HostileGarrissonShipNames = Array[String](["Sarma"])

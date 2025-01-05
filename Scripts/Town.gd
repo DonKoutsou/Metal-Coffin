@@ -25,23 +25,19 @@ func GenerateCity() -> void:
 		var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
 
 		sc.connect("SpotAproached", _TownSpotApreached)
-		#sc.connect("SpotSearched", TownSpotSearched)
-		#sc.connect("SpotAnalazyed", _TownSpotAnalyzed)
 		sc.connect("SpotLanded", _TownSpotLanded)
 		var pos = g.position
 		sc.position = pos
 		g.replace_by(sc)
 		sc.SetSpotData(spottype)
-		#if (spottype.GetEnumString() == "CITY_CENTER"):
-			#centername = sc.SpotName + " City"
-		#else : if (spottype.FullName == "Village"):
-			#centername = sc.SpotName
-		#else :
-			#sc.SpotName = spottype.FullName
-		
-		
 		g.free()
 	pass
+func GetSpots() -> Array[MapSpot]:
+	var spots : Array[MapSpot] = []
+	for g in $CitySpots.get_children() :
+		spots.append(g)
+	return spots
+	
 func SpawnEnemies():
 	for g in $CitySpots.get_children() :
 		var spot = g as MapSpot
@@ -100,9 +96,5 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		
 func _TownSpotApreached(spot : MapSpot):
 	TownSpotAproached.emit(spot)
-#func TownSpotSearched(spot : MapSpot):
-	#SpotSearched.emit(spot)
-#func _TownSpotAnalyzed(spot : MapSpot):
-	#TownSpotAnalazyed.emit(spot)
 func _TownSpotLanded(spot : MapSpot):
 	TownSpotLanded.emit(spot)

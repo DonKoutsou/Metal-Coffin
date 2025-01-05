@@ -16,3 +16,11 @@ func GetStatValue(StName : String):
 	for g in CaptainStats:
 		if (g.StatName == StName):
 			return g.StatBase
+
+func CopyStats(Cpt : Captain) -> void:
+	CaptainName = Cpt.CaptainName
+	CaptainBio = Cpt.CaptainBio
+	CaptainPortrait = Cpt.CaptainPortrait
+	ShipIcon = Cpt.ShipIcon
+	for g in Cpt.CaptainStats:
+		CaptainStats.append(g.duplicate(true))

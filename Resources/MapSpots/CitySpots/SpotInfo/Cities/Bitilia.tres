@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://diqxtbe2q5rdo"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://diqxtbe2q5rdo"]
 
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_f048x"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_y7cwe"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_jwgua"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_3s876"]
@@ -8,6 +9,8 @@
 script = ExtResource("3_3s876")
 SpotName = "Bitilia"
 EnemyCity = true
-HostilePatrolShipName = ""
+HostilePatrol = Array[ExtResource("1_f048x")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("1_y7cwe")]([ExtResource("2_jwgua")])
-HostileShipName = ""
+HostileGarrisson = Array[ExtResource("1_f048x")]([])
+HostileGarrissonShipNames = Array[String]([])

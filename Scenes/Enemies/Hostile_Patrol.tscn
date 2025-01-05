@@ -101,6 +101,8 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
 shape = SubResource("CircleShape2D_t084r")
 
+[node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
+
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]
 [connection signal="area_entered" from="Radar" to="." method="_on_radar_2_area_entered"]

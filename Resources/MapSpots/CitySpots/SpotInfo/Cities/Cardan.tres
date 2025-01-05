@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://b67ax85vkrox"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://b67ax85vkrox"]
 
 [ext_resource type="Resource" uid="uid://r5k7lwi7y3wa" path="res://Resources/Happenings/CrewRecruitHappeningAmol.tres" id="1_33een"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_8e3it"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_kulcb"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_wscmt"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_0wmni"]
 
@@ -10,6 +11,8 @@ script = ExtResource("2_wscmt")
 SpotName = "Cardan"
 Event = ExtResource("1_33een")
 EnemyCity = true
-HostilePatrolShipName = ""
+HostilePatrol = Array[ExtResource("2_kulcb")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("2_8e3it")]([ExtResource("3_0wmni")])
-HostileShipName = ""
+HostileGarrisson = Array[ExtResource("2_kulcb")]([])
+HostileGarrissonShipNames = Array[String]([])

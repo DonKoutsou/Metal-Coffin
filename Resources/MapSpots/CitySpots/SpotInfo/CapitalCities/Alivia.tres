@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=8 format=3 uid="uid://cau8rjgorpmtu"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=9 format=3 uid="uid://cau8rjgorpmtu"]
 
-[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="1_vg6a8"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_gbx4f"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_1p1c1"]
-[ext_resource type="PackedScene" uid="uid://dorwtx3kdq1md" path="res://Scenes/Enemies/Hostile_Garrison.tscn" id="2_gcxtl"]
+[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_x1pwj"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="3_dvn88"]
+[ext_resource type="Resource" uid="uid://cf4b4c1bssfsr" path="res://Resources/Captains/EnemyCaptains/EnemyTanker.tres" id="3_nfwu8"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_rkon4"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_c76ag"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_pelbf"]
@@ -12,8 +13,8 @@
 script = ExtResource("2_1p1c1")
 SpotName = "Alivia"
 EnemyCity = true
-HostilePatrolShipScene = ExtResource("1_vg6a8")
-HostilePatrolShipName = "Jonji"
+HostilePatrol = Array[ExtResource("1_gbx4f")]([ExtResource("2_x1pwj"), ExtResource("2_x1pwj"), ExtResource("3_nfwu8"), ExtResource("3_nfwu8"), ExtResource("3_nfwu8"), ExtResource("3_nfwu8")])
+HostilePatrolShipNames = Array[String](["Jonji", "Ji", "Jo", "Jah", "Ju", "Je"])
 PossibleDrops = Array[ExtResource("3_dvn88")]([ExtResource("4_rkon4"), ExtResource("5_c76ag"), ExtResource("6_pelbf")])
-HostileShipScene = ExtResource("2_gcxtl")
-HostileShipName = "Hark"
+HostileGarrisson = Array[ExtResource("1_gbx4f")]([ExtResource("2_x1pwj")])
+HostileGarrissonShipNames = Array[String](["Hark"])

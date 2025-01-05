@@ -20,7 +20,7 @@ var CanUpgrade = false
 var IsRefueling = false
 var RadarWorking = true
 var Altitude = 10000
-
+var Command : MapShip
 var ShowFuelRange = true
 
 var CamZoom = 1
@@ -239,6 +239,8 @@ func ShipLookAt(pos : Vector2) -> void:
 	piv.global_rotation = deg_to_rad(-90)
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
+	for g in GetDroneDock().DockedDrones:
+		g.global_rotation = global_rotation
 	
 func GetSteer() -> float:
 	return rotation
@@ -306,5 +308,5 @@ func GetElintLevel(Dist : float) -> int:
 	else :
 		Lvl = 1
 	return Lvl
-func GetDroneDock() -> DroneDock:
+func GetDroneDock():
 	return $DroneDock

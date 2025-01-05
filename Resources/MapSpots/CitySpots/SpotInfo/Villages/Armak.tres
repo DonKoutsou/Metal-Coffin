@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://eemvne8otjn4"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://eemvne8otjn4"]
 
 [ext_resource type="Resource" uid="uid://cjywrm3yoyv76" path="res://Resources/Happenings/CrewRecruitHappeningJor.tres" id="1_7uhe7"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_eytgd"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_iodb8"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="2_vytmo"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_o7gig"]
 
@@ -10,6 +11,10 @@ script = ExtResource("2_eytgd")
 SpotName = "Armak"
 Event = ExtResource("1_7uhe7")
 EnemyCity = false
+HostilePatrol = Array[ExtResource("2_iodb8")]([])
+HostilePatrolShipNames = Array[String]([])
 HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("2_vytmo")]([ExtResource("3_o7gig")])
+HostileGarrisson = Array[ExtResource("2_iodb8")]([])
+HostileGarrissonShipNames = Array[String]([])
 HostileShipName = ""

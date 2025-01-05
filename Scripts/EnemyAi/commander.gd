@@ -27,6 +27,8 @@ func _physics_process(_delta: float) -> void:
 			OrderShipToInvestigate(FindClosestFleetToPosition(investigatedpos, true, true) ,investigatedpos, investigatedship)
 
 #ORDER MANAGEMENT////////////////////////////////////////////////////////////////
+func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
+	pass
 func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
 	Ship.PursuingShips.append(Target)
 	for g in PursuitOrders:
@@ -173,6 +175,8 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 	var closestdistance : float = 999999999999999
 	var ClosestShip : HostileShip
 	for g in Fleet:
+		if (g.Docked):
+			continue
 		if (free):
 			if (g.PursuingShips.size() > 0 or g.LastKnownPosition != Vector2.ZERO or !g.CanReachPosition(Pos)):
 				continue

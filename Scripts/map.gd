@@ -7,6 +7,7 @@ class_name Map
 @export var FinalCity : PackedScene
 @export var MapSize : int
 @export var MapGenerationDistanceCurve : Curve
+@export var EnemyScene : PackedScene
 @onready var thrust_slider: ThrustSlider = $UI/ScreenUi/ThrustSlider
 @onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
 
@@ -58,7 +59,6 @@ func ToggleMapMarkerPlecement(t : bool) -> void:
 
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return $CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor
-
 func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
@@ -242,13 +242,54 @@ func GenerateMap() -> void:
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 	for g in SpotList:
-		g.SpawnEnemies()
+		SpawnTownEnemies(g)
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
 	
 	GenerateRoads()
 	#_DrawMapLines(["City Center", "Capital City Center"])
 	#_DrawMapLines(["City Center", "Capital City Center","Chora"], true, false)
+func SpawnTownEnemies(T : Town) -> void:
+	var Spots = T.GetSpots()
+	for g in Spots:
+		var PatrolBP = g.SpotInfo.HostilePatrol
+		var PatrolCommander : HostileShip
+		for Patrol in PatrolBP.size():
+			var Ship = EnemyScene.instantiate() as HostileShip
+			var Cpt = Captain.new()
+			Cpt.CopyStats(PatrolBP[Patrol])
+			Ship.Cpt = Cpt
+			Ship.CurrentPort = g
+			Ship.ShipName = g.SpotInfo.HostilePatrolShipNames[Patrol]
+			Ship.Patrol = true
+			if (PatrolCommander == null):
+				PatrolCommander = Ship
+			else:
+				Ship.Docked = true
+				Ship.Command = PatrolCommander
+				PatrolCommander.GetDroneDock().call_deferred("DockShip", Ship)
+			$CanvasLayer/SubViewportContainer/SubViewport.add_child(Ship)
+			Ship.global_position = g.global_position
+			
+		var GarrissonBP = g.SpotInfo.HostileGarrisson
+		var GarrissonCommander : HostileShip
+		for Garrisson in GarrissonBP.size():
+			var Ship = EnemyScene.instantiate() as HostileShip
+			var Cpt = Captain.new()
+			Cpt.CopyStats(GarrissonBP[Garrisson])
+			Ship.Cpt = Cpt
+			Ship.CurrentPort = g
+			Ship.ShipName = g.SpotInfo.HostileGarrissonShipNames[Garrisson]
+			Ship.Patrol = false
+			if (GarrissonCommander == null):
+				GarrissonCommander = Ship
+			else:
+				Ship.Docked = true
+				Ship.Command = GarrissonCommander
+				GarrissonCommander.GetDroneDock().call_deferred("DockShip", Ship)
+			$CanvasLayer/SubViewportContainer/SubViewport.add_child(Ship)
+			Ship.global_position = g.global_position
+			
 #ROAD GENERATION
 func GenerateRoads() -> void:
 	var CityGroups = ["CITY_CENTER"]

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cwjp6uxmysg5f"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cwjp6uxmysg5f"]
 
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_mh182"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_xwn58"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_doslg"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_jbiew"]
@@ -8,6 +9,8 @@
 script = ExtResource("3_jbiew")
 SpotName = "Ustar"
 EnemyCity = true
-HostilePatrolShipName = ""
+HostilePatrol = Array[ExtResource("1_mh182")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("1_xwn58")]([ExtResource("2_doslg")])
-HostileShipName = ""
+HostileGarrisson = Array[ExtResource("1_mh182")]([])
+HostileGarrissonShipNames = Array[String]([])

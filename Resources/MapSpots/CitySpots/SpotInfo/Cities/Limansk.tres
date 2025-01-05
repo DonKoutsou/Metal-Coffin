@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://dk4hwl1v20mrr"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dk4hwl1v20mrr"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_cy6yr"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_quo5c"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_uginv"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_14vsy"]
 
@@ -8,6 +9,8 @@
 script = ExtResource("3_14vsy")
 SpotName = "Limansk"
 EnemyCity = true
-HostilePatrolShipName = ""
+HostilePatrol = Array[ExtResource("1_quo5c")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("1_cy6yr")]([ExtResource("2_uginv")])
-HostileShipName = ""
+HostileGarrisson = Array[ExtResource("1_quo5c")]([])
+HostileGarrissonShipNames = Array[String]([])

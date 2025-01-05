@@ -7,8 +7,6 @@ class_name Drone
 var CommingBack = false
 var Docked = true
 
-var Command : MapShip
-
 signal DroneReturning
 
 func  _ready() -> void:

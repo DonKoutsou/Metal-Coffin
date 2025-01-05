@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=53 format=3 uid="uid://bdisf4wscxmw5"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_5r2qd"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="8_kpprx"]
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_yqugh"]
 [ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_3nbu5"]
+[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_7djmp"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="12_5ifa8"]
 [ext_resource type="Script" path="res://Scripts/ship_controller.gd" id="12_e8tb5"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ax28q"]
@@ -109,6 +110,7 @@ CapitalCity = ExtResource("9_yqugh")
 FinalCity = ExtResource("10_3nbu5")
 MapSize = 100
 MapGenerationDistanceCurve = SubResource("Curve_rghuw")
+EnemyScene = ExtResource("11_7djmp")
 
 [node name="ShipController" type="Node" parent="."]
 script = ExtResource("12_e8tb5")
@@ -199,7 +201,6 @@ MarkerScene = ExtResource("19_mn7nq")
 MapSpotMarkerScene = ExtResource("20_4fmmi")
 FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
 EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
-EnemyDebug = true
 
 [node name="CircleDrawer" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager" groups=["LineMarkers"]]
 use_parent_material = true

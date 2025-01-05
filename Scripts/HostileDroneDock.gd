@@ -5,23 +5,6 @@ var DockedDrones : Array[HostileShip]
 
 func HasSpace() -> bool:
 	return DockedDrones.size() < 6
-
-#func GetSaveData() -> Array[DroneSaveData]:
-	#var saved : Array[DroneSaveData]
-	#for g in DockedDrones:
-		#saved.append(g.GetSaveData())
-	#return saved
-	
-#func LoadSaveData( Dat : Array[DroneSaveData]) -> void:
-	#for g in Dat:
-		#var dr = AddCaptain(g.Cpt, false)
-		#dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = g.Fuel
-		#if (!g.Docked):
-			#UndockDrone(dr)
-			#dr.EnableDrone()
-			#dr.global_position = g.Pos
-			#dr.global_rotation = g.Rot
-			#dr.CommingBack = g.CommingBack
 	
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
@@ -58,6 +41,7 @@ func DockShip(Ship : HostileShip):
 		dock.add_child(trans)
 		trans.remote_path = Ship.get_path()
 		Ship.Docked = true
+		Ship.Command = get_parent()
 		return
 
 func UndockDrone(drone : Drone):
@@ -69,4 +53,22 @@ func UndockDrone(drone : Drone):
 			if (trans.remote_path == drone.get_path()):
 				trans.free()
 				drone.Docked = false
+				drone.Command = null
 				return
+
+func DronesHaveFuel(f : float) -> bool:
+	var fuelneeded = f
+	for g in DockedDrones:
+		fuelneeded -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		if (fuelneeded <= 0):
+			return true
+	return false
+
+func SyphonFuelFromDrones(amm : float) -> void:
+	for g in DockedDrones:
+		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > amm):
+			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= amm
+			return
+		else:
+			amm -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+			g.Cpt.GetStat("FUEL_TANK").CurrentVelue = 0
