@@ -18,7 +18,7 @@ var PathPart : int = 0
 var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
-var WeaponInventory : Array[MissileItem]
+var WeaponInventory : int = 0
 
 @export var FleetShips : Array[PackedScene]
 
@@ -183,10 +183,11 @@ func SetNewDestination(DistName : String) -> void:
 
 func SetCurrentPort(P : MapSpot) -> void:
 	CurrentPort = P
+	WeaponInventory = Cpt.GetStat("MISSILE_SPACE").GetStat()
 	if (P == RefuelSpot):
 		RefuelSpot = null
 	for g in GetDroneDock().DockedDrones:
-		g.CurrentPort = P
+		g.SetCurrentPort(P)
 
 func RemovePort():
 	if (Docked):

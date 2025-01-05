@@ -41,7 +41,6 @@ func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
 	Order.Target = Target
 	Target.connect("OnShipDestroyed", PursuitOrderCompleted)
 	PursuitOrders.append(Order)
-
 #completing pusuit mission means ships has been killed
 #remove mission from list and make sure all assigned ships know about it
 func PursuitOrderCompleted(TargetShip : MapShip) -> void:
@@ -95,7 +94,6 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
 			print("Position : " + var_to_str(Pos) + "has been investigated.")
 			return
-			
 #SIGNAL RECEIVERS///////////////////////////////////////////////////
 func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
@@ -188,7 +186,19 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 			closestdistance = dist
 			ClosestShip = g
 	return ClosestShip
-	
+
+func FindClosestMissileCarrierToPosition(Pos : Vector2) -> HostileShip:
+	var closestdistance : float = 999999999999999
+	var ClosestShip : HostileShip
+	for g in Fleet:
+		if (g.WeaponInventory == 0):
+			continue
+		var dist = Pos.distance_to(g.global_position)
+		if (dist < closestdistance):
+			closestdistance = dist
+			ClosestShip = g
+	return ClosestShip
+
 func IsShipBeingPursued(Ship : MapShip) -> bool:
 	for g in PursuitOrders:
 		if (g.Target == Ship):
