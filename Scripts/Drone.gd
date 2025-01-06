@@ -83,13 +83,9 @@ func _physics_process(_delta: float) -> void:
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
-	
-	for g in SimulationSpeed:
-		global_position = GetShipAcelerationNode().global_position
-	#GetShipTrajecoryLine().set_point_position(1, Vector2(Fuel, 0))
-	#if (Fuel <= global_position.distance_to(PlayerShip.GetInstance().global_position) / 10 / 2):
-		#ReturnToBase()
-		#$Line2D.visible = true
+
+	var offset = GetShipSpeedVec()
+	global_position += offset * SimulationSpeed
 
 func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
@@ -132,7 +128,7 @@ func DissableDrone():
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", true)
 func ReturnToBase():
-	$Aceleration.position.x = GetShipMaxSpeed()
+	SetSpeed(GetShipMaxSpeed())
 	#rotation = 0.0
 	CommingBack = true
 	DroneReturning.emit()
@@ -251,3 +247,8 @@ func GetElintLevel(Dist : float) -> int:
 	return Lvl
 func GetShipMaxSpeed() -> float:
 	return Cpt.GetStatValue("SPEED")
+func IsFuelFull() -> bool:
+	for g in GetDroneDock().DockedDrones:
+		if (!g.IsFuelFull()):
+			return false
+	return Cpt.GetStat("FUEL_TANK").CurrentVelue == Cpt.GetStat("FUEL_TANK").GetStat()

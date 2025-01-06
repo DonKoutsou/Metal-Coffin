@@ -95,3 +95,4 @@ CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_avlug")
 ShipIcon = ExtResource("3_v7x56")
 CaptainStats = Array[ExtResource("2_sr6bq")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym")])
+ShipCallsign = "R"

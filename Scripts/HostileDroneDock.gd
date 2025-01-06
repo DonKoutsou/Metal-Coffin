@@ -2,9 +2,6 @@ extends Node2D
 class_name HostileDroneDock
 
 var DockedDrones : Array[HostileShip]
-
-func HasSpace() -> bool:
-	return DockedDrones.size() < 6
 	
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
@@ -15,9 +12,6 @@ func GetCaptains() -> Array[Captain]:
 func DroneDisharged(Dr : Drone):
 	if (DockedDrones.has(Dr)):
 		DockedDrones.erase(Dr)
-	ShipData.GetInstance().RemoveCaptainStats([Dr.Cpt.GetStat("INVENTORY_CAPACITY")])
-	Inventory.GetInstance().UpdateSize()
-	MapPointerManager.GetInstance().RemoveShip(Dr)
 	Dr.queue_free()
 
 func AddShip(Ship : HostileShip, Notify : bool = true) -> void:
@@ -47,7 +41,7 @@ func DockShip(Ship : HostileShip):
 func UndockShip(Ship : HostileShip):
 	DockedDrones.erase(Ship)
 	Ship.Docked = false
-	Ship.Command = null
+	#Ship.Command = null
 	var docks = $DroneSpots.get_children()
 	for g in docks.size():
 		if (docks[g].get_child_count() > 0):
@@ -72,3 +66,17 @@ func SyphonFuelFromDrones(amm : float) -> void:
 		else:
 			amm -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
 			g.Cpt.GetStat("FUEL_TANK").CurrentVelue = 0
+
+func LaunchShip(Ship : HostileShip) -> void:
+	UndockShip(Ship)
+	Ship.global_position = global_position
+
+func GetShipWithBiggerRange() -> HostileShip:
+	var Ship : HostileShip
+	var Rang = 0
+	for g in DockedDrones:
+		var R = g.GetFuelRange()
+		if (R > Rang):
+			Ship = g
+			Rang = R
+	return Ship

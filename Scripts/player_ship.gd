@@ -69,9 +69,11 @@ func _physics_process(_delta: float) -> void:
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
-			
-	for g in SimulationSpeed:
-		global_position = $Aceleration.global_position
+	
+	var offset = GetShipSpeedVec()
+	global_position += offset * SimulationSpeed
+	#for g in SimulationSpeed:
+		#global_position = $Aceleration.global_position
 
 func ToggleRadar():
 	super()

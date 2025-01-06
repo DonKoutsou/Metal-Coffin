@@ -8,7 +8,6 @@ class_name HostileShip
 
 @export var ShipName : String
 @export var Patrol : bool = true
-@export var ShipCallsign : String = "P"
 
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
@@ -18,8 +17,7 @@ var PathPart : int = 0
 var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
-
-
+var CommingBack = false
 @export var FleetShips : Array[PackedScene]
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
@@ -69,49 +67,41 @@ func  _ready() -> void:
 	#MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
-	
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
-	
 	UpdateElint(delta)
 	Reloading -= delta
-	if (!Patrol):
-		return
-
-	if (CurrentPort != null):
-		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
-			SetSpeed(0)
-			Cpt.GetStat("FUEL_TANK").CurrentVelue += 0.05 * SimulationSpeed
-			if (Cpt.GetStat("FUEL_TANK").CurrentVelue >= Cpt.GetStat("FUEL_TANK").GetStat()):
+	if (Patrol):
+		if (CurrentPort != null):
+			Cpt.GetStat("FUEL_TANK").RefilCurrentVelue(0.05 * SimulationSpeed)
+			if (IsFuelFull()):
 				SetSpeed(GetShipMaxSpeed())
-	else:
-		if (!CanReachDestination() or ToFarFromRefuel()):
-			FindRefuelSpot()
-	
-	if (Docked):
-		return
-	
-	for g in GetDroneDock().DockedDrones:
-		var dronefuel = ($Aceleration.position.x / 10 / g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
-		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > dronefuel):
-			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
-		else : if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
-			Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
-	
-	var ftoconsume =  GetShipAcelerationNode().position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY") * SimulationSpeed
-	if (Cpt.GetStat("FUEL_TANK").CurrentVelue > ftoconsume):
-		Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
-	else: if (GetDroneDock().DronesHaveFuel(ftoconsume)):
-		GetDroneDock().SyphonFuelFromDrones(ftoconsume)
+		else:
+			if (!CanReachDestination() or ToFarFromRefuel()):
+				FindRefuelSpot()
 		
-	ShipLookAt(GetCurrentDestination())
-	
-	for g in  SimulationSpeed:
-		var ac = GetShipAcelerationNode().global_position
-		global_position = ac
+		if (Docked):
+			return
 		
-		#Cpt.GetStat("FUEL_TANK").CurrentVelue -= ftoconsume
+		for g in GetDroneDock().DockedDrones:
+			var Ship = g as HostileShip
+			var dronefuel = (GetShipSpeed() / 10 / Ship.Cpt.GetStatValue("FUEL_EFFICIENCY")) * SimulationSpeed
+			if (Ship.Cpt.GetStatCurrentValue("FUEL_TANK") > dronefuel):
+				Ship.Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
+			else : if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
+				Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
+		
+		var ftoconsume = GetShipSpeed() / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY") * SimulationSpeed
+		if (Cpt.GetStatCurrentValue("FUEL_TANK") > ftoconsume):
+			Cpt.GetStat("FUEL_TANK").ConsumeResource(ftoconsume)
+		else: if (GetDroneDock().DronesHaveFuel(ftoconsume)):
+			GetDroneDock().SyphonFuelFromDrones(ftoconsume)
+			
+		ShipLookAt(GetCurrentDestination())
+		
+		var offset = GetShipSpeedVec()
+		global_position += offset * SimulationSpeed
 
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
@@ -141,7 +131,10 @@ func UpdateElint(delta: float) -> void:
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > 0):
-		ElintContact.emit(ClosestShip ,true)
+		if (ClosestShip.Command != null):
+			ElintContact.emit(ClosestShip.Command ,true)
+		else:
+			ElintContact.emit(ClosestShip ,true)
 func GetFuelRange() -> float:
 	var fuel = Cpt.GetStat("FUEL_TANK").GetCurrentValue()
 	var fuel_ef = Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
@@ -255,14 +248,11 @@ func _on_area_entered(area: Area2D) -> void:
 				OnDestinationReached.emit(self)
 			else :
 				PathPart += 1
-				#ShipLookAt(GetCity(Path[PathPart + 1]).global_position)
-			#SetCurrentPort(GetCity(Path[Path.size() - 1]))
 			if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
 				SetSpeed(0)
 		if (area.get_parent() == RefuelSpot and Patrol):
 			SetCurrentPort(RefuelSpot)
-		#if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
-			#GetShipAcelerationNode().position.x = 0
+			SetSpeed(0)
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
 		if (bit):
@@ -289,6 +279,17 @@ func _on_area_entered(area: Area2D) -> void:
 				OnShipMet.emit(plships, hostships)
 		else:
 			OnShipSeen(area.get_parent())
+	else : if (area.get_parent() == Command and CommingBack):
+		var Ship = area.get_parent() as HostileShip
+		Ship.GetDroneDock().DockDrone(self, true)
+		var MyDroneDock = GetDroneDock()
+		for g in MyDroneDock.DockedDrones:
+			MyDroneDock.UndockDrone(g, false)
+			Ship.GetDroneDock().DockDrone(g, false)
+		for g in MyDroneDock.FlyingDrones:
+			g.Command = Ship
+		CommingBack = false
+		
 func _on_area_exited(area: Area2D) -> void:
 	if (area.get_parent() == CurrentPort):
 		if (!Docked):
@@ -393,6 +394,10 @@ func GetCity(CityName : String) -> MapSpot:
 	return CorrectCity
 func GetShipName() -> String:
 	return ShipName
+func GetShipSpeed() -> float:
+	if (Docked):
+		return Command.GetShipSpeed()
+	return super()
 func GetShipMaxSpeed() -> float:
 	var Spd = Cpt.GetStatValue("SPEED")
 	if (Docked):
@@ -425,3 +430,8 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
 	#WeaponInventory = Dat.WeaponInventory 
+func IsFuelFull() -> bool:
+	for g in GetDroneDock().DockedDrones:
+		if (!g.IsFuelFull()):
+			return false
+	return Cpt.GetStat("FUEL_TANK").CurrentVelue == Cpt.GetStat("FUEL_TANK").GetStat()

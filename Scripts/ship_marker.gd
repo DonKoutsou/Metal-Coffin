@@ -34,7 +34,7 @@ func _ready() -> void:
 	#$Control/PanelContainer/VBoxContainer/Threat.visible = false
 	$Control/PanelContainer/VBoxContainer/Fuel.visible = false
 	$Control/PanelContainer/VBoxContainer/Hull.visible = false
-	set_physics_process(false)
+	#set_physics_process(false)
 func PlayHostileShipNotif() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText("Hostile Ship Located")
@@ -101,7 +101,7 @@ func OnLandingEnded(_Ship : MapShip):
 func ToggleShipDetails(T : bool):
 	$Control.visible = T
 	$Line2D.visible = T
-	set_physics_process(T)
+	#set_physics_process(T)
 func ToggleFriendlyShipDetails(T : bool):
 	$Control/PanelContainer/VBoxContainer/Fuel.visible = T
 	$Control/PanelContainer/VBoxContainer/Hull.visible = T
@@ -136,9 +136,9 @@ func UpdateLine()-> void:
 func UpdateSpeed(Spd : float):
 	var spd = roundi(Spd * 360)
 	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(spd) + "km/h"
-func UpdateFuel():
-	var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL").GetCurrentValue())
-	var maxfuel = ShipData.GetInstance().GetStat("FUEL").GetStat()
+func UpdateFuel(extraamm : float = 0, extramax : float = 0):
+	var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL").GetCurrentValue() + extraamm)
+	var maxfuel = ShipData.GetInstance().GetStat("FUEL").GetStat() + extramax
 	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxfuel])
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(Alt))

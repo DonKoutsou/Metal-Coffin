@@ -61,7 +61,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 			marker.ToggleFriendlyShipDetails(true)
 			#////
 		marker.ToggleShipDetails(true)
-		marker.SetMarkerDetails(Ship.ShipName, Ship.ShipCallsign ,Ship.GetShipSpeed())
+		marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
 		marker.PlayHostileShipNotif()
 	
 	if (Ship is Drone):
@@ -148,7 +148,7 @@ func _physics_process(delta: float) -> void:
 		var Marker = _ShipMarkers[g]
 		
 		if (ship is HostileShip):
-			#HOSTILE_SHIP_DEBUG
+			Marker.ToggleShipDetails(!ship.Docked)
 			if (EnemyDebug):
 				Marker.global_position = ship.global_position
 				Marker.UpdateSpeed(ship.GetShipSpeed())
@@ -168,11 +168,19 @@ func _physics_process(delta: float) -> void:
 					###Marker.ToggleThreat(false)
 					Marker.ToggleTimeLastSeend(true)
 					Marker.UpdateTime()
-			
 		else:
 			if (ship is Drone):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
+				Marker.ToggleShipDetails(!ship.Docked)
+				if (ship.GetDroneDock().DockedDrones.size() > 0):
+					var fuel = ship.Cpt.GetStat("FUEL_TANK").CurrentVelue
+					var MaxFuel = ship.Cpt.GetStatValue("FUEL_TANK")
+					for z in ship.GetDroneDock().DockedDrones:
+						fuel += z.Cpt.GetStat("FUEL_TANK").CurrentVelue
+						MaxFuel += z.Cpt.GetStatValue("FUEL_TANK")
+					Marker.UpdateDroneFuel(roundi(fuel), MaxFuel)
+				else:
+					Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStat("FUEL_TANK").CurrentVelue), ship.Cpt.GetStatValue("FUEL_TANK"))
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStat("HULL").CurrentVelue), ship.Cpt.GetStat("HULL").GetStat())
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
@@ -182,13 +190,22 @@ func _physics_process(delta: float) -> void:
 				#Marker.global_position = ship.global_position
 			if (ship is PlayerShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				Marker.UpdateFuel()
+				if (ship.GetDroneDock().DockedDrones.size() > 0):
+					var fuel = 0.0
+					var MaxFuel = 0.0
+					for z in ship.GetDroneDock().DockedDrones:
+						fuel += z.Cpt.GetStat("FUEL_TANK").CurrentVelue
+						MaxFuel += z.Cpt.GetStatValue("FUEL_TANK")
+					Marker.UpdateFuel(roundi(fuel), MaxFuel)
+				else:
+					Marker.UpdateFuel()
 				Marker.UpdateHull()
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
 					Circles.append(PackedVector2Array([ship.global_position, Vector2(ShipData.GetInstance().GetStat("VIZ_RANGE").GetStat(), 0)]))
 				if (ship.Landing or ship.TakingOff):
 					Marker.UpdateAltitude(ship.Altitude)
+				
 				#Marker.global_position = ship.global_position
 				#Marker.UpdateSpeed(ship.GetSpeed())
 			if (ship is Missile):

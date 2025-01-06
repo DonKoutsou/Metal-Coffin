@@ -21,3 +21,5 @@ func GetCurrentValue()-> float:
 	return CurrentVelue
 func RefilCurrentVelue(RefAmmount : float) -> void:
 	CurrentVelue = clamp(CurrentVelue + RefAmmount, 0, GetStat())
+func ConsumeResource(Amm : float) -> void:
+	CurrentVelue -= Amm

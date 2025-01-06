@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
-[ext_resource type="FontFile" uid="uid://cn7w3x8fi0o58" path="res://Fonts/Play-Regular.ttf" id="3_p38gw"]
+[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="3_p38gw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
 bg_color = Color(0, 0, 0, 1)

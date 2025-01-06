@@ -162,7 +162,7 @@ func HaltShip():
 	Travelling = false
 	#set_physics_process(false)
 	
-	$Aceleration.position.x = 0
+	SetSpeed(0)
 	#$AudioStreamPlayer2D.stop()
 	AccelerationChanged(0)
 	#ChangingCourse = false
@@ -310,3 +310,7 @@ func GetElintLevel(Dist : float) -> int:
 	return Lvl
 func GetDroneDock():
 	return $DroneDock
+func IsFuelFull() -> bool:
+	return false
+func Refuel(Amm : float) -> void:
+	pass
