@@ -71,7 +71,7 @@ func AnimEnded() -> void:
 	AnimationFinished.emit()
 	queue_free()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:

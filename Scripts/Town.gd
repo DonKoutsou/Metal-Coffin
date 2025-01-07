@@ -49,7 +49,7 @@ func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
 	datas.TownLoc = position
 	datas.TownRot = rotation
-	datas.TownScene = scene_file_path
+	datas.TownScenePath = scene_file_path
 	var spotdata : Array[MapSpotSaveData]
 	for g in $CitySpots.get_children() :
 		var spot = g as MapSpot

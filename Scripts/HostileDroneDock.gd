@@ -14,7 +14,7 @@ func DroneDisharged(Dr : Drone):
 		DockedDrones.erase(Dr)
 	Dr.queue_free()
 
-func AddShip(Ship : HostileShip, Notify : bool = true) -> void:
+func AddShip(Ship : HostileShip, _Notify : bool = true) -> void:
 	AddShipToHierarchy(Ship)
 
 func AddShipToHierarchy(Ship : HostileShip):

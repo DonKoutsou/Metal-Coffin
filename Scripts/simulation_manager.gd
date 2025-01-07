@@ -5,13 +5,15 @@ class_name SimulationManager
 static var Paused : bool = false
 static var SimulationSpeed : int = 1
 
+@onready var simulation_notification: SimulationNotification = $"../Map/SubViewportContainer/ViewPort/InScreenUI/Control3/SimulationNotification"
+
+
 static  var Instance : SimulationManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	var notif = SimulationNotification.GetInstance()
-	notif.visible = false
-	notif.set_physics_process(false)
+	simulation_notification.visible = false
+	simulation_notification.set_physics_process(false)
 
 static func GetInstance() -> SimulationManager:
 	return Instance
@@ -20,9 +22,8 @@ static func IsPaused() -> bool:
 	return Paused
 	
 func TogglePause(t : bool) -> void:
-	var notif = SimulationNotification.GetInstance()
-	notif.visible = t
-	notif.set_physics_process(t)
+	simulation_notification.visible = t
+	simulation_notification.set_physics_process(t)
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
 	Inventory.GetInstance().OnSimulationPaused(t)

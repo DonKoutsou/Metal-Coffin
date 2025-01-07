@@ -221,7 +221,7 @@ func OnCardSelected(C : Card, Option : String) -> void:
 	selected_card_plecements.add_child(c)
 	Actions[CurrentShip].append(Action)
 
-func RemoveCard(C : Card, Options : String) -> void:
+func RemoveCard(C : Card, _Options : String) -> void:
 	C.queue_free()
 	var CurrentShip = ShipTurns[CurrentTurn]
 	Actions[CurrentShip].erase(C.CStats)
@@ -232,5 +232,5 @@ func UpdateEnergy() -> void:
 	$VBoxContainer4/VBoxContainer4/ProgressBar.value = Energy
 	$VBoxContainer4/VBoxContainer4/ProgressBar/Label.text = var_to_str(Energy) + " / 4"
 
-func PlayOffensiveAction(SourcePos : Vector2, TargetPos : Vector2, Countered : bool) -> void:
-	pass
+#func PlayOffensiveAction(SourcePos : Vector2, TargetPos : Vector2, Countered : bool) -> void:
+	#pass

@@ -14,7 +14,7 @@ func _ready() -> void:
 	Instance = self
 static func GetInstance() -> CaptainUI:
 	return Instance
-func AddCaptain(Dr : Drone, Target : MapShip):
+func AddCaptain(Dr : Drone, _Target : MapShip):
 	var Position : Control
 	for g in $GridContainer.get_children():
 		if (g is CaptainPanel):
@@ -30,14 +30,14 @@ func AddCaptain(Dr : Drone, Target : MapShip):
 	cptscene.SetCap(Dr.Cpt)
 
 func ToggleUI(t : bool) -> void:
-	$"../../../../../../..".OnScreenUiToggled(t)
+	Map.GetInstance().OnScreenUiToggled(t)
 func _on_captain_button_pressed() -> void:
 	
 	if (!visible):
-		$"../../../../../../..".OnScreenUiToggled(false)
-		InventoryUI.GetInstance().visible = false
+		Map.GetInstance().OnScreenUiToggled(false)
+		$"../InventoryUI".visible = false
 	else:
-		$"../../../../../../..".OnScreenUiToggled(true)
+		Map.GetInstance().OnScreenUiToggled(true)
 	visible = !visible
 
 func OnCaptainDischarged(C : Captain):

@@ -5,5 +5,5 @@ class_name Happening_Option
 
 func OptionResault() -> String:
 	return ""
-func OptionOutCome(Instigator : MapShip)-> void:
+func OptionOutCome(_Instigator : MapShip)-> void:
 	return

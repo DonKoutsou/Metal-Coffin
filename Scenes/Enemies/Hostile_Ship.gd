@@ -162,7 +162,7 @@ func CanReachPosition(Pos : Vector2) -> bool:
 	return dist >= actualdistance
 func ToFarFromRefuel() -> bool:
 	var dist = GetFuelRange()
-	var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
+	#var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot
 		if (spot.global_position.distance_to(global_position) < dist):
@@ -334,7 +334,7 @@ func find_path(start_city: String, end_city: String) -> Array:
 		
 		# If we reached the end_city, reconstruct the path
 		if current_city == end_city:
-			return reconstruct_path(parent, start_city, end_city)
+			return reconstruct_path(parent, end_city)
 		
 		# Explore neighboring cities
 		var Cit = GetCity(current_city)
@@ -349,7 +349,7 @@ func find_path(start_city: String, end_city: String) -> Array:
 	# If no path is found, return an empty array
 	print(GetShipName() + " has failed to find a path from " + start_city + " to " + end_city)
 	return []
-func reconstruct_path(parent: Dictionary, start_city: String, end_city: String) -> Array:
+func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 	var path = []
 	var current_city = end_city
 	while current_city != null:

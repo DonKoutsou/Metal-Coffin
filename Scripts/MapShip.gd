@@ -130,7 +130,7 @@ func UpdateELINTTRange(rang : float):
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
 
-func Damage(amm : float) -> void:
+func Damage(_amm : float) -> void:
 	if (IsDead()):
 		MapPointerManager.GetInstance().RemoveShip(self)
 		OnShipDestroyed.emit(self)
@@ -312,5 +312,5 @@ func GetDroneDock():
 	return $DroneDock
 func IsFuelFull() -> bool:
 	return false
-func Refuel(Amm : float) -> void:
+func Refuel(_Amm : float) -> void:
 	pass

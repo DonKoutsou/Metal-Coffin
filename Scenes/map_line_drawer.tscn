@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cja47tyjnyae"]
+
+[ext_resource type="Script" path="res://Scenes/MapLineDrawer.gd" id="1_3qvpb"]
+
+[node name="MapLineDrawer" type="Node2D"]
+use_parent_material = true
+script = ExtResource("1_3qvpb")

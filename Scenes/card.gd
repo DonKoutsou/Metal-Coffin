@@ -19,7 +19,7 @@ func _ready() -> void:
 	#st.Options.append_array(["FIRE", "AP", "NORMAL"])
 	#SetCardStats(st)
 
-func SetCardStats(Stats : CardStats, Option : String = "") -> void:
+func SetCardStats(Stats : CardStats, Opt : String = "") -> void:
 	CStats = Stats
 
 	$VBoxContainer/CardName.text = Option + " " + Stats.CardName

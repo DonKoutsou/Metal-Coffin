@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 class_name Map
 
 @export var Villages : Array[PackedScene]
@@ -8,8 +8,8 @@ class_name Map
 @export var MapSize : int
 @export var MapGenerationDistanceCurve : Curve
 @export var EnemyScene : PackedScene
-@onready var thrust_slider: ThrustSlider = $UI/ScreenUi/ThrustSlider
-@onready var camera_2d: ShipCamera = $CanvasLayer/SubViewportContainer/SubViewport/ShipCamera
+@onready var thrust_slider: ThrustSlider = $OuterUI/ScreenUi/ThrustSlider
+
 
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_NeighborsSet
@@ -24,9 +24,10 @@ static func GetInstance() -> Map:
 
 func _ready() -> void:
 	Instance = self
+	$SubViewportContainer/ViewPort/InScreenUI/Control3/UnderStatUI/InventoryUI.connect("OnUiToggled", OnScreenUiToggled)
 	# spotlist empty means we are not loading and starting new game
 	GetMapMarkerEditor().visible = false
-	$UI/MapMarkerControls.visible = false
+	$OuterUI/MapMarkerControls.visible = false
 	if (SpotList.size() == 0):
 		GenerateMap()
 		_InitialPlayerPlacament()
@@ -41,7 +42,7 @@ func _InitialPlayerPlacament():
 	pos.y += 500
 	var PlShip = GetPlayerShip()
 	PlShip.global_position = pos
-	camera_2d.global_position = PlShip.global_position
+	GetCamera().global_position = PlShip.global_position
 	PlShip.ShipLookAt(firstvilage.global_position)
 
 #Called when enemy ship touches friendly one to strart a fight
@@ -50,21 +51,23 @@ func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 
 func ToggleUIForIntro(t : bool):
 	#PlayerShip.GetInstance().ToggleUI(t)
-	$UI/ScreenUi.visible = t
+	$OuterUI/ScreenUi.visible = t
 
 func ToggleMapMarkerPlecement(t : bool) -> void:
-	$UI/ScreenUi.visible = !t
-	$UI/MapMarkerControls.visible = t
+	$OuterUI/ScreenUi.visible = !t
+	$OuterUI/MapMarkerControls.visible = t
 	GetMapMarkerEditor().visible = t
 
 func GetMapMarkerEditor() -> MapMarkerEditor:
-	return $CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor
+	return $SubViewportContainer/ViewPort/InScreenUI/Control3/MapMarkerEditor
 func GetPlayerPos() -> Vector2:
 	return GetPlayerShip().position
 func GetPlayerShip() -> PlayerShip:
-	return $CanvasLayer/SubViewportContainer/SubViewport/PlayerShip
+	return $SubViewportContainer/ViewPort/PlayerShip
 func GetCommander() -> Commander:
-	return $Commander
+	return $"../Commander"
+func GetCamera() -> ShipCamera:
+	return $SubViewportContainer/ViewPort/ShipCamera
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
@@ -74,7 +77,7 @@ func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 			ship.Docked = true
 			ship.Command = com
 			com.GetDroneDock().call_deferred("DockShip", ship)
-		$CanvasLayer/SubViewportContainer/SubViewport.add_child(ship)
+		$SubViewportContainer/ViewPort.add_child(ship)
 		ship.global_position = g.Position
 
 func FindEnemyByName(Name : String) -> HostileShip:
@@ -82,18 +85,6 @@ func FindEnemyByName(Name : String) -> HostileShip:
 		if (g.GetShipName() == Name):
 			return g
 	return null
-func RespawnMissiles(MissileData : Array[Resource]) -> void:
-	for g in MissileData:
-		var dat = g as MissileSaveData
-		var missile = (load(dat.Scene) as PackedScene).instantiate() as Missile
-		missile.Distance = dat.Distance
-		missile.MissileName = dat.MisName
-		missile.Speed = dat.MisSpeed
-		$CanvasLayer/SubViewportContainer/SubViewport.add_child(missile)
-		missile.global_position = dat.Pos
-		missile.global_rotation = dat.Rot
-	for g in get_tree().get_nodes_in_group("Enemy"):
-		g.connect("OnShipMet", EnemyMet)
 
 func GetEnemySaveData() ->SaveData:
 	var dat = SaveData.new()
@@ -147,7 +138,7 @@ func GetMapMarkerEditorSaveData() -> SaveData:
 	var dat = SaveData.new().duplicate()
 	dat.DataName = "MarkerEditor"
 	var EditorData = SD_MapMarkerEditor.new()
-	for g in $CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager/Lines.get_children():
+	for g in $SubViewportContainer/ViewPort/MapPointerManager/MapLines.get_children():
 		if (g is MapMarkerLine):
 			EditorData.AddLine(g)
 		else : if (g is MapMarkerText):
@@ -155,16 +146,29 @@ func GetMapMarkerEditorSaveData() -> SaveData:
 	dat.Datas.append(EditorData)
 	return dat
 
+func RespawnMissiles(MissileData : Array[Resource]) -> void:
+	for g in MissileData:
+		var dat = g as MissileSaveData
+		var missile = (load(dat.Scene) as PackedScene).instantiate() as Missile
+		missile.Distance = dat.Distance
+		missile.MissileName = dat.MisName
+		missile.Speed = dat.MisSpeed
+		$CanvasLayer/SubViewportContainer/SubViewport.add_child(missile)
+		missile.global_position = dat.Pos
+		missile.global_rotation = dat.Rot
+	for g in get_tree().get_nodes_in_group("Enemy"):
+		g.connect("OnShipMet", EnemyMet)
+
 func LoadMapMarkerEditorSaveData(Data : SD_MapMarkerEditor) -> void:
-	$CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/MapMarkerEditor.LoadData(Data)
+	GetMapMarkerEditor().LoadData(Data)
 
 func LoadSaveData(Data : Array[Resource]) -> void:
 	for g in Data.size():
 		var dat = Data[g] as TownSaveData
 		
-		var sc = load(dat.TownScene).instantiate() as Town
+		var sc = load(dat.TownScenePath).instantiate() as Town
 		sc.LoadingData = true
-		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
+		$SubViewportContainer/ViewPort/MapSpots.add_child(sc)
 		sc.connect("TownSpotAproached", Arrival)
 		
 		sc.LoadSaveData(dat)
@@ -173,29 +177,29 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 	call_deferred("GenerateRoads")
 	#call_deferred("accept_event")
 	#call_deferred(accept_event())
-	$CanvasLayer/SubViewportContainer/SubViewport/ShipCamera.call_deferred("FrameCamToPlayer")
+	GetCamera().call_deferred("FrameCamToPlayer")
 #////////////////////////////////////////////	
 #SIGNALS COMMING FROM PLAYER SHIP
 func ShipStartedMoving():
-	camera_2d.applyshake()
+	GetCamera().applyshake()
 func ShipStoppedMoving():
-	camera_2d.applyshake()
+	GetCamera().applyshake()
 func OnScreenUiToggled(t : bool) -> void:
-	$UI/ScreenUi.visible = t
+	$OuterUI/ScreenUi.visible = t
 func ShipForcedStop():
 	thrust_slider.ZeroAcceleration()
 #INPUT HANDLING////////////////////////////
 func _MAP_INPUT(event: InputEvent) -> void:
 	if (event.is_action_pressed("ZoomIn")):
-		camera_2d._HANDLE_ZOOM(1.1)
+		GetCamera()._HANDLE_ZOOM(1.1)
 	if (event.is_action_pressed("ZoomOut")):
-		camera_2d._HANDLE_ZOOM(0.9)
+		GetCamera()._HANDLE_ZOOM(0.9)
 	if (event is InputEventScreenTouch):
-		camera_2d._HANDLE_TOUCH(event)
+		GetCamera()._HANDLE_TOUCH(event)
 	if (event is InputEventScreenDrag):
-		camera_2d._HANDLE_DRAG(event)
+		GetCamera()._HANDLE_DRAG(event)
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		camera_2d.UpdateCameraPos(event.relative)
+		GetCamera().UpdateCameraPos(event.relative)
 #//////////////////////////////////////////////////////////
 var Maplt : Thread
 var Roadt : Thread
@@ -246,7 +250,7 @@ func GenerateMap() -> void:
 			pos = GetNextRandomPos(Prevpos, Distanceval)
 		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
 		sc.Pos = pos
-		$CanvasLayer/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
+		$SubViewportContainer/ViewPort/MapSpots.add_child(sc)
 		
 		SpotList.append(sc)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
@@ -278,7 +282,7 @@ func SpawnTownEnemies(T : Town) -> void:
 				Ship.Docked = true
 				Ship.Command = PatrolCommander
 				PatrolCommander.GetDroneDock().call_deferred("DockShip", Ship)
-			$CanvasLayer/SubViewportContainer/SubViewport.add_child(Ship)
+			$SubViewportContainer/ViewPort.add_child(Ship)
 			Ship.global_position = g.global_position
 			
 		var GarrissonBP = g.SpotInfo.HostileGarrisson
@@ -297,7 +301,7 @@ func SpawnTownEnemies(T : Town) -> void:
 				Ship.Docked = true
 				Ship.Command = GarrissonCommander
 				GarrissonCommander.GetDroneDock().call_deferred("DockShip", Ship)
-			$CanvasLayer/SubViewportContainer/SubViewport.add_child(Ship)
+			$SubViewportContainer/ViewPort.add_child(Ship)
 			Ship.global_position = g.global_position
 			
 #ROAD GENERATION
@@ -319,9 +323,9 @@ func GenerateRoads() -> void:
 		cityloc2.append(g.global_position)
 	Mut = Mutex.new()
 	Maplt = Thread.new()
-	Maplt.start(_DrawMapLines.bind(cityloc, $CanvasLayer/SubViewportContainer/SubViewport/MapLines, true))
+	Maplt.start(_DrawMapLines.bind(cityloc, true))
 	Roadt = Thread.new()
-	Roadt.start(_DrawMapLines.bind(cityloc2, $CanvasLayer/SubViewportContainer/SubViewport/Roads, false, true, false))
+	Roadt.start(_DrawMapLines.bind(cityloc2, false, true))
 func GeneratePathsFromLines(Lines : Array):
 	var Cits = get_tree().get_nodes_in_group("CITY_CENTER")
 	for g in Cits:
@@ -342,59 +346,47 @@ func GeneratePathsFromLines(Lines : Array):
 	MAP_NeighborsSet.emit()
 	#print(find_path("Amarta", "Blanst"))
 	#print(find_path("Tsard", "Witra"))
-func _DrawMapLines(SpotLocs : Array, PlacementNode : Node2D, GenerateNeighbors : bool, RandomiseLines : bool = false, Unshaded : bool = true) -> void:
+func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : bool = false) -> Array:
 	var time = Time.get_ticks_msec()
 	var lines = _prim_mst_optimized(SpotLocs)
 	if (GenerateNeighbors):
 		call_deferred("GeneratePathsFromLines", lines)
 	print("Figuring out lines took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
-	var mat = CanvasItemMaterial.new()
-	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
-	var paintedlines : Array[Line2D]
-	for l in lines:
-		var lne = Line2D.new()
-		lne.width = 20
-		lne.joint_mode = Line2D.LINE_JOINT_ROUND
-		paintedlines.append(lne)
-		#lne.default_color = Color(1,1,1,0.2)
-		if (Unshaded):
-			lne.material = mat
-		PlacementNode.call_deferred("add_child", lne)
-		for g in l:
-			lne.add_point(g)
-		if (Unshaded):
-			lne.z_index = 2
-	if (!RandomiseLines):
-		return 
-	for l in paintedlines:
-		var point1 = l.get_point_position(0)
-		var point2 = l.get_point_position(1)
-		l.remove_point(1)
-		
-		var dir = point1.direction_to(point2)
-		
-		var dist = point1.distance_to(point2)
-		var pointamm = roundi(dist / 50)
-		var offsetperpoint = dist/pointamm
-		for g in pointamm:
-			var offset = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
-			Mut.lock()
-			l.add_point(point1 + offset)
-			Mut.unlock()
-		l.add_point(point2)
-
+			
 	if (RandomiseLines):
+		for l in lines:
+			var Line = l as Array
+			var point1 = Line[0]
+			var point2 = Line[1]
+			Line.remove_at(1)
+			#l.remove_point(1)
+			
+			var dir = point1.direction_to(point2)
+			
+			var dist = point1.distance_to(point2)
+			var pointamm = roundi(dist / 50)
+			var offsetperpoint = dist/pointamm
+			for g in pointamm:
+				var offs = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+				Mut.lock()
+				Line.append(point1 + offs)
+				Mut.unlock()
+			Line.append(point2)
+			
 		call_deferred("RoadFinished")
 	else:
 		call_deferred("MapLineFinished")
+	return lines
 func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
 	for g in Points:
 		Lne.add_point(g)
 func RoadFinished() -> void:
-	Roadt.wait_to_finish()
+	var Lines = Roadt.wait_to_finish()
+	$SubViewportContainer/ViewPort/RoadLineDrawer.AddLines(Lines)
 	Roadt = null
 func MapLineFinished() -> void:
-	Maplt.wait_to_finish()
+	var Lines = Maplt.wait_to_finish()
+	$SubViewportContainer/ViewPort/MapPointerManager/MapLineDrawer.AddLines(Lines)
 	Maplt = null
 # Helper function: Push an element to the heap
 func _heap_push(heap: Array, element: Array):
@@ -504,5 +496,5 @@ func _on_exit_map_marker_pressed() -> void:
 	ToggleMapMarkerPlecement(false)
 
 func _on_clear_lines_pressed() -> void:
-	for g in $CanvasLayer/SubViewportContainer/SubViewport/MapPointerManager/Lines.get_children():
+	for g in $SubViewportContainer/ViewPort/MapPointerManager/MapLines.get_children():
 		g.queue_free()

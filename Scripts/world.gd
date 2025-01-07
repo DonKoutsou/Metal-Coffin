@@ -2,7 +2,6 @@ extends Control
 class_name World
 
 @export var ShipDat : ShipData
-
 @export var StartingShip : BaseShip
 @export var ShipTradeScene : PackedScene
 @export var DogfightScene : PackedScene
@@ -26,7 +25,7 @@ static func GetInstance() -> World:
 
 func _ready() -> void:
 	$Inventory.Player = GetMap().GetPlayerShip()
-	UISoundMan.GetInstance().Refresh()
+	#UISoundMan.GetInstance().Refresh()
 	Instance = self
 	if (!Loading):
 		PlayIntro()
@@ -35,22 +34,22 @@ func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
 	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."]
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ShowStation, true)
-	$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
-	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
+	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
+	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
 	GetMap().ToggleUIForIntro(false)
 
 func ShowStation():
 	var DiagText : Array[String]  = ["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."]
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ReturnCamToPlayer, true)
-	GetMap().camera_2d.ShowStation()
+	GetMap().GetCamera().ShowStation()
 
 func ReturnCamToPlayer():
 	EnableBackUI()
-	GetMap().camera_2d.FrameCamToPlayer()
+	GetMap().GetCamera().FrameCamToPlayer()
 
 func EnableBackUI():
-	$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = true
-	$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
+	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = true
+	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
 	GetMap().ToggleUIForIntro(true)
 
 func _enter_tree() -> void:
@@ -142,11 +141,10 @@ func GetMap() -> Map:
 	return $Map
 
 func GetStatPanel() -> StatPanel:
-	return $Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel
+	return $Map/OuterUI/HBoxContainer/Stat_Panel
 
 func TestTrade() -> void:
 	StartShipTrade(load("res://Resources/Ships/Ship2.tres") as BaseShip)
-
 func OnItemAdded(It : Item) -> void:
 	if (It is ShipPart and !It.IsDamaged):
 		ShipDat.ApplyShipPartStat(It)
@@ -178,7 +176,7 @@ func _input(event: InputEvent) -> void:
 func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused
-	$Ingame_UIManager/PauseContainer.visible = !paused
+	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PauseContainer.visible = !paused
 
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[Node2D]

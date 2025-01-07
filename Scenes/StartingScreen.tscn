@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" path="res://Scripts/starting_screen.gd" id="1_kry56"]
-[ext_resource type="PackedScene" uid="uid://doahe8bm2ac5r" path="res://Scenes/world.tscn" id="2_j3r4n"]
+[ext_resource type="PackedScene" uid="uid://cbhf8nh85npqq" path="res://Scenes/World_1.tscn" id="3_lbc5q"]
 [ext_resource type="PackedScene" uid="uid://delsjvmgmdgcn" path="res://Scenes/starting_menu.tscn" id="3_pxh3m"]
 [ext_resource type="Script" path="res://Scripts/save_load_manager.gd" id="4_nq3sn"]
 [ext_resource type="Script" path="res://Scripts/UISoundManager.gd" id="5_8b602"]
@@ -13,7 +13,7 @@
 process_mode = 3
 script = ExtResource("1_kry56")
 StartingMenuScene = ExtResource("3_pxh3m")
-GameScene = ExtResource("2_j3r4n")
+GameScene = ExtResource("3_lbc5q")
 
 [node name="SaveLoadManager" type="Node" parent="."]
 script = ExtResource("4_nq3sn")

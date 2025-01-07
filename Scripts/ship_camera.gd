@@ -58,7 +58,7 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 func _UpdateMapGridVisibility():
 	if (zoom.x < 0.25):
 		var mtw = create_tween()
-		mtw.tween_property($"../MapLines", "modulate", Color(1,1,1,1), 0.5)
+		mtw.tween_property($"../MapPointerManager/MapLineDrawer", "modulate", Color(1,1,1,1), 0.5)
 		#$"../MapLines".visible = true
 		var tw = create_tween()
 		tw.tween_property($"../InScreenUI/Control3/DarkBlueBackground", "modulate", Color(1,1,1,1), 0.5)
@@ -66,7 +66,7 @@ func _UpdateMapGridVisibility():
 		var tw = create_tween()
 		tw.tween_property($"../InScreenUI/Control3/DarkBlueBackground", "modulate", Color(1,1,1,0), 0.5)
 		var mtw = create_tween()
-		mtw.tween_property($"../MapLines", "modulate", Color(1,1,1,0), 0.5)
+		mtw.tween_property($"../MapPointerManager/MapLineDrawer", "modulate", Color(1,1,1,0), 0.5)
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 
 func UpdateCameraPos(relativeMovement : Vector2):

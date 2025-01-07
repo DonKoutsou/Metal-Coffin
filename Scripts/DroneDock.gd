@@ -109,7 +109,7 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	if (Notify):
 		var notif = CaptainNotif.instantiate() as CaptainNotification
 		notif.SetCaptain(Drne.Cpt)
-		Ingame_UIManager.GetInstance().AddUI(notif, false, true)
+		Ingame_UIManager.GetInstance().AddUI(notif, true)
 	Drne.connect("OnShipDestroyed", DroneDisharged)
 	ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
 	Inventory.GetInstance().UpdateSize()

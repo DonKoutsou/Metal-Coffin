@@ -2,7 +2,7 @@ extends Node
 
 @export var DroneDockEventH : DroneDockEventHandler
 
-@onready var ship_camera: ShipCamera = $"../CanvasLayer/SubViewportContainer/SubViewport/ShipCamera"
+@onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
 @export var HappeningUI : PackedScene
 
 var AvailableShips : Array[MapShip] = []
@@ -12,13 +12,13 @@ var ControlledShip : MapShip
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
-	ControlledShip = $"../CanvasLayer/SubViewportContainer/SubViewport/PlayerShip"
+	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	AvailableShips.append(ControlledShip)
-	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
-	$"../UI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
+	$"../Map/OuterUI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
+	$"../Map/OuterUI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
 	
-func OnDroneDocked(D : Drone, Target : MapShip) -> void:
+func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
 	AvailableShips.erase(D)
 	if (D.is_connected("OnShipDestroyed", OnShipDestroyed)):
 		D.disconnect("OnShipDestroyed", OnShipDestroyed)
@@ -27,7 +27,7 @@ func OnDroneDocked(D : Drone, Target : MapShip) -> void:
 		_on_controlled_ship_swtich_range_changed()
 	
 	
-func OnDroneUnDocked(D : Drone, Target : MapShip) -> void:
+func OnDroneUnDocked(D : Drone, _Target : MapShip) -> void:
 	AvailableShips.append(D)
 	D.connect("OnShipDestroyed", OnShipDestroyed)
 	#ControlledShip = D
@@ -67,7 +67,7 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.BoughtRepairs = spot.PlayerRepairReserves
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
 	fuel.LandedShip = Ship
-	Ingame_UIManager.GetInstance().AddUI(fuel, false, true)
+	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 
 func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float):
 	ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
@@ -91,7 +91,7 @@ func Land(Spot : MapSpot) -> bool:
 	if (Spot.SpotInfo.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		happeningui.HappeningInstigator = ControlledShip
-		Ingame_UIManager.GetInstance().AddUI(happeningui, false, true)
+		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
 		happeningui.PresentHappening(Spot.SpotInfo.Event)
 		PlayedEvent = true
 	Spot.OnSpotVisited()

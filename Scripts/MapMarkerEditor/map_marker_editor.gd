@@ -31,7 +31,7 @@ func _on_text_confirm_pressed() -> void:
 	$MarkerTextEditor.visible = false
 	var textblock = TextScene.instantiate() as MapMarkerText
 	var pos = ($Panel.position + ($Panel.size / 2)) - (get_viewport_rect().size / 2)
-	$"../../../MapPointerManager/Lines".add_child(textblock)
+	$"../../../MapPointerManager/MapLines".add_child(textblock)
 	textblock.add_to_group("LineMarkers")
 	textblock.CamZoomUpdated(ship_camera.zoom.x)
 	textblock.global_position = ship_camera.global_position + (pos / ship_camera.zoom)
@@ -48,7 +48,7 @@ func _on_drone_button_pressed() -> void:
 	else:
 		var pos = Line.position - (get_viewport_rect().size / 2)
 		$Linetemp.remove_child(Line)
-		$"../../../MapPointerManager/Lines".add_child(Line)
+		$"../../../MapPointerManager/MapLines".add_child(Line)
 		Line.add_to_group("LineMarkers")
 		Line.CamZoomUpdated(ship_camera.zoom.x)
 		Line.global_position = ship_camera.global_position + (pos / ship_camera.zoom)
@@ -66,9 +66,9 @@ func _on_x_gas_range_changed(NewVal: float) -> void:
 func LoadData(Dat : SD_MapMarkerEditor) -> void:
 	for g in Dat.Lines:
 		var newline = LineScene.instantiate() as MapMarkerLine
-		$"../../../MapPointerManager/Lines".add_child(newline)
+		$"../../../MapPointerManager/MapLines".add_child(newline)
 		newline.LoadData(g)
 	for g in Dat.Texts:
 		var newtext = TextScene.instantiate() as MapMarkerText
-		$"../../../MapPointerManager/Lines".add_child(newtext)
+		$"../../../MapPointerManager/MapLines".add_child(newtext)
 		newtext.LoadData(g)
