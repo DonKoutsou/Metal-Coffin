@@ -10,9 +10,11 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 3475.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_ebbol")
 script = ExtResource("2_laeyy")
 DroneDockEvH = ExtResource("3_m05qx")
@@ -41,4 +43,43 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="PanelContainer7" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer8" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer9" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer10" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer11" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer12" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer13" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer14" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer15" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer16" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer17" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer18" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer19" parent="GridContainer" instance=ExtResource("5_1igqk")]
+layout_mode = 2
+
+[node name="PanelContainer20" parent="GridContainer" instance=ExtResource("5_1igqk")]
 layout_mode = 2

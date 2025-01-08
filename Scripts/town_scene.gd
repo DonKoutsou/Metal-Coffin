@@ -17,7 +17,7 @@ var PlHull : float = 0
 var PlMaxHull : float = 0
 var BoughtRepairs : float = 0
 
-signal TransactionFinished(BFuel : float, BRepair : float, NewCurrency : float)
+signal TransactionFinished(BFuel : float, BRepair : float, NewCurrency : float, Ship : MapShip)
 
 var LandedShip : MapShip
 
@@ -150,5 +150,5 @@ func UpdateRepairBar(AddedRepair : float):
 	$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm.text = var_to_str(roundi(PlHull + BoughtRepairs))
 func _on_button_pressed() -> void:
-	TransactionFinished.emit(BoughtFuel, BoughtRepairs, PlFunds)
+	TransactionFinished.emit(BoughtFuel, BoughtRepairs, PlFunds, LandedShip)
 	queue_free()

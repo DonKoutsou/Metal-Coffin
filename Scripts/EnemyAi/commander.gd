@@ -16,20 +16,20 @@ var KnownEnemies : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 
-func _physics_process(_delta: float) -> void:
+#func _physics_process(_delta: float) -> void:
 	# check for known enemies and see if an order can be created
-	for g in KnownEnemies:
-		if (!IsShipBeingPursued(g)):
-			var closestship = FindClosestFleetToPosition(g.global_position, true, true)
-			OrderShipToPursue(closestship, g)
-		var Carrier = FindMissileCarrierAbleToFireToPosition(g.global_position)
-		if (Carrier != null):
-			OrderShipToAtack(Carrier, g)
-	for g in EnemyPositionsToInvestigate.size():
-		var investigatedship = EnemyPositionsToInvestigate.keys()[g]
-		var investigatedpos = EnemyPositionsToInvestigate.values()[g]
-		if (!IsShipsPositionUnderInvestigation(investigatedship)):
-			OrderShipToInvestigate(FindClosestFleetToPosition(investigatedpos, true, true) ,investigatedpos, investigatedship)
+	#for g in KnownEnemies:
+		#if (!IsShipBeingPursued(g)):
+			#var closestship = FindClosestFleetToPosition(g.global_position, true, true)
+			#OrderShipToPursue(closestship, g)
+		#var Carrier = FindMissileCarrierAbleToFireToPosition(g.global_position)
+		#if (Carrier != null):
+			#OrderShipToAtack(Carrier, g)
+	#for g in EnemyPositionsToInvestigate.size():
+		#var investigatedship = EnemyPositionsToInvestigate.keys()[g]
+		#var investigatedpos = EnemyPositionsToInvestigate.values()[g]
+		#if (!IsShipsPositionUnderInvestigation(investigatedship)):
+			#OrderShipToInvestigate(FindClosestFleetToPosition(investigatedpos, true, true) ,investigatedpos, investigatedship)
 
 #ORDER MANAGEMENT////////////////////////////////////////////////////////////////
 func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:

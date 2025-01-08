@@ -25,7 +25,7 @@ static func GetInstance() -> World:
 
 func _ready() -> void:
 	$Inventory.Player = GetMap().GetPlayerShip()
-	#UISoundMan.GetInstance().Refresh()
+	UISoundMan.GetInstance().Refresh()
 	Instance = self
 	if (!Loading):
 		PlayIntro()
@@ -141,7 +141,7 @@ func GetMap() -> Map:
 	return $Map
 
 func GetStatPanel() -> StatPanel:
-	return $Map/OuterUI/HBoxContainer/Stat_Panel
+	return $Map/OuterUI/VBoxContainer/Stat_Panel
 
 func TestTrade() -> void:
 	StartShipTrade(load("res://Resources/Ships/Ship2.tres") as BaseShip)
@@ -177,7 +177,6 @@ func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused
 	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PauseContainer.visible = !paused
-
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[Node2D]
 var FighingEnemyUnits : Array[Node2D]

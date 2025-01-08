@@ -69,16 +69,16 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.LandedShip = Ship
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 
-func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float):
+func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float, Ship : MapShip):
 	ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
-	var spot = ControlledShip.CurrentPort as MapSpot
+	var spot = Ship.CurrentPort as MapSpot
 	if (spot.PlayerFuelReserves != BFuel):
 		spot.CityFuelReserves -= BFuel
 	if (BFuel < 0):
-		if (ControlledShip is PlayerShip):
+		if (Ship is PlayerShip):
 			ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
 		else:
-			ControlledShip.Cpt.GetStat("FUEL_TANK").CurrentVelue -= -BFuel
+			Ship.Cpt.GetStat("FUEL_TANK").CurrentVelue -= -BFuel
 
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)
@@ -138,13 +138,13 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 		ControlledShip.ToggleFuelRangeVisibility(false)
 		ControlledShip = AvailableShips[currentcontrolled + 1]
 	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
-	$"../UI/ScreenUi/ThrustSlider".ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	$"../UI/ScreenUi/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
+	$"../Map/OuterUI/ThrustSlider".ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	$"../Map/OuterUI/ScreenUi/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
-	$"../UI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
-	$"../UI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
-	$"../UI/ScreenUi/DroneTab".ConnectedShip = ControlledShip
+	$"../Map/OuterUI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
+	$"../Map/OuterUI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
+	$"../Map/OuterUI/ScreenUi/DroneTab".ConnectedShip = ControlledShip
 
 var camtw : Tween
 func FrameCamToShip():

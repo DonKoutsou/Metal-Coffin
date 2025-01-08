@@ -8,7 +8,7 @@ class_name Map
 @export var MapSize : int
 @export var MapGenerationDistanceCurve : Curve
 @export var EnemyScene : PackedScene
-@onready var thrust_slider: ThrustSlider = $OuterUI/ScreenUi/ThrustSlider
+@onready var thrust_slider: ThrustSlider = $OuterUI/ThrustSlider
 
 
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])

@@ -12,8 +12,6 @@ var DockedDrones : Dictionary
 
 var CurrentlySelectedDrone : Drone
 
-var SteerShowing : bool = false
-
 func _enter_tree() -> void:
 	DroneDockEventH.connect("DroneDocked", DroneDocked)
 	DroneDockEventH.connect("DroneUndocked", DroneUnDocked)
@@ -76,9 +74,9 @@ func _on_arm_drone_button_pressed(t : bool) -> void:
 	#$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton.disabled = true
 	$Control/Control/Dissarm.ToggleDissable(false)
 	$Control/Control/Launch.ToggleDissable(false)
-	if (!SteerShowing):
-		$AnimationPlayer.play("ShowSteer")
-		SteerShowing = true
+	#if (!SteerShowing):
+		#$AnimationPlayer.play("ShowSteer")
+		#SteerShowing = true
 	DroneDockEventH.DroneArmed(ConnectedShip)
 	
 func _on_dissarm_drone_button_2_pressed() -> void:
@@ -86,9 +84,9 @@ func _on_dissarm_drone_button_2_pressed() -> void:
 	$Control/Control/Arm.button_pressed = false
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
-	if (SteerShowing):
-		$AnimationPlayer.play("HideSteer")
-		SteerShowing = false
+	#if (SteerShowing):
+		#$AnimationPlayer.play("HideSteer")
+		#SteerShowing = false
 	DroneDockEventH.DroneDissarmed(ConnectedShip)
 
 func _on_looter_drone_button_pressed() -> void:

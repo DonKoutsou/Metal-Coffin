@@ -2,7 +2,9 @@ extends Control
 
 class_name  Clock
 
-var CurrentDay : int = 1
+var CurrentDay : int = 10
+var CurrentMonth : int = 4
+var CurrentYear : int = 3874
 var currentHour : int = 13
 var currentMin : float = 0
 
@@ -16,7 +18,7 @@ func _ready() -> void:
 	Instance = self
 	var rot = (360.0/12.0)*currentHour
 	$Hour.rotation = deg_to_rad(rot)
-	$Label.text = "Day : " + var_to_str(CurrentDay)
+	$PanelContainer/Label.text = "Date : " + var_to_str(CurrentDay) + "/" + var_to_str(CurrentMonth) + "/" + var_to_str(CurrentYear)
 static func GetInstance() -> Clock:
 	return Instance
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,7 +31,13 @@ func _physics_process(delta: float) -> void:
 		if (currentHour >= 24):
 			currentHour = 0
 			CurrentDay += 1
-			$Label.text = "Day : " + var_to_str(CurrentDay)
+			$PanelContainer/Label.text = "Date : " + var_to_str(CurrentDay) + "/" + var_to_str(CurrentMonth) + "/" + var_to_str(CurrentYear)
+			if (CurrentDay > GetDaysInMonth(CurrentMonth)):
+				CurrentDay = 1
+				CurrentMonth += 1
+				if (CurrentMonth > 12):
+					CurrentMonth = 1
+					CurrentYear += 1
 		currentMin = 0
 		
 	var rot = (360.0/60.0)*currentMin
@@ -46,3 +54,30 @@ func GetTimeInHours() -> float:
 	return t
 func GetHoursSince(time : float) -> float:
 	return GetTimeInHours() - time
+
+func GetDaysInMonth(Month : int) -> int:
+	if (Month == 1):
+		return 31
+	if (Month == 2):
+		return 28
+	if (Month == 3):
+		return 31
+	if (Month == 4):
+		return 30
+	if (Month == 5):
+		return 31
+	if (Month == 6):
+		return 30
+	if (Month == 7):
+		return 31
+	if (Month == 8):
+		return 30
+	if (Month == 9):
+		return 31
+	if (Month == 10):
+		return 30
+	if (Month == 11):
+		return 31
+	if (Month == 12):
+		return 30
+	return 0

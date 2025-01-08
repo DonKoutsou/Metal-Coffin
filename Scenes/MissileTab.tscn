@@ -254,9 +254,9 @@ offset_bottom = 35.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 28.0
 offset_top = -176.0
-offset_right = 195.0
+offset_right = 203.0
 offset_bottom = -123.0
 mouse_filter = 2
 texture = ExtResource("20_x7uai")

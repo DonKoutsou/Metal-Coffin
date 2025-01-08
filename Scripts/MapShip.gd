@@ -116,7 +116,6 @@ func UpdateElint(delta: float) -> void:
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
 		if (Newlvl != lvl):
-			
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > 0):
 		Elint.emit(true, BiggestLevel)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=18 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_lpij7"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_jqji2"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/HostileDroneDock.tscn" id="7_hahnw"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_x18j0"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="8_qk3o6"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="9_0e3pp"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_xvf14"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y3qq8"]
 blend_mode = 1
@@ -102,6 +105,19 @@ monitorable = false
 shape = SubResource("CircleShape2D_t084r")
 
 [node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("8_qk3o6")
+actor_node_path = NodePath("..")
+blackboard = NodePath("../Blackboard")
+custom_monitor = true
+actor = NodePath("..")
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("9_0e3pp")
+
+[node name="Blackboard" type="Node" parent="."]
+script = ExtResource("9_xvf14")
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

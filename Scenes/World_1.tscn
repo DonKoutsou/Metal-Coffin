@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/HappeningUI.tscn" id="9_5gym6"]
 [ext_resource type="Script" path="res://Scripts/simulation_manager.gd" id="9_l7oy3"]
 [ext_resource type="PackedScene" uid="uid://dqisqmi1gj7sn" path="res://Scenes/inventory.tscn" id="10_2t2b2"]
-[ext_resource type="Script" path="res://Scripts/EnemyAi/commander.gd" id="10_mykq4"]
+[ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/commander.tscn" id="10_15dwo"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="11_abqbu"]
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="12_5a36f"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="13_wlidp"]
@@ -68,15 +68,15 @@
 [ext_resource type="Texture2D" uid="uid://b6q1pf3tujd60" path="res://Assets/UIPiecies/Button_Camera 1_Red.png" id="49_t4548"]
 [ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="50_fywmy"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="51_qpdx5"]
-[ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="52_ajm6w"]
-[ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="53_0qs7j"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="54_bj6qu"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="55_cx4y6"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="56_1vybw"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ELint.tscn" id="57_x15c3"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="59_3w8uv"]
+[ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="59_54e7s"]
+[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="61_xntku"]
 
-[sub_resource type="Resource" id="Resource_ewael"]
+[sub_resource type="Resource" id="Resource_waxb0"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
@@ -91,13 +91,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_e7e73"]
+[sub_resource type="Resource" id="Resource_rrvht"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 700.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_ewael")
+UpgradeVersion = SubResource("Resource_waxb0")
 UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -107,13 +107,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_1cs5b"]
+[sub_resource type="Resource" id="Resource_87u2m"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 500.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_e7e73")
+UpgradeVersion = SubResource("Resource_rrvht")
 UpgradeTime = 0.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -123,13 +123,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_sparj"]
+[sub_resource type="Resource" id="Resource_eeoor"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_1cs5b")
+UpgradeVersion = SubResource("Resource_87u2m")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -139,7 +139,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_yjp7c"]
+[sub_resource type="Resource" id="Resource_svhbb"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL"
@@ -154,13 +154,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_4glbn"]
+[sub_resource type="Resource" id="Resource_7m5cp"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL"
 UpgradeAmm = 450.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_yjp7c")
+UpgradeVersion = SubResource("Resource_svhbb")
 UpgradeTime = 400.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -170,13 +170,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_6gwc3"]
+[sub_resource type="Resource" id="Resource_jf174"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL"
 UpgradeAmm = 300.0
 CurrentVal = 300.0
-UpgradeVersion = SubResource("Resource_4glbn")
+UpgradeVersion = SubResource("Resource_7m5cp")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -186,7 +186,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_2d2b8"]
+[sub_resource type="Resource" id="Resource_cnsmu"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -201,13 +201,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_utdld"]
+[sub_resource type="Resource" id="Resource_1loax"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_2d2b8")
+UpgradeVersion = SubResource("Resource_cnsmu")
 UpgradeTime = 200.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -217,13 +217,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_5hv71"]
+[sub_resource type="Resource" id="Resource_ymt53"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_utdld")
+UpgradeVersion = SubResource("Resource_1loax")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -291,7 +291,7 @@ shader = ExtResource("44_tyma6")
 shader_parameter/curvature = 0.28
 shader_parameter/skip = 0.01
 shader_parameter/image_flicker = 0.05
-shader_parameter/vignette_flicker_speed = 0.0
+shader_parameter/vignette_flicker_speed = 0.01
 shader_parameter/vignette_strength = 1.2
 shader_parameter/small_scanlines_speed = 1.0
 shader_parameter/small_scanlines_proximity = 2.0
@@ -299,7 +299,7 @@ shader_parameter/small_scanlines_opacity = 1.17
 shader_parameter/scanlines_opacity = 0.08
 shader_parameter/scanlines_speed = 1.0
 shader_parameter/scanline_thickness = 0.55
-shader_parameter/scanlines_spacing = 1.0
+shader_parameter/scanlines_spacing = 1.85
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_uyww5")
 
 [node name="World" type="Control"]
@@ -323,11 +323,7 @@ script = ExtResource("7_q720d")
 DroneDockEventH = ExtResource("8_q55oc")
 HappeningUI = ExtResource("9_5gym6")
 
-[node name="Commander" type="Node" parent="."]
-script = ExtResource("10_mykq4")
-Armaments = {
-ExtResource("17_8bqk3"): 2
-}
+[node name="Commander" parent="." instance=ExtResource("10_15dwo")]
 
 [node name="DialogueProgressHolder" type="Node" parent="."]
 script = ExtResource("8_6vv6u")
@@ -336,7 +332,7 @@ script = ExtResource("8_6vv6u")
 script = ExtResource("9_l7oy3")
 
 [node name="Inventory" parent="." instance=ExtResource("10_2t2b2")]
-StartingItems = Array[ExtResource("11_abqbu")]([SubResource("Resource_sparj"), SubResource("Resource_6gwc3"), SubResource("Resource_5hv71"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3")])
+StartingItems = Array[ExtResource("11_abqbu")]([SubResource("Resource_eeoor"), SubResource("Resource_jf174"), SubResource("Resource_ymt53"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3")])
 
 [node name="Map" type="CanvasLayer" parent="."]
 layer = -1
@@ -354,10 +350,10 @@ EnemyScene = ExtResource("31_oewj5")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 77.0
-offset_top = 95.0
-offset_right = -61.0
-offset_bottom = -49.0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = -311.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -370,7 +366,7 @@ handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(1014, 504)
+size = Vector2i(817, 517)
 render_target_update_mode = 4
 
 [node name="Ground" type="Control" parent="Map/SubViewportContainer/ViewPort"]
@@ -429,12 +425,12 @@ EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 [node name="MapLines" type="Node2D" parent="Map/SubViewportContainer/ViewPort/MapPointerManager"]
 use_parent_material = true
 
+[node name="MapLineDrawer" parent="Map/SubViewportContainer/ViewPort/MapPointerManager" instance=ExtResource("30_nxltg")]
+
 [node name="CircleDrawer" type="Node2D" parent="Map/SubViewportContainer/ViewPort/MapPointerManager" groups=["LineMarkers"]]
 use_parent_material = true
 script = ExtResource("39_u6dmy")
 Col = Color(0.721279, 0.395459, 0.144425, 1)
-
-[node name="MapLineDrawer" parent="Map/SubViewportContainer/ViewPort/MapPointerManager" instance=ExtResource("30_nxltg")]
 
 [node name="InScreenUI" type="CanvasLayer" parent="Map/SubViewportContainer/ViewPort"]
 script = ExtResource("18_yjogh")
@@ -598,6 +594,7 @@ scale = Vector2(50, 50)
 mouse_filter = 2
 
 [node name="OuterUI" type="Control" parent="Map"]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -611,10 +608,10 @@ custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -46.0
-offset_right = 62.0
-offset_bottom = 95.0
+offset_left = -77.0
+offset_top = -92.0
+offset_right = -211.0
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -630,298 +627,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SteeringWheel" parent="Map/OuterUI/ScreenUi" instance=ExtResource("46_8djaj")]
-layout_mode = 1
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-grow_horizontal = 1
-grow_vertical = 0
-
-[node name="ThrustSlider" parent="Map/OuterUI/ScreenUi" instance=ExtResource("47_pk7le")]
-layout_mode = 1
-
-[node name="RadarButton" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
-layout_mode = 1
-offset_left = 388.0
-offset_top = -14.0
-offset_right = 494.0
-offset_bottom = 100.0
-rotation = 1.57079
-texture_normal = ExtResource("48_sbiy2")
-texture_pressed = ExtResource("48_sbiy2")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
-[node name="Label" type="TextureRect" parent="Map/OuterUI/ScreenUi/RadarButton"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = 44.0
-offset_right = 26.0
-offset_bottom = 97.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.5708
-texture = ExtResource("12_5a36f")
-expand_mode = 1
-
-[node name="SimulationButton" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
-layout_mode = 1
-offset_left = 388.0
-offset_top = 92.0
-offset_right = 494.0
-offset_bottom = 206.0
-rotation = -1.57079
-texture_normal = ExtResource("49_t4548")
-texture_pressed = ExtResource("49_t4548")
-ignore_texture_size = true
-stretch_mode = 0
-flip_h = true
-flip_v = true
-
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/SimulationButton"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = 44.0
-offset_right = 28.0
-offset_bottom = 97.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.57079
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("50_fywmy")
-theme_override_font_sizes/font_size = 34
-text = "II
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="SpeedSimulation" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
-layout_mode = 1
-offset_left = 616.0
-offset_top = -14.0
-offset_right = 722.0
-offset_bottom = 100.0
-rotation = 1.57079
-texture_normal = ExtResource("49_t4548")
-texture_pressed = ExtResource("49_t4548")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/SpeedSimulation"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 45.0
-offset_right = 27.0
-offset_bottom = 99.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.57079
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("50_fywmy")
-theme_override_font_sizes/font_size = 34
-text = ">>
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="MarkerPlecement" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
-layout_mode = 1
-offset_left = 730.0
-offset_top = -14.0
-offset_right = 836.0
-offset_bottom = 100.0
-rotation = 1.57079
-texture_normal = ExtResource("49_t4548")
-texture_pressed = ExtResource("49_t4548")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/MarkerPlecement"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 45.0
-offset_right = 27.0
-offset_bottom = 99.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.57079
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("50_fywmy")
-theme_override_font_sizes/font_size = 34
-text = "M
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LandButton" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
-layout_mode = 1
-offset_left = 274.0
-offset_top = -14.0
-offset_right = 380.0
-offset_bottom = 100.0
-rotation = 1.57079
-texture_normal = ExtResource("51_qpdx5")
-texture_pressed = ExtResource("51_qpdx5")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/LandButton"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 9.0
-offset_right = 26.0
-offset_bottom = 63.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.5708
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("50_fywmy")
-theme_override_font_sizes/font_size = 14
-text = "Land
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="DroneButton" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -353.0
-offset_top = -110.0
-offset_right = -202.0
-offset_bottom = -54.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("52_ajm6w")
-texture_pressed = ExtResource("53_0qs7j")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/DroneButton"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -19.0
-offset_right = 36.5
-offset_bottom = 19.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("50_fywmy")
-theme_override_font_sizes/font_size = 12
-text = "Deploy Drone"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="MissileButton" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -353.0
-offset_top = -56.0
-offset_right = -202.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("52_ajm6w")
-texture_pressed = ExtResource("53_0qs7j")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/MissileButton"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -19.0
-offset_right = 36.5
-offset_bottom = 19.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("50_fywmy")
-theme_override_font_sizes/font_size = 12
-text = "Fire Missile"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Clock" parent="Map/OuterUI/ScreenUi" instance=ExtResource("54_bj6qu")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -197.0
-offset_top = -192.0
-offset_right = -139.0
-offset_bottom = -136.0
-grow_horizontal = 0
-grow_vertical = 0
-
 [node name="DroneTab" parent="Map/OuterUI/ScreenUi" instance=ExtResource("55_cx4y6")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -404.0
-offset_right = -364.0
+offset_left = -495.0
+offset_top = -41.0
+offset_right = -455.0
+offset_bottom = -1.0
 grow_horizontal = 0
 
 [node name="Missile Tab" parent="Map/OuterUI/ScreenUi" instance=ExtResource("56_1vybw")]
@@ -929,8 +643,10 @@ layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -404.0
-offset_right = -364.0
+offset_left = -495.0
+offset_top = -41.0
+offset_right = -455.0
+offset_bottom = -1.0
 grow_horizontal = 0
 
 [node name="Elint" parent="Map/OuterUI/ScreenUi" instance=ExtResource("57_x15c3")]
@@ -942,22 +658,171 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = -5.0
 offset_top = -5.0
-offset_right = 163.0
-offset_bottom = 163.0
+offset_right = 197.0
+offset_bottom = 197.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="ControlledShipSwitch" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
+[node name="SteeringWheel" parent="Map/OuterUI/ScreenUi" instance=ExtResource("46_8djaj")]
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = 25.0
+offset_right = -26.0
+offset_bottom = 25.0
+grow_horizontal = 1
+grow_vertical = 0
+PositionOnStart = false
+
+[node name="ThrustSlider" parent="Map/OuterUI" instance=ExtResource("47_pk7le")]
+layout_mode = 1
+
+[node name="SpeedSimulation" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -229.0
+offset_top = -118.0
+offset_right = -119.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("48_sbiy2")
+texture_pressed = ExtResource("48_sbiy2")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="Label" parent="Map/OuterUI/SpeedSimulation"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -9.0
+offset_right = 27.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("50_fywmy")
+theme_override_font_sizes/font_size = 34
+text = ">>
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SimulationButton" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -308.0
+offset_top = -118.0
+offset_right = -198.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("49_t4548")
+texture_pressed = ExtResource("49_t4548")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="Label" parent="Map/OuterUI/SimulationButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.9996
+offset_top = -10.5
+offset_right = 27.0004
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("50_fywmy")
+theme_override_font_sizes/font_size = 34
+text = "II
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Clock" parent="Map/OuterUI" instance=ExtResource("54_bj6qu")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 119.0
+offset_right = -169.0
+offset_bottom = 207.0
+grow_horizontal = 0
+
+[node name="RadarButton" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -308.0
+offset_top = -358.0
+offset_right = -198.0
+offset_bottom = -240.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("51_qpdx5")
+texture_pressed = ExtResource("51_qpdx5")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="TextureRect" parent="Map/OuterUI/RadarButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -6.0
+offset_right = 24.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_5a36f")
+expand_mode = 1
+
+[node name="ControlledShipSwitch" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
 process_mode = 3
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -149.0
-offset_right = 71.0
-offset_bottom = -63.0
+offset_left = -94.0
+offset_top = -118.0
+offset_right = 16.0
+grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -969,7 +834,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/ControlledShipSwitch"]
+[node name="Label" type="Label" parent="Map/OuterUI/ControlledShipSwitch"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -977,10 +842,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.5
-offset_top = -7.0
-offset_right = 20.5
-offset_bottom = 34.0
+offset_left = -21.0002
+offset_top = -1.0
+offset_right = 19.9998
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
@@ -991,17 +856,61 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ControlledShipReturn" type="TextureButton" parent="Map/OuterUI/ScreenUi" groups=["Buttons"]]
+[node name="MarkerPlecement" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -229.0
+offset_top = -358.0
+offset_right = -119.0
+offset_bottom = -240.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("49_t4548")
+texture_pressed = ExtResource("49_t4548")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="Label" parent="Map/OuterUI/MarkerPlecement"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -8.0
+offset_right = 27.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("50_fywmy")
+theme_override_font_sizes/font_size = 34
+text = "M
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ControlledShipReturn" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
 process_mode = 3
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -63.0
-offset_right = 70.0
-offset_bottom = 23.0
+offset_left = -173.0
+offset_top = -118.0
+offset_right = -63.0
+grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -1011,9 +920,9 @@ texture_normal = ExtResource("48_sbiy2")
 texture_pressed = ExtResource("48_sbiy2")
 ignore_texture_size = true
 stretch_mode = 0
-flip_h = true
+flip_v = true
 
-[node name="Label" type="Label" parent="Map/OuterUI/ScreenUi/ControlledShipReturn"]
+[node name="Label" type="Label" parent="Map/OuterUI/ControlledShipReturn"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -1022,9 +931,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.5
-offset_top = -34.0
+offset_top = -2.0
 offset_right = 20.5
-offset_bottom = 7.0
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
@@ -1035,29 +944,168 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/OuterUI"]
+[node name="LandButton" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -252.0
+offset_top = -442.0
+offset_right = -142.0
+offset_bottom = -324.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("51_qpdx5")
+texture_pressed = ExtResource("51_qpdx5")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="Label" parent="Map/OuterUI/LandButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0002
+offset_top = -9.0
+offset_right = 25.9998
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("50_fywmy")
+theme_override_font_sizes/font_size = 14
+text = "Land
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DroneButton" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.0
+offset_top = -523.0
+offset_right = -63.0
+offset_bottom = -405.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("51_qpdx5")
+texture_pressed = ExtResource("51_qpdx5")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="Label" type="TextureRect" parent="Map/OuterUI/DroneButton"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -8.0
+offset_right = 26.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("59_54e7s")
+expand_mode = 1
+
+[node name="q" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -253.0
+offset_top = -523.0
+offset_right = -143.0
+offset_bottom = -405.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("51_qpdx5")
+texture_pressed = ExtResource("51_qpdx5")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+flip_v = true
+
+[node name="Label" type="TextureRect" parent="Map/OuterUI/q"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_right = 18.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("61_xntku")
+expand_mode = 1
+
+[node name="CaptainButton" type="TextureButton" parent="Map/OuterUI" groups=["Buttons"]]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -199.0
+offset_right = 16.0
+offset_bottom = -81.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("21_ou8sa")
+action_mode = 0
+texture_normal = ExtResource("25_3mmt5")
+texture_pressed = ExtResource("26_utt2d")
+texture_click_mask = ExtResource("24_oe0t3")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/OuterUI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -1152.0
-offset_bottom = 80.0
+offset_left = -159.0
+offset_bottom = 84.0
 grow_horizontal = 0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/OuterUI/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = -1
 alignment = 2
 
-[node name="Stat_Panel" parent="Map/OuterUI/HBoxContainer" instance=ExtResource("20_3s2f4")]
-layout_mode = 2
-size_flags_vertical = 4
-StatsToShow = Array[String](["FUNDS"])
-
-[node name="Panel2" type="Panel" parent="Map/OuterUI/HBoxContainer"]
+[node name="Panel2" type="Panel" parent="Map/OuterUI/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="Pause" type="TextureButton" parent="Map/OuterUI/HBoxContainer/Panel2" groups=["Buttons"]]
+[node name="Pause" type="TextureButton" parent="Map/OuterUI/VBoxContainer/HBoxContainer/Panel2" groups=["Buttons"]]
 process_mode = 3
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
@@ -1068,8 +1116,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -55.0
 offset_top = -40.0
-offset_right = 57.0
-offset_bottom = 72.0
+offset_right = 55.0
+offset_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -1082,11 +1130,11 @@ texture_click_mask = ExtResource("24_oe0t3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Panel" type="Panel" parent="Map/OuterUI/HBoxContainer"]
+[node name="Panel3" type="Panel" parent="Map/OuterUI/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="CaptainButton" type="TextureButton" parent="Map/OuterUI/HBoxContainer/Panel" groups=["Buttons"]]
+[node name="InventoryButton" type="TextureButton" parent="Map/OuterUI/VBoxContainer/HBoxContainer/Panel3" groups=["Buttons"]]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
 anchors_preset = 8
@@ -1096,8 +1144,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -55.0
 offset_top = -40.0
-offset_right = 57.0
-offset_bottom = 72.0
+offset_right = 55.0
+offset_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -1111,45 +1159,23 @@ texture_click_mask = ExtResource("24_oe0t3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Panel3" type="Panel" parent="Map/OuterUI/HBoxContainer"]
-custom_minimum_size = Vector2(80, 80)
+[node name="Stat_Panel" parent="Map/OuterUI/VBoxContainer" instance=ExtResource("20_3s2f4")]
 layout_mode = 2
-
-[node name="InventoryButton" type="TextureButton" parent="Map/OuterUI/HBoxContainer/Panel3" groups=["Buttons"]]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = -40.0
-offset_right = 57.0
-offset_bottom = 72.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 size_flags_vertical = 4
-focus_mode = 0
-theme = ExtResource("21_ou8sa")
-action_mode = 0
-texture_normal = ExtResource("25_3mmt5")
-texture_pressed = ExtResource("26_utt2d")
-texture_click_mask = ExtResource("24_oe0t3")
-ignore_texture_size = true
-stretch_mode = 0
+StatsToShow = Array[String](["FUNDS"])
 
 [node name="MapMarkerControls" type="Control" parent="Map/OuterUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
+offset_left = -154.0
 offset_top = -40.0
-offset_right = 20.0
+offset_right = -114.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -1357,21 +1383,23 @@ FadNot = ExtResource("32_kjxmn")
 [connection signal="pressed" from="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PauseContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]
 [connection signal="SteeringDitChanged" from="Map/OuterUI/ScreenUi/SteeringWheel" to="ShipController" method="SteerChanged"]
-[connection signal="AccelerationChanged" from="Map/OuterUI/ScreenUi/ThrustSlider" to="ShipController" method="AccelerationChanged"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/RadarButton" to="ShipController" method="_on_radar_button_pressed"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/SimulationButton" to="Map" method="_on_simulation_button_pressed"]
-[connection signal="button_down" from="Map/OuterUI/ScreenUi/SpeedSimulation" to="Map" method="_on_speed_simulation_button_down"]
-[connection signal="button_up" from="Map/OuterUI/ScreenUi/SpeedSimulation" to="Map" method="_on_speed_simulation_button_up"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/MarkerPlecement" to="Map" method="_on_marker_plecement_pressed"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/LandButton" to="ShipController" method="_on_land_button_pressed"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/DroneButton" to="Map/OuterUI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/MissileButton" to="Map/OuterUI/ScreenUi/Missile Tab" method="_on_toggle_drone_tab_pressed"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/ControlledShipSwitch" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]
-[connection signal="pressed" from="Map/OuterUI/ScreenUi/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]
-[connection signal="pressed" from="Map/OuterUI/HBoxContainer/Panel2/Pause" to="." method="_on_pause_pressed"]
-[connection signal="pressed" from="Map/OuterUI/HBoxContainer/Panel/CaptainButton" to="." method="_on_captain_button_pressed"]
-[connection signal="pressed" from="Map/OuterUI/HBoxContainer/Panel3/InventoryButton" to="Inventory" method="_on_inventory_button_pressed"]
+[connection signal="AccelerationChanged" from="Map/OuterUI/ThrustSlider" to="ShipController" method="AccelerationChanged"]
+[connection signal="button_down" from="Map/OuterUI/SpeedSimulation" to="Map" method="_on_speed_simulation_button_down"]
+[connection signal="button_up" from="Map/OuterUI/SpeedSimulation" to="Map" method="_on_speed_simulation_button_up"]
+[connection signal="pressed" from="Map/OuterUI/SimulationButton" to="Map" method="_on_simulation_button_pressed"]
+[connection signal="pressed" from="Map/OuterUI/RadarButton" to="ShipController" method="_on_radar_button_pressed"]
+[connection signal="pressed" from="Map/OuterUI/ControlledShipSwitch" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]
+[connection signal="pressed" from="Map/OuterUI/MarkerPlecement" to="Map" method="_on_marker_plecement_pressed"]
+[connection signal="pressed" from="Map/OuterUI/ControlledShipReturn" to="ShipController" method="_on_controlled_ship_return_pressed"]
+[connection signal="pressed" from="Map/OuterUI/LandButton" to="ShipController" method="_on_land_button_pressed"]
+[connection signal="pressed" from="Map/OuterUI/DroneButton" to="Map/OuterUI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]
+[connection signal="pressed" from="Map/OuterUI/q" to="Map/OuterUI/ScreenUi/Missile Tab" method="_on_toggle_drone_tab_pressed"]
+[connection signal="pressed" from="Map/OuterUI/CaptainButton" to="." method="_on_captain_button_pressed"]
+[connection signal="pressed" from="Map/OuterUI/VBoxContainer/HBoxContainer/Panel2/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="Map/OuterUI/VBoxContainer/HBoxContainer/Panel3/InventoryButton" to="Inventory" method="_on_inventory_button_pressed"]
 [connection signal="RangeChanged" from="Map/OuterUI/MapMarkerControls/YGas" to="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/MapMarkerEditor" method="_on_y_gas_range_changed"]
 [connection signal="RangeChanged" from="Map/OuterUI/MapMarkerControls/XGas" to="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/MapMarkerEditor" method="_on_x_gas_range_changed"]
+[connection signal="pressed" from="Map/OuterUI/MapMarkerControls/ExitMapMarker" to="Map" method="_on_exit_map_marker_pressed"]
+[connection signal="pressed" from="Map/OuterUI/MapMarkerControls/ClearLines" to="Map" method="_on_clear_lines_pressed"]
 [connection signal="pressed" from="Map/OuterUI/MapMarkerControls/DrawLine" to="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/MapMarkerEditor" method="_on_drone_button_pressed"]
 [connection signal="pressed" from="Map/OuterUI/MapMarkerControls/DrawText" to="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/MapMarkerEditor" method="_OnTextButtonPressed"]
