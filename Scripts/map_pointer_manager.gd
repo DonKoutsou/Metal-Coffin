@@ -148,7 +148,7 @@ func _physics_process(delta: float) -> void:
 		var Marker = _ShipMarkers[g]
 		
 		if (ship is HostileShip):
-			Marker.ToggleShipDetails(!ship.Docked)
+			Marker.ToggleShipDetails(true)
 			if (EnemyDebug):
 				Marker.global_position = ship.global_position
 				Marker.UpdateSpeed(ship.GetShipSpeed())

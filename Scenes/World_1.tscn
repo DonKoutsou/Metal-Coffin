@@ -76,7 +76,7 @@
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="59_54e7s"]
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="61_xntku"]
 
-[sub_resource type="Resource" id="Resource_waxb0"]
+[sub_resource type="Resource" id="Resource_jm0ed"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
@@ -91,13 +91,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_rrvht"]
+[sub_resource type="Resource" id="Resource_h5h3r"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 700.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_waxb0")
+UpgradeVersion = SubResource("Resource_jm0ed")
 UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -107,13 +107,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_87u2m"]
+[sub_resource type="Resource" id="Resource_60yx2"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 500.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_rrvht")
+UpgradeVersion = SubResource("Resource_h5h3r")
 UpgradeTime = 0.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -123,13 +123,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_eeoor"]
+[sub_resource type="Resource" id="Resource_rxudi"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_87u2m")
+UpgradeVersion = SubResource("Resource_60yx2")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -139,7 +139,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_svhbb"]
+[sub_resource type="Resource" id="Resource_lv8l1"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL"
@@ -154,13 +154,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_7m5cp"]
+[sub_resource type="Resource" id="Resource_umgt1"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL"
 UpgradeAmm = 450.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_svhbb")
+UpgradeVersion = SubResource("Resource_lv8l1")
 UpgradeTime = 400.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -170,13 +170,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_jf174"]
+[sub_resource type="Resource" id="Resource_wlw02"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL"
 UpgradeAmm = 300.0
 CurrentVal = 300.0
-UpgradeVersion = SubResource("Resource_7m5cp")
+UpgradeVersion = SubResource("Resource_umgt1")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -186,7 +186,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_cnsmu"]
+[sub_resource type="Resource" id="Resource_skiyf"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -201,13 +201,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_1loax"]
+[sub_resource type="Resource" id="Resource_voqoa"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_cnsmu")
+UpgradeVersion = SubResource("Resource_skiyf")
 UpgradeTime = 200.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -217,13 +217,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_ymt53"]
+[sub_resource type="Resource" id="Resource_4ksyy"]
 resource_local_to_scene = true
 script = ExtResource("14_8jrch")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_1loax")
+UpgradeVersion = SubResource("Resource_voqoa")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("13_wlidp"), ExtResource("13_wlidp")])
@@ -332,10 +332,9 @@ script = ExtResource("8_6vv6u")
 script = ExtResource("9_l7oy3")
 
 [node name="Inventory" parent="." instance=ExtResource("10_2t2b2")]
-StartingItems = Array[ExtResource("11_abqbu")]([SubResource("Resource_eeoor"), SubResource("Resource_jf174"), SubResource("Resource_ymt53"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3")])
+StartingItems = Array[ExtResource("11_abqbu")]([SubResource("Resource_rxudi"), SubResource("Resource_wlw02"), SubResource("Resource_4ksyy"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3")])
 
 [node name="Map" type="CanvasLayer" parent="."]
-layer = -1
 follow_viewport_enabled = true
 script = ExtResource("21_3cl37")
 Villages = Array[PackedScene]([ExtResource("22_jhlf2"), ExtResource("23_ciiss"), ExtResource("24_c6gbe"), ExtResource("25_4xpe4"), ExtResource("26_r5qa5")])
@@ -421,6 +420,7 @@ MarkerScene = ExtResource("37_dnbvd")
 MapSpotMarkerScene = ExtResource("38_pwko1")
 FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
 EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
+EnemyDebug = true
 
 [node name="MapLines" type="Node2D" parent="Map/SubViewportContainer/ViewPort/MapPointerManager"]
 use_parent_material = true
@@ -456,6 +456,9 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
 
+[node name="MapMarkerEditor" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3" instance=ExtResource("43_saqi0")]
+layout_mode = 1
+
 [node name="UnderStatUI" type="Control" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3"]
 process_mode = 1
 layout_mode = 1
@@ -485,9 +488,6 @@ offset_top = 54.0
 offset_bottom = 141.0
 grow_vertical = 1
 theme_override_font_sizes/font_size = 24
-
-[node name="MapMarkerEditor" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3" instance=ExtResource("43_saqi0")]
-layout_mode = 1
 
 [node name="PauseContainer" type="PanelContainer" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3"]
 process_mode = 3
@@ -656,10 +656,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 197.0
-offset_bottom = 197.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 168.0
+offset_bottom = 168.0
 grow_horizontal = 1
 grow_vertical = 1
 

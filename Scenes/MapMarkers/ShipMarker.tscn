@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="6_ju0yw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7migo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi5cf"]
 content_margin_left = 1.0
 content_margin_top = 1.0
 content_margin_right = 1.0
@@ -89,7 +89,7 @@ offset_right = 1.0
 offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7migo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wi5cf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
 use_parent_material = true

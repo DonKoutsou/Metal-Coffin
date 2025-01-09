@@ -1,10 +1,11 @@
 extends ConditionLeaf
 
-class_name HasKnownEnemiesCondition
+class_name ToFarToRefuelCondition
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	var Command = actor as Commander
-	if (Command.KnownEnemies.size() > 0):
+	var MainShip = actor as HostileShip
+
+	if (MainShip.ToFarFromRefuel()):
 		return SUCCESS
 	
 	return FAILURE

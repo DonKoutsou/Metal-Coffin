@@ -8,7 +8,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 
 	var MissileCarrier = blackboard.get_value("MissileCarrier")
 	
-	var Target = Command.KnownEnemies[0]
+	var Target = Command.KnownEnemies.keys()[0]
 	
 	Command.OrderShipToAtack(MissileCarrier, Target)
 	

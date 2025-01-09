@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=28 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_lpij7"]
@@ -9,7 +9,17 @@
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="7_x18j0"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="8_qk3o6"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="9_0e3pp"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="9_arij6"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_xvf14"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="10_ljb35"]
+[ext_resource type="Script" path="res://BeehaveNodes/CanReachDestinationCondition.gd" id="11_xv5cw"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="12_0xx16"]
+[ext_resource type="Script" path="res://BeehaveNodes/FindRefuelSpot_Action.gd" id="12_1uft7"]
+[ext_resource type="Script" path="res://BeehaveNodes/HasRefuelSpotCondition.gd" id="12_mmu5j"]
+[ext_resource type="Script" path="res://BeehaveNodes/AproachRefuelSpot_Action.gd" id="12_pcbty"]
+[ext_resource type="Script" path="res://BeehaveNodes/ToFarToRefuelCondition.gd" id="13_2veyn"]
+[ext_resource type="Script" path="res://BeehaveNodes/Refuel_Action.gd" id="13_yiive"]
+[ext_resource type="Script" path="res://BeehaveNodes/AproachDestination_Action.gd" id="14_mako3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y3qq8"]
 blend_mode = 1
@@ -46,6 +56,7 @@ radius = 150.0
 radius = 1000.0
 
 [node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
+process_mode = 1
 script = ExtResource("1_dinuw")
 Cpt = ExtResource("2_lpij7")
 
@@ -107,14 +118,63 @@ shape = SubResource("CircleShape2D_t084r")
 [node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+process_mode = 1
 script = ExtResource("8_qk3o6")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../Blackboard")
 custom_monitor = true
 actor = NodePath("..")
 
-[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("9_arij6")
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("10_ljb35")
+
+[node name="InverterDecorator" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("12_0xx16")
+
+[node name="CanReachDestinationCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/InverterDecorator"]
+script = ExtResource("11_xv5cw")
+
+[node name="SelectorComposite2" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
 script = ExtResource("9_0e3pp")
+
+[node name="HasRefuelSpotCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
+script = ExtResource("12_mmu5j")
+
+[node name="FindRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
+script = ExtResource("12_1uft7")
+
+[node name="AproachRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("12_pcbty")
+
+[node name="RefuelAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("13_yiive")
+
+[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("10_ljb35")
+
+[node name="ToFarToRefuelCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+script = ExtResource("13_2veyn")
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+script = ExtResource("9_0e3pp")
+
+[node name="HasRefuelSpotCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2/SelectorComposite"]
+script = ExtResource("12_mmu5j")
+
+[node name="FindRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2/SelectorComposite"]
+script = ExtResource("12_1uft7")
+
+[node name="AproachRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+script = ExtResource("12_pcbty")
+
+[node name="RefuelAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+script = ExtResource("13_yiive")
+
+[node name="ApreachDestinationAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("14_mako3")
 
 [node name="Blackboard" type="Node" parent="."]
 script = ExtResource("9_xvf14")

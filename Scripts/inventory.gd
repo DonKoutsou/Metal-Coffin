@@ -226,7 +226,8 @@ func _OnItemSelected(ItCo : ItemContainer) -> void:
 		var desc = descriptors[0] as ItemDescriptor
 		if (desc.DescribedContainer == ItCo):
 			descriptors[0].queue_free()
-			inventory_ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer").visible = true
+			inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer").visible = true
+			inventory_ui.get_node("HBoxContainer/VBoxContainer/Panel").visible = true
 			return
 		descriptors[0].SetData(ItCo)
 		return
@@ -234,7 +235,8 @@ func _OnItemSelected(ItCo : ItemContainer) -> void:
 	
 	inventory_ui.get_node("HBoxContainer/VBoxContainer").add_child(Descriptor)
 	inventory_ui.get_node("HBoxContainer/VBoxContainer").move_child(Descriptor, 0)
-	inventory_ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer").visible = false
+	inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer").visible = false
+	inventory_ui.get_node("HBoxContainer/VBoxContainer/Panel").visible = false
 	Descriptor.SetData(ItCo)
 	Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", UpgradeItem)
@@ -245,7 +247,7 @@ func FindAndDissableDescriptors() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		descriptors[0].queue_free()
-	inventory_ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer").visible = true
+	inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer").visible = true
 
 var UpgradedItem : ItemContainer
 func CancelUpgrades() -> void:
@@ -389,9 +391,22 @@ func BreakPart(Part : ShipPart) -> void:
 	INV_OnShipPartDamaged.emit(Part)
 	
 func UpdateShipInfo(ship : BaseShip) -> void:
-	inventory_ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer/TextureRect").texture = ship.Icon
-	inventory_ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label").text = ship.ShipName
-	inventory_ui.get_node("HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2").text = ship.ShipDesc
+	var icon = inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/TextureRect") as TextureRect
+	icon.texture = ship.Icon
+	var Title = inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label") as Label
+	Title.text = ship.ShipName
+	var Desc = inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2") as Label
+	Desc.text = ship.ShipDesc
+	if (Desc.text.length() > 43):
+		var Desc2 = inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer/Label2") as Label
+		Desc2.visible = true
+		var L = 0
+		while(Desc.text.length() > 43):
+			L += 1
+			Desc.text = ship.ShipDesc.substr(0, ship.ShipDesc.length() - L)
+		Desc2.text = ship.ShipDesc.substr(ship.ShipDesc.length() - L, ship.ShipDesc.length())
+	else:
+		inventory_ui.get_node("HBoxContainer/VBoxContainer/VBoxContainer/Label2").visile = false
 	
 func _on_inventory_button_pressed() -> void:
 	var IsOpening = !inventory_ui.visible

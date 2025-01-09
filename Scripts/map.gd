@@ -74,7 +74,7 @@ func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 		ship.LoadSaveData(g)
 		if (g.CommandName != ""):
 			var com = FindEnemyByName(g.CommandName)
-			ship.Docked = true
+			ship.ToggleDocked(true)
 			ship.Command = com
 			com.GetDroneDock().call_deferred("DockShip", ship)
 		$SubViewportContainer/ViewPort.add_child(ship)
@@ -279,7 +279,7 @@ func SpawnTownEnemies(T : Town) -> void:
 			if (PatrolCommander == null):
 				PatrolCommander = Ship
 			else:
-				Ship.Docked = true
+				Ship.ToggleDocked(true)
 				Ship.Command = PatrolCommander
 				PatrolCommander.GetDroneDock().call_deferred("DockShip", Ship)
 			$SubViewportContainer/ViewPort.add_child(Ship)
@@ -298,7 +298,7 @@ func SpawnTownEnemies(T : Town) -> void:
 			if (GarrissonCommander == null):
 				GarrissonCommander = Ship
 			else:
-				Ship.Docked = true
+				Ship.ToggleDocked(true)
 				Ship.Command = GarrissonCommander
 				GarrissonCommander.GetDroneDock().call_deferred("DockShip", Ship)
 			$SubViewportContainer/ViewPort.add_child(Ship)

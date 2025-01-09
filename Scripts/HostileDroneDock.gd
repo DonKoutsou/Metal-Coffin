@@ -34,13 +34,13 @@ func DockShip(Ship : HostileShip):
 		trans.update_rotation = false
 		dock.add_child(trans)
 		trans.remote_path = Ship.get_path()
-		Ship.Docked = true
+		Ship.ToggleDocked(true)
 		Ship.Command = get_parent()
 		return
 
 func UndockShip(Ship : HostileShip):
 	DockedDrones.erase(Ship)
-	Ship.Docked = false
+	Ship.ToggleDocked(false)
 	#Ship.Command = null
 	var docks = $DroneSpots.get_children()
 	for g in docks.size():

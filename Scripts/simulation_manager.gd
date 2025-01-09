@@ -27,12 +27,14 @@ func TogglePause(t : bool) -> void:
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
 	Inventory.GetInstance().OnSimulationPaused(t)
+	Commander.GetInstance().OnSimulationPaused(t)
 	get_tree().call_group("Clock", "ToggleSimulation", t)
 
 func SetSimulationSpeed(Speed : int) -> void:
 	SimulationSpeed = Speed
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	$"../VBoxContainer/Inventory".OnSimulationSpeedChanged(SimulationSpeed)
+	Commander.GetInstance().OnSimulationSpeedChanged(SimulationSpeed)
 	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)
 
 func SpeedToggle(t : bool) -> void:

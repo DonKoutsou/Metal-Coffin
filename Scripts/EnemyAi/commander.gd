@@ -14,6 +14,15 @@ var InvestigationOrders : Array[InvestigationOrder]
 var EnemyPositionsToInvestigate : Dictionary
 var KnownEnemies : Dictionary
 
+var SimPaused : bool = false
+var SimSpeed : int = 1
+
+func OnSimulationPaused(t : bool) -> void:
+	SimPaused = t
+	$BeehaveTree.set_physics_process(!t)
+func OnSimulationSpeedChanged(i : int) -> void:
+	SimSpeed = i
+	$BeehaveTree.tick_rate = i
 # Called when the node enters the scene tree for the first time.
 
 #func _physics_process(_delta: float) -> void:
@@ -211,8 +220,8 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
 	var Carrier : HostileShip
 	for g in Fleet:
-		if g.Reloading > 0:
-			continue
+		#if g.Reloading > 0:
+			#continue
 		var dist = Pos.distance_to(g.global_position)
 		var PossibleArmament = GetCheapestArmamentForDistance(dist)
 		if (PossibleArmament == null):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c2tp3xgyap8ar"]
+[gd_scene load_steps=25 format=3 uid="uid://c2tp3xgyap8ar"]
 
 [ext_resource type="Script" path="res://Scripts/UI/e_lint.gd" id="1_n0goy"]
 [ext_resource type="Texture2D" uid="uid://cb14164lv0llj" path="res://Assets/UIPiecies/Elint/transparent/Opacity5.png" id="3_wx2vp"]
@@ -24,7 +24,11 @@
 [ext_resource type="AudioStream" uid="uid://bfi3w55ap7hs7" path="res://Assets/Sounds/alarm_01.wav" id="21_w3va6"]
 [ext_resource type="AudioStream" uid="uid://c383tvo4hv3s6" path="res://Assets/VoiceLines/mapmode_contact_elint_01.wav" id="23_unhwr"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ilvog"]
+light_mode = 1
+
 [node name="Elint" type="Control"]
+material = SubResource("CanvasItemMaterial_ilvog")
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -69,14 +73,12 @@ texture = ExtResource("17_bii6e")
 expand_mode = 1
 
 [node name="RangeIndicator" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(83.8, 83.8)
 color = Color(0.811384, 0.567062, 0.119301, 1)
 texture = ExtResource("4_h0jj8")
 texture_scale = 0.65
 
 [node name="AlertLight" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(83.8, 83.8)
 color = Color(0.979746, 0.18299, 7.70092e-07, 1)
 energy = 4.0
@@ -84,7 +86,6 @@ texture = ExtResource("5_fn607")
 texture_scale = 0.65
 
 [node name="DangerCloseLight" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(83.8, 83.8)
 color = Color(0.855231, 0.38363, 0, 1)
 texture = ExtResource("6_heli2")
