@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=27 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_lpij7"]
@@ -11,9 +11,8 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="9_0e3pp"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="9_arij6"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_xvf14"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="10_ljb35"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="10_gfqs1"]
 [ext_resource type="Script" path="res://BeehaveNodes/CanReachDestinationCondition.gd" id="11_xv5cw"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="12_0xx16"]
 [ext_resource type="Script" path="res://BeehaveNodes/FindRefuelSpot_Action.gd" id="12_1uft7"]
 [ext_resource type="Script" path="res://BeehaveNodes/HasRefuelSpotCondition.gd" id="12_mmu5j"]
 [ext_resource type="Script" path="res://BeehaveNodes/AproachRefuelSpot_Action.gd" id="12_pcbty"]
@@ -128,49 +127,31 @@ actor = NodePath("..")
 [node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree"]
 script = ExtResource("9_arij6")
 
-[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
-script = ExtResource("10_ljb35")
+[node name="SequenceReactiveComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("10_gfqs1")
 
-[node name="InverterDecorator" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
-script = ExtResource("12_0xx16")
+[node name="SelectorComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite"]
+script = ExtResource("9_0e3pp")
 
-[node name="CanReachDestinationCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/InverterDecorator"]
+[node name="UnableToReachDestinationCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite/SelectorComposite"]
 script = ExtResource("11_xv5cw")
 
-[node name="SelectorComposite2" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
-script = ExtResource("9_0e3pp")
-
-[node name="HasRefuelSpotCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
-script = ExtResource("12_mmu5j")
-
-[node name="FindRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
-script = ExtResource("12_1uft7")
-
-[node name="AproachRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
-script = ExtResource("12_pcbty")
-
-[node name="RefuelAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
-script = ExtResource("13_yiive")
-
-[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
-script = ExtResource("10_ljb35")
-
-[node name="ToFarToRefuelCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+[node name="ToFarToRefuelCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite/SelectorComposite"]
 script = ExtResource("13_2veyn")
 
-[node name="SelectorComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+[node name="SelectorComposite2" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite"]
 script = ExtResource("9_0e3pp")
 
-[node name="HasRefuelSpotCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2/SelectorComposite"]
+[node name="HasRefuelSpotCondition" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite/SelectorComposite2"]
 script = ExtResource("12_mmu5j")
 
-[node name="FindRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2/SelectorComposite"]
+[node name="FindRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite/SelectorComposite2"]
 script = ExtResource("12_1uft7")
 
-[node name="AproachRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+[node name="AproachRefuelSpotAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite"]
 script = ExtResource("12_pcbty")
 
-[node name="RefuelAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2"]
+[node name="RefuelAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceReactiveComposite"]
 script = ExtResource("13_yiive")
 
 [node name="ApreachDestinationAction" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]

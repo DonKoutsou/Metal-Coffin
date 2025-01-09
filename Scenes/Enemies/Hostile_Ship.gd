@@ -55,13 +55,14 @@ func  _ready() -> void:
 		
 		#If path is full it means we are loading so skip path generation
 		if (Path.size() == 0 and CurrentPort != null):
+			var port = CurrentPort
 			if (CurrentPort.NeighboringCities.size() == 0):
 				set_physics_process(false)
 				await Map.GetInstance().MAP_NeighborsSet
 				set_physics_process(true)
-			Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
+			Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
 			if (Path.size() == 0):
-				Path = find_path(CurrentPort.GetSpotName(), cities[nextcity].GetSpotName())
+				Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
 			PathPart = 1
 	
 	MapPointerManager.GetInstance().AddShip(self, false)
@@ -251,7 +252,7 @@ func _on_area_entered(area: Area2D) -> void:
 				PathPart += 1
 			#if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
 				#SetSpeed(0)
-		if (area.get_parent() == RefuelSpot and Patrol):
+		if (spot == RefuelSpot and Patrol):
 			SetCurrentPort(RefuelSpot)
 			#SetSpeed(0)
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
@@ -439,9 +440,9 @@ func IsFuelFull() -> bool:
 func TogglePause(t : bool):
 	super(t)
 	if (t):
-		$BeehaveTree.tick_rate = 0
+		$BeehaveTree.process_mode = Node.PROCESS_MODE_DISABLED
 	else:
-		$BeehaveTree.tick_rate = 1
+		$BeehaveTree.process_mode = Node.PROCESS_MODE_PAUSABLE
 func ChangeSimulationSpeed(i : int):
 	super(i)
 	#$BeehaveTree.tick_rate = 1 / i
