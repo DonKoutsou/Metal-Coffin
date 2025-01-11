@@ -1,0 +1,72 @@
+[gd_scene load_steps=14 format=3 uid="uid://b0gylky44tnsw"]
+
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_vo0jh"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_2caii"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_ovbxk"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="4_32dxd"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_mvm57"]
+[ext_resource type="Script" path="res://BeehaveNodes/CanReachDestinationCondition.gd" id="5_81qny"]
+[ext_resource type="Script" path="res://BeehaveNodes/ToFarToRefuelCondition.gd" id="6_77sl7"]
+[ext_resource type="Script" path="res://BeehaveNodes/NeedRepairs.gd" id="7_83cx2"]
+[ext_resource type="Script" path="res://BeehaveNodes/HasRefuelSpotCondition.gd" id="8_ojqis"]
+[ext_resource type="Script" path="res://BeehaveNodes/FindRefuelSpot_Action.gd" id="9_r0x3t"]
+[ext_resource type="Script" path="res://BeehaveNodes/AproachRefuelSpot_Action.gd" id="10_wywiw"]
+[ext_resource type="Script" path="res://BeehaveNodes/Refuel_Action.gd" id="11_lt8fk"]
+[ext_resource type="Script" path="res://BeehaveNodes/AproachDestination_Action.gd" id="12_dvl3g"]
+
+[node name="BeehaveTree" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+process_mode = 1
+script = ExtResource("1_vo0jh")
+actor_node_path = NodePath("..")
+process_thread = 0
+blackboard = NodePath("@Node@17560")
+custom_monitor = true
+actor = NodePath("")
+
+[node name="SelectorReactiveComposite" type="Node" parent="."]
+script = ExtResource("2_2caii")
+
+[node name="SequenceComposite" type="Node" parent="SelectorReactiveComposite"]
+script = ExtResource("3_ovbxk")
+
+[node name="SelectorComposite" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("4_mvm57")
+
+[node name="CooldownDecorator" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite"]
+script = ExtResource("4_32dxd")
+wait_time = 1.5
+
+[node name="UnableToReachDestinationCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite/CooldownDecorator"]
+script = ExtResource("5_81qny")
+
+[node name="CooldownDecorator2" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite"]
+script = ExtResource("4_32dxd")
+wait_time = 1.0
+
+[node name="ToFarToRefuelCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite/CooldownDecorator2"]
+script = ExtResource("6_77sl7")
+
+[node name="CooldownDecorator3" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite"]
+script = ExtResource("4_32dxd")
+wait_time = 3.3
+
+[node name="NeedRepairCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite/CooldownDecorator3"]
+script = ExtResource("7_83cx2")
+
+[node name="SelectorComposite2" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("4_mvm57")
+
+[node name="HasRefuelSpotCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
+script = ExtResource("8_ojqis")
+
+[node name="FindRefuelSpotAction" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
+script = ExtResource("9_r0x3t")
+
+[node name="AproachRefuelSpotAction" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("10_wywiw")
+
+[node name="RefuelAction" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("11_lt8fk")
+
+[node name="ApreachDestinationAction" type="Node" parent="SelectorReactiveComposite"]
+script = ExtResource("12_dvl3g")

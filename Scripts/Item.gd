@@ -7,3 +7,6 @@ class_name Item
 @export var ItemDesc = "ItemDesc"
 @export var MaxStackCount = 1
 @export var RandomFindMaxCount = 1
+
+func GetItemDesc() -> String:
+	return ItemDesc

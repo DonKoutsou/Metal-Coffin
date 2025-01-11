@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://bcmppxhqs5fre"]
+
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_k62wr"]
+
+[resource]
+script = ExtResource("1_k62wr")
+StatName = "FIREPOWER"
+StatMax = 10.0
+StatBase = 0.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
+AllowAutoRefil = false

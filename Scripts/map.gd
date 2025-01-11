@@ -57,6 +57,11 @@ func ToggleMapMarkerPlecement(t : bool) -> void:
 	$OuterUI/ScreenUi.visible = !t
 	$OuterUI/MapMarkerControls.visible = t
 	GetMapMarkerEditor().visible = t
+func ToggleMapMarkerPlacementAuto() -> void:
+	var t = !GetMapMarkerEditor().visible
+	$OuterUI/ScreenUi.visible = !t
+	$OuterUI/MapMarkerControls.visible = t
+	GetMapMarkerEditor().visible = t
 
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return $SubViewportContainer/ViewPort/InScreenUI/Control3/MapMarkerEditor
@@ -153,7 +158,7 @@ func RespawnMissiles(MissileData : Array[Resource]) -> void:
 		missile.Distance = dat.Distance
 		missile.MissileName = dat.MisName
 		missile.Speed = dat.MisSpeed
-		$CanvasLayer/SubViewportContainer/SubViewport.add_child(missile)
+		$SubViewportContainer/ViewPort.add_child(missile)
 		missile.global_position = dat.Pos
 		missile.global_rotation = dat.Rot
 	for g in get_tree().get_nodes_in_group("Enemy"):
@@ -490,7 +495,7 @@ func _on_missile_button_pressed() -> void:
 	GetPlayerShip().FireMissile()
 
 func _on_marker_plecement_pressed() -> void:
-	ToggleMapMarkerPlecement(true)
+	ToggleMapMarkerPlacementAuto()
 
 func _on_exit_map_marker_pressed() -> void:
 	ToggleMapMarkerPlecement(false)

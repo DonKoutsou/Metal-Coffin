@@ -1,7 +1,7 @@
 @tool
 extends ActionLeaf
 
-class_name PursuitAction
+class_name FindCloseShipAndOrderForPursuit_Action
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var Command = actor as Commander

@@ -15,6 +15,7 @@ func _ready() -> void:
 		
 func UpdateValues() -> void:
 	for g in Stats.size():
-		var value = ShipData.GetInstance().GetStat(Stats[g].STName).GetStat()
+		var value = ShipData.GetInstance().GetStat(Stats[g].STName).GetBaseStat()
+		var ItemBuff = ShipData.GetInstance().GetStat(Stats[g].STName).GetItemBuff()
 		var ShipValue = ShipData.GetInstance().GetStat(Stats[g].STName).GetShipBuff()
-		Stats[g].UpdateStatValue(value, ShipValue)
+		Stats[g].UpdateStatValue(value, ItemBuff, ShipValue)

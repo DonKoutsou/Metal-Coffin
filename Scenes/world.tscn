@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://Scripts/pop_up_manager.gd" id="22_xsiwt"]
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="28_won13"]
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="29_mynot"]
-[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Missile.tres" id="29_uppco"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="29_uppco"]
 [ext_resource type="Script" path="res://Scripts/simulation_manager.gd" id="30_h70po"]
 [ext_resource type="Script" path="res://Scripts/ingame_ui_manager.gd" id="31_5kch8"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/DialoguePlayer.tscn" id="33_vqlp6"]

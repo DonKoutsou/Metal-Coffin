@@ -147,7 +147,11 @@ layout_mode = 2
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("5_wa6ro")
 theme_override_font_sizes/font_size = 34
-text = "Into The Void"
+text = "Causarum Machina"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
 
 [node name="Play" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2

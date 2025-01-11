@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BaseShip" load_steps=11 format=3 uid="uid://dcw4b2h3xa0no"]
+[gd_resource type="Resource" script_class="BaseShip" load_steps=12 format=3 uid="uid://dcw4b2h3xa0no"]
 
 [ext_resource type="Script" path="res://Scripts/BaseShipStat.gd" id="1_rx5mn"]
 [ext_resource type="Script" path="res://Scripts/BaseShip.gd" id="1_vob0b"]
@@ -30,6 +30,11 @@ StatCurrentVal = 100000.0
 StatName = "FUNDS"
 StatBuff = 100000.0
 
+[sub_resource type="Resource" id="Resource_jh21a"]
+script = ExtResource("1_rx5mn")
+StatName = "FIREPOWER"
+StatBuff = 3.0
+
 [resource]
 script = ExtResource("1_vob0b")
 ShipName = "Cruiser"
@@ -37,4 +42,4 @@ ShipDesc = "Original model was designed for racing, its light and fast, but lack
 ShipScene = ExtResource("4_mbctq")
 Icon = ExtResource("3_cbndh")
 TopIcon = ExtResource("5_8aws1")
-Buffs = Array[ExtResource("1_rx5mn")]([SubResource("Resource_cjlo5"), SubResource("Resource_nsfy5"), SubResource("Resource_12ake"), SubResource("Resource_h1e6g")])
+Buffs = Array[ExtResource("1_rx5mn")]([SubResource("Resource_cjlo5"), SubResource("Resource_nsfy5"), SubResource("Resource_12ake"), SubResource("Resource_h1e6g"), SubResource("Resource_jh21a")])

@@ -9,11 +9,13 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		#return SUCCESS
 	var SimulationSpeed = MainShip.SimulationSpeed
 	MainShip.Cpt.GetStat("FUEL_TANK").RefilCurrentVelue(0.05 * SimulationSpeed)
+	MainShip.Cpt.GetStat("HULL").RefilCurrentVelue(0.02 * SimulationSpeed)
 	
 	for g in MainShip.GetDroneDock().DockedDrones:
 		g.Cpt.GetStat("FUEL_TANK").RefilCurrentVelue(0.05 * SimulationSpeed)
+		MainShip.Cpt.GetStat("HULL").RefilCurrentVelue(0.02 * SimulationSpeed)
 	
-	if (!MainShip.IsFuelFull()):
+	if (!MainShip.IsFuelFull() or MainShip.IsDamaged()):
 		return RUNNING
 	
 	#Ship.SetSpeed(0)

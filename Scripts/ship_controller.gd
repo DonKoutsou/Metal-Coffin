@@ -12,12 +12,16 @@ var ControlledShip : MapShip
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
+	call_deferred("SetInitialShip")
+
+func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	AvailableShips.append(ControlledShip)
+	$"../Map/OuterUI/ScreenUi/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
 	$"../Map/OuterUI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
 	$"../Map/OuterUI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
-	
+
 func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
 	AvailableShips.erase(D)
 	if (D.is_connected("OnShipDestroyed", OnShipDestroyed)):
@@ -144,7 +148,6 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	FrameCamToShip()
 	$"../Map/OuterUI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
 	$"../Map/OuterUI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
-	$"../Map/OuterUI/ScreenUi/DroneTab".ConnectedShip = ControlledShip
 
 var camtw : Tween
 func FrameCamToShip():

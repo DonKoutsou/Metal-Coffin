@@ -20,6 +20,7 @@ func SetData(Cont : ItemContainer) -> void:
 	#DescribedItem = It
 	#OwnedAmm = Amm
 	$VBoxContainer/HBoxContainer/VBoxContainer/TextureRect.texture = DescribedContainer.ItemType.ItemIcon
+	$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = DescribedContainer.ItemType.GetItemDesc()
 	if (DescribedContainer.ItemType is UsableItem):
 		$VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions.visible = true
 		$VBoxContainer/HBoxContainer/VBoxContainer/TextureRect.modulate = DescribedContainer.ItemType.ItecColor
@@ -28,12 +29,10 @@ func SetData(Cont : ItemContainer) -> void:
 	$VBoxContainer/HBoxContainer/VBoxContainer/ItemName.text = DescribedContainer.ItemType.ItemName
 	#Ship Parts
 	if (DescribedContainer.ItemType is ShipPart):
-		
-		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = DescribedContainer.ItemType.ItemDesc + "\nProvides " + var_to_str(DescribedContainer.ItemType.UpgradeAmm)+ " of "  + DescribedContainer.ItemType.UpgradeName 
 		$VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions.visible = false
-		#Damage
+		$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions.visible = true
 		$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Repair.visible = DescribedContainer.ItemType.IsDamaged
-		#Upgrade
+		$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer.visible = true
 		if (DescribedContainer.ItemType.UpgradeVersion == null):
 			$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade.visible = false
 			$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer.visible = false
@@ -43,10 +42,9 @@ func SetData(Cont : ItemContainer) -> void:
 				set_physics_process(true)
 				$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade.visible = false
 			else:
-				#$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/TextureRect.texture = (DescribedContainer.ItemType.UpgradeItems[0] as Item).ItemIconSmol
-				$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "Upgrade Time : " + var_to_str(DescribedContainer.ItemType.UpgradeTime)
+				$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade.visible = true
+				$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label.text = "[color=#c19200]Upgrade Time[/color] : " + var_to_str(DescribedContainer.ItemType.UpgradeTime)
 	else :
-		$VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc.text = DescribedContainer.ItemType.ItemDesc
 		$VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions.visible = false
 		$VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer.visible = false
 func _on_close_pressed() -> void:

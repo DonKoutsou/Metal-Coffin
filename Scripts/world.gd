@@ -196,7 +196,8 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 	CardF.EnemyShips = EBattleStats
 	SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
-	Ingame_UIManager.GetInstance().AddUI(CardF, false, true)
+	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
+	GetMap().ToggleUIForIntro(false)
 func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	for g in Survivors:
 		var nam = g.Name
@@ -222,7 +223,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 		#MapPointerManager.GetInstance().RemoveShip(g)
 		#g.free()
 	SimulationManager.GetInstance().TogglePause(false)
-
+	GetMap().ToggleUIForIntro(true)
 #--------------------------------------------------------
 func GameLost(reason : String):
 	get_tree().paused = true

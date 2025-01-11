@@ -1,22 +1,22 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4yumrb4c0xyd"]
 
-[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_24a6o"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="1_fola4"]
 [ext_resource type="Script" path="res://Scenes/card.gd" id="1_vr3r8"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_d5d7j"]
+[ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="4_irncy"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="5_lvjg3"]
 
 [node name="Card" type="PanelContainer"]
-custom_minimum_size = Vector2(220, 200)
+custom_minimum_size = Vector2(130, 130)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -95.0
-offset_right = 100.0
-offset_bottom = 105.0
+offset_left = -77.0
+offset_top = -59.0
+offset_right = 53.0
+offset_bottom = 71.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -36,6 +36,7 @@ theme_override_constants/separation = 10
 [node name="CardName" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_d5d7j")
+theme_override_font_sizes/font_size = 16
 text = "Card Name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -43,13 +44,14 @@ vertical_alignment = 1
 [node name="CardIcon" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_24a6o")
+texture = ExtResource("4_irncy")
 stretch_mode = 3
 
 [node name="CardDesc" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_d5d7j")
+theme_override_font_sizes/font_size = 10
 text = "afwfa fw aw faw faw f fwa aw fa"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -58,6 +60,7 @@ autowrap_mode = 2
 [node name="CardCost" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_d5d7j")
+theme_override_font_sizes/font_size = 10
 text = "1"
 horizontal_alignment = 2
 vertical_alignment = 1

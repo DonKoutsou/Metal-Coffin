@@ -27,6 +27,9 @@ func ChangeSimulationSpeed(i : int):
 func GetSpeed() -> float:
 	return Speed
 
+func GetShipName() -> String:
+	return MissileName
+
 func _ready() -> void:
 	MapPointerManager.GetInstance().AddShip(self, false)
 	Paused = SimulationManager.IsPaused()
@@ -48,11 +51,17 @@ func _physics_process(_delta: float) -> void:
 	for g in SimulationSpeed:
 		global_position = $AccelPosition.global_position
 		Distance -= $AccelPosition.position.x
-	#if (Distance <= 0):
-		#MapPointerManager.GetInstance().RemoveShip(self)
+	if (Distance <= 0):
+		MapPointerManager.GetInstance().RemoveShip(self)
+		StopSeeing()
 		#if (FoundShip):
 			#MapPointerManager.GetInstance().RemoveShip(FoundShip)
-		#queue_free()
+		queue_free()
+
+func StopSeeing() -> void:
+	for g in FoundShips:
+		if (g is HostileShip):
+			g.OnShipUnseen(self)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (!FoundShips.has(area.get_parent())):
@@ -67,6 +76,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 	#area.queue_free()
 	if (area.get_parent() is Missile):
 		area.get_parent().queue_free()
+		StopSeeing()
 		queue_free()
 		return
 	area.get_parent().Damage(Damage)
@@ -78,7 +88,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		s.autoplay = true
 		#s.max_distance = 20000
 		get_parent().add_child(s)
-	
+	StopSeeing()
 	queue_free()
 
 func _exit_tree() -> void:

@@ -109,6 +109,7 @@ grow_vertical = 2
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_ait7u")
 theme_override_font_sizes/font_size = 16
 text = "Dr"

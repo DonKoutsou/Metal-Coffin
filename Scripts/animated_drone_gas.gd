@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 
 signal RangeChanged(NewVal : float)
+signal RangeSnapedChaned(Dir : bool)
 
 var framecount : int
 var accumulatedrel : float
@@ -23,14 +24,17 @@ func _physics_process(_delta: float) -> void:
 	
 	if (DistanceTraveled > 1):
 		DistanceTraveled = 0
+		
 		$AudioStreamPlayer.play()
 		Input.vibrate_handheld(30)
 		if (accumulatedrel > 0):
+			RangeSnapedChaned.emit(true)
 			if (frame + 1 == framecount):
 				frame = 0
 			else:
 				frame += 1
 		else: if (accumulatedrel < 0):
+			RangeSnapedChaned.emit(false)
 			if (frame == 0):
 				frame = framecount - 1
 			else:

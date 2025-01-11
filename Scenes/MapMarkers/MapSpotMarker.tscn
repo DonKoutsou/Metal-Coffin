@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgsgcnyyv1gxm"]
+[gd_scene load_steps=11 format=3 uid="uid://bgsgcnyyv1gxm"]
 
 [ext_resource type="Script" path="res://Scripts/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
@@ -230,9 +230,6 @@ _data = {
 "SpotFound": SubResource("Animation_fxdlk")
 }
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gil5n"]
-light_mode = 1
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ey58"]
 resource_local_to_scene = true
 bg_color = Color(0.252517, 0.622353, 0.846633, 1)
@@ -249,9 +246,6 @@ corner_radius_bottom_right = 1024
 corner_radius_bottom_left = 1024
 corner_detail = 20
 anti_aliasing = false
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bwde2"]
-light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldbeq"]
 bg_color = Color(0.158472, 0.158472, 0.158472, 0.760784)
@@ -296,20 +290,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gjj15")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_4iew2")
@@ -318,7 +298,7 @@ libraries = {
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 visible = false
 z_index = 2
-material = SubResource("CanvasItemMaterial_gil5n")
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -338,7 +318,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2ey58")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 z_index = 2
 texture_filter = 4
-material = SubResource("CanvasItemMaterial_bwde2")
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -366,6 +346,7 @@ use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_p38gw")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_ldbeq")

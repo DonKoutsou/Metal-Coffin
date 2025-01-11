@@ -44,8 +44,8 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
-custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]

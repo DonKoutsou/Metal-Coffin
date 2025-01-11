@@ -119,9 +119,11 @@ func UpdateDroneRange(Rang : float):
 		
 		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir), ConnectedShip)
 		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))
-	else:
-		ProgressCrewSelect()
-		
+func UpdateSelected(Dir : bool) -> void:
+	if (!Armed):
+		ProgressCrewSelect(Dir)
+
+
 func UpdateCrewSelect(Select : int = 0):
 	if (DockedDrones[ConnectedShip].size() > Select):
 		CurrentlySelectedDrone = DockedDrones[ConnectedShip][Select]
@@ -130,7 +132,7 @@ func UpdateCrewSelect(Select : int = 0):
 	else:
 		$Control/TextureRect/Label2.text = "No Drones"
 		$Control/TextureRect/Light.Toggle(true)
-func ProgressCrewSelect():
+func ProgressCrewSelect(_Front : bool = true):
 	if (DockedDrones[ConnectedShip].size() == 0):
 		$Control/TextureRect/Label2.text = "No Drones"
 		$Control/TextureRect/Light.Toggle(true)

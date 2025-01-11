@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_00g78"]
 [ext_resource type="Script" path="res://Scripts/EnemyAi/commander.gd" id="14_bfgu5"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="16_4wqve"]
-[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Missile.tres" id="16_52ym8"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="16_52ym8"]
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="18_ahli7"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="19_mn7nq"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="20_4fmmi"]

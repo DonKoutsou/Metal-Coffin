@@ -5,7 +5,10 @@ class_name ToFarToRefuelCondition
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var MainShip = actor as HostileShip
 
-	if (MainShip.ToFarFromRefuel()):
-		return SUCCESS
-	
-	return FAILURE
+	var dist = MainShip.GetFuelRange()
+	#var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
+	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
+		var spot = g as MapSpot
+		if (spot.global_position.distance_to(MainShip.global_position) < dist):
+			return FAILURE
+	return SUCCESS

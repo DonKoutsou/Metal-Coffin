@@ -52,7 +52,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		Ship.connect("LandingEnded", marker.OnLandingEnded)
 		Ship.connect("TakeoffStarted", marker.OnLandingStarted)
 		Ship.connect("TakeoffEnded", marker.OnLandingEnded)
-		
+		marker.SetType("Ship")
 		marker.SetMarkerDetails("Flagship", "P",Ship.GetShipSpeed())
 	
 	if (Ship is HostileShip):
@@ -63,7 +63,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
 		marker.PlayHostileShipNotif()
-	
+		marker.SetType("Ship")
 	if (Ship is Drone):
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
@@ -77,10 +77,11 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.ToggleShipDetails(true)
 		marker.ToggleFriendlyShipDetails(true)
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
-	
+		marker.SetType("Ship")
 	if (Ship is Missile):
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
+		marker.SetType("Missile")
 	_ShipMarkers.append(marker)
 	
 func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
@@ -148,7 +149,7 @@ func _physics_process(delta: float) -> void:
 		var Marker = _ShipMarkers[g]
 		
 		if (ship is HostileShip):
-			Marker.ToggleShipDetails(true)
+			Marker.ToggleShipDetails(!ship.Docked)
 			if (EnemyDebug):
 				Marker.global_position = ship.global_position
 				Marker.UpdateSpeed(ship.GetShipSpeed())

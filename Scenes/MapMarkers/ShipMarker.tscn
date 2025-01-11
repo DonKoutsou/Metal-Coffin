@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=10 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="6_ju0yw"]
+[ext_resource type="Texture2D" uid="uid://crn46j7x7kq6m" path="res://Assets/Ship.png" id="7_kn8g7"]
+[ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
+[ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/Missile.png" id="7_uwuwu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi5cf"]
 content_margin_left = 1.0
@@ -19,23 +21,6 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 shadow_color = Color(1, 1, 1, 0.6)
 shadow_size = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gah6h"]
-bg_color = Color(1, 1, 1, 1)
-draw_center = false
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 1
-shadow_color = Color(1, 1, 1, 0.6)
-shadow_size = 4
-anti_aliasing = false
 
 [node name="ShipMarker" type="Control"]
 z_index = 1
@@ -57,6 +42,10 @@ script = ExtResource("1_y30vi")
 EnemyLocatedSound = ExtResource("3_6yg5x")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
+Icons = {
+"Missile": ExtResource("7_uwuwu"),
+"Ship": ExtResource("7_kn8g7")
+}
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-4, -5)
@@ -103,6 +92,7 @@ alignment = 1
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Quifsa"
@@ -113,6 +103,7 @@ use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "SPEED 100"
@@ -122,6 +113,7 @@ vertical_alignment = 1
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Last Seen 1h ago"
@@ -132,6 +124,7 @@ visible = false
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Threat Level : 10"
@@ -141,6 +134,7 @@ vertical_alignment = 1
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Fuel : 10 / 250 Tons"
@@ -150,12 +144,13 @@ vertical_alignment = 1
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="." groups=["MapShipVizualiser"]]
+[node name="Icon" type="TextureRect" parent="." groups=["MapShipVizualiser"]]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -170,38 +165,42 @@ offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(17, 17)
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gah6h")
+texture = ExtResource("7_kn8g7")
+expand_mode = 1
+stretch_mode = 3
 
-[node name="Direction" type="Label" parent="Panel"]
+[node name="Direction" type="Label" parent="Icon"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 17.0
+offset_left = 20.0
 offset_top = -40.0
-offset_right = 109.0
+offset_right = 112.0
 offset_bottom = 40.0
 grow_vertical = 2
 pivot_offset = Vector2(0, 40)
-theme_override_fonts/font = ExtResource("6_ju0yw")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("7_nvnv6")
+theme_override_font_sizes/font_size = 34
 text = "->"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ShipSymbol" type="Label" parent="Panel"]
+[node name="ShipSymbol" type="Label" parent="Icon"]
 use_parent_material = true
-layout_mode = 0
-offset_left = 17.0
-offset_top = -18.0
-offset_right = 18.0
-offset_bottom = 1.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_top = -24.0
+offset_right = 0.5
+grow_horizontal = 2
 pivot_offset = Vector2(0, 35)
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("4_sgdeo")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "P"
 horizontal_alignment = 1
 vertical_alignment = 1

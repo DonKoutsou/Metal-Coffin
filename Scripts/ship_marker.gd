@@ -12,6 +12,8 @@ class_name ShipMarker
 
 @export var NotificationScene : PackedScene
 
+@export var Icons : Dictionary
+
 var camera : Camera2D
 
 var TimeLastSeen : float
@@ -53,12 +55,15 @@ func OnShipDeparted() -> void:
 	ToggleShowRefuel("Upgrading", false, 0)
 
 func UpdateTrajectory(Dir : float) -> void:
-	$Panel/Direction.rotation = Dir
+	$Icon/Direction.rotation = Dir
 
 func DroneReturning() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText("Drone Returning To Base")
 	add_child(notif)
+
+func SetType(T : String) -> void:
+	$Icon.texture = Icons[T]
 	
 func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 	var notif : ResuplyNotification
@@ -116,11 +121,11 @@ func OnStatLow(StatName : String) -> void:
 func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : float):
 	$Control/PanelContainer/VBoxContainer/ShipName.text = ShipName
 	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(ShipSpeed * 360) + "km/h"
-	$Panel/ShipSymbol.text = ShipCasllSign
+	$Icon/ShipSymbol.text = ShipCasllSign
 	
 func _physics_process(_delta: float) -> void:
 	$Control.scale = Vector2(1,1) / camera.zoom
-	$Panel.scale = (Vector2(1,1) / camera.zoom) * 0.5
+	$Icon.scale = (Vector2(1,1) / camera.zoom) * 0.5
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine()
 	$Line2D.width =  2 / camera.zoom.x
@@ -168,11 +173,11 @@ func UpdateTime():
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
-	$Panel.add_to_group("UnmovableMapInfo")
+	$Icon.add_to_group("UnmovableMapInfo")
 	
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
-	$Panel.remove_from_group("UnmovableMapInfo")
+	$Icon.remove_from_group("UnmovableMapInfo")
 
 func UpdateSignRotation() -> void:
 	var c = $Control as Control

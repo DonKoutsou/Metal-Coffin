@@ -4,7 +4,8 @@ class_name MissileTab
 var Armed = false
 @export var MissileDockEventH : MissileDockEventHandler
 var Missiles : Array[MissileItem]
-var CurrentlySelectedMissile 
+var CurrentlySelectedMissile
+var SelectedIndex : int
 
 func _ready() -> void:
 	MissileDockEventH.connect("MissileAdded", MissileAdded)
@@ -60,11 +61,14 @@ func UpdateSteer(RelativeRot : float):
 	if (Armed):
 		SteeringDir = RelativeRot
 		MissileDockEventH.MissileDirectionChanged(SteeringDir / 50)
-	else:
-		ProgressCrewSelect()
+
+func UpdateSelected(Dir : bool) -> void:
+	if (!Armed):
+		ProgressCrewSelect(Dir)
 
 func UpdateCrewSelect(Select : int = 0):
 	if (Missiles.size() > Select):
+		SelectedIndex = Select
 		CurrentlySelectedMissile = Missiles[Select]
 		$Control/TextureRect/Label2.text = CurrentlySelectedMissile.MissileName
 		$Control/Control/Label.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
@@ -73,7 +77,7 @@ func UpdateCrewSelect(Select : int = 0):
 		$Control/TextureRect/Label2.text = "No Missiles"
 		$Control/TextureRect/Light.Toggle(true)
 		
-func ProgressCrewSelect():
+func ProgressCrewSelect(Front : bool = true):
 	if (Missiles.size() == 0):
 		$Control/TextureRect/Label2.text = "No Missiles"
 		$Control/TextureRect/Light.Toggle(true)
@@ -81,10 +85,15 @@ func ProgressCrewSelect():
 	if (CurrentlySelectedMissile == null):
 		CurrentlySelectedMissile = Missiles[0]
 	else:
-		var i = Missiles.find(CurrentlySelectedMissile) + 1
-		if (i >= Missiles.size()):
-			i = 0
-		CurrentlySelectedMissile = Missiles[i]
+		if (Front):
+			SelectedIndex +=  1
+		else :
+			SelectedIndex -= 1
+		if (SelectedIndex >= Missiles.size()):
+			SelectedIndex = 0
+		else : if (SelectedIndex < 0):
+			SelectedIndex = Missiles.size() - 1
+		CurrentlySelectedMissile = Missiles[SelectedIndex]
 	$Control/TextureRect/Light.Toggle(true, true)
 	$Control/TextureRect/Label2.text = CurrentlySelectedMissile.MissileName
 

@@ -206,9 +206,11 @@ func AccelerationChanged(value: float) -> void:
 	if (!$AudioStreamPlayer2D.playing):
 		$AudioStreamPlayer2D.play()
 	
-	var postween = create_tween()
-	postween.set_trans(Tween.TRANS_EXPO)
-	postween.tween_property($Aceleration, "position", Vector2(max(0,value * GetShipMaxSpeed()), 0), 2)
+	GetShipAcelerationNode().position.x = max(0,value * GetShipMaxSpeed())
+	#var postween = create_tween()
+	#postween.set_trans(Tween.TRANS_EXPO)
+	#postween.tween_property($Aceleration, "position", Vector2(max(0,value * GetShipMaxSpeed()), 0), 2)
+	
 func AccelerationEnded(_value_changed: bool) -> void:
 	pass
 	#ChangingCourse = false

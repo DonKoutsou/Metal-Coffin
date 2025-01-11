@@ -297,3 +297,4 @@ offset_bottom = 46.0
 [connection signal="pressed" from="Control/Control/Launch" to="." method="_on_deploy_drone_button_pressed"]
 [connection signal="pressed" from="Control/Control/off" to="." method="_on_turn_off_button_pressed"]
 [connection signal="RangeChanged" from="Control/Control/DroneGas" to="." method="UpdateSteer"]
+[connection signal="RangeSnapedChaned" from="Control/Control/DroneGas" to="." method="UpdateSelected"]

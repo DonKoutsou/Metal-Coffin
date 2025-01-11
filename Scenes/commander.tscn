@@ -1,15 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://ccmwul4ncd4dx"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyAi/commander.gd" id="1_8h2pk"]
-[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Missile.tres" id="2_5iab7"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="2_5iab7"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_pwdnr"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_0bmgh"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="4_bwmvr"]
 [ext_resource type="Script" path="res://BeehaveNodes/UnhandledEnemies_Condition.gd" id="6_mn76p"]
-[ext_resource type="Script" path="res://BeehaveNodes/PursuitOrder_Action.gd" id="7_aauxr"]
+[ext_resource type="Script" path="res://BeehaveNodes/FindCloseShipAndOrderForPursuit_Action.gd" id="7_aauxr"]
 [ext_resource type="Script" path="res://BeehaveNodes/UnhandledSignals_Condition.gd" id="8_vpsmx"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_4n77h"]
-[ext_resource type="Script" path="res://BeehaveNodes/InvestigateOrder_Action.gd" id="9_7yj6h"]
+[ext_resource type="Script" path="res://BeehaveNodes/FindCloseShipAndOrderInvestigation_Action.gd" id="9_7yj6h"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="10_rt8k1"]
 [ext_resource type="Script" path="res://BeehaveNodes/HasKnownEnemies_Condition.gd" id="11_4ea20"]
 [ext_resource type="Script" path="res://BeehaveNodes/MissileCarrierInPosition_Condition.gd" id="12_mk577"]
@@ -32,22 +32,30 @@ actor = NodePath("..")
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
 script = ExtResource("4_0bmgh")
 
-[node name="FindUnhandledEnemies" type="Node" parent="BeehaveTree/SelectorComposite"]
+[node name="CooldownDecorator2" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("10_rt8k1")
+wait_time = 1.0
+
+[node name="FindUnhandledEnemies" type="Node" parent="BeehaveTree/SelectorComposite/CooldownDecorator2"]
 script = ExtResource("4_bwmvr")
 
-[node name="UnhandledEnemiesCondition" type="Node" parent="BeehaveTree/SelectorComposite/FindUnhandledEnemies"]
+[node name="UnhandledEnemiesCondition" type="Node" parent="BeehaveTree/SelectorComposite/CooldownDecorator2/FindUnhandledEnemies"]
 script = ExtResource("6_mn76p")
 
-[node name="PursuitOrder" type="Node" parent="BeehaveTree/SelectorComposite/FindUnhandledEnemies"]
+[node name="FindCloseShipAndOrderForPursuit_Action" type="Node" parent="BeehaveTree/SelectorComposite/CooldownDecorator2/FindUnhandledEnemies"]
 script = ExtResource("7_aauxr")
 
-[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorComposite"]
+[node name="CooldownDecorator3" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("10_rt8k1")
+wait_time = 1.0
+
+[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorComposite/CooldownDecorator3"]
 script = ExtResource("4_bwmvr")
 
-[node name="UnhandledSignalsCondition" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
+[node name="UnhandledSignalsCondition" type="Node" parent="BeehaveTree/SelectorComposite/CooldownDecorator3/SequenceComposite2"]
 script = ExtResource("8_vpsmx")
 
-[node name="InvestigateAction" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
+[node name="FindCloseShipAndOrderInvestigation_Action" type="Node" parent="BeehaveTree/SelectorComposite/CooldownDecorator3/SequenceComposite2"]
 script = ExtResource("9_7yj6h")
 
 [node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite"]

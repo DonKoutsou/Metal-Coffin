@@ -8,6 +8,7 @@ class_name HostileShip
 
 @export var ShipName : String
 @export var Patrol : bool = true
+@export var BT : PackedScene
 
 var PursuingShips : Array[Node2D]
 var LastKnownPosition : Vector2
@@ -18,7 +19,7 @@ var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
 var CommingBack = false
-@export var FleetShips : Array[PackedScene]
+var BTree
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
@@ -30,17 +31,12 @@ signal ElintContact(Ship : MapShip, t : bool)
 func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	Commander.GetInstance().RegisterSelf(self)
-	for g in FleetShips:
-		var s = g.instantiate() as HostileShip
-		#get_parent().add_child(s)
-		$ShipDock.AddShip(s)
-	#visible = false
+
 	for g in Cpt.CaptainStats:
 		g.CurrentVelue = g.GetStat()
 	
 	_UpdateShipIcon(Cpt.ShipIcon)
-	SetSpeed(GetShipMaxSpeed())
-	$BeehaveTree.set_physics_process(Patrol)
+	
 	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
 	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
 	
@@ -64,46 +60,24 @@ func  _ready() -> void:
 			if (Path.size() == 0):
 				Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
 			PathPart = 1
-	
-	MapPointerManager.GetInstance().AddShip(self, false)
+		
+		BTree = BT.instantiate() as BeehaveTree
+		
+		var bb = Blackboard.new()
+		add_child(bb)
+		
+		BTree.blackboard = bb
+		
+		add_child(BTree)
+	TogglePause(SimulationManager.IsPaused())
+	#MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
 	UpdateElint(delta)
-	#Reloading -= delta
-	#if (Patrol):
-		#if (CurrentPort != null):
-			#Cpt.GetStat("FUEL_TANK").RefilCurrentVelue(0.05 * SimulationSpeed)
-			#if (IsFuelFull()):
-				#SetSpeed(GetShipMaxSpeed())
-		#else:
-			#if (!CanReachDestination() or ToFarFromRefuel()):
-				#FindRefuelSpot()
-		#
-		#if (Docked):
-			#return
-		#
-		#for g in GetDroneDock().DockedDrones:
-			#var Ship = g as HostileShip
-			#var dronefuel = (GetShipSpeed() / 10 / Ship.Cpt.GetStatValue("FUEL_EFFICIENCY")) * SimulationSpeed
-			#if (Ship.Cpt.GetStatCurrentValue("FUEL_TANK") > dronefuel):
-				#Ship.Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
-			#else : if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
-				#Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
-		#
-		#var ftoconsume = GetShipSpeed() / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY") * SimulationSpeed
-		#if (Cpt.GetStatCurrentValue("FUEL_TANK") > ftoconsume):
-			#Cpt.GetStat("FUEL_TANK").ConsumeResource(ftoconsume)
-		#else: if (GetDroneDock().DronesHaveFuel(ftoconsume)):
-			#GetDroneDock().SyphonFuelFromDrones(ftoconsume)
-			#
-		#ShipLookAt(GetCurrentDestination())
-		#
-		#var offset = GetShipSpeedVec()
-		#global_position += offset * SimulationSpeed
-
+	
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
 	missile.SetData(Mis)
@@ -153,6 +127,7 @@ func GetFuelRange() -> float:
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
 	return (total_fuel * 10 * effective_efficiency) / fleetsize
+	
 func CanReachDestination() -> bool:
 	var dist = GetFuelRange()
 	var actualdistance = global_position.distance_to(GetCurrentDestination())
@@ -169,26 +144,9 @@ func ToFarFromRefuel() -> bool:
 		if (spot.global_position.distance_to(global_position) < dist):
 			return false
 	return true
-func FindRefuelSpot() -> bool:
-	var dist = GetFuelRange()
-	var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
-	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
-		var spot = g as MapSpot
-		if (spot.global_position.distance_to(global_position) >= dist):
-			continue
-		#if (spot.global_position.distance_to(GetCurrentDestination()) > DistanceToDestination):
-			#continue
-		#if (spot == CurrentPort):
-			#continue
-		RefuelSpot = spot
-		print(ShipName + " will take a detour through " + RefuelSpot.SpotInfo.SpotName + " to refuel")
-		return true
-	print(ShipName + " whas failed to find a refuel spot ")
-	return false
 func SetNewDestination(DistName : String) -> void:
 	Path = find_path(CurrentPort.GetSpotName(), DistName)
 	PathPart = 1
-
 func SetCurrentPort(P : MapSpot) -> void:
 	CurrentPort = P
 	Cpt.GetStat("MISSILE_SPACE").CurrentVelue = Cpt.GetStat("MISSILE_SPACE").GetStat()
@@ -196,7 +154,6 @@ func SetCurrentPort(P : MapSpot) -> void:
 		#RefuelSpot = null
 	for g in GetDroneDock().DockedDrones:
 		g.SetCurrentPort(P)
-
 func RemovePort():
 	if (Docked):
 		return
@@ -205,13 +162,11 @@ func RemovePort():
 	CurrentPort = null
 	for g in GetDroneDock().DockedDrones:
 		g.CurrentPort = null
-
 func Damage(amm : float) -> void:
 	Cpt.GetStat("HULL").CurrentVelue -= amm
 	super(amm)
 func IsDead() -> bool:
 	return Cpt.GetStat("HULL").CurrentVelue <= 0
-
 func IntersectPusruing() -> Vector2:
 	# Get the current position and velocity of the ship
 	var ship_position
@@ -226,7 +181,6 @@ func IntersectPusruing() -> Vector2:
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	return predicted_position
-	
 func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBy.has(SeenBy)):
 		return
@@ -258,16 +212,20 @@ func _on_area_entered(area: Area2D) -> void:
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
 		if (bit):
+			var plships : Array[Node2D] = []
+			var hostships : Array[Node2D] = []
+			if (Docked):
+				hostships.append(Command)
+				hostships.append_array(Command.GetDroneDock().DockedDrones)
+			else:
+				hostships.append(self)
+				hostships.append_array(GetDroneDock().DockedDrones)
+				
 			if (area.get_parent() is PlayerShip):
 				var player = area.get_parent() as PlayerShip
-				var ships : Array[Node2D] = []
-				ships.append(player)
-				ships.append_array(player.GetDroneDock().DockedDrones)
-				var hostships : Array[Node2D] = []
-				hostships.append(self)
-				OnShipMet.emit(ships, hostships)
+				plships.append(player)
+				plships.append_array(player.GetDroneDock().DockedDrones)
 			else:
-				var plships : Array[Node2D] = []
 				var drn = area.get_parent() as Drone
 				if (drn.Docked):
 					var player = drn.Command
@@ -275,10 +233,9 @@ func _on_area_entered(area: Area2D) -> void:
 					plships.append_array(player.GetDroneDock().DockedDrones)
 				else:
 					plships.append(drn)
-				
-				var hostships : Array[Node2D] = []
-				hostships.append(self)
-				OnShipMet.emit(plships, hostships)
+					plships.append_array(drn.GetDroneDock().DockedDrones)
+					
+			OnShipMet.emit(plships, hostships)
 		else:
 			OnShipSeen(area.get_parent())
 	else : if (area.get_parent() == Command and CommingBack):
@@ -291,7 +248,6 @@ func _on_area_entered(area: Area2D) -> void:
 		for g in MyDroneDock.FlyingDrones:
 			g.Command = Ship
 		CommingBack = false
-		
 func _on_area_exited(area: Area2D) -> void:
 	if (area.get_parent() == CurrentPort):
 		if (!Docked):
@@ -318,7 +274,6 @@ func _on_radar_2_area_exited(area: Area2D) -> void:
 		OnEnemyVisualLost.emit(area.get_parent())
 		#PursuingShips.erase(area.get_parent())
 		#LastKnownPosition = area.get_parent().global_position
-
 func find_path(start_city: String, end_city: String) -> Array:
 	#var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var queue = []
@@ -360,7 +315,6 @@ func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 		
 	path.reverse()  # Reverse the path to get it from start to end
 	return path
-
 func GetCurrentDestination() -> Vector2:
 	var destination
 	#if (RefuelSpot != null):
@@ -437,15 +391,21 @@ func IsFuelFull() -> bool:
 		if (!g.IsFuelFull()):
 			return false
 	return Cpt.GetStat("FUEL_TANK").CurrentVelue == Cpt.GetStat("FUEL_TANK").GetStat()
+func IsDamaged() -> bool:
+	for g in GetDroneDock().DockedDrones:
+		if (!g.IsDamaged()):
+			return false
+	return Cpt.GetStat("HULL").CurrentVelue == Cpt.GetStat("HULL").GetStat()
 func TogglePause(t : bool):
-	super(t)
-	if (t):
-		$BeehaveTree.process_mode = Node.PROCESS_MODE_DISABLED
-	else:
-		$BeehaveTree.process_mode = Node.PROCESS_MODE_PAUSABLE
+	Paused = t
+	if (t and BTree != null):
+		BTree.process_mode = Node.PROCESS_MODE_DISABLED
+	else: if (BTree != null):
+		BTree.process_mode = Node.PROCESS_MODE_PAUSABLE
 func ChangeSimulationSpeed(i : int):
 	super(i)
 	#$BeehaveTree.tick_rate = 1 / i
 func ToggleDocked(t : bool) -> void:
 	Docked = t
-	$BeehaveTree.set_physics_process(!t)
+	if (BTree != null):
+		BTree.set_physics_process(!t)

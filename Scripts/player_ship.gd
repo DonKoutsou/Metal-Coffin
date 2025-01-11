@@ -141,7 +141,7 @@ func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
 	stats.Speed = GetShipMaxSpeed()
-	stats.FirePower = 1
+	stats.FirePower = ShipData.GetInstance().GetStat("FIREPOWER").GetCurrentValue()
 	stats.ShipIcon = ShipType.TopIcon
 	stats.CaptainIcon = CaptainIcon
 	stats.Name = "Player"
