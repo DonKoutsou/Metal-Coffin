@@ -117,14 +117,14 @@ func FixLabelClipping() -> void:
 	AllMapInfos.append_array(Mapinfos)
 	for g in Mapinfos:
 		var control1 = g as Control
-		if (!control1.visible):
+		if (!control1.is_visible_in_tree()):
 			continue
 		var r1 = control1.get_global_rect()
 		for z in AllMapInfos:
 			if (g == z):
 				continue
 			var control2 = z as Control
-			if (!control2.visible):
+			if (!control2.is_visible_in_tree()):
 				continue
 			var r2 = control2.get_global_rect()
 			var tries = 0

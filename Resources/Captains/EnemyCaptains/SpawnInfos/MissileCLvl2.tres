@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://bc8tkbx0lm76l"]
+
+[ext_resource type="Resource" uid="uid://6n7k1biixh2y" path="res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier2.tres" id="1_pewue"]
+[ext_resource type="Script" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_uq62a"]
+
+[resource]
+script = ExtResource("2_uq62a")
+Cpt = ExtResource("1_pewue")
+Cost = 80
+MaxAmmInFleet = 2

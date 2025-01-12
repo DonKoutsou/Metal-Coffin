@@ -8,4 +8,4 @@ class_name MissileItem
 @export var Damage : int = 30
 
 func GetItemDesc() -> String:
-	return "{0} \n[color=#c19200]Range[/color] : {1} | [color=#c19200]Speed[/color] : {2}  | [color=#c19200]Damage[/color] : {3}".format([ItemDesc, Distance, Speed, Damage])
+	return "{0} \n[color=#c19200]Range[/color] : {1} km| [color=#c19200]Speed[/color] : {2} km/h  | [color=#c19200]Damage[/color] : {3}".format([ItemDesc, Distance, Speed * 360, Damage])

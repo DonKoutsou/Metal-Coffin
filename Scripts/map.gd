@@ -8,6 +8,8 @@ class_name Map
 @export var MapSize : int
 @export var MapGenerationDistanceCurve : Curve
 @export var EnemyScene : PackedScene
+@export var EnSpawner : SpawnDecider
+@export var EnemyShipNames : Array[String]
 @onready var thrust_slider: ThrustSlider = $OuterUI/ThrustSlider
 
 
@@ -260,54 +262,42 @@ func GenerateMap() -> void:
 		SpotList.append(sc)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
+	EnSpawner.Init()
+	var time = Time.get_ticks_msec()
 	for g in SpotList:
 		SpawnTownEnemies(g)
+	print("Spawning enemies took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
 	
 	GenerateRoads()
 	#_DrawMapLines(["City Center", "Capital City Center"])
 	#_DrawMapLines(["City Center", "Capital City Center","Chora"], true, false)
+func SpawnSpotFleet(Spot : MapSpot, Patrol : bool) -> void:
+	var Fleet = EnSpawner.GetSpawnsForLocation(Spot.global_position.y)
+	var SpawnedFleet = []
+	for f in Fleet:
+		var Ship = EnemyScene.instantiate() as HostileShip
+		Ship.Cpt = f
+		Ship.CurrentPort = Spot
+		Ship.Patrol = Patrol
+		Ship.ShipName = EnemyShipNames.pop_back()
+		SpawnedFleet.append(Ship)
+		if (Fleet.find(f) != 0):
+			Ship.ToggleDocked(true)
+			Ship.Command = SpawnedFleet[0]
+			SpawnedFleet[0].GetDroneDock().call_deferred("DockShip", Ship)
+		$SubViewportContainer/ViewPort.add_child(Ship)
+		Ship.global_position = Spot.global_position
 func SpawnTownEnemies(T : Town) -> void:
 	var Spots = T.GetSpots()
 	for g in Spots:
-		var PatrolBP = g.SpotInfo.HostilePatrol
-		var PatrolCommander : HostileShip
-		for Patrol in PatrolBP.size():
-			var Ship = EnemyScene.instantiate() as HostileShip
-			var Cpt = Captain.new()
-			Cpt.CopyStats(PatrolBP[Patrol])
-			Ship.Cpt = Cpt
-			Ship.CurrentPort = g
-			Ship.ShipName = g.SpotInfo.HostilePatrolShipNames[Patrol]
-			Ship.Patrol = true
-			if (PatrolCommander == null):
-				PatrolCommander = Ship
-			else:
-				Ship.ToggleDocked(true)
-				Ship.Command = PatrolCommander
-				PatrolCommander.GetDroneDock().call_deferred("DockShip", Ship)
-			$SubViewportContainer/ViewPort.add_child(Ship)
-			Ship.global_position = g.global_position
-			
-		var GarrissonBP = g.SpotInfo.HostileGarrisson
-		var GarrissonCommander : HostileShip
-		for Garrisson in GarrissonBP.size():
-			var Ship = EnemyScene.instantiate() as HostileShip
-			var Cpt = Captain.new()
-			Cpt.CopyStats(GarrissonBP[Garrisson])
-			Ship.Cpt = Cpt
-			Ship.CurrentPort = g
-			Ship.ShipName = g.SpotInfo.HostileGarrissonShipNames[Garrisson]
-			Ship.Patrol = false
-			if (GarrissonCommander == null):
-				GarrissonCommander = Ship
-			else:
-				Ship.ToggleDocked(true)
-				Ship.Command = GarrissonCommander
-				GarrissonCommander.GetDroneDock().call_deferred("DockShip", Ship)
-			$SubViewportContainer/ViewPort.add_child(Ship)
-			Ship.global_position = g.global_position
+		var time = Time.get_ticks_msec()
+		if (g.SpotInfo.EnemyCity):
+			SpawnSpotFleet(g, false)
+		if (g.GetPossibleDrops().size() == 3):
+			SpawnSpotFleet(g, true)
+		print("Spawning fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 			
 #ROAD GENERATION
 func GenerateRoads() -> void:

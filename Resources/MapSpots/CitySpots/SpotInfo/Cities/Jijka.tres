@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_s22og"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_xjfdo"]
-[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_dx2nd"]
+[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_dx2nd"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_t26eo"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_obv2u"]
 

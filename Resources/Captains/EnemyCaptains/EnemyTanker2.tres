@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://quqnjrytm6df"]
+[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://wdewnahxdu77"]
 
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_bi0n4"]
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_dgbco"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="3_7bnik"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_vw3ce"]
+[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_s4bbh"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_nhpak"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="3_dssc8"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_a63wb"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "SPEED"
 StatMax = 3.0
 StatBase = 0.2
@@ -16,20 +16,20 @@ CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_nn3aw"]
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "RADAR_RANGE"
-StatMax = 500.0
-StatBase = 300.0
+StatMax = 1000.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_0a6up"]
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "FIREPOWER"
 StatMax = 10.0
-StatBase = 3.0
+StatBase = 1.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -37,7 +37,7 @@ AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_he0oc"]
 resource_local_to_scene = true
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "HULL"
 StatMax = 300.0
 StatBase = 200.0
@@ -47,20 +47,20 @@ CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_q78cv"]
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "ELINT"
 StatMax = 3000.0
-StatBase = 1500.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_rpqpm"]
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "FUEL_EFFICIENCY"
 StatMax = 5.0
-StatBase = 1.5
+StatBase = 3.5
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -68,20 +68,20 @@ AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_vhm23"]
 resource_local_to_scene = true
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "FUEL_TANK"
 StatMax = 500.0
-StatBase = 500.0
+StatBase = 420.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_lqay8"]
-script = ExtResource("2_dgbco")
+script = ExtResource("2_nhpak")
 StatName = "MISSILE_SPACE"
 StatMax = 20.0
-StatBase = 10.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -89,10 +89,10 @@ AllowAutoRefil = false
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("4_vw3ce")
+script = ExtResource("4_a63wb")
 CaptainName = "Grunt"
 CaptainBio = "Shithead"
-CaptainPortrait = ExtResource("1_bi0n4")
-ShipIcon = ExtResource("3_7bnik")
-CaptainStats = Array[ExtResource("2_dgbco")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8")])
-ShipCallsign = "M"
+CaptainPortrait = ExtResource("1_s4bbh")
+ShipIcon = ExtResource("3_dssc8")
+CaptainStats = Array[ExtResource("2_nhpak")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8")])
+ShipCallsign = "T"

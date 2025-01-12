@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://d17h4a7ifln30"]
+
+[ext_resource type="Resource" uid="uid://cvk1mvgokhtus" path="res://Resources/Captains/EnemyCaptains/EnemyTanker4.tres" id="1_ttsgr"]
+[ext_resource type="Script" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_lp2nb"]
+
+[resource]
+script = ExtResource("2_lp2nb")
+Cpt = ExtResource("1_ttsgr")
+Cost = 100
+MaxAmmInFleet = 2

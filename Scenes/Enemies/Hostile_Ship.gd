@@ -37,13 +37,14 @@ func  _ready() -> void:
 	
 	_UpdateShipIcon(Cpt.ShipIcon)
 	
-	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
-	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
+	call_deferred("UpdateELINTTRange", Cpt.GetStatValue("ELINT"))
+	call_deferred("UpdateVizRange", Cpt.GetStatValue("RADAR_RANGE"))
 	
-	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
+	
 	if (!Patrol):
 		SetSpeed(0)
 	else:
+		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 		var nextcity = cities.find(CurrentPort) + Direction
 		if (nextcity < 0 or nextcity > cities.size() - 1):
 			Direction *= -1
@@ -69,6 +70,7 @@ func  _ready() -> void:
 		BTree.blackboard = bb
 		
 		add_child(BTree)
+		ToggleDocked(Docked)
 	TogglePause(SimulationManager.IsPaused())
 	#MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)

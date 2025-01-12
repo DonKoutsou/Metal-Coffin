@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Hostile_Ship.gd" id="1_dinuw"]
-[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyBase.tres" id="2_lpij7"]
+[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_xxp8j"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_q8roo"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_jqji2"]
@@ -46,6 +46,7 @@ radius = 1000.0
 process_mode = 1
 script = ExtResource("1_dinuw")
 Cpt = ExtResource("2_lpij7")
+Patrol = false
 BT = ExtResource("8_w8ob0")
 
 [node name="SmokeParticles" type="GPUParticles2D" parent="."]

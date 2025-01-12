@@ -15,6 +15,7 @@ func DrawLines() -> void:
 	for points in Lines:
 		var L = Line2D.new()
 		L.use_parent_material = true
+		L.width = 20
 		add_child(L)
 		L.global_position = points[0]
 		#L.add_point(Vector2.ZERO, 0)

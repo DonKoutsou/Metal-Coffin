@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="SpawnDecider" load_steps=19 format=3 uid="uid://c1buiwym6qkh8"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_e8y86"]
+[ext_resource type="Script" path="res://Scripts/EnemyAi/SpawnDecider.gd" id="2_gx7ll"]
+[ext_resource type="Resource" uid="uid://ctb0bey42ck18" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/FireshipLvl1.tres" id="2_ujkrp"]
+[ext_resource type="Resource" uid="uid://brklxjupl0rch" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/FireshipLvl2.tres" id="3_3burq"]
+[ext_resource type="Resource" uid="uid://brutfvbqof8br" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/FireshipLvl3.tres" id="4_skjn5"]
+[ext_resource type="Resource" uid="uid://dcgnt16mqufga" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/FireshipLvl4.tres" id="5_nj04r"]
+[ext_resource type="Resource" uid="uid://blavi3f1ur507" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/MissileCLvl1.tres" id="6_rkuq5"]
+[ext_resource type="Resource" uid="uid://bc8tkbx0lm76l" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/MissileCLvl2.tres" id="7_4r1ff"]
+[ext_resource type="Resource" uid="uid://bgcudxjcbwqho" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/MissileCLvl3.tres" id="8_tgta4"]
+[ext_resource type="Resource" uid="uid://dcvoc8bgq8ctq" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/MissileCLvl4.tres" id="9_0kqkm"]
+[ext_resource type="Resource" uid="uid://cl0a8poce0hjq" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/RadarLvl1.tres" id="10_g406a"]
+[ext_resource type="Resource" uid="uid://qk63uojn4d3u" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/RadarLvl2.tres" id="11_8j6y3"]
+[ext_resource type="Resource" uid="uid://cib15c8a1rw34" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/RadarLvl3.tres" id="12_jf4i4"]
+[ext_resource type="Resource" uid="uid://b8rk3y5wevyap" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/RadarLvl4.tres" id="13_eutgs"]
+[ext_resource type="Resource" uid="uid://bjwc7eir6wdlu" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl1.tres" id="14_u64bs"]
+[ext_resource type="Resource" uid="uid://bcsspmo5nnyvm" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl2.tres" id="15_702x6"]
+[ext_resource type="Resource" uid="uid://g2a8jt5yrgwr" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl3.tres" id="16_b5jl3"]
+[ext_resource type="Resource" uid="uid://d17h4a7ifln30" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl4.tres" id="17_d84jx"]
+
+[resource]
+script = ExtResource("2_gx7ll")
+CaptainList = Array[ExtResource("1_e8y86")]([ExtResource("2_ujkrp"), ExtResource("3_3burq"), ExtResource("4_skjn5"), ExtResource("5_nj04r"), ExtResource("6_rkuq5"), ExtResource("7_4r1ff"), ExtResource("8_tgta4"), ExtResource("9_0kqkm"), ExtResource("10_g406a"), ExtResource("11_8j6y3"), ExtResource("12_jf4i4"), ExtResource("13_eutgs"), ExtResource("14_u64bs"), ExtResource("15_702x6"), ExtResource("16_b5jl3"), ExtResource("17_d84jx")])

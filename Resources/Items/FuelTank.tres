@@ -16,6 +16,7 @@ UpgradeVersion = ExtResource("4_ox6xo")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("2_rbprg")]([ExtResource("3_w076d"), ExtResource("3_w076d")])
+UpAmmSymbol = "Cubic Tons"
 ItemIcon = ExtResource("1_2e0sy")
 ItemName = "Fuel Tank"
 ItemDesc = "ItemDesc"

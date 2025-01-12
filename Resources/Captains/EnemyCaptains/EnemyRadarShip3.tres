@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://y1ohb6oss4v0"]
+[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://bfqcga4l0b5l5"]
 
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_avlug"]
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_sr6bq"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_v7x56"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_08lax"]
+[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_txr8i"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_mukc2"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_fyn4s"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_wuex0"]
 
 [sub_resource type="Resource" id="Resource_4xt1j"]
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "SPEED"
 StatMax = 3.0
 StatBase = 0.7
@@ -16,17 +16,17 @@ CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_lwofe"]
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "RADAR_RANGE"
-StatMax = 500.0
-StatBase = 500.0
+StatMax = 1000.0
+StatBase = 800.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_evefn"]
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "FIREPOWER"
 StatMax = 10.0
 StatBase = 1.0
@@ -37,7 +37,7 @@ AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_cx83o"]
 resource_local_to_scene = true
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "HULL"
 StatMax = 300.0
 StatBase = 50.0
@@ -47,17 +47,17 @@ CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_do68y"]
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "ELINT"
 StatMax = 3000.0
-StatBase = 1000.0
+StatBase = 2000.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_kxkd2"]
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "FUEL_EFFICIENCY"
 StatMax = 5.0
 StatBase = 3.0
@@ -68,7 +68,7 @@ AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_hkfj7"]
 resource_local_to_scene = true
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "FUEL_TANK"
 StatMax = 500.0
 StatBase = 300.0
@@ -78,7 +78,7 @@ CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_hx3ym"]
-script = ExtResource("2_sr6bq")
+script = ExtResource("2_mukc2")
 StatName = "MISSILE_SPACE"
 StatMax = 20.0
 StatBase = 0.0
@@ -89,10 +89,10 @@ AllowAutoRefil = false
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("4_08lax")
+script = ExtResource("4_wuex0")
 CaptainName = "Grunt"
 CaptainBio = "Shithead"
-CaptainPortrait = ExtResource("1_avlug")
-ShipIcon = ExtResource("3_v7x56")
-CaptainStats = Array[ExtResource("2_sr6bq")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym")])
+CaptainPortrait = ExtResource("1_txr8i")
+ShipIcon = ExtResource("3_fyn4s")
+CaptainStats = Array[ExtResource("2_mukc2")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym")])
 ShipCallsign = "R"
