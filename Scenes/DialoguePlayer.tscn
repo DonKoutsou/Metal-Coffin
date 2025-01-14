@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq8y4l8uapojy"]
+[gd_scene load_steps=6 format=3 uid="uid://cq8y4l8uapojy"]
 
-[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="1_57nkx"]
 [ext_resource type="Script" path="res://Scripts/Dialogue_Player.gd" id="1_xcud3"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_rodwx"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="2_tpi4a"]
 [ext_resource type="Texture2D" uid="uid://d2m66tlt5cl4b" path="res://Assets/artificial-hive.png" id="4_kc08c"]
 [ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="5_p12ba"]
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="6_kmbr8"]
 
 [node name="PanelContainer" type="Control"]
 layout_mode = 3
@@ -31,7 +30,7 @@ offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_57nkx")
+theme = ExtResource("2_rodwx")
 
 [node name="Label" type="Label" parent="PanelContainer2"]
 custom_minimum_size = Vector2(50, 50)
@@ -55,7 +54,7 @@ offset_bottom = -147.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_57nkx")
+theme = ExtResource("2_rodwx")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
@@ -84,7 +83,7 @@ offset_right = 64.5
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("6_kmbr8")
+theme = ExtResource("2_rodwx")
 theme_override_font_sizes/font_size = 21
 text = "Skip"
 

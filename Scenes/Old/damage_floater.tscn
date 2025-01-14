@@ -17,7 +17,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_elilk")
-theme_override_font_sizes/font_size = 78
+theme_override_font_sizes/font_size = 30
 text = "10"
 script = ExtResource("1_nmcop")
 

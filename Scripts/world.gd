@@ -202,7 +202,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	for g in Survivors:
 		var nam = g.Name
 		for z in FighingFriendlyUnits:
-			if z is PlayerShip and nam == "Player":
+			if z is PlayerShip:
 				ShipData.GetInstance().SetStatValue("HULL", g.Hull)
 				FighingFriendlyUnits.erase(z)
 				break
@@ -227,8 +227,8 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 #--------------------------------------------------------
 func GameLost(reason : String):
 	get_tree().paused = true
-	$Ingame_UIManager/PanelContainer.visible = true
-	$Ingame_UIManager/PanelContainer/VBoxContainer/Label.text = reason
+	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer.visible = true
+	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer/VBoxContainer/Label.text = reason
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save(self)
 	PopUpManager.GetInstance().DoFadeNotif("Save successful")

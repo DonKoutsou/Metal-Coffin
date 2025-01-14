@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dy41ui65qkhmb"]
+[gd_scene load_steps=7 format=3 uid="uid://dy41ui65qkhmb"]
 
 [ext_resource type="Script" path="res://Scripts/MapMarkerEditor/map_marker_editor.gd" id="1_8dwjq"]
 [ext_resource type="PackedScene" uid="uid://dd26j51u4ni6g" path="res://Scenes/MapMarkerLine.tscn" id="2_5eayg"]
 [ext_resource type="PackedScene" uid="uid://dvnr81a8uogh4" path="res://Scenes/TextMarker.tscn" id="3_ikfwh"]
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="3_j0o20"]
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_jc86s"]
-[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="5_ucevc"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_i7jhj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0ok87"]
 light_mode = 1
@@ -60,6 +58,7 @@ offset_top = 276.0
 offset_right = 610.0
 offset_bottom = 305.0
 pivot_offset = Vector2(11, 11)
+theme = ExtResource("6_i7jhj")
 theme_override_styles/panel = SubResource("StyleBoxFlat_aurdw")
 
 [node name="MarkerTextEditor" type="Panel" parent="."]
@@ -70,7 +69,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("3_j0o20")
+theme = ExtResource("6_i7jhj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarkerTextEditor"]
 layout_mode = 1
@@ -89,16 +88,14 @@ grow_vertical = 2
 [node name="TextEdit" type="TextEdit" parent="MarkerTextEditor/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("5_ucevc")
-theme_override_styles/focus = ExtResource("5_ucevc")
-theme_override_styles/read_only = ExtResource("5_ucevc")
+theme = ExtResource("6_i7jhj")
 placeholder_text = "Marker Text"
 wrap_mode = 1
 caret_blink = true
 
 [node name="TextConfirm" type="Button" parent="MarkerTextEditor/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_jc86s")
+theme = ExtResource("6_i7jhj")
 text = "Done"
 
 [connection signal="pressed" from="MarkerTextEditor/VBoxContainer/TextConfirm" to="." method="_on_text_confirm_pressed"]

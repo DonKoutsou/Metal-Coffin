@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=14 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_mhnyb"]
@@ -8,11 +8,10 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_lojl1"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Scenes/Cards/Flares.tres" id="10_084tn"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Scenes/Cards/Extringuish.tres" id="11_5vvva"]
-[ext_resource type="Theme" uid="uid://v4mw3n57sksp" path="res://Theme/Bar.tres" id="11_a65yd"]
 [ext_resource type="PackedScene" uid="uid://cbdyafmynts2u" path="res://Scenes/Cards/OffensiveAnimation.tscn" id="11_j66lv"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Scenes/Cards/Missile.tres" id="12_a2cqf"]
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="12_dxiib"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Scenes/Cards/Evasive.tres" id="13_pchum"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="14_kl7fj"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Scenes/Cards/Barrage.tres" id="14_ll7ew"]
 
 [node name="CardFight" type="PanelContainer"]
@@ -64,7 +63,7 @@ alignment = 1
 [node name="Button" type="Button" parent="VBoxContainer4/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("12_dxiib")
+theme = ExtResource("14_kl7fj")
 text = "End Turn"
 
 [node name="VBoxContainer3" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
@@ -89,7 +88,7 @@ alignment = 1
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-theme = ExtResource("11_a65yd")
+theme = ExtResource("14_kl7fj")
 max_value = 4.0
 step = 1.0
 value = 3.0

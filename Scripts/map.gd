@@ -15,7 +15,7 @@ class_name Map
 
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_NeighborsSet
-
+var TempEnemyNames: Array[String]
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
@@ -26,11 +26,13 @@ static func GetInstance() -> Map:
 
 func _ready() -> void:
 	Instance = self
+	
 	$SubViewportContainer/ViewPort/InScreenUI/Control3/UnderStatUI/InventoryUI.connect("OnUiToggled", OnScreenUiToggled)
 	# spotlist empty means we are not loading and starting new game
 	GetMapMarkerEditor().visible = false
 	$OuterUI/MapMarkerControls.visible = false
 	if (SpotList.size() == 0):
+		TempEnemyNames.append_array(EnemyShipNames)
 		GenerateMap()
 		_InitialPlayerPlacament()
 		ShowingTutorial = true
@@ -197,15 +199,15 @@ func ShipForcedStop():
 	thrust_slider.ZeroAcceleration()
 #INPUT HANDLING////////////////////////////
 func _MAP_INPUT(event: InputEvent) -> void:
-	if (event.is_action_pressed("ZoomIn")):
-		GetCamera()._HANDLE_ZOOM(1.1)
-	if (event.is_action_pressed("ZoomOut")):
-		GetCamera()._HANDLE_ZOOM(0.9)
 	if (event is InputEventScreenTouch):
 		GetCamera()._HANDLE_TOUCH(event)
-	if (event is InputEventScreenDrag):
+	else : if (event is InputEventScreenDrag):
 		GetCamera()._HANDLE_DRAG(event)
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+	else : if (event.is_action_pressed("ZoomIn")):
+		GetCamera()._HANDLE_ZOOM(1.1)
+	else : if (event.is_action_pressed("ZoomOut")):
+		GetCamera()._HANDLE_ZOOM(0.9)
+	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		GetCamera().UpdateCameraPos(event.relative)
 #//////////////////////////////////////////////////////////
 var Maplt : Thread
@@ -281,7 +283,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool) -> void:
 		Ship.Cpt = f
 		Ship.CurrentPort = Spot
 		Ship.Patrol = Patrol
-		Ship.ShipName = EnemyShipNames.pop_back()
+		Ship.ShipName = TempEnemyNames.pop_back()
 		SpawnedFleet.append(Ship)
 		if (Fleet.find(f) != 0):
 			Ship.ToggleDocked(true)

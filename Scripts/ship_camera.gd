@@ -16,10 +16,7 @@ func _HANDLE_ZOOM(zoomval : float):
 	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.07,0.07), Vector2(2.1,2.1))
 	#for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
 		#g.visible = zoom < Vector2(1, 1)
-	for g in get_tree().get_nodes_in_group("MapLines"):
-		g.material.set_shader_parameter("line_width", lerp(0.02, 0.001, zoom.x / 2))
-	get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
-	get_tree().call_group("Ships", "UpdateCameraZoom", zoom.x)
+	call_deferred("OnZoomChanged")
 	_UpdateMapGridVisibility()
 	#$Screen.scale = zoom / 2
 	#for g in get_tree().get_nodes_in_group("DissapearingMap"):
@@ -47,13 +44,16 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
 		zoom = clamp(start_zoom / zoom_factor, Vector2(0.1,0.1), Vector2(2.1,2.1))
-		for g in get_tree().get_nodes_in_group("MapLines"):
-			g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
-		get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
-		get_tree().call_group("Ships", "UpdateCameraZoom", zoom.x)
+		call_deferred("OnZoomChanged")
 		_UpdateMapGridVisibility()
 	else:
 		UpdateCameraPos(event.relative)
+
+func OnZoomChanged() -> void:
+	for g in get_tree().get_nodes_in_group("MapLines"):
+		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
+	get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
+	get_tree().call_group("Ships", "UpdateCameraZoom", zoom.x)
 		
 func _UpdateMapGridVisibility():
 	if (zoom.x < 0.25):

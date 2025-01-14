@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=98 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://b5b3q5ta3whql" path="res://Resources/ShipData.tres" id="2_8yf1y"]
@@ -37,7 +37,6 @@
 [ext_resource type="Texture2D" uid="uid://b2spr3t4g1h0u" path="res://Assets/UIPiecies/ButtonPressed_Camera 1.png" id="26_utt2d"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="27_63atb"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town1.tscn" id="27_j7jqg"]
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="28_iet4t"]
 [ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="28_mbdgp"]
 [ext_resource type="Script" path="res://Scripts/pop_up_manager.gd" id="29_22y5c"]
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="29_kbjhb"]
@@ -63,6 +62,7 @@
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/Map_Marker_Editor.tscn" id="43_saqi0"]
 [ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="44_tyma6"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="45_c24u0"]
+[ext_resource type="PackedScene" uid="uid://b84obdsc4r2vk" path="res://Scenes/fps_counter.tscn" id="45_geaen"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="46_8djaj"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="47_a84i3"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="47_pk7le"]
@@ -70,6 +70,7 @@
 [ext_resource type="Texture2D" uid="uid://b6q1pf3tujd60" path="res://Assets/UIPiecies/Button_Camera 1_Red.png" id="49_t4548"]
 [ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="50_fywmy"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="51_qpdx5"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="53_dxo16"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="54_bj6qu"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="55_cx4y6"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="56_1vybw"]
@@ -78,7 +79,7 @@
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="59_54e7s"]
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="61_xntku"]
 
-[sub_resource type="Resource" id="Resource_xupem"]
+[sub_resource type="Resource" id="Resource_ctwle"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "VIZ_RANGE"
@@ -94,13 +95,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_jo5qy"]
+[sub_resource type="Resource" id="Resource_vkuyh"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 700.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_xupem")
+UpgradeVersion = SubResource("Resource_ctwle")
 UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("16_kjylh"), ExtResource("16_kjylh")])
@@ -111,13 +112,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_11bq5"]
+[sub_resource type="Resource" id="Resource_nfp20"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 500.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_jo5qy")
+UpgradeVersion = SubResource("Resource_vkuyh")
 UpgradeTime = 0.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("16_kjylh"), ExtResource("16_kjylh")])
@@ -128,13 +129,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_rl17o"]
+[sub_resource type="Resource" id="Resource_s4eqx"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "VIZ_RANGE"
 UpgradeAmm = 300.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_11bq5")
+UpgradeVersion = SubResource("Resource_nfp20")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("16_kjylh"), ExtResource("16_kjylh")])
@@ -145,7 +146,7 @@ ItemDesc = "Standard issue radar, providing the minimal visual distance around t
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_ugux1"]
+[sub_resource type="Resource" id="Resource_5uwup"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "FUEL"
@@ -161,13 +162,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_qnyxx"]
+[sub_resource type="Resource" id="Resource_2ixyb"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "FUEL"
 UpgradeAmm = 450.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_ugux1")
+UpgradeVersion = SubResource("Resource_5uwup")
 UpgradeTime = 400.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("16_kjylh"), ExtResource("16_kjylh")])
@@ -178,13 +179,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_eknx5"]
+[sub_resource type="Resource" id="Resource_ue6ws"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "FUEL"
 UpgradeAmm = 300.0
 CurrentVal = 300.0
-UpgradeVersion = SubResource("Resource_qnyxx")
+UpgradeVersion = SubResource("Resource_2ixyb")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("16_kjylh"), ExtResource("16_kjylh")])
@@ -195,7 +196,7 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_qbm2r"]
+[sub_resource type="Resource" id="Resource_ebbpr"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "FUEL_EFFICIENCY"
@@ -211,13 +212,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_eceli"]
+[sub_resource type="Resource" id="Resource_t6ku8"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.25
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_qbm2r")
+UpgradeVersion = SubResource("Resource_ebbpr")
 UpgradeTime = 200.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("16_kjylh"), ExtResource("16_kjylh")])
@@ -228,13 +229,13 @@ ItemDesc = "ItemDesc"
 MaxStackCount = 1
 RandomFindMaxCount = 1
 
-[sub_resource type="Resource" id="Resource_dlarj"]
+[sub_resource type="Resource" id="Resource_ggoym"]
 resource_local_to_scene = true
 script = ExtResource("17_lwi56")
 UpgradeName = "FUEL_EFFICIENCY"
 UpgradeAmm = 1.0
 CurrentVal = 0.0
-UpgradeVersion = SubResource("Resource_eceli")
+UpgradeVersion = SubResource("Resource_t6ku8")
 UpgradeTime = 100.0
 IsDamaged = false
 RepairItems = Array[ExtResource("11_abqbu")]([ExtResource("16_kjylh"), ExtResource("16_kjylh")])
@@ -344,7 +345,7 @@ script = ExtResource("8_6vv6u")
 script = ExtResource("9_l7oy3")
 
 [node name="Inventory" parent="." instance=ExtResource("10_2t2b2")]
-StartingItems = Array[ExtResource("11_abqbu")]([SubResource("Resource_rl17o"), SubResource("Resource_eknx5"), SubResource("Resource_dlarj"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("21_t2vx8")])
+StartingItems = Array[ExtResource("11_abqbu")]([SubResource("Resource_s4eqx"), SubResource("Resource_ue6ws"), SubResource("Resource_ggoym"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("17_8bqk3"), ExtResource("21_t2vx8")])
 
 [node name="Map" type="CanvasLayer" parent="."]
 layer = 0
@@ -472,8 +473,27 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
 
+[node name="FpsCounter" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3" instance=ExtResource("45_geaen")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+grow_horizontal = 2
+
 [node name="MapMarkerEditor" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3" instance=ExtResource("43_saqi0")]
 layout_mode = 1
+
+[node name="SimulationNotification" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3" instance=ExtResource("40_042hc")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 54.0
+offset_bottom = 141.0
+grow_vertical = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="UnderStatUI" type="Control" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3"]
 process_mode = 1
@@ -494,16 +514,6 @@ offset_bottom = 1.0
 [node name="CaptainUI" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/UnderStatUI" instance=ExtResource("42_h4mom")]
 visible = false
 layout_mode = 1
-
-[node name="SimulationNotification" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3" instance=ExtResource("40_042hc")]
-layout_mode = 1
-anchors_preset = 5
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_top = 54.0
-offset_bottom = 141.0
-grow_vertical = 1
-theme_override_font_sizes/font_size = 24
 
 [node name="PauseContainer" type="PanelContainer" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3"]
 process_mode = 3
@@ -541,7 +551,7 @@ vertical_alignment = 1
 
 [node name="Return" type="Button" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PauseContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
-theme = ExtResource("21_ou8sa")
+theme = ExtResource("53_dxo16")
 theme_override_fonts/font = ExtResource("27_63atb")
 theme_override_font_sizes/font_size = 34
 text = "Return
@@ -549,14 +559,14 @@ text = "Return
 
 [node name="Save" type="Button" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PauseContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
-theme = ExtResource("21_ou8sa")
+theme = ExtResource("53_dxo16")
 theme_override_fonts/font = ExtResource("27_63atb")
 theme_override_font_sizes/font_size = 34
 text = "Save"
 
 [node name="Exit" type="Button" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PauseContainer/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
-theme = ExtResource("21_ou8sa")
+theme = ExtResource("53_dxo16")
 theme_override_fonts/font = ExtResource("27_63atb")
 theme_override_font_sizes/font_size = 34
 text = "Exit"
@@ -576,7 +586,7 @@ offset_right = 143.5
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("28_iet4t")
+theme = ExtResource("53_dxo16")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer"]
 layout_mode = 2
@@ -593,8 +603,7 @@ horizontal_alignment = 1
 [node name="Button" type="Button" parent="Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("21_ou8sa")
-theme_override_fonts/font = ExtResource("27_63atb")
+theme = ExtResource("53_dxo16")
 theme_override_font_sizes/font_size = 26
 text = "OK"
 

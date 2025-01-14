@@ -1,86 +1,15 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://cgma68ateq86o"]
 
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="1_3ukfs"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3k43"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.113127, 0.140603, 0.176541, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.308435, 0.282964, 0.136267, 1)
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ph6w3"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.318049, 0.374525, 0.448438, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 60
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-shadow_size = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6pr5"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.161404, 0.19644, 0.24227, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldhnu"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0766064, 0.0982225, 0.126494, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-shadow_size = 5
+[ext_resource type="StyleBox" uid="uid://7ith0ajugsk2" path="res://Theme/ButtonDissabled.tres" id="2_w1a50"]
+[ext_resource type="StyleBox" uid="uid://bf8ldnyjyuff" path="res://Theme/ButtonHover.tres" id="3_w04hi"]
+[ext_resource type="StyleBox" uid="uid://cakd87dtiyrm2" path="res://Theme/ButtonNormal.tres" id="4_2mufa"]
+[ext_resource type="StyleBox" uid="uid://bjl04u3co6107" path="res://Theme/ButtonPressed.tres" id="5_cprjp"]
 
 [resource]
 Button/constants/outline_size = 6
 Button/fonts/font = ExtResource("1_3ukfs")
-Button/styles/disabled = SubResource("StyleBoxFlat_y3k43")
-Button/styles/hover = SubResource("StyleBoxFlat_ph6w3")
-Button/styles/normal = SubResource("StyleBoxFlat_l6pr5")
-Button/styles/pressed = SubResource("StyleBoxFlat_ldhnu")
+Button/styles/disabled = ExtResource("2_w1a50")
+Button/styles/hover = ExtResource("3_w04hi")
+Button/styles/normal = ExtResource("4_2mufa")
+Button/styles/pressed = ExtResource("5_cprjp")

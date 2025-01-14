@@ -60,12 +60,13 @@ func DronesHaveFuel(f : float) -> bool:
 
 func SyphonFuelFromDrones(amm : float) -> void:
 	for g in DockedDrones:
-		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > amm):
-			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= amm
+		var FuelTank = g.Cpt.GetStat("FUEL_TANK") as ShipStat
+		if (FuelTank.GetCurrentValue() > amm):
+			FuelTank.ConsumeResource(amm)
 			return
 		else:
-			amm -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
-			g.Cpt.GetStat("FUEL_TANK").CurrentVelue = 0
+			amm -= FuelTank.GetCurrentValue()
+			FuelTank.CurrentVelue = 0
 
 func LaunchShip(Ship : HostileShip) -> void:
 	UndockShip(Ship)

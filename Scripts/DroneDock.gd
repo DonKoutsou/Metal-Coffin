@@ -89,6 +89,8 @@ func GetCaptains() -> Array[Captain]:
 	return cptns
 	
 func DroneDisharged(Dr : Drone):
+	if (Dr == get_parent()):
+		return
 	if (DockedDrones.has(Dr)):
 		DockedDrones.erase(Dr)
 	if (FlyingDrones.has(Dr)):

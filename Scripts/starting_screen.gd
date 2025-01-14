@@ -7,9 +7,9 @@ class_name StartingScreen
 @export var GameScene : PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var oname = OS.get_name() 
-	if (oname == "Windows"):
-		get_viewport().size = Vector2(1980, 1080)
+	#var oname = OS.get_name() 
+	#if (oname == "Windows"):
+		#get_viewport().size = Vector2(1980, 1080)
 	SpawnMenu()
 
 func SpawnMenu() -> void:

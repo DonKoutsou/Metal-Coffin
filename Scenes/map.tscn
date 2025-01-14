@@ -87,11 +87,11 @@ shader_parameter/image_flicker = 0.05
 shader_parameter/vignette_flicker_speed = 0.0
 shader_parameter/vignette_strength = 1.2
 shader_parameter/small_scanlines_speed = 1.0
-shader_parameter/small_scanlines_proximity = 2.0
-shader_parameter/small_scanlines_opacity = 1.17
+shader_parameter/small_scanlines_proximity = 1.0
+shader_parameter/small_scanlines_opacity = 1.0
 shader_parameter/scanlines_opacity = 0.08
 shader_parameter/scanlines_speed = 1.0
-shader_parameter/scanline_thickness = 0.55
+shader_parameter/scanline_thickness = 0.5
 shader_parameter/scanlines_spacing = 1.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_uyww5")
 

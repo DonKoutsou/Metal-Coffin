@@ -62,7 +62,7 @@ func _ready() -> void:
 		call_deferred("AddItems", StartingItems, false)
 
 func ToggleShipPausing(t : bool):
-	$"../HBoxContainer/Panel3/InventoryButton".disabled = t
+	$"../Map/OuterUI/VBoxContainer/HBoxContainer/Panel3/InventoryButton".disabled = t
 	get_tree().call_group("Ships", "TogglePause", t)
 
 func GetSaveData() ->SaveData:

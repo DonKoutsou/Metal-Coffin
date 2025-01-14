@@ -6,14 +6,11 @@ signal AnimationFinished
 
 @export var CardScene : PackedScene
 @export var DamageFloater : PackedScene
+@export var ShipViz : PackedScene
 
 var LinePos : float = 0
 
-var AtackCard : OffensiveCardStats
-var DefCard : CardStats
-var OriginShip : BattleShipStats
-var OriginIcon : Texture
-var TargetIcon : Texture
+var DrawnLine : bool = false
 
 var AtC
 var DefC
@@ -21,13 +18,13 @@ var Ic
 var Ic2
 
 func _ready() -> void:
-	Ic = TextureRect.new()
-	Ic.texture = OriginIcon
+	set_physics_process(DrawnLine)
+
+func DoOffensive(AtackCard : OffensiveCardStats, DefCard : CardStats, OriginShip : BattleShipStats, TargetShip : BattleShipStats, FriendShip : bool) -> void:
+	Ic = ShipViz.instantiate() as CardFightShipViz
+	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
-	Ic.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-	Ic.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	Ic.rotation = -90
-	
+
 	AtC = CardScene.instantiate() as Card
 	AtC.SetCardStats(AtackCard)
 	$HBoxContainer.add_child(AtC)
@@ -41,21 +38,18 @@ func _ready() -> void:
 		DefC.size_flags_horizontal = Control.SIZE_EXPAND
 		DefC.show_behind_parent = true
 	
-	Ic2 = TextureRect.new()
-	Ic2.texture = TargetIcon
+	Ic2 = ShipViz.instantiate() as CardFightShipViz
+	Ic2.SetStatsAnimation(TargetShip, FriendShip)
 	$HBoxContainer.add_child(Ic2)
-	Ic2.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-	Ic2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	Ic2.rotation = -90
-	
 	var tw = create_tween()
 	tw.tween_property(self, "LinePos", 1, 1)
-	tw.tween_callback(TweenEnded)
-func TweenEnded() -> void:
+	tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
+	
+func TweenEnded(Damage : float) -> void:
 	if (DefC == null):
 		var d = DamageFloater.instantiate()
 		d.modulate = Color(1,0,0,1)
-		d.text = var_to_str(roundi(OriginShip.FirePower * AtackCard.Damage))
+		d.text = var_to_str(Damage)
 		add_child(d)
 		d.global_position = (Ic2.global_position + (Ic2.size / 2)) - d.size / 2.
 		d.connect("Ended", AnimEnded)
@@ -67,6 +61,37 @@ func TweenEnded() -> void:
 		d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2
 		d.connect("Ended", AnimEnded)
 
+func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip : bool) -> void:
+	Ic = ShipViz.instantiate() as CardFightShipViz
+	Ic.SetStatsAnimation(OriginShip, !FriendShip)
+	$HBoxContainer.add_child(Ic)
+
+	DefC = CardScene.instantiate() as Card
+	DefC.SetCardStats(DefCard)
+	$HBoxContainer.add_child(DefC)
+	DefC.size_flags_horizontal = Control.SIZE_EXPAND
+	DefC.show_behind_parent = true
+	
+	var d = DamageFloater.instantiate()
+	d.text = "Fire Extinguished"
+	d.modulate = Color(1,1,1,1)
+	add_child(d)
+	d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2
+	d.connect("Ended", AnimEnded)
+
+func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
+	Ic = ShipViz.instantiate() as CardFightShipViz
+	Ic.SetStatsAnimation(OriginShip, !FriendShip)
+	$HBoxContainer.add_child(Ic)
+	
+	Ic.ToggleFire(true)
+	var d = DamageFloater.instantiate()
+	d.text = "Fire Damage - 10"
+	d.modulate = Color(1,1,1,1)
+	add_child(d)
+	d.global_position = (Ic.global_position + (Ic.size / 2)) - d.size / 2
+	d.connect("Ended", AnimEnded)
+	
 func AnimEnded() -> void:
 	AnimationFinished.emit()
 	queue_free()
@@ -75,7 +100,8 @@ func _physics_process(_delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	#draw_set_transform(position)
+	if (!DrawnLine):
+		return
 	var pos1 = AtC.position
 	pos1.x += (AtC.size.x / 2)
 	var pos2 
@@ -85,4 +111,5 @@ func _draw() -> void:
 	else :
 		pos2 = Ic2.position
 		pos2.x += (Ic2.size.x / 2)
+		pos2.y -= (Ic2.size.y / 2)
 	draw_line(pos1, lerp(pos1, pos2, LinePos), Color(1,0,0,1), 8)

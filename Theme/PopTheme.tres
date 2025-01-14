@@ -1,8 +1,22 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://de7fb8k462lxb"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://de7fb8k462lxb"]
 
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="1_7bjd6"]
+[ext_resource type="StyleBox" uid="uid://7ith0ajugsk2" path="res://Theme/ButtonDissabled.tres" id="2_cw7vp"]
 [ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="2_pusc7"]
+[ext_resource type="StyleBox" uid="uid://bf8ldnyjyuff" path="res://Theme/ButtonHover.tres" id="3_n3ok3"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_ud4oh"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="4_apdyr"]
+[ext_resource type="StyleBox" uid="uid://cakd87dtiyrm2" path="res://Theme/ButtonNormal.tres" id="4_dknas"]
+[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://Theme/ProgrssBarBack.tres" id="4_o6tu3"]
+[ext_resource type="StyleBox" uid="uid://bjl04u3co6107" path="res://Theme/ButtonPressed.tres" id="5_27xf5"]
+[ext_resource type="StyleBox" uid="uid://54vphqglxfyk" path="res://Theme/ProgressBarFill.tres" id="5_rqfwx"]
+[ext_resource type="Texture2D" uid="uid://dy5rk5txpvlh4" path="res://Assets/UIPiecies/UISliderBigVert.png" id="6_436r5"]
+[ext_resource type="StyleBox" uid="uid://46p0yqwfh7ud" path="res://Theme/HSlider_Grabber.tres" id="7_c6x1m"]
+[ext_resource type="StyleBox" uid="uid://cjob57ldf08tq" path="res://Theme/HSlider_GrabberH.tres" id="8_xd0bq"]
+[ext_resource type="StyleBox" uid="uid://d2d2677f3j08f" path="res://Theme/HSlider_Slider.tres" id="9_hukj5"]
+[ext_resource type="Texture2D" uid="uid://dfky4sa7x12ef" path="res://Assets/UIPiecies/UISliderBig.png" id="13_eaocs"]
+[ext_resource type="StyleBox" uid="uid://b55uyr0b56r5s" path="res://Theme/VSlider_Grabber.tres" id="14_v41hx"]
+[ext_resource type="StyleBox" uid="uid://cfiw4vt0vjqy4" path="res://Theme/VSlider_GrabberH.tres" id="15_v1byl"]
+[ext_resource type="StyleBox" uid="uid://bdeoxgivjnh2" path="res://Theme/VSlider_Slider.tres" id="16_g4m2n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqxuj"]
 content_margin_left = 8.0
@@ -24,53 +38,45 @@ expand_margin_bottom = 15.0
 shadow_size = 5
 shadow_offset = Vector2(-2, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1n88"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.119449, 0.14793, 0.185182, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_detail = 1
-shadow_size = 5
-shadow_offset = Vector2(-2, 2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2snv7"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.180343, 0.218266, 0.267873, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_detail = 1
-shadow_size = 5
-shadow_offset = Vector2(-2, 2)
-
 [resource]
 AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
 AcceptDialog/colors/title_outline_modulate = Color(0, 0, 0, 1)
 AcceptDialog/constants/buttons_separation = 10
 AcceptDialog/font_sizes/title_font_size = 24
-AcceptDialog/fonts/title_font = ExtResource("1_7bjd6")
+AcceptDialog/fonts/title_font = ExtResource("3_ud4oh")
 AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_dqxuj")
 AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_dqxuj")
 AcceptDialog/styles/panel = SubResource("StyleBoxFlat_dqxuj")
+Button/colors/font_color = Color(0.151516, 0.151516, 0.151516, 1)
+Button/colors/font_outline_color = Color(0.615304, 0.57196, 0.322451, 1)
 Button/constants/outline_size = 5
-Button/font_sizes/font_size = 24
-Button/fonts/font = ExtResource("1_7bjd6")
-Button/styles/hover = SubResource("StyleBoxFlat_c1n88")
-Button/styles/normal = ExtResource("2_pusc7")
-Button/styles/pressed = SubResource("StyleBoxFlat_2snv7")
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("3_ud4oh")
+Button/styles/disabled = ExtResource("2_cw7vp")
+Button/styles/hover = ExtResource("3_n3ok3")
+Button/styles/normal = ExtResource("4_dknas")
+Button/styles/pressed = ExtResource("5_27xf5")
+HSlider/icons/grabber = ExtResource("6_436r5")
+HSlider/icons/grabber_disabled = ExtResource("6_436r5")
+HSlider/icons/grabber_highlight = ExtResource("6_436r5")
+HSlider/styles/grabber_area = ExtResource("7_c6x1m")
+HSlider/styles/grabber_area_highlight = ExtResource("8_xd0bq")
+HSlider/styles/slider = ExtResource("9_hukj5")
 Label/constants/outline_size = 5
 Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("3_ud4oh")
+Panel/styles/panel = ExtResource("4_apdyr")
+PanelContainer/styles/panel = ExtResource("4_apdyr")
+ProgressBar/fonts/font = ExtResource("3_ud4oh")
+ProgressBar/styles/background = ExtResource("4_o6tu3")
+ProgressBar/styles/fill = ExtResource("5_rqfwx")
+TextEdit/styles/focus = ExtResource("2_pusc7")
+TextEdit/styles/normal = ExtResource("2_pusc7")
+TextEdit/styles/read_only = ExtResource("2_pusc7")
+VSlider/icons/grabber = ExtResource("13_eaocs")
+VSlider/icons/grabber_disabled = ExtResource("13_eaocs")
+VSlider/icons/grabber_highlight = ExtResource("13_eaocs")
+VSlider/icons/tick = null
+VSlider/styles/grabber_area = ExtResource("14_v41hx")
+VSlider/styles/grabber_area_highlight = ExtResource("15_v1byl")
+VSlider/styles/slider = ExtResource("16_g4m2n")

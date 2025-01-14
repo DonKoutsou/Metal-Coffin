@@ -19,7 +19,7 @@ var RefuelSpot : MapSpot
 var Docked : bool = false
 var VisibleBy : Array[Node2D]
 var CommingBack = false
-var BTree
+var BTree : BeehaveTree
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
@@ -68,9 +68,9 @@ func  _ready() -> void:
 		add_child(bb)
 		
 		BTree.blackboard = bb
-		
-		add_child(BTree)
 		ToggleDocked(Docked)
+		add_child(BTree)
+		
 	TogglePause(SimulationManager.IsPaused())
 	#MapPointerManager.GetInstance().AddShip(self, false)
 	$Elint.connect("area_entered", _on_elint_area_entered)
@@ -339,7 +339,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Speed = Cpt.GetStatValue("SPEED")
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
-	stats.Name = "Enemy"
+	stats.Name = Cpt.CaptainName
 	return stats
 func GetCity(CityName : String) -> MapSpot:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
@@ -410,4 +410,5 @@ func ChangeSimulationSpeed(i : int):
 func ToggleDocked(t : bool) -> void:
 	Docked = t
 	if (BTree != null):
+		BTree.enabled = !t
 		BTree.set_physics_process(!t)

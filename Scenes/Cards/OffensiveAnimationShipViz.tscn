@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmq4aarkkp044"]
+[gd_scene load_steps=10 format=3 uid="uid://dhfqn405u7iov"]
 
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="2_5pxfv"]
-[ext_resource type="Script" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="2_qce1f"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_4gmqt"]
+[ext_resource type="Script" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="1_o7oni"]
+[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="2_kkcv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v77k"]
 content_margin_left = 2.0
@@ -48,22 +47,21 @@ scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
 [node name="CardFightShipViz" type="PanelContainer"]
-custom_minimum_size = Vector2(150, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -69.0
+offset_left = -35.0
 offset_top = -35.0
-offset_right = 71.0
+offset_right = 38.0
 offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_3v77k")
-script = ExtResource("2_qce1f")
+script = ExtResource("1_o7oni")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
@@ -80,40 +78,8 @@ autowrap_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_5pxfv")
+texture = ExtResource("2_kkcv5")
 stretch_mode = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_4gmqt")
-theme_override_font_sizes/normal_font_size = 14
-bbcode_enabled = true
-text = "[color=#c19200]HL[/color] : 100"
-fit_content = true
-scroll_active = false
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_4gmqt")
-theme_override_font_sizes/normal_font_size = 14
-bbcode_enabled = true
-text = "[color=#c19200]SPD[/color] : 100"
-fit_content = true
-scroll_active = false
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_4gmqt")
-theme_override_font_sizes/normal_font_size = 14
-bbcode_enabled = true
-text = "[color=#c19200]FP[/color] : 100"
-fit_content = true
-scroll_active = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(39.5, 38.5)

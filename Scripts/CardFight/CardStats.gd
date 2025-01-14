@@ -5,5 +5,6 @@ class_name CardStats
 @export var CardName : String
 @export var CardDescription : String
 @export var Energy : int
-@export var Options : Array[String]
+@export var Options : Array[CardOption]
 @export var AllowDuplicates : bool
+var SelectedOption : CardOption

@@ -1,13 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=5 format=3 uid="uid://b4yumrb4c0xyd"]
 
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="1_fola4"]
 [ext_resource type="Script" path="res://Scenes/card.gd" id="1_vr3r8"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_d5d7j"]
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="4_irncy"]
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="5_lvjg3"]
 
 [node name="Card" type="PanelContainer"]
-custom_minimum_size = Vector2(130, 130)
+custom_minimum_size = Vector2(150, 130)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,7 +25,7 @@ script = ExtResource("1_vr3r8")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-theme = ExtResource("1_fola4")
+theme = ExtResource("2_n60qq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -70,7 +69,7 @@ autowrap_mode = 2
 visible = false
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("5_lvjg3")
+theme = ExtResource("2_n60qq")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="5_ahffl"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="5_wa6ro"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 
 [sub_resource type="Animation" id="Animation_gaja2"]
 length = 0.001
@@ -155,21 +155,21 @@ uppercase = true
 
 [node name="Play" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
-theme = ExtResource("5_ahffl")
+theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Play"
 
 [node name="Load" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
-theme = ExtResource("5_ahffl")
+theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Load"
 
 [node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
-theme = ExtResource("5_ahffl")
+theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Exit"

@@ -141,13 +141,13 @@ func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
 	stats.Speed = GetShipMaxSpeed()
-	stats.FirePower = ShipData.GetInstance().GetStat("FIREPOWER").GetCurrentValue()
+	stats.FirePower = ShipData.GetInstance().GetStat("FIREPOWER").GetStat()
 	stats.ShipIcon = ShipType.TopIcon
 	stats.CaptainIcon = CaptainIcon
-	stats.Name = "Player"
+	stats.Name = GetShipName()
 	return stats
 func GetShipName() -> String:
-	return "Player"
+	return "Flagship"
 func _on_elint_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is Drone):
 		return

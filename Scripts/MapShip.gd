@@ -59,6 +59,7 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 	if (Paused):
 		return
+
 	if (Landing):
 		UpdateAltitude(Altitude - (20 * SimulationSpeed))
 		if (Altitude <= 0):
@@ -172,7 +173,7 @@ func AccelerationChanged(value: float) -> void:
 		Travelling = false
 		#set_physics_process(false)
 		#$AudioStreamPlayer2D.stop()
-		$SmokeParticles.emitting = false
+		#$SmokeParticles.emitting = false
 		ShipStopped.emit()
 		#return
 	else:
@@ -192,7 +193,7 @@ func AccelerationChanged(value: float) -> void:
 			return
 			#set_physics_process(false)
 			
-		$SmokeParticles.emitting = true
+		#$SmokeParticles.emitting = true
 		Travelling = true
 		#set_physics_process(true)
 		ShipAccelerating.emit()

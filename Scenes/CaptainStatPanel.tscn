@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="2_xbipx"]
 [ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="3_babv5"]
 [ext_resource type="PackedScene" uid="uid://vb68ip76lkb" path="res://Scenes/Captain_Stat_Container.tscn" id="4_7yqdf"]
-[ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="6_nmyfl"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_oshhh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q877l"]
 bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
@@ -67,6 +67,7 @@ alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("6_oshhh")
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -78,7 +79,7 @@ vertical_alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer" groups=["Buttons"]]
 layout_mode = 2
-theme = ExtResource("6_nmyfl")
+theme = ExtResource("6_oshhh")
 text = "Discharge  "
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="DischargeCaprain"]
