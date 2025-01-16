@@ -1,9 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=10 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_sc0wx"]
-[ext_resource type="Resource" uid="uid://dvsp0jjfpsys" path="res://Resources/Ships/Ship2.tres" id="3_u8pdg"]
-[ext_resource type="PackedScene" uid="uid://hs6mpykyuklx" path="res://Scenes/Shiptrade.tscn" id="4_1b7gj"]
-[ext_resource type="PackedScene" uid="uid://cxnqcu1fgkujm" path="res://Scenes/battle_arena.tscn" id="5_iijjg"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Card_Fight.tscn" id="6_sol3n"]
 [ext_resource type="Script" path="res://Scripts/ship_controller.gd" id="7_q720d"]
 [ext_resource type="Script" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
@@ -13,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
 
-[node name="World" type="Control" node_paths=PackedStringArray("_Map")]
+[node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -24,9 +21,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_sc0wx")
 _Map = NodePath("Map")
-StartingShip = ExtResource("3_u8pdg")
-ShipTradeScene = ExtResource("4_1b7gj")
-DogfightScene = ExtResource("5_iijjg")
+_Command = NodePath("Commander")
 CardFightScene = ExtResource("6_sol3n")
 
 [node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]

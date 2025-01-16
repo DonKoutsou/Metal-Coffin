@@ -94,4 +94,5 @@ CaptainPortrait = ExtResource("1_rabqn")
 ShipIcon = ExtResource("3_4kdwt")
 CaptainStats = Array[ExtResource("2_vd7a0")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k")])
 ShipCallsign = "P"
-Items = Array[ExtResource("3_q3468")]([])
+StartingItems = Array[ExtResource("3_q3468")]([])
+CurrentPort = ""

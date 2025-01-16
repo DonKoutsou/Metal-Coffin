@@ -65,7 +65,7 @@ texture_repeat = 2
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_Camera", "ScreenUI", "SteeringWh", "Elint", "DroneUI", "ThrustUI", "MapMarkerControls")]
+[node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_Camera", "ScreenUI", "SteeringWh", "Elint", "DroneUI", "MissileUI", "ThrustUI", "MapMarkerControls")]
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
@@ -75,6 +75,7 @@ ScreenUI = NodePath("OuterUI/ScreenUi")
 SteeringWh = NodePath("OuterUI/ScreenUi/SteeringWheel")
 Elint = NodePath("OuterUI/ScreenUi/Elint")
 DroneUI = NodePath("OuterUI/ScreenUi/DroneTab")
+MissileUI = NodePath("OuterUI/ScreenUi/Missile Tab")
 ThrustUI = NodePath("OuterUI/ThrustSlider")
 MapMarkerControls = NodePath("OuterUI/MapMarkerControls")
 Villages = Array[PackedScene]([ExtResource("2_mkjud"), ExtResource("3_syapm"), ExtResource("4_jrhc7"), ExtResource("5_csr2j"), ExtResource("6_57tvq")])

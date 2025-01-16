@@ -22,10 +22,9 @@ func SetInitialShip() -> void:
 	_Map.GetSteeringWheelUI().ForceSteer(ControlledShip.GetSteer())
 	_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
-	
+	_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
-	
 	_Map.GetThrustUI().connect("AccelerationChanged", AccelerationChanged)
 	_Map.GetSteeringWheelUI().connect("SteeringDitChanged", SteerChanged)
 
@@ -80,7 +79,7 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.LandedShip = Ship
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 
-func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float, Ship : MapShip):
+func FuelTransactionFinished(BFuel : float, BRepair: float, _NewCurrency : float, Ship : MapShip):
 	#ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
 	var spot = Ship.CurrentPort as MapSpot
 	if (spot.PlayerFuelReserves != BFuel):
@@ -155,7 +154,7 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	FrameCamToShip()
 	_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
-	_Map.GetInScreenUI().GetInventory().ShipStats.SetValues(ControlledShip.Cpt)
+	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	
 	
 var camtw : Tween

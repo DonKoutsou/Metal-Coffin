@@ -18,6 +18,6 @@ func MissileDissarmed() -> void:
 func OnMissileLaunched(Mis : MissileItem, Owner : Captain) -> void:
 	MissileLaunched.emit(Mis, Owner)
 func OnMissileAdded(Mis : MissileItem, Owner : Captain) -> void:
-	MissileAdded.emit(Mis)
+	MissileAdded.emit(Mis, Owner)
 func OnMissileRemoved(Mis : MissileItem, Owner : Captain) -> void:
-	MissileRemoved.emit(Mis)
+	MissileRemoved.emit(Mis, Owner)

@@ -3,7 +3,7 @@ extends ActionLeaf
 
 class_name FindRefuelSpotAction
 
-func tick(actor: Node, blackboard: Blackboard) -> int:
+func tick(actor: Node, _blackboard: Blackboard) -> int:
 	
 	var ship = actor as HostileShip
 
@@ -13,7 +13,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	
 	var RefuelSpot
 	
-	var DistanceToDestination = ship.global_position.distance_to(ship.GetCurrentDestination())
+	#var DistanceToDestination = ship.global_position.distance_to(ship.GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot
 		var D = spot.global_position.distance_to(ship.global_position)

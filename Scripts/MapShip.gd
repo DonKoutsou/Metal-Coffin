@@ -49,6 +49,7 @@ var Detectable = true
 func _ready() -> void:
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
+	Cpt.connect("ShipPartChanged", PartChanged)
 	MapPointerManager.GetInstance().AddShip(self, true)
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
@@ -61,7 +62,6 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 	if (Paused):
 		return
-
 	if (Landing):
 		UpdateAltitude(Altitude - (20 * SimulationSpeed))
 		if (Altitude <= 0):
@@ -145,6 +145,11 @@ func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.stream_paused = t
 
+func PartChanged(It : ShipPart) -> void:
+	if (It.UpgradeName == "VIZ_RANGE"):
+		UpdateVizRange(Cpt.GetStat("VIZ_RANGE").GetStat())
+	else : if (It.UpgradeName == "ELINT"):
+		UpdateELINTTRange(Cpt.GetStat("ELINT").GetStat())
 func ChangeSimulationSpeed(i : int):
 	SimulationSpeed = i
 
@@ -152,6 +157,8 @@ func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
 	$Radar/CollisionShape2D.set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
+	for g in GetDroneDock().DockedDrones:
+		g.ToggleRadar()
 func ToggleElint():
 	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
 func ToggleFuelRangeVisibility(t : bool) -> void:
@@ -170,6 +177,8 @@ func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
 	$PlayerShipSpr.scale = Vector2(lerp(0.3, 1.0, Altitude / 10000.0), lerp(0.3, 1.0, Altitude / 10000.0))
 	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -20, Altitude / 10000.0), lerp(0, -20, Altitude / 10000.0))
+	for g in GetDroneDock().DockedDrones:
+		g.UpdateAltitude(NewAlt)
 var d = 0.4
 func UpdateElint(delta: float) -> void:
 	d -= delta
@@ -197,14 +206,15 @@ func UpdateELINTTRange(rang : float):
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
 
-func Damage(_amm : float) -> void:
+func Damage(amm : float) -> void:
+	Cpt.GetStat("HULL").CurrentVelue -= amm
 	if (IsDead()):
 		MapPointerManager.GetInstance().RemoveShip(self)
 		OnShipDestroyed.emit(self)
 		#$Radar/CollisionShape2D.set_deferred("disabled", true)
 		queue_free()
 func IsDead() -> bool:
-	return false
+	return Cpt.GetStat("HULL").CurrentVelue <= 0
 
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
@@ -212,6 +222,9 @@ func SetCurrentPort(Port : MapSpot):
 	CanRepair = Port.HasRepair()
 	CanUpgrade = Port.HasUpgrade()
 	Cpt.CurrentPort = Port.GetSpotName()
+	var dr = GetDroneDock().DockedDrones
+	for g in dr:
+		g.SetCurrentPort(Port)
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd
 func RemovePort():
@@ -219,6 +232,9 @@ func RemovePort():
 	CurrentPort = null
 	InventoryManager.GetInstance().CancelUpgrades(Cpt)
 	Cpt.CurrentPort = ""
+	var dr = GetDroneDock().DockedDrones
+	for g in dr:
+		g.RemovePort()
 func ShowingNotif() -> bool:
 	return $Notifications.get_child_count() > 0
 
@@ -305,6 +321,8 @@ func Steer(Rotation : float) -> void:
 	piv.global_rotation = deg_to_rad(-90)
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
+	for g in GetDroneDock().DockedDrones:
+		g.Steer(Rotation)
 func ShipLookAt(pos : Vector2) -> void:
 	look_at(pos)
 	var piv = $PlayerShipSpr/ShadowPivot as Node2D
@@ -348,15 +366,45 @@ func GetShipIcon() -> Node2D:
 func GetFuelReserves() -> float:
 	return 0
 func GetFuelRange() -> float:
-	return 0
+	var fuel = Cpt.GetStat("FUEL_TANK").GetCurrentValue()
+	var fuel_ef = Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
+	var total_fuel = fuel
+	var inverse_ef_sum = 1.0 / fuel_ef
+	
+	# Group ships fuel and efficiency calculations
+	for g in GetDroneDock().DockedDrones:
+		var ship_fuel = g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		var ship_efficiency = g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+		total_fuel += ship_fuel
+		inverse_ef_sum += 1.0 / ship_efficiency
+
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	return (total_fuel * 10 * effective_efficiency) / fleetsize
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
+	stats.Hull = Cpt.GetStat("HULL").GetCurrentValue()
+	stats.Speed = Cpt.GetStat("SPEED").GetStat()
+	stats.FirePower = Cpt.GetStat("FIREPOWER").GetStat()
+	stats.ShipIcon = Cpt.ShipIcon
+	stats.CaptainIcon = Cpt.CaptainPortrait
+	stats.Name = GetShipName()
 	return stats
 func GetShipMaxSpeed() -> float:
-	return 0.3
+	var Spd = Cpt.GetStatFinalValue("SPEED")
+	if (Docked):
+		Spd = Command.GetShipMaxSpeed()
+	for g in GetDroneDock().DockedDrones:
+		var DroneSpd = g.Cpt.GetStatFinalValue("SPEED")
+		if (DroneSpd < Spd):
+			Spd = DroneSpd
+	return Spd
 func GetShipName() -> String:
-	return ""
+	return Cpt.CaptainName
 func GetShipSpeed() -> float:
+	if (Docked):
+		return Command.GetShipSpeed()
 	return $Aceleration.position.x
 func GetShipSpeedVec() -> Vector2:
 	return $Aceleration.global_position - global_position
@@ -373,16 +421,21 @@ func GetClosestElint() -> Vector2:
 	return closest
 func GetElintLevel(Dist : float) -> int:
 	var Lvl = 1
-	if (Dist < 300):
+	if (Dist < Cpt.GetStat("ELINT").GetStat() * 0.3):
 		Lvl = 3
-	else : if(Dist < 600):
+	else : if(Dist < Cpt.GetStat("ELINT").GetStat() * 0.6):
 		Lvl = 2
-	else :
+	else : if(Dist < Cpt.GetStat("ELINT").GetStat()):
 		Lvl = 1
+	else :
+		Lvl = 0
 	return Lvl
 func GetDroneDock():
 	return $DroneDock
 func IsFuelFull() -> bool:
-	return false
+	for g in GetDroneDock().DockedDrones:
+		if (!g.IsFuelFull()):
+			return false
+	return Cpt.GetStat("FUEL_TANK").CurrentVelue == Cpt.GetStat("FUEL_TANK").GetStat()
 func Refuel(_Amm : float) -> void:
 	pass

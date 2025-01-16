@@ -15,6 +15,7 @@ signal ItemPlecementFailed(it : Item)
 signal BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal ItemUpgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal ItemTransf(Box : Inventory_Box, OwnerInventory : CharacterInventory)
+signal OnCharacterInspectionPressed
 var _InventoryContents : Dictionary
 
 
@@ -152,3 +153,7 @@ func GetUpgradeTimeLeft() -> float:
 
 func GetItemBeingUpgraded() -> Inventory_Box:
 	return _ItemBeingUpgraded
+
+
+func _on_button_pressed() -> void:
+	OnCharacterInspectionPressed.emit()

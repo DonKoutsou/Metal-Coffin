@@ -7,6 +7,7 @@ class_name Map
 @export var SteeringWh : SteeringWheelUI
 @export var Elint : ElingUI
 @export var DroneUI : DroneTab
+@export var MissileUI : MissileTab
 @export var ThrustUI : ThrustSlider
 @export var MapMarkerControls : Control
 
@@ -97,6 +98,8 @@ func GetElintUI() -> ElingUI:
 	return Elint
 func GetDroneUI() -> DroneTab:
 	return DroneUI
+func GetMissileUI() -> MissileTab:
+	return MissileUI
 func GetThrustUI() -> ThrustSlider:
 	return ThrustUI
 func GetCamera() -> ShipCamera:

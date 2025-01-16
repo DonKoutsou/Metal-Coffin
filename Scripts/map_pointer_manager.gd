@@ -67,7 +67,8 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 	else : if (Ship is MapShip):
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
-		Ship.connect("DroneReturning", marker.DroneReturning)
+		if (Ship is Drone):
+			Ship.connect("DroneReturning", marker.DroneReturning)
 		Ship.connect("Elint", marker.ToggleShowElint)
 		Ship.connect("LandingStarted", marker.OnLandingStarted)
 		Ship.connect("LandingCanceled", marker.OnLandingEnded)

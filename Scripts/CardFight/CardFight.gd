@@ -38,10 +38,10 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 #enemies need to have inventory of armaments to see what they can do in fight
 
 func _ready() -> void:
-	for g in 3:
-		PlayerShips.append(GenerateRandomisedShip("Player" + var_to_str(g), false))
-	for g in 3:
-		EnemyShips.append(GenerateRandomisedShip("Enemy" + var_to_str(g), true))
+	#for g in 3:
+		#PlayerShips.append(GenerateRandomisedShip("Player" + var_to_str(g), false))
+	#for g in 3:
+		#EnemyShips.append(GenerateRandomisedShip("Enemy" + var_to_str(g), true))
 	
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
@@ -81,7 +81,7 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	ShipsViz[index].SetStats(BattleS, Friendly)
 
 func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
-	var Friendly : bool = PlayerShips.has(BattleS)
+	#var Friendly : bool = PlayerShips.has(BattleS)
 	var index = ShipTurns.find(BattleS)
 	ShipsViz[index].ToggleFire(Fire)
 

@@ -10,6 +10,9 @@ class_name Captain
 @export var StartingItems : Array[Item]
 @export var CurrentPort : String
 
+#used to signal ship so it can change size of colliders
+signal ShipPartChanged(P : ShipPart)
+
 func GetStat(StName : String) -> ShipStat:
 	for g in CaptainStats:
 		if (g.StatName == StName):
@@ -44,8 +47,10 @@ func IsResourceFull(StatN : String) -> bool:
 func OnShipPartAddedToInventory(It : ShipPart) -> void:
 	GetStat(It.UpgradeName).SetItemBuff(It.UpgradeAmm)
 	GetStat(It.UpgradeName).RefilCurrentVelue(It.CurrentVal)
+	ShipPartChanged.emit(It)
 
 func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
 	GetStat(It.UpgradeName).SetItemBuff(-It.UpgradeAmm)
 	if (GetStatCurrentValue(It.UpgradeName) > GetStatFinalValue(It.UpgradeName)):
 		GetStat(It.UpgradeName).CurrentVelue = GetStatFinalValue(It.UpgradeName)
+	ShipPartChanged.emit(It)

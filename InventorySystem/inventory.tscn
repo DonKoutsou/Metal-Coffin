@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dslxdgbana1k1"]
+[gd_scene load_steps=27 format=3 uid="uid://dslxdgbana1k1"]
 
 [ext_resource type="Script" path="res://InventorySystem/InventoryManager.gd" id="1_cjse7"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ddos4"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="9_sau7b"]
 [ext_resource type="Script" path="res://InventorySystem/InventoryShipStats.gd" id="10_f0lea"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="11_0ig21"]
+[ext_resource type="Texture2D" uid="uid://cjg61awbfrku4" path="res://Assets/CaptainPortraits/Captain1.png" id="11_hc03f"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="12_te605"]
 [ext_resource type="Resource" uid="uid://dggrnmd2ynjmr" path="res://Resources/ShipStats/FuelTank.tres" id="13_ajgcw"]
 [ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="14_brctl"]
@@ -35,6 +36,31 @@ border_color = Color(0.615304, 0.57196, 0.322451, 1)
 border_blend = true
 corner_detail = 1
 shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12j2j"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 961
+border_color = Color(0.0053553, 0.00773166, 0.0116329, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="Resource" id="Resource_40m2x"]
+script = ExtResource("12_te605")
+StatName = "SPEED"
+StatMax = 3.0
+StatBase = 0.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
+AllowAutoRefil = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
@@ -185,11 +211,25 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_ddos4")
 
-[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Panel"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")
+
+[node name="CaptainIcon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Panel/PanelContainer"]
+self_modulate = Color(1, 1, 1, 0.414)
+show_behind_parent = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("11_hc03f")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Panel" node_paths=PackedStringArray("CharPortrait")]
 layout_mode = 2
 script = ExtResource("10_f0lea")
+CharPortrait = NodePath("../PanelContainer/CaptainIcon")
 ShipStatScene = ExtResource("11_0ig21")
-StatsToShow = Array[ExtResource("12_te605")]([ExtResource("13_ajgcw"), ExtResource("14_brctl"), ExtResource("15_07o0m"), ExtResource("16_fv0s6"), ExtResource("17_slt1l"), ExtResource("18_5n2cg"), ExtResource("19_eva1j")])
+StatsToShow = Array[ExtResource("12_te605")]([ExtResource("13_ajgcw"), ExtResource("14_brctl"), ExtResource("15_07o0m"), ExtResource("16_fv0s6"), ExtResource("17_slt1l"), ExtResource("18_5n2cg"), ExtResource("19_eva1j"), SubResource("Resource_40m2x")])
 
 [node name="Legend" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats"]
 layout_mode = 2

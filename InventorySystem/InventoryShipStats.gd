@@ -1,6 +1,6 @@
 extends VBoxContainer
 class_name InventoryShipStats
-
+@export var CharPortrait : TextureRect
 @export var ShipStatScene : PackedScene
 @export var StatsToShow : Array[ShipStat]
 
@@ -23,5 +23,6 @@ func UpdateValues() -> void:
 		Stats[g].UpdateStatValue(value, ItemBuff, ShipValue)
 
 func SetCaptain(Cpt : Captain) -> void:
+	CharPortrait.texture = Cpt.CaptainPortrait
 	CurrentShownCaptain = Cpt
 	UpdateValues()

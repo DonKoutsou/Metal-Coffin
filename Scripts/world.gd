@@ -4,11 +4,12 @@ class_name World
 
 @export_group("Nodes")
 @export var _Map : Map
+@export var _Command : Commander
 #@export var ShipDat : ShipData
 @export_group("Scenes")
-@export var StartingShip : BaseShip
-@export var ShipTradeScene : PackedScene
-@export var DogfightScene : PackedScene
+#@export var StartingShip : BaseShip
+#@export var ShipTradeScene : PackedScene
+#@export var DogfightScene : PackedScene
 @export var CardFightScene : PackedScene
 
 
@@ -71,20 +72,20 @@ func _enter_tree() -> void:
 	#CurrentShip = StartingShip
 
 func TerminateWorld() -> void:
-	GetMap().GetInScreenUI().GetInventory().FlushInventory()
-	GetMap().GetPlayerShip().GetDroneDock().ClearAllDrones()
+	#GetMap().GetInScreenUI().GetInventory().FlushInventory()
+	var PlShip = get_tree().get_nodes_in_group("Ships")[0]
+	InventoryManager.GetInstance().OnCharacterRemoved(PlShip.Cpt)
+	PlShip.GetDroneDock().ClearAllDrones()
 
 func GetDialogueProgress() -> DialogueProgressHolder:
 	return $DialogueProgressHolder
 
 func GetMap() -> Map:
 	return _Map
-
+func GetCommander() -> Commander:
+	return _Command
 func GetStatPanel() -> StatPanel:
 	return $Map/OuterUI/VBoxContainer/Stat_Panel
-
-
-
 
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[Node2D]

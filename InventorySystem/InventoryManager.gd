@@ -77,7 +77,16 @@ func CancelUpgrades(Cha : Captain) -> void:
 	var CharInv = _CharacterInventories[Cha] as CharacterInventory
 	CharInv.CancelUpgrade()
 	
-	
+
+func FlushInventory() -> void:
+	for g in _CharacterInventories.values():
+		var Inv = g as CharacterInventory
+		for z in Inv._GetInventoryBoxes():
+			for i in z._ContentAmmout:
+				Inv.RemoveItemFromBox(z)
+		Inv.queue_free()
+	_CharacterInventories.clear()
+
 func ItemTranfer(Box : Inventory_Box) -> void:
 	var Cpt = GetBoxOwner(Box)
 	var OwnerInventory = _CharacterInventories[Cpt] as CharacterInventory
@@ -108,7 +117,7 @@ func GetBoxOwner(Box : Inventory_Box) -> Captain:
 				return g
 	return null
 
-func DroneAdded(Dr : Drone, Target : MapShip):
+func DroneAdded(Dr : Drone, _Target : MapShip):
 	AddCharacter(Dr.Cpt)
 
 func AddCharacter(Cha : Captain) -> void:
@@ -124,30 +133,41 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.connect("OnItemRemoved", OnItemRemoved.bind(Cha))
 	CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
 	CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
-	
+	CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
 	for g in Cha.StartingItems:
 		CharInv.AddItem(g)
 
 func OnCharacterRemoved(Cha : Captain) -> void:
 	var Inv = _CharacterInventories[Cha] as CharacterInventory
+	for z in Inv._GetInventoryBoxes():
+		for i in z._ContentAmmout:
+			Inv.RemoveItemFromBox(z)
 	Inv.queue_free()
 	_CharacterInventories.erase(Cha)
 	
-func LoadCharacter(Cha : Captain, LoadedItems : Array[Item]) -> void:
-	var CharInv = CharInvScene.instantiate() as CharacterInventory
-	CharInv.InitialiseInventory(Cha)
-	_CharacterInventories[Cha] = CharInv
-	CharacterPlace.add_child(CharInv)
+func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
+	var CharInv : CharacterInventory
+	if (_CharacterInventories.has(Cha)):
+		CharInv = _CharacterInventories[Cha]
+	else:
+		CharInv = CharInvScene.instantiate() as CharacterInventory
+		CharInv.InitialiseInventory(Cha)
+		_CharacterInventories[Cha] = CharInv
+		CharacterPlace.add_child(CharInv)
 	
-	CharInv.connect("BoxSelected", BoxSelected)
-	CharInv.connect("ItemUpgrade", ItemUpdgrade)
-	CharInv.connect("OnItemAdded", OnItemAdded.bind(Cha))
-	CharInv.connect("OnItemRemoved", OnItemRemoved.bind(Cha))
-	CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
-	CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
-	
+		CharInv.connect("BoxSelected", BoxSelected)
+		CharInv.connect("ItemUpgrade", ItemUpdgrade)
+		CharInv.connect("OnItemAdded", OnItemAdded.bind(Cha))
+		CharInv.connect("OnItemRemoved", OnItemRemoved.bind(Cha))
+		CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
+		CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
+		CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
+	for g in CharInv._GetInventoryBoxes():
+		for z in g._ContentAmmout:
+			CharInv.RemoveItemFromBox(g)
 	for g in LoadedItems:
-		CharInv.AddItem(g)
+		for z in g.Ammount:
+			CharInv.AddItem(g.ItemType)
 
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
@@ -159,7 +179,10 @@ func OnItemRemoved(It : Item, Owner : Captain) -> void:
 		MissileDockEventH.OnMissileRemoved(It, Owner)
 	CloseDescriptor()
 	ShipStats.UpdateValues()
-	
+
+func InspectCharacter(Cha : Captain) -> void:
+	ShipStats.SetCaptain(Cha)
+
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
@@ -167,12 +190,13 @@ func CloseDescriptor() -> void:
 
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
 	var Data = SD_CharacterInventory.new()
-	Data.CptName = Cpt.CaptainName
+	Data.Cpt = Cpt
 	var Contents = Inv.GetInventoryContents()
 	for g in Contents.keys():
 		var Ic = ItemContainer.new()
 		Ic.ItemType = g
 		Ic.Ammount = Contents[g]
+		Data.Items.append(Ic)
 	return Data
 	
 	
@@ -186,19 +210,20 @@ func GetSaveData() ->SaveData:
 	return dat
 	
 func LoadSaveData(Data : SaveData) -> void:
+	#FlushInventory()
 	for g in Data.Datas:
 		var dat = g as SD_CharacterInventory
-		
-		var CptInv : CharacterInventory
-		for c in _CharacterInventories.keys():
-			var cpt = c as Captain
-			if (cpt.CaptainName == dat.CptName):
-				CptInv = _CharacterInventories[c]
-		
-		for It in dat.Items:
-			var Ic = It as ItemContainer
-			for Am in Ic.Ammount:
-				CptInv.AddItem(Ic.ItemType)
+		LoadCharacter(dat.Cpt, dat.Items)
+		#var CptInv : CharacterInventory
+		#for c in _CharacterInventories.keys():
+			#var cpt = c as Captain
+			#if (cpt.CaptainName == dat.CptName):
+				#CptInv = _CharacterInventories[c]
+		#
+		#for It in dat.Items:
+			#var Ic = It as ItemContainer
+			#for Am in Ic.Ammount:
+				#CptInv.AddItem(Ic.ItemType)
 
 func ToggleInventory() -> void:
 	visible = !visible

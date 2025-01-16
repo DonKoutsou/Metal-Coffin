@@ -15,7 +15,7 @@ class_name ItemDescriptor
 @export var UpgradeButton : Button
 @export var UpgradeLabel : RichTextLabel
 
-signal ItemUsed(Box : Inventory_Box, Amm : int)
+#signal ItemUsed(Box : Inventory_Box, Amm : int)
 signal ItemUpgraded(Box : Inventory_Box)
 signal ItemDropped(Box : Inventory_Box)
 signal ItemRepaired(Box : Inventory_Box)
@@ -110,7 +110,7 @@ func _on_transfer_pressed() -> void:
 	ItemTransf.emit(DescribedContainer)
 	queue_free()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var inv = DescribedContainer.GetParentInventory()
 	var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
 	UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])

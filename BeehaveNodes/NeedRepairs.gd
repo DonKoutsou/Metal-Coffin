@@ -2,7 +2,7 @@ extends ConditionLeaf
 
 class_name NeedRepairCondition
 
-func tick(actor: Node, blackboard: Blackboard) -> int:
+func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MainShip = actor as HostileShip
 
 	var MaxHull = MainShip.Cpt.GetStatFinalValue("HULL")

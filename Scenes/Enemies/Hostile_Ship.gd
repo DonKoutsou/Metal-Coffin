@@ -353,15 +353,7 @@ func GetShipSpeed() -> float:
 	if (Docked):
 		return Command.GetShipSpeed()
 	return super()
-func GetShipMaxSpeed() -> float:
-	var Spd = Cpt.GetStatValue("SPEED")
-	if (Docked):
-		Spd = Command.GetShipMaxSpeed()
-	for g in GetDroneDock().DockedDrones:
-		var DroneSpd = g.Cpt.GetStatValue("SPEED")
-		if (DroneSpd < Spd):
-			Spd = DroneSpd
-	return Spd
+
 func GetSaveData() -> SD_HostileShip:
 	var dat = SD_HostileShip.new()
 	dat.Path = Path
