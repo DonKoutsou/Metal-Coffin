@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=5 format=3 uid="uid://bgobongojpq6o"]
 
 [ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="1_rysmt"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_otoms"]
-[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_laauu"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_otoms"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_laauu"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_wdbtf"]
 
 [resource]

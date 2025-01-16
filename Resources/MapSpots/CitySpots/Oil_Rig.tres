@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_goghs"]
 [ext_resource type="Texture2D" uid="uid://dsbfvbom3h575" path="res://Assets/oil-rig.png" id="2_y8lri"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_m4m06"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_m4m06"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_13m4u"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_ffelc"]
 

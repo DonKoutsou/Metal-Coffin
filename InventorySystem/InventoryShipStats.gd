@@ -4,6 +4,8 @@ class_name InventoryShipStats
 @export var ShipStatScene : PackedScene
 @export var StatsToShow : Array[ShipStat]
 
+var CurrentShownCaptain : Captain
+
 var Stats : Array[ShipStatContainer]
 
 func _ready() -> void:
@@ -15,7 +17,11 @@ func _ready() -> void:
 		
 func UpdateValues() -> void:
 	for g in Stats.size():
-		var value = ShipData.GetInstance().GetStat(Stats[g].STName).GetBaseStat()
-		var ItemBuff = ShipData.GetInstance().GetStat(Stats[g].STName).GetItemBuff()
-		var ShipValue = ShipData.GetInstance().GetStat(Stats[g].STName).GetShipBuff()
+		var value = CurrentShownCaptain.GetStat(Stats[g].STName).GetBaseStat()
+		var ItemBuff = CurrentShownCaptain.GetStat(Stats[g].STName).GetItemBuff()
+		var ShipValue = CurrentShownCaptain.GetStat(Stats[g].STName).GetShipBuff()
 		Stats[g].UpdateStatValue(value, ItemBuff, ShipValue)
+
+func SetCaptain(Cpt : Captain) -> void:
+	CurrentShownCaptain = Cpt
+	UpdateValues()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_rempu"]
 [ext_resource type="Texture2D" uid="uid://dhrvf4akuqgbb" path="res://Assets/nuclear-plant.png" id="2_6imlj"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_3anq6"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_3anq6"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_sgpjx"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_cghtq"]
 

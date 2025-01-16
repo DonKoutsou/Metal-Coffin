@@ -65,9 +65,9 @@ func _on_arm_drone_button_pressed(t : bool) -> void:
 		_on_dissarm_drone_button_2_pressed()
 		return
 	Armed = true
-	var eff = CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_EFFICIENCY")
+	var eff = CurrentlySelectedDrone.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")
 	var fuel = CurrentlySelectedDrone.Cpt.GetStat("FUEL_TANK").CurrentVelue
-	RangeDir = clamp(RangeDir, fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_TANK") * 10 * eff)
+	RangeDir = clamp(RangeDir, fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatFinalValue("FUEL_TANK") * 10 * eff)
 	
 	DroneDockEventH.OnDronRangeChanged(roundi(RangeDir), ConnectedShip)
 	$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))
@@ -113,9 +113,9 @@ var RangeDir : float = 0.0
 func UpdateDroneRange(Rang : float):
 	if (Armed):
 		#TODO figure out this filthy math
-		var eff = CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_EFFICIENCY")
+		var eff = CurrentlySelectedDrone.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")
 		var fuel = CurrentlySelectedDrone.Cpt.GetStat("FUEL_TANK").CurrentVelue
-		RangeDir = clamp((RangeDir + (Rang * 20)), fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatValue("FUEL_TANK") * 10 * eff)
+		RangeDir = clamp((RangeDir + (Rang * 20)), fuel * 10 * eff, CurrentlySelectedDrone.Cpt.GetStatFinalValue("FUEL_TANK") * 10 * eff)
 		
 		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir), ConnectedShip)
 		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))

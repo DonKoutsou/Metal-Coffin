@@ -7,13 +7,9 @@ class_name CaptainUI
 
 var Drones : Array[Drone]
 
-static var Instance : CaptainUI
-
 func _ready() -> void:
 	DroneDockEvH.connect("DroneAdded", AddCaptain)
-	Instance = self
-static func GetInstance() -> CaptainUI:
-	return Instance
+
 func AddCaptain(Dr : Drone, _Target : MapShip):
 	var Position : Control
 	for g in $GridContainer.get_children():

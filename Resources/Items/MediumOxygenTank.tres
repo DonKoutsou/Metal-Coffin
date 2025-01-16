@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://chxr32lry75bx"]
 
 [ext_resource type="Texture2D" uid="uid://coh3ud4i7ph3f" path="res://Assets/Items/cannister.png" id="1_22nwi"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_cp3in"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_cp3in"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_8t864"]
 [ext_resource type="Resource" uid="uid://bky83js31le74" path="res://Resources/Items/LargeOxygenTank.tres" id="3_bbia4"]
-[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_sogaj"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="5_sogaj"]
 
 [resource]
 resource_local_to_scene = true

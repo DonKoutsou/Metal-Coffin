@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_g63pb"]
 [ext_resource type="Texture2D" uid="uid://4wh00ooewh5y" path="res://Assets/hospital.png" id="2_srfse"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_xa00t"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_xa00t"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_4t2vw"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_igja5"]
 

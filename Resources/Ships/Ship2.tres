@@ -16,7 +16,7 @@ StatBuff = 6.0
 resource_local_to_scene = true
 script = ExtResource("2_b4dg8")
 StatCurrentVal = 100.0
-StatName = "FUEL"
+StatName = "FUEL_TANK"
 StatBuff = 100.0
 
 [sub_resource type="Resource" id="Resource_ynnat"]

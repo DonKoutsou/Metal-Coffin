@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=5 format=3 uid="uid://cxum5qaw20d1q"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://cxum5qaw20d1q"]
 
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_cxl4y"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_11t01"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_11t01"]
+[ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="2_li246"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_rflth"]
-[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_s64vj"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_s64vj"]
 
 [resource]
 resource_local_to_scene = true
@@ -14,7 +15,9 @@ CurrentVal = 0.0
 UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("2_11t01")]([ExtResource("3_rflth"), ExtResource("3_rflth")])
+UpAmmSymbol = ""
 ItemIcon = ExtResource("1_cxl4y")
+ItemIconSmol = ExtResource("2_li246")
 ItemName = "High Efficiency Engine"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1

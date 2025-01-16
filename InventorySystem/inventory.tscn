@@ -1,0 +1,218 @@
+[gd_scene load_steps=24 format=3 uid="uid://dslxdgbana1k1"]
+
+[ext_resource type="Script" path="res://InventorySystem/InventoryManager.gd" id="1_cjse7"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ddos4"]
+[ext_resource type="PackedScene" uid="uid://cmvl7w65kwp5a" path="res://InventorySystem/CharacterInventory/character_inventory.tscn" id="2_x688u"]
+[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://InventorySystem/ItemDescriptor/ItemDescriptor.tscn" id="3_fv7xx"]
+[ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://InventorySystem/ItemTransfer/ItemTransfer.tscn" id="4_4jjg6"]
+[ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/ItemsAddedNotif.tscn" id="6_8f3qb"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="6_tmvr3"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="8_3qdt5"]
+[ext_resource type="Texture2D" uid="uid://dwhs3o3bmu88" path="res://Assets/Spaceship/Spaceship_top_Rend_Main Camera 1.png" id="8_m8c8a"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="9_sau7b"]
+[ext_resource type="Script" path="res://InventorySystem/InventoryShipStats.gd" id="10_f0lea"]
+[ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="11_0ig21"]
+[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="12_te605"]
+[ext_resource type="Resource" uid="uid://dggrnmd2ynjmr" path="res://Resources/ShipStats/FuelTank.tres" id="13_ajgcw"]
+[ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="14_brctl"]
+[ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="15_07o0m"]
+[ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="16_fv0s6"]
+[ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="17_slt1l"]
+[ext_resource type="Resource" uid="uid://caakr00uaqhjj" path="res://Resources/ShipStats/Elint.tres" id="18_5n2cg"]
+[ext_resource type="Resource" uid="uid://bcmppxhqs5fre" path="res://Resources/ShipStats/FirePower.tres" id="19_eva1j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fam5"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 356
+border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_blend = true
+corner_detail = 1
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.756101, 0.571811, 1.34766e-06, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwjun"]
+bg_color = Color(0.280974, 0.780967, 0.810078, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0997141, 0.368611, 0.384012, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
+[node name="Inventory" type="Control" node_paths=PackedStringArray("CharacterPlace", "DescriptorPlace", "ShipStats")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ddos4")
+script = ExtResource("1_cjse7")
+CharInvScene = ExtResource("2_x688u")
+ItemDescriptorScene = ExtResource("3_fv7xx")
+ItemTransferScene = ExtResource("4_4jjg6")
+ItemNotifScene = ExtResource("6_8f3qb")
+CharacterPlace = NodePath("HBoxContainer/ScrollContainer/VBoxContainer")
+DescriptorPlace = NodePath("HBoxContainer/VBoxContainer/Panel")
+ShipStats = NodePath("HBoxContainer/VBoxContainer/Panel/InventoryShipStats")
+MissileDockEventH = ExtResource("6_tmvr3")
+DroneDockEventH = ExtResource("8_3qdt5")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="Panel2" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(25, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4fam5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("8_m8c8a")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_sau7b")
+theme_override_font_sizes/font_size = 30
+text = "Ship Name"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5.565)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_sau7b")
+theme_override_font_sizes/font_size = 24
+text = "Ship descawfhwaifhaw ifhawipfhaiwfhpawjfpaw jawpojfpawpfawawfwafwafwaf aw"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5.565)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_sau7b")
+theme_override_font_sizes/font_size = 24
+text = "Ship descawfhwaifhawifha wipfhaiwfhpawjfpaw fjawpojfpawpfawawfwa fwafw afwahifwahfawohfwaiohaowaf"
+autowrap_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_ddos4")
+
+[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 2
+script = ExtResource("10_f0lea")
+ShipStatScene = ExtResource("11_0ig21")
+StatsToShow = Array[ExtResource("12_te605")]([ExtResource("13_ajgcw"), ExtResource("14_brctl"), ExtResource("15_07o0m"), ExtResource("16_fv0s6"), ExtResource("17_slt1l"), ExtResource("18_5n2cg"), ExtResource("19_eva1j")])
+
+[node name="Legend" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_sau7b")
+theme_override_font_sizes/font_size = 12
+text = "Item Buff"
+
+[node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_sau7b")
+theme_override_font_sizes/font_size = 12
+text = "Ship Buff"
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")

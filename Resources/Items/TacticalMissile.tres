@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_tmfc8"]
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="2_oaolx"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="3_j5y6l"]
-[ext_resource type="Script" path="res://Scripts/MissileItem.gd" id="4_1mwvx"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/MissileItem.gd" id="4_1mwvx"]
 
 [resource]
 script = ExtResource("4_1mwvx")

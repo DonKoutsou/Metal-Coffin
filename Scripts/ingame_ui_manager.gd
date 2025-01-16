@@ -1,6 +1,10 @@
 extends CanvasLayer
 class_name Ingame_UIManager
 
+@export var _Inventory : InventoryManager
+@export var _CaptainUI : CaptainUI
+@export var _MapMarkerEditor : MapMarkerEditor
+@export var PauseContainer : Control
 @export var DiagplScene : PackedScene
 
 static var Instance :Ingame_UIManager
@@ -37,6 +41,23 @@ func CallbackDiag (Diags : Array[String], Callback : Callable, StopInput : bool 
 func ToggleInventoryButton(t : bool):
 	$VBoxContainer/HBoxContainer/Panel/InventoryButton.disabled = !t
 
-#func CameraZoomChanged(NewZoom : float):
-	#var scalables = get_tree().get_nodes_in_group("Scalables")
-	
+func GetInventory() -> InventoryManager:
+	return _Inventory
+func GetCapUI() -> CaptainUI:
+	return _CaptainUI
+func GetMapMarkerEditor() -> MapMarkerEditor:
+	return _MapMarkerEditor
+func Pause() -> void:
+	var paused = get_tree().paused
+	get_tree().paused = !paused
+	PauseContainer.visible = !paused
+func _on_save_pressed() -> void:
+	SaveLoadManager.GetInstance().Save()
+	PopUpManager.GetInstance().DoFadeNotif("Save successful")
+func _on_exit_pressed() -> void:
+	World.GetInstance().WRLD_OnGameEnded.emit()
+func On_Game_Lost_Button_Pressed() -> void:
+	World.GetInstance().WRLD_OnGameEnded.emit()
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("Pause")):
+		Pause()

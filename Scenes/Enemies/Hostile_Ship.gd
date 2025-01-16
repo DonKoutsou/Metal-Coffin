@@ -4,7 +4,6 @@ class_name HostileShip
 
 @export var Direction = -1
 
-@export var Cpt : Captain
 
 @export var ShipName : String
 @export var Patrol : bool = true
@@ -16,9 +15,7 @@ var LastKnownPosition : Vector2
 var Path : Array = []
 var PathPart : int = 0
 var RefuelSpot : MapSpot
-var Docked : bool = false
 var VisibleBy : Array[Node2D]
-var CommingBack = false
 var BTree : BeehaveTree
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
@@ -37,8 +34,8 @@ func  _ready() -> void:
 	
 	_UpdateShipIcon(Cpt.ShipIcon)
 	
-	call_deferred("UpdateELINTTRange", Cpt.GetStatValue("ELINT"))
-	call_deferred("UpdateVizRange", Cpt.GetStatValue("RADAR_RANGE"))
+	call_deferred("UpdateELINTTRange", Cpt.GetStatFinalValue("ELINT"))
+	call_deferred("UpdateVizRange", Cpt.GetStatFinalValue("VIZ_RANGE"))
 	
 	
 	if (!Patrol):
@@ -178,7 +175,7 @@ func IntersectPusruing() -> Vector2:
 	ship_velocity = PursuingShips[0].GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatValue("SPEED")
+	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatFinalValue("SPEED")
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception

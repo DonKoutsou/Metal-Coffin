@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://ds65jn3new0if"]
 
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_ipvpg"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="1_ipvpg"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_loj0t"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_57u31"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_vte5s"]

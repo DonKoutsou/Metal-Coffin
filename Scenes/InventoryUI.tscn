@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7owbjefasxhp"]
+[gd_scene load_steps=18 format=3 uid="uid://c8emfm3d0e45d"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_4lg1h"]
 [ext_resource type="Texture2D" uid="uid://dwhs3o3bmu88" path="res://Assets/Spaceship/Spaceship_top_Rend_Main Camera 1.png" id="1_pwxaw"]
-[ext_resource type="Script" path="res://Scripts/UI/inventory_ui.gd" id="2_481me"]
-[ext_resource type="Script" path="res://Scripts/InventoryShipStats.gd" id="3_jtr6h"]
+[ext_resource type="Script" path="res://InventorySystem/InventoryShipStats.gd" id="4_ig5cj"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="4_mdouc"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_x0mp8"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="5_7fa5c"]
@@ -14,6 +13,58 @@
 [ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="10_72dl8"]
 [ext_resource type="Resource" uid="uid://caakr00uaqhjj" path="res://Resources/ShipStats/Elint.tres" id="13_mhp77"]
 [ext_resource type="Resource" uid="uid://bcmppxhqs5fre" path="res://Resources/ShipStats/FirePower.tres" id="15_mk8vu"]
+
+[sub_resource type="GDScript" id="GDScript_we255"]
+script/source = "extends PanelContainer
+
+class_name InventoryUI
+
+signal OnUiToggled(t)
+
+var Scroll : int
+
+var Contents : Dictionary
+
+func _enter_tree() -> void:
+	Contents[\"Flagship\"] = $HBoxContainer/ScrollContainer/VBoxContainer/InvContents
+func _ready() -> void:
+	ToggleUI(false)
+	Scroll = $HBoxContainer/ScrollContainer.scroll_vertical
+	#ZeroPos = $HBoxContainer/InvContents.position.y
+	#Contents[\"Flagship\"] = $HBoxContainer/ScrollContainer/VBoxContainer/InvContents
+
+func AddNewInventory(CharacterName : String):
+	var Lab = $HBoxContainer/ScrollContainer/VBoxContainer/Label.duplicate() as Label
+	Lab.text = CharacterName
+	$HBoxContainer/ScrollContainer/VBoxContainer.add_child(Lab)
+	var Cont = $HBoxContainer/ScrollContainer/VBoxContainer/InvContents.duplicate() as GridContainer
+	for g in Cont.get_children():
+		g.free()
+	$HBoxContainer/ScrollContainer/VBoxContainer.add_child(Cont)
+	Contents[CharacterName] = Cont
+
+func RemoveInventory(CharacterName : String) -> void:
+	var cont = GetInventoryContents(CharacterName)
+	var Index = $HBoxContainer/ScrollContainer/VBoxContainer.get_children().find(cont)
+	var Lab = $HBoxContainer/ScrollContainer/VBoxContainer.get_child(Index - 1)
+	Contents.erase(CharacterName)
+	cont.queue_free()
+	Lab.queue_free()
+
+func ToggleUI(t : bool) -> void:
+	visible = t
+	OnUiToggled.emit(!t)
+
+func _on_scroll_container_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and Input.is_action_pressed(\"Click\"):
+		#Scroll = max(Scroll - event.relative.y, 0)
+		#Scroll -= event.relative.y
+		$HBoxContainer/ScrollContainer.scroll_vertical = Scroll - event.relative.y
+		Scroll = $HBoxContainer/ScrollContainer.scroll_vertical
+
+func GetInventoryContents(CharacterName : String) -> GridContainer:
+	return Contents[CharacterName]
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_351ay"]
 content_margin_left = 8.0
@@ -59,31 +110,51 @@ corner_radius_bottom_left = 6
 corner_detail = 1
 
 [node name="InventoryUI" type="PanelContainer"]
-custom_minimum_size = Vector2(800, 0)
+custom_minimum_size = Vector2(800, 400)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_4lg1h")
-script = ExtResource("2_481me")
+script = SubResource("GDScript_we255")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="InvContents" type="GridContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(396, 490)
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_4lg1h")
+text = "Flagship"
+
+[node name="InvContents" type="GridContainer" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
 mouse_filter = 2
 columns = 3
 
 [node name="Panel" type="Panel" parent="HBoxContainer"]
-custom_minimum_size = Vector2(25, 0)
+custom_minimum_size = Vector2(25, 500)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_351ay")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -151,7 +222,7 @@ theme = ExtResource("1_4lg1h")
 
 [node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Panel"]
 layout_mode = 2
-script = ExtResource("3_jtr6h")
+script = ExtResource("4_ig5cj")
 ShipStatScene = ExtResource("4_mdouc")
 StatsToShow = Array[ExtResource("5_7fa5c")]([ExtResource("6_vt07v"), ExtResource("7_q1ex4"), ExtResource("8_ac41u"), ExtResource("9_a73jk"), ExtResource("10_72dl8"), ExtResource("13_mhp77"), ExtResource("15_mk8vu")])
 
@@ -180,3 +251,5 @@ text = "Ship Buff"
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0tx04")
+
+[connection signal="gui_input" from="HBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]

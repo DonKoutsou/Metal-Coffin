@@ -141,16 +141,16 @@ func UpdateLine()-> void:
 func UpdateSpeed(Spd : float):
 	var spd = roundi(Spd * 360)
 	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(spd) + "km/h"
-func UpdateFuel(extraamm : float = 0, extramax : float = 0):
-	var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL").GetCurrentValue() + extraamm)
-	var maxfuel = ShipData.GetInstance().GetStat("FUEL").GetStat() + extramax
-	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxfuel])
+#func UpdateFuel(extraamm : float = 0, extramax : float = 0):
+	#var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL_TANK").GetCurrentValue() + extraamm)
+	#var maxfuel = ShipData.GetInstance().GetStat("FUEL_TANK").GetStat() + extramax
+	#$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxfuel])
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(Alt))
 func UpdateDroneFuel(amm : float, maxamm : float):
 	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1}  Tons".format([amm, maxamm])
-func UpdateHull():
-	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
+#func UpdateHull():
+	#$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
 func UpdateDroneHull(amm : float, maxamm : float):
 	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([amm, maxamm])
 #func ToggleThreat(T : bool):

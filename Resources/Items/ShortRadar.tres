@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://c6j0y0r05rijg"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://c6j0y0r05rijg"]
 
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_2wpva"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_ys63s"]
+[ext_resource type="Texture2D" uid="uid://b3oxh70gjpu2h" path="res://Assets/Items/radar-sweep_smol.png" id="2_q4dxl"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_ys63s"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_n4ugw"]
 [ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/MediumRadar.tres" id="4_f476b"]
-[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="5_85il0"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="5_85il0"]
 
 [resource]
 resource_local_to_scene = true
@@ -18,6 +19,7 @@ IsDamaged = false
 RepairItems = Array[ExtResource("2_ys63s")]([ExtResource("3_n4ugw"), ExtResource("3_n4ugw")])
 UpAmmSymbol = "km"
 ItemIcon = ExtResource("1_2wpva")
+ItemIconSmol = ExtResource("2_q4dxl")
 ItemName = "Short Range Radar"
 ItemDesc = "Standard issue radar, providing the minimal visual distance around the ship."
 MaxStackCount = 1

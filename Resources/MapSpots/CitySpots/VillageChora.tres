@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_2g2aw"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_lphgm"]
 [ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="5_75pvh"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="6_1pw4v"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="6_1pw4v"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_bji58"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_853xu"]
 

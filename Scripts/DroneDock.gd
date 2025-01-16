@@ -95,8 +95,8 @@ func DroneDisharged(Dr : Drone):
 		DockedDrones.erase(Dr)
 	if (FlyingDrones.has(Dr)):
 		FlyingDrones.erase(Dr)
-	ShipData.GetInstance().RemoveCaptainStats([Dr.Cpt.GetStat("INVENTORY_CAPACITY")])
-	Inventory.GetInstance().UpdateSize()
+	#ShipData.GetInstance().RemoveCaptainStats([Dr.Cpt.GetStat("INVENTORY_CAPACITY")])
+	InventoryManager.GetInstance().OnCharacterRemoved(Dr.Cpt)
 	MapPointerManager.GetInstance().RemoveShip(Dr)
 	Dr.queue_free()
 
@@ -113,8 +113,8 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 		notif.SetCaptain(Drne.Cpt)
 		Ingame_UIManager.GetInstance().AddUI(notif, true)
 	Drne.connect("OnShipDestroyed", DroneDisharged)
-	ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
-	Inventory.GetInstance().UpdateSize()
+	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
+	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
 	AddDroneToHierarchy(Drne)
 	var pl = get_parent() as MapShip
 	if (pl.CurrentPort != null):
@@ -172,22 +172,22 @@ func DroneRangeChanged(NewRange : float, Target : MapShip) -> void:
 	
 func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 	if (Target == get_parent()):
-		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
+		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")
 		var neededfuel = fueltoconsume - Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue
 		if (neededfuel > 0):
-			if (Target is Drone):
-				if (Target.Cpt.GetStat("FUEL_TANK").CurrentVelue < neededfuel):
-					return
-				Target.Cpt.GetStat("FUEL_TANK").CurrentVelue -= neededfuel
-			if (Target is PlayerShip):
-				if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
-					return
-				ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
+			#if (Target is Drone):
+			if (Target.Cpt.GetStat("FUEL_TANK").CurrentVelue < neededfuel):
+				return
+			Target.Cpt.GetStat("FUEL_TANK").CurrentVelue -= neededfuel
+			#if (Target is PlayerShip):
+				#if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
+					#return
+				#ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
 		PlayTakeoffSound()
 		UndockDrone(Dr)
 		Dr.global_rotation = $Line2D.global_rotation
 		Dr.global_position = global_position
-		Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatValue("FUEL_EFFICIENCY")
+		Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")
 		Dr.EnableDrone()
 	
 func AddDroneToHierarchy(drone : Drone):

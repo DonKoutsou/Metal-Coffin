@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c22kbrr2llw68"]
 
 [ext_resource type="Script" path="res://Scripts/Supply_Cache.gd" id="1_uk6lw"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_ndbqt"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_ndbqt"]
 [ext_resource type="Resource" uid="uid://fuxqtjwxm8px" path="res://Resources/Items/CryoChamber.tres" id="3_vsl0i"]
 [ext_resource type="Resource" uid="uid://dod4ugx85516y" path="res://Resources/Items/OxygenTank.tres" id="4_qsqh4"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="5_aio5w"]

@@ -26,11 +26,22 @@ var Actions : Dictionary
 
 signal CardFightEnded(Survivors : Array[BattleShipStats])
 
+
+
+
+
+#TODO
+#Find way to expand system to work with inventory items.
+#need to make sure that any armaments brought into the fight exist inside inventory.
+#armaments that can be used in map will be different to those used in card fight
+#Card fight armaments will also be resupplied in same way in towns.
+#enemies need to have inventory of armaments to see what they can do in fight
+
 func _ready() -> void:
-	#for g in 3:
-		#PlayerShips.append(GenerateRandomisedShip("Player" + var_to_str(g), false))
-	#for g in 3:
-		#EnemyShips.append(GenerateRandomisedShip("Enemy" + var_to_str(g), true))
+	for g in 3:
+		PlayerShips.append(GenerateRandomisedShip("Player" + var_to_str(g), false))
+	for g in 3:
+		EnemyShips.append(GenerateRandomisedShip("Enemy" + var_to_str(g), true))
 	
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)

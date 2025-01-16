@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dymr3kp27n5to"]
 
 [ext_resource type="Resource" uid="uid://byx81bxds55dv" path="res://Resources/Happenings/CrewRecruitHappeningSamir.tres" id="1_vw7nb"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_7sxud"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_7sxud"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_ycksc"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_vr4ve"]
 

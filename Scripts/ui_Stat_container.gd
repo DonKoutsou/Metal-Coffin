@@ -16,28 +16,29 @@ var Stat : String
 func UpdateStat(StatN : String):
 	if (Stat != StatN):
 		return
-	var dat = ShipData.GetInstance()
-	var stat = dat.GetStat(Stat)
-	var CurStat = roundi(stat.GetCurrentValue())
-	var MaxValue = stat.GetStat()
-	AutoRefill = stat.AllowAutoRefil
-	$Control/AutoRefil.visible = stat.AllowAutoRefil
-	#var MyTween = create_tween()
-	#MyTween.set_trans(Tween.TRANS_EXPO)
-	#MyTween.tween_property($HBoxContainer/Bar, "value", CurStat, 0.1)
-	#$HBoxContainer/Bar.max_value = MaxValue
-	#$HBoxContainer/Bar.value = CurStat
-	$Control/TextureRect/Label.text = var_to_str(roundi(CurStat))
-	if (StatN == "HP"):
-		$Control/TextureRect/Label.text += " " + FundsThing
-	if (StatN == "HULL"):
-		$Control/TextureRect/Label.text += " " + HullThing
-	if (StatN == "FUEL"):
-		$Control/TextureRect/Label.text += " " + FuelThing
-	if (StatN == "FUNDS"):
-		$Control/TextureRect/Label.text += " " + FundsThing
-	if (CurStat > MaxValue * 0.2):
-		$Control/Light.Toggle(false)
+	#TODO redo this
+	#var dat = ShipData.GetInstance()
+	#var stat = dat.GetStat(Stat)
+	#var CurStat = roundi(stat.GetCurrentValue())
+	#var MaxValue = stat.GetStat()
+	#AutoRefill = stat.AllowAutoRefil
+	#$Control/AutoRefil.visible = stat.AllowAutoRefil
+	##var MyTween = create_tween()
+	##MyTween.set_trans(Tween.TRANS_EXPO)
+	##MyTween.tween_property($HBoxContainer/Bar, "value", CurStat, 0.1)
+	##$HBoxContainer/Bar.max_value = MaxValue
+	##$HBoxContainer/Bar.value = CurStat
+	#$Control/TextureRect/Label.text = var_to_str(roundi(CurStat))
+	#if (StatN == "HP"):
+		#$Control/TextureRect/Label.text += " " + FundsThing
+	#if (StatN == "HULL"):
+		#$Control/TextureRect/Label.text += " " + HullThing
+	#if (StatN == "FUEL"):
+		#$Control/TextureRect/Label.text += " " + FuelThing
+	#if (StatN == "FUNDS"):
+		#$Control/TextureRect/Label.text += " " + FundsThing
+	#if (CurStat > MaxValue * 0.2):
+		#$Control/Light.Toggle(false)
 		#$HBoxContainer/Bar/HBoxContainer/TextureRect2.visible = false
 		#$HBoxContainer/Bar/HBoxContainer/TextureRect3.visible = false
 	#if (CurStat < 20):
@@ -48,18 +49,18 @@ func AlarmLow(StatN : String):
 		return
 	$Control/Light.Toggle(true)
 	#$AnimationPlayer.play("StatLow")
-func UpdateStatCust(StatN : String, Val : float):
-	if (Stat != StatN):
-		return
-	var dat = ShipData.GetInstance()
-	var MaxValue = dat.GetStat(Stat).GetStat()
+#func UpdateStatCust(StatN : String, Val : float):
+	#if (Stat != StatN):
+		#return
+	#var dat = ShipData.GetInstance()
+	#var MaxValue = dat.GetStat(Stat).GetStat()
 	#MaxValue.set_trans(Tween.TRANS_EXPO)
 	#var tw = create_tween()
 	#tw.tween_property($HBoxContainer/Bar, "value", Val, 0.1)
 	#tw.play()
 	#$HBoxContainer/Bar.max_value = MaxValue
 	#$HBoxContainer/Bar.value = CurStat
-	$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(Val)) + "/" + var_to_str((roundi(MaxValue)))
+	#$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(Val)) + "/" + var_to_str((roundi(MaxValue)))
 func _enter_tree() -> void:
 	if (Stat == "HP"):
 		$Control/TextureRect.texture = FundsTex

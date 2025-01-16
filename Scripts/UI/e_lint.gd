@@ -1,5 +1,7 @@
 extends Control
 
+class_name ElingUI
+
 @export var DirectionMasks : Dictionary
 @export var DistanceMasks : Array[Texture2D]
 @export var OnOffTextures : Array[Texture2D]
@@ -90,10 +92,10 @@ static func DegreesToElintAngle(Deg : float) -> int:
 	
 func SetDistance(dist : float):
 	var maxdist
-	if (ConnectedShip is Drone):
-		maxdist = ConnectedShip.Cpt.GetStat("ELINT").GetStat()
-	else:
-		maxdist = ShipData.GetInstance().GetStat("ELINT").GetStat()
+	#if (ConnectedShip is Drone):
+	maxdist = ConnectedShip.Cpt.GetStat("ELINT").GetStat()
+	#else:
+		#maxdist = ShipData.GetInstance().GetStat("ELINT").GetStat()
 	if (dist < maxdist * 0.3):
 		if ($RangeIndicator.texture != DistanceMasks[2]):
 			$RangeIndicator.texture = DistanceMasks[2]

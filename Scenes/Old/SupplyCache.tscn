@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://oa22m2ia7nea"]
 
 [ext_resource type="Script" path="res://Scripts/Supply_Cache.gd" id="1_wx47k"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_5aomk"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_5aomk"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_dhy22"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="5_3qeas"]
 [ext_resource type="Resource" uid="uid://bqclpdfwg8s6j" path="res://Resources/Items/Medical.tres" id="5_gwcla"]

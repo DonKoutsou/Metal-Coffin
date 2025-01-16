@@ -23,3 +23,5 @@ func RefilCurrentVelue(RefAmmount : float) -> void:
 	CurrentVelue = clamp(CurrentVelue + RefAmmount, 0, GetStat())
 func ConsumeResource(Amm : float) -> void:
 	CurrentVelue -= Amm
+func SetItemBuff(Amm : float) -> void:
+	StatItemBuff += Amm

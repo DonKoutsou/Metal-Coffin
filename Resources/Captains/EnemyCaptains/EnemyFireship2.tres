@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://bipfcwumlbq7u"]
+[gd_resource type="Resource" script_class="Captain" load_steps=14 format=3 uid="uid://bipfcwumlbq7u"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_76con"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_eu6gc"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_hkrb1"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_x72ig"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_4majv"]
 
@@ -17,7 +18,7 @@ AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_bf8ot"]
 script = ExtResource("2_eu6gc")
-StatName = "RADAR_RANGE"
+StatName = "VIZ_RANGE"
 StatMax = 1000.0
 StatBase = 200.0
 StatShipBuff = 0.0
@@ -96,3 +97,5 @@ CaptainPortrait = ExtResource("1_76con")
 ShipIcon = ExtResource("3_x72ig")
 CaptainStats = Array[ExtResource("2_eu6gc")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u")])
 ShipCallsign = "P"
+StartingItems = Array[ExtResource("3_hkrb1")]([])
+CurrentPort = ""

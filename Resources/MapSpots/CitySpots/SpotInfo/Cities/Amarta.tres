@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_djheq"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_h7yr4"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_3yfej"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_3yfej"]
 
 [resource]
 script = ExtResource("1_djheq")

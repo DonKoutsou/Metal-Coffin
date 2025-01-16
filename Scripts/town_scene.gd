@@ -23,17 +23,17 @@ var LandedShip : MapShip
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	PlFunds = ShipData.GetInstance().GetStat("FUNDS").GetCurrentValue()
+	PlFunds = 1000000
 	$VBoxContainer2/HBoxContainer2/FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	if (!HasFuel):
 		FuelPricePerTon = 200
 	else:
 		FuelPricePerTon = 100
 
-	if (LandedShip is PlayerShip):
-		SetFuelData()
-	else :
-		SetDroneFuelData()
+	#if (LandedShip is PlayerShip):
+		#SetFuelData()
+	#else :
+	SetDroneFuelData()
 	$VBoxContainer2/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm.text = var_to_str(roundi(PlFuel + BoughtFuel))
 	$VBoxContainer2/VBoxContainer/ProgressBar.max_value = PlMaxFuel
 	$VBoxContainer2/VBoxContainer/ProgressBar.value = PlFuel + BoughtFuel
@@ -43,10 +43,10 @@ func _ready() -> void:
 	else:
 		RepairpricePerRepairValue = 100
 	
-	if (LandedShip is PlayerShip):
-		SetHullData()
-	else :
-		SetDroneHullData()
+	#if (LandedShip is PlayerShip):
+		#SetHullData()
+	#else :
+	SetDroneHullData()
 	$VBoxContainer2/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm.text = var_to_str(roundi(PlHull))
 	$VBoxContainer2/VBoxContainer2/ProgressBar.max_value = PlMaxHull
 	$VBoxContainer2/VBoxContainer2/ProgressBar.value = PlHull + BoughtRepairs
@@ -55,31 +55,31 @@ func _ready() -> void:
 #func _process(delta: float) -> void:
 	#pass
 
-func SetFuelData():
-	PlFuel = ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()
-	PlMaxFuel = ShipData.GetInstance().GetStat("FUEL").GetStat()
-	var plship = LandedShip as PlayerShip
-	var dd = plship.GetDroneDock()
-	for g in dd.DockedDrones:
-		PlMaxFuel += g.Cpt.GetStatValue("FUEL_TANK")
-		PlFuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
-	
-func SetHullData():
-	PlHull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
-	PlMaxHull = ShipData.GetInstance().GetStat("HULL").GetStat()
-	var plship = LandedShip as PlayerShip
-	var dd = plship.GetDroneDock()
-	for g in dd.DockedDrones:
-		PlMaxHull += g.Cpt.GetStatValue("HULL")
-		PlHull += g.Cpt.GetStat("HULL").CurrentVelue
+#func SetFuelData():
+	#PlFuel = ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()
+	#PlMaxFuel = ShipData.GetInstance().GetStat("FUEL").GetStat()
+	#var plship = LandedShip as PlayerShip
+	#var dd = plship.GetDroneDock()
+	#for g in dd.DockedDrones:
+		#PlMaxFuel += g.Cpt.GetStatValue("FUEL_TANK")
+		#PlFuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+	#
+#func SetHullData():
+	#PlHull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
+	#PlMaxHull = ShipData.GetInstance().GetStat("HULL").GetStat()
+	#var plship = LandedShip as PlayerShip
+	#var dd = plship.GetDroneDock()
+	#for g in dd.DockedDrones:
+		#PlMaxHull += g.Cpt.GetStatValue("HULL")
+		#PlHull += g.Cpt.GetStat("HULL").CurrentVelue
 
 func SetDroneFuelData():
 	PlFuel = LandedShip.Cpt.GetStat("FUEL_TANK").CurrentVelue
-	PlMaxFuel = LandedShip.Cpt.GetStatValue("FUEL_TANK")
+	PlMaxFuel = LandedShip.Cpt.GetStatFinalValue("FUEL_TANK")
 	var plship = LandedShip as Drone
 	var dd = plship.GetDroneDock()
 	for g in dd.DockedDrones:
-		PlMaxFuel += g.Cpt.GetStatValue("FUEL_TANK")
+		PlMaxFuel += g.Cpt.GetStatFinalValue("FUEL_TANK")
 		PlFuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
 func SetDroneHullData():
 	PlHull = LandedShip.Cpt.GetStat("HULL").CurrentVelue
@@ -87,7 +87,7 @@ func SetDroneHullData():
 	var plship = LandedShip as Drone
 	var dd = plship.GetDroneDock()
 	for g in dd.DockedDrones:
-		PlMaxHull += g.Cpt.GetStatValue("HULL")
+		PlMaxHull += g.Cpt.GetStatFinalValue("HULL")
 		PlHull += g.Cpt.GetStat("HULL").CurrentVelue
 	
 func FuelBar_gui_input(event: InputEvent) -> void:

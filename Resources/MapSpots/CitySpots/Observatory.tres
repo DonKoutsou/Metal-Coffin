@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_gvacd"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_Names.gd" id="2_o4ed3"]
 [ext_resource type="Texture2D" uid="uid://b68abpq2k8t0e" path="res://Assets/observatory.png" id="2_uplcd"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_ps428"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_ps428"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_mnl5k"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_kv61i"]
 

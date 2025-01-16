@@ -1,6 +1,16 @@
 extends CanvasLayer
 class_name Map
+@export_group("Nodes")
+@export var _InScreenUI : Ingame_UIManager
+@export var _Camera : ShipCamera
+@export var ScreenUI : Control
+@export var SteeringWh : SteeringWheelUI
+@export var Elint : ElingUI
+@export var DroneUI : DroneTab
+@export var ThrustUI : ThrustSlider
+@export var MapMarkerControls : Control
 
+@export_group("Map Generation")
 @export var Villages : Array[PackedScene]
 @export var Cities : Array[PackedScene]
 @export var CapitalCity : PackedScene
@@ -10,11 +20,14 @@ class_name Map
 @export var EnemyScene : PackedScene
 @export var EnSpawner : SpawnDecider
 @export var EnemyShipNames : Array[String]
-@onready var thrust_slider: ThrustSlider = $OuterUI/ThrustSlider
-
 
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_NeighborsSet
+signal LandButton
+signal RadarButton
+signal ShipReturnButton
+signal ShipswitchButton
+
 var TempEnemyNames: Array[String]
 var SpotList : Array[Town]
 var ShowingTutorial = false
@@ -26,16 +39,23 @@ static func GetInstance() -> Map:
 
 func _ready() -> void:
 	Instance = self
-	
-	$SubViewportContainer/ViewPort/InScreenUI/Control3/UnderStatUI/InventoryUI.connect("OnUiToggled", OnScreenUiToggled)
+	GetInScreenUI().GetInventory().connect("InventoryToggled", OnScreenUiToggled)
 	# spotlist empty means we are not loading and starting new game
 	GetMapMarkerEditor().visible = false
-	$OuterUI/MapMarkerControls.visible = false
+	MapMarkerControls.visible = false
 	if (SpotList.size() == 0):
 		TempEnemyNames.append_array(EnemyShipNames)
 		GenerateMap()
 		_InitialPlayerPlacament()
 		ShowingTutorial = true
+	ConnectMapMarkerEditorControls()
+	
+func ConnectMapMarkerEditorControls() -> void:
+	var MapMEditor = GetInScreenUI().GetMapMarkerEditor()
+	$OuterUI/MapMarkerControls/DrawLine.connect("pressed", MapMEditor._on_drone_button_pressed)
+	$OuterUI/MapMarkerControls/DrawText.connect("pressed", MapMEditor._OnTextButtonPressed)
+	$OuterUI/MapMarkerControls/YGas.connect("RangeChanged", MapMEditor._on_y_gas_range_changed)
+	$OuterUI/MapMarkerControls/XGas.connect("RangeChanged", MapMEditor._on_x_gas_range_changed)
 
 func _InitialPlayerPlacament():
 	#find first village and make sure its visible
@@ -44,7 +64,7 @@ func _InitialPlayerPlacament():
 	#place player close to first village
 	var pos = firstvilage.global_position
 	pos.y += 500
-	var PlShip = GetPlayerShip()
+	var PlShip = $SubViewportContainer/ViewPort/PlayerShip
 	PlShip.global_position = pos
 	GetCamera().global_position = PlShip.global_position
 	PlShip.ShipLookAt(firstvilage.global_position)
@@ -55,28 +75,33 @@ func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 
 func ToggleUIForIntro(t : bool):
 	#PlayerShip.GetInstance().ToggleUI(t)
-	$OuterUI/ScreenUi.visible = t
+	ScreenUI.visible = t
 
 func ToggleMapMarkerPlecement(t : bool) -> void:
-	$OuterUI/ScreenUi.visible = !t
-	$OuterUI/MapMarkerControls.visible = t
+	ScreenUI.visible = !t
+	MapMarkerControls.visible = t
 	GetMapMarkerEditor().visible = t
 func ToggleMapMarkerPlacementAuto() -> void:
 	var t = !GetMapMarkerEditor().visible
-	$OuterUI/ScreenUi.visible = !t
-	$OuterUI/MapMarkerControls.visible = t
+	ScreenUI.visible = !t
+	MapMarkerControls.visible = t
 	GetMapMarkerEditor().visible = t
 
 func GetMapMarkerEditor() -> MapMarkerEditor:
-	return $SubViewportContainer/ViewPort/InScreenUI/Control3/MapMarkerEditor
-func GetPlayerPos() -> Vector2:
-	return GetPlayerShip().position
-func GetPlayerShip() -> PlayerShip:
-	return $SubViewportContainer/ViewPort/PlayerShip
-func GetCommander() -> Commander:
-	return $"../Commander"
+	return GetInScreenUI().GetMapMarkerEditor()
+func GetInScreenUI() -> Ingame_UIManager:
+	return _InScreenUI
+func GetSteeringWheelUI() -> SteeringWheelUI:
+	return SteeringWh
+func GetElintUI() -> ElingUI:
+	return Elint
+func GetDroneUI() -> DroneTab:
+	return DroneUI
+func GetThrustUI() -> ThrustSlider:
+	return ThrustUI
 func GetCamera() -> ShipCamera:
-	return $SubViewportContainer/ViewPort/ShipCamera
+	return _Camera
+	
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
@@ -184,8 +209,6 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		SpotList.insert(g, sc)
 	
 	call_deferred("GenerateRoads")
-	#call_deferred("accept_event")
-	#call_deferred(accept_event())
 	GetCamera().call_deferred("FrameCamToPlayer")
 #////////////////////////////////////////////	
 #SIGNALS COMMING FROM PLAYER SHIP
@@ -194,9 +217,9 @@ func ShipStartedMoving():
 func ShipStoppedMoving():
 	GetCamera().applyshake()
 func OnScreenUiToggled(t : bool) -> void:
-	$OuterUI/ScreenUi.visible = t
-func ShipForcedStop():
-	thrust_slider.ZeroAcceleration()
+	ScreenUI.visible = !t
+#func ShipForcedStop():
+	#thrust_slider.ZeroAcceleration()
 #INPUT HANDLING////////////////////////////
 func _MAP_INPUT(event: InputEvent) -> void:
 	if (event is InputEventScreenTouch):
@@ -483,15 +506,38 @@ func _on_speed_simulation_button_down() -> void:
 func _on_speed_simulation_button_up() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
 
-func _on_missile_button_pressed() -> void:
-	GetPlayerShip().FireMissile()
-
 func _on_marker_plecement_pressed() -> void:
 	ToggleMapMarkerPlacementAuto()
-
 func _on_exit_map_marker_pressed() -> void:
 	ToggleMapMarkerPlecement(false)
 
 func _on_clear_lines_pressed() -> void:
 	for g in $SubViewportContainer/ViewPort/MapPointerManager/MapLines.get_children():
 		g.queue_free()
+
+func _on_inventory_button_pressed() -> void:
+	GetInScreenUI().GetInventory().ToggleInventory()
+	
+
+func _on_pause_pressed() -> void:
+	GetInScreenUI().Pause()
+func _on_return_pressed() -> void:
+	GetInScreenUI().Pause()
+func _on_captain_button_pressed() -> void:
+	GetInScreenUI().GetCapUI()._on_captain_button_pressed()
+
+
+func _on_land_button_pressed() -> void:
+	LandButton.emit()
+
+
+func _on_radar_button_pressed() -> void:
+	RadarButton.emit()
+
+
+func _on_controlled_ship_return_pressed() -> void:
+	ShipReturnButton.emit()
+
+
+func _on_controlled_ship_switch_pressed() -> void:
+	ShipswitchButton.emit()

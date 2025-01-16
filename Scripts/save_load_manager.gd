@@ -10,9 +10,10 @@ static func GetInstance() -> SaveLoadManager:
 	return Instance
 
 # Called when the node enters the scene tree for the first time.
-func Save(world : World) -> void:
+func Save() -> void:
+	var world = World.GetInstance()
 	var Mapz = world.GetMap() as Map
-	var Inv = world.GetInventory() as Inventory
+	var Inv = world.GetInventory() as InventoryManager
 	var DataArray : Array[Resource] = []
 	DataArray.append(Mapz.GetSaveData())
 	DataArray.append(Mapz.GetMapMarkerEditorSaveData())
@@ -39,10 +40,10 @@ func Load(world : World) ->bool:
 	
 	var sav = load("user://SavedGame.tres") as SaveData
 	var Mapz = world.GetMap() as Map
-	var Inv = world.GetInventory() as Inventory
+	var Inv = world.GetInventory() as InventoryManager
 	var DiagHolder = world.GetDialogueProgress()
 	var mapdata : Array[Resource] = (sav.GetData("Towns") as SaveData).Datas
-	var InvData : Array[Resource] = (sav.GetData("InventoryContents") as SaveData).Datas
+	var InvData : SaveData = sav.GetData("InventoryContents") as SaveData
 	var StatData : Resource = sav.GetData("Stats")
 	var ShipDat : BaseShip = (sav.GetData("Ship") as SaveData).Datas[0]
 	DiagHolder.ToldDialogues =  sav.GetData("SpokenDiags") as SpokenDialogueEntry

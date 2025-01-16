@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://732b0m15lc18"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://732b0m15lc18"]
 
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_jils6"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_8krx2"]
-[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="2_w2xra"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_8krx2"]
+[ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="2_dongv"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="2_w2xra"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_ijy7h"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/MediumEngine.tres" id="4_adnd2"]
 
@@ -18,6 +19,7 @@ IsDamaged = false
 RepairItems = Array[ExtResource("2_8krx2")]([ExtResource("3_ijy7h"), ExtResource("3_ijy7h")])
 UpAmmSymbol = "lt / km"
 ItemIcon = ExtResource("1_jils6")
+ItemIconSmol = ExtResource("2_dongv")
 ItemName = "Engine"
 ItemDesc = "Standard issue nuclear fusion engine."
 MaxStackCount = 1

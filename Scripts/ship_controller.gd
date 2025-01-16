@@ -1,5 +1,6 @@
 extends Node
 
+@export var _Map : Map
 @export var DroneDockEventH : DroneDockEventHandler
 
 @onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
@@ -18,9 +19,15 @@ func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	AvailableShips.append(ControlledShip)
-	$"../Map/OuterUI/ScreenUi/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
-	$"../Map/OuterUI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
-	$"../Map/OuterUI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
+	_Map.GetSteeringWheelUI().ForceSteer(ControlledShip.GetSteer())
+	_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
+	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
+	
+	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
+	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
+	
+	_Map.GetThrustUI().connect("AccelerationChanged", AccelerationChanged)
+	_Map.GetSteeringWheelUI().connect("SteeringDitChanged", SteerChanged)
 
 func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
 	AvailableShips.erase(D)
@@ -74,7 +81,7 @@ func OnShipLanded(Ship : MapShip) -> void:
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 
 func FuelTransactionFinished(BFuel : float, BRepair: float, NewCurrency : float, Ship : MapShip):
-	ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
+	#ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
 	var spot = Ship.CurrentPort as MapSpot
 	if (spot.PlayerFuelReserves != BFuel):
 		spot.CityFuelReserves -= BFuel
@@ -142,13 +149,15 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 		ControlledShip.ToggleFuelRangeVisibility(false)
 		ControlledShip = AvailableShips[currentcontrolled + 1]
 	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
-	$"../Map/OuterUI/ThrustSlider".ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	$"../Map/OuterUI/ScreenUi/SteeringWheel".ForceSteer(ControlledShip.GetSteer())
+	_Map.GetThrustUI().ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	_Map.GetSteeringWheelUI().ForceSteer(ControlledShip.GetSteer())
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
-	$"../Map/OuterUI/ScreenUi/Elint".UpdateConnectedShip(ControlledShip)
-	$"../Map/OuterUI/ScreenUi/DroneTab".UpdateConnectedShip(ControlledShip)
-
+	_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
+	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
+	_Map.GetInScreenUI().GetInventory().ShipStats.SetValues(ControlledShip.Cpt)
+	
+	
 var camtw : Tween
 func FrameCamToShip():
 	if (camtw != null):
@@ -157,7 +166,6 @@ func FrameCamToShip():
 	var plpos = ControlledShip.global_position
 	camtw.set_trans(Tween.TRANS_EXPO)
 	camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
-
 
 func _on_controlled_ship_return_pressed() -> void:
 	if (ControlledShip is Drone and !ControlledShip.CommingBack):

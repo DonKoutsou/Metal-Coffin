@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bdisf4wscxmw5"]
+[gd_scene load_steps=54 format=3 uid="uid://ycfkup05mxe1"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_mq604"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_5r2qd"]
@@ -25,7 +25,7 @@
 [ext_resource type="Script" path="res://Scripts/CircleDrawer.gd" id="23_q5rq1"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/Map_Marker_Editor.tscn" id="23_vhdnp"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/simulation_notification.tscn" id="25_ux7bi"]
-[ext_resource type="PackedScene" uid="uid://b7owbjefasxhp" path="res://Scenes/InventoryUI.tscn" id="26_wbn50"]
+[ext_resource type="PackedScene" uid="uid://c8emfm3d0e45d" path="res://Scenes/InventoryUI.tscn" id="26_wbn50"]
 [ext_resource type="Texture2D" uid="uid://mw7ipxjn6yxm" path="res://Assets/UIPiecies/CrewButton_Camera 1.png" id="26_y7o3o"]
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="27_0t7uv"]
 [ext_resource type="Texture2D" uid="uid://cmhuyu65hbo36" path="res://Assets/UIPiecies/CrewButtonPressed_Camera 1.png" id="27_x5hrs"]
@@ -256,10 +256,11 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="InventoryUI" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Control" instance=ExtResource("26_wbn50")]
-visible = false
 layout_mode = 1
-offset_top = -1.0
-offset_bottom = 1.0
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
 
 [node name="CaptainUI" parent="CanvasLayer/SubViewportContainer/SubViewport/InScreenUI/Control3/Control" instance=ExtResource("34_jwdde")]
 visible = false

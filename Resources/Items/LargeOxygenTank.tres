@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=5 format=3 uid="uid://bky83js31le74"]
 
 [ext_resource type="Texture2D" uid="uid://coh3ud4i7ph3f" path="res://Assets/Items/cannister.png" id="1_5kdlo"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_562da"]
-[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="3_bo8sm"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_562da"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_bo8sm"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_g3aci"]
 
 [resource]

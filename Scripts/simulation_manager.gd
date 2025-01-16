@@ -2,6 +2,8 @@ extends Node
 
 class_name SimulationManager
 
+@export var _Map : Map
+
 static var Paused : bool = false
 static var SimulationSpeed : int = 1
 
@@ -26,14 +28,15 @@ func TogglePause(t : bool) -> void:
 	simulation_notification.set_physics_process(t)
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
-	Inventory.GetInstance().OnSimulationPaused(t)
+	#Inventory.GetInstance().OnSimulationPaused(t)
+	_Map.GetInScreenUI().GetInventory().OnSimulationPaused(t)
 	Commander.GetInstance().OnSimulationPaused(t)
 	get_tree().call_group("Clock", "ToggleSimulation", t)
 
 func SetSimulationSpeed(Speed : int) -> void:
 	SimulationSpeed = Speed
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
-	$"../VBoxContainer/Inventory".OnSimulationSpeedChanged(SimulationSpeed)
+	_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
 	Commander.GetInstance().OnSimulationSpeedChanged(SimulationSpeed)
 	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)
 
@@ -43,5 +46,5 @@ func SpeedToggle(t : bool) -> void:
 	else:
 		SimulationSpeed = 1
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
-	$"../Inventory".OnSimulationSpeedChanged(SimulationSpeed)
+	_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
 	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)

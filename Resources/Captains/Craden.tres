@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://caroffy3ubxip"]
+[gd_resource type="Resource" script_class="Captain" load_steps=17 format=3 uid="uid://caroffy3ubxip"]
 
 [ext_resource type="Texture2D" uid="uid://bt647g030nod" path="res://Assets/CaptainPortraits/Captain10.png" id="1_k5wxp"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_5s782"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_ttymy"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_y0oxi"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_yi83q"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="5_a5h7b"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="6_s2hhx"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="7_owr8l"]
 
 [sub_resource type="Resource" id="Resource_bp15r"]
 script = ExtResource("2_ttymy")
@@ -17,7 +21,7 @@ AllowAutoRefil = false
 
 [sub_resource type="Resource" id="Resource_s5ab2"]
 script = ExtResource("2_ttymy")
-StatName = "RADAR_RANGE"
+StatName = "VIZ_RANGE"
 StatMax = 300.0
 StatBase = 50.0
 StatShipBuff = 0.0
@@ -28,8 +32,8 @@ AllowAutoRefil = false
 [sub_resource type="Resource" id="Resource_f25rj"]
 script = ExtResource("2_ttymy")
 StatName = "INVENTORY_CAPACITY"
-StatMax = 3.0
-StatBase = 1.0
+StatMax = 10.0
+StatBase = 4.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -93,3 +97,5 @@ CaptainPortrait = ExtResource("1_k5wxp")
 ShipIcon = ExtResource("3_yi83q")
 CaptainStats = Array[ExtResource("2_ttymy")]([SubResource("Resource_bp15r"), SubResource("Resource_s5ab2"), SubResource("Resource_f25rj"), SubResource("Resource_j8fdu"), SubResource("Resource_dap26"), SubResource("Resource_rifue"), SubResource("Resource_pno3o"), SubResource("Resource_pew21")])
 ShipCallsign = "P"
+StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_a5h7b"), ExtResource("6_s2hhx"), ExtResource("7_owr8l")])
+CurrentPort = ""

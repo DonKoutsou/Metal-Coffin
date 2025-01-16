@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_tujyv"]
 [ext_resource type="Texture2D" uid="uid://oi7dcafqr3rt" path="res://Assets/control-tower.png" id="2_5pdsa"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_by1cj"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_1khm3"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_1khm3"]
 [ext_resource type="Script" path="res://Scripts/HappeningOption.gd" id="3_npq0v"]
 [ext_resource type="Script" path="res://Scripts/ShipHappeningOption.gd" id="4_365tn"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_b4kvc"]

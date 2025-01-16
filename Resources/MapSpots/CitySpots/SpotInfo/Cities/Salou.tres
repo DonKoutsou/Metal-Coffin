@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://0htbclijowxk"]
 
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_rpe74"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="1_rpe74"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_ie2gy"]
 
 [resource]

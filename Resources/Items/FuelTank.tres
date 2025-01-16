@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://33sxgbk0di7b"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://33sxgbk0di7b"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_2e0sy"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_rbprg"]
-[ext_resource type="Script" path="res://Scripts/ShipPartItem.gd" id="2_sc66u"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_rbprg"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="2_sc66u"]
+[ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_tdcwm"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_w076d"]
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/MediumFuelTank.tres" id="4_ox6xo"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_sc66u")
-UpgradeName = "FUEL"
+UpgradeName = "FUEL_TANK"
 UpgradeAmm = 300.0
 CurrentVal = 300.0
 UpgradeVersion = ExtResource("4_ox6xo")
@@ -18,6 +19,7 @@ IsDamaged = false
 RepairItems = Array[ExtResource("2_rbprg")]([ExtResource("3_w076d"), ExtResource("3_w076d")])
 UpAmmSymbol = "Cubic Tons"
 ItemIcon = ExtResource("1_2e0sy")
+ItemIconSmol = ExtResource("2_tdcwm")
 ItemName = "Fuel Tank"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1

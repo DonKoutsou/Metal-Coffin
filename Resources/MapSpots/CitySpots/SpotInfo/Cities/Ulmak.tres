@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_1xbgu"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_6cvg6"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_eogw7"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="1_eogw7"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_3k28t"]
 
 [resource]

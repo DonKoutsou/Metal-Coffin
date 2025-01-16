@@ -21,13 +21,13 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		for g in MainShip.GetDroneDock().DockedDrones:
 			var Ship = g as HostileShip
 			
-			var dronefuel = (MainShip.GetShipSpeed() / 10 / Ship.Cpt.GetStatValue("FUEL_EFFICIENCY")) * SimulationSpeed
+			var dronefuel = (MainShip.GetShipSpeed() / 10 / Ship.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")) * SimulationSpeed
 			if (Ship.Cpt.GetStatCurrentValue("FUEL_TANK") > dronefuel):
 				Ship.Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
 			else : if (MainShip.Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
 				MainShip.Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
 		
-		var ftoconsume = MainShip.GetShipSpeed() / 10 / MainShip.Cpt.GetStatValue("FUEL_EFFICIENCY") * SimulationSpeed
+		var ftoconsume = MainShip.GetShipSpeed() / 10 / MainShip.Cpt.GetStatFinalValue("FUEL_EFFICIENCY") * SimulationSpeed
 		if (MainShip.Cpt.GetStatCurrentValue("FUEL_TANK") > ftoconsume):
 			MainShip.Cpt.GetStat("FUEL_TANK").ConsumeResource(ftoconsume)
 		else: if (MainShip.GetDroneDock().DronesHaveFuel(ftoconsume)):

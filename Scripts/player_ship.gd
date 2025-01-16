@@ -2,76 +2,12 @@ extends MapShip
 
 class_name PlayerShip
 
-@export var CaptainIcon : Texture
-
 #static var Instance : PlayerShip
 
 func _ready() -> void:
 	super()
 	#Instance = self
 
-func _physics_process(_delta: float) -> void:
-	super(_delta)
-	if (Paused):
-		return
-	
-	var Dat = ShipData.GetInstance()
-	#if ($Aceleration.position.x == 0):
-	if (CurrentPort != null):
-		#CurrentPort.OnSpotVisited()
-		#if (CanRefuel):
-		if (!Dat.IsResourceFull("FUEL") and CurrentPort.PlayerFuelReserves > 0):
-			var maxfuelcap = Dat.GetStat("FUEL").GetStat()
-			var currentfuel = Dat.GetStat("FUEL").GetCurrentValue()
-			var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
-			ShipDockActions.emit("Refueling", true, roundi(timeleft))
-			Dat.RefilResource("FUEL", 0.05 * SimulationSpeed)
-			CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
-		else:
-			ShipDockActions.emit("Refueling", false, 0)
-		#if (CanRepair):
-		if (!Dat.IsResourceFull("HULL") and CurrentPort.PlayerRepairReserves):
-			var timeleft = ((Dat.GetStat("HULL").GetStat() - Dat.GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
-			ShipDockActions.emit("Repairing", true, roundi(timeleft))
-			Dat.RefilResource("HULL", 0.05 * SimulationSpeed)
-		else:
-			ShipDockActions.emit("Repairing", false, 0)
-			#ToggleShowRefuel("Repairing", false)
-		if (CanUpgrade):
-			var inv = Inventory.GetInstance()
-			if (inv.UpgradedItem != null):
-				#ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-				ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-			else:
-				ShipDockActions.emit("Upgrading", false, 0)
-				#ToggleShowRefuel("Upgrading", false)
-
-	var FuelConsumtion = ($Aceleration.position.x / 10 / ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
-	
-	#Consume fuel on shif if enough
-	if (Dat.GetStat("FUEL").GetCurrentValue() >= FuelConsumtion):
-		Dat.ConsumeResource("FUEL", FuelConsumtion)
-	# If not enough on ship syphoon some from drones in dock
-	else: if (GetDroneDock().DronesHaveFuel(FuelConsumtion)):
-		GetDroneDock().SyphonFuelFromDrones(FuelConsumtion)
-		#SetFuelShaderRange(GetFuelRange())
-	else:
-		HaltShip()
-		PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
-		return
-	#TODO fix drones not being able to syphon gas, once at 0 all fleet is not able to move
-	for g in GetDroneDock().DockedDrones:
-		var dronefuel = ($Aceleration.position.x / 10 / g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
-		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > dronefuel):
-			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
-		else : if (Dat.GetStat("FUEL").GetCurrentValue() >= dronefuel):
-			Dat.ConsumeResource("FUEL", dronefuel)
-		else:
-			HaltShip()
-			PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
-	
-	var offset = GetShipSpeedVec()
-	global_position += offset * SimulationSpeed
 	#for g in SimulationSpeed:
 		#global_position = $Aceleration.global_position
 
@@ -93,11 +29,11 @@ func RemovePort():
 		g.RemovePort()
 		
 func Damage(amm : float) -> void:
-	ShipData.GetInstance().GetStat("HULL").CurrentVelue -= amm
+	Cpt.GetStat("HULL").CurrentVelue -= amm
 	super(amm)
 		
 func IsDead() -> bool:
-	return ShipData.GetInstance().GetStat("HULL").CurrentVelue <= 0
+	return Cpt.GetStat("HULL").CurrentVelue <= 0
 	
 func UpdateAltitude(NewAlt : float) -> void:
 	super(NewAlt)
@@ -110,8 +46,8 @@ func Steer(Rotation : float) -> void:
 		g.Steer(Rotation)
 
 func GetFuelRange() -> float:
-	var fuel = ShipData.GetInstance().GetStat("FUEL").GetCurrentValue()
-	var fuel_ef = ShipData.GetInstance().GetStat("FUEL_EFFICIENCY").GetStat()
+	var fuel = Cpt.GetStat("FUEL_TANK").GetCurrentValue()
+	var fuel_ef = Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
 	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
 	var total_fuel = fuel
 	var inverse_ef_sum = 1.0 / fuel_ef
@@ -128,22 +64,22 @@ func GetFuelRange() -> float:
 	return (total_fuel * 10 * effective_efficiency) / fleetsize
 func GetElintLevel(Dist : float) -> int:
 	var Lvl = 1
-	if (Dist < ShipData.GetInstance().GetStat("ELINT").GetStat() * 0.3):
+	if (Dist < Cpt.GetStat("ELINT").GetStat() * 0.3):
 		Lvl = 3
-	else : if(Dist < ShipData.GetInstance().GetStat("ELINT").GetStat() * 0.6):
+	else : if(Dist < Cpt.GetStat("ELINT").GetStat() * 0.6):
 		Lvl = 2
-	else : if(Dist < ShipData.GetInstance().GetStat("ELINT").GetStat()):
+	else : if(Dist < Cpt.GetStat("ELINT").GetStat()):
 		Lvl = 1
 	else :
 		Lvl = 0
 	return Lvl
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = ShipData.GetInstance().GetStat("HULL").GetCurrentValue()
+	stats.Hull = Cpt.GetStat("HULL").GetCurrentValue()
 	stats.Speed = GetShipMaxSpeed()
-	stats.FirePower = ShipData.GetInstance().GetStat("FIREPOWER").GetStat()
+	stats.FirePower = Cpt.GetStat("FIREPOWER").GetStat()
 	stats.ShipIcon = ShipType.TopIcon
-	stats.CaptainIcon = CaptainIcon
+	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
 	return stats
 func GetShipName() -> String:

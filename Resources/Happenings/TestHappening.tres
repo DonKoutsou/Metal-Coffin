@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/HappeningOption.gd" id="1_jd7ju"]
 [ext_resource type="Script" path="res://Scripts/ResourceHappeningOption.gd" id="2_dqww5"]
 [ext_resource type="Script" path="res://Scripts/Happening.gd" id="2_etprd"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_nsq7x"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_nsq7x"]
 [ext_resource type="Resource" uid="uid://dod4ugx85516y" path="res://Resources/Items/OxygenTank.tres" id="4_j0vhq"]
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/LargeFuelTank.tres" id="5_7d1g5"]
 [ext_resource type="Script" path="res://Scripts/ItemHappeningOption.gd" id="5_ofmhk"]

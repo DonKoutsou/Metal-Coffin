@@ -10,10 +10,11 @@
 [ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/Dormak.tres" id="8_16bcg"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="9_w7njc"]
 [ext_resource type="Texture2D" uid="uid://cjs06ul2657jw" path="res://Assets/block-house.png" id="10_qt1a1"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="11_7vp1d"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="11_7vp1d"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="12_6lqdd"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="13_2vuu3"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="14_y50ce"]
+
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ustqo"]
 blend_mode = 1

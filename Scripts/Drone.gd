@@ -2,90 +2,19 @@ extends MapShip
 
 class_name Drone
 
-@export var Cpt : Captain
 
-var CommingBack = false
-var Docked = true
+
+
 
 signal DroneReturning
 
 func  _ready() -> void:
 	super()
-	for g in Cpt.CaptainStats:
-		g.CurrentVelue = g.GetStat()
-	UpdateVizRange(Cpt.GetStatValue("RADAR_RANGE"))
-	UpdateELINTTRange(Cpt.GetStatValue("ELINT"))
+	
+	UpdateVizRange(Cpt.GetStatFinalValue("VIZ_RANGE"))
+	UpdateELINTTRange(Cpt.GetStatFinalValue("ELINT"))
 	Paused = SimulationManager.IsPaused()
-	
-func _physics_process(_delta: float) -> void:
-	super(_delta)
-	if (Paused):
-		return
-	#if ($Aceleration.position.x == 0):
-	if (CurrentPort != null):
-		#CurrentPort.OnSpotVisited()
-		#if (CanRefuel):
-		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStatValue("FUEL_TANK") and CurrentPort.PlayerFuelReserves > 0):
-			var maxfuelcap = Cpt.GetStatValue("FUEL_TANK")
-			var currentfuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
-			var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
-			ShipDockActions.emit("Refueling", true, roundi(timeleft))
-			#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-			Cpt.GetStat("FUEL_TANK").CurrentVelue +=  0.05 * SimulationSpeed
-			CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
-		else:
-			ShipDockActions.emit("Refueling", false, 0)
-				#ToggleShowRefuel("Refueling", false)
-		#if (CanRepair):
-		if (Cpt.GetStat("HULL").GetCurrentValue() < Cpt.GetStat("HULL").GetStat() and CurrentPort.PlayerRepairReserves > 0):
-			var timeleft = ((Cpt.GetStat("HULL").GetStat() - Cpt.GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
-			ShipDockActions.emit("Repairing", true, roundi(timeleft))
-			#ToggleShowRefuel("Repairing", true, roundi(timeleft))
-			Cpt.GetStat("HULL").RefilCurrentVelue(0.05 * SimulationSpeed)
-		else:
-			ShipDockActions.emit("Repairing", false, 0)
-				#ToggleShowRefuel("Repairing", false)
-		#if (CanUpgrade):
-			#var inv = Inventory.GetInstance()
-			#if (inv.UpgradedItem != null):
-				##ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-				#ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-			#else:
-				#ShipDockActions.emit("Upgrading", false, 0)
-				##ToggleShowRefuel("Upgrading", false)
-	if (Docked):
-		return
-	
-	var FuelConsumtion = $Aceleration.position.x / 10 / Cpt.GetStatValue("FUEL_EFFICIENCY") * SimulationSpeed
-	
-	#Consume fuel on shif if enough
-	if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= FuelConsumtion):
-		Cpt.GetStat("FUEL_TANK").CurrentVelue -= FuelConsumtion
-	# If not enough on ship syphoon some from drones in dock
-	else: if (GetDroneDock().DronesHaveFuel(FuelConsumtion)):
-		GetDroneDock().SyphonFuelFromDrones(FuelConsumtion)
-		#SetFuelShaderRange(GetFuelRange())
-	else:
-		HaltShip()
-		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
-		return
-	#if (Cpt.GetStat("FUEL_TANK").CurrentVelue <= 0)
-	
-	if (CommingBack):
-		updatedronecourse()
-	
-	for g in GetDroneDock().DockedDrones:
-		var dronefuel = ($Aceleration.position.x / 10 / g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
-		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > dronefuel):
-			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
-		else : if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
-			Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
-		else:
-			HaltShip()
-			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
 
-	var offset = GetShipSpeedVec()
-	global_position += offset * SimulationSpeed
 
 func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
@@ -117,7 +46,7 @@ func EnableDrone():
 		TakeoffStarted.emit()
 		TakingOff = true
 	$AudioStreamPlayer2D.play()
-	GetShipAcelerationNode().position.x = Cpt.GetStatValue("SPEED")
+	GetShipAcelerationNode().position.x = Cpt.GetStatFinalValue("SPEED")
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 func DissableDrone():
@@ -134,19 +63,7 @@ func ReturnToBase():
 	DroneReturning.emit()
 	#Docked = false
 
-func updatedronecourse():
-	var plship = Command
-	# Get the current position and velocity of the ship
-	
-	var ship_position = plship.position
-	var ship_velocity = plship.GetShipSpeedVec()
 
-	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / GetShipSpeed()
-
-	# Calculate the predicted interception point
-	var predicted_position = ship_position + ship_velocity * time_to_interception
-	ShipLookAt(predicted_position)
 func SetCurrentPort(Port : MapSpot):
 	super(Port)
 	var dr = GetDroneDock().DockedDrones
@@ -228,8 +145,8 @@ func GetSaveData() -> DroneSaveData:
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStat("HULL").CurrentVelue
-	stats.FirePower = Cpt.GetStatValue("FIREPOWER")
-	stats.Speed = Cpt.GetStatValue("SPEED")
+	stats.FirePower = Cpt.GetStatFinalValue("FIREPOWER")
+	stats.Speed = Cpt.GetStatFinalValue("SPEED")
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = Cpt.CaptainName
@@ -246,7 +163,7 @@ func GetElintLevel(Dist : float) -> int:
 		Lvl = 0
 	return Lvl
 func GetShipMaxSpeed() -> float:
-	return Cpt.GetStatValue("SPEED")
+	return Cpt.GetStatFinalValue("SPEED")
 func IsFuelFull() -> bool:
 	for g in GetDroneDock().DockedDrones:
 		if (!g.IsFuelFull()):

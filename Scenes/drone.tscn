@@ -53,8 +53,8 @@ radius = 150.0
 [node name="Drone" type="Node2D" groups=["Ships"]]
 material = SubResource("CanvasItemMaterial_p3smt")
 script = ExtResource("1_vfr1e")
-Cpt = ExtResource("3_fw0pf")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
+Cpt = ExtResource("3_fw0pf")
 
 [node name="SmokeParticles" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_ewj1d")

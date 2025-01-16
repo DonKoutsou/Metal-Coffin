@@ -1,5 +1,7 @@
 extends Control
 
+class_name SteeringWheelUI
+
 @export var PositionOnStart : bool = true
 
 var SteeringDir : float = 0.0

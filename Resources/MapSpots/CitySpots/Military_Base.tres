@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_0yych"]
 [ext_resource type="Texture2D" uid="uid://btagt34t2urjj" path="res://Assets/barracks.png" id="2_3vbfk"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="3_1nr0o"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_1nr0o"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_jeieq"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_epl8d"]
 

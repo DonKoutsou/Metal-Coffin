@@ -6,6 +6,8 @@ class_name MissileDock
 
 var Missiles : Array[MissileItem]
 
+
+
 func _ready() -> void:
 	$MissileLine.visible = false
 	MissileDockEventH.connect("OnMissileDirectionChanged", MissileAimDirChanged)
@@ -14,6 +16,8 @@ func _ready() -> void:
 	MissileDockEventH.connect("MissileLaunched", LaunchMissile)
 	MissileDockEventH.connect("MissileAdded", AddMissile)
 	MissileDockEventH.connect("MissileRemoved", MissileRemoved)
+
+
 
 func ClearAllMissiles() -> void:
 	for g in Missiles:

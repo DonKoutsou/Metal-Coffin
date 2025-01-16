@@ -1,0 +1,205 @@
+extends Control
+
+class_name InventoryManager
+
+@export_group("Scenes")
+@export var CharInvScene : PackedScene
+@export var ItemDescriptorScene : PackedScene
+@export var ItemTransferScene : PackedScene
+@export var ItemNotifScene : PackedScene
+@export_group("Nodes")
+@export var CharacterPlace : Control
+@export var DescriptorPlace : Control
+@export var ShipStats : InventoryShipStats
+@export_group("Event Handlers")
+@export var MissileDockEventH : MissileDockEventHandler
+@export var DroneDockEventH : DroneDockEventHandler
+
+var _CharacterInventories : Dictionary
+var SimPaused : bool = false
+var SimSpeed : int = 1
+
+signal InventoryToggled(t : bool)
+
+static var Instance : InventoryManager
+
+static func GetInstance() -> InventoryManager:
+	return Instance
+
+func _ready() -> void:
+	MissileDockEventH.connect("MissileLaunched", OnMissileLaunched)
+	DroneDockEventH.connect("DroneAdded", DroneAdded)
+	Instance = self
+
+func GetCharacterInventory(Cha : Captain) -> CharacterInventory:
+	return _CharacterInventories[Cha]
+
+func OnMissileLaunched(Mis : MissileItem, Target : Captain):
+	var CharacterInv = _CharacterInventories[Target] as CharacterInventory
+	CharacterInv.RemoveItem(Mis)
+
+func OnSimulationPaused(t : bool) -> void:
+	SimPaused = t
+	for g in _CharacterInventories.values():
+		g.SimPaused = t
+func OnSimulationSpeedChanged(i : int) -> void:
+	SimSpeed = i
+	for g in _CharacterInventories.values():
+		g.SimSpeed = i
+func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
+	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+	if (descriptors.size() > 0):
+		var desc = descriptors[0] as ItemDescriptor
+		desc.queue_free()
+		if (desc.DescribedContainer == Box):
+			return
+		
+	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
+	
+	DescriptorPlace.add_child(Descriptor)
+	Descriptor.SetData(Box)
+	#Descriptor.connect("ItemUsed", UseItem)
+	Descriptor.connect("ItemUpgraded", OwnerInventory.UpgradeItem)
+	Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
+	Descriptor.connect("ItemTransf", ItemTranfer)
+	#Descriptor.connect("ItemRepaired", RepairPart)
+	
+
+func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
+	var Cpt = GetBoxOwner(Box)
+	if (Cpt.CurrentPort == ""):
+		#PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
+		print("Ship needs to be docked to upgrade")
+		return
+	OwnerInventory.StartUpgrade(Box)
+
+func CancelUpgrades(Cha : Captain) -> void:
+	var CharInv = _CharacterInventories[Cha] as CharacterInventory
+	CharInv.CancelUpgrade()
+	
+	
+func ItemTranfer(Box : Inventory_Box) -> void:
+	var Cpt = GetBoxOwner(Box)
+	var OwnerInventory = _CharacterInventories[Cpt] as CharacterInventory
+	
+	var Transfer = ItemTransferScene.instantiate() as ItemTransfer
+	add_child(Transfer)
+	var AvailableCaptains : Array[Captain]
+	for g in _CharacterInventories.keys():
+		if (g == Cpt):
+			continue
+		var inv = _CharacterInventories[g]
+		if (inv.HasSpaceForItem(Box.GetContainedItem())):
+			AvailableCaptains.append(g)
+	Transfer.SetData(AvailableCaptains)
+	await Transfer.CharacterSelected
+	var SelectedChar = Transfer.SelectedCharacter
+	if (SelectedChar == null):
+		return
+	var SelectedCharInventory = _CharacterInventories[SelectedChar] as CharacterInventory
+	SelectedCharInventory.AddItem(Box.GetContainedItem())
+	OwnerInventory.RemoveItemFromBox(Box)
+	
+	
+func GetBoxOwner(Box : Inventory_Box) -> Captain:
+	for g in _CharacterInventories.keys():
+		for z in _CharacterInventories[g]._GetInventoryBoxes():
+			if (z == Box):
+				return g
+	return null
+
+func DroneAdded(Dr : Drone, Target : MapShip):
+	AddCharacter(Dr.Cpt)
+
+func AddCharacter(Cha : Captain) -> void:
+	var CharInv = CharInvScene.instantiate() as CharacterInventory
+	
+	CharInv.InitialiseInventory(Cha)
+	_CharacterInventories[Cha] = CharInv
+	CharacterPlace.add_child(CharInv)
+	
+	CharInv.connect("BoxSelected", BoxSelected)
+	CharInv.connect("ItemUpgrade", ItemUpdgrade)
+	CharInv.connect("OnItemAdded", OnItemAdded.bind(Cha))
+	CharInv.connect("OnItemRemoved", OnItemRemoved.bind(Cha))
+	CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
+	CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
+	
+	for g in Cha.StartingItems:
+		CharInv.AddItem(g)
+
+func OnCharacterRemoved(Cha : Captain) -> void:
+	var Inv = _CharacterInventories[Cha] as CharacterInventory
+	Inv.queue_free()
+	_CharacterInventories.erase(Cha)
+	
+func LoadCharacter(Cha : Captain, LoadedItems : Array[Item]) -> void:
+	var CharInv = CharInvScene.instantiate() as CharacterInventory
+	CharInv.InitialiseInventory(Cha)
+	_CharacterInventories[Cha] = CharInv
+	CharacterPlace.add_child(CharInv)
+	
+	CharInv.connect("BoxSelected", BoxSelected)
+	CharInv.connect("ItemUpgrade", ItemUpdgrade)
+	CharInv.connect("OnItemAdded", OnItemAdded.bind(Cha))
+	CharInv.connect("OnItemRemoved", OnItemRemoved.bind(Cha))
+	CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
+	CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
+	
+	for g in LoadedItems:
+		CharInv.AddItem(g)
+
+func OnItemAdded(It : Item, Owner : Captain) -> void:
+	if (It is MissileItem):
+		MissileDockEventH.OnMissileAdded(It, Owner)
+	ShipStats.UpdateValues()
+	
+func OnItemRemoved(It : Item, Owner : Captain) -> void:
+	if (It is MissileItem):
+		MissileDockEventH.OnMissileRemoved(It, Owner)
+	CloseDescriptor()
+	ShipStats.UpdateValues()
+	
+func CloseDescriptor() -> void:
+	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+	if (descriptors.size() > 0):
+		descriptors[0].queue_free()
+
+func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
+	var Data = SD_CharacterInventory.new()
+	Data.CptName = Cpt.CaptainName
+	var Contents = Inv.GetInventoryContents()
+	for g in Contents.keys():
+		var Ic = ItemContainer.new()
+		Ic.ItemType = g
+		Ic.Ammount = Contents[g]
+	return Data
+	
+	
+func GetSaveData() ->SaveData:
+	var dat = SaveData.new()
+	dat.DataName = "InventoryContents"
+	var Datas : Array[Resource] = []
+	for g in _CharacterInventories.keys():
+		Datas.append(GenerateCaptainSaveData(g, _CharacterInventories[g]))
+	dat.Datas = Datas
+	return dat
+	
+func LoadSaveData(Data : SaveData) -> void:
+	for g in Data.Datas:
+		var dat = g as SD_CharacterInventory
+		
+		var CptInv : CharacterInventory
+		for c in _CharacterInventories.keys():
+			var cpt = c as Captain
+			if (cpt.CaptainName == dat.CptName):
+				CptInv = _CharacterInventories[c]
+		
+		for It in dat.Items:
+			var Ic = It as ItemContainer
+			for Am in Ic.Ammount:
+				CptInv.AddItem(Ic.ItemType)
+
+func ToggleInventory() -> void:
+	visible = !visible
+	InventoryToggled.emit(visible)

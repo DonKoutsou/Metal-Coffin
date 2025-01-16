@@ -3,9 +3,23 @@ class_name MissileTab
 
 var Armed = false
 @export var MissileDockEventH : MissileDockEventHandler
-var Missiles : Array[MissileItem]
+
+#var Missiles : Array[MissileItem]
+
 var CurrentlySelectedMissile
+
 var SelectedIndex : int
+
+var ConnectedShip : MapShip
+
+var Missiles : Dictionary
+
+func UpdateConnectedShip(Ship : MapShip) -> void:
+	if (!Missiles.has(Ship)):
+		var MissileAr : Array[MissileItem] = []
+		Missiles[Ship] = MissileAr
+	ConnectedShip = Ship
+	call_deferred("UpdateCrewSelect")
 
 func _ready() -> void:
 	MissileDockEventH.connect("MissileAdded", MissileAdded)
@@ -14,19 +28,19 @@ func _ready() -> void:
 	$Control/Control/Launch.ToggleDissable(true)
 	#visible = false
 
-func MissileAdded(MIs : MissileItem) -> void:
-	Missiles.append(MIs)
+func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
+	Missiles[Target].append(MIs)
 	if (CurrentlySelectedMissile == null):
 		UpdateCrewSelect()
 
-func MissileRemoved(MIs : MissileItem) -> void:
-	Missiles.erase(MIs)
+func MissileRemoved(MIs : MissileItem, Target : Captain) -> void:
+	Missiles[Target].erade(MIs)
 	if (MIs == CurrentlySelectedMissile):
 		CurrentlySelectedMissile = null
 		UpdateCrewSelect()
 		
 func _on_deploy_drone_button_pressed() -> void:
-	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile)
+	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, ConnectedShip.Cpt)
 	_on_dissarm_drone_button_2_pressed()
 	
 func _on_arm_drone_button_pressed(t : bool) -> void:
