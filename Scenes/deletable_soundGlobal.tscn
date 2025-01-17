@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cudysfqfh2yr6"]
-
-[ext_resource type="Script" path="res://Scripts/deletable_soundGlobal.gd" id="1_2vtgi"]
-
-[node name="DeletableSound" type="AudioStreamPlayer"]
-script = ExtResource("1_2vtgi")
-
-[connection signal="finished" from="." to="." method="_on_finished"]

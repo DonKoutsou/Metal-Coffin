@@ -2,7 +2,7 @@ extends Resource
 class_name MapSpotType
 
 @export var SpotK : SpotKind
-@export var MapIcon : Texture
+#@export var MapIcon : Texture
 #@export var Scene : PackedScene
 #@export var PossibleDrops : Array[Item]
 @export var FullName : String

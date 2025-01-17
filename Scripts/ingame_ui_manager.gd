@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name Ingame_UIManager
 
 @export var _Inventory : InventoryManager
-@export var _CaptainUI : CaptainUI
+#@export var _CaptainUI : CaptainUI
 @export var _MapMarkerEditor : MapMarkerEditor
 @export var PauseContainer : Control
 @export var DiagplScene : PackedScene
@@ -43,8 +43,8 @@ func ToggleInventoryButton(t : bool):
 
 func GetInventory() -> InventoryManager:
 	return _Inventory
-func GetCapUI() -> CaptainUI:
-	return _CaptainUI
+#func GetCapUI() -> CaptainUI:
+	#return _CaptainUI
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return _MapMarkerEditor
 func Pause() -> void:

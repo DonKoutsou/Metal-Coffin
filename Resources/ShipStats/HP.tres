@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://b0nulfa1cfwc8"]
-
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_e20rk"]
-
-[resource]
-script = ExtResource("1_e20rk")
-StatName = "HP"
-StatMax = 100.0
-StatBase = 100.0

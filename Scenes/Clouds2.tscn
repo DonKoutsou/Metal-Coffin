@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://shtkd2xxb6e4"]
 
-[ext_resource type="Shader" path="res://cloud.gdshader" id="1_jyhxu"]
+[ext_resource type="Shader" path="res://Shaders/cloud.gdshader" id="1_jyhxu"]
 [ext_resource type="Script" path="res://Scenes/clouds_2.gd" id="2_5f7b3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rjx82"]

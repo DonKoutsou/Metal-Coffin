@@ -1,41 +1,52 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=14 format=3 uid="uid://djaoab8knkpvx"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=13 format=3 uid="uid://djaoab8knkpvx"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_fq5ct"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_1vnci"]
 [ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_2g2aw"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_lphgm"]
-[ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="5_75pvh"]
+[ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_wtut4"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="6_1pw4v"]
-[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="8_bji58"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_853xu"]
 
 [sub_resource type="Resource" id="Resource_i0qwa"]
 script = ExtResource("2_1vnci")
 SpotName = "Samothrake"
 EnemyCity = false
-HostilePatrolShipName = ""
-HostileShipName = ""
+HostilePatrol = Array[ExtResource("4_wtut4")]([])
+HostilePatrolShipNames = Array[String]([])
+PossibleDrops = Array[ExtResource("6_1pw4v")]([])
+HostileGarrisson = Array[ExtResource("4_wtut4")]([])
+HostileGarrissonShipNames = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_frucv"]
 script = ExtResource("2_1vnci")
 SpotName = "Kazan"
 EnemyCity = false
-HostilePatrolShipName = ""
-HostileShipName = ""
+HostilePatrol = Array[ExtResource("4_wtut4")]([])
+HostilePatrolShipNames = Array[String]([])
+PossibleDrops = Array[ExtResource("6_1pw4v")]([])
+HostileGarrisson = Array[ExtResource("4_wtut4")]([])
+HostileGarrissonShipNames = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_y2cpb"]
 script = ExtResource("2_1vnci")
 SpotName = "Curd"
 EnemyCity = false
-HostilePatrolShipName = ""
-HostileShipName = ""
+HostilePatrol = Array[ExtResource("4_wtut4")]([])
+HostilePatrolShipNames = Array[String]([])
+PossibleDrops = Array[ExtResource("6_1pw4v")]([])
+HostileGarrisson = Array[ExtResource("4_wtut4")]([])
+HostileGarrissonShipNames = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_gjm2h"]
 script = ExtResource("2_1vnci")
 SpotName = "Hijaz"
 EnemyCity = false
-HostilePatrolShipName = ""
-HostileShipName = ""
+HostilePatrol = Array[ExtResource("4_wtut4")]([])
+HostilePatrolShipNames = Array[String]([])
+PossibleDrops = Array[ExtResource("6_1pw4v")]([])
+HostileGarrisson = Array[ExtResource("4_wtut4")]([])
+HostileGarrissonShipNames = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_3mffu"]
 script = ExtResource("4_lphgm")
@@ -45,8 +56,6 @@ DataName = ""
 [resource]
 script = ExtResource("10_853xu")
 SpotK = 13
-MapIcon = ExtResource("5_75pvh")
-PossibleDrops = Array[ExtResource("6_1pw4v")]([ExtResource("8_bji58")])
 FullName = "Chora"
 Description = "blah blah"
 VisibleOnStart = false

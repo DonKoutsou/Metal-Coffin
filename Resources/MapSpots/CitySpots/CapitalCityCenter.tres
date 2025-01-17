@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=22 format=3 uid="uid://dyvpncg7tolc7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=21 format=3 uid="uid://dyvpncg7tolc7"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_qkgba"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_khihf"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Curd.tres" id="4_mjh1h"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_xevlw"]
 [ext_resource type="Resource" uid="uid://dobir15ooa8uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Cirkari.tres" id="6_esr4f"]
-[ext_resource type="Texture2D" uid="uid://cjs06ul2657jw" path="res://Assets/block-house.png" id="6_ixavb"]
 [ext_resource type="Resource" uid="uid://kjwdfwc0h4uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Kalicard.tres" id="7_bot42"]
 [ext_resource type="Resource" uid="uid://ltonn44hg1kq" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Krokaria.tres" id="8_2jrjj"]
 [ext_resource type="Resource" uid="uid://bscbp2mebv4e4" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Jud.tres" id="8_xhovg"]
@@ -29,7 +28,6 @@ DataName = ""
 [resource]
 script = ExtResource("10_jgsae")
 SpotK = 12
-MapIcon = ExtResource("6_ixavb")
 FullName = "City Center"
 Description = "blah blah"
 VisibleOnStart = true

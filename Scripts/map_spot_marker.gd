@@ -23,7 +23,6 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		if (!Spot.Seen):
 			$AnimationPlayer.play("SpotFound")
 			PlaySound()
-	#$VBoxContainer/TextureRect.texture = Spot.SpotType.MapIcon
 	$VBoxContainer/PanelContainer/TextureRect2.text = Spot.SpotInfo.SpotName
 	for g in Spot.SpotInfo.PossibleDrops:
 		var text = TextureRect.new()

@@ -1,22 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://dno0yq1eqewjt"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=3 format=3 uid="uid://dno0yq1eqewjt"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_0yych"]
-[ext_resource type="Texture2D" uid="uid://btagt34t2urjj" path="res://Assets/barracks.png" id="2_3vbfk"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_1nr0o"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_jeieq"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_epl8d"]
 
 [resource]
 script = ExtResource("10_epl8d")
 SpotK = 18
-MapIcon = ExtResource("2_3vbfk")
-PossibleDrops = Array[ExtResource("3_1nr0o")]([ExtResource("4_jeieq")])
 FullName = "Miitary Base"
 Description = "blah blah"
-CanLand = false
-HasAtmoshere = false
 VisibleOnStart = false
 DropAmmount = 1
-EnemyCity = false
-SpawnHostileShip = false
 CustomData = Array[ExtResource("1_0yych")]([])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=17 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" path="res://Scripts/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/simulation_notification.tscn" id="5_g51f2"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://InventorySystem/inventory.tscn" id="6_u1p46"]
-[ext_resource type="PackedScene" uid="uid://bh861bc6qssti" path="res://Scenes/CaptainUI.tscn" id="7_51gob"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="8_cokoq"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
@@ -66,11 +65,10 @@ shader_parameter/scanline_thickness = 0.55
 shader_parameter/scanlines_spacing = 1.85
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_uyww5")
 
-[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_CaptainUI", "_MapMarkerEditor", "PauseContainer")]
+[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer")]
 process_mode = 3
 script = ExtResource("1_3cf0e")
 _Inventory = NodePath("Control3/UnderStatUI/Inventory")
-_CaptainUI = NodePath("Control3/UnderStatUI/CaptainUI")
 _MapMarkerEditor = NodePath("Control3/MapMarkerEditor")
 PauseContainer = NodePath("Control3/PauseContainer")
 DiagplScene = ExtResource("2_ehn1p")
@@ -128,10 +126,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Inventory" parent="Control3/UnderStatUI" instance=ExtResource("6_u1p46")]
-visible = false
-layout_mode = 1
-
-[node name="CaptainUI" parent="Control3/UnderStatUI" instance=ExtResource("7_51gob")]
 visible = false
 layout_mode = 1
 

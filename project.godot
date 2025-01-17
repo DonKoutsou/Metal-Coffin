@@ -14,7 +14,6 @@ config/name="Into The Void"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
-config/icon="res://Assets/plane_Wheel_BaseColor_smol.png"
 
 [autoload]
 
@@ -36,7 +35,7 @@ project/assembly_name="test"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/virtual_joystick/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 
 [global_group]
 

@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=23 format=3 uid="uid://df37gonu46vbl"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=22 format=3 uid="uid://df37gonu46vbl"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_jl7m7"]
-[ext_resource type="Texture2D" uid="uid://bdwodqqgqr3nd" path="res://Assets/village.png" id="2_sgbgx"]
 [ext_resource type="Resource" uid="uid://eemvne8otjn4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Armak.tres" id="3_b6ce5"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_i4484"]
 [ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_snnyn"]
@@ -30,7 +29,6 @@ DataName = ""
 [resource]
 script = ExtResource("10_ex7ij")
 SpotK = 13
-MapIcon = ExtResource("2_sgbgx")
 FullName = "Village"
 Description = "blah blah"
 VisibleOnStart = false

@@ -1,10 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=8 format=3 uid="uid://dsia5ebkwvf6p"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=5 format=3 uid="uid://dsia5ebkwvf6p"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_gvacd"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCustomData_Names.gd" id="2_o4ed3"]
-[ext_resource type="Texture2D" uid="uid://b68abpq2k8t0e" path="res://Assets/observatory.png" id="2_uplcd"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_ps428"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_mnl5k"]
 [ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_kv61i"]
 
 [sub_resource type="Resource" id="Resource_7m0k3"]
@@ -15,8 +12,6 @@ DataName = ""
 [resource]
 script = ExtResource("10_kv61i")
 SpotK = 16
-MapIcon = ExtResource("2_uplcd")
-PossibleDrops = Array[ExtResource("3_ps428")]([ExtResource("6_mnl5k")])
 FullName = "Observatory"
 Description = "blah blah"
 VisibleOnStart = false
