@@ -41,7 +41,6 @@ func FindShip(C: Captain ) -> MapShip:
 			return ship
 	return null
 	
-	
 func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
 	var Ship = FindShip(Target)
 	if (Ship == null):
@@ -63,7 +62,7 @@ func _on_deploy_drone_button_pressed() -> void:
 	_on_dissarm_drone_button_2_pressed()
 	
 func _on_arm_drone_button_pressed(t : bool) -> void:
-	if (Missiles.size() == 0):
+	if (Missiles[ConnectedShip].size() == 0):
 		_on_dissarm_drone_button_2_pressed()
 		return
 	if (!t):
@@ -74,14 +73,14 @@ func _on_arm_drone_button_pressed(t : bool) -> void:
 	$Control/Control/Dissarm.ToggleDissable(false)
 	$Control/Control/Launch.ToggleDissable(false)
 
-	MissileDockEventH.MissileArmed(CurrentlySelectedMissile)
+	MissileDockEventH.MissileArmed(CurrentlySelectedMissile, ConnectedShip.Cpt)
 	
 func _on_dissarm_drone_button_2_pressed() -> void:
 	Armed = false
 	$Control/Control/Arm.button_pressed = false
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
-	MissileDockEventH.MissileDissarmed()
+	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
 
 func _on_toggle_drone_tab_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
@@ -93,7 +92,7 @@ var SteeringDir : float = 0.0
 func UpdateSteer(RelativeRot : float):
 	if (Armed):
 		SteeringDir = RelativeRot
-		MissileDockEventH.MissileDirectionChanged(SteeringDir / 50)
+		MissileDockEventH.MissileDirectionChanged(SteeringDir / 50, ConnectedShip.Cpt)
 
 func UpdateSelected(Dir : bool) -> void:
 	if (!Armed):

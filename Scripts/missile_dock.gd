@@ -6,8 +6,6 @@ class_name MissileDock
 
 var Missiles : Array[MissileItem]
 
-
-
 func _ready() -> void:
 	$MissileLine.visible = false
 	MissileDockEventH.connect("OnMissileDirectionChanged", MissileAimDirChanged)
@@ -17,29 +15,42 @@ func _ready() -> void:
 	MissileDockEventH.connect("MissileAdded", AddMissile)
 	MissileDockEventH.connect("MissileRemoved", MissileRemoved)
 
-
+func IsOwner(Owner : Captain) -> bool:
+	return Owner == get_parent().Cpt
 
 func ClearAllMissiles() -> void:
 	for g in Missiles:
-		MissileRemoved(g)
+		MissileRemoved(g, get_parent().Cpt)
 
-func MissileRemoved(Mis : MissileItem):
+func MissileRemoved(Mis : MissileItem, Owner : Captain):
+	if (!IsOwner(Owner)):
+		return
 	if (Missiles.has(Mis)):
 		Missiles.erase(Mis)
-func AddMissile(Mis : MissileItem):
+func AddMissile(Mis : MissileItem, Owner : Captain):
+	if (!IsOwner(Owner)):
+		return
 	Missiles.append(Mis)
 
-func MissileArmed(Mis : MissileItem) -> void:
+func MissileArmed(Mis : MissileItem, Owner : Captain) -> void:
+	if (!IsOwner(Owner)):
+		return
 	$MissileLine.set_point_position(1, Vector2(Mis.Distance, 0))
 	$MissileLine.visible = true
 
-func MissileDissarmed() -> void:
+func MissileDissarmed(Owner : Captain) -> void:
+	if (!IsOwner(Owner)):
+		return
 	$MissileLine.visible = false
 
-func MissileAimDirChanged(NewDir : float) -> void:
+func MissileAimDirChanged(NewDir : float, Owner : Captain) -> void:
+	if (!IsOwner(Owner)):
+		return
 	$MissileLine.rotation += NewDir
 	
-func LaunchMissile(Mis : MissileItem) -> void:
+func LaunchMissile(Mis : MissileItem, Owner : Captain) -> void:
+	if (!IsOwner(Owner)):
+		return
 	var missile = Mis.MissileScene.instantiate() as Missile
 	missile.SetData(Mis)
 	missile.global_rotation = $MissileLine.global_rotation

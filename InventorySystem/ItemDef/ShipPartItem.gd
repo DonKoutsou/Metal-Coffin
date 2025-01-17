@@ -1,16 +1,17 @@
 extends Item
 class_name ShipPart
 
-@export var UpgradeName : String
-@export var UpgradeAmm : float
-@export var CurrentVal : float
+@export var Upgrades : Array[ShipPartUpgrade]
 @export var UpgradeVersion : ShipPart
 @export var UpgradeTime : float
 @export var IsDamaged : bool = false
 @export var RepairItems : Array[Item]
-@export var UpAmmSymbol : String
 func _setup_local_to_scene() -> void:
-	CurrentVal = UpgradeAmm
+	for Up in Upgrades:
+		Up.CurrentValue = Up.UpgradeAmmount
 
 func GetItemDesc() -> String:
-	return "{0} \n[color=#c19200]{1}[/color] : + {2} {3}".format([ItemDesc, UpgradeName.replace("_", " "), UpgradeAmm, UpAmmSymbol])
+	var UpNames = ""
+	for g in Upgrades.size():
+		UpNames += "\n[color=#c19200]{0}[/color] : + {1} {2}".format([Upgrades[g].UpgradeName.replace("_", " "), Upgrades[g].UpgradeAmmount, Upgrades[g].UpAmmSymbol])
+	return "{0} {1}".format([ItemDesc, UpNames])

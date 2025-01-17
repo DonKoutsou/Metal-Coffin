@@ -114,10 +114,11 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		#PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part. Wait for it to finish first.")
 		print("Ship is already upgrading a part. Wait for it to finish first.")
 		return
-	ItemUpgrade.emit(Box, self)
-	#else :if (!Player.CanUpgrade):
+	#else :if (!Player.cu):
 		#PopUpManager.GetInstance().DoFadeNotif("Cant upgrade ship in current port.")
 		#return
+	ItemUpgrade.emit(Box, self)
+	
 
 func TransferItem(Box : Inventory_Box) -> void:
 	ItemTransf.emit(Box, self)

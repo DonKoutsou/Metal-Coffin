@@ -77,22 +77,27 @@ func RemoveShipStats(ShipStats : Array[BaseShipStat]) -> void:
 				#shipst.StatCurrentVal = dif
 			SD_StatsUpdated.emit(shipst.StatName)
 func ApplyShipPartStat(Part : ShipPart) -> void:
-	var st = GetStat(Part.UpgradeName)
-	_AddToStatItemBuff(Part.UpgradeName ,Part.UpgradeAmm)
-	_AddToStatCurrentValue(st.StatName, Part.CurrentVal)
-	SD_StatsUpdated.emit(st.StatName)
+	for g in Part.Upgrades.size():
+		var Upgr = Part.Upgrades[g] as ShipPartUpgrade
+		var st = GetStat(Upgr.UpgradeName)
+		_AddToStatItemBuff(Upgr.UpgradeName , Upgr.UpgradeAmmount)
+		_AddToStatCurrentValue(st.StatName, Upgr.CurrentValue)
+		SD_StatsUpdated.emit(st.StatName)
+	
 func RemoveShipPartStat(Part : ShipPart) -> void:
-	var st = GetStat(Part.UpgradeName)
-	_AddToStatItemBuff(Part.UpgradeName ,-Part.UpgradeAmm)
-	var newstat = st.GetStat()
-	if (st.CurrentVelue > newstat):
-		var dif = st.CurrentVelue - newstat
-		_UpdateStatCurrentValue(st.StatName, newstat)
-		Part.CurrentVal = dif
-	else:
-		Part.CurrentVal = 0
-		
-	SD_StatsUpdated.emit(st.StatName)
+	for g in Part.Upgrades.size():
+		var Upgr = Part.Upgrades[g] as ShipPartUpgrade
+		var st = GetStat(Upgr.UpgradeName)
+		_AddToStatItemBuff(Upgr.UpgradeName,-Upgr.UpgradeAmmount)
+		var newstat = st.GetStat()
+		if (st.CurrentVelue > newstat):
+			var dif = st.CurrentVelue - newstat
+			_UpdateStatCurrentValue(st.StatName, newstat)
+			Upgr.CurrentValue = dif
+		else:
+			Upgr.CurrentValue = 0
+			
+		SD_StatsUpdated.emit(st.StatName)
 				
 			
 func GetStat(Name : String) -> ShipStat:

@@ -5,5 +5,9 @@
 [resource]
 script = ExtResource("1_q4rv3")
 StatName = "INVENTORY_CAPACITY"
-StatMax = 20.0
+StatMax = 12.0
 StatBase = 0.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
+AllowAutoRefil = false

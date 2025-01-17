@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=17 format=3 uid="uid://caroffy3ubxip"]
+[gd_resource type="Resource" script_class="Captain" load_steps=18 format=3 uid="uid://caroffy3ubxip"]
 
 [ext_resource type="Texture2D" uid="uid://bt647g030nod" path="res://Assets/CaptainPortraits/Captain10.png" id="1_k5wxp"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_5s782"]
@@ -8,12 +8,13 @@
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="5_a5h7b"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="6_s2hhx"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="7_owr8l"]
+[ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShortElint.tres" id="8_jjx6u"]
 
 [sub_resource type="Resource" id="Resource_bp15r"]
 script = ExtResource("2_ttymy")
 StatName = "SPEED"
 StatMax = 3.0
-StatBase = 3.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -22,7 +23,7 @@ AllowAutoRefil = false
 [sub_resource type="Resource" id="Resource_s5ab2"]
 script = ExtResource("2_ttymy")
 StatName = "VIZ_RANGE"
-StatMax = 300.0
+StatMax = 1000.0
 StatBase = 50.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
@@ -32,8 +33,8 @@ AllowAutoRefil = false
 [sub_resource type="Resource" id="Resource_f25rj"]
 script = ExtResource("2_ttymy")
 StatName = "INVENTORY_CAPACITY"
-StatMax = 10.0
-StatBase = 4.0
+StatMax = 12.0
+StatBase = 6.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -52,7 +53,7 @@ AllowAutoRefil = false
 [sub_resource type="Resource" id="Resource_dap26"]
 script = ExtResource("2_ttymy")
 StatName = "HULL"
-StatMax = 300.0
+StatMax = 1000.0
 StatBase = 100.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
@@ -62,8 +63,8 @@ AllowAutoRefil = false
 [sub_resource type="Resource" id="Resource_rifue"]
 script = ExtResource("2_ttymy")
 StatName = "FUEL_EFFICIENCY"
-StatMax = 5.0
-StatBase = 3.0
+StatMax = 3.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -72,7 +73,7 @@ AllowAutoRefil = false
 [sub_resource type="Resource" id="Resource_pno3o"]
 script = ExtResource("2_ttymy")
 StatName = "FUEL_TANK"
-StatMax = 500.0
+StatMax = 1000.0
 StatBase = 150.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
@@ -83,7 +84,7 @@ AllowAutoRefil = false
 script = ExtResource("2_ttymy")
 StatName = "ELINT"
 StatMax = 3000.0
-StatBase = 1500.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -97,5 +98,6 @@ CaptainPortrait = ExtResource("1_k5wxp")
 ShipIcon = ExtResource("3_yi83q")
 CaptainStats = Array[ExtResource("2_ttymy")]([SubResource("Resource_bp15r"), SubResource("Resource_s5ab2"), SubResource("Resource_f25rj"), SubResource("Resource_j8fdu"), SubResource("Resource_dap26"), SubResource("Resource_rifue"), SubResource("Resource_pno3o"), SubResource("Resource_pew21")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_a5h7b"), ExtResource("6_s2hhx"), ExtResource("7_owr8l")])
+StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_a5h7b"), ExtResource("6_s2hhx"), ExtResource("7_owr8l"), ExtResource("8_jjx6u")])
 CurrentPort = ""
+CheckForErrors = true

@@ -239,6 +239,7 @@ grow_vertical = 2
 scale = Vector2(50, 50)
 mouse_filter = 2
 
+[connection signal="pressed" from="Control3/PauseContainer/HBoxContainer/Return" to="." method="Pause"]
 [connection signal="pressed" from="Control3/PauseContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Control3/PauseContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Control3/PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]

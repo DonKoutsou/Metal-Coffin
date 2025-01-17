@@ -71,7 +71,6 @@ func GetSaveData() -> Array[DroneSaveData]:
 func LoadSaveData( Dat : Array[DroneSaveData]) -> void:
 	for g in Dat:
 		var dr = AddCaptain(g.Cpt, false)
-		dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = g.Fuel
 		if (!g.Docked):
 			UndockDrone(dr)
 			dr.EnableDrone()
@@ -177,12 +176,9 @@ func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 		if (neededfuel > 0):
 			#if (Target is Drone):
 			if (Target.Cpt.GetStat("FUEL_TANK").CurrentVelue < neededfuel):
+				PopUpManager.GetInstance().DoFadeNotif("Not enough fuel to perform operation.")
 				return
 			Target.Cpt.GetStat("FUEL_TANK").CurrentVelue -= neededfuel
-			#if (Target is PlayerShip):
-				#if (ShipData.GetInstance().GetStat("FUEL").CurrentVelue < neededfuel):
-					#return
-				#ShipData.GetInstance().ConsumeResource("FUEL", neededfuel)
 		PlayTakeoffSound()
 		UndockDrone(Dr)
 		Dr.global_rotation = $Line2D.global_rotation

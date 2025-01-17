@@ -13,8 +13,8 @@ var ControlledShip : MapShip
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
-	call_deferred("SetInitialShip")
-
+	#call_deferred("SetInitialShip")
+	SetInitialShip()
 func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
@@ -24,24 +24,26 @@ func SetInitialShip() -> void:
 	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
+	_Map.GetInScreenUI().GetInventory().ShipStats.call_deferred("UpdateValues")
 	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
 	_Map.GetThrustUI().connect("AccelerationChanged", AccelerationChanged)
 	_Map.GetSteeringWheelUI().connect("SteeringDitChanged", SteerChanged)
 
 func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
-	AvailableShips.erase(D)
-	if (D.is_connected("OnShipDestroyed", OnShipDestroyed)):
-		D.disconnect("OnShipDestroyed", OnShipDestroyed)
+	if (!AvailableShips.has(D)):
+		AvailableShips.append(D)
+		if (!D.is_connected("OnShipDestroyed", OnShipDestroyed)):
+			D.connect("OnShipDestroyed", OnShipDestroyed)
 	D.ToggleFuelRangeVisibility(false)
 	if (D == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
 	
 	
 func OnDroneUnDocked(D : Drone, _Target : MapShip) -> void:
-	AvailableShips.append(D)
-	D.connect("OnShipDestroyed", OnShipDestroyed)
+	#AvailableShips.append(D)
+	#D.connect("OnShipDestroyed", OnShipDestroyed)
 	#ControlledShip = D
-
+	pass
 func _on_radar_button_pressed() -> void:
 	ControlledShip.ToggleRadar()
 
@@ -131,9 +133,10 @@ func OnShipDestroyed(Sh : MapShip):
 	for g in Sh.GetDroneDock().FlyingDrones:
 		if (g != NewCommander):
 			g.Command = NewCommander
+	AvailableShips.erase(Sh)
 	if (Sh == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
-	AvailableShips.erase(Sh)
+	
 
 func _on_controlled_ship_swtich_range_changed() -> void:
 	var currentcontrolled = AvailableShips.find(ControlledShip)
@@ -155,7 +158,7 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
-	
+	_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
 	
 var camtw : Tween
 func FrameCamToShip():

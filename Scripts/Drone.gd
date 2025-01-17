@@ -14,12 +14,12 @@ func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 
 func Steer(Rotation : float) -> void:
-	if (CommingBack):
+	if (CommingBack or Docked):
 		return
 	super(Rotation)
 
 func AccelerationChanged(value: float) -> void:
-	if (CommingBack):
+	if (CommingBack or Docked):
 		return
 	super(value)
 
@@ -99,7 +99,7 @@ func GetSaveData() -> DroneSaveData:
 	dat.Docked = Docked
 	dat.Pos = global_position
 	dat.Rot = global_rotation
-	dat.Fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
+	#dat.Fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
 	for g in GetDroneDock().DockedDrones:
 		dat.DockedDrones.append(g.GetSaveData())
 	for g in GetDroneDock().FlyingDrones:

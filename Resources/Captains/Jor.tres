@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=16 format=3 uid="uid://c8b3lpqbi11up"]
+[gd_resource type="Resource" script_class="Captain" load_steps=18 format=3 uid="uid://c8b3lpqbi11up"]
 
 [ext_resource type="Texture2D" uid="uid://h68yf60yhy41" path="res://Assets/CaptainPortraits/Captain9.png" id="1_ud80f"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_6dx32"]
@@ -6,14 +6,16 @@
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="3_u6ltl"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_urdjp"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="5_s11s7"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="6_42eoy"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="6_n8mnj"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="7_7qj3w"]
 
 [sub_resource type="Resource" id="Resource_t21ml"]
 resource_local_to_scene = true
 script = ExtResource("2_6dx32")
 StatName = "SPEED"
 StatMax = 3.0
-StatBase = 0.5
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -24,7 +26,7 @@ resource_local_to_scene = true
 script = ExtResource("2_6dx32")
 StatName = "VIZ_RANGE"
 StatMax = 300.0
-StatBase = 150.0
+StatBase = 50.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -34,8 +36,8 @@ AllowAutoRefil = false
 resource_local_to_scene = true
 script = ExtResource("2_6dx32")
 StatName = "INVENTORY_CAPACITY"
-StatMax = 3.0
-StatBase = 3.0
+StatMax = 12.0
+StatBase = 5.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -45,7 +47,7 @@ AllowAutoRefil = false
 script = ExtResource("2_6dx32")
 StatName = "FIREPOWER"
 StatMax = 10.0
-StatBase = 2.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -65,7 +67,7 @@ AllowAutoRefil = false
 script = ExtResource("2_6dx32")
 StatName = "FUEL_EFFICIENCY"
 StatMax = 5.0
-StatBase = 3.0
+StatBase = 0.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -99,5 +101,6 @@ CaptainPortrait = ExtResource("1_ud80f")
 ShipIcon = ExtResource("3_j33n8")
 CaptainStats = Array[ExtResource("2_6dx32")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_5nith"), SubResource("Resource_1yc5b"), SubResource("Resource_2jxnm"), SubResource("Resource_rn88p"), SubResource("Resource_3a3o1")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("5_s11s7"), ExtResource("6_n8mnj"), ExtResource("6_n8mnj"), ExtResource("6_n8mnj"), ExtResource("6_n8mnj")])
+StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("5_s11s7"), ExtResource("6_42eoy"), ExtResource("7_7qj3w"), ExtResource("6_n8mnj"), ExtResource("6_n8mnj"), ExtResource("6_n8mnj"), ExtResource("6_n8mnj")])
 CurrentPort = ""
+CheckForErrors = true

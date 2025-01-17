@@ -63,12 +63,12 @@ CurrentVelue = 0.0
 AllowAutoRefil = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.756101, 0.571811, 1.34766e-06, 1)
+border_color = Color(0.282501, 0.267741, 0.268801, 1)
 border_blend = true
 corner_radius_top_left = 6
 corner_radius_top_right = 6
@@ -77,12 +77,12 @@ corner_radius_bottom_left = 6
 corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwjun"]
-bg_color = Color(0.280974, 0.780967, 0.810078, 1)
+bg_color = Color(1, 0.763983, 0.0812772, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.0997141, 0.368611, 0.384012, 1)
+border_color = Color(0.423551, 0.31482, 2.40654e-07, 1)
 border_blend = true
 corner_radius_top_left = 6
 corner_radius_top_right = 6
@@ -239,7 +239,7 @@ alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_sau7b")
 theme_override_font_sizes/font_size = 12
-text = "Item Buff"
+text = "Base Stat"
 
 [node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 custom_minimum_size = Vector2(15, 0)
@@ -250,7 +250,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_sau7b")
 theme_override_font_sizes/font_size = 12
-text = "Ship Buff"
+text = "Item Buff"
 
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 custom_minimum_size = Vector2(15, 0)

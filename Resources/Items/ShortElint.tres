@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://bh0113ts576au"]
+
+[ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="1_tcc44"]
+[ext_resource type="Texture2D" uid="uid://cud25kmc3qpt1" path="res://Assets/Items/radar-dish_Smol.png" id="2_1ofb4"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_p72pf"]
+[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_j3exk"]
+[ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/MediumElint.tres" id="5_rphxy"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="6_ecw7k"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_yy2hs"]
+
+[sub_resource type="Resource" id="Resource_k0n8b"]
+script = ExtResource("6_yy2hs")
+UpgradeName = "ELINT"
+UpgradeAmmount = 800.0
+CurrentValue = 0.0
+UpAmmSymbol = "km"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("6_ecw7k")
+Upgrades = Array[ExtResource("6_yy2hs")]([SubResource("Resource_k0n8b")])
+UpgradeVersion = ExtResource("5_rphxy")
+UpgradeTime = 100.0
+IsDamaged = false
+RepairItems = Array[ExtResource("3_p72pf")]([ExtResource("4_j3exk"), ExtResource("4_j3exk")])
+ItemIcon = ExtResource("1_tcc44")
+ItemIconSmol = ExtResource("2_1ofb4")
+ItemName = "ELINT-10 'Vigil"
+ItemDesc = "An entry-level electronic intelligence system designed for basic surveillance operations. It passively detects enemy radar emissions, providing essential data on the presence of active radar systems within range. While limited in range and resolution, 'Vigil' serves as a reliable tool for initial threat assessment in less contested environments."
+MaxStackCount = 1
+RandomFindMaxCount = 1

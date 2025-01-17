@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://c16lcf8swpkjk"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://c16lcf8swpkjk"]
 
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_2a3m1"]
 [ext_resource type="Texture2D" uid="uid://b3oxh70gjpu2h" path="res://Assets/Items/radar-sweep_smol.png" id="2_4ii2e"]
@@ -6,21 +6,26 @@
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_0quoj"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_ypyoy"]
 [ext_resource type="Resource" uid="uid://cgigq707wifrf" path="res://Resources/Items/SuperLargeRadar.tres" id="4_nra5m"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_qmdqt"]
+
+[sub_resource type="Resource" id="Resource_8wfub"]
+script = ExtResource("6_qmdqt")
+UpgradeName = "VIZ_RANGE"
+UpgradeAmmount = 1000.0
+CurrentValue = 0.0
+UpAmmSymbol = "km"
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("3_ypyoy")
-UpgradeName = "VIZ_RANGE"
-UpgradeAmm = 700.0
-CurrentVal = 0.0
+Upgrades = Array[ExtResource("6_qmdqt")]([SubResource("Resource_8wfub")])
 UpgradeVersion = ExtResource("4_nra5m")
 UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("2_5w58m")]([ExtResource("3_0quoj"), ExtResource("3_0quoj")])
-UpAmmSymbol = ""
 ItemIcon = ExtResource("1_2a3m1")
 ItemIconSmol = ExtResource("2_4ii2e")
-ItemName = "High Range Radar"
-ItemDesc = "ItemDesc"
+ItemName = "RA-100"
+ItemDesc = "A superior radar array with far-reaching detection range. Utilizes phased array technology for unparalleled tracking specificity and enhanced situational awareness."
 MaxStackCount = 1
 RandomFindMaxCount = 1

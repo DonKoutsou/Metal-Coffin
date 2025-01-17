@@ -154,7 +154,7 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "Drop"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade" to="." method="ConfirmUpgrade"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Transfer" to="." method="_on_transfer_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Drop" to="." method="ConfirmDrop"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Drop" to="." method="_on_drop_pressed"]

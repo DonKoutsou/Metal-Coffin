@@ -1,24 +1,29 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://bwwby1vknkefj"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://bwwby1vknkefj"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_cbem7"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_6e4v5"]
 [ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_hfrci"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_11ept"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_lu011"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="5_83sa7"]
+
+[sub_resource type="Resource" id="Resource_o628u"]
+script = ExtResource("5_83sa7")
+UpgradeName = "FUEL TANK"
+UpgradeAmmount = 600.0
+CurrentValue = 600.0
+UpAmmSymbol = "Cubic Tons"
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("3_lu011")
-UpgradeName = "FUEL_TANK"
-UpgradeAmm = 600.0
-CurrentVal = 0.0
+Upgrades = Array[ExtResource("5_83sa7")]([SubResource("Resource_o628u")])
 UpgradeTime = 300.0
 IsDamaged = false
 RepairItems = Array[ExtResource("2_6e4v5")]([ExtResource("3_11ept"), ExtResource("3_11ept")])
-UpAmmSymbol = ""
 ItemIcon = ExtResource("1_cbem7")
 ItemIconSmol = ExtResource("2_hfrci")
-ItemName = "Large Fuel Tank"
-ItemDesc = "ItemDesc"
+ItemName = "FT-2000"
+ItemDesc = "A high-capacity fuel tank built for extended missions. Made with proprietary composite materials, it maintains durability even under the most challenging conditions"
 MaxStackCount = 1
 RandomFindMaxCount = 1

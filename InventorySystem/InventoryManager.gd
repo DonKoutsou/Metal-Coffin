@@ -68,8 +68,8 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
 	var Cpt = GetBoxOwner(Box)
 	if (Cpt.CurrentPort == ""):
-		#PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
-		print("Ship needs to be docked to upgrade")
+		PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
+		#print("Ship needs to be docked to upgrade")
 		return
 	OwnerInventory.StartUpgrade(Box)
 
@@ -162,6 +162,7 @@ func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
 		CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
 		CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
 		CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
+		
 	for g in CharInv._GetInventoryBoxes():
 		for z in g._ContentAmmout:
 			CharInv.RemoveItemFromBox(g)
@@ -191,6 +192,8 @@ func CloseDescriptor() -> void:
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
 	var Data = SD_CharacterInventory.new()
 	Data.Cpt = Cpt
+	Data.Fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
+	Data.Hull = Cpt.GetStat("HULL").CurrentVelue
 	var Contents = Inv.GetInventoryContents()
 	for g in Contents.keys():
 		var Ic = ItemContainer.new()
@@ -214,6 +217,8 @@ func LoadSaveData(Data : SaveData) -> void:
 	for g in Data.Datas:
 		var dat = g as SD_CharacterInventory
 		LoadCharacter(dat.Cpt, dat.Items)
+		dat.Cpt.GetStat("FUEL_TANK").CurrentVelue = dat.Fuel
+		dat.Cpt.GetStat("HULL").CurrentVelue = dat.Hull
 		#var CptInv : CharacterInventory
 		#for c in _CharacterInventories.keys():
 			#var cpt = c as Captain

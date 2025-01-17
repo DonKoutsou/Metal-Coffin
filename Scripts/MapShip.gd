@@ -146,10 +146,11 @@ func TogglePause(t : bool):
 	$AudioStreamPlayer2D.stream_paused = t
 
 func PartChanged(It : ShipPart) -> void:
-	if (It.UpgradeName == "VIZ_RANGE"):
-		UpdateVizRange(Cpt.GetStat("VIZ_RANGE").GetStat())
-	else : if (It.UpgradeName == "ELINT"):
-		UpdateELINTTRange(Cpt.GetStat("ELINT").GetStat())
+	for g in It.Upgrades:
+		if (g.UpgradeName == "VIZ_RANGE"):
+			UpdateVizRange(Cpt.GetStat("VIZ_RANGE").GetStat())
+		else : if (g.UpgradeName == "ELINT"):
+			UpdateELINTTRange(Cpt.GetStat("ELINT").GetStat())
 func ChangeSimulationSpeed(i : int):
 	SimulationSpeed = i
 
@@ -322,7 +323,17 @@ func Steer(Rotation : float) -> void:
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
 	for g in GetDroneDock().DockedDrones:
-		g.Steer(Rotation)
+		g.ForceSteer(Rotation)
+		
+func ForceSteer(Rotation : float) -> void:
+	var tw = create_tween()
+	#tw.set_trans(Tween.TRANS_EXPO)
+	tw.tween_property(self, "rotation", Rotation, 1)
+	var piv = $PlayerShipSpr/ShadowPivot as Node2D
+	piv.global_rotation = deg_to_rad(-90)
+	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
+	shadow.rotation = rotation
+		
 func ShipLookAt(pos : Vector2) -> void:
 	look_at(pos)
 	var piv = $PlayerShipSpr/ShadowPivot as Node2D

@@ -5,5 +5,9 @@
 [resource]
 script = ExtResource("1_lu11s")
 StatName = "HULL"
-StatMax = 600.0
+StatMax = 1000.0
 StatBase = 0.0
+StatShipBuff = 0.0
+StatItemBuff = 0.0
+CurrentVelue = 0.0
+AllowAutoRefil = false
