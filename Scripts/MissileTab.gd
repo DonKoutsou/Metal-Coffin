@@ -75,6 +75,8 @@ func UpdateAvailableMissiles() -> void:
 	
 func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
 	var Ship = FindShip(Target)
+	if (MIs.Type == 1):
+		return
 	if (Ship == null):
 		call_deferred("MissileAdded",MIs, Target)
 		return
@@ -84,6 +86,8 @@ func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
 
 func MissileRemoved(MIs : MissileItem, Target : Captain) -> void:
 	var Ship = FindShip(Target)
+	if (MIs.Type == 1):
+		return
 	Missiles[Ship].erase(MIs)
 	if (MIs == CurrentlySelectedMissile):
 		CurrentlySelectedMissile = null
@@ -134,7 +138,7 @@ func UpdateCrewSelect(Select : int = 0):
 	if (AvailableMissiles.size() > Select):
 		SelectedIndex = Select
 		CurrentlySelectedMissile = AvailableMissiles[Select]
-		$Control/TextureRect/Label2.text = CurrentlySelectedMissile.MissileName
+		$Control/TextureRect/Label2.text = CurrentlySelectedMissile.ItemName
 		$Control/Control/Label.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
 		$Control/TextureRect/Light.Toggle(true, true)
 	else:
@@ -159,7 +163,7 @@ func ProgressCrewSelect(Front : bool = true):
 			SelectedIndex = AvailableMissiles.size() - 1
 		CurrentlySelectedMissile = AvailableMissiles[SelectedIndex]
 	$Control/TextureRect/Light.Toggle(true, true)
-	$Control/TextureRect/Label2.text = CurrentlySelectedMissile.MissileName
+	$Control/TextureRect/Label2.text = CurrentlySelectedMissile.ItemName
 
 func _on_turn_off_button_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_STOP

@@ -15,7 +15,7 @@ var SimulationSpeed : int = 1
 
 func SetData(Dat : MissileItem) -> void:
 	Speed = Dat.Speed
-	MissileName = Dat.MissileName
+	MissileName = Dat.ItemName
 	Damage = Dat.Damage
 	Distance = Dat.Distance
 	

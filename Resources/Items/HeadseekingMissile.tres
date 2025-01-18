@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MissileItem" load_steps=5 format=3 uid="uid://60cqxlcirs15"]
+
+[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_0xfv8"]
+[ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="2_iety4"]
+[ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="3_2il65"]
+[ext_resource type="Script" path="res://InventorySystem/ItemDef/MissileItem.gd" id="4_o0c70"]
+
+[resource]
+script = ExtResource("4_o0c70")
+MissileScene = ExtResource("3_2il65")
+Distance = 50
+Speed = 6.0
+Damage = 10
+Type = 1
+ItemIcon = ExtResource("1_0xfv8")
+ItemIconSmol = ExtResource("2_iety4")
+ItemName = "Heat-seeking Missile"
+ItemDesc = "Within visual range missile, used for close quarter encounters."
+MaxStackCount = 99
+RandomFindMaxCount = 1

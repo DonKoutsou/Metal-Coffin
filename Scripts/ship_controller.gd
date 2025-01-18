@@ -117,10 +117,10 @@ func SteerChanged(value: float) -> void:
 
 func OnShipDestroyed(Sh : MapShip):
 	var NewCommander
-	if (Sh.GetDroneDock().DockedDrones > 0):
+	if (Sh.GetDroneDock().DockedDrones.size() > 0):
 		NewCommander = Sh.GetDroneDock().DockedDrones[0]
 		NewCommander.Command = null
-	else : if (Sh.GetDroneDock().FlyingDrones > 0):
+	else : if (Sh.GetDroneDock().FlyingDrones.size() > 0):
 		NewCommander = Sh.GetDroneDock().FlyingDrones[0]
 		NewCommander.Command = null
 	var Drones = []

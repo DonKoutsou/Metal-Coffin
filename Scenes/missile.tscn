@@ -7,9 +7,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qemak"]
 shader = ExtResource("1_hg5k0")
-shader_parameter/angle = 54.0
+shader_parameter/angle = 57.518
 shader_parameter/range = 0.011
-shader_parameter/cone_origin = Vector2(0.5, 0.5)
+shader_parameter/cone_origin = Vector2(0.501, 0.5)
 shader_parameter/edge_softness = 0.005
 shader_parameter/boundary_thickness = 0.9
 shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)

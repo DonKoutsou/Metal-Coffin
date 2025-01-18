@@ -4,7 +4,7 @@ class_name MissileDock
 
 @export var MissileDockEventH : MissileDockEventHandler
 
-var Missiles : Array[MissileItem]
+#var Missiles : Array[MissileItem]
 
 func _ready() -> void:
 	$MissileLine.visible = false
@@ -12,25 +12,25 @@ func _ready() -> void:
 	MissileDockEventH.connect("OnMissileArmed", MissileArmed)
 	MissileDockEventH.connect("OnMissileDissarmed", MissileDissarmed)
 	MissileDockEventH.connect("MissileLaunched", LaunchMissile)
-	MissileDockEventH.connect("MissileAdded", AddMissile)
-	MissileDockEventH.connect("MissileRemoved", MissileRemoved)
+	#MissileDockEventH.connect("MissileAdded", AddMissile)
+	#MissileDockEventH.connect("MissileRemoved", MissileRemoved)
 
 func IsOwner(Owner : Captain) -> bool:
 	return Owner == get_parent().Cpt
 
-func ClearAllMissiles() -> void:
-	for g in Missiles:
-		MissileRemoved(g, get_parent().Cpt)
+#func ClearAllMissiles() -> void:
+	#for g in Missiles:
+		#MissileRemoved(g, get_parent().Cpt)
 
-func MissileRemoved(Mis : MissileItem, Owner : Captain):
-	if (!IsOwner(Owner)):
-		return
-	if (Missiles.has(Mis)):
-		Missiles.erase(Mis)
-func AddMissile(Mis : MissileItem, Owner : Captain):
-	if (!IsOwner(Owner)):
-		return
-	Missiles.append(Mis)
+#func MissileRemoved(Mis : MissileItem, Owner : Captain):
+	#if (!IsOwner(Owner)):
+		#return
+	#if (Missiles.has(Mis)):
+		#Missiles.erase(Mis)
+#func AddMissile(Mis : MissileItem, Owner : Captain):
+	#if (!IsOwner(Owner)):
+		#return
+	#Missiles.append(Mis)
 
 func MissileArmed(Mis : MissileItem, Owner : Captain) -> void:
 	if (!IsOwner(Owner)):
@@ -48,7 +48,7 @@ func MissileAimDirChanged(NewDir : float, Owner : Captain) -> void:
 		return
 	$MissileLine.rotation += NewDir
 	
-func LaunchMissile(Mis : MissileItem, Owner : Captain, User : Captain) -> void:
+func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	if (!IsOwner(User)):
 		return
 	var missile = Mis.MissileScene.instantiate() as Missile
