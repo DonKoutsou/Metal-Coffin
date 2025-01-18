@@ -16,5 +16,5 @@ ItemIcon = ExtResource("1_w8n63")
 ItemIconSmol = ExtResource("2_87bbv")
 ItemName = "Cruise Missile"
 ItemDesc = "Medium range High speed missile"
-MaxStackCount = 10
+MaxStackCount = 99
 RandomFindMaxCount = 1

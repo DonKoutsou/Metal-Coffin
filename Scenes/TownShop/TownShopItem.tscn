@@ -1,0 +1,114 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt2v8s1av0q6i"]
+
+[ext_resource type="Script" path="res://Scenes/TownShop/town_shop_item.gd" id="1_0hew0"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_vpph7"]
+[ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_7jnpa"]
+
+[node name="TownShopItem" type="VBoxContainer" node_paths=PackedStringArray("ItemName", "Bar", "PlOwnedT", "ShopOwnedT", "ItPriceT")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -53.0
+offset_right = 130.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+script = ExtResource("1_0hew0")
+ItemName = NodePath("VBoxContainer/Label")
+Bar = NodePath("VBoxContainer/ProgressBar")
+PlOwnedT = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/PlAmm")
+ShopOwnedT = NodePath("VBoxContainer/HBoxContainer/HBoxContainer3/ShopAmm")
+ItPriceT = NodePath("VBoxContainer/HBoxContainer/HBoxContainer2/Price")
+PlWallet = ExtResource("2_7jnpa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_vpph7")
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cruise Missile"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Owned:"
+
+[node name="PlAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "1"
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(6.86, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Shop Inventory:"
+
+[node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "1"
+
+[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(6.86, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Piece Price:"
+
+[node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "50"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 2
+value = 27.12
+show_percentage = false
+
+[connection signal="gui_input" from="VBoxContainer/ProgressBar" to="." method="ItemBar_gui_input"]

@@ -1,0 +1,233 @@
+[gd_scene load_steps=11 format=3 uid="uid://bahj28qps5ssw"]
+
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
+[ext_resource type="Script" path="res://Scripts/town_scene.gd" id="2_epy1b"]
+[ext_resource type="Script" path="res://Scenes/TownShop/merchandise.gd" id="3_5r13l"]
+[ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_u2135"]
+[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="4_do06v"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="4_s1edh"]
+[ext_resource type="PackedScene" uid="uid://bt2v8s1av0q6i" path="res://Scenes/TownShop/TownShopItem.tscn" id="4_wqnl6"]
+[ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/TacticalMissile.tres" id="5_orvgx"]
+
+[sub_resource type="Resource" id="Resource_ofpv0"]
+script = ExtResource("3_5r13l")
+It = ExtResource("4_s1edh")
+Price = 10
+Amm = 10
+
+[sub_resource type="Resource" id="Resource_hooln"]
+script = ExtResource("3_5r13l")
+It = ExtResource("5_orvgx")
+Price = 20
+Amm = 4
+
+[node name="TownScene" type="Control" node_paths=PackedStringArray("FuelPrice", "CurrentFuel", "FuelBar", "RepairPrice", "CurrentHull", "HullBar", "ItemPlecement", "RepRefPlecement")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ca22g")
+script = ExtResource("2_epy1b")
+Merch = Array[ExtResource("3_5r13l")]([SubResource("Resource_ofpv0"), SubResource("Resource_hooln")])
+FuelPrice = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
+CurrentFuel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
+FuelBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/ProgressBar")
+RepairPrice = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer2/RepairPrice")
+CurrentHull = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm")
+HullBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/ProgressBar")
+ItemPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer")
+RepRefPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3")
+PlayerWallet = ExtResource("3_u2135")
+ItemScene = ExtResource("4_wqnl6")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_do06v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "Munition Shop"
+
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "Refuel / Repair"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Fuel Reserves"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FuelAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "4214"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "tons"
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(6.86, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_ca22g")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Ton Price:"
+
+[node name="TonPrice" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "202139"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 2
+value = 27.12
+show_percentage = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+text = "Hull Condition"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HullAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Hull Integrity"
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(6.86, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_ca22g")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Repair Price:"
+
+[node name="RepairPrice" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "202"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+value = 27.12
+show_percentage = false
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "Finalize Transaction"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button2" to="." method="On_MunitionShop_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button3" to="." method="On_RefRef_Pressed"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/ProgressBar" to="." method="RepairBar_gui_input"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

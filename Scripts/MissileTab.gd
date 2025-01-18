@@ -14,10 +14,14 @@ var ConnectedShip : MapShip
 
 var Missiles : Dictionary
 
+var AvailableMissiles : Array[MissileItem]
+
 func UpdateConnectedShip(Ship : MapShip) -> void:
 	if (!Missiles.has(Ship)):
 		var MissileAr : Array[MissileItem] = []
 		Missiles[Ship] = MissileAr
+	if (Armed):
+		_on_dissarm_drone_button_2_pressed()
 	ConnectedShip = Ship
 	call_deferred("UpdateCrewSelect")
 
@@ -29,7 +33,24 @@ func _ready() -> void:
 	$Control/Control/Launch.ToggleDissable(true)
 	#visible = false
 
-func RegisterShip(Dr : Drone, Target : MapShip):
+func FindOwner(Mis : MissileItem) -> Captain:
+	for g in Missiles.keys():
+		if (Missiles[g].has(Mis)):
+			return g.Cpt
+	return null
+	
+	
+var d = 0.3
+
+func _physics_process(delta: float) -> void:
+	d -= delta
+	if (d > 0):
+		return
+	d = 0.3
+	
+	UpdateAvailableMissiles()
+	
+func RegisterShip(Dr : Drone, _Target : MapShip):
 	if (!Missiles.has(Dr)):
 		var MissileAr : Array[MissileItem] = []
 		Missiles[Dr] = MissileAr
@@ -40,6 +61,17 @@ func FindShip(C: Captain ) -> MapShip:
 		if (ship.Cpt == C):
 			return ship
 	return null
+
+func UpdateAvailableMissiles() -> void:
+	var sizeb = AvailableMissiles.size()
+	var Misses : Array[MissileItem] = []
+	Misses.append_array(Missiles[ConnectedShip])
+	for g in ConnectedShip.GetDroneDock().DockedDrones:
+		Misses.append_array(Missiles[g])
+	AvailableMissiles =  Misses
+	var sizea = AvailableMissiles.size()
+	if (sizeb != sizea):
+		UpdateCrewSelect()
 	
 func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
 	var Ship = FindShip(Target)
@@ -58,11 +90,11 @@ func MissileRemoved(MIs : MissileItem, Target : Captain) -> void:
 		UpdateCrewSelect()
 		
 func _on_deploy_drone_button_pressed() -> void:
-	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, ConnectedShip.Cpt)
+	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, FindOwner(CurrentlySelectedMissile),ConnectedShip.Cpt)
 	_on_dissarm_drone_button_2_pressed()
 	
 func _on_arm_drone_button_pressed(t : bool) -> void:
-	if (Missiles[ConnectedShip].size() == 0):
+	if (AvailableMissiles.size() == 0):
 		_on_dissarm_drone_button_2_pressed()
 		return
 	if (!t):
@@ -99,9 +131,9 @@ func UpdateSelected(Dir : bool) -> void:
 		ProgressCrewSelect(Dir)
 
 func UpdateCrewSelect(Select : int = 0):
-	if (Missiles[ConnectedShip].size() > Select):
+	if (AvailableMissiles.size() > Select):
 		SelectedIndex = Select
-		CurrentlySelectedMissile = Missiles[ConnectedShip][Select]
+		CurrentlySelectedMissile = AvailableMissiles[Select]
 		$Control/TextureRect/Label2.text = CurrentlySelectedMissile.MissileName
 		$Control/Control/Label.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
 		$Control/TextureRect/Light.Toggle(true, true)
@@ -110,22 +142,22 @@ func UpdateCrewSelect(Select : int = 0):
 		$Control/TextureRect/Light.Toggle(true)
 		
 func ProgressCrewSelect(Front : bool = true):
-	if (Missiles[ConnectedShip].size() == 0):
+	if (AvailableMissiles.size() == 0):
 		$Control/TextureRect/Label2.text = "No Missiles"
 		$Control/TextureRect/Light.Toggle(true)
 		return
 	if (CurrentlySelectedMissile == null):
-		CurrentlySelectedMissile = Missiles[ConnectedShip][0]
+		CurrentlySelectedMissile = AvailableMissiles[0]
 	else:
 		if (Front):
 			SelectedIndex +=  1
 		else :
 			SelectedIndex -= 1
-		if (SelectedIndex >= Missiles[ConnectedShip].size()):
+		if (SelectedIndex >= AvailableMissiles.size()):
 			SelectedIndex = 0
 		else : if (SelectedIndex < 0):
-			SelectedIndex = Missiles[ConnectedShip].size() - 1
-		CurrentlySelectedMissile = Missiles[ConnectedShip][SelectedIndex]
+			SelectedIndex = AvailableMissiles.size() - 1
+		CurrentlySelectedMissile = AvailableMissiles[SelectedIndex]
 	$Control/TextureRect/Light.Toggle(true, true)
 	$Control/TextureRect/Label2.text = CurrentlySelectedMissile.MissileName
 

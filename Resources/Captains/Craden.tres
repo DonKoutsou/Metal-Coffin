@@ -1,14 +1,17 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=18 format=3 uid="uid://caroffy3ubxip"]
+[gd_resource type="Resource" script_class="Captain" load_steps=21 format=3 uid="uid://caroffy3ubxip"]
 
 [ext_resource type="Texture2D" uid="uid://bt647g030nod" path="res://Assets/CaptainPortraits/Captain10.png" id="1_k5wxp"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_5s782"]
 [ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_ttymy"]
+[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_xtukk"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_y0oxi"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_yi83q"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="5_a5h7b"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="6_s2hhx"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="7_owr8l"]
 [ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShortElint.tres" id="8_jjx6u"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShortMissilePod.tres" id="9_fi65e"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShortMachinegun.tres" id="10_lsjiy"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="11_d3beu"]
 
 [sub_resource type="Resource" id="Resource_bp15r"]
 script = ExtResource("2_ttymy")
@@ -33,8 +36,8 @@ AllowAutoRefil = false
 [sub_resource type="Resource" id="Resource_f25rj"]
 script = ExtResource("2_ttymy")
 StatName = "INVENTORY_CAPACITY"
-StatMax = 12.0
-StatBase = 6.0
+StatMax = 24.0
+StatBase = 9.0
 StatShipBuff = 0.0
 StatItemBuff = 0.0
 CurrentVelue = 0.0
@@ -95,9 +98,9 @@ script = ExtResource("2_5s782")
 CaptainName = "Craden"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_k5wxp")
-ShipIcon = ExtResource("3_yi83q")
+ShipIcon = ExtResource("3_xtukk")
 CaptainStats = Array[ExtResource("2_ttymy")]([SubResource("Resource_bp15r"), SubResource("Resource_s5ab2"), SubResource("Resource_f25rj"), SubResource("Resource_j8fdu"), SubResource("Resource_dap26"), SubResource("Resource_rifue"), SubResource("Resource_pno3o"), SubResource("Resource_pew21")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_a5h7b"), ExtResource("6_s2hhx"), ExtResource("7_owr8l"), ExtResource("8_jjx6u")])
+StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_a5h7b"), ExtResource("6_s2hhx"), ExtResource("7_owr8l"), ExtResource("8_jjx6u"), ExtResource("9_fi65e"), ExtResource("10_lsjiy"), ExtResource("11_d3beu"), ExtResource("11_d3beu"), ExtResource("11_d3beu"), ExtResource("11_d3beu")])
 CurrentPort = ""
 CheckForErrors = true

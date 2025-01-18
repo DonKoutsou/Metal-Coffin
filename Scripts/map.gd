@@ -10,7 +10,7 @@ class_name Map
 @export var MissileUI : MissileTab
 @export var ThrustUI : ThrustSlider
 @export var MapMarkerControls : Control
-
+#@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var Villages : Array[PackedScene]
 @export var Cities : Array[PackedScene]
@@ -104,7 +104,8 @@ func GetThrustUI() -> ThrustSlider:
 	return ThrustUI
 func GetCamera() -> ShipCamera:
 	return _Camera
-	
+#func GetStatUI() -> StatPanel:
+	#return _StatPanel
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
@@ -526,8 +527,8 @@ func _on_pause_pressed() -> void:
 	GetInScreenUI().Pause()
 func _on_return_pressed() -> void:
 	GetInScreenUI().Pause()
-func _on_captain_button_pressed() -> void:
-	GetInScreenUI().GetCapUI()._on_captain_button_pressed()
+#func _on_captain_button_pressed() -> void:
+	#GetInScreenUI().GetCapUI()._on_captain_button_pressed()
 
 
 func _on_land_button_pressed() -> void:

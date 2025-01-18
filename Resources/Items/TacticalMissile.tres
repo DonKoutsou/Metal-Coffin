@@ -16,5 +16,5 @@ ItemIcon = ExtResource("1_tmfc8")
 ItemIconSmol = ExtResource("2_oaolx")
 ItemName = "Tactical Missile"
 ItemDesc = "Low range high speed missile missile, usefull for close range interceptions of enemy missiles"
-MaxStackCount = 10
+MaxStackCount = 99
 RandomFindMaxCount = 1

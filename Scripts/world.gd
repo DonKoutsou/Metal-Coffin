@@ -1,17 +1,14 @@
 extends Control
 class_name World
 
-
 @export_group("Nodes")
 @export var _Map : Map
 @export var _Command : Commander
-#@export var ShipDat : ShipData
 @export_group("Scenes")
-#@export var StartingShip : BaseShip
-#@export var ShipTradeScene : PackedScene
-#@export var DogfightScene : PackedScene
 @export var CardFightScene : PackedScene
-
+@export_group("Wallet")
+@export var StartingFunds : int = 500000
+@export var PlayerWallet : Wallet
 
 
 #ship player is currently using
@@ -32,10 +29,20 @@ static func GetInstance() -> World:
 
 func _ready() -> void:
 	#$Inventory.Player = GetMap().GetPlayerShip()
+	PlayerWallet.Funds = StartingFunds
 	UISoundMan.GetInstance().Refresh()
 	Instance = self
 	if (!Loading):
 		PlayIntro()
+
+func GetSaveData() -> SaveData:
+	var Data = SaveData.new()
+	Data.DataName = "Wallet"
+	Data.Datas.append(PlayerWallet)
+	return Data
+
+func LoadSaveData(PlWallet : Wallet) -> void:
+	PlayerWallet.Funds = PlWallet.Funds
 
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
@@ -64,9 +71,9 @@ func _enter_tree() -> void:
 	
 	map.connect("MAP_EnemyArrival", StartDogFight)
 	
-	var statp = GetStatPanel()
-	#connect("WRLD_StatsUpdated", statp.StatsUp)
-	connect("WRLD_StatGotLow", statp.StatsLow)
+	#var statp = GetStatPanel()
+	##connect("WRLD_StatsUpdated", statp.StatsUp)
+	#connect("WRLD_StatGotLow", statp.StatsLow)
 	
 	#GetMap().GetPlayerShip().SetShipType(StartingShip)
 	#CurrentShip = StartingShip
@@ -84,8 +91,8 @@ func GetMap() -> Map:
 	return _Map
 func GetCommander() -> Commander:
 	return _Command
-func GetStatPanel() -> StatPanel:
-	return $Map/OuterUI/VBoxContainer/Stat_Panel
+#func GetStatPanel() -> StatPanel:
+	#return GetMap()._StatPanel
 
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[Node2D]
@@ -120,14 +127,14 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 				z.Damage(z.Cpt.GetStatFinalValue("HULL") - g.Hull)
 				FighingFriendlyUnits.erase(z)
 				break
-	for g in FighingFriendlyUnits:
-		if (g is PlayerShip):
-			GetMap().StageFailed()
-			GameLost("Your ship got destroyed")
-			return
-		if (g is Drone):
-			
-			GetMap().GetInScreenUI().GetCapUI().OnCaptainDischarged(g.Cpt)
+	#for g in FighingFriendlyUnits:
+		#if (g is PlayerShip):
+			#GetMap().StageFailed()
+			#GameLost("Your ship got destroyed")
+			#return
+		#if (g is Drone):
+			#
+			#GetMap().GetInScreenUI().GetCapUI().OnCaptainDischarged(g.Cpt)
 	for g in FighingEnemyUnits:
 		var enship = g as HostileShip
 		enship.Damage(99999999999)

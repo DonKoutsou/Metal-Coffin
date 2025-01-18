@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://carxyijo0mekn"]
+[gd_scene load_steps=12 format=3 uid="uid://carxyijo0mekn"]
 
 [ext_resource type="Script" path="res://Scripts/ui_Stat_container.gd" id="2_yw81g"]
 [ext_resource type="Texture2D" uid="uid://dmmqxl5mf2mjn" path="res://Assets/UIPiecies/Display_Camera 1.png" id="3_5vvs3"]
@@ -11,21 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://da27xfif878pc" path="res://Assets/UIPiecies/Autofill_button_Camera 1.png" id="9_644ma"]
 [ext_resource type="Texture2D" uid="uid://cxmiuhrg1etpr" path="res://Assets/UIPiecies/Autofill_button_on_Camera 1.png" id="10_u6875"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxbbu"]
-draw_center = false
-shadow_size = 5
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75nru"]
 draw_center = false
 shadow_color = Color(0, 0, 0, 1)
 shadow_size = 2
 
-[node name="Oxygen_Container" type="PanelContainer"]
+[node name="Fund_Container" type="PanelContainer"]
 offset_right = 242.0
 offset_bottom = 50.0
 size_flags_horizontal = 6
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sxbbu")
 script = ExtResource("2_yw81g")
 FuelTex = ExtResource("3_5vvs3")
 HullTex = ExtResource("3_qtl3w")

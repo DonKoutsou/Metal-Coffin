@@ -7,16 +7,16 @@ class_name MapShip
 
 #@export var Missile : PackedScene
 
-var ShipType : BaseShip
+#var ShipType : BaseShip
 
 var Travelling = false
 #var ChangingCourse = false
 var Paused = true
 var SimulationSpeed : int = 1
 var CurrentPort : MapSpot
-var CanRefuel = false
-var CanRepair = false
-var CanUpgrade = false
+#var CanRefuel = false
+#var CanRepair = false
+#var CanUpgrade = false
 var IsRefueling = false
 var RadarWorking = true
 var Altitude = 10000
@@ -76,26 +76,30 @@ func _physics_process(delta: float) -> void:
 			TakingOff = false
 	UpdateElint(delta)
 	
+	var FuelTankStat : ShipStat = Cpt.GetStat("FUEL_TANK")
+	
 	if (CurrentPort != null):
 		#CurrentPort.OnSpotVisited()
 		#if (CanRefuel):
-		if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStatFinalValue("FUEL_TANK") and CurrentPort.PlayerFuelReserves > 0):
-			var maxfuelcap = Cpt.GetStatFinalValue("FUEL_TANK")
-			var currentfuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
+		if (FuelTankStat.CurrentVelue < FuelTankStat.GetStat() and CurrentPort.PlayerFuelReserves > 0):
+			var maxfuelcap = FuelTankStat.GetStat()
+			var currentfuel = FuelTankStat.GetCurrentValue()
 			var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
 			ShipDockActions.emit("Refueling", true, roundi(timeleft))
 			#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-			Cpt.GetStat("FUEL_TANK").CurrentVelue +=  0.05 * SimulationSpeed
+			FuelTankStat.CurrentVelue +=  0.05 * SimulationSpeed
 			CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
 		else:
 			ShipDockActions.emit("Refueling", false, 0)
 				#ToggleShowRefuel("Refueling", false)
 		#if (CanRepair):
-		if (Cpt.GetStat("HULL").GetCurrentValue() < Cpt.GetStat("HULL").GetStat() and CurrentPort.PlayerRepairReserves > 0):
-			var timeleft = ((Cpt.GetStat("HULL").GetStat() - Cpt.GetStat("HULL").GetCurrentValue()) / 0.05 / 6)
+		var HullStat : ShipStat = Cpt.GetStat("HULL")
+		
+		if (HullStat.GetCurrentValue() < HullStat.GetStat() and CurrentPort.PlayerRepairReserves > 0):
+			var timeleft = ((HullStat.GetStat() - HullStat.GetCurrentValue()) / 0.05 / 6)
 			ShipDockActions.emit("Repairing", true, roundi(timeleft))
 			#ToggleShowRefuel("Repairing", true, roundi(timeleft))
-			Cpt.GetStat("HULL").RefilCurrentVelue(0.05 * SimulationSpeed)
+			HullStat.RefilCurrentVelue(0.05 * SimulationSpeed)
 		else:
 			ShipDockActions.emit("Repairing", false, 0)
 				#ToggleShowRefuel("Repairing", false)
@@ -107,14 +111,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			ShipDockActions.emit("Upgrading", false, 0)
 			#ToggleShowRefuel("Upgrading", false)
+			
 	if (Docked):
 		return
 	
 	var FuelConsumtion = $Aceleration.position.x / 10 / Cpt.GetStatFinalValue("FUEL_EFFICIENCY") * SimulationSpeed
-	
 	#Consume fuel on shif if enough
-	if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= FuelConsumtion):
-		Cpt.GetStat("FUEL_TANK").CurrentVelue -= FuelConsumtion
+	if (FuelTankStat.GetCurrentValue() >= FuelConsumtion):
+		FuelTankStat.CurrentVelue -= FuelConsumtion
 	# If not enough on ship syphoon some from drones in dock
 	else: if (GetDroneDock().DronesHaveFuel(FuelConsumtion)):
 		GetDroneDock().SyphonFuelFromDrones(FuelConsumtion)
@@ -130,10 +134,10 @@ func _physics_process(delta: float) -> void:
 	
 	for g in GetDroneDock().DockedDrones:
 		var dronefuel = ($Aceleration.position.x / 10 / g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()) * SimulationSpeed
-		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > dronefuel):
+		if (g.Cpt.GetStatCurrentValue("FUEL_TANK") > dronefuel):
 			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
-		else : if (Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
-			Cpt.GetStat("FUEL_TANK").CurrentVelue -= dronefuel
+		else : if (Cpt.GetStatCurrentValue("FUEL_TANK") >= dronefuel):
+			FuelTankStat.CurrentVelue -= dronefuel
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
@@ -160,8 +164,10 @@ func ToggleRadar():
 	$Radar/CollisionShape2D.set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
 	for g in GetDroneDock().DockedDrones:
 		g.ToggleRadar()
+		
 func ToggleElint():
 	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
+	
 func ToggleFuelRangeVisibility(t : bool) -> void:
 	ShowFuelRange = t
 
@@ -219,9 +225,9 @@ func IsDead() -> bool:
 
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
-	CanRefuel = Port.HasFuel()
-	CanRepair = Port.HasRepair()
-	CanUpgrade = Port.HasUpgrade()
+	#CanRefuel = Port.HasFuel()
+	#CanRepair = Port.HasRepair()
+	#CanUpgrade = Port.HasUpgrade()
 	Cpt.CurrentPort = Port.GetSpotName()
 	var dr = GetDroneDock().DockedDrones
 	for g in dr:
@@ -346,9 +352,9 @@ func ShipLookAt(pos : Vector2) -> void:
 func GetSteer() -> float:
 	return rotation
 
-func SetShipType(Ship : BaseShip):
-	ShipType = Ship
-	_UpdateShipIcon(Ship.TopIcon)
+#func SetShipType(Ship : BaseShip):
+	#ShipType = Ship
+	#_UpdateShipIcon(Ship.TopIcon)
 
 func _UpdateShipIcon(Tex : Texture) -> void:
 	$PlayerShipSpr.texture = Tex

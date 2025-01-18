@@ -23,7 +23,7 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		if (!Spot.Seen):
 			$AnimationPlayer.play("SpotFound")
 			PlaySound()
-	$VBoxContainer/PanelContainer/TextureRect2.text = Spot.SpotInfo.SpotName
+	$VBoxContainer/TextureRect2.text = Spot.SpotInfo.SpotName
 	for g in Spot.SpotInfo.PossibleDrops:
 		var text = TextureRect.new()
 		text.texture = g.ItemIconSmol
@@ -57,9 +57,9 @@ func _physics_process(_delta: float) -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$AnalyzeButton.add_to_group("UnmovableMapInfo")
-	$VBoxContainer/PanelContainer/TextureRect2.add_to_group("UnmovableMapInfo")
+	$VBoxContainer/TextureRect2.add_to_group("UnmovableMapInfo")
 	
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$AnalyzeButton.remove_from_group("UnmovableMapInfo")
-	$VBoxContainer/PanelContainer/TextureRect2.remove_from_group("UnmovableMapInfo")
+	$VBoxContainer/TextureRect2.remove_from_group("UnmovableMapInfo")

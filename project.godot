@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Into The Void"
+config/name="Causarum Machina"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
+config/icon="res://Assets/plane_Wheel_BaseColor.png"
 
 [autoload]
 

@@ -81,8 +81,7 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.LandedShip = Ship
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 
-func FuelTransactionFinished(BFuel : float, BRepair: float, _NewCurrency : float, Ship : MapShip):
-	#ShipData.GetInstance().SetStatValue("FUNDS", NewCurrency)
+func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 	var spot = Ship.CurrentPort as MapSpot
 	if (spot.PlayerFuelReserves != BFuel):
 		spot.CityFuelReserves -= BFuel

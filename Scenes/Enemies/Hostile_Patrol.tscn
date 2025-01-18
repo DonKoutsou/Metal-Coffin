@@ -20,9 +20,9 @@ radius = 1000.0
 [node name="HostileShip" type="Node2D" groups=["Enemy", "Ships"]]
 process_mode = 1
 script = ExtResource("1_dinuw")
-Cpt = ExtResource("2_lpij7")
 Patrol = false
 BT = ExtResource("8_w8ob0")
+Cpt = ExtResource("2_lpij7")
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708

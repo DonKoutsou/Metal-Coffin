@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmvl7w65kwp5a"]
+[gd_scene load_steps=5 format=3 uid="uid://cmvl7w65kwp5a"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7awpj"]
 [ext_resource type="Script" path="res://InventorySystem/CharacterInventory/character_inventory.gd" id="1_i6whi"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://InventorySystem/InventoryBox/InventoryBox.tscn" id="2_e1s57"]
+[ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="4_a6772"]
 
 [node name="CharacterInventoryUI" type="VBoxContainer" node_paths=PackedStringArray("InventoryBoxParent", "CaptainNameLabel")]
 anchors_preset = 15
@@ -25,6 +26,8 @@ alignment = 1
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_a6772")
 text = "Char name"
 horizontal_alignment = 1
 

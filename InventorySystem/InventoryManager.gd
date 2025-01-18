@@ -8,6 +8,7 @@ class_name InventoryManager
 @export var ItemTransferScene : PackedScene
 @export var ItemNotifScene : PackedScene
 @export_group("Nodes")
+@export var CharStatPanel : Control
 @export var CharacterPlace : Control
 @export var DescriptorPlace : Control
 @export var ShipStats : InventoryShipStats
@@ -32,11 +33,53 @@ func _ready() -> void:
 	Instance = self
 
 func GetCharacterInventory(Cha : Captain) -> CharacterInventory:
-	return _CharacterInventories[Cha]
+	if (_CharacterInventories.has(Cha)):
+		return _CharacterInventories[Cha]
+	return null
 
-func OnMissileLaunched(Mis : MissileItem, Target : Captain):
+func OnMissileLaunched(Mis : MissileItem, Target : Captain, _User : Captain):
 	var CharacterInv = _CharacterInventories[Target] as CharacterInventory
 	CharacterInv.RemoveItem(Mis)
+
+func RemoveItemFromFleet(It : Item, Command : MapShip) -> void:
+	var Captains : Array[Captain] = []
+	Captains.append(Command.Cpt)
+	for g in Command.GetDroneDock().DockedDrones:
+		Captains.append(g.Cpt)
+	
+	for g in Captains:
+		var Inv = GetCharacterInventory(g)
+		if (Inv.HasItem(It)):
+			Inv.RemoveItem(It)
+			return
+
+func AddItemToFleet(It : Item, Command : MapShip) -> void:
+	var Captains : Array[Captain] = []
+	Captains.append(Command.Cpt)
+	for g in Command.GetDroneDock().DockedDrones:
+		Captains.append(g.Cpt)
+	
+	for g in Captains:
+		var Inv = GetCharacterInventory(g)
+		if (Inv.HasSpaceForItem(It)):
+			Inv.AddItem(It)
+			return
+
+func GetAllItemsInFleet(Command : MapShip) -> Array[Item]:
+	var Captains : Array[Captain] = []
+	Captains.append(Command.Cpt)
+	for g in Command.GetDroneDock().DockedDrones:
+		Captains.append(g.Cpt)
+	
+	var Items : Array[Item] = []
+	
+	for g in Captains:
+		var InvContents = GetCharacterInventory(g).GetInventoryContents()
+		for It in InvContents.keys():
+			for Am in InvContents[It]:
+				Items.append(It)
+	
+	return Items
 
 func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t
@@ -52,11 +95,13 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 		var desc = descriptors[0] as ItemDescriptor
 		desc.queue_free()
 		if (desc.DescribedContainer == Box):
+			CharStatPanel.visible = true
 			return
 		
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
 	
 	DescriptorPlace.add_child(Descriptor)
+	CharStatPanel.visible = false
 	Descriptor.SetData(Box)
 	#Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", OwnerInventory.UpgradeItem)
@@ -74,8 +119,9 @@ func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> v
 	OwnerInventory.StartUpgrade(Box)
 
 func CancelUpgrades(Cha : Captain) -> void:
-	var CharInv = _CharacterInventories[Cha] as CharacterInventory
-	CharInv.CancelUpgrade()
+	if (_CharacterInventories.has(Cha)):
+		var CharInv = _CharacterInventories[Cha] as CharacterInventory
+		CharInv.CancelUpgrade()
 	
 
 func FlushInventory() -> void:
@@ -188,6 +234,7 @@ func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		descriptors[0].queue_free()
+	CharStatPanel.visible = true
 
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
 	var Data = SD_CharacterInventory.new()
@@ -233,3 +280,8 @@ func LoadSaveData(Data : SaveData) -> void:
 func ToggleInventory() -> void:
 	visible = !visible
 	InventoryToggled.emit(visible)
+
+
+func _on_scroll_container_gui_input(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		$HBoxContainer/ScrollContainer.scroll_vertical -= event.relative.y

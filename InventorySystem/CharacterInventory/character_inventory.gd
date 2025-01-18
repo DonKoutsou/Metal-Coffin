@@ -46,7 +46,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 
 func AddItem(It : Item) -> void:
 	var boxes = _GetInventoryBoxes()
-	var Empty : Inventory_Box
+	var Empty : Inventory_Box = null
 	#try to find matching box for it and if not put it on any empty ones we found
 	for g in boxes:
 		if (g.IsEmpty()):
@@ -73,6 +73,9 @@ func AddItem(It : Item) -> void:
 		return
 	ItemPlecementFailed.emit(It)
 	return
+
+func HasItem(It : Item) -> bool:
+	return _InventoryContents.has(It)
 
 func HasSpaceForItem(It : Item) -> bool:
 	var boxes = _GetInventoryBoxes()
@@ -145,7 +148,8 @@ func CancelUpgrade() -> void:
 func ItemUpgradeFinished() -> void:
 	var Part = _ItemBeingUpgraded.GetContainedItem() as ShipPart
 	RemoveItemFromBox(_ItemBeingUpgraded)
-	Part.UpgradeVersion.CurrentVal = Part.CurrentVal
+	for g in Part.Upgrades.size():
+		Part.UpgradeVersion.Upgrades[g].CurrentVal = Part.Upgrades[g].CurrentVal
 	AddItem(Part.UpgradeVersion)
 	_ItemBeingUpgraded = null
 

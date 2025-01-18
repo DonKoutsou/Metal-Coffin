@@ -99,3 +99,4 @@ CaptainStats = Array[ExtResource("2_7ui3p")]([SubResource("Resource_4xt1j"), Sub
 ShipCallsign = "R"
 StartingItems = Array[ExtResource("3_uv4n8")]([])
 CurrentPort = ""
+CheckForErrors = false

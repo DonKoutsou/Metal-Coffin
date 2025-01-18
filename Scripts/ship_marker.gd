@@ -2,6 +2,18 @@ extends Control
 
 class_name ShipMarker
 
+@export_group("Nodes")
+@export var Direction : Label
+@export var ShipCallsign : Label
+@export var ShipNameLabel : Label
+@export var ShipSpeedLabel : Label
+@export var TimeSeenLabel : Label
+@export var ThreatLabel : Label
+@export var FuelLabel : Label
+@export var HullLabel : Label
+@export var DetailPanel : Control
+@export var ShipIcon : TextureRect
+@export_group("Resources")
 #@export var EnemyLocatedNotifScene : PackedScene
 
 @export var EnemyLocatedSound : AudioStream
@@ -18,7 +30,7 @@ var camera : Camera2D
 
 var TimeLastSeen : float
 
-var DetailInitialPos : Vector2
+#var DetailInitialPos : Vector2
 
 var Showspeed : bool = false
 
@@ -28,14 +40,14 @@ var LandingNotif : ShipMarkerNotif
 signal ShipDeparted
 
 func _ready() -> void:
-	DetailInitialPos = $Control/PanelContainer/VBoxContainer.position
+	#DetailInitialPos = $Control/PanelContainer/VBoxContainer.position
 	camera = ShipCamera.GetInstance()
-	$Control.visible = false
+	DetailPanel.visible = false
 	$Line2D.visible = false
-	$Control/PanelContainer/VBoxContainer/TimeSeen .visible = false
+	TimeSeenLabel.visible = false
 	#$Control/PanelContainer/VBoxContainer/Threat.visible = false
-	$Control/PanelContainer/VBoxContainer/Fuel.visible = false
-	$Control/PanelContainer/VBoxContainer/Hull.visible = false
+	FuelLabel.visible = false
+	HullLabel.visible = false
 	#set_physics_process(false)
 func PlayHostileShipNotif() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
@@ -55,7 +67,7 @@ func OnShipDeparted() -> void:
 	ToggleShowRefuel("Upgrading", false, 0)
 
 func UpdateTrajectory(Dir : float) -> void:
-	$Icon/Direction.rotation = Dir
+	Direction.rotation = Dir
 
 func DroneReturning() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
@@ -63,7 +75,7 @@ func DroneReturning() -> void:
 	add_child(notif)
 
 func SetType(T : String) -> void:
-	$Icon.texture = Icons[T]
+	ShipIcon.texture = Icons[T]
 	
 func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 	var notif : ResuplyNotification
@@ -104,12 +116,13 @@ func OnLandingEnded(_Ship : MapShip):
 	LandingNotif = null
 
 func ToggleShipDetails(T : bool):
-	$Control.visible = T
+	DetailPanel.visible = T
 	$Line2D.visible = T
+	Direction.visible = T
 	#set_physics_process(T)
 func ToggleFriendlyShipDetails(T : bool):
-	$Control/PanelContainer/VBoxContainer/Fuel.visible = T
-	$Control/PanelContainer/VBoxContainer/Hull.visible = T
+	FuelLabel.visible = T
+	HullLabel.visible = T
 func OnStatLow(StatName : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText(StatName + " bellow 20%")
@@ -119,13 +132,13 @@ func OnStatLow(StatName : String) -> void:
 	add_child(notif)
 	
 func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : float):
-	$Control/PanelContainer/VBoxContainer/ShipName.text = ShipName
-	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(ShipSpeed * 360) + "km/h"
-	$Icon/ShipSymbol.text = ShipCasllSign
+	ShipNameLabel.text = ShipName
+	ShipSpeedLabel.text = "Speed " + var_to_str(ShipSpeed * 360) + "km/h"
+	ShipCallsign.text = ShipCasllSign
 	
 func _physics_process(_delta: float) -> void:
-	$Control.scale = Vector2(1,1) / camera.zoom
-	$Icon.scale = (Vector2(1,1) / camera.zoom) * 0.5
+	DetailPanel.scale = Vector2(1,1) / camera.zoom
+	ShipIcon.scale = (Vector2(1,1) / camera.zoom) * 0.5
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine()
 	$Line2D.width =  2 / camera.zoom.x
@@ -133,14 +146,13 @@ func _physics_process(_delta: float) -> void:
 	
 
 func UpdateLine()-> void:
-	var c = $Control as Control
-	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), c.global_position)
+	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
 
 func UpdateSpeed(Spd : float):
 	var spd = roundi(Spd * 360)
-	$Control/PanelContainer/VBoxContainer/ShipName2.text = "Speed " + var_to_str(spd) + "km/h"
+	ShipSpeedLabel.text = "Speed " + var_to_str(spd) + "km/h"
 #func UpdateFuel(extraamm : float = 0, extramax : float = 0):
 	#var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL_TANK").GetCurrentValue() + extraamm)
 	#var maxfuel = ShipData.GetInstance().GetStat("FUEL_TANK").GetStat() + extramax
@@ -148,11 +160,11 @@ func UpdateSpeed(Spd : float):
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(Alt))
 func UpdateDroneFuel(amm : float, maxamm : float):
-	$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1}  Tons".format([amm, maxamm])
+	FuelLabel.text = "Fuel: {0} / {1}  Tons".format([amm, maxamm])
 #func UpdateHull():
 	#$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
 func UpdateDroneHull(amm : float, maxamm : float):
-	$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([amm, maxamm])
+	HullLabel.text = "Hull: {0} / {1}".format([amm, maxamm])
 #func ToggleThreat(T : bool):
 	#$Control/PanelContainer/VBoxContainer/Threat.visible = T
 
@@ -165,26 +177,25 @@ func ToggleTimeLastSeend(T : bool):
 		TimeLastSeen = 0
 	else: if (TimeLastSeen == 0):
 		TimeLastSeen = Clock.GetInstance().GetTimeInHours()
-	$Control/PanelContainer/VBoxContainer/TimeSeen.visible = T
+	TimeSeenLabel.visible = T
 
 func UpdateTime():
 	var timepast = Clock.GetInstance().GetHoursSince(TimeLastSeen)
-	$Control/PanelContainer/VBoxContainer/TimeSeen.text = "Last Seen " + var_to_str(snappedf((timepast) , 0.01)) + "h ago"
+	TimeSeenLabel.text = "Last Seen " + var_to_str(snappedf((timepast) , 0.01)) + "h ago"
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
-	$Icon.add_to_group("UnmovableMapInfo")
+	ShipIcon.add_to_group("UnmovableMapInfo")
 	
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
-	$Icon.remove_from_group("UnmovableMapInfo")
+	ShipIcon.remove_from_group("UnmovableMapInfo")
 
 func UpdateSignRotation() -> void:
-	var c = $Control as Control
-	c.rotation += 0.01
+	DetailPanel.rotation += 0.01
 	$Control/PanelContainer.pivot_offset = $Control/PanelContainer.size / 2
 	$Control/PanelContainer.rotation -= 0.01
-	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), c.global_position)
+	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
 

@@ -15,6 +15,7 @@ func Save() -> void:
 	var Mapz = world.GetMap() as Map
 	var Inv = Mapz.GetInScreenUI().GetInventory() as InventoryManager
 	var DataArray : Array[Resource] = []
+	DataArray.append(world.GetSaveData())
 	DataArray.append(Mapz.GetSaveData())
 	DataArray.append(Mapz.GetMapMarkerEditorSaveData())
 	DataArray.append(Mapz.GetEnemySaveData())
@@ -44,6 +45,7 @@ func Load(world : World) ->bool:
 	#var Inv = Mapz.GetInScreenUI().GetInventory() as InventoryManager
 	var DiagHolder = world.GetDialogueProgress()
 	var mapdata : Array[Resource] = (sav.GetData("Towns") as SaveData).Datas
+	var WalletData : Wallet = (sav.GetData("Wallet") as SaveData).Datas[0]
 	var InvData : SaveData = sav.GetData("InventoryContents") as SaveData
 	#var StatData : Resource = sav.GetData("Stats")
 	#var ShipDat : BaseShip = (sav.GetData("Ship") as SaveData).Datas[0]
@@ -57,14 +59,15 @@ func Load(world : World) ->bool:
 	var InvestigationPositions = sav.GetData("PositionsToInvestigate") as SaveData
 	world.Loading = true
 	#call_deferred("LoadStats", world, StatData)
-	call_deferred("LoadMapDat", world, sav.GetData("PLData").Pos ,sav.GetData("PLData").DroneDat, enems, misses, MarkerEditorData, InvestigationPositions, InvData)
+	call_deferred("LoadMapDat", world, WalletData, sav.GetData("PLData").Pos ,sav.GetData("PLData").DroneDat, enems, misses, MarkerEditorData, InvestigationPositions, InvData)
 	return true
 
-func LoadMapDat(W : World, PlPos : Vector2, DroneDat : Array[DroneSaveData], Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
+func LoadMapDat(W : World, PlayerWallet : Wallet, PlPos : Vector2, DroneDat : Array[DroneSaveData], Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
 	var Mp = W.GetMap()
 	var Ships = get_tree().get_nodes_in_group("Ships")
 	Ships[0].GetDroneDock().LoadSaveData(DroneDat)
 	Ships[0].global_position = PlPos
+	W.LoadSaveData(PlayerWallet)
 	Mp.RespawnEnemies( Enems )
 	Mp.RespawnMissiles( Missiles )
 	Mp.LoadMapMarkerEditorSaveData(Data)

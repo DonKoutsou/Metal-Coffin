@@ -3,7 +3,7 @@ class_name InventoryShipStats
 @export var CharPortrait : TextureRect
 @export var ShipStatScene : PackedScene
 @export var StatsToShow : Array[ShipStat]
-
+@export var ShipIcon : TextureRect
 var CurrentShownCaptain : Captain
 
 var Stats : Array[ShipStatContainer]
@@ -26,3 +26,4 @@ func SetCaptain(Cpt : Captain) -> void:
 	CharPortrait.texture = Cpt.CaptainPortrait
 	CurrentShownCaptain = Cpt
 	UpdateValues()
+	ShipIcon.texture = Cpt.ShipIcon

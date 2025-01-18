@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=16 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
 [ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="5_wa6ro"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
+[ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="7_2spow"]
+[ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="8_i38ft"]
 
 [sub_resource type="Animation" id="Animation_gaja2"]
 length = 0.001
@@ -68,6 +70,34 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 shadow_size = 4
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m6hat"]
+noise_type = 4
+frequency = 0.6
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uyww5"]
+seamless = true
+normalize = false
+noise = SubResource("FastNoiseLite_m6hat")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_od2fi"]
+shader = ExtResource("7_2spow")
+shader_parameter/curvature = 0.28
+shader_parameter/skip = 0.01
+shader_parameter/image_flicker = 0.1
+shader_parameter/vignette_flicker_speed = 0.01
+shader_parameter/vignette_strength = 1.2
+shader_parameter/small_scanlines_speed = 1.0
+shader_parameter/small_scanlines_proximity = 2.0
+shader_parameter/small_scanlines_opacity = 0.64
+shader_parameter/scanlines_opacity = 0.41
+shader_parameter/scanlines_speed = 1.0
+shader_parameter/scanline_thickness = 0.58
+shader_parameter/scanlines_spacing = 0.5
+shader_parameter/tint_color = Color(0.154158, 0.635917, 0, 1)
+shader_parameter/tint_intensity = 0.02
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_uyww5")
+
 [node name="StartingMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 96
@@ -88,10 +118,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = -74.0
-offset_right = 143.0
-offset_bottom = -10.0
+offset_left = 74.0
+offset_top = -146.0
+offset_right = 206.0
+offset_bottom = -82.0
 grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/HBoxContainer"]
@@ -173,6 +203,32 @@ theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Exit"
+
+[node name="Screen" type="ColorRect" parent="."]
+process_mode = 3
+material = SubResource("ShaderMaterial_od2fi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(50, 50)
+mouse_filter = 2
+
+[node name="ScreenFrame" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_top = -90.0
+offset_right = 69.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_i38ft")
+expand_mode = 1
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]

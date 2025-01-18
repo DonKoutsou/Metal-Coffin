@@ -18,6 +18,7 @@ func DrawLines() -> void:
 		L.width = 20
 		add_child(L)
 		L.global_position = points[0]
+		#L.default_color = Color("0ca50a")
 		#L.add_point(Vector2.ZERO, 0)
 		for z in points.size():
 			L.add_point(points[z] - L.global_position, z)

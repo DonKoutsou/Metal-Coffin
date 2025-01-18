@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://InventorySystem/ItemDescriptor/ItemDescriptor.gd" id="1_2v1h2"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_qi0qj"]
-[ext_resource type="Texture2D" uid="uid://cw7pry6dv5w2k" path="res://Assets/Items/materials-science.png" id="2_yditg"]
+[ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="3_v0xjj"]
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemIcon", "ItemName", "ItemDesc", "UsableItemsActions", "UpgradeContainer", "ShipPartActions", "RepairButton", "UseButton", "TransferButton", "UpgradeButton", "UpgradeLabel") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "UsableItemsActions", "ShipPartActions", "RepairButton", "UseButton", "TransferButton", "UpgradeButton", "UpgradeLabel") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,17 +14,15 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("1_qi0qj")
 script = ExtResource("1_2v1h2")
-ItemIcon = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/TextureRect")
 ItemName = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ItemName")
 ItemDesc = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc")
 UsableItemsActions = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions")
-UpgradeContainer = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer")
 ShipPartActions = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions")
 RepairButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Repair")
 UseButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions/Use")
 TransferButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/Transfer")
 UpgradeButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade")
-UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer/Label")
+UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/Label")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -45,38 +43,25 @@ alignment = 1
 [node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_v0xjj")
 theme_override_font_sizes/font_size = 28
 text = "Item"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-texture = ExtResource("2_yditg")
-expand_mode = 2
-
-[node name="UpgradeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-alignment = 1
-
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(181.765, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_v0xjj")
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
 "
 fit_content = true
 autowrap_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/UpgradeContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 4
 
 [node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -86,6 +71,7 @@ alignment = 1
 [node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "Upgrade"
 
@@ -135,6 +121,8 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_v0xjj")
 bbcode_enabled = true
 text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
 fit_content = true

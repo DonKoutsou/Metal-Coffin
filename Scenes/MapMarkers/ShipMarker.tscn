@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=11 format=3 uid="uid://c3l8v8l2e2pkt"]
 
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
 [ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
@@ -10,19 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/Missile.png" id="7_uwuwu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi5cf"]
-content_margin_left = 1.0
-content_margin_top = 1.0
-content_margin_right = 1.0
-content_margin_bottom = 1.0
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
 bg_color = Color(0.176471, 0.176471, 0.176471, 0.780392)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
+corner_detail = 1
 shadow_color = Color(1, 1, 1, 0.6)
 shadow_size = 3
 
-[node name="ShipMarker" type="Control"]
+[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipNameLabel", "ShipSpeedLabel", "TimeSeenLabel", "ThreatLabel", "FuelLabel", "HullLabel", "DetailPanel", "ShipIcon")]
 z_index = 1
 use_parent_material = true
 layout_mode = 3
@@ -38,7 +36,18 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_7vk35")
 script = ExtResource("1_y30vi")
+Direction = NodePath("Icon/Direction")
+ShipCallsign = NodePath("Icon/ShipSymbol")
+ShipNameLabel = NodePath("Control/PanelContainer/VBoxContainer/ShipName")
+ShipSpeedLabel = NodePath("Control/PanelContainer/VBoxContainer/ShipName2")
+TimeSeenLabel = NodePath("Control/PanelContainer/VBoxContainer/TimeSeen")
+ThreatLabel = NodePath("Control/PanelContainer/VBoxContainer/Threat")
+FuelLabel = NodePath("Control/PanelContainer/VBoxContainer/Fuel")
+HullLabel = NodePath("Control/PanelContainer/VBoxContainer/Hull")
+DetailPanel = NodePath("Control")
+ShipIcon = NodePath("Icon")
 EnemyLocatedSound = ExtResource("3_6yg5x")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
@@ -91,9 +100,6 @@ alignment = 1
 [node name="ShipName" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-theme_override_constants/line_spacing = -5
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Quifsa"
 vertical_alignment = 1
@@ -102,9 +108,6 @@ vertical_alignment = 1
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_constants/line_spacing = -5
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "SPEED 100"
 vertical_alignment = 1
@@ -112,9 +115,6 @@ vertical_alignment = 1
 [node name="TimeSeen" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-theme_override_constants/line_spacing = -5
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Last Seen 1h ago"
 vertical_alignment = 1
@@ -123,9 +123,6 @@ vertical_alignment = 1
 visible = false
 use_parent_material = true
 layout_mode = 2
-theme_override_constants/line_spacing = -5
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Threat Level : 10"
 vertical_alignment = 1
@@ -133,9 +130,6 @@ vertical_alignment = 1
 [node name="Fuel" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-theme_override_constants/line_spacing = -5
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Fuel : 10 / 250 Tons"
 vertical_alignment = 1
@@ -143,9 +137,6 @@ vertical_alignment = 1
 [node name="Hull" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-theme_override_constants/line_spacing = -5
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 14
 text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
@@ -181,6 +172,7 @@ offset_right = 105.0
 offset_bottom = 40.0
 grow_vertical = 2
 pivot_offset = Vector2(0, 40)
+theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("7_nvnv6")
 theme_override_font_sizes/font_size = 34
 text = "->"
@@ -198,7 +190,7 @@ offset_top = -24.0
 offset_right = 0.5
 grow_horizontal = 2
 pivot_offset = Vector2(0, 35)
-theme_override_constants/line_spacing = -5
+theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_sgdeo")
 theme_override_font_sizes/font_size = 20
 text = "P"

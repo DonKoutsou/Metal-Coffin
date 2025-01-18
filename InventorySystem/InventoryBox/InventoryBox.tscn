@@ -39,6 +39,7 @@ Butto = NodePath("ItemButton")
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("1_xu5pf")
 disabled = true
 action_mode = 0
 icon_alignment = 1

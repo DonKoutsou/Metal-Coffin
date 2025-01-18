@@ -48,8 +48,8 @@ func MissileAimDirChanged(NewDir : float, Owner : Captain) -> void:
 		return
 	$MissileLine.rotation += NewDir
 	
-func LaunchMissile(Mis : MissileItem, Owner : Captain) -> void:
-	if (!IsOwner(Owner)):
+func LaunchMissile(Mis : MissileItem, Owner : Captain, User : Captain) -> void:
+	if (!IsOwner(User)):
 		return
 	var missile = Mis.MissileScene.instantiate() as Missile
 	missile.SetData(Mis)

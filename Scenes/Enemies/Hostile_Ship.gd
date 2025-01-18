@@ -362,6 +362,7 @@ func GetSaveData() -> SD_HostileShip:
 	dat.Position = global_position
 	dat.Cpt = Cpt
 	dat.Scene = scene_file_path
+	dat.Patrol = Patrol
 	dat.ShipName = ShipName
 	if (Command != null):
 		dat.CommandName = Command.GetShipName()
@@ -372,6 +373,7 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	Path = Dat.Path
 	PathPart = Dat.PathPart
 	Direction = Dat.Direction
+	Patrol = Dat.Patrol
 	#positioning happens on script wich respawns ship
 	#global_position = Dat.Position
 	Cpt = Dat.Cpt

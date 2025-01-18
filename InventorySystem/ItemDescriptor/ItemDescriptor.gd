@@ -3,11 +3,11 @@ extends PanelContainer
 class_name ItemDescriptor
 
 @export_group("UI Pieces")
-@export var ItemIcon : TextureRect
+#@export var ItemIcon : TextureRect
 @export var ItemName : Label
 @export var ItemDesc : RichTextLabel
 @export var UsableItemsActions : HBoxContainer
-@export var UpgradeContainer : HBoxContainer
+#@export var UpgradeContainer : HBoxContainer
 @export var ShipPartActions : HBoxContainer
 @export var RepairButton : Button
 @export var UseButton : Button
@@ -31,7 +31,7 @@ func SetData(Box : Inventory_Box) -> void:
 	set_physics_process(false)
 	DescribedContainer = Box
 	var It = DescribedContainer.GetContainedItem()
-	ItemIcon.texture = It.ItemIcon
+	#ItemIcon.texture = It.ItemIcon
 	ItemDesc.text = It.GetItemDesc()
 	
 	#if (It is UsableItem):
@@ -48,10 +48,10 @@ func SetData(Box : Inventory_Box) -> void:
 		UsableItemsActions.visible = false
 		ShipPartActions.visible = true
 		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
-		UpgradeContainer.visible = true
+		UpgradeLabel.visible = true
 		if (It.UpgradeVersion == null):
 			UpgradeButton.visible = false
-			UpgradeContainer.visible = false
+			UpgradeLabel.visible = false
 		else:
 			var inv = Box.GetParentInventory()
 			if (inv.GetItemBeingUpgraded() == Box):
@@ -63,7 +63,7 @@ func SetData(Box : Inventory_Box) -> void:
 	else :
 		TransferButton.visible = true
 		ShipPartActions.visible = false
-		UpgradeContainer.visible = false
+		UpgradeLabel.visible = false
 		
 #func _on_use_pressed() -> void:
 	#PopUpManager.GetInstance().DoConfirm("Are you sure you want to use this item ?", "Use", ConfirmUse)

@@ -27,6 +27,8 @@ func RegisterShip(Target : MapShip) -> void:
 	DockedDrones[Target] = []
 
 func UpdateConnectedShip(Ship : MapShip) -> void:
+	if (Armed):
+		_on_dissarm_drone_button_2_pressed()
 	ConnectedShip = Ship
 	call_deferred("UpdateCrewSelect")
 
