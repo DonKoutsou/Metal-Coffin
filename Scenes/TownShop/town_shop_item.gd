@@ -31,17 +31,25 @@ var Accum : float = 0
 func ItemBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		var rel = event.relative
+		if (rel.x > 0 and Bar.max_value == Bar.value):
+			return
+		else : if (rel.x < 0 and Bar.value == 0):
+			return
 		Accum += rel.x / 2
 		if (abs(Accum) < 10):
 			return
-		UpdateBar(Accum / 10)
+		UpdateBar(sign(Accum))
 		Accum = 0
 	else : if (event is InputEventScreenDrag):
 		var rel = event.relative
+		if (rel > 0 and Bar.max_value == Bar.value):
+			return
+		else : if (rel < 0 and Bar.value == 0):
+			return
 		Accum += rel.x / 2
 		if (abs(Accum) < 10):
 			return
-		UpdateBar(Accum / 10)
+		UpdateBar(sign(Accum))
 		Accum = 0
 
 func UpdateBar(Added : int):

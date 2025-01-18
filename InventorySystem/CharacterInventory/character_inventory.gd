@@ -57,6 +57,7 @@ func AddItem(It : Item) -> void:
 			g.UpdateAmm(1)
 			_InventoryContents[It] += 1
 			OnItemAdded.emit(It)
+			print("Added 1 {0}".format([It.ItemName]))
 			#if (It is MissileItem):
 				#MissileDockEventH.MissileAdded.emit(It)
 			return
@@ -68,6 +69,7 @@ func AddItem(It : Item) -> void:
 		if (It is ShipPart):
 			OnShipPartAdded.emit(It)
 		OnItemAdded.emit(It)
+		print("Added 1 {0}".format([It.ItemName]))
 		#if (It is MissileItem):
 			#MissileDockEventH.MissileAdded.emit(It)
 		return
@@ -96,6 +98,7 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	#if (It is MissileItem):
 		#MissileDockEventH.MissileRemoved.emit(It)
 	Box.UpdateAmm(-1)
+	print("Removed 1 {0}".format([It.ItemName]))
 	_InventoryContents[It] -= 1
 	if (_InventoryContents[It] == 0):
 		_InventoryContents.erase(It)
