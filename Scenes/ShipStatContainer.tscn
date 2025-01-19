@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://r8hnhjq1f0q0"]
+[gd_scene load_steps=9 format=3 uid="uid://r8hnhjq1f0q0"]
 
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_2cn7x"]
 [ext_resource type="Script" path="res://Scripts/ShipStatContainer.gd" id="1_30hhs"]
-[ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="2_otfxp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvfpq"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6mq6a"]
 bg_color = Color(1, 1, 1, 1)
@@ -17,6 +23,8 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 corner_detail = 1
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ueh8q"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nasb0"]
 bg_color = Color(0.421311, 0.88706, 0.915024, 1)
 border_width_left = 1
@@ -30,6 +38,8 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ufp1a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v3x0"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
@@ -48,6 +58,7 @@ corner_detail = 1
 [node name="ShipStatContainer" type="VBoxContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_2cn7x")
 theme_override_constants/separation = 0
 script = ExtResource("1_30hhs")
 
@@ -59,7 +70,6 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("2_otfxp")
 theme_override_font_sizes/font_size = 14
 text = "stat"
 horizontal_alignment = 1
@@ -70,7 +80,6 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 3
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("2_otfxp")
 theme_override_font_sizes/font_size = 20
 text = "10"
 horizontal_alignment = 1
@@ -79,6 +88,7 @@ vertical_alignment = 1
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_jvfpq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
 value = 19.17
 show_percentage = false
@@ -94,6 +104,7 @@ offset_top = -2.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_ueh8q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nasb0")
 value = 43.54
 show_percentage = false
@@ -109,6 +120,7 @@ offset_top = -2.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_ufp1a")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5v3x0")
 value = 60.17
 show_percentage = false

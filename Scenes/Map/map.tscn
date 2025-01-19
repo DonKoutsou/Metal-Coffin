@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=56 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ufdxh"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_j6nai"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
+[ext_resource type="Shader" path="res://Scenes/Map/teraininftest.gdshader" id="16_deff2"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/Craden.tres" id="18_qrim1"]
@@ -25,12 +26,12 @@
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="24_id5g2"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="25_s6vr7"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="25_xtg2d"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="26_h8cr4"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ELint.tscn" id="27_x5jep"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="28_dgqcy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="29_ugh6x"]
 [ext_resource type="Texture2D" uid="uid://6rqpwwu1hdxb" path="res://Assets/UIPiecies/Button_Camera 1_Green.png" id="30_8kvct"]
-[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="31_a4pob"]
 [ext_resource type="Texture2D" uid="uid://b6q1pf3tujd60" path="res://Assets/UIPiecies/Button_Camera 1_Red.png" id="32_82pap"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="33_v4i0p"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="34_4g7nr"]
@@ -62,8 +63,17 @@ normal_texture = ExtResource("14_j6nai")
 texture_filter = 5
 texture_repeat = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bohty"]
+shader = ExtResource("16_deff2")
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/zoom = 1.0
+shader_parameter/camera_position = null
+shader_parameter/my_texture = ExtResource("13_ufdxh")
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k65q1"]
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_Camera", "ScreenUI", "SteeringWh", "Elint", "DroneUI", "MissileUI", "ThrustUI", "MapMarkerControls")]
 layer = 0
@@ -113,7 +123,6 @@ size = Vector2i(866, 459)
 render_target_update_mode = 4
 
 [node name="Ground" type="Control" parent="SubViewportContainer/ViewPort"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,6 +160,7 @@ position_smoothing_speed = 1.0
 script = ExtResource("15_d8bna")
 
 [node name="ColorRect" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
+material = SubResource("ShaderMaterial_bohty")
 offset_left = -7500.0
 offset_top = -7500.0
 offset_right = 7500.0
@@ -196,6 +206,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("25_xtg2d")
 
 [node name="ScreenFrame" type="TextureRect" parent="OuterUI"]
 custom_minimum_size = Vector2(0, 38.045)
@@ -426,7 +437,6 @@ offset_bottom = 45.9999
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 12
 text = "Switch Ship"
 horizontal_alignment = 1
@@ -467,7 +477,6 @@ offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 12
 text = "Map Marker Editor"
 horizontal_alignment = 1
@@ -515,7 +524,6 @@ offset_bottom = 47.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 12
 text = "Regroup"
 horizontal_alignment = 1
@@ -557,7 +565,6 @@ offset_bottom = 45.9999
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 12
 text = "Land
 "
@@ -627,7 +634,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.57079
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 12
 text = "Speed Sim"
 horizontal_alignment = 1
@@ -669,7 +675,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.57079
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 12
 text = "Toggle Sim Pause"
 horizontal_alignment = 1
@@ -716,9 +721,8 @@ offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 12
-text = "Inventory"
+text = "Inv"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -814,7 +818,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5708
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
 theme_override_font_sizes/font_size = 24
 text = "X"
 horizontal_alignment = 1
@@ -858,8 +861,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5708
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "Clear"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -901,8 +903,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5708
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "Line"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -945,8 +946,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5708
 theme_override_constants/line_spacing = -3
-theme_override_fonts/font = ExtResource("31_a4pob")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "Text"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -980,6 +980,7 @@ offset_left = -494.0
 offset_right = -237.455
 offset_bottom = 76.755
 grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_k65q1")
 
 [connection signal="gui_input" from="SubViewportContainer" to="." method="_MAP_INPUT"]
 [connection signal="pressed" from="OuterUI/ScreenUi/RadarButton" to="." method="_on_radar_button_pressed"]

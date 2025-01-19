@@ -53,7 +53,7 @@ func OnZoomChanged() -> void:
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
 	get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
-	get_tree().call_group("Ships", "UpdateCameraZoom", zoom.x)
+	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", zoom.x)
 		
 func _UpdateMapGridVisibility():
 	if (zoom.x < 0.25):

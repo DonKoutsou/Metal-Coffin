@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=16 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" path="res://Scripts/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/simulation_notification.tscn" id="5_g51f2"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://InventorySystem/inventory.tscn" id="6_u1p46"]
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="8_cokoq"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="11_1oyku"]
@@ -18,29 +17,12 @@ light_mode = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ms5"]
 bg_color = Color(0.104229, 0.190224, 0.196376, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5r8g"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-corner_detail = 1
-shadow_size = 5
-shadow_offset = Vector2(-2, 2)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srlt5"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qsdd3"]
 noise_type = 4
-frequency = 0.4201
+frequency = 0.6494
 fractal_octaves = 10
 fractal_weighted_strength = 1.0
 
@@ -108,6 +90,7 @@ grow_horizontal = 2
 layout_mode = 1
 
 [node name="SimulationNotification" parent="Control3" instance=ExtResource("5_g51f2")]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_top = 0.0
@@ -139,55 +122,51 @@ layout_mode = 1
 process_mode = 3
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -193.5
-offset_top = -191.0
-offset_right = 193.5
-offset_bottom = 191.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_s5r8g")
+theme_override_styles/panel = SubResource("StyleBoxFlat_srlt5")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Control3/PauseContainer"]
 layout_mode = 2
+theme_override_constants/separation = 25
 alignment = 1
 
 [node name="PauseLabel" type="Label" parent="Control3/PauseContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.615304, 0.57196, 0.322451, 1)
+theme = ExtResource("9_8iafl")
+theme_override_colors/font_color = Color(0.964604, 0, 0.163205, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("8_cokoq")
-theme_override_font_sizes/font_size = 96
-text = "PAUSED"
+theme_override_font_sizes/font_size = 50
+text = "Device on standby"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Return" type="Button" parent="Control3/PauseContainer/HBoxContainer" groups=["Buttons"]]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("9_8iafl")
-theme_override_fonts/font = ExtResource("10_ljnge")
 theme_override_font_sizes/font_size = 34
 text = "Return
 "
 
 [node name="Save" type="Button" parent="Control3/PauseContainer/HBoxContainer" groups=["Buttons"]]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("9_8iafl")
-theme_override_fonts/font = ExtResource("10_ljnge")
 theme_override_font_sizes/font_size = 34
 text = "Save"
 
 [node name="Exit" type="Button" parent="Control3/PauseContainer/HBoxContainer" groups=["Buttons"]]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("9_8iafl")
-theme_override_fonts/font = ExtResource("10_ljnge")
 theme_override_font_sizes/font_size = 34
 text = "Exit"
 

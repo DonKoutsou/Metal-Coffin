@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dslxdgbana1k1"]
+[gd_scene load_steps=26 format=3 uid="uid://dslxdgbana1k1"]
 
 [ext_resource type="Script" path="res://InventorySystem/InventoryManager.gd" id="1_cjse7"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ddos4"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/ItemsAddedNotif.tscn" id="6_8f3qb"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="6_tmvr3"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="8_3qdt5"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="9_sau7b"]
 [ext_resource type="Script" path="res://InventorySystem/InventoryShipStats.gd" id="10_f0lea"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="10_gk2xr"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="11_0ig21"]
@@ -184,7 +183,6 @@ alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_sau7b")
 theme_override_font_sizes/font_size = 12
 text = "Base Stat"
 
@@ -196,7 +194,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_sau7b")
 theme_override_font_sizes/font_size = 12
 text = "Item Buff"
 

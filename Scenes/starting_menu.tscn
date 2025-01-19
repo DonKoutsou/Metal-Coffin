@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=15 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="5_wa6ro"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="7_2spow"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="8_i38ft"]
@@ -174,8 +173,8 @@ alignment = 1
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("6_gn124")
 theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("5_wa6ro")
 theme_override_font_sizes/font_size = 34
 text = "Causarum Machina"
 horizontal_alignment = 1
@@ -188,7 +187,7 @@ layout_mode = 2
 theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
-text = "Play"
+text = "New Expedition"
 
 [node name="Load" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
 layout_mode = 2

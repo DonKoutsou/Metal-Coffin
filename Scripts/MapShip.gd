@@ -59,7 +59,7 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, GetFuelRange(), Color(0.763, 0.659, 0.082), false, 2 / CamZoom, true)
 
 func _physics_process(delta: float) -> void:
-	queue_redraw()
+	#queue_redraw()
 	if (Paused):
 		return
 	if (Landing):
@@ -212,6 +212,7 @@ func UpdateELINTTRange(rang : float):
 	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
+	queue_redraw()
 
 func Damage(amm : float) -> void:
 	Cpt.GetStat("HULL").CurrentVelue -= amm

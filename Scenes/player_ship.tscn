@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=12 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="5_vcup0"]
@@ -6,35 +6,10 @@
 [ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="9_jx5d0"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="18_elnvx"]
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="20_8n1nj"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="20_hn8tc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
 light_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bweje"]
-blend_mode = 1
-
-[sub_resource type="Curve" id="Curve_gn3pm"]
-_data = [Vector2(0, 0.297297), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_pgv80"]
-curve = SubResource("Curve_gn3pm")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qn4ww"]
-particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-spread = 1.244
-initial_velocity_max = 1.0
-angular_velocity_min = -1.60933e-05
-angular_velocity_max = 308.99
-radial_velocity_min = -2.23517e-05
-radial_velocity_max = -2.23517e-05
-gravity = Vector3(0, 0, 0)
-scale_min = 0.05
-scale_max = 0.05
-scale_curve = SubResource("CurveTexture_pgv80")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
 
@@ -44,19 +19,11 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
 radius = 1000.0
 
-[node name="PlayerShip" type="Node2D" groups=["Ships"]]
+[node name="PlayerShip" type="Node2D" groups=["Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_vppi8")
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
-
-[node name="SmokeParticles" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_bweje")
-position = Vector2(-7, 0)
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_qn4ww")
-texture = ExtResource("20_8n1nj")
-lifetime = 20.0
 
 [node name="ShipBody" type="Area2D" parent="."]
 collision_layer = 4

@@ -26,8 +26,6 @@ class_name ShipMarker
 
 @export var Icons : Dictionary
 
-var camera : Camera2D
-
 var TimeLastSeen : float
 
 #var DetailInitialPos : Vector2
@@ -41,7 +39,6 @@ signal ShipDeparted
 
 func _ready() -> void:
 	#DetailInitialPos = $Control/PanelContainer/VBoxContainer.position
-	camera = ShipCamera.GetInstance()
 	DetailPanel.visible = false
 	$Line2D.visible = false
 	TimeSeenLabel.visible = false
@@ -136,14 +133,13 @@ func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : flo
 	ShipSpeedLabel.text = "Speed " + var_to_str(ShipSpeed * 360) + "km/h"
 	ShipCallsign.text = ShipCasllSign
 	
-func _physics_process(_delta: float) -> void:
-	DetailPanel.scale = Vector2(1,1) / camera.zoom
-	ShipIcon.scale = (Vector2(1,1) / camera.zoom) * 0.5
+func UpdateCameraZoom(NewZoom : float) -> void:
+	DetailPanel.scale = Vector2(1,1) / NewZoom
+	ShipIcon.scale = (Vector2(1,1) / NewZoom) * 0.5
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine()
-	$Line2D.width =  2 / camera.zoom.x
-	
-	
+	$Line2D.width =  2 / NewZoom
+
 
 func UpdateLine()-> void:
 	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)

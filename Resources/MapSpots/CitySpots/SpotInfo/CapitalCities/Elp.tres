@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=9 format=3 uid="uid://dclt8xw084fal"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=8 format=3 uid="uid://dclt8xw084fal"]
 
 [ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="1_fc6nb"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_btbid"]
-[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="3_ly1cw"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="4_bc7ui"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="4_u7sym"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_t2yuh"]
@@ -14,8 +13,8 @@ script = ExtResource("4_bc7ui")
 SpotName = "Elp"
 Event = ExtResource("1_fc6nb")
 EnemyCity = true
-HostilePatrol = Array[ExtResource("2_btbid")]([ExtResource("3_ly1cw")])
-HostilePatrolShipNames = Array[String](["Lement"])
+HostilePatrol = Array[ExtResource("2_btbid")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("4_u7sym")]([ExtResource("5_t2yuh"), ExtResource("6_rsk4r"), ExtResource("7_moet6")])
-HostileGarrisson = Array[ExtResource("2_btbid")]([ExtResource("3_ly1cw")])
-HostileGarrissonShipNames = Array[String](["Epsilon"])
+HostileGarrisson = Array[ExtResource("2_btbid")]([])
+HostileGarrissonShipNames = Array[String]([])

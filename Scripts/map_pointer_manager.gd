@@ -39,22 +39,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.modulate = FriendlyColor
 	else:
 		marker.modulate = EnemyColor
-	
-	#if (Ship is PlayerShip):
-		#marker.call_deferred("ToggleShipDetails", true)
-		#marker.call_deferred("ToggleFriendlyShipDetails", true)
-		#Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
-		#Ship.connect("ShipDeparted", marker.OnShipDeparted)
-		#Ship.connect("StatLow", marker.OnStatLow)
-		#Ship.connect("Elint", marker.ToggleShowElint)
-		#Ship.connect("LandingStarted", marker.OnLandingStarted)
-		#Ship.connect("LandingCanceled", marker.OnLandingEnded)
-		#Ship.connect("LandingEnded", marker.OnLandingEnded)
-		#Ship.connect("TakeoffStarted", marker.OnLandingStarted)
-		#Ship.connect("TakeoffEnded", marker.OnLandingEnded)
-		#marker.SetType("Ship")
-		#marker.SetMarkerDetails("Flagship", "P",Ship.GetShipSpeed())
-	
+
 	if (Ship is HostileShip):
 		if (EnemyDebug):
 			#HOSTILE_SHIP_DEBUG

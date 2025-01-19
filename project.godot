@@ -53,6 +53,7 @@ UnmovableMapInfo=""
 Clock=""
 Missiles=""
 LineMarkers=""
+ZoomAffected=""
 
 [gui]
 

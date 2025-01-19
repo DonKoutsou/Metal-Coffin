@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
-[ext_resource type="FontFile" uid="uid://b0gnimhhmxlfd" path="res://Fonts/Play-Regular.ttf" id="3_p38gw"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_n5ia3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
 bg_color = Color(0, 0, 0, 1)
@@ -246,7 +246,7 @@ corner_radius_bottom_left = 1024
 corner_detail = 20
 anti_aliasing = false
 
-[node name="SpotMarker" type="Control"]
+[node name="SpotMarker" type="Control" node_paths=PackedStringArray("SpotNameLabel", "SpotDropPosition") groups=["ZoomAffected"]]
 use_parent_material = true
 layout_mode = 3
 anchors_preset = 8
@@ -262,6 +262,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_5x46s")
+SpotNameLabel = NodePath("HBoxContainer/TextureRect2")
+SpotDropPosition = NodePath("HBoxContainer")
 NofiticationScene = ExtResource("2_b0564")
 
 [node name="AnalyzeButton" type="Panel" parent="."]
@@ -306,7 +308,29 @@ pivot_offset = Vector2(20, 20)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ey58")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+use_parent_material = true
+layout_mode = 2
+offset_left = -32.0
+offset_top = -95.045
+offset_right = 34.0
+offset_bottom = -78.045
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect2" type="Label" parent="HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_n5ia3")
+theme_override_font_sizes/font_size = 16
+text = "Curdawa"
+vertical_alignment = 1
+justification_flags = 227
+uppercase = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 z_index = 2
 texture_filter = 4
 use_parent_material = true
@@ -317,41 +341,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -321.0
+offset_top = -353.045
 offset_right = 34.0
-offset_bottom = -46.0
+offset_bottom = -78.045
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(33, 275)
 mouse_filter = 2
 theme_override_constants/separation = -4
 alignment = 2
-
-[node name="TextureRect2" type="Label" parent="VBoxContainer"]
-texture_filter = 6
-use_parent_material = true
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("3_p38gw")
-theme_override_font_sizes/font_size = 16
-text = "Curdawa"
-horizontal_alignment = 1
-vertical_alignment = 2
-autowrap_mode = 2
-justification_flags = 227
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-use_parent_material = true
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-use_parent_material = true
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -32.5)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://xsvdtls713l0"]
+
+[ext_resource type="Shader" path="res://Scenes/Map/teraininftest.gdshader" id="1_v8ssp"]
+[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="2_10n88"]
+[ext_resource type="Script" path="res://testcam.gd" id="3_rkvo3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cu6nj"]
+shader = ExtResource("1_v8ssp")
+shader_parameter/texture_scale = Vector2(0.5, 0.5)
+shader_parameter/zoom = 1.0
+shader_parameter/camera_position = Vector2(0, 0)
+shader_parameter/my_texture = ExtResource("2_10n88")
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_cu6nj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_rkvo3")

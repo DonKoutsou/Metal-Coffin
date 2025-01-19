@@ -1,21 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://1vnrpn8q4byq"]
+[gd_scene load_steps=3 format=3 uid="uid://1vnrpn8q4byq"]
 
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_urlo6"]
 [ext_resource type="Script" path="res://Scripts/fade_notif.gd" id="2_k1b3j"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_n0ir2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrba1"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.202578, 0.128871, 0.115881, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_detail = 1
 
 [node name="FadeNotif" type="PanelContainer" groups=["ItemNotification"]]
 anchors_preset = 8
@@ -31,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_xrba1")
+theme = ExtResource("1_urlo6")
 script = ExtResource("2_k1b3j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -40,7 +26,6 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_n0ir2")
 theme_override_font_sizes/font_size = 34
 text = "Item(s) Found"
 horizontal_alignment = 1

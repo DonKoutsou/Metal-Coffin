@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=9 format=3 uid="uid://dobir15ooa8uf"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=8 format=3 uid="uid://dobir15ooa8uf"]
 
 [ext_resource type="Resource" uid="uid://dijsq004n7ouw" path="res://Resources/Happenings/CrewRecruitHappeningCraden.tres" id="1_fg3oa"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_ldj7b"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_bqrbn"]
-[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="3_plwxm"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="4_wlpxv"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_50l7f"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="6_36t7x"]
@@ -14,8 +13,8 @@ script = ExtResource("1_ldj7b")
 SpotName = "Cirkari"
 Event = ExtResource("1_fg3oa")
 EnemyCity = true
-HostilePatrol = Array[ExtResource("2_bqrbn")]([ExtResource("3_plwxm")])
-HostilePatrolShipNames = Array[String](["Karkhan"])
+HostilePatrol = Array[ExtResource("2_bqrbn")]([])
+HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("4_wlpxv")]([ExtResource("5_50l7f"), ExtResource("6_36t7x"), ExtResource("7_gc4lx")])
-HostileGarrisson = Array[ExtResource("2_bqrbn")]([ExtResource("3_plwxm")])
-HostileGarrissonShipNames = Array[String](["Korm"])
+HostileGarrisson = Array[ExtResource("2_bqrbn")]([])
+HostileGarrissonShipNames = Array[String]([])

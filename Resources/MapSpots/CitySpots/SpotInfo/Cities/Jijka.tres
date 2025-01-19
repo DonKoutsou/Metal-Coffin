@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://d7rsc1j336wt"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://d7rsc1j336wt"]
 
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="1_s22og"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_xjfdo"]
-[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_dx2nd"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_t26eo"]
 [ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_obv2u"]
 
@@ -13,5 +12,5 @@ EnemyCity = true
 HostilePatrol = Array[ExtResource("1_xjfdo")]([])
 HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("1_s22og")]([ExtResource("2_t26eo")])
-HostileGarrisson = Array[ExtResource("1_xjfdo")]([ExtResource("2_dx2nd"), ExtResource("2_dx2nd")])
-HostileGarrissonShipNames = Array[String](["Zift", "DedP"])
+HostileGarrisson = Array[ExtResource("1_xjfdo")]([])
+HostileGarrissonShipNames = Array[String]([])
