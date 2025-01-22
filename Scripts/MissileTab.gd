@@ -25,10 +25,14 @@ func UpdateConnectedShip(Ship : MapShip) -> void:
 	ConnectedShip = Ship
 	call_deferred("UpdateCrewSelect")
 
-func _ready() -> void:
+#HACK TO MAKE SURE UI IS INITIALISED IN TIME.
+func Initialise() -> void:
 	DroneDockEventH.connect("DroneAdded", RegisterShip)
 	MissileDockEventH.connect("MissileAdded", MissileAdded)
 	MissileDockEventH.connect("MissileRemoved", MissileRemoved)
+
+func _ready() -> void:
+	
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
 	#visible = false

@@ -13,6 +13,8 @@ class_name Captain
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
 
+var _CharInv : CharacterInventory
+
 func _init() -> void:
 	if (OS.is_debug_build() and CheckForErrors):
 		call_deferred("CheckForIssues")
@@ -76,3 +78,6 @@ func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
 	#if (GetStatCurrentValue(It.UpgradeName) > GetStatFinalValue(It.UpgradeName)):
 		#GetStat(It.UpgradeName).CurrentVelue = GetStatFinalValue(It.UpgradeName)
 	ShipPartChanged.emit(It)
+
+func GetCharacterInventory() -> CharacterInventory:
+	return _CharInv

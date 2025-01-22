@@ -45,3 +45,4 @@ CardDescription = "Throws a barragge on the enemy. DMG = 6 * Firepower"
 Energy = 1
 Options = Array[ExtResource("3_p2x1d")]([SubResource("Resource_dv0dw"), SubResource("Resource_8bfpy"), SubResource("Resource_rs06y")])
 AllowDuplicates = true
+Consume = false

@@ -8,3 +8,4 @@ class_name BattleShipStats
 @export var ShipIcon : Texture
 @export var CaptainIcon : Texture
 @export var Speed : float
+@export var Cards : Dictionary

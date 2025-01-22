@@ -69,7 +69,7 @@ _data = {
 "Show": SubResource("Animation_w7jjx")
 }
 
-[node name="ShipMarkerNotification" type="Control"]
+[node name="ShipMarkerNotification" type="Control" groups=["ZoomAffected"]]
 z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
 layout_mode = 3

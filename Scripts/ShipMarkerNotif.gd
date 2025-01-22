@@ -3,14 +3,13 @@ extends Control
 class_name ShipMarkerNotif
 
 var EntityToFollow : Node2D
-var camera : Camera2D
 
 var Blink : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	camera = ShipCamera.GetInstance()
 	if (Blink):
 		$AnimationPlayer.play("Show")
+	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
 	
 func SetText(Txt : String) -> void:
 	$Control/PanelContainer/Label.text = Txt
@@ -18,10 +17,10 @@ func SetText(Txt : String) -> void:
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	queue_free()
 
-func _physics_process(_delta: float) -> void:
-	$Control.scale = Vector2(1,1) / camera.zoom
+func UpdateCameraZoom(NewZoom : float) -> void:
+	$Control.scale = Vector2(1,1) / NewZoom
 	UpdateLine()
-	$Line2D.width =  2 / camera.zoom.x
+	$Line2D.width =  2 / NewZoom
 	
 func UpdateLine()-> void:
 	var c = $Control as Control

@@ -7,4 +7,5 @@ class_name CardStats
 @export var Energy : int
 @export var Options : Array[CardOption]
 @export var AllowDuplicates : bool
+@export var Consume : bool = false
 var SelectedOption : CardOption

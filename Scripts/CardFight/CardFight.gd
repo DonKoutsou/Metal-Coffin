@@ -18,6 +18,7 @@ var ShipTurns : Array[BattleShipStats]
 var CurrentTurn : int = 0
 
 var PlayerShips : Array[BattleShipStats]
+
 var EnemyShips : Array[BattleShipStats]
 
 var ShipsViz : Array[CardFightShipViz]
@@ -25,10 +26,6 @@ var ShipsViz : Array[CardFightShipViz]
 var Actions : Dictionary
 
 signal CardFightEnded(Survivors : Array[BattleShipStats])
-
-
-
-
 
 #TODO
 #Find way to expand system to work with inventory items.
@@ -129,7 +126,15 @@ func StartActionPerformPhase() -> void:
 				else :
 					Target = PlayerShips.pick_random()
 				
-				var HasDeff = Actions[Target].has(Action.CounteredBy)
+				
+				var HasDeff = false
+				var DefName = Action.CounteredBy.get_rid()
+				for Ac in Actions[Target]:
+					var TargAction = Ac as CardStats
+					if (TargAction.CardName == DefName):
+						Actions[Target].erase(Ac)
+						HasDeff = true
+						break
 				
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				anim.DrawnLine = true
@@ -206,7 +211,7 @@ func NextShipActionPick() -> void:
 	var CurrentShip = ShipTurns[CurrentTurn]
 	Actions[CurrentShip] = []
 	if (PlayerShips.has(CurrentShip)):
-		UpdateCards()
+		RestartCards()
 	else:
 		EnemyActionSelection()
 
@@ -248,11 +253,12 @@ func EnemyActionSelection() -> void:
 	CurrentTurn += 1
 	NextShipActionPick()
 
-func UpdateCards() -> void:
+func RestartCards() -> void:
 	ClearCards()
 	Energy = 4
 	UpdateEnergy()
-	for g in Cards:
+	var CharCards = ShipTurns[CurrentTurn].Cards
+	for g in CharCards.keys():
 		var c = CardScene.instantiate() as Card
 		c.SetCardStats(g)
 		c.connect("OnCardPressed", OnCardSelected)
@@ -261,6 +267,21 @@ func UpdateCards() -> void:
 		else :
 			deffensive_card_plecements.add_child(c)
 	ShipsViz[CurrentTurn].Enable()
+
+func UpdateHandCards() -> void:
+	for g in offensive_card_plecements.get_children():
+		g.queue_free()
+	for g in deffensive_card_plecements.get_children():
+		g.queue_free()
+	var CharCards = ShipTurns[CurrentTurn].Cards
+	for g in CharCards.keys():
+		var c = CardScene.instantiate() as Card
+		c.SetCardStats(g)
+		c.connect("OnCardPressed", OnCardSelected)
+		if (g is OffensiveCardStats):
+			offensive_card_plecements.add_child(c)
+		else :
+			deffensive_card_plecements.add_child(c)
 
 func ClearCards() -> void:
 	for g in offensive_card_plecements.get_children():
@@ -271,7 +292,7 @@ func ClearCards() -> void:
 		g.queue_free()
 
 func OnCardSelected(C : Card, Option : String) -> void:
-
+	
 	var Action = C.CStats.duplicate() as CardStats
 	var CurrentShip = ShipTurns[CurrentTurn]
 	if (!Action.AllowDuplicates and Actions[CurrentShip].has(Action)):
@@ -289,6 +310,13 @@ func OnCardSelected(C : Card, Option : String) -> void:
 	c.connect("OnCardPressed", RemoveCard)
 	selected_card_plecements.add_child(c)
 	Actions[CurrentShip].append(Action)
+	
+	if (C.CStats.Consume):
+		var Cards = ShipTurns[CurrentTurn].Cards
+		Cards[C.CStats] -= 1
+		if (Cards[C.CStats] == 0):
+			Cards.erase(C.CStats)
+	UpdateHandCards()
 
 func RemoveCard(C : Card, _Options : String) -> void:
 	C.queue_free()

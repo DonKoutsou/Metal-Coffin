@@ -59,7 +59,7 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, GetFuelRange(), Color(0.763, 0.659, 0.082), false, 2 / CamZoom, true)
 
 func _physics_process(delta: float) -> void:
-	#queue_redraw()
+	queue_redraw()
 	if (Paused):
 		return
 	if (Landing):
@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 			ShipDockActions.emit("Repairing", false, 0)
 				#ToggleShowRefuel("Repairing", false)
 		#if (CanUpgrade):
-		var inv = InventoryManager.GetInstance().GetCharacterInventory(Cpt)
+		var inv = Cpt.GetCharacterInventory()
 		if (inv._ItemBeingUpgraded != null):
 			#ToggleShowRefuel("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
 			ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
@@ -408,6 +408,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
+	stats.Cards = Cpt.GetCharacterInventory().GetCards()
 	return stats
 func GetShipMaxSpeed() -> float:
 	var Spd = Cpt.GetStatFinalValue("SPEED")

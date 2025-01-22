@@ -13,6 +13,7 @@ signal OnItemBought(It : Item)
 signal OnItemSold(It : Item)
 
 #var PlFunds : int = 10000
+var LandedShip : MapShip
 var ItPrice : int = 10
 var It : Item
 var ShopAmm : int = 10
@@ -53,6 +54,15 @@ func ItemBar_gui_input(event: InputEvent) -> void:
 		Accum = 0
 
 func UpdateBar(Added : int):
+	
+	if (Added > 0):
+		if (!InventoryManager.GetInstance().FleetHasSpace(It, LandedShip)):
+			PopUpManager.GetInstance().DoFadeNotif("No Space available to buy armament.")
+			return
+		OnItemBought.emit(It)
+	else :
+		OnItemSold.emit(It)
+		
 	if (Added * ItPrice > PlWallet.Funds):
 		Added = PlWallet.Funds / ItPrice
 	if (Added > ShopAmm):
@@ -64,10 +74,6 @@ func UpdateBar(Added : int):
 	#if (NowPlAmm > PlMaxFuel):
 		#Added = PlMaxFuel - (PlFuel + BoughtAmm)
 		#NewPlFuel = Added
-	if (Added > 0):
-		OnItemBought.emit(It)
-	else :
-		OnItemSold.emit(It)
 	ShopAmm -= Added
 	BoughtAmm += Added
 	PlWallet.Funds -= Added * ItPrice

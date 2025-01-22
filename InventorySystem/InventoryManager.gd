@@ -53,6 +53,17 @@ func RemoveItemFromFleet(It : Item, Command : MapShip) -> void:
 			Inv.RemoveItem(It)
 			return
 
+func FleetHasSpace(It : Item, Command : MapShip) -> bool:
+	var Captains : Array[Captain] = []
+	Captains.append(Command.Cpt)
+	for g in Command.GetDroneDock().DockedDrones:
+		Captains.append(g.Cpt)
+	for g in Captains:
+		var Inv = GetCharacterInventory(g)
+		if (Inv.HasSpaceForItem(It)):
+			return true
+	return false
+
 func AddItemToFleet(It : Item, Command : MapShip) -> void:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
@@ -168,7 +179,7 @@ func DroneAdded(Dr : Drone, _Target : MapShip):
 
 func AddCharacter(Cha : Captain) -> void:
 	var CharInv = CharInvScene.instantiate() as CharacterInventory
-	
+	Cha._CharInv = CharInv
 	CharInv.InitialiseInventory(Cha)
 	_CharacterInventories[Cha] = CharInv
 	CharacterPlace.add_child(CharInv)
@@ -193,6 +204,7 @@ func OnCharacterRemoved(Cha : Captain) -> void:
 	
 func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
 	var CharInv : CharacterInventory
+	Cha._CharInv = CharInv
 	if (_CharacterInventories.has(Cha)):
 		CharInv = _CharacterInventories[Cha]
 	else:

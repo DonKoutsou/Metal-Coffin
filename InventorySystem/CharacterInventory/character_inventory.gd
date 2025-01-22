@@ -18,6 +18,7 @@ signal ItemTransf(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal OnCharacterInspectionPressed
 var _InventoryContents : Dictionary
 
+var _CardInventory : Dictionary
 
 var SimPaused : bool = false
 var SimSpeed : int = 1
@@ -27,6 +28,9 @@ var _UpgradeTime : float
 func _ready() -> void:
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
+
+func GetCards() -> Dictionary:
+	return _CardInventory.duplicate()
 
 func GetInventoryContents() -> Dictionary:
 	return _InventoryContents
@@ -57,6 +61,8 @@ func AddItem(It : Item) -> void:
 			g.UpdateAmm(1)
 			_InventoryContents[It] += 1
 			OnItemAdded.emit(It)
+			if (It.CardProviding != null):
+				_CardInventory[It.CardProviding] += 1
 			print("Added 1 {0}".format([It.ItemName]))
 			#if (It is MissileItem):
 				#MissileDockEventH.MissileAdded.emit(It)
@@ -66,6 +72,8 @@ func AddItem(It : Item) -> void:
 		Empty.RegisterItem(It)
 		Empty.UpdateAmm(1)
 		_InventoryContents[It] = 1
+		if (It.CardProviding != null):
+			_CardInventory[It.CardProviding] = 1
 		if (It is ShipPart):
 			OnShipPartAdded.emit(It)
 		OnItemAdded.emit(It)
@@ -100,9 +108,14 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	Box.UpdateAmm(-1)
 	print("Removed 1 {0}".format([It.ItemName]))
 	_InventoryContents[It] -= 1
+	if (It.CardProviding != null):
+		var c = It.CardProviding
+		_CardInventory[c] -= 1
+		if (_CardInventory[c] == 0):
+			_CardInventory.erase(c)
 	if (_InventoryContents[It] == 0):
 		_InventoryContents.erase(It)
-
+	
 func RemoveItem(It : Item) -> void:
 	for g in _GetInventoryBoxes():
 		var box = g as Inventory_Box

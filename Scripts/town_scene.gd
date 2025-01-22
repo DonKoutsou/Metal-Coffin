@@ -74,6 +74,7 @@ func _ready() -> void:
 		ItScene.ItPrice = g.Price
 		ItScene.ShopAmm = g.Amm
 		ItScene.PlAmm = Itms.count(g.It)
+		ItScene.LandedShip = LandedShip
 		ItScene.connect("OnItemBought", OnItemBought)
 		ItScene.connect("OnItemSold", OnItemSold)
 		ItemPlecement.add_child(ItScene)
