@@ -10,12 +10,6 @@ var Cost : int
 
 func _ready() -> void:
 	$PanelContainer.visible = false
-	#var st = CardStats.new()
-	#st.CardName = "Barrage"
-	#st.Energy = 1
-	#st.Icon = load("res://Assets/Items/rocket.png")
-	#st.Options.append_array(["FIRE", "AP", "NORMAL"])
-	#SetCardStats(st)
 
 func SetCardStats(Stats : CardStats) -> void:
 	CStats = Stats

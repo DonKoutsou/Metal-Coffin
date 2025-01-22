@@ -128,7 +128,7 @@ func StartActionPerformPhase() -> void:
 				
 				
 				var HasDeff = false
-				var DefName = Action.CounteredBy.get_rid()
+				var DefName = Action.CounteredBy.CardName
 				for Ac in Actions[Target]:
 					var TargAction = Ac as CardStats
 					if (TargAction.CardName == DefName):
@@ -305,6 +305,7 @@ func OnCardSelected(C : Card, Option : String) -> void:
 	c.SetCardStats(Action)
 	if (Energy < c.GetCost()):
 		return
+	@warning_ignore("narrowing_conversion")
 	Energy -= c.GetCost()
 	UpdateEnergy()
 	c.connect("OnCardPressed", RemoveCard)

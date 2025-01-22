@@ -141,7 +141,8 @@ Fire={
 
 2d_physics/layer_1="ShipBody"
 2d_physics/layer_2="Radar"
-2d_physics/layer_3="Fuel"
+2d_physics/layer_3="Spot"
+2d_physics/layer_4="Dock"
 
 [rendering]
 

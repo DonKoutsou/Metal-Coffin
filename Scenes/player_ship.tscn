@@ -26,17 +26,15 @@ script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 
 [node name="ShipBody" type="Area2D" parent="."]
-collision_layer = 4
 collision_mask = 0
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_rjoek")
 
 [node name="Radar" type="Area2D" parent="."]
 disable_mode = 2
-collision_layer = 16385
-collision_mask = 0
+collision_layer = 2
+collision_mask = 5
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
@@ -44,7 +42,7 @@ shape = SubResource("CircleShape2D_42dgb")
 
 [node name="Elint" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 16384
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
@@ -61,7 +59,6 @@ points = PackedVector2Array(0, 0, 10, 0)
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="DroneDock" parent="." instance=ExtResource("5_vcup0")]
-collision_layer = 4096
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708

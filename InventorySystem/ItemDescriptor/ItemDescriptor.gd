@@ -89,7 +89,7 @@ func ConfirmDrop() -> void:
 	
 func ConfirmUpgrade() -> void:
 	ItemUpgraded.emit(DescribedContainer)
-	queue_free()
+	#queue_free()
 	
 func _on_use_more_pressed() -> void:
 	UsingAmm = min(UsingAmm + 1, DescribedContainer.Ammount)

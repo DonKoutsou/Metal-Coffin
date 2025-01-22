@@ -4,6 +4,7 @@ class_name SpawnDecider
 
 @export var CaptainList : Array[CaptainSpawnInfo]
 
+const LowestPrice : int = 30
 var sorted_captain_list
 
 func Init() -> void:
@@ -21,7 +22,11 @@ func GetSpawnsForLocation(YPos : float) -> Array[Captain]:
 		var cpt = Captain.new()
 		cpt.CopyStats(g.Cpt)
 		Fleet.append(cpt)
-	print("Generating fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
+	#print("Generating fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
+	#var FleetNames = "Fleet : "
+	#for g in Fleet:
+		#FleetNames += "\n" + g.ShipCallsign
+	#print(FleetNames)
 	return Fleet
 
 func GetPointsForPosition(YPos : float) -> int:
@@ -29,20 +34,42 @@ func GetPointsForPosition(YPos : float) -> int:
 
 func generate_fleet(points: int) -> Array[CaptainSpawnInfo]:
 	var fleet : Array[CaptainSpawnInfo] = []
+	var available_ships: Array = sorted_captain_list.duplicate()
 
-	# Iterate over the sorted list and fill the fleet
-	for ship in sorted_captain_list:
-		var CInfo = ship as CaptainSpawnInfo
-		var max_ships = min(points / CInfo.Cost, CInfo.MaxAmmInFleet)
-
-		# Add the ships to the fleet if budget allows
-		for i in range(max_ships):  # Use a simple loop variable like 'i'
-			if points >= CInfo.Cost and fleet.size() < 6:
-				fleet.append(CInfo)
-				points -= CInfo.Cost
-			else:
-				break
+	# Randomly shuffle the available ships to introduce variability in selection.
+	available_ships.shuffle()
 	
+	# While there's space in the fleet, try to maximize the points usage
+	# with a dynamic strategy.
+	while fleet.size() < 6 and points > LowestPrice:
+		var selected_ship: CaptainSpawnInfo = null
+		var best_value = 0
+
+		# Consider each ship for inclusion
+		for ship in available_ships:
+			var ship_info = ship as CaptainSpawnInfo
+
+			# Calculate how many we can afford and consider its strategic value
+			var max_ships = min(points / ship_info.Cost, ship_info.MaxAmmInFleet)
+			if max_ships > 0:
+				# Calculate ship value by some heuristic (e.g., cost efficiency)
+				var value = ship_info.Cost  # Add your strategy metric here
+				
+				# Decide if this ship is worth adding to the fleet
+				if value > best_value:
+					best_value = value
+					selected_ship = ship_info
+
+		# If a valid ship is selected, add to the fleet
+		if selected_ship:
+			var to_add = min(points / selected_ship.Cost, selected_ship.MaxAmmInFleet, 6 - fleet.size())
+			for i in range(to_add):
+				if points >= selected_ship.Cost:
+					fleet.append(selected_ship)
+					points -= selected_ship.Cost
+				else:
+					break
+
 	return fleet
 
 # Custom sort function: Sort by cost descending

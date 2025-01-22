@@ -13,6 +13,9 @@ var FoundShips : Array[Node2D] = []
 var Paused = false
 var SimulationSpeed : int = 1
 
+var FiredBy : MapShip
+var VisibleBy : Array[MapShip]
+
 func SetData(Dat : MissileItem) -> void:
 	Speed = Dat.Speed
 	MissileName = Dat.ItemName
@@ -31,7 +34,7 @@ func GetShipName() -> String:
 	return MissileName
 
 func _ready() -> void:
-	MapPointerManager.GetInstance().AddShip(self, false)
+	#
 	Paused = SimulationManager.IsPaused()
 	var s = DeletableSound.new()
 	s.stream = MissileLaunchSound
@@ -66,31 +69,44 @@ func StopSeeing() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (!FoundShips.has(area.get_parent())):
 		FoundShips.append(area.get_parent())
-		if (area.get_parent() is HostileShip):
-			area.get_parent().OnShipSeen(self)
+		if (FiredBy is PlayerShip or FiredBy is Drone):
+			if (area.get_parent() is HostileShip):
+				area.get_parent().OnShipSeen(self)
 
 func _on_missile_body_area_entered(area: Area2D) -> void:
-	if (FoundShips.size() == 0):
-		return
+	
 	#MapPointerManager.GetInstance().RemoveShip(area)
 	#area.queue_free()
-	if (area.get_parent() is Missile):
-		area.get_parent().queue_free()
+	var IsRadar = area.get_collision_layer_value(2)
+	if (IsRadar):
+		if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+			OnShipSeen(area.get_parent())
+			#MapPointerManager.GetInstance().AddShip(self, false)
+	else:
+		if (FoundShips.size() == 0):
+			return
+		if (area.get_parent() is Missile):
+			area.get_parent().queue_free()
+			StopSeeing()
+			queue_free()
+			return
+		area.get_parent().Damage(Damage)
+		if (area.get_parent().IsDead()):
+			var s = DeletableSoundGlobal.new()
+			s.stream = MissileKillSound
+			s.volume_db = -10
+			s.bus = "UI"
+			s.autoplay = true
+			#s.max_distance = 20000
+			get_parent().add_child(s)
 		StopSeeing()
 		queue_free()
-		return
-	area.get_parent().Damage(Damage)
-	if (area.get_parent().IsDead()):
-		var s = DeletableSoundGlobal.new()
-		s.stream = MissileKillSound
-		s.volume_db = -10
-		s.bus = "UI"
-		s.autoplay = true
-		#s.max_distance = 20000
-		get_parent().add_child(s)
-	StopSeeing()
-	queue_free()
-
+		
+func _on_missile_body_area_exited(area: Area2D) -> void:
+	var IsRadar = area.get_collision_layer_value(2)
+	if (IsRadar):
+		if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+			OnShipUnseen(area.get_parent())
 func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 
@@ -124,3 +140,14 @@ func GetSaveData() -> MissileSaveData:
 	dat.Distance = Distance
 	dat.Scene = scene_file_path
 	return dat
+	
+func OnShipSeen(SeenBy : MapShip):
+	if (VisibleBy.has(SeenBy)):
+		return
+	VisibleBy.append(SeenBy)
+	if (VisibleBy.size() > 1):
+		return
+	MapPointerManager.GetInstance().AddShip(self, false)
+	SimulationManager.GetInstance().TogglePause(true)
+func OnShipUnseen(UnSeenBy : MapShip):
+	VisibleBy.erase(UnSeenBy)

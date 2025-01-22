@@ -52,8 +52,11 @@ func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	if (!IsOwner(User)):
 		return
 	var missile = Mis.MissileScene.instantiate() as Missile
+	missile.FiredBy = get_parent()
 	missile.SetData(Mis)
 	missile.global_rotation = $MissileLine.global_rotation
 	missile.global_position = global_position
 	get_parent().get_parent().add_child(missile)
+	
+	MapPointerManager.GetInstance().AddShip(missile, true)
 	#MissileDockEventH.MissileLaunched(Mis)

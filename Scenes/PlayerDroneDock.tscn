@@ -21,7 +21,7 @@ radius = 10.0499
 light_mode = 1
 
 [node name="DroneDock" type="Area2D"]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_fmftw")

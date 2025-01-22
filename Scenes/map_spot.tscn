@@ -11,8 +11,8 @@ script = ExtResource("1_x7uyn")
 FuelTradeScene = ExtResource("2_yj7um")
 
 [node name="AreaNotif" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 15
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaNotif"]
 shape = SubResource("CircleShape2D_4ymfd")

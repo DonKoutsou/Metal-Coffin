@@ -19,7 +19,7 @@ func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	AvailableShips.append(ControlledShip)
-	_Map.GetSteeringWheelUI().call_deferred("ForceSteer",ControlledShip.GetSteer())
+	_Map.GetSteeringWheelUI().call_deferred("CopyShipSteer", ControlledShip)
 	_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
@@ -114,7 +114,7 @@ func AccelerationChanged(value: float) -> void:
 	ControlledShip.AccelerationChanged(value)
 #Called from steering wheel to change tragectory of currently controlled ship
 func SteerChanged(value: float) -> void:
-	ControlledShip.Steer(deg_to_rad(value))
+	ControlledShip.Steer(value)
 
 func OnShipDestroyed(Sh : MapShip):
 	var NewCommander
@@ -152,7 +152,7 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 		ControlledShip = AvailableShips[currentcontrolled + 1]
 	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	_Map.GetThrustUI().ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	_Map.GetSteeringWheelUI().call_deferred("ForceSteer",ControlledShip.GetSteer())
+	_Map.GetSteeringWheelUI().call_deferred("CopyShipSteer", ControlledShip)
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
 	_Map.GetElintUI().UpdateConnectedShip(ControlledShip)

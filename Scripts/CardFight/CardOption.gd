@@ -8,3 +8,4 @@ class_name CardOption
 @export var Fire : bool = false
 @export var DamageMitigationFlat : int
 @export var DamageMitigationPercent : float
+@export var FittingCard : CardStats

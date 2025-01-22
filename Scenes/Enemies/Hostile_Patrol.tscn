@@ -39,8 +39,7 @@ position = Vector2(-13.9999, -14.0001)
 texture = ExtResource("5_q8roo")
 
 [node name="ShipBody" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 13
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_jc744")
@@ -49,23 +48,26 @@ shape = SubResource("CircleShape2D_jc744")
 position = Vector2(0.5, 0)
 
 [node name="Radar" type="Area2D" parent="."]
-collision_layer = 16384
-collision_mask = 12
+collision_layer = 2
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
 
 [node name="ShipDock" parent="." instance=ExtResource("7_hahnw")]
+collision_layer = 1
+collision_mask = 7
 
 [node name="Elint" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 16384
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
 shape = SubResource("CircleShape2D_t084r")
 
 [node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
+collision_layer = 1
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

@@ -8,6 +8,7 @@ class_name Item
 @export var MaxStackCount = 1
 @export var RandomFindMaxCount = 1
 @export var CardProviding : CardStats
+@export var CardOptionProviding : CardOption
 
 func GetItemDesc() -> String:
 	return ItemDesc

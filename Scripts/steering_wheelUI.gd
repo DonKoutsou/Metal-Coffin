@@ -31,13 +31,16 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 
 func ForceSteer(st : float) -> void:
 	$TextureRect.rotation = rad_to_deg(st)
-	
+
+func CopyShipSteer(Ship : MapShip) -> void:
+	$TextureRect.rotation = Ship.GetSteer()
+
 func _physics_process(_delta: float) -> void:
 	$TextureRect.rotation += SteeringDir
 	DistanceTraveled += abs(SteeringDir)
 	SteeringDir = lerp(SteeringDir, 0.0, 0.2)
 	SteeringOffseted.emit(SteeringDir)
-	SteeringDitChanged.emit($TextureRect.rotation)
+	SteeringDitChanged.emit(SteeringDir)
 	if (abs(SteeringDir) < 0.001):
 		set_physics_process(false)
 	if (DistanceTraveled > 1):

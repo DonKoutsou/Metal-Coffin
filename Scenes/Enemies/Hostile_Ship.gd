@@ -34,8 +34,8 @@ func  _ready() -> void:
 	
 	_UpdateShipIcon(Cpt.ShipIcon)
 	
-	call_deferred("UpdateELINTTRange", Cpt.GetStatFinalValue("ELINT"))
-	call_deferred("UpdateVizRange", Cpt.GetStatFinalValue("VIZ_RANGE"))
+	UpdateELINTTRange(Cpt.GetStatFinalValue("ELINT"))
+	UpdateVizRange(Cpt.GetStatFinalValue("VIZ_RANGE"))
 	
 	
 	if (!Patrol):
@@ -70,8 +70,8 @@ func  _ready() -> void:
 		
 	TogglePause(SimulationManager.IsPaused())
 	#MapPointerManager.GetInstance().AddShip(self, false)
-	$Elint.connect("area_entered", _on_elint_area_entered)
-	$Elint.connect("area_exited", _on_elint_area_exited)
+	#$Elint.connect("area_entered", _on_elint_area_entered)
+	#$Elint.connect("area_exited", _on_elint_area_exited)
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
@@ -79,6 +79,7 @@ func _physics_process(delta: float) -> void:
 	
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
+	missile.FiredBy = self
 	missile.SetData(Mis)
 	get_parent().add_child(missile)
 	if (Command != null):
@@ -161,11 +162,7 @@ func RemovePort():
 	CurrentPort = null
 	for g in GetDroneDock().DockedDrones:
 		g.CurrentPort = null
-func Damage(amm : float) -> void:
-	Cpt.GetStat("HULL").CurrentVelue -= amm
-	super(amm)
-func IsDead() -> bool:
-	return Cpt.GetStat("HULL").CurrentVelue <= 0
+
 func IntersectPusruing() -> Vector2:
 	# Get the current position and velocity of the ship
 	var ship_position
@@ -183,9 +180,9 @@ func IntersectPusruing() -> Vector2:
 func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBy.has(SeenBy)):
 		return
-	if (VisibleBy.size() > 0):
-		return
 	VisibleBy.append(SeenBy)
+	if (VisibleBy.size() > 1):
+		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	SimulationManager.GetInstance().TogglePause(true)
 func OnShipUnseen(UnSeenBy : Node2D):
@@ -209,8 +206,10 @@ func _on_area_entered(area: Area2D) -> void:
 			SetCurrentPort(RefuelSpot)
 			#SetSpeed(0)
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		var bit = area.get_collision_layer_value(3) or area.get_collision_layer_value(4)
-		if (bit):
+		var IsRadar = area.get_collision_layer_value(2)
+		if (IsRadar):
+			OnShipSeen(area.get_parent())
+		else:
 			var plships : Array[Node2D] = []
 			var hostships : Array[Node2D] = []
 			if (Docked):
@@ -235,8 +234,6 @@ func _on_area_entered(area: Area2D) -> void:
 					plships.append_array(drn.GetDroneDock().DockedDrones)
 					
 			OnShipMet.emit(plships, hostships)
-		else:
-			OnShipSeen(area.get_parent())
 	else : if (area.get_parent() == Command and CommingBack):
 		var Ship = area.get_parent() as HostileShip
 		Ship.GetDroneDock().DockDrone(self, true)

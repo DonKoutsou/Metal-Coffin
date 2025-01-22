@@ -165,7 +165,7 @@ func ItemUpgradeFinished() -> void:
 	var Part = _ItemBeingUpgraded.GetContainedItem() as ShipPart
 	RemoveItemFromBox(_ItemBeingUpgraded)
 	for g in Part.Upgrades.size():
-		Part.UpgradeVersion.Upgrades[g].CurrentVal = Part.Upgrades[g].CurrentVal
+		Part.UpgradeVersion.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
 	AddItem(Part.UpgradeVersion)
 	_ItemBeingUpgraded = null
 

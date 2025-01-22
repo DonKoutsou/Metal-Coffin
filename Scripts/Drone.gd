@@ -6,8 +6,8 @@ signal DroneReturning
 
 func  _ready() -> void:
 	super()
-	UpdateVizRange(Cpt.GetStatFinalValue("VIZ_RANGE"))
-	UpdateELINTTRange(Cpt.GetStatFinalValue("ELINT"))
+	#UpdateVizRange(Cpt.GetStatFinalValue("VIZ_RANGE"))
+	#UpdateELINTTRange(Cpt.GetStatFinalValue("ELINT"))
 	Paused = SimulationManager.IsPaused()
 
 func _exit_tree() -> void:

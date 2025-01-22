@@ -46,10 +46,12 @@ var ElintContacts : Dictionary
 
 var Detectable = true
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	$Elint.connect("area_entered", _on_elint_area_entered)
 	$Elint.connect("area_exited", _on_elint_area_exited)
 	Cpt.connect("ShipPartChanged", PartChanged)
+
+func _ready() -> void:
 	MapPointerManager.GetInstance().AddShip(self, true)
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
@@ -204,6 +206,7 @@ func UpdateElint(delta: float) -> void:
 	if (BiggestLevel > 0):
 		Elint.emit(true, BiggestLevel)
 func UpdateVizRange(rang : float):
+	print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = $Radar/CollisionShape2D
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 func UpdateELINTTRange(rang : float):
@@ -322,20 +325,22 @@ func updatedronecourse():
 	ShipLookAt(predicted_position)
 	
 func Steer(Rotation : float) -> void:
-	var tw = create_tween()
+	#var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(self, "rotation", Rotation, 1)
+	#tw.tween_property(self, "rotation", rotation + (Rotation ), 1)
+	rotation += Rotation / 50
 	var piv = $PlayerShipSpr/ShadowPivot as Node2D
 	piv.global_rotation = deg_to_rad(-90)
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
 	for g in GetDroneDock().DockedDrones:
-		g.ForceSteer(Rotation)
+		g.ForceSteer(rotation)
 		
 func ForceSteer(Rotation : float) -> void:
-	var tw = create_tween()
-	#tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(self, "rotation", Rotation, 1)
+	#var tw = create_tween()
+	##tw.set_trans(Tween.TRANS_EXPO)
+	#tw.tween_property(self, "rotation", Rotation, 1)
+	rotation = Rotation
 	var piv = $PlayerShipSpr/ShadowPivot as Node2D
 	piv.global_rotation = deg_to_rad(-90)
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D

@@ -39,7 +39,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.modulate = FriendlyColor
 	else:
 		marker.modulate = EnemyColor
-
+		#_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif()
 	if (Ship is HostileShip):
 		if (EnemyDebug):
 			#HOSTILE_SHIP_DEBUG
@@ -65,11 +65,14 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
 		marker.SetType("Ship")
 	else : if (Ship is Missile):
+		if (!Friend):
+			marker.PlayHostileShipNotif()
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 		marker.SetType("Missile")
 	_ShipMarkers.append(marker)
 	
+	marker.UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
 func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	if (Spots.has(Spot)):
 		return
@@ -193,11 +196,21 @@ func _physics_process(delta: float) -> void:
 				#if (ship.Landing or ship.TakingOff):
 					#Marker.UpdateAltitude(ship.Altitude)
 				
-				#Marker.global_position = ship.global_position
+				Marker.global_position = ship.global_position
 				#Marker.UpdateSpeed(ship.GetSpeed())
 			else : if (ship is Missile):
-				Marker.UpdateTrajectory(ship.global_rotation)
-			Marker.global_position = ship.global_position
+				if (ship.FiredBy is PlayerShip or ship.FiredBy is Drone or ship.VisibleBy.size() > 0):
+					Marker.global_position = ship.global_position
+					#Marker.UpdateSpeed(ship.GetShipSpeed())
+					
+					Marker.ToggleTimeLastSeend(false)
+					Marker.UpdateTrajectory(ship.global_rotation)
+				else :
+					###Marker.ToggleThreat(false)
+					Marker.ToggleTimeLastSeend(true)
+					Marker.UpdateTime()
+				#Marker.UpdateTrajectory(ship.global_rotation)
+			
 		
 	
 	

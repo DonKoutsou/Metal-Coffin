@@ -45,7 +45,7 @@ func _ready() -> void:
 	#$Control/PanelContainer/VBoxContainer/Threat.visible = false
 	FuelLabel.visible = false
 	HullLabel.visible = false
-	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
+	
 	#set_physics_process(false)
 func PlayHostileShipNotif() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif

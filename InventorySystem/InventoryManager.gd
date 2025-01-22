@@ -104,6 +104,7 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
+		DescriptorPlace.remove_child(desc)
 		desc.queue_free()
 		if (desc.DescribedContainer == Box):
 			CharStatPanel.visible = true
@@ -128,7 +129,8 @@ func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> v
 		#print("Ship needs to be docked to upgrade")
 		return
 	OwnerInventory.StartUpgrade(Box)
-
+	CloseDescriptor()
+	BoxSelected(Box, OwnerInventory)
 func CancelUpgrades(Cha : Captain) -> void:
 	if (_CharacterInventories.has(Cha)):
 		var CharInv = _CharacterInventories[Cha] as CharacterInventory
@@ -240,11 +242,13 @@ func OnItemRemoved(It : Item, Owner : Captain) -> void:
 	ShipStats.UpdateValues()
 
 func InspectCharacter(Cha : Captain) -> void:
+	CloseDescriptor()
 	ShipStats.SetCaptain(Cha)
 
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
+		DescriptorPlace.remove_child(descriptors[0])
 		descriptors[0].queue_free()
 	CharStatPanel.visible = true
 

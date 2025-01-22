@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Scenes/Cards/Missile.tres" id="12_a2cqf"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Scenes/Cards/Evasive.tres" id="13_pchum"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="14_kl7fj"]
-[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Scenes/Cards/Barrage.tres" id="14_ll7ew"]
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Scenes/Cards/Res/Barrage/Barrage.tres" id="14_ll7ew"]
 
 [node name="CardFight" type="PanelContainer"]
 anchors_preset = 15
