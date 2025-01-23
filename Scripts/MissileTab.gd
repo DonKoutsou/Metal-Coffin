@@ -20,6 +20,7 @@ func UpdateConnectedShip(Ship : MapShip) -> void:
 	if (!Missiles.has(Ship)):
 		var MissileAr : Array[MissileItem] = []
 		Missiles[Ship] = MissileAr
+		Ship.connect("OnShipDestroyed", OnShipDest)
 	if (Armed):
 		_on_dissarm_drone_button_2_pressed()
 	ConnectedShip = Ship
@@ -58,6 +59,7 @@ func RegisterShip(Dr : Drone, _Target : MapShip):
 	if (!Missiles.has(Dr)):
 		var MissileAr : Array[MissileItem] = []
 		Missiles[Dr] = MissileAr
+		Dr.connect("OnShipDestroyed", OnShipDest)
 
 func FindShip(C: Captain ) -> MapShip:
 	for g in Missiles.keys():
@@ -76,7 +78,7 @@ func UpdateAvailableMissiles() -> void:
 	var sizea = AvailableMissiles.size()
 	if (sizeb != sizea):
 		UpdateCrewSelect()
-	
+
 func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
 	var Ship = FindShip(Target)
 	if (MIs.Type == 1):
@@ -96,7 +98,10 @@ func MissileRemoved(MIs : MissileItem, Target : Captain) -> void:
 	if (MIs == CurrentlySelectedMissile):
 		CurrentlySelectedMissile = null
 		UpdateCrewSelect()
-		
+
+func OnShipDest(Ship : MapShip) -> void:
+	Missiles.erase(Ship)
+
 func _on_deploy_drone_button_pressed() -> void:
 	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, FindOwner(CurrentlySelectedMissile),ConnectedShip.Cpt)
 	_on_dissarm_drone_button_2_pressed()

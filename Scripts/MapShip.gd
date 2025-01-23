@@ -220,10 +220,15 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 func Damage(amm : float) -> void:
 	Cpt.GetStat("HULL").CurrentVelue -= amm
 	if (IsDead()):
-		MapPointerManager.GetInstance().RemoveShip(self)
-		OnShipDestroyed.emit(self)
-		#$Radar/CollisionShape2D.set_deferred("disabled", true)
-		queue_free()
+		Kill()
+		
+func Kill() -> void:
+	if (self is not HostileShip):
+			InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
+	MapPointerManager.GetInstance().RemoveShip(self)
+	OnShipDestroyed.emit(self)
+	queue_free()
+
 func IsDead() -> bool:
 	return Cpt.GetStat("HULL").CurrentVelue <= 0
 

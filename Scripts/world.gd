@@ -81,8 +81,9 @@ func _enter_tree() -> void:
 func TerminateWorld() -> void:
 	#GetMap().GetInScreenUI().GetInventory().FlushInventory()
 	var PlShip = get_tree().get_nodes_in_group("Ships")[0]
-	InventoryManager.GetInstance().OnCharacterRemoved(PlShip.Cpt)
-	PlShip.GetDroneDock().ClearAllDrones()
+	if (PlShip is PlayerShip):
+		InventoryManager.GetInstance().OnCharacterRemoved(PlShip.Cpt)
+		PlShip.GetDroneDock().ClearAllDrones()
 
 func GetDialogueProgress() -> DialogueProgressHolder:
 	return $DialogueProgressHolder

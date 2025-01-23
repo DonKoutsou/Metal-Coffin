@@ -57,9 +57,10 @@ func HasSpace() -> bool:
 func ClearAllDrones() -> void:
 	for g in DockedDrones:
 		DroneDisharged(g)
+		g.Kill()
 	for g in FlyingDrones:
 		DroneDisharged(g)
-
+		g.Kill()
 func GetSaveData() -> Array[DroneSaveData]:
 	var saved : Array[DroneSaveData]
 	for g in DockedDrones:
@@ -95,9 +96,7 @@ func DroneDisharged(Dr : Drone):
 	if (FlyingDrones.has(Dr)):
 		FlyingDrones.erase(Dr)
 	#ShipData.GetInstance().RemoveCaptainStats([Dr.Cpt.GetStat("INVENTORY_CAPACITY")])
-	InventoryManager.GetInstance().OnCharacterRemoved(Dr.Cpt)
-	MapPointerManager.GetInstance().RemoveShip(Dr)
-	Dr.queue_free()
+	
 
 func AddCaptain(Cpt : Captain, Notify : bool = true) -> Drone:
 	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone

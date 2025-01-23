@@ -87,6 +87,9 @@ func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	else:
 		missile.global_position = global_position
 	missile.look_at(Pos)
+	
+	if (CurrentPort != null):
+		Cpt.GetStat("MISSILE_SPACE").CurrentVelue = Cpt.GetStat("MISSILE_SPACE").GetStat()
 	#Reloading = 4
 
 func UpdateElint(delta: float) -> void:

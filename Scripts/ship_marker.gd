@@ -116,7 +116,7 @@ func OnLandingEnded(_Ship : MapShip):
 func ToggleShipDetails(T : bool):
 	DetailPanel.visible = T
 	$Line2D.visible = T
-	Direction.visible = T
+	#Direction.visible = T
 	#set_physics_process(T)
 func ToggleFriendlyShipDetails(T : bool):
 	FuelLabel.visible = T
@@ -148,6 +148,7 @@ func UpdateLine()-> void:
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
 
 func UpdateSpeed(Spd : float):
+	Direction.visible = Spd > 0
 	var spd = roundi(Spd * 360)
 	ShipSpeedLabel.text = "Speed " + var_to_str(spd) + "km/h"
 #func UpdateFuel(extraamm : float = 0, extramax : float = 0):

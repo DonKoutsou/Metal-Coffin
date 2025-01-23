@@ -10,8 +10,9 @@ func  _ready() -> void:
 	#UpdateELINTTRange(Cpt.GetStatFinalValue("ELINT"))
 	Paused = SimulationManager.IsPaused()
 
-func _exit_tree() -> void:
-	MapPointerManager.GetInstance().RemoveShip(self)
+#func _exit_tree() -> void:
+	##InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
+	#MapPointerManager.GetInstance().RemoveShip(self)
 
 func Steer(Rotation : float) -> void:
 	if (CommingBack or Docked):

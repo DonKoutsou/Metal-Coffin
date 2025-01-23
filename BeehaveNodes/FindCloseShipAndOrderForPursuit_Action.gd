@@ -9,7 +9,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	
 	var closestship = Command.FindClosestFleetToPosition(ShipToPursue.global_position, true, true)
 	if (closestship == null):
-		return RUNNING
+		return FAILURE
 	Command.OrderShipToPursue(closestship, ShipToPursue)
 	
 	return SUCCESS

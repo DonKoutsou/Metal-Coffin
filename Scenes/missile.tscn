@@ -52,7 +52,6 @@ polygon = PackedVector2Array(22, 0, 200, 100, 220, 0, 200, -100)
 
 [node name="MissileBody" type="Area2D" parent="."]
 collision_mask = 3
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MissileBody"]
 shape = SubResource("CircleShape2D_xahj0")

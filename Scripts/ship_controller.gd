@@ -117,6 +117,10 @@ func SteerChanged(value: float) -> void:
 	ControlledShip.Steer(value)
 
 func OnShipDestroyed(Sh : MapShip):
+	if (Sh is PlayerShip):
+		Sh.GetDroneDock().ClearAllDrones()
+		World.GetInstance().call_deferred("GameLost", "Flagshit destroyed")
+		return
 	var NewCommander
 	if (Sh.GetDroneDock().DockedDrones.size() > 0):
 		NewCommander = Sh.GetDroneDock().DockedDrones[0]
