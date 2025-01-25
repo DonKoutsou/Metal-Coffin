@@ -69,7 +69,7 @@ func  _ready() -> void:
 		add_child(BTree)
 		
 	TogglePause(SimulationManager.IsPaused())
-	MapPointerManager.GetInstance().AddShip(self, false)
+	#MapPointerManager.GetInstance().AddShip(self, false)
 	#$Elint.connect("area_entered", _on_elint_area_entered)
 	#$Elint.connect("area_exited", _on_elint_area_exited)
 func _physics_process(delta: float) -> void:
@@ -383,9 +383,9 @@ func IsFuelFull() -> bool:
 	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
 func IsDamaged() -> bool:
 	for g in GetDroneDock().DockedDrones:
-		if (!g.IsDamaged()):
-			return false
-	return Cpt.IsResourceFull(STAT_CONST.STATS.HULL)
+		if (g.IsDamaged()):
+			return true
+	return !Cpt.IsResourceFull(STAT_CONST.STATS.HULL)
 func TogglePause(t : bool):
 	Paused = t
 	if (t and BTree != null):

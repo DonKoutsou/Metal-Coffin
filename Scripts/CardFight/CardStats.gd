@@ -8,4 +8,5 @@ class_name CardStats
 @export var Options : Array[CardOption]
 @export var AllowDuplicates : bool
 @export var Consume : bool = false
+@export var RequiredPart : Array[ShipPart]
 var SelectedOption : CardOption

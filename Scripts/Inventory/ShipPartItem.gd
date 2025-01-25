@@ -5,7 +5,7 @@ class_name ShipPart
 @export var UpgradeVersion : ShipPart
 @export var UpgradeTime : float
 @export var IsDamaged : bool = false
-@export var RepairItems : Array[Item]
+
 func _setup_local_to_scene() -> void:
 	for Up in Upgrades:
 		Up.CurrentValue = Up.UpgradeAmmount

@@ -19,6 +19,7 @@ signal OnCharacterInspectionPressed
 var _InventoryContents : Dictionary
 
 var _CardInventory : Dictionary
+var _CardAmmo : Dictionary
 
 var SimPaused : bool = false
 var SimSpeed : int = 1
@@ -30,7 +31,27 @@ func _ready() -> void:
 	set_physics_process(_ItemBeingUpgraded != null)
 
 func GetCards() -> Dictionary:
-	return _CardInventory.duplicate()
+	var CardsInInventory : Dictionary = {}
+	for g in _CardInventory.keys():
+		var C = g as CardStats
+		if (C.RequiredPart.size() > 0):
+			for P in C.RequiredPart:
+				if (HasItem(P)):
+					CardsInInventory[g] = _CardInventory[g]
+					break
+			continue
+		CardsInInventory[g] = _CardInventory[g]
+	return CardsInInventory
+	
+func GetCardAmmo() -> Dictionary:
+	return _CardAmmo.duplicate()
+
+func HasItem(It : Item) -> bool:
+	for g in _InventoryContents.keys():
+		var it = g as Item
+		if (it.resource_path == It.resource_path):
+			return true
+	return false
 
 func GetInventoryContents() -> Dictionary:
 	return _InventoryContents
@@ -84,8 +105,8 @@ func AddItem(It : Item) -> void:
 	ItemPlecementFailed.emit(It)
 	return
 
-func HasItem(It : Item) -> bool:
-	return _InventoryContents.has(It)
+#func HasItem(It : Item) -> bool:
+	#return _InventoryContents.has(It)
 
 func HasSpaceForItem(It : Item) -> bool:
 	var boxes = _GetInventoryBoxes()
