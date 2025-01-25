@@ -9,6 +9,8 @@ func SetData(Stat : STAT_CONST.STATS) -> void:
 	
 	$HBoxContainer/Label.text = STAT_CONST.STATS.keys()[Stat].replace("_", " ")
 	var MaxVal = STAT_CONST.GetStatMaxValue(Stat)
+	if (Stat == STAT_CONST.STATS.SPEED):
+		MaxVal *= 360
 	$ProgressBar.max_value = MaxVal
 	#$ProgressBar.value = Stat.GetShipBuff()
 	$ProgressBar/ShipBar.max_value = MaxVal

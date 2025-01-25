@@ -84,6 +84,7 @@ func UpdateInvestigationPos(newpos : Vector2, originship : MapShip) -> void:
 			for z in g.Receivers:
 				z.LastKnownPosition = newpos
 	print("Investigation position updated to : " + var_to_str(newpos))
+	
 func InvestigationOrderComplete(Pos : Vector2) -> void:
 	for g in InvestigationOrders:
 		if (g.Target == Pos):

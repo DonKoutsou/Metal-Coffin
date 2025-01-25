@@ -1,16 +1,21 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=14 format=3 uid="uid://c8b3lpqbi11up"]
+[gd_resource type="Resource" script_class="Captain" load_steps=19 format=3 uid="uid://c8b3lpqbi11up"]
 
 [ext_resource type="Texture2D" uid="uid://h68yf60yhy41" path="res://Assets/CaptainPortraits/Captain9.png" id="1_ud80f"]
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_6dx32"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_j33n8"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="3_u6ltl"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_urdjp"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="5_mlw8x"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="6_38q0j"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="7_f81un"]
+[ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/MediumMachinegun.tres" id="8_f0x14"]
+[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/FireSuppressionUnit.tres" id="9_62oib"]
 
 [sub_resource type="Resource" id="Resource_t21ml"]
 resource_local_to_scene = true
 script = ExtResource("2_6dx32")
 StatName = 2
-StatBase = 1.0
+StatBase = 0.0
 StatShipPartBuff = 0.0
 CurrentValue = 0.0
 
@@ -47,7 +52,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_2jxnm"]
 script = ExtResource("2_6dx32")
 StatName = 1
-StatBase = 1.0
+StatBase = 0.0
 StatShipPartBuff = 0.0
 CurrentValue = 0.0
 
@@ -73,6 +78,6 @@ CaptainPortrait = ExtResource("1_ud80f")
 ShipIcon = ExtResource("3_j33n8")
 CaptainStats = Array[ExtResource("2_6dx32")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_5nith"), SubResource("Resource_1yc5b"), SubResource("Resource_2jxnm"), SubResource("Resource_rn88p"), SubResource("Resource_3a3o1")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_urdjp")]([])
+StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("5_mlw8x"), ExtResource("6_38q0j"), ExtResource("7_f81un"), ExtResource("8_f0x14"), ExtResource("9_62oib"), ExtResource("9_62oib"), ExtResource("9_62oib"), ExtResource("9_62oib")])
 CurrentPort = ""
 CheckForErrors = true
