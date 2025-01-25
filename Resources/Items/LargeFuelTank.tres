@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://bwwby1vknkefj"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_cbem7"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_6e4v5"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_6e4v5"]
 [ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_hfrci"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_11ept"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_lu011"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="5_83sa7"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_lu011"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_83sa7"]
 
 [sub_resource type="Resource" id="Resource_o628u"]
 script = ExtResource("5_83sa7")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkl2a6ey2cxpg"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_w86mx"]
-[ext_resource type="Script" path="res://Scripts/HappeningInstance.gd" id="2_nimax"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningInstance.gd" id="2_nimax"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_s42or"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="3_hs11o"]
 

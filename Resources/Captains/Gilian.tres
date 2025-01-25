@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://b3cn121xunbep" path="res://Assets/CaptainPortraits/Captain3.png" id="1_msgws"]
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_mq2gw"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_506nn"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="3_aa2jg"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_506nn"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="3_aa2jg"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_bnb6e"]
 
 [sub_resource type="Resource" id="Resource_hejd0"]

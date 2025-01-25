@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapSpotType" load_steps=3 format=3 uid="uid://d13yx8yfnji63"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_rempu"]
-[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_cghtq"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="1_rempu"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="10_cghtq"]
 
 [resource]
 script = ExtResource("10_cghtq")

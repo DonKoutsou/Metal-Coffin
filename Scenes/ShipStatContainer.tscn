@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://r8hnhjq1f0q0"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_2cn7x"]
-[ext_resource type="Script" path="res://Scripts/ShipStatContainer.gd" id="1_30hhs"]
+[ext_resource type="Script" path="res://Scripts/UI/ShipStatContainer.gd" id="1_30hhs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvfpq"]
 content_margin_left = 2.0

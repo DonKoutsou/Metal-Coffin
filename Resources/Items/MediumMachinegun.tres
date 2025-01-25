@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://bf51pn2x4c423" path="res://Assets/Items/minigun.png" id="1_yt2n5"]
 [ext_resource type="Texture2D" uid="uid://bnwaknai0r21l" path="res://Assets/Items/minigun_smol.png" id="2_1c05x"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_b0ot2"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_b0ot2"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_pixhh"]
 [ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/LargeMachinegun.tres" id="5_nun2t"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_gbk8t"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="7_dtxf4"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_gbk8t"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_dtxf4"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("6_gbk8t")

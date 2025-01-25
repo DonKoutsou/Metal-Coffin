@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=14 format=3 uid="uid://baci05am3ufd7"]
 
 [ext_resource type="Texture2D" uid="uid://cvgjm3emof6rb" path="res://Assets/CaptainPortraits/Captain4.png" id="1_8s8cf"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_g2kmb"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="2_g2kmb"]
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_vqeqm"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_a7xj7"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_a7xj7"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_wxibw"]
 
 [sub_resource type="Resource" id="Resource_t21ml"]

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dd8qwufafqdn8"]
 
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="1_asnb0"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_kvtr6"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_asnb0"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="1_kvtr6"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_jfepl"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_7vmlk"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_7vmlk"]
 
 [resource]
 script = ExtResource("3_7vmlk")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://bgjt5dxvletq4"]
 
 [ext_resource type="Resource" uid="uid://cbe4h0paqjgm4" path="res://Resources/Happenings/CrewRecruitHappeningCorkan.tres" id="1_wqunj"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_5vm73"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_5vm73"]
 
 [resource]
 script = ExtResource("2_5vm73")

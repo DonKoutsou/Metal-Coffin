@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
-[ext_resource type="Script" path="res://Scripts/ship_marker.gd" id="1_y30vi"]
+[ext_resource type="Script" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
-[ext_resource type="Texture2D" uid="uid://crn46j7x7kq6m" path="res://Assets/Ship.png" id="7_kn8g7"]
+[ext_resource type="Texture2D" uid="uid://crn46j7x7kq6m" path="res://Assets/MapElements/Ship.png" id="7_kn8g7"]
 [ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
-[ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/Missile.png" id="7_uwuwu"]
+[ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi5cf"]
 content_margin_left = 3.0

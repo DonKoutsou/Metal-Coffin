@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=3 format=3 uid="uid://v4j1js25kum5"]
 
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="1_kr1sd"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_x4ha5"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_kr1sd"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_x4ha5"]
 
 [resource]
 script = ExtResource("2_x4ha5")

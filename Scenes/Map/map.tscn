@@ -17,10 +17,10 @@
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="17_21a23"]
-[ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="19_ccpfd"]
+[ext_resource type="Script" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="21_oyi6l"]
-[ext_resource type="Script" path="res://Scripts/CircleDrawer.gd" id="22_fa7wu"]
+[ext_resource type="Script" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="24_id5g2"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="25_s6vr7"]
@@ -43,7 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://dsjug6qiyxhlp" path="res://Assets/UIPiecies/PauseButton_Camera 1.png" id="42_5c8py"]
 [ext_resource type="Texture2D" uid="uid://dkrff8dnglv30" path="res://Assets/UIPiecies/PauseButtonPressed_Camera 1.png" id="43_h3gbo"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="45_ssr13"]
-[ext_resource type="Script" path="res://Scripts/pop_up_manager.gd" id="46_8wkt8"]
+[ext_resource type="Script" path="res://Scripts/UI/pop_up_manager.gd" id="46_8wkt8"]
 [ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/CustomPopUp.tscn" id="47_j01wc"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/CustomConfirm.tscn" id="48_huwio"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="49_j4oow"]
@@ -65,7 +65,7 @@ texture_repeat = 2
 light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujsvm"]
-bg_color = Color(0.104229, 0.190224, 0.196376, 1)
+bg_color = Color(0.174391, 0.296014, 0.304712, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -187,6 +187,7 @@ MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
 EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
+EnemyDebug = true
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]
 use_parent_material = true

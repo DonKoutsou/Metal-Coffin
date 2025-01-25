@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://1vnrpn8q4byq"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_urlo6"]
-[ext_resource type="Script" path="res://Scripts/fade_notif.gd" id="2_k1b3j"]
+[ext_resource type="Script" path="res://Scripts/UI/fade_notif.gd" id="2_k1b3j"]
 
 [node name="FadeNotif" type="PanelContainer" groups=["ItemNotification"]]
 process_mode = 3

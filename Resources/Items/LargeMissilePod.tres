@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://3p3g5f3bmg8g" path="res://Assets/Items/missile-pod.png" id="1_e3orr"]
 [ext_resource type="Texture2D" uid="uid://dp1dr20b5s1we" path="res://Assets/Items/missile-pod_smol.png" id="2_gup6i"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_fecrm"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_fecrm"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_q0n26"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_g1ywd"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="7_r3ka5"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_g1ywd"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_r3ka5"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("6_g1ywd")

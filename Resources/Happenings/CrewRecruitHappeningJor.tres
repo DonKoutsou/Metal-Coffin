@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://cjywrm3yoyv76"]
 
-[ext_resource type="Script" path="res://Scripts/HappeningOption.gd" id="1_hgwpy"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_hgwpy"]
 [ext_resource type="Resource" uid="uid://c8b3lpqbi11up" path="res://Resources/Captains/Jor.tres" id="2_623hf"]
-[ext_resource type="Script" path="res://Scripts/DroneHappeningOption.gd" id="3_1guw4"]
-[ext_resource type="Script" path="res://Scripts/StringHappeningOption.gd" id="4_x3762"]
-[ext_resource type="Script" path="res://Scripts/Happening.gd" id="5_4g28x"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_1guw4"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_x3762"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_4g28x"]
 
 [sub_resource type="Resource" id="Resource_xsydv"]
 script = ExtResource("3_1guw4")

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://cj5f5f7y85dfw"]
 
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_kg7gd"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_mnd7c"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="3_ynv1t"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="1_kg7gd"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_mnd7c"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_ynv1t"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_sy2kx"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_62iae"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_es2sb"]

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="MapSpotType" load_steps=13 format=3 uid="uid://djaoab8knkpvx"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_fq5ct"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_1vnci"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="1_fq5ct"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_1vnci"]
 [ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_2g2aw"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_CompletePlaceInfo.gd" id="4_lphgm"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="4_wtut4"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="6_1pw4v"]
-[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_853xu"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="4_lphgm"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="4_wtut4"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="6_1pw4v"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="10_853xu"]
 
 [sub_resource type="Resource" id="Resource_i0qwa"]
 script = ExtResource("2_1vnci")

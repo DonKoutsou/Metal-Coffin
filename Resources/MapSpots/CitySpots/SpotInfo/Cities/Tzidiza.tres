@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dfv7w4reu4ulx"]
 
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="1_5gw6h"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="1_um8ae"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="1_wly7j"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="1_5gw6h"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_um8ae"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_wly7j"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_q5j18"]
 
 [resource]

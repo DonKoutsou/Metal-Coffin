@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgsgcnyyv1gxm"]
 
-[ext_resource type="Script" path="res://Scripts/map_spot_marker.gd" id="1_5x46s"]
+[ext_resource type="Script" path="res://Scripts/UI/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_n5ia3"]
 
@@ -16,7 +16,9 @@ corner_radius_top_left = 70
 corner_radius_top_right = 70
 corner_radius_bottom_right = 70
 corner_radius_bottom_left = 70
-corner_detail = 10
+corner_detail = 4
+shadow_color = Color(0.973513, 0.740474, 1.92523e-06, 1)
+shadow_size = 5
 anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_pxthd"]
@@ -310,11 +312,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2ey58")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 use_parent_material = true
-layout_mode = 2
-offset_left = -32.0
-offset_top = -95.045
-offset_right = 34.0
-offset_bottom = -78.045
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.0
+offset_top = -92.0
+offset_right = 43.0
+offset_bottom = -75.0
+grow_horizontal = 2
 mouse_filter = 2
 alignment = 1
 
@@ -352,8 +358,8 @@ theme_override_constants/separation = -4
 alignment = 2
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0, -32.5)
-scale = Vector2(7, 7.05)
+position = Vector2(0, -16.5)
+scale = Vector2(7, 8.65)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

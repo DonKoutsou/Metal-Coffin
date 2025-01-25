@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1k2h35khc40y"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/Inventory_Box.gd" id="1_1cx5j"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_xu5pf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_708pr"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="InventoryBox" type="PanelContainer" node_paths=PackedStringArray("Butto")]
+custom_minimum_size = Vector2(96, 96)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("1_xu5pf")
+script = ExtResource("1_1cx5j")
+Butto = NodePath("ItemButton")
+
+[node name="ItemButton" type="Button" parent="." groups=["Buttons"]]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_xu5pf")
+disabled = true
+action_mode = 0
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ItemButton"]
+texture_filter = 6
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_708pr")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "1"
+
+[connection signal="pressed" from="ItemButton" to="." method="_On_Item_Pressed"]

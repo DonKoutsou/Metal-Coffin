@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://djtjqkmdep3dh"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot.gd" id="1_x7uyn"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpot.gd" id="1_x7uyn"]
 [ext_resource type="PackedScene" uid="uid://bahj28qps5ssw" path="res://Scenes/TownShop/TownScene.tscn" id="2_yj7um"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]

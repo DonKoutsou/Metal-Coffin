@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://33sxgbk0di7b"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_2e0sy"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_rbprg"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="2_sc66u"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_rbprg"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="2_sc66u"]
 [ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_tdcwm"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_w076d"]
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/MediumFuelTank.tres" id="4_ox6xo"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_bxopk"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_bxopk"]
 
 [sub_resource type="Resource" id="Resource_i41uq"]
 script = ExtResource("6_bxopk")

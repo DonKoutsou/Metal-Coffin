@@ -56,8 +56,8 @@ func _enter_tree() -> void:
 	#if (Stat == "OXYGEN"):
 		#$Control/TextureRect.texture = OxygenTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.371, 0.411, 0.64)
-	if (Stat == STAT_CONST.STATS.HULL):
-		$Control/TextureRect.texture = HullTex
+	#if (Stat == STAT_CONST.STATS.HULL):
+		#$Control/TextureRect.texture = HullTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.218, 0.419, 0.576)
 	if (Stat == "FUEL"):
 		$Control/TextureRect.texture = FuelTex

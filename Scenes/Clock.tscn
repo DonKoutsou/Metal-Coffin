@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://diq2p5s5u6bc0"]
 
-[ext_resource type="Script" path="res://Scripts/clock.gd" id="1_1k7lr"]
+[ext_resource type="Script" path="res://Scripts/UI/clock.gd" id="1_1k7lr"]
 [ext_resource type="Texture2D" uid="uid://u6qd6o0jhpg4" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="2_es0ac"]
 [ext_resource type="Texture2D" uid="uid://bpb6rygwl5stf" path="res://Assets/UIPiecies/clockwhite.png" id="2_p6dw0"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_cob4w"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://hiw68h8srifm"]
 
-[ext_resource type="Script" path="res://Scripts/steering_wheelUI.gd" id="1_akv35"]
+[ext_resource type="Script" path="res://Scripts/UI/steering_wheelUI.gd" id="1_akv35"]
 [ext_resource type="Texture2D" uid="uid://cwl51wjxss6oj" path="res://Assets/UIPiecies/steer_2_Camera 1.png" id="3_baxy7"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="3_py1nb"]
 [ext_resource type="BitMap" uid="uid://dtbujuyxlrxmx" path="res://Assets/plane_Wheel_BaseColorMask.png" id="5_30b70"]

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=8 format=3 uid="uid://tj0mcbsdf01i"]
 
 [ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="1_r7cs8"]
-[ext_resource type="Script" path="res://Scripts/Captain.gd" id="2_pi8kp"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="4_2c4jn"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="4_lvenl"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="2_pi8kp"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="4_2c4jn"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_lvenl"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_oachf"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="6_jq03q"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="7_h3j08"]

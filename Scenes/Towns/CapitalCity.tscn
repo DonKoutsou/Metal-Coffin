@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://cohc2ixfcnsjq"]
 
-[ext_resource type="Script" path="res://Scripts/Town.gd" id="1_6k08a"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Town.gd" id="1_6k08a"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_ihubk"]
-[ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/city.png" id="3_lvvcp"]
-[ext_resource type="Script" path="res://Scripts/CitySpot.gd" id="4_1dybe"]
-[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="5_vutws"]
+[ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/MapElements/city.png" id="3_lvvcp"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/CitySpot.gd" id="4_1dybe"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="5_vutws"]
 [ext_resource type="Resource" uid="uid://dyvpncg7tolc7" path="res://Resources/MapSpots/CitySpots/CapitalCityCenter.tres" id="6_ypttb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ustqo"]

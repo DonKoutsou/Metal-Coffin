@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c812ersqwg8p1"]
 
 [ext_resource type="Texture2D" uid="uid://72l45pouumfk" path="res://Assets/UIPiecies/LIGHT_Camera 1.png" id="1_boguy"]
-[ext_resource type="Script" path="res://Scripts/light.gd" id="2_uxg4q"]
+[ext_resource type="Script" path="res://Scripts/UI/light.gd" id="2_uxg4q"]
 [ext_resource type="Texture2D" uid="uid://c1mhc4vevx68e" path="res://Assets/UIPiecies/LIGHTON_Camera 1.png" id="3_c346u"]
 [ext_resource type="Texture2D" uid="uid://w1jutcwdpnr0" path="res://Assets/UIPiecies/LIGHTONGreen_Camera 1.png" id="4_y50yj"]
 

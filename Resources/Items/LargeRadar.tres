@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_2a3m1"]
 [ext_resource type="Texture2D" uid="uid://b3oxh70gjpu2h" path="res://Assets/Items/radar-sweep_smol.png" id="2_4ii2e"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_5w58m"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_5w58m"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_0quoj"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_ypyoy"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_ypyoy"]
 [ext_resource type="Resource" uid="uid://cgigq707wifrf" path="res://Resources/Items/SuperLargeRadar.tres" id="4_nra5m"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_qmdqt"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_qmdqt"]
 
 [sub_resource type="Resource" id="Resource_8wfub"]
 script = ExtResource("6_qmdqt")

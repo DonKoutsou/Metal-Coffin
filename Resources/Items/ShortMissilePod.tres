@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://3p3g5f3bmg8g" path="res://Assets/Items/missile-pod.png" id="1_vh0x4"]
 [ext_resource type="Texture2D" uid="uid://dp1dr20b5s1we" path="res://Assets/Items/missile-pod_smol.png" id="2_s7whr"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_qi218"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_qi218"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_clq4u"]
 [ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/MediumMissilePod.tres" id="5_dw84e"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_eoxlf"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="7_33fq1"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_eoxlf"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_33fq1"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("6_eoxlf")

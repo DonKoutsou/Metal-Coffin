@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapSpotType" load_steps=5 format=3 uid="uid://dsia5ebkwvf6p"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpotCustomData.gd" id="1_gvacd"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCustomData_Names.gd" id="2_o4ed3"]
-[ext_resource type="Script" path="res://Scripts/MapSpotType.gd" id="10_kv61i"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="1_gvacd"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData_Names.gd" id="2_o4ed3"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="10_kv61i"]
 
 [sub_resource type="Resource" id="Resource_7m0k3"]
 script = ExtResource("2_o4ed3")

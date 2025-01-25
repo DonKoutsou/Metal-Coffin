@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://ba1syk5pxpcs5"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_jvqon"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_jvqon"]
 
 [resource]
 script = ExtResource("2_jvqon")

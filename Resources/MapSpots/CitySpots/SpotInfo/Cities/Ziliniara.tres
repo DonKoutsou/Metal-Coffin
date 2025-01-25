@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dm38q3okq43cs"]
 
 [ext_resource type="Resource" uid="uid://cbe4h0paqjgm4" path="res://Resources/Happenings/CrewRecruitHappeningCorkan.tres" id="1_nep70"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_4r7xt"]
-[ext_resource type="Script" path="res://Scripts/MapSpotCompleteInfo.gd" id="2_puyyb"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_4r7xt"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_puyyb"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_rfh8t"]
 
 [resource]

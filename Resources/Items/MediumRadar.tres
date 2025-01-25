@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://dxg1gr0twgav3"]
 
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_oa86g"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_52jbd"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_52jbd"]
 [ext_resource type="Texture2D" uid="uid://b3oxh70gjpu2h" path="res://Assets/Items/radar-sweep_smol.png" id="2_mn6q1"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_5sqmr"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartItem.gd" id="3_r1wno"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_r1wno"]
 [ext_resource type="Resource" uid="uid://c16lcf8swpkjk" path="res://Resources/Items/LargeRadar.tres" id="4_6ok2g"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/ShipPartUpgrade.gd" id="6_ony00"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_ony00"]
 
 [sub_resource type="Resource" id="Resource_g0jur"]
 script = ExtResource("6_ony00")

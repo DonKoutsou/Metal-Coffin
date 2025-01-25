@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://cqxnjihcai1kd"]
 
-[ext_resource type="Script" path="res://Scripts/starting_screen.gd" id="1_kry56"]
+[ext_resource type="Script" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="PackedScene" uid="uid://cbhf8nh85npqq" path="res://Scenes/World_1.tscn" id="3_lbc5q"]
 [ext_resource type="PackedScene" uid="uid://delsjvmgmdgcn" path="res://Scenes/starting_menu.tscn" id="3_pxh3m"]
-[ext_resource type="Script" path="res://Scripts/save_load_manager.gd" id="4_nq3sn"]
-[ext_resource type="Script" path="res://Scripts/UISoundManager.gd" id="5_8b602"]
+[ext_resource type="Script" path="res://Scripts/Save/save_load_manager.gd" id="4_nq3sn"]
+[ext_resource type="Script" path="res://Scripts/Audio/UISoundManager.gd" id="5_8b602"]
 [ext_resource type="AudioStream" uid="uid://bs7algrkaxlxb" path="res://Assets/Sounds/button_02.wav" id="6_52dcv"]
 [ext_resource type="AudioStream" uid="uid://ups7egvp1xc5" path="res://Assets/Sounds/Hover.mp3" id="6_h4tjh"]
 [ext_resource type="AudioStream" uid="uid://hwoqcqavpcex" path="res://Assets/Sounds/ambient.mp3" id="8_y0dhp"]

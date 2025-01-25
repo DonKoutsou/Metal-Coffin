@@ -1,5 +1,7 @@
 extends Node
 
+class_name ShipContainer
+
 @export var _Map : Map
 @export var DroneDockEventH : DroneDockEventHandler
 

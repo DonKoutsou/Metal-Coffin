@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dn356hqaf372p"]
 
-[ext_resource type="Script" path="res://Scripts/thrust_slider.gd" id="1_pmd3c"]
+[ext_resource type="Script" path="res://Scripts/UI/thrust_slider.gd" id="1_pmd3c"]
 [ext_resource type="Texture2D" uid="uid://b7uf4103bd05b" path="res://Assets/UIPiecies/panel_Camera 3.png" id="2_c6hf5"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/light.tscn" id="3_pgc6o"]
 [ext_resource type="Texture2D" uid="uid://cppak6y6wit6" path="res://Assets/UIPiecies/handle_Camera 3.png" id="4_yj1xw"]

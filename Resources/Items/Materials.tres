@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cw7pry6dv5w2k" path="res://Assets/Items/materials-science.png" id="1_pfi5x"]
 [ext_resource type="Texture2D" uid="uid://com40xglelaik" path="res://Assets/Items/materials-science_smol.png" id="2_s3yb4"]
-[ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="2_yyjv6"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_yyjv6"]
 
 [resource]
 script = ExtResource("2_yyjv6")

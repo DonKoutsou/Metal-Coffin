@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://cwnxxystgxrjm"]
 
-[ext_resource type="Script" path="res://Scripts/MissileTab.gd" id="1_3wcnd"]
+[ext_resource type="Script" path="res://Scripts/UI/MissileTab.gd" id="1_3wcnd"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="2_lb1ah"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="3_6s7wp"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="5_ii4ur"]
