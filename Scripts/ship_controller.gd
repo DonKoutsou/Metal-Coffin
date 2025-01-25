@@ -87,10 +87,10 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 	if (spot.PlayerFuelReserves != BFuel):
 		spot.CityFuelReserves -= BFuel
 	if (BFuel < 0):
-		if (Ship is PlayerShip):
-			ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
-		else:
-			Ship.Cpt.GetStat("FUEL_TANK").CurrentVelue -= -BFuel
+		#if (Ship is PlayerShip):
+			#ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
+		#else:
+		Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
 
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)

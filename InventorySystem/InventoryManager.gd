@@ -255,8 +255,8 @@ func CloseDescriptor() -> void:
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
 	var Data = SD_CharacterInventory.new()
 	Data.Cpt = Cpt
-	Data.Fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
-	Data.Hull = Cpt.GetStat("HULL").CurrentVelue
+	Data.Fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	Data.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	var Contents = Inv.GetInventoryContents()
 	for g in Contents.keys():
 		var Ic = ItemContainer.new()
@@ -280,18 +280,8 @@ func LoadSaveData(Data : SaveData) -> void:
 	for g in Data.Datas:
 		var dat = g as SD_CharacterInventory
 		LoadCharacter(dat.Cpt, dat.Items)
-		dat.Cpt.GetStat("FUEL_TANK").CurrentVelue = dat.Fuel
-		dat.Cpt.GetStat("HULL").CurrentVelue = dat.Hull
-		#var CptInv : CharacterInventory
-		#for c in _CharacterInventories.keys():
-			#var cpt = c as Captain
-			#if (cpt.CaptainName == dat.CptName):
-				#CptInv = _CharacterInventories[c]
-		#
-		#for It in dat.Items:
-			#var Ic = It as ItemContainer
-			#for Am in Ic.Ammount:
-				#CptInv.AddItem(Ic.ItemType)
+		dat.Cpt.LoadStats(dat.Fuel, dat.Hull)
+
 
 func ToggleInventory() -> void:
 	visible = !visible

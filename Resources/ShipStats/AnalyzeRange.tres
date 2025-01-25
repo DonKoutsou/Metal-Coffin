@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://dm0s4m8iysdxb"]
 
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_q5iso"]
+[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="1_q5iso"]
 
 [resource]
 script = ExtResource("1_q5iso")

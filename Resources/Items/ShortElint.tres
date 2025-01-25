@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_k0n8b"]
 script = ExtResource("6_yy2hs")
-UpgradeName = "ELINT"
+UpgradeName = 7
 UpgradeAmmount = 800.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"

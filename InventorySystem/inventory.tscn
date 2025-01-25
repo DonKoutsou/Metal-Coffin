@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dslxdgbana1k1"]
+[gd_scene load_steps=17 format=3 uid="uid://dslxdgbana1k1"]
 
 [ext_resource type="Script" path="res://InventorySystem/InventoryManager.gd" id="1_cjse7"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ddos4"]
@@ -12,14 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="10_gk2xr"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="11_0ig21"]
 [ext_resource type="Texture2D" uid="uid://cjg61awbfrku4" path="res://Assets/CaptainPortraits/Captain1.png" id="11_hc03f"]
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="12_te605"]
-[ext_resource type="Resource" uid="uid://dggrnmd2ynjmr" path="res://Resources/ShipStats/FuelTank.tres" id="13_ajgcw"]
-[ext_resource type="Resource" uid="uid://crarnad70api6" path="res://Resources/ShipStats/FuelEfficiency.tres" id="14_brctl"]
-[ext_resource type="Resource" uid="uid://c5c8gjoxlagpy" path="res://Resources/ShipStats/VisualRange.tres" id="15_07o0m"]
-[ext_resource type="Resource" uid="uid://mnkq2e86fvd2" path="res://Resources/ShipStats/Hull.tres" id="16_fv0s6"]
-[ext_resource type="Resource" uid="uid://dn2mbu3q22p5d" path="res://Resources/ShipStats/InventoryCap.tres" id="17_slt1l"]
-[ext_resource type="Resource" uid="uid://caakr00uaqhjj" path="res://Resources/ShipStats/Elint.tres" id="18_5n2cg"]
-[ext_resource type="Resource" uid="uid://bcmppxhqs5fre" path="res://Resources/ShipStats/FirePower.tres" id="19_eva1j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fam5"]
 content_margin_left = 8.0
@@ -50,16 +42,6 @@ border_width_bottom = 961
 border_color = Color(0.0053553, 0.00773166, 0.0116329, 1)
 border_blend = true
 corner_detail = 1
-
-[sub_resource type="Resource" id="Resource_40m2x"]
-script = ExtResource("12_te605")
-StatName = "SPEED"
-StatMax = 3.0
-StatBase = 0.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
 bg_color = Color(1, 1, 1, 1)
@@ -174,7 +156,7 @@ layout_mode = 2
 script = ExtResource("10_f0lea")
 CharPortrait = NodePath("../PanelContainer/CaptainIcon")
 ShipStatScene = ExtResource("11_0ig21")
-StatsToShow = Array[ExtResource("12_te605")]([ExtResource("13_ajgcw"), ExtResource("14_brctl"), ExtResource("15_07o0m"), ExtResource("16_fv0s6"), ExtResource("17_slt1l"), ExtResource("18_5n2cg"), ExtResource("19_eva1j"), SubResource("Resource_40m2x")])
+StatsShown = Array[int]([0, 1, 6, 4, 5, 7, 3, 2])
 ShipIcon = NodePath("Legend/CaptainIcon2")
 
 [node name="Legend" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats"]

@@ -31,24 +31,25 @@ func AnyDroneNeedsFuel() -> bool:
 func DronesHaveFuel(f : float) -> bool:
 	var fuelneeded = f
 	for g in DockedDrones:
-		fuelneeded -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		fuelneeded -= g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		if (fuelneeded <= 0):
 			return true
 	return false
 
 func SyphonFuelFromDrones(amm : float) -> void:
 	for g in DockedDrones:
-		if (g.Cpt.GetStat("FUEL_TANK").CurrentVelue > amm):
-			g.Cpt.GetStat("FUEL_TANK").CurrentVelue -= amm
+		if (g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > amm):
+			g.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, amm)
 			return
 		else:
-			amm -= g.Cpt.GetStat("FUEL_TANK").CurrentVelue
-			g.Cpt.GetStat("FUEL_TANK").CurrentVelue = 0
+			var FuelAmm = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+			amm -= FuelAmm
+			g.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelAmm)
 
 func GetDroneFuel() -> float:
 	var fuel : float = 0
 	for g in DockedDrones:
-		fuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		fuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	return fuel
 
 func HasSpace() -> bool:
@@ -95,8 +96,7 @@ func DroneDisharged(Dr : Drone):
 		DockedDrones.erase(Dr)
 	if (FlyingDrones.has(Dr)):
 		FlyingDrones.erase(Dr)
-	#ShipData.GetInstance().RemoveCaptainStats([Dr.Cpt.GetStat("INVENTORY_CAPACITY")])
-	
+
 
 func AddCaptain(Cpt : Captain, Notify : bool = true) -> Drone:
 	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
@@ -111,7 +111,7 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 		notif.SetCaptain(Drne.Cpt)
 		Ingame_UIManager.GetInstance().AddUI(notif, true)
 	Drne.connect("OnShipDestroyed", DroneDisharged)
-	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat("INVENTORY_CAPACITY")])
+	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
 	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
 	AddDroneToHierarchy(Drne)
 	var pl = get_parent() as MapShip
@@ -170,19 +170,20 @@ func DroneRangeChanged(NewRange : float, Target : MapShip) -> void:
 	
 func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 	if (Target == get_parent()):
-		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")
-		var neededfuel = fueltoconsume - Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var neededfuel = fueltoconsume - Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		if (neededfuel > 0):
 			#if (Target is Drone):
-			if (Target.Cpt.GetStat("FUEL_TANK").CurrentVelue < neededfuel):
+			if (Target.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) < neededfuel):
 				PopUpManager.GetInstance().DoFadeNotif("Not enough fuel to perform operation.")
 				return
-			Target.Cpt.GetStat("FUEL_TANK").CurrentVelue -= neededfuel
+			Target.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, neededfuel)
 		PlayTakeoffSound()
 		UndockDrone(Dr)
 		Dr.global_rotation = $Line2D.global_rotation
 		Dr.global_position = global_position
-		Dr.Cpt.GetStat("FUEL_TANK").CurrentVelue = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")
+		var RefilAmm = Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) - ($Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY))
+		Dr.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, RefilAmm)
 		Dr.EnableDrone()
 	
 func AddDroneToHierarchy(drone : Drone):

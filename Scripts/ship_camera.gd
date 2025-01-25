@@ -2,6 +2,9 @@ extends Camera2D
 
 class_name ShipCamera
 
+@export var Background : Control
+@export var CityLines : MapLineDrawer
+
 static var Instance : ShipCamera
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,13 +17,8 @@ static func GetInstance() -> ShipCamera:
 func _HANDLE_ZOOM(zoomval : float):
 	var prevzoom = zoom
 	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.07,0.07), Vector2(2.1,2.1))
-	#for g in get_tree().get_nodes_in_group("MapShipVizualiser"):
-		#g.visible = zoom < Vector2(1, 1)
 	call_deferred("OnZoomChanged")
 	_UpdateMapGridVisibility()
-	#$Screen.scale = zoom / 2
-	#for g in get_tree().get_nodes_in_group("DissapearingMap"):
-		#g.modulate.a = mod
 #////////////////////////////
 var touch_points: Dictionary = {}
 var start_zoom: Vector2
@@ -58,15 +56,15 @@ func OnZoomChanged() -> void:
 func _UpdateMapGridVisibility():
 	if (zoom.x < 0.25):
 		var mtw = create_tween()
-		mtw.tween_property($"../MapPointerManager/MapLineDrawer", "modulate", Color(1,1,1,1), 0.5)
+		mtw.tween_property(CityLines, "modulate", Color(1,1,1,1), 0.5)
 		#$"../MapLines".visible = true
 		var tw = create_tween()
-		tw.tween_property($"../InScreenUI/Control3/DarkBlueBackground", "modulate", Color(1,1,1,1), 0.5)
+		tw.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
 	else:
 		var tw = create_tween()
-		tw.tween_property($"../InScreenUI/Control3/DarkBlueBackground", "modulate", Color(1,1,1,0), 0.5)
+		tw.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
 		var mtw = create_tween()
-		mtw.tween_property($"../MapPointerManager/MapLineDrawer", "modulate", Color(1,1,1,0), 0.5)
+		mtw.tween_property(CityLines, "modulate", Color(1,1,1,0), 0.5)
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 
 func UpdateCameraPos(relativeMovement : Vector2):
@@ -76,16 +74,10 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	var rel = relativeMovement / zoom
 	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,300) )
 	if (newpos.x != position.x):
-		#$CanvasLayer/SubViewportContainer/SubViewport/Control2.position.x = newpos.x - ($CanvasLayer/SubViewportContainer/SubViewport/Control2.size.x /2)
 		position.x = newpos.x
-		#var val = GalaxyMat.get_shader_parameter("thing")
-		#GalaxyMat.set_shader_parameter("thing", val - (rel.x / 1800))
 	if (newpos.y != position.y):
 		
 		position.y = newpos.y
-		#var val2 = GalaxyMat.get_shader_parameter("thing2")
-		#GalaxyMat.set_shader_parameter("thing2", val2 - (rel.y / 1800))
-	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("pan_offset", position * zoom)
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():

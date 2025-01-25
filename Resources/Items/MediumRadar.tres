@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_g0jur"]
 script = ExtResource("6_ony00")
-UpgradeName = "VIZ_RANGE"
+UpgradeName = 6
 UpgradeAmmount = 700.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"

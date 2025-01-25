@@ -31,7 +31,7 @@ func UpdateStat(StatN : String):
 	#$Control/TextureRect/Label.text = var_to_str(roundi(CurStat))
 	#if (StatN == "HP"):
 		#$Control/TextureRect/Label.text += " " + FundsThing
-	#if (StatN == "HULL"):
+	#if (StatN == STAT_CONST.STATS.HULL):
 		#$Control/TextureRect/Label.text += " " + HullThing
 	#if (StatN == "FUEL"):
 		#$Control/TextureRect/Label.text += " " + FuelThing
@@ -48,19 +48,7 @@ func AlarmLow(StatN : String):
 	if (Stat != StatN):
 		return
 	$Control/Light.Toggle(true)
-	#$AnimationPlayer.play("StatLow")
-#func UpdateStatCust(StatN : String, Val : float):
-	#if (Stat != StatN):
-		#return
-	#var dat = ShipData.GetInstance()
-	#var MaxValue = dat.GetStat(Stat).GetStat()
-	#MaxValue.set_trans(Tween.TRANS_EXPO)
-	#var tw = create_tween()
-	#tw.tween_property($HBoxContainer/Bar, "value", Val, 0.1)
-	#tw.play()
-	#$HBoxContainer/Bar.max_value = MaxValue
-	#$HBoxContainer/Bar.value = CurStat
-	#$HBoxContainer/Bar/HBoxContainer/Label.text = var_to_str(roundi(Val)) + "/" + var_to_str((roundi(MaxValue)))
+
 func _enter_tree() -> void:
 	if (Stat == "HP"):
 		$Control/TextureRect.texture = FundsTex
@@ -68,7 +56,7 @@ func _enter_tree() -> void:
 	#if (Stat == "OXYGEN"):
 		#$Control/TextureRect.texture = OxygenTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.371, 0.411, 0.64)
-	if (Stat == "HULL"):
+	if (Stat == STAT_CONST.STATS.HULL):
 		$Control/TextureRect.texture = HullTex
 		#($HBoxContainer/Bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.218, 0.419, 0.576)
 	if (Stat == "FUEL"):

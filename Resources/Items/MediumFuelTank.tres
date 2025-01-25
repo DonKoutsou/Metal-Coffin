@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_mdpmd"]
 script = ExtResource("6_u32dk")
-UpgradeName = "FUEL_TANK"
+UpgradeName = 0
 UpgradeAmmount = 400.0
 CurrentValue = 400.0
 UpAmmSymbol = "Cubic Tons"

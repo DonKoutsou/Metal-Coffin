@@ -80,21 +80,21 @@ func _ready() -> void:
 		ItemPlecement.add_child(ItScene)
 
 func SetFuelData():
-	PlFuel = LandedShip.Cpt.GetStat("FUEL_TANK").CurrentVelue
-	PlMaxFuel = LandedShip.Cpt.GetStatFinalValue("FUEL_TANK")
+	PlFuel = LandedShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	PlMaxFuel = LandedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 	var plship = LandedShip as MapShip
 	var dd = plship.GetDroneDock()
 	for g in dd.DockedDrones:
-		PlMaxFuel += g.Cpt.GetStatFinalValue("FUEL_TANK")
-		PlFuel += g.Cpt.GetStat("FUEL_TANK").CurrentVelue
+		PlMaxFuel += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+		PlFuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 func SetHullData():
-	PlHull = LandedShip.Cpt.GetStat("HULL").CurrentVelue
-	PlMaxHull = LandedShip.Cpt.GetStat("HULL").GetStat()
+	PlHull = LandedShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
+	PlMaxHull = LandedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 	var plship = LandedShip as MapShip
 	var dd = plship.GetDroneDock()
 	for g in dd.DockedDrones:
-		PlMaxHull += g.Cpt.GetStatFinalValue("HULL")
-		PlHull += g.Cpt.GetStat("HULL").CurrentVelue
+		PlMaxHull += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+		PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	
 func FuelBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

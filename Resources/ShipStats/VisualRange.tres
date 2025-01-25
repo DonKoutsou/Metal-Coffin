@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://c5c8gjoxlagpy"]
 
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_cvkpt"]
+[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="1_cvkpt"]
 
 [resource]
 script = ExtResource("1_cvkpt")
-StatName = "VIZ_RANGE"
-StatMax = 1000.0
+StatName = 6
 StatBase = 100.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0

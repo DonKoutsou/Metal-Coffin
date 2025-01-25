@@ -30,12 +30,12 @@ func  _ready() -> void:
 	Commander.GetInstance().RegisterSelf(self)
 
 	for g in Cpt.CaptainStats:
-		g.CurrentVelue = g.GetStat()
-	
+		g.ForceMaxValue()
+
 	_UpdateShipIcon(Cpt.ShipIcon)
 	
-	UpdateELINTTRange(Cpt.GetStatFinalValue("ELINT"))
-	UpdateVizRange(Cpt.GetStatFinalValue("VIZ_RANGE"))
+	UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
+	UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 	
 	
 	if (!Patrol):
@@ -89,7 +89,7 @@ func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	missile.look_at(Pos)
 	
 	if (CurrentPort != null):
-		Cpt.GetStat("MISSILE_SPACE").CurrentVelue = Cpt.GetStat("MISSILE_SPACE").GetStat()
+		Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
 	#Reloading = 4
 
 func UpdateElint(delta: float) -> void:
@@ -114,16 +114,16 @@ func UpdateElint(delta: float) -> void:
 		else:
 			ElintContact.emit(ClosestShip ,true)
 func GetFuelRange() -> float:
-	var fuel = Cpt.GetStat("FUEL_TANK").GetCurrentValue()
-	var fuel_ef = Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
 	var total_fuel = fuel
 	var inverse_ef_sum = 1.0 / fuel_ef
 	
 	# Group ships fuel and efficiency calculations
 	for g in GetDroneDock().DockedDrones:
-		var ship_fuel = g.Cpt.GetStat("FUEL_TANK").CurrentVelue
-		var ship_efficiency = g.Cpt.GetStat("FUEL_EFFICIENCY").GetStat()
+		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		total_fuel += ship_fuel
 		inverse_ef_sum += 1.0 / ship_efficiency
 
@@ -152,7 +152,7 @@ func SetNewDestination(DistName : String) -> void:
 	PathPart = 1
 func SetCurrentPort(P : MapSpot) -> void:
 	CurrentPort = P
-	Cpt.GetStat("MISSILE_SPACE").CurrentVelue = Cpt.GetStat("MISSILE_SPACE").GetStat()
+	Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
 	#if (P == RefuelSpot):
 		#RefuelSpot = null
 	for g in GetDroneDock().DockedDrones:
@@ -175,7 +175,7 @@ func IntersectPusruing() -> Vector2:
 	ship_velocity = PursuingShips[0].GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatFinalValue("SPEED")
+	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -203,11 +203,8 @@ func _on_area_entered(area: Area2D) -> void:
 				OnDestinationReached.emit(self)
 			else :
 				PathPart += 1
-			#if (Cpt.GetStat("FUEL_TANK").CurrentVelue < Cpt.GetStat("FUEL_TANK").GetStat()):
-				#SetSpeed(0)
 		if (spot == RefuelSpot and Patrol):
 			SetCurrentPort(RefuelSpot)
-			#SetSpeed(0)
 	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
 		var IsRadar = area.get_collision_layer_value(2)
 		if (IsRadar):
@@ -331,9 +328,9 @@ func GetCurrentDestination() -> Vector2:
 	return destination
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStatValue("HULL")
-	stats.FirePower = Cpt.GetStatValue("FIREPOWER")
-	stats.Speed = Cpt.GetStatValue("SPEED")
+	stats.Hull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
+	stats.Speed = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = Cpt.CaptainName
@@ -383,12 +380,12 @@ func IsFuelFull() -> bool:
 	for g in GetDroneDock().DockedDrones:
 		if (!g.IsFuelFull()):
 			return false
-	return Cpt.GetStat("FUEL_TANK").CurrentVelue == Cpt.GetStat("FUEL_TANK").GetStat()
+	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
 func IsDamaged() -> bool:
 	for g in GetDroneDock().DockedDrones:
 		if (!g.IsDamaged()):
 			return false
-	return Cpt.GetStat("HULL").CurrentVelue == Cpt.GetStat("HULL").GetStat()
+	return Cpt.IsResourceFull(STAT_CONST.STATS.HULL)
 func TogglePause(t : bool):
 	Paused = t
 	if (t and BTree != null):

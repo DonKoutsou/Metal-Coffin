@@ -1,0 +1,30 @@
+extends Node
+
+class_name STAT_CONST
+
+const StatMaxValues : Dictionary = {
+	STATS.FUEL_TANK : 1000,
+	STATS.FUEL_EFFICIENCY : 5,
+	STATS.SPEED : 3,
+	STATS.FIREPOWER : 20,
+	STATS.HULL : 500,
+	STATS.INVENTORY_SPACE : 12,
+	STATS.VISUAL_RANGE : 1000,
+	STATS.ELINT : 1500,
+	STATS.MISSILE_SPACE : 20
+}
+
+static func GetStatMaxValue(Stat : STATS) -> int:
+	return StatMaxValues[Stat]
+
+enum STATS{
+	FUEL_TANK,
+	FUEL_EFFICIENCY,
+	SPEED,
+	FIREPOWER,
+	HULL,
+	INVENTORY_SPACE,
+	VISUAL_RANGE,
+	ELINT,
+	MISSILE_SPACE
+}

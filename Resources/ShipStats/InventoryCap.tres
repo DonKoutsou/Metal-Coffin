@@ -1,13 +1,10 @@
 [gd_resource type="Resource" script_class="ShipStat" load_steps=2 format=3 uid="uid://dn2mbu3q22p5d"]
 
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="1_q4rv3"]
+[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="1_q4rv3"]
 
 [resource]
 script = ExtResource("1_q4rv3")
-StatName = "INVENTORY_CAPACITY"
-StatMax = 12.0
+StatName = 5
 StatBase = 0.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0

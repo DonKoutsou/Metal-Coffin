@@ -21,15 +21,15 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		for g in MainShip.GetDroneDock().DockedDrones:
 			var Ship = g as HostileShip
 			
-			var dronefuel = (MainShip.GetShipSpeed() / 10 / Ship.Cpt.GetStatFinalValue("FUEL_EFFICIENCY")) * SimulationSpeed
-			if (Ship.Cpt.GetStatCurrentValue("FUEL_TANK") > dronefuel):
-				Ship.Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
-			else : if (MainShip.Cpt.GetStat("FUEL_TANK").GetCurrentValue() >= dronefuel):
-				MainShip.Cpt.GetStat("FUEL_TANK").ConsumeResource(dronefuel)
+			var dronefuel = (MainShip.GetShipSpeed() / 10 / Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * SimulationSpeed
+			if (Ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > dronefuel):
+				Ship.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, dronefuel)
+			else : if (MainShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= dronefuel):
+				MainShip.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, dronefuel)
 		
-		var ftoconsume = MainShip.GetShipSpeed() / 10 / MainShip.Cpt.GetStatFinalValue("FUEL_EFFICIENCY") * SimulationSpeed
-		if (MainShip.Cpt.GetStatCurrentValue("FUEL_TANK") > ftoconsume):
-			MainShip.Cpt.GetStat("FUEL_TANK").ConsumeResource(ftoconsume)
+		var ftoconsume = MainShip.GetShipSpeed() / 10 / MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * SimulationSpeed
+		if (MainShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > ftoconsume):
+			MainShip.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, ftoconsume)
 		else: if (MainShip.GetDroneDock().DronesHaveFuel(ftoconsume)):
 			MainShip.GetDroneDock().SyphonFuelFromDrones(ftoconsume)
 			

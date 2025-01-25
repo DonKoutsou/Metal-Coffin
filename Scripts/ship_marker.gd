@@ -151,24 +151,12 @@ func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
 	var spd = roundi(Spd * 360)
 	ShipSpeedLabel.text = "Speed " + var_to_str(spd) + "km/h"
-#func UpdateFuel(extraamm : float = 0, extramax : float = 0):
-	#var curfuel = roundi(ShipData.GetInstance().GetStat("FUEL_TANK").GetCurrentValue() + extraamm)
-	#var maxfuel = ShipData.GetInstance().GetStat("FUEL_TANK").GetStat() + extramax
-	#$Control/PanelContainer/VBoxContainer/Fuel.text = "Fuel: {0} / {1} Tons".format([curfuel, maxfuel])
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(Alt))
 func UpdateDroneFuel(amm : float, maxamm : float):
 	FuelLabel.text = "Fuel: {0} / {1}  Tons".format([amm, maxamm])
-#func UpdateHull():
-	#$Control/PanelContainer/VBoxContainer/Hull.text = "Hull: {0} / {1}".format([roundi(ShipData.GetInstance().GetStat("HULL").GetCurrentValue()), ShipData.GetInstance().GetStat("HULL").GetStat()])
 func UpdateDroneHull(amm : float, maxamm : float):
 	HullLabel.text = "Hull: {0} / {1}".format([amm, maxamm])
-#func ToggleThreat(T : bool):
-	#$Control/PanelContainer/VBoxContainer/Threat.visible = T
-
-	
-#func UpdateThreatLevel(Level : float):
-	#$Control/PanelContainer/VBoxContainer/Threat.text = "Threat Level : " + var_to_str(roundi(Level))
 
 func ToggleTimeLastSeend(T : bool):
 	if (!T):

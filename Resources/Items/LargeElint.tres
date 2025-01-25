@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_pxbaq"]
 script = ExtResource("5_mb8i7")
-UpgradeName = "ELINT11"
+UpgradeName = 7
 UpgradeAmmount = 2500.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"

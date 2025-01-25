@@ -1,90 +1,66 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=14 format=3 uid="uid://c6f3bxpe2rsxd"]
 
 [ext_resource type="Texture2D" uid="uid://sulgpuieqkg0" path="res://Assets/CaptainPortraits/Captain7.png" id="1_w0gjd"]
-[ext_resource type="Script" path="res://Scripts/ShipStat.gd" id="2_4a58b"]
+[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_4a58b"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_7dora"]
 [ext_resource type="Script" path="res://Scripts/Captain.gd" id="3_7iysc"]
 [ext_resource type="Script" path="res://InventorySystem/ItemDef/Item.gd" id="3_k55jm"]
 
 [sub_resource type="Resource" id="Resource_w8w27"]
 script = ExtResource("2_4a58b")
-StatName = "SPEED"
-StatMax = 3.0
+StatName = 2
 StatBase = 0.5
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_134fm"]
 script = ExtResource("2_4a58b")
-StatName = "VIZ_RANGE"
-StatMax = 300.0
+StatName = 6
 StatBase = 150.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_an27y"]
 script = ExtResource("2_4a58b")
-StatName = "INVENTORY_CAPACITY"
-StatMax = 3.0
+StatName = 5
 StatBase = 3.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_15w3p"]
 script = ExtResource("2_4a58b")
-StatName = "FIREPOWER"
-StatMax = 10.0
-StatBase = 3.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatName = 3
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_pasmb"]
 script = ExtResource("2_4a58b")
-StatName = "HULL"
-StatMax = 300.0
+StatName = 4
 StatBase = 100.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_s1ct5"]
 script = ExtResource("2_4a58b")
-StatName = "FUEL_EFFICIENCY"
-StatMax = 5.0
+StatName = 1
 StatBase = 3.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_8yg4b"]
 script = ExtResource("2_4a58b")
-StatName = "FUEL_TANK"
-StatMax = 500.0
+StatName = 0
 StatBase = 150.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_ewkhp"]
 script = ExtResource("2_4a58b")
-StatName = "ELINT"
-StatMax = 3000.0
+StatName = 7
 StatBase = 0.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
 
 [resource]
 script = ExtResource("3_7iysc")

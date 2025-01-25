@@ -26,7 +26,7 @@ func OnSimulationSpeedChanged(i : int) -> void:
 #ORDER MANAGEMENT////////////////////////////////////////////////////////////////
 func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
 	var Armament = GetCheapestArmamentForDistance(Ship.global_position.distance_to(Target.global_position))
-	Ship.Cpt.GetStat("MISSILE_SPACE").CurrentVelue -= Armaments[Armament]
+	Ship.Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, Armaments[Armament])
 	Ship.LaunchMissile(Armament, Target.global_position)
 	
 func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
@@ -209,7 +209,7 @@ func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
 		var PossibleArmament = GetCheapestArmamentForDistance(dist)
 		if (PossibleArmament == null):
 			continue
-		if (g.Cpt.GetStat("MISSILE_SPACE").CurrentVelue < Armaments[PossibleArmament]):
+		if (g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.MISSILE_SPACE) < Armaments[PossibleArmament]):
 			continue
 		Carrier = g
 		break

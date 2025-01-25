@@ -37,7 +37,7 @@ func ToggleElint(t : bool) -> void:
 func UpdateConnectedShip(Sh : MapShip) -> void:
 	ConnectedShip = Sh
 	if Sh is Drone:
-		ToggleElint(Sh.Cpt.GetStat("ELINT").GetStat() > 0)
+		ToggleElint(Sh.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0)
 	else :
 		ToggleElint(true)
 		
@@ -92,10 +92,7 @@ static func DegreesToElintAngle(Deg : float) -> int:
 	
 func SetDistance(dist : float):
 	var maxdist
-	#if (ConnectedShip is Drone):
-	maxdist = ConnectedShip.Cpt.GetStat("ELINT").GetStat()
-	#else:
-		#maxdist = ShipData.GetInstance().GetStat("ELINT").GetStat()
+	maxdist = ConnectedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
 	if (dist < maxdist * 0.3):
 		if ($RangeIndicator.texture != DistanceMasks[2]):
 			$RangeIndicator.texture = DistanceMasks[2]

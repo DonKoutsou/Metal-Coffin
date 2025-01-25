@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=55 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -15,10 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ufdxh"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_j6nai"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
-[ext_resource type="Shader" path="res://Scenes/Map/teraininftest.gdshader" id="16_deff2"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="17_21a23"]
-[ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/Craden.tres" id="18_qrim1"]
 [ext_resource type="Script" path="res://Scripts/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="21_oyi6l"]
@@ -63,12 +61,11 @@ normal_texture = ExtResource("14_j6nai")
 texture_filter = 5
 texture_repeat = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bohty"]
-shader = ExtResource("16_deff2")
-shader_parameter/texture_scale = Vector2(1, 1)
-shader_parameter/zoom = 1.0
-shader_parameter/camera_position = null
-shader_parameter/my_texture = ExtResource("13_ufdxh")
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujsvm"]
+bg_color = Color(0.104229, 0.190224, 0.196376, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -142,9 +139,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -20000.0
-offset_top = -9e+07
+offset_top = -80000.0
 offset_right = 18956.0
-offset_bottom = 9.99932e+06
+offset_bottom = 19541.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_nb103")
@@ -153,27 +150,34 @@ stretch_mode = 1
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]
 color = Color(0, 0, 0, 1)
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort"]
-position = Vector2(576, 324)
-process_callback = 0
-position_smoothing_speed = 1.0
-script = ExtResource("15_d8bna")
-
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
-material = SubResource("ShaderMaterial_bohty")
-offset_left = -7500.0
-offset_top = -7500.0
-offset_right = 7500.0
-offset_bottom = 7500.0
-color = Color(0.382364, 0.479568, 0.481693, 1)
-
 [node name="RoadLineDrawer" parent="SubViewportContainer/ViewPort" instance=ExtResource("16_sp82o")]
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort"]
 
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "CityLines")]
+position = Vector2(576, 324)
+process_callback = 0
+position_smoothing_speed = 1.0
+script = ExtResource("15_d8bna")
+Background = NodePath("DarkBlueBackground")
+CityLines = NodePath("../MapPointerManager/MapLineDrawer")
+
+[node name="DarkBlueBackground" type="Panel" parent="SubViewportContainer/ViewPort/ShipCamera"]
+material = SubResource("CanvasItemMaterial_rrndq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8000.0
+offset_top = -4000.0
+offset_right = 8000.0
+offset_bottom = 4000.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ujsvm")
+
 [node name="PlayerShip" parent="SubViewportContainer/ViewPort" instance=ExtResource("17_21a23")]
 position = Vector2(163, 60)
-Cpt = ExtResource("18_qrim1")
 
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort"]
 z_index = 100

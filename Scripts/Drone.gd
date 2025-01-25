@@ -6,8 +6,8 @@ signal DroneReturning
 
 func  _ready() -> void:
 	super()
-	#UpdateVizRange(Cpt.GetStatFinalValue("VIZ_RANGE"))
-	#UpdateELINTTRange(Cpt.GetStatFinalValue("ELINT"))
+	#UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+	#UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 	Paused = SimulationManager.IsPaused()
 
 #func _exit_tree() -> void:
@@ -33,7 +33,7 @@ func EnableDrone():
 		TakeoffStarted.emit()
 		TakingOff = true
 	$AudioStreamPlayer2D.play()
-	GetShipAcelerationNode().position.x = Cpt.GetStatFinalValue("SPEED")
+	GetShipAcelerationNode().position.x = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 func DissableDrone():
@@ -100,7 +100,6 @@ func GetSaveData() -> DroneSaveData:
 	dat.Docked = Docked
 	dat.Pos = global_position
 	dat.Rot = global_rotation
-	#dat.Fuel = Cpt.GetStat("FUEL_TANK").CurrentVelue
 	for g in GetDroneDock().DockedDrones:
 		dat.DockedDrones.append(g.GetSaveData())
 	for g in GetDroneDock().FlyingDrones:

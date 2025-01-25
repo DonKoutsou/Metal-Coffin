@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=14 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" path="res://Scripts/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -9,13 +9,6 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="11_1oyku"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0a4hg"]
-blend_mode = 1
-light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ms5"]
-bg_color = Color(0.104229, 0.190224, 0.196376, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srlt5"]
 bg_color = Color(0, 0, 0, 1)
@@ -45,8 +38,8 @@ shader_parameter/scanlines_opacity = 0.41
 shader_parameter/scanlines_speed = 1.0
 shader_parameter/scanline_thickness = 0.58
 shader_parameter/scanlines_spacing = 1.0
-shader_parameter/tint_color = Color(1, 1, 1, 1)
-shader_parameter/tint_intensity = 0.0
+shader_parameter/tint_color = Color(0.732043, 0.377644, 0, 1)
+shader_parameter/tint_intensity = 0.1
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_w8jme")
 
 [node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer")]
@@ -65,17 +58,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="DarkBlueBackground" type="Panel" parent="Control3"]
-material = SubResource("CanvasItemMaterial_0a4hg")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_26ms5")
 
 [node name="FpsCounter" parent="Control3" instance=ExtResource("3_y1d86")]
 layout_mode = 1
@@ -215,7 +197,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(50, 50)
 mouse_filter = 2
 
 [connection signal="pressed" from="Control3/PauseContainer/HBoxContainer/Return" to="." method="Pause"]

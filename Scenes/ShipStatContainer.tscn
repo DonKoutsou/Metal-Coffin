@@ -106,7 +106,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_ueh8q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nasb0")
-value = 43.54
 show_percentage = false
 
 [node name="ItemBar" type="ProgressBar" parent="ProgressBar"]

@@ -107,7 +107,7 @@ func HasFuel() -> bool:
 func HasRepair() -> bool:
 	var hasf = false
 	for g in SpotInfo.PossibleDrops:
-		if g is UsableItem and g.StatUseName == "HULL":
+		if g is UsableItem and g.StatUseName == STAT_CONST.STATS.HULL:
 			hasf = true
 			break
 	return hasf

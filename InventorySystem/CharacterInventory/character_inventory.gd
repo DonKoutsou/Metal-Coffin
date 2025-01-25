@@ -36,7 +36,7 @@ func GetInventoryContents() -> Dictionary:
 	return _InventoryContents
 
 func InitialiseInventory(Cha : Captain) -> void:
-	var CharInvSpace : int = Cha.GetStatFinalValue("INVENTORY_CAPACITY")
+	var CharInvSpace : int = Cha.GetStatFinalValue(STAT_CONST.STATS.INVENTORY_SPACE)
 	var CharName = Cha.CaptainName
 	for g in CharInvSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box

@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("6_g1ywd")
-UpgradeName = "FIREPOWER"
+UpgradeName = 3
 UpgradeAmmount = 3.0
 CurrentValue = 0.0
 UpAmmSymbol = ""

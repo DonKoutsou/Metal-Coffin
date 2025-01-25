@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=13 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_ekbhy"]
+[ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/Craden.tres" id="2_ddg27"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
@@ -24,6 +25,7 @@ material = SubResource("CanvasItemMaterial_vppi8")
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
+Cpt = ExtResource("2_ddg27")
 
 [node name="ShipBody" type="Area2D" parent="."]
 collision_mask = 0

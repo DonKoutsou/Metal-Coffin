@@ -6,46 +6,50 @@ class_name Captain
 @export var CaptainPortrait : Texture
 @export var ShipIcon : Texture
 @export var CaptainStats : Array[ShipStat]
+var MappedStats : Array[STAT_CONST.STATS]
 @export var ShipCallsign : String = "P"
 @export var StartingItems : Array[Item]
 @export var CurrentPort : String
 @export var CheckForErrors : bool = false
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
+signal StatChanged(NewVal : float)
 
 var _CharInv : CharacterInventory
 
 func _init() -> void:
+	call_deferred("MapStats")
 	if (OS.is_debug_build() and CheckForErrors):
 		call_deferred("CheckForIssues")
-		
+
+func MapStats() -> void:
+	for g in CaptainStats:
+		MappedStats.push_back(g.GetStatName())
+
 func CheckForIssues() -> void:
 	var Itms : Array[Item] = []
 	for g in StartingItems:
 		if (!Itms.has(g)):
 			Itms.append(g)
 	
-	var Inv = GetStat("INVENTORY_CAPACITY").GetStat()
+	var Inv = _GetStat(STAT_CONST.STATS.INVENTORY_SPACE).GetStat()
 	if (Itms.size() > Inv):
 		printerr("Character {0} has more items configured than inventory space.".format([CaptainName]))
 
-func GetStat(StName : String) -> ShipStat:
-	for g in CaptainStats:
-		if (g.StatName == StName):
-			return g
-	return null
-func GetStatValue(StName : String):
-	for g in CaptainStats:
-		if (g.StatName == StName):
-			return g.StatBase
-func GetStatFinalValue(StName : String):
-	for g in CaptainStats:
-		if (g.StatName == StName):
-			return g.GetStat()
-func GetStatCurrentValue(StName : String):
-	for g in CaptainStats:
-		if (g.StatName == StName):
-			return g.CurrentVelue
+func _GetStat(StatN : STAT_CONST.STATS) -> ShipStat:
+	return CaptainStats[MappedStats.find(StatN)]
+
+func GetStatBaseValue(StatN : STAT_CONST.STATS) -> float:
+	return _GetStat(StatN).GetBaseValue()
+			
+func GetStatShipPartBuff(StatN : STAT_CONST.STATS) -> float:
+	return _GetStat(StatN).GetShipPartBuff()
+
+func GetStatFinalValue(StatN : STAT_CONST.STATS) -> float:
+	return _GetStat(StatN).GetFinalValue()
+			
+func GetStatCurrentValue(StatN : STAT_CONST.STATS) -> float:
+	return _GetStat(StatN).GetCurrentValue()
 
 func CopyStats(Cpt : Captain) -> void:
 	CaptainName = Cpt.CaptainName
@@ -56,28 +60,38 @@ func CopyStats(Cpt : Captain) -> void:
 	for g in Cpt.CaptainStats:
 		CaptainStats.append(g.duplicate(true))
 		
-func IsResourceFull(StatN : String) -> bool:
-	var stat = GetStat(StatN)
-	return stat.CurrentVelue == stat.GetStat()
+func IsResourceFull(StatN : STAT_CONST.STATS) -> bool:
+	var stat = _GetStat(StatN)
+	return stat.GetCurrentValue() == stat.GetFinalValue()
+
+func RefillResource(StatN : STAT_CONST.STATS, RefillAmm : float) -> void:
+	_GetStat(StatN).RefilCurrentValue(RefillAmm)
+	StatChanged.emit(StatN)
+
+func FullyRefilStat(StatN : STAT_CONST.STATS) -> void:
+	_GetStat(StatN).ForceMaxValue()
+	StatChanged.emit(StatN)
 	
+func ConsumeResource(StatN : STAT_CONST.STATS, Consumption : float) -> void:
+	_GetStat(StatN).ConsumeResource(Consumption)
+	StatChanged.emit(StatN)
+
 func OnShipPartAddedToInventory(It : ShipPart) -> void:
 	for Up in It.Upgrades:
-		GetStat(Up.UpgradeName).SetItemBuff(Up.UpgradeAmmount)
-		GetStat(Up.UpgradeName).RefilCurrentVelue(Up.CurrentValue)
-	#GetStat(It.UpgradeName).SetItemBuff(It.UpgradeAmm)
-	#GetStat(It.UpgradeName).RefilCurrentVelue(It.CurrentVal)
+		_GetStat(Up.UpgradeName).AddShipPartBuff(Up.UpgradeAmmount)
+		RefillResource(Up.UpgradeName, Up.CurrentValue)
 	ShipPartChanged.emit(It)
 
 func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
 	for Up in It.Upgrades:
-		GetStat(Up.UpgradeName).SetItemBuff(-Up.UpgradeAmmount)
+		_GetStat(Up.UpgradeName).AddShipPartBuff(-Up.UpgradeAmmount)
 		if (GetStatCurrentValue(Up.UpgradeName) > GetStatFinalValue(Up.UpgradeName)):
-			GetStat(Up.UpgradeName).CurrentVelue = GetStatFinalValue(Up.UpgradeName)
-		#GetStat(It.UpgradeNames[g]).RefilCurrentVelue(It.UpCurrentVal[g])
-	#GetStat(It.UpgradeName).SetItemBuff(-It.UpgradeAmm)
-	#if (GetStatCurrentValue(It.UpgradeName) > GetStatFinalValue(It.UpgradeName)):
-		#GetStat(It.UpgradeName).CurrentVelue = GetStatFinalValue(It.UpgradeName)
+			FullyRefilStat(Up.UpgradeName)
 	ShipPartChanged.emit(It)
 
 func GetCharacterInventory() -> CharacterInventory:
 	return _CharInv
+
+func LoadStats(Fuel : float, Hull : float) -> void:
+	_GetStat(STAT_CONST.STATS.FUEL_TANK).CurrentValue = Fuel
+	_GetStat(STAT_CONST.STATS.HULL).CurrentValue = Hull

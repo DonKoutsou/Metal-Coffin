@@ -10,9 +10,6 @@ class_name World
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
 
-
-#ship player is currently using
-#var CurrentShip : BaseShip
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 
@@ -121,11 +118,11 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 		var nam = g.Name
 		for z in FighingFriendlyUnits:
 			#if z is PlayerShip:
-				#ShipData.GetInstance().SetStatValue("HULL", g.Hull)
+				#ShipData.GetInstance().SetStatValue(STAT_CONST.STATS.HULL, g.Hull)
 				#FighingFriendlyUnits.erase(z)
 				#break
 			if nam == z.Cpt.CaptainName:
-				z.Damage(z.Cpt.GetStatFinalValue("HULL") - g.Hull)
+				z.Damage(z.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - g.Hull)
 				FighingFriendlyUnits.erase(z)
 				break
 	#for g in FighingFriendlyUnits:

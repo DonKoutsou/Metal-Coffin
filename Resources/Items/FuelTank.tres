@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_i41uq"]
 script = ExtResource("6_bxopk")
-UpgradeName = "FUEL_TANK"
+UpgradeName = 0
 UpgradeAmmount = 150.0
 CurrentValue = 150.0
 UpAmmSymbol = "Cubic Tons"
