@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="CardOption" load_steps=3 format=3 uid="uid://mqg2y5hfy65s"]
+[gd_resource type="Resource" script_class="CardOption" load_steps=2 format=3 uid="uid://mqg2y5hfy65s"]
 
 [ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="1_7f5u1"]
-[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Scenes/Cards/Res/Barrage/Barrage.tres" id="1_rnor3"]
 
 [resource]
 script = ExtResource("1_7f5u1")
@@ -12,4 +11,5 @@ DamageMult = 1.5
 Fire = false
 DamageMitigationFlat = 0
 DamageMitigationPercent = 0.0
-FittingCard = ExtResource("1_rnor3")
+ComatibleWeapon = 1
+CauseConsumption = true

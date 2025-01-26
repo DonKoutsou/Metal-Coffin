@@ -4,9 +4,22 @@ class_name CardStats
 @export var Icon : Texture
 @export var CardName : String
 @export var CardDescription : String
+## Energy consumption of card
 @export var Energy : int
 @export var Options : Array[CardOption]
+## Allow this card to be done twice in one turn?
 @export var AllowDuplicates : bool
+## Consume this card after use?
 @export var Consume : bool = false
+## Part that needs to be in inventory to be able to see this card in fight
 @export var RequiredPart : Array[ShipPart]
+@export var WeapT : WeaponType
+
+
 var SelectedOption : CardOption
+
+enum WeaponType{
+	NONE,
+	MG100mm,
+	ML,
+}

@@ -1,9 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://bwwby1vknkefj"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://bwwby1vknkefj"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_cbem7"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_6e4v5"]
 [ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_hfrci"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_11ept"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_lu011"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_83sa7"]
 
@@ -20,7 +18,6 @@ script = ExtResource("3_lu011")
 Upgrades = Array[ExtResource("5_83sa7")]([SubResource("Resource_o628u")])
 UpgradeTime = 300.0
 IsDamaged = false
-RepairItems = Array[ExtResource("2_6e4v5")]([ExtResource("3_11ept"), ExtResource("3_11ept")])
 ItemIcon = ExtResource("1_cbem7")
 ItemIconSmol = ExtResource("2_hfrci")
 ItemName = "FT-2000"

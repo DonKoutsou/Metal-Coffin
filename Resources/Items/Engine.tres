@@ -1,11 +1,9 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://732b0m15lc18"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://732b0m15lc18"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Scenes/Cards/Evasive.tres" id="1_bifgn"]
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_jils6"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_8krx2"]
 [ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="2_dongv"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="2_w2xra"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_ijy7h"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/MediumEngine.tres" id="4_adnd2"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_hho6w"]
 
@@ -30,7 +28,6 @@ Upgrades = Array[ExtResource("6_hho6w")]([SubResource("Resource_y5vig"), SubReso
 UpgradeVersion = ExtResource("4_adnd2")
 UpgradeTime = 100.0
 IsDamaged = false
-RepairItems = Array[ExtResource("2_8krx2")]([ExtResource("3_ijy7h"), ExtResource("3_ijy7h")])
 ItemIcon = ExtResource("1_jils6")
 ItemIconSmol = ExtResource("2_dongv")
 ItemName = "Model EN-100"

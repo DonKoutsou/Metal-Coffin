@@ -319,7 +319,7 @@ func GetCurrentDestination() -> Vector2:
 		destination = IntersectPusruing()
 	else : if(LastKnownPosition != Vector2.ZERO):
 		destination = LastKnownPosition
-		if (LastKnownPosition.distance_to(global_position) < 10):
+		if (LastKnownPosition.distance_to(global_position) < 0.5):
 			OnPositionInvestigated.emit(LastKnownPosition)
 	else : if (Path.size() > 0):
 		destination = GetCity(Path[PathPart]).global_position

@@ -258,10 +258,17 @@ func RestartCards() -> void:
 	Energy = 4
 	UpdateEnergy()
 	var CharCards = ShipTurns[CurrentTurn].Cards
+	var CharAmmo = ShipTurns[CurrentTurn].Ammo
 	for g in CharCards.keys():
 		var c = CardScene.instantiate() as Card
-		c.SetCardStats(g)
-		c.connect("OnCardPressed", OnCardSelected)
+		var WType = g.WeapT
+		var PossibleOptions : Array[CardOption] = []
+		for Ammo in CharAmmo:
+			var am = Ammo as CardOption
+			if (am.ComatibleWeapon == WType):
+				PossibleOptions.append(am)
+		c.SetCardStats(g, PossibleOptions)
+		c.connect("OnCardPressed", OnCardSelected) 
 		if (g is OffensiveCardStats):
 			offensive_card_plecements.add_child(c)
 		else :
@@ -274,9 +281,16 @@ func UpdateHandCards() -> void:
 	for g in deffensive_card_plecements.get_children():
 		g.queue_free()
 	var CharCards = ShipTurns[CurrentTurn].Cards
+	var CharAmmo = ShipTurns[CurrentTurn].Ammo
 	for g in CharCards.keys():
 		var c = CardScene.instantiate() as Card
-		c.SetCardStats(g)
+		var WType = g.WeapT
+		var PossibleOptions : Array[CardOption] = []
+		for Ammo in CharAmmo:
+			var am = Ammo as CardOption
+			if (am.ComatibleWeapon == WType):
+				PossibleOptions.append(am)
+		c.SetCardStats(g, PossibleOptions)
 		c.connect("OnCardPressed", OnCardSelected)
 		if (g is OffensiveCardStats):
 			offensive_card_plecements.add_child(c)
@@ -291,23 +305,23 @@ func ClearCards() -> void:
 	for g in selected_card_plecements.get_children():
 		g.queue_free()
 
-func OnCardSelected(C : Card, Option : String) -> void:
-	
+func OnCardSelected(C : Card, Option : CardOption) -> void:
 	var Action = C.CStats.duplicate() as CardStats
 	var CurrentShip = ShipTurns[CurrentTurn]
 	if (!Action.AllowDuplicates and Actions[CurrentShip].has(Action)):
 		return
-	for g in C.CStats.Options:
-		if (g.OptionName == Option):
-			Action.SelectedOption = g
-			
+	#for g in C.CStats.Options:
+		#if (g.OptionName == Option):
+	Action.SelectedOption = Option
 	var c = CardScene.instantiate() as Card
-	c.SetCardStats(Action)
+	if (Option != null):
+		c.SetCardStats(Action, [Option])
+	else:
+		c.SetCardStats(Action, [])
 	if (Energy < c.GetCost()):
 		return
-	@warning_ignore("narrowing_conversion")
 	Energy -= c.GetCost()
-	UpdateEnergy()
+	
 	c.connect("OnCardPressed", RemoveCard)
 	selected_card_plecements.add_child(c)
 	Actions[CurrentShip].append(Action)
@@ -317,15 +331,37 @@ func OnCardSelected(C : Card, Option : String) -> void:
 		Cards[C.CStats] -= 1
 		if (Cards[C.CStats] == 0):
 			Cards.erase(C.CStats)
+	if (Option != null):
+		if (Option.CauseConsumption):
+			var Ammo = ShipTurns[CurrentTurn].Ammo
+			Ammo[Option] -= 1
+			if (Ammo[Option] == 0):
+				Ammo.erase(Option)
+	UpdateEnergy()
 	UpdateHandCards()
 
-func RemoveCard(C : Card, _Options : String) -> void:
+func RemoveCard(C : Card, Option : CardOption) -> void:
 	C.queue_free()
+	if (C.CStats.Consume):
+		var Cards = ShipTurns[CurrentTurn].Cards
+		if (!Cards.has(C.CStats)):
+			Cards[C.CStats] = 1
+		else:
+			Cards[C.CStats] += 1
+	if (C.CStats.SelectedOption != null):
+		if (C.CStats.SelectedOption.CauseConsumption):
+			var Ammo = ShipTurns[CurrentTurn].Ammo
+			if (!Ammo.has(C.CStats.SelectedOption)):
+				Ammo[C.CStats.SelectedOption] = 1
+			else:
+				Ammo[C.CStats.SelectedOption] += 1
+			
 	var CurrentShip = ShipTurns[CurrentTurn]
 	Actions[CurrentShip].erase(C.CStats)
 	Energy += C.GetCost()
 	UpdateEnergy()
-
+	UpdateHandCards()
+	
 func UpdateEnergy() -> void:
 	$VBoxContainer4/VBoxContainer4/ProgressBar.value = Energy
 	$VBoxContainer4/VBoxContainer4/ProgressBar/Label.text = var_to_str(Energy) + " / 4"

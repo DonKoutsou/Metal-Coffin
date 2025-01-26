@@ -26,14 +26,16 @@ func DoOffensive(AtackCard : OffensiveCardStats, DefCard : CardStats, OriginShip
 	$HBoxContainer.add_child(Ic)
 
 	AtC = CardScene.instantiate() as Card
-	AtC.SetCardStats(AtackCard)
+	var Opts : Array[CardOption] = []
+	AtC.SetCardStats(AtackCard, Opts)
 	$HBoxContainer.add_child(AtC)
 	AtC.size_flags_horizontal = Control.SIZE_EXPAND
 	AtC.show_behind_parent = true
 	
 	if (DefCard != null):
 		DefC = CardScene.instantiate() as Card
-		DefC.SetCardStats(DefCard)
+		var Opts2 : Array[CardOption] = []
+		DefC.SetCardStats(DefCard, Opts2)
 		$HBoxContainer.add_child(DefC)
 		DefC.size_flags_horizontal = Control.SIZE_EXPAND
 		DefC.show_behind_parent = true
@@ -65,9 +67,9 @@ func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip 
 	Ic = ShipViz.instantiate() as CardFightShipViz
 	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
-
+	var Opts : Array[CardOption] = []
 	DefC = CardScene.instantiate() as Card
-	DefC.SetCardStats(DefCard)
+	DefC.SetCardStats(DefCard, Opts)
 	$HBoxContainer.add_child(DefC)
 	DefC.size_flags_horizontal = Control.SIZE_EXPAND
 	DefC.show_behind_parent = true

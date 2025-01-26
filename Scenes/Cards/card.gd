@@ -11,35 +11,43 @@ var Cost : int
 func _ready() -> void:
 	$PanelContainer.visible = false
 
-func SetCardStats(Stats : CardStats) -> void:
+func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	CStats = Stats
+	Cost = Stats.Energy
 	if Stats.SelectedOption !=  null:
 		$VBoxContainer/CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
+		Cost += Stats.SelectedOption.EnergyAdd
 	else:
 		$VBoxContainer/CardName.text = Stats.CardName
 	$VBoxContainer/CardIcon.texture = Stats.Icon
 	$VBoxContainer/CardCost.text = var_to_str(Stats.Energy)
 	$VBoxContainer/CardDesc.text = Stats.CardDescription
-	Cost = Stats.Energy
+	
+	$VBoxContainer/CardCost.text = var_to_str(Cost)
 	for g in Stats.Options:
 		var OptionBut = Button.new()
 		OptionBut.text = g.OptionName
 		$PanelContainer/HBoxContainer.add_child(OptionBut)
-		OptionBut.connect("pressed", OnOptionSelected)
+		OptionBut.connect("pressed", OnOptionSelected.bind(g))
+	for g in Options:
+		var OptionBut = Button.new()
+		OptionBut.text = g.OptionName
+		$PanelContainer/HBoxContainer.add_child(OptionBut)
+		OptionBut.connect("pressed", OnOptionSelected.bind(g))
 
 func OnButtonPressed() -> void:
 	if ($PanelContainer/HBoxContainer.get_child_count() > 0 and CStats.SelectedOption == null):
 		$PanelContainer.visible = true
 	else:
-		OnCardPressed.emit(self, "")
+		OnCardPressed.emit(self, null)
 
-func OnOptionSelected() -> void:
+func OnOptionSelected(Option : CardOption) -> void:
 	var but = get_viewport().gui_get_focus_owner() as Button
 	#Option = but.text
 	$PanelContainer.visible = false
-	OnCardPressed.emit(self, but.text)
+	OnCardPressed.emit(self, Option)
 
 func GetCost() -> float:
-	if (CStats.SelectedOption != null):
-		return Cost + CStats.SelectedOption.EnergyAdd
+	#if (CStats.SelectedOption != null):
+		#return Cost + CStats.SelectedOption.EnergyAdd
 	return Cost

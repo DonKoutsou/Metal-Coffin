@@ -1,9 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://cgigq707wifrf"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://cgigq707wifrf"]
 
 [ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_q4wll"]
 [ext_resource type="Texture2D" uid="uid://b3oxh70gjpu2h" path="res://Assets/Items/radar-sweep_smol.png" id="2_0tvyx"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_pp1bp"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_eumis"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_6tjws"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_gbrn0"]
 
@@ -20,7 +18,6 @@ script = ExtResource("4_6tjws")
 Upgrades = Array[ExtResource("5_gbrn0")]([SubResource("Resource_l8s17")])
 UpgradeTime = 500.0
 IsDamaged = false
-RepairItems = Array[ExtResource("2_pp1bp")]([ExtResource("3_eumis"), ExtResource("3_eumis")])
 ItemIcon = ExtResource("1_q4wll")
 ItemIconSmol = ExtResource("2_0tvyx")
 ItemName = "Super HighRange Radar"

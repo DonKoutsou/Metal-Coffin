@@ -113,33 +113,58 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	GetMap().ToggleUIForIntro(false)
+	
 func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
-	for g in Survivors:
-		var nam = g.Name
-		for z in FighingFriendlyUnits:
-			#if z is PlayerShip:
-				#ShipData.GetInstance().SetStatValue(STAT_CONST.STATS.HULL, g.Hull)
-				#FighingFriendlyUnits.erase(z)
-				#break
-			if nam == z.Cpt.CaptainName:
-				z.Damage(z.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - g.Hull)
-				FighingFriendlyUnits.erase(z)
+	var AllUnits : Array[MapShip]
+	AllUnits.append_array(FighingFriendlyUnits)
+	AllUnits.append_array(FighingEnemyUnits)
+	
+	for Unit in AllUnits:
+		var Survived = false
+		for Surv in Survivors:
+			var Nam = Surv.Name
+			if (Unit.Cpt.CaptainName == Nam):
+				Unit.Damage(Unit.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Surv.Hull)
+				if (Unit is not HostileShip):
+					FigureOutInventory(Unit.Cpt.GetCharacterInventory(), Surv.Cards, Surv.Ammo)
+				Survived = true
 				break
-	#for g in FighingFriendlyUnits:
-		#if (g is PlayerShip):
-			#GetMap().StageFailed()
-			#GameLost("Your ship got destroyed")
-			#return
-		#if (g is Drone):
-			#
-			#GetMap().GetInScreenUI().GetCapUI().OnCaptainDischarged(g.Cpt)
-	for g in FighingEnemyUnits:
-		var enship = g as HostileShip
-		enship.Damage(99999999999)
-		#MapPointerManager.GetInstance().RemoveShip(g)
-		#g.free()
-	SimulationManager.GetInstance().TogglePause(false)
+		if (!Survived):
+			Unit.Damage(99999999999)
+	
+	FighingEnemyUnits.clear()
+	FighingFriendlyUnits.clear()
+	
+	#SimulationManager.GetInstance().TogglePause(false)
 	GetMap().ToggleUIForIntro(true)
+
+#Make sure to remove all items that their cards have been used
+func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo : Dictionary):
+	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
+	var Contents = CharInv.GetInventoryContents().duplicate()
+	for It in Contents.keys():
+		var Itm = It as Item
+		for g in Contents[It]:
+			#if item doesent provide a card then it def didnt get used
+			if (Itm.CardProviding != null):
+				#if it did remove it from dictionary and leave ininside inventory
+				if (Cards.has(Itm.CardProviding)):
+					Cards[Itm.CardProviding] -= 1
+					if (Cards[Itm.CardProviding] == 0):
+						Cards.erase(Itm.CardProviding)
+				#if it was used and we cant find it in the dictionary then remove it from inventory
+				else:
+					CharInv.RemoveItem(Itm)
+			
+			if (Itm.CardOptionProviding != null):
+				#if it did remove it from dictionary and leave ininside inventory
+				if (Ammo.has(Itm.CardOptionProviding)):
+					Ammo[Itm.CardOptionProviding] -= 1
+					if (Ammo[Itm.CardOptionProviding] == 0):
+						Ammo.erase(Itm.CardOptionProviding)
+				#if it was used and we cant find it in the dictionary then remove it from inventory
+				else:
+					CharInv.RemoveItem(Itm)
 #--------------------------------------------------------
 func GameLost(reason : String):
 	get_tree().paused = true

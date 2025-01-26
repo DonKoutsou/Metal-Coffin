@@ -42,7 +42,7 @@ func GetCards() -> Dictionary:
 			continue
 		CardsInInventory[g] = _CardInventory[g]
 	return CardsInInventory
-	
+
 func GetCardAmmo() -> Dictionary:
 	return _CardAmmo.duplicate()
 
@@ -84,6 +84,8 @@ func AddItem(It : Item) -> void:
 			OnItemAdded.emit(It)
 			if (It.CardProviding != null):
 				_CardInventory[It.CardProviding] += 1
+			if (It.CardOptionProviding != null):
+				_CardAmmo[It.CardOptionProviding] += 1
 			print("Added 1 {0}".format([It.ItemName]))
 			#if (It is MissileItem):
 				#MissileDockEventH.MissileAdded.emit(It)
@@ -95,6 +97,8 @@ func AddItem(It : Item) -> void:
 		_InventoryContents[It] = 1
 		if (It.CardProviding != null):
 			_CardInventory[It.CardProviding] = 1
+		if (It.CardOptionProviding != null):
+			_CardAmmo[It.CardOptionProviding] = 1
 		if (It is ShipPart):
 			OnShipPartAdded.emit(It)
 		OnItemAdded.emit(It)
@@ -134,6 +138,10 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 		_CardInventory[c] -= 1
 		if (_CardInventory[c] == 0):
 			_CardInventory.erase(c)
+	if (It.CardOptionProviding != null):
+		_CardAmmo[It.CardOptionProviding] = 1
+		if (_CardAmmo[It.CardOptionProviding] == 0):
+			_CardAmmo.erase(It.CardOptionProvidin)
 	if (_InventoryContents[It] == 0):
 		_InventoryContents.erase(It)
 	

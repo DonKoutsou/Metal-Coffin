@@ -83,7 +83,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			ShipDockActions.emit("Refueling", false, 0)
 
-		if (Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and CurrentPort.PlayerRepairReserves > 0):
+		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and CurrentPort.PlayerRepairReserves > 0):
 			var timeleft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / 0.05 / 6)
 			ShipDockActions.emit("Repairing", true, roundi(timeleft))
 			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.05 * SimulationSpeed)
@@ -379,6 +379,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()
+	stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
 	return stats
 func GetShipMaxSpeed() -> float:
 	var Spd = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)

@@ -1,14 +1,10 @@
-[gd_resource type="Resource" script_class="MissileItem" load_steps=10 format=3 uid="uid://60cqxlcirs15"]
+[gd_resource type="Resource" script_class="MissileItem" load_steps=6 format=3 uid="uid://60cqxlcirs15"]
 
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_0xfv8"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Scenes/Cards/Missile.tres" id="1_c4tby"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="2_e6cn8"]
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="2_iety4"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="3_2il65"]
-[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShortMissilePod.tres" id="3_66ewk"]
 [ext_resource type="Script" path="res://Scripts/Inventory/MissileItem.gd" id="4_o0c70"]
-[ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/MediumMissilePod.tres" id="4_w7ofc"]
-[ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/LargeMissilePod.tres" id="5_04p7p"]
 
 [resource]
 script = ExtResource("4_o0c70")
@@ -24,4 +20,3 @@ ItemDesc = "Within visual range missile, used for close quarter encounters."
 MaxStackCount = 99
 RandomFindMaxCount = 1
 CardProviding = ExtResource("1_c4tby")
-CardRequirement = Array[ExtResource("2_e6cn8")]([ExtResource("3_66ewk"), ExtResource("4_w7ofc"), ExtResource("5_04p7p")])

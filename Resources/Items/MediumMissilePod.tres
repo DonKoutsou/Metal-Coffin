@@ -1,9 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://boh6gvavu4h2c"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://boh6gvavu4h2c"]
 
 [ext_resource type="Texture2D" uid="uid://3p3g5f3bmg8g" path="res://Assets/Items/missile-pod.png" id="1_laxio"]
 [ext_resource type="Texture2D" uid="uid://dp1dr20b5s1we" path="res://Assets/Items/missile-pod_smol.png" id="2_fod6m"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_n2vj5"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="4_lyj1r"]
 [ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/LargeMissilePod.tres" id="5_5gmkn"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_uw0hq"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_rof78"]
@@ -22,7 +20,6 @@ Upgrades = Array[ExtResource("6_uw0hq")]([SubResource("Resource_fmxhr")])
 UpgradeVersion = ExtResource("5_5gmkn")
 UpgradeTime = 100.0
 IsDamaged = false
-RepairItems = Array[ExtResource("3_n2vj5")]([ExtResource("4_lyj1r"), ExtResource("4_lyj1r")])
 ItemIcon = ExtResource("1_laxio")
 ItemIconSmol = ExtResource("2_fod6m")
 ItemName = "MP-6 \"Cyclone\""
