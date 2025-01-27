@@ -182,7 +182,7 @@ func AreaEntered(area: Area2D):
 			#SpotAproached.emit(self)
 func AreaExited(area: Area2D):
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		if (area.get_collision_layer_value(3)):
+		if (area.get_collision_layer_value(1)):
 			CurrentlyVisiting = false
 			var ship = area.get_parent() 
 			ship.RemovePort()

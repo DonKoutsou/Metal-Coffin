@@ -183,7 +183,7 @@ func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 		Dr.global_rotation = $Line2D.global_rotation
 		Dr.global_position = global_position
 		var RefilAmm = Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) - ($Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY))
-		Dr.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, RefilAmm)
+		Dr.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, abs(RefilAmm))
 		Dr.EnableDrone()
 	
 func AddDroneToHierarchy(drone : Drone):

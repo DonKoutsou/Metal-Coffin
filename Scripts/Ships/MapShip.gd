@@ -208,7 +208,7 @@ func Damage(amm : float) -> void:
 		
 func Kill() -> void:
 	if (self is not HostileShip):
-			InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
+		InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
 	MapPointerManager.GetInstance().RemoveShip(self)
 	OnShipDestroyed.emit(self)
 	queue_free()
@@ -230,6 +230,12 @@ func RemovePort():
 	CurrentPort = null
 	InventoryManager.GetInstance().CancelUpgrades(Cpt)
 	Cpt.CurrentPort = ""
+	if (Landing):
+		LandingCanceled.emit(self)
+		Landing = false
+	if (Altitude != 10000 and !TakingOff):
+		TakeoffStarted.emit()
+		TakingOff = true
 	var dr = GetDroneDock().DockedDrones
 	for g in dr:
 		g.RemovePort()

@@ -4,15 +4,16 @@
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/Craden.tres" id="2_ddg27"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="6_6lhcj"]
 [ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="9_jx5d0"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="18_elnvx"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="20_hn8tc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
 light_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 200.0
@@ -64,7 +65,7 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 rotation = -1.5708
-texture = ExtResource("18_elnvx")
+texture = ExtResource("6_6lhcj")
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
 show_behind_parent = true
@@ -73,7 +74,7 @@ show_behind_parent = true
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 position = Vector2(-20, -20)
-texture = ExtResource("18_elnvx")
+texture = ExtResource("6_6lhcj")
 
 [node name="Aceleration" type="Node2D" parent="."]
 

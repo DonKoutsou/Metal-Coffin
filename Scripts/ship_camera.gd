@@ -16,7 +16,7 @@ static func GetInstance() -> ShipCamera:
 #////////////////////////////
 func _HANDLE_ZOOM(zoomval : float):
 	var prevzoom = zoom
-	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.07,0.07), Vector2(2.1,2.1))
+	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(2.1,2.1))
 	call_deferred("OnZoomChanged")
 	_UpdateMapGridVisibility()
 #////////////////////////////
@@ -41,7 +41,7 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		var touch_point_positions = touch_points.values()
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
-		zoom = clamp(start_zoom / zoom_factor, Vector2(0.1,0.1), Vector2(2.1,2.1))
+		zoom = clamp(start_zoom / zoom_factor, Vector2(0.07,0.07), Vector2(2.1,2.1))
 		call_deferred("OnZoomChanged")
 		_UpdateMapGridVisibility()
 	else:

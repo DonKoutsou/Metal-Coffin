@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_d5d7j"]
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="4_irncy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t855l"]
 
 [node name="Card" type="PanelContainer"]
 custom_minimum_size = Vector2(150, 130)
@@ -21,6 +22,8 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 2
+theme = ExtResource("2_n60qq")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t855l")
 script = ExtResource("1_vr3r8")
 
 [node name="Button" type="Button" parent="."]
@@ -34,7 +37,6 @@ theme_override_constants/separation = 10
 
 [node name="CardName" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_d5d7j")
 theme_override_font_sizes/font_size = 16
 text = "Card Name"
 horizontal_alignment = 1
@@ -49,7 +51,6 @@ stretch_mode = 3
 [node name="CardDesc" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("3_d5d7j")
 theme_override_font_sizes/font_size = 10
 text = "afwfa fw aw faw faw f fwa aw fa"
 horizontal_alignment = 1
@@ -58,7 +59,6 @@ autowrap_mode = 2
 
 [node name="CardCost" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_d5d7j")
 theme_override_font_sizes/font_size = 10
 text = "1"
 horizontal_alignment = 2

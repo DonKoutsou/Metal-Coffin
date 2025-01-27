@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_j33n8"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="3_u6ltl"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_urdjp"]
-[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/Engine.tres" id="5_mlw8x"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="5_mlw8x"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/FuelTank.tres" id="6_38q0j"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShortRadar.tres" id="7_f81un"]
 [ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/MediumMachinegun.tres" id="8_f0x14"]

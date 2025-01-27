@@ -161,16 +161,16 @@ func _physics_process(delta: float) -> void:
 		else:
 			if (ship is MapShip):
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				Marker.ToggleShipDetails(!ship.Docked)
-				if (ship.GetDroneDock().DockedDrones.size() > 0):
-					var fuel = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-					var MaxFuel = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-					for z in ship.GetDroneDock().DockedDrones:
-						fuel += z.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-						MaxFuel += z.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-					Marker.UpdateDroneFuel(roundi(fuel), MaxFuel)
-				else:
-					Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK))
+				#Marker.ToggleShipDetails(!ship.Docked)
+				#if (ship.GetDroneDock().DockedDrones.size() > 0):
+					#var fuel = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+					#var MaxFuel = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+					#for z in ship.GetDroneDock().DockedDrones:
+						#fuel += z.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+						#MaxFuel += z.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+					#Marker.UpdateDroneFuel(roundi(fuel), MaxFuel)
+				#else:
+				Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK))
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
