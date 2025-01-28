@@ -163,6 +163,17 @@ ShipIcon = NodePath("Legend/CaptainIcon2")
 layout_mode = 2
 alignment = 1
 
+[node name="CaptainIcon2" type="TextureRect" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+self_modulate = Color(1, 1, 1, 0.414)
+show_behind_parent = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("12_gc8sd")
+expand_mode = 1
+flip_v = true
+
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -184,16 +195,5 @@ custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
-
-[node name="CaptainIcon2" type="TextureRect" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
-self_modulate = Color(1, 1, 1, 0.414)
-show_behind_parent = true
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture = ExtResource("12_gc8sd")
-expand_mode = 1
-flip_v = true
 
 [connection signal="gui_input" from="HBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]
