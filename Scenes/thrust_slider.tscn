@@ -1,89 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn356hqaf372p"]
+[gd_scene load_steps=5 format=3 uid="uid://dn356hqaf372p"]
 
 [ext_resource type="Script" path="res://Scripts/UI/thrust_slider.gd" id="1_pmd3c"]
-[ext_resource type="Texture2D" uid="uid://b7uf4103bd05b" path="res://Assets/UIPiecies/panel_Camera 3.png" id="2_c6hf5"]
-[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/light.tscn" id="3_pgc6o"]
 [ext_resource type="Texture2D" uid="uid://cppak6y6wit6" path="res://Assets/UIPiecies/handle_Camera 3.png" id="4_yj1xw"]
 [ext_resource type="Texture2D" uid="uid://c2f4quec7hbw0" path="res://Assets/UIPiecies/handleshadow_Camera 3.png" id="5_pwxcd"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="6_hkc0e"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u6pk"]
-draw_center = false
-
-[node name="ThrustSlider" type="PanelContainer"]
+[node name="ThrustSlider" type="Control" node_paths=PackedStringArray("Handle")]
+layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -211.0
-offset_top = -450.0
+offset_left = -101.0
+offset_top = -372.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4u6pk")
 script = ExtResource("1_pmd3c")
-MaxVelocityLoc = 157.0
-MinVelocityLoc = 367.0
+Handle = NodePath("Handle")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Handle" type="TextureRect" parent="."]
 layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("2_c6hf5")
-expand_mode = 1
-
-[node name="Handle3" type="TextureRect" parent="TextureRect"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(1, 1, 1, 0.399)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -30.0
-offset_top = -22.0
-offset_right = -30.0
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("2_c6hf5")
-expand_mode = 1
-
-[node name="Light" parent="TextureRect" instance=ExtResource("3_pgc6o")]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 325.0
-offset_right = 41.0
-offset_bottom = 365.0
-
-[node name="Light2" parent="TextureRect" instance=ExtResource("3_pgc6o")]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 325.0
-offset_right = 62.0
-offset_bottom = 365.0
-
-[node name="Light3" parent="TextureRect" instance=ExtResource("3_pgc6o")]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 325.0
-offset_right = 83.0
-offset_bottom = 365.0
-
-[node name="Handle" type="TextureRect" parent="TextureRect"]
-layout_mode = 0
-offset_left = 91.0
-offset_top = 366.0
-offset_right = 197.0
-offset_bottom = 472.0
+offset_top = 277.0
+offset_right = 106.0
+offset_bottom = 383.0
 mouse_filter = 0
 texture = ExtResource("4_yj1xw")
 expand_mode = 1
 
-[node name="Handle2" type="TextureRect" parent="TextureRect/Handle"]
+[node name="Handle2" type="TextureRect" parent="Handle"]
 modulate = Color(1, 1, 1, 0.654)
 show_behind_parent = true
 layout_mode = 0
@@ -101,4 +49,4 @@ volume_db = -10.0
 pitch_scale = 1.38
 bus = &"MapSounds"
 
-[connection signal="gui_input" from="TextureRect/Handle" to="." method="_on_handle_gui_input"]
+[connection signal="gui_input" from="Handle" to="." method="_on_handle_gui_input"]

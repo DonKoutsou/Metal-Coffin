@@ -25,7 +25,7 @@ func AccelerationChanged(value: float) -> void:
 	super(value)
 
 func EnableDrone():
-	#set_physics_process(true)
+	#set_physics_process(true)`
 	if (Altitude != 10000):
 		if (Landing):
 			LandingCanceled.emit()

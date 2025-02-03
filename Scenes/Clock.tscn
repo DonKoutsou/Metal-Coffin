@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://diq2p5s5u6bc0"]
+[gd_scene load_steps=6 format=3 uid="uid://diq2p5s5u6bc0"]
 
 [ext_resource type="Script" path="res://Scripts/UI/clock.gd" id="1_1k7lr"]
 [ext_resource type="Texture2D" uid="uid://u6qd6o0jhpg4" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="2_es0ac"]
 [ext_resource type="Texture2D" uid="uid://bpb6rygwl5stf" path="res://Assets/UIPiecies/clockwhite.png" id="2_p6dw0"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_cob4w"]
+[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="4_s5u7i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c63ko"]
 content_margin_left = 8.0
@@ -28,16 +28,6 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 shadow_size = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7um3"]
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
-border_blend = true
-corner_detail = 1
-
 [node name="Clock" type="Control" groups=["Clock"]]
 layout_mode = 3
 anchors_preset = 8
@@ -54,6 +44,7 @@ grow_vertical = 2
 script = ExtResource("1_1k7lr")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,6 +62,7 @@ texture = ExtResource("2_es0ac")
 expand_mode = 1
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -86,6 +78,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c63ko")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 modulate = Color(0.615304, 0.57196, 0.322451, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -104,7 +97,7 @@ expand_mode = 1
 
 [node name="Hour" type="Line2D" parent="."]
 position = Vector2(45.9048, 44.4107)
-points = PackedVector2Array(0, 0, 0, -29.5155)
+points = PackedVector2Array(0, 0, 0, -21.4107)
 width = 1.0
 default_color = Color(0.615304, 0.57196, 0.322451, 1)
 begin_cap_mode = 2
@@ -113,28 +106,21 @@ end_cap_mode = 2
 [node name="Min" type="Line2D" parent="."]
 position = Vector2(45.9048, 44.4107)
 rotation = 0.669831
-points = PackedVector2Array(0, 0, 0, -52.3084)
+points = PackedVector2Array(0, 0, 0, -42.0824)
 width = 1.0
 default_color = Color(0.615304, 0.57196, 0.322451, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
-offset_top = -36.0
-offset_right = 48.5
-offset_bottom = -19.0
-grow_horizontal = 2
-theme = ExtResource("4_cob4w")
-theme_override_styles/panel = SubResource("StyleBoxFlat_v7um3")
-
-[node name="Label" type="Label" parent="PanelContainer"]
+[node name="Label" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Date : 10/4/3874"
+offset_left = -12.0
+offset_top = 110.0
+offset_right = 103.0
+offset_bottom = 127.0
+theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
+theme_override_fonts/font = ExtResource("4_s5u7i")
+theme_override_font_sizes/font_size = 16
+text = "10/4/3874"
 horizontal_alignment = 1
 vertical_alignment = 1

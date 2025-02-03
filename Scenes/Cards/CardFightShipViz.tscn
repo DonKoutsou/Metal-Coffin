@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dmq4aarkkp044"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_3u5gi"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="2_5pxfv"]
 [ext_resource type="Script" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="2_qce1f"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_5ndf2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v77k"]
 content_margin_left = 3.0
@@ -96,9 +96,8 @@ autowrap_mode = 1
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("2_5pxfv")
+texture = ExtResource("3_5ndf2")
 expand_mode = 1
-stretch_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(85, 0)
@@ -136,5 +135,5 @@ scroll_active = false
 text_direction = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(39.5, 38.5)
+position = Vector2(54, 38.5)
 process_material = SubResource("ParticleProcessMaterial_on4wq")

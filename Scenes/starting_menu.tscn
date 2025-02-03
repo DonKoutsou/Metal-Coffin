@@ -1,12 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=12 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
-[ext_resource type="Shader" path="res://Shaders/Crt.gdshader" id="7_2spow"]
-[ext_resource type="Texture2D" uid="uid://dujg17ho7wv68" path="res://Assets/UIPiecies/BORDER_Camera 1.png" id="8_i38ft"]
+[ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="6_voe58"]
+[ext_resource type="Texture2D" uid="uid://bdrm4lf7c2q4l" path="res://Assets/UIPiecies/Screen/Screen_Camera 1_FullQuality.png" id="7_qv7al"]
 
 [sub_resource type="Animation" id="Animation_gaja2"]
 length = 0.001
@@ -69,41 +69,13 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 shadow_size = 4
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m6hat"]
-noise_type = 4
-frequency = 0.6
-fractal_weighted_strength = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uyww5"]
-seamless = true
-normalize = false
-noise = SubResource("FastNoiseLite_m6hat")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_od2fi"]
-shader = ExtResource("7_2spow")
-shader_parameter/curvature = 0.28
-shader_parameter/skip = 0.01
-shader_parameter/image_flicker = 0.1
-shader_parameter/vignette_flicker_speed = 0.01
-shader_parameter/vignette_strength = 1.2
-shader_parameter/small_scanlines_speed = 1.0
-shader_parameter/small_scanlines_proximity = 2.0
-shader_parameter/small_scanlines_opacity = 0.64
-shader_parameter/scanlines_opacity = 0.41
-shader_parameter/scanlines_speed = 1.0
-shader_parameter/scanline_thickness = 0.58
-shader_parameter/scanlines_spacing = 0.5
-shader_parameter/tint_color = Color(0.154158, 0.635917, 0, 1)
-shader_parameter/tint_intensity = 0.02
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_uyww5")
-
 [node name="StartingMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 96
 follow_viewport_enabled = true
 script = ExtResource("1_y40tw")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="w" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -112,22 +84,22 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="w"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 74.0
-offset_top = -146.0
-offset_right = 206.0
-offset_bottom = -82.0
+offset_left = 113.0
+offset_top = -154.0
+offset_right = 245.0
+offset_bottom = -90.0
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="w/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_q14vk")
 
-[node name="TextureRect2" type="TextureRect" parent="ColorRect/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="w/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_s86m3")
 
@@ -205,13 +177,16 @@ text = "Exit"
 
 [node name="Screen" type="ColorRect" parent="."]
 process_mode = 3
-material = SubResource("ShaderMaterial_od2fi")
+material = ExtResource("6_voe58")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = 61.0
+offset_right = -83.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(50, 50)
 mouse_filter = 2
 
 [node name="ScreenFrame" type="TextureRect" parent="."]
@@ -219,14 +194,11 @@ custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -69.0
-offset_top = -90.0
-offset_right = 69.0
-offset_bottom = 90.0
+offset_right = 323.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("8_i38ft")
+texture = ExtResource("7_qv7al")
 expand_mode = 1
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
