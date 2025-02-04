@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=56 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -23,28 +23,30 @@
 [ext_resource type="Script" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="Texture2D" uid="uid://bdrm4lf7c2q4l" path="res://Assets/UIPiecies/Screen/Screen_Camera 1_FullQuality.png" id="24_sddf6"]
+[ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="25_nqjgb"]
 [ext_resource type="PackedScene" uid="uid://b1q7brpw8cc2p" path="res://Scenes/DroneTab.tscn" id="25_s6vr7"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="25_xtg2d"]
+[ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="26_6asdg"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="26_h8cr4"]
-[ext_resource type="Texture2D" uid="uid://dbx4r4aldogko" path="res://Assets/UIPiecies/buttonsonlytop.png" id="27_vdlpk"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ELint.tscn" id="27_x5jep"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="28_dgqcy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="29_ugh6x"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="33_v4i0p"]
+[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="33_x32n8"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="34_4g7nr"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="36_4epqv"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="37_nythg"]
+[ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality.png" id="38_iludl"]
+[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="38_non32"]
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="38_vyrfo"]
 [ext_resource type="Texture2D" uid="uid://b76vc3yqgpkla" path="res://Assets/UIPiecies/Button_Camera 1.png" id="39_yx6y0"]
 [ext_resource type="Texture2D" uid="uid://b2spr3t4g1h0u" path="res://Assets/UIPiecies/ButtonPressed_Camera 1.png" id="40_2nn8k"]
 [ext_resource type="BitMap" uid="uid://bws1mu52unesf" path="res://Assets/UIPiecies/ButtonAlpha.png" id="41_62ow1"]
+[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="42_jcl8h"]
+[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="43_fa10l"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="45_ssr13"]
-[ext_resource type="Script" path="res://Scripts/UI/pop_up_manager.gd" id="46_8wkt8"]
-[ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/CustomPopUp.tscn" id="47_j01wc"]
-[ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/CustomConfirm.tscn" id="48_huwio"]
 [ext_resource type="Texture2D" uid="uid://cbfjaei6s76i" path="res://Assets/UIPiecies/Screen/Buttons_Camera 1_FullQuality.png" id="49_0pvp7"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="49_j4oow"]
-[ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/FadeNotif.tscn" id="49_ogyew"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
@@ -58,6 +60,38 @@ normal_texture = ExtResource("14_j6nai")
 texture_filter = 5
 texture_repeat = 2
 
+[sub_resource type="Gradient" id="Gradient_3bd7r"]
+offsets = PackedFloat32Array(0, 0.404459, 0.600318, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.498979, 0.52605, 0.368283, 1, 0.562558, 0.562557, 0.562557, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tkg8l"]
+gradient = SubResource("Gradient_3bd7r")
+width = 128
+
+[sub_resource type="Environment" id="Environment_6n7os"]
+background_mode = 3
+background_canvas_max_layer = 1
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_exposure = 2.0
+tonemap_white = 0.37
+glow_enabled = true
+glow_levels/1 = 16.0
+glow_levels/2 = 16.0
+glow_levels/3 = 16.0
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 0.16
+glow_strength = 1.01
+glow_mix = 0.825
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+adjustment_enabled = true
+adjustment_brightness = 0.8
+adjustment_contrast = 1.2
+adjustment_saturation = 0.65
+adjustment_color_correction = SubResource("GradientTexture1D_tkg8l")
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]
 light_mode = 1
 
@@ -68,7 +102,6 @@ bg_color = Color(0.174391, 0.296014, 0.304712, 1)
 light_mode = 1
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_Camera", "ScreenUI", "SteeringWh", "Elint", "DroneUI", "MissileUI", "ThrustUI", "MapMarkerControls")]
-layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
@@ -97,7 +130,7 @@ anchor_bottom = 1.0
 offset_left = 76.0
 offset_top = 67.0
 offset_right = -333.0
-offset_bottom = -72.0
+offset_bottom = -69.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -107,11 +140,12 @@ stretch = true
 [node name="ViewPort" type="SubViewport" parent="SubViewportContainer"]
 process_mode = 1
 disable_3d = true
+own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(791, 509)
+size = Vector2i(791, 512)
 render_target_update_mode = 4
 
 [node name="Ground" type="Control" parent="SubViewportContainer/ViewPort"]
@@ -141,6 +175,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_nb103")
 stretch_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort"]
+environment = SubResource("Environment_6n7os")
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]
 color = Color(0, 0, 0, 1)
@@ -180,24 +217,26 @@ material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
 MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
-FriendlyColor = Color(0.0486369, 0.645335, 0.0400367, 1)
-EnemyColor = Color(0.983526, 0.0936426, 7.70092e-07, 1)
+FriendlyColor = Color(0.049, 1, 0.04, 1)
+EnemyColor = Color(1, 0.094, 0, 1)
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]
 use_parent_material = true
 
 [node name="MapLineDrawer" parent="SubViewportContainer/ViewPort/MapPointerManager" instance=ExtResource("16_sp82o")]
 modulate = Color(0.0410537, 0.575073, 0.0333716, 1)
+ResizeLinesWithZoom = true
 
 [node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager" groups=["LineMarkers"]]
 use_parent_material = true
 script = ExtResource("22_fa7wu")
-Col = Color(0.721279, 0.395459, 0.144425, 1)
+Col = Color(100, 0.395, 0.144, 1)
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" instance=ExtResource("23_53oad")]
 
 [node name="OuterUI" type="Control" parent="."]
 process_mode = 1
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,6 +257,74 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("24_sddf6")
 expand_mode = 1
+
+[node name="ScreenFrame3" type="TextureRect" parent="OuterUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -104.0
+offset_right = -949.0
+offset_bottom = -445.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("25_nqjgb")
+expand_mode = 1
+
+[node name="ScreenFrame6" type="TextureRect" parent="OuterUI/ScreenFrame3"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 12.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("25_nqjgb")
+expand_mode = 1
+
+[node name="ScreenFrame5" type="TextureRect" parent="OuterUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -121.0
+offset_top = -72.0
+offset_right = -1085.0
+offset_bottom = -467.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.290599
+mouse_filter = 2
+texture = ExtResource("26_6asdg")
+expand_mode = 1
+flip_h = true
+
+[node name="ScreenFrame6" type="TextureRect" parent="OuterUI/ScreenFrame5"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.7533
+offset_top = 45.9875
+offset_right = -13.7533
+offset_bottom = 45.9875
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.290599
+mouse_filter = 2
+texture = ExtResource("26_6asdg")
+expand_mode = 1
+flip_h = true
 
 [node name="ScreenFrame2" type="TextureRect" parent="OuterUI"]
 layout_mode = 1
@@ -250,21 +357,20 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -240.0
-offset_top = -136.0
-offset_right = -176.0
-offset_bottom = -88.0
+offset_left = -238.0
+offset_top = -132.0
+offset_right = -180.0
+offset_bottom = -92.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
 [node name="Label" type="TextureRect" parent="OuterUI/DroneButton"]
-modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -287,21 +393,20 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -241.0
-offset_top = -201.0
-offset_right = -178.0
-offset_bottom = -153.0
+offset_left = -238.0
+offset_top = -197.0
+offset_right = -180.0
+offset_bottom = -157.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
 [node name="Label" type="TextureRect" parent="OuterUI/q"]
-modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -324,15 +429,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -240.0
-offset_top = -266.0
-offset_right = -176.0
-offset_bottom = -218.0
+offset_left = -238.0
+offset_top = -263.0
+offset_right = -180.0
+offset_bottom = -222.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -354,6 +459,7 @@ theme_override_font_sizes/font_size = 14
 text = "Radar"
 
 [node name="ScreenUi" type="Control" parent="OuterUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -420,19 +526,19 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -161.0
-offset_top = -71.0
-offset_right = -97.0
-offset_bottom = -24.0
+offset_left = -158.0
+offset_top = -67.0
+offset_right = -101.0
+offset_bottom = -28.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
@@ -465,15 +571,15 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -7.0
-offset_right = -176.0
-offset_bottom = 41.0
+offset_left = -238.0
+offset_top = -4.0
+offset_right = -180.0
+offset_bottom = 36.0
 grow_horizontal = 0
 grow_vertical = 2
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -506,19 +612,19 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -71.0
-offset_right = -176.0
-offset_bottom = -24.0
+offset_left = -237.0
+offset_top = -67.0
+offset_right = -180.0
+offset_bottom = -28.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
@@ -551,15 +657,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -240.0
-offset_top = -71.0
-offset_right = -176.0
-offset_bottom = -23.0
+offset_left = -238.0
+offset_top = -67.0
+offset_right = -180.0
+offset_bottom = -27.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
@@ -620,15 +726,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -82.0
-offset_top = -555.0
-offset_right = -18.0
-offset_bottom = -487.0
+offset_left = -79.0
+offset_top = -549.0
+offset_right = -23.0
+offset_bottom = -494.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("42_jcl8h")
+texture_pressed = ExtResource("42_jcl8h")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -660,15 +766,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -83.0
-offset_top = -476.0
-offset_right = -18.0
-offset_bottom = -408.0
+offset_left = -79.0
+offset_top = -470.0
+offset_right = -22.0
+offset_bottom = -414.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("43_fa10l")
+texture_pressed = ExtResource("43_fa10l")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -700,10 +806,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -71.0
-offset_right = -18.0
-offset_bottom = -24.0
+offset_left = -80.0
+offset_top = -68.0
+offset_right = -22.0
+offset_bottom = -28.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -711,9 +817,9 @@ size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
 action_mode = 0
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -755,18 +861,18 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0
-offset_top = 14.0
-offset_right = -18.0
-offset_bottom = 83.0
+offset_left = -79.0
+offset_top = 20.0
+offset_right = -22.0
+offset_bottom = 77.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
-texture_normal = ExtResource("27_vdlpk")
-texture_pressed = ExtResource("27_vdlpk")
-texture_click_mask = ExtResource("41_62ow1")
+texture_normal = ExtResource("38_non32")
+texture_pressed = ExtResource("38_non32")
+texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -783,6 +889,7 @@ offset_right = 20.0
 offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.651769, 0.651769, 0.651769, 1)
 theme_override_font_sizes/font_size = 50
 text = "II"
 horizontal_alignment = 1
@@ -982,25 +1089,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PopUpManager" type="Control" parent="OuterUI"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -76.0
-offset_bottom = -76.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-script = ExtResource("46_8wkt8")
-CustomPop = ExtResource("47_j01wc")
-CustomConfirm = ExtResource("48_huwio")
-FadNot = ExtResource("49_ogyew")
-
 [node name="Fund_Container" parent="OuterUI" instance=ExtResource("49_j4oow")]
 layout_mode = 1
 anchors_preset = 1
@@ -1014,6 +1102,38 @@ offset_right = -122.0
 offset_bottom = 59.0
 grow_horizontal = 0
 grow_vertical = 1
+
+[node name="ScreenFrame4" type="TextureRect" parent="OuterUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 717.0
+offset_top = -139.0
+offset_right = -175.0
+offset_bottom = -457.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("26_6asdg")
+expand_mode = 1
+
+[node name="ScreenFrame6" type="TextureRect" parent="OuterUI/ScreenFrame4"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = 6.0
+offset_right = -25.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("26_6asdg")
+expand_mode = 1
 
 [connection signal="gui_input" from="SubViewportContainer" to="." method="_MAP_INPUT"]
 [connection signal="pressed" from="OuterUI/DroneButton" to="OuterUI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]

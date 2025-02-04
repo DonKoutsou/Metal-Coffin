@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_n7ex3")
-StatUseName = "FUEL"
+StatUseName = 0
 ItecColor = Color(0.635226, 0.591743, 0.323459, 1)
 ItemIcon = ExtResource("1_eqrny")
 ItemIconSmol = ExtResource("2_b3pbw")

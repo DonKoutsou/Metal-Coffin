@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dhfqn405u7iov"]
 
 [ext_resource type="Script" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="1_o7oni"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="2_kkcv5"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="2_lbgr3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v77k"]
 content_margin_left = 2.0
@@ -78,8 +78,8 @@ autowrap_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_kkcv5")
-stretch_mode = 3
+texture = ExtResource("2_lbgr3")
+expand_mode = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(39.5, 38.5)

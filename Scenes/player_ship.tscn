@@ -51,7 +51,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
 shape = SubResource("CircleShape2D_utfkb")
 
-[node name="MissileDock" type="Node2D" parent="."]
+[node name="MissileDock" type="Node2D" parent="." groups=["ZoomAffected"]]
 script = ExtResource("9_dl1n1")
 MissileDockEventH = ExtResource("9_jx5d0")
 

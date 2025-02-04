@@ -60,3 +60,5 @@ func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	
 	MapPointerManager.GetInstance().AddShip(missile, true)
 	#MissileDockEventH.MissileLaunched(Mis)
+func UpdateCameraZoom(NewZoom : float) -> void:
+	$MissileLine.width =  2 / NewZoom

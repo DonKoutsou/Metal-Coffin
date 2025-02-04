@@ -49,7 +49,7 @@ func _ready() -> void:
 		g.ForceMaxValue()
 func _draw() -> void:
 	if (ShowFuelRange):
-		draw_circle(Vector2.ZERO, GetFuelRange(), Color(0.763, 0.659, 0.082), false, 2 / CamZoom, true)
+		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 0.659, 0.082), false, 2 / CamZoom, true)
 
 func _physics_process(delta: float) -> void:
 	queue_redraw()

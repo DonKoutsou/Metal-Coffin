@@ -229,3 +229,6 @@ func UndockDrone(drone : Drone, Keep : bool = true):
 				trans.free()
 				drone.Docked = false
 				return
+
+func UpdateCameraZoom(NewZoom : float) -> void:
+	$Line2D.width =  2 / NewZoom

@@ -23,10 +23,6 @@ uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
 group_uniforms Noise;
 uniform sampler2D noise_texture: filter_linear_mipmap, repeat_enable;
 
-group_uniforms Tint;
-uniform vec3 tint_color : source_color  = vec3(1.0, 1.0, 1.0);
-uniform float tint_intensity: hint_range(0., 1., .01) = 0.5;
-
 float noise(vec2 p, vec2 uv)
 {
     float s = texture(noise_texture, vec2(1. * TIME, 2. * TIME) * 8. + p * 1.).x;
@@ -95,9 +91,6 @@ void fragment()
     video += noise(uv * 2., uv) / 2.;
     video *= vignette;
     video *= (12. / small_scanlines_opacity + mod(uv.y * 30. * small_scanlines_proximity + TIME * small_scanlines_speed, 1.)) / 13. * small_scanlines_opacity;
-    
-    // Apply the color tint
-    video = mix(video, tint_color, tint_intensity);
 
     COLOR = vec4(video, 1.0);
 }

@@ -4,7 +4,11 @@ class_name MapLineDrawer
 
 var Lines : Array
 
+@export var ResizeLinesWithZoom : bool = false
+
 func AddLines(L : Array) -> void:
+	if (ResizeLinesWithZoom):
+		add_to_group("ZoomAffected")
 	Lines.append_array(L)
 	DrawLines()
 
@@ -22,6 +26,11 @@ func DrawLines() -> void:
 		#L.add_point(Vector2.ZERO, 0)
 		for z in points.size():
 			L.add_point(points[z] - L.global_position, z)
+
+func UpdateCameraZoom(NewZoom : float) -> void:
+	for g in get_children():
+		var line = g as Line2D
+		line.width =  2 / NewZoom
 
 #func _draw() -> void:
 	#

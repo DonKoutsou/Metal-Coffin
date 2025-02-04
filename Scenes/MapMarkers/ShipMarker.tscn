@@ -16,6 +16,7 @@ content_margin_top = 3.0
 content_margin_right = 3.0
 content_margin_bottom = 3.0
 bg_color = Color(0.176471, 0.176471, 0.176471, 0.780392)
+border_color = Color(80, 80, 80, 1)
 corner_detail = 1
 shadow_color = Color(1, 1, 1, 0.6)
 shadow_size = 3
@@ -38,7 +39,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_7vk35")
 script = ExtResource("1_y30vi")
-Direction = NodePath("Icon/Direction")
+Direction = NodePath("Icon/ShipSymbol/Direction")
 ShipCallsign = NodePath("Icon/ShipSymbol")
 ShipNameLabel = NodePath("Control/PanelContainer/VBoxContainer/ShipName")
 ShipSpeedLabel = NodePath("Control/PanelContainer/VBoxContainer/ShipName2")
@@ -160,25 +161,6 @@ texture = ExtResource("7_kn8g7")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="Direction" type="Label" parent="Icon"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 17.0
-offset_top = -40.0
-offset_right = 105.0
-offset_bottom = 40.0
-grow_vertical = 2
-pivot_offset = Vector2(0, 40)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("7_nvnv6")
-theme_override_font_sizes/font_size = 34
-text = "->"
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="ShipSymbol" type="Label" parent="Icon"]
 use_parent_material = true
 layout_mode = 1
@@ -197,6 +179,25 @@ text = "P"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Direction" type="Label" parent="Icon/ShipSymbol"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = -11.0
+offset_right = 88.5
+offset_bottom = 69.0
+grow_vertical = 2
+pivot_offset = Vector2(0, 40)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("7_nvnv6")
+theme_override_font_sizes/font_size = 34
+text = "->"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

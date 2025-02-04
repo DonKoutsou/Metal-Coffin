@@ -6,8 +6,12 @@
 [ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="4_eac37"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd4vr"]
-shadow_color = Color(0, 0, 0, 1)
-shadow_size = 6
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 3
 
 [sub_resource type="Animation" id="Animation_ih5ls"]
 length = 0.001
@@ -99,9 +103,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
+offset_left = 1.0
 offset_top = 1.0
-offset_right = -3.0
+offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
