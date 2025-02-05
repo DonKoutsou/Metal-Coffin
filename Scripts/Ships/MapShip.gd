@@ -197,8 +197,20 @@ func UpdateELINTTRange(rang : float):
 	var ElintRangeCollisionShape = $Elint/CollisionShape2D
 	#scalling collision
 	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
+
+var IconShowing = false
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
+	#if (NewZoom > 0.25 and !IconShowing):
+		#$PlayerShipSpr.modulate = Color(1,1,1,1)
+		#$PlayerShipSpr/ShadowPivot/Shadow.modulate = Color(1,1,1,1)
+		#IconShowing = true
+	#else: if (NewZoom < 0.25 and IconShowing):
+		#var tw = create_tween()
+		#tw.tween_property($PlayerShipSpr, "modulate", Color(1,1,1,0), 0.5)
+		#var mtw = create_tween()
+		#mtw.tween_property($PlayerShipSpr/ShadowPivot/Shadow, "modulate", Color(1,1,1,0), 0.5)
+		#IconShowing = false
 	queue_redraw()
 
 func Damage(amm : float) -> void:

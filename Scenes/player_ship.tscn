@@ -16,12 +16,13 @@ light_mode = 1
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
-radius = 200.0
+radius = 350.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
 radius = 1000.0
 
 [node name="PlayerShip" type="Node2D" groups=["Ships", "ZoomAffected"]]
+z_index = -1
 material = SubResource("CanvasItemMaterial_vppi8")
 position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
@@ -84,8 +85,10 @@ volume_db = -10.0
 bus = &"Engine"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.736328, 0.736328)
 energy = 0.25
+blend_mode = 2
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
-texture_scale = 4.0
+texture_scale = 16.0
 height = 200.0

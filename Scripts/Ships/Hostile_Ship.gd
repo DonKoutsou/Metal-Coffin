@@ -20,7 +20,7 @@ var BTree : BeehaveTree
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
-signal OnEnemyVisualContact(Ship : MapShip)
+signal OnEnemyVisualContact(Ship : MapShip, SeenBy : HostileShip)
 signal OnEnemyVisualLost(Ship : MapShip)
 signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
@@ -97,7 +97,7 @@ func UpdateElint(delta: float) -> void:
 	if (d > 0):
 		return
 	d = 0.4
-	var BiggestLevel = 0
+	var BiggestLevel = -1
 	var ClosestShip : MapShip
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g]
@@ -108,7 +108,7 @@ func UpdateElint(delta: float) -> void:
 			ClosestShip = ship
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
-	if (BiggestLevel > 0):
+	if (BiggestLevel > -1):
 		if (ClosestShip.Command != null):
 			ElintContact.emit(ClosestShip.Command ,true)
 		else:
@@ -263,7 +263,7 @@ func _on_elint_area_exited(area: Area2D) -> void:
 	ElintContact.emit(area.get_parent(), false)
 func _on_radar_2_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		OnEnemyVisualContact.emit(area.get_parent())
+		OnEnemyVisualContact.emit(area.get_parent(), self)
 		#PursuingShips.append(area.get_parent())
 func _on_radar_2_area_exited(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):

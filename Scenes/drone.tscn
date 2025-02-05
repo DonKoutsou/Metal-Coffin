@@ -37,6 +37,7 @@ LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 Cpt = ExtResource("3_fw0pf")
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
+z_index = -1
 rotation = -1.5708
 texture = ExtResource("3_4y2i6")
 

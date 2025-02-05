@@ -36,6 +36,7 @@ func PlaySound():
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	SpotDropPosition.scale = Vector2(1,1) / NewZoom
+	$AnalyzeButton.visible = NewZoom <= 0.25
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$AnalyzeButton.add_to_group("UnmovableMapInfo")

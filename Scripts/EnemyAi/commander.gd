@@ -112,24 +112,24 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 		
 		
 	var POrdersToErase : Array[PursuitOrder] = []
-	if (Ship.PursuingShips.size() > 0):
-		for g in PursuitOrders:
-			if (g.Receivers.has(Ship)):
-				g.Receivers.erase(Ship)
-				if (g.Receivers.size() == 0):
-					POrdersToErase.append(g)
+	#if (Ship.PursuingShips.size() > 0):
+	for g in PursuitOrders:
+		if (g.Receivers.has(Ship)):
+			g.Receivers.erase(Ship)
+			if (g.Receivers.size() == 0):
+				POrdersToErase.append(g)
 	var IOrdersToErase : Array[InvestigationOrder] = []
-	if (Ship.LastKnownPosition != Vector2.ZERO):
-		for g in InvestigationOrders:
-			if (g.Receivers.has(Ship)):
-				g.Receivers.erase(Ship)
-				if (g.Receivers.size() == 0):
-					IOrdersToErase.append(g)
+	#if (Ship.LastKnownPosition != Vector2.ZERO):
+	for g in InvestigationOrders:
+		if (g.Receivers.has(Ship)):
+			g.Receivers.erase(Ship)
+			if (g.Receivers.size() == 0):
+				IOrdersToErase.append(g)
 	for g in POrdersToErase:
 		PursuitOrderCanceled(g.Target)
 	for g in IOrdersToErase:
 		InvestigationOrders.erase(g)
-func OnEnemySeen(Ship : MapShip) -> void:
+func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 	#if an enemy that had its location investigated is seen 
 	#make sure to call of all investigation on its previusly known location
 	print(Ship.GetShipName() + " has been located.")
@@ -139,6 +139,7 @@ func OnEnemySeen(Ship : MapShip) -> void:
 			InvestigationOrderComplete(EnemyPositionsToInvestigate[Ship])
 		EnemyPositionsToInvestigate.erase(Ship)
 	
+	OrderShipToPursue(SeenBy, Ship)
 	if (KnownEnemies.keys().has(Ship)):
 		KnownEnemies[Ship] += 1
 	else :

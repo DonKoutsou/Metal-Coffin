@@ -52,19 +52,22 @@ func OnZoomChanged() -> void:
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
 	get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", zoom.x)
-		
+
+var GridShowing = false
 func _UpdateMapGridVisibility():
-	if (zoom.x < 0.25):
+	if (zoom.x < 0.25 and !GridShowing):
 		var mtw = create_tween()
 		mtw.tween_property(CityLines, "modulate", Color(1,1,1,1), 0.5)
 		#$"../MapLines".visible = true
 		var tw = create_tween()
 		tw.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
-	else:
+		GridShowing = true
+	else: if (zoom.x >= 0.25 and GridShowing):
 		var tw = create_tween()
 		tw.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
 		var mtw = create_tween()
 		mtw.tween_property(CityLines, "modulate", Color(1,1,1,0), 0.5)
+		GridShowing = false
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 
 func UpdateCameraPos(relativeMovement : Vector2):

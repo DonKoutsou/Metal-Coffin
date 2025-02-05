@@ -173,7 +173,7 @@ func ProgressCrewSelect(Front : bool = true):
 		CurrentlySelectedMissile = AvailableMissiles[SelectedIndex]
 	$Control/TextureRect/Light.Toggle(true, true)
 	$Control/TextureRect/Label2.text = CurrentlySelectedMissile.ItemName
-
+	$Control/Control/Label.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
 func _on_turn_off_button_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_STOP
 	if (Armed):
