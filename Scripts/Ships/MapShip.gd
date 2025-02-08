@@ -32,7 +32,7 @@ var TakingOff : bool = false
 signal TakeoffStarted
 signal TakeoffEnded(Ship : MapShip)
 
-signal Elint(T : bool, Lvl : int)
+signal Elint(T : bool, Lvl : int, Dir : String)
 var ElintContacts : Dictionary
 
 var Detectable = true
@@ -43,16 +43,21 @@ func _enter_tree() -> void:
 	Cpt.connect("ShipPartChanged", PartChanged)
 
 func _ready() -> void:
+	
 	MapPointerManager.GetInstance().AddShip(self, true)
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
 func _draw() -> void:
 	if (ShowFuelRange):
-		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 0.659, 0.082), false, 2 / CamZoom, true)
-
+		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 100, 100), false, 2 / CamZoom, true)
+		
+#var DrawD = 0.1
 func _physics_process(delta: float) -> void:
+	#DrawD -= delta
+	#if (DrawD < 0):
 	queue_redraw()
+		#DrawD = 0.1
 	if (Paused):
 		return
 	if (Landing):
@@ -179,16 +184,24 @@ func UpdateElint(delta: float) -> void:
 		return
 	d = 0.4
 	var BiggestLevel = 0
+	var Dir : float
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g]
 		var lvl = ElintContacts.values()[g]
 		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position))
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
+			Dir = global_position.angle_to_point(ship.global_position)
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > 0):
-		Elint.emit(true, BiggestLevel)
+		Elint.emit(true, BiggestLevel, angle_to_direction(Dir))
+
+func angle_to_direction(angle: float) -> String:
+	var directions = ["East", "Southeast",  "South", "Southwest", "West", "Northwest", "North","Northeast"]
+	var index = int(fmod((angle + PI/8 + TAU), TAU) / (PI / 4)) % 8
+	return directions[index]
+
 func UpdateVizRange(rang : float):
 	print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = $Radar/CollisionShape2D
@@ -358,7 +371,7 @@ func _on_elint_area_exited(area: Area2D) -> void:
 	if (area.get_parent() == self):
 		return
 	ElintContacts.erase(area.get_parent())
-	Elint.emit(false, 0)
+	#Elint.emit(false, 0)
 func GetShipBodyArea() -> Area2D:
 	return $ShipBody
 func GetShipRadarArea() -> Area2D:

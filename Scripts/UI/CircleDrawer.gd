@@ -2,16 +2,28 @@ extends Node2D
 
 class_name CircleDrawer
 
+@export var ShipControllerEvent : ShipControllerEventHandler
+
 @export var Col : Color
 
 var circles = []
 var clusters = []
 var intersections = {}
+
+var ControlledShip : MapShip
+
 var CamZoom = 1
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#$AnimationPlayer.play("loop")
-	
+
+func _ready() -> void:
+	ControlledShip = ShipControllerEvent.CurrentControlled
+	ShipControllerEvent.connect("OnControlledShipChanged", UpdateControlledShip)
+
+func UpdateControlledShip(NewShip : MapShip) -> void:
+	ControlledShip = NewShip
+
 func UpdateCircles(Circl : Array[PackedVector2Array])-> void:
 	circles.clear()
 	circles.append_array(Circl)
@@ -75,6 +87,8 @@ func CamZoomUpdated(NewVal : float) -> void:
 	CamZoom = NewVal
 
 func _draw():
+	DrawRuller()
+	
 	var intersectingcircles = []
 	if (intersections.size() > 0):
 		for g in intersections.size():
@@ -104,6 +118,42 @@ func _draw():
 		if (intersectingcircles.has(g)):
 			continue
 		draw_polyline(get_circle_polygon(circles[g][0], circles[g][1].x), Col, 2 / CamZoom, true)
+	
+	
+			
+func DrawRuller() -> void:
+	var shippos = ControlledShip.global_position
+	for g in 3:
+		draw_circle(shippos, 350 * (g + 1), Color(100, 100, 100), false, 1/CamZoom, true)
+	var Next = rotation_degrees
+	var Num = 90
+	for g in 12:
+		draw_line(Vector2(350,0).rotated(deg_to_rad(Next)) + shippos, Vector2(1050,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100), 1/CamZoom, true)
+		var Text = var_to_str(Num).replace(".0", "")
+		var TextSize = (2/CamZoom)*6
+		var Textpos = Vector2(1100, 0).rotated(deg_to_rad(Next))
+		Textpos += Vector2.ZERO.direction_to(Textpos) * TextSize
+		Textpos.x -= Text.length() * (TextSize / 4)
+		Textpos.y += TextSize / 4
+		draw_string(ThemeDB.fallback_font, Textpos + shippos, Text, HORIZONTAL_ALIGNMENT_LEFT, -1, TextSize)
+		Next -= 30
+		Num -= 30
+		if (Num == 0):
+			Num = 360
+	#for g in 3:
+		#draw_circle(shippos, 50 / CamZoom * (g + 1), Color(100, 100, 100), false, 1/CamZoom, true)
+	#var Next = rotation_degrees
+#
+	#for g in 12:
+		#draw_line(Vector2(50 / CamZoom,0).rotated(deg_to_rad(-Next)) + shippos, Vector2(150 / CamZoom,0).rotated(deg_to_rad(-Next)) + shippos, Color(100, 100, 100), 1/CamZoom, true)
+		#var Text = var_to_str(abs(rotation_degrees + 90 - Next)).replace(".0", "")
+		#var TextSize = (2/CamZoom)*6
+		#var Textpos = Vector2(160 / CamZoom, 0).rotated(deg_to_rad(-Next))
+		#Textpos += Vector2.ZERO.direction_to(Textpos) * TextSize
+		#Textpos.x -= Text.length() * (TextSize / 4)
+		#Textpos.y += TextSize / 4
+		#draw_string(ThemeDB.fallback_font, Textpos + shippos, Text, HORIZONTAL_ALIGNMENT_LEFT, -1, TextSize)
+		#Next += 30
 func merge_cluster_polygons(cluster: Array) :
 	var merged_polygon = PackedVector2Array()
 	for circ in cluster:

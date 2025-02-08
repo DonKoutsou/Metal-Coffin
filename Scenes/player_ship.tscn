@@ -22,9 +22,7 @@ radius = 350.0
 radius = 1000.0
 
 [node name="PlayerShip" type="Node2D" groups=["Ships", "ZoomAffected"]]
-z_index = -1
 material = SubResource("CanvasItemMaterial_vppi8")
-position = Vector2(-90, 324)
 script = ExtResource("1_ekbhy")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 Cpt = ExtResource("2_ddg27")
@@ -65,6 +63,7 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 [node name="DroneDock" parent="." instance=ExtResource("5_vcup0")]
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
+z_index = -1
 rotation = -1.5708
 texture = ExtResource("6_6lhcj")
 

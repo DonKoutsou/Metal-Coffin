@@ -4,6 +4,7 @@ class_name MapLineDrawer
 
 var Lines : Array
 
+@export var RoadLines : bool = false
 @export var ResizeLinesWithZoom : bool = false
 
 func AddLines(L : Array) -> void:
@@ -20,6 +21,10 @@ func DrawLines() -> void:
 		var L = Line2D.new()
 		L.use_parent_material = true
 		L.width = 20
+		if (!RoadLines):
+			L.default_color = Color(1,1,1, 0.2)
+		else:
+			L.width = 4
 		add_child(L)
 		L.global_position = points[0]
 		#L.default_color = Color("0ca50a")

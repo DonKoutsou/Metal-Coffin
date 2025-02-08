@@ -11,6 +11,7 @@ signal AccelerationChanged(value : float)
 
 func _ready() -> void:
 	MinVelocityLoc = size.y - (Handle.size.y / 2)
+	ZeroAcceleration()
 	#$TextureRect/Light.Toggle(true, true)
 	##$TextureRect/Light.Toggle(true)
 	

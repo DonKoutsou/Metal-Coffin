@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=59 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="21_oyi6l"]
 [ext_resource type="Script" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/ShipControllerEventHandler.tres" id="22_n73so"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="Texture2D" uid="uid://bdrm4lf7c2q4l" path="res://Assets/UIPiecies/Screen/Screen_Camera 1_FullQuality.png" id="24_sddf6"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="25_nqjgb"]
@@ -40,13 +41,13 @@
 [ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality.png" id="38_iludl"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="38_non32"]
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="38_vyrfo"]
-[ext_resource type="Texture2D" uid="uid://b76vc3yqgpkla" path="res://Assets/UIPiecies/Button_Camera 1.png" id="39_yx6y0"]
-[ext_resource type="Texture2D" uid="uid://b2spr3t4g1h0u" path="res://Assets/UIPiecies/ButtonPressed_Camera 1.png" id="40_2nn8k"]
-[ext_resource type="Texture2D" uid="uid://cub3jskgpfw07" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality.png" id="40_t417a"]
+[ext_resource type="Texture2D" uid="uid://5mvc2lmslh6d" path="res://Assets/UIPiecies/Screen/Button9_Camera 1_FullQuality.png" id="40_17tgj"]
 [ext_resource type="BitMap" uid="uid://bws1mu52unesf" path="res://Assets/UIPiecies/ButtonAlpha.png" id="41_62ow1"]
+[ext_resource type="Texture2D" uid="uid://cjikrrpjhmdnl" path="res://Assets/UIPiecies/Screen/Button11_Camera 1_FullQuality.png" id="42_a2kw8"]
 [ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="42_jcl8h"]
 [ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="43_fa10l"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="45_ssr13"]
+[ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="48_xvuot"]
 [ext_resource type="Texture2D" uid="uid://cbfjaei6s76i" path="res://Assets/UIPiecies/Screen/Buttons_Camera 1_FullQuality.png" id="49_0pvp7"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="49_j4oow"]
 
@@ -126,6 +127,7 @@ EnSpawner = ExtResource("12_m1k6s")
 EnemyShipNames = Array[String](["Mirage", "Sirocco", "Anubis", "Scimitar", "Horus", "Falcon", "Ibex", "Zahara", "Sandstorm", "Scarab", "Oasis", "Dune", "Caravan", "Oryx", "Phoenix", "Djinn", "Aswan", "Sphinx", "Seraph", "Ziggurat", "Bedouin", "Qasr", "Simoon", "Palmyra", "Cobra", "Ishtara", "Hibiscus", "Maham", "Amon", "Selket", "Citadel", "Baobab", "Solstice", "Magi", "Olive", "Mecca", "Pyramid", "Zerda", "Ghibli", "Siwa", "Sahara", "Ra", "Nebula", "Ishtar", "Giza", "Camelot", "Zephyr", "Lybian", "Nubian", "Babylon", "Lotus", "Emir", "Acacia", "Jasmine", "Cumin", "Balsam", "Arash", "Ibri", "Zahir", "Alamut", "Petra", "Khanjar", "Tamrin", "Mamluk", "Souq", "Sinai", "Aqaba", "Argan", "Almaza", "Akasha", "Valley", "Shamal", "Halva", "Desert Rose", "Gazelle", "Myrrh", "Qatar", "Atlas", "Palma", "Hamsin", "Sultan", "Amira", "Basil", "Kahina", "Masira", "Alchemy", "Selene", "Sabiya", "Kurdemir", "Eunice", "Zenobia", "Azeez", "Farah", "Yasmine", "Arun", "Soraya", "Nahyan", "Layla", "Arash", "Zareen", "Ghaith", "Samir", "Rasha", "Dariya", "Pearl", "Dhalia", "Rania", "Lapis", "Magma", "Azure", "Ammonite", "Coral", "Kubra", "Rayan", "Malik", "Tarik", "Zamzam", "Wadi", "Casbah", "Fennec", "Raidan", "Farida", "Nassir", "Amani", "Badiya", "Jabari", "Kabira", "Thal", "Fajr", "Khamsin", "Wilayat", "Bahira", "Ameer", "Buraq", "Kamal", "Mashaal", "Najma", "Furat", "Tasnim", "Qamar", "Zafira", "Rimal", "Nilufar", "Naima", "Jazira", "Asad", "Rahma", "Haitham", "Amir", "Yasir", "Zein", "Tarab", "Saba", "Bakr", "Mahtab", "Sharif", "Nizwa", "Rashid", "Alia", "Farzin", "Parveen", "Qasim", "Tariq", "Samara", "Nadir", "Sidra", "Yasmina", "Zohar", "Jalal", "Rumi", "Faiz", "Azar", "Jannah", "Kamal", "Zafir", "Laila", "Mahira", "Idris", "Hadi", "Adil", "Soraya", "Zayna", "Elham", "Malika", "Riad", "Ishmael", "Halima", "Munir", "Zubair", "Aya", "Zainab", "Karam", "Basim", "Munira", "Faris", "Safira", "Maalik", "Najwa", "Aziz", "Kawthar", "Marwan", "Zara", "Fadia", "Ihsan", "Jamil", "Arwa", "Nasim", "Sadiq", "Rabia", "Hakim", "Najib", "Salma", "Firdaus", "Anwar", "Tahira", "Karim", "Leila", "Subhi", "Nouf", "Saeed", "Rami", "Aaliyah", "Emira", "Tariqa", "Zia", "Naima", "Khalid", "Nour", "Uzma", "Hudhayfa", "Nabi", "Afreen", "Masoud", "Zulekha", "Rabi", "Aziza", "Harith", "Inara", "Sami", "Baqir", "Noor", "Sabrin", "Lamis", "Jafar", "Ghadir", "Farouq", "Ilhaam", "Nadim", "Hania", "Shadi", "Ziad", "Khalifa", "Amal", "Rashaad", "Sanaa", "Zayd", "Nawal", "Ehsan", "Tasneem", "Rashida", "Haleem", "Jasir", "Nihal", "Fathi", "Adnan", "Ghada", "Firdos", "Hajar", "Asma", "Abdul", "Qamar", "Mahmud", "Ruqayya", "Lutfi", "Noorani", "Qudsiya", "Salim", "Fawzi", "Ishraq", "Warda", "Issam", "Jinan", "Latif", "Nabeeha", "Mashal", "Asrar", "Hilal", "Badr", "Waleed", "Ramla", "Sohail", "Yasir", "Wasim", "Nizar", "Abira", "Nashwa", "Fahad", "Tamer", "Razan", "Azim", "Tariq", "Maysa", "Rafiq", "Safwan", "Zayn", "Nadira", "Amir", "Hana", "Mustafa", "Qusay", "Tarik", "Rihana", "Ayman", "Lutfullah", "Batool", "Majid", "Nisrin", "Bahir", "Omran", "Salma", "Bilal", "Wardah", "Haifa", "Firas", "Ghazal", "Jawad", "Sameera", "Razan", "Aseel", "Gibran", "Isra", "Najla", "Khalil", "Siham", "Raed", "Anisa", "Farouk", "Najwa", "Qadir", "Shaima", "Jabir", "Tazeen", "Bayan", "Bashir", "Lubna", "Moin", "Saleh", "Hadiyah", "Yazan", "Tahir", "Malikah", "Zubaydah", "Fareed", "Saladin", "Yasmina", "Iqbal", "Faridah", "Munif", "Qadira", "Yousuf", "Shakira", "Badia", "Talal", "Zayda", "Hashem", "Nourah", "Zaher", "Liyana", "Sadiyah", "Ihab", "Hawra", "Lutfiya", "Mufeed", "Amirah", "Nasira", "Gheida", "Mahrez", "Abir", "Zuhair", "Salsabil", "Yasin", "Maitha", "Aadil", "Noorul", "Rashad", "Layla", "Wasila", "Adeem", "Nahed", "Burhan", "Halimah", "Arib", "Fayrouz", "Wafaa", "Nasib", "Ghada", "Tousif", "Salwa", "Muhsin", "Hamida"])
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+process_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -140,7 +142,6 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="ViewPort" type="SubViewport" parent="SubViewportContainer"]
-process_mode = 1
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
@@ -186,6 +187,8 @@ environment = SubResource("Environment_6n7os")
 color = Color(0, 0, 0, 1)
 
 [node name="RoadLineDrawer" parent="SubViewportContainer/ViewPort" instance=ExtResource("16_sp82o")]
+z_index = -1
+RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort"]
 
@@ -198,6 +201,7 @@ Background = NodePath("DarkBlueBackground")
 CityLines = NodePath("../MapPointerManager/MapLineDrawer")
 
 [node name="DarkBlueBackground" type="Panel" parent="SubViewportContainer/ViewPort/ShipCamera"]
+modulate = Color(1, 1, 1, 0)
 material = SubResource("CanvasItemMaterial_rrndq")
 anchors_preset = 15
 anchor_right = 1.0
@@ -212,7 +216,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ujsvm")
 
 [node name="PlayerShip" parent="SubViewportContainer/ViewPort" instance=ExtResource("17_21a23")]
-position = Vector2(163, 60)
+position = Vector2(167.19, 290.37)
 
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort"]
 z_index = 100
@@ -227,12 +231,12 @@ EnemyColor = Color(1, 0.094, 0, 1)
 use_parent_material = true
 
 [node name="MapLineDrawer" parent="SubViewportContainer/ViewPort/MapPointerManager" instance=ExtResource("16_sp82o")]
-modulate = Color(0.0410537, 0.575073, 0.0333716, 1)
 ResizeLinesWithZoom = true
 
 [node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager" groups=["LineMarkers"]]
 use_parent_material = true
 script = ExtResource("22_fa7wu")
+ShipControllerEvent = ExtResource("22_n73so")
 Col = Color(100, 0.395, 0.144, 1)
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" instance=ExtResource("23_53oad")]
@@ -361,9 +365,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -238.0
-offset_top = -132.0
+offset_top = -262.0
 offset_right = -180.0
-offset_bottom = -92.0
+offset_bottom = -222.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("38_iludl")
@@ -425,8 +429,8 @@ offset_right = -180.0
 offset_bottom = -157.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("43_fa10l")
-texture_pressed = ExtResource("43_fa10l")
+texture_normal = ExtResource("38_iludl")
+texture_pressed = ExtResource("38_iludl")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -479,9 +483,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -238.0
-offset_top = -263.0
+offset_top = -133.0
 offset_right = -180.0
-offset_bottom = -222.0
+offset_bottom = -92.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("33_sh4yx")
@@ -587,8 +591,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
-texture_normal = ExtResource("38_iludl")
-texture_pressed = ExtResource("38_iludl")
+texture_normal = ExtResource("42_a2kw8")
+texture_pressed = ExtResource("42_a2kw8")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -629,8 +633,8 @@ offset_right = -180.0
 offset_bottom = 36.0
 grow_horizontal = 0
 grow_vertical = 2
-texture_normal = ExtResource("43_fa10l")
-texture_pressed = ExtResource("43_fa10l")
+texture_normal = ExtResource("40_17tgj")
+texture_pressed = ExtResource("40_17tgj")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -675,8 +679,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
-texture_normal = ExtResource("42_jcl8h")
-texture_pressed = ExtResource("42_jcl8h")
+texture_normal = ExtResource("38_non32")
+texture_pressed = ExtResource("38_non32")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -717,8 +721,8 @@ offset_right = -180.0
 offset_bottom = -27.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("40_t417a")
-texture_pressed = ExtResource("40_t417a")
+texture_normal = ExtResource("48_xvuot")
+texture_pressed = ExtResource("48_xvuot")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -744,33 +748,6 @@ text = "Land"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="CaptainButton" type="TextureButton" parent="OuterUI" groups=["Buttons"]]
-visible = false
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -440.0
-offset_top = -199.0
-offset_right = -330.0
-offset_bottom = -81.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-focus_mode = 0
-theme = ExtResource("36_4epqv")
-action_mode = 0
-texture_normal = ExtResource("39_yx6y0")
-texture_pressed = ExtResource("40_2nn8k")
-texture_click_mask = ExtResource("41_62ow1")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
 
 [node name="SpeedSimulation" type="TextureButton" parent="OuterUI" groups=["Buttons"]]
 layout_mode = 1
@@ -877,6 +854,8 @@ texture_pressed = ExtResource("38_iludl")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
+flip_h = true
+flip_v = true
 
 [node name="Label" type="Label" parent="OuterUI/InventoryButton"]
 modulate = Color(1, 1, 1, 0.673)
@@ -1190,7 +1169,7 @@ mouse_filter = 2
 texture = ExtResource("26_6asdg")
 expand_mode = 1
 
-[connection signal="gui_input" from="SubViewportContainer" to="." method="_MAP_INPUT"]
+[connection signal="GUI_Input" from="SubViewportContainer/ViewPort/InScreenUI" to="." method="_MAP_INPUT"]
 [connection signal="pressed" from="OuterUI/DroneButton" to="OuterUI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]
 [connection signal="pressed" from="OuterUI/q" to="OuterUI/ScreenUi/Missile Tab" method="_on_toggle_drone_tab_pressed"]
 [connection signal="pressed" from="OuterUI/RadarButton" to="." method="_on_radar_button_pressed"]

@@ -84,7 +84,7 @@ func SetDirection(dir : float):
 
 static func DegreesToElintAngle(Deg : float) -> int:
 	var dirs = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
-	for g in dirs:
+	for g in dirs.size():
 		if (abs(dirs[g] - Deg) > 15):
 			continue
 		return dirs[g]

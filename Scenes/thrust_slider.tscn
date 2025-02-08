@@ -24,9 +24,9 @@ Handle = NodePath("Handle")
 
 [node name="Handle" type="TextureRect" parent="."]
 layout_mode = 2
-offset_top = 277.0
+offset_top = 248.0
 offset_right = 106.0
-offset_bottom = 383.0
+offset_bottom = 354.0
 mouse_filter = 0
 texture = ExtResource("4_yj1xw")
 expand_mode = 1

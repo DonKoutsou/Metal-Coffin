@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=12 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/ShipControllerEventHandler.tres" id="6_1ajha"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="6_sol3n"]
 [ext_resource type="Script" path="res://Scripts/Ship_Controller.gd" id="7_q720d"]
 [ext_resource type="Script" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
@@ -31,6 +32,7 @@ PlayerWallet = ExtResource("3_inc6i")
 script = ExtResource("7_q720d")
 _Map = NodePath("../Map")
 DroneDockEventH = ExtResource("8_q55oc")
+ShipControllerEventH = ExtResource("6_1ajha")
 HappeningUI = ExtResource("9_5gym6")
 
 [node name="Commander" parent="." instance=ExtResource("10_15dwo")]

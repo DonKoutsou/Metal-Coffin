@@ -4,7 +4,7 @@ class_name ShipContainer
 
 @export var _Map : Map
 @export var DroneDockEventH : DroneDockEventHandler
-
+@export var ShipControllerEventH : ShipControllerEventHandler
 @onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
 @export var HappeningUI : PackedScene
 
@@ -17,6 +17,7 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	#call_deferred("SetInitialShip")
 	SetInitialShip()
+	
 func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
@@ -31,6 +32,7 @@ func SetInitialShip() -> void:
 	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
 	_Map.GetThrustUI().connect("AccelerationChanged", AccelerationChanged)
 	_Map.GetSteeringWheelUI().connect("SteeringDitChanged", SteerChanged)
+	ShipControllerEventH.ShipChanged(ControlledShip)
 
 func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
 	if (!AvailableShips.has(D)):
@@ -165,6 +167,7 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
+	ShipControllerEventH.ShipChanged(ControlledShip)
 	
 var camtw : Tween
 func FrameCamToShip():

@@ -63,7 +63,7 @@ energy = 0.25
 blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
-texture_scale = 4.0
+texture_scale = 12.0
 height = 200.0
 
 [node name="ShipBody" type="Area2D" parent="."]
