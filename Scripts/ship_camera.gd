@@ -69,7 +69,6 @@ func _UpdateMapGridVisibility():
 		mtw.tween_property(CityLines, "modulate", Color(1,1,1,0), 0.5)
 		GridShowing = false
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
-
 func UpdateCameraPos(relativeMovement : Vector2):
 	var maxposY = 999999
 	var vpsizehalf = (get_viewport_rect().size.x / 2)

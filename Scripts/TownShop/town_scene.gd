@@ -129,7 +129,7 @@ func UpdateFuelBar(AddedFuel : float):
 		NewPlFuel = PlMaxFuel
 	TownFuel -= AddedFuel
 	BoughtFuel += AddedFuel
-	PlayerWallet.Funds -= AddedFuel * FuelPricePerTon
+	PlayerWallet.AddFunds(-(AddedFuel * FuelPricePerTon))
 	FuelBar.value = PlFuel + BoughtFuel
 	#FundAmm.text = var_to_str(roundi(PlayerWallet.Funds)) + " ₯"
 	CurrentFuel.text = var_to_str(roundi(PlFuel + BoughtFuel))
@@ -149,7 +149,7 @@ func UpdateRepairBar(AddedRepair : float):
 		NewPlRepair = PlMaxHull
 
 	BoughtRepairs += AddedRepair
-	PlayerWallet.Funds -= AddedRepair * RepairpricePerRepairValue
+	PlayerWallet.AddFunds(-(AddedRepair * RepairpricePerRepairValue))
 	HullBar.value = PlHull + BoughtRepairs
 	#FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	CurrentHull.text = var_to_str(roundi(PlHull + BoughtRepairs))

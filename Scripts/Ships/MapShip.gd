@@ -56,6 +56,7 @@ func _draw() -> void:
 func _physics_process(delta: float) -> void:
 	#DrawD -= delta
 	#if (DrawD < 0):
+	UpdateElint(delta)
 	queue_redraw()
 		#DrawD = 0.1
 	if (Paused):
@@ -72,7 +73,7 @@ func _physics_process(delta: float) -> void:
 			Altitude = 10000
 			TakeoffEnded.emit(self)
 			TakingOff = false
-	UpdateElint(delta)
+	
 
 	if (CurrentPort != null):
 		#CurrentPort.OnSpotVisited()
@@ -183,19 +184,21 @@ func UpdateElint(delta: float) -> void:
 	if (d > 0):
 		return
 	d = 0.4
-	var BiggestLevel = 0
+	var BiggestLevel = -1
 	var Dir : float
 	for g in ElintContacts.size():
-		var ship = ElintContacts.keys()[g]
+		var ship = ElintContacts.keys()[g] as MapShip
 		var lvl = ElintContacts.values()[g]
-		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position))
+		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
 			Dir = global_position.angle_to_point(ship.global_position)
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
-	if (BiggestLevel > 0):
+	if (BiggestLevel > -1):
 		Elint.emit(true, BiggestLevel, angle_to_direction(Dir))
+	else:
+		Elint.emit(false, -1, "")
 
 func angle_to_direction(angle: float) -> String:
 	var directions = ["East", "Southeast",  "South", "Southwest", "West", "Northwest", "North","Northeast"]
@@ -237,6 +240,7 @@ func Kill() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 	OnShipDestroyed.emit(self)
 	queue_free()
+	get_parent().remove_child(self)
 
 func IsDead() -> bool:
 	return Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) <= 0
@@ -440,17 +444,17 @@ func GetClosestElint() -> Vector2:
 			closestdist = dist
 	
 	return closest
-func GetElintLevel(Dist : float) -> int:
-	var Lvl = 1
+func GetElintLevel(Dist : float, RadarL : float) -> int:
+	var Lvl = -1
 	var ElintDist = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
-	if (Dist < ElintDist * 0.3):
+	if (ElintDist == 0):
+		return Lvl
+	if (Dist < RadarL):
 		Lvl = 3
-	else : if (Dist < ElintDist * 0.6):
+	else : if (Dist < RadarL * 2):
 		Lvl = 2
-	else : if (Dist < ElintDist):
+	else : if (Dist < RadarL * 10):
 		Lvl = 1
-	else :
-		Lvl = 0
 	return Lvl
 func GetDroneDock():
 	return $DroneDock

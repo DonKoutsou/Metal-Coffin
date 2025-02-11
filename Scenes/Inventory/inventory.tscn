@@ -164,7 +164,6 @@ layout_mode = 2
 alignment = 1
 
 [node name="CaptainIcon2" type="TextureRect" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
-self_modulate = Color(1, 1, 1, 0.414)
 show_behind_parent = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2

@@ -55,6 +55,7 @@ Clock=""
 Missiles=""
 LineMarkers=""
 ZoomAffected=""
+Pausable=""
 
 [gui]
 

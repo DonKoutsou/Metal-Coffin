@@ -76,7 +76,7 @@ func UpdateBar(Added : int):
 		#NewPlFuel = Added
 	ShopAmm -= Added
 	BoughtAmm += Added
-	PlWallet.Funds -= Added * ItPrice
+	PlWallet.AddFunds( -(Added * ItPrice) )
 	Bar.value = PlAmm + BoughtAmm
 	#FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	PlOwnedT.text = var_to_str(roundi(PlAmm + BoughtAmm))

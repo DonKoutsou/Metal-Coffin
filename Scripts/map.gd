@@ -5,7 +5,7 @@ class_name Map
 @export var _Camera : ShipCamera
 @export var ScreenUI : Control
 @export var SteeringWh : SteeringWheelUI
-@export var Elint : ElingUI
+#@export var Elint : ElingUI
 @export var DroneUI : DroneTab
 @export var MissileUI : MissileTab
 @export var ThrustUI : ThrustSlider
@@ -94,8 +94,8 @@ func GetInScreenUI() -> Ingame_UIManager:
 	return _InScreenUI
 func GetSteeringWheelUI() -> SteeringWheelUI:
 	return SteeringWh
-func GetElintUI() -> ElingUI:
-	return Elint
+#func GetElintUI() -> ElingUI:
+	#return Elint
 func GetDroneUI() -> DroneTab:
 	return DroneUI
 func GetMissileUI() -> MissileTab:
@@ -149,7 +149,7 @@ func Arrival(_Spot : MapSpot)	-> void:
 	if (ShowingTutorial):
 		SimulationManager.GetInstance().TogglePause(true)
 		var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
-		Ingame_UIManager.GetInstance().CallbackDiag(DiagText, LandTutorialShown, false)
+		Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), LandTutorialShown, false)
 	
 func LandTutorialShown():
 	SimulationManager.GetInstance().TogglePause(false)

@@ -38,7 +38,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_q78cv"]
 script = ExtResource("2_en1ly")
 StatName = 7
-StatBase = 1500.0
+StatBase = 0.0
 StatShipPartBuff = 0.0
 CurrentValue = 0.0
 
@@ -76,3 +76,4 @@ ShipCallsign = "M2"
 StartingItems = Array[ExtResource("3_4bm2g")]([])
 CurrentPort = ""
 CheckForErrors = false
+ProvidingFunds = 30000

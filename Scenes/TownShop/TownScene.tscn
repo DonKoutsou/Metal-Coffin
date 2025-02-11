@@ -28,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_force_pass_scroll_events = false
 theme = ExtResource("1_ca22g")
 script = ExtResource("2_epy1b")
 Merch = Array[ExtResource("3_5r13l")]([SubResource("Resource_ofpv0"), SubResource("Resource_hooln")])

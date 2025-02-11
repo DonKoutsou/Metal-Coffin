@@ -26,7 +26,7 @@ static func GetInstance() -> World:
 
 func _ready() -> void:
 	#$Inventory.Player = GetMap().GetPlayerShip()
-	PlayerWallet.Funds = StartingFunds
+	PlayerWallet.SetFunds( StartingFunds)
 	UISoundMan.GetInstance().Refresh()
 	Instance = self
 	if (!Loading):
@@ -39,19 +39,19 @@ func GetSaveData() -> SaveData:
 	return Data
 
 func LoadSaveData(PlWallet : Wallet) -> void:
-	PlayerWallet.Funds = PlWallet.Funds
+	PlayerWallet.SetFunds(PlWallet.Funds)
 
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
 	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."]
-	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ShowStation, true)
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), ShowStation, true)
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
 	GetMap().ToggleUIForIntro(false)
 
 func ShowStation():
 	var DiagText : Array[String]  = ["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."]
-	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, ReturnCamToPlayer, true)
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), ReturnCamToPlayer, true)
 	GetMap().GetCamera().ShowStation()
 
 func ReturnCamToPlayer():

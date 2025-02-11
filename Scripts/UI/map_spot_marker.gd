@@ -10,8 +10,6 @@ var TimeLastSeen : float
 
 func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	if (PlayAnim):
-		if (Spot.SpotType.GetEnumString() == "SUB_STATION"):
-			Ingame_UIManager.GetInstance().PlayDiag(["Operator, we are aproaching a sub-station.","I'd recomend visiting it to look for supplies or any clues regarding the collapse."])
 		if (!Spot.Seen):
 			$AnimationPlayer.play("SpotFound")
 			PlaySound()

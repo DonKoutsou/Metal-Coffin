@@ -99,7 +99,8 @@ func ToggleShowElint( t : bool, ElingLevel : int, Direction : String):
 	if (t):
 		ElintNotif = NotificationScene.instantiate() as ShipMarkerNotif
 		ElintNotif.SetText("ELINT : {0} \nDiretion : {1}".format([var_to_str(ElingLevel), Direction]))
-		ElintNotif.Blink = false
+		ElintNotif.Blink = true
+		ElintNotif.Fast = true
 		#connect("ShipDeparted", notif.OnShipDeparted)
 		add_child(ElintNotif)
 

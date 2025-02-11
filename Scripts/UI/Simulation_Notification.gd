@@ -3,6 +3,7 @@ class_name SimulationNotification
 var In : bool = false
 var d : float = 0.1
 
+#TODO probably a bettr wayto do this
 func _physics_process(delta: float) -> void:
 	d -= delta
 	if (d > 0):

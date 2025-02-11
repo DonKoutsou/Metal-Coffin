@@ -60,6 +60,7 @@ theme = ExtResource("2_rodwx")
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_kc08c")
+expand_mode = 1
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0

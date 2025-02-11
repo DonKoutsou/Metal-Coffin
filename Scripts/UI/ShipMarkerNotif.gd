@@ -5,10 +5,20 @@ class_name ShipMarkerNotif
 var EntityToFollow : Node2D
 
 var Blink : bool = true
-# Called when the node enters the scene tree for the first time.
+var Fast : bool = false
+
+func ToggleSimulation(t : bool) -> void:
+	if (Blink):
+		if (!t):
+			$AnimationPlayer.play()
+		else:
+			$AnimationPlayer.pause()
+			$AudioStreamPlayer.stop()
 func _ready() -> void:
 	if (Blink):
 		$AnimationPlayer.play("Show")
+		if (Fast):
+			$AnimationPlayer.play("Show_2")
 	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
 	
 func SetText(Txt : String) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=58 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -29,7 +29,6 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="25_xtg2d"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="26_6asdg"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="26_h8cr4"]
-[ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ELint.tscn" id="27_x5jep"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="28_dgqcy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="29_ugh6x"]
 [ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="33_sh4yx"]
@@ -104,14 +103,13 @@ bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_Camera", "ScreenUI", "SteeringWh", "Elint", "DroneUI", "MissileUI", "ThrustUI", "MapMarkerControls")]
+[node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_Camera", "ScreenUI", "SteeringWh", "DroneUI", "MissileUI", "ThrustUI", "MapMarkerControls")]
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
 _Camera = NodePath("SubViewportContainer/ViewPort/ShipCamera")
 ScreenUI = NodePath("OuterUI/ScreenUi")
 SteeringWh = NodePath("OuterUI/ScreenUi/SteeringWheel")
-Elint = NodePath("OuterUI/ScreenUi/Elint")
 DroneUI = NodePath("OuterUI/ScreenUi/DroneTab")
 MissileUI = NodePath("OuterUI/ScreenUi/Missile Tab")
 ThrustUI = NodePath("OuterUI/ThrustSlider")
@@ -127,7 +125,6 @@ EnSpawner = ExtResource("12_m1k6s")
 EnemyShipNames = Array[String](["Mirage", "Sirocco", "Anubis", "Scimitar", "Horus", "Falcon", "Ibex", "Zahara", "Sandstorm", "Scarab", "Oasis", "Dune", "Caravan", "Oryx", "Phoenix", "Djinn", "Aswan", "Sphinx", "Seraph", "Ziggurat", "Bedouin", "Qasr", "Simoon", "Palmyra", "Cobra", "Ishtara", "Hibiscus", "Maham", "Amon", "Selket", "Citadel", "Baobab", "Solstice", "Magi", "Olive", "Mecca", "Pyramid", "Zerda", "Ghibli", "Siwa", "Sahara", "Ra", "Nebula", "Ishtar", "Giza", "Camelot", "Zephyr", "Lybian", "Nubian", "Babylon", "Lotus", "Emir", "Acacia", "Jasmine", "Cumin", "Balsam", "Arash", "Ibri", "Zahir", "Alamut", "Petra", "Khanjar", "Tamrin", "Mamluk", "Souq", "Sinai", "Aqaba", "Argan", "Almaza", "Akasha", "Valley", "Shamal", "Halva", "Desert Rose", "Gazelle", "Myrrh", "Qatar", "Atlas", "Palma", "Hamsin", "Sultan", "Amira", "Basil", "Kahina", "Masira", "Alchemy", "Selene", "Sabiya", "Kurdemir", "Eunice", "Zenobia", "Azeez", "Farah", "Yasmine", "Arun", "Soraya", "Nahyan", "Layla", "Arash", "Zareen", "Ghaith", "Samir", "Rasha", "Dariya", "Pearl", "Dhalia", "Rania", "Lapis", "Magma", "Azure", "Ammonite", "Coral", "Kubra", "Rayan", "Malik", "Tarik", "Zamzam", "Wadi", "Casbah", "Fennec", "Raidan", "Farida", "Nassir", "Amani", "Badiya", "Jabari", "Kabira", "Thal", "Fajr", "Khamsin", "Wilayat", "Bahira", "Ameer", "Buraq", "Kamal", "Mashaal", "Najma", "Furat", "Tasnim", "Qamar", "Zafira", "Rimal", "Nilufar", "Naima", "Jazira", "Asad", "Rahma", "Haitham", "Amir", "Yasir", "Zein", "Tarab", "Saba", "Bakr", "Mahtab", "Sharif", "Nizwa", "Rashid", "Alia", "Farzin", "Parveen", "Qasim", "Tariq", "Samara", "Nadir", "Sidra", "Yasmina", "Zohar", "Jalal", "Rumi", "Faiz", "Azar", "Jannah", "Kamal", "Zafir", "Laila", "Mahira", "Idris", "Hadi", "Adil", "Soraya", "Zayna", "Elham", "Malika", "Riad", "Ishmael", "Halima", "Munir", "Zubair", "Aya", "Zainab", "Karam", "Basim", "Munira", "Faris", "Safira", "Maalik", "Najwa", "Aziz", "Kawthar", "Marwan", "Zara", "Fadia", "Ihsan", "Jamil", "Arwa", "Nasim", "Sadiq", "Rabia", "Hakim", "Najib", "Salma", "Firdaus", "Anwar", "Tahira", "Karim", "Leila", "Subhi", "Nouf", "Saeed", "Rami", "Aaliyah", "Emira", "Tariqa", "Zia", "Naima", "Khalid", "Nour", "Uzma", "Hudhayfa", "Nabi", "Afreen", "Masoud", "Zulekha", "Rabi", "Aziza", "Harith", "Inara", "Sami", "Baqir", "Noor", "Sabrin", "Lamis", "Jafar", "Ghadir", "Farouq", "Ilhaam", "Nadim", "Hania", "Shadi", "Ziad", "Khalifa", "Amal", "Rashaad", "Sanaa", "Zayd", "Nawal", "Ehsan", "Tasneem", "Rashida", "Haleem", "Jasir", "Nihal", "Fathi", "Adnan", "Ghada", "Firdos", "Hajar", "Asma", "Abdul", "Qamar", "Mahmud", "Ruqayya", "Lutfi", "Noorani", "Qudsiya", "Salim", "Fawzi", "Ishraq", "Warda", "Issam", "Jinan", "Latif", "Nabeeha", "Mashal", "Asrar", "Hilal", "Badr", "Waleed", "Ramla", "Sohail", "Yasir", "Wasim", "Nizar", "Abira", "Nashwa", "Fahad", "Tamer", "Razan", "Azim", "Tariq", "Maysa", "Rafiq", "Safwan", "Zayn", "Nadira", "Amir", "Hana", "Mustafa", "Qusay", "Tarik", "Rihana", "Ayman", "Lutfullah", "Batool", "Majid", "Nisrin", "Bahir", "Omran", "Salma", "Bilal", "Wardah", "Haifa", "Firas", "Ghazal", "Jawad", "Sameera", "Razan", "Aseel", "Gibran", "Isra", "Najla", "Khalil", "Siham", "Raed", "Anisa", "Farouk", "Najwa", "Qadir", "Shaima", "Jabir", "Tazeen", "Bayan", "Bashir", "Lubna", "Moin", "Saleh", "Hadiyah", "Yazan", "Tahir", "Malikah", "Zubaydah", "Fareed", "Saladin", "Yasmina", "Iqbal", "Faridah", "Munif", "Qadira", "Yousuf", "Shakira", "Badia", "Talal", "Zayda", "Hashem", "Nourah", "Zaher", "Liyana", "Sadiyah", "Ihab", "Hawra", "Lutfiya", "Mufeed", "Amirah", "Nasira", "Gheida", "Mahrez", "Abir", "Zuhair", "Salsabil", "Yasin", "Maitha", "Aadil", "Noorul", "Rashad", "Layla", "Wasila", "Adeem", "Nahed", "Burhan", "Halimah", "Arib", "Fayrouz", "Wafaa", "Nasib", "Ghada", "Tousif", "Salwa", "Muhsin", "Hamida"])
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-process_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -142,6 +139,7 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="ViewPort" type="SubViewport" parent="SubViewportContainer"]
+process_mode = 1
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
@@ -524,21 +522,6 @@ offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="Elint" parent="OuterUI/ScreenUi" instance=ExtResource("27_x5jep")]
-visible = false
-layout_mode = 1
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = -10.0
-offset_top = -4.0
-offset_right = 158.0
-offset_bottom = 164.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="SteeringWheel" parent="OuterUI/ScreenUi" instance=ExtResource("28_dgqcy")]
 layout_mode = 1

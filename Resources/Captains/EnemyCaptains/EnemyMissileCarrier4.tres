@@ -76,3 +76,4 @@ ShipCallsign = "M4"
 StartingItems = Array[ExtResource("3_lldrx")]([])
 CurrentPort = ""
 CheckForErrors = false
+ProvidingFunds = 50000

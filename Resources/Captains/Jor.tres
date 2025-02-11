@@ -81,3 +81,4 @@ ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("5_mlw8x"), ExtResource("6_38q0j"), ExtResource("7_f81un"), ExtResource("8_f0x14"), ExtResource("9_62oib"), ExtResource("9_62oib"), ExtResource("9_62oib"), ExtResource("9_62oib")])
 CurrentPort = ""
 CheckForErrors = true
+ProvidingFunds = 40000

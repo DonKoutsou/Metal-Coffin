@@ -7,7 +7,7 @@ class_name CircleDrawer
 @export var Col : Color
 
 var circles = []
-var clusters = []
+
 var intersections = {}
 
 var ControlledShip : MapShip
@@ -28,7 +28,7 @@ func UpdateCircles(Circl : Array[PackedVector2Array])-> void:
 	circles.clear()
 	circles.append_array(Circl)
 	#PackedVector2Array([g.global_position, Vector2(100, 0)])
-func find_or_create_cluster(circle_index):
+func find_or_create_cluster(clusters, circle_index):
 		for cluster in clusters:
 			if circle_index in cluster:
 				return cluster
@@ -36,9 +36,10 @@ func find_or_create_cluster(circle_index):
 		clusters.append(new_cluster)
 		return new_cluster
 
-func _physics_process(_delta: float) -> void:
+func ThreadProcessIntersections() -> Dictionary:
 	#circles.clear()
-	clusters.clear()
+	var clusters = []
+	#clusters.clear()
 	#$Area2D3.global_position = get_global_mouse_position()
 	#for g in get_children():
 		#if g is Node2D:
@@ -55,8 +56,8 @@ func _physics_process(_delta: float) -> void:
 
 			# Check if circles intersect
 			if distance < (circle1_radius + circle2_radius):
-				var cluster1 = find_or_create_cluster(i)
-				var cluster2 = find_or_create_cluster(j)
+				var cluster1 = find_or_create_cluster(clusters, i)
+				var cluster2 = find_or_create_cluster(clusters, j)
 
 				if cluster1 != cluster2:
 					# Merge clusters if they are different
@@ -69,11 +70,25 @@ func _physics_process(_delta: float) -> void:
 					cluster1.append(j)
 
 	# Convert clusters to a dictionary
-	intersections.clear()
+	var intersects = {}
 	for index in range(clusters.size()):
-		intersections[index] = clusters[index]
+		intersects[index] = clusters[index]
 	
+	call_deferred("ClusterCalcFinished")
+	
+	return intersects
+
+func ClusterCalcFinished() -> void:
+	intersections = ClusterTH.wait_to_finish()
+	ClusterTH = null
 	queue_redraw()
+
+var ClusterTH : Thread
+func _physics_process(delta: float) -> void:
+	if (ClusterTH == null):
+		ClusterTH = Thread.new()
+		ClusterTH.start(ThreadProcessIntersections)
+	
 
 func get_circle_polygon(center: Vector2, rad : float) -> PackedVector2Array:
 	var points = PackedVector2Array()
@@ -123,12 +138,13 @@ func _draw():
 			
 func DrawRuller() -> void:
 	var shippos = ControlledShip.global_position
+	var LineW = 1/CamZoom
 	for g in 3:
-		draw_circle(shippos, 350 * (g + 1), Color(100, 100, 100), false, 1/CamZoom, true)
+		draw_circle(shippos, 350 * (g + 1), Color(100, 100, 100), false, LineW, true)
 	var Next = rotation_degrees
 	var Num = 90
 	for g in 12:
-		draw_line(Vector2(350,0).rotated(deg_to_rad(Next)) + shippos, Vector2(1050,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100), 1/CamZoom, true)
+		draw_line(Vector2(350,0).rotated(deg_to_rad(Next)) + shippos, Vector2(1050,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100), LineW, true)
 		var Text = var_to_str(Num).replace(".0", "")
 		var TextSize = (2/CamZoom)*6
 		var Textpos = Vector2(1100, 0).rotated(deg_to_rad(Next))

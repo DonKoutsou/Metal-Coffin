@@ -31,7 +31,8 @@ func TogglePause(t : bool) -> void:
 	#Inventory.GetInstance().OnSimulationPaused(t)
 	_Map.GetInScreenUI().GetInventory().OnSimulationPaused(t)
 	Commander.GetInstance().OnSimulationPaused(t)
-	get_tree().call_group("Clock", "ToggleSimulation", t)
+	get_tree().call_group("Pausable", "ToggleSimulation", t)
+	
 
 func SetSimulationSpeed(Speed : int) -> void:
 	SimulationSpeed = Speed

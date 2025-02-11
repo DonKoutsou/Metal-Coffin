@@ -15,8 +15,9 @@ var CharactersShowing = 0
 func _ready() -> void:
 	set_physics_process(false)
 	#PlayDialogue(["Dis a test tes tes  sgsesgesg eesg sge sges ges ges", " ga gawe geagg ae gea gae geag g"])
-func PlayDialogue(Text : Array[String]):
+func PlayDialogue(Text : Array[String], Avatar : Texture):
 	textToShow.append_array(Text)
+	$PanelContainer/TextureRect.texture = Avatar
 	ApplyNextText()
 	
 func DialogueEnded():

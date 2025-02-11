@@ -11,6 +11,7 @@ var MappedStats : Array[STAT_CONST.STATS]
 @export var StartingItems : Array[Item]
 @export var CurrentPort : String
 @export var CheckForErrors : bool = false
+@export var ProvidingFunds : int = 0
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
 signal StatChanged(NewVal : float)

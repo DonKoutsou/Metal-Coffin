@@ -73,9 +73,9 @@ func  _ready() -> void:
 	#$Elint.connect("area_entered", _on_elint_area_entered)
 	#$Elint.connect("area_exited", _on_elint_area_exited)
 func _physics_process(delta: float) -> void:
+	UpdateElint(delta)
 	if (Paused):
 		return
-	UpdateElint(delta)
 	
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
@@ -100,9 +100,9 @@ func UpdateElint(delta: float) -> void:
 	var BiggestLevel = -1
 	var ClosestShip : MapShip
 	for g in ElintContacts.size():
-		var ship = ElintContacts.keys()[g]
+		var ship = ElintContacts.keys()[g] as MapShip
 		var lvl = ElintContacts.values()[g]
-		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position))
+		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
 			ClosestShip = ship

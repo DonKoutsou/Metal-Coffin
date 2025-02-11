@@ -203,6 +203,10 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 		queue_free()
 		return true
 	return false
+	
+func ShowEndCard() -> void:
+	pass
+
 func EndActionPerformPhase() -> void:
 	Actions.clear()
 	StartActionPickPhase()
