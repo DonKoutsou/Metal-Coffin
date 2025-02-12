@@ -16,7 +16,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_nn3aw"]
 script = ExtResource("2_7forp")
 StatName = 6
-StatBase = 300.0
+StatBase = 0.0
 StatShipPartBuff = 0.0
 CurrentValue = 0.0
 

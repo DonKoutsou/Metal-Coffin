@@ -33,10 +33,17 @@ func  _ready() -> void:
 		g.ForceMaxValue()
 
 	_UpdateShipIcon(Cpt.ShipIcon)
-	
-	UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
-	UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
-	
+	var ElintRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
+	if (ElintRange == 0):
+		ElintShape.queue_free()
+	else:
+		UpdateELINTTRange(ElintRange)
+
+	var Visual = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+	if (Visual == 0):
+		RadarShape.queue_free()
+	else:
+		UpdateVizRange(Visual)
 	
 	if (!Patrol):
 		SetSpeed(0)
@@ -180,6 +187,9 @@ func IntersectPusruing() -> Vector2:
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	return predicted_position
+
+#//////////////////Area Events
+
 func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBy.has(SeenBy)):
 		return
@@ -191,11 +201,34 @@ func OnShipSeen(SeenBy : Node2D):
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
-func _on_area_entered(area: Area2D) -> void:
-	if (area.get_parent() is MapSpot):
+	
+func BodyEnteredElint(area: Area2D) -> void:
+	if (area.get_parent() is HostileShip):
+		return
+	super(area)
+func BodyLeftElint(area: Area2D) -> void:
+	if (area.get_parent() is HostileShip):
+		return
+	if (area.get_parent() == self):
+		return
+	ElintContacts.erase(area.get_parent())
+	ElintContact.emit(area.get_parent(), false)
+func BodyEnteredRadar(Body : Area2D) -> void:
+	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+		OnEnemyVisualContact.emit(Body.get_parent(), self)
+		#PursuingShips.append(area.get_parent())
+
+func BodyLeftRadar(Body : Area2D) -> void:
+	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+		OnEnemyVisualLost.emit(Body.get_parent())
+		#PursuingShips.erase(area.get_parent())
+		#LastKnownPosition = area.get_parent().global_position
+
+func BodyEnteredBody(Body : Area2D) -> void:
+	if (Body.get_parent() is MapSpot):
 		if (Docked):
 			return
-		var spot = area.get_parent() as MapSpot
+		var spot = Body.get_parent() as MapSpot
 		if (Path.has(spot.GetSpotName()) and Patrol):
 			SetCurrentPort(spot)
 			PathPart = Path.find(spot.GetSpotName())
@@ -205,37 +238,33 @@ func _on_area_entered(area: Area2D) -> void:
 				PathPart += 1
 		if (spot == RefuelSpot and Patrol):
 			SetCurrentPort(RefuelSpot)
-	else :if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		var IsRadar = area.get_collision_layer_value(2)
-		if (IsRadar):
-			OnShipSeen(area.get_parent())
+	else :if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+		var plships : Array[Node2D] = []
+		var hostships : Array[Node2D] = []
+		if (Docked):
+			hostships.append(Command)
+			hostships.append_array(Command.GetDroneDock().DockedDrones)
 		else:
-			var plships : Array[Node2D] = []
-			var hostships : Array[Node2D] = []
-			if (Docked):
-				hostships.append(Command)
-				hostships.append_array(Command.GetDroneDock().DockedDrones)
-			else:
-				hostships.append(self)
-				hostships.append_array(GetDroneDock().DockedDrones)
-				
-			if (area.get_parent() is PlayerShip):
-				var player = area.get_parent() as PlayerShip
+			hostships.append(self)
+			hostships.append_array(GetDroneDock().DockedDrones)
+			
+		if (Body.get_parent() is PlayerShip):
+			var player = Body.get_parent() as PlayerShip
+			plships.append(player)
+			plships.append_array(player.GetDroneDock().DockedDrones)
+		else:
+			var drn = Body.get_parent() as Drone
+			if (drn.Docked):
+				var player = drn.Command
 				plships.append(player)
 				plships.append_array(player.GetDroneDock().DockedDrones)
 			else:
-				var drn = area.get_parent() as Drone
-				if (drn.Docked):
-					var player = drn.Command
-					plships.append(player)
-					plships.append_array(player.GetDroneDock().DockedDrones)
-				else:
-					plships.append(drn)
-					plships.append_array(drn.GetDroneDock().DockedDrones)
-					
-			OnShipMet.emit(plships, hostships)
-	else : if (area.get_parent() == Command and CommingBack):
-		var Ship = area.get_parent() as HostileShip
+				plships.append(drn)
+				plships.append_array(drn.GetDroneDock().DockedDrones)
+				
+		OnShipMet.emit(plships, hostships)
+	else : if (Body.get_parent() == Command and CommingBack):
+		var Ship = Body.get_parent() as HostileShip
 		Ship.GetDroneDock().DockDrone(self, true)
 		var MyDroneDock = GetDroneDock()
 		for g in MyDroneDock.DockedDrones:
@@ -244,32 +273,19 @@ func _on_area_entered(area: Area2D) -> void:
 		for g in MyDroneDock.FlyingDrones:
 			g.Command = Ship
 		CommingBack = false
-func _on_area_exited(area: Area2D) -> void:
-	if (area.get_parent() == CurrentPort):
+	
+func BodyLeftBody(Body : Area2D) -> void:
+	if (Body.get_parent() == CurrentPort):
 		if (!Docked):
 			RemovePort()
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		OnShipUnseen(area.get_parent())
-func _on_elint_area_entered(area: Area2D) -> void:
-	if (area.get_parent() is HostileShip):
-		return
-	super(area)
-func _on_elint_area_exited(area: Area2D) -> void:
-	if (area.get_parent() is HostileShip):
-		return
-	if (area.get_parent() == self):
-		return
-	ElintContacts.erase(area.get_parent())
-	ElintContact.emit(area.get_parent(), false)
-func _on_radar_2_area_entered(area: Area2D) -> void:
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		OnEnemyVisualContact.emit(area.get_parent(), self)
-		#PursuingShips.append(area.get_parent())
-func _on_radar_2_area_exited(area: Area2D) -> void:
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		OnEnemyVisualLost.emit(area.get_parent())
-		#PursuingShips.erase(area.get_parent())
-		#LastKnownPosition = area.get_parent().global_position
+	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+		OnShipUnseen(Body.get_parent())
+		
+		
+#//////////////////
+
+
+
 func find_path(start_city: String, end_city: String) -> Array:
 	#var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var queue = []

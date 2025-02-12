@@ -154,21 +154,21 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Play" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
+[node name="Play" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "New Expedition"
 
-[node name="Load" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
+[node name="Load" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Load"
 
-[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" groups=["Buttons"]]
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 theme = ExtResource("6_gn124")
 theme_override_font_sizes/font_size = 24

@@ -156,33 +156,9 @@ func PlaySound():
 	sound.stream = load("res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3")
 	add_child(sound)
 	sound.play()
-	
-func AreaEntered(area: Area2D):
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		
-		if (area.get_collision_layer_value(2)):
-			if (!Seen):
-				OnSpotSeen()
-				#OnSpotAnalyzed()
-		#else: if (area.get_collision_layer_value(2)):
-			#if (!Analyzed):
-				#OnSpotAnalyzed()
-		else: if (area.get_collision_layer_value(1)):
-			CurrentlyVisiting = true
-			var ship = area.get_parent()
-			ship.SetCurrentPort(self)
-			SpotAproached.emit(self)
-			if (!Seen):
-				OnSpotSeen()
-				#OnSpotAnalyzed()
-		#else: if (area.get_collision_layer_value(4)):
-			#CurrentlyVisiting = true
-			#var ship = area.get_parent() as Drone
-			#ship.SetCurrentPort(self)
-			#SpotAproached.emit(self)
-func AreaExited(area: Area2D):
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-		if (area.get_collision_layer_value(1)):
-			CurrentlyVisiting = false
-			var ship = area.get_parent() 
-			ship.RemovePort()
+
+func OnSpotAproached() -> void:
+	CurrentlyVisiting = true
+	SpotAproached.emit(self)
+	if (!Seen):
+		OnSpotSeen()

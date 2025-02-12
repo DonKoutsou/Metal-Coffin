@@ -76,3 +76,4 @@ ShipCallsign = "P4"
 StartingItems = Array[ExtResource("3_tfww2")]([])
 CurrentPort = ""
 CheckForErrors = false
+ProvidingFunds = 0

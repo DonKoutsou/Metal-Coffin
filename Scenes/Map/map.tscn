@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=66 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -36,16 +36,24 @@
 [ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="33_x32n8"]
 [ext_resource type="Texture2D" uid="uid://byw2qwoyfn3qa" path="res://Assets/UIPiecies/Button_Camera 1_Black.png" id="34_4g7nr"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="36_4epqv"]
+[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="36_mcl7k"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="37_nythg"]
 [ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality.png" id="38_iludl"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="38_non32"]
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="38_vyrfo"]
 [ext_resource type="Texture2D" uid="uid://5mvc2lmslh6d" path="res://Assets/UIPiecies/Screen/Button9_Camera 1_FullQuality.png" id="40_17tgj"]
 [ext_resource type="BitMap" uid="uid://bws1mu52unesf" path="res://Assets/UIPiecies/ButtonAlpha.png" id="41_62ow1"]
+[ext_resource type="Texture2D" uid="uid://bh054v0wx0c0y" path="res://Assets/UIPiecies/Screen/Button11_Camera 1_FullQuality_pressed.png" id="42_8fqtt"]
 [ext_resource type="Texture2D" uid="uid://cjikrrpjhmdnl" path="res://Assets/UIPiecies/Screen/Button11_Camera 1_FullQuality.png" id="42_a2kw8"]
 [ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="42_jcl8h"]
+[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="43_dnalw"]
 [ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="43_fa10l"]
+[ext_resource type="Texture2D" uid="uid://dfn2y3vn7f8vm" path="res://Assets/UIPiecies/Screen/Button9_Camera 1_FullQuality_pressed.png" id="44_nv4nm"]
+[ext_resource type="Texture2D" uid="uid://dlaoa5dhbn3h5" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality_Pressed.png" id="45_mo7js"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="45_ssr13"]
+[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="46_nn36s"]
+[ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality_pressed.png" id="47_jihcv"]
+[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="48_5i6gs"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="48_xvuot"]
 [ext_resource type="Texture2D" uid="uid://cbfjaei6s76i" path="res://Assets/UIPiecies/Screen/Buttons_Camera 1_FullQuality.png" id="49_0pvp7"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="49_j4oow"]
@@ -369,7 +377,7 @@ offset_bottom = -222.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("38_iludl")
-texture_pressed = ExtResource("38_iludl")
+texture_pressed = ExtResource("45_mo7js")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -428,7 +436,7 @@ offset_bottom = -157.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("38_iludl")
-texture_pressed = ExtResource("38_iludl")
+texture_pressed = ExtResource("45_mo7js")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -487,7 +495,7 @@ offset_bottom = -92.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("33_sh4yx")
-texture_pressed = ExtResource("33_sh4yx")
+texture_pressed = ExtResource("36_mcl7k")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -575,7 +583,7 @@ size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
 texture_normal = ExtResource("42_a2kw8")
-texture_pressed = ExtResource("42_a2kw8")
+texture_pressed = ExtResource("42_8fqtt")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -617,7 +625,7 @@ offset_bottom = 36.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("40_17tgj")
-texture_pressed = ExtResource("40_17tgj")
+texture_pressed = ExtResource("44_nv4nm")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -663,7 +671,7 @@ size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
 texture_normal = ExtResource("38_non32")
-texture_pressed = ExtResource("38_non32")
+texture_pressed = ExtResource("43_dnalw")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -705,7 +713,7 @@ offset_bottom = -27.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("48_xvuot")
-texture_pressed = ExtResource("48_xvuot")
+texture_pressed = ExtResource("47_jihcv")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -746,7 +754,7 @@ offset_bottom = -494.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("42_jcl8h")
-texture_pressed = ExtResource("42_jcl8h")
+texture_pressed = ExtResource("46_nn36s")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -787,7 +795,7 @@ offset_bottom = -414.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("43_fa10l")
-texture_pressed = ExtResource("43_fa10l")
+texture_pressed = ExtResource("48_5i6gs")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -833,7 +841,7 @@ focus_mode = 0
 theme = ExtResource("36_4epqv")
 action_mode = 0
 texture_normal = ExtResource("38_iludl")
-texture_pressed = ExtResource("38_iludl")
+texture_pressed = ExtResource("45_mo7js")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -888,7 +896,7 @@ size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
 texture_normal = ExtResource("38_non32")
-texture_pressed = ExtResource("38_non32")
+texture_pressed = ExtResource("43_dnalw")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0

@@ -2,6 +2,11 @@ extends Node2D
 
 class_name MapShip
 
+@export var RadarShape : Area2D
+@export var VisualShape : Area2D
+@export var ElintShape : Area2D
+@export var BodyShape : Area2D
+
 @export var LowStatsToNotifyAbout : Array[String]
 @export var Cpt : Captain
 
@@ -38,12 +43,18 @@ var ElintContacts : Dictionary
 var Detectable = true
 
 func _enter_tree() -> void:
-	$Elint.connect("area_entered", _on_elint_area_entered)
-	$Elint.connect("area_exited", _on_elint_area_exited)
+	ElintShape.connect("area_entered", BodyEnteredElint)
+	ElintShape.connect("area_exited", BodyLeftElint)
+	RadarShape.connect("area_entered", BodyEnteredRadar)
+	RadarShape.connect("area_exited", BodyLeftRadar)
+	VisualShape.connect("area_entered", BodyEnteredRadar)
+	VisualShape.connect("area_exited", BodyLeftRadar)
+	BodyShape.connect("area_entered", BodyEnteredBody)
+	BodyShape.connect("area_exited", BodyLeftBody)
+	
 	Cpt.connect("ShipPartChanged", PartChanged)
 
 func _ready() -> void:
-	
 	MapPointerManager.GetInstance().AddShip(self, true)
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
@@ -153,7 +164,7 @@ func ChangeSimulationSpeed(i : int):
 func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
-	$Radar/CollisionShape2D.set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
+	RadarShape.get_node("CollisionShape2D").set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
 	for g in GetDroneDock().DockedDrones:
 		g.ToggleRadar()
 		
@@ -207,10 +218,10 @@ func angle_to_direction(angle: float) -> String:
 
 func UpdateVizRange(rang : float):
 	print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
-	var RadarRangeCollisionShape = $Radar/CollisionShape2D
+	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
 func UpdateELINTTRange(rang : float):
-	var ElintRangeCollisionShape = $Elint/CollisionShape2D
+	var ElintRangeCollisionShape = ElintShape.get_node("CollisionShape2D")
 	#scalling collision
 	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
 
@@ -366,16 +377,43 @@ func _UpdateShipIcon(Tex : Texture) -> void:
 	$PlayerShipSpr.texture = Tex
 	$PlayerShipSpr/ShadowPivot/Shadow.texture = Tex
 
-func _on_elint_area_entered(area: Area2D) -> void:
-	if (area.get_parent() == self):
+func BodyEnteredElint(Body: Area2D) -> void:
+	if (Body.get_parent() == self):
 		return
-	ElintContacts[area.get_parent()] = 0
+	ElintContacts[Body.get_parent()] = 0
 	#Elint.emit(true, 1)
-func _on_elint_area_exited(area: Area2D) -> void:
-	if (area.get_parent() == self):
+	
+func BodyLeftElint(Body: Area2D) -> void:
+	if (Body.get_parent() == self):
 		return
-	ElintContacts.erase(area.get_parent())
+	ElintContacts.erase(Body.get_parent())
 	#Elint.emit(false, 0)
+	
+func BodyEnteredRadar(Body : Area2D) -> void:
+	var Parent = Body.get_parent()
+	if (Parent is HostileShip):
+		Parent.OnShipSeen(self)
+	else : if (Parent is MapSpot):
+		if (!Parent.Seen):
+			Parent.OnSpotSeen()
+
+func BodyLeftRadar(Body : Area2D) -> void:
+	var Parent = Body.get_parent()
+	if (Parent is HostileShip):
+		Parent.OnShipUnseen(self)
+
+func BodyEnteredBody(Body : Area2D) -> void:
+	var Parent = Body.get_parent()
+	if (Parent is MapSpot):
+		SetCurrentPort(Parent)
+		Parent.OnSpotAproached()
+	
+func BodyLeftBody(Body : Area2D) -> void:
+	var Parent = Body.get_parent()
+	if (Parent is MapSpot):
+		Parent.CurrentlyVisiting = false
+		RemovePort()
+
 func GetShipBodyArea() -> Area2D:
 	return $ShipBody
 func GetShipRadarArea() -> Area2D:

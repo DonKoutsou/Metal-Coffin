@@ -6,8 +6,6 @@ signal DroneReturning
 
 func  _ready() -> void:
 	super()
-	#UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
-	#UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 	Paused = SimulationManager.IsPaused()
 
 #func _exit_tree() -> void:
@@ -64,7 +62,7 @@ func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
 		plship.GetDroneDock().PlayReturnSound()
-func _on_ship_body_area_entered(area: Area2D) -> void:
+func BodyEnteredBody(area: Area2D) -> void:
 	if (Docked):
 		return
 	if (area.get_parent() is MapSpot and !CommingBack):
@@ -84,14 +82,14 @@ func _on_ship_body_area_entered(area: Area2D) -> void:
 		for g in MyDroneDock.FlyingDrones:
 			g.Command = plship
 		CommingBack = false
-func _on_elint_area_entered(area: Area2D) -> void:
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+func BodyEnteredElint(Body: Area2D) -> void:
+	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
 		return
-	super(area)
-func _on_elint_area_exited(area: Area2D) -> void:
-	if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+	super(Body)
+func BodyLeftElint(Body: Area2D) -> void:
+	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
 		return
-	super(area)
+	super(Body)
 
 func GetSaveData() -> DroneSaveData:
 	var dat = DroneSaveData.new()

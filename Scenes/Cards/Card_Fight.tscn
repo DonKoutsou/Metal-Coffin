@@ -60,7 +60,7 @@ layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer4/VBoxContainer4"]
+[node name="Button" type="Button" parent="VBoxContainer4/VBoxContainer4" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("14_kl7fj")

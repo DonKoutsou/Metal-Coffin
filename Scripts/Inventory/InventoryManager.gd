@@ -286,7 +286,7 @@ func LoadSaveData(Data : SaveData) -> void:
 func ToggleInventory() -> void:
 	visible = !visible
 	InventoryToggled.emit(visible)
-
+	$AudioStreamPlayer.play()
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

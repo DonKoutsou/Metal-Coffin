@@ -76,3 +76,4 @@ ShipCallsign = "T3"
 StartingItems = Array[ExtResource("3_iuwjv")]([])
 CurrentPort = ""
 CheckForErrors = false
+ProvidingFunds = 0

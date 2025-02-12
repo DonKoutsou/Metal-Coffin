@@ -35,7 +35,7 @@ theme = ExtResource("1_xu5pf")
 script = ExtResource("1_1cx5j")
 Butto = NodePath("ItemButton")
 
-[node name="ItemButton" type="Button" parent="." groups=["Buttons"]]
+[node name="ItemButton" type="Button" parent="." groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0

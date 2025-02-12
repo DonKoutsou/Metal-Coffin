@@ -83,3 +83,4 @@ ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_dli6y"), ExtResource("6_cqo66"), ExtResource("7_vialp"), ExtResource("8_8jnuw"), ExtResource("9_fi65e"), ExtResource("10_lsjiy"), ExtResource("11_d3beu"), ExtResource("11_d3beu"), ExtResource("11_d3beu"), ExtResource("11_d3beu"), ExtResource("12_3551g"), ExtResource("13_sv6iv"), ExtResource("13_sv6iv"), ExtResource("12_3551g"), ExtResource("12_3551g"), ExtResource("12_3551g"), ExtResource("14_wxi0w"), ExtResource("14_wxi0w")])
 CurrentPort = ""
 CheckForErrors = true
+ProvidingFunds = 0

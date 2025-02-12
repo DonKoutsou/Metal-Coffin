@@ -73,3 +73,4 @@ ShipCallsign = null
 StartingItems = Array[ExtResource("3_q3468")]([])
 CurrentPort = null
 CheckForErrors = true
+ProvidingFunds = 0

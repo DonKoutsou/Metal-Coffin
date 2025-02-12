@@ -65,14 +65,14 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["Buttons"]]
+[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "Upgrade"
 
-[node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["Buttons"]]
+[node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -85,19 +85,19 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["Buttons"]]
+[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "-"
 
-[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["Buttons"]]
+[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Use :1x"
 
-[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["Buttons"]]
+[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
@@ -124,14 +124,14 @@ text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
 fit_content = true
 autowrap_mode = 2
 
-[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2" groups=["Buttons"]]
+[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme_override_font_sizes/font_size = 24
 text = "Transfer"
 
-[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2" groups=["Buttons"]]
+[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8

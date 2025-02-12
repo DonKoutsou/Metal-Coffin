@@ -29,7 +29,7 @@ func StartGame(Load : bool) -> void:
 			window.popup_centered()
 			return
 	
-	get_child(3).queue_free()
+	get_child(4).queue_free()
 	add_child(wor)
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
@@ -39,6 +39,6 @@ func StartGame(Load : bool) -> void:
 
 func OnGameEnded() -> void:
 	get_tree().paused = false
-	get_child(3).TerminateWorld()
-	get_child(3).queue_free()
+	get_child(4).TerminateWorld()
+	get_child(4).queue_free()
 	SpawnMenu()

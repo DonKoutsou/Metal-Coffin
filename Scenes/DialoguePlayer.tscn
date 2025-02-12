@@ -71,7 +71,7 @@ one_shot = true
 stream = ExtResource("5_p12ba")
 bus = &"UI"
 
-[node name="Skip" type="Button" parent="."]
+[node name="Skip" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

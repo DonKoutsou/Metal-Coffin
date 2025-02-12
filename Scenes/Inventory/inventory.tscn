@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dslxdgbana1k1"]
+[gd_scene load_steps=18 format=3 uid="uid://dslxdgbana1k1"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_xdylh"]
 [ext_resource type="Script" path="res://Scripts/Inventory/InventoryManager.gd" id="2_n8wv5"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/Inventory/InventoryShipStats.gd" id="10_jwvgm"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="11_lweht"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="12_gc8sd"]
+[ext_resource type="AudioStream" uid="uid://d4k7al36dc8er" path="res://Assets/Sounds/ScreenZap.wav" id="13_jjw7x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fam5"]
 content_margin_left = 8.0
@@ -194,5 +195,8 @@ custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_jjw7x")
 
 [connection signal="gui_input" from="HBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]

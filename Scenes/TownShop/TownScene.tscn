@@ -66,7 +66,7 @@ layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -74,7 +74,7 @@ theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 text = "Munition Shop"
 
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -219,7 +219,7 @@ size_flags_vertical = 3
 value = 27.12
 show_percentage = false
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

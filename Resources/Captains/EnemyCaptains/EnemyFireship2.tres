@@ -76,3 +76,4 @@ ShipCallsign = "P2"
 StartingItems = Array[ExtResource("3_hkrb1")]([])
 CurrentPort = ""
 CheckForErrors = false
+ProvidingFunds = 0

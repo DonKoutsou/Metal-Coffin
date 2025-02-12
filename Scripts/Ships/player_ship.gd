@@ -2,11 +2,11 @@ extends MapShip
 
 class_name PlayerShip
 
-func _on_elint_area_entered(area: Area2D) -> void:
-	if (area.get_parent() is Drone):
+func BodyEnteredElint(Body: Area2D) -> void:
+	if (Body.get_parent() is Drone):
 		return
-	super(area)
-func _on_elint_area_exited(area: Area2D) -> void:
-	if (area.get_parent() is Drone):
+	super(Body)
+func BodyLeftElint(Body: Area2D) -> void:
+	if (Body.get_parent() is Drone):
 		return
-	super(area)
+	super(Body)
