@@ -76,4 +76,4 @@ ShipCallsign = "R2"
 StartingItems = Array[ExtResource("3_uv4n8")]([])
 CurrentPort = ""
 CheckForErrors = false
-ProvidingFunds = 0
+ProvidingFunds = 8000

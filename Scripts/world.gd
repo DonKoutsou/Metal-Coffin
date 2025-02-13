@@ -118,7 +118,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	var AllUnits : Array[MapShip]
 	AllUnits.append_array(FighingFriendlyUnits)
 	AllUnits.append_array(FighingEnemyUnits)
-	
+	var WonFunds = 0
 	for Unit in AllUnits:
 		var Survived = false
 		for Surv in Survivors:
@@ -131,7 +131,11 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 				break
 		if (!Survived):
 			Unit.Damage(99999999999)
-	
+			if (Unit is HostileShip):
+				WonFunds += Unit.Cpt.ProvidingFunds
+	if (WonFunds > 0):
+		PlayerWallet.AddFunds(WonFunds)
+		PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([WonFunds]))
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()
 	

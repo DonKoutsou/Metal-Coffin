@@ -173,11 +173,12 @@ func UpdateTime():
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
 	ShipIcon.add_to_group("UnmovableMapInfo")
+	add_to_group("ZoomAffected")
 	
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
 	ShipIcon.remove_from_group("UnmovableMapInfo")
-
+	remove_from_group("ZoomAffected")
 func UpdateSignRotation() -> void:
 	DetailPanel.rotation += 0.01
 	$Control/PanelContainer.pivot_offset = $Control/PanelContainer.size / 2

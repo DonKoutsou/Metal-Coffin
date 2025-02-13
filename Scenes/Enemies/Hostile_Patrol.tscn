@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=10 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
@@ -17,16 +17,12 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
 radius = 1000.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0x0e1"]
-radius = 350.0
-
-[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "VisualShape", "ElintShape", "BodyShape") groups=["Enemy", "Ships", "ZoomAffected"]]
+[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape") groups=["Enemy", "Ships"]]
 process_mode = 1
 script = ExtResource("1_dinuw")
 Patrol = false
 BT = ExtResource("8_w8ob0")
 RadarShape = NodePath("Radar")
-VisualShape = NodePath("Visibility")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
 Cpt = ExtResource("2_lpij7")
@@ -62,10 +58,6 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
 
-[node name="ShipDock" parent="." instance=ExtResource("7_hahnw")]
-collision_layer = 1
-collision_mask = 7
-
 [node name="Elint" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -76,15 +68,6 @@ shape = SubResource("CircleShape2D_t084r")
 
 [node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
 collision_layer = 8
-
-[node name="Visibility" type="Area2D" parent="."]
-disable_mode = 2
-collision_layer = 0
-collision_mask = 5
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visibility"]
-shape = SubResource("CircleShape2D_0x0e1")
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

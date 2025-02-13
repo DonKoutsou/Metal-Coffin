@@ -76,4 +76,4 @@ ShipCallsign = "R1"
 StartingItems = Array[ExtResource("3_ucdyq")]([])
 CurrentPort = ""
 CheckForErrors = false
-ProvidingFunds = 0
+ProvidingFunds = 5000

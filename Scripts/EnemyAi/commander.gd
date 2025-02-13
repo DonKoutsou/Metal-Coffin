@@ -139,7 +139,11 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 			InvestigationOrderComplete(EnemyPositionsToInvestigate[Ship])
 		EnemyPositionsToInvestigate.erase(Ship)
 	
-	OrderShipToPursue(SeenBy, Ship)
+	if (SeenBy.Patrol):
+		if (SeenBy.Command == null):
+			OrderShipToPursue(SeenBy, Ship)
+		else:
+			OrderShipToPursue(SeenBy.Command, Ship)
 	if (KnownEnemies.keys().has(Ship)):
 		KnownEnemies[Ship] += 1
 	else :
@@ -189,7 +193,7 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 	var closestdistance : float = 999999999999999
 	var ClosestShip : HostileShip
 	for g in Fleet:
-		if (g.Docked):
+		if (g.Docked or g.Command != null):
 			continue
 		if (free):
 			if (g.PursuingShips.size() > 0 or g.LastKnownPosition != Vector2.ZERO or !g.CanReachPosition(Pos)):

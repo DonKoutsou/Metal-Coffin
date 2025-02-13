@@ -12,6 +12,8 @@ var DockedDrones : Dictionary
 
 var CurrentlySelectedDrone : Drone
 
+var Showing = false
+
 func _enter_tree() -> void:
 	DroneDockEventH.connect("DroneDocked", DroneDocked)
 	DroneDockEventH.connect("DroneUndocked", DroneUnDocked)
@@ -101,11 +103,18 @@ func _on_recon_dron_button_pressed() -> void:
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ReconDronButton.ToggleDissable(true)
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Label.text = "Armed Drone : Recon"
 
-func _on_toggle_drone_tab_pressed() -> void:
-	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
-	$AnimationPlayer.play("Show")
-	UpdateCrewSelect()
 
+func _on_toggle_drone_tab_pressed() -> void:
+	if ($AnimationPlayer.is_playing()):
+		await  $AnimationPlayer.animation_finished
+	if (!Showing):
+		$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
+		$AnimationPlayer.play("Show")
+		UpdateCrewSelect()
+		Showing = true
+	else :
+		_on_turn_off_button_pressed()
+		
 func UpdateSteer(RelativeRot : float):
 	DroneDockEventH.DroneDirectionChanged(RelativeRot / 10, ConnectedShip)
 
@@ -155,7 +164,7 @@ func _on_turn_off_button_pressed() -> void:
 		_on_dissarm_drone_button_2_pressed()
 		await $AnimationPlayer.animation_finished
 	$AnimationPlayer.play("Hide")
-
+	Showing = false
 func _on_drone_range_slider_value_changed(value: float) -> void:
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4/Label2.text = var_to_str(value / 2)
 	DroneDockEventH.OnDronRangeChanged(value, ConnectedShip)

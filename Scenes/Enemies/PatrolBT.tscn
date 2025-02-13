@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0gylky44tnsw"]
+[gd_scene load_steps=13 format=3 uid="uid://b0gylky44tnsw"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_vo0jh"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_2caii"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_ovbxk"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="4_32dxd"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_mvm57"]
@@ -18,54 +17,54 @@
 process_mode = 1
 script = ExtResource("1_vo0jh")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@23364")
+blackboard = NodePath("@Node@53672")
 custom_monitor = true
 actor = NodePath("")
 
-[node name="SelectorReactiveComposite" type="Node" parent="."]
-script = ExtResource("2_2caii")
-
-[node name="SequenceComposite" type="Node" parent="SelectorReactiveComposite"]
-script = ExtResource("3_ovbxk")
-
-[node name="SelectorComposite" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+[node name="SelectorComposite" type="Node" parent="."]
 script = ExtResource("4_mvm57")
 
-[node name="CooldownDecorator" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite"]
+[node name="SequenceComposite" type="Node" parent="SelectorComposite"]
+script = ExtResource("3_ovbxk")
+
+[node name="SelectorComposite" type="Node" parent="SelectorComposite/SequenceComposite"]
+script = ExtResource("4_mvm57")
+
+[node name="CooldownDecorator" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]
 script = ExtResource("4_32dxd")
 wait_time = 1.5
 
-[node name="UnableToReachDestinationCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite/CooldownDecorator"]
+[node name="UnableToReachDestinationCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite/CooldownDecorator"]
 script = ExtResource("5_81qny")
 
-[node name="CooldownDecorator2" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite"]
+[node name="CooldownDecorator2" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]
 script = ExtResource("4_32dxd")
 wait_time = 1.0
 
-[node name="ToFarToRefuelCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite/CooldownDecorator2"]
+[node name="ToFarToRefuelCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite/CooldownDecorator2"]
 script = ExtResource("6_77sl7")
 
-[node name="CooldownDecorator3" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite"]
+[node name="CooldownDecorator3" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]
 script = ExtResource("4_32dxd")
 wait_time = 3.3
 
-[node name="NeedRepairCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite/CooldownDecorator3"]
+[node name="NeedRepairCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite/CooldownDecorator3"]
 script = ExtResource("7_83cx2")
 
-[node name="SelectorComposite2" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+[node name="SelectorComposite2" type="Node" parent="SelectorComposite/SequenceComposite"]
 script = ExtResource("4_mvm57")
 
-[node name="HasRefuelSpotCondition" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
+[node name="HasRefuelSpotCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite2"]
 script = ExtResource("8_ojqis")
 
-[node name="FindRefuelSpotAction" type="Node" parent="SelectorReactiveComposite/SequenceComposite/SelectorComposite2"]
+[node name="FindRefuelSpotAction" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite2"]
 script = ExtResource("9_r0x3t")
 
-[node name="AproachRefuelSpotAction" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+[node name="AproachRefuelSpotAction" type="Node" parent="SelectorComposite/SequenceComposite"]
 script = ExtResource("10_wywiw")
 
-[node name="RefuelAction" type="Node" parent="SelectorReactiveComposite/SequenceComposite"]
+[node name="RefuelAction" type="Node" parent="SelectorComposite/SequenceComposite"]
 script = ExtResource("11_lt8fk")
 
-[node name="ApreachDestinationAction" type="Node" parent="SelectorReactiveComposite"]
+[node name="ApreachDestinationAction" type="Node" parent="SelectorComposite"]
 script = ExtResource("12_dvl3g")

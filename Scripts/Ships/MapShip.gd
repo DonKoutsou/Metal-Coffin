@@ -3,7 +3,6 @@ extends Node2D
 class_name MapShip
 
 @export var RadarShape : Area2D
-@export var VisualShape : Area2D
 @export var ElintShape : Area2D
 @export var BodyShape : Area2D
 
@@ -47,8 +46,6 @@ func _enter_tree() -> void:
 	ElintShape.connect("area_exited", BodyLeftElint)
 	RadarShape.connect("area_entered", BodyEnteredRadar)
 	RadarShape.connect("area_exited", BodyLeftRadar)
-	VisualShape.connect("area_entered", BodyEnteredRadar)
-	VisualShape.connect("area_exited", BodyLeftRadar)
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
 	
@@ -164,7 +161,10 @@ func ChangeSimulationSpeed(i : int):
 func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
-	RadarShape.get_node("CollisionShape2D").set_deferred("disabled", !$Radar/CollisionShape2D.disabled)
+	if (RadarWorking):
+		UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+	else:
+		UpdateVizRange(0)
 	for g in GetDroneDock().DockedDrones:
 		g.ToggleRadar()
 		
@@ -219,7 +219,7 @@ func angle_to_direction(angle: float) -> String:
 func UpdateVizRange(rang : float):
 	print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = rang
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 350)
 func UpdateELINTTRange(rang : float):
 	var ElintRangeCollisionShape = ElintShape.get_node("CollisionShape2D")
 	#scalling collision
@@ -358,6 +358,8 @@ func ForceSteer(Rotation : float) -> void:
 	shadow.rotation = rotation
 		
 func ShipLookAt(pos : Vector2) -> void:
+	if (is_equal_approx(global_position.angle_to_point(pos), global_rotation)):
+		return
 	look_at(pos)
 	var piv = $PlayerShipSpr/ShadowPivot as Node2D
 	piv.global_rotation = deg_to_rad(-90)
@@ -388,11 +390,13 @@ func BodyLeftElint(Body: Area2D) -> void:
 		return
 	ElintContacts.erase(Body.get_parent())
 	#Elint.emit(false, 0)
-	
+
+var SeenByRadar : Array[HostileShip] = []
 func BodyEnteredRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
 		Parent.OnShipSeen(self)
+		SeenByRadar.append(Parent)
 	else : if (Parent is MapSpot):
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()
@@ -401,7 +405,8 @@ func BodyLeftRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
 		Parent.OnShipUnseen(self)
-
+		SeenByRadar.erase(Parent)
+		
 func BodyEnteredBody(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
@@ -411,7 +416,6 @@ func BodyEnteredBody(Body : Area2D) -> void:
 func BodyLeftBody(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
-		Parent.CurrentlyVisiting = false
 		RemovePort()
 
 func GetShipBodyArea() -> Area2D:

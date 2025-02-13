@@ -60,6 +60,7 @@ func CopyStats(Cpt : Captain) -> void:
 	ShipIcon = Cpt.ShipIcon
 	ShipCallsign = Cpt.ShipCallsign
 	MappedStats = Cpt.MappedStats
+	ProvidingFunds = Cpt.ProvidingFunds
 	for g in Cpt.CaptainStats:
 		CaptainStats.append(g.duplicate(true))
 		

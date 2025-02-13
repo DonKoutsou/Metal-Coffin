@@ -36,15 +36,16 @@ func GetShipName() -> String:
 	return MissileName
 
 func _ready() -> void:
-	#
+	
 	Paused = SimulationManager.IsPaused()
-	var s = DeletableSound.new()
-	s.stream = MissileLaunchSound
-	s.volume_db = -5
-	s.bus = "MapSounds"
-	s.autoplay = true
-	s.max_distance = 20000
-	get_parent().add_child(s)
+	if (FiredBy != HostileShip):
+		var s = DeletableSound.new()
+		s.stream = MissileLaunchSound
+		s.volume_db = -5
+		s.bus = "MapSounds"
+		s.autoplay = true
+		s.max_distance = 20000
+		get_parent().add_child(s)
 	$AccelPosition.position.x = Speed
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

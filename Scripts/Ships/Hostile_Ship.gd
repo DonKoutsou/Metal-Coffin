@@ -40,10 +40,7 @@ func  _ready() -> void:
 		UpdateELINTTRange(ElintRange)
 
 	var Visual = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
-	if (Visual == 0):
-		RadarShape.queue_free()
-	else:
-		UpdateVizRange(Visual)
+	UpdateVizRange(Visual)
 	
 	if (!Patrol):
 		SetSpeed(0)
@@ -70,11 +67,13 @@ func  _ready() -> void:
 		
 		var bb = Blackboard.new()
 		add_child(bb)
-		
+		bb.set_value("TickRate", 1)
 		BTree.blackboard = bb
 		ToggleDocked(Docked)
 		add_child(BTree)
-		
+		if (OS.get_name() == "Android"):
+			BTree.tick_rate = 10
+		bb.set_value("TickRate", BTree.tick_rate)
 	TogglePause(SimulationManager.IsPaused())
 	#MapPointerManager.GetInstance().AddShip(self, false)
 	#$Elint.connect("area_entered", _on_elint_area_entered)
@@ -174,6 +173,7 @@ func RemovePort():
 		g.CurrentPort = null
 
 func IntersectPusruing() -> Vector2:
+	var ms = Time.get_ticks_msec()
 	# Get the current position and velocity of the ship
 	var ship_position
 	var ship_velocity
@@ -186,6 +186,7 @@ func IntersectPusruing() -> Vector2:
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
+	print("Calculating Intersection Point took " + var_to_str(Time.get_ticks_msec() - ms) + " msec")
 	return predicted_position
 
 #//////////////////Area Events
@@ -213,6 +214,7 @@ func BodyLeftElint(area: Area2D) -> void:
 		return
 	ElintContacts.erase(area.get_parent())
 	ElintContact.emit(area.get_parent(), false)
+
 func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
 		OnEnemyVisualContact.emit(Body.get_parent(), self)
@@ -335,7 +337,7 @@ func GetCurrentDestination() -> Vector2:
 		destination = IntersectPusruing()
 	else : if(LastKnownPosition != Vector2.ZERO):
 		destination = LastKnownPosition
-		if (LastKnownPosition.distance_to(global_position) < 0.5):
+		if (LastKnownPosition.distance_to(global_position) <= 4):
 			OnPositionInvestigated.emit(LastKnownPosition)
 	else : if (Path.size() > 0):
 		destination = GetCity(Path[PathPart]).global_position

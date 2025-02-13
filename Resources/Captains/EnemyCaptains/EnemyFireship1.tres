@@ -76,4 +76,4 @@ ShipCallsign = "P1"
 StartingItems = Array[ExtResource("3_c5lqg")]([])
 CurrentPort = ""
 CheckForErrors = false
-ProvidingFunds = 0
+ProvidingFunds = 5000

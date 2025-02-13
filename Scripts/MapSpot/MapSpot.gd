@@ -16,7 +16,6 @@ var Pos : Vector2
 var Visited = false
 var Seen = false
 #bool to avoid sent drones colliding with current visited spot
-var CurrentlyVisiting = false
 var NeighboringCities : Array[String]
 var Connected
 
@@ -67,18 +66,7 @@ func SetSpotData(Data : MapSpotType) -> void:
 					if (z.PickedBy != null):
 						continue
 					SpotInfo = z as MapSpotCompleteInfo
-					#if (ID.PickedBy != null):
-					#continue
-					#SpotName = spotid.SpotName
-					#Evnt = spotid.Event
-					#EnemyCity = spotid.EnemyCity
-					#SpawnHostileShip = spotid.SpawnHostileShip
-					#PossibleDrops = spotid.PossibleDrops
-					#HostilePatrolToSpawn = spotid.HostilePatrolShipScene
-					#HostilePatrolName = spotid.HostilePatrolShipName
-					#HostileGarison = spotid.HostileShipScene
-					#HostileGarisonName = spotid.HostileShipName
-					
+
 					if (SpotInfo.EnemyCity):
 						add_to_group("EnemyDestinations")
 					#IDs.PossibleIds.erase(ID)
@@ -135,19 +123,6 @@ func AddMapSpot(PlayAnim : bool) -> void:
 	MapPointerManager.GetInstance().AddSpot( self, PlayAnim)
 	Seen = true
 	SimulationManager.GetInstance().TogglePause(true)
-#Called when drone visits a mapspot
-func OnSpotSeenByDrone(PlayAnim : bool = true) -> void:
-	call_deferred("AddMapSpot", PlayAnim)
-	
-#func OnSpotVisitedByDrone() -> void:
-	#if (!Analyzed):
-		#OnSpotAnalyzed()
-#func OnSpotAnalyzed(PlayAnim : bool = true) ->void:
-	#call_deferred("SpotAnalyzedSignal", PlayAnim)
-	#Analyzed = true
-	
-#func SpotAnalyzedSignal(PlayAnim: bool)-> void:
-	#SpotAnalazyed.emit(PlayAnim)
 
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
@@ -158,7 +133,6 @@ func PlaySound():
 	sound.play()
 
 func OnSpotAproached() -> void:
-	CurrentlyVisiting = true
 	SpotAproached.emit(self)
 	if (!Seen):
 		OnSpotSeen()

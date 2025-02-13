@@ -16,6 +16,8 @@ var Missiles : Dictionary
 
 var AvailableMissiles : Array[MissileItem]
 
+var Showing = false
+
 func UpdateConnectedShip(Ship : MapShip) -> void:
 	if (!Missiles.has(Ship)):
 		var MissileAr : Array[MissileItem] = []
@@ -128,9 +130,15 @@ func _on_dissarm_drone_button_2_pressed() -> void:
 	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
 
 func _on_toggle_drone_tab_pressed() -> void:
-	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
-	$AnimationPlayer.play("Show")
-	UpdateCrewSelect()
+	if ($AnimationPlayer.is_playing()):
+		await $AnimationPlayer.animation_finished	
+	if (!Showing):
+		$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
+		$AnimationPlayer.play("Show")
+		UpdateCrewSelect()
+		Showing = true
+	else:
+		_on_turn_off_button_pressed()
 		
 var SteeringDir : float = 0.0
 
@@ -179,7 +187,7 @@ func _on_turn_off_button_pressed() -> void:
 	if (Armed):
 		_on_dissarm_drone_button_2_pressed()
 	$AnimationPlayer.play("Hide")
-
+	Showing = false
 func _on_drone_range_slider_value_changed(value: float) -> void:
 	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4/Label2.text = var_to_str(value / 2)
 	#DroneDockEventH.OnDronRangeChanged(value)

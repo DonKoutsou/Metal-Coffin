@@ -39,8 +39,10 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$AnalyzeButton.add_to_group("UnmovableMapInfo")
 	SpotNameLabel.get_parent().add_to_group("UnmovableMapInfo")
-	
+	add_to_group("ZoomAffected")
+	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$AnalyzeButton.remove_from_group("UnmovableMapInfo")
 	SpotNameLabel.get_parent().remove_from_group("UnmovableMapInfo")
+	remove_from_group("ZoomAffected")

@@ -62,18 +62,15 @@ func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip and CommingBack):
 		var plship = area.get_parent() as PlayerShip
 		plship.GetDroneDock().PlayReturnSound()
-func BodyEnteredBody(area: Area2D) -> void:
+func BodyEnteredBody(Body: Area2D) -> void:
 	if (Docked):
 		return
-	if (area.get_parent() is MapSpot and !CommingBack):
-		var spot = area.get_parent() as MapSpot
-		if (spot.CurrentlyVisiting):
-			return
-		if (!spot.Seen):
-			spot.OnSpotSeenByDrone()
-		spot.OnSpotVisitedByDrone()
-	else : if (area.get_parent() == Command and CommingBack):
-		var plship = area.get_parent() as MapShip
+	var Parent = Body.get_parent()
+	if (Parent is MapSpot):
+		SetCurrentPort(Parent)
+		Parent.OnSpotAproached()
+	else : if (Parent == Command and CommingBack):
+		var plship = Body.get_parent() as MapShip
 		plship.GetDroneDock().DockDrone(self, true)
 		var MyDroneDock = GetDroneDock()
 		for g in MyDroneDock.DockedDrones:

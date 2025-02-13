@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=16 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" path="res://Scripts/Ships/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -30,14 +30,10 @@ radius = 150.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c58ob"]
 light_mode = 1
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_geuk5"]
-radius = 350.0
-
-[node name="Drone" type="Node2D" node_paths=PackedStringArray("RadarShape", "VisualShape", "ElintShape", "BodyShape") groups=["Ships", "ZoomAffected"]]
+[node name="Drone" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape") groups=["Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_p3smt")
 script = ExtResource("1_vfr1e")
 RadarShape = NodePath("Radar")
-VisualShape = NodePath("Visibility")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
@@ -115,14 +111,5 @@ z_index = 2
 material = SubResource("CanvasItemMaterial_c58ob")
 points = PackedVector2Array(0, 0, 10, 0)
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
-
-[node name="Visibility" type="Area2D" parent="."]
-disable_mode = 2
-collision_layer = 0
-collision_mask = 5
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visibility"]
-shape = SubResource("CircleShape2D_geuk5")
 
 [connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]

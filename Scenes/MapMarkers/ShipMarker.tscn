@@ -21,7 +21,7 @@ corner_detail = 1
 shadow_color = Color(1, 1, 1, 0.6)
 shadow_size = 3
 
-[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipNameLabel", "ShipSpeedLabel", "TimeSeenLabel", "ThreatLabel", "FuelLabel", "HullLabel", "DetailPanel", "ShipIcon") groups=["ZoomAffected"]]
+[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipNameLabel", "ShipSpeedLabel", "TimeSeenLabel", "ThreatLabel", "FuelLabel", "HullLabel", "DetailPanel", "ShipIcon")]
 z_index = 1
 use_parent_material = true
 layout_mode = 3

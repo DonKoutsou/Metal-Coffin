@@ -76,4 +76,4 @@ ShipCallsign = "T4"
 StartingItems = Array[ExtResource("3_lxbyk")]([])
 CurrentPort = ""
 CheckForErrors = false
-ProvidingFunds = 0
+ProvidingFunds = 80000

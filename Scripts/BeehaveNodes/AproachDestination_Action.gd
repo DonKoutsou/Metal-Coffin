@@ -5,37 +5,39 @@ class_name ApreachDestinationAction
 
 func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MainShip = actor as HostileShip
-
-	
+	var TickRate = _blackboard.get_value("TickRate")
 	var SimulationSpeed = MainShip.SimulationSpeed
 	var Pos = MainShip.global_position
 	var DestinationPos = MainShip.GetCurrentDestination()
-	
+	var MainShipMaxSpeed = MainShip.GetShipMaxSpeed()
+
 	if (Pos.distance_to(DestinationPos) > 1):
 		var Speed = MainShip.GetShipSpeed()
 		var Cap = MainShip.Cpt
+		var MainShipFuelReserves = Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		var FuelToConsume = 0
 		
 		var DroneD = MainShip.GetDroneDock() as HostileDroneDock
 		for g in DroneD.DockedDrones:
 			var Ship = g as HostileShip
 			var DroneCap = Ship.Cpt
-			var dronefuel = (Speed / 10 / Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * SimulationSpeed
+			var dronefuel = (Speed / 10 / DroneCap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * TickRate * SimulationSpeed
 			if (DroneCap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > dronefuel):
 				DroneCap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK ,dronefuel)
-			else : if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= dronefuel):
-				Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, dronefuel)
+			else : if (MainShipFuelReserves - FuelToConsume >= dronefuel):
+				FuelToConsume += dronefuel
 		
-		var ftoconsume = Speed / 10 / MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * SimulationSpeed
-		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > ftoconsume):
-			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, ftoconsume)
-		else: if (DroneD.DronesHaveFuel(ftoconsume)):
-			DroneD.SyphonFuelFromDrones(ftoconsume)
+		FuelToConsume += Speed / 10 / MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * TickRate * SimulationSpeed
+		if (MainShipFuelReserves - FuelToConsume > 0):
+			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelToConsume)
+		else: if (DroneD.DronesHaveFuel(FuelToConsume)):
+			DroneD.SyphonFuelFromDrones(FuelToConsume)
 			
-		MainShip.SetSpeed(MainShip.GetShipMaxSpeed())
+		MainShip.SetSpeed(MainShipMaxSpeed)
 		#var SimulationSpeed = Ship.SimulationSpeed
-		MainShip.global_position += MainShip.GetShipSpeedVec() * SimulationSpeed
+		MainShip.global_position += MainShip.GetShipSpeedVec() * TickRate * SimulationSpeed
 		MainShip.ShipLookAt(DestinationPos)
-		return RUNNING
+		return SUCCESS
 	
 	MainShip.SetSpeed(0)
-	return RUNNING
+	return SUCCESS
