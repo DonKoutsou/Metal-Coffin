@@ -457,6 +457,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Name = GetShipName()
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()
 	stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
+	stats.Funds = Cpt.ProvidingFunds
 	return stats
 func GetShipMaxSpeed() -> float:
 	var Spd = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)

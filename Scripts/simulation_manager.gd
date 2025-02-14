@@ -14,8 +14,7 @@ static  var Instance : SimulationManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	simulation_notification.visible = false
-	simulation_notification.set_physics_process(false)
+	#simulation_notification.set_physics_process(false)
 
 static func GetInstance() -> SimulationManager:
 	return Instance
@@ -24,8 +23,7 @@ static func IsPaused() -> bool:
 	return Paused
 	
 func TogglePause(t : bool) -> void:
-	simulation_notification.visible = t
-	simulation_notification.set_physics_process(t)
+	simulation_notification.SimPaused(t)
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
 	#Inventory.GetInstance().OnSimulationPaused(t)
@@ -35,6 +33,7 @@ func TogglePause(t : bool) -> void:
 	
 
 func SetSimulationSpeed(Speed : int) -> void:
+	simulation_notification.SimSpeedUpdated(Speed)
 	SimulationSpeed = Speed
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
@@ -49,3 +48,4 @@ func SpeedToggle(t : bool) -> void:
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
 	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)
+	simulation_notification.SimSpeedUpdated(SimulationSpeed)

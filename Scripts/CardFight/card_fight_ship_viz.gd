@@ -43,3 +43,9 @@ func ToggleFire(t : bool) -> void:
 
 func IsOnFire() -> bool:
 	return $GPUParticles2D.visible
+
+func ShipDestroyed() -> void:
+	var tw = create_tween()
+	tw.tween_property(self, "modulation", Color(1,1,1,0), 1)
+	await tw.finished
+	queue_free()

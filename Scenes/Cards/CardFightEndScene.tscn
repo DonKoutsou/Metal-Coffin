@@ -1,11 +1,16 @@
-[gd_scene format=3 uid="uid://dfh0dm1lwcumv"]
+[gd_scene load_steps=3 format=3 uid="uid://dfh0dm1lwcumv"]
 
-[node name="Control" type="PanelContainer"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_wr76p"]
+[ext_resource type="Script" path="res://Scenes/Cards/card_fight_end_scene.gd" id="2_rajye"]
+
+[node name="CardFightEndScreen" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_wr76p")
+script = ExtResource("2_rajye")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -13,9 +18,26 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 60
 text = "VICTORY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center][color=#c19200]Funds Earned[/color] : 20000
+[color=#c19200]Damage Dealt[/color] : 42142
+[color=#c19200]Damage Received [/color]: 2141
+[color=#c19200]Damage Negated[/color] : 120
+"
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Continue"
+
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

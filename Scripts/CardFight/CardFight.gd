@@ -6,10 +6,15 @@ class_name Card_Fight
 @export var ShipVizScene : PackedScene
 @export var Cards : Array[CardStats]
 @export var ActionAnim : PackedScene
-
+@export var EndScene : PackedScene
 @onready var offensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/OffensiveCardPlecements
 @onready var deffensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/DeffensiveCardPlecements
 @onready var selected_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/HBoxContainer2/SelectedCardPlecements
+
+var DamageDone : float = 0
+var DamageGot : float = 0
+var DamageNeg : float = 0
+var FundsToWin : float = 0
 
 var Energy : int = 4
 
@@ -43,6 +48,8 @@ func _ready() -> void:
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
 	ShipTurns.sort_custom(speed_comparator)
+	for g in EnemyShips:
+		FundsToWin += g.Funds
 	#for g in PlayerShips:
 		#AddShip(g, true)
 	for g in ShipTurns:
@@ -84,7 +91,7 @@ func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
 
 func RemoveShip(Ship : BattleShipStats) -> void:
 	var index = ShipTurns.find(Ship)
-	ShipsViz[index].queue_free()
+	ShipsViz[index].ShipDestroyed()
 	ShipsViz.remove_at(index)
 	ShipTurns.erase(Ship)
 	PlayerShips.erase(Ship)
@@ -149,13 +156,21 @@ func StartActionPerformPhase() -> void:
 				if (HasDeff):
 					Actions[Target].erase(Action.CounteredBy)
 					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
+					if (PlayerShips.has(Ship)):
+						DamageNeg += Action.GetDamage() * Ship.FirePower
 				else:
 					if (Action.CauseFire()):
 						if (TrySetFire()):
 							ToggleFireToShip(Target, true)
 					Target.Hull -= Action.GetDamage() * Ship.FirePower
+					
+					if (PlayerShips.has(Ship)):
+						DamageDone += Action.GetDamage() * Ship.FirePower
+					else:
+						DamageGot += Action.GetDamage() * Ship.FirePower
+					
 					if (Target.Hull <= 0):
-						if (ShipDestroyed(Target)):
+						if (await ShipDestroyed(Target)):
 							return
 					else:
 						UpdateShipStats(Target)
@@ -180,7 +195,7 @@ func StartActionPerformPhase() -> void:
 			await(anim.AnimationFinished)
 			g.Hull -= 10
 			if (g.Hull <= 0):
-				if (ShipDestroyed(g)):
+				if (await ShipDestroyed(g)):
 					return
 			else:
 				UpdateShipStats(g)
@@ -195,14 +210,23 @@ func TrySetFire() -> bool:
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	RemoveShip(Ship)
 	if (EnemyShips.size() == 0):
+		await OnFightEnded(true)
 		CardFightEnded.emit(PlayerShips)
 		queue_free()
 		return true
 	if (PlayerShips.size() == 0):
+		await OnFightEnded(false)
 		CardFightEnded.emit(EnemyShips)
 		queue_free()
 		return true
 	return false
+
+func OnFightEnded(Won : bool) -> void:
+	var EndScene = EndScene.instantiate() as CardFightEndScene
+	EndScene.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg)
+	add_child(EndScene)
+	await EndScene.ContinuePressed
+	return 
 	
 func ShowEndCard() -> void:
 	pass

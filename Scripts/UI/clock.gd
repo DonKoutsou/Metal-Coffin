@@ -16,9 +16,10 @@ static var Instance : Clock
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	var rot = (360.0/12.0)*currentHour
-	$Hour.rotation = deg_to_rad(rot)
-	$Label.text = var_to_str(CurrentDay) + " / " + var_to_str(CurrentMonth) + " / " + var_to_str(CurrentYear)
+	#var rot = (360.0/12.0)*currentHour
+	#$Hour.rotation = deg_to_rad(rot)
+	$Label.text = var_to_str(currentHour) + " : " + var_to_str(roundi(currentMin))
+	$Label2.text = var_to_str(CurrentDay) + " / " + var_to_str(CurrentMonth) + " / " + var_to_str(CurrentYear)
 static func GetInstance() -> Clock:
 	return Instance
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		if (currentHour >= 24):
 			currentHour = 0
 			CurrentDay += 1
-			$Label.text = var_to_str(CurrentDay) + " / " + var_to_str(CurrentMonth) + " / " + var_to_str(CurrentYear)
+			$Label2.text = var_to_str(CurrentDay) + " / " + var_to_str(CurrentMonth) + " / " + var_to_str(CurrentYear)
 			if (CurrentDay > GetDaysInMonth(CurrentMonth)):
 				CurrentDay = 1
 				CurrentMonth += 1
@@ -40,10 +41,11 @@ func _physics_process(delta: float) -> void:
 					CurrentYear += 1
 		currentMin = 0
 		
-	var rot = (360.0/60.0)*currentMin
-	$Min.rotation = deg_to_rad(rot)
-	var Hrot = (360.0/12.0)* currentHour
-	$Hour.rotation = deg_to_rad(Hrot + (rot / 12))
+	#var rot = (360.0/60.0)*currentMin
+	#$Min.rotation = deg_to_rad(rot)
+	#var Hrot = (360.0/12.0)* currentHour
+	#$Hour.rotation = deg_to_rad(Hrot + (rot / 12))
+	$Label.text = var_to_str(currentHour) + " : " + var_to_str(roundi(currentMin))
 
 func ToggleSimulation(t : bool) -> void:
 	SimulationPaused = t

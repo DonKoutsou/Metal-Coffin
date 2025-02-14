@@ -16,6 +16,6 @@ func UpDateFunds(NewAmm : int) -> void:
 	tw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 
 func UpdateLabel(Amm : int) -> void:
-	$Label.text = "{0} {1}".format([Amm, FundsThing])
+	$Label.text = "{0}".format([Amm])
 	CurrentAmm = Amm
 	$AudioStreamPlayer2D.play()

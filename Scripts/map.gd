@@ -504,6 +504,9 @@ func _on_simulation_button_pressed() -> void:
 	simmulationPaused = !SimulationManager.GetInstance().Paused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
 
+func SimulationSpeedChanged(NewSpeed : int) -> void:
+	SimulationManager.GetInstance().SetSimulationSpeed(NewSpeed)
+
 func _on_speed_simulation_button_down() -> void:
 	SimulationManager.GetInstance().SpeedToggle(true)
 

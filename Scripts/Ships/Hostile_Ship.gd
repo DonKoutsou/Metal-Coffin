@@ -352,6 +352,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = Cpt.CaptainName
+	stats.Funds = Cpt.ProvidingFunds
 	return stats
 func GetCity(CityName : String) -> MapSpot:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")

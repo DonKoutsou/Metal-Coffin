@@ -10,3 +10,4 @@ class_name BattleShipStats
 @export var Speed : float
 @export var Cards : Dictionary
 @export var Ammo : Dictionary
+@export var Funds : int

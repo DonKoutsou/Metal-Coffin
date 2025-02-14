@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=63 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="26_6asdg"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="26_h8cr4"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/SteeringWheelUI.tscn" id="28_dgqcy"]
+[ext_resource type="Texture2D" uid="uid://f1i2ou41obw" path="res://Assets/UIPiecies/Screen/Buttons2_Camera 1_FullQuality.png" id="28_vb2m5"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/thrust_slider.tscn" id="29_ugh6x"]
 [ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="33_sh4yx"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/Clock.tscn" id="33_v4i0p"]
@@ -38,25 +39,21 @@
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="36_4epqv"]
 [ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="36_mcl7k"]
 [ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="37_nythg"]
-[ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality.png" id="38_iludl"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="38_non32"]
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="38_vyrfo"]
-[ext_resource type="Texture2D" uid="uid://5mvc2lmslh6d" path="res://Assets/UIPiecies/Screen/Button9_Camera 1_FullQuality.png" id="40_17tgj"]
 [ext_resource type="BitMap" uid="uid://bws1mu52unesf" path="res://Assets/UIPiecies/ButtonAlpha.png" id="41_62ow1"]
-[ext_resource type="Texture2D" uid="uid://bh054v0wx0c0y" path="res://Assets/UIPiecies/Screen/Button11_Camera 1_FullQuality_pressed.png" id="42_8fqtt"]
-[ext_resource type="Texture2D" uid="uid://cjikrrpjhmdnl" path="res://Assets/UIPiecies/Screen/Button11_Camera 1_FullQuality.png" id="42_a2kw8"]
+[ext_resource type="Texture2D" uid="uid://cub3jskgpfw07" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality.png" id="41_i42nj"]
 [ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="42_jcl8h"]
+[ext_resource type="Texture2D" uid="uid://diws0gke4cls1" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality_Pressed.png" id="42_k34mj"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="43_dnalw"]
 [ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="43_fa10l"]
-[ext_resource type="Texture2D" uid="uid://dfn2y3vn7f8vm" path="res://Assets/UIPiecies/Screen/Button9_Camera 1_FullQuality_pressed.png" id="44_nv4nm"]
-[ext_resource type="Texture2D" uid="uid://dlaoa5dhbn3h5" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality_Pressed.png" id="45_mo7js"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/AnimatedDroneGas.tscn" id="45_ssr13"]
 [ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="46_nn36s"]
 [ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality_pressed.png" id="47_jihcv"]
 [ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="48_5i6gs"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="48_xvuot"]
-[ext_resource type="Texture2D" uid="uid://cbfjaei6s76i" path="res://Assets/UIPiecies/Screen/Buttons_Camera 1_FullQuality.png" id="49_0pvp7"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="49_j4oow"]
+[ext_resource type="PackedScene" uid="uid://c0fey2gjg1mvv" path="res://Scenes/SimNob.tscn" id="54_lhpu3"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
@@ -353,15 +350,15 @@ offset_bottom = 311.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("49_0pvp7")
+texture = ExtResource("28_vb2m5")
 expand_mode = 1
 
 [node name="ThrustSlider" parent="OuterUI" instance=ExtResource("29_ugh6x")]
 layout_mode = 1
-offset_left = -124.0
-offset_top = -336.0
-offset_right = -23.0
-offset_bottom = -41.0
+offset_left = -117.0
+offset_top = -334.0
+offset_right = -16.0
+offset_bottom = -43.0
 
 [node name="DroneButton" type="TextureButton" parent="OuterUI" groups=["Buttons"]]
 layout_mode = 1
@@ -370,14 +367,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -238.0
-offset_top = -262.0
-offset_right = -180.0
+offset_left = -232.0
+offset_top = -269.0
+offset_right = -208.0
 offset_bottom = -222.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("38_iludl")
-texture_pressed = ExtResource("45_mo7js")
+texture_normal = ExtResource("38_non32")
+texture_pressed = ExtResource("43_dnalw")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -401,6 +398,7 @@ texture = ExtResource("37_nythg")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="OuterUI/DroneButton"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -429,14 +427,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -238.0
-offset_top = -197.0
-offset_right = -180.0
+offset_left = -232.0
+offset_top = -204.0
+offset_right = -208.0
 offset_bottom = -157.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("38_iludl")
-texture_pressed = ExtResource("45_mo7js")
+texture_normal = ExtResource("38_non32")
+texture_pressed = ExtResource("43_dnalw")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -460,6 +458,7 @@ texture = ExtResource("38_vyrfo")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="OuterUI/q"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -488,10 +487,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -238.0
-offset_top = -133.0
-offset_right = -180.0
-offset_bottom = -92.0
+offset_left = -231.0
+offset_top = -138.0
+offset_right = -209.0
+offset_bottom = -93.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("33_sh4yx")
@@ -501,6 +500,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="OuterUI/RadarButton"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -572,24 +572,25 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -158.0
-offset_top = -67.0
-offset_right = -101.0
-offset_bottom = -28.0
+offset_left = -154.0
+offset_top = -48.0
+offset_right = -107.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
-texture_normal = ExtResource("42_a2kw8")
-texture_pressed = ExtResource("42_8fqtt")
+texture_normal = ExtResource("38_non32")
+texture_pressed = ExtResource("43_dnalw")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
 [node name="Label" type="Label" parent="OuterUI/ControlledShipSwitch"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -618,19 +619,20 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -238.0
-offset_top = -4.0
-offset_right = -180.0
-offset_bottom = 36.0
+offset_left = -232.0
+offset_top = -10.0
+offset_right = -208.0
+offset_bottom = 37.0
 grow_horizontal = 0
 grow_vertical = 2
-texture_normal = ExtResource("40_17tgj")
-texture_pressed = ExtResource("44_nv4nm")
+texture_normal = ExtResource("38_non32")
+texture_pressed = ExtResource("43_dnalw")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="OuterUI/MarkerPlecement"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -660,24 +662,25 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -237.0
-offset_top = -67.0
-offset_right = -180.0
-offset_bottom = -28.0
+offset_left = -232.0
+offset_top = -48.0
+offset_right = -185.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
-texture_normal = ExtResource("38_non32")
-texture_pressed = ExtResource("43_dnalw")
+texture_normal = ExtResource("41_i42nj")
+texture_pressed = ExtResource("42_k34mj")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
 [node name="Label" type="Label" parent="OuterUI/ControlledShipReturn"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -706,10 +709,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -238.0
-offset_top = -67.0
-offset_right = -180.0
-offset_bottom = -27.0
+offset_left = -231.0
+offset_top = -73.0
+offset_right = -209.0
+offset_bottom = -28.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("48_xvuot")
@@ -720,6 +723,7 @@ stretch_mode = 0
 flip_v = true
 
 [node name="Label" type="Label" parent="OuterUI/LandButton"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -741,15 +745,16 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="SpeedSimulation" type="TextureButton" parent="OuterUI" groups=["Buttons"]]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -79.0
+offset_left = -80.0
 offset_top = -549.0
-offset_right = -23.0
+offset_right = -24.0
 offset_bottom = -494.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -788,10 +793,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -79.0
-offset_top = -470.0
-offset_right = -22.0
-offset_bottom = -414.0
+offset_left = -48.0
+offset_top = -477.0
+offset_right = -26.0
+offset_bottom = -432.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("43_fa10l")
@@ -801,6 +806,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="OuterUI/SimulationButton"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -829,10 +835,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -68.0
-offset_right = -22.0
-offset_bottom = -28.0
+offset_left = -72.0
+offset_top = -48.0
+offset_right = -26.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -840,8 +846,8 @@ size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("36_4epqv")
 action_mode = 0
-texture_normal = ExtResource("38_iludl")
-texture_pressed = ExtResource("45_mo7js")
+texture_normal = ExtResource("38_non32")
+texture_pressed = ExtResource("43_dnalw")
 texture_click_mask = ExtResource("33_x32n8")
 ignore_texture_size = true
 stretch_mode = 0
@@ -849,6 +855,7 @@ flip_h = true
 flip_v = true
 
 [node name="Label" type="Label" parent="OuterUI/InventoryButton"]
+visible = false
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -874,10 +881,10 @@ layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -213.0
-offset_top = -217.0
-offset_right = -122.0
-offset_bottom = -129.0
+offset_left = -206.0
+offset_top = -210.0
+offset_right = -115.0
+offset_bottom = -122.0
 grow_horizontal = 0
 
 [node name="Pause" type="TextureButton" parent="OuterUI" groups=["Buttons"]]
@@ -886,9 +893,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -79.0
-offset_top = 20.0
-offset_right = -22.0
+offset_left = -85.0
+offset_top = 32.0
+offset_right = -25.0
 offset_bottom = 77.0
 grow_horizontal = 0
 size_flags_horizontal = 0
@@ -908,14 +915,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -12.5
-offset_right = 20.0
-offset_bottom = 12.5
+offset_left = -27.0
+offset_top = -25.5
+offset_right = 27.0
+offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.651769, 0.651769, 0.651769, 1)
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1121,10 +1128,10 @@ anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -208.0
-offset_top = 30.0
-offset_right = -122.0
-offset_bottom = 59.0
+offset_left = -207.0
+offset_top = 35.0
+offset_right = -129.0
+offset_bottom = 62.0
 grow_horizontal = 0
 grow_vertical = 1
 
@@ -1160,6 +1167,17 @@ mouse_filter = 2
 texture = ExtResource("26_6asdg")
 expand_mode = 1
 
+[node name="SteeringWheel" parent="OuterUI" instance=ExtResource("54_lhpu3")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_top = -195.0
+offset_right = -58.0
+offset_bottom = -195.0
+grow_horizontal = 0
+
 [connection signal="GUI_Input" from="SubViewportContainer/ViewPort/InScreenUI" to="." method="_MAP_INPUT"]
 [connection signal="pressed" from="OuterUI/DroneButton" to="OuterUI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]
 [connection signal="pressed" from="OuterUI/q" to="OuterUI/ScreenUi/Missile Tab" method="_on_toggle_drone_tab_pressed"]
@@ -1175,3 +1193,4 @@ expand_mode = 1
 [connection signal="pressed" from="OuterUI/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="OuterUI/MapMarkerControls/ExitMapMarker" to="." method="_on_exit_map_marker_pressed"]
 [connection signal="pressed" from="OuterUI/MapMarkerControls/ClearLines" to="." method="_on_clear_lines_pressed"]
+[connection signal="StepChanged" from="OuterUI/SteeringWheel" to="." method="SimulationSpeedChanged"]
