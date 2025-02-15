@@ -26,7 +26,7 @@ func EnableDrone():
 	#set_physics_process(true)`
 	if (Altitude != 10000):
 		if (Landing):
-			LandingCanceled.emit()
+			LandingCanceled.emit(self)
 			Landing = false
 		TakeoffStarted.emit()
 		TakingOff = true

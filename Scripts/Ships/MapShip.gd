@@ -36,6 +36,8 @@ var TakingOff : bool = false
 signal TakeoffStarted
 signal TakeoffEnded(Ship : MapShip)
 
+signal PortChanged(P : MapSpot)
+
 signal Elint(T : bool, Lvl : int, Dir : String)
 var ElintContacts : Dictionary
 
@@ -262,6 +264,7 @@ func SetCurrentPort(Port : MapSpot):
 	var dr = GetDroneDock().DockedDrones
 	for g in dr:
 		g.SetCurrentPort(Port)
+	PortChanged.emit(Port)
 		
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd
@@ -279,6 +282,7 @@ func RemovePort():
 	var dr = GetDroneDock().DockedDrones
 	for g in dr:
 		g.RemovePort()
+	PortChanged.emit(null)
 func ShowingNotif() -> bool:
 	return $Notifications.get_child_count() > 0
 
@@ -391,12 +395,15 @@ func BodyLeftElint(Body: Area2D) -> void:
 	ElintContacts.erase(Body.get_parent())
 	#Elint.emit(false, 0)
 
-var SeenByRadar : Array[HostileShip] = []
+#var SeenByRadar : Array[HostileShip] = []
 func BodyEnteredRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
 		Parent.OnShipSeen(self)
-		SeenByRadar.append(Parent)
+		#SeenByRadar.append(Parent)
+	else: if (Parent is Missile):
+		if (Parent.FiredBy is HostileShip):
+			Parent.OnShipSeen(self)
 	else : if (Parent is MapSpot):
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()
@@ -405,7 +412,7 @@ func BodyLeftRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
 		Parent.OnShipUnseen(self)
-		SeenByRadar.erase(Parent)
+		#SeenByRadar.erase(Parent)
 		
 func BodyEnteredBody(Body : Area2D) -> void:
 	var Parent = Body.get_parent()

@@ -58,11 +58,7 @@ func _physics_process(_delta: float) -> void:
 		global_position = $AccelPosition.global_position
 		Distance -= $AccelPosition.position.x
 	if (Distance <= 0):
-		MapPointerManager.GetInstance().RemoveShip(self)
-		StopSeeing()
-		#if (FoundShip):
-			#MapPointerManager.GetInstance().RemoveShip(FoundShip)
-		queue_free()
+		Kill()
 
 func StopSeeing() -> void:
 	VisibleBy.clear()
@@ -86,30 +82,30 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_missile_body_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == FiredBy):
 		return
-	#MapPointerManager.GetInstance().RemoveShip(area)
-	#area.queue_free()
-	var IsRadar = area.get_collision_layer_value(2)
-	if (IsRadar):
-		if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-			OnShipSeen(area.get_parent())
-			#MapPointerManager.GetInstance().AddShip(self, false)
-	else:
-		if (FoundShips.size() == 0):
-			return
-		if (area.get_parent() is Missile):
-			area.get_parent().Kill()
-			Kill()
-			return
-		area.get_parent().Damage(Damage)
-		if (area.get_parent().IsDead()):
-			var s = DeletableSoundGlobal.new()
-			s.stream = MissileKillSound
-			s.volume_db = -10
-			s.bus = "UI"
-			s.autoplay = true
-			#s.max_distance = 20000
-			get_parent().add_child(s)
+	##MapPointerManager.GetInstance().RemoveShip(area)
+	##area.queue_free()
+	#var IsRadar = area.get_collision_layer_value(2)
+	#if (IsRadar):
+		#if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+			#OnShipSeen(area.get_parent())
+			##MapPointerManager.GetInstance().AddShip(self, false)
+	#else:
+	if (FoundShips.size() == 0):
+		return
+	if (area.get_parent() is Missile):
+		area.get_parent().Kill()
 		Kill()
+		return
+	area.get_parent().Damage(Damage)
+	if (area.get_parent().IsDead()):
+		var s = DeletableSoundGlobal.new()
+		s.stream = MissileKillSound
+		s.volume_db = -10
+		s.bus = "UI"
+		s.autoplay = true
+		#s.max_distance = 20000
+		get_parent().add_child(s)
+	Kill()
 		
 func _on_missile_body_area_exited(area: Area2D) -> void:
 	var IsRadar = area.get_collision_layer_value(2)

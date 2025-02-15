@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=16 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/simulation_notification.tscn" id="5_g51f2"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
+[ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="Script" path="res://Scripts/UI/pop_up_manager.gd" id="9_jvf02"]
 [ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="9_nmtsd"]
@@ -46,6 +47,34 @@ grow_horizontal = 2
 [node name="MapMarkerEditor" parent="Control3" instance=ExtResource("4_w862u")]
 layout_mode = 1
 
+[node name="SimulationNotification" parent="Control3" instance=ExtResource("5_g51f2")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -19.0
+offset_top = 19.0
+offset_right = -19.0
+offset_bottom = 106.0
+grow_horizontal = 0
+grow_vertical = 1
+
+[node name="PortNotification" parent="Control3" instance=ExtResource("7_4bt5v")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -75.0
+offset_right = -19.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 0
+
 [node name="UnderStatUI" type="Control" parent="Control3"]
 process_mode = 1
 layout_mode = 1
@@ -60,17 +89,6 @@ mouse_filter = 2
 visible = false
 layout_mode = 1
 mouse_force_pass_scroll_events = false
-
-[node name="SimulationNotification" parent="Control3" instance=ExtResource("5_g51f2")]
-layout_mode = 1
-anchors_preset = 5
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_left = 331.0
-offset_top = 0.0
-offset_right = 371.0
-offset_bottom = 87.0
-grow_vertical = 1
 
 [node name="PauseContainer" type="PanelContainer" parent="Control3"]
 process_mode = 3

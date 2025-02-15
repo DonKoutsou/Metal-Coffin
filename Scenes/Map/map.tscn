@@ -262,6 +262,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -273,10 +277,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -35.0
-offset_top = -104.0
-offset_right = -949.0
-offset_bottom = -445.0
+offset_left = 82.0
+offset_top = -130.0
+offset_right = -832.0
+offset_bottom = -471.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -305,10 +309,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -121.0
-offset_top = -72.0
-offset_right = -1085.0
-offset_bottom = -467.0
+offset_left = -135.0
+offset_top = -47.0
+offset_right = -1099.0
+offset_bottom = -442.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.290599
@@ -1121,20 +1125,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Fund_Container" parent="OuterUI" instance=ExtResource("49_j4oow")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-offset_left = -207.0
-offset_top = 35.0
-offset_right = -129.0
-offset_bottom = 62.0
-grow_horizontal = 0
-grow_vertical = 1
-
 [node name="ScreenFrame4" type="TextureRect" parent="OuterUI"]
 layout_mode = 1
 anchors_preset = 15
@@ -1177,6 +1167,20 @@ offset_top = -195.0
 offset_right = -58.0
 offset_bottom = -195.0
 grow_horizontal = 0
+
+[node name="Fund_Container" parent="OuterUI" instance=ExtResource("49_j4oow")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -101.0
+offset_top = 28.0
+offset_right = -101.0
+offset_bottom = 115.0
+grow_horizontal = 0
+grow_vertical = 1
 
 [connection signal="GUI_Input" from="SubViewportContainer/ViewPort/InScreenUI" to="." method="_MAP_INPUT"]
 [connection signal="pressed" from="OuterUI/DroneButton" to="OuterUI/ScreenUi/DroneTab" method="_on_toggle_drone_tab_pressed"]
