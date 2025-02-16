@@ -18,7 +18,7 @@ func Steer(Rotation : float) -> void:
 	super(Rotation)
 
 func AccelerationChanged(value: float) -> void:
-	if (CommingBack or Docked):
+	if (Docked):
 		return
 	super(value)
 

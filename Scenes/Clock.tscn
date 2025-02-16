@@ -1,32 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://diq2p5s5u6bc0"]
+[gd_scene load_steps=4 format=3 uid="uid://diq2p5s5u6bc0"]
 
 [ext_resource type="Script" path="res://Scripts/UI/clock.gd" id="1_1k7lr"]
-[ext_resource type="Texture2D" uid="uid://u6qd6o0jhpg4" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="2_es0ac"]
-[ext_resource type="Texture2D" uid="uid://bpb6rygwl5stf" path="res://Assets/UIPiecies/clockwhite.png" id="2_p6dw0"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="4_s5u7i"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c63ko"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32s5e"]
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.615304, 0.57196, 0.322451, 1)
+border_color = Color(0.483, 100, 0.381, 1)
 border_blend = true
-corner_radius_top_left = 80
-corner_radius_top_right = 80
-corner_radius_bottom_right = 80
-corner_radius_bottom_left = 80
-corner_detail = 20
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-shadow_size = 4
+anti_aliasing = false
 
 [node name="Clock" type="Control" groups=["Clock", "Pausable"]]
 layout_mode = 3
@@ -43,57 +28,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1k7lr")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 83.5
-offset_top = -83.0
-offset_right = 249.5
-offset_bottom = 83.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 1.57079
-texture = ExtResource("2_es0ac")
-expand_mode = 1
-
 [node name="Panel" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -61.0
-offset_top = -61.0
-offset_right = 61.0
-offset_bottom = 61.0
+offset_left = 49.5
+offset_top = -23.0
+offset_right = 50.5
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_c63ko")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.615304, 0.57196, 0.322451, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.5
-offset_top = -61.0
-offset_right = 61.5
-offset_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_p6dw0")
-expand_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_32s5e")
 
 [node name="Hour" type="Line2D" parent="."]
 visible = false
@@ -131,7 +79,7 @@ theme_override_colors/font_color = Color(0.80768, 0.999816, 0.788471, 1)
 theme_override_colors/font_outline_color = Color(0.483, 100, 0.381, 1)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("4_s5u7i")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "10/4/3874"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -153,7 +101,7 @@ theme_override_colors/font_color = Color(0.80768, 0.999816, 0.788471, 1)
 theme_override_colors/font_outline_color = Color(0.483, 100, 0.381, 1)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("4_s5u7i")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "10/4/3874"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://djgy3lp61vapo"]
+[gd_scene load_steps=6 format=3 uid="uid://djgy3lp61vapo"]
 
 [ext_resource type="Script" path="res://Resources/Funds/Funds_Stat_container.gd" id="1_lghqb"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_gmtu8"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="5_o47we"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="7_xbk7s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1glc"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.483, 100, 0.381, 1)
+border_blend = true
+anti_aliasing = false
 
 [node name="Fund_Container" type="Control"]
 layout_mode = 3
@@ -12,9 +22,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -84.0
 offset_top = -43.0
-offset_right = -20.0
+offset_right = 44.0
 offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -26,13 +36,17 @@ PlayerWallet = ExtResource("2_gmtu8")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -133.0
-offset_right = -2.0
-offset_bottom = 33.0
-grow_horizontal = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = -16.5
+offset_right = 65.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.80768, 0.999816, 0.788471, 1)
 theme_override_colors/font_outline_color = Color(0.483, 100, 0.381, 1)
 theme_override_constants/outline_size = 1
@@ -47,3 +61,18 @@ vertical_alignment = 1
 stream = ExtResource("5_o47we")
 volume_db = -17.5
 pitch_scale = 0.6
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 46.0
+offset_top = -15.5
+offset_right = 49.0
+offset_bottom = -14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y1glc")

@@ -77,5 +77,6 @@ expand_mode = 1
 stream = ExtResource("4_w1h5k")
 volume_db = -5.0
 pitch_scale = 0.88
+bus = &"UI"
 
 [connection signal="gui_input" from="TextureButton" to="." method="_on_texture_rect_gui_input"]

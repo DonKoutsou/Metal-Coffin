@@ -85,16 +85,16 @@ func UpdateInvestigationPos(newpos : Vector2, originship : MapShip) -> void:
 				z.LastKnownPosition = newpos
 	print("Investigation position updated to : " + var_to_str(newpos))
 	
-func InvestigationOrderComplete(Pos : Vector2) -> void:
+func InvestigationOrderComplete(Info : VisualLostInfo) -> void:
 	for g in InvestigationOrders:
-		if (g.Target == Pos):
+		if (g.Target == Info.Position):
 			for z in g.Receivers:
 				z.disconnect("OnPositionInvestigated", InvestigationOrderComplete)
 				z.LastKnownPosition = Vector2.ZERO
 				#z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
-			print("Position : " + var_to_str(Pos) + "has been investigated.")
+			print("Position : " + var_to_str(Info.Position) + "has been investigated.")
 			return
 	
 #SIGNAL RECEIVERS///////////////////////////////////////////////////
@@ -102,7 +102,14 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
 	#DissconnectSignals(Ship)
 	if (Ship.GetDroneDock().DockedDrones.size() > 0):
-		var NewCommander = Ship.GetDroneDock().DockedDrones[0]
+		var NewCommander = Ship.GetDroneDock().DockedDrones[0] as HostileShip
+		var BT = Ship.BTree
+		if (BT != null):
+			Ship.remove_child(BT)
+			NewCommander.addchild(BT)
+			NewCommander.BTree = BT
+			NewCommander.Path = Ship.Path
+			NewCommander.PathPart = Ship.PathPart
 		var DockedDrones = []
 		DockedDrones.append_array(Ship.GetDroneDock().DockedDrones)
 		for g in DockedDrones:
@@ -157,13 +164,22 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 		if (IsShipBeingPursued(Ship)):
 			PursuitOrderCanceled(Ship)
 		if (!Ship.IsDead()):
-			EnemyPositionsToInvestigate[Ship] = Ship.global_position
-
+			var Info = VisualLostInfo.new()
+			Info.Position = Ship.global_position
+			Info.Speed = Ship.GetShipSpeed()
+			Info.Direction = Ship.global_rotation
+			EnemyPositionsToInvestigate[Ship] = Info
 #func OnPositionInvestigated(Pos : Vector2) -> void:
 	#for g in EnemyPositionsToInvestigate.size():
 		#if (EnemyPositionsToInvestigate.values()[g] == Pos):
 			#EnemyPositionsToInvestigate.erase(EnemyPositionsToInvestigate.keys()[g])
 			#break
+func AproximatePositionOnIntercept(HunterPos : Vector2, HunsterSpeed : float, Pos : Vector2, Speed : float) -> Vector2:
+
+	var time_to_interception = (HunterPos.distance_to(Pos)) / HunsterSpeed
+
+	# Calculate the predicted interception point
+	return Pos + Speed * time_to_interception
 
 func OnDestinationReached(Ship : HostileShip) -> void:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")

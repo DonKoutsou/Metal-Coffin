@@ -84,7 +84,7 @@ func ClusterCalcFinished() -> void:
 	queue_redraw()
 
 var ClusterTH : Thread
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (ClusterTH == null):
 		ClusterTH = Thread.new()
 		ClusterTH.start(ThreadProcessIntersections)

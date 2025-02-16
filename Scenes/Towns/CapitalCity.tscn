@@ -16,6 +16,7 @@ script = ExtResource("1_6k08a")
 SpotScene = ExtResource("2_ihubk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
+z_index = -1
 z_as_relative = false
 material = SubResource("CanvasItemMaterial_ustqo")
 scale = Vector2(2, 2)

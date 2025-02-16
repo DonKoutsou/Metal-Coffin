@@ -54,8 +54,8 @@ func _physics_process(delta: float) -> void:
 	if (d > 0):
 		return
 	d = 0.3
-	
-	UpdateAvailableMissiles()
+	if (ConnectedShip != null):
+		UpdateAvailableMissiles()
 	
 func RegisterShip(Dr : Drone, _Target : MapShip):
 	if (!Missiles.has(Dr)):

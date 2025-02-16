@@ -137,7 +137,6 @@ func UpdateFuelBar(AddedFuel : float):
 func UpdateRepairBar(AddedRepair : float):
 	if (AddedRepair * RepairpricePerRepairValue > PlayerWallet.Funds):
 		AddedRepair = PlayerWallet.Funds / RepairpricePerRepairValue
-
 	var NewPlRepair = PlHull + BoughtRepairs + AddedRepair
 	
 	if (NewPlRepair < PlHull):

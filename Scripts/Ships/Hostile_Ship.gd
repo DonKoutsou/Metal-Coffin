@@ -17,6 +17,7 @@ var PathPart : int = 0
 var RefuelSpot : MapSpot
 var VisibleBy : Array[Node2D]
 var BTree : BeehaveTree
+var UseDefaultBehavior : bool = false
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
@@ -41,10 +42,13 @@ func  _ready() -> void:
 
 	var Visual = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	UpdateVizRange(Visual)
-	
+	TogglePause(SimulationManager.IsPaused())
 	if (!Patrol):
 		SetSpeed(0)
+		UseDefaultBehavior = true
 	else:
+		if (Command != null):
+			return
 		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 		var nextcity = cities.find(CurrentPort) + Direction
 		if (nextcity < 0 or nextcity > cities.size() - 1):
@@ -74,15 +78,27 @@ func  _ready() -> void:
 		if (OS.get_name() == "Android"):
 			BTree.tick_rate = 10
 		bb.set_value("TickRate", BTree.tick_rate)
-	TogglePause(SimulationManager.IsPaused())
+	
 	#MapPointerManager.GetInstance().AddShip(self, false)
 	#$Elint.connect("area_entered", _on_elint_area_entered)
 	#$Elint.connect("area_exited", _on_elint_area_exited)
 func _physics_process(delta: float) -> void:
 	UpdateElint(delta)
-	if (Paused):
-		return
 	
+	if (UseDefaultBehavior):
+		if (Paused):
+			return
+			
+		#if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)):
+			#Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, 0.05 * SimulationSpeed)
+			#CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
+
+		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL)):
+			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.02 * SimulationSpeed)
+		
+		if (!Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)):
+			Cpt.RefillResource(STAT_CONST.STATS.MISSILE_SPACE ,0.005 * SimulationSpeed)
+
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
 	missile.FiredBy = self
@@ -94,8 +110,9 @@ func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 		missile.global_position = global_position
 	missile.look_at(Pos)
 	
-	if (CurrentPort != null):
-		Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
+	#Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, 1)
+	#if (CurrentPort != null):
+		#Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
 	#Reloading = 4
 
 func UpdateElint(delta: float) -> void:
@@ -158,7 +175,7 @@ func SetNewDestination(DistName : String) -> void:
 	PathPart = 1
 func SetCurrentPort(P : MapSpot) -> void:
 	CurrentPort = P
-	Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
+	#Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
 	#if (P == RefuelSpot):
 		#RefuelSpot = null
 	for g in GetDroneDock().DockedDrones:
@@ -346,7 +363,7 @@ func GetCurrentDestination() -> Vector2:
 	return destination
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
 	stats.Speed = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 	stats.ShipIcon = Cpt.ShipIcon
@@ -405,6 +422,11 @@ func IsDamaged() -> bool:
 		if (g.IsDamaged()):
 			return true
 	return !Cpt.IsResourceFull(STAT_CONST.STATS.HULL)
+func NeedsReload() -> bool:
+	for g in GetDroneDock().DockedDrones:
+		if (g.NeedsReload()):
+			return true
+	return !Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)
 func TogglePause(t : bool):
 	Paused = t
 	if (t and BTree != null):

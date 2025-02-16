@@ -11,14 +11,15 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var TickRate = _blackboard.get_value("TickRate")
 	var RefuelSpeed = 0.05 * SimulationSpeed * TickRate
 	var RepairSpeed = 0.02 * SimulationSpeed * TickRate
+	var ReloadSpeed = 0.005 * SimulationSpeed * TickRate
 	MainShip.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, RefuelSpeed)
 	MainShip.Cpt.RefillResource(STAT_CONST.STATS.HULL, RepairSpeed)
-	
+	MainShip.Cpt.RefillResource(STAT_CONST.STATS.MISSILE_SPACE, ReloadSpeed)
 	for g in MainShip.GetDroneDock().DockedDrones:
 		g.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, RefuelSpeed)
-		MainShip.Cpt.RefillResource(STAT_CONST.STATS.HULL, RepairSpeed)
-	
-	if (!MainShip.IsFuelFull() or MainShip.IsDamaged()):
+		g.Cpt.RefillResource(STAT_CONST.STATS.HULL, RepairSpeed)
+		g.Cpt.RefillResource(STAT_CONST.STATS.MISSILE_SPACE, ReloadSpeed)
+	if (!MainShip.IsFuelFull() or MainShip.IsDamaged() or MainShip.NeedsReload()):
 		return RUNNING
 	
 	#Ship.SetSpeed(0)

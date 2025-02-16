@@ -38,7 +38,7 @@ func GetShipName() -> String:
 func _ready() -> void:
 	
 	Paused = SimulationManager.IsPaused()
-	if (FiredBy != HostileShip):
+	if (FiredBy is not HostileShip):
 		var s = DeletableSound.new()
 		s.stream = MissileLaunchSound
 		s.volume_db = -5

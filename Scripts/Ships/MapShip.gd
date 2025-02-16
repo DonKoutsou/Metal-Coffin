@@ -113,7 +113,7 @@ func _physics_process(delta: float) -> void:
 			ShipDockActions.emit("Upgrading", false, 0)
 
 			
-	if (Docked):
+	if (Docked or GetShipSpeedVec() == Vector2.ZERO):
 		return
 	
 	var FuelConsumtion = $Aceleration.position.x / 10 / Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * SimulationSpeed

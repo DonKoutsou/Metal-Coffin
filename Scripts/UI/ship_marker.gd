@@ -132,7 +132,7 @@ func OnStatLow(StatName : String) -> void:
 	
 func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : float):
 	ShipNameLabel.text = ShipName
-	ShipSpeedLabel.text = "Speed " + var_to_str(ShipSpeed * 360) + "km/h"
+	ShipSpeedLabel.text = "Speed " + var_to_str(ShipSpeed * 360).replace(".0", "") + "km/h"
 	ShipCallsign.text = ShipCasllSign
 	
 func UpdateCameraZoom(NewZoom : float) -> void:
@@ -151,13 +151,13 @@ func UpdateLine()-> void:
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
 	var spd = roundi(Spd * 360)
-	ShipSpeedLabel.text = "Speed " + var_to_str(spd) + "km/h"
+	ShipSpeedLabel.text = "Spd " + var_to_str(spd).replace(".0", "") + "km/h"
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(Alt))
 func UpdateDroneFuel(amm : float, maxamm : float):
-	FuelLabel.text = "Fuel: {0} / {1}  Tons".format([amm, maxamm])
+	FuelLabel.text = "F: {0} / {1}".format([amm, maxamm])
 func UpdateDroneHull(amm : float, maxamm : float):
-	HullLabel.text = "Hull: {0} / {1}".format([amm, maxamm])
+	HullLabel.text = "H: {0} / {1}".format([amm, maxamm])
 
 func ToggleTimeLastSeend(T : bool):
 	if (!T):

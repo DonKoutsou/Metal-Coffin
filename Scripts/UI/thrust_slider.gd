@@ -50,7 +50,7 @@ func _on_handle_gui_input(event: InputEvent) -> void:
 		Handle.position.y = newpos
 		accumulatedrelative = 0
 		$AudioStreamPlayer.play()
-		Input.vibrate_handheld(10)
+		Input.vibrate_handheld(30)
 		var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 		AccelerationChanged.emit(newval)
 		#$TextureRect/Light3.Toggle(newval > 0.7)
@@ -67,7 +67,7 @@ func _on_handle_gui_input(event: InputEvent) -> void:
 		Handle.position.y = newpos
 		accumulatedrelative = 0
 		$AudioStreamPlayer.play()
-		Input.vibrate_handheld(10)
+		Input.vibrate_handheld(30)
 		var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 		AccelerationChanged.emit(newval)
 		$TextureRect/Light3.Toggle(newval > 0.7)

@@ -57,10 +57,10 @@ func _physics_process(_delta: float) -> void:
 			CurrentStep += 1
 		else:
 			CurrentStep -= 1
-		if (CurrentStep == 11):
+		if (CurrentStep == Steps + 1):
 			CurrentStep = 1
 		else: if (CurrentStep == 0):
-			CurrentStep = 10
+			CurrentStep = Steps
 		print(CurrentStep)
 		StepChanged.emit(CurrentStep)
 		SteeringDir = 0
