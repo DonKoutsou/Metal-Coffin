@@ -124,6 +124,8 @@ func UpdateElint(delta: float) -> void:
 	var ClosestShip : MapShip
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g] as MapShip
+		if (!ship.RadarWorking):
+			continue
 		var lvl = ElintContacts.values()[g]
 		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		if (Newlvl > BiggestLevel):

@@ -1,17 +1,13 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://b5mce733abxqu"]
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://b5mce733abxqu"]
 
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Scenes/Cards/Extringuish.tres" id="1_wh627"]
 [ext_resource type="Texture2D" uid="uid://bcsiopa768823" path="res://Assets/Cards/fire-extinguisher.png" id="2_e2usa"]
 [ext_resource type="Texture2D" uid="uid://cb1wfsqw6e0iy" path="res://Assets/Cards/fire-extinguisher_Smol.png" id="3_jq3u0"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="7_db4f2"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="8_8of3a"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_ltqo5"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("8_8of3a")
-Upgrades = Array[ExtResource("7_db4f2")]([])
-UpgradeTime = 0.0
-IsDamaged = false
+script = ExtResource("4_ltqo5")
 ItemIcon = ExtResource("2_e2usa")
 ItemIconSmol = ExtResource("3_jq3u0")
 ItemName = "Fire Suppression Unit"

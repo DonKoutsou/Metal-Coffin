@@ -196,7 +196,11 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 		if (KnownEnemies.keys().has(Ship) or Ship.IsDead()):
 			return
 		print(Ship.GetShipName() + " has triggered an Elint sensor")
-		EnemyPositionsToInvestigate[Ship] = Ship.global_position
+		var Info = VisualLostInfo.new()
+		Info.Position = Ship.global_position
+		Info.Speed = Ship.GetShipSpeed()
+		Info.Direction = Ship.global_rotation
+		EnemyPositionsToInvestigate[Ship] = Info
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			UpdateInvestigationPos(Ship.global_position, Ship)
 #HELPER FUNCTIONS/////////////////////////////////////////////////

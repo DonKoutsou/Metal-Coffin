@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/MissileTab.gd" id="1_3wcnd"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="2_lb1ah"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="3_6s7wp"]
-[ext_resource type="Texture2D" uid="uid://dym5lf8i8ensg" path="res://Assets/UIPiecies/Screen/Panel_Camera 1_FullQuality.png" id="4_o5dt3"]
+[ext_resource type="Texture2D" uid="uid://bxec8bkr01ino" path="res://Assets/UIPiecies/Screen/Panel.png" id="4_qfjri"]
 [ext_resource type="PackedScene" uid="uid://bl1t8w4ot467w" path="res://Scenes/AnimatedButton.tscn" id="12_cxvvo"]
 [ext_resource type="Texture2D" uid="uid://bjkm8sbw8g0st" path="res://Assets/UIPiecies/dissarm_on_Camera 1.png" id="13_ycwvk"]
 [ext_resource type="Texture2D" uid="uid://bj2r2y882vpmo" path="res://Assets/UIPiecies/dissarmButton_Camera 1.png" id="14_cm273"]
@@ -122,7 +122,7 @@ offset_top = -90.0
 offset_right = 182.0
 offset_bottom = 74.0
 mouse_filter = 0
-texture = ExtResource("4_o5dt3")
+texture = ExtResource("4_qfjri")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect"]
@@ -134,7 +134,7 @@ offset_top = -10.0
 offset_right = 460.0
 offset_bottom = 154.0
 mouse_filter = 2
-texture = ExtResource("4_o5dt3")
+texture = ExtResource("4_qfjri")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Control/Control"]

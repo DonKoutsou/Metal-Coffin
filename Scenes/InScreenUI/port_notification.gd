@@ -21,6 +21,15 @@ func PortUpdated(NewPort : MapSpot) -> void:
 	if (NewPort == null):
 		modulate = PortUnAvailableCol
 		$SimulationNotification.text = "NO PORTS NEARBY\nPERSMISSION TO LAND\nDENIED"
+		$SimulationNotification2.text = ""
 	else:
 		modulate = PortAvailableCol
-		$SimulationNotification.text = "CURRENTLY FLYING OVER {0}\nPERSMISSION TO LAND\nGRANTED".format([NewPort.GetSpotName()])
+		$SimulationNotification.text = "FLYING OVER {0}\nPERSMISSION TO LAND\nGRANTED".format([NewPort.GetSpotName()])
+		var PortThings = ""
+		if (NewPort.HasFuel()):
+			PortThings += "faster and cheaper refuels\n"
+		if (NewPort.HasRepair()):
+			PortThings += "faster and cheaper repairs\n"
+		if (NewPort.HasUpgrade()):
+			PortThings += "Ship parts can be upgraded\n"
+		$SimulationNotification2.text = PortThings

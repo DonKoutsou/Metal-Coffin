@@ -72,7 +72,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
-text = "Munition Shop"
+text = "AMUNITION"
 
 [node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
@@ -80,7 +80,15 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
-text = "Refuel / Repair"
+text = "REFUEL / REPAIR"
+
+[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "UPGRADE"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

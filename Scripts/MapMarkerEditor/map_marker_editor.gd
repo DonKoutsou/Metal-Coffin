@@ -72,3 +72,6 @@ func LoadData(Dat : SD_MapMarkerEditor) -> void:
 		var newtext = TextScene.instantiate() as MapMarkerText
 		$"../../../MapPointerManager/MapLines".add_child(newtext)
 		newtext.LoadData(g)
+
+func ToggleVisibilidy(t : bool) -> void:
+	visible = t

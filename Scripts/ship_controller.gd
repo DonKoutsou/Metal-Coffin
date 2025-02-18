@@ -1,10 +1,11 @@
 extends Node
 
-class_name ShipContainer
+class_name ShipContoller
 
 @export var _Map : Map
 @export var DroneDockEventH : DroneDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
+@export var UIEventH : UIEventHandler
 @onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
 @export var HappeningUI : PackedScene
 
@@ -15,6 +16,13 @@ var ControlledShip : MapShip
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
+	UIEventH.connect("LandPressed", _on_land_button_pressed)
+	UIEventH.connect("RadarButtonPressed", _on_radar_button_pressed)
+	UIEventH.connect("RegroupPressed", _on_controlled_ship_return_pressed)
+	UIEventH.connect("AccelerationChanged", AccelerationChanged)
+	UIEventH.connect("SteerOffseted", SteerChanged)
+	UIEventH.connect("ShipSwitchPressed", _on_controlled_ship_swtich_range_changed)
+	
 	#call_deferred("SetInitialShip")
 	SetInitialShip()
 	
@@ -22,16 +30,13 @@ func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	AvailableShips.append(ControlledShip)
-	_Map.GetSteeringWheelUI().call_deferred("CopyShipSteer", ControlledShip)
-	#_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
-	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
-	_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
-	_Map.GetMissileUI().Initialise()
+
+	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	UIEventH.OnSteerDirForced(ControlledShip.GetSteer())
+	UIEventH.call_deferred("OnShipUpdated", ControlledShip)
+	_Map.GetInScreenUI().GetInventory().call_deferred("AddCharacter",ControlledShip.Cpt)
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	_Map.GetInScreenUI().GetInventory().ShipStats.call_deferred("UpdateValues")
-	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
-	_Map.GetThrustUI().connect("AccelerationChanged", AccelerationChanged)
-	_Map.GetSteeringWheelUI().connect("SteeringDitChanged", SteerChanged)
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
 func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
@@ -85,7 +90,8 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
 	fuel.LandedShip = Ship
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
-
+	UIEventH.OnScreenUIToggled(false)
+	UIEventH.OnButtonCoverToggled(true)
 func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 	var spot = Ship.CurrentPort as MapSpot
 	if (spot.PlayerFuelReserves != BFuel):
@@ -99,8 +105,9 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)
 	
+	UIEventH.OnScreenUIToggled(true)
 	#SimulationManager.GetInstance().TogglePause(false)
-
+	UIEventH.OnButtonCoverToggled(false)
 func Land(Spot : MapSpot) -> bool:
 	ControlledShip.HaltShip()
 	var PlayedEvent = false
@@ -109,10 +116,16 @@ func Land(Spot : MapSpot) -> bool:
 		happeningui.HappeningInstigator = ControlledShip
 		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
 		happeningui.PresentHappening(Spot.SpotInfo.Event)
+		UIEventH.OnScreenUIToggled(false)
+		UIEventH.OnButtonCoverToggled(true)
+		happeningui.connect("HappeningFinished", HappeningFinished)
 		PlayedEvent = true
 	Spot.OnSpotVisited()
 	return PlayedEvent
 	
+func HappeningFinished() -> void:
+	UIEventH.OnScreenUIToggled(true)
+	UIEventH.OnButtonCoverToggled(false)
 #Called from accelerator UI to change acceleration of currently controlled ship
 func AccelerationChanged(value: float) -> void:
 	ControlledShip.AccelerationChanged(value)
@@ -159,14 +172,19 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 		ControlledShip.ToggleFuelRangeVisibility(false)
 		ControlledShip = AvailableShips[currentcontrolled + 1]
 	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
-	_Map.GetThrustUI().ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	_Map.GetSteeringWheelUI().call_deferred("CopyShipSteer", ControlledShip)
+
+	
+	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	UIEventH.OnSteerDirForced(ControlledShip.GetSteer())
+	UIEventH.OnShipUpdated(ControlledShip)
+	#_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
+	#_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
+	#_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
+	#_Map.GetThrustUI().ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	#_Map.GetSteeringWheelUI().call_deferred("CopyShipSteer", ControlledShip)
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
-	#_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
-	_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
-	_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
 	ShipControllerEventH.ShipChanged(ControlledShip)
 	
 var camtw : Tween

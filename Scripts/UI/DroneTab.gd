@@ -37,24 +37,24 @@ func UpdateConnectedShip(Ship : MapShip) -> void:
 func DroneDisharged(Dr : Drone):
 	if (DockedDrones.has(Dr)):
 		DockedDrones.erase(Dr)
-	if (Dr == CurrentlySelectedDrone):
+	if (Dr == CurrentlySelectedDrone and Showing):
 		CurrentlySelectedDrone = null
-		UpdateCrewSelect()
+		call_deferred("UpdateCrewSelect")
 
 func DroneDocked(Dr : Drone, Target : MapShip) -> void:
 	DockedDrones[Target].append(Dr)
 	#DockedDrones.append(Dr)
 	#visible = DockedDrones.size() > 0
-	if (CurrentlySelectedDrone == null):
-		UpdateCrewSelect()
+	if (CurrentlySelectedDrone == null and Showing):
+		call_deferred("UpdateCrewSelect")
 
 func DroneUnDocked(Dr : Drone, Target : MapShip) -> void:
 	DockedDrones[Target].erase(Dr)
 	#visible = DockedDrones.size() > 0
 	
-	if (Dr == CurrentlySelectedDrone):
+	if (Dr == CurrentlySelectedDrone and Showing):
 		CurrentlySelectedDrone = null
-		UpdateCrewSelect()
+		call_deferred("UpdateCrewSelect")
 
 func _on_deploy_drone_button_pressed() -> void:
 	DroneDockEventH.OnDroneLaunched(CurrentlySelectedDrone, ConnectedShip)

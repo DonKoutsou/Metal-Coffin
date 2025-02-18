@@ -89,20 +89,27 @@ func _physics_process(delta: float) -> void:
 		#CurrentPort.OnSpotVisited()
 		#if (CanRefuel):
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerFuelReserves > 0):
+			var TimeMulti = 0.05
+			if (CurrentPort.HasFuel()):
+				TimeMulti = 0.1
 			var maxfuelcap = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 			var currentfuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-			var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / 0.05 / 6
+			var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / TimeMulti / 6
 			ShipDockActions.emit("Refueling", true, roundi(timeleft))
 			#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-			Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, 0.05 * SimulationSpeed)
-			CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
+			Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, TimeMulti * SimulationSpeed)
+			CurrentPort.PlayerFuelReserves -= TimeMulti * SimulationSpeed
 		else:
 			ShipDockActions.emit("Refueling", false, 0)
 
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and CurrentPort.PlayerRepairReserves > 0):
-			var timeleft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / 0.05 / 6)
+			var TimeMulti = 0.05
+			if (CurrentPort.HasRepair()):
+				TimeMulti = 0.25
+			var timeleft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / TimeMulti / 6)
 			ShipDockActions.emit("Repairing", true, roundi(timeleft))
-			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.05 * SimulationSpeed)
+			Cpt.RefillResource(STAT_CONST.STATS.HULL ,TimeMulti * SimulationSpeed)
+			CurrentPort.PlayerRepairReserves -= TimeMulti * SimulationSpeed
 		else:
 			ShipDockActions.emit("Repairing", false, 0)
 
@@ -164,8 +171,10 @@ func ToggleRadar():
 	Detectable = !Detectable
 	RadarWorking = !RadarWorking
 	if (RadarWorking):
+		#RadarShape.get_child(0).disabled = false
 		UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 	else:
+		#RadarShape.get_child(0).disabled = false
 		UpdateVizRange(0)
 	for g in GetDroneDock().DockedDrones:
 		g.ToggleRadar()
@@ -413,7 +422,9 @@ func BodyLeftRadar(Body : Area2D) -> void:
 	if (Parent is HostileShip):
 		Parent.OnShipUnseen(self)
 		#SeenByRadar.erase(Parent)
-		
+	else: if (Parent is Missile):
+		if (Parent.FiredBy is HostileShip):
+			Parent.OnShipUnseen(self)
 func BodyEnteredBody(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):

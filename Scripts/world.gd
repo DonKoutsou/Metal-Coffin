@@ -47,7 +47,7 @@ func PlayIntro():
 	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), ShowStation, true)
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
-	GetMap().ToggleUIForIntro(false)
+	#GetMap().ToggleUIForIntro(false)
 
 func ShowStation():
 	var DiagText : Array[String]  = ["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."]
@@ -61,7 +61,8 @@ func ReturnCamToPlayer():
 func EnableBackUI():
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = true
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
-	GetMap().ToggleUIForIntro(true)
+	#Ingame_UIManager.GetInstance().ToggleScreenUI(true)
+	GetMap().GetScreenUi().ToggleScreenUI(true)
 
 func _enter_tree() -> void:
 	var map = GetMap()
@@ -112,7 +113,9 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 	SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
-	GetMap().ToggleUIForIntro(false)
+	GetMap().GetScreenUi().ToggleControllCover(true)
+	GetMap().GetScreenUi().ToggleScreenUI(false)
+
 	
 func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	var AllUnits : Array[MapShip]
@@ -139,8 +142,8 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()
 	
-	#SimulationManager.GetInstance().TogglePause(false)
-	GetMap().ToggleUIForIntro(true)
+	GetMap().GetScreenUi().ToggleControllCover(false)
+	GetMap().GetScreenUi().ToggleScreenUI(true)
 
 #Make sure to remove all items that their cards have been used
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo : Dictionary):

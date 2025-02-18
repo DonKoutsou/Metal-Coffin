@@ -11,10 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi5cf"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 3.0
-content_margin_bottom = 3.0
 bg_color = Color(0.176471, 0.176471, 0.176471, 0.780392)
 border_color = Color(80, 80, 80, 1)
 corner_detail = 1
@@ -109,14 +105,14 @@ vertical_alignment = 1
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "SPEED 100"
 vertical_alignment = 1
 
 [node name="TimeSeen" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "Last Seen 1h ago"
 vertical_alignment = 1
 
@@ -124,21 +120,21 @@ vertical_alignment = 1
 visible = false
 use_parent_material = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "Threat Level : 10"
 vertical_alignment = 1
 
 [node name="Fuel" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "Fuel : 10 / 250 Tons"
 vertical_alignment = 1
 
 [node name="Hull" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
 

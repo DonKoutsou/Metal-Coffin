@@ -2,14 +2,8 @@ extends CanvasLayer
 class_name Map
 @export_group("Nodes")
 @export var _InScreenUI : Ingame_UIManager
+@export var _ScreenUI : ScreenUI
 @export var _Camera : ShipCamera
-@export var ScreenUI : Control
-@export var SteeringWh : SteeringWheelUI
-#@export var Elint : ElingUI
-@export var DroneUI : DroneTab
-@export var MissileUI : MissileTab
-@export var ThrustUI : ThrustSlider
-@export var MapMarkerControls : Control
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var Villages : Array[PackedScene]
@@ -24,10 +18,6 @@ class_name Map
 
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_NeighborsSet
-signal LandButton
-signal RadarButton
-signal ShipReturnButton
-signal ShipswitchButton
 
 var TempEnemyNames: Array[String]
 var SpotList : Array[Town]
@@ -40,23 +30,18 @@ static func GetInstance() -> Map:
 
 func _ready() -> void:
 	Instance = self
-	GetInScreenUI().GetInventory().connect("InventoryToggled", OnScreenUiToggled)
 	# spotlist empty means we are not loading and starting new game
-	GetMapMarkerEditor().visible = false
-	MapMarkerControls.visible = false
+	#GetMapMarkerEditor().visible = false
+	#MapMarkerControls.visible = false
+	call_deferred("Init")
+	#ConnectMapMarkerEditorControls()
+	
+func Init() -> void:
 	if (SpotList.size() == 0):
 		TempEnemyNames.append_array(EnemyShipNames)
 		GenerateMap()
 		_InitialPlayerPlacament()
 		ShowingTutorial = true
-	ConnectMapMarkerEditorControls()
-	
-func ConnectMapMarkerEditorControls() -> void:
-	var MapMEditor = GetInScreenUI().GetMapMarkerEditor()
-	$OuterUI/MapMarkerControls/DrawLine.connect("pressed", MapMEditor._on_drone_button_pressed)
-	$OuterUI/MapMarkerControls/DrawText.connect("pressed", MapMEditor._OnTextButtonPressed)
-	$OuterUI/MapMarkerControls/YGas.connect("RangeChanged", MapMEditor._on_y_gas_range_changed)
-	$OuterUI/MapMarkerControls/XGas.connect("RangeChanged", MapMEditor._on_x_gas_range_changed)
 
 func _InitialPlayerPlacament():
 	#find first village and make sure its visible
@@ -74,34 +59,20 @@ func _InitialPlayerPlacament():
 func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
 
-func ToggleUIForIntro(t : bool):
-	#PlayerShip.GetInstance().ToggleUI(t)
-	ScreenUI.visible = t
+func ScreenControls(t : bool) -> void:
+	$OuterUI/ButtonCover.visible = !t
 
-func ToggleMapMarkerPlecement(t : bool) -> void:
-	ScreenUI.visible = !t
-	MapMarkerControls.visible = t
-	GetMapMarkerEditor().visible = t
-func ToggleMapMarkerPlacementAuto() -> void:
-	var t = !GetMapMarkerEditor().visible
-	ScreenUI.visible = !t
-	MapMarkerControls.visible = t
-	GetMapMarkerEditor().visible = t
+
 
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return GetInScreenUI().GetMapMarkerEditor()
 func GetInScreenUI() -> Ingame_UIManager:
 	return _InScreenUI
-func GetSteeringWheelUI() -> SteeringWheelUI:
-	return SteeringWh
+
 #func GetElintUI() -> ElingUI:
 	#return Elint
-func GetDroneUI() -> DroneTab:
-	return DroneUI
-func GetMissileUI() -> MissileTab:
-	return MissileUI
-func GetThrustUI() -> ThrustSlider:
-	return ThrustUI
+func GetScreenUi() -> ScreenUI:
+	return _ScreenUI
 func GetCamera() -> ShipCamera:
 	return _Camera
 #func GetStatUI() -> StatPanel:
@@ -220,8 +191,7 @@ func ShipStartedMoving():
 	GetCamera().applyshake()
 func ShipStoppedMoving():
 	GetCamera().applyshake()
-func OnScreenUiToggled(t : bool) -> void:
-	ScreenUI.visible = !t
+
 #func ShipForcedStop():
 	#thrust_slider.ZeroAcceleration()
 #INPUT HANDLING////////////////////////////
@@ -497,54 +467,7 @@ func _exit_tree() -> void:
 	if (Maplt != null):
 		Maplt.wait_to_finish()
 #//////////////////////////////////////////////////////////
-#SIMULTATION
-var simmulationPaused = false
 
-func _on_simulation_button_pressed() -> void:
-	simmulationPaused = !SimulationManager.GetInstance().Paused
-	SimulationManager.GetInstance().TogglePause(simmulationPaused)
 
-func SimulationSpeedChanged(NewSpeed : int) -> void:
-	SimulationManager.GetInstance().SetSimulationSpeed(NewSpeed)
-
-func _on_speed_simulation_button_down() -> void:
-	SimulationManager.GetInstance().SpeedToggle(true)
-
-func _on_speed_simulation_button_up() -> void:
-	SimulationManager.GetInstance().SpeedToggle(false)
-
-func _on_marker_plecement_pressed() -> void:
-	ToggleMapMarkerPlacementAuto()
-func _on_exit_map_marker_pressed() -> void:
-	ToggleMapMarkerPlecement(false)
-
-func _on_clear_lines_pressed() -> void:
-	for g in $SubViewportContainer/ViewPort/MapPointerManager/MapLines.get_children():
-		g.queue_free()
-
-func _on_inventory_button_pressed() -> void:
-	GetInScreenUI().GetInventory().ToggleInventory()
-	
-
-func _on_pause_pressed() -> void:
-	GetInScreenUI().Pause()
-func _on_return_pressed() -> void:
-	GetInScreenUI().Pause()
 #func _on_captain_button_pressed() -> void:
 	#GetInScreenUI().GetCapUI()._on_captain_button_pressed()
-
-
-func _on_land_button_pressed() -> void:
-	LandButton.emit()
-
-
-func _on_radar_button_pressed() -> void:
-	RadarButton.emit()
-
-
-func _on_controlled_ship_return_pressed() -> void:
-	ShipReturnButton.emit()
-
-
-func _on_controlled_ship_switch_pressed() -> void:
-	ShipswitchButton.emit()

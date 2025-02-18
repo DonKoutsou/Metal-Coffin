@@ -205,7 +205,7 @@ func OnCharacterRemoved(Cha : Captain) -> void:
 	_CharacterInventories.erase(Cha)
 	
 func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
-	var CharInv : CharacterInventory
+	var CharInv = CharInvScene.instantiate() as CharacterInventory
 	Cha._CharInv = CharInv
 	if (_CharacterInventories.has(Cha)):
 		CharInv = _CharacterInventories[Cha]
@@ -285,7 +285,7 @@ func LoadSaveData(Data : SaveData) -> void:
 
 func ToggleInventory() -> void:
 	visible = !visible
-	InventoryToggled.emit(visible)
+	InventoryToggled.emit(!visible)
 	$AudioStreamPlayer.play()
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:

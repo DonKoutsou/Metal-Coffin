@@ -38,6 +38,7 @@ func _ready() -> void:
 	
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
+	Initialise()
 	#visible = false
 
 func FindOwner(Mis : MissileItem) -> Captain:

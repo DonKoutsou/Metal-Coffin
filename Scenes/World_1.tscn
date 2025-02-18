@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=13 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/ShipControllerEventHandler.tres" id="6_1ajha"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="6_sol3n"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/UIEventH.tres" id="7_3dbmh"]
 [ext_resource type="Script" path="res://Scripts/Ship_Controller.gd" id="7_q720d"]
 [ext_resource type="Script" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="8_q55oc"]
@@ -33,6 +34,7 @@ script = ExtResource("7_q720d")
 _Map = NodePath("../Map")
 DroneDockEventH = ExtResource("8_q55oc")
 ShipControllerEventH = ExtResource("6_1ajha")
+UIEventH = ExtResource("7_3dbmh")
 HappeningUI = ExtResource("9_5gym6")
 
 [node name="Commander" parent="." instance=ExtResource("10_15dwo")]
@@ -45,8 +47,3 @@ script = ExtResource("9_l7oy3")
 _Map = NodePath("../Map")
 
 [node name="Map" parent="." instance=ExtResource("12_11aq8")]
-
-[connection signal="LandButton" from="Map" to="ShipController" method="_on_land_button_pressed"]
-[connection signal="RadarButton" from="Map" to="ShipController" method="_on_radar_button_pressed"]
-[connection signal="ShipReturnButton" from="Map" to="ShipController" method="_on_controlled_ship_return_pressed"]
-[connection signal="ShipswitchButton" from="Map" to="ShipController" method="_on_controlled_ship_swtich_range_changed"]

@@ -51,7 +51,7 @@ func _on_handle_gui_input(event: InputEvent) -> void:
 		accumulatedrelative = 0
 		$AudioStreamPlayer.play()
 		Input.vibrate_handheld(30)
-		var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
+		var newval = snapped((newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc), 0.01)
 		AccelerationChanged.emit(newval)
 		#$TextureRect/Light3.Toggle(newval > 0.7)
 	if (event is InputEventScreenDrag):

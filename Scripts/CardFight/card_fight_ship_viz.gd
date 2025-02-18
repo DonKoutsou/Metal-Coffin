@@ -46,6 +46,6 @@ func IsOnFire() -> bool:
 
 func ShipDestroyed() -> void:
 	var tw = create_tween()
-	tw.tween_property(self, "modulation", Color(1,1,1,0), 1)
+	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
 	await tw.finished
 	queue_free()

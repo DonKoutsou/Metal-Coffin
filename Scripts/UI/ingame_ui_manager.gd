@@ -6,13 +6,22 @@ class_name Ingame_UIManager
 @export var _MapMarkerEditor : MapMarkerEditor
 @export var PauseContainer : Control
 @export var DiagplScene : PackedScene
+@export var EventHandler : UIEventHandler
 
 signal GUI_Input(event)
 static var Instance :Ingame_UIManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	
+	EventHandler.connect("PausePressed", Pause)
+	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
+	GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
+	EventHandler.connect("DrawLinePressed", _MapMarkerEditor._on_drone_button_pressed)
+	EventHandler.connect("DrawTextPressed", _MapMarkerEditor._OnTextButtonPressed)
+	EventHandler.connect("MarkerEditorYRangeChanged", _MapMarkerEditor._on_y_gas_range_changed)
+	EventHandler.connect("MarkerEditorXRangeChanged", _MapMarkerEditor._on_x_gas_range_changed)
+	EventHandler.connect("MarkerEditorToggled", _MapMarkerEditor.ToggleVisibilidy)
+	_MapMarkerEditor.visible = false
 static func GetInstance() -> Ingame_UIManager:
 	return Instance
 
@@ -48,6 +57,7 @@ func GetInventory() -> InventoryManager:
 	#return _CaptainUI
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return _MapMarkerEditor
+
 func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused

@@ -20,10 +20,10 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	else:
 		$VBoxContainer/CardName.text = Stats.CardName
 	$VBoxContainer/CardIcon.texture = Stats.Icon
-	$VBoxContainer/CardCost.text = var_to_str(Stats.Energy)
+	$CardCost.text = var_to_str(Stats.Energy)
 	$VBoxContainer/CardDesc.text = Stats.CardDescription
 	
-	$VBoxContainer/CardCost.text = var_to_str(Cost)
+	$CardCost.text = var_to_str(Cost)
 	for g in Stats.Options:
 		var OptionBut = Button.new()
 		OptionBut.text = g.OptionName

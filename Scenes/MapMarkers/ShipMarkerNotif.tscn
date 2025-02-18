@@ -178,7 +178,7 @@ layout_mode = 2
 theme_override_constants/line_spacing = -5
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_tj1hq")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 12
 text = "Dr"
 vertical_alignment = 1
 

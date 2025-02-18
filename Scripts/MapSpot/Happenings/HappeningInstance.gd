@@ -6,6 +6,8 @@ var Hp : Happening
 
 var SelectedOption : int
 
+signal HappeningFinished
+
 var HappeningInstigator : MapShip
 
 func _ready() -> void:
@@ -62,6 +64,7 @@ func _physics_process(_delta: float) -> void:
 	$VBoxContainer/ProgressBar.value = $Timer.time_left
 
 func _on_timer_timeout() -> void:
+	HappeningFinished.emit()
 	Hp.Options[SelectedOption].OptionOutCome(HappeningInstigator)
 	queue_free()
 	SimulationManager.GetInstance().TogglePause(false)

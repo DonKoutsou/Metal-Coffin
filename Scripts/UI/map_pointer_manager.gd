@@ -7,28 +7,38 @@ class_name MapPointerManager
 @export var FriendlyColor : Color
 @export var EnemyColor : Color
 @export var EnemyDebug : bool = false
+@export var UIEventH : UIEventHandler
 #@export var SpotColor : Color
 var Ships : Array[Node2D] = []
 var _ShipMarkers : Array[ShipMarker] = []
 var Spots : Array[Node2D] = []
 var _SpotMarkers : Array[SpotMarker] = []
+
 static var Instance : MapPointerManager
 
 func _enter_tree() -> void:
 	Instance = self
+
+func _ready() -> void:
+	UIEventH.connect("MarkerEditorCleared", ClearLines)
+
 static func GetInstance() -> MapPointerManager:
 	return Instance
+#
+#func _draw() -> void:
+	#pass
+#
+#func DrawLines() -> void:
+	#pass
 
-func _draw() -> void:
-	pass
-
-func DrawLines() -> void:
-	pass
+func ClearLines() -> void:
+	for g in $MapLines.get_children():
+		g.queue_free()
 
 func AddShip(Ship : Node2D, Friend : bool) -> void:
 	if (Ships.has(Ship)):
 		if (Ship is HostileShip):
-			_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif()
+			_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship Located")
 		return
 	Ships.append(Ship)
 	var marker = MarkerScene.instantiate() as ShipMarker
@@ -47,7 +57,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 			#////
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
-		marker.PlayHostileShipNotif()
+		marker.PlayHostileShipNotif("Hostile Ship Located")
 		marker.SetType("Ship")
 	else : if (Ship is MapShip):
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
@@ -66,7 +76,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.SetType("Ship")
 	else : if (Ship is Missile):
 		if (!Friend):
-			marker.PlayHostileShipNotif()
+			marker.PlayHostileShipNotif("Hostile Missile Located")
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 		marker.SetType("Missile")
@@ -187,13 +197,12 @@ func _physics_process(delta: float) -> void:
 				if (ship.FiredBy is PlayerShip or ship.FiredBy is Drone or ship.VisibleBy.size() > 0):
 					Marker.global_position = ship.global_position
 					#Marker.UpdateSpeed(ship.GetShipSpeed())
-					
+					Marker.visible = true
 					Marker.ToggleTimeLastSeend(false)
 					Marker.UpdateTrajectory(ship.global_rotation)
 				else :
 					###Marker.ToggleThreat(false)
-					Marker.ToggleTimeLastSeend(true)
-					Marker.UpdateTime()
+					Marker.visible = false
 				#Marker.UpdateTrajectory(ship.global_rotation)
 			
 		

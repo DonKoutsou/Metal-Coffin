@@ -47,9 +47,9 @@ func _ready() -> void:
 	HullLabel.visible = false
 	
 	#set_physics_process(false)
-func PlayHostileShipNotif() -> void:
+func PlayHostileShipNotif(text : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
-	notif.SetText("Hostile Ship Located")
+	notif.SetText(text)
 	var sound = DeletableSoundGlobal.new()
 	sound.stream = EnemyLocatedSound
 	sound.volume_db = -10
