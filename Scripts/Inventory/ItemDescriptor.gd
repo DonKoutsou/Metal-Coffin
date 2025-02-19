@@ -27,7 +27,7 @@ var UsingAmm : int = 1
 #func _ready() -> void:
 	#UISoundMan.GetInstance().Refresh()
 	
-func SetData(Box : Inventory_Box) -> void:
+func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	set_physics_process(false)
 	DescribedContainer = Box
 	var It = DescribedContainer.GetContainedItem()
@@ -48,6 +48,7 @@ func SetData(Box : Inventory_Box) -> void:
 		UsableItemsActions.visible = false
 		ShipPartActions.visible = true
 		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
+		#if (CanUpgrade):
 		UpgradeLabel.visible = true
 		if (It.UpgradeVersion == null):
 			UpgradeButton.visible = false
@@ -59,7 +60,13 @@ func SetData(Box : Inventory_Box) -> void:
 				UpgradeButton.visible = false
 			else:
 				UpgradeButton.visible = true
-				UpgradeLabel.text = "[color=#c19200]Upgrade Time[/color] : " + var_to_str(It.UpgradeTime)
+				var UpTime = It.UpgradeTime
+				var UpCost = It.UpgradeCost
+				if (CanUpgrade):
+					UpTime /= 2
+					UpCost /= 2
+				UpgradeLabel.text = "[color=#c19200]Upgrade Time[/color] : {0} | [color=#c19200]Upgrade Cost[/color] : {1} ".format([UpTime, UpCost])
+		
 	else :
 		TransferButton.visible = true
 		ShipPartActions.visible = false

@@ -132,7 +132,7 @@ func _on_dissarm_drone_button_2_pressed() -> void:
 
 func _on_toggle_drone_tab_pressed() -> void:
 	if ($AnimationPlayer.is_playing()):
-		await $AnimationPlayer.animation_finished	
+		await $AnimationPlayer.animation_finished
 	if (!Showing):
 		$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 		$AnimationPlayer.play("Show")
@@ -140,6 +140,11 @@ func _on_toggle_drone_tab_pressed() -> void:
 		Showing = true
 	else:
 		_on_turn_off_button_pressed()
+
+func TurnOff() -> void:
+	if (!Showing):
+		return
+	_on_turn_off_button_pressed()
 		
 var SteeringDir : float = 0.0
 

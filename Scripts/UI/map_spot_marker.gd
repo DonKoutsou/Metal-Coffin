@@ -31,6 +31,13 @@ func PlaySound():
 	add_child(sound)
 	sound.play()
 
+func OnAlarmRaised(Notify : bool) -> void:
+	SpotNameLabel.self_modulate = Color(1, 0.1, 0)
+	if (Notify):
+		var Notif = NofiticationScene.instantiate() as ShipMarkerNotif
+		Notif.SetText("Alarm Raised")
+		Notif.modulate = Color(1, 0.1, 0)
+		add_child(Notif)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	SpotDropPosition.scale = Vector2(1,1) / NewZoom

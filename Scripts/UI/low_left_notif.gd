@@ -24,7 +24,15 @@ func ToggleStat(Stat: String, t : bool, timel : float = 0):
 	
 	var statstring : String = ""
 	for g in ShowingStats:
-		statstring += g + " " + var_to_str(ShowingStats[g]).replace(".0", "") + " minutes left" + "\n"
+		var Hours = 0
+		var Mins = ShowingStats[g]
+		while Mins > 60:
+			Hours += 1
+			Mins -= 60
+		if (Hours > 0):
+			statstring += g + "\n{0} hour(s) {1} minute(s)\n".format([Hours, roundi(Mins)])
+		else:
+			statstring += g + "\n{0} minute(s)\n".format([roundi(Mins)])
 	$Control/PanelContainer/Label.text = statstring
 	
 func OnShipDeparted():

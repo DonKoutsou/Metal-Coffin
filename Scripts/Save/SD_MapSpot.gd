@@ -13,3 +13,5 @@ class_name  MapSpotSaveData
 #@export var EnemyCity : bool
 #@export var PossibleDrops : Array[Item]
 @export var SpotInfo : MapSpotCompleteInfo
+@export var AlarmRaised : bool
+@export var AlarmProgress : float

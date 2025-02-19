@@ -28,13 +28,14 @@ func Acceleration_Forced(NewVal : float) -> void:
 
 func Drone_Button_Pressed() -> void:
 	DroneUI._on_toggle_drone_tab_pressed()
+	MissileUI.TurnOff()
 	#EventHandler.OnDroneButtonPressed()
-
+	ToggleMarkerEditor(false)
 
 func Missile_Button_Pressed() -> void:
 	MissileUI._on_toggle_drone_tab_pressed()
-
-
+	DroneUI.TurnOff()
+	ToggleMarkerEditor(false)
 func Radar_Button_Pressed() -> void:
 	EventHandler.OnRadarButtonPressed()
 
@@ -62,13 +63,15 @@ func ControlledShipSwitched(NewShip : MapShip) -> void:
 # Marker editor
 func Marker_Editor_Pressed() -> void:
 	var t = !MarkerEditorControls.visible
+	DroneUI.TurnOff()
+	MissileUI.TurnOff()
 	ToggleMarkerEditor(t)
 	
 func Exit_Marker_Editor_Pressed() -> void:
 	ToggleMarkerEditor(false)
 
 func ToggleMarkerEditor(t : bool) -> void:
-	_ScreenItems.visible = !t
+	#_ScreenItems.visible = !t
 	MarkerEditorControls.visible = t
 	EventHandler.OnMarkerEditorToggled(t)
 	

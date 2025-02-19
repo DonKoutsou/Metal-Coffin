@@ -114,7 +114,12 @@ func _on_toggle_drone_tab_pressed() -> void:
 		Showing = true
 	else :
 		_on_turn_off_button_pressed()
-		
+
+func TurnOff() -> void:
+	if (!Showing):
+		return
+	_on_turn_off_button_pressed()
+
 func UpdateSteer(RelativeRot : float):
 	DroneDockEventH.DroneDirectionChanged(RelativeRot / 10, ConnectedShip)
 

@@ -68,7 +68,7 @@ func BodyEnteredBody(Body: Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
 		SetCurrentPort(Parent)
-		Parent.OnSpotAproached()
+		Parent.OnSpotAproached(self)
 	else : if (Parent == Command and CommingBack):
 		var plship = Body.get_parent() as MapShip
 		plship.GetDroneDock().DockDrone(self, true)

@@ -2,9 +2,10 @@ extends Node2D
 class_name Town
 
 @export var SpotScene: PackedScene
-
 var LoadingData : bool = false
 var Pos : Vector2
+
+var Spot : MapSpot
 signal TownSpotAproached(spot : MapSpot)
 #signal SpotSearched(spot : MapSpot)
 #signal TownSpotAnalazyed(spot : MapSpot)
@@ -17,53 +18,43 @@ func _ready() -> void:
 		GenerateCity()
 	
 func GenerateCity() -> void:
-	var spots = $CitySpots.get_children()
-	#var centername : String = ""
-	for g in spots:
-		var spt = g as CitySpot
-		var sc = SpotScene.instantiate() as MapSpot 
-		var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
-
-		sc.connect("SpotAproached", _TownSpotApreached)
-		sc.connect("SpotLanded", _TownSpotLanded)
-		var pos = g.position
-		sc.position = pos
-		g.replace_by(sc)
-		sc.SetSpotData(spottype)
-		g.free()
+	var spt = $CitySpot as CitySpot
+	var sc = SpotScene.instantiate() as MapSpot 
+	var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
+	Spot = sc
+	sc.connect("SpotAproached", _TownSpotApreached)
+	sc.connect("SpotLanded", _TownSpotLanded)
+	var pos = spt.position
+	sc.position = pos
+	spt.replace_by(sc)
+	sc.SetSpotData(spottype)
+	spt.free()
 	pass
-func GetSpots() -> Array[MapSpot]:
-	var spots : Array[MapSpot] = []
-	for g in $CitySpots.get_children() :
-		spots.append(g)
-	return spots
+	
+func IsEnemy() -> bool:
+	return Spot.SpotInfo.EnemyCity
+
+func GetSpot() -> MapSpot:
+	return Spot
 	
 func SpawnEnemies():
-	for g in $CitySpots.get_children() :
-		var spot = g as MapSpot
-		if (spot.SpotInfo.HostilePatrolShipScene != null):
-			spot.SpawnEnemyPatrol()
-		if (spot.SpotInfo.HostileShipScene != null):
-			spot.SpawnEnemyGarison()
+	if (Spot.SpotInfo.HostilePatrolShipScene != null):
+		Spot.SpawnEnemyPatrol()
+	if (Spot.SpotInfo.HostileShipScene != null):
+		Spot.SpawnEnemyGarison()
 func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
 	datas.TownLoc = position
 	datas.TownRot = rotation
 	datas.TownScenePath = scene_file_path
 	var spotdata : Array[MapSpotSaveData]
-	for g in $CitySpots.get_children() :
-		var spot = g as MapSpot
-		spotdata.append(spot.GetSaveData())
+	spotdata.append(Spot.GetSaveData())
 	datas.Spots = spotdata
 	return datas
 
 #TODO get rid of cities, useless
 func GetCityName() -> String:
-	var CityName
-	for g in $CitySpots.get_children():
-		var cit = g as MapSpot
-		CityName = cit.SpotName
-	return CityName
+	return $CitySpot.SpotName
 func LoadSaveData(Dat : TownSaveData) -> void:
 	position = Dat.TownLoc
 	rotation = Dat.TownRot
@@ -75,14 +66,16 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		
 		sc.SetSpotData(spotdat.SpotType)
 		
-		var spt = $CitySpots.get_child(g)
-		spt.replace_by(sc)
-		
-		sc.position = spt.position
+		var CSpot = $CitySpot
+		CSpot.replace_by(sc)
+		Spot = sc
+		sc.position = CSpot.position
 		sc.SpotInfo = spotdat.SpotInfo
 		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
 		sc.CityFuelReserves = spotdat.CityFuelReserves
-		spt.free()
+		sc.AlarmRaised = spotdat.AlarmRaised
+		sc.AlarmProgress = spotdat.AlarmProgress
+		CSpot.free()
 
 		if (spotdat.Seen):
 			sc.OnSpotSeen(false)

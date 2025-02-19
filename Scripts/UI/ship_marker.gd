@@ -35,6 +35,8 @@ var Showspeed : bool = false
 var ElintNotif : ShipMarkerNotif
 var LandingNotif : ShipMarkerNotif
 
+var CurrentZoom : float
+
 signal ShipDeparted
 
 func _ready() -> void:
@@ -139,14 +141,14 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 	DetailPanel.scale = Vector2(1,1) / NewZoom
 	ShipIcon.scale = (Vector2(1,1) / NewZoom) * 0.5
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
-	UpdateLine()
+	UpdateLine(NewZoom)
 	$Line2D.width =  2 / NewZoom
+	CurrentZoom = NewZoom
 
-
-func UpdateLine()-> void:
+func UpdateLine(Zoom : float)-> void:
 	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
+	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / Zoom)
 
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
@@ -174,7 +176,7 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
 	ShipIcon.add_to_group("UnmovableMapInfo")
 	add_to_group("ZoomAffected")
-	
+	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
 	ShipIcon.remove_from_group("UnmovableMapInfo")
@@ -185,7 +187,7 @@ func UpdateSignRotation() -> void:
 	$Control/PanelContainer.rotation -= 0.01
 	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
+	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / CurrentZoom)
 
 	
 func get_closest_point_on_rect(rect: Rect2, point: Vector2) -> Vector2:

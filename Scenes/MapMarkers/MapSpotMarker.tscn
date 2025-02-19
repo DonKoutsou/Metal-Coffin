@@ -11,14 +11,12 @@ border_width_left = 20
 border_width_top = 20
 border_width_right = 20
 border_width_bottom = 20
-border_color = Color(100, 0.764, 0.081, 1)
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 70
 corner_radius_top_right = 70
 corner_radius_bottom_right = 70
 corner_radius_bottom_left = 70
 corner_detail = 4
-shadow_color = Color(0.973513, 0.740474, 1.92523e-06, 1)
-shadow_size = 5
 anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_pxthd"]

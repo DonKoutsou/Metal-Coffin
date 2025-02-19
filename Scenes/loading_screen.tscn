@@ -1,0 +1,217 @@
+[gd_scene load_steps=11 format=3 uid="uid://bas2hvjynjr05"]
+
+[ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="1_uao5l"]
+[ext_resource type="Script" path="res://Scenes/loading_screen.gd" id="2_ehbru"]
+[ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="2_how7o"]
+[ext_resource type="Texture2D" uid="uid://byfedq22uoe62" path="res://Assets/Logos/ΜΧΨ1.png" id="4_57mps"]
+[ext_resource type="Texture2D" uid="uid://cga2lurpwk4ft" path="res://Assets/Logos/ΜΧΨ2.png" id="5_bbvsw"]
+[ext_resource type="Texture2D" uid="uid://dni651daut8p5" path="res://Assets/Logos/ΜΧΨ3.png" id="6_pg350"]
+[ext_resource type="Texture2D" uid="uid://c0od8ddjkv4ks" path="res://Assets/Logos/ΜΧΨ4.png" id="7_6jo5o"]
+[ext_resource type="Texture2D" uid="uid://dssiekrv78ooj" path="res://Assets/Logos/ΜΧΨ5.png" id="8_1dav1"]
+
+[sub_resource type="Animation" id="Animation_n8xlk"]
+resource_name = "Logo"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.16667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.733333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TextureRect5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.63333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_boxul"]
+_data = {
+"Logo": SubResource("Animation_n8xlk")
+}
+
+[node name="LoadingScreen" type="CanvasLayer"]
+layer = 5
+script = ExtResource("2_ehbru")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -136.0
+offset_right = -116.0
+offset_bottom = -86.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("4_57mps")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -136.0
+offset_right = -116.0
+offset_bottom = -86.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("5_bbvsw")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -136.0
+offset_right = -116.0
+offset_bottom = -86.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_pg350")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -136.0
+offset_right = -116.0
+offset_bottom = -86.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("7_6jo5o")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -136.0
+offset_right = -116.0
+offset_bottom = -86.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_1dav1")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_boxul")
+}
+autoplay = "LogoDraw"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -423.0
+offset_top = -125.0
+offset_right = 423.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 24.26
+
+[node name="Screen" type="ColorRect" parent="."]
+process_mode = 3
+material = ExtResource("1_uao5l")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = 61.0
+offset_right = -71.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScreenFrame" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_how7o")
+expand_mode = 1

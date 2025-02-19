@@ -18,6 +18,7 @@ class_name Map
 
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal MAP_NeighborsSet
+signal GenerationFinished
 
 var TempEnemyNames: Array[String]
 var SpotList : Array[Town]
@@ -33,15 +34,22 @@ func _ready() -> void:
 	# spotlist empty means we are not loading and starting new game
 	#GetMapMarkerEditor().visible = false
 	#MapMarkerControls.visible = false
-	call_deferred("Init")
+	#call_deferred("Init")
 	#ConnectMapMarkerEditorControls()
 	
+var GenThread : Thread
 func Init() -> void:
 	if (SpotList.size() == 0):
 		TempEnemyNames.append_array(EnemyShipNames)
-		GenerateMap()
-		_InitialPlayerPlacament()
+		GenThread = Thread.new()
+		GenThread.start(GenerateMap.bind($SubViewportContainer/ViewPort/MapSpots))
+		#_InitialPlayerPlacament()
 		ShowingTutorial = true
+
+func MapGenFinished() -> void:
+	GenThread.wait_to_finish()
+	GenerationFinished.emit()
+	_InitialPlayerPlacament()
 
 func _InitialPlayerPlacament():
 	#find first village and make sure its visible
@@ -78,16 +86,24 @@ func GetCamera() -> ShipCamera:
 #func GetStatUI() -> StatPanel:
 	#return _StatPanel
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
+	EnemySpawnTh = Thread.new()
+	EnemySpawnTh.start(RespawnEnemiesThreaded.bind(EnemyData))
+func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
+	var SpawnedEnems : Array[HostileShip] = []
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
 		ship.LoadSaveData(g)
+		SpawnedEnems.append(ship)
+		call_deferred("AddEnemyToHierarchy", ship, g.Position)
 		if (g.CommandName != ""):
-			var com = FindEnemyByName(g.CommandName)
+			var com
+			for z in SpawnedEnems:
+				if (z.GetShipName() == g.CommandName):
+					com = z
 			ship.ToggleDocked(true)
 			ship.Command = com
 			com.GetDroneDock().call_deferred("DockShip", ship)
-		$SubViewportContainer/ViewPort.add_child(ship)
-		ship.global_position = g.Position
+	call_deferred("EnemySpawnFinished")
 
 func FindEnemyByName(Name : String) -> HostileShip:
 	for g in get_tree().get_nodes_in_group("Enemy"):
@@ -116,7 +132,7 @@ func GetMissileSaveData() -> SaveData:
 	return dat
 
 #CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
-func Arrival(_Spot : MapSpot)	-> void:
+func Arrival(_Spot : MapSpot) -> void:
 	if (ShowingTutorial):
 		SimulationManager.GetInstance().TogglePause(true)
 		var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
@@ -211,7 +227,7 @@ var Maplt : Thread
 var Roadt : Thread
 var Mut : Mutex
 #MAP GENERARION
-func GenerateMap() -> void:
+func GenerateMap(SpotParent : Node2D) -> void:
 	#DECIDE ON PLECEMENT OF STATIONS
 	var CapitalCitySpots : Array[int] = []
 	for z in MapSize / 3:
@@ -256,24 +272,27 @@ func GenerateMap() -> void:
 			pos = GetNextRandomPos(Prevpos, Distanceval)
 		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
 		sc.Pos = pos
-		$SubViewportContainer/ViewPort/MapSpots.add_child(sc)
+		SpotParent.call_deferred("add_child", sc)
 		
 		SpotList.append(sc)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 	EnSpawner.Init()
 	var time = Time.get_ticks_msec()
-	for g in SpotList:
-		SpawnTownEnemies(g)
+
+	call_deferred("SpawnTownEnemies")
+	
 	print("Spawning enemies took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
 	
-	GenerateRoads()
+	call_deferred("GenerateRoads")
+	
+	call_deferred("MapGenFinished")
 	#_DrawMapLines(["City Center", "Capital City Center"])
 	#_DrawMapLines(["City Center", "Capital City Center","Chora"], true, false)
-func SpawnSpotFleet(Spot : MapSpot, Patrol : bool) -> void:
-	var Fleet = EnSpawner.GetSpawnsForLocation(Spot.global_position.y)
+func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Pos : Vector2) -> void:
+	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y)
 	var SpawnedFleet = []
 	for f in Fleet:
 		var Ship = EnemyScene.instantiate() as HostileShip
@@ -282,22 +301,35 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool) -> void:
 		Ship.Patrol = Patrol
 		Ship.ShipName = TempEnemyNames.pop_back()
 		SpawnedFleet.append(Ship)
+		call_deferred("AddEnemyToHierarchy", Ship, Pos)
 		if (Fleet.find(f) != 0):
 			Ship.ToggleDocked(true)
 			Ship.Command = SpawnedFleet[0]
 			SpawnedFleet[0].GetDroneDock().call_deferred("DockShip", Ship)
-		$SubViewportContainer/ViewPort.add_child(Ship)
-		Ship.global_position = Spot.global_position
-func SpawnTownEnemies(T : Town) -> void:
-	var Spots = T.GetSpots()
-	for g in Spots:
+		
+		
+
+func AddEnemyToHierarchy(en : HostileShip, pos : Vector2):
+	$SubViewportContainer/ViewPort.add_child(en)
+	en.global_position = pos
+
+var EnemySpawnTh : Thread
+func SpawnTownEnemies() -> void:
+	EnemySpawnTh = Thread.new()
+	EnemySpawnTh.start(SpawnTownEnemiesThreaded.bind(SpotList))
+func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
+	for T in Towns:
+		var Spot = T.GetSpot()
 		var time = Time.get_ticks_msec()
-		if (g.SpotInfo.EnemyCity):
-			SpawnSpotFleet(g, false)
-		if (g.GetPossibleDrops().size() == 3):
-			SpawnSpotFleet(g, true)
+		if (T.IsEnemy()):
+			SpawnSpotFleet(Spot, false, T.Pos)
+		if (Spot.GetPossibleDrops().size() == 3):
+			SpawnSpotFleet(Spot, true, T.Pos)
 		print("Spawning fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
-			
+	call_deferred("EnemySpawnFinished")
+func EnemySpawnFinished() -> void:
+	EnemySpawnTh.wait_to_finish()
+	GenerationFinished.emit()
 #ROAD GENERATION
 func GenerateRoads() -> void:
 	var CityGroups = ["CITY_CENTER"]
@@ -370,6 +402,7 @@ func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : 
 		call_deferred("RoadFinished")
 	else:
 		call_deferred("MapLineFinished")
+		
 	return lines
 func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
 	for g in Points:
@@ -378,10 +411,16 @@ func RoadFinished() -> void:
 	var Lines = Roadt.wait_to_finish()
 	$SubViewportContainer/ViewPort/RoadLineDrawer.AddLines(Lines)
 	Roadt = null
+	GenerationFinished.emit()
 func MapLineFinished() -> void:
 	var Lines = Maplt.wait_to_finish()
+	for g in Lines:
+		var l = g as Array[Vector2]
+		g[0] += (l[0].direction_to(l[1]) * 45)
+		g[1] += (l[1].direction_to(l[0]) * 45)
 	$SubViewportContainer/ViewPort/MapPointerManager/MapLineDrawer.AddLines(Lines)
 	Maplt = null
+	GenerationFinished.emit()
 # Helper function: Push an element to the heap
 func _heap_push(heap: Array, element: Array):
 	heap.append(element)
@@ -457,7 +496,7 @@ func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
 func HasClose(pos : Vector2) -> bool:
 	var b= false
 	for z in SpotList.size():
-		if (pos.distance_to(SpotList[z].position) < 800):
+		if (pos.distance_to(SpotList[z].Pos) < 800):
 			b = true
 			break
 	return b	

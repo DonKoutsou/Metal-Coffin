@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="6_voe58"]
-[ext_resource type="Texture2D" uid="uid://doea6iw0omah8" path="res://Assets/UIPiecies/Screen/Screen.png" id="7_bqa1w"]
+[ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="7_wdsp5"]
 
 [sub_resource type="Animation" id="Animation_gaja2"]
 length = 0.001
@@ -89,10 +89,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 113.0
-offset_top = -154.0
-offset_right = 245.0
-offset_bottom = -90.0
+offset_left = 79.0
+offset_top = -143.0
+offset_right = 211.0
+offset_bottom = -79.0
 grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="w/HBoxContainer"]
@@ -181,9 +181,9 @@ material = ExtResource("6_voe58")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 89.0
+offset_left = 77.0
 offset_top = 61.0
-offset_right = -83.0
+offset_right = -71.0
 offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -194,11 +194,10 @@ custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 323.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("7_bqa1w")
+texture = ExtResource("7_wdsp5")
 expand_mode = 1
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]

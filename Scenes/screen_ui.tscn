@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=34 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -29,6 +29,7 @@
 [ext_resource type="BitMap" uid="uid://bws1mu52unesf" path="res://Assets/UIPiecies/ButtonAlpha.png" id="26_pu5a5"]
 [ext_resource type="PackedScene" uid="uid://c0fey2gjg1mvv" path="res://Scenes/SimNob.tscn" id="27_67jhj"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
+[ext_resource type="Texture2D" uid="uid://bxec8bkr01ino" path="res://Assets/UIPiecies/Screen/Panel.png" id="28_r1kt4"]
 [ext_resource type="Texture2D" uid="uid://c8pjg0qhbcr8d" path="res://Assets/UIPiecies/Screen/ButtonCover.png" id="30_0jgnt"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
@@ -46,7 +47,7 @@ mouse_filter = 2
 theme = ExtResource("1_7t5fk")
 script = ExtResource("2_spr1r")
 _ScreenItems = NodePath("ScreenUi")
-MarkerEditorControls = NodePath("MapMarkerControls")
+MarkerEditorControls = NodePath("ScreenUi/MapMarkerControls")
 Thrust = NodePath("ThrustSlider")
 Steer = NodePath("ScreenUi/SteeringWheel")
 MissileUI = NodePath("ScreenUi/Missile Tab")
@@ -195,6 +196,212 @@ offset_top = -41.0
 offset_right = -420.0
 offset_bottom = -1.0
 grow_horizontal = 0
+
+[node name="MapMarkerControls" type="Control" parent="ScreenUi"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -441.0
+offset_top = -74.0
+offset_right = -401.0
+offset_bottom = -34.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="ScreenUi/MapMarkerControls"]
+layout_mode = 0
+offset_left = -289.0
+offset_top = -90.0
+offset_right = 182.0
+offset_bottom = 74.0
+mouse_filter = 0
+texture = ExtResource("28_r1kt4")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="ScreenUi/MapMarkerControls/TextureRect2"]
+modulate = Color(0, 0, 0, 0.518)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 460.0
+offset_bottom = 154.0
+mouse_filter = 2
+texture = ExtResource("28_r1kt4")
+expand_mode = 1
+
+[node name="YGas" parent="ScreenUi/MapMarkerControls" instance=ExtResource("24_01ksk")]
+position = Vector2(-117, 34)
+scale = Vector2(0.520363, 0.520363)
+
+[node name="XGas" parent="ScreenUi/MapMarkerControls" instance=ExtResource("24_01ksk")]
+position = Vector2(72, -55)
+scale = Vector2(0.787035, 0.787035)
+
+[node name="ExitMapMarker" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = -53.0
+offset_right = 129.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("25_hbytw")
+texture_pressed = ExtResource("25_hbytw")
+texture_click_mask = ExtResource("26_pu5a5")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/ExitMapMarker"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0002
+offset_top = -29.5
+offset_right = 18.9998
+offset_bottom = 6.49998
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 24
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ClearLines" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -53.0
+offset_right = 43.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("25_hbytw")
+texture_pressed = ExtResource("25_hbytw")
+texture_click_mask = ExtResource("26_pu5a5")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/ClearLines"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0002
+offset_top = -30.5
+offset_right = 18.9998
+offset_bottom = 5.49998
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 10
+text = "Clear"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DrawLine" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -124.0
+offset_right = -125.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("25_hbytw")
+texture_pressed = ExtResource("25_hbytw")
+texture_click_mask = ExtResource("26_pu5a5")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/DrawLine"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -30.5
+offset_right = 19.0
+offset_bottom = 5.49998
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 10
+text = "Line"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DrawText" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -124.0
+offset_right = -58.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("25_hbytw")
+texture_pressed = ExtResource("25_hbytw")
+texture_click_mask = ExtResource("26_pu5a5")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/DrawText"]
+modulate = Color(1, 1, 1, 0.673)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -30.5
+offset_right = 19.0
+offset_bottom = 5.50001
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 10
+text = "Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="ControlledShipSwitch" type="TextureButton" parent="." groups=["Buttons"]]
 process_mode = 3
@@ -364,9 +571,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -82.0
+offset_left = -85.0
 offset_top = 34.0
-offset_right = -22.0
+offset_right = -26.0
 offset_bottom = 78.0
 grow_horizontal = 0
 size_flags_horizontal = 0
@@ -397,200 +604,6 @@ theme_override_font_sizes/font_size = 40
 text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="MapMarkerControls" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = -166.0
-offset_right = -99.0
-offset_bottom = -126.0
-grow_horizontal = 0
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="YGas" parent="MapMarkerControls" instance=ExtResource("24_01ksk")]
-position = Vector2(-81, 37)
-rotation = -1.57079
-
-[node name="XGas" parent="MapMarkerControls" instance=ExtResource("24_01ksk")]
-position = Vector2(112, 34)
-rotation = -1.57079
-
-[node name="ExitMapMarker" type="TextureButton" parent="MapMarkerControls" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -12.0
-offset_right = 72.0
-offset_bottom = 67.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 1.57079
-texture_normal = ExtResource("25_hbytw")
-texture_pressed = ExtResource("25_hbytw")
-texture_click_mask = ExtResource("26_pu5a5")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
-[node name="Label" type="Label" parent="MapMarkerControls/ExitMapMarker"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0002
-offset_top = 30.5001
-offset_right = 18.9998
-offset_bottom = 66.5001
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.5708
-theme_override_constants/line_spacing = -3
-theme_override_font_sizes/font_size = 24
-text = "X"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="ClearLines" type="TextureButton" parent="MapMarkerControls" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -65.0
-offset_right = 72.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 1.57079
-texture_normal = ExtResource("25_hbytw")
-texture_pressed = ExtResource("25_hbytw")
-texture_click_mask = ExtResource("26_pu5a5")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
-[node name="Label" type="Label" parent="MapMarkerControls/ClearLines"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0002
-offset_top = 30.5001
-offset_right = 18.9998
-offset_bottom = 66.5001
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.5708
-theme_override_constants/line_spacing = -3
-theme_override_font_sizes/font_size = 10
-text = "Clear"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="DrawLine" type="TextureButton" parent="MapMarkerControls" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 77.0
-offset_top = -65.0
-offset_right = 151.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 1.57079
-texture_normal = ExtResource("25_hbytw")
-texture_pressed = ExtResource("25_hbytw")
-texture_click_mask = ExtResource("26_pu5a5")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="MapMarkerControls/DrawLine"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = 6.50012
-offset_right = 19.0
-offset_bottom = 42.5001
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.5708
-theme_override_constants/line_spacing = -3
-theme_override_font_sizes/font_size = 10
-text = "Line"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="DrawText" type="TextureButton" parent="MapMarkerControls" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 76.0
-offset_top = -12.0
-offset_right = 150.0
-offset_bottom = 67.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 1.57079
-texture_normal = ExtResource("25_hbytw")
-texture_pressed = ExtResource("25_hbytw")
-texture_click_mask = ExtResource("26_pu5a5")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="MapMarkerControls/DrawText"]
-modulate = Color(1, 1, 1, 0.673)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = 6.5001
-offset_right = 19.0
-offset_bottom = 42.5001
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.5708
-theme_override_constants/line_spacing = -3
-theme_override_font_sizes/font_size = 10
-text = "Text"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="Simulation_Nob" parent="." instance=ExtResource("27_67jhj")]
 layout_mode = 1
@@ -742,6 +755,12 @@ flip_h = true
 [connection signal="pressed" from="RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="SteeringDitChanged" from="ScreenUi/SteeringWheel" to="." method="Steering_Direction_Changed"]
 [connection signal="SteeringOffseted" from="ScreenUi/SteeringWheel" to="." method="Steer_Offseted"]
+[connection signal="RangeChanged" from="ScreenUi/MapMarkerControls/YGas" to="." method="MarkerEditorYRangeChanged"]
+[connection signal="RangeChanged" from="ScreenUi/MapMarkerControls/XGas" to="." method="MarkerEditorXRangeChanged"]
+[connection signal="pressed" from="ScreenUi/MapMarkerControls/ExitMapMarker" to="." method="Exit_Marker_Editor_Pressed"]
+[connection signal="pressed" from="ScreenUi/MapMarkerControls/ClearLines" to="." method="Clear_Lines_Pressed"]
+[connection signal="pressed" from="ScreenUi/MapMarkerControls/DrawLine" to="." method="Draw_Line_Pressed"]
+[connection signal="pressed" from="ScreenUi/MapMarkerControls/DrawText" to="." method="Draw_Text_Pressed"]
 [connection signal="pressed" from="ControlledShipSwitch" to="." method="Ship_Switch_Pressed"]
 [connection signal="pressed" from="MarkerPlecement" to="." method="Marker_Editor_Pressed"]
 [connection signal="pressed" from="ControlledShipReturn" to="." method="Regroup_Pressed"]
@@ -749,10 +768,4 @@ flip_h = true
 [connection signal="pressed" from="SimulationButton" to="." method="Sim_Pause_Pressed"]
 [connection signal="pressed" from="InventoryButton" to="." method="Inventory_Pressed"]
 [connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
-[connection signal="RangeChanged" from="MapMarkerControls/YGas" to="." method="MarkerEditorYRangeChanged"]
-[connection signal="RangeChanged" from="MapMarkerControls/XGas" to="." method="MarkerEditorXRangeChanged"]
-[connection signal="pressed" from="MapMarkerControls/ExitMapMarker" to="." method="Exit_Marker_Editor_Pressed"]
-[connection signal="pressed" from="MapMarkerControls/ClearLines" to="." method="Clear_Lines_Pressed"]
-[connection signal="pressed" from="MapMarkerControls/DrawLine" to="." method="Draw_Line_Pressed"]
-[connection signal="pressed" from="MapMarkerControls/DrawText" to="." method="Draw_Text_Pressed"]
 [connection signal="StepChanged" from="Simulation_Nob" to="." method="Simmulation_Step_Changed"]

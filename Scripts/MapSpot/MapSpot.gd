@@ -9,20 +9,36 @@ var PlayerRepairReserves : float = 0
 
 signal SpotAproached(Type :MapSpotType)
 signal SpotLanded(Type : MapSpotType)
+signal SpotAlarmRaised(Notify : bool)
 
 var SpotType : MapSpotType
 var SpotInfo : MapSpotCompleteInfo
 var Pos : Vector2
 var Visited = false
 var Seen = false
+var AlarmRaised = false
+var AlarmProgress = 0
 #bool to avoid sent drones colliding with current visited spot
 var NeighboringCities : Array[String]
 var Connected
 
+var SimPaused = false
+var SimSpeed = 1
+
 func _ready() -> void:
+	set_physics_process(false)
+	var simman = SimulationManager.GetInstance()
+	SimPaused = simman.IsPaused()
+	SimSpeed = simman.SimulationSpeed
 	global_rotation = 0
 	if (Pos != Vector2.ZERO):
 		position = Pos
+
+func SimulationSpeedChanged(i : int) -> void:
+	SimSpeed = i
+	
+func ToggleSimulation(t : bool) -> void:
+	SimPaused = t
 
 func SetNeighbord(N : Array) -> void:
 	NeighboringCities = N
@@ -51,6 +67,8 @@ func GetSaveData() -> Resource:
 	datas.CityFuelReserves = CityFuelReserves
 	datas.PlayerFuelReserves = PlayerFuelReserves
 	datas.SpotInfo = SpotInfo
+	datas.AlarmRaised = AlarmRaised
+	datas.AlarmProgress = AlarmProgress
 	return datas
 
 func SetSpotData(Data : MapSpotType) -> void:
@@ -132,7 +150,41 @@ func PlaySound():
 	add_child(sound)
 	sound.play()
 
-func OnSpotAproached() -> void:
+func _physics_process(delta: float) -> void:
+	if (SimPaused):
+		return
+	
+	AlarmProgress += delta * SimSpeed
+	
+	if (AlarmProgress > 300):
+		set_physics_process(false)
+		OnAlarmRaised(true)
+
+var VisitingShips : Array[MapShip] = []
+
+func OnSpotAproached(AproachedBy : MapShip) -> void:
 	SpotAproached.emit(self)
+	VisitingShips.append(AproachedBy)
 	if (!Seen):
 		OnSpotSeen()
+	
+	if (SpotInfo.EnemyCity):
+		if (AlarmRaised):
+			Commander.GetInstance().OnEnemySeen(AproachedBy, null)
+		else:
+			set_physics_process(true)
+
+func OnSpotDeparture(DepartingShip : MapShip) -> void:
+	VisitingShips.erase(DepartingShip)
+	if (SpotInfo.EnemyCity):
+		if (AlarmRaised):
+			Commander.GetInstance().OnEnemyVisualLost(DepartingShip)
+		else :if (VisitingShips.size() == 0):
+			set_physics_process(false)
+func OnAlarmRaised(Notify : bool = false) -> void:
+	SimulationManager.GetInstance().TogglePause(true)
+	ShipCamera.GetInstance().FrameCamToPos(global_position)
+	SpotAlarmRaised.emit(Notify)
+	AlarmRaised = true
+	for g in VisitingShips:
+		Commander.GetInstance().OnEnemySeen(g, null)

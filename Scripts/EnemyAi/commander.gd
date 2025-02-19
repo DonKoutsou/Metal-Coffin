@@ -85,16 +85,16 @@ func UpdateInvestigationPos(newpos : Vector2, originship : MapShip) -> void:
 				z.LastKnownPosition = newpos
 	print("Investigation position updated to : " + var_to_str(newpos))
 	
-func InvestigationOrderComplete(Info : VisualLostInfo) -> void:
+func InvestigationOrderComplete(Pos : Vector2) -> void:
 	for g in InvestigationOrders:
-		if (g.Target == Info.Position):
+		if (g.Target == Pos):
 			for z in g.Receivers:
 				z.disconnect("OnPositionInvestigated", InvestigationOrderComplete)
 				z.LastKnownPosition = Vector2.ZERO
 				#z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
-			print("Position : " + var_to_str(Info.Position) + "has been investigated.")
+			print("Position : " + var_to_str(Pos) + "has been investigated.")
 			return
 	
 #SIGNAL RECEIVERS///////////////////////////////////////////////////
@@ -145,12 +145,12 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 			print(Ship.GetShipName() + "'s position was under investigation, investigation order has been canceled")
 			InvestigationOrderComplete(EnemyPositionsToInvestigate[Ship])
 		EnemyPositionsToInvestigate.erase(Ship)
-	
-	if (SeenBy.Patrol):
-		if (SeenBy.Command == null):
-			OrderShipToPursue(SeenBy, Ship)
-		else:
-			OrderShipToPursue(SeenBy.Command, Ship)
+	if (SeenBy != null):
+		if (SeenBy.Patrol):
+			if (SeenBy.Command == null):
+				OrderShipToPursue(SeenBy, Ship)
+			else:
+				OrderShipToPursue(SeenBy.Command, Ship)
 	if (KnownEnemies.keys().has(Ship)):
 		KnownEnemies[Ship] += 1
 	else :

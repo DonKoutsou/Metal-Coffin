@@ -4,15 +4,13 @@ class_name StartingScreen
 @onready var save_load_manager: SaveLoadManager = $SaveLoadManager
 
 @export var StartingMenuScene : PackedScene
+@export var StudioAnim : PackedScene
 @export var GameScene : PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var vidpl = VideoStreamPlayer.new()
-	vidpl.stream = load("res://Assets/Sequence 01_2.ogv")
-	vidpl.autoplay = true
+	var vidpl = StudioAnim.instantiate() as StudioAnim
 	add_child(vidpl)
-	await  vidpl.finished
-	
+	await  vidpl.Finished
 	vidpl.queue_free()
 	#var oname = OS.get_name() 
 	#if (oname == "Windows"):

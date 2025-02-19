@@ -114,7 +114,12 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	
 	DescriptorPlace.add_child(Descriptor)
 	CharStatPanel.visible = false
-	Descriptor.SetData(Box)
+	var cpt = GetBoxOwner(Box)
+	var HasUp = false
+	if (cpt.CurrentPort != ""):
+		var cit = GetCity(cpt.CurrentPort)
+		HasUp = cit.HasUpgrade()
+	Descriptor.SetData(Box, HasUp)
 	#Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", OwnerInventory.UpgradeItem)
 	Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
@@ -122,13 +127,33 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	#Descriptor.connect("ItemRepaired", RepairPart)
 	
 
+func GetCity(CityName : String) -> MapSpot:
+	var cities = get_tree().get_nodes_in_group("City")
+	var CorrectCity : MapSpot
+	for g in cities:
+		var cit = g as MapSpot
+		if (cit.GetSpotName() == CityName):
+			CorrectCity = cit
+			break
+	return CorrectCity
+
 func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
 	var Cpt = GetBoxOwner(Box)
 	if (Cpt.CurrentPort == ""):
 		PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
-		#print("Ship needs to be docked to upgrade")
 		return
-	OwnerInventory.StartUpgrade(Box)
+	var It = Box.GetContainedItem() as ShipPart
+	var cit = GetCity(Cpt.CurrentPort)
+	var HasUpgrade = cit.HasUpgrade()
+	var Cost = It.UpgradeCost
+	if (HasUpgrade):
+		Cost /= 2
+	var PLWallet = World.GetInstance().PlayerWallet
+	if (PLWallet.Funds < Cost):
+		PopUpManager.GetInstance().DoFadeNotif("Cant pay for upgrade")
+		return
+	PLWallet.AddFunds(-Cost)
+	OwnerInventory.StartUpgrade(Box, cit.HasUpgrade())
 	CloseDescriptor()
 	BoxSelected(Box, OwnerInventory)
 func CancelUpgrades(Cha : Captain) -> void:
@@ -195,6 +220,7 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
 	for g in Cha.StartingItems:
 		CharInv.AddItem(g)
+	UISoundMan.GetInstance().Refresh()
 
 func OnCharacterRemoved(Cha : Captain) -> void:
 	var Inv = _CharacterInventories[Cha] as CharacterInventory
@@ -279,7 +305,8 @@ func LoadSaveData(Data : SaveData) -> void:
 	#FlushInventory()
 	for g in Data.Datas:
 		var dat = g as SD_CharacterInventory
-		LoadCharacter(dat.Cpt, dat.Items)
+		call_deferred("LoadCharacter", dat.Cpt, dat.Items)
+		#LoadCharacter(dat.Cpt, dat.Items)
 		dat.Cpt.LoadStats(dat.Fuel, dat.Hull)
 
 

@@ -14,6 +14,7 @@ config/name="Causarum Machina"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/plane_Wheel_BaseColor.png"
 
 [autoload]
@@ -57,6 +58,7 @@ LineMarkers=""
 ZoomAffected=""
 Pausable=""
 DigitalButtons=""
+City=""
 
 [gui]
 

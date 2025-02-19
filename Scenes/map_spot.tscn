@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
 radius = 150.0
 
-[node name="MapSpot" type="Node2D"]
+[node name="MapSpot" type="Node2D" groups=["City", "Clock", "Pausable"]]
 script = ExtResource("1_x7uyn")
 FuelTradeScene = ExtResource("2_yj7um")
 
@@ -17,6 +17,8 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaNotif"]
 shape = SubResource("CircleShape2D_4ymfd")
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="AreaNotif" to="." method="AreaEntered"]
 [connection signal="area_exited" from="AreaNotif" to="." method="AreaExited"]

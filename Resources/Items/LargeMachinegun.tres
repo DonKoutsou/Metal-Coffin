@@ -18,6 +18,7 @@ resource_local_to_scene = true
 script = ExtResource("7_clrx3")
 Upgrades = Array[ExtResource("6_oaj4l")]([SubResource("Resource_fmxhr")])
 UpgradeTime = 100.0
+UpgradeCost = 0.0
 IsDamaged = false
 ItemIcon = ExtResource("1_6bv61")
 ItemIconSmol = ExtResource("2_whklm")

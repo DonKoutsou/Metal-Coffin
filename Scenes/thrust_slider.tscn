@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dn356hqaf372p"]
 
 [ext_resource type="Script" path="res://Scripts/UI/thrust_slider.gd" id="1_pmd3c"]
-[ext_resource type="AudioStream" uid="uid://nl3f8shh7sjs" path="res://Assets/Sounds/Steer.wav" id="4_y1n38"]
+[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="4_i44d0"]
 [ext_resource type="Texture2D" uid="uid://cppak6y6wit6" path="res://Assets/UIPiecies/handle_Camera 3.png" id="4_yj1xw"]
 [ext_resource type="Texture2D" uid="uid://c2f4quec7hbw0" path="res://Assets/UIPiecies/handleshadow_Camera 3.png" id="5_pwxcd"]
 
@@ -44,9 +44,9 @@ texture = ExtResource("5_pwxcd")
 expand_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_y1n38")
-volume_db = -22.0
-pitch_scale = 0.8
+stream = ExtResource("4_i44d0")
+volume_db = 8.125
+pitch_scale = 4.0
 bus = &"MapSounds"
 
 [connection signal="gui_input" from="Handle" to="." method="_on_handle_gui_input"]

@@ -6,6 +6,7 @@ class_name World
 @export var _Command : Commander
 @export_group("Scenes")
 @export var CardFightScene : PackedScene
+@export var LoadingScene : PackedScene
 @export_group("Wallet")
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
@@ -26,12 +27,26 @@ static func GetInstance() -> World:
 
 func _ready() -> void:
 	#$Inventory.Player = GetMap().GetPlayerShip()
-	PlayerWallet.SetFunds( StartingFunds)
+	var Loadingscr = LoadingScene.instantiate() as LoadingScreen
+	add_child(Loadingscr)
+	GetMap().call_deferred("Init")
+	#TODO needs fix
+	if (!Loading):
+		await GetMap().GenerationFinished
+	Loadingscr.UpdateProgress(25)
+	await GetMap().GenerationFinished
+	Loadingscr.UpdateProgress(50)
+	await GetMap().GenerationFinished
+	Loadingscr.UpdateProgress(75)
+	await GetMap().GenerationFinished
+	Loadingscr.UpdateProgress(100)
+	Loadingscr.StartDest()
+	
 	UISoundMan.GetInstance().Refresh()
 	Instance = self
 	if (!Loading):
 		PlayIntro()
-
+		PlayerWallet.SetFunds( StartingFunds)
 func GetSaveData() -> SaveData:
 	var Data = SaveData.new()
 	Data.DataName = "Wallet"

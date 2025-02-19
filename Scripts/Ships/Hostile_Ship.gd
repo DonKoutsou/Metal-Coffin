@@ -218,6 +218,7 @@ func OnShipSeen(SeenBy : Node2D):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	SimulationManager.GetInstance().TogglePause(true)
+	ShipCamera.GetInstance().FrameCamToPos(global_position)
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0

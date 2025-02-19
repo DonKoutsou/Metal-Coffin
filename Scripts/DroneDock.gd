@@ -125,6 +125,7 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	var pl = get_parent() as MapShip
 	if (pl.CurrentPort != null):
 		Drne.SetCurrentPort(pl.CurrentPort)
+		pl.CurrentPort.OnSpotAproached(Drne)
 	if (!pl.Detectable):
 		Drne.ToggleRadar()
 func PlayLandingSound()-> void:

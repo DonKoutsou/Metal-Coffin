@@ -22,7 +22,7 @@ func DrawLines() -> void:
 		L.use_parent_material = true
 		L.width = 20
 		if (!RoadLines):
-			L.default_color = Color(1,1,1, 0.2)
+			L.default_color = Color(1,1,1, 1)
 		else:
 			L.width = 4
 		add_child(L)

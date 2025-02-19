@@ -19,6 +19,7 @@ script = ExtResource("7_rof78")
 Upgrades = Array[ExtResource("6_uw0hq")]([SubResource("Resource_fmxhr")])
 UpgradeVersion = ExtResource("5_5gmkn")
 UpgradeTime = 100.0
+UpgradeCost = 0.0
 IsDamaged = false
 ItemIcon = ExtResource("1_laxio")
 ItemIconSmol = ExtResource("2_fod6m")

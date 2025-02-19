@@ -21,9 +21,6 @@ material = SubResource("CanvasItemMaterial_oo6l4")
 scale = Vector2(2, 2)
 texture = ExtResource("3_mdex1")
 
-[node name="CitySpots" type="Node2D" parent="."]
-
-[node name="CitySpot1" type="Node2D" parent="CitySpots"]
-position = Vector2(-62, 37)
+[node name="CitySpot" type="Node2D" parent="."]
 script = ExtResource("4_e0mru")
 MapSpotTypes = Array[ExtResource("5_dg7gi")]([ExtResource("6_bgi6y")])

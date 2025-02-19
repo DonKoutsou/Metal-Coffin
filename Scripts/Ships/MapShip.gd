@@ -60,7 +60,7 @@ func _ready() -> void:
 		g.ForceMaxValue()
 func _draw() -> void:
 	if (ShowFuelRange):
-		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 100, 100), false, 2 / CamZoom, true)
+		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 0.764, 0.081), false, 2 / CamZoom, true)
 		
 #var DrawD = 0.1
 func _physics_process(delta: float) -> void:
@@ -84,6 +84,12 @@ func _physics_process(delta: float) -> void:
 			TakeoffEnded.emit(self)
 			TakingOff = false
 	
+	if (AccelChanged):
+		var Audioween = create_tween()
+		Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", lerp(0.1, 1.0, GetShipSpeed() / GetShipMaxSpeed()), 2)
+		if (!$AudioStreamPlayer2D.playing):
+			$AudioStreamPlayer2D.play()
+		AccelChanged = false
 
 	if (CurrentPort != null):
 		#CurrentPort.OnSpotVisited()
@@ -304,6 +310,8 @@ func HaltShip():
 	SetSpeed(0)
 	AccelerationChanged(0)
 
+var AccelChanged = false
+
 func AccelerationChanged(value: float) -> void:
 	if (value <= 0):
 		Travelling = false
@@ -323,11 +331,8 @@ func AccelerationChanged(value: float) -> void:
 
 		Travelling = true
 	
+	AccelChanged = true
 	
-	var Audioween = create_tween()
-	Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", max(0.1,value / 2), 2)
-	if (!$AudioStreamPlayer2D.playing):
-		$AudioStreamPlayer2D.play()
 	
 	GetShipAcelerationNode().position.x = max(0,value * GetShipMaxSpeed())
 	
@@ -429,13 +434,21 @@ func BodyEnteredBody(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
 		SetCurrentPort(Parent)
-		Parent.OnSpotAproached()
+		Parent.OnSpotAproached(self)
+		for g in GetDroneDock().DockedDrones:
+			g.SetCurrentPort(Parent)
+			Parent.OnSpotAproached(g)
 	
 func BodyLeftBody(Body : Area2D) -> void:
+	if (Docked):
+		return
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
 		RemovePort()
-
+		Parent.OnSpotDeparture(self)
+		for g in GetDroneDock().DockedDrones:
+			g.RemovePort()
+			Parent.OnSpotDeparture(g)
 func GetShipBodyArea() -> Area2D:
 	return $ShipBody
 func GetShipRadarArea() -> Area2D:

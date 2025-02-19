@@ -96,6 +96,10 @@ func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	#marker.ToggleShipDetails(true)
 	marker.SetMarkerDetails(Spot, PlayAnim)
 	
+	if (Spot.AlarmRaised):
+		marker.OnAlarmRaised(false)
+	else:
+		Spot.connect("SpotAlarmRaised", marker.OnAlarmRaised)
 	#Spot.connect("SpotAnalazyed", marker.OnSpotAnalyzed)
 	
 	_SpotMarkers.append(marker)

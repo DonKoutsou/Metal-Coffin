@@ -36,7 +36,7 @@ func GetShipName() -> String:
 	return MissileName
 
 func _ready() -> void:
-	
+	SimulationSpeed = SimulationManager.SimulationSpeed
 	Paused = SimulationManager.IsPaused()
 	if (FiredBy is not HostileShip):
 		var s = DeletableSound.new()
@@ -154,6 +154,7 @@ func OnShipSeen(SeenBy : MapShip):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
 	SimulationManager.GetInstance().TogglePause(true)
+	ShipCamera.GetInstance().FrameCamToPos(global_position)
 func OnShipUnseen(UnSeenBy : MapShip):
 	VisibleBy.erase(UnSeenBy)
 

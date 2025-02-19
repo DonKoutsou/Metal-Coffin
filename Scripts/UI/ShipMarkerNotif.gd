@@ -7,6 +7,8 @@ var EntityToFollow : Node2D
 var Blink : bool = true
 var Fast : bool = false
 
+var CurrentZoom : float
+
 func ToggleSimulation(t : bool) -> void:
 	if (Blink):
 		if (!t):
@@ -29,14 +31,14 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	$Control.scale = Vector2(1,1) / NewZoom
-	UpdateLine()
+	UpdateLine(NewZoom)
 	$Line2D.width =  2 / NewZoom
-	
-func UpdateLine()-> void:
+	CurrentZoom = NewZoom
+func UpdateLine(Zoom : float)-> void:
 	var c = $Control as Control
 	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
+	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / Zoom)
 	
 func UpdateSignRotation() -> void:
 	var c = $Control as Control
@@ -46,7 +48,7 @@ func UpdateSignRotation() -> void:
 	#$Control/PanelContainer/VBoxContainer.pivot_offset = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), c.global_position) - $Control/PanelContainer/VBoxContainer.global_position
 	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
+	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / CurrentZoom)
 
 	
 func get_closest_point_on_rect(rect: Rect2, point: Vector2) -> Vector2:

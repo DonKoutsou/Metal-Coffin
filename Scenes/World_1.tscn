@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=14 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
+[ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/loading_screen.tscn" id="3_pocgy"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/ShipControllerEventHandler.tres" id="6_1ajha"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="6_sol3n"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/UIEventH.tres" id="7_3dbmh"]
@@ -26,6 +27,7 @@ script = ExtResource("1_sc0wx")
 _Map = NodePath("Map")
 _Command = NodePath("Commander")
 CardFightScene = ExtResource("6_sol3n")
+LoadingScene = ExtResource("3_pocgy")
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
 

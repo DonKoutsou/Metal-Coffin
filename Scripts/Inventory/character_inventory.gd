@@ -171,9 +171,11 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 func TransferItem(Box : Inventory_Box) -> void:
 	ItemTransf.emit(Box, self)
 
-func StartUpgrade(Box : Inventory_Box) -> void:
+func StartUpgrade(Box : Inventory_Box, UpgradeBuff : bool) -> void:
 	var Part = Box.GetContainedItem() as ShipPart
 	_UpgradeTime = Part.UpgradeTime
+	if (UpgradeBuff):
+		_UpgradeTime /= 2
 	_ItemBeingUpgraded = Box
 	set_physics_process(true)
 	
