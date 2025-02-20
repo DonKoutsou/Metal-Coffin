@@ -97,12 +97,18 @@ alignment = 1
 [node name="ShipName" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
+theme_override_constants/line_spacing = -3
 theme_override_font_sizes/font_size = 14
-text = "Quifsa"
+text = "Quifsa
+SPEED 100
+Last Seen 1h ago
+Fuel : 10 / 250 Tons
+Hull Condition : 10 / 100"
 vertical_alignment = 1
 uppercase = true
 
 [node name="ShipName2" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+visible = false
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -112,6 +118,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="TimeSeen" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+visible = false
 use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -129,6 +136,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Fuel" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+visible = false
 use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -137,6 +145,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Hull" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+visible = false
 use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12

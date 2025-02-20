@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=35 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
 [ext_resource type="Texture2D" uid="uid://cyonateow4p62" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="31_bthjx"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
+[ext_resource type="Script" path="res://Scripts/Cable.gd" id="33_l6yn6"]
 
 [node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "DroneUI", "ButtonCover")]
 process_mode = 1
@@ -660,6 +661,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
+script = ExtResource("33_l6yn6")
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame4"]
 modulate = Color(0, 0, 0, 0.5)
@@ -692,6 +694,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
+script = ExtResource("33_l6yn6")
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame3"]
 modulate = Color(0, 0, 0, 0.5)
@@ -726,6 +729,7 @@ mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 flip_h = true
+script = ExtResource("33_l6yn6")
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame5"]
 modulate = Color(0, 0, 0, 0.5)
