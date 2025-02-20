@@ -17,7 +17,7 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
 radius = 1000.0
 
-[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape") groups=["Enemy", "Ships"]]
+[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["Enemy", "Ships"]]
 process_mode = 1
 script = ExtResource("1_dinuw")
 Patrol = false
@@ -25,6 +25,7 @@ BT = ExtResource("8_w8ob0")
 RadarShape = NodePath("Radar")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
+DroneDok = NodePath("DroneDock")
 Cpt = ExtResource("2_lpij7")
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]

@@ -137,6 +137,8 @@ func _draw():
 	
 			
 func DrawRuller() -> void:
+	if (ControlledShip == null):
+		return
 	var shippos = ControlledShip.global_position
 	var LineW = 1 / CamZoom
 

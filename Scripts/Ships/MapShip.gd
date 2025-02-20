@@ -5,7 +5,7 @@ class_name MapShip
 @export var RadarShape : Area2D
 @export var ElintShape : Area2D
 @export var BodyShape : Area2D
-
+@export var DroneDok : Node2D
 @export var LowStatsToNotifyAbout : Array[String]
 @export var Cpt : Captain
 
@@ -234,7 +234,7 @@ func angle_to_direction(angle: float) -> String:
 	return directions[index]
 
 func UpdateVizRange(rang : float):
-	print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
+	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 350)
 func UpdateELINTTRange(rang : float):
@@ -531,7 +531,7 @@ func GetElintLevel(Dist : float, RadarL : float) -> int:
 		Lvl = 1
 	return Lvl
 func GetDroneDock():
-	return $DroneDock
+	return DroneDok
 	
 func IsFuelFull() -> bool:
 	for g in GetDroneDock().DockedDrones:

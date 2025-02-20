@@ -24,19 +24,21 @@ func _ready() -> void:
 	UIEventH.connect("ShipSwitchPressed", _on_controlled_ship_swtich_range_changed)
 	
 	#call_deferred("SetInitialShip")
-	SetInitialShip()
+	
 	
 func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	AvailableShips.append(ControlledShip)
 
+	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
+	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
+	
 	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
 	UIEventH.OnSteerDirForced(ControlledShip.GetSteer())
-	UIEventH.call_deferred("OnShipUpdated", ControlledShip)
-	_Map.GetInScreenUI().GetInventory().call_deferred("AddCharacter",ControlledShip.Cpt)
-	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
-	_Map.GetInScreenUI().GetInventory().ShipStats.call_deferred("UpdateValues")
+	UIEventH.OnShipUpdated(ControlledShip)
+	
+	#_Map.GetInScreenUI().GetInventory().ShipStats.UpdateValues()
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
 func OnDroneDocked(D : Drone, _Target : MapShip) -> void:

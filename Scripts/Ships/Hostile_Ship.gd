@@ -4,7 +4,6 @@ class_name HostileShip
 
 @export var Direction = -1
 
-
 @export var ShipName : String
 @export var Patrol : bool = true
 @export var BT : PackedScene
@@ -18,6 +17,7 @@ var RefuelSpot : MapSpot
 var VisibleBy : Array[Node2D]
 var BTree : BeehaveTree
 var UseDefaultBehavior : bool = false
+var PosToSpawn : Vector2
 
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
@@ -25,8 +25,18 @@ signal OnEnemyVisualContact(Ship : MapShip, SeenBy : HostileShip)
 signal OnEnemyVisualLost(Ship : MapShip)
 signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
+signal ShipSpawned
 
 func  _ready() -> void:
+	call_deferred("InitialiseShip")
+	
+	#MapPointerManager.GetInstance().AddShip(self, false)
+	#$Elint.connect("area_entered", _on_elint_area_entered)
+	#$Elint.connect("area_exited", _on_elint_area_exited)
+
+func InitialiseShip() -> void:
+	global_position = PosToSpawn
+	ShipSpawned.emit()
 	ToggleFuelRangeVisibility(false)
 	Commander.GetInstance().RegisterSelf(self)
 
@@ -49,39 +59,39 @@ func  _ready() -> void:
 	else:
 		if (Command != null):
 			return
-		var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-		var nextcity = cities.find(CurrentPort) + Direction
-		if (nextcity < 0 or nextcity > cities.size() - 1):
-			Direction *= -1
-			nextcity = cities.find(CurrentPort) + Direction
-		
-		#If path is full it means we are loading so skip path generation
-		if (Path.size() == 0 and CurrentPort != null):
-			var port = CurrentPort
-			if (CurrentPort.NeighboringCities.size() == 0):
-				set_physics_process(false)
-				await Map.GetInstance().MAP_NeighborsSet
-				set_physics_process(true)
-			Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
-			if (Path.size() == 0):
-				Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
-			PathPart = 1
-		
-		BTree = BT.instantiate() as BeehaveTree
-		
-		var bb = Blackboard.new()
-		add_child(bb)
-		bb.set_value("TickRate", 1)
-		BTree.blackboard = bb
-		ToggleDocked(Docked)
-		add_child(BTree)
-		if (OS.get_name() == "Android"):
-			BTree.tick_rate = 10
-		bb.set_value("TickRate", BTree.tick_rate)
+		call_deferred("FigureOutPath")
+
+func FigureOutPath() -> void:
+	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
+	var nextcity = cities.find(CurrentPort) + Direction
+	if (nextcity < 0 or nextcity > cities.size() - 1):
+		Direction *= -1
+		nextcity = cities.find(CurrentPort) + Direction
 	
-	#MapPointerManager.GetInstance().AddShip(self, false)
-	#$Elint.connect("area_entered", _on_elint_area_entered)
-	#$Elint.connect("area_exited", _on_elint_area_exited)
+	#If path is full it means we are loading so skip path generation
+	if (Path.size() == 0 and CurrentPort != null):
+		var port = CurrentPort
+		if (CurrentPort.NeighboringCities.size() == 0):
+			set_physics_process(false)
+			await Map.GetInstance().MAP_NeighborsSet
+			set_physics_process(true)
+		Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
+		if (Path.size() == 0):
+			Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
+		PathPart = 1
+	
+	BTree = BT.instantiate() as BeehaveTree
+	
+	var bb = Blackboard.new()
+	add_child(bb)
+	bb.set_value("TickRate", 1)
+	BTree.blackboard = bb
+	ToggleDocked(Docked)
+	add_child(BTree)
+	if (OS.get_name() == "Android"):
+		BTree.tick_rate = 10
+	bb.set_value("TickRate", BTree.tick_rate)
+
 func _physics_process(delta: float) -> void:
 	UpdateElint(delta)
 	

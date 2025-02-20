@@ -8,7 +8,7 @@ var CurrentShip : MapShip
 
 func _ready() -> void:
 	ShipControllerEventH.connect("OnControlledShipChanged", ControlledShipChanged)
-	ControlledShipChanged(ShipControllerEventH.CurrentControlled)
+	#ControlledShipChanged(ShipControllerEventH.CurrentControlled)
 
 func ControlledShipChanged(NewShip : MapShip) -> void:
 	if (CurrentShip != null):

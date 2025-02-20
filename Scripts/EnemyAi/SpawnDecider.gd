@@ -20,7 +20,7 @@ func GetSpawnsForLocation(YPos : float) -> Array[Captain]:
 	var CptnInfo = generate_fleet(Points)
 	for g in CptnInfo:
 		var cpt = Captain.new()
-		cpt.CopyStats(g.Cpt)
+		cpt.call_deferred("CopyStats", g.Cpt)
 		Fleet.append(cpt)
 	#print("Generating fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 	#var FleetNames = "Fleet : "

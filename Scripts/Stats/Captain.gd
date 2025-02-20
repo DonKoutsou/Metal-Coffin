@@ -6,7 +6,7 @@ class_name Captain
 @export var CaptainPortrait : Texture
 @export var ShipIcon : Texture
 @export var CaptainStats : Array[ShipStat]
-var MappedStats : Array[STAT_CONST.STATS]
+#var MappedStats : Array[STAT_CONST.STATS]
 @export var ShipCallsign : String = "P"
 @export var StartingItems : Array[Item]
 @export var CurrentPort : String = ""
@@ -19,14 +19,14 @@ signal StatChanged(NewVal : float)
 var _CharInv : CharacterInventory
 
 func _init() -> void:
-	call_deferred("MapStats")
+	#call_deferred("MapStats")
 	if (OS.is_debug_build() and CheckForErrors):
 		call_deferred("CheckForIssues")
 
-func MapStats() -> void:
-	MappedStats.clear()
-	for g in CaptainStats:
-		MappedStats.push_back(g.GetStatName())
+#func MapStats() -> void:
+	#MappedStats.clear()
+	#for g in CaptainStats:
+		#MappedStats.push_back(g.GetStatName())
 
 func CheckForIssues() -> void:
 	var Itms : Array[Item] = []
@@ -39,7 +39,10 @@ func CheckForIssues() -> void:
 		printerr("Character {0} has more items configured than inventory space.".format([CaptainName]))
 
 func _GetStat(StatN : STAT_CONST.STATS) -> ShipStat:
-	return CaptainStats[MappedStats.find(StatN)]
+	for g in CaptainStats:
+		if (g.StatName == StatN):
+			return g
+	return null
 
 func GetStatBaseValue(StatN : STAT_CONST.STATS) -> float:
 	return _GetStat(StatN).GetBaseValue()
@@ -59,7 +62,7 @@ func CopyStats(Cpt : Captain) -> void:
 	CaptainPortrait = Cpt.CaptainPortrait
 	ShipIcon = Cpt.ShipIcon
 	ShipCallsign = Cpt.ShipCallsign
-	MappedStats = Cpt.MappedStats
+	#MappedStats = Cpt.MappedStats
 	ProvidingFunds = Cpt.ProvidingFunds
 	for g in Cpt.CaptainStats:
 		CaptainStats.append(g.duplicate(true))

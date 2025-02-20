@@ -21,12 +21,13 @@ radius = 350.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
 radius = 1000.0
 
-[node name="PlayerShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape") groups=["Ships", "ZoomAffected"]]
+[node name="PlayerShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_vppi8")
 script = ExtResource("1_ekbhy")
 RadarShape = NodePath("Radar")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
+DroneDok = NodePath("DroneDock")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 Cpt = ExtResource("2_ddg27")
 

@@ -63,6 +63,7 @@ func Load(world : World) ->bool:
 	return true
 
 func LoadMapDat(W : World, PlayerWallet : Wallet, PlPos : Vector2, DroneDat : Array[DroneSaveData], Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
+	await W.WRLD_WorldReady
 	var Mp = W.GetMap()
 	var Ships = get_tree().get_nodes_in_group("Ships")
 	Ships[0].GetDroneDock().LoadSaveData(DroneDat)

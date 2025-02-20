@@ -15,6 +15,7 @@ class_name World
 var StatsNotifiedLow : Array[String] = []
 
 signal WRLD_OnGameEnded
+signal WRLD_WorldReady
 #signal WRLD_StatsUpdated(StatN : String)
 signal WRLD_StatGotLow(StatN : String)
 
@@ -29,24 +30,42 @@ func _ready() -> void:
 	#$Inventory.Player = GetMap().GetPlayerShip()
 	var Loadingscr = LoadingScene.instantiate() as LoadingScreen
 	add_child(Loadingscr)
-	GetMap().call_deferred("Init")
 	#TODO needs fix
 	if (!Loading):
+		Loadingscr.ProcessStarted("Generating Map Spot Plecement")
+		GetMap().GenerateMap()
 		await GetMap().GenerationFinished
-	Loadingscr.UpdateProgress(25)
+		Loadingscr.ProcesFinished("Generating Map Spot Plecement")
+	Loadingscr.UpdateProgress(20)
+	Loadingscr.ProcessStarted("Generating Road Networks")
+	GetMap().GenerateRoads()
 	await GetMap().GenerationFinished
-	Loadingscr.UpdateProgress(50)
+	Loadingscr.ProcesFinished("Generating Road Networks")
+	Loadingscr.ProcessStarted("Generating Spot Connections")
+	Loadingscr.UpdateProgress(40)
 	await GetMap().GenerationFinished
-	Loadingscr.UpdateProgress(75)
-	await GetMap().GenerationFinished
+	Loadingscr.ProcesFinished("Generating Spot Connections")
+	Loadingscr.UpdateProgress(60)
+	if (!Loading):
+		Loadingscr.ProcessStarted("Spawning Enemy Fleets")
+		GetMap().SpawnTownEnemies()
+		await GetMap().GenerationFinished
+		Loadingscr.ProcesFinished("Creating Enemy Fleets")
+		Loadingscr.ProcessStarted("Placing Fleets In World")
+		Loadingscr.UpdateProgress(80)
+		await GetMap().GenerationFinished
+		Loadingscr.ProcesFinished("Placing Fleets In World")
 	Loadingscr.UpdateProgress(100)
 	Loadingscr.StartDest()
-	
+	GetMap()._InitialPlayerPlacament()
+	$ShipController.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
 	Instance = self
 	if (!Loading):
 		PlayIntro()
 		PlayerWallet.SetFunds( StartingFunds)
+	WRLD_WorldReady.emit()
+	
 func GetSaveData() -> SaveData:
 	var Data = SaveData.new()
 	Data.DataName = "Wallet"
