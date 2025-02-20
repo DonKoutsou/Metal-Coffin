@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://b6kalsa6lyfbf"]
+
+[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/FireSuppressionUnit.tres" id="1_08pc1"]
+[ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_bdj1a"]
+
+[resource]
+script = ExtResource("2_bdj1a")
+It = ExtResource("1_08pc1")
+Price = 15
+Amm = 0

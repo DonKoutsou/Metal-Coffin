@@ -10,9 +10,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -130.0
+offset_left = -180.0
 offset_top = -53.0
-offset_right = 130.0
+offset_right = 180.0
 offset_bottom = 53.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -28,7 +28,7 @@ ItPriceT = NodePath("VBoxContainer/HBoxContainer/HBoxContainer2/Price")
 PlWallet = ExtResource("2_7jnpa")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(420, 0)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("1_vpph7")

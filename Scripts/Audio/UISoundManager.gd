@@ -4,29 +4,33 @@ class_name UISoundMan
 @export var ClickOutSound : AudioStream
 @export var DigitalClick : AudioStream
 @export var HoverShound : AudioStream
-
+@export var SoundStr : float = 0
 var Sounds : Array[AudioStreamPlayer] = []
 
 static var Instance : UISoundMan
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var player1 = AudioStreamPlayer.new()
+	player1.volume_db = SoundStr
 	player1.stream = ClickSound
 	player1.bus = "UI"
 	add_child(player1)
 	Sounds.append(player1)
 	var player2 = AudioStreamPlayer.new()
+	player2.volume_db = SoundStr
 	player2.stream = ClickOutSound
 	player2.bus = "UI"
 	add_child(player2)
 	Sounds.append(player2)
 	var player3 = AudioStreamPlayer.new()
+	player3.volume_db = SoundStr
 	player3.stream = DigitalClick
 	player3.bus = "UI"
 	add_child(player3)
 	Sounds.append(player3)
 	var player4 = AudioStreamPlayer.new()
-	player4.volume_db = -5
+	player4.volume_db = SoundStr
+	#player4.volume_db = -5
 	player4.stream = HoverShound
 	player4.bus = "UI"
 	add_child(player4)
@@ -58,11 +62,11 @@ func OnButtonClicked():
 	Sounds[0].playing = true
 	var rand = randf_range(0.9, 1.0)
 	Sounds[0].pitch_scale = rand
-	Sounds[0].volume_db = randf_range(-1, 1.0)
+	Sounds[0].volume_db = randf_range(SoundStr -1, SoundStr + 1.0)
 func OnButtonReleased():
 	Sounds[1].playing = true
 	var rand = randf_range(0.9, 1.0)
 	Sounds[1].pitch_scale = rand
-	Sounds[1].volume_db = randf_range(-1, 1.0)
+	Sounds[1].volume_db = randf_range(SoundStr -1, SoundStr + 1.0)
 func OnDigitalButtonClicked():
 	Sounds[3].playing = true

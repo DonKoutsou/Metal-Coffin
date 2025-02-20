@@ -4,13 +4,37 @@ class_name SpawnDecider
 
 @export var CaptainList : Array[CaptainSpawnInfo]
 
+@export var MerchList : Array[MerchandiseInfo]
+
 const LowestPrice : int = 30
+const MerchLowest : int = 2
 var sorted_captain_list
 
 func Init() -> void:
 	# Sort CaptainList by cost descending to prioritize more powerful ships
 	sorted_captain_list = CaptainList.duplicate()
 	sorted_captain_list.sort_custom(SortByCostDescending)
+
+func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
+	var available_merch: Array[Merchandise] = []
+	var points = GetPointsForPosition(abs(YPos))
+
+	# Iterate through the MerchList to select merchandise based on points
+	while points > MerchLowest:
+		var m = MerchList.pick_random() as MerchandiseInfo
+		if (points > m.Cost):
+			var hasm = false
+			for g in available_merch:
+				if (m.Merch.It == g.It):
+					g.Amm += 1
+					hasm = true
+					break
+			if (!hasm):
+				var NewMerch = m.Merch.duplicate(false)
+				NewMerch.Amm = 1
+				available_merch.append(NewMerch)
+			points -= m.Cost
+	return available_merch
 
 func GetSpawnsForLocation(YPos : float) -> Array[Captain]:
 	var time = Time.get_ticks_msec()

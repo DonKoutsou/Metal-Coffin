@@ -15,3 +15,4 @@ class_name  MapSpotSaveData
 @export var SpotInfo : MapSpotCompleteInfo
 @export var AlarmRaised : bool
 @export var AlarmProgress : float
+@export var Merch : Array[Merchandise]

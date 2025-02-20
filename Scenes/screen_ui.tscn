@@ -30,8 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://c0fey2gjg1mvv" path="res://Scenes/SimNob.tscn" id="27_67jhj"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
 [ext_resource type="Texture2D" uid="uid://bxec8bkr01ino" path="res://Assets/UIPiecies/Screen/Panel.png" id="28_r1kt4"]
-[ext_resource type="Texture2D" uid="uid://c8pjg0qhbcr8d" path="res://Assets/UIPiecies/Screen/ButtonCover.png" id="30_0jgnt"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
+[ext_resource type="Texture2D" uid="uid://cyonateow4p62" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="31_bthjx"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 
 [node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "DroneUI", "ButtonCover")]
@@ -404,7 +404,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="ControlledShipSwitch" type="TextureButton" parent="." groups=["Buttons"]]
-process_mode = 3
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -448,7 +447,6 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="ControlledShipReturn" type="TextureButton" parent="." groups=["Buttons"]]
-process_mode = 3
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -645,7 +643,7 @@ offset_bottom = 314.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 0
-texture = ExtResource("30_0jgnt")
+texture = ExtResource("31_bthjx")
 expand_mode = 1
 
 [node name="ScreenFrame4" type="TextureRect" parent="."]

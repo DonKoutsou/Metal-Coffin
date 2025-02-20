@@ -2,17 +2,19 @@ extends CanvasLayer
 
 class_name LoadingScreen
 
+signal LoadingDestroyed
 
 func _ready() -> void:
 	$AnimationPlayer.play("Logo")
 
 func ProcessStarted(ProcessName : String) -> void:
 	var l = Label.new()
-	l.text = "{0} : Working...".format([ProcessName])
+	l.text = "{0} {1} : Process Started...".format([Time.get_time_string_from_system(),ProcessName])
 	$VBoxContainer.add_child(l)
 func ProcesFinished(ProcessName : String) -> void:
-	$VBoxContainer.get_child($VBoxContainer.get_child_count() - 1).text = "{0} : Finished".format([ProcessName])
-
+	var l = Label.new()
+	l.text = "{0} {1} : Process Finished".format([Time.get_time_string_from_system(),ProcessName])
+	$VBoxContainer.add_child(l)
 func UpdateProgress(Precent : float) -> void:
 	var tw = create_tween()
 	tw.tween_property($ProgressBar, "value", Precent, 1)
@@ -24,4 +26,5 @@ func StartDest():
 	t.autostart = true
 	add_child(t)
 	await t.timeout
+	LoadingDestroyed.emit()
 	queue_free()

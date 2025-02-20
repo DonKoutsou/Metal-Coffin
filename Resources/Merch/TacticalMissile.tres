@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://fgpjo7b6j2lp"]
+
+[ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/TacticalMissile.tres" id="1_rve1n"]
+[ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_sh1dp"]
+
+[resource]
+script = ExtResource("2_sh1dp")
+It = ExtResource("1_rve1n")
+Price = 20
+Amm = 0

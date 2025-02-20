@@ -27,6 +27,7 @@ script = ExtResource("5_8b602")
 ClickSound = ExtResource("6_3kbt8")
 ClickOutSound = ExtResource("7_a5iis")
 HoverShound = ExtResource("6_h4tjh")
+SoundStr = -10.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_y0dhp")

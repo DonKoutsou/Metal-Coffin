@@ -29,7 +29,7 @@ var PlMaxFuel : float = 0
 var BoughtFuel : float = 0
 var HasFuel : bool = false
 var HasRepair : bool = false
-
+var TownSpot : MapSpot
 var PlHull : float = 0
 var PlMaxHull : float = 0
 var BoughtRepairs : float = 0
@@ -64,19 +64,25 @@ func _ready() -> void:
 	RepairPrice.text = var_to_str(RepairpricePerRepairValue)
 	
 	var Itms = InventoryManager.GetInstance().GetAllItemsInFleet(LandedShip)
-	
+	for g in TownSpot.Merch:
+		var It = g.It
+		for z in Merch:
+			if (It == z.It):
+				z.Amm = g.Amm
 	#signal OnItemBought(It : Item)
 #signal OnItemSold(It : Item)
 	
-	for g in Merch:
+	for g in Merch.size():
+		var m = Merch[g] as Merchandise
 		var ItScene = ItemScene.instantiate() as TownShopItem
-		ItScene.It = g.It
-		ItScene.ItPrice = g.Price
-		ItScene.ShopAmm = g.Amm
-		ItScene.PlAmm = Itms.count(g.It)
+		ItScene.It = m.It
+		ItScene.ItPrice = m.Price
+		ItScene.ShopAmm = m.Amm
+		ItScene.PlAmm = Itms.count(m.It)
 		ItScene.LandedShip = LandedShip
 		ItScene.connect("OnItemBought", OnItemBought)
 		ItScene.connect("OnItemSold", OnItemSold)
+		ItemPlecement.visible = true
 		ItemPlecement.add_child(ItScene)
 
 func SetFuelData():
@@ -159,16 +165,31 @@ func _on_button_pressed() -> void:
 
 
 func On_MunitionShop_pressed() -> void:
-	ItemPlecement.visible = true
+	ItemPlecement.get_parent().get_parent().visible = true
 	RepRefPlecement.visible = false
 
 
 func On_RefRef_Pressed() -> void:
-	ItemPlecement.visible = false
+	ItemPlecement.get_parent().get_parent().visible = false
 	RepRefPlecement.visible = true
 
 func OnItemSold(It : Item) -> void:
 	InventoryManager.GetInstance().RemoveItemFromFleet(It, LandedShip)
-	
+	for g in TownSpot.Merch:
+		if (g.It == It):
+			g.Amm += 1
+			break
+
 func OnItemBought(It : Item) -> void:
 	InventoryManager.GetInstance().AddItemToFleet(It, LandedShip)
+	for g in TownSpot.Merch:
+		if (g.It == It):
+			g.Amm -= 1
+			break
+
+
+func _on_scroll_gui_input(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		$VBoxContainer/HBoxContainer/PanelContainer/Scroll.scroll_vertical -= event.relative.y
+	if (event is InputEventScreenDrag):
+		$VBoxContainer/HBoxContainer/PanelContainer/Scroll.scroll_vertical -= event.relative.y

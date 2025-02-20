@@ -155,6 +155,11 @@ func StartActionPerformPhase() -> void:
 				
 				if (HasDeff):
 					Actions[Target].erase(Action.CounteredBy)
+					if (Action.Consume):
+						var Cards = Target.Cards
+						Cards[Action] -= 1
+						if (Cards[Action] == 0):
+							Cards.erase(Action)
 					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
 					if (PlayerShips.has(Ship)):
 						DamageNeg += Action.GetDamage() * Ship.FirePower
@@ -185,6 +190,11 @@ func StartActionPerformPhase() -> void:
 					anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
 					await(anim.AnimationFinished)
 					viz.ToggleFire(false)
+					if (Action.Consume):
+						var Cards = Ship.Cards
+						Cards[Action] -= 1
+						if (Cards[Action] == 0):
+							Cards.erase(Action)
 	for g in ShipTurns:
 		var viz = GetShipViz(g)
 		if (viz.IsOnFire()):
@@ -354,35 +364,37 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	selected_card_plecements.add_child(c)
 	Actions[CurrentShip].append(Action)
 	
-	if (C.CStats.Consume):
-		var Cards = ShipTurns[CurrentTurn].Cards
-		Cards[C.CStats] -= 1
-		if (Cards[C.CStats] == 0):
-			Cards.erase(C.CStats)
-	if (Option != null):
-		if (Option.CauseConsumption):
-			var Ammo = ShipTurns[CurrentTurn].Ammo
-			Ammo[Option] -= 1
-			if (Ammo[Option] == 0):
-				Ammo.erase(Option)
+	if (C.CStats is OffensiveCardStats):
+		if (C.CStats.Consume):
+			var Cards = ShipTurns[CurrentTurn].Cards
+			Cards[C.CStats] -= 1
+			if (Cards[C.CStats] == 0):
+				Cards.erase(C.CStats)
+		if (Option != null):
+			if (Option.CauseConsumption):
+				var Ammo = ShipTurns[CurrentTurn].Ammo
+				Ammo[Option] -= 1
+				if (Ammo[Option] == 0):
+					Ammo.erase(Option)
 	UpdateEnergy()
 	UpdateHandCards()
 
 func RemoveCard(C : Card, Option : CardOption) -> void:
 	C.queue_free()
-	if (C.CStats.Consume):
-		var Cards = ShipTurns[CurrentTurn].Cards
-		if (!Cards.has(C.CStats)):
-			Cards[C.CStats] = 1
-		else:
-			Cards[C.CStats] += 1
-	if (C.CStats.SelectedOption != null):
-		if (C.CStats.SelectedOption.CauseConsumption):
-			var Ammo = ShipTurns[CurrentTurn].Ammo
-			if (!Ammo.has(C.CStats.SelectedOption)):
-				Ammo[C.CStats.SelectedOption] = 1
+	if (C.CStats is OffensiveCardStats):
+		if (C.CStats.Consume):
+			var Cards = ShipTurns[CurrentTurn].Cards
+			if (!Cards.has(C.CStats)):
+				Cards[C.CStats] = 1
 			else:
-				Ammo[C.CStats.SelectedOption] += 1
+				Cards[C.CStats] += 1
+		if (C.CStats.SelectedOption != null):
+			if (C.CStats.SelectedOption.CauseConsumption):
+				var Ammo = ShipTurns[CurrentTurn].Ammo
+				if (!Ammo.has(C.CStats.SelectedOption)):
+					Ammo[C.CStats.SelectedOption] = 1
+				else:
+					Ammo[C.CStats.SelectedOption] += 1
 			
 	var CurrentShip = ShipTurns[CurrentTurn]
 	Actions[CurrentShip].erase(C.CStats)

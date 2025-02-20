@@ -159,10 +159,10 @@ func _physics_process(delta: float) -> void:
 
 	var offset = GetShipSpeedVec()
 	global_position += offset * SimulationSpeed
-	
+
 func TogglePause(t : bool):
 	Paused = t
-	$AudioStreamPlayer2D.stream_paused = t
+	$AudioStreamPlayer2D.playing = !t
 
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:

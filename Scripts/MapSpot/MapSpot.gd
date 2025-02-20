@@ -13,6 +13,7 @@ signal SpotAlarmRaised(Notify : bool)
 
 var SpotType : MapSpotType
 var SpotInfo : MapSpotCompleteInfo
+var Merch : Array[Merchandise] = []
 var Pos : Vector2
 var Visited = false
 var Seen = false
@@ -69,6 +70,7 @@ func GetSaveData() -> Resource:
 	datas.SpotInfo = SpotInfo
 	datas.AlarmRaised = AlarmRaised
 	datas.AlarmProgress = AlarmProgress
+	datas.Merch = Merch
 	return datas
 
 func SetSpotData(Data : MapSpotType) -> void:

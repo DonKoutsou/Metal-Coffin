@@ -37,8 +37,7 @@ func SetInitialShip() -> void:
 	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
 	UIEventH.OnSteerDirForced(ControlledShip.GetSteer())
 	UIEventH.OnShipUpdated(ControlledShip)
-	
-	#_Map.GetInScreenUI().GetInventory().ShipStats.UpdateValues()
+
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
 func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
@@ -84,6 +83,7 @@ func OnShipLanded(Ship : MapShip) -> void:
 		return
 	var sc = spot.FuelTradeScene as PackedScene
 	var fuel = sc.instantiate() as TownScene
+	#fuel.TownMerch = spot.SpotInfo.Merchendise
 	fuel.HasFuel = spot.HasFuel()
 	fuel.HasRepair = spot.HasRepair()
 	fuel.TownFuel = spot.CityFuelReserves
@@ -91,6 +91,7 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.BoughtRepairs = spot.PlayerRepairReserves
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
 	fuel.LandedShip = Ship
+	fuel.TownSpot = spot
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 	UIEventH.OnScreenUIToggled(false)
 	UIEventH.OnButtonCoverToggled(true)

@@ -61,10 +61,12 @@ func _ready() -> void:
 	$ShipController.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
 	Instance = self
+	WRLD_WorldReady.emit()
 	if (!Loading):
+		await Loadingscr.LoadingDestroyed
 		PlayIntro()
 		PlayerWallet.SetFunds( StartingFunds)
-	WRLD_WorldReady.emit()
+	
 	
 func GetSaveData() -> SaveData:
 	var Data = SaveData.new()

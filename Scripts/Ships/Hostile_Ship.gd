@@ -28,6 +28,7 @@ signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
 
 func  _ready() -> void:
+	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 	
 	#MapPointerManager.GetInstance().AddShip(self, false)
@@ -37,7 +38,7 @@ func  _ready() -> void:
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
 	ShipSpawned.emit()
-	ToggleFuelRangeVisibility(false)
+	
 	Commander.GetInstance().RegisterSelf(self)
 
 	for g in Cpt.CaptainStats:

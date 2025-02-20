@@ -191,7 +191,8 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		VillageSpots.append(spot)
 	#LOCATION OF PREVIUSLY PLACED MAP SPOT
 	var Prevpos : Vector2 = Vector2(250,250)
-
+	
+	var GeneratedSpots : Array[Town] = []
 	for g in MapSize :
 		var type : PackedScene
 		
@@ -220,17 +221,18 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
 		sc.Pos = pos
 		SpotParent.call_deferred("add_child", sc)
-		
-		SpotList.append(sc)
+		sc.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(pos.y))
+		GeneratedSpots.append(sc)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 	
 	var time = Time.get_ticks_msec()
 	
-	call_deferred("MapGenFinished")
+	call_deferred("MapGenFinished", GeneratedSpots)
 
 
-func MapGenFinished() -> void:
+func MapGenFinished(Spots : Array[Town]) -> void:
+	SpotList.append_array(Spots)
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()
 	
@@ -319,7 +321,7 @@ func _physics_process(delta: float) -> void:
 func AddEnemyToHierarchy(en : HostileShip, pos : Vector2):
 	en.PosToSpawn = pos
 	$SubViewportContainer/ViewPort.add_child(en)
-	
+	en.connect("OnShipMet", EnemyMet)
 
 
 func FindEnemyByName(Name : String) -> HostileShip:
@@ -368,8 +370,7 @@ func GetMissileSaveData() -> SaveData:
 func EnemySpawnFinished() -> void:
 	EnemySpawnTh.wait_to_finish()
 	set_physics_process(true)
-	for g in get_tree().get_nodes_in_group("Enemy"):
-		g.connect("OnShipMet", EnemyMet)
+	
 	GenerationFinished.emit()
 	
 #/////////////////////////////////////////////////////////////

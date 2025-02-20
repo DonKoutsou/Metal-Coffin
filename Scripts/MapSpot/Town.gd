@@ -52,6 +52,8 @@ func GetSaveData() -> TownSaveData:
 	datas.Spots = spotdata
 	return datas
 
+func SetMerch(Merch : Array[Merchandise]) -> void:
+	GetSpot().Merch = Merch
 #TODO get rid of cities, useless
 func GetCityName() -> String:
 	return $CitySpot.SpotName
@@ -75,6 +77,7 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.CityFuelReserves = spotdat.CityFuelReserves
 		sc.AlarmRaised = spotdat.AlarmRaised
 		sc.AlarmProgress = spotdat.AlarmProgress
+		sc.Merch = spotdat.Merch
 		CSpot.free()
 
 		if (spotdat.Seen):

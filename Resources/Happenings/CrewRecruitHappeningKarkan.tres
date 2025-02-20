@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://gvu43lp4i4y6"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_53tyg"]
-[ext_resource type="Resource" uid="uid://c6f3bxpe2rsxd" path="res://Resources/Captains/Karkan.tres" id="2_oxhqw"]
+[ext_resource type="Resource" uid="uid://c6f3bxpe2rsxd" path="res://Resources/Karkan.tres" id="2_oxhqw"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_bobis"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_n4hjy"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_i0msm"]
