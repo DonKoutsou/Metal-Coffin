@@ -108,7 +108,6 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="ShipName2" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-visible = false
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0

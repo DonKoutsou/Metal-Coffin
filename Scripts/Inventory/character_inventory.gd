@@ -86,7 +86,7 @@ func AddItem(It : Item) -> void:
 				_CardInventory[It.CardProviding] += 1
 			if (It.CardOptionProviding != null):
 				_CardAmmo[It.CardOptionProviding] += 1
-			print("Added 1 {0}".format([It.ItemName]))
+			#print("Added 1 {0}".format([It.ItemName]))
 			#if (It is MissileItem):
 				#MissileDockEventH.MissileAdded.emit(It)
 			return
@@ -102,7 +102,7 @@ func AddItem(It : Item) -> void:
 		if (It is ShipPart):
 			OnShipPartAdded.emit(It)
 		OnItemAdded.emit(It)
-		print("Added 1 {0}".format([It.ItemName]))
+		#print("Added 1 {0}".format([It.ItemName]))
 		#if (It is MissileItem):
 			#MissileDockEventH.MissileAdded.emit(It)
 		return
@@ -131,7 +131,7 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	#if (It is MissileItem):
 		#MissileDockEventH.MissileRemoved.emit(It)
 	Box.UpdateAmm(-1)
-	print("Removed 1 {0}".format([It.ItemName]))
+	#print("Removed 1 {0}".format([It.ItemName]))
 	_InventoryContents[It] -= 1
 	if (It.CardProviding != null):
 		var c = It.CardProviding
@@ -159,8 +159,8 @@ func _GetInventoryBoxes() -> Array:
 
 func UpgradeItem(Box : Inventory_Box) -> void:
 	if (_ItemBeingUpgraded != null):
-		#PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part. Wait for it to finish first.")
-		print("Ship is already upgrading a part. Wait for it to finish first.")
+		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part.")
+		#print("Ship is already upgrading a part. Wait for it to finish first.")
 		return
 	#else :if (!Player.cu):
 		#PopUpManager.GetInstance().DoFadeNotif("Cant upgrade ship in current port.")

@@ -143,7 +143,7 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 	if (EnemyPositionsToInvestigate.keys().has(Ship)):
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			print(Ship.GetShipName() + "'s position was under investigation, investigation order has been canceled")
-			InvestigationOrderComplete(EnemyPositionsToInvestigate[Ship])
+			InvestigationOrderComplete(EnemyPositionsToInvestigate[Ship].Position)
 		EnemyPositionsToInvestigate.erase(Ship)
 	if (SeenBy != null):
 		if (SeenBy.Patrol):

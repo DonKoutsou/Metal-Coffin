@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=14 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
+[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="6_460uc"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="6_voe58"]
+[ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="7_wdsp5"]
 
 [sub_resource type="Animation" id="Animation_gaja2"]
@@ -82,7 +84,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+color = Color(0.168968, 0.205164, 0.25251, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="w"]
 layout_mode = 1
@@ -104,6 +106,7 @@ layout_mode = 2
 texture = ExtResource("3_s86m3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -123,7 +126,66 @@ libraries = {
 "": SubResource("AnimationLibrary_d3p0b")
 }
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -257.0
+offset_right = 256.0
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_gn124")
+theme_override_colors/font_outline_color = Color(0.615304, 0.57196, 0.322451, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("6_460uc")
+theme_override_font_sizes/font_size = 64
+text = "Metal Coffin"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(512, 200)
+layout_mode = 2
+size_flags_vertical = 6
+texture = ExtResource("7_aspsn")
+expand_mode = 1
+
+[node name="Play" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+theme = ExtResource("6_gn124")
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+text = "New Expedition"
+
+[node name="Load" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+theme = ExtResource("6_gn124")
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+text = "Load"
+
+[node name="Exit" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+theme = ExtResource("6_gn124")
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+text = "Exit"
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -137,43 +199,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nyw5u")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_gn124")
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 34
-text = "Metal Lament"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-uppercase = true
-
-[node name="Play" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-layout_mode = 2
-theme = ExtResource("6_gn124")
-theme_override_font_sizes/font_size = 24
-action_mode = 0
-text = "New Expedition"
-
-[node name="Load" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-layout_mode = 2
-theme = ExtResource("6_gn124")
-theme_override_font_sizes/font_size = 24
-action_mode = 0
-text = "Load"
-
-[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-layout_mode = 2
-theme = ExtResource("6_gn124")
-theme_override_font_sizes/font_size = 24
-action_mode = 0
-text = "Exit"
 
 [node name="Screen" type="ColorRect" parent="."]
 process_mode = 3
@@ -200,6 +225,6 @@ mouse_filter = 2
 texture = ExtResource("7_wdsp5")
 expand_mode = 1
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bas2hvjynjr05"]
+[gd_scene load_steps=13 format=3 uid="uid://bas2hvjynjr05"]
 
 [ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="1_uao5l"]
 [ext_resource type="Script" path="res://Scenes/loading_screen.gd" id="2_ehbru"]
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="2_how7o"]
+[ext_resource type="Texture2D" uid="uid://1w0gtw2r1ypf" path="res://Assets/Untitled.png" id="2_umnp2"]
 [ext_resource type="Texture2D" uid="uid://byfedq22uoe62" path="res://Assets/Logos/ΜΧΨ1.png" id="4_57mps"]
 [ext_resource type="Texture2D" uid="uid://cga2lurpwk4ft" path="res://Assets/Logos/ΜΧΨ2.png" id="5_bbvsw"]
 [ext_resource type="Texture2D" uid="uid://dni651daut8p5" path="res://Assets/Logos/ΜΧΨ3.png" id="6_pg350"]
@@ -91,6 +92,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.499)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -356.0
+offset_top = -139.0
+offset_right = 356.0
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_umnp2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false

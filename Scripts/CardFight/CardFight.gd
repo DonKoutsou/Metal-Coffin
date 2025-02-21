@@ -155,11 +155,6 @@ func StartActionPerformPhase() -> void:
 				
 				if (HasDeff):
 					Actions[Target].erase(Action.CounteredBy)
-					if (Action.Consume):
-						var Cards = Target.Cards
-						Cards[Action] -= 1
-						if (Cards[Action] == 0):
-							Cards.erase(Action)
 					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
 					if (PlayerShips.has(Ship)):
 						DamageNeg += Action.GetDamage() * Ship.FirePower
@@ -206,6 +201,7 @@ func StartActionPerformPhase() -> void:
 			g.Hull -= 10
 			if (g.Hull <= 0):
 				if (await ShipDestroyed(g)):
+					
 					return
 			else:
 				UpdateShipStats(g)
@@ -220,11 +216,13 @@ func TrySetFire() -> bool:
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	RemoveShip(Ship)
 	if (EnemyShips.size() == 0):
+		RefundUnusedCards()
 		await OnFightEnded(true)
 		CardFightEnded.emit(PlayerShips)
 		queue_free()
 		return true
 	if (PlayerShips.size() == 0):
+		RefundUnusedCards()
 		await OnFightEnded(false)
 		CardFightEnded.emit(EnemyShips)
 		queue_free()
@@ -241,9 +239,30 @@ func OnFightEnded(Won : bool) -> void:
 func ShowEndCard() -> void:
 	pass
 
+
 func EndActionPerformPhase() -> void:
+	RefundUnusedCards()
 	Actions.clear()
 	StartActionPickPhase()
+
+func RefundUnusedCards() -> void:
+	for Ship in PlayerShips:
+		var Acts = Actions[Ship]
+		for z in Acts:
+			var Action = z as CardStats
+			if (!Action.Consume):
+				continue
+			RefundCardToPlayerShip(Action, Ship)
+			
+func RefundCardToPlayerShip(C : CardStats, Ship : BattleShipStats):
+	var HasCard = false
+	for c in Ship.Cards.keys():
+		if (c.CardName == C.CardName):
+			Ship.Cards[c] += 1
+			HasCard = true
+			break
+	if (!HasCard):
+		Ship.Cards[C] = 1
 
 func NextShipActionPick() -> void:
 	var CurrentShip = ShipTurns[CurrentTurn]
@@ -364,37 +383,43 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	selected_card_plecements.add_child(c)
 	Actions[CurrentShip].append(Action)
 	
-	if (C.CStats is OffensiveCardStats):
-		if (C.CStats.Consume):
-			var Cards = ShipTurns[CurrentTurn].Cards
-			Cards[C.CStats] -= 1
-			if (Cards[C.CStats] == 0):
-				Cards.erase(C.CStats)
-		if (Option != null):
-			if (Option.CauseConsumption):
-				var Ammo = ShipTurns[CurrentTurn].Ammo
-				Ammo[Option] -= 1
-				if (Ammo[Option] == 0):
-					Ammo.erase(Option)
+	#if (C.CStats is OffensiveCardStats):
+	if (C.CStats.Consume):
+		var Cards = ShipTurns[CurrentTurn].Cards
+		Cards[C.CStats] -= 1
+		if (Cards[C.CStats] == 0):
+			Cards.erase(C.CStats)
+	if (Option != null):
+		if (Option.CauseConsumption):
+			var Ammo = ShipTurns[CurrentTurn].Ammo
+			Ammo[Option] -= 1
+			if (Ammo[Option] == 0):
+				Ammo.erase(Option)
 	UpdateEnergy()
 	UpdateHandCards()
 
 func RemoveCard(C : Card, Option : CardOption) -> void:
 	C.queue_free()
-	if (C.CStats is OffensiveCardStats):
-		if (C.CStats.Consume):
-			var Cards = ShipTurns[CurrentTurn].Cards
-			if (!Cards.has(C.CStats)):
-				Cards[C.CStats] = 1
+	#if (C.CStats is OffensiveCardStats):
+	if (C.CStats.Consume):
+		var Cards = ShipTurns[CurrentTurn].Cards
+		var HasCard = false
+		for g in Cards.keys():
+			#print("Comparing {0} with {1}".format([g.resource_path, C.CStats.resource_path]))
+			if (g.CardName == C.CStats.CardName):
+				HasCard = true
+				Cards[g] += 1
+				break
+		if (!HasCard):
+			Cards[C.CStats] = 1
+
+	if (C.CStats.SelectedOption != null):
+		if (C.CStats.SelectedOption.CauseConsumption):
+			var Ammo = ShipTurns[CurrentTurn].Ammo
+			if (!Ammo.has(C.CStats.SelectedOption)):
+				Ammo[C.CStats.SelectedOption] = 1
 			else:
-				Cards[C.CStats] += 1
-		if (C.CStats.SelectedOption != null):
-			if (C.CStats.SelectedOption.CauseConsumption):
-				var Ammo = ShipTurns[CurrentTurn].Ammo
-				if (!Ammo.has(C.CStats.SelectedOption)):
-					Ammo[C.CStats.SelectedOption] = 1
-				else:
-					Ammo[C.CStats.SelectedOption] += 1
+				Ammo[C.CStats.SelectedOption] += 1
 			
 	var CurrentShip = ShipTurns[CurrentTurn]
 	Actions[CurrentShip].erase(C.CStats)

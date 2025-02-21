@@ -10,22 +10,17 @@ config_version=5
 
 [application]
 
-config/name="Causarum Machina"
+config/name="Metal Coffin"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://Assets/plane_Wheel_BaseColor.png"
+config/icon="res://Assets/LogoIcon2.png"
 
 [autoload]
 
 BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
-
-[debug]
-
-settings/stdout/print_gpu_profile=true
-settings/stdout/verbose_stdout=true
 
 [display]
 

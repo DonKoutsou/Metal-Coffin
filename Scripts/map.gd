@@ -265,19 +265,21 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 			SpawnSpotFleet(Spot, false, T.Pos)
 		if (Spot.GetPossibleDrops().size() == 3):
 			SpawnSpotFleet(Spot, true, T.Pos)
-		print("Spawning fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
+		#print("Spawning fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 	call_deferred("EnemySpawnFinished")
 
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Pos : Vector2) -> void:
 	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y)
 	var SpawnedFleet = []
+	var SpawnedCallsigns = []
 	for f in Fleet:
 		var Ship = EnemyScene.instantiate() as HostileShip
 		Ship.Cpt = f
 		Ship.CurrentPort = Spot
 		Ship.Patrol = Patrol
 		Ship.ShipName = TempEnemyNames.pop_back()
+		SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
 		EnemsToSpawn[Ship] = Pos
 		#call_deferred("AddEnemyToHierarchy", Ship, Pos)
@@ -285,7 +287,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Pos : Vector2) -> void:
 			Ship.ToggleDocked(true)
 			Ship.Command = SpawnedFleet[0]
 			SpawnedFleet[0].GetDroneDock().call_deferred("DockShip", Ship)
-
+	#print("A fleet consisting of {0} was spawned at the port of {1}. Patrol = {2}".format([var_to_str(SpawnedCallsigns), Spot.GetSpotName(), Patrol]))
 
 func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 	var SpawnedEnems : Array[HostileShip] = []
