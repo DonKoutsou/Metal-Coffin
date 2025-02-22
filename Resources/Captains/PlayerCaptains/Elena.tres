@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_vqeqm"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_a7xj7"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_wxibw"]
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="5_5ropb"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="6_38vj0"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="7_777j8"]
 [ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun.tres" id="7_b2r4g"]
 [ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="8_khliy"]
@@ -87,7 +87,7 @@ CaptainPortrait = ExtResource("1_th3p2")
 ShipIcon = ExtResource("3_wxibw")
 CaptainStats = Array[ExtResource("2_vqeqm")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_ecade"), SubResource("Resource_ws6c0"), SubResource("Resource_mwl6h"), SubResource("Resource_fem14"), SubResource("Resource_06of4")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_a7xj7")]([ExtResource("5_5ropb"), ExtResource("7_777j8"), ExtResource("7_b2r4g"), ExtResource("8_khliy"), ExtResource("9_gnr4m"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx")])
+StartingItems = Array[ExtResource("3_a7xj7")]([ExtResource("7_777j8"), ExtResource("6_38vj0"), ExtResource("9_gnr4m"), ExtResource("8_khliy"), ExtResource("7_b2r4g"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 0

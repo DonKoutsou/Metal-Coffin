@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_43sb5"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_kc55u"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="4_2ffin"]
-[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="5_l6hqf"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="6_atj7q"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="6_h7o08"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="7_c7b8r"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="7_ddapy"]
 
@@ -83,7 +83,7 @@ CaptainPortrait = ExtResource("1_2qy3x")
 ShipIcon = ExtResource("3_kc55u")
 CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), SubResource("Resource_48366"), SubResource("Resource_hl7ky")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_43sb5")]([ExtResource("4_2ffin"), ExtResource("5_l6hqf"), ExtResource("6_atj7q"), ExtResource("6_atj7q"), ExtResource("7_c7b8r"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy")])
+StartingItems = Array[ExtResource("3_43sb5")]([ExtResource("4_2ffin"), ExtResource("6_h7o08"), ExtResource("7_c7b8r"), ExtResource("6_atj7q"), ExtResource("6_atj7q"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 55000

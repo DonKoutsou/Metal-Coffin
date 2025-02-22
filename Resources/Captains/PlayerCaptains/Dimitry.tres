@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_0gtvo"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_wbv1e"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="5_dgj0j"]
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="6_2ksix"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="6_bgine"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="7_puq50"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="8_i2ufw"]
 [ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="9_ktr2s"]
@@ -84,7 +84,7 @@ CaptainPortrait = ExtResource("1_5783a")
 ShipIcon = ExtResource("3_0gtvo")
 CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), SubResource("Resource_v6t2m"), SubResource("Resource_g5q3n"), SubResource("Resource_qsyx2"), SubResource("Resource_1apas"), SubResource("Resource_8oau1"), SubResource("Resource_g3wpv"), SubResource("Resource_8tqmo")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_wbv1e")]([ExtResource("5_dgj0j"), ExtResource("6_2ksix"), ExtResource("7_puq50"), ExtResource("7_puq50"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("9_ktr2s"), ExtResource("9_ktr2s"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc")])
+StartingItems = Array[ExtResource("3_wbv1e")]([ExtResource("5_dgj0j"), ExtResource("6_bgine"), ExtResource("7_puq50"), ExtResource("7_puq50"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("8_i2ufw"), ExtResource("9_ktr2s"), ExtResource("9_ktr2s"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc"), ExtResource("10_nkrbc")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 0

@@ -22,7 +22,7 @@ var AlarmProgress = 0
 #bool to avoid sent drones colliding with current visited spot
 var NeighboringCities : Array[String]
 var Connected
-
+var Event : Happening
 var SimPaused = false
 var SimSpeed = 1
 

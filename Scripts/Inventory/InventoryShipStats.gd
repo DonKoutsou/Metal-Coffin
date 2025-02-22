@@ -24,7 +24,7 @@ func UpdateValues() -> void:
 		var ItemBuff = CurrentShownCaptain.GetStatShipPartBuff(Stats[g].STName)
 		var ItemPenalty = CurrentShownCaptain.GetStatShipPartPenalty(Stats[g].STName)
 		#var ShipValue = CurrentShownCaptain.GetStatShipBuff(Stats[g].STName)
-		Stats[g].UpdateStatValue(value * Multiplier, ItemBuff, ItemPenalty)
+		Stats[g].UpdateStatValue(value , ItemBuff, ItemPenalty)
 
 func SetCaptain(Cpt : Captain) -> void:
 	CharPortrait.texture = Cpt.CaptainPortrait

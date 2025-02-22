@@ -140,26 +140,26 @@ func DrawRuller() -> void:
 	if (ControlledShip == null):
 		return
 	var shippos = ControlledShip.global_position
-	var LineW = 1 / CamZoom
+	var LineW = 1/CamZoom
 
-	# Draw circles (remain as separate calls as they already hint to be combined with draw_circle's optimizations)
+
 	for g in 3:
 		draw_circle(shippos, 350 * (g + 1), Color(100, 100, 100), false, LineW, true)
 
-	# Prepare points for polylines
-	var polyline_points = []
-	
+
+
+
 	var Next = rotation_degrees
 	var Num = 90
 	for g in 12:
-		var point_start = Vector2(350, 0).rotated(deg_to_rad(Next)) + shippos
-		var point_end = Vector2(1050, 0).rotated(deg_to_rad(Next)) + shippos
-		polyline_points.append(point_start)
-		polyline_points.append(point_end)
-		polyline_points.append(point_start)
-		# Draw the text (remains a separate call as they are distinct operations)
+		draw_line(Vector2(350,0).rotated(deg_to_rad(Next)) + shippos, Vector2(1050,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100), LineW, true)
+
+
+
+
+
 		var Text = var_to_str(Num).replace(".0", "")
-		var TextSize = (2 / CamZoom) * 6
+		var TextSize = (2/CamZoom)*6
 		var Textpos = Vector2(1100, 0).rotated(deg_to_rad(Next))
 		Textpos += Vector2.ZERO.direction_to(Textpos) * TextSize
 		Textpos.x -= Text.length() * (TextSize / 4)
@@ -168,11 +168,8 @@ func DrawRuller() -> void:
 
 		Next -= 30
 		Num -= 30
-		if Num == 0:
+		if (Num == 0):
 			Num = 360
-
-	# Draw polyline instead of separate lines
-	draw_polyline(polyline_points, Color(100, 100, 100), LineW, true)
 	#for g in 3:
 		#draw_circle(shippos, 50 / CamZoom * (g + 1), Color(100, 100, 100), false, 1/CamZoom, true)
 	#var Next = rotation_degrees

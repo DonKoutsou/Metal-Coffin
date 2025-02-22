@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=80 format=3 uid="uid://du24ilvkea51x"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=91 format=3 uid="uid://du24ilvkea51x"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="1_ig8qa"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_npnnf"]
@@ -78,6 +78,17 @@
 [ext_resource type="Resource" uid="uid://cwpmbca3wqdsu" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Hitris.tres" id="74_3y7b2"]
 [ext_resource type="Resource" uid="uid://cphwc10ye3ddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Gigila.tres" id="75_84c2c"]
 [ext_resource type="Resource" uid="uid://cg0iuyn66iwk3" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Koptala.tres" id="76_ce8sp"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="78_j7oca"]
+[ext_resource type="Resource" uid="uid://r5k7lwi7y3wa" path="res://Resources/Happenings/CrewRecruitHappeningAmol.tres" id="79_5ly13"]
+[ext_resource type="Resource" uid="uid://cbe4h0paqjgm4" path="res://Resources/Happenings/CrewRecruitHappeningCorkan.tres" id="80_ei2ph"]
+[ext_resource type="Resource" uid="uid://dijsq004n7ouw" path="res://Resources/Happenings/CrewRecruitHappeningCraden.tres" id="81_ak0ob"]
+[ext_resource type="Resource" uid="uid://cewy7vds2cnh8" path="res://Resources/Happenings/CrewRecruitHappeningDimitry.tres" id="82_t5jng"]
+[ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="83_dxcl8"]
+[ext_resource type="Resource" uid="uid://c3kr3kcdnvesc" path="res://Resources/Happenings/CrewRecruitHappeningGilian.tres" id="84_cajs7"]
+[ext_resource type="Resource" uid="uid://cjywrm3yoyv76" path="res://Resources/Happenings/CrewRecruitHappeningJor.tres" id="85_mvaqs"]
+[ext_resource type="Resource" uid="uid://gvu43lp4i4y6" path="res://Resources/Happenings/CrewRecruitHappeningKarkan.tres" id="86_q1cnf"]
+[ext_resource type="Resource" uid="uid://byx81bxds55dv" path="res://Resources/Happenings/CrewRecruitHappeningSamir.tres" id="87_pwuis"]
+[ext_resource type="Resource" uid="uid://mhuc4oqjjoph" path="res://Resources/Happenings/CrewRecruitHappeningSirius.tres" id="88_b3ntq"]
 
 [sub_resource type="Resource" id="Resource_m1q4d"]
 script = ExtResource("4_u8h8q")
@@ -92,3 +103,4 @@ Description = "blah blah"
 VisibleOnStart = true
 DropAmmount = 1
 CustomData = Array[ExtResource("1_ig8qa")]([SubResource("Resource_m1q4d")])
+PossibleHappenings = Array[ExtResource("78_j7oca")]([ExtResource("85_mvaqs"), ExtResource("79_5ly13"), ExtResource("80_ei2ph"), ExtResource("81_ak0ob"), ExtResource("82_t5jng"), ExtResource("83_dxcl8"), ExtResource("84_cajs7"), ExtResource("86_q1cnf"), ExtResource("87_pwuis"), ExtResource("88_b3ntq")])

@@ -12,6 +12,7 @@ class_name MapSpotType
 
 
 @export var CustomData : Array[MapSpotCustomData]
+@export var PossibleHappenings : Array[Happening]
 
 func GetCustomData(datname : String) -> Array[MapSpotCustomData]:
 	var returnval : Array[MapSpotCustomData] = []

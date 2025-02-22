@@ -21,3 +21,5 @@ script = ExtResource("5_n3mdr")
 HappeningName = "Crew Recruit"
 HappeningText = "In the city you meet someone who is interested in joining your fleet. What do you say?"
 Options = Array[ExtResource("1_as0ao")]([SubResource("Resource_lh6em"), SubResource("Resource_lqhcv")])
+HappeningAppearance = 2
+Special = true

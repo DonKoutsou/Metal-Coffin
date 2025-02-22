@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=18 format=3 uid="uid://b1e5ovklwmp7v"]
+[gd_resource type="Resource" script_class="Captain" load_steps=19 format=3 uid="uid://b1e5ovklwmp7v"]
 
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_jwmx4"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="1_phe2p"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="6_jxjwo"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="7_8bfg0"]
 [ext_resource type="Resource" uid="uid://carmmqiu3rn2f" path="res://Resources/Items/ShipParts/Shield/SPK-50 Ship Barrier.tres" id="7_s7djg"]
+[ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine.tres" id="9_wulof"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_7h107")
@@ -82,7 +83,7 @@ CaptainPortrait = ExtResource("1_jwmx4")
 ShipIcon = ExtResource("3_i2eq4")
 CaptainStats = Array[ExtResource("2_7h107")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_q3468")]([ExtResource("6_c3xo7"), ExtResource("6_jxjwo"), ExtResource("7_s7djg"), ExtResource("7_8bfg0"), ExtResource("7_8bfg0")])
+StartingItems = Array[ExtResource("3_q3468")]([ExtResource("6_jxjwo"), ExtResource("6_c3xo7"), ExtResource("7_s7djg"), ExtResource("7_8bfg0"), ExtResource("7_8bfg0"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 40000

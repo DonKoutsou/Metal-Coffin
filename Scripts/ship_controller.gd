@@ -114,11 +114,11 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 func Land(Spot : MapSpot) -> bool:
 	ControlledShip.HaltShip()
 	var PlayedEvent = false
-	if (Spot.SpotInfo.Event != null and !Spot.Visited):
+	if (Spot.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		happeningui.HappeningInstigator = ControlledShip
 		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
-		happeningui.PresentHappening(Spot.SpotInfo.Event)
+		happeningui.PresentHappening(Spot.Event)
 		UIEventH.OnScreenUIToggled(false)
 		UIEventH.OnButtonCoverToggled(true)
 		happeningui.connect("HappeningFinished", HappeningFinished)
