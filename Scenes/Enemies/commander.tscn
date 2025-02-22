@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://ccmwul4ncd4dx"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyAi/commander.gd" id="1_2gt3m"]
-[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="2_fb4ti"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="2_fb4ti"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_7gsnn"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_2bbgj"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="5_ocenr"]

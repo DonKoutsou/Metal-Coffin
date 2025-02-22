@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://22w1h832bsxa"]
+
+[ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="1_p7a0x"]
+[ext_resource type="Texture2D" uid="uid://cud25kmc3qpt1" path="res://Assets/Items/radar-dish_Smol.png" id="2_7hrf0"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_mb8i7"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_6tdai"]
+
+[sub_resource type="Resource" id="Resource_pxbaq"]
+script = ExtResource("5_mb8i7")
+UpgradeName = 7
+UpgradeAmmount = 2500.0
+CurrentValue = 0.0
+UpAmmSymbol = "km"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("6_6tdai")
+Upgrades = Array[ExtResource("5_mb8i7")]([SubResource("Resource_pxbaq")])
+UpgradeTime = 100.0
+UpgradeCost = 0.0
+IsDamaged = false
+ItemIcon = ExtResource("1_p7a0x")
+ItemIconSmol = ExtResource("2_7hrf0")
+ItemName = "ELINT-100 \"Oracle\" "
+ItemDesc = "Oracle is the pinnacle of electronic intelligence technology, featuring cutting-edge detection capabilities and unmatched precision. 'Oracle' excels at identifying and classifying complex radar emissions, providing comprehensive situational awareness in real-time. Its robust analytics engine allows it to operate effectively even in dense electronic environments, making it indispensable for high-stakes missions requiring absolute radar stealth intelligence."
+MaxStackCount = 1
+RandomFindMaxCount = 1

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://byx81bxds55dv"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_fwef7"]
-[ext_resource type="Resource" uid="uid://disqw5cbdncos" path="res://Resources/Captains/Samir.tres" id="2_enltx"]
+[ext_resource type="Resource" uid="uid://disqw5cbdncos" path="res://Resources/Captains/PlayerCaptains/Samir.tres" id="2_enltx"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_hv5re"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_wy5gf"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_p1l7f"]

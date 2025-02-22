@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="2_etprd"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_nsq7x"]
 [ext_resource type="Resource" path="res://Resources/Items/OxygenTank.tres" id="4_j0vhq"]
-[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/LargeFuelTank.tres" id="5_7d1g5"]
+[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/LargeFuelTank.tres" id="5_7d1g5"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/ItemHappeningOption.gd" id="5_ofmhk"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="6_w8ef2"]
 

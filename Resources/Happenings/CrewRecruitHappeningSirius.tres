@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://mhuc4oqjjoph"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_llbs1"]
-[ext_resource type="Resource" uid="uid://cga5buofwr6yr" path="res://Resources/Captains/Sirius.tres" id="2_3e5yd"]
+[ext_resource type="Resource" uid="uid://cga5buofwr6yr" path="res://Resources/Captains/PlayerCaptains/Sirius.tres" id="2_3e5yd"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_rriw4"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_1unhh"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_4w1x8"]

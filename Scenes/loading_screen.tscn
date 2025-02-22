@@ -81,9 +81,10 @@ _data = {
 "Logo": SubResource("Animation_n8xlk")
 }
 
-[node name="LoadingScreen" type="CanvasLayer"]
+[node name="LoadingScreen" type="CanvasLayer" node_paths=PackedStringArray("Labe")]
 layer = 5
 script = ExtResource("2_ehbru")
+Labe = NodePath("Label")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -208,17 +209,18 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("7_s87fu")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Label" type="Label" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 180.0
-offset_top = -178.0
-offset_right = 332.0
-offset_bottom = -138.0
+offset_left = 178.0
+offset_top = -171.0
+offset_right = 1019.0
+offset_bottom = -148.0
 grow_vertical = 0
-theme = ExtResource("7_s87fu")
-alignment = 2
+vertical_alignment = 2
+autowrap_mode = 1
+visible_characters = 0
 
 [node name="Screen" type="ColorRect" parent="."]
 process_mode = 3

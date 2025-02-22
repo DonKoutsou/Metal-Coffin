@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://hncmt3swcqbu"]
+
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Scenes/Cards/Res/Barrage/Barrage.tres" id="1_cqyoh"]
+[ext_resource type="Texture2D" uid="uid://bf51pn2x4c423" path="res://Assets/Items/minigun.png" id="1_yt2n5"]
+[ext_resource type="Texture2D" uid="uid://bnwaknai0r21l" path="res://Assets/Items/minigun_smol.png" id="2_1c05x"]
+[ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun.tres" id="5_nun2t"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_gbk8t"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_dtxf4"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("6_gbk8t")
+UpgradeName = 3
+UpgradeAmmount = 3.0
+CurrentValue = 0.0
+UpAmmSymbol = ""
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("7_dtxf4")
+Upgrades = Array[ExtResource("6_gbk8t")]([SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("5_nun2t")
+UpgradeTime = 100.0
+UpgradeCost = 0.0
+IsDamaged = false
+ItemIcon = ExtResource("1_yt2n5")
+ItemIconSmol = ExtResource("2_1c05x")
+ItemName = "MG-20 \"Fury\""
+ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
+MaxStackCount = 1
+RandomFindMaxCount = 1
+CardProviding = ExtResource("1_cqyoh")

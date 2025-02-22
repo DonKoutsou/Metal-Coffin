@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://cgcfrrlvaj7mi"]
 
-[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/CruiseMissile.tres" id="1_pyqfi"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="1_pyqfi"]
 [ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_4ax7c"]
 
 [resource]

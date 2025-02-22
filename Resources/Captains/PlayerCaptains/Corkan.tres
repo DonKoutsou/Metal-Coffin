@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://cnqhhk0a4yp6e"]
+
+[ext_resource type="Texture2D" uid="uid://skvxvvjwfnji" path="res://Assets/CaptainPortraits/Captain2.png" id="1_htfb6"]
+[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_wx6fp"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_4yl3g"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="3_8xlo2"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="3_knux0"]
+[ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="5_hmg7d"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/MediumFuelTank.tres" id="6_kwppf"]
+[ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="7_dfm3q"]
+[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="8_ms0ef"]
+[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="9_du10m"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="10_0xigk"]
+
+[sub_resource type="Resource" id="Resource_8ea6t"]
+script = ExtResource("2_wx6fp")
+StatName = 2
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_u83uq"]
+script = ExtResource("2_wx6fp")
+StatName = 6
+StatBase = 350.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_bwrmv"]
+script = ExtResource("2_wx6fp")
+StatName = 5
+StatBase = 10.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_ltk5n"]
+script = ExtResource("2_wx6fp")
+StatName = 3
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_qggik"]
+script = ExtResource("2_wx6fp")
+StatName = 4
+StatBase = 250.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_dgqvy"]
+script = ExtResource("2_wx6fp")
+StatName = 1
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_5stch"]
+script = ExtResource("2_wx6fp")
+StatName = 0
+StatBase = 150.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_s68ix"]
+script = ExtResource("2_wx6fp")
+StatName = 7
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("3_knux0")
+CaptainName = "Corkan"
+CaptainBio = "Heavy "
+CaptainPortrait = ExtResource("1_htfb6")
+ShipIcon = ExtResource("3_8xlo2")
+CaptainStats = Array[ExtResource("2_wx6fp")]([SubResource("Resource_8ea6t"), SubResource("Resource_u83uq"), SubResource("Resource_bwrmv"), SubResource("Resource_ltk5n"), SubResource("Resource_qggik"), SubResource("Resource_dgqvy"), SubResource("Resource_5stch"), SubResource("Resource_s68ix")])
+ShipCallsign = "P"
+StartingItems = Array[ExtResource("3_4yl3g")]([ExtResource("5_hmg7d"), ExtResource("6_kwppf"), ExtResource("7_dfm3q"), ExtResource("8_ms0ef"), ExtResource("8_ms0ef"), ExtResource("8_ms0ef"), ExtResource("8_ms0ef"), ExtResource("9_du10m"), ExtResource("9_du10m"), ExtResource("9_du10m"), ExtResource("9_du10m"), ExtResource("9_du10m"), ExtResource("10_0xigk")])
+CurrentPort = ""
+CheckForErrors = true
+ProvidingFunds = 0

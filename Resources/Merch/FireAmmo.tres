@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://csn5s05u6rd82"]
 
-[ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/FireAmmoMagazine.tres" id="1_1xar4"]
+[ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine.tres" id="1_1xar4"]
 [ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_8bovl"]
 
 [resource]

@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/ItemsAddedNotif.tscn" id="6_q7t14"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="7_ffxnd"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="8_0fcos"]
-[ext_resource type="Texture2D" uid="uid://cjg61awbfrku4" path="res://Assets/CaptainPortraits/Captain1.png" id="9_is7o4"]
 [ext_resource type="Script" path="res://Scripts/Inventory/InventoryShipStats.gd" id="10_jwvgm"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/ShipStatContainer.tscn" id="11_lweht"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="12_gc8sd"]
@@ -43,6 +42,8 @@ border_width_bottom = 961
 border_color = Color(0.0053553, 0.00773166, 0.0116329, 1)
 border_blend = true
 corner_detail = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qp5bg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
 bg_color = Color(1, 1, 1, 1)
@@ -148,7 +149,7 @@ self_modulate = Color(1, 1, 1, 0.414)
 show_behind_parent = true
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("9_is7o4")
+texture = SubResource("CompressedTexture2D_qp5bg")
 expand_mode = 1
 stretch_mode = 3
 

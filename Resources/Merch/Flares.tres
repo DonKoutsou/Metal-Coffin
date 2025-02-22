@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://byfi8gb5rfaq5"]
 
-[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Flares.tres" id="1_g1v26"]
+[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="1_g1v26"]
 [ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_ekyvy"]
 
 [resource]

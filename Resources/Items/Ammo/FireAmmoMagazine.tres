@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b4slsaff7t4ha"]
+
+[ext_resource type="Texture2D" uid="uid://dcwvf3of7pu8g" path="res://Assets/hazard-sign.png" id="1_0drf5"]
+[ext_resource type="Resource" uid="uid://dep1p3s46i325" path="res://Scenes/Cards/Res/Barrage/Options/BarrageFireOption.tres" id="1_7tadr"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_rfcla"]
+
+[resource]
+script = ExtResource("1_rfcla")
+ItemIcon = ExtResource("1_0drf5")
+ItemIconSmol = ExtResource("1_0drf5")
+ItemName = "Fire ammo magazine"
+ItemDesc = "Medium range High speed missile"
+MaxStackCount = 99
+RandomFindMaxCount = 1
+CardOptionProviding = ExtResource("1_7tadr")

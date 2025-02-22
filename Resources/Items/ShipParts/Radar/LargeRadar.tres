@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://c16lcf8swpkjk"]
+
+[ext_resource type="Texture2D" uid="uid://dg5aetdaa68et" path="res://Assets/Items/radar-sweep.png" id="1_2a3m1"]
+[ext_resource type="Texture2D" uid="uid://b3oxh70gjpu2h" path="res://Assets/Items/radar-sweep_smol.png" id="2_4ii2e"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_ypyoy"]
+[ext_resource type="Resource" uid="uid://cgigq707wifrf" path="res://Resources/Items/ShipParts/Radar/SuperLargeRadar.tres" id="4_nra5m"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_qmdqt"]
+
+[sub_resource type="Resource" id="Resource_8wfub"]
+script = ExtResource("6_qmdqt")
+UpgradeName = 6
+UpgradeAmmount = 1000.0
+CurrentValue = 0.0
+UpAmmSymbol = "km"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("3_ypyoy")
+Upgrades = Array[ExtResource("6_qmdqt")]([SubResource("Resource_8wfub")])
+UpgradeVersion = ExtResource("4_nra5m")
+UpgradeTime = 300.0
+UpgradeCost = 0.0
+IsDamaged = false
+ItemIcon = ExtResource("1_2a3m1")
+ItemIconSmol = ExtResource("2_4ii2e")
+ItemName = "RA-100"
+ItemDesc = "A superior radar array with far-reaching detection range. Utilizes phased array technology for unparalleled tracking specificity and enhanced situational awareness."
+MaxStackCount = 1
+RandomFindMaxCount = 1

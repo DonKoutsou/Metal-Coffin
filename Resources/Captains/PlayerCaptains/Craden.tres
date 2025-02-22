@@ -1,0 +1,86 @@
+[gd_resource type="Resource" script_class="Captain" load_steps=24 format=3 uid="uid://caroffy3ubxip"]
+
+[ext_resource type="Texture2D" uid="uid://baiwp3ejwapub" path="res://Assets/CaptainPortraits/Captain11.png" id="1_2va48"]
+[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_ttymy"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_nr51w"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_y0oxi"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/MediumFuelTank.tres" id="5_dqknp"]
+[ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="6_30g6s"]
+[ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="7_0kcyb"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="8_p7srd"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="9_vkicc"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="10_jcfu4"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="11_nudrd"]
+[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="12_nvnas"]
+[ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine.tres" id="13_o6oto"]
+[ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="14_0kk7r"]
+[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="14_8itwo"]
+
+[sub_resource type="Resource" id="Resource_bp15r"]
+script = ExtResource("2_ttymy")
+StatName = 2
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_s5ab2"]
+script = ExtResource("2_ttymy")
+StatName = 6
+StatBase = 350.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_f25rj"]
+script = ExtResource("2_ttymy")
+StatName = 5
+StatBase = 12.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_j8fdu"]
+script = ExtResource("2_ttymy")
+StatName = 3
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_dap26"]
+script = ExtResource("2_ttymy")
+StatName = 4
+StatBase = 500.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_rifue"]
+script = ExtResource("2_ttymy")
+StatName = 1
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_pno3o"]
+script = ExtResource("2_ttymy")
+StatName = 0
+StatBase = 150.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_pew21"]
+script = ExtResource("2_ttymy")
+StatName = 7
+StatBase = 0.0
+StatShipPartBuff = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("14_8itwo")
+CaptainName = "Craden"
+CaptainBio = "Shitheadwafwaf"
+CaptainPortrait = ExtResource("1_2va48")
+ShipIcon = ExtResource("3_nr51w")
+CaptainStats = Array[ExtResource("2_ttymy")]([SubResource("Resource_bp15r"), SubResource("Resource_s5ab2"), SubResource("Resource_f25rj"), SubResource("Resource_j8fdu"), SubResource("Resource_dap26"), SubResource("Resource_rifue"), SubResource("Resource_pno3o"), SubResource("Resource_pew21")])
+ShipCallsign = "P"
+StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_dqknp"), ExtResource("6_30g6s"), ExtResource("7_0kcyb"), ExtResource("8_p7srd"), ExtResource("9_vkicc"), ExtResource("10_jcfu4"), ExtResource("11_nudrd"), ExtResource("12_nvnas"), ExtResource("11_nudrd"), ExtResource("11_nudrd"), ExtResource("11_nudrd"), ExtResource("13_o6oto"), ExtResource("13_o6oto"), ExtResource("14_0kk7r")])
+CurrentPort = ""
+CheckForErrors = true
+ProvidingFunds = 0

@@ -18,8 +18,8 @@ func _ready() -> void:
 func UpdateValues() -> void:
 	for g in Stats.size():
 		var Multiplier = 1
-		if (Stats[g].STName == STAT_CONST.STATS.SPEED):
-			Multiplier = 360
+		#if (Stats[g].STName == STAT_CONST.STATS.SPEED):
+			#Multiplier = 360
 		var value = CurrentShownCaptain.GetStatBaseValue(Stats[g].STName)
 		var ItemBuff = CurrentShownCaptain.GetStatShipPartBuff(Stats[g].STName)
 		#var ShipValue = CurrentShownCaptain.GetStatShipBuff(Stats[g].STName)

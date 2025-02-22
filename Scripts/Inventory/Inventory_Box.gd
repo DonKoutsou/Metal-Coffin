@@ -1,3 +1,4 @@
+@tool
 extends Control
 class_name Inventory_Box
 

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://f8x3cqxrqo6s"]
+
+[ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Scenes/Cards/Flares.tres" id="1_ts5ya"]
+[ext_resource type="Texture2D" uid="uid://cfbr5l87xuwd4" path="res://Assets/Items/eclipse-flare.png" id="2_fuo7h"]
+[ext_resource type="Texture2D" uid="uid://b6h31uv01rsm6" path="res://Assets/Items/eclipse-flare_smol.png" id="3_756a3"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_5dmdk"]
+
+[resource]
+script = ExtResource("4_5dmdk")
+ItemIcon = ExtResource("2_fuo7h")
+ItemIconSmol = ExtResource("3_756a3")
+ItemName = "Flares"
+ItemDesc = "Medium range High speed missile"
+MaxStackCount = 99
+CardProviding = ExtResource("1_ts5ya")

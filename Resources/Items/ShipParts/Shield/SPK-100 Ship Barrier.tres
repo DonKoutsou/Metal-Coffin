@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://dlkv8clb3piuw"]
+
+[ext_resource type="Texture2D" uid="uid://ehsfmj5xbkb3" path="res://Assets/Items/bubble-field.png" id="1_bl8l4"]
+[ext_resource type="Texture2D" uid="uid://dtk5sb7w7lkqw" path="res://Assets/Items/bubble-field_smol.png" id="2_2sa64"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_c5tjm"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_p5xd3"]
+
+[sub_resource type="Resource" id="Resource_x8weo"]
+script = ExtResource("3_c5tjm")
+UpgradeName = 4
+UpgradeAmmount = 800.0
+CurrentValue = 800.0
+UpAmmSymbol = ""
+
+[resource]
+script = ExtResource("4_p5xd3")
+Upgrades = Array[ExtResource("3_c5tjm")]([SubResource("Resource_x8weo")])
+UpgradeTime = 1200.0
+UpgradeCost = 120000.0
+IsDamaged = false
+ItemIcon = ExtResource("1_bl8l4")
+ItemIconSmol = ExtResource("2_2sa64")
+ItemName = "SPK-100 Ship Barrier"
+ItemDesc = "ItemDesc"
+MaxStackCount = 1
