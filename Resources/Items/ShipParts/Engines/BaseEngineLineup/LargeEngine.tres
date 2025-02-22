@@ -10,6 +10,7 @@
 script = ExtResource("5_0moyl")
 UpgradeName = 1
 UpgradeAmmount = 2.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "lt/km"
 
@@ -17,6 +18,7 @@ UpAmmSymbol = "lt/km"
 script = ExtResource("5_0moyl")
 UpgradeName = 2
 UpgradeAmmount = 2.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km/h"
 
@@ -32,5 +34,4 @@ ItemIconSmol = ExtResource("2_li246")
 ItemName = "Model EN-500"
 ItemDesc = "The pinnacle of engineering, this engine includes advanced fuel atomization technology. It excels in long-haul missions, ensuring optimal energy distribution for maximum efficiency."
 MaxStackCount = 1
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_t7h3x")

@@ -10,6 +10,7 @@
 script = ExtResource("4_vcqkx")
 UpgradeName = 1
 UpgradeAmmount = 2.6
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "lt/km"
 
@@ -17,6 +18,7 @@ UpAmmSymbol = "lt/km"
 script = ExtResource("4_vcqkx")
 UpgradeName = 2
 UpgradeAmmount = 0.8
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km/h"
 
@@ -32,5 +34,4 @@ ItemIconSmol = ExtResource("3_fiup7")
 ItemName = "EcoDrive-500 \"Preserve\""
 ItemDesc = "'Preserve' is the pinnacle of efficient propulsion technology, boasting exceptional fuel conservation for prolonged deployments. While it forgoes high-velocity capabilities, 'Preserve' provides unparalleled range and endurance, making it the engine of choice for missions where resource management is critical."
 MaxStackCount = 1
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_2vnos")

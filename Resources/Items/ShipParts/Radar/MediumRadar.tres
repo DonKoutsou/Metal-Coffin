@@ -10,6 +10,7 @@
 script = ExtResource("6_ony00")
 UpgradeName = 6
 UpgradeAmmount = 700.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"
 
@@ -26,4 +27,3 @@ ItemIconSmol = ExtResource("2_mn6q1")
 ItemName = "RA-50"
 ItemDesc = "An advanced unit with extended detection capabilities. It uses adaptive filtering algorithms to enhance clarity in threat analysis."
 MaxStackCount = 1
-RandomFindMaxCount = 1

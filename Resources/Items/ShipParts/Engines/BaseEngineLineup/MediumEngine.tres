@@ -11,6 +11,7 @@
 script = ExtResource("6_kd1ru")
 UpgradeName = 1
 UpgradeAmmount = 1.5
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "lt/km"
 
@@ -18,6 +19,7 @@ UpAmmSymbol = "lt/km"
 script = ExtResource("6_kd1ru")
 UpgradeName = 2
 UpgradeAmmount = 1.5
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km/h"
 
@@ -34,5 +36,4 @@ ItemIconSmol = ExtResource("2_a6w7i")
 ItemName = "Model EN-250"
 ItemDesc = "This intermediate engine integrates enhanced fuel management systems. Designed for improved performance, it maintains reliability under increased load conditions."
 MaxStackCount = 1
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_ro018")

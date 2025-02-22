@@ -10,6 +10,7 @@
 script = ExtResource("6_uw0hq")
 UpgradeName = 3
 UpgradeAmmount = 2.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = ""
 
@@ -26,4 +27,3 @@ ItemIconSmol = ExtResource("2_fod6m")
 ItemName = "MP-6 \"Cyclone\""
 ItemDesc = "Cyclone enhances missile deployment capabilities, featuring improved targeting systems and increased payload capacity. Compatible with intermediate missile types, 'Cyclone' delivers effective firepower for tactical engagements, ensuring versatility and increased lethality on the battlefield."
 MaxStackCount = 1
-RandomFindMaxCount = 1

@@ -10,6 +10,7 @@
 script = ExtResource("6_sy8y8")
 UpgradeName = 6
 UpgradeAmmount = 400.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"
 
@@ -26,4 +27,3 @@ ItemIconSmol = ExtResource("2_q4dxl")
 ItemName = "RA-20"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
 MaxStackCount = 1
-RandomFindMaxCount = 1

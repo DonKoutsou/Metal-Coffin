@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cyt6r2lakmb36" path="res://Assets/CaptainPortraits/Captain6.png" id="1_xqxow"]
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_ufoo0"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="3_3cbbo"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_8he85"]
+[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_yl744"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_yy4iq"]
 
 [sub_resource type="Resource" id="Resource_ju8ek"]
@@ -11,6 +11,7 @@ script = ExtResource("2_ufoo0")
 StatName = 2
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_w0tur"]
@@ -18,6 +19,7 @@ script = ExtResource("2_ufoo0")
 StatName = 6
 StatBase = 350.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_34f4w"]
@@ -25,6 +27,7 @@ script = ExtResource("2_ufoo0")
 StatName = 5
 StatBase = 6.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_hjfxs"]
@@ -32,6 +35,7 @@ script = ExtResource("2_ufoo0")
 StatName = 3
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_wxl3a"]
@@ -39,6 +43,7 @@ script = ExtResource("2_ufoo0")
 StatName = 4
 StatBase = 150.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_haf7u"]
@@ -46,6 +51,7 @@ script = ExtResource("2_ufoo0")
 StatName = 1
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_knqm1"]
@@ -53,6 +59,7 @@ script = ExtResource("2_ufoo0")
 StatName = 0
 StatBase = 150.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_fwmht"]
@@ -60,6 +67,7 @@ script = ExtResource("2_ufoo0")
 StatName = 7
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [resource]
@@ -67,7 +75,7 @@ script = ExtResource("3_3cbbo")
 CaptainName = "Samir"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_xqxow")
-ShipIcon = ExtResource("3_8he85")
+ShipIcon = ExtResource("3_yl744")
 CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs"), SubResource("Resource_wxl3a"), SubResource("Resource_haf7u"), SubResource("Resource_knqm1"), SubResource("Resource_fwmht")])
 ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_yy4iq")]([])

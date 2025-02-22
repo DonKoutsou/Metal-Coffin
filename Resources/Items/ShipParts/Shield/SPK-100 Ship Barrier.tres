@@ -9,6 +9,7 @@
 script = ExtResource("3_c5tjm")
 UpgradeName = 4
 UpgradeAmmount = 800.0
+PenaltyAmmount = 0.0
 CurrentValue = 800.0
 UpAmmSymbol = ""
 

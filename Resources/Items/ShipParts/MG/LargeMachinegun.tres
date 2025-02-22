@@ -10,6 +10,7 @@
 script = ExtResource("6_oaj4l")
 UpgradeName = 3
 UpgradeAmmount = 5.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = ""
 
@@ -25,5 +26,4 @@ ItemIconSmol = ExtResource("2_whklm")
 ItemName = "MG-30 \"Tempest\""
 ItemDesc = "the elite choice for those requiring ultimate firepower in critical scenarios. Featuring cutting-edge targeting and stabilization technology, 'Tempest' supports continuous and dynamic fire, overwhelming even the staunchest defenses with relentless precision and unmatched rate of fire."
 MaxStackCount = 1
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_bfbfv")

@@ -9,6 +9,7 @@
 script = ExtResource("6_g1ywd")
 UpgradeName = 3
 UpgradeAmmount = 3.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = ""
 
@@ -24,4 +25,3 @@ ItemIconSmol = ExtResource("2_gup6i")
 ItemName = "MP-9 \"Maelstrom\""
 ItemDesc = "Maelstrom represents the pinnacle of missile pod technology, offering advanced targeting algorithms and maximum payload flexibility. Capable of deploying a wide array of specialized missiles, 'Maelstrom' delivers precise strikes against both single and multiple targets, making it indispensable for advanced combat operations."
 MaxStackCount = 1
-RandomFindMaxCount = 1

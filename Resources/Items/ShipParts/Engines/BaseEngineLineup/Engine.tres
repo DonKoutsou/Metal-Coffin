@@ -11,6 +11,7 @@
 script = ExtResource("6_hho6w")
 UpgradeName = 1
 UpgradeAmmount = 1.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "lt/km"
 
@@ -18,6 +19,7 @@ UpAmmSymbol = "lt/km"
 script = ExtResource("6_hho6w")
 UpgradeName = 2
 UpgradeAmmount = 1.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km/h"
 
@@ -34,5 +36,4 @@ ItemIconSmol = ExtResource("2_dongv")
 ItemName = "Model EN-100"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
 MaxStackCount = 1
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_bifgn")

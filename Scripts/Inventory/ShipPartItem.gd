@@ -19,6 +19,16 @@ func GetItemDesc() -> String:
 		if (Upgrades[g].UpgradeName == STAT_CONST.STATS.SPEED):
 			Multiplier = 360
 		var UpName = STAT_CONST.STATS.keys()[Upgrades[g].UpgradeName].replace("_", " ")
-		var UpAmm = Upgrades[g].UpgradeAmmount * Multiplier
-		UpNames += "\n[color=#c19200]{0}[/color] : + {1} {2}".format([UpName, UpAmm, Upgrades[g].UpAmmSymbol])
+		var UpAmm
+		var UpSymbol
+		var Col
+		if (Upgrades[g].UpgradeAmmount > 0):
+			UpAmm = Upgrades[g].UpgradeAmmount * Multiplier
+			UpSymbol = "+"
+			Col = "c19200"
+		else : if (Upgrades[g].PenaltyAmmount > 0):
+			UpAmm = Upgrades[g].PenaltyAmmount * Multiplier
+			UpSymbol = "-"
+			Col = "db2c36"
+		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, Upgrades[g].UpAmmSymbol, UpSymbol, Col])
 	return "{0} {1}".format([ItemDesc, UpNames])

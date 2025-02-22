@@ -10,6 +10,7 @@
 script = ExtResource("1_uxjth")
 UpgradeName = 4
 UpgradeAmmount = 300.0
+PenaltyAmmount = 0.0
 CurrentValue = 300.0
 UpAmmSymbol = ""
 
@@ -25,4 +26,3 @@ ItemIconSmol = ExtResource("2_a8j70")
 ItemName = "SPK-25 Ship Barrier"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
-RandomFindMaxCount = 1

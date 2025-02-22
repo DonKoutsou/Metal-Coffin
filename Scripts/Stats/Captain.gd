@@ -51,6 +51,9 @@ func GetStatBaseValue(StatN : STAT_CONST.STATS) -> float:
 func GetStatShipPartBuff(StatN : STAT_CONST.STATS) -> float:
 	return _GetStat(StatN).GetShipPartBuff()
 
+func GetStatShipPartPenalty(StatN : STAT_CONST.STATS) -> float:
+	return _GetStat(StatN).GetShipPartPenalty()
+
 func GetStatFinalValue(StatN : STAT_CONST.STATS) -> float:
 	return _GetStat(StatN).GetFinalValue()
 			
@@ -87,12 +90,14 @@ func ConsumeResource(StatN : STAT_CONST.STATS, Consumption : float) -> void:
 func OnShipPartAddedToInventory(It : ShipPart) -> void:
 	for Up in It.Upgrades:
 		_GetStat(Up.UpgradeName).AddShipPartBuff(Up.UpgradeAmmount)
+		_GetStat(Up.UpgradeName).AddShipPartPenalty(Up.PenaltyAmmount)
 		RefillResource(Up.UpgradeName, Up.CurrentValue)
 	ShipPartChanged.emit(It)
 
 func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
 	for Up in It.Upgrades:
 		_GetStat(Up.UpgradeName).AddShipPartBuff(-Up.UpgradeAmmount)
+		_GetStat(Up.UpgradeName).AddShipPartPenalty(-Up.PenaltyAmmount)
 		if (GetStatCurrentValue(Up.UpgradeName) > GetStatFinalValue(Up.UpgradeName)):
 			FullyRefilStat(Up.UpgradeName)
 	ShipPartChanged.emit(It)

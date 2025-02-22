@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_ttymy"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_nr51w"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_y0oxi"]
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/MediumFuelTank.tres" id="5_dqknp"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="5_dqknp"]
 [ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="6_30g6s"]
 [ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="7_0kcyb"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="8_p7srd"]
@@ -21,6 +21,7 @@ script = ExtResource("2_ttymy")
 StatName = 2
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_s5ab2"]
@@ -28,6 +29,7 @@ script = ExtResource("2_ttymy")
 StatName = 6
 StatBase = 350.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_f25rj"]
@@ -35,6 +37,7 @@ script = ExtResource("2_ttymy")
 StatName = 5
 StatBase = 12.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_j8fdu"]
@@ -42,6 +45,7 @@ script = ExtResource("2_ttymy")
 StatName = 3
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_dap26"]
@@ -49,6 +53,7 @@ script = ExtResource("2_ttymy")
 StatName = 4
 StatBase = 500.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_rifue"]
@@ -56,6 +61,7 @@ script = ExtResource("2_ttymy")
 StatName = 1
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_pno3o"]
@@ -63,6 +69,7 @@ script = ExtResource("2_ttymy")
 StatName = 0
 StatBase = 150.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_pew21"]
@@ -70,6 +77,7 @@ script = ExtResource("2_ttymy")
 StatName = 7
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [resource]
@@ -83,4 +91,4 @@ ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("5_dqknp"), ExtResource("6_30g6s"), ExtResource("7_0kcyb"), ExtResource("8_p7srd"), ExtResource("9_vkicc"), ExtResource("10_jcfu4"), ExtResource("11_nudrd"), ExtResource("12_nvnas"), ExtResource("11_nudrd"), ExtResource("11_nudrd"), ExtResource("11_nudrd"), ExtResource("13_o6oto"), ExtResource("13_o6oto"), ExtResource("14_0kk7r")])
 CurrentPort = ""
 CheckForErrors = true
-ProvidingFunds = 0
+ProvidingFunds = 20000

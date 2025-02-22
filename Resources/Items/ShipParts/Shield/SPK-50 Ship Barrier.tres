@@ -10,6 +10,7 @@
 script = ExtResource("3_30ir8")
 UpgradeName = 4
 UpgradeAmmount = 600.0
+PenaltyAmmount = 0.0
 CurrentValue = 600.0
 UpAmmSymbol = ""
 

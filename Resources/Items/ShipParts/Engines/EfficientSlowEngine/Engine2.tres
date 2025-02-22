@@ -11,6 +11,7 @@
 script = ExtResource("5_awpny")
 UpgradeName = 1
 UpgradeAmmount = 1.5
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "lt/km"
 
@@ -18,6 +19,7 @@ UpAmmSymbol = "lt/km"
 script = ExtResource("5_awpny")
 UpgradeName = 2
 UpgradeAmmount = 0.3
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km/h"
 
@@ -34,5 +36,4 @@ ItemIconSmol = ExtResource("3_583i0")
 ItemName = "EcoDrive-100q \"Conserve\""
 ItemDesc = "'Conserve' is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, 'Conserve' offers a balanced compromise for steady pacing over extended durations."
 MaxStackCount = 1
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_66jjj")

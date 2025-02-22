@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="3_8xlo2"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="3_knux0"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="5_hmg7d"]
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/MediumFuelTank.tres" id="6_kwppf"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="6_kwppf"]
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="7_dfm3q"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="8_ms0ef"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="9_du10m"]
@@ -17,6 +17,7 @@ script = ExtResource("2_wx6fp")
 StatName = 2
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_u83uq"]
@@ -24,6 +25,7 @@ script = ExtResource("2_wx6fp")
 StatName = 6
 StatBase = 350.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_bwrmv"]
@@ -31,6 +33,7 @@ script = ExtResource("2_wx6fp")
 StatName = 5
 StatBase = 10.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_ltk5n"]
@@ -38,6 +41,7 @@ script = ExtResource("2_wx6fp")
 StatName = 3
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_qggik"]
@@ -45,6 +49,7 @@ script = ExtResource("2_wx6fp")
 StatName = 4
 StatBase = 250.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_dgqvy"]
@@ -52,6 +57,7 @@ script = ExtResource("2_wx6fp")
 StatName = 1
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_5stch"]
@@ -59,6 +65,7 @@ script = ExtResource("2_wx6fp")
 StatName = 0
 StatBase = 150.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_s68ix"]
@@ -66,6 +73,7 @@ script = ExtResource("2_wx6fp")
 StatName = 7
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [resource]

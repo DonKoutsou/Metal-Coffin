@@ -10,6 +10,7 @@
 script = ExtResource("6_qmdqt")
 UpgradeName = 6
 UpgradeAmmount = 1000.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"
 
@@ -26,4 +27,3 @@ ItemIconSmol = ExtResource("2_4ii2e")
 ItemName = "RA-100"
 ItemDesc = "A superior radar array with far-reaching detection range. Utilizes phased array technology for unparalleled tracking specificity and enhanced situational awareness."
 MaxStackCount = 1
-RandomFindMaxCount = 1

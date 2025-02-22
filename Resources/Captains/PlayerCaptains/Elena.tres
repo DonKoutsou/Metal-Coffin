@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_vqeqm"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_a7xj7"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_wxibw"]
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/MediumFuelTank.tres" id="5_5ropb"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="5_5ropb"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="7_777j8"]
 [ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun.tres" id="7_b2r4g"]
 [ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="8_khliy"]
@@ -18,6 +18,7 @@ script = ExtResource("2_vqeqm")
 StatName = 2
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_bob4r"]
@@ -26,6 +27,7 @@ script = ExtResource("2_vqeqm")
 StatName = 6
 StatBase = 350.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_laqgl"]
@@ -34,6 +36,7 @@ script = ExtResource("2_vqeqm")
 StatName = 5
 StatBase = 8.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_ecade"]
@@ -41,6 +44,7 @@ script = ExtResource("2_vqeqm")
 StatName = 3
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_ws6c0"]
@@ -48,6 +52,7 @@ script = ExtResource("2_vqeqm")
 StatName = 4
 StatBase = 100.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_mwl6h"]
@@ -55,6 +60,7 @@ script = ExtResource("2_vqeqm")
 StatName = 1
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_fem14"]
@@ -62,6 +68,7 @@ script = ExtResource("2_vqeqm")
 StatName = 0
 StatBase = 50.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_06of4"]
@@ -69,6 +76,7 @@ script = ExtResource("2_vqeqm")
 StatName = 7
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [resource]

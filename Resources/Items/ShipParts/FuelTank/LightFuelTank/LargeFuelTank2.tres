@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://bxnmuntwctjfi"]
+
+[ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_47v7n"]
+[ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_gjxbr"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_4hto1"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_8btqa"]
+
+[sub_resource type="Resource" id="Resource_i41uq"]
+script = ExtResource("3_4hto1")
+UpgradeName = 0
+UpgradeAmmount = 150.0
+PenaltyAmmount = 0.0
+CurrentValue = 150.0
+UpAmmSymbol = "Cubic Tons"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("4_8btqa")
+Upgrades = Array[ExtResource("3_4hto1")]([SubResource("Resource_i41uq")])
+UpgradeTime = 100.0
+UpgradeCost = 0.0
+IsDamaged = false
+ItemIcon = ExtResource("1_47v7n")
+ItemIconSmol = ExtResource("2_gjxbr")
+ItemName = "SPT-300"
+ItemDesc = "A standard fuel containment solution with dual baffled chambers for stability. Constructed from reinforced materials for reliability in routine operations."
+MaxStackCount = 1

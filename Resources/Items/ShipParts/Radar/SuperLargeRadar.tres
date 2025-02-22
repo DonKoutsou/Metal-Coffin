@@ -9,6 +9,7 @@
 script = ExtResource("5_gbrn0")
 UpgradeName = 6
 UpgradeAmmount = 0.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"
 
@@ -24,4 +25,3 @@ ItemIconSmol = ExtResource("2_0tvyx")
 ItemName = "Super HighRange Radar"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
-RandomFindMaxCount = 1

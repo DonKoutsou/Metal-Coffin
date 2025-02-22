@@ -11,6 +11,7 @@
 script = ExtResource("6_gbk8t")
 UpgradeName = 3
 UpgradeAmmount = 3.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = ""
 
@@ -27,5 +28,4 @@ ItemIconSmol = ExtResource("2_1c05x")
 ItemName = "MG-20 \"Fury\""
 ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
 MaxStackCount = 1
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_cqyoh")

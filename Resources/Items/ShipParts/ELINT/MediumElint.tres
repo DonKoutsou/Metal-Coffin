@@ -10,6 +10,7 @@
 script = ExtResource("6_bgqm5")
 UpgradeName = 7
 UpgradeAmmount = 1500.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "km"
 
@@ -26,4 +27,3 @@ ItemIconSmol = ExtResource("2_rbrwa")
 ItemName = "ELINT-50 \"Watcher"
 ItemDesc = "Watcher offers a significant upgrade in sensitivity and processing power, capable of discerning radar signatures from greater distances and with improved accuracy. Equipped with advanced signal filtering algorithms, 'Watcher' reduces noise interference, delivering clearer insights into enemy radar activity. This makes it a valuable asset for strategic operations in moderately hostile regions."
 MaxStackCount = 1
-RandomFindMaxCount = 1

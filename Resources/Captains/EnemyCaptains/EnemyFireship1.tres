@@ -11,6 +11,7 @@ script = ExtResource("2_0or3p")
 StatName = 2
 StatBase = 1.5
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_bf8ot"]
@@ -18,6 +19,7 @@ script = ExtResource("2_0or3p")
 StatName = 6
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_mcdo0"]
@@ -25,6 +27,7 @@ script = ExtResource("2_0or3p")
 StatName = 3
 StatBase = 3.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_yl52l"]
@@ -33,6 +36,7 @@ script = ExtResource("2_0or3p")
 StatName = 4
 StatBase = 30.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_7g4dd"]
@@ -40,6 +44,7 @@ script = ExtResource("2_0or3p")
 StatName = 7
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_4p6v8"]
@@ -47,6 +52,7 @@ script = ExtResource("2_0or3p")
 StatName = 1
 StatBase = 3.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_66526"]
@@ -55,6 +61,7 @@ script = ExtResource("2_0or3p")
 StatName = 0
 StatBase = 300.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_h3q7u"]
@@ -62,6 +69,7 @@ script = ExtResource("2_0or3p")
 StatName = 8
 StatBase = 0.0
 StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
 [resource]
