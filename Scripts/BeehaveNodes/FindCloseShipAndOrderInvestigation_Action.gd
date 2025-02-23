@@ -11,7 +11,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	var closestship = Command.FindClosestFleetToPosition(SignalInfo[1], true, true)
 	
 	if (closestship == null):
-		return RUNNING
+		return FAILURE
 		
 	Command.OrderShipToInvestigate(closestship, SignalInfo[1], SignalInfo[0])
 	

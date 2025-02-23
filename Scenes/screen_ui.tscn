@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=45 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -34,6 +34,201 @@
 [ext_resource type="Texture2D" uid="uid://cyonateow4p62" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="31_bthjx"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" path="res://Scripts/Cable.gd" id="33_l6yn6"]
+[ext_resource type="Script" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="36_ai3xr"]
+[ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
+[ext_resource type="AudioStream" uid="uid://v80gryxgxfoo" path="res://Assets/Sounds/ExplosionHit.wav" id="38_4yqhn"]
+[ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="39_qac3v"]
+
+[sub_resource type="Curve" id="Curve_8gyii"]
+_data = [Vector2(0, 0), 0.0, 1.03392, 0, 0, Vector2(0.997337, 1), 0.887123, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_bbf4s"]
+resource_name = "Alarm"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AlarmLight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.466667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sb2tx"]
+resource_name = "Damage"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AlarmLight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 4.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.466667, 1.46667, 2.37132, 2.43798, 2.46667, 3.46667, 4.46667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, true, true, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("CanvasModulate:visible")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.00232568, 0.0333333, 1.4, 1.46667, 1.76666, 2.03333, 2.70465, 2.77132, 2.90465, 2.97132, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScreenLight:visible")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.00465136, 0.035659, 4.86667, 4.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("AlarmLight2:visible")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0310076, 1.39535, 1.46201, 1.76201, 2.02868, 2.7, 2.76667, 2.9, 2.96667, 3.09535),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AlarmLight2:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.166667, 4.86667, 4.96667),
+"transitions": PackedFloat32Array(1, 2.43104, 2.43104, 1),
+"update": 0,
+"values": [1.44, 0.18, 0.18, 1.44]
+}
+
+[sub_resource type="Animation" id="Animation_ad6t0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AlarmLight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("CanvasModulate:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScreenLight:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AlarmLight2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AlarmLight2:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8scw"]
+_data = {
+"Alarm": SubResource("Animation_bbf4s"),
+"Damage": SubResource("Animation_sb2tx"),
+"RESET": SubResource("Animation_ad6t0")
+}
 
 [node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "DroneUI", "ButtonCover")]
 process_mode = 1
@@ -658,10 +853,15 @@ offset_right = -175.0
 offset_bottom = -457.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(150, 0)
 mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 script = ExtResource("33_l6yn6")
+amplitude = 7.81
+frequency = 4.0
+max_rotation = 0.02
+max_scale_x = 0.01
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame4"]
 modulate = Color(0, 0, 0, 0.5)
@@ -691,10 +891,17 @@ offset_right = -832.0
 offset_bottom = -471.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(140, 0)
 mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
 script = ExtResource("33_l6yn6")
+amplitude = 4.585
+frequency = 4.0
+phase_offset = 1.265
+max_rotation = 0.04
+max_scale_x = 0.01
+skew_factor = 50.0
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame3"]
 modulate = Color(0, 0, 0, 0.5)
@@ -718,18 +925,21 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -135.0
-offset_top = -51.0
-offset_right = -1099.0
-offset_bottom = -446.0
+offset_left = -118.0
+offset_top = -83.0
+offset_right = -1082.0
+offset_bottom = -478.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.290599
+pivot_offset = Vector2(115, 0)
 mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 flip_h = true
 script = ExtResource("33_l6yn6")
+amplitude = 4.0
+max_scale_x = 0.01
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame5"]
 modulate = Color(0, 0, 0, 0.5)
@@ -749,6 +959,58 @@ mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 flip_h = true
+
+[node name="ScreenCam" type="Camera2D" parent="."]
+position = Vector2(600, 324)
+script = ExtResource("35_vmft1")
+GoingDownC = SubResource("Curve_8gyii")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
+position = Vector2(-600, -324)
+color = Color(0, 0, 0, 1)
+
+[node name="ScreenLight" type="PointLight2D" parent="ScreenCam"]
+visible = false
+position = Vector2(-104, 6)
+scale = Vector2(0.845, 0.675)
+color = Color(0.21411, 0.398386, 0.176593, 1)
+energy = 2.71
+texture = ExtResource("36_ai3xr")
+texture_scale = 20.2
+
+[node name="AlarmLight" type="PointLight2D" parent="ScreenCam"]
+visible = false
+position = Vector2(5, -328)
+color = Color(0.851914, 0.187693, 0, 1)
+energy = 1.69
+texture = ExtResource("36_ai3xr")
+texture_scale = 23.39
+
+[node name="AlarmLight2" type="PointLight2D" parent="ScreenCam"]
+position = Vector2(5, -328)
+texture = ExtResource("36_ai3xr")
+texture_scale = 44.2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
+stream = ExtResource("37_dgs2i")
+volume_db = -10.046
+pitch_scale = 0.3
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="ScreenCam"]
+stream = ExtResource("38_4yqhn")
+volume_db = 10.0
+bus = &"MapSounds"
+
+[node name="Shake" type="AudioStreamPlayer" parent="ScreenCam"]
+stream = ExtResource("39_qac3v")
+volume_db = 10.0
+stream_paused = true
+bus = &"MapSounds"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenCam"]
+libraries = {
+"": SubResource("AnimationLibrary_i8scw")
+}
 
 [connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]

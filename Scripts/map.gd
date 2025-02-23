@@ -216,7 +216,7 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		var pos = GetNextRandomPos(Prevpos, Distanceval)
 		#MAKE SURE WE DONT PLACE IT TO CLOSE TO ANOTHER TIME
 		#HASCLOSE COULD BE DONE BETTER TO NOT ITTERATE OVER ALL MAP SPOTS PLACED
-		while (HasClose(pos)):
+		while (HasClose(pos, GeneratedSpots)):
 			pos = GetNextRandomPos(Prevpos, Distanceval)
 		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
 		sc.Pos = pos
@@ -568,10 +568,10 @@ func _prim_mst_optimized(cities: Array) -> Array:
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
 	return Vector2(randf_range(-5000, +5000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
 #TODO IMPROVE
-func HasClose(pos : Vector2) -> bool:
+func HasClose(pos : Vector2, places : Array[Town]) -> bool:
 	var b= false
-	for z in SpotList.size():
-		if (pos.distance_to(SpotList[z].Pos) < 800):
+	for z in places.size():
+		if (pos.distance_to(places[z].Pos) < 1500):
 			b = true
 			break
 	return b	

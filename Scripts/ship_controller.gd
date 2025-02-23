@@ -28,7 +28,9 @@ func _ready() -> void:
 	
 func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
+	
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
+	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
 	AvailableShips.append(ControlledShip)
 
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
@@ -136,6 +138,9 @@ func AccelerationChanged(value: float) -> void:
 func SteerChanged(value: float) -> void:
 	ControlledShip.Steer(value)
 
+func OnShipDamaged(Amm : float) -> void:
+	UIEventH.OnControlledShipDamaged()
+
 func OnShipDestroyed(Sh : MapShip):
 	if (Sh is PlayerShip):
 		World.GetInstance().call_deferred("GameLost", "Flagshit destroyed")
@@ -180,11 +185,6 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
 	UIEventH.OnSteerDirForced(ControlledShip.GetSteer())
 	UIEventH.OnShipUpdated(ControlledShip)
-	#_Map.GetElintUI().UpdateConnectedShip(ControlledShip)
-	#_Map.GetMissileUI().UpdateConnectedShip(ControlledShip)
-	#_Map.GetDroneUI().UpdateConnectedShip(ControlledShip)
-	#_Map.GetThrustUI().ForceValue(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	#_Map.GetSteeringWheelUI().call_deferred("CopyShipSteer", ControlledShip)
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
 	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)

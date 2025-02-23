@@ -1,0 +1,49 @@
+extends Camera2D
+
+#SCREEN SHAKE///////////////////////////////////
+@export var GoingDownC : Curve
+
+var GoDownValue = 1
+var Shake = false
+var GoingDown = false
+var shakestr = 1.5
+
+func _ready() -> void:
+	$Shake.play()
+	$Shake.stream_paused = true
+
+func EnableShake(amm : float):
+	Shake = true
+	#$AnimationPlayer.stop()
+	#$AnimationPlayer.play("Damage")
+	$Shake.stream_paused = false
+	shakestr = max(amm, shakestr)
+	$Shake.volume_db = 5
+func EnableDamageShake() -> void:
+	Shake = true
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("Damage")
+	$AudioStreamPlayer2.play()
+	shakestr = 1.5
+
+func DissableShake() -> void:
+	GoingDown = true
+	GoDownValue = 1
+func _physics_process(delta: float) -> void:
+	if (GoingDown):
+		GoDownValue -= delta / 2
+		shakestr = 1.5 * GoingDownC.sample(GoDownValue)
+		$Shake.volume_db =  5 * GoingDownC.sample(GoDownValue)
+	if Shake:
+		#shakestr = lerpf(shakestr, 0, 5.0 * delta)
+		if (shakestr <= 0):
+			#$AnimationPlayer.stop()
+			Shake = false
+			GoingDown = false
+			shakestr = 1.5
+			$Shake.stream_paused = true
+		var of = RandomOffset()
+		offset = of
+func RandomOffset()-> Vector2:
+	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
+var stattween : Tween

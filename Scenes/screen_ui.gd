@@ -17,11 +17,20 @@ func _ready() -> void:
 	EventHandler.connect("SteerDirForced", Steer_Forced)
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	EventHandler.connect("CoverToggled", ToggleControllCover)
+	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
+	
+	#OnControlledShipDamaged()
+	
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)
-
+	#var tw = create_tween()
+	#tw.set_trans(Tween.TRANS_BOUNCE)
+	#tw.tween_property($ScreenCam, "shakestr", 0, $ScreenCam.shakestr * 3)
+	$ScreenCam.DissableShake()
+	
 func Acceleration_Changed(value: float) -> void:
 	EventHandler.OnAccelerationChanged(value)
+	$ScreenCam.EnableShake(value * 1.5)
 
 func Acceleration_Forced(NewVal : float) -> void:
 	Thrust.ForceValue(NewVal)
@@ -45,11 +54,14 @@ func ToggleScreenUI(t : bool) -> void:
 
 func Steering_Direction_Changed(NewValue: float) -> void:
 	EventHandler.OnSteeringDirectionChanged(NewValue)
-
+	$ScreenCam.EnableShake(0.1)
+	$ScreenCam.DissableShake()
 
 func Steer_Offseted(Offset: float) -> void:
 	EventHandler.OnSteerOffseted(Offset)
-
+	$ScreenCam.EnableShake(0.1)
+	$ScreenCam.DissableShake()
+	
 func Steer_Forced(NewVal : float) -> void:
 	Steer.ForceSteer(NewVal)
 
@@ -120,6 +132,13 @@ func Pause_Pressed() -> void:
 func ToggleControllCover(t : bool) -> void:
 	ButtonCover.visible = t
 
-
+func OnControlledShipDamaged() -> void:
+	var tw = create_tween()
+	tw.set_trans(Tween.TRANS_BOUNCE)
+	tw.tween_property($ScreenCam, "shakestr", 0, 8)
+	$ScreenCam.EnableDamageShake()
+	#$ScreenCam.Shake = false
+	
+	
 
 	

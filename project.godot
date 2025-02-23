@@ -159,5 +159,6 @@ environment/ssil/quality=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/glow/upscale_mode=0
 environment/volumetric_fog/use_filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 lights_and_shadows/positional_shadow/atlas_size=2048
 lights_and_shadows/positional_shadow/atlas_size.mobile=1024

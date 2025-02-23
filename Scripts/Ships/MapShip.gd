@@ -26,6 +26,7 @@ var CommingBack = false
 signal ShipDeparted()
 signal ShipDockActions(Stats : String, t : bool, timel : float)
 signal StatLow(StatName : String)
+signal OnShipDamaged(Amm : float)
 signal OnShipDestroyed(Sh : MapShip)
 
 var Landing : bool = false
@@ -258,6 +259,7 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 	queue_redraw()
 
 func Damage(amm : float) -> void:
+	OnShipDamaged.emit(amm)
 	Cpt.ConsumeResource(STAT_CONST.STATS.HULL, amm)
 	if (IsDead()):
 		Kill()

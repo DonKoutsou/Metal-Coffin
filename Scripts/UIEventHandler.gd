@@ -33,6 +33,10 @@ signal PausePressed()
 
 signal ScreenUIToggled(t : bool)
 
+signal AlarmRaised
+
+signal ShipDamaged
+
 func OnScreenUIToggled(t : bool):
 	ScreenUIToggled.emit(t)
 
@@ -114,5 +118,7 @@ func OnPausePressed() -> void:
 func OnButtonCoverToggled(t : bool) -> void:
 	CoverToggled.emit(t)
 
+func OnControlledShipDamaged() -> void:
+	ShipDamaged.emit()
 #func OnSimmulationStepChanged(NewStep: int) -> void:
 	#SimStepChanged.emit(NewStep)
