@@ -23,3 +23,5 @@ script = ExtResource("3_tmcok")
 HappeningName = "Robbery"
 HappeningText = "As you enter the village you get ambushed by a  pack of bandits, what do you do."
 Options = Array[ExtResource("1_68sh8")]([SubResource("Resource_tqwyn"), SubResource("Resource_84hnr")])
+HappeningAppearance = 0
+Special = false

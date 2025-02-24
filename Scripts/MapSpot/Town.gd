@@ -29,44 +29,10 @@ func GenerateCity() -> void:
 	spt.replace_by(sc)
 	
 	sc.SetSpotData(spottype)
-	var Hap = FigureOutEvent(position.y, spottype.PossibleHappenings)
-	if (Hap != null):
-		print("Picked happening {0} for {1}".format([Hap.HappeningName, sc.GetSpotName()]))
-		if (Hap.Special):
-			Hap.PickedBy = sc
-		sc.Event = Hap
+	
 	spt.free()
-	pass
 
 
-func FigureOutEvent(YPos : float, Events : Array[Happening]) -> Happening:
-	if (Events == null or Events.size() == 0):
-		return null
-	var GameSt : Happening.GameStage
-	if (YPos < -40000):
-		GameSt = Happening.GameStage.LATE
-	else : if (YPos < -30000):
-		GameSt = Happening.GameStage.SEMI_LATE
-	else : if (YPos < -20000):
-		GameSt = Happening.GameStage.MID
-	else : if (YPos < -10000):
-		GameSt = Happening.GameStage.SEMI_EARLY
-	else :
-		GameSt = Happening.GameStage.EARLY
-	
-	var PossibleHappenings : Array[Happening]
-	for g in Events:
-		if (g.HappeningAppearance == GameSt and g.PickedBy == null):
-			PossibleHappenings.append(g)
-			PossibleHappenings.append(null)
-			PossibleHappenings.append(null)
-	
-	if (PossibleHappenings.size() > 0):
-		var Hap = PossibleHappenings.pick_random() as Happening
-		if (Hap != null):
-			return Hap
-	
-	return null
 		
 	
 func IsEnemy() -> bool:

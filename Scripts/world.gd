@@ -36,6 +36,11 @@ func _ready() -> void:
 		GetMap().GenerateMap()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Map Spot Plecement")
+		Loadingscr.UpdateProgress(10)
+		Loadingscr.ProcessStarted("Generating Events")
+		GetMap().GenerateEvents()
+		await GetMap().GenerationFinished
+		Loadingscr.ProcesFinished("Generating Events")
 	Loadingscr.UpdateProgress(20)
 	Loadingscr.ProcessStarted("Generating Road Networks")
 	GetMap().GenerateRoads()

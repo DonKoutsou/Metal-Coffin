@@ -18,9 +18,9 @@ UpAmmSymbol = "Cubic Tons"
 script = ExtResource("6_bxopk")
 UpgradeName = 2
 UpgradeAmmount = 0.0
-PenaltyAmmount = 0.5
+PenaltyAmmount = 0.25
 CurrentValue = 0.0
-UpAmmSymbol = ""
+UpAmmSymbol = "km/h"
 
 [resource]
 resource_local_to_scene = true

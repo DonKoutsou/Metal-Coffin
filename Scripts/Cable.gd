@@ -39,8 +39,8 @@ func _physics_process(delta: float) -> void:
 	
 	#amplitude = max(amplitude - delta, 0)
 	#print("amp :" + var_to_str(amplitude))
-	max_rotation = max(max_rotation - delta / 100, 0.001)
-	max_scale_x = max(max_scale_x - delta / 100, 0.001)
+	max_rotation = max(max_rotation - delta / 60, 0.003)
+	max_scale_x = max(max_scale_x - delta / 60, 0.001)
 	#print("frequency :" + var_to_str(frequency))
 	# Update transformations
 	position = StartingPos

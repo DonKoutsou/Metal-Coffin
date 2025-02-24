@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("2_4ax7c")
 It = ExtResource("1_pyqfi")
-Price = 10
+Price = 1000
 Amm = 0

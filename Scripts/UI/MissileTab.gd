@@ -6,6 +6,8 @@ var Armed = false
 @export var DroneDockEventH : DroneDockEventHandler
 #var Missiles : Array[MissileItem]
 
+signal MissileLaunched
+
 var CurrentlySelectedMissile
 
 var SelectedIndex : int
@@ -107,6 +109,7 @@ func OnShipDest(Ship : MapShip) -> void:
 
 func _on_deploy_drone_button_pressed() -> void:
 	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, FindOwner(CurrentlySelectedMissile),ConnectedShip.Cpt)
+	MissileLaunched.emit()
 	_on_dissarm_drone_button_2_pressed()
 	
 func _on_arm_drone_button_pressed(t : bool) -> void:

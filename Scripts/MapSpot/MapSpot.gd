@@ -58,6 +58,8 @@ func SpawnEnemyGarison():
 	host.ShipName = SpotInfo.HostileShipName
 	get_parent().get_parent().get_parent().get_parent().add_child(host)
 	host.global_position = global_position
+
+
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
 	var datas = MapSpotSaveData.new().duplicate()

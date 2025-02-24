@@ -5,7 +5,7 @@ class_name MapSpotType
 #@export var MapIcon : Texture
 #@export var Scene : PackedScene
 #@export var PossibleDrops : Array[Item]
-@export var FullName : String
+#@export var FullName : String
 @export var Description : String
 @export var VisibleOnStart : bool = false
 @export var DropAmmount : int = 1
@@ -27,7 +27,19 @@ func ClearCustomData(Dat : MapSpotCustomData):
 			return
 func GetEnumString() -> String:
 	return SpotKind.keys()[SpotK]
-	
+
+func GetSpecialEvents() -> Array[Happening]:
+	var SpEvents : Array[Happening] = []
+	for g in PossibleHappenings:
+		if (g.Special):
+			SpEvents.append(g)
+	return SpEvents
+func GetNormalEvents() -> Array[Happening]:
+	var Events : Array[Happening] = []
+	for g in PossibleHappenings:
+		if (!g.Special):
+			Events.append(g)
+	return Events
 #func GetSpotDrop() -> Array[Item]:
 	#var Drops : Array[Item] = []
 	#for z in DropAmmount:
@@ -41,24 +53,7 @@ func GetSpotEnumString(S : SpotKind) -> String:
 	return SpotKind.keys()[S]
 
 enum SpotKind{
-SHIP,
-TERRESTRIAL_PLANET,
-GAS,
-LAVA,
-ICE,
-NO_ATMO,
-SAND,
-STAR,
-STATION,
-RINGED,
-ASTEROID_BELT,
-SUB_STATION,
 CITY_CENTER,
 VILLAGE,
-POWER_PLANT,
-AIRPORT,
-OBSERVATORY,
-OIL_RIG,
-MILITARRY_BASE,
-HOSPITAL
+CAPITAL,
 }

@@ -41,7 +41,7 @@ func _ready() -> void:
 	if (FiredBy is not HostileShip):
 		var s = DeletableSound.new()
 		s.stream = MissileLaunchSound
-		s.volume_db = -5
+		s.volume_db = -15
 		s.bus = "MapSounds"
 		s.autoplay = true
 		s.max_distance = 20000

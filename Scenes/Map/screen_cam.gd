@@ -16,28 +16,40 @@ func EnableShake(amm : float):
 	for g in Cabled:
 		g.ApplyShake(1)
 	Shake = true
-	#$AnimationPlayer.stop()
+	GoingDown= false
 	#$AnimationPlayer.play("Damage")
 	$Shake.stream_paused = false
 	shakestr = max(amm, shakestr)
-	$Shake.volume_db = 5
+	#$Shake.volume_db = 5
+func EnableMissileShake() -> void:
+	for g in Cabled:
+		g.ApplyShake(2)
+	Shake = true
+	if (!$AnimationPlayer.is_playing()):
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("Alarm")
+	$Shake.stream_paused = false
+	shakestr = max(1.5, shakestr)
+	GoDownValue = 1
+	GoingDown = true
 func EnableDamageShake() -> void:
 	for g in Cabled:
 		g.ApplyShake(2)
 	Shake = true
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")
-	$AudioStreamPlayer2.play()
-	shakestr = 1.5
-
+	$Boom.play()
+	shakestr = max(1.5, shakestr)
+	GoDownValue = 2
+	GoingDown = true
 func DissableShake() -> void:
 	GoingDown = true
 	GoDownValue = 1
 func _physics_process(delta: float) -> void:
 	if (GoingDown):
-		GoDownValue -= delta / 2
-		shakestr = 1.5 * GoingDownC.sample(GoDownValue)
-		$Shake.volume_db =  5 * GoingDownC.sample(GoDownValue)
+		GoDownValue -= delta / 4
+		shakestr = 1.5 * GoingDownC.sample(GoDownValue / 2)
+		$Shake.volume_db =  min(10, 20 * GoingDownC.sample(GoDownValue / 2) - 10)
 	if Shake:
 		#shakestr = lerpf(shakestr, 0, 5.0 * delta)
 		if (shakestr <= 0):

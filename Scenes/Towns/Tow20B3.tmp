@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgf0r7r507qef"]
+
+[ext_resource type="Script" path="res://Scripts/MapSpot/Town.gd" id="1_3nxd6"]
+[ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/MapElements/city.png" id="2_5a7gx"]
+[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="3_woqxo"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="3_xx0ea"]
+[ext_resource type="Resource" uid="uid://du24ilvkea51x" path="res://Resources/MapSpots/CitySpots/CityCenter.tres" id="6_1ol82"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/CitySpot.gd" id="6_qw32s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b86gk"]
+
+[node name="Town2" type="Node2D"]
+position = Vector2(608, 338)
+script = ExtResource("1_3nxd6")
+SpotScene = ExtResource("3_woqxo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
+z_index = -1
+material = SubResource("CanvasItemMaterial_b86gk")
+scale = Vector2(2, 2)
+texture = ExtResource("2_5a7gx")
+
+[node name="CitySpot" type="Node2D" parent="."]
+script = ExtResource("6_qw32s")
+MapSpotTypes = Array[ExtResource("3_xx0ea")]([ExtResource("6_1ol82")])

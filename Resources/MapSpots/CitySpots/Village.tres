@@ -29,8 +29,7 @@ DataName = ""
 
 [resource]
 script = ExtResource("10_ex7ij")
-SpotK = 13
-FullName = "Village"
+SpotK = 1
 Description = "blah blah"
 VisibleOnStart = false
 DropAmmount = 1

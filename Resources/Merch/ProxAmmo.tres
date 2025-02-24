@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://bjp66pbcmoto5"]
+
+[ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="1_a2r2j"]
+[ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_e26qs"]
+
+[resource]
+script = ExtResource("2_e26qs")
+It = ExtResource("1_a2r2j")
+Price = 300
+Amm = 0

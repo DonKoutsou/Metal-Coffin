@@ -4,11 +4,12 @@
 
 [resource]
 script = ExtResource("1_7f5u1")
-OptionName = "AP"
+OptionName = "Armor Piercing"
 EnergyAdd = 1
 DamageFlat = 0
 DamageMult = 1.5
 Fire = false
+Proxy = false
 DamageMitigationFlat = 0
 DamageMitigationPercent = 0.0
 ComatibleWeapon = 1

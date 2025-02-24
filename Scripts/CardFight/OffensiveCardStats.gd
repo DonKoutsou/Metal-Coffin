@@ -13,3 +13,8 @@ func CauseFire() -> bool:
 	if (SelectedOption):
 		return SelectedOption.Fire
 	return false
+
+func IsPorximityFuse() -> bool:
+	if (SelectedOption):
+		return SelectedOption.Proxy
+	return false

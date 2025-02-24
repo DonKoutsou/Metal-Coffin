@@ -18,7 +18,7 @@ func _ready() -> void:
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	EventHandler.connect("CoverToggled", ToggleControllCover)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
-	
+	MissileUI.connect("MissileLaunched", $ScreenCam.EnableMissileShake)
 	#OnControlledShipDamaged()
 	
 func Acceleration_Ended(value_changed: float) -> void:
@@ -133,9 +133,9 @@ func ToggleControllCover(t : bool) -> void:
 	ButtonCover.visible = t
 
 func OnControlledShipDamaged() -> void:
-	var tw = create_tween()
-	tw.set_trans(Tween.TRANS_BOUNCE)
-	tw.tween_property($ScreenCam, "shakestr", 0, 8)
+	#var tw = create_tween()
+	#tw.set_trans(Tween.TRANS_BOUNCE)
+	#tw.tween_property($ScreenCam, "shakestr", 0, 8)
 	$ScreenCam.EnableDamageShake()
 	#$ScreenCam.Shake = false
 	

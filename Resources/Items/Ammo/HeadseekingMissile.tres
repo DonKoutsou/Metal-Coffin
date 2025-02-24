@@ -18,5 +18,4 @@ ItemIconSmol = ExtResource("2_iety4")
 ItemName = "Heat-seeking Missile"
 ItemDesc = "Within visual range missile, used for close quarter encounters."
 MaxStackCount = 99
-RandomFindMaxCount = 1
 CardProviding = ExtResource("1_c4tby")

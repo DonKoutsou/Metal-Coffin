@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bahj28qps5ssw"]
+[gd_scene load_steps=16 format=3 uid="uid://bahj28qps5ssw"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
@@ -9,9 +9,11 @@
 [ext_resource type="Resource" uid="uid://cgcfrrlvaj7mi" path="res://Resources/Merch/CruiseMissile.tres" id="4_ydye5"]
 [ext_resource type="Resource" uid="uid://fgpjo7b6j2lp" path="res://Resources/Merch/TacticalMissile.tres" id="5_11niw"]
 [ext_resource type="Resource" uid="uid://dpqowk6037rdv" path="res://Resources/Merch/HeatSeekingMissile.tres" id="6_31owc"]
+[ext_resource type="Resource" uid="uid://kdgwrtlmoo12" path="res://Resources/Merch/APAmmo.tres" id="6_vlkdt"]
 [ext_resource type="Resource" uid="uid://b6kalsa6lyfbf" path="res://Resources/Merch/FireExtinguisher.tres" id="7_bygo8"]
 [ext_resource type="Resource" uid="uid://byfi8gb5rfaq5" path="res://Resources/Merch/Flares.tres" id="8_quutr"]
 [ext_resource type="Resource" uid="uid://csn5s05u6rd82" path="res://Resources/Merch/FireAmmo.tres" id="9_t8y33"]
+[ext_resource type="Resource" uid="uid://bjp66pbcmoto5" path="res://Resources/Merch/ProxAmmo.tres" id="10_vs4qv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
 content_margin_left = 5.0
@@ -29,7 +31,7 @@ grow_vertical = 2
 mouse_force_pass_scroll_events = false
 theme = ExtResource("1_ca22g")
 script = ExtResource("2_epy1b")
-Merch = Array[ExtResource("3_5r13l")]([ExtResource("4_ydye5"), ExtResource("5_11niw"), ExtResource("6_31owc"), ExtResource("7_bygo8"), ExtResource("8_quutr"), ExtResource("9_t8y33")])
+Merch = Array[ExtResource("3_5r13l")]([ExtResource("10_vs4qv"), ExtResource("9_t8y33"), ExtResource("6_vlkdt"), ExtResource("6_31owc"), ExtResource("4_ydye5"), ExtResource("5_11niw"), ExtResource("7_bygo8"), ExtResource("8_quutr")])
 FuelPrice = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
 CurrentFuel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
 FuelBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/ProgressBar")

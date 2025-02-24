@@ -235,8 +235,82 @@ func MapGenFinished(Spots : Array[Town]) -> void:
 	SpotList.append_array(Spots)
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()
+
+var EventThread : Thread
+
+func GenerateEvents() -> void:
+	EventThread = Thread.new()
+	EventThread.start(GenerateEventsThreaded)
+
+func GenerateEventsThreaded() -> void:
+	var SpotGroups = ["CAPITAL", "CITY_CENTER", "VILLAGE"]
+
+	for g in SpotGroups:
+		var Spots : Array
+		Spots.append_array(get_tree().get_nodes_in_group(g))
+		Spots.shuffle()
+		
+		var SpEvents = (Spots[0] as MapSpot).SpotType.GetSpecialEvents()
+		
+		while SpEvents.size() != 0:
+			#var EventToGive = SpEvents[0]
+			var S = Spots.pick_random() as MapSpot
+			var YPos = S.get_parent().Pos.y
+			if (S.Event == null):
+				var E = FigureOutEvent(YPos, SpEvents)
+				if (E != null):
+					S.Event = E
+					E.PickedBy = S
+					SpEvents.erase(E)
+					print("Picked happening {0} for {1}".format([E.HappeningName, S.GetSpotName()]))
+		var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
+		
+		for S in Spots:
+			var Sp = S as MapSpot
+			if (Sp.Event != null):
+				continue
+			var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Sp.SpotType.PossibleHappenings)
+			if (Hap != null):
+				print("Picked happening {0} for {1}".format([Hap.HappeningName, Sp.GetSpotName()]))
+				if (Hap.Special):
+					Hap.PickedBy = Sp
+				Sp.Event = Hap
+	call_deferred("EventGenFinished")
+
+func FigureOutEvent(YPos : float, Events : Array[Happening]) -> Happening:
+	if (Events == null or Events.size() == 0):
+		return null
+	var GameSt : Happening.GameStage
+	if (YPos < -40000):
+		GameSt = Happening.GameStage.LATE
+	else : if (YPos < -30000):
+		GameSt = Happening.GameStage.SEMI_LATE
+	else : if (YPos < -20000):
+		GameSt = Happening.GameStage.MID
+	else : if (YPos < -10000):
+		GameSt = Happening.GameStage.SEMI_EARLY
+	else :
+		GameSt = Happening.GameStage.EARLY
 	
+	var PossibleHappenings : Array[Happening]
+	for g in Events:
+		if (g.PickedBy != null):
+			continue
+		if (g.HappeningAppearance == GameSt or g.HappeningAppearance == Happening.GameStage.ANY):
+			PossibleHappenings.append(g)
+			PossibleHappenings.append(null)
+			PossibleHappenings.append(null)
 	
+	if (PossibleHappenings.size() > 0):
+		var Hap = PossibleHappenings.pick_random() as Happening
+		if (Hap != null):
+			return Hap
+	
+	return null
+
+func EventGenFinished() -> void:
+	EventThread.wait_to_finish()
+	GenerationFinished.emit()
 #/////////////////////////////////////////////////////////////
 #/////////////////////////////////////////////////////////////
 #/////////////////////////////////////////////////////////////
@@ -384,8 +458,8 @@ var Roadt : Thread
 var Mut : Mutex
 
 func GenerateRoads() -> void:
-	var CityGroups = ["CITY_CENTER"]
-	var AllSpotGroups = ["CITY_CENTER", "VILLAGE"]
+	var CityGroups = ["CAPITAL", "CITY_CENTER"]
+	var AllSpotGroups = ["CAPITAL", "CITY_CENTER", "VILLAGE"]
 	var Spots : Array
 	for g in CityGroups:
 		Spots.append_array(get_tree().get_nodes_in_group(g))
@@ -407,7 +481,11 @@ func GenerateRoads() -> void:
 	
 	
 func GeneratePathsFromLines(Lines : Array):
-	var Cits = get_tree().get_nodes_in_group("CITY_CENTER")
+	var SpotGroups = ["CAPITAL", "CITY_CENTER"]
+	var Cits : Array
+	for g in SpotGroups:
+		Cits.append_array(get_tree().get_nodes_in_group(g))
+
 	for g in Cits:
 		var SpotPos = g.global_position
 		var Neighbors : Array[String] = []

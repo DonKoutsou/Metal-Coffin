@@ -123,6 +123,7 @@ func StartActionPerformPhase() -> void:
 		var Ship = g as BattleShipStats
 		if (Ship.Hull <= 0):
 			continue
+		var ActionsToBurn : Array[CardStats]
 		for z in Actions[Ship]:
 			var Action = z as CardStats
 			if (Action is OffensiveCardStats):
@@ -132,8 +133,8 @@ func StartActionPerformPhase() -> void:
 					Target = EnemyShips.pick_random()
 				else :
 					Target = PlayerShips.pick_random()
-				
-				
+				ActionsToBurn.append(Action)
+				#Actions[Ship].erase(Action)
 				var HasDeff = false
 				var DefName = Action.CounteredBy.CardName
 				for Ac in Actions[Target]:
@@ -152,8 +153,20 @@ func StartActionPerformPhase() -> void:
 				$VBoxContainer4.move_child(anim, 1)
 				anim.DoOffensive(Action, Def, Ship, Target, EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
-				
-				if (HasDeff):
+				if (Action.IsPorximityFuse()):
+					Target.Hull -= Action.GetDamage() * Ship.FirePower
+					
+					if (PlayerShips.has(Ship)):
+						DamageDone += Action.GetDamage() * Ship.FirePower
+					else:
+						DamageGot += Action.GetDamage() * Ship.FirePower
+					
+					if (Target.Hull <= 0):
+						if (await ShipDestroyed(Target)):
+							return
+					else:
+						UpdateShipStats(Target)
+				else :if (HasDeff):
 					Actions[Target].erase(Action.CounteredBy)
 					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
 					if (PlayerShips.has(Ship)):
@@ -190,6 +203,11 @@ func StartActionPerformPhase() -> void:
 						Cards[Action] -= 1
 						if (Cards[Action] == 0):
 							Cards.erase(Action)
+					ActionsToBurn.append(Action)
+					#Actions[Ship].erase(Action)
+		for ToBurn in ActionsToBurn:
+			Actions[Ship].erase(ToBurn)
+			
 	for g in ShipTurns:
 		var viz = GetShipViz(g)
 		if (viz.IsOnFire()):

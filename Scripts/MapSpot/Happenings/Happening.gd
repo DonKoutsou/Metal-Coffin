@@ -26,5 +26,6 @@ enum GameStage
 	SEMI_EARLY,
 	MID,
 	SEMI_LATE,
-	LATE
+	LATE,
+	ANY
 }

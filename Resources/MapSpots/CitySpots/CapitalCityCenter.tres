@@ -28,8 +28,7 @@ DataName = ""
 
 [resource]
 script = ExtResource("10_jgsae")
-SpotK = 12
-FullName = "City Center"
+SpotK = 2
 Description = "blah blah"
 VisibleOnStart = true
 DropAmmount = 1
