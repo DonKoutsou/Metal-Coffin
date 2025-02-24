@@ -842,15 +842,54 @@ mouse_filter = 0
 texture = ExtResource("31_bthjx")
 expand_mode = 1
 
+[node name="ScreenFrame6" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 566.0
+offset_top = -97.0
+offset_right = -391.0
+offset_bottom = -484.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(178, 0)
+mouse_filter = 2
+texture = ExtResource("31_g4rws")
+expand_mode = 1
+flip_h = true
+script = ExtResource("33_l6yn6")
+frequency = 10.0
+phase_offset = 1.265
+max_rotation = 0.0
+max_scale_x = 0.0
+
+[node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame6"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 12.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("31_g4rws")
+expand_mode = 1
+
 [node name="ScreenFrame4" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 717.0
-offset_top = -139.0
-offset_right = -175.0
-offset_bottom = -457.0
+offset_left = 648.0
+offset_top = -180.0
+offset_right = -158.0
+offset_bottom = -406.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
@@ -858,10 +897,10 @@ mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 script = ExtResource("33_l6yn6")
-amplitude = 7.81
-frequency = 4.0
-max_rotation = 0.02
-max_scale_x = 0.01
+frequency = 10.0
+phase_offset = 1.265
+max_rotation = 0.0
+max_scale_x = 0.0
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame4"]
 modulate = Color(0, 0, 0, 0.5)
@@ -885,23 +924,21 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 82.0
-offset_top = -130.0
-offset_right = -832.0
-offset_bottom = -471.0
+offset_left = 9.0
+offset_top = -140.0
+offset_right = -835.0
+offset_bottom = -406.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(140, 0)
+pivot_offset = Vector2(178, 0)
 mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
 script = ExtResource("33_l6yn6")
-amplitude = 4.585
-frequency = 4.0
+frequency = 10.0
 phase_offset = 1.265
-max_rotation = 0.04
-max_scale_x = 0.01
-skew_factor = 50.0
+max_rotation = 0.0
+max_scale_x = 0.0
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame3"]
 modulate = Color(0, 0, 0, 0.5)
@@ -925,21 +962,23 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -118.0
-offset_top = -83.0
-offset_right = -1082.0
-offset_bottom = -478.0
+offset_left = -131.0
+offset_top = -119.0
+offset_right = -1026.0
+offset_bottom = -440.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = -0.290599
+rotation = -0.16012
 pivot_offset = Vector2(115, 0)
 mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 flip_h = true
 script = ExtResource("33_l6yn6")
-amplitude = 4.0
-max_scale_x = 0.01
+frequency = 10.0
+phase_offset = 1.265
+max_rotation = 0.0
+max_scale_x = 0.0
 
 [node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame5"]
 modulate = Color(0, 0, 0, 0.5)
@@ -960,10 +999,11 @@ texture = ExtResource("30_c0ifk")
 expand_mode = 1
 flip_h = true
 
-[node name="ScreenCam" type="Camera2D" parent="."]
+[node name="ScreenCam" type="Camera2D" parent="." node_paths=PackedStringArray("Cabled")]
 position = Vector2(600, 324)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
+Cabled = [NodePath("../ScreenFrame4"), NodePath("../ScreenFrame3"), NodePath("../ScreenFrame5"), NodePath("../ScreenFrame6")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
 position = Vector2(-600, -324)
@@ -1004,7 +1044,6 @@ bus = &"MapSounds"
 [node name="Shake" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("39_qac3v")
 volume_db = 10.0
-stream_paused = true
 bus = &"MapSounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenCam"]

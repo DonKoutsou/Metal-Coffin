@@ -2,7 +2,7 @@ extends Camera2D
 
 #SCREEN SHAKE///////////////////////////////////
 @export var GoingDownC : Curve
-
+@export var Cabled : Array[TextureRect]
 var GoDownValue = 1
 var Shake = false
 var GoingDown = false
@@ -13,6 +13,8 @@ func _ready() -> void:
 	$Shake.stream_paused = true
 
 func EnableShake(amm : float):
+	for g in Cabled:
+		g.ApplyShake(1)
 	Shake = true
 	#$AnimationPlayer.stop()
 	#$AnimationPlayer.play("Damage")
@@ -20,6 +22,8 @@ func EnableShake(amm : float):
 	shakestr = max(amm, shakestr)
 	$Shake.volume_db = 5
 func EnableDamageShake() -> void:
+	for g in Cabled:
+		g.ApplyShake(2)
 	Shake = true
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")

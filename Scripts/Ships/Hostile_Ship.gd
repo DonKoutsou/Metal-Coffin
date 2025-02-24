@@ -228,7 +228,7 @@ func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBy.size() > 1):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
-	SimulationManager.GetInstance().TogglePause(true)
+	#SimulationManager.GetInstance().TogglePause(true)
 	ShipCamera.GetInstance().FrameCamToPos(global_position)
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
