@@ -1,24 +1,38 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://r5k7lwi7y3wa"]
+[gd_resource type="Resource" script_class="Happening" load_steps=11 format=3 uid="uid://r5k7lwi7y3wa"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_084du"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="2_v6565"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_6dwv7"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_ioldp"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_oufnu"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_vub4e"]
 
 [sub_resource type="Resource" id="Resource_qxdql"]
 script = ExtResource("3_6dwv7")
 Cpt = ExtResource("2_v6565")
 OptionName = "Accept them into your fleet"
+FinishDiag = false
 
 [sub_resource type="Resource" id="Resource_lqhcv"]
 script = ExtResource("4_ioldp")
 StringReply = "They depart."
 OptionName = "Reject them"
+FinishDiag = false
+
+[sub_resource type="Resource" id="Resource_3oa6o"]
+script = ExtResource("5_oufnu")
+HappeningTexts = Array[String](["Landing on the port after a while and the Chief officer offers you a tour to the city. He's spent part of his early adult life on this town and thinks a small walk will take the preasure out of you for a bit."])
+Options = Array[ExtResource("1_084du")]([])
+
+[sub_resource type="Resource" id="Resource_22y04"]
+script = ExtResource("5_oufnu")
+HappeningTexts = Array[String](["You take his offer and "])
+Options = Array[ExtResource("1_084du")]([])
 
 [resource]
 script = ExtResource("5_vub4e")
-HappeningName = "Crew Recruit"
+HappeningName = "The sand hill"
+Stages = Array[ExtResource("5_oufnu")]([SubResource("Resource_3oa6o"), SubResource("Resource_22y04")])
 HappeningTexts = Array[String](["dwadwadwadaw", "awdwawawa", "dwaawda", "awdawdw"])
 Options = Array[ExtResource("1_084du")]([SubResource("Resource_qxdql"), SubResource("Resource_lqhcv")])
 HappeningAppearance = 0

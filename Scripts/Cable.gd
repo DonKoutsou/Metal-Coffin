@@ -22,8 +22,8 @@ func _ready() -> void:
 	#PosToGo = position
 
 func ApplyShake(amm : float = 1) -> void:
-	max_rotation = 0.04 * amm
-	max_scale_x = 0.01 * amm
+	max_rotation = max(max_rotation, 0.04 * amm)
+	max_scale_x = max(max_scale_x, 0.01 * amm)
 
 func _physics_process(delta: float) -> void:
 	var time = Time.get_ticks_msec() / 1000.0

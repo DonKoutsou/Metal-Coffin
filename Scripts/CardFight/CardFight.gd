@@ -5,12 +5,24 @@ class_name Card_Fight
 @export var CardScene : PackedScene
 @export var ShipVizScene : PackedScene
 @export var Cards : Array[CardStats]
+#Animation of the atack
 @export var ActionAnim : PackedScene
+#Scene that shows the stats of the fight
 @export var EndScene : PackedScene
-@onready var offensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/OffensiveCardPlecements
-@onready var deffensive_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/VBoxContainer3/DeffensiveCardPlecements
-@onready var selected_card_plecements: HBoxContainer = $VBoxContainer4/VBoxContainer4/HBoxContainer2/SelectedCardPlecements
 
+@export_group("Plecement Referances")
+#Plecement for any atack cards player can play
+@export var OffensiveCardPlecement : HBoxContainer
+#Plecement for any deffence cards player can play
+@export var DeffensiveCardPlecement : HBoxContainer
+#Plecement for any cards player selects to play
+@export var SelectedCardPlecement : HBoxContainer
+@export var AnimationPlecement : Control
+@export var EnergyBar : ProgressBar
+@export var EnemyShipVisualPlecement : Control
+@export var PlayerShipVisualPlecement : Control
+
+#Stats kept to show at the end screen
 var DamageDone : float = 0
 var DamageGot : float = 0
 var DamageNeg : float = 0
@@ -18,6 +30,7 @@ var FundsToWin : float = 0
 
 var Energy : int = 4
 
+#All ships are placed here based on their Speed stat, Once the turn starts this array is used for the turns
 var ShipTurns : Array[BattleShipStats]
 
 var CurrentTurn : int = 0
@@ -33,28 +46,27 @@ var Actions : Dictionary
 signal CardFightEnded(Survivors : Array[BattleShipStats])
 
 #TODO
-#Find way to expand system to work with inventory items.
-#need to make sure that any armaments brought into the fight exist inside inventory.
+#Find way to expand system to work with inventory items. DONE
+#need to make sure that any armaments brought into the fight exist inside inventory. DONE
 #armaments that can be used in map will be different to those used in card fight
-#Card fight armaments will also be resupplied in same way in towns.
-#enemies need to have inventory of armaments to see what they can do in fight
+#Card fight armaments will also be resupplied in same way in towns. DONE
+#enemies need to have inventory of armaments to see what they can do in fight SEMI-DONE
 
 func _ready() -> void:
-	#for g in 3:
-		#PlayerShips.append(GenerateRandomisedShip("Player" + var_to_str(g), false))
-	#for g in 3:
-		#EnemyShips.append(GenerateRandomisedShip("Enemy" + var_to_str(g), true))
-	
+	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
 	ShipTurns.sort_custom(speed_comparator)
+	
 	for g in EnemyShips:
 		FundsToWin += g.Funds
-	#for g in PlayerShips:
-		#AddShip(g, true)
+	
+	#Create the visualisation for each ship, basicly their stat holder
 	for g in ShipTurns:
-		AddShip(g)
-	print("init done")
+		CreateShipVisuals(g)
+	
+	print("Card fight initialised. {0} player ship(s) VS {1} enemy ship(s)".format([PlayerShips.size(), EnemyShips.size()]))
+	
 	StartActionPickPhase()
 
 #function to sort battle ships based on their speed
@@ -65,14 +77,14 @@ static func speed_comparator(a, b):
 		return false  # 1 means 'b' should appear before 'a'
 	return true
 	
-func AddShip(BattleS : BattleShipStats) -> void:
+func CreateShipVisuals(BattleS : BattleShipStats) -> void:
 	var t = ShipVizScene.instantiate() as CardFightShipViz
 	var Friendly : bool = PlayerShips.has(BattleS)
 	t.SetStats(BattleS, Friendly)
 	if (Friendly):
-		$VBoxContainer4/VBoxContainer2.add_child(t)
+		PlayerShipVisualPlecement.add_child(t)
 	else :
-		$VBoxContainer4/VBoxContainer.add_child(t)
+		EnemyShipVisualPlecement.add_child(t)
 	ShipsViz.append(t)
 
 func GetShipViz(BattleS : BattleShipStats) -> CardFightShipViz:
@@ -117,6 +129,33 @@ func EndActionPickPhase() -> void:
 	ClearCards()
 	StartActionPerformPhase()
 
+func ShipHasDeffence(Ship : BattleShipStats, Atack : CardStats) -> bool:
+	var DefName = Atack.CounteredBy.CardName
+	var HasDeff = false
+	for Ac in Actions[Ship]:
+		var TargAction = Ac as CardStats
+		if (TargAction.CardName == DefName):
+			Actions[Ship].erase(Ac)
+			HasDeff = true
+			break
+	return HasDeff
+
+func DoFireDamage() -> void:
+	for g in ShipTurns:
+		var viz = GetShipViz(g)
+		if (viz.IsOnFire()):
+			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
+			AnimationPlecement.add_child(anim)
+			AnimationPlecement.move_child(anim, 1)
+			anim.DoFire(g, EnemyShips.has(g))
+			await(anim.AnimationFinished)
+			g.Hull -= 10
+			if (g.Hull <= 0):
+				if (await ShipDestroyed(g)):
+					return
+			else:
+				UpdateShipStats(g)
+	
 func StartActionPerformPhase() -> void:
 	$VBoxContainer4/VBoxContainer4.visible = false
 	for g in Actions:
@@ -134,23 +173,16 @@ func StartActionPerformPhase() -> void:
 				else :
 					Target = PlayerShips.pick_random()
 				ActionsToBurn.append(Action)
-				#Actions[Ship].erase(Action)
-				var HasDeff = false
-				var DefName = Action.CounteredBy.CardName
-				for Ac in Actions[Target]:
-					var TargAction = Ac as CardStats
-					if (TargAction.CardName == DefName):
-						Actions[Target].erase(Ac)
-						HasDeff = true
-						break
+				
+				var HasDeff = ShipHasDeffence(Target, Action)
 				
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				anim.DrawnLine = true
 				var Def
 				if (HasDeff):
 					Def = Action.CounteredBy
-				$VBoxContainer4.add_child(anim)
-				$VBoxContainer4.move_child(anim, 1)
+				AnimationPlecement.add_child(anim)
+				AnimationPlecement.move_child(anim, 1)
 				anim.DoOffensive(Action, Def, Ship, Target, EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
 				if (Action.IsPorximityFuse()):
@@ -193,8 +225,8 @@ func StartActionPerformPhase() -> void:
 				var viz = GetShipViz(Ship)
 				if (Action.CardName == "Extinguish fires" and viz.IsOnFire()):
 					var anim = ActionAnim.instantiate() as CardOffensiveAnimation
-					$VBoxContainer4.add_child(anim)
-					$VBoxContainer4.move_child(anim, 1)
+					AnimationPlecement.add_child(anim)
+					AnimationPlecement.move_child(anim, 1)
 					anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
 					await(anim.AnimationFinished)
 					viz.ToggleFire(false)
@@ -208,21 +240,8 @@ func StartActionPerformPhase() -> void:
 		for ToBurn in ActionsToBurn:
 			Actions[Ship].erase(ToBurn)
 			
-	for g in ShipTurns:
-		var viz = GetShipViz(g)
-		if (viz.IsOnFire()):
-			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
-			$VBoxContainer4.add_child(anim)
-			$VBoxContainer4.move_child(anim, 1)
-			anim.DoFire(g, EnemyShips.has(g))
-			await(anim.AnimationFinished)
-			g.Hull -= 10
-			if (g.Hull <= 0):
-				if (await ShipDestroyed(g)):
-					
-					return
-			else:
-				UpdateShipStats(g)
+	DoFireDamage()
+	
 	$VBoxContainer4/VBoxContainer4.visible = true
 	EndActionPerformPhase()
 
@@ -253,9 +272,6 @@ func OnFightEnded(Won : bool) -> void:
 	add_child(EndScene)
 	await EndScene.ContinuePressed
 	return 
-	
-func ShowEndCard() -> void:
-	pass
 
 
 func EndActionPerformPhase() -> void:
@@ -263,6 +279,7 @@ func EndActionPerformPhase() -> void:
 	Actions.clear()
 	StartActionPickPhase()
 
+#Refunds cards that consume inventory items if the card wasnt used in the end
 func RefundUnusedCards() -> void:
 	for Ship in PlayerShips:
 		var Acts = Actions[Ship]
@@ -271,6 +288,7 @@ func RefundUnusedCards() -> void:
 			if (!Action.Consume):
 				continue
 			RefundCardToPlayerShip(Action, Ship)
+			
 			
 func RefundCardToPlayerShip(C : CardStats, Ship : BattleShipStats):
 	var HasCard = false
@@ -345,15 +363,15 @@ func RestartCards() -> void:
 		c.SetCardStats(g, PossibleOptions)
 		c.connect("OnCardPressed", OnCardSelected) 
 		if (g is OffensiveCardStats):
-			offensive_card_plecements.add_child(c)
+			OffensiveCardPlecement.add_child(c)
 		else :
-			deffensive_card_plecements.add_child(c)
+			DeffensiveCardPlecement.add_child(c)
 	ShipsViz[CurrentTurn].Enable()
 
 func UpdateHandCards() -> void:
-	for g in offensive_card_plecements.get_children():
+	for g in OffensiveCardPlecement.get_children():
 		g.queue_free()
-	for g in deffensive_card_plecements.get_children():
+	for g in DeffensiveCardPlecement.get_children():
 		g.queue_free()
 	var CharCards = ShipTurns[CurrentTurn].Cards
 	var CharAmmo = ShipTurns[CurrentTurn].Ammo
@@ -368,16 +386,16 @@ func UpdateHandCards() -> void:
 		c.SetCardStats(g, PossibleOptions)
 		c.connect("OnCardPressed", OnCardSelected)
 		if (g is OffensiveCardStats):
-			offensive_card_plecements.add_child(c)
+			OffensiveCardPlecement.add_child(c)
 		else :
-			deffensive_card_plecements.add_child(c)
+			DeffensiveCardPlecement.add_child(c)
 
 func ClearCards() -> void:
-	for g in offensive_card_plecements.get_children():
+	for g in OffensiveCardPlecement.get_children():
 		g.queue_free()
-	for g in deffensive_card_plecements.get_children():
+	for g in DeffensiveCardPlecement.get_children():
 		g.queue_free()
-	for g in selected_card_plecements.get_children():
+	for g in SelectedCardPlecement.get_children():
 		g.queue_free()
 
 func OnCardSelected(C : Card, Option : CardOption) -> void:
@@ -398,7 +416,7 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	Energy -= c.GetCost()
 	
 	c.connect("OnCardPressed", RemoveCard)
-	selected_card_plecements.add_child(c)
+	SelectedCardPlecement.add_child(c)
 	Actions[CurrentShip].append(Action)
 	
 	#if (C.CStats is OffensiveCardStats):
@@ -446,8 +464,12 @@ func RemoveCard(C : Card, Option : CardOption) -> void:
 	UpdateHandCards()
 	
 func UpdateEnergy() -> void:
-	$VBoxContainer4/VBoxContainer4/ProgressBar.value = Energy
-	$VBoxContainer4/VBoxContainer4/ProgressBar/Label.text = var_to_str(Energy) + " / 4"
+	EnergyBar.value = Energy
+	EnergyBar.get_child(0).text = var_to_str(Energy) + " / 4"
 
 #func PlayOffensiveAction(SourcePos : Vector2, TargetPos : Vector2, Countered : bool) -> void:
 	#pass
+
+func _on_scroll_container_gui_input(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		$VBoxContainer4/VBoxContainer4/ScrollContainer.scroll_horizontal -= event.relative.x

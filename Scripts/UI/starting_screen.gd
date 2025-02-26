@@ -11,20 +11,22 @@ const APPID = "3551150"
 # Called when the node enters the scene tree for the first time.
 
 func _init() -> void:
-	OS.set_environment("SteamAppID", APPID)
-	OS.set_environment("SteamGameID", APPID)
+	if (OS.get_name() == "Windows"):
+		OS.set_environment("SteamAppID", APPID)
+		OS.set_environment("SteamGameID", APPID)
 	
 func _ready() -> void:
-	Steam.steamInit()
-	var IsRunning = Steam.isSteamRunning()
-	
-	if (!IsRunning):
-		printerr("Steam Is Not Running")
-	else:
-		print("Steam Is Running")
-		var ID = Steam.getSteamID()
-		var name = Steam.getFriendPersonaName(ID)
-		print("Username : ", str(name))
+	if (OS.get_name() == "Windows"):
+		Steam.steamInit()
+		var IsRunning = Steam.isSteamRunning()
+		
+		if (!IsRunning):
+			printerr("Steam Is Not Running")
+		else:
+			print("Steam Is Running")
+			var ID = Steam.getSteamID()
+			var name = Steam.getFriendPersonaName(ID)
+			print("Username : ", str(name))
 	
 	
 	var vidpl = StudioAnim.instantiate() as StudioAnim

@@ -53,12 +53,12 @@ func ToggleScreenUI(t : bool) -> void:
 
 func Steering_Direction_Changed(NewValue: float) -> void:
 	EventHandler.OnSteeringDirectionChanged(NewValue)
-	$ScreenCam.EnableShake(0.1)
+	$ScreenCam.EnableShake(0.5)
 	$ScreenCam.DissableShake()
 
 func Steer_Offseted(Offset: float) -> void:
 	EventHandler.OnSteerOffseted(Offset)
-	$ScreenCam.EnableShake(0.1)
+	$ScreenCam.EnableShake(0.5)
 	$ScreenCam.DissableShake()
 	
 func Steer_Forced(NewVal : float) -> void:

@@ -65,6 +65,7 @@ glow_mix = 0.825
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
+adjustment_brightness = 0.8
 adjustment_contrast = 1.2
 adjustment_saturation = 0.7
 adjustment_color_correction = SubResource("GradientTexture1D_tkg8l")

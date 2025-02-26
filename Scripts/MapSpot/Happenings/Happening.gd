@@ -2,6 +2,7 @@ extends Resource
 class_name Happening
 
 @export var HappeningName : String
+@export var HappeningBg : Texture
 @export var Stages : Array[HappeningStage]
 @export var HappeningTexts : Array[String]
 @export var Options : Array[Happening_Option] = []

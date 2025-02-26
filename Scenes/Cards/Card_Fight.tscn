@@ -15,7 +15,7 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="14_kl7fj"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Scenes/Cards/Res/Barrage/Barrage.tres" id="14_ll7ew"]
 
-[node name="CardFight" type="PanelContainer"]
+[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +29,13 @@ ShipVizScene = ExtResource("3_5p8hw")
 Cards = Array[ExtResource("3_3dpfm")]([ExtResource("11_5vvva"), ExtResource("12_a2cqf"), ExtResource("13_pchum"), ExtResource("14_ll7ew"), ExtResource("10_084tn")])
 ActionAnim = ExtResource("11_j66lv")
 EndScene = ExtResource("12_lqfcs")
+OffensiveCardPlecement = NodePath("VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3/OffensiveCardPlecements")
+DeffensiveCardPlecement = NodePath("VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3/DeffensiveCardPlecements")
+SelectedCardPlecement = NodePath("VBoxContainer4/VBoxContainer4/HBoxContainer2/SelectedCardPlecements")
+AnimationPlecement = NodePath("VBoxContainer4")
+EnergyBar = NodePath("VBoxContainer4/VBoxContainer4/HBoxContainer/ProgressBar")
+EnemyShipVisualPlecement = NodePath("VBoxContainer4/VBoxContainer")
+PlayerShipVisualPlecement = NodePath("VBoxContainer4/VBoxContainer2")
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -36,7 +43,7 @@ alignment = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer4"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 0
 alignment = 1
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer4"]
@@ -51,7 +58,6 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("4_lojl1")
 text = "Selected Cards"
 horizontal_alignment = 1
@@ -59,36 +65,19 @@ vertical_alignment = 1
 
 [node name="SelectedCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
 layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="Button" type="Button" parent="VBoxContainer4/VBoxContainer4" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("14_kl7fj")
-text = "End Turn"
-
-[node name="VBoxContainer3" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="OffensiveCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3"]
-layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="DeffensiveCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 8
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer4/VBoxContainer4"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer4/VBoxContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
 theme = ExtResource("14_kl7fj")
 max_value = 4.0
@@ -96,7 +85,7 @@ step = 1.0
 value = 3.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/ProgressBar"]
+[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/HBoxContainer/ProgressBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,9 +96,40 @@ text = "1/4"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer4"]
+[node name="Button" type="Button" parent="VBoxContainer4/VBoxContainer4/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
-size_flags_vertical = 10
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("14_kl7fj")
+text = "End Turn"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer4/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer3" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
 alignment = 1
 
-[connection signal="pressed" from="VBoxContainer4/VBoxContainer4/Button" to="." method="PlayerActionSelectionEnded"]
+[node name="OffensiveCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="DeffensiveCardPlecements" type="HBoxContainer" parent="VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[connection signal="pressed" from="VBoxContainer4/VBoxContainer4/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]
+[connection signal="gui_input" from="VBoxContainer4/VBoxContainer4/ScrollContainer" to="." method="_on_scroll_container_gui_input"]

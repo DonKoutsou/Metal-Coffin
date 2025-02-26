@@ -53,7 +53,7 @@ Options = Array[ExtResource("1_hgwpy")]([SubResource("Resource_xsydv"), SubResou
 
 [resource]
 script = ExtResource("5_4g28x")
-HappeningName = "The Khamir suad"
+HappeningName = "The Khamir squad"
 Stages = Array[ExtResource("5_loek2")]([SubResource("Resource_3ealn"), SubResource("Resource_1esk3"), SubResource("Resource_n5aj4"), SubResource("Resource_c1wc8")])
 HappeningTexts = Array[String]([])
 Options = Array[ExtResource("1_hgwpy")]([])

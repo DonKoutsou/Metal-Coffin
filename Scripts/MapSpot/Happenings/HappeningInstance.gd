@@ -29,9 +29,9 @@ func PresentHappening(Hap : Happening):
 	set_physics_process(true)
 	#$VBoxContainer/NextDiag.visible = true
 	#$VBoxContainer/HBoxContainer.visible = false
-	
+	$VBoxContainer/Label.text = Hap.HappeningName
+	$TextureRect.texture = Hap.HappeningBg
 	for Stage in Hap.Stages:
-		$VBoxContainer/Label.text = Hap.HappeningName
 		for z in Stage.HappeningTexts.size():
 			var Last = Stage.HappeningTexts.size() ==  z + 1
 			

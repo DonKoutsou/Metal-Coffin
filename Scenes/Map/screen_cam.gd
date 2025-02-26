@@ -14,13 +14,13 @@ func _ready() -> void:
 
 func EnableShake(amm : float):
 	for g in Cabled:
-		g.ApplyShake(1)
+		g.ApplyShake(amm)
 	Shake = true
 	GoingDown= false
 	#$AnimationPlayer.play("Damage")
 	$Shake.stream_paused = false
 	shakestr = max(amm, shakestr)
-	#$Shake.volume_db = 5
+	GoDownValue = max(amm, GoDownValue)
 func EnableMissileShake() -> void:
 	for g in Cabled:
 		g.ApplyShake(2)
@@ -39,24 +39,25 @@ func EnableDamageShake() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")
 	$Boom.play()
+	$Shake.stream_paused = false
 	shakestr = max(1.5, shakestr)
 	GoDownValue = 2
 	GoingDown = true
 func DissableShake() -> void:
 	GoingDown = true
-	GoDownValue = 1
+	#GoDownValue = 1
 func _physics_process(delta: float) -> void:
 	if (GoingDown):
 		GoDownValue -= delta / 4
 		shakestr = 1.5 * GoingDownC.sample(GoDownValue / 2)
-		$Shake.volume_db =  min(10, 20 * GoingDownC.sample(GoDownValue / 2) - 10)
+		
 	if Shake:
-		#shakestr = lerpf(shakestr, 0, 5.0 * delta)
+		$Shake.volume_db =  min(10, 20 * GoingDownC.sample(GoDownValue / 2) - 10)
 		if (shakestr <= 0):
 			#$AnimationPlayer.stop()
 			Shake = false
 			GoingDown = false
-			shakestr = 1.5
+			#shakestr = 1.5
 			$Shake.stream_paused = true
 		var of = RandomOffset()
 		offset = of

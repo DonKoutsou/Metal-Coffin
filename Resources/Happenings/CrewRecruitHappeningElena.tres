@@ -1,25 +1,29 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://boanhwedl2f1l"]
+[gd_resource type="Resource" script_class="Happening" load_steps=9 format=3 uid="uid://boanhwedl2f1l"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_as0ao"]
 [ext_resource type="Resource" uid="uid://baci05am3ufd7" path="res://Resources/Captains/PlayerCaptains/Elena.tres" id="2_y2xqp"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_o3a14"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_pu2qb"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_io4g8"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_n3mdr"]
 
 [sub_resource type="Resource" id="Resource_lh6em"]
 script = ExtResource("3_o3a14")
 Cpt = ExtResource("2_y2xqp")
 OptionName = "Accept them into your fleet"
+FinishDiag = false
 
 [sub_resource type="Resource" id="Resource_lqhcv"]
 script = ExtResource("4_pu2qb")
 StringReply = "They depart."
 OptionName = "Reject them"
+FinishDiag = false
 
 [resource]
 script = ExtResource("5_n3mdr")
 HappeningName = "Crew Recruit"
-HappeningText = "In the city you meet someone who is interested in joining your fleet. What do you say?"
+Stages = Array[ExtResource("5_io4g8")]([])
+HappeningTexts = Array[String]([])
 Options = Array[ExtResource("1_as0ao")]([SubResource("Resource_lh6em"), SubResource("Resource_lqhcv")])
 HappeningAppearance = 2
 Special = true
