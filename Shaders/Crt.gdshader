@@ -62,7 +62,7 @@ vec3 getVideo(vec2 uv)
     vec2 blue_offset = vec2(aberration_amount, 0.0);
 
     vec3 video;
-    video.r = texture(screen_texture, look + red_offset).r;
+    video.r = texture(screen_texture, look + red_offset).r ;
     video.g = texture(screen_texture, look).g;
     video.b = texture(screen_texture, look + blue_offset).b;
 

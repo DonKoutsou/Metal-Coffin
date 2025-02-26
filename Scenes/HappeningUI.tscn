@@ -45,6 +45,14 @@ max_value = 3.0
 value = 3.0
 show_percentage = false
 
+[node name="NextDiag" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_hs11o")
+theme_override_font_sizes/font_size = 32
+text = "Next"
+expand_icon = true
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -79,9 +87,10 @@ text = "Option 1"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
+[connection signal="pressed" from="VBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Option1" to="." method="_on_option_1_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Option2" to="." method="_on_option_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Option3" to="." method="_on_option_3_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Option4" to="." method="_on_option_4_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

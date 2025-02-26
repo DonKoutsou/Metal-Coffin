@@ -1,52 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=11 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="3_vcxot"]
+[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/BG.png" id="4_ancht"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="6_460uc"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="6_voe58"]
 [ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="7_wdsp5"]
-
-[sub_resource type="Animation" id="Animation_gaja2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_lf1n0"]
-resource_name = "Rotate"
-length = 20.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 20),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.28319]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d3p0b"]
-_data = {
-"RESET": SubResource("Animation_gaja2"),
-"Rotate": SubResource("Animation_lf1n0")
-}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nyw5u"]
 content_margin_left = 8.0
@@ -106,25 +68,21 @@ layout_mode = 2
 texture = ExtResource("3_s86m3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
+custom_minimum_size = Vector2(512, 200)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -538.0
+offset_top = -303.0
+offset_right = 538.0
+offset_bottom = 303.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(255, 256)
-texture = ExtResource("3_vcxot")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_d3p0b")
-}
+size_flags_vertical = 4
+texture = ExtResource("4_ancht")
+expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8

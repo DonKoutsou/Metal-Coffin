@@ -1,25 +1,61 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://cjywrm3yoyv76"]
+[gd_resource type="Resource" script_class="Happening" load_steps=15 format=3 uid="uid://cjywrm3yoyv76"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_hgwpy"]
 [ext_resource type="Resource" uid="uid://c8b3lpqbi11up" path="res://Resources/Captains/PlayerCaptains/Jor.tres" id="2_623hf"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_1guw4"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_x3762"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_4g28x"]
+[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_loek2"]
+
+[sub_resource type="Resource" id="Resource_3ealn"]
+script = ExtResource("5_loek2")
+HappeningTexts = Array[String](["As you set foot out of the ship you see a band of soldiers apreaching you. Your guard steps infront of you but you dismiss them once you see that the band posses no threat."])
+Options = Array[ExtResource("1_hgwpy")]([])
+
+[sub_resource type="Resource" id="Resource_1esk3"]
+script = ExtResource("5_loek2")
+HappeningTexts = Array[String](["The band looks to be composed of old Khamir fighters, their armors and their faces as weathered as you would expect of people with such ill fate."])
+Options = Array[ExtResource("1_hgwpy")]([])
+
+[sub_resource type="Resource" id="Resource_bhj06"]
+script = ExtResource("4_x3762")
+StringReply = "You tell him of your plan to reach Dormak and stop the war."
+OptionName = "Answer him."
+FinishDiag = false
+
+[sub_resource type="Resource" id="Resource_kk02p"]
+script = ExtResource("4_x3762")
+StringReply = "He raises his head and looks you in the eye. \"You cant do this alone, your ambition will come and crush upon you one of these day. Dont you forget that.\""
+OptionName = "Dissmiss him."
+FinishDiag = true
+
+[sub_resource type="Resource" id="Resource_n5aj4"]
+script = ExtResource("5_loek2")
+HappeningTexts = Array[String](["Once their leader is a few meters away from you, he bows down and asks of your buisness here."])
+Options = Array[ExtResource("1_hgwpy")]([SubResource("Resource_bhj06"), SubResource("Resource_kk02p")])
 
 [sub_resource type="Resource" id="Resource_xsydv"]
 script = ExtResource("3_1guw4")
 Cpt = ExtResource("2_623hf")
 OptionName = "Accept them into your fleet"
+FinishDiag = true
 
 [sub_resource type="Resource" id="Resource_lqhcv"]
 script = ExtResource("4_x3762")
 StringReply = "They depart."
 OptionName = "Reject them"
+FinishDiag = true
+
+[sub_resource type="Resource" id="Resource_c1wc8"]
+script = ExtResource("5_loek2")
+HappeningTexts = Array[String](["He asks if he can join you on your jurney."])
+Options = Array[ExtResource("1_hgwpy")]([SubResource("Resource_xsydv"), SubResource("Resource_lqhcv")])
 
 [resource]
 script = ExtResource("5_4g28x")
-HappeningName = "Crew Recruit"
-HappeningText = "In the city you meet someone who is interested in joining your fleet. What do you say?"
-Options = Array[ExtResource("1_hgwpy")]([SubResource("Resource_xsydv"), SubResource("Resource_lqhcv")])
+HappeningName = "The Khamir suad"
+Stages = Array[ExtResource("5_loek2")]([SubResource("Resource_3ealn"), SubResource("Resource_1esk3"), SubResource("Resource_n5aj4"), SubResource("Resource_c1wc8")])
+HappeningTexts = Array[String]([])
+Options = Array[ExtResource("1_hgwpy")]([])
 HappeningAppearance = 0
 Special = true

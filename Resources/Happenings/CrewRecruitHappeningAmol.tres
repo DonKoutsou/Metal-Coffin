@@ -19,7 +19,7 @@ OptionName = "Reject them"
 [resource]
 script = ExtResource("5_vub4e")
 HappeningName = "Crew Recruit"
-HappeningText = "In the city you meet someone who is interested in joining your fleet. What do you say?"
+HappeningTexts = Array[String](["dwadwadwadaw", "awdwawawa", "dwaawda", "awdawdw"])
 Options = Array[ExtResource("1_084du")]([SubResource("Resource_qxdql"), SubResource("Resource_lqhcv")])
 HappeningAppearance = 0
 Special = true

@@ -1,6 +1,6 @@
 // Based on: https://www.shadertoy.com/view/Ms23DR
 shader_type canvas_item;
-
+render_mode unshaded;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform vec4 line_color : source_color = vec4(0.0, 0.4, 0.0, 1.0);
 vec2 curve(vec2 uv)

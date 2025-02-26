@@ -4,8 +4,8 @@ class_name StartingMenu
 
 signal GameStart(Load : bool)
 
-func _ready() -> void:
-	$AnimationPlayer.play("Rotate")
+#func _ready() -> void:
+	#$AnimationPlayer.play("Rotate")
 
 func _on_play_pressed() -> void:
 	GameStart.emit(false)

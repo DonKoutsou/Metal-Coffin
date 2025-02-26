@@ -16,9 +16,11 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	SpotNameLabel.text = Spot.SpotInfo.SpotName
 	for g in Spot.SpotInfo.PossibleDrops:
 		var text = TextureRect.new()
-		text.texture = g.ItemIconSmol
-		if (g is UsableItem):
-			text.self_modulate = g.ItecColor
+		text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		text.custom_minimum_size = Vector2(17,17)
+		text.texture = g.ItemIcon
+		#if (g is UsableItem):
+			#text.self_modulate = g.ItecColor
 		text.use_parent_material = true
 		SpotDropPosition.add_child(text)
 	SpotDropPosition.pivot_offset.y = SpotDropPosition.size.y

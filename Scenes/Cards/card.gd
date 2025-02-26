@@ -37,12 +37,15 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 
 func OnButtonPressed() -> void:
 	if ($PanelContainer/HBoxContainer.get_child_count() > 0 and CStats.SelectedOption == null):
+		if ($PanelContainer/HBoxContainer.get_child_count() == 1):
+			OnCardPressed.emit(self, CStats.Options[0])
+			return
 		$PanelContainer.visible = true
 	else:
 		OnCardPressed.emit(self, null)
 
 func OnOptionSelected(Option : CardOption) -> void:
-	var but = get_viewport().gui_get_focus_owner() as Button
+	#var but = get_viewport().gui_get_focus_owner() as Button
 	#Option = but.text
 	$PanelContainer.visible = false
 	OnCardPressed.emit(self, Option)

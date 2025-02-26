@@ -32,7 +32,7 @@ func UpdateAmm(Amm : int) -> void:
 		_UpdateItemIcon()
 		Butto.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	else:
-		Butto.mouse_filter = Control.MOUSE_FILTER_STOP
+		Butto.mouse_filter = Control.MOUSE_FILTER_PASS
 	_UpdateAmmountLabel()
 
 func GetContainedItem() -> Item:

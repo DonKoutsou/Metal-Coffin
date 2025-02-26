@@ -6,11 +6,30 @@ class_name StartingScreen
 @export var StartingMenuScene : PackedScene
 @export var StudioAnim : PackedScene
 @export var GameScene : PackedScene
+
+const APPID = "3551150"
 # Called when the node enters the scene tree for the first time.
+
+func _init() -> void:
+	OS.set_environment("SteamAppID", APPID)
+	OS.set_environment("SteamGameID", APPID)
+	
 func _ready() -> void:
+	Steam.steamInit()
+	var IsRunning = Steam.isSteamRunning()
+	
+	if (!IsRunning):
+		printerr("Steam Is Not Running")
+	else:
+		print("Steam Is Running")
+		var ID = Steam.getSteamID()
+		var name = Steam.getFriendPersonaName(ID)
+		print("Username : ", str(name))
+	
+	
 	var vidpl = StudioAnim.instantiate() as StudioAnim
 	add_child(vidpl)
-	await  vidpl.Finished
+	await vidpl.Finished
 	vidpl.queue_free()
 	#var oname = OS.get_name() 
 	#if (oname == "Windows"):
@@ -34,7 +53,7 @@ func StartGame(Load : bool) -> void:
 			window.popup_centered()
 			return
 	
-	get_child(4).queue_free()
+	get_child(5).queue_free()
 	add_child(wor)
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
@@ -44,6 +63,6 @@ func StartGame(Load : bool) -> void:
 
 func OnGameEnded() -> void:
 	get_tree().paused = false
-	get_child(4).TerminateWorld()
-	get_child(4).queue_free()
+	get_child(5).TerminateWorld()
+	get_child(5).queue_free()
 	SpawnMenu()

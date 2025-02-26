@@ -51,7 +51,6 @@ func Radar_Button_Pressed() -> void:
 func ToggleScreenUI(t : bool) -> void:
 	_ScreenItems.visible = t
 
-
 func Steering_Direction_Changed(NewValue: float) -> void:
 	EventHandler.OnSteeringDirectionChanged(NewValue)
 	$ScreenCam.EnableShake(0.1)

@@ -109,6 +109,7 @@ func OnShipDest(Ship : MapShip) -> void:
 
 func _on_deploy_drone_button_pressed() -> void:
 	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, FindOwner(CurrentlySelectedMissile),ConnectedShip.Cpt)
+	AchievementManager.GetInstance().UlockAchievement("MC_MISSILEFIRE")
 	MissileLaunched.emit()
 	_on_dissarm_drone_button_2_pressed()
 	

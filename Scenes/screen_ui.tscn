@@ -1092,7 +1092,7 @@ texture_scale = 23.39
 position = Vector2(5, -666)
 energy = 2.0
 texture = ExtResource("36_ai3xr")
-texture_scale = 44.2
+texture_scale = 50.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")
