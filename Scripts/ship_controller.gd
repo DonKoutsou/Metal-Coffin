@@ -59,7 +59,10 @@ func OnDroneUnDocked(D : Drone, _Target : MapShip) -> void:
 	pass
 func _on_radar_button_pressed() -> void:
 	ControlledShip.ToggleRadar()
-
+	if (ControlledShip.RadarWorking):
+		PopUpManager.GetInstance().DoFadeNotif("Radar turned on")
+	else:
+		PopUpManager.GetInstance().DoFadeNotif("Radar turned off")
 func _on_land_button_pressed() -> void:
 	var spot = ControlledShip.CurrentPort as MapSpot
 	if (spot == null):
@@ -67,17 +70,24 @@ func _on_land_button_pressed() -> void:
 		return
 	if (ControlledShip.Landing):
 		return
+	if (ControlledShip.Altitude == 0):
+		OnShipLanded(ControlledShip)
+		return
 	ControlledShip.StartLanding()
+	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
 	ControlledShip.connect("LandingEnded", OnShipLanded)
 	ControlledShip.connect("LandingCanceled", OnLandingCanceled)
 
 func OnLandingCanceled(Ship : MapShip) -> void:
+	PopUpManager.GetInstance().DoFadeNotif("Landing sequence canceled")
 	Ship.disconnect("LandingEnded", OnShipLanded)
 	Ship.disconnect("LandingCanceled", OnLandingCanceled)
 
 func OnShipLanded(Ship : MapShip) -> void:
-	Ship.disconnect("LandingEnded", OnShipLanded)
-	Ship.disconnect("LandingCanceled", OnLandingCanceled)
+	if (Ship.is_connected("LandingEnded", OnShipLanded)):
+		Ship.disconnect("LandingEnded", OnShipLanded)
+	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):
+		Ship.disconnect("LandingCanceled", OnLandingCanceled)
 	SimulationManager.GetInstance().TogglePause(true)
 	var spot = Ship.CurrentPort as MapSpot
 	var PlayedEvent = Land(spot)
@@ -173,6 +183,7 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	if (currentcontrolled + 1 > AvailableShips.size() - 1):
 		var newcont = 0
 		if (newcont == currentcontrolled):
+			PopUpManager.GetInstance().DoFadeNotif("No ship to switch to")
 			return
 		ControlledShip.ToggleFuelRangeVisibility(false)
 		ControlledShip = AvailableShips[newcont]

@@ -115,11 +115,14 @@ func Land_Pressed() -> void:
 func Sim_Pause_Pressed() -> void:
 	var simmulationPaused = !SimulationManager.GetInstance().Paused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
-
+	if (simmulationPaused):
+		PopUpManager.GetInstance().DoFadeNotif("Simulation paused")
+	else:
+		PopUpManager.GetInstance().DoFadeNotif("Simulation unpaused")
 func Simmulation_Step_Changed(NewStep: int) -> void:
 	#EventHandler.OnSimmulationStepChanged(NewStep)
 	SimulationManager.GetInstance().SetSimulationSpeed(NewStep)
-
+	
 
 func Inventory_Pressed() -> void:
 	EventHandler.OnInventoryPressed()

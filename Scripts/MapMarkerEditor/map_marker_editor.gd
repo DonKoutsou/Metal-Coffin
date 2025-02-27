@@ -37,6 +37,7 @@ func _on_text_confirm_pressed() -> void:
 	textblock.global_position = ship_camera.global_position + (pos / ship_camera.zoom)
 	textblock.SetText($MarkerTextEditor/VBoxContainer/TextEdit.text)
 	$MarkerTextEditor/VBoxContainer/TextEdit.text = ""
+	PopUpManager.GetInstance().DoFadeNotif("Text marker placed")
 func _on_drone_button_pressed() -> void:
 	if (Line == null):
 		Line = LineScene.instantiate() as MapMarkerLine
@@ -55,7 +56,7 @@ func _on_drone_button_pressed() -> void:
 		Line.set_point_position(1, Line.get_point_position(1) / ship_camera.zoom)
 		Line.get_child(0).position = (Line.get_point_position(1) / 2) - (Line.get_child(0).size / 2)
 		Line = null
-
+		PopUpManager.GetInstance().DoFadeNotif("Line marker placed")
 
 func _on_y_gas_range_changed(NewVal: float) -> void:
 	$YLine.global_position.y = clamp($YLine.global_position.y + NewVal * 5, 0, get_viewport_rect().size.y)

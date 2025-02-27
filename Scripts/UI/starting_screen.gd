@@ -27,7 +27,8 @@ func _ready() -> void:
 			var ID = Steam.getSteamID()
 			var name = Steam.getFriendPersonaName(ID)
 			print("Username : ", str(name))
-	
+			$AchievementManager.SteamRunning = true
+			print("Achievement Tracking Enabled")
 	
 	var vidpl = StudioAnim.instantiate() as StudioAnim
 	add_child(vidpl)

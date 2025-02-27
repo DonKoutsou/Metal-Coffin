@@ -26,6 +26,9 @@ func DoConfirm(Text : String, ConfirmText : String, Method : Callable):
 	dig.ok_button_text = ConfirmText
 	dig.popup_centered()
 func DoFadeNotif(Text : String):
+	var f = get_tree().get_nodes_in_group("FadeNotif")
+	if (f.size() > 0):
+		f[0].queue_free()
 	var dig = FadNot.instantiate() as FadeNotif
 	add_child(dig)
 	dig.SetText(Text)

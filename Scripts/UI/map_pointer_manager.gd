@@ -34,7 +34,7 @@ static func GetInstance() -> MapPointerManager:
 func ClearLines() -> void:
 	for g in $MapLines.get_children():
 		g.queue_free()
-
+	PopUpManager.GetInstance().DoFadeNotif("Marker Cleared")
 func AddShip(Ship : Node2D, Friend : bool) -> void:
 	if (Ships.has(Ship)):
 		if (Ship is HostileShip):

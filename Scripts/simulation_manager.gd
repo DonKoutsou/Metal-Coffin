@@ -31,7 +31,7 @@ func TogglePause(t : bool) -> void:
 	Commander.GetInstance().OnSimulationPaused(t)
 	get_tree().call_group("Pausable", "ToggleSimulation", t)
 	
-
+		
 func SetSimulationSpeed(Speed : int) -> void:
 	simulation_notification.SimSpeedUpdated(Speed)
 	SimulationSpeed = Speed
@@ -39,7 +39,7 @@ func SetSimulationSpeed(Speed : int) -> void:
 	_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
 	Commander.GetInstance().OnSimulationSpeedChanged(SimulationSpeed)
 	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)
-
+	PopUpManager.GetInstance().DoFadeNotif("Simulation Speed changed to " + var_to_str(Speed))
 func SpeedToggle(t : bool) -> void:
 	if (t):
 		SimulationSpeed = 10

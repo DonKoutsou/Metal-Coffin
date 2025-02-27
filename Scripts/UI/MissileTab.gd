@@ -108,32 +108,41 @@ func OnShipDest(Ship : MapShip) -> void:
 	Missiles.erase(Ship)
 
 func _on_deploy_drone_button_pressed() -> void:
+	PopUpManager.GetInstance().DoFadeNotif("{0} Launched".format([CurrentlySelectedMissile.ItemName]))
 	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, FindOwner(CurrentlySelectedMissile),ConnectedShip.Cpt)
 	AchievementManager.GetInstance().UlockAchievement("MC_MISSILEFIRE")
 	MissileLaunched.emit()
-	_on_dissarm_drone_button_2_pressed()
-	
+	DissarmMiss()
 func _on_arm_drone_button_pressed(t : bool) -> void:
 	if (AvailableMissiles.size() == 0):
-		_on_dissarm_drone_button_2_pressed()
+		PopUpManager.GetInstance().DoFadeNotif("No missiles available")
+		DissarmMiss()
 		return
 	if (!t):
 		_on_dissarm_drone_button_2_pressed()
 		return
 	Armed = true
-	#$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2/ArmDroneButton.disabled = true
+	PopUpManager.GetInstance().DoFadeNotif("{0} Armed".format([CurrentlySelectedMissile.ItemName]))
 	$Control/Control/Dissarm.ToggleDissable(false)
 	$Control/Control/Launch.ToggleDissable(false)
 
 	MissileDockEventH.MissileArmed(CurrentlySelectedMissile, ConnectedShip.Cpt)
-	
-func _on_dissarm_drone_button_2_pressed() -> void:
+
+func DissarmMiss() -> void:
 	Armed = false
-	$Control/Control/Arm.button_pressed = false
+	$Control/Control/Arm.set_pressed_no_signal(false)
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
 	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
 
+func _on_dissarm_drone_button_2_pressed() -> void:
+	PopUpManager.GetInstance().DoFadeNotif("{0} Dissarmed".format([CurrentlySelectedMissile.ItemName]))
+	Armed = false
+	$Control/Control/Arm.set_pressed_no_signal(false)
+	$Control/Control/Dissarm.ToggleDissable(true)
+	$Control/Control/Launch.ToggleDissable(true)
+	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
+	
 func _on_toggle_drone_tab_pressed() -> void:
 	if ($AnimationPlayer.is_playing()):
 		await $AnimationPlayer.animation_finished
