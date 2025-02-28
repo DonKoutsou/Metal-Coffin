@@ -3,6 +3,7 @@ class_name OffensiveCardStats
 
 @export var CounteredBy : CardStats
 @export var Damage : float
+@export var Accuracy : float
 
 func GetDamage() -> float:
 	if (SelectedOption):

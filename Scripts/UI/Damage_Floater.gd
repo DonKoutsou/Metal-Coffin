@@ -1,4 +1,6 @@
 extends Label
+
+class_name Floater
 @onready var timer: Timer = $Timer
 
 signal Ended

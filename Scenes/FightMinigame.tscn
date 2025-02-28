@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://djd1dfb5i6p0y"]
+
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7ge77"]
+[ext_resource type="Script" path="res://Scripts/fight_minigame.gd" id="2_j7j1y"]
+[ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_qapge"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lxn3t"]
+
+[node name="FigthMinigame" type="ProgressBar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -13.0
+offset_right = 196.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7ge77")
+theme_override_styles/background = SubResource("StyleBoxEmpty_lxn3t")
+show_percentage = false
+script = ExtResource("2_j7j1y")
+Float = ExtResource("3_qapge")
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 180.0
+offset_top = -6.0
+offset_right = -180.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StopButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = 35.5
+offset_right = 29.0
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+text = "Stop"
+
+[connection signal="pressed" from="StopButton" to="." method="_on_stop_button_pressed"]
