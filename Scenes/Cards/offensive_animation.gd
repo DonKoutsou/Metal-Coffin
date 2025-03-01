@@ -20,7 +20,8 @@ var Ic2
 func _ready() -> void:
 	set_physics_process(DrawnLine)
 
-func DoOffensive(AtackCard : OffensiveCardStats, DefCard : CardStats, OriginShip : BattleShipStats, TargetShip : BattleShipStats, FriendShip : bool) -> void:
+func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShip : BattleShipStats, FriendShip : bool) -> void:
+	#DrawnLine = true
 	Ic = ShipViz.instantiate() as CardFightShipViz
 	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
@@ -32,10 +33,10 @@ func DoOffensive(AtackCard : OffensiveCardStats, DefCard : CardStats, OriginShip
 	AtC.size_flags_horizontal = Control.SIZE_EXPAND
 	AtC.show_behind_parent = true
 	
-	if (DefCard != null):
+	if (HasDef):
 		DefC = CardScene.instantiate() as Card
 		var Opts2 : Array[CardOption] = []
-		DefC.SetCardStats(DefCard, Opts2)
+		DefC.SetCardStats(AtackCard.GetCounter(), Opts2)
 		$HBoxContainer.add_child(DefC)
 		DefC.size_flags_horizontal = Control.SIZE_EXPAND
 		DefC.show_behind_parent = true
@@ -110,8 +111,9 @@ func _draw() -> void:
 	if (DefC != null):
 		pos2 = DefC.position
 		pos2.x += (DefC.size.x / 2)
+		pos2.y = pos1.y
 	else :
 		pos2 = Ic2.position
 		pos2.x += (Ic2.size.x / 2)
-		pos2.y -= (Ic2.size.y / 2)
+		pos2.y = pos1.y
 	draw_line(pos1, lerp(pos1, pos2, LinePos), Color(1,0,0,1), 8)

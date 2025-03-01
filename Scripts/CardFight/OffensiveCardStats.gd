@@ -19,3 +19,9 @@ func IsPorximityFuse() -> bool:
 	if (SelectedOption):
 		return SelectedOption.Proxy
 	return false
+
+func GetCounter() -> CardStats:
+	if (SelectedOption != null and SelectedOption.NegateCounter):
+		return null
+	
+	return CounteredBy

@@ -11,3 +11,4 @@ class_name CardOption
 @export var DamageMitigationPercent : float
 @export var ComatibleWeapon : CardStats.WeaponType
 @export var CauseConsumption : bool
+@export var NegateCounter : bool = false

@@ -67,7 +67,7 @@ func _ready() -> void:
 	
 	print("Card fight initialised. {0} player ship(s) VS {1} enemy ship(s)".format([PlayerShips.size(), EnemyShips.size()]))
 	
-	StartActionPickPhase()
+	RunTurn()
 
 #function to sort battle ships based on their speed
 static func speed_comparator(a, b):
@@ -79,8 +79,10 @@ static func speed_comparator(a, b):
 	
 func CreateShipVisuals(BattleS : BattleShipStats) -> void:
 	var t = ShipVizScene.instantiate() as CardFightShipViz
-	var Friendly : bool = PlayerShips.has(BattleS)
+	var Friendly = IsShipFriendly(BattleS)
+	
 	t.SetStats(BattleS, Friendly)
+	
 	if (Friendly):
 		PlayerShipVisualPlecement.add_child(t)
 	else :
@@ -92,53 +94,145 @@ func GetShipViz(BattleS : BattleShipStats) -> CardFightShipViz:
 	return ShipsViz[index]
 	
 func UpdateShipStats(BattleS : BattleShipStats) -> void:
-	var Friendly : bool = PlayerShips.has(BattleS)
-	var index = ShipTurns.find(BattleS)
-	ShipsViz[index].SetStats(BattleS, Friendly)
+	var Friendly = IsShipFriendly(BattleS)
+	GetShipViz(BattleS).SetStats(BattleS, Friendly)
 
 func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
-	#var Friendly : bool = PlayerShips.has(BattleS)
-	var index = ShipTurns.find(BattleS)
-	ShipsViz[index].ToggleFire(Fire)
+	GetShipViz(BattleS).ToggleFire(Fire)
 
 func RemoveShip(Ship : BattleShipStats) -> void:
-	var index = ShipTurns.find(Ship)
-	ShipsViz[index].ShipDestroyed()
-	ShipsViz.remove_at(index)
+	var ShipViz = GetShipViz(Ship)
+	ShipViz.ShipDestroyed()
+	ShipsViz.erase(ShipViz)
+
+	Actions.erase(Ship)
 	ShipTurns.erase(Ship)
 	PlayerShips.erase(Ship)
 	EnemyShips.erase(Ship)
 
-func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
-	var Stats = BattleShipStats.new()
-	Stats.Name = Name
-	Stats.FirePower = randf_range(0.5, 3)
-	Stats.Hull = randf_range(10, 800)
-	Stats.Speed = randf_range(0.5, 3)
-	if (!enemy):
-		Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_2_Main Camera.png")
-	else:
-		Stats.ShipIcon = load("res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png")
-	return Stats
+#/////////////////////////////////////////////////
+#PHASES
+var GameOver : bool = false
 
-func StartActionPickPhase() -> void:
+signal PlayerActionPickingEnded
+
+func RunTurn() -> void:
 	CurrentTurn = 0
-	NextShipActionPick()
-
-func EndActionPickPhase() -> void:
+	
+	for Ship in ShipTurns:
+		Actions[Ship] = []
+		if (IsShipFriendly(Ship)):
+			RestartCards()
+			await PlayerActionPickingEnded
+		else:
+			EnemyActionSelection(Ship)
+			
+		CurrentTurn += 1
+		
 	ClearCards()
-	StartActionPerformPhase()
+	
+	$VBoxContainer4/VBoxContainer4.visible = false
+	
+	for Ship in Actions:
+		var PerformedActions = await PerformActions(Ship)
+		
+		for ToBurn in PerformedActions:
+			Actions[Ship].erase(ToBurn)
+			
+		if (GameOver):
+			return
 
-func ShipHasDeffence(Ship : BattleShipStats, Atack : CardStats) -> bool:
-	var DefName = Atack.CounteredBy.CardName
-	var HasDeff = false
-	for Ac in Actions[Ship]:
-		var TargAction = Ac as CardStats
-		if (TargAction.CardName == DefName):
-			Actions[Ship].erase(Ac)
-			HasDeff = true
-			break
-	return HasDeff
+	await DoFireDamage()
+	
+	if (GameOver):
+		return
+		
+	$VBoxContainer4/VBoxContainer4.visible = true
+	
+	RefundUnusedCards()
+	Actions.clear()
+	
+	call_deferred("RunTurn")
+
+func EnemyActionSelection(Ship : BattleShipStats) -> void:
+	var EnemyEnergy = 4
+	
+	if (GetShipViz(Ship).IsOnFire()):
+		var ExtinguishAction
+		for g in Cards:
+			if (g.CardName == "Extinguish fires"):
+				ExtinguishAction = g
+		EnemyEnergy -= ExtinguishAction.Energy
+		Actions[Ship].append(ExtinguishAction)
+	
+	while (EnemyEnergy > 0):
+		var Action = (Cards.pick_random() as CardStats).duplicate()
+		if (!Action.AllowDuplicates and Actions[Ship].has(Action)):
+			continue
+		if (Action.CardName == "Extinguish fires"):
+			continue
+		EnemyEnergy -= Action.Energy
+		if (EnemyEnergy > 0 and Action.Options.size() > 0):
+			Action.SelectedOption = Action.Options.pick_random()
+			EnemyEnergy -= Action.SelectedOption.EnergyAdd
+		Actions[Ship].append(Action)
+
+
+func PerformActions(Ship : BattleShipStats) -> Array[CardStats]:
+	var ActionsToBurn : Array[CardStats]
+	var Friendly = IsShipFriendly(Ship)
+	
+	for z in Actions[Ship]:
+		var Action = z as CardStats
+		
+		if (Action is OffensiveCardStats):
+			var Target
+			if (Friendly):
+				Target = EnemyShips.pick_random()
+			else :
+				Target = PlayerShips.pick_random()
+				
+			ActionsToBurn.append(Action)
+			
+			var Counter = Action.GetCounter()
+			var HasDeff = ShipHasDeffence(Target, Counter)
+			
+			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
+			anim.DrawnLine = true
+			AnimationPlecement.add_child(anim)
+			AnimationPlecement.move_child(anim, 1)
+			anim.DoOffensive(Action, HasDeff, Ship, Target, EnemyShips.has(Ship))
+			
+			await(anim.AnimationFinished)
+			
+			if (HasDeff):
+				Actions[Target].erase(Counter)
+				print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
+				if (Friendly):
+					DamageNeg += Action.GetDamage() * Ship.FirePower
+			else:
+				if (DamageShip(Target, Action.GetDamage() * Ship.FirePower, Action.CauseFire())):
+					break
+				
+				print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
+				
+		else :if (Action is Deffensive):
+			var viz = GetShipViz(Ship)
+			if (Action.CardName == "Extinguish fires" and viz.IsOnFire()):
+				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
+				AnimationPlecement.add_child(anim)
+				AnimationPlecement.move_child(anim, 1)
+				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
+				await(anim.AnimationFinished)
+				viz.ToggleFire(false)
+				if (Action.Consume):
+					var ShipCards = Ship.Cards
+					ShipCards[Action] -= 1
+					if (ShipCards[Action] == 0):
+						ShipCards.erase(Action)
+				ActionsToBurn.append(Action)
+				
+	return ActionsToBurn
 
 func DoFireDamage() -> void:
 	for g in ShipTurns:
@@ -147,137 +241,77 @@ func DoFireDamage() -> void:
 			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 			AnimationPlecement.add_child(anim)
 			AnimationPlecement.move_child(anim, 1)
-			anim.DoFire(g, EnemyShips.has(g))
+			anim.DoFire(g, IsShipFriendly(g))
 			await(anim.AnimationFinished)
-			g.Hull -= 10
-			if (g.Hull <= 0):
-				if (await ShipDestroyed(g)):
-					return
-			else:
-				UpdateShipStats(g)
+			if (DamageShip(g, 10)):
+				break
+#////////////////////////////////////////////////////////////////////////////
+
+func ShipHasDeffence(Ship : BattleShipStats, NeededDef : CardStats) -> bool:
+	if (NeededDef == null):
+		return false
+	var HasDeff = false
+	for Ac in Actions[Ship]:
+		var TargAction = Ac as CardStats
+		if (TargAction.CardName == NeededDef.CardName):
+			Actions[Ship].erase(Ac)
+			HasDeff = true
+			break
+	return HasDeff
+
+# RETURN TRUE IF FIGHT IS OVER
+func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -> bool:
+	Ship.Hull -= Amm
+
+	if (CauseFire and TrySetFire()):
+			ToggleFireToShip(Ship, true)
 	
-func StartActionPerformPhase() -> void:
-	$VBoxContainer4/VBoxContainer4.visible = false
-	for g in Actions:
-		var Ship = g as BattleShipStats
-		if (Ship.Hull <= 0):
-			continue
-		var ActionsToBurn : Array[CardStats]
-		for z in Actions[Ship]:
-			var Action = z as CardStats
-			if (Action is OffensiveCardStats):
-				var friendly = PlayerShips.has(Ship)
-				var Target
-				if (friendly):
-					Target = EnemyShips.pick_random()
-				else :
-					Target = PlayerShips.pick_random()
-				ActionsToBurn.append(Action)
-				
-				var HasDeff = ShipHasDeffence(Target, Action)
-				
-				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
-				anim.DrawnLine = true
-				var Def
-				if (HasDeff):
-					Def = Action.CounteredBy
-				AnimationPlecement.add_child(anim)
-				AnimationPlecement.move_child(anim, 1)
-				anim.DoOffensive(Action, Def, Ship, Target, EnemyShips.has(Ship))
-				await(anim.AnimationFinished)
-				if (Action.IsPorximityFuse()):
-					Target.Hull -= Action.GetDamage() * Ship.FirePower
-					
-					if (PlayerShips.has(Ship)):
-						DamageDone += Action.GetDamage() * Ship.FirePower
-					else:
-						DamageGot += Action.GetDamage() * Ship.FirePower
-					
-					if (Target.Hull <= 0):
-						if (await ShipDestroyed(Target)):
-							return
-					else:
-						UpdateShipStats(Target)
-				else :if (HasDeff):
-					Actions[Target].erase(Action.CounteredBy)
-					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
-					if (PlayerShips.has(Ship)):
-						DamageNeg += Action.GetDamage() * Ship.FirePower
-				else:
-					if (Action.CauseFire()):
-						if (TrySetFire()):
-							ToggleFireToShip(Target, true)
-					Target.Hull -= Action.GetDamage() * Ship.FirePower
-					
-					if (PlayerShips.has(Ship)):
-						DamageDone += Action.GetDamage() * Ship.FirePower
-					else:
-						DamageGot += Action.GetDamage() * Ship.FirePower
-					
-					if (Target.Hull <= 0):
-						if (await ShipDestroyed(Target)):
-							return
-					else:
-						UpdateShipStats(Target)
-					
-					print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
-			if (Action is Deffensive):
-				var viz = GetShipViz(Ship)
-				if (Action.CardName == "Extinguish fires" and viz.IsOnFire()):
-					var anim = ActionAnim.instantiate() as CardOffensiveAnimation
-					AnimationPlecement.add_child(anim)
-					AnimationPlecement.move_child(anim, 1)
-					anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
-					await(anim.AnimationFinished)
-					viz.ToggleFire(false)
-					if (Action.Consume):
-						var Cards = Ship.Cards
-						Cards[Action] -= 1
-						if (Cards[Action] == 0):
-							Cards.erase(Action)
-					ActionsToBurn.append(Action)
-					#Actions[Ship].erase(Action)
-		for ToBurn in ActionsToBurn:
-			Actions[Ship].erase(ToBurn)
-			
-	DoFireDamage()
+	if (IsShipFriendly(Ship)):
+		DamageGot += Amm
+	else:
+		DamageDone += Amm
 	
-	$VBoxContainer4/VBoxContainer4.visible = true
-	EndActionPerformPhase()
+	if (Ship.Hull <= 0):
+		if (ShipDestroyed(Ship)):
+			return true
+	else:
+		UpdateShipStats(Ship)
+	return false
+
+func IsShipFriendly(Ship : BattleShipStats) -> bool:
+	return PlayerShips.has(Ship)
 
 func TrySetFire() -> bool:
 	randomize()
 	var random_value = randf()
 	return random_value < 0.5
 
+# RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	RemoveShip(Ship)
-	if (EnemyShips.size() == 0):
+	
+	var EnemiesDead = EnemyShips.size() == 0
+	var PlayerDead = PlayerShips.size() == 0
+	
+	if (EnemiesDead or PlayerDead):
 		RefundUnusedCards()
-		await OnFightEnded(true)
-		CardFightEnded.emit(PlayerShips)
-		queue_free()
+		GameOver = true
+		call_deferred("OnFightEnded", EnemiesDead)
 		return true
-	if (PlayerShips.size() == 0):
-		RefundUnusedCards()
-		await OnFightEnded(false)
-		CardFightEnded.emit(EnemyShips)
-		queue_free()
-		return true
+		
 	return false
 
+# CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 
 func OnFightEnded(Won : bool) -> void:
-	var EndScene = EndScene.instantiate() as CardFightEndScene
-	EndScene.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg)
-	add_child(EndScene)
-	await EndScene.ContinuePressed
-	return 
-
-
-func EndActionPerformPhase() -> void:
-	RefundUnusedCards()
-	Actions.clear()
-	StartActionPickPhase()
+	var End = EndScene.instantiate() as CardFightEndScene
+	End.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg)
+	add_child(End)
+	await End.ContinuePressed
+	if (Won):
+		CardFightEnded.emit(PlayerShips)
+	else:
+		CardFightEnded.emit(EnemyShips)
+	queue_free()
 
 #Refunds cards that consume inventory items if the card wasnt used in the end
 func RefundUnusedCards() -> void:
@@ -287,10 +321,10 @@ func RefundUnusedCards() -> void:
 			var Action = z as CardStats
 			if (!Action.Consume):
 				continue
-			RefundCardToPlayerShip(Action, Ship)
-			
-			
-func RefundCardToPlayerShip(C : CardStats, Ship : BattleShipStats):
+			RefundCardToShip(Action, Ship)
+
+
+func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	var HasCard = false
 	for c in Ship.Cards.keys():
 		if (c.CardName == C.CardName):
@@ -300,51 +334,11 @@ func RefundCardToPlayerShip(C : CardStats, Ship : BattleShipStats):
 	if (!HasCard):
 		Ship.Cards[C] = 1
 
-func NextShipActionPick() -> void:
-	var CurrentShip = ShipTurns[CurrentTurn]
-	Actions[CurrentShip] = []
-	if (PlayerShips.has(CurrentShip)):
-		RestartCards()
-	else:
-		EnemyActionSelection()
 
 func PlayerActionSelectionEnded() -> void:
 	ShipsViz[CurrentTurn].Dissable()
-	if (CurrentTurn == ShipTurns.size() - 1):
-		EndActionPickPhase()
-		return
-	CurrentTurn += 1
-	NextShipActionPick()
+	PlayerActionPickingEnded.emit()
 
-func EnemyActionSelection() -> void:
-	var CurrentShip = ShipTurns[CurrentTurn]
-	var EnemyEnergy = 4
-	
-	if (GetShipViz(CurrentShip).IsOnFire()):
-		var ExtinguishAction
-		for g in Cards:
-			if (g.CardName == "Extinguish fires"):
-				ExtinguishAction = g
-		EnemyEnergy -= ExtinguishAction.Energy
-		Actions[CurrentShip].append(ExtinguishAction)
-	
-	while (EnemyEnergy > 0):
-		var Action = (Cards.pick_random() as CardStats).duplicate()
-		if (!Action.AllowDuplicates and Actions[CurrentShip].has(Action)):
-			continue
-		if (Action.CardName == "Extinguish fires"):
-			continue
-		EnemyEnergy -= Action.Energy
-		if (EnemyEnergy > 0 and Action.Options.size() > 0):
-			Action.SelectedOption = Action.Options.pick_random()
-			EnemyEnergy -= Action.SelectedOption.EnergyAdd
-		Actions[CurrentShip].append(Action)
-	
-	if (CurrentTurn == ShipTurns.size() - 1):
-		EndActionPickPhase()
-		return
-	CurrentTurn += 1
-	NextShipActionPick()
 
 func RestartCards() -> void:
 	ClearCards()
@@ -361,7 +355,7 @@ func RestartCards() -> void:
 			if (am.ComatibleWeapon == WType):
 				PossibleOptions.append(am)
 		c.SetCardStats(g, PossibleOptions)
-		c.connect("OnCardPressed", OnCardSelected) 
+		c.connect("OnCardPressed", OnCardSelected)
 		if (g is OffensiveCardStats):
 			OffensiveCardPlecement.add_child(c)
 		else :
@@ -421,10 +415,10 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	
 	#if (C.CStats is OffensiveCardStats):
 	if (C.CStats.Consume):
-		var Cards = ShipTurns[CurrentTurn].Cards
-		Cards[C.CStats] -= 1
-		if (Cards[C.CStats] == 0):
-			Cards.erase(C.CStats)
+		var ShipCards = ShipTurns[CurrentTurn].Cards
+		ShipCards[C.CStats] -= 1
+		if (ShipCards[C.CStats] == 0):
+			ShipCards.erase(C.CStats)
 	if (Option != null):
 		if (Option.CauseConsumption):
 			var Ammo = ShipTurns[CurrentTurn].Ammo
@@ -434,20 +428,20 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	UpdateEnergy()
 	UpdateHandCards()
 
-func RemoveCard(C : Card, Option : CardOption) -> void:
+func RemoveCard(C : Card, _Option : CardOption) -> void:
 	C.queue_free()
 	#if (C.CStats is OffensiveCardStats):
 	if (C.CStats.Consume):
-		var Cards = ShipTurns[CurrentTurn].Cards
+		var ShipCards = ShipTurns[CurrentTurn].Cards
 		var HasCard = false
-		for g in Cards.keys():
+		for g in ShipCards.keys():
 			#print("Comparing {0} with {1}".format([g.resource_path, C.CStats.resource_path]))
 			if (g.CardName == C.CStats.CardName):
 				HasCard = true
-				Cards[g] += 1
+				ShipCards[g] += 1
 				break
 		if (!HasCard):
-			Cards[C.CStats] = 1
+			ShipCards[C.CStats] = 1
 
 	if (C.CStats.SelectedOption != null):
 		if (C.CStats.SelectedOption.CauseConsumption):
@@ -473,3 +467,15 @@ func UpdateEnergy() -> void:
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		$VBoxContainer4/VBoxContainer4/ScrollContainer.scroll_horizontal -= event.relative.x
+
+func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
+	var Stats = BattleShipStats.new()
+	Stats.Name = Name
+	Stats.FirePower = randf_range(0.5, 3)
+	Stats.Hull = randf_range(10, 800)
+	Stats.Speed = randf_range(0.5, 3)
+	if (!enemy):
+		Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_2_Main Camera.png")
+	else:
+		Stats.ShipIcon = load("res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png")
+	return Stats

@@ -11,6 +11,7 @@
 script = ExtResource("5_yokpx")
 CounteredBy = ExtResource("1_c17ap")
 Damage = 6.0
+Accuracy = 0.0
 Icon = ExtResource("2_140si")
 CardName = "Barragge"
 CardDescription = "Throws a barragge on the enemy. DMG = 6 * Firepower"
