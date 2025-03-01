@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://1dcxgrpt06te"]
+
+[ext_resource type="Resource" uid="uid://cta70yn02gqg5" path="res://Resources/Captains/EnemyCaptains/LandEnemyFireship1.tres" id="1_ts5h3"]
+[ext_resource type="Script" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_4abio"]
+
+[resource]
+script = ExtResource("2_4abio")
+Cpt = ExtResource("1_ts5h3")
+Cost = 50
+MaxAmmInFleet = 10

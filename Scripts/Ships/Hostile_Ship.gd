@@ -35,7 +35,7 @@ func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 	
-	#MapPointerManager.GetInstance().AddShip(self, false)
+	MapPointerManager.GetInstance().AddShip(self, false)
 	#$Elint.connect("area_entered", _on_elint_area_entered)
 	#$Elint.connect("area_exited", _on_elint_area_exited)
 
@@ -104,6 +104,8 @@ func FigureOutPath() -> void:
 	if (OS.get_name() == "Android"):
 		BTree.tick_rate = 10
 	bb.set_value("TickRate", BTree.tick_rate)
+	
+	TogglePause(SimulationManager.IsPaused())
 
 func _physics_process(delta: float) -> void:
 	UpdateElint(delta)
@@ -228,7 +230,7 @@ func IntersectPusruing() -> Vector2:
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
-	print("Calculating Intersection Point took " + var_to_str(Time.get_ticks_msec() - ms) + " msec")
+	#print("Calculating Intersection Point took " + var_to_str(Time.get_ticks_msec() - ms) + " msec")
 	return predicted_position
 
 #//////////////////Area Events

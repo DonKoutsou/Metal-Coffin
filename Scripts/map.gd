@@ -343,7 +343,7 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Pos : Vector2) -> void:
-	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y)
+	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol)
 	var SpawnedFleet = []
 	var SpawnedCallsigns = []
 	for f in Fleet:

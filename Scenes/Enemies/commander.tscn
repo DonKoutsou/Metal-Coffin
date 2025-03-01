@@ -15,19 +15,20 @@
 [ext_resource type="Script" path="res://Scripts/BeehaveNodes/AtackOrder_Action.gd" id="13_obikj"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="14_ny52o"]
 
-[node name="Commander" type="Node"]
+[node name="Commander" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_2gt3m")
 Armaments = {
 ExtResource("2_fb4ti"): 2
 }
+layers_2d_physics = 1
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("3_7gsnn")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../Blackboard")
 custom_monitor = true
-actor = NodePath("..")
+actor = NodePath("")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
 script = ExtResource("4_2bbgj")

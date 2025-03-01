@@ -1,8 +1,10 @@
-extends Node
+extends Node2D
 
 class_name Commander
 
 @export var Armaments : Dictionary
+
+@export_flags_2d_physics var layers_2d_physics
 
 static var Instance : Commander
 
@@ -237,9 +239,58 @@ func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
 			continue
 		if (g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.MISSILE_SPACE) < Armaments[PossibleArmament]):
 			continue
+		
 		Carrier = g
 		break
 	return Carrier
+
+func FindMissileCarrierAbleToFireToShip(Ship : MapShip) -> HostileShip:
+	var Carrier : HostileShip
+	for g in Fleet:
+		#if g.Reloading > 0:
+			#continue
+		var dist = Ship.global_position.distance_to(g.global_position)
+		var PossibleArmament = GetCheapestArmamentForDistance(dist)
+		if (PossibleArmament == null):
+			continue
+		if (g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.MISSILE_SPACE) < Armaments[PossibleArmament]):
+			continue
+		if (shapecast_2d(g, Ship)):
+			continue
+		Carrier = g
+		break
+	return Carrier
+
+func shapecast_2d(from : MapShip, to: MapShip, margin: float = 1) -> bool:
+	# Access the PhysicsDirectSpaceState2D from the World2D resource
+	var world: World2D = get_world_2d()
+	var space_state: PhysicsDirectSpaceState2D = world.direct_space_state
+	
+	var Shape = RectangleShape2D.new()
+	Shape.size = Vector2(10,10)
+	# Calculate the motion vector
+	var motion: Vector2 = to.global_position - from.global_position
+	
+	# Prepare the shape cast query
+	var query: PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
+	query.transform = Transform2D(0, from.global_position)
+	query.collide_with_areas = true
+	query.collision_mask = layers_2d_physics
+	query.shape_rid = Shape.get_rid()
+	query.margin = margin
+	query.motion = motion
+
+	# Perform the shape cast
+	var result = space_state.intersect_shape(query)
+	
+	for g in result:
+		if (g["collider"].get_parent() == from or g["collider"].get_parent() == to):
+			continue
+		return true
+	
+	# Return true if the shape cast collides, false otherwise
+	return false
+
 func GetCheapestArmamentForDistance(Dist : float) -> MissileItem:
 	var CheapestPrice = 10000
 	var CheapestArmament
@@ -258,6 +309,7 @@ func IsShipBeingPursued(Ship : MapShip) -> bool:
 #//////////////////////////////////////////////////////////////////
 func _ready() -> void:
 	Instance = self
+
 
 static func GetInstance() -> Commander:
 	return Instance

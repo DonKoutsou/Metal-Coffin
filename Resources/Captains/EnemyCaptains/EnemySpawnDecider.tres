@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpawnDecider" load_steps=34 format=3 uid="uid://c1buiwym6qkh8"]
+[gd_resource type="Resource" script_class="SpawnDecider" load_steps=36 format=3 uid="uid://c1buiwym6qkh8"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_e8y86"]
 [ext_resource type="Script" path="res://Scripts/EnemyAi/SpawnDecider.gd" id="2_gx7ll"]
@@ -19,6 +19,8 @@
 [ext_resource type="Resource" uid="uid://g2a8jt5yrgwr" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl3.tres" id="16_b5jl3"]
 [ext_resource type="Resource" uid="uid://d17h4a7ifln30" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl4.tres" id="17_d84jx"]
 [ext_resource type="Script" path="res://Scripts/TownShop/merchandise_info.gd" id="18_dy8r8"]
+[ext_resource type="Resource" uid="uid://1dcxgrpt06te" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/LandFireshipLvl1.tres" id="18_mua1f"]
+[ext_resource type="Resource" uid="uid://dx7unrtjdflj2" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/LandFireshipLvl2.tres" id="19_i0b0x"]
 [ext_resource type="Resource" uid="uid://cgcfrrlvaj7mi" path="res://Resources/Merch/CruiseMissile.tres" id="19_n3idt"]
 [ext_resource type="Resource" uid="uid://fgpjo7b6j2lp" path="res://Resources/Merch/TacticalMissile.tres" id="20_glado"]
 [ext_resource type="Resource" uid="uid://csn5s05u6rd82" path="res://Resources/Merch/FireAmmo.tres" id="21_1io8s"]
@@ -72,4 +74,5 @@ MaxAmmInFleet = 10
 [resource]
 script = ExtResource("2_gx7ll")
 CaptainList = Array[ExtResource("1_e8y86")]([ExtResource("2_ujkrp"), ExtResource("3_3burq"), ExtResource("4_skjn5"), ExtResource("5_nj04r"), ExtResource("6_rkuq5"), ExtResource("7_4r1ff"), ExtResource("8_tgta4"), ExtResource("9_0kqkm"), ExtResource("10_g406a"), ExtResource("11_8j6y3"), ExtResource("12_jf4i4"), ExtResource("13_eutgs"), ExtResource("14_u64bs"), ExtResource("15_702x6"), ExtResource("16_b5jl3"), ExtResource("17_d84jx")])
+GroundUnits = Array[ExtResource("1_e8y86")]([ExtResource("18_mua1f"), ExtResource("19_i0b0x")])
 MerchList = Array[ExtResource("18_dy8r8")]([SubResource("Resource_5f3bh"), SubResource("Resource_lbk5a"), SubResource("Resource_rcgj4"), SubResource("Resource_73uj5"), SubResource("Resource_icura"), SubResource("Resource_iknr7"), SubResource("Resource_30o4t")])

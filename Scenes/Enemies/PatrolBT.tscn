@@ -16,7 +16,7 @@
 process_mode = 1
 script = ExtResource("1_vo0jh")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@116918")
+blackboard = NodePath("@Node@44415")
 custom_monitor = true
 actor = NodePath("")
 
@@ -29,11 +29,7 @@ script = ExtResource("3_ovbxk")
 [node name="SelectorComposite" type="Node" parent="SelectorComposite/SequenceComposite"]
 script = ExtResource("4_mvm57")
 
-[node name="CooldownDecorator" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]
-script = ExtResource("4_32dxd")
-wait_time = 1.5
-
-[node name="UnableToReachDestinationCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite/CooldownDecorator"]
+[node name="UnableToReachDestinationCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]
 script = ExtResource("5_81qny")
 
 [node name="CooldownDecorator3" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]

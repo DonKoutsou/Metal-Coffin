@@ -115,7 +115,6 @@ disable_3d = true
 own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
-screen_space_aa = 1
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(791, 512)
@@ -196,6 +195,7 @@ MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.049, 1, 0.04, 1)
 EnemyColor = Color(1, 0.094, 0, 1)
+EnemyDebug = true
 UIEventH = ExtResource("25_8mjbw")
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]
