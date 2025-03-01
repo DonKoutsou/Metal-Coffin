@@ -9,6 +9,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var actualdistance = MainShip.global_position.distance_to(MainShip.GetCurrentDestination())
 	
 	if (dist < actualdistance):
+		print(MainShip.ShipName + " is unable to reach destination")
 		return SUCCESS
 	
 	return FAILURE

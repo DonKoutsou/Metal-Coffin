@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=12 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
 [ext_resource type="Script" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://crn46j7x7kq6m" path="res://Assets/MapElements/Ship.png" id="7_kn8g7"]
 [ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
 [ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
+[ext_resource type="Texture2D" uid="uid://bbvfo5xkwu8pg" path="res://Assets/MapElements/triangle-target.png" id="8_143co"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tc2tu"]
 
@@ -45,7 +46,8 @@ ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
 Icons = {
 "Missile": ExtResource("7_uwuwu"),
-"Ship": ExtResource("7_kn8g7")
+"Ship": ExtResource("7_kn8g7"),
+"Wreck": ExtResource("8_143co")
 }
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
@@ -205,5 +207,5 @@ text = "->"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="EnteredScreen"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ExitedScreen"]

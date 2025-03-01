@@ -78,7 +78,14 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if (FiredBy is PlayerShip or FiredBy is Drone):
 			if (area.get_parent() is HostileShip):
 				area.get_parent().OnShipSeen(self)
-
+				
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if (FoundShips.has(area.get_parent())):
+		FoundShips.erase(area.get_parent())
+		if (FiredBy is PlayerShip or FiredBy is Drone):
+			if (area.get_parent() is HostileShip):
+				area.get_parent().OnShipUnseen(self)
+				
 func _on_missile_body_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == FiredBy):
 		return
@@ -105,7 +112,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		s.autoplay = true
 		#s.max_distance = 20000
 		get_parent().add_child(s)
-	Kill()
+	call_deferred("Kill")
 		
 func _on_missile_body_area_exited(area: Area2D) -> void:
 	var IsRadar = area.get_collision_layer_value(2)
@@ -162,3 +169,4 @@ func Kill() -> void:
 	OnShipDestroyed.emit(self)
 	StopSeeing()
 	queue_free()
+	get_parent().remove_child(self)

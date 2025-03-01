@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b0gylky44tnsw"]
+[gd_scene load_steps=12 format=3 uid="uid://b0gylky44tnsw"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_vo0jh"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_ovbxk"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="4_32dxd"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_mvm57"]
 [ext_resource type="Script" path="res://Scripts/BeehaveNodes/CanReachDestinationCondition.gd" id="5_81qny"]
-[ext_resource type="Script" path="res://Scripts/BeehaveNodes/ToFarToRefuelCondition.gd" id="6_77sl7"]
 [ext_resource type="Script" path="res://Scripts/BeehaveNodes/NeedRepairs.gd" id="7_83cx2"]
 [ext_resource type="Script" path="res://Scripts/BeehaveNodes/HasRefuelSpotCondition.gd" id="8_ojqis"]
 [ext_resource type="Script" path="res://Scripts/BeehaveNodes/FindRefuelSpot_Action.gd" id="9_r0x3t"]
@@ -17,7 +16,7 @@
 process_mode = 1
 script = ExtResource("1_vo0jh")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17582")
+blackboard = NodePath("@Node@116918")
 custom_monitor = true
 actor = NodePath("")
 
@@ -36,13 +35,6 @@ wait_time = 1.5
 
 [node name="UnableToReachDestinationCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite/CooldownDecorator"]
 script = ExtResource("5_81qny")
-
-[node name="CooldownDecorator2" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]
-script = ExtResource("4_32dxd")
-wait_time = 1.0
-
-[node name="ToFarToRefuelCondition" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite/CooldownDecorator2"]
-script = ExtResource("6_77sl7")
 
 [node name="CooldownDecorator3" type="Node" parent="SelectorComposite/SequenceComposite/SelectorComposite"]
 script = ExtResource("4_32dxd")

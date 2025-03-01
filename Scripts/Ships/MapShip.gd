@@ -26,7 +26,7 @@ var CommingBack = false
 signal ShipDeparted()
 signal ShipDockActions(Stats : String, t : bool, timel : float)
 signal StatLow(StatName : String)
-signal OnShipDamaged(Amm : float)
+signal OnShipDamaged(Amm : float, ShowVisuals : bool)
 signal OnShipDestroyed(Sh : MapShip)
 
 var Landing : bool = false
@@ -258,15 +258,14 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 		#IconShowing = false
 	queue_redraw()
 
-func Damage(amm : float) -> void:
-	OnShipDamaged.emit(amm)
+func Damage(amm : float, ShowVisuals : bool = true) -> void:
+	OnShipDamaged.emit(amm, ShowVisuals)
 	Cpt.ConsumeResource(STAT_CONST.STATS.HULL, amm)
 	if (IsDead()):
 		Kill()
 		
 func Kill() -> void:
-	if (self is not HostileShip):
-		InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
+	InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
 	MapPointerManager.GetInstance().RemoveShip(self)
 	OnShipDestroyed.emit(self)
 	queue_free()

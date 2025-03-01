@@ -40,15 +40,14 @@ var CurrentZoom : float
 signal ShipDeparted
 
 func _ready() -> void:
-	#DetailInitialPos = $Control/PanelContainer/VBoxContainer.position
 	DetailPanel.visible = false
 	$Line2D.visible = false
 	TimeSeenLabel.visible = false
-	#$Control/PanelContainer/VBoxContainer/Threat.visible = false
 	FuelLabel.visible = false
 	HullLabel.visible = false
 	
 	#set_physics_process(false)
+	
 func PlayHostileShipNotif(text : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText(text)
@@ -134,7 +133,7 @@ func OnStatLow(StatName : String) -> void:
 	
 func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : float):
 	ShipNameLabel.text = ShipName
-	ShipSpeedLabel.text = "Speed " + var_to_str(ShipSpeed * 360).replace(".0", "") + "km/h"
+	UpdateSpeed(ShipSpeed)
 	ShipCallsign.text = ShipCasllSign
 	
 func UpdateCameraZoom(NewZoom : float) -> void:
@@ -154,10 +153,13 @@ func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
 	var spd = roundi(Spd * 360)
 	ShipSpeedLabel.text = "Spd " + var_to_str(spd).replace(".0", "") + "km/h"
+	
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(Alt))
+	
 func UpdateDroneFuel(amm : float, maxamm : float):
 	FuelLabel.text = "F: {0} / {1}".format([amm, maxamm])
+	
 func UpdateDroneHull(amm : float, maxamm : float):
 	HullLabel.text = "H: {0} / {1}".format([amm, maxamm])
 
@@ -172,15 +174,16 @@ func UpdateTime():
 	var timepast = Clock.GetInstance().GetHoursSince(TimeLastSeen)
 	TimeSeenLabel.text = "Last Seen " + var_to_str(snappedf((timepast) , 0.01)) + "h ago"
 
-func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+func EnteredScreen() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
 	ShipIcon.add_to_group("UnmovableMapInfo")
 	add_to_group("ZoomAffected")
 	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+func ExitedScreen() -> void:
 	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
 	ShipIcon.remove_from_group("UnmovableMapInfo")
 	remove_from_group("ZoomAffected")
+	
 func UpdateSignRotation() -> void:
 	DetailPanel.rotation += 0.01
 	$Control/PanelContainer.pivot_offset = $Control/PanelContainer.size / 2
@@ -189,7 +192,13 @@ func UpdateSignRotation() -> void:
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / CurrentZoom)
 
-	
+func OnHostileShipDestroyed() -> void:
+	modulate = Color(1,1,1)
+	ShipCallsign.text = ""
+	UpdateSpeed(0)
+	ShipSpeedLabel.visible = false
+	SetType("Wreck")
+
 func get_closest_point_on_rect(rect: Rect2, point: Vector2) -> Vector2:
 	var closest_x = clamp(point.x, rect.position.x, rect.position.x + rect.size.x)
 	var closest_y = clamp(point.y, rect.position.y, rect.position.y + rect.size.y)

@@ -19,6 +19,9 @@ var BTree : BeehaveTree
 var UseDefaultBehavior : bool = false
 var PosToSpawn : Vector2
 
+var Destroyed : bool
+var Loading : bool = false
+
 signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
 signal OnEnemyVisualContact(Ship : MapShip, SeenBy : HostileShip)
@@ -26,6 +29,7 @@ signal OnEnemyVisualLost(Ship : MapShip)
 signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
+signal OnShipWrecked
 
 func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
@@ -39,11 +43,19 @@ func InitialiseShip() -> void:
 	global_position = PosToSpawn
 	ShipSpawned.emit()
 	
+	
+	TogglePause(SimulationManager.IsPaused())
+	
+	if (!Loading):
+		for g in Cpt.CaptainStats:
+			g.ForceMaxValue()
+	
+	if (Destroyed):
+		Kill()
+		return
+	
 	Commander.GetInstance().RegisterSelf(self)
-
-	for g in Cpt.CaptainStats:
-		g.ForceMaxValue()
-
+	
 	_UpdateShipIcon(Cpt.ShipIcon)
 	var ElintRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
 	if (ElintRange == 0):
@@ -53,7 +65,7 @@ func InitialiseShip() -> void:
 
 	var Visual = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	UpdateVizRange(Visual)
-	TogglePause(SimulationManager.IsPaused())
+	
 	if (!Patrol):
 		SetSpeed(0)
 		UseDefaultBehavior = true
@@ -272,30 +284,36 @@ func BodyEnteredBody(Body : Area2D) -> void:
 		if (spot == RefuelSpot and Patrol):
 			SetCurrentPort(RefuelSpot)
 	else :if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		var plships : Array[Node2D] = []
-		var hostships : Array[Node2D] = []
-		if (Docked):
-			hostships.append(Command)
-			hostships.append_array(Command.GetDroneDock().DockedDrones)
+		if (Destroyed):
+			var Wonfunds = Cpt.ProvidingFunds
+			World.GetInstance().PlayerWallet.AddFunds(Wonfunds)
+			PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Wonfunds]))
+			call_deferred("DestroyEnemyDebry")
 		else:
-			hostships.append(self)
-			hostships.append_array(GetDroneDock().DockedDrones)
-			
-		if (Body.get_parent() is PlayerShip):
-			var player = Body.get_parent() as PlayerShip
-			plships.append(player)
-			plships.append_array(player.GetDroneDock().DockedDrones)
-		else:
-			var drn = Body.get_parent() as Drone
-			if (drn.Docked):
-				var player = drn.Command
+			var plships : Array[Node2D] = []
+			var hostships : Array[Node2D] = []
+			if (Docked):
+				hostships.append(Command)
+				hostships.append_array(Command.GetDroneDock().DockedDrones)
+			else:
+				hostships.append(self)
+				hostships.append_array(GetDroneDock().DockedDrones)
+				
+			if (Body.get_parent() is PlayerShip):
+				var player = Body.get_parent() as PlayerShip
 				plships.append(player)
 				plships.append_array(player.GetDroneDock().DockedDrones)
 			else:
-				plships.append(drn)
-				plships.append_array(drn.GetDroneDock().DockedDrones)
-				
-		OnShipMet.emit(plships, hostships)
+				var drn = Body.get_parent() as Drone
+				if (drn.Docked):
+					var player = drn.Command
+					plships.append(player)
+					plships.append_array(player.GetDroneDock().DockedDrones)
+				else:
+					plships.append(drn)
+					plships.append_array(drn.GetDroneDock().DockedDrones)
+					
+			OnShipMet.emit(plships, hostships)
 	else : if (Body.get_parent() == Command and CommingBack):
 		var Ship = Body.get_parent() as HostileShip
 		Ship.GetDroneDock().DockDrone(self, true)
@@ -411,6 +429,7 @@ func GetSaveData() -> SD_HostileShip:
 	dat.Scene = scene_file_path
 	dat.Patrol = Patrol
 	dat.ShipName = ShipName
+	dat.Destroyed = Destroyed
 	if (Command != null):
 		dat.CommandName = Command.GetShipName()
 	#dat.WeaponInventory = WeaponInventory
@@ -425,6 +444,8 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	#global_position = Dat.Position
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
+	Destroyed = Dat.Destroyed
+	Loading = true
 	#WeaponInventory = Dat.WeaponInventory 
 func IsFuelFull() -> bool:
 	for g in GetDroneDock().DockedDrones:
@@ -455,3 +476,19 @@ func ToggleDocked(t : bool) -> void:
 	if (BTree != null):
 		BTree.enabled = !t
 		BTree.set_physics_process(!t)
+
+func Kill() -> void:
+	OnShipDestroyed.emit(self)
+	Destroyed = true
+	if (ElintShape != null):
+		ElintShape.queue_free()
+		
+	RadarShape.queue_free()
+	OnShipWrecked.emit()
+	#queue_free()
+	#get_parent().remove_child(self)
+
+func DestroyEnemyDebry() -> void:
+	MapPointerManager.GetInstance().RemoveShip(self)
+	queue_free()
+	get_parent().remove_child(self)

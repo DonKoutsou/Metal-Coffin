@@ -168,14 +168,18 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 		for Surv in Survivors:
 			var Nam = Surv.Name
 			if (Unit.GetShipName() == Nam):
-				Unit.Damage(Unit.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) - Surv.Hull)
+				Unit.Damage(Unit.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) - Surv.Hull, false)
 				if (Unit is not HostileShip):
 					FigureOutInventory(Unit.Cpt.GetCharacterInventory(), Surv.Cards, Surv.Ammo)
+				else: if (Unit.IsDead()):
+					Unit.DestroyEnemyDebry()
+					
 				Survived = true
 				break
 		if (!Survived):
 			Unit.Damage(99999999999)
 			if (Unit is HostileShip):
+				Unit.DestroyEnemyDebry()
 				WonFunds += Unit.Cpt.ProvidingFunds
 	if (WonFunds > 0):
 		PlayerWallet.AddFunds(WonFunds)

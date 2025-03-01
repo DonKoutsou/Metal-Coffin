@@ -148,8 +148,9 @@ func AccelerationChanged(value: float) -> void:
 func SteerChanged(value: float) -> void:
 	ControlledShip.Steer(value)
 
-func OnShipDamaged(Amm : float) -> void:
-	UIEventH.OnControlledShipDamaged()
+func OnShipDamaged(Amm : float, OnShipDamaged : bool) -> void:
+	if (OnShipDamaged):
+		UIEventH.OnControlledShipDamaged()
 
 func OnShipDestroyed(Sh : MapShip):
 	if (Sh is PlayerShip):

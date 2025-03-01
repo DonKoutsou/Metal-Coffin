@@ -11,4 +11,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		var spot = g as MapSpot
 		if (spot.global_position.distance_to(MainShip.global_position) < dist):
 			return FAILURE
+			
+	print(MainShip.ShipName + " is too far from reafuel stations")
+	
 	return SUCCESS

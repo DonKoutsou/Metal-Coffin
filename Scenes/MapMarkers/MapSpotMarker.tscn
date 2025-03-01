@@ -333,9 +333,9 @@ vertical_alignment = 1
 justification_flags = 227
 uppercase = true
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibilityNotif" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -16.5)
 scale = Vector2(7, 8.65)
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_entered" from="VisibilityNotif" to="." method="EnteredScreen"]
+[connection signal="screen_exited" from="VisibilityNotif" to="." method="ExitedScreen"]

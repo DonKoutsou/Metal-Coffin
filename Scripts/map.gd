@@ -59,10 +59,9 @@ func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
 func ScreenControls(t : bool) -> void:
 	$OuterUI/ButtonCover.visible = !t
 
-
-
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return GetInScreenUI().GetMapMarkerEditor()
+	
 func GetInScreenUI() -> Ingame_UIManager:
 	return _InScreenUI
 

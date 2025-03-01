@@ -37,13 +37,16 @@ func ClearLines() -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Marker Cleared")
 func AddShip(Ship : Node2D, Friend : bool) -> void:
 	if (Ships.has(Ship)):
-		if (Ship is HostileShip):
+		if (Ship is HostileShip and !Ship.Destroyed):
 			_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship Located")
 		return
+		
 	Ships.append(Ship)
 	var marker = MarkerScene.instantiate() as ShipMarker
 	
 	add_child(marker)
+	
+	marker.global_position = Ship.global_position
 	
 	if (Friend):
 		marker.modulate = FriendlyColor
@@ -55,10 +58,16 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 			#HOSTILE_SHIP_DEBUG
 			marker.ToggleFriendlyShipDetails(true)
 			#////
+		
 		marker.ToggleShipDetails(true)
-		marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
-		marker.PlayHostileShipNotif("Hostile Ship Located")
-		marker.SetType("Ship")
+		if (Ship.Destroyed):
+			marker.OnHostileShipDestroyed()
+		else:
+			marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
+			marker.PlayHostileShipNotif("Hostile Ship Located")
+			marker.SetType("Ship")
+			Ship.connect("OnShipWrecked", marker.OnHostileShipDestroyed)
+		
 	else : if (Ship is MapShip):
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
@@ -162,7 +171,10 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK))
 				Marker.UpdateTrajectory(ship.global_rotation)
 			else:
-				if (ship.VisibleBy.size() > 0):
+				if (ship.Destroyed):
+					Marker.SetMarkerDetails("Ship Debris", "" ,0)
+					
+				else: if (ship.VisibleBy.size() > 0):
 					Marker.global_position = ship.global_position
 					Marker.UpdateSpeed(ship.GetShipSpeed())
 					

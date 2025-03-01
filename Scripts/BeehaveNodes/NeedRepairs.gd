@@ -8,6 +8,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MaxHull = MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 	var Hull = MainShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	if (MaxHull/3 > Hull):
+		print(MainShip.ShipName + " needs repairs")
 		return SUCCESS
 	#var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
 	for g in MainShip.GetDroneDock().DockedDrones:
@@ -20,6 +21,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	MaxHull /= FleetSize
 	Hull /= FleetSize
 	if (MaxHull/3 > Hull):
+		print(MainShip.ShipName + " needs repairs")
 		return SUCCESS
 	
 	return FAILURE

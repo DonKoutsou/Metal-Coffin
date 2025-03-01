@@ -13,4 +13,5 @@ class_name SD_HostileShip
 @export var PathPart : int
 @export var CommandName : String
 @export var Patrol : bool
+@export var Destroyed : bool
 #@export var WeaponInventory : int
