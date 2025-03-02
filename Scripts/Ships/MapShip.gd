@@ -239,7 +239,7 @@ func AccelerationChanged(value: float) -> void:
 		LandingCanceled.emit(self)
 		Landing = false
 		
-	if (Altitude != 10000 and !TakingOff):
+	else : if (Altitude != 10000 and !TakingOff):
 		TakeoffStarted.emit()
 		TakingOff = true
 

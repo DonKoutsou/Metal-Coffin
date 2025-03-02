@@ -124,7 +124,7 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 	#SimulationManager.GetInstance().TogglePause(false)
 	UIEventH.OnButtonCoverToggled(false)
 func Land(Spot : MapSpot) -> bool:
-	ControlledShip.HaltShip()
+	#ControlledShip.HaltShip()
 	var PlayedEvent = false
 	if (Spot.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance

@@ -117,7 +117,7 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	var cpt = GetBoxOwner(Box)
 	var HasUp = false
 	if (cpt.CurrentPort != ""):
-		var cit = Helper.GetInstance().GetCityByName(cpt.CurrentPort)
+		var cit = GetCity(cpt.CurrentPort)
 		HasUp = cit.HasUpgrade()
 	Descriptor.SetData(Box, HasUp)
 	#Descriptor.connect("ItemUsed", UseItem)
@@ -126,6 +126,15 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	Descriptor.connect("ItemTransf", ItemTranfer)
 	#Descriptor.connect("ItemRepaired", RepairPart)
 
+func GetCity(CityName : String) -> MapSpot:
+	var cities = get_tree().get_nodes_in_group("City")
+	var CorrectCity : MapSpot
+	for g in cities:
+		var cit = g as MapSpot
+		if (cit.GetSpotName() == CityName):
+			CorrectCity = cit
+			break
+	return CorrectCity
 
 func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
 	var Cpt = GetBoxOwner(Box)
@@ -133,7 +142,7 @@ func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> v
 		PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
 		return
 	var It = Box.GetContainedItem() as ShipPart
-	var cit = Helper.GetInstance().GetCityByName(Cpt.CurrentPort)
+	var cit = GetCity(Cpt.CurrentPort)
 	var HasUpgrade = cit.HasUpgrade()
 	var Cost = It.UpgradeCost
 	if (HasUpgrade):

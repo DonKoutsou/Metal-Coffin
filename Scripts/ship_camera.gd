@@ -109,7 +109,7 @@ func FrameCamToPlayer():
 	var tw = create_tween()
 	var plpos = $"../PlayerShip".global_position
 	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(self, "global_position", plpos, plpos.distance_to(global_position) / 1000)
+	tw.tween_property(self, "global_position", plpos, 6)
 
 func FrameCamToPos(pos : Vector2) -> void:
 	if (stattween != null):
