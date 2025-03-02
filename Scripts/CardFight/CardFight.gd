@@ -60,7 +60,7 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 
 #TODO
 #ACTION WRAPPER
-#WRAPPER THAT HOLDS IN ALL DATA FOR AN ACTION
+#WRAPPER THAT HOLDS IN ALL DATA FOR AN ACTION DONE
 
 #TODO
 #Find way to expand system to work with inventory items. DONE
@@ -460,8 +460,13 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		return
 	Energy -= c.GetCost()
 	
+	if (target != CurrentShip):
+		var TargetViz = GetShipViz(target)
+		c.TargetLoc = TargetViz.global_position + TargetViz.size / 2
+		
 	c.connect("OnCardPressed", RemoveCard)
 	SelectedCardPlecement.add_child(c)
+	
 	
 	var ShipAction = CardFightAction.new()
 	ShipAction.Action = Action

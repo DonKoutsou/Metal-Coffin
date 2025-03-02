@@ -28,6 +28,7 @@ script = ExtResource("1_vr3r8")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
+focus_mode = 0
 mouse_filter = 1
 theme = ExtResource("2_n60qq")
 

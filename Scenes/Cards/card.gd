@@ -8,8 +8,19 @@ var CStats : CardStats
 
 var Cost : int
 
+var TargetLoc : Vector2
+
+func _physics_process(delta: float) -> void:
+	queue_redraw()
+
+func _draw() -> void:
+	if (TargetLoc != Vector2.ZERO):
+		draw_set_transform(- global_position)
+		draw_line(global_position + size / 2, TargetLoc, Color(0.482,0.69,0.705))
+
 func _ready() -> void:
 	$PanelContainer.visible = false
+	set_physics_process(TargetLoc != Vector2.ZERO)
 
 func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	CStats = Stats
