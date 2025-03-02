@@ -192,3 +192,6 @@ func OnAlarmRaised(Notify : bool = false) -> void:
 	AlarmRaised = true
 	for g in VisitingShips:
 		Commander.GetInstance().OnEnemySeen(g, null)
+
+func PlayerHasFuelReserves() -> bool:
+	return PlayerFuelReserves > 0

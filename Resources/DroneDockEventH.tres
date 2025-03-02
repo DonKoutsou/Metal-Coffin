@@ -1,6 +1,0 @@
-[gd_resource type="Resource" script_class="DroneDockEventHandler" load_steps=2 format=3 uid="uid://daboq4ltk4k55"]
-
-[ext_resource type="Script" path="res://Scripts/DroneDockEventHandler.gd" id="1_e5xag"]
-
-[resource]
-script = ExtResource("1_e5xag")

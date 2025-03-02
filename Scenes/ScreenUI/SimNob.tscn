@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0fey2gjg1mvv"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Nob.gd" id="1_qphjf"]
+[ext_resource type="Texture2D" uid="uid://cd8ggnco2dv3d" path="res://Assets/UIPiecies/Screen/Nob.png" id="2_alpln"]
+[ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="3_6xwkf"]
+
+[node name="SteeringWheel" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qphjf")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(30, 30)
+mouse_filter = 2
+texture = ExtResource("2_alpln")
+expand_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6xwkf")
+volume_db = -5.0
+pitch_scale = 1.8
+bus = &"MapSounds"
+
+[connection signal="gui_input" from="TextureButton" to="." method="_on_texture_rect_gui_input"]

@@ -1,5 +1,14 @@
 extends Node2D
-
+#/////////////////////////////////////////////////////////////
+ #██████  ██████  ███    ███ ███    ███  █████  ███    ██ ██████  ███████ ██████  
+#██      ██    ██ ████  ████ ████  ████ ██   ██ ████   ██ ██   ██ ██      ██   ██ 
+#██      ██    ██ ██ ████ ██ ██ ████ ██ ███████ ██ ██  ██ ██   ██ █████   ██████  
+#██      ██    ██ ██  ██  ██ ██  ██  ██ ██   ██ ██  ██ ██ ██   ██ ██      ██   ██ 
+ #██████  ██████  ██      ██ ██      ██ ██   ██ ██   ████ ██████  ███████ ██   ██ 
+#/////////////////////////////////////////////////////////////
+#Controls patrols in map. Receives events from ships when they locate enemy signals or see enemies.
+#Arranges missile atacks, investigatiosn, pursuits. Uses behavior tree to decide actions
+#/////////////////////////////////////////////////////////////
 class_name Commander
 
 @export var Armaments : Dictionary
@@ -19,13 +28,38 @@ var KnownEnemies : Dictionary
 var SimPaused : bool = false
 var SimSpeed : int = 1
 
+func _ready() -> void:
+	Instance = self
+
+static func GetInstance() -> Commander:
+	return Instance
+
+func RegisterSelf(Ship : HostileShip) -> void:
+	Fleet.append(Ship)
+	ConnectSignals(Ship)
+
+func ConnectSignals(Ship : HostileShip) -> void:
+	Ship.connect("OnShipDestroyed", OnShipDestroyed)
+	Ship.connect("OnDestinationReached", OnDestinationReached)
+	Ship.connect("OnPlayerVisualContact", OnEnemySeen)
+	Ship.connect("OnPlayerVisualLost", OnEnemyVisualLost)
+	Ship.connect("ElintContact", OnElintHit)
+
 func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t
 	$BeehaveTree.set_physics_process(!t)
+	
 func OnSimulationSpeedChanged(i : int) -> void:
 	SimSpeed = i
 	#$BeehaveTree.tick_rate = i
-#ORDER MANAGEMENT////////////////////////////////////////////////////////////////
+
+#/////////////////////////////////////////////////////////////
+ #██████  ██████  ██████  ███████ ██████      ███    ███  █████  ███    ██  █████   ██████  ███████ ███    ███ ███████ ███    ██ ████████ 
+#██    ██ ██   ██ ██   ██ ██      ██   ██     ████  ████ ██   ██ ████   ██ ██   ██ ██       ██      ████  ████ ██      ████   ██    ██    
+#██    ██ ██████  ██   ██ █████   ██████      ██ ████ ██ ███████ ██ ██  ██ ███████ ██   ███ █████   ██ ████ ██ █████   ██ ██  ██    ██    
+#██    ██ ██   ██ ██   ██ ██      ██   ██     ██  ██  ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██      ██  ██  ██ ██      ██  ██ ██    ██    
+ #██████  ██   ██ ██████  ███████ ██   ██     ██      ██ ██   ██ ██   ████ ██   ██  ██████  ███████ ██      ██ ███████ ██   ████    ██    
+
 func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
 	var Armament = GetCheapestArmamentForDistance(Ship.global_position.distance_to(Target.global_position))
 	Ship.Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, Armaments[Armament])
@@ -64,7 +98,7 @@ func PursuitOrderCanceled(TargetShip : MapShip) -> void:
 			return
 
 func OrderShipToInvestigate(Ship : HostileShip, Target : Vector2, SignalOrigin : MapShip) -> void:
-	Ship.LastKnownPosition = Target
+	Ship.PositionToInvestigate = Target
 	for g in InvestigationOrders:
 		if (g.ShipTrigger == SignalOrigin):
 			g.Receivers.append(Ship)
@@ -84,7 +118,7 @@ func UpdateInvestigationPos(newpos : Vector2, originship : MapShip) -> void:
 		if (g.ShipTrigger == originship):
 			g.Target = newpos
 			for z in g.Receivers:
-				z.LastKnownPosition = newpos
+				z.PositionToInvestigate = newpos
 	print("Investigation position updated to : " + var_to_str(newpos))
 	
 func InvestigationOrderComplete(Pos : Vector2) -> void:
@@ -92,14 +126,20 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 		if (g.Target == Pos):
 			for z in g.Receivers:
 				z.disconnect("OnPositionInvestigated", InvestigationOrderComplete)
-				z.LastKnownPosition = Vector2.ZERO
+				z.PositionToInvestigate = Vector2.ZERO
 				#z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
 			print("Position : " + var_to_str(Pos) + "has been investigated.")
 			return
-	
-#SIGNAL RECEIVERS///////////////////////////////////////////////////
+
+#/////////////////////////////////////////////////////////////
+#███████ ██  ██████  ███    ██  █████  ██          ██████  ███████  ██████ ███████ ██ ██    ██ ███████ ██████  ███████ 
+#██      ██ ██       ████   ██ ██   ██ ██          ██   ██ ██      ██      ██      ██ ██    ██ ██      ██   ██ ██      
+#███████ ██ ██   ███ ██ ██  ██ ███████ ██          ██████  █████   ██      █████   ██ ██    ██ █████   ██████  ███████ 
+	 #██ ██ ██    ██ ██  ██ ██ ██   ██ ██          ██   ██ ██      ██      ██      ██  ██  ██  ██      ██   ██      ██ 
+#███████ ██  ██████  ██   ████ ██   ██ ███████     ██   ██ ███████  ██████ ███████ ██   ████   ███████ ██   ██ ███████ 
+
 func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
 	#DissconnectSignals(Ship)
@@ -118,17 +158,15 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 			Ship.GetDroneDock().UndockShip(g)
 			if (g != NewCommander):
 				NewCommander.GetDroneDock().DockShip(g)
-		
-		
+
 	var POrdersToErase : Array[PursuitOrder] = []
-	#if (Ship.PursuingShips.size() > 0):
 	for g in PursuitOrders:
 		if (g.Receivers.has(Ship)):
 			g.Receivers.erase(Ship)
 			if (g.Receivers.size() == 0):
 				POrdersToErase.append(g)
+				
 	var IOrdersToErase : Array[InvestigationOrder] = []
-	#if (Ship.LastKnownPosition != Vector2.ZERO):
 	for g in InvestigationOrders:
 		if (g.Receivers.has(Ship)):
 			g.Receivers.erase(Ship)
@@ -138,6 +176,7 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 		PursuitOrderCanceled(g.Target)
 	for g in IOrdersToErase:
 		InvestigationOrders.erase(g)
+		
 func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 	#if an enemy that had its location investigated is seen 
 	#make sure to call of all investigation on its previusly known location
@@ -176,6 +215,9 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 		#if (EnemyPositionsToInvestigate.values()[g] == Pos):
 			#EnemyPositionsToInvestigate.erase(EnemyPositionsToInvestigate.keys()[g])
 			#break
+
+#/////////////////////////////////////////////////////////////
+
 func AproximatePositionOnIntercept(HunterPos : Vector2, HunsterSpeed : float, Pos : Vector2, Speed : float) -> Vector2:
 
 	var time_to_interception = (HunterPos.distance_to(Pos)) / HunsterSpeed
@@ -205,12 +247,20 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 		EnemyPositionsToInvestigate[Ship] = Info
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			UpdateInvestigationPos(Ship.global_position, Ship)
-#HELPER FUNCTIONS/////////////////////////////////////////////////
+
+#/////////////////////////////////////////////////////////////
+#██   ██ ███████ ██      ██████  ███████ ██████      ███████ ██    ██ ███    ██  ██████ ████████ ██  ██████  ███    ██ ███████ 
+#██   ██ ██      ██      ██   ██ ██      ██   ██     ██      ██    ██ ████   ██ ██         ██    ██ ██    ██ ████   ██ ██      
+#███████ █████   ██      ██████  █████   ██████      █████   ██    ██ ██ ██  ██ ██         ██    ██ ██    ██ ██ ██  ██ ███████ 
+#██   ██ ██      ██      ██      ██      ██   ██     ██      ██    ██ ██  ██ ██ ██         ██    ██ ██    ██ ██  ██ ██      ██ 
+#██   ██ ███████ ███████ ██      ███████ ██   ██     ██       ██████  ██   ████  ██████    ██    ██  ██████  ██   ████ ███████ 
+
 func IsShipsPositionUnderInvestigation(Ship : MapShip) -> bool:
 	for g in InvestigationOrders:
 		if (g.ShipTrigger == Ship):
 			return true
 	return false
+	
 func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : bool = false) -> HostileShip:
 	var closestdistance : float = 999999999999999
 	var ClosestShip : HostileShip
@@ -218,7 +268,7 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 		if (g.Docked or g.Command != null):
 			continue
 		if (free):
-			if (g.PursuingShips.size() > 0 or g.LastKnownPosition != Vector2.ZERO or !g.CanReachPosition(Pos)):
+			if (g.PursuingShips.size() > 0 or g.PositionToInvestigate != Vector2.ZERO or !g.CanReachPosition(Pos)):
 				continue
 		if (patrol):
 			if (!g.Patrol):
@@ -228,6 +278,7 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 			closestdistance = dist
 			ClosestShip = g
 	return ClosestShip
+
 func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
 	var Carrier : HostileShip
 	for g in Fleet:
@@ -301,30 +352,19 @@ func GetCheapestArmamentForDistance(Dist : float) -> MissileItem:
 			CheapestArmament = g
 			CheapestPrice = Armaments[g]
 	return CheapestArmament
+
 func IsShipBeingPursued(Ship : MapShip) -> bool:
 	for g in PursuitOrders:
 		if (g.Target == Ship):
 			return true
 	return false
-#//////////////////////////////////////////////////////////////////
-func _ready() -> void:
-	Instance = self
 
-
-static func GetInstance() -> Commander:
-	return Instance
-
-func RegisterSelf(Ship : HostileShip) -> void:
-	Fleet.append(Ship)
-	ConnectSignals(Ship)
-
-func ConnectSignals(Ship : HostileShip) -> void:
-	Ship.connect("OnShipDestroyed", OnShipDestroyed)
-	Ship.connect("OnDestinationReached", OnDestinationReached)
-	Ship.connect("OnEnemyVisualContact", OnEnemySeen)
-	Ship.connect("OnEnemyVisualLost", OnEnemyVisualLost)
-	Ship.connect("ElintContact", OnElintHit)
-	
+#/////////////////////////////////////////////////////////////
+#███████  █████  ██    ██ ███████     ██ ██       ██████   █████  ██████  
+#██      ██   ██ ██    ██ ██         ██  ██      ██    ██ ██   ██ ██   ██ 
+#███████ ███████ ██    ██ █████     ██   ██      ██    ██ ███████ ██   ██ 
+	 #██ ██   ██  ██  ██  ██       ██    ██      ██    ██ ██   ██ ██   ██ 
+#███████ ██   ██   ████   ███████ ██     ███████  ██████  ██   ██ ██████ 
 
 func GetSaveData() -> SaveData:
 	var Save = SaveData.new()

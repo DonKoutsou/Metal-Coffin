@@ -28,7 +28,7 @@ script = ExtResource("3_7gsnn")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../Blackboard")
 custom_monitor = true
-actor = NodePath("")
+actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
 script = ExtResource("4_2bbgj")

@@ -37,7 +37,7 @@ func SetInitialShip() -> void:
 	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
 	
 	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	UIEventH.OnSteerDirForced(ControlledShip.GetSteer())
+	UIEventH.OnSteerDirForced(ControlledShip.rotation)
 	UIEventH.OnShipUpdated(ControlledShip)
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
@@ -195,7 +195,7 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 
 	
 	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	UIEventH.OnSteerDirForced(ControlledShip.GetSteer())
+	UIEventH.OnSteerDirForced(ControlledShip.rotation)
 	UIEventH.OnShipUpdated(ControlledShip)
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()

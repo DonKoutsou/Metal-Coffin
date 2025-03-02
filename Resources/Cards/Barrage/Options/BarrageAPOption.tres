@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardOption" load_steps=2 format=3 uid="uid://mqg2y5hfy65s"]
+
+[ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="1_7f5u1"]
+
+[resource]
+script = ExtResource("1_7f5u1")
+OptionName = "Armor Piercing"
+EnergyAdd = 1
+DamageFlat = 0
+DamageMult = 1.5
+Fire = false
+Proxy = false
+DamageMitigationFlat = 0
+DamageMitigationPercent = 0.0
+ComatibleWeapon = 1
+CauseConsumption = true

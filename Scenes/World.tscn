@@ -1,0 +1,51 @@
+[gd_scene load_steps=14 format=3 uid="uid://cbhf8nh85npqq"]
+
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_sc0wx"]
+[ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
+[ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/loading_screen.tscn" id="3_pocgy"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="6_1ajha"]
+[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="6_sol3n"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="7_3dbmh"]
+[ext_resource type="Script" path="res://Scripts/Ship_Controller.gd" id="7_q720d"]
+[ext_resource type="Script" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_q55oc"]
+[ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/InScreenUI/HappeningUI.tscn" id="9_5gym6"]
+[ext_resource type="Script" path="res://Scripts/Simulation_Manager.gd" id="9_l7oy3"]
+[ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
+[ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
+
+[node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_sc0wx")
+_Map = NodePath("Map")
+_Command = NodePath("Commander")
+CardFightScene = ExtResource("6_sol3n")
+LoadingScene = ExtResource("3_pocgy")
+StartingFunds = 400000
+PlayerWallet = ExtResource("3_inc6i")
+
+[node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]
+script = ExtResource("7_q720d")
+_Map = NodePath("../Map")
+DroneDockEventH = ExtResource("8_q55oc")
+ShipControllerEventH = ExtResource("6_1ajha")
+UIEventH = ExtResource("7_3dbmh")
+HappeningUI = ExtResource("9_5gym6")
+
+[node name="Commander" parent="." instance=ExtResource("10_15dwo")]
+
+[node name="DialogueProgressHolder" type="Node" parent="."]
+script = ExtResource("8_6vv6u")
+
+[node name="SimulationManager" type="Node" parent="." node_paths=PackedStringArray("_Map")]
+script = ExtResource("9_l7oy3")
+_Map = NodePath("../Map")
+
+[node name="Map" parent="." instance=ExtResource("12_11aq8")]

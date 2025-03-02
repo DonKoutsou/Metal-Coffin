@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://cnrek2mbia331"]
 
-[ext_resource type="Resource" uid="uid://bo0job0edtbgf" path="res://Scenes/Cards/Res/Barrage/Options/BarrageProxyOption.tres" id="1_s7usd"]
+[ext_resource type="Resource" uid="uid://bo0job0edtbgf" path="res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres" id="1_s7usd"]
 [ext_resource type="Texture2D" uid="uid://dkjsj675yxjih" path="res://Assets/Items/PoxyFuseAmmo.png" id="2_vq8oe"]
 [ext_resource type="Texture2D" uid="uid://oahjywt7sjlb" path="res://Assets/Items/PoxyFuseAmmoSmol.png" id="3_ddfco"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_nmigf"]

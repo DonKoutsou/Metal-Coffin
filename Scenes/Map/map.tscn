@@ -15,16 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ufdxh"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_j6nai"]
 [ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
-[ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/map_line_drawer.tscn" id="16_sp82o"]
+[ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Script" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="21_oyi6l"]
 [ext_resource type="Script" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/ShipControllerEventHandler.tres" id="22_n73so"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="22_n73so"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
-[ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/screen_ui.tscn" id="24_e5um8"]
-[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/UIEventH.tres" id="25_8mjbw"]
+[ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 min_value = 1.0
@@ -65,6 +65,7 @@ glow_mix = 0.825
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
+adjustment_brightness = 0.8
 adjustment_contrast = 1.2
 adjustment_saturation = 0.7
 adjustment_color_correction = SubResource("GradientTexture1D_tkg8l")
@@ -195,7 +196,6 @@ MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.049, 1, 0.04, 1)
 EnemyColor = Color(1, 0.094, 0, 1)
-EnemyDebug = true
 UIEventH = ExtResource("25_8mjbw")
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]

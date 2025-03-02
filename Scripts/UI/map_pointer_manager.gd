@@ -66,7 +66,7 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 			marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
 			marker.PlayHostileShipNotif("Hostile Ship Located")
 			marker.SetType("Ship")
-			Ship.connect("OnShipWrecked", marker.OnHostileShipDestroyed)
+			Ship.connect("ShipWrecked", marker.OnHostileShipDestroyed)
 		
 	else : if (Ship is MapShip):
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)

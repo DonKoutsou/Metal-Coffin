@@ -1,4 +1,14 @@
 extends CanvasLayer
+#/////////////////////////////////////////////////////////////
+#███    ███  █████  ██████  
+#████  ████ ██   ██ ██   ██ 
+#██ ████ ██ ███████ ██████  
+#██  ██  ██ ██   ██ ██      
+#██      ██ ██   ██ ██      
+#/////////////////////////////////////////////////////////////
+#Map contains all the game. Here everything is generated from the town plecement to the enemy spawing.
+
+#/////////////////////////////////////////////////////////////
 class_name Map
 @export_group("Nodes")
 @export var _InScreenUI : Ingame_UIManager
@@ -17,6 +27,7 @@ class_name Map
 @export var EnemyShipNames : Array[String]
 
 signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
+#Signal called when all cities have their neighbors configured
 signal MAP_NeighborsSet
 signal GenerationFinished
 
@@ -32,13 +43,12 @@ static func GetInstance() -> Map:
 func _ready() -> void:
 	set_physics_process(false)
 	Instance = self
-	# spotlist empty means we are not loading and starting new game
-	#GetMapMarkerEditor().visible = false
-	#MapMarkerControls.visible = false
-	#call_deferred("Init")
-	#ConnectMapMarkerEditorControls()
-	
 
+func _exit_tree() -> void:
+	if (Roadt != null):
+		Roadt.wait_to_finish()
+	if (Maplt != null):
+		Maplt.wait_to_finish()
 
 func _InitialPlayerPlacament():
 	#find first village and make sure its visible
@@ -65,15 +75,11 @@ func GetMapMarkerEditor() -> MapMarkerEditor:
 func GetInScreenUI() -> Ingame_UIManager:
 	return _InScreenUI
 
-#func GetElintUI() -> ElingUI:
-	#return Elint
 func GetScreenUi() -> ScreenUI:
 	return _ScreenUI
+	
 func GetCamera() -> ShipCamera:
 	return _Camera
-#func GetStatUI() -> StatPanel:
-	#return _StatPanel
-
 
 #CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
 func Arrival(_Spot : MapSpot) -> void:
@@ -86,13 +92,13 @@ func LandTutorialShown():
 	SimulationManager.GetInstance().TogglePause(false)
 	ShowingTutorial = false
 
-func StageFailed() -> void:
-	# enable inputs
-	set_process(true)
-	set_process_input(true)
-	#Travelling = false
-	
-#Save/Load///////////////////////////////////////////
+#/////////////////////////////////////////////////////////////
+#███████  █████  ██    ██ ███████     ██ ██       ██████   █████  ██████  
+#██      ██   ██ ██    ██ ██         ██  ██      ██    ██ ██   ██ ██   ██ 
+#███████ ███████ ██    ██ █████     ██   ██      ██    ██ ███████ ██   ██ 
+	 #██ ██   ██  ██  ██  ██       ██    ██      ██    ██ ██   ██ ██   ██ 
+#███████ ██   ██   ████   ███████ ██     ███████  ██████  ██   ██ ██████ 
+ 
 func GetSaveData() ->SaveData:
 	var dat = SaveData.new().duplicate()
 	dat.DataName = "Towns"
@@ -133,19 +139,15 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 	
 	#call_deferred("GenerateRoads")
 	GetCamera().call_deferred("FrameCamToPlayer")
-#////////////////////////////////////////////	
-#SIGNALS COMMING FROM PLAYER SHIP
 
-func ShipStartedMoving():
-	GetCamera().applyshake()
-	
-func ShipStoppedMoving():
-	GetCamera().applyshake()
+#/////////////////////////////////////////////////////////////
+#██ ███    ██ ██████  ██    ██ ████████     ██   ██  █████  ███    ██ ██████  ██      ██ ███    ██  ██████  
+#██ ████   ██ ██   ██ ██    ██    ██        ██   ██ ██   ██ ████   ██ ██   ██ ██      ██ ████   ██ ██       
+#██ ██ ██  ██ ██████  ██    ██    ██        ███████ ███████ ██ ██  ██ ██   ██ ██      ██ ██ ██  ██ ██   ███ 
+#██ ██  ██ ██ ██      ██    ██    ██        ██   ██ ██   ██ ██  ██ ██ ██   ██ ██      ██ ██  ██ ██ ██    ██ 
+#██ ██   ████ ██       ██████     ██        ██   ██ ██   ██ ██   ████ ██████  ███████ ██ ██   ████  ██████ 
 
-#func ShipForcedStop():
-	#thrust_slider.ZeroAcceleration()
-	
-#INPUT HANDLING////////////////////////////
+
 func _MAP_INPUT(event: InputEvent) -> void:
 	if (event is InputEventScreenTouch):
 		GetCamera()._HANDLE_TOUCH(event)
@@ -158,11 +160,14 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		GetCamera().UpdateCameraPos(event.relative)
 		
-		
-#//////////////////////////////////////////////////////////
+
 #/////////////////////////////////////////////////////////////
-#/////////////////////////////////////////////////////////////
-#MAP GENERARION
+#███    ███  █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 
+#████  ████ ██   ██ ██   ██     ██       ██      ████   ██ ██      ██   ██ ██   ██    ██    ██ ██    ██ ████   ██ 
+#██ ████ ██ ███████ ██████      ██   ███ █████   ██ ██  ██ █████   ██████  ███████    ██    ██ ██    ██ ██ ██  ██ 
+#██  ██  ██ ██   ██ ██          ██    ██ ██      ██  ██ ██ ██      ██   ██ ██   ██    ██    ██ ██    ██ ██  ██ ██ 
+#██      ██ ██   ██ ██           ██████  ███████ ██   ████ ███████ ██   ██ ██   ██    ██    ██  ██████  ██   ████ 
+
 var GenThread : Thread
 
 func GenerateMap() -> void:
@@ -171,7 +176,6 @@ func GenerateMap() -> void:
 	GenThread.start(GenerateMapThreaded.bind($SubViewportContainer/ViewPort/MapSpots))
 	#_InitialPlayerPlacament()
 	ShowingTutorial = true
-
 
 func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	#DECIDE ON PLECEMENT OF STATIONS
@@ -229,6 +233,16 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	
 	call_deferred("MapGenFinished", GeneratedSpots)
 
+func HasClose(pos : Vector2, places : Array[Town]) -> bool:
+	var b= false
+	for z in places.size():
+		if (pos.distance_to(places[z].Pos) < 1500):
+			b = true
+			break
+	return b
+
+func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
+	return Vector2(randf_range(-5000, +5000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
 
 func MapGenFinished(Spots : Array[Town]) -> void:
 	SpotList.append_array(Spots)
@@ -310,10 +324,15 @@ func FigureOutEvent(YPos : float, Events : Array[Happening]) -> Happening:
 func EventGenFinished() -> void:
 	EventThread.wait_to_finish()
 	GenerationFinished.emit()
+
 #/////////////////////////////////////////////////////////////
-#/////////////////////////////////////////////////////////////
-#/////////////////////////////////////////////////////////////
-#ENEMY SPAWNING
+#███████ ███    ██ ███████ ███    ███ ██    ██     ███████ ██████   █████  ██     ██ ███    ██ ██ ███    ██  ██████  
+#██      ████   ██ ██      ████  ████  ██  ██      ██      ██   ██ ██   ██ ██     ██ ████   ██ ██ ████   ██ ██       
+#█████   ██ ██  ██ █████   ██ ████ ██   ████       ███████ ██████  ███████ ██  █  ██ ██ ██  ██ ██ ██ ██  ██ ██   ███ 
+#██      ██  ██ ██ ██      ██  ██  ██    ██             ██ ██      ██   ██ ██ ███ ██ ██  ██ ██ ██ ██  ██ ██ ██    ██ 
+#███████ ██   ████ ███████ ██      ██    ██        ███████ ██      ██   ██  ███ ███  ██   ████ ██ ██   ████  ██████  
+
+
 var EnemySpawnTh : Thread
 
 func SpawnTownEnemies() -> void:
@@ -396,7 +415,7 @@ func _physics_process(delta: float) -> void:
 func AddEnemyToHierarchy(en : HostileShip, pos : Vector2):
 	en.PosToSpawn = pos
 	$SubViewportContainer/ViewPort.add_child(en)
-	en.connect("OnShipMet", EnemyMet)
+	en.connect("OnPlayerShipMet", EnemyMet)
 
 
 func FindEnemyByName(Name : String) -> HostileShip:
@@ -449,9 +468,12 @@ func EnemySpawnFinished() -> void:
 	GenerationFinished.emit()
 	
 #/////////////////////////////////////////////////////////////
-#/////////////////////////////////////////////////////////////
-#/////////////////////////////////////////////////////////////
-#ROAD GENERATION
+#██████   ██████   █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 
+#██   ██ ██    ██ ██   ██ ██   ██     ██       ██      ████   ██ ██      ██   ██ ██   ██    ██    ██ ██    ██ ████   ██ 
+#██████  ██    ██ ███████ ██   ██     ██   ███ █████   ██ ██  ██ █████   ██████  ███████    ██    ██ ██    ██ ██ ██  ██ 
+#██   ██ ██    ██ ██   ██ ██   ██     ██    ██ ██      ██  ██ ██ ██      ██   ██ ██   ██    ██    ██ ██    ██ ██  ██ ██ 
+#██   ██  ██████  ██   ██ ██████       ██████  ███████ ██   ████ ███████ ██   ██ ██   ██    ██    ██  ██████  ██   ████
+
 var Maplt : Thread
 var Roadt : Thread
 var Mut : Mutex
@@ -638,25 +660,4 @@ func _prim_mst_optimized(cities: Array) -> Array:
 
 	return mst_edges
 	
-	
-#//////////////////////////////////////////////////////////
 #/////////////////////////////////////////////////////////////
-#/////////////////////////////////////////////////////////////
-func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
-	return Vector2(randf_range(-5000, +5000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
-#TODO IMPROVE
-func HasClose(pos : Vector2, places : Array[Town]) -> bool:
-	var b= false
-	for z in places.size():
-		if (pos.distance_to(places[z].Pos) < 1500):
-			b = true
-			break
-	return b	
-func _exit_tree() -> void:
-	if (Roadt != null):
-		Roadt.wait_to_finish()
-	if (Maplt != null):
-		Maplt.wait_to_finish()
-
-#func _on_captain_button_pressed() -> void:
-	#GetInScreenUI().GetCapUI()._on_captain_button_pressed()

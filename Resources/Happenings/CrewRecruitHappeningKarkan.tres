@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Happening" load_steps=9 format=3 uid="uid://gvu43lp4i4y6"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_53tyg"]
-[ext_resource type="Resource" uid="uid://c6f3bxpe2rsxd" path="res://Resources/Karkan.tres" id="2_oxhqw"]
+[ext_resource type="Resource" uid="uid://c6f3bxpe2rsxd" path="res://Resources/Captains/PlayerCaptains/Karkan.tres" id="2_oly5j"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_bobis"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_n4hjy"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_7trcy"]
@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_dxjbw"]
 script = ExtResource("3_bobis")
-Cpt = ExtResource("2_oxhqw")
+Cpt = ExtResource("2_oly5j")
 OptionName = "Accept them into your fleet"
 FinishDiag = false
 

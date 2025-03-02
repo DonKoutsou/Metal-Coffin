@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://1vnrpn8q4byq"]
+
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_urlo6"]
+[ext_resource type="Script" path="res://Scripts/UI/fade_notif.gd" id="2_k1b3j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fkkej"]
+
+[node name="FadeNotif" type="PanelContainer" groups=["FadeNotif", "ItemNotification"]]
+process_mode = 3
+offset_left = 18.0
+offset_top = 96.0
+offset_right = 219.0
+offset_bottom = 117.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_urlo6")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fkkej")
+script = ExtResource("2_k1b3j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Item(s) Found awfaw awfa awf a"
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+visible_characters = 0
+visible_ratio = 0.0

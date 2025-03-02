@@ -7,8 +7,6 @@ var Pos : Vector2
 
 var Spot : MapSpot
 signal TownSpotAproached(spot : MapSpot)
-#signal SpotSearched(spot : MapSpot)
-#signal TownSpotAnalazyed(spot : MapSpot)
 signal TownSpotLanded(spot : MapSpot)
 
 func _ready() -> void:
@@ -32,20 +30,12 @@ func GenerateCity() -> void:
 	
 	spt.free()
 
-
-		
-	
 func IsEnemy() -> bool:
 	return Spot.SpotInfo.EnemyCity
 
 func GetSpot() -> MapSpot:
 	return Spot
-	
-func SpawnEnemies():
-	if (Spot.SpotInfo.HostilePatrolShipScene != null):
-		Spot.SpawnEnemyPatrol()
-	if (Spot.SpotInfo.HostileShipScene != null):
-		Spot.SpawnEnemyGarison()
+		
 func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
 	datas.TownLoc = position
@@ -58,9 +48,10 @@ func GetSaveData() -> TownSaveData:
 
 func SetMerch(Merch : Array[Merchandise]) -> void:
 	GetSpot().Merch = Merch
-#TODO get rid of cities, useless
+
 func GetCityName() -> String:
 	return $CitySpot.SpotName
+	
 func LoadSaveData(Dat : TownSaveData) -> void:
 	position = Dat.TownLoc
 	rotation = Dat.TownRot
@@ -86,13 +77,9 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 
 		if (spotdat.Seen):
 			sc.OnSpotSeen(false)
-		
-		#sc.Visited = spotdat.Visited
+			
 		if (spotdat.Visited):
 			sc.Visited = true
-			
-		#if (spotdat.Analyzed):
-			#sc.OnSpotAnalyzed(false)
 		
 func _TownSpotApreached(spot : MapSpot):
 	TownSpotAproached.emit(spot)

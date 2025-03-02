@@ -1,6 +1,0 @@
-[gd_resource type="Resource" script_class="UIEventHandler" load_steps=2 format=3 uid="uid://dblsu2gs81rs6"]
-
-[ext_resource type="Script" path="res://Scripts/UIEventHandler.gd" id="1_kwgsq"]
-
-[resource]
-script = ExtResource("1_kwgsq")

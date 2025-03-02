@@ -1,52 +1,58 @@
 extends MapShip
-
+#/////////////////////////////////////////////////////////////
+#██   ██  ██████  ███████ ████████ ██ ██      ███████     ███████ ██   ██ ██ ██████  
+#██   ██ ██    ██ ██         ██    ██ ██      ██          ██      ██   ██ ██ ██   ██ 
+#███████ ██    ██ ███████    ██    ██ ██      █████       ███████ ███████ ██ ██████  
+#██   ██ ██    ██      ██    ██    ██ ██      ██               ██ ██   ██ ██ ██      
+#██   ██  ██████  ███████    ██    ██ ███████ ███████     ███████ ██   ██ ██ ██      
+#/////////////////////////////////////////////////////////////
+#Enemy class. Enemies that are patrolling are controlled from COMMANDER.
+#If its not patrolling it needs to behavior as it is static and its just protecting city.
+#/////////////////////////////////////////////////////////////
 class_name HostileShip
 
+#Direction this patrol will go towards if its a patrol
 @export var Direction = -1
-
 @export var ShipName : String
 @export var Patrol : bool = true
 @export var BT : PackedScene
 
+#This array will be filled by commander when this ship is sent after another ship
 var PursuingShips : Array[Node2D]
-var LastKnownPosition : Vector2
-#var Reloading : float = 0
-var Path : Array = []
-var PathPart : int = 0
+#This value will be filled by commander when this ship is sent to investigate a position
+var PositionToInvestigate : Vector2
+
+#Spot that was chosen to stop and refuel
 var RefuelSpot : MapSpot
+#Filled with player ships when they can see this ship
 var VisibleBy : Array[Node2D]
+
 var BTree : BeehaveTree
 var UseDefaultBehavior : bool = false
+
 var PosToSpawn : Vector2
+var LoadingSave : bool = false
 
-var Destroyed : bool
-var Loading : bool = false
-
-signal OnShipMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
+signal OnPlayerShipMet(PlayerSquad : Array[Node2D] , EnemySquad : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
-signal OnEnemyVisualContact(Ship : MapShip, SeenBy : HostileShip)
-signal OnEnemyVisualLost(Ship : MapShip)
+signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
+signal OnPlayerVisualLost(Ship : MapShip)
 signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
-signal OnShipWrecked
+signal ShipWrecked
 
 func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
-	
-	MapPointerManager.GetInstance().AddShip(self, false)
-	#$Elint.connect("area_entered", _on_elint_area_entered)
-	#$Elint.connect("area_exited", _on_elint_area_exited)
+
+	#MapPointerManager.GetInstance().AddShip(self, false)
 
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
 	ShipSpawned.emit()
-	
-	
-	TogglePause(SimulationManager.IsPaused())
-	
-	if (!Loading):
+
+	if (!LoadingSave):
 		for g in Cpt.CaptainStats:
 			g.ForceMaxValue()
 	
@@ -63,49 +69,17 @@ func InitialiseShip() -> void:
 	else:
 		UpdateELINTTRange(ElintRange)
 
-	var Visual = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
-	UpdateVizRange(Visual)
+	UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 	
-	if (!Patrol):
+	if (Patrol):
+		if (Command == null):
+			FigureOutPath()
+	else:
 		SetSpeed(0)
 		UseDefaultBehavior = true
-	else:
-		if (Command != null):
-			return
-		call_deferred("FigureOutPath")
-
-func FigureOutPath() -> void:
-	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-	var nextcity = cities.find(CurrentPort) + Direction
-	if (nextcity < 0 or nextcity > cities.size() - 1):
-		Direction *= -1
-		nextcity = cities.find(CurrentPort) + Direction
-	
-	#If path is full it means we are loading so skip path generation
-	if (Path.size() == 0 and CurrentPort != null):
-		var port = CurrentPort
-		if (CurrentPort.NeighboringCities.size() == 0):
-			set_physics_process(false)
-			await Map.GetInstance().MAP_NeighborsSet
-			set_physics_process(true)
-		Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
-		if (Path.size() == 0):
-			Path = find_path(port.GetSpotName(), cities[nextcity].GetSpotName())
-		PathPart = 1
-	
-	BTree = BT.instantiate() as BeehaveTree
-	
-	var bb = Blackboard.new()
-	add_child(bb)
-	bb.set_value("TickRate", 1)
-	BTree.blackboard = bb
-	ToggleDocked(Docked)
-	add_child(BTree)
-	if (OS.get_name() == "Android"):
-		BTree.tick_rate = 10
-	bb.set_value("TickRate", BTree.tick_rate)
 	
 	TogglePause(SimulationManager.IsPaused())
+	
 
 func _physics_process(delta: float) -> void:
 	UpdateElint(delta)
@@ -113,10 +87,6 @@ func _physics_process(delta: float) -> void:
 	if (UseDefaultBehavior):
 		if (Paused):
 			return
-			
-		#if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)):
-			#Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, 0.05 * SimulationSpeed)
-			#CurrentPort.PlayerFuelReserves -= 0.05 * SimulationSpeed
 
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL)):
 			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.02 * SimulationSpeed)
@@ -134,11 +104,6 @@ func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	else:
 		missile.global_position = global_position
 	missile.look_at(Pos)
-	
-	#Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, 1)
-	#if (CurrentPort != null):
-		#Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
-	#Reloading = 4
 
 func UpdateElint(delta: float) -> void:
 	d -= delta
@@ -163,6 +128,7 @@ func UpdateElint(delta: float) -> void:
 			ElintContact.emit(ClosestShip.Command ,true)
 		else:
 			ElintContact.emit(ClosestShip ,true)
+
 func GetFuelRange() -> float:
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
@@ -180,15 +146,87 @@ func GetFuelRange() -> float:
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
 	return (total_fuel * 10 * effective_efficiency) / fleetsize
+
+func IsFuelFull() -> bool:
+	for g in GetDroneDock().DockedDrones:
+		if (!g.IsFuelFull()):
+			return false
+	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
+
+func NeedsReload() -> bool:
+	for g in GetDroneDock().DockedDrones:
+		if (g.NeedsReload()):
+			return true
+	return !Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)
+
+func TogglePause(t : bool):
+	Paused = t
+	if (t and BTree != null):
+		BTree.process_mode = Node.PROCESS_MODE_DISABLED
+	else: if (BTree != null):
+		BTree.process_mode = Node.PROCESS_MODE_PAUSABLE
+
+func ToggleDocked(t : bool) -> void:
+	Docked = t
+	if (BTree != null):
+		BTree.enabled = !t
+		BTree.set_physics_process(!t)
+
+
+#///////////////////////////////////////////////////
+#██████  ███████ ███████ ████████ ██ ███    ██  █████  ████████ ██  ██████  ███    ██     ███    ███  █████  ███    ██  █████   ██████  ███    ███ ███████ ███    ██ ████████ 
+#██   ██ ██      ██         ██    ██ ████   ██ ██   ██    ██    ██ ██    ██ ████   ██     ████  ████ ██   ██ ████   ██ ██   ██ ██       ████  ████ ██      ████   ██    ██    
+#██   ██ █████   ███████    ██    ██ ██ ██  ██ ███████    ██    ██ ██    ██ ██ ██  ██     ██ ████ ██ ███████ ██ ██  ██ ███████ ██   ███ ██ ████ ██ █████   ██ ██  ██    ██    
+#██   ██ ██           ██    ██    ██ ██  ██ ██ ██   ██    ██    ██ ██    ██ ██  ██ ██     ██  ██  ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██  ██  ██ ██      ██  ██ ██    ██    
+#██████  ███████ ███████    ██    ██ ██   ████ ██   ██    ██    ██  ██████  ██   ████     ██      ██ ██   ██ ██   ████ ██   ██  ██████  ██      ██ ███████ ██   ████    ██    
+
+#Path to destination City
+var Path : Array = []
+#Current Stage of the path
+var PathPart : int = 0
+
+#Crates a path to the destination city
+func FigureOutPath() -> void:
+	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
+	var nextcity = cities.find(CurrentPort) + Direction
+	if (nextcity < 0 or nextcity > cities.size() - 1):
+		Direction *= -1
+		nextcity = cities.find(CurrentPort) + Direction
 	
+	#If path is full it means we are loading so skip path generation
+	if (Path.size() == 0 and CurrentPort != null):
+		var port = CurrentPort
+		
+		if (CurrentPort.NeighboringCities.size() == 0):
+			await Map.GetInstance().MAP_NeighborsSet
+			
+		Path = Helper.GetInstance().FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
+		if (Path.size() == 0):
+			Path = Helper.GetInstance().FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
+		PathPart = 1
+	
+	BTree = BT.instantiate() as BeehaveTree
+	#TODO Test different tickrateson android
+	var bb = Blackboard.new()
+	add_child(bb)
+	bb.set_value("TickRate", 1)
+	BTree.blackboard = bb
+	ToggleDocked(Docked)
+	add_child(BTree)
+	if (OS.get_name() == "Android"):
+		BTree.tick_rate = 10
+	bb.set_value("TickRate", BTree.tick_rate)
+
 func CanReachDestination() -> bool:
 	var dist = GetFuelRange()
 	var actualdistance = global_position.distance_to(GetCurrentDestination())
 	return dist >= actualdistance
+
 func CanReachPosition(Pos : Vector2) -> bool:
 	var dist = GetFuelRange()
 	var actualdistance = global_position.distance_to(Pos)
 	return dist >= actualdistance
+
 func ToFarFromRefuel() -> bool:
 	var dist = GetFuelRange()
 	#var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
@@ -197,16 +235,16 @@ func ToFarFromRefuel() -> bool:
 		if (spot.global_position.distance_to(global_position) < dist):
 			return false
 	return true
+
 func SetNewDestination(DistName : String) -> void:
-	Path = find_path(CurrentPort.GetSpotName(), DistName)
+	Path = Helper.GetInstance().FindPath(CurrentPort.GetSpotName(), DistName)
 	PathPart = 1
+
 func SetCurrentPort(P : MapSpot) -> void:
 	CurrentPort = P
-	#Cpt.FullyRefilStat(STAT_CONST.STATS.MISSILE_SPACE)
-	#if (P == RefuelSpot):
-		#RefuelSpot = null
 	for g in GetDroneDock().DockedDrones:
 		g.SetCurrentPort(P)
+
 func RemovePort():
 	if (Docked):
 		return
@@ -233,7 +271,28 @@ func IntersectPusruing() -> Vector2:
 	#print("Calculating Intersection Point took " + var_to_str(Time.get_ticks_msec() - ms) + " msec")
 	return predicted_position
 
-#//////////////////Area Events
+func GetCurrentDestination() -> Vector2:
+	var destination
+	#if (RefuelSpot != null):
+		#destination = RefuelSpot.global_position
+	if (PursuingShips.size() > 0):
+		destination = IntersectPusruing()
+	else : if(PositionToInvestigate != Vector2.ZERO):
+		destination = PositionToInvestigate
+		if (PositionToInvestigate.distance_to(global_position) <= 4):
+			OnPositionInvestigated.emit(PositionToInvestigate)
+	else : if (Path.size() > 0):
+		destination = Helper.GetInstance().GetCityByName(Path[PathPart]).global_position
+	else : 
+		destination = global_position
+	return destination
+#/////////////////////////////////////////////////////
+#██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 
+#██   ██ ██   ██  ██  ██  ██      ██ ██      ██          ██      ██    ██ ██      ████   ██    ██    ██      
+#██████  ███████   ████   ███████ ██ ██      ███████     █████   ██    ██ █████   ██ ██  ██    ██    ███████ 
+#██      ██   ██    ██         ██ ██ ██           ██     ██       ██  ██  ██      ██  ██ ██    ██         ██ 
+#██      ██   ██    ██    ███████ ██  ██████ ███████     ███████   ████   ███████ ██   ████    ██    ███████ 
+#Overriding events from MapShip as extra functionality is needed for enemies to let know of the COMMANDER of what was found/lost
 
 func OnShipSeen(SeenBy : Node2D):
 	if (VisibleBy.has(SeenBy)):
@@ -244,6 +303,7 @@ func OnShipSeen(SeenBy : Node2D):
 	MapPointerManager.GetInstance().AddShip(self, false)
 	#SimulationManager.GetInstance().TogglePause(true)
 	ShipCamera.GetInstance().FrameCamToPos(global_position)
+	
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
@@ -252,6 +312,7 @@ func BodyEnteredElint(area: Area2D) -> void:
 	if (area.get_parent() is HostileShip):
 		return
 	super(area)
+	
 func BodyLeftElint(area: Area2D) -> void:
 	if (area.get_parent() is HostileShip):
 		return
@@ -262,28 +323,27 @@ func BodyLeftElint(area: Area2D) -> void:
 
 func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		OnEnemyVisualContact.emit(Body.get_parent(), self)
-		#PursuingShips.append(area.get_parent())
+		OnPlayerVisualContact.emit(Body.get_parent(), self)
 
 func BodyLeftRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		OnEnemyVisualLost.emit(Body.get_parent())
-		#PursuingShips.erase(area.get_parent())
-		#LastKnownPosition = area.get_parent().global_position
+		OnPlayerVisualLost.emit(Body.get_parent())
 
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Body.get_parent() is MapSpot):
-		if (Docked):
-			return
+		#if (Docked):
+			#return
 		var spot = Body.get_parent() as MapSpot
-		if (Path.has(spot.GetSpotName()) and Patrol):
+		if (Path.has(spot.GetSpotName())):
+			
 			SetCurrentPort(spot)
 			PathPart = Path.find(spot.GetSpotName())
 			if (PathPart == Path.size() - 1):
 				OnDestinationReached.emit(self)
 			else :
 				PathPart += 1
-		if (spot == RefuelSpot and Patrol):
+				
+		if (spot == RefuelSpot):
 			SetCurrentPort(RefuelSpot)
 	else :if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
 		if (Destroyed):
@@ -315,7 +375,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 					plships.append(drn)
 					plships.append_array(drn.GetDroneDock().DockedDrones)
 					
-			OnShipMet.emit(plships, hostships)
+			OnPlayerShipMet.emit(plships, hostships)
 	else : if (Body.get_parent() == Command and CommingBack):
 		var Ship = Body.get_parent() as HostileShip
 		Ship.GetDroneDock().DockDrone(self, true)
@@ -333,68 +393,14 @@ func BodyLeftBody(Body : Area2D) -> void:
 			RemovePort()
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
 		OnShipUnseen(Body.get_parent())
-		
-		
-#//////////////////
 
+#//////////////////////////////////////////////////////
+ #██████  ███████ ████████ ████████ ███████ ██████  ███████ 
+#██       ██         ██       ██    ██      ██   ██ ██      
+#██   ███ █████      ██       ██    █████   ██████  ███████ 
+#██    ██ ██         ██       ██    ██      ██   ██      ██ 
+ #██████  ███████    ██       ██    ███████ ██   ██ ███████ 
 
-
-func find_path(start_city: String, end_city: String) -> Array:
-	#var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-	var queue = []
-	var visited = {}
-	var parent = {}
-	
-	# Initialize the BFS
-	queue.append(start_city)
-	visited[start_city] = true
-	parent[start_city] = null
-	
-	# Perform the BFS
-	while queue.size() > 0:
-		var current_city = queue.pop_front()
-		
-		# If we reached the end_city, reconstruct the path
-		if current_city == end_city:
-			return reconstruct_path(parent, end_city)
-		
-		# Explore neighboring cities
-		var Cit = GetCity(current_city)
-		if (Cit.NeighboringCities.size() == 0):
-			printerr(Cit.GetSpotName + " has no neighboring cities. Seems sus.")
-		for neighbor in Cit.NeighboringCities:
-			if not visited.has(neighbor):
-				queue.append(neighbor)
-				visited[neighbor] = true
-				parent[neighbor] = current_city
-	
-	# If no path is found, return an empty array
-	print(GetShipName() + " has failed to find a path from " + start_city + " to " + end_city)
-	return []
-func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
-	var path = []
-	var current_city = end_city
-	while current_city != null:
-		path.append(current_city)
-		current_city = parent[current_city]
-		
-	path.reverse()  # Reverse the path to get it from start to end
-	return path
-func GetCurrentDestination() -> Vector2:
-	var destination
-	#if (RefuelSpot != null):
-		#destination = RefuelSpot.global_position
-	if (PursuingShips.size() > 0):
-		destination = IntersectPusruing()
-	else : if(LastKnownPosition != Vector2.ZERO):
-		destination = LastKnownPosition
-		if (LastKnownPosition.distance_to(global_position) <= 4):
-			OnPositionInvestigated.emit(LastKnownPosition)
-	else : if (Path.size() > 0):
-		destination = GetCity(Path[PathPart]).global_position
-	else : 
-		destination = global_position
-	return destination
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
@@ -405,21 +411,21 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Name = Cpt.CaptainName
 	stats.Funds = Cpt.ProvidingFunds
 	return stats
-func GetCity(CityName : String) -> MapSpot:
-	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
-	var CorrectCity : MapSpot
-	for g in cities:
-		var cit = g as MapSpot
-		if (cit.GetSpotName() == CityName):
-			CorrectCity = cit
-			break
-	return CorrectCity
+	
 func GetShipName() -> String:
 	return ShipName
+	
 func GetShipSpeed() -> float:
 	if (Docked):
 		return Command.GetShipSpeed()
 	return super()
+
+#/////////////////////////////////////////////////////////////
+#███████  █████  ██    ██ ███████     ██ ██       ██████   █████  ██████  
+#██      ██   ██ ██    ██ ██         ██  ██      ██    ██ ██   ██ ██   ██ 
+#███████ ███████ ██    ██ █████     ██   ██      ██    ██ ███████ ██   ██ 
+	 #██ ██   ██  ██  ██  ██       ██    ██      ██    ██ ██   ██ ██   ██ 
+#███████ ██   ██   ████   ███████ ██     ███████  ██████  ██   ██ ██████ 
 
 func GetSaveData() -> SD_HostileShip:
 	var dat = SD_HostileShip.new()
@@ -436,6 +442,7 @@ func GetSaveData() -> SD_HostileShip:
 		dat.CommandName = Command.GetShipName()
 	#dat.WeaponInventory = WeaponInventory
 	return dat
+	
 func LoadSaveData(Dat : SD_HostileShip) -> void:
 	#DestinationCity = GetCity(Dat.DestinationCityName)
 	Path = Dat.Path
@@ -447,37 +454,24 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
 	Destroyed = Dat.Destroyed
-	Loading = true
-	#WeaponInventory = Dat.WeaponInventory 
-func IsFuelFull() -> bool:
-	for g in GetDroneDock().DockedDrones:
-		if (!g.IsFuelFull()):
-			return false
-	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
+	LoadingSave = true
+	#WeaponInventory = Dat.WeaponInventory
+
+#///////////////////////////////////////////////////
+#██████   █████  ███    ███  █████   ██████  ██ ███    ██  ██████  
+#██   ██ ██   ██ ████  ████ ██   ██ ██       ██ ████   ██ ██       
+#██   ██ ███████ ██ ████ ██ ███████ ██   ███ ██ ██ ██  ██ ██   ███ 
+#██   ██ ██   ██ ██  ██  ██ ██   ██ ██    ██ ██ ██  ██ ██ ██    ██ 
+#██████  ██   ██ ██      ██ ██   ██  ██████  ██ ██   ████  ██████  
+
+#When Killed outside of battle (With missile) enemies will leave behind wreck, then this bool will be true
+var Destroyed : bool
+
 func IsDamaged() -> bool:
 	for g in GetDroneDock().DockedDrones:
 		if (g.IsDamaged()):
 			return true
 	return !Cpt.IsResourceFull(STAT_CONST.STATS.HULL)
-func NeedsReload() -> bool:
-	for g in GetDroneDock().DockedDrones:
-		if (g.NeedsReload()):
-			return true
-	return !Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)
-func TogglePause(t : bool):
-	Paused = t
-	if (t and BTree != null):
-		BTree.process_mode = Node.PROCESS_MODE_DISABLED
-	else: if (BTree != null):
-		BTree.process_mode = Node.PROCESS_MODE_PAUSABLE
-func ChangeSimulationSpeed(i : int):
-	super(i)
-	#$BeehaveTree.tick_rate = 1 / i
-func ToggleDocked(t : bool) -> void:
-	Docked = t
-	if (BTree != null):
-		BTree.enabled = !t
-		BTree.set_physics_process(!t)
 
 func Kill() -> void:
 	OnShipDestroyed.emit(self)
@@ -486,9 +480,7 @@ func Kill() -> void:
 		ElintShape.queue_free()
 		
 	RadarShape.queue_free()
-	OnShipWrecked.emit()
-	#queue_free()
-	#get_parent().remove_child(self)
+	ShipWrecked.emit()
 
 func DestroyEnemyDebry() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)

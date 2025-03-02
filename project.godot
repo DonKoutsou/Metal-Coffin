@@ -16,12 +16,13 @@ config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://Assets/LogoIcon2.png"
+config/icon="res://Assets/Logos/LogoIcon2.png"
 
 [autoload]
 
 BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
+HelperFunctions="*res://Scripts/Helper.gd"
 
 [display]
 
@@ -154,8 +155,7 @@ Fire={
 [rendering]
 
 occlusion_culling/bvh_build_quality=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/size=2048
 lights_and_shadows/directional_shadow/size.mobile=1024

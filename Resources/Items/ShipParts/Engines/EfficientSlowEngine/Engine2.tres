@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://c8wthdbwacfhe"]
 
-[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Scenes/Cards/Evasive.tres" id="1_66jjj"]
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_66jjj"]
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="2_4t30g"]
 [ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="3_583i0"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="4_q0elo"]

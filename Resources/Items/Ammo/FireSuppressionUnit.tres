@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://b5mce733abxqu"]
 
-[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Scenes/Cards/Extringuish.tres" id="1_wh627"]
+[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="1_wh627"]
 [ext_resource type="Texture2D" uid="uid://bcsiopa768823" path="res://Assets/Cards/fire-extinguisher.png" id="2_e2usa"]
 [ext_resource type="Texture2D" uid="uid://cb1wfsqw6e0iy" path="res://Assets/Cards/fire-extinguisher_Smol.png" id="3_jq3u0"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_ltqo5"]

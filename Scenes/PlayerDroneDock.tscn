@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://cw6nos06km7b3"]
 
 [ext_resource type="Script" path="res://Scripts/DroneDock.gd" id="1_fmftw"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/DroneDockEventH.tres" id="2_42hgf"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="2_42hgf"]
 [ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/NewCaptainNotif.tscn" id="3_62xl3"]
 [ext_resource type="AudioStream" uid="uid://5fvite02ickv" path="res://Assets/VoiceLines/radio_landing_end_02.wav" id="4_tsdwq"]
 [ext_resource type="AudioStream" uid="uid://cxp410y4qjnl8" path="res://Assets/VoiceLines/radio_landing_end_03.wav" id="5_0vdpa"]

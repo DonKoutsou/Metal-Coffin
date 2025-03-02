@@ -34,9 +34,7 @@ func _ready() -> void:
 	add_child(vidpl)
 	await vidpl.Finished
 	vidpl.queue_free()
-	#var oname = OS.get_name() 
-	#if (oname == "Windows"):
-		#get_viewport().size = Vector2(1980, 1080)
+
 	SpawnMenu()
 
 func SpawnMenu() -> void:

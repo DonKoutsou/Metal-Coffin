@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfh0dm1lwcumv"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_wr76p"]
-[ext_resource type="Script" path="res://Scenes/Cards/card_fight_end_scene.gd" id="2_rajye"]
+[ext_resource type="Script" path="res://Scripts/CardFight/card_fight_end_scene.gd" id="2_rajye"]
 
 [node name="CardFightEndScreen" type="PanelContainer"]
 anchors_preset = 15

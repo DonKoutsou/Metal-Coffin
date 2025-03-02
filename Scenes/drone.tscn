@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="9_82ju4"]
 [ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_f4h60"]
-[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/MissileDockEventHandler.tres" id="10_ilnq0"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p3smt"]
 light_mode = 1

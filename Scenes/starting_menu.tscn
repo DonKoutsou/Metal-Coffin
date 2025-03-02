@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
-[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/BG.png" id="4_ancht"]
+[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="4_ancht"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="6_460uc"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="6_voe58"]
-[ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Untitled_001.png" id="7_aspsn"]
+[ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="7_wdsp5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nyw5u"]

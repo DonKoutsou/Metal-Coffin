@@ -33,7 +33,7 @@ func ForceSteer(st : float) -> void:
 	$TextureRect.rotation = rad_to_deg(st)
 
 func CopyShipSteer(Ship : MapShip) -> void:
-	$TextureRect.rotation = Ship.GetSteer()
+	$TextureRect.rotation = Ship.rotation
 
 func _physics_process(_delta: float) -> void:
 	$TextureRect.rotation += SteeringDir / 5

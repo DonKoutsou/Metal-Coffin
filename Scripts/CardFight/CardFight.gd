@@ -1,7 +1,18 @@
 extends PanelContainer
 
 class_name Card_Fight
-
+#/////////////////////////////////////////////////////////////
+ #██████  █████  ██████  ██████      ███████ ██  ██████  ██   ██ ████████ 
+#██      ██   ██ ██   ██ ██   ██     ██      ██ ██       ██   ██    ██    
+#██      ███████ ██████  ██   ██     █████   ██ ██   ███ ███████    ██    
+#██      ██   ██ ██   ██ ██   ██     ██      ██ ██    ██ ██   ██    ██    
+ #██████ ██   ██ ██   ██ ██████      ██      ██  ██████  ██   ██    ██    
+#/////////////////////////////////////////////////////////////
+#When a player fleet comed in contact with an enemy one a turn based fight takes place
+#Player has acces to weapons present in the current fleet that is fighting
+#Each turn player select the actions of his ships and then based on speed each ship doese their actions
+#Any atack can have a counter, so a barrage from the machine guns can be "blocked" from an enemy doing evasive manuvers
+#/////////////////////////////////////////////////////////////
 @export var CardScene : PackedScene
 @export var ShipVizScene : PackedScene
 @export var Cards : Array[CardStats]
@@ -44,6 +55,10 @@ var ShipsViz : Array[CardFightShipViz]
 var Actions : Dictionary
 
 signal CardFightEnded(Survivors : Array[BattleShipStats])
+
+#TODO
+#ACTION WRAPPER
+#WRAPPER THAT HOLDS IN ALL DATA FOR AN ACTION
 
 #TODO
 #Find way to expand system to work with inventory items. DONE
@@ -97,6 +112,7 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	var Friendly = IsShipFriendly(BattleS)
 	GetShipViz(BattleS).SetStats(BattleS, Friendly)
 
+#atm of a ship is on fire is stored in the UI. Should change #TODO
 func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
 	GetShipViz(BattleS).ToggleFire(Fire)
 
@@ -111,7 +127,24 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 	EnemyShips.erase(Ship)
 
 #/////////////////////////////////////////////////
-#PHASES
+#██████  ██   ██  █████  ███████ ███████ ███████ 
+#██   ██ ██   ██ ██   ██ ██      ██      ██      
+#██████  ███████ ███████ ███████ █████   ███████ 
+#██      ██   ██ ██   ██      ██ ██           ██ 
+#██      ██   ██ ██   ██ ███████ ███████ ███████ 
+#/////////////////////////////////////////////////
+#1
+#First phase is action pick phase. Each ship based on their speed picks their actions based on how much energy they have
+#If its player ship, the atacks/deffences the ship has apear so player can choose.
+#If its enemy ship it is determined randomly what atacks they will do in EnemyActionSelection function
+#2
+#Second phase is actions perform phase. Each ship based on their speed do the actions they chose durring previus phase
+#An animation is played for each atacking action.
+#3
+#Third phase is DOT aplication phase. If any ship has a DOT on them (fire etc...) the damage of that dot is applied
+#4
+#Forth phase is cleanup phase, all unused card are refunded (an atack that was destined for a target that got killed) and the turn is reastarted
+#/////////////////////////////////////////////////
 var GameOver : bool = false
 
 signal PlayerActionPickingEnded
@@ -163,6 +196,11 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			if (g.CardName == "Extinguish fires"):
 				ExtinguishAction = g
 		EnemyEnergy -= ExtinguishAction.Energy
+		
+		var Action = CardFightAction.new()
+		Action.Action = ExtinguishAction
+		Action.Target = Ship
+		
 		Actions[Ship].append(ExtinguishAction)
 	
 	while (EnemyEnergy > 0):
@@ -176,7 +214,6 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			Action.SelectedOption = Action.Options.pick_random()
 			EnemyEnergy -= Action.SelectedOption.EnergyAdd
 		Actions[Ship].append(Action)
-
 
 func PerformActions(Ship : BattleShipStats) -> Array[CardStats]:
 	var ActionsToBurn : Array[CardStats]
@@ -323,7 +360,6 @@ func RefundUnusedCards() -> void:
 				continue
 			RefundCardToShip(Action, Ship)
 
-
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	var HasCard = false
 	for c in Ship.Cards.keys():
@@ -334,11 +370,9 @@ func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	if (!HasCard):
 		Ship.Cards[C] = 1
 
-
 func PlayerActionSelectionEnded() -> void:
 	ShipsViz[CurrentTurn].Dissable()
 	PlayerActionPickingEnded.emit()
-
 
 func RestartCards() -> void:
 	ClearCards()

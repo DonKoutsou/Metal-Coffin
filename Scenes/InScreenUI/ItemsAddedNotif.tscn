@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxog70dwnkaal"]
+
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_w0ggn"]
+[ext_resource type="Script" path="res://Scripts/UI/ItemNotification.gd" id="1_xgnwe"]
+[ext_resource type="PackedScene" uid="uid://bd47qsxg6jka3" path="res://Scenes/InScreenUI/ItemNotifContainer.tscn" id="2_2upok"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_qqedk"]
+
+[node name="Items Found Notif" type="PanelContainer" groups=["ItemNotification"]]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -138.0
+offset_right = 87.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_w0ggn")
+script = ExtResource("1_xgnwe")
+InventoryBoxScene = ExtResource("2_2upok")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Item(s) Found"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" groups=["Buttons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_qqedk")
+theme_override_font_sizes/font_size = 22
+text = "OK"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
