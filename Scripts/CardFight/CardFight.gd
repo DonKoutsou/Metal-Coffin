@@ -32,6 +32,7 @@ class_name Card_Fight
 @export var EnergyBar : ProgressBar
 @export var EnemyShipVisualPlecement : Control
 @export var PlayerShipVisualPlecement : Control
+@export var TargetSelect : CardFightTargetSelection
 
 #Stats kept to show at the end screen
 var DamageDone : float = 0
@@ -52,7 +53,8 @@ var EnemyShips : Array[BattleShipStats]
 
 var ShipsViz : Array[CardFightShipViz]
 
-var Actions : Dictionary
+#var Actions : Dictionary
+var ActionList = CardFightActionList.new()
 
 signal CardFightEnded(Survivors : Array[BattleShipStats])
 
@@ -120,8 +122,9 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 	var ShipViz = GetShipViz(Ship)
 	ShipViz.ShipDestroyed()
 	ShipsViz.erase(ShipViz)
+	
+	ActionList.RemoveShip(Ship)
 
-	Actions.erase(Ship)
 	ShipTurns.erase(Ship)
 	PlayerShips.erase(Ship)
 	EnemyShips.erase(Ship)
@@ -153,7 +156,7 @@ func RunTurn() -> void:
 	CurrentTurn = 0
 	
 	for Ship in ShipTurns:
-		Actions[Ship] = []
+		ActionList.AddShip(Ship)
 		if (IsShipFriendly(Ship)):
 			RestartCards()
 			await PlayerActionPickingEnded
@@ -166,11 +169,12 @@ func RunTurn() -> void:
 	
 	$VBoxContainer4/VBoxContainer4.visible = false
 	
-	for Ship in Actions:
+	for Ship in ShipTurns:
 		var PerformedActions = await PerformActions(Ship)
 		
 		for ToBurn in PerformedActions:
-			Actions[Ship].erase(ToBurn)
+			ActionList.RemoveActionFromShip(Ship, ToBurn.Action)
+			#Actions[Ship].erase(ToBurn)
 			
 		if (GameOver):
 			return
@@ -183,7 +187,8 @@ func RunTurn() -> void:
 	$VBoxContainer4/VBoxContainer4.visible = true
 	
 	RefundUnusedCards()
-	Actions.clear()
+	ActionList.Clear()
+	#Actions.clear()
 	
 	call_deferred("RunTurn")
 
@@ -201,38 +206,49 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		Action.Action = ExtinguishAction
 		Action.Target = Ship
 		
-		Actions[Ship].append(ExtinguishAction)
+		ActionList.AddAction(Ship, Action)
+		#Actions[Ship].append(Action)
 	
 	while (EnemyEnergy > 0):
 		var Action = (Cards.pick_random() as CardStats).duplicate()
-		if (!Action.AllowDuplicates and Actions[Ship].has(Action)):
+		
+		if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
 			continue
+			
 		if (Action.CardName == "Extinguish fires"):
 			continue
 		EnemyEnergy -= Action.Energy
 		if (EnemyEnergy > 0 and Action.Options.size() > 0):
 			Action.SelectedOption = Action.Options.pick_random()
 			EnemyEnergy -= Action.SelectedOption.EnergyAdd
-		Actions[Ship].append(Action)
+			
+		var ShipAction = CardFightAction.new()
+		ShipAction.Action = Action
+		
+		#TODO figure out better way to decide target
+		ShipAction.Target = PlayerShips.pick_random()
+		
+		ActionList.AddAction(Ship, ShipAction)
 
-func PerformActions(Ship : BattleShipStats) -> Array[CardStats]:
-	var ActionsToBurn : Array[CardStats]
+func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
+	var ActionsToBurn : Array[CardFightAction]
 	var Friendly = IsShipFriendly(Ship)
 	
-	for z in Actions[Ship]:
-		var Action = z as CardStats
-		
+	for z in ActionList.GetShipsActions(Ship):
+		var ShipAction = z as CardFightAction
+		var Action = ShipAction.Action
 		if (Action is OffensiveCardStats):
-			var Target
-			if (Friendly):
-				Target = EnemyShips.pick_random()
-			else :
-				Target = PlayerShips.pick_random()
+			
+			var Target = ShipAction.Target
+			#if (Friendly):
+				#Target = EnemyShips.pick_random()
+			#else :
+				#Target = PlayerShips.pick_random()
 				
-			ActionsToBurn.append(Action)
+			ActionsToBurn.append(ShipAction)
 			
 			var Counter = Action.GetCounter()
-			var HasDeff = ShipHasDeffence(Target, Counter)
+			var HasDeff = ActionList.ShipHasAction(Target, Counter)
 			
 			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 			anim.DrawnLine = true
@@ -243,7 +259,8 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardStats]:
 			await(anim.AnimationFinished)
 			
 			if (HasDeff):
-				Actions[Target].erase(Counter)
+				ActionList.RemoveActionFromShip(Target, Counter)
+				
 				print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
 				if (Friendly):
 					DamageNeg += Action.GetDamage() * Ship.FirePower
@@ -283,18 +300,6 @@ func DoFireDamage() -> void:
 			if (DamageShip(g, 10)):
 				break
 #////////////////////////////////////////////////////////////////////////////
-
-func ShipHasDeffence(Ship : BattleShipStats, NeededDef : CardStats) -> bool:
-	if (NeededDef == null):
-		return false
-	var HasDeff = false
-	for Ac in Actions[Ship]:
-		var TargAction = Ac as CardStats
-		if (TargAction.CardName == NeededDef.CardName):
-			Actions[Ship].erase(Ac)
-			HasDeff = true
-			break
-	return HasDeff
 
 # RETURN TRUE IF FIGHT IS OVER
 func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -> bool:
@@ -353,12 +358,12 @@ func OnFightEnded(Won : bool) -> void:
 #Refunds cards that consume inventory items if the card wasnt used in the end
 func RefundUnusedCards() -> void:
 	for Ship in PlayerShips:
-		var Acts = Actions[Ship]
+		var Acts = ActionList.GetShipsActions(Ship)
 		for z in Acts:
-			var Action = z as CardStats
-			if (!Action.Consume):
+			var ShipAction = z as CardFightAction
+			if (!ShipAction.Action.Consume):
 				continue
-			RefundCardToShip(Action, Ship)
+			RefundCardToShip(ShipAction.Action, Ship)
 
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	var HasCard = false
@@ -429,8 +434,20 @@ func ClearCards() -> void:
 func OnCardSelected(C : Card, Option : CardOption) -> void:
 	var Action = C.CStats.duplicate() as CardStats
 	var CurrentShip = ShipTurns[CurrentTurn]
-	if (!Action.AllowDuplicates and Actions[CurrentShip].has(Action)):
+	if (!Action.AllowDuplicates and ActionList.ShipHasAction(CurrentShip, Action)):
 		return
+	
+	var target
+	if (Action is OffensiveCardStats):
+		if (EnemyShips.size() == 1):
+			target = EnemyShips[0]
+		else:
+			TargetSelect.SetEnemies(EnemyShips)
+			$VBoxContainer4/VBoxContainer4.visible = false
+			target = await TargetSelect.EnemySelected
+			$VBoxContainer4/VBoxContainer4.visible = true
+	else:
+		target = CurrentShip
 	#for g in C.CStats.Options:
 		#if (g.OptionName == Option):
 	Action.SelectedOption = Option
@@ -445,7 +462,12 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	
 	c.connect("OnCardPressed", RemoveCard)
 	SelectedCardPlecement.add_child(c)
-	Actions[CurrentShip].append(Action)
+	
+	var ShipAction = CardFightAction.new()
+	ShipAction.Action = Action
+	ShipAction.Target = target
+	
+	ActionList.AddAction(CurrentShip, ShipAction)
 	
 	#if (C.CStats is OffensiveCardStats):
 	if (C.CStats.Consume):
@@ -486,7 +508,9 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 				Ammo[C.CStats.SelectedOption] += 1
 			
 	var CurrentShip = ShipTurns[CurrentTurn]
-	Actions[CurrentShip].erase(C.CStats)
+	
+	ActionList.RemoveActionFromShip(CurrentShip, C.CStats)
+	#Actions[CurrentShip].erase(C.CStats)
 	Energy += C.GetCost()
 	UpdateEnergy()
 	UpdateHandCards()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=16 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_mhnyb"]
@@ -14,8 +14,9 @@
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="13_pchum"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="14_kl7fj"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="14_ll7ew"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="15_dpyfj"]
 
-[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement")]
+[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,6 +37,7 @@ AnimationPlecement = NodePath("VBoxContainer4")
 EnergyBar = NodePath("VBoxContainer4/VBoxContainer4/HBoxContainer/ProgressBar")
 EnemyShipVisualPlecement = NodePath("VBoxContainer4/VBoxContainer")
 PlayerShipVisualPlecement = NodePath("VBoxContainer4/VBoxContainer2")
+TargetSelect = NodePath("VBoxContainer4/TargetSelect")
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -43,12 +45,13 @@ alignment = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer4"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 2
 alignment = 1
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer4"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
 alignment = 1
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
@@ -126,9 +129,28 @@ size_flags_vertical = 3
 theme_override_constants/separation = 8
 alignment = 1
 
+[node name="TargetSelect" type="PanelContainer" parent="VBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("14_kl7fj")
+script = ExtResource("15_dpyfj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer4/TargetSelect"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer4/TargetSelect/VBoxContainer"]
+layout_mode = 2
+text = "Select Target"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer4/TargetSelect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
 [node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer4"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 10
 alignment = 1
 
 [connection signal="pressed" from="VBoxContainer4/VBoxContainer4/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]

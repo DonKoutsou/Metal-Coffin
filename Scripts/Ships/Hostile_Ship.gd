@@ -408,7 +408,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Speed = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
-	stats.Name = Cpt.CaptainName
+	stats.Name = GetShipName()
 	stats.Funds = Cpt.ProvidingFunds
 	return stats
 	
