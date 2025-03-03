@@ -13,6 +13,10 @@ class_name Captain
 @export var CurrentPort : String = ""
 @export var CheckForErrors : bool = false
 @export var ProvidingFunds : int = 0
+
+#Only used by enemies
+@export var Cards : Array[CardStats]
+
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
 signal StatChanged(NewVal : float)
@@ -66,7 +70,7 @@ func CopyStats(Cpt : Captain) -> void:
 	CaptainPortrait = Cpt.CaptainPortrait
 	ShipIcon = Cpt.ShipIcon
 	ShipCallsign = Cpt.ShipCallsign
-	#MappedStats = Cpt.MappedStats
+	Cards = Cpt.Cards
 	ProvidingFunds = Cpt.ProvidingFunds
 	for g in Cpt.CaptainStats:
 		CaptainStats.append(g.duplicate(true))

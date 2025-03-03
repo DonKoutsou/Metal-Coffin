@@ -1,5 +1,7 @@
 extends Camera2D
 
+class_name ScreenCamera
+
 #SCREEN SHAKE///////////////////////////////////
 @export var GoingDownC : Curve
 @export var Cabled : Array[TextureRect]

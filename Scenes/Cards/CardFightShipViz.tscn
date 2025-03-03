@@ -64,9 +64,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -89.0
+offset_left = -109.0
 offset_top = -35.0
-offset_right = 91.0
+offset_right = 73.0
 offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -99,40 +99,20 @@ layout_mode = 2
 texture = ExtResource("3_5ndf2")
 expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(85, 0)
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
-text = "[color=#c19200]HL[/color] : 100"
+text = "[color=#c19200]HULL[/color] : 100
+[color=#c19200]SLD[/color] : 10
+[color=#c19200]SPD[/color] : 3
+[color=#c19200]FPWR[/color] : 10"
 fit_content = true
 scroll_active = false
-text_direction = 2
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 14
-bbcode_enabled = true
-text = "[color=#c19200]SPD[/color] : 100"
-fit_content = true
-scroll_active = false
-text_direction = 2
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 14
-bbcode_enabled = true
-text = "[color=#c19200]FP[/color] : 100"
-fit_content = true
-scroll_active = false
-text_direction = 2
+text_direction = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(54, 38.5)

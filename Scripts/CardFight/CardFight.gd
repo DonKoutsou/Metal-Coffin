@@ -210,7 +210,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		#Actions[Ship].append(Action)
 	
 	while (EnemyEnergy > 0):
-		var Action = (Cards.pick_random() as CardStats).duplicate()
+		var Action = (Ship.Cards.keys().pick_random() as CardStats).duplicate()
 		
 		if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
 			continue
@@ -254,7 +254,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			anim.DrawnLine = true
 			AnimationPlecement.add_child(anim)
 			AnimationPlecement.move_child(anim, 1)
-			anim.DoOffensive(Action, HasDeff, Ship, Target, EnemyShips.has(Ship))
+			anim.DoOffensive(Action, HasDeff, Ship, [Target], EnemyShips.has(Ship))
 			
 			await(anim.AnimationFinished)
 			
@@ -319,6 +319,10 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -
 	else:
 		UpdateShipStats(Ship)
 	return false
+
+func ShieldShip(Ship : BattleShipStats, Amm : float) -> void:
+	Ship.Shield = min(Ship.Hull / 2, Ship.Shield + Amm)
+	UpdateShipStats(Ship)
 
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
 	return PlayerShips.has(Ship)

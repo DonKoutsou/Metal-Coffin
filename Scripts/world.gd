@@ -155,7 +155,7 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	GetMap().GetScreenUi().ToggleControllCover(true)
-	GetMap().GetScreenUi().ToggleScreenUI(false)
+	GetMap().GetScreenUi().ToggleFullScreen(true)
 
 	
 func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
@@ -188,7 +188,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	FighingFriendlyUnits.clear()
 	
 	GetMap().GetScreenUi().ToggleControllCover(false)
-	GetMap().GetScreenUi().ToggleScreenUI(true)
+	GetMap().GetScreenUi().ToggleFullScreen(false)
 
 #Make sure to remove all items that their cards have been used
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo : Dictionary):

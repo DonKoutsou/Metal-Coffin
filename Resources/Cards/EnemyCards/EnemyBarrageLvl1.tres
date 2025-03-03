@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=7 format=3 uid="uid://cbkme88wrncp4"]
+
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_6rgsr"]
+[ext_resource type="Texture2D" uid="uid://dgj0w64wb7mmy" path="res://Assets/Cards/hydra-shot.png" id="2_beagt"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="3_17aj4"]
+[ext_resource type="Resource" uid="uid://ktph3wbdfaxg" path="res://Resources/Cards/Barrage/Options/BarrageNormalOption.tres" id="4_t83mo"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_ogein"]
+[ext_resource type="Script" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="6_ht4r4"]
+
+[resource]
+script = ExtResource("6_ht4r4")
+CounteredBy = ExtResource("1_6rgsr")
+Damage = 6.0
+Accuracy = 0.0
+Icon = ExtResource("2_beagt")
+CardName = "Barragge"
+CardDescription = "Throws a barragge on the enemy. DMG = 6 * Firepower"
+Energy = 1
+Options = Array[ExtResource("3_17aj4")]([ExtResource("4_t83mo")])
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("5_ogein")]([])
+WeapT = 1

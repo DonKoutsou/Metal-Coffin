@@ -10,6 +10,29 @@ class_name ScreenUI
 @export var DroneUI : DroneTab
 @export var ButtonCover : TextureRect
 @export var EventHandler : UIEventHandler
+@export var Cam : ScreenCamera
+@export_group("Screen")
+@export var NormalScreen : Control
+@export var FullScreenFrame : TextureRect
+
+signal FullScreenToggleStarted
+signal FullScreenToggleFinished(t : bool)
+
+func ToggleFullScreen(toggle : bool) -> void:
+	FullScreenToggleStarted.emit()
+	
+	var tw = create_tween()
+	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
+	await tw.finished
+
+	FullScreenFrame.visible = toggle
+	NormalScreen.visible = !toggle
+
+	var tw2 = create_tween()
+	tw2.tween_property(self, "modulate", Color(1,1,1,1), 1)
+	await tw2.finished
+	
+	FullScreenToggleFinished.emit(toggle)
 
 func _ready() -> void:
 	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
@@ -18,7 +41,7 @@ func _ready() -> void:
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	EventHandler.connect("CoverToggled", ToggleControllCover)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
-	MissileUI.connect("MissileLaunched", $ScreenCam.EnableMissileShake)
+	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
 	#OnControlledShipDamaged()
 	
 func Acceleration_Ended(value_changed: float) -> void:
@@ -26,11 +49,11 @@ func Acceleration_Ended(value_changed: float) -> void:
 	#var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_BOUNCE)
 	#tw.tween_property($ScreenCam, "shakestr", 0, $ScreenCam.shakestr * 3)
-	$ScreenCam.DissableShake()
+	Cam.DissableShake()
 	
 func Acceleration_Changed(value: float) -> void:
 	EventHandler.OnAccelerationChanged(value)
-	$ScreenCam.EnableShake(value * 1.5)
+	Cam.EnableShake(value * 1.5)
 
 func Acceleration_Forced(NewVal : float) -> void:
 	Thrust.ForceValue(NewVal)
@@ -53,13 +76,13 @@ func ToggleScreenUI(t : bool) -> void:
 
 func Steering_Direction_Changed(NewValue: float) -> void:
 	EventHandler.OnSteeringDirectionChanged(NewValue)
-	$ScreenCam.EnableShake(0.5)
-	$ScreenCam.DissableShake()
+	Cam.EnableShake(0.5)
+	Cam.DissableShake()
 
 func Steer_Offseted(Offset: float) -> void:
 	EventHandler.OnSteerOffseted(Offset)
-	$ScreenCam.EnableShake(0.5)
-	$ScreenCam.DissableShake()
+	Cam.EnableShake(0.5)
+	Cam.DissableShake()
 	
 func Steer_Forced(NewVal : float) -> void:
 	Steer.ForceSteer(NewVal)
@@ -138,7 +161,7 @@ func OnControlledShipDamaged() -> void:
 	#var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_BOUNCE)
 	#tw.tween_property($ScreenCam, "shakestr", 0, 8)
-	$ScreenCam.EnableDamageShake()
+	Cam.EnableDamageShake()
 	#$ScreenCam.Shake = false
 	
 	

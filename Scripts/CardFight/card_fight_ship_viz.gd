@@ -2,6 +2,8 @@ extends PanelContainer
 
 class_name CardFightShipViz
 
+const StatText = "[color=#c19200]HULL[/color] : {0}\n[color=#c19200]SLD[/color] : {1}\n[color=#c19200]SPD[/color] : {2}\n[color=#c19200]FPWR[/color] : {3}"
+
 func _ready() -> void:
 	#$Panel.visible = false
 	ToggleFire(false)
@@ -9,9 +11,7 @@ func _ready() -> void:
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	$HBoxContainer/Label.text = S.Name.substr(0, 3)
 	$HBoxContainer/TextureRect.texture = S.ShipIcon
-	$HBoxContainer/VBoxContainer/RichTextLabel.text = "[color=#c19200]HL[/color] : " + var_to_str(S.Hull)
-	$HBoxContainer/VBoxContainer/RichTextLabel2.text = "[color=#c19200]SPD[/color] : " + var_to_str(S.Speed)
-	$HBoxContainer/VBoxContainer/RichTextLabel3.text = "[color=#c19200]FP[/color] : " + var_to_str(S.FirePower)
+	$HBoxContainer/RichTextLabel.text = StatText.format([var_to_str(S.Hull).replace(".0", ""), var_to_str(S.Shield).replace(".0", ""), var_to_str(S.Speed).replace(".0", ""), var_to_str(S.FirePower).replace(".0", "")])
 	$HBoxContainer/TextureRect.flip_v = Friendly
 	$Panel.visible = false
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:

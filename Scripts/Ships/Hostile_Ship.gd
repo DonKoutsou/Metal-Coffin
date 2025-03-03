@@ -410,6 +410,10 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
 	stats.Funds = Cpt.ProvidingFunds
+	var EnemyCards : Dictionary
+	for g in Cpt.Cards:
+		EnemyCards[g] = 1
+	stats.Cards = EnemyCards
 	return stats
 	
 func GetShipName() -> String:

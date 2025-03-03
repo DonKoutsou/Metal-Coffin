@@ -42,6 +42,7 @@ static func GetInstance() -> Map:
 
 func _ready() -> void:
 	set_physics_process(false)
+	$ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
 	Instance = self
 
 func _exit_tree() -> void:
@@ -661,3 +662,19 @@ func _prim_mst_optimized(cities: Array) -> Array:
 	return mst_edges
 	
 #/////////////////////////////////////////////////////////////
+#SCREEN RESIZING
+const OriginalSize = Vector2(791, 512)
+const FullSize = Vector2(1052, 512)
+
+func ToggleFullScreen() -> void:
+	
+	$SubViewportContainer.visible = false
+	
+	var toggle = await _ScreenUI.FullScreenToggleFinished
+	
+	if (toggle):
+		$SubViewportContainer.size = FullSize
+	else:
+		$SubViewportContainer.size = OriginalSize
+	
+	$SubViewportContainer.visible = true

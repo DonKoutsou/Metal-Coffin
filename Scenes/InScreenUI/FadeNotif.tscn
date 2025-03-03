@@ -13,16 +13,19 @@ offset_right = 219.0
 offset_bottom = 117.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme = ExtResource("1_urlo6")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fkkej")
 script = ExtResource("2_k1b3j")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HBoxContainer"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2

@@ -8,20 +8,25 @@ signal AnimationFinished
 @export var DamageFloater : PackedScene
 @export var ShipViz : PackedScene
 
-var LinePos : float = 0
+#var LinePos : float = 0
+
+#var DrawPositions : Array
+var DrawPositions2 : Dictionary
 
 var DrawnLine : bool = false
 
 var AtC
 var DefC
 var Ic
-var Ic2
+var Ic2 : Array
 
 func _ready() -> void:
 	set_physics_process(DrawnLine)
+	#set_physics_process(true)
+	#DoOffensive(OffensiveCardStats.new(), false, BattleShipStats.new(), [BattleShipStats.new(), BattleShipStats.new()], false)
 
-func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShip : BattleShipStats, FriendShip : bool) -> void:
-	#DrawnLine = true
+func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShips : Array[BattleShipStats], FriendShip : bool) -> void:
+	
 	Ic = ShipViz.instantiate() as CardFightShipViz
 	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
@@ -41,21 +46,39 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		DefC.size_flags_horizontal = Control.SIZE_EXPAND
 		DefC.show_behind_parent = true
 	
-	Ic2 = ShipViz.instantiate() as CardFightShipViz
-	Ic2.SetStatsAnimation(TargetShip, FriendShip)
-	$HBoxContainer.add_child(Ic2)
-	var tw = create_tween()
-	tw.tween_property(self, "LinePos", 1, 1)
-	tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
+	var ShipPlemenent = VBoxContainer.new()
+	$HBoxContainer.add_child(ShipPlemenent)
+	ShipPlemenent.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
+	for g in TargetShips.size():
+		var t = ShipViz.instantiate() as CardFightShipViz
+		t.SetStatsAnimation(TargetShips[g], FriendShip)
+		ShipPlemenent.add_child(t)
+		Ic2.append(t)
+		
+		DrawPositions2[g] = 0.0
+		
+		var tw = create_tween()
+		tw.tween_method(MoveLine, 0.0, 1.0, 1.0)
+		#tw.tween_property(self, DrawPositions2[g], 1, 1)
+		tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
+
+var LineToMove = 0
+func MoveLine(Val : float) -> void:
+	DrawPositions2[LineToMove] = Val
+	LineToMove += 1
+	if (LineToMove > DrawPositions2.size() - 1):
+		LineToMove = 0
+
 func TweenEnded(Damage : float) -> void:
 	if (DefC == null):
-		var d = DamageFloater.instantiate()
-		d.modulate = Color(1,0,0,1)
-		d.text = var_to_str(Damage)
-		add_child(d)
-		d.global_position = (Ic2.global_position + (Ic2.size / 2)) - d.size / 2.
-		d.connect("Ended", AnimEnded)
+		for g in Ic2:
+			var d = DamageFloater.instantiate()
+			d.modulate = Color(1,0,0,1)
+			d.text = var_to_str(Damage)
+			add_child(d)
+			d.global_position = (g.global_position + (g.size / 2)) - d.size / 2.
+			d.connect("Ended", AnimEnded)
 	else :
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
@@ -105,15 +128,20 @@ func _physics_process(_delta: float) -> void:
 func _draw() -> void:
 	if (!DrawnLine):
 		return
-	var pos1 = AtC.position
-	pos1.x += (AtC.size.x / 2)
-	var pos2 
-	if (DefC != null):
-		pos2 = DefC.position
-		pos2.x += (DefC.size.x / 2)
-		pos2.y = pos1.y
-	else :
-		pos2 = Ic2.position
-		pos2.x += (Ic2.size.x / 2)
-		pos2.y = pos1.y
-	draw_line(pos1, lerp(pos1, pos2, LinePos), Color(1,0,0,1), 8)
+	draw_set_transform(-global_position)
+	for g in Ic2.size():
+		var pos1 = AtC.global_position
+		pos1.x += AtC.size.x / 2
+		pos1.y += AtC.size.y / 2
+		var pos2 
+		if (DefC != null):
+			pos2 = DefC.global_position
+			pos2.x += DefC.size.x / 2
+			pos2.y = pos1.y
+		else :
+			pos2 = Ic2[g].global_position
+			pos2.x += Ic2[g].size.x / 2
+			pos2.y += Ic2[g].size.y / 2
+			#pos2.y = pos1.y
+			
+		draw_line(pos1, lerp(pos1, pos2, DrawPositions2[g]), Color(1,0,0), 8)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=46 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://doea6iw0omah8" path="res://Assets/UIPiecies/Screen/Screen.png" id="4_eannu"]
 [ext_resource type="Texture2D" uid="uid://cdiuxoj3qvrjt" path="res://Assets/UIPiecies/Screen/Buttons2.png" id="5_jp3or"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
+[ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="5_nt8da"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
 [ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="8_eamxa"]
@@ -291,7 +292,7 @@ _data = {
 "RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "DroneUI", "ButtonCover")]
+[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "DroneUI", "ButtonCover", "Cam", "NormalScreen", "FullScreenFrame")]
 process_mode = 1
 z_as_relative = false
 layout_mode = 3
@@ -303,16 +304,28 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_7t5fk")
 script = ExtResource("2_spr1r")
-_ScreenItems = NodePath("ScreenUi")
-MarkerEditorControls = NodePath("ScreenUi/MapMarkerControls")
-Thrust = NodePath("ThrustSlider")
-Steer = NodePath("ScreenUi/SteeringWheel")
-MissileUI = NodePath("ScreenUi/Missile Tab")
-DroneUI = NodePath("ScreenUi/DroneTab")
-ButtonCover = NodePath("ButtonCover")
+_ScreenItems = NodePath("NormalScreen/ScreenUi")
+MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")
+Thrust = NodePath("NormalScreen/ThrustSlider")
+Steer = NodePath("NormalScreen/ScreenUi/SteeringWheel")
+MissileUI = NodePath("NormalScreen/ScreenUi/Missile Tab")
+DroneUI = NodePath("NormalScreen/ScreenUi/DroneTab")
+ButtonCover = NodePath("NormalScreen/ButtonCover")
 EventHandler = ExtResource("3_i441f")
+Cam = NodePath("ScreenCam")
+NormalScreen = NodePath("NormalScreen")
+FullScreenFrame = NodePath("ScreenFrameLong")
 
-[node name="ScreenFrame" type="TextureRect" parent="."]
+[node name="NormalScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScreenFrame" type="TextureRect" parent="NormalScreen"]
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15
@@ -328,7 +341,7 @@ mouse_filter = 2
 texture = ExtResource("4_eannu")
 expand_mode = 1
 
-[node name="ScreenFrame2" type="TextureRect" parent="."]
+[node name="ButtonBG" type="TextureRect" parent="NormalScreen"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -345,14 +358,14 @@ mouse_filter = 2
 texture = ExtResource("5_jp3or")
 expand_mode = 1
 
-[node name="ThrustSlider" parent="." instance=ExtResource("5_mda8n")]
+[node name="ThrustSlider" parent="NormalScreen" instance=ExtResource("5_mda8n")]
 layout_mode = 1
 offset_left = -117.0
 offset_top = -333.0
 offset_right = -16.0
 offset_bottom = -42.0
 
-[node name="DroneButton" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="DroneButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -371,7 +384,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="MissileButton" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="MissileButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -391,7 +404,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="RadarButton" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="RadarButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -410,7 +423,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ScreenUi" type="Control" parent="."]
+[node name="ScreenUi" type="Control" parent="NormalScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -421,7 +434,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SteeringWheel" parent="ScreenUi" instance=ExtResource("11_s7gev")]
+[node name="SteeringWheel" parent="NormalScreen/ScreenUi" instance=ExtResource("11_s7gev")]
 layout_mode = 1
 anchors_preset = 2
 anchor_left = 0.0
@@ -432,7 +445,7 @@ grow_horizontal = 1
 grow_vertical = 0
 PositionOnStart = false
 
-[node name="DroneTab" parent="ScreenUi" instance=ExtResource("12_x0pq6")]
+[node name="DroneTab" parent="NormalScreen/ScreenUi" instance=ExtResource("12_x0pq6")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -443,7 +456,7 @@ offset_right = -420.0
 offset_bottom = -1.0
 grow_horizontal = 0
 
-[node name="Missile Tab" parent="ScreenUi" instance=ExtResource("13_4xtjg")]
+[node name="Missile Tab" parent="NormalScreen/ScreenUi" instance=ExtResource("13_4xtjg")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -454,7 +467,7 @@ offset_right = -420.0
 offset_bottom = -1.0
 grow_horizontal = 0
 
-[node name="MapMarkerControls" type="Control" parent="ScreenUi"]
+[node name="MapMarkerControls" type="Control" parent="NormalScreen/ScreenUi"]
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -470,7 +483,7 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="TextureRect2" type="TextureRect" parent="ScreenUi/MapMarkerControls"]
+[node name="TextureRect2" type="TextureRect" parent="NormalScreen/ScreenUi/MapMarkerControls"]
 layout_mode = 0
 offset_left = -289.0
 offset_top = -90.0
@@ -480,7 +493,7 @@ mouse_filter = 0
 texture = ExtResource("28_r1kt4")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="ScreenUi/MapMarkerControls/TextureRect2"]
+[node name="TextureRect2" type="TextureRect" parent="NormalScreen/ScreenUi/MapMarkerControls/TextureRect2"]
 modulate = Color(0, 0, 0, 0.518)
 show_behind_parent = true
 layout_mode = 0
@@ -492,15 +505,15 @@ mouse_filter = 2
 texture = ExtResource("28_r1kt4")
 expand_mode = 1
 
-[node name="YGas" parent="ScreenUi/MapMarkerControls" instance=ExtResource("24_01ksk")]
+[node name="YGas" parent="NormalScreen/ScreenUi/MapMarkerControls" instance=ExtResource("24_01ksk")]
 position = Vector2(-117, 34)
 scale = Vector2(0.520363, 0.520363)
 
-[node name="XGas" parent="ScreenUi/MapMarkerControls" instance=ExtResource("24_01ksk")]
+[node name="XGas" parent="NormalScreen/ScreenUi/MapMarkerControls" instance=ExtResource("24_01ksk")]
 position = Vector2(72, -55)
 scale = Vector2(0.787035, 0.787035)
 
-[node name="ExitMapMarker" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+[node name="ExitMapMarker" type="TextureButton" parent="NormalScreen/ScreenUi/MapMarkerControls" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -519,7 +532,7 @@ texture_click_mask = ExtResource("26_pu5a5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/ExitMapMarker"]
+[node name="Label" type="Label" parent="NormalScreen/ScreenUi/MapMarkerControls/ExitMapMarker"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -540,7 +553,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ClearLines" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+[node name="ClearLines" type="TextureButton" parent="NormalScreen/ScreenUi/MapMarkerControls" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -559,7 +572,7 @@ texture_click_mask = ExtResource("26_pu5a5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/ClearLines"]
+[node name="Label" type="Label" parent="NormalScreen/ScreenUi/MapMarkerControls/ClearLines"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -580,7 +593,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="DrawLine" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+[node name="DrawLine" type="TextureButton" parent="NormalScreen/ScreenUi/MapMarkerControls" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -599,7 +612,7 @@ texture_click_mask = ExtResource("26_pu5a5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/DrawLine"]
+[node name="Label" type="Label" parent="NormalScreen/ScreenUi/MapMarkerControls/DrawLine"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -620,7 +633,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="DrawText" type="TextureButton" parent="ScreenUi/MapMarkerControls" groups=["Buttons"]]
+[node name="DrawText" type="TextureButton" parent="NormalScreen/ScreenUi/MapMarkerControls" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -639,7 +652,7 @@ texture_click_mask = ExtResource("26_pu5a5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ScreenUi/MapMarkerControls/DrawText"]
+[node name="Label" type="Label" parent="NormalScreen/ScreenUi/MapMarkerControls/DrawText"]
 modulate = Color(1, 1, 1, 0.673)
 layout_mode = 1
 anchors_preset = 8
@@ -660,7 +673,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ControlledShipSwitch" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="ControlledShipSwitch" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -684,7 +697,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="MarkerPlecement" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="MarkerPlecement" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -703,7 +716,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ControlledShipReturn" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="ControlledShipReturn" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -727,7 +740,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="LandButton" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="LandButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -746,7 +759,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SpeedSimulation" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -766,7 +779,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SimulationButton" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="SimulationButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -785,7 +798,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="InventoryButton" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="InventoryButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -809,7 +822,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Clock" parent="." instance=ExtResource("23_0465a")]
+[node name="Clock" parent="NormalScreen" instance=ExtResource("23_0465a")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -820,7 +833,7 @@ offset_right = -115.0
 offset_bottom = -122.0
 grow_horizontal = 0
 
-[node name="Pause" type="TextureButton" parent="." groups=["Buttons"]]
+[node name="Pause" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 1
@@ -841,7 +854,7 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Pause"]
+[node name="Label" type="Label" parent="NormalScreen/Pause"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -860,7 +873,7 @@ text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Simulation_Nob" parent="." instance=ExtResource("27_67jhj")]
+[node name="Simulation_Nob" parent="NormalScreen" instance=ExtResource("27_67jhj")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -871,7 +884,7 @@ offset_right = -58.0
 offset_bottom = -194.0
 grow_horizontal = 0
 
-[node name="Fund_Container" parent="." instance=ExtResource("28_qwofv")]
+[node name="Fund_Container" parent="NormalScreen" instance=ExtResource("28_qwofv")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -885,7 +898,7 @@ offset_bottom = 93.0
 grow_horizontal = 0
 grow_vertical = 1
 
-[node name="ButtonCover" type="TextureRect" parent="."]
+[node name="ButtonCover" type="TextureRect" parent="NormalScreen"]
 visible = false
 layout_mode = 1
 anchors_preset = 6
@@ -901,6 +914,23 @@ grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 0
 texture = ExtResource("31_bthjx")
+expand_mode = 1
+
+[node name="ScreenFrameLong" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_nt8da")
 expand_mode = 1
 
 [node name="ScreenFrame4" type="TextureRect" parent="."]
@@ -1114,24 +1144,24 @@ libraries = {
 "": SubResource("AnimationLibrary_i8scw")
 }
 
-[connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
-[connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]
-[connection signal="pressed" from="DroneButton" to="." method="Drone_Button_Pressed"]
-[connection signal="pressed" from="MissileButton" to="." method="Missile_Button_Pressed"]
-[connection signal="pressed" from="RadarButton" to="." method="Radar_Button_Pressed"]
-[connection signal="SteeringDitChanged" from="ScreenUi/SteeringWheel" to="." method="Steering_Direction_Changed"]
-[connection signal="SteeringOffseted" from="ScreenUi/SteeringWheel" to="." method="Steer_Offseted"]
-[connection signal="RangeChanged" from="ScreenUi/MapMarkerControls/YGas" to="." method="MarkerEditorYRangeChanged"]
-[connection signal="RangeChanged" from="ScreenUi/MapMarkerControls/XGas" to="." method="MarkerEditorXRangeChanged"]
-[connection signal="pressed" from="ScreenUi/MapMarkerControls/ExitMapMarker" to="." method="Exit_Marker_Editor_Pressed"]
-[connection signal="pressed" from="ScreenUi/MapMarkerControls/ClearLines" to="." method="Clear_Lines_Pressed"]
-[connection signal="pressed" from="ScreenUi/MapMarkerControls/DrawLine" to="." method="Draw_Line_Pressed"]
-[connection signal="pressed" from="ScreenUi/MapMarkerControls/DrawText" to="." method="Draw_Text_Pressed"]
-[connection signal="pressed" from="ControlledShipSwitch" to="." method="Ship_Switch_Pressed"]
-[connection signal="pressed" from="MarkerPlecement" to="." method="Marker_Editor_Pressed"]
-[connection signal="pressed" from="ControlledShipReturn" to="." method="Regroup_Pressed"]
-[connection signal="pressed" from="LandButton" to="." method="Land_Pressed"]
-[connection signal="pressed" from="SimulationButton" to="." method="Sim_Pause_Pressed"]
-[connection signal="pressed" from="InventoryButton" to="." method="Inventory_Pressed"]
-[connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
-[connection signal="StepChanged" from="Simulation_Nob" to="." method="Simmulation_Step_Changed"]
+[connection signal="AccelerationChangeEnded" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Ended"]
+[connection signal="AccelerationChanged" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Changed"]
+[connection signal="pressed" from="NormalScreen/DroneButton" to="." method="Drone_Button_Pressed"]
+[connection signal="pressed" from="NormalScreen/MissileButton" to="." method="Missile_Button_Pressed"]
+[connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
+[connection signal="SteeringDitChanged" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steering_Direction_Changed"]
+[connection signal="SteeringOffseted" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steer_Offseted"]
+[connection signal="RangeChanged" from="NormalScreen/ScreenUi/MapMarkerControls/YGas" to="." method="MarkerEditorYRangeChanged"]
+[connection signal="RangeChanged" from="NormalScreen/ScreenUi/MapMarkerControls/XGas" to="." method="MarkerEditorXRangeChanged"]
+[connection signal="pressed" from="NormalScreen/ScreenUi/MapMarkerControls/ExitMapMarker" to="." method="Exit_Marker_Editor_Pressed"]
+[connection signal="pressed" from="NormalScreen/ScreenUi/MapMarkerControls/ClearLines" to="." method="Clear_Lines_Pressed"]
+[connection signal="pressed" from="NormalScreen/ScreenUi/MapMarkerControls/DrawLine" to="." method="Draw_Line_Pressed"]
+[connection signal="pressed" from="NormalScreen/ScreenUi/MapMarkerControls/DrawText" to="." method="Draw_Text_Pressed"]
+[connection signal="pressed" from="NormalScreen/ControlledShipSwitch" to="." method="Ship_Switch_Pressed"]
+[connection signal="pressed" from="NormalScreen/MarkerPlecement" to="." method="Marker_Editor_Pressed"]
+[connection signal="pressed" from="NormalScreen/ControlledShipReturn" to="." method="Regroup_Pressed"]
+[connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
+[connection signal="pressed" from="NormalScreen/SimulationButton" to="." method="Sim_Pause_Pressed"]
+[connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
+[connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]
+[connection signal="StepChanged" from="NormalScreen/Simulation_Nob" to="." method="Simmulation_Step_Changed"]
