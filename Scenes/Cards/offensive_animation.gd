@@ -7,7 +7,8 @@ signal AnimationFinished
 @export var CardScene : PackedScene
 @export var DamageFloater : PackedScene
 @export var ShipViz : PackedScene
-
+@export_group("Event Handlers")
+@export var UIEventH : UIEventHandler
 #var LinePos : float = 0
 
 #var DrawPositions : Array
@@ -19,14 +20,14 @@ var AtC
 var DefC
 var Ic
 var Ic2 : Array
-
+var fr : bool
 func _ready() -> void:
 	set_physics_process(DrawnLine)
 	#set_physics_process(true)
 	#DoOffensive(OffensiveCardStats.new(), false, BattleShipStats.new(), [BattleShipStats.new(), BattleShipStats.new()], false)
 
 func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShips : Array[BattleShipStats], FriendShip : bool) -> void:
-	
+	fr = FriendShip
 	Ic = ShipViz.instantiate() as CardFightShipViz
 	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
@@ -72,6 +73,7 @@ func MoveLine(Val : float) -> void:
 
 func TweenEnded(Damage : float) -> void:
 	if (DefC == null):
+		
 		for g in Ic2:
 			var d = DamageFloater.instantiate()
 			d.modulate = Color(1,0,0,1)
@@ -79,6 +81,8 @@ func TweenEnded(Damage : float) -> void:
 			add_child(d)
 			d.global_position = (g.global_position + (g.size / 2)) - d.size / 2.
 			d.connect("Ended", AnimEnded)
+		if (fr):
+			UIEventH.OnControlledShipDamaged()
 	else :
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
@@ -98,8 +102,12 @@ func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip 
 	DefC.size_flags_horizontal = Control.SIZE_EXPAND
 	DefC.show_behind_parent = true
 	
+	
 	var d = DamageFloater.instantiate()
-	d.text = "Fire Extinguished"
+	if (DefCard.CardName == "Extinguish fires"):
+		d.text = "Fire Extinguished"
+	else : if (DefCard.CardName == "Shield Overcharge"):
+		d.text = "Shield Added"
 	d.modulate = Color(1,1,1,1)
 	add_child(d)
 	d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2

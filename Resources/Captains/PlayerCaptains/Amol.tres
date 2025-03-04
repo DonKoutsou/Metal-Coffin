@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=19 format=3 uid="uid://b1e5ovklwmp7v"]
+[gd_resource type="Resource" script_class="Captain" load_steps=21 format=3 uid="uid://b1e5ovklwmp7v"]
 
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_jwmx4"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="1_phe2p"]
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_7h107"]
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="3_i2eq4"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_q3468"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="3_x13ps"]
 [ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="6_c3xo7"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="6_jxjwo"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="7_8bfg0"]
 [ext_resource type="Resource" uid="uid://carmmqiu3rn2f" path="res://Resources/Items/ShipParts/Shield/SPK-50 Ship Barrier.tres" id="7_s7djg"]
 [ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine.tres" id="9_wulof"]
+[ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="11_5euox"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_7h107")
@@ -83,7 +85,8 @@ CaptainPortrait = ExtResource("1_jwmx4")
 ShipIcon = ExtResource("3_i2eq4")
 CaptainStats = Array[ExtResource("2_7h107")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_q3468")]([ExtResource("6_jxjwo"), ExtResource("6_c3xo7"), ExtResource("7_s7djg"), ExtResource("7_8bfg0"), ExtResource("7_8bfg0"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof")])
+StartingItems = Array[ExtResource("3_q3468")]([ExtResource("6_jxjwo"), ExtResource("6_c3xo7"), ExtResource("7_s7djg"), ExtResource("7_8bfg0"), ExtResource("7_8bfg0"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("11_5euox")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 40000
+Cards = Array[ExtResource("3_x13ps")]([])

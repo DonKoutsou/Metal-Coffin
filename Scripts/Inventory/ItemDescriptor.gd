@@ -2,6 +2,8 @@ extends PanelContainer
 
 class_name ItemDescriptor
 
+@export_group("Scenes")
+@export var CardScene : PackedScene
 @export_group("UI Pieces")
 #@export var ItemIcon : TextureRect
 @export var ItemName : Label
@@ -14,7 +16,8 @@ class_name ItemDescriptor
 @export var TransferButton : Button
 @export var UpgradeButton : Button
 @export var UpgradeLabel : RichTextLabel
-
+@export var CardSection : Control
+@export var CardPlecement : Control
 #signal ItemUsed(Box : Inventory_Box, Amm : int)
 signal ItemUpgraded(Box : Inventory_Box)
 signal ItemDropped(Box : Inventory_Box)
@@ -71,7 +74,14 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 		TransferButton.visible = true
 		ShipPartActions.visible = false
 		UpgradeLabel.visible = false
-		
+	
+	if (It.CardProviding.size() > 0):
+		for g in It.CardProviding:
+			var card = CardScene.instantiate() as Card
+			card.SetCardStats(g, [])
+			CardPlecement.add_child(card)
+	else:
+		CardSection.visible = false
 #func _on_use_pressed() -> void:
 	#PopUpManager.GetInstance().DoConfirm("Are you sure you want to use this item ?", "Use", ConfirmUse)
 

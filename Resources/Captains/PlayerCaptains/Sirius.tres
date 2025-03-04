@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=19 format=3 uid="uid://cga5buofwr6yr"]
+[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://cga5buofwr6yr"]
 
 [ext_resource type="Texture2D" uid="uid://dlebd41j7q7s1" path="res://Assets/CaptainPortraits/Captain10.png" id="1_2qy3x"]
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_ot5w6"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="3_5m53b"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_43sb5"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="3_alabf"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_kc55u"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="4_2ffin"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="6_atj7q"]
@@ -87,3 +88,4 @@ StartingItems = Array[ExtResource("3_43sb5")]([ExtResource("4_2ffin"), ExtResour
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 55000
+Cards = Array[ExtResource("3_alabf")]([])

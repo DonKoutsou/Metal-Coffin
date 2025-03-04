@@ -156,7 +156,7 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	GetMap().GetScreenUi().ToggleControllCover(true)
 	GetMap().GetScreenUi().ToggleFullScreen(true)
-
+	UISoundMan.GetInstance().Refresh()
 	
 func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	var AllUnits : Array[MapShip]
@@ -198,15 +198,16 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo :
 		var Itm = It as Item
 		for g in Contents[It]:
 			#if item doesent provide a card then it def didnt get used
-			if (Itm.CardProviding != null):
+			if (Itm.CardProviding.size() > 0):
+				for c in Itm.CardProviding:
 				#if it did remove it from dictionary and leave ininside inventory
-				if (Cards.has(Itm.CardProviding)):
-					Cards[Itm.CardProviding] -= 1
-					if (Cards[Itm.CardProviding] == 0):
-						Cards.erase(Itm.CardProviding)
+					if (Cards.has(c)):
+						Cards[c] -= 1
+						if (Cards[c] == 0):
+							Cards.erase(c)
 				#if it was used and we cant find it in the dictionary then remove it from inventory
-				else:
-					CharInv.RemoveItem(Itm)
+					else:
+						CharInv.RemoveItem(Itm)
 			
 			if (Itm.CardOptionProviding != null):
 				#if it did remove it from dictionary and leave ininside inventory

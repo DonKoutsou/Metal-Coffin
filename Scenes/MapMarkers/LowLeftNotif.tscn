@@ -27,6 +27,7 @@ use_parent_material = true
 anchors_preset = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
+self_modulate = Color(1, 1, 1, 0)
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8

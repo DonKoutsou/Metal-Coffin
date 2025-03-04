@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=19 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -16,6 +16,7 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/InScreenUI/CustomConfirm.tscn" id="11_nk6oj"]
 [ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/InScreenUI/FadeNotif.tscn" id="12_1jh8x"]
+[ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/command_line.tscn" id="17_aessx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
@@ -199,6 +200,13 @@ script = ExtResource("9_jvf02")
 CustomPop = ExtResource("10_e626m")
 CustomConfirm = ExtResource("11_nk6oj")
 FadNot = ExtResource("12_1jh8x")
+
+[node name="CommandLine" parent="Control3" instance=ExtResource("17_aessx")]
+layout_mode = 1
+offset_left = 222.0
+offset_top = -157.0
+offset_right = -222.0
+offset_bottom = -98.0
 
 [node name="Screen" type="ColorRect" parent="Control3"]
 process_mode = 3

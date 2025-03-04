@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=14 format=3 uid="uid://cvk1mvgokhtus"]
+[gd_resource type="Resource" script_class="Captain" load_steps=15 format=3 uid="uid://cvk1mvgokhtus"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_vh11m"]
 [ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_ag261"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="3_66sfh"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_lxbyk"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="3_nfki2"]
 [ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="4_u3xj4"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
@@ -85,3 +86,4 @@ StartingItems = Array[ExtResource("3_lxbyk")]([])
 CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 80000
+Cards = Array[ExtResource("3_nfki2")]([])

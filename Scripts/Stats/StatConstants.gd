@@ -15,6 +15,12 @@ const StatMaxValues : Dictionary = {
 	STATS.MISSILE_SPACE : 20
 }
 
+static func StringToEnum(Stat : String) -> STATS:
+	for g in STATS.keys():
+		if (g.to_lower() == Stat):
+			return STATS[g]
+	return -1
+	
 static func GetStatMaxValue(Stat : STATS) -> int:
 	return StatMaxValues[Stat]
 

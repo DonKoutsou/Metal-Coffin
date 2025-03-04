@@ -73,6 +73,9 @@ func _on_land_button_pressed() -> void:
 	if (ControlledShip.Altitude == 0):
 		OnShipLanded(ControlledShip)
 		return
+	if (ControlledShip.GetShipSpeed() > 0):
+		PopUpManager.GetInstance().DoFadeNotif("Ship cant land while moving")
+		return
 	ControlledShip.StartLanding()
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
 	ControlledShip.connect("LandingEnded", OnShipLanded)

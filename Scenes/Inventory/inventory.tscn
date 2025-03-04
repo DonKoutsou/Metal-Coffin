@@ -73,7 +73,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 1
 
-[node name="Inventory" type="Control" node_paths=PackedStringArray("CharStatPanel", "CharacterPlace", "DescriptorPlace", "ShipStats")]
+[node name="Inventory" type="Control" node_paths=PackedStringArray("CharStatPanel", "CharacterPlace", "DescriptorPlace", "ShipStats", "InvScrol")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,10 +86,11 @@ CharInvScene = ExtResource("3_5gkpo")
 ItemDescriptorScene = ExtResource("4_8j1nc")
 ItemTransferScene = ExtResource("5_pqw7i")
 ItemNotifScene = ExtResource("6_q7t14")
-CharStatPanel = NodePath("HBoxContainer/VBoxContainer/Panel")
-CharacterPlace = NodePath("HBoxContainer/ScrollContainer/VBoxContainer")
-DescriptorPlace = NodePath("HBoxContainer/VBoxContainer")
-ShipStats = NodePath("HBoxContainer/VBoxContainer/Panel/InventoryShipStats")
+CharStatPanel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/Panel")
+CharacterPlace = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer")
+DescriptorPlace = NodePath("VBoxContainer/HBoxContainer/VBoxContainer")
+ShipStats = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats")
+InvScrol = NodePath("VBoxContainer/HBoxContainer/ScrollContainer")
 MissileDockEventH = ExtResource("7_ffxnd")
 DroneDockEventH = ExtResource("8_0fcos")
 
@@ -101,50 +102,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ItemInventory" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Item Inventory"
+
+[node name="CardInventory" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Card Inventory"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
-[node name="Panel2" type="Panel" parent="HBoxContainer"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4fam5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Panel" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_xdylh")
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/Panel"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
 clip_contents = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")
 
-[node name="CaptainIcon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Panel/PanelContainer"]
+[node name="CaptainIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel/PanelContainer"]
 self_modulate = Color(1, 1, 1, 0.414)
 show_behind_parent = true
 layout_mode = 2
@@ -153,7 +168,7 @@ texture = SubResource("CompressedTexture2D_qp5bg")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="InventoryShipStats" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Panel" node_paths=PackedStringArray("CharPortrait", "ShipIcon")]
+[node name="InventoryShipStats" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel" node_paths=PackedStringArray("CharPortrait", "ShipIcon")]
 layout_mode = 2
 script = ExtResource("10_jwvgm")
 CharPortrait = NodePath("../PanelContainer/CaptainIcon")
@@ -161,11 +176,11 @@ ShipStatScene = ExtResource("11_lweht")
 StatsShown = Array[int]([0, 1, 6, 4, 5, 7, 3, 2])
 ShipIcon = NodePath("Legend/CaptainIcon2")
 
-[node name="Legend" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats"]
+[node name="Legend" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats"]
 layout_mode = 2
 alignment = 1
 
-[node name="CaptainIcon2" type="TextureRect" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+[node name="CaptainIcon2" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 show_behind_parent = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -175,29 +190,65 @@ texture = ExtResource("12_gc8sd")
 expand_mode = 1
 flip_v = true
 
-[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Base Stats"
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Ship Part Buffs"
 
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel/InventoryShipStats/Legend"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
 
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "offensive cards"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true
+
+[node name="OffensiveCards" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "deffensive cards"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true
+
+[node name="DeffensiveCards" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_jjw7x")
 
-[connection signal="gui_input" from="HBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]

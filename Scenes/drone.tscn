@@ -30,7 +30,7 @@ radius = 150.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c58ob"]
 light_mode = 1
 
-[node name="Drone" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["Ships", "ZoomAffected"]]
+[node name="Drone" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["PlayerShips", "Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_p3smt")
 script = ExtResource("1_vfr1e")
 RadarShape = NodePath("Radar")

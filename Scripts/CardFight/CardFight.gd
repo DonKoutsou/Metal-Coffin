@@ -34,6 +34,7 @@ class_name Card_Fight
 @export var PlayerShipVisualPlecement : Control
 @export var TargetSelect : CardFightTargetSelection
 
+
 #Stats kept to show at the end screen
 var DamageDone : float = 0
 var DamageGot : float = 0
@@ -285,6 +286,14 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 					if (ShipCards[Action] == 0):
 						ShipCards.erase(Action)
 				ActionsToBurn.append(Action)
+			else: if Action.CardName == "Shield Overcharge":
+				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
+				AnimationPlecement.add_child(anim)
+				AnimationPlecement.move_child(anim, 1)
+				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
+				await(anim.AnimationFinished)
+				ShieldShip(Ship, 15)
+				ActionsToBurn.append(Action)
 				
 	return ActionsToBurn
 
@@ -303,15 +312,20 @@ func DoFireDamage() -> void:
 
 # RETURN TRUE IF FIGHT IS OVER
 func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -> bool:
-	Ship.Hull -= Amm
+	var Dmg = Amm
+	if Ship.Shield > 0:
+		var origshield = Ship.Shield
+		Ship.Shield = max(0,origshield - Amm)
+		Dmg -= origshield - Ship.Shield
+	Ship.Hull -= Dmg
 
 	if (CauseFire and TrySetFire()):
 			ToggleFireToShip(Ship, true)
 	
 	if (IsShipFriendly(Ship)):
-		DamageGot += Amm
+		DamageGot += Dmg
 	else:
-		DamageDone += Amm
+		DamageDone += Dmg
 	
 	if (Ship.Hull <= 0):
 		if (ShipDestroyed(Ship)):

@@ -10,9 +10,18 @@ var Shake = false
 var GoingDown = false
 var shakestr = 1.5
 
+var ShakePos
+func PauseShake(t : bool) -> void:
+	if t and $Shake.playing:
+		ShakePos = $Shake.get_playback_position()
+		$Shake.stop() 
+	else: if !t and !$Shake.playing:
+		$Shake.play()
+		$Shake.seek(ShakePos) 
+
 func _ready() -> void:
 	$Shake.play()
-	$Shake.stream_paused = true
+	PauseShake(true)
 
 func EnableShake(amm : float):
 	for g in Cabled:
@@ -20,7 +29,7 @@ func EnableShake(amm : float):
 	Shake = true
 	GoingDown= false
 	#$AnimationPlayer.play("Damage")
-	$Shake.stream_paused = false
+	PauseShake(false)
 	shakestr = max(amm, shakestr)
 	GoDownValue = max(amm, GoDownValue)
 func EnableMissileShake() -> void:
@@ -30,7 +39,7 @@ func EnableMissileShake() -> void:
 	if (!$AnimationPlayer.is_playing()):
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("Alarm")
-	$Shake.stream_paused = false
+	PauseShake(false)
 	shakestr = max(1.5, shakestr)
 	GoDownValue = 1
 	GoingDown = true
@@ -41,7 +50,7 @@ func EnableDamageShake() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")
 	$Boom.play()
-	$Shake.stream_paused = false
+	PauseShake(false)
 	shakestr = max(1.5, shakestr)
 	GoDownValue = 2
 	GoingDown = true
@@ -54,13 +63,13 @@ func _physics_process(delta: float) -> void:
 		shakestr = 1.5 * GoingDownC.sample(GoDownValue / 2)
 		
 	if Shake:
-		$Shake.volume_db =  min(10, 20 * GoingDownC.sample(GoDownValue / 2) - 10)
+		$Shake.volume_db =  min(5, 20 * GoingDownC.sample(GoDownValue / 2) - 10)
 		if (shakestr <= 0):
 			#$AnimationPlayer.stop()
 			Shake = false
 			GoingDown = false
 			#shakestr = 1.5
-			$Shake.stream_paused = true
+			PauseShake(true)
 		var of = RandomOffset()
 		offset = of
 func RandomOffset()-> Vector2:

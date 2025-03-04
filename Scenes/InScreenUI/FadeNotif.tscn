@@ -7,10 +7,10 @@
 
 [node name="FadeNotif" type="PanelContainer" groups=["FadeNotif", "ItemNotification"]]
 process_mode = 3
-offset_left = 18.0
-offset_top = 96.0
-offset_right = 219.0
-offset_bottom = 117.0
+offset_left = 24.0
+offset_top = 23.0
+offset_right = 225.0
+offset_bottom = 44.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2

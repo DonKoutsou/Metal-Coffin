@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://bwwby1vknkefj"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://bwwby1vknkefj"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_cbem7"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="1_vievn"]
 [ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_hfrci"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_lu011"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_83sa7"]
@@ -33,3 +34,4 @@ ItemIconSmol = ExtResource("2_hfrci")
 ItemName = "FT-2000"
 ItemDesc = "A high-capacity fuel tank built for extended missions. Made with proprietary composite materials, it maintains durability even under the most challenging conditions"
 MaxStackCount = 1
+CardProviding = Array[ExtResource("1_vievn")]([])

@@ -142,7 +142,7 @@ func _on_dissarm_drone_button_2_pressed() -> void:
 	$Control/Control/Dissarm.ToggleDissable(true)
 	$Control/Control/Launch.ToggleDissable(true)
 	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
-	
+	$Control/Control/Arm._on_toggled(false)
 func _on_toggle_drone_tab_pressed() -> void:
 	if ($AnimationPlayer.is_playing()):
 		await $AnimationPlayer.animation_finished

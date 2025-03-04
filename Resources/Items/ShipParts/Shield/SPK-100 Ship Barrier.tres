@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://dlkv8clb3piuw"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://dlkv8clb3piuw"]
 
 [ext_resource type="Texture2D" uid="uid://ehsfmj5xbkb3" path="res://Assets/Items/bubble-field.png" id="1_bl8l4"]
+[ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="1_mnixx"]
 [ext_resource type="Texture2D" uid="uid://dtk5sb7w7lkqw" path="res://Assets/Items/bubble-field_smol.png" id="2_2sa64"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="2_7eit2"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_c5tjm"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_p5xd3"]
 
@@ -24,3 +26,4 @@ ItemIconSmol = ExtResource("2_2sa64")
 ItemName = "SPK-100 Ship Barrier"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
+CardProviding = Array[ExtResource("2_7eit2")]([ExtResource("1_mnixx")])

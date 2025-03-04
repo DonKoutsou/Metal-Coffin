@@ -12,6 +12,8 @@ signal GUI_Input(event)
 static var Instance :Ingame_UIManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$Control3/CommandLine.visible = false
+	
 	Instance = self
 	EventHandler.connect("PausePressed", Pause)
 	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
@@ -69,9 +71,14 @@ func _on_exit_pressed() -> void:
 	World.GetInstance().WRLD_OnGameEnded.emit()
 func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().WRLD_OnGameEnded.emit()
+	
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Pause")):
 		Pause()
+	if (event.is_action_pressed("CommandLine")):
+		$Control3/CommandLine.visible = !$Control3/CommandLine.visible
+		$Control3/CommandLine.call_deferred("Focus")
+		
 		
 func _on_control_3_gui_input(event: InputEvent) -> void:
 	GUI_Input.emit(event)

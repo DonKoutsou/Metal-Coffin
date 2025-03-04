@@ -12,6 +12,7 @@ class_name InventoryManager
 @export var CharacterPlace : Control
 @export var DescriptorPlace : Control
 @export var ShipStats : InventoryShipStats
+@export var InvScrol : ScrollContainer
 @export_group("Event Handlers")
 @export var MissileDockEventH : MissileDockEventHandler
 @export var DroneDockEventH : DroneDockEventHandler
@@ -37,6 +38,18 @@ func GetCharacterInventory(Cha : Captain) -> CharacterInventory:
 		return _CharacterInventories[Cha]
 	return null
 
+func GetCharacterInventoryByName(CharName : String) -> CharacterInventory:
+	for g in _CharacterInventories:
+		if (g.CaptainName.to_lower() == CharName.to_lower()):
+			return _CharacterInventories[g]
+	return null
+
+func GetCharacterByName(CharName : String) -> Captain:
+	for g in _CharacterInventories:
+		if (g.CaptainName.to_lower() == CharName.to_lower()):
+			return g
+	return null
+	
 func OnMissileLaunched(Mis : MissileItem, Target : Captain, _User : Captain):
 	var CharacterInv = _CharacterInventories[Target] as CharacterInventory
 	CharacterInv.RemoveItem(Mis)
@@ -316,4 +329,4 @@ func ToggleInventory() -> void:
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		$HBoxContainer/ScrollContainer.scroll_vertical -= event.relative.y
+		InvScrol.scroll_vertical -= event.relative.y

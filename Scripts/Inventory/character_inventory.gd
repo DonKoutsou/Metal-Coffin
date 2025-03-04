@@ -82,8 +82,9 @@ func AddItem(It : Item) -> void:
 			g.UpdateAmm(1)
 			_InventoryContents[It] += 1
 			OnItemAdded.emit(It)
-			if (It.CardProviding != null):
-				_CardInventory[It.CardProviding] += 1
+			if (It.CardProviding.size() > 0):
+				for c in It.CardProviding:
+					_CardInventory[c] += 1
 			if (It.CardOptionProviding != null):
 				_CardAmmo[It.CardOptionProviding] += 1
 			#print("Added 1 {0}".format([It.ItemName]))
@@ -95,10 +96,14 @@ func AddItem(It : Item) -> void:
 		Empty.RegisterItem(It)
 		Empty.UpdateAmm(1)
 		_InventoryContents[It] = 1
-		if (It.CardProviding != null):
-			_CardInventory[It.CardProviding] = 1
+		
+		if (It.CardProviding.size() > 0):
+			for c in It.CardProviding:
+				_CardInventory[c] = 1
+				
 		if (It.CardOptionProviding != null):
 			_CardAmmo[It.CardOptionProviding] = 1
+			
 		if (It is ShipPart):
 			OnShipPartAdded.emit(It)
 		OnItemAdded.emit(It)
@@ -166,7 +171,7 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		#PopUpManager.GetInstance().DoFadeNotif("Cant upgrade ship in current port.")
 		#return
 	ItemUpgrade.emit(Box, self)
-	
+
 
 func TransferItem(Box : Inventory_Box) -> void:
 	ItemTransf.emit(Box, self)
@@ -199,6 +204,22 @@ func ItemUpgradeFinished() -> void:
 		Part.UpgradeVersion.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
 	AddItem(Part.UpgradeVersion)
 	_ItemBeingUpgraded = null
+
+func ForceUpgradeItem(Box : Inventory_Box) -> bool:
+	var Part = Box.GetContainedItem() as ShipPart
+	
+	if (Part == null):
+		return false
+	
+	if (Part.UpgradeVersion == null):
+		return false
+	
+	RemoveItemFromBox(Box)
+	for g in Part.Upgrades.size():
+		Part.UpgradeVersion.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
+	AddItem(Part.UpgradeVersion)
+	
+	return true
 
 func GetUpgradeTimeLeft() -> float:
 	return _UpgradeTime

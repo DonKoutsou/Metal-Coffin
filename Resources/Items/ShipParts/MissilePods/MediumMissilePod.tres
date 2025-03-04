@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://boh6gvavu4h2c"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://boh6gvavu4h2c"]
 
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="1_5pt53"]
 [ext_resource type="Texture2D" uid="uid://3p3g5f3bmg8g" path="res://Assets/Items/missile-pod.png" id="1_laxio"]
 [ext_resource type="Texture2D" uid="uid://dp1dr20b5s1we" path="res://Assets/Items/missile-pod_smol.png" id="2_fod6m"]
 [ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/ShipParts/MissilePods/LargeMissilePod.tres" id="5_5gmkn"]
@@ -27,3 +28,4 @@ ItemIconSmol = ExtResource("2_fod6m")
 ItemName = "MP-6 \"Cyclone\""
 ItemDesc = "Cyclone enhances missile deployment capabilities, featuring improved targeting systems and increased payload capacity. Compatible with intermediate missile types, 'Cyclone' delivers effective firepower for tactical engagements, ensuring versatility and increased lethality on the battlefield."
 MaxStackCount = 1
+CardProviding = Array[ExtResource("1_5pt53")]([])

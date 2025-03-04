@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://cwoay1furrmi7"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://cwoay1furrmi7"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_02upx"]
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="1_5kv6q"]
 [ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_rxeca"]
 [ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="3_o7sn3"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_nw4kc"]
@@ -27,3 +28,4 @@ ItemIconSmol = ExtResource("2_rxeca")
 ItemName = "SPT-100"
 ItemDesc = "A standard fuel containment solution with dual baffled chambers for stability. Constructed from reinforced materials for reliability in routine operations."
 MaxStackCount = 1
+CardProviding = Array[ExtResource("1_5kv6q")]([])

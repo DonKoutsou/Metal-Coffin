@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://b30l72bpalbfy"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://b30l72bpalbfy"]
 
+[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="1_ap6kf"]
 [ext_resource type="Texture2D" uid="uid://3p3g5f3bmg8g" path="res://Assets/Items/missile-pod.png" id="1_e3orr"]
 [ext_resource type="Texture2D" uid="uid://dp1dr20b5s1we" path="res://Assets/Items/missile-pod_smol.png" id="2_gup6i"]
 [ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_g1ywd"]
@@ -25,3 +26,4 @@ ItemIconSmol = ExtResource("2_gup6i")
 ItemName = "MP-9 \"Maelstrom\""
 ItemDesc = "Maelstrom represents the pinnacle of missile pod technology, offering advanced targeting algorithms and maximum payload flexibility. Capable of deploying a wide array of specialized missiles, 'Maelstrom' delivers precise strikes against both single and multiple targets, making it indispensable for advanced combat operations."
 MaxStackCount = 1
+CardProviding = Array[ExtResource("1_ap6kf")]([])

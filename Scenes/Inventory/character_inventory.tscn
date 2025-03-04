@@ -16,27 +16,43 @@ theme = ExtResource("1_7awpj")
 script = ExtResource("1_i6whi")
 InventoryBoxScene = ExtResource("2_e1s57")
 InventoryBoxParent = NodePath("GridContainer")
-CaptainNameLabel = NodePath("HBoxContainer/Label")
+CaptainNameLabel = NodePath("VBoxContainer/HBoxContainer2/Label")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
 text = "Char name"
-horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="HBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Preview Stats"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Items"
+
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cards"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 2
 columns = 3
 
-[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
