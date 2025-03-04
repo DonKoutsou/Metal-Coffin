@@ -141,30 +141,30 @@ func DrawRuller() -> void:
 		return
 	var shippos = ControlledShip.global_position
 	var LineW = 1/CamZoom
-
-
+	var vizrange = ControlledShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+	if(!ControlledShip.RadarWorking):
+		vizrange = 350
+	
+	
 	for g in 3:
-		draw_circle(shippos, 350 * (g + 1), Color(100, 100, 100), false, LineW, true)
-
-
-
+		draw_circle(shippos, vizrange / 3 * (g + 1), Color(100, 100, 100), false, LineW, true)
 
 	var Next = rotation_degrees
 	var Num = 90
 	for g in 12:
-		draw_line(Vector2(350,0).rotated(deg_to_rad(Next)) + shippos, Vector2(1050,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100), LineW, true)
+		draw_line(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + shippos, Vector2(vizrange,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100), LineW, true)
 
 
 
 
 
-		var Text = var_to_str(Num).replace(".0", "")
-		var TextSize = (2/CamZoom)*6
-		var Textpos = Vector2(1100, 0).rotated(deg_to_rad(Next))
-		Textpos += Vector2.ZERO.direction_to(Textpos) * TextSize
-		Textpos.x -= Text.length() * (TextSize / 4)
-		Textpos.y += TextSize / 4
-		draw_string(ThemeDB.fallback_font, Textpos + shippos, Text, HORIZONTAL_ALIGNMENT_LEFT, -1, TextSize)
+		#var Text = var_to_str(Num).replace(".0", "")
+		#var TextSize = (2/CamZoom)*6
+		#var Textpos = Vector2(vizrange + 50, 0).rotated(deg_to_rad(Next))
+		#Textpos += Vector2.ZERO.direction_to(Textpos) * TextSize
+		#Textpos.x -= Text.length() * (TextSize / 4)
+		#Textpos.y += TextSize / 4
+		#draw_string(ThemeDB.fallback_font, Textpos + shippos, Text, HORIZONTAL_ALIGNMENT_LEFT, -1, TextSize)
 
 		Next -= 30
 		Num -= 30

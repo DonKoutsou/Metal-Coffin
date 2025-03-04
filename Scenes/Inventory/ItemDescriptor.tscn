@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_qi0qj"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_40o7a"]
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "UsableItemsActions", "ShipPartActions", "RepairButton", "UseButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "UsableItemsActions", "RepairButton", "UseButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement", "DescScroll", "CardScroll") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,37 +15,73 @@ mouse_filter = 2
 theme = ExtResource("1_qi0qj")
 script = ExtResource("1_2v1h2")
 CardScene = ExtResource("3_40o7a")
-ItemName = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ItemName")
-ItemDesc = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/ItemDesc")
-UsableItemsActions = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions")
-ShipPartActions = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions")
-RepairButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Repair")
-UseButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions/Use")
-TransferButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/Transfer")
-UpgradeButton = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade")
-UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/Label")
-CardSection = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/CardsSection")
-CardPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/CardsSection/CardPlecement")
+ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")
+ItemDesc = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
+UsableItemsActions = NodePath("VBoxContainer/HBoxContainer/UsableItemsActions")
+RepairButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair")
+UseButton = NodePath("VBoxContainer/HBoxContainer/UsableItemsActions/Use")
+TransferButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
+UpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
+UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
+CardSection = NodePath("VBoxContainer/HBoxContainer/PanelContainer")
+CardPlecement = NodePath("VBoxContainer/HBoxContainer/PanelContainer/CardsSection/ScrollContainer/CardPlecement")
+DescScroll = NodePath("VBoxContainer")
+CardScroll = NodePath("VBoxContainer/HBoxContainer/PanelContainer/CardsSection/ScrollContainer")
 
 [node name="VBoxContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/separation = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ShipPartActions" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(265, 80)
+[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Upgrade"
 
-[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Repair"
+
+[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Transfer"
+
+[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Drop"
+
+[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 28
 text = "Item"
@@ -53,10 +89,35 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(181.765, 0)
+[node name="UsableItemsActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "-"
+
+[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Use :1x"
+
+[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "+"
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/outline_size = 10
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
@@ -64,98 +125,46 @@ text = "[color=#c19200]Upgrade Time[/color] : 4x
 fit_content = true
 autowrap_mode = 2
 
-[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="ItemDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 24
-text = "Upgrade"
-
-[node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "Repair"
-
-[node name="UsableItemsActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="UseLess" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "-"
-
-[node name="Use" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "Use :1x"
-
-[node name="UseMore" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/UsableItemsActions" groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "+"
-
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="ItemDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
+size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/outline_size = 10
 bbcode_enabled = true
 text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
 fit_content = true
 autowrap_mode = 2
 
-[node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/CardsSection"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/CardsSection"]
 layout_mode = 2
 text = "Providing Cards"
+horizontal_alignment = 1
 
-[node name="CardPlecement" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/CardsSection"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/CardsSection"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 
-[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2" groups=["DigitalButtons"]]
+[node name="CardPlecement" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/CardsSection/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
-theme_override_font_sizes/font_size = 24
-text = "Transfer"
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 24
-text = "Drop"
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Transfer" to="." method="_on_transfer_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Drop" to="." method="_on_drop_pressed"]
+[connection signal="gui_input" from="VBoxContainer" to="." method="OnDescScrollInput"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Drop" to="." method="_on_drop_pressed"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/PanelContainer/CardsSection/ScrollContainer" to="." method="CardScrolInput"]

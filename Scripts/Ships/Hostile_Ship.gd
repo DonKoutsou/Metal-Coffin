@@ -46,7 +46,7 @@ func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 
-	#MapPointerManager.GetInstance().AddShip(self, false)
+	MapPointerManager.GetInstance().AddShip(self, false)
 
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
@@ -87,7 +87,13 @@ func _physics_process(delta: float) -> void:
 	if (UseDefaultBehavior):
 		if (Paused):
 			return
-
+		
+		if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):
+			VisualContactCountdown -= 0.02 * SimulationSpeed
+			if (VisualContactCountdown < 0):
+				for c in GarrissonVisualContacts:
+					OnPlayerVisualContact.emit(c, self)
+		
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL)):
 			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.02 * SimulationSpeed)
 		
@@ -300,10 +306,14 @@ func OnShipSeen(SeenBy : Node2D):
 	VisibleBy.append(SeenBy)
 	if (VisibleBy.size() > 1):
 		return
+	
 	MapPointerManager.GetInstance().AddShip(self, false)
 	#SimulationManager.GetInstance().TogglePause(true)
 	ShipCamera.GetInstance().FrameCamToPos(global_position)
-	
+
+func wait(seconds : float) -> Signal:
+	return get_tree().create_timer(seconds).timeout
+
 func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
@@ -321,13 +331,38 @@ func BodyLeftElint(area: Area2D) -> void:
 	ElintContacts.erase(area.get_parent())
 	ElintContact.emit(area.get_parent(), false)
 
+
+
 func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		OnPlayerVisualContact.emit(Body.get_parent(), self)
+		if (!Patrol):
+			GarissonVisualContact(Body.get_parent())
+		else:
+			OnPlayerVisualContact.emit(Body.get_parent(), self)
+
+var GarrissonVisualContacts : Array[MapShip]
+var VisualContactCountdown = 10
+
+func GarissonVisualContact(Ship : MapShip) -> void:
+	if (VisualContactCountdown < 0):
+		OnPlayerVisualContact.emit(Ship, self)
+		
+	GarrissonVisualContacts.append(Ship)
+
+func GarissonLostVisualContact(Ship : MapShip) -> void:
+	if (VisualContactCountdown <= 0):
+		OnPlayerVisualLost.emit(Ship, self)
+
+	GarrissonVisualContacts.erase(Ship)
+	if (GarrissonVisualContacts.size() == 0):
+		VisualContactCountdown = 10
 
 func BodyLeftRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		OnPlayerVisualLost.emit(Body.get_parent())
+		if (!Patrol):
+			GarissonLostVisualContact(Body.get_parent())
+		else:
+			OnPlayerVisualLost.emit(Body.get_parent())
 
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Body.get_parent() is MapSpot):

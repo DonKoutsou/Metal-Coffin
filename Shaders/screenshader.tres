@@ -4,7 +4,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qsdd3"]
 noise_type = 4
-frequency = 1.0
+frequency = 0.417
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w8jme"]
 generate_mipmaps = false
@@ -17,11 +17,11 @@ shader_parameter/curvature = 1.02
 shader_parameter/skip = 0.01
 shader_parameter/image_flicker = 0.1
 shader_parameter/vignette_flicker_speed = 0.01
-shader_parameter/vignette_strength = 0.5
+shader_parameter/vignette_strength = 0.61
 shader_parameter/small_scanlines_speed = 1.0
 shader_parameter/small_scanlines_proximity = 2.0
-shader_parameter/small_scanlines_opacity = 0.64
-shader_parameter/scanlines_opacity = 0.06
+shader_parameter/small_scanlines_opacity = 0.98
+shader_parameter/scanlines_opacity = 0.24
 shader_parameter/scanlines_speed = 1.0
 shader_parameter/scanline_thickness = 0.58
 shader_parameter/scanlines_spacing = 0.47

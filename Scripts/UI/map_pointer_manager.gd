@@ -162,6 +162,10 @@ func _physics_process(delta: float) -> void:
 		
 		if (ship is HostileShip):
 			Marker.ToggleShipDetails(!ship.Docked)
+			Marker.ToggleVisualContactProgress(ship.VisualContactCountdown < 10)
+			if (ship.VisualContactCountdown < 10):
+				
+				Marker.UpdateVisualContactProgress(ship.VisualContactCountdown)
 			if (EnemyDebug):
 				Marker.global_position = ship.global_position
 				Marker.UpdateSpeed(ship.GetShipSpeed())

@@ -138,11 +138,11 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	Box.UpdateAmm(-1)
 	#print("Removed 1 {0}".format([It.ItemName]))
 	_InventoryContents[It] -= 1
-	if (It.CardProviding != null):
-		var c = It.CardProviding
-		_CardInventory[c] -= 1
-		if (_CardInventory[c] == 0):
-			_CardInventory.erase(c)
+	if (It.CardProviding.size > 0):
+		for g in It.CardProviding:
+			_CardInventory[g] -= 1
+			if (_CardInventory[g] == 0):
+				_CardInventory.erase(g)
 	if (It.CardOptionProviding != null):
 		_CardAmmo[It.CardOptionProviding] = 1
 		if (_CardAmmo[It.CardOptionProviding] == 0):

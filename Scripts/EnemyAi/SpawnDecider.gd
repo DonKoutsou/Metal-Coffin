@@ -7,7 +7,7 @@ class_name SpawnDecider
 
 @export var MerchList : Array[MerchandiseInfo]
 
-const LowestPrice : int = 30
+const LowestPrice : int = 50
 const MerchLowest : int = 2
 var sorted_captain_list
 var sorted_ground_captain_list
@@ -40,13 +40,13 @@ func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 			points -= m.Cost
 	return available_merch
 
-func GetSpawnsForLocation(YPos : float, Patrol : bool) -> Array[Captain]:
+func GetSpawnsForLocation(YPos : float, Patrol : bool, stage : Happening.GameStage) -> Array[Captain]:
 	var time = Time.get_ticks_msec()
 	
 	var Fleet : Array[Captain] = []
 	var Points = GetPointsForPosition(abs(YPos))
 
-	var CptnInfo = generate_fleet(Points, Patrol)
+	var CptnInfo = generate_fleet(Points, Patrol, stage)
 	for g in CptnInfo:
 		var cpt = Captain.new()
 		cpt.call_deferred("CopyStats", g.Cpt)
@@ -61,7 +61,7 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool) -> Array[Captain]:
 func GetPointsForPosition(YPos : float) -> int:
 	return roundi(max(50, YPos / 100))
 
-func generate_fleet(points: int, Patrol : bool) -> Array[CaptainSpawnInfo]:
+func generate_fleet(points: int, Patrol : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:
 	var fleet : Array[CaptainSpawnInfo] = []
 	var available_ships: Array = sorted_captain_list.duplicate()
 	if (Patrol):
@@ -82,7 +82,11 @@ func generate_fleet(points: int, Patrol : bool) -> Array[CaptainSpawnInfo]:
 		# Consider each ship for inclusion
 		for ship in available_ships:
 			var ship_info = ship as CaptainSpawnInfo
-
+			
+			if (ship_info.DontGenerateBefore > stage):
+				continue
+			if (fleet.size() == 0 and !ship_info.SpawnAlone):
+				continue
 			# Calculate how many we can afford and consider its strategic value
 			var max_ships = min(points / ship_info.Cost, ship_info.MaxAmmInFleet - fleet.count(ship_info))
 			if max_ships > 0:

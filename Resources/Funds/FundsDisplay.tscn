@@ -50,6 +50,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.80768, 0.999816, 0.788471, 1)
 theme_override_colors/font_outline_color = Color(0.483, 100, 0.381, 1)
 theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("7_xbk7s")
 theme_override_font_sizes/font_size = 18
 text = "Funds

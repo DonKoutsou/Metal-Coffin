@@ -33,6 +33,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 	$HBoxContainer.add_child(Ic)
 
 	AtC = CardScene.instantiate() as Card
+	AtC.Dissable()
 	var Opts : Array[CardOption] = []
 	AtC.SetCardStats(AtackCard, Opts)
 	$HBoxContainer.add_child(AtC)
@@ -41,6 +42,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 	
 	if (HasDef):
 		DefC = CardScene.instantiate() as Card
+		DefC.Dissable()
 		var Opts2 : Array[CardOption] = []
 		DefC.SetCardStats(AtackCard.GetCounter(), Opts2)
 		$HBoxContainer.add_child(DefC)
@@ -97,6 +99,7 @@ func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip 
 	$HBoxContainer.add_child(Ic)
 	var Opts : Array[CardOption] = []
 	DefC = CardScene.instantiate() as Card
+	DefC.Dissable()
 	DefC.SetCardStats(DefCard, Opts)
 	$HBoxContainer.add_child(DefC)
 	DefC.size_flags_horizontal = Control.SIZE_EXPAND

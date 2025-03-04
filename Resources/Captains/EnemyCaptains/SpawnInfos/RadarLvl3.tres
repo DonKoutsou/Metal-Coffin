@@ -8,3 +8,5 @@ script = ExtResource("2_spk21")
 Cpt = ExtResource("1_gf10t")
 Cost = 90
 MaxAmmInFleet = 1
+DontGenerateBefore = 3
+SpawnAlone = false

@@ -13,6 +13,7 @@ class_name ShipMarker
 @export var HullLabel : Label
 @export var DetailPanel : Control
 @export var ShipIcon : TextureRect
+@export var VisualContactCountdown : ProgressBar
 @export_group("Resources")
 #@export var EnemyLocatedNotifScene : PackedScene
 
@@ -45,7 +46,7 @@ func _ready() -> void:
 	TimeSeenLabel.visible = false
 	FuelLabel.visible = false
 	HullLabel.visible = false
-	
+	VisualContactCountdown.visible = false
 	#set_physics_process(false)
 	
 func PlayHostileShipNotif(text : String) -> void:
@@ -203,3 +204,9 @@ func get_closest_point_on_rect(rect: Rect2, point: Vector2) -> Vector2:
 	var closest_x = clamp(point.x, rect.position.x, rect.position.x + rect.size.x)
 	var closest_y = clamp(point.y, rect.position.y, rect.position.y + rect.size.y)
 	return Vector2(closest_x, closest_y)
+
+func UpdateVisualContactProgress(val : float) -> void:
+	VisualContactCountdown.value = val
+
+func ToggleVisualContactProgress(t : bool) -> void:
+	VisualContactCountdown.visible = t

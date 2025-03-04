@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=14 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
 [ext_resource type="Script" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
@@ -13,7 +13,12 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tc2tu"]
 
-[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipNameLabel", "ShipSpeedLabel", "TimeSeenLabel", "ThreatLabel", "FuelLabel", "HullLabel", "DetailPanel", "ShipIcon")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_12u8d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6175k"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipNameLabel", "ShipSpeedLabel", "TimeSeenLabel", "ThreatLabel", "FuelLabel", "HullLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown")]
 z_index = 1
 use_parent_material = true
 layout_mode = 3
@@ -41,6 +46,7 @@ FuelLabel = NodePath("Control/PanelContainer/VBoxContainer/Fuel")
 HullLabel = NodePath("Control/PanelContainer/VBoxContainer/Hull")
 DetailPanel = NodePath("Control")
 ShipIcon = NodePath("Icon")
+VisualContactCountdown = NodePath("Control/VisualContactCountdown")
 EnemyLocatedSound = ExtResource("3_6yg5x")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
@@ -148,6 +154,26 @@ theme_override_font_sizes/font_size = 12
 text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
 uppercase = true
+
+[node name="VisualContactCountdown" type="ProgressBar" parent="Control"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = 16.0
+offset_right = 26.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_12u8d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6175k")
+max_value = 10.0
+value = 10.0
+show_percentage = false
 
 [node name="Icon" type="TextureRect" parent="." groups=["MapShipVizualiser"]]
 use_parent_material = true

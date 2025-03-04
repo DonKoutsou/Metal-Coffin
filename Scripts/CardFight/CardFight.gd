@@ -484,7 +484,7 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		
 	c.connect("OnCardPressed", RemoveCard)
 	SelectedCardPlecement.add_child(c)
-	
+	#c.Dissable()
 	
 	var ShipAction = CardFightAction.new()
 	ShipAction.Action = Action

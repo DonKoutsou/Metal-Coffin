@@ -55,6 +55,9 @@ func OnButtonPressed() -> void:
 	else:
 		OnCardPressed.emit(self, null)
 
+func Dissable() -> void:
+	$Button.disabled = true
+
 func OnOptionSelected(Option : CardOption) -> void:
 	#var but = get_viewport().gui_get_focus_owner() as Button
 	#Option = but.text

@@ -9,8 +9,6 @@ class_name ItemDescriptor
 @export var ItemName : Label
 @export var ItemDesc : RichTextLabel
 @export var UsableItemsActions : HBoxContainer
-#@export var UpgradeContainer : HBoxContainer
-@export var ShipPartActions : HBoxContainer
 @export var RepairButton : Button
 @export var UseButton : Button
 @export var TransferButton : Button
@@ -18,6 +16,8 @@ class_name ItemDescriptor
 @export var UpgradeLabel : RichTextLabel
 @export var CardSection : Control
 @export var CardPlecement : Control
+@export var DescScroll : ScrollContainer
+@export var CardScroll : ScrollContainer
 #signal ItemUsed(Box : Inventory_Box, Amm : int)
 signal ItemUpgraded(Box : Inventory_Box)
 signal ItemDropped(Box : Inventory_Box)
@@ -27,9 +27,15 @@ signal ItemTransf(Box : Inventory_Box)
 var DescribedContainer : Inventory_Box
 var UsingAmm : int = 1
 
-#func _ready() -> void:
-	#UISoundMan.GetInstance().Refresh()
-	
+func _ready() -> void:
+	call_deferred("PlayIntroAnim")
+	UISoundMan.GetInstance().Refresh()
+
+func PlayIntroAnim() -> void:
+	var tw = create_tween()
+	tw.tween_property(self, "size", Vector2(size.x, size.y), 0.5)
+	set_deferred("size", Vector2(size.x, 0))
+
 func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	set_physics_process(false)
 	DescribedContainer = Box
@@ -49,7 +55,8 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	if (It is ShipPart):
 		TransferButton.visible = false
 		UsableItemsActions.visible = false
-		ShipPartActions.visible = true
+		
+		#ShipPartActions.visible = true
 		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
 		#if (CanUpgrade):
 		UpgradeLabel.visible = true
@@ -72,12 +79,13 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 		
 	else :
 		TransferButton.visible = true
-		ShipPartActions.visible = false
+		UpgradeButton.visible = false
 		UpgradeLabel.visible = false
 	
 	if (It.CardProviding.size() > 0):
 		for g in It.CardProviding:
 			var card = CardScene.instantiate() as Card
+			card.Dissable()
 			card.SetCardStats(g, [])
 			CardPlecement.add_child(card)
 	else:
@@ -129,3 +137,12 @@ func _physics_process(_delta: float) -> void:
 	var inv = DescribedContainer.GetParentInventory()
 	var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
 	UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
+
+
+func CardScrolInput(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		CardScroll.scroll_horizontal -= event.relative.x
+
+func OnDescScrollInput(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		DescScroll.scroll_vertical -= event.relative.y
