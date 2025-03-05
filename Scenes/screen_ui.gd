@@ -22,17 +22,20 @@ func ToggleFullScreen(toggle : bool) -> void:
 	FullScreenToggleStarted.emit()
 	
 	var tw = create_tween()
-	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
+	tw.set_trans(Tween.TRANS_BOUNCE)
+	tw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
 	await tw.finished
 
 	FullScreenFrame.visible = toggle
 	NormalScreen.visible = !toggle
-
-	var tw2 = create_tween()
-	tw2.tween_property(self, "modulate", Color(1,1,1,1), 1)
-	await tw2.finished
 	
 	FullScreenToggleFinished.emit(toggle)
+	
+	var tw2 = create_tween()
+	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y), 2)
+	await tw2.finished
+	
+	
 
 func _ready() -> void:
 	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)

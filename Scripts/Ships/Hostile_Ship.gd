@@ -28,6 +28,7 @@ var RefuelSpot : MapSpot
 var VisibleBy : Array[Node2D]
 
 var BTree : BeehaveTree
+var BBoard : Blackboard
 var UseDefaultBehavior : bool = false
 
 var PosToSpawn : Vector2
@@ -46,7 +47,7 @@ func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 
-	MapPointerManager.GetInstance().AddShip(self, false)
+	#sMapPointerManager.GetInstance().AddShip(self, false)
 
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
@@ -213,15 +214,15 @@ func FigureOutPath() -> void:
 	
 	BTree = BT.instantiate() as BeehaveTree
 	#TODO Test different tickrateson android
-	var bb = Blackboard.new()
-	add_child(bb)
-	bb.set_value("TickRate", 1)
-	BTree.blackboard = bb
+	BBoard = Blackboard.new()
+	add_child(BBoard)
+	BBoard.set_value("TickRate", 1)
+	BTree.blackboard = BBoard
 	ToggleDocked(Docked)
 	add_child(BTree)
 	if (OS.get_name() == "Android"):
 		BTree.tick_rate = 10
-	bb.set_value("TickRate", BTree.tick_rate)
+	BBoard.set_value("TickRate", BTree.tick_rate)
 
 func CanReachDestination() -> bool:
 	var dist = GetFuelRange()
@@ -351,7 +352,7 @@ func GarissonVisualContact(Ship : MapShip) -> void:
 
 func GarissonLostVisualContact(Ship : MapShip) -> void:
 	if (VisualContactCountdown <= 0):
-		OnPlayerVisualLost.emit(Ship, self)
+		OnPlayerVisualLost.emit(Ship)
 
 	GarrissonVisualContacts.erase(Ship)
 	if (GarrissonVisualContacts.size() == 0):

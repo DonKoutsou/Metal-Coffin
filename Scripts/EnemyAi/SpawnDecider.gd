@@ -73,7 +73,7 @@ func generate_fleet(points: int, Patrol : bool, stage : Happening.GameStage) -> 
 	
 	# While there's space in the fleet, try to maximize the points usage
 	# with a dynamic strategy.
-	while fleet.size() < 7 and points > LowestPrice:
+	while fleet.size() < 7 and points >= LowestPrice:
 		available_ships.shuffle()
 		
 		var selected_ship: CaptainSpawnInfo = null
@@ -90,23 +90,26 @@ func generate_fleet(points: int, Patrol : bool, stage : Happening.GameStage) -> 
 			# Calculate how many we can afford and consider its strategic value
 			var max_ships = min(points / ship_info.Cost, ship_info.MaxAmmInFleet - fleet.count(ship_info))
 			if max_ships > 0:
-				# Calculate ship value by some heuristic (e.g., cost efficiency)
-				var value = ship_info.Cost  # Add your strategy metric here
 				
-				# Decide if this ship is worth adding to the fleet
-				if value > best_value:
-					best_value = value
-					selected_ship = ship_info
+				selected_ship = ship_info
+				break
+				## Calculate ship value by some heuristic (e.g., cost efficiency)
+				#var value = ship_info.Cost  # Add your strategy metric here
+				#
+				## Decide if this ship is worth adding to the fleet
+				#if value > best_value:
+					#best_value = value
+					#selected_ship = ship_info
 
 		# If a valid ship is selected, add to the fleet
 		if selected_ship:
-			var to_add = min(points / selected_ship.Cost, selected_ship.MaxAmmInFleet, 7 - fleet.size())
-			for i in range(to_add):
-				if points >= selected_ship.Cost:
-					fleet.append(selected_ship)
-					points -= selected_ship.Cost
-				else:
-					break
+			#var to_add = min(points / selected_ship.Cost, selected_ship.MaxAmmInFleet, 7 - fleet.size())
+			#for i in range(to_add):
+			if points >= selected_ship.Cost:
+				fleet.append(selected_ship)
+				points -= selected_ship.Cost
+			#else:
+				#break
 
 	return fleet
 

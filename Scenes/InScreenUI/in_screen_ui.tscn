@@ -210,6 +210,7 @@ offset_bottom = -98.0
 
 [node name="Screen" type="ColorRect" parent="Control3"]
 process_mode = 3
+z_index = 10
 material = ExtResource("9_nmtsd")
 layout_mode = 1
 anchors_preset = 15

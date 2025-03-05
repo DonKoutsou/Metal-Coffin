@@ -53,6 +53,7 @@ size_flags_stretch_ratio = 20.0
 alignment = 1
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
+z_index = 1
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1

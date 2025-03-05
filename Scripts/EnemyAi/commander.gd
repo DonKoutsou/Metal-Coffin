@@ -148,7 +148,12 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 		var BT = Ship.BTree
 		if (BT != null):
 			Ship.remove_child(BT)
-			NewCommander.addchild(BT)
+			var BBoard = Ship.BBoard
+			Ship.remove_child(BBoard)
+			NewCommander.add_child(BBoard)
+			BT.blackboard = BBoard
+			NewCommander.add_child(BT)
+			BT.actor = NewCommander
 			NewCommander.BTree = BT
 			NewCommander.Path = Ship.Path
 			NewCommander.PathPart = Ship.PathPart

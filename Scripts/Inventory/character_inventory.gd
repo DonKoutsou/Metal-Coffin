@@ -138,7 +138,7 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	Box.UpdateAmm(-1)
 	#print("Removed 1 {0}".format([It.ItemName]))
 	_InventoryContents[It] -= 1
-	if (It.CardProviding.size > 0):
+	if (It.CardProviding.size() > 0):
 		for g in It.CardProviding:
 			_CardInventory[g] -= 1
 			if (_CardInventory[g] == 0):

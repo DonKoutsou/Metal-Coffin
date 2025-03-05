@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=32 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -38,21 +38,13 @@ normal_texture = ExtResource("14_j6nai")
 texture_filter = 5
 texture_repeat = 2
 
-[sub_resource type="Gradient" id="Gradient_3bd7r"]
-offsets = PackedFloat32Array(0, 0.404459, 0.600318, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.498979, 0.52605, 0.368283, 1, 0.562558, 0.562557, 0.562557, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_tkg8l"]
-gradient = SubResource("Gradient_3bd7r")
-width = 128
-
 [sub_resource type="Environment" id="Environment_6n7os"]
 background_mode = 3
 background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_exposure = 2.0
-tonemap_white = 0.37
+tonemap_white = 1.25
 glow_enabled = true
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
@@ -68,7 +60,6 @@ adjustment_enabled = true
 adjustment_brightness = 0.8
 adjustment_contrast = 1.2
 adjustment_saturation = 0.7
-adjustment_color_correction = SubResource("GradientTexture1D_tkg8l")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]
 light_mode = 1
@@ -116,6 +107,7 @@ disable_3d = true
 own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(791, 512)
@@ -196,7 +188,6 @@ MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.049, 1, 0.04, 1)
 EnemyColor = Color(1, 0.094, 0, 1)
-EnemyDebug = true
 UIEventH = ExtResource("25_8mjbw")
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]

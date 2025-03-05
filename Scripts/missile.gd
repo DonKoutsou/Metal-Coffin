@@ -69,6 +69,10 @@ func OnMissDest(Mis : Missile) -> void:
 	FoundShips.erase(Mis)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	var bod = area.get_parent()
+	if (bod is HostileShip):
+		if (bod.Destroyed):
+			return
 	if (!FoundShips.has(area.get_parent())):
 		FoundShips.append(area.get_parent())
 		if (area.get_parent() is MapShip):
@@ -97,8 +101,13 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 			#OnShipSeen(area.get_parent())
 			##MapPointerManager.GetInstance().AddShip(self, false)
 	#else:
+	var Bod = area.get_parent()
+	
 	if (FoundShips.size() == 0):
 		return
+	if (Bod is HostileShip):
+		if (Bod.Destroyed):
+			return
 	if (area.get_parent() is Missile):
 		area.get_parent().Kill()
 		Kill()

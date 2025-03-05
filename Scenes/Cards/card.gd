@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 func _draw() -> void:
 	if (TargetLoc != Vector2.ZERO):
 		draw_set_transform(- global_position)
-		draw_line(global_position + size / 2, TargetLoc, Color(0.482,0.69,0.705))
+		draw_line(global_position + size / 2, TargetLoc, Color(0.482,0.69,0.705), 2)
 
 func _ready() -> void:
 	$PanelContainer.visible = false

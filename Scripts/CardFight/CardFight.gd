@@ -280,12 +280,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
 				viz.ToggleFire(false)
-				if (Action.Consume):
-					var ShipCards = Ship.Cards
-					ShipCards[Action] -= 1
-					if (ShipCards[Action] == 0):
-						ShipCards.erase(Action)
-				ActionsToBurn.append(Action)
+
 			else: if Action.CardName == "Shield Overcharge":
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				AnimationPlecement.add_child(anim)
@@ -293,7 +288,14 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
 				ShieldShip(Ship, 15)
-				ActionsToBurn.append(Action)
+			
+			if (Action.Consume):
+				var ShipCards = Ship.Cards
+				ShipCards[Action] -= 1
+				if (ShipCards[Action] == 0):
+					ShipCards.erase(Action)
+					
+			ActionsToBurn.append(ShipAction)
 				
 	return ActionsToBurn
 
@@ -478,9 +480,9 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		return
 	Energy -= c.GetCost()
 	
-	if (target != CurrentShip):
-		var TargetViz = GetShipViz(target)
-		c.TargetLoc = TargetViz.global_position + TargetViz.size / 2
+	#if (target != CurrentShip):
+	var TargetViz = GetShipViz(target)
+	c.TargetLoc = TargetViz.global_position + TargetViz.size / 2
 		
 	c.connect("OnCardPressed", RemoveCard)
 	SelectedCardPlecement.add_child(c)
