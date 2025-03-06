@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=11 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
@@ -16,6 +16,19 @@ radius = 150.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
 radius = 1000.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3uei4"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["Enemy", "Ships"]]
 process_mode = 1
@@ -69,6 +82,9 @@ shape = SubResource("CircleShape2D_t084r")
 
 [node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
 collision_layer = 8
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3uei4")
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

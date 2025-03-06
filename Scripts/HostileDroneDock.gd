@@ -33,7 +33,11 @@ func DockShip(Ship : HostileShip):
 		var trans = RemoteTransform2D.new()
 		trans.update_rotation = false
 		dock.add_child(trans)
-		call_deferred("TrySetDockPath", trans, Ship)
+		if (Ship.Spawned):
+			Ship.global_position = trans.global_position
+			trans.remote_path = Ship.get_path()
+		else:
+			call_deferred("TrySetDockPath", trans, Ship)
 		#trans.remote_path = Ship.get_path()
 		Ship.ToggleDocked(true)
 		Ship.Command = get_parent()
@@ -53,6 +57,8 @@ func UndockShip(Ship : HostileShip):
 		if (docks[g].get_child_count() > 0):
 			var trans = docks[g].get_child(0) as RemoteTransform2D
 			if (trans.remote_path == Ship.get_path()):
+				#trans.remote_path = "."
+				#trans.force_update_cache()
 				trans.free()
 				return
 

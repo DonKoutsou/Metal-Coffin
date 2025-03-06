@@ -33,6 +33,7 @@ var UseDefaultBehavior : bool = false
 
 var PosToSpawn : Vector2
 var LoadingSave : bool = false
+var Spawned : bool = false
 
 signal OnPlayerShipMet(PlayerSquad : Array[Node2D] , EnemySquad : Array[Node2D])
 signal OnDestinationReached(Ship : HostileShip)
@@ -52,7 +53,8 @@ func  _ready() -> void:
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
 	ShipSpawned.emit()
-
+	Spawned = true
+	
 	if (!LoadingSave):
 		for g in Cpt.CaptainStats:
 			g.ForceMaxValue()

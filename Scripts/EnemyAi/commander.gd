@@ -145,12 +145,15 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 	#DissconnectSignals(Ship)
 	if (Ship.GetDroneDock().DockedDrones.size() > 0):
 		var NewCommander = Ship.GetDroneDock().DockedDrones[0] as HostileShip
+		NewCommander.Command = null
 		var BT = Ship.BTree
 		if (BT != null):
+			BT.interrupt()
 			Ship.remove_child(BT)
 			var BBoard = Ship.BBoard
 			Ship.remove_child(BBoard)
 			NewCommander.add_child(BBoard)
+			NewCommander.BBoard = BBoard
 			BT.blackboard = BBoard
 			NewCommander.add_child(BT)
 			BT.actor = NewCommander
