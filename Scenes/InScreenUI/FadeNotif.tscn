@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://1vnrpn8q4byq"]
+[gd_scene load_steps=5 format=3 uid="uid://1vnrpn8q4byq"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_urlo6"]
 [ext_resource type="Script" path="res://Scripts/UI/fade_notif.gd" id="2_k1b3j"]
+[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="2_ue5og"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fkkej"]
 
-[node name="FadeNotif" type="PanelContainer" groups=["FadeNotif", "ItemNotification"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j3ox"]
+
+[node name="FadeNotif" type="PanelContainer" node_paths=PackedStringArray("T") groups=["FadeNotif", "ItemNotification"]]
 process_mode = 3
+modulate = Color(0.483, 100, 0.381, 1)
 offset_left = 24.0
 offset_top = 23.0
 offset_right = 225.0
@@ -14,26 +17,27 @@ offset_bottom = 44.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-theme = ExtResource("1_urlo6")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fkkej")
 script = ExtResource("2_k1b3j")
+T = NodePath("HBoxContainer/Label")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HBoxContainer"]
-custom_minimum_size = Vector2(6, 0)
+custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3j3ox")
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("2_ue5og")
+theme_override_font_sizes/font_size = 16
 text = "Item(s) Found awfaw awfa awf a"
 vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
-visible_characters = 0
-visible_ratio = 0.0
+visible_characters_behavior = 1

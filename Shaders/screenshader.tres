@@ -25,4 +25,5 @@ shader_parameter/scanlines_opacity = 0.24
 shader_parameter/scanlines_speed = 1.0
 shader_parameter/scanline_thickness = 0.58
 shader_parameter/scanlines_spacing = 0.47
+shader_parameter/static_noise_intensity = 0.258
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_w8jme")

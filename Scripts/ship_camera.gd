@@ -6,6 +6,8 @@ class_name ShipCamera
 @export var CityLines : MapLineDrawer
 
 static var Instance : ShipCamera
+
+signal ZoomChanged(NewVal : float)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
@@ -52,7 +54,8 @@ func OnZoomChanged() -> void:
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, zoom.x / 2))
 	get_tree().call_group("LineMarkers", "CamZoomUpdated", zoom.x)
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", zoom.x)
-
+	ZoomChanged.emit(zoom.x)
+	
 var GridShowing = false
 func _UpdateMapGridVisibility():
 	if (zoom.x < 0.25 and !GridShowing):

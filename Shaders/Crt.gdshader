@@ -19,7 +19,7 @@ uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
 uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
-
+uniform float static_noise_intensity : hint_range(0.0, 1.0) = 0.06;
 group_uniforms Noise;
 uniform sampler2D noise_texture: filter_linear_mipmap, repeat_enable;
 
@@ -76,19 +76,32 @@ vec2 screenDistort(vec2 uv)
     uv += vec2(.5, .5);
     return uv;
 }
+vec2 random(vec2 uv){
+    uv = vec2( dot(uv, vec2(127.1,311.7) ),
+               dot(uv, vec2(269.5,183.3) ) );
+    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
+}
+
 
 void fragment()
 {
     vec2 uv = FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy;
     uv = screenDistort(uv);
+	
     vec3 video = getVideo(uv);
+	// Apply static
+    if (static_noise_intensity > 0.0) {
+        video.rgb += clamp(random((ceil(uv) / uv) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
+    }
+	
     float vigAmt = 3. + .3 * sin(TIME * vignette_flicker_speed + 1. + 5. * cos(TIME * 5. * vignette_flicker_speed + 1.));
     vigAmt *= vignette_strength;
     float vignette = (1. - vigAmt * (uv.y - 0.5) * (uv.y - .5)) * (1.0 - vigAmt * (uv.x - .5) * (uv.x - .5));
 
     // Original effect application
     video += stripes(uv);
-    video += noise(uv * 2., uv) / 2.;
+    //video += noise(uv * 2., uv) / 2.;
+	
     video *= vignette;
     video *= (12. / small_scanlines_opacity + mod(uv.y * 30. * small_scanlines_proximity + TIME * small_scanlines_speed, 1.)) / 13. * small_scanlines_opacity;
 

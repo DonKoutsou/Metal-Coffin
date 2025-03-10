@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=21 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b84obdsc4r2vk" path="res://Scenes/InScreenUI/fps_counter.tscn" id="3_y1d86"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/simulation_notification.tscn" id="5_g51f2"]
+[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="5_hx3hn"]
+[ext_resource type="Script" path="res://Scripts/UI/zoom_level.gd" id="6_awabe"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
@@ -37,15 +39,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-
-[node name="FpsCounter" parent="Control3" instance=ExtResource("3_y1d86")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-grow_horizontal = 2
 
 [node name="MapMarkerEditor" parent="Control3" instance=ExtResource("4_w862u")]
 layout_mode = 1
@@ -92,6 +85,39 @@ mouse_filter = 2
 visible = false
 layout_mode = 1
 mouse_force_pass_scroll_events = false
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Control3"]
+modulate = Color(0.483, 100, 0.381, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.5
+offset_right = 111.5
+offset_bottom = 32.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("5_hx3hn")
+
+[node name="FpsCounter" parent="Control3/VBoxContainer" instance=ExtResource("3_y1d86")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "FPS : 60.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZoomLevel" type="Label" parent="Control3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "Zoom Level : 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_awabe")
 
 [node name="PauseContainer" type="PanelContainer" parent="Control3"]
 process_mode = 3

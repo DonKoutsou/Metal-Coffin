@@ -2,6 +2,11 @@ extends PanelContainer
 
 class_name Card
 
+@export var CardIcon : TextureRect
+@export var CardName : Label
+@export var CardDesc : RichTextLabel
+@export var CardCost : Label
+
 signal OnCardPressed(C : Card, Options : CardOption)
 
 var CStats : CardStats
@@ -26,15 +31,20 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	CStats = Stats
 	Cost = Stats.Energy
 	if Stats.SelectedOption !=  null:
-		$VBoxContainer/CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
+		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
 		Cost += Stats.SelectedOption.EnergyAdd
 	else:
-		$VBoxContainer/CardName.text = Stats.CardName
-	$VBoxContainer/CardIcon.texture = Stats.Icon
-	$CardCost.text = var_to_str(Stats.Energy)
-	$VBoxContainer/CardDesc.text = Stats.CardDescription
+		CardName.text = Stats.CardName
+	CardIcon.texture = Stats.Icon
 	
-	$CardCost.text = var_to_str(Cost)
+	var DescText =  "[center]{0}".format([Stats.CardDescription])
+	#CardDesc.visible_ratio = 0
+	#var tw = create_tween()
+	#tw.tween_property(CardDesc, "visible_ratio", 1, 1)
+	
+	CardDesc.text = DescText
+	
+	CardCost.text = var_to_str(Cost)
 	for g in Stats.Options:
 		var OptionBut = Button.new()
 		OptionBut.text = g.OptionName
