@@ -16,7 +16,7 @@ config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://Assets/Logos/LogoIcon2.png"
+config/icon="res://Assets/Logos/LogoIcon.png"
 
 [autoload]
 
@@ -27,7 +27,6 @@ HelperFunctions="*res://Scripts/Helper.gd"
 [display]
 
 window/size/viewport_width=1200
-window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [dotnet]

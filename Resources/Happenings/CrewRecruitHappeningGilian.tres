@@ -1,29 +1,55 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=9 format=3 uid="uid://c3kr3kcdnvesc"]
+[gd_resource type="Resource" script_class="Happening" load_steps=13 format=3 uid="uid://c3kr3kcdnvesc"]
 
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_x2bkw"]
-[ext_resource type="Resource" uid="uid://c75as8yglsqcy" path="res://Resources/Captains/PlayerCaptains/Gilian.tres" id="2_jegpl"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_83muy"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_fdmko"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_3u5ui"]
 [ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_eghih"]
 
-[sub_resource type="Resource" id="Resource_jmqt3"]
-script = ExtResource("3_83muy")
-Cpt = ExtResource("2_jegpl")
-OptionName = "Accept them into your fleet"
+[sub_resource type="Resource" id="Resource_kk05a"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["While aproaching the port you notice another ship just about comming down at the same time."])
+Options = Array[ExtResource("1_x2bkw")]([])
+
+[sub_resource type="Resource" id="Resource_cmfn1"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["The ships not very far from your location. Your commanding officer takes a good look at them, probably to make sure they dont pose any threat to you."])
+Options = Array[ExtResource("1_x2bkw")]([])
+
+[sub_resource type="Resource" id="Resource_57mxl"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["After taking a good look though his bonoculars he smirks and turns away. You ask him about what he saw."])
+Options = Array[ExtResource("1_x2bkw")]([])
+
+[sub_resource type="Resource" id="Resource_ipjf8"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["The ship surprisingly has no weapons on it. You would think a ship traversing the land at these time would have at least the minumim of deffences."])
+Options = Array[ExtResource("1_x2bkw")]([])
+
+[sub_resource type="Resource" id="Resource_c5ks0"]
+script = ExtResource("4_fdmko")
+StringReply = "You take your eyes away and head for the city."
+OptionName = "Look away"
+FinishDiag = true
+
+[sub_resource type="Resource" id="Resource_71ow0"]
+script = ExtResource("4_fdmko")
+StringReply = "You gather a small brigade an make your way to the ship."
+OptionName = "Aproach the machine"
 FinishDiag = false
 
-[sub_resource type="Resource" id="Resource_lqhcv"]
-script = ExtResource("4_fdmko")
-StringReply = "They depart."
-OptionName = "Reject them"
-FinishDiag = false
+[sub_resource type="Resource" id="Resource_qi88o"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["Your commanding officer turns your atention to the ship's captain stepping out of the ship. Its one of the machines, it all starts to make sense slowly."])
+Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_c5ks0"), SubResource("Resource_71ow0")])
+
+[sub_resource type="Resource" id="Resource_q82st"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["The machine is surprised to see you but after realising who you are you can see it lowers its guard."])
+Options = Array[ExtResource("1_x2bkw")]([])
 
 [resource]
 script = ExtResource("5_eghih")
-HappeningName = "Crew Recruit"
-Stages = Array[ExtResource("5_3u5ui")]([])
-HappeningTexts = Array[String]([])
-Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_jmqt3"), SubResource("Resource_lqhcv")])
-HappeningAppearance = 2
+HappeningName = "The Machine"
+Stages = Array[ExtResource("5_3u5ui")]([SubResource("Resource_kk05a"), SubResource("Resource_cmfn1"), SubResource("Resource_57mxl"), SubResource("Resource_ipjf8"), SubResource("Resource_qi88o"), SubResource("Resource_q82st"), null])
+HappeningAppearance = 0
 Special = true

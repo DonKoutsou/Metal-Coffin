@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp5ghsxs3xitl"]
+
+[ext_resource type="Script" path="res://Scripts/UI/linetest.gd" id="1_jknyh"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ylop2"]
+
+[node name="LineDrawer" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 446.0
+offset_top = 7.0
+offset_right = -440.0
+offset_bottom = -236.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ylop2")
+script = ExtResource("1_jknyh")
+WaveSize = 25.53
+PointAmm = 17
+Speed = 10.0

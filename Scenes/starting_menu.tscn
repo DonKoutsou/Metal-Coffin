@@ -115,11 +115,9 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(512, 200)
 layout_mode = 2
 size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
-expand_mode = 1
 
 [node name="Play" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2

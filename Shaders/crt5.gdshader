@@ -85,7 +85,7 @@ void fragment() {
 	ROUGHNESS = roughness_tex * roughness;
 
 	//// The display fun begins here
-	
+
 	// Copy the base UV, before we mess with it
 	vec2 raster_uv = base_uv;
 	// store input texture resolution

@@ -3,6 +3,7 @@ extends PanelContainer
 class_name HappeningInstance
 
 #@export var TestHappening : Happening
+@export var OptionParent : Control
 
 var Hp : Happening
 

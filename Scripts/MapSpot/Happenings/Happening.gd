@@ -4,8 +4,7 @@ class_name Happening
 @export var HappeningName : String
 @export var HappeningBg : Texture
 @export var Stages : Array[HappeningStage]
-@export var HappeningTexts : Array[String]
-@export var Options : Array[Happening_Option] = []
+
 @export var HappeningAppearance : GameStage
 @export var Special : bool = false
 var PickedBy : MapSpot
@@ -19,8 +18,6 @@ func CheckIfSpecial() -> void:
 	if (Special):
 		Specials.append(self)
 
-func GetOptionsCount() -> int:
-	return Options.size()
 
 enum GameStage
 {

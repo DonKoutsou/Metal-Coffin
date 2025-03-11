@@ -87,13 +87,13 @@ void fragment()
 {
     vec2 uv = FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy;
     uv = screenDistort(uv);
-	
+
     vec3 video = getVideo(uv);
 	// Apply static
     if (static_noise_intensity > 0.0) {
         video.rgb += clamp(random((ceil(uv) / uv) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
     }
-	
+
     float vigAmt = 3. + .3 * sin(TIME * vignette_flicker_speed + 1. + 5. * cos(TIME * 5. * vignette_flicker_speed + 1.));
     vigAmt *= vignette_strength;
     float vignette = (1. - vigAmt * (uv.y - 0.5) * (uv.y - .5)) * (1.0 - vigAmt * (uv.x - .5) * (uv.x - .5));
@@ -101,7 +101,7 @@ void fragment()
     // Original effect application
     video += stripes(uv);
     //video += noise(uv * 2., uv) / 2.;
-	
+
     video *= vignette;
     video *= (12. / small_scanlines_opacity + mod(uv.y * 30. * small_scanlines_proximity + TIME * small_scanlines_speed, 1.)) / 13. * small_scanlines_opacity;
 
