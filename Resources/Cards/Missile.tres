@@ -2,9 +2,9 @@
 
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="1_6i3qa"]
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="2_2t01k"]
-[ext_resource type="Script" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="2_hl4dw"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="3_ffuhs"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_oxogx"]
+[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="2_hl4dw"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_ffuhs"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_oxogx"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="5_af5cy"]
 [ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="6_ycv20"]
 [ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/ShipParts/MissilePods/LargeMissilePod.tres" id="7_2xhbi"]

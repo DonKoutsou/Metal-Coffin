@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://dyh1g0mso2lw2"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dyh1g0mso2lw2"]
 
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_hpc2o"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_tkf35"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_hpc2o"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_pbila"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_tkf35"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_4uvgl"]
 
 [resource]
 script = ExtResource("1_tkf35")
 SpotName = "Kordan"
 EnemyCity = false
-HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("1_hpc2o")]([ExtResource("2_4uvgl")])
-HostileShipName = ""
+Merchendise = Array[ExtResource("1_pbila")]([])

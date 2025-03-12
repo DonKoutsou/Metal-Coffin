@@ -8,23 +8,31 @@ class_name ShipContoller
 @export var UIEventH : UIEventHandler
 @onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
 @export var HappeningUI : PackedScene
-
+@export var FleetSeparationScene : PackedScene
 var AvailableShips : Array[MapShip] = []
 
 var ControlledShip : MapShip
+
+signal FleetSeperationRequested(ControlledShip : MapShip)
 
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	UIEventH.connect("LandPressed", _on_land_button_pressed)
 	UIEventH.connect("RadarButtonPressed", _on_radar_button_pressed)
+	UIEventH.connect("FleetSeparationPressed", InitiateFleetSeparation)
 	UIEventH.connect("RegroupPressed", _on_controlled_ship_return_pressed)
 	UIEventH.connect("AccelerationChanged", AccelerationChanged)
 	UIEventH.connect("SteerOffseted", SteerChanged)
 	UIEventH.connect("ShipSwitchPressed", _on_controlled_ship_swtich_range_changed)
 	
 	#call_deferred("SetInitialShip")
-	
+
+func InitiateFleetSeparation() -> void:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+	FleetSeperationRequested.emit(Instigator)
 	
 func SetInitialShip() -> void:
 	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
@@ -58,28 +66,36 @@ func OnDroneUnDocked(D : Drone, _Target : MapShip) -> void:
 	#ControlledShip = D
 	pass
 func _on_radar_button_pressed() -> void:
-	ControlledShip.ToggleRadar()
-	if (ControlledShip.RadarWorking):
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+		
+	Instigator.ToggleRadar()
+	if (Instigator.RadarWorking):
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned on")
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned off")
 func _on_land_button_pressed() -> void:
-	var spot = ControlledShip.CurrentPort as MapSpot
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+		
+	var spot = Instigator.CurrentPort as MapSpot
 	if (spot == null):
 		PopUpManager.GetInstance().DoFadeNotif("No port to land to")
 		return
-	if (ControlledShip.Landing):
+	if (Instigator.Landing):
 		return
-	if (ControlledShip.Altitude == 0):
-		OnShipLanded(ControlledShip)
+	if (Instigator.Altitude == 0):
+		OnShipLanded(Instigator)
 		return
-	if (ControlledShip.GetShipSpeed() > 0):
+	if (Instigator.GetShipSpeed() > 0):
 		PopUpManager.GetInstance().DoFadeNotif("Ship cant land while moving")
 		return
-	ControlledShip.StartLanding()
+	Instigator.StartLanding()
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
-	ControlledShip.connect("LandingEnded", OnShipLanded)
-	ControlledShip.connect("LandingCanceled", OnLandingCanceled)
+	Instigator.connect("LandingEnded", OnShipLanded)
+	Instigator.connect("LandingCanceled", OnLandingCanceled)
 
 func OnLandingCanceled(Ship : MapShip) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence canceled")
@@ -127,11 +143,14 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 	#SimulationManager.GetInstance().TogglePause(false)
 	UIEventH.OnButtonCoverToggled(false)
 func Land(Spot : MapSpot) -> bool:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
 	#ControlledShip.HaltShip()
 	var PlayedEvent = false
 	if (Spot.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
-		happeningui.HappeningInstigator = ControlledShip
+		happeningui.HappeningInstigator = Instigator
 		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
 		happeningui.PresentHappening(Spot.Event)
 		UIEventH.OnScreenUIToggled(false)
@@ -146,10 +165,16 @@ func HappeningFinished() -> void:
 	UIEventH.OnButtonCoverToggled(false)
 #Called from accelerator UI to change acceleration of currently controlled ship
 func AccelerationChanged(value: float) -> void:
-	ControlledShip.AccelerationChanged(value)
+	if (ControlledShip.Docked):
+		ControlledShip.Command.AccelerationChanged(value)
+	else:
+		ControlledShip.AccelerationChanged(value)
 #Called from steering wheel to change tragectory of currently controlled ship
 func SteerChanged(value: float) -> void:
-	ControlledShip.Steer(value)
+	if (ControlledShip.Docked):
+		ControlledShip.Command.Steer(value)
+	else:
+		ControlledShip.Steer(value)
 
 func OnShipDamaged(Amm : float, OnShipDamaged : bool) -> void:
 	if (OnShipDamaged):

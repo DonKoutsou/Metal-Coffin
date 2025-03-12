@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Deffensive" load_steps=4 format=3 uid="uid://bcyedao3gvdki"]
+[gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://bcyedao3gvdki"]
 
 [ext_resource type="Texture2D" uid="uid://cpdoprpxpx58d" path="res://Assets/Cards/eclipse-flare.png" id="1_qrasw"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="2_8hlof"]
-[ext_resource type="Script" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_lxvii"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_8hlof"]
+[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_lxvii"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_6wv8y"]
 
 [resource]
 script = ExtResource("2_lxvii")
@@ -13,3 +14,5 @@ Energy = 1
 Options = Array[ExtResource("2_8hlof")]([])
 AllowDuplicates = true
 Consume = true
+RequiredPart = Array[ExtResource("3_6wv8y")]([])
+WeapT = 0

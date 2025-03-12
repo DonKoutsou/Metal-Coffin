@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://crwbxcbj81jvc"]
 
-[ext_resource type="Script" path="res://Scripts/stat_panel.gd" id="2_3iuan"]
+[ext_resource type="Script" uid="uid://bnn7lbnheu20l" path="res://Scripts/stat_panel.gd" id="2_3iuan"]
 [ext_resource type="PackedScene" uid="uid://carxyijo0mekn" path="res://Scenes/Old/UISTatContainer.tscn" id="3_6v150"]
 
 [node name="Stat_Panel" type="PanelContainer"]

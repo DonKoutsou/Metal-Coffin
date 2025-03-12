@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c0fey2gjg1mvv"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Nob.gd" id="1_qphjf"]
+[ext_resource type="Script" uid="uid://6u5mppl6etjl" path="res://Scripts/UI/Nob.gd" id="1_qphjf"]
 [ext_resource type="Texture2D" uid="uid://cd8ggnco2dv3d" path="res://Assets/UIPiecies/Screen/Nob.png" id="2_alpln"]
 [ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="3_6xwkf"]
 

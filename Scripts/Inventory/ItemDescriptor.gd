@@ -131,7 +131,7 @@ func _on_repair_pressed() -> void:
 
 func _on_transfer_pressed() -> void:
 	ItemTransf.emit(DescribedContainer)
-	queue_free()
+	#queue_free()
 
 func _physics_process(_delta: float) -> void:
 	var inv = DescribedContainer.GetParentInventory()

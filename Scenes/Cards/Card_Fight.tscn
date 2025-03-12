@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://bg4oh7r4qnxy8"]
 
-[ext_resource type="Script" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
+[ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="3_3dpfm"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_3dpfm"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_5p8hw"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="10_084tn"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_5vvva"]
@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="13_pchum"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="14_kl7fj"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="14_ll7ew"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="15_dpyfj"]
+[ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="15_dpyfj"]
 
 [node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect")]
 anchors_preset = 15

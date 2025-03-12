@@ -230,7 +230,7 @@ func _UpdateShipIcon(Tex : Texture) -> void:
 
 func HaltShip():
 	SetSpeed(0)
-	AccelerationChanged(0)
+	#AccelerationChanged(0)
 
 var AccelChanged = false
 
@@ -473,10 +473,33 @@ func GetShipAcelerationNode() -> Node2D:
 	
 func GetShipIcon() -> Node2D:
 	return $PlayerShipSpr
+
+func GetFuelStats() -> Dictionary[String, float]:
+	var Stats : Dictionary[String, float]
 	
-func GetFuelReserves() -> float:
-	return 0
+	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
+	var total_fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	var total_maxfuel = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+	var inverse_ef_sum = 1.0 / fuel_ef
 	
+	# Group ships fuel and efficiency calculations
+	for g in GetDroneDock().DockedDrones:
+		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		var ship_maxfuel = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		total_fuel += ship_fuel
+		total_maxfuel += ship_maxfuel
+		inverse_ef_sum += 1.0 / ship_efficiency
+
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	Stats["CurrentFuel"] = total_fuel
+	Stats["MaxFuel"] = total_maxfuel
+	Stats["FleetRange"] = (total_fuel * 10 * effective_efficiency) / fleetsize
+	return Stats
+
 func GetFuelRange() -> float:
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)

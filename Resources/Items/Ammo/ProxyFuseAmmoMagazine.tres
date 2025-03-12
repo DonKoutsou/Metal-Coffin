@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://cnrek2mbia331"]
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://cnrek2mbia331"]
 
 [ext_resource type="Resource" uid="uid://bo0job0edtbgf" path="res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres" id="1_s7usd"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_n3me5"]
 [ext_resource type="Texture2D" uid="uid://dkjsj675yxjih" path="res://Assets/Items/PoxyFuseAmmo.png" id="2_vq8oe"]
 [ext_resource type="Texture2D" uid="uid://oahjywt7sjlb" path="res://Assets/Items/PoxyFuseAmmoSmol.png" id="3_ddfco"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_nmigf"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_nmigf"]
 
 [resource]
 script = ExtResource("4_nmigf")
@@ -12,4 +13,5 @@ ItemIconSmol = ExtResource("3_ddfco")
 ItemName = "Proximity Fuse Magazine"
 ItemDesc = "This magazine contains rounds equipped with proximity fuses, designed to detonate upon nearing a target. The sensor technology ensures activation within a specified range, providing effective engagement without requiring direct contact. Suitable for various combat scenarios, this ammunition type enhances hit probability against fast-moving targets. Recommended for use in environments where traditional contact-based munitions may struggle to achieve accuracy."
 MaxStackCount = 99
+CardProviding = Array[ExtResource("2_n3me5")]([])
 CardOptionProviding = ExtResource("1_s7usd")

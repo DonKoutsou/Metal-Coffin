@@ -7,7 +7,7 @@ class_name ScreenUI
 @export var Thrust : ThrustSlider
 @export var Steer : SteeringWheelUI
 @export var MissileUI : MissileTab
-@export var DroneUI : DroneTab
+#@export var DroneUI : DroneTab
 @export var ButtonCover : TextureRect
 @export var EventHandler : UIEventHandler
 @export var Cam : ScreenCamera
@@ -17,24 +17,35 @@ class_name ScreenUI
 
 signal FullScreenToggleStarted
 signal FullScreenToggleFinished(t : bool)
+signal FleetSeparationInitiated
 
 func ToggleFullScreen(toggle : bool) -> void:
 	FullScreenToggleStarted.emit()
 	
+	$DoorSound.play()
+	Cam.EnableFullScreenShake()
+	await wait(0.5)
 	var tw = create_tween()
+	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BOUNCE)
 	tw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
 	await tw.finished
-
+	
+	await wait(0.2)
+	
 	FullScreenFrame.visible = toggle
 	NormalScreen.visible = !toggle
 	
 	FullScreenToggleFinished.emit(toggle)
 	
 	var tw2 = create_tween()
-	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y), 2)
+	tw2.set_ease(Tween.EASE_IN)
+	tw2.set_trans(Tween.TRANS_QUART)
+	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y), 1.6)
 	await tw2.finished
-	
+	Cam.EnableFullScreenShake()
+func wait(secs : float) -> Signal:
+	return get_tree().create_timer(secs).timeout
 	
 
 func _ready() -> void:
@@ -45,8 +56,13 @@ func _ready() -> void:
 	EventHandler.connect("CoverToggled", ToggleControllCover)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
 	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
+
 	#OnControlledShipDamaged()
-	
+#
+#func _input(event: InputEvent) -> void:
+	#if (event.is_action_pressed("Click")):
+		#ToggleFullScreen(true)
+
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)
 	#var tw = create_tween()
@@ -62,14 +78,15 @@ func Acceleration_Forced(NewVal : float) -> void:
 	Thrust.ForceValue(NewVal)
 
 func Drone_Button_Pressed() -> void:
-	DroneUI._on_toggle_drone_tab_pressed()
-	MissileUI.TurnOff()
-	#EventHandler.OnDroneButtonPressed()
-	ToggleMarkerEditor(false)
+	EventHandler.OnFleetSeparationPressed()
+	#DroneUI._on_toggle_drone_tab_pressed()
+	#MissileUI.TurnOff()
+	##EventHandler.OnDroneButtonPressed()
+	#ToggleMarkerEditor(false)
 
 func Missile_Button_Pressed() -> void:
-	MissileUI._on_toggle_drone_tab_pressed()
-	DroneUI.TurnOff()
+	MissileUI.Toggle()
+	#DroneUI.TurnOff()
 	ToggleMarkerEditor(false)
 func Radar_Button_Pressed() -> void:
 	EventHandler.OnRadarButtonPressed()
@@ -95,12 +112,12 @@ func Ship_Switch_Pressed() -> void:
 
 func ControlledShipSwitched(NewShip : MapShip) -> void:
 	MissileUI.UpdateConnectedShip(NewShip)
-	DroneUI.UpdateConnectedShip(NewShip)
+	#DroneUI.UpdateConnectedShip(NewShip)
 
 # Marker editor
 func Marker_Editor_Pressed() -> void:
 	var t = !MarkerEditorControls.visible
-	DroneUI.TurnOff()
+	#DroneUI.TurnOff()
 	MissileUI.TurnOff()
 	ToggleMarkerEditor(t)
 	

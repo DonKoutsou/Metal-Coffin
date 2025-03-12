@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dcxd3udf7434a"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot/Town.gd" id="1_55o70"]
+[ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_55o70"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_veptg"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="3_8palk"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/CitySpot.gd" id="4_c67kr"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="3_8palk"]
+[ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="4_c67kr"]
 [ext_resource type="Texture2D" uid="uid://dtikba7jw4fho" path="res://Assets/MapElements/city5.png" id="5_y50gx"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Village.tres" id="6_qegue"]
 

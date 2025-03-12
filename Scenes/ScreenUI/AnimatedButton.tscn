@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cx6fk232wq523" path="res://Assets/UIPiecies/arm_button_Camera 1.png" id="1_mepyr"]
 [ext_resource type="Texture2D" uid="uid://86iic6oblp47" path="res://Assets/UIPiecies/arm_button_on_Camera 1.png" id="2_brb37"]
-[ext_resource type="Script" path="res://Scripts/UI/animated_button.gd" id="2_srf4c"]
+[ext_resource type="Script" uid="uid://gx2hpsdt504h" path="res://Scripts/UI/animated_button.gd" id="2_srf4c"]
 [ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="4_eac37"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd4vr"]
@@ -73,8 +73,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d3ury"]
 resource_local_to_scene = true
 _data = {
-"RESET": SubResource("Animation_ih5ls"),
-"Tick": SubResource("Animation_dsoe7")
+&"RESET": SubResource("Animation_ih5ls"),
+&"Tick": SubResource("Animation_dsoe7")
 }
 
 [node name="AnimatedTexture" type="TextureButton" groups=["Buttons"]]

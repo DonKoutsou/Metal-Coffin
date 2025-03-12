@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4yumrb4c0xyd"]
 
-[ext_resource type="Script" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
+[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="4_irncy"]
 

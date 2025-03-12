@@ -1,3 +1,4 @@
+@tool
 extends ConditionLeaf
 
 class_name HasKnownEnemiesCondition

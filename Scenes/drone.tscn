@@ -1,13 +1,13 @@
 [gd_scene load_steps=16 format=3 uid="uid://4pq5t6l3c55k"]
 
-[ext_resource type="Script" path="res://Scripts/Ships/Drone.gd" id="1_vfr1e"]
+[ext_resource type="Script" uid="uid://crsatqn78m71w" path="res://Scripts/Ships/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="3_fw0pf"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="9_82ju4"]
-[ext_resource type="Script" path="res://Scripts/missile_dock.gd" id="9_f4h60"]
+[ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_f4h60"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p3smt"]
@@ -59,7 +59,7 @@ texture = ExtResource("5_r8oj1")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_g6qkr")
 volume_db = -15.0
-pitch_scale = 0.5
+pitch_scale = 0.01
 bus = &"Engine"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

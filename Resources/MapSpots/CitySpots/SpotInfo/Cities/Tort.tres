@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=2 format=3 uid="uid://c6gcac2damco4"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://c6gcac2damco4"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_6fhe0"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_6fhe0"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_wk6fd"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_xq66t"]
 
 [resource]
 script = ExtResource("1_6fhe0")
 SpotName = "Tort"
 EnemyCity = true
-HostilePatrolShipName = ""
-HostileShipName = ""
+PossibleDrops = Array[ExtResource("2_xq66t")]([])
+Merchendise = Array[ExtResource("1_wk6fd")]([])

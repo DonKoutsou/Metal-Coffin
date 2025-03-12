@@ -4,9 +4,11 @@ class_name World
 @export_group("Nodes")
 @export var _Map : Map
 @export var _Command : Commander
+@export var Controller : ShipContoller
 @export_group("Scenes")
 @export var CardFightScene : PackedScene
 @export var LoadingScene : PackedScene
+@export var FleetSeparationScene : PackedScene
 @export_group("Wallet")
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
@@ -109,7 +111,7 @@ func _enter_tree() -> void:
 	var map = GetMap()
 	
 	map.connect("MAP_EnemyArrival", StartDogFight)
-	
+	Controller.connect("FleetSeperationRequested", StartShipTrade)
 	#var statp = GetStatPanel()
 	##connect("WRLD_StatsUpdated", statp.StatsUp)
 	#connect("WRLD_StatGotLow", statp.StatsLow)
@@ -134,6 +136,24 @@ func GetCommander() -> Commander:
 #func GetStatPanel() -> StatPanel:
 	#return GetMap()._StatPanel
 
+#ShipTrade
+func StartShipTrade(ControlledShip : MapShip) -> void:
+	SimulationManager.GetInstance().TogglePause(true)
+	var CurrentFleet : Array[MapShip] = [ControlledShip]
+	for S in ControlledShip.GetDroneDock().DockedDrones:
+		CurrentFleet.append(S)
+	
+	if (CurrentFleet.size() == 1):
+		PopUpManager.GetInstance().DoFadeNotif("Cant separate current fleet")
+		return
+	var sc = FleetSeparationScene.instantiate() as FleetSeparation
+	sc.CurrentFleet = CurrentFleet
+	Ingame_UIManager.GetInstance().AddUI(sc)
+	GetMap().GetScreenUi().ToggleFullScreen(true)
+	sc.connect("SeperationFinished", ShipSeparationFinished)
+		
+func ShipSeparationFinished() -> void:
+	GetMap().GetScreenUi().ToggleFullScreen(false)
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[Node2D]
 var FighingEnemyUnits : Array[Node2D]

@@ -3,10 +3,10 @@
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_bifgn"]
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_jils6"]
 [ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="2_dongv"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="2_trv85"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="2_w2xra"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_trv85"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="2_w2xra"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="4_adnd2"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_hho6w"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_hho6w"]
 
 [sub_resource type="Resource" id="Resource_y5vig"]
 script = ExtResource("6_hho6w")

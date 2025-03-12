@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmvl7w65kwp5a"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7awpj"]
-[ext_resource type="Script" path="res://Scripts/Inventory/character_inventory.gd" id="1_i6whi"]
+[ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://Scripts/Inventory/character_inventory.gd" id="1_i6whi"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_e1s57"]
 
 [node name="CharacterInventoryUI" type="VBoxContainer" node_paths=PackedStringArray("InventoryBoxParent", "CaptainNameLabel")]

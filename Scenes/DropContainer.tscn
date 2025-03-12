@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1utv5btptm7c"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_psvkg"]
-[ext_resource type="Script" path="res://Scripts/UI/DropContainer.gd" id="1_rc1ox"]
+[ext_resource type="Script" uid="uid://ypkuty40kyas" path="res://Scripts/UI/DropContainer.gd" id="1_rc1ox"]
 [ext_resource type="Texture2D" uid="uid://bd1hamn6rh765" path="res://Assets/Items/Oxygen_Smol.png" id="2_g1oh1"]
 
 [node name="DropContainer" type="PanelContainer"]

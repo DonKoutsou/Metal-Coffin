@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Wallet" load_steps=2 format=3 uid="uid://cl03ayn238giq"]
 
-[ext_resource type="Script" path="res://Resources/Funds/Wallet.gd" id="1_7c6ft"]
+[ext_resource type="Script" uid="uid://defax2amo77qq" path="res://Resources/Funds/Wallet.gd" id="1_7c6ft"]
 
 [resource]
 script = ExtResource("1_7c6ft")

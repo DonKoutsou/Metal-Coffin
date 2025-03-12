@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://25aprsc0nfje"]
 
-[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="1_swefx"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_1i1ae"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_1rr3c"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_1q3ab"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_1i1ae"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_1rr3c"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_ts8f7"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_ti0gc"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_uqwb8"]
@@ -11,8 +11,5 @@
 script = ExtResource("3_1i1ae")
 SpotName = "Trast"
 EnemyCity = true
-HostilePatrol = Array[ExtResource("1_swefx")]([])
-HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("3_1rr3c")]([ExtResource("4_ts8f7"), ExtResource("5_ti0gc"), ExtResource("6_uqwb8")])
-HostileGarrisson = Array[ExtResource("1_swefx")]([])
-HostileGarrissonShipNames = Array[String]([])
+Merchendise = Array[ExtResource("1_1q3ab")]([])

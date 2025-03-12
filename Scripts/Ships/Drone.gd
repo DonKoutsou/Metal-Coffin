@@ -30,14 +30,14 @@ func EnableDrone():
 			Landing = false
 		TakeoffStarted.emit()
 		TakingOff = true
-	$AudioStreamPlayer2D.play()
+	#$AudioStreamPlayer2D.play()
 	GetShipAcelerationNode().position.x = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 func DissableDrone():
 	#GetShipIcon().rotation = 0.0
 	rotation = 0
-	$AudioStreamPlayer2D.stop()
+	#$AudioStreamPlayer2D.stop()
 	#set_physics_process(false)
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", true)

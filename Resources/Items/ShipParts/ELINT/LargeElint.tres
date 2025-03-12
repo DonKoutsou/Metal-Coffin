@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://22w1h832bsxa"]
 
-[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="1_eay5v"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_eay5v"]
 [ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="1_p7a0x"]
 [ext_resource type="Texture2D" uid="uid://cud25kmc3qpt1" path="res://Assets/Items/radar-dish_Smol.png" id="2_7hrf0"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_mb8i7"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_6tdai"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_mb8i7"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_6tdai"]
 
 [sub_resource type="Resource" id="Resource_pxbaq"]
 script = ExtResource("5_mb8i7")

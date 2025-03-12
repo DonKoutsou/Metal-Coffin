@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://brklxjupl0rch"]
 
 [ext_resource type="Resource" uid="uid://bipfcwumlbq7u" path="res://Resources/Captains/EnemyCaptains/EnemyFireship2.tres" id="1_qcvoe"]
-[ext_resource type="Script" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_1k0e7"]
+[ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_1k0e7"]
 
 [resource]
 script = ExtResource("2_1k0e7")

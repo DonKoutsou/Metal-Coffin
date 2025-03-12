@@ -1,15 +1,13 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dymr3kp27n5to"]
 
-[ext_resource type="Resource" uid="uid://byx81bxds55dv" path="res://Resources/Happenings/CrewRecruitHappeningSamir.tres" id="1_vw7nb"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_7sxud"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_ycksc"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_7qb7y"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_7sxud"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_ycksc"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_vr4ve"]
 
 [resource]
 script = ExtResource("2_ycksc")
 SpotName = "Cardi"
-Event = ExtResource("1_vw7nb")
 EnemyCity = false
-HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("2_7sxud")]([ExtResource("3_vr4ve")])
-HostileShipName = ""
+Merchendise = Array[ExtResource("1_7qb7y")]([])

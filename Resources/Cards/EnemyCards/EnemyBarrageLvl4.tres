@@ -2,13 +2,13 @@
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_cossn"]
 [ext_resource type="Texture2D" uid="uid://dgj0w64wb7mmy" path="res://Assets/Cards/hydra-shot.png" id="2_xy7yl"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="3_yuw0m"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_yuw0m"]
 [ext_resource type="Resource" uid="uid://ktph3wbdfaxg" path="res://Resources/Cards/Barrage/Options/BarrageNormalOption.tres" id="4_s4rt5"]
 [ext_resource type="Resource" uid="uid://dep1p3s46i325" path="res://Resources/Cards/Barrage/Options/BarrageFireOption.tres" id="5_jlhqs"]
 [ext_resource type="Resource" uid="uid://bo0job0edtbgf" path="res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres" id="6_vnjoc"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_8pny3"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_8pny3"]
 [ext_resource type="Resource" uid="uid://mqg2y5hfy65s" path="res://Resources/Cards/Barrage/Options/BarrageAPOption.tres" id="7_tvjfu"]
-[ext_resource type="Script" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="8_gf57c"]
+[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="8_gf57c"]
 
 [resource]
 script = ExtResource("8_gf57c")

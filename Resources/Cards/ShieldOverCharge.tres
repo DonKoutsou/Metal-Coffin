@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://b4y2rot7doyj3"]
 
 [ext_resource type="Texture2D" uid="uid://cpwy1rn05puu6" path="res://Assets/Cards/shieldcomb.png" id="1_o6xph"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="2_crul3"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_8aeef"]
-[ext_resource type="Script" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_i8eet"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_crul3"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_8aeef"]
+[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_i8eet"]
 
 [resource]
 script = ExtResource("4_i8eet")

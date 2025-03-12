@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cmdvuq7n6nncl"]
 
 [ext_resource type="Texture2D" uid="uid://byfedq22uoe62" path="res://Assets/Logos/ΜΧΨ1.png" id="1_dv3lf"]
-[ext_resource type="Script" path="res://Scripts/studio_anim.gd" id="1_ivc2u"]
+[ext_resource type="Script" uid="uid://d2rmlsu15m8om" path="res://Scripts/studio_anim.gd" id="1_ivc2u"]
 [ext_resource type="Texture2D" uid="uid://cga2lurpwk4ft" path="res://Assets/Logos/ΜΧΨ2.png" id="2_i3r34"]
 [ext_resource type="Texture2D" uid="uid://dni651daut8p5" path="res://Assets/Logos/ΜΧΨ3.png" id="3_6xdul"]
 [ext_resource type="Texture2D" uid="uid://dssiekrv78ooj" path="res://Assets/Logos/ΜΧΨ5.png" id="4_e40io"]
@@ -161,8 +161,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aophf"]
 _data = {
-"LogoDraw": SubResource("Animation_0ewoy"),
-"RESET": SubResource("Animation_lv8rv")
+&"LogoDraw": SubResource("Animation_0ewoy"),
+&"RESET": SubResource("Animation_lv8rv")
 }
 
 [node name="StudioAnim" type="Control"]

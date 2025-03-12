@@ -1,15 +1,13 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://ck7jx6746yvdp"]
 
-[ext_resource type="Resource" uid="uid://mhuc4oqjjoph" path="res://Resources/Happenings/CrewRecruitHappeningSirius.tres" id="1_10562"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_dw7cy"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_u18j6"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_udame"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_dw7cy"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_u18j6"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_ufxup"]
 
 [resource]
 script = ExtResource("2_u18j6")
 SpotName = "Sirkan"
-Event = ExtResource("1_10562")
 EnemyCity = false
-HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("2_dw7cy")]([ExtResource("3_ufxup")])
-HostileShipName = ""
+Merchendise = Array[ExtResource("1_udame")]([])

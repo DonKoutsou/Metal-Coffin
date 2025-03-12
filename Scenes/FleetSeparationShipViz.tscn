@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dci144io03ffa"]
+
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="1_cggg1"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_yd436"]
+[ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="2_5k7vr"]
+[ext_resource type="Script" uid="uid://dvx4hdp7fvbi0" path="res://Scripts/fleet_separation_ship_viz.gd" id="2_f1v6n"]
+
+[node name="FleetSeparationShipViz" type="PanelContainer" node_paths=PackedStringArray("CapPortrait", "ShipIcon", "CapName")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -52.0
+offset_right = 121.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_yd436")
+script = ExtResource("2_f1v6n")
+CapPortrait = NodePath("CapPortrait")
+ShipIcon = NodePath("VBoxContainer/TextureRect")
+CapName = NodePath("VBoxContainer/CapName")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+
+[node name="CapPortrait" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.249)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_5k7vr")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CapName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Craden"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 2
+texture = ExtResource("1_cggg1")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

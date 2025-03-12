@@ -10,7 +10,7 @@ colors = PackedColorArray(0.958, 0.958, 0.958, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
 gradient = SubResource("Gradient_itxm5")
 
 [sub_resource type="Curve" id="Curve_1cx2g"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0.992456, 2), 0.0, 0.0, 0, 0]
 point_count = 1
 
@@ -26,6 +26,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 400.0
 emission_ring_inner_radius = 400.0
+emission_ring_cone_angle = 90.0
 angle_min = 1.07288e-05
 angle_max = 720.0
 velocity_pivot = Vector3(0, 2, 0)

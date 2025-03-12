@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=17 format=3 uid="uid://quqnjrytm6df"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_c8anm"]
-[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_7forp"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="3_56hd3"]
+[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7forp"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_56hd3"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="3_lrwkv"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile.tres" id="4_didop"]
-[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="4_f3cc4"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_sht43"]
+[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_f3cc4"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_sht43"]
 [ext_resource type="Resource" uid="uid://cbkme88wrncp4" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres" id="4_w1jij"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]

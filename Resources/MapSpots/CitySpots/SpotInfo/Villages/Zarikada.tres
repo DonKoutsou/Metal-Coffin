@@ -1,15 +1,13 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://d0f35jq2otwcu"]
 
-[ext_resource type="Resource" uid="uid://c3kr3kcdnvesc" path="res://Resources/Happenings/CrewRecruitHappeningGilian.tres" id="1_o88qn"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_5hmp0"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_7slje"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_hhj56"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_5hmp0"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_7slje"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_jdpqh"]
 
 [resource]
 script = ExtResource("2_7slje")
 SpotName = "Zarikada"
-Event = ExtResource("1_o88qn")
 EnemyCity = false
-HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("2_5hmp0")]([ExtResource("3_jdpqh")])
-HostileShipName = ""
+Merchendise = Array[ExtResource("1_hhj56")]([])

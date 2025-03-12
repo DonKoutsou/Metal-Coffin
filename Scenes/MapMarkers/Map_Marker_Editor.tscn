@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dy41ui65qkhmb"]
 
-[ext_resource type="Script" path="res://Scripts/MapMarkerEditor/map_marker_editor.gd" id="1_8dwjq"]
+[ext_resource type="Script" uid="uid://dk3dum3bl1yhq" path="res://Scripts/MapMarkerEditor/map_marker_editor.gd" id="1_8dwjq"]
 [ext_resource type="PackedScene" uid="uid://dd26j51u4ni6g" path="res://Scenes/MapMarkers/MapMarkerLine.tscn" id="2_5eayg"]
 [ext_resource type="PackedScene" uid="uid://dvnr81a8uogh4" path="res://Scenes/TextMarker.tscn" id="3_ikfwh"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_i7jhj"]

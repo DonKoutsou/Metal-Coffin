@@ -44,17 +44,17 @@ func PresentHappening(Hap : Happening):
 				break
 				
 			$VBoxContainer/NextDiag.visible = true
-			$VBoxContainer/HBoxContainer.visible = false
+			$VBoxContainer/HBoxContainer2/Control2/HBoxContainer.visible = false
 			
 			await NextDiag
 			
 			$VBoxContainer/NextDiag.visible = false
-			$VBoxContainer/HBoxContainer.visible = true
+			$VBoxContainer/HBoxContainer2/Control2/HBoxContainer.visible = true
 		
 		if (Stage.Options.size() > 0):
 			var OptionAmm = Stage.Options.size()
-			for f in $VBoxContainer/HBoxContainer.get_child_count():
-				var but = $VBoxContainer/HBoxContainer.get_child(f) as Button
+			for f in $VBoxContainer/HBoxContainer2/Control2/HBoxContainer.get_child_count():
+				var but = $VBoxContainer/HBoxContainer2/Control2/HBoxContainer.get_child(f) as Button
 				if (f >= OptionAmm):
 					but.visible = false
 					continue
@@ -74,12 +74,12 @@ func PresentHappening(Hap : Happening):
 			$Timer.start()
 			set_physics_process(true)
 			$VBoxContainer/ProgressBar.visible = true
-			$VBoxContainer/HBoxContainer.visible = false
+			$VBoxContainer/HBoxContainer2/Control2/HBoxContainer.visible = false
 			
 			await $Timer.timeout
 			
 			$VBoxContainer/ProgressBar.visible = false
-			$VBoxContainer/HBoxContainer.visible = true
+			$VBoxContainer/HBoxContainer2/Control2/HBoxContainer.visible = true
 			
 			if (Stage.Options[SelectedOption].FinishDiag):
 				HappeningFinished.emit()

@@ -1,15 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://eemvne8otjn4"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://eemvne8otjn4"]
 
-[ext_resource type="Resource" uid="uid://cjywrm3yoyv76" path="res://Resources/Happenings/CrewRecruitHappeningJor.tres" id="1_7uhe7"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_eytgd"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_vytmo"]
-[ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_yf0if"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_eytgd"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_vytmo"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_yf0if"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_o7gig"]
 
 [resource]
 script = ExtResource("2_eytgd")
 SpotName = "Armak"
-Event = ExtResource("1_7uhe7")
 EnemyCity = false
 PossibleDrops = Array[ExtResource("2_vytmo")]([ExtResource("3_o7gig")])
 Merchendise = Array[ExtResource("2_yf0if")]([])

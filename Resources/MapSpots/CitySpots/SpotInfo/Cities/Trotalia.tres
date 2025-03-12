@@ -1,16 +1,13 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://bwitpv7g6re5n"]
 
-[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="1_8no1a"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_u0hqa"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_fsxqc"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_u0hqa"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_kxtac"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_abq6a"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_abq6a"]
 
 [resource]
 script = ExtResource("3_abq6a")
 SpotName = "Trotalia"
 EnemyCity = true
-HostilePatrol = Array[ExtResource("1_8no1a")]([])
-HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("1_u0hqa")]([ExtResource("2_kxtac")])
-HostileGarrisson = Array[ExtResource("1_8no1a")]([])
-HostileGarrissonShipNames = Array[String]([])
+Merchendise = Array[ExtResource("1_fsxqc")]([])

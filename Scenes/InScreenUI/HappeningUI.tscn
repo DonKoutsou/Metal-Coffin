@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bkl2a6ey2cxpg"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_w86mx"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningInstance.gd" id="2_nimax"]
+[ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://Scripts/MapSpot/Happenings/HappeningInstance.gd" id="2_nimax"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="2_s42or"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="3_hs11o"]
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Sound.tscn" id="5_fjydm"]
@@ -69,12 +69,20 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2"]
-visible = false
+[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer2/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
@@ -82,21 +90,21 @@ theme_override_font_sizes/font_size = 32
 text = "Option 1"
 expand_icon = true
 
-[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer2/HBoxContainer"]
+[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
 theme_override_font_sizes/font_size = 32
 text = "Option 1"
 
-[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer2/HBoxContainer"]
+[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
 theme_override_font_sizes/font_size = 32
 text = "Option 1"
 
-[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer2/HBoxContainer"]
+[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
@@ -112,7 +120,7 @@ wait_time = 3.0
 one_shot = true
 
 [connection signal="pressed" from="VBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/HBoxContainer/Option1" to="." method="_on_option_1_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/HBoxContainer/Option2" to="." method="_on_option_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/HBoxContainer/Option3" to="." method="_on_option_3_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/HBoxContainer/Option4" to="." method="_on_option_4_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option1" to="." method="_on_option_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option2" to="." method="_on_option_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option3" to="." method="_on_option_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option4" to="." method="_on_option_4_pressed"]

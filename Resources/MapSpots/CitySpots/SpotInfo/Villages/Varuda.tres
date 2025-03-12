@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cdo0equ5nufta"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cdo0equ5nufta"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_aoaki"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_titao"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_aoaki"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_p0nin"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_titao"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_0p0cx"]
 
 [resource]
 script = ExtResource("1_aoaki")
 SpotName = "Varuda"
 EnemyCity = false
-HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("1_titao")]([ExtResource("2_0p0cx")])
-HostileShipName = ""
+Merchendise = Array[ExtResource("1_p0nin")]([])

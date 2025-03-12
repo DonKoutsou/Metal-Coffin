@@ -1,20 +1,21 @@
-[gd_resource type="Resource" script_class="MissileItem" load_steps=5 format=3 uid="uid://da5wwxg8h0n50"]
+[gd_resource type="Resource" script_class="MissileItem" load_steps=6 format=3 uid="uid://da5wwxg8h0n50"]
 
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_0rlix"]
 [ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_tmfc8"]
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="2_oaolx"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="3_j5y6l"]
-[ext_resource type="Script" path="res://Scripts/Inventory/MissileItem.gd" id="4_1mwvx"]
+[ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="4_1mwvx"]
 
 [resource]
 script = ExtResource("4_1mwvx")
 MissileScene = ExtResource("3_j5y6l")
-MissileName = "Tactical Missile"
 Distance = 900
 Speed = 6.0
 Damage = 50
+Type = 0
 ItemIcon = ExtResource("1_tmfc8")
 ItemIconSmol = ExtResource("2_oaolx")
 ItemName = "Tactical Missile"
 ItemDesc = "Low range high speed missile missile, usefull for close range interceptions of enemy missiles"
 MaxStackCount = 99
-RandomFindMaxCount = 1
+CardProviding = Array[ExtResource("1_0rlix")]([])

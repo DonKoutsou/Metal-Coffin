@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0iiqaijsg1y1"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_s0ja4"]
-[ext_resource type="Script" path="res://Scripts/command_line.gd" id="2_svsqk"]
+[ext_resource type="Script" uid="uid://djw0qatbronxr" path="res://Scripts/command_line.gd" id="2_svsqk"]
 [ext_resource type="FontFile" uid="uid://b67dqsdclgjad" path="res://Fonts/OpenSans-Regular.ttf" id="3_jrwwy"]
 
 [node name="CommandLine" type="PanelContainer" node_paths=PackedStringArray("Text")]

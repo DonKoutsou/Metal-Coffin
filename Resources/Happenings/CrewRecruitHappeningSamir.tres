@@ -1,29 +1,11 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=9 format=3 uid="uid://byx81bxds55dv"]
+[gd_resource type="Resource" script_class="Happening" load_steps=3 format=3 uid="uid://byx81bxds55dv"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_fwef7"]
-[ext_resource type="Resource" uid="uid://disqw5cbdncos" path="res://Resources/Captains/PlayerCaptains/Samir.tres" id="2_enltx"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="3_hv5re"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_wy5gf"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_em2a0"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_p1l7f"]
-
-[sub_resource type="Resource" id="Resource_lh6em"]
-script = ExtResource("3_hv5re")
-Cpt = ExtResource("2_enltx")
-OptionName = "Accept them into your fleet"
-FinishDiag = false
-
-[sub_resource type="Resource" id="Resource_lqhcv"]
-script = ExtResource("4_wy5gf")
-StringReply = "They depart."
-OptionName = "Reject them"
-FinishDiag = false
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_em2a0"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_p1l7f"]
 
 [resource]
 script = ExtResource("5_p1l7f")
 HappeningName = "Crew Recruit"
 Stages = Array[ExtResource("5_em2a0")]([])
-HappeningTexts = Array[String]([])
-Options = Array[ExtResource("1_fwef7")]([SubResource("Resource_lh6em"), SubResource("Resource_lqhcv")])
 HappeningAppearance = 3
 Special = true

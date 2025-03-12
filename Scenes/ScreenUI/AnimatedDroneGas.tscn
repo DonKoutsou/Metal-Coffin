@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://di7s7gbaldbrb" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_017.png" id="18_t6y3d"]
 [ext_resource type="Texture2D" uid="uid://bayeskgot2rr1" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_018.png" id="19_jtyie"]
 [ext_resource type="Texture2D" uid="uid://b1uos50fmh2da" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_019.png" id="20_lod21"]
-[ext_resource type="Script" path="res://Scripts/UI/animated_drone_gas.gd" id="21_2eusn"]
+[ext_resource type="Script" uid="uid://byieey8mlbces" path="res://Scripts/UI/animated_drone_gas.gd" id="21_2eusn"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="22_mtsvb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8cr6m"]
@@ -115,7 +115,7 @@ grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_mtsvb")
-volume_db = -5.0
+volume_db = -15.0
 pitch_scale = 1.03
 bus = &"MapSounds"
 

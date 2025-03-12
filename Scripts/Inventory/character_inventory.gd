@@ -95,11 +95,17 @@ func AddItem(It : Item) -> void:
 	if (Empty != null):
 		Empty.RegisterItem(It)
 		Empty.UpdateAmm(1)
-		_InventoryContents[It] = 1
+		if (_InventoryContents.has(It)):
+			_InventoryContents[It] += 1
+		else:
+			_InventoryContents[It] = 1
 		
 		if (It.CardProviding.size() > 0):
 			for c in It.CardProviding:
-				_CardInventory[c] = 1
+				if (_CardInventory.has(c)):
+					_CardInventory[c] += 1
+				else:
+					_CardInventory[c] = 1
 				
 		if (It.CardOptionProviding != null):
 			_CardAmmo[It.CardOptionProviding] = 1

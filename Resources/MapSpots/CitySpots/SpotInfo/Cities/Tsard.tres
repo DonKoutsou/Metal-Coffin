@@ -1,18 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://cymxwbov1pdsm"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cymxwbov1pdsm"]
 
-[ext_resource type="Resource" uid="uid://cewy7vds2cnh8" path="res://Resources/Happenings/CrewRecruitHappeningDimitry.tres" id="1_j0aub"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="2_e67pm"]
-[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="2_h2gd0"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_p81b1"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_dkdkj"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_e67pm"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_p81b1"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_synvh"]
 
 [resource]
 script = ExtResource("2_p81b1")
 SpotName = "Tsard"
-Event = ExtResource("1_j0aub")
 EnemyCity = true
-HostilePatrol = Array[ExtResource("2_h2gd0")]([])
-HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("2_e67pm")]([ExtResource("3_synvh")])
-HostileGarrisson = Array[ExtResource("2_h2gd0")]([])
-HostileGarrissonShipNames = Array[String]([])
+Merchendise = Array[ExtResource("1_dkdkj")]([])

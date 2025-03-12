@@ -1,15 +1,15 @@
 [gd_scene load_steps=14 format=3 uid="uid://bk5qdfealbiie"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot/Town.gd" id="1_ove43"]
+[ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_ove43"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_5m8np"]
 [ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/MapElements/city.png" id="3_yc03l"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/CitySpot.gd" id="4_2dmtt"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="5_q0xbj"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="6_3skxr"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="7_en220"]
+[ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="4_2dmtt"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="5_q0xbj"]
+[ext_resource type="Script" uid="uid://b1yjldcssni32" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="6_3skxr"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="7_en220"]
 [ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/Dormak.tres" id="8_16bcg"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="9_w7njc"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="10_qk3xb"]
+[ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="9_w7njc"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="10_qk3xb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ustqo"]
 blend_mode = 1

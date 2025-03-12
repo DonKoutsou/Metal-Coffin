@@ -1,18 +1,20 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwnxxystgxrjm"]
+[gd_scene load_steps=22 format=3 uid="uid://cwnxxystgxrjm"]
 
-[ext_resource type="Script" path="res://Scripts/UI/MissileTab.gd" id="1_3wcnd"]
+[ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_3wcnd"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_lb1ah"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_6s7wp"]
-[ext_resource type="Texture2D" uid="uid://bxec8bkr01ino" path="res://Assets/UIPiecies/Screen/Panel.png" id="4_qfjri"]
-[ext_resource type="PackedScene" uid="uid://bl1t8w4ot467w" path="res://Scenes/ScreenUI/AnimatedButton.tscn" id="12_cxvvo"]
-[ext_resource type="Texture2D" uid="uid://bjkm8sbw8g0st" path="res://Assets/UIPiecies/dissarm_on_Camera 1.png" id="13_ycwvk"]
-[ext_resource type="Texture2D" uid="uid://bj2r2y882vpmo" path="res://Assets/UIPiecies/dissarmButton_Camera 1.png" id="14_cm273"]
-[ext_resource type="Texture2D" uid="uid://c4typshdm7o6m" path="res://Assets/UIPiecies/launchbuttonon_Camera 1.png" id="15_k7kk5"]
-[ext_resource type="Texture2D" uid="uid://38xapu6ybfup" path="res://Assets/UIPiecies/Launchbutton_Camera 1.png" id="16_unqge"]
-[ext_resource type="Texture2D" uid="uid://ckuoofhsmdwhc" path="res://Assets/UIPiecies/offbuttonon_Camera 1.png" id="17_gifwe"]
-[ext_resource type="Texture2D" uid="uid://cfqj4sicmtmfi" path="res://Assets/UIPiecies/offbutton_Camera 1.png" id="18_dhll4"]
+[ext_resource type="Texture2D" uid="uid://7ukbsw5o0nhs" path="res://Assets/UIPiecies/Screen/MissileTab_FullQuality.png" id="4_12h3a"]
+[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="5_0a32p"]
+[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="6_aa6e4"]
+[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="8_2obss"]
+[ext_resource type="Texture2D" uid="uid://cba3crf7vyc2x" path="res://Assets/Off.png" id="8_ou8yy"]
+[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="8_wqlpk"]
+[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="9_12h3a"]
+[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="9_qdwod"]
+[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="17_7by3v"]
+[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="18_u3im4"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="19_bexkj"]
-[ext_resource type="Texture2D" uid="uid://dift04metc6c5" path="res://Assets/UIPiecies/CrewDisplay_Camera 1.png" id="20_x7uai"]
+[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="19_i70s6"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="21_e1dqm"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="22_yc7om"]
 
@@ -28,7 +30,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 216)]
+"values": [Vector2(0, -14), Vector2(0, 216)]
 }
 
 [sub_resource type="Animation" id="Animation_wlayh"]
@@ -43,7 +45,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 216)]
+"values": [Vector2(0, 162)]
 }
 
 [sub_resource type="Animation" id="Animation_stsyt"]
@@ -58,17 +60,17 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 215), Vector2(0, 0)]
+"values": [Vector2(0, 162), Vector2(0, -14)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kt4fa"]
 _data = {
-"Hide": SubResource("Animation_brgwl"),
-"RESET": SubResource("Animation_wlayh"),
-"Show": SubResource("Animation_stsyt")
+&"Hide": SubResource("Animation_brgwl"),
+&"RESET": SubResource("Animation_wlayh"),
+&"Show": SubResource("Animation_stsyt")
 }
 
-[node name="Missile Tab" type="Control"]
+[node name="Missile Tab" type="Control" node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TouchStopper")]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -84,10 +86,15 @@ mouse_filter = 2
 script = ExtResource("1_3wcnd")
 MissileDockEventH = ExtResource("2_lb1ah")
 DroneDockEventH = ExtResource("3_6s7wp")
+MissileSelectLight = NodePath("Control/Control/MissileSelectLight")
+AngleSelectLight = NodePath("Control/Control/AngleSelectLight")
+RangeText = NodePath("Control/Control/RangeText")
+SelectedMissileText = NodePath("Control/Control/SelectedMissileText")
+TouchStopper = NodePath("Control/TouchStopper")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_kt4fa")
+&"": SubResource("AnimationLibrary_kt4fa")
 }
 
 [node name="Control" type="Control" parent="."]
@@ -98,9 +105,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = 176.0
+offset_top = 122.0
 offset_right = 20.0
-offset_bottom = 216.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -117,34 +124,147 @@ size_flags_vertical = 4
 
 [node name="TextureRect" type="TextureRect" parent="Control/Control"]
 layout_mode = 0
-offset_left = -289.0
+offset_left = -352.0
 offset_top = -90.0
-offset_right = 182.0
-offset_bottom = 74.0
+offset_right = 228.0
+offset_bottom = 90.0
 mouse_filter = 0
-texture = ExtResource("4_qfjri")
+texture = ExtResource("4_12h3a")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect"]
+visible = false
 modulate = Color(0, 0, 0, 0.518)
 show_behind_parent = true
 layout_mode = 0
 offset_left = -11.0
 offset_top = -10.0
-offset_right = 460.0
-offset_bottom = 154.0
+offset_right = 569.0
+offset_bottom = 170.0
 mouse_filter = 2
-texture = ExtResource("4_qfjri")
+texture = ExtResource("4_12h3a")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="Control/Control"]
+[node name="LaunchButton" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = 63.0
+offset_right = -111.0
+offset_bottom = 109.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -1.57079
+texture_normal = ExtResource("5_0a32p")
+texture_pressed = ExtResource("6_aa6e4")
+texture_click_mask = ExtResource("19_i70s6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="DissarmButton" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = 9.0
+offset_right = -111.0
+offset_bottom = 55.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -1.57079
+scale = Vector2(1, 1.00062)
+texture_normal = ExtResource("8_2obss")
+texture_pressed = ExtResource("9_12h3a")
+texture_click_mask = ExtResource("19_i70s6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ArmButton" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -42.0
+offset_right = -111.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -1.57079
+texture_normal = ExtResource("8_wqlpk")
+texture_pressed = ExtResource("9_qdwod")
+texture_click_mask = ExtResource("19_i70s6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TurnOff" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -244.0
+offset_top = 63.0
+offset_right = -199.0
+offset_bottom = 124.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -1.57079
+texture_normal = ExtResource("17_7by3v")
+texture_pressed = ExtResource("18_u3im4")
+texture_click_mask = ExtResource("19_i70s6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control/TurnOff"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 23.5
+offset_top = -22.5003
+offset_right = 70.5
+offset_bottom = 24.4997
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+texture = ExtResource("8_ou8yy")
+expand_mode = 1
+
+[node name="MissileSelectLight" parent="Control/Control" instance=ExtResource("22_yc7om")]
+layout_mode = 0
+offset_left = 104.0
+offset_top = -33.0
+offset_right = 144.0
+offset_bottom = 7.0
+
+[node name="AngleSelectLight" parent="Control/Control" instance=ExtResource("22_yc7om")]
+layout_mode = 0
+offset_left = 104.0
+offset_top = -3.0
+offset_right = 144.0
+offset_bottom = 37.0
+
+[node name="RangeText" type="Label" parent="Control/Control"]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-offset_left = -183.0
-offset_top = 13.0
-offset_right = -51.0
-offset_bottom = 55.0
+offset_left = -24.0
+offset_top = -67.0
+offset_right = 108.0
+offset_bottom = -25.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_fonts/font = ExtResource("21_e1dqm")
@@ -154,69 +274,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Arm" parent="Control/Control" instance=ExtResource("12_cxvvo")]
-layout_mode = 1
-offset_left = -161.0
-offset_top = -81.0
-offset_right = -53.0
-offset_bottom = -48.0
-
-[node name="Dissarm" parent="Control/Control" instance=ExtResource("12_cxvvo")]
-layout_mode = 1
-offset_left = -161.0
-offset_top = -36.0
-offset_right = -53.0
-offset_bottom = -3.0
-toggle_mode = false
-texture_pressed = ExtResource("13_ycwvk")
-OffTexture = ExtResource("14_cm273")
-OnTexture = ExtResource("13_ycwvk")
-
-[node name="Launch" parent="Control/Control" instance=ExtResource("12_cxvvo")]
-layout_mode = 1
-offset_left = -18.0
-offset_top = -5.0
-offset_right = 82.0
-offset_bottom = 52.0
-toggle_mode = false
-texture_pressed = ExtResource("15_k7kk5")
-OffTexture = ExtResource("16_unqge")
-OnTexture = ExtResource("15_k7kk5")
-
-[node name="off" parent="Control/Control" instance=ExtResource("12_cxvvo")]
-layout_mode = 1
-offset_left = 107.0
-offset_top = -5.0
-offset_right = 169.0
-offset_bottom = 52.0
-toggle_mode = false
-texture_pressed = ExtResource("17_gifwe")
-OffTexture = ExtResource("18_dhll4")
-OnTexture = ExtResource("17_gifwe")
-
-[node name="DroneGas" parent="Control/Control" instance=ExtResource("19_bexkj")]
-position = Vector2(72, -54)
-scale = Vector2(0.799999, 0.799999)
-
-[node name="TouchStopper" type="Control" parent="Control"]
-layout_mode = 2
-anchors_preset = 0
-offset_left = -156.0
-offset_top = -121.0
-offset_right = 198.0
-offset_bottom = 35.0
-
-[node name="TextureRect" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_left = 28.0
-offset_top = -176.0
-offset_right = 203.0
-offset_bottom = -123.0
-mouse_filter = 2
-texture = ExtResource("20_x7uai")
-expand_mode = 1
-
-[node name="Label2" type="Label" parent="Control/TextureRect"]
+[node name="SelectedMissileText" type="Label" parent="Control/Control"]
 texture_filter = 6
 layout_mode = 1
 anchors_preset = 8
@@ -224,31 +282,36 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -8.5
-offset_top = -13.5
-offset_right = 58.5
-offset_bottom = 14.5
+offset_left = -15.0
+offset_top = 31.0
+offset_right = 98.0
+offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_fonts/font = ExtResource("21_e1dqm")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Cruise Missile"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Light" parent="Control/TextureRect" instance=ExtResource("22_yc7om")]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 6.0
-offset_right = 71.0
-offset_bottom = 46.0
+[node name="DroneGas" parent="Control/Control" instance=ExtResource("19_bexkj")]
+position = Vector2(173, -1.36424e-12)
+rotation = 1.57079
+scale = Vector2(0.489254, 0.449254)
 
-[connection signal="toggled" from="Control/Control/Arm" to="." method="_on_arm_drone_button_pressed"]
-[connection signal="pressed" from="Control/Control/Dissarm" to="." method="_on_dissarm_drone_button_2_pressed"]
-[connection signal="toggled" from="Control/Control/Dissarm" to="." method="_on_arm_drone_button_pressed"]
-[connection signal="pressed" from="Control/Control/Launch" to="." method="_on_deploy_drone_button_pressed"]
-[connection signal="pressed" from="Control/Control/off" to="." method="_on_turn_off_button_pressed"]
+[node name="TouchStopper" type="Control" parent="Control"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = -282.0
+offset_top = -121.0
+offset_right = 244.0
+offset_bottom = 51.0
+
+[connection signal="pressed" from="Control/Control/LaunchButton" to="." method="OnLaunchPressed"]
+[connection signal="pressed" from="Control/Control/DissarmButton" to="." method="OnDissarmPressed"]
+[connection signal="pressed" from="Control/Control/ArmButton" to="." method="OnArmPressed"]
+[connection signal="pressed" from="Control/Control/TurnOff" to="." method="TurnOffPressed"]
 [connection signal="RangeChanged" from="Control/Control/DroneGas" to="." method="UpdateSteer"]
 [connection signal="RangeSnapedChaned" from="Control/Control/DroneGas" to="." method="UpdateSelected"]

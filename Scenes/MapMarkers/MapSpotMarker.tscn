@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgsgcnyyv1gxm"]
 
-[ext_resource type="Script" path="res://Scripts/UI/map_spot_marker.gd" id="1_5x46s"]
+[ext_resource type="Script" uid="uid://c3wcxx1myg0wb" path="res://Scripts/UI/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_n5ia3"]
 
@@ -224,9 +224,9 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4iew2"]
 _data = {
-"RESET": SubResource("Animation_pxthd"),
-"SpotAnalyzed": SubResource("Animation_ph3na"),
-"SpotFound": SubResource("Animation_fxdlk")
+&"RESET": SubResource("Animation_pxthd"),
+&"SpotAnalyzed": SubResource("Animation_ph3na"),
+&"SpotFound": SubResource("Animation_fxdlk")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ey58"]

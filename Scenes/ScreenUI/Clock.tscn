@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://diq2p5s5u6bc0"]
 
-[ext_resource type="Script" path="res://Scripts/UI/clock.gd" id="1_1k7lr"]
+[ext_resource type="Script" uid="uid://bhjvlymp807sj" path="res://Scripts/UI/clock.gd" id="1_1k7lr"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="4_s5u7i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32s5e"]
@@ -75,8 +75,8 @@ offset_right = 57.5
 offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.80768, 0.999816, 0.788471, 1)
-theme_override_colors/font_outline_color = Color(0.483, 100, 0.381, 1)
+theme_override_colors/font_color = Color(0.652075, 0.999652, 0.623239, 1)
+theme_override_colors/font_outline_color = Color(0.0182532, 0.372706, 0.014834, 1)
 theme_override_constants/line_spacing = 10
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 0

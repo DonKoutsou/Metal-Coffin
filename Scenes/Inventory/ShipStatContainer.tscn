@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://r8hnhjq1f0q0"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_netfp"]
-[ext_resource type="Script" path="res://Scripts/UI/ShipStatContainer.gd" id="2_hehea"]
+[ext_resource type="Script" uid="uid://ba6i2l3wt1dop" path="res://Scripts/UI/ShipStatContainer.gd" id="2_hehea"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvfpq"]
 content_margin_left = 2.0
@@ -83,7 +83,7 @@ size_flags_horizontal = 10
 size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
-text = "[color=#c19200]{1}[/color]"
+text = "12 / 23"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 2

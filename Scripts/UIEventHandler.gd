@@ -29,6 +29,7 @@ signal LandPressed()
 #signal SimPausePressed()
 signal InventoryPressed()
 signal PausePressed()
+signal FleetSeparationPressed()
 #signal SimStepChanged(NewStep : float)
 
 signal ScreenUIToggled(t : bool)
@@ -111,6 +112,8 @@ func OnLandPressed() -> void:
 func OnInventoryPressed() -> void:
 	InventoryPressed.emit()
 
+func OnFleetSeparationPressed() -> void:
+	FleetSeparationPressed.emit()
 
 func OnPausePressed() -> void:
 	PausePressed.emit()

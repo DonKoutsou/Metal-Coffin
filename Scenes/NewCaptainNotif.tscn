@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://c8mhqxasgvcaw"]
 
-[ext_resource type="Script" path="res://Scripts/UI/new_captain_notif.gd" id="1_0w8d6"]
+[ext_resource type="Script" uid="uid://du63r6okycjs6" path="res://Scripts/UI/new_captain_notif.gd" id="1_0w8d6"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_16lxh"]
-[ext_resource type="Texture2D" uid="uid://bqkwoke2degse" path="res://Assets/CaptainPortraits/Captain8.png" id="1_61vqk"]
+[ext_resource type="Texture2D" uid="uid://i5etyaevvg3k" path="res://Assets/CaptainPortraits/Captain8.png" id="1_61vqk"]
 [ext_resource type="StyleBox" uid="uid://cqvxsqe7hceth" path="res://Theme/Darkblue_Circle.tres" id="2_edtct"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ve8i"]
@@ -59,8 +59,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_88w5f"]
 _data = {
-"Fadeout": SubResource("Animation_0634q"),
-"RESET": SubResource("Animation_v5284")
+&"Fadeout": SubResource("Animation_0634q"),
+&"RESET": SubResource("Animation_v5284")
 }
 
 [node name="CaptainNotification" type="Control"]

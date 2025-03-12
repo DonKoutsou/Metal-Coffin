@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cijjnpnnmoigc"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cijjnpnnmoigc"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_2ksgb"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="1_o8spy"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_2ksgb"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_eg83d"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_o8spy"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_b7bac"]
 
 [resource]
 script = ExtResource("1_2ksgb")
 SpotName = "Regan"
 EnemyCity = false
-HostilePatrolShipName = ""
 PossibleDrops = Array[ExtResource("1_o8spy")]([ExtResource("2_b7bac")])
-HostileShipName = ""
+Merchendise = Array[ExtResource("1_eg83d")]([])

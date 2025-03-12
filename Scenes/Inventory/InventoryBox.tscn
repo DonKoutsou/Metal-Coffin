@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1k2h35khc40y"]
 
-[ext_resource type="Script" path="res://Scripts/Inventory/Inventory_Box.gd" id="1_1cx5j"]
+[ext_resource type="Script" uid="uid://faswynkmbrw2" path="res://Scripts/Inventory/Inventory_Box.gd" id="1_1cx5j"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_xu5pf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_708pr"]

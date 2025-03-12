@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://djd1dfb5i6p0y"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7ge77"]
-[ext_resource type="Script" path="res://Scripts/fight_minigame.gd" id="2_j7j1y"]
+[ext_resource type="Script" uid="uid://dq8ut66nbknul" path="res://Scripts/fight_minigame.gd" id="2_j7j1y"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_qapge"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lxn3t"]

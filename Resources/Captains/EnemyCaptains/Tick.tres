@@ -1,91 +1,77 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=13 format=3 uid="uid://22pk1grsmvjx"]
+[gd_resource type="Resource" script_class="Captain" load_steps=15 format=3 uid="uid://22pk1grsmvjx"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_rer20"]
-[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_5r51y"]
+[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_5r51y"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_hg1bf"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_ln4rf"]
-[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="4_b2ula"]
+[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_b2ula"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="5_62pqv"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_5r51y")
-StatName = "SPEED"
-StatMax = 3.0
+StatName = 0
 StatBase = 2.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_bf8ot"]
 script = ExtResource("2_5r51y")
-StatName = "RADAR_RANGE"
-StatMax = 1000.0
+StatName = 0
 StatBase = 250.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_mcdo0"]
 script = ExtResource("2_5r51y")
-StatName = "FIREPOWER"
-StatMax = 10.0
+StatName = 0
 StatBase = 1.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_yl52l"]
 resource_local_to_scene = true
 script = ExtResource("2_5r51y")
-StatName = "HULL"
-StatMax = 300.0
+StatName = 0
 StatBase = 30.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_7g4dd"]
 script = ExtResource("2_5r51y")
-StatName = "ELINT"
-StatMax = 3000.0
+StatName = 0
 StatBase = 3000.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_4p6v8"]
 script = ExtResource("2_5r51y")
-StatName = "FUEL_EFFICIENCY"
-StatMax = 5.0
+StatName = 0
 StatBase = 5.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_66526"]
 resource_local_to_scene = true
 script = ExtResource("2_5r51y")
-StatName = "FUEL_TANK"
-StatMax = 500.0
+StatName = 0
 StatBase = 500.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_h3q7u"]
 script = ExtResource("2_5r51y")
-StatName = "MISSILE_SPACE"
-StatMax = 20.0
+StatName = 0
 StatBase = 0.0
-StatShipBuff = 0.0
-StatItemBuff = 0.0
-CurrentVelue = 0.0
-AllowAutoRefil = false
+StatShipPartBuff = 0.0
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [resource]
 resource_local_to_scene = true
@@ -96,3 +82,8 @@ CaptainPortrait = ExtResource("1_rer20")
 ShipIcon = ExtResource("3_ln4rf")
 CaptainStats = Array[ExtResource("2_5r51y")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u")])
 ShipCallsign = "T"
+StartingItems = Array[ExtResource("5_62pqv")]([])
+CurrentPort = ""
+CheckForErrors = false
+ProvidingFunds = 0
+Cards = Array[ExtResource("3_hg1bf")]([])

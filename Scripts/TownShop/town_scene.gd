@@ -103,20 +103,13 @@ func SetHullData():
 		PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	
 func FuelBar_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var rel = event.relative
 		var AddedFuel = roundi(((rel.x / 3) * (FuelBar.max_value / 100)))
 		UpdateFuelBar(AddedFuel)
-	if (event is InputEventScreenDrag):
-		var rel = event.relative
-		var AddedFuel = roundi(((rel.x / 3) * (FuelBar.max_value / 100)))
-		UpdateFuelBar(AddedFuel)
+
 func RepairBar_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		var rel = event.relative
-		var AddedRepair = roundi(((rel.x / 3) * (HullBar.max_value / 100)))
-		UpdateRepairBar(AddedRepair)
-	if (event is InputEventScreenDrag):
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var rel = event.relative
 		var AddedRepair = roundi(((rel.x / 3) * (HullBar.max_value / 100)))
 		UpdateRepairBar(AddedRepair)

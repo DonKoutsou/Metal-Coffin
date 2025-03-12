@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://mxfnm7hywo4f"]
 
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_elilk"]
-[ext_resource type="Script" path="res://Scripts/UI/Damage_Floater.gd" id="1_nmcop"]
+[ext_resource type="Script" uid="uid://cdwrypr6ltbch" path="res://Scripts/UI/Damage_Floater.gd" id="1_nmcop"]
 
 [node name="DamageFloater" type="Label"]
 modulate = Color(1, 0.161135, 0.371105, 1)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://c7q06y84ke4b3"]
 
-[ext_resource type="Script" path="res://Scripts/MapSpot/Town.gd" id="1_3ouol"]
+[ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_3ouol"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_5sb0b"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotType.gd" id="3_p0m7m"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/CitySpot.gd" id="4_ucdjx"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="3_p0m7m"]
+[ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="4_ucdjx"]
 [ext_resource type="Texture2D" uid="uid://cjqfld17y71ix" path="res://Assets/MapElements/coty2.png" id="5_kjpgs"]
 [ext_resource type="Resource" uid="uid://du24ilvkea51x" path="res://Resources/MapSpots/CitySpots/CityCenter.tres" id="6_ctmg0"]
 

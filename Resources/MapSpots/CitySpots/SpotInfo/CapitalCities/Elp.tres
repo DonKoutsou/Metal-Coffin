@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=8 format=3 uid="uid://dclt8xw084fal"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://dclt8xw084fal"]
 
-[ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="1_fc6nb"]
-[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="2_btbid"]
-[ext_resource type="Script" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="4_bc7ui"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="4_u7sym"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_x2uwb"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="4_bc7ui"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_u7sym"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_t2yuh"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="6_rsk4r"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="7_moet6"]
@@ -11,10 +10,6 @@
 [resource]
 script = ExtResource("4_bc7ui")
 SpotName = "Elp"
-Event = ExtResource("1_fc6nb")
 EnemyCity = true
-HostilePatrol = Array[ExtResource("2_btbid")]([])
-HostilePatrolShipNames = Array[String]([])
 PossibleDrops = Array[ExtResource("4_u7sym")]([ExtResource("5_t2yuh"), ExtResource("6_rsk4r"), ExtResource("7_moet6")])
-HostileGarrisson = Array[ExtResource("2_btbid")]([])
-HostileGarrissonShipNames = Array[String]([])
+Merchendise = Array[ExtResource("1_x2uwb")]([])

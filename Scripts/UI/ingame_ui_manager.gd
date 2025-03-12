@@ -6,6 +6,7 @@ class_name Ingame_UIManager
 @export var _MapMarkerEditor : MapMarkerEditor
 @export var PauseContainer : Control
 @export var DiagplScene : PackedScene
+
 @export var EventHandler : UIEventHandler
 
 signal GUI_Input(event)
@@ -17,6 +18,7 @@ func _ready() -> void:
 	Instance = self
 	EventHandler.connect("PausePressed", Pause)
 	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
+	
 	GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
 	EventHandler.connect("DrawLinePressed", _MapMarkerEditor._on_drone_button_pressed)
 	EventHandler.connect("DrawTextPressed", _MapMarkerEditor._OnTextButtonPressed)
@@ -26,6 +28,8 @@ func _ready() -> void:
 	_MapMarkerEditor.visible = false
 static func GetInstance() -> Ingame_UIManager:
 	return Instance
+
+
 
 func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 	if (UnderUI):

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://cf3nxx0s2bsn5"]
+[gd_resource type="Resource" script_class="UsableItem" load_steps=5 format=3 uid="uid://cf3nxx0s2bsn5"]
 
 [ext_resource type="Texture2D" uid="uid://dgk6qcppifpnk" path="res://Assets/Items/cubeforce.png" id="1_3f7co"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_w8wc6"]
 [ext_resource type="Texture2D" uid="uid://dwwluk8xikvpe" path="res://Assets/Items/cubeforcesmol.png" id="2_ksavl"]
-[ext_resource type="Script" path="res://Scripts/Inventory/UsableItem.gd" id="3_c4cjt"]
+[ext_resource type="Script" uid="uid://c2hy2hwaqy0vp" path="res://Scripts/Inventory/UsableItem.gd" id="3_c4cjt"]
 
 [resource]
 script = ExtResource("3_c4cjt")
@@ -13,4 +14,4 @@ ItemIconSmol = ExtResource("2_ksavl")
 ItemName = "Supply"
 ItemDesc = "Used to repair damages to the hull of the ship"
 MaxStackCount = 10
-RandomFindMaxCount = 3
+CardProviding = Array[ExtResource("1_w8wc6")]([])

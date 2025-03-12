@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=15 format=3 uid="uid://b4smeavm0axw3"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_01u70"]
-[ext_resource type="Script" path="res://Scripts/Stats/ShipStat.gd" id="2_s85u5"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="3_ahevm"]
-[ext_resource type="Script" path="res://Scripts/Inventory/Item.gd" id="3_iuwjv"]
+[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_s85u5"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_ahevm"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_iuwjv"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="3_rtsjw"]
-[ext_resource type="Script" path="res://Scripts/Stats/Captain.gd" id="4_6b0la"]
+[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_6b0la"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_s85u5")

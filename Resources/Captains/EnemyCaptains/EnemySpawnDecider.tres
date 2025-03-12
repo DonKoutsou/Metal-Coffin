@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpawnDecider" load_steps=36 format=3 uid="uid://c1buiwym6qkh8"]
 
-[ext_resource type="Script" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_e8y86"]
-[ext_resource type="Script" path="res://Scripts/EnemyAi/SpawnDecider.gd" id="2_gx7ll"]
+[ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_e8y86"]
+[ext_resource type="Script" uid="uid://orkurt2hukf6" path="res://Scripts/EnemyAi/SpawnDecider.gd" id="2_gx7ll"]
 [ext_resource type="Resource" uid="uid://ctb0bey42ck18" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/FireshipLvl1.tres" id="2_ujkrp"]
 [ext_resource type="Resource" uid="uid://brklxjupl0rch" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/FireshipLvl2.tres" id="3_3burq"]
 [ext_resource type="Resource" uid="uid://brutfvbqof8br" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/FireshipLvl3.tres" id="4_skjn5"]
@@ -18,7 +18,7 @@
 [ext_resource type="Resource" uid="uid://bcsspmo5nnyvm" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl2.tres" id="15_702x6"]
 [ext_resource type="Resource" uid="uid://g2a8jt5yrgwr" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl3.tres" id="16_b5jl3"]
 [ext_resource type="Resource" uid="uid://d17h4a7ifln30" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/TankerLvl4.tres" id="17_d84jx"]
-[ext_resource type="Script" path="res://Scripts/TownShop/merchandise_info.gd" id="18_dy8r8"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="18_dy8r8"]
 [ext_resource type="Resource" uid="uid://1dcxgrpt06te" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/LandFireshipLvl1.tres" id="18_mua1f"]
 [ext_resource type="Resource" uid="uid://dx7unrtjdflj2" path="res://Resources/Captains/EnemyCaptains/SpawnInfos/LandFireshipLvl2.tres" id="19_i0b0x"]
 [ext_resource type="Resource" uid="uid://cgcfrrlvaj7mi" path="res://Resources/Merch/CruiseMissile.tres" id="19_n3idt"]

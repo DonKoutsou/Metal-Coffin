@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://cyujmksfffet"]
 
-[ext_resource type="Script" path="res://Scripts/map.gd" id="1_vpest"]
+[ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
 [ext_resource type="PackedScene" uid="uid://yupxf3b2xhjq" path="res://Scenes/Towns/Village1.tscn" id="3_syapm"]
 [ext_resource type="PackedScene" uid="uid://cw0fmxei1f6xx" path="res://Scenes/Towns/Village2.tscn" id="4_jrhc7"]
@@ -14,21 +14,20 @@
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ufdxh"]
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_j6nai"]
-[ext_resource type="Script" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
+[ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="17_21a23"]
-[ext_resource type="Script" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
+[ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="21_oyi6l"]
-[ext_resource type="Script" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
+[ext_resource type="Script" uid="uid://c2ufjbkhk6v0q" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="22_n73so"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
-min_value = 1.0
-max_value = 10.0
+_limits = [0.99, 10.0, 0.0, 1.0]
 _data = [Vector2(0, 5.5), 0.0, 3.3398, 0, 0]
 point_count = 1
 
@@ -43,8 +42,9 @@ background_mode = 3
 background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_exposure = 2.0
-tonemap_white = 1.25
+tonemap_mode = 1
+tonemap_exposure = 0.7
+tonemap_white = 4.03
 glow_enabled = true
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
@@ -57,8 +57,8 @@ glow_mix = 0.825
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
-adjustment_brightness = 0.8
-adjustment_saturation = 0.7
+adjustment_brightness = 1.46
+adjustment_saturation = 0.8
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]
 light_mode = 1
@@ -90,10 +90,10 @@ EnemyShipNames = Array[String](["Mirage", "Sirocco", "Anubis", "Scimitar", "Horu
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 76.0
+offset_left = 74.0
 offset_top = 67.0
-offset_right = -333.0
-offset_bottom = -69.0
+offset_right = -334.0
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -109,7 +109,7 @@ snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(791, 512)
+size = Vector2i(792, 509)
 render_target_update_mode = 4
 
 [node name="Ground" type="Control" parent="SubViewportContainer/ViewPort"]

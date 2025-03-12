@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://cwoay1furrmi7"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_02upx"]
-[ext_resource type="Script" path="res://Scripts/CardFight/CardStats.gd" id="1_5kv6q"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_5kv6q"]
 [ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_rxeca"]
 [ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="3_o7sn3"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_nw4kc"]
-[ext_resource type="Script" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_fgxqn"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_nw4kc"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_fgxqn"]
 
 [sub_resource type="Resource" id="Resource_i41uq"]
+resource_local_to_scene = true
 script = ExtResource("4_nw4kc")
 UpgradeName = 0
 UpgradeAmmount = 75.0

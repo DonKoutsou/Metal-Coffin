@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardOption" load_steps=2 format=3 uid="uid://dep1p3s46i325"]
 
-[ext_resource type="Script" path="res://Scripts/CardFight/CardOption.gd" id="1_xhabx"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="1_xhabx"]
 
 [resource]
 script = ExtResource("1_xhabx")
@@ -9,7 +9,9 @@ EnergyAdd = 1
 DamageFlat = 0
 DamageMult = 1.0
 Fire = true
+Proxy = false
 DamageMitigationFlat = 0
 DamageMitigationPercent = 0.0
 ComatibleWeapon = 1
 CauseConsumption = true
+NegateCounter = false

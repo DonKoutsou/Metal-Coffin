@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://dpqowk6037rdv"]
 
 [ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="1_5wvn6"]
-[ext_resource type="Script" path="res://Scripts/TownShop/merchandise.gd" id="2_44yp3"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_44yp3"]
 
 [resource]
 script = ExtResource("2_44yp3")

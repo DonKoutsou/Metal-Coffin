@@ -187,8 +187,8 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 	var Cpt = GetBoxOwner(Box)
 	var OwnerInventory = _CharacterInventories[Cpt] as CharacterInventory
 	
-	var Transfer = ItemTransferScene.instantiate() as ItemTransfer
-	add_child(Transfer)
+	
+	
 	var AvailableCaptains : Array[Captain]
 	for g in _CharacterInventories.keys():
 		if (g == Cpt):
@@ -196,6 +196,11 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 		var inv = _CharacterInventories[g]
 		if (inv.HasSpaceForItem(Box.GetContainedItem())):
 			AvailableCaptains.append(g)
+	if (AvailableCaptains.size() == 0):
+		PopUpManager.GetInstance().DoFadeNotif("No characters to transfer too")
+		return
+	var Transfer = ItemTransferScene.instantiate() as ItemTransfer
+	add_child(Transfer)
 	Transfer.SetData(AvailableCaptains)
 	await Transfer.CharacterSelected
 	var SelectedChar = Transfer.SelectedCharacter
@@ -317,8 +322,8 @@ func LoadSaveData(Data : SaveData) -> void:
 	#FlushInventory()
 	for g in Data.Datas:
 		var dat = g as SD_CharacterInventory
-		call_deferred("LoadCharacter", dat.Cpt, dat.Items)
-		#LoadCharacter(dat.Cpt, dat.Items)
+		#call_deferred("LoadCharacter", dat.Cpt, dat.Items)
+		LoadCharacter(dat.Cpt, dat.Items)
 		dat.Cpt.LoadStats(dat.Fuel, dat.Hull)
 
 

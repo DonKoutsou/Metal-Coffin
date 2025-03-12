@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://b1q7brpw8cc2p"]
 
-[ext_resource type="Script" path="res://Scripts/UI/DroneTab.gd" id="1_v0de6"]
+[ext_resource type="Script" uid="uid://ddmda2myljemh" path="res://Scripts/UI/DroneTab.gd" id="1_v0de6"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="2_35lsn"]
 [ext_resource type="Texture2D" uid="uid://bxec8bkr01ino" path="res://Assets/UIPiecies/Screen/Panel.png" id="3_dcx1e"]
 [ext_resource type="PackedScene" uid="uid://bl1t8w4ot467w" path="res://Scenes/ScreenUI/AnimatedButton.tscn" id="10_igd2c"]
@@ -62,9 +62,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kt4fa"]
 _data = {
-"Hide": SubResource("Animation_brgwl"),
-"RESET": SubResource("Animation_wlayh"),
-"Show": SubResource("Animation_stsyt")
+&"Hide": SubResource("Animation_brgwl"),
+&"RESET": SubResource("Animation_wlayh"),
+&"Show": SubResource("Animation_stsyt")
 }
 
 [node name="Control" type="Control"]

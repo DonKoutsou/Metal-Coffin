@@ -75,3 +75,11 @@ func _physics_process(delta: float) -> void:
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 var stattween : Tween
+func EnableFullScreenShake() -> void:
+	for g in Cabled:
+		g.ApplyShake(2)
+	Shake = true
+	PauseShake(false)
+	shakestr = max(1.5, shakestr)
+	GoDownValue = 0.5
+	GoingDown = true

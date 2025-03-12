@@ -4,6 +4,13 @@ class_name MissileTab
 var Armed = false
 @export var MissileDockEventH : MissileDockEventHandler
 @export var DroneDockEventH : DroneDockEventHandler
+
+@export_group("Nodes")
+@export var MissileSelectLight : Light
+@export var AngleSelectLight : Light
+@export var RangeText : Label
+@export var SelectedMissileText : Label
+@export var TouchStopper : Control
 #var Missiles : Array[MissileItem]
 
 signal MissileLaunched
@@ -26,9 +33,9 @@ func UpdateConnectedShip(Ship : MapShip) -> void:
 		Missiles[Ship] = MissileAr
 		Ship.connect("OnShipDestroyed", OnShipDest)
 	if (Armed):
-		_on_dissarm_drone_button_2_pressed()
+		DissarmMiss()
 	ConnectedShip = Ship
-	call_deferred("UpdateCrewSelect")
+	call_deferred("UpdateMissileSelect")
 
 #HACK TO MAKE SURE UI IS INITIALISED IN TIME.
 func Initialise() -> void:
@@ -37,9 +44,8 @@ func Initialise() -> void:
 	MissileDockEventH.connect("MissileRemoved", MissileRemoved)
 
 func _ready() -> void:
-	
-	$Control/Control/Dissarm.ToggleDissable(true)
-	$Control/Control/Launch.ToggleDissable(true)
+	#$Control/Control/Dissarm.ToggleDissable(true)
+	#$Control/Control/Launch.ToggleDissable(true)
 	Initialise()
 	#visible = false
 
@@ -48,8 +54,7 @@ func FindOwner(Mis : MissileItem) -> Captain:
 		if (Missiles[g].has(Mis)):
 			return g.Cpt
 	return null
-	
-	
+
 var d = 0.3
 
 func _physics_process(delta: float) -> void:
@@ -82,7 +87,7 @@ func UpdateAvailableMissiles() -> void:
 	AvailableMissiles =  Misses
 	var sizea = AvailableMissiles.size()
 	if (sizeb != sizea):
-		UpdateCrewSelect()
+		UpdateMissileSelect()
 
 func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
 	var Ship = FindShip(Target)
@@ -93,7 +98,7 @@ func MissileAdded(MIs : MissileItem, Target : Captain) -> void:
 		return
 	Missiles[Ship].append(MIs)
 	if (CurrentlySelectedMissile == null):
-		UpdateCrewSelect()
+		UpdateMissileSelect()
 
 func MissileRemoved(MIs : MissileItem, Target : Captain) -> void:
 	var Ship = FindShip(Target)
@@ -102,63 +107,59 @@ func MissileRemoved(MIs : MissileItem, Target : Captain) -> void:
 	Missiles[Ship].erase(MIs)
 	if (MIs == CurrentlySelectedMissile):
 		CurrentlySelectedMissile = null
-		UpdateCrewSelect()
+		UpdateMissileSelect()
 
 func OnShipDest(Ship : MapShip) -> void:
 	Missiles.erase(Ship)
 
-func _on_deploy_drone_button_pressed() -> void:
+func OnLaunchPressed() -> void:
+	if (!Armed):
+		PopUpManager.GetInstance().DoFadeNotif("No missile is Armed. Launch canceled.")
+		return
 	PopUpManager.GetInstance().DoFadeNotif("{0} Launched".format([CurrentlySelectedMissile.ItemName]))
 	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, FindOwner(CurrentlySelectedMissile),ConnectedShip.Cpt)
 	AchievementManager.GetInstance().UlockAchievement("MC_MISSILEFIRE")
 	MissileLaunched.emit()
 	DissarmMiss()
-func _on_arm_drone_button_pressed(t : bool) -> void:
+	
+func OnArmPressed() -> void:
 	if (AvailableMissiles.size() == 0):
 		PopUpManager.GetInstance().DoFadeNotif("No missiles available")
 		DissarmMiss()
 		return
-	if (!t):
-		_on_dissarm_drone_button_2_pressed()
+	if (Armed):
+		PopUpManager.GetInstance().DoFadeNotif("A missile is already armed")
 		return
+
 	Armed = true
+	MissileSelectLight.Toggle(false, false)
+	AngleSelectLight.Toggle(true, true)
 	PopUpManager.GetInstance().DoFadeNotif("{0} Armed".format([CurrentlySelectedMissile.ItemName]))
-	$Control/Control/Dissarm.ToggleDissable(false)
-	$Control/Control/Launch.ToggleDissable(false)
 
 	MissileDockEventH.MissileArmed(CurrentlySelectedMissile, ConnectedShip.Cpt)
 
+
+func OnDissarmPressed() -> void:
+	PopUpManager.GetInstance().DoFadeNotif("{0} Dissarmed".format([CurrentlySelectedMissile.ItemName]))
+	DissarmMiss()
+
 func DissarmMiss() -> void:
 	Armed = false
-	$Control/Control/Arm.set_pressed_no_signal(false)
-	$Control/Control/Dissarm.ToggleDissable(true)
-	$Control/Control/Launch.ToggleDissable(true)
+	MissileSelectLight.Toggle(true, true)
+	AngleSelectLight.Toggle(false, false)
 	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
-
-func _on_dissarm_drone_button_2_pressed() -> void:
-	PopUpManager.GetInstance().DoFadeNotif("{0} Dissarmed".format([CurrentlySelectedMissile.ItemName]))
-	Armed = false
-	$Control/Control/Arm.set_pressed_no_signal(false)
-	$Control/Control/Dissarm.ToggleDissable(true)
-	$Control/Control/Launch.ToggleDissable(true)
-	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
-	$Control/Control/Arm._on_toggled(false)
-func _on_toggle_drone_tab_pressed() -> void:
+	
+func Toggle() -> void:
 	if ($AnimationPlayer.is_playing()):
 		await $AnimationPlayer.animation_finished
 	if (!Showing):
-		$Control/TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
+		TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 		$AnimationPlayer.play("Show")
-		UpdateCrewSelect()
+		UpdateMissileSelect()
 		Showing = true
 	else:
-		_on_turn_off_button_pressed()
+		TurnOffPressed()
 
-func TurnOff() -> void:
-	if (!Showing):
-		return
-	_on_turn_off_button_pressed()
-		
 var SteeringDir : float = 0.0
 
 func UpdateSteer(RelativeRot : float):
@@ -168,23 +169,20 @@ func UpdateSteer(RelativeRot : float):
 
 func UpdateSelected(Dir : bool) -> void:
 	if (!Armed):
-		ProgressCrewSelect(Dir)
+		ProgressMissileSelect(Dir)
 
-func UpdateCrewSelect(Select : int = 0):
+func UpdateMissileSelect(Select : int = 0):
 	if (AvailableMissiles.size() > Select):
 		SelectedIndex = Select
 		CurrentlySelectedMissile = AvailableMissiles[Select]
-		$Control/TextureRect/Label2.text = CurrentlySelectedMissile.ItemName
-		$Control/Control/Label.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
-		$Control/TextureRect/Light.Toggle(true, true)
+		SelectedMissileText.text = CurrentlySelectedMissile.ItemName
+		RangeText.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
 	else:
-		$Control/TextureRect/Label2.text = "No Missiles"
-		$Control/TextureRect/Light.Toggle(true)
+		SelectedMissileText.text = "No Missiles"
 		
-func ProgressCrewSelect(Front : bool = true):
+func ProgressMissileSelect(Front : bool = true):
 	if (AvailableMissiles.size() == 0):
-		$Control/TextureRect/Label2.text = "No Missiles"
-		$Control/TextureRect/Light.Toggle(true)
+		SelectedMissileText.text = "No Missiles"
 		return
 	if (CurrentlySelectedMissile == null):
 		CurrentlySelectedMissile = AvailableMissiles[0]
@@ -198,15 +196,18 @@ func ProgressCrewSelect(Front : bool = true):
 		else : if (SelectedIndex < 0):
 			SelectedIndex = AvailableMissiles.size() - 1
 		CurrentlySelectedMissile = AvailableMissiles[SelectedIndex]
-	$Control/TextureRect/Light.Toggle(true, true)
-	$Control/TextureRect/Label2.text = CurrentlySelectedMissile.ItemName
-	$Control/Control/Label.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
-func _on_turn_off_button_pressed() -> void:
-	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_STOP
+		
+	SelectedMissileText.text = CurrentlySelectedMissile.ItemName
+	RangeText.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
+	
+func TurnOffPressed() -> void:
+	TouchStopper.mouse_filter = MOUSE_FILTER_STOP
 	if (Armed):
-		_on_dissarm_drone_button_2_pressed()
+		DissarmMiss()
 	$AnimationPlayer.play("Hide")
 	Showing = false
-func _on_drone_range_slider_value_changed(value: float) -> void:
-	$Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer4/Label2.text = var_to_str(value / 2)
-	#DroneDockEventH.OnDronRangeChanged(value)
+
+func TurnOff() -> void:
+	if (!Showing):
+		return
+	TurnOffPressed()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://djgy3lp61vapo"]
 
-[ext_resource type="Script" path="res://Resources/Funds/Funds_Stat_container.gd" id="1_lghqb"]
+[ext_resource type="Script" uid="uid://brbba7olbisek" path="res://Resources/Funds/Funds_Stat_container.gd" id="1_lghqb"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_gmtu8"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="4_qnuj3"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="7_xbk7s"]
@@ -47,8 +47,8 @@ offset_right = 65.5
 offset_bottom = 16.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.80768, 0.999816, 0.788471, 1)
-theme_override_colors/font_outline_color = Color(0.483, 100, 0.381, 1)
+theme_override_colors/font_color = Color(0.652075, 0.999652, 0.623239, 1)
+theme_override_colors/font_outline_color = Color(0.0182532, 0.372706, 0.014834, 1)
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("7_xbk7s")
