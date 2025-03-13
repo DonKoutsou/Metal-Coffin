@@ -51,6 +51,7 @@ theme_override_constants/separation = 10
 
 [node name="CardName" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 16
 text = "Card Name"
 horizontal_alignment = 1
@@ -61,7 +62,7 @@ autowrap_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 8
 bbcode_enabled = true
 text = "[center]  test test \\n test"
 fit_content = true
@@ -73,6 +74,7 @@ modulate = Color(1, 0.763983, 0.0812772, 1)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 14
 text = "1"
 horizontal_alignment = 2

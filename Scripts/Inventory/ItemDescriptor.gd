@@ -84,9 +84,12 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	
 	if (It.CardProviding.size() > 0):
 		for g in It.CardProviding:
+			var CardS = g.duplicate() as CardStats
 			var card = CardScene.instantiate() as Card
 			card.Dissable()
-			card.SetCardStats(g, [])
+			if (It.CardOptionProviding != null):
+				CardS.SelectedOption = It.CardOptionProviding
+			card.SetCardStats(CardS, [])
 			CardPlecement.add_child(card)
 	else:
 		CardSection.visible = false

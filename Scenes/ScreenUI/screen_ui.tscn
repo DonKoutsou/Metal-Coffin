@@ -827,6 +827,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="NormalScreen/Pause"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -840,6 +841,7 @@ offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.651769, 0.651769, 0.651769, 1)
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 40
 text = "II"
 horizontal_alignment = 1
