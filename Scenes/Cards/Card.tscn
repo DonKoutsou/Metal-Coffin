@@ -38,6 +38,7 @@ theme = ExtResource("2_n60qq")
 
 [node name="CardIcon" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.3)
+texture_filter = 1
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_irncy")

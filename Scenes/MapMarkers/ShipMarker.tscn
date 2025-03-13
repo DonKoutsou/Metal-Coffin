@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=13 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
 [ext_resource type="Script" uid="uid://we85k2ntvck5" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
-[ext_resource type="AudioStream" uid="uid://b0webvyay3i6d" path="res://Assets/VoiceLines/mapmode_contact_radar_01.wav" id="3_6yg5x"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
@@ -47,7 +46,6 @@ HullLabel = NodePath("Control/PanelContainer/VBoxContainer/Hull")
 DetailPanel = NodePath("Control")
 ShipIcon = NodePath("Icon")
 VisualContactCountdown = NodePath("Control/VisualContactCountdown")
-EnemyLocatedSound = ExtResource("3_6yg5x")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
 Icons = {

@@ -1,6 +1,5 @@
 [gd_scene load_steps=13 format=3 uid="uid://bas2hvjynjr05"]
 
-[ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="1_uao5l"]
 [ext_resource type="Script" uid="uid://b6akb2f5doubl" path="res://Scenes/loading_screen.gd" id="2_ehbru"]
 [ext_resource type="Texture2D" uid="uid://dmn5vs4kmksro" path="res://Assets/Logos/Name1438p.png" id="2_fo8k0"]
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="2_how7o"]
@@ -10,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c0od8ddjkv4ks" path="res://Assets/Logos/ΜΧΨ4.png" id="7_6jo5o"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="7_s87fu"]
 [ext_resource type="Texture2D" uid="uid://dssiekrv78ooj" path="res://Assets/Logos/ΜΧΨ5.png" id="8_1dav1"]
+[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="9_xbrhi"]
 
 [sub_resource type="Animation" id="Animation_n8xlk"]
 resource_name = "Logo"
@@ -225,7 +225,7 @@ visible_characters = 0
 
 [node name="Screen" type="ColorRect" parent="."]
 process_mode = 3
-material = ExtResource("1_uao5l")
+material = ExtResource("9_xbrhi")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

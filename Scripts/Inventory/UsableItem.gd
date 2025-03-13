@@ -1,3 +1,4 @@
+@tool
 extends Item
 class_name UsableItem
 

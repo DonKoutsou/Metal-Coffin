@@ -14,7 +14,7 @@ signal OnItemSold(It : Item)
 
 #var PlFunds : int = 10000
 var LandedShip : MapShip
-var ItPrice : int = 10
+var ItPrice : float = 10
 var It : Item
 var ShopAmm : int = 10
 var PlAmm : int = 4

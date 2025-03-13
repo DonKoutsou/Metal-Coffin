@@ -22,7 +22,7 @@ func UpdateProgress(Precent : float) -> void:
 	tw.tween_property($ProgressBar, "value", Precent, 1)
 	#$ProgressBar.value = Precent
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	Labe.visible_characters = min(Labe.text.length(), Labe.visible_characters + 1)
 
 func StartDest():

@@ -93,10 +93,6 @@ func OnShipContainerSelecter(Cont : FleetSeparationShipViz) -> void:
 		UpdateCurrentFleetStats()
 		UpdateNewFleetStats()
 func UpdateCurrentFleetStats() -> void:
-	var MaxFuel : float
-	var CurrentFuel : float
-	var FleetRange : float
-	
 	var Cap = CurrentFleet[0]
 	var FuelStats = Cap.GetFuelStats()
 	CurrentFleetRangeText.text = var_to_str(roundi(FuelStats["FleetRange"])) + " km"
@@ -104,9 +100,6 @@ func UpdateCurrentFleetStats() -> void:
 	CurrentFleetFuelBar.value = FuelStats["CurrentFuel"]
 
 func UpdateNewFleetStats() -> void:
-	var MaxFuel : float
-	var CurrentFuel : float
-	var FleetRange : float
 	if (NewFleet.size() > 0):
 		var Cap = NewFleet[0]
 		var FuelStats = Cap.GetFuelStats()

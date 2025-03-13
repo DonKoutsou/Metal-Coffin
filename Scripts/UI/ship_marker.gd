@@ -17,8 +17,6 @@ class_name ShipMarker
 @export_group("Resources")
 #@export var EnemyLocatedNotifScene : PackedScene
 
-@export var EnemyLocatedSound : AudioStream
-
 #@export var DroneReturnNotif : PackedScene
 
 @export var ResuplyNotificationScene : PackedScene
@@ -52,12 +50,7 @@ func _ready() -> void:
 func PlayHostileShipNotif(text : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText(text)
-	var sound = DeletableSoundGlobal.new()
-	sound.stream = EnemyLocatedSound
-	sound.volume_db = -10
-	sound.bus = "UI"
-	sound.autoplay = true
-	add_child(sound)
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.RADAR_DETECTED)
 	add_child(notif)
 	
 func OnShipDeparted() -> void:
@@ -89,10 +82,10 @@ func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 		connect("ShipDeparted", notif.OnShipDeparted)
 		add_child(notif)
 
-func ToggleShowElint( t : bool, ElingLevel : int, Direction : String):
+func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 	if ElintNotif != null:
 		if (t):
-			ElintNotif.SetText("ELINT : Lvl {0} \nDiretion : {1}".format([var_to_str(ElingLevel), Direction]))
+			ElintNotif.SetText("ELINT : Lvl {0} \nDiretion : {1}".format([var_to_str(ElingLevel), ElintDirection]))
 			return
 		else :
 			ElintNotif.queue_free()
@@ -100,7 +93,7 @@ func ToggleShowElint( t : bool, ElingLevel : int, Direction : String):
 			return
 	if (t):
 		ElintNotif = NotificationScene.instantiate() as ShipMarkerNotif
-		ElintNotif.SetText("ELINT : {0} \nDiretion : {1}".format([var_to_str(ElingLevel), Direction]))
+		ElintNotif.SetText("ELINT : {0} \nDiretion : {1}".format([var_to_str(ElingLevel), ElintDirection]))
 		ElintNotif.Blink = true
 		ElintNotif.Fast = true
 		#connect("ShipDeparted", notif.OnShipDeparted)

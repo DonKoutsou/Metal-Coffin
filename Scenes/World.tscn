@@ -31,6 +31,7 @@ Controller = NodePath("ShipController")
 CardFightScene = ExtResource("6_sol3n")
 LoadingScene = ExtResource("3_pocgy")
 FleetSeparationScene = ExtResource("10_8l3nt")
+HappeningUI = ExtResource("9_5gym6")
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
 
@@ -40,8 +41,6 @@ _Map = NodePath("../Map")
 DroneDockEventH = ExtResource("8_q55oc")
 ShipControllerEventH = ExtResource("6_1ajha")
 UIEventH = ExtResource("7_3dbmh")
-HappeningUI = ExtResource("9_5gym6")
-FleetSeparationScene = ExtResource("10_8l3nt")
 
 [node name="Commander" parent="." instance=ExtResource("10_15dwo")]
 

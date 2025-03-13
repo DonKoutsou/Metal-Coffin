@@ -17,7 +17,7 @@ class_name ScreenUI
 
 signal FullScreenToggleStarted
 signal FullScreenToggleFinished(t : bool)
-signal FleetSeparationInitiated
+#signal FleetSeparationInitiated
 
 func ToggleFullScreen(toggle : bool) -> void:
 	FullScreenToggleStarted.emit()
@@ -177,7 +177,7 @@ func Pause_Pressed() -> void:
 func ToggleControllCover(t : bool) -> void:
 	ButtonCover.visible = t
 
-func OnControlledShipDamaged() -> void:
+func OnControlledShipDamaged(DamageAmm : float) -> void:
 	#var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_BOUNCE)
 	#tw.tween_property($ScreenCam, "shakestr", 0, 8)

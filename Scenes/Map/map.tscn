@@ -42,9 +42,9 @@ background_mode = 3
 background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_mode = 1
+tonemap_mode = 3
 tonemap_exposure = 0.7
-tonemap_white = 4.03
+tonemap_white = 16.0
 glow_enabled = true
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
@@ -57,7 +57,8 @@ glow_mix = 0.825
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
-adjustment_brightness = 1.46
+adjustment_brightness = 0.86
+adjustment_contrast = 0.95
 adjustment_saturation = 0.8
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]

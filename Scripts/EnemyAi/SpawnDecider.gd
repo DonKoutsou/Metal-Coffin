@@ -41,7 +41,7 @@ func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 	return available_merch
 
 func GetSpawnsForLocation(YPos : float, Patrol : bool, stage : Happening.GameStage) -> Array[Captain]:
-	var time = Time.get_ticks_msec()
+	#var time = Time.get_ticks_msec()
 	
 	var Fleet : Array[Captain] = []
 	var Points = GetPointsForPosition(abs(YPos))
@@ -77,7 +77,7 @@ func generate_fleet(points: int, Patrol : bool, stage : Happening.GameStage) -> 
 		available_ships.shuffle()
 		
 		var selected_ship: CaptainSpawnInfo = null
-		var best_value = 0
+		#var best_value = 0
 
 		# Consider each ship for inclusion
 		for ship in available_ships:

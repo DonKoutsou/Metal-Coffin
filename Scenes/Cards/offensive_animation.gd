@@ -84,7 +84,7 @@ func TweenEnded(Damage : float) -> void:
 			d.global_position = (g.global_position + (g.size / 2)) - d.size / 2.
 			d.connect("Ended", AnimEnded)
 		if (fr):
-			UIEventH.OnControlledShipDamaged()
+			UIEventH.OnControlledShipDamaged(Damage)
 	else :
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"

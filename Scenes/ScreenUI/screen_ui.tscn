@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=47 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://43oufd7tk1tv" path="res://Scripts/Cable.gd" id="33_l6yn6"]
 [ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
+[ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/speaker.tscn" id="33_wetmy"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="36_ai3xr"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
@@ -354,9 +355,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -230.0
+offset_left = -231.0
 offset_top = -266.0
-offset_right = -208.0
+offset_right = -210.0
 offset_bottom = -222.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -373,9 +374,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -230.0
+offset_left = -231.0
 offset_top = -201.0
-offset_right = -208.0
+offset_right = -210.0
 offset_bottom = -157.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -393,10 +394,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -230.0
+offset_left = -231.0
 offset_top = -136.0
-offset_right = -208.0
-offset_bottom = -91.0
+offset_right = -210.0
+offset_bottom = -92.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("9_3s488")
@@ -651,10 +652,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -152.0
-offset_top = -47.0
-offset_right = -106.0
-offset_bottom = -25.0
+offset_left = -153.0
+offset_top = -46.0
+offset_right = -109.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -675,9 +676,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -230.0
+offset_left = -231.0
 offset_top = -8.0
-offset_right = -208.0
+offset_right = -210.0
 offset_bottom = 37.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -694,10 +695,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -230.0
-offset_top = -47.0
-offset_right = -185.0
-offset_bottom = -25.0
+offset_left = -231.0
+offset_top = -46.0
+offset_right = -187.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -718,10 +719,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -230.0
+offset_left = -231.0
 offset_top = -71.0
-offset_right = -208.0
-offset_bottom = -26.0
+offset_right = -210.0
+offset_bottom = -27.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("17_07pwg")
@@ -757,10 +758,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -46.0
-offset_top = -477.0
-offset_right = -25.0
-offset_bottom = -431.0
+offset_left = -47.0
+offset_top = -476.0
+offset_right = -27.0
+offset_bottom = -432.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("21_ue6hp")
@@ -776,10 +777,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = -47.0
-offset_right = -25.0
-offset_bottom = -25.0
+offset_left = -72.0
+offset_top = -46.0
+offset_right = -27.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -810,10 +811,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0
-offset_top = 32.0
-offset_right = -24.0
-offset_bottom = 77.0
+offset_left = -84.0
+offset_top = 34.0
+offset_right = -27.0
+offset_bottom = 76.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -849,10 +850,10 @@ layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -56.5
-offset_top = -195.5
-offset_right = -56.5
-offset_bottom = -195.5
+offset_left = -58.4
+offset_top = -195.0
+offset_right = -58.4
+offset_bottom = -195.0
 grow_horizontal = 0
 
 [node name="Fund_Container" parent="NormalScreen" instance=ExtResource("28_qwofv")]
@@ -886,6 +887,15 @@ grow_vertical = 2
 mouse_filter = 0
 texture = ExtResource("31_bthjx")
 expand_mode = 1
+
+[node name="Speaker" parent="NormalScreen" instance=ExtResource("33_wetmy")]
+offset_left = 2.0
+offset_top = 94.0
+offset_right = 42.0
+offset_bottom = 134.0
+rotation = -0.0490991
+frequency = 10.0
+phase_offset = 1.265
 
 [node name="ScreenFrameLong" type="TextureRect" parent="."]
 visible = false
@@ -1080,7 +1090,7 @@ flip_h = true
 position = Vector2(600, 324)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../ScreenFrame4"), NodePath("../ScreenFrame3"), NodePath("../ScreenFrame5"), NodePath("../ScreenFrame6")]
+Cabled = [NodePath("../ScreenFrame4"), NodePath("../ScreenFrame3"), NodePath("../ScreenFrame5"), NodePath("../ScreenFrame6"), NodePath("../NormalScreen/Speaker")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
 position = Vector2(-600, -324)
@@ -1104,7 +1114,7 @@ texture = ExtResource("36_ai3xr")
 texture_scale = 23.39
 
 [node name="AlarmLight2" type="PointLight2D" parent="ScreenCam"]
-position = Vector2(4, -666)
+position = Vector2(3, -666)
 energy = 2.0
 texture = ExtResource("36_ai3xr")
 texture_scale = 50.0

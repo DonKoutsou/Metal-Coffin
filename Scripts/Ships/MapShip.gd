@@ -70,7 +70,7 @@ func _ready() -> void:
 		
 func _draw() -> void:
 	if (ShowFuelRange):
-		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 0.764, 0.081), false, 2 / CamZoom, true)
+		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 0.764, 0.081), false, 2.0 / CamZoom, true)
 		
 func _physics_process(delta: float) -> void:
 
@@ -476,8 +476,7 @@ func GetShipIcon() -> Node2D:
 
 func GetFuelStats() -> Dictionary[String, float]:
 	var Stats : Dictionary[String, float]
-	
-	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
 	var total_fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)

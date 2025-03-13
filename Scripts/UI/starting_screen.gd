@@ -30,7 +30,7 @@ func _ready() -> void:
 			#$AchievementManager.SteamRunning = true
 			#print("Achievement Tracking Enabled")
 	
-	var vidpl = StudioAnim.instantiate() as StudioAnim
+	var vidpl = StudioAnim.instantiate() as StudioAnimation
 	add_child(vidpl)
 	await vidpl.Finished
 	vidpl.queue_free()

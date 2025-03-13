@@ -39,7 +39,7 @@ class_name Card_Fight
 var DamageDone : float = 0
 var DamageGot : float = 0
 var DamageNeg : float = 0
-var FundsToWin : float = 0
+var FundsToWin : int = 0
 
 var Energy : int = 4
 

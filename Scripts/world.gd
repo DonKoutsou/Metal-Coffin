@@ -9,6 +9,7 @@ class_name World
 @export var CardFightScene : PackedScene
 @export var LoadingScene : PackedScene
 @export var FleetSeparationScene : PackedScene
+@export var HappeningUI : PackedScene
 @export_group("Wallet")
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
@@ -112,6 +113,7 @@ func _enter_tree() -> void:
 	
 	map.connect("MAP_EnemyArrival", StartDogFight)
 	Controller.connect("FleetSeperationRequested", StartShipTrade)
+	Controller.connect("LandingRequested", OnLandRequested)
 	#var statp = GetStatPanel()
 	##connect("WRLD_StatsUpdated", statp.StatsUp)
 	#connect("WRLD_StatGotLow", statp.StatsLow)
@@ -209,6 +211,100 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	
 	GetMap().GetScreenUi().ToggleControllCover(false)
 	GetMap().GetScreenUi().ToggleFullScreen(false)
+
+#LANDING
+func OnLandRequested(ControlledShip : MapShip) -> void:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+		
+	var spot = Instigator.CurrentPort as MapSpot
+	if (spot == null):
+		PopUpManager.GetInstance().DoFadeNotif("No port to land to")
+		return
+	if (Instigator.Landing):
+		return
+	if (Instigator.Altitude == 0):
+		OnShipLanded(Instigator)
+		return
+	if (Instigator.GetShipSpeed() > 0):
+		PopUpManager.GetInstance().DoFadeNotif("Ship cant land while moving")
+		return
+	Instigator.StartLanding()
+	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
+	Instigator.connect("LandingEnded", OnShipLanded)
+	Instigator.connect("LandingCanceled", OnLandingCanceled)
+
+func OnLandingCanceled(Ship : MapShip) -> void:
+	PopUpManager.GetInstance().DoFadeNotif("Landing sequence canceled")
+	Ship.disconnect("LandingEnded", OnShipLanded)
+	Ship.disconnect("LandingCanceled", OnLandingCanceled)
+
+func OnShipLanded(Ship : MapShip) -> void:
+	if (Ship.is_connected("LandingEnded", OnShipLanded)):
+		Ship.disconnect("LandingEnded", OnShipLanded)
+	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):
+		Ship.disconnect("LandingCanceled", OnLandingCanceled)
+	SimulationManager.GetInstance().TogglePause(true)
+	var spot = Ship.CurrentPort as MapSpot
+	var PlayedEvent = Land(spot, Ship)
+	if (PlayedEvent):
+		return
+	var sc = spot.FuelTradeScene as PackedScene
+	var fuel = sc.instantiate() as TownScene
+	#fuel.TownMerch = spot.SpotInfo.Merchendise
+	fuel.HasFuel = spot.HasFuel()
+	fuel.HasRepair = spot.HasRepair()
+	fuel.TownFuel = spot.CityFuelReserves
+	fuel.BoughtFuel = spot.PlayerFuelReserves
+	fuel.BoughtRepairs = spot.PlayerRepairReserves
+	fuel.connect("TransactionFinished", FuelTransactionFinished)
+	fuel.LandedShip = Ship
+	fuel.TownSpot = spot
+	Ingame_UIManager.GetInstance().AddUI(fuel, true)
+	GetMap().GetScreenUi().ToggleFullScreen(true)
+	#UIEventH.OnScreenUIToggled(false)
+	#UIEventH.OnButtonCoverToggled(true)
+func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
+	var spot = Ship.CurrentPort as MapSpot
+	if (spot.PlayerFuelReserves != BFuel):
+		spot.CityFuelReserves -= BFuel
+	if (BFuel < 0):
+		#if (Ship is PlayerShip):
+			#ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
+		#else:
+		Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
+
+	spot.PlayerFuelReserves = max(0 , BFuel)
+	spot.PlayerRepairReserves = max(0, BRepair)
+	
+	GetMap().GetScreenUi().ToggleFullScreen(false)
+	#UIEventH.OnScreenUIToggled(true)
+	##SimulationManager.GetInstance().TogglePause(false)
+	#UIEventH.OnButtonCoverToggled(false)
+func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+	#ControlledShip.HaltShip()
+	var PlayedEvent = false
+	if (Spot.Event != null and !Spot.Visited):
+		var happeningui = HappeningUI.instantiate() as HappeningInstance
+		happeningui.HappeningInstigator = Instigator
+		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
+		happeningui.PresentHappening(Spot.Event)
+		GetMap().GetScreenUi().ToggleFullScreen(false)
+		#UIEventH.OnScreenUIToggled(false)
+		#UIEventH.OnButtonCoverToggled(true)
+		happeningui.connect("HappeningFinished", HappeningFinished)
+		PlayedEvent = true
+	Spot.OnSpotVisited()
+	return PlayedEvent
+	
+func HappeningFinished() -> void:
+	GetMap().GetScreenUi().ToggleFullScreen(false)
+	#UIEventH.OnScreenUIToggled(true)
+	#UIEventH.OnButtonCoverToggled(false)
 
 #Make sure to remove all items that their cards have been used
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo : Dictionary):

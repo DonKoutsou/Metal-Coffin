@@ -21,7 +21,10 @@ static func GetInstance() -> SimulationManager:
 
 static func IsPaused() -> bool:
 	return Paused
-	
+
+static func SimSpeed() -> int:
+	return SimulationSpeed
+
 func TogglePause(t : bool) -> void:
 	simulation_notification.SimPaused(t)
 	Paused = t

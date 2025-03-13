@@ -8,7 +8,7 @@ var Distance : int = 1500
 var Speed : float = 1
 var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
-@export var MissileKillSound : AudioStream
+
 var FoundShips : Array[Node2D] = []
 var Paused = false
 var SimulationSpeed : int = 1
@@ -114,13 +114,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		return
 	area.get_parent().Damage(Damage)
 	if (area.get_parent().IsDead()):
-		var s = DeletableSoundGlobal.new()
-		s.stream = MissileKillSound
-		s.volume_db = -10
-		s.bus = "UI"
-		s.autoplay = true
-		#s.max_distance = 20000
-		get_parent().add_child(s)
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.TARGET_DEST)
 	call_deferred("Kill")
 		
 func _on_missile_body_area_exited(area: Area2D) -> void:

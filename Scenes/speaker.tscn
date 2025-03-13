@@ -1,0 +1,62 @@
+[gd_scene load_steps=15 format=3 uid="uid://b7cgarcbvixw6"]
+
+[ext_resource type="Script" uid="uid://jj8scn4ef501" path="res://Scripts/speaker.gd" id="1_5i5xf"]
+[ext_resource type="Texture2D" uid="uid://cbg33obslhrhy" path="res://Assets/UIPiecies/Screen/Speaker_FullQuality.png" id="1_mrwrk"]
+[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="2_5i5xf"]
+[ext_resource type="AudioStream" uid="uid://bymb44f8ge1q3" path="res://Assets/VoiceLines/LandingStart.mp3" id="2_dvjny"]
+[ext_resource type="AudioStream" uid="uid://byqrdeh8f56vh" path="res://Assets/VoiceLines/LandingComplete.mp3" id="3_fjhpm"]
+[ext_resource type="AudioStream" uid="uid://l3irygo540pg" path="res://Assets/VoiceLines/Damaged.mp3" id="4_lpxs0"]
+[ext_resource type="AudioStream" uid="uid://dkx2t35x5b2a3" path="res://Assets/VoiceLines/LiftOff.mp3" id="5_8fefr"]
+[ext_resource type="AudioStream" uid="uid://bftr7v2col3rw" path="res://Assets/VoiceLines/RadarDetected.mp3" id="6_iscgv"]
+[ext_resource type="AudioStream" uid="uid://by3alnfngj2q6" path="res://Assets/VoiceLines/RadarDetected2.mp3" id="7_2vroc"]
+[ext_resource type="AudioStream" uid="uid://blg7dow3gycjv" path="res://Assets/VoiceLines/RadarDetected3.mp3" id="8_ulhfu"]
+[ext_resource type="AudioStream" uid="uid://c5tf6ammmexey" path="res://Assets/VoiceLines/RadioDetected.mp3" id="9_bgimx"]
+[ext_resource type="AudioStream" uid="uid://bm6ss6aupjt2y" path="res://Assets/VoiceLines/VisualContact.mp3" id="10_cwdkg"]
+[ext_resource type="AudioStream" uid="uid://ceoxpuch57wsg" path="res://Assets/VoiceLines/TargetDestr.mp3" id="11_518v1"]
+[ext_resource type="AudioStream" uid="uid://bgg5wwdq877gi" path="res://Assets/VoiceLines/Aproaching.mp3" id="12_ly22l"]
+
+[node name="Speaker" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_right = 60.0
+offset_bottom = 40.0
+pivot_offset = Vector2(40, 20)
+script = ExtResource("1_5i5xf")
+SoundList = Dictionary[int, Array]({
+0: [ExtResource("2_dvjny")],
+1: [ExtResource("3_fjhpm")],
+2: [ExtResource("4_lpxs0")],
+3: [ExtResource("5_8fefr")],
+4: [ExtResource("6_iscgv"), ExtResource("7_2vroc"), ExtResource("8_ulhfu")],
+5: [ExtResource("9_bgimx")],
+6: [ExtResource("10_cwdkg")],
+7: [ExtResource("11_518v1")],
+8: [ExtResource("12_ly22l")]
+})
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -35.0
+offset_top = -3.0
+offset_right = 114.0
+offset_bottom = 295.0
+texture = ExtResource("1_mrwrk")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 14.0
+offset_top = 7.0
+offset_right = 163.0
+offset_bottom = 305.0
+texture = ExtResource("1_mrwrk")
+expand_mode = 1
+
+[node name="Light" parent="." instance=ExtResource("2_5i5xf")]
+layout_mode = 0
+offset_left = 18.5
+offset_right = 58.5
+scale = Vector2(0.65693, 0.65693)

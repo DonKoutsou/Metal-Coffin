@@ -19,7 +19,7 @@ static func StringToEnum(Stat : String) -> STATS:
 	for g in STATS.keys():
 		if (g.to_lower() == Stat):
 			return STATS[g]
-	return -1
+	return STATS.FUEL_TANK
 	
 static func GetStatMaxValue(Stat : STATS) -> int:
 	return StatMaxValues[Stat]

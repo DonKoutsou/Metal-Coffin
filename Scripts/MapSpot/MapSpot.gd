@@ -28,9 +28,8 @@ var SimSpeed = 1
 
 func _ready() -> void:
 	set_physics_process(false)
-	var simman = SimulationManager.GetInstance()
-	SimPaused = simman.IsPaused()
-	SimSpeed = simman.SimulationSpeed
+	SimPaused = SimulationManager.IsPaused()
+	SimSpeed = SimulationManager.SimSpeed()
 	global_rotation = 0
 	if (Pos != Vector2.ZERO):
 		position = Pos

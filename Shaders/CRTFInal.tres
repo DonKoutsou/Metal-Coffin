@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://camvvfprrteei"]
+
+[ext_resource type="Shader" uid="uid://cp7f1eve77if5" path="res://Shaders/Screen2.gdshader" id="1_wo0vq"]
+
+[resource]
+shader = ExtResource("1_wo0vq")
+shader_parameter/res = Vector2(792, 509)
+shader_parameter/mask_type = 1
+shader_parameter/vignette_strength = 1.0
+shader_parameter/image_flicker = 0.2
+shader_parameter/skip = 0.01
+shader_parameter/bloom_type = 0
+shader_parameter/hardScan = -1.0
+shader_parameter/hardPix = -2.0
+shader_parameter/hardBloomScan = 0.0
+shader_parameter/hardBloomPix = -0.597
+shader_parameter/bloomAmount = 5.0
+shader_parameter/warp = Vector2(20, 20)
+shader_parameter/maskDark = 0.0
+shader_parameter/maskLight = 2.0

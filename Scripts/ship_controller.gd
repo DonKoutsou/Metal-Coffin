@@ -7,13 +7,13 @@ class_name ShipContoller
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
 @onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
-@export var HappeningUI : PackedScene
-@export var FleetSeparationScene : PackedScene
+
 var AvailableShips : Array[MapShip] = []
 
 var ControlledShip : MapShip
 
 signal FleetSeperationRequested(ControlledShip : MapShip)
+signal LandingRequested(ControlledShip : MapShip)
 
 func _ready() -> void:
 	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
@@ -60,7 +60,7 @@ func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
 		_on_controlled_ship_swtich_range_changed()
 	
 	
-func OnDroneUnDocked(D : Drone, _Target : MapShip) -> void:
+func OnDroneUnDocked(_D : Drone, _Target : MapShip) -> void:
 	#AvailableShips.append(D)
 	#D.connect("OnShipDestroyed", OnShipDestroyed)
 	#ControlledShip = D
@@ -75,94 +75,14 @@ func _on_radar_button_pressed() -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned on")
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned off")
+		
 func _on_land_button_pressed() -> void:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
 		Instigator = ControlledShip.Command
-		
-	var spot = Instigator.CurrentPort as MapSpot
-	if (spot == null):
-		PopUpManager.GetInstance().DoFadeNotif("No port to land to")
-		return
-	if (Instigator.Landing):
-		return
-	if (Instigator.Altitude == 0):
-		OnShipLanded(Instigator)
-		return
-	if (Instigator.GetShipSpeed() > 0):
-		PopUpManager.GetInstance().DoFadeNotif("Ship cant land while moving")
-		return
-	Instigator.StartLanding()
-	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
-	Instigator.connect("LandingEnded", OnShipLanded)
-	Instigator.connect("LandingCanceled", OnLandingCanceled)
-
-func OnLandingCanceled(Ship : MapShip) -> void:
-	PopUpManager.GetInstance().DoFadeNotif("Landing sequence canceled")
-	Ship.disconnect("LandingEnded", OnShipLanded)
-	Ship.disconnect("LandingCanceled", OnLandingCanceled)
-
-func OnShipLanded(Ship : MapShip) -> void:
-	if (Ship.is_connected("LandingEnded", OnShipLanded)):
-		Ship.disconnect("LandingEnded", OnShipLanded)
-	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):
-		Ship.disconnect("LandingCanceled", OnLandingCanceled)
-	SimulationManager.GetInstance().TogglePause(true)
-	var spot = Ship.CurrentPort as MapSpot
-	var PlayedEvent = Land(spot)
-	if (PlayedEvent):
-		return
-	var sc = spot.FuelTradeScene as PackedScene
-	var fuel = sc.instantiate() as TownScene
-	#fuel.TownMerch = spot.SpotInfo.Merchendise
-	fuel.HasFuel = spot.HasFuel()
-	fuel.HasRepair = spot.HasRepair()
-	fuel.TownFuel = spot.CityFuelReserves
-	fuel.BoughtFuel = spot.PlayerFuelReserves
-	fuel.BoughtRepairs = spot.PlayerRepairReserves
-	fuel.connect("TransactionFinished", FuelTransactionFinished)
-	fuel.LandedShip = Ship
-	fuel.TownSpot = spot
-	Ingame_UIManager.GetInstance().AddUI(fuel, true)
-	UIEventH.OnScreenUIToggled(false)
-	UIEventH.OnButtonCoverToggled(true)
-func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
-	var spot = Ship.CurrentPort as MapSpot
-	if (spot.PlayerFuelReserves != BFuel):
-		spot.CityFuelReserves -= BFuel
-	if (BFuel < 0):
-		#if (Ship is PlayerShip):
-			#ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
-		#else:
-		Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
-
-	spot.PlayerFuelReserves = max(0 , BFuel)
-	spot.PlayerRepairReserves = max(0, BRepair)
 	
-	UIEventH.OnScreenUIToggled(true)
-	#SimulationManager.GetInstance().TogglePause(false)
-	UIEventH.OnButtonCoverToggled(false)
-func Land(Spot : MapSpot) -> bool:
-	var Instigator = ControlledShip
-	if (ControlledShip.Docked):
-		Instigator = ControlledShip.Command
-	#ControlledShip.HaltShip()
-	var PlayedEvent = false
-	if (Spot.Event != null and !Spot.Visited):
-		var happeningui = HappeningUI.instantiate() as HappeningInstance
-		happeningui.HappeningInstigator = Instigator
-		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
-		happeningui.PresentHappening(Spot.Event)
-		UIEventH.OnScreenUIToggled(false)
-		UIEventH.OnButtonCoverToggled(true)
-		happeningui.connect("HappeningFinished", HappeningFinished)
-		PlayedEvent = true
-	Spot.OnSpotVisited()
-	return PlayedEvent
+	LandingRequested.emit(Instigator)
 	
-func HappeningFinished() -> void:
-	UIEventH.OnScreenUIToggled(true)
-	UIEventH.OnButtonCoverToggled(false)
 #Called from accelerator UI to change acceleration of currently controlled ship
 func AccelerationChanged(value: float) -> void:
 	if (ControlledShip.Docked):
@@ -176,9 +96,9 @@ func SteerChanged(value: float) -> void:
 	else:
 		ControlledShip.Steer(value)
 
-func OnShipDamaged(Amm : float, OnShipDamaged : bool) -> void:
-	if (OnShipDamaged):
-		UIEventH.OnControlledShipDamaged()
+func OnShipDamaged(Amm : float, ShowVisuals : bool) -> void:
+	if (ShowVisuals):
+		UIEventH.OnControlledShipDamaged(Amm)
 
 func OnShipDestroyed(Sh : MapShip):
 	if (Sh is PlayerShip):

@@ -6,10 +6,6 @@ class_name DroneDock
 
 @export var CaptainNotif : PackedScene
 
-@export var LandedVoiceLines : Array[AudioStream]
-@export var ReturnVoiceLines : Array[AudioStream]
-@export var TakeoffVoiceLines : Array[AudioStream]
-
 var DockedDrones : Array[Drone]
 var FlyingDrones : Array[Drone]
 
@@ -128,32 +124,6 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 		pl.CurrentPort.OnSpotAproached(Drne)
 	if (!pl.Detectable):
 		Drne.ToggleRadar()
-func PlayLandingSound()-> void:
-	var sound = AudioStreamPlayer.new()
-	sound.stream = LandedVoiceLines.pick_random()
-	sound.bus = "UI"
-	add_child(sound, true)
-	sound.connect("finished", SoundEnded)
-	sound.volume_db = -10
-	sound.play()
-	
-func PlayReturnSound() -> void:
-	var sound = AudioStreamPlayer.new()
-	sound.stream = ReturnVoiceLines.pick_random()
-	sound.bus = "UI"
-	add_child(sound, true)
-	sound.connect("finished", SoundEnded)
-	sound.volume_db = -10
-	sound.play()
-
-func PlayTakeoffSound() -> void:
-	var sound = AudioStreamPlayer.new()
-	sound.stream = TakeoffVoiceLines.pick_random()
-	sound.bus = "UI"
-	add_child(sound, true)
-	sound.connect("finished", SoundEnded)
-	sound.volume_db = -10
-	sound.play()
 
 func SoundEnded() -> void:
 	for g in $Sounds.get_child_count():
@@ -187,7 +157,8 @@ func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 				PopUpManager.GetInstance().DoFadeNotif("Not enough fuel to perform operation.")
 				return
 			Target.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, neededfuel)
-		PlayTakeoffSound()
+		#PlayTakeoffSound()
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LIFTOFF)
 		UndockDrone(Dr)
 		Dr.global_rotation = $Line2D.global_rotation
 		Dr.global_position = global_position
@@ -203,7 +174,7 @@ func AddDroneToHierarchy(drone : Drone):
 
 func DockDrone(drone : Drone, playsound : bool = false):
 	if (playsound):
-		PlayLandingSound()
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
 	FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
 	drone.DissableDrone()

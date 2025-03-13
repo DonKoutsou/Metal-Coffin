@@ -2,14 +2,14 @@ extends Resource
 
 class_name Wallet
 
-signal OnFundsUpdated(NewF : int)
+signal OnFundsUpdated(NewF : float)
 
-@export var Funds : int
+@export var Funds : float
 
-func AddFunds(Amm : int) -> void:
+func AddFunds(Amm : float) -> void:
 	Funds += Amm
 	OnFundsUpdated.emit(Funds)
 
-func SetFunds(Amm : int) -> void:
+func SetFunds(Amm : float) -> void:
 	Funds = Amm
 	OnFundsUpdated.emit(Funds)

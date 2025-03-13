@@ -12,13 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="Script" uid="uid://cpu5xsyrg37ql" path="res://Scripts/UI/pop_up_manager.gd" id="9_jvf02"]
-[ext_resource type="Material" uid="uid://bhyfvqbv3uyoq" path="res://Shaders/screenshader.tres" id="9_nmtsd"]
 [ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="10_ct3x8"]
 [ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/InScreenUI/CustomPopUp.tscn" id="10_e626m"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/InScreenUI/CustomConfirm.tscn" id="11_nk6oj"]
 [ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/InScreenUI/FadeNotif.tscn" id="12_1jh8x"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/command_line.tscn" id="17_aessx"]
+[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
@@ -237,7 +237,7 @@ offset_bottom = -98.0
 [node name="Screen" type="ColorRect" parent="Control3"]
 process_mode = 3
 z_index = 10
-material = ExtResource("9_nmtsd")
+material = ExtResource("19_j7r7e")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

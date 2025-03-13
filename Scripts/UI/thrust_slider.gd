@@ -18,11 +18,11 @@ func _ready() -> void:
 func ZeroAcceleration():
 	Handle.position.y = MinVelocityLoc
 
-func ForceValue(val : int) ->void:
+func ForceValue(val : float) ->void:
 	var newpos = val * (MaxVelocityLoc - MinVelocityLoc) + MinVelocityLoc;
 	Handle.position.y = newpos
-	var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
-	
+	#var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
+	#AccelerationChanged.emit(newval)
 func HandleInput(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var step = ( MinVelocityLoc - MaxVelocityLoc ) / StepCOunt

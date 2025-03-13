@@ -180,7 +180,7 @@ func OnMoveButtonUp() -> void:
 	set_physics_process(false)
 	Focus()
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	global_position = get_global_mouse_position() - offset
 
 func OnCloseButtonPressed() -> void:
@@ -211,11 +211,11 @@ func RecomendationPressed(text : String) -> void:
 func OnCommandLineFocused() -> void:
 	UpdateRecomendations()
 		
-func AddRecomendation(Text : String) -> void:
+func AddRecomendation(RecText : String) -> void:
 	var butn = Button.new()
-	butn.connect("pressed", RecomendationPressed.bind(Text))
+	butn.connect("pressed", RecomendationPressed.bind(RecText))
 	$VBoxContainer/TextEdit/VBoxContainer.add_child(butn)
-	butn.text = Text
+	butn.text = RecText
 
 func ClearRecomendations() -> void:
 	for g in $VBoxContainer/TextEdit/VBoxContainer.get_children():

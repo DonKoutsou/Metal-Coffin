@@ -264,7 +264,7 @@ func RemovePort():
 		g.CurrentPort = null
 
 func IntersectPusruing() -> Vector2:
-	var ms = Time.get_ticks_msec()
+	#var ms = Time.get_ticks_msec()
 	# Get the current position and velocity of the ship
 	var ship_position
 	var ship_velocity

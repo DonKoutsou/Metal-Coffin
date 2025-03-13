@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 	else :
 		if (!FoundContact):
 			FoundContact = true
-			$DetectionWarning.play()
+			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
 		SetDirection(rad_to_deg(ConnectedShip.global_position.angle_to_point(Elint)) + 180)
 		SetDistance(ConnectedShip.global_position.distance_to(Elint))
 	

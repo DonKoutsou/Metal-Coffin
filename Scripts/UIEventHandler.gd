@@ -34,9 +34,9 @@ signal FleetSeparationPressed()
 
 signal ScreenUIToggled(t : bool)
 
-signal AlarmRaised
+#signal AlarmRaised
 
-signal ShipDamaged
+signal ShipDamaged(DammageAmm : float)
 
 func OnScreenUIToggled(t : bool):
 	ScreenUIToggled.emit(t)
@@ -63,7 +63,7 @@ func OnRadarButtonPressed() -> void:
 	RadarButtonPressed.emit()
 
 func OnSteeringDirectionChanged(NewValue: float) -> void:
-	SteerDirChanged.emit()
+	SteerDirChanged.emit(NewValue)
 
 
 func OnSteerOffseted(Offset: float) -> void:
@@ -121,7 +121,7 @@ func OnPausePressed() -> void:
 func OnButtonCoverToggled(t : bool) -> void:
 	CoverToggled.emit(t)
 
-func OnControlledShipDamaged() -> void:
-	ShipDamaged.emit()
+func OnControlledShipDamaged(DammageAmm : float) -> void:
+	ShipDamaged.emit(DammageAmm)
 #func OnSimmulationStepChanged(NewStep: int) -> void:
 	#SimStepChanged.emit(NewStep)

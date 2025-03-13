@@ -46,7 +46,7 @@ action_mode = 0
 icon_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="ItemButton"]
-texture_filter = 6
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

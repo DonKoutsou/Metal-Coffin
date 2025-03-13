@@ -15,7 +15,7 @@ var Cost : int
 
 var TargetLoc : Vector2
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
@@ -74,7 +74,7 @@ func OnOptionSelected(Option : CardOption) -> void:
 	$PanelContainer.visible = false
 	OnCardPressed.emit(self, Option)
 
-func GetCost() -> float:
+func GetCost() -> int:
 	#if (CStats.SelectedOption != null):
 		#return Cost + CStats.SelectedOption.EnergyAdd
 	return Cost

@@ -4,7 +4,7 @@ class_name ScreenCamera
 
 #SCREEN SHAKE///////////////////////////////////
 @export var GoingDownC : Curve
-@export var Cabled : Array[TextureRect]
+@export var Cabled : Array[Control]
 var GoDownValue = 1
 var Shake = false
 var GoingDown = false

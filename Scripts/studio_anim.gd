@@ -1,6 +1,6 @@
 extends Control
 
-class_name StudioAnim
+class_name StudioAnimation
 
 signal Finished
 
