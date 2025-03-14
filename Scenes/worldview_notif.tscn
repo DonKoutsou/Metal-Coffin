@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5vi65a1j0fjf"]
+
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_tjow4"]
+[ext_resource type="Script" uid="uid://cs5fudgijb2eo" path="res://Scripts/WorldView/worldview_notif.gd" id="2_hjag5"]
+[ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_jidor"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tjow4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjag5"]
+
+[node name="WorldviewNotif" type="PanelContainer" node_paths=PackedStringArray("Negativebar", "Possetivebar")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -33.0
+offset_right = 239.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_tjow4")
+script = ExtResource("2_hjag5")
+Negativebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")
+Possetivebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar2")
+DamageFloaterScene = ExtResource("3_jidor")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "COMPOSURE"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AGITATION"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_tjow4")
+step = 1.0
+fill_mode = 1
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_hjag5")
+step = 1.0
+value = 11.0
+show_percentage = false

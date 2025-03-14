@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://bam7qeec6la4g"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_7448n"]
+
+[resource]
+script = ExtResource("1_7448n")
+QuestionText = "During a community event, the organizer is overwhelmed. How do you assist?"
+NegativeAnswer = "Directly take charge to organize tasks."
+PossetiveAnswer = "Rally others to help lighten the load."
+WorldviewSkill = 4
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

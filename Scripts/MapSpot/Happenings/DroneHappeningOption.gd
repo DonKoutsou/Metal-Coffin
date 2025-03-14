@@ -10,4 +10,5 @@ var DroneScene : String = "res://Scenes/drone.tscn"
 func OptionResault() -> String:
 	return "A new ship has joined your fleet."
 func OptionOutCome(Instigator : MapShip) -> void:
+	super(Instigator)
 	Instigator.GetDroneDock().AddRecruit(Cpt)

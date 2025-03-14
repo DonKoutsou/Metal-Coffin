@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://c20jv2v1r7jga"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_fsf63"]
+
+[resource]
+script = ExtResource("1_fsf63")
+QuestionText = "While rebuilding, a newcomer offers an unconventional idea. How do you respond?"
+NegativeAnswer = "Listen and encourage their input, valuing diverse perspectives."
+PossetiveAnswer = "Assert your own approach, believing in your experience."
+WorldviewSkill = 3
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://lebcdjjo5w8d"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_dq461"]
+
+[resource]
+script = ExtResource("1_dq461")
+QuestionText = "During a meeting, someone opposes your plan. How do you react?"
+NegativeAnswer = "Consider their perspective and adjust your plan if needed."
+PossetiveAnswer = "Stand firm and argue for your strategy."
+WorldviewSkill = 3
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

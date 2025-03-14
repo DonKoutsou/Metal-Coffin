@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://dmfaobxfl2bks"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_cdgij"]
+
+[resource]
+script = ExtResource("1_cdgij")
+QuestionText = "A decision needs to be made about planting crops for the next season. How do you decide?"
+NegativeAnswer = "Analyze soil data and climate predictions to make an informed choice."
+PossetiveAnswer = "Rely on traditional methods and community beliefs for guidance."
+WorldviewSkill = 2
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

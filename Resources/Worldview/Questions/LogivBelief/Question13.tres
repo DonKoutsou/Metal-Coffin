@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://ch8eh8he57gip"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_8u1tg"]
+
+[resource]
+script = ExtResource("1_8u1tg")
+QuestionText = "A relic from the old world is found. How do you lead the exploration of its use?"
+NegativeAnswer = "Form a study group to carefully examine its potential."
+PossetiveAnswer = "Encourage others to interpret its use based on intuition and need."
+WorldviewSkill = 2
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

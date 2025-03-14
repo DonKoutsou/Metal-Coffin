@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://ggthjj4qjboo"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_vbl2c"]
+
+[resource]
+script = ExtResource("1_vbl2c")
+QuestionText = "A friend calls you late at night, sounding distressed. How do you respond?"
+NegativeAnswer = "Listen patiently and offer comfort."
+PossetiveAnswer = "Share a similar experience of your own."
+WorldviewSkill = 3
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

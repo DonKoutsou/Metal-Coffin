@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://brhdbbo02p4l"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_gqx63"]
+
+[resource]
+script = ExtResource("1_gqx63")
+QuestionText = "You hear conflicting rumors about a potential threat to the settlement. What’s your reaction"
+NegativeAnswer = "Remain calm and seek verified information."
+PossetiveAnswer = "Urgently spread the word to ensure preparedness."
+WorldviewSkill = 1
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://dnuaid5mx6umc"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_cks76"]
+
+[resource]
+script = ExtResource("1_cks76")
+QuestionText = "The community faces a mysterious illness. How do you find a solution?"
+NegativeAnswer = "Gather and study symptoms systematically."
+PossetiveAnswer = "Consult local healing practices and remedies."
+WorldviewSkill = 2
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

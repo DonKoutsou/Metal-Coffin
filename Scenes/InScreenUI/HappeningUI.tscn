@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Sound.tscn" id="5_fjydm"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
 
-[node name="HappeningInstance" type="PanelContainer"]
+[node name="HappeningInstance" type="PanelContainer" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "NextDiagButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,6 +15,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_w86mx")
 script = ExtResource("2_nimax")
+OptionParent = NodePath("VBoxContainer/HBoxContainer")
+HappeningTitle = NodePath("VBoxContainer/HBoxContainer2/Control2/VBoxContainer/Label")
+HappeningText = NodePath("VBoxContainer/HBoxContainer2/Control2/VBoxContainer/Label2")
+HappeningBackgroundTexture = NodePath("TextureRect")
+ProgBar = NodePath("VBoxContainer/HBoxContainer2/Control2/VBoxContainer/ProgressBar")
+NextDiagButton = NodePath("VBoxContainer/HBoxContainer2/Control2/VBoxContainer/NextDiag")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
@@ -24,7 +30,29 @@ stretch_mode = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LineDrawer" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("5_ylhno")]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/Control2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_s42or")
 theme_override_font_sizes/font_size = 80
@@ -32,7 +60,7 @@ text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/Control2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_vertical = 3
@@ -46,13 +74,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/Control2/VBoxContainer"]
 layout_mode = 2
 max_value = 3.0
 value = 3.0
 show_percentage = false
 
-[node name="NextDiag" type="Button" parent="VBoxContainer"]
+[node name="NextDiag" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
@@ -60,29 +88,15 @@ theme_override_font_sizes/font_size = 32
 text = "Next"
 expand_icon = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 120)
+[node name="Control" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("5_fjydm")]
 layout_mode = 2
+size_flags_horizontal = 8
 
-[node name="LineDrawer" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("5_ylhno")]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Control2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-
-[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
+[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
@@ -90,37 +104,33 @@ theme_override_font_sizes/font_size = 32
 text = "Option 1"
 expand_icon = true
 
-[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
+[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
 theme_override_font_sizes/font_size = 32
 text = "Option 1"
 
-[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
+[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
 theme_override_font_sizes/font_size = 32
 text = "Option 1"
 
-[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer2/Control2/HBoxContainer"]
+[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_hs11o")
 theme_override_font_sizes/font_size = 32
 text = "Option 1"
-
-[node name="Control" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("5_fjydm")]
-layout_mode = 2
-size_flags_horizontal = 8
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
-[connection signal="pressed" from="VBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option1" to="." method="_on_option_1_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option2" to="." method="_on_option_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option3" to="." method="_on_option_3_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/HBoxContainer/Option4" to="." method="_on_option_4_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Control2/VBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Option1" to="." method="_on_option_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Option2" to="." method="_on_option_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Option3" to="." method="_on_option_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Option4" to="." method="_on_option_4_pressed"]

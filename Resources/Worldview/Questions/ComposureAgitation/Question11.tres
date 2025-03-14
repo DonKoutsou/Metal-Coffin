@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://r7p5hp8lxqip"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_bdo7f"]
+
+[resource]
+script = ExtResource("1_bdo7f")
+QuestionText = "A valuable piece of technology malfunctions during a critical moment. What’s your approach?"
+NegativeAnswer = "Maintain composure and systematically troubleshoot the issue."
+PossetiveAnswer = "React swiftly and try various quick fixes."
+WorldviewSkill = 1
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

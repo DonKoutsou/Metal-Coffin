@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://celoydn1kc28e"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_6iv5o"]
+
+[resource]
+script = ExtResource("1_6iv5o")
+QuestionText = "A critical construction project encounters unexpected delays. What do you do first?"
+NegativeAnswer = "Keep your cool and calmly reassess the timeline."
+PossetiveAnswer = "Focus on speeding up the process to meet the deadline."
+WorldviewSkill = 1
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

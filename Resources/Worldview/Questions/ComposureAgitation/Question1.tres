@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://b14pf60c6owon"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_qa2x3"]
+
+[resource]
+script = ExtResource("1_qa2x3")
+QuestionText = "You find yourself lost in a city. What do you do?"
+NegativeAnswer = "Calmly find a map or ask for directions."
+PossetiveAnswer = "Rush to find a recognizable landmark."
+WorldviewSkill = 1
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

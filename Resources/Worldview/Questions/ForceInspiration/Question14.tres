@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://dye1exg1a32qv"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_4h62t"]
+
+[resource]
+script = ExtResource("1_4h62t")
+QuestionText = "n the middle of a group project, someone proposes a bold new idea. How do you react?"
+NegativeAnswer = "Weigh the idea critically and decide on its feasibility."
+PossetiveAnswer = "Foster an open discussion to explore its potential."
+WorldviewSkill = 4
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

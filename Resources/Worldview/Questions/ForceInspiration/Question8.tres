@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://bqbpuwy4bgjdv"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_52ixw"]
+
+[resource]
+script = ExtResource("1_52ixw")
+QuestionText = "You're assigned to lead a project. How do you begin?"
+NegativeAnswer = "Clearly outline rules and responsibilities."
+PossetiveAnswer = "Share a vision that excites everyone."
+WorldviewSkill = 4
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

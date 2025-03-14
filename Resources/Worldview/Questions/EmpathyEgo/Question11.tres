@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://64dfulxy6ods"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_b5qxi"]
+
+[resource]
+script = ExtResource("1_b5qxi")
+QuestionText = "You notice a teammate hasn’t contributed to a group effort. How do you address it?"
+NegativeAnswer = "Ask if there's anything they need help with."
+PossetiveAnswer = "Highlight their lack of input and express your concern."
+WorldviewSkill = 3
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

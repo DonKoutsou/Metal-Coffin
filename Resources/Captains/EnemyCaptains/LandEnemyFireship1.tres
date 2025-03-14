@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=15 format=3 uid="uid://cta70yn02gqg5"]
+[gd_resource type="Resource" script_class="Captain" load_steps=17 format=3 uid="uid://cta70yn02gqg5"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_t248c"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7jpyg"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_kdirt"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_xtppk"]
+[ext_resource type="Resource" uid="uid://cbkme88wrncp4" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres" id="4_1kxyg"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_wk585"]
+[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="5_7ynpd"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="5_mwjps"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
@@ -86,4 +88,4 @@ StartingItems = Array[ExtResource("4_wk585")]([])
 CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 2500
-Cards = Array[ExtResource("3_xtppk")]([])
+Cards = Array[ExtResource("3_xtppk")]([ExtResource("4_1kxyg"), ExtResource("5_7ynpd")])

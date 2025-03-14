@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://wkltvw7eqq05"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_pgl41"]
+
+[resource]
+script = ExtResource("1_pgl41")
+QuestionText = "Given an incomplete puzzle, how do you start?"
+NegativeAnswer = "Sort pieces by shape and color methodically."
+PossetiveAnswer = "Try fitting pieces based on what feels right."
+WorldviewSkill = 2
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

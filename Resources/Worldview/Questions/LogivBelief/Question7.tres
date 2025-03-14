@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://gb2154dsiv47"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_yude0"]
+
+[resource]
+script = ExtResource("1_yude0")
+QuestionText = "You encounter a broken gadget. What’s your next step?"
+NegativeAnswer = "Systematically figure out the issue."
+PossetiveAnswer = "Hit it on the side of the table."
+WorldviewSkill = 2
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

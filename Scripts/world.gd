@@ -10,6 +10,7 @@ class_name World
 @export var LoadingScene : PackedScene
 @export var FleetSeparationScene : PackedScene
 @export var HappeningUI : PackedScene
+@export var WorldViewQuestionairScene : PackedScene
 @export_group("Wallet")
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
@@ -71,7 +72,12 @@ func _ready() -> void:
 	Instance = self
 	WRLD_WorldReady.emit()
 	if (!Loading):
+		GetMap().GetScreenUi().ToggleFullScreen(true)
+		var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
+		Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
 		await Loadingscr.LoadingDestroyed
+		await Questionair.Ended
+		GetMap().GetScreenUi().ToggleFullScreen(false)
 		PlayIntro()
 		PlayerWallet.SetFunds( StartingFunds)
 	
@@ -199,7 +205,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 				Survived = true
 				break
 		if (!Survived):
-			Unit.Damage(99999999999)
+			Unit.Damage(99999999999, false)
 			if (Unit is HostileShip):
 				Unit.DestroyEnemyDebry()
 				WonFunds += Unit.Cpt.ProvidingFunds

@@ -99,6 +99,7 @@ func SteerChanged(value: float) -> void:
 func OnShipDamaged(Amm : float, ShowVisuals : bool) -> void:
 	if (ShowVisuals):
 		UIEventH.OnControlledShipDamaged(Amm)
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.DAMAGED)
 
 func OnShipDestroyed(Sh : MapShip):
 	if (Sh is PlayerShip):

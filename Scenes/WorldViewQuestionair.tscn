@@ -1,0 +1,90 @@
+[gd_scene load_steps=28 format=3 uid="uid://c2db1rw6borur"]
+
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_2kmgx"]
+[ext_resource type="Script" uid="uid://feql74pw4kam" path="res://Scripts/WorldView/world_view_questionair.gd" id="2_wn0u1"]
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="3_5vy1l"]
+[ext_resource type="Resource" uid="uid://b14pf60c6owon" path="res://Resources/Worldview/Questions/ComposureAgitation/Question1.tres" id="4_0jjjo"]
+[ext_resource type="Resource" uid="uid://imhmel7yejn2" path="res://Resources/Worldview/Questions/ComposureAgitation/Question5.tres" id="5_0ey4p"]
+[ext_resource type="Resource" uid="uid://jfvfthb8ap5o" path="res://Resources/Worldview/Questions/ComposureAgitation/Question9.tres" id="6_mkbl6"]
+[ext_resource type="Resource" uid="uid://brhdbbo02p4l" path="res://Resources/Worldview/Questions/ComposureAgitation/Question10.tres" id="7_gij2h"]
+[ext_resource type="Resource" uid="uid://r7p5hp8lxqip" path="res://Resources/Worldview/Questions/ComposureAgitation/Question11.tres" id="8_6xjrs"]
+[ext_resource type="Resource" uid="uid://celoydn1kc28e" path="res://Resources/Worldview/Questions/ComposureAgitation/Question12.tres" id="9_cphet"]
+[ext_resource type="Resource" uid="uid://c20jv2v1r7jga" path="res://Resources/Worldview/Questions/EmpathyEgo/Question1.tres" id="10_dx0y0"]
+[ext_resource type="Resource" uid="uid://dsou1hxtj3bc6" path="res://Resources/Worldview/Questions/EmpathyEgo/Question2.tres" id="11_1cuev"]
+[ext_resource type="Resource" uid="uid://ggthjj4qjboo" path="res://Resources/Worldview/Questions/EmpathyEgo/Question3.tres" id="12_yejad"]
+[ext_resource type="Resource" uid="uid://gb2154dsiv47" path="res://Resources/Worldview/Questions/LogivBelief/Question7.tres" id="13_ss02x"]
+[ext_resource type="Resource" uid="uid://64dfulxy6ods" path="res://Resources/Worldview/Questions/EmpathyEgo/Question11.tres" id="14_6iaxw"]
+[ext_resource type="Resource" uid="uid://lebcdjjo5w8d" path="res://Resources/Worldview/Questions/EmpathyEgo/Question12.tres" id="15_e18fm"]
+[ext_resource type="Resource" uid="uid://bam7qeec6la4g" path="res://Resources/Worldview/Questions/ForceInspiration/Question4.tres" id="16_jtjw7"]
+[ext_resource type="Resource" uid="uid://bqbpuwy4bgjdv" path="res://Resources/Worldview/Questions/ForceInspiration/Question8.tres" id="17_dymyh"]
+[ext_resource type="Resource" uid="uid://ciec4otx2rv03" path="res://Resources/Worldview/Questions/ForceInspiration/Question12.tres" id="18_ucmj5"]
+[ext_resource type="Resource" uid="uid://btbe6q2hdw557" path="res://Resources/Worldview/Questions/ForceInspiration/Question13.tres" id="19_8f5b7"]
+[ext_resource type="Resource" uid="uid://dye1exg1a32qv" path="res://Resources/Worldview/Questions/ForceInspiration/Question14.tres" id="20_s1878"]
+[ext_resource type="Resource" uid="uid://dvlh7ox6eyjp" path="res://Resources/Worldview/Questions/ForceInspiration/Question15.tres" id="21_fmooa"]
+[ext_resource type="Resource" uid="uid://b4gpfuksjs2ds" path="res://Resources/Worldview/Questions/LogivBelief/Question2.tres" id="22_a01bo"]
+[ext_resource type="Resource" uid="uid://b7g2e26vk8708" path="res://Resources/Worldview/Questions/LogivBelief/Question6.tres" id="23_l0coj"]
+[ext_resource type="Resource" uid="uid://wkltvw7eqq05" path="res://Resources/Worldview/Questions/LogivBelief/Question10.tres" id="24_ra63j"]
+[ext_resource type="Resource" uid="uid://ch8eh8he57gip" path="res://Resources/Worldview/Questions/LogivBelief/Question13.tres" id="25_3hoxt"]
+[ext_resource type="Resource" uid="uid://dmfaobxfl2bks" path="res://Resources/Worldview/Questions/LogivBelief/Question14.tres" id="26_vfqru"]
+[ext_resource type="Resource" uid="uid://dnuaid5mx6umc" path="res://Resources/Worldview/Questions/LogivBelief/Question15.tres" id="27_fl7up"]
+
+[node name="WorldViewQuestionair" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2kmgx")
+script = ExtResource("2_wn0u1")
+IntroDialogue = Array[String](["test1", "test2"])
+PossibleQuestions = Array[ExtResource("3_5vy1l")]([ExtResource("4_0jjjo"), ExtResource("5_0ey4p"), ExtResource("6_mkbl6"), ExtResource("7_gij2h"), ExtResource("8_6xjrs"), ExtResource("9_cphet"), ExtResource("10_dx0y0"), ExtResource("11_1cuev"), ExtResource("12_yejad"), ExtResource("13_ss02x"), ExtResource("14_6iaxw"), ExtResource("15_e18fm"), ExtResource("16_jtjw7"), ExtResource("17_dymyh"), ExtResource("18_ucmj5"), ExtResource("19_8f5b7"), ExtResource("20_s1878"), ExtResource("21_fmooa"), ExtResource("22_a01bo"), ExtResource("23_l0coj"), ExtResource("24_ra63j"), ExtResource("25_3hoxt"), ExtResource("26_vfqru"), ExtResource("27_fl7up")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "wafwafwafwafwafawa"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Option1"
+autowrap_mode = 2
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Option 2"
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Next"
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Skip"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="Option1Pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="Option2Pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="NextButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button2" to="." method="SkipButton"]

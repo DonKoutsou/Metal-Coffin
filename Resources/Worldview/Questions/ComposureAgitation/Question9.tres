@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://jfvfthb8ap5o"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_a0j8p"]
+
+[resource]
+script = ExtResource("1_a0j8p")
+QuestionText = "Your travel plans are disrupted. What’s your first reaction?"
+NegativeAnswer = "Stay calm and reevaluate your options."
+PossetiveAnswer = "Feel anxious and upset by the change."
+WorldviewSkill = 1
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

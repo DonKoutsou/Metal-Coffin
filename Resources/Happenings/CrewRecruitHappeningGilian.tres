@@ -30,12 +30,18 @@ script = ExtResource("4_fdmko")
 StringReply = "You take your eyes away and head for the city."
 OptionName = "Look away"
 FinishDiag = true
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
 
 [sub_resource type="Resource" id="Resource_71ow0"]
 script = ExtResource("4_fdmko")
 StringReply = "You gather a small brigade an make your way to the ship."
 OptionName = "Aproach the machine"
 FinishDiag = false
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
 
 [sub_resource type="Resource" id="Resource_qi88o"]
 script = ExtResource("5_3u5ui")

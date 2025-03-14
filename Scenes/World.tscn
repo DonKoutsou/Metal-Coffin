@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=17 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
 [ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/loading_screen.tscn" id="3_pocgy"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="6_1ajha"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="6_sol3n"]
+[ext_resource type="PackedScene" uid="uid://c2db1rw6borur" path="res://Scenes/WorldViewQuestionair.tscn" id="6_xiqgv"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="7_3dbmh"]
 [ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/Ship_Controller.gd" id="7_q720d"]
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/FleetSparationScene.tscn" id="10_8l3nt"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
+[ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="15_kwl8l"]
 
 [node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
@@ -32,6 +34,7 @@ CardFightScene = ExtResource("6_sol3n")
 LoadingScene = ExtResource("3_pocgy")
 FleetSeparationScene = ExtResource("10_8l3nt")
 HappeningUI = ExtResource("9_5gym6")
+WorldViewQuestionairScene = ExtResource("6_xiqgv")
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
 
@@ -50,5 +53,8 @@ script = ExtResource("8_6vv6u")
 [node name="SimulationManager" type="Node" parent="." node_paths=PackedStringArray("_Map")]
 script = ExtResource("9_l7oy3")
 _Map = NodePath("../Map")
+
+[node name="WorldviewManager" type="Node" parent="."]
+script = ExtResource("15_kwl8l")
 
 [node name="Map" parent="." instance=ExtResource("12_11aq8")]

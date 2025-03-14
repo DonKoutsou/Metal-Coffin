@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://b4gpfuksjs2ds"]
+
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_wcjje"]
+
+[resource]
+script = ExtResource("1_wcjje")
+QuestionText = "You witness someone struggling to open a tightly jammed door. What’s your approach?"
+NegativeAnswer = "Analyze the mechanism for a solution."
+PossetiveAnswer = "Encourage them with reassuring words."
+WorldviewSkill = 2
+metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"
