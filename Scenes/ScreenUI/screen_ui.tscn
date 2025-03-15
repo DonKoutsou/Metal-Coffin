@@ -343,9 +343,9 @@ expand_mode = 1
 
 [node name="ThrustSlider" parent="NormalScreen" instance=ExtResource("5_mda8n")]
 layout_mode = 1
-offset_left = -116.0
+offset_left = -114.0
 offset_top = -333.0
-offset_right = -15.0
+offset_right = -13.0
 offset_bottom = -42.0
 
 [node name="DroneButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
@@ -1085,7 +1085,7 @@ offset_top = -648.0
 offset_bottom = -648.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("33_vyv2f")
 expand_mode = 1
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=18 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="15_kwl8l"]
+[ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="16_waglr"]
 
 [node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
@@ -56,5 +57,6 @@ _Map = NodePath("../Map")
 
 [node name="WorldviewManager" type="Node" parent="."]
 script = ExtResource("15_kwl8l")
+WorldviewAdjustNotif = ExtResource("16_waglr")
 
 [node name="Map" parent="." instance=ExtResource("12_11aq8")]

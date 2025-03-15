@@ -1,22 +1,23 @@
+@tool
 extends PanelContainer
 
-@export var WaveSize : float
-@export var PointAmm : int
+@export var OrientationUpDown : bool = true
+
 var ti : float
 @export var Speed : float
 #var quifsa : float =  0
 #var GoingUp : bool = false
 
-var stream = AudioStreamGenerator.new()
-var playback : AudioStreamGeneratorPlayback
+#var stream = AudioStreamGenerator.new()
+#var playback : AudioStreamGeneratorPlayback
 @export var AudiostreamPlayer : AudioStreamPlayer
 @export var frequency := 440.0
 @export var amplitude := 50.0
 @export var waveform_points := 360 # Number of points for one cycle
-@export var sample_rate := 44100
-@export var buffer_size := 2048
-@export var phase := 0.0
-@export var volume := 0.5
+#@export var sample_rate := 44100
+#@export var buffer_size := 2048
+#@export var phase := 0.0
+#@export var volume := 0.5
 
 var ContainerSize : Vector2
 
@@ -51,30 +52,30 @@ func _physics_process(delta: float) -> void:
 	ti += delta * Speed
 	queue_redraw()
 
-func _on_audio_frame(buffer: AudioStreamGeneratorPlayback):
-	for i in range(buffer_size):
-		# Simulate speech with sine waves
-		var value = noise_wave(frequency) * volume
-		buffer.push_frame(Vector2(value, value))
-
-func start_audio():
-	while playback.get_frames_available() >= buffer_size:
-		var buffer = PackedVector2Array()
-		for i in range(buffer_size):
-			# Generate sound sample
-			var value = noise_wave(frequency) * volume
-			buffer.append(Vector2(value, value)) # Stereo sound
-		playback.push_buffer(buffer)
-
-func noise_wave(freq: float) -> float:
-	# Create a wave with a combination of noise and a sine wave
-	var noise = randf() * 2.0 - 1.0
-	var sine_wave = sin(phase * TAU)
-	phase += freq / sample_rate
-	if phase > 1.0:
-		phase -= 1.0
-	# Mix sine and noise to simulate speech-like sound
-	return noise * 0.2 + sine_wave * 0.8
+#func _on_audio_frame(buffer: AudioStreamGeneratorPlayback):
+	#for i in range(buffer_size):
+		## Simulate speech with sine waves
+		#var value = noise_wave(frequency) * volume
+		#buffer.push_frame(Vector2(value, value))
+#
+#func start_audio():
+	#while playback.get_frames_available() >= buffer_size:
+		#var buffer = PackedVector2Array()
+		#for i in range(buffer_size):
+			## Generate sound sample
+			#var value = noise_wave(frequency) * volume
+			#buffer.append(Vector2(value, value)) # Stereo sound
+		#playback.push_buffer(buffer)
+#
+#func noise_wave(freq: float) -> float:
+	## Create a wave with a combination of noise and a sine wave
+	#var noise = randf() * 2.0 - 1.0
+	#var sine_wave = sin(phase * TAU)
+	#phase += freq / sample_rate
+	#if phase > 1.0:
+		#phase -= 1.0
+	## Mix sine and noise to simulate speech-like sound
+	#return noise * 0.2 + sine_wave * 0.8
 
 func _draw() -> void:
 	#var point = []
@@ -86,7 +87,11 @@ func _draw() -> void:
 		#
 	#draw_polyline(point, Color(0,1,0))
 	
-	var height = ContainerSize.y
+	var height 
+	if (OrientationUpDown):
+		height = ContainerSize.y
+	else:
+		height = ContainerSize.x
 	
 	# Adjust the frequency and noise
 	var phase_offset = 0.0
@@ -100,10 +105,14 @@ func _draw() -> void:
 		var noise = (randf() * 2 - 1) * 0.1
 		var x = amplitude * (sine_value_1 + sine_value_2 + noise)
 		
-		var point = Vector2(ContainerSize.x / 2 + x, y)
+		var point 
+		if (OrientationUpDown):
+			point = Vector2(ContainerSize.x / 2 + x, y)
+		else:
+			point = Vector2(y, ContainerSize.y / 2 + x)
 		if y > 0:
 			draw_line(prev_point, point, Color(0,1,0))
 		
 		prev_point = point
 	
-	phase_offset += step
+		phase_offset += step

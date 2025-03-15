@@ -11,6 +11,7 @@ class_name Happening_Option
 @export_group("Worldview Check")
 @export var WorldviewCheck : WorldView.WorldViews
 @export var CheckPossetive : bool
+@export var CheckDifficulty : int = 20
 @export var WorldViewCheckFailBranch : Array[HappeningStage]
 
 var CheckResault = true
@@ -19,13 +20,14 @@ func OptionResault() -> String:
 	return ""
 	
 func OptionOutCome(_Instigator : MapShip)-> void:
-	if (WorldviewEffect != WorldView.WorldViews.NONE):
-		WorldView.AdjustStat(WorldviewEffect, WorldviewEffectAmm)
-	
+	if (CheckResault):
+		if (WorldviewEffect != WorldView.WorldViews.NONE):
+			WorldView.GetInstance().AdjustStat(WorldviewEffect, WorldviewEffectAmm, true)
+		
 func Check() -> bool:
 	
 	if (WorldviewCheck != WorldView.WorldViews.NONE):
-		CheckResault = WorldView.SkillCheck(WorldviewCheck, CheckPossetive)
+		CheckResault = WorldView.GetInstance().SkillCheck(WorldviewCheck, CheckPossetive, CheckDifficulty)
 	
 	return CheckResault
 	

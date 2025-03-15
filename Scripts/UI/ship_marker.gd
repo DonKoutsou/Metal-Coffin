@@ -145,7 +145,7 @@ func UpdateLine(Zoom : float)-> void:
 
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
-	var spd = roundi(Spd * 360)
+	var spd = roundi(Map.SpeedToKmH(Spd))
 	ShipSpeedLabel.text = "Spd " + var_to_str(spd).replace(".0", "") + "km/h"
 	
 func UpdateAltitude(Alt : float):

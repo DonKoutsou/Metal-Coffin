@@ -15,7 +15,7 @@ light_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6yyl"]
 resource_local_to_scene = true
-radius = 9.0
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7khp2"]
 radius = 258.136
@@ -43,6 +43,7 @@ Cpt = ExtResource("3_fw0pf")
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_4y2i6")
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]

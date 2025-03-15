@@ -97,7 +97,7 @@ func NextStage() -> void:
 		
 		var Check = Option.Check()
 
-		HappeningText.text = Stage.Options[SelectedOption].OptionResault()
+		HappeningText.text = Option.OptionResault()
 		
 		if (Option.WorldviewCheck != WorldView.WorldViews.NONE):
 			var CheckResault = TextFloater.instantiate() as Floater
@@ -108,6 +108,9 @@ func NextStage() -> void:
 				CheckResault.SetColor(false)
 				CheckResault.text = "WorldView Check Failed"
 			add_child(CheckResault)
+		
+		Option.OptionOutCome(HappeningInstigator)
+		
 		$Timer.start()
 		set_physics_process(true)
 		ProgBar.visible = true
@@ -118,7 +121,7 @@ func NextStage() -> void:
 		ProgBar.visible = false
 		OptionParent.visible = true
 		
-		Stage.Options[SelectedOption].OptionOutCome(HappeningInstigator)
+		
 		
 		if (Stage.Options[SelectedOption].FinishDiag):
 			HappeningFinished.emit()

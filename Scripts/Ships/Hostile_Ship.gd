@@ -16,7 +16,7 @@ class_name HostileShip
 @export var ShipName : String
 @export var Patrol : bool = true
 @export var BT : PackedScene
-
+@export var AlarmVisual : PackedScene
 #This array will be filled by commander when this ship is sent after another ship
 var PursuingShips : Array[Node2D]
 #This value will be filled by commander when this ship is sent to investigate a position
@@ -96,6 +96,7 @@ func _physics_process(delta: float) -> void:
 			if (VisualContactCountdown < 0):
 				for c in GarrissonVisualContacts:
 					OnPlayerVisualContact.emit(c, self)
+				add_child(AlarmVisual.instantiate())
 		
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL)):
 			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.02 * SimulationSpeed)

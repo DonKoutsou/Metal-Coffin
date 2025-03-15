@@ -23,7 +23,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_ebi2g"]
 script = ExtResource("2_mq2gw")
 StatName = 6
-StatBase = 350.0
+StatBase = 80.0
 StatShipPartBuff = 0.0
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

@@ -22,18 +22,26 @@ script = ExtResource("4_x3762")
 StringReply = "You tell him of your plan to reach Dormak and stop the war."
 OptionName = "Answer him."
 FinishDiag = false
+BranchContinuation = Array[ExtResource("5_loek2")]([])
 WorldviewEffect = 0
 WorldviewEffectAmm = 0
 WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("5_loek2")]([])
 
 [sub_resource type="Resource" id="Resource_kk02p"]
 script = ExtResource("4_x3762")
 StringReply = "He raises his head and looks you in the eye. \"You cant do this alone, your ambition will come and crush upon you one of these day. Dont you forget that.\""
 OptionName = "Dissmiss him."
 FinishDiag = true
+BranchContinuation = Array[ExtResource("5_loek2")]([])
 WorldviewEffect = 0
 WorldviewEffectAmm = 0
 WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("5_loek2")]([])
 
 [sub_resource type="Resource" id="Resource_n5aj4"]
 script = ExtResource("5_loek2")
@@ -45,18 +53,26 @@ script = ExtResource("3_1guw4")
 Cpt = ExtResource("2_623hf")
 OptionName = "Accept them into your fleet"
 FinishDiag = true
+BranchContinuation = Array[ExtResource("5_loek2")]([])
 WorldviewEffect = 0
 WorldviewEffectAmm = 0
 WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("5_loek2")]([])
 
 [sub_resource type="Resource" id="Resource_lqhcv"]
 script = ExtResource("4_x3762")
 StringReply = "They depart."
 OptionName = "Reject them"
 FinishDiag = true
+BranchContinuation = Array[ExtResource("5_loek2")]([])
 WorldviewEffect = 0
 WorldviewEffectAmm = 0
 WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("5_loek2")]([])
 
 [sub_resource type="Resource" id="Resource_c1wc8"]
 script = ExtResource("5_loek2")

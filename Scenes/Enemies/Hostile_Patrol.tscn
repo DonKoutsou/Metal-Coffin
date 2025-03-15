@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=12 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
+[ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/alarm_effect.tscn" id="3_ty6mh"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_xxp8j"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_q8roo"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/HostileDroneDock.tscn" id="7_hahnw"]
@@ -35,6 +36,7 @@ process_mode = 1
 script = ExtResource("1_dinuw")
 Patrol = false
 BT = ExtResource("8_w8ob0")
+AlarmVisual = ExtResource("3_ty6mh")
 RadarShape = NodePath("Radar")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")

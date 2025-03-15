@@ -23,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 	$Panel.position = Vector2($XLine.position.x - psize.x, $YLine.position.y - psize.y)
 	if (Line != null):
 		Line.UpdateLine(($Panel.global_position + psize) - Line.position, ship_camera.zoom.x)
-
+		Line.queue_redraw()
 func _OnTextButtonPressed() -> void:
 	$MarkerTextEditor.visible = true
 
@@ -60,7 +60,7 @@ func _on_drone_button_pressed() -> void:
 
 func _on_y_gas_range_changed(NewVal: float) -> void:
 	$YLine.global_position.y = clamp($YLine.global_position.y + NewVal * 5, 0, get_viewport_rect().size.y)
-
+	
 func _on_x_gas_range_changed(NewVal: float) -> void:
 	$XLine.global_position.x = clamp($XLine.global_position.x + NewVal * 5, 0, get_viewport_rect().size.x)
 

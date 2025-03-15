@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2db1rw6borur"]
+[gd_scene load_steps=29 format=3 uid="uid://c2db1rw6borur"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_2kmgx"]
 [ext_resource type="Script" uid="uid://feql74pw4kam" path="res://Scripts/WorldView/world_view_questionair.gd" id="2_wn0u1"]
@@ -27,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://ch8eh8he57gip" path="res://Resources/Worldview/Questions/LogivBelief/Question13.tres" id="25_3hoxt"]
 [ext_resource type="Resource" uid="uid://dmfaobxfl2bks" path="res://Resources/Worldview/Questions/LogivBelief/Question14.tres" id="26_vfqru"]
 [ext_resource type="Resource" uid="uid://dnuaid5mx6umc" path="res://Resources/Worldview/Questions/LogivBelief/Question15.tres" id="27_fl7up"]
+[ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="28_0jjjo"]
 
 [node name="WorldViewQuestionair" type="PanelContainer"]
 anchors_preset = 15
@@ -41,15 +42,27 @@ PossibleQuestions = Array[ExtResource("3_5vy1l")]([ExtResource("4_0jjjo"), ExtRe
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "wafwafwafwafwafawa"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="LineDrawer" parent="VBoxContainer" instance=ExtResource("28_0jjjo")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+OrientationUpDown = false
+frequency = 50.0
+amplitude = 100.0
+waveform_points = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 visible = false

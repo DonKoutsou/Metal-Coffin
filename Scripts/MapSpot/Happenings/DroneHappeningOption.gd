@@ -14,6 +14,6 @@ func OptionResault() -> String:
 		return "The captain has refused to join your fleet"
 	
 func OptionOutCome(Instigator : MapShip) -> void:
+	super(Instigator)
 	if (CheckResault):
-		super(Instigator)
 		Instigator.GetDroneDock().AddRecruit(Cpt)

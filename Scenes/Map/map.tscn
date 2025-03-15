@@ -28,8 +28,8 @@
 [ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
-_limits = [0.99, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 5.5), 0.0, 3.3398, 0, 0]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, 3.3398, 0, 0]
 point_count = 1
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
@@ -141,6 +141,7 @@ offset_bottom = 19541.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_nb103")
+expand_mode = 1
 stretch_mode = 1
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]

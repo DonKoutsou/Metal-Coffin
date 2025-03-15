@@ -18,7 +18,7 @@ static func GetInstance() -> ShipCamera:
 #////////////////////////////
 func _HANDLE_ZOOM(zoomval : float):
 	var prevzoom = zoom
-	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(2.1,2.1))
+	zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(10,10))
 	call_deferred("OnZoomChanged")
 	_UpdateMapGridVisibility()
 #////////////////////////////
@@ -58,14 +58,14 @@ func OnZoomChanged() -> void:
 	
 var GridShowing = false
 func _UpdateMapGridVisibility():
-	if (zoom.x < 0.25 and !GridShowing):
+	if (zoom.x < 1 and !GridShowing):
 		var mtw = create_tween()
 		mtw.tween_property(CityLines, "modulate", Color(1,1,1,1), 0.5)
 		#$"../MapLines".visible = true
 		var tw = create_tween()
 		tw.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
 		GridShowing = true
-	else: if (zoom.x >= 0.25 and GridShowing):
+	else: if (zoom.x >= 1 and GridShowing):
 		var tw = create_tween()
 		tw.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
 		var mtw = create_tween()

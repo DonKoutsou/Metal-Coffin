@@ -12,6 +12,9 @@ var CurrentQuestion : int = 0
 signal Ended
 
 func _ready() -> void:
+	Tw = create_tween()
+	Tw.set_trans(Tween.TRANS_BOUNCE)
+	Tw.tween_property($VBoxContainer/LineDrawer, "amplitude", randf_range(3, 20), 1)
 	for g in 4:
 		var Stat = WorldView.WorldViews.values()[g + 1]
 		var Picked : Array[WorldviewQuestion]
@@ -29,8 +32,21 @@ func _ready() -> void:
 	PickedQuestions.shuffle()
 	$VBoxContainer/Label.text = IntroDialogue[CurrentIntroDialogue]
 	$VBoxContainer/Label.visible_ratio = 0
+
+var Tw : Tween
 func _physics_process(delta: float) -> void:
 	$VBoxContainer/Label.visible_ratio += delta
+	if ($VBoxContainer/Label.visible_ratio < 1):
+		if (Tw.finished):
+			Tw = create_tween()
+			Tw.set_trans(Tween.TRANS_BOUNCE)
+			Tw.tween_property($VBoxContainer/LineDrawer, "amplitude", randf_range(-60, 60), 0.2)
+			
+	else:
+		Tw = create_tween()
+		#Tw.set_trans(Tween.TRANS_BOUNCE)
+		Tw.tween_property($VBoxContainer/LineDrawer, "amplitude", 0, 0.1)
+		#$VBoxContainer/LineDrawer.amplitude = 0
 
 func NextButtonPressed() -> void:
 	CurrentIntroDialogue += 1
@@ -58,10 +74,10 @@ func UpdateQuestion() -> void:
 	$VBoxContainer/HBoxContainer/Button2.text = PickedQuestions[CurrentQuestion].PossetiveAnswer
 
 func Option1Pressed() -> void:
-	WorldView.AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, - 10)
+	WorldView.GetInstance().AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, - 10, false)
 	CurrentQuestion += 1
 	UpdateQuestion()
 func Option2Pressed() -> void:
-	WorldView.AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, 10)
+	WorldView.GetInstance().AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, 10, false)
 	CurrentQuestion += 1
 	UpdateQuestion()

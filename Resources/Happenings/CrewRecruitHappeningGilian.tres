@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=17 format=3 uid="uid://c3kr3kcdnvesc"]
+[gd_resource type="Resource" script_class="Happening" load_steps=18 format=3 uid="uid://c3kr3kcdnvesc"]
 
 [ext_resource type="Texture2D" uid="uid://hcbn2124kbd3" path="res://Assets/CaptainPortraits/Captain5.png" id="1_3tnlt"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_x2bkw"]
@@ -33,6 +33,12 @@ script = ExtResource("5_3u5ui")
 HappeningTexts = Array[String](["Your commanding officer turns your atention to the ship's captain stepping out of the ship. Its one of the machines, it all starts to make sense slowly."])
 Options = Array[ExtResource("1_x2bkw")]([])
 
+[sub_resource type="Resource" id="Resource_gpgth"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["The Machine returns to its ship. After a while it comes back delivers you the crews answer to follow you. \"Lead the way captain\""])
+Options = Array[ExtResource("1_x2bkw")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
 [sub_resource type="Resource" id="Resource_j2ryf"]
 script = ExtResource("5_3u5ui")
 HappeningTexts = Array[String](["The machine asks you to leave."])
@@ -44,11 +50,12 @@ script = ExtResource("4_ui0gd")
 Cpt = ExtResource("3_j2ryf")
 OptionName = "Ask them to join your fleet"
 FinishDiag = false
-BranchContinuation = Array[ExtResource("5_3u5ui")]([])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
+BranchContinuation = Array[ExtResource("5_3u5ui")]([SubResource("Resource_gpgth")])
+WorldviewEffect = 3
+WorldviewEffectAmm = -20
 WorldviewCheck = 3
 CheckPossetive = false
+CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([SubResource("Resource_j2ryf")])
 metadata/_custom_type_script = "uid://w3pbagqwci26"
 
@@ -62,6 +69,7 @@ WorldviewEffect = 0
 WorldviewEffectAmm = 0
 WorldviewCheck = 0
 CheckPossetive = false
+CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([])
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 

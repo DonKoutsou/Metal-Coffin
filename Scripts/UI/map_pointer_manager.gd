@@ -204,9 +204,9 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 350), 0)]))
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 80), 0)]))
 				else:
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(350, 0)]))
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(80, 0)]))
 				if (ship.Landing or ship.TakingOff):
 					Marker.UpdateAltitude(ship.Altitude)
 

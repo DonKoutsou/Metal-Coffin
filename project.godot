@@ -165,6 +165,7 @@ textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/size=2048
 lights_and_shadows/directional_shadow/size.mobile=1024
 2d/shadow_atlas/size=512
+shading/overrides/force_vertex_shading=true
 textures/default_filters/anisotropic_filtering_level=0
 camera/depth_of_field/depth_of_field_bokeh_shape=0
 environment/ssao/quality=0

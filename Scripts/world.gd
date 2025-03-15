@@ -309,7 +309,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 		happeningui.HappeningInstigator = Instigator
 		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
 		happeningui.PresentHappening(Spot.Event)
-		GetMap().GetScreenUi().ToggleFullScreen(false)
+		GetMap().GetScreenUi().ToggleFullScreen(true)
 		#UIEventH.OnScreenUIToggled(false)
 		#UIEventH.OnButtonCoverToggled(true)
 		happeningui.connect("HappeningFinished", HappeningFinished)

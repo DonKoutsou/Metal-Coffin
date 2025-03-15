@@ -3,6 +3,7 @@ class_name MapSpot
 
 @export var FuelTradeScene : PackedScene
 @export var CityFuelReserves : float = 1000
+@export var AlarmVisual : PackedScene
 
 var PlayerFuelReserves : float = 0
 var PlayerRepairReserves : float = 0
@@ -186,6 +187,8 @@ func OnSpotDeparture(DepartingShip : MapShip) -> void:
 		else :if (VisitingShips.size() == 0):
 			set_physics_process(false)
 func OnAlarmRaised(Notify : bool = false) -> void:
+	var AlarmViz = AlarmVisual.instantiate()
+	add_child(AlarmViz)
 	SimulationManager.GetInstance().TogglePause(true)
 	ShipCamera.GetInstance().FrameCamToPos(global_position)
 	SpotAlarmRaised.emit(Notify)

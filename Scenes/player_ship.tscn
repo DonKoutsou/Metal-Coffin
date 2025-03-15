@@ -13,7 +13,6 @@
 light_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
-radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
 radius = 350.0
@@ -68,6 +67,7 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("6_6lhcj")
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
@@ -93,5 +93,5 @@ energy = 0.25
 blend_mode = 2
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
-texture_scale = 16.0
+texture_scale = 3.5
 height = 200.0

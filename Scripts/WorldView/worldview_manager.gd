@@ -2,6 +2,9 @@ extends Node
 
 class_name WorldView
 
+@export_group("WorldviewNotif")
+@export var WorldviewAdjustNotif : PackedScene
+
 static var WorldviewStats : Dictionary[WorldViews, int] = {
 	WorldViews.COMPOSURE_AGITATION : 0,
 	WorldViews.LOGIC_BELIEF : 0,
@@ -9,14 +12,27 @@ static var WorldviewStats : Dictionary[WorldViews, int] = {
 	WorldViews.FORCE_INSPIRATION : 0,
 }
 
-static func AdjustStat(Stat : WorldViews, Amm : int) -> void:
+static var Instance : WorldView
+
+func _ready() -> void:
+	Instance = self
+
+static func GetInstance() -> WorldView:
+	return Instance
+
+func AdjustStat(Stat : WorldViews, Amm : int, Notify : bool) -> void:
 	WorldviewStats[Stat] += Amm
 	print("Worldview stat {0} new value is {1}".format([WorldViews.keys()[Stat], WorldviewStats[Stat]]))
+	if (Notify):
+		var notif = WorldviewAdjustNotif.instantiate() as WorldviewNotif
+		notif.AdjustedAmm = Amm
+		notif.NotifStat = Stat
+		Ingame_UIManager.GetInstance().AddUI(notif, false, true)
 	
-static func GetStatValue(StatName : WorldViews) -> int:
+func GetStatValue(StatName : WorldViews) -> int:
 	return WorldviewStats[StatName]
 
-static func SkillCheck(Stat : WorldViews, Possetive : bool) -> bool:
+func SkillCheck(Stat : WorldViews, Possetive : bool, Difficulty : int) -> bool:
 	var skill_value = WorldviewStats[Stat]
 	
 	var roll = randf_range(1, 100)
@@ -27,7 +43,7 @@ static func SkillCheck(Stat : WorldViews, Possetive : bool) -> bool:
 	else:
 		result -= roll
 	
-	if abs(result) >= 80:
+	if abs(result) >= Difficulty:
 		print("Skill Check Passed!")
 		return true
 	else:

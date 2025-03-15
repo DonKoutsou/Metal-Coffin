@@ -37,6 +37,12 @@ var ShowingTutorial = false
 
 static var Instance : Map
 
+static func PixelDistanceToKm(Dist : float) -> float:
+	return Dist
+
+static func SpeedToKmH(Speed : float) -> float:
+	return Speed * 360
+
 static func GetInstance() -> Map:
 	return Instance
 
