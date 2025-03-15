@@ -73,6 +73,7 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.AlarmRaised = spotdat.AlarmRaised
 		sc.AlarmProgress = spotdat.AlarmProgress
 		sc.Merch = spotdat.Merch
+		sc.Event = spotdat.Evnt
 		CSpot.free()
 
 		if (spotdat.Seen):

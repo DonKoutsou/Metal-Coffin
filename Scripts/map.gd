@@ -376,8 +376,8 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Pos : Vector2) -> void:
 		Ship.Cpt = f
 		Ship.CurrentPort = Spot
 		Ship.Patrol = Patrol
-		if (TempEnemyNames.size() > 0):
-			Ship.ShipName = TempEnemyNames.pop_back()
+		#if (TempEnemyNames.size() > 0):
+		Ship.ShipName = TempEnemyNames.pop_back()
 		SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
 		EnemsToSpawn[Ship] = Pos

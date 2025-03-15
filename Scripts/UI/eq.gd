@@ -5,6 +5,8 @@ class_name EQ
 var prev : float = 0
 
 func _ready() -> void:
+	#for g : Control in get_children():
+		#g.custom_minimum_size.y = size.y
 	DoThing()
 
 func DoThing() -> void:

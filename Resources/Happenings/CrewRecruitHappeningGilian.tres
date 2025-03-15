@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=13 format=3 uid="uid://c3kr3kcdnvesc"]
+[gd_resource type="Resource" script_class="Happening" load_steps=17 format=3 uid="uid://c3kr3kcdnvesc"]
 
+[ext_resource type="Texture2D" uid="uid://hcbn2124kbd3" path="res://Assets/CaptainPortraits/Captain5.png" id="1_3tnlt"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_x2bkw"]
+[ext_resource type="Resource" uid="uid://c75as8yglsqcy" path="res://Resources/Captains/PlayerCaptains/Gilian.tres" id="3_j2ryf"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_fdmko"]
+[ext_resource type="Script" uid="uid://w3pbagqwci26" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="4_ui0gd"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_3u5ui"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_eghih"]
 
@@ -25,37 +28,52 @@ script = ExtResource("5_3u5ui")
 HappeningTexts = Array[String](["The ship surprisingly has no weapons on it. You would think a ship traversing the land at these time would have at least the minumim of deffences."])
 Options = Array[ExtResource("1_x2bkw")]([])
 
-[sub_resource type="Resource" id="Resource_c5ks0"]
-script = ExtResource("4_fdmko")
-StringReply = "You take your eyes away and head for the city."
-OptionName = "Look away"
-FinishDiag = true
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-
-[sub_resource type="Resource" id="Resource_71ow0"]
-script = ExtResource("4_fdmko")
-StringReply = "You gather a small brigade an make your way to the ship."
-OptionName = "Aproach the machine"
-FinishDiag = false
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-
 [sub_resource type="Resource" id="Resource_qi88o"]
 script = ExtResource("5_3u5ui")
 HappeningTexts = Array[String](["Your commanding officer turns your atention to the ship's captain stepping out of the ship. Its one of the machines, it all starts to make sense slowly."])
-Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_c5ks0"), SubResource("Resource_71ow0")])
+Options = Array[ExtResource("1_x2bkw")]([])
+
+[sub_resource type="Resource" id="Resource_j2ryf"]
+script = ExtResource("5_3u5ui")
+HappeningTexts = Array[String](["The machine asks you to leave."])
+Options = Array[ExtResource("1_x2bkw")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_3tnlt"]
+script = ExtResource("4_ui0gd")
+Cpt = ExtResource("3_j2ryf")
+OptionName = "Ask them to join your fleet"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("5_3u5ui")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 3
+CheckPossetive = false
+WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([SubResource("Resource_j2ryf")])
+metadata/_custom_type_script = "uid://w3pbagqwci26"
+
+[sub_resource type="Resource" id="Resource_ui0gd"]
+script = ExtResource("4_fdmko")
+StringReply = "You take your leave"
+OptionName = "Leave"
+FinishDiag = true
+BranchContinuation = Array[ExtResource("5_3u5ui")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_q82st"]
 script = ExtResource("5_3u5ui")
 HappeningTexts = Array[String](["The machine is surprised to see you but after realising who you are you can see it lowers its guard."])
-Options = Array[ExtResource("1_x2bkw")]([])
+Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_3tnlt"), SubResource("Resource_ui0gd")])
 
 [resource]
 script = ExtResource("5_eghih")
 HappeningName = "The Machine"
+HappeningBg = ExtResource("1_3tnlt")
 Stages = Array[ExtResource("5_3u5ui")]([SubResource("Resource_kk05a"), SubResource("Resource_cmfn1"), SubResource("Resource_57mxl"), SubResource("Resource_ipjf8"), SubResource("Resource_qi88o"), SubResource("Resource_q82st")])
 HappeningAppearance = 0
 Special = true

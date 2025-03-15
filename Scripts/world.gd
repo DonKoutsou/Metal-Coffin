@@ -33,7 +33,8 @@ static func GetInstance() -> World:
 func _ready() -> void:
 	#$Inventory.Player = GetMap().GetPlayerShip()
 	var Loadingscr = LoadingScene.instantiate() as LoadingScreen
-	add_child(Loadingscr)
+	GetMap().GetScreenUi().add_child(Loadingscr)
+	#add_child(Loadingscr)
 	#TODO needs fix
 	if (!Loading):
 		Loadingscr.ProcessStarted("Generating Map Spot Plecement")
@@ -65,7 +66,9 @@ func _ready() -> void:
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Placing Fleets In World")
 	Loadingscr.UpdateProgress(100)
-	Loadingscr.StartDest()
+	
+	
+	#Loadingscr.StartDest()
 	GetMap()._InitialPlayerPlacament()
 	$ShipController.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
@@ -73,14 +76,21 @@ func _ready() -> void:
 	WRLD_WorldReady.emit()
 	if (!Loading):
 		GetMap().GetScreenUi().ToggleFullScreen(true)
+		await GetMap().GetScreenUi().FullScreenToggleFinished
+		Loadingscr.queue_free()
+		
 		var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
 		Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
-		await Loadingscr.LoadingDestroyed
+		#await Loadingscr.LoadingDestroyed
 		await Questionair.Ended
 		GetMap().GetScreenUi().ToggleFullScreen(false)
 		PlayIntro()
 		PlayerWallet.SetFunds( StartingFunds)
-	
+	else:
+		GetMap().GetScreenUi().ToggleFullScreen(false)
+		await GetMap().GetScreenUi().FullScreenToggleFinished
+		Loadingscr.queue_free()
+		GetMap().GetCamera().FrameCamToPlayer()
 	
 func GetSaveData() -> SaveData:
 	var Data = SaveData.new()

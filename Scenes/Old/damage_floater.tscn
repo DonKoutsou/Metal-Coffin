@@ -21,6 +21,8 @@ theme_override_fonts/font = ExtResource("1_elilk")
 theme_override_font_sizes/font_size = 30
 text = "10"
 script = ExtResource("1_nmcop")
+GoodColor = Color(0.483, 100, 0.381, 1)
+BadColor = Color(100, 0, 0.163, 1)
 EndTimer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]

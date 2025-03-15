@@ -916,20 +916,6 @@ mouse_filter = 2
 texture = ExtResource("5_nt8da")
 expand_mode = 1
 
-[node name="ScreenFrameLong2" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -648.0
-offset_bottom = -648.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("33_vyv2f")
-expand_mode = 1
-
 [node name="ScreenFrame4" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -1087,6 +1073,21 @@ mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
 flip_h = true
+
+[node name="ScreenFrameLong2" type="TextureRect" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -648.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("33_vyv2f")
+expand_mode = 1
 
 [node name="ScreenCam" type="Camera2D" parent="." node_paths=PackedStringArray("Cabled")]
 position = Vector2(600, 324)

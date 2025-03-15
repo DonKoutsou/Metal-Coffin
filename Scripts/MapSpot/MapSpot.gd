@@ -61,7 +61,7 @@ func SpawnEnemyGarison():
 
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
-	var datas = MapSpotSaveData.new().duplicate()
+	var datas = MapSpotSaveData.new()
 	datas.SpotType = SpotType
 	datas.SpotLoc = position
 	datas.Seen = Seen
@@ -72,6 +72,7 @@ func GetSaveData() -> Resource:
 	datas.AlarmRaised = AlarmRaised
 	datas.AlarmProgress = AlarmProgress
 	datas.Merch = Merch
+	datas.Evnt = Event
 	return datas
 
 func SetSpotData(Data : MapSpotType) -> void:

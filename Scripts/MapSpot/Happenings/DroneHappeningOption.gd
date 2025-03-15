@@ -8,7 +8,12 @@ var DroneScene : String = "res://Scenes/drone.tscn"
 	#Dron = DroneScene.instantiate()
 
 func OptionResault() -> String:
-	return "A new ship has joined your fleet."
+	if (CheckResault):
+		return "A new ship has joined your fleet."
+	else:
+		return "The captain has refused to join your fleet"
+	
 func OptionOutCome(Instigator : MapShip) -> void:
-	super(Instigator)
-	Instigator.GetDroneDock().AddRecruit(Cpt)
+	if (CheckResault):
+		super(Instigator)
+		Instigator.GetDroneDock().AddRecruit(Cpt)
