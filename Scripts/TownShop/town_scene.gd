@@ -34,7 +34,7 @@ var PlHull : float = 0
 var PlMaxHull : float = 0
 var BoughtRepairs : float = 0
 
-signal TransactionFinished(BFuel : float, BRepair : float, Ship : MapShip)
+signal TransactionFinished(BFuel : float, BRepair : float, Ship : MapShip, TradeScene : TownScene)
 
 var LandedShip : MapShip
 
@@ -153,18 +153,31 @@ func UpdateRepairBar(AddedRepair : float):
 	CurrentHull.text = var_to_str(roundi(PlHull + BoughtRepairs))
 func _on_button_pressed() -> void:
 	#PlayerWallet.Funds = PlFunds
-	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShip)
-	queue_free()
+	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShip, self)
+	#queue_free()
 
 
 func On_MunitionShop_pressed() -> void:
-	ItemPlecement.get_parent().get_parent().visible = true
+	ItemPlecement.get_parent().visible = true
 	RepRefPlecement.visible = false
+	$VBoxContainer/HBoxContainer2/Button3.pressed = false
 
+func OnMunitionShopToggled(toggled_on: bool) -> void:
+	ItemPlecement.get_parent().visible = toggled_on
+	RepRefPlecement.visible = !toggled_on
+	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(toggled_on)
+	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(!toggled_on)
 
 func On_RefRef_Pressed() -> void:
-	ItemPlecement.get_parent().get_parent().visible = false
+	ItemPlecement.get_parent().visible = false
 	RepRefPlecement.visible = true
+	$VBoxContainer/HBoxContainer2/Button2.pressed = false
+
+func OnRefuelShopPressed(toggled_on: bool) -> void:
+	ItemPlecement.get_parent().visible = !toggled_on
+	RepRefPlecement.visible = toggled_on
+	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(!toggled_on)
+	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(toggled_on)
 
 func OnItemSold(It : Item) -> void:
 	InventoryManager.GetInstance().RemoveItemFromFleet(It, LandedShip)
@@ -183,6 +196,6 @@ func OnItemBought(It : Item) -> void:
 
 func _on_scroll_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		$VBoxContainer/HBoxContainer/PanelContainer/Scroll.scroll_vertical -= event.relative.y
+		$VBoxContainer/HBoxContainer/Scroll.scroll_vertical -= event.relative.y
 	if (event is InputEventScreenDrag):
-		$VBoxContainer/HBoxContainer/PanelContainer/Scroll.scroll_vertical -= event.relative.y
+		$VBoxContainer/HBoxContainer/Scroll.scroll_vertical -= event.relative.y

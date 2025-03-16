@@ -54,8 +54,10 @@ func StartGame(Load : bool) -> void:
 			window.popup_centered()
 			return
 	
-	get_child(4).queue_free()
+	
 	add_child(wor)
+	await wor.WorldSpawnTransitionFinished
+	get_child(4).queue_free()
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
 	wor.connect("WRLD_OnGameEnded", OnGameEnded)

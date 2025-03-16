@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0iiqaijsg1y1"]
+[gd_scene load_steps=3 format=3 uid="uid://d0iiqaijsg1y1"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_s0ja4"]
 [ext_resource type="Script" uid="uid://djw0qatbronxr" path="res://Scripts/command_line.gd" id="2_svsqk"]
-[ext_resource type="FontFile" uid="uid://b67dqsdclgjad" path="res://Fonts/OpenSans-Regular.ttf" id="3_jrwwy"]
 
 [node name="CommandLine" type="PanelContainer" node_paths=PackedStringArray("Text")]
 anchors_preset = 14
@@ -39,7 +38,6 @@ text = "X"
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_jrwwy")
 placeholder_text = "Cheat Code Here"
 scroll_fit_content_height = true
 

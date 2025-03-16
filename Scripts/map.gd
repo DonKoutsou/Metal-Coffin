@@ -48,6 +48,7 @@ static func GetInstance() -> Map:
 
 func _ready() -> void:
 	set_physics_process(false)
+	$SubViewportContainer.visible = false
 	$ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
 	Instance = self
 
@@ -236,7 +237,7 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 	
-	var time = Time.get_ticks_msec()
+	#var time = Time.get_ticks_msec()
 	
 	call_deferred("MapGenFinished", GeneratedSpots)
 
@@ -283,7 +284,7 @@ func GenerateEventsThreaded() -> void:
 					E.PickedBy = S
 					SpEvents.erase(E)
 					print("Picked happening {0} for {1}".format([E.HappeningName, S.GetSpotName()]))
-		var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
+		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
 		
 		for S in Spots:
 			var Sp = S as MapSpot
@@ -364,7 +365,7 @@ func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 	for T in Towns:
 		var Spot = T.GetSpot()
-		var time = Time.get_ticks_msec()
+		#var time = Time.get_ticks_msec()
 		if (T.IsEnemy()):
 			SpawnSpotFleet(Spot, false, T.Pos)
 		if (Spot.GetPossibleDrops().size() == 3):
@@ -414,7 +415,7 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 
 var EnemsToSpawn : Dictionary
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (EnemsToSpawn.size() == 0):
 		set_physics_process(false)
 		GenerationFinished.emit()
@@ -678,11 +679,11 @@ func _prim_mst_optimized(cities: Array) -> Array:
 const OriginalSize = Vector2(791, 512)
 const FullSize = Vector2(1052, 512)
 
-func ToggleFullScreen() -> void:
+func ToggleFullScreen(toggle : bool) -> void:
 	
-	$SubViewportContainer.visible = false
+	#$SubViewportContainer.visible = false
 	
-	var toggle = await _ScreenUI.FullScreenToggleFinished
+	#var toggle = await _ScreenUI.FullScreenToggleStarted
 	
 	if (toggle):
 		$SubViewportContainer.size = FullSize

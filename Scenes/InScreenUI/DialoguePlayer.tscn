@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq8y4l8uapojy"]
+[gd_scene load_steps=5 format=3 uid="uid://cq8y4l8uapojy"]
 
 [ext_resource type="Script" uid="uid://bn0w6hkd0jgv6" path="res://Scripts/UI/Dialogue_Player.gd" id="1_xcud3"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_rodwx"]
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="2_tpi4a"]
 [ext_resource type="Texture2D" uid="uid://d2m66tlt5cl4b" path="res://Assets/artificial-hive.png" id="4_kc08c"]
 [ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="5_p12ba"]
 
@@ -23,10 +22,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -311.0
-offset_top = -156.0
-offset_right = 391.0
-offset_bottom = -38.0
+offset_left = -351.0
+offset_top = -168.0
+offset_right = 351.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -36,7 +35,6 @@ theme = ExtResource("2_rodwx")
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("2_tpi4a")
 theme_override_font_sizes/font_size = 24
 autowrap_mode = 2
 
@@ -47,10 +45,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -343.0
-offset_top = -267.0
-offset_right = -223.0
-offset_bottom = -147.0
+offset_left = -404.0
+offset_top = -277.0
+offset_right = -284.0
+offset_bottom = -157.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -78,10 +76,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 7.5
-offset_top = -60.0
-offset_right = 64.5
-offset_bottom = -16.0
+offset_left = -32.0
+offset_top = -70.0
+offset_right = 32.0
+offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_rodwx")

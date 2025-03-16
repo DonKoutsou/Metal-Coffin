@@ -15,12 +15,12 @@ class_name ScreenUI
 @export var NormalScreen : Control
 @export var FullScreenFrame : TextureRect
 
-signal FullScreenToggleStarted
-signal FullScreenToggleFinished(t : bool)
+signal FullScreenToggleStarted(t : bool)
+signal FullScreenToggleFinished()
 #signal FleetSeparationInitiated
 
 func ToggleFullScreen(toggle : bool) -> void:
-	FullScreenToggleStarted.emit()
+	#FullScreenToggleStarted.emit()
 	
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
@@ -31,24 +31,29 @@ func ToggleFullScreen(toggle : bool) -> void:
 	tw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
 	await tw.finished
 	
+	FullScreenToggleStarted.emit(toggle)
+	
 	await wait(0.2)
 	
 	FullScreenFrame.visible = toggle
 	NormalScreen.visible = !toggle
 	
-	FullScreenToggleFinished.emit(toggle)
+	
 	
 	var tw2 = create_tween()
 	tw2.set_ease(Tween.EASE_IN)
 	tw2.set_trans(Tween.TRANS_QUART)
 	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y), 1.6)
 	await tw2.finished
+	FullScreenToggleFinished.emit(toggle)
 	Cam.EnableFullScreenShake()
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
 	
 
 func _ready() -> void:
+	NormalScreen.visible = false
+	FullScreenFrame.visible = false
 	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
 	EventHandler.connect("AccelerationForced", Acceleration_Forced)
 	EventHandler.connect("SteerDirForced", Steer_Forced)
@@ -177,7 +182,7 @@ func Pause_Pressed() -> void:
 func ToggleControllCover(t : bool) -> void:
 	ButtonCover.visible = t
 
-func OnControlledShipDamaged(DamageAmm : float) -> void:
+func OnControlledShipDamaged(_DamageAmm : float) -> void:
 	#var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_BOUNCE)
 	#tw.tween_property($ScreenCam, "shakestr", 0, 8)

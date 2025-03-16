@@ -29,7 +29,7 @@ vec3 ToSrgb(vec3 c){ return vec3(ToSrgb1(c.r), ToSrgb1(c.g), ToSrgb1(c.b)); }
 
 vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
 	pos = floor(pos * res + off) / res;
-	
+
 	// Ensure that the return value is vec3(0.0) when out of bounds.
 	if (max(abs(pos.x - 0.5), abs(pos.y - 0.5)) > 0.5) {
 		return vec3(0.0);

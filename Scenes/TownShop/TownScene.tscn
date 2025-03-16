@@ -38,7 +38,7 @@ FuelBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/Pro
 RepairPrice = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer2/RepairPrice")
 CurrentHull = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm")
 HullBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/ProgressBar")
-ItemPlecement = NodePath("VBoxContainer/HBoxContainer/PanelContainer/Scroll/VBoxContainer")
+ItemPlecement = NodePath("VBoxContainer/HBoxContainer/Scroll/VBoxContainer")
 RepRefPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3")
 PlayerWallet = ExtResource("3_u2135")
 ItemScene = ExtResource("4_wqnl6")
@@ -52,68 +52,40 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_do06v")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = 53.0
+offset_right = -60.0
+offset_bottom = -53.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-alignment = 1
-
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-text = "AMUNITION"
-
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-text = "REFUEL / REPAIR"
-
-[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-text = "UPGRADE"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_horizontal = 3
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Scroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="Scroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ayl0t")
 horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/Scroll"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -131,6 +103,7 @@ layout_mode = 2
 text = "Fuel Reserves"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
@@ -147,7 +120,8 @@ text = "4214"
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 10
 text = "tons"
 horizontal_alignment = 2
@@ -165,7 +139,8 @@ alignment = 2
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 10
 text = "Ton Price:"
 
@@ -192,6 +167,7 @@ layout_mode = 2
 text = "Hull Condition"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2"]
 layout_mode = 2
@@ -208,7 +184,8 @@ text = "100"
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 10
 text = "Hull Integrity"
 horizontal_alignment = 2
@@ -226,7 +203,8 @@ alignment = 2
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.756863, 0.572549, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 10
 text = "Repair Price:"
 
@@ -241,17 +219,50 @@ size_flags_vertical = 3
 value = 27.12
 show_percentage = false
 
-[node name="Button" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
-text = "Finalize Transaction"
+toggle_mode = true
+text = "AMUNITION"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button2" to="." method="On_MunitionShop_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button3" to="." method="On_RefRef_Pressed"]
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/PanelContainer/Scroll" to="." method="_on_scroll_gui_input"]
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+toggle_mode = true
+button_pressed = true
+text = "REFUEL / REPAIR"
+
+[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "UPGRADE"
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "FINILIZE TRANSACTION"
+
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/Scroll" to="." method="_on_scroll_gui_input"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer2/ProgressBar" to="." method="RepairBar_gui_input"]
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button2" to="." method="OnMunitionShopToggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button3" to="." method="OnRefuelShopPressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]

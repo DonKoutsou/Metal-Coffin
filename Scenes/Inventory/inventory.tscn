@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dslxdgbana1k1"]
+[gd_scene load_steps=19 format=3 uid="uid://dslxdgbana1k1"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_xdylh"]
 [ext_resource type="Script" uid="uid://de8gy2g6upjg4" path="res://Scripts/Inventory/InventoryManager.gd" id="2_n8wv5"]
@@ -13,12 +13,18 @@
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="12_gc8sd"]
 [ext_resource type="AudioStream" uid="uid://d4k7al36dc8er" path="res://Assets/Sounds/ScreenZap.wav" id="13_jjw7x"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1gkd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fam5"]
 content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
-bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -131,6 +137,7 @@ size_flags_vertical = 3
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_n1gkd")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
@@ -140,6 +147,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4fam5")

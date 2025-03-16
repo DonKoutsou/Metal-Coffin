@@ -20,6 +20,7 @@ var StatsNotifiedLow : Array[String] = []
 
 signal WRLD_OnGameEnded
 signal WRLD_WorldReady
+signal WorldSpawnTransitionFinished
 #signal WRLD_StatsUpdated(StatN : String)
 signal WRLD_StatGotLow(StatN : String)
 
@@ -31,9 +32,12 @@ static func GetInstance() -> World:
 	return Instance
 
 func _ready() -> void:
+	GetMap().GetScreenUi().ToggleFullScreen(true)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	WorldSpawnTransitionFinished.emit()
 	#$Inventory.Player = GetMap().GetPlayerShip()
 	var Loadingscr = LoadingScene.instantiate() as LoadingScreen
-	GetMap().GetScreenUi().add_child(Loadingscr)
+	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, true)
 	#add_child(Loadingscr)
 	#TODO needs fix
 	if (!Loading):
@@ -76,19 +80,23 @@ func _ready() -> void:
 	WRLD_WorldReady.emit()
 	if (!Loading):
 		GetMap().GetScreenUi().ToggleFullScreen(true)
-		await GetMap().GetScreenUi().FullScreenToggleFinished
+		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		
 		var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
 		Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
+		await GetMap().GetScreenUi().FullScreenToggleFinished
+		Questionair.Init()
 		#await Loadingscr.LoadingDestroyed
 		await Questionair.Ended
 		GetMap().GetScreenUi().ToggleFullScreen(false)
+		await GetMap().GetScreenUi().FullScreenToggleStarted
+		Questionair.queue_free()
 		PlayIntro()
 		PlayerWallet.SetFunds( StartingFunds)
 	else:
 		GetMap().GetScreenUi().ToggleFullScreen(false)
-		await GetMap().GetScreenUi().FullScreenToggleFinished
+		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		GetMap().GetCamera().FrameCamToPlayer()
 	
@@ -166,24 +174,28 @@ func StartShipTrade(ControlledShip : MapShip) -> void:
 		return
 	var sc = FleetSeparationScene.instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
-	Ingame_UIManager.GetInstance().AddUI(sc)
 	GetMap().GetScreenUi().ToggleFullScreen(true)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	Ingame_UIManager.GetInstance().AddUI(sc)
+	
 	sc.connect("SeperationFinished", ShipSeparationFinished)
 		
 func ShipSeparationFinished() -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(false)
 #Dogfight-----------------------------------------------
-var FighingFriendlyUnits : Array[Node2D]
-var FighingEnemyUnits : Array[Node2D]
+var FighingFriendlyUnits : Array[Node2D] = []
+var FighingEnemyUnits : Array[Node2D] = []
 func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
-	FighingFriendlyUnits = Friendlies
-	FighingEnemyUnits = Enemies
 	
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
+		FighingFriendlyUnits.append(g)
 		FBattleStats.append(g.GetBattleStats())
 	var EBattleStats : Array[BattleShipStats] = []
-	for g in Enemies:
+	for g : HostileShip in Enemies:
+		if (g.Destroyed):
+			continue
+		FighingEnemyUnits.append(g)
 		EBattleStats.append(g.GetBattleStats())
 	var CardF = CardFightScene.instantiate() as Card_Fight
 	CardF.connect("CardFightEnded", CardFightEnded)
@@ -191,9 +203,10 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 	CardF.EnemyShips = EBattleStats
 	SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
+	GetMap().GetScreenUi().ToggleFullScreen(true)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	GetMap().GetScreenUi().ToggleControllCover(true)
-	GetMap().GetScreenUi().ToggleFullScreen(true)
 	UISoundMan.GetInstance().Refresh()
 	
 func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
@@ -263,7 +276,7 @@ func OnShipLanded(Ship : MapShip) -> void:
 		Ship.disconnect("LandingCanceled", OnLandingCanceled)
 	SimulationManager.GetInstance().TogglePause(true)
 	var spot = Ship.CurrentPort as MapSpot
-	var PlayedEvent = Land(spot, Ship)
+	var PlayedEvent = await Land(spot, Ship)
 	if (PlayedEvent):
 		return
 	var sc = spot.FuelTradeScene as PackedScene
@@ -277,11 +290,13 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
 	fuel.LandedShip = Ship
 	fuel.TownSpot = spot
-	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 	GetMap().GetScreenUi().ToggleFullScreen(true)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	Ingame_UIManager.GetInstance().AddUI(fuel, true)
+
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
-func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
+func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip, Scene : TownScene):
 	var spot = Ship.CurrentPort as MapSpot
 	if (spot.PlayerFuelReserves != BFuel):
 		spot.CityFuelReserves -= BFuel
@@ -295,6 +310,8 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip):
 	spot.PlayerRepairReserves = max(0, BRepair)
 	
 	GetMap().GetScreenUi().ToggleFullScreen(false)
+	await  GetMap().GetScreenUi().FullScreenToggleStarted
+	Scene.queue_free()
 	#UIEventH.OnScreenUIToggled(true)
 	##SimulationManager.GetInstance().TogglePause(false)
 	#UIEventH.OnButtonCoverToggled(false)
@@ -307,9 +324,10 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	if (Spot.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		happeningui.HappeningInstigator = Instigator
+		GetMap().GetScreenUi().ToggleFullScreen(true)
+		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
 		happeningui.PresentHappening(Spot.Event)
-		GetMap().GetScreenUi().ToggleFullScreen(true)
 		#UIEventH.OnScreenUIToggled(false)
 		#UIEventH.OnButtonCoverToggled(true)
 		happeningui.connect("HappeningFinished", HappeningFinished)

@@ -6,7 +6,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdmwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lndbu"]
-bg_color = Color(0.483, 100, 0.381, 1)
+bg_color = Color(1, 0.763983, 0.0812772, 1)
 
 [node name="Control" type="PanelContainer"]
 custom_minimum_size = Vector2(100, 0)

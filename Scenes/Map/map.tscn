@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=34 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -70,6 +70,9 @@ adjustment_enabled = true
 adjustment_brightness = 0.86
 adjustment_contrast = 0.95
 adjustment_saturation = 0.8
+
+[sub_resource type="Compositor" id="Compositor_h7q0i"]
+compositor_effects = Array[CompositorEffect]([null])
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
 layer = 0
@@ -205,6 +208,7 @@ Col = Color(100, 0.395, 0.144, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort"]
 environment = SubResource("Environment_h7q0i")
+compositor = SubResource("Compositor_h7q0i")
 
 [node name="ScreenUI" parent="." instance=ExtResource("24_e5um8")]
 

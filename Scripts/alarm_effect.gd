@@ -23,7 +23,7 @@ func TimerFin() -> void:
 		queue_free()
 
 # Called every frame
-func _process(delta):
+func _process(_delta):
 	queue_redraw()
 
 func _draw():

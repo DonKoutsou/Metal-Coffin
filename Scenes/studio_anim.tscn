@@ -176,7 +176,7 @@ script = ExtResource("1_ivc2u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_aophf")
+&"": SubResource("AnimationLibrary_aophf")
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]

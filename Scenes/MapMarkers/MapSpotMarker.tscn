@@ -285,7 +285,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_gjj15")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_4iew2")
+&"": SubResource("AnimationLibrary_4iew2")
 }
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
@@ -327,6 +327,8 @@ use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_n5ia3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Curdawa"
 vertical_alignment = 1

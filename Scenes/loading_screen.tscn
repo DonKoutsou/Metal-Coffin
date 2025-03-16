@@ -88,6 +88,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_s87fu")
 script = ExtResource("2_ehbru")
 Labe = NodePath("Label")
 
@@ -205,28 +206,29 @@ autoplay = "LogoDraw"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 174.0
+offset_top = -124.0
+offset_right = -174.0
+offset_bottom = -103.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -423.0
-offset_top = -125.0
-offset_right = 423.0
-offset_bottom = -98.0
+offset_left = -420.5
+offset_top = -165.0
+offset_right = 420.5
+offset_bottom = -142.0
 grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("7_s87fu")
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 178.0
-offset_top = -171.0
-offset_right = 1019.0
-offset_bottom = -148.0
 grow_vertical = 0
 vertical_alignment = 2
 autowrap_mode = 1

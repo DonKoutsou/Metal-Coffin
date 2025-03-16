@@ -12,7 +12,7 @@ func _ready() -> void:
 static func GetInstance() -> AchievementManager:
 	return Instance
 
-func UlockAchievement(Name : String) -> void:
+func UlockAchievement(_Name : String) -> void:
 	#if (SteamRunning):
 		#var AchStatus = Steam.getAchievement(Name)
 		#if (AchStatus["achieved"]):

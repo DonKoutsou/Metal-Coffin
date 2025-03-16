@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://yin8tcre8wf8"]
+[gd_scene load_steps=6 format=3 uid="uid://yin8tcre8wf8"]
 
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="1_b01h5"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_rpr4c"]
 [ext_resource type="Script" uid="uid://wsdodkllx8nn" path="res://Scenes/InScreenUI/port_notification.gd" id="1_xoog0"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_3wc5p"]
 
@@ -18,6 +19,7 @@ offset_top = -20.0
 offset_bottom = 67.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_rpr4c")
 script = ExtResource("1_xoog0")
 PortAvailableCol = Color(0.483, 100, 0.381, 1)
 PortUnAvailableCol = Color(100, 0, 0.163, 1)
@@ -32,6 +34,8 @@ offset_left = -427.0
 offset_right = -7.0
 offset_bottom = 93.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("1_b01h5")
 theme_override_font_sizes/font_size = 16
 text = "FLYING OVER CARDI
@@ -51,6 +55,8 @@ offset_top = -95.0
 offset_right = -7.0
 offset_bottom = -2.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("1_b01h5")
 theme_override_font_sizes/font_size = 14
 text = "FLYING OVER CARDI
