@@ -40,8 +40,8 @@ var LandedShip : MapShip
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#PlFunds = PlayerWallet.Funds
-	#FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
+	
+	
 	if (!HasFuel):
 		FuelPricePerTon = 200
 	else:
@@ -84,7 +84,7 @@ func _ready() -> void:
 		ItScene.connect("OnItemSold", OnItemSold)
 		ItemPlecement.visible = true
 		ItemPlecement.add_child(ItScene)
-
+	UISoundMan.GetInstance().Refresh()
 func SetFuelData():
 	PlFuel = LandedShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	PlMaxFuel = LandedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)

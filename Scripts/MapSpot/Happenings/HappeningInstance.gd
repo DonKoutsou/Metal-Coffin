@@ -26,6 +26,7 @@ signal NextDiag
 var HappeningInstigator : MapShip
 
 func _ready() -> void:
+	UISoundMan.GetInstance().Refresh()
 	set_physics_process(false)
 	NextDiagButton.visible = false
 	ProgBar.visible = false
@@ -125,7 +126,7 @@ func NextStage() -> void:
 		
 		if (Stage.Options[SelectedOption].FinishDiag):
 			HappeningFinished.emit()
-			queue_free()
+			#queue_free()
 		
 		else:
 			var Possiblebranch
@@ -140,7 +141,7 @@ func NextStage() -> void:
 	
 	if (CurrentBranch.size() == CurrentStage):
 		HappeningFinished.emit()
-		queue_free()
+		#queue_free()
 	else:
 		call_deferred("NextStage")
 		

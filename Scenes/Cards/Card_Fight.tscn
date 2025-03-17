@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="14_ll7ew"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="15_dpyfj"]
 
-[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect")]
+[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -238,8 +238,10 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()
 	
-	GetMap().GetScreenUi().ToggleControllCover(false)
+	#GetMap().GetScreenUi().ToggleControllCover(false)
 	GetMap().GetScreenUi().ToggleFullScreen(false)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
 
 #LANDING
 func OnLandRequested(ControlledShip : MapShip) -> void:
@@ -337,6 +339,8 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	
 func HappeningFinished() -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(false)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	get_tree().get_nodes_in_group("Happening")[0].queue_free()
 	#UIEventH.OnScreenUIToggled(true)
 	#UIEventH.OnButtonCoverToggled(false)
 

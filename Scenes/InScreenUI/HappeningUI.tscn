@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Sound.tscn" id="5_fjydm"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
 
-[node name="HappeningInstance" type="PanelContainer" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "NextDiagButton")]
+[node name="HappeningInstance" type="PanelContainer" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "NextDiagButton") groups=["Happening"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -95,7 +95,7 @@ max_value = 3.0
 value = 3.0
 show_percentage = false
 
-[node name="NextDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
+[node name="NextDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
@@ -107,7 +107,7 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
@@ -117,21 +117,21 @@ faw"
 autowrap_mode = 2
 expand_icon = true
 
-[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Option 1"
 autowrap_mode = 2
 
-[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Option 1"
 autowrap_mode = 2
 
-[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24

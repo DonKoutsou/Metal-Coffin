@@ -1,7 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1k2h35khc40y"]
+[gd_scene load_steps=5 format=3 uid="uid://b1k2h35khc40y"]
 
 [ext_resource type="Script" uid="uid://faswynkmbrw2" path="res://Scripts/Inventory/Inventory_Box.gd" id="1_1cx5j"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_xu5pf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xrnb"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.482095, 0.689901, 0.704644, 1)
+border_blend = true
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_708pr"]
 content_margin_left = 2.0
@@ -33,6 +48,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("1_xu5pf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3xrnb")
 script = ExtResource("1_1cx5j")
 Butto = NodePath("ItemButton")
 

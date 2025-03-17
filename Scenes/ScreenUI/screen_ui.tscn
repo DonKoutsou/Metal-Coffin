@@ -3,10 +3,9 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
-[ext_resource type="Texture2D" uid="uid://cysdidvsikumn" path="res://Assets/UIPiecies/Screen/Screen_FullQuality.png" id="4_j0j1u"]
 [ext_resource type="AudioStream" uid="uid://idnn507tyewg" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
-[ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="5_nt8da"]
+[ext_resource type="Texture2D" uid="uid://b8nyxo2neky46" path="res://Assets/UIPiecies/Screen/ScreenMetal_FullQuality.png" id="5_ng3jm"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
 [ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="8_eamxa"]
@@ -35,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://cyonateow4p62" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="31_bthjx"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://43oufd7tk1tv" path="res://Scripts/Cable.gd" id="33_l6yn6"]
+[ext_resource type="Texture2D" uid="uid://mo0il3pmabbx" path="res://Assets/UIPiecies/Screen/ScreenMetal_Long.png" id="33_ng3jm"]
 [ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/speaker.tscn" id="33_wetmy"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
@@ -339,15 +339,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_j0j1u")
+texture = ExtResource("5_ng3jm")
 expand_mode = 1
 
 [node name="ThrustSlider" parent="NormalScreen" instance=ExtResource("5_mda8n")]
 layout_mode = 1
 offset_left = -114.0
-offset_top = -333.0
+offset_top = -337.0
 offset_right = -13.0
-offset_bottom = -42.0
+offset_bottom = -46.0
 
 [node name="DroneButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
@@ -915,7 +915,7 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("5_nt8da")
+texture = ExtResource("33_ng3jm")
 expand_mode = 1
 
 [node name="ScreenFrame4" type="TextureRect" parent="."]

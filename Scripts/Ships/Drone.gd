@@ -60,8 +60,8 @@ func RemovePort():
 		g.RemovePort()
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerShip and CommingBack):
-		var plship = area.get_parent() as PlayerShip
-		plship.GetDroneDock().PlayReturnSound()
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.APROACHING)
+		
 func BodyEnteredBody(Body: Area2D) -> void:
 	if (Docked):
 		return

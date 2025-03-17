@@ -189,7 +189,7 @@ script = ExtResource("19_ccpfd")
 MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.483, 100, 0.381, 1)
-EnemyColor = Color(1, 0.094, 0, 1)
+EnemyColor = Color(100, 0.094, 0, 1)
 UIEventH = ExtResource("25_8mjbw")
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]

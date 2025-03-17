@@ -7,6 +7,9 @@ class_name StartingScreen
 @export var StudioAnim : PackedScene
 @export var GameScene : PackedScene
 
+var StMenu : StartingMenu
+var Wor : World
+
 const APPID = "3551150"
 # Called when the node enters the scene tree for the first time.
 
@@ -38,16 +41,16 @@ func _ready() -> void:
 	SpawnMenu()
 
 func SpawnMenu() -> void:
-	var startmen = StartingMenuScene.instantiate() as StartingMenu
-	add_child(startmen)
-	startmen.connect("GameStart", StartGame)
+	StMenu = StartingMenuScene.instantiate() as StartingMenu
+	add_child(StMenu)
+	StMenu.connect("GameStart", StartGame)
 	UISoundMan.GetInstance().Refresh()
 	
 func StartGame(Load : bool) -> void:
-	var wor = GameScene.instantiate() as World
+	Wor = GameScene.instantiate() as World
 	#wor.Load
 	if (Load):
-		if (!save_load_manager.Load(wor)):
+		if (!save_load_manager.Load(Wor)):
 			var window = AcceptDialog.new()
 			add_child(window)
 			window.dialog_text = "No Save File Found"
@@ -55,17 +58,17 @@ func StartGame(Load : bool) -> void:
 			return
 	
 	
-	add_child(wor)
-	await wor.WorldSpawnTransitionFinished
-	get_child(4).queue_free()
+	add_child(Wor)
+	await Wor.WorldSpawnTransitionFinished
+	StMenu.queue_free()
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
-	wor.connect("WRLD_OnGameEnded", OnGameEnded)
+	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
 	
 
 func OnGameEnded() -> void:
 	get_tree().paused = false
-	get_child(4).TerminateWorld()
-	get_child(4).queue_free()
+	Wor.TerminateWorld()
+	Wor.queue_free()
 	SpawnMenu()

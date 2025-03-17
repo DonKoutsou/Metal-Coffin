@@ -16,6 +16,7 @@ var CurrentQuestion : int = 0
 signal Ended
 
 func Init() -> void:
+	UISoundMan.GetInstance().Refresh()
 	Tw = create_tween()
 	Tw.set_trans(Tween.TRANS_BOUNCE)
 	Tw.tween_property($VBoxContainer/LineDrawer, "amplitude", randf_range(3, 20), 1)
@@ -39,10 +40,18 @@ func Init() -> void:
 	Text.text = IntroDialogue[CurrentIntroDialogue]
 	Text.visible_ratio = 0
 
-
+var d = 0.06
 var Tw : Tween
 func _physics_process(delta: float) -> void:
+	
 	Text.visible_ratio += delta
+	
+	d -= delta
+	if (d > 0):
+		return
+	d = 0.06
+	
+	
 	
 	if (Text.visible_ratio < 1):
 		#if (!$AudioStreamPlayer.playing):

@@ -24,6 +24,7 @@ func _draw() -> void:
 		draw_line(global_position + size / 2, TargetLoc, Color(0.482,0.69,0.705), 2)
 
 func _ready() -> void:
+	UISoundMan.GetInstance().AddSelf($Button)
 	$PanelContainer.visible = false
 	set_physics_process(TargetLoc != Vector2.ZERO)
 

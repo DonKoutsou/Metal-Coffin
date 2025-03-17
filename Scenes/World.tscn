@@ -60,4 +60,3 @@ script = ExtResource("15_kwl8l")
 WorldviewAdjustNotif = ExtResource("16_waglr")
 
 [node name="Map" parent="." instance=ExtResource("12_11aq8")]
-layer = 0

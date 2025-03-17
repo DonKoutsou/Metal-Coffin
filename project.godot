@@ -58,6 +58,8 @@ DigitalButtons=""
 City=""
 FadeNotif=""
 PlayerShips=""
+CardFight=""
+Happening=""
 
 [gui]
 

@@ -373,7 +373,7 @@ func OnFightEnded(Won : bool) -> void:
 		CardFightEnded.emit(PlayerShips)
 	else:
 		CardFightEnded.emit(EnemyShips)
-	queue_free()
+	
 
 #Refunds cards that consume inventory items if the card wasnt used in the end
 func RefundUnusedCards() -> void:

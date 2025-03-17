@@ -73,6 +73,8 @@ func _UpdateMapGridVisibility():
 		GridShowing = false
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 func UpdateCameraPos(relativeMovement : Vector2):
+	if (FrameTween.is_valid()):
+		FrameTween.kill()
 	var maxposY = 999999
 	var vpsizehalf = (get_viewport_rect().size.x / 2)
 	var maxposX = Vector2(vpsizehalf - 6000, vpsizehalf + 6000)
@@ -105,18 +107,20 @@ func ShowStation():
 	#var mattw = create_tween()
 	#mattw.set_trans(Tween.TRANS_EXPO)
 	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
-	
+
+var FrameTween : Tween
+
 func FrameCamToPlayer():
 	if (stattween != null):
 		stattween.kill()
-	var tw = create_tween()
+	FrameTween = create_tween()
 	var plpos = $"../PlayerShip".global_position
-	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(self, "global_position", plpos, 6)
+	FrameTween.set_trans(Tween.TRANS_EXPO)
+	FrameTween.tween_property(self, "global_position", plpos, 6)
 
 func FrameCamToPos(pos : Vector2) -> void:
 	if (stattween != null):
 		stattween.kill()
-	var tw = create_tween()
-	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property(self, "global_position", pos, 2)
+	FrameTween = create_tween()
+	FrameTween.set_trans(Tween.TRANS_EXPO)
+	FrameTween.tween_property(self, "global_position", pos, 2)

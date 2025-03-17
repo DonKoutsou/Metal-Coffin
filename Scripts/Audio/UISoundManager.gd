@@ -42,23 +42,37 @@ func _ready() -> void:
 static func GetInstance() -> UISoundMan:
 	return Instance
 
+func AddSelf(But : Button) -> void:
+	if (But.is_in_group("Buttons")):
+		if (But.is_connected("button_down", OnButtonClicked)):
+			return
+		But.connect("button_down", OnButtonClicked)
+		But.connect("button_up", OnButtonReleased)
+		
+	if (But.is_in_group("DigitalButtons")):
+		if (But.is_connected("button_down", OnDigitalButtonClicked)):
+			return
+		But.connect("button_down", OnDigitalButtonClicked)
+		But.connect("mouse_entered", OnButtonHovered)
+
 func Refresh():
 	var buttons = get_tree().get_nodes_in_group("Buttons")
 	for g in buttons.size():
 		if (buttons[g].is_connected("button_down", OnButtonClicked)):
 			continue
-		#buttons[g].connect("mouse_entered", OnButtonHovered);
-		#buttons[g].connect("focus_entered", OnButtonHovered);
-		buttons[g].connect("button_down", OnButtonClicked);
-		buttons[g].connect("button_up", OnButtonReleased);
+		
+		buttons[g].connect("button_down", OnButtonClicked)
+		buttons[g].connect("button_up", OnButtonReleased)
 	var Digibuttons = get_tree().get_nodes_in_group("DigitalButtons")
 	for g in Digibuttons.size():
 		if (Digibuttons[g].is_connected("button_down", OnDigitalButtonClicked)):
 			continue
-		Digibuttons[g].connect("button_down", OnDigitalButtonClicked);
+		Digibuttons[g].connect("button_down", OnDigitalButtonClicked)
+		Digibuttons[g].connect("mouse_entered", OnButtonHovered)
+		#Digibuttons[g].connect("focus_entered", OnButtonHovered);
 
 func OnButtonHovered():
-	Sounds[4].playing = true
+	Sounds[3].playing = true
 func OnButtonClicked():
 	Sounds[0].playing = true
 	var rand = randf_range(0.9, 1.0)
@@ -70,4 +84,4 @@ func OnButtonReleased():
 	Sounds[1].pitch_scale = rand
 	Sounds[1].volume_db = randf_range(AnalogueSoundStr -1, AnalogueSoundStr + 1.0)
 func OnDigitalButtonClicked():
-	Sounds[3].playing = true
+	Sounds[2].playing = true

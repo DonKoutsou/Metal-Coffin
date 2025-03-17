@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=14 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
 [ext_resource type="Script" uid="uid://we85k2ntvck5" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
 [ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
 [ext_resource type="Texture2D" uid="uid://bbvfo5xkwu8pg" path="res://Assets/MapElements/triangle-target.png" id="8_143co"]
+[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="8_jiuqu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tc2tu"]
 
@@ -101,6 +102,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = -3
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_jiuqu")
 theme_override_font_sizes/font_size = 15
 text = "Quifsa
 SPEED 100
@@ -116,6 +118,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_jiuqu")
 theme_override_font_sizes/font_size = 15
 text = "SPEED 100"
 vertical_alignment = 1
@@ -127,6 +130,7 @@ use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_jiuqu")
 theme_override_font_sizes/font_size = 15
 text = "Last Seen 1h ago"
 vertical_alignment = 1
@@ -138,6 +142,7 @@ use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_jiuqu")
 theme_override_font_sizes/font_size = 15
 text = "Threat Level : 10"
 vertical_alignment = 1
@@ -149,6 +154,7 @@ use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_jiuqu")
 theme_override_font_sizes/font_size = 15
 text = "Fuel : 10 / 250 Tons"
 vertical_alignment = 1
@@ -160,6 +166,7 @@ use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_jiuqu")
 theme_override_font_sizes/font_size = 15
 text = "Hull Condition : 10 / 100"
 vertical_alignment = 1

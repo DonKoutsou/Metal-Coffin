@@ -77,7 +77,7 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -85,7 +85,7 @@ theme_override_font_sizes/font_size = 26
 text = "Option1"
 autowrap_mode = 2
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -97,13 +97,13 @@ autowrap_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Next"
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
@@ -111,7 +111,7 @@ text = "Skip"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("29_0ey4p")
-volume_db = 5.0
+volume_db = -5.0
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="Option1Pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="Option2Pressed"]

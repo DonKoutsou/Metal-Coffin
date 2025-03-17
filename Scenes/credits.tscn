@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxkoglcdnoen2"]
+
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_gryuy"]
+[ext_resource type="Texture2D" uid="uid://8wnfauuuwprh" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
+[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="2_1bamb"]
+[ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_ccovl"]
+[ext_resource type="Script" uid="uid://be7e88egssi03" path="res://Scripts/credits.gd" id="2_xelri"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gryuy")
+script = ExtResource("2_xelri")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1bamb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_ccovl")
+stretch_mode = 3
+
+[node name="Control2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Developers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Koutsouradis Antonis - Main Develompent"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Badon Gale - Soundtrack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Addons Used"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_r18jl")
+stretch_mode = 3
+
+[node name="Control3" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CLOSE"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
