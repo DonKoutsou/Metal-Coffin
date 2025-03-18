@@ -4,7 +4,12 @@ class_name CharacterInventory
 
 @export_group("Nodes")
 @export var InventoryBoxScene : PackedScene
-@export var InventoryBoxParent : GridContainer
+@export var EngineInventoryBoxParent : VBoxContainer
+@export var SensorInventoryBoxParent : VBoxContainer
+@export var FuelTankInventoryBoxParent : VBoxContainer
+@export var WeaponInventoryBoxParent : VBoxContainer
+@export var ShieldInventoryBoxParent : VBoxContainer
+@export var InventoryBoxParent : VBoxContainer
 @export var CaptainNameLabel : Label
 
 signal OnItemAdded(it : Item)
@@ -27,6 +32,7 @@ var _ItemBeingUpgraded : Inventory_Box
 var _UpgradeTime : float
 
 func _ready() -> void:
+	InventoryBoxParent.get_parent().get_parent().visible = false
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
 
@@ -111,6 +117,10 @@ func AddItem(It : Item) -> void:
 			_CardAmmo[It.CardOptionProviding] = 1
 			
 		if (It is ShipPart):
+			var BoxParent = GetBoxParentForType(It.PartType)
+			if (Empty.get_parent() != BoxParent):
+				Empty.get_parent().remove_child(Empty)
+				BoxParent.add_child(Empty)
 			OnShipPartAdded.emit(It)
 		OnItemAdded.emit(It)
 		#print("Added 1 {0}".format([It.ItemName]))
@@ -123,6 +133,20 @@ func AddItem(It : Item) -> void:
 #func HasItem(It : Item) -> bool:
 	#return _InventoryContents.has(It)
 
+func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
+	var BoxParent : Control
+	if (PartType == ShipPart.ShipPartType.ENGINE):
+		BoxParent = EngineInventoryBoxParent
+	else : if (PartType == ShipPart.ShipPartType.SENSOR):
+		BoxParent = SensorInventoryBoxParent
+	else : if (PartType == ShipPart.ShipPartType.FUEL_TANK):
+		BoxParent = FuelTankInventoryBoxParent
+	else : if (PartType == ShipPart.ShipPartType.WEAPON):
+		BoxParent = WeaponInventoryBoxParent
+	else : if (PartType == ShipPart.ShipPartType.SHIELD):
+		BoxParent = ShieldInventoryBoxParent
+	return BoxParent
+	
 func HasSpaceForItem(It : Item) -> bool:
 	var boxes = _GetInventoryBoxes()
 	#try to find matching box for it and if not put it on any empty ones we found
@@ -166,7 +190,14 @@ func RemoveItem(It : Item) -> void:
 			return
 
 func _GetInventoryBoxes() -> Array:
-	return InventoryBoxParent.get_children()
+	var Boxes : Array
+	Boxes.append_array(EngineInventoryBoxParent.get_children())
+	Boxes.append_array(SensorInventoryBoxParent.get_children())
+	Boxes.append_array(FuelTankInventoryBoxParent.get_children())
+	Boxes.append_array(WeaponInventoryBoxParent.get_children())
+	Boxes.append_array(ShieldInventoryBoxParent.get_children())
+	Boxes.append_array(InventoryBoxParent.get_children())
+	return Boxes
 
 func UpgradeItem(Box : Inventory_Box) -> void:
 	if (_ItemBeingUpgraded != null):
@@ -236,3 +267,12 @@ func GetItemBeingUpgraded() -> Inventory_Box:
 
 func _on_button_pressed() -> void:
 	OnCharacterInspectionPressed.emit()
+
+
+func _on_inventory_vis_toggle_pressed() -> void:
+	InventoryBoxParent.get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().visible
+	if (InventoryBoxParent.get_parent().get_parent().visible):
+		$InventoryVisToggle.text = "Hide Inventory"
+	else:
+		$InventoryVisToggle.text = "Show Inventory"
+	

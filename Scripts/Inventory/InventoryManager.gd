@@ -188,10 +188,12 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 	var OwnerInventory = _CharacterInventories[Cpt] as CharacterInventory
 	
 	
-	
+	var fleet = Cpt.CaptainShip.GetFleet()
 	var AvailableCaptains : Array[Captain]
-	for g in _CharacterInventories.keys():
+	for g : Captain in _CharacterInventories.keys():
 		if (g == Cpt):
+			continue
+		if (!fleet.has(g)):
 			continue
 		var inv = _CharacterInventories[g]
 		if (inv.HasSpaceForItem(Box.GetContainedItem())):

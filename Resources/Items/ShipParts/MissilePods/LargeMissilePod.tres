@@ -21,6 +21,7 @@ Upgrades = Array[ExtResource("6_g1ywd")]([SubResource("Resource_fmxhr")])
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 4
 ItemIcon = ExtResource("1_e3orr")
 ItemIconSmol = ExtResource("2_gup6i")
 ItemName = "MP-9 \"Maelstrom\""

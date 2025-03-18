@@ -64,6 +64,10 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	MapPointerManager.GetInstance().AddShip(self, true)
+
+	#TODO probably a better way to do this
+	Cpt.CaptainShip = self
+	###
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
@@ -251,7 +255,7 @@ func AccelerationChanged(value: float) -> void:
 	AccelChanged = true
 	
 	
-	GetShipAcelerationNode().position.x = max(0,value * GetShipMaxSpeed())
+	GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed())
 
 func updatedronecourse():
 	var plship = Command
@@ -498,6 +502,17 @@ func GetFuelStats() -> Dictionary[String, float]:
 	Stats["MaxFuel"] = total_maxfuel
 	Stats["FleetRange"] = (total_fuel * 10 * effective_efficiency) / fleetsize
 	return Stats
+
+func GetFleet() -> Array[MapShip]:
+	var Fleet : Array[MapShip]
+	
+	if (Command == null):
+		Fleet.append(Command)
+		Fleet.append_array(Command.GetDroneDock().DockedDrones)
+	else:
+		Fleet.append_array(GetDroneDock().DockedDrones)
+	
+	return Fleet
 
 func GetFuelRange() -> float:
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)

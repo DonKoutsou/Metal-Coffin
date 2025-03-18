@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7cgarcbvixw6"]
+[gd_scene load_steps=16 format=3 uid="uid://b7cgarcbvixw6"]
 
 [ext_resource type="Script" uid="uid://jj8scn4ef501" path="res://Scripts/speaker.gd" id="1_5i5xf"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="2_5i5xf"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://ceoxpuch57wsg" path="res://Assets/VoiceLines/TargetDestr.mp3" id="11_518v1"]
 [ext_resource type="AudioStream" uid="uid://bgg5wwdq877gi" path="res://Assets/VoiceLines/Aproaching.mp3" id="12_ly22l"]
 [ext_resource type="Texture2D" uid="uid://exd6idgv5fpm" path="res://Assets/UIPiecies/Screen/Speaker_Metal_FullQuality.png" id="13_dvjny"]
+[ext_resource type="Texture2D" uid="uid://cbg33obslhrhy" path="res://Assets/UIPiecies/Screen/Speaker_FullQuality.png" id="13_fjhpm"]
 
 [node name="Speaker" type="Control"]
 layout_mode = 3
@@ -37,11 +38,11 @@ SoundList = Dictionary[int, Array]({
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -55.0
-offset_top = -11.0
-offset_right = 94.0
-offset_bottom = 287.0
-texture = ExtResource("13_dvjny")
+offset_left = -35.0
+offset_top = -3.0
+offset_right = 114.0
+offset_bottom = 295.0
+texture = ExtResource("13_fjhpm")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="TextureRect"]

@@ -101,12 +101,17 @@ func AddCaptain(Cpt : Captain, Notify : bool = true) -> Drone:
 	return ship
 
 func AddRecruit(Cpt : Captain, Notify : bool = true) -> void:
-	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
-	ship.Cpt = Cpt
+	
 	World.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
 	PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Cpt.ProvidingFunds]))
-	Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait)
-	AddDrone(ship, Notify)
+	Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait, Cpt.CaptainName)
+	var ship = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
+	ship.Cpt = Cpt
+	AddDrone(ship, false)
+	for Crew in Cpt.ProvidingCaptains:
+		var NewShip = (load("res://Scenes/drone.tscn") as PackedScene).instantiate() as Drone
+		NewShip.Cpt = Crew
+		AddDrone(NewShip, false)
 
 func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#var drone = DroneScene.instantiate()
@@ -167,7 +172,6 @@ func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 		Dr.EnableDrone()
 	
 func AddDroneToHierarchy(drone : Drone):
-	drone.Command = get_parent()
 	get_parent().get_parent().add_child(drone)
 	DockDrone(drone)
 	DroneDockEventH.OnDroneAdded(drone, get_parent())
@@ -178,7 +182,8 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
 	drone.DissableDrone()
-	
+
+	drone.Command = get_parent()
 	DroneDockEventH.OnDroneDocked(drone, get_parent())
 	
 	var docks = $DroneSpots.get_children()
@@ -198,8 +203,11 @@ func DockDrone(drone : Drone, playsound : bool = false):
 
 func UndockDrone(drone : Drone, Keep : bool = true):
 	DockedDrones.erase(drone)
+	
 	if (Keep):
 		FlyingDrones.append(drone)
+	else:
+		drone.Command = null
 	DroneDockEventH.OnDroneUnDocked(drone, get_parent())
 	var docks = $DroneSpots.get_children()
 	for g in docks.size():

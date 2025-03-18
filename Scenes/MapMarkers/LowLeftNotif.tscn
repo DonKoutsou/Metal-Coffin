@@ -45,7 +45,9 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="Control/PanelContainer" groups=["MapInfo"]]
 use_parent_material = true
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("2_lmaby")
 theme_override_font_sizes/font_size = 12
 text = "Location Analyzed

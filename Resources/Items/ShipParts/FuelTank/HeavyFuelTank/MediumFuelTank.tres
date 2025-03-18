@@ -33,6 +33,7 @@ UpgradeVersion = ExtResource("4_eq04c")
 UpgradeTime = 400.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 3
 ItemIcon = ExtResource("1_3ytf2")
 ItemIconSmol = ExtResource("2_s1m52")
 ItemName = "FT-1000"

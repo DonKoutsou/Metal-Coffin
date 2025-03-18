@@ -24,6 +24,7 @@ UpgradeVersion = ExtResource("5_tksjm")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 4
 ItemIcon = ExtResource("1_psc5g")
 ItemIconSmol = ExtResource("2_76vpk")
 ItemName = "MG-10 \"Squall\""

@@ -15,9 +15,10 @@ var CharactersShowing = 0
 func _ready() -> void:
 	set_physics_process(false)
 	#PlayDialogue(["Dis a test tes tes  sgsesgesg eesg sge sges ges ges", " ga gawe geagg ae gea gae geag g"])
-func PlayDialogue(Text : Array[String], Avatar : Texture):
+func PlayDialogue(Text : Array[String], Avatar : Texture, Name : String):
 	textToShow.append_array(Text)
 	$PanelContainer/TextureRect.texture = Avatar
+	$PanelContainer/Label.text = Name
 	ApplyNextText()
 	
 func DialogueEnded():
@@ -25,6 +26,17 @@ func DialogueEnded():
 	textToShow.remove_at(0)
 	$Timer.start()
 
+func SkipLine() -> void:
+	CharactersShowing = 0
+	textToShow.remove_at(0)
+	if (textToShow.size() > 0):
+		ApplyNextText()
+		return 
+	DialoguePlayed.emit()
+	if (Callback != Callable()):
+		Callback.call()
+	queue_free()
+	
 func ApplyNextText():
 	#label.text = textToShow[0]
 	#label.visible_ratio = 0
@@ -66,3 +78,7 @@ func _on_skip_pressed() -> void:
 	if (Callback != Callable()):
 		Callback.call()
 	queue_free()
+
+
+func _on_next_pressed() -> void:
+	SkipLine()

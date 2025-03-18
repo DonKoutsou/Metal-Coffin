@@ -22,6 +22,7 @@ Upgrades = Array[ExtResource("6_oaj4l")]([SubResource("Resource_fmxhr")])
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 4
 ItemIcon = ExtResource("1_6bv61")
 ItemIconSmol = ExtResource("2_whklm")
 ItemName = "MG-30 \"Tempest\""

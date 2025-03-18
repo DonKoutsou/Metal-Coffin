@@ -101,7 +101,11 @@ var stattween : Tween
 func ShowStation():
 	stattween = create_tween()
 	var stations = get_tree().get_nodes_in_group("CAPITAL")
-	var stationpos = stations[stations.size()-1].global_position
+	var stationpos
+	for g : MapSpot in stations:
+		if (g.GetSpotName() == "Dormak"):
+			stationpos = g.global_position
+			break
 	stattween.set_trans(Tween.TRANS_EXPO)
 	stattween.tween_property(self, "global_position", stationpos, 6)
 	#var mattw = create_tween()

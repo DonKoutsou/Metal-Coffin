@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
 [ext_resource type="AudioStream" uid="uid://idnn507tyewg" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
-[ext_resource type="Texture2D" uid="uid://b8nyxo2neky46" path="res://Assets/UIPiecies/Screen/ScreenMetal_FullQuality.png" id="5_ng3jm"]
+[ext_resource type="Texture2D" uid="uid://cysdidvsikumn" path="res://Assets/UIPiecies/Screen/Screen_FullQuality.png" id="5_ng3jm"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
 [ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="8_eamxa"]
@@ -34,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://cyonateow4p62" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="31_bthjx"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://43oufd7tk1tv" path="res://Scripts/Cable.gd" id="33_l6yn6"]
-[ext_resource type="Texture2D" uid="uid://mo0il3pmabbx" path="res://Assets/UIPiecies/Screen/ScreenMetal_Long.png" id="33_ng3jm"]
+[ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="33_ng3jm"]
 [ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/speaker.tscn" id="33_wetmy"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
@@ -918,7 +918,16 @@ mouse_filter = 2
 texture = ExtResource("33_ng3jm")
 expand_mode = 1
 
-[node name="ScreenFrame4" type="TextureRect" parent="."]
+[node name="Cables" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScreenFrame4" type="TextureRect" parent="Cables"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -939,7 +948,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame4"]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame4"]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -956,7 +965,7 @@ mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 
-[node name="ScreenFrame3" type="TextureRect" parent="."]
+[node name="ScreenFrame3" type="TextureRect" parent="Cables"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -977,7 +986,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame3"]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame3"]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -994,7 +1003,7 @@ mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
 
-[node name="ScreenFrame5" type="TextureRect" parent="."]
+[node name="ScreenFrame5" type="TextureRect" parent="Cables"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1017,7 +1026,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="ScreenFrame5"]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame5"]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -1036,7 +1045,7 @@ texture = ExtResource("30_c0ifk")
 expand_mode = 1
 flip_h = true
 
-[node name="ScreenFrame6" type="TextureRect" parent="."]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1058,7 +1067,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ς" type="TextureRect" parent="ScreenFrame6"]
+[node name="ς" type="TextureRect" parent="Cables/ScreenFrame6"]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -1095,7 +1104,7 @@ expand_mode = 1
 position = Vector2(600, 324)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../ScreenFrame4"), NodePath("../ScreenFrame3"), NodePath("../ScreenFrame5"), NodePath("../ScreenFrame6"), NodePath("../NormalScreen/Speaker")]
+Cabled = [NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3"), NodePath("../Cables/ScreenFrame5"), NodePath("../Cables/ScreenFrame6"), NodePath("../NormalScreen/Speaker")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
 position = Vector2(-600, -324)

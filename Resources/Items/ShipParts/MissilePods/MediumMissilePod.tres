@@ -23,6 +23,7 @@ UpgradeVersion = ExtResource("5_5gmkn")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 4
 ItemIcon = ExtResource("1_laxio")
 ItemIconSmol = ExtResource("2_fod6m")
 ItemName = "MP-6 \"Cyclone\""

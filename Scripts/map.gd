@@ -94,7 +94,7 @@ func Arrival(_Spot : MapSpot) -> void:
 	if (ShowingTutorial):
 		SimulationManager.GetInstance().TogglePause(true)
 		var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
-		Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), LandTutorialShown, false)
+		Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), "Seg", LandTutorialShown, false)
 	
 func LandTutorialShown():
 	SimulationManager.GetInstance().TogglePause(false)

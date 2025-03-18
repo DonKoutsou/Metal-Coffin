@@ -60,6 +60,7 @@ FadeNotif=""
 PlayerShips=""
 CardFight=""
 Happening=""
+FleetSep=""
 
 [gui]
 

@@ -1,10 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmvl7w65kwp5a"]
+[gd_scene load_steps=6 format=3 uid="uid://cmvl7w65kwp5a"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7awpj"]
 [ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://Scripts/Inventory/character_inventory.gd" id="1_i6whi"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_e1s57"]
 
-[node name="CharacterInventoryUI" type="VBoxContainer" node_paths=PackedStringArray("InventoryBoxParent", "CaptainNameLabel")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f7qw"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+skew = Vector2(0, -0.1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.763983, 0.0812772, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxetj"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+skew = Vector2(0, 0.1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.763983, 0.0812772, 1)
+border_blend = true
+corner_detail = 1
+
+[node name="CharacterInventoryUI" type="VBoxContainer" node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "CaptainNameLabel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,7 +45,12 @@ size_flags_vertical = 3
 theme = ExtResource("1_7awpj")
 script = ExtResource("1_i6whi")
 InventoryBoxScene = ExtResource("2_e1s57")
-InventoryBoxParent = NodePath("GridContainer")
+EngineInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/EngineInventory")
+SensorInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/SensorInventory")
+FuelTankInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/FuelTankInventory")
+WeaponInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/WeaponInventory")
+ShieldInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/ShieldInventory")
+InventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/Inventory")
 CaptainNameLabel = NodePath("VBoxContainer/HBoxContainer2/Label")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -27,7 +62,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
 text = "Char name"
+horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
@@ -49,9 +86,83 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Cards"
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="InventoryVisToggle" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "Show Inventory"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1f7qw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Engines"
+
+[node name="EngineInventory" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 2
-columns = 3
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fuel Tanks"
+
+[node name="FuelTankInventory" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Label4" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sensors"
+
+[node name="SensorInventory" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Label6" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Shields"
+
+[node name="ShieldInventory" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Label5" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Weapons"
+
+[node name="WeaponInventory" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Panel2" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sxetj")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="InventoryVisToggle" to="." method="_on_inventory_vis_toggle_pressed"]

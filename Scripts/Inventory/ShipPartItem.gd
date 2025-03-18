@@ -7,6 +7,7 @@ class_name ShipPart
 @export var UpgradeTime : float
 @export var UpgradeCost : float
 @export var IsDamaged : bool = false
+@export var PartType : ShipPartType
 
 func _setup_local_to_scene() -> void:
 	for Up in Upgrades:
@@ -32,3 +33,13 @@ func GetItemDesc() -> String:
 			Col = "db2c36"
 		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, Upgrades[g].UpAmmSymbol, UpSymbol, Col])
 	return "{0} {1}".format([ItemDesc, UpNames])
+
+
+enum ShipPartType{
+	NORMAL,
+	ENGINE,
+	SENSOR,
+	FUEL_TANK,
+	WEAPON,
+	SHIELD
+}

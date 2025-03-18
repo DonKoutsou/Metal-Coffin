@@ -30,6 +30,7 @@ Upgrades = Array[ExtResource("4_vcqkx")]([SubResource("Resource_y5vig"), SubReso
 UpgradeTime = 100.0
 UpgradeCost = 5000.0
 IsDamaged = false
+PartType = 1
 ItemIcon = ExtResource("2_yt0w3")
 ItemIconSmol = ExtResource("3_fiup7")
 ItemName = "EcoDrive-500 \"Preserve\""

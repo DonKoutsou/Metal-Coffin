@@ -23,6 +23,7 @@ UpgradeVersion = ExtResource("5_dw84e")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 4
 ItemIcon = ExtResource("1_vh0x4")
 ItemIconSmol = ExtResource("2_s7whr")
 ItemName = "MP-3 \"Gale\""

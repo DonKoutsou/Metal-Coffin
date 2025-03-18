@@ -13,14 +13,14 @@ class_name Captain
 @export var CurrentPort : String = ""
 @export var CheckForErrors : bool = false
 @export var ProvidingFunds : int = 0
-
+@export var ProvidingCaptains : Array[Captain]
 #Only used by enemies
 @export var Cards : Array[CardStats]
 
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
 signal StatChanged(NewVal : float)
-
+var CaptainShip : MapShip
 var _CharInv : CharacterInventory
 
 func _init() -> void:

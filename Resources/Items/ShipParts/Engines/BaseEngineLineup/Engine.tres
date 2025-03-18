@@ -32,6 +32,7 @@ UpgradeVersion = ExtResource("4_adnd2")
 UpgradeTime = 500.0
 UpgradeCost = 20000.0
 IsDamaged = false
+PartType = 1
 ItemIcon = ExtResource("1_jils6")
 ItemIconSmol = ExtResource("2_dongv")
 ItemName = "Model EN-100"

@@ -32,7 +32,7 @@ static func GetInstance() -> World:
 	return Instance
 
 func _ready() -> void:
-	GetMap().GetScreenUi().ToggleFullScreen(true)
+	GetMap().GetScreenUi().DoIntroFullScreen(true)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	WorldSpawnTransitionFinished.emit()
 	#$Inventory.Player = GetMap().GetPlayerShip()
@@ -112,14 +112,14 @@ func LoadSaveData(PlWallet : Wallet) -> void:
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
 	var DiagText : Array[String] = ["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."]
-	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), ShowStation, true)
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), "Seg", ShowStation, true)
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = false
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = false
 	#GetMap().ToggleUIForIntro(false)
 
 func ShowStation():
 	var DiagText : Array[String]  = ["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."]
-	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), ReturnCamToPlayer, true)
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
 	GetMap().GetCamera().ShowStation()
 
 func ReturnCamToPlayer():
@@ -182,6 +182,9 @@ func StartShipTrade(ControlledShip : MapShip) -> void:
 		
 func ShipSeparationFinished() -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(false)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
+	
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[Node2D] = []
 var FighingEnemyUnits : Array[Node2D] = []

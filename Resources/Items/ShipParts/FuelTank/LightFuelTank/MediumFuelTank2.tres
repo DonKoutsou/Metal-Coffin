@@ -24,6 +24,7 @@ UpgradeVersion = ExtResource("3_ku1j6")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 3
 ItemIcon = ExtResource("1_l85im")
 ItemIconSmol = ExtResource("2_62vlm")
 ItemName = "SPT-200"

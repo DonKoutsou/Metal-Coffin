@@ -22,6 +22,7 @@ Upgrades = Array[ExtResource("3_4hto1")]([SubResource("Resource_i41uq")])
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 3
 ItemIcon = ExtResource("1_47v7n")
 ItemIconSmol = ExtResource("2_gjxbr")
 ItemName = "SPT-300"

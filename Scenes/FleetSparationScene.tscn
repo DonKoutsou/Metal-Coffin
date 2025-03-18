@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dai8r8wn5redq" path="res://Scripts/fleet_sparation_scene.gd" id="2_lan5t"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/FleetSeparationShipViz.tscn" id="3_vws75"]
 
-[node name="FleetSeparationScene" type="PanelContainer" node_paths=PackedStringArray("CurrentFleetRangeText", "CurrentFleetFuelBar", "CurrentFleetCommanderPlecemenet", "CurrentFleetShipPlecement", "NewFleetRangeText", "NewFleetFuelBar", "NewFleetShipPlecement", "NewFleetCommanderPlecemenet")]
+[node name="FleetSeparationScene" type="PanelContainer" node_paths=PackedStringArray("CurrentFleetRangeText", "CurrentFleetFuelBar", "CurrentFleetCommanderPlecemenet", "CurrentFleetShipPlecement", "NewFleetRangeText", "NewFleetFuelBar", "NewFleetShipPlecement", "NewFleetCommanderPlecemenet") groups=["FleetSep"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

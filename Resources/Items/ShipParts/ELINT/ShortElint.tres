@@ -23,6 +23,7 @@ UpgradeVersion = ExtResource("5_rphxy")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 2
 ItemIcon = ExtResource("1_tcc44")
 ItemIconSmol = ExtResource("2_1ofb4")
 ItemName = "ELINT-10 'Vigil"

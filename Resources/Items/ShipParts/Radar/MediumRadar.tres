@@ -23,6 +23,7 @@ UpgradeVersion = ExtResource("4_6ok2g")
 UpgradeTime = 0.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 2
 ItemIcon = ExtResource("1_oa86g")
 ItemIconSmol = ExtResource("2_mn6q1")
 ItemName = "RA-50"

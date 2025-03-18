@@ -18,7 +18,7 @@ UpAmmSymbol = "Cubic Tons"
 [sub_resource type="Resource" id="Resource_pmgj3"]
 resource_local_to_scene = true
 script = ExtResource("5_83sa7")
-UpgradeName = 0
+UpgradeName = 2
 UpgradeAmmount = 0.0
 PenaltyAmmount = 0.25
 CurrentValue = 0.0
@@ -31,6 +31,7 @@ Upgrades = Array[ExtResource("5_83sa7")]([SubResource("Resource_o628u"), SubReso
 UpgradeTime = 300.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 3
 ItemIcon = ExtResource("1_cbem7")
 ItemIconSmol = ExtResource("2_hfrci")
 ItemName = "FT-2000"

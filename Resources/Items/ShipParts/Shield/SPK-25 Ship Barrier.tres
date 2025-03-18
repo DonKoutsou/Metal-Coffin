@@ -24,6 +24,7 @@ UpgradeVersion = ExtResource("3_x0l6p")
 UpgradeTime = 500.0
 UpgradeCost = 60000.0
 IsDamaged = false
+PartType = 5
 ItemIcon = ExtResource("1_3igdn")
 ItemIconSmol = ExtResource("2_a8j70")
 ItemName = "SPK-25 Ship Barrier"

@@ -19,6 +19,34 @@ signal FullScreenToggleStarted(t : bool)
 signal FullScreenToggleFinished()
 #signal FleetSeparationInitiated
 
+func DoIntroFullScreen(toggle : bool) -> void:
+	$Cables.visible = false
+	$DoorSound.play()
+	Cam.EnableFullScreenShake()
+	await wait(0.5)
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_OUT)
+	tw.set_trans(Tween.TRANS_BOUNCE)
+	tw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
+	await tw.finished
+	
+	FullScreenToggleStarted.emit(toggle)
+	
+	await wait(0.2)
+	$Cables.visible = true
+	FullScreenFrame.visible = toggle
+	NormalScreen.visible = !toggle
+	
+	
+	
+	var tw2 = create_tween()
+	tw2.set_ease(Tween.EASE_IN)
+	tw2.set_trans(Tween.TRANS_QUART)
+	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y), 1.6)
+	await tw2.finished
+	FullScreenToggleFinished.emit(toggle)
+	Cam.EnableFullScreenShake()
+
 func ToggleFullScreen(toggle : bool) -> void:
 	#FullScreenToggleStarted.emit()
 	

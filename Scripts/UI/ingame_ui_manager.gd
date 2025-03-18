@@ -39,19 +39,19 @@ func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 	else:
 		add_child(Scene)
 
-func PlayDiag(Diags : Array[String], Avatar : Texture, StopInput : bool = false):
+func PlayDiag(Diags : Array[String], Avatar : Texture, TalkerName : String, StopInput : bool = false):
 	var diag = DiagplScene.instantiate() as DialoguePlayer
 	if (StopInput):
 		diag.MouseFilter = StopInput
 	AddUI(diag, true)
-	diag.PlayDialogue(Diags, Avatar)
+	diag.PlayDialogue(Diags, Avatar, TalkerName)
 
-func CallbackDiag (Diags : Array[String], Avatar : Texture, Callback : Callable, StopInput : bool = false):
+func CallbackDiag (Diags : Array[String], Avatar : Texture, TalkerName : String, Callback : Callable, StopInput : bool = false):
 	var diag = DiagplScene.instantiate() as DialoguePlayer
 	if (StopInput):
 		diag.mouse_filter = Control.MOUSE_FILTER_STOP
 	AddUI(diag, true)
-	diag.PlayDialogue(Diags, Avatar)
+	diag.PlayDialogue(Diags, Avatar, TalkerName)
 	diag.Callback = Callback
 
 func ToggleInventoryButton(t : bool):

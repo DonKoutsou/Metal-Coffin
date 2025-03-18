@@ -24,6 +24,7 @@ UpgradeVersion = ExtResource("5_nun2t")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 4
 ItemIcon = ExtResource("1_yt2n5")
 ItemIconSmol = ExtResource("2_1c05x")
 ItemName = "MG-20 \"Fury\""

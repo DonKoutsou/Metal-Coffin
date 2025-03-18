@@ -88,4 +88,5 @@ StartingItems = Array[ExtResource("3_k55jm")]([ExtResource("6_wl8yo"), ExtResour
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 50000
+ProvidingCaptains = Array[ExtResource("3_7iysc")]([])
 Cards = Array[ExtResource("2_qdkr2")]([])

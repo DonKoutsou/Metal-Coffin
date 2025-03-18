@@ -30,7 +30,7 @@ CardName = NodePath("VBoxContainer/CardName")
 CardDesc = NodePath("VBoxContainer/CardDesc")
 CardCost = NodePath("CardCost")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1

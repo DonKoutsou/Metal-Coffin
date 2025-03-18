@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_jwmx4"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="1_phe2p"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7h107"]
-[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="3_i2eq4"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_q3468"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_x13ps"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="5_cqbt2"]
 [ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="6_c3xo7"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="6_jxjwo"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="7_8bfg0"]
@@ -82,11 +82,12 @@ script = ExtResource("1_phe2p")
 CaptainName = "Amol"
 CaptainBio = "Bount Hunter Strong Atack, strong def"
 CaptainPortrait = ExtResource("1_jwmx4")
-ShipIcon = ExtResource("3_i2eq4")
+ShipIcon = ExtResource("5_cqbt2")
 CaptainStats = Array[ExtResource("2_7h107")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k")])
 ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_q3468")]([ExtResource("6_jxjwo"), ExtResource("6_c3xo7"), ExtResource("7_s7djg"), ExtResource("7_8bfg0"), ExtResource("7_8bfg0"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("9_wulof"), ExtResource("11_5euox")])
 CurrentPort = ""
 CheckForErrors = true
-ProvidingFunds = 40000
+ProvidingFunds = 0
+ProvidingCaptains = Array[ExtResource("1_phe2p")]([])
 Cards = Array[ExtResource("3_x13ps")]([])

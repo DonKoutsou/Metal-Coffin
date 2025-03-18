@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_7f5u1")
 OptionName = "Armor Piercing"
+OptionDescription = "Throws a barragge on the enemy. [color=#c19200]DMG = (6 * Firepower) * 1.5"
 EnergyAdd = 1
 DamageFlat = 0
 DamageMult = 1.5

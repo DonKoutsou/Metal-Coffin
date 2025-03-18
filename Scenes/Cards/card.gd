@@ -31,14 +31,17 @@ func _ready() -> void:
 func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	CStats = Stats
 	Cost = Stats.Energy
+	var DescText =  "[center]{0}".format([Stats.CardDescription])
+	
 	if Stats.SelectedOption !=  null:
 		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
+		DescText =  "[center]{0}".format([ Stats.SelectedOption.OptionDescription])
 		Cost += Stats.SelectedOption.EnergyAdd
 	else:
 		CardName.text = Stats.CardName
 	CardIcon.texture = Stats.Icon
 	
-	var DescText =  "[center]{0}".format([Stats.CardDescription])
+	#var DescText =  "[center]{0}".format([Stats.CardDescription])
 	#CardDesc.visible_ratio = 0
 	#var tw = create_tween()
 	#tw.tween_property(CardDesc, "visible_ratio", 1, 1)

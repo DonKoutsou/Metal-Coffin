@@ -50,7 +50,7 @@ func SetInitialShip() -> void:
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
-func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
+func OnDroneDocked(D : Drone, Target : MapShip) -> void:
 	if (!AvailableShips.has(D)):
 		AvailableShips.append(D)
 		if (!D.is_connected("OnShipDestroyed", OnShipDestroyed)):
@@ -59,6 +59,8 @@ func OnDroneDocked(D : Drone, _Target : MapShip) -> void:
 	if (D == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
 	
+	#Max speed of a ship can change when a slower ship joins the fleet, so update speed
+	Target.AccelerationChanged(Target.GetShipSpeed() / Target.GetShipMaxSpeed())
 	
 func OnDroneUnDocked(_D : Drone, _Target : MapShip) -> void:
 	#AvailableShips.append(D)

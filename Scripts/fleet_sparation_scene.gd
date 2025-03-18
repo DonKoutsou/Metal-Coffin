@@ -47,14 +47,14 @@ func OnShipContainerSelecter(Cont : FleetSeparationShipViz) -> void:
 			#Find the old commander and remove this ship from the dock
 			var OldCommander = CurrentFleet[0]
 			var Dock = OldCommander.GetDroneDock()
-			Dock.UndockDrone(Ship)
+			Dock.UndockDrone(Ship, false)
 			Ship.EnableDrone()
 		#if not then find the new commander and replace his
 		else:
 			NewFleetShipPlecement.add_child(Cont)
 			var OldCommander = CurrentFleet[0]
 			var Dock = OldCommander.GetDroneDock()
-			Dock.UndockDrone(Ship)
+			Dock.UndockDrone(Ship, false)
 			
 			var NewCommander = NewFleet[0]
 			var NewDock = NewCommander.GetDroneDock()
@@ -165,4 +165,3 @@ func RemoveFuelFromFleet(Fleet : Array[MapShip], Fuel : float):
 
 func _on_button_pressed() -> void:
 	SeperationFinished.emit()
-	queue_free()

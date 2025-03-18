@@ -21,6 +21,7 @@ Upgrades = Array[ExtResource("5_mb8i7")]([SubResource("Resource_pxbaq")])
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 2
 ItemIcon = ExtResource("1_p7a0x")
 ItemIconSmol = ExtResource("2_7hrf0")
 ItemName = "ELINT-100 \"Oracle\" "

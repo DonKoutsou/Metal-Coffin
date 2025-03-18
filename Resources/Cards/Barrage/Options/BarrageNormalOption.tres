@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_542g0")
 OptionName = "Normal"
+OptionDescription = "Throws a barragge on the enemy. [color=#c19200]DMG = 6 * Firepower"
 EnergyAdd = 0
 DamageFlat = 0
 DamageMult = 1.0

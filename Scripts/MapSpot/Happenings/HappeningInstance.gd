@@ -126,7 +126,7 @@ func NextStage() -> void:
 		
 		if (Stage.Options[SelectedOption].FinishDiag):
 			HappeningFinished.emit()
-			#queue_free()
+			$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 		
 		else:
 			var Possiblebranch
@@ -141,7 +141,7 @@ func NextStage() -> void:
 	
 	if (CurrentBranch.size() == CurrentStage):
 		HappeningFinished.emit()
-		#queue_free()
+		$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 	else:
 		call_deferred("NextStage")
 		

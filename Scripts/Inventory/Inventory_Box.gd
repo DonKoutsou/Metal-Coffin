@@ -55,13 +55,15 @@ func _UpdateAmmountLabel() -> void:
 
 func _UpdateItemIcon() -> void:
 	if (_ContainedItem):
-		$ItemButton/TextureRect.texture = _ContainedItem.ItemIconSmol
+		$ItemButton.text = _ContainedItem.ItemName
+		#$ItemButton/ItemName.text = _ContainedItem.ItemName
+		#$ItemButton/TextureRect.texture = _ContainedItem.ItemIconSmol
 		#if (_ContainedItem is UsableItem):
 			#$TextureRect/TextureRect.modulate = _ContainedItem.ItecColor
 		#else:
 			#$TextureRect/TextureRect.modulate = Color.WHITE
 	else:
-		$ItemButton/TextureRect.texture = null
+		$ItemButton/ItemName.text = ""
 
 func _On_Item_Pressed() -> void:
 	if (_ContentAmmout == 0):

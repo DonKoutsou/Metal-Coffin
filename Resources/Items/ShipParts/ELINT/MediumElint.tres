@@ -23,6 +23,7 @@ UpgradeVersion = ExtResource("5_n5pci")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
+PartType = 2
 ItemIcon = ExtResource("1_887gu")
 ItemIconSmol = ExtResource("2_rbrwa")
 ItemName = "ELINT-50 \"Watcher"

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_xhabx")
 OptionName = "Fire"
+OptionDescription = "Throws a barragge on the enemy. Has chance to start fire. [color=#c19200]DMG = 6 * Firepower"
 EnergyAdd = 1
 DamageFlat = 0
 DamageMult = 1.0
