@@ -209,7 +209,7 @@ func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
 	GetMap().GetScreenUi().ToggleFullScreen(true)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
-	GetMap().GetScreenUi().ToggleControllCover(true)
+	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
 	
 func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:

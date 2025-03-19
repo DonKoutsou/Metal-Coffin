@@ -63,7 +63,7 @@ func _UpdateItemIcon() -> void:
 		#else:
 			#$TextureRect/TextureRect.modulate = Color.WHITE
 	else:
-		$ItemButton/ItemName.text = ""
+		$ItemButton.text = ""
 
 func _On_Item_Pressed() -> void:
 	if (_ContentAmmout == 0):

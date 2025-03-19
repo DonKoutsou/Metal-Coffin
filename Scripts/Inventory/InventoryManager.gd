@@ -193,7 +193,7 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 	for g : Captain in _CharacterInventories.keys():
 		if (g == Cpt):
 			continue
-		if (!fleet.has(g)):
+		if (!fleet.has(g.CaptainShip)):
 			continue
 		var inv = _CharacterInventories[g]
 		if (inv.HasSpaceForItem(Box.GetContainedItem())):

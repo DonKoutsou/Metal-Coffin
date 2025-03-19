@@ -34,6 +34,7 @@ func EnableDrone():
 	GetShipAcelerationNode().position.x = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
+	
 func DissableDrone():
 	#GetShipIcon().rotation = 0.0
 	rotation = 0
@@ -41,7 +42,9 @@ func DissableDrone():
 	#set_physics_process(false)
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", true)
-func ReturnToBase():
+	
+func Regroup(NewCommander : MapShip):
+	Command = NewCommander
 	SetSpeed(GetShipMaxSpeed())
 	#rotation = 0.0
 	CommingBack = true

@@ -16,7 +16,7 @@ signal SteerOffseted(Offset : float)
 signal ShipSwitchPressed()
 signal ShipUpdated(NewShip : MapShip)
 
-signal CoverToggled(t : bool)
+#signal CoverToggled(t : bool)
 signal MarkerEditorToggled(t : bool)
 signal MarkerEditorCleared()
 signal DrawLinePressed()
@@ -118,8 +118,8 @@ func OnFleetSeparationPressed() -> void:
 func OnPausePressed() -> void:
 	PausePressed.emit()
 
-func OnButtonCoverToggled(t : bool) -> void:
-	CoverToggled.emit(t)
+#func OnButtonCoverToggled(t : bool) -> void:
+	#CoverToggled.emit(t)
 
 func OnControlledShipDamaged(DammageAmm : float) -> void:
 	ShipDamaged.emit(DammageAmm)

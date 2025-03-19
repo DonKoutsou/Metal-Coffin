@@ -506,7 +506,7 @@ func GetFuelStats() -> Dictionary[String, float]:
 func GetFleet() -> Array[MapShip]:
 	var Fleet : Array[MapShip]
 	
-	if (Command == null):
+	if (Command != null):
 		Fleet.append(Command)
 		Fleet.append_array(Command.GetDroneDock().DockedDrones)
 	else:

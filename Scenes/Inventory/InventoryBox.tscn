@@ -36,7 +36,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="InventoryBox" type="PanelContainer" node_paths=PackedStringArray("Butto")]
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(120, 120)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -47,7 +47,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme = ExtResource("1_xu5pf")
 theme_override_styles/panel = SubResource("StyleBoxFlat_3xrnb")
 script = ExtResource("1_1cx5j")
 Butto = NodePath("ItemButton")
@@ -57,8 +56,11 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 2
 theme = ExtResource("1_xu5pf")
+theme_override_font_sizes/font_size = 16
 disabled = true
 action_mode = 0
+text = "testesttse"
+autowrap_mode = 2
 icon_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="ItemButton"]

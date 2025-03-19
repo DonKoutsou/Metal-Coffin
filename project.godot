@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.4", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Logos/LogoIcon.png"
+config/windows_native_icon="res://Assets/Logos/LogoIc.ico"
 
 [autoload]
 
@@ -65,6 +66,7 @@ FleetSep=""
 [gui]
 
 common/snap_controls_to_pixels=false
+theme/custom="uid://de7fb8k462lxb"
 
 [input]
 
@@ -179,3 +181,4 @@ environment/volumetric_fog/use_filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 lights_and_shadows/positional_shadow/atlas_size=2048
 lights_and_shadows/positional_shadow/atlas_size.mobile=1024
+environment/defaults/default_environment="uid://msr3nng400ji"

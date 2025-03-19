@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_ivh1w")
-QuestionText = "In a noisy environment, you need to focus on a task. What’s your reaction?"
-NegativeAnswer = "Tune out distractions and proceed methodically."
-PossetiveAnswer = "Express frustration and struggle to focus."
+QuestionText = "In a tense debate, someone challenges your viewpoint. What’s your reaction?"
+NegativeAnswer = "Listen carefully and respond thoughtfully to their arguments."
+PossetiveAnswer = "Defend my position impulsively, feeling a surge of irritation."
 WorldviewSkill = 1
 metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

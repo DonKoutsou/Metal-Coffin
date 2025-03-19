@@ -7,6 +7,7 @@ class_name ShipContoller
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
 @onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
+@export var CaptainSelectScreen : PackedScene
 
 var AvailableShips : Array[MapShip] = []
 
@@ -164,4 +165,21 @@ func FrameCamToShip():
 
 func _on_controlled_ship_return_pressed() -> void:
 	if (ControlledShip is Drone and !ControlledShip.CommingBack):
-		ControlledShip.ReturnToBase()
+		var CaptainSelect = CaptainSelectScreen.instantiate() as ItemTransfer
+		
+		var ShipList = get_tree().get_nodes_in_group("PlayerShips")
+		var CapList : Array[Captain]
+		for g in range(ShipList.size() - 1, -1, -1):
+			if (ShipList[g].Docked or ShipList[g] == ControlledShip):
+				ShipList.remove_at(g)
+				continue
+				
+			CapList.append(ShipList[g].Cpt)
+		
+		CaptainSelect.SetData(CapList, "Choose Fleet to Regroup With")
+		
+		Ingame_UIManager.GetInstance().AddUI(CaptainSelect)
+		
+		await CaptainSelect.CharacterSelected
+		if (CaptainSelect.SelectedCharacter != null):
+			ControlledShip.Regroup(CaptainSelect.SelectedCharacter.CaptainShip)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=19 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/FleetSparationScene.tscn" id="10_8l3nt"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
+[ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="12_rwt1y"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="15_kwl8l"]
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="16_waglr"]
 
@@ -45,6 +46,7 @@ _Map = NodePath("../Map")
 DroneDockEventH = ExtResource("8_q55oc")
 ShipControllerEventH = ExtResource("6_1ajha")
 UIEventH = ExtResource("7_3dbmh")
+CaptainSelectScreen = ExtResource("12_rwt1y")
 
 [node name="Commander" parent="." instance=ExtResource("10_15dwo")]
 

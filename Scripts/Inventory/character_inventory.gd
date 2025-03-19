@@ -4,12 +4,12 @@ class_name CharacterInventory
 
 @export_group("Nodes")
 @export var InventoryBoxScene : PackedScene
-@export var EngineInventoryBoxParent : VBoxContainer
-@export var SensorInventoryBoxParent : VBoxContainer
-@export var FuelTankInventoryBoxParent : VBoxContainer
-@export var WeaponInventoryBoxParent : VBoxContainer
-@export var ShieldInventoryBoxParent : VBoxContainer
-@export var InventoryBoxParent : VBoxContainer
+@export var EngineInventoryBoxParent : GridContainer
+@export var SensorInventoryBoxParent : GridContainer
+@export var FuelTankInventoryBoxParent : GridContainer
+@export var WeaponInventoryBoxParent : GridContainer
+@export var ShieldInventoryBoxParent : GridContainer
+@export var InventoryBoxParent : GridContainer
 @export var CaptainNameLabel : Label
 
 signal OnItemAdded(it : Item)
@@ -122,6 +122,11 @@ func AddItem(It : Item) -> void:
 				Empty.get_parent().remove_child(Empty)
 				BoxParent.add_child(Empty)
 			OnShipPartAdded.emit(It)
+		else:
+			var BoxParent = InventoryBoxParent
+			if (Empty.get_parent() != BoxParent):
+				Empty.get_parent().remove_child(Empty)
+				BoxParent.add_child(Empty)
 		OnItemAdded.emit(It)
 		#print("Added 1 {0}".format([It.ItemName]))
 		#if (It is MissileItem):
@@ -145,6 +150,8 @@ func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 		BoxParent = WeaponInventoryBoxParent
 	else : if (PartType == ShipPart.ShipPartType.SHIELD):
 		BoxParent = ShieldInventoryBoxParent
+	else : if (PartType == ShipPart.ShipPartType.NORMAL):
+		BoxParent = InventoryBoxParent
 	return BoxParent
 	
 func HasSpaceForItem(It : Item) -> bool:
@@ -179,6 +186,11 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 			_CardAmmo.erase(It.CardOptionProvidin)
 	if (_InventoryContents[It] == 0):
 		_InventoryContents.erase(It)
+	if (Box.IsEmpty()):
+		var BoxParent = InventoryBoxParent
+		if (Box.get_parent() != BoxParent):
+			Box.get_parent().remove_child(Box)
+			BoxParent.add_child(Box)
 	
 func RemoveItem(It : Item) -> void:
 	for g in _GetInventoryBoxes():
@@ -187,6 +199,7 @@ func RemoveItem(It : Item) -> void:
 			continue
 		if (box.GetContainedItemName() == It.ItemName):
 			RemoveItemFromBox(box)
+			
 			return
 
 func _GetInventoryBoxes() -> Array:

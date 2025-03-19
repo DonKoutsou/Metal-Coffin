@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_qa2x3")
-QuestionText = "You find yourself lost in a city. What do you do?"
-NegativeAnswer = "Calmly find a map or ask for directions."
-PossetiveAnswer = "Rush to find a recognizable landmark."
+QuestionText = "You’re lost in an unfamiliar town, and your phone’s GPS is down. What do you do?"
+NegativeAnswer = "Calmly look for signs or maps while observing my surroundings."
+PossetiveAnswer = "Feel frustrated and hurriedly ask strangers for directions."
 WorldviewSkill = 1
 metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

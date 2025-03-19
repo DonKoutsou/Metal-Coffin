@@ -3,12 +3,12 @@ extends Control
 class_name ScreenUI
 
 @export var _ScreenItems : Control
-@export var MarkerEditorControls : Control
+@export var MarkerEditorControls : MapMarkerControls
 @export var Thrust : ThrustSlider
 @export var Steer : SteeringWheelUI
 @export var MissileUI : MissileTab
 #@export var DroneUI : DroneTab
-@export var ButtonCover : TextureRect
+#@export var ButtonCover : TextureRect
 @export var EventHandler : UIEventHandler
 @export var Cam : ScreenCamera
 @export_group("Screen")
@@ -86,7 +86,7 @@ func _ready() -> void:
 	EventHandler.connect("AccelerationForced", Acceleration_Forced)
 	EventHandler.connect("SteerDirForced", Steer_Forced)
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
-	EventHandler.connect("CoverToggled", ToggleControllCover)
+	#EventHandler.connect("CoverToggled", ToggleControllCover)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
 	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
 
@@ -120,7 +120,8 @@ func Drone_Button_Pressed() -> void:
 func Missile_Button_Pressed() -> void:
 	MissileUI.Toggle()
 	#DroneUI.TurnOff()
-	ToggleMarkerEditor(false)
+	MarkerEditorControls.TurnOff()
+	
 func Radar_Button_Pressed() -> void:
 	EventHandler.OnRadarButtonPressed()
 
@@ -149,18 +150,14 @@ func ControlledShipSwitched(NewShip : MapShip) -> void:
 
 # Marker editor
 func Marker_Editor_Pressed() -> void:
-	var t = !MarkerEditorControls.visible
 	#DroneUI.TurnOff()
 	MissileUI.TurnOff()
-	ToggleMarkerEditor(t)
+	MarkerEditorControls.Toggle()
+	EventHandler.OnMarkerEditorToggled(MarkerEditorControls.Showing)
 	
 func Exit_Marker_Editor_Pressed() -> void:
-	ToggleMarkerEditor(false)
-
-func ToggleMarkerEditor(t : bool) -> void:
-	#_ScreenItems.visible = !t
-	MarkerEditorControls.visible = t
-	EventHandler.OnMarkerEditorToggled(t)
+	MarkerEditorControls.TurnOff()
+	EventHandler.OnMarkerEditorToggled(false)
 	
 func Clear_Lines_Pressed() -> void:
 	EventHandler.OnMarkerEditorClearLinesPressed()
@@ -207,8 +204,8 @@ func Inventory_Pressed() -> void:
 func Pause_Pressed() -> void:
 	EventHandler.OnPausePressed()
 
-func ToggleControllCover(t : bool) -> void:
-	ButtonCover.visible = t
+#func ToggleControllCover(t : bool) -> void:
+	#ButtonCover.visible = t
 
 func OnControlledShipDamaged(_DamageAmm : float) -> void:
 	#var tw = create_tween()

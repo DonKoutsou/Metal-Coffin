@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgs0u1j4mhhx5"]
+[gd_scene load_steps=5 format=3 uid="uid://cgs0u1j4mhhx5"]
 
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="1_2v1h2"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_qi0qj"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_40o7a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
@@ -28,7 +27,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme = ExtResource("1_qi0qj")
 script = ExtResource("1_2v1h2")
 CardScene = ExtResource("3_40o7a")
 ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")
