@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cw6nos06km7b3"]
 
-[ext_resource type="Script" uid="uid://bororrr45wonv" path="res://Scripts/DroneDock.gd" id="1_fmftw"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="2_42hgf"]
-[ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/NewCaptainNotif.tscn" id="3_62xl3"]
+[ext_resource type="Script" uid="uid://bororrr45wonv" path="res://Scripts/DroneDock.gd" id="1_dip3y"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="2_hacy5"]
+[ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/Old/NewCaptainNotif.tscn" id="3_16qk4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
 radius = 10.0499
@@ -14,9 +14,9 @@ light_mode = 1
 collision_layer = 8
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_fmftw")
-DroneDockEventH = ExtResource("2_42hgf")
-CaptainNotif = ExtResource("3_62xl3")
+script = ExtResource("1_dip3y")
+DroneDockEventH = ExtResource("2_hacy5")
+CaptainNotif = ExtResource("3_16qk4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_oemyy")

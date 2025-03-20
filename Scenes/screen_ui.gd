@@ -2,7 +2,7 @@ extends Control
 
 class_name ScreenUI
 
-@export var _ScreenItems : Control
+#@export var _ScreenItems : Control
 @export var MarkerEditorControls : MapMarkerControls
 @export var Thrust : ThrustSlider
 @export var Steer : SteeringWheelUI
@@ -82,7 +82,7 @@ func wait(secs : float) -> Signal:
 func _ready() -> void:
 	NormalScreen.visible = false
 	FullScreenFrame.visible = false
-	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
+	#EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
 	EventHandler.connect("AccelerationForced", Acceleration_Forced)
 	EventHandler.connect("SteerDirForced", Steer_Forced)
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
@@ -125,8 +125,8 @@ func Missile_Button_Pressed() -> void:
 func Radar_Button_Pressed() -> void:
 	EventHandler.OnRadarButtonPressed()
 
-func ToggleScreenUI(t : bool) -> void:
-	_ScreenItems.visible = t
+#func ToggleScreenUI(t : bool) -> void:
+	#_ScreenItems.visible = t
 
 func Steering_Direction_Changed(NewValue: float) -> void:
 	EventHandler.OnSteeringDirectionChanged(NewValue)

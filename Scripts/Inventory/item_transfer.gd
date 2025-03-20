@@ -10,7 +10,7 @@ var SelectedCharacter : Captain
 
 func SetData(Characters : Array[Captain], HeaderText : String = "Transfer To") -> void:
 	for g : Captain in Characters:
-		var B = CaptainButton.instantiate() as FleetSeparationShipViz
+		var B = CaptainButton.instantiate() as CaptainButton
 		B.SetVisuals(g)
 		ButtonPlecements.add_child(B)
 		B.connect("OnShipSelected", OnCharacterSelected.bind(g))

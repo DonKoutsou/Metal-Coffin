@@ -11,9 +11,9 @@
 resource_local_to_scene = true
 script = ExtResource("6_bxopk")
 UpgradeName = 0
-UpgradeAmmount = 150.0
+UpgradeAmmount = 100.0
 PenaltyAmmount = 0.0
-CurrentValue = 150.0
+CurrentValue = 100.0
 UpAmmSymbol = "Cubic Tons"
 
 [sub_resource type="Resource" id="Resource_ygi31"]

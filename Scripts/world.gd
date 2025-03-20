@@ -123,14 +123,14 @@ func ShowStation():
 	GetMap().GetCamera().ShowStation()
 
 func ReturnCamToPlayer():
-	EnableBackUI()
+	#EnableBackUI()
 	GetMap().GetCamera().FrameCamToPlayer()
 
-func EnableBackUI():
+#func EnableBackUI():
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = true
 	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
 	#Ingame_UIManager.GetInstance().ToggleScreenUI(true)
-	GetMap().GetScreenUi().ToggleScreenUI(true)
+	#GetMap().GetScreenUi().ToggleScreenUI(true)
 
 func _enter_tree() -> void:
 	var map = GetMap()

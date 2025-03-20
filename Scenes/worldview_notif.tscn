@@ -9,17 +9,14 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjag5"]
 
 [node name="WorldviewNotif" type="PanelContainer" node_paths=PackedStringArray("Negativebar", "Possetivebar")]
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -239.0
-offset_top = -33.0
+offset_top = 94.0
 offset_right = 239.0
-offset_bottom = 33.0
+offset_bottom = 160.0
 grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("1_tjow4")
 script = ExtResource("2_hjag5")
 Negativebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")

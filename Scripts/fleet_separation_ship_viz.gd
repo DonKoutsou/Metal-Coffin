@@ -1,6 +1,6 @@
 extends PanelContainer
 
-class_name FleetSeparationShipViz
+class_name CaptainButton
 
 @export var CapPortrait : TextureRect
 

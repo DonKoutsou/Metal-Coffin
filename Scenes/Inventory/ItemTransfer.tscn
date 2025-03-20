@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ct6jtj6oya27k" path="res://Scripts/Inventory/item_transfer.gd" id="1_jxlxb"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_vvfaq"]
-[ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/FleetSeparationShipViz.tscn" id="3_ucstj"]
+[ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="3_ucstj"]
 
 [node name="ItemTransfer" type="PanelContainer" node_paths=PackedStringArray("ButtonPlecements")]
 anchors_preset = 15

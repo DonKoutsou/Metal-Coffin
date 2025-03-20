@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
-[ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/loading_screen.tscn" id="3_pocgy"]
+[ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/InScreenUI/loading_screen.tscn" id="3_pocgy"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="6_1ajha"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="6_sol3n"]
 [ext_resource type="PackedScene" uid="uid://c2db1rw6borur" path="res://Scenes/WorldViewQuestionair.tscn" id="6_xiqgv"]
@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_q55oc"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/InScreenUI/HappeningUI.tscn" id="9_5gym6"]
 [ext_resource type="Script" uid="uid://b6ekpg378n2t4" path="res://Scripts/Simulation_Manager.gd" id="9_l7oy3"]
-[ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/FleetSparationScene.tscn" id="10_8l3nt"]
+[ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/InScreenUI/FleetSparationScene.tscn" id="10_8l3nt"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
 [ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="12_rwt1y"]

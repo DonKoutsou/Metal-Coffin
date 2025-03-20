@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="9_3s488"]
 [ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="10_3csbo"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/SteeringWheelUI.tscn" id="11_s7gev"]
-[ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/MissileTab.tscn" id="13_4xtjg"]
+[ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="13_4xtjg"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_l0ryv"]
 [ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="14_ua54b"]
 [ext_resource type="Texture2D" uid="uid://cub3jskgpfw07" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality.png" id="15_tpyok"]
@@ -32,7 +32,7 @@
 [ext_resource type="Script" uid="uid://43oufd7tk1tv" path="res://Scripts/Cable.gd" id="33_l6yn6"]
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="33_ng3jm"]
 [ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
-[ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/speaker.tscn" id="33_wetmy"]
+[ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="33_wetmy"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="36_ai3xr"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
@@ -290,7 +290,7 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "NormalScreen", "FullScreenFrame")]
+[node name="ScreenUI" type="Control" node_paths=PackedStringArray("MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "NormalScreen", "FullScreenFrame")]
 process_mode = 1
 z_as_relative = false
 layout_mode = 3
@@ -302,7 +302,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_7t5fk")
 script = ExtResource("2_spr1r")
-_ScreenItems = NodePath("NormalScreen/ScreenUi")
 MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")
 Thrust = NodePath("NormalScreen/ThrustSlider")
 Steer = NodePath("NormalScreen/ScreenUi/SteeringWheel")

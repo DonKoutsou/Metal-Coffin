@@ -19,7 +19,7 @@ func _ready() -> void:
 	EventHandler.connect("PausePressed", Pause)
 	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
 	
-	GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
+	#GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
 	EventHandler.connect("DrawLinePressed", _MapMarkerEditor._on_drone_button_pressed)
 	EventHandler.connect("DrawTextPressed", _MapMarkerEditor._OnTextButtonPressed)
 	EventHandler.connect("MarkerEditorYRangeChanged", _MapMarkerEditor._on_y_gas_range_changed)

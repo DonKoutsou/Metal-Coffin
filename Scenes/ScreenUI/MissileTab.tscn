@@ -1,22 +1,22 @@
 [gd_scene load_steps=22 format=3 uid="uid://cwnxxystgxrjm"]
 
-[ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_3wcnd"]
-[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_lb1ah"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_6s7wp"]
-[ext_resource type="Texture2D" uid="uid://7ukbsw5o0nhs" path="res://Assets/UIPiecies/Screen/MissileTab_FullQuality.png" id="4_12h3a"]
-[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="5_0a32p"]
-[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="6_aa6e4"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="8_2obss"]
-[ext_resource type="Texture2D" uid="uid://cba3crf7vyc2x" path="res://Assets/Off.png" id="8_ou8yy"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="8_wqlpk"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="9_12h3a"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="9_qdwod"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="17_7by3v"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="18_u3im4"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="19_bexkj"]
-[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="19_i70s6"]
-[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="21_e1dqm"]
-[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="22_yc7om"]
+[ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_2m6j3"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_uy6ab"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_5j6a5"]
+[ext_resource type="Texture2D" uid="uid://7ukbsw5o0nhs" path="res://Assets/UIPiecies/Screen/MissileTab_FullQuality.png" id="4_nth3v"]
+[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="5_jqaeg"]
+[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="6_o630s"]
+[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="7_602df"]
+[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="8_tvoe2"]
+[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="9_5r1o0"]
+[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="10_ng7p5"]
+[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="11_4sk4u"]
+[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="12_q0qm5"]
+[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="13_y4ap4"]
+[ext_resource type="Texture2D" uid="uid://cba3crf7vyc2x" path="res://Assets/Off.png" id="14_w0uv6"]
+[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
+[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
 
 [sub_resource type="Animation" id="Animation_brgwl"]
 resource_name = "Hide"
@@ -83,9 +83,9 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-script = ExtResource("1_3wcnd")
-MissileDockEventH = ExtResource("2_lb1ah")
-DroneDockEventH = ExtResource("3_6s7wp")
+script = ExtResource("1_2m6j3")
+MissileDockEventH = ExtResource("2_uy6ab")
+DroneDockEventH = ExtResource("3_5j6a5")
 MissileSelectLight = NodePath("Control/Control/MissileSelectLight")
 AngleSelectLight = NodePath("Control/Control/AngleSelectLight")
 RangeText = NodePath("Control/Control/RangeText")
@@ -129,7 +129,7 @@ offset_top = -90.0
 offset_right = 228.0
 offset_bottom = 90.0
 mouse_filter = 0
-texture = ExtResource("4_12h3a")
+texture = ExtResource("4_nth3v")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect"]
@@ -142,7 +142,7 @@ offset_top = -10.0
 offset_right = 569.0
 offset_bottom = 170.0
 mouse_filter = 2
-texture = ExtResource("4_12h3a")
+texture = ExtResource("4_nth3v")
 expand_mode = 1
 
 [node name="LaunchButton" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
@@ -159,9 +159,9 @@ offset_bottom = 107.0
 grow_horizontal = 0
 grow_vertical = 0
 rotation = -1.57079
-texture_normal = ExtResource("5_0a32p")
-texture_pressed = ExtResource("6_aa6e4")
-texture_click_mask = ExtResource("19_i70s6")
+texture_normal = ExtResource("5_jqaeg")
+texture_pressed = ExtResource("6_o630s")
+texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -180,9 +180,9 @@ grow_horizontal = 0
 grow_vertical = 0
 rotation = -1.57079
 scale = Vector2(1, 1.00062)
-texture_normal = ExtResource("8_2obss")
-texture_pressed = ExtResource("9_12h3a")
-texture_click_mask = ExtResource("19_i70s6")
+texture_normal = ExtResource("8_tvoe2")
+texture_pressed = ExtResource("9_5r1o0")
+texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -200,9 +200,9 @@ offset_bottom = 2.0
 grow_horizontal = 0
 grow_vertical = 0
 rotation = -1.57079
-texture_normal = ExtResource("8_wqlpk")
-texture_pressed = ExtResource("9_qdwod")
-texture_click_mask = ExtResource("19_i70s6")
+texture_normal = ExtResource("10_ng7p5")
+texture_pressed = ExtResource("11_4sk4u")
+texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -220,9 +220,9 @@ offset_bottom = 124.0
 grow_horizontal = 0
 grow_vertical = 0
 rotation = -1.57079
-texture_normal = ExtResource("17_7by3v")
-texture_pressed = ExtResource("18_u3im4")
-texture_click_mask = ExtResource("19_i70s6")
+texture_normal = ExtResource("12_q0qm5")
+texture_pressed = ExtResource("13_y4ap4")
+texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -240,17 +240,17 @@ offset_bottom = 24.4997
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5708
-texture = ExtResource("8_ou8yy")
+texture = ExtResource("14_w0uv6")
 expand_mode = 1
 
-[node name="MissileSelectLight" parent="Control/Control" instance=ExtResource("22_yc7om")]
+[node name="MissileSelectLight" parent="Control/Control" instance=ExtResource("15_pknbg")]
 layout_mode = 0
 offset_left = 104.0
 offset_top = -33.0
 offset_right = 144.0
 offset_bottom = 7.0
 
-[node name="AngleSelectLight" parent="Control/Control" instance=ExtResource("22_yc7om")]
+[node name="AngleSelectLight" parent="Control/Control" instance=ExtResource("15_pknbg")]
 layout_mode = 0
 offset_left = 104.0
 offset_top = -3.0
@@ -268,7 +268,7 @@ offset_bottom = -25.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("21_e1dqm")
+theme_override_fonts/font = ExtResource("16_6ithd")
 theme_override_font_sizes/font_size = 16
 text = "Range : 1000km"
 horizontal_alignment = 1
@@ -291,14 +291,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("21_e1dqm")
+theme_override_fonts/font = ExtResource("16_6ithd")
 theme_override_font_sizes/font_size = 16
 text = "Cruise Missile"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="DroneGas" parent="Control/Control" instance=ExtResource("19_bexkj")]
+[node name="DroneGas" parent="Control/Control" instance=ExtResource("17_ptq1t")]
 position = Vector2(173, -1.36424e-12)
 rotation = 1.57079
 scale = Vector2(0.489254, 0.449254)

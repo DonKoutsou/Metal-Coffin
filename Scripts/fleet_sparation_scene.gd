@@ -20,7 +20,7 @@ var NewFleet : Array[MapShip]
 
 func _ready() -> void:
 	for Ship in CurrentFleet.size():
-		var ShipCont = ShipContainer.instantiate() as FleetSeparationShipViz
+		var ShipCont = ShipContainer.instantiate() as CaptainButton
 		if (Ship == 0):
 			CurrentFleetCommanderPlecemenet.add_child(ShipCont)
 		else:
@@ -28,7 +28,7 @@ func _ready() -> void:
 		ShipCont.SetShip(CurrentFleet[Ship])
 		ShipCont.connect("OnShipSelected", OnShipContainerSelecter.bind(ShipCont))
 		
-func OnShipContainerSelecter(Cont : FleetSeparationShipViz) -> void:
+func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 	var Ship = Cont.ContainedShip
 	if (CurrentFleet.has(Ship)):
 		#If trying to remove commander of current fleet return

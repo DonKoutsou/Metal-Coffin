@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_j6nai"]
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
-[ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/player_ship.tscn" id="17_21a23"]
+[ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="21_oyi6l"]

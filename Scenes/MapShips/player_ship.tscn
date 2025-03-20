@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlu3wdrtljpfh" path="res://Scripts/Ships/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="2_ddg27"]
-[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/PlayerDroneDock.tscn" id="5_vcup0"]
+[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="6_6lhcj"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]

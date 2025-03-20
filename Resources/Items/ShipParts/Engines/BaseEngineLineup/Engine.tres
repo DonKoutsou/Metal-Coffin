@@ -11,7 +11,7 @@
 [sub_resource type="Resource" id="Resource_y5vig"]
 script = ExtResource("6_hho6w")
 UpgradeName = 1
-UpgradeAmmount = 1.0
+UpgradeAmmount = 0.5
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 UpAmmSymbol = "lt/km"

@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_aa2jg"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="5_1pd72"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="5_p6xi5"]
-[ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="6_j06g1"]
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="8_c7188"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="9_6k00j"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="10_lgywl"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="12_1pd72"]
 
 [sub_resource type="Resource" id="Resource_hejd0"]
 script = ExtResource("2_mq2gw")
@@ -85,7 +85,7 @@ CaptainPortrait = ExtResource("1_i0srd")
 ShipIcon = ExtResource("2_opqov")
 CaptainStats = Array[ExtResource("2_mq2gw")]([SubResource("Resource_hejd0"), SubResource("Resource_ebi2g"), SubResource("Resource_owwtk"), SubResource("Resource_5chah"), SubResource("Resource_4qmer"), SubResource("Resource_i1lsy"), SubResource("Resource_fpklk"), SubResource("Resource_g0xbp")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_506nn")]([ExtResource("6_j06g1"), ExtResource("6_j06g1"), ExtResource("5_p6xi5"), ExtResource("5_p6xi5"), ExtResource("8_c7188"), ExtResource("9_6k00j"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl")])
+StartingItems = Array[ExtResource("3_506nn")]([ExtResource("5_p6xi5"), ExtResource("8_c7188"), ExtResource("9_6k00j"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("5_p6xi5"), ExtResource("12_1pd72"), ExtResource("12_1pd72")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 20000

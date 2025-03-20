@@ -17,7 +17,7 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/InScreenUI/CustomConfirm.tscn" id="11_nk6oj"]
 [ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/InScreenUI/FadeNotif.tscn" id="12_1jh8x"]
-[ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/command_line.tscn" id="17_aessx"]
+[ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]

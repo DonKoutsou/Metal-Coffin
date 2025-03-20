@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://shtkd2xxb6e4"]
 
-[ext_resource type="Shader" uid="uid://cb0dm0o4762nl" path="res://Shaders/cloud.gdshader" id="1_jyhxu"]
-[ext_resource type="Script" uid="uid://cuoiyspw87y75" path="res://Scripts/clouds_2.gd" id="2_5f7b3"]
+[ext_resource type="Shader" uid="uid://cb0dm0o4762nl" path="res://Shaders/cloud.gdshader" id="1_cbqnv"]
+[ext_resource type="Script" uid="uid://cuoiyspw87y75" path="res://Scripts/clouds_2.gd" id="2_hw6sj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rjx82"]
 noise_type = 3
@@ -20,7 +20,7 @@ normalize = false
 noise = SubResource("FastNoiseLite_rjx82")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vciop"]
-shader = ExtResource("1_jyhxu")
+shader = ExtResource("1_cbqnv")
 shader_parameter/cloud_speed = 0.0
 shader_parameter/cloud_density = 0.073
 shader_parameter/cloud_color = Color(0.677406, 0.61809, 0.553115, 1)
@@ -41,5 +41,5 @@ offset_right = 129384.0
 offset_bottom = 114963.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_5f7b3")
+script = ExtResource("2_hw6sj")
 Nois = SubResource("NoiseTexture2D_fsyna")
