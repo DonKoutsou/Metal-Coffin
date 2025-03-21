@@ -5,7 +5,7 @@ class_name ShipStat
 @export var StatName : STAT_CONST.STATS
 #@export var StatName : String
 @export var StatBase : float
-@export var StatShipPartBuff : float
+@export var StatShipPartBuff : Array[float]
 @export var StatShipPartPenalty : float
 @export var CurrentValue : float
 	
@@ -16,19 +16,22 @@ func GetBaseValue()-> float:
 	return StatBase
 	
 func GetShipPartBuff()-> float:
-	return StatShipPartBuff
+	return STAT_CONST.GetStatItemBuff(StatName, StatShipPartBuff)
 	
 func GetShipPartPenalty() -> float:
 	return StatShipPartPenalty
 
 func AddShipPartBuff(Amm : float) -> void:
-	StatShipPartBuff += Amm
+	StatShipPartBuff.append(Amm)
+
+func RemoveShipPartBuff(Amm : float) -> void:
+	StatShipPartBuff.erase(Amm)
 
 func AddShipPartPenalty(Amm : float) -> void:
 	StatShipPartPenalty += Amm
 	
 func GetFinalValue()-> float:
-	return StatBase + StatShipPartBuff - StatShipPartPenalty
+	return StatBase + STAT_CONST.GetStatItemBuff(StatName, StatShipPartBuff) - StatShipPartPenalty
 	
 func GetCurrentValue()-> float:
 	return CurrentValue

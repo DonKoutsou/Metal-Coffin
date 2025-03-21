@@ -12,7 +12,6 @@ UpgradeName = 3
 UpgradeAmmount = 3.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = ""
 
 [resource]
 resource_local_to_scene = true
@@ -28,3 +27,4 @@ ItemName = "MP-9 \"Maelstrom\""
 ItemDesc = "Maelstrom represents the pinnacle of missile pod technology, offering advanced targeting algorithms and maximum payload flexibility. Capable of deploying a wide array of specialized missiles, 'Maelstrom' delivers precise strikes against both single and multiple targets, making it indispensable for advanced combat operations."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_ap6kf")]([])
+CanTransfer = false

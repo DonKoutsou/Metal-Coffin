@@ -22,10 +22,10 @@ func DoPopUp(Text : String):
 func DoConfirm(Text : String, ConfirmText : String, Method : Callable):
 	var dig = CustomConfirm.instantiate() as ConfirmationDialog
 	dig.connect("confirmed", Method)
-	add_child(dig)
+	#add_child(dig)
 	dig.dialog_text = Text
 	dig.ok_button_text = ConfirmText
-	dig.popup_centered()
+	dig.popup_exclusive_centered(self)
 	
 func DoFadeNotif(Text : String, overridetime : float = 4):
 	var f = get_tree().get_nodes_in_group("FadeNotif")

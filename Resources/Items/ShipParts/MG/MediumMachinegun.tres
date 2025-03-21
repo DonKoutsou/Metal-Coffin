@@ -14,7 +14,6 @@ UpgradeName = 3
 UpgradeAmmount = 3.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = ""
 
 [resource]
 resource_local_to_scene = true
@@ -31,3 +30,4 @@ ItemName = "MG-20 \"Fury\""
 ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("1_cqyoh")])
+CanTransfer = false

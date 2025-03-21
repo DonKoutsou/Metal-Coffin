@@ -102,7 +102,7 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	var vpsizehalf = (get_viewport_rect().size.x / 2)
 	var maxposX = Vector2(vpsizehalf - 6000, vpsizehalf + 6000)
 	var rel = relativeMovement / zoom
-	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,300) )
+	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,1000) )
 	if (newpos.x != position.x):
 		position.x = newpos.x
 	if (newpos.y != position.y):

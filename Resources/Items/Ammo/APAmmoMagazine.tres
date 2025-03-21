@@ -16,3 +16,4 @@ ItemDesc = "This magazine contains rounds equipped with proximity fuses, designe
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_4abif")]([ExtResource("3_fks2y")])
 CardOptionProviding = ExtResource("1_i3lil")
+CanTransfer = true

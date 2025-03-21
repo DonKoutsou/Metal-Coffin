@@ -14,7 +14,6 @@ UpgradeName = 0
 UpgradeAmmount = 100.0
 PenaltyAmmount = 0.0
 CurrentValue = 100.0
-UpAmmSymbol = "Cubic Tons"
 
 [resource]
 resource_local_to_scene = true
@@ -31,3 +30,4 @@ ItemName = "SPT-200"
 ItemDesc = "A standard fuel containment solution with dual baffled chambers for stability. Constructed from reinforced materials for reliability in routine operations."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_tlvwb")]([])
+CanTransfer = false

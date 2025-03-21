@@ -6,4 +6,5 @@
 position = Vector2i(500, 272)
 size = Vector2i(200, 103)
 visible = true
+exclusive = false
 theme = ExtResource("1_jivx4")

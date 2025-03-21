@@ -13,7 +13,6 @@ UpgradeName = 3
 UpgradeAmmount = 5.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = ""
 
 [resource]
 resource_local_to_scene = true
@@ -29,3 +28,4 @@ ItemName = "MG-30 \"Tempest\""
 ItemDesc = "the elite choice for those requiring ultimate firepower in critical scenarios. Featuring cutting-edge targeting and stabilization technology, 'Tempest' supports continuous and dynamic fire, overwhelming even the staunchest defenses with relentless precision and unmatched rate of fire."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("2_cejtf")]([ExtResource("1_bfbfv")])
+CanTransfer = false

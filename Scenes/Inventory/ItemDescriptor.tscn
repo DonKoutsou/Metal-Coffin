@@ -99,6 +99,7 @@ size_flags_vertical = 8
 text = "Transfer"
 
 [node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -139,7 +140,6 @@ clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_constants/outline_size = 10
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
 "
@@ -152,7 +152,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
-theme_override_constants/outline_size = 10
 bbcode_enabled = true
 text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
 fit_content = true

@@ -15,3 +15,4 @@ ItemName = "Fire Suppression Unit"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_ddlmt")]([ExtResource("1_wh627")])
+CanTransfer = true

@@ -20,3 +20,4 @@ ItemName = "Heat-seeking Missile"
 ItemDesc = "Within visual range missile, used for close quarter encounters."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_u57dd")]([ExtResource("1_c4tby")])
+CanTransfer = true

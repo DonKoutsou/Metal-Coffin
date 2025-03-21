@@ -13,7 +13,6 @@ UpgradeName = 6
 UpgradeAmmount = 700.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = "km"
 
 [resource]
 resource_local_to_scene = true
@@ -30,3 +29,4 @@ ItemName = "RA-50"
 ItemDesc = "An advanced unit with extended detection capabilities. It uses adaptive filtering algorithms to enhance clarity in threat analysis."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_nfjge")]([])
+CanTransfer = true

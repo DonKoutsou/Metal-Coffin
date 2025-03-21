@@ -14,3 +14,4 @@ ItemName = "Flares"
 ItemDesc = "Medium range High speed missile"
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_lbfjr")]([ExtResource("1_ts5ya")])
+CanTransfer = true

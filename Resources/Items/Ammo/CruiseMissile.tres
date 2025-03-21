@@ -19,3 +19,4 @@ ItemName = "Cruise Missile"
 ItemDesc = "Medium range High speed missile"
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_61ala")]([])
+CanTransfer = true

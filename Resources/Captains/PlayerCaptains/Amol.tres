@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7h107"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_q3468"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_x13ps"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="5_cqbt2"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/Spaceship/Tanker2.png" id="5_w5the"]
 [ext_resource type="Resource" uid="uid://carmmqiu3rn2f" path="res://Resources/Items/ShipParts/Shield/SPK-50 Ship Barrier.tres" id="7_s7djg"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="10_2v38v"]
 [ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="11_cqbt2"]
@@ -57,7 +57,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_jnwut"]
 script = ExtResource("2_7h107")
 StatName = 1
-StatBase = 0.0
+StatBase = 1.0
 StatShipPartBuff = 0.0
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -83,7 +83,7 @@ script = ExtResource("1_phe2p")
 CaptainName = "Amol"
 CaptainBio = "Bount Hunter Strong Atack, strong def"
 CaptainPortrait = ExtResource("1_jwmx4")
-ShipIcon = ExtResource("5_cqbt2")
+ShipIcon = ExtResource("5_w5the")
 CaptainStats = Array[ExtResource("2_7h107")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k")])
 ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_q3468")]([ExtResource("12_w5the"), ExtResource("11_i43ge"), ExtResource("11_i43ge"), ExtResource("7_s7djg"), ExtResource("10_2v38v"), ExtResource("11_cqbt2"), ExtResource("12_cqbt2"), ExtResource("12_cqbt2"), ExtResource("13_w5the"), ExtResource("13_w5the")])

@@ -187,6 +187,12 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 	var Cpt = GetBoxOwner(Box)
 	var OwnerInventory = _CharacterInventories[Cpt] as CharacterInventory
 	
+	var It = Box.GetContainedItem()
+	
+	#TODO figure out a better design for landing so i can implement transfering of ship parts only on cities
+	#if (It is ShipPart and Cpt.CaptainShip.CurrentPort == null and !Cpt.CaptainShip.Landed()):
+		#PopUpManager.GetInstance().DoFadeNotif("Land ship to city to")
+		#return
 	
 	var fleet = Cpt.CaptainShip.GetFleet()
 	var AvailableCaptains : Array[Captain]
@@ -196,7 +202,7 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 		if (!fleet.has(g.CaptainShip)):
 			continue
 		var inv = _CharacterInventories[g]
-		if (inv.HasSpaceForItem(Box.GetContainedItem())):
+		if (inv.HasSpaceForItem(It)):
 			AvailableCaptains.append(g)
 	if (AvailableCaptains.size() == 0):
 		PopUpManager.GetInstance().DoFadeNotif("No characters to transfer too")
@@ -209,7 +215,7 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 	if (SelectedChar == null):
 		return
 	var SelectedCharInventory = _CharacterInventories[SelectedChar] as CharacterInventory
-	SelectedCharInventory.AddItem(Box.GetContainedItem())
+	SelectedCharInventory.AddItem(It)
 	OwnerInventory.RemoveItemFromBox(Box)
 	
 	

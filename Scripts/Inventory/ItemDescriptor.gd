@@ -49,11 +49,11 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	#else :
 	UsableItemsActions.visible = false
 	
+	TransferButton.visible = It.CanTransfer
 	
 	ItemName.text = It.ItemName
 	#Ship Parts
 	if (It is ShipPart):
-		TransferButton.visible = false
 		UsableItemsActions.visible = false
 		
 		#ShipPartActions.visible = true
@@ -78,7 +78,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 				UpgradeLabel.text = "[color=#c19200]Upgrade Time[/color] : {0}\n[color=#c19200]Upgrade Cost[/color] : {1}\n[color=#c19200]-------------".format([UpTime, UpCost])
 		
 	else :
-		TransferButton.visible = true
+		
 		UpgradeButton.visible = false
 		UpgradeLabel.visible = false
 	

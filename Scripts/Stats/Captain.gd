@@ -100,7 +100,7 @@ func OnShipPartAddedToInventory(It : ShipPart) -> void:
 
 func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
 	for Up in It.Upgrades:
-		_GetStat(Up.UpgradeName).AddShipPartBuff(-Up.UpgradeAmmount)
+		_GetStat(Up.UpgradeName).RemoveShipPartBuff(Up.UpgradeAmmount)
 		_GetStat(Up.UpgradeName).AddShipPartPenalty(-Up.PenaltyAmmount)
 		if (GetStatCurrentValue(Up.UpgradeName) > GetStatFinalValue(Up.UpgradeName)):
 			FullyRefilStat(Up.UpgradeName)

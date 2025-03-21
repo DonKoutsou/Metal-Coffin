@@ -13,7 +13,6 @@ UpgradeName = 6
 UpgradeAmmount = 400.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = "km"
 
 [resource]
 resource_local_to_scene = true
@@ -30,3 +29,4 @@ ItemName = "RA-20"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_bgxiv")]([])
+CanTransfer = true

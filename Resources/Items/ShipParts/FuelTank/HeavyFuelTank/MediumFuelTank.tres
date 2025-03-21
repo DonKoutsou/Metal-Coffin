@@ -14,7 +14,6 @@ UpgradeName = 0
 UpgradeAmmount = 200.0
 PenaltyAmmount = 0.0
 CurrentValue = 200.0
-UpAmmSymbol = "Cubic Tons"
 
 [sub_resource type="Resource" id="Resource_xgd67"]
 resource_local_to_scene = true
@@ -23,7 +22,6 @@ UpgradeName = 2
 UpgradeAmmount = 0.0
 PenaltyAmmount = 0.25
 CurrentValue = 0.0
-UpAmmSymbol = "km/h"
 
 [resource]
 resource_local_to_scene = true
@@ -40,3 +38,4 @@ ItemName = "FT-1000"
 ItemDesc = "Designed for medium-range missions, this tank offers increased fuel retention. Its triple-layered internal lining adds to its structural integrity."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_okalb")]([])
+CanTransfer = false

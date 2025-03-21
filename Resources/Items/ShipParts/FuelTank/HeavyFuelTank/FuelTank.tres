@@ -14,7 +14,6 @@ UpgradeName = 0
 UpgradeAmmount = 100.0
 PenaltyAmmount = 0.0
 CurrentValue = 100.0
-UpAmmSymbol = "Cubic Tons"
 
 [sub_resource type="Resource" id="Resource_ygi31"]
 resource_local_to_scene = true
@@ -23,7 +22,6 @@ UpgradeName = 2
 UpgradeAmmount = 0.0
 PenaltyAmmount = 0.25
 CurrentValue = 0.0
-UpAmmSymbol = "km/h"
 
 [resource]
 resource_local_to_scene = true
@@ -40,3 +38,4 @@ ItemName = "FT-500"
 ItemDesc = "A standard fuel containment solution with dual baffled chambers for stability. Constructed from reinforced materials for reliability in routine operations."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_yqtop")]([])
+CanTransfer = false

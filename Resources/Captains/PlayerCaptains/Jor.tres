@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://c8b3lpqbi11up"]
+[gd_resource type="Resource" script_class="Captain" load_steps=22 format=3 uid="uid://c8b3lpqbi11up"]
 
 [ext_resource type="Texture2D" uid="uid://c5rf570oonbbc" path="res://Assets/CaptainPortraits/Captain9.png" id="1_25cgl"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_6dx32"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_fklaq"]
-[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="3_j6d66"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_u6ltl"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_urdjp"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="5_mlw8x"]
+[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="5_so2fg"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="6_ktgwm"]
-[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="7_kc0ts"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="8_u6p3e"]
-[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="9_bjcbt"]
+[ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="9_av0js"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="11_so2fg"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="12_1itiu"]
+[ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="13_wmdyx"]
 
 [sub_resource type="Resource" id="Resource_t21ml"]
 resource_local_to_scene = true
@@ -34,7 +36,7 @@ CurrentValue = 0.0
 resource_local_to_scene = true
 script = ExtResource("2_6dx32")
 StatName = 5
-StatBase = 8.0
+StatBase = 9.0
 StatShipPartBuff = 0.0
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -66,7 +68,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_rn88p"]
 script = ExtResource("2_6dx32")
 StatName = 0
-StatBase = 150.0
+StatBase = 100.0
 StatShipPartBuff = 0.0
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -84,10 +86,10 @@ script = ExtResource("3_u6ltl")
 CaptainName = "Jor"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_25cgl")
-ShipIcon = ExtResource("3_j6d66")
+ShipIcon = ExtResource("5_so2fg")
 CaptainStats = Array[ExtResource("2_6dx32")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_5nith"), SubResource("Resource_1yc5b"), SubResource("Resource_2jxnm"), SubResource("Resource_rn88p"), SubResource("Resource_3a3o1")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("5_mlw8x"), ExtResource("6_ktgwm"), ExtResource("7_kc0ts"), ExtResource("8_u6p3e"), ExtResource("8_u6p3e"), ExtResource("9_bjcbt"), ExtResource("9_bjcbt"), ExtResource("9_bjcbt"), ExtResource("9_bjcbt")])
+StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("5_mlw8x"), ExtResource("6_ktgwm"), ExtResource("8_u6p3e"), ExtResource("11_so2fg"), ExtResource("12_1itiu"), ExtResource("12_1itiu"), ExtResource("13_wmdyx"), ExtResource("13_wmdyx"), ExtResource("9_av0js")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 40000

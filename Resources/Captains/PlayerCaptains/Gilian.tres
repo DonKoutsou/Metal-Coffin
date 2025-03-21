@@ -2,12 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://hcbn2124kbd3" path="res://Assets/CaptainPortraits/Captain5.png" id="1_i0srd"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_mq2gw"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png" id="2_opqov"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_7y4lj"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_506nn"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_aa2jg"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="5_1pd72"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="5_p6xi5"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="6_1pd72"]
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="8_c7188"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="9_6k00j"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="10_lgywl"]
@@ -82,7 +82,7 @@ script = ExtResource("3_aa2jg")
 CaptainName = "Gilian"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_i0srd")
-ShipIcon = ExtResource("2_opqov")
+ShipIcon = ExtResource("6_1pd72")
 CaptainStats = Array[ExtResource("2_mq2gw")]([SubResource("Resource_hejd0"), SubResource("Resource_ebi2g"), SubResource("Resource_owwtk"), SubResource("Resource_5chah"), SubResource("Resource_4qmer"), SubResource("Resource_i1lsy"), SubResource("Resource_fpklk"), SubResource("Resource_g0xbp")])
 ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_506nn")]([ExtResource("5_p6xi5"), ExtResource("8_c7188"), ExtResource("9_6k00j"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("5_p6xi5"), ExtResource("12_1pd72"), ExtResource("12_1pd72")])

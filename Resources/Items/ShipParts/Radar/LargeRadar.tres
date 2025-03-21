@@ -13,7 +13,6 @@ UpgradeName = 6
 UpgradeAmmount = 1000.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = "km"
 
 [resource]
 resource_local_to_scene = true
@@ -30,3 +29,4 @@ ItemName = "RA-100"
 ItemDesc = "A superior radar array with far-reaching detection range. Utilizes phased array technology for unparalleled tracking specificity and enhanced situational awareness."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_6ifd7")]([])
+CanTransfer = true

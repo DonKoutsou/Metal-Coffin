@@ -14,6 +14,17 @@ const StatMaxValues : Dictionary = {
 	STATS.ELINT : 3000,
 	STATS.MISSILE_SPACE : 20
 }
+const StatShouldStack : Dictionary = {
+	STATS.FUEL_TANK : true,
+	STATS.FUEL_EFFICIENCY : true,
+	STATS.SPEED : true,
+	STATS.FIREPOWER : true,
+	STATS.HULL : true,
+	STATS.INVENTORY_SPACE : true,
+	STATS.VISUAL_RANGE : false,
+	STATS.ELINT : false,
+	STATS.MISSILE_SPACE : true
+}
 
 static func StringToEnum(Stat : String) -> STATS:
 	for g in STATS.keys():
@@ -35,7 +46,21 @@ static func GetStatMetric(Stat : STATS) -> String:
 		STATS.ELINT:
 			Metric = "km"
 	return Metric
-	
+
+static func GetStatItemBuff(Stat : STATS, Buffs : Array[float]) -> float:
+	var Buff : float
+	if (ShouldStatStack(Stat)):
+		for g in Buffs:
+			Buff += g
+	else:
+		for g in Buffs:
+			if (g > Buff):
+				Buff = g
+	return Buff
+
+static func ShouldStatStack(Stat : STATS) -> bool:
+	return StatShouldStack[Stat]
+
 static func GetStatMaxValue(Stat : STATS) -> int:
 	return StatMaxValues[Stat]
 

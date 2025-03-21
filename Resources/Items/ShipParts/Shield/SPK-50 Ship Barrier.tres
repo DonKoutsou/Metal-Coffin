@@ -15,7 +15,6 @@ UpgradeName = 4
 UpgradeAmmount = 600.0
 PenaltyAmmount = 0.0
 CurrentValue = 600.0
-UpAmmSymbol = ""
 
 [resource]
 script = ExtResource("4_n02hm")
@@ -31,3 +30,4 @@ ItemName = "SPK-50 Ship Barrier"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
 CardProviding = Array[ExtResource("2_hyayd")]([ExtResource("1_fjff3"), ExtResource("3_17djw")])
+CanTransfer = false

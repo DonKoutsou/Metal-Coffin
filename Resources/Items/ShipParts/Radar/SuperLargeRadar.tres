@@ -12,7 +12,6 @@ UpgradeName = 6
 UpgradeAmmount = 1400.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = "km"
 
 [resource]
 resource_local_to_scene = true
@@ -28,3 +27,4 @@ ItemName = "Super HighRange Radar"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_in1r4")]([])
+CanTransfer = true

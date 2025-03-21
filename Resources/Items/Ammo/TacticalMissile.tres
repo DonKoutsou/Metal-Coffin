@@ -19,3 +19,4 @@ ItemName = "Tactical Missile"
 ItemDesc = "Low range high speed missile missile, usefull for close range interceptions of enemy missiles"
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_0rlix")]([])
+CanTransfer = true

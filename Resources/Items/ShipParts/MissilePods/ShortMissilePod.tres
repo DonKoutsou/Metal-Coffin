@@ -13,7 +13,6 @@ UpgradeName = 3
 UpgradeAmmount = 1.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = ""
 
 [resource]
 resource_local_to_scene = true
@@ -30,3 +29,4 @@ ItemName = "MP-3 \"Gale\""
 ItemDesc = "A basic missile pod installation designed for entry-level combat scenarios. It supports a limited variety of missile types but provides reliable targeting and launch functionality. Ideal for skirmishes where simplicity and reliability are prioritized, 'Gale' remains a dependable choice for new operators."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_lhpej")]([])
+CanTransfer = false

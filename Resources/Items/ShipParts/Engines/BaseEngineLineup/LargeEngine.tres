@@ -35,3 +35,4 @@ ItemName = "Model EN-500"
 ItemDesc = "The pinnacle of engineering, this engine includes advanced fuel atomization technology. It excels in long-haul missions, ensuring optimal energy distribution for maximum efficiency."
 MaxStackCount = 1
 CardProviding = Array[ExtResource("2_x01tj")]([ExtResource("1_t7h3x")])
+CanTransfer = false

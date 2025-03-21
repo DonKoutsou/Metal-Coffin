@@ -13,7 +13,6 @@ UpgradeName = 0
 UpgradeAmmount = 400.0
 PenaltyAmmount = 0.0
 CurrentValue = 400.0
-UpAmmSymbol = "Cubic Tons"
 
 [sub_resource type="Resource" id="Resource_pmgj3"]
 resource_local_to_scene = true
@@ -22,7 +21,6 @@ UpgradeName = 2
 UpgradeAmmount = 0.0
 PenaltyAmmount = 0.25
 CurrentValue = 0.0
-UpAmmSymbol = "km/h"
 
 [resource]
 resource_local_to_scene = true
@@ -38,3 +36,4 @@ ItemName = "FT-2000"
 ItemDesc = "A high-capacity fuel tank built for extended missions. Made with proprietary composite materials, it maintains durability even under the most challenging conditions"
 MaxStackCount = 1
 CardProviding = Array[ExtResource("1_vievn")]([])
+CanTransfer = false
