@@ -53,6 +53,7 @@ corner_radius_bottom_left = 1
 corner_detail = 1
 
 [node name="ShipStatContainer" type="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_netfp")
@@ -64,17 +65,14 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 15
 text = "stat"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 10
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 18
 text = "12 / 23"

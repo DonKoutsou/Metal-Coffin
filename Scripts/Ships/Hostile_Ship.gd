@@ -155,7 +155,7 @@ func GetFuelRange() -> float:
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
-	return (total_fuel * 10 * effective_efficiency) / fleetsize
+	return (total_fuel * effective_efficiency) / fleetsize
 
 func IsFuelFull() -> bool:
 	for g in GetDroneDock().DockedDrones:

@@ -117,7 +117,7 @@ func _physics_process(delta: float) -> void:
 	if (Docked or GetShipSpeedVec() == Vector2.ZERO):
 		return
 	
-	var FuelConsumtion = $Aceleration.position.x / 10 / Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * SimulationSpeed
+	var FuelConsumtion = $Aceleration.position.x / Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * SimulationSpeed
 	#Consume fuel on shif if enough
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
 		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
@@ -135,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	
 	for g in GetDroneDock().DockedDrones:
 		var Cap = g.Cpt as Captain
-		var dronefuel = ($Aceleration.position.x / 10 / Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * SimulationSpeed
+		var dronefuel = ($Aceleration.position.x / Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * SimulationSpeed
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > dronefuel):
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,dronefuel)
 		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= dronefuel):
@@ -500,7 +500,7 @@ func GetFuelStats() -> Dictionary[String, float]:
 	# Calculate average efficiency for the group
 	Stats["CurrentFuel"] = total_fuel
 	Stats["MaxFuel"] = total_maxfuel
-	Stats["FleetRange"] = (total_fuel * 10 * effective_efficiency) / fleetsize
+	Stats["FleetRange"] = (total_fuel * effective_efficiency) / fleetsize
 	return Stats
 
 func GetFleet() -> Array[MapShip]:
@@ -530,7 +530,7 @@ func GetFuelRange() -> float:
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
-	return (total_fuel * 10 * effective_efficiency) / fleetsize
+	return (total_fuel * effective_efficiency) / fleetsize
 	
 func GetBattleStats() -> BattleShipStats:
 	

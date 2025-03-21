@@ -55,7 +55,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_rpqpm"]
 script = ExtResource("2_s85u5")
 StatName = 1
-StatBase = 4.0
+StatBase = 40.0
 StatShipPartBuff = 0.0
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

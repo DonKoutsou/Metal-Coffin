@@ -53,7 +53,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_rpqpm"]
 script = ExtResource("2_7forp")
 StatName = 1
-StatBase = 1.5
+StatBase = 15.0
 StatShipPartBuff = 0.0
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

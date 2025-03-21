@@ -11,10 +11,9 @@
 [sub_resource type="Resource" id="Resource_y5vig"]
 script = ExtResource("5_awpny")
 UpgradeName = 1
-UpgradeAmmount = 1.0
+UpgradeAmmount = 10.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = "lt/km"
 
 [sub_resource type="Resource" id="Resource_05yu7"]
 script = ExtResource("5_awpny")
@@ -22,7 +21,6 @@ UpgradeName = 2
 UpgradeAmmount = 0.3
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
-UpAmmSymbol = "km/h"
 
 [resource]
 resource_local_to_scene = true

@@ -59,11 +59,23 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ShipPartActions" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 28
+text = "Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
@@ -91,18 +103,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "Drop"
-
-[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 28
-text = "Item"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-uppercase = true
 
 [node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 10)

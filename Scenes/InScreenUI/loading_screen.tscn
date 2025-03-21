@@ -217,15 +217,14 @@ grow_vertical = 0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -420.5
-offset_top = -165.0
-offset_right = 420.5
-offset_bottom = -142.0
+offset_left = 172.0
+offset_top = -168.0
+offset_right = -172.0
+offset_bottom = -145.0
 grow_horizontal = 2
 grow_vertical = 0
 vertical_alignment = 2
