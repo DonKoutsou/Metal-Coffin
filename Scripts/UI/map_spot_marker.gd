@@ -6,6 +6,8 @@ class_name SpotMarker
 @export var SpotDropPosition : Control
 @export var NofiticationScene : PackedScene
 
+@export var BeepSound : AudioStream
+
 var TimeLastSeen : float
 
 func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
@@ -30,7 +32,7 @@ func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
 	sound.bus = "MapSounds"
 	sound.volume_db = 10
-	sound.stream = load("res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3")
+	sound.stream = BeepSound
 	add_child(sound)
 	sound.play()
 

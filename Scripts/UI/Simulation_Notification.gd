@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			FormatSpeedPlace.append("I")
 	
-	$SimulationNotification2.text = Text.format([SpeedText.format(FormatSpeedPlace)])
+	$VBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer/SimulationNotification2.text = Text.format([SpeedText.format(FormatSpeedPlace)])
 	d -= delta
 	if (d > 0):
 		return
@@ -28,23 +28,23 @@ func _physics_process(delta: float) -> void:
 	if (Paused):
 		var Tw = create_tween()
 		if (In):
-			Tw.tween_property($SimulationNotification, "modulate", Color(1,1,1,1), 0.4)
+			Tw.tween_property($VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification, "modulate", Color(1,1,1,1), 0.4)
 			In = false
 		else:
-			Tw.tween_property($SimulationNotification, "modulate", Color(1,1,1,0), 0.4)
+			Tw.tween_property($VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification, "modulate", Color(1,1,1,0), 0.4)
 			In = true
 	
 func SimPaused(t : bool) -> void:
 	if (t):
 		modulate = SimulationPColor
-		$SimulationNotification.text = "SIMULATION\nPAUSED"
+		$VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification.text = "SIMULATION\nPAUSED"
 		Text = "SPEED\n{0}"
 	else:
 		modulate = SimulationRColor
-		$SimulationNotification.text = "SIMULATION\nRUNNING"
+		$VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification.text = "SIMULATION\nRUNNING"
 		Text = "SPEED\n{0}"
 		var Tw = create_tween()
-		Tw.tween_property($SimulationNotification, "modulate", Color(1,1,1,1), 0.4)
+		Tw.tween_property($VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification, "modulate", Color(1,1,1,1), 0.4)
 	#set_physics_process(t)
 	Paused = t
 func SimSpeedUpdated(Speed : int) -> void:

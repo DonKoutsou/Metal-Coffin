@@ -97,18 +97,31 @@ theme_override_constants/separation = -3
 alignment = 1
 
 [node name="ShipName" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+visible = false
 use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = -3
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("8_jiuqu")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "Quifsa
 SPEED 100
 Last Seen 1h ago
 Fuel : 10 / 250 Tons
 Hull Condition : 10 / 100"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Fuel" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+visible = false
+use_parent_material = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_jiuqu")
+theme_override_font_sizes/font_size = 18
+text = "Fuel : 10 / 250 Tons"
 vertical_alignment = 1
 uppercase = true
 
@@ -119,7 +132,7 @@ size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("8_jiuqu")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "SPEED 100"
 vertical_alignment = 1
 uppercase = true
@@ -131,7 +144,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("8_jiuqu")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "Last Seen 1h ago"
 vertical_alignment = 1
 uppercase = true
@@ -143,20 +156,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("8_jiuqu")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "Threat Level : 10"
-vertical_alignment = 1
-uppercase = true
-
-[node name="Fuel" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("8_jiuqu")
-theme_override_font_sizes/font_size = 15
-text = "Fuel : 10 / 250 Tons"
 vertical_alignment = 1
 uppercase = true
 
@@ -167,7 +168,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("8_jiuqu")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
 uppercase = true

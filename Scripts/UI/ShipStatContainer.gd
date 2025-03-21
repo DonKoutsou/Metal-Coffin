@@ -7,7 +7,7 @@ var STName
 
 func SetData(Stat : STAT_CONST.STATS) -> void:
 	STName = Stat
-	$HBoxContainer/Label.text = STAT_CONST.STATS.keys()[Stat].replace("_", " ")
+	$HBoxContainer/Label.text = STAT_CONST.STATS.keys()[Stat].replace("_", " ") + " | " + STAT_CONST.GetStatMetric(STName)
 	var MaxVal = STAT_CONST.GetStatMaxValue(Stat)
 	if (Stat == STAT_CONST.STATS.SPEED):
 		MaxVal *= 360

@@ -20,6 +20,21 @@ static func StringToEnum(Stat : String) -> STATS:
 		if (g.to_lower() == Stat):
 			return STATS[g]
 	return STATS.FUEL_TANK
+
+static func GetStatMetric(Stat : STATS) -> String:
+	var Metric : String
+	match Stat:
+		STATS.FUEL_TANK :
+			Metric = "Cubic Tons"
+		STATS.FUEL_EFFICIENCY:
+			Metric = "km/Lt"
+		STATS.SPEED:
+			Metric = "km/h"
+		STATS.VISUAL_RANGE:
+			Metric = "km"
+		STATS.ELINT:
+			Metric = "km"
+	return Metric
 	
 static func GetStatMaxValue(Stat : STATS) -> int:
 	return StatMaxValues[Stat]

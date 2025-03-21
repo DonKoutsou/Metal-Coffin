@@ -7,4 +7,3 @@ class_name ShipPartUpgrade
 @export var UpgradeAmmount : float
 @export var PenaltyAmmount : float = 0
 @export var CurrentValue : float
-@export var UpAmmSymbol : String

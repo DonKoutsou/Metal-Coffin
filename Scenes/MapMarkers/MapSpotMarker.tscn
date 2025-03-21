@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgsgcnyyv1gxm"]
+[gd_scene load_steps=12 format=3 uid="uid://bgsgcnyyv1gxm"]
 
 [ext_resource type="Script" uid="uid://c3wcxx1myg0wb" path="res://Scripts/UI/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
+[ext_resource type="AudioStream" uid="uid://hrwbq66p4fq8" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="3_625fb"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_n5ia3"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="4_xqhia"]
 
@@ -266,6 +267,7 @@ script = ExtResource("1_5x46s")
 SpotNameLabel = NodePath("HBoxContainer/TextureRect2")
 SpotDropPosition = NodePath("HBoxContainer")
 NofiticationScene = ExtResource("2_b0564")
+BeepSound = ExtResource("3_625fb")
 
 [node name="AnalyzeButton" type="Panel" parent="."]
 show_behind_parent = true
@@ -330,6 +332,7 @@ size_flags_horizontal = 3
 theme = ExtResource("3_n5ia3")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_xqhia")
 theme_override_font_sizes/font_size = 16
 text = "Curdawa"

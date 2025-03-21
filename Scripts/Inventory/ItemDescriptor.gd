@@ -75,7 +75,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 				if (CanUpgrade):
 					UpTime /= 2
 					UpCost /= 2
-				UpgradeLabel.text = "[color=#c19200]Upgrade Time[/color] : {0} | [color=#c19200]Upgrade Cost[/color] : {1} ".format([UpTime, UpCost])
+				UpgradeLabel.text = "[color=#c19200]Upgrade Time[/color] : {0}\n[color=#c19200]Upgrade Cost[/color] : {1}\n[color=#c19200]-------------".format([UpTime, UpCost])
 		
 	else :
 		TransferButton.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=24 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -10,11 +10,14 @@
 [ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="6_awabe"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
+[ext_resource type="Script" uid="uid://cf7you43vrtlg" path="res://Scripts/UI/current_ship_text.gd" id="8_u111i"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="Script" uid="uid://cpu5xsyrg37ql" path="res://Scripts/UI/pop_up_manager.gd" id="9_jvf02"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="9_vr5ky"]
 [ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="10_ct3x8"]
 [ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/InScreenUI/CustomPopUp.tscn" id="10_e626m"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
+[ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/InScreenUI/CustomConfirm.tscn" id="11_nk6oj"]
 [ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/InScreenUI/FadeNotif.tscn" id="12_1jh8x"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
@@ -32,6 +35,7 @@ DiagplScene = ExtResource("2_ehn1p")
 EventHandler = ExtResource("3_b4kau")
 
 [node name="Control3" type="Control" parent="."]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,9 +56,9 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
 offset_left = -19.0
-offset_top = 19.0
+offset_top = 7.0
 offset_right = -19.0
-offset_bottom = 106.0
+offset_bottom = 7.0
 grow_horizontal = 0
 grow_vertical = 1
 
@@ -65,14 +69,33 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -19.0
-offset_top = -75.0
-offset_right = -19.0
-offset_bottom = 12.0
+offset_left = -13.0
+offset_top = -14.0
+offset_right = -13.0
+offset_bottom = -14.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="CurrentShipText" type="Label" parent="Control3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.5
+offset_right = 72.5
+offset_bottom = 32.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 18
+text = "Current Captain Craden
+HULL : 100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_u111i")
+ShipControllerEventH = ExtResource("9_vr5ky")
+
 [node name="VBoxContainer" type="HBoxContainer" parent="Control3"]
+visible = false
 modulate = Color(1, 0.763983, 0.0812772, 1)
 layout_mode = 1
 anchors_preset = 5
@@ -82,6 +105,7 @@ offset_left = -145.5
 offset_right = 145.5
 offset_bottom = 32.0
 grow_horizontal = 2
+alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Control3/VBoxContainer"]
 layout_mode = 2
@@ -104,6 +128,26 @@ text = "Zoom Level : 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("6_awabe")
+
+[node name="CursorPos" type="Label" parent="Control3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -49.0
+offset_right = 73.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 16
+text = "28°22' 24°12'"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_avpxw")
 
 [node name="UnderStatUI" type="Control" parent="Control3"]
 process_mode = 1

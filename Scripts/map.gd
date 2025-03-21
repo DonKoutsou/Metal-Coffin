@@ -162,9 +162,9 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	else : if (event is InputEventScreenDrag):
 		GetCamera()._HANDLE_DRAG(event)
 	else : if (event.is_action_pressed("ZoomIn")):
-		GetCamera()._HANDLE_ZOOM(1.1)
+		GetCamera()._HANDLE_ZOOM(1.5)
 	else : if (event.is_action_pressed("ZoomOut")):
-		GetCamera()._HANDLE_ZOOM(0.9)
+		GetCamera()._HANDLE_ZOOM(0.5)
 	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		GetCamera().UpdateCameraPos(event.relative)
 		

@@ -68,7 +68,7 @@ energy = 0.25
 blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
-texture_scale = 12.0
+texture_scale = 3.5
 height = 200.0
 
 [node name="ShipBody" type="Area2D" parent="."]
@@ -102,8 +102,6 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
 
-[node name="DroneDock" parent="." instance=ExtResource("9_82ju4")]
-
 [node name="MissileDock" type="Node2D" parent="."]
 script = ExtResource("9_f4h60")
 MissileDockEventH = ExtResource("10_ilnq0")
@@ -113,5 +111,7 @@ z_index = 2
 material = SubResource("CanvasItemMaterial_c58ob")
 points = PackedVector2Array(0, 0, 10, 0)
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
+
+[node name="DroneDock" parent="." instance=ExtResource("9_82ju4")]
 
 [connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]

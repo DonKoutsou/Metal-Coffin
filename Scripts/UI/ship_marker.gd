@@ -116,7 +116,7 @@ func ToggleShipDetails(T : bool):
 	#set_physics_process(T)
 func ToggleFriendlyShipDetails(T : bool):
 	FuelLabel.visible = T
-	HullLabel.visible = T
+	#HullLabel.visible = T
 func OnStatLow(StatName : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText(StatName + " bellow 20%")
@@ -146,17 +146,17 @@ func UpdateLine(Zoom : float)-> void:
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
 	var spd = roundi(Map.SpeedToKmH(Spd))
-	ShipSpeedLabel.text = "Spd " + var_to_str(spd).replace(".0", "") + "km/h"
+	ShipSpeedLabel.text = "SPEED " + var_to_str(spd).replace(".0", "")
 	
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(Alt))
 	
 func UpdateDroneFuel(amm : float, maxamm : float):
-	FuelLabel.text = "F: {0} / {1}".format([amm, maxamm])
-	
+	FuelLabel.text = "FUEL {0}%".format([roundi(amm / maxamm * 100)])
+	#roundi(amm / maxamm * 100)
 func UpdateDroneHull(amm : float, maxamm : float):
-	HullLabel.text = "H: {0} / {1}".format([amm, maxamm])
-
+	HullLabel.text = "HULL {0}%".format([roundi(amm / maxamm * 100)])
+	#roundi(amm / maxamm * 100)
 func ToggleTimeLastSeend(T : bool):
 	if (!T):
 		TimeLastSeen = 0

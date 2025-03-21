@@ -14,7 +14,7 @@ func _setup_local_to_scene() -> void:
 		Up.CurrentValue = Up.UpgradeAmmount
 
 func GetItemDesc() -> String:
-	var UpNames = ""
+	var UpNames = "\n[color=#c19200]-------------[/color]"
 	for g in Upgrades.size():
 		var Multiplier = 1
 		if (Upgrades[g].UpgradeName == STAT_CONST.STATS.SPEED):
@@ -31,7 +31,7 @@ func GetItemDesc() -> String:
 			UpAmm = Upgrades[g].PenaltyAmmount * Multiplier
 			UpSymbol = "-"
 			Col = "db2c36"
-		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, Upgrades[g].UpAmmSymbol, UpSymbol, Col])
+		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, STAT_CONST.GetStatMetric(Upgrades[g].UpgradeName), UpSymbol, Col])
 	return "{0} {1}".format([ItemDesc, UpNames])
 
 

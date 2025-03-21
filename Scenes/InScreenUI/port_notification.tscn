@@ -6,55 +6,51 @@
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_3wc5p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5djm"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="PortNotification" type="Control"]
 modulate = Color(0.483, 100, 0.381, 1)
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -20.0
-offset_bottom = 67.0
+offset_top = 24.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_rpr4c")
 script = ExtResource("1_xoog0")
 PortAvailableCol = Color(0.483, 100, 0.381, 1)
 PortUnAvailableCol = Color(100, 0, 0.163, 1)
 ShipControllerEventH = ExtResource("2_3wc5p")
 
-[node name="SimulationNotification" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -427.0
-offset_right = -7.0
-offset_bottom = 93.0
-grow_horizontal = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -306.0
+offset_top = -134.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("1_b01h5")
-theme_override_font_sizes/font_size = 16
-text = "FLYING OVER CARDI
-PERSMISSION TO LAND 
-RECEIVED"
+text = "- - - - - - - - - - - - - "
 horizontal_alignment = 2
-autowrap_mode = 2
-uppercase = true
 
-[node name="SimulationNotification2" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -427.0
-offset_top = -95.0
-offset_right = -7.0
-offset_bottom = -2.0
-grow_horizontal = 2
+[node name="SimulationNotification2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("1_b01h5")
@@ -68,13 +64,32 @@ vertical_alignment = 2
 autowrap_mode = 2
 uppercase = true
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -1.0
-offset_right = 1.0
-offset_bottom = 57.0
-grow_horizontal = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="SimulationNotification" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("1_b01h5")
+theme_override_font_sizes/font_size = 16
+text = "FLYING OVER CARDI
+PERSMISSION TO LAND 
+RECEIVED"
+horizontal_alignment = 2
+autowrap_mode = 2
+uppercase = true
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g5djm")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+text = "- - - - - - - - - - - - -"
+horizontal_alignment = 2

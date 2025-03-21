@@ -190,8 +190,14 @@ func _physics_process(delta: float) -> void:
 					Marker.UpdateTime()
 		else:
 			if (ship is MapShip):
+				var docked = ship.Docked
+				Marker.global_position = ship.global_position
+				Marker.ToggleShipDetails(!docked)
+				if (docked):
+					continue
+				
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				#Marker.ToggleShipDetails(!ship.Docked)
+				
 				#if (ship.GetDroneDock().DockedDrones.size() > 0):
 					#var fuel = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 					#var MaxFuel = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
@@ -200,7 +206,8 @@ func _physics_process(delta: float) -> void:
 						#MaxFuel += z.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 					#Marker.UpdateDroneFuel(roundi(fuel), MaxFuel)
 				#else:
-				Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK))
+				var fuelstats = ship.GetFuelStats()
+				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
@@ -211,7 +218,7 @@ func _physics_process(delta: float) -> void:
 					Marker.UpdateAltitude(ship.Altitude)
 
 				
-				Marker.global_position = ship.global_position
+				
 				#Marker.UpdateSpeed(ship.GetSpeed())
 			else : if (ship is Missile):
 				if (ship.FiredBy is PlayerShip or ship.FiredBy is Drone or ship.VisibleBy.size() > 0):
