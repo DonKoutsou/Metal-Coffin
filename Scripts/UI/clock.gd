@@ -8,7 +8,7 @@ var CurrentYear : int = 3874
 var currentHour : int = 13
 var currentMin : float = 0
 
-var SimulationSpeed : int = 1
+#var SimulationSpeed : float = 1
 var SimulationPaused : bool = false
 
 static var Instance : Clock
@@ -18,6 +18,7 @@ func _ready() -> void:
 	Instance = self
 	#var rot = (360.0/12.0)*currentHour
 	#$Hour.rotation = deg_to_rad(rot)
+	#SimulationSpeed = SimulationManager.SimSpeed()
 	var HourString = CheckNumber(var_to_str(currentHour)) + " : " + CheckNumber(var_to_str(roundi(currentMin)))
 	var DayString = CheckNumber(var_to_str(CurrentDay)) + " / " + CheckNumber(var_to_str(CurrentMonth)) + " / " + var_to_str(CurrentYear)
 	$Label.text = HourString + "\n" + DayString
@@ -27,7 +28,7 @@ static func GetInstance() -> Clock:
 func _physics_process(delta: float) -> void:
 	if (SimulationPaused):
 		return
-	currentMin += (delta * 10) * SimulationSpeed
+	currentMin += (delta * 10) * SimulationManager.SimSpeed()
 	if (currentMin >= 60):
 		currentHour += 1
 		if (currentHour >= 24):
@@ -57,8 +58,8 @@ func CheckNumber(NumString : String) -> String:
 	return NumString
 func ToggleSimulation(t : bool) -> void:
 	SimulationPaused = t
-func SimulationSpeedChanged(i : int) -> void:
-	SimulationSpeed = i
+#func SimulationSpeedChanged(i : float) -> void:
+	#SimulationSpeed = i
 func GetTimeInHours() -> float:
 	var t = (CurrentDay * 24) + currentHour + (currentMin / 60)
 	return t

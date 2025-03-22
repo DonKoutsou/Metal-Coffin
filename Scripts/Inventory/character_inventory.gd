@@ -27,7 +27,7 @@ var _CardInventory : Dictionary
 var _CardAmmo : Dictionary
 
 var SimPaused : bool = false
-var SimSpeed : int = 1
+#var SimSpeed : int = 1
 var _ItemBeingUpgraded : Inventory_Box
 var _UpgradeTime : float
 
@@ -237,7 +237,7 @@ func StartUpgrade(Box : Inventory_Box, UpgradeBuff : bool) -> void:
 func _physics_process(delta: float) -> void:
 	if (SimPaused):
 		return
-	_UpgradeTime -= (delta * 10) * SimSpeed
+	_UpgradeTime -= (delta * 10) * SimulationManager.SimSpeed()
 	#_UpgradeTime -= (delta * 10)
 	if (_UpgradeTime <= 0):
 		ItemUpgradeFinished()

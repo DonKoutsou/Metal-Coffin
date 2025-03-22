@@ -23,11 +23,11 @@ class_name Card_Fight
 
 @export_group("Plecement Referances")
 #Plecement for any atack cards player can play
-@export var OffensiveCardPlecement : HBoxContainer
+@export var OffensiveCardPlecement : Control
 #Plecement for any deffence cards player can play
-@export var DeffensiveCardPlecement : HBoxContainer
+@export var DeffensiveCardPlecement : Control
 #Plecement for any cards player selects to play
-@export var SelectedCardPlecement : HBoxContainer
+@export var SelectedCardPlecement : Control
 @export var AnimationPlecement : Control
 @export var EnergyBar : ProgressBar
 @export var EnemyShipVisualPlecement : Control
@@ -368,6 +368,8 @@ func OnFightEnded(Won : bool) -> void:
 	var End = EndScene.instantiate() as CardFightEndScene
 	End.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg)
 	add_child(End)
+	PlayerShipVisualPlecement.visible = false
+	EnemyShipVisualPlecement.visible = false
 	await End.ContinuePressed
 	if (Won):
 		CardFightEnded.emit(PlayerShips)
@@ -549,7 +551,7 @@ func UpdateEnergy() -> void:
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		$VBoxContainer4/VBoxContainer4/ScrollContainer.scroll_horizontal -= event.relative.x
+		$VBoxContainer4/VBoxContainer4/ScrollContainer.scroll_vertical -= event.relative.y
 
 func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	var Stats = BattleShipStats.new()

@@ -5,16 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="4_irncy"]
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardIcon", "CardName", "CardDesc", "CardCost")]
-custom_minimum_size = Vector2(160, 130)
+custom_minimum_size = Vector2(200, 130)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -112.0
+offset_left = -141.0
 offset_top = -59.0
-offset_right = 48.0
+offset_right = 59.0
 offset_bottom = 71.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -28,9 +28,12 @@ CardDesc = NodePath("VBoxContainer/CardDesc")
 CardCost = NodePath("CardCost")
 
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
-layout_mode = 2
-offset_right = 160.0
-offset_bottom = 130.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
 mouse_filter = 1
 theme = ExtResource("2_n60qq")
@@ -38,17 +41,23 @@ theme = ExtResource("2_n60qq")
 [node name="CardIcon" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.3)
 texture_filter = 1
-layout_mode = 2
-offset_right = 160.0
-offset_bottom = 130.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("4_irncy")
 stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-offset_right = 160.0
-offset_bottom = 130.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 10
 
@@ -74,10 +83,14 @@ visible_characters_behavior = 1
 
 [node name="CardCost" type="Label" parent="."]
 modulate = Color(1, 0.763983, 0.0812772, 1)
-layout_mode = 2
-offset_top = 113.0
-offset_right = 1.0
-offset_bottom = 130.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_right = -6.0
+offset_bottom = 17.0
+grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/outline_size = 8

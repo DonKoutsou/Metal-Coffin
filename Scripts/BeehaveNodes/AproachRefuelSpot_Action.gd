@@ -14,7 +14,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		#return SUCCESS
 	
 	var Pos = MainShip.global_position
-	var SimulationSpeed = MainShip.SimulationSpeed
+	var SimulationSpeed = SimulationManager.SimSpeed()
 	var TickRate = _blackboard.get_value("TickRate")
 	var DestinationPos = MainShip.RefuelSpot.global_position
 

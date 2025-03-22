@@ -6,7 +6,7 @@ class_name ApreachDestinationAction
 func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MainShip = actor as HostileShip
 	var TickRate = _blackboard.get_value("TickRate")
-	var SimulationSpeed = MainShip.SimulationSpeed
+	var SimulationSpeed = SimulationManager.SimSpeed()
 	var Pos = MainShip.global_position
 	var DestinationPos = MainShip.GetCurrentDestination()
 	var MainShipMaxSpeed = MainShip.GetShipMaxSpeed()

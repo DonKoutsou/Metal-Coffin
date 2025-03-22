@@ -11,7 +11,7 @@ var previous_mouse_angle = 0.0
 
 var accumulatedrel : float
 
-signal StepChanged(NewStep : int)
+signal StepChanged(NewStep : float)
 
 var DistanceTraveled = 0
 
@@ -62,7 +62,7 @@ func _physics_process(_delta: float) -> void:
 		else: if (CurrentStep == 0):
 			CurrentStep = Steps
 		print(CurrentStep)
-		StepChanged.emit(CurrentStep)
+		StepChanged.emit(CurrentStep * 0.5)
 		SteeringDir = 0
 		$TextureRect.rotation = CurrentStep * AngleStep
 		$AudioStreamPlayer.play()

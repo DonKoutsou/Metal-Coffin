@@ -7,7 +7,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MainShip = actor as HostileShip
 	#if (MainShip.Docked):
 		#return SUCCESS
-	var SimulationSpeed = MainShip.SimulationSpeed
+	var SimulationSpeed = SimulationManager.SimSpeed()
 	var TickRate = _blackboard.get_value("TickRate")
 	var RefuelSpeed = 0.05 * SimulationSpeed * TickRate
 	var RepairSpeed = 0.02 * SimulationSpeed * TickRate

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
 [ext_resource type="AudioStream" uid="uid://idnn507tyewg" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
-[ext_resource type="Texture2D" uid="uid://cysdidvsikumn" path="res://Assets/UIPiecies/Screen/Screen_FullQuality.png" id="5_ng3jm"]
+[ext_resource type="Texture2D" uid="uid://bt5d4jvftjfin" path="res://Assets/UIPiecies/Screen/Screen2_FullQuality.png" id="5_ua54b"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
 [ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="8_eamxa"]
@@ -333,7 +333,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("5_ng3jm")
+texture = ExtResource("5_ua54b")
 expand_mode = 1
 
 [node name="ThrustSlider" parent="NormalScreen" instance=ExtResource("5_mda8n")]
@@ -524,19 +524,19 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -549.0
-offset_right = -24.0
-offset_bottom = -494.0
+offset_left = -48.0
+offset_top = -541.0
+offset_right = -27.0
+offset_bottom = -496.0
 grow_horizontal = 0
 grow_vertical = 0
+action_mode = 0
 texture_normal = ExtResource("19_n4cku")
 texture_pressed = ExtResource("20_sa8yb")
 texture_click_mask = ExtResource("8_eamxa")
@@ -641,6 +641,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Simulation_Nob" parent="NormalScreen" instance=ExtResource("27_67jhj")]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -901,7 +902,7 @@ texture = ExtResource("36_ai3xr")
 texture_scale = 23.39
 
 [node name="AlarmLight2" type="PointLight2D" parent="ScreenCam"]
-position = Vector2(6, -668)
+position = Vector2(5, -668)
 energy = 2.0
 texture = ExtResource("36_ai3xr")
 texture_scale = 50.0
@@ -943,6 +944,8 @@ libraries = {
 [connection signal="pressed" from="NormalScreen/MarkerPlecement" to="." method="Marker_Editor_Pressed"]
 [connection signal="pressed" from="NormalScreen/ControlledShipReturn" to="." method="Regroup_Pressed"]
 [connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
+[connection signal="button_up" from="NormalScreen/SpeedSimulation" to="." method="Sim_Speed_Released"]
+[connection signal="pressed" from="NormalScreen/SpeedSimulation" to="." method="Sim_Speed_Pressed"]
 [connection signal="pressed" from="NormalScreen/SimulationButton" to="." method="Sim_Pause_Pressed"]
 [connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
 [connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]

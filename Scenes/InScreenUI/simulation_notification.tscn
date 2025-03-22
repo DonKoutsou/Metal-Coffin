@@ -30,7 +30,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -360.0
-offset_bottom = 132.0
+offset_bottom = 89.0
 grow_horizontal = 0
 theme_override_constants/separation = 0
 
@@ -40,6 +40,29 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 text = "- - - - - - - -"
 horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="SimulationNotification2" type="Label" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("1_5ioyh")
+theme_override_font_sizes/font_size = 18
+text = "SIMULATION CONDITION
+PAUSED"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Panel2" type="Panel" parent="VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y8018")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
@@ -60,28 +83,6 @@ text = "SIMULATION
 2"
 horizontal_alignment = 2
 autowrap_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 2
-
-[node name="SimulationNotification2" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("1_5ioyh")
-theme_override_font_sizes/font_size = 18
-text = "SIMULATION CONDITION
-PAUSED"
-horizontal_alignment = 2
-autowrap_mode = 2
-
-[node name="Panel2" type="Panel" parent="VBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y8018")
 
 [node name="Panel" type="Panel" parent="VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(2, 0)

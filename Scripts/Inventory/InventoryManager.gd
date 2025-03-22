@@ -19,7 +19,7 @@ class_name InventoryManager
 
 var _CharacterInventories : Dictionary
 var SimPaused : bool = false
-var SimSpeed : int = 1
+#var SimSpeed : float = 1
 
 signal InventoryToggled(t : bool)
 
@@ -109,10 +109,10 @@ func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t
 	for g in _CharacterInventories.values():
 		g.SimPaused = t
-func OnSimulationSpeedChanged(i : int) -> void:
-	SimSpeed = i
-	for g in _CharacterInventories.values():
-		g.SimSpeed = i
+#func OnSimulationSpeedChanged(i : float) -> void:
+	#SimSpeed = i
+	#for g in _CharacterInventories.values():
+		#g.SimSpeed = i
 func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):

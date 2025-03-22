@@ -15,7 +15,7 @@
 script = ExtResource("2_nhpak")
 StatName = 2
 StatBase = 0.4
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -23,7 +23,7 @@ CurrentValue = 0.0
 script = ExtResource("2_nhpak")
 StatName = 6
 StatBase = 350.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -31,7 +31,7 @@ CurrentValue = 0.0
 script = ExtResource("2_nhpak")
 StatName = 3
 StatBase = 1.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -40,7 +40,7 @@ resource_local_to_scene = true
 script = ExtResource("2_nhpak")
 StatName = 4
 StatBase = 200.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -48,7 +48,7 @@ CurrentValue = 0.0
 script = ExtResource("2_nhpak")
 StatName = 7
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -56,7 +56,7 @@ CurrentValue = 0.0
 script = ExtResource("2_nhpak")
 StatName = 1
 StatBase = 35.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -65,7 +65,7 @@ resource_local_to_scene = true
 script = ExtResource("2_nhpak")
 StatName = 0
 StatBase = 420.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -73,7 +73,7 @@ CurrentValue = 0.0
 script = ExtResource("2_nhpak")
 StatName = 8
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 

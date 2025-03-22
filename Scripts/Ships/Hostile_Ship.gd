@@ -90,9 +90,9 @@ func _physics_process(delta: float) -> void:
 	if (UseDefaultBehavior):
 		if (Paused):
 			return
-		
+		var SimulationSpeed = SimulationManager.SimSpeed()
 		if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):
-			VisualContactCountdown -= 0.02 * SimulationSpeed
+			VisualContactCountdown -= 0.1 * SimulationSpeed
 			if (VisualContactCountdown < 0):
 				for c in GarrissonVisualContacts:
 					OnPlayerVisualContact.emit(c, self)
@@ -339,15 +339,21 @@ func BodyLeftElint(area: Area2D) -> void:
 
 func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		if (!Patrol):
-			GarissonVisualContact(Body.get_parent())
-		else:
-			OnPlayerVisualContact.emit(Body.get_parent(), self)
+		#if (!Patrol):
+		GarissonVisualContact(Body.get_parent())
+		#else:
+			#OnPlayerVisualContact.emit(Body.get_parent(), self)
 
 var GarrissonVisualContacts : Array[MapShip]
 var VisualContactCountdown = 10
 
 func GarissonVisualContact(Ship : MapShip) -> void:
+	if (GarrissonVisualContacts.size() == 0):
+		if (Patrol):
+			VisualContactCountdown = 5
+		else:
+			VisualContactCountdown = 10
+			
 	if (VisualContactCountdown < 0):
 		OnPlayerVisualContact.emit(Ship, self)
 		

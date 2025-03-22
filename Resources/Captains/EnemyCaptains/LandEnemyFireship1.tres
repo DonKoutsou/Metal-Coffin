@@ -13,7 +13,7 @@
 script = ExtResource("2_7jpyg")
 StatName = 2
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -21,7 +21,7 @@ CurrentValue = 0.0
 script = ExtResource("2_7jpyg")
 StatName = 6
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -29,7 +29,7 @@ CurrentValue = 0.0
 script = ExtResource("2_7jpyg")
 StatName = 3
 StatBase = 2.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -38,7 +38,7 @@ resource_local_to_scene = true
 script = ExtResource("2_7jpyg")
 StatName = 4
 StatBase = 60.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -46,7 +46,7 @@ CurrentValue = 0.0
 script = ExtResource("2_7jpyg")
 StatName = 7
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -54,7 +54,7 @@ CurrentValue = 0.0
 script = ExtResource("2_7jpyg")
 StatName = 1
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -63,7 +63,7 @@ resource_local_to_scene = true
 script = ExtResource("2_7jpyg")
 StatName = 0
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
@@ -71,7 +71,7 @@ CurrentValue = 0.0
 script = ExtResource("2_7jpyg")
 StatName = 8
 StatBase = 0.0
-StatShipPartBuff = 0.0
+StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 

@@ -5,7 +5,7 @@ class_name SimulationManager
 @export var _Map : Map
 
 static var Paused : bool = false
-static var SimulationSpeed : int = 1
+static var SimulationSpeed : float = 0.5
 
 @onready var simulation_notification: SimulationNotification = $"../Map/SubViewportContainer/ViewPort/InScreenUI/Control3/SimulationNotification"
 
@@ -22,7 +22,7 @@ static func GetInstance() -> SimulationManager:
 static func IsPaused() -> bool:
 	return Paused
 
-static func SimSpeed() -> int:
+static func SimSpeed() -> float:
 	return SimulationSpeed
 
 func TogglePause(t : bool) -> void:
@@ -33,9 +33,12 @@ func TogglePause(t : bool) -> void:
 	_Map.GetInScreenUI().GetInventory().OnSimulationPaused(t)
 	Commander.GetInstance().OnSimulationPaused(t)
 	get_tree().call_group("Pausable", "ToggleSimulation", t)
-	
+	if (Paused):
+		PopUpManager.GetInstance().DoFadeNotif("Simulation paused")
+	else:
+		PopUpManager.GetInstance().DoFadeNotif("Simulation unpaused")
 		
-func SetSimulationSpeed(Speed : int) -> void:
+func SetSimulationSpeed(Speed : float) -> void:
 	simulation_notification.SimSpeedUpdated(Speed)
 	SimulationSpeed = Speed
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
@@ -47,8 +50,8 @@ func SpeedToggle(t : bool) -> void:
 	if (t):
 		SimulationSpeed = 10
 	else:
-		SimulationSpeed = 1
-	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
-	_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
-	get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)
-	simulation_notification.SimSpeedUpdated(SimulationSpeed)
+		SimulationSpeed = 0.5
+	#get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
+	#_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
+	#get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)
+	#simulation_notification.SimSpeedUpdated(SimulationSpeed)

@@ -25,18 +25,18 @@ var NeighboringCities : Array[String]
 var Connected
 var Event : Happening
 var SimPaused = false
-var SimSpeed = 1
+#var SimSpeed : float = 1
 
 func _ready() -> void:
 	set_physics_process(false)
 	SimPaused = SimulationManager.IsPaused()
-	SimSpeed = SimulationManager.SimSpeed()
+	#SimSpeed = SimulationManager.SimSpeed()
 	global_rotation = 0
 	if (Pos != Vector2.ZERO):
 		position = Pos
 
-func SimulationSpeedChanged(i : int) -> void:
-	SimSpeed = i
+#func SimulationSpeedChanged(i : float) -> void:
+	#SimSpeed = i
 	
 func ToggleSimulation(t : bool) -> void:
 	SimPaused = t
@@ -159,7 +159,7 @@ func _physics_process(delta: float) -> void:
 	if (SimPaused):
 		return
 	
-	AlarmProgress += delta * SimSpeed
+	AlarmProgress += delta * SimulationManager.SimSpeed()
 	
 	if (AlarmProgress > 300):
 		set_physics_process(false)

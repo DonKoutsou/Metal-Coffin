@@ -11,7 +11,7 @@ var Damage : float = 20
 
 var FoundShips : Array[Node2D] = []
 var Paused = false
-var SimulationSpeed : int = 1
+#var SimulationSpeed : float = 1
 
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
@@ -26,8 +26,8 @@ func SetData(Dat : MissileItem) -> void:
 	
 func TogglePause(t : bool):
 	Paused = t
-func ChangeSimulationSpeed(i : int):
-	SimulationSpeed = i
+#func ChangeSimulationSpeed(i : float):
+	#SimulationSpeed = i
 
 func GetSpeed() -> float:
 	return Speed
@@ -36,7 +36,7 @@ func GetShipName() -> String:
 	return MissileName
 
 func _ready() -> void:
-	SimulationSpeed = SimulationManager.SimulationSpeed
+	#SimulationSpeed = SimulationManager.SimulationSpeed
 	Paused = SimulationManager.IsPaused()
 	if (FiredBy is not HostileShip):
 		var s = DeletableSound.new()
@@ -54,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	if (FoundShips.size() > 0):
 		HoneAtEnemy()
-	for g in SimulationSpeed:
+	for g in SimulationManager.SimSpeed():
 		global_position = $AccelPosition.global_position
 		Distance -= $AccelPosition.position.x
 	if (Distance <= 0):

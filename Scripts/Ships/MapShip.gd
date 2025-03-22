@@ -20,7 +20,7 @@ class_name MapShip
 @export var Cpt : Captain
 
 var Paused = true
-var SimulationSpeed : int = 1
+#var SimulationSpeed : float = 1
 var CurrentPort : MapSpot
 
 var RadarWorking = true
@@ -64,7 +64,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	MapPointerManager.GetInstance().AddShip(self, true)
-
+	#SimulationSpeed = SimulationManager.SimSpeed()
 	#TODO probably a better way to do this
 	Cpt.CaptainShip = self
 	###
@@ -83,6 +83,9 @@ func _physics_process(delta: float) -> void:
 
 	if (Paused):
 		return
+	
+	var SimulationSpeed = SimulationManager.SimSpeed()
+	
 	if (Landing):
 		UpdateAltitude(Altitude - (20 * SimulationSpeed))
 		if (Altitude <= 0):
@@ -149,7 +152,9 @@ func _physics_process(delta: float) -> void:
 
 func Refuel() -> void:
 	if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
+		var SimulationSpeed = SimulationManager.SimSpeed()
 		var TimeMulti = 0.05
+		
 		if (CurrentPort.HasFuel()):
 			TimeMulti = 0.1
 		var maxfuelcap = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
@@ -164,7 +169,9 @@ func Refuel() -> void:
 
 func Repair() -> void:
 	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and CurrentPort.PlayerRepairReserves > 0):
+		var SimulationSpeed = SimulationManager.SimSpeed()
 		var TimeMulti = 0.05
+		
 		if (CurrentPort.HasRepair()):
 			TimeMulti = 0.25
 		var timeleft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / TimeMulti / 6)
@@ -608,8 +615,8 @@ func IsFuelFull() -> bool:
 #     ██ ██ ██  ██  ██ ██    ██ ██      ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #███████ ██ ██      ██  ██████  ███████ ██   ██    ██    ██  ██████  ██   ████ 
 
-func ChangeSimulationSpeed(i : int):
-	SimulationSpeed = i
+#func ChangeSimulationSpeed(i : float):
+	#SimulationSpeed = i
 
 func TogglePause(t : bool):
 	Paused = t

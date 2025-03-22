@@ -26,7 +26,7 @@ var EnemyPositionsToInvestigate : Dictionary
 var KnownEnemies : Dictionary
 
 var SimPaused : bool = false
-var SimSpeed : int = 1
+#var SimSpeed : float = 1
 
 func _ready() -> void:
 	Instance = self
@@ -49,8 +49,8 @@ func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t
 	$BeehaveTree.set_physics_process(!t)
 	
-func OnSimulationSpeedChanged(i : int) -> void:
-	SimSpeed = i
+#func OnSimulationSpeedChanged(i : float) -> void:
+	#SimSpeed = i
 	#$BeehaveTree.tick_rate = i
 
 #/////////////////////////////////////////////////////////////
