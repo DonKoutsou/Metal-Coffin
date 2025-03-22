@@ -22,7 +22,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_lwofe"]
 script = ExtResource("2_mukc2")
 StatName = 6
-StatBase = 800.0
+StatBase = 400.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

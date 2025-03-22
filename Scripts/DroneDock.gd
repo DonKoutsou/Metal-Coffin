@@ -7,6 +7,7 @@ class_name DroneDock
 @export var CaptainNotif : PackedScene
 
 var DockedDrones : Array[Drone]
+var Captives : Array[HostileShip]
 var FlyingDrones : Array[Drone]
 
 func _ready() -> void:
@@ -58,6 +59,7 @@ func ClearAllDrones() -> void:
 	for g in FlyingDrones:
 		DroneDisharged(g)
 		g.Kill()
+		
 func GetSaveData() -> Array[DroneSaveData]:
 	var saved : Array[DroneSaveData]
 	for g in DockedDrones:
@@ -112,6 +114,26 @@ func AddRecruit(Cpt : Captain, Notify : bool = true) -> void:
 		var NewShip = (load("res://Scenes/MapShips/drone.tscn") as PackedScene).instantiate() as Drone
 		NewShip.Cpt = Crew
 		AddDrone(NewShip, false)
+
+func AddCaptive(Captive : HostileShip) -> void:
+	
+	var pl = get_parent() as MapShip
+	if (pl.CurrentPort != null):
+		World.GetInstance().PlayerWallet.AddFunds(Captive.Cpt.ProvidingFunds * 2)
+		Captive.Evaporate()
+		return
+		
+	Captive.connect("OnShipDestroyed", DroneDisharged)
+	
+	var CaptiveParent = Captive.get_parent()
+	CaptiveParent.remove_child(Captive)
+	Captive.Captured = true
+	CaptiveParent.add_child(Captive)
+	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
+	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
+	DockCaptive(Captive)
+	
+	
 
 func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#var drone = DroneScene.instantiate()
@@ -170,7 +192,7 @@ func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 		var RefilAmm = Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) - ($Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY))
 		Dr.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, abs(RefilAmm))
 		Dr.EnableDrone()
-	
+
 func AddDroneToHierarchy(drone : Drone):
 	get_parent().get_parent().add_child(drone)
 	DockDrone(drone)
@@ -199,6 +221,24 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		if ($"..".Landing or $"..".Landed()):
 			drone.LandingStarted.emit()
 			drone.Landing = true
+		return
+	
+func DockCaptive(Captive : HostileShip) -> void:
+	Captives.append(Captive)
+	Captive.Command = get_parent()
+	var docks = $DroneSpots.get_children()
+	for g in docks.size():
+		if (docks[g].get_child_count() > 0):
+			continue
+		var dock = docks[g]
+		var trans = RemoteTransform2D.new()
+		trans.update_rotation = false
+		dock.add_child(trans)
+		trans.remote_path = Captive.get_path()
+		Captive.Docked = true
+		if ($"..".Landing or $"..".Landed()):
+			Captive.LandingStarted.emit()
+			Captive.Landing = true
 		return
 
 func UndockDrone(drone : Drone, Keep : bool = true):

@@ -25,11 +25,16 @@ var InvestigationOrders : Array[InvestigationOrder]
 var EnemyPositionsToInvestigate : Dictionary
 var KnownEnemies : Dictionary
 
+var Alarmed : bool = false
+
 var SimPaused : bool = false
 #var SimSpeed : float = 1
 
 func _ready() -> void:
 	Instance = self
+
+func _physics_process(delta: float) -> void:
+	$BeehaveTree.Process_Tree()
 
 static func GetInstance() -> Commander:
 	return Instance
@@ -47,12 +52,34 @@ func ConnectSignals(Ship : HostileShip) -> void:
 
 func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t
-	$BeehaveTree.set_physics_process(!t)
+	#$BeehaveTree.set_physics_process(!t)
 	
 #func OnSimulationSpeedChanged(i : float) -> void:
 	#SimSpeed = i
 	#$BeehaveTree.tick_rate = i
 
+var ShipLodCheckList : Array[HostileShip]
+func ProcessLODList() -> void:
+	if (Fleet.size() == 0):
+		return
+	
+	var PlayerShips = get_tree().get_nodes_in_group("PlayerShips")
+	
+	for g in 10:
+		if (ShipLodCheckList.size() == 0):
+			ShipLodCheckList.append_array(Fleet)
+
+		var Ship : HostileShip = ShipLodCheckList.pop_back()
+		var ShipPos : Vector2 = Ship.global_position
+		
+		var ShouldRun = false
+		
+		for Pl in PlayerShips:
+			if (ShipPos.distance_to(Pl.global_position) < 10000):
+				ShouldRun = true
+				break
+		
+		Ship.set_physics_process(ShouldRun)
 #/////////////////////////////////////////////////////////////
  #██████  ██████  ██████  ███████ ██████      ███    ███  █████  ███    ██  █████   ██████  ███████ ███    ███ ███████ ███    ██ ████████ 
 #██    ██ ██   ██ ██   ██ ██      ██   ██     ████  ████ ██   ██ ████   ██ ██   ██ ██       ██      ████  ████ ██      ████   ██    ██    
@@ -87,7 +114,7 @@ func PursuitOrderCompleted(TargetShip : MapShip) -> void:
 			PursuitOrders.erase(g)
 			TargetShip.disconnect("OnShipDestroyed", PursuitOrderCompleted)
 			return
-
+	
 func PursuitOrderCanceled(TargetShip : MapShip) -> void:
 	for g in PursuitOrders:
 		if (g.Target == TargetShip):
@@ -255,6 +282,60 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 		EnemyPositionsToInvestigate[Ship] = Info
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			UpdateInvestigationPos(Ship.global_position, Ship)
+#/////////////////////////////////////////////////////////////
+ #█████  ██       █████  ██████  ███    ███ 
+#██   ██ ██      ██   ██ ██   ██ ████  ████ 
+#███████ ██      ███████ ██████  ██ ████ ██ 
+#██   ██ ██      ██   ██ ██   ██ ██  ██  ██ 
+#██   ██ ███████ ██   ██ ██   ██ ██      ██ 
+
+func CheckAlarm() -> void:
+	if (PursuitOrders.size() > 0 or InvestigationOrders.size() > 0):
+		if (!Alarmed):
+			OnAlarmRaised()
+	else:
+		if (Alarmed):
+			OnAlarmDissabled()
+			
+func OnAlarmRaised() -> void:
+	print("Alarm has been raised")
+	Alarmed = true
+	for g in Fleet:
+		if (g.Command == null and g.Convoy):
+			var Refuge = FindRefugeForShip(g)
+			g.RefugeSpot = Refuge
+	
+func OnAlarmDissabled() -> void:
+	print("Alarm has been dissabled")
+	Alarmed = false
+	for g in Fleet:
+		if (g.Command == null and g.Convoy):
+			g.RefugeSpot = null
+
+func FindRefugeForShip(Ship : HostileShip) -> MapSpot:
+	var dist = Ship.GetFuelRange()
+	
+	var DistToSpot = 9999999999
+	
+	var RefugeSpot
+	
+	#var DistanceToDestination = ship.global_position.distance_to(ship.GetCurrentDestination())
+	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
+		var spot = g as MapSpot
+		var D = spot.global_position.distance_to(Ship.global_position)
+		#if we cant reach it look for another
+		if (D >= dist):
+			continue
+		
+		if (D > DistToSpot):
+			continue
+		
+		DistToSpot = D
+		RefugeSpot = spot
+		if (DistToSpot < 10):
+			break
+			
+	return RefugeSpot
 
 #/////////////////////////////////////////////////////////////
 #██   ██ ███████ ██      ██████  ███████ ██████      ███████ ██    ██ ███    ██  ██████ ████████ ██  ██████  ███    ██ ███████ 

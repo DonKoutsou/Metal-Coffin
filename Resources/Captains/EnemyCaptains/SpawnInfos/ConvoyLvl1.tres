@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://di5eydm5e8bvx"]
+
+[ext_resource type="Resource" uid="uid://mtu8yrc4q3l8" path="res://Resources/Captains/EnemyCaptains/EnemyConvoy1.tres" id="1_n7onx"]
+[ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_71n0r"]
+
+[resource]
+script = ExtResource("2_71n0r")
+Cpt = ExtResource("1_n7onx")
+Cost = 50
+MaxAmmInFleet = 1
+DontGenerateBefore = 0
+SpawnAlone = true

@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="3_i2dyh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
-radius = 150.0
 
 [node name="MapSpot" type="Node2D" groups=["City", "Clock", "Pausable"]]
 script = ExtResource("1_x7uyn")

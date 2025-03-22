@@ -76,7 +76,7 @@ collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_e6yyl")
-debug_color = Color(0.745105, 0.130026, 1.92523e-07, 0.42)
+debug_color = Color(0.616808, 0.00135421, 0.770009, 0.42)
 
 [node name="ReturnSoundTrigger" type="Area2D" parent="."]
 collision_layer = 0
@@ -84,7 +84,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSoundTrigger"]
 shape = SubResource("CircleShape2D_7khp2")
-debug_color = Color(0.718534, 0.251914, 1, 0.42)
+debug_color = Color(0.261535, 0.503371, 1, 0.42)
 
 [node name="Elint" type="Area2D" parent="."]
 collision_layer = 0
@@ -93,6 +93,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
 shape = SubResource("CircleShape2D_mk6wy")
+debug_color = Color(0, 0.64636, 0.238936, 0.42)
 
 [node name="Radar" type="Area2D" parent="."]
 rotation = -0.282025
@@ -101,6 +102,7 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
 shape = SubResource("CircleShape2D_63pb3")
+debug_color = Color(0.912138, 0.294213, 0, 0.42)
 
 [node name="MissileDock" type="Node2D" parent="."]
 script = ExtResource("9_f4h60")

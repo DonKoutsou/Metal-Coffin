@@ -15,6 +15,7 @@ class_name HostileShip
 @export var Direction = -1
 @export var ShipName : String
 @export var Patrol : bool = true
+@export var Convoy : bool = false
 @export var BT : PackedScene
 @export var AlarmVisual : PackedScene
 #This array will be filled by commander when this ship is sent after another ship
@@ -24,9 +25,13 @@ var PositionToInvestigate : Vector2
 
 #Spot that was chosen to stop and refuel
 var RefuelSpot : MapSpot
+#Spot that was chosen to hide until alarm goese of
+var RefugeSpot : MapSpot
 #Filled with player ships when they can see this ship
 var VisibleBy : Array[Node2D]
 
+#var LOD : int = 0
+var Captured : bool
 var BTree : BeehaveTree
 var BBoard : Blackboard
 var UseDefaultBehavior : bool = false
@@ -74,7 +79,7 @@ func InitialiseShip() -> void:
 
 	UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 	
-	if (Patrol):
+	if (Patrol or Convoy):
 		if (Command == null):
 			FigureOutPath()
 	else:
@@ -82,14 +87,16 @@ func InitialiseShip() -> void:
 		UseDefaultBehavior = true
 	
 	TogglePause(SimulationManager.IsPaused())
-	
+
 
 func _physics_process(delta: float) -> void:
+	if (Captured):
+		return
 	UpdateElint(delta)
+	if (Paused):
+		return
 	
 	if (UseDefaultBehavior):
-		if (Paused):
-			return
 		var SimulationSpeed = SimulationManager.SimSpeed()
 		if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):
 			VisualContactCountdown -= 0.1 * SimulationSpeed
@@ -103,6 +110,10 @@ func _physics_process(delta: float) -> void:
 		
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)):
 			Cpt.RefillResource(STAT_CONST.STATS.MISSILE_SPACE ,0.005 * SimulationSpeed)
+			
+	else: if (BTree != null):
+		BTree.Process_Tree()
+		
 
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
@@ -223,9 +234,9 @@ func FigureOutPath() -> void:
 	BTree.blackboard = BBoard
 	ToggleDocked(Docked)
 	add_child(BTree)
-	if (OS.get_name() == "Android"):
-		BTree.tick_rate = 10
-	BBoard.set_value("TickRate", BTree.tick_rate)
+	#if (OS.get_name() == "Android"):
+		#BTree.tick_rate = 10
+	BBoard.set_value("TickRate", 1)
 
 func CanReachDestination() -> bool:
 	var dist = GetFuelRange()
@@ -291,6 +302,8 @@ func GetCurrentDestination() -> Vector2:
 		destination = PositionToInvestigate
 		if (PositionToInvestigate.distance_to(global_position) <= 4):
 			OnPositionInvestigated.emit(PositionToInvestigate)
+	else: if(RefugeSpot != null) :
+		destination = RefugeSpot.global_position
 	else : if (Path.size() > 0):
 		destination = Helper.GetInstance().GetCityByName(Path[PathPart]).global_position
 	else : 
@@ -323,6 +336,8 @@ func OnShipUnseen(UnSeenBy : Node2D):
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
 	
 func BodyEnteredElint(area: Area2D) -> void:
+	if (Captured):
+		return
 	if (area.get_parent() is HostileShip):
 		return
 	super(area)
@@ -338,21 +353,23 @@ func BodyLeftElint(area: Area2D) -> void:
 
 
 func BodyEnteredRadar(Body : Area2D) -> void:
+	if (Captured):
+		return
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		#if (!Patrol):
-		GarissonVisualContact(Body.get_parent())
-		#else:
-			#OnPlayerVisualContact.emit(Body.get_parent(), self)
+		if (!Patrol and !Convoy):
+			GarissonVisualContact(Body.get_parent())
+		else:
+			OnPlayerVisualContact.emit(Body.get_parent(), self)
 
 var GarrissonVisualContacts : Array[MapShip]
 var VisualContactCountdown = 10
 
 func GarissonVisualContact(Ship : MapShip) -> void:
 	if (GarrissonVisualContacts.size() == 0):
-		if (Patrol):
-			VisualContactCountdown = 5
-		else:
-			VisualContactCountdown = 10
+		#if (Patrol):
+			#VisualContactCountdown = 5
+		#else:
+		VisualContactCountdown = 10
 			
 	if (VisualContactCountdown < 0):
 		OnPlayerVisualContact.emit(Ship, self)
@@ -369,12 +386,14 @@ func GarissonLostVisualContact(Ship : MapShip) -> void:
 
 func BodyLeftRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		if (!Patrol):
+		if (!Patrol and !Convoy):
 			GarissonLostVisualContact(Body.get_parent())
 		else:
 			OnPlayerVisualLost.emit(Body.get_parent())
 
 func BodyEnteredBody(Body : Area2D) -> void:
+	if (Captured):
+		return
 	if (Body.get_parent() is MapSpot):
 		#if (Docked):
 			#return
@@ -396,6 +415,15 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			World.GetInstance().PlayerWallet.AddFunds(Wonfunds)
 			PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Wonfunds]))
 			call_deferred("DestroyEnemyDebry")
+		#TODO expand logic to allow for convoys with guards
+		else : if (Convoy):
+			var Ship = Body.get_parent()
+			var FleetCommander : MapShip
+			if (Ship.Command == null):
+				FleetCommander = Ship
+			else:
+				FleetCommander = Ship.Command
+			FleetCommander.GetDroneDock().AddCaptive(self)
 		else:
 			var plships : Array[Node2D] = []
 			var hostships : Array[Node2D] = []
@@ -485,6 +513,7 @@ func GetSaveData() -> SD_HostileShip:
 	dat.Cpt = Cpt
 	dat.Scene = scene_file_path
 	dat.Patrol = Patrol
+	dat.Convoy = Convoy
 	dat.ShipName = ShipName
 	dat.Destroyed = Destroyed
 	if (Command != null):
@@ -498,6 +527,7 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	PathPart = Dat.PathPart
 	Direction = Dat.Direction
 	Patrol = Dat.Patrol
+	Convoy = Dat.Convoy
 	#positioning happens on script wich respawns ship
 	#global_position = Dat.Position
 	Cpt = Dat.Cpt
@@ -521,6 +551,17 @@ func IsDamaged() -> bool:
 		if (g.IsDamaged()):
 			return true
 	return !Cpt.IsResourceFull(STAT_CONST.STATS.HULL)
+
+func Evaporate() -> void:
+	OnShipDestroyed.emit(self)
+	Destroyed = true
+	if (ElintShape != null):
+		ElintShape.queue_free()
+		
+	RadarShape.queue_free()
+	MapPointerManager.GetInstance().RemoveShip(self)
+	queue_free()
+	get_parent().remove_child(self)
 
 func Kill() -> void:
 	OnShipDestroyed.emit(self)

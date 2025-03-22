@@ -286,7 +286,8 @@ func Steer(Rotation : float) -> void:
 	shadow.rotation = rotation
 	for g in GetDroneDock().DockedDrones:
 		g.ForceSteer(rotation)
-		
+	for g in GetDroneDock().Captives:
+		g.ForceSteer(rotation)
 func ForceSteer(Rotation : float) -> void:
 	rotation = Rotation
 	var piv = $PlayerShipSpr/ShadowPivot as Node2D
@@ -561,6 +562,10 @@ func GetShipMaxSpeed() -> float:
 		var DroneSpd = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 		if (DroneSpd < Spd):
 			Spd = DroneSpd
+	for g in GetDroneDock().Captives:
+		var CaptiveSpd = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
+		if (CaptiveSpd < Spd):
+			Spd = CaptiveSpd
 	return Spd
 	
 func GetShipName() -> String:

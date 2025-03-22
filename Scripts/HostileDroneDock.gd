@@ -2,7 +2,7 @@ extends Node2D
 class_name HostileDroneDock
 
 var DockedDrones : Array[HostileShip]
-	
+var Captives : Array[HostileShip]
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
 	for g in DockedDrones:

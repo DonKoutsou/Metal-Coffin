@@ -4,6 +4,7 @@ class_name SpawnDecider
 
 @export var CaptainList : Array[CaptainSpawnInfo]
 @export var GroundUnits : Array[CaptainSpawnInfo]
+@export var ConvoyUnits : Array[CaptainSpawnInfo]
 
 @export var MerchList : Array[MerchandiseInfo]
 
@@ -11,13 +12,16 @@ const LowestPrice : int = 50
 const MerchLowest : int = 2
 var sorted_captain_list
 var sorted_ground_captain_list
+var sorted_convoy_captain_list
 
 func Init() -> void:
 	# Sort CaptainList by cost descending to prioritize more powerful ships
 	sorted_captain_list = CaptainList.duplicate()
 	sorted_ground_captain_list = GroundUnits.duplicate()
+	sorted_convoy_captain_list = ConvoyUnits.duplicate()
 	sorted_captain_list.sort_custom(SortByCostDescending)
 	sorted_ground_captain_list.sort_custom(SortByCostDescending)
+	sorted_convoy_captain_list.sort_custom(SortByCostDescending)
 	
 func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
@@ -40,13 +44,13 @@ func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 			points -= m.Cost
 	return available_merch
 
-func GetSpawnsForLocation(YPos : float, Patrol : bool, stage : Happening.GameStage) -> Array[Captain]:
+func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[Captain]:
 	#var time = Time.get_ticks_msec()
 	
 	var Fleet : Array[Captain] = []
 	var Points = GetPointsForPosition(abs(YPos))
 
-	var CptnInfo = generate_fleet(Points, Patrol, stage)
+	var CptnInfo = generate_fleet(Points, Patrol, Convoy, stage)
 	for g in CptnInfo:
 		var cpt = Captain.new()
 		cpt.call_deferred("CopyStats", g.Cpt)
@@ -61,11 +65,14 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool, stage : Happening.GameSta
 func GetPointsForPosition(YPos : float) -> int:
 	return roundi(max(50, YPos / 100))
 
-func generate_fleet(points: int, Patrol : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:
+func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:
 	var fleet : Array[CaptainSpawnInfo] = []
 	var available_ships: Array = sorted_captain_list.duplicate()
 	if (Patrol):
 		points *= 3
+	else : if (Convoy):
+		points = 50
+		available_ships = sorted_convoy_captain_list.duplicate()
 	else:
 		available_ships.append_array(sorted_ground_captain_list.duplicate())
 	# Randomly shuffle the available ships to introduce variability in selection.

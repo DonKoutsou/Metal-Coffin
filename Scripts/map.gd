@@ -367,15 +367,22 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 		var Spot = T.GetSpot()
 		#var time = Time.get_ticks_msec()
 		if (T.IsEnemy()):
-			SpawnSpotFleet(Spot, false, T.Pos)
+			SpawnSpotFleet(Spot, false, false, T.Pos)
 		if (Spot.GetPossibleDrops().size() == 3):
-			SpawnSpotFleet(Spot, true, T.Pos)
+			SpawnSpotFleet(Spot, true, false, T.Pos)
 		#print("Spawning fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
+	
+	#spawn convoy
+	for g in Towns.size() / 3:
+		var T = Towns[g * 3]
+		var Spot = T.GetSpot()
+		if (T.IsEnemy()):
+			SpawnSpotFleet(Spot, false, true, T.Pos)
 	call_deferred("EnemySpawnFinished")
 
 
-func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Pos : Vector2) -> void:
-	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, GetStageForYPos(Pos.y))
+func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
+	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy, GetStageForYPos(Pos.y))
 	var SpawnedFleet = []
 	var SpawnedCallsigns = []
 	for f in Fleet:
@@ -383,6 +390,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Pos : Vector2) -> void:
 		Ship.Cpt = f
 		Ship.CurrentPort = Spot
 		Ship.Patrol = Patrol
+		Ship.Convoy = Convoy
 		#if (TempEnemyNames.size() > 0):
 		Ship.ShipName = TempEnemyNames.pop_back()
 		SpawnedCallsigns.append(f.ShipCallsign)

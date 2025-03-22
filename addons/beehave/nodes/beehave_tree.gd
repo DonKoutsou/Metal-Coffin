@@ -28,7 +28,7 @@ signal tree_disabled
 
 ## How often the tree should tick, in frames. The default value of 1 means
 ## tick() runs every frame.
-@export var tick_rate: int = 1
+#@export var tick_rate: int = 1
 
 ## An optional node path this behavior tree should apply to.
 @export_node_path var actor_node_path: NodePath:
@@ -140,7 +140,7 @@ func _ready() -> void:
 		BeehaveDebuggerMessages.register_tree(_get_debugger_data(self))
 
 	# Randomize at what frames tick() will happen to avoid stutters
-	last_tick = randi_range(0, tick_rate - 1)
+	#last_tick = randi_range(0, tick_rate - 1)
 
 
 func _on_scene_tree_node_added_removed(node: Node, is_added: bool) -> void:
@@ -160,23 +160,23 @@ func _on_scene_tree_node_added_removed(node: Node, is_added: bool) -> void:
 			)
 
 
-func _physics_process(_delta: float) -> void:
-	_process_internally()
+#func _physics_process(_delta: float) -> void:
+	#_process_internally()
+#
+#
+#func _process(_delta: float) -> void:
+	#_process_internally()
 
 
-func _process(_delta: float) -> void:
-	_process_internally()
-
-
-func _process_internally() -> void:
+func Process_Tree() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	if last_tick < tick_rate - 1:
-		last_tick += 1
-		return
-
-	last_tick = 0
+	#if last_tick < tick_rate - 1:
+		#last_tick += 1
+		#return
+#
+	#last_tick = 0
 
 	# Start timing for metric
 	var start_time = Time.get_ticks_usec()
