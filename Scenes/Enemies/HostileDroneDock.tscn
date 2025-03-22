@@ -15,21 +15,3 @@ script = ExtResource("1_civqe")
 shape = SubResource("CircleShape2D_xe3xl")
 
 [node name="DroneSpots" type="Node2D" parent="."]
-
-[node name="DroneSpot1" type="Node2D" parent="DroneSpots"]
-position = Vector2(-30, -30)
-
-[node name="DroneSpot4" type="Node2D" parent="DroneSpots"]
-position = Vector2(-30, 30)
-
-[node name="DroneSpot2" type="Node2D" parent="DroneSpots"]
-position = Vector2(-60, -60)
-
-[node name="DroneSpot5" type="Node2D" parent="DroneSpots"]
-position = Vector2(-60, 60)
-
-[node name="DroneSpot3" type="Node2D" parent="DroneSpots"]
-position = Vector2(-90, -90)
-
-[node name="DroneSpot6" type="Node2D" parent="DroneSpots"]
-position = Vector2(-90, 90)

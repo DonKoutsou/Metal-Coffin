@@ -24,24 +24,6 @@ debug_color = Color(0.738844, 0.467419, 0, 0.42)
 
 [node name="DroneSpots" type="Node2D" parent="."]
 
-[node name="DroneSpot1" type="Node2D" parent="DroneSpots"]
-position = Vector2(-10, -10)
-
-[node name="DroneSpot4" type="Node2D" parent="DroneSpots"]
-position = Vector2(-10, 10)
-
-[node name="DroneSpot2" type="Node2D" parent="DroneSpots"]
-position = Vector2(-20, -20)
-
-[node name="DroneSpot5" type="Node2D" parent="DroneSpots"]
-position = Vector2(-20, 20)
-
-[node name="DroneSpot3" type="Node2D" parent="DroneSpots"]
-position = Vector2(-30, -30)
-
-[node name="DroneSpot6" type="Node2D" parent="DroneSpots"]
-position = Vector2(-30, 30)
-
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
 z_index = 2

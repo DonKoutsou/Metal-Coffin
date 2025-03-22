@@ -49,9 +49,6 @@ func GetDroneFuel() -> float:
 		fuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	return fuel
 
-func HasSpace() -> bool:
-	return DockedDrones.size() + FlyingDrones.size() < 6
-	
 func ClearAllDrones() -> void:
 	for g in DockedDrones:
 		DroneDisharged(g)
@@ -209,20 +206,30 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	DroneDockEventH.OnDroneDocked(drone, get_parent())
 	
 	var docks = $DroneSpots.get_children()
-	for g in docks.size():
-		if (docks[g].get_child_count() > 0):
-			continue
-		var dock = docks[g]
-		var trans = RemoteTransform2D.new()
-		trans.update_rotation = false
-		dock.add_child(trans)
-		trans.remote_path = drone.get_path()
-		drone.Docked = true
-		if ($"..".Landing or $"..".Landed()):
-			drone.LandingStarted.emit()
-			drone.Landing = true
-		return
 	
+	var pos : Vector2
+	var Offset = 10
+	for g in docks.size():
+		if (is_even(g)):
+			pos = Vector2(-Offset, -Offset)
+		else:
+			pos = Vector2(-Offset, Offset)
+			Offset += 10
+
+	var trans = RemoteTransform2D.new()
+	trans.update_rotation = false
+	$DroneSpots.add_child(trans)
+	trans.position = pos
+	trans.remote_path = drone.get_path()
+	drone.Docked = true
+	if ($"..".Landing or $"..".Landed()):
+		drone.LandingStarted.emit()
+		drone.Landing = true
+	return
+		
+func is_even(number: int) -> bool:
+	return number % 2 == 0
+		
 func DockCaptive(Captive : HostileShip) -> void:
 	Captives.append(Captive)
 	Captive.Command = get_parent()
@@ -250,13 +257,27 @@ func UndockDrone(drone : Drone, Keep : bool = true):
 		drone.Command = null
 	DroneDockEventH.OnDroneUnDocked(drone, get_parent())
 	var docks = $DroneSpots.get_children()
-	for g in docks.size():
-		if (docks[g].get_child_count() > 0):
-			var trans = docks[g].get_child(0) as RemoteTransform2D
-			if (trans.remote_path == drone.get_path()):
-				trans.free()
-				drone.Docked = false
-				return
+	for g in docks:
+		var trans = g as RemoteTransform2D
+		if (trans.remote_path == drone.get_path()):
+			trans.free()
+			drone.Docked = false
+			break
+	RepositionDocks()
+	
+func RepositionDocks() -> void:
+	
+	for DockSpot in $DroneSpots.get_children().size():
+		var pos : Vector2
+		var Offset = 10
+		for g in DockSpot:
+			if (is_even(g)):
+				pos = Vector2(-Offset, -Offset)
+			else:
+				pos = Vector2(-Offset, Offset)
+				Offset += 10
+		
+		$DroneSpots.get_child(DockSpot).position = pos
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	$Line2D.width =  2 / NewZoom

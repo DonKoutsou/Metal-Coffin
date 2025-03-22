@@ -41,6 +41,10 @@ func Load(world : World) ->bool:
 		return false
 	
 	var sav = load("user://SavedGame.tres") as SaveData
+	
+	if (sav == null):
+		return false
+	
 	var Mapz = world.GetMap() as Map
 	#var Inv = Mapz.GetInScreenUI().GetInventory() as InventoryManager
 	var DiagHolder = world.GetDialogueProgress()

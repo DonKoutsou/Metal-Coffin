@@ -25,23 +25,31 @@ func DockShip(Ship : HostileShip):
 	DockedDrones.append(Ship)
 	#Ship.DissableShip()
 	
+	Ship.Command = get_parent()
 	var docks = $DroneSpots.get_children()
+	
+	var pos : Vector2
+	var Offset = 10
 	for g in docks.size():
-		if (docks[g].get_child_count() > 0):
-			continue
-		var dock = docks[g]
-		var trans = RemoteTransform2D.new()
-		trans.update_rotation = false
-		dock.add_child(trans)
-		if (Ship.Spawned):
-			Ship.global_position = trans.global_position
-			trans.remote_path = Ship.get_path()
+		if (is_even(g)):
+			pos = Vector2(-Offset, -Offset)
 		else:
-			call_deferred("TrySetDockPath", trans, Ship)
-		#trans.remote_path = Ship.get_path()
-		Ship.ToggleDocked(true)
-		Ship.Command = get_parent()
-		return
+			pos = Vector2(-Offset, Offset)
+			Offset += 10
+
+	var trans = RemoteTransform2D.new()
+	trans.update_rotation = false
+	$DroneSpots.add_child(trans)
+	trans.position = pos
+	if (Ship.Spawned):
+		Ship.global_position = trans.global_position
+		trans.remote_path = Ship.get_path()
+	else:
+		call_deferred("TrySetDockPath", trans, Ship)
+	Ship.ToggleDocked(true)
+
+func is_even(number: int) -> bool:
+	return number % 2 == 0
 
 func TrySetDockPath(RemoteT : RemoteTransform2D, Ship : HostileShip):
 	await  Ship.ShipSpawned
@@ -53,14 +61,28 @@ func UndockShip(Ship : HostileShip):
 	Ship.ToggleDocked(false)
 	#Ship.Command = null
 	var docks = $DroneSpots.get_children()
-	for g in docks.size():
-		if (docks[g].get_child_count() > 0):
-			var trans = docks[g].get_child(0) as RemoteTransform2D
-			if (trans.remote_path == Ship.get_path()):
-				#trans.remote_path = "."
-				#trans.force_update_cache()
-				trans.free()
-				return
+	for g in docks:
+		var trans = g as RemoteTransform2D
+		if (trans.remote_path == Ship.get_path()):
+			#trans.remote_path = "."
+			#trans.force_update_cache()
+			trans.free()
+			return
+	RepositionDocks()
+	
+func RepositionDocks() -> void:
+	
+	for DockSpot in $DroneSpots.get_children().size():
+		var pos : Vector2
+		var Offset = 10
+		for g in DockSpot:
+			if (is_even(g)):
+				pos = Vector2(-Offset, -Offset)
+			else:
+				pos = Vector2(-Offset, Offset)
+				Offset += 10
+		
+		$DroneSpots.get_child(DockSpot).position = pos
 
 func DronesHaveFuel(f : float) -> bool:
 	var fuelneeded = f
