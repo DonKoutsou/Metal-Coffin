@@ -187,7 +187,11 @@ func _physics_process(delta: float) -> void:
 				else :
 					###Marker.ToggleThreat(false)
 					Marker.ToggleTimeLastSeend(true)
-					Marker.UpdateTime()
+					var timepast = Clock.GetInstance().GetHoursSince(Marker.TimeLastSeen)
+					if (timepast > 24):
+						call_deferred("RemoveShip", ship)
+					else:
+						Marker.UpdateTime(timepast)
 		else:
 			if (ship is MapShip):
 				var docked = ship.Docked
@@ -211,9 +215,9 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
 				Marker.UpdateTrajectory(ship.global_rotation)
 				if (ship.RadarWorking):
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 80), 0)]))
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 105), 0)]))
 				else:
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(80, 0)]))
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(105, 0)]))
 				if (ship.Landing or ship.TakingOff):
 					Marker.UpdateAltitude(ship.Altitude)
 

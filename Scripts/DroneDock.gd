@@ -122,15 +122,22 @@ func AddCaptive(Captive : HostileShip) -> void:
 		
 	Captive.connect("OnShipDestroyed", DroneDisharged)
 	
+	call_deferred("DoCaptiveThing", Captive)
+	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
+	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
+	
+func GetDockedShips() -> Array[MapShip]:
+	var Ships : Array[MapShip]
+	Ships.append_array(DockedDrones)
+	Ships.append_array(Captives)
+	return Ships
+
+func DoCaptiveThing(Captive : HostileShip) -> void:
 	var CaptiveParent = Captive.get_parent()
 	CaptiveParent.remove_child(Captive)
 	Captive.Captured = true
 	CaptiveParent.add_child(Captive)
-	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
-	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
 	DockCaptive(Captive)
-	
-	
 
 func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#var drone = DroneScene.instantiate()
@@ -209,7 +216,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	
 	var pos : Vector2
 	var Offset = 10
-	for g in docks.size():
+	for g in docks.size() + 1:
 		if (is_even(g)):
 			pos = Vector2(-Offset, -Offset)
 		else:
@@ -233,20 +240,25 @@ func is_even(number: int) -> bool:
 func DockCaptive(Captive : HostileShip) -> void:
 	Captives.append(Captive)
 	Captive.Command = get_parent()
+	
 	var docks = $DroneSpots.get_children()
-	for g in docks.size():
-		if (docks[g].get_child_count() > 0):
-			continue
-		var dock = docks[g]
-		var trans = RemoteTransform2D.new()
-		trans.update_rotation = false
-		dock.add_child(trans)
-		trans.remote_path = Captive.get_path()
-		Captive.Docked = true
-		if ($"..".Landing or $"..".Landed()):
-			Captive.LandingStarted.emit()
-			Captive.Landing = true
-		return
+	
+	var pos : Vector2
+	var Offset = 10
+	for g in docks.size() + 1:
+		if (is_even(g)):
+			pos = Vector2(-Offset, -Offset)
+		else:
+			pos = Vector2(-Offset, Offset)
+			Offset += 10
+
+	var trans = RemoteTransform2D.new()
+	trans.update_rotation = false
+	$DroneSpots.add_child(trans)
+	trans.position = pos
+	trans.remote_path = Captive.get_path()
+	Captive.Docked = true
+
 
 func UndockDrone(drone : Drone, Keep : bool = true):
 	DockedDrones.erase(drone)

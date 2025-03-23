@@ -168,8 +168,13 @@ func _physics_process(delta: float) -> void:
 var VisitingShips : Array[MapShip] = []
 
 func OnSpotAproached(AproachedBy : MapShip) -> void:
-	SpotAproached.emit(self)
 	VisitingShips.append(AproachedBy)
+	
+	if (AproachedBy is HostileShip):
+		return
+		
+	SpotAproached.emit(self)
+	
 	if (!Seen):
 		OnSpotSeen()
 	

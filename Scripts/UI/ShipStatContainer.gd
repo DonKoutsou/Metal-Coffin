@@ -29,5 +29,7 @@ func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> v
 	$ProgressBar/ItemNegBar.value = StatVal + ItemVar - ItemPenalty
 	#$ProgressBar/ShipBar.value = StatVal + ItemVar + ShipVar
 	var Max = var_to_str($ProgressBar.max_value).replace(".0", "")
-	$HBoxContainer/Label2.text = "|{0} / {1}|".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Max])
-	
+	if (!STAT_CONST.ShouldStatStack(STName)):
+		$HBoxContainer/Label2.text = "|{0} / {1}|".format([var_to_str(max(StatVal, ItemVar) - ItemPenalty).replace(".0", ""), Max])
+	else:
+		$HBoxContainer/Label2.text = "|{0} / {1}|".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Max])

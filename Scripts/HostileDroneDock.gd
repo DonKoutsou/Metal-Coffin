@@ -56,6 +56,12 @@ func TrySetDockPath(RemoteT : RemoteTransform2D, Ship : HostileShip):
 	Ship.global_position = RemoteT.global_position
 	RemoteT.remote_path = Ship.get_path()
 
+func GetDockedShips() -> Array[MapShip]:
+	var Ships : Array[MapShip]
+	Ships.append_array(DockedDrones)
+	Ships.append_array(Captives)
+	return Ships
+
 func UndockShip(Ship : HostileShip):
 	DockedDrones.erase(Ship)
 	Ship.ToggleDocked(false)

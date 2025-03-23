@@ -143,7 +143,7 @@ func DrawRuller() -> void:
 	var LineW = 1/CamZoom
 	var vizrange = ControlledShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	if(!ControlledShip.RadarWorking):
-		vizrange = 80
+		vizrange = 105
 	
 	
 	for g in 3:

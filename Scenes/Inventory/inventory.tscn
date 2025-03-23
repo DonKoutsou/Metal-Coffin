@@ -80,6 +80,7 @@ corner_radius_bottom_left = 6
 corner_detail = 1
 
 [node name="Inventory" type="Control" node_paths=PackedStringArray("CharStatPanel", "CharacterPlace", "DescriptorPlace", "ShipStats", "InvScrol")]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

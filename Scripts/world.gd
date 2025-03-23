@@ -186,9 +186,9 @@ func ShipSeparationFinished() -> void:
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
 	
 #Dogfight-----------------------------------------------
-var FighingFriendlyUnits : Array[Node2D] = []
-var FighingEnemyUnits : Array[Node2D] = []
-func StartDogFight(Friendlies : Array[Node2D], Enemies : Array[Node2D]):
+var FighingFriendlyUnits : Array[MapShip] = []
+var FighingEnemyUnits : Array[MapShip] = []
+func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:

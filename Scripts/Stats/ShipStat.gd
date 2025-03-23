@@ -31,6 +31,8 @@ func AddShipPartPenalty(Amm : float) -> void:
 	StatShipPartPenalty += Amm
 	
 func GetFinalValue()-> float:
+	if (!STAT_CONST.ShouldStatStack(StatName)):
+		return max(StatBase, STAT_CONST.GetStatItemBuff(StatName, StatShipPartBuff)) - StatShipPartPenalty
 	return StatBase + STAT_CONST.GetStatItemBuff(StatName, StatShipPartBuff) - StatShipPartPenalty
 	
 func GetCurrentValue()-> float:

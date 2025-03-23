@@ -26,7 +26,7 @@ class_name Map
 @export var EnSpawner : SpawnDecider
 @export var EnemyShipNames : Array[String]
 
-signal MAP_EnemyArrival(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D])
+signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
 #Signal called when all cities have their neighbors configured
 signal MAP_NeighborsSet
 signal GenerationFinished
@@ -71,7 +71,7 @@ func _InitialPlayerPlacament():
 	PlShip.ShipLookAt(firstvilage.global_position)
 
 #Called when enemy ship touches friendly one to strart a fight
-func EnemyMet(FriendlyShips : Array[Node2D] , EnemyShips : Array[Node2D]):
+func EnemyMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip]):
 	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
 
 func ScreenControls(t : bool) -> void:
@@ -90,11 +90,57 @@ func GetCamera() -> ShipCamera:
 	return _Camera
 
 #CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
-func Arrival(_Spot : MapSpot) -> void:
-	if (ShowingTutorial):
-		SimulationManager.GetInstance().TogglePause(true)
-		var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
-		Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), "Seg", LandTutorialShown, false)
+func Arrival(Spot : MapSpot) -> void:
+	var PlayerShips : Array[MapShip]
+	var HostileShips : Array[MapShip]
+	
+	#TODO find better way for this
+	for Ship in Spot.VisitingShips:
+		if (Ship is PlayerShip and !PlayerShips.has(Ship)):
+			PlayerShips.append(Ship)
+			if (Ship.Command == null):
+				for Docked in Ship.GetDroneDock().GetDockedShips():
+					if (Docked is PlayerShip and !PlayerShips.has(Docked)):
+						PlayerShips.append(Docked)
+					else: if (Docked is HostileShip and !HostileShips.has(Docked)):
+						HostileShips.append(Docked)
+		else : if (Ship is HostileShip and  !HostileShips.has(Ship)):
+				HostileShips.append(Ship)
+				if (Ship.Command == null):
+					for Docked in Ship.GetDroneDock().GetDockedShips():
+						if (!HostileShips.has(Docked)):
+							HostileShips.append(Docked)
+	
+	if (PlayerShips.size() > 0 and HostileShips.size() > 0):
+		for g in HostileShips:
+			if (g.Convoy == false):
+				EnemyMet(PlayerShips, HostileShips)
+	#var plships : Array[Node2D] = []
+	#var hostships : Array[Node2D] = []
+	#if (Docked):
+		#hostships.append(Command)
+		#hostships.append_array(Command.GetDroneDock().DockedDrones)
+	#else:
+		#hostships.append(self)
+		#hostships.append_array(GetDroneDock().DockedDrones)
+		#
+	#if (Body.get_parent() is PlayerShip):
+		#var player = Body.get_parent() as PlayerShip
+		#plships.append(player)
+		#plships.append_array(player.GetDroneDock().DockedDrones)
+	#else:
+		#var drn = Body.get_parent() as Drone
+		#if (drn.Docked):
+			#var player = drn.Command
+			#plships.append(player)
+			#plships.append_array(player.GetDroneDock().DockedDrones)
+		#else:
+			#plships.append(drn)
+			#plships.append_array(drn.GetDroneDock().DockedDrones)
+	#if (ShowingTutorial):
+		#SimulationManager.GetInstance().TogglePause(true)
+		#var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
+		#Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), "Seg", LandTutorialShown, false)
 	
 func LandTutorialShown():
 	SimulationManager.GetInstance().TogglePause(false)

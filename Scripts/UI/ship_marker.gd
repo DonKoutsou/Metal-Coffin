@@ -164,8 +164,8 @@ func ToggleTimeLastSeend(T : bool):
 		TimeLastSeen = Clock.GetInstance().GetTimeInHours()
 	TimeSeenLabel.visible = T
 
-func UpdateTime():
-	var timepast = Clock.GetInstance().GetHoursSince(TimeLastSeen)
+func UpdateTime(timepast : float):
+	
 	TimeSeenLabel.text = "Last Seen " + var_to_str(snappedf((timepast) , 0.01)) + "h ago"
 
 func EnteredScreen() -> void:

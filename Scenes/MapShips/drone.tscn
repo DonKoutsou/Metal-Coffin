@@ -109,6 +109,7 @@ script = ExtResource("9_f4h60")
 MissileDockEventH = ExtResource("10_ilnq0")
 
 [node name="MissileLine" type="Line2D" parent="MissileDock"]
+visible = false
 z_index = 2
 material = SubResource("CanvasItemMaterial_c58ob")
 points = PackedVector2Array(0, 0, 10, 0)

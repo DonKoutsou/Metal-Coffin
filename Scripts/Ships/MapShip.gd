@@ -52,17 +52,16 @@ var ElintContacts : Dictionary
 
 var Detectable = true
 
-func _enter_tree() -> void:
+
+func _ready() -> void:
 	ElintShape.connect("area_entered", BodyEnteredElint)
 	ElintShape.connect("area_exited", BodyLeftElint)
 	RadarShape.connect("area_entered", BodyEnteredRadar)
 	RadarShape.connect("area_exited", BodyLeftRadar)
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
-	
 	Cpt.connect("ShipPartChanged", PartChanged)
-
-func _ready() -> void:
+	
 	MapPointerManager.GetInstance().AddShip(self, true)
 	#SimulationSpeed = SimulationManager.SimSpeed()
 	#TODO probably a better way to do this
@@ -136,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	if (CommingBack):
 		updatedronecourse()
 	
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDroneDock().GetDockedShips():
 		var Cap = g.Cpt as Captain
 		var dronefuel = ($Aceleration.position.x / Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * SimulationSpeed
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > dronefuel):
@@ -199,7 +198,7 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	Cpt.CurrentPort = Port.GetSpotName()
-	var dr = GetDroneDock().DockedDrones
+	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
 		g.SetCurrentPort(Port)
 	PortChanged.emit(Port)
@@ -218,7 +217,7 @@ func RemovePort():
 	if (Altitude != 10000 and !TakingOff):
 		TakeoffStarted.emit()
 		TakingOff = true
-	var dr = GetDroneDock().DockedDrones
+	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
 		g.RemovePort()
 	PortChanged.emit(null)
@@ -284,10 +283,9 @@ func Steer(Rotation : float) -> void:
 	piv.global_rotation = deg_to_rad(-90)
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDroneDock().GetDockedShips():
 		g.ForceSteer(rotation)
-	for g in GetDroneDock().Captives:
-		g.ForceSteer(rotation)
+
 func ForceSteer(Rotation : float) -> void:
 	rotation = Rotation
 	var piv = $PlayerShipSpr/ShadowPivot as Node2D
@@ -303,7 +301,7 @@ func ShipLookAt(pos : Vector2) -> void:
 	piv.global_rotation = deg_to_rad(-90)
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDroneDock().GetDockedShips():
 		g.global_rotation = global_rotation
 	
 #///////////////////////////////////////////////////
@@ -351,7 +349,7 @@ func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
 	$PlayerShipSpr.scale = Vector2(lerp(0.03, 0.1, Altitude / 10000.0), lerp(0.03, 0.1, Altitude / 10000.0))
 	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -20, Altitude / 10000.0), lerp(0, -20, Altitude / 10000.0))
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDroneDock().GetDockedShips():
 		g.UpdateAltitude(NewAlt)
 	
 func UpdateELINTTRange(rang : float):
@@ -407,7 +405,7 @@ func UpdateElint(delta: float) -> void:
 func UpdateVizRange(rang : float):
 	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 80)
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 105)
 
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 
@@ -452,7 +450,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 	if (Parent is MapSpot):
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
-		for g in GetDroneDock().DockedDrones:
+		for g in GetDroneDock().GetDockedShips():
 			g.SetCurrentPort(Parent)
 			Parent.OnSpotAproached(g)
 	
@@ -463,7 +461,7 @@ func BodyLeftBody(Body : Area2D) -> void:
 	if (Parent is MapSpot):
 		RemovePort()
 		Parent.OnSpotDeparture(self)
-		for g in GetDroneDock().DockedDrones:
+		for g in GetDroneDock().GetDockedShips():
 			g.RemovePort()
 			Parent.OnSpotDeparture(g)
 
@@ -488,15 +486,16 @@ func GetShipIcon() -> Node2D:
 
 func GetFuelStats() -> Dictionary[String, float]:
 	var Stats : Dictionary[String, float]
-
+	
+	var Fleet = GetDroneDock().GetDockedShips()
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
-	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
+	var fleetsize = 1 + Fleet.size()
 	var total_fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var total_maxfuel = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 	var inverse_ef_sum = 1.0 / fuel_ef
 	
 	# Group ships fuel and efficiency calculations
-	for g in GetDroneDock().DockedDrones:
+	for g in Fleet:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_maxfuel = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
@@ -523,14 +522,16 @@ func GetFleet() -> Array[MapShip]:
 	return Fleet
 
 func GetFuelRange() -> float:
+	var Fleet = GetDroneDock().GetDockedShips()
+	
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
-	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
+	var fleetsize = 1 + Fleet.size()
 	var total_fuel = fuel
 	var inverse_ef_sum = 1.0 / fuel_ef
 	
 	# Group ships fuel and efficiency calculations
-	for g in GetDroneDock().DockedDrones:
+	for g in Fleet:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		total_fuel += ship_fuel
@@ -558,14 +559,12 @@ func GetShipMaxSpeed() -> float:
 	var Spd = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
 	if (Docked):
 		Spd = Command.GetShipMaxSpeed()
-	for g in GetDroneDock().DockedDrones:
-		var DroneSpd = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
-		if (DroneSpd < Spd):
-			Spd = DroneSpd
-	for g in GetDroneDock().Captives:
-		var CaptiveSpd = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
-		if (CaptiveSpd < Spd):
-			Spd = CaptiveSpd
+	else:
+		for g in GetDroneDock().GetDockedShips():
+			var DroneSpd = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
+			if (DroneSpd < Spd):
+				Spd = DroneSpd
+
 	return Spd
 	
 func GetShipName() -> String:

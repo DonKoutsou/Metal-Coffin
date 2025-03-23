@@ -290,7 +290,7 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 #██   ██ ███████ ██   ██ ██   ██ ██      ██ 
 
 func CheckAlarm() -> void:
-	if (PursuitOrders.size() > 0 or InvestigationOrders.size() > 0):
+	if (PursuitOrders.size() > 0 or InvestigationOrders.size() > 0 or EnemyPositionsToInvestigate.size() > 0 or KnownEnemies.size() > 0):
 		if (!Alarmed):
 			OnAlarmRaised()
 	else:

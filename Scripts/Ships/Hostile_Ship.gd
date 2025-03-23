@@ -40,7 +40,7 @@ var PosToSpawn : Vector2
 var LoadingSave : bool = false
 var Spawned : bool = false
 
-signal OnPlayerShipMet(PlayerSquad : Array[Node2D] , EnemySquad : Array[Node2D])
+signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip])
 signal OnDestinationReached(Ship : HostileShip)
 signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
 signal OnPlayerVisualLost(Ship : MapShip)
@@ -50,6 +50,14 @@ signal ShipSpawned
 signal ShipWrecked
 
 func  _ready() -> void:
+	ElintShape.connect("area_entered", BodyEnteredElint)
+	ElintShape.connect("area_exited", BodyLeftElint)
+	RadarShape.connect("area_entered", BodyEnteredRadar)
+	RadarShape.connect("area_exited", BodyLeftRadar)
+	BodyShape.connect("area_entered", BodyEnteredBody)
+	BodyShape.connect("area_exited", BodyLeftBody)
+	Cpt.connect("ShipPartChanged", PartChanged)
+	
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 
@@ -395,20 +403,22 @@ func BodyEnteredBody(Body : Area2D) -> void:
 	if (Captured):
 		return
 	if (Body.get_parent() is MapSpot):
-		#if (Docked):
-			#return
+		if (Docked):
+			return
 		var spot = Body.get_parent() as MapSpot
-		if (Path.has(spot.GetSpotName())):
-			
+		SetCurrentPort(spot)
+		spot.OnSpotAproached(self)
+		for g in GetDroneDock().GetDockedShips():
 			SetCurrentPort(spot)
+			spot.OnSpotAproached(g)
+		if (Path.has(spot.GetSpotName())):
+
 			PathPart = Path.find(spot.GetSpotName())
 			if (PathPart == Path.size() - 1):
 				OnDestinationReached.emit(self)
 			else :
 				PathPart += 1
-				
-		if (spot == RefuelSpot):
-			SetCurrentPort(RefuelSpot)
+
 	else :if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
 		if (Destroyed):
 			var Wonfunds = Cpt.ProvidingFunds
@@ -425,29 +435,32 @@ func BodyEnteredBody(Body : Area2D) -> void:
 				FleetCommander = Ship.Command
 			FleetCommander.GetDroneDock().AddCaptive(self)
 		else:
-			var plships : Array[Node2D] = []
-			var hostships : Array[Node2D] = []
+			var plships : Array[MapShip] = []
+			var hostships : Array[MapShip] = []
 			if (Docked):
 				hostships.append(Command)
 				hostships.append_array(Command.GetDroneDock().DockedDrones)
 			else:
 				hostships.append(self)
 				hostships.append_array(GetDroneDock().DockedDrones)
-				
-			if (Body.get_parent() is PlayerShip):
-				var player = Body.get_parent() as PlayerShip
-				plships.append(player)
-				plships.append_array(player.GetDroneDock().DockedDrones)
+			
+			var Ship : MapShip = Body.get_parent()
+			if (Ship.Command == null):
+				plships.append(Ship)
+				for g in Ship.GetDroneDock().GetDockedShips():
+					if (g is HostileShip):
+						hostships.append(g)
+					else:
+						plships.append(g)
 			else:
-				var drn = Body.get_parent() as Drone
-				if (drn.Docked):
-					var player = drn.Command
-					plships.append(player)
-					plships.append_array(player.GetDroneDock().DockedDrones)
-				else:
-					plships.append(drn)
-					plships.append_array(drn.GetDroneDock().DockedDrones)
-					
+				var Command = Ship.Command
+				plships.append(Command)
+				for g in Command.GetDroneDock().GetDockedShips():
+					if (g is HostileShip):
+						hostships.append(g)
+					else:
+						plships.append(g)
+						
 			OnPlayerShipMet.emit(plships, hostships)
 	else : if (Body.get_parent() == Command and CommingBack):
 		var Ship = Body.get_parent() as HostileShip
@@ -463,9 +476,13 @@ func BodyEnteredBody(Body : Area2D) -> void:
 func BodyLeftBody(Body : Area2D) -> void:
 	if (Body.get_parent() == CurrentPort):
 		if (!Docked):
+			CurrentPort.OnSpotDeparture(self)
+			for g in GetDroneDock().GetDockedShips():
+				CurrentPort.OnSpotDeparture(g)
 			RemovePort()
-	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
-		OnShipUnseen(Body.get_parent())
+			
+	#if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+		#OnShipUnseen(Body.get_parent())
 
 #//////////////////////////////////////////////////////
  #██████  ███████ ████████ ████████ ███████ ██████  ███████ 
