@@ -8,7 +8,7 @@ class_name DroneDock
 
 var DockedDrones : Array[Drone]
 var Captives : Array[HostileShip]
-var FlyingDrones : Array[Drone]
+#var FlyingDrones : Array[Drone]
 
 func _ready() -> void:
 	$Line2D.visible = false
@@ -53,35 +53,24 @@ func ClearAllDrones() -> void:
 	for g in DockedDrones:
 		DroneDisharged(g)
 		g.Kill()
-	for g in FlyingDrones:
-		DroneDisharged(g)
-		g.Kill()
+	#for g in FlyingDrones:
+		#DroneDisharged(g)
+		#g.Kill()
 		
 func GetSaveData() -> Array[DroneSaveData]:
 	var saved : Array[DroneSaveData]
 	for g in DockedDrones:
 		saved.append(g.GetSaveData())
-	for g in FlyingDrones:
-		saved.append(g.GetSaveData())
+	#for g in FlyingDrones:
+		#saved.append(g.GetSaveData())
 	return saved
-	
-func LoadSaveData( Dat : Array[DroneSaveData]) -> void:
-	for g in Dat:
-		var dr = AddCaptain(g.Cpt, false)
-		if (!g.Docked):
-			UndockDrone(dr)
-			dr.EnableDrone()
-			dr.global_position = g.Pos
-			dr.global_rotation = g.Rot
-			dr.CommingBack = g.CommingBack
-		dr.GetDroneDock().LoadSaveData(g.DockedDrones)
 	
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
 	for g in DockedDrones:
 		cptns.append(g.Cpt)
-	for g in FlyingDrones:
-		cptns.append(g.Cpt)
+	#for g in FlyingDrones:
+		#cptns.append(g.Cpt)
 	return cptns
 	
 func DroneDisharged(Dr : Drone):
@@ -89,15 +78,8 @@ func DroneDisharged(Dr : Drone):
 		return
 	if (DockedDrones.has(Dr)):
 		DockedDrones.erase(Dr)
-	if (FlyingDrones.has(Dr)):
-		FlyingDrones.erase(Dr)
-
-
-func AddCaptain(Cpt : Captain, Notify : bool = true) -> Drone:
-	var ship = (load("res://Scenes/MapShips/drone.tscn") as PackedScene).instantiate() as Drone
-	ship.Cpt = Cpt
-	AddDrone(ship, Notify)
-	return ship
+	#if (FlyingDrones.has(Dr)):
+		#FlyingDrones.erase(Dr)
 
 func AddRecruit(Cpt : Captain, Notify : bool = true) -> void:
 	
@@ -138,6 +120,7 @@ func DoCaptiveThing(Captive : HostileShip) -> void:
 	Captive.Captured = true
 	CaptiveParent.add_child(Captive)
 	DockCaptive(Captive)
+	Commander.GetInstance().UnregisterSelf(Captive)
 
 func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#var drone = DroneScene.instantiate()
@@ -205,7 +188,7 @@ func AddDroneToHierarchy(drone : Drone):
 func DockDrone(drone : Drone, playsound : bool = false):
 	if (playsound):
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
-	FlyingDrones.erase(drone)
+	#FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
 	drone.DissableDrone()
 
@@ -229,6 +212,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	trans.position = pos
 	trans.remote_path = drone.get_path()
 	drone.Docked = true
+	drone.ToggleFuelRangeVisibility(false)
 	if ($"..".Landing or $"..".Landed()):
 		drone.LandingStarted.emit()
 		drone.Landing = true
@@ -260,13 +244,11 @@ func DockCaptive(Captive : HostileShip) -> void:
 	Captive.Docked = true
 
 
-func UndockDrone(drone : Drone, Keep : bool = true):
+func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)
+
+	drone.Command = null
 	
-	if (Keep):
-		FlyingDrones.append(drone)
-	else:
-		drone.Command = null
 	DroneDockEventH.OnDroneUnDocked(drone, get_parent())
 	var docks = $DroneSpots.get_children()
 	for g in docks:

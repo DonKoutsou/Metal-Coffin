@@ -467,10 +467,10 @@ func BodyEnteredBody(Body : Area2D) -> void:
 		Ship.GetDroneDock().DockDrone(self, true)
 		var MyDroneDock = GetDroneDock()
 		for g in MyDroneDock.DockedDrones:
-			MyDroneDock.UndockDrone(g, false)
+			MyDroneDock.UndockDrone(g)
 			Ship.GetDroneDock().DockDrone(g, false)
-		for g in MyDroneDock.FlyingDrones:
-			g.Command = Ship
+		#for g in MyDroneDock.FlyingDrones:
+			#g.Command = Ship
 		CommingBack = false
 	
 func BodyLeftBody(Body : Area2D) -> void:
@@ -588,7 +588,9 @@ func Kill() -> void:
 		
 	RadarShape.queue_free()
 	ShipWrecked.emit()
-
+	if (CurrentPort != null):
+		CurrentPort.OnSpotDeparture(self)
+	
 func DestroyEnemyDebry() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 	queue_free()

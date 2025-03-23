@@ -13,22 +13,24 @@ static func GetInstance() -> SaveLoadManager:
 func Save() -> void:
 	var world = World.GetInstance()
 	var Mapz = world.GetMap() as Map
-	var Inv = Mapz.GetInScreenUI().GetInventory() as InventoryManager
+	var Inv = InventoryManager.GetInstance()
+	var Controller = world.Controller
 	var DataArray : Array[Resource] = []
 	DataArray.append(world.GetSaveData())
 	DataArray.append(Mapz.GetSaveData())
 	DataArray.append(Mapz.GetMapMarkerEditorSaveData())
-	DataArray.append(Mapz.GetEnemySaveData())
+	
 	DataArray.append(Mapz.GetMissileSaveData())
 	DataArray.append(Inv.GetSaveData())
+	
 	#DataArray.append(world.ShipDat.GetSaveData())
 	#DataArray.append(world.GetShipSaveData())
+	DataArray.append(world.GetCommander().GetEnemySaveData())
 	DataArray.append(world.GetCommander().GetSaveData())
-	var pldata = PlayerSaveData.new()
-	var Ships = get_tree().get_nodes_in_group("Ships")
-	pldata.DroneDat = Ships[0].GetDroneDock().GetSaveData()
-	DataArray.append(pldata)
-	pldata.Pos = Ships[0].global_position
+	
+	DataArray.append(Controller.GetSaveData())
+	
+	
 	DataArray.append(DialogueProgressHolder.GetInstance().ToldDialogues)
 	var sav = SaveData.new()
 	sav.DataName = "Save"
@@ -63,15 +65,15 @@ func Load(world : World) ->bool:
 	var InvestigationPositions = sav.GetData("PositionsToInvestigate") as SaveData
 	world.Loading = true
 	#call_deferred("LoadStats", world, StatData)
-	call_deferred("LoadMapDat", world, WalletData, sav.GetData("PLData").Pos ,sav.GetData("PLData").DroneDat, enems, misses, MarkerEditorData, InvestigationPositions, InvData)
+	call_deferred("LoadMapDat", world, WalletData, sav.GetData("PLData"), enems, misses, MarkerEditorData, InvestigationPositions, InvData)
 	return true
 
-func LoadMapDat(W : World, PlayerWallet : Wallet, PlPos : Vector2, DroneDat : Array[DroneSaveData], Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
+func LoadMapDat(W : World, PlayerWallet : Wallet, PlayerData : PlayerSaveData, Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
 	await W.WRLD_WorldReady
 	var Mp = W.GetMap()
 	var Ships = get_tree().get_nodes_in_group("Ships")
-	Ships[0].GetDroneDock().LoadSaveData(DroneDat)
-	Ships[0].global_position = PlPos
+	var Controller = W.Controller
+	Controller.LoadSaveData(PlayerData)
 	W.LoadSaveData(PlayerWallet)
 	Mp.RespawnEnemies( Enems )
 	Mp.RespawnMissiles( Missiles )

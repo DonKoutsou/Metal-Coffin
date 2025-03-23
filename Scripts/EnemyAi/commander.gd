@@ -41,14 +41,20 @@ static func GetInstance() -> Commander:
 
 func RegisterSelf(Ship : HostileShip) -> void:
 	Fleet.append(Ship)
-	ConnectSignals(Ship)
-
-func ConnectSignals(Ship : HostileShip) -> void:
 	Ship.connect("OnShipDestroyed", OnShipDestroyed)
 	Ship.connect("OnDestinationReached", OnDestinationReached)
 	Ship.connect("OnPlayerVisualContact", OnEnemySeen)
 	Ship.connect("OnPlayerVisualLost", OnEnemyVisualLost)
 	Ship.connect("ElintContact", OnElintHit)
+
+func UnregisterSelf(Ship : HostileShip) -> void:
+	Fleet.erase(Ship)
+	Ship.disconnect("OnShipDestroyed", OnShipDestroyed)
+	Ship.disconnect("OnDestinationReached", OnDestinationReached)
+	Ship.disconnect("OnPlayerVisualContact", OnEnemySeen)
+	Ship.disconnect("OnPlayerVisualLost", OnEnemyVisualLost)
+	Ship.disconnect("ElintContact", OnElintHit)
+
 
 func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t
@@ -169,7 +175,7 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 
 func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
-	#DissconnectSignals(Ship)
+
 	if (Ship.GetDroneDock().DockedDrones.size() > 0):
 		var NewCommander = Ship.GetDroneDock().DockedDrones[0] as HostileShip
 		NewCommander.Command = null
@@ -465,7 +471,17 @@ func GetSaveData() -> SaveData:
 	SavedData.Pos = Poses
 	Save.Datas.append(SavedData)
 	return Save
-	
+
+func GetEnemySaveData() ->SaveData:
+	var dat = SaveData.new()
+	dat.DataName = "Enemies"
+	var Datas : Array[Resource] = []
+	for g in Fleet:
+		var enem = g as HostileShip
+		Datas.append(enem.GetSaveData())
+	dat.Datas = Datas
+	return dat
+
 func LoadSaveData(Save : SaveData) -> void:
 	var ships = get_tree().get_nodes_in_group("Ships")
 	var Pos = (Save.Datas[0] as SD_PositionsToInvestigate).Pos

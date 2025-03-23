@@ -493,15 +493,7 @@ func FindEnemyByName(Name : String) -> HostileShip:
 	return null
 
 
-func GetEnemySaveData() ->SaveData:
-	var dat = SaveData.new()
-	dat.DataName = "Enemies"
-	var Datas : Array[Resource] = []
-	for g in get_tree().get_nodes_in_group("Enemy"):
-		var enem = g as HostileShip
-		Datas.append(enem.GetSaveData())
-	dat.Datas = Datas
-	return dat
+
 
 
 func RespawnMissiles(MissileData : Array[Resource]) -> void:

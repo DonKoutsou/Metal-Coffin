@@ -77,10 +77,10 @@ func BodyEnteredBody(Body: Area2D) -> void:
 		plship.GetDroneDock().DockDrone(self, true)
 		var MyDroneDock = GetDroneDock()
 		for g in MyDroneDock.DockedDrones:
-			MyDroneDock.UndockDrone(g, false)
+			MyDroneDock.UndockDrone(g)
 			plship.GetDroneDock().DockDrone(g, false)
-		for g in MyDroneDock.FlyingDrones:
-			g.Command = plship
+		#for g in MyDroneDock.FlyingDrones:
+			#g.Command = plship
 		CommingBack = false
 func BodyEnteredElint(Body: Area2D) -> void:
 	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
@@ -100,6 +100,8 @@ func GetSaveData() -> DroneSaveData:
 	dat.Rot = global_rotation
 	for g in GetDroneDock().DockedDrones:
 		dat.DockedDrones.append(g.GetSaveData())
-	for g in GetDroneDock().FlyingDrones:
-		dat.DockedDrones.append(g.GetSaveData())
+	
+	#TODO to fix flying drones not saved
+	#for g in GetDroneDock().FlyingDrones:
+		#dat.DockedDrones.append(g.GetSaveData())
 	return dat

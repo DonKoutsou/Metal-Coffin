@@ -8,6 +8,7 @@ class_name ShipContoller
 @export var UIEventH : UIEventHandler
 @onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
 @export var CaptainSelectScreen : PackedScene
+@export var DroneScene : PackedScene
 
 var AvailableShips : Array[MapShip] = []
 
@@ -56,7 +57,7 @@ func OnDroneDocked(D : Drone, Target : MapShip) -> void:
 		AvailableShips.append(D)
 		if (!D.is_connected("OnShipDestroyed", OnShipDestroyed)):
 			D.connect("OnShipDestroyed", OnShipDestroyed)
-	D.ToggleFuelRangeVisibility(false)
+	
 	if (D == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
 	
@@ -113,18 +114,18 @@ func OnShipDestroyed(Sh : MapShip):
 	if (Sh.GetDroneDock().DockedDrones.size() > 0):
 		NewCommander = Sh.GetDroneDock().DockedDrones[0]
 		NewCommander.Command = null
-	else : if (Sh.GetDroneDock().FlyingDrones.size() > 0):
-		NewCommander = Sh.GetDroneDock().FlyingDrones[0]
-		NewCommander.Command = null
+	#else : if (Sh.GetDroneDock().FlyingDrones.size() > 0):
+		#NewCommander = Sh.GetDroneDock().FlyingDrones[0]
+		#NewCommander.Command = null
 	var Drones = []
 	Drones.append_array(Sh.GetDroneDock().DockedDrones)
 	for g in Drones:
-		Sh.GetDroneDock().UndockDrone(g, false)
+		Sh.GetDroneDock().UndockDrone(g)
 		if (g != NewCommander):
 			NewCommander.GetDroneDock().DockDrone(g)
-	for g in Sh.GetDroneDock().FlyingDrones:
-		if (g != NewCommander):
-			g.Command = NewCommander
+	#for g in Sh.GetDroneDock().FlyingDrones:
+		#if (g != NewCommander):
+			#g.Command = NewCommander
 	AvailableShips.erase(Sh)
 	if (Sh == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
@@ -183,3 +184,42 @@ func _on_controlled_ship_return_pressed() -> void:
 		await CaptainSelect.CharacterSelected
 		if (CaptainSelect.SelectedCharacter != null):
 			ControlledShip.Regroup(CaptainSelect.SelectedCharacter.CaptainShip)
+
+func GetSaveData() -> PlayerSaveData:
+	var pldata = PlayerSaveData.new()
+	var Ships = get_tree().get_nodes_in_group("PlayerShips")
+	
+	for g : MapShip in Ships:
+		if (g.Command == null):
+			if g is PlayerShip:
+				pldata.Pos = g.global_position
+				pldata.PlayerFleet = g.GetDroneDock().GetSaveData()
+			else :
+				var FleetData = FleetSaveData.new()
+				if (g is Drone):
+					FleetData.CommanderData = g.GetSaveData()
+				FleetData.DockedShips.append_array(g.GetDroneDock().GetSaveData())
+				pldata.FleetData.append(FleetData)
+	
+	return pldata
+
+func LoadSaveData(Data : PlayerSaveData) -> void:
+	var Player = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
+	Player.global_position = Data.Pos
+	for Ship in Data.PlayerFleet:
+		var DockedShip = DroneScene.instantiate() as Drone
+		DockedShip.Cpt = Ship.Cpt
+		Player.GetDroneDock().AddDrone(DockedShip)
+	
+	var ShipPlecement = Player.get_parent()
+	
+	for Command in Data.FleetData:
+		var CommanderShip = DroneScene.instantiate() as Drone
+		CommanderShip.Cpt = Command.CommanderData.Cpt
+		ShipPlecement.add_child(CommanderShip)
+		CommanderShip.global_position = Command.CommanderData.Pos
+		CommanderShip.global_rotation = Command.CommanderData.Rot
+		for Ship in Command.DockedShips:
+			var DockedShip = DroneScene.instantiate() as Drone
+			DockedShip.Cpt = Ship.Cpt
+			CommanderShip.GetDroneDock().AddDrone(DockedShip)
