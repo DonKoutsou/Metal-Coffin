@@ -243,6 +243,10 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
 	CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
 	CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
+	
+	if (ShipStats.CurrentShownCaptain == null):
+		ShipStats.SetCaptain(Cha)
+	
 	for g in Cha.StartingItems:
 		CharInv.AddItem(g)
 	UISoundMan.GetInstance().Refresh()

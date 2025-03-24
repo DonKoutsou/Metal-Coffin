@@ -30,7 +30,7 @@ func DockShip(Ship : HostileShip):
 	
 	var pos : Vector2
 	var Offset = 10
-	for g in docks.size():
+	for g in docks.size() + 1:
 		if (is_even(g)):
 			pos = Vector2(-Offset, -Offset)
 		else:

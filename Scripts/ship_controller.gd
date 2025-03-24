@@ -17,9 +17,12 @@ var ControlledShip : MapShip
 signal FleetSeperationRequested(ControlledShip : MapShip)
 signal LandingRequested(ControlledShip : MapShip)
 
+static var Instance : ShipContoller
+
 func _ready() -> void:
-	DroneDockEventH.connect("DroneDocked", OnDroneDocked)
-	DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
+	Instance = self
+	#DroneDockEventH.connect("DroneDocked", OnDroneDocked)
+	#DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	UIEventH.connect("LandPressed", _on_land_button_pressed)
 	UIEventH.connect("RadarButtonPressed", _on_radar_button_pressed)
 	UIEventH.connect("FleetSeparationPressed", InitiateFleetSeparation)
@@ -29,6 +32,9 @@ func _ready() -> void:
 	UIEventH.connect("ShipSwitchPressed", _on_controlled_ship_swtich_range_changed)
 	
 	#call_deferred("SetInitialShip")
+
+static func GetInstance() -> ShipContoller:
+	return Instance
 
 func InitiateFleetSeparation() -> void:
 	var Instigator = ControlledShip
@@ -43,32 +49,18 @@ func SetInitialShip() -> void:
 	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
 	AvailableShips.append(ControlledShip)
 
-	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
 	
-	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	UIEventH.OnSteerDirForced(ControlledShip.rotation)
 	UIEventH.OnShipUpdated(ControlledShip)
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
-func OnDroneDocked(D : Drone, Target : MapShip) -> void:
-	if (!AvailableShips.has(D)):
-		AvailableShips.append(D)
-		if (!D.is_connected("OnShipDestroyed", OnShipDestroyed)):
-			D.connect("OnShipDestroyed", OnShipDestroyed)
-	
-	if (D == ControlledShip):
-		_on_controlled_ship_swtich_range_changed()
-	
-	#Max speed of a ship can change when a slower ship joins the fleet, so update speed
-	Target.AccelerationChanged(Target.GetShipSpeed() / Target.GetShipMaxSpeed())
-	
-func OnDroneUnDocked(_D : Drone, _Target : MapShip) -> void:
-	#AvailableShips.append(D)
-	#D.connect("OnShipDestroyed", OnShipDestroyed)
-	#ControlledShip = D
-	pass
+func RegisterSelf(D : MapShip) -> void:
+	AvailableShips.append(D)
+
+	D.ToggleFuelRangeVisibility(false)
+	D.connect("OnShipDestroyed", OnShipDestroyed)
+
 func _on_radar_button_pressed() -> void:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
@@ -107,29 +99,29 @@ func OnShipDamaged(Amm : float, ShowVisuals : bool) -> void:
 
 func OnShipDestroyed(Sh : MapShip):
 	if (Sh is PlayerShip):
-		World.GetInstance().call_deferred("GameLost", "Flagshit destroyed")
+		World.GetInstance().call_deferred("GameLost", "Flagship destroyed")
 		Sh.GetDroneDock().ClearAllDrones()
 		return
 	var NewCommander
 	if (Sh.GetDroneDock().DockedDrones.size() > 0):
 		NewCommander = Sh.GetDroneDock().DockedDrones[0]
+		Sh.GetDroneDock().UndockDrone(NewCommander)
 		NewCommander.Command = null
-	#else : if (Sh.GetDroneDock().FlyingDrones.size() > 0):
-		#NewCommander = Sh.GetDroneDock().FlyingDrones[0]
-		#NewCommander.Command = null
-	var Drones = []
-	Drones.append_array(Sh.GetDroneDock().DockedDrones)
-	for g in Drones:
-		Sh.GetDroneDock().UndockDrone(g)
-		if (g != NewCommander):
-			NewCommander.GetDroneDock().DockDrone(g)
-	#for g in Sh.GetDroneDock().FlyingDrones:
-		#if (g != NewCommander):
-			#g.Command = NewCommander
+
+	for DockedShip in range(Sh.GetDroneDock().DockedDrones.size() - 1, -1, -1):
+		Sh.GetDroneDock().UndockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
+		NewCommander.GetDroneDock().DockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
+
+	for Captive in range(Sh.GetDroneDock().Captives.size() - 1, -1, -1):
+		if (NewCommander != null):
+			Sh.GetDroneDock().UndockCaptive(Sh.GetDroneDock().Captives[Captive])
+			NewCommander.GetDroneDock().DockCaptive(Sh.GetDroneDock().Captives[Captive])
+		else:
+			Sh.GetDroneDock().ReleaseCaptive(Captive)
+
 	AvailableShips.erase(Sh)
 	if (Sh == ControlledShip):
 		_on_controlled_ship_swtich_range_changed()
-	
 
 func _on_controlled_ship_swtich_range_changed() -> void:
 	var currentcontrolled = AvailableShips.find(ControlledShip)
@@ -147,12 +139,12 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 
 	
-	UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	UIEventH.OnSteerDirForced(ControlledShip.rotation)
+	#UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	#UIEventH.OnSteerDirForced(ControlledShip.rotation)
 	UIEventH.OnShipUpdated(ControlledShip)
 	ControlledShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
-	_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
+	#_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	ShipControllerEventH.ShipChanged(ControlledShip)
 	
 var camtw : Tween

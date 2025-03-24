@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bahj28qps5ssw"]
+[gd_scene load_steps=17 format=3 uid="uid://bahj28qps5ssw"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://byfi8gb5rfaq5" path="res://Resources/Merch/Flares.tres" id="8_quutr"]
 [ext_resource type="Resource" uid="uid://csn5s05u6rd82" path="res://Resources/Merch/FireAmmo.tres" id="9_t8y33"]
 [ext_resource type="Resource" uid="uid://bjp66pbcmoto5" path="res://Resources/Merch/ProxAmmo.tres" id="10_vs4qv"]
+[ext_resource type="PackedScene" uid="uid://b6gyf4stqfreh" path="res://Resources/Funds/FundsDisplayTown.tscn" id="15_0uykb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
 content_margin_left = 5.0
@@ -224,6 +225,10 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 alignment = 1
+
+[node name="Fund_Container" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("15_0uykb")]
+layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2

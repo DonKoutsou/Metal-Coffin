@@ -19,7 +19,7 @@ SpotScene = ExtResource("2_ihubk")
 z_index = -1
 z_as_relative = false
 material = SubResource("CanvasItemMaterial_ustqo")
-scale = Vector2(2, 2)
+scale = Vector2(0.214844, 0.214844)
 texture = ExtResource("3_lvvcp")
 
 [node name="CitySpot" type="Node2D" parent="."]

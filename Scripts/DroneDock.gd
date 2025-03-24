@@ -27,14 +27,14 @@ func AnyDroneNeedsFuel() -> bool:
 
 func DronesHaveFuel(f : float) -> bool:
 	var fuelneeded = f
-	for g in DockedDrones:
+	for g in GetDockedShips():
 		fuelneeded -= g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		if (fuelneeded <= 0):
 			return true
 	return false
 
 func SyphonFuelFromDrones(amm : float) -> void:
-	for g in DockedDrones:
+	for g in GetDockedShips():
 		if (g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > amm):
 			g.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, amm)
 			return
@@ -73,7 +73,7 @@ func GetCaptains() -> Array[Captain]:
 		#cptns.append(g.Cpt)
 	return cptns
 	
-func DroneDisharged(Dr : Drone):
+func DroneDisharged(Dr : MapShip):
 	if (Dr == get_parent()):
 		return
 	if (DockedDrones.has(Dr)):
@@ -96,18 +96,23 @@ func AddRecruit(Cpt : Captain, Notify : bool = true) -> void:
 
 func AddCaptive(Captive : HostileShip) -> void:
 	
-	var pl = get_parent() as MapShip
-	if (pl.CurrentPort != null):
-		World.GetInstance().PlayerWallet.AddFunds(Captive.Cpt.ProvidingFunds * 2)
-		Captive.Evaporate()
-		return
+	#var pl = get_parent() as MapShip
+	#if (pl.CurrentPort != null):
+		#World.GetInstance().PlayerWallet.AddFunds(Captive.Cpt.ProvidingFunds * 2)
+		#Captive.Evaporate()
+		#return
 		
 	Captive.connect("OnShipDestroyed", DroneDisharged)
 	
 	call_deferred("DoCaptiveThing", Captive)
 	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
 	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
-	
+
+func ReleaseCaptive(Captive : HostileShip) -> void:
+	UndockCaptive(Captive)
+	Captive.Captured = false
+	Commander.GetInstance().RegisterSelf(Captive)
+
 func GetDockedShips() -> Array[MapShip]:
 	var Ships : Array[MapShip]
 	Ships.append_array(DockedDrones)
@@ -121,6 +126,8 @@ func DoCaptiveThing(Captive : HostileShip) -> void:
 	CaptiveParent.add_child(Captive)
 	DockCaptive(Captive)
 	Commander.GetInstance().UnregisterSelf(Captive)
+
+
 
 func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#var drone = DroneScene.instantiate()
@@ -191,9 +198,11 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	#FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
 	drone.DissableDrone()
-
-	drone.Command = get_parent()
-	DroneDockEventH.OnDroneDocked(drone, get_parent())
+	
+	var Command = get_parent() as MapShip
+	
+	drone.Command = Command
+	DroneDockEventH.OnDroneDocked(drone, Command)
 	
 	var docks = $DroneSpots.get_children()
 	
@@ -212,11 +221,12 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	trans.position = pos
 	trans.remote_path = drone.get_path()
 	drone.Docked = true
-	drone.ToggleFuelRangeVisibility(false)
+
 	if ($"..".Landing or $"..".Landed()):
 		drone.LandingStarted.emit()
 		drone.Landing = true
-	return
+	
+	Command.AccelerationChanged(Command.GetShipSpeed() / Command.GetShipMaxSpeed())
 		
 func is_even(number: int) -> bool:
 	return number % 2 == 0
@@ -243,6 +253,19 @@ func DockCaptive(Captive : HostileShip) -> void:
 	trans.remote_path = Captive.get_path()
 	Captive.Docked = true
 
+func UndockCaptive(Captive : HostileShip):
+	Captives.erase(Captive)
+
+	Captive.Command = null
+
+	var docks = $DroneSpots.get_children()
+	for g in docks:
+		var trans = g as RemoteTransform2D
+		if (trans.remote_path == Captive.get_path()):
+			trans.free()
+			Captive.Docked = false
+			break
+	RepositionDocks()
 
 func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)

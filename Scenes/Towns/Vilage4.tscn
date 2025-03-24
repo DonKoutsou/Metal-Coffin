@@ -18,7 +18,7 @@ SpotScene = ExtResource("2_5ev4f")
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
 z_index = -1
 material = SubResource("CanvasItemMaterial_oo6l4")
-scale = Vector2(2, 2)
+scale = Vector2(0.214844, 0.214844)
 texture = ExtResource("3_mdex1")
 
 [node name="CitySpot" type="Node2D" parent="."]

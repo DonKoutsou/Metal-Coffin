@@ -6,6 +6,7 @@ class_name FundsStat
 var CurrentAmm :int = 0
 var tw : Tween
 func _ready() -> void:
+	UpDateFunds(PlayerWallet.Funds)
 	PlayerWallet.connect("OnFundsUpdated", UpDateFunds)
 
 func UpDateFunds(NewAmm : int) -> void:

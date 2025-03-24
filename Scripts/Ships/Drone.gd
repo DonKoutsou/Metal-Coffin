@@ -7,6 +7,7 @@ signal DroneReturning
 func  _ready() -> void:
 	super()
 	Paused = SimulationManager.IsPaused()
+	ShipContoller.GetInstance().RegisterSelf(self)
 
 #func _exit_tree() -> void:
 	##InventoryManager.GetInstance().OnCharacterRemoved(Cpt)

@@ -221,7 +221,7 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 	#if an enemy that had its location investigated is seen 
 	#make sure to call of all investigation on its previusly known location
-	print(Ship.GetShipName() + " has been located.")
+	print(Ship.GetShipName() + " has been located by ." + SeenBy.GetShipName())
 	if (EnemyPositionsToInvestigate.keys().has(Ship)):
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			print(Ship.GetShipName() + "'s position was under investigation, investigation order has been canceled")

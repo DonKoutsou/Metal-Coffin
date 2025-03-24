@@ -93,6 +93,7 @@ func GetCamera() -> ShipCamera:
 func Arrival(Spot : MapSpot) -> void:
 	var PlayerShips : Array[MapShip]
 	var HostileShips : Array[MapShip]
+	var Convoys : Array[MapShip]
 	
 	#TODO find better way for this
 	for Ship in Spot.VisitingShips:
@@ -104,17 +105,34 @@ func Arrival(Spot : MapSpot) -> void:
 						PlayerShips.append(Docked)
 					else: if (Docked is HostileShip and !HostileShips.has(Docked)):
 						HostileShips.append(Docked)
+						Convoys.append(Docked)
+						
 		else : if (Ship is HostileShip and  !HostileShips.has(Ship)):
 				HostileShips.append(Ship)
+				if (Ship.Convoy):
+					Convoys.append(Ship)
 				if (Ship.Command == null):
 					for Docked in Ship.GetDroneDock().GetDockedShips():
 						if (!HostileShips.has(Docked)):
 							HostileShips.append(Docked)
+						if (Docked.Convoy):
+							Convoys.append(Docked)
+	
+	var StartFight : bool = false
 	
 	if (PlayerShips.size() > 0 and HostileShips.size() > 0):
 		for g in HostileShips:
 			if (g.Convoy == false):
-				EnemyMet(PlayerShips, HostileShips)
+				StartFight = true
+				break
+	
+	if (StartFight):
+		EnemyMet(PlayerShips, HostileShips)
+	#else:
+		#for g in Convoys:
+			#g.Command.GetDroneDock().UndockCaptive(g)
+			#World.GetInstance().PlayerWallet.AddFunds(g.Cpt.ProvidingFunds * 2)
+			#g.Evaporate()
 	#var plships : Array[Node2D] = []
 	#var hostships : Array[Node2D] = []
 	#if (Docked):

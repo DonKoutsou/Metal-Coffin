@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
-[ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/MapMarkers/MapSpotMarker.tscn" id="21_oyi6l"]
+[ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
 [ext_resource type="Script" uid="uid://c2ufjbkhk6v0q" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="22_n73so"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
@@ -190,6 +190,7 @@ MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.483, 100, 0.381, 1)
 EnemyColor = Color(100, 0.094, 0, 1)
+ConvoyColor = Color(100, 0.764, 0.081, 1)
 UIEventH = ExtResource("25_8mjbw")
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]

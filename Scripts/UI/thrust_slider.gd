@@ -19,7 +19,8 @@ func ZeroAcceleration():
 	Handle.position.y = MinVelocityLoc
 
 func ForceValue(val : float) ->void:
-	var newpos = val * (MaxVelocityLoc - MinVelocityLoc) + MinVelocityLoc;
+	var ForcedValue = clamp(val, 0, 1)
+	var newpos = ForcedValue * (MaxVelocityLoc - MinVelocityLoc) + MinVelocityLoc;
 	Handle.position.y = newpos
 	#var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 	#AccelerationChanged.emit(newval)

@@ -166,7 +166,7 @@ func ToggleTimeLastSeend(T : bool):
 
 func UpdateTime(timepast : float):
 	
-	TimeSeenLabel.text = "Last Seen " + var_to_str(snappedf((timepast) , 0.01)) + "h ago"
+	TimeSeenLabel.text = var_to_str(snappedf((timepast) , 0.01)) + "h ago"
 
 func EnteredScreen() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")

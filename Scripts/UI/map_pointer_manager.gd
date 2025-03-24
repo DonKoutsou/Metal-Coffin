@@ -6,6 +6,7 @@ class_name MapPointerManager
 @export var MapSpotMarkerScene : PackedScene
 @export var FriendlyColor : Color
 @export var EnemyColor : Color
+@export var ConvoyColor : Color
 @export var EnemyDebug : bool = false
 @export var UIEventH : UIEventHandler
 #@export var SpotColor : Color
@@ -54,6 +55,8 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 		marker.modulate = EnemyColor
 		#_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif()
 	if (Ship is HostileShip):
+		if (Ship.Convoy):
+			marker.modulate = ConvoyColor
 		if (EnemyDebug):
 			#HOSTILE_SHIP_DEBUG
 			marker.ToggleFriendlyShipDetails(true)
@@ -197,11 +200,11 @@ func _physics_process(delta: float) -> void:
 				var docked = ship.Docked
 				Marker.global_position = ship.global_position
 				Marker.ToggleShipDetails(!docked)
+		
+				Marker.UpdateTrajectory(ship.global_rotation)
+				Marker.UpdateSpeed(ship.GetShipSpeed())
 				if (docked):
 					continue
-				
-				Marker.UpdateSpeed(ship.GetShipSpeed())
-				
 				#if (ship.GetDroneDock().DockedDrones.size() > 0):
 					#var fuel = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 					#var MaxFuel = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
@@ -213,7 +216,7 @@ func _physics_process(delta: float) -> void:
 				var fuelstats = ship.GetFuelStats()
 				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
-				Marker.UpdateTrajectory(ship.global_rotation)
+				
 				if (ship.RadarWorking):
 					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 105), 0)]))
 				else:

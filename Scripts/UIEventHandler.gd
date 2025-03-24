@@ -4,11 +4,11 @@ class_name UIEventHandler
 
 signal AccelerationEnded(Value : float)
 signal AccelerationChanged(Value : float)
-signal AccelerationForced(ForceVal : float)
+#signal AccelerationForced(ForceVal : float)
 signal DroneButtonPressed()
 signal MissileButtonPressed()
 signal RadarButtonPressed()
-signal SteerDirForced(ForcedVal : float)
+#signal SteerDirForced(ForcedVal : float)
 signal SteerDirChanged(NewDir : float)
 signal SteerOffseted(Offset : float)
 
@@ -48,8 +48,8 @@ func OnAccelerationEnded(value_changed: float) -> void:
 func OnAccelerationChanged(value: float) -> void:
 	AccelerationChanged.emit(value)
 
-func OnAccelerationForced(NewVal : float) -> void:
-	AccelerationForced.emit(NewVal)
+#func OnAccelerationForced(NewVal : float) -> void:
+	#AccelerationForced.emit(NewVal)
 
 func OnDroneButtonPressed() -> void:
 	DroneButtonPressed.emit()
@@ -76,8 +76,8 @@ func OnShipSwitchPressed() -> void:
 func OnShipUpdated(NewShip : MapShip) -> void:
 	ShipUpdated.emit(NewShip)
 
-func OnSteerDirForced(NewVal : float) -> void:
-	SteerDirForced.emit(NewVal)
+#func OnSteerDirForced(NewVal : float) -> void:
+	#SteerDirForced.emit(NewVal)
 
 func OnMarkerEditorToggled(t : bool) -> void:
 	MarkerEditorToggled.emit(t)

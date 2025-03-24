@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=25 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -23,6 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vr5ky"]
+light_mode = 1
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
 [node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer")]
@@ -36,6 +39,7 @@ EventHandler = ExtResource("3_b4kau")
 
 [node name="Control3" type="Control" parent="."]
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_vr5ky")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

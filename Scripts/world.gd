@@ -275,6 +275,16 @@ func OnLandingCanceled(Ship : MapShip) -> void:
 	Ship.disconnect("LandingCanceled", OnLandingCanceled)
 
 func OnShipLanded(Ship : MapShip) -> void:
+	
+	if (Ship.GetDroneDock().Captives.size() > 0):
+		var Earnings = 0
+		for g in Ship.GetDroneDock().Captives:
+			Ship.GetDroneDock().UndockCaptive(g)
+			Earnings += g.Cpt.ProvidingFunds * 2
+			g.Evaporate()
+			
+		World.GetInstance().PlayerWallet.AddFunds(Earnings)
+		
 	if (Ship.is_connected("LandingEnded", OnShipLanded)):
 		Ship.disconnect("LandingEnded", OnShipLanded)
 	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):

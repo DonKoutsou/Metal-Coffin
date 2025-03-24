@@ -83,8 +83,8 @@ func _ready() -> void:
 	NormalScreen.visible = false
 	FullScreenFrame.visible = false
 	#EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
-	EventHandler.connect("AccelerationForced", Acceleration_Forced)
-	EventHandler.connect("SteerDirForced", Steer_Forced)
+	#EventHandler.connect("AccelerationForced", Acceleration_Forced)
+	#EventHandler.connect("SteerDirForced", Steer_Forced)
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	#EventHandler.connect("CoverToggled", ToggleControllCover)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
@@ -106,9 +106,6 @@ func Acceleration_Ended(value_changed: float) -> void:
 func Acceleration_Changed(value: float) -> void:
 	EventHandler.OnAccelerationChanged(value)
 	Cam.EnableShake(value * 1.5)
-
-func Acceleration_Forced(NewVal : float) -> void:
-	Thrust.ForceValue(NewVal)
 
 func Drone_Button_Pressed() -> void:
 	EventHandler.OnFleetSeparationPressed()
@@ -137,15 +134,16 @@ func Steer_Offseted(Offset: float) -> void:
 	EventHandler.OnSteerOffseted(Offset)
 	Cam.EnableShake(0.5)
 	Cam.DissableShake()
-	
-func Steer_Forced(NewVal : float) -> void:
-	Steer.ForceSteer(NewVal)
 
 func Ship_Switch_Pressed() -> void:
 	EventHandler.OnShipSwitchPressed()
 
 func ControlledShipSwitched(NewShip : MapShip) -> void:
 	MissileUI.UpdateConnectedShip(NewShip)
+	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
+	Steer.ForceSteer(NewShip.rotation)
+	#UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
+	#UIEventH.OnSteerDirForced(ControlledShip.rotation)
 	#DroneUI.UpdateConnectedShip(NewShip)
 
 # Marker editor

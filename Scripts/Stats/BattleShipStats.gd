@@ -12,3 +12,4 @@ class_name BattleShipStats
 @export var Cards : Dictionary
 @export var Ammo : Dictionary
 @export var Funds : int
+@export var Convoy : bool

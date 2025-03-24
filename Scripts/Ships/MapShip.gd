@@ -73,7 +73,7 @@ func _ready() -> void:
 		
 func _draw() -> void:
 	if (ShowFuelRange):
-		draw_circle(Vector2.ZERO, GetFuelRange(), Color(100, 0.764, 0.081), false, 2.0 / CamZoom, true)
+		draw_circle(Vector2.ZERO, GetFuelRange(), Color(0.3, 0.7, 0.915), false, 2.0 / CamZoom, true)
 		
 func _physics_process(delta: float) -> void:
 
@@ -142,6 +142,8 @@ func _physics_process(delta: float) -> void:
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,dronefuel)
 		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= dronefuel):
 			Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, dronefuel)
+		else: if (GetDroneDock().DronesHaveFuel(dronefuel)):
+			GetDroneDock().SyphonFuelFromDrones(dronefuel)
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
@@ -252,11 +254,12 @@ func AccelerationChanged(value: float) -> void:
 	else : if (Altitude != 10000 and !TakingOff):
 		TakeoffStarted.emit()
 		TakingOff = true
-
-	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) <= 0):
-		HaltShip()
-		PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
-		return
+	
+	if (value > 0):
+		if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) <= 0):
+			HaltShip()
+			PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
+			return
 	
 	AccelChanged = true
 	
@@ -522,6 +525,8 @@ func GetFleet() -> Array[MapShip]:
 	return Fleet
 
 func GetFuelRange() -> float:
+	if (Command != null):
+		return Command.GetFuelRange()
 	var Fleet = GetDroneDock().GetDockedShips()
 	
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
@@ -553,6 +558,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()
 	stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
 	stats.Funds = Cpt.ProvidingFunds
+	stats.Convoy = false
 	return stats
 	
 func GetShipMaxSpeed() -> float:

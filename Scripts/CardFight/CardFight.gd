@@ -76,8 +76,7 @@ func _ready() -> void:
 	ShipTurns.append_array(EnemyShips)
 	ShipTurns.sort_custom(speed_comparator)
 	
-	for g in EnemyShips:
-		FundsToWin += g.Funds
+	
 	
 	#Create the visualisation for each ship, basicly their stat holder
 	for g in ShipTurns:
@@ -350,10 +349,13 @@ func TrySetFire() -> bool:
 
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
+	if (EnemyShips.has(Ship)):
+		FundsToWin += Ship.Funds
+	
 	RemoveShip(Ship)
 	
-	var EnemiesDead = EnemyShips.size() == 0
-	var PlayerDead = PlayerShips.size() == 0
+	var EnemiesDead = GetFightingUnitAmmount(EnemyShips) == 0
+	var PlayerDead = GetFightingUnitAmmount(PlayerShips) == 0
 	
 	if (EnemiesDead or PlayerDead):
 		RefundUnusedCards()
@@ -363,6 +365,13 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 		
 	return false
 
+func GetFightingUnitAmmount(Ships : Array[BattleShipStats]) -> int:
+	var CombatantAmmount = 0
+	for g in Ships:
+		if (!g.Convoy):
+			CombatantAmmount += 1
+	return CombatantAmmount
+
 # CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 
 func OnFightEnded(Won : bool) -> void:
 	var End = EndScene.instantiate() as CardFightEndScene
@@ -371,11 +380,12 @@ func OnFightEnded(Won : bool) -> void:
 	PlayerShipVisualPlecement.visible = false
 	EnemyShipVisualPlecement.visible = false
 	await End.ContinuePressed
-	if (Won):
-		CardFightEnded.emit(PlayerShips)
-	else:
-		CardFightEnded.emit(EnemyShips)
-	
+	var Survivors : Array[BattleShipStats]
+	Survivors.append_array(PlayerShips)
+	Survivors.append_array(EnemyShips)
+
+	CardFightEnded.emit(Survivors)
+
 
 #Refunds cards that consume inventory items if the card wasnt used in the end
 func RefundUnusedCards() -> void:
