@@ -54,7 +54,8 @@ func UnregisterSelf(Ship : HostileShip) -> void:
 	Ship.disconnect("OnPlayerVisualContact", OnEnemySeen)
 	Ship.disconnect("OnPlayerVisualLost", OnEnemyVisualLost)
 	Ship.disconnect("ElintContact", OnElintHit)
-
+	if (ShipLodCheckList.has(Ship)):
+		ShipLodCheckList.erase(Ship)
 
 func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t

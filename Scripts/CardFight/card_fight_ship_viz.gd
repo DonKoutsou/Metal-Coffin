@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Button
 
 class_name CardFightShipViz
 

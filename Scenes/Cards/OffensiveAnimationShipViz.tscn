@@ -1,24 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhfqn405u7iov"]
+[gd_scene load_steps=9 format=3 uid="uid://dhfqn405u7iov"]
 
 [ext_resource type="Script" uid="uid://c1614nt44tmoh" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="1_o7oni"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="2_lbgr3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v77k"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.482095, 0.689901, 0.704644, 1)
-border_blend = true
-corner_detail = 1
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
 bg_color = Color(0.231024, 0.490544, 0.236315, 1)
+skew = Vector2(0.1, 0)
 
 [sub_resource type="Gradient" id="Gradient_iq4iy"]
 offsets = PackedFloat32Array(0, 0.998435)
@@ -46,7 +33,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
-[node name="CardFightShipViz" type="PanelContainer"]
+[node name="CardFightShipViz" type="Button"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -54,21 +41,28 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -35.0
 offset_top = -35.0
-offset_right = 38.0
+offset_right = 40.0
 offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxFlat_3v77k")
 script = ExtResource("1_o7oni")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 73.0
+offset_bottom = 68.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 73.0
+offset_bottom = 68.0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2

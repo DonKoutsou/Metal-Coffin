@@ -31,7 +31,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 	Ic = ShipViz.instantiate() as CardFightShipViz
 	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
-
+	Ic.disabled = true
 	AtC = CardScene.instantiate() as Card
 	AtC.Dissable()
 	var Opts : Array[CardOption] = []
@@ -58,7 +58,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		t.SetStatsAnimation(TargetShips[g], FriendShip)
 		ShipPlemenent.add_child(t)
 		Ic2.append(t)
-		
+		t.disabled = true
 		DrawPositions2[g] = 0.0
 		
 		var tw = create_tween()
@@ -95,6 +95,7 @@ func TweenEnded(Damage : float) -> void:
 
 func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	Ic = ShipViz.instantiate() as CardFightShipViz
+	Ic.disabled = true
 	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
 	var Opts : Array[CardOption] = []
@@ -118,6 +119,7 @@ func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip 
 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	Ic = ShipViz.instantiate() as CardFightShipViz
+	Ic.disabled = true
 	Ic.SetStatsAnimation(OriginShip, !FriendShip)
 	$HBoxContainer.add_child(Ic)
 	

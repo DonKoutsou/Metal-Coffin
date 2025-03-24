@@ -46,7 +46,7 @@ FuelLabel = NodePath("Control/PanelContainer/VBoxContainer/Fuel")
 HullLabel = NodePath("Control/PanelContainer/VBoxContainer/Hull")
 DetailPanel = NodePath("Control")
 ShipIcon = NodePath("Icon")
-VisualContactCountdown = NodePath("Control/VisualContactCountdown")
+VisualContactCountdown = NodePath("Icon/VisualContactCountdown")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
 Icons = {
@@ -172,26 +172,6 @@ text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
 uppercase = true
 
-[node name="VisualContactCountdown" type="ProgressBar" parent="Control"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = 16.0
-offset_right = 26.0
-offset_bottom = 29.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_12u8d")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6175k")
-max_value = 10.0
-value = 10.0
-show_percentage = false
-
 [node name="Icon" type="TextureRect" parent="." groups=["MapShipVizualiser"]]
 use_parent_material = true
 layout_mode = 1
@@ -251,6 +231,26 @@ theme_override_font_sizes/font_size = 20
 text = "->"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="VisualContactCountdown" type="ProgressBar" parent="Icon"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = 18.0
+offset_right = 26.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_12u8d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6175k")
+max_value = 10.0
+value = 10.0
+show_percentage = false
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="EnteredScreen"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ExitedScreen"]

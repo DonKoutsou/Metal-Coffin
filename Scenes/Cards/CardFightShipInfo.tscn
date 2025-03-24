@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://6hcd2pi6mky3"]
+
+[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_67igm"]
+[ext_resource type="Script" uid="uid://c3h40cgun3it3" path="res://Scripts/CardFight/card_fight_ship_info.gd" id="1_dmg4y"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/Spaceship/Tanker2.png" id="2_yr62a"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_yr62a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmg4y"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[node name="CardFightShipInfo" type="PanelContainer" node_paths=PackedStringArray("CaptainPortrait", "ShipIcon", "ShipName", "ShipDesc", "CardPlecement")]
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dmg4y")
+CaptainPortrait = NodePath("VBoxContainer/HBoxContainer/CapPortrait")
+ShipIcon = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ShipIcon")
+ShipName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/CapName")
+ShipDesc = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/CapBio")
+CardPlecement = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/Cards/HBoxContainer")
+CardScene = ExtResource("3_yr62a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CapPortrait" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_67igm")
+expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Captain Name :"
+uppercase = true
+
+[node name="CapName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Amol"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Captain BIO"
+uppercase = true
+
+[node name="CapBio" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Bount Hunter Strong Atack, strong def"
+autowrap_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ship Icon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShipIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("2_yr62a")
+expand_mode = 1
+
+[node name="Cards" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dmg4y")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer/Cards"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_constants/separation = -15
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "CLOSE"
+
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/HBoxContainer/Cards" to="." method="_on_scroll_container_gui_input"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

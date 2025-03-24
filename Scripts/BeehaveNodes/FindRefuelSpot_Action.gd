@@ -5,9 +5,12 @@ class_name FindRefuelSpotAction
 
 func tick(actor: Node, _blackboard: Blackboard) -> int:
 	
-	var ship = actor as HostileShip
+	var Ship = actor as HostileShip
+	if (Ship.RefuelSpot != null):
+		print(Ship.ShipName + " already has refuel spot")
+		return SUCCESS
 
-	var dist = ship.GetFuelRange()
+	var dist = Ship.GetFuelRange()
 	
 	var DistToSpot = 9999999999
 	
@@ -16,7 +19,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	#var DistanceToDestination = ship.global_position.distance_to(ship.GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot
-		var D = spot.global_position.distance_to(ship.global_position)
+		var D = spot.global_position.distance_to(Ship.global_position)
 		#if we cant reach it look for another
 		if (D >= dist):
 			continue
@@ -30,9 +33,9 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 			break
 		
 	if (RefuelSpot != null):
-		print(ship.ShipName + " will take a detour through " + RefuelSpot.SpotInfo.SpotName + " to refuel")
-		ship.RefuelSpot = RefuelSpot
+		print(Ship.ShipName + " will take a detour through " + RefuelSpot.SpotInfo.SpotName + " to refuel")
+		Ship.RefuelSpot = RefuelSpot
 		return SUCCESS
 	else:
-		print(ship.ShipName + " whas failed to find a refuel spot ")
+		print(Ship.ShipName + " whas failed to find a refuel spot ")
 		return FAILURE

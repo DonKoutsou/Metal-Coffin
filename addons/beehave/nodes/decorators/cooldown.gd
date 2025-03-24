@@ -9,7 +9,7 @@ class_name CooldownDecorator
 
 ## The wait time in seconds
 @export var wait_time: = 0.0
-
+@export var ReturnVar : bool
 @onready var cache_key = 'cooldown_%s' % self.get_instance_id()
 
 
@@ -22,7 +22,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		c.before_run(actor, blackboard)
 	
 	if remaining_time > 0:
-		response = FAILURE
+		response = ReturnVar
 		
 		remaining_time -= get_physics_process_delta_time()
 		blackboard.set_value(cache_key, remaining_time, str(actor.get_instance_id()))

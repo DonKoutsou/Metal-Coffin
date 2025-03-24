@@ -20,7 +20,7 @@ class_name Card_Fight
 @export var ActionAnim : PackedScene
 #Scene that shows the stats of the fight
 @export var EndScene : PackedScene
-
+@export var CardFightShipInfoScene : PackedScene
 @export_group("Plecement Referances")
 #Plecement for any atack cards player can play
 @export var OffensiveCardPlecement : Control
@@ -96,6 +96,7 @@ static func speed_comparator(a, b):
 	
 func CreateShipVisuals(BattleS : BattleShipStats) -> void:
 	var t = ShipVizScene.instantiate() as CardFightShipViz
+	t.connect("pressed", ShipVizPressed.bind(BattleS))
 	var Friendly = IsShipFriendly(BattleS)
 	
 	t.SetStats(BattleS, Friendly)
@@ -105,6 +106,11 @@ func CreateShipVisuals(BattleS : BattleShipStats) -> void:
 	else :
 		EnemyShipVisualPlecement.add_child(t)
 	ShipsViz.append(t)
+
+func ShipVizPressed(Ship : BattleShipStats) -> void:
+	var Scene = CardFightShipInfoScene.instantiate() as CardFightShipInfo
+	Scene.SetUpShip(Ship)
+	add_child(Scene)
 
 func GetShipViz(BattleS : BattleShipStats) -> CardFightShipViz:
 	var index = ShipTurns.find(BattleS)
