@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 
 class_name CharacterInventory
 
@@ -31,7 +31,10 @@ var SimPaused : bool = false
 var _ItemBeingUpgraded : Inventory_Box
 var _UpgradeTime : float
 
+var OriginalSize : float
+
 func _ready() -> void:
+	OriginalSize = size.y
 	InventoryBoxParent.get_parent().get_parent().visible = false
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
@@ -283,9 +286,31 @@ func _on_button_pressed() -> void:
 
 
 func _on_inventory_vis_toggle_pressed() -> void:
+	$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = true
+	var prevc = custom_minimum_size.y
+	custom_minimum_size.y = 0
+	var Show = !InventoryBoxParent.get_parent().get_parent().visible
 	InventoryBoxParent.get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().visible
-	if (InventoryBoxParent.get_parent().get_parent().visible):
-		$InventoryVisToggle.text = "Hide Inventory"
+	var TargetSize
+	if (Show):
+		TargetSize = 500
+		InventoryBoxParent.get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().visible
 	else:
-		$InventoryVisToggle.text = "Show Inventory"
+		TargetSize = OriginalSize
+		custom_minimum_size.y = prevc
+		
+	var Tw = create_tween()
+	Tw.set_ease(Tween.EASE_OUT)
+	Tw.set_trans(Tween.TRANS_QUAD)
+	Tw.tween_property(self, "custom_minimum_size", Vector2(0,TargetSize), 0.5)
 	
+	await Tw.finished
+	if (Show):
+		InventoryBoxParent.get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().visible
+
+	if (InventoryBoxParent.get_parent().get_parent().visible):
+		$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Hide Inventory"
+	else:
+		$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Show Inventory"
+	
+	$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = false

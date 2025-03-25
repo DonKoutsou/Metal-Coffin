@@ -35,7 +35,7 @@ script = ExtResource("2_f1v6n")
 CapPortrait = NodePath("VBoxContainer/CapPortrait")
 CapName = NodePath("VBoxContainer/CapName")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
 focus_mode = 0
 

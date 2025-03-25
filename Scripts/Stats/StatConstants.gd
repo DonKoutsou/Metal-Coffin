@@ -36,9 +36,9 @@ static func GetStatMetric(Stat : STATS) -> String:
 	var Metric : String
 	match Stat:
 		STATS.FUEL_TANK :
-			Metric = "Cubic Tons"
+			Metric = "m³"
 		STATS.FUEL_EFFICIENCY:
-			Metric = "km/Lt"
+			Metric = "km/m³"
 		STATS.SPEED:
 			Metric = "km/h"
 		STATS.VISUAL_RANGE:

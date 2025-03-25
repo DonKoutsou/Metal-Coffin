@@ -15,13 +15,23 @@ var Cost : int
 
 var TargetLoc : Vector2
 
-func _physics_process(_delta: float) -> void:
+var InterpolationValue : float
+
+func _physics_process(delta: float) -> void:
 	queue_redraw()
+	InterpolationValue = min(InterpolationValue + delta, 1)
 
 func _draw() -> void:
 	if (TargetLoc != Vector2.ZERO):
 		draw_set_transform(- global_position)
-		draw_line(global_position + size / 2, TargetLoc, Color(0.482,0.69,0.705), 2)
+		draw_line(global_position + size / 2, lerp(global_position + size / 2 ,TargetLoc,InterpolationValue), Color(0.482,0.69,0.705), 5)
+
+func KillCard() -> void:
+	var KillTw = create_tween()
+	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	KillTw.tween_property(self, "modulate", Color(1,1,1,0), 0.2)
+	await KillTw.finished
+	free()
 
 func _ready() -> void:
 	UISoundMan.GetInstance().AddSelf($Button)

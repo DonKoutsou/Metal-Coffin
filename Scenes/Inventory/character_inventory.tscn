@@ -1,156 +1,180 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmvl7w65kwp5a"]
+[gd_scene load_steps=5 format=3 uid="uid://cmvl7w65kwp5a"]
 
 [ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://Scripts/Inventory/character_inventory.gd" id="1_i6whi"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_sxetj"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_e1s57"]
+[ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="3_1f7qw"]
 
-[node name="CharacterInventoryUI" type="VBoxContainer" node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "CaptainNameLabel")]
-anchors_preset = 15
+[node name="CharacterInventoryUI" type="PanelContainer" node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "CaptainNameLabel")]
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -554.0
+anchor_bottom = 0.5
+offset_top = -61.0
+offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sxetj")
 script = ExtResource("1_i6whi")
 InventoryBoxScene = ExtResource("2_e1s57")
-EngineInventoryBoxParent = NodePath("HBoxContainer/HFlowContainer/VBoxContainer/Engines")
-SensorInventoryBoxParent = NodePath("HBoxContainer/HFlowContainer/VBoxContainer3/Sensors")
-FuelTankInventoryBoxParent = NodePath("HBoxContainer/HFlowContainer/VBoxContainer2/Fuel Tanks")
-WeaponInventoryBoxParent = NodePath("HBoxContainer/HFlowContainer/VBoxContainer5/Weapons")
-ShieldInventoryBoxParent = NodePath("HBoxContainer/HFlowContainer/VBoxContainer4/Shields")
-InventoryBoxParent = NodePath("HBoxContainer/HFlowContainer/VBoxContainer6/Inventory")
-CaptainNameLabel = NodePath("VBoxContainer/HBoxContainer2/Label")
+EngineInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer/Engines")
+SensorInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer3/Sensors")
+FuelTankInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer2/Fuel Tanks")
+WeaponInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer5/Weapons")
+ShieldInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer4/Shields")
+InventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer6/Inventory")
+CaptainNameLabel = NodePath("VBoxContainer2/VBoxContainer/HBoxContainer2/Label")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.5)
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_1f7qw")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 32
 text = "Char name"
-horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Preview Stats"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-visible = false
-layout_mode = 2
-alignment = 1
-
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Items"
-
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Cards"
-
-[node name="InventoryVisToggle" type="Button" parent="." groups=["DigitalButtons"]]
+[node name="InventoryVisToggle" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Show Inventory"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Items"
+
+[node name="Button3" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cards"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer"]
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/HFlowContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/HFlowContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer"]
 layout_mode = 2
 text = "Engines"
 
-[node name="Engines" type="GridContainer" parent="HBoxContainer/HFlowContainer/VBoxContainer"]
+[node name="Engines" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/HFlowContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/HFlowContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Fuel Tanks"
 
-[node name="Fuel Tanks" type="GridContainer" parent="HBoxContainer/HFlowContainer/VBoxContainer2"]
+[node name="Fuel Tanks" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/HFlowContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/HFlowContainer/VBoxContainer3"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer3"]
 layout_mode = 2
 text = "Sensors"
 
-[node name="Sensors" type="GridContainer" parent="HBoxContainer/HFlowContainer/VBoxContainer3"]
+[node name="Sensors" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="HBoxContainer/HFlowContainer"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/HFlowContainer/VBoxContainer4"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer4"]
 layout_mode = 2
 text = "Shields"
 
-[node name="Shields" type="GridContainer" parent="HBoxContainer/HFlowContainer/VBoxContainer4"]
+[node name="Shields" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="HBoxContainer/HFlowContainer"]
+[node name="VBoxContainer5" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/HFlowContainer/VBoxContainer5"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer5"]
 layout_mode = 2
 text = "Weapons"
 
-[node name="Weapons" type="GridContainer" parent="HBoxContainer/HFlowContainer/VBoxContainer5"]
+[node name="Weapons" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer6" type="VBoxContainer" parent="HBoxContainer/HFlowContainer"]
+[node name="VBoxContainer6" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/HFlowContainer/VBoxContainer6"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer6"]
 layout_mode = 2
 text = "Inventory"
 
-[node name="Inventory" type="GridContainer" parent="HBoxContainer/HFlowContainer/VBoxContainer6"]
+[node name="Inventory" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="InventoryVisToggle" to="." method="_on_inventory_vis_toggle_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle" to="." method="_on_inventory_vis_toggle_pressed"]

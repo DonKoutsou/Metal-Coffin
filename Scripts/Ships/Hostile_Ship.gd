@@ -111,7 +111,7 @@ func _physics_process(delta: float) -> void:
 			if (VisualContactCountdown < 0):
 				for c in GarrissonVisualContacts:
 					OnPlayerVisualContact.emit(c, self)
-				add_child(AlarmVisual.instantiate())
+
 		
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL)):
 			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.02 * SimulationSpeed)
@@ -122,6 +122,9 @@ func _physics_process(delta: float) -> void:
 	else: if (BTree != null):
 		BTree.Process_Tree()
 		
+
+func DoAlarmVisual() -> void:
+	add_child(AlarmVisual.instantiate())
 
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile

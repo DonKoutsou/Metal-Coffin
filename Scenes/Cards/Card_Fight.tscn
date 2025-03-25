@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=19 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_ial63"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_3dpfm"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_5p8hw"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="10_084tn"]
@@ -50,7 +51,7 @@ border_color = Color(0.482095, 0.689901, 0.704644, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect") groups=["CardFight"]]
+[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardScrollContainer", "SelectedCardScrollContainer", "EnergyLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -58,6 +59,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_force_pass_scroll_events = false
 theme = ExtResource("14_kl7fj")
+theme_override_styles/panel = ExtResource("2_ial63")
 script = ExtResource("1_defjt")
 CardScene = ExtResource("2_5q24q")
 ShipVizScene = ExtResource("3_5p8hw")
@@ -65,14 +67,17 @@ Cards = Array[ExtResource("3_3dpfm")]([ExtResource("11_5vvva"), ExtResource("12_
 ActionAnim = ExtResource("11_j66lv")
 EndScene = ExtResource("12_lqfcs")
 CardFightShipInfoScene = ExtResource("13_wsi3m")
-OffensiveCardPlecement = NodePath("VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3/OffensiveCardPlecements")
-DeffensiveCardPlecement = NodePath("VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3/DeffensiveCardPlecements")
-SelectedCardPlecement = NodePath("VBoxContainer4/VBoxContainer4/HBoxContainer2/SelectedCardPlecements")
+OffensiveCardPlecement = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll/VBoxContainer3/OffensiveCardPlecements")
+DeffensiveCardPlecement = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll/VBoxContainer3/DeffensiveCardPlecements")
+SelectedCardPlecement = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements")
 AnimationPlecement = NodePath("VBoxContainer4")
-EnergyBar = NodePath("VBoxContainer4/VBoxContainer4/HBoxContainer/ProgressBar")
+EnergyBar = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer/ProgressBar")
 EnemyShipVisualPlecement = NodePath("VBoxContainer4/EnemyShipPlecement")
 PlayerShipVisualPlecement = NodePath("VBoxContainer4/PlayerShipPlecement")
 TargetSelect = NodePath("VBoxContainer4/TargetSelect")
+CardScrollContainer = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll")
+SelectedCardScrollContainer = NodePath("")
+EnergyLabel = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer/ProgressBar/Label2")
 
 [node name="VBoxContainer4" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -84,14 +89,30 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 alignment = 1
 
-[node name="VBoxContainer4" type="HBoxContainer" parent="VBoxContainer4"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_ial63")
+
+[node name="VBoxContainer4" type="HBoxContainer" parent="VBoxContainer4/PanelContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer4/VBoxContainer4"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer"]
+layout_mode = 2
+text = "Available Cards"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AvailableCardScroll" type="ScrollContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -99,33 +120,33 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_r7epx")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4/ScrollContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = -20
 alignment = 1
 
-[node name="OffensiveCardPlecements" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3"]
+[node name="OffensiveCardPlecements" type="VBoxContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll/VBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = -20
 alignment = 1
 
-[node name="DeffensiveCardPlecements" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4/ScrollContainer/VBoxContainer3"]
+[node name="DeffensiveCardPlecements" type="VBoxContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll/VBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = -20
 alignment = 1
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer4/VBoxContainer4/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
@@ -134,12 +155,11 @@ theme = ExtResource("14_kl7fj")
 theme_override_styles/background = SubResource("StyleBoxFlat_r7epx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wsi3m")
 max_value = 4.0
-step = 1.0
 value = 3.0
 fill_mode = 2
 show_percentage = false
 
-[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/HBoxContainer/ProgressBar"]
+[node name="Label2" type="Label" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer/ProgressBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -150,30 +170,32 @@ text = "1/4"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer4/VBoxContainer4/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("14_kl7fj")
 text = "End Turn"
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4"]
+[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4"]
 z_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer2"]
 layout_mode = 2
 text = "Selected Cards"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
-[node name="SelectedCardPlecements" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer4/HBoxContainer2"]
+[node name="SelectedCardPlecements" type="VBoxContainer" parent="VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = -20
+theme_override_constants/separation = -200
 alignment = 1
 
 [node name="TargetSelect" type="PanelContainer" parent="VBoxContainer4"]
@@ -202,5 +224,10 @@ size_flags_horizontal = 8
 size_flags_vertical = 3
 alignment = 1
 
-[connection signal="gui_input" from="VBoxContainer4/VBoxContainer4/ScrollContainer" to="." method="_on_scroll_container_gui_input"]
-[connection signal="pressed" from="VBoxContainer4/VBoxContainer4/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]
+[node name="Control" type="Control" parent="."]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+
+[connection signal="gui_input" from="VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll" to="." method="_on_scroll_container_gui_input"]
+[connection signal="pressed" from="VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]

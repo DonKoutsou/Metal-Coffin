@@ -195,7 +195,9 @@ func OnItemBought(It : Item) -> void:
 
 
 func _on_scroll_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		$VBoxContainer/HBoxContainer/Scroll.scroll_vertical -= event.relative.y
-	if (event is InputEventScreenDrag):
-		$VBoxContainer/HBoxContainer/Scroll.scroll_vertical -= event.relative.y
+		#UpdateShopItemsDetails()
+func UpdateShopItemsDetails() -> void:
+	for g:TownShopItem in $VBoxContainer/HBoxContainer/Scroll/VBoxContainer.get_children():
+		g.ToggleDetails(g.global_position.y > 0 and g.global_position.y < get_viewport_rect().size.y - 150)

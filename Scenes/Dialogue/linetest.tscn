@@ -24,6 +24,7 @@ frequency = 471.38
 amplitude = 20.0
 buffer_size = 748
 phase = 0.861716
+LineWidth = -1.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("3_uq335")

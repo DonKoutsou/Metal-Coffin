@@ -14,6 +14,7 @@ func _ready() -> void:
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property($w, "modulate", Color(1,1,1), 2)
+	LoopAmp()
 
 func _on_play_pressed() -> void:
 	GameStart.emit(false)
@@ -28,3 +29,11 @@ func _on_load_pressed() -> void:
 func On_Credits_Pressed() -> void:
 	SpawnedCredits = CreditsScene.instantiate()
 	$w.add_child(SpawnedCredits)
+
+
+func LoopAmp() -> void:
+	var Tw = create_tween()
+	Tw.set_trans(Tween.TRANS_BOUNCE)
+	Tw.tween_property($w/LineDrawer, "amplitude", randf_range(-80, 80), 0.2)
+	await Tw.finished
+	call_deferred("LoopAmp")

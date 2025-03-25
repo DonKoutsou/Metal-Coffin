@@ -27,7 +27,8 @@ func _ready() -> void:
 			CurrentFleetShipPlecement.add_child(ShipCont)
 		ShipCont.SetShip(CurrentFleet[Ship])
 		ShipCont.connect("OnShipSelected", OnShipContainerSelecter.bind(ShipCont))
-		
+	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
+	
 func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 	var Ship = Cont.ContainedShip
 	if (CurrentFleet.has(Ship)):

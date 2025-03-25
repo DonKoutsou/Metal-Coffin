@@ -10,6 +10,9 @@ class_name CardFightShipInfo
 
 @export var CardScene : PackedScene
 
+func _ready() -> void:
+	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
+
 func SetUpShip(Ship : BattleShipStats) -> void:
 	CaptainPortrait.texture = Ship.CaptainIcon
 	ShipIcon.texture = Ship.ShipIcon
@@ -22,7 +25,7 @@ func SetUpShip(Ship : BattleShipStats) -> void:
 		C.Dissable()
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		$VBoxContainer/HBoxContainer/HBoxContainer/Cards.scroll_vertical -= event.relative.y
+		$VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer/Cards.scroll_vertical -= event.relative.y
 
 func _on_button_pressed() -> void:
 	queue_free()

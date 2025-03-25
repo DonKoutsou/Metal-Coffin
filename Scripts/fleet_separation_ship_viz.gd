@@ -11,6 +11,9 @@ signal OnShipSelected
 
 var ContainedShip : MapShip
 
+func _ready() -> void:
+	UISoundMan.GetInstance().AddSelf($Button)
+
 func SetShip(Ship : MapShip) -> void:
 	ContainedShip = Ship
 	SetVisuals(Ship.Cpt)

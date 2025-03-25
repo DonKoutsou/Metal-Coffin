@@ -96,7 +96,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 74.0
-offset_top = 67.0
+offset_top = 69.0
 offset_right = -334.0
 offset_bottom = -72.0
 grow_horizontal = 2
@@ -114,7 +114,7 @@ snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(792, 509)
+size = Vector2i(792, 507)
 render_target_update_mode = 4
 
 [node name="Ground" type="Control" parent="SubViewportContainer/ViewPort"]

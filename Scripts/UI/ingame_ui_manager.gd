@@ -86,3 +86,6 @@ func _input(event: InputEvent) -> void:
 		
 func _on_control_3_gui_input(event: InputEvent) -> void:
 	GUI_Input.emit(event)
+
+func Stuter() -> void:
+	var mat : ShaderMaterial = $Control3/Screen.material

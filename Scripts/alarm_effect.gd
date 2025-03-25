@@ -27,7 +27,7 @@ func _process(_delta):
 	queue_redraw()
 
 func _draw():
-	print(timer.wait_time - timer.time_left)
+	#print(timer.wait_time - timer.time_left)
 	for i in range(num_circles):
 		var radius = i * circle_spacing + expansion_rate * ((timer.wait_time - timer.time_left) - (timer.wait_time / 2))
 		if radius <= max_radius and radius > 0:

@@ -33,7 +33,9 @@ class_name Card_Fight
 @export var EnemyShipVisualPlecement : Control
 @export var PlayerShipVisualPlecement : Control
 @export var TargetSelect : CardFightTargetSelection
-
+@export var CardScrollContainer : ScrollContainer
+@export var SelectedCardScrollContainer : ScrollContainer
+@export var EnergyLabel : Label
 
 #Stats kept to show at the end screen
 var DamageDone : float = 0
@@ -173,7 +175,7 @@ func RunTurn() -> void:
 		
 	ClearCards()
 	
-	$VBoxContainer4/VBoxContainer4.visible = false
+	$VBoxContainer4/PanelContainer2.visible = false
 	
 	for Ship in ShipTurns:
 		var PerformedActions = await PerformActions(Ship)
@@ -190,7 +192,7 @@ func RunTurn() -> void:
 	if (GameOver):
 		return
 		
-	$VBoxContainer4/VBoxContainer4.visible = true
+	$VBoxContainer4/PanelContainer2.visible = true
 	
 	RefundUnusedCards()
 	ActionList.Clear()
@@ -469,6 +471,24 @@ func ClearCards() -> void:
 	for g in SelectedCardPlecement.get_children():
 		g.queue_free()
 
+func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
+	var c = CardScene.instantiate() as Card
+
+	c.SetCardStats(C.CStats, [])
+	c.TargetLoc = C.TargetLoc
+	$Control.add_child(c)
+	c.global_position = OriginalPos
+	
+	var PlecementTw = create_tween()
+	PlecementTw.set_ease(Tween.EASE_OUT)
+	PlecementTw.set_trans(Tween.TRANS_QUAD)
+	PlecementTw.tween_property(c, "global_position", C.global_position, 0.4)
+	C.visible = false
+	await PlecementTw.finished
+	c.queue_free()
+	C.visible = true
+	
+
 func OnCardSelected(C : Card, Option : CardOption) -> void:
 	var Action = C.CStats.duplicate() as CardStats
 	var CurrentShip = ShipTurns[CurrentTurn]
@@ -481,9 +501,9 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 			target = EnemyShips[0]
 		else:
 			TargetSelect.SetEnemies(EnemyShips)
-			$VBoxContainer4/VBoxContainer4.visible = false
+			$VBoxContainer4/PanelContainer2.visible = false
 			target = await TargetSelect.EnemySelected
-			$VBoxContainer4/VBoxContainer4.visible = true
+			$VBoxContainer4/PanelContainer2.visible = true
 	else:
 		target = CurrentShip
 	#for g in C.CStats.Options:
@@ -524,11 +544,20 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 			Ammo[Option] -= 1
 			if (Ammo[Option] == 0):
 				Ammo.erase(Option)
+				
+	#DoCardPlecementAnimation(c, C.global_position)
+	call_deferred("DoCardPlecementAnimation", c, C.global_position)
 	UpdateEnergy()
 	UpdateHandCards()
+	
+	
 
 func RemoveCard(C : Card, _Option : CardOption) -> void:
-	C.queue_free()
+	#var PrevLoc = C.global_position
+	#C.get_parent().remove_child(C)
+	#$Control.add_child(C)
+	#C.global_position = PrevLoc
+	C.KillCard()
 	#if (C.CStats is OffensiveCardStats):
 	if (C.CStats.Consume):
 		var ShipCards = ShipTurns[CurrentTurn].Cards
@@ -557,17 +586,32 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 	Energy += C.GetCost()
 	UpdateEnergy()
 	UpdateHandCards()
-	
+
+var EnergyBarTween : Tween
+
 func UpdateEnergy() -> void:
-	EnergyBar.value = Energy
-	EnergyBar.get_child(0).text = var_to_str(Energy) + " / 4"
+	if (is_instance_valid(EnergyBarTween)):
+		EnergyBarTween.kill()
+	EnergyBarTween = create_tween()
+	EnergyBarTween.set_ease(Tween.EASE_OUT)
+	EnergyBarTween.set_trans(Tween.TRANS_QUAD)
+	EnergyBarTween.tween_method(UpdateEnergyBar, EnergyBar.value, Energy, 0.5)
+
+
+func UpdateEnergyBar(NewVal : float) -> void:
+	EnergyBar.value = NewVal
+	EnergyLabel.text = var_to_str(roundi(NewVal)) + " / 4"
 
 #func PlayOffensiveAction(SourcePos : Vector2, TargetPos : Vector2, Countered : bool) -> void:
 	#pass
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		$VBoxContainer4/VBoxContainer4/ScrollContainer.scroll_vertical -= event.relative.y
+		CardScrollContainer.scroll_vertical -= event.relative.y
+
+func _on_selected_card_scroll_gui_input(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		SelectedCardScrollContainer.scroll_vertical -= event.relative.y
 
 func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	var Stats = BattleShipStats.new()

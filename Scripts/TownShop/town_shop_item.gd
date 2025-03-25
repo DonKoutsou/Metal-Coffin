@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 
 class_name TownShopItem
 
@@ -81,3 +81,7 @@ func UpdateBar(Added : int):
 	#FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
 	PlOwnedT.text = var_to_str(roundi(PlAmm + BoughtAmm))
 	ShopOwnedT.text = var_to_str(roundi(ShopAmm))
+
+func ToggleDetails(t : bool) -> void:
+	$VBoxContainer/HBoxContainer.visible = t
+	$VBoxContainer/ProgressBar.visible = t

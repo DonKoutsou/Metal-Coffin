@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 class_name ItemDescriptor
 
@@ -29,10 +29,13 @@ var UsingAmm : int = 1
 
 func _ready() -> void:
 	call_deferred("PlayIntroAnim")
-	UISoundMan.GetInstance().Refresh()
+	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade)
+	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer)
 
 func PlayIntroAnim() -> void:
 	var tw = create_tween()
+	tw.set_ease(Tween.EASE_OUT)
+	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(self, "size", Vector2(size.x, size.y), 0.5)
 	set_deferred("size", Vector2(size.x, 0))
 

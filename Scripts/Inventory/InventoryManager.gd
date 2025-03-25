@@ -346,14 +346,19 @@ func ToggleInventory() -> void:
 	visible = !visible
 	InventoryToggled.emit(!visible)
 	$AudioStreamPlayer.play()
-	#ToggleTween = create_tween()
-	#if (visible):
-		#size = Vector2(size.x, 0)
-		#ToggleTween.set_ease(Tween.EASE_IN)
-		#ToggleTween.set_trans(Tween.TRANS_QUAD)
-		#ToggleTween.tween_property(self, "size", Vector2(size.x, get_viewport_rect().size.y), 0.5)
-	#else:
-		#ToggleTween.tween_property(self, "size", Vector2(size.x, 0), 0.2)
+	ToggleTween = create_tween()
+	if (visible):
+		size = Vector2(size.x, 0)
+		ToggleTween.set_ease(Tween.EASE_OUT)
+		ToggleTween.set_trans(Tween.TRANS_QUAD)
+		ToggleTween.tween_property(self, "size", Vector2(size.x, get_viewport_rect().size.y), 0.3)
+	else:
+		visible = !visible
+		ToggleTween.set_ease(Tween.EASE_OUT)
+		ToggleTween.set_trans(Tween.TRANS_QUAD)
+		ToggleTween.tween_property(self, "size", Vector2(size.x, 0), 0.3)
+		await ToggleTween.finished
+		visible = !visible
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

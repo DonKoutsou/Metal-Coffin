@@ -237,6 +237,8 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 	if (KnownEnemies.keys().has(Ship)):
 		KnownEnemies[Ship] += 1
 	else :
+		if (SeenBy.VisibleBy.size() > 0):
+			SeenBy.DoAlarmVisual()
 		KnownEnemies[Ship] = 1
 
 func OnEnemyVisualLost(Ship : MapShip) -> void:

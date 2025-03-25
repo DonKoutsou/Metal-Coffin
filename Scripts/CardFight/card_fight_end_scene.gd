@@ -4,6 +4,9 @@ class_name CardFightEndScene
 
 signal ContinuePressed
 
+func _ready() -> void:
+	UISoundMan.GetInstance().AddSelf($VBoxContainer/ContinueButton)
+
 func _on_continue_button_pressed() -> void:
 	ContinuePressed.emit()
 

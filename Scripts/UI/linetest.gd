@@ -19,7 +19,7 @@ var playback : AudioStreamGeneratorPlayback
 @export var buffer_size := 2048
 @export var phase := 0.0
 @export var volume := 0.5
-
+@export var LineWidth : float = 2
 var ContainerSize : Vector2
 
 #func _ready() -> void:
@@ -105,7 +105,7 @@ func _draw() -> void:
 		else:
 			point = Vector2(y, ContainerSize.y / 2 + x)
 		if y > 0:
-			draw_line(prev_point, point, Col)
+			draw_line(prev_point, point, Col, LineWidth, true)
 		
 		prev_point = point
 	

@@ -28,6 +28,7 @@ CardDesc = NodePath("VBoxContainer/CardDesc")
 CardCost = NodePath("CardCost")
 
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

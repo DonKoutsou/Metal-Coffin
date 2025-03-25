@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=13 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -7,6 +7,26 @@
 [ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="4_ancht"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
+[ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="8_mjxvy"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
+[ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="10_jcj0v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjxvy"]
+content_margin_left = 10.0
+content_margin_top = 18.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.067, 0.133, 0.138, 0.795)
+border_width_left = 2
+border_width_top = 8
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_detail = 1
+shadow_size = 8
+anti_aliasing_size = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bgwj"]
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
@@ -47,97 +67,153 @@ size_flags_horizontal = 3
 texture = ExtResource("4_ancht")
 expand_mode = 1
 
+[node name="LineDrawer" parent="w" instance=ExtResource("8_mjxvy")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjxvy")
+OrientationUpDown = false
+Speed = 5.0
+amplitude = 10.0
+waveform_points = 5
+
 [node name="TextureRect2" type="TextureRect" parent="w"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -566.0
-offset_top = -115.0
-offset_right = 431.0
-offset_bottom = 445.0
+offset_left = -605.0
+offset_top = -152.0
+offset_right = 392.0
+offset_bottom = 408.0
 grow_horizontal = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="w"]
+[node name="PanelContainer2" type="PanelContainer" parent="w"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -166.0
-offset_top = -95.0
-offset_right = -34.0
-offset_bottom = -31.0
+offset_left = -169.0
+offset_top = -109.0
+offset_right = -17.0
+offset_bottom = -17.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_styles/panel = ExtResource("9_3vvgq")
 
-[node name="TextureRect" type="TextureRect" parent="w/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="w/PanelContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="w/PanelContainer2/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_q14vk")
 
-[node name="TextureRect2" type="TextureRect" parent="w/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="w/PanelContainer2/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_s86m3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="w"]
+[node name="PanelContainer" type="PanelContainer" parent="w"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 68.0
-offset_top = -295.0
-offset_right = 312.0
-offset_bottom = -29.0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -577.0
+offset_top = -35.0
+offset_right = -220.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("9_3vvgq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="w/PanelContainer"]
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Play" type="Button" parent="w/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Play" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("6_gn124")
+theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- NEW GAME -"
 
-[node name="Panel4" type="Panel" parent="w/VBoxContainer"]
+[node name="Panel4" type="Panel" parent="w/PanelContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
-[node name="Load" type="Button" parent="w/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Load" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("6_gn124")
+theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- LOAD -"
 
-[node name="Panel5" type="Panel" parent="w/VBoxContainer"]
+[node name="Panel5" type="Panel" parent="w/PanelContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
-[node name="Credits" type="Button" parent="w/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Credits" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("6_gn124")
+theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- CREDITS -"
 
-[node name="Panel6" type="Panel" parent="w/VBoxContainer"]
+[node name="Panel6" type="Panel" parent="w/PanelContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
-[node name="Exit" type="Button" parent="w/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Exit" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("6_gn124")
+theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- EXIT -"
 
-[connection signal="pressed" from="w/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="w/VBoxContainer/Load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="w/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
-[connection signal="pressed" from="w/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="ScreenFrameLong" type="TextureRect" parent="w"]
+visible = false
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_jcj0v")
+expand_mode = 1
+
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

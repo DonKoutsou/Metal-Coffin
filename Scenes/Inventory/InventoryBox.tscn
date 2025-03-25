@@ -37,7 +37,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="InventoryBox" type="PanelContainer" node_paths=PackedStringArray("Butto")]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(110, 110)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -57,7 +57,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 2
 theme = ExtResource("1_xu5pf")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 disabled = true
 action_mode = 0
 autowrap_mode = 2
