@@ -96,7 +96,7 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 func UpdateCurrentFleetStats() -> void:
 	var Cap = CurrentFleet[0]
 	var FuelStats = Cap.GetFuelStats()
-	CurrentFleetRangeText.text = var_to_str(roundi(FuelStats["FleetRange"])) + " km"
+	CurrentFleetRangeText.text = "Range : " + var_to_str(roundi(FuelStats["FleetRange"])) + " km"
 	CurrentFleetFuelBar.max_value = FuelStats["MaxFuel"]
 	CurrentFleetFuelBar.value = FuelStats["CurrentFuel"]
 
@@ -104,11 +104,11 @@ func UpdateNewFleetStats() -> void:
 	if (NewFleet.size() > 0):
 		var Cap = NewFleet[0]
 		var FuelStats = Cap.GetFuelStats()
-		NewFleetRangeText.text = var_to_str(roundi(FuelStats["FleetRange"])) + " km"
+		NewFleetRangeText.text = "Range : " + var_to_str(roundi(FuelStats["FleetRange"])) + " km"
 		NewFleetFuelBar.max_value = FuelStats["MaxFuel"]
 		NewFleetFuelBar.value = FuelStats["CurrentFuel"]
 	else:
-		NewFleetRangeText.text = "0"
+		NewFleetRangeText.text = "Range : 0"
 		NewFleetFuelBar.max_value = 0
 		NewFleetFuelBar.value = 0
 

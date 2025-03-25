@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://c2db1rw6borur"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_2kmgx"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_0ey4p"]
 [ext_resource type="Script" uid="uid://feql74pw4kam" path="res://Scripts/WorldView/world_view_questionair.gd" id="2_wn0u1"]
 [ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="3_5vy1l"]
 [ext_resource type="Resource" uid="uid://b14pf60c6owon" path="res://Resources/Worldview/Questions/ComposureAgitation/Question1.tres" id="4_0jjjo"]
@@ -38,7 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_2kmgx")
+theme_override_styles/panel = ExtResource("1_0ey4p")
 script = ExtResource("2_wn0u1")
 Text = NodePath("VBoxContainer/Label")
 IntroDialogue = Array[String]([".................................", ".................................................", "Where am I ?", "A voice cuts through the void, calming yet authoritative—likely female.", "\"Steady your breath, pilot. This may cause some discomfort, but I assure you, it’s temporary.\"", "Her words linger, drawing fragments of reality back to you.", " \"As you know, the pilot initiation program is mandatory for all aspiring pilots. Your time has come to undertake this test.\"", "Clarity returns. You had prepared for this moment, expecting a written exam. Yet, something feels different.", "Her voice, clear and resonant, continues.", "\"You're likely curious about your current situation. Rest assured, it's all precautionary, tailored to gather the data we need.\"", "\"Your physiological readings are carefully monitored. You'll be released shortly after the test concludes.\"", "\"We've curated a selection of 12 questions to serve as your evaluation. Stay calm and respond as thoroughly as possible. The screen will display them shortly.\"", "Your heart rate quickens. Can something so simple stand as a barrier to the duty you've committed to? You chose this war for reasons beyond yourself. Would they truly deny you this chance to honor that choice?", "\"Remember, pilot, you will hold the lives of your comrades in your hands. This is a matter of gravity. While I empathize with your anxieties, the role of a pilot is earned, not given.\"", "She ......", "INITIALISING TEST"])

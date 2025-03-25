@@ -176,7 +176,9 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 
 func OnShipDestroyed(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
-
+	if (ShipLodCheckList.has(Ship)):
+		ShipLodCheckList.erase(Ship)
+		
 	if (Ship.GetDroneDock().DockedDrones.size() > 0):
 		var NewCommander = Ship.GetDroneDock().DockedDrones[0] as HostileShip
 		NewCommander.Command = null

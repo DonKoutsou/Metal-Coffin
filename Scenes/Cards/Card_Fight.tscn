@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="15_dpyfj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7epx"]
-content_margin_top = 5.0
+content_margin_top = 20.0
 content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7epx"]
@@ -51,7 +51,7 @@ border_color = Color(0.482095, 0.689901, 0.704644, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardScrollContainer", "SelectedCardScrollContainer", "EnergyLabel") groups=["CardFight"]]
+[node name="CardFight" type="PanelContainer" node_paths=PackedStringArray("OffensiveCardPlecement", "DeffensiveCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardScrollContainer", "EnergyLabel", "CardSelectContainer", "ActionDeclaration") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -76,8 +76,23 @@ EnemyShipVisualPlecement = NodePath("VBoxContainer4/EnemyShipPlecement")
 PlayerShipVisualPlecement = NodePath("VBoxContainer4/PlayerShipPlecement")
 TargetSelect = NodePath("VBoxContainer4/TargetSelect")
 CardScrollContainer = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll")
-SelectedCardScrollContainer = NodePath("")
 EnergyLabel = NodePath("VBoxContainer4/PanelContainer2/VBoxContainer4/HBoxContainer/ProgressBar/Label2")
+CardSelectContainer = NodePath("VBoxContainer4/PanelContainer2")
+ActionDeclaration = NodePath("Action Declaration")
+
+[node name="Action Declaration" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_ial63")
+
+[node name="Label" type="Label" parent="Action Declaration"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "ACTION PICK PHASE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer4" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -198,10 +213,16 @@ size_flags_vertical = 3
 theme_override_constants/separation = -200
 alignment = 1
 
+[node name="Control" type="Control" parent="VBoxContainer4"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="TargetSelect" type="PanelContainer" parent="VBoxContainer4"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_ial63")
 script = ExtResource("15_dpyfj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer4/TargetSelect"]

@@ -260,8 +260,8 @@ func OnCharacterRemoved(Cha : Captain) -> void:
 	_CharacterInventories.erase(Cha)
 	
 func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
-	var CharInv = CharInvScene.instantiate() as CharacterInventory
-	Cha._CharInv = CharInv
+	var CharInv
+	
 	if (_CharacterInventories.has(Cha)):
 		CharInv = _CharacterInventories[Cha]
 	else:
@@ -278,6 +278,8 @@ func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
 		CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
 		CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
 		
+	Cha._CharInv = CharInv
+	
 	for g in CharInv._GetInventoryBoxes():
 		for z in g._ContentAmmout:
 			CharInv.RemoveItemFromBox(g)

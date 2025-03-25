@@ -36,7 +36,8 @@ class_name Card_Fight
 @export var CardScrollContainer : ScrollContainer
 @export var SelectedCardScrollContainer : ScrollContainer
 @export var EnergyLabel : Label
-
+@export var CardSelectContainer : Control
+@export var ActionDeclaration : Control
 #Stats kept to show at the end screen
 var DamageDone : float = 0
 var DamageGot : float = 0
@@ -72,6 +73,8 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 #Card fight armaments will also be resupplied in same way in towns. DONE
 #enemies need to have inventory of armaments to see what they can do in fight SEMI-DONE
 
+var CardSelectSize : float
+
 func _ready() -> void:
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -86,7 +89,58 @@ func _ready() -> void:
 	
 	print("Card fight initialised. {0} player ship(s) VS {1} enemy ship(s)".format([PlayerShips.size(), EnemyShips.size()]))
 	
-	RunTurn()
+	call_deferred("StoreContainerSize")
+	
+	call_deferred("RunTurn")
+
+func StoreContainerSize() -> void:
+	CardSelectSize = CardSelectContainer.size.y
+	CardSelectContainer.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	#CardSelectContainer.custom_minimum_size.y = CardSelectSize
+	CardSelectContainer.visible = false
+	
+	ActionDeclaration.get_child(0).visible = false
+	ActionDeclaration.get_child(0).modulate = Color(1,1,1,0)
+	ActionDeclaration.visible = false
+
+func DoActionDeclaration(ActionName : String) -> void:
+	$VBoxContainer4/Control.visible = true
+	ActionDeclaration.visible = true
+	ActionDeclaration.get_child(0).text = ActionName
+	var Tw = create_tween()
+	Tw.set_ease(Tween.EASE_OUT)
+	Tw.set_trans(Tween.TRANS_QUAD)
+	Tw.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(650, 80), 0.5)
+	await Tw.finished
+	
+	ActionDeclaration.get_child(0).visible = true
+	
+	var Tw2 = create_tween()
+	Tw2.set_ease(Tween.EASE_OUT)
+	Tw2.set_trans(Tween.TRANS_QUAD)
+	Tw2.tween_property(ActionDeclaration.get_child(0), "modulate", Color(1,1,1,1), 0.5)
+	await Tw2.finished
+	
+	await wait(1)
+	
+	var Tw3 = create_tween()
+	Tw3.set_ease(Tween.EASE_OUT)
+	Tw3.set_trans(Tween.TRANS_QUAD)
+	Tw3.tween_property(ActionDeclaration.get_child(0), "modulate", Color(1,1,1,0), 0.5)
+	await Tw3.finished
+	
+	ActionDeclaration.get_child(0).visible = false
+	
+	var Tw4 = create_tween()
+	Tw4.set_ease(Tween.EASE_OUT)
+	Tw4.set_trans(Tween.TRANS_QUAD)
+	Tw4.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(0, 80), 0.5)
+	await Tw4.finished
+	$VBoxContainer4/Control.visible = false
+	ActionDeclaration.visible = false
+
+func wait(secs : float) -> Signal:
+	return get_tree().create_timer(secs).timeout
 
 #function to sort battle ships based on their speed
 static func speed_comparator(a, b):
@@ -161,6 +215,17 @@ var GameOver : bool = false
 signal PlayerActionPickingEnded
 
 func RunTurn() -> void:
+	await DoActionDeclaration("Action Pick Phase")
+	
+	CardSelectContainer.visible = true
+	var Tw2 = create_tween()
+	Tw2.set_ease(Tween.EASE_OUT)
+	Tw2.set_trans(Tween.TRANS_QUAD)
+	Tw2.tween_property(CardSelectContainer, "custom_minimum_size", Vector2(0,CardSelectSize), 0.5)
+	await Tw2.finished
+	
+	CardSelectContainer.get_child(0).visible = true
+	
 	CurrentTurn = 0
 	
 	for Ship in ShipTurns:
@@ -175,7 +240,18 @@ func RunTurn() -> void:
 		
 	ClearCards()
 	
-	$VBoxContainer4/PanelContainer2.visible = false
+	#CardSelectContainer.custom_minimum_size.y = CardSelectSize
+	
+	CardSelectContainer.get_child(0).visible = false
+	
+	var Tw = create_tween()
+	Tw.set_ease(Tween.EASE_OUT)
+	Tw.set_trans(Tween.TRANS_QUAD)
+	Tw.tween_property(CardSelectContainer, "custom_minimum_size", Vector2(0,0), 0.5)
+	await Tw.finished
+	CardSelectContainer.visible = false
+	
+	await DoActionDeclaration("Action Perform Phase")
 	
 	for Ship in ShipTurns:
 		var PerformedActions = await PerformActions(Ship)
@@ -191,8 +267,8 @@ func RunTurn() -> void:
 	
 	if (GameOver):
 		return
-		
-	$VBoxContainer4/PanelContainer2.visible = true
+
+	
 	
 	RefundUnusedCards()
 	ActionList.Clear()
