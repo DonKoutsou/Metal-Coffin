@@ -314,7 +314,7 @@ func HasClose(pos : Vector2, places : Array[Town]) -> bool:
 	return b
 
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
-	return Vector2(randf_range(-5000, +5000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
+	return Vector2(randf_range(-10000, +10000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
 
 func MapGenFinished(Spots : Array[Town]) -> void:
 	SpotList.append_array(Spots)

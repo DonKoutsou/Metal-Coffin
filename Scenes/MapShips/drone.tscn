@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=17 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" uid="uid://crsatqn78m71w" path="res://Scripts/Ships/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="9_82ju4"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_f4h60"]
+[ext_resource type="PackedScene" uid="uid://nt0q5le0g6aj" path="res://Scenes/Old/Cloudthing.tscn" id="10_dxnd3"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p3smt"]
@@ -63,14 +64,6 @@ volume_db = -15.0
 pitch_scale = 0.01
 bus = &"Engine"
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.25
-blend_mode = 2
-shadow_color = Color(0.919342, 0, 0.452291, 0)
-texture = ExtResource("5_k2uly")
-texture_scale = 3.5
-height = 200.0
-
 [node name="ShipBody" type="Area2D" parent="."]
 collision_mask = 13
 
@@ -116,5 +109,16 @@ points = PackedVector2Array(0, 0, 10, 0)
 default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="DroneDock" parent="." instance=ExtResource("9_82ju4")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.25
+blend_mode = 2
+shadow_color = Color(0.919342, 0, 0.452291, 0)
+texture = ExtResource("5_k2uly")
+texture_scale = 4.8
+height = 40.0
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("10_dxnd3")]
+z_index = -1
 
 [connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]

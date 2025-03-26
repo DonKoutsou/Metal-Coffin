@@ -48,9 +48,9 @@ func SetSimulationSpeed(Speed : float) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Simulation Speed changed to " + var_to_str(Speed))
 func SpeedToggle(t : bool) -> void:
 	if (t):
-		SimulationSpeed = 10
+		SimulationSpeed = 5
 	else:
-		SimulationSpeed = 0.5
+		SimulationSpeed = 0.2
 	#get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	#_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
 	#get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)

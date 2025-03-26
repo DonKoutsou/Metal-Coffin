@@ -86,13 +86,13 @@ func _physics_process(delta: float) -> void:
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
 	if (Landing):
-		UpdateAltitude(Altitude - (20 * SimulationSpeed))
+		UpdateAltitude(Altitude - (60 * SimulationSpeed))
 		if (Altitude <= 0):
 			Altitude = 0
 			LandingEnded.emit(self)
 			Landing = false
 	if (TakingOff):
-		UpdateAltitude(Altitude + (20 * SimulationSpeed))
+		UpdateAltitude(Altitude + (60 * SimulationSpeed))
 		if (Altitude >= 10000):
 			Altitude = 10000
 			TakeoffEnded.emit(self)

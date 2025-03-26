@@ -43,16 +43,16 @@ func EnableMissileShake() -> void:
 	shakestr = max(1.5, shakestr)
 	GoDownValue = 1
 	GoingDown = true
-func EnableDamageShake() -> void:
+func EnableDamageShake(amm : float) -> void:
 	for g in Cabled:
-		g.ApplyShake(2)
+		g.ApplyShake(amm)
 	Shake = true
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")
 	$Boom.play()
 	PauseShake(false)
-	shakestr = max(1.5, shakestr)
-	GoDownValue = 2
+	shakestr = max(amm, shakestr)
+	GoDownValue = max(amm, GoDownValue)
 	GoingDown = true
 func DissableShake() -> void:
 	GoingDown = true

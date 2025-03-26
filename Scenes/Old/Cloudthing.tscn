@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpdjsljrku63t"]
+[gd_scene load_steps=8 format=3 uid="uid://nt0q5le0g6aj"]
 
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="1_gnsfh"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="1_gxbtn"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gxbtn"]
+light_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_itxm5"]
 offsets = PackedFloat32Array(0, 0.315, 0.535993, 0.775, 1)
@@ -24,39 +27,22 @@ particle_flag_damping_as_friction = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
-emission_ring_radius = 400.0
-emission_ring_inner_radius = 400.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 100.0
 emission_ring_cone_angle = 90.0
 angle_min = 1.07288e-05
 angle_max = 720.0
-velocity_pivot = Vector3(0, 2, 0)
+direction = Vector3(-1, 1, 0)
 spread = 0.0
-initial_velocity_min = 5.0
-initial_velocity_max = 10.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
-tangential_accel_min = 0.0299978
-tangential_accel_max = 0.709998
-damping_min = 30.909
-damping_max = 100.0
-scale_min = 3.0
-scale_max = 3.0
 color_ramp = SubResource("GradientTexture1D_gsb7r")
 emission_curve = SubResource("CurveTexture_ejgp5")
-collision_mode = 2
-collision_use_scale = true
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvtr6"]
-polygon = PackedVector2Array(0, -95, 77, -77, 95, 0, 77, 77, 0, 95, -77, 77, -95, 0, -77, -77)
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
 process_mode = 3
-amount = 50
-texture = ExtResource("1_gnsfh")
-preprocess = 5.0
-randomness = 0.62
-draw_order = 0
+material = SubResource("CanvasItemMaterial_gxbtn")
+texture = ExtResource("1_gxbtn")
+lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_ooyv3")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(1, -2)
-occluder = SubResource("OccluderPolygon2D_xvtr6")

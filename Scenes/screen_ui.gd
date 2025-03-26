@@ -213,7 +213,7 @@ func OnControlledShipDamaged(_DamageAmm : float) -> void:
 	#var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_BOUNCE)
 	#tw.tween_property($ScreenCam, "shakestr", 0, 8)
-	Cam.EnableDamageShake()
+	Cam.EnableDamageShake(_DamageAmm / 10)
 	#$ScreenCam.Shake = false
 	
 	

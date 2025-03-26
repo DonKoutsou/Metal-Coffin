@@ -22,10 +22,30 @@ uniform vec2 warp = vec2(64.0, 24.0);
 uniform float maskDark : hint_range(0.0, 1.0) = 0.5;
 uniform float maskLight : hint_range(1.0, 2.0) = 1.5;
 
+uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
+uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
+uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
+uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
+
 float ToLinear1(float c){ return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
 vec3 ToLinear(vec3 c){ return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b)); }
 float ToSrgb1(float c){ return (c < 0.0031308) ? c * 12.92 : 1.055 * pow(c, 0.41666) - 0.055; }
 vec3 ToSrgb(vec3 c){ return vec3(ToSrgb1(c.r), ToSrgb1(c.g), ToSrgb1(c.b)); }
+
+float ramp(float y, float start, float end)
+{
+    float inside = step(start, y) - step(end, y);
+    float fact = (y-start)/(end-start) * inside;
+    return (1.-fact) * inside;
+}
+
+float stripes(vec2 uv)
+{
+    float noi = scanlines_opacity;
+    return ramp(mod(uv.y * 4. * scanlines_spacing + TIME * scanlines_speed / (2. * scanlines_spacing) + sin(TIME * scanlines_speed + sin(TIME * scanlines_speed * 0.63 * scanlines_spacing)), 1.), scanline_thickness, .6) * noi;
+}
+
+
 
 vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
 	pos = floor(pos * res + off) / res;
@@ -110,13 +130,14 @@ void fragment(){
 	float aberration_amount = 0.005 * window * 5.0;
 	vec2 red_offset = vec2(-aberration_amount, 0.0);
 	vec2 blue_offset = vec2(aberration_amount, 0.0);
-
+	COLOR.rgb += stripes(pos);
 	COLOR.r = mix(COLOR.r, texture(SCREEN_TEXTURE, look + red_offset).r, 0.5);
 	COLOR.g = mix(COLOR.g, texture(SCREEN_TEXTURE, look).g, 0.5);
 	COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + blue_offset).b, 0.5);
 
 	float vigAmt = (3.3) * vignette_strength;
 	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 2.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 2.0));
+	
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
 }

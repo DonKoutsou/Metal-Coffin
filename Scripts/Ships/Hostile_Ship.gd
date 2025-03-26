@@ -336,7 +336,7 @@ func OnShipSeen(SeenBy : Node2D):
 		return
 	
 	MapPointerManager.GetInstance().AddShip(self, false)
-	#SimulationManager.GetInstance().TogglePause(true)
+	SimulationManager.GetInstance().TogglePause(true)
 	ShipCamera.GetInstance().FrameCamToPos(global_position)
 
 func wait(seconds : float) -> Signal:

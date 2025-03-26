@@ -20,9 +20,9 @@ var ZoomStage = 1
 var ZoomStageMulti = 0.5
 
 var ZoomTw : Tween
-
+var prevzoom = Vector2(0,0)
 func _HANDLE_ZOOM(zoomval : float):
-	var prevzoom = zoom
+	#prevzoom = zoom
 	if (is_instance_valid(ZoomTw)):
 		ZoomTw.kill()
 	ZoomTw = create_tween()
@@ -30,8 +30,8 @@ func _HANDLE_ZOOM(zoomval : float):
 	ZoomTw.set_trans(Tween.TRANS_QUART)
 	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(10,10))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
-	ZoomTw.tween_method(UpdateZoom, prevzoom, newzoom, 1)
-	#zoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(10,10))
+	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
+	prevzoom = newzoom
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	call_deferred("OnZoomChanged", newzoom)
 	
@@ -100,14 +100,16 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		FrameTween.kill()
 	var maxposY = 999999
 	var vpsizehalf = (get_viewport_rect().size.x / 2)
-	var maxposX = Vector2(vpsizehalf - 6000, vpsizehalf + 6000)
+	var maxposX = Vector2(vpsizehalf - 11000, vpsizehalf + 11000)
 	var rel = relativeMovement / zoom
 	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,1000) )
 	if (newpos.x != position.x):
 		position.x = newpos.x
 	if (newpos.y != position.y):
-		
 		position.y = newpos.y
+	
+	var CloudMat = $ColorRect.material as ShaderMaterial
+	CloudMat.set_shader_parameter("offset", global_position / 1000)
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():

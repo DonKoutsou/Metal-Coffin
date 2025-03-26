@@ -2,6 +2,8 @@ extends PanelContainer
 
 class_name CardFightTargetSelection
 
+@export var ShipVizScene : PackedScene
+
 signal EnemySelected(Enemy : BattleShipStats)
 
 func _ready() -> void:
@@ -9,8 +11,8 @@ func _ready() -> void:
 
 func SetEnemies(EnemyList : Array[BattleShipStats]) -> void:
 	for g in EnemyList:
-		var b = Button.new()
-		b.text = g.Name
+		var b = ShipVizScene.instantiate() as CardFightShipViz
+		b.SetStats(g, false)
 		$VBoxContainer/HBoxContainer.add_child(b)
 		b.connect("pressed", TargetSelected.bind(g))
 	visible = true

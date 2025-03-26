@@ -18,3 +18,7 @@ shader_parameter/bloomAmount = 5.0
 shader_parameter/warp = Vector2(20, 20)
 shader_parameter/maskDark = 0.0
 shader_parameter/maskLight = 2.0
+shader_parameter/scanlines_opacity = 0.04
+shader_parameter/scanlines_speed = 0.43
+shader_parameter/scanline_thickness = 0.58
+shader_parameter/scanlines_spacing = 0.5
