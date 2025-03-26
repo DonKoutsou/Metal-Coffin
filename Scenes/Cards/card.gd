@@ -41,11 +41,11 @@ func _ready() -> void:
 func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	CStats = Stats
 	Cost = Stats.Energy
-	var DescText =  "[center]{0}".format([Stats.CardDescription])
+	var DescText =  "{0}".format([Stats.CardDescription])
 	
 	if Stats.SelectedOption !=  null:
 		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
-		DescText =  "[center]{0}".format([ Stats.SelectedOption.OptionDescription])
+		DescText =  "{0}".format([ Stats.SelectedOption.OptionDescription])
 		Cost += Stats.SelectedOption.EnergyAdd
 	else:
 		CardName.text = Stats.CardName

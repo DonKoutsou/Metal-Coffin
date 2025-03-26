@@ -12,12 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_7mvy7"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
-[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_ufdxh"]
-[ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="14_j6nai"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="15_a2ujk"]
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
+[ext_resource type="Texture2D" uid="uid://borwlcefmcmlo" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="16_x3wib"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
+[ext_resource type="Texture2D" uid="uid://bytl8pn1yhfaa" path="res://Assets/Sand/Ground055S_1K-PNG_Color.png" id="17_28wu2"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
@@ -36,10 +36,10 @@ point_count = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28wu2"]
 shader = ExtResource("18_x3wib")
-shader_parameter/GroundTexture = ExtResource("13_ufdxh")
-shader_parameter/GroundNormalTexture = ExtResource("14_j6nai")
-shader_parameter/offset = Vector2(-0.52, 0)
-shader_parameter/Scale = Vector2(1, 1)
+shader_parameter/GroundTexture = ExtResource("17_28wu2")
+shader_parameter/GroundNormalTexture = ExtResource("16_x3wib")
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/Scale = Vector2(2, 2)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5
@@ -58,6 +58,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_o1060")
 shader_parameter/density = 3.0
 shader_parameter/speed = Vector2(0.03, -0.01)
 shader_parameter/offset = Vector2(0, 0)
+shader_parameter/custom_time = 0.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]
 light_mode = 1
@@ -147,7 +148,7 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "CityLines")]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "CityLines") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
@@ -156,16 +157,16 @@ Background = NodePath("DarkBlueBackground")
 CityLines = NodePath("../MapPointerManager/MapLineDrawer")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
-z_index = -2
+z_index = -3
 texture_filter = 1
 material = SubResource("ShaderMaterial_28wu2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -676.0
-offset_top = -568.0
-offset_right = 324.0
-offset_bottom = 432.0
+offset_left = -766.0
+offset_top = -775.0
+offset_right = 734.0
+offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -175,10 +176,10 @@ material = SubResource("ShaderMaterial_x3wib")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -676.0
-offset_top = -568.0
-offset_right = 324.0
-offset_bottom = 432.0
+offset_left = -766.0
+offset_top = -775.0
+offset_right = 734.0
+offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 

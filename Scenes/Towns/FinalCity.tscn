@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bk5qdfealbiie"]
+[gd_scene load_steps=15 format=3 uid="uid://bk5qdfealbiie"]
 
 [ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_ove43"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_5m8np"]
+[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_0b8es"]
+[ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_ao8uw"]
 [ext_resource type="Texture2D" uid="uid://cwqfdaaby7me8" path="res://Assets/MapElements/city.png" id="3_yc03l"]
 [ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="4_2dmtt"]
 [ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="5_q0xbj"]
@@ -10,9 +12,6 @@
 [ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/Dormak.tres" id="8_16bcg"]
 [ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="9_w7njc"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="10_qk3xb"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ustqo"]
-blend_mode = 1
 
 [sub_resource type="Resource" id="Resource_pf7mu"]
 script = ExtResource("9_w7njc")
@@ -33,10 +32,16 @@ position = Vector2(608, 338)
 script = ExtResource("1_ove43")
 SpotScene = ExtResource("2_5m8np")
 
+[node name="Sprite2D2" type="Sprite2D" parent="." groups=["DissapearingMap"]]
+z_index = -1
+material = ExtResource("3_ao8uw")
+scale = Vector2(0.195313, 0.195313)
+texture = ExtResource("3_0b8es")
+region_rect = Rect2(251.179, 160.971, 745.969, 227.22)
+
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
 z_index = -1
 z_as_relative = false
-material = SubResource("CanvasItemMaterial_ustqo")
 scale = Vector2(0.214844, 0.214844)
 texture = ExtResource("3_yc03l")
 

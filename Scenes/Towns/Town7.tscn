@@ -1,23 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7q06y84ke4b3"]
+[gd_scene load_steps=9 format=3 uid="uid://c7q06y84ke4b3"]
 
 [ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_3ouol"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_5sb0b"]
+[ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_lskgb"]
+[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_myk0m"]
 [ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="3_p0m7m"]
 [ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="4_ucdjx"]
 [ext_resource type="Texture2D" uid="uid://cjqfld17y71ix" path="res://Assets/MapElements/coty2.png" id="5_kjpgs"]
 [ext_resource type="Resource" uid="uid://du24ilvkea51x" path="res://Resources/MapSpots/CitySpots/CityCenter.tres" id="6_ctmg0"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kpfum"]
-blend_mode = 1
 
 [node name="Town" type="Node2D"]
 position = Vector2(608, 338)
 script = ExtResource("1_3ouol")
 SpotScene = ExtResource("2_5sb0b")
 
+[node name="Sprite2D2" type="Sprite2D" parent="." groups=["DissapearingMap"]]
+z_index = -1
+material = ExtResource("3_lskgb")
+scale = Vector2(0.121094, 0.121094)
+texture = ExtResource("3_myk0m")
+region_rect = Rect2(251.179, 160.971, 745.969, 227.22)
+
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
 z_index = -1
-material = SubResource("CanvasItemMaterial_kpfum")
 scale = Vector2(0.214844, 0.214844)
 texture = ExtResource("5_kjpgs")
 

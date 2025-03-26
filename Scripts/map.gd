@@ -67,7 +67,7 @@ func _InitialPlayerPlacament():
 	pos.y += 500
 	var PlShip = $SubViewportContainer/ViewPort/PlayerShip
 	PlShip.global_position = pos
-	GetCamera().global_position = PlShip.global_position
+	GetCamera().FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
 
 #Called when enemy ship touches friendly one to strart a fight

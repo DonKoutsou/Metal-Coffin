@@ -46,7 +46,7 @@ func OnAlarmRaised(Notify : bool) -> void:
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	SpotDropPosition.scale = Vector2(1,1) / NewZoom
-	$AnalyzeButton.visible = NewZoom <= 1
+	$AnalyzeButton.visible = NewZoom <= 0.5
 
 func EnteredScreen() -> void:
 	$AnalyzeButton.add_to_group("UnmovableMapInfo")

@@ -80,7 +80,7 @@ show_behind_parent = true
 [node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
-position = Vector2(-20, -20)
+position = Vector2(-40, -40)
 texture = ExtResource("6_6lhcj")
 
 [node name="Aceleration" type="Node2D" parent="."]
@@ -98,4 +98,4 @@ blend_mode = 2
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
 texture_scale = 4.8
-height = 20.0
+height = 50.0

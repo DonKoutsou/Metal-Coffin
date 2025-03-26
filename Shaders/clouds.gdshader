@@ -10,10 +10,12 @@ uniform vec2 speed = vec2(0.02, 0.01);
 // Custom offset for camera movement
 uniform vec2 offset;
 
+uniform float custom_time;
+
 // Called for every pixel the material is visible on
 void fragment() {
     // Combine UV, speed, time, and offset for the final texture coordinates
-    vec2 uv = UV + speed * TIME + offset;
+    vec2 uv = UV + speed * custom_time + offset;
     // Sample the noise texture
     float noise = texture(noise_texture, uv).r;
     // Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range

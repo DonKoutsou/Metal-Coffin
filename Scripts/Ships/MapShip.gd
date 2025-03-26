@@ -351,7 +351,7 @@ func Landed() -> bool:
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
 	$PlayerShipSpr.scale = Vector2(lerp(0.03, 0.1, Altitude / 10000.0), lerp(0.03, 0.1, Altitude / 10000.0))
-	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -20, Altitude / 10000.0), lerp(0, -20, Altitude / 10000.0))
+	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -40, Altitude / 10000.0), lerp(0, -40, Altitude / 10000.0))
 	for g in GetDroneDock().GetDockedShips():
 		g.UpdateAltitude(NewAlt)
 	

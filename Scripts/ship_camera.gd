@@ -11,8 +11,8 @@ signal ZoomChanged(NewVal : float)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	$Clouds.material.set_shader_parameter("offset", global_position / 1000)
-	$Ground.material.set_shader_parameter("offset", global_position / 1000)
+	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
+	$Ground.material.set_shader_parameter("offset", global_position / 1500)
 	
 static func GetInstance() -> ShipCamera:
 	return Instance
@@ -83,14 +83,14 @@ func OnZoomChanged(NewZoom : Vector2) -> void:
 	
 var GridShowing = false
 func _UpdateMapGridVisibility():
-	if (zoom.x < 1 and !GridShowing):
+	if (zoom.x < 0.5 and !GridShowing):
 		var mtw = create_tween()
 		mtw.tween_property(CityLines, "modulate", Color(1,1,1,1), 0.5)
 		#$"../MapLines".visible = true
 		var tw = create_tween()
 		tw.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
 		GridShowing = true
-	else: if (zoom.x >= 1 and GridShowing):
+	else: if (zoom.x >= 0.5 and GridShowing):
 		var tw = create_tween()
 		tw.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
 		var mtw = create_tween()
@@ -110,14 +110,22 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	if (newpos.y != position.y):
 		position.y = newpos.y
 
-	$Clouds.material.set_shader_parameter("offset", global_position / 1000)
-	$Ground.material.set_shader_parameter("offset", global_position / 1000)
+	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
+	$Ground.material.set_shader_parameter("offset", global_position / 1500)
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():
 	shakestr = 2
 
+var custom_time = 0.0
+var time_scale = 1.0  # 1.0 for normal, 2.0 for 2x, etc.
+
+
 func _physics_process(delta: float) -> void:
+	if (!SimulationManager.IsPaused()):
+		custom_time += delta * SimulationManager.SimSpeed()
+		$Clouds.material.set_shader_parameter("custom_time", custom_time)
+
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
 		var of = RandomOffset()
@@ -147,11 +155,17 @@ func FrameCamToPlayer():
 	FrameTween = create_tween()
 	var plpos = $"../PlayerShip".global_position
 	FrameTween.set_trans(Tween.TRANS_EXPO)
-	FrameTween.tween_property(self, "global_position", plpos, 6)
+	FrameTween.tween_method(ForceCamPosition, global_position, plpos, 6)
+
 
 func FrameCamToPos(pos : Vector2) -> void:
 	if (stattween != null):
 		stattween.kill()
 	FrameTween = create_tween()
 	FrameTween.set_trans(Tween.TRANS_EXPO)
-	FrameTween.tween_property(self, "global_position", pos, 2)
+	FrameTween.tween_method(ForceCamPosition, global_position, pos, 2)
+
+func ForceCamPosition(Pos : Vector2) -> void:
+	global_position = Pos
+	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
+	$Ground.material.set_shader_parameter("offset", global_position / 1500)

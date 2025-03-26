@@ -40,6 +40,7 @@ mouse_filter = 1
 theme = ExtResource("2_n60qq")
 
 [node name="CardIcon" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.3)
 texture_filter = 1
 layout_mode = 1
@@ -69,10 +70,9 @@ theme_override_constants/separation = 10
 [node name="CardName" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 28
 text = "Card Name"
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
