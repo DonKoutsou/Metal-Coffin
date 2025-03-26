@@ -18,6 +18,19 @@ func CheckIfSpecial() -> void:
 	if (Special):
 		Specials.append(self)
 
+static func GetStageForYPos(YPos : float) -> Happening.GameStage:
+	var GameSt : Happening.GameStage
+	if (YPos < -40000):
+		GameSt = Happening.GameStage.LATE
+	else : if (YPos < -30000):
+		GameSt = Happening.GameStage.SEMI_LATE
+	else : if (YPos < -20000):
+		GameSt = Happening.GameStage.MID
+	else : if (YPos < -10000):
+		GameSt = Happening.GameStage.SEMI_EARLY
+	else :
+		GameSt = Happening.GameStage.EARLY
+	return GameSt
 
 enum GameStage
 {

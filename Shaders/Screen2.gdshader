@@ -137,7 +137,7 @@ void fragment(){
 
 	float vigAmt = (3.3) * vignette_strength;
 	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 2.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 2.0));
-	
+
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
 }

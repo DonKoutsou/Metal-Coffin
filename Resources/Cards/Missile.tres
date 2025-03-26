@@ -17,7 +17,7 @@ Accuracy = 0.0
 Icon = ExtResource("2_2t01k")
 CardName = "Missile"
 CardDescription = "Throws a missile to enemy. [color=#c19200]DMG = 10 * Firepower"
-Energy = 2
+Energy = 3
 Options = Array[ExtResource("3_ffuhs")]([])
 AllowDuplicates = true
 Consume = true

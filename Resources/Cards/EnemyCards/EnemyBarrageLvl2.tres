@@ -16,7 +16,7 @@ Accuracy = 0.0
 Icon = ExtResource("2_6ft8n")
 CardName = "Barragge"
 CardDescription = "Throws a barragge on the enemy. DMG = 6 * Firepower"
-Energy = 1
+Energy = 3
 Options = Array[ExtResource("3_tems8")]([ExtResource("4_23m0t"), ExtResource("5_xng0n")])
 AllowDuplicates = true
 Consume = false

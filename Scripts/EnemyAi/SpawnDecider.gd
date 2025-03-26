@@ -26,10 +26,12 @@ func Init() -> void:
 func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
 	var points = GetPointsForPosition(abs(YPos))
-
+	var stage = Happening.GetStageForYPos(YPos)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
 		var m = MerchList.pick_random() as MerchandiseInfo
+		if (m.DontGenerateBefore > stage):
+				continue
 		if (points > m.Cost):
 			var hasm = false
 			for g in available_merch:
@@ -44,9 +46,9 @@ func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 			points -= m.Cost
 	return available_merch
 
-func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[Captain]:
+func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool) -> Array[Captain]:
 	#var time = Time.get_ticks_msec()
-	
+	var stage = Happening.GetStageForYPos(YPos)
 	var Fleet : Array[Captain] = []
 	var Points = GetPointsForPosition(abs(YPos))
 

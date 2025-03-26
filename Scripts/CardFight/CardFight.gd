@@ -44,7 +44,7 @@ var DamageGot : float = 0
 var DamageNeg : float = 0
 var FundsToWin : int = 0
 
-var Energy : int = 4
+var Energy : int = 10
 
 #All ships are placed here based on their Speed stat, Once the turn starts this array is used for the turns
 var ShipTurns : Array[BattleShipStats]
@@ -277,7 +277,7 @@ func RunTurn() -> void:
 	call_deferred("RunTurn")
 
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
-	var EnemyEnergy = 4
+	var EnemyEnergy = 10
 	
 	if (GetShipViz(Ship).IsOnFire()):
 		var ExtinguishAction
@@ -293,21 +293,30 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		ActionList.AddAction(Ship, Action)
 		#Actions[Ship].append(Action)
 	
-	while (EnemyEnergy > 0):
-		var Action = (Ship.Cards.keys().pick_random() as CardStats).duplicate()
+	var AvailableActions = Ship.Cards.duplicate()
+	while (AvailableActions.size() > 0):
+		var Action = (AvailableActions.keys().pick_random() as CardStats)
 		
 		if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
+			AvailableActions.erase(Action)
 			continue
 			
-		if (Action.CardName == "Extinguish fires"):
+		if (Action.CardName == "Extinguish fires" or Action.Energy > EnemyEnergy):
+			AvailableActions.erase(Action)
 			continue
-		EnemyEnergy -= Action.Energy
-		if (EnemyEnergy > 0 and Action.Options.size() > 0):
-			Action.SelectedOption = Action.Options.pick_random()
-			EnemyEnergy -= Action.SelectedOption.EnergyAdd
+		
+		var SelectedAction = Action.duplicate()
+		
+		EnemyEnergy -= SelectedAction.Energy
+		if (EnemyEnergy > 0 and SelectedAction.Options.size() > 0):
+			SelectedAction.SelectedOption = SelectedAction.Options.pick_random()
+			EnemyEnergy -= SelectedAction.SelectedOption.EnergyAdd
 			
+		AvailableActions.clear()
+		AvailableActions = Ship.Cards.duplicate()
+		
 		var ShipAction = CardFightAction.new()
-		ShipAction.Action = Action
+		ShipAction.Action = SelectedAction
 		
 		#TODO figure out better way to decide target
 		ShipAction.Target = PlayerShips.pick_random()
@@ -497,7 +506,7 @@ func PlayerActionSelectionEnded() -> void:
 
 func RestartCards() -> void:
 	ClearCards()
-	Energy = 4
+	Energy = 10
 	UpdateEnergy()
 	var CharCards = ShipTurns[CurrentTurn].Cards
 	var CharAmmo = ShipTurns[CurrentTurn].Ammo
@@ -676,7 +685,7 @@ func UpdateEnergy() -> void:
 
 func UpdateEnergyBar(NewVal : float) -> void:
 	EnergyBar.value = NewVal
-	EnergyLabel.text = var_to_str(roundi(NewVal)) + " / 4"
+	EnergyLabel.text = var_to_str(roundi(NewVal)) + " / 10"
 
 #func PlayOffensiveAction(SourcePos : Vector2, TargetPos : Vector2, Countered : bool) -> void:
 	#pass

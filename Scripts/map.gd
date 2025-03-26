@@ -362,25 +362,13 @@ func GenerateEventsThreaded() -> void:
 				Sp.Event = Hap
 	call_deferred("EventGenFinished")
 
-func GetStageForYPos(YPos : float) -> Happening.GameStage:
-	var GameSt : Happening.GameStage
-	if (YPos < -40000):
-		GameSt = Happening.GameStage.LATE
-	else : if (YPos < -30000):
-		GameSt = Happening.GameStage.SEMI_LATE
-	else : if (YPos < -20000):
-		GameSt = Happening.GameStage.MID
-	else : if (YPos < -10000):
-		GameSt = Happening.GameStage.SEMI_EARLY
-	else :
-		GameSt = Happening.GameStage.EARLY
-	return GameSt
+
 	
 	
 func FigureOutEvent(YPos : float, Events : Array[Happening]) -> Happening:
 	if (Events == null or Events.size() == 0):
 		return null
-	var GameSt : Happening.GameStage = GetStageForYPos(YPos)
+	var GameSt : Happening.GameStage = Happening.GetStageForYPos(YPos)
 	
 	var PossibleHappenings : Array[Happening]
 	for g in Events:
@@ -446,7 +434,7 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
-	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy, GetStageForYPos(Pos.y))
+	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy)
 	var SpawnedFleet = []
 	var SpawnedCallsigns = []
 	for f in Fleet:

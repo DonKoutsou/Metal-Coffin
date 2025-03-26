@@ -300,10 +300,23 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 #██   ██ ██      ██   ██ ██   ██ ██  ██  ██ 
 #██   ██ ███████ ██   ██ ██   ██ ██      ██ 
 
+var PrevAmm : float
+var AlarmCooldown : float
 func CheckAlarm() -> void:
-	if (PursuitOrders.size() > 0 or InvestigationOrders.size() > 0 or EnemyPositionsToInvestigate.size() > 0 or KnownEnemies.size() > 0):
-		if (!Alarmed):
+	if (SimPaused):
+		return
+	var Events = PursuitOrders.size() + InvestigationOrders.size() + EnemyPositionsToInvestigate.size()
+	if (Events > 0):
+		if (!Alarmed and  KnownEnemies.size() > 0):
 			OnAlarmRaised()
+			AlarmCooldown = 20
+			
+		else : if (KnownEnemies.size() == 0):
+			
+			AlarmCooldown -= 0.01 * SimulationManager.SimSpeed()
+			
+			if (AlarmCooldown <= 0 and Alarmed):
+				OnAlarmDissabled()
 	else:
 		if (Alarmed):
 			OnAlarmDissabled()
@@ -328,12 +341,15 @@ func FindRefugeForShip(Ship : HostileShip) -> MapSpot:
 	
 	var DistToSpot = 9999999999
 	
+	var DistToEnemy = 0
+	
 	var RefugeSpot
 	
 	#var DistanceToDestination = ship.global_position.distance_to(ship.GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot
 		var D = spot.global_position.distance_to(Ship.global_position)
+		
 		#if we cant reach it look for another
 		if (D >= dist):
 			continue
@@ -341,12 +357,28 @@ func FindRefugeForShip(Ship : HostileShip) -> MapSpot:
 		if (D > DistToSpot):
 			continue
 		
+		var DistToDanger = GetClosestKnownDanger(spot.global_position).distance_to(spot.global_position)
+		
+		if (DistToDanger < DistToEnemy):
+			continue
+		
+		DistToEnemy = DistToDanger
 		DistToSpot = D
 		RefugeSpot = spot
 		if (DistToSpot < 10):
 			break
 			
 	return RefugeSpot
+
+func GetClosestKnownDanger(Pos : Vector2) -> Vector2:
+	var Closest : Vector2
+	var Dist = 999999999999
+	for g in KnownEnemies:
+		var Mydist = Pos.distance_to(g.global_position)
+		if (Mydist < Dist):
+			Dist = Mydist
+			Closest = g.global_position
+	return Closest
 
 #/////////////////////////////////////////////////////////////
 #██   ██ ███████ ██      ██████  ███████ ██████      ███████ ██    ██ ███    ██  ██████ ████████ ██  ██████  ███    ██ ███████ 
