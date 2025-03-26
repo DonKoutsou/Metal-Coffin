@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=39 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
+[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
@@ -33,11 +34,12 @@ _limits = [0.0, 10.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, 3.3398, 0, 0]
 point_count = 1
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_nb103"]
-diffuse_texture = ExtResource("13_ufdxh")
-normal_texture = ExtResource("14_j6nai")
-texture_filter = 1
-texture_repeat = 2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28wu2"]
+shader = ExtResource("18_x3wib")
+shader_parameter/GroundTexture = ExtResource("13_ufdxh")
+shader_parameter/GroundNormalTexture = ExtResource("14_j6nai")
+shader_parameter/offset = Vector2(-0.52, 0)
+shader_parameter/Scale = Vector2(1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5
@@ -136,36 +138,6 @@ positional_shadow_atlas_size = 512
 size = Vector2i(792, 507)
 render_target_update_mode = 4
 
-[node name="Ground" type="Control" parent="SubViewportContainer/ViewPort"]
-z_index = -1
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1162.0
-offset_top = 287.0
-offset_right = -1162.0
-offset_bottom = 287.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/ViewPort/Ground"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -20000.0
-offset_top = -80000.0
-offset_right = 18956.0
-offset_bottom = 19541.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_nb103")
-expand_mode = 1
-stretch_mode = 1
-
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]
 color = Color(0, 0, 0, 1)
 
@@ -183,7 +155,21 @@ script = ExtResource("15_d8bna")
 Background = NodePath("DarkBlueBackground")
 CityLines = NodePath("../MapPointerManager/MapLineDrawer")
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
+[node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
+z_index = -2
+texture_filter = 1
+material = SubResource("ShaderMaterial_28wu2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -676.0
+offset_top = -568.0
+offset_right = 324.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Clouds" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_x3wib")
 anchors_preset = 15

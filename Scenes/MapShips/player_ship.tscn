@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=13 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" uid="uid://dlu3wdrtljpfh" path="res://Scripts/Ships/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="2_ddg27"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="6_6lhcj"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="9_jx5d0"]
-[ext_resource type="PackedScene" uid="uid://nt0q5le0g6aj" path="res://Scenes/Old/Cloudthing.tscn" id="9_wfgcg"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="20_hn8tc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
@@ -99,8 +98,4 @@ blend_mode = 2
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
 texture_scale = 4.8
-height = 40.0
-
-[node name="GPUParticles2D" parent="." instance=ExtResource("9_wfgcg")]
-visible = false
-z_index = -1
+height = 20.0

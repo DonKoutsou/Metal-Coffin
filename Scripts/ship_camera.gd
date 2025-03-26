@@ -11,7 +11,9 @@ signal ZoomChanged(NewVal : float)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-
+	$Clouds.material.set_shader_parameter("offset", global_position / 1000)
+	$Ground.material.set_shader_parameter("offset", global_position / 1000)
+	
 static func GetInstance() -> ShipCamera:
 	return Instance
 
@@ -20,7 +22,7 @@ var ZoomStage = 1
 var ZoomStageMulti = 0.5
 
 var ZoomTw : Tween
-var prevzoom = Vector2(0,0)
+var prevzoom = Vector2(1,1)
 func _HANDLE_ZOOM(zoomval : float):
 	#prevzoom = zoom
 	if (is_instance_valid(ZoomTw)):
@@ -107,9 +109,9 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		position.x = newpos.x
 	if (newpos.y != position.y):
 		position.y = newpos.y
-	
-	var CloudMat = $ColorRect.material as ShaderMaterial
-	CloudMat.set_shader_parameter("offset", global_position / 1000)
+
+	$Clouds.material.set_shader_parameter("offset", global_position / 1000)
+	$Ground.material.set_shader_parameter("offset", global_position / 1000)
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():
