@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=15 format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
 [ext_resource type="Script" uid="uid://we85k2ntvck5" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://crn46j7x7kq6m" path="res://Assets/MapElements/Ship.png" id="7_kn8g7"]
 [ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
 [ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="8_24cpb"]
 [ext_resource type="Texture2D" uid="uid://bbvfo5xkwu8pg" path="res://Assets/MapElements/triangle-target.png" id="8_143co"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="8_jiuqu"]
 
@@ -102,7 +103,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = -3
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("8_jiuqu")
+theme_override_fonts/font = ExtResource("8_24cpb")
 theme_override_font_sizes/font_size = 18
 text = "Quifsa
 SPEED 100
@@ -118,7 +119,7 @@ use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("8_jiuqu")
+theme_override_fonts/font = ExtResource("8_24cpb")
 theme_override_font_sizes/font_size = 18
 text = "Fuel : 10 / 250 Tons"
 vertical_alignment = 1
@@ -130,7 +131,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("8_jiuqu")
+theme_override_fonts/font = ExtResource("8_24cpb")
 theme_override_font_sizes/font_size = 18
 text = "SPEED 100"
 vertical_alignment = 1

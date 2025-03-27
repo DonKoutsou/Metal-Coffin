@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b36uht6mfemcw"]
+
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="1_1do1n"]
+
+[sub_resource type="Gradient" id="Gradient_1do1n"]
+interpolation_color_space = 2
+colors = PackedColorArray(1, 1, 1, 1, 0.25, 0.25, 0.25, 0)
+
+[node name="TrailLine" type="Line2D"]
+width = 1.0
+gradient = SubResource("Gradient_1do1n")
+joint_mode = 1
+end_cap_mode = 2
+round_precision = 32
+antialiased = true
+script = ExtResource("1_1do1n")
+trail_fade_speed = 0.1

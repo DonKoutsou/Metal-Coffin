@@ -1,0 +1,144 @@
+[gd_scene load_steps=11 format=3 uid="uid://db0e2caembxle"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_sdl3v"]
+[ext_resource type="Script" uid="uid://ysm54y3gb5lt" path="res://Scripts/FlightManual/flight_manual.gd" id="1_xll1p"]
+[ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scripts/FlightManual/flight_manual_entry.gd" id="2_x06mv"]
+
+[sub_resource type="Resource" id="Resource_lm06n"]
+script = ExtResource("2_x06mv")
+EntryName = "Ports"
+EntryDesc = "[color=#ffc315]Ports Overview[/color][p][p]In the vast expanse of your journey, ports serve as essential havens where ships can safely land. These designated areas are the only permissible landing zones, ensuring that every descent is both secure and efficient. As a critical component of flight operations, understanding the strategic advantages of each port is paramount.[p][color=#ffc315]Functions and Services[/color][p][p]When over a city press the LAND button on the lower right part of your Ship Controller to initiate the decent to the port. Upon landing, access is granted to several vital services. Ports offer refueling facilities, ensuring vessels are prepared for the next leg of the journey. Additionally, they provide repair services to fix any damages sustained during flights. Upgrading a ship's systems is also possible here, allowing for enhancements that can improve performance and resilience. Lastly, ammo can be purchased, ensuring readiness for any challenges that lie ahead.[p][color=#ffc315]City-Specific Buffs[/color][p][p]Each port is situated in a city that boasts unique attributes, granting specific buffs to visiting vessels. These enhancements might include faster and more cost-effective refueling, reduced repair times and costs, or discounts on upgrades. Understanding these distinct advantages is crucial for optimizing strategic planning and resource management throughout the adventure.[p][img]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p][img]res://Assets/Items/cubeforce.png[/img] REPAIR TIME/COST -[p][img]res://Assets/Items/materials-science.png[/img] UPGRADE TIME/COST -[p][p]By familiarizing oneself with the nuances of each port, the journey can be effectively planned, ensuring maximum efficiency and preparedness for the challenges that await."
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"
+
+[sub_resource type="Resource" id="Resource_6btdu"]
+script = ExtResource("2_x06mv")
+EntryName = "Simulation"
+EntryDesc = "[color=#ffc315]Simulation Control Manual[/color][p]In the intricacies of command, mastering the simulation tools is essential to effectively manage and strategize. The controls at your disposal—SIM PAUSE and SIM SPEED—grant comprehensive oversight of the world simulation, allowing for meticulous planning and execution. The controls can be found on the top right of your ship controller panel.[p][color=#ffc315]SIM PAUSE[/color][p]The SIM PAUSE function serves as your gateway to toggling the simulation between active and paused states. This feature is indispensable for assessing the environment, analyzing potential threats, and devising strategies without the pressures of real-time events. Use it to halt the simulation and carefully evaluate your current status, resources, and objectives.[p][color=#ffc315]SIM SPEED[/color][p]The SIM SPEED control enables you to accelerate the passage of time, allowing for rapid progression through less eventful periods. By holding this button, you can expedite processes such as refueling, repairs, or travel between locations, effectively optimizing time management. Release to return to normal speed, ensuring precision when timing is critical.[p][color=#ffc315]Strategic Use[/color][p]Employ these controls to your strategic advantage. Pause the simulation to contemplate intricate maneuvers, foresee possible challenges, and prepare contingencies. Speed up during routine operations to minimize downtime and maintain momentum.[p]By mastering the simulation controls, you ensure that every decision is deliberate and well-informed, enhancing your capability to navigate the complexities of the mission with confidence and precision.[p]"
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"
+
+[sub_resource type="Resource" id="Resource_ia3ty"]
+script = ExtResource("2_x06mv")
+EntryName = "Map Marker Editor"
+EntryDesc = "[color=#ffc315]Map Marker Editor[/color][p][p]The Map Marker Editor is a crucial tool for strategic planning and battlefield management. It allows for the addition of markers and measuring lines on the map, providing essential information and enabling precise calculations of distances and interception trajectories.[p][color=#ffc315]Controls and Functions[/color][p][p]    [color=#ffc315]MOVE HORIZONTAL RING[/color][p]    Adjusts the placement target horizontally across the screen, allowing for exact positioning of markers and lines.[p]    [color=#ffc315]MOVE VERTICAL RING[/color][p]    Moves the placement target vertically, ensuring precise alignment with the desired map location.[p]    [color=#ffc315]LINE[/color][p]    Initiates the drawing of a line. Pressing this button places the start point at the placement target's location. Move the target to adjust the line’s trajectory, and press the button again to finalize the line on the map.[p]    [color=#ffc315]TEXT[/color][p]    Prompts for text input to create a marker. Enter the desired information, and a marker displaying this text will appear at the placement target’s location.[p]    [color=#ffc315]CLEAR[/color][p]    Removes all markers and lines, providing a clean slate for new strategic planning.[p]    [color=#ffc315]CLOSE[/color][p]    Exits the Map Marker Editor, saving all current placements and modifications.[p]By adeptly using the Map Marker Editor, you can meticulously chart the battlefield, gauge distances between ships and towns, and accurately plan interception and engagement strategies. This tool is indispensable for achieving tactical supremacy.[p]"
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"
+
+[sub_resource type="Resource" id="Resource_x06mv"]
+script = ExtResource("2_x06mv")
+EntryName = "Missile Tab"
+EntryDesc = "[color=#ffc315]Missile Tab[/color][p]The Missile Tab is the dedicated interface for aiming and firing BVR missiles, providing streamlined control over your ship's offensive capabilities.[p]Only ships equipped with a Missile Pos are able to fire any kind of missile.[p][color=#ffc315]Controls and Functions[/color][p]    [color=#ffc315]RING[/color][p]        Missile Selection: When no missile is armed, rotate the ring to cycle through the available missiles in the ship's inventory. The selected missile is displayed on the central device screen.[p]        Aiming: Once a missile is armed, the ring transitions to control the missile's aim, allowing precise targeting of the desired coordinates.[p]    [color=#ffc315]ARM[/color][p]    Activates the selected missile, unlocking aiming controls. The missile's range is displayed on the map, aiding in accurate targeting.[p]    [color=#ffc315]DISARM[/color][p]    Safely deactivates the armed missile, resetting the device and allowing for the selection of a different missile if needed.[p]    [color=#ffc315]LAUNCH[/color][p]    Fires the armed missile toward the designated target. After launch, the device resets, ready for the next operation.[p]    [color=#ffc315]CLOSE[/color][p]    Exits the Missile Tab, maintaining the current operational state.[p]Utilize the Missile Tab to effectively manage and deploy your ship's arsenal, ensuring tactical advantages in combat scenarios with precision targeting and execution.[p]"
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"
+
+[sub_resource type="Resource" id="Resource_m4vth"]
+script = ExtResource("2_x06mv")
+EntryName = "Missile Types"
+EntryDesc = "[color=#ffc315]Missile Types[/color][p]In the realm of strategic warfare, the effective use of missiles is paramount. Two primary missile categories exist: Beyond Visual Range (BVR) and Within Visual Range (WVR), each suited for distinct combat scenarios.[p][color=#ffc315]Beyond Visual Range (BVR) Missiles[/color][p]    [color=#ffc315]Usage:[/color][p]        Utilized when commanding the fleet in the overworld.[p]        Ideal for engaging targets from a distance before visual contact.[p]    [color=#ffc315]Characteristics:[/color][p]        Long-range capabilities allow for pre-emptive strikes and strategic targeting ahead of engagements.[p]        Varying speed and ranges depending on the model.[p]    [color=#ffc315]Strategic Advantage:[/color][p]        Use BVR missiles to weaken or eliminate enemy fleets before direct confrontation, creating opportunities for tactical superiority.[p][color=#ffc315]Within Visual Range (WVR) Missiles[/color][p]    [color=#ffc315]Usage:[/color][p]        Deployed during direct combat encounters.[p]        Designed for engagements where the enemy is within sight.[p]    [color=#ffc315]Characteristics:[/color][p]        Shorter range but highly maneuverable, suited for dynamic combat scenarios.[p]        Quick response times and agility make them ideal for close-quarter combat.[p]    [color=#ffc315]Strategic Advantage:[/color][p]        Employ WVR missiles to quickly neutralize threats during intense combat, leveraging their agility to gain the upper hand.[p]By understanding and utilizing the distinct capabilities of BVR and WVR missiles, you can adapt strategies to the evolving battlefield, ensuring readiness and effectiveness in both long-range and close-range engagements."
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lm06n"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x06mv"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+
+[node name="FlightManual" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xll1p")
+FlightManualEntries = Array[ExtResource("2_x06mv")]([SubResource("Resource_lm06n"), SubResource("Resource_6btdu"), SubResource("Resource_ia3ty"), SubResource("Resource_x06mv"), SubResource("Resource_m4vth")])
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+theme_override_styles/panel = ExtResource("1_sdl3v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lm06n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "FLIGHT MANUAL ENTRIES"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sdl3v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_x06mv")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "ENTRIES NAME"
+autowrap_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+bbcode_enabled = true
+text = "Entry desc
+fa
+ba
+avav
+
+vwavawv
+vf fwajfwao fwao f
+fa wfojwajfoaw  a
+wfwa fwafo wajo
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[connection signal="gui_input" from="HBoxContainer/VBoxContainer/PanelContainer2/ScrollContainer" to="." method="_on_scroll2_container_gui_input"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="gui_input" from="HBoxContainer/PanelContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhr5epkvjl588"]
+[gd_scene load_steps=16 format=3 uid="uid://dhr5epkvjl588"]
 
 [ext_resource type="Script" uid="uid://dlu3wdrtljpfh" path="res://Scripts/Ships/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="2_ddg27"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="6_6lhcj"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="9_jx5d0"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="9_wfgcg"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="20_hn8tc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
@@ -20,7 +21,16 @@ radius = 350.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
 radius = 1000.0
 
-[node name="PlayerShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["PlayerShips", "Ships", "ZoomAffected"]]
+[sub_resource type="Curve" id="Curve_mktum"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_wfgcg"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.715481, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
+
+[node name="w" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["PlayerShips", "Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_vppi8")
 script = ExtResource("1_ekbhy")
 RadarShape = NodePath("Radar")
@@ -34,6 +44,7 @@ Cpt = ExtResource("2_ddg27")
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
+visible = false
 shape = SubResource("CircleShape2D_rjoek")
 debug_color = Color(0.839233, 0.00116919, 0.924893, 0.42)
 
@@ -43,6 +54,7 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
+visible = false
 shape = SubResource("CircleShape2D_42dgb")
 debug_color = Color(0, 0.650296, 0.101282, 0.42)
 
@@ -52,6 +64,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+visible = false
 shape = SubResource("CircleShape2D_utfkb")
 debug_color = Color(0.772676, 0.418681, 0.395994, 0.42)
 
@@ -97,5 +110,33 @@ energy = 0.25
 blend_mode = 2
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
-texture_scale = 4.8
+texture_scale = 5.0
 height = 50.0
+
+[node name="TrailLine" type="Line2D" parent="."]
+z_index = -2
+position = Vector2(-12, -2)
+points = PackedVector2Array(0, 0)
+width = 2.0
+width_curve = SubResource("Curve_mktum")
+gradient = SubResource("Gradient_wfgcg")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("9_wfgcg")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="TrailLine2" type="Line2D" parent="."]
+z_index = -2
+position = Vector2(-12, 2)
+points = PackedVector2Array(0, 0)
+width = 2.0
+width_curve = SubResource("Curve_mktum")
+gradient = SubResource("Gradient_wfgcg")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("9_wfgcg")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"

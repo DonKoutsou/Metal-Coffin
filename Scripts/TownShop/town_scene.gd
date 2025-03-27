@@ -72,8 +72,10 @@ func _ready() -> void:
 	#signal OnItemBought(It : Item)
 #signal OnItemSold(It : Item)
 	
-	for g in Merch.size():
-		var m = Merch[g] as Merchandise
+	for m : Merchandise in Merch:
+		if (m.Amm == 0 and Itms.count(m.It) == 0):
+			continue
+
 		var ItScene = ItemScene.instantiate() as TownShopItem
 		ItScene.It = m.It
 		ItScene.ItPrice = m.Price

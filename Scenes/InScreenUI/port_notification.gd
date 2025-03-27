@@ -20,17 +20,17 @@ func ControlledShipChanged(NewShip : MapShip) -> void:
 func PortUpdated(NewPort : MapSpot) -> void:
 	if (NewPort == null):
 		modulate = PortUnAvailableCol
-		$VBoxContainer/HBoxContainer/SimulationNotification.text = "NO PORTS NEARBY\nPERSMISSION TO LAND\nDENIED"
+		$VBoxContainer/HBoxContainer/SimulationNotification.text = "NO PORTS NEARBY\nLANDING DENIED"
 		$VBoxContainer/SimulationNotification2.text = ""
 	else:
 		modulate = PortAvailableCol
-		$VBoxContainer/HBoxContainer/SimulationNotification.text = "FLYING OVER {0}\nPERSMISSION TO LAND\nGRANTED".format([NewPort.GetSpotName()])
+		$VBoxContainer/HBoxContainer/SimulationNotification.text = "FLYING OVER {0}\nCLEAR TO LAND".format([NewPort.GetSpotName()])
 		var PortThings = ""
 		if (NewPort.HasFuel()):
-			PortThings += "faster and cheaper refuels\n"
+			PortThings += "REFUEL TIME/COST -\n"
 		if (NewPort.HasRepair()):
-			PortThings += "faster and cheaper repairs\n"
+			PortThings += "REPAIR TIME/COST -\n"
 		if (NewPort.HasUpgrade()):
-			PortThings += "Ship parts can be upgraded\n"
+			PortThings += "UPGRADE TIME/COST -\n"
 		$VBoxContainer/SimulationNotification2.text = PortThings
 	$VBoxContainer/SimulationNotification2.visible = NewPort != null

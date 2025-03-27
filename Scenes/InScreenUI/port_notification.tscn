@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://yin8tcre8wf8"]
 
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="1_b01h5"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_rpr4c"]
 [ext_resource type="Script" uid="uid://wsdodkllx8nn" path="res://Scenes/InScreenUI/port_notification.gd" id="1_xoog0"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_3wc5p"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_5iliw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5djm"]
 bg_color = Color(1, 1, 1, 1)
@@ -36,7 +36,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -306.0
-offset_top = -134.0
+offset_top = -168.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 0
@@ -46,23 +46,21 @@ alignment = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-text = "- - - - - - - - - - - - - "
+theme_override_fonts/font = ExtResource("5_5iliw")
+text = "- - - - - - - - - "
 horizontal_alignment = 2
 
 [node name="SimulationNotification2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("1_b01h5")
-theme_override_font_sizes/font_size = 14
-text = "FLYING OVER CARDI
-PERSMISSION TO LAND 
-RECEIVED
-afaw"
+theme_override_font_sizes/font_size = 16
+text = "REFUEL TIME/COST -
+REPAIR TIME/COST -
+UPGRADE TIME/COST -"
 horizontal_alignment = 2
 vertical_alignment = 2
 autowrap_mode = 2
-uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -73,7 +71,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("1_b01h5")
+theme_override_fonts/font = ExtResource("5_5iliw")
 theme_override_font_sizes/font_size = 16
 text = "FLYING OVER CARDI
 PERSMISSION TO LAND 
@@ -91,5 +89,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_g5djm")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-text = "- - - - - - - - - - - - -"
+theme_override_fonts/font = ExtResource("5_5iliw")
+text = "- - - - - - - - - "
 horizontal_alignment = 2

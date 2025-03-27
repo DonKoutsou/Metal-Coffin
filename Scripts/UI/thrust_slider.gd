@@ -27,7 +27,7 @@ func ForceValue(val : float) ->void:
 func HandleInput(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var step = ( MinVelocityLoc - MaxVelocityLoc ) / StepCOunt
-		accumulatedrelative += event.relative.y * 1.5
+		accumulatedrelative += event.relative.y * 3
 		
 		if (abs(accumulatedrelative) < step):
 			return

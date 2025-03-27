@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccmqbt58qk8rv"]
 
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="1_5ioyh"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_olgxh"]
 [ext_resource type="Script" uid="uid://dpnur6jb3ppgl" path="res://Scripts/UI/Simulation_Notification.gd" id="2_jnlvy"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_mcsd0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8018"]
 bg_color = Color(1, 1, 1, 1)
@@ -38,31 +38,9 @@ theme_override_constants/separation = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-text = "- - - - - - - -"
+theme_override_fonts/font = ExtResource("4_mcsd0")
+text = "- - - - - "
 horizontal_alignment = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 2
-
-[node name="SimulationNotification2" type="Label" parent="VBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("1_5ioyh")
-theme_override_font_sizes/font_size = 18
-text = "SIMULATION CONDITION
-PAUSED"
-horizontal_alignment = 2
-autowrap_mode = 2
-
-[node name="Panel2" type="Panel" parent="VBoxContainer2/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y8018")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
@@ -77,7 +55,7 @@ theme_override_constants/separation = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("1_5ioyh")
+theme_override_fonts/font = ExtResource("4_mcsd0")
 theme_override_font_sizes/font_size = 18
 text = "SIMULATION
 2"
@@ -93,5 +71,35 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_y8018")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-text = "- - - - - - - -"
+theme_override_fonts/font = ExtResource("4_mcsd0")
+text = "- - - - - "
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_mcsd0")
+theme_override_font_sizes/font_size = 18
+text = "SIM PAUSE
+TO TOGGLE
+>>>>"
+horizontal_alignment = 2
+
+[node name="Panel2" type="Panel" parent="VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y8018")
+
+[node name="Label4" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_mcsd0")
+text = "- - - - - "
 horizontal_alignment = 2
