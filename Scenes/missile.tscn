@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvdaxeaw05g4k"]
+[gd_scene load_steps=9 format=3 uid="uid://dvdaxeaw05g4k"]
 
 [ext_resource type="Script" uid="uid://hbnehjln8dhp" path="res://Scripts/missile.gd" id="1_dxfkf"]
 [ext_resource type="Shader" uid="uid://coc3mor33lg72" path="res://Shaders/missileCone.gdshader" id="1_hg5k0"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="4_5epdn"]
 [ext_resource type="AudioStream" uid="uid://mii1rhqfjkwv" path="res://Assets/Sounds/missile_launch_02.ogg" id="4_v3idv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qemak"]
@@ -14,7 +15,16 @@ shader_parameter/boundary_thickness = 0.9
 shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahj0"]
-radius = 20.0
+radius = 5.0
+
+[sub_resource type="Curve" id="Curve_5epdn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5epdn"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.715481, 1)
+colors = PackedColorArray(1, 0.234572, 0.131967, 1, 0, 0, 0, 1, 0.313, 0.313, 0.313, 0)
 
 [node name="Missile" type="Node2D" groups=["Missiles", "Ships"]]
 script = ExtResource("1_dxfkf")
@@ -54,6 +64,15 @@ polygon = PackedVector2Array(22, 0, 200, 100, 220, 0, 200, -100)
 shape = SubResource("CircleShape2D_xahj0")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="TrailLine" type="Line2D" parent="."]
+z_index = -2
+width = 1.0
+width_curve = SubResource("Curve_5epdn")
+gradient = SubResource("Gradient_5epdn")
+script = ExtResource("4_5epdn")
+ManualInit = null
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

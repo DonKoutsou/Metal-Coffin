@@ -6,6 +6,7 @@ class_name TrailLine
 @export var max_points: int = 50
 @export var trail_fade_speed: float = 1.0
 @export var min_distance: float = 5.0
+@export var ManualInit : bool
 # Internally used to track movement
 var last_position: Vector2
 var stationary_time: float = 0.0
@@ -17,6 +18,11 @@ func _exit_tree() -> void:
 	clear_points()
 
 func _enter_tree() -> void:
+	if (ManualInit):
+		return
+	Init()
+
+func Init() -> void:
 	clear_points()
 	#position = Vector2(0,0)
 	PointPos.clear()
@@ -24,8 +30,7 @@ func _enter_tree() -> void:
 	PointPos.append(Vector2(0,0))
 	#print (PointPos)
 	add_point(Vector2(0,0))
-
-
+	
 func _process(delta: float) -> void:
 	# Check if the position has changed
 	if last_position.distance_to(global_position) > min_distance:

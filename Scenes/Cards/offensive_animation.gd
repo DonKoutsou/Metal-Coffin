@@ -7,6 +7,7 @@ signal AnimationFinished
 @export var CardScene : PackedScene
 @export var DamageFloater : PackedScene
 @export var ShipViz : PackedScene
+@export var AtackVisual : PackedScene
 @export_group("Event Handlers")
 @export var UIEventH : UIEventHandler
 #var LinePos : float = 0
@@ -22,9 +23,9 @@ var Ic
 var Ic2 : Array
 var fr : bool
 func _ready() -> void:
-	set_physics_process(DrawnLine)
+	set_physics_process(false)
 	#set_physics_process(true)
-	#DoOffensive(OffensiveCardStats.new(), false, BattleShipStats.new(), [BattleShipStats.new(), BattleShipStats.new()], false)
+	DoOffensive(OffensiveCardStats.new(), false, BattleShipStats.new(), [BattleShipStats.new(), BattleShipStats.new()], false)
 
 func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShips : Array[BattleShipStats], FriendShip : bool) -> void:
 	fr = FriendShip
@@ -61,10 +62,26 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		t.disabled = true
 		DrawPositions2[g] = 0.0
 		
-		var tw = create_tween()
-		tw.tween_method(MoveLine, 0.0, 1.0, 1.0)
-		#tw.tween_property(self, DrawPositions2[g], 1, 1)
-		tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
+		var Target
+		if (DefC != null):
+			Target = DefC
+		else :
+			Target = t
+		
+		call_deferred("SpawnVisual", Target, roundi(OriginShip.FirePower * AtackCard.GetDamage()))
+
+		#var tw = create_tween()
+		#tw.tween_method(MoveLine, 0.0, 1.0, 1.0)
+		##tw.tween_property(self, DrawPositions2[g], 1, 1)
+		#tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
+
+func SpawnVisual(Target : Control, Damage : float) -> void:
+	var Visual = AtackVisual.instantiate() as MissileViz
+	Visual.Target = Target
+	Visual.SpawnPos = AtC.global_position
+	add_child(Visual)
+
+	Visual.connect("Finished", TweenEnded.bind(Damage))
 
 var LineToMove = 0
 func MoveLine(Val : float) -> void:

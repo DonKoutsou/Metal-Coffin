@@ -2,8 +2,7 @@ extends Control
 
 class_name Card
 
-@export var CardIcon : TextureRect
-@export var CardName : Label
+@export var CardB : Button
 @export var CardDesc : RichTextLabel
 @export var CardCost : Label
 
@@ -34,22 +33,24 @@ func KillCard() -> void:
 	free()
 
 func _ready() -> void:
-	UISoundMan.GetInstance().AddSelf($Button)
+	var SoundMan = UISoundMan.GetInstance()
+	if (is_instance_valid(SoundMan)):
+		SoundMan.AddSelf($Button)
 	$PanelContainer.visible = false
 	set_physics_process(TargetLoc != Vector2.ZERO)
 
 func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	CStats = Stats
 	Cost = Stats.Energy
-	var DescText =  "{0}".format([Stats.CardDescription])
+	var DescText =  "[center]{0}[/center]".format([Stats.CardDescription])
 	
 	if Stats.SelectedOption !=  null:
-		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
-		DescText =  "{0}".format([ Stats.SelectedOption.OptionDescription])
+		CardB.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
+		DescText =  "[center]{0}[/center]".format([ Stats.SelectedOption.OptionDescription])
 		Cost += Stats.SelectedOption.EnergyAdd
 	else:
-		CardName.text = Stats.CardName
-	CardIcon.texture = Stats.Icon
+		CardB.text = Stats.CardName
+	CardB.icon = Stats.Icon
 	
 	#var DescText =  "[center]{0}".format([Stats.CardDescription])
 	#CardDesc.visible_ratio = 0

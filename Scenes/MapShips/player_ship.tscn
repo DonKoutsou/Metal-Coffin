@@ -81,6 +81,34 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="DroneDock" parent="." instance=ExtResource("5_vcup0")]
 
+[node name="TrailLine" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(-12, -2)
+width = 2.0
+width_curve = SubResource("Curve_mktum")
+gradient = SubResource("Gradient_wfgcg")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("9_wfgcg")
+trail_fade_speed = 30.0
+min_distance = 1.0
+ManualInit = null
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="TrailLine2" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(-12, 2)
+width = 2.0
+width_curve = SubResource("Curve_mktum")
+gradient = SubResource("Gradient_wfgcg")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("9_wfgcg")
+trail_fade_speed = 30.0
+min_distance = 1.0
+ManualInit = null
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
@@ -112,31 +140,3 @@ shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
 texture_scale = 5.0
 height = 50.0
-
-[node name="TrailLine" type="Line2D" parent="."]
-z_index = -2
-position = Vector2(-12, -2)
-points = PackedVector2Array(0, 0)
-width = 2.0
-width_curve = SubResource("Curve_mktum")
-gradient = SubResource("Gradient_wfgcg")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("9_wfgcg")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
-[node name="TrailLine2" type="Line2D" parent="."]
-z_index = -2
-position = Vector2(-12, 2)
-points = PackedVector2Array(0, 0)
-width = 2.0
-width_curve = SubResource("Curve_mktum")
-gradient = SubResource("Gradient_wfgcg")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("9_wfgcg")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"

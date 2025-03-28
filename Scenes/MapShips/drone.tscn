@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://4pq5t6l3c55k"]
+[gd_scene load_steps=19 format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="Script" uid="uid://crsatqn78m71w" path="res://Scripts/Ships/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="3_4y2i6"]
@@ -8,10 +8,20 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_r8oj1"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="9_82ju4"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_f4h60"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="10_dxnd3"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p3smt"]
 light_mode = 1
+
+[sub_resource type="Curve" id="Curve_qb3w4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_xnk77"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.715481, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6yyl"]
 resource_local_to_scene = true
@@ -40,6 +50,21 @@ DroneDok = NodePath("DroneDock")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 Cpt = ExtResource("3_fw0pf")
 
+[node name="TrailLine" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(-1, 0)
+width = 2.0
+width_curve = SubResource("Curve_qb3w4")
+gradient = SubResource("Gradient_xnk77")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("10_dxnd3")
+trail_fade_speed = 30.0
+min_distance = 1.0
+ManualInit = null
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
@@ -67,6 +92,7 @@ bus = &"Engine"
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
+visible = false
 shape = SubResource("CircleShape2D_e6yyl")
 debug_color = Color(0.616808, 0.00135421, 0.770009, 0.42)
 
@@ -75,6 +101,7 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSoundTrigger"]
+visible = false
 shape = SubResource("CircleShape2D_7khp2")
 debug_color = Color(0.261535, 0.503371, 1, 0.42)
 
@@ -84,6 +111,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+visible = false
 shape = SubResource("CircleShape2D_mk6wy")
 debug_color = Color(0, 0.64636, 0.238936, 0.42)
 
@@ -93,6 +121,7 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
+visible = false
 shape = SubResource("CircleShape2D_63pb3")
 debug_color = Color(0.912138, 0.294213, 0, 0.42)
 

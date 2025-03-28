@@ -11,7 +11,7 @@ func _ready() -> void:
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	$HBoxContainer/Label.text = S.Name.substr(0, 3)
 	$HBoxContainer/TextureRect.texture = S.ShipIcon
-	$HBoxContainer/RichTextLabel.text = StatText.format([var_to_str(S.Hull).replace(".0", ""), var_to_str(S.Shield).replace(".0", ""), var_to_str(S.Speed).replace(".0", ""), var_to_str(S.FirePower).replace(".0", "")])
+	$HBoxContainer/RichTextLabel.text = StatText.format([var_to_str(snapped(S.Hull, 0.1)).replace(".0", ""), var_to_str(snapped(S.Shield, 0.1)).replace(".0", ""), var_to_str(snapped(S.Speed, 0.1)).replace(".0", ""), var_to_str(snapped(S.FirePower, 0.1)).replace(".0", "")])
 	$HBoxContainer/TextureRect.flip_v = Friendly
 	$Panel.visible = false
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:

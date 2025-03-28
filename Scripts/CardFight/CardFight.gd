@@ -76,6 +76,12 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
+	for g in 3:
+		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+	for g in 3:
+		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
@@ -707,5 +713,13 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	if (!enemy):
 		Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_2_Main Camera.png")
 	else:
-		Stats.ShipIcon = load("res://Assets/Spaceship2/Spaceship2Top_Main Camera 3.png")
+		Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_Main Camera.png")
+		
+	if (!enemy):
+		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain1.png")
+	else:
+		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain9.png")
+	
+	Stats.Cards[load("res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres")] = 1
+		
 	return Stats
