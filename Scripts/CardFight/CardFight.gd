@@ -21,6 +21,10 @@ class_name Card_Fight
 #Scene that shows the stats of the fight
 @export var EndScene : PackedScene
 @export var CardFightShipInfoScene : PackedScene
+@export var CardPlecementSound : AudioStream
+@export var UIInSound : AudioStream
+@export var UIOutSound : AudioStream
+@export var RemoveCardSound : AudioStream
 @export_group("Plecement Referances")
 #Plecement for any atack cards player can play
 @export var OffensiveCardPlecement : Control
@@ -76,11 +80,11 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	for g in 3:
-		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-	for g in 3:
-		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#for g in 1:
+		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in 1:
+		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -110,6 +114,7 @@ func StoreContainerSize() -> void:
 	ActionDeclaration.visible = false
 
 func DoActionDeclaration(ActionName : String) -> void:
+	
 	$VBoxContainer4/Control.visible = true
 	ActionDeclaration.visible = true
 	ActionDeclaration.get_child(0).text = ActionName
@@ -117,6 +122,12 @@ func DoActionDeclaration(ActionName : String) -> void:
 	Tw.set_ease(Tween.EASE_OUT)
 	Tw.set_trans(Tween.TRANS_QUAD)
 	Tw.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(650, 80), 0.5)
+	
+	var InSound = DeletableSoundGlobal.new()
+	InSound.stream = UIInSound
+	InSound.autoplay = true
+	add_child(InSound)
+	
 	await Tw.finished
 	
 	ActionDeclaration.get_child(0).visible = true
@@ -141,6 +152,12 @@ func DoActionDeclaration(ActionName : String) -> void:
 	Tw4.set_ease(Tween.EASE_OUT)
 	Tw4.set_trans(Tween.TRANS_QUAD)
 	Tw4.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(0, 80), 0.5)
+	
+	var OutSound = DeletableSoundGlobal.new()
+	OutSound.stream = UIOutSound
+	OutSound.autoplay = true
+	add_child(OutSound)
+	
 	await Tw4.finished
 	$VBoxContainer4/Control.visible = false
 	ActionDeclaration.visible = false
@@ -357,6 +374,9 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			
 			await(anim.AnimationFinished)
 			
+			anim.visible = false
+			anim.queue_free()
+			
 			if (HasDeff):
 				ActionList.RemoveActionFromShip(Target, Counter)
 				
@@ -377,7 +397,10 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				AnimationPlecement.move_child(anim, 1)
 				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
+				anim.visible = false
+				anim.queue_free()
 				viz.ToggleFire(false)
+				ActionsToBurn.append(ShipAction)
 
 			else: if Action.CardName == "Shield Overcharge":
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
@@ -385,15 +408,18 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				AnimationPlecement.move_child(anim, 1)
 				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
+				anim.visible = false
+				anim.queue_free()
 				ShieldShip(Ship, 15)
-			
+				ActionsToBurn.append(ShipAction)
+				
 			if (Action.Consume):
 				var ShipCards = Ship.Cards
 				ShipCards[Action] -= 1
 				if (ShipCards[Action] == 0):
 					ShipCards.erase(Action)
 					
-			ActionsToBurn.append(ShipAction)
+			
 				
 	return ActionsToBurn
 
@@ -406,6 +432,8 @@ func DoFireDamage() -> void:
 			AnimationPlecement.move_child(anim, 1)
 			anim.DoFire(g, IsShipFriendly(g))
 			await(anim.AnimationFinished)
+			anim.visible = false
+			anim.queue_free()
 			if (DamageShip(g, 10)):
 				break
 #////////////////////////////////////////////////////////////////////////////
@@ -560,7 +588,8 @@ func ClearCards() -> void:
 	for g in DeffensiveCardPlecement.get_children():
 		g.queue_free()
 	for g in SelectedCardPlecement.get_children():
-		g.queue_free()
+		for z in g.get_children():
+			z.queue_free()
 
 func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	var c = CardScene.instantiate() as Card
@@ -570,6 +599,11 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	$Control.add_child(c)
 	c.global_position = OriginalPos
 	
+	var S = DeletableSoundGlobal.new()
+	S.stream = CardPlecementSound
+	S.autoplay = true
+	add_child(S)
+	S.volume_db = - 10
 	var PlecementTw = create_tween()
 	PlecementTw.set_ease(Tween.EASE_OUT)
 	PlecementTw.set_trans(Tween.TRANS_QUAD)
@@ -614,7 +648,10 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	c.TargetLoc = TargetViz.global_position + TargetViz.size / 2
 		
 	c.connect("OnCardPressed", RemoveCard)
-	SelectedCardPlecement.add_child(c)
+	for g in SelectedCardPlecement.get_children():
+		if (g.get_child_count() == 0):
+			g.add_child(c)
+			break
 	#c.Dissable()
 	
 	var ShipAction = CardFightAction.new()
@@ -644,10 +681,12 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	
 
 func RemoveCard(C : Card, _Option : CardOption) -> void:
-	#var PrevLoc = C.global_position
-	#C.get_parent().remove_child(C)
-	#$Control.add_child(C)
-	#C.global_position = PrevLoc
+	var S = DeletableSoundGlobal.new()
+	S.stream = RemoveCardSound
+	S.autoplay = true
+	add_child(S)
+	S.volume_db = -10
+	
 	C.KillCard()
 	#if (C.CStats is OffensiveCardStats):
 	if (C.CStats.Consume):
@@ -721,5 +760,6 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain9.png")
 	
 	Stats.Cards[load("res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres")] = 1
+	Stats.Cards[load("res://Resources/Cards/Evasive.tres")] = 1
 		
 	return Stats

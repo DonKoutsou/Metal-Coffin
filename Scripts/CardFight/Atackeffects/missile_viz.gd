@@ -12,23 +12,27 @@ class_name MissileViz
 
 var Target : Control
 var Going = true
-var SpawnPos : Vector2
+var SpawnPos : Vector2 = Vector2.ZERO
 # Wiggle amplitude and speed
 @export var wiggle_amplitude = 5.0
 @export var wiggle_frequency = 3.0
 
+@export var ExplosionSound : AudioStream
+
 signal Finished
+signal Reached
 
 func _ready() -> void:
 	global_position = SpawnPos
 	$TrailLine.Init()
+	$MissileCruise.play(1)
 
 func _process(delta: float) -> void:
 	
-	if (!Going):
+	if (!Going or Target == null):
 		return
 	
-	var direction = Target.global_position - global_position
+	var direction = (Target.global_position + (Target.size / 2)) - global_position
 	var distance = direction.length()
 
 	# Only adjust if the missile is more than a tiny distance from the target
@@ -57,13 +61,20 @@ func _process(delta: float) -> void:
 		rotation = current_angle
 
 		# Move the missile forward
+		
 		position += Vector2(cos(rotation), sin(rotation)) * speed * delta
 	
-	if (global_position.distance_to(Target.global_position) < 30):
+	if (global_position.distance_to(Target.global_position + (Target.size / 2)) < 30):
 		$MultiParticleExample2.global_position = global_position
 		$MultiParticleExample2.burst()
 		$TrailLine.queue_free()
 		Going = false
+		Reached.emit()
+		$MissileCruise.stop()
+		var S = DeletableSoundGlobal.new()
+		S.stream = ExplosionSound
+		get_parent().add_child(S)
+		S.play()
 		await $MultiParticleExample2.Finished
 		queue_free()
 		Finished.emit()

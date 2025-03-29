@@ -5,13 +5,13 @@ class_name Missile
 #once an enemy enters it the missile will hone at them and kill once struc
 var MissileName : String
 var Distance : int = 1500
-var Speed : float = 1
+@export var Speed : float = 1
 var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
 
 var FoundShips : Array[Node2D] = []
 var Paused = false
-#var SimulationSpeed : float = 1
+var Friendly = false
 
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
@@ -47,18 +47,48 @@ func _ready() -> void:
 		s.max_distance = 20000
 		get_parent().add_child(s)
 	$AccelPosition.position.x = Speed
-
+	$Radar_Range.visible = Friendly
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if (Paused):
 		return
 	if (FoundShips.size() > 0):
 		HoneAtEnemy()
-	for g in SimulationManager.SimSpeed():
-		global_position = $AccelPosition.global_position
-		Distance -= $AccelPosition.position.x
+	
+	var offset = GetShipSpeedVec() * SimulationManager.SimSpeed()
+	
+	var Col = CheckForBodiesOnTrajectory(offset)
+	if (Col != null and Col.get_parent() != self and Col.get_parent() != FiredBy):
+		global_position = Col.global_position
+	else:
+		var PosBefore = global_position
+		global_position += offset
+		Distance -= PosBefore.distance_to(global_position)
+		
 	if (Distance <= 0):
 		Kill()
+
+func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
+	var Body : Node2D
+	  # Calculate direction and distance
+	var direction = ((global_position + Dir) - global_position).normalized()
+	var distance_to_move = Dir
+	
+	var shape_cast = ShapeCast2D.new()
+	add_child(shape_cast)
+	shape_cast.collide_with_areas = true
+	shape_cast.collision_mask = $MissileBody.collision_mask
+	shape_cast.shape = CapsuleShape2D.new()
+	# Set ShapeCast destination
+	shape_cast.target_position = global_position + Dir
+
+	# Perform the ShapeCast
+	shape_cast.force_shapecast_update()
+	if shape_cast.get_collision_count() > 0:
+		Body = shape_cast.get_collider(0)
+	shape_cast.queue_free()
+	return Body
 
 func StopSeeing() -> void:
 	VisibleBy.clear()
@@ -70,6 +100,8 @@ func OnMissDest(Mis : Missile) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var bod = area.get_parent()
+	if (bod == FiredBy):
+		return
 	if (bod is HostileShip):
 		if (bod.Destroyed):
 			return

@@ -2,7 +2,7 @@ extends Control
 
 class_name Card
 
-@export var CardB : Button
+@export var CardName : Label
 @export var CardDesc : RichTextLabel
 @export var CardCost : Label
 
@@ -45,12 +45,12 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	var DescText =  "[center]{0}[/center]".format([Stats.CardDescription])
 	
 	if Stats.SelectedOption !=  null:
-		CardB.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
+		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
 		DescText =  "[center]{0}[/center]".format([ Stats.SelectedOption.OptionDescription])
 		Cost += Stats.SelectedOption.EnergyAdd
 	else:
-		CardB.text = Stats.CardName
-	CardB.icon = Stats.Icon
+		CardName.text = Stats.CardName
+	#CardB.icon = Stats.Icon
 	
 	#var DescText =  "[center]{0}".format([Stats.CardDescription])
 	#CardDesc.visible_ratio = 0

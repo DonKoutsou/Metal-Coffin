@@ -8,6 +8,7 @@ signal AnimationFinished
 @export var DamageFloater : PackedScene
 @export var ShipViz : PackedScene
 @export var AtackVisual : PackedScene
+@export var DefVisual : PackedScene
 @export_group("Event Handlers")
 @export var UIEventH : UIEventHandler
 #var LinePos : float = 0
@@ -25,7 +26,7 @@ var fr : bool
 func _ready() -> void:
 	set_physics_process(false)
 	#set_physics_process(true)
-	DoOffensive(OffensiveCardStats.new(), false, BattleShipStats.new(), [BattleShipStats.new(), BattleShipStats.new()], false)
+	#DoOffensive(OffensiveCardStats.new(), true, BattleShipStats.new(), [BattleShipStats.new()], false)
 
 func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShips : Array[BattleShipStats], FriendShip : bool) -> void:
 	fr = FriendShip
@@ -78,10 +79,10 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 func SpawnVisual(Target : Control, Damage : float) -> void:
 	var Visual = AtackVisual.instantiate() as MissileViz
 	Visual.Target = Target
-	Visual.SpawnPos = AtC.global_position
+	Visual.SpawnPos = AtC.global_position + (AtC.size / 2)
 	add_child(Visual)
-
-	Visual.connect("Finished", TweenEnded.bind(Damage))
+	
+	Visual.connect("Reached", TweenEnded.bind(Damage))
 
 var LineToMove = 0
 func MoveLine(Val : float) -> void:
@@ -103,12 +104,18 @@ func TweenEnded(Damage : float) -> void:
 		if (fr):
 			UIEventH.OnControlledShipDamaged(Damage)
 	else :
+
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
 		d.modulate = Color(1,1,1,1)
 		add_child(d)
 		d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2
 		d.connect("Ended", AnimEnded)
+		
+		var ShieldEff = DefVisual.instantiate() as BurstParticleGroup2D
+		add_child(ShieldEff)
+		ShieldEff.global_position = (DefC.global_position + (DefC.size / 2))
+		ShieldEff.burst()
 
 func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	Ic = ShipViz.instantiate() as CardFightShipViz
@@ -150,7 +157,7 @@ func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	
 func AnimEnded() -> void:
 	AnimationFinished.emit()
-	queue_free()
+
 
 func _physics_process(_delta: float) -> void:
 	queue_redraw()
@@ -174,4 +181,4 @@ func _draw() -> void:
 			pos2.y += Ic2[g].size.y / 2
 			#pos2.y = pos1.y
 			
-		draw_line(pos1, lerp(pos1, pos2, DrawPositions2[g]), Color(1,0,0), 8)
+		#draw_line(pos1, lerp(pos1, pos2, DrawPositions2[g]), Color(1,0,0), 8)

@@ -12,14 +12,14 @@ uniform vec2 Scale;
 void fragment() {
     // Combine UV, speed, time, and offset for the final texture coordinates
     vec2 uv = (UV + offset) * Scale;
-	
+
 	vec4 n_out4p0;
 	// Texture2D:4
 	n_out4p0 = texture(GroundNormalTexture, uv);
     // Apply the fog effect
     COLOR = texture(GroundTexture, uv);
-	
+
 	NORMAL_MAP = vec3(n_out4p0.xyz);
 	NORMAL_MAP_DEPTH = n_out4p0.x;
-	
+
 }
