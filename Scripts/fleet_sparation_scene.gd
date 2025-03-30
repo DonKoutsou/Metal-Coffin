@@ -79,7 +79,7 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 		else:
 			NewFleetShipPlecement.remove_child(Cont)
 
-			var OldCommander = CurrentFleet[0]
+			var OldCommander = NewFleet[0]
 			var Dock = OldCommander.GetDroneDock()
 			Dock.UndockDrone(Ship)
 			

@@ -82,10 +82,11 @@ func DroneDisharged(Dr : MapShip):
 		#FlyingDrones.erase(Dr)
 
 func AddRecruit(Cpt : Captain, Notify : bool = true) -> void:
+	if (Notify):
+		PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Cpt.ProvidingFunds]))
+		Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait, Cpt.CaptainName)
 	
 	World.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
-	PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Cpt.ProvidingFunds]))
-	Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait, Cpt.CaptainName)
 	var ship = (load("res://Scenes/MapShips/drone.tscn") as PackedScene).instantiate() as Drone
 	ship.Cpt = Cpt
 	AddDrone(ship, false)

@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://b5ao0qlhgw6p0"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_df5dq"]
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="2_syodc"]
+[ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="3_yoqfn"]
+[ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="4_dj1bk"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_enww6"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_52ckq"]
+
+[sub_resource type="Resource" id="Resource_y5vig"]
+script = ExtResource("6_enww6")
+UpgradeName = 1
+UpgradeAmmount = 10.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_05yu7"]
+script = ExtResource("6_enww6")
+UpgradeName = 2
+UpgradeAmmount = 1.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_a5vje"]
+script = ExtResource("6_enww6")
+UpgradeName = 0
+UpgradeAmmount = 100.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("7_52ckq")
+Upgrades = Array[ExtResource("6_enww6")]([SubResource("Resource_y5vig"), SubResource("Resource_05yu7"), SubResource("Resource_a5vje")])
+UpgradeTime = 300.0
+UpgradeCost = 1000.0
+IsDamaged = false
+PartType = 1
+ItemIcon = ExtResource("3_yoqfn")
+ItemIconSmol = ExtResource("4_dj1bk")
+ItemName = "EF 100"
+ItemDesc = "'Conserve' is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, 'Conserve' offers a balanced compromise for steady pacing over extended durations."
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_df5dq")]([ExtResource("2_syodc")])
+CanTransfer = false

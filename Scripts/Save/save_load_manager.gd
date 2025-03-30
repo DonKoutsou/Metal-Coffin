@@ -71,7 +71,7 @@ func Load(world : World) ->bool:
 func LoadMapDat(W : World, PlayerWallet : Wallet, PlayerData : PlayerSaveData, Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
 	await W.WRLD_WorldReady
 	var Mp = W.GetMap()
-	var Ships = get_tree().get_nodes_in_group("Ships")
+	#var Ships = get_tree().get_nodes_in_group("Ships")
 	var Controller = W.Controller
 	Controller.LoadSaveData(PlayerData)
 	W.LoadSaveData(PlayerWallet)

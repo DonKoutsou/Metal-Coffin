@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=24 format=3 uid="uid://caroffy3ubxip"]
+[gd_resource type="Resource" script_class="Captain" load_steps=26 format=3 uid="uid://caroffy3ubxip"]
 
 [ext_resource type="Texture2D" uid="uid://baiwp3ejwapub" path="res://Assets/CaptainPortraits/Captain11.png" id="1_2va48"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ttymy"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_nr51w"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_y0oxi"]
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="5_6qaa8"]
+[ext_resource type="Resource" uid="uid://cga5buofwr6yr" path="res://Resources/Captains/PlayerCaptains/Sirius.tres" id="5_jnhcl"]
+[ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="6_bcr2s"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="7_c36cb"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="8_p7srd"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="9_vkicc"]
@@ -92,5 +94,5 @@ StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("15_38pvm"), ExtResou
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 20000
-ProvidingCaptains = Array[ExtResource("14_8itwo")]([])
+ProvidingCaptains = Array[ExtResource("14_8itwo")]([ExtResource("5_jnhcl"), ExtResource("6_bcr2s")])
 Cards = Array[ExtResource("3_i1vcp")]([])

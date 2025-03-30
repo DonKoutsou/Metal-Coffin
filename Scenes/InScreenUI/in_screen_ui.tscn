@@ -54,11 +54,6 @@ theme = ExtResource("9_8iafl")
 
 [node name="MapMarkerEditor" parent="Control3" instance=ExtResource("4_w862u")]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [node name="SimulationNotification" parent="Control3" instance=ExtResource("5_g51f2")]
 layout_mode = 1

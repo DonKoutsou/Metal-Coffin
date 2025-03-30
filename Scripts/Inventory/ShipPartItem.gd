@@ -16,19 +16,19 @@ func _setup_local_to_scene() -> void:
 func GetItemDesc() -> String:
 	var UpNames = "\n[color=#c19200]-------------[/color]"
 	for g in Upgrades.size():
-		var Multiplier = 1
-		if (Upgrades[g].UpgradeName == STAT_CONST.STATS.SPEED):
-			Multiplier = 360
+		#var Multiplier = 1
+		#if (Upgrades[g].UpgradeName == STAT_CONST.STATS.THRUST):
+			#Multiplier = 360
 		var UpName = STAT_CONST.STATS.keys()[Upgrades[g].UpgradeName].replace("_", " ")
 		var UpAmm
 		var UpSymbol
 		var Col
 		if (Upgrades[g].UpgradeAmmount > 0):
-			UpAmm = Upgrades[g].UpgradeAmmount * Multiplier
+			UpAmm = Upgrades[g].UpgradeAmmount
 			UpSymbol = "+"
 			Col = "c19200"
 		else : if (Upgrades[g].PenaltyAmmount > 0):
-			UpAmm = Upgrades[g].PenaltyAmmount * Multiplier
+			UpAmm = Upgrades[g].PenaltyAmmount
 			UpSymbol = "-"
 			Col = "db2c36"
 		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, STAT_CONST.GetStatMetric(Upgrades[g].UpgradeName), UpSymbol, Col])

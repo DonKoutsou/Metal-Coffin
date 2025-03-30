@@ -20,54 +20,70 @@ var DrawnLine : bool = false
 
 var AtC
 var DefC
-var Ic
-var Ic2 : Array
+var IcPos : Vector2
+var Targets : Array[Control]
+#var Ic2Pos : Vector2
 var fr : bool
-func _ready() -> void:
-	set_physics_process(false)
+#func _ready() -> void:
+	#set_physics_process(false)
 	#set_physics_process(true)
 	#DoOffensive(OffensiveCardStats.new(), true, BattleShipStats.new(), [BattleShipStats.new()], false)
 
-func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShips : Array[BattleShipStats], FriendShip : bool) -> void:
+func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : BattleShipStats, TargetShips : Array[Control], FriendShip : bool) -> void:
 	fr = FriendShip
-	Ic = ShipViz.instantiate() as CardFightShipViz
-	Ic.SetStatsAnimation(OriginShip, !FriendShip)
-	$HBoxContainer.add_child(Ic)
-	Ic.disabled = true
-	AtC = CardScene.instantiate() as Card
-	AtC.Dissable()
-	var Opts : Array[CardOption] = []
-	AtC.SetCardStats(AtackCard, Opts)
-	$HBoxContainer.add_child(AtC)
-	AtC.size_flags_horizontal = Control.SIZE_EXPAND
-	AtC.show_behind_parent = true
+	#Ic = ShipViz.instantiate() as CardFightShipViz
+	#Ic.SetStatsAnimation(OriginShip, !FriendShip)
+	#$HBoxContainer.add_child(Ic)
 	
-	if (HasDef):
-		DefC = CardScene.instantiate() as Card
-		DefC.Dissable()
-		var Opts2 : Array[CardOption] = []
-		DefC.SetCardStats(AtackCard.GetCounter(), Opts2)
-		$HBoxContainer.add_child(DefC)
-		DefC.size_flags_horizontal = Control.SIZE_EXPAND
-		DefC.show_behind_parent = true
+	if (fr):
+		$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_END)
+		if (HasDef):
+			DefC = CardScene.instantiate() as Card
+			DefC.Dissable()
+			var Opts2 : Array[CardOption] = []
+			DefC.SetCardStats(AtackCard.GetCounter(), Opts2)
+			$HBoxContainer.add_child(DefC)
+			DefC.size_flags_horizontal = Control.SIZE_EXPAND
+			DefC.show_behind_parent = true
+		Targets.append_array(TargetShips)
+		AtC = CardScene.instantiate() as Card
+		AtC.Dissable()
+		var Opts : Array[CardOption] = []
+		AtC.SetCardStats(AtackCard, Opts)
+		$HBoxContainer.add_child(AtC)
+		AtC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		AtC.show_behind_parent = true
+	else:
+		$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_BEGIN)
+		Targets.append_array(TargetShips)
+		AtC = CardScene.instantiate() as Card
+		AtC.Dissable()
+		var Opts : Array[CardOption] = []
+		AtC.SetCardStats(AtackCard, Opts)
+		$HBoxContainer.add_child(AtC)
+		AtC.size_flags_horizontal = Control.SIZE_EXPAND
+		AtC.show_behind_parent = true
+		
+		if (HasDef):
+			DefC = CardScene.instantiate() as Card
+			DefC.Dissable()
+			var Opts2 : Array[CardOption] = []
+			DefC.SetCardStats(AtackCard.GetCounter(), Opts2)
+			$HBoxContainer.add_child(DefC)
+			DefC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+			DefC.show_behind_parent = true
+		
+	#var ShipPlemenent = VBoxContainer.new()
+	#$HBoxContainer.add_child(ShipPlemenent)
+	#ShipPlemenent.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
-	var ShipPlemenent = VBoxContainer.new()
-	$HBoxContainer.add_child(ShipPlemenent)
-	ShipPlemenent.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	
-	for g in TargetShips.size():
-		var t = ShipViz.instantiate() as CardFightShipViz
-		t.SetStatsAnimation(TargetShips[g], FriendShip)
-		ShipPlemenent.add_child(t)
-		Ic2.append(t)
-		t.disabled = true
-		DrawPositions2[g] = 0.0
+	for g in Targets.size():
 		
 		var Target
 		if (DefC != null):
 			Target = DefC
 		else :
-			Target = t
+			Target = Targets[g]
 		
 		call_deferred("SpawnVisual", Target, roundi(OriginShip.FirePower * AtackCard.GetDamage()))
 
@@ -94,7 +110,7 @@ func MoveLine(Val : float) -> void:
 func TweenEnded(Damage : float) -> void:
 	if (DefC == null):
 		
-		for g in Ic2:
+		for g in Targets:
 			var d = DamageFloater.instantiate()
 			d.modulate = Color(1,0,0,1)
 			d.text = var_to_str(Damage)
@@ -118,10 +134,10 @@ func TweenEnded(Damage : float) -> void:
 		ShieldEff.burst()
 
 func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip : bool) -> void:
-	Ic = ShipViz.instantiate() as CardFightShipViz
-	Ic.disabled = true
-	Ic.SetStatsAnimation(OriginShip, !FriendShip)
-	$HBoxContainer.add_child(Ic)
+	var ship = ShipViz.instantiate() as CardFightShipViz
+	ship.disabled = true
+	ship.SetStatsAnimation(OriginShip, !FriendShip)
+	$HBoxContainer.add_child(ship)
 	var Opts : Array[CardOption] = []
 	DefC = CardScene.instantiate() as Card
 	DefC.Dissable()
@@ -142,43 +158,43 @@ func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip 
 	d.connect("Ended", AnimEnded)
 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
-	Ic = ShipViz.instantiate() as CardFightShipViz
-	Ic.disabled = true
-	Ic.SetStatsAnimation(OriginShip, !FriendShip)
-	$HBoxContainer.add_child(Ic)
+	var Ship = ShipViz.instantiate() as CardFightShipViz
+	Ship.disabled = true
+	Ship.SetStatsAnimation(OriginShip, !FriendShip)
+	$HBoxContainer.add_child(Ship)
 	
-	Ic.ToggleFire(true)
+	Ship.ToggleFire(true)
 	var d = DamageFloater.instantiate()
 	d.text = "Fire Damage - 10"
 	d.modulate = Color(1,1,1,1)
 	add_child(d)
-	d.global_position = (Ic.global_position + (Ic.size / 2)) - d.size / 2
+	d.global_position = (Ship.global_position + (Ship.size / 2)) - d.size / 2
 	d.connect("Ended", AnimEnded)
 	
 func AnimEnded() -> void:
 	AnimationFinished.emit()
 
 
-func _physics_process(_delta: float) -> void:
-	queue_redraw()
-
-func _draw() -> void:
-	if (!DrawnLine):
-		return
-	draw_set_transform(-global_position)
-	for g in Ic2.size():
-		var pos1 = AtC.global_position
-		pos1.x += AtC.size.x / 2
-		pos1.y += AtC.size.y / 2
-		var pos2 
-		if (DefC != null):
-			pos2 = DefC.global_position
-			pos2.x += DefC.size.x / 2
-			pos2.y = pos1.y
-		else :
-			pos2 = Ic2[g].global_position
-			pos2.x += Ic2[g].size.x / 2
-			pos2.y += Ic2[g].size.y / 2
+#func _physics_process(_delta: float) -> void:
+	#queue_redraw()
+#
+#func _draw() -> void:
+	#if (!DrawnLine):
+		#return
+	#draw_set_transform(-global_position)
+	#for g in Ic2.size():
+		#var pos1 = AtC.global_position
+		#pos1.x += AtC.size.x / 2
+		#pos1.y += AtC.size.y / 2
+		#var pos2 
+		#if (DefC != null):
+			#pos2 = DefC.global_position
+			#pos2.x += DefC.size.x / 2
 			#pos2.y = pos1.y
+		#else :
+			#pos2 = Ic2[g].global_position
+			#pos2.x += Ic2[g].size.x / 2
+			#pos2.y += Ic2[g].size.y / 2
+			##pos2.y = pos1.y
 			
 		#draw_line(pos1, lerp(pos1, pos2, DrawPositions2[g]), Color(1,0,0), 8)

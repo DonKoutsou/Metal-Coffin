@@ -65,10 +65,15 @@ func _InitialPlayerPlacament():
 	#place player close to first village
 	var pos = firstvilage.global_position
 	pos.y += 500
-	var PlShip = $SubViewportContainer/ViewPort/PlayerShip
+	var PlShip = $SubViewportContainer/ViewPort/PlayerShip as MapShip
 	PlShip.global_position = pos
 	GetCamera().FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
+	
+	for g in PlShip.Cpt.ProvidingCaptains:
+		PlShip.GetDroneDock().AddRecruit(g)
+
+
 
 #Called when enemy ship touches friendly one to strart a fight
 func EnemyMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip]):

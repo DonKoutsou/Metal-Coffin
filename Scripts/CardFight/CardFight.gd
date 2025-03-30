@@ -80,11 +80,11 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	#for g in 1:
-		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-	#for g in 1:
-		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	for g in 1:
+		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+	for g in 1:
+		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -370,7 +370,8 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			anim.DrawnLine = true
 			AnimationPlecement.add_child(anim)
 			AnimationPlecement.move_child(anim, 1)
-			anim.DoOffensive(Action, HasDeff, Ship, [Target], EnemyShips.has(Ship))
+			#anim.Originator = GetShipViz(Ship)
+			anim.DoOffensive(Action, HasDeff, Ship, [GetShipViz(Target)], EnemyShips.has(Ship))
 			
 			await(anim.AnimationFinished)
 			

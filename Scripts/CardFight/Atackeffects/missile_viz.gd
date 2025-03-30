@@ -25,7 +25,7 @@ signal Reached
 func _ready() -> void:
 	global_position = SpawnPos
 	$TrailLine.Init()
-	$MissileCruise.play(1)
+	#$MissileCruise.play(1)
 
 func _process(delta: float) -> void:
 	

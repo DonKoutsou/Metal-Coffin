@@ -32,6 +32,8 @@ static func GetInstance() -> World:
 	return Instance
 
 func _ready() -> void:
+	Instance = self
+	
 	GetMap().GetScreenUi().DoIntroFullScreen(true)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	WorldSpawnTransitionFinished.emit()
@@ -73,12 +75,13 @@ func _ready() -> void:
 	
 	
 	#Loadingscr.StartDest()
-	GetMap()._InitialPlayerPlacament()
+	
 	$ShipController.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
-	Instance = self
+	
 	WRLD_WorldReady.emit()
 	if (!Loading):
+		GetMap()._InitialPlayerPlacament()
 		GetMap().GetScreenUi().ToggleFullScreen(true)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
@@ -93,6 +96,7 @@ func _ready() -> void:
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Questionair.queue_free()
 		PlayIntro()
+		
 		PlayerWallet.SetFunds( StartingFunds)
 	else:
 		GetMap().GetScreenUi().ToggleFullScreen(false)

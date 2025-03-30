@@ -10,9 +10,9 @@
 resource_local_to_scene = true
 script = ExtResource("3_4hto1")
 UpgradeName = 0
-UpgradeAmmount = 150.0
+UpgradeAmmount = 275.0
 PenaltyAmmount = 0.0
-CurrentValue = 150.0
+CurrentValue = 275.0
 
 [resource]
 resource_local_to_scene = true

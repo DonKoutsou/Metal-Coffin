@@ -6,24 +6,26 @@ class_name STAT_CONST
 const StatMaxValues : Dictionary = {
 	STATS.FUEL_TANK : 1000,
 	STATS.FUEL_EFFICIENCY : 50,
-	STATS.SPEED : 3,
+	STATS.THRUST : 10000,
 	STATS.FIREPOWER : 20,
 	STATS.HULL : 1000,
 	STATS.INVENTORY_SPACE : 12,
 	STATS.VISUAL_RANGE : 1500,
 	STATS.ELINT : 3000,
-	STATS.MISSILE_SPACE : 20
+	STATS.MISSILE_SPACE : 20,
+	STATS.WEIGHT : 1000
 }
 const StatShouldStack : Dictionary = {
 	STATS.FUEL_TANK : true,
 	STATS.FUEL_EFFICIENCY : true,
-	STATS.SPEED : true,
+	STATS.THRUST : true,
 	STATS.FIREPOWER : true,
 	STATS.HULL : true,
 	STATS.INVENTORY_SPACE : true,
 	STATS.VISUAL_RANGE : false,
 	STATS.ELINT : false,
-	STATS.MISSILE_SPACE : true
+	STATS.MISSILE_SPACE : true,
+	STATS.WEIGHT : true
 }
 
 static func StringToEnum(Stat : String) -> STATS:
@@ -39,12 +41,14 @@ static func GetStatMetric(Stat : STATS) -> String:
 			Metric = "m³"
 		STATS.FUEL_EFFICIENCY:
 			Metric = "km/m³"
-		STATS.SPEED:
-			Metric = "km/h"
+		STATS.THRUST:
+			Metric = "kN"
 		STATS.VISUAL_RANGE:
 			Metric = "km"
 		STATS.ELINT:
 			Metric = "km"
+		STATS.WEIGHT:
+			Metric = "tons"
 	return Metric
 
 static func GetStatItemBuff(Stat : STATS, Buffs : Array[float]) -> float:
@@ -67,11 +71,12 @@ static func GetStatMaxValue(Stat : STATS) -> int:
 enum STATS{
 	FUEL_TANK,
 	FUEL_EFFICIENCY,
-	SPEED,
+	THRUST,
 	FIREPOWER,
 	HULL,
 	INVENTORY_SPACE,
 	VISUAL_RANGE,
 	ELINT,
-	MISSILE_SPACE
+	MISSILE_SPACE,
+	WEIGHT,
 }

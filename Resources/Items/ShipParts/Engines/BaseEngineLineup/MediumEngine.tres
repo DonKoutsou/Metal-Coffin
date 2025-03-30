@@ -18,7 +18,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_qf4d6"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 2
-UpgradeAmmount = 1.5
+UpgradeAmmount = 1.75
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
