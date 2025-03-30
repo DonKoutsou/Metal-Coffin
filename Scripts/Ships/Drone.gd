@@ -32,7 +32,8 @@ func EnableDrone():
 		TakeoffStarted.emit()
 		TakingOff = true
 	#$AudioStreamPlayer2D.play()
-	GetShipAcelerationNode().position.x = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
+	var Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	GetShipAcelerationNode().position.x =  Speed / 360
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 	

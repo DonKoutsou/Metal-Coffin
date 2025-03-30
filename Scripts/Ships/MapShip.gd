@@ -206,7 +206,7 @@ func SetCurrentPort(Port : MapSpot):
 	PortChanged.emit(Port)
 		
 func SetSpeed(Spd : float) -> void:
-	GetShipAcelerationNode().position.x = Spd
+	GetShipAcelerationNode().position.x = Spd / 360
 
 func RemovePort():
 	ShipDeparted.emit()
@@ -263,8 +263,8 @@ func AccelerationChanged(value: float) -> void:
 	
 	AccelChanged = true
 	
-	
-	GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed())
+	SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
+	#GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed()) 
 
 func updatedronecourse():
 	var plship = Command
@@ -551,7 +551,7 @@ func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	var W = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-	stats.Speed = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * (W / 500)
+	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
@@ -563,12 +563,13 @@ func GetBattleStats() -> BattleShipStats:
 	return stats
 	
 func GetShipMaxSpeed() -> float:
-	var Spd = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
+	var Spd
 	if (Docked):
 		Spd = Command.GetShipMaxSpeed()
 	else:
+		Spd = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		for g in GetDroneDock().GetDockedShips():
-			var DroneSpd = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
+			var DroneSpd = (g.Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 			if (DroneSpd < Spd):
 				Spd = DroneSpd
 
@@ -580,7 +581,7 @@ func GetShipName() -> String:
 func GetShipSpeed() -> float:
 	if (Docked):
 		return Command.GetShipSpeed()
-	return $Aceleration.position.x
+	return $Aceleration.position.x * 360
 	
 func GetShipSpeedVec() -> Vector2:
 	return $Aceleration.global_position - global_position

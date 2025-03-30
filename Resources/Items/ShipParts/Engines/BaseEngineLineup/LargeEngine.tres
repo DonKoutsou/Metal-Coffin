@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://cxum5qaw20d1q"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://cxum5qaw20d1q"]
 
 [ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_cxl4y"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_t7h3x"]
@@ -17,14 +17,22 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_uftnd"]
 script = ExtResource("5_0moyl")
 UpgradeName = 2
-UpgradeAmmount = 2.0
+UpgradeAmmount = 40.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_j5fk8"]
+script = ExtResource("5_0moyl")
+UpgradeName = 9
+UpgradeAmmount = 70.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("3_s64vj")
-Upgrades = Array[ExtResource("5_0moyl")]([SubResource("Resource_1w3hf"), SubResource("Resource_uftnd")])
+Upgrades = Array[ExtResource("5_0moyl")]([SubResource("Resource_1w3hf"), SubResource("Resource_uftnd"), SubResource("Resource_j5fk8")])
 UpgradeTime = 300.0
 UpgradeCost = 5000.0
 IsDamaged = false

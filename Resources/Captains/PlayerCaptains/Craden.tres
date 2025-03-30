@@ -1,22 +1,22 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=26 format=3 uid="uid://caroffy3ubxip"]
+[gd_resource type="Resource" script_class="Captain" load_steps=27 format=3 uid="uid://caroffy3ubxip"]
 
 [ext_resource type="Texture2D" uid="uid://baiwp3ejwapub" path="res://Assets/CaptainPortraits/Captain11.png" id="1_2va48"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ttymy"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_i1vcp"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_nr51w"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_y0oxi"]
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="5_6qaa8"]
-[ext_resource type="Resource" uid="uid://cga5buofwr6yr" path="res://Resources/Captains/PlayerCaptains/Sirius.tres" id="5_jnhcl"]
+[ext_resource type="Resource" uid="uid://bkfcg5rwf7vhu" path="res://Resources/Captains/PlayerCaptains/Dimitry.tres" id="5_jnhcl"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="6_bcr2s"]
-[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="7_c36cb"]
-[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="8_p7srd"]
-[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="9_vkicc"]
-[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="10_jcfu4"]
-[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="11_nudrd"]
-[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="12_nvnas"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="10_2fph2"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="10_xdro3"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="11_2fph2"]
+[ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="12_q0d4v"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="13_m641q"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="14_8itwo"]
-[ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="15_38pvm"]
-[ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="17_q7w2d"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="14_tfttw"]
+[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="15_5588k"]
+[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="16_tcmus"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="17_jnhcl"]
 
 [sub_resource type="Resource" id="Resource_bp15r"]
 script = ExtResource("2_ttymy")
@@ -29,7 +29,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_s5ab2"]
 script = ExtResource("2_ttymy")
 StatName = 6
-StatBase = 100.0
+StatBase = 90.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -69,7 +69,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_pno3o"]
 script = ExtResource("2_ttymy")
 StatName = 0
-StatBase = 150.0
+StatBase = 0.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -82,15 +82,24 @@ StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_jnhcl"]
+script = ExtResource("2_ttymy")
+StatName = 9
+StatBase = 300.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
 [resource]
 script = ExtResource("14_8itwo")
 CaptainName = "Craden"
 CaptainBio = "Shitheadwafwaf"
 CaptainPortrait = ExtResource("1_2va48")
 ShipIcon = ExtResource("3_nr51w")
-CaptainStats = Array[ExtResource("2_ttymy")]([SubResource("Resource_bp15r"), SubResource("Resource_s5ab2"), SubResource("Resource_f25rj"), SubResource("Resource_j8fdu"), SubResource("Resource_dap26"), SubResource("Resource_rifue"), SubResource("Resource_pno3o"), SubResource("Resource_pew21")])
+CaptainStats = Array[ExtResource("2_ttymy")]([SubResource("Resource_bp15r"), SubResource("Resource_s5ab2"), SubResource("Resource_f25rj"), SubResource("Resource_j8fdu"), SubResource("Resource_dap26"), SubResource("Resource_rifue"), SubResource("Resource_pno3o"), SubResource("Resource_pew21"), SubResource("Resource_jnhcl")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("15_38pvm"), ExtResource("17_q7w2d"), ExtResource("5_6qaa8"), ExtResource("7_c36cb"), ExtResource("8_p7srd"), ExtResource("9_vkicc"), ExtResource("10_jcfu4"), ExtResource("11_nudrd"), ExtResource("12_nvnas"), ExtResource("11_nudrd"), ExtResource("11_nudrd"), ExtResource("11_nudrd"), ExtResource("10_jcfu4"), ExtResource("10_jcfu4"), ExtResource("10_jcfu4")])
+StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("10_2fph2"), ExtResource("10_2fph2"), ExtResource("11_2fph2"), ExtResource("12_q0d4v"), ExtResource("13_m641q"), ExtResource("14_tfttw"), ExtResource("15_5588k"), ExtResource("15_5588k"), ExtResource("16_tcmus"), ExtResource("16_tcmus"), ExtResource("17_jnhcl"), ExtResource("17_jnhcl"), ExtResource("17_jnhcl"), ExtResource("17_jnhcl"), ExtResource("10_xdro3")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 20000

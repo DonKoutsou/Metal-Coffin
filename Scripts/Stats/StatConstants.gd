@@ -6,14 +6,14 @@ class_name STAT_CONST
 const StatMaxValues : Dictionary = {
 	STATS.FUEL_TANK : 1000,
 	STATS.FUEL_EFFICIENCY : 50,
-	STATS.THRUST : 10000,
+	STATS.THRUST : 100,
 	STATS.FIREPOWER : 20,
 	STATS.HULL : 1000,
 	STATS.INVENTORY_SPACE : 12,
 	STATS.VISUAL_RANGE : 1500,
 	STATS.ELINT : 3000,
 	STATS.MISSILE_SPACE : 20,
-	STATS.WEIGHT : 1000
+	STATS.WEIGHT : 500
 }
 const StatShouldStack : Dictionary = {
 	STATS.FUEL_TANK : true,
@@ -42,7 +42,7 @@ static func GetStatMetric(Stat : STATS) -> String:
 		STATS.FUEL_EFFICIENCY:
 			Metric = "km/m³"
 		STATS.THRUST:
-			Metric = "kN"
+			Metric = "MN"
 		STATS.VISUAL_RANGE:
 			Metric = "km"
 		STATS.ELINT:

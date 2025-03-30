@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://d0a5l4aegq46m"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://d0a5l4aegq46m"]
 
 [ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_l85im"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_tlvwb"]
@@ -15,10 +15,18 @@ UpgradeAmmount = 200.0
 PenaltyAmmount = 0.0
 CurrentValue = 200.0
 
+[sub_resource type="Resource" id="Resource_bic66"]
+script = ExtResource("3_34rnk")
+UpgradeName = 9
+UpgradeAmmount = 4.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_sjam0")
-Upgrades = Array[ExtResource("3_34rnk")]([SubResource("Resource_i41uq")])
+Upgrades = Array[ExtResource("3_34rnk")]([SubResource("Resource_i41uq"), SubResource("Resource_bic66")])
 UpgradeVersion = ExtResource("3_ku1j6")
 UpgradeTime = 100.0
 UpgradeCost = 0.0

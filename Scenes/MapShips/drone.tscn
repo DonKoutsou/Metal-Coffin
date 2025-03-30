@@ -91,7 +91,6 @@ bus = &"Engine"
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
-visible = false
 shape = SubResource("CircleShape2D_e6yyl")
 debug_color = Color(0.616808, 0.00135421, 0.770009, 0.42)
 
@@ -100,7 +99,6 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSoundTrigger"]
-visible = false
 shape = SubResource("CircleShape2D_7khp2")
 debug_color = Color(0.261535, 0.503371, 1, 0.42)
 
@@ -110,7 +108,6 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
-visible = false
 shape = SubResource("CircleShape2D_mk6wy")
 debug_color = Color(0, 0.64636, 0.238936, 0.42)
 

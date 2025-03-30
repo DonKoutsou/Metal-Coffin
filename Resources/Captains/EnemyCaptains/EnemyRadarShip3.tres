@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=19 format=3 uid="uid://bfqcga4l0b5l5"]
+[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://bfqcga4l0b5l5"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_txr8i"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_mukc2"]
@@ -14,7 +14,7 @@
 [sub_resource type="Resource" id="Resource_4xt1j"]
 script = ExtResource("2_mukc2")
 StatName = 2
-StatBase = 0.7
+StatBase = 20.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -77,6 +77,15 @@ StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_vrfhx"]
+script = ExtResource("2_mukc2")
+StatName = 9
+StatBase = 100.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_wuex0")
@@ -84,7 +93,7 @@ CaptainName = "Grunt"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_txr8i")
 ShipIcon = ExtResource("3_fyn4s")
-CaptainStats = Array[ExtResource("2_mukc2")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym")])
+CaptainStats = Array[ExtResource("2_mukc2")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym"), SubResource("Resource_vrfhx")])
 ShipCallsign = "R3"
 StartingItems = Array[ExtResource("3_7cfbx")]([])
 CurrentPort = ""

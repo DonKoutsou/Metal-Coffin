@@ -6,13 +6,12 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_43sb5"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_alabf"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_kc55u"]
-[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="4_2ffin"]
-[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="6_atj7q"]
-[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="7_c7b8r"]
-[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="7_ddapy"]
-[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="12_8kp6e"]
+[ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="8_lumq3"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="9_nheko"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="10_al4bv"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="11_6t7up"]
+[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_8kp6e"]
 [ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/FuelTank2.tres" id="13_0d70u"]
-[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="13_1mnok"]
 
 [sub_resource type="Resource" id="Resource_wdy4b"]
 script = ExtResource("2_ot5w6")
@@ -78,15 +77,24 @@ StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_1mnok"]
+script = ExtResource("2_ot5w6")
+StatName = 9
+StatBase = 20.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
 [resource]
 script = ExtResource("3_5m53b")
 CaptainName = "Sirius"
 CaptainBio = "Missile Carrier"
 CaptainPortrait = ExtResource("1_2qy3x")
 ShipIcon = ExtResource("3_kc55u")
-CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), SubResource("Resource_48366"), SubResource("Resource_hl7ky")])
+CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), SubResource("Resource_48366"), SubResource("Resource_hl7ky"), SubResource("Resource_1mnok")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_43sb5")]([ExtResource("4_2ffin"), ExtResource("13_0d70u"), ExtResource("7_c7b8r"), ExtResource("6_atj7q"), ExtResource("6_atj7q"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("7_ddapy"), ExtResource("12_8kp6e"), ExtResource("12_8kp6e"), ExtResource("12_8kp6e"), ExtResource("12_8kp6e"), ExtResource("13_1mnok"), ExtResource("13_1mnok"), ExtResource("13_1mnok")])
+StartingItems = Array[ExtResource("3_43sb5")]([ExtResource("8_lumq3"), ExtResource("13_0d70u"), ExtResource("9_nheko"), ExtResource("10_al4bv"), ExtResource("10_al4bv"), ExtResource("11_6t7up"), ExtResource("11_6t7up"), ExtResource("11_6t7up"), ExtResource("11_6t7up"), ExtResource("12_8kp6e"), ExtResource("12_8kp6e"), ExtResource("12_8kp6e"), ExtResource("12_8kp6e")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 0

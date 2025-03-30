@@ -296,7 +296,8 @@ func IntersectPusruing() -> Vector2:
 	ship_velocity = PursuingShips[0].GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
+	var speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var time_to_interception = (position.distance_to(ship_position)) / speed
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -498,7 +499,7 @@ func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
-	stats.Speed = Cpt.GetStatFinalValue(STAT_CONST.STATS.SPEED)
+	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()

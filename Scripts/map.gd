@@ -41,7 +41,7 @@ static func PixelDistanceToKm(Dist : float) -> float:
 	return Dist
 
 static func SpeedToKmH(Speed : float) -> float:
-	return Speed * 360
+	return Speed
 
 static func GetInstance() -> Map:
 	return Instance
@@ -102,11 +102,11 @@ func Arrival(Spot : MapSpot) -> void:
 	
 	#TODO find better way for this
 	for Ship in Spot.VisitingShips:
-		if (Ship is PlayerShip and !PlayerShips.has(Ship)):
+		if (Ship is not HostileShip and !PlayerShips.has(Ship)):
 			PlayerShips.append(Ship)
 			if (Ship.Command == null):
 				for Docked in Ship.GetDroneDock().GetDockedShips():
-					if (Docked is PlayerShip and !PlayerShips.has(Docked)):
+					if (Docked is MapShip and !PlayerShips.has(Docked)):
 						PlayerShips.append(Docked)
 					else: if (Docked is HostileShip and !HostileShips.has(Docked)):
 						HostileShips.append(Docked)

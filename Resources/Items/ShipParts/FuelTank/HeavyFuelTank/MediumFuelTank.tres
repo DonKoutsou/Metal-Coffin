@@ -18,9 +18,9 @@ CurrentValue = 350.0
 [sub_resource type="Resource" id="Resource_xgd67"]
 resource_local_to_scene = true
 script = ExtResource("6_u32dk")
-UpgradeName = 2
-UpgradeAmmount = 0.0
-PenaltyAmmount = 0.25
+UpgradeName = 9
+UpgradeAmmount = 25.0
+PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
 [resource]
