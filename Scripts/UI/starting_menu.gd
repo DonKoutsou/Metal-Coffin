@@ -9,11 +9,11 @@ var SpawnedCredits : Control
 signal GameStart(Load : bool)
 
 func _ready() -> void:
-	$w.modulate = Color(0,0,0)
+	$w/PointLight2D.energy = 0
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property($w, "modulate", Color(1,1,1), 2)
+	tw.tween_property($w/PointLight2D, "energy", 1, 2)
 	LoopAmp()
 
 func _on_play_pressed() -> void:

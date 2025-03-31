@@ -891,6 +891,7 @@ position = Vector2(-104, 6)
 scale = Vector2(0.845, 0.675)
 color = Color(0.21411, 0.398386, 0.176593, 1)
 energy = 2.71
+blend_mode = 2
 texture = ExtResource("36_ai3xr")
 texture_scale = 20.2
 
@@ -899,12 +900,15 @@ visible = false
 position = Vector2(5, -328)
 color = Color(0.851914, 0.187693, 0, 1)
 energy = 1.69
+blend_mode = 2
 texture = ExtResource("36_ai3xr")
 texture_scale = 23.39
 
 [node name="AlarmLight2" type="PointLight2D" parent="ScreenCam"]
-position = Vector2(5, -668)
+position = Vector2(7, -671)
 energy = 2.0
+blend_mode = 2
+range_z_min = 0
 texture = ExtResource("36_ai3xr")
 texture_scale = 50.0
 

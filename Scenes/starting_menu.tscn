@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=28 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -6,10 +6,55 @@
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="4_ancht"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
+[ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
+[ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/Spaceship/ShipElena2.png" id="7_ol3kq"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="8_mjxvy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="10_jcj0v"]
+[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
+[ext_resource type="Texture2D" uid="uid://borwlcefmcmlo" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="12_7x35f"]
+[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_2tj7v"]
+[ext_resource type="Shader" uid="uid://cmen5pp83lhs2" path="res://Shaders/clouds2.gdshader" id="14_7x35f"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
+[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
+shader = ExtResource("11_j424g")
+shader_parameter/GroundTexture = ExtResource("13_2tj7v")
+shader_parameter/GroundNormalTexture = ExtResource("12_7x35f")
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/Scale = Vector2(4, 4)
+
+[sub_resource type="Curve" id="Curve_1p5b6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_srpg8"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.715481, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
+noise_type = 5
+frequency = 0.0085
+fractal_lacunarity = 5.77
+fractal_weighted_strength = 1.0
+domain_warp_enabled = true
+domain_warp_frequency = 0.015
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
+seamless = true
+noise = SubResource("FastNoiseLite_a2ujk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tj7v"]
+shader = ExtResource("14_7x35f")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
+shader_parameter/density = 2.5
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/custom_time = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjxvy"]
 content_margin_left = 10.0
@@ -41,43 +86,184 @@ border_blend = true
 [node name="StartingMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 0
-follow_viewport_enabled = true
 script = ExtResource("1_y40tw")
 CreditsScene = ExtResource("2_0pu32")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
 [node name="w" type="ColorRect" parent="."]
-z_index = 1025
+z_index = -1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.168968, 0.205164, 0.25251, 1)
+color = Color(1, 1, 1, 0)
 
-[node name="TextureRect" type="TextureRect" parent="w"]
-custom_minimum_size = Vector2(512, 200)
+[node name="Ground" type="ColorRect" parent="w"]
+z_index = -1
+texture_filter = 1
+material = SubResource("ShaderMaterial_yrlew")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -766.0
+offset_top = -775.0
+offset_right = 734.0
+offset_bottom = 725.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IntroMenuShips" type="Control" parent="w"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -32.0
+offset_right = -15.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_yrlew")
+
+[node name="TextureRect3" type="TextureRect" parent="w/IntroMenuShips"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+rotation = -1.5708
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("16_2tj7v")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="w/IntroMenuShips/TextureRect3"]
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-texture = ExtResource("4_ancht")
+pivot_offset = Vector2(15, 15)
+
+[node name="TextureRect6" type="TextureRect" parent="w/IntroMenuShips/TextureRect3/Control"]
+modulate = Color(0, 0, 0, 0.6)
+layout_mode = 0
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 34.0
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("16_2tj7v")
 expand_mode = 1
 
-[node name="LineDrawer" parent="w" instance=ExtResource("8_mjxvy")]
+[node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect3"]
+show_behind_parent = true
+position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
+width = 2.0
+width_curve = SubResource("Curve_1p5b6")
+gradient = SubResource("Gradient_srpg8")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_eb1s8")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="TextureRect4" type="TextureRect" parent="w/IntroMenuShips"]
+layout_mode = 0
+offset_left = -30.0
+offset_top = -30.0
+rotation = -1.5708
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("7_ol3kq")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="w/IntroMenuShips/TextureRect4"]
+show_behind_parent = true
 layout_mode = 1
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_mjxvy")
-OrientationUpDown = false
-Speed = 5.0
-amplitude = 10.0
-waveform_points = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(15, 15)
+
+[node name="TextureRect6" type="TextureRect" parent="w/IntroMenuShips/TextureRect4/Control"]
+modulate = Color(0, 0, 0, 0.6)
+layout_mode = 0
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 34.0
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("7_ol3kq")
+expand_mode = 1
+
+[node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect4"]
+show_behind_parent = true
+position = Vector2(15, 6)
+points = PackedVector2Array(0, 0)
+width = 2.0
+width_curve = SubResource("Curve_1p5b6")
+gradient = SubResource("Gradient_srpg8")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_eb1s8")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="TextureRect5" type="TextureRect" parent="w/IntroMenuShips"]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 30.0
+offset_bottom = 60.0
+rotation = -1.5708
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("7_ol3kq")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="w/IntroMenuShips/TextureRect5"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(15, 15)
+
+[node name="TextureRect6" type="TextureRect" parent="w/IntroMenuShips/TextureRect5/Control"]
+modulate = Color(0, 0, 0, 0.6)
+layout_mode = 0
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 34.0
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("7_ol3kq")
+expand_mode = 1
+
+[node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect5"]
+show_behind_parent = true
+position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
+width = 2.0
+width_curve = SubResource("Curve_1p5b6")
+gradient = SubResource("Gradient_srpg8")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_eb1s8")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="TextureRect2" type="TextureRect" parent="w"]
 layout_mode = 1
@@ -94,7 +280,81 @@ size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
 expand_mode = 1
 
+[node name="TextureRect3" type="TextureRect" parent="w/TextureRect2"]
+self_modulate = Color(0, 0, 0, 0.6)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -489.5
+offset_top = 10.0
+offset_right = 507.5
+offset_bottom = 570.0
+grow_horizontal = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("7_aspsn")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="w"]
+layout_mode = 2
+offset_left = 1041.0
+offset_top = 557.0
+offset_right = 1173.0
+offset_bottom = 621.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="w/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_q14vk")
+
+[node name="TextureRect2" type="TextureRect" parent="w/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_s86m3")
+
+[node name="Clouds" type="ColorRect" parent="w"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_2tj7v")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -766.0
+offset_top = -775.0
+offset_right = 734.0
+offset_bottom = 725.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="w"]
+visible = false
+custom_minimum_size = Vector2(512, 200)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_ancht")
+expand_mode = 1
+
+[node name="LineDrawer" parent="w" instance=ExtResource("8_mjxvy")]
+visible = false
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjxvy")
+OrientationUpDown = false
+Speed = 5.0
+amplitude = 10.0
+waveform_points = 5
+
 [node name="PanelContainer2" type="PanelContainer" parent="w"]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -108,18 +368,6 @@ offset_bottom = -17.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("9_3vvgq")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="w/PanelContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="w/PanelContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_q14vk")
-
-[node name="TextureRect2" type="TextureRect" parent="w/PanelContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_s86m3")
 
 [node name="PanelContainer" type="PanelContainer" parent="w"]
 layout_mode = 1
@@ -212,6 +460,14 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("10_jcj0v")
 expand_mode = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="w"]
+position = Vector2(468, 136)
+blend_mode = 2
+range_z_max = -1
+texture = ExtResource("15_7x35f")
+texture_scale = 7.21
+height = 328.0
 
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]

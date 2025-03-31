@@ -52,7 +52,6 @@ Cpt = ExtResource("3_fw0pf")
 [node name="TrailLine" type="Line2D" parent="."]
 z_index = -1
 position = Vector2(-1, 0)
-points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_qb3w4")
 gradient = SubResource("Gradient_xnk77")
