@@ -30,7 +30,7 @@ func _HANDLE_ZOOM(zoomval : float):
 	ZoomTw = create_tween()
 	ZoomTw.set_ease(Tween.EASE_OUT)
 	ZoomTw.set_trans(Tween.TRANS_QUART)
-	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(10,10))
+	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(5,5))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
 	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
 	prevzoom = newzoom
@@ -154,7 +154,8 @@ func FrameCamToPlayer():
 		stattween.kill()
 	FrameTween = create_tween()
 	var plpos = $"../PlayerShip".global_position
-	FrameTween.set_trans(Tween.TRANS_EXPO)
+	FrameTween.set_trans(Tween.TRANS_QUAD)
+	FrameTween.set_ease(Tween.EASE_OUT)
 	FrameTween.tween_method(ForceCamPosition, global_position, plpos, 6)
 
 
@@ -162,8 +163,9 @@ func FrameCamToPos(pos : Vector2) -> void:
 	if (stattween != null):
 		stattween.kill()
 	FrameTween = create_tween()
-	FrameTween.set_trans(Tween.TRANS_EXPO)
-	FrameTween.tween_method(ForceCamPosition, global_position, pos, 2)
+	FrameTween.set_trans(Tween.TRANS_QUAD)
+	FrameTween.set_ease(Tween.EASE_OUT)
+	FrameTween.tween_method(ForceCamPosition, global_position, pos, 1)
 
 func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = Pos

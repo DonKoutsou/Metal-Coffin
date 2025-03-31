@@ -449,6 +449,8 @@ func BodyLeftRadar(Body : Area2D) -> void:
 			Parent.OnShipUnseen(self)
 			
 func BodyEnteredBody(Body : Area2D) -> void:
+	if (Docked):
+		return
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
 		SetCurrentPort(Parent)

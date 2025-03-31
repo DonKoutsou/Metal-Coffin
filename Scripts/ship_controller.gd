@@ -149,13 +149,13 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	
 var camtw : Tween
 func FrameCamToShip():
-	if (camtw != null):
-		camtw.kill()
-	camtw = create_tween()
-	var plpos = ControlledShip.global_position
-	camtw.set_trans(Tween.TRANS_EXPO)
-	camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
-
+	#if (camtw != null):
+		#camtw.kill()
+	#camtw = create_tween()
+	#var plpos = ControlledShip.global_position
+	#camtw.set_trans(Tween.TRANS_EXPO)
+	#camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
+	ship_camera.FrameCamToPos(ControlledShip.global_position)
 func _on_controlled_ship_return_pressed() -> void:
 	if (ControlledShip is Drone and !ControlledShip.CommingBack):
 		var CaptainSelect = CaptainSelectScreen.instantiate() as ItemTransfer

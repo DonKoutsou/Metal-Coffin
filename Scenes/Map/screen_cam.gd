@@ -30,8 +30,16 @@ func EnableShake(amm : float):
 	GoingDown= false
 	#$AnimationPlayer.play("Damage")
 	PauseShake(false)
-	shakestr = max(amm, shakestr)
-	GoDownValue = max(amm, GoDownValue)
+	var Tw = create_tween()
+	Tw.set_ease(Tween.EASE_OUT)
+	Tw.set_trans(Tween.TRANS_QUAD)
+	Tw.tween_property(self, "shakestr", max(amm, shakestr), 1)
+
+	var Tw2 = create_tween()
+	Tw2.set_ease(Tween.EASE_OUT)
+	Tw2.set_trans(Tween.TRANS_QUAD)
+	Tw2.tween_property(self, "GoDownValue", max(amm, GoDownValue), 1)
+
 func EnableMissileShake() -> void:
 	for g in Cabled:
 		g.ApplyShake(2)
@@ -40,8 +48,19 @@ func EnableMissileShake() -> void:
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("Alarm")
 	PauseShake(false)
-	shakestr = max(1.5, shakestr)
-	GoDownValue = 1
+	
+	
+	var Tw = create_tween()
+	Tw.set_ease(Tween.EASE_OUT)
+	Tw.set_trans(Tween.TRANS_QUAD)
+	Tw.tween_property(self, "shakestr", max(1.5, shakestr),1)
+
+	var Tw2 = create_tween()
+	Tw2.set_ease(Tween.EASE_OUT)
+	Tw2.set_trans(Tween.TRANS_QUAD)
+	Tw2.tween_property(self, "GoDownValue", 1, 1)
+	
+	await Tw2.finished
 	GoingDown = true
 func EnableDamageShake(amm : float) -> void:
 	for g in Cabled:
