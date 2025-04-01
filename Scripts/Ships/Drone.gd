@@ -36,15 +36,15 @@ func EnableDrone():
 	GetShipAcelerationNode().position.x =  Speed / 360
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
-	
-func DissableDrone():
-	#GetShipIcon().rotation = 0.0
-	rotation = 0
-	#$AudioStreamPlayer2D.stop()
-	#set_physics_process(false)
-	#ToggleRadar()
-	#$ShipBody/CollisionShape2D.set_deferred("disabled", true)
-	
+	#
+#func DissableDrone():
+	##GetShipIcon().rotation = 0.0
+	##rotation = 0
+	##$AudioStreamPlayer2D.stop()
+	##set_physics_process(false)
+	##ToggleRadar()
+	##$ShipBody/CollisionShape2D.set_deferred("disabled", true)
+	#pass
 func Regroup(NewCommander : MapShip):
 	Command = NewCommander
 	SetSpeed(GetShipMaxSpeed())
@@ -81,6 +81,9 @@ func BodyEnteredBody(Body: Area2D) -> void:
 		for g in MyDroneDock.DockedDrones:
 			MyDroneDock.UndockDrone(g)
 			plship.GetDroneDock().DockDrone(g, false)
+		for g in MyDroneDock.Captives:
+			MyDroneDock.UndockCaptive(g)
+			plship.GetDroneDock().DockCaptive(g, false)
 		#for g in MyDroneDock.FlyingDrones:
 			#g.Command = plship
 		CommingBack = false

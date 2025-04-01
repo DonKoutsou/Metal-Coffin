@@ -198,7 +198,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
 	#FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
-	drone.DissableDrone()
+	#drone.DissableDrone()
 	
 	var Command = get_parent() as MapShip
 	
@@ -220,6 +220,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	trans.update_rotation = false
 	$DroneSpots.add_child(trans)
 	trans.position = pos
+	drone.ForceSteer(get_parent().rotation)
 	trans.remote_path = drone.get_path()
 	drone.Docked = true
 
@@ -251,6 +252,7 @@ func DockCaptive(Captive : HostileShip) -> void:
 	trans.update_rotation = false
 	$DroneSpots.add_child(trans)
 	trans.position = pos
+	Captive.ForceSteer(get_parent().rotation)
 	trans.remote_path = Captive.get_path()
 	Captive.Docked = true
 
@@ -288,7 +290,7 @@ func RepositionDocks() -> void:
 	for DockSpot in $DroneSpots.get_children().size():
 		var pos : Vector2
 		var Offset = 10
-		for g in DockSpot:
+		for g in DockSpot + 1:
 			if (is_even(g)):
 				pos = Vector2(-Offset, -Offset)
 			else:

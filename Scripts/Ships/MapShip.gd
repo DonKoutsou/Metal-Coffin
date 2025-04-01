@@ -256,7 +256,7 @@ func AccelerationChanged(value: float) -> void:
 		TakingOff = true
 	
 	if (value > 0):
-		if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) <= 0):
+		if (GetFuelRange() <= 0):
 			HaltShip()
 			PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
 			return

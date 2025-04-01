@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=45 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="33_ng3jm"]
 [ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="33_wetmy"]
+[ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="36_ai3xr"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
@@ -351,9 +352,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -231.0
+offset_left = -230.5
 offset_top = -266.0
-offset_right = -210.0
+offset_right = -209.5
 offset_bottom = -222.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -370,9 +371,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -231.0
+offset_left = -230.5
 offset_top = -201.0
-offset_right = -210.0
+offset_right = -209.5
 offset_bottom = -157.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -390,9 +391,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -231.0
+offset_left = -230.5
 offset_top = -136.0
-offset_right = -210.0
+offset_right = -209.5
 offset_bottom = -92.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -445,10 +446,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -153.0
-offset_top = -46.0
-offset_right = -109.0
-offset_bottom = -26.0
+offset_left = -152.5
+offset_top = -45.5
+offset_right = -108.5
+offset_bottom = -25.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -469,9 +470,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -231.0
+offset_left = -230.5
 offset_top = -8.0
-offset_right = -210.0
+offset_right = -209.5
 offset_bottom = 37.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -488,10 +489,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -231.0
-offset_top = -46.0
-offset_right = -187.0
-offset_bottom = -26.0
+offset_left = -230.5
+offset_top = -45.5
+offset_right = -186.5
+offset_bottom = -25.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -512,9 +513,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -231.0
+offset_left = -230.5
 offset_top = -71.0
-offset_right = -210.0
+offset_right = -209.5
 offset_bottom = -27.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -604,10 +605,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -84.0
-offset_top = 34.0
-offset_right = -27.0
-offset_bottom = 76.0
+offset_left = -83.0
+offset_top = 35.0
+offset_right = -26.0
+offset_bottom = 77.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -668,13 +669,18 @@ grow_horizontal = 0
 grow_vertical = 1
 
 [node name="Speaker" parent="NormalScreen" instance=ExtResource("33_wetmy")]
-offset_left = 2.0
-offset_top = 94.0
-offset_right = 42.0
-offset_bottom = 134.0
-rotation = -0.0490991
-frequency = 10.0
-phase_offset = 1.265
+offset_left = 19.0
+offset_top = 97.0
+offset_right = 59.0
+offset_bottom = 137.0
+frequency = 15.0
+max_rotation = 0.02
+
+[node name="AnimatedSprite2D" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
+position = Vector2(936, -22)
+scale = Vector2(0.898438, 0.898438)
+frame_progress = 0.96041
+frequency = 40.0
 
 [node name="ScreenFrameLong" type="TextureRect" parent="."]
 visible = false
@@ -707,10 +713,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 648.0
-offset_top = -180.0
-offset_right = -158.0
-offset_bottom = -406.0
+offset_left = 560.0
+offset_top = -174.0
+offset_right = -246.0
+offset_bottom = -400.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
@@ -731,9 +737,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -25.0
-offset_top = 6.0
+offset_top = 12.0
 offset_right = -25.0
-offset_bottom = 6.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -745,10 +751,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -167.0
-offset_top = -176.0
-offset_right = -1011.0
-offset_bottom = -442.0
+offset_left = -94.0
+offset_top = -191.0
+offset_right = -938.0
+offset_bottom = -457.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(178, 0)
@@ -769,9 +775,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = 8.0
+offset_top = 19.0
 offset_right = 12.0
-offset_bottom = 8.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -783,9 +789,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 141.0
+offset_left = 238.0
 offset_top = -153.0
-offset_right = -754.0
+offset_right = -657.0
 offset_bottom = -474.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -825,12 +831,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 781.0
-offset_top = -139.0
-offset_right = -176.0
-offset_bottom = -526.0
+offset_left = 926.14
+offset_top = -218.865
+offset_right = 44.225
+offset_bottom = -517.865
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.298187
 pivot_offset = Vector2(178, 0)
 mouse_filter = 2
 texture = ExtResource("31_g4rws")
@@ -850,9 +857,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = 8.0
+offset_top = 12.0
 offset_right = 12.0
-offset_bottom = 8.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -867,8 +874,24 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -648.0
-offset_bottom = -648.0
+offset_top = -678.0
+offset_bottom = -678.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("33_vyv2f")
+expand_mode = 1
+
+[node name="ScreenFrameLong3" type="TextureRect" parent="ScreenFrameLong2"]
+modulate = Color(0, 0, 0, 0.8)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
@@ -879,7 +902,7 @@ expand_mode = 1
 position = Vector2(600, 324)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3"), NodePath("../Cables/ScreenFrame5"), NodePath("../Cables/ScreenFrame6"), NodePath("../NormalScreen/Speaker")]
+Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3"), NodePath("../Cables/ScreenFrame5"), NodePath("../Cables/ScreenFrame6")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
 position = Vector2(-600, -324)
@@ -893,7 +916,7 @@ color = Color(0.21411, 0.398386, 0.176593, 1)
 energy = 2.71
 blend_mode = 2
 texture = ExtResource("36_ai3xr")
-texture_scale = 20.2
+texture_scale = 11.48
 
 [node name="AlarmLight" type="PointLight2D" parent="ScreenCam"]
 visible = false
@@ -902,15 +925,15 @@ color = Color(0.851914, 0.187693, 0, 1)
 energy = 1.69
 blend_mode = 2
 texture = ExtResource("36_ai3xr")
-texture_scale = 23.39
+texture_scale = 6.4
 
 [node name="AlarmLight2" type="PointLight2D" parent="ScreenCam"]
-position = Vector2(7, -671)
+position = Vector2(13, -645)
 energy = 2.0
 blend_mode = 2
 range_z_min = 0
 texture = ExtResource("36_ai3xr")
-texture_scale = 50.0
+texture_scale = 13.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")

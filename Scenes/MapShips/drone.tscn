@@ -141,7 +141,6 @@ energy = 0.25
 blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
-texture_scale = 4.8
 height = 40.0
 
 [connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]

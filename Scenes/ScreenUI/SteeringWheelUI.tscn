@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://hiw68h8srifm"]
 
 [ext_resource type="Script" uid="uid://buq0xxelj3jfe" path="res://Scripts/UI/steering_wheelUI.gd" id="1_akv35"]
-[ext_resource type="Texture2D" uid="uid://dbio6r8fksygw" path="res://Assets/UIPiecies/Screen/Steer.png" id="3_3l22y"]
+[ext_resource type="Texture2D" uid="uid://dekdqwypsxis1" path="res://Assets/UIPiecies/Screen/Steer_FullQuality.png" id="3_dkc7s"]
 [ext_resource type="AudioStream" uid="uid://csg6r42tebwqi" path="res://Assets/Sounds/Steer-003.wav" id="4_w1h5k"]
 [ext_resource type="BitMap" uid="uid://dtbujuyxlrxmx" path="res://Assets/plane_Wheel_BaseColorMask.png" id="5_30b70"]
 
@@ -24,10 +24,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.0
-offset_top = -184.0
-offset_right = 184.0
-offset_bottom = 184.0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
@@ -42,15 +42,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -190.0
-offset_top = -190.0
-offset_right = 190.0
-offset_bottom = 190.0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(190, 190)
+pivot_offset = Vector2(256, 256)
 mouse_filter = 2
-texture = ExtResource("3_3l22y")
+texture = ExtResource("3_dkc7s")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="TextureRect"]
@@ -71,7 +71,7 @@ grow_vertical = 2
 rotation = -0.0698132
 pivot_offset = Vector2(240, 240)
 mouse_filter = 2
-texture = ExtResource("3_3l22y")
+texture = ExtResource("3_dkc7s")
 expand_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

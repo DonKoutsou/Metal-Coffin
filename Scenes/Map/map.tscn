@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="Texture2D" uid="uid://borwlcefmcmlo" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="16_x3wib"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
-[ext_resource type="Texture2D" uid="uid://bytl8pn1yhfaa" path="res://Assets/Sand/Ground055S_1K-PNG_Color.png" id="17_28wu2"]
+[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="17_x3wib"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
@@ -36,7 +36,7 @@ point_count = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28wu2"]
 shader = ExtResource("18_x3wib")
-shader_parameter/GroundTexture = ExtResource("17_28wu2")
+shader_parameter/GroundTexture = ExtResource("17_x3wib")
 shader_parameter/GroundNormalTexture = ExtResource("16_x3wib")
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale = Vector2(2, 2)
@@ -99,6 +99,7 @@ compositor_effects = Array[CompositorEffect]([null])
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
 layer = 0
+follow_viewport_enabled = true
 script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
 _ScreenUI = NodePath("ScreenUI")

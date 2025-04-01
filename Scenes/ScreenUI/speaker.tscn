@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7cgarcbvixw6"]
+[gd_scene load_steps=15 format=3 uid="uid://b7cgarcbvixw6"]
 
 [ext_resource type="Script" uid="uid://jj8scn4ef501" path="res://Scripts/speaker.gd" id="1_mivq8"]
 [ext_resource type="AudioStream" uid="uid://bymb44f8ge1q3" path="res://Assets/VoiceLines/LandingStart.mp3" id="2_kxl5j"]
@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://ceoxpuch57wsg" path="res://Assets/VoiceLines/TargetDestr.mp3" id="11_cotvj"]
 [ext_resource type="AudioStream" uid="uid://bgg5wwdq877gi" path="res://Assets/VoiceLines/Aproaching.mp3" id="12_4ylf7"]
 [ext_resource type="Texture2D" uid="uid://cbg33obslhrhy" path="res://Assets/UIPiecies/Screen/Speaker_FullQuality.png" id="13_xhvq3"]
-[ext_resource type="Texture2D" uid="uid://exd6idgv5fpm" path="res://Assets/UIPiecies/Screen/Speaker_Metal_FullQuality.png" id="14_1tj2n"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_3b7e2"]
 
 [node name="Speaker" type="Control"]
@@ -39,11 +38,12 @@ SoundList = Dictionary[int, Array]({
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -35.0
-offset_top = -3.0
+offset_top = -94.0
 offset_right = 114.0
-offset_bottom = 295.0
+offset_bottom = 204.0
 texture = ExtResource("13_xhvq3")
 expand_mode = 1
+flip_h = true
 
 [node name="TextureRect2" type="TextureRect" parent="TextureRect"]
 modulate = Color(0, 0, 0, 0.5)
@@ -54,17 +54,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -76.5
-offset_top = -145.0
-offset_right = 72.5
-offset_bottom = 153.0
+offset_left = -68.5
+offset_top = -130.0
+offset_right = 80.5
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("14_1tj2n")
+texture = ExtResource("13_xhvq3")
 expand_mode = 1
+flip_h = true
 
 [node name="Light" parent="." instance=ExtResource("15_3b7e2")]
 layout_mode = 0
-offset_left = 18.5
-offset_right = 58.5
+offset_left = 45.0
+offset_top = 59.0
+offset_right = 85.0
+offset_bottom = 99.0
 scale = Vector2(0.65693, 0.65693)

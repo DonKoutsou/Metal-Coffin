@@ -239,6 +239,16 @@ theme_override_font_sizes/font_size = 16
 toggle_mode = true
 text = "AMUNITION"
 
+[node name="Button5" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+toggle_mode = true
+text = "REFUEL"
+
 [node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -247,7 +257,7 @@ theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 toggle_mode = true
 button_pressed = true
-text = "REFUEL / REPAIR"
+text = "REPAIR"
 
 [node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 visible = false

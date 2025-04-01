@@ -60,7 +60,7 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 			var NewCommander = NewFleet[0]
 			var NewDock = NewCommander.GetDroneDock()
 			NewDock.DockDrone(Ship)
-			Ship.DissableDrone()
+			#Ship.DissableDrone()
 		#Add ship to new fleet array
 		NewFleet.append(Ship)
 		#Update stats
@@ -86,7 +86,7 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 		var NewCommander = CurrentFleet[0]
 		var NewDock = NewCommander.GetDroneDock()
 		NewDock.DockDrone(Ship)
-		Ship.DissableDrone()
+		#Ship.DissableDrone()
 		
 		CurrentFleetShipPlecement.add_child(Cont)
 		NewFleet.erase(Ship)

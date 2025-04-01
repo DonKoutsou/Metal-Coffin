@@ -86,7 +86,7 @@
 [ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="83_dxcl8"]
 [ext_resource type="Resource" uid="uid://c3kr3kcdnvesc" path="res://Resources/Happenings/CrewRecruitHappeningGilian.tres" id="84_cajs7"]
 [ext_resource type="Resource" uid="uid://cjywrm3yoyv76" path="res://Resources/Happenings/CrewRecruitHappeningJor.tres" id="85_mvaqs"]
-[ext_resource type="Resource" uid="uid://gvu43lp4i4y6" path="res://Resources/Happenings/CrewRecruitHappeningKarkan.tres" id="86_q1cnf"]
+[ext_resource type="Resource" uid="uid://gvu43lp4i4y6" path="res://Resources/Happenings/CrewRecruitHappeningBaron.tres" id="86_q1cnf"]
 [ext_resource type="Resource" uid="uid://byx81bxds55dv" path="res://Resources/Happenings/CrewRecruitHappeningSamir.tres" id="87_pwuis"]
 [ext_resource type="Resource" uid="uid://mhuc4oqjjoph" path="res://Resources/Happenings/CrewRecruitHappeningSirius.tres" id="88_b3ntq"]
 [ext_resource type="Resource" uid="uid://bi5laknt8ktr6" path="res://Resources/Happenings/Robbery.tres" id="89_rurmo"]

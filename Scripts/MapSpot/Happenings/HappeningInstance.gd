@@ -30,7 +30,7 @@ func _ready() -> void:
 	set_physics_process(false)
 	NextDiagButton.visible = false
 	ProgBar.visible = false
-	
+	#PresentHappening(load("res://Resources/Happenings/CrewRecruitHappeningBaron.tres"))
 
 func PresentHappening(Hap : Happening):
 	SimulationManager.GetInstance().TogglePause(true)
@@ -111,16 +111,24 @@ func NextStage() -> void:
 			add_child(CheckResault)
 		
 		Option.OptionOutCome(HappeningInstigator)
+		#
+		#$Timer.start()
+		#set_physics_process(true)
+		#ProgBar.visible = true
+		#OptionParent.visible = false
+		#
+		#await $Timer.timeout
 		
-		$Timer.start()
-		set_physics_process(true)
-		ProgBar.visible = true
+		NextDiagButton.visible = true
 		OptionParent.visible = false
 		
-		await $Timer.timeout
+		await NextDiag
 		
-		ProgBar.visible = false
+		NextDiagButton.visible = false
 		OptionParent.visible = true
+		
+		#ProgBar.visible = false
+		#OptionParent.visible = true
 		
 		
 		
@@ -129,16 +137,17 @@ func NextStage() -> void:
 			$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 		
 		else:
-			var Possiblebranch
+			var Possiblebranch : Array[HappeningStage] = []
 			if (!Check):
-				Possiblebranch = Option.WorldViewCheckFailBranch
+				Possiblebranch.append_array(Option.WorldViewCheckFailBranch) 
 			else:
-				Possiblebranch = Option.BranchContinuation
+				Possiblebranch.append_array(Option.BranchContinuation)
 			
-			if (Possiblebranch != null):
+			if (Possiblebranch.size() > 0):
 				CurrentBranch = Possiblebranch
 				CurrentStage = 0
-	
+			
+			
 	if (CurrentBranch.size() == CurrentStage):
 		HappeningFinished.emit()
 		$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false

@@ -1,6 +1,6 @@
-extends TextureRect
+extends AnimatedSprite2D
 
-class_name Cable
+class_name Fan
 
 var StartingPos : Vector2
 var StartingScale :Vector2
@@ -18,13 +18,15 @@ var StartingScale :Vector2
 #@export var skew_factor: float = 0.1  # Maximum skew factor, adjust as needed
 
 func _ready() -> void:
-	#StartingPos = position
+	play()
+	get_child(0).play()
+	StartingPos = position
 	StartingScale = scale
 	phase_offset = randf_range(0.0, TAU)
 	#PosToGo = position
 
 func ApplyShake(amm : float = 1) -> void:
-	max_rotation = max(max_rotation, 0.04 * amm)
+	max_rotation = max(max_rotation, 0.03 * amm)
 	max_scale_x = max(max_scale_x, 0.01 * amm)
 
 func _physics_process(delta: float) -> void:
@@ -45,6 +47,6 @@ func _physics_process(delta: float) -> void:
 	max_scale_x = max(max_scale_x - delta / 60, 0.001)
 	#print("frequency :" + var_to_str(frequency))
 	# Update transformations
-	#position = StartingPos
+	position = StartingPos
 	rotation = rotation_angle
 	scale.x = StartingScale.x * scale_x

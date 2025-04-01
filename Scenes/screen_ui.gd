@@ -20,6 +20,7 @@ signal FullScreenToggleFinished()
 #signal FleetSeparationInitiated
 
 func DoIntroFullScreen(toggle : bool) -> void:
+	$ScreenFrameLong2.visible = true
 	$Cables.visible = false
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
@@ -42,14 +43,15 @@ func DoIntroFullScreen(toggle : bool) -> void:
 	var tw2 = create_tween()
 	tw2.set_ease(Tween.EASE_IN)
 	tw2.set_trans(Tween.TRANS_QUART)
-	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y), 1.6)
+	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
 	await tw2.finished
+	$ScreenFrameLong2.visible = false
 	FullScreenToggleFinished.emit(toggle)
 	Cam.EnableFullScreenShake()
 
 func ToggleFullScreen(toggle : bool) -> void:
 	#FullScreenToggleStarted.emit()
-	
+	$ScreenFrameLong2.visible = true
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
@@ -71,8 +73,9 @@ func ToggleFullScreen(toggle : bool) -> void:
 	var tw2 = create_tween()
 	tw2.set_ease(Tween.EASE_IN)
 	tw2.set_trans(Tween.TRANS_QUART)
-	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y), 1.6)
+	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
 	await tw2.finished
+	$ScreenFrameLong2.visible = false
 	FullScreenToggleFinished.emit(toggle)
 	Cam.EnableFullScreenShake()
 func wait(secs : float) -> Signal:
@@ -186,7 +189,7 @@ func Land_Pressed() -> void:
 func Sim_Pause_Pressed() -> void:
 	var simmulationPaused = !SimulationManager.GetInstance().Paused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
-	
+
 		
 func Simmulation_Step_Changed(NewStep: float) -> void:
 	#EventHandler.OnSimmulationStepChanged(NewStep)

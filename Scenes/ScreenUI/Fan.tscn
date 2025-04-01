@@ -1,0 +1,84 @@
+[gd_scene load_steps=17 format=3 uid="uid://dwhre3xvmvjwf"]
+
+[ext_resource type="Texture2D" uid="uid://bh6thi4rfkofn" path="res://Assets/FanFrames/Untitled_FullQuality_00000.png" id="1_5gwwt"]
+[ext_resource type="Texture2D" uid="uid://bjxyw6juxpub1" path="res://Assets/FanFrames/Untitled_FullQuality_00001.png" id="2_33lmu"]
+[ext_resource type="Texture2D" uid="uid://yq5tfnlcudof" path="res://Assets/FanFrames/Untitled_FullQuality_00002.png" id="3_o0r8h"]
+[ext_resource type="Texture2D" uid="uid://bmy8f6cn0bipy" path="res://Assets/FanFrames/Untitled_FullQuality_00003.png" id="4_t27gr"]
+[ext_resource type="Texture2D" uid="uid://by1ikfkpwsavr" path="res://Assets/FanFrames/Untitled_FullQuality_00004.png" id="5_dhdtk"]
+[ext_resource type="Texture2D" uid="uid://d3dt6mh6jq4s8" path="res://Assets/FanFrames/Untitled_FullQuality_00005.png" id="6_1h2ui"]
+[ext_resource type="Texture2D" uid="uid://koyxyaq3o7s4" path="res://Assets/FanFrames/Untitled_FullQuality_00006.png" id="7_ubkin"]
+[ext_resource type="Texture2D" uid="uid://b0k1isina30l4" path="res://Assets/FanFrames/Untitled_FullQuality_00007.png" id="8_yt8ca"]
+[ext_resource type="Texture2D" uid="uid://pwod10h8ow0l" path="res://Assets/FanFrames/Untitled_FullQuality_00008.png" id="9_fssmw"]
+[ext_resource type="Texture2D" uid="uid://dmq11s1ix424g" path="res://Assets/FanFrames/Untitled_FullQuality_00009.png" id="10_rkxns"]
+[ext_resource type="Texture2D" uid="uid://drecjndk0mqbg" path="res://Assets/FanFrames/Untitled_FullQuality_00010.png" id="11_hac8f"]
+[ext_resource type="Texture2D" uid="uid://bq6uga4vpyuds" path="res://Assets/FanFrames/Untitled_FullQuality_00011.png" id="12_e8wiv"]
+[ext_resource type="Texture2D" uid="uid://c0p7mh3af8pow" path="res://Assets/FanFrames/Untitled_FullQuality_00012.png" id="13_wew1k"]
+[ext_resource type="Texture2D" uid="uid://0y77tmnexp1n" path="res://Assets/FanFrames/Untitled_FullQuality_00013.png" id="14_gyl7m"]
+[ext_resource type="Script" uid="uid://djvoh3v6ya70x" path="res://Scripts/fan.gd" id="25_33lmu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jvc5q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5gwwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_33lmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o0r8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t27gr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_dhdtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1h2ui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ubkin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yt8ca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fssmw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_rkxns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hac8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e8wiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_wew1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_gyl7m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_jvc5q")
+frame_progress = 0.754348
+offset = Vector2(0, 128)
+script = ExtResource("25_33lmu")
+frequency = 20.0
+max_rotation = 0.02
+max_scale_x = 0.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.6)
+show_behind_parent = true
+position = Vector2(19, 10)
+sprite_frames = SubResource("SpriteFrames_jvc5q")
+frame_progress = 0.0988424
+offset = Vector2(0, 128)
