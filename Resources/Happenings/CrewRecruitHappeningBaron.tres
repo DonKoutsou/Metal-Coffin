@@ -175,3 +175,4 @@ HappeningBg = ExtResource("1_8l24b")
 Stages = Array[ExtResource("2_4o3s8")]([SubResource("Resource_5oj2u")])
 HappeningAppearance = 0
 Special = true
+CrewRecruit = true

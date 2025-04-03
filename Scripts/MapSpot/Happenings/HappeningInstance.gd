@@ -11,9 +11,9 @@ class_name HappeningInstance
 @export var NextDiagButton : Button
 @export var TextFloater : PackedScene
 
-
+var EventSpot : MapSpot
 var SelectedOption : int
-
+var Hapen : Happening
 var CurrentBranch : Array[HappeningStage]
 var CurrentStage : int = 0
 
@@ -39,7 +39,7 @@ func PresentHappening(Hap : Happening):
 	
 	HappeningTitle.text = Hap.HappeningName
 	HappeningBackgroundTexture.texture = Hap.HappeningBg
-	
+	Hapen = Hap
 	CurrentBranch = Hap.Stages
 	
 	call_deferred("NextStage")
@@ -98,7 +98,7 @@ func NextStage() -> void:
 		
 		var Check = Option.Check()
 
-		HappeningText.text = Option.OptionResault()
+		HappeningText.text = Option.OptionResault(EventSpot)
 		
 		if (Option.WorldviewCheck != WorldView.WorldViews.NONE):
 			var CheckResault = TextFloater.instantiate() as Floater

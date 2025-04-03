@@ -7,7 +7,7 @@ var DroneScene : String = "res://Scenes/drone.tscn"
 #func _init() -> void:
 	#Dron = DroneScene.instantiate()
 
-func OptionResault() -> String:
+func OptionResault(EventOrigin : MapSpot) -> String:
 	if (CheckResault):
 		return "A new ship has joined your fleet."
 	else:

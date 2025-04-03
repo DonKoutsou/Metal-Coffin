@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 static func GetInstance() -> Commander:
 	return Instance
 
-func RegisterSelf(Ship : HostileShip) -> void:
+func RegisterSelf(Ship : ) -> void:
 	Fleet.append(Ship)
 	Ship.connect("OnShipDestroyed", OnShipDestroyed)
 	Ship.connect("OnDestinationReached", OnDestinationReached)
@@ -244,7 +244,7 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 		KnownEnemies[Ship] = 1
 
 func OnEnemyVisualLost(Ship : MapShip) -> void:
-	if (KnownEnemies[Ship] > 1):
+	if (KnownEnemies.has(Ship) and KnownEnemies[Ship] > 1):
 		KnownEnemies[Ship] -= 1
 	else :
 		KnownEnemies.erase(Ship)

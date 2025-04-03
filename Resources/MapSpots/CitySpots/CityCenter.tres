@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=93 format=3 uid="uid://du24ilvkea51x"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=94 format=3 uid="uid://du24ilvkea51x"]
 
 [ext_resource type="Script" uid="uid://b1yjldcssni32" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="1_ig8qa"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_npnnf"]
@@ -91,6 +91,7 @@
 [ext_resource type="Resource" uid="uid://mhuc4oqjjoph" path="res://Resources/Happenings/CrewRecruitHappeningSirius.tres" id="88_b3ntq"]
 [ext_resource type="Resource" uid="uid://bi5laknt8ktr6" path="res://Resources/Happenings/Robbery.tres" id="89_rurmo"]
 [ext_resource type="Resource" uid="uid://cxkj2k4llta37" path="res://Resources/Happenings/YoungCrewDiscussion.tres" id="90_wqx1t"]
+[ext_resource type="Resource" uid="uid://b8kumsjf70n22" path="res://Resources/Happenings/Nomads.tres" id="91_7mclc"]
 
 [sub_resource type="Resource" id="Resource_m1q4d"]
 script = ExtResource("4_u8h8q")
@@ -104,4 +105,4 @@ Description = "blah blah"
 VisibleOnStart = true
 DropAmmount = 1
 CustomData = Array[ExtResource("1_ig8qa")]([SubResource("Resource_m1q4d")])
-PossibleHappenings = Array[ExtResource("78_j7oca")]([ExtResource("85_mvaqs"), ExtResource("79_5ly13"), ExtResource("80_ei2ph"), ExtResource("81_ak0ob"), ExtResource("82_t5jng"), ExtResource("83_dxcl8"), ExtResource("84_cajs7"), ExtResource("86_q1cnf"), ExtResource("87_pwuis"), ExtResource("88_b3ntq"), ExtResource("89_rurmo"), ExtResource("90_wqx1t")])
+PossibleHappenings = Array[ExtResource("78_j7oca")]([ExtResource("85_mvaqs"), ExtResource("79_5ly13"), ExtResource("80_ei2ph"), ExtResource("81_ak0ob"), ExtResource("82_t5jng"), ExtResource("83_dxcl8"), ExtResource("84_cajs7"), ExtResource("86_q1cnf"), ExtResource("87_pwuis"), ExtResource("88_b3ntq"), ExtResource("89_rurmo"), ExtResource("90_wqx1t"), ExtResource("91_7mclc")])

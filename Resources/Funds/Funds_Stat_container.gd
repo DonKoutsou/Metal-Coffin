@@ -19,4 +19,4 @@ func UpDateFunds(NewAmm : int) -> void:
 func UpdateLabel(Amm : int) -> void:
 	$Label.text = "{0} {1}".format([Amm, FundsThing])
 	CurrentAmm = Amm
-	$AudioStreamPlayer2D.play()
+	#$AudioStreamPlayer2D.play()

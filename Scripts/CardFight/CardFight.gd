@@ -404,6 +404,11 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				anim.queue_free()
 				viz.ToggleFire(false)
 				ActionsToBurn.append(ShipAction)
+				if (Action.Consume):
+					var ShipCards = Ship.Cards
+					ShipCards[Action] -= 1
+					if (ShipCards[Action] == 0):
+						ShipCards.erase(Action)
 
 			else: if Action.CardName == "Shield Overcharge":
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
@@ -415,15 +420,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				anim.queue_free()
 				ShieldShip(Ship, 15)
 				ActionsToBurn.append(ShipAction)
-				
-			if (Action.Consume):
-				var ShipCards = Ship.Cards
-				ShipCards[Action] -= 1
-				if (ShipCards[Action] == 0):
-					ShipCards.erase(Action)
-					
-			
-				
+
 	return ActionsToBurn
 
 func DoFireDamage() -> void:

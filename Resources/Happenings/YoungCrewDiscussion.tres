@@ -82,6 +82,8 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 [resource]
 script = ExtResource("4_ni7lq")
 HappeningName = "The young recruit"
-Stages = Array[ExtResource("1_qaalc")]([SubResource("Resource_okl8h"), null])
+Stages = Array[ExtResource("1_qaalc")]([SubResource("Resource_okl8h")])
 HappeningAppearance = 0
 Special = true
+CrewRecruit = false
+AllowedAppearances = 1

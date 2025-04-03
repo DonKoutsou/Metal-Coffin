@@ -172,8 +172,9 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 	
 	if (AproachedBy is HostileShip):
 		return
-		
-	SpotAproached.emit(self)
+	
+	if (AproachedBy.Command == null):
+		SpotAproached.emit(self)
 	
 	if (!Seen):
 		OnSpotSeen()

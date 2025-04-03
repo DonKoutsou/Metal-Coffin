@@ -598,5 +598,6 @@ func Kill() -> void:
 	
 func DestroyEnemyDebry() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
-	queue_free()
 	get_parent().remove_child(self)
+	queue_free()
+	

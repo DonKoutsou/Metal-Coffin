@@ -15,6 +15,18 @@ func AngleToDirection(angle: float) -> String:
 	var index = int(fmod((angle + PI/8 + TAU), TAU) / (PI / 4)) % 8
 	return directions[index]
 
+func DistanceToDistance(Dist: float) -> String:
+	if Dist > 8000:
+		return "very far"
+	elif Dist > 5000:
+		return "far"
+	elif Dist > 3000:
+		return "close"
+	elif Dist > 1000:
+		return "fairly close"
+	else:
+		return "very close"
+		
 func GetCityByName(CityName : String) -> MapSpot:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var CorrectCity : MapSpot

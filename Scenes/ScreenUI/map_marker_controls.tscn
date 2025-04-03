@@ -217,3 +217,4 @@ libraries = {
 [connection signal="pressed" from="Control/ClearLines" to="." method="_on_clear_lines_pressed"]
 [connection signal="pressed" from="Control/DrawLine" to="." method="_on_draw_line_pressed"]
 [connection signal="pressed" from="Control/DrawText" to="." method="_on_draw_text_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

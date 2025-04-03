@@ -9,3 +9,4 @@ HappeningName = "Crew Recruit"
 Stages = Array[ExtResource("5_7njed")]([])
 HappeningAppearance = 2
 Special = true
+CrewRecruit = true

@@ -133,7 +133,6 @@ texture = ExtResource("4_nth3v")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect"]
-visible = false
 modulate = Color(0, 0, 0, 0.518)
 show_behind_parent = true
 layout_mode = 0
@@ -311,6 +310,7 @@ offset_top = -121.0
 offset_right = 244.0
 offset_bottom = 51.0
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Control/Control/LaunchButton" to="." method="OnLaunchPressed"]
 [connection signal="pressed" from="Control/Control/DissarmButton" to="." method="OnDissarmPressed"]
 [connection signal="pressed" from="Control/Control/ArmButton" to="." method="OnArmPressed"]

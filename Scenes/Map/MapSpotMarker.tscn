@@ -322,12 +322,11 @@ offset_right = 43.0
 offset_bottom = -75.0
 grow_horizontal = 2
 mouse_filter = 2
-alignment = 1
 
 [node name="TextureRect2" type="Label" parent="HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.232962, 0.232962, 0.232962, 1)
 theme_override_fonts/font = ExtResource("4_ejl2a")

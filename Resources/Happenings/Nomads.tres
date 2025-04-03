@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=9 format=3 uid="uid://b8kumsjf70n22"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_myfjk"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_27cmu"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="3_57k1v"]
+[ext_resource type="Script" uid="uid://ccd5qmxeujy5i" path="res://Scripts/MapSpot/Happenings/RecruitLocatorHappeningOption.gd" id="3_ni65v"]
+[ext_resource type="Script" uid="uid://diwf2l5h75sxb" path="res://Scripts/MapSpot/Happenings/VillageLocatorHappeningOption.gd" id="4_31pqe"]
+
+[sub_resource type="Resource" id="Resource_c4s21"]
+script = ExtResource("3_ni65v")
+OptionName = "You ask them about possible recruits in nearby cities."
+FinishDiag = true
+BranchContinuation = Array[ExtResource("1_myfjk")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_myfjk")]([])
+metadata/_custom_type_script = "uid://ccd5qmxeujy5i"
+
+[sub_resource type="Resource" id="Resource_ukikf"]
+script = ExtResource("4_31pqe")
+OptionName = "You ask them of any nearby rebel villages."
+FinishDiag = true
+BranchContinuation = Array[ExtResource("1_myfjk")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_myfjk")]([])
+metadata/_custom_type_script = "uid://diwf2l5h75sxb"
+
+[sub_resource type="Resource" id="Resource_tahtp"]
+script = ExtResource("1_myfjk")
+HappeningTexts = Array[String](["Reaching the city you are met with a verry busy port. Withing all the ruckous you catch a glimpse of a nomad group resting.", "You make your way to them hoping to get some information of any nearby happenings."])
+Options = Array[ExtResource("2_27cmu")]([SubResource("Resource_c4s21"), SubResource("Resource_ukikf")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[resource]
+script = ExtResource("3_57k1v")
+HappeningName = "The nomad group."
+Stages = Array[ExtResource("1_myfjk")]([SubResource("Resource_tahtp")])
+HappeningAppearance = 5
+Special = false
+CrewRecruit = false
+AllowedAppearances = 8

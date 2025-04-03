@@ -5,7 +5,7 @@ class_name Resource_Happening_Option
 @export var ResourceName : String = ""
 @export var RandomiseResourceAmm : bool = false
 
-func OptionResault() -> String:
+func OptionResault(EventOrigin : MapSpot) -> String:
 	var returnstring : String
 	if (RandomiseResourceAmm):
 		var amm = randi_range(1, ResourceAmm)

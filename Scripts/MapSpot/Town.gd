@@ -74,6 +74,8 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.AlarmProgress = spotdat.AlarmProgress
 		sc.Merch = spotdat.Merch
 		sc.Event = spotdat.Evnt
+		if (spotdat.Evnt.CrewRecruit):
+			sc.add_to_group("CrewRecruitTown")
 		CSpot.free()
 
 		if (spotdat.Seen):

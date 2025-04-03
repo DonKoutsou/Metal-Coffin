@@ -49,7 +49,7 @@ static func GetInstance() -> Map:
 func _ready() -> void:
 	set_physics_process(false)
 	$SubViewportContainer.visible = false
-	$ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
+	_ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
 	Instance = self
 
 func _exit_tree() -> void:
@@ -71,7 +71,7 @@ func _InitialPlayerPlacament():
 	PlShip.ShipLookAt(firstvilage.global_position)
 	
 	for g in PlShip.Cpt.ProvidingCaptains:
-		PlShip.GetDroneDock().AddRecruit(g)
+		PlShip.GetDroneDock().AddRecruit(g, false)
 
 
 
@@ -350,9 +350,11 @@ func GenerateEventsThreaded() -> void:
 				var E = FigureOutEvent(YPos, SpEvents)
 				if (E != null):
 					S.Event = E
-					E.PickedBy = S
+					E.PickedBy.append(S)
 					SpEvents.erase(E)
 					print("Picked happening {0} for {1}".format([E.HappeningName, S.GetSpotName()]))
+					if (E.CrewRecruit):
+						S.call_deferred("add_to_group", "CrewRecruitTown")
 		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
 		
 		for S in Spots:
@@ -362,8 +364,8 @@ func GenerateEventsThreaded() -> void:
 			var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Sp.SpotType.PossibleHappenings)
 			if (Hap != null):
 				print("Picked happening {0} for {1}".format([Hap.HappeningName, Sp.GetSpotName()]))
-				if (Hap.Special):
-					Hap.PickedBy = Sp
+
+				Hap.PickedBy.append(Sp)
 				Sp.Event = Hap
 	call_deferred("EventGenFinished")
 
@@ -377,7 +379,7 @@ func FigureOutEvent(YPos : float, Events : Array[Happening]) -> Happening:
 	
 	var PossibleHappenings : Array[Happening]
 	for g in Events:
-		if (g.PickedBy != null):
+		if (g.PickedBy.size() >= g.AllowedAppearances):
 			continue
 		if (g.HappeningAppearance == GameSt or g.HappeningAppearance == Happening.GameStage.ANY):
 			PossibleHappenings.append(g)

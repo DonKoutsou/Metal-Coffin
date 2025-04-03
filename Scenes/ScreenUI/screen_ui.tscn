@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=47 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -36,6 +36,8 @@
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="36_ai3xr"]
+[ext_resource type="Script" uid="uid://30ku4j8kcjjm" path="res://Scripts/UI/light_pivot_1.gd" id="36_wetmy"]
+[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/LightCone.png" id="36_xl4i0"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="38_e7ydv"]
 [ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="39_qac3v"]
@@ -51,7 +53,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AlarmLight:visible")
+tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +65,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AlarmLight:visible")
+tracks/1/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -99,7 +101,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ScreenLight:visible")
+tracks/4/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -111,7 +113,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = false
-tracks/5/path = NodePath("AlarmLight2:visible")
+tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -123,7 +125,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("AlarmLight2:energy")
+tracks/6/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -139,7 +141,7 @@ length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AlarmLight:visible")
+tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -175,7 +177,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ScreenLight:visible")
+tracks/3/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -187,7 +189,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = false
-tracks/4/path = NodePath("AlarmLight2:visible")
+tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -199,7 +201,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AlarmLight2:energy")
+tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -214,7 +216,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AlarmLight:visible")
+tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -250,7 +252,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ScreenLight:visible")
+tracks/3/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -262,7 +264,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AlarmLight2:visible")
+tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -274,7 +276,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AlarmLight2:energy")
+tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -670,9 +672,9 @@ grow_vertical = 1
 
 [node name="Speaker" parent="NormalScreen" instance=ExtResource("33_wetmy")]
 offset_left = 19.0
-offset_top = 97.0
+offset_top = 46.0
 offset_right = 59.0
-offset_bottom = 137.0
+offset_bottom = 86.0
 frequency = 15.0
 max_rotation = 0.02
 
@@ -713,10 +715,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 560.0
-offset_top = -174.0
-offset_right = -246.0
-offset_bottom = -400.0
+offset_left = 580.0
+offset_top = -178.0
+offset_right = -226.0
+offset_bottom = -404.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
@@ -751,10 +753,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -94.0
-offset_top = -191.0
-offset_right = -938.0
-offset_bottom = -457.0
+offset_left = 39.0
+offset_top = -218.0
+offset_right = -759.0
+offset_bottom = -435.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(178, 0)
@@ -783,89 +785,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
-
-[node name="ScreenFrame5" type="TextureRect" parent="Cables"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 238.0
-offset_top = -153.0
-offset_right = -657.0
-offset_bottom = -474.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.00504369
-pivot_offset = Vector2(115, 0)
-mouse_filter = 2
-texture = ExtResource("30_c0ifk")
-expand_mode = 1
-flip_h = true
-script = ExtResource("31_ua54b")
-frequency = 10.0
-phase_offset = 1.265
-max_rotation = 0.0
-max_scale_x = 0.0
-
-[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame5"]
-modulate = Color(0, 0, 0, 0.5)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -13.7533
-offset_top = 45.9875
-offset_right = -13.7533
-offset_bottom = 45.9875
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.290599
-mouse_filter = 2
-texture = ExtResource("30_c0ifk")
-expand_mode = 1
-flip_h = true
-
-[node name="ScreenFrame6" type="TextureRect" parent="Cables"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 926.14
-offset_top = -218.865
-offset_right = 44.225
-offset_bottom = -517.865
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.298187
-pivot_offset = Vector2(178, 0)
-mouse_filter = 2
-texture = ExtResource("31_g4rws")
-expand_mode = 1
-flip_h = true
-script = ExtResource("31_ua54b")
-frequency = 10.0
-phase_offset = 1.265
-max_rotation = 0.0
-max_scale_x = 0.0
-
-[node name="ς" type="TextureRect" parent="Cables/ScreenFrame6"]
-modulate = Color(0, 0, 0, 0.5)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 12.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("31_g4rws")
-expand_mode = 1
-flip_h = true
 
 [node name="ScreenFrameLong2" type="TextureRect" parent="."]
 z_index = 1
@@ -902,38 +821,48 @@ expand_mode = 1
 position = Vector2(600, 324)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3"), NodePath("../Cables/ScreenFrame5"), NodePath("../Cables/ScreenFrame6")]
+Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
-position = Vector2(-600, -324)
-color = Color(0, 0, 0, 1)
+[node name="LightPivot1" type="Node2D" parent="ScreenCam"]
+position = Vector2(0, -1450)
+script = ExtResource("36_wetmy")
+frequency = 6.0
+max_rotation = 0.2
 
-[node name="ScreenLight" type="PointLight2D" parent="ScreenCam"]
+[node name="LightPivot2" type="Node2D" parent="ScreenCam/LightPivot1"]
+position = Vector2(0, 514)
+
+[node name="ScreenLight" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
 visible = false
-position = Vector2(-104, 6)
-scale = Vector2(0.845, 0.675)
 color = Color(0.21411, 0.398386, 0.176593, 1)
 energy = 2.71
 blend_mode = 2
+range_layer_max = 1
 texture = ExtResource("36_ai3xr")
-texture_scale = 11.48
+texture_scale = 13.0
 
-[node name="AlarmLight" type="PointLight2D" parent="ScreenCam"]
+[node name="AlarmLight" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
 visible = false
-position = Vector2(5, -328)
 color = Color(0.851914, 0.187693, 0, 1)
 energy = 1.69
 blend_mode = 2
+range_layer_max = 1
 texture = ExtResource("36_ai3xr")
-texture_scale = 6.4
+texture_scale = 13.0
 
-[node name="AlarmLight2" type="PointLight2D" parent="ScreenCam"]
-position = Vector2(13, -645)
+[node name="AlarmLight2" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
+color = Color(1, 0.974189, 0.876833, 1)
 energy = 2.0
 blend_mode = 2
 range_z_min = 0
-texture = ExtResource("36_ai3xr")
-texture_scale = 13.0
+range_layer_max = 1
+texture = ExtResource("36_xl4i0")
+offset = Vector2(0, 800)
+texture_scale = 6.5
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
+position = Vector2(-600, -324)
+color = Color(0.137067, 0.137067, 0.137067, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")

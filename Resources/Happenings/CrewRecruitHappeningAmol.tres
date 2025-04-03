@@ -18,5 +18,6 @@ Options = Array[ExtResource("1_084du")]([])
 script = ExtResource("5_vub4e")
 HappeningName = "The sand hill"
 Stages = Array[ExtResource("5_oufnu")]([SubResource("Resource_3oa6o"), SubResource("Resource_22y04")])
-HappeningAppearance = null
+HappeningAppearance = 0
 Special = true
+CrewRecruit = true

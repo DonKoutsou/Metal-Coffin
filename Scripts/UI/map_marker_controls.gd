@@ -13,6 +13,9 @@ signal ClearPressed
 signal DrawLine
 signal DrawText
 
+func _ready() -> void:
+	visible = false
+
 func _on_y_gas_range_changed(NewVal: float) -> void:
 	MarkerHorizontalMove.emit(NewVal)
 
@@ -40,6 +43,7 @@ func Toggle() -> void:
 	if ($AnimationPlayer.is_playing()):
 		await $AnimationPlayer.animation_finished
 	if (!Showing):
+		visible = true
 		TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 		$AnimationPlayer.play("Show")
 		Showing = true
@@ -51,7 +55,14 @@ func TurnOffPressed() -> void:
 	$AnimationPlayer.play("Hide")
 	Showing = false
 
+
+
 func TurnOff() -> void:
 	if (!Showing):
 		return
 	TurnOffPressed()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if (anim_name == "Hide"):
+		visible = false

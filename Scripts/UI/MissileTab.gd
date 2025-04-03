@@ -47,7 +47,7 @@ func _ready() -> void:
 	#$Control/Control/Dissarm.ToggleDissable(true)
 	#$Control/Control/Launch.ToggleDissable(true)
 	Initialise()
-	#visible = false
+	visible = false
 
 func FindOwner(Mis : MissileItem) -> Captain:
 	for g in Missiles.keys():
@@ -153,6 +153,7 @@ func Toggle() -> void:
 	if ($AnimationPlayer.is_playing()):
 		await $AnimationPlayer.animation_finished
 	if (!Showing):
+		visible = true
 		TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 		$AnimationPlayer.play("Show")
 		UpdateMissileSelect()
@@ -211,3 +212,9 @@ func TurnOff() -> void:
 	if (!Showing):
 		return
 	TurnOffPressed()
+
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if (anim_name == "Hide"):
+		visible = false

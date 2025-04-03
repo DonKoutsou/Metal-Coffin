@@ -85,3 +85,4 @@ HappeningName = "The Khamir squad"
 Stages = Array[ExtResource("5_loek2")]([SubResource("Resource_3ealn"), SubResource("Resource_1esk3"), SubResource("Resource_n5aj4"), SubResource("Resource_c1wc8")])
 HappeningAppearance = 0
 Special = true
+CrewRecruit = true

@@ -85,3 +85,4 @@ HappeningBg = ExtResource("1_3tnlt")
 Stages = Array[ExtResource("5_3u5ui")]([SubResource("Resource_kk05a"), SubResource("Resource_cmfn1"), SubResource("Resource_57mxl"), SubResource("Resource_ipjf8"), SubResource("Resource_qi88o"), SubResource("Resource_q82st")])
 HappeningAppearance = 0
 Special = true
+CrewRecruit = true

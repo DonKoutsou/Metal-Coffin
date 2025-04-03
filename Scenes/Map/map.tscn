@@ -102,7 +102,7 @@ layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
-_ScreenUI = NodePath("ScreenUI")
+_ScreenUI = NodePath("CanvasLayer/ScreenUI")
 _Camera = NodePath("SubViewportContainer/ViewPort/ShipCamera")
 Villages = Array[PackedScene]([ExtResource("2_mkjud"), ExtResource("3_syapm"), ExtResource("4_jrhc7"), ExtResource("5_csr2j"), ExtResource("6_57tvq")])
 Cities = Array[PackedScene]([ExtResource("7_0ker0"), ExtResource("8_ijcj1")])
@@ -134,7 +134,6 @@ disable_3d = true
 own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
-canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(792, 507)
@@ -226,12 +225,15 @@ ShipControllerEvent = ExtResource("22_n73so")
 Col = Color(100, 0.395, 0.144, 1)
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" instance=ExtResource("23_53oad")]
+layer = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort"]
 environment = SubResource("Environment_h7q0i")
 compositor = SubResource("Compositor_h7q0i")
 
-[node name="ScreenUI" parent="." instance=ExtResource("24_e5um8")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScreenUI" parent="CanvasLayer" instance=ExtResource("24_e5um8")]
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_h7q0i")

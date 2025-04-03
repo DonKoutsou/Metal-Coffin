@@ -26,6 +26,7 @@ func _ready() -> void:
 func EnableShake(amm : float):
 	for g in Cabled:
 		g.ApplyShake(amm)
+	$LightPivot1.ApplyShake(amm)
 	Shake = true
 	GoingDown= false
 	PauseShake(false)
@@ -44,6 +45,7 @@ func EnableShake(amm : float):
 func EnableMissileShake() -> void:
 	for g in Cabled:
 		g.ApplyShake(2)
+	$LightPivot1.ApplyShake(1)
 	Shake = true
 	if (!$AnimationPlayer.is_playing()):
 		$AnimationPlayer.stop()
@@ -67,6 +69,7 @@ func EnableMissileShake() -> void:
 func EnableDamageShake(amm : float) -> void:
 	for g in Cabled:
 		g.ApplyShake(amm)
+	$LightPivot1.ApplyShake(amm)
 	Shake = true
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")
@@ -99,6 +102,7 @@ var stattween : Tween
 func EnableFullScreenShake() -> void:
 	for g in Cabled:
 		g.ApplyShake(2)
+	$LightPivot1.ApplyShake(1)
 	Shake = true
 	PauseShake(false)
 	shakestr = max(1.5, shakestr)

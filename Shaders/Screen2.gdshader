@@ -1,5 +1,5 @@
 shader_type canvas_item;
-
+render_mode unshaded;
 uniform vec2 res = vec2(864, 486);
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform int mask_type : hint_range(0, 2) = 0;
@@ -140,4 +140,5 @@ void fragment(){
 
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
+	
 }

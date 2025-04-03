@@ -7,16 +7,20 @@ class_name Happening
 
 @export var HappeningAppearance : GameStage
 @export var Special : bool = false
-var PickedBy : MapSpot
+@export var CrewRecruit : bool = false
+var PickedBy : Array
 
-static var Specials : Array[Happening]
+@export var AllowedAppearances : int = 1
 
-func _init() -> void:
-	call_deferred("CheckIfSpecial")
-	
-func CheckIfSpecial() -> void:
-	if (Special):
-		Specials.append(self)
+#
+#static var Specials : Array[Happening]
+#
+#func _init() -> void:
+	#call_deferred("CheckIfSpecial")
+	#
+#func CheckIfSpecial() -> void:
+	#if (Special):
+		#Specials.append(self)
 
 static func GetStageForYPos(YPos : float) -> Happening.GameStage:
 	var GameSt : Happening.GameStage

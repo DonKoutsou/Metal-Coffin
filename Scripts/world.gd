@@ -342,6 +342,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	var PlayedEvent = false
 	if (Spot.Event != null and !Spot.Visited):
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
+		happeningui.EventSpot = Spot
 		happeningui.HappeningInstigator = Instigator
 		GetMap().GetScreenUi().ToggleFullScreen(true)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
