@@ -10,3 +10,4 @@ Stages = Array[ExtResource("5_7njed")]([])
 HappeningAppearance = 2
 Special = true
 CrewRecruit = true
+AllowedAppearances = 1

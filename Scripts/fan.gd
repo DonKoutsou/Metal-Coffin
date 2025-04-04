@@ -92,4 +92,6 @@ func SetFps(FPS: int) -> void:
 
 
 func _on_visibility_changed() -> void:
+	if (!$AudioStreamPlayer2D.is_inside_tree()):
+		return
 	$AudioStreamPlayer2D.playing = is_visible_in_tree()

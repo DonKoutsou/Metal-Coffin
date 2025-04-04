@@ -82,7 +82,7 @@ var CardSelectSize : float
 func _ready() -> void:
 	#for g in 1:
 		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
+
 	#for g in 1:
 		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 

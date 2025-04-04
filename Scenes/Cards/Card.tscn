@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=4 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntgjb"]
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 2
+border_width_top = 8
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_detail = 1
+shadow_size = 8
+anti_aliasing_size = 2.0
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost")]
 custom_minimum_size = Vector2(200, 170)
@@ -14,7 +28,7 @@ size_flags_vertical = 6
 mouse_filter = 2
 script = ExtResource("1_vr3r8")
 CardName = NodePath("VBoxContainer/Label")
-CardDesc = NodePath("VBoxContainer/CardDesc")
+CardDesc = NodePath("VBoxContainer/PanelContainer/CardDesc")
 CardCost = NodePath("CardCost")
 
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
@@ -39,14 +53,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 2.0
-offset_right = -8.0
-offset_bottom = -2.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -56,13 +69,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ntgjb")
+
+[node name="CardDesc" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
-text = "[center]  test test \\n test [/center]"
 fit_content = true
 autowrap_mode = 2
 vertical_alignment = 1
@@ -82,7 +101,7 @@ grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "1"
 vertical_alignment = 1
 autowrap_mode = 2

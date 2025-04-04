@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=49 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
@@ -39,7 +39,9 @@
 [ext_resource type="Script" uid="uid://30ku4j8kcjjm" path="res://Scripts/UI/light_pivot_1.gd" id="36_wetmy"]
 [ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/LightCone.png" id="36_xl4i0"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
+[ext_resource type="AudioStream" uid="uid://bir6mqhkctabs" path="res://Assets/Sounds/Sqeak2.mp3" id="38_ao4ul"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="38_e7ydv"]
+[ext_resource type="AudioStream" uid="uid://ciq487snqicgb" path="res://Assets/Sounds/Sqeak1.mp3" id="39_ng3jm"]
 [ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="39_qac3v"]
 
 [sub_resource type="Curve" id="Curve_8gyii"]
@@ -823,9 +825,12 @@ script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
 Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 
-[node name="LightPivot1" type="Node2D" parent="ScreenCam"]
+[node name="LightPivot1" type="Node2D" parent="ScreenCam" node_paths=PackedStringArray("SoundPlayer")]
 position = Vector2(0, -1450)
 script = ExtResource("36_wetmy")
+LeftSound = ExtResource("39_ng3jm")
+RightSound = ExtResource("38_ao4ul")
+SoundPlayer = NodePath("LightPivot2/AudioStreamPlayer2D")
 frequency = 6.0
 max_rotation = 0.2
 
@@ -859,6 +864,10 @@ range_layer_max = 1
 texture = ExtResource("36_xl4i0")
 offset = Vector2(0, 800)
 texture_scale = 6.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ScreenCam/LightPivot1/LightPivot2"]
+stream = ExtResource("38_ao4ul")
+volume_db = -20.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
 position = Vector2(-600, -324)

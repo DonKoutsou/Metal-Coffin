@@ -21,3 +21,4 @@ Stages = Array[ExtResource("5_oufnu")]([SubResource("Resource_3oa6o"), SubResour
 HappeningAppearance = 0
 Special = true
 CrewRecruit = true
+AllowedAppearances = 1

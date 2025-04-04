@@ -50,7 +50,8 @@ func GetDroneFuel() -> float:
 	return fuel
 
 func ClearAllDrones() -> void:
-	for g in DockedDrones:
+	var Drones = DockedDrones.duplicate()
+	for g in Drones:
 		DroneDisharged(g)
 		g.Kill()
 	#for g in FlyingDrones:

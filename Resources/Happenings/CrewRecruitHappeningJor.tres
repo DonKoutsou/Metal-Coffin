@@ -86,3 +86,4 @@ Stages = Array[ExtResource("5_loek2")]([SubResource("Resource_3ealn"), SubResour
 HappeningAppearance = 0
 Special = true
 CrewRecruit = true
+AllowedAppearances = 1

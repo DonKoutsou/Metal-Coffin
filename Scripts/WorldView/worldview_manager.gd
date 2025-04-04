@@ -17,6 +17,10 @@ static var Instance : WorldView
 func _ready() -> void:
 	Instance = self
 
+func _exit_tree() -> void:
+	for g in WorldviewStats:
+		WorldviewStats[g] = 0
+
 static func GetInstance() -> WorldView:
 	return Instance
 

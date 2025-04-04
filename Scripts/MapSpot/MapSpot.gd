@@ -35,6 +35,9 @@ func _ready() -> void:
 	if (Pos != Vector2.ZERO):
 		position = Pos
 
+func _exit_tree() -> void:
+	if (Event != null):
+		Event.PickedBy.erase(self)
 #func SimulationSpeedChanged(i : float) -> void:
 	#SimSpeed = i
 	
