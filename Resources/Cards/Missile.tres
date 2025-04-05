@@ -15,7 +15,7 @@ CounteredBy = ExtResource("1_6i3qa")
 Damage = 10.0
 Accuracy = 0.0
 Icon = ExtResource("2_2t01k")
-CardName = "Missile"
+CardName = "Heat Seeking Missile"
 CardDescription = "Throws a missile to enemy. [color=#c19200]DMG = 10 * Firepower"
 Energy = 3
 Options = Array[ExtResource("3_ffuhs")]([])

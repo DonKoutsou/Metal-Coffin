@@ -73,6 +73,7 @@ alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
@@ -81,6 +82,7 @@ text = "Owned:"
 [node name="PlAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 26
 text = "1"
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
@@ -97,6 +99,7 @@ size_flags_horizontal = 3
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 2
+size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
@@ -105,6 +108,7 @@ text = "Shop Inventory:"
 [node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 26
 text = "1"
 
 [node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
@@ -122,6 +126,7 @@ alignment = 1
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
@@ -130,6 +135,7 @@ text = "Piece Price:"
 [node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 26
 text = "50"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]

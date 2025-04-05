@@ -301,8 +301,8 @@ func OnShipLanded(Ship : MapShip) -> void:
 	var sc = spot.FuelTradeScene as PackedScene
 	var fuel = sc.instantiate() as TownScene
 	#fuel.TownMerch = spot.SpotInfo.Merchendise
-	fuel.HasFuel = spot.HasFuel()
-	fuel.HasRepair = spot.HasRepair()
+	#fuel.HasFuel = spot.HasFuel()
+	#fuel.HasRepair = spot.HasRepair()
 	fuel.TownFuel = spot.CityFuelReserves
 	fuel.BoughtFuel = spot.PlayerFuelReserves
 	fuel.BoughtRepairs = spot.PlayerRepairReserves

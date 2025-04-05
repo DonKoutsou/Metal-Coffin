@@ -12,9 +12,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -64.0
-offset_top = -43.5
+offset_top = -43.0
 offset_right = 64.0
-offset_bottom = 43.5
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -25,15 +25,13 @@ PlayerWallet = ExtResource("2_lq3s3")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -65.5
-offset_right = 65.5
-offset_bottom = 49.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-text = "Funds
-1214124"
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "1214124 ₯"
 horizontal_alignment = 1
 vertical_alignment = 1
 

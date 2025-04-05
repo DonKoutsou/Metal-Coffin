@@ -1,0 +1,157 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvkf4xl23yb3n"]
+
+[ext_resource type="Script" uid="uid://c1ciyx5wjndht" path="res://Scenes/InScreenUI/CaptainRepairStation.gd" id="1_bt8au"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_l6oop"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_bt8au"]
+
+[node name="VBoxContainer3" type="VBoxContainer"]
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+script = ExtResource("1_bt8au")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_l6oop")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Fuel Reserves"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FuelAmm" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "4214"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "tons"
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(6.86, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_bt8au")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "Ton Price:"
+
+[node name="TonPrice" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "202139"
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 2
+value = 27.12
+show_percentage = false
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_l6oop")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Hull Condition"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HullAmm" type="Label" parent="PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "100"
+
+[node name="Label2" type="Label" parent="PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "Hull Integrity"
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="PanelContainer2/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(6.86, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_bt8au")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer2/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Label3" type="Label" parent="PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "Repair Price:"
+
+[node name="RepairPrice" type="Label" parent="PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "202"
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer2/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+value = 27.12
+show_percentage = false

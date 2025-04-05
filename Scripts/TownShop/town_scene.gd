@@ -5,6 +5,8 @@ class_name TownScene
 @export var Merch : Array[Merchandise]
 @export_group("Nodes")
 #@export var FundAmm : Label
+@export var PortName : Label
+@export var PortBuffText : RichTextLabel
 @export var FuelPrice : Label
 @export var CurrentFuel : Label
 @export var FuelBar : ProgressBar
@@ -19,7 +21,7 @@ class_name TownScene
 @export var PlayerWallet : Wallet
 @export_group("Scenes")
 @export var ItemScene : PackedScene
-
+@export var RestockStation : PackedScene
 #"[color=#c19200]
 
 var TownFuel : float = 0
@@ -27,8 +29,7 @@ var TownFuel : float = 0
 var PlFuel : float = 0
 var PlMaxFuel : float = 0
 var BoughtFuel : float = 0
-var HasFuel : bool = false
-var HasRepair : bool = false
+
 var TownSpot : MapSpot
 var PlHull : float = 0
 var PlMaxHull : float = 0
@@ -41,8 +42,10 @@ var LandedShip : MapShip
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	PortName.text = TownSpot.GetSpotName() + " City Port"
+	SetTownBuffs()
 	
-	if (!HasFuel):
+	if (!TownSpot.HasFuel()):
 		FuelPricePerTon = 200
 	else:
 		FuelPricePerTon = 100
@@ -52,7 +55,7 @@ func _ready() -> void:
 	FuelBar.max_value = PlMaxFuel
 	FuelBar.value = PlFuel + BoughtFuel
 	FuelPrice.text = var_to_str(FuelPricePerTon)
-	if (!HasRepair):
+	if (!TownSpot.HasRepair()):
 		RepairpricePerRepairValue = 200
 	else:
 		RepairpricePerRepairValue = 100
@@ -103,6 +106,16 @@ func SetHullData():
 	for g in dd.DockedDrones:
 		PlMaxHull += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 		PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
+
+func SetTownBuffs() -> void:
+	var Text : String
+	if (TownSpot.HasFuel()):
+		Text += "[p][img]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
+	if (TownSpot.HasRepair()):
+		Text += "[img]res://Assets/Items/cubeforce.png[/img] REPAIR TIME/COST -[p]"
+	if (TownSpot.HasUpgrade()):
+		Text += "[img]res://Assets/Items/materials-science.png[/img] UPGRADE TIME/COST -[p][p]"
+	PortBuffText.text = Text
 	
 func FuelBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):

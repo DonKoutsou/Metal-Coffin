@@ -1,35 +1,124 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=9 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
+[ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="3_58ae4"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntgjb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd7hj"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
-skew = Vector2(0.1, 0)
 border_width_left = 2
-border_width_top = 8
+border_width_top = 45
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 0.763983, 0.0812772, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_detail = 1
-shadow_size = 8
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 4
+shadow_size = 5
 anti_aliasing_size = 2.0
 
-[node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost")]
-custom_minimum_size = Vector2(200, 170)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mr5f"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 45
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.066982, 0.133257, 0.137998, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yyhe"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 4
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh81d"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+border_width_left = 2
+border_width_top = 45
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 4
+shadow_size = 5
+anti_aliasing_size = 2.0
+
+[node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
+custom_minimum_size = Vector2(200, 250)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 200.0
-offset_bottom = 170.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -85.0
+offset_right = 100.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_vr3r8")
-CardName = NodePath("VBoxContainer/Label")
-CardDesc = NodePath("VBoxContainer/PanelContainer/CardDesc")
-CardCost = NodePath("CardCost")
+CardName = NodePath("VBoxContainer/HBoxContainer/Label")
+CardDesc = NodePath("VBoxContainer/CardDesc")
+CardCost = NodePath("VBoxContainer/HBoxContainer/CardCost")
+CardTex = NodePath("VBoxContainer/CardText")
 
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
 show_behind_parent = true
@@ -41,8 +130,12 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
 mouse_filter = 1
-theme = ExtResource("2_n60qq")
 theme_override_font_sizes/font_size = 26
+theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rd7hj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7mr5f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3yyhe")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yh81d")
 autowrap_mode = 3
 icon_alignment = 1
 vertical_icon_alignment = 2
@@ -53,29 +146,49 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 3.0
-offset_right = -6.0
-offset_bottom = -3.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Card Name"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 41)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Evasive Manuvers
+fwaf"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="CardCost" type="Label" parent="VBoxContainer/HBoxContainer"]
+modulate = Color(1, 0.763983, 0.0812772, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="CardText" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ntgjb")
+texture = ExtResource("3_58ae4")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="CardDesc" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
+[node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -86,25 +199,6 @@ fit_content = true
 autowrap_mode = 2
 vertical_alignment = 1
 visible_characters_behavior = 1
-
-[node name="CardCost" type="Label" parent="."]
-modulate = Color(1, 0.763983, 0.0812772, 1)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -10.0
-offset_top = 4.0
-offset_right = -9.0
-offset_bottom = 21.0
-grow_horizontal = 0
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
-text = "1"
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 visible = false

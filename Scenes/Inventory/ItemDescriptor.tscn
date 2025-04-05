@@ -182,7 +182,7 @@ uppercase = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/CardsSection"]
 clip_contents = false
-custom_minimum_size = Vector2(0, 180)
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 3

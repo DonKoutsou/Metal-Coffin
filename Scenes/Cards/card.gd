@@ -5,6 +5,7 @@ class_name Card
 @export var CardName : Label
 @export var CardDesc : RichTextLabel
 @export var CardCost : Label
+@export var CardTex : TextureRect
 
 signal OnCardPressed(C : Card, Options : CardOption)
 
@@ -50,7 +51,7 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 		Cost += Stats.SelectedOption.EnergyAdd
 	else:
 		CardName.text = Stats.CardName
-	#CardB.icon = Stats.Icon
+	CardTex.texture = Stats.Icon
 	
 	#var DescText =  "[center]{0}".format([Stats.CardDescription])
 	#CardDesc.visible_ratio = 0
