@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://yupxf3b2xhjq"]
+[gd_scene load_steps=8 format=3 uid="uid://yupxf3b2xhjq"]
 
 [ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_binbp"]
 [ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="1_p3ogv"]
@@ -6,7 +6,6 @@
 [ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_fe8ja"]
 [ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="3_j5y3q"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_pr6q6"]
-[ext_resource type="Texture2D" uid="uid://cu756tobhu4gw" path="res://Assets/MapElements/city6.png" id="5_owaup"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Village.tres" id="6_by0cx"]
 
 [node name="Town" type="Node2D"]
@@ -20,11 +19,6 @@ material = ExtResource("3_fe8ja")
 scale = Vector2(0.121094, 0.121094)
 texture = ExtResource("3_pr6q6")
 region_rect = Rect2(251.179, 160.971, 745.969, 227.22)
-
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["DissapearingMap"]]
-z_index = -1
-scale = Vector2(0.214844, 0.214844)
-texture = ExtResource("5_owaup")
 
 [node name="CitySpot" type="Node2D" parent="."]
 script = ExtResource("1_p3ogv")

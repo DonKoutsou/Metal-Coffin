@@ -30,8 +30,8 @@ func Init() -> void:
 	PointPos.append(Vector2(0,0))
 	#print (PointPos)
 	add_point(Vector2(0,0))
-	
-func _process(delta: float) -> void:
+
+func Update(delta: float) -> void:
 	# Check if the position has changed
 	if last_position.distance_to(global_position) > min_distance:
 

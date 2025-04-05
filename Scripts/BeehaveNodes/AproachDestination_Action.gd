@@ -12,7 +12,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MainShipMaxSpeed = MainShip.GetShipMaxSpeed()
 
 	if (Pos.distance_to(DestinationPos) > 1):
-		var Speed = MainShip.GetShipSpeed()
+		var Speed = MainShip.GetShipSpeed() / 360
 		var Cap = MainShip.Cpt
 		var MainShipFuelReserves = Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var FuelToConsume = 0

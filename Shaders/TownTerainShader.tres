@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://g4nd4xc327yt"]
 
-[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="1_q20aw"]
-[ext_resource type="Texture2D" uid="uid://5nrtapcij387" path="res://Assets/Sand/Ground033_1K-PNG_NormalGL.png" id="2_lw8bi"]
-[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_alaxh"]
+[ext_resource type="Texture2D" uid="uid://dp2vcww2oabjp" path="res://Assets/MapElements/Grayscale.png" id="1_q20aw"]
+[ext_resource type="Texture2D" uid="uid://ckh8skdhkuf7x" path="res://Assets/MapElements/plane_Town1_Normal.png" id="2_q20aw"]
+[ext_resource type="Texture2D" uid="uid://bn7tbt6reetit" path="res://Assets/MapElements/plane_Town1_BaseColor.png" id="3_lw8bi"]
 
 [sub_resource type="Shader" id="Shader_cns0g"]
 code = "shader_type canvas_item;
@@ -32,5 +32,5 @@ void fragment() {
 [resource]
 shader = SubResource("Shader_cns0g")
 shader_parameter/Alpha = ExtResource("1_q20aw")
-shader_parameter/GroundTexture = ExtResource("3_alaxh")
-shader_parameter/GroundNormalTexture = ExtResource("2_lw8bi")
+shader_parameter/GroundTexture = ExtResource("3_lw8bi")
+shader_parameter/GroundNormalTexture = ExtResource("2_q20aw")

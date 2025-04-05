@@ -50,7 +50,7 @@ func _ready() -> void:
 	$Radar_Range.visible = Friendly
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
 	if (FoundShips.size() > 0):
@@ -68,7 +68,9 @@ func _physics_process(_delta: float) -> void:
 		
 	if (Distance <= 0):
 		Kill()
-
+		
+	$TrailLine.Update(delta)
+	
 func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
 	var Body : Node2D
 	  # Calculate direction and distance

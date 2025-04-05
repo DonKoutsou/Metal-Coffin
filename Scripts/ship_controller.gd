@@ -180,11 +180,12 @@ func _on_controlled_ship_return_pressed() -> void:
 func GetSaveData() -> PlayerSaveData:
 	var pldata = PlayerSaveData.new()
 	var Ships = get_tree().get_nodes_in_group("PlayerShips")
-	
+	pldata.Worldview = WorldView.GetInstance().GetSaveData()
 	for g : MapShip in Ships:
 		if (g.Command == null):
 			if g is PlayerShip:
 				pldata.Pos = g.global_position
+				pldata.Rot = g.global_rotation
 				pldata.PlayerFleet = g.GetDroneDock().GetSaveData()
 			else :
 				var FleetData = FleetSaveData.new()
@@ -197,7 +198,9 @@ func GetSaveData() -> PlayerSaveData:
 
 func LoadSaveData(Data : PlayerSaveData) -> void:
 	var Player = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
-	Player.global_position = Data.Pos
+	Player.SetShipPosition(Data.Pos)
+	Player.global_rotation = Data.Rot
+	WorldView.GetInstance().LoadData(Data.Worldview)
 	for Ship in Data.PlayerFleet:
 		var DockedShip = DroneScene.instantiate() as Drone
 		DockedShip.Cpt = Ship.Cpt
@@ -209,7 +212,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		var CommanderShip = DroneScene.instantiate() as Drone
 		CommanderShip.Cpt = Command.CommanderData.Cpt
 		ShipPlecement.add_child(CommanderShip)
-		CommanderShip.global_position = Command.CommanderData.Pos
+		CommanderShip.SetShipPosition(Command.CommanderData.Pos)
 		CommanderShip.global_rotation = Command.CommanderData.Rot
 		for Ship in Command.DockedShips:
 			var DockedShip = DroneScene.instantiate() as Drone

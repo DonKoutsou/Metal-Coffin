@@ -224,7 +224,9 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	drone.ForceSteer(get_parent().rotation)
 	trans.remote_path = drone.get_path()
 	drone.Docked = true
-
+	
+	drone.SetShipPosition(trans.global_position)
+	
 	if ($"..".Landing or $"..".Landed()):
 		drone.LandingStarted.emit()
 		drone.Landing = true
@@ -256,7 +258,8 @@ func DockCaptive(Captive : HostileShip) -> void:
 	Captive.ForceSteer(get_parent().rotation)
 	trans.remote_path = Captive.get_path()
 	Captive.Docked = true
-
+	Captive.SetShipPosition(trans.global_position)
+	
 func UndockCaptive(Captive : HostileShip):
 	Captives.erase(Captive)
 

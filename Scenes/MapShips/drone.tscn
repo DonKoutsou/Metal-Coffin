@@ -39,7 +39,7 @@ radius = 150.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c58ob"]
 light_mode = 1
 
-[node name="Drone" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["PlayerShips", "Ships", "ZoomAffected"]]
+[node name="Drone" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines") groups=["PlayerShips", "Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_p3smt")
 script = ExtResource("1_vfr1e")
 RadarShape = NodePath("Radar")
@@ -48,11 +48,20 @@ BodyShape = NodePath("ShipBody")
 DroneDok = NodePath("DroneDock")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 Cpt = ExtResource("3_fw0pf")
+TrailLines = [NodePath("PlayerShipSpr/TrailLine")]
 
-[node name="TrailLine" type="Line2D" parent="."]
+[node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(-1, 0)
-width = 2.0
+rotation = -1.5708
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_nd4dw")
+
+[node name="TrailLine" type="Line2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+position = Vector2(3.61999e-05, -10)
+rotation = 1.5708
+scale = Vector2(10, 10)
+width = 1.0
 width_curve = SubResource("Curve_qb3w4")
 gradient = SubResource("Gradient_xnk77")
 joint_mode = 2
@@ -62,12 +71,6 @@ script = ExtResource("10_dxnd3")
 trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
-[node name="PlayerShipSpr" type="Sprite2D" parent="."]
-z_index = -1
-rotation = -1.5708
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_nd4dw")
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
 show_behind_parent = true

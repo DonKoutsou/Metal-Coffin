@@ -104,6 +104,9 @@ func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
 	
+	for g in TrailLines:
+		g.Update(delta)
+	
 	if (UseDefaultBehavior):
 		var SimulationSpeed = SimulationManager.SimSpeed()
 		if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):

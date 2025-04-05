@@ -19,12 +19,21 @@ func DrawLines() -> void:
 	
 	for points in Lines:
 		var L = Line2D.new()
+		
+		L.joint_mode = Line2D.LINE_JOINT_ROUND
+		L.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		L.end_cap_mode = Line2D.LINE_CAP_ROUND
+		L.round_precision = 4
+		
 		L.use_parent_material = true
 		L.width = 20
 		if (!RoadLines):
 			L.default_color = Color(1,1,1, 1)
 		else:
-			L.width = 4
+			#L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+			#L.texture = load("res://Assets/Sand/Tiles093_1K-PNG_Color.png")
+			L.default_color = Color(0,0,0, 1)
+			L.width = 1
 		add_child(L)
 		L.global_position = points[0]
 		#L.default_color = Color("0ca50a")

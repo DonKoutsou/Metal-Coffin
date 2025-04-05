@@ -81,7 +81,7 @@ func RepositionDocks() -> void:
 	for DockSpot in $DroneSpots.get_children().size():
 		var pos : Vector2
 		var Offset = 10
-		for g in DockSpot:
+		for g in DockSpot + 1:
 			if (is_even(g)):
 				pos = Vector2(-Offset, -Offset)
 			else:

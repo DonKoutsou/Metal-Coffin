@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	
 	var direction = (Target.global_position + (Target.size / 2)) - global_position
 	var distance = direction.length()
-
+	
 	# Only adjust if the missile is more than a tiny distance from the target
 	if distance > 1:
 		# Normalize the direction
@@ -78,3 +78,5 @@ func _process(delta: float) -> void:
 		await $MultiParticleExample2.Finished
 		queue_free()
 		Finished.emit()
+	else:
+		$TrailLine.Update(delta)

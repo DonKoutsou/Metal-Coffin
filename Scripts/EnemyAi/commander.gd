@@ -82,7 +82,7 @@ func ProcessLODList() -> void:
 		var ShouldRun = false
 		
 		for Pl in PlayerShips:
-			if (ShipPos.distance_to(Pl.global_position) < 10000):
+			if (ShipPos.distance_to(Pl.global_position) < 20000):
 				ShouldRun = true
 				break
 		

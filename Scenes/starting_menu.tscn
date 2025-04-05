@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=29 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -19,6 +19,7 @@
 [ext_resource type="Shader" uid="uid://cmen5pp83lhs2" path="res://Shaders/clouds2.gdshader" id="14_7x35f"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
 [ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
+[ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_1p5b6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
 shader = ExtResource("11_j424g")
@@ -267,10 +268,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -605.0
-offset_top = -152.0
-offset_right = 392.0
-offset_bottom = 408.0
+offset_left = -595.0
+offset_top = -163.0
+offset_right = 468.0
+offset_bottom = 434.0
 grow_horizontal = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6
@@ -281,14 +282,15 @@ expand_mode = 1
 self_modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -489.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
 offset_top = 10.0
-offset_right = 507.5
-offset_bottom = 570.0
+offset_right = -8.0
+offset_bottom = 10.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
@@ -368,17 +370,14 @@ theme_override_styles/panel = ExtResource("9_3vvgq")
 
 [node name="PanelContainer" type="PanelContainer" parent="w"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -577.0
-offset_top = -35.0
-offset_right = -220.0
-offset_bottom = 308.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -330.0
+offset_right = 321.0
+offset_bottom = -22.0
+grow_vertical = 0
 theme_override_styles/panel = ExtResource("9_3vvgq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="w/PanelContainer"]
@@ -388,11 +387,9 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Play" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
-theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- NEW GAME -"
 
@@ -403,11 +400,9 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
 [node name="Load" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
-theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- LOAD -"
 
@@ -418,13 +413,14 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
 [node name="Credits" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
-theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- CREDITS -"
+
+[node name="SettingPanel" parent="w/PanelContainer/VBoxContainer" instance=ExtResource("18_1p5b6")]
+layout_mode = 2
 
 [node name="Panel6" type="Panel" parent="w/PanelContainer/VBoxContainer"]
 visible = false
@@ -433,11 +429,9 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
 [node name="Exit" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
-theme_override_font_sizes/font_size = 26
 action_mode = 0
 text = "- EXIT -"
 
@@ -459,7 +453,7 @@ texture = ExtResource("10_jcj0v")
 expand_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="w"]
-position = Vector2(468, 136)
+position = Vector2(467, 152)
 blend_mode = 2
 range_z_max = -1
 texture = ExtResource("15_7x35f")

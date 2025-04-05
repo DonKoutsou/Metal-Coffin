@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=16 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
@@ -6,7 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/Spaceship/Spaceship_top_Main Camera.png" id="4_xxp8j"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="5_q8roo"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/Enemies/HostileDroneDock.tscn" id="7_hahnw"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_kunx8"]
 [ext_resource type="PackedScene" uid="uid://b0gylky44tnsw" path="res://Scenes/Enemies/PatrolBT.tscn" id="8_w8ob0"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="9_grjy8"]
+
+[sub_resource type="Curve" id="Curve_grjy8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_hjoyl"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.715481, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jc744"]
 radius = 5.0
@@ -31,7 +42,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["Enemy", "Ships"]]
+[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines") groups=["Enemy", "Ships"]]
 process_mode = 1
 script = ExtResource("1_dinuw")
 Patrol = false
@@ -42,12 +53,29 @@ ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
 DroneDok = NodePath("DroneDock")
 Cpt = ExtResource("2_lpij7")
+TrailLines = [NodePath("PlayerShipSpr/TrailLine")]
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_xxp8j")
+
+[node name="TrailLine" type="Line2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+position = Vector2(3.61999e-05, -10)
+rotation = 1.5708
+scale = Vector2(10, 10)
+width = 1.0
+width_curve = SubResource("Curve_grjy8")
+gradient = SubResource("Gradient_hjoyl")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_kunx8")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
 show_behind_parent = true
@@ -87,6 +115,14 @@ collision_layer = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3uei4")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.736328, 0.736328)
+energy = 0.25
+blend_mode = 2
+shadow_color = Color(0.767, 0, 0.373, 1)
+texture = ExtResource("9_grjy8")
+height = 50.0
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]

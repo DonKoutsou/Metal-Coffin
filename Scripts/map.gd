@@ -66,7 +66,7 @@ func _InitialPlayerPlacament():
 	var pos = firstvilage.global_position
 	pos.y += 500
 	var PlShip = $SubViewportContainer/ViewPort/PlayerShip as MapShip
-	PlShip.global_position = pos
+	PlShip.SetShipPosition(pos)
 	GetCamera().FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
 	
@@ -618,7 +618,7 @@ func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : 
 			var dir = point1.direction_to(point2)
 			
 			var dist = point1.distance_to(point2)
-			var pointamm = roundi(dist / 50)
+			var pointamm = roundi(dist / 80)
 			var offsetperpoint = dist/pointamm
 			for g in pointamm:
 				var offs = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
@@ -641,6 +641,10 @@ func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
 		
 func RoadFinished() -> void:
 	var Lines = Roadt.wait_to_finish()
+	for g in Lines:
+		var l = g as Array[Vector2]
+		g[0] += (l[0].direction_to(l[l.size() - 1]) * 42)
+		g[l.size() - 1] += (l[l.size() - 1].direction_to(l[0]) * 42)
 	$SubViewportContainer/ViewPort/RoadLineDrawer.AddLines(Lines)
 	Roadt = null
 	GenerationFinished.emit()

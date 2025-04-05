@@ -143,6 +143,7 @@ render_target_update_mode = 4
 color = Color(0, 0, 0, 1)
 
 [node name="RoadLineDrawer" parent="SubViewportContainer/ViewPort" instance=ExtResource("16_sp82o")]
+modulate = Color(1, 1, 1, 0.5)
 z_index = -1
 RoadLines = true
 

@@ -30,7 +30,7 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.715481, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
-[node name="w" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok") groups=["PlayerShips", "Ships", "ZoomAffected"]]
+[node name="w" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines") groups=["PlayerShips", "Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_vppi8")
 script = ExtResource("1_ekbhy")
 RadarShape = NodePath("Radar")
@@ -39,6 +39,7 @@ BodyShape = NodePath("ShipBody")
 DroneDok = NodePath("DroneDock")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 Cpt = ExtResource("2_ddg27")
+TrailLines = [NodePath("PlayerShipSpr/TrailLine"), NodePath("PlayerShipSpr/TrailLine2")]
 
 [node name="ShipBody" type="Area2D" parent="."]
 collision_mask = 5
@@ -77,37 +78,41 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 
 [node name="DroneDock" parent="." instance=ExtResource("5_vcup0")]
 
-[node name="TrailLine" type="Line2D" parent="."]
-z_index = -1
-position = Vector2(-12, -2)
-width = 2.0
-width_curve = SubResource("Curve_mktum")
-gradient = SubResource("Gradient_wfgcg")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("9_wfgcg")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
-[node name="TrailLine2" type="Line2D" parent="."]
-z_index = -1
-position = Vector2(-12, 2)
-width = 2.0
-width_curve = SubResource("Curve_mktum")
-gradient = SubResource("Gradient_wfgcg")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("9_wfgcg")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("6_6lhcj")
+
+[node name="TrailLine" type="Line2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+position = Vector2(20.0004, -120.006)
+rotation = 1.5708
+scale = Vector2(10, 10)
+width = 2.0
+width_curve = SubResource("Curve_mktum")
+gradient = SubResource("Gradient_wfgcg")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("9_wfgcg")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="TrailLine2" type="Line2D" parent="PlayerShipSpr"]
+show_behind_parent = true
+position = Vector2(-19.9996, -120.006)
+rotation = 1.5708
+scale = Vector2(10, 10)
+width = 2.0
+width_curve = SubResource("Curve_mktum")
+gradient = SubResource("Gradient_wfgcg")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("9_wfgcg")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
 show_behind_parent = true

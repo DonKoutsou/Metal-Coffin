@@ -36,6 +36,16 @@ func AdjustStat(Stat : WorldViews, Amm : int, Notify : bool) -> void:
 func GetStatValue(StatName : WorldViews) -> int:
 	return WorldviewStats[StatName]
 
+func GetSaveData() -> Array[int]:
+	var SavedStats : Array[int]
+	for g in WorldviewStats:
+		SavedStats.append(WorldviewStats[g])
+	return SavedStats
+
+func LoadData(SavedStats : Array[int]) -> void:
+	for g in WorldviewStats.size():
+		WorldviewStats[WorldviewStats.keys()[g]] = SavedStats[g]
+
 func SkillCheck(Stat : WorldViews, Possetive : bool, Difficulty : int) -> bool:
 	var skill_value = WorldviewStats[Stat]
 	

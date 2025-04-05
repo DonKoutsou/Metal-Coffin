@@ -18,6 +18,7 @@ class_name MapShip
 @export var DroneDok : Node2D
 @export var LowStatsToNotifyAbout : Array[String]
 @export var Cpt : Captain
+@export var TrailLines : Array[TrailLine]
 
 var Paused = true
 #var SimulationSpeed : float = 1
@@ -30,6 +31,8 @@ var ShowFuelRange = true
 var Docked = false
 var CamZoom = 1
 var CommingBack = false
+
+
 
 signal ShipDeparted()
 signal ShipDockActions(Stats : String, t : bool, timel : float)
@@ -79,9 +82,14 @@ func _physics_process(delta: float) -> void:
 
 	UpdateElint(delta)
 	queue_redraw()
-
+	
+	for g in TrailLines:
+		g.Update(delta)
+	
 	if (Paused):
 		return
+	
+	
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
@@ -306,7 +314,12 @@ func ShipLookAt(pos : Vector2) -> void:
 	shadow.rotation = rotation
 	for g in GetDroneDock().GetDockedShips():
 		g.global_rotation = global_rotation
-	
+
+func SetShipPosition(pos : Vector2) -> void:
+	global_position = pos
+	for g in TrailLines:
+		g.Init()
+
 #///////////////////////////////////////////////////
 #██████   █████  ███    ███  █████   ██████  ██ ███    ██  ██████  
 #██   ██ ██   ██ ████  ████ ██   ██ ██       ██ ████   ██ ██       
