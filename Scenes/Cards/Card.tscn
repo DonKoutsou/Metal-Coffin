@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=11 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
@@ -96,6 +96,14 @@ corner_radius_bottom_left = 5
 corner_detail = 4
 shadow_size = 5
 anti_aliasing_size = 2.0
+
+[sub_resource type="Curve" id="Curve_58ae4"]
+_data = [Vector2(0, 0.431387), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_58ae4"]
+offsets = PackedFloat32Array(0, 0.102293, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
 custom_minimum_size = Vector2(200, 250)
@@ -209,5 +217,13 @@ theme = ExtResource("2_n60qq")
 [node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(100, 125)
+points = PackedVector2Array(0, 0, 0, 0)
+width_curve = SubResource("Curve_58ae4")
+gradient = SubResource("Gradient_58ae4")
+end_cap_mode = 2
+round_precision = 2
 
 [connection signal="pressed" from="Button" to="." method="OnButtonPressed"]

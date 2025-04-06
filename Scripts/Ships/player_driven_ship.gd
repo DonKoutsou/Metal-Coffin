@@ -1,6 +1,6 @@
-extends PlayerDrivenShip
+extends MapShip
 
-class_name PlayerShip
+class_name PlayerDrivenShip
 
 func _physics_process(delta: float) -> void:
 	
@@ -12,8 +12,6 @@ func _physics_process(delta: float) -> void:
 	
 	if (Paused):
 		return
-	
-	
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
@@ -82,12 +80,3 @@ func _physics_process(delta: float) -> void:
 
 	var offset = GetShipSpeedVec()
 	global_position += offset * SimulationSpeed
-
-func BodyEnteredElint(Body: Area2D) -> void:
-	if (Body.get_parent() is Drone):
-		return
-	super(Body)
-func BodyLeftElint(Body: Area2D) -> void:
-	if (Body.get_parent() is Drone):
-		return
-	super(Body)

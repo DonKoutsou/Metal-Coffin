@@ -40,6 +40,9 @@ var PosToSpawn : Vector2
 var LoadingSave : bool = false
 var Spawned : bool = false
 
+#if lodded it means it should not process
+var Lodded : bool = true
+
 signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip])
 signal OnDestinationReached(Ship : HostileShip)
 signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
@@ -94,15 +97,16 @@ func InitialiseShip() -> void:
 		SetSpeed(0)
 		UseDefaultBehavior = true
 	
-	TogglePause(SimulationManager.IsPaused())
+	#TogglePause(SimulationManager.IsPaused())
 
 
-func _physics_process(delta: float) -> void:
-	if (Captured):
+func _Update(delta: float) -> void:
+	if (Lodded):
 		return
+		
 	UpdateElint(delta)
-	if (Paused):
-		return
+	#if (Paused):
+		#return
 	
 	for g in TrailLines:
 		g.Update(delta)
@@ -195,11 +199,13 @@ func NeedsReload() -> bool:
 	return !Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)
 
 func TogglePause(t : bool):
-	Paused = t
-	if (t and BTree != null):
-		BTree.process_mode = Node.PROCESS_MODE_DISABLED
-	else: if (BTree != null):
-		BTree.process_mode = Node.PROCESS_MODE_PAUSABLE
+	pass
+#func TogglePause(t : bool):
+	#Paused = t
+	#if (t and BTree != null):
+		#BTree.process_mode = Node.PROCESS_MODE_DISABLED
+	#else: if (BTree != null):
+		#BTree.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 func ToggleDocked(t : bool) -> void:
 	Docked = t

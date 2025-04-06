@@ -34,7 +34,12 @@ func _ready() -> void:
 	Instance = self
 
 func _physics_process(delta: float) -> void:
+	if (SimPaused):
+		return
 	$BeehaveTree.Process_Tree()
+	for g in Fleet:
+		if (!g.Lodded):
+			g._Update(delta)
 
 static func GetInstance() -> Commander:
 	return Instance
@@ -86,7 +91,7 @@ func ProcessLODList() -> void:
 				ShouldRun = true
 				break
 		
-		Ship.set_physics_process(ShouldRun)
+		Ship.Lodded = !ShouldRun
 #/////////////////////////////////////////////////////////////
  #██████  ██████  ██████  ███████ ██████      ███    ███  █████  ███    ██  █████   ██████  ███████ ███    ███ ███████ ███    ██ ████████ 
 #██    ██ ██   ██ ██   ██ ██      ██   ██     ████  ████ ██   ██ ████   ██ ██   ██ ██       ██      ████  ████ ██      ████   ██    ██    

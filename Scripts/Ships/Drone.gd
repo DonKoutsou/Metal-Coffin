@@ -1,4 +1,4 @@
-extends MapShip
+extends PlayerDrivenShip
 
 class_name Drone
 

@@ -67,14 +67,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "stat"
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "12 / 23"
 horizontal_alignment = 2
 vertical_alignment = 1

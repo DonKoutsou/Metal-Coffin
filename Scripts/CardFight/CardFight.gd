@@ -15,6 +15,8 @@ class_name Card_Fight
 #/////////////////////////////////////////////////////////////
 @export var CardScene : PackedScene
 @export var ShipVizScene : PackedScene
+@export var AtackTime : PackedScene
+@export var FightGame : PackedScene
 @export var Cards : Array[CardStats]
 #Animation of the atack
 @export var ActionAnim : PackedScene
@@ -80,11 +82,11 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	#for g in 1:
-		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-	#for g in 1:
-		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	for g in 1:
+		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+	for g in 1:
+		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -104,10 +106,10 @@ func _ready() -> void:
 	call_deferred("RunTurn")
 
 func StoreContainerSize() -> void:
-	CardSelectSize = CardSelectContainer.size.y
-	CardSelectContainer.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	CardSelectSize = CardSelectContainer.get_parent().size.y
+	CardSelectContainer.get_parent().size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	#CardSelectContainer.custom_minimum_size.y = CardSelectSize
-	CardSelectContainer.visible = false
+	CardSelectContainer.get_parent().visible = false
 	
 	ActionDeclaration.get_child(0).visible = false
 	ActionDeclaration.get_child(0).modulate = Color(1,1,1,0)
@@ -240,11 +242,11 @@ signal PlayerActionPickingEnded
 func RunTurn() -> void:
 	await DoActionDeclaration("Action Pick Phase")
 	
-	CardSelectContainer.visible = true
+	CardSelectContainer.get_parent().visible = true
 	var Tw2 = create_tween()
 	Tw2.set_ease(Tween.EASE_OUT)
 	Tw2.set_trans(Tween.TRANS_QUAD)
-	Tw2.tween_property(CardSelectContainer, "custom_minimum_size", Vector2(0,CardSelectSize), 0.5)
+	Tw2.tween_property(CardSelectContainer.get_parent(), "custom_minimum_size", Vector2(0,CardSelectSize), 0.5)
 	await Tw2.finished
 	
 	CardSelectContainer.get_child(0).visible = true
@@ -255,7 +257,11 @@ func RunTurn() -> void:
 		ActionList.AddShip(Ship)
 		if (IsShipFriendly(Ship)):
 			RestartCards()
+			var ATime = AtackTime.instantiate() as AtackTimer
+			CardSelectContainer.get_parent().add_child(ATime)
+			ATime.connect("Finished", PlayerActionSelectionEnded)
 			await PlayerActionPickingEnded
+			ATime.queue_free()
 		else:
 			EnemyActionSelection(Ship)
 			
@@ -270,9 +276,9 @@ func RunTurn() -> void:
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_OUT)
 	Tw.set_trans(Tween.TRANS_QUAD)
-	Tw.tween_property(CardSelectContainer, "custom_minimum_size", Vector2(0,0), 0.5)
+	Tw.tween_property(CardSelectContainer.get_parent(), "custom_minimum_size", Vector2(0,0), 0.5)
 	await Tw.finished
-	CardSelectContainer.visible = false
+	CardSelectContainer.get_parent().visible = false
 	
 	await DoActionDeclaration("Action Perform Phase")
 	
@@ -615,6 +621,13 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	
 
 func OnCardSelected(C : Card, Option : CardOption) -> void:
+	var Minigame = FightGame.instantiate() as FightMinigame
+	add_child(Minigame)
+	var Resault = await Minigame.Ended
+	Minigame.queue_free()
+	if (!Resault):
+		return
+	
 	var Action = C.CStats.duplicate() as CardStats
 	var CurrentShip = ShipTurns[CurrentTurn]
 	if (!Action.AllowDuplicates and ActionList.ShipHasAction(CurrentShip, Action)):

@@ -146,7 +146,6 @@ clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ayl0t")
-vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Scroll"]
 layout_mode = 2
@@ -310,5 +309,5 @@ show_percentage = false
 [connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button3" to="." method="OnRefuelShopPressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer/Scroll" to="." method="_on_scroll_gui_input"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/ProgressBar" to="." method="UpdateFuelBar"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/ProgressBar" to="." method="UpdateRepairBar"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/ProgressBar" to="." method="RepairBar_gui_input"]

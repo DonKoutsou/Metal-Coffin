@@ -18,13 +18,12 @@ var TargetLoc : Vector2
 var InterpolationValue : float
 
 func _physics_process(delta: float) -> void:
-	queue_redraw()
-	InterpolationValue = min(InterpolationValue + delta, 1)
+	InterpolationValue = min(InterpolationValue + delta * 2, 1)
+	UpdateLine()
 
-func _draw() -> void:
-	if (TargetLoc != Vector2.ZERO):
-		draw_set_transform(- global_position)
-		draw_line(global_position + size / 2, lerp(global_position + size / 2 ,TargetLoc,InterpolationValue), Color(0.482,0.69,0.705), 5)
+func UpdateLine() -> void:
+	$Line2D.set_point_position(1, lerp(Vector2.ZERO ,$Line2D.to_local(TargetLoc),InterpolationValue))
+		#draw_line(global_position + size / 2, lerp(global_position + size / 2 ,TargetLoc,InterpolationValue), Color(0.482,0.69,0.705), 5)
 
 func KillCard() -> void:
 	var KillTw = create_tween()
@@ -39,6 +38,7 @@ func _ready() -> void:
 		SoundMan.AddSelf($Button)
 	$PanelContainer.visible = false
 	set_physics_process(TargetLoc != Vector2.ZERO)
+	$Line2D.visible = TargetLoc != Vector2.ZERO
 
 func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 	CStats = Stats
