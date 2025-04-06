@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=21 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="13_mvfa8"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="15_kwl8l"]
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="16_waglr"]
+[ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/InScreenUI/tutorial_manager.tscn" id="19_r0dna"]
 
 [node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
@@ -64,3 +65,5 @@ script = ExtResource("15_kwl8l")
 WorldviewAdjustNotif = ExtResource("16_waglr")
 
 [node name="Map" parent="." instance=ExtResource("12_11aq8")]
+
+[node name="TutorialManager" parent="." instance=ExtResource("19_r0dna")]

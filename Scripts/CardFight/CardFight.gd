@@ -621,12 +621,12 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	
 
 func OnCardSelected(C : Card, Option : CardOption) -> void:
-	var Minigame = FightGame.instantiate() as FightMinigame
-	add_child(Minigame)
-	var Resault = await Minigame.Ended
-	Minigame.queue_free()
-	if (!Resault):
-		return
+	#var Minigame = FightGame.instantiate() as FightMinigame
+	#add_child(Minigame)
+	#var Resault = await Minigame.Ended
+	#Minigame.queue_free()
+	#if (!Resault):
+		#return
 	
 	var Action = C.CStats.duplicate() as CardStats
 	var CurrentShip = ShipTurns[CurrentTurn]

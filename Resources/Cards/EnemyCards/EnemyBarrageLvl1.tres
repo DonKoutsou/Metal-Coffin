@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=7 format=3 uid="uid://cbkme88wrncp4"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_6rgsr"]
-[ext_resource type="Texture2D" uid="uid://dgj0w64wb7mmy" path="res://Assets/Cards/hydra-shot.png" id="2_beagt"]
+[ext_resource type="Texture2D" uid="uid://cln0pmvmp4m00" path="res://Assets/Cards/barrage.png" id="2_mh8we"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_17aj4"]
 [ext_resource type="Resource" uid="uid://ktph3wbdfaxg" path="res://Resources/Cards/Barrage/Options/BarrageNormalOption.tres" id="4_t83mo"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_ogein"]
@@ -12,7 +12,7 @@ script = ExtResource("6_ht4r4")
 CounteredBy = ExtResource("1_6rgsr")
 Damage = 6.0
 Accuracy = 0.0
-Icon = ExtResource("2_beagt")
+Icon = ExtResource("2_mh8we")
 CardName = "Barragge"
 CardDescription = "Throws a barragge on the enemy. [color=#c19200]DMG = 6 * Firepower[/color]"
 Energy = 3

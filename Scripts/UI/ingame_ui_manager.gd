@@ -8,6 +8,8 @@ class_name Ingame_UIManager
 @export var DiagplScene : PackedScene
 @export var Manual : FlightManual
 @export var EventHandler : UIEventHandler
+@export var UnderstatUI : Control
+@export var OverStatUI : Control
 
 signal GUI_Input(event)
 static var Instance :Ingame_UIManager
@@ -33,9 +35,9 @@ static func GetInstance() -> Ingame_UIManager:
 
 func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 	if (UnderUI):
-		$Control3/UnderStatUI.add_child(Scene)
+		UnderstatUI.add_child(Scene)
 	else: if (OverUI):
-		add_child(Scene)
+		OverStatUI.add_child(Scene)
 	else:
 		add_child(Scene)
 

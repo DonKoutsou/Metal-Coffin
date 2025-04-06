@@ -39,7 +39,7 @@ func _ready() -> void:
 	WorldSpawnTransitionFinished.emit()
 	#$Inventory.Player = GetMap().GetPlayerShip()
 	var Loadingscr = LoadingScene.instantiate() as LoadingScreen
-	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, true)
+	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, false)
 	#add_child(Loadingscr)
 	#TODO needs fix
 	if (!Loading):

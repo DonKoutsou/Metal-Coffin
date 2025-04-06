@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
+[ext_resource type="Texture2D" uid="uid://cln0pmvmp4m00" path="res://Assets/Cards/barrage.png" id="2_58ae4"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
-[ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="3_58ae4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
 content_margin_left = 4.0
@@ -170,8 +170,7 @@ custom_minimum_size = Vector2(0, 41)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
-text = "Evasive Manuvers
-fwaf"
+text = "Incindiary Barrage"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -192,9 +191,9 @@ autowrap_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-texture = ExtResource("3_58ae4")
+texture = ExtResource("2_58ae4")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
@@ -203,6 +202,8 @@ mouse_filter = 2
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
+text = "[center]Throws a barragge on the enemy. [color=#c19200]DMG = 6 * Firepower[/color].
+May cause fire"
 fit_content = true
 autowrap_mode = 2
 vertical_alignment = 1

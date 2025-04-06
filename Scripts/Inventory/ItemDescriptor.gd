@@ -31,6 +31,14 @@ func _ready() -> void:
 	call_deferred("PlayIntroAnim")
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade)
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer)
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
+		var tuttext = "When selecting an [color=#c19200]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#c19200]Upgrade[/color] it if its a ship part, [color=#c19200]Transfer[/color] it to another ship if its allowed and check any [color=#c19200]Cards[/color] it provides in close quarters combat."
+		ActionTracker.GetInstance().ShowTutorial("Item Inspection", tuttext, self, true)
+		
+
+func DescriptorTutorial() -> void:
+	pass
 
 func PlayIntroAnim() -> void:
 	var tw = create_tween()

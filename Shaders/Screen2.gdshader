@@ -140,5 +140,5 @@ void fragment(){
 
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
-	
+
 }

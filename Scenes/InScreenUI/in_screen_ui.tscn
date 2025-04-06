@@ -28,7 +28,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
-[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual")]
+[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual", "UnderstatUI", "OverStatUI")]
 process_mode = 3
 script = ExtResource("1_3cf0e")
 _Inventory = NodePath("Control3/UnderStatUI/Inventory")
@@ -37,6 +37,8 @@ PauseContainer = NodePath("Control3/PauseContainer")
 DiagplScene = ExtResource("2_ehn1p")
 Manual = NodePath("Control3/PauseContainer/FlightManual")
 EventHandler = ExtResource("3_b4kau")
+UnderstatUI = NodePath("Control3/UnderStatUI")
+OverStatUI = NodePath("Control3/OverStatUI")
 
 [node name="Control3" type="Control" parent="."]
 texture_filter = 1
@@ -177,6 +179,66 @@ offset_top = -173.5
 offset_right = -222.0
 offset_bottom = -81.5
 
+[node name="OverStatUI" type="Control" parent="Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PopUpManager" type="Control" parent="Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("9_jvf02")
+CustomPop = ExtResource("10_e626m")
+CustomConfirm = ExtResource("11_nk6oj")
+FadNot = ExtResource("12_1jh8x")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control3"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = -100.0
+offset_right = 143.5
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_8iafl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control3/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control3/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("10_ljnge")
+theme_override_font_sizes/font_size = 41
+text = "Game Lost"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control3/PanelContainer/VBoxContainer" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("9_8iafl")
+theme_override_font_sizes/font_size = 26
+text = "OK"
+
 [node name="PauseContainer" type="PanelContainer" parent="Control3"]
 process_mode = 3
 visible = false
@@ -257,57 +319,6 @@ text = "Exit"
 visible = false
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control3"]
-process_mode = 3
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.5
-offset_top = -100.0
-offset_right = 143.5
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("9_8iafl")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control3/PanelContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="Control3/PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("10_ljnge")
-theme_override_font_sizes/font_size = 41
-text = "Game Lost"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="Control3/PanelContainer/VBoxContainer" groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("9_8iafl")
-theme_override_font_sizes/font_size = 26
-text = "OK"
-
-[node name="PopUpManager" type="Control" parent="Control3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-script = ExtResource("9_jvf02")
-CustomPop = ExtResource("10_e626m")
-CustomConfirm = ExtResource("11_nk6oj")
-FadNot = ExtResource("12_1jh8x")
-
 [node name="Screen" type="ColorRect" parent="Control3"]
 process_mode = 3
 z_index = 10
@@ -321,8 +332,8 @@ grow_vertical = 2
 mouse_filter = 2
 
 [connection signal="gui_input" from="Control3" to="." method="_on_control_3_gui_input"]
+[connection signal="pressed" from="Control3/PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]
 [connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/Return" to="." method="Pause"]
 [connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
 [connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Control3/PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]
