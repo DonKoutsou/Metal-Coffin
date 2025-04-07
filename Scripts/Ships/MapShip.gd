@@ -335,6 +335,9 @@ func UpdateElint(delta: float) -> void:
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > -1):
+		if (!ActionTracker.GetInstance().IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
+			ActionTracker.GetInstance().OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
+			ActionTracker.GetInstance().ShowTutorial("Electronic Intelligence", "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.", [], true)
 		Elint.emit(true, BiggestLevel, Helper.GetInstance().AngleToDirection(Dir))
 	else:
 		Elint.emit(false, -1, "")
@@ -371,6 +374,16 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 		if (Parent.FiredBy is HostileShip):
 			Parent.OnShipSeen(self)
 	else : if (Parent is MapSpot):
+		if (Parent.SpotInfo.EnemyCity):
+			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
+				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
+				var TutText = "You are reaching an enemy [color=#c19200]city[/color]. Enemy cities are usual refuel spots for [color=#c19200]patrols[/color], and always have a guarding [color=#c19200]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
+				ActionTracker.GetInstance().ShowTutorial("Enemy Cities", TutText, [], true)
+		else:
+			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_APROACH)):
+				ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
+				var TutText = "You are reaching one of the many friendly [color=#c19200]villages[/color] in the dessert. No enemies exist in those [color=#c19200]villages[/color] and none of the locals wil raise the [color=#c19200]alarm[color] on you. You are free to use those [color=#c19200]villages[/color] to restock/repair or even as a hideout. The location of those [color=#c19200]villages[/color] is unknown and will need to be discovered."
+				ActionTracker.GetInstance().ShowTutorial("Friendly Villages", TutText, [], true)
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()
 
@@ -387,6 +400,9 @@ func BodyEnteredBody(Body : Area2D) -> void:
 		return
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.LANDING)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
+			ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a town. To visit the town's verdors to resuply you need to land your fleet. To do so click the Land button next to the thrust lever to initiate the landing procedure.", [World.GetInstance().GetMap().GetScreenUi().LandButton], false)
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
 		for g in GetDroneDock().GetDockedShips():

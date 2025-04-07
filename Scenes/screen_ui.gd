@@ -7,6 +7,7 @@ class_name ScreenUI
 @export var Thrust : ThrustSlider
 @export var Steer : SteeringWheelUI
 @export var MissileUI : MissileTab
+@export var LandButton : TextureButton
 #@export var DroneUI : DroneTab
 #@export var ButtonCover : TextureRect
 @export var EventHandler : UIEventHandler
