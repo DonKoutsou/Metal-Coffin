@@ -8,6 +8,7 @@ var SpawnedCredits : Control
 
 signal GameStart(Load : bool)
 signal PrologueStart()
+signal DelSave
 
 func _ready() -> void:
 	$w/PointLight2D.energy = 0
@@ -42,3 +43,7 @@ func LoopAmp() -> void:
 
 func _on_prologue_pressed() -> void:
 	PrologueStart.emit()
+
+
+func _on_button_pressed() -> void:
+	DelSave.emit()

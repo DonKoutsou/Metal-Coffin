@@ -47,6 +47,7 @@ func SpawnMenu() -> void:
 	add_child(StMenu)
 	StMenu.connect("GameStart", StartGame)
 	StMenu.connect("PrologueStart", StartPrologue)
+	StMenu.connect("DelSave", DelSave)
 	UISoundMan.GetInstance().Refresh()
 
 func StartPrologue() -> void:
@@ -76,6 +77,13 @@ func StartGame(Load : bool) -> void:
 	#$PanelContainer.visible = false
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
+func DelSave() -> void:
+	var pop = ConfirmationDialog.new()
+	pop.dialog_text = "Saves have been nuked"
+	get_viewport().add_child(pop)
+	pop.popup_centered()
+	$SaveLoadManager.DeleteSave()
+	$TutorialManager.DeleteSave()
 	
 
 func OnGameEnded() -> void:

@@ -9,10 +9,12 @@ func _ready() -> void:
 static func GetInstance() -> SaveLoadManager:
 	return Instance
 
+func DeleteSave() -> void:
+	DirAccess.remove_absolute("user://SavedGame.tres")
 # Called when the node enters the scene tree for the first time.
 func Save() -> void:
 	var world = World.GetInstance()
-	if (world.IsIntro):
+	if (world.IsPrologue):
 		PopUpManager.GetInstance().DoPopUp("Can't save progress in prologue.")
 		return
 	var Mapz = world.GetMap() as Map

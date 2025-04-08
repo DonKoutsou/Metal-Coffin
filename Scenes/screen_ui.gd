@@ -2,12 +2,14 @@ extends Control
 
 class_name ScreenUI
 
-#@export var _ScreenItems : Control
+@export var _ScreenItems : Control
 @export var MarkerEditorControls : MapMarkerControls
 @export var Thrust : ThrustSlider
 @export var Steer : SteeringWheelUI
 @export var MissileUI : MissileTab
 @export var LandButton : TextureButton
+@export var ShipDockButton : TextureButton
+@export var RegroupButton : TextureButton
 #@export var DroneUI : DroneTab
 #@export var ButtonCover : TextureRect
 @export var EventHandler : UIEventHandler
@@ -20,17 +22,20 @@ signal FullScreenToggleStarted(t : bool)
 signal FullScreenToggleFinished()
 #signal FleetSeparationInitiated
 
+var CloseTw : Tween
+var OpenTw : Tween
+
 func DoIntroFullScreen(toggle : bool) -> void:
-	$ScreenFrameLong2.visible = true
+	#$ScreenFrameLong2.visible = true
 	$Cables.visible = false
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
-	var tw = create_tween()
-	tw.set_ease(Tween.EASE_OUT)
-	tw.set_trans(Tween.TRANS_BOUNCE)
-	tw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
-	await tw.finished
+	CloseTw = create_tween()
+	CloseTw.set_ease(Tween.EASE_OUT)
+	CloseTw.set_trans(Tween.TRANS_BOUNCE)
+	CloseTw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
+	await CloseTw.finished
 	
 	FullScreenToggleStarted.emit(toggle)
 	
@@ -41,26 +46,26 @@ func DoIntroFullScreen(toggle : bool) -> void:
 	
 	
 	
-	var tw2 = create_tween()
-	tw2.set_ease(Tween.EASE_IN)
-	tw2.set_trans(Tween.TRANS_QUART)
-	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
-	await tw2.finished
-	$ScreenFrameLong2.visible = false
+	OpenTw = create_tween()
+	OpenTw.set_ease(Tween.EASE_IN)
+	OpenTw.set_trans(Tween.TRANS_QUART)
+	OpenTw.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
+	await OpenTw.finished
+	#$ScreenFrameLong2.visible = false
 	FullScreenToggleFinished.emit(toggle)
 	Cam.EnableFullScreenShake()
 
 func ToggleFullScreen(toggle : bool) -> void:
 	#FullScreenToggleStarted.emit()
-	$ScreenFrameLong2.visible = true
+	#$ScreenFrameLong2.visible = true
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
-	var tw = create_tween()
-	tw.set_ease(Tween.EASE_OUT)
-	tw.set_trans(Tween.TRANS_BOUNCE)
-	tw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
-	await tw.finished
+	CloseTw = create_tween()
+	CloseTw.set_ease(Tween.EASE_OUT)
+	CloseTw.set_trans(Tween.TRANS_BOUNCE)
+	CloseTw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
+	await CloseTw.finished
 	
 	FullScreenToggleStarted.emit(toggle)
 	
@@ -71,12 +76,12 @@ func ToggleFullScreen(toggle : bool) -> void:
 	
 	
 	
-	var tw2 = create_tween()
-	tw2.set_ease(Tween.EASE_IN)
-	tw2.set_trans(Tween.TRANS_QUART)
-	tw2.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
-	await tw2.finished
-	$ScreenFrameLong2.visible = false
+	OpenTw = create_tween()
+	OpenTw.set_ease(Tween.EASE_IN)
+	OpenTw.set_trans(Tween.TRANS_QUART)
+	OpenTw.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
+	await OpenTw.finished
+	#$ScreenFrameLong2.visible = false
 	FullScreenToggleFinished.emit(toggle)
 	Cam.EnableFullScreenShake()
 func wait(secs : float) -> Signal:
@@ -86,7 +91,7 @@ func wait(secs : float) -> Signal:
 func _ready() -> void:
 	NormalScreen.visible = false
 	FullScreenFrame.visible = false
-	#EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
+	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
 	#EventHandler.connect("AccelerationForced", Acceleration_Forced)
 	#EventHandler.connect("SteerDirForced", Steer_Forced)
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
@@ -126,8 +131,8 @@ func Missile_Button_Pressed() -> void:
 func Radar_Button_Pressed() -> void:
 	EventHandler.OnRadarButtonPressed()
 
-#func ToggleScreenUI(t : bool) -> void:
-	#_ScreenItems.visible = t
+func ToggleScreenUI(t : bool) -> void:
+	_ScreenItems.visible = t
 
 func Steering_Direction_Changed(NewValue: float) -> void:
 	EventHandler.OnSteeringDirectionChanged(NewValue)
@@ -209,7 +214,7 @@ func Inventory_Pressed() -> void:
 
 func Pause_Pressed() -> void:
 	EventHandler.OnPausePressed()
-
+	
 #func ToggleControllCover(t : bool) -> void:
 	#ButtonCover.visible = t
 

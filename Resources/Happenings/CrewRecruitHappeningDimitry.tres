@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("5_e78rh")
-HappeningName = "Crew Recruit"
+HappeningName = "The call to arms"
 Stages = Array[ExtResource("5_7njed")]([])
-HappeningAppearance = 2
+HappeningAppearance = 5
 Special = true
 CrewRecruit = true
 AllowedAppearances = 1

@@ -53,7 +53,6 @@ HappeningUI = ExtResource("9_5gym6")
 WorldViewQuestionairScene = ExtResource("6_xiqgv")
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
-DoQuestionair = true
 
 [node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]
 script = ExtResource("7_q720d")

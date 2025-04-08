@@ -1,10 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=35 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
-[ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage.tscn" id="2_mkjud"]
+[ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
+[ext_resource type="Resource" uid="uid://du24ilvkea51x" path="res://Resources/MapSpots/CitySpots/CityCenter.tres" id="4_tftes"]
+[ext_resource type="Resource" uid="uid://dyvpncg7tolc7" path="res://Resources/MapSpots/CitySpots/CapitalCityCenter.tres" id="5_6an1p"]
+[ext_resource type="Resource" uid="uid://1vptbvrlos7" path="res://Resources/MapSpots/CitySpots/FinalCity.tres" id="6_tftes"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
-[ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_6rnlc"]
-[ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_7mvy7"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="15_a2ujk"]
@@ -99,10 +100,11 @@ script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
 _ScreenUI = NodePath("CanvasLayer/ScreenUI")
 _Camera = NodePath("SubViewportContainer/ViewPort/ShipCamera")
-Village = ExtResource("2_mkjud")
-City = ExtResource("7_0ker0")
-CapitalCity = ExtResource("9_6rnlc")
-FinalCity = ExtResource("10_7mvy7")
+TownSpotScene = ExtResource("7_0ker0")
+VillageSpotType = ExtResource("3_utnqo")
+CitySpotType = ExtResource("4_tftes")
+CapitalSpotType = ExtResource("5_6an1p")
+FinalCitySpotType = ExtResource("6_tftes")
 MapSize = 100
 MapGenerationDistanceCurve = SubResource("Curve_rghuw")
 EnemyScene = ExtResource("11_323je")

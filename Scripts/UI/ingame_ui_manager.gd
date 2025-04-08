@@ -21,7 +21,7 @@ func _ready() -> void:
 	EventHandler.connect("PausePressed", Pause)
 	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
 	
-	#GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
+	GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
 	EventHandler.connect("DrawLinePressed", _MapMarkerEditor._on_drone_button_pressed)
 	EventHandler.connect("DrawTextPressed", _MapMarkerEditor._OnTextButtonPressed)
 	EventHandler.connect("MarkerEditorYRangeChanged", _MapMarkerEditor._on_y_gas_range_changed)
@@ -70,6 +70,8 @@ func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused
 	PauseContainer.visible = !paused
+	EventHandler.OnScreenUIToggled(paused)
+	
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save()
 	PopUpManager.GetInstance().DoFadeNotif("Save successful")

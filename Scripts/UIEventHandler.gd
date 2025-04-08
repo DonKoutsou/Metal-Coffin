@@ -32,14 +32,14 @@ signal PausePressed()
 signal FleetSeparationPressed()
 #signal SimStepChanged(NewStep : float)
 
-#signal ScreenUIToggled(t : bool)
+signal ScreenUIToggled(t : bool)
 
 #signal AlarmRaised
 
 signal ShipDamaged(DammageAmm : float)
 
-#func OnScreenUIToggled(t : bool):
-	#ScreenUIToggled.emit(t)
+func OnScreenUIToggled(t : bool):
+	ScreenUIToggled.emit(t)
 
 func OnAccelerationEnded(value_changed: float) -> void:
 	AccelerationEnded.emit(value_changed)

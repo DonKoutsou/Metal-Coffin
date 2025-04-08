@@ -34,6 +34,8 @@ func _ready() -> void:
 	global_rotation = 0
 	if (Pos != Vector2.ZERO):
 		position = Pos
+	if (SpotType.VisibleOnStart):
+		OnSpotSeen(false)
 
 func _exit_tree() -> void:
 	if (Event != null):
@@ -95,8 +97,7 @@ func SetSpotData(Type : MapSpotType) -> void:
 		break
 				
 		
-	if (SpotType.VisibleOnStart):
-		OnSpotSeen(false)
+	
 		#OnSpotAnalyzed(false)
 
 	add_to_group(SpotType.GetSpotEnumString())

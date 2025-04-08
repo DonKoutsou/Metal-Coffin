@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://1vptbvrlos7"]
+
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_j1plu"]
+[ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/Dormak.tres" id="2_toe1d"]
+[ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="3_0xhkr"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="4_7vqyx"]
+
+[sub_resource type="Resource" id="Resource_o1avt"]
+script = ExtResource("3_0xhkr")
+PossibleIds = Array[ExtResource("1_j1plu")]([ExtResource("2_toe1d")])
+DataName = ""
+metadata/_custom_type_script = "uid://bqgyl8uqmo3sl"
+
+[resource]
+script = ExtResource("4_7vqyx")
+SpotK = 2
+VisibleOnStart = true
+Data = SubResource("Resource_o1avt")

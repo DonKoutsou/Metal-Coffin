@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://q6pvyblp3f1r"]
+
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_hd55o"]
+[ext_resource type="Resource" uid="uid://eemvne8otjn4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Armak.tres" id="2_thg8v"]
+[ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="3_5cvix"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="4_5ie0d"]
+
+[sub_resource type="Resource" id="Resource_daran"]
+script = ExtResource("3_5cvix")
+PossibleIds = Array[ExtResource("1_hd55o")]([ExtResource("2_thg8v")])
+DataName = ""
+metadata/_custom_type_script = "uid://bqgyl8uqmo3sl"
+
+[resource]
+script = ExtResource("4_5ie0d")
+SpotK = 0
+VisibleOnStart = true
+Data = SubResource("Resource_daran")

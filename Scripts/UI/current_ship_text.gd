@@ -11,9 +11,25 @@ func _ready() -> void:
 func ShipChanged(NewShip : MapShip) -> void:
 	currentShip = NewShip
 
+var d = 0.4
 func _physics_process(delta: float) -> void:
+	d -= delta
+	if d > 0:
+		return
+	d = 0.4
+	
 	if (currentShip == null):
 		return
-	var hull = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-	text = "{0}\nHULL : {1}%".format([currentShip.Cpt.CaptainName.to_upper(), roundi(hull)])
+	var commander
+	if (currentShip.Command != null):
+		commander = currentShip.Command
+	else:
+		commander = currentShip
+		
+	var hull = commander.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / commander.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
+	var Ships = "-FLEET-\n{0}\nHULL:{1}%".format([commander.Cpt.CaptainName.to_upper(), roundi(hull)])
+	for g in commander.GetDroneDock().DockedDrones:
+		var h = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
+		Ships += "\n{0}\nHULL:{1}%".format([g.Cpt.CaptainName.to_upper(), roundi(h)])
+	text = Ships
 #roundi(hull)

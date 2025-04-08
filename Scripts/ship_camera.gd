@@ -133,12 +133,27 @@ func _physics_process(delta: float) -> void:
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 var stattween : Tween
+
 func ShowStation():
 	stattween = create_tween()
 	var stations = get_tree().get_nodes_in_group("CAPITAL")
 	var stationpos
 	for g : MapSpot in stations:
 		if (g.GetSpotName() == "Dormak"):
+			stationpos = g.global_position
+			break
+	stattween.set_trans(Tween.TRANS_EXPO)
+	stattween.tween_property(self, "global_position", stationpos, 6)
+	#var mattw = create_tween()
+	#mattw.set_trans(Tween.TRANS_EXPO)
+	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
+
+func ShowArmak():
+	stattween = create_tween()
+	var stations = get_tree().get_nodes_in_group("CITY_CENTER")
+	var stationpos
+	for g : MapSpot in stations:
+		if (g.GetSpotName() == "Armak"):
 			stationpos = g.global_position
 			break
 	stattween.set_trans(Tween.TRANS_EXPO)

@@ -16,10 +16,15 @@ class_name Map
 @export var _Camera : ShipCamera
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
-@export var Village : PackedScene
-@export var City : PackedScene
-@export var CapitalCity : PackedScene
-@export var FinalCity : PackedScene
+@export var TownSpotScene : PackedScene
+#@export var Village : PackedScene
+@export var VillageSpotType : MapSpotType
+#@export var City : PackedScene
+@export var CitySpotType : MapSpotType
+#@export var CapitalCity : PackedScene
+@export var CapitalSpotType : MapSpotType
+#@export var FinalCity : PackedScene
+@export var FinalCitySpotType : MapSpotType
 @export var MapSize : int
 @export var MapGenerationDistanceCurve : Curve
 @export var EnemyScene : PackedScene
@@ -59,7 +64,7 @@ func _exit_tree() -> void:
 	if (Maplt != null):
 		Maplt.wait_to_finish()
 
-func _InitialPlayerPlacament():
+func _InitialPlayerPlacament(IsPrologue : bool = false):
 	#find first village and make sure its visible
 	var firstvilage = get_tree().get_nodes_in_group("VILLAGE")[0] as MapSpot
 	firstvilage.OnSpotSeen(false)
@@ -71,8 +76,9 @@ func _InitialPlayerPlacament():
 	GetCamera().FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
 	
-	for g in PlShip.Cpt.ProvidingCaptains:
-		PlShip.GetDroneDock().AddRecruit(g, false)
+	if (!IsPrologue):
+		for g in PlShip.Cpt.ProvidingCaptains:
+			PlShip.GetDroneDock().AddRecruit(g, false)
 
 
 
@@ -276,20 +282,19 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	var GeneratedSpots : Array[Town] = []
 	for g in MapSize :
 		var type : PackedScene
-		
-		if (g == MapSize - 10):
-			type = FinalCity
-			#AddingStation = true
-		else : if (CapitalCitySpots.has(g)):
-			type = CapitalCity
-		else :if (VillageSpots.has(g)):
-			type = Village
-			#AddingStation = true
-		else:
-			type = City
-			
+
 		#SET THE TYPE
-		var sc = type.instantiate() as Town
+		var sc = TownSpotScene.instantiate() as Town
+		
+		if (g == max(roundi(MapSize * 0.9), MapSize - 10)):
+			sc.GenerateCity(FinalCitySpotType)
+		else : if (CapitalCitySpots.has(g)):
+			sc.GenerateCity(CapitalSpotType)
+		else :if (VillageSpots.has(g)):
+			sc.GenerateCity(VillageSpotType)
+		else:
+			sc.GenerateCity(CitySpotType)
+		
 		sc.connect("TownSpotAproached", Arrival)
 		#DECIDE ON ITS PLACEMENT
 		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))

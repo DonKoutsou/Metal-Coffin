@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://chjcgb4pp86hr"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_afuai"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_ifktw"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="3_8tlxq"]
+[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="3_ifktw"]
+
+[sub_resource type="Resource" id="Resource_ifktw"]
+script = ExtResource("1_afuai")
+HappeningTexts = Array[String](["You fail to stay calm"])
+Options = Array[ExtResource("2_ifktw")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_8tlxq"]
+script = ExtResource("3_ifktw")
+StringReply = "1"
+OptionName = "Try to stay calm"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_afuai")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 1
+CheckPossetive = false
+CheckDifficulty = 100
+WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([SubResource("Resource_ifktw")])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_afuai"]
+script = ExtResource("1_afuai")
+HappeningTexts = Array[String](["You meet the prince", "Stuff happens"])
+Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_8tlxq")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[resource]
+script = ExtResource("3_8tlxq")
+HappeningName = "The prince"
+Stages = Array[ExtResource("1_afuai")]([SubResource("Resource_afuai")])
+HappeningAppearance = 5
+Special = true
+CrewRecruit = false
+AllowedAppearances = 1

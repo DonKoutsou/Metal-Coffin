@@ -431,8 +431,18 @@ theme = ExtResource("6_gn124")
 action_mode = 0
 text = "- CREDITS -"
 
-[node name="SettingPanel" parent="w/PanelContainer/VBoxContainer" instance=ExtResource("18_1p5b6")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="w/PanelContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="SettingPanel" parent="w/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_1p5b6")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="w/PanelContainer/VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Del
+Save"
+autowrap_mode = 2
 
 [node name="Panel6" type="Panel" parent="w/PanelContainer/VBoxContainer"]
 visible = false
@@ -476,4 +486,5 @@ height = 328.0
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cid0s6uni7fky"]
+[gd_scene load_steps=26 format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="2_0dp8t"]
@@ -20,6 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="18_567dx"]
 [ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_0dp8t"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
+[ext_resource type="Resource" uid="uid://chjcgb4pp86hr" path="res://Resources/Happenings/CardiPrince.tres" id="20_7no5x"]
+[ext_resource type="Resource" uid="uid://cewy7vds2cnh8" path="res://Resources/Happenings/CrewRecruitHappeningDimitry.tres" id="20_trvh7"]
+[ext_resource type="Resource" uid="uid://q6pvyblp3f1r" path="res://Resources/MapSpots/CitySpots/PrologueSpots/PrologueFinalCity.tres" id="21_0dp8t"]
+[ext_resource type="Resource" uid="uid://d1ccujxqp1ci3" path="res://Resources/MapSpots/CitySpots/PrologueSpots/PrologueVillages.tres" id="21_0i6dt"]
 
 [sub_resource type="Curve" id="Curve_0dp8t"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -46,7 +50,7 @@ HappeningUI = ExtResource("5_7no5x")
 WorldViewQuestionairScene = ExtResource("6_8eeky")
 StartingFunds = 400000
 PlayerWallet = ExtResource("7_udtpl")
-IsIntro = true
+IsPrologue = true
 
 [node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]
 script = ExtResource("8_qeah0")
@@ -72,9 +76,16 @@ WorldviewAdjustNotif = ExtResource("18_567dx")
 
 [node name="EventManager" type="Node" parent="."]
 script = ExtResource("19_0dp8t")
+EventsPerSpot = Dictionary[int, Array]({
+0: [],
+1: [ExtResource("20_7no5x")],
+2: [ExtResource("20_trvh7")]
+})
 metadata/_custom_type_script = "uid://s3ha37qvdear"
 
 [node name="Map" parent="." instance=ExtResource("19_3v2l7")]
+VillageSpotType = ExtResource("21_0i6dt")
+FinalCitySpotType = ExtResource("21_0dp8t")
 MapSize = 11
 MapGenerationDistanceCurve = SubResource("Curve_0dp8t")
 SpawningBoundsX = 2000.0

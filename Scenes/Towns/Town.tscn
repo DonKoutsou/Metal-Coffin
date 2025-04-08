@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgf0r7r507qef"]
+[gd_scene load_steps=5 format=3 uid="uid://dgf0r7r507qef"]
 
 [ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_sfmn7"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_l7yg4"]
 [ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_ot8kj"]
 [ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="4_u3ytj"]
-[ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="5_p3cbg"]
-[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="6_wq4l1"]
-[ext_resource type="Resource" uid="uid://du24ilvkea51x" path="res://Resources/MapSpots/CitySpots/CityCenter.tres" id="7_snuvt"]
 
 [node name="Town2" type="Node2D"]
 position = Vector2(608, 338)
@@ -21,5 +18,3 @@ texture = ExtResource("4_u3ytj")
 region_rect = Rect2(251.179, 160.971, 745.969, 227.22)
 
 [node name="CitySpot" type="Node2D" parent="."]
-script = ExtResource("5_p3cbg")
-MapSpotTypes = Array[ExtResource("6_wq4l1")]([ExtResource("7_snuvt")])

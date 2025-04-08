@@ -15,8 +15,7 @@ class_name World
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
 @export_group("Settingsd")
-@export var DoQuestionair : bool = false
-@export var IsIntro : bool = false
+@export var IsPrologue : bool = false
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 
@@ -83,26 +82,27 @@ func _ready() -> void:
 	
 	WRLD_WorldReady.emit()
 	if (!Loading):
-		GetMap()._InitialPlayerPlacament()
-		if (DoQuestionair):
+		GetMap()._InitialPlayerPlacament(IsPrologue)
+		if (!IsPrologue):
 			GetMap().GetScreenUi().ToggleFullScreen(true)
 		else:
 			GetMap().GetScreenUi().ToggleFullScreen(false)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
-		await GetMap().GetScreenUi().FullScreenToggleFinished
-		if (DoQuestionair):
+		
+		if (!IsPrologue):
 			var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
 			Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
-			
 			Questionair.Init()
+			await GetMap().GetScreenUi().FullScreenToggleFinished
 			#await Loadingscr.LoadingDestroyed
 			await Questionair.Ended
 			GetMap().GetScreenUi().ToggleFullScreen(false)
 			await GetMap().GetScreenUi().FullScreenToggleStarted
 			Questionair.queue_free()
-		PlayIntro()
-		
+			PlayIntro()
+		else:
+			PlayPrologue()
 		PlayerWallet.SetFunds( StartingFunds)
 	else:
 		GetMap().GetScreenUi().ToggleFullScreen(false)
@@ -118,6 +118,15 @@ func GetSaveData() -> SaveData:
 
 func LoadSaveData(PlWallet : Wallet) -> void:
 	PlayerWallet.SetFunds(PlWallet.Funds)
+
+func PlayPrologue():
+	var DiagText : Array[String] = ["Operator we are almost at Cardi. Thankfully we didn't meet any empire patrols.", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."]
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), "Seg", ShowArmak, true)
+
+func ShowArmak():
+	var DiagText : Array[String]  = ["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."]
+	Ingame_UIManager.GetInstance().CallbackDiag(DiagText, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
+	GetMap().GetCamera().ShowArmak()
 
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
@@ -141,12 +150,6 @@ func ReturnCamToPlayer():
 		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
 		var text = "Use the [color=#c19200]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#c19200]Thrust Lever[/color] on the right side of the controller"
 		ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust], false)
-
-#func EnableBackUI():
-	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Panel.visible = true
-	#$Ingame_UIManager/VBoxContainer/HBoxContainer/Stat_Panel.visible = true
-	#Ingame_UIManager.GetInstance().ToggleScreenUI(true)
-	#GetMap().GetScreenUi().ToggleScreenUI(true)
 
 func _enter_tree() -> void:
 	var map = GetMap()
@@ -290,8 +293,7 @@ func OnLandingCanceled(Ship : MapShip) -> void:
 	Ship.disconnect("LandingEnded", OnShipLanded)
 	Ship.disconnect("LandingCanceled", OnLandingCanceled)
 
-func OnShipLanded(Ship : MapShip) -> void:
-	
+func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	if (Ship.GetDroneDock().Captives.size() > 0):
 		var Earnings = 0
 		for g in Ship.GetDroneDock().Captives:
@@ -321,10 +323,18 @@ func OnShipLanded(Ship : MapShip) -> void:
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
 	fuel.LandedShip = Ship
 	fuel.TownSpot = spot
-	GetMap().GetScreenUi().ToggleFullScreen(true)
-	await GetMap().GetScreenUi().FullScreenToggleStarted
+	if (!skiptransition):
+		GetMap().GetScreenUi().ToggleFullScreen(true)
+		await GetMap().GetScreenUi().FullScreenToggleStarted
+		
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
+	await GetMap().GetScreenUi().FullScreenToggleFinished
 
+		
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_SHOP)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_SHOP)
+		var text = "When landing on a city you are able to refuel, repair and rearm your fleet. Each city provides cerain bonuses to price and speed of a service. The bonuses can be seen on the left bellow the port's name. Drag on the sliders to buy or sell the shown resource."
+		ActionTracker.GetInstance().ShowTutorial("Town Shop", text, [], true)
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
 func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip, Scene : TownScene):
@@ -343,6 +353,7 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip, Scen
 	GetMap().GetScreenUi().ToggleFullScreen(false)
 	await  GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
+	
 	#UIEventH.OnScreenUIToggled(true)
 	##SimulationManager.GetInstance().TogglePause(false)
 	#UIEventH.OnButtonCoverToggled(false)
@@ -362,17 +373,21 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 		happeningui.PresentHappening(Spot.Event)
 		#UIEventH.OnScreenUIToggled(false)
 		#UIEventH.OnButtonCoverToggled(true)
-		happeningui.connect("HappeningFinished", HappeningFinished)
+		happeningui.connect("HappeningFinished", HappeningFinished.bind(ControlledShip))
 		PlayedEvent = true
 	Spot.OnSpotVisited()
 	return PlayedEvent
 	
-func HappeningFinished() -> void:
+func HappeningFinished(Recruited : bool, Ship : MapShip) -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(false)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
-	#UIEventH.OnScreenUIToggled(true)
-	#UIEventH.OnButtonCoverToggled(false)
+	await GetMap().GetScreenUi().FullScreenToggleFinished
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
+		var text = "Managing your fleet is a crucial part to a sucsesfull campaign. Ships that are composed together into a fleet share fuel reserves so fitting a fleet with a ship with extra fuel reserves than the rest might come in handy. To split the currently selected speed the Ship Dock will need to be accessed from the controller, there you will be able to split the fleet and trade fuel reserves between them. If at any time you want to merge two fleets together press the Regroup key on the fleet actions and select the fleet to merge with. To switch the currently selected fleet press the Switch Ship button on the fleet actions section of the controller."
+		ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
+	#OnShipLanded(Ship, true)
 
 #Make sure to remove all items that their cards have been used
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo : Dictionary):

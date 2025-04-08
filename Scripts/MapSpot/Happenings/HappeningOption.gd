@@ -19,13 +19,13 @@ var CheckResault = true
 func OptionResault(EventOrigin : MapSpot) -> String:
 	return ""
 	
-func OptionOutCome(_Instigator : MapShip)-> void:
+func OptionOutCome(_Instigator : MapShip)-> bool:
 	if (CheckResault):
 		if (WorldviewEffect != WorldView.WorldViews.NONE):
 			WorldView.GetInstance().AdjustStat(WorldviewEffect, WorldviewEffectAmm, true)
+	return CheckResault
 		
 func Check() -> bool:
-	
 	if (WorldviewCheck != WorldView.WorldViews.NONE):
 		CheckResault = WorldView.GetInstance().SkillCheck(WorldviewCheck, CheckPossetive, CheckDifficulty)
 	

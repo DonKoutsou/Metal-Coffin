@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node2D
 class_name Town
 
@@ -11,17 +11,17 @@ signal TownSpotAproached(spot : MapSpot)
 signal TownSpotLanded(spot : MapSpot)
 
 func _ready() -> void:
-	if (Engine.is_editor_hint()):
-		return
+	#if (Engine.is_editor_hint()):
+		#return
 	if (!LoadingData):
 		position = Pos
 		rotation = randf_range(0, 360)
-		GenerateCity()
+		#GenerateCity()
 	
-func GenerateCity() -> void:
-	var spt = $CitySpot as CitySpot
-	var sc = SpotScene.instantiate() as MapSpot 
-	var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
+func GenerateCity(Type : MapSpotType) -> void:
+	var spt = $CitySpot
+	var sc = SpotScene.instantiate() as MapSpot
+	#var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
 	Spot = sc
 	sc.connect("SpotAproached", _TownSpotApreached)
 	sc.connect("SpotLanded", _TownSpotLanded)
@@ -29,7 +29,7 @@ func GenerateCity() -> void:
 	sc.position = pos
 	spt.replace_by(sc)
 	
-	sc.SetSpotData(spottype)
+	sc.SetSpotData(Type)
 	
 	spt.free()
 

@@ -17,11 +17,13 @@ var Hapen : Happening
 var CurrentBranch : Array[HappeningStage]
 var CurrentStage : int = 0
 
-signal HappeningFinished
+signal HappeningFinished(Recruited : bool)
 
 signal ResponseReceived
 
 signal NextDiag
+
+var RecruitedShips : bool = false
 
 var HappeningInstigator : MapShip
 
@@ -84,6 +86,11 @@ func NextStage() -> void:
 				else:
 					CurrentCheck = Checks[0]
 				but.text += "\nWorldView check : {0}".format([CurrentCheck])
+				
+				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)):
+					ActionTracker.OnActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)
+					var text = "Certain dialogue options require a stat check to happen. This check will determine if the option will have the outcome you want."
+					ActionTracker.GetInstance().ShowTutorial("Worldview Checks", text, [but], true)
 			#if (Stage.Options[f] is Drone_Happening_Option):
 				##var hasspave = HappeningInstigator.GetDroneDock().HasSpace()
 				##but.disabled = !hasspave
@@ -98,7 +105,7 @@ func NextStage() -> void:
 		
 		var Check = Option.Check()
 
-		HappeningText.text = Option.OptionResault(EventSpot)
+		
 		
 		if (Option.WorldviewCheck != WorldView.WorldViews.NONE):
 			var CheckResault = TextFloater.instantiate() as Floater
@@ -110,7 +117,9 @@ func NextStage() -> void:
 				CheckResault.text = "WorldView Check Failed"
 			add_child(CheckResault)
 		
-		Option.OptionOutCome(HappeningInstigator)
+		var res = Option.OptionOutCome(HappeningInstigator)
+		if (Option is Drone_Happening_Option and res == true):
+			RecruitedShips = true
 		#
 		#$Timer.start()
 		#set_physics_process(true)
@@ -118,14 +127,16 @@ func NextStage() -> void:
 		#OptionParent.visible = false
 		#
 		#await $Timer.timeout
-		
-		NextDiagButton.visible = true
-		OptionParent.visible = false
-		
-		await NextDiag
-		
-		NextDiagButton.visible = false
-		OptionParent.visible = true
+		if (Check):
+			HappeningText.text = Option.OptionResault(EventSpot)
+			
+			NextDiagButton.visible = true
+			OptionParent.visible = false
+			
+			await NextDiag
+			
+			NextDiagButton.visible = false
+			OptionParent.visible = true
 		
 		#ProgBar.visible = false
 		#OptionParent.visible = true
@@ -133,9 +144,8 @@ func NextStage() -> void:
 		
 		
 		if (Stage.Options[SelectedOption].FinishDiag):
-			HappeningFinished.emit()
+			HappeningFinished.emit(RecruitedShips)
 			$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
-		
 		else:
 			var Possiblebranch : Array[HappeningStage] = []
 			if (!Check):
@@ -149,7 +159,7 @@ func NextStage() -> void:
 			
 			
 	if (CurrentBranch.size() == CurrentStage):
-		HappeningFinished.emit()
+		HappeningFinished.emit(RecruitedShips)
 		$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 	else:
 		call_deferred("NextStage")

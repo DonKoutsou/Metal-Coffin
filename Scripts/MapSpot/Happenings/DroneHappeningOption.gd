@@ -13,7 +13,8 @@ func OptionResault(EventOrigin : MapSpot) -> String:
 	else:
 		return "The captain has refused to join your fleet"
 	
-func OptionOutCome(Instigator : MapShip) -> void:
+func OptionOutCome(Instigator : MapShip) -> bool:
 	super(Instigator)
 	if (CheckResault):
 		Instigator.GetDroneDock().AddRecruit(Cpt)
+	return CheckResault

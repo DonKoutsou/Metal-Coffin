@@ -295,7 +295,7 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="Control" node_paths=PackedStringArray("MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "Cam", "NormalScreen", "FullScreenFrame")]
+[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "Cam", "NormalScreen", "FullScreenFrame")]
 process_mode = 1
 z_as_relative = false
 layout_mode = 3
@@ -307,11 +307,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_7t5fk")
 script = ExtResource("2_spr1r")
+_ScreenItems = NodePath("NormalScreen/ScreenUi")
 MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")
 Thrust = NodePath("NormalScreen/ThrustSlider")
 Steer = NodePath("NormalScreen/ScreenUi/SteeringWheel")
 MissileUI = NodePath("NormalScreen/ScreenUi/Missile Tab")
 LandButton = NodePath("NormalScreen/LandButton")
+ShipDockButton = NodePath("NormalScreen/DroneButton")
+RegroupButton = NodePath("NormalScreen/ControlledShipReturn")
 EventHandler = ExtResource("3_i441f")
 Cam = NodePath("ScreenCam")
 NormalScreen = NodePath("NormalScreen")
@@ -418,6 +421,14 @@ offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Speaker" parent="NormalScreen/ScreenUi" instance=ExtResource("33_wetmy")]
+offset_left = 17.0
+offset_top = 46.0
+offset_right = 57.0
+offset_bottom = 86.0
+frequency = 15.0
+max_rotation = 0.02
 
 [node name="SteeringWheel" parent="NormalScreen/ScreenUi" instance=ExtResource("11_s7gev")]
 layout_mode = 1
@@ -673,14 +684,6 @@ offset_bottom = 92.0
 grow_horizontal = 0
 grow_vertical = 1
 
-[node name="Speaker" parent="NormalScreen" instance=ExtResource("33_wetmy")]
-offset_left = 19.0
-offset_top = 46.0
-offset_right = 59.0
-offset_bottom = 86.0
-frequency = 15.0
-max_rotation = 0.02
-
 [node name="AnimatedSprite2D" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
 position = Vector2(936, -22)
 scale = Vector2(0.898438, 0.898438)
@@ -824,7 +827,7 @@ expand_mode = 1
 position = Vector2(600, 324)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
+Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 
 [node name="LightPivot1" type="Node2D" parent="ScreenCam" node_paths=PackedStringArray("SoundPlayer")]
 position = Vector2(0, -1450)
