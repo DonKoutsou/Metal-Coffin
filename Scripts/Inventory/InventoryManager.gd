@@ -350,14 +350,14 @@ func ToggleInventory() -> void:
 	$AudioStreamPlayer.play()
 	ToggleTween = create_tween()
 	if (visible):
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.INVENTORY_OPEN)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.INVENTORY_OPEN)
-			InventoryTutorial()
-		
 		size = Vector2(size.x, 0)
 		ToggleTween.set_ease(Tween.EASE_OUT)
 		ToggleTween.set_trans(Tween.TRANS_QUAD)
 		ToggleTween.tween_property(self, "size", Vector2(size.x, get_viewport_rect().size.y), 0.3)
+		await ToggleTween.finished
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.INVENTORY_OPEN)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.INVENTORY_OPEN)
+			InventoryTutorial()
 	else:
 		visible = !visible
 		ToggleTween.set_ease(Tween.EASE_OUT)

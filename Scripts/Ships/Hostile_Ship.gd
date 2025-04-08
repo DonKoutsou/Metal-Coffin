@@ -386,6 +386,10 @@ var GarrissonVisualContacts : Array[MapShip]
 var VisualContactCountdown = 10
 
 func GarissonVisualContact(Ship : MapShip) -> void:
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.GARISSION_ALARM)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.GARISSION_ALARM)
+		ActionTracker.GetInstance().ShowTutorial("Surprise Atack", "When entering enemy cities you are given a small time frame where you can surprise the enemy, that time is signified by the red bar above the enemies ship marker. If the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected", [], true)
+		
 	if (GarrissonVisualContacts.size() == 0):
 		#if (Patrol):
 			#VisualContactCountdown = 5

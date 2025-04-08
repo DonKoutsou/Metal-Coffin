@@ -3,6 +3,7 @@ extends CanvasLayer
 class_name ActionTracker
 
 @export var TutorialScene : PackedScene
+@export var OutTutorialScene : PackedScene
 
 static var CompletedActions : Array[Action]
 
@@ -25,7 +26,12 @@ static func OnActionCompleted(Act : Action) -> void:
 func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Control], InScreen : bool) -> void:
 	get_tree().paused = true
 
-	var Tut = TutorialScene.instantiate() as Tutorial
+	var Tut : Tutorial
+	
+	if (InScreen):
+		Tut = TutorialScene.instantiate() as Tutorial
+	else:
+		Tut = OutTutorialScene.instantiate() as Tutorial
 	
 	Tut.SetData(TurotialTitle, TutorialText, ElementsToFocusOn)
 	
@@ -87,5 +93,7 @@ enum Action{
 	MISSILE_LAUNCH,
 	HAPPENING,
 	RECRUIT,
-	WORLDVIEW_CHECK
+	WORLDVIEW_CHECK,
+	GARISSION_ALARM,
+	CONVOY,
 }

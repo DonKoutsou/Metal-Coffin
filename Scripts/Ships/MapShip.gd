@@ -370,6 +370,10 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
 		Parent.OnShipSeen(self)
+		if (Parent.Convoy and !ActionTracker.IsActionCompleted(ActionTracker.Action.CONVOY)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
+			ActionTracker.GetInstance().ShowTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
+		
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
 			Parent.OnShipSeen(self)

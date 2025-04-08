@@ -16,6 +16,7 @@ var Target2 : Control
 var Line1Target : Vector2
 var Line2Target : Vector2
 
+var MyOriginalSize : Vector2
 var OriginalSize : Vector2
 
 signal Completed
@@ -35,6 +36,7 @@ func _ready() -> void:
 func DoFadeInAnim() -> void:
 	TextLabel.visible_ratio = 0
 	Pan.size.y = 0
+	#MyOriginalSize = size
 	OriginalSize = Pan.size
 	
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = false
@@ -42,6 +44,9 @@ func DoFadeInAnim() -> void:
 	
 	Pan.size = Vector2.ZERO
 	Pan.position = size/2 - Pan.size/2
+	
+	#size = Vector2.ZERO
+	#position = get_viewport_rect().size / 2
 	
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_IN)
@@ -68,11 +73,15 @@ func DoFadeInAnim() -> void:
 func UpdateSize(NewSize : Vector2) -> void:
 	Pan.size = NewSize
 	Pan.position = size/2 - Pan.size/2
+	
+	#size = lerp(Vector2.ZERO, OriginalSize, NewSize.x / OriginalSize.x)
+	#position = get_viewport_rect().size / 2 - size / 2
+	
 	if (Target != null):
-		Line1Target = lerp(Line.global_position, Target.global_position, NewSize.x / OriginalSize.x)
+		Line1Target = lerp(Line.global_position, Target.global_position + Vector2( Target.size.x / 2, 0), NewSize.x / OriginalSize.x)
 		Line.set_point_position(1, Line.to_local(Line1Target))
 	if (Target2 != null):
-		Line2Target = lerp(Line2.global_position, Target2.global_position, NewSize.x / OriginalSize.x)
+		Line2Target = lerp(Line2.global_position, Target2.global_position + Vector2( Target2.size.x / 2, 0), NewSize.x / OriginalSize.x)
 		Line2.set_point_position(1, Line2.to_local(Line2Target))
 
 func _physics_process(delta: float) -> void:

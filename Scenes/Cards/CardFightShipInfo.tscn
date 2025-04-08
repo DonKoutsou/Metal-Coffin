@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_67igm"]
 [ext_resource type="Script" uid="uid://c3h40cgun3it3" path="res://Scripts/CardFight/card_fight_ship_info.gd" id="1_dmg4y"]
 [ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/Spaceship/Tanker2.png" id="2_yr62a"]
-[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Assets/Cards/Card.tscn" id="3_yr62a"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_yr62a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmg4y"]
 content_margin_left = 10.0

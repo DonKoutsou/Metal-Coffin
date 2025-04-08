@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
-[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Assets/Cards/Card.tscn" id="2_5q24q"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_ial63"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_3dpfm"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_5p8hw"]

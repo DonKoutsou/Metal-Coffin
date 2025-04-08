@@ -104,6 +104,7 @@ func AddCaptive(Captive : HostileShip) -> void:
 		#Captive.Evaporate()
 		#return
 		
+	#TODO new signal for captives
 	Captive.connect("OnShipDestroyed", DroneDisharged)
 	
 	call_deferred("DoCaptiveThing", Captive)

@@ -383,7 +383,7 @@ func HappeningFinished(Recruited : bool, Ship : MapShip) -> void:
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
 	await GetMap().GetScreenUi().FullScreenToggleFinished
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
+	if (Recruited and !ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
 		var text = "Managing your fleet is a crucial part to a sucsesfull campaign. Ships that are composed together into a fleet share fuel reserves so fitting a fleet with a ship with extra fuel reserves than the rest might come in handy. To split the currently selected speed the Ship Dock will need to be accessed from the controller, there you will be able to split the fleet and trade fuel reserves between them. If at any time you want to merge two fleets together press the Regroup key on the fleet actions and select the fleet to merge with. To switch the currently selected fleet press the Switch Ship button on the fleet actions section of the controller."
 		ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
