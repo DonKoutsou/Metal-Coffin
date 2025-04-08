@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4yumrb4c0xyd"]
 
-[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
-[ext_resource type="Texture2D" uid="uid://cln0pmvmp4m00" path="res://Assets/Cards/barrage.png" id="2_58ae4"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
+[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_gvfcw"]
+[ext_resource type="Texture2D" uid="uid://cln0pmvmp4m00" path="res://Assets/Cards/barrage.png" id="2_gvfcw"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_6bk54"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
 content_margin_left = 4.0
@@ -106,7 +106,7 @@ offsets = PackedFloat32Array(0, 0.102293, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
-custom_minimum_size = Vector2(200, 160)
+custom_minimum_size = Vector2(200, 240)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -114,15 +114,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -80.0
+offset_top = -110.0
 offset_right = 100.0
-offset_bottom = 80.0
+offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("1_vr3r8")
+script = ExtResource("1_gvfcw")
 CardName = NodePath("VBoxContainer/HBoxContainer/Label")
 CardDesc = NodePath("VBoxContainer/CardDesc")
 CardCost = NodePath("VBoxContainer/HBoxContainer/CardCost")
@@ -188,11 +188,10 @@ horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="CardText" type="TextureRect" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-texture = ExtResource("2_58ae4")
+texture = ExtResource("2_gvfcw")
 expand_mode = 1
 stretch_mode = 6
 
@@ -214,7 +213,7 @@ visible_characters_behavior = 1
 visible = false
 layout_mode = 2
 mouse_filter = 2
-theme = ExtResource("2_n60qq")
+theme = ExtResource("3_6bk54")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

@@ -386,25 +386,37 @@ size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Play" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Prologue" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
 action_mode = 0
+text = "- Prologue -"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="w/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Play2" type="Button" parent="w/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("6_gn124")
+action_mode = 0
 text = "- NEW GAME -"
+
+[node name="Load" type="Button" parent="w/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("6_gn124")
+action_mode = 0
+text = "- LOAD -"
 
 [node name="Panel4" type="Panel" parent="w/PanelContainer/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
-
-[node name="Load" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("6_gn124")
-action_mode = 0
-text = "- LOAD -"
 
 [node name="Panel5" type="Panel" parent="w/PanelContainer/VBoxContainer"]
 visible = false
@@ -460,7 +472,8 @@ texture = ExtResource("15_7x35f")
 texture_scale = 7.21
 height = 328.0
 
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Prologue" to="." method="_on_prologue_pressed"]
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

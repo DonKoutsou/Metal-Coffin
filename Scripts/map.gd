@@ -16,8 +16,8 @@ class_name Map
 @export var _Camera : ShipCamera
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
-@export var Villages : Array[PackedScene]
-@export var Cities : Array[PackedScene]
+@export var Village : PackedScene
+@export var City : PackedScene
 @export var CapitalCity : PackedScene
 @export var FinalCity : PackedScene
 @export var MapSize : int
@@ -283,10 +283,10 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		else : if (CapitalCitySpots.has(g)):
 			type = CapitalCity
 		else :if (VillageSpots.has(g)):
-			type = Villages.pick_random()
+			type = Village
 			#AddingStation = true
 		else:
-			type = Cities.pick_random()
+			type = City
 			
 		#SET THE TYPE
 		var sc = type.instantiate() as Town
@@ -407,6 +407,7 @@ var EnemySpawnTh : Thread
 
 func SpawnTownEnemies() -> void:
 	EnSpawner.Init()
+	TempEnemyNames.clear()
 	TempEnemyNames.append_array(EnemyShipNames)
 	EnemySpawnTh = Thread.new()
 	EnemySpawnTh.start(SpawnTownEnemiesThreaded.bind(SpotList))
@@ -414,7 +415,7 @@ func SpawnTownEnemies() -> void:
 	
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
 	EnSpawner.Init()
-	TempEnemyNames.append_array(EnemyShipNames)
+	#TempEnemyNames.append_array(EnemyShipNames)
 	EnemySpawnTh = Thread.new()
 	EnemySpawnTh.start(RespawnEnemiesThreaded.bind(EnemyData))
 

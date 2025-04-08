@@ -20,7 +20,11 @@
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="18_567dx"]
 [ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_0dp8t"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
-[ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/InScreenUI/tutorial_manager.tscn" id="20_4pqph"]
+
+[sub_resource type="Curve" id="Curve_0dp8t"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 3.3398, 0, 0]
+point_count = 1
 
 [node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
@@ -42,6 +46,7 @@ HappeningUI = ExtResource("5_7no5x")
 WorldViewQuestionairScene = ExtResource("6_8eeky")
 StartingFunds = 400000
 PlayerWallet = ExtResource("7_udtpl")
+IsIntro = true
 
 [node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]
 script = ExtResource("8_qeah0")
@@ -71,6 +76,5 @@ metadata/_custom_type_script = "uid://s3ha37qvdear"
 
 [node name="Map" parent="." instance=ExtResource("19_3v2l7")]
 MapSize = 11
+MapGenerationDistanceCurve = SubResource("Curve_0dp8t")
 SpawningBoundsX = 2000.0
-
-[node name="TutorialManager" parent="." instance=ExtResource("20_4pqph")]

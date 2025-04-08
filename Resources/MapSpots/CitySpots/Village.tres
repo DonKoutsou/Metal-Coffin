@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=23 format=3 uid="uid://df37gonu46vbl"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=21 format=3 uid="uid://df37gonu46vbl"]
 
-[ext_resource type="Script" uid="uid://b1yjldcssni32" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="1_jl7m7"]
 [ext_resource type="Resource" uid="uid://eemvne8otjn4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Armak.tres" id="3_b6ce5"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_i4484"]
 [ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_snnyn"]
@@ -20,7 +19,6 @@
 [ext_resource type="Resource" uid="uid://1ha1dp4lfskf" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Lament.tres" id="16_hubos"]
 [ext_resource type="Resource" uid="uid://cijjnpnnmoigc" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Regan.tres" id="17_a77xt"]
 [ext_resource type="Resource" uid="uid://doq7bspt0uqb4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Moldi.tres" id="18_tsgiu"]
-[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="20_qio4e"]
 
 [sub_resource type="Resource" id="Resource_3mffu"]
 script = ExtResource("4_ha07c")
@@ -30,8 +28,5 @@ DataName = ""
 [resource]
 script = ExtResource("10_ex7ij")
 SpotK = 1
-Description = "blah blah"
 VisibleOnStart = false
-DropAmmount = 1
-CustomData = Array[ExtResource("1_jl7m7")]([SubResource("Resource_3mffu")])
-PossibleHappenings = Array[ExtResource("20_qio4e")]([])
+Data = SubResource("Resource_3mffu")

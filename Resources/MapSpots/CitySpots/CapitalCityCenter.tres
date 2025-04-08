@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=22 format=3 uid="uid://dyvpncg7tolc7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=20 format=3 uid="uid://dyvpncg7tolc7"]
 
-[ext_resource type="Script" uid="uid://b1yjldcssni32" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="1_qkgba"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_khihf"]
 [ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Alivia.tres" id="3_u02hr"]
 [ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Curd.tres" id="4_mjh1h"]
@@ -19,7 +18,6 @@
 [ext_resource type="Resource" uid="uid://dclt8xw084fal" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Elp.tres" id="14_m0i82"]
 [ext_resource type="Resource" uid="uid://cixdtluk2fh7m" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Loksia.tres" id="16_gt6sk"]
 [ext_resource type="Resource" uid="uid://cfnebyfygsrw6" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Radi.tres" id="17_4mqq2"]
-[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="19_mautw"]
 
 [sub_resource type="Resource" id="Resource_k4o2w"]
 script = ExtResource("4_xevlw")
@@ -29,8 +27,5 @@ DataName = ""
 [resource]
 script = ExtResource("10_jgsae")
 SpotK = 2
-Description = "blah blah"
 VisibleOnStart = true
-DropAmmount = 1
-CustomData = Array[ExtResource("1_qkgba")]([SubResource("Resource_k4o2w")])
-PossibleHappenings = Array[ExtResource("19_mautw")]([])
+Data = SubResource("Resource_k4o2w")

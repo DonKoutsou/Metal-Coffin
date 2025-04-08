@@ -79,32 +79,27 @@ func GetSaveData() -> Resource:
 	datas.Evnt = Event
 	return datas
 
-func SetSpotData(Data : MapSpotType) -> void:
-	SpotType = Data
-	if (Data.CustomData.size() > 0):
-		for g in Data.CustomData:
-			if (g is MapSpotCustomData_CompleteInfo):
-				var IDs = g as MapSpotCustomData_CompleteInfo
-				if (IDs.PossibleIds.size() == 0):
-					continue
+func SetSpotData(Type : MapSpotType) -> void:
+	SpotType = Type
+	var Data = Type.Data as MapSpotCustomData_CompleteInfo
+	
+	for z in Data.PossibleIds:
+		if (z.PickedBy != null):
+			continue
+		SpotInfo = z as MapSpotCompleteInfo
 
-				for z in IDs.PossibleIds:
-					if (z.PickedBy != null):
-						continue
-					SpotInfo = z as MapSpotCompleteInfo
-
-					if (SpotInfo.EnemyCity):
-						add_to_group("EnemyDestinations")
-					#IDs.PossibleIds.erase(ID)
-					SpotInfo.PickedBy = self
-					break
+		if (SpotInfo.EnemyCity):
+			add_to_group("EnemyDestinations")
+		#IDs.PossibleIds.erase(ID)
+		SpotInfo.PickedBy = self
+		break
 				
 		
-	if (Data.VisibleOnStart):
+	if (SpotType.VisibleOnStart):
 		OnSpotSeen(false)
 		#OnSpotAnalyzed(false)
 
-	add_to_group(Data.GetSpotEnumString(Data.SpotK))
+	add_to_group(SpotType.GetSpotEnumString())
 func GetSpotName() -> String:
 	return SpotInfo.SpotName
 func GetPossibleDrops() -> Array:

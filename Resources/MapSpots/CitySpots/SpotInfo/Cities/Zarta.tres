@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://dlbywka0hm43a"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dlbywka0hm43a"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_kr6y8"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_nm0bp"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_qfo0o"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_qfo0o"]
 
 [resource]
 script = ExtResource("1_kr6y8")
 SpotName = "Zarta"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("2_qfo0o")]([])
+PossibleDrops = Array[ExtResource("2_qfo0o")]([ExtResource("3_qfo0o")])
 Merchendise = Array[ExtResource("1_nm0bp")]([])

@@ -16,6 +16,8 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 			$AnimationPlayer.play("SpotFound")
 			PlaySound()
 	SpotNameLabel.text = Spot.SpotInfo.SpotName
+	if (Spot.SpotInfo.PossibleDrops.size() == 0):
+		print(Spot.GetSpotName() + " has no drops")
 	for g in Spot.SpotInfo.PossibleDrops:
 		var text = TextureRect.new()
 		text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

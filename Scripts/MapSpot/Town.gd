@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 class_name Town
 
@@ -10,6 +11,8 @@ signal TownSpotAproached(spot : MapSpot)
 signal TownSpotLanded(spot : MapSpot)
 
 func _ready() -> void:
+	if (Engine.is_editor_hint()):
+		return
 	if (!LoadingData):
 		position = Pos
 		rotation = randf_range(0, 360)
@@ -88,3 +91,16 @@ func _TownSpotApreached(spot : MapSpot):
 	TownSpotAproached.emit(spot)
 func _TownSpotLanded(spot : MapSpot):
 	TownSpotLanded.emit(spot)
+
+#func _physics_process(delta: float) -> void:
+	#if (!Engine.is_editor_hint()):
+		#return
+	#var Data =  $CitySpot.MapSpotTypes[0].Data as MapSpotCustomData_CompleteInfo
+	#for g : MapSpotCompleteInfo in Data.PossibleIds:
+		#if (g.PossibleDrops.size() == 0):
+			#g.PossibleDrops.append(GetRandomDrop())
+			#print("Added drop")
+		#
+#func GetRandomDrop() -> Item:
+	#var Itms = [load("res://Resources/Items/Radioactive.tres"), load("res://Resources/Items/Materials.tres"), load("res://Resources/Items/Supply.tres")]
+	#return Itms.pick_random()

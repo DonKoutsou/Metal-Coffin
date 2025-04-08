@@ -1,13 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=34 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
-[ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage4.tscn" id="2_mkjud"]
-[ext_resource type="PackedScene" uid="uid://yupxf3b2xhjq" path="res://Scenes/Towns/Village1.tscn" id="3_syapm"]
-[ext_resource type="PackedScene" uid="uid://cw0fmxei1f6xx" path="res://Scenes/Towns/Village2.tscn" id="4_jrhc7"]
-[ext_resource type="PackedScene" uid="uid://dcxd3udf7434a" path="res://Scenes/Towns/Village3.tscn" id="5_csr2j"]
-[ext_resource type="PackedScene" uid="uid://dd1rqlkx1y832" path="res://Scenes/Towns/Town3.tscn" id="6_57tvq"]
-[ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town1.tscn" id="7_0ker0"]
-[ext_resource type="PackedScene" uid="uid://c7q06y84ke4b3" path="res://Scenes/Towns/Town7.tscn" id="8_ijcj1"]
+[ext_resource type="PackedScene" uid="uid://5gxh2jgyiq6f" path="res://Scenes/Towns/Vilage.tscn" id="2_mkjud"]
+[ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
 [ext_resource type="PackedScene" uid="uid://cohc2ixfcnsjq" path="res://Scenes/Towns/CapitalCity.tscn" id="9_6rnlc"]
 [ext_resource type="PackedScene" uid="uid://bk5qdfealbiie" path="res://Scenes/Towns/FinalCity.tscn" id="10_7mvy7"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
@@ -30,8 +25,8 @@
 [ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
-_limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 10), 0.0, 3.3398, 0, 0]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, 3.3398, 0, 0]
 point_count = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28wu2"]
@@ -104,8 +99,8 @@ script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
 _ScreenUI = NodePath("CanvasLayer/ScreenUI")
 _Camera = NodePath("SubViewportContainer/ViewPort/ShipCamera")
-Villages = Array[PackedScene]([ExtResource("2_mkjud"), ExtResource("3_syapm"), ExtResource("4_jrhc7"), ExtResource("5_csr2j"), ExtResource("6_57tvq")])
-Cities = Array[PackedScene]([ExtResource("7_0ker0"), ExtResource("8_ijcj1")])
+Village = ExtResource("2_mkjud")
+City = ExtResource("7_0ker0")
 CapitalCity = ExtResource("9_6rnlc")
 FinalCity = ExtResource("10_7mvy7")
 MapSize = 100

@@ -10,6 +10,7 @@ static var Instance : ActionTracker
 
 func _ready() -> void:
 	Instance = self
+	Load()
 
 static func GetInstance() -> ActionTracker:
 	return Instance
@@ -19,6 +20,7 @@ static func IsActionCompleted(Act : Action) -> bool:
 
 static func OnActionCompleted(Act : Action) -> void:
 	CompletedActions.append(Act)
+	Save()
 
 func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Control], InScreen : bool) -> void:
 	get_tree().paused = true
@@ -40,6 +42,24 @@ func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocus
 	
 	get_tree().paused = false
 
+static func Save() -> void:
+	var sav = TutorialSaveData.new()
+	sav.CompletedActions = CompletedActions.duplicate()
+	ResourceSaver.save(sav, "user://TutorialData.tres")
+	print("Saved tutorial data")
+
+func Load() -> void:
+	if (!FileAccess.file_exists("user://TutorialData.tres")):
+		return
+	
+	var sav = load("user://TutorialData.tres") as TutorialSaveData
+	
+	if (sav == null):
+		return
+	
+	print("Loaded found tutorial data")
+	
+	CompletedActions = sav.CompletedActions
 
 enum Action{
 	INVENTORY_OPEN,

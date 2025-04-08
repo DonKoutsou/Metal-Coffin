@@ -12,6 +12,9 @@ static func GetInstance() -> SaveLoadManager:
 # Called when the node enters the scene tree for the first time.
 func Save() -> void:
 	var world = World.GetInstance()
+	if (world.IsIntro):
+		PopUpManager.GetInstance().DoPopUp("Can't save progress in prologue.")
+		return
 	var Mapz = world.GetMap() as Map
 	var Inv = InventoryManager.GetInstance()
 	var Controller = world.Controller

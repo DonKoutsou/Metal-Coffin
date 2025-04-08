@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bk5qdfealbiie"]
+[gd_scene load_steps=12 format=3 uid="uid://bk5qdfealbiie"]
 
 [ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_ove43"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_5m8np"]
@@ -6,25 +6,21 @@
 [ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_ao8uw"]
 [ext_resource type="Script" uid="uid://nfcj45lgyccm" path="res://Scripts/MapSpot/CitySpot.gd" id="4_2dmtt"]
 [ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="5_q0xbj"]
-[ext_resource type="Script" uid="uid://b1yjldcssni32" path="res://Scripts/MapSpot/MapSpotCustomData.gd" id="6_3skxr"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="7_en220"]
 [ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/Dormak.tres" id="8_16bcg"]
 [ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="9_w7njc"]
-[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="10_qk3xb"]
 
-[sub_resource type="Resource" id="Resource_pf7mu"]
+[sub_resource type="Resource" id="Resource_o1avt"]
 script = ExtResource("9_w7njc")
 PossibleIds = Array[ExtResource("7_en220")]([ExtResource("8_16bcg")])
 DataName = ""
+metadata/_custom_type_script = "uid://bqgyl8uqmo3sl"
 
 [sub_resource type="Resource" id="Resource_um16y"]
 script = ExtResource("5_q0xbj")
 SpotK = 2
-Description = "blah blah"
 VisibleOnStart = true
-DropAmmount = 1
-CustomData = Array[ExtResource("6_3skxr")]([SubResource("Resource_pf7mu")])
-PossibleHappenings = Array[ExtResource("10_qk3xb")]([])
+Data = SubResource("Resource_o1avt")
 
 [node name="Town" type="Node2D"]
 position = Vector2(608, 338)

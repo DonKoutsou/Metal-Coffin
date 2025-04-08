@@ -6,9 +6,11 @@ class_name StartingScreen
 @export var StartingMenuScene : PackedScene
 @export var StudioAnim : PackedScene
 @export var GameScene : PackedScene
+@export var IntroGameScene : PackedScene
 
 var StMenu : StartingMenu
 var Wor : World
+
 
 const APPID = "3551150"
 # Called when the node enters the scene tree for the first time.
@@ -44,8 +46,18 @@ func SpawnMenu() -> void:
 	StMenu = StartingMenuScene.instantiate() as StartingMenu
 	add_child(StMenu)
 	StMenu.connect("GameStart", StartGame)
+	StMenu.connect("PrologueStart", StartPrologue)
 	UISoundMan.GetInstance().Refresh()
-	
+
+func StartPrologue() -> void:
+	Wor = IntroGameScene.instantiate() as World
+	add_child(Wor)
+	await Wor.WorldSpawnTransitionFinished
+	StMenu.queue_free()
+	#$ColorRect.visible = false
+	#$PanelContainer.visible = false
+	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
+
 func StartGame(Load : bool) -> void:
 	Wor = GameScene.instantiate() as World
 	#wor.Load
@@ -56,7 +68,6 @@ func StartGame(Load : bool) -> void:
 			window.dialog_text = "No Save File Found"
 			window.popup_centered()
 			return
-	
 	
 	add_child(Wor)
 	await Wor.WorldSpawnTransitionFinished

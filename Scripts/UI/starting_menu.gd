@@ -7,6 +7,7 @@ class_name StartingMenu
 var SpawnedCredits : Control
 
 signal GameStart(Load : bool)
+signal PrologueStart()
 
 func _ready() -> void:
 	$w/PointLight2D.energy = 0
@@ -37,3 +38,7 @@ func LoopAmp() -> void:
 	Tw.tween_property($w/LineDrawer, "amplitude", randf_range(-80, 80), 0.2)
 	await Tw.finished
 	call_deferred("LoopAmp")
+
+
+func _on_prologue_pressed() -> void:
+	PrologueStart.emit()

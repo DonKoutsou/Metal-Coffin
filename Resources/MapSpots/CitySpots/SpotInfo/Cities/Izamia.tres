@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://c6dh3pyx12srk"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://c6dh3pyx12srk"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_6ab8r"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_e5oti"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_a1k5h"]
+[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_a1k5h"]
 
 [resource]
 script = ExtResource("1_6ab8r")
 SpotName = "Izamia"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("2_a1k5h")]([])
+PossibleDrops = Array[ExtResource("2_a1k5h")]([ExtResource("3_a1k5h")])
 Merchendise = Array[ExtResource("1_e5oti")]([])

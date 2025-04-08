@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqxnjihcai1kd"]
+[gd_scene load_steps=15 format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
+[ext_resource type="PackedScene" uid="uid://cbhf8nh85npqq" path="res://Scenes/World.tscn" id="3_lbc5q"]
 [ext_resource type="PackedScene" uid="uid://delsjvmgmdgcn" path="res://Scenes/starting_menu.tscn" id="3_pxh3m"]
 [ext_resource type="PackedScene" uid="uid://cmdvuq7n6nncl" path="res://Scenes/studio_anim.tscn" id="3_yypyw"]
 [ext_resource type="Script" uid="uid://j57h3okdod4b" path="res://Scripts/Save/save_load_manager.gd" id="4_nq3sn"]
@@ -10,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://oyvpm41u3k5x" path="res://Assets/Sounds/ButtonIn.wav" id="6_3kbt8"]
 [ext_resource type="AudioStream" uid="uid://ups7egvp1xc5" path="res://Assets/Sounds/Hover.mp3" id="6_h4tjh"]
 [ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="7_a5iis"]
+[ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/InScreenUI/tutorial_manager.tscn" id="8_y5t4y"]
 [ext_resource type="AudioStream" uid="uid://bxom1q5kepbxb" path="res://Assets/Sounds/Ambience.mp3" id="11_7gvun"]
 [ext_resource type="AudioStream" uid="uid://l32wa336ywlb" path="res://Assets/Sounds/Hover2.mp3" id="11_r02ad"]
 
@@ -18,7 +20,8 @@ process_mode = 3
 script = ExtResource("1_kry56")
 StartingMenuScene = ExtResource("3_pxh3m")
 StudioAnim = ExtResource("3_yypyw")
-GameScene = ExtResource("4_r02ad")
+GameScene = ExtResource("3_lbc5q")
+IntroGameScene = ExtResource("4_r02ad")
 
 [node name="AchievementManager" type="Node" parent="."]
 script = ExtResource("5_f5f7e")
@@ -34,6 +37,8 @@ DigitalClick = ExtResource("6_h4tjh")
 HoverShound = ExtResource("11_r02ad")
 AnalogueSoundStr = -20.0
 DigitalSoundStr = -10.0
+
+[node name="TutorialManager" parent="." instance=ExtResource("8_y5t4y")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_7gvun")

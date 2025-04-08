@@ -14,7 +14,9 @@ class_name World
 @export_group("Wallet")
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
-
+@export_group("Settingsd")
+@export var DoQuestionair : bool = false
+@export var IsIntro : bool = false
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 
@@ -82,19 +84,23 @@ func _ready() -> void:
 	WRLD_WorldReady.emit()
 	if (!Loading):
 		GetMap()._InitialPlayerPlacament()
-		GetMap().GetScreenUi().ToggleFullScreen(true)
+		if (DoQuestionair):
+			GetMap().GetScreenUi().ToggleFullScreen(true)
+		else:
+			GetMap().GetScreenUi().ToggleFullScreen(false)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
-		
-		var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
-		Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
 		await GetMap().GetScreenUi().FullScreenToggleFinished
-		Questionair.Init()
-		#await Loadingscr.LoadingDestroyed
-		await Questionair.Ended
-		GetMap().GetScreenUi().ToggleFullScreen(false)
-		await GetMap().GetScreenUi().FullScreenToggleStarted
-		Questionair.queue_free()
+		if (DoQuestionair):
+			var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
+			Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
+			
+			Questionair.Init()
+			#await Loadingscr.LoadingDestroyed
+			await Questionair.Ended
+			GetMap().GetScreenUi().ToggleFullScreen(false)
+			await GetMap().GetScreenUi().FullScreenToggleStarted
+			Questionair.queue_free()
 		PlayIntro()
 		
 		PlayerWallet.SetFunds( StartingFunds)
