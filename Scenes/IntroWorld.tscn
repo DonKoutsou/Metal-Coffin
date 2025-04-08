@@ -1,0 +1,76 @@
+[gd_scene load_steps=22 format=3 uid="uid://cid0s6uni7fky"]
+
+[ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
+[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="2_0dp8t"]
+[ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/InScreenUI/loading_screen.tscn" id="3_0i6dt"]
+[ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/InScreenUI/FleetSparationScene.tscn" id="4_trvh7"]
+[ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/InScreenUI/HappeningUI.tscn" id="5_7no5x"]
+[ext_resource type="PackedScene" uid="uid://c2db1rw6borur" path="res://Scenes/WorldViewQuestionair.tscn" id="6_8eeky"]
+[ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="7_udtpl"]
+[ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/Ship_Controller.gd" id="8_qeah0"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="9_ljctt"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="10_8o37l"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="11_43ao6"]
+[ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="12_ybi1w"]
+[ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="13_32m5b"]
+[ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="14_m5d6e"]
+[ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="15_g1jcv"]
+[ext_resource type="Script" uid="uid://b6ekpg378n2t4" path="res://Scripts/Simulation_Manager.gd" id="16_5hurr"]
+[ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="17_18b7g"]
+[ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="18_567dx"]
+[ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_0dp8t"]
+[ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
+[ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/InScreenUI/tutorial_manager.tscn" id="20_4pqph"]
+
+[node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_7wuav")
+_Map = NodePath("Map")
+_Command = NodePath("Commander")
+Controller = NodePath("ShipController")
+CardFightScene = ExtResource("2_0dp8t")
+LoadingScene = ExtResource("3_0i6dt")
+FleetSeparationScene = ExtResource("4_trvh7")
+HappeningUI = ExtResource("5_7no5x")
+WorldViewQuestionairScene = ExtResource("6_8eeky")
+StartingFunds = 400000
+PlayerWallet = ExtResource("7_udtpl")
+
+[node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]
+script = ExtResource("8_qeah0")
+_Map = NodePath("../Map")
+DroneDockEventH = ExtResource("9_ljctt")
+ShipControllerEventH = ExtResource("10_8o37l")
+UIEventH = ExtResource("11_43ao6")
+CaptainSelectScreen = ExtResource("12_ybi1w")
+DroneScene = ExtResource("13_32m5b")
+
+[node name="Commander" parent="." instance=ExtResource("14_m5d6e")]
+
+[node name="DialogueProgressHolder" type="Node" parent="."]
+script = ExtResource("15_g1jcv")
+
+[node name="SimulationManager" type="Node" parent="." node_paths=PackedStringArray("_Map")]
+script = ExtResource("16_5hurr")
+_Map = NodePath("../Map")
+
+[node name="WorldviewManager" type="Node" parent="."]
+script = ExtResource("17_18b7g")
+WorldviewAdjustNotif = ExtResource("18_567dx")
+
+[node name="EventManager" type="Node" parent="."]
+script = ExtResource("19_0dp8t")
+metadata/_custom_type_script = "uid://s3ha37qvdear"
+
+[node name="Map" parent="." instance=ExtResource("19_3v2l7")]
+MapSize = 11
+SpawningBoundsX = 2000.0
+
+[node name="TutorialManager" parent="." instance=ExtResource("20_4pqph")]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
-[ext_resource type="PackedScene" uid="uid://cbhf8nh85npqq" path="res://Scenes/World.tscn" id="3_lbc5q"]
 [ext_resource type="PackedScene" uid="uid://delsjvmgmdgcn" path="res://Scenes/starting_menu.tscn" id="3_pxh3m"]
 [ext_resource type="PackedScene" uid="uid://cmdvuq7n6nncl" path="res://Scenes/studio_anim.tscn" id="3_yypyw"]
 [ext_resource type="Script" uid="uid://j57h3okdod4b" path="res://Scripts/Save/save_load_manager.gd" id="4_nq3sn"]
+[ext_resource type="PackedScene" uid="uid://cid0s6uni7fky" path="res://Scenes/IntroWorld.tscn" id="4_r02ad"]
 [ext_resource type="Script" uid="uid://bdyunkmrrtpmv" path="res://Scripts/Audio/UISoundManager.gd" id="5_8b602"]
 [ext_resource type="Script" uid="uid://cmtmhklwbalyb" path="res://Scripts/achievement_manager.gd" id="5_f5f7e"]
 [ext_resource type="AudioStream" uid="uid://oyvpm41u3k5x" path="res://Assets/Sounds/ButtonIn.wav" id="6_3kbt8"]
@@ -18,7 +18,7 @@ process_mode = 3
 script = ExtResource("1_kry56")
 StartingMenuScene = ExtResource("3_pxh3m")
 StudioAnim = ExtResource("3_yypyw")
-GameScene = ExtResource("3_lbc5q")
+GameScene = ExtResource("4_r02ad")
 
 [node name="AchievementManager" type="Node" parent="."]
 script = ExtResource("5_f5f7e")

@@ -82,11 +82,11 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	for g in 1:
-		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-	for g in 1:
-		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#for g in 1:
+		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in 1:
+		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -639,9 +639,9 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 			target = EnemyShips[0]
 		else:
 			TargetSelect.SetEnemies(EnemyShips)
-			$VBoxContainer4/PanelContainer2.visible = false
+			$VBoxContainer4/VBoxContainer/PanelContainer2.visible = false
 			target = await TargetSelect.EnemySelected
-			$VBoxContainer4/PanelContainer2.visible = true
+			$VBoxContainer4/VBoxContainer/PanelContainer2.visible = true
 	else:
 		target = CurrentShip
 	#for g in C.CStats.Options:

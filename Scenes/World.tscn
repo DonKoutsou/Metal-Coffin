@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=34 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
@@ -19,7 +19,20 @@
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="13_mvfa8"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="15_kwl8l"]
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="16_waglr"]
+[ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_b5aes"]
 [ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/InScreenUI/tutorial_manager.tscn" id="19_r0dna"]
+[ext_resource type="Resource" uid="uid://b8kumsjf70n22" path="res://Resources/Happenings/Nomads.tres" id="20_371b6"]
+[ext_resource type="Resource" uid="uid://bi5laknt8ktr6" path="res://Resources/Happenings/Robbery.tres" id="21_ao4cr"]
+[ext_resource type="Resource" uid="uid://mhuc4oqjjoph" path="res://Resources/Happenings/CrewRecruitHappeningSirius.tres" id="22_irg3d"]
+[ext_resource type="Resource" uid="uid://byx81bxds55dv" path="res://Resources/Happenings/CrewRecruitHappeningSamir.tres" id="23_y8a40"]
+[ext_resource type="Resource" uid="uid://cjywrm3yoyv76" path="res://Resources/Happenings/CrewRecruitHappeningJor.tres" id="24_n1aqv"]
+[ext_resource type="Resource" uid="uid://c3kr3kcdnvesc" path="res://Resources/Happenings/CrewRecruitHappeningGilian.tres" id="25_d2jk0"]
+[ext_resource type="Resource" uid="uid://boanhwedl2f1l" path="res://Resources/Happenings/CrewRecruitHappeningElena.tres" id="26_5dli4"]
+[ext_resource type="Resource" uid="uid://cewy7vds2cnh8" path="res://Resources/Happenings/CrewRecruitHappeningDimitry.tres" id="27_uvb3s"]
+[ext_resource type="Resource" uid="uid://dijsq004n7ouw" path="res://Resources/Happenings/CrewRecruitHappeningCraden.tres" id="28_crxrm"]
+[ext_resource type="Resource" uid="uid://cbe4h0paqjgm4" path="res://Resources/Happenings/CrewRecruitHappeningCorkan.tres" id="29_d4o7i"]
+[ext_resource type="Resource" uid="uid://gvu43lp4i4y6" path="res://Resources/Happenings/CrewRecruitHappeningBaron.tres" id="30_bbwj2"]
+[ext_resource type="Resource" uid="uid://r5k7lwi7y3wa" path="res://Resources/Happenings/CrewRecruitHappeningAmol.tres" id="31_ivfu3"]
 
 [node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
@@ -63,6 +76,14 @@ _Map = NodePath("../Map")
 [node name="WorldviewManager" type="Node" parent="."]
 script = ExtResource("15_kwl8l")
 WorldviewAdjustNotif = ExtResource("16_waglr")
+
+[node name="EventManager" type="Node" parent="."]
+script = ExtResource("19_b5aes")
+EventsPerSpot = Dictionary[int, Array]({
+0: [ExtResource("20_371b6"), ExtResource("21_ao4cr"), ExtResource("22_irg3d"), ExtResource("23_y8a40"), ExtResource("24_n1aqv"), ExtResource("25_d2jk0"), ExtResource("26_5dli4"), ExtResource("27_uvb3s"), ExtResource("28_crxrm"), ExtResource("29_d4o7i"), ExtResource("30_bbwj2"), ExtResource("31_ivfu3")],
+1: [],
+2: []
+})
 
 [node name="Map" parent="." instance=ExtResource("12_11aq8")]
 

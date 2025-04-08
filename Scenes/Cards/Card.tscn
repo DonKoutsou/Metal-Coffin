@@ -106,7 +106,7 @@ offsets = PackedFloat32Array(0, 0.102293, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
-custom_minimum_size = Vector2(200, 250)
+custom_minimum_size = Vector2(200, 160)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -114,9 +114,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -85.0
+offset_top = -80.0
 offset_right = 100.0
-offset_bottom = 85.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -188,6 +188,7 @@ horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="CardText" type="TextureRect" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2

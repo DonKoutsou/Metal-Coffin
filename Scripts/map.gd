@@ -25,6 +25,7 @@ class_name Map
 @export var EnemyScene : PackedScene
 @export var EnSpawner : SpawnDecider
 @export var EnemyShipNames : Array[String]
+@export var SpawningBoundsX : float = 10000
 
 signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
 #Signal called when all cities have their neighbors configured
@@ -319,7 +320,7 @@ func HasClose(pos : Vector2, places : Array[Town]) -> bool:
 	return b
 
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
-	return Vector2(randf_range(-10000, +10000), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
+	return Vector2(randf_range(-SpawningBoundsX, SpawningBoundsX), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
 
 func MapGenFinished(Spots : Array[Town]) -> void:
 	SpotList.append_array(Spots)
@@ -340,7 +341,7 @@ func GenerateEventsThreaded() -> void:
 		Spots.append_array(get_tree().get_nodes_in_group(g))
 		Spots.shuffle()
 		
-		var SpEvents = (Spots[0] as MapSpot).SpotType.GetSpecialEvents()
+		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		
 		while SpEvents.size() != 0:
 			#var EventToGive = SpEvents[0]
@@ -356,12 +357,12 @@ func GenerateEventsThreaded() -> void:
 					if (E.CrewRecruit):
 						S.call_deferred("add_to_group", "CrewRecruitTown")
 		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
-		
+		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
 		for S in Spots:
 			var Sp = S as MapSpot
 			if (Sp.Event != null):
 				continue
-			var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Sp.SpotType.PossibleHappenings)
+			var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Events)
 			if (Hap != null):
 				print("Picked happening {0} for {1}".format([Hap.HappeningName, Sp.GetSpotName()]))
 
@@ -369,10 +370,7 @@ func GenerateEventsThreaded() -> void:
 				Sp.Event = Hap
 	call_deferred("EventGenFinished")
 
-
-	
-	
-func FigureOutEvent(YPos : float, Events : Array[Happening]) -> Happening:
+func FigureOutEvent(YPos : float, Events : Array) -> Happening:
 	if (Events == null or Events.size() == 0):
 		return null
 	var GameSt : Happening.GameStage = Happening.GetStageForYPos(YPos)

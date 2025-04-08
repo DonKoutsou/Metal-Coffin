@@ -12,7 +12,6 @@ class_name MapSpotType
 
 
 @export var CustomData : Array[MapSpotCustomData]
-@export var PossibleHappenings : Array[Happening]
 
 func GetCustomData(datname : String) -> Array[MapSpotCustomData]:
 	var returnval : Array[MapSpotCustomData] = []
@@ -28,18 +27,18 @@ func ClearCustomData(Dat : MapSpotCustomData):
 func GetEnumString() -> String:
 	return SpotKind.keys()[SpotK]
 
-func GetSpecialEvents() -> Array[Happening]:
-	var SpEvents : Array[Happening] = []
-	for g in PossibleHappenings:
-		if (g.Special):
-			SpEvents.append(g)
-	return SpEvents
-func GetNormalEvents() -> Array[Happening]:
-	var Events : Array[Happening] = []
-	for g in PossibleHappenings:
-		if (!g.Special):
-			Events.append(g)
-	return Events
+#func GetSpecialEvents() -> Array[Happening]:
+	#var SpEvents : Array[Happening] = []
+	#for g in PossibleHappenings:
+		#if (g.Special):
+			#SpEvents.append(g)
+	#return SpEvents
+#func GetNormalEvents() -> Array[Happening]:
+	#var Events : Array[Happening] = []
+	#for g in PossibleHappenings:
+		#if (!g.Special):
+			#Events.append(g)
+	#return Events
 #func GetSpotDrop() -> Array[Item]:
 	#var Drops : Array[Item] = []
 	#for z in DropAmmount:
