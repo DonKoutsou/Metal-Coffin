@@ -15,6 +15,7 @@ class_name CardStats
 @export var RequiredPart : Array[ShipPart]
 @export var WeapT : WeaponType
 
+@export var AOE : bool = false
 
 var SelectedOption : CardOption
 

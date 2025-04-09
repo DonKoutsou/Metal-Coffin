@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CardOption" load_steps=2 format=3 uid="uid://dep1p3s46i325"]
+[gd_resource type="Resource" script_class="CardOption" load_steps=3 format=3 uid="uid://dep1p3s46i325"]
 
+[ext_resource type="Texture2D" uid="uid://dgj0w64wb7mmy" path="res://Assets/Cards/hydra-shot.png" id="1_jk8sp"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="1_xhabx"]
 
 [resource]
 script = ExtResource("1_xhabx")
 OptionName = "Fire"
 OptionDescription = "Throws a barragge on the enemy. Has chance to start fire. [color=#c19200]DMG = 6 * Firepower"
+NewPic = ExtResource("1_jk8sp")
 EnergyAdd = 1
 DamageFlat = 0
 DamageMult = 1.0

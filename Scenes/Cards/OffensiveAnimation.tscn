@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbdyafmynts2u"]
+[gd_scene load_steps=9 format=3 uid="uid://cbdyafmynts2u"]
 
 [ext_resource type="Script" uid="uid://bdvm3q5rknxlm" path="res://Scenes/Cards/offensive_animation.gd" id="1_jaurs"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_jp0up"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="5_6jbgu"]
 [ext_resource type="PackedScene" uid="uid://cqejjvj1hassq" path="res://Scenes/Cards/AtackEffects/missile_thing.tscn" id="5_f7v70"]
 [ext_resource type="PackedScene" uid="uid://5ubeqcn5eqt5" path="res://Scenes/Cards/AtackEffects/ShieldEffect.tscn" id="6_mj77s"]
+[ext_resource type="PackedScene" uid="uid://bu0gnwclyuygc" path="res://Scenes/Cards/AtackEffects/Shield_thing.tscn" id="7_o02sb"]
 
 [node name="CardOffensiveAnimation" type="Control"]
 z_index = 1
@@ -24,6 +25,7 @@ DamageFloater = ExtResource("3_d0xxj")
 ShipViz = ExtResource("4_p073m")
 AtackVisual = ExtResource("5_f7v70")
 DefVisual = ExtResource("6_mj77s")
+ShieldVisual = ExtResource("7_o02sb")
 UIEventH = ExtResource("5_6jbgu")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

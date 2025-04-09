@@ -1,18 +1,19 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://dr3fmkjvlgj4l"]
 
-[ext_resource type="Texture2D" uid="uid://cpwy1rn05puu6" path="res://Assets/Cards/shieldcomb.png" id="1_ilbjh"]
+[ext_resource type="Texture2D" uid="uid://c221vevim2qk3" path="res://Assets/Cards/Shield.png" id="1_ywkdi"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_jdau8"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_f0bjb"]
 [ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_6wusb"]
 
 [resource]
 script = ExtResource("4_6wusb")
-Icon = ExtResource("1_ilbjh")
+Icon = ExtResource("1_ywkdi")
 CardName = "Shield Overcharge Team"
 CardDescription = "Overcharge team shiels for temporary buff. [color=#c19200]+ 15 shield"
-Energy = 2
+Energy = 4
 Options = Array[ExtResource("2_jdau8")]([])
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_f0bjb")]([])
 WeapT = 0
+AOE = true

@@ -57,13 +57,15 @@ var ShipTurns : Array[BattleShipStats]
 
 var CurrentTurn : int = 0
 
+#Stored stats for each ship in battle. Once ship is killed in battle this stat is deleted
+#Once fight is done this stats are retrieved. If a ship's stats is missing that means it got killed in battle so we kill it in overworld to
 var PlayerShips : Array[BattleShipStats]
-
 var EnemyShips : Array[BattleShipStats]
 
+#Stored UI visualisation for ships
 var ShipsViz : Array[CardFightShipViz]
 
-#var Actions : Dictionary
+
 var ActionList = CardFightActionList.new()
 
 signal CardFightEnded(Survivors : Array[BattleShipStats])
@@ -75,26 +77,24 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 #TODO
 #Find way to expand system to work with inventory items. DONE
 #need to make sure that any armaments brought into the fight exist inside inventory. DONE
-#armaments that can be used in map will be different to those used in card fight
+#armaments that can be used in map will be different to those used in card fight DONE
 #Card fight armaments will also be resupplied in same way in towns. DONE
 #enemies need to have inventory of armaments to see what they can do in fight SEMI-DONE
 
 var CardSelectSize : float
 
 func _ready() -> void:
-	for g in 1:
-		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-	for g in 1:
-		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#for g in 2:
+		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in 2:
+		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
 	ShipTurns.sort_custom(speed_comparator)
-	
-	
-	
+
 	#Create the visualisation for each ship, basicly their stat holder
 	for g in ShipTurns:
 		CreateShipVisuals(g)
@@ -179,13 +179,25 @@ func CreateShipVisuals(BattleS : BattleShipStats) -> void:
 	var t = ShipVizScene.instantiate() as CardFightShipViz
 	t.connect("pressed", ShipVizPressed.bind(BattleS))
 	var Friendly = IsShipFriendly(BattleS)
+	var Hbox = HBoxContainer.new()
+	var C = Control.new()
+	
 	
 	t.SetStats(BattleS, Friendly)
 	
 	if (Friendly):
-		PlayerShipVisualPlecement.add_child(t)
+		PlayerShipVisualPlecement.add_child(Hbox)
+		Hbox.add_child(C)
+		Hbox.add_child(t)
 	else :
-		EnemyShipVisualPlecement.add_child(t)
+		Hbox.alignment = BoxContainer.ALIGNMENT_END
+		EnemyShipVisualPlecement.add_child(Hbox)
+		Hbox.add_child(t)
+		Hbox.add_child(C)
+	
+	C.custom_minimum_size.x = 30
+	C.visible = false
+	
 	ShipsViz.append(t)
 
 func ShipVizPressed(Ship : BattleShipStats) -> void:
@@ -243,6 +255,7 @@ func RunTurn() -> void:
 	await DoActionDeclaration("Action Pick Phase")
 	
 	CardSelectContainer.get_parent().visible = true
+	CardSelectContainer.get_child(0).visible = false
 	var Tw2 = create_tween()
 	Tw2.set_ease(Tween.EASE_OUT)
 	Tw2.set_trans(Tween.TRANS_QUAD)
@@ -297,8 +310,6 @@ func RunTurn() -> void:
 	if (GameOver):
 		return
 
-	
-	
 	RefundUnusedCards()
 	ActionList.Clear()
 	#Actions.clear()
@@ -355,7 +366,10 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 	var ActionsToBurn : Array[CardFightAction]
 	var Friendly = IsShipFriendly(Ship)
-	
+	var viz = GetShipViz(Ship)
+	for g in viz.get_parent().get_children():
+		if (g != viz):
+			g.visible = true
 	for z in ActionList.GetShipsActions(Ship):
 		var ShipAction = z as CardFightAction
 		var Action = ShipAction.Action
@@ -399,12 +413,11 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
 				
 		else :if (Action is Deffensive):
-			var viz = GetShipViz(Ship)
 			if (Action.CardName == "Extinguish fires" and viz.IsOnFire()):
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				AnimationPlecement.add_child(anim)
 				AnimationPlecement.move_child(anim, 1)
-				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
+				anim.DoDeffensive(Action, [GetShipViz(Ship)], EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
 				anim.visible = false
 				anim.queue_free()
@@ -416,18 +429,52 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 					if (ShipCards[Action] == 0):
 						ShipCards.erase(Action)
 
-			else: if Action.CardName == "Shield Overcharge":
+			else: if Action.CardName == "Shield Overcharge" or Action.CardName == "Shield Overcharge Team":
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				AnimationPlecement.add_child(anim)
 				AnimationPlecement.move_child(anim, 1)
-				anim.DoDeffensive(Action, Ship, EnemyShips.has(Ship))
+				var Targets : Array[BattleShipStats]
+				var TargetViz : Array[Control]
+				if (Action.AOE):
+					Targets = GetShipsTeam(Ship)
+					TargetViz = GetShipsTeamViz(Ship)
+				else:
+					Targets = [Ship]
+					TargetViz = [GetShipViz(Ship)]
+					
+				anim.DoDeffensive(Action, TargetViz, EnemyShips.has(Ship))
 				await(anim.AnimationFinished)
 				anim.visible = false
 				anim.queue_free()
-				ShieldShip(Ship, 15)
+				
+				for T in Targets:
+					ShieldShip(T, 15)
+					
 				ActionsToBurn.append(ShipAction)
-
+	
+	for g in viz.get_parent().get_children():
+		if (g != viz):
+			g.visible = false
+	
 	return ActionsToBurn
+
+func GetShipsTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
+	var Team : Array[BattleShipStats]
+	if (IsShipFriendly(Ship)):
+		Team.append_array(PlayerShips)
+	else:
+		Team.append_array(EnemyShips)
+	return Team
+
+func GetShipsTeamViz(Ship : BattleShipStats) -> Array[Control]:
+	var Team : Array[Control]
+	if (IsShipFriendly(Ship)):
+		for g in PlayerShips:
+			Team.append(GetShipViz(g))
+	else:
+		for g in EnemyShips:
+			Team.append(GetShipViz(g))
+	return Team
 
 func DoFireDamage() -> void:
 	for g in ShipTurns:
@@ -454,7 +501,7 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -
 	Ship.Hull -= Dmg
 
 	if (CauseFire and TrySetFire()):
-			ToggleFireToShip(Ship, true)
+		ToggleFireToShip(Ship, true)
 	
 	if (IsShipFriendly(Ship)):
 		DamageGot += Dmg
@@ -547,23 +594,10 @@ func PlayerActionSelectionEnded() -> void:
 func RestartCards() -> void:
 	ClearCards()
 	Energy = 10
+	
 	UpdateEnergy()
-	var CharCards = ShipTurns[CurrentTurn].Cards
-	var CharAmmo = ShipTurns[CurrentTurn].Ammo
-	for g in CharCards.keys():
-		var c = CardScene.instantiate() as Card
-		var WType = g.WeapT
-		var PossibleOptions : Array[CardOption] = []
-		for Ammo in CharAmmo:
-			var am = Ammo as CardOption
-			if (am.ComatibleWeapon == WType):
-				PossibleOptions.append(am)
-		c.SetCardStats(g, PossibleOptions)
-		c.connect("OnCardPressed", OnCardSelected)
-		if (g is OffensiveCardStats):
-			OffensiveCardPlecement.add_child(c)
-		else :
-			DeffensiveCardPlecement.add_child(c)
+	UpdateHandCards()
+	
 	ShipsViz[CurrentTurn].Enable()
 
 func UpdateHandCards() -> void:
@@ -576,17 +610,25 @@ func UpdateHandCards() -> void:
 	for g in CharCards.keys():
 		var c = CardScene.instantiate() as Card
 		var WType = g.WeapT
-		var PossibleOptions : Array[CardOption] = []
-		for Ammo in CharAmmo:
-			var am = Ammo as CardOption
-			if (am.ComatibleWeapon == WType):
-				PossibleOptions.append(am)
-		c.SetCardStats(g, PossibleOptions)
+		c.SetCardStats(g, [])
 		c.connect("OnCardPressed", OnCardSelected)
 		if (g is OffensiveCardStats):
 			OffensiveCardPlecement.add_child(c)
 		else :
 			DeffensiveCardPlecement.add_child(c)
+		for Ammo in CharAmmo:
+			var am = Ammo as CardOption
+			if (am.ComatibleWeapon == WType):
+				var c2 = CardScene.instantiate() as Card
+				var Cstats2 = g.duplicate()
+				Cstats2.SelectedOption = am
+				c2.SetCardStats(Cstats2, [])
+				c2.connect("OnCardPressed", OnCardSelected)
+				if (Cstats2 is OffensiveCardStats):
+					OffensiveCardPlecement.add_child(c2)
+				else :
+					DeffensiveCardPlecement.add_child(c2)
+				#PossibleOptions.append(am)
 
 func ClearCards() -> void:
 	for g in OffensiveCardPlecement.get_children():
@@ -599,12 +641,13 @@ func ClearCards() -> void:
 
 func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	var c = CardScene.instantiate() as Card
-
+	
 	c.SetCardStats(C.CStats, [])
 	c.TargetLoc = C.TargetLoc
 	$Control.add_child(c)
 	c.global_position = OriginalPos
-	
+	#c.CompactCard()
+	#C.CompactCard()
 	var S = DeletableSoundGlobal.new()
 	S.stream = CardPlecementSound
 	S.autoplay = true
@@ -613,12 +656,15 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	var PlecementTw = create_tween()
 	PlecementTw.set_ease(Tween.EASE_OUT)
 	PlecementTw.set_trans(Tween.TRANS_QUAD)
+	#PlecementTw.tween_method(MoveCard.bind(OriginalPos, c, C), 0, 1, 0.4)
 	PlecementTw.tween_property(c, "global_position", C.global_position, 0.4)
 	C.visible = false
 	await PlecementTw.finished
 	c.queue_free()
 	C.visible = true
-	
+
+#func MoveCard(Val : float, origpos : Vector2, C : Card, C2 : Card)  -> void:
+	#C.global_position = lerp(origpos, C2.global_position, Val)
 
 func OnCardSelected(C : Card, Option : CardOption) -> void:
 	#var Minigame = FightGame.instantiate() as FightMinigame
@@ -629,6 +675,8 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		#return
 	
 	var Action = C.CStats.duplicate() as CardStats
+	Action.SelectedOption = C.CStats.SelectedOption
+	
 	var CurrentShip = ShipTurns[CurrentTurn]
 	if (!Action.AllowDuplicates and ActionList.ShipHasAction(CurrentShip, Action)):
 		return
@@ -639,14 +687,14 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 			target = EnemyShips[0]
 		else:
 			TargetSelect.SetEnemies(EnemyShips)
-			$VBoxContainer4/VBoxContainer/PanelContainer2.visible = false
+			$VBoxContainer4/VBoxContainer.visible = false
 			target = await TargetSelect.EnemySelected
-			$VBoxContainer4/VBoxContainer/PanelContainer2.visible = true
+			$VBoxContainer4/VBoxContainer.visible = true
 	else:
 		target = CurrentShip
 	#for g in C.CStats.Options:
 		#if (g.OptionName == Option):
-	Action.SelectedOption = Option
+	#Action.SelectedOption = Option
 	var c = CardScene.instantiate() as Card
 	if (Option != null):
 		c.SetCardStats(Action, [Option])
@@ -691,7 +739,6 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	UpdateEnergy()
 	UpdateHandCards()
 	
-	
 
 func RemoveCard(C : Card, _Option : CardOption) -> void:
 	var S = DeletableSoundGlobal.new()
@@ -730,8 +777,8 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 	UpdateEnergy()
 	UpdateHandCards()
 
-var EnergyBarTween : Tween
 
+var EnergyBarTween : Tween
 func UpdateEnergy() -> void:
 	if (is_instance_valid(EnergyBarTween)):
 		EnergyBarTween.kill()
@@ -740,13 +787,10 @@ func UpdateEnergy() -> void:
 	EnergyBarTween.set_trans(Tween.TRANS_QUAD)
 	EnergyBarTween.tween_method(UpdateEnergyBar, EnergyBar.value, Energy, 0.5)
 
-
 func UpdateEnergyBar(NewVal : float) -> void:
 	EnergyBar.value = NewVal
 	EnergyLabel.text = var_to_str(roundi(NewVal)) + " / 10"
 
-#func PlayOffensiveAction(SourcePos : Vector2, TargetPos : Vector2, Countered : bool) -> void:
-	#pass
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
@@ -776,5 +820,10 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	Stats.Cards[load("res://Resources/Cards/Evasive.tres")] = 1
 	Stats.Cards[load("res://Resources/Cards/Missile.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/Flares.tres")] = 10
+	Stats.Cards[load("res://Resources/Cards/ShieldOverChargeTeam.tres")] = 1
+	
+	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageAPOption.tres")] = 10
+	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageFireOption.tres")] = 10
+	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres")] = 10
 		
 	return Stats

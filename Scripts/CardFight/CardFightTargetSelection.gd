@@ -14,6 +14,7 @@ func SetEnemies(EnemyList : Array[BattleShipStats]) -> void:
 		var b = ShipVizScene.instantiate() as CardFightShipViz
 		b.SetStats(g, false)
 		$VBoxContainer/HBoxContainer.add_child(b)
+		
 		b.connect("pressed", TargetSelected.bind(g))
 	visible = true
 	

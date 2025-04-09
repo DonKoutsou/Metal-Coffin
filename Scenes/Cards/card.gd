@@ -25,6 +25,15 @@ func UpdateLine() -> void:
 	$Line2D.set_point_position(1, lerp(Vector2.ZERO ,$Line2D.to_local(TargetLoc),InterpolationValue))
 		#draw_line(global_position + size / 2, lerp(global_position + size / 2 ,TargetLoc,InterpolationValue), Color(0.482,0.69,0.705), 5)
 
+func CompactCard() -> void:
+	$VBoxContainer/CardDesc.visible = false
+	$Line2D.position.y -= size.y - 85
+	custom_minimum_size.y = 85
+	size.y = 85
+	
+	#position.y += size.y - 85
+	set_anchors_preset(Control.PRESET_CENTER)
+
 func KillCard() -> void:
 	var KillTw = create_tween()
 	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
@@ -49,9 +58,10 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
 		DescText =  "[center] {0}".format([ Stats.SelectedOption.OptionDescription])
 		Cost += Stats.SelectedOption.EnergyAdd
+		CardTex.texture = Stats.SelectedOption.NewPic
 	else:
 		CardName.text = Stats.CardName
-	CardTex.texture = Stats.Icon
+		CardTex.texture = Stats.Icon
 	
 	#var DescText =  "[center]{0}".format([Stats.CardDescription])
 	#CardDesc.visible_ratio = 0

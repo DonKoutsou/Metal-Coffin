@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
-[ext_resource type="Texture2D" uid="uid://cln0pmvmp4m00" path="res://Assets/Cards/barrage.png" id="2_58ae4"]
+[ext_resource type="Texture2D" uid="uid://c221vevim2qk3" path="res://Assets/Cards/Shield.png" id="2_58ae4"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
@@ -84,6 +84,7 @@ content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+skew = Vector2(0.05, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -114,9 +115,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -77.0
+offset_top = -87.5
 offset_right = 100.0
-offset_bottom = 98.0
+offset_bottom = 87.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -154,9 +155,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
+offset_left = 5.0
 offset_top = 2.0
-offset_right = -2.0
+offset_right = -5.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2

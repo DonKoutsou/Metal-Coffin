@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bu0gnwclyuygc"]
+
+[ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scripts/CardFight/Atackeffects/missile_viz.gd" id="1_rhdqx"]
+[ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="2_rb54q"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="3_sj6es"]
+[ext_resource type="PackedScene" uid="uid://5ubeqcn5eqt5" path="res://Scenes/Cards/AtackEffects/ShieldEffect.tscn" id="5_p7sl4"]
+[ext_resource type="AudioStream" uid="uid://btlq0gcaqeagc" path="res://Assets/Sounds/MissileSlowUp.mp3" id="9_bvb5i"]
+
+[sub_resource type="Curve" id="Curve_5lbu3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_p7sl4"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.71, 1)
+colors = PackedColorArray(0.421311, 0.88706, 0.915024, 1, 0.810676, 0.304988, 0.106007, 1, 1, 1, 1, 0)
+
+[node name="MissileThing" type="Node2D"]
+script = ExtResource("1_rhdqx")
+speed = 1200
+base_curve_intensity = 0.2
+wiggle_amplitude = 0.0
+wiggle_frequency = 0.0
+ExplosionSound = ExtResource("2_rb54q")
+
+[node name="TrailLine" type="Line2D" parent="."]
+width_curve = SubResource("Curve_5lbu3")
+gradient = SubResource("Gradient_p7sl4")
+joint_mode = 2
+begin_cap_mode = 2
+round_precision = 32
+antialiased = true
+script = ExtResource("3_sj6es")
+trail_fade_speed = 0.02
+ManualInit = true
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="MissileCruise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_bvb5i")
+pitch_scale = 0.9
+autoplay = true
+
+[node name="MultiParticleExample2" parent="." instance=ExtResource("5_p7sl4")]

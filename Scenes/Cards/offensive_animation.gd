@@ -9,6 +9,7 @@ signal AnimationFinished
 @export var ShipViz : PackedScene
 @export var AtackVisual : PackedScene
 @export var DefVisual : PackedScene
+@export var ShieldVisual : PackedScene
 @export_group("Event Handlers")
 @export var UIEventH : UIEventHandler
 #var LinePos : float = 0
@@ -45,6 +46,8 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 			$HBoxContainer.add_child(DefC)
 			DefC.size_flags_horizontal = Control.SIZE_EXPAND
 			DefC.show_behind_parent = true
+			DefC.modulate = Color(1,1,1,0)
+			
 		Targets.append_array(TargetShips)
 		AtC = CardScene.instantiate() as Card
 		AtC.Dissable()
@@ -53,6 +56,17 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		$HBoxContainer.add_child(AtC)
 		AtC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		AtC.show_behind_parent = true
+		
+		AtC.modulate = Color(1,1,1,0)
+		
+		var tw = create_tween()
+		tw.tween_property(AtC, "modulate", Color(1,1,1,1), 0.4)
+		await tw.finished
+		
+		if (HasDef):
+			var tw2 = create_tween()
+			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
+			await tw2.finished
 	else:
 		$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_BEGIN)
 		Targets.append_array(TargetShips)
@@ -63,7 +77,10 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		$HBoxContainer.add_child(AtC)
 		AtC.size_flags_horizontal = Control.SIZE_EXPAND
 		AtC.show_behind_parent = true
-		
+		AtC.modulate = Color(1,1,1,0)
+		var tw = create_tween()
+		tw.tween_property(AtC, "modulate", Color(1,1,1,1), 0.4)
+		await tw.finished
 		if (HasDef):
 			DefC = CardScene.instantiate() as Card
 			DefC.Dissable()
@@ -72,6 +89,10 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 			$HBoxContainer.add_child(DefC)
 			DefC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 			DefC.show_behind_parent = true
+			DefC.modulate = Color(1,1,1,0)
+			var tw2 = create_tween()
+			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
+			await tw2.finished
 		
 	#var ShipPlemenent = VBoxContainer.new()
 	#$HBoxContainer.add_child(ShipPlemenent)
@@ -100,6 +121,15 @@ func SpawnVisual(Target : Control, Damage : float) -> void:
 	
 	Visual.connect("Reached", TweenEnded.bind(Damage))
 
+func SpawnShieldVisual(Target : Control) -> void:
+	var Visual = ShieldVisual.instantiate() as MissileViz
+	Visual.Target = Target
+	Visual.SpawnPos = DefC.global_position + (DefC.size / 2)
+	add_child(Visual)
+	
+	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
+
+
 var LineToMove = 0
 func MoveLine(Val : float) -> void:
 	DrawPositions2[LineToMove] = Val
@@ -109,7 +139,6 @@ func MoveLine(Val : float) -> void:
 
 func TweenEnded(Damage : float) -> void:
 	if (DefC == null):
-		
 		for g in Targets:
 			var d = DamageFloater.instantiate()
 			d.modulate = Color(1,0,0,1)
@@ -120,7 +149,6 @@ func TweenEnded(Damage : float) -> void:
 		if (fr):
 			UIEventH.OnControlledShipDamaged(Damage)
 	else :
-
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
 		d.modulate = Color(1,1,1,1)
@@ -133,29 +161,43 @@ func TweenEnded(Damage : float) -> void:
 		ShieldEff.global_position = (DefC.global_position + (DefC.size / 2))
 		ShieldEff.burst()
 
-func DoDeffensive(DefCard : CardStats, OriginShip : BattleShipStats, FriendShip : bool) -> void:
-	var ship = ShipViz.instantiate() as CardFightShipViz
-	ship.disabled = true
-	ship.SetStatsAnimation(OriginShip, !FriendShip)
-	$HBoxContainer.add_child(ship)
+func ShieldTweenEnded(target : Control) -> void:
+	var d = DamageFloater.instantiate()
+	d.text = "Shield Added"
+	d.modulate = Color(1,1,1,1)
+	add_child(d)
+	d.global_position = (target.global_position + (target.size / 2)) - d.size / 2
+	d.connect("Ended", AnimEnded)
+
+func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], FriendShip : bool) -> void:
+
 	var Opts : Array[CardOption] = []
 	DefC = CardScene.instantiate() as Card
 	DefC.Dissable()
 	DefC.SetCardStats(DefCard, Opts)
 	$HBoxContainer.add_child(DefC)
-	DefC.size_flags_horizontal = Control.SIZE_EXPAND
+	#DefC.size_flags_horizontal = Control.SIZE_EXPAND
 	DefC.show_behind_parent = true
+	DefC.modulate = Color(1,1,1,0)
+
+	var tw2 = create_tween()
+	tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
+	await tw2.finished
+	
+	for g in TargetShips:
+		call_deferred("SpawnShieldVisual", g)
+		
+		#var d = DamageFloater.instantiate()
+		#if (DefCard.CardName == "Extinguish fires"):
+			#d.text = "Fire Extinguished"
+		#else : if (DefCard.CardName == "Shield Overcharge" or DefCard.CardName == "Shield Overcharge Team"):
+			#d.text = "Shield Added"
+		#d.modulate = Color(1,1,1,1)
+		#g.add_child(d)
+		##d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2
+		#d.connect("Ended", AnimEnded)
 	
 	
-	var d = DamageFloater.instantiate()
-	if (DefCard.CardName == "Extinguish fires"):
-		d.text = "Fire Extinguished"
-	else : if (DefCard.CardName == "Shield Overcharge"):
-		d.text = "Shield Added"
-	d.modulate = Color(1,1,1,1)
-	add_child(d)
-	d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2
-	d.connect("Ended", AnimEnded)
 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	var Ship = ShipViz.instantiate() as CardFightShipViz
@@ -170,8 +212,13 @@ func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	add_child(d)
 	d.global_position = (Ship.global_position + (Ship.size / 2)) - d.size / 2
 	d.connect("Ended", AnimEnded)
-	
+
+var Finished : bool = false
+
 func AnimEnded() -> void:
+	if (Finished):
+		return
+	Finished = true
 	AnimationFinished.emit()
 
 

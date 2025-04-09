@@ -23,3 +23,4 @@ AllowDuplicates = true
 Consume = true
 RequiredPart = Array[ExtResource("4_oxogx")]([ExtResource("5_af5cy"), ExtResource("6_ycv20"), ExtResource("7_2xhbi")])
 WeapT = 2
+AOE = false

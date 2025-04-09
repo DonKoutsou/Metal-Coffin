@@ -24,6 +24,8 @@ signal Reached
 
 func _ready() -> void:
 	global_position = SpawnPos
+	#if (Target.global_position.dot(global_position) > 0):
+		#rotation = 180
 	$TrailLine.Init()
 	#$MissileCruise.play(1)
 
@@ -66,6 +68,7 @@ func _process(delta: float) -> void:
 	
 	if (global_position.distance_to(Target.global_position + (Target.size / 2)) < 30):
 		$MultiParticleExample2.global_position = global_position
+		$MultiParticleExample2.global_rotation = 0
 		$MultiParticleExample2.burst()
 		$TrailLine.queue_free()
 		Going = false

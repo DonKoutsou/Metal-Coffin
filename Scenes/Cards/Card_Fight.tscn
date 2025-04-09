@@ -23,13 +23,13 @@
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="18_wdur5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7epx"]
-content_margin_top = 20.0
+content_margin_left = 5.0
+content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7epx"]
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
-skew = Vector2(0, 0.1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -137,6 +137,7 @@ alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer"]
 layout_mode = 2
@@ -150,35 +151,34 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_r7epx")
-horizontal_scroll_mode = 3
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = -20
+theme_override_constants/separation = -2
 alignment = 1
 
 [node name="OffensiveCardPlecements" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll/VBoxContainer3"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = -20
+theme_override_constants/separation = -2
 alignment = 1
 
 [node name="DeffensiveCardPlecements" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/AvailableCardScroll/VBoxContainer3"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = -20
+theme_override_constants/separation = -2
 alignment = 1
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
 alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer"]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
@@ -213,7 +213,6 @@ text = "End Turn"
 z_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2"]
@@ -227,43 +226,43 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_constants/separation = -200
+theme_override_constants/separation = -150
 alignment = 1
 
 [node name="CardPlecement1" type="Control" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(200, 170)
+custom_minimum_size = Vector2(200, 95)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement2" type="Control" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(200, 170)
+custom_minimum_size = Vector2(200, 95)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement3" type="Control" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(200, 170)
+custom_minimum_size = Vector2(200, 95)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement4" type="Control" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(200, 170)
+custom_minimum_size = Vector2(200, 95)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement5" type="Control" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(200, 170)
+custom_minimum_size = Vector2(200, 95)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement6" type="Control" parent="VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(200, 170)
+custom_minimum_size = Vector2(200, 95)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="Control" type="Control" parent="VBoxContainer4"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=37 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -66,13 +66,18 @@ bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
+[sub_resource type="Gradient" id="Gradient_tftes"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6an1p"]
+gradient = SubResource("Gradient_tftes")
+
 [sub_resource type="Environment" id="Environment_h7q0i"]
 background_mode = 3
 background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_mode = 3
-tonemap_exposure = 0.7
+tonemap_mode = 2
+tonemap_exposure = 0.61
 tonemap_white = 16.0
 glow_enabled = true
 glow_levels/1 = 16.0
@@ -81,14 +86,14 @@ glow_levels/3 = 16.0
 glow_levels/5 = 0.0
 glow_normalized = true
 glow_intensity = 0.16
-glow_strength = 1.01
 glow_mix = 0.825
+glow_bloom = 0.85
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
 adjustment_brightness = 0.86
-adjustment_contrast = 0.95
 adjustment_saturation = 0.8
+adjustment_color_correction = SubResource("GradientTexture1D_6an1p")
 
 [sub_resource type="Compositor" id="Compositor_h7q0i"]
 compositor_effects = Array[CompositorEffect]([null])

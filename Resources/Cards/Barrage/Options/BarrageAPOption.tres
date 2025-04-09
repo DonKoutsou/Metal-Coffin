@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CardOption" load_steps=2 format=3 uid="uid://mqg2y5hfy65s"]
+[gd_resource type="Resource" script_class="CardOption" load_steps=3 format=3 uid="uid://mqg2y5hfy65s"]
 
+[ext_resource type="Texture2D" uid="uid://c7qah54aaf1jj" path="res://Assets/starfighter.png" id="1_1vtlb"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="1_7f5u1"]
 
 [resource]
 script = ExtResource("1_7f5u1")
 OptionName = "Armor Piercing"
 OptionDescription = "Throws a barragge on the enemy. [color=#c19200]DMG = (6 * Firepower) * 1.5"
+NewPic = ExtResource("1_1vtlb")
 EnergyAdd = 1
 DamageFlat = 0
 DamageMult = 1.5

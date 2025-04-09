@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CardOption" load_steps=2 format=3 uid="uid://bo0job0edtbgf"]
+[gd_resource type="Resource" script_class="CardOption" load_steps=3 format=3 uid="uid://bo0job0edtbgf"]
 
+[ext_resource type="Texture2D" uid="uid://cfbr5l87xuwd4" path="res://Assets/Items/eclipse-flare.png" id="1_dslbu"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="1_y6fth"]
 
 [resource]
 script = ExtResource("1_y6fth")
 OptionName = "Prox Fuse"
 OptionDescription = "Throws a barragge on the enemy. Can't be avoided. [color=#c19200]DMG = 6 * Firepower"
+NewPic = ExtResource("1_dslbu")
 EnergyAdd = 1
 DamageFlat = 0
 DamageMult = 1.0

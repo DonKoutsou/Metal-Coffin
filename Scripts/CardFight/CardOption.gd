@@ -3,6 +3,7 @@ class_name CardOption
 
 @export var OptionName : String
 @export var OptionDescription : String
+@export var NewPic : Texture
 @export var EnergyAdd : int
 @export var DamageFlat : int
 @export var DamageMult : float = 1 #Multiplied over base damage of card
