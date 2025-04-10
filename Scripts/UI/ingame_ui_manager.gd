@@ -16,7 +16,7 @@ static var Instance :Ingame_UIManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Control3/CommandLine.visible = false
-	
+	PauseContainer.visible = false
 	Instance = self
 	EventHandler.connect("PausePressed", Pause)
 	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)

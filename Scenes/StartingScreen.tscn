@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqxnjihcai1kd"]
+[gd_scene load_steps=16 format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="PackedScene" uid="uid://cbhf8nh85npqq" path="res://Scenes/World.tscn" id="3_lbc5q"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/InScreenUI/tutorial_manager.tscn" id="8_y5t4y"]
 [ext_resource type="AudioStream" uid="uid://bxom1q5kepbxb" path="res://Assets/Sounds/Ambience.mp3" id="11_7gvun"]
 [ext_resource type="AudioStream" uid="uid://l32wa336ywlb" path="res://Assets/Sounds/Hover2.mp3" id="11_r02ad"]
+[ext_resource type="Script" uid="uid://1f2otbxhjnv4" path="res://Scripts/Helper.gd" id="13_v267o"]
 
 [node name="StartingScreen" type="Node"]
 process_mode = 3
@@ -37,6 +38,9 @@ DigitalClick = ExtResource("6_h4tjh")
 HoverShound = ExtResource("11_r02ad")
 AnalogueSoundStr = -20.0
 DigitalSoundStr = -10.0
+
+[node name="Helper" type="Node" parent="."]
+script = ExtResource("13_v267o")
 
 [node name="TutorialManager" parent="." instance=ExtResource("8_y5t4y")]
 

@@ -31,8 +31,7 @@ func _ready() -> void:
 	call_deferred("PlayIntroAnim")
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade)
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer)
-	
-		
+
 
 func DescriptorTutorial() -> void:
 	pass

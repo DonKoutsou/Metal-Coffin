@@ -39,7 +39,7 @@ func KillCard() -> void:
 	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	KillTw.tween_property(self, "modulate", Color(1,1,1,0), 0.2)
 	await KillTw.finished
-	free()
+	queue_free()
 
 func _ready() -> void:
 	var SoundMan = UISoundMan.GetInstance()
