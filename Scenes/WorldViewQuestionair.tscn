@@ -68,6 +68,7 @@ layout_mode = 2
 size_flags_horizontal = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_0ey4p")
 OrientationUpDown = false
+frequency = 425.915
 waveform_points = 10
 sample_rate = 2700
 buffer_size = 471

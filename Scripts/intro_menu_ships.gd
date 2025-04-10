@@ -16,7 +16,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position += Vector2(delta * 100, 0).rotated(rotation) 
-	
+	$TextureRect3/TrailLine2.Update(delta)
+	$TextureRect4/TrailLine2.Update(delta)
+	$TextureRect5/TrailLine2.Update(delta)
 	if (CommingFromOut):
 		if (centerpoint.distance_to(position) < 300):
 			if (is_instance_valid(RotTw)):
@@ -41,7 +43,9 @@ func _physics_process(delta: float) -> void:
 		
 		rotation = spawnpoint.angle_to_point(centerpoint)
 		AlignShips()
-		
+		$TextureRect3/TrailLine2.Init()
+		$TextureRect4/TrailLine2.Init()
+		$TextureRect5/TrailLine2.Init()
 
 
 func UpdateRotation(rot : float) -> void:

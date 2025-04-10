@@ -144,7 +144,7 @@ func OnSpotSeen(PlayAnim : bool = true) -> void:
 func AddMapSpot(PlayAnim : bool) -> void:
 	MapPointerManager.GetInstance().AddSpot( self, PlayAnim)
 	Seen = true
-	SimulationManager.GetInstance().TogglePause(true)
+	#SimulationManager.GetInstance().TogglePause(true)
 
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()

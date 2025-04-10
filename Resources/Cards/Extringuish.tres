@@ -9,7 +9,7 @@
 script = ExtResource("2_kfy2h")
 Icon = ExtResource("1_0cpai")
 CardName = "Extinguish fires"
-CardDescription = "Extinguishes fires on ship"
+CardDescription = "Extinguishes [color=#ff3c22]fires[/color] on ship"
 Energy = 4
 Options = Array[ExtResource("2_hfern")]([])
 AllowDuplicates = false

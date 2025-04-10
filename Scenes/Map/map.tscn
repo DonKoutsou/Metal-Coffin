@@ -35,7 +35,7 @@ shader = ExtResource("18_x3wib")
 shader_parameter/GroundTexture = ExtResource("17_x3wib")
 shader_parameter/GroundNormalTexture = ExtResource("16_x3wib")
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale = Vector2(2, 2)
+shader_parameter/Scale = Vector2(10, 10)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5
@@ -120,10 +120,10 @@ EnemyShipNames = Array[String](["Mirage", "Sirocco", "Anubis", "Scimitar", "Horu
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 74.0
-offset_top = 69.0
-offset_right = -334.0
-offset_bottom = -72.0
+offset_left = 80.0
+offset_top = 75.0
+offset_right = -358.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -138,7 +138,7 @@ handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(792, 507)
+size = Vector2i(842, 565)
 render_target_update_mode = 4
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]

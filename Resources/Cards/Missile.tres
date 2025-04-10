@@ -16,7 +16,7 @@ Damage = 10.0
 Accuracy = 0.0
 Icon = ExtResource("2_vjf7b")
 CardName = "Heat Seeking Missile"
-CardDescription = "Throws a missile to enemy. [color=#c19200]DMG = 10 * Firepower"
+CardDescription = "Throws a missile to enemy.[p][center][color=#c19200]DMG = 10 * FPWR"
 Energy = 3
 Options = Array[ExtResource("3_ffuhs")]([])
 AllowDuplicates = true

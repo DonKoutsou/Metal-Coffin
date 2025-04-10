@@ -3,10 +3,14 @@ class_name FundsStat
 
 @export var FundsThing : String
 @export var PlayerWallet : Wallet
+@export var Sound : AudioStreamPlayer2D
+@export var Text : Label
+
 var CurrentAmm :int = 0
 var tw : Tween
 func _ready() -> void:
-	UpDateFunds(PlayerWallet.Funds)
+	Text.text = "{0} {1}".format([PlayerWallet.Funds, FundsThing])
+	CurrentAmm = PlayerWallet.Funds
 	PlayerWallet.connect("OnFundsUpdated", UpDateFunds)
 
 func UpDateFunds(NewAmm : int) -> void:
@@ -17,6 +21,6 @@ func UpDateFunds(NewAmm : int) -> void:
 	tw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 
 func UpdateLabel(Amm : int) -> void:
-	$Label.text = "{0} {1}".format([Amm, FundsThing])
+	Text.text = "{0} {1}".format([Amm, FundsThing])
 	CurrentAmm = Amm
-	#$AudioStreamPlayer2D.play()
+	Sound.play()

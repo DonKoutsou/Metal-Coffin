@@ -54,7 +54,7 @@ func ItemBar_gui_input(event: InputEvent) -> void:
 		Accum = 0
 
 func UpdateBar(Added : int):
-	
+	$AudioStreamPlayer.play()
 	if (Added > 0):
 		if (!InventoryManager.GetInstance().FleetHasSpace(It, LandedShip)):
 			PopUpManager.GetInstance().DoFadeNotif("No Space available to buy armament.")

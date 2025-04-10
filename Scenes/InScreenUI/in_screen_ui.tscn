@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=28 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="18_in80l"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_rwdyb"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
+[ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="25_nvtku"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
@@ -245,7 +246,6 @@ text = "OK"
 
 [node name="PauseContainer" type="PanelContainer" parent="Control3"]
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -318,6 +318,17 @@ layout_mode = 2
 theme = ExtResource("9_8iafl")
 theme_override_font_sizes/font_size = 34
 text = "Exit"
+
+[node name="Control" type="Control" parent="Control3/PauseContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="Control3/PauseContainer/Control" instance=ExtResource("25_nvtku")]
+layout_mode = 1
+offset_left = -293.0
+offset_top = -68.0
+offset_right = -25.0
+offset_bottom = -25.0
 
 [node name="FlightManual" parent="Control3/PauseContainer" instance=ExtResource("18_in80l")]
 visible = false

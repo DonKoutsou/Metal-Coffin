@@ -743,8 +743,8 @@ func _prim_mst_optimized(cities: Array) -> Array:
 	
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
-const OriginalSize = Vector2(791, 512)
-const FullSize = Vector2(1052, 512)
+const OriginalSize = Vector2(842.0, 565.0)
+const FullSize = Vector2(1124.0, 565.0)
 
 func ToggleFullScreen(toggle : bool) -> void:
 	

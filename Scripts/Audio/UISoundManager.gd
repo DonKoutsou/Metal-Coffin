@@ -55,6 +55,19 @@ func AddSelf(But : Button) -> void:
 		But.connect("button_down", OnDigitalButtonClicked)
 		But.connect("mouse_entered", OnButtonHovered)
 
+func RemoveSelf(But : Button) -> void:
+	if (But.is_in_group("Buttons")):
+		if (!But.is_connected("button_down", OnButtonClicked)):
+			return
+		But.disconnect("button_down", OnButtonClicked)
+		But.disconnect("button_up", OnButtonReleased)
+		
+	if (But.is_in_group("DigitalButtons")):
+		if (!But.is_connected("button_down", OnDigitalButtonClicked)):
+			return
+		But.disconnect("button_down", OnDigitalButtonClicked)
+		But.disconnect("mouse_entered", OnButtonHovered)
+
 func Refresh():
 	var buttons = get_tree().get_nodes_in_group("Buttons")
 	for g in buttons.size():

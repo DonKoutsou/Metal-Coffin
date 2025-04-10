@@ -84,7 +84,6 @@ content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
-skew = Vector2(0.05, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -95,7 +94,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 4
-shadow_size = 5
+shadow_size = 10
 anti_aliasing_size = 2.0
 
 [sub_resource type="Curve" id="Curve_58ae4"]
@@ -107,17 +106,17 @@ offsets = PackedFloat32Array(0, 0.102293, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
-custom_minimum_size = Vector2(200, 190)
+custom_minimum_size = Vector2(192, 200)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -87.5
-offset_right = 100.0
-offset_bottom = 87.5
+offset_left = -96.0
+offset_top = -100.0
+offset_right = 96.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -126,7 +125,7 @@ mouse_filter = 2
 script = ExtResource("1_vr3r8")
 CardName = NodePath("VBoxContainer/HBoxContainer/Label")
 CardDesc = NodePath("VBoxContainer/CardDesc")
-CardCost = NodePath("VBoxContainer/HBoxContainer/CardCost")
+CardCost = NodePath("CardCost")
 CardTex = NodePath("VBoxContainer/HBoxContainer/CardText")
 
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
@@ -150,6 +149,26 @@ icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
+[node name="CardCost" type="Label" parent="."]
+modulate = Color(1, 0.763983, 0.0812772, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 22.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 2
+autowrap_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -167,7 +186,7 @@ theme_override_constants/separation = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.19
+size_flags_stretch_ratio = 1.37
 mouse_filter = 2
 
 [node name="CardText" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
@@ -190,30 +209,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="CardCost" type="Label" parent="VBoxContainer/HBoxContainer"]
-modulate = Color(1, 0.763983, 0.0812772, 1)
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 1
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
-text = "1"
-horizontal_alignment = 2
-autowrap_mode = 2
-
 [node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
-text = "[center]Throws a barragge on the enemy. [color=#c19200]DMG = 6 * Firepower[/color].
-May cause fire"
+text = "Throws a barragge on the enemy.
+CAN'T BE AVOIDED
+[color=#c19200]DMG = 6 * Firepower
+faw"
 fit_content = true
 autowrap_mode = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 

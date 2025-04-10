@@ -121,7 +121,7 @@ func FuelBar_gui_input(event: InputEvent) -> void:
 		var rel = event.relative
 		var AddedFuel = roundi(((rel.x / 3) * (FuelBar.max_value / 100)))
 		UpdateFuelBar(AddedFuel)
-
+	
 func RepairBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var rel = event.relative
@@ -129,6 +129,7 @@ func RepairBar_gui_input(event: InputEvent) -> void:
 		UpdateRepairBar(AddedRepair)
 		
 func UpdateFuelBar(AddedFuel : float):
+	$AudioStreamPlayer.play()
 	if (AddedFuel * FuelPricePerTon > PlayerWallet.Funds):
 		AddedFuel = PlayerWallet.Funds / FuelPricePerTon
 	if (AddedFuel > TownFuel):
@@ -148,6 +149,7 @@ func UpdateFuelBar(AddedFuel : float):
 	CurrentFuel.text = var_to_str(roundi(PlFuel + BoughtFuel))
 	
 func UpdateRepairBar(AddedRepair : float):
+	$AudioStreamPlayer.play()
 	if (AddedRepair * RepairpricePerRepairValue > PlayerWallet.Funds):
 		AddedRepair = PlayerWallet.Funds / RepairpricePerRepairValue
 	var NewPlRepair = PlHull + BoughtRepairs + AddedRepair

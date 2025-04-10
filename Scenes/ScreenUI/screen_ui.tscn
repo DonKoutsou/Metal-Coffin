@@ -353,64 +353,6 @@ offset_top = -337.0
 offset_right = -13.0
 offset_bottom = -46.0
 
-[node name="DroneButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -230.5
-offset_top = -266.0
-offset_right = -209.5
-offset_bottom = -222.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="MissileButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -230.5
-offset_top = -201.0
-offset_right = -209.5
-offset_bottom = -157.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
-ignore_texture_size = true
-stretch_mode = 0
-flip_h = true
-
-[node name="RadarButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -230.5
-offset_top = -136.0
-offset_right = -209.5
-offset_bottom = -92.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("9_3s488")
-texture_pressed = ExtResource("10_3csbo")
-texture_click_mask = ExtResource("8_eamxa")
-ignore_texture_size = true
-stretch_mode = 0
-
 [node name="ScreenUi" type="Control" parent="NormalScreen"]
 layout_mode = 1
 anchors_preset = 15
@@ -455,92 +397,6 @@ grow_horizontal = 0
 [node name="MapMarkerControls" parent="NormalScreen/ScreenUi" instance=ExtResource("14_ua54b")]
 layout_mode = 1
 
-[node name="ControlledShipSwitch" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -152.5
-offset_top = -45.5
-offset_right = -108.5
-offset_bottom = -25.5
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-focus_mode = 0
-theme = ExtResource("14_l0ryv")
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
-[node name="MarkerPlecement" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -230.5
-offset_top = -8.0
-offset_right = -209.5
-offset_bottom = 37.0
-grow_horizontal = 0
-grow_vertical = 2
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="ControlledShipReturn" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -230.5
-offset_top = -45.5
-offset_right = -186.5
-offset_bottom = -25.5
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-focus_mode = 0
-theme = ExtResource("14_l0ryv")
-texture_normal = ExtResource("15_tpyok")
-texture_pressed = ExtResource("16_sln7g")
-texture_click_mask = ExtResource("8_eamxa")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
-[node name="LandButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -230.5
-offset_top = -71.0
-offset_right = -209.5
-offset_bottom = -27.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("17_07pwg")
-texture_pressed = ExtResource("18_qqmpd")
-texture_click_mask = ExtResource("8_eamxa")
-ignore_texture_size = true
-stretch_mode = 0
-
 [node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
@@ -548,10 +404,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -541.0
-offset_right = -27.0
-offset_bottom = -496.0
+offset_left = -52.0
+offset_top = -601.0
+offset_right = -28.0
+offset_bottom = -551.0
 grow_horizontal = 0
 grow_vertical = 0
 action_mode = 0
@@ -568,10 +424,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -47.0
-offset_top = -476.0
-offset_right = -27.0
-offset_bottom = -432.0
+offset_left = -51.0
+offset_top = -529.0
+offset_right = -28.0
+offset_bottom = -479.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("21_ue6hp")
@@ -587,10 +443,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -72.0
-offset_top = -46.0
-offset_right = -27.0
-offset_bottom = -26.0
+offset_left = -77.0
+offset_top = -51.0
+offset_right = -29.0
+offset_bottom = -28.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -604,15 +460,159 @@ texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="ControlledShipSwitch" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -51.0
+offset_right = -115.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("14_l0ryv")
+texture_normal = ExtResource("6_kbeeh")
+texture_pressed = ExtResource("7_t8pjf")
+texture_click_mask = ExtResource("8_eamxa")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="ControlledShipReturn" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -51.0
+offset_right = -198.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("14_l0ryv")
+texture_normal = ExtResource("15_tpyok")
+texture_pressed = ExtResource("16_sln7g")
+texture_click_mask = ExtResource("8_eamxa")
+ignore_texture_size = true
+stretch_mode = 0
+flip_v = true
+
+[node name="MarkerPlecement" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -9.0
+offset_right = -223.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("6_kbeeh")
+texture_pressed = ExtResource("7_t8pjf")
+texture_click_mask = ExtResource("8_eamxa")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="DroneButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -246.0
+offset_top = -296.0
+offset_right = -223.0
+offset_bottom = -247.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("6_kbeeh")
+texture_pressed = ExtResource("7_t8pjf")
+texture_click_mask = ExtResource("8_eamxa")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MissileButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -246.0
+offset_top = -224.0
+offset_right = -223.0
+offset_bottom = -175.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("6_kbeeh")
+texture_pressed = ExtResource("7_t8pjf")
+texture_click_mask = ExtResource("8_eamxa")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="RadarButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -246.0
+offset_top = -151.0
+offset_right = -223.0
+offset_bottom = -102.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("9_3s488")
+texture_pressed = ExtResource("10_3csbo")
+texture_click_mask = ExtResource("8_eamxa")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="LandButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -246.0
+offset_top = -79.0
+offset_right = -223.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("17_07pwg")
+texture_pressed = ExtResource("18_qqmpd")
+texture_click_mask = ExtResource("8_eamxa")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="Clock" parent="NormalScreen" instance=ExtResource("23_0465a")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -206.0
-offset_top = -211.0
-offset_right = -115.0
-offset_bottom = -123.0
+offset_left = -228.0
+offset_top = -209.0
+offset_right = -113.0
+offset_bottom = -157.0
 grow_horizontal = 0
 
 [node name="Pause" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
@@ -621,10 +621,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0
-offset_top = 35.0
-offset_right = -26.0
-offset_bottom = 77.0
+offset_left = -90.0
+offset_top = 39.0
+offset_right = -27.0
+offset_bottom = 86.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -677,15 +677,15 @@ anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -167.0
-offset_top = 5.0
-offset_right = -167.0
-offset_bottom = 92.0
+offset_left = -179.0
+offset_top = 9.0
+offset_right = -179.0
+offset_bottom = 96.0
 grow_horizontal = 0
 grow_vertical = 1
 
 [node name="AnimatedSprite2D" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
-position = Vector2(936, -22)
+position = Vector2(984, -6)
 scale = Vector2(0.898438, 0.898438)
 frame_progress = 0.96041
 frequency = 40.0
@@ -722,9 +722,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 580.0
-offset_top = -178.0
+offset_top = -213.0
 offset_right = -226.0
-offset_bottom = -404.0
+offset_bottom = -439.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
@@ -759,10 +759,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 39.0
-offset_top = -218.0
-offset_right = -759.0
-offset_bottom = -435.0
+offset_left = 17.0
+offset_top = -244.0
+offset_right = -781.0
+offset_bottom = -461.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(178, 0)
@@ -799,8 +799,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -678.0
-offset_bottom = -678.0
+offset_top = -751.0
+offset_bottom = -751.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
@@ -824,13 +824,13 @@ texture = ExtResource("33_vyv2f")
 expand_mode = 1
 
 [node name="ScreenCam" type="Camera2D" parent="." node_paths=PackedStringArray("Cabled")]
-position = Vector2(600, 324)
+position = Vector2(640, 360)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
 Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 
 [node name="LightPivot1" type="Node2D" parent="ScreenCam" node_paths=PackedStringArray("SoundPlayer")]
-position = Vector2(0, -1450)
+position = Vector2(0, -1609)
 script = ExtResource("36_wetmy")
 LeftSound = ExtResource("39_ng3jm")
 RightSound = ExtResource("38_ao4ul")
@@ -866,8 +866,8 @@ blend_mode = 2
 range_z_min = 0
 range_layer_max = 1
 texture = ExtResource("36_xl4i0")
-offset = Vector2(0, 800)
-texture_scale = 6.5
+offset = Vector2(0, 850)
+texture_scale = 6.7
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ScreenCam/LightPivot1/LightPivot2"]
 stream = ExtResource("38_ao4ul")
@@ -899,9 +899,6 @@ libraries = {
 
 [connection signal="AccelerationChangeEnded" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Changed"]
-[connection signal="pressed" from="NormalScreen/DroneButton" to="." method="Drone_Button_Pressed"]
-[connection signal="pressed" from="NormalScreen/MissileButton" to="." method="Missile_Button_Pressed"]
-[connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="SteeringDitChanged" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steering_Direction_Changed"]
 [connection signal="SteeringOffseted" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steer_Offseted"]
 [connection signal="ClearPressed" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="Clear_Lines_Pressed"]
@@ -910,13 +907,16 @@ libraries = {
 [connection signal="ExitPressed" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="Exit_Marker_Editor_Pressed"]
 [connection signal="MarkerHorizontalMove" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="MarkerEditorXRangeChanged"]
 [connection signal="MarkerVerticalMove" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="MarkerEditorYRangeChanged"]
-[connection signal="pressed" from="NormalScreen/ControlledShipSwitch" to="." method="Ship_Switch_Pressed"]
-[connection signal="pressed" from="NormalScreen/MarkerPlecement" to="." method="Marker_Editor_Pressed"]
-[connection signal="pressed" from="NormalScreen/ControlledShipReturn" to="." method="Regroup_Pressed"]
-[connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
 [connection signal="button_up" from="NormalScreen/SpeedSimulation" to="." method="Sim_Speed_Released"]
 [connection signal="pressed" from="NormalScreen/SpeedSimulation" to="." method="Sim_Speed_Pressed"]
 [connection signal="pressed" from="NormalScreen/SimulationButton" to="." method="Sim_Pause_Pressed"]
 [connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
+[connection signal="pressed" from="NormalScreen/ControlledShipSwitch" to="." method="Ship_Switch_Pressed"]
+[connection signal="pressed" from="NormalScreen/ControlledShipReturn" to="." method="Regroup_Pressed"]
+[connection signal="pressed" from="NormalScreen/MarkerPlecement" to="." method="Marker_Editor_Pressed"]
+[connection signal="pressed" from="NormalScreen/DroneButton" to="." method="Drone_Button_Pressed"]
+[connection signal="pressed" from="NormalScreen/MissileButton" to="." method="Missile_Button_Pressed"]
+[connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
+[connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]
 [connection signal="StepChanged" from="NormalScreen/Simulation_Nob" to="." method="Simmulation_Step_Changed"]

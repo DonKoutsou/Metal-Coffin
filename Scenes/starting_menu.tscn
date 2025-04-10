@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=30 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -20,13 +20,14 @@
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
 [ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_1p5b6"]
+[ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
 shader = ExtResource("11_j424g")
 shader_parameter/GroundTexture = ExtResource("13_2tj7v")
 shader_parameter/GroundNormalTexture = ExtResource("12_7x35f")
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale = Vector2(4, 4)
+shader_parameter/Scale = Vector2(6, 6)
 
 [sub_resource type="Curve" id="Curve_1p5b6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
@@ -34,8 +35,8 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_srpg8"]
 interpolation_color_space = 1
-offsets = PackedFloat32Array(0, 0.715481, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
+offsets = PackedFloat32Array(0, 0.719685, 1)
+colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.313, 0.313, 0.313, 0)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5
@@ -166,7 +167,8 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 position = Vector2(15, 7)
-width = 2.0
+points = PackedVector2Array(0, 0)
+width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
 begin_cap_mode = 2
@@ -209,7 +211,8 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 position = Vector2(15, 6)
-width = 2.0
+points = PackedVector2Array(0, 0)
+width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
 begin_cap_mode = 2
@@ -253,7 +256,8 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 position = Vector2(15, 7)
-width = 2.0
+points = PackedVector2Array(0, 0)
+width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
 begin_cap_mode = 2
@@ -265,14 +269,13 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="TextureRect2" type="TextureRect" parent="w"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -595.0
-offset_top = -163.0
-offset_right = 468.0
-offset_bottom = 434.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -197.0
+offset_bottom = -197.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
@@ -285,9 +288,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
+offset_left = 10.0
 offset_top = 10.0
-offset_right = -8.0
+offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -297,11 +300,18 @@ texture = ExtResource("7_aspsn")
 expand_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="w"]
-layout_mode = 2
-offset_left = 1041.0
-offset_top = 557.0
-offset_right = 1173.0
-offset_bottom = 621.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -90.0
+offset_right = -20.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="w/HBoxContainer"]
@@ -313,6 +323,7 @@ layout_mode = 2
 texture = ExtResource("3_s86m3")
 
 [node name="Clouds" type="ColorRect" parent="w"]
+visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_2tj7v")
 layout_mode = 1
@@ -373,10 +384,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 26.0
-offset_top = -330.0
-offset_right = 321.0
-offset_bottom = -22.0
+offset_left = 41.0
+offset_top = -342.0
+offset_right = 336.0
+offset_bottom = -34.0
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("9_3vvgq")
 
@@ -475,12 +486,19 @@ texture = ExtResource("10_jcj0v")
 expand_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="w"]
-position = Vector2(467, 152)
+position = Vector2(656, 196)
 blend_mode = 2
 range_z_max = -1
 texture = ExtResource("15_7x35f")
 texture_scale = 7.21
 height = 328.0
+
+[node name="Button" parent="w" instance=ExtResource("21_srpg8")]
+layout_mode = 1
+offset_left = -288.0
+offset_top = -142.0
+offset_right = -20.0
+offset_bottom = -99.0
 
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/Prologue" to="." method="_on_prologue_pressed"]
 [connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]

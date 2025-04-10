@@ -93,7 +93,10 @@ func OnButtonPressed() -> void:
 
 func Dissable() -> void:
 	$Button.disabled = true
-
+	var SoundMan = UISoundMan.GetInstance()
+	if (is_instance_valid(SoundMan)):
+		SoundMan.RemoveSelf($Button)
+	
 func OnOptionSelected(Option : CardOption) -> void:
 	#var but = get_viewport().gui_get_focus_owner() as Button
 	#Option = but.text

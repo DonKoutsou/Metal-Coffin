@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=62 format=4 uid="uid://de7fb8k462lxb"]
+[gd_resource type="Theme" load_steps=63 format=4 uid="uid://de7fb8k462lxb"]
 
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="1_udhci"]
 [ext_resource type="FontFile" uid="uid://d0r7lokuktq1c" path="res://Fonts/OCR-a___.ttf" id="2_mvyjv"]
@@ -13,6 +13,7 @@
 [ext_resource type="StyleBox" uid="uid://46p0yqwfh7ud" path="res://Theme/HSlider_Grabber.tres" id="7_c6x1m"]
 [ext_resource type="StyleBox" uid="uid://cjob57ldf08tq" path="res://Theme/HSlider_GrabberH.tres" id="8_xd0bq"]
 [ext_resource type="StyleBox" uid="uid://d2d2677f3j08f" path="res://Theme/HSlider_Slider.tres" id="9_hukj5"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_udhci"]
 [ext_resource type="Texture2D" uid="uid://dfky4sa7x12ef" path="res://Assets/UIPiecies/UISliderBig.png" id="13_eaocs"]
 [ext_resource type="StyleBox" uid="uid://b55uyr0b56r5s" path="res://Theme/VSlider_Grabber.tres" id="14_v41hx"]
 [ext_resource type="StyleBox" uid="uid://cfiw4vt0vjqy4" path="res://Theme/VSlider_GrabberH.tres" id="15_v1byl"]
@@ -2794,6 +2795,7 @@ Label/constants/shadow_offset_y = 0
 Label/constants/shadow_outline_size = 0
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_udhci")
+LinkButton/styles/focus = ExtResource("9_udhci")
 MenuBar/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 MenuBar/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 MenuBar/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)

@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd47qsxg6jka3"]
+[gd_scene load_steps=5 format=3 uid="uid://bd47qsxg6jka3"]
 
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_d2gur"]
 [ext_resource type="Script" uid="uid://bvnw3s03wdeai" path="res://Scripts/UI/ItemNotifContainer.gd" id="1_ojvh4"]
-[ext_resource type="Texture2D" uid="uid://bd1hamn6rh765" path="res://Assets/Items/Oxygen_Smol.png" id="2_ywqay"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="3_xn060"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2vg1"]
@@ -34,7 +33,6 @@ script = ExtResource("1_ojvh4")
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("2_ywqay")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

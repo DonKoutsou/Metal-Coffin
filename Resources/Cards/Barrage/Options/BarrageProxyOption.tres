@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_y6fth")
 OptionName = "Prox Fuse"
-OptionDescription = "Throws a barragge on the enemy. Can't be avoided. [color=#c19200]DMG = 6 * Firepower"
+OptionDescription = "Throws a barragge on the enemy.[p][center]CAN'T BE AVOIDED[p][center][color=#c19200]DMG = 6 * FPWR"
 NewPic = ExtResource("1_dslbu")
 EnergyAdd = 1
 DamageFlat = 0

@@ -1,15 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://mynuy3gwirlo"]
+[gd_scene load_steps=3 format=3 uid="uid://mynuy3gwirlo"]
 
 [ext_resource type="Script" uid="uid://yryotxutpsur" path="res://Scripts/CardFight/atack_timer.gd" id="1_sxahx"]
+[ext_resource type="AudioStream" uid="uid://dppa5wcyhh4an" path="res://Assets/Sounds/Clock.mp3" id="2_8m7rj"]
 
-[node name="AtackTimer" type="ProgressBar"]
+[node name="AtackTimer" type="ProgressBar" node_paths=PackedStringArray("T", "S", "Text")]
+custom_minimum_size = Vector2(0, 21)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+show_percentage = false
 script = ExtResource("1_sxahx")
+Timeout = 10.0
+T = NodePath("Timer")
+S = NodePath("AudioStreamPlayer")
+Text = NodePath("Label")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8m7rj")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

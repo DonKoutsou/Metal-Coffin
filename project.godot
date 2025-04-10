@@ -27,7 +27,8 @@ HelperFunctions="*res://Scripts/Helper.gd"
 
 [display]
 
-window/size/viewport_width=1200
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
 [dotnet]

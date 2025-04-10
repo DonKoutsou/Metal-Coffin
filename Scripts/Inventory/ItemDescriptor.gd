@@ -99,11 +99,12 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 		for g in It.CardProviding:
 			var CardS = g.duplicate() as CardStats
 			var card = CardScene.instantiate() as Card
-			card.Dissable()
+			
 			if (It.CardOptionProviding != null):
 				CardS.SelectedOption = It.CardOptionProviding
 			card.SetCardStats(CardS, [])
 			CardPlecement.add_child(card)
+			card.Dissable()
 	else:
 		CardSection.visible = false
 #func _on_use_pressed() -> void:

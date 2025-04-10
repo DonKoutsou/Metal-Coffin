@@ -7,6 +7,9 @@ class_name CommandLine
 var Items : Array[Item]
 
 func _ready() -> void:
+	if (!OS.is_debug_build()):
+		queue_free()
+		return
 	set_physics_process(false)
 	RefrshExistingItems()
 

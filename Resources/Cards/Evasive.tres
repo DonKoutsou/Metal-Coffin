@@ -9,7 +9,7 @@
 script = ExtResource("2_hgrwv")
 Icon = ExtResource("1_nlrrw")
 CardName = "Evasive Maneuvers"
-CardDescription = "Avoid an incomming  [color=#c19200]barragge"
+CardDescription = "Avoid an incomming [color=#c19200]barragge"
 Energy = 2
 Options = Array[ExtResource("2_1ikl0")]([])
 AllowDuplicates = true

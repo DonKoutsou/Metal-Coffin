@@ -9,7 +9,7 @@
 script = ExtResource("2_lxvii")
 Icon = ExtResource("1_6wv8y")
 CardName = "Flare"
-CardDescription = "Avoid incomming  [color=#c19200]Heat Seeking Missile"
+CardDescription = "Avoid an incomming [color=#c19200]Heat Seeking Missile"
 Energy = 2
 Options = Array[ExtResource("2_8hlof")]([])
 AllowDuplicates = true

@@ -84,11 +84,11 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	for g in 2:
-		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-	for g in 2:
-		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#for g in 2:
+		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in 2:
+		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -507,7 +507,7 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -
 		Dmg -= origshield - Ship.Shield
 	Ship.Hull -= Dmg
 
-	if (CauseFire and TrySetFire()):
+	if (CauseFire or TrySetFire()):
 		ToggleFireToShip(Ship, true)
 	
 	if (IsShipFriendly(Ship)):
