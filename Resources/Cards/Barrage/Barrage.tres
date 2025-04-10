@@ -21,3 +21,4 @@ AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("4_3kuj3")]([])
 WeapT = 1
+AOE = false

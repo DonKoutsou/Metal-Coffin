@@ -1,9 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://c8wthdbwacfhe"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://c8wthdbwacfhe"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_66jjj"]
-[ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="2_4t30g"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_6o1ql"]
-[ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="3_583i0"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="4_q0elo"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_awpny"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_n7ikb"]
@@ -39,8 +37,6 @@ UpgradeTime = 300.0
 UpgradeCost = 1000.04
 IsDamaged = false
 PartType = 1
-ItemIcon = ExtResource("2_4t30g")
-ItemIconSmol = ExtResource("3_583i0")
 ItemName = "EcoDrive-100q \"Conserve\""
 ItemDesc = "'Conserve' is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, 'Conserve' offers a balanced compromise for steady pacing over extended durations."
 MaxStackCount = 1

@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://n1uvu44r7eyd"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://n1uvu44r7eyd"]
 
-[ext_resource type="Texture2D" uid="uid://dyf374yh5u1dh" path="res://Assets/Items/fuel-tank.png" id="1_3ytf2"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_okalb"]
-[ext_resource type="Texture2D" uid="uid://dnew4yhwmns36" path="res://Assets/Items/fuel-tank_smol.png" id="2_s1m52"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_4o074"]
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/LargeFuelTank.tres" id="4_eq04c"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_u32dk"]
@@ -32,8 +30,6 @@ UpgradeTime = 400.0
 UpgradeCost = 0.0
 IsDamaged = false
 PartType = 3
-ItemIcon = ExtResource("1_3ytf2")
-ItemIconSmol = ExtResource("2_s1m52")
 ItemName = "FT-1000"
 ItemDesc = "Designed for medium-range missions, this tank offers increased fuel retention. Its triple-layered internal lining adds to its structural integrity."
 MaxStackCount = 1

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardOption" load_steps=3 format=3 uid="uid://dep1p3s46i325"]
 
-[ext_resource type="Texture2D" uid="uid://dgj0w64wb7mmy" path="res://Assets/Cards/hydra-shot.png" id="1_jk8sp"]
+[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="1_jk8sp"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="1_xhabx"]
 
 [resource]

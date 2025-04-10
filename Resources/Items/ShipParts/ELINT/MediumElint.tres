@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://p0sngnrp8hgi"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://p0sngnrp8hgi"]
 
-[ext_resource type="Texture2D" uid="uid://b2g3n0183j4lm" path="res://Assets/Items/radar-dish.png" id="1_887gu"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_axxoo"]
-[ext_resource type="Texture2D" uid="uid://cud25kmc3qpt1" path="res://Assets/Items/radar-dish_Smol.png" id="2_rbrwa"]
 [ext_resource type="Resource" uid="uid://22w1h832bsxa" path="res://Resources/Items/ShipParts/ELINT/LargeElint.tres" id="5_n5pci"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_2djwj"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_bgqm5"]
@@ -23,8 +21,6 @@ UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
 PartType = 2
-ItemIcon = ExtResource("1_887gu")
-ItemIconSmol = ExtResource("2_rbrwa")
 ItemName = "ELINT-50 \"Watcher"
 ItemDesc = "Watcher offers a significant upgrade in sensitivity and processing power, capable of discerning radar signatures from greater distances and with improved accuracy. Equipped with advanced signal filtering algorithms, 'Watcher' reduces noise interference, delivering clearer insights into enemy radar activity. This makes it a valuable asset for strategic operations in moderately hostile regions."
 MaxStackCount = 1

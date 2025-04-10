@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="MissileItem" load_steps=7 format=3 uid="uid://60cqxlcirs15"]
+[gd_resource type="Resource" script_class="MissileItem" load_steps=5 format=3 uid="uid://60cqxlcirs15"]
 
-[ext_resource type="Texture2D" uid="uid://ccuxh3qifp7sw" path="res://Assets/Items/rocket.png" id="1_0xfv8"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile.tres" id="1_c4tby"]
-[ext_resource type="Texture2D" uid="uid://c8a2hugeiqnob" path="res://Assets/Items/rocketsmol.png" id="2_iety4"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_u57dd"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="3_2il65"]
 [ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="4_o0c70"]
@@ -14,8 +12,6 @@ Distance = 50
 Speed = 6.0
 Damage = 10
 Type = 1
-ItemIcon = ExtResource("1_0xfv8")
-ItemIconSmol = ExtResource("2_iety4")
 ItemName = "Heat-seeking Missile"
 ItemDesc = "Within visual range missile, used for close quarter encounters."
 MaxStackCount = 99

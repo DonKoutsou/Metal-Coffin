@@ -1,9 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://k0unclveytur"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://k0unclveytur"]
 
-[ext_resource type="Texture2D" uid="uid://cq65p5qeyrist" path="res://Assets/Items/furnace.png" id="1_7w3sd"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_ro018"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_0ovoj"]
-[ext_resource type="Texture2D" uid="uid://cmun3x0vt61t" path="res://Assets/Items/furnace_smol.png" id="2_a6w7i"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_qr78f"]
 [ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/LargeEngine.tres" id="3_u0cql"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_kd1ru"]
@@ -39,8 +37,6 @@ UpgradeTime = 200.0
 UpgradeCost = 3000.0
 IsDamaged = false
 PartType = 1
-ItemIcon = ExtResource("1_7w3sd")
-ItemIconSmol = ExtResource("2_a6w7i")
 ItemName = "Model EN-250"
 ItemDesc = "This intermediate engine integrates enhanced fuel management systems. Designed for improved performance, it maintains reliability under increased load conditions."
 MaxStackCount = 1

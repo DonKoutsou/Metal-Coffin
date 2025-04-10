@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://dlkv8clb3piuw"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://dlkv8clb3piuw"]
 
-[ext_resource type="Texture2D" uid="uid://ehsfmj5xbkb3" path="res://Assets/Items/bubble-field.png" id="1_bl8l4"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="1_mnixx"]
-[ext_resource type="Texture2D" uid="uid://dtk5sb7w7lkqw" path="res://Assets/Items/bubble-field_smol.png" id="2_2sa64"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_7eit2"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_c5tjm"]
 [ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="3_mupuh"]
@@ -22,8 +20,6 @@ UpgradeTime = 1200.0
 UpgradeCost = 120000.0
 IsDamaged = false
 PartType = 5
-ItemIcon = ExtResource("1_bl8l4")
-ItemIconSmol = ExtResource("2_2sa64")
 ItemName = "SPK-100 Ship Barrier"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1

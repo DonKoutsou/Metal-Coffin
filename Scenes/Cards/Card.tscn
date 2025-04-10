@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
-[ext_resource type="Texture2D" uid="uid://c221vevim2qk3" path="res://Assets/Cards/Shield.png" id="2_58ae4"]
+[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="2_58ae4"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
@@ -107,7 +107,7 @@ offsets = PackedFloat32Array(0, 0.102293, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
-custom_minimum_size = Vector2(200, 175)
+custom_minimum_size = Vector2(200, 190)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -167,6 +167,7 @@ theme_override_constants/separation = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.19
 mouse_filter = 2
 
 [node name="CardText" type="TextureRect" parent="VBoxContainer/HBoxContainer"]

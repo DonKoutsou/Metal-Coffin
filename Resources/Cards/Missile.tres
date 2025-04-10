@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="1_6i3qa"]
 [ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="2_hl4dw"]
-[ext_resource type="Texture2D" uid="uid://mal2en5ulov6" path="res://Assets/Cards/Missile2.png" id="2_vjf7b"]
+[ext_resource type="Texture2D" uid="uid://bi0eebl0i1oyo" path="res://Assets/Cards/Missile.png" id="2_vjf7b"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_ffuhs"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_oxogx"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="5_af5cy"]

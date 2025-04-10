@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardOption" load_steps=3 format=3 uid="uid://bo0job0edtbgf"]
 
-[ext_resource type="Texture2D" uid="uid://cfbr5l87xuwd4" path="res://Assets/Items/eclipse-flare.png" id="1_dslbu"]
+[ext_resource type="Texture2D" uid="uid://c85gq1kvhbjny" path="res://Assets/Cards/BarrazeProxy.png" id="1_dslbu"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="1_y6fth"]
 
 [resource]

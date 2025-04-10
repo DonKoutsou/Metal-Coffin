@@ -1,16 +1,12 @@
-[gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://b4slsaff7t4ha"]
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://b4slsaff7t4ha"]
 
 [ext_resource type="Resource" uid="uid://dep1p3s46i325" path="res://Resources/Cards/Barrage/Options/BarrageFireOption.tres" id="1_7tadr"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_rfcla"]
-[ext_resource type="Texture2D" uid="uid://ca5g1udw64sjg" path="res://Assets/Items/FlameAmmo.png" id="2_lrlu1"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_r3656"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="3_4yt4g"]
-[ext_resource type="Texture2D" uid="uid://b32p7qjm44u7g" path="res://Assets/Items/FlameAmmoSmol.png" id="3_k6xvc"]
 
 [resource]
 script = ExtResource("1_rfcla")
-ItemIcon = ExtResource("2_lrlu1")
-ItemIconSmol = ExtResource("3_k6xvc")
 ItemName = "Fire ammo magazine"
 ItemDesc = "Medium range High speed missile"
 MaxStackCount = 99
