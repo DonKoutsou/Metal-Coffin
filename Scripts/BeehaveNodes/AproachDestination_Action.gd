@@ -21,13 +21,15 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		for g in DroneD.DockedDrones:
 			var Ship = g as HostileShip
 			var DroneCap = Ship.Cpt
-			var dronefuel = (Speed / DroneCap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * TickRate * SimulationSpeed
+			var DroneWeight = DroneCap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+			var dronefuel = (Speed / (DroneCap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - DroneWeight/40)) * TickRate * SimulationSpeed
 			if (DroneCap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > dronefuel):
 				DroneCap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK ,dronefuel)
 			else : if (MainShipFuelReserves - FuelToConsume >= dronefuel):
 				FuelToConsume += dronefuel
 		
-		FuelToConsume += Speed / MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * TickRate * SimulationSpeed
+		var Weight = MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		FuelToConsume += Speed / (MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - Weight / 40)* TickRate * SimulationSpeed
 		if (MainShipFuelReserves - FuelToConsume > 0):
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelToConsume)
 		else: if (DroneD.DronesHaveFuel(FuelToConsume)):

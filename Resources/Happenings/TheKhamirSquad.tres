@@ -1,0 +1,108 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=14 format=3 uid="uid://cjywrm3yoyv76"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_aoe7e"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_13uso"]
+[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="3_afxht"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="6_jxpfh"]
+
+[sub_resource type="Resource" id="Resource_afxht"]
+script = ExtResource("3_afxht")
+StringReply = ""
+OptionName = "Accept"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_aoe7e")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_qybly"]
+script = ExtResource("3_afxht")
+StringReply = ""
+OptionName = "Decline"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_aoe7e")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_13uso"]
+script = ExtResource("1_aoe7e")
+HappeningTexts = Array[String](["\"But you wouldn't really call me here to kill me, that's not how the Khamirs do buisness, they aint this sneaky.\"", "You barely see a smile pop up in her face, all because of the glistenning white teeth that shine within it.", "\"You are right captain, we did have a consideration about it but you might have something that we want. And killing you guaranties us this loss.\"", "You dont talk expecting her to continue...", "\"You see captain alot of ruckus has been raised inside the empires corridors, the big heads dont have the spine to say it but you stress them.\"", "\"Your campaign has barely started but you've reached further than any other that has tried. You show premise that is beyond what one would expect from our times.\"", "\"You might know our history but you probably dont know the whole of it. The decision to join the empire was taken by one of the weakest leaders our tribe ever had.\"", "\"Ever since that day an internal dispute that was caused thanks to the contract that this man had put us on that's been going on without an end in sight.\"", "\"The Khamirs will one day be free captain...\" As you hear the phrase the hair on the back of your neck stand up. She is emanating power and it's slowly filling up the whole room.\"", "You are once again finding it hard to speak. Your tungue has picked up some weight and by now its impossible to move. You force yourself and you can just about take out a few words.", "\"Through the transmission earlier you called me Khoma. What is the meaning of that word.\"", "\"Butcher\" is the only word that leaves her mouth, it seemed like she was waiting for you to ask and is almost relieved to have finally let that word out.", "\"That's what they are calling you captain. You can understand now why i went through all this trouble to meet you.\"", "\"This is taking too long unfortunately and our meeting is prone to get leaked if we dont hurry and get to the gist of the matter.\"", "\"We would like to assist you in your journey to liberate Dormak, and with that liberate the Khamirs.\" The whole room falls silent... \"What say you?\""])
+Options = Array[ExtResource("2_13uso")]([SubResource("Resource_afxht"), SubResource("Resource_qybly")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_aoe7e"]
+script = ExtResource("3_afxht")
+StringReply = "\"I must admit, i accepted your request before i figured out who you were. Had i had a better memory this meeting would have probably not been made.\""
+OptionName = "Respond"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_aoe7e")]([SubResource("Resource_13uso")])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 1
+CheckPossetive = false
+CheckDifficulty = 40
+WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_udrsw"]
+script = ExtResource("1_aoe7e")
+HappeningTexts = Array[String](["Is this a bad idea ? Suddenly it comes to you. The armor... That's Khamir armor. They Khamirs have been allied to the empire for decades now. Sudennly this is starting to feel like a bad idea.", "As the ship touches the port you snap back to reality. You feel the urge to order the ship to launch again, but the crew is looking at you. They probably figured out what you did as well.", "You make your way to the exit and to the far side of the port you see the Khamir ship. Sharp edjes come out of its body, if you saw it on the sky you would think its alien, no gaps apear to its surface, only the door that you see open as you aproach.", "2 huge soldiers come out, they must be 2-3 heads above you. The stand at the edge of the opened gate. They bow and signal you to step into the ship.", "As you make it inside you are struck by the heavy smell of incence, and hear a faint music towards the deeper parts of the ship.", "You follow the music and are eventually met with the captain of the ship. The woman you spoke with through the radio.", "You see her slowly stand up to welcome you. She stands from the pillow she sits on the floor. The elegance of her moves makes you forget for a second that this woman is one of the most skilled murderers the planet has probably seen in years.", "\"My honor to finally get to meet you captain.\" She is wearing a helmet but you can feel her eyes piercing through yours.", "Any weakness here will be taken advantage of you think. You need to ignore your shaking knees and act like the person she expects you to be. ", "You take a big breath and say...."])
+Options = Array[ExtResource("2_13uso")]([SubResource("Resource_aoe7e")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_ee684"]
+script = ExtResource("3_afxht")
+StringReply = "\"You honor me.\" She and the people that stand around her get up and bow. \"Lets both land and i'll be expecting you ...\" The transmission ends..."
+OptionName = "Accept"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_aoe7e")]([SubResource("Resource_udrsw")])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_r1uac"]
+script = ExtResource("1_aoe7e")
+HappeningTexts = Array[String](["The transmission ends."])
+Options = Array[ExtResource("2_13uso")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_72crc"]
+script = ExtResource("3_afxht")
+StringReply = "\"You make me sad captain. We could have done great thing together.\""
+OptionName = "Decline"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_aoe7e")]([SubResource("Resource_r1uac")])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_3ealn"]
+script = ExtResource("1_aoe7e")
+HappeningTexts = Array[String](["While landing the ship a request for a transmision comes from a nearby fleet. \"Incomming transmission Captain you hear the radio operator as he looks back at you expecting an answer.", "You make a shallow nod at him and he allows the transmission come through. It is a woman, you recognise the armor she is wearing but you cant put your finger to it.", "Her voice comes through, its rough but still keeps some of its elegance. \"Hmm, what a surprise, never expected you do be this young.\"", "What would she mean by that? She knows me ? ....", "\"I've heard of you, i've came here with a purpose of meeting you in person. Would you accept an invitation to our ship Khoma?\""])
+Options = Array[ExtResource("2_13uso")]([SubResource("Resource_ee684"), SubResource("Resource_72crc")])
+
+[resource]
+script = ExtResource("6_jxpfh")
+HappeningName = "The Khamir squad"
+Stages = Array[ExtResource("1_aoe7e")]([SubResource("Resource_3ealn")])
+HappeningAppearance = 0
+Special = true
+CrewRecruit = true
+AllowedAppearances = 1

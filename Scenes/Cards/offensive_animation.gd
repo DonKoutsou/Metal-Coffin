@@ -66,7 +66,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		if (HasDef):
 			var tw2 = create_tween()
 			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
-			await tw2.finished
+			#await tw2.finished
 	else:
 		$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_BEGIN)
 		Targets.append_array(TargetShips)
@@ -92,7 +92,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 			DefC.modulate = Color(1,1,1,0)
 			var tw2 = create_tween()
 			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
-			await tw2.finished
+			#await tw2.finished
 		
 	#var ShipPlemenent = VBoxContainer.new()
 	#$HBoxContainer.add_child(ShipPlemenent)
@@ -114,6 +114,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		#tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
 
 func SpawnVisual(Target : Control, Damage : float) -> void:
+
 	var Visual = AtackVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = AtC.global_position + (AtC.size / 2)
@@ -182,7 +183,7 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], FriendShip 
 
 	var tw2 = create_tween()
 	tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
-	await tw2.finished
+	#await tw2.finished
 	
 	for g in TargetShips:
 		call_deferred("SpawnShieldVisual", g)

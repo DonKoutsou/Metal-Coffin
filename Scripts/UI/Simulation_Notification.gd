@@ -12,6 +12,9 @@ var Paused : bool = false
 var Text : String = ""
 
 var Arrow : bool = false
+
+func _ready() -> void:
+	SimPaused(SimulationManager.IsPaused())
 #TODO probably a bettr wayto do this
 func _physics_process(delta: float) -> void:
 	

@@ -30,9 +30,10 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.715481, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
-[node name="w" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines") groups=["PlayerShips", "Ships", "ZoomAffected"]]
+[node name="w" type="Node2D" node_paths=PackedStringArray("AccelerationAudio", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines", "Acceleration") groups=["PlayerShips", "Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_vppi8")
 script = ExtResource("1_ekbhy")
+AccelerationAudio = NodePath("AudioStreamPlayer2D")
 RadarShape = NodePath("Radar")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
@@ -40,6 +41,7 @@ DroneDok = NodePath("DroneDock")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
 Cpt = ExtResource("2_ddg27")
 TrailLines = [NodePath("PlayerShipSpr/TrailLine"), NodePath("PlayerShipSpr/TrailLine2")]
+Acceleration = NodePath("Aceleration")
 
 [node name="ShipBody" type="Area2D" parent="."]
 collision_mask = 5

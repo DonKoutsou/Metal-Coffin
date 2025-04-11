@@ -1,14 +1,16 @@
-[gd_scene load_steps=38 format=3 uid="uid://cqejjvj1hassq"]
+[gd_scene load_steps=40 format=3 uid="uid://cqejjvj1hassq"]
 
 [ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scripts/CardFight/Atackeffects/missile_viz.gd" id="1_5lbu3"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="2_28kke"]
 [ext_resource type="Script" uid="uid://c8jyddoymll7x" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="3_6elwd"]
+[ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Cards/AtackEffects/RevEf.tscn" id="3_n0kd1"]
 [ext_resource type="Script" uid="uid://b05dvjh6sn83r" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_pof7x"]
+[ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_q07tg"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_6elwd"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="5_ex23e"]
 [ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="7_1fv0c"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="9_hv3nu"]
-[ext_resource type="AudioStream" uid="uid://btlq0gcaqeagc" path="res://Assets/Sounds/MissileSlowUp.mp3" id="9_n0kd1"]
+[ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="9_n0kd1"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -132,11 +134,16 @@ _data = [Vector2(0, 1), 0.0, 0.0597402, 0, 0, Vector2(1, 0), -0.904178, 0.0, 0, 
 point_count = 2
 
 [node name="MissileThing" type="Node2D"]
+rotation = -1.5708
 script = ExtResource("1_5lbu3")
-speed = 1200
+speed = 2000
 base_curve_intensity = 0.2
-wiggle_amplitude = 25.0
+wiggle_amplitude = 0.0
+wiggle_frequency = 0.0
 ExplosionSound = ExtResource("9_hv3nu")
+FireSound = ExtResource("3_q07tg")
+
+[node name="MultiParticleExample1" parent="." instance=ExtResource("3_n0kd1")]
 
 [node name="TrailLine" type="Line2D" parent="."]
 width_curve = SubResource("Curve_5lbu3")
@@ -312,5 +319,5 @@ alpha_curve = SubResource("Curve_2rqx3")
 
 [node name="MissileCruise" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_n0kd1")
-pitch_scale = 0.9
-autoplay = true
+volume_db = -20.0
+pitch_scale = 1.01215

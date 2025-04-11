@@ -41,7 +41,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines") groups=["Enemy", "Ships"]]
+[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines", "Acceleration") groups=["Enemy", "Ships"]]
 process_mode = 1
 script = ExtResource("1_dinuw")
 Patrol = false
@@ -53,6 +53,7 @@ BodyShape = NodePath("ShipBody")
 DroneDok = NodePath("DroneDock")
 Cpt = ExtResource("2_lpij7")
 TrailLines = [NodePath("PlayerShipSpr/TrailLine")]
+Acceleration = NodePath("Aceleration")
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1

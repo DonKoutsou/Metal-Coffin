@@ -18,6 +18,7 @@ var SpawnPos : Vector2 = Vector2.ZERO
 @export var wiggle_frequency = 3.0
 
 @export var ExplosionSound : AudioStream
+@export var FireSound : AudioStream
 
 signal Finished
 signal Reached
@@ -29,6 +30,20 @@ func _ready() -> void:
 	$TrailLine.Init()
 	
 	$MissileCruise.pitch_scale = randf_range(0.8, 1.2)
+	
+	var S = DeletableSoundGlobal.new()
+	S.stream = FireSound
+	get_parent().get_parent().add_child(S)
+	S.volume_db = - 20
+	S.play()
+	S.pitch_scale = randf_range(0.8, 1.2)
+	
+	set_process(false)
+	$MultiParticleExample1.burst()
+	await $MultiParticleExample1.Finished
+	$MissileCruise.play()
+	
+	set_process(true)
 
 func _process(delta: float) -> void:
 	
@@ -67,7 +82,8 @@ func _process(delta: float) -> void:
 		
 		position += Vector2(cos(rotation), sin(rotation)) * speed * delta
 	
-	if (global_position.distance_to(Target.global_position + (Target.size / 2)) < 30):
+	if (global_position.distance_to(Target.global_position + (Target.size / 2)) < 50):
+		global_position = Target.global_position + (Target.size / 2)
 		$MultiParticleExample2.global_position = global_position
 		$MultiParticleExample2.global_rotation = 0
 		$MultiParticleExample2.burst()

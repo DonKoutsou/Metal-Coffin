@@ -16,6 +16,7 @@ class_name World
 @export var PlayerWallet : Wallet
 @export_group("Settingsd")
 @export var IsPrologue : bool = false
+@export var StartingFuel : float = 100
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 
@@ -49,10 +50,12 @@ func _ready() -> void:
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Map Spot Plecement")
 		Loadingscr.UpdateProgress(10)
+		await wait(1)
 		Loadingscr.ProcessStarted("Generating Events")
 		GetMap().GenerateEvents()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Events")
+		await wait(1)
 	Loadingscr.UpdateProgress(20)
 	Loadingscr.ProcessStarted("Generating Road Networks")
 	GetMap().GenerateRoads()
@@ -63,17 +66,21 @@ func _ready() -> void:
 	await GetMap().GenerationFinished
 	Loadingscr.ProcesFinished("Generating Spot Connections")
 	Loadingscr.UpdateProgress(60)
+	await wait(1)
 	if (!Loading):
 		Loadingscr.ProcessStarted("Spawning Enemy Fleets")
 		GetMap().SpawnTownEnemies()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Creating Enemy Fleets")
+		await wait(1)
+		GetMap().EnemySpawnFinished()
 		Loadingscr.ProcessStarted("Placing Fleets In World")
 		Loadingscr.UpdateProgress(80)
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Placing Fleets In World")
+		await wait(1)
 	Loadingscr.UpdateProgress(100)
-	
+	await wait(1)
 	
 	#Loadingscr.StartDest()
 	
@@ -82,7 +89,7 @@ func _ready() -> void:
 	
 	WRLD_WorldReady.emit()
 	if (!Loading):
-		GetMap()._InitialPlayerPlacament(IsPrologue)
+		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
 		if (!IsPrologue):
 			GetMap().GetScreenUi().ToggleFullScreen(true)
 		else:
@@ -109,7 +116,10 @@ func _ready() -> void:
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		GetMap().GetCamera().FrameCamToPlayer()
-	
+
+func wait(secs : float) -> Signal:
+	return get_tree().create_timer(secs).timeout
+
 func GetSaveData() -> SaveData:
 	var Data = SaveData.new()
 	Data.DataName = "Wallet"

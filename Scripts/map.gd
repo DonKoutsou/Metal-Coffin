@@ -64,7 +64,7 @@ func _exit_tree() -> void:
 	if (Maplt != null):
 		Maplt.wait_to_finish()
 
-func _InitialPlayerPlacament(IsPrologue : bool = false):
+func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#find first village and make sure its visible
 	var firstvilage = get_tree().get_nodes_in_group("VILLAGE")[0] as MapSpot
 	firstvilage.OnSpotSeen(false)
@@ -75,11 +75,11 @@ func _InitialPlayerPlacament(IsPrologue : bool = false):
 	PlShip.SetShipPosition(pos)
 	GetCamera().FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
-	
+	PlShip.Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	if (!IsPrologue):
 		for g in PlShip.Cpt.ProvidingCaptains:
 			PlShip.GetDroneDock().AddRecruit(g, false)
-
+			g._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 
 
 #Called when enemy ship touches friendly one to strart a fight
@@ -441,8 +441,12 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 		var Spot = T.GetSpot()
 		if (T.IsEnemy()):
 			SpawnSpotFleet(Spot, false, true, T.Pos)
-	call_deferred("EnemySpawnFinished")
+	
+	#GenerationFinished.emit()
+	call_deferred("SpawnFin")
 
+func SpawnFin() -> void:
+	GenerationFinished.emit()
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
 	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy)
@@ -482,6 +486,8 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 			ship.ToggleDocked(true)
 			ship.Command = com
 			com.GetDroneDock().call_deferred("DockShip", ship)
+	
+	GenerationFinished.emit()
 	call_deferred("EnemySpawnFinished")
 
 var EnemsToSpawn : Dictionary
@@ -542,7 +548,7 @@ func EnemySpawnFinished() -> void:
 	EnemySpawnTh.wait_to_finish()
 	set_physics_process(true)
 	
-	GenerationFinished.emit()
+	
 	
 #/////////////////////////////////////////////////////////////
 #██████   ██████   █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 

@@ -2,6 +2,8 @@ extends MapShip
 
 class_name PlayerDrivenShip
 
+@export var AccelerationAudio : AudioStreamPlayer2D
+
 func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)
@@ -15,41 +17,21 @@ func _physics_process(delta: float) -> void:
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
-	if (Landing):
-		UpdateAltitude(Altitude - (60 * SimulationSpeed))
-		if (Altitude <= 0):
-			Altitude = 0
-			LandingEnded.emit(self)
-			Landing = false
-	if (TakingOff):
-		UpdateAltitude(Altitude + (60 * SimulationSpeed))
-		if (Altitude >= 10000):
-			Altitude = 10000
-			TakeoffEnded.emit(self)
-			TakingOff = false
+	_HandleLanding(SimulationSpeed)
 	
+	#HandleAcceleration
 	if (AccelChanged):
-		var Audioween = create_tween()
-		Audioween.tween_property($AudioStreamPlayer2D, "pitch_scale", lerp(0.1, 1.0, GetShipSpeed() / GetShipMaxSpeed()), 2)
-		if (!$AudioStreamPlayer2D.playing):
-			$AudioStreamPlayer2D.play()
-		AccelChanged = false
+		_HandleAccelerationSound()
 
 	if (CurrentPort != null):
-		Refuel()
-		
-		Repair()
-		
-		var inv = Cpt.GetCharacterInventory()
-		if (inv._ItemBeingUpgraded != null):
-			ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
-		else:
-			ShipDockActions.emit("Upgrading", false, 0)
+		_HandleRestock()
 
 	if (Docked or GetShipSpeedVec() == Vector2.ZERO):
 		return
-	
-	var FuelConsumtion = $Aceleration.position.x / Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) * SimulationSpeed
+
+	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var ShipEfficiency = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - ShipWeight / 40
+	var FuelConsumtion = Acceleration.position.x / ShipEfficiency * SimulationSpeed
 	#Consume fuel on shif if enough
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
 		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
@@ -67,16 +49,61 @@ func _physics_process(delta: float) -> void:
 	
 	for g in GetDroneDock().GetDockedShips():
 		var Cap = g.Cpt as Captain
-		var dronefuel = ($Aceleration.position.x / Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)) * SimulationSpeed
-		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > dronefuel):
-			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,dronefuel)
-		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= dronefuel):
-			Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, dronefuel)
-		else: if (GetDroneDock().DronesHaveFuel(dronefuel)):
-			GetDroneDock().SyphonFuelFromDrones(dronefuel)
+		
+		var DroneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		var DroneEfficiency = Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - DroneWeight / 40
+		
+		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency * SimulationSpeed
+		
+		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
+			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,DroneFuelConsumtion)
+		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= DroneFuelConsumtion):
+			Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, DroneFuelConsumtion)
+		else: if (GetDroneDock().DronesHaveFuel(DroneFuelConsumtion)):
+			GetDroneDock().SyphonFuelFromDrones(DroneFuelConsumtion)
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
 
 	var offset = GetShipSpeedVec()
 	global_position += offset * SimulationSpeed
+
+func _HandleAccelerationSound() -> void:
+	var Audioween = create_tween()
+	Audioween.tween_property(AccelerationAudio, "pitch_scale", lerp(0.1, 1.0, GetShipSpeed() / GetShipMaxSpeed()), 2)
+	if (!AccelerationAudio.playing):
+		AccelerationAudio.play()
+	AccelChanged = false
+
+func _HandleRestock() -> void:
+	Refuel()
+	Repair()
+	
+	var inv = Cpt.GetCharacterInventory()
+	if (inv._ItemBeingUpgraded != null):
+		ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+	else:
+		ShipDockActions.emit("Upgrading", false, 0)
+
+func _HandleLanding(SimulationSpeed : float) -> void:
+	if (Landing):
+		UpdateAltitude(Altitude - (60 * SimulationSpeed))
+		if (Altitude <= 0):
+			Altitude = 0
+			LandingEnded.emit(self)
+			Landing = false
+	if (TakingOff):
+		UpdateAltitude(Altitude + (60 * SimulationSpeed))
+		if (Altitude >= 10000):
+			Altitude = 10000
+			TakeoffEnded.emit(self)
+			TakingOff = false
+
+func BodyEnteredElint(Body: Area2D) -> void:
+	if (Body.get_parent() is PlayerDrivenShip):
+		return
+	super(Body)
+func BodyLeftElint(Body: Area2D) -> void:
+	if (Body.get_parent() is PlayerShip):
+		return
+	super(Body)

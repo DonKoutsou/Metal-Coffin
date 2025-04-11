@@ -19,6 +19,7 @@ class_name MapShip
 @export var LowStatsToNotifyAbout : Array[String]
 @export var Cpt : Captain
 @export var TrailLines : Array[TrailLine]
+@export var Acceleration : Node2D
 
 var Paused = true
 #var SimulationSpeed : float = 1
@@ -438,7 +439,7 @@ func GetShipRadarArea() -> Area2D:
 	return $Radar
 
 func GetShipAcelerationNode() -> Node2D:
-	return $Aceleration
+	return Acceleration
 	
 func GetShipIcon() -> Node2D:
 	return $PlayerShipSpr
@@ -448,25 +449,30 @@ func GetFuelStats() -> Dictionary[String, float]:
 	
 	var Fleet = GetDroneDock().GetDockedShips()
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+	var Weight =  Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	
 	var fleetsize = 1 + Fleet.size()
 	var total_fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var total_maxfuel = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-	var inverse_ef_sum = 1.0 / fuel_ef
+	var inverse_ef_sum = 1.0 / (fuel_ef - Weight / 40)
 	
 	# Group ships fuel and efficiency calculations
 	for g in Fleet:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_maxfuel = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		
 		total_fuel += ship_fuel
 		total_maxfuel += ship_maxfuel
-		inverse_ef_sum += 1.0 / ship_efficiency
+		inverse_ef_sum += 1.0 / (ship_efficiency - ship_weight / 40)
+		
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
 	Stats["CurrentFuel"] = total_fuel
 	Stats["MaxFuel"] = total_maxfuel
-	Stats["FleetRange"] = (total_fuel * effective_efficiency) / fleetsize
+	Stats["FleetRange"] = total_fuel * effective_efficiency / fleetsize
 	return Stats
 
 func GetFleet() -> Array[MapShip]:
@@ -485,22 +491,25 @@ func GetFuelRange() -> float:
 		return Command.GetFuelRange()
 	var Fleet = GetDroneDock().GetDockedShips()
 	
+	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var fleetsize = 1 + Fleet.size()
 	var total_fuel = fuel
-	var inverse_ef_sum = 1.0 / fuel_ef
+	var inverse_ef_sum = 1.0 / (fuel_ef - Weight / 40)
 	
 	# Group ships fuel and efficiency calculations
 	for g in Fleet:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		total_fuel += ship_fuel
-		inverse_ef_sum += 1.0 / ship_efficiency
+		inverse_ef_sum += 1.0 / (ship_efficiency - ship_weight / 40)
+		
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
-	return (total_fuel * effective_efficiency) / fleetsize
+	return total_fuel * effective_efficiency / fleetsize
 	
 func GetBattleStats() -> BattleShipStats:
 	
@@ -537,10 +546,10 @@ func GetShipName() -> String:
 func GetShipSpeed() -> float:
 	if (Docked):
 		return Command.GetShipSpeed()
-	return $Aceleration.position.x * 360
+	return Acceleration.position.x * 360
 	
 func GetShipSpeedVec() -> Vector2:
-	return $Aceleration.global_position - global_position
+	return Acceleration.global_position - global_position
 	
 func GetClosestElint() -> Vector2:
 	var closest : Vector2 = Vector2.ZERO

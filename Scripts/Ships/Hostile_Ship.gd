@@ -376,7 +376,7 @@ func BodyLeftElint(area: Area2D) -> void:
 func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Captured):
 		return
-	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+	if (Body.get_parent() is PlayerDrivenShip):
 		if (!Patrol and !Convoy):
 			GarissonVisualContact(Body.get_parent())
 		else:
@@ -410,7 +410,7 @@ func GarissonLostVisualContact(Ship : MapShip) -> void:
 		VisualContactCountdown = 10
 
 func BodyLeftRadar(Body : Area2D) -> void:
-	if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+	if (Body.get_parent() is PlayerDrivenShip):
 		if (!Patrol and !Convoy):
 			GarissonLostVisualContact(Body.get_parent())
 		else:
@@ -436,7 +436,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			else :
 				PathPart += 1
 
-	else :if (Body.get_parent() is PlayerShip or Body.get_parent() is Drone):
+	else :if (Body.get_parent() is PlayerDrivenShip):
 		if (Destroyed):
 			var Wonfunds = Cpt.ProvidingFunds
 			World.GetInstance().PlayerWallet.AddFunds(Wonfunds)

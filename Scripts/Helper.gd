@@ -28,7 +28,10 @@ func DistanceToDistance(Dist: float) -> String:
 		return "very close"
 		
 func GetCityByName(CityName : String) -> MapSpot:
-	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
+	var SpotGroups = ["CAPITAL", "CITY_CENTER"]
+	var cities = []
+	for g in SpotGroups:
+		cities.append_array( get_tree().get_nodes_in_group(g))
 	var CorrectCity : MapSpot
 	for g in cities:
 		var cit = g as MapSpot

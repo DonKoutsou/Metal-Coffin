@@ -113,14 +113,14 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			area.get_parent().connect("OnShipDestroyed" ,OnShipDest)
 		else : if (area.get_parent() is Missile):
 			area.get_parent().connect("OnShipDestroyed" ,OnMissDest)
-		if (FiredBy is PlayerShip or FiredBy is Drone):
+		if (FiredBy is PlayerDrivenShip):
 			if (area.get_parent() is HostileShip):
 				area.get_parent().OnShipSeen(self)
 				
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if (FoundShips.has(area.get_parent())):
 		FoundShips.erase(area.get_parent())
-		if (FiredBy is PlayerShip or FiredBy is Drone):
+		if (FiredBy is PlayerDrivenShip):
 			if (area.get_parent() is HostileShip):
 				area.get_parent().OnShipUnseen(self)
 				
@@ -154,7 +154,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 func _on_missile_body_area_exited(area: Area2D) -> void:
 	var IsRadar = area.get_collision_layer_value(2)
 	if (IsRadar):
-		if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
+		if (area.get_parent() is PlayerDrivenShip):
 			OnShipUnseen(area.get_parent())
 func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)

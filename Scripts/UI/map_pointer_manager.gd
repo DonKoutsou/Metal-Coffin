@@ -228,7 +228,7 @@ func _physics_process(delta: float) -> void:
 				
 				#Marker.UpdateSpeed(ship.GetSpeed())
 			else : if (ship is Missile):
-				if (ship.FiredBy is PlayerShip or ship.FiredBy is Drone or ship.VisibleBy.size() > 0):
+				if (ship.FiredBy is PlayerDrivenShip or ship.VisibleBy.size() > 0):
 					Marker.global_position = ship.global_position
 					#Marker.UpdateSpeed(ship.GetShipSpeed())
 					Marker.visible = true

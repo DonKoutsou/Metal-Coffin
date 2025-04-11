@@ -86,6 +86,6 @@ metadata/_custom_type_script = "uid://s3ha37qvdear"
 [node name="Map" parent="." instance=ExtResource("19_3v2l7")]
 VillageSpotType = ExtResource("21_0i6dt")
 FinalCitySpotType = ExtResource("21_0dp8t")
-MapSize = 11
+MapSize = 20
 MapGenerationDistanceCurve = SubResource("Curve_0dp8t")
-SpawningBoundsX = 2000.0
+SpawningBoundsX = 6000.0
