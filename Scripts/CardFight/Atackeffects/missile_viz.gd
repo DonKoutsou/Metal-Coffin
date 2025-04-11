@@ -27,7 +27,8 @@ func _ready() -> void:
 	#if (Target.global_position.dot(global_position) > 0):
 		#rotation = 180
 	$TrailLine.Init()
-	#$MissileCruise.play(1)
+	
+	$MissileCruise.pitch_scale = randf_range(0.8, 1.2)
 
 func _process(delta: float) -> void:
 	
@@ -76,8 +77,9 @@ func _process(delta: float) -> void:
 		$MissileCruise.stop()
 		var S = DeletableSoundGlobal.new()
 		S.stream = ExplosionSound
-		get_parent().add_child(S)
+		get_parent().get_parent().add_child(S)
 		S.play()
+		S.pitch_scale = randf_range(0.8, 1.2)
 		await $MultiParticleExample2.Finished
 		queue_free()
 		Finished.emit()

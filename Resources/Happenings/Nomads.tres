@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://diwf2l5h75sxb"
 
 [sub_resource type="Resource" id="Resource_tahtp"]
 script = ExtResource("1_myfjk")
-HappeningTexts = Array[String](["Reaching the city you are met with a verry busy port. Withing all the ruckous you catch a glimpse of a nomad group resting.", "You make your way to them hoping to get some information of any nearby happenings."])
+HappeningTexts = Array[String](["Reaching the city you are met with a verry busy port. Within all the ruckous you catch a glimpse of a nomad group resting.", "You make your way to them hoping to get some information of any nearby happenings."])
 Options = Array[ExtResource("2_27cmu")]([SubResource("Resource_c4s21"), SubResource("Resource_ukikf")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

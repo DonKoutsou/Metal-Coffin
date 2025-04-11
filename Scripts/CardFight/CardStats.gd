@@ -3,7 +3,7 @@ class_name CardStats
 
 @export var Icon : Texture
 @export var CardName : String
-@export var CardDescription : String
+@export_multiline var CardDescription : String
 ## Energy consumption of card
 @export var Energy : int
 @export var Options : Array[CardOption]

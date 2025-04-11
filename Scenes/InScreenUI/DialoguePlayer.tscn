@@ -117,6 +117,7 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_p12ba")
+volume_db = -5.0
 bus = &"UI"
 
 [connection signal="pressed" from="HBoxContainer/Skip" to="." method="_on_skip_pressed"]

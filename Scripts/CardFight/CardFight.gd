@@ -84,11 +84,11 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	#for g in 2:
-		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-	#for g in 2:
-		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	for g in 2:
+		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+	for g in 2:
+		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -128,6 +128,8 @@ func DoActionDeclaration(ActionName : String) -> void:
 	var InSound = DeletableSoundGlobal.new()
 	InSound.stream = UIInSound
 	InSound.autoplay = true
+	InSound.bus = "MapSounds"
+	InSound.pitch_scale = randf_range(0.9, 1.1)
 	add_child(InSound)
 	
 	await Tw.finished
@@ -158,6 +160,8 @@ func DoActionDeclaration(ActionName : String) -> void:
 	var OutSound = DeletableSoundGlobal.new()
 	OutSound.stream = UIOutSound
 	OutSound.autoplay = true
+	OutSound.bus = "MapSounds"
+	OutSound.pitch_scale = randf_range(0.9, 1.1)
 	add_child(OutSound)
 	
 	await Tw4.finished
@@ -658,6 +662,8 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	var S = DeletableSoundGlobal.new()
 	S.stream = CardPlecementSound
 	S.autoplay = true
+	S.pitch_scale = randf_range(0.8, 1.2)
+	#S.bus = "MapSounds"
 	add_child(S)
 	S.volume_db = - 10
 	var PlecementTw = create_tween()
