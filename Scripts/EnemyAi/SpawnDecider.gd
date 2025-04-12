@@ -14,6 +14,7 @@ var sorted_captain_list
 var sorted_ground_captain_list
 var sorted_convoy_captain_list
 
+
 func Init() -> void:
 	# Sort CaptainList by cost descending to prioritize more powerful ships
 	sorted_captain_list = CaptainList.duplicate()

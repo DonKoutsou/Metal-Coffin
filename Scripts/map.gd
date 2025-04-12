@@ -279,6 +279,8 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	#LOCATION OF PREVIUSLY PLACED MAP SPOT
 	var Prevpos : Vector2 = Vector2(250,250)
 	
+	var WorldSize : float = 100000
+	
 	var GeneratedSpots : Array[Town] = []
 	for g in MapSize :
 		var type : PackedScene
@@ -306,15 +308,23 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 			pos = GetNextRandomPos(Prevpos, Distanceval)
 		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
 		sc.Pos = pos
+		if (pos.y < WorldSize):
+			WorldSize = pos.y
 		SpotParent.call_deferred("add_child", sc)
-		sc.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(pos.y))
+		
 		GeneratedSpots.append(sc)
 		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
 	
+	
+	
+	
 	#var time = Time.get_ticks_msec()
 	
-	call_deferred("MapGenFinished", GeneratedSpots)
+	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
+	
+	for g in GeneratedSpots:
+		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y))
 
 func HasClose(pos : Vector2, places : Array[Town]) -> bool:
 	var b= false
@@ -327,7 +337,8 @@ func HasClose(pos : Vector2, places : Array[Town]) -> bool:
 func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
 	return Vector2(randf_range(-SpawningBoundsX, SpawningBoundsX), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
 
-func MapGenFinished(Spots : Array[Town]) -> void:
+func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
+	Happening.OnWorldGenerated(WorldSize)
 	SpotList.append_array(Spots)
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()
@@ -345,6 +356,8 @@ func GenerateEventsThreaded() -> void:
 		var Spots : Array
 		Spots.append_array(get_tree().get_nodes_in_group(g))
 		Spots.shuffle()
+		
+		
 		
 		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		

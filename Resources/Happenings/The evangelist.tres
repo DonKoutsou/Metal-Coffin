@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://bwwb3anxj624k"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_fu0io"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_8a2hk"]
+[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="3_y0x4t"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="4_p8xji"]
+
+[sub_resource type="Resource" id="Resource_fu0io"]
+script = ExtResource("3_y0x4t")
+StringReply = "1"
+OptionName = "1"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_fu0io")]([])
+WorldviewEffect = 5
+WorldviewEffectAmm = -5
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_8a2hk"]
+script = ExtResource("3_y0x4t")
+StringReply = "1"
+OptionName = "1"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_fu0io")]([])
+WorldviewEffect = 5
+WorldviewEffectAmm = 5
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_y0x4t"]
+script = ExtResource("1_fu0io")
+HappeningTexts = Array[String](["test"])
+Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_fu0io"), SubResource("Resource_8a2hk")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[resource]
+script = ExtResource("4_p8xji")
+HappeningName = "The evangelist"
+Stages = Array[ExtResource("1_fu0io")]([SubResource("Resource_y0x4t")])
+HappeningAppearance = 3
+Special = true
+CrewRecruit = false
+AllowedAppearances = 1

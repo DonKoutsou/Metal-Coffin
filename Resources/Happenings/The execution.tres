@@ -1,13 +1,49 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=3 format=3 uid="uid://c5n56ywx45ilm"]
+[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://c5n56ywx45ilm"]
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_tpfoe"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_7kn1s"]
+[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="3_4kru7"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="4_kp7kq"]
+
+[sub_resource type="Resource" id="Resource_tpfoe"]
+script = ExtResource("3_4kru7")
+StringReply = "1"
+OptionName = "1"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_tpfoe")]([])
+WorldviewEffect = 4
+WorldviewEffectAmm = -5
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_tpfoe")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_7kn1s"]
+script = ExtResource("3_4kru7")
+StringReply = "2"
+OptionName = "2"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_tpfoe")]([])
+WorldviewEffect = 3
+WorldviewEffectAmm = -5
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_tpfoe")]([])
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_4kru7"]
+script = ExtResource("1_tpfoe")
+HappeningTexts = Array[String](["Test"])
+Options = Array[ExtResource("2_7kn1s")]([SubResource("Resource_tpfoe"), SubResource("Resource_7kn1s")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [resource]
 script = ExtResource("4_kp7kq")
 HappeningName = "The execution"
-Stages = Array[ExtResource("1_tpfoe")]([])
-HappeningAppearance = 0
+Stages = Array[ExtResource("1_tpfoe")]([SubResource("Resource_4kru7")])
+HappeningAppearance = 3
 Special = true
 CrewRecruit = false
 AllowedAppearances = 1
