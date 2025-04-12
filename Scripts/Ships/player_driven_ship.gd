@@ -4,6 +4,10 @@ class_name PlayerDrivenShip
 
 @export var AccelerationAudio : AudioStreamPlayer2D
 
+func  _ready() -> void:
+	super()
+	Paused = SimulationManager.IsPaused()
+
 func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)

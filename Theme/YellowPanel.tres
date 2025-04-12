@@ -13,6 +13,6 @@ border_width_bottom = 2
 border_color = Color(1, 0.763983, 0.0812772, 1)
 corner_radius_top_left = 1
 corner_radius_top_right = 1
-corner_detail = 1
+corner_detail = 2
 shadow_size = 8
 anti_aliasing_size = 2.0

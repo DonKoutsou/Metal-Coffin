@@ -10,6 +10,7 @@ static var WorldviewStats : Dictionary[WorldViews, int] = {
 	WorldViews.LOGIC_BELIEF : 0,
 	WorldViews.EMPATHY_EGO : 0,
 	WorldViews.FORCE_INSPIRATION : 0,
+	WorldViews.MAN_MACHINE : 0,
 }
 
 static var Instance : WorldView
@@ -70,4 +71,5 @@ enum WorldViews{
 	LOGIC_BELIEF,
 	EMPATHY_EGO,
 	FORCE_INSPIRATION,
+	MAN_MACHINE
 }

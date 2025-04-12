@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=3 format=3 uid="uid://c5n56ywx45ilm"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_tpfoe"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="4_kp7kq"]
+
+[resource]
+script = ExtResource("4_kp7kq")
+HappeningName = "The execution"
+Stages = Array[ExtResource("1_tpfoe")]([])
+HappeningAppearance = 0
+Special = true
+CrewRecruit = false
+AllowedAppearances = 1

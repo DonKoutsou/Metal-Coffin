@@ -6,7 +6,6 @@ signal DroneReturning
 
 func  _ready() -> void:
 	super()
-	Paused = SimulationManager.IsPaused()
 	ShipContoller.GetInstance().RegisterSelf(self)
 
 func Steer(Rotation : float) -> void:

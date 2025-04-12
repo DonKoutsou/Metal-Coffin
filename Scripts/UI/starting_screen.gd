@@ -60,6 +60,12 @@ func StartPrologue() -> void:
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
 func StartGame(Load : bool) -> void:
+	if (!OS.is_debug_build()):
+		var window = AcceptDialog.new()
+		add_child(window)
+		window.dialog_text = "Not available on Demo"
+		window.popup_centered()
+		return
 	Wor = GameScene.instantiate() as World
 	#wor.Load
 	if (Load):

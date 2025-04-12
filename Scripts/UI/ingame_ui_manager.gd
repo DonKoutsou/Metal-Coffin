@@ -28,10 +28,9 @@ func _ready() -> void:
 	EventHandler.connect("MarkerEditorXRangeChanged", _MapMarkerEditor._on_x_gas_range_changed)
 	EventHandler.connect("MarkerEditorToggled", _MapMarkerEditor.ToggleVisibilidy)
 	_MapMarkerEditor.visible = false
+	
 static func GetInstance() -> Ingame_UIManager:
 	return Instance
-
-
 
 func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 	if (UnderUI):
@@ -44,7 +43,7 @@ func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 func PlayDiag(Diags : Array[String], Avatar : Texture, TalkerName : String, StopInput : bool = false):
 	var diag = DiagplScene.instantiate() as DialoguePlayer
 	if (StopInput):
-		diag.MouseFilter = StopInput
+		diag.mouse_filter = Control.MOUSE_FILTER_STOP
 	AddUI(diag, true)
 	diag.PlayDialogue(Diags, Avatar, TalkerName)
 

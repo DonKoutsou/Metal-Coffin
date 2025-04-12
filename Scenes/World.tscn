@@ -53,6 +53,10 @@ HappeningUI = ExtResource("9_5gym6")
 WorldViewQuestionairScene = ExtResource("6_xiqgv")
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
+IntroDialogues = Array[String](["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\", \"Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."])
+IntroDialogue2 = Array[String](["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."])
+PrologueDialgues = Array[String](["Operator we are almost at Cardi.", "Thankfully we didn't meet any empire patrols.", "\"We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\"", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."])
+PrologueDialogues2 = Array[String](["Armak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."])
 
 [node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]
 script = ExtResource("7_q720d")

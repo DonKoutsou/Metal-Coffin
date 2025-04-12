@@ -114,22 +114,39 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		#tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
 
 func SpawnVisual(Target : Control, Damage : float) -> void:
-
+	await wait (0.4)
+	
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_IN)
+	tw.set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(AtC, "scale", Vector2.ZERO, 0.75)
+	
 	var Visual = AtackVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = AtC.global_position + (AtC.size / 2)
 	add_child(Visual)
 	
+	
+	
 	Visual.connect("Reached", TweenEnded.bind(Damage))
 
 func SpawnShieldVisual(Target : Control) -> void:
+	await wait (0.4)
+	
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_IN)
+	tw.set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.75)
+	
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefC.global_position + (DefC.size / 2)
 	add_child(Visual)
-	
+
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
 
+func wait(secs : float) -> Signal:
+	return get_tree().create_timer(secs).timeout
 
 var LineToMove = 0
 func MoveLine(Val : float) -> void:
