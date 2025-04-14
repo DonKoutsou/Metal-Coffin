@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=8 format=3 uid="uid://bwwb3anxj624k"]
+[gd_resource type="Resource" script_class="Happening" load_steps=15 format=3 uid="uid://bwwb3anxj624k"]
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_fu0io"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_8a2hk"]
@@ -7,8 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_fu0io"]
 script = ExtResource("3_y0x4t")
-StringReply = "1"
-OptionName = "1"
+StringReply = "You get up and as you are about to head out towards the crowd you feel the guards hand on your shoulder again. You turn around looking him in the eyes and say \"We leave nobody behind soldier.\" And make your way towards the crowd."
+OptionName = "Walk out towards the stage"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_fu0io")]([])
 WorldviewEffect = 5
@@ -17,32 +17,112 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_8a2hk"]
 script = ExtResource("3_y0x4t")
-StringReply = "1"
-OptionName = "1"
+StringReply = "You turn around and signal the guard, you both get up and start heading back."
+OptionName = "Head back into the ship"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_fu0io")]([])
-WorldviewEffect = 5
-WorldviewEffectAmm = 5
+WorldviewEffect = 4
+WorldviewEffectAmm = 10
 WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_y0x4t"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["test"])
+HappeningTexts = Array[String](["As you step out of ship you are met with a surprising silence. The usual trafic that is seen in these ports is gone. On of the guardsmen in the gate receives a radio transmission.", "\"Most of the villages population seems to be gathered at the square. There seems to be a talk going. Will investigate further. Out...\"", "The gruardsman looks at you. You turn around and start heading towards the square, you hear the guard following closely behind you.", "As you slowly reach clother to the square you can hear the comotion, you hear alot of people scream what seem like a chants. The crowd seems to be angry about something.", "You feel a hand reach out and grab your shoulder. A voice behind you. \"Captain, lets not go further\". Its the guard that was following you, and he is pointing at an overreaching stage. 2 men seem to be standing there.", "As you watch closer you start to notice something familiar about one of the men. That is one of your crew, he seems to be tied up to a pole. You signal the guard and you hide trying to listen to what the other man is saying.", "\"Machine lovers on our step people! What? They think we will just sit around and let them bring humanity to its demise ? We have the lesson of the past. Would you let those things around those kids?\"", "This seems to be one of the regimes propagandists talking. You find it hard to belive even all the way out here their influence has reached, but even the crowd seems to be buying into it. Raising their fist and repeating everything the man says.\"", "We will need to act on it. You turn to speak with your guard. The worry in his eyes is the same as your own. \"We need to go back to the ship captain\" you hear him say. And you slowly start figuring out your options."])
 Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_fu0io"), SubResource("Resource_8a2hk")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_qvm6c"]
+script = ExtResource("3_y0x4t")
+StringReply = ""
+OptionName = ""
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_fu0io")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([])
+ReverseEffectOnFail = false
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_qklod"]
+script = ExtResource("3_y0x4t")
+StringReply = ""
+OptionName = ""
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_fu0io")]([])
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([])
+ReverseEffectOnFail = false
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_k6bax"]
+script = ExtResource("1_fu0io")
+HappeningTexts = Array[String](["You manage to fill the crew in on the situtation. Once you finish they seem to be waiting for you to say something more. They seem to have cought on your cool on the situation, they seem to think you already have a plan in your mind and are ready to follow you.", "You get lost in thought for a split second. Do you have a plan? Do you jump straight at a bunch of villigers, what is going to be the resault of that. A bloodbath! There must be a way to avoid that."])
+Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_qvm6c"), SubResource("Resource_qklod")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_23p60"]
+script = ExtResource("1_fu0io")
+HappeningTexts = Array[String]([])
+Options = Array[ExtResource("2_8a2hk")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_p8xji"]
+script = ExtResource("3_y0x4t")
+StringReply = "You deliver the info of your captured comrade and rile up the crew. They all seem to be angered by the situation. You start heading back, now with an agitated hoard of men behind you."
+OptionName = "You exmplain the situation to the crew"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_fu0io")]([SubResource("Resource_k6bax")])
+WorldviewEffect = 1
+WorldviewEffectAmm = 10
+WorldviewCheck = 1
+CheckPossetive = true
+CheckDifficulty = 40
+WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([SubResource("Resource_23p60")])
+ReverseEffectOnFail = true
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_q3kdx"]
+script = ExtResource("3_y0x4t")
+StringReply = "The crew seems to be confused but obeys. The guard the followed you is still next to you. He seems to have some second thoughts on his mind but tried to keep it cool."
+OptionName = "Order the crew to gather back at the ship and make preparations for departure."
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_fu0io")]([])
+WorldviewEffect = 3
+WorldviewEffectAmm = 10
+WorldviewCheck = 0
+CheckPossetive = false
+CheckDifficulty = 20
+WorldViewCheckFailBranch = Array[ExtResource("1_fu0io")]([])
+ReverseEffectOnFail = false
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_shlty"]
+script = ExtResource("1_fu0io")
+HappeningTexts = Array[String](["As you make your way to the ship, some of your crew has already started gethering outside wandering what is happening."])
+Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_p8xji"), SubResource("Resource_q3kdx")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [resource]
 script = ExtResource("4_p8xji")
 HappeningName = "The evangelist"
-Stages = Array[ExtResource("1_fu0io")]([SubResource("Resource_y0x4t")])
+Stages = Array[ExtResource("1_fu0io")]([SubResource("Resource_y0x4t"), SubResource("Resource_shlty")])
 HappeningAppearance = 3
 Special = true
 CrewRecruit = false

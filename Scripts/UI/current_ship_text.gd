@@ -2,13 +2,13 @@ extends Label
 
 @export var ShipControllerEventH : ShipControllerEventHandler
 
-var currentShip : MapShip
+var currentShip : PlayerDrivenShip
 
 func _ready() -> void:
 	currentShip = ShipControllerEventH.CurrentControlled
 	ShipControllerEventH.connect("OnControlledShipChanged", ShipChanged)
 
-func ShipChanged(NewShip : MapShip) -> void:
+func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	currentShip = NewShip
 
 var d = 0.4

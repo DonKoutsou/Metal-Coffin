@@ -44,6 +44,17 @@ func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocus
 	
 	get_tree().paused = false
 
+func DidPrologue() -> bool:
+	if (!FileAccess.file_exists("user://TutorialData.tres")):
+		return false
+	
+	var sav = load("user://TutorialData.tres") as TutorialSaveData
+	
+	if (sav == null):
+		return false
+	
+	return sav.CompletedPrologue
+	
 static func Save() -> void:
 	var sav : TutorialSaveData
 	
@@ -87,6 +98,7 @@ enum Action{
 	TOWN_APROACH,
 	ENEMY_TOWN_APROACH,
 	CARD_FIGHT,
+	CARD_FIGHT_ACTION_PICK,
 	ELINT_CONTACT,
 	LANDING,
 	TOWN_SHOP,
@@ -96,4 +108,7 @@ enum Action{
 	WORLDVIEW_CHECK,
 	GARISSION_ALARM,
 	CONVOY,
+	SIMULATION,
+	MAP_MARKER,
+	MAP_MARKER_INTRO,
 }

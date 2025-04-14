@@ -95,14 +95,14 @@ func _ready() -> void:
 	WRLD_WorldReady.emit()
 	if (!Loading):
 		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
-		if (!IsPrologue):
+		if (IsPrologue):
 			GetMap().GetScreenUi().ToggleFullScreen(true)
 		else:
 			GetMap().GetScreenUi().ToggleFullScreen(false)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		
-		if (!IsPrologue):
+		if (IsPrologue):
 			var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
 			Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
 			Questionair.Init()
@@ -112,9 +112,11 @@ func _ready() -> void:
 			GetMap().GetScreenUi().ToggleFullScreen(false)
 			await GetMap().GetScreenUi().FullScreenToggleStarted
 			Questionair.queue_free()
-			PlayIntro()
-		else:
 			PlayPrologue()
+		else:
+			#Load worldview from prologue
+			WorldView.GetInstance().Load()
+			PlayIntro()
 		PlayerWallet.SetFunds( StartingFunds)
 	else:
 		GetMap().GetScreenUi().ToggleFullScreen(false)
@@ -135,11 +137,17 @@ func LoadSaveData(PlWallet : Wallet) -> void:
 	PlayerWallet.SetFunds(PlWallet.Funds)
 
 func PlayPrologue():
-	Ingame_UIManager.GetInstance().PlayDiag(PrologueDialgues, load("res://Assets/artificial-hive.png"), "Seg", true)
+	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, load("res://Assets/artificial-hive.png"), "Seg", SteerTut, true)
 
 func ShowArmak():
 	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialogues2, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
 	GetMap().GetCamera().ShowArmak()
+
+func SteerTut() -> void:
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
+		var text = "Use the [color=#c19200]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#c19200]Thrust Lever[/color] on the right side of the controller"
+		ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust], false)
 
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
@@ -154,10 +162,7 @@ func ReturnCamToPlayer():
 	
 	GetMap().GetCamera().FrameCamToPlayer()
 	
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
-		var text = "Use the [color=#c19200]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#c19200]Thrust Lever[/color] on the right side of the controller"
-		ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust], false)
+	
 
 func _enter_tree() -> void:
 	var map = GetMap()
@@ -190,9 +195,9 @@ func GetCommander() -> Commander:
 	#return GetMap()._StatPanel
 
 #ShipTrade
-func StartShipTrade(ControlledShip : MapShip) -> void:
+func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	SimulationManager.GetInstance().TogglePause(true)
-	var CurrentFleet : Array[MapShip] = [ControlledShip]
+	var CurrentFleet : Array[PlayerDrivenShip] = [ControlledShip]
 	for S in ControlledShip.GetDroneDock().DockedDrones:
 		CurrentFleet.append(S)
 	

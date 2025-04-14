@@ -17,8 +17,8 @@ corner_radius_bottom_right = 10
 corner_detail = 1
 
 [sub_resource type="Gradient" id="Gradient_iq4iy"]
-offsets = PackedFloat32Array(0, 0.998435)
-colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.96597, 0.782513, 7.70092e-07, 1)
+offsets = PackedFloat32Array(0, 0.998609)
+colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.957883, 0.775879, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_x4s8m"]
 gradient = SubResource("Gradient_iq4iy")
@@ -32,12 +32,16 @@ curve = SubResource("Curve_e1h5p")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_on4wq"]
 particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
 direction = Vector3(0, -1, 0)
-spread = 34.529
+spread = 22.226
 initial_velocity_min = 35.93
 initial_velocity_max = 35.93
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 316.1
 gravity = Vector3(0, 0, 0)
-scale_min = 10.0
+scale_min = 5.0
 scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
@@ -115,4 +119,5 @@ text_direction = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(54, 38.5)
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_on4wq")

@@ -1,32 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkl2a6ey2cxpg"]
+[gd_scene load_steps=8 format=3 uid="uid://bkl2a6ey2cxpg"]
 
-[ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="1_w86mx"]
 [ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://Scripts/MapSpot/Happenings/HappeningInstance.gd" id="2_nimax"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="4_6q6vd"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_gqhsy"]
+[ext_resource type="Texture2D" uid="uid://b680xs4rw5ro1" path="res://Assets/CaptainPortraits/Priest.png" id="4_hqvhd"]
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Sound.tscn" id="5_fjydm"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
+[ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="6_6q6vd"]
 
-[node name="HappeningInstance" type="PanelContainer" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "NextDiagButton") groups=["Happening"]]
+[node name="HappeningInstance" type="PanelContainer" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "DiagButtons", "NextDialogueButton", "SkipDialogueButton", "Line", "Amp") groups=["Happening"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_w86mx")
+theme_override_styles/panel = ExtResource("4_gqhsy")
 script = ExtResource("2_nimax")
 OptionParent = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer")
 HappeningTitle = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/Label")
 HappeningText = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/Label2")
-HappeningBackgroundTexture = NodePath("TextureRect")
+HappeningBackgroundTexture = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/TextureRect")
 ProgBar = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/ProgressBar")
-NextDiagButton = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/NextDiag")
+DiagButtons = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer")
+NextDialogueButton = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer/NextDiag")
+SkipDialogueButton = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer/SkipDiag")
 TextFloater = ExtResource("4_6q6vd")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.5)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
+Line = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer/LineDrawer")
+Amp = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer/Control")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -37,19 +37,46 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer2"]
+clip_contents = true
 layout_mode = 2
 
-[node name="LineDrawer" parent="VBoxContainer/HBoxContainer2/VBoxContainer" instance=ExtResource("5_ylhno")]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("4_gqhsy")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(280, 395)
+layout_mode = 2
+texture = ExtResource("4_hqvhd")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+
+[node name="LineDrawer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("5_ylhno")]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = null
-frequency = 352.325
+theme_override_styles/panel = ExtResource("4_gqhsy")
+OrientationUpDown = false
+frequency = 2.0
 amplitude = 27.745
 
-[node name="Control" parent="VBoxContainer/HBoxContainer2/VBoxContainer" instance=ExtResource("5_fjydm")]
+[node name="Control" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("5_fjydm")]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
@@ -86,6 +113,7 @@ fwafwa"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+visible_characters_behavior = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
 layout_mode = 2
@@ -93,11 +121,21 @@ max_value = 3.0
 value = 3.0
 show_percentage = false
 
-[node name="NextDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer" groups=["DigitalButtons"]]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
+layout_mode = 2
+
+[node name="NextDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Next"
+expand_icon = true
+
+[node name="SkipDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Skip"
 expand_icon = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2"]
@@ -140,7 +178,12 @@ autowrap_mode = 2
 wait_time = 3.0
 one_shot = true
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6q6vd")
+volume_db = -5.0
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer/SkipDiag" to="." method="_on_skip_diag_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/Option1" to="." method="_on_option_1_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/Option2" to="." method="_on_option_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/Option3" to="." method="_on_option_3_pressed"]

@@ -6,4 +6,3 @@ var DataName = "PLData"
 @export var Rot : float
 @export var FleetData : Array[FleetSaveData]
 @export var PlayerFleet : Array[DroneSaveData]
-@export var Worldview : Array[int]

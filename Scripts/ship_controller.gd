@@ -10,12 +10,12 @@ class_name ShipContoller
 @export var CaptainSelectScreen : PackedScene
 @export var DroneScene : PackedScene
 
-var AvailableShips : Array[MapShip] = []
+var AvailableShips : Array[PlayerDrivenShip] = []
 
-var ControlledShip : MapShip
+var ControlledShip : PlayerDrivenShip
 
-signal FleetSeperationRequested(ControlledShip : MapShip)
-signal LandingRequested(ControlledShip : MapShip)
+signal FleetSeperationRequested(ControlledShip : PlayerDrivenShip)
+signal LandingRequested(ControlledShip : PlayerDrivenShip)
 
 static var Instance : ShipContoller
 
@@ -97,7 +97,7 @@ func OnShipDamaged(Amm : float, ShowVisuals : bool) -> void:
 		UIEventH.OnControlledShipDamaged(Amm)
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.DAMAGED)
 
-func OnShipDestroyed(Sh : MapShip):
+func OnShipDestroyed(Sh : PlayerDrivenShip):
 	if (Sh is PlayerShip):
 		World.GetInstance().call_deferred("GameLost", "Flagship destroyed")
 		Sh.GetDroneDock().ClearAllDrones()
@@ -181,7 +181,7 @@ func GetSaveData() -> PlayerSaveData:
 	var pldata = PlayerSaveData.new()
 	var Ships = get_tree().get_nodes_in_group("PlayerShips")
 	pldata.Worldview = WorldView.GetInstance().GetSaveData()
-	for g : MapShip in Ships:
+	for g : PlayerDrivenShip in Ships:
 		if (g.Command == null):
 			if g is PlayerShip:
 				pldata.Pos = g.global_position

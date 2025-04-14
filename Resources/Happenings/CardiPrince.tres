@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=15 format=3 uid="uid://chjcgb4pp86hr"]
+[gd_resource type="Resource" script_class="Happening" load_steps=17 format=3 uid="uid://chjcgb4pp86hr"]
 
+[ext_resource type="Texture2D" uid="uid://416d5uw306xw" path="res://Assets/CaptainPortraits/PriestHood.png" id="1_8tlxq"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_afuai"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_ifktw"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="3_8tlxq"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="3_ifktw"]
+[ext_resource type="Texture2D" uid="uid://b680xs4rw5ro1" path="res://Assets/CaptainPortraits/Priest.png" id="5_gl0ga"]
 
 [sub_resource type="Resource" id="Resource_8tlxq"]
 script = ExtResource("3_ifktw")
@@ -35,6 +37,7 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_afuai"]
 script = ExtResource("1_afuai")
+StagePic = ExtResource("1_8tlxq")
 HappeningTexts = Array[String](["As you enter the town an eerie silence plegues the port. Walking out of the ship you are met by slim hooded figure. ", "The figure waits for you to aproach it. As you are withing a few steps away from it bows. Taking out its hood you are met by an old man. His skin is wrinkly but his gaze contains no malice.", "\"Welcome master, we were expecting your arival.\"", "You are left preplexed, you were tasked with bringing a package here and leave, not ment to meet anybody.", "\"Dont be alarmed master, we mean you no harm. My master aranged for your arival here, we didnt want to risk our location being exposed so we chose to leave out the details for your journey.", "\"You see my master is a wanted man within the empire, even a small hint that we might be here would have raised more than a few alarms and the port would be swarmed within a few hours.\"", "I'd like for you to follow me if its not much trouble. My master would like to have a talk with you. We will be keeping an eye on your ship and crew so you shouldn't worry. Your meeting wont take long."])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_8tlxq"), SubResource("Resource_ifktw")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
@@ -69,6 +72,7 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_gl0ga"]
 script = ExtResource("1_afuai")
+StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["The man start walking toward the iniards of the city, you follow him and soon are lost in the alleyways of the city. The man seems to be taking a strange route, most likely to dissorient you.", "He stops and points to an entrance to your left, he gestures you with a kind smile to go in. Inside you are met by a small group of armed men, they seem alarmed at you precence but seem to relax after seeing the old man walk in behind you.", "The man at the far end of the room lifts a drape that reveals a whole in the wall that seems to lead to an underground path. ", "He waits for you to pass before closing the drape behind you. You are sudenly engulfed by darkness, you hear a flick of a switch and the tunnel is filled with light from small bulbs handing from the ceiling. ", "You follow the path and are soon led to an opening, the tunnel seems to be connecting two houses and you emerge on a barricaded house. Everything from the doors to the windows is filled with planks, only a few rays of light manage to pass though them.", "In the far end of the room you are met by a masked figure drenched in gold. The sight of it brings certain memories back. Something makes you think you've met the figure before. Maybe a dream?", "The figure exnted it's arm gracefully and gestures you to aproach. A voice seems to eminating under the mask, you can just barely hear the words.", "\"Welcome my child, this is not the introdction i would hope to give you but times are as they are now. Let us hope the future hold a beter meeting place for us, but for now this will do.\"", "\"What i am about to offer you is a chance, there is a chance for us to change this world. This world was not always as it is now as you may know. When a chance for something this big is given to you, you take it, am i right?\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_3j43l"), SubResource("Resource_vgxkk")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"

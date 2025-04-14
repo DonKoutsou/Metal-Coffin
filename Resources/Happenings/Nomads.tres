@@ -17,6 +17,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_myfjk")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ccd5qmxeujy5i"
 
 [sub_resource type="Resource" id="Resource_ukikf"]
@@ -30,6 +31,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_myfjk")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://diwf2l5h75sxb"
 
 [sub_resource type="Resource" id="Resource_tahtp"]

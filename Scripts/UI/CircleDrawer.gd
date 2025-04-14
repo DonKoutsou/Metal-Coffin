@@ -10,7 +10,7 @@ var circles = []
 
 var intersections = {}
 
-var ControlledShip : MapShip
+var ControlledShip : PlayerDrivenShip
 
 var CamZoom = 1
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +21,7 @@ func _ready() -> void:
 	ControlledShip = ShipControllerEvent.CurrentControlled
 	ShipControllerEvent.connect("OnControlledShipChanged", UpdateControlledShip)
 
-func UpdateControlledShip(NewShip : MapShip) -> void:
+func UpdateControlledShip(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip = NewShip
 
 func UpdateCircles(Circl : Array[PackedVector2Array])-> void:

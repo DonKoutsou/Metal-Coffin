@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsw1gh7af04md"]
+[gd_scene load_steps=7 format=3 uid="uid://dsw1gh7af04md"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_pamm7"]
 [ext_resource type="Script" uid="uid://bukudf4qdqxak" path="res://Scripts/UI/eq.gd" id="1_vg0r0"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_dyluc"]
+[ext_resource type="Script" uid="uid://br1hagurf546d" path="res://Scripts/amp.gd" id="3_d4vpm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdmwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lndbu"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 
-[node name="Control" type="PanelContainer"]
+[node name="Control" type="PanelContainer" node_paths=PackedStringArray("Eqs")]
 custom_minimum_size = Vector2(100, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,6 +24,9 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pamm7")
+theme_override_styles/panel = ExtResource("2_dyluc")
+script = ExtResource("3_d4vpm")
+Eqs = [NodePath("HBoxContainer/Eq"), NodePath("HBoxContainer/Eq2"), NodePath("HBoxContainer/Eq3"), NodePath("HBoxContainer/Eq4"), NodePath("HBoxContainer/Eq5"), NodePath("HBoxContainer/Eq6")]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(30.555, 0)

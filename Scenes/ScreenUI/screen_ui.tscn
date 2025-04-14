@@ -295,7 +295,7 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "Cam", "NormalScreen", "FullScreenFrame")]
+[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "NormalScreen", "FullScreenFrame")]
 process_mode = 1
 z_as_relative = false
 layout_mode = 3
@@ -315,6 +315,8 @@ MissileUI = NodePath("NormalScreen/ScreenUi/Missile Tab")
 LandButton = NodePath("NormalScreen/LandButton")
 ShipDockButton = NodePath("NormalScreen/DroneButton")
 RegroupButton = NodePath("NormalScreen/ControlledShipReturn")
+SimulationButton = NodePath("NormalScreen/SimulationButton")
+MapMarkerButton = NodePath("NormalScreen/MarkerPlecement")
 EventHandler = ExtResource("3_i441f")
 Cam = NodePath("ScreenCam")
 NormalScreen = NodePath("NormalScreen")
@@ -349,7 +351,7 @@ expand_mode = 1
 [node name="ThrustSlider" parent="NormalScreen" instance=ExtResource("5_mda8n")]
 layout_mode = 1
 offset_left = -114.0
-offset_top = -337.0
+offset_top = -371.0
 offset_right = -13.0
 offset_bottom = -46.0
 

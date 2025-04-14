@@ -9,6 +9,7 @@ class_name MapPointerManager
 @export var ConvoyColor : Color
 @export var EnemyDebug : bool = false
 @export var UIEventH : UIEventHandler
+@export var ControllerEventHandler : ShipControllerEventHandler
 #@export var SpotColor : Color
 var Ships : Array[Node2D] = []
 var _ShipMarkers : Array[ShipMarker] = []
@@ -17,11 +18,18 @@ var _SpotMarkers : Array[SpotMarker] = []
 
 static var Instance : MapPointerManager
 
+var ControlledShip : PlayerDrivenShip
+
 func _enter_tree() -> void:
 	Instance = self
 
 func _ready() -> void:
 	UIEventH.connect("MarkerEditorCleared", ClearLines)
+	ControllerEventHandler.connect("OnControlledShipChanged", OnControlledShipChanged)
+	ControlledShip = ControllerEventHandler.CurrentControlled
+
+func OnControlledShipChanged(Ship : PlayerDrivenShip) -> void:
+	ControlledShip = Ship
 
 static func GetInstance() -> MapPointerManager:
 	return Instance
@@ -199,11 +207,11 @@ func _physics_process(delta: float) -> void:
 			if (ship is MapShip):
 				var docked = ship.Docked
 				Marker.global_position = ship.global_position
-				Marker.ToggleShipDetails(!docked)
+				Marker.ToggleShipDetails(ship == ControlledShip)
 		
 				Marker.UpdateTrajectory(ship.global_rotation)
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-				if (docked):
+				if (ship != ControlledShip):
 					continue
 				#if (ship.GetDroneDock().DockedDrones.size() > 0):
 					#var fuel = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
@@ -213,7 +221,11 @@ func _physics_process(delta: float) -> void:
 						#MaxFuel += z.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 					#Marker.UpdateDroneFuel(roundi(fuel), MaxFuel)
 				#else:
-				var fuelstats = ship.GetFuelStats()
+				var fuelstats
+				if (ship.Docked):
+					fuelstats = ship.Command.GetFuelStats()
+				else:
+					fuelstats = ship.GetFuelStats()
 				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
 				

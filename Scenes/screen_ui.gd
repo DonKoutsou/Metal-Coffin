@@ -10,6 +10,8 @@ class_name ScreenUI
 @export var LandButton : TextureButton
 @export var ShipDockButton : TextureButton
 @export var RegroupButton : TextureButton
+@export var SimulationButton : TextureButton
+@export var MapMarkerButton : TextureButton
 #@export var DroneUI : DroneTab
 #@export var ButtonCover : TextureRect
 @export var EventHandler : UIEventHandler

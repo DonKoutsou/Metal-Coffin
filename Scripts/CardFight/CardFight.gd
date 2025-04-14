@@ -84,11 +84,13 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	for g in 2:
-		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-	for g in 2:
-		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	set_physics_process(false)
+	
+	#for g in 2:
+		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in 2:
+		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
@@ -199,8 +201,8 @@ func CreateShipVisuals(BattleS : BattleShipStats) -> void:
 		Hbox.add_child(t)
 		Hbox.add_child(C)
 	
-	C.custom_minimum_size.x = 30
-	C.visible = false
+	#C.custom_minimum_size.x = 180
+	#C.visible = false
 	
 	ShipsViz.append(t)
 
@@ -258,6 +260,10 @@ signal PlayerActionPickingEnded
 func RunTurn() -> void:
 	await DoActionDeclaration("Action Pick Phase")
 	
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
+		ActionTracker.GetInstance().ShowTutorial("Action Picking Phase", "In the Action Picking Phase each ship picks their moves for the upcomming Action Performing Phase, the ships with the bigger speed get to pick and perform their moves first. Limited time is given for each ship to pick their moves. All offensive actions have a possible deffence, make sure you keep your ship's protected while maintaining a steady offensive.", [], true)
+	
 	CardSelectContainer.get_parent().visible = true
 	CardSelectContainer.get_child(0).visible = false
 	var Tw2 = create_tween()
@@ -299,6 +305,7 @@ func RunTurn() -> void:
 	
 	await DoActionDeclaration("Action Perform Phase")
 	
+	AnimationPlecement.visible = true
 	for Ship in ShipTurns:
 		var PerformedActions = await PerformActions(Ship)
 		
@@ -311,9 +318,11 @@ func RunTurn() -> void:
 
 	await DoFireDamage()
 	
+	AnimationPlecement.visible = false
+	
 	if (GameOver):
 		return
-
+	
 	RefundUnusedCards()
 	ActionList.Clear()
 	#Actions.clear()
@@ -368,12 +377,19 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		ActionList.AddAction(Ship, ShipAction)
 
 func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
+	
+	
 	var ActionsToBurn : Array[CardFightAction]
 	var Friendly = IsShipFriendly(Ship)
 	var viz = GetShipViz(Ship)
 	for g in viz.get_parent().get_children():
 		if (g != viz):
-			g.visible = true
+			var tw = create_tween()
+			tw.set_ease(Tween.EASE_OUT)
+			tw.set_trans(Tween.TRANS_QUAD)
+			tw.tween_property(g, "custom_minimum_size", Vector2(180, 0), 0.5)
+			await tw.finished
+			#g.visible = true
 	for z in ActionList.GetShipsActions(Ship):
 		var ShipAction = z as CardFightAction
 		var Action = ShipAction.Action
@@ -462,10 +478,16 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 					ShieldShip(T, 15)
 					
 				ActionsToBurn.append(ShipAction)
-	
+
 	for g in viz.get_parent().get_children():
 		if (g != viz):
-			g.visible = false
+			var tw = create_tween()
+			tw.set_ease(Tween.EASE_OUT)
+			tw.set_trans(Tween.TRANS_QUAD)
+			tw.tween_property(g, "custom_minimum_size", Vector2(0, 0), 0.5)
+			await tw.finished
+	
+	
 	
 	return ActionsToBurn
 
@@ -804,10 +826,18 @@ func UpdateEnergyBar(NewVal : float) -> void:
 	EnergyBar.value = NewVal
 	EnergyLabel.text = var_to_str(roundi(NewVal)) + " / 10"
 
+var ScrollMomentum : float = 0
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		CardScrollContainer.scroll_vertical -= event.relative.y
+		set_physics_process(true)
+		ScrollMomentum += event.relative.y
+		
+func _physics_process(delta: float) -> void:
+	CardScrollContainer.scroll_vertical -= ScrollMomentum
+	ScrollMomentum = move_toward(ScrollMomentum, 0, delta * 500)
+	if (ScrollMomentum == 0):
+		set_physics_process(false)
 
 func _on_selected_card_scroll_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

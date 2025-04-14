@@ -16,13 +16,14 @@
 [ext_resource type="AudioStream" uid="uid://l32wa336ywlb" path="res://Assets/Sounds/Hover2.mp3" id="11_r02ad"]
 [ext_resource type="Script" uid="uid://1f2otbxhjnv4" path="res://Scripts/Helper.gd" id="13_v267o"]
 
-[node name="StartingScreen" type="Node"]
+[node name="StartingScreen" type="Node" node_paths=PackedStringArray("TutMan")]
 process_mode = 3
 script = ExtResource("1_kry56")
 StartingMenuScene = ExtResource("3_pxh3m")
 StudioAnim = ExtResource("3_yypyw")
 GameScene = ExtResource("3_lbc5q")
 IntroGameScene = ExtResource("4_r02ad")
+TutMan = NodePath("TutorialManager")
 
 [node name="AchievementManager" type="Node" parent="."]
 script = ExtResource("5_f5f7e")

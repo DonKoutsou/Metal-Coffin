@@ -37,7 +37,7 @@ var ContainerSize : Vector2
 	#AudiostreamPlayer.connect("audio_frame", _on_audio_frame)
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	ContainerSize = size
 
 	ti += delta * Speed

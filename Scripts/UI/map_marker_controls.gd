@@ -47,6 +47,11 @@ func Toggle() -> void:
 		TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE
 		$AnimationPlayer.play("Show")
 		Showing = true
+		await $AnimationPlayer.animation_finished
+		
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MAP_MARKER_INTRO)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.MAP_MARKER_INTRO)
+			ActionTracker.GetInstance().ShowTutorial("Map Marker Editor Controlls", "The [color=#c19200]Map Marker Editor[/color] provides the creation of texts markers and measuring lines. Use the [color=#c19200]Move Horizontal[/color] and [color=#c19200]Move Vertical[/color] dials to select the plecement of the marker. Clicking the [color=#c19200]Text Button[/color] will prompt you with inputing the text that will aprear on the marker. Clicking the [color=#c19200]Line Button[/color] will start drawing a line, use the dials to extend the line and press the [color=#c19200]Line Button[/color] again to place the line.", [self], false)
 	else:
 		TurnOffPressed()
 

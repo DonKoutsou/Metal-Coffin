@@ -1,15 +1,11 @@
-//Shader by: Jordancjb (https://linktr.ee/jordancjb)
-//Licensed under Creative Commons 0, Use as you like c:
 shader_type canvas_item;
 
-//Noise Texture
-uniform sampler2D Noise;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
-//Settings
-uniform float Transparency = 4.0;
-uniform float Slow = 25.0;
+uniform float amount = 40.0;
 
-//Shader Code
 void fragment() {
-	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV) * texture(Noise, texture(Noise, UV).xy + cos(TIME) / Slow) / Transparency;
+	vec2 uv = UV*0.05;
+	float a = fract(sin(dot(UV, vec2(12.9898, 78.233) * TIME)) * 438.5453) * 1.9;
+	vec4 col = texture(TEXTURE, UV);
+	col.a *= pow(a, amount);
+	COLOR.a = col.a;
 }

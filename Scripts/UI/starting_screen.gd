@@ -7,6 +7,7 @@ class_name StartingScreen
 @export var StudioAnim : PackedScene
 @export var GameScene : PackedScene
 @export var IntroGameScene : PackedScene
+@export var TutMan : ActionTracker
 
 var StMenu : StartingMenu
 var Wor : World
@@ -60,12 +61,23 @@ func StartPrologue() -> void:
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
 func StartGame(Load : bool) -> void:
+	#TODO enable on full release
+	if (!TutMan.DidPrologue()):
+		var window = AcceptDialog.new()
+		add_child(window)
+		window.dialog_text = "Prologue needs to be completed before moving to the campaign"
+		window.popup_centered()
+		return
+		
 	if (!OS.is_debug_build()):
 		var window = AcceptDialog.new()
 		add_child(window)
 		window.dialog_text = "Not available on Demo"
 		window.popup_centered()
 		return
+		
+	
+		
 	Wor = GameScene.instantiate() as World
 	#wor.Load
 	if (Load):

@@ -65,6 +65,34 @@ func SkillCheck(Stat : WorldViews, Possetive : bool, Difficulty : int) -> bool:
 		print("Skill Check Failed!")
 		return false
 
+static func Save() -> void:
+	var sav : TutorialSaveData
+	
+	if (FileAccess.file_exists("user://TutorialData.tres")):
+		sav = load("user://TutorialData.tres") as TutorialSaveData
+	
+	if (sav == null):
+		sav = TutorialSaveData.new()
+	
+	sav.WorldviewStats = WorldviewStats.duplicate()
+
+	ResourceSaver.save(sav, "user://TutorialData.tres")
+	print("Saved tutorial data")
+
+func Load() -> void:
+	if (!FileAccess.file_exists("user://TutorialData.tres")):
+		return
+	
+	var sav = load("user://TutorialData.tres") as TutorialSaveData
+	
+	if (sav == null):
+		return
+	
+	print("Loaded found tutorial data")
+	
+	
+	WorldviewStats = sav.WorldviewStats.duplicate()
+
 enum WorldViews{
 	NONE,
 	COMPOSURE_AGITATION,

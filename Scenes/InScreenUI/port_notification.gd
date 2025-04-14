@@ -4,13 +4,13 @@ class_name PortNotification
 @export var PortUnAvailableCol: Color
 @export var ShipControllerEventH : ShipControllerEventHandler
 
-var CurrentShip : MapShip
+var CurrentShip : PlayerDrivenShip
 
 func _ready() -> void:
 	ShipControllerEventH.connect("OnControlledShipChanged", ControlledShipChanged)
 	#ControlledShipChanged(ShipControllerEventH.CurrentControlled)
 
-func ControlledShipChanged(NewShip : MapShip) -> void:
+func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
 	if (CurrentShip != null):
 		CurrentShip.disconnect("PortChanged", PortUpdated)
 	CurrentShip = NewShip

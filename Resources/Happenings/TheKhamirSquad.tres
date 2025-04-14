@@ -17,6 +17,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_qybly"]
@@ -31,6 +32,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_13uso"]
@@ -51,6 +53,7 @@ WorldviewCheck = 1
 CheckPossetive = false
 CheckDifficulty = 40
 WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_udrsw"]
@@ -71,6 +74,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_r1uac"]
@@ -91,6 +95,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_3ealn"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dy41ui65qkhmb"]
+[gd_scene load_steps=8 format=3 uid="uid://dy41ui65qkhmb"]
 
 [ext_resource type="Script" uid="uid://dk3dum3bl1yhq" path="res://Scripts/MapMarkerEditor/map_marker_editor.gd" id="1_8dwjq"]
 [ext_resource type="PackedScene" uid="uid://dd26j51u4ni6g" path="res://Scenes/MapMarkers/MapMarkerLine.tscn" id="2_5eayg"]
 [ext_resource type="PackedScene" uid="uid://dvnr81a8uogh4" path="res://Scenes/MapMarkers/TextMarker.tscn" id="3_ikfwh"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="5_3d6hg"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_i7jhj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0ok87"]
@@ -62,7 +63,6 @@ theme = ExtResource("6_i7jhj")
 theme_override_styles/panel = SubResource("StyleBoxFlat_aurdw")
 
 [node name="MarkerTextEditor" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,6 +70,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_i7jhj")
+theme_override_styles/panel = ExtResource("5_3d6hg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarkerTextEditor"]
 layout_mode = 1

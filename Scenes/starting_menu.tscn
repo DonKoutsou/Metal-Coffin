@@ -367,7 +367,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
 action_mode = 0
-text = "- NEW GAME -"
+text = "- NEW -
+CAMPAIGN"
 
 [node name="Load" type="Button" parent="w/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
@@ -375,7 +376,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
 action_mode = 0
-text = "- LOAD -"
+text = "- LOAD -
+CAMPAIGN"
 
 [node name="Panel4" type="Panel" parent="w/PanelContainer/VBoxContainer"]
 visible = false

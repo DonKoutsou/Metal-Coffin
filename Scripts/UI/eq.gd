@@ -4,6 +4,8 @@ class_name EQ
 
 var prev : float = 0
 
+var Work : bool = false
+
 func _ready() -> void:
 	#for g : Control in get_children():
 		#g.custom_minimum_size.y = size.y
@@ -15,8 +17,19 @@ func DoThing() -> void:
 	tw.tween_method(SetVar, prev, newval, 0.1)
 	await  tw.finished
 	prev = newval
-	call_deferred("DoThing")
+	if (Work):
+		call_deferred("DoThing")
 
+func Toggle(t : bool) -> void:
+	if (Work == t):
+		return
+	Work = t
+	if (t):
+		DoThing()
+	else:
+		var tw = create_tween()
+		tw.tween_method(SetVar, prev, 0, 0.1)
+	
 func SetVar(v : float) -> void:
 	var i = roundi(v)
 	

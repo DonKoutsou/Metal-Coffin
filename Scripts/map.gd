@@ -32,6 +32,8 @@ class_name Map
 @export var EnemyShipNames : Array[String]
 @export var SpawningBoundsX : float = 10000
 
+@export var TutorialTrigger : PackedScene
+
 signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
 #Signal called when all cities have their neighbors configured
 signal MAP_NeighborsSet
@@ -80,7 +82,29 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		for g in PlShip.Cpt.ProvidingCaptains:
 			PlShip.GetDroneDock().AddRecruit(g, false)
 			g._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
-
+	
+	var SimulationTrigger = TutorialTrigger.instantiate() as TutTrigger
+	SimulationTrigger.Inscreen = false
+	SimulationTrigger.TutorialToShow = ActionTracker.Action.SIMULATION
+	SimulationTrigger.TutorialTitle = "Simulation Managment"
+	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning. Use the [color=#c19200]Simulation Buttons[/color] to either stop the simulation and think over your plans or speed up the simulations to speed through big protions of your voyage."
+	SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
+	$SubViewportContainer/ViewPort.add_child(SimulationTrigger)
+	var triggerpos = pos
+	triggerpos.y -= 250
+	SimulationTrigger.global_position = triggerpos
+	
+	var MapMarkerTrigger = TutorialTrigger.instantiate() as TutTrigger
+	MapMarkerTrigger.Inscreen = false
+	MapMarkerTrigger.TutorialToShow = ActionTracker.Action.MAP_MARKER
+	MapMarkerTrigger.TutorialTitle = "Map Markers"
+	MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#c19200]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#c19200]Map Marker Editor[/color] using the dediacted button on the [color=#c19200]Ship Controller[/color]."
+	MapMarkerTrigger.TutorialElement.append(GetScreenUi().MapMarkerButton)
+	$SubViewportContainer/ViewPort.add_child(MapMarkerTrigger)
+	var MapMarkerTriggerpos = pos
+	MapMarkerTriggerpos.y -= 750
+	MapMarkerTrigger.global_position = MapMarkerTriggerpos
+	
 
 #Called when enemy ship touches friendly one to strart a fight
 func EnemyMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip]):

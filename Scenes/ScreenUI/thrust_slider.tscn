@@ -21,6 +21,7 @@ size_flags_vertical = 8
 mouse_filter = 2
 script = ExtResource("1_cn7hu")
 Handle = NodePath("Handle")
+StepCOunt = 20
 
 [node name="Handle" type="TextureRect" parent="."]
 layout_mode = 2

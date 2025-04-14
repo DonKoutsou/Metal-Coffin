@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("2_8bovl")
 It = ExtResource("1_1xar4")
-Price = 6
+Price = 200
 Amm = 0

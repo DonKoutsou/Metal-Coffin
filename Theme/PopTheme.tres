@@ -1,8 +1,7 @@
-[gd_resource type="Theme" load_steps=63 format=4 uid="uid://de7fb8k462lxb"]
+[gd_resource type="Theme" load_steps=62 format=4 uid="uid://de7fb8k462lxb"]
 
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="1_udhci"]
 [ext_resource type="FontFile" uid="uid://d0r7lokuktq1c" path="res://Fonts/OCR-a___.ttf" id="2_mvyjv"]
-[ext_resource type="StyleBox" uid="uid://macpisymorbb" path="res://Theme/DarkBlueContShadow.tres" id="2_pusc7"]
 [ext_resource type="StyleBox" uid="uid://bf8ldnyjyuff" path="res://Theme/ButtonHover.tres" id="3_n3ok3"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="4_apdyr"]
 [ext_resource type="StyleBox" uid="uid://cakd87dtiyrm2" path="res://Theme/ButtonNormal.tres" id="4_dknas"]
@@ -2892,11 +2891,13 @@ TabContainer/styles/tabbar_background = SubResource("StyleBoxEmpty_61fkw")
 TextEdit/colors/caret_color = Color(1, 0.763983, 0.0812772, 1)
 TextEdit/colors/font_color = Color(1, 0.763983, 0.0812772, 1)
 TextEdit/colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
+TextEdit/colors/font_placeholder_color = Color(1, 0.763983, 0.0812772, 1)
+TextEdit/colors/font_selected_color = Color(1, 0.763983, 0.0812772, 1)
 TextEdit/constants/outline_size = 4
 TextEdit/fonts/font = ExtResource("1_udhci")
-TextEdit/styles/focus = ExtResource("2_pusc7")
-TextEdit/styles/normal = ExtResource("2_pusc7")
-TextEdit/styles/read_only = ExtResource("2_pusc7")
+TextEdit/styles/focus = ExtResource("9_udhci")
+TextEdit/styles/normal = ExtResource("9_udhci")
+TextEdit/styles/read_only = ExtResource("9_udhci")
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_xwr5s")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_xu7sv")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_xu7sv")
