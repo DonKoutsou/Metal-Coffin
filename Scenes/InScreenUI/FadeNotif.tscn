@@ -10,7 +10,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0.113)
 
 [node name="FadeNotif" type="PanelContainer" node_paths=PackedStringArray("T") groups=["FadeNotif", "ItemNotification"]]
 process_mode = 3
-modulate = Color(0.483, 100, 0.381, 1)
+modulate = Color(1, 0.763983, 0.0812772, 1)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -43,7 +43,7 @@ size_flags_horizontal = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("2_xxwjh")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "Iawdawdwa"
 horizontal_alignment = 1
 vertical_alignment = 1

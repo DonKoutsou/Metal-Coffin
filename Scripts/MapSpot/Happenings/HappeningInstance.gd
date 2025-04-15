@@ -34,7 +34,7 @@ var HappeningInstigator : MapShip
 var CurrentText : int
 
 func _ready() -> void:
-	#UISoundMan.GetInstance().Refresh()
+	UISoundMan.GetInstance().Refresh()
 	#set_physics_process(false)
 	Tw = create_tween()
 	Tw.set_trans(Tween.TRANS_BOUNCE)
@@ -42,10 +42,10 @@ func _ready() -> void:
 	
 	DiagButtons.visible = false
 	ProgBar.visible = false
-	PresentHappening(load("res://Resources/Happenings/CardiPrince.tres"))
+	#PresentHappening(load("res://Resources/Happenings/The evangelist.tres"))
 
 func PresentHappening(Hap : Happening):
-	#SimulationManager.GetInstance().TogglePause(true)
+	SimulationManager.GetInstance().TogglePause(true)
 
 	#set_physics_process(true)
 	
