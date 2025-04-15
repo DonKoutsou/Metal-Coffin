@@ -95,10 +95,10 @@ func UpdateQuestion() -> void:
 	$VBoxContainer/HBoxContainer/Button2.text = PickedQuestions[CurrentQuestion].PossetiveAnswer
 
 func Option1Pressed() -> void:
-	WorldView.GetInstance().AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, - 10, false)
+	WorldView.GetInstance().AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, - 10, true)
 	CurrentQuestion += 1
 	UpdateQuestion()
 func Option2Pressed() -> void:
-	WorldView.GetInstance().AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, 10, false)
+	WorldView.GetInstance().AdjustStat(PickedQuestions[CurrentQuestion].WorldviewSkill, 10, true)
 	CurrentQuestion += 1
 	UpdateQuestion()

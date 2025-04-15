@@ -22,7 +22,7 @@ class_name TownScene
 @export_group("Scenes")
 @export var ItemScene : PackedScene
 @export var RestockStation : PackedScene
-#"[color=#c19200]
+#"[color=#ffc315
 
 var TownFuel : float = 0
 #var PlFunds : float = 0

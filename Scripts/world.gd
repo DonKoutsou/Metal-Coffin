@@ -146,7 +146,7 @@ func ShowArmak():
 func SteerTut() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
-		var text = "Use the [color=#c19200]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#c19200]Thrust Lever[/color] on the right side of the controller"
+		var text = "Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller"
 		ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust], false)
 
 func PlayIntro():

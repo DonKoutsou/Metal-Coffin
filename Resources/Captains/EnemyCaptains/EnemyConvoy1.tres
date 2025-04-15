@@ -8,8 +8,8 @@
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="6_340aw"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="6_rnln8"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="7_340aw"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="7_ha1o8"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="8_o2kyv"]
+[ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/Spaceship/Convoy.png" id="9_bip6n"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_pl6a6")
@@ -92,7 +92,7 @@ script = ExtResource("6_340aw")
 CaptainName = "Grunt"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_ey02j")
-ShipIcon = ExtResource("7_ha1o8")
+ShipIcon = ExtResource("9_bip6n")
 CaptainStats = Array[ExtResource("2_pl6a6")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_bip6n")])
 ShipCallsign = "T"
 StartingItems = Array[ExtResource("8_o2kyv")]([])

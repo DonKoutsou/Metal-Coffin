@@ -15,8 +15,8 @@ class_name FleetSeparation
 
 signal SeperationFinished
 
-var CurrentFleet : Array[MapShip]
-var NewFleet : Array[MapShip]
+var CurrentFleet : Array[PlayerDrivenShip]
+var NewFleet : Array[PlayerDrivenShip]
 
 func _ready() -> void:
 	for Ship in CurrentFleet.size():
@@ -143,7 +143,7 @@ func NewFleetBarInput(event: InputEvent) -> void:
 			RemoveFuelFromFleet(CurrentFleet, AddedFuel)
 			UpdateCurrentFleetStats()
 			UpdateNewFleetStats()
-func AddFuelToFleet(Fleet : Array[MapShip], Fuel : float):
+func AddFuelToFleet(Fleet : Array[PlayerDrivenShip], Fuel : float):
 	var RemainingFuel = Fuel
 	for Ship in Fleet:
 		var Dif = Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - Ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
@@ -153,7 +153,7 @@ func AddFuelToFleet(Fleet : Array[MapShip], Fuel : float):
 		if (RemainingFuel == 0):
 			break
 	
-func RemoveFuelFromFleet(Fleet : Array[MapShip], Fuel : float):
+func RemoveFuelFromFleet(Fleet : Array[PlayerDrivenShip], Fuel : float):
 	var FuelLeftToRemove = Fuel
 	for Ship in Fleet:
 		var CurrentFuel = Ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)

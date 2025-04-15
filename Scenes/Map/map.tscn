@@ -62,7 +62,7 @@ shader_parameter/custom_time = 0.0
 light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujsvm"]
-bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
+bg_color = Color(0.0755152, 0.146343, 0.151409, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1

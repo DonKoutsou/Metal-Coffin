@@ -2,7 +2,7 @@ extends Button
 
 class_name CardFightShipViz
 
-const StatText = "[color=#c19200]HULL[/color] : {0}\n[color=#c19200]SLD[/color] : {1}\n[color=#c19200]SPD[/color] : {2}\n[color=#c19200]FPWR[/color] : {3}"
+const StatText = "[color=#ffc315]HULL[/color] : {0}\n[color=#ffc315]SLD[/color] : {1}\n[color=#ffc315]SPD[/color] : {2}\n[color=#ffc315]FPWR[/color] : {3}"
 
 func _ready() -> void:
 	#$Panel.visible = false

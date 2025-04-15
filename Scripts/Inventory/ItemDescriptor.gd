@@ -45,7 +45,7 @@ func PlayIntroAnim() -> void:
 	await tw.finished
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
-		var tuttext = "When selecting an [color=#c19200]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#c19200]Upgrade[/color] it if its a ship part, [color=#c19200]Transfer[/color] it to another ship if its allowed and check any [color=#c19200]Cards[/color] it provides in close quarters combat."
+		var tuttext = "When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
 		ActionTracker.GetInstance().ShowTutorial("Item Inspection", tuttext, [self], true)
 
 func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
@@ -87,7 +87,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 				if (CanUpgrade):
 					UpTime /= 2
 					UpCost /= 2
-				UpgradeLabel.text = "[color=#c19200]Upgrade Time[/color] : {0}\n[color=#c19200]Upgrade Cost[/color] : {1}\n[color=#c19200]-------------".format([UpTime, UpCost])
+				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}\n[color=#ffc315]-------------".format([UpTime, UpCost])
 		
 	else :
 		

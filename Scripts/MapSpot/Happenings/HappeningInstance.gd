@@ -5,7 +5,7 @@ class_name HappeningInstance
 #@export var TestHappening : Happening
 @export var OptionParent : Control
 @export var HappeningTitle : Label
-@export var HappeningText : Label
+@export var HappeningText : RichTextLabel
 @export var HappeningBackgroundTexture : TextureRect
 @export var ProgBar : ProgressBar
 @export var DiagButtons : Control
@@ -34,7 +34,7 @@ var HappeningInstigator : MapShip
 var CurrentText : int
 
 func _ready() -> void:
-	UISoundMan.GetInstance().Refresh()
+	#UISoundMan.GetInstance().Refresh()
 	#set_physics_process(false)
 	Tw = create_tween()
 	Tw.set_trans(Tween.TRANS_BOUNCE)
@@ -42,10 +42,10 @@ func _ready() -> void:
 	
 	DiagButtons.visible = false
 	ProgBar.visible = false
-	#PresentHappening(load("res://Resources/Happenings/The evangelist.tres"))
+	PresentHappening(load("res://Resources/Happenings/CardiPrince.tres"))
 
 func PresentHappening(Hap : Happening):
-	SimulationManager.GetInstance().TogglePause(true)
+	#SimulationManager.GetInstance().TogglePause(true)
 
 	#set_physics_process(true)
 	
@@ -70,16 +70,15 @@ func NextStage() -> void:
 	if (Stage.StagePic != null):
 		var bTw = create_tween()
 		bTw.set_ease(Tween.EASE_OUT)
-		bTw.set_trans(Tween.TRANS_BOUNCE)
+		bTw.set_trans(Tween.TRANS_QUAD)
 		
 		bTw.tween_property($VBoxContainer/HBoxContainer2/Control, "custom_minimum_size", Vector2(320,0), 1)
 
-		
 	else:
 
 		var bTw = create_tween()
 		bTw.set_ease(Tween.EASE_OUT)
-		bTw.set_trans(Tween.TRANS_BOUNCE)
+		bTw.set_trans(Tween.TRANS_QUAD)
 		
 		bTw.tween_property($VBoxContainer/HBoxContainer2/Control, "custom_minimum_size", Vector2(0,0), 1)
 	
@@ -91,7 +90,7 @@ func NextStage() -> void:
 		
 		HappeningText.text = text
 		HappeningText.visible_ratio = 0
-		if (Last and Stage.Options.size() > 0):
+		if (Last):
 			break
 			
 		DiagButtons.visible = true
@@ -255,5 +254,5 @@ func _on_next_diag_pressed() -> void:
 
 func _on_skip_diag_pressed() -> void:
 	var Size = CurrentBranch[CurrentStage].HappeningTexts.size()
-	while(Size > CurrentText + 1):
+	while(Size - 1 > CurrentText):
 		NextDiag.emit()

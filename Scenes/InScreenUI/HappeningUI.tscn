@@ -101,18 +101,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 26
+theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
 text = "Testfwafwafawf
 +awfwafwafawfwa
 fawfwa
 fwafwa"
+autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
 visible_characters_behavior = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]

@@ -87,7 +87,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	SimulationTrigger.Inscreen = false
 	SimulationTrigger.TutorialToShow = ActionTracker.Action.SIMULATION
 	SimulationTrigger.TutorialTitle = "Simulation Managment"
-	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning. Use the [color=#c19200]Simulation Buttons[/color] to either stop the simulation and think over your plans or speed up the simulations to speed through big protions of your voyage."
+	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning. Use the [color=#ffc315]Simulation Buttons[/color] to either stop the simulation and think over your plans or speed up the simulations to speed through big protions of your voyage."
 	SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
 	$SubViewportContainer/ViewPort.add_child(SimulationTrigger)
 	var triggerpos = pos
@@ -98,7 +98,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	MapMarkerTrigger.Inscreen = false
 	MapMarkerTrigger.TutorialToShow = ActionTracker.Action.MAP_MARKER
 	MapMarkerTrigger.TutorialTitle = "Map Markers"
-	MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#c19200]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#c19200]Map Marker Editor[/color] using the dediacted button on the [color=#c19200]Ship Controller[/color]."
+	MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
 	MapMarkerTrigger.TutorialElement.append(GetScreenUi().MapMarkerButton)
 	$SubViewportContainer/ViewPort.add_child(MapMarkerTrigger)
 	var MapMarkerTriggerpos = pos

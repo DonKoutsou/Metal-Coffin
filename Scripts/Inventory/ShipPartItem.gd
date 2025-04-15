@@ -14,7 +14,7 @@ func _setup_local_to_scene() -> void:
 		Up.CurrentValue = Up.UpgradeAmmount
 
 func GetItemDesc() -> String:
-	var UpNames = "\n[color=#c19200]-------------[/color]"
+	var UpNames = "\n[color=#ffc315]-------------[/color]"
 	for g in Upgrades.size():
 		#var Multiplier = 1
 		#if (Upgrades[g].UpgradeName == STAT_CONST.STATS.THRUST):

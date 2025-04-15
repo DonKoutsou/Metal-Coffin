@@ -382,12 +382,12 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 		if (Parent.SpotInfo.EnemyCity):
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
-				var TutText = "You are reaching an enemy [color=#c19200]city[/color]. Enemy cities are usual refuel spots for [color=#c19200]patrols[/color], and always have a guarding [color=#c19200]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
+				var TutText = "You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
 				ActionTracker.GetInstance().ShowTutorial("Enemy Cities", TutText, [], true)
 		else:
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
-				var TutText = "You are reaching one of the many friendly [color=#c19200]villages[/color] in the dessert. No enemies exist in those [color=#c19200]villages[/color] and none of the locals wil raise the [color=#c19200]alarm[color] on you. You are free to use those [color=#c19200]villages[/color] to restock/repair or even as a hideout. The location of those [color=#c19200]villages[/color] is unknown and will need to be discovered."
+				var TutText = "You are reaching one of the many friendly [color=#ffc315]villages[/color] in the dessert. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered."
 				ActionTracker.GetInstance().ShowTutorial("Friendly Villages", TutText, [], true)
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()
