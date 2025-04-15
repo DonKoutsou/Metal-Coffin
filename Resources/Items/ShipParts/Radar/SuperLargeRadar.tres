@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=5 format=3 uid="uid://cgigq707wifrf"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://cgigq707wifrf"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_in1r4"]
+[ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="2_3uncw"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_6tjws"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_gbrn0"]
 
@@ -22,5 +23,5 @@ PartType = 2
 ItemName = "Super HighRange Radar"
 ItemDesc = "ItemDesc"
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_in1r4")]([])
+CardProviding = Array[ExtResource("1_in1r4")]([ExtResource("2_3uncw")])
 CanTransfer = true

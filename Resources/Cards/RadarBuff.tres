@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Deffensive" load_steps=8 format=3 uid="uid://d1oxwkmh155gc"]
+
+[ext_resource type="Texture2D" uid="uid://biimea34gc828" path="res://Assets/Cards/RadarBuff.png" id="2_8g4fu"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_l2s87"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_uafpq"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="5_0ryvg"]
+[ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="6_tjupg"]
+[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="7_bub5l"]
+[ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/ShipParts/MissilePods/LargeMissilePod.tres" id="7_d48d8"]
+
+[resource]
+script = ExtResource("7_bub5l")
+Icon = ExtResource("2_8g4fu")
+CardName = "Radar Atack"
+CardDescription = "Buffs Other Ships.[p][center][color=#c19200] FRP + 1"
+Energy = 3
+Options = Array[ExtResource("3_l2s87")]([])
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("4_uafpq")]([ExtResource("5_0ryvg"), ExtResource("6_tjupg"), ExtResource("7_d48d8")])
+WeapT = 0
+AOE = true

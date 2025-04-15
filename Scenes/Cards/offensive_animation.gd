@@ -145,6 +145,21 @@ func SpawnShieldVisual(Target : Control) -> void:
 
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
 
+func SpawnUpVisual(Target : Control) -> void:
+	await wait (0.4)
+	
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_IN)
+	tw.set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.75)
+	
+	var Visual = ShieldVisual.instantiate() as MissileViz
+	Visual.Target = Target
+	Visual.SpawnPos = DefC.global_position + (DefC.size / 2)
+	add_child(Visual)
+
+	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
+
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
 
@@ -204,7 +219,10 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], FriendShip 
 	
 	for g in TargetShips:
 		call_deferred("SpawnShieldVisual", g)
-		
+	
+	for g in TargetShips:
+		call_deferred("SpawnUpVisual", g)
+	
 		#var d = DamageFloater.instantiate()
 		#if (DefCard.CardName == "Extinguish fires"):
 			#d.text = "Fire Extinguished"

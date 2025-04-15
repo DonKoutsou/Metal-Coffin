@@ -478,6 +478,28 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 					ShieldShip(T, 15)
 					
 				ActionsToBurn.append(ShipAction)
+			else: if Action.CardName == "Radar Atack":
+				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
+				AnimationPlecement.add_child(anim)
+				AnimationPlecement.move_child(anim, 1)
+				var Targets : Array[BattleShipStats]
+				var TargetViz : Array[Control]
+				if (Action.AOE):
+					Targets = GetShipsTeam(Ship)
+					TargetViz = GetShipsTeamViz(Ship)
+				else:
+					Targets = [Ship]
+					TargetViz = [GetShipViz(Ship)]
+					
+				anim.DoDeffensive(Action, TargetViz, EnemyShips.has(Ship))
+				await(anim.AnimationFinished)
+				anim.visible = false
+				anim.queue_free()
+				
+				for T in Targets:
+					ShieldShip(T, 15)
+					
+				ActionsToBurn.append(ShipAction)
 
 	for g in viz.get_parent().get_children():
 		if (g != viz):
@@ -551,6 +573,8 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -
 func ShieldShip(Ship : BattleShipStats, Amm : float) -> void:
 	Ship.Shield = min(Ship.Hull / 2, Ship.Shield + Amm)
 	UpdateShipStats(Ship)
+
+
 
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
 	return PlayerShips.has(Ship)
