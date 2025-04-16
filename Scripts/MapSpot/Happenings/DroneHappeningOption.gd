@@ -1,4 +1,4 @@
-extends Happening_Option
+extends String_Happening_Option
 class_name Drone_Happening_Option
 
 var DroneScene : String = "res://Scenes/drone.tscn"
@@ -8,10 +8,7 @@ var DroneScene : String = "res://Scenes/drone.tscn"
 	#Dron = DroneScene.instantiate()
 
 func OptionResault(EventOrigin : MapSpot) -> String:
-	if (CheckResault):
-		return "A new ship has joined your fleet."
-	else:
-		return "The captain has refused to join your fleet"
+	return StringReply
 	
 func OptionOutCome(Instigator : MapShip) -> bool:
 	super(Instigator)

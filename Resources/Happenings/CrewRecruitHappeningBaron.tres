@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=24 format=3 uid="uid://gvu43lp4i4y6"]
+[gd_resource type="Resource" script_class="Happening" load_steps=23 format=3 uid="uid://gvu43lp4i4y6"]
 
-[ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="1_8l24b"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="2_4o3s8"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="3_fnrm0"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_dh2fs"]
@@ -20,6 +19,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_8l24b"]
@@ -34,6 +34,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_4o3s8"]
@@ -48,6 +49,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_fnrm0"]
@@ -74,6 +76,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://w3pbagqwci26"
 
 [sub_resource type="Resource" id="Resource_6gnjm"]
@@ -94,6 +97,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_bpqwd"]
@@ -120,6 +124,7 @@ WorldviewCheck = 1
 CheckPossetive = false
 CheckDifficulty = 50
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([SubResource("Resource_a5i7n")])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_g3lsv"]
@@ -140,6 +145,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_n8mto"]
@@ -160,6 +166,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_5oj2u"]
@@ -171,7 +178,6 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 [resource]
 script = ExtResource("5_igefk")
 HappeningName = "The Baron"
-HappeningBg = ExtResource("1_8l24b")
 Stages = Array[ExtResource("2_4o3s8")]([SubResource("Resource_5oj2u")])
 HappeningAppearance = 0
 Special = true

@@ -497,7 +497,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				anim.queue_free()
 				
 				for T in Targets:
-					ShieldShip(T, 15)
+					BuffShip(T, 1)
 					
 				ActionsToBurn.append(ShipAction)
 
@@ -574,7 +574,9 @@ func ShieldShip(Ship : BattleShipStats, Amm : float) -> void:
 	Ship.Shield = min(Ship.Hull / 2, Ship.Shield + Amm)
 	UpdateShipStats(Ship)
 
-
+func BuffShip(Ship : BattleShipStats, Amm : float) -> void:
+	Ship.FirePowerBuff = Amm
+	UpdateShipStats(Ship)
 
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
 	return PlayerShips.has(Ship)
@@ -888,6 +890,8 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	Stats.Cards[load("res://Resources/Cards/Missile.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/Flares.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/ShieldOverChargeTeam.tres")] = 1
+	Stats.Cards[load("res://Resources/Cards/RadarBuff.tres")] = 1
+	
 	
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageAPOption.tres")] = 10
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageFireOption.tres")] = 10

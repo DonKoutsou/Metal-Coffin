@@ -21,13 +21,15 @@ var Hapen : Happening
 var CurrentBranch : Array[HappeningStage]
 var CurrentStage : int = 0
 
-signal HappeningFinished(Recruited : bool)
+signal HappeningFinished(Recruited : bool, End : bool)
 
 signal ResponseReceived
 
 signal NextDiag
 
 var RecruitedShips : bool = false
+
+var FinishedCampaign : bool = false
 
 var HappeningInstigator : MapShip
 
@@ -90,7 +92,9 @@ func NextStage() -> void:
 		
 		HappeningText.text = text
 		HappeningText.visible_ratio = 0
-		if (Last):
+		if (Last and Stage.HappeningTexts.size() > 1):
+			break
+		if (Last and Stage.Options.size() > 0):
 			break
 			
 		DiagButtons.visible = true
@@ -154,9 +158,13 @@ func NextStage() -> void:
 			add_child(CheckResault)
 		
 		var res = Option.OptionOutCome(HappeningInstigator)
+		
 		if (Option is Drone_Happening_Option and res == true):
 			RecruitedShips = true
-
+		
+		if (Option is EndGame_Happening_Option and res == true):
+			FinishedCampaign = true
+		
 		if (Check):
 			HappeningText.text = Option.OptionResault(EventSpot)
 			HappeningText.visible_ratio = 0
@@ -169,9 +177,9 @@ func NextStage() -> void:
 			DiagButtons.visible = false
 			SkipDialogueButton.visible = true
 			OptionParent.visible = true
-		
 		if (Stage.Options[SelectedOption].FinishDiag):
-			HappeningFinished.emit(RecruitedShips)
+		
+			HappeningFinished.emit(RecruitedShips, FinishedCampaign)
 			$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 		else:
 			var Possiblebranch : Array[HappeningStage] = []
@@ -254,5 +262,6 @@ func _on_next_diag_pressed() -> void:
 
 func _on_skip_diag_pressed() -> void:
 	var Size = CurrentBranch[CurrentStage].HappeningTexts.size()
+	NextDiag.emit()
 	while(Size - 1 > CurrentText):
 		NextDiag.emit()

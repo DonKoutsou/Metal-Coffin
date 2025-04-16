@@ -13,7 +13,7 @@ script = ExtResource("7_bub5l")
 Icon = ExtResource("2_8g4fu")
 CardName = "Radar Atack"
 CardDescription = "Buffs Other Ships.[p][center][color=#c19200] FRP + 1"
-Energy = 3
+Energy = 6
 Options = Array[ExtResource("3_l2s87")]([])
 AllowDuplicates = true
 Consume = false

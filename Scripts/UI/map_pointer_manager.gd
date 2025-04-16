@@ -208,7 +208,12 @@ func _physics_process(delta: float) -> void:
 				var docked = ship.Docked
 				Marker.global_position = ship.global_position
 				Marker.ToggleShipDetails(ship == ControlledShip)
-		
+				
+				if (ship.RadarWorking):
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 105), 0)]))
+				else:
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(105, 0)]))
+				
 				Marker.UpdateTrajectory(ship.global_rotation)
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				if (ship != ControlledShip):
@@ -229,10 +234,7 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
 				
-				if (ship.RadarWorking):
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 105), 0)]))
-				else:
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(105, 0)]))
+				
 				if (ship.Landing or ship.TakingOff):
 					Marker.UpdateAltitude(ship.Altitude)
 

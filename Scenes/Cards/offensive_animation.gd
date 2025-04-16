@@ -10,6 +10,7 @@ signal AnimationFinished
 @export var AtackVisual : PackedScene
 @export var DefVisual : PackedScene
 @export var ShieldVisual : PackedScene
+@export var BuffVisual : PackedScene
 @export_group("Event Handlers")
 @export var UIEventH : UIEventHandler
 #var LinePos : float = 0
@@ -153,12 +154,12 @@ func SpawnUpVisual(Target : Control) -> void:
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.75)
 	
-	var Visual = ShieldVisual.instantiate() as MissileViz
+	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefC.global_position + (DefC.size / 2)
 	add_child(Visual)
 
-	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
+	Visual.connect("Reached", BuffTweenEnded.bind(Target))
 
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
@@ -202,6 +203,14 @@ func ShieldTweenEnded(target : Control) -> void:
 	d.global_position = (target.global_position + (target.size / 2)) - d.size / 2
 	d.connect("Ended", AnimEnded)
 
+func BuffTweenEnded(target : Control) -> void:
+	var d = DamageFloater.instantiate()
+	d.text = "Buffed"
+	d.modulate = Color(1,1,1,1)
+	add_child(d)
+	d.global_position = (target.global_position + (target.size / 2)) - d.size / 2
+	d.connect("Ended", AnimEnded)
+
 func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], FriendShip : bool) -> void:
 
 	var Opts : Array[CardOption] = []
@@ -217,11 +226,12 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], FriendShip 
 	tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
 	#await tw2.finished
 	
-	for g in TargetShips:
-		call_deferred("SpawnShieldVisual", g)
-	
-	for g in TargetShips:
-		call_deferred("SpawnUpVisual", g)
+	if (DefCard.CardName == "Radar Atack"):
+		for g in TargetShips:
+			call_deferred("SpawnUpVisual", g)
+	else:
+		for g in TargetShips:
+			call_deferred("SpawnShieldVisual", g)
 	
 		#var d = DamageFloater.instantiate()
 		#if (DefCard.CardName == "Extinguish fires"):
