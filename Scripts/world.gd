@@ -391,8 +391,8 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	Spot.OnSpotVisited()
 	return PlayedEvent
 	
-func HappeningFinished(Recruited : bool, Ship : MapShip) -> void:
-	GetMap().GetScreenUi().ToggleFullScreen(false)
+func HappeningFinished(Recruited : bool, CapmaignFin : bool, Ship : MapShip) -> void:
+	GetMap().GetScreenUi().ToggleFullScreen(CapmaignFin)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
 	await GetMap().GetScreenUi().FullScreenToggleFinished
@@ -400,6 +400,8 @@ func HappeningFinished(Recruited : bool, Ship : MapShip) -> void:
 		ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
 		var text = "Managing your fleet is a crucial part to a sucsesfull campaign. Ships that are composed together into a fleet share fuel reserves so fitting a fleet with a ship with extra fuel reserves than the rest might come in handy. To split the currently selected speed the Ship Dock will need to be accessed from the controller, there you will be able to split the fleet and trade fuel reserves between them. If at any time you want to merge two fleets together press the Regroup key on the fleet actions and select the fleet to merge with. To switch the currently selected fleet press the Switch Ship button on the fleet actions section of the controller."
 		ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
+	if (CapmaignFin):
+		Ingame_UIManager.GetInstance().CallbackDiag(["Time to head back people. The package has been delivered."], null, "", EndGame, true)
 	#OnShipLanded(Ship, true)
 
 #Make sure to remove all items that their cards have been used
@@ -435,3 +437,6 @@ func GameLost(reason : String):
 	get_tree().paused = true
 	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer.visible = true
 	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer/VBoxContainer/Label.text = reason
+
+func EndGame() -> void:
+	WRLD_OnGameEnded.emit()

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_4h62t")
-QuestionText = "n the middle of a group project, someone proposes a bold new idea. How do you react?"
+QuestionText = "In the middle of a group project, someone proposes a bold new idea. How do you react?"
 NegativeAnswer = "Weigh the idea critically and decide on its feasibility."
 PossetiveAnswer = "Foster an open discussion to explore its potential."
 WorldviewSkill = 4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cid0s6uni7fky"]
+[gd_scene load_steps=30 format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="2_0dp8t"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
 [ext_resource type="Resource" uid="uid://chjcgb4pp86hr" path="res://Resources/Happenings/CardiPrince.tres" id="20_7no5x"]
 [ext_resource type="Resource" uid="uid://b2cbd58y7piwy" path="res://Resources/Happenings/NomadsIntro.tres" id="20_8eeky"]
-[ext_resource type="Resource" uid="uid://cewy7vds2cnh8" path="res://Resources/Happenings/CrewRecruitHappeningDimitry.tres" id="20_trvh7"]
 [ext_resource type="Resource" uid="uid://q6pvyblp3f1r" path="res://Resources/MapSpots/CitySpots/PrologueSpots/PrologueFinalCity.tres" id="21_0dp8t"]
 [ext_resource type="Resource" uid="uid://d1ccujxqp1ci3" path="res://Resources/MapSpots/CitySpots/PrologueSpots/PrologueVillages.tres" id="21_0i6dt"]
 [ext_resource type="Resource" uid="uid://cpj4icaudta0f" path="res://Resources/Happenings/The Adressing.tres" id="21_ljctt"]
@@ -88,7 +87,7 @@ script = ExtResource("19_0dp8t")
 EventsPerSpot = Dictionary[int, Array]({
 0: [ExtResource("20_8eeky"), ExtResource("21_ljctt"), ExtResource("22_8o37l"), ExtResource("23_43ao6"), ExtResource("24_8o37l")],
 1: [ExtResource("20_7no5x")],
-2: [ExtResource("20_trvh7")]
+2: []
 })
 metadata/_custom_type_script = "uid://s3ha37qvdear"
 

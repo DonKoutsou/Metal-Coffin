@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=18 format=3 uid="uid://c3kr3kcdnvesc"]
+[gd_resource type="Resource" script_class="Happening" load_steps=17 format=3 uid="uid://c3kr3kcdnvesc"]
 
-[ext_resource type="Texture2D" uid="uid://hcbn2124kbd3" path="res://Assets/CaptainPortraits/Captain5.png" id="1_3tnlt"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_x2bkw"]
 [ext_resource type="Resource" uid="uid://c75as8yglsqcy" path="res://Resources/Captains/PlayerCaptains/Gilian.tres" id="3_j2ryf"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="4_fdmko"]
@@ -48,6 +47,7 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 [sub_resource type="Resource" id="Resource_3tnlt"]
 script = ExtResource("4_ui0gd")
 Cpt = ExtResource("3_j2ryf")
+StringReply = ""
 OptionName = "Ask them to join your fleet"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("5_3u5ui")]([SubResource("Resource_gpgth")])
@@ -57,6 +57,7 @@ WorldviewCheck = 3
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([SubResource("Resource_j2ryf")])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://w3pbagqwci26"
 
 [sub_resource type="Resource" id="Resource_ui0gd"]
@@ -71,6 +72,7 @@ WorldviewCheck = 0
 CheckPossetive = false
 CheckDifficulty = 20
 WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([])
+ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_q82st"]
@@ -81,7 +83,6 @@ Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_3tnlt"), SubResou
 [resource]
 script = ExtResource("5_eghih")
 HappeningName = "The Machine"
-HappeningBg = ExtResource("1_3tnlt")
 Stages = Array[ExtResource("5_3u5ui")]([SubResource("Resource_kk05a"), SubResource("Resource_cmfn1"), SubResource("Resource_57mxl"), SubResource("Resource_ipjf8"), SubResource("Resource_qi88o"), SubResource("Resource_q82st")])
 HappeningAppearance = 0
 Special = true

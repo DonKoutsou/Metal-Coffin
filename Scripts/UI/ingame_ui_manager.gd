@@ -75,9 +75,9 @@ func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save()
 	PopUpManager.GetInstance().DoFadeNotif("Save successful")
 func _on_exit_pressed() -> void:
-	World.GetInstance().WRLD_OnGameEnded.emit()
+	World.GetInstance().EndGame()
 func On_Game_Lost_Button_Pressed() -> void:
-	World.GetInstance().WRLD_OnGameEnded.emit()
+	World.GetInstance().EndGame()
 	
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Pause")):

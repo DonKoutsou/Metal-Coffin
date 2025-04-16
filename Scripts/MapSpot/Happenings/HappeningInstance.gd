@@ -36,7 +36,7 @@ var HappeningInstigator : MapShip
 var CurrentText : int
 
 func _ready() -> void:
-	#UISoundMan.GetInstance().Refresh()
+	UISoundMan.GetInstance().Refresh()
 	#set_physics_process(false)
 	Tw = create_tween()
 	Tw.set_trans(Tween.TRANS_BOUNCE)
@@ -44,20 +44,15 @@ func _ready() -> void:
 	
 	DiagButtons.visible = false
 	ProgBar.visible = false
-	PresentHappening(load("res://Resources/Happenings/CardiPrince.tres"))
+	#PresentHappening(load("res://Resources/Happenings/CardiPrince.tres"))
 
 func PresentHappening(Hap : Happening):
-	#SimulationManager.GetInstance().TogglePause(true)
+	SimulationManager.GetInstance().TogglePause(true)
 
 	#set_physics_process(true)
 	
 	HappeningTitle.text = Hap.HappeningName
-	
-	
-	
-	
-	
-	
+
 	Hapen = Hap
 	CurrentBranch = Hap.Stages
 	
@@ -131,13 +126,7 @@ func NextStage() -> void:
 					ActionTracker.OnActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)
 					var text = "Certain dialogue options require a stat check to happen. This check will determine if the option will have the outcome you want."
 					ActionTracker.GetInstance().ShowTutorial("Worldview Checks", text, [but], true)
-			#if (Stage.Options[f] is Drone_Happening_Option):
-				##var hasspave = HappeningInstigator.GetDroneDock().HasSpace()
-				##but.disabled = !hasspave
-				##if (!hasspave):
-					##but.text += " No space in drone dock"
-				#var Dronehap = Stage.Options[f] as Drone_Happening_Option
-				#but.icon = Dronehap.Cpt.CaptainPortrait
+
 		
 		await ResponseReceived
 		
@@ -145,8 +134,6 @@ func NextStage() -> void:
 		
 		var Check = Option.Check()
 
-		
-		
 		if (Option.WorldviewCheck != WorldView.WorldViews.NONE):
 			var CheckResault = TextFloater.instantiate() as Floater
 			if (Check):
@@ -184,7 +171,7 @@ func NextStage() -> void:
 		else:
 			var Possiblebranch : Array[HappeningStage] = []
 			if (!Check):
-				Possiblebranch.append_array(Option.WorldViewCheckFailBranch) 
+				Possiblebranch.append_array(Option.WorldViewCheckFailBranch)
 			else:
 				Possiblebranch.append_array(Option.BranchContinuation)
 			
@@ -194,7 +181,7 @@ func NextStage() -> void:
 			
 			
 	if (CurrentBranch.size() == CurrentStage):
-		HappeningFinished.emit(RecruitedShips)
+		HappeningFinished.emit(RecruitedShips, FinishedCampaign)
 		$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 	else:
 		call_deferred("NextStage")
@@ -215,19 +202,6 @@ func _on_option_4_pressed() -> void:
 	
 	SelectedOption = 3
 	ResponseReceived.emit()
-	
-#func OnActionSelected():
-	#ProgBar.visible = true
-	#OptionParent.visible = false
-	#$Timer.start()
-	#set_physics_process(true)
-	#
-	#await $Timer.timeout
-	#
-	#HappeningFinished.emit()
-	#Hp.Options[SelectedOption].OptionOutCome(HappeningInstigator)
-	#queue_free()
-	#SimulationManager.GetInstance().TogglePause(false)
 	
 var d = 0.06
 var Tw : Tween

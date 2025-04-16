@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_fsf63")
-QuestionText = "While rebuilding, a newcomer offers an unconventional idea. How do you respond?"
+QuestionText = "A newcomer offers an unconventional idea. How do you respond?"
 NegativeAnswer = "Listen and encourage their input, valuing diverse perspectives."
 PossetiveAnswer = "Assert your own approach, believing in your experience."
 WorldviewSkill = 3

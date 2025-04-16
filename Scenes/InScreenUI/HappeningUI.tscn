@@ -95,11 +95,12 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 50
 text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+uppercase = true
 
 [node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 1)
@@ -107,7 +108,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 34
 bbcode_enabled = true
 text = "Testfwafwafawf
 +awfwafwafawfwa
