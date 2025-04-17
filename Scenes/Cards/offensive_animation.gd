@@ -248,7 +248,7 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], FriendShip 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	var Ship = ShipViz.instantiate() as CardFightShipViz
 	Ship.disabled = true
-	Ship.SetStatsAnimation(OriginShip, !FriendShip)
+	Ship.SetStatsAnimation(OriginShip, FriendShip)
 	$HBoxContainer.add_child(Ship)
 	
 	Ship.ToggleFire(true)

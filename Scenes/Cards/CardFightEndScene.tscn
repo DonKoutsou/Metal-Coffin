@@ -27,12 +27,14 @@ vertical_alignment = 1
 clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[center][color=#c19200]Funds Earned[/color] : 20000
-[color=#c19200]Damage Dealt[/color] : 42142
-[color=#c19200]Damage Received [/color]: 2141
-[color=#c19200]Damage Negated[/color] : 120
+text = "[center][color=#ffc315]Funds Earned[/color] : 20000
+[color=#ffc315]Damage Dealt[/color] : 42142
+[color=#ffc315]Damage Received [/color]: 2141
+[color=#ffc315]Damage Negated[/color] : 120
 "
 fit_content = true
 scroll_active = false

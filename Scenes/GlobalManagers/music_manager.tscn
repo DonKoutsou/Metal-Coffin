@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://btglsgwihfdpy"]
+
+[ext_resource type="Script" uid="uid://cipqdmo5r1cmp" path="res://Scripts/music_manager.gd" id="1_p2pcq"]
+[ext_resource type="AudioStream" uid="uid://bxom1q5kepbxb" path="res://Assets/Sounds/Ambience.mp3" id="2_vbvrh"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_p2pcq")
+AmbientMusic = Array[AudioStream]([ExtResource("2_vbvrh")])

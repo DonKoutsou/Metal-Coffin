@@ -86,20 +86,23 @@ var CardSelectSize : float
 func _ready() -> void:
 	set_physics_process(false)
 	
-	#for g in 2:
-		#EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-	#for g in 2:
-		#PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	for g in 2:
+		EnemyShips.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+	for g in 2:
+		PlayerShips.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 
 	#Add all ships to turn array and sort them
 	ShipTurns.append_array(PlayerShips)
 	ShipTurns.append_array(EnemyShips)
+	
+	for g in ShipTurns:
+		CreateShipVisuals(g)
+	
 	ShipTurns.sort_custom(speed_comparator)
 
 	#Create the visualisation for each ship, basicly their stat holder
-	for g in ShipTurns:
-		CreateShipVisuals(g)
+	
 	
 	print("Card fight initialised. {0} player ship(s) VS {1} enemy ship(s)".format([PlayerShips.size(), EnemyShips.size()]))
 	
@@ -183,7 +186,8 @@ static func speed_comparator(a, b):
 	
 func CreateShipVisuals(BattleS : BattleShipStats) -> void:
 	var t = ShipVizScene.instantiate() as CardFightShipViz
-	t.connect("pressed", ShipVizPressed.bind(BattleS))
+	t.disabled = true
+	#t.connect("pressed", ShipVizPressed.bind(BattleS))
 	var Friendly = IsShipFriendly(BattleS)
 	var Hbox = HBoxContainer.new()
 	var C = Control.new()
@@ -212,7 +216,9 @@ func ShipVizPressed(Ship : BattleShipStats) -> void:
 	add_child(Scene)
 
 func GetShipViz(BattleS : BattleShipStats) -> CardFightShipViz:
-	var index = ShipTurns.find(BattleS)
+	var index = PlayerShips.find(BattleS)
+	if (index == -1):
+		index = EnemyShips.find(BattleS) + PlayerShips.size()
 	return ShipsViz[index]
 	
 func UpdateShipStats(BattleS : BattleShipStats) -> void:
@@ -647,7 +653,7 @@ func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 		Ship.Cards[C] = 1
 
 func PlayerActionSelectionEnded() -> void:
-	ShipsViz[CurrentTurn].Dissable()
+	GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 	PlayerActionPickingEnded.emit()
 
 func RestartCards() -> void:
@@ -656,8 +662,8 @@ func RestartCards() -> void:
 	
 	UpdateEnergy()
 	UpdateHandCards()
-	
-	ShipsViz[CurrentTurn].Enable()
+
+	GetShipViz(ShipTurns[CurrentTurn]).Enable()
 
 func UpdateHandCards() -> void:
 	for g in OffensiveCardPlecement.get_children():
@@ -757,10 +763,11 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		#if (g.OptionName == Option):
 	#Action.SelectedOption = Option
 	var c = CardScene.instantiate() as Card
-	if (Option != null):
-		c.SetCardStats(Action, [Option])
-	else:
-		c.SetCardStats(Action, [])
+	#if (Option != null):
+		#c.SetCardStats(Action, [Option])
+	#else:
+	
+	c.SetCardStats(Action, [])
 	if (Energy < c.GetCost()):
 		return
 	Energy -= c.GetCost()

@@ -301,12 +301,12 @@ func IntersectPusruing() -> Vector2:
 	var ship_position
 	var ship_velocity
 	
-	ship_position = PursuingShips[0].position
+	ship_position = PursuingShips[0].global_position
 	ship_velocity = PursuingShips[0].GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	var time_to_interception = (position.distance_to(ship_position)) / speed
+	var speed = GetShipSpeed()
+	var time_to_interception = (global_position.distance_to(ship_position)) / (speed / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -339,13 +339,19 @@ func GetCurrentDestination() -> Vector2:
 #Overriding events from MapShip as extra functionality is needed for enemies to let know of the COMMANDER of what was found/lost
 
 func OnShipSeen(SeenBy : Node2D):
+	if (Docked):
+		Command.OnShipSeen(SeenBy)
+		return
 	if (VisibleBy.has(SeenBy)):
 		return
 	VisibleBy.append(SeenBy)
 	if (VisibleBy.size() > 1):
 		return
 	
-	MapPointerManager.GetInstance().AddShip(self, false)
+	MapPointerManager.GetInstance().AddShip(self, false, true)
+	for g in GetDroneDock().DockedDrones:
+		g.VisibleBy.append(SeenBy)
+		MapPointerManager.GetInstance().AddShip(g, false)
 	#SimulationManager.GetInstance().TogglePause(true)
 	ShipCamera.GetInstance().FrameCamToPos(global_position)
 
@@ -353,7 +359,13 @@ func wait(seconds : float) -> Signal:
 	return get_tree().create_timer(seconds).timeout
 
 func OnShipUnseen(UnSeenBy : Node2D):
+	if (Docked):
+		Command.OnShipUnseen(UnSeenBy)
+		return
+		
 	VisibleBy.erase(UnSeenBy)
+	for g in GetDroneDock().DockedDrones:
+		g.VisibleBy.erase(UnSeenBy)
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
 	
 func BodyEnteredElint(area: Area2D) -> void:

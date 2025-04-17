@@ -80,8 +80,8 @@ func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().EndGame()
 	
 func _input(event: InputEvent) -> void:
-	if (event.is_action_pressed("Pause")):
-		Pause()
+	#if (event.is_action_pressed("Pause")):
+		#Pause()
 	if (event.is_action_pressed("CommandLine")):
 		$Control3/CommandLine.visible = !$Control3/CommandLine.visible
 		$Control3/CommandLine.call_deferred("Focus")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bahj28qps5ssw"]
+[gd_scene load_steps=20 format=3 uid="uid://bahj28qps5ssw"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
@@ -15,7 +15,9 @@
 [ext_resource type="Resource" uid="uid://bjp66pbcmoto5" path="res://Resources/Merch/ProxAmmo.tres" id="10_vs4qv"]
 [ext_resource type="PackedScene" uid="uid://b6gyf4stqfreh" path="res://Resources/Funds/FundsDisplayTown.tscn" id="15_0uykb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
+[ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBg_001.png" id="15_cp5cc"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
+[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="18_box5h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
 content_margin_left = 5.0
@@ -55,6 +57,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("15_baphb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_cp5cc")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -311,6 +323,10 @@ stream = ExtResource("16_baphb")
 volume_db = -10.0
 pitch_scale = 4.0
 bus = &"MapSounds"
+
+[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_box5h")
+autoplay = true
 
 [connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button2" to="." method="OnMunitionShopToggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button3" to="." method="OnRefuelShopPressed"]

@@ -1,7 +1,6 @@
 extends Node
 
 class_name StartingScreen
-@onready var save_load_manager: SaveLoadManager = $SaveLoadManager
 
 @export var StartingMenuScene : PackedScene
 @export var StudioAnim : PackedScene
@@ -16,25 +15,25 @@ var Wor : World
 const APPID = "3551150"
 # Called when the node enters the scene tree for the first time.
 
-#func _init() -> void:
-	#if (OS.get_name() == "Windows"):
-		#OS.set_environment("SteamAppID", APPID)
-		#OS.set_environment("SteamGameID", APPID)
+func _init() -> void:
+	if (OS.get_name() == "Windows"):
+		OS.set_environment("SteamAppID", APPID)
+		OS.set_environment("SteamGameID", APPID)
 	
 func _ready() -> void:
-	#if (OS.get_name() == "Windows"):
-		#Steam.steamInit()
-		#var IsRunning = Steam.isSteamRunning()
-		#
-		#if (!IsRunning):
-			#printerr("Steam Is Not Running")
-		#else:
-			#print("Steam Is Running")
-			#var ID = Steam.getSteamID()
-			#var name = Steam.getFriendPersonaName(ID)
-			#print("Username : ", str(name))
-			#$AchievementManager.SteamRunning = true
-			#print("Achievement Tracking Enabled")
+	if (OS.get_name() == "Windows"):
+		Steam.steamInit()
+		var IsRunning = Steam.isSteamRunning()
+		
+		if (!IsRunning):
+			printerr("Steam Is Not Running")
+		else:
+			print("Steam Is Running")
+			var ID = Steam.getSteamID()
+			var name = Steam.getFriendPersonaName(ID)
+			print("Username : ", str(name))
+			AchievementManager.GetInstance().SteamRunning = true
+			print("Achievement Tracking Enabled")
 	
 	var vidpl = StudioAnim.instantiate() as StudioAnimation
 	add_child(vidpl)
@@ -81,7 +80,7 @@ func StartGame(Load : bool) -> void:
 	Wor = GameScene.instantiate() as World
 	#wor.Load
 	if (Load):
-		if (!save_load_manager.Load(Wor)):
+		if (!SaveLoadManager.GetInstance().Load(Wor)):
 			var window = AcceptDialog.new()
 			add_child(window)
 			window.dialog_text = "No Save File Found"
@@ -100,8 +99,8 @@ func DelSave() -> void:
 	pop.dialog_text = "Saves have been nuked"
 	get_viewport().add_child(pop)
 	pop.popup_centered()
-	$SaveLoadManager.DeleteSave()
-	$TutorialManager.DeleteSave()
+	SaveLoadManager.GetInstance().DeleteSave()
+	ActionTracker.GetInstance().DeleteSave()
 	
 
 func OnGameEnded() -> void:

@@ -46,7 +46,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
-[node name="CardFightShipViz" type="Button" groups=["DigitalButtons"]]
+[node name="CardFightShipViz" type="Button"]
 custom_minimum_size = Vector2(180, 86)
 anchors_preset = 8
 anchor_left = 0.5

@@ -9,6 +9,7 @@ light_mode = 1
 [node name="AlarmEffect" type="Node2D"]
 material = SubResource("CanvasItemMaterial_bronl")
 script = ExtResource("1_bronl")
+TimesPlayed = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_jjfkd")

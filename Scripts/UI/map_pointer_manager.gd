@@ -44,9 +44,9 @@ func ClearLines() -> void:
 	for g in $MapLines.get_children():
 		g.queue_free()
 	PopUpManager.GetInstance().DoFadeNotif("Marker Cleared")
-func AddShip(Ship : Node2D, Friend : bool) -> void:
+func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 	if (Ships.has(Ship)):
-		if (Ship is HostileShip and !Ship.Destroyed):
+		if (Ship is HostileShip and !Ship.Destroyed and notify):
 			_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship Located")
 		return
 		
@@ -75,7 +75,8 @@ func AddShip(Ship : Node2D, Friend : bool) -> void:
 			marker.OnHostileShipDestroyed()
 		else:
 			marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
-			marker.PlayHostileShipNotif("Hostile Ship Located")
+			if (notify):
+				marker.PlayHostileShipNotif("Hostile Ship Located")
 			marker.SetType("Ship")
 			Ship.connect("ShipWrecked", marker.OnHostileShipDestroyed)
 		

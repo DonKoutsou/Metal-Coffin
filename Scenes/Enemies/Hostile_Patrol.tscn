@@ -81,7 +81,7 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 show_behind_parent = true
 
 [node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 position = Vector2(-13.9999, -14.0001)
 texture = ExtResource("5_q8roo")

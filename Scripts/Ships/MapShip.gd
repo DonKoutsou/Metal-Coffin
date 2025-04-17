@@ -204,7 +204,7 @@ func updatedronecourse():
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / GetShipSpeed()
+	var time_to_interception = (position.distance_to(ship_position)) / (GetShipSpeed() / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -235,7 +235,7 @@ func ShipLookAt(pos : Vector2) -> void:
 	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
 	shadow.rotation = rotation
 	for g in GetDroneDock().GetDockedShips():
-		g.global_rotation = global_rotation
+		g.ForceSteer(rotation)
 
 func SetShipPosition(pos : Vector2) -> void:
 	global_position = pos

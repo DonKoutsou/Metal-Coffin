@@ -36,7 +36,7 @@ shader = ExtResource("18_x3wib")
 shader_parameter/GroundTexture = ExtResource("17_x3wib")
 shader_parameter/GroundNormalTexture = ExtResource("16_x3wib")
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale = Vector2(10, 10)
+shader_parameter/Scale = Vector2(20, 20)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5

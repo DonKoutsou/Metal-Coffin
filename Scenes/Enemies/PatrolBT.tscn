@@ -13,7 +13,7 @@
 process_mode = 1
 script = ExtResource("1_vo0jh")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@22267")
+blackboard = NodePath("@Node@22168")
 custom_monitor = true
 actor = NodePath("")
 

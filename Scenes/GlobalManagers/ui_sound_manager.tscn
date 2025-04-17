@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://xva4nxui76gv"]
+
+[ext_resource type="Script" uid="uid://bdyunkmrrtpmv" path="res://Scripts/Audio/UISoundManager.gd" id="1_rf4sq"]
+[ext_resource type="AudioStream" uid="uid://oyvpm41u3k5x" path="res://Assets/Sounds/ButtonIn.wav" id="2_6djbc"]
+[ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="3_tx5of"]
+[ext_resource type="AudioStream" uid="uid://ups7egvp1xc5" path="res://Assets/Sounds/Hover.mp3" id="4_llfjl"]
+[ext_resource type="AudioStream" uid="uid://l32wa336ywlb" path="res://Assets/Sounds/Hover2.mp3" id="5_u1rpw"]
+
+[node name="UISoundManager" type="Node"]
+script = ExtResource("1_rf4sq")
+ClickSound = ExtResource("2_6djbc")
+ClickOutSound = ExtResource("3_tx5of")
+DigitalClick = ExtResource("4_llfjl")
+HoverShound = ExtResource("5_u1rpw")
+AnalogueSoundStr = -20.0
+DigitalSoundStr = -10.0

@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccmwul4ncd4dx"]
+[gd_scene load_steps=16 format=3 uid="uid://ccmwul4ncd4dx"]
 
 [ext_resource type="Script" uid="uid://e20sht2jh3tt" path="res://Scripts/EnemyAi/commander.gd" id="1_2gt3m"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="2_fb4ti"]
 [ext_resource type="Script" uid="uid://b2gyfw6gh37hb" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_7gsnn"]
 [ext_resource type="Script" uid="uid://c8jxlsxyeh3y" path="res://addons/beehave/nodes/composites/selector.gd" id="4_2bbgj"]
-[ext_resource type="Script" uid="uid://78j7k027aex8" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="5_ocenr"]
 [ext_resource type="Script" uid="uid://duypquk8en6g3" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_smsg2"]
 [ext_resource type="Script" uid="uid://dyxwpkc3fr5yh" path="res://Scripts/BeehaveNodes/UnhandledEnemies_Condition.gd" id="7_3q3c6"]
 [ext_resource type="Script" uid="uid://bc848p65pfktw" path="res://Scripts/BeehaveNodes/FindCloseShipAndOrderForPursuit_Action.gd" id="8_xcs4j"]
@@ -47,46 +46,34 @@ metadata/_custom_type_script = "uid://dtaxqupdatg7m"
 [node name="SelectorComposite" type="Node" parent="BeehaveTree/SequenceComposite"]
 script = ExtResource("4_2bbgj")
 
-[node name="CooldownDecorator2" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite"]
-script = ExtResource("5_ocenr")
-wait_time = 1.0
-
-[node name="FindUnhandledEnemies" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator2"]
+[node name="FindUnhandledEnemies" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite"]
 script = ExtResource("6_smsg2")
 
-[node name="UnhandledEnemiesCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator2/FindUnhandledEnemies"]
+[node name="UnhandledEnemiesCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/FindUnhandledEnemies"]
 script = ExtResource("7_3q3c6")
 
-[node name="FindCloseShipAndOrderForPursuit_Action" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator2/FindUnhandledEnemies"]
+[node name="FindCloseShipAndOrderForPursuit_Action" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/FindUnhandledEnemies"]
 script = ExtResource("8_xcs4j")
 
-[node name="CooldownDecorator3" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite"]
-script = ExtResource("5_ocenr")
-wait_time = 1.0
-
-[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator3"]
+[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite"]
 script = ExtResource("6_smsg2")
 
-[node name="UnhandledSignalsCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator3/SequenceComposite2"]
+[node name="UnhandledSignalsCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/SequenceComposite2"]
 script = ExtResource("9_jbplp")
 
-[node name="FindCloseShipAndOrderInvestigation_Action" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator3/SequenceComposite2"]
+[node name="FindCloseShipAndOrderInvestigation_Action" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/SequenceComposite2"]
 script = ExtResource("10_x4oqt")
 
-[node name="CooldownDecorator" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite"]
-script = ExtResource("5_ocenr")
-wait_time = 1.0
-
-[node name="SequenceComposite" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator"]
+[node name="SequenceComposite" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite"]
 script = ExtResource("6_smsg2")
 
-[node name="HasKnownEnemiesCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator/SequenceComposite"]
+[node name="HasKnownEnemiesCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/SequenceComposite"]
 script = ExtResource("11_2v8ck")
 
-[node name="MissileCarrierInPositionCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator/SequenceComposite"]
+[node name="MissileCarrierInPositionCondition" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/SequenceComposite"]
 script = ExtResource("12_qpqk6")
 
-[node name="AtackAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/CooldownDecorator/SequenceComposite"]
+[node name="AtackAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite/SequenceComposite"]
 script = ExtResource("13_obikj")
 
 [node name="Blackboard" type="Node" parent="."]

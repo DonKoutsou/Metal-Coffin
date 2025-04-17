@@ -67,6 +67,7 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 [sub_resource type="Resource" id="Resource_t3ljt"]
 script = ExtResource("6_dh2fs")
 Cpt = ExtResource("5_fnrm0")
+StringReply = ""
 OptionName = "Accept"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("2_4o3s8")]([SubResource("Resource_j03jq")])
