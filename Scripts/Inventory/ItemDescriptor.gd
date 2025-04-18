@@ -110,11 +110,11 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	#PopUpManager.GetInstance().DoConfirm("Are you sure you want to use this item ?", "Use", ConfirmUse)
 
 func _on_upgrade_pressed() -> void:
-	PopUpManager.GetInstance().DoConfirm("Are you sure you want to upgrade this item ?", "Upgrade", ConfirmUpgrade)
+	PopUpManager.GetInstance().DoConfirm("", "Are you sure you want to upgrade this item ?", "Upgrade", ConfirmUpgrade)
 
 
 func _on_drop_pressed() -> void:
-	PopUpManager.GetInstance().DoConfirm("Are you sure you want to drop this item ?", "Drop", ConfirmDrop)
+	PopUpManager.GetInstance().DoConfirm("", "Are you sure you want to drop this item ?", "Drop", ConfirmDrop)
 	
 	
 func ConfirmDrop() -> void:

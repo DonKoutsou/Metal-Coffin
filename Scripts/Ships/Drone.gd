@@ -27,8 +27,8 @@ func EnableDrone():
 		TakeoffStarted.emit()
 		TakingOff = true
 	#$AudioStreamPlayer2D.play()
-	var Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	GetShipAcelerationNode().position.x =  Speed / 360
+	#var Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	#GetShipAcelerationNode().position.x =  Speed / 360
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 	#
@@ -60,7 +60,7 @@ func BodyEnteredBody(Body: Area2D) -> void:
 			plship.GetDroneDock().DockDrone(g, false)
 		for g in MyDroneDock.Captives:
 			MyDroneDock.UndockCaptive(g)
-			plship.GetDroneDock().DockCaptive(g, false)
+			plship.GetDroneDock().DockCaptive(g)
 		#for g in MyDroneDock.FlyingDrones:
 			#g.Command = plship
 		CommingBack = false

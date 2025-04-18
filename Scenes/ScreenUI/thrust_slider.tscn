@@ -26,9 +26,9 @@ StepCOunt = 12
 [node name="Handle" type="TextureRect" parent="."]
 layout_mode = 2
 offset_left = -14.0
-offset_top = 234.0
+offset_top = 215.0
 offset_right = 106.0
-offset_bottom = 354.0
+offset_bottom = 335.0
 mouse_filter = 0
 texture = ExtResource("2_l8mv8")
 expand_mode = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cid0s6uni7fky"]
+[gd_scene load_steps=32 format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="2_0dp8t"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/InScreenUI/FleetSparationScene.tscn" id="4_trvh7"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/InScreenUI/HappeningUI.tscn" id="5_7no5x"]
 [ext_resource type="PackedScene" uid="uid://c2db1rw6borur" path="res://Scenes/WorldViewQuestionair.tscn" id="6_8eeky"]
+[ext_resource type="PackedScene" uid="uid://dmtr88wf7mpm3" path="res://Scenes/PrologueEnd_trigger.tscn" id="7_8o37l"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="7_udtpl"]
+[ext_resource type="PackedScene" uid="uid://btb0vs0eaeg0m" path="res://Scenes/prologue_end.tscn" id="8_43ao6"]
 [ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/Ship_Controller.gd" id="8_qeah0"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="9_ljctt"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="10_8o37l"]
@@ -52,12 +54,14 @@ LoadingScene = ExtResource("3_0i6dt")
 FleetSeparationScene = ExtResource("4_trvh7")
 HappeningUI = ExtResource("5_7no5x")
 WorldViewQuestionairScene = ExtResource("6_8eeky")
+PrologueTrigger = ExtResource("7_8o37l")
+PrologueEndScreen = ExtResource("8_43ao6")
 StartingFunds = 400000
 PlayerWallet = ExtResource("7_udtpl")
 IsPrologue = true
 IntroDialogues = Array[String](["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\", \"Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."])
 IntroDialogue2 = Array[String](["Dormak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."])
-PrologueDialgues = Array[String](["Operator we are almost at Cardi. Thankfully we didn't meet any empire patrols.", "We should make this stop fast and head back. Patrols dont frequent around here but we shouldn't play with our luck."])
+PrologueDialgues = Array[String](["You open your eyes, it seems that you fell asleep. ", "The dream slowly fades away, but before it doese you have a moment to apreciate your early days in the pilot academy. Life was different back then.", "Your illusion is broken by a loud voice from our side your door.", "Captain ! We are almost at Cardi. Thankfully we didn't meet any empire patrols. ETA 10 minutes...", "We should make this stop fast and head back you think to yourself. Patrols dont frequent around here but we shouldn't play with our luck."])
 PrologueDialogues2 = Array[String](["Armak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."])
 
 [node name="ShipController" type="Node" parent="." node_paths=PackedStringArray("_Map")]

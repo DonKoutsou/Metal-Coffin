@@ -27,6 +27,18 @@ signal FullScreenToggleFinished()
 var CloseTw : Tween
 var OpenTw : Tween
 
+func CloseScreen() -> void:
+	$DoorSound.play()
+	Cam.EnableFullScreenShake()
+	await wait(0.5)
+	CloseTw = create_tween()
+	CloseTw.set_ease(Tween.EASE_OUT)
+	CloseTw.set_trans(Tween.TRANS_BOUNCE)
+	CloseTw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
+	await CloseTw.finished
+	
+	FullScreenToggleStarted.emit(true)
+
 func DoIntroFullScreen(toggle : bool) -> void:
 	#$ScreenFrameLong2.visible = true
 	$Cables.visible = false

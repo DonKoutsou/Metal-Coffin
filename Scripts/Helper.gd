@@ -40,6 +40,19 @@ func GetCityByName(CityName : String) -> MapSpot:
 			break
 	return CorrectCity
 
+func GetSpotByName(CityName : String) -> MapSpot:
+	var SpotGroups = ["City"]
+	var cities = []
+	for g in SpotGroups:
+		cities.append_array( get_tree().get_nodes_in_group(g))
+	var CorrectCity : MapSpot
+	for g in cities:
+		var cit = g as MapSpot
+		if (cit.GetSpotName() == CityName):
+			CorrectCity = cit
+			break
+	return CorrectCity
+
 func FindPath(start_city: String, end_city: String) -> Array:
 	#var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var queue = []

@@ -8,6 +8,9 @@ class_name DroneDock
 
 var DockedDrones : Array[Drone]
 var Captives : Array[HostileShip]
+
+signal DroneAdded
+signal DroneRemoved
 #var FlyingDrones : Array[Drone]
 
 func _ready() -> void:
@@ -79,14 +82,16 @@ func DroneDisharged(Dr : MapShip):
 		return
 	if (DockedDrones.has(Dr)):
 		DockedDrones.erase(Dr)
+	
+	DroneRemoved.emit()
 	#if (FlyingDrones.has(Dr)):
 		#FlyingDrones.erase(Dr)
 
 func AddRecruit(Cpt : Captain, Notify : bool = true) -> void:
-	if (Notify):
-		PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Cpt.ProvidingFunds]))
-		Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait, Cpt.CaptainName)
-	
+	#if (Notify):
+		#PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Cpt.ProvidingFunds]))
+		#Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait, Cpt.CaptainName)
+	#
 	World.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
 	var ship = (load("res://Scenes/MapShips/drone.tscn") as PackedScene).instantiate() as Drone
 	ship.Cpt = Cpt
@@ -232,7 +237,10 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		drone.LandingStarted.emit()
 		drone.Landing = true
 	
-	Command.AccelerationChanged(Command.GetShipSpeed() / Command.GetShipMaxSpeed())
+	if (Command.GetShipSpeed() > 0):
+		Command.AccelerationChanged(Command.GetShipSpeed() / Command.GetShipMaxSpeed())
+	
+	DroneAdded.emit()
 		
 func is_even(number: int) -> bool:
 	return number % 2 == 0
@@ -274,6 +282,8 @@ func UndockCaptive(Captive : HostileShip):
 			Captive.Docked = false
 			break
 	RepositionDocks()
+	
+	DroneRemoved.emit()
 
 func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)
@@ -289,6 +299,8 @@ func UndockDrone(drone : Drone):
 			drone.Docked = false
 			break
 	RepositionDocks()
+	
+	DroneRemoved.emit()
 	
 func RepositionDocks() -> void:
 	

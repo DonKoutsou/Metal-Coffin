@@ -19,10 +19,11 @@ func DoPopUp(Text : String):
 	dig.dialog_text = Text
 	dig.popup_centered()
 	
-func DoConfirm(Text : String, ConfirmText : String, Method : Callable):
+func DoConfirm(Title : String, Text : String, ConfirmText : String, Method : Callable):
 	var dig = CustomConfirm.instantiate() as ConfirmationDialog
 	dig.connect("confirmed", Method)
 	#add_child(dig)
+	#dig.title = 
 	dig.dialog_text = Text
 	dig.ok_button_text = ConfirmText
 	dig.popup_exclusive_centered(self)

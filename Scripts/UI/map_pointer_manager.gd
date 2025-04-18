@@ -44,6 +44,7 @@ func ClearLines() -> void:
 	for g in $MapLines.get_children():
 		g.queue_free()
 	PopUpManager.GetInstance().DoFadeNotif("Marker Cleared")
+	
 func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 	if (Ships.has(Ship)):
 		if (Ship is HostileShip and !Ship.Destroyed and notify):
@@ -217,6 +218,10 @@ func _physics_process(delta: float) -> void:
 				
 				Marker.UpdateTrajectory(ship.global_rotation)
 				Marker.UpdateSpeed(ship.GetShipSpeed())
+				
+				if (ship.Landing or ship.TakingOff):
+					Marker.UpdateAltitude(ship.Altitude)
+				
 				if (ship != ControlledShip):
 					continue
 				#if (ship.GetDroneDock().DockedDrones.size() > 0):
@@ -236,8 +241,7 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
 				
 				
-				if (ship.Landing or ship.TakingOff):
-					Marker.UpdateAltitude(ship.Altitude)
+				
 
 				
 				

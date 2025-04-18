@@ -11,6 +11,7 @@ var tw : Tween
 func _ready() -> void:
 	Text.text = "{0} {1}".format([PlayerWallet.Funds, FundsThing])
 	CurrentAmm = PlayerWallet.Funds
+	UpDateFunds(CurrentAmm)
 	PlayerWallet.connect("OnFundsUpdated", UpDateFunds)
 
 func UpDateFunds(NewAmm : int) -> void:

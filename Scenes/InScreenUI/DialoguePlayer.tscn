@@ -39,6 +39,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 24
 autowrap_mode = 2
+visible_characters_behavior = 1
 
 [node name="LineDrawer" parent="." instance=ExtResource("5_j0ljn")]
 layout_mode = 1
@@ -58,6 +59,7 @@ amplitude = 10.0
 waveform_points = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

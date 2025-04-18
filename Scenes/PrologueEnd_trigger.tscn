@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmtr88wf7mpm3"]
+
+[ext_resource type="Script" uid="uid://yjwsivbwy68k" path="res://Scripts/prologue_end_trigger.gd" id="1_xooj2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xooj2"]
+radius = 500.0
+
+[node name="TutorialTrigger" type="Node2D"]
+script = ExtResource("1_xooj2")
+OutroText = Array[String](["As you slowly arive to Armak you wonder what the future holds for you."])
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xooj2")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

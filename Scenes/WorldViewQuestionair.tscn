@@ -32,7 +32,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ey4p"]
 
-[node name="WorldViewQuestionair" type="PanelContainer" node_paths=PackedStringArray("Text")]
+[node name="WorldViewQuestionair" type="PanelContainer" node_paths=PackedStringArray("Text", "QuestionAnswers", "DiagButtons", "Line")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,8 +41,12 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_0ey4p")
 script = ExtResource("2_wn0u1")
 Text = NodePath("VBoxContainer/Label")
+QuestionAnswers = NodePath("VBoxContainer/Control/HBoxContainer")
+DiagButtons = NodePath("VBoxContainer/Control/HBoxContainer2")
+Line = NodePath("VBoxContainer/LineDrawer")
 IntroDialogue = Array[String]([".................................", ".................................................", "Where am I ?", "A voice cuts through the void, calming yet authoritative—likely female.", "\"Steady your breath, pilot. This may cause some discomfort, but I assure you, it’s temporary.\"", "Her words linger, drawing fragments of reality back to you.", " \"As you know, the pilot initiation program is mandatory for all aspiring pilots. Your time has come to undertake this test.\"", "Clarity returns. You had prepared for this moment, expecting a written exam. Yet, something feels different.", "Her voice, clear and resonant, continues.", "\"You're likely curious about your current situation. Rest assured, it's all precautionary, tailored to gather the data we need.\"", "\"Your physiological readings are carefully monitored. You'll be released shortly after the test concludes.\"", "\"We've curated a selection of 12 questions to serve as your evaluation. Stay calm and respond as thoroughly as possible. The screen will display them shortly.\"", "Your heart rate quickens. Can something so simple stand as a barrier to the duty you've committed to? You chose this war for reasons beyond yourself. Would they truly deny you this chance to honor that choice?", "\"Remember, pilot, you will hold the lives of your comrades in your hands. This is a matter of gravity. While I empathize with your anxieties, the role of a pilot is earned, not given.\"", "She ......", "INITIALISING TEST"])
 PossibleQuestions = Array[ExtResource("3_5vy1l")]([ExtResource("4_0jjjo"), ExtResource("5_0ey4p"), ExtResource("6_mkbl6"), ExtResource("7_gij2h"), ExtResource("8_6xjrs"), ExtResource("9_cphet"), ExtResource("10_dx0y0"), ExtResource("11_1cuev"), ExtResource("12_yejad"), ExtResource("13_ss02x"), ExtResource("14_6iaxw"), ExtResource("15_e18fm"), ExtResource("16_jtjw7"), ExtResource("17_dymyh"), ExtResource("18_ucmj5"), ExtResource("19_8f5b7"), ExtResource("20_s1878"), ExtResource("21_fmooa"), ExtResource("22_a01bo"), ExtResource("23_l0coj"), ExtResource("24_ra63j"), ExtResource("25_3hoxt"), ExtResource("26_vfqru"), ExtResource("27_fl7up")])
+OutroDialogue = Array[String]([".................................", "TEST ENDED", "A cold sweat washes over you. How did you do. Was there a wrong answer? You go through the answers in your head trying to see where you could have gone wrong.", "Suddenly the female voice reaches you again. \"Relax pilot. It's all gone well. We apreciate your honesty in ansewring. I will not be able to give you an answer about your resaults, the flying test is next as you know  and the resaults of both will determine your if you get your pilot license.", "For a moment you let go. The excitement seems to be getting the best of you. For a moment you close your eyes and drift of........."])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -74,14 +78,46 @@ sample_rate = 2700
 buffer_size = 471
 phase = inf
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Control/HBoxContainer2" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Next"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Control/HBoxContainer2" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Skip"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
 visible = false
 custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer/Control/HBoxContainer" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -89,7 +125,7 @@ theme_override_font_sizes/font_size = 26
 text = "Option1"
 autowrap_mode = 2
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Button2" type="Button" parent="VBoxContainer/Control/HBoxContainer" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -97,27 +133,11 @@ theme_override_font_sizes/font_size = 26
 text = "Option 2"
 autowrap_mode = 2
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
-text = "Next"
-
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
-text = "Skip"
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("29_0ey4p")
 volume_db = -5.0
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="Option1Pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="Option2Pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="NextButtonPressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button2" to="." method="SkipButton"]
+[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer2/Button" to="." method="NextButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer2/Button2" to="." method="SkipButton"]
+[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/Button" to="." method="Option1Pressed"]
+[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/Button2" to="." method="Option2Pressed"]

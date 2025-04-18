@@ -111,3 +111,8 @@ func BodyLeftElint(Body: Area2D) -> void:
 	if (Body.get_parent() is PlayerShip):
 		return
 	super(Body)
+func AccelerationChanged(value: float) -> void:
+	super(value)
+	
+	for g in GetDroneDock().GetDockedShips():
+		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )

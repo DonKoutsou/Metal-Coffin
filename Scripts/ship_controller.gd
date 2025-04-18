@@ -47,6 +47,12 @@ func SetInitialShip() -> void:
 	
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
+	
+	var dock = ControlledShip.GetDroneDock() as DroneDock
+	
+	dock.DroneAdded.connect(RefreshUI)
+	dock.DroneRemoved.connect(RefreshUI)
+	
 	AvailableShips.append(ControlledShip)
 
 	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
@@ -97,6 +103,9 @@ func OnShipDamaged(Amm : float, ShowVisuals : bool) -> void:
 		UIEventH.OnControlledShipDamaged(Amm)
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.DAMAGED)
 
+func RefreshUI() -> void:
+	UIEventH.call_deferred("OnShipUpdated",ControlledShip)
+
 func OnShipDestroyed(Sh : PlayerDrivenShip):
 	if (Sh is PlayerShip):
 		World.GetInstance().call_deferred("GameLost", "Flagship destroyed")
@@ -132,12 +141,34 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 			PopUpManager.GetInstance().DoFadeNotif("No ship to switch to")
 			return
 		ControlledShip.ToggleFuelRangeVisibility(false)
+
+		ControlledShip.disconnect("OnShipDamaged", OnShipDamaged)
+		
+		var dock = ControlledShip.GetDroneDock() as DroneDock
+	
+		dock.DroneAdded.disconnect(RefreshUI)
+		dock.DroneRemoved.disconnect(RefreshUI)
+		
 		ControlledShip = AvailableShips[newcont]
 	else:
 		ControlledShip.ToggleFuelRangeVisibility(false)
+
+		ControlledShip.disconnect("OnShipDamaged", OnShipDamaged)
+		
+		var dock = ControlledShip.GetDroneDock() as DroneDock
+	
+		dock.DroneAdded.disconnect(RefreshUI)
+		dock.DroneRemoved.disconnect(RefreshUI)
+		
 		ControlledShip = AvailableShips[currentcontrolled + 1]
 	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
-
+	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
+	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
+	
+	var NewDock = ControlledShip.GetDroneDock() as DroneDock
+	
+	NewDock.DroneAdded.connect(RefreshUI)
+	NewDock.DroneRemoved.connect(RefreshUI)
 	
 	#UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
 	#UIEventH.OnSteerDirForced(ControlledShip.rotation)

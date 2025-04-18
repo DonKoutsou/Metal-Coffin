@@ -18,6 +18,7 @@ func _ready() -> void:
 func PlayDialogue(Text : Array[String], Avatar : Texture, Name : String):
 	textToShow.append_array(Text)
 	$PanelContainer/TextureRect.texture = Avatar
+	$PanelContainer/TextureRect.visible = Avatar != null
 	$PanelContainer/Label.text = Name
 	ApplyNextText()
 	

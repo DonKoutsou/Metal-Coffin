@@ -6,11 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cmdvuq7n6nncl" path="res://Scenes/studio_anim.tscn" id="3_yypyw"]
 [ext_resource type="PackedScene" uid="uid://cid0s6uni7fky" path="res://Scenes/IntroWorld.tscn" id="4_r02ad"]
 
-[node name="StartingScreen" type="Node" node_paths=PackedStringArray("TutMan")]
+[node name="StartingScreen" type="Node"]
 process_mode = 3
 script = ExtResource("1_kry56")
 StartingMenuScene = ExtResource("3_pxh3m")
 StudioAnim = ExtResource("3_yypyw")
 GameScene = ExtResource("3_lbc5q")
 IntroGameScene = ExtResource("4_r02ad")
-TutMan = NodePath("")

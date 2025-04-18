@@ -11,6 +11,9 @@ class_name World
 @export var FleetSeparationScene : PackedScene
 @export var HappeningUI : PackedScene
 @export var WorldViewQuestionairScene : PackedScene
+@export_group("Prologue")
+@export var PrologueTrigger : PackedScene
+@export var PrologueEndScreen : PackedScene
 @export_group("Wallet")
 @export var StartingFunds : int = 500000
 @export var PlayerWallet : Wallet
@@ -103,6 +106,10 @@ func _ready() -> void:
 		Loadingscr.queue_free()
 		
 		if (IsPrologue):
+			var Trigger = PrologueTrigger.instantiate() as PrologueEnd_Trigger
+			var Armak = Helper.GetInstance().GetSpotByName("Armak")
+			Armak.add_child(Trigger)
+			
 			var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
 			Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
 			Questionair.Init()
@@ -137,10 +144,10 @@ func LoadSaveData(PlWallet : Wallet) -> void:
 	PlayerWallet.SetFunds(PlWallet.Funds)
 
 func PlayPrologue():
-	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, load("res://Assets/artificial-hive.png"), "Seg", SteerTut, true)
+	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, null, "Seg", SteerTut, true)
 
 func ShowArmak():
-	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialogues2, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
+	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialogues2, null, "Seg", ReturnCamToPlayer, true)
 	GetMap().GetCamera().ShowArmak()
 
 func SteerTut() -> void:
@@ -439,4 +446,15 @@ func GameLost(reason : String):
 	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer/VBoxContainer/Label.text = reason
 
 func EndGame() -> void:
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	WRLD_OnGameEnded.emit()
+
+func EndPrologue() -> void:
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	
+	var ProgEnd = PrologueEndScreen.instantiate() as PrologueEnd
+	GetMap().GetScreenUi().add_child(ProgEnd)
+	await ProgEnd.Finished
 	WRLD_OnGameEnded.emit()
