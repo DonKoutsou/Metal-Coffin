@@ -28,6 +28,8 @@ func _ready() -> void:
 		ShipCont.SetShip(CurrentFleet[Ship])
 		ShipCont.connect("OnShipSelected", OnShipContainerSelecter.bind(ShipCont))
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
+	UpdateCurrentFleetStats()
+	UpdateNewFleetStats()
 	
 func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 	var Ship = Cont.ContainedShip
@@ -63,9 +65,7 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 			#Ship.DissableDrone()
 		#Add ship to new fleet array
 		NewFleet.append(Ship)
-		#Update stats
-		UpdateCurrentFleetStats()
-		UpdateNewFleetStats()
+		
 	else : if (NewFleet.has(Ship)):
 		
 		if (NewFleet[0] == Ship):
@@ -91,8 +91,9 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 		CurrentFleetShipPlecement.add_child(Cont)
 		NewFleet.erase(Ship)
 		CurrentFleet.append(Ship)
-		UpdateCurrentFleetStats()
-		UpdateNewFleetStats()
+		
+	UpdateCurrentFleetStats()
+	UpdateNewFleetStats()
 func UpdateCurrentFleetStats() -> void:
 	var Cap = CurrentFleet[0]
 	var FuelStats = Cap.GetFuelStats()

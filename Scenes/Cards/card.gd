@@ -49,7 +49,7 @@ func _ready() -> void:
 	set_physics_process(TargetLoc != Vector2.ZERO)
 	$Line2D.visible = TargetLoc != Vector2.ZERO
 
-func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
+func SetCardStats(Stats : CardStats, Options : Array[CardOption], Amm : int = 0) -> void:
 	CStats = Stats
 	Cost = Stats.Energy
 	var DescText =  "[center] {0}".format([Stats.CardDescription])
@@ -63,6 +63,8 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption]) -> void:
 		CardName.text = Stats.CardName
 		CardTex.texture = Stats.Icon
 	
+	$Amm.visible = Amm != 0
+	$Amm/Label.text = var_to_str(Amm) + "x"
 	#var DescText =  "[center]{0}".format([Stats.CardDescription])
 	#CardDesc.visible_ratio = 0
 	#var tw = create_tween()

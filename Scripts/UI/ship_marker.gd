@@ -100,6 +100,8 @@ func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 		add_child(ElintNotif)
 
 func OnLandingStarted():
+	if (is_instance_valid(LandingNotif)):
+		return
 	LandingNotif = NotificationScene.instantiate() as ShipMarkerNotif
 	#LandingNotif.SetText("ELINT : " + var_to_str(ElingLevel))
 	LandingNotif.Blink = false

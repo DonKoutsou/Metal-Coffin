@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://c8b3lpqbi11up"]
 
-[ext_resource type="Texture2D" uid="uid://c5rf570oonbbc" path="res://Assets/CaptainPortraits/Captain9.png" id="1_25cgl"]
+[ext_resource type="Texture2D" uid="uid://1l0uuhes56vw" path="res://Assets/CaptainPortraits/Captain3.png" id="1_xaias"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_6dx32"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_fklaq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_u6ltl"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_urdjp"]
-[ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/Spaceship/ShipElena2.png" id="5_xaias"]
-[ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/FuelTank2.tres" id="8_av0js"]
+[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="5_xaias"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="8_nxfpy"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="8_u6p3e"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="10_xaias"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="11_so2fg"]
 
 [sub_resource type="Resource" id="Resource_t21ml"]
 resource_local_to_scene = true
@@ -91,11 +91,11 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 script = ExtResource("3_u6ltl")
 CaptainName = "Jor"
 CaptainBio = "Shithead"
-CaptainPortrait = ExtResource("1_25cgl")
+CaptainPortrait = ExtResource("1_xaias")
 ShipIcon = ExtResource("5_xaias")
 CaptainStats = Array[ExtResource("2_6dx32")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_5nith"), SubResource("Resource_1yc5b"), SubResource("Resource_2jxnm"), SubResource("Resource_rn88p"), SubResource("Resource_3a3o1"), SubResource("Resource_wmdyx")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("8_nxfpy"), ExtResource("8_av0js"), ExtResource("8_u6p3e"), ExtResource("8_u6p3e"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias")])
+StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("8_nxfpy"), ExtResource("11_so2fg"), ExtResource("8_u6p3e"), ExtResource("8_u6p3e"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 40000

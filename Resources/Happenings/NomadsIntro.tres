@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_c4s21"]
 script = ExtResource("3_jrds2")
-OptionName = "You ask them about possible recruits in nearby cities."
+OptionName = "You ask them about possible recruits in nearby villages."
 FinishDiag = true
 BranchContinuation = Array[ExtResource("1_nu0k6")]([])
 WorldviewEffect = 0

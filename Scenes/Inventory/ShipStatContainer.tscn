@@ -62,6 +62,7 @@ script = ExtResource("2_hehea")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -80,8 +81,9 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 6
 theme_override_styles/background = SubResource("StyleBoxEmpty_jvfpq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
 value = 19.17
@@ -90,12 +92,9 @@ show_percentage = false
 [node name="ItemBar" type="ProgressBar" parent="ProgressBar"]
 show_behind_parent = true
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -2.0
-offset_bottom = 2.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_jokjb")
@@ -105,12 +104,9 @@ show_percentage = false
 
 [node name="ItemNegBar" type="ProgressBar" parent="ProgressBar"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -2.0
-offset_bottom = 2.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_ueh8q")

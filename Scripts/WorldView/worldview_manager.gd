@@ -5,6 +5,8 @@ class_name WorldView
 @export_group("WorldviewNotif")
 @export var WorldviewAdjustNotif : PackedScene
 
+var Lied : bool = false
+
 static var WorldviewStats : Dictionary[WorldViews, int] = {
 	WorldViews.COMPOSURE_AGITATION : 0,
 	WorldViews.LOGIC_BELIEF : 0,

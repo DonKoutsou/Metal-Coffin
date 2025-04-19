@@ -672,10 +672,13 @@ func UpdateHandCards() -> void:
 		g.queue_free()
 	var CharCards = ShipTurns[CurrentTurn].Cards
 	var CharAmmo = ShipTurns[CurrentTurn].Ammo
-	for g in CharCards.keys():
+	for g : CardStats in CharCards.keys():
 		var c = CardScene.instantiate() as Card
 		var WType = g.WeapT
-		c.SetCardStats(g, [])
+		var Amm = 0
+		if (g.Consume):
+			Amm = CharCards[g]
+		c.SetCardStats(g, [], Amm)
 		c.connect("OnCardPressed", OnCardSelected)
 		if (g is OffensiveCardStats):
 			OffensiveCardPlecement.add_child(c)
@@ -687,7 +690,10 @@ func UpdateHandCards() -> void:
 				var c2 = CardScene.instantiate() as Card
 				var Cstats2 = g.duplicate()
 				Cstats2.SelectedOption = am
-				c2.SetCardStats(Cstats2, [])
+				var Amm2 = 0
+				if (am.CauseConsumption):
+					Amm2 = CharAmmo[Ammo]
+				c2.SetCardStats(Cstats2, [], Amm2)
 				c2.connect("OnCardPressed", OnCardSelected)
 				if (Cstats2 is OffensiveCardStats):
 					OffensiveCardPlecement.add_child(c2)
@@ -795,12 +801,12 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		ShipCards[C.CStats] -= 1
 		if (ShipCards[C.CStats] == 0):
 			ShipCards.erase(C.CStats)
-	if (Option != null):
-		if (Option.CauseConsumption):
+	if (C.CStats.SelectedOption != null):
+		if (C.CStats.SelectedOption.CauseConsumption):
 			var Ammo = ShipTurns[CurrentTurn].Ammo
-			Ammo[Option] -= 1
-			if (Ammo[Option] == 0):
-				Ammo.erase(Option)
+			Ammo[C.CStats.SelectedOption] -= 1
+			if (Ammo[C.CStats.SelectedOption] == 0):
+				Ammo.erase(C.CStats.SelectedOption)
 				
 	#DoCardPlecementAnimation(c, C.global_position)
 	call_deferred("DoCardPlecementAnimation", c, C.global_position)

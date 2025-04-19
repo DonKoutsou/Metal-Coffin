@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_3et3s")
-QuestionText = "In a negotiation with another community, how do you ensure success?"
-NegativeAnswer = "Understand their needs and find common ground."
-PossetiveAnswer = "Focus on securing the best outcome for your settlement."
+QuestionText = "In a negotiation, how do you ensure success?"
+NegativeAnswer = "Understand the needs of both sides and find common ground."
+PossetiveAnswer = "Focus on securing the best outcome for your side."
 WorldviewSkill = 3
 metadata/_custom_type_script = "uid://cpsu3uuo3rqxr"

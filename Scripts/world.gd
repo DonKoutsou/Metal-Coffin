@@ -451,6 +451,7 @@ func EndGame() -> void:
 	WRLD_OnGameEnded.emit()
 
 func EndPrologue() -> void:
+	ActionTracker.GetInstance().OnPrologueFinished()
 	GetMap().GetScreenUi().CloseScreen()
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	

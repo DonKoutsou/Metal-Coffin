@@ -17,12 +17,12 @@ func _ready() -> void:
 	visible = false
 
 func _on_y_gas_range_changed(NewVal: float) -> void:
-	MarkerHorizontalMove.emit(NewVal)
+	MarkerVerticalMove.emit(NewVal)
 
 
 func _on_x_gas_range_changed(NewVal: float) -> void:
-	MarkerVerticalMove.emit(NewVal)
-
+	MarkerHorizontalMove.emit(NewVal)
+	
 
 func _on_exit_map_marker_pressed() -> void:
 	ExitPressed.emit()

@@ -86,12 +86,14 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
 		if (Ship is Drone):
 			Ship.connect("DroneReturning", marker.DroneReturning)
-		Ship.connect("Elint", marker.ToggleShowElint)
-		Ship.connect("LandingStarted", marker.OnLandingStarted)
-		Ship.connect("LandingCanceled", marker.OnLandingEnded)
-		Ship.connect("LandingEnded", marker.OnLandingEnded)
-		Ship.connect("TakeoffStarted", marker.OnLandingStarted)
-		Ship.connect("TakeoffEnded", marker.OnLandingEnded)
+
+		Ship.Elint.connect(marker.ToggleShowElint)
+		Ship.LandingStarted.connect(marker.OnLandingStarted)
+		Ship.LandingEnded.connect(marker.OnLandingEnded)
+		Ship.TakeoffStarted.connect(marker.OnLandingStarted)
+		Ship.TakeoffEnded.connect(marker.OnLandingEnded)
+		#Ship.connect("LandingCanceled", marker.OnLandingEnded)
+
 		marker.call_deferred("ToggleShipDetails", true)
 		marker.call_deferred("ToggleFriendlyShipDetails", true)
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
@@ -220,6 +222,9 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				
 				if (ship.Landing or ship.TakingOff):
+					#TODO find proper fix
+					if (Marker.LandingNotif == null):
+						Marker.OnLandingStarted()
 					Marker.UpdateAltitude(ship.Altitude)
 				
 				if (ship != ControlledShip):

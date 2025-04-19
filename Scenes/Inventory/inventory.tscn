@@ -195,7 +195,7 @@ flip_v = true
 
 [node name="Label2" type="Label" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 16
 text = "Base Stats"
 
 [node name="Panel2" type="Panel" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
@@ -206,7 +206,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
 
 [node name="Label" type="Label" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 18
 text = "Ship Part Buffs"
 
 [node name="Panel" type="Panel" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]

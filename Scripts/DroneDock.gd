@@ -52,6 +52,13 @@ func GetDroneFuel() -> float:
 		fuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	return fuel
 
+func RemoveCaptain(Cap : Captain) -> void:
+	for g in DockedDrones:
+		if (g.Cpt == Cap):
+			UndockDrone(g)
+			g.Kill()
+			return
+		
 func ClearAllDrones() -> void:
 	var Drones = DockedDrones.duplicate()
 	for g in Drones:
@@ -78,12 +85,9 @@ func GetCaptains() -> Array[Captain]:
 	return cptns
 	
 func DroneDisharged(Dr : MapShip):
-	if (Dr == get_parent()):
-		return
-	if (DockedDrones.has(Dr)):
-		DockedDrones.erase(Dr)
-	
+
 	DroneRemoved.emit()
+	UndockDrone(Dr)
 	#if (FlyingDrones.has(Dr)):
 		#FlyingDrones.erase(Dr)
 

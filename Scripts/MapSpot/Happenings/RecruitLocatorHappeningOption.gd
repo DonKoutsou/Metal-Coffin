@@ -4,7 +4,7 @@ class_name Recruit_Locator_Happening_Option
 func OptionResault(EventOrigin : MapSpot) -> String:
 	var ClosestRecruitLoc = FindClosestRecruit(EventOrigin)
 	if (ClosestRecruitLoc == Vector2.ZERO):
-		return "There are not possible rebels in any of the nearby towns as far as i know."
+		return "There are not rebel ships in any of the nearby towns as far as i know."
 	var Dir = Helper.GetInstance().AngleToDirection(EventOrigin.global_position.angle_to_point(ClosestRecruitLoc))
 	var Dist = Helper.GetInstance().DistanceToDistance(EventOrigin.global_position.distance_to(ClosestRecruitLoc))
 	

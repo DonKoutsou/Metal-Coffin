@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=36 format=3 uid="uid://chjcgb4pp86hr"]
+[gd_resource type="Resource" script_class="Happening" load_steps=40 format=3 uid="uid://chjcgb4pp86hr"]
 
 [ext_resource type="Texture2D" uid="uid://416d5uw306xw" path="res://Assets/CaptainPortraits/PriestHood.png" id="1_8tlxq"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_afuai"]
@@ -8,7 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://b680xs4rw5ro1" path="res://Assets/CaptainPortraits/Priest.png" id="5_gl0ga"]
 [ext_resource type="Resource" uid="uid://bkfcg5rwf7vhu" path="res://Resources/Captains/PlayerCaptains/Dimitry.tres" id="6_vgxkk"]
 [ext_resource type="Script" uid="uid://w3pbagqwci26" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="7_143ge"]
+[ext_resource type="Resource" uid="uid://c8b3lpqbi11up" path="res://Resources/Captains/PlayerCaptains/Jor.tres" id="8_dy2mo"]
 [ext_resource type="Texture2D" uid="uid://g3ml8lxq5yyn" path="res://Assets/CaptainPortraits/Captain10_1.png" id="8_rhe50"]
+[ext_resource type="Texture2D" uid="uid://1l0uuhes56vw" path="res://Assets/CaptainPortraits/Captain3.png" id="9_7bg2p"]
+[ext_resource type="Script" uid="uid://b5ww8sd3i6oa4" path="res://Scripts/MapSpot/Happenings/DroneLossHappeningOption.gd" id="9_ftcno"]
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="9_rhe50"]
 [ext_resource type="Script" uid="uid://k3yo61qak6d8" path="res://Scripts/MapSpot/Happenings/EndGameHappeningOption.gd" id="10_uqsfa"]
 
@@ -187,25 +190,32 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_wmf6a"]
 script = ExtResource("1_afuai")
-HappeningTexts = Array[String](["Suddenly the silece breaks. One by one your crew starts standing and proclaming to follow you to the very end. Your army is ready. With a scream you order all the crew back at their posts.
-\"Back to your posts soldiers, we are at war!\""])
+HappeningTexts = Array[String](["\"Suddenly the silece breaks. One by one your crew starts standing and proclaming to follow you to the very end. Your army is ready. With a scream you order all the crew back at their posts.", "\"Back to your posts soldiers, we are at war!", ""])
+Options = Array[ExtResource("2_ifktw")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_gtnr6"]
+script = ExtResource("1_afuai")
+StagePic = ExtResource("9_7bg2p")
+HappeningTexts = Array[String](["\"I am sorry Captain, but that wont do. I've promised my men that they will be back to their families within a week. I will not drag them into a war just like that.\"", "\"We will be headning out.... Its been nice captain... Good luck.\"", "Jor's crew gets on their ship and head off. You crew seems to be jealous of them. But the decision has been made. There is no turning back now.", ""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_xhtgi"]
-script = ExtResource("3_ifktw")
+script = ExtResource("9_ftcno")
+Cpt = ExtResource("8_dy2mo")
 StringReply = "The room falls silent. For a few minutes nothing moves......"
 OptionName = "Try to comunicate what happened in the meeting"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_wmf6a")])
-WorldviewEffect = 4
-WorldviewEffectAmm = 10
+WorldviewEffect = 0
+WorldviewEffectAmm = 0
 WorldviewCheck = 4
 CheckPossetive = true
 CheckDifficulty = 10
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
+WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([SubResource("Resource_gtnr6")])
 ReverseEffectOnFail = false
-metadata/_custom_type_script = "uid://ii12ceb6fgif"
+metadata/_custom_type_script = "uid://b5ww8sd3i6oa4"
 
 [sub_resource type="Resource" id="Resource_el5wf"]
 script = ExtResource("1_afuai")
@@ -232,7 +242,7 @@ metadata/_custom_type_script = "uid://w3pbagqwci26"
 [sub_resource type="Resource" id="Resource_pwkje"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["In that case i will have to ask you to leave. This is no place for you to be. We will be relocation shortly. The place will mostlikely be exposed in the next few hours.", "\"Please forget about this meeting happening....\"", "\"Pack up you stuff people, we are leaving.\" With a fell swop you see everybody in the room, get up, pick up their stuff and head out of the room. Withing a few moment you are left alone in the room. There is nothing left for you to do and go to your ship and head home."])
+HappeningTexts = Array[String](["In that case i will have to ask you to leave. This is no place for you to be. We will be relocation shortly. The place will mostlikely be exposed in the next few hours.", "\"Please forget about this meeting happening....\"", "\"Pack up you stuff people, we are leaving.\" With a fell swop you see everybody in the room, get up, pick up their stuff and head out of the room. Withing a few moment you are left alone in the room. There is nothing left for you to do and go to your ship and head home.", ""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

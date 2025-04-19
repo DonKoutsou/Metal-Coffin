@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/Old/NewCaptainNotif.tscn" id="3_16qk4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
+radius = 5.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
 light_mode = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=12 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Texture2D" uid="uid://biimea34gc828" path="res://Assets/Cards/RadarBuff.png" id="2_58ae4"]
@@ -105,6 +105,20 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.102293, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4r8q"]
+content_margin_top = 6.0
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+border_width_left = 1
+border_width_top = 4
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_detail = 2
+shadow_size = 8
+anti_aliasing_size = 2.0
+
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
 custom_minimum_size = Vector2(192, 200)
 layout_mode = 3
@@ -124,7 +138,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_vr3r8")
-CardName = NodePath("VBoxContainer/HBoxContainer/Label")
+CardName = NodePath("Label")
 CardDesc = NodePath("VBoxContainer/CardDesc")
 CardCost = NodePath("CardCost")
 CardTex = NodePath("VBoxContainer/HBoxContainer/CardText")
@@ -170,6 +184,22 @@ text = "1"
 horizontal_alignment = 2
 autowrap_mode = 2
 
+[node name="Label" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 41)
+layout_mode = 2
+offset_left = 98.0
+offset_top = 38.0
+offset_right = 187.0
+offset_bottom = 79.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Incindiary Barrage"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -198,17 +228,6 @@ mouse_filter = 2
 texture = ExtResource("2_58ae4")
 expand_mode = 1
 stretch_mode = 6
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 41)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 18
-text = "Incindiary Barrage"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
@@ -248,5 +267,25 @@ width_curve = SubResource("Curve_58ae4")
 gradient = SubResource("Gradient_58ae4")
 end_cap_mode = 2
 round_precision = 2
+
+[node name="Amm" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -112.0
+offset_right = 16.0
+offset_bottom = -88.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4r8q")
+
+[node name="Label" type="Label" parent="Amm"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 14
+text = "11x"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="OnButtonPressed"]

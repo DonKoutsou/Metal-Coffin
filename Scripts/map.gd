@@ -78,7 +78,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	GetCamera().FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
 	PlShip.Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
-	if (!IsPrologue):
+	if (IsPrologue):
 		for g in PlShip.Cpt.ProvidingCaptains:
 			PlShip.GetDroneDock().AddRecruit(g, false)
 			g._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)

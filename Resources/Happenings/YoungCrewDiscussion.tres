@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_ni7lq"]
 script = ExtResource("1_qaalc")
-HappeningTexts = Array[String](["You sit next to the boy and you take it in your embrace. You sit there for what feels like an hour.", "The twitching slowly fades away, the boy is slowly takes control back of his body. The silence is quickly broken as the boy breaks into a sobbing cry.", "It was clear to you, this is not a place for a boy. Going through your mind is all the possible circumances that could make the boy want to fight, but alas the purity of his soul had been tarnished enough by this conflict.", "You take the boy and you lead it out the ship. You task a couple of the crew to make sure to find a place for the boy to stay in the town, he's seen enough of this conflict."])
+HappeningTexts = Array[String](["You sit next to the boy and you take it in your embrace. You sit there for what feels like an hour.", "The twitching slowly fades away, the boy is slowly takes control back of his body. The silence is quickly broken as the boy breaks into a sobbing cry.", "It was clear to you, this is not a place for a boy. Going through your mind is all the possible circumances that could make the boy want to fight, but alas the purity of his soul had been tarnished enough by this conflict.", "You take the boy and you lead it out the ship. You task a couple of the crew to make sure to find a place for the boy to stay in the town, he's seen enough of this conflict.", ""])
 Options = Array[ExtResource("2_3td2i")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

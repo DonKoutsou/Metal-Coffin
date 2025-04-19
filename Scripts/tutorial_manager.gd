@@ -54,7 +54,14 @@ func DidPrologue() -> bool:
 		return false
 	
 	return sav.CompletedPrologue
-	
+
+func OnPrologueFinished() -> void:
+	var sav = load("user://TutorialData.tres") as TutorialSaveData
+	sav.CompletedPrologue = true
+	sav.LiedInPrologue = WorldView.GetInstance().Lied
+	ResourceSaver.save(sav, "user://TutorialData.tres")
+	print("Saved Fulfilled Prologue data")
+
 static func Save() -> void:
 	var sav : TutorialSaveData
 	
