@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=5 format=3 uid="uid://cxrq5fe4uqxsf"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=6 format=3 uid="uid://cxrq5fe4uqxsf"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_lhpej"]
+[ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="2_74rgq"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="3_1oqec"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_eoxlf"]
 
@@ -16,6 +17,7 @@ resource_local_to_scene = true
 script = ExtResource("3_1oqec")
 WType = 0
 Upgrades = Array[ExtResource("6_eoxlf")]([SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("2_74rgq")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false

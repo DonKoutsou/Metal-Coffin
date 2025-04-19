@@ -55,8 +55,23 @@ func DidPrologue() -> bool:
 	
 	return sav.CompletedPrologue
 
+func GetPrologueCaptains() -> Array[String]:
+
+	var sav = load("user://TutorialData.tres") as TutorialSaveData
+
+	return sav.CaptainsInPrologue
+
 func OnPrologueFinished() -> void:
 	var sav = load("user://TutorialData.tres") as TutorialSaveData
+	
+	var C : Array[String]
+	
+	for Ship : PlayerDrivenShip in get_tree().get_nodes_in_group("PlayerShips"):
+		if (Ship is PlayerShip):
+			continue
+		C.append(Ship.Cpt.resource_path)
+	
+	sav.CaptainsInPrologue = C
 	sav.CompletedPrologue = true
 	sav.LiedInPrologue = WorldView.GetInstance().Lied
 	ResourceSaver.save(sav, "user://TutorialData.tres")

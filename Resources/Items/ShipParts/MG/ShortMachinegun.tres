@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=6 format=3 uid="uid://css6e78uhfsfa"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=7 format=3 uid="uid://css6e78uhfsfa"]
 
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="1_4mvru"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_6g1cv"]
+[ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun.tres" id="3_xou1h"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="4_11w2t"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_ol1vs"]
 
@@ -17,10 +18,12 @@ resource_local_to_scene = true
 script = ExtResource("4_11w2t")
 WType = 1
 Upgrades = Array[ExtResource("6_ol1vs")]([SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("3_xou1h")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
 PartType = 4
+Tier = null
 ItemName = "MG-10 \"Squall\""
 ItemDesc = "a basic machine gun turret designed for straightforward, high-rate-of-fire engagements. It offers standard round delivery with fundamental targeting precision, providing ships with an entry-level solution for close-range defense and suppression."
 MaxStackCount = 1

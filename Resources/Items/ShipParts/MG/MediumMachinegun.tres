@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=6 format=3 uid="uid://hncmt3swcqbu"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=7 format=3 uid="uid://hncmt3swcqbu"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_1qqs8"]
 [ext_resource type="Resource" uid="uid://cnk24jchtyeco" path="res://Resources/Cards/Barrage/BarrageT2.tres" id="2_arjqo"]
+[ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun.tres" id="3_q5ys8"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="4_arjqo"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_gbk8t"]
 
@@ -17,6 +18,7 @@ resource_local_to_scene = true
 script = ExtResource("4_arjqo")
 WType = 1
 Upgrades = Array[ExtResource("6_gbk8t")]([SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("3_q5ys8")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
