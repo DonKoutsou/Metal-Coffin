@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://dlrxjlssarqit"]
+[gd_resource type="Resource" script_class="AmmoItem" load_steps=4 format=3 uid="uid://dlrxjlssarqit"]
 
-[ext_resource type="Resource" uid="uid://mqg2y5hfy65s" path="res://Resources/Cards/Barrage/Options/BarrageAPOption.tres" id="1_i3lil"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_4abif"]
+[ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_3xkxt"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="3_fks2y"]
-[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_5ge6k"]
 
 [resource]
-script = ExtResource("4_5ge6k")
-ItemName = "AP Ammo Magazine"
-ItemDesc = "This magazine contains rounds equipped with proximity fuses, designed to detonate upon nearing a target. The sensor technology ensures activation within a specified range, providing effective engagement without requiring direct contact. Suitable for various combat scenarios, this ammunition type enhances hit probability against fast-moving targets. Recommended for use in environments where traditional contact-based munitions may struggle to achieve accuracy."
+script = ExtResource("3_3xkxt")
+WType = 1
+ItemName = "Armor-Piercing (AP) Ammo Magazine"
+ItemDesc = "This magazine contains high-velocity rounds with reinforced cores, optimized for penetrating heavy armor and fortified hulls. The dense material composition minimizes deformation upon impact, allowing for deep penetration and critical internal damage."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_4abif")]([ExtResource("3_fks2y")])
-CardOptionProviding = ExtResource("1_i3lil")
 CanTransfer = true

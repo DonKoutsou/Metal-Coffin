@@ -17,6 +17,13 @@ class_name CardStats
 
 @export var AOE : bool = false
 
+@export var Tier : int = 1
+
+func GetDescription() -> String:
+	if is_instance_valid(SelectedOption):
+		return SelectedOption.OptionDescription
+	return CardDescription
+
 var SelectedOption : CardOption
 
 enum WeaponType{

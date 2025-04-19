@@ -1,26 +1,26 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://boh6gvavu4h2c"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=5 format=3 uid="uid://boh6gvavu4h2c"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_5pt53"]
-[ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/ShipParts/MissilePods/LargeMissilePod.tres" id="5_5gmkn"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="3_mhnw5"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_uw0hq"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_rof78"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("6_uw0hq")
 UpgradeName = 3
-UpgradeAmmount = 2.0
+UpgradeAmmount = 3.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("7_rof78")
+script = ExtResource("3_mhnw5")
+WType = 0
 Upgrades = Array[ExtResource("6_uw0hq")]([SubResource("Resource_fmxhr")])
-UpgradeVersion = ExtResource("5_5gmkn")
 UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
 PartType = 4
+Tier = null
 ItemName = "MP-6 \"Cyclone\""
 ItemDesc = "Cyclone enhances missile deployment capabilities, featuring improved targeting systems and increased payload capacity. Compatible with intermediate missile types, Cyclone delivers effective firepower for tactical engagements, ensuring versatility and increased lethality on the battlefield."
 MaxStackCount = 1

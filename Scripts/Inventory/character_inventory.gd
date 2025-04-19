@@ -41,15 +41,18 @@ func _ready() -> void:
 
 func GetCards() -> Dictionary:
 	var CardsInInventory : Dictionary = {}
-	for g in _CardInventory.keys():
-		var C = g as CardStats
+	for C : CardStats in _CardInventory.keys():
+		for z : CardStats in CardsInInventory:
+			if (z.CardName == C.CardName and z.Tier < C.Tier):
+				CardsInInventory.erase(z)
+				break
 		if (C.RequiredPart.size() > 0):
 			for P in C.RequiredPart:
 				if (HasItem(P)):
-					CardsInInventory[g] = _CardInventory[g]
+					CardsInInventory[C] = _CardInventory[C]
 					break
 			continue
-		CardsInInventory[g] = _CardInventory[g]
+		CardsInInventory[C] = _CardInventory[C]
 	return CardsInInventory
 
 func GetCardAmmo() -> Dictionary:

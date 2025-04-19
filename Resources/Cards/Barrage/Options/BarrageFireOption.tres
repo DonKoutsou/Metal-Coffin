@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_xhabx")
 OptionName = "Fire"
-OptionDescription = "Throws a barragge on the enemy. Has chance to start [color=#ff3c22]fire[/color].[p][center][color=#c19200]DMG = 4 * FPWR"
+OptionDescription = "Throws a barragge on the enemy. Has chance to start [color=#ff3c22]fire[/color].[p][center]"
 NewPic = ExtResource("1_jk8sp")
 EnergyAdd = 1
 DamageFlat = 0

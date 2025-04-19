@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_542g0")
 OptionName = "Normal"
-OptionDescription = "Throws a barragge on the enemy.[p][center][color=#c19200]DMG = 6 * FPWR[/color]"
+OptionDescription = "Throws a barragge on the enemy.[p][center]"
 EnergyAdd = 0
 DamageFlat = 0
 DamageMult = 1.0

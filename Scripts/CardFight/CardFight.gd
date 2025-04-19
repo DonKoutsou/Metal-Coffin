@@ -463,6 +463,9 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 						ShipCards.erase(Action)
 
 			else: if Action.CardName == "Shield Overcharge" or Action.CardName == "Shield Overcharge Team":
+				var ShieldAmm = 10
+				
+				
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				AnimationPlecement.add_child(anim)
 				AnimationPlecement.move_child(anim, 1)
@@ -472,6 +475,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 					Targets = GetShipsTeam(Ship)
 					TargetViz = GetShipsTeamViz(Ship)
 				else:
+					ShieldAmm = 20
 					Targets = [Ship]
 					TargetViz = [GetShipViz(Ship)]
 					
@@ -481,7 +485,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				anim.queue_free()
 				
 				for T in Targets:
-					ShieldShip(T, 15)
+					ShieldShip(T, ShieldAmm * Action.Tier)
 					
 				ActionsToBurn.append(ShipAction)
 			else: if Action.CardName == "Radar Atack":
@@ -503,7 +507,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				anim.queue_free()
 				
 				for T in Targets:
-					BuffShip(T, 1)
+					BuffShip(T, 1 * Action.Tier)
 					
 				ActionsToBurn.append(ShipAction)
 

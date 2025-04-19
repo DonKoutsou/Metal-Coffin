@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://5k4na6wpwyds"]
+
+[ext_resource type="Texture2D" uid="uid://biimea34gc828" path="res://Assets/Cards/RadarBuff.png" id="1_uykab"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_um806"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_mlgy5"]
+[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_8niei"]
+
+[resource]
+script = ExtResource("4_8niei")
+Icon = ExtResource("1_uykab")
+CardName = "Radar Atack"
+CardDescription = "Buffs Other Ships.[p][center][color=#c19200] FRP + 3"
+Energy = 6
+Options = Array[ExtResource("2_um806")]([])
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("3_mlgy5")]([])
+WeapT = 0
+AOE = true
+Tier = 3

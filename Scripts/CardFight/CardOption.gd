@@ -2,7 +2,7 @@ extends Resource
 class_name CardOption
 
 @export var OptionName : String
-@export var OptionDescription : String
+@export_multiline var OptionDescription : String
 @export var NewPic : Texture
 @export var EnergyAdd : int
 @export var DamageFlat : int

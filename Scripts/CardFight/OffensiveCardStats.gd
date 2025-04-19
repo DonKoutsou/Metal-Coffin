@@ -7,7 +7,7 @@ class_name OffensiveCardStats
 
 func GetDamage() -> float:
 	if (SelectedOption):
-		return (Damage + SelectedOption.DamageFlat) * SelectedOption.DamageMult
+		return (Damage + SelectedOption.DamageFlat) * Tier * SelectedOption.DamageMult
 	return Damage
 
 func CauseFire() -> bool:
@@ -25,3 +25,8 @@ func GetCounter() -> CardStats:
 		return null
 	
 	return CounteredBy
+
+func GetDescription() -> String:
+	if is_instance_valid(SelectedOption):
+		return SelectedOption.OptionDescription + "[color=#c19200]DMG = {0} * FPWR[/color]".format([GetDamage()])
+	return CardDescription + "[color=#c19200]DMG = {0} * FPWR[/color]".format([GetDamage()])
