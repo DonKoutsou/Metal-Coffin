@@ -15,4 +15,3 @@ round_precision = 32
 antialiased = true
 script = ExtResource("1_1do1n")
 trail_fade_speed = 0.1
-ManualInit = null

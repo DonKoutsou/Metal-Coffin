@@ -94,6 +94,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 		UpgradeButton.visible = false
 		UpgradeLabel.visible = false
 	
+	#TODO Option doesent show when ship has upgraded weapons
 	if (It.CardProviding.size() > 0):
 		for g in It.CardProviding:
 			var CardS = g.duplicate() as CardStats

@@ -91,7 +91,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
 	$SubViewportContainer/ViewPort.add_child(SimulationTrigger)
 	var triggerpos = pos
-	triggerpos.y -= 250
+	triggerpos.y -= 100
 	SimulationTrigger.global_position = triggerpos
 	
 	var MapMarkerTrigger = TutorialTrigger.instantiate() as TutTrigger

@@ -10,7 +10,7 @@ var EntityToFollow : Node2D
 var camera : Camera2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	camera = ShipCamera.GetInstance()
+	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
 
 func ToggleStat(Stat: String, t : bool, timel : float = 0):
 	if (t):
@@ -38,17 +38,23 @@ func ToggleStat(Stat: String, t : bool, timel : float = 0):
 func OnShipDeparted():
 	queue_free()
 
-func _physics_process(_delta: float) -> void:
+func UpdateCameraZoom(NewZoom : float) -> void:
+	$Control.scale = Vector2(1,1) / NewZoom
+	UpdateLine(NewZoom)
+	$Line2D.width =  2 / NewZoom
 	rotation = - get_parent().get_parent().rotation
-	$Control.scale = Vector2(1,1) / camera.zoom
-	UpdateLine()
-	$Line2D.width =  2 / camera.zoom.x
 
-func UpdateLine()-> void:
+#func _physics_process(_delta: float) -> void:
+	#rotation = - get_parent().get_parent().rotation
+	#$Control.scale = Vector2(1,1) / camera.zoom
+	#UpdateLine()
+	#$Line2D.width =  2 / camera.zoom.x
+
+func UpdateLine(Zoom : float)-> void:
 	var c = $Control as Control
 	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
+	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / Zoom)
 	
 func UpdateSignRotation() -> void:
 	var c = $Control as Control

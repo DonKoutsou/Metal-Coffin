@@ -286,11 +286,11 @@ func RunTurn() -> void:
 		ActionList.AddShip(Ship)
 		if (IsShipFriendly(Ship)):
 			RestartCards()
-			var ATime = AtackTime.instantiate() as AtackTimer
-			CardSelectContainer.get_parent().add_child(ATime)
-			ATime.connect("Finished", PlayerActionSelectionEnded)
+			#var ATime = AtackTime.instantiate() as AtackTimer
+			#CardSelectContainer.get_parent().add_child(ATime)
+			#ATime.connect("Finished", PlayerActionSelectionEnded)
 			await PlayerActionPickingEnded
-			ATime.queue_free()
+			#ATime.queue_free()
 		else:
 			EnemyActionSelection(Ship)
 			

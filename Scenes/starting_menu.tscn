@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=34 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -18,6 +18,37 @@
 [ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_1p5b6"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
+
+[sub_resource type="Gradient" id="Gradient_yrlew"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6an1p"]
+gradient = SubResource("Gradient_yrlew")
+
+[sub_resource type="Environment" id="Environment_1p5b6"]
+background_mode = 3
+background_canvas_max_layer = 1
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_exposure = 0.61
+tonemap_white = 16.0
+glow_enabled = true
+glow_levels/1 = 16.0
+glow_levels/2 = 16.0
+glow_levels/3 = 16.0
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 0.16
+glow_mix = 0.825
+glow_bloom = 0.85
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+adjustment_enabled = true
+adjustment_saturation = 0.8
+adjustment_color_correction = SubResource("GradientTexture1D_6an1p")
+
+[sub_resource type="Compositor" id="Compositor_1p5b6"]
+compositor_effects = Array[CompositorEffect]([null])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
 shader = ExtResource("11_j424g")
@@ -55,6 +86,9 @@ shader_parameter/speed = Vector2(0.02, 0.01)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eb1s8"]
+light_mode = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bgwj"]
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
 skew = Vector2(0.1, 0)
@@ -85,14 +119,21 @@ corner_detail = 2
 shadow_size = 5
 anti_aliasing_size = 2.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1p5b6"]
+light_mode = 1
+
 [node name="StartingMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 0
 script = ExtResource("1_y40tw")
 CreditsScene = ExtResource("2_0pu32")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1p5b6")
+compositor = SubResource("Compositor_1p5b6")
 
 [node name="w" type="ColorRect" parent="."]
 z_index = -1
@@ -278,36 +319,15 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="w"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -152.0
-offset_top = -90.0
-offset_right = -20.0
-offset_bottom = -26.0
-grow_horizontal = 0
-grow_vertical = 0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="w/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_q14vk")
-
-[node name="TextureRect2" type="TextureRect" parent="w/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_s86m3")
-
 [node name="TextureRect2" type="TextureRect" parent="w"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -197.0
-offset_bottom = -197.0
+offset_left = 97.0
+offset_top = -122.0
+offset_right = -95.0
+offset_bottom = -218.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -333,35 +353,40 @@ size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
 expand_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="w"]
-layout_mode = 1
+[node name="PanelContainer" type="PanelContainer" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_eb1s8")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 41.0
-offset_top = -342.0
-offset_right = 336.0
-offset_bottom = -34.0
+offset_left = 45.0
+offset_top = -351.0
+offset_right = 340.0
+offset_bottom = -28.0
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("9_3vvgq")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="w/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Prologue" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Prologue" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
 action_mode = 0
 text = "- Prologue -"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="w/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 
-[node name="Play2" type="Button" parent="w/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Play2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -370,7 +395,8 @@ action_mode = 0
 text = "- NEW -
 CAMPAIGN"
 
-[node name="Load" type="Button" parent="w/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Load" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -379,32 +405,37 @@ action_mode = 0
 text = "- LOAD -
 CAMPAIGN"
 
-[node name="Panel4" type="Panel" parent="w/PanelContainer/VBoxContainer"]
+[node name="Panel4" type="Panel" parent="PanelContainer/VBoxContainer"]
 visible = false
+use_parent_material = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
-[node name="Panel5" type="Panel" parent="w/PanelContainer/VBoxContainer"]
+[node name="Panel5" type="Panel" parent="PanelContainer/VBoxContainer"]
 visible = false
+use_parent_material = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
-[node name="Credits" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Credits" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
 action_mode = 0
 text = "- CREDITS -"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="w/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 
-[node name="SettingPanel" parent="w/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_1p5b6")]
+[node name="SettingPanel" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_1p5b6")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="w/PanelContainer/VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_yrlew")
@@ -412,37 +443,78 @@ text = "Del
 Save"
 autowrap_mode = 2
 
-[node name="Panel6" type="Panel" parent="w/PanelContainer/VBoxContainer"]
+[node name="Panel6" type="Panel" parent="PanelContainer/VBoxContainer"]
 visible = false
+use_parent_material = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
 
-[node name="Exit" type="Button" parent="w/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
 action_mode = 0
 text = "- EXIT -"
 
-[node name="PointLight2D" type="PointLight2D" parent="w"]
-position = Vector2(656, 196)
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_yrlew")
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.0
+offset_top = -100.0
+offset_right = -41.0
+offset_bottom = -36.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("2_q14vk")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("3_s86m3")
+
+[node name="Button" parent="." instance=ExtResource("21_srpg8")]
+z_index = -1
+offset_left = -309.0
+offset_top = -152.0
+offset_right = -41.0
+offset_bottom = -109.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(623, 210)
 blend_mode = 2
 range_z_max = -1
 texture = ExtResource("15_7x35f")
 texture_scale = 7.21
 height = 328.0
 
-[node name="Button" parent="w" instance=ExtResource("21_srpg8")]
-layout_mode = 1
-offset_left = -288.0
-offset_top = -142.0
-offset_right = -20.0
-offset_bottom = -99.0
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_1p5b6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Prologue" to="." method="_on_prologue_pressed"]
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="w/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Prologue" to="." method="_on_prologue_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

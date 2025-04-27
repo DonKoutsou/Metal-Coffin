@@ -11,11 +11,11 @@ signal PrologueStart()
 signal DelSave
 
 func _ready() -> void:
-	$w/PointLight2D.energy = 0
+	$ColorRect.color = Color(0,0,0,1)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property($w/PointLight2D, "energy", 1, 2)
+	tw.tween_property($ColorRect, "color", Color(0,0,0,0), 2)
 	#LoopAmp()
 
 func _on_play_pressed() -> void:
@@ -30,7 +30,7 @@ func _on_load_pressed() -> void:
 
 func On_Credits_Pressed() -> void:
 	SpawnedCredits = CreditsScene.instantiate()
-	$w.add_child(SpawnedCredits)
+	add_child(SpawnedCredits)
 
 
 #func LoopAmp() -> void:

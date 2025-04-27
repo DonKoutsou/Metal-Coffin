@@ -22,3 +22,4 @@ Consume = false
 RequiredPart = Array[ExtResource("5_ciqs7")]([])
 WeapT = 1
 AOE = false
+Tier = 1

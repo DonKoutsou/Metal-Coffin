@@ -148,7 +148,7 @@ script = ExtResource("1_yijdn")
 
 [node name="Line2D" type="Line2D" parent="."]
 use_parent_material = true
-points = PackedVector2Array(0, -162, 0, 0)
+points = PackedVector2Array(0, -94, 0, -38)
 width = 2.0
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -167,10 +167,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -188.0
-offset_right = 9.0
-offset_bottom = -169.0
+offset_left = -13.0
+offset_top = -115.0
+offset_right = 13.0
+offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_r74yg")

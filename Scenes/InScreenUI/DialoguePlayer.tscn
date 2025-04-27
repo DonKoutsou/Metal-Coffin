@@ -112,11 +112,6 @@ theme = ExtResource("2_rodwx")
 theme_override_font_sizes/font_size = 21
 text = "NEXT"
 
-[node name="Timer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 2.0
-one_shot = true
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_p12ba")
 volume_db = -5.0
@@ -124,5 +119,4 @@ bus = &"UI"
 
 [connection signal="pressed" from="HBoxContainer/Skip" to="." method="_on_skip_pressed"]
 [connection signal="pressed" from="HBoxContainer/Next" to="." method="_on_next_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

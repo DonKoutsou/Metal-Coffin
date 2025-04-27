@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=40 format=3 uid="uid://chjcgb4pp86hr"]
+[gd_resource type="Resource" script_class="Happening" load_steps=42 format=3 uid="uid://chjcgb4pp86hr"]
 
 [ext_resource type="Texture2D" uid="uid://416d5uw306xw" path="res://Assets/CaptainPortraits/PriestHood.png" id="1_8tlxq"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_afuai"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://b5ww8sd3i6oa4" path="res://Scripts/MapSpot/Happenings/DroneLossHappeningOption.gd" id="9_ftcno"]
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="9_rhe50"]
 [ext_resource type="Script" uid="uid://k3yo61qak6d8" path="res://Scripts/MapSpot/Happenings/EndGameHappeningOption.gd" id="10_uqsfa"]
+[ext_resource type="Script" uid="uid://diug21pe121lm" path="res://Scripts/OverworldCityEventData.gd" id="12_7bg2p"]
 
 [sub_resource type="Resource" id="Resource_8tlxq"]
 script = ExtResource("3_ifktw")
@@ -223,12 +224,19 @@ HappeningTexts = Array[String](["The machine gets up and start packing it's stuf
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_kqmrd"), SubResource("Resource_xhtgi")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
+[sub_resource type="Resource" id="Resource_gsd8q"]
+script = ExtResource("12_7bg2p")
+CityToFocus = "Armak"
+Dialogues = Array[String](["Armak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."])
+metadata/_custom_type_script = "uid://diug21pe121lm"
+
 [sub_resource type="Resource" id="Resource_7bg2p"]
 script = ExtResource("7_143ge")
 Cpt = ExtResource("6_vgxkk")
 StringReply = "The look in his eyes changed. It feels like a mix of happines and sorrow. Maybe he sees into my future..."
 OptionName = "Choose the sword"
 FinishDiag = false
+Event = SubResource("Resource_gsd8q")
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_v8t0e"), SubResource("Resource_4ttfb"), SubResource("Resource_27exd"), SubResource("Resource_r6bso"), SubResource("Resource_el5wf")])
 WorldviewEffect = 0
 WorldviewEffectAmm = 0

@@ -3,6 +3,7 @@ class_name Happening_Option
 
 @export var OptionName : String
 @export var FinishDiag : bool = false
+@export var Event : OverworldEventData
 @export_group("Branch")
 @export var BranchContinuation : Array[HappeningStage]
 @export_group("Worldview Effect")

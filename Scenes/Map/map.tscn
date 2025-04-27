@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=37 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -96,9 +96,6 @@ adjustment_brightness = 0.86
 adjustment_saturation = 0.8
 adjustment_color_correction = SubResource("GradientTexture1D_6an1p")
 
-[sub_resource type="Compositor" id="Compositor_h7q0i"]
-compositor_effects = Array[CompositorEffect]([null])
-
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
 layer = 0
 follow_viewport_enabled = true
@@ -122,10 +119,10 @@ TutorialTrigger = ExtResource("9_6an1p")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 80.0
+offset_left = 76.0
 offset_top = 75.0
-offset_right = -358.0
-offset_bottom = -80.0
+offset_right = -356.0
+offset_bottom = -79.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -140,7 +137,7 @@ handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(842, 565)
+size = Vector2i(848, 566)
 render_target_update_mode = 4
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]
@@ -235,7 +232,6 @@ layer = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort"]
 environment = SubResource("Environment_h7q0i")
-compositor = SubResource("Compositor_h7q0i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

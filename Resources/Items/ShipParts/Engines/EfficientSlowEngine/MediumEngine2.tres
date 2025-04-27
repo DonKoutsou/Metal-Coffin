@@ -37,6 +37,7 @@ UpgradeTime = 100.0
 UpgradeCost = 3000.0
 IsDamaged = false
 PartType = 1
+Tier = 1
 ItemName = "EcoDrive-250 \"Sustain\""
 ItemDesc = "Sustain enhances fuel efficiency features while allowing for moderate improvements in speed. Utilizing advanced energy management systems, Sustain is perfect for tactical retreats or slow reconnaissance missions, conserving resources while maintaining operational readiness."
 MaxStackCount = 1

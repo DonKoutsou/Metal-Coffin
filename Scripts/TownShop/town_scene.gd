@@ -45,9 +45,9 @@ func _ready() -> void:
 	SetTownBuffs()
 	
 	if (!TownSpot.HasFuel()):
-		FuelPricePerTon = 200
-	else:
 		FuelPricePerTon = 100
+	else:
+		FuelPricePerTon = 50
 
 	SetFuelData()
 	CurrentFuel.text = var_to_str(roundi(PlFuel + BoughtFuel))

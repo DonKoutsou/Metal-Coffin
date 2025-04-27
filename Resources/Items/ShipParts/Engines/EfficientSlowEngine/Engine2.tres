@@ -37,6 +37,7 @@ UpgradeTime = 300.0
 UpgradeCost = 1000.04
 IsDamaged = false
 PartType = 1
+Tier = 1
 ItemName = "EcoDrive-100q \"Conserve\""
 ItemDesc = "Conserve is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, Conserve offers a balanced compromise for steady pacing over extended durations."
 MaxStackCount = 1

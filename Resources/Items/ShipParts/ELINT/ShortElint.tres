@@ -21,6 +21,7 @@ UpgradeTime = 100.0
 UpgradeCost = 0.0
 IsDamaged = false
 PartType = 2
+Tier = 1
 ItemName = "ELINT-10 'Vigil"
 ItemDesc = "An entry-level electronic intelligence system designed for basic surveillance operations. It passively detects enemy radar emissions, providing essential data on the presence of active radar systems within range. While limited in range and resolution, 'Vigil' serves as a reliable tool for initial threat assessment in less contested environments."
 MaxStackCount = 1

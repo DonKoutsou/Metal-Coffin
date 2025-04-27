@@ -186,7 +186,7 @@ func FrameCamToShip():
 	#var plpos = ControlledShip.global_position
 	#camtw.set_trans(Tween.TRANS_EXPO)
 	#camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
-	ship_camera.FrameCamToPos(ControlledShip.global_position)
+	ship_camera.FrameCamToPos(ControlledShip.global_position, 1, false)
 func _on_controlled_ship_return_pressed() -> void:
 	if (ControlledShip is Drone and !ControlledShip.CommingBack):
 		var CaptainSelect = CaptainSelectScreen.instantiate() as ItemTransfer

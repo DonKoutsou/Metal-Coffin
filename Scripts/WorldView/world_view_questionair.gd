@@ -34,7 +34,7 @@ func Init() -> void:
 			var Question = PossibleQuestions.pick_random()
 			if (Question.WorldviewSkill != Stat):
 				continue
-			if (Picked.has(Question)):
+			if (Picked.has(Question) or PickedQuestions.has(Question)):
 				continue
 			Picked.append(Question)
 			

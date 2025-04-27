@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://c54mqk4mcr360"]
 
 [ext_resource type="Script" uid="uid://b2gfvyf2wrlvn" path="res://Scripts/UI/low_left_notif.gd" id="1_er3bd"]
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="2_lmaby"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="2_s4jaq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
 light_mode = 1
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" groups=["ZoomAffected"]]
 z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
 layout_mode = 3
@@ -17,7 +17,7 @@ script = ExtResource("1_er3bd")
 
 [node name="Line2D" type="Line2D" parent="."]
 use_parent_material = true
-points = PackedVector2Array(0, -162, 0, 0)
+points = PackedVector2Array(0, -94, 0, -38)
 width = 2.0
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -35,10 +35,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -69.0
-offset_top = -189.0
-offset_right = 70.0
-offset_bottom = -170.0
+offset_left = -112.0
+offset_top = -132.0
+offset_right = 113.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -46,11 +46,10 @@ grow_vertical = 2
 use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/line_spacing = -2
+theme_override_constants/line_spacing = -3
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("2_lmaby")
+theme_override_fonts/font = ExtResource("2_s4jaq")
 theme_override_font_sizes/font_size = 18
-text = "Location Analyzed
-"
+text = "Location Analyzed"
 vertical_alignment = 1
 uppercase = true

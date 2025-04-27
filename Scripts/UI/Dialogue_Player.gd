@@ -25,7 +25,6 @@ func PlayDialogue(Text : Array[String], Avatar : Texture, Name : String):
 func DialogueEnded():
 	#$AudioStreamPlayer.stop()
 	textToShow.remove_at(0)
-	$Timer.start()
 
 func SkipLine() -> void:
 	CharactersShowing = 0
@@ -47,14 +46,14 @@ func ApplyNextText():
 	#$AudioStreamPlayer.play()
 	set_physics_process(true)
 
-func _on_timer_timeout() -> void:
-	if (textToShow.size() > 0):
-		ApplyNextText()
-		return 
-	DialoguePlayed.emit()
-	if (Callback != Callable()):
-		Callback.call()
-	queue_free()
+#func _on_timer_timeout() -> void:
+	#if (textToShow.size() > 0):
+		#ApplyNextText()
+		#return 
+	#DialoguePlayed.emit()
+	#if (Callback != Callable()):
+		#Callback.call()
+	#queue_free()
 
 var d = 0.06;
 

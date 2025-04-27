@@ -31,6 +31,8 @@ var RecruitedShips : bool = false
 
 var FinishedCampaign : bool = false
 
+var Events : Array[OverworldEventData]
+
 var HappeningInstigator : MapShip
 
 var CurrentText : int
@@ -152,6 +154,9 @@ func NextStage() -> void:
 		if (Option is EndGame_Happening_Option and res == true):
 			FinishedCampaign = true
 		
+		if (Option.Event != null):
+			Events.append(Option.Event)
+		
 		if (Check):
 			HappeningText.text = Option.OptionResault(EventSpot)
 			HappeningText.visible_ratio = 0
@@ -166,7 +171,7 @@ func NextStage() -> void:
 			OptionParent.visible = true
 		if (Stage.Options[SelectedOption].FinishDiag):
 		
-			HappeningFinished.emit(RecruitedShips, FinishedCampaign)
+			HappeningFinished.emit(RecruitedShips, FinishedCampaign, Events)
 			$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 		else:
 			var Possiblebranch : Array[HappeningStage] = []
@@ -181,7 +186,7 @@ func NextStage() -> void:
 			
 			
 	if (CurrentBranch.size() == CurrentStage):
-		HappeningFinished.emit(RecruitedShips, FinishedCampaign)
+		HappeningFinished.emit(RecruitedShips, FinishedCampaign, Events)
 		$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
 	else:
 		call_deferred("NextStage")

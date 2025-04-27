@@ -63,7 +63,6 @@ show_behind_parent = true
 position = Vector2(3.61999e-05, -10)
 rotation = 1.5708
 scale = Vector2(10, 10)
-points = PackedVector2Array(0, 0)
 width = 1.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_xnk77")

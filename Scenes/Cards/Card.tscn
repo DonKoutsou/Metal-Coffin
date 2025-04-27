@@ -120,7 +120,7 @@ shadow_size = 8
 anti_aliasing_size = 2.0
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
-custom_minimum_size = Vector2(192, 200)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -235,7 +235,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Throws a barragge on the enemy.
 CAN'T BE AVOIDED

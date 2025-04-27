@@ -17,6 +17,7 @@ func _ready() -> void:
 static func GetInstance() -> ShipCamera:
 	return Instance
 
+
 #////////////////////////////
 var ZoomStage = 1
 var ZoomStageMulti = 0.5
@@ -98,7 +99,7 @@ func _UpdateMapGridVisibility():
 		GridShowing = false
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 func UpdateCameraPos(relativeMovement : Vector2):
-	if (FrameTween.is_valid()):
+	if (FrameTween != null):
 		FrameTween.kill()
 	var maxposY = 999999
 	var vpsizehalf = (get_viewport_rect().size.x / 2)
@@ -130,6 +131,24 @@ func _physics_process(delta: float) -> void:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
 		var of = RandomOffset()
 		offset = of
+	
+	var rel : Vector2
+	if (Input.is_action_pressed("MapDown")):
+		rel.y -= 10
+	if (Input.is_action_pressed("MapUp")):
+		rel.y += 10
+	if (Input.is_action_pressed("MapRight")):
+		rel.x -= 10
+	if (Input.is_action_pressed("MapLeft")):
+		rel.x += 10
+	if (Input.is_action_pressed("ZoomIn")):
+		_HANDLE_ZOOM(1.1)
+	if (Input.is_action_pressed("ZoomOut")):
+		_HANDLE_ZOOM(0.9)
+	
+	if (rel != Vector2.ZERO):
+		UpdateCameraPos(rel)
+	
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 var stattween : Tween
@@ -144,6 +163,8 @@ func ShowStation():
 			break
 	stattween.set_trans(Tween.TRANS_EXPO)
 	stattween.tween_property(self, "global_position", stationpos, 6)
+	if (zoom.x > 1):
+		_HANDLE_ZOOM(0.05)
 	#var mattw = create_tween()
 	#mattw.set_trans(Tween.TRANS_EXPO)
 	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
@@ -158,6 +179,8 @@ func ShowArmak():
 			break
 	stattween.set_trans(Tween.TRANS_EXPO)
 	stattween.tween_property(self, "global_position", stationpos, 6)
+	if (zoom.x > 1):
+		_HANDLE_ZOOM(0.05)
 	#var mattw = create_tween()
 	#mattw.set_trans(Tween.TRANS_EXPO)
 	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
@@ -174,13 +197,17 @@ func FrameCamToPlayer():
 	FrameTween.tween_method(ForceCamPosition, global_position, plpos, 6)
 
 
-func FrameCamToPos(pos : Vector2) -> void:
+
+func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true) -> void:
 	if (stattween != null):
 		stattween.kill()
 	FrameTween = create_tween()
 	FrameTween.set_trans(Tween.TRANS_QUAD)
 	FrameTween.set_ease(Tween.EASE_OUT)
-	FrameTween.tween_method(ForceCamPosition, global_position, pos, 1)
+	FrameTween.tween_method(ForceCamPosition, global_position, pos, OverrideTime)
+	
+	if (Unzoom and zoom.x > 1):
+		_HANDLE_ZOOM(0.05)
 
 func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = Pos

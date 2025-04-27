@@ -398,7 +398,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	Spot.OnSpotVisited()
 	return PlayedEvent
 	
-func HappeningFinished(Recruited : bool, CapmaignFin : bool, Ship : MapShip) -> void:
+func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(CapmaignFin)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
@@ -409,6 +409,13 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Ship : MapShip) -> 
 		ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
 	if (CapmaignFin):
 		Ingame_UIManager.GetInstance().CallbackDiag(["Time to head back people. The package has been delivered."], null, "", EndGame, true)
+		
+	for g in Events:
+		var Pos = g.GetFocusPos()
+		if (Pos != Vector2.ZERO):
+			GetMap().GetCamera().FrameCamToPos(Pos, 4)
+			Ingame_UIManager.GetInstance().CallbackDiag(g.Dialogues, null, "", ReturnCamToPlayer, true)
+		
 	#OnShipLanded(Ship, true)
 
 #Make sure to remove all items that their cards have been used
@@ -446,8 +453,8 @@ func GameLost(reason : String):
 	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer/VBoxContainer/Label.text = reason
 
 func EndGame() -> void:
-	GetMap().GetScreenUi().CloseScreen()
-	await GetMap().GetScreenUi().FullScreenToggleStarted
+	#GetMap().GetScreenUi().CloseScreen()
+	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	WRLD_OnGameEnded.emit()
 
 func EndPrologue() -> void:

@@ -37,6 +37,7 @@ UpgradeTime = 500.0
 UpgradeCost = 20000.0
 IsDamaged = false
 PartType = 1
+Tier = 1
 ItemName = "EN-100"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
 MaxStackCount = 1

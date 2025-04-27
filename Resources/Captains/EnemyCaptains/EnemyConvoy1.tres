@@ -98,6 +98,6 @@ ShipCallsign = "T"
 StartingItems = Array[ExtResource("8_o2kyv")]([])
 CurrentPort = ""
 CheckForErrors = false
-ProvidingFunds = 20000
+ProvidingFunds = 50000
 ProvidingCaptains = Array[ExtResource("6_340aw")]([])
 Cards = Array[ExtResource("3_bip6n")]([ExtResource("4_bip6n"), ExtResource("5_0ohhi"), ExtResource("6_rnln8"), ExtResource("7_340aw")])
