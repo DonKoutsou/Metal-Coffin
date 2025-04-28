@@ -30,7 +30,7 @@ func TogglePause(t : bool):
 	#SimulationSpeed = i
 
 func GetSpeed() -> float:
-	return Speed
+	return Speed * 360
 
 func GetShipName() -> String:
 	return MissileName
@@ -56,15 +56,18 @@ func _physics_process(delta: float) -> void:
 	if (FoundShips.size() > 0):
 		HoneAtEnemy()
 	
-	var offset = GetShipSpeedVec() * SimulationManager.SimSpeed()
+	var offset = GetShipSpeedVec()
 	
-	var Col = CheckForBodiesOnTrajectory(offset)
-	if (Col != null and Col.get_parent() != self and Col.get_parent() != FiredBy):
-		global_position = Col.global_position
-	else:
-		var PosBefore = global_position
+	#var Col = CheckForBodiesOnTrajectory(offset)
+	#if (Col != null and Col.get_parent() != self and Col.get_parent() != FiredBy):
+		#global_position = Col.global_position
+	#else:
+	var PosBefore = global_position
+	
+	for g in SimulationManager.SimSpeed():
 		global_position += offset
-		Distance -= PosBefore.distance_to(global_position)
+		
+	Distance -= PosBefore.distance_to(global_position)
 		
 	if (Distance <= 0):
 		Kill()
@@ -79,6 +82,7 @@ func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
 	
 	var shape_cast = ShapeCast2D.new()
 	add_child(shape_cast)
+	shape_cast.exclude_parent = true
 	shape_cast.collide_with_areas = true
 	shape_cast.collision_mask = $MissileBody.collision_mask
 	shape_cast.shape = CapsuleShape2D.new()

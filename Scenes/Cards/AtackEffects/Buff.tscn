@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://5tjx6x3nbk1e"]
 
-[ext_resource type="Script" uid="uid://c8jyddoymll7x" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_duyon"]
-[ext_resource type="Script" uid="uid://b05dvjh6sn83r" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_o6vbn"]
+[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_duyon"]
+[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_o6vbn"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_2hlpi"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_tymn1"]
 [ext_resource type="Texture2D" uid="uid://b870cywtujqjn" path="res://Assets/Cards/Arrow.png" id="5_duyon"]

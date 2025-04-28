@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bu0gnwclyuygc"]
 
-[ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scripts/CardFight/Atackeffects/missile_viz.gd" id="1_rhdqx"]
+[ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://missile_viz.gd" id="1_rhdqx"]
 [ext_resource type="AudioStream" uid="uid://dtvbu1dtsfivv" path="res://Assets/Sounds/Shield.mp3" id="2_p7sl4"]
 [ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_it0yv"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="3_sj6es"]

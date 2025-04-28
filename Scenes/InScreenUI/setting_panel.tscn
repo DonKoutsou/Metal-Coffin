@@ -44,5 +44,21 @@ use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+use_parent_material = true
+layout_mode = 2
+text = "Screen Glitches"
+
+[node name="GlitchesCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer3"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 10
+
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer2/SoundCheckBox" to="." method="_on_sound_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer3/GlitchesCheckBox" to="." method="_on_glitches_check_box_toggled"]

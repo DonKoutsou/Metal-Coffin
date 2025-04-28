@@ -29,6 +29,19 @@ func _ready() -> void:
 	EventHandler.connect("MarkerEditorToggled", _MapMarkerEditor.ToggleVisibilidy)
 	_MapMarkerEditor.visible = false
 	
+	ToggleScreenGlitches(SettingsPanel.GetGlitch())
+
+func ToggleScreenGlitches(t : bool) -> void:
+	var mat = $Control3/Screen.material as ShaderMaterial
+	var ImageFlicker = 0
+	var Skip = 0
+	if (t):
+		ImageFlicker = 0.2
+		Skip = 0.01
+		
+	mat.set_shader_parameter("image_flicker", ImageFlicker)
+	mat.set_shader_parameter("skip", Skip)
+
 static func GetInstance() -> Ingame_UIManager:
 	return Instance
 
