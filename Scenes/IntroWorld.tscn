@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="13_32m5b"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="14_m5d6e"]
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="15_g1jcv"]
-[ext_resource type="Script" uid="uid://b6ekpg378n2t4" path="res://Scripts/Simulation_Manager.gd" id="16_5hurr"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="17_18b7g"]
+[ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/simulation_manager.tscn" id="18_43ao6"]
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="18_567dx"]
 [ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_0dp8t"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
@@ -78,8 +78,7 @@ DroneScene = ExtResource("13_32m5b")
 [node name="DialogueProgressHolder" type="Node" parent="."]
 script = ExtResource("15_g1jcv")
 
-[node name="SimulationManager" type="Node" parent="." node_paths=PackedStringArray("_Map")]
-script = ExtResource("16_5hurr")
+[node name="SimulationManager" parent="." node_paths=PackedStringArray("_Map") instance=ExtResource("18_43ao6")]
 _Map = NodePath("../Map")
 
 [node name="WorldviewManager" type="Node" parent="."]

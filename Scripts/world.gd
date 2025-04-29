@@ -413,7 +413,7 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 	for g in Events:
 		var Pos = g.GetFocusPos()
 		if (Pos != Vector2.ZERO):
-			GetMap().GetCamera().FrameCamToPos(Pos, 4)
+			GetMap().GetCamera().FrameCamToPos(Pos, 4.0, true)
 			Ingame_UIManager.GetInstance().CallbackDiag(g.Dialogues, null, "", ReturnCamToPlayer, true)
 		
 	#OnShipLanded(Ship, true)

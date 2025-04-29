@@ -1,18 +1,21 @@
-[gd_scene load_steps=34 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=40 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
+[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="4_yrlew"]
+[ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="5_1p5b6"]
+[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="5_eb1s8"]
+[ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="6_eb1s8"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/Spaceship/ShipElena2.png" id="7_ol3kq"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
+[ext_resource type="Texture2D" uid="uid://ba12l5ym2hrwf" path="res://Assets/Sand/Ice003_1K-PNG_Displacement.png" id="8_srpg8"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
-[ext_resource type="Texture2D" uid="uid://borwlcefmcmlo" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="12_7x35f"]
-[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="13_2tj7v"]
 [ext_resource type="Shader" uid="uid://cmen5pp83lhs2" path="res://Shaders/clouds2.gdshader" id="14_7x35f"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
 [ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
@@ -20,8 +23,10 @@
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 
 [sub_resource type="Gradient" id="Gradient_yrlew"]
+offsets = PackedFloat32Array(0, 0.929379, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.916342, 0.951284, 0.926063, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6an1p"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_srpg8"]
 gradient = SubResource("Gradient_yrlew")
 
 [sub_resource type="Environment" id="Environment_1p5b6"]
@@ -45,17 +50,40 @@ glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
 adjustment_saturation = 0.8
-adjustment_color_correction = SubResource("GradientTexture1D_6an1p")
+adjustment_color_correction = SubResource("GradientTexture1D_srpg8")
 
 [sub_resource type="Compositor" id="Compositor_1p5b6"]
 compositor_effects = Array[CompositorEffect]([null])
 
+[sub_resource type="Gradient" id="Gradient_eb1s8"]
+offsets = PackedFloat32Array(0.52029, 0.550725)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1p5b6"]
+noise_type = 3
+frequency = 0.0035
+cellular_distance_function = 2
+cellular_return_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_srpg8"]
+width = 2048
+height = 2048
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_eb1s8")
+noise = SubResource("FastNoiseLite_1p5b6")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
 shader = ExtResource("11_j424g")
-shader_parameter/GroundTexture = ExtResource("13_2tj7v")
-shader_parameter/GroundNormalTexture = ExtResource("12_7x35f")
+shader_parameter/GroundTexture = ExtResource("5_eb1s8")
+shader_parameter/GroundTextureMask = ExtResource("8_srpg8")
+shader_parameter/GroundTexture2 = ExtResource("6_eb1s8")
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_srpg8")
+shader_parameter/GroundNormalTexture = ExtResource("5_1p5b6")
+shader_parameter/GroundNormal2Texture = ExtResource("4_yrlew")
+shader_parameter/NormalD = 1.0
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale = Vector2(6, 6)
+shader_parameter/Scale1 = Vector2(5, 5)
+shader_parameter/Scale2 = Vector2(10, 10)
 
 [sub_resource type="Curve" id="Curve_1p5b6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
@@ -81,7 +109,7 @@ noise = SubResource("FastNoiseLite_a2ujk")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2tj7v"]
 shader = ExtResource("14_7x35f")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
-shader_parameter/density = 2.5
+shader_parameter/density = 2.114
 shader_parameter/speed = Vector2(0.02, 0.01)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
@@ -147,7 +175,6 @@ color = Color(1, 1, 1, 0)
 
 [node name="Ground" type="ColorRect" parent="w"]
 z_index = -1
-texture_filter = 1
 material = SubResource("ShaderMaterial_yrlew")
 layout_mode = 1
 anchors_preset = 15
@@ -320,14 +347,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect2" type="TextureRect" parent="w"]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 97.0
-offset_top = -122.0
-offset_right = -95.0
-offset_bottom = -218.0
+offset_left = 20.0
+offset_top = -193.0
+offset_right = -109.0
+offset_bottom = -253.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -338,6 +366,7 @@ expand_mode = 1
 [node name="TextureRect3" type="TextureRect" parent="w/TextureRect2"]
 self_modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -360,8 +389,8 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 45.0
-offset_top = -351.0
-offset_right = 340.0
+offset_top = -387.0
+offset_right = 383.0
 offset_bottom = -28.0
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("9_3vvgq")
@@ -495,7 +524,7 @@ offset_bottom = -109.0
 color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(623, 210)
+position = Vector2(623, 234)
 blend_mode = 2
 range_z_max = -1
 texture = ExtResource("15_7x35f")
@@ -511,6 +540,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Prologue" to="." method="_on_prologue_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]

@@ -2,6 +2,11 @@ extends Button
 
 class_name CardFightShipViz
 
+@export var ShipNameLabel : Label
+@export var ShipIcon : TextureRect
+@export var StatLabel : RichTextLabel
+@export var FriendlyPanel : Panel
+
 const StatText = "[color=#ffc315]HULL[/color] : {0}\n[color=#ffc315]SLD[/color] : {1}\n[color=#ffc315]SPD[/color] : {2}\n[color=#ffc315]FPWR[/color] : {3}"
 
 func _ready() -> void:
@@ -9,39 +14,39 @@ func _ready() -> void:
 	ToggleFire(false)
 
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
-	$HBoxContainer/Label.text = S.Name.substr(0, 3)
-	$HBoxContainer/TextureRect.texture = S.ShipIcon
+	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipIcon.texture = S.ShipIcon
 	var Hull = var_to_str(snapped(S.Hull, 0.1)).replace(".0", "")
 	var Shield = var_to_str(snapped(S.Shield, 0.1)).replace(".0", "")
 	var Speed = var_to_str(snapped(S.Speed, 0.1)).replace(".0", "")
-	var Firep = var_to_str(snapped(S.FirePower + S.FirePowerBuff, 0.1)).replace(".0", "")
+	var Firep = var_to_str(snapped(S.GetFirePower(), 0.1)).replace(".0", "")
 	if (S.FirePowerBuff > 0):
 		Firep = "[color=#308a4d]" + Firep + "[/color]"
-	$HBoxContainer/RichTextLabel.text = StatText.format([Hull, Shield, Speed, Firep])
-	$HBoxContainer/TextureRect.flip_v = Friendly
-	$Panel.visible = false
+	StatLabel.text = StatText.format([Hull, Shield, Speed, Firep])
+	ShipIcon.flip_v = Friendly
+	FriendlyPanel.visible = false
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
-	$HBoxContainer/Label.text = S.Name.substr(0, 3)
-	$HBoxContainer/TextureRect.texture = S.ShipIcon
-	$Panel.visible = Friendly
+	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipIcon.texture = S.ShipIcon
+	FriendlyPanel.visible = Friendly
 
 func Dissable() -> void:
-	$Panel.visible = false
+	FriendlyPanel.visible = false
 
 func Enable() -> void:
-	$Panel.visible = true
+	FriendlyPanel.visible = true
 	var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_CIRC)
-	tw.tween_property($Panel, "modulate", Color(1,1,1,0), 1)
+	tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,0), 1)
 	tw.tween_callback(TweenEnded)
 
 func TweenEnded() -> void:
 	var tw = create_tween()
 	#tw.set_trans(Tween.TRANS_CIRC)
-	if ($Panel.modulate == Color(1,1,1,0)):
-		tw.tween_property($Panel, "modulate", Color(1,1,1,1), 1)
+	if (FriendlyPanel.modulate == Color(1,1,1,0)):
+		tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,1), 1)
 	else:
-		tw.tween_property($Panel, "modulate", Color(1,1,1,0), 1)
+		tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,0), 1)
 	tw.tween_callback(TweenEnded)
 
 func ToggleFire(t : bool) -> void:

@@ -21,7 +21,7 @@ func _ready() -> void:
 		$AnimationPlayer.play("Show")
 		if (Fast):
 			$AnimationPlayer.play("Show_2")
-	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
+	UpdateCameraZoom(Map.GetCameraZoom())
 	
 func SetText(Txt : String) -> void:
 	$Control/PanelContainer/Label.text = Txt

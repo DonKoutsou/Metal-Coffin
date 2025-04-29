@@ -41,7 +41,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines", "Acceleration") groups=["Enemy", "Ships"]]
+[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines", "Acceleration") groups=["Enemy", "Ships", "ZoomAffected"]]
 process_mode = 1
 script = ExtResource("1_dinuw")
 Patrol = false

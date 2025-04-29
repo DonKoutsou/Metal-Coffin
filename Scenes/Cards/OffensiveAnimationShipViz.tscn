@@ -33,7 +33,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
-[node name="CardFightShipViz" type="Button"]
+[node name="CardFightShipViz" type="Button" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "FriendlyPanel")]
 custom_minimum_size = Vector2(70, 70)
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,6 +49,9 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 script = ExtResource("1_o7oni")
+ShipNameLabel = NodePath("HBoxContainer/Label")
+ShipIcon = NodePath("HBoxContainer/TextureRect")
+FriendlyPanel = NodePath("Panel")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2

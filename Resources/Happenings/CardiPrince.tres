@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_ifktw"]
 script = ExtResource("3_ifktw")
-StringReply = "[color=#c19200]\"That is quite unfortunate, but you see in reality there is no choice for you. We are aware that your ship is in need of refueling and you wont be able to make it to the next town. Please follow me...\""
+StringReply = "[color=#c19200]\"That is quite unfortunate, but you see in reality there is no choice for you. We are aware that your ship is in need of refueling and you won't be able to make it to the next town. Please follow me...\""
 OptionName = "Reject the man's proposal"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([])
@@ -48,13 +48,13 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_afuai"]
 script = ExtResource("1_afuai")
-HappeningTexts = Array[String](["As you enter the town an eerie silence plegues the port. Walking out of the ship you are met by slim hooded figure. ", "The figure waits for you to aproach it. As you are withing a few steps away from it, it bows. Taking out its hood you are met by an old man. His skin is wrinkly but his gaze contains no malice.", "[color=#ffc315]\"Welcome master, we were expecting your arival.\"", "You are left preplexed, you were tasked with bringing a package here and leave, not ment to meet anybody.", "[color=#ffc315]\"Dont be alarmed master, we mean you no harm. My master aranged for your arival here, we didnt want to risk our location being exposed so we chose to leave out the details for your journey.\"", "[color=#ffc315]\"You see my master is a wanted man within the empire, even a small hint that we might be here would have raised more than a few alarms and the port would be swarmed within a few hours.\"", "[color=#ffc315]\"I'd like for you to follow me if its not much trouble. My master would like to have a talk with you. We will be keeping an eye on your ship and crew so you shouldn't worry. Your meeting wont take long.\""])
+HappeningTexts = Array[String](["As you enter the town an eerie silence plagues the port. Walking out of the ship you are met by a slim hooded figure. ", "The figure waits for you to approach it. As you are within a few steps away from it, it bows. Taking out its hood you are met by an old man. His skin is wrinkly but his gaze contains no malice.", "[color=#ffc315]\"Welcome master, we were expecting your arrival.\"", "You are left perplexed, you were tasked with bringing a package here and leave, not meant to meet anybody.", "[color=#ffc315]\"Don't be alarmed master, we mean you no harm. My master arranged for your arrival here, we didn't want to risk our location being exposed so we chose to leave out the details for your journey.\"", "[color=#ffc315]\"You see my master is a wanted man within the empire, even a small hint that we might be here would have raised more than a few alarms and the port would be swarmed within a few hours.\"", "[color=#ffc315]\"I'd like for you to follow me if it's not much trouble. My master would like to have a talk with you. We will be keeping an eye on your ship and crew so you shouldn't worry. Your meeting won't take long.\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_8tlxq"), SubResource("Resource_ifktw")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_gl0ga"]
 script = ExtResource("1_afuai")
-HappeningTexts = Array[String](["The man start walking toward the iniards of the city, you follow him and soon are lost in the alleyways of the city. The man seems to be taking a strange route, most likely to dissorient you.", "He stops and points to an entrance to your left, he gestures you with a kind smile to go in. Inside, you are met by a small group of armed men, they seem alarmed at you presence but seem to relax after seeing the old man walk in behind you.", "The man at the far end of the room lifts a drape that reveals a hole in the wall that seems to lead to an underground path. ", "He waits for you to pass before closing the drape behind you. You are sudenly engulfed by darkness, you hear a flick of a switch and the tunnel is filled with light from small bulbs handing from the ceiling. ", "You follow the path and are soon led to an opening, the tunnel seems to be connecting two houses and you emerge on a barricaded house. Everything from the doors to the windows is filled with planks, only a few rays of light manage to pass though them."])
+HappeningTexts = Array[String](["The man starts walking toward the innards of the city, you follow him and soon are lost in the alleyways of the city. The man seems to be taking a strange route, most likely to disorient you.", "He stops and points to an entrance to your left, he gestures you with a kind smile to go in. Inside, you are met by a small group of armed men, they seem alarmed at your presence but seem to relax after seeing the old man walk in behind you.", "The man at the far end of the room lifts a drape that reveals a hole in the wall that seems to lead to an underground path. ", "He waits for you to pass before closing the drape behind you. You are suddenly engulfed by darkness, you hear a flick of a switch and the tunnel is filled with light from small bulbs hanging from the ceiling. ", "You follow the path and are soon led to an opening, the tunnel seems to be connecting two houses and you emerge on a barricaded house. Everything from the doors to the windows is filled with planks, only a few rays of light manage to pass through them."])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -75,7 +75,7 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_vgxkk"]
 script = ExtResource("3_ifktw")
-StringReply = "[color=#c19200]\"Indeed you do my child, those who dont have no choice but to leave as prisoners to how things are.\""
+StringReply = "[color=#c19200]\"Indeed you do my child, those who don't have no choice but to leave as prisoners to how things are.\""
 OptionName = "You do"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([])
@@ -91,20 +91,20 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 [sub_resource type="Resource" id="Resource_dy2mo"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("1_8tlxq")
-HappeningTexts = Array[String](["In the far end of the room you are met by a hooded figure. The sight of it brings certain memories back. Something makes you think you've met the figure before. Maybe a dream?", "The figure exnteds it's arm gracefully and gestures you to aproach. A voice seems to eminating under the hood, you can just barely hear the words.", "[color=#c19200]\"Welcome my child, this is not the introdction i would hope to give you but times are as they are now. Let us hope the future holds a beter meeting place for us, but for now this will do.\"", "[color=#c19200]\"What i am about to offer you is a chance, there is a chance for us to change this world. This world was not always as it is now as you may know. When a chance for something this big is given to you, you take it, am i right?\""])
+HappeningTexts = Array[String](["In the far end of the room you are met by a hooded figure. The sight of it brings certain memories back. Something makes you think you've met the figure before. Maybe a dream?", "The figure extends its arm gracefully and gestures you to approach. A voice seems to emanate under the hood, you can just barely hear the words.", "[color=#c19200]\"Welcome my child, this is not the introduction I would hope to give you but times are as they are now. Let us hope the future holds a better meeting place for us, but for now this will do.\"", "[color=#c19200]\"What I am about to offer you is a chance, there is a chance for us to change this world. This world was not always as it is now as you may know. When a chance for something this big is given to you, you take it, am I right?\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_3j43l"), SubResource("Resource_vgxkk")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_143ge"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("1_8tlxq")
-HappeningTexts = Array[String](["[color=#c19200]\"Have you confiidence in your crew captain, and doese your crew have confidence in you? Answer this to yourself, what you answer to me now changes nothing.\"", "You are slowly starting to feel the gravity of the situation, whatever the future holds for you, you have nobody else to support on than them and they nobody than you. What will this man ask of you?", "[color=#c19200]\"You may have started to understand who i might be, and why this secrecy is important. Ever since the war has started, if you can call it that we've had to live like this.\"", "[color=#c19200]\"We helped build this world and we now have to see it though crack on the wall.\" [/color]It finally hits you... Without even realising the surprise it written all over your face."])
+HappeningTexts = Array[String](["[color=#c19200]\"Have you confidence in your crew captain, and does your crew have confidence in you? Answer this to yourself, what you answer to me now changes nothing.\"", "You are slowly starting to feel the gravity of the situation, whatever the future holds for you, you have nobody else to support on than them and they nobody than you. What will this man ask of you?", "[color=#c19200]\"You may have started to understand who I might be, and why this secrecy is important. Ever since the war has started, if you can call it that we've had to live like this.\"", "[color=#c19200]\"We helped build this world and we now have to see it through crack on the wall.\" [/color]It finally hits you... Without even realizing the surprise it is written all over your face."])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_rhe50"]
 script = ExtResource("3_ifktw")
-StringReply = "[color=#c19200]\"You might not apreciate us my child but nonetheless i am sure our hopes for this world surely overlap.\""
+StringReply = "[color=#c19200]\"You might not appreciate us my child but nonetheless I am sure our hopes for this world surely overlap.\""
 OptionName = "Stay silent"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([])
@@ -119,7 +119,7 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_uqsfa"]
 script = ExtResource("3_ifktw")
-StringReply = "[color=#c19200]\"Lift your head my child, you owe no apollogies to me. Quite the contrary.\""
+StringReply = "[color=#c19200]\"Lift your head my child, you owe no apologies to me. Quite the contrary.\""
 OptionName = "Bow your head"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([])
@@ -135,48 +135,48 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 [sub_resource type="Resource" id="Resource_ftcno"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["[color=#c19200]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child. You now understand our mission i suppose.\""])
+HappeningTexts = Array[String](["[color=#c19200]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child. You now understand our mission I suppose.\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_rhe50"), SubResource("Resource_uqsfa")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_v8t0e"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["[color=#c19200]\"You have our eternal gratitude my child... No many would take this option, but you did. As i said before we will be handing some help to you. I will be putting Dimitry and Amol under your command from now on. They will follow you to the pits of hell. Put your trust onto them child.\""])
+HappeningTexts = Array[String](["[color=#c19200]\"You have our eternal gratitude my child... Not many would take this option, but you did. As I said before we will be handing some help to you. I will be putting Dimitry and Amol under your command from now on. They will follow you to the pits of hell. Put your trust onto them child.\""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_4ttfb"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("8_rhe50")
-HappeningTexts = Array[String](["[color=#c19200]\"Its my honor to take part in this sacred campaign along with you sir. Let me make this journey of yours a little less cumbersome.\""])
+HappeningTexts = Array[String](["[color=#c19200]\"It's my honor to take part in this sacred campaign along with you sir. Let me make this journey of yours a little less cumbersome.\""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_27exd"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("9_rhe50")
-HappeningTexts = Array[String](["You turn and look at Amol. You didnt expect a machine into the battlefield... [color=#c19200]\"I am not able to fight for you sir but i'll provide any other service i can.\" [/color] Amol bows it's head and stays there for a few seconds."])
+HappeningTexts = Array[String](["You turn and look at Amol. You didn't expect a machine into the battlefield... [color=#c19200]\"I am not able to fight for you sir but I'll provide any other service I can.\" [/color] Amol bows its head and stays there for a few seconds."])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_r6bso"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["[color=#c19200]\"The plan is for you to infiltrate enemy territory and push towards Dormak. Once we have Dormak then everything becomes easier. We have some chips to negotioate with.\"", "[color=#c19200]\"First part of the plan is for you to reach Armak. There we have another representative who will provide a little helping hand.\"", "[color=#c19200]\"And with that you should head out my child. We will also be relocating. This position will soon become exposed and we can't risk being found. Not now... I recomend you do the same.\""])
+HappeningTexts = Array[String](["[color=#c19200]\"The plan is for you to infiltrate enemy territory and push towards Dormak. Once we have Dormak then everything becomes easier. We have some chips to negotiate with.\"", "[color=#c19200]\"First part of the plan is for you to reach Armak. There we have another representative who will provide a little helping hand.\"", "[color=#c19200]\"And with that you should head out my child. We will also be relocating. This position will soon become exposed and we can't risk being found. Not now... I recommend you do the same.\""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_236gb"]
 script = ExtResource("1_afuai")
-HappeningTexts = Array[String](["The crew is riled up. They are enraged. They want to see the empire bleed. With a scream you order all the crew back at their posts.
+HappeningTexts = Array[String](["The crew is riled up. They are enraged. They want to see the empire bleed. With a scream you order all the crew back at their posts. 
 \"Back to your posts soldiers, we are at war!\""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_kqmrd"]
 script = ExtResource("3_ifktw")
-StringReply = "You tell the crew that in reality there is nowhere to return to. You lie to the crew and tell them that the refime had started expanding once again and that all our houses are ashes. There is a huge pause in the room. Everybody is slowly trying to fathom this new information."
+StringReply = "You tell the crew that in reality, there is nowhere to return to. You lie to the crew and tell them that the regime had started expanding once again and that all our houses are ashes. There is a huge pause in the room. Everybody is slowly trying to fathom this new information."
 OptionName = "Lie"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_236gb")])
@@ -191,14 +191,14 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_wmf6a"]
 script = ExtResource("1_afuai")
-HappeningTexts = Array[String](["\"Suddenly the silece breaks. One by one your crew starts standing and proclaming to follow you to the very end. Your army is ready. With a scream you order all the crew back at their posts.", "\"Back to your posts soldiers, we are at war!", ""])
+HappeningTexts = Array[String](["\"Suddenly the silence breaks. One by one your crew starts standing and proclaiming to follow you to the very end. Your army is ready. With a scream you order all the crew back at their posts.", "\"Back to your posts soldiers, we are at war!\"", ""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_gtnr6"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("9_7bg2p")
-HappeningTexts = Array[String](["\"I am sorry Captain, but that wont do. I've promised my men that they will be back to their families within a week. I will not drag them into a war just like that.\"", "\"We will be headning out.... Its been nice captain... Good luck.\"", "Jor's crew gets on their ship and head off. You crew seems to be jealous of them. But the decision has been made. There is no turning back now.", ""])
+HappeningTexts = Array[String](["\"I am sorry Captain, but that won't do. I've promised my men that they will be back to their families within a week. I will not drag them into a war just like that.\"", "\"We will be heading out.... It's been nice captain... Good luck.\"", "Jor's crew gets on their ship and heads off. Your crew seems to be jealous of them. But the decision has been made. There is no turning back now.", ""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -206,7 +206,7 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("9_ftcno")
 Cpt = ExtResource("8_dy2mo")
 StringReply = "The room falls silent. For a few minutes nothing moves......"
-OptionName = "Try to comunicate what happened in the meeting"
+OptionName = "Try to communicate what happened in the meeting"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_wmf6a")])
 WorldviewEffect = 0
@@ -220,20 +220,20 @@ metadata/_custom_type_script = "uid://b5ww8sd3i6oa4"
 
 [sub_resource type="Resource" id="Resource_el5wf"]
 script = ExtResource("1_afuai")
-HappeningTexts = Array[String](["The machine gets up and start packing it's stuff. Your new recruits also seem to be getting ready for departure. You share with them the location of your ship and you start heading out.", "On your way back to the ship you are reflecting on what happened... Trying to find the words to communicate to your crew that you no longer are a simple smugler ship. But should be heading towards Dormak on a sacred capaign against the regime...", "And it is as you thought. The moment they crew hears what you have to say they burst out laughing. Waiting for you to crack a laugh as well. But as they see you are not break, their smile slowly dissapears.", "They ask you for a reason. Since when has this war become important to us? What will it gain us? Are we really to put our lives on the line just because you have said so?"])
+HappeningTexts = Array[String](["The machine gets up and starts packing its stuff. Your new recruits also seem to be getting ready for departure. You share with them the location of your ship and you start heading out.", "On your way back to the ship you are reflecting on what happened... Trying to find the words to communicate to your crew that you no longer are a simple smuggler ship. But should be heading towards Dormak on a sacred campaign against the regime...", "And it is as you thought. The moment the crew hears what you have to say they burst out laughing. Waiting for you to crack a laugh as well. But as they see you are not breaking, their smile slowly disappears.", "They ask you for a reason. Since when has this war become important to us? What will it gain us? Are we really to put our lives on the line just because you have said so?"])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_kqmrd"), SubResource("Resource_xhtgi")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_gsd8q"]
 script = ExtResource("12_7bg2p")
 CityToFocus = "Armak"
-Dialogues = Array[String](["Armak is a few killometers away.", "Lets be cautious and slowly make our way there.", "Multiple cities exist on the way there but i'd advise against visiting unless on great need.", "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."])
+Dialogues = Array[String](["Armak is a few kilometers away.", "Let's be cautious and slowly make our way there.", "Multiple cities exist on the way there but I'd advise against visiting unless in great need.", "Most of the cities in this area are inhabited by enemy troops, even if we don't stumble on a patrol, occupants of the cities might report our location to the enemy."])
 metadata/_custom_type_script = "uid://diug21pe121lm"
 
 [sub_resource type="Resource" id="Resource_7bg2p"]
 script = ExtResource("7_143ge")
 Cpt = ExtResource("6_vgxkk")
-StringReply = "The look in his eyes changed. It feels like a mix of happines and sorrow. Maybe he sees into my future..."
+StringReply = "The look in his eyes changed. It feels like a mix of happiness and sorrow. Maybe he sees into my future..."
 OptionName = "Choose the sword"
 FinishDiag = false
 Event = SubResource("Resource_gsd8q")
@@ -250,14 +250,14 @@ metadata/_custom_type_script = "uid://w3pbagqwci26"
 [sub_resource type="Resource" id="Resource_pwkje"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["In that case i will have to ask you to leave. This is no place for you to be. We will be relocation shortly. The place will mostlikely be exposed in the next few hours.", "\"Please forget about this meeting happening....\"", "\"Pack up you stuff people, we are leaving.\" With a fell swop you see everybody in the room, get up, pick up their stuff and head out of the room. Withing a few moment you are left alone in the room. There is nothing left for you to do and go to your ship and head home.", ""])
+HappeningTexts = Array[String](["In that case I will have to ask you to leave. This is no place for you to be. We will be relocating shortly. The place will most likely be exposed in the next few hours.", "\"Please forget about this meeting happening....\"", "\"Pack up your stuff people, we are leaving.\" With a fell swoop you see everybody in the room, get up, pick up their stuff and head out of the room. Within a few moments you are left alone in the room. There is nothing left for you to do and go to your ship and head home.", ""])
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_wlpbn"]
 script = ExtResource("10_uqsfa")
 StringReply = "I see...."
-OptionName = "Chose the blindfold"
+OptionName = "Choose the blindfold"
 FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_pwkje")])
 WorldviewEffect = 0
@@ -272,7 +272,7 @@ metadata/_custom_type_script = "uid://k3yo61qak6d8"
 [sub_resource type="Resource" id="Resource_xjsvv"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["[color=#c19200]\"You must know, what we're to ask you we've asked before. You are not the first to enter this room only to regret it. As you probably have guessed none of the have succeded, and are probably lying somewhere deep in the desert.\"", "[color=#c19200]\"I want not to misslead you, there is a choice for you to make here. There is no major assistance we will be able to provide other than a couple of ships.\" The machine takes 2 objects and holds them infront of you. One is a sword and the other seems to be a scraf.", "[color=#c19200]\"Choose to sword, and you join a righteous cause to bring back peace into this world. Choose the blindfold and you join all the others who picked to look away. You might not understand the gravity of these choices but you must choose. So... Come child, choose life or death.\""])
+HappeningTexts = Array[String](["[color=#c19200]\"You must know, what we're to ask you we've asked before. You are not the first to enter this room only to regret it. As you probably have guessed none of them have succeeded, and are probably lying somewhere deep in the desert.\"", "[color=#c19200]\"I want not to mislead you, there is a choice for you to make here. There is no major assistance we will be able to provide other than a couple of ships.\" The machine takes 2 objects and holds them in front of you. One is a sword and the other seems to be a scarf.", "[color=#c19200]\"Choose the sword, and you join a righteous cause to bring back peace into this world. Choose the blindfold and you join all the others who picked to look away. You might not understand the gravity of these choices but you must choose. So... Come child, choose life or death.\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_7bg2p"), SubResource("Resource_wlpbn")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

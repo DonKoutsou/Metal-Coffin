@@ -10,7 +10,7 @@ var EntityToFollow : Node2D
 var camera : Camera2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
+	UpdateCameraZoom(Map.GetCameraZoom())
 
 func ToggleStat(Stat: String, t : bool, timel : float = 0):
 	if (t):

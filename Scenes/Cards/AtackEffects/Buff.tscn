@@ -104,7 +104,7 @@ autostart = false
 [node name="Flash" type="Node2D" parent="."]
 script = ExtResource("2_o6vbn")
 num_particles = 1
-lifetime = 0.75
+lifetime = 0.5
 autostart = false
 texture = ExtResource("3_2hlpi")
 image_scale = 0.01
@@ -124,7 +124,7 @@ alpha_curve = SubResource("Curve_g0j12")
 [node name="Orb3" type="Node2D" parent="."]
 script = ExtResource("2_o6vbn")
 num_particles = 32
-lifetime = 0.75
+lifetime = 0.5
 lifetime_randomness = 0.653
 autostart = false
 texture = ExtResource("4_tymn1")

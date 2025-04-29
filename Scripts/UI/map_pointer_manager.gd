@@ -106,7 +106,8 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 		marker.SetType("Missile")
 	_ShipMarkers.append(marker)
 	
-	marker.UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
+	marker.UpdateCameraZoom(Map.GetCameraZoom())
+
 func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	if (Spots.has(Spot)):
 		return

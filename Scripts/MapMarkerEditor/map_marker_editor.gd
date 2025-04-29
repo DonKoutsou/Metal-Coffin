@@ -8,7 +8,7 @@ class_name MapMarkerEditor
 var Line : MapMarkerLine
 var LineLeangth : float = 0
 
-@onready var ship_camera: ShipCamera = $"../../../ShipCamera"
+@onready var ship_camera: Camera2D = $"../../../ShipCamera"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

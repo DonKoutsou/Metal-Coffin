@@ -295,7 +295,7 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "NormalScreen", "FullScreenFrame")]
+[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "NormalScreen", "FullScreenFrame", "ScreenPanel")]
 process_mode = 1
 z_as_relative = false
 layout_mode = 3
@@ -321,6 +321,7 @@ EventHandler = ExtResource("3_i441f")
 Cam = NodePath("ScreenCam")
 NormalScreen = NodePath("NormalScreen")
 FullScreenFrame = NodePath("ScreenFrameLong")
+ScreenPanel = NodePath("ScreenFrameLong2")
 
 [node name="DoorSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wetmy")
@@ -821,6 +822,16 @@ mouse_filter = 0
 texture = ExtResource("33_vyv2f")
 expand_mode = 1
 
+[node name="Control" type="Control" parent="ScreenFrameLong2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 751.0
+offset_bottom = 751.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ScreenCam" type="Camera2D" parent="." node_paths=PackedStringArray("Cabled")]
 position = Vector2(640, 360)
 script = ExtResource("35_vmft1")
@@ -872,7 +883,7 @@ volume_db = -20.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
 position = Vector2(-600, -324)
-color = Color(0.137067, 0.137067, 0.137067, 1)
+color = Color(0.240191, 0.240191, 0.240191, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")

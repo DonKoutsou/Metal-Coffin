@@ -14,3 +14,6 @@ class_name BattleShipStats
 @export var Ammo : Dictionary
 @export var Funds : int
 @export var Convoy : bool
+
+func GetFirePower() -> float:
+	return FirePower + FirePowerBuff

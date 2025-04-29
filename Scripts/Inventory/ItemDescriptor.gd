@@ -96,13 +96,18 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	
 	#TODO Option doesent show when ship has upgraded weapons
 	if (It.CardProviding.size() > 0):
+		var CardsChecked : Array[CardStats]
 		for g in It.CardProviding:
+			if (CardsChecked.has(g)):
+				return
+			CardsChecked.append(g)
+			
 			var CardS = g.duplicate() as CardStats
 			var card = CardScene.instantiate() as Card
 			
 			if (It.CardOptionProviding != null):
 				CardS.SelectedOption = It.CardOptionProviding
-			card.SetCardStats(CardS, [])
+			card.SetCardStats(CardS, [], It.CardProviding.count(g))
 			CardPlecement.add_child(card)
 			card.Dissable()
 	else:

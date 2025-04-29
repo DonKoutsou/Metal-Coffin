@@ -54,7 +54,7 @@ func EnteredScreen() -> void:
 	$AnalyzeButton.add_to_group("UnmovableMapInfo")
 	SpotNameLabel.get_parent().add_to_group("UnmovableMapInfo")
 	add_to_group("ZoomAffected")
-	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
+	UpdateCameraZoom(Map.GetCameraZoom())
 
 func ExitedScreen() -> void:
 	$AnalyzeButton.remove_from_group("UnmovableMapInfo")

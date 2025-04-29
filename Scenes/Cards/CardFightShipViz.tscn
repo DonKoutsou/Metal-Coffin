@@ -46,7 +46,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
-[node name="CardFightShipViz" type="Button"]
+[node name="CardFightShipViz" type="Button" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel")]
 custom_minimum_size = Vector2(180, 86)
 anchors_preset = 8
 anchor_left = 0.5
@@ -63,6 +63,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_3u5gi")
 script = ExtResource("2_qce1f")
+ShipNameLabel = NodePath("HBoxContainer/VBoxContainer/Label")
+ShipIcon = NodePath("HBoxContainer/VBoxContainer/TextureRect")
+StatLabel = NodePath("HBoxContainer/RichTextLabel")
+FriendlyPanel = NodePath("Panel")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
@@ -83,8 +87,11 @@ offset_right = 201.0
 offset_bottom = 83.0
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(14.24, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "GER"
@@ -92,12 +99,13 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(52, 64)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_5ndf2")
 expand_mode = 1
+stretch_mode = 6
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
 clip_contents = false
@@ -107,7 +115,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
 text = "[color=#c19200]HULL[/color] : 100
 [color=#c19200]SLD[/color] : 10
@@ -118,6 +126,6 @@ scroll_active = false
 text_direction = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(54, 38.5)
+position = Vector2(28, 41)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_on4wq")

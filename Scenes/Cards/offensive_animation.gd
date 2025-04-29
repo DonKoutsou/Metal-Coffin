@@ -61,12 +61,12 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		AtC.modulate = Color(1,1,1,0)
 		
 		var tw = create_tween()
-		tw.tween_property(AtC, "modulate", Color(1,1,1,1), 0.4)
+		tw.tween_property(AtC, "modulate", Color(1,1,1,1), 0.2)
 		await tw.finished
 		
 		if (HasDef):
 			var tw2 = create_tween()
-			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
+			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.2)
 			#await tw2.finished
 	else:
 		$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_BEGIN)
@@ -80,7 +80,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		AtC.show_behind_parent = true
 		AtC.modulate = Color(1,1,1,0)
 		var tw = create_tween()
-		tw.tween_property(AtC, "modulate", Color(1,1,1,1), 0.4)
+		tw.tween_property(AtC, "modulate", Color(1,1,1,1), 0.2)
 		await tw.finished
 		if (HasDef):
 			DefC = CardScene.instantiate() as Card
@@ -92,7 +92,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 			DefC.show_behind_parent = true
 			DefC.modulate = Color(1,1,1,0)
 			var tw2 = create_tween()
-			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
+			tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.2)
 			#await tw2.finished
 		
 	#var ShipPlemenent = VBoxContainer.new()
@@ -107,7 +107,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		else :
 			Target = Targets[g]
 		
-		call_deferred("SpawnVisual", Target, roundi(OriginShip.FirePower * AtackCard.GetDamage()))
+		call_deferred("SpawnVisual", Target, roundi(OriginShip.GetFirePower() * AtackCard.GetDamage()))
 
 		#var tw = create_tween()
 		#tw.tween_method(MoveLine, 0.0, 1.0, 1.0)
@@ -115,12 +115,12 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		#tw.tween_callback(TweenEnded.bind(roundi(OriginShip.FirePower * AtackCard.GetDamage())))
 
 func SpawnVisual(Target : Control, Damage : float) -> void:
-	await wait (0.4)
+	await wait (0.15)
 	
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(AtC, "scale", Vector2.ZERO, 0.75)
+	tw.tween_property(AtC, "scale", Vector2.ZERO, 0.5)
 	
 	var Visual = AtackVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -132,12 +132,12 @@ func SpawnVisual(Target : Control, Damage : float) -> void:
 	Visual.connect("Reached", TweenEnded.bind(Damage))
 
 func SpawnShieldVisual(Target : Control) -> void:
-	await wait (0.4)
+	await wait (0.15)
 	
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.75)
+	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
 	
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -152,7 +152,7 @@ func SpawnUpVisual(Target : Control) -> void:
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.75)
+	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
 	
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target

@@ -42,7 +42,7 @@ UnderstatUI = NodePath("Control3/UnderStatUI")
 OverStatUI = NodePath("Control3/OverStatUI")
 
 [node name="Control3" type="Control" parent="."]
-texture_filter = 1
+texture_filter = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,6 +246,7 @@ text = "OK"
 
 [node name="PauseContainer" type="PanelContainer" parent="Control3"]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -195,7 +195,7 @@ func OnAlarmRaised(Notify : bool = false) -> void:
 	var AlarmViz = AlarmVisual.instantiate()
 	add_child(AlarmViz)
 	SimulationManager.GetInstance().TogglePause(true)
-	ShipCamera.GetInstance().FrameCamToPos(global_position)
+	Map.GetInstance().GetCamera().FrameCamToPos(global_position)
 	SpotAlarmRaised.emit(Notify)
 	AlarmRaised = true
 	for g in VisitingShips:

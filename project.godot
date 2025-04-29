@@ -13,7 +13,7 @@ config_version=5
 config/name="Metal Coffin"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.4", "C#", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Logos/LogoIcon.png"
@@ -176,7 +176,6 @@ CommandLine={
 
 [physics]
 
-2d/run_on_separate_thread=true
 2d/solver/solver_iterations=4
 
 [rendering]

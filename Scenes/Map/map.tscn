@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=45 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -7,14 +7,16 @@
 [ext_resource type="Resource" uid="uid://1vptbvrlos7" path="res://Resources/MapSpots/CitySpots/FinalCity.tres" id="6_tftes"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/tutorial_trigger.tscn" id="9_6an1p"]
+[ext_resource type="Script" uid="uid://cok22sbmibwle" path="res://Scripts/ShipCameraC.cs" id="11_6an1p"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
+[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
+[ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="14_a2ujk"]
+[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="14_h7q0i"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="15_a2ujk"]
-[ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="15_d8bna"]
+[ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="15_h7q0i"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
-[ext_resource type="Texture2D" uid="uid://borwlcefmcmlo" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="16_x3wib"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
-[ext_resource type="Texture2D" uid="uid://bkguuiaav3p6w" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="17_x3wib"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
@@ -31,12 +33,34 @@ _limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, 3.3398, 0, 0]
 point_count = 1
 
+[sub_resource type="Gradient" id="Gradient_eb1s8"]
+offsets = PackedFloat32Array(0.52029, 0.550725)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eb1s8"]
+noise_type = 3
+frequency = 0.0035
+cellular_distance_function = 2
+cellular_return_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1p5b6"]
+width = 1024
+height = 1024
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_eb1s8")
+noise = SubResource("FastNoiseLite_eb1s8")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28wu2"]
 shader = ExtResource("18_x3wib")
-shader_parameter/GroundTexture = ExtResource("17_x3wib")
-shader_parameter/GroundNormalTexture = ExtResource("16_x3wib")
+shader_parameter/GroundTexture = ExtResource("14_h7q0i")
+shader_parameter/GroundTexture2 = ExtResource("15_h7q0i")
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_1p5b6")
+shader_parameter/GroundNormalTexture = ExtResource("14_a2ujk")
+shader_parameter/GroundNormal2Texture = ExtResource("13_6an1p")
+shader_parameter/NormalD = 1.0
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale = Vector2(20, 20)
+shader_parameter/Scale1 = Vector2(10, 10)
+shader_parameter/Scale2 = Vector2(20, 20)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5
@@ -67,10 +91,12 @@ bg_color = Color(0.0755152, 0.146343, 0.151409, 1)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_tftes"]
+[sub_resource type="Gradient" id="Gradient_a2ujk"]
+offsets = PackedFloat32Array(0, 0.51861, 0.997849)
+colors = PackedColorArray(0, 0, 0, 1, 0.311519, 0.32502, 0.315282, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6an1p"]
-gradient = SubResource("Gradient_tftes")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x3wib"]
+gradient = SubResource("Gradient_a2ujk")
 
 [sub_resource type="Environment" id="Environment_h7q0i"]
 background_mode = 3
@@ -78,7 +104,36 @@ background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
-tonemap_exposure = 0.61
+tonemap_exposure = 0.8
+tonemap_white = 16.0
+glow_enabled = true
+glow_levels/1 = 16.0
+glow_levels/2 = 16.0
+glow_levels/3 = 16.0
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 1.0
+glow_strength = 0.5
+glow_mix = 0.825
+glow_bloom = 1.0
+glow_map_strength = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_color_correction = SubResource("GradientTexture1D_x3wib")
+
+[sub_resource type="Gradient" id="Gradient_28wu2"]
+offsets = PackedFloat32Array(0, 0.929379, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.916342, 0.951284, 0.926063, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6an1p"]
+gradient = SubResource("Gradient_28wu2")
+
+[sub_resource type="Environment" id="Environment_x3wib"]
+background_mode = 3
+background_canvas_max_layer = 1
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
 tonemap_white = 16.0
 glow_enabled = true
 glow_levels/1 = 16.0
@@ -89,10 +144,9 @@ glow_normalized = true
 glow_intensity = 0.16
 glow_mix = 0.825
 glow_bloom = 0.85
-glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
-adjustment_brightness = 0.86
+adjustment_contrast = 1.01
 adjustment_saturation = 0.8
 adjustment_color_correction = SubResource("GradientTexture1D_6an1p")
 
@@ -150,13 +204,15 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "CityLines") groups=["Clock"]]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "CityLines", "Clouds", "Ground") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
-script = ExtResource("15_d8bna")
+script = ExtResource("11_6an1p")
 Background = NodePath("DarkBlueBackground")
-CityLines = NodePath("../MapPointerManager/MapLineDrawer")
+CityLines = NodePath("../MapPointerManager/MapLines")
+Clouds = NodePath("Clouds")
+Ground = NodePath("Ground")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
 z_index = -3
@@ -234,6 +290,9 @@ layer = 2
 environment = SubResource("Environment_h7q0i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer"]
+environment = SubResource("Environment_x3wib")
 
 [node name="ScreenUI" parent="CanvasLayer" instance=ExtResource("24_e5um8")]
 

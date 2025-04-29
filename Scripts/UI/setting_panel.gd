@@ -5,7 +5,6 @@ class_name SettingsPanel
 static var HasGlitch = true
 
 func _ready() -> void:
-
 	$VBoxContainer/HBoxContainer3/GlitchesCheckBox.button_pressed = HasGlitch
 	$VBoxContainer/HBoxContainer/FullScreenCheckBox.button_pressed = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
 	$VBoxContainer/HBoxContainer2/SoundCheckBox.button_pressed = AudioServer.get_bus_volume_db(0) == 0

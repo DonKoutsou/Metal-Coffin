@@ -71,6 +71,9 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_gqt8n")
+frame = 6
+frame_progress = 0.556294
+speed_scale = -1.0
 offset = Vector2(0, 128)
 script = ExtResource("25_33lmu")
 frequency = 20.0
@@ -84,7 +87,7 @@ modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
 position = Vector2(19, 10)
 sprite_frames = SubResource("SpriteFrames_jvc5q")
-frame_progress = 0.0988424
+speed_scale = -1.0
 offset = Vector2(0, 128)
 
 [node name="Control" type="Control" parent="."]

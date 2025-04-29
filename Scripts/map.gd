@@ -13,7 +13,7 @@ class_name Map
 @export_group("Nodes")
 @export var _InScreenUI : Ingame_UIManager
 @export var _ScreenUI : ScreenUI
-@export var _Camera : ShipCamera
+@export var _Camera : Camera2D
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var TownSpotScene : PackedScene
@@ -43,6 +43,8 @@ var TempEnemyNames: Array[String]
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
+
+
 static var Instance : Map
 
 static func PixelDistanceToKm(Dist : float) -> float:
@@ -54,17 +56,26 @@ static func SpeedToKmH(Speed : float) -> float:
 static func GetInstance() -> Map:
 	return Instance
 
+func _enter_tree() -> void:
+	Instance = self
+
 func _ready() -> void:
+	
 	set_physics_process(false)
 	$SubViewportContainer.visible = false
 	_ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
-	Instance = self
+	
+	_Camera.connect("PositionChanged", CamPosChanged)
+	_Camera.connect("ZoomChanged", CamZoomChanged)
 
 func _exit_tree() -> void:
 	if (Roadt != null):
 		Roadt.wait_to_finish()
 	if (Maplt != null):
 		Maplt.wait_to_finish()
+
+
+
 
 func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#find first village and make sure its visible
@@ -75,7 +86,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	pos.y += 500
 	var PlShip = $SubViewportContainer/ViewPort/PlayerShip as MapShip
 	PlShip.SetShipPosition(pos)
-	GetCamera().FrameCamToPlayer()
+	_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
 	PlShip.Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	if (IsPrologue):
@@ -122,8 +133,24 @@ func GetInScreenUI() -> Ingame_UIManager:
 func GetScreenUi() -> ScreenUI:
 	return _ScreenUI
 	
-func GetCamera() -> ShipCamera:
+func GetCamera() -> Camera2D:
 	return _Camera
+
+#CAMERA DATA
+static var CamZoom : float = 1
+static var CamPos : Vector2 = Vector2.ZERO
+
+func CamPosChanged(NewPos : Vector2) -> void:
+	CamPos = NewPos
+
+func CamZoomChanged(NewZoom : float) -> void:
+	CamZoom = NewZoom
+
+static func GetCameraPosition() -> Vector2:
+	return CamPos
+
+static func GetCameraZoom() -> float:
+	return CamZoom
 
 #CALLED BY WORLD AFTER STAGE IS FINISHED AND WE HAVE REACHED THE NEW PLANET
 func Arrival(Spot : MapSpot) -> void:
@@ -246,7 +273,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		SpotList.insert(g, sc)
 	
 	#call_deferred("GenerateRoads")
-	GetCamera().call_deferred("FrameCamToPlayer")
+	_Camera.call_deferred("FrameCamToPlayer")
 
 #/////////////////////////////////////////////////////////////
 #██ ███    ██ ██████  ██    ██ ████████     ██   ██  █████  ███    ██ ██████  ██      ██ ███    ██  ██████  
@@ -258,15 +285,15 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 
 func _MAP_INPUT(event: InputEvent) -> void:
 	if (event is InputEventScreenTouch):
-		GetCamera()._HANDLE_TOUCH(event)
+		_Camera._HANDLE_TOUCH(event)
 	else : if (event is InputEventScreenDrag):
-		GetCamera()._HANDLE_DRAG(event)
+		_Camera._HANDLE_DRAG(event)
 	else : if (event.is_action_pressed("ZoomIn")):
-		GetCamera()._HANDLE_ZOOM(1.5)
+		_Camera._HANDLE_ZOOM(1.5)
 	else : if (event.is_action_pressed("ZoomOut")):
-		GetCamera()._HANDLE_ZOOM(0.5)
+		_Camera._HANDLE_ZOOM(0.5)
 	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		GetCamera().UpdateCameraPos(event.relative)
+		_Camera.UpdateCameraPos(event.relative)
 		
 
 #/////////////////////////////////////////////////////////////

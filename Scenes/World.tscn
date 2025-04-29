@@ -11,13 +11,13 @@
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_q55oc"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/InScreenUI/HappeningUI.tscn" id="9_5gym6"]
-[ext_resource type="Script" uid="uid://b6ekpg378n2t4" path="res://Scripts/Simulation_Manager.gd" id="9_l7oy3"]
 [ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/InScreenUI/FleetSparationScene.tscn" id="10_8l3nt"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
 [ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="12_rwt1y"]
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="13_mvfa8"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="15_kwl8l"]
+[ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/simulation_manager.tscn" id="16_mq4nq"]
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="16_waglr"]
 [ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_b5aes"]
 [ext_resource type="Resource" uid="uid://b8kumsjf70n22" path="res://Resources/Happenings/Nomads.tres" id="20_371b6"]
@@ -72,9 +72,7 @@ DroneScene = ExtResource("13_mvfa8")
 [node name="DialogueProgressHolder" type="Node" parent="."]
 script = ExtResource("8_6vv6u")
 
-[node name="SimulationManager" type="Node" parent="." node_paths=PackedStringArray("_Map")]
-script = ExtResource("9_l7oy3")
-_Map = NodePath("../Map")
+[node name="SimulationManager" parent="." instance=ExtResource("16_mq4nq")]
 
 [node name="WorldviewManager" type="Node" parent="."]
 script = ExtResource("15_kwl8l")

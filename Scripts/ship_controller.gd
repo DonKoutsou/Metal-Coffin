@@ -6,7 +6,7 @@ class_name ShipContoller
 @export var DroneDockEventH : DroneDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
-@onready var ship_camera: ShipCamera = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
+@onready var ship_camera: Camera2D = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
 @export var CaptainSelectScreen : PackedScene
 @export var DroneScene : PackedScene
 

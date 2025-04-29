@@ -9,13 +9,9 @@ uniform float vignette_strength : hint_range(0., 3., 0.01) = 1.;
 uniform float image_flicker : hint_range(0., 1., .01) = 1.;
 uniform float skip : hint_range(0., 1., .01) = 1.;
 
-uniform int bloom_type : hint_range(0, 2) = 0;
 
 uniform float hardScan : hint_range(-12.0, -1.0) = -8.0;
 uniform float hardPix : hint_range(-4.0, 0.0) = -2.0;
-uniform float hardBloomScan : hint_range(-4.0, 0.0) = -2.0;
-uniform float hardBloomPix : hint_range(-2.0, 0.0) = -1.5;
-uniform float bloomAmount : hint_range(1.0, 16.0) = 16.0;
 
 uniform vec2 warp = vec2(64.0, 24.0);
 

@@ -66,6 +66,9 @@ func  _ready() -> void:
 
 	#sMapPointerManager.GetInstance().AddShip(self, false)
 
+func UpdateCameraZoom(NewZoom : float) -> void:
+	visible = NewZoom > 0.5
+
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
 	ShipSpawned.emit()
@@ -101,8 +104,6 @@ func InitialiseShip() -> void:
 
 
 func _Update(delta: float) -> void:
-	if (Lodded):
-		return
 		
 	UpdateElint(delta)
 	#if (Paused):
@@ -353,7 +354,7 @@ func OnShipSeen(SeenBy : Node2D):
 		g.VisibleBy.append(SeenBy)
 		MapPointerManager.GetInstance().AddShip(g, false)
 	#SimulationManager.GetInstance().TogglePause(true)
-	ShipCamera.GetInstance().FrameCamToPos(global_position)
+	Map.GetInstance().GetCamera().FrameCamToPos(global_position,1, true)
 
 func wait(seconds : float) -> Signal:
 	return get_tree().create_timer(seconds).timeout

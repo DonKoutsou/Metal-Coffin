@@ -19,6 +19,7 @@ class_name ScreenUI
 @export_group("Screen")
 @export var NormalScreen : Control
 @export var FullScreenFrame : TextureRect
+@export var ScreenPanel : TextureRect
 
 signal FullScreenToggleStarted(t : bool)
 signal FullScreenToggleFinished()
@@ -28,6 +29,7 @@ var CloseTw : Tween
 var OpenTw : Tween
 
 func CloseScreen() -> void:
+	ScreenPanel.visible = true
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
@@ -40,7 +42,7 @@ func CloseScreen() -> void:
 	FullScreenToggleStarted.emit(true)
 
 func DoIntroFullScreen(toggle : bool) -> void:
-	#$ScreenFrameLong2.visible = true
+	ScreenPanel.visible = true
 	$Cables.visible = false
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
@@ -65,13 +67,14 @@ func DoIntroFullScreen(toggle : bool) -> void:
 	OpenTw.set_trans(Tween.TRANS_QUART)
 	OpenTw.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
 	await OpenTw.finished
-	#$ScreenFrameLong2.visible = false
+	ScreenPanel.visible = false
 	FullScreenToggleFinished.emit(toggle)
 	Cam.EnableFullScreenShake()
 
 func ToggleFullScreen(toggle : bool) -> void:
 	#FullScreenToggleStarted.emit()
 	#$ScreenFrameLong2.visible = true
+	ScreenPanel.visible = true
 	$DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
@@ -95,7 +98,7 @@ func ToggleFullScreen(toggle : bool) -> void:
 	OpenTw.set_trans(Tween.TRANS_QUART)
 	OpenTw.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
 	await OpenTw.finished
-	#$ScreenFrameLong2.visible = false
+	ScreenPanel.visible = false
 	FullScreenToggleFinished.emit(toggle)
 	Cam.EnableFullScreenShake()
 func wait(secs : float) -> Signal:
@@ -105,6 +108,7 @@ func wait(secs : float) -> Signal:
 func _ready() -> void:
 	NormalScreen.visible = false
 	FullScreenFrame.visible = false
+	ScreenPanel.visible = false
 	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
 	#EventHandler.connect("AccelerationForced", Acceleration_Forced)
 	#EventHandler.connect("SteerDirForced", Steer_Forced)

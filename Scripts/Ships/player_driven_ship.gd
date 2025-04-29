@@ -8,6 +8,10 @@ func  _ready() -> void:
 	super()
 	Paused = SimulationManager.IsPaused()
 
+func UpdateCameraZoom(NewZoom : float) -> void:
+	CamZoom = NewZoom
+	queue_redraw()
+
 func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)

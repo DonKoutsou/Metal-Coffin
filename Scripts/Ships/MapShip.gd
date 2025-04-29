@@ -123,9 +123,7 @@ func PartChanged(It : ShipPart) -> void:
 func ToggleFuelRangeVisibility(t : bool) -> void:
 	ShowFuelRange = t
 
-func UpdateCameraZoom(NewZoom : float) -> void:
-	CamZoom = NewZoom
-	queue_redraw()
+
 
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port

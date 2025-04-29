@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://mqqrbhnagjvi"]
+
+[ext_resource type="Script" uid="uid://b6ekpg378n2t4" path="res://Scripts/Simulation_Manager.gd" id="1_xhptf"]
+[ext_resource type="Script" uid="uid://y3n150pxvn15" path="res://Scripts/SimulationManageC.cs" id="2_hmp7x"]
+
+[node name="SimulationManager" type="Node"]
+script = ExtResource("1_xhptf")
+
+[node name="SimulationManageC#" type="Node" parent="."]
+script = ExtResource("2_hmp7x")

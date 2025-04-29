@@ -1,38 +1,47 @@
 shader_type canvas_item;
 
+// Color textures
+uniform sampler2D GroundTexture: repeat_enable, filter_nearest_mipmap_anisotropic;
+uniform sampler2D GroundTextureMask: repeat_enable, filter_nearest_mipmap_anisotropic;
+uniform sampler2D GroundTexture2: repeat_enable, filter_nearest_mipmap_anisotropic;
 
 // Noise texture
-uniform sampler2D GroundTexture: repeat_enable, filter_nearest;
-uniform sampler2D GroundNormalTexture: hint_normal, filter_nearest, repeat_enable;
+uniform sampler2D NoiseTexture: repeat_enable, filter_nearest_mipmap_anisotropic;  // Add noise texture
+
+// Normal texture
+uniform sampler2D GroundNormalTexture: hint_normal, filter_nearest_mipmap_anisotropic, repeat_enable;
+uniform sampler2D GroundNormal2Texture: hint_normal, filter_nearest_mipmap_anisotropic, repeat_enable;
+uniform float NormalD = 1.0;
+
 // Custom offset for camera movement
 uniform vec2 offset;
-uniform vec2 Scale;
-
-float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-}
-
-float noise(vec2 p) {
-    vec2 i = floor(p);
-    vec2 f = fract(p);
-    float a = hash(i);
-    float b = hash(i + vec2(1.0, 0.0));
-    float c = hash(i + vec2(0.0, 1.0));
-    float d = hash(i + vec2(1.0, 1.0));
-    vec2 u = f * f * (3.0 - 2.0 * f);
-    return mix(a, b, u.x) + (c - a)*(1.0 - u.y) + (d - b)*u.x*u.y;
-}
+uniform vec2 Scale1;
+uniform vec2 Scale2;
 
 void fragment() {
-    vec2 uv = (UV + offset) * Scale;
-    float patternNoise = noise(uv * 5.0); // Adjust scale
+    // Scale the UVs for the main textures
+    vec2 uv1 = (UV + offset) * Scale1;
+	vec2 uv2 = (UV + offset) * Scale2;
+	vec2 uvnoise = UV + offset;
+    // Sample noise texture
+	//float t = abs(1.0 - texture(GroundTextureMask, uv).r) * 5.0;
+	
+	//float texColormask = clamp(t, 0.0, 1.0);
+    float patternNoise = texture(NoiseTexture, uvnoise).r; // Sample red channel for noise; adjust scale as needed
+	
+    // Normalize noise to [0, 1] if necessary
+    // patternNoise = (patternNoise + 1.0) / 2.0; // Uncomment if your noise texture has values in range [-1, 1]
+	
+    // Sample colors from the textures
+    vec4 texColor1 = texture(GroundTexture, uv1);
+    vec4 texColor2 = texture(GroundTexture2, uv2);
+	
+	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
+	vec3 texNormal2 = clamp(texture(GroundNormal2Texture, uv2).rgb * patternNoise, vec3(0,0,0), vec3(1.0,1.0,1.0));
+    // Blend colors based on sampled noise
+    COLOR = mix(texColor1, texColor2, patternNoise);
+	//COLOR = t;
+	NORMAL_MAP = mix(texNormal1, texNormal2, patternNoise);
 
-    vec4 texColor1 = texture(GroundTexture, uv);
-    vec4 texColor2 = texture(GroundTexture, uv + vec2(0.05, 0.05)); // Offset texture
-
-    COLOR = mix(texColor1, texColor2, patternNoise); // Blend based on noise
-
-    vec4 normalTex = texture(GroundNormalTexture, uv);
-    NORMAL_MAP = normalTex.xyz;
-    NORMAL_MAP_DEPTH = normalTex.x;
+    NORMAL_MAP_DEPTH = NormalD;
 }

@@ -41,5 +41,5 @@ Tier = 1
 ItemName = "EcoDrive-250 \"Sustain\""
 ItemDesc = "Sustain enhances fuel efficiency features while allowing for moderate improvements in speed. Utilizing advanced energy management systems, Sustain is perfect for tactical retreats or slow reconnaissance missions, conserving resources while maintaining operational readiness."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_rjcvh")]([ExtResource("1_h3l1d")])
+CardProviding = Array[ExtResource("2_rjcvh")]([ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d")])
 CanTransfer = false

@@ -36,6 +36,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if (SimPaused):
 		return
+	
+	CheckAlarm()
+	
+	ProcessLODList()
+	
 	$BeehaveTree.Process_Tree()
 	for g in Fleet:
 		if (!g.Lodded):

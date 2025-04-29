@@ -31,7 +31,6 @@ BuffVisual = ExtResource("8_bwlgq")
 UIEventH = ExtResource("5_6jbgu")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

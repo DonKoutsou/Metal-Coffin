@@ -2,7 +2,7 @@ shader_type canvas_item;
 //render_mode unshaded; // optional
 
 // Noise texture
-uniform sampler2D noise_texture: repeat_enable, filter_nearest;
+uniform sampler2D noise_texture: repeat_enable, filter_nearest_mipmap_anisotropic;
 // Fog density
 uniform float density: hint_range(0.0, 3.0) = 0.25;
 // Fog speed

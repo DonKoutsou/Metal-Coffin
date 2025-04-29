@@ -30,7 +30,7 @@ func _on_load_pressed() -> void:
 
 func On_Credits_Pressed() -> void:
 	SpawnedCredits = CreditsScene.instantiate()
-	add_child(SpawnedCredits)
+	$CanvasLayer.add_child(SpawnedCredits)
 
 
 #func LoopAmp() -> void:

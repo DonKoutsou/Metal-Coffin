@@ -174,7 +174,8 @@ func EnteredScreen() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
 	ShipIcon.add_to_group("UnmovableMapInfo")
 	add_to_group("ZoomAffected")
-	UpdateCameraZoom(ShipCamera.GetInstance().zoom.x)
+	UpdateCameraZoom(Map.GetCameraZoom())
+
 func ExitedScreen() -> void:
 	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
 	ShipIcon.remove_from_group("UnmovableMapInfo")

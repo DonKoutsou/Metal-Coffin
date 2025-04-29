@@ -41,5 +41,5 @@ Tier = 1
 ItemName = "EN-100"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_trv85")]([ExtResource("1_bifgn")])
+CardProviding = Array[ExtResource("2_trv85")]([ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("1_bifgn")])
 CanTransfer = false

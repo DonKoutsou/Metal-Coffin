@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy1ohrkbe4n1e"]
+
+[ext_resource type="Script" uid="uid://cwsqpf7lee1hv" path="res://Scenes/Cards/SegmentedBar/segmented_hp.gd" id="1_f4xkd"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_f37qp"]
+[ext_resource type="PackedScene" uid="uid://bogrgwq53r7oo" path="res://Scenes/Cards/SegmentedBar/Segment.tscn" id="2_yg37y"]
+
+[node name="SegmentedHP" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 6)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -3.0
+offset_right = 90.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_f37qp")
+script = ExtResource("1_f4xkd")
+SegmentScene = ExtResource("2_yg37y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1

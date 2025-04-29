@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=13 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Texture2D" uid="uid://biimea34gc828" path="res://Assets/Cards/RadarBuff.png" id="2_58ae4"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
+[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
 content_margin_left = 4.0
@@ -28,9 +29,9 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
 border_width_left = 2
-border_width_top = 2
+border_width_top = 42
 border_width_right = 2
-border_width_bottom = 85
+border_width_bottom = 105
 border_color = Color(1, 0.763983, 0.0812772, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -47,9 +48,9 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 border_width_left = 2
-border_width_top = 2
+border_width_top = 42
 border_width_right = 2
-border_width_bottom = 85
+border_width_bottom = 105
 border_color = Color(0.066982, 0.133257, 0.137998, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -85,9 +86,9 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
 border_width_left = 2
-border_width_top = 2
+border_width_top = 42
 border_width_right = 2
-border_width_bottom = 85
+border_width_bottom = 105
 border_color = Color(1, 0.763983, 0.0812772, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -102,7 +103,7 @@ _data = [Vector2(0, 0.431387), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_58ae4"]
-offsets = PackedFloat32Array(0, 0.102293, 1)
+offsets = PackedFloat32Array(0, 0.0423892, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4r8q"]
@@ -120,17 +121,17 @@ shadow_size = 8
 anti_aliasing_size = 2.0
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(200, 256)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -100.0
-offset_right = 96.0
-offset_bottom = 100.0
+offset_left = -100.0
+offset_top = -128.0
+offset_right = 100.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(96, 100)
@@ -138,10 +139,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_vr3r8")
-CardName = NodePath("Label")
+CardName = NodePath("VBoxContainer/HBoxContainer/Label")
 CardDesc = NodePath("VBoxContainer/CardDesc")
-CardCost = NodePath("CardCost")
-CardTex = NodePath("VBoxContainer/HBoxContainer/CardText")
+CardCost = NodePath("VBoxContainer/HBoxContainer/CardCost")
+CardTex = NodePath("VBoxContainer/CardText")
 
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
 show_behind_parent = true
@@ -164,42 +165,6 @@ icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[node name="CardCost" type="Label" parent="."]
-modulate = Color(1, 0.763983, 0.0812772, 1)
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -15.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = 22.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-size_flags_vertical = 1
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
-text = "1"
-horizontal_alignment = 2
-autowrap_mode = 2
-
-[node name="Label" type="Label" parent="."]
-visible = false
-custom_minimum_size = Vector2(0, 41)
-layout_mode = 2
-offset_left = 98.0
-offset_top = 38.0
-offset_right = 187.0
-offset_bottom = 79.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 18
-text = "Incindiary Barrage"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -216,11 +181,49 @@ theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 1.37
 mouse_filter = 2
+theme_override_constants/separation = 18
 
-[node name="CardText" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="CardCost" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/CardCost"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -60.0
+offset_right = 28.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_rd7hj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 41)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Incindiary Barrage"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CardText" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -261,6 +264,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Line2D" type="Line2D" parent="."]
+z_index = 1
 position = Vector2(100, 125)
 points = PackedVector2Array(0, 0, 0, 0)
 width_curve = SubResource("Curve_58ae4")
@@ -273,10 +277,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -112.0
-offset_right = 16.0
-offset_bottom = -88.0
+offset_left = -2.0
+offset_top = 103.0
+offset_right = 30.0
+offset_bottom = 127.0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4r8q")
 
@@ -288,4 +292,6 @@ text = "11x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="OnButtonPressed"]

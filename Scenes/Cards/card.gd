@@ -109,3 +109,16 @@ func GetCost() -> int:
 	#if (CStats.SelectedOption != null):
 		#return Cost + CStats.SelectedOption.EnergyAdd
 	return Cost
+
+
+func _on_button_mouse_entered() -> void:
+	if ($Button.disabled):
+		return
+	z_index = 1
+
+
+
+func _on_button_mouse_exited() -> void:
+	if ($Button.disabled):
+		return
+	z_index = 0
