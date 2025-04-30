@@ -46,6 +46,7 @@ scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
 [node name="CardFightShipViz" type="Control" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel")]
+z_index = 1
 custom_minimum_size = Vector2(180, 86)
 layout_mode = 3
 anchors_preset = 8
@@ -69,6 +70,7 @@ StatLabel = NodePath("HBoxContainer/RichTextLabel")
 FriendlyPanel = NodePath("Panel")
 
 [node name="Panel" type="Panel" parent="."]
+z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,7 +111,6 @@ text_direction = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -121,9 +122,10 @@ autowrap_mode = 1
 
 [node name="Control" type="Control" parent="HBoxContainer/VBoxContainer"]
 show_behind_parent = true
+z_index = -1
 custom_minimum_size = Vector2(50, 35)
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 6
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/Control"]
 custom_minimum_size = Vector2(52, 64)
@@ -143,8 +145,8 @@ rotation = -1.5708
 pivot_offset = Vector2(26, 32)
 mouse_filter = 2
 texture = ExtResource("3_mg5jy")
-expand_mode = 1
-stretch_mode = 6
+expand_mode = 2
+stretch_mode = 3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/Control"]
 position = Vector2(24, 16)

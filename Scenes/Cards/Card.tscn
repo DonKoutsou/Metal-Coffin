@@ -116,11 +116,11 @@ corner_detail = 4
 anti_aliasing_size = 2.0
 
 [sub_resource type="Curve" id="Curve_58ae4"]
-_data = [Vector2(0, 0.431387), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.245536), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_58ae4"]
-offsets = PackedFloat32Array(0, 0.0423892, 1)
+offsets = PackedFloat32Array(0, 0.0208333, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4r8q"]
@@ -294,7 +294,7 @@ use_parent_material = true
 layout_mode = 2
 
 [node name="Line2D" type="Line2D" parent="."]
-z_index = 1
+z_index = 2
 position = Vector2(100, 125)
 points = PackedVector2Array(0, 0, 0, 0)
 width_curve = SubResource("Curve_58ae4")

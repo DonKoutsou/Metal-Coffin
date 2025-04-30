@@ -56,6 +56,9 @@ glow_mix = 0.825
 glow_bloom = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
+adjustment_brightness = 0.9
+adjustment_contrast = 1.02
+adjustment_saturation = 1.2
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
 
 [sub_resource type="World3D" id="World3D_f2au4"]
@@ -84,7 +87,7 @@ shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_hn1mp")
 shader_parameter/GroundNormalTexture = ExtResource("23_f2au4")
 shader_parameter/GroundNormal2Texture = ExtResource("22_hn1mp")
 shader_parameter/NormalD = 1.0
-shader_parameter/offset = Vector2(0, 0)
+shader_parameter/offset = Vector2(0.865, -1.8)
 shader_parameter/Scale1 = Vector2(2.5, 2.5)
 shader_parameter/Scale2 = Vector2(5, 5)
 
@@ -258,7 +261,6 @@ theme_override_constants/separation = -5
 alignment = 1
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
-z_index = 1
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -313,9 +315,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 mouse_filter = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="PlayerCardPlacement" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -84
+alignment = 1
+
 [node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
 z_index = 1
 layout_mode = 2
+theme_override_constants/separation = -12
 alignment = 1
 
 [node name="SegmentedHP" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer" instance=ExtResource("21_taaw1")]
@@ -328,18 +345,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("14_kl7fj")
 text = "End Turn"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PlayerCardPlacement" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = -84
-alignment = 1
 
 [node name="ShipSpacer" type="Control" parent="SubViewport/Control2/VBoxContainer4"]
 visible = false

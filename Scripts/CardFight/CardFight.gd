@@ -100,19 +100,19 @@ func _ready() -> void:
 	EnergyBar.Init(10)
 	
 	
-	for g in 10:
-		EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-	for g in 10:
-		PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#for g in 10:
+		#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in 10:
+		#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
-	
-	for g in MaxCombatants:
+	var EnReservesAmm : int = EnemyReserves.size()
+	for g in min(MaxCombatants, EnReservesAmm):
 		var NewCombatant = EnemyReserves.pick_random()
 		EnemyCombatants.append(NewCombatant)
 		EnemyReserves.erase(NewCombatant)
-	
-	for g in MaxCombatants:
+	var PlReservesAmm : int = PlayerReserves.size()
+	for g in min(MaxCombatants, PlReservesAmm):
 		var NewCombatant = PlayerReserves.pick_random()
 		PlayerCombatants.append(NewCombatant)
 		PlayerReserves.erase(NewCombatant)
@@ -796,7 +796,7 @@ func BuffShip(Ship : BattleShipStats, Amm : float) -> void:
 	UpdateShipStats(Ship)
 
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
-	return PlayerCombatants.has(Ship)
+	return PlayerCombatants.has(Ship) or PlayerReserves.has(Ship)
 
 func TrySetFire() -> bool:
 	randomize()
@@ -873,8 +873,13 @@ func PlayerActionSelectionEnded() -> void:
 
 func RestartCards() -> void:
 	ClearCards()
-	
+
 	var D = PlayerDecks[ShipTurns[CurrentTurn]]
+	
+	if (D.DeckPile.size() == 0):
+		D.DeckPile.append_array(D.DiscardPile)
+		D.DiscardPile.clear()
+		
 	var C = D.DeckPile.pick_random()
 	D.Hand.append(C)
 	D.DeckPile.erase(C)
@@ -1001,40 +1006,49 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	
 	ActionList.AddAction(CurrentShip, ShipAction)
 	
+	var Consumed : bool = false
 	#if (C.CStats is OffensiveCardStats):
 	if (C.CStats.Consume):
 		var ShipCards = ShipTurns[CurrentTurn].Cards
 		ShipCards[C.CStats] -= 1
 		if (ShipCards[C.CStats] == 0):
 			ShipCards.erase(C.CStats)
+			
+		Consumed = true
 	if (C.CStats.SelectedOption != null):
 		if (C.CStats.SelectedOption.CauseConsumption):
 			var Ammo = ShipTurns[CurrentTurn].Ammo
 			Ammo[C.CStats.SelectedOption] -= 1
 			if (Ammo[C.CStats.SelectedOption] == 0):
 				Ammo.erase(C.CStats.SelectedOption)
+				
+			Consumed = true
 	
 	var deck = PlayerDecks[ShipTurns[CurrentTurn]]
 	deck.Hand.erase(C.CStats)
-	deck.DiscardPile.append(C.CStats)
+	if (!Consumed):
+		deck.DiscardPile.append(C.CStats)
 	#DoCardPlecementAnimation(c, C.global_position)
 	call_deferred("DoCardPlecementAnimation", c, C.global_position)
-	UpdateHandCards()
+	C.queue_free()
+	#UpdateHandCards()
 	#PerformAction(CurrentShip, ShipAction)
 	
 
 func RemoveCard(C : Card, _Option : CardOption) -> void:
 	if (SelectingTarget):
 		return
-		
+	
+	C.disconnect("OnCardPressed", RemoveCard)
+	
 	var S = DeletableSoundGlobal.new()
 	S.stream = RemoveCardSound
 	S.autoplay = true
 	add_child(S)
 	S.volume_db = -10
 	
-	C.KillCard()
-	#if (C.CStats is OffensiveCardStats):
+	var Consumed : bool = false
+	
 	if (C.CStats.Consume):
 		var ShipCards = ShipTurns[CurrentTurn].Cards
 		var HasCard = false
@@ -1046,7 +1060,7 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 				break
 		if (!HasCard):
 			ShipCards[C.CStats] = 1
-
+		Consumed = true
 	if (C.CStats.SelectedOption != null):
 		if (C.CStats.SelectedOption.CauseConsumption):
 			var Ammo = ShipTurns[CurrentTurn].Ammo
@@ -1054,7 +1068,8 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 				Ammo[C.CStats.SelectedOption] = 1
 			else:
 				Ammo[C.CStats.SelectedOption] += 1
-			
+				
+			Consumed = true
 	var CurrentShip = ShipTurns[CurrentTurn]
 	
 	ActionList.RemoveActionFromShip(CurrentShip, C.CStats)
@@ -1063,9 +1078,18 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 	
 	var D = PlayerDecks[ShipTurns[CurrentTurn]]
 	D.Hand.append(C.CStats)
-	D.DiscardPile.erase(C.CStats)
-	UpdateHandCards()
+	if (!Consumed):
+		D.DiscardPile.erase(C.CStats)
+	
+	#UpdateHandCards()
+	var c = CardScene.instantiate() as Card
+	c.SetCardStats(C.CStats, [])
+	c.connect("OnCardPressed", OnCardSelected)
 
+	PlayerCardPlecement.add_child(c)
+	call_deferred("DoCardPlecementAnimation", c, C.global_position)
+	
+	C.queue_free()
 
 var EnergyBarTween : Tween
 func UpdateEnergy(NewEnergy : float) -> void:

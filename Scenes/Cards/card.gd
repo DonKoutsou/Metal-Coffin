@@ -34,14 +34,15 @@ func CompactCard() -> void:
 	#position.y += size.y - 85
 	set_anchors_preset(Control.PRESET_CENTER)
 
-func KillCard() -> void:
+func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 	var KillTw = create_tween()
 	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	var mat = material as ShaderMaterial
-	KillTw.tween_method(UpdateShader, 1.0, 0.0,1)
+	KillTw.tween_method(UpdateShader, 1.0, 0.0,CustomTime)
 	#KillTw.tween_property(mat, "dissolve_value", 0, 0.2)
 	await KillTw.finished
-	queue_free()
+	if (Free):
+		queue_free()
 
 func UpdateShader(Value : float) -> void:
 	var mat = material as ShaderMaterial
@@ -78,16 +79,16 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption], Amm : int = 0)
 	CardDesc.text = DescText
 	
 	CardCost.text = var_to_str(Cost)
-	for g in Stats.Options:
-		var OptionBut = Button.new()
-		OptionBut.text = g.OptionName
-		$PanelContainer/HBoxContainer.add_child(OptionBut)
-		OptionBut.connect("pressed", OnOptionSelected.bind(g))
-	for g in Options:
-		var OptionBut = Button.new()
-		OptionBut.text = g.OptionName
-		$PanelContainer/HBoxContainer.add_child(OptionBut)
-		OptionBut.connect("pressed", OnOptionSelected.bind(g))
+	#for g in Stats.Options:
+		#var OptionBut = Button.new()
+		#OptionBut.text = g.OptionName
+		#$PanelContainer/HBoxContainer.add_child(OptionBut)
+		#OptionBut.connect("pressed", OnOptionSelected.bind(g))
+	#for g in Options:
+		#var OptionBut = Button.new()
+		#OptionBut.text = g.OptionName
+		#$PanelContainer/HBoxContainer.add_child(OptionBut)
+		#OptionBut.connect("pressed", OnOptionSelected.bind(g))
 
 func OnButtonPressed() -> void:
 	#if ($PanelContainer/HBoxContainer.get_child_count() > 0 and CStats.SelectedOption == null):

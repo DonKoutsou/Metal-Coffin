@@ -20,8 +20,8 @@ var DrawPositions2 : Dictionary
 
 var DrawnLine : bool = false
 
-var AtC
-var DefC
+var AtC : Card
+var DefC : Card
 var IcPos : Vector2
 var Targets : Array[Control]
 #var Ic2Pos : Vector2
@@ -117,10 +117,11 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 func SpawnVisual(Target : Control, Damage : float) -> void:
 	await wait (0.15)
 	
-	var tw = create_tween()
-	tw.set_ease(Tween.EASE_IN)
-	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(AtC, "scale", Vector2.ZERO, 0.5)
+	#var tw = create_tween()
+	#tw.set_ease(Tween.EASE_IN)
+	#tw.set_trans(Tween.TRANS_QUAD)
+	#tw.tween_property(AtC, "scale", Vector2.ZERO, 0.5)
+	AtC.KillCard(0.5, false)
 	
 	var Visual = AtackVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -134,10 +135,11 @@ func SpawnVisual(Target : Control, Damage : float) -> void:
 func SpawnShieldVisual(Target : Control) -> void:
 	await wait (0.15)
 	
-	var tw = create_tween()
-	tw.set_ease(Tween.EASE_IN)
-	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
+	#var tw = create_tween()
+	#tw.set_ease(Tween.EASE_IN)
+	#tw.set_trans(Tween.TRANS_QUAD)
+	#tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
+	DefC.KillCard(0.5, false)
 	
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -149,10 +151,11 @@ func SpawnShieldVisual(Target : Control) -> void:
 func SpawnUpVisual(Target : Control) -> void:
 	await wait (0.4)
 	
-	var tw = create_tween()
-	tw.set_ease(Tween.EASE_IN)
-	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
+	#var tw = create_tween()
+	#tw.set_ease(Tween.EASE_IN)
+	#tw.set_trans(Tween.TRANS_QUAD)
+	#tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
+	DefC.KillCard(0.5, false)
 	
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -189,6 +192,7 @@ func TweenEnded(Damage : float) -> void:
 		add_child(d)
 		d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2
 		d.connect("Ended", AnimEnded)
+		DefC.KillCard(0.5, false)
 		
 		var ShieldEff = DefVisual.instantiate() as BurstParticleGroup2D
 		add_child(ShieldEff)

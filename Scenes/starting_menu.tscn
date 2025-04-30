@@ -524,7 +524,7 @@ offset_bottom = -109.0
 color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(623, 234)
+position = Vector2(618, 386)
 blend_mode = 2
 range_z_max = -1
 texture = ExtResource("15_7x35f")

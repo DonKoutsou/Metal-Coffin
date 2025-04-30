@@ -37,7 +37,8 @@ void fragment() {
     vec4 texColor2 = texture(GroundTexture2, uv2);
 	
 	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
-	vec3 texNormal2 = clamp(texture(GroundNormal2Texture, uv2).rgb * patternNoise, vec3(0,0,0), vec3(1.0,1.0,1.0));
+	vec3 texNormal2 = texture(GroundNormal2Texture, uv2).rgb;
+	texNormal2.b = clamp(texNormal2.b + patternNoise, 0, 1);
     // Blend colors based on sampled noise
     COLOR = mix(texColor1, texColor2, patternNoise);
 	//COLOR = t;
