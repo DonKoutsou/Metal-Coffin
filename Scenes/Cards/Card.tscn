@@ -1,9 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=17 format=3 uid="uid://b4yumrb4c0xyd"]
 
+[ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="1_7mr5f"]
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
 [ext_resource type="Texture2D" uid="uid://biimea34gc828" path="res://Assets/Cards/RadarBuff.png" id="2_58ae4"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_n60qq"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3yyhe"]
+noise = SubResource("FastNoiseLite_7mr5f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3yyhe"]
+resource_local_to_scene = true
+shader = ExtResource("1_7mr5f")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
 content_margin_left = 4.0
@@ -38,7 +59,6 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 4
-shadow_size = 5
 anti_aliasing_size = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mr5f"]
@@ -58,7 +78,6 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 4
 shadow_color = Color(0, 0, 0, 1)
-shadow_size = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yyhe"]
 content_margin_left = 8.0
@@ -77,7 +96,6 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 4
-shadow_size = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh81d"]
 content_margin_left = 8.0
@@ -95,7 +113,6 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 4
-shadow_size = 10
 anti_aliasing_size = 2.0
 
 [sub_resource type="Curve" id="Curve_58ae4"]
@@ -121,6 +138,7 @@ shadow_size = 8
 anti_aliasing_size = 2.0
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
+material = SubResource("ShaderMaterial_3yyhe")
 custom_minimum_size = Vector2(200, 256)
 layout_mode = 3
 anchors_preset = 8
@@ -144,8 +162,22 @@ CardDesc = NodePath("VBoxContainer/CardDesc")
 CardCost = NodePath("VBoxContainer/HBoxContainer/CardCost")
 CardTex = NodePath("VBoxContainer/CardText")
 
+[node name="Panel" type="Panel" parent="."]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4v2x1")
+
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
-show_behind_parent = true
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,6 +198,7 @@ vertical_icon_alignment = 2
 expand_icon = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,11 +213,13 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 10
 
 [node name="CardCost" type="Label" parent="VBoxContainer/HBoxContainer"]
+use_parent_material = true
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -197,6 +232,7 @@ autowrap_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/CardCost"]
 show_behind_parent = true
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -215,6 +251,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+use_parent_material = true
 custom_minimum_size = Vector2(0, 41)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -224,6 +261,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CardText" type="TextureRect" parent="VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -233,6 +271,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -251,17 +290,8 @@ vertical_alignment = 1
 visible_characters_behavior = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("2_n60qq")
-
-[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-alignment = 1
 
 [node name="Line2D" type="Line2D" parent="."]
 z_index = 1
@@ -273,6 +303,7 @@ end_cap_mode = 2
 round_precision = 2
 
 [node name="Amm" type="PanelContainer" parent="."]
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -285,6 +316,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4r8q")
 
 [node name="Label" type="Label" parent="Amm"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 14

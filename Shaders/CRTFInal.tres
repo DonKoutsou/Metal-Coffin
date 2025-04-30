@@ -5,14 +5,14 @@
 [resource]
 shader = ExtResource("1_wo0vq")
 shader_parameter/res = Vector2(792, 509)
-shader_parameter/mask_type = 1
+shader_parameter/mask_type = 0
 shader_parameter/vignette_strength = 1.0
-shader_parameter/image_flicker = 0.2
+shader_parameter/image_flicker = 0.1
 shader_parameter/skip = 0.01
 shader_parameter/hardScan = -1.0
 shader_parameter/hardPix = 0.0
 shader_parameter/warp = Vector2(16.52, 19.265)
-shader_parameter/maskDark = 0.0
+shader_parameter/maskDark = 0.5
 shader_parameter/maskLight = 1.0
 shader_parameter/scanlines_opacity = 0.04
 shader_parameter/scanlines_speed = 0.43

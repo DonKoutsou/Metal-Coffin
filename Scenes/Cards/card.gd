@@ -37,15 +37,20 @@ func CompactCard() -> void:
 func KillCard() -> void:
 	var KillTw = create_tween()
 	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	KillTw.tween_property(self, "modulate", Color(1,1,1,0), 0.2)
+	var mat = material as ShaderMaterial
+	KillTw.tween_method(UpdateShader, 1.0, 0.0,1)
+	#KillTw.tween_property(mat, "dissolve_value", 0, 0.2)
 	await KillTw.finished
 	queue_free()
+
+func UpdateShader(Value : float) -> void:
+	var mat = material as ShaderMaterial
+	mat.set_shader_parameter("dissolve_value", Value)
 
 func _ready() -> void:
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf($Button)
-	$PanelContainer.visible = false
 	set_physics_process(TargetLoc != Vector2.ZERO)
 	$Line2D.visible = TargetLoc != Vector2.ZERO
 
@@ -63,7 +68,7 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption], Amm : int = 0)
 		CardName.text = Stats.CardName
 		CardTex.texture = Stats.Icon
 	
-	$Amm.visible = Amm != 0
+	$Amm.visible = Amm > 1
 	$Amm/Label.text = var_to_str(Amm) + "x"
 	#var DescText =  "[center]{0}".format([Stats.CardDescription])
 	#CardDesc.visible_ratio = 0
@@ -85,13 +90,13 @@ func SetCardStats(Stats : CardStats, Options : Array[CardOption], Amm : int = 0)
 		OptionBut.connect("pressed", OnOptionSelected.bind(g))
 
 func OnButtonPressed() -> void:
-	if ($PanelContainer/HBoxContainer.get_child_count() > 0 and CStats.SelectedOption == null):
-		if ($PanelContainer/HBoxContainer.get_child_count() == 1):
-			OnCardPressed.emit(self, CStats.Options[0])
-			return
-		$PanelContainer.visible = true
-	else:
-		OnCardPressed.emit(self, null)
+	#if ($PanelContainer/HBoxContainer.get_child_count() > 0 and CStats.SelectedOption == null):
+		#if ($PanelContainer/HBoxContainer.get_child_count() == 1):
+			#OnCardPressed.emit(self, CStats.Options[0])
+			#return
+		#$PanelContainer.visible = true
+	#else:
+	OnCardPressed.emit(self, null)
 
 func Dissable() -> void:
 	$Button.disabled = true
@@ -110,15 +115,25 @@ func GetCost() -> int:
 		#return Cost + CStats.SelectedOption.EnergyAdd
 	return Cost
 
+var TweenHover : Tween
 
 func _on_button_mouse_entered() -> void:
 	if ($Button.disabled):
 		return
 	z_index = 1
-
+	
+	if (TweenHover and TweenHover.is_running()):
+		TweenHover.kill()
+	
+	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
+	TweenHover.tween_property(self,"scale", Vector2(1.2, 1.2), 0.55)
 
 
 func _on_button_mouse_exited() -> void:
 	if ($Button.disabled):
 		return
 	z_index = 0
+	if (TweenHover and TweenHover.is_running()):
+		TweenHover.kill()
+	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.55)

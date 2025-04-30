@@ -1,0 +1,67 @@
+extends Control
+
+class_name CardFightShipViz2
+
+@export var ShipNameLabel : Label
+@export var ShipIcon : TextureRect
+@export var StatLabel : RichTextLabel
+@export var FriendlyPanel : Panel
+
+const StatText = "[color=#ffc315]HULL[/color] : {0}\n[color=#ffc315]SLD[/color] : {1}\n[color=#ffc315]SPD[/color] : {2}\n[color=#ffc315]FPWR[/color] : {3}"
+
+func _ready() -> void:
+	#$Panel.visible = false
+	ToggleFire(false)
+
+func SetStats(S : BattleShipStats, Friendly : bool) -> void:
+	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipIcon.texture = S.ShipIcon
+	var Hull = var_to_str(snapped(S.Hull, 0.1)).replace(".0", "")
+	var Shield = var_to_str(snapped(S.Shield, 0.1)).replace(".0", "")
+	var Speed = var_to_str(snapped(S.Speed, 0.1)).replace(".0", "")
+	var Firep = var_to_str(snapped(S.GetFirePower(), 0.1)).replace(".0", "")
+	if (S.FirePowerBuff > 0):
+		Firep = "[color=#308a4d]" + Firep + "[/color]"
+	StatLabel.text = StatText.format([Hull, Shield, Speed, Firep])
+	ShipIcon.flip_v = !Friendly
+	if (Friendly):
+		$HBoxContainer.move_child($HBoxContainer/RichTextLabel, 0)
+	else:
+		$HBoxContainer.move_child($HBoxContainer/RichTextLabel, 1)
+	FriendlyPanel.visible = false
+	
+func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
+	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipIcon.texture = S.ShipIcon
+	FriendlyPanel.visible = Friendly
+
+func Dissable() -> void:
+	FriendlyPanel.visible = false
+
+func Enable() -> void:
+	FriendlyPanel.visible = true
+	var tw = create_tween()
+	#tw.set_trans(Tween.TRANS_CIRC)
+	tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,0), 1)
+	tw.tween_callback(TweenEnded)
+
+func TweenEnded() -> void:
+	var tw = create_tween()
+	#tw.set_trans(Tween.TRANS_CIRC)
+	if (FriendlyPanel.modulate == Color(1,1,1,0)):
+		tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,1), 1)
+	else:
+		tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,0), 1)
+	tw.tween_callback(TweenEnded)
+
+func ToggleFire(t : bool) -> void:
+	$HBoxContainer/VBoxContainer/Control/GPUParticles2D.visible = t
+
+func IsOnFire() -> bool:
+	return $HBoxContainer/VBoxContainer/Control/GPUParticles2D.visible
+
+func ShipDestroyed() -> void:
+	var tw = create_tween()
+	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
+	await tw.finished
+	queue_free()

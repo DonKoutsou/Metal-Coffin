@@ -8,6 +8,8 @@ func GetList() -> Dictionary:
 	return List
 
 func GetShipsActions(Ship : BattleShipStats) -> Array:
+	if (!List.keys().has(Ship)):
+		return []
 	return List[Ship]
 
 func AddAction(Instigator : BattleShipStats, Action : CardFightAction) -> void:

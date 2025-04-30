@@ -16,7 +16,7 @@ Damage = 10.0
 Accuracy = 0.0
 Icon = ExtResource("2_vjf7b")
 CardName = "Heat Seeking Missile"
-CardDescription = "Throws a missile to enemy.[p][center][color=#c19200]DMG = 10 * FPWR"
+CardDescription = "Throws a missile to enemy."
 Energy = 3
 Options = Array[ExtResource("3_ffuhs")]([])
 AllowDuplicates = true
@@ -24,3 +24,4 @@ Consume = true
 RequiredPart = Array[ExtResource("4_oxogx")]([ExtResource("5_af5cy"), ExtResource("6_ycv20"), ExtResource("7_2xhbi")])
 WeapT = 2
 AOE = false
+Tier = 1

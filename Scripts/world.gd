@@ -241,12 +241,13 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 		EBattleStats.append(g.GetBattleStats())
 	var CardF = CardFightScene.instantiate() as Card_Fight
 	CardF.connect("CardFightEnded", CardFightEnded)
-	CardF.PlayerShips = FBattleStats
-	CardF.EnemyShips = EBattleStats
+	CardF.PlayerReserves = FBattleStats
+	CardF.EnemyReserves = EBattleStats
 	SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
 	GetMap().GetScreenUi().ToggleFullScreen(true)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
+	
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()

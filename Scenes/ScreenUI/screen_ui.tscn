@@ -855,7 +855,7 @@ visible = false
 color = Color(0.21411, 0.398386, 0.176593, 1)
 energy = 2.71
 blend_mode = 2
-range_layer_max = 1
+range_layer_max = 2
 texture = ExtResource("36_ai3xr")
 texture_scale = 13.0
 
@@ -864,7 +864,7 @@ visible = false
 color = Color(0.851914, 0.187693, 0, 1)
 energy = 1.69
 blend_mode = 2
-range_layer_max = 1
+range_layer_max = 2
 texture = ExtResource("36_ai3xr")
 texture_scale = 13.0
 
@@ -872,7 +872,7 @@ texture_scale = 13.0
 color = Color(1, 0.974189, 0.876833, 1)
 energy = 2.0
 range_z_min = 0
-range_layer_max = 1
+range_layer_max = 2
 texture = ExtResource("36_xl4i0")
 offset = Vector2(0, 850)
 texture_scale = 6.7

@@ -41,7 +41,7 @@ func _ready() -> void:
 	$MultiParticleExample1.burst()
 	await $MultiParticleExample1.Finished
 	$MissileCruise.play()
-	look_at(Target.global_position)
+	look_at(Target.global_position + (Target.size / 2))
 	set_process(true)
 
 func _process(delta: float) -> void:
