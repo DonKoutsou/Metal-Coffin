@@ -27,5 +27,5 @@ Tier = 1
 ItemName = "MG-20 \"Fury\""
 ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("2_arjqo")])
+CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("2_arjqo"), ExtResource("2_arjqo"), ExtResource("2_arjqo"), ExtResource("2_arjqo"), ExtResource("2_arjqo")])
 CanTransfer = false

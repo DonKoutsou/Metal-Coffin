@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://cwoay1furrmi7"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://cwoay1furrmi7"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_5kv6q"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_vlra8"]
 [ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="3_o7sn3"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_nw4kc"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_fgxqn"]
@@ -34,5 +35,5 @@ Tier = 1
 ItemName = "SPT-100"
 ItemDesc = "A light weight fuel tank with reduced size. Constructed from lightweight materials for reliability in combat operations. Finds its uses in smaller and more adgile ships."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_5kv6q")]([])
+CardProviding = Array[ExtResource("1_5kv6q")]([ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("2_vlra8")])
 CanTransfer = false

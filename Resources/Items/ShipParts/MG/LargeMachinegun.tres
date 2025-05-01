@@ -25,5 +25,5 @@ Tier = 1
 ItemName = "MG-30 \"Tempest\""
 ItemDesc = "the elite choice for those requiring ultimate firepower in critical scenarios. Featuring cutting-edge targeting and stabilization technology, 'Tempest' supports continuous and dynamic fire, overwhelming even the staunchest defenses with relentless precision and unmatched rate of fire."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_cejtf")]([ExtResource("2_7no4a")])
+CardProviding = Array[ExtResource("2_cejtf")]([ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("2_7no4a")])
 CanTransfer = false

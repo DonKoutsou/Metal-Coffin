@@ -877,6 +877,14 @@ func PlayerActionSelectionEnded() -> void:
 func RestartCards() -> void:
 	ClearCards()
 
+	UpdateEnergy(10)
+	UpdateHandCards()
+
+	GetShipViz(ShipTurns[CurrentTurn]).Enable()
+	
+	call_deferred("DrawCard")
+
+func DrawCard() -> void:
 	var D = PlayerDecks[ShipTurns[CurrentTurn]]
 	
 	if (D.DeckPile.size() == 0):
@@ -886,11 +894,14 @@ func RestartCards() -> void:
 	var C = D.DeckPile.pick_random()
 	D.Hand.append(C)
 	D.DeckPile.erase(C)
-			
-	UpdateEnergy(10)
-	UpdateHandCards()
+	
+	var c = CardScene.instantiate() as Card
+	c.SetCardStats(C, [])
+	c.connect("OnCardPressed", OnCardSelected)
 
-	GetShipViz(ShipTurns[CurrentTurn]).Enable()
+	PlayerCardPlecement.add_child(c)
+	
+	call_deferred("DoCardPlecementAnimation", c, DeckButton.global_position)
 
 func UpdateHandCards() -> void:
 	for g in PlayerCardPlecement.get_children():
@@ -1191,23 +1202,7 @@ func _on_deck_button_pressed() -> void:
 	
 	UpdateEnergy(Energy - 1)
 	
-	var D = PlayerDecks[ShipTurns[CurrentTurn]]
-	
-	if (D.DeckPile.size() == 0):
-		D.DeckPile.append_array(D.DiscardPile)
-		D.DiscardPile.clear()
-		
-	var C = D.DeckPile.pick_random()
-	D.Hand.append(C)
-	D.DeckPile.erase(C)
-	
-	var c = CardScene.instantiate() as Card
-	c.SetCardStats(C, [])
-	c.connect("OnCardPressed", OnCardSelected)
-
-	PlayerCardPlecement.add_child(c)
-	
-	call_deferred("DoCardPlecementAnimation", c, DeckButton.global_position)
+	DrawCard()
 	
 	
 

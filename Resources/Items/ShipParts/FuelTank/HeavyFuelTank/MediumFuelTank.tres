@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://n1uvu44r7eyd"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://n1uvu44r7eyd"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_okalb"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_x46xi"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_4o074"]
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/LargeFuelTank.tres" id="4_eq04c"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_u32dk"]
@@ -34,5 +35,5 @@ Tier = 2
 ItemName = "FT-1000"
 ItemDesc = "Designed for medium-range missions, this tank offers increased fuel retention. Its triple-layered internal lining adds to its structural integrity."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_okalb")]([])
+CardProviding = Array[ExtResource("1_okalb")]([ExtResource("2_x46xi"), ExtResource("2_x46xi"), ExtResource("2_x46xi"), ExtResource("2_x46xi")])
 CanTransfer = false

@@ -27,5 +27,5 @@ Tier = 1
 ItemName = "MG-10 \"Squall\""
 ItemDesc = "a basic machine gun turret designed for straightforward, high-rate-of-fire engagements. It offers standard round delivery with fundamental targeting precision, providing ships with an entry-level solution for close-range defense and suppression."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_6g1cv")]([ExtResource("1_4mvru")])
+CardProviding = Array[ExtResource("2_6g1cv")]([ExtResource("1_4mvru"), ExtResource("1_4mvru"), ExtResource("1_4mvru"), ExtResource("1_4mvru"), ExtResource("1_4mvru")])
 CanTransfer = false
