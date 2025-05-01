@@ -6,14 +6,15 @@ class_name Card
 @export var CardDesc : RichTextLabel
 @export var CardCost : Label
 @export var CardTex : TextureRect
+@export var Lines : Array[Line2D]
 
-signal OnCardPressed(C : Card, Options : CardOption)
+signal OnCardPressed(C : Card)
 
 var CStats : CardStats
 
 var Cost : int
 
-var TargetLoc : Vector2
+var TargetLocs : Array[Vector2]
 
 var InterpolationValue : float
 
@@ -22,7 +23,8 @@ func _physics_process(delta: float) -> void:
 	UpdateLine()
 
 func UpdateLine() -> void:
-	$Line2D.set_point_position(1, lerp(Vector2.ZERO ,$Line2D.to_local(TargetLoc),InterpolationValue))
+	for g in TargetLocs.size():
+		Lines[g].set_point_position(1, lerp(Vector2.ZERO ,$Line2D.to_local(TargetLocs[g]),InterpolationValue))
 		#draw_line(global_position + size / 2, lerp(global_position + size / 2 ,TargetLoc,InterpolationValue), Color(0.482,0.69,0.705), 5)
 
 func CompactCard() -> void:
@@ -52,8 +54,12 @@ func _ready() -> void:
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf($Button)
-	set_physics_process(TargetLoc != Vector2.ZERO)
-	$Line2D.visible = TargetLoc != Vector2.ZERO
+	for g in TargetLocs.size() - 1:
+		var NewLine = $Line2D.duplicate()
+		add_child(NewLine)
+		Lines.append(NewLine)
+	set_physics_process(TargetLocs.size() > 0)
+	$Line2D.visible = TargetLocs.size() > 0
 
 func SetCardStats(Stats : CardStats, Options : Array[CardOption], Amm : int = 0) -> void:
 	CStats = Stats
@@ -97,7 +103,7 @@ func OnButtonPressed() -> void:
 			#return
 		#$PanelContainer.visible = true
 	#else:
-	OnCardPressed.emit(self, null)
+	OnCardPressed.emit(self)
 
 func Dissable() -> void:
 	$Button.disabled = true
@@ -105,11 +111,11 @@ func Dissable() -> void:
 	if (is_instance_valid(SoundMan)):
 		SoundMan.RemoveSelf($Button)
 	
-func OnOptionSelected(Option : CardOption) -> void:
+#func OnOptionSelected(Option : CardOption) -> void:
 	#var but = get_viewport().gui_get_focus_owner() as Button
 	#Option = but.text
-	$PanelContainer.visible = false
-	OnCardPressed.emit(self, Option)
+	#$PanelContainer.visible = false
+	#OnCardPressed.emit(self, Option)
 
 func GetCost() -> int:
 	#if (CStats.SelectedOption != null):
@@ -127,7 +133,7 @@ func _on_button_mouse_entered() -> void:
 		TweenHover.kill()
 	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
-	TweenHover.tween_property(self,"scale", Vector2(1.2, 1.2), 0.55)
+	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
 
 
 func _on_button_mouse_exited() -> void:

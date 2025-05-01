@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=45 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="25_xdq0f"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="26_reii6"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="29_hn1mp"]
+[ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="30_xdq0f"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="30_yhraa"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
@@ -118,7 +119,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "DeckButton") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "DeckButton", "HandAmmountLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -146,11 +147,14 @@ EnergyBar = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelCon
 EnemyShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/EnemyShipPlecement")
 PlayerShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/PlayerShipPlecement")
 TargetSelect = NodePath("SubViewport/Control2/TargetSelect")
+CardSelect = NodePath("SubViewport/Control2/CardSelect")
 CardSelectContainer = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2")
 ActionDeclaration = NodePath("SubViewport/Control2/Action Declaration")
 ShipSpacer = NodePath("SubViewport/Control2/VBoxContainer4/ShipSpacer")
 DeckButton = NodePath("SubViewport/Control2/DeckButton")
+HandAmmountLabel = NodePath("SubViewport/Control2/Label")
 StartingCardAmm = 4
+MaxCombatants = 4
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -244,7 +248,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
@@ -314,17 +318,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 mouse_filter = 2
 
-[node name="CardPlecement6" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(200, 113.47)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 10
-mouse_filter = 2
-
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 6
 mouse_filter = 2
 
 [node name="PlayerCardPlacement" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer"]
@@ -335,8 +332,42 @@ mouse_filter = 2
 theme_override_constants/separation = -84
 alignment = 1
 
+[node name="CardPlecement1" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PlayerCardPlacement"]
+custom_minimum_size = Vector2(200, 113.47)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CardPlecement2" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PlayerCardPlacement"]
+custom_minimum_size = Vector2(200, 113.47)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CardPlecement3" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PlayerCardPlacement"]
+custom_minimum_size = Vector2(200, 113.47)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CardPlecement4" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PlayerCardPlacement"]
+custom_minimum_size = Vector2(200, 113.47)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CardPlecement5" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PlayerCardPlacement"]
+custom_minimum_size = Vector2(200, 113.47)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
 [node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
-z_index = 1
 layout_mode = 2
 theme_override_constants/separation = -12
 alignment = 1
@@ -363,7 +394,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("ShipVizContainer")]
@@ -408,6 +439,45 @@ columns = 2
 layout_mode = 2
 text = "Cancel Move"
 
+[node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("CardContainer")]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -46.0
+offset_right = 91.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_ial63")
+script = ExtResource("30_xdq0f")
+CardScene = ExtResource("2_5q24q")
+CardContainer = NodePath("VBoxContainer/HBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/CardSelect"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="SubViewport/Control2/CardSelect/VBoxContainer"]
+layout_mode = 2
+text = "Choose A Card To Discard"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/CardSelect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = -60
+
 [node name="Control" type="Control" parent="SubViewport/Control2"]
 z_index = 1
 layout_mode = 3
@@ -423,12 +493,26 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 28.0
-offset_top = -218.0
-offset_right = 184.0
-offset_bottom = -20.0
+offset_left = 13.0
+offset_top = -211.0
+offset_right = 169.0
+offset_bottom = -13.0
 grow_horizontal = 1
 grow_vertical = 0
+
+[node name="Label" type="Label" parent="SubViewport/Control2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = -103.0
+offset_right = 264.0
+offset_bottom = -58.0
+grow_vertical = 0
+pivot_offset = Vector2(41, 22.5)
+text = "In Hand
+3/5"
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewport"]
 color = Color(0, 0, 0, 1)

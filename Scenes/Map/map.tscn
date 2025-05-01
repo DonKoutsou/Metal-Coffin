@@ -171,9 +171,9 @@ TutorialTrigger = ExtResource("9_6an1p")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 76.0
-offset_top = 75.0
-offset_right = -356.0
+offset_left = 80.0
+offset_top = 76.0
+offset_right = -355.0
 offset_bottom = -79.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -189,7 +189,7 @@ handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(848, 566)
+size = Vector2i(845, 565)
 render_target_update_mode = 4
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]

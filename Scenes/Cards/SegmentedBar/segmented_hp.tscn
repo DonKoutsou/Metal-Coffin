@@ -1,8 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy1ohrkbe4n1e"]
+[gd_scene load_steps=5 format=3 uid="uid://cy1ohrkbe4n1e"]
 
 [ext_resource type="Script" uid="uid://cwsqpf7lee1hv" path="res://Scenes/Cards/SegmentedBar/segmented_hp.gd" id="1_f4xkd"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_f37qp"]
 [ext_resource type="PackedScene" uid="uid://bogrgwq53r7oo" path="res://Scenes/Cards/SegmentedBar/Segment.tscn" id="2_yg37y"]
+[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_nvaog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f37qp"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+border_width_left = 2
+border_width_top = 8
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_detail = 2
+shadow_size = 8
+anti_aliasing_size = 2.0
 
 [node name="SegmentedHP" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 6)
@@ -17,7 +33,7 @@ offset_right = 90.0
 offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_f37qp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_f37qp")
 script = ExtResource("1_f4xkd")
 SegmentScene = ExtResource("2_yg37y")
 
@@ -25,3 +41,38 @@ SegmentScene = ExtResource("2_yg37y")
 layout_mode = 2
 theme_override_constants/separation = 1
 alignment = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.0
+offset_top = -25.5
+offset_right = 9.0
+offset_bottom = 11.5
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "1"
+
+[node name="TextureRect" type="TextureRect" parent="Control/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -20.5
+offset_right = 37.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_nvaog")
+expand_mode = 1

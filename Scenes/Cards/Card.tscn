@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=16 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="1_7mr5f"]
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
@@ -61,42 +61,6 @@ corner_radius_bottom_left = 5
 corner_detail = 4
 anti_aliasing_size = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mr5f"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 42
-border_width_right = 2
-border_width_bottom = 105
-border_color = Color(0.066982, 0.133257, 0.137998, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 4
-shadow_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yyhe"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 4
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh81d"]
 content_margin_left = 8.0
 content_margin_top = 8.0
@@ -115,13 +79,30 @@ corner_radius_bottom_left = 5
 corner_detail = 4
 anti_aliasing_size = 2.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mr5f"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 42
+border_width_right = 2
+border_width_bottom = 105
+border_color = Color(0.066982, 0.133257, 0.137998, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 4
+shadow_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Curve" id="Curve_58ae4"]
 _data = [Vector2(0, 0.245536), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_58ae4"]
-offsets = PackedFloat32Array(0, 0.0208333, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.406, 0.854, 0.881, 1, 0.421311, 0.88706, 0.915024, 1)
+[sub_resource type="Gradient" id="Gradient_rd7hj"]
+colors = PackedColorArray(1, 1, 1, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4r8q"]
 content_margin_top = 6.0
@@ -137,7 +118,7 @@ corner_detail = 2
 shadow_size = 8
 anti_aliasing_size = 2.0
 
-[node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex")]
+[node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "Lines")]
 material = SubResource("ShaderMaterial_3yyhe")
 custom_minimum_size = Vector2(200, 256)
 layout_mode = 3
@@ -161,6 +142,7 @@ CardName = NodePath("VBoxContainer/HBoxContainer/Label")
 CardDesc = NodePath("VBoxContainer/CardDesc")
 CardCost = NodePath("VBoxContainer/HBoxContainer/CardCost")
 CardTex = NodePath("VBoxContainer/CardText")
+Lines = [NodePath("Line2D")]
 
 [node name="Panel" type="Panel" parent="."]
 use_parent_material = true
@@ -189,8 +171,8 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 26
 theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_rd7hj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_7mr5f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3yyhe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yh81d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7mr5f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yh81d")
 autowrap_mode = 3
 icon_alignment = 1
@@ -298,7 +280,7 @@ z_index = 2
 position = Vector2(100, 125)
 points = PackedVector2Array(0, 0, 0, 0)
 width_curve = SubResource("Curve_58ae4")
-gradient = SubResource("Gradient_58ae4")
+gradient = SubResource("Gradient_rd7hj")
 end_cap_mode = 2
 round_precision = 2
 

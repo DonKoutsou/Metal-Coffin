@@ -39,6 +39,7 @@ class_name Card_Fight
 @export var EnemyShipVisualPlecement : Control
 @export var PlayerShipVisualPlecement : Control
 @export var TargetSelect : CardFightTargetSelection
+@export var CardSelect : CardFightDiscardSelection
 @export var CardScrollContainer : ScrollContainer
 @export var SelectedCardScrollContainer : ScrollContainer
 @export var EnergyLabel : Label
@@ -46,9 +47,11 @@ class_name Card_Fight
 @export var ActionDeclaration : Control
 @export var ShipSpacer : Control
 @export var DeckButton : Button
+@export var HandAmmountLabel : Label
 @export_group("FightSettings")
 @export var StartingCardAmm : int = 5
 @export var MaxCombatants : int = 5
+@export var TurnEnergy : int = 10
 #Stats kept to show at the end screen
 var DamageDone : float = 0
 var DamageGot : float = 0
@@ -98,14 +101,14 @@ var CardSelectSize : float
 func _ready() -> void:
 	set_physics_process(false)
 	
-	EnergyBar.Init(10)
+	EnergyBar.Init(TurnEnergy)
 	
 	
-	for g in 10:
-		EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-	for g in 10:
-		PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#for g in 10:
+		#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in 10:
+		#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
@@ -134,7 +137,7 @@ func _ready() -> void:
 	#print("Card fight initialised. {0} player ship(s) VS {1} enemy ship(s)".format([PlayerShips.size(), EnemyShips.size()]))
 	
 	DeckButton.visible = false
-	
+	HandAmmountLabel.visible = false
 	call_deferred("StoreContainerSize")
 	
 	call_deferred("RunTurn")
@@ -367,6 +370,7 @@ func RunTurn() -> void:
 	
 	CardSelectContainer.get_child(0).visible = true
 	DeckButton.visible = true
+	HandAmmountLabel.visible = true
 	CurrentTurn = 0
 	
 	for Ship in ShipTurns:
@@ -396,6 +400,7 @@ func RunTurn() -> void:
 	await Tw.finished
 	CardSelectContainer.get_parent().visible = false
 	DeckButton.visible = false
+	HandAmmountLabel.visible = false
 	await DoActionDeclaration("Action Perform Phase")
 	
 	AnimationPlecement.visible = true
@@ -423,7 +428,7 @@ func RunTurn() -> void:
 	call_deferred("RunTurn")
 
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
-	var EnemyEnergy = 10
+	var EnemyEnergy = TurnEnergy
 	
 	if (GetShipViz(Ship).IsOnFire()):
 		var ExtinguishAction
@@ -434,7 +439,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		
 		var Action = CardFightAction.new()
 		Action.Action = ExtinguishAction
-		Action.Target = Ship
+		Action.Targets.append(Ship)
 		
 		ActionList.AddAction(Ship, Action)
 		#Actions[Ship].append(Action)
@@ -465,8 +470,19 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		ShipAction.Action = SelectedAction
 		
 		#TODO figure out better way to decide target
-		ShipAction.Target = PlayerCombatants.pick_random()
-		
+		if (Action is OffensiveCardStats):
+			if (Action.AOE):
+				ShipAction.Targets.append_array(PlayerCombatants)
+			else:
+				ShipAction.Targets.append(PlayerCombatants.pick_random())
+		else:
+			if (Action.AOE):
+				ShipAction.Targets.append_array(EnemyCombatants)
+			else: if (Action.CanBeUsedOnOther):
+				ShipAction.Targets.append(EnemyCombatants.pick_random())
+			else:
+				ShipAction.Targets.append(Ship)
+				
 		ActionList.AddAction(Ship, ShipAction)
 
 func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
@@ -486,14 +502,18 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 	for z in ActionList.GetShipsActions(Ship):
 		var ShipAction = z as CardFightAction
 		var Action = ShipAction.Action
+		
+		var Targets = ShipAction.Targets
+			
+		for g in Targets:
+			if (!PlayerCombatants.has(g) and !EnemyCombatants.has(g)):
+				Targets.erase(g)
+		
+		if (Targets.size() == 0):
+			continue
+			
 		if (Action is OffensiveCardStats):
-			
-			var Target = ShipAction.Target
-			
-			if (!PlayerCombatants.has(Target) and !EnemyCombatants.has(Target)):
-				#ship is dead
-				continue
-				
+
 			#if (Friendly):
 				#Target = EnemyShips.pick_random()
 			#else :
@@ -504,16 +524,22 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			var Counter = Action.GetCounter()
 			var HasDeff = false
 			
-			
 			if (!Action.IsPorximityFuse()):
-				HasDeff = ActionList.ShipHasAction(Target, Counter)
+				for g in Targets:
+					if (ActionList.ShipHasAction(g, Counter)):
+						HasDeff = true
+						break
 			
 			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 			anim.DrawnLine = true
 			AnimationPlecement.add_child(anim)
 			AnimationPlecement.move_child(anim, 1)
 			#anim.Originator = GetShipViz(Ship)
-			anim.DoOffensive(Action, HasDeff, Ship, [GetShipViz(Target)], EnemyCombatants.has(Ship))
+			var Vizs : Array[Control]
+			for g in Targets:
+				Vizs.append(GetShipViz(g))
+				
+			anim.DoOffensive(Action, HasDeff, Ship, Vizs, EnemyCombatants.has(Ship))
 			
 			await(anim.AnimationFinished)
 			
@@ -521,16 +547,18 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			anim.queue_free()
 			
 			if (HasDeff):
-				ActionList.RemoveActionFromShip(Target, Counter)
+				for g in Targets:
+					ActionList.RemoveActionFromShip(g, Counter)
 				
-				print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
+				#print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
 				if (Friendly):
 					DamageNeg += Action.GetDamage() * Ship.GetFirePower()
 			else:
-				if (DamageShip(Target, Action.GetDamage() * Ship.GetFirePower(), Action.CauseFire())):
-					break
+				for g in Targets:
+					if (DamageShip(g, Action.GetDamage() * Ship.GetFirePower(), Action.CauseFire())):
+						break
 				
-				print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
+				#print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
 				
 		else :if (Action is Deffensive):
 			if (Action.CardName == "Extinguish fires" and viz.IsOnFire()):
@@ -556,17 +584,12 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				AnimationPlecement.add_child(anim)
 				AnimationPlecement.move_child(anim, 1)
-				var Targets : Array[BattleShipStats]
-				var TargetViz : Array[Control]
-				if (Action.AOE):
-					Targets = GetShipsTeam(Ship)
-					TargetViz = GetShipsTeamViz(Ship)
-				else:
-					ShieldAmm = 20
-					Targets = [Ship]
-					TargetViz = [GetShipViz(Ship)]
+				
+				var Vizs : Array[Control]
+				for g in Targets:
+					Vizs.append(GetShipViz(g))
 					
-				anim.DoDeffensive(Action, TargetViz, EnemyCombatants.has(Ship))
+				anim.DoDeffensive(Action, Vizs, EnemyCombatants.has(Ship))
 				await(anim.AnimationFinished)
 				anim.visible = false
 				anim.queue_free()
@@ -579,16 +602,12 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 				AnimationPlecement.add_child(anim)
 				AnimationPlecement.move_child(anim, 1)
-				var Targets : Array[BattleShipStats]
-				var TargetViz : Array[Control]
-				if (Action.AOE):
-					Targets = GetShipsTeam(Ship)
-					TargetViz = GetShipsTeamViz(Ship)
-				else:
-					Targets = [Ship]
-					TargetViz = [GetShipViz(Ship)]
+				
+				var Vizs : Array[Control]
+				for g in Targets:
+					Vizs.append(GetShipViz(g))
 					
-				anim.DoDeffensive(Action, TargetViz, EnemyCombatants.has(Ship))
+				anim.DoDeffensive(Action, Vizs, EnemyCombatants.has(Ship))
 				await(anim.AnimationFinished)
 				anim.visible = false
 				anim.queue_free()
@@ -867,6 +886,9 @@ func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 			break
 	if (!HasCard):
 		Ship.Cards[C] = 1
+		
+	var deck = PlayerDecks[Ship]
+	deck.DiscardPile.append(C)
 
 func PlayerActionSelectionEnded() -> void:
 	if (SelectingTarget):
@@ -876,13 +898,18 @@ func PlayerActionSelectionEnded() -> void:
 
 func RestartCards() -> void:
 	ClearCards()
-
-	UpdateEnergy(10)
+	
+	EnergyBar.ChangeSegmentAmm(TurnEnergy)
+	UpdateEnergy(0, TurnEnergy)
 	UpdateHandCards()
 
 	GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
-	call_deferred("DrawCard")
+	CallAfter(DrawCard)
+	
+func CallAfter(Call : Callable, t : float = 1) -> void:
+	await get_tree().create_timer(t).timeout
+	Call.call()
 
 func DrawCard() -> void:
 	var D = PlayerDecks[ShipTurns[CurrentTurn]]
@@ -890,22 +917,26 @@ func DrawCard() -> void:
 	if (D.DeckPile.size() == 0):
 		D.DeckPile.append_array(D.DiscardPile)
 		D.DiscardPile.clear()
-		
+	
+	
 	var C = D.DeckPile.pick_random()
-	D.Hand.append(C)
-	D.DeckPile.erase(C)
 	
 	var c = CardScene.instantiate() as Card
 	c.SetCardStats(C, [])
 	c.connect("OnCardPressed", OnCardSelected)
-
-	PlayerCardPlecement.add_child(c)
 	
-	call_deferred("DoCardPlecementAnimation", c, DeckButton.global_position)
+	var Placed = await PlaceCardInPlayerHand(c)
+	
+	if (Placed):
+		call_deferred("DoCardPlecementAnimation", c, DeckButton.global_position)
+	else:
+		c.queue_free()
 
 func UpdateHandCards() -> void:
 	for g in PlayerCardPlecement.get_children():
-		g.queue_free()
+		for z in g.get_children():
+			z.queue_free()
+	
 
 	var CharDeck = PlayerDecks[ShipTurns[CurrentTurn]]
 	
@@ -915,23 +946,109 @@ func UpdateHandCards() -> void:
 		c.SetCardStats(ran, [])
 		c.connect("OnCardPressed", OnCardSelected)
 		
-		PlayerCardPlecement.add_child(c)
+		for g in PlayerCardPlecement.get_children():
+			if (g.get_child_count() == 0):
+				g.add_child(c)
+				break
+		
+		call_deferred("DoCardPlecementAnimation", c, DeckButton.global_position)
 	
+	UpdateHandAmount(CharDeck.Hand.size())
 
+func PlaceCardInPlayerHand(C : Card) -> bool:
+	var CanPlace : bool = false
+	
+	var Cards : int = 0
+	
+	for g in PlayerCardPlecement.get_children():
+		if (g.get_child_count() > 0):
+			Cards += 1
+	#for g in SelectedCardPlecement.get_children():
+		#if (g.get_child_count() > 0):
+			#Cards += 1
+	
+	if (Cards < 5):
+		CanPlace = true
+			
+	var PlDeck = PlayerDecks[ShipTurns[CurrentTurn]]
+	PlDeck.DeckPile.erase(C.CStats)
+	
+	if (CanPlace):
+		PlDeck.Hand.append(C.CStats)
+		for g in PlayerCardPlecement.get_children():
+			if (g.get_child_count() == 0):
+				g.add_child(C)
+				break
+	else:
+		var Hand : Array[Card]
+		for g in PlayerCardPlecement.get_children():
+			if (g.get_child_count() > 0):
+				Hand.append(g.get_child(0))
+		#for g in SelectedCardPlecement.get_children():
+			#if (g.get_child_count() > 0):
+				#Hand.append(g.get_child(0))
+				
+		Hand.append(C)
+		
+		CardSelect.SetCards(Hand)
+		SelectingTarget = true
+		var ToDiscard : CardStats = await CardSelect.CardSelected
+		SelectingTarget = false
 
+		if (ToDiscard == C.CStats):
+			PlDeck.DiscardPile.append(C.CStats)
+			return false
+
+		PlDeck.Hand.append(C.CStats)
+		
+
+		for g in PlayerCardPlecement.get_children():
+			if (g.get_child_count() == 0):
+				g.add_child(C)
+				PlDeck.Hand.erase(ToDiscard)
+				break
+			else: if (g.get_child(0).CStats == ToDiscard):
+				g.get_child(0).queue_free()
+				PlDeck.DiscardPile.append(ToDiscard)
+				g.add_child(C)
+				PlDeck.Hand.erase(ToDiscard)
+				break
+		#for g in SelectedCardPlecement.get_children():
+			#if (g.get_child_count() == 0):
+				#continue
+			#var Action = g.get_child(0).CStats as CardStats
+			#if (Action == ToDiscard):
+				#g.get_child(0).queue_free()
+				#var CurrentShip = ShipTurns[CurrentTurn]
+				#ActionList.RemoveActionFromShip(CurrentShip, ToDiscard)
+				#
+				#UpdateEnergy(Energy, Energy + g.get_child(0).GetCost())
+				#
+				#if (Action.Consume):
+					#RefundCardToShip(Action, CurrentShip)
+				#else: if (Action !=null or Action.SelectedOption.CauseConsumption):
+					#RefundCardToShip(Action, CurrentShip)
+				#else:
+					#PlDeck.DiscardPile.append(ToDiscard)
+				#break
+	
+	UpdateHandAmount(PlDeck.Hand.size())
+	return true
+	
 func ClearCards() -> void:
 	for g in PlayerCardPlecement.get_children():
-		g.queue_free()
+		for z in g.get_children():
+			z.free()
 
 	for g in SelectedCardPlecement.get_children():
 		for z in g.get_children():
-			z.queue_free()
+			z.free()
 
 func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	var c = CardScene.instantiate() as Card
 	
 	c.SetCardStats(C.CStats, [])
-	c.TargetLoc = C.TargetLoc
+	c.TargetLocs = C.TargetLocs
 	$SubViewport/Control2.add_child(c)
 	c.global_position = OriginalPos
 	#c.CompactCard()
@@ -957,7 +1074,7 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 #func MoveCard(Val : float, origpos : Vector2, C : Card, C2 : Card)  -> void:
 	#C.global_position = lerp(origpos, C2.global_position, Val)
 
-func OnCardSelected(C : Card, Option : CardOption) -> void:
+func OnCardSelected(C : Card) -> void:
 	#var Minigame = FightGame.instantiate() as FightMinigame
 	#add_child(Minigame)
 	#var Resault = await Minigame.Ended
@@ -968,9 +1085,9 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	
 	if (C.CStats is ResupplyCardStats):
 		var resupplyamm = C.CStats.ResupplyAmmount
-		if (Energy + resupplyamm > 10):
-			return
-		UpdateEnergy(Energy + resupplyamm)
+		#if (Energy + resupplyamm > 10):
+			#return
+		UpdateEnergy(Energy, Energy + resupplyamm)
 		C.KillCard(0.5, true)
 		
 		var S = DeletableSoundGlobal.new()
@@ -978,6 +1095,10 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		S.autoplay = true
 		add_child(S)
 		S.volume_db = -10
+		
+		var deck = PlayerDecks[ShipTurns[CurrentTurn]]
+		deck.Hand.erase(C.CStats)
+		deck.DiscardPile.append(C.CStats)
 		
 		return
 	
@@ -994,36 +1115,57 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		if (!Action.AllowDuplicates and ActionList.ShipHasAction(CurrentShip, Action)):
 			return
 		
-		var target
-		if (Action is OffensiveCardStats):
-			if (EnemyCombatants.size() == 1):
-				target = EnemyCombatants[0]
-			else:
-				TargetSelect.SetEnemies(EnemyCombatants)
-				SelectingTarget = true
-				target = await TargetSelect.EnemySelected
-				SelectingTarget = false
-				if (target == null):
-					return
-		else:
-			target = CurrentShip
-		#for g in C.CStats.Options:
-			#if (g.OptionName == Option):
-		#Action.SelectedOption = Option
 		var c = CardScene.instantiate() as Card
-		#if (Option != null):
-			#c.SetCardStats(Action, [Option])
-		#else:
+
 		
 		c.SetCardStats(Action, [])
 		if (Energy < c.GetCost()):
+			EnergyBar.NotifyNotEnough()
+			c.queue_free()
+			
 			return
 		
-		UpdateEnergy(Energy - c.GetCost())
+		var targets : Array[BattleShipStats]
+		if (Action is OffensiveCardStats):
+			if (EnemyCombatants.size() == 1):
+				targets.append(EnemyCombatants[0])
+			else: if Action.AOE:
+				targets.append_array(EnemyCombatants)
+			else:
+				TargetSelect.SetEnemies(EnemyCombatants)
+				SelectingTarget = true
+				var Target = await TargetSelect.EnemySelected
+				if (Target != null):
+					targets.append(Target)
+				SelectingTarget = false
+		else:
+			if (PlayerCombatants.size() == 1):
+				targets.append(CurrentShip)
+			else: if Action.AOE:
+				targets.append_array(PlayerCombatants)
+			else: if Action.CanBeUsedOnOther:
+				TargetSelect.SetEnemies(PlayerCombatants)
+				SelectingTarget = true
+				var Target = await TargetSelect.EnemySelected
+				if (Target != null):
+					targets.append(Target)
+				SelectingTarget = false
+			else:
+				targets.append(CurrentShip)
+		if (targets.size() == 0):
+			return
+		#for g in C.CStats.Options:
+			#if (g.OptionName == Option):
+		#Action.SelectedOption = Option
+		
+		
+		UpdateEnergy(Energy, Energy - c.GetCost())
 		
 		#if (target != CurrentShip):
-		var TargetViz = GetShipViz(target)
-		c.TargetLoc = TargetViz.global_position + TargetViz.size / 2
+		
+		for g in targets:
+			var TargetViz = GetShipViz(g)
+			c.TargetLocs.append(TargetViz.global_position + TargetViz.size / 2)
 			
 		c.connect("OnCardPressed", RemoveCard)
 		for g in SelectedCardPlecement.get_children():
@@ -1033,7 +1175,7 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 		#c.Dissable()
 		var ShipAction = CardFightAction.new()
 		ShipAction.Action = Action
-		ShipAction.Target = target
+		ShipAction.Targets.append_array(targets)
 		
 		ActionList.AddAction(CurrentShip, ShipAction)
 		
@@ -1063,13 +1205,19 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	if (!Consumed):
 		deck.DiscardPile.append(C.CStats)
 	#DoCardPlecementAnimation(c, C.global_position)
-	
+	UpdateHandAmount(deck.Hand.size())
 	#UpdateHandCards()
 	#PerformAction(CurrentShip, ShipAction)
 	
 
-func RemoveCard(C : Card, _Option : CardOption) -> void:
+func RemoveCard(C : Card) -> void:
 	if (SelectingTarget):
+		return
+	
+	var D = PlayerDecks[ShipTurns[CurrentTurn]]
+	
+	if (D.Hand.size() == 5):
+		NotifyFullHand()
 		return
 	
 	C.disconnect("OnCardPressed", RemoveCard)
@@ -1107,10 +1255,11 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 	
 	ActionList.RemoveActionFromShip(CurrentShip, C.CStats)
 	#Actions[CurrentShip].erase(C.CStats)
-	UpdateEnergy(Energy + C.GetCost())
+	UpdateEnergy(Energy, Energy + C.GetCost())
 	
-	var D = PlayerDecks[ShipTurns[CurrentTurn]]
+
 	D.Hand.append(C.CStats)
+	UpdateHandAmount(D.Hand.size())
 	if (!Consumed):
 		D.DiscardPile.erase(C.CStats)
 	
@@ -1119,24 +1268,20 @@ func RemoveCard(C : Card, _Option : CardOption) -> void:
 	c.SetCardStats(C.CStats, [])
 	c.connect("OnCardPressed", OnCardSelected)
 
-	PlayerCardPlecement.add_child(c)
+	for g in PlayerCardPlecement.get_children():
+		if (g.get_child_count() == 0):
+			g.add_child(c)
+			
 	call_deferred("DoCardPlecementAnimation", c, C.global_position)
 	
 	C.queue_free()
 
-var EnergyBarTween : Tween
-func UpdateEnergy(NewEnergy : float) -> void:
-	if (is_instance_valid(EnergyBarTween)):
-		EnergyBarTween.kill()
-	EnergyBarTween = create_tween()
-	EnergyBarTween.set_ease(Tween.EASE_OUT)
-	EnergyBarTween.set_trans(Tween.TRANS_QUAD)
-	EnergyBarTween.tween_method(UpdateEnergyBar, Energy, NewEnergy, 0.5)
+func UpdateEnergy(OldEnergy : float, NewEnergy : float) -> void:
+	EnergyBar.UpdateAmmount(OldEnergy, NewEnergy)
 	Energy = NewEnergy
+	if (Energy > TurnEnergy):
+		EnergyBar.ChangeSegmentAmm(Energy)
 
-func UpdateEnergyBar(NewVal : float) -> void:
-	EnergyBar.Update(NewVal)
-	#EnergyLabel.text = var_to_str(roundi(NewVal)) + " / 10"
 
 var ScrollMomentum : float = 0
 
@@ -1197,10 +1342,11 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 
 func _on_deck_button_pressed() -> void:
 	
-	if (Energy < 1):
+	if (SelectingTarget or Energy < 1):
+		EnergyBar.NotifyNotEnough()
 		return
 	
-	UpdateEnergy(Energy - 1)
+	UpdateEnergy(Energy, Energy - 1)
 	
 	DrawCard()
 	
@@ -1218,9 +1364,28 @@ func _on_deck_button_mouse_entered() -> void:
 	DeckHoverTween.tween_property(DeckButton,"scale", Vector2(1.2, 1.2), 0.55)
 
 
+
 func _on_deck_button_mouse_exited() -> void:
 	#z_index = 0
 	if (DeckHoverTween and DeckHoverTween.is_running()):
 		DeckHoverTween.kill()
 	DeckHoverTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	DeckHoverTween.tween_property(DeckButton,"scale", Vector2.ONE, 0.55)
+
+func UpdateHandAmount(NewAmm : int) -> void:
+	HandAmmountLabel.text = "In Hand \n{0}/5".format([NewAmm])
+
+var HandCountTween : Tween
+
+func NotifyFullHand() -> void:
+	if (HandCountTween and HandCountTween.is_running()):
+		HandCountTween.kill()
+	
+	HandCountTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
+	HandCountTween.tween_property(HandAmmountLabel,"scale", Vector2(1.2, 1.2), 0.55)
+
+	await HandCountTween.finished
+	HandCountTween.kill()
+	
+	HandCountTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	HandCountTween.tween_property(HandAmmountLabel,"scale", Vector2.ONE, 0.55)

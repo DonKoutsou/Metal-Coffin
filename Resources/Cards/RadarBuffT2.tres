@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("4_25p15")
+CanBeUsedOnOther = true
 Icon = ExtResource("1_hgmgd")
 CardName = "Radar Atack"
 CardDescription = "Buffs Other Ships.[p][center][color=#c19200] FPWR + 2[p][center][color=#ff3c22]Doesn't Stack"

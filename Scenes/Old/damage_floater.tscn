@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_elilk"]
 [ext_resource type="Script" uid="uid://cdwrypr6ltbch" path="res://Scripts/UI/Damage_Floater.gd" id="1_nmcop"]
 
-[node name="DamageFloater" type="Label" node_paths=PackedStringArray("EndTimer")]
+[node name="DamageFloater" type="Label"]
 modulate = Color(1, 0.161135, 0.371105, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -23,9 +23,3 @@ text = "10"
 script = ExtResource("1_nmcop")
 GoodColor = Color(0.483, 100, 0.381, 1)
 BadColor = Color(100, 0, 0.163, 1)
-EndTimer = NodePath("Timer")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.75
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
