@@ -24,6 +24,7 @@ Handle = NodePath("Handle")
 StepCOunt = 12
 
 [node name="Handle" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 2
 offset_left = -14.0
 offset_top = 215.0

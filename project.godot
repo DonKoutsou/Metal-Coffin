@@ -35,7 +35,7 @@ AchMan="*res://Scripts/achievement_manager.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/mode=3
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -181,6 +181,7 @@ CommandLine={
 [rendering]
 
 occlusion_culling/bvh_build_quality=0
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/size=2048

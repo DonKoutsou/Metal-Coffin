@@ -338,6 +338,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ScreenFrame" type="TextureRect" parent="NormalScreen"]
+texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15
@@ -688,13 +689,14 @@ grow_horizontal = 0
 grow_vertical = 1
 
 [node name="AnimatedSprite2D" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
-position = Vector2(1008, -22)
-scale = Vector2(0.898438, 0.898438)
+position = Vector2(982, -128)
+scale = Vector2(1.73438, 1.73438)
 frame_progress = 0.96041
 frequency = 40.0
 
 [node name="ScreenFrameLong" type="TextureRect" parent="."]
 visible = false
+texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15
@@ -793,6 +795,7 @@ expand_mode = 1
 
 [node name="ScreenFrameLong2" type="TextureRect" parent="."]
 z_index = 1
+texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15

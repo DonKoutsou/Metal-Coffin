@@ -578,7 +578,11 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 						ShipCards.erase(Action)
 
 			else: if Action.CardName == "Shield Overcharge" or Action.CardName == "Shield Overcharge Team":
-				var ShieldAmm = 10
+				var ShieldAmm : float
+				if (Action.AOE):
+					ShieldAmm = 10
+				else:
+					ShieldAmm = 20
 				
 				
 				var anim = ActionAnim.instantiate() as CardOffensiveAnimation
@@ -1271,7 +1275,7 @@ func RemoveCard(C : Card) -> void:
 	for g in PlayerCardPlecement.get_children():
 		if (g.get_child_count() == 0):
 			g.add_child(c)
-			
+			break
 	call_deferred("DoCardPlecementAnimation", c, C.global_position)
 	
 	C.queue_free()

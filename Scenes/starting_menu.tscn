@@ -175,6 +175,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="Ground" type="ColorRect" parent="w"]
 z_index = -1
+texture_filter = 1
 material = SubResource("ShaderMaterial_yrlew")
 layout_mode = 1
 anchors_preset = 15
