@@ -46,7 +46,6 @@ scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
 [node name="CardFightShipViz" type="Control" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel")]
-z_index = 1
 custom_minimum_size = Vector2(180, 86)
 layout_mode = 3
 anchors_preset = 8

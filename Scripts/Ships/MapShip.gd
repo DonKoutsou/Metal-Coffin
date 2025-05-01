@@ -512,7 +512,6 @@ func GetFuelRange() -> float:
 func GetBattleStats() -> BattleShipStats:
 	
 	var stats = BattleShipStats.new()
-	var W = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)

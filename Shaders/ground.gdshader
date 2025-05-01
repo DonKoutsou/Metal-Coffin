@@ -25,17 +25,17 @@ void fragment() {
 	vec2 uvnoise = UV + offset;
     // Sample noise texture
 	//float t = abs(1.0 - texture(GroundTextureMask, uv).r) * 5.0;
-	
+
 	//float texColormask = clamp(t, 0.0, 1.0);
     float patternNoise = texture(NoiseTexture, uvnoise).r; // Sample red channel for noise; adjust scale as needed
-	
+
     // Normalize noise to [0, 1] if necessary
     // patternNoise = (patternNoise + 1.0) / 2.0; // Uncomment if your noise texture has values in range [-1, 1]
-	
+
     // Sample colors from the textures
     vec4 texColor1 = texture(GroundTexture, uv1);
     vec4 texColor2 = texture(GroundTexture2, uv2);
-	
+
 	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
 	vec3 texNormal2 = texture(GroundNormal2Texture, uv2).rgb;
 	texNormal2.b = clamp(texNormal2.b + patternNoise, 0, 1);

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ResupplyCardStats" load_steps=5 format=3 uid="uid://b3gyn3343cp4u"]
+
+[ext_resource type="Texture2D" uid="uid://cngvmnworwmqg" path="res://Assets/Cards/Energy.png" id="1_wqvsm"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_fosgn"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_o5gji"]
+[ext_resource type="Script" uid="uid://h6mrpid3a2ps" path="res://Scripts/CardFight/ResupplyCardStats.gd" id="4_wqvsm"]
+
+[resource]
+script = ExtResource("4_wqvsm")
+ResupplyAmmount = 1
+Icon = ExtResource("1_wqvsm")
+CardName = "Resupply"
+CardDescription = "Adds 1 Energy"
+Energy = 0
+Options = Array[ExtResource("2_fosgn")]([])
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("3_o5gji")]([])
+WeapT = 0
+AOE = false
+Tier = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=44 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="25_xdq0f"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="26_reii6"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="29_hn1mp"]
+[ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="30_yhraa"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
 offsets = PackedFloat32Array(0, 0.51861, 0.997849)
@@ -44,7 +45,7 @@ ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
 tonemap_exposure = 0.9
-tonemap_white = 16.0
+tonemap_white = 1.5
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -117,7 +118,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "DeckButton") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -148,6 +149,7 @@ TargetSelect = NodePath("SubViewport/Control2/TargetSelect")
 CardSelectContainer = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2")
 ActionDeclaration = NodePath("SubViewport/Control2/Action Declaration")
 ShipSpacer = NodePath("SubViewport/Control2/VBoxContainer4/ShipSpacer")
+DeckButton = NodePath("SubViewport/Control2/DeckButton")
 StartingCardAmm = 4
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -185,6 +187,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Clouds" type="ColorRect" parent="SubViewport/Control2"]
+z_index = -1
 texture_filter = 1
 material = SubResource("ShaderMaterial_xr0yy")
 layout_mode = 1
@@ -239,7 +242,10 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
+
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
 layout_mode = 2
@@ -355,7 +361,10 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
+
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
 [node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("ShipVizContainer")]
 z_index = 1
@@ -407,6 +416,20 @@ offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
 
+[node name="DeckButton" parent="SubViewport/Control2" instance=ExtResource("30_yhraa")]
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -218.0
+offset_right = 184.0
+offset_bottom = -20.0
+grow_horizontal = 1
+grow_vertical = 0
+
 [node name="Darkness" type="CanvasModulate" parent="SubViewport"]
 color = Color(0, 0, 0, 1)
 
@@ -420,3 +443,6 @@ height = 284.0
 
 [connection signal="pressed" from="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]
+[connection signal="mouse_entered" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_mouse_entered"]
+[connection signal="mouse_exited" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_mouse_exited"]
+[connection signal="pressed" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_pressed"]

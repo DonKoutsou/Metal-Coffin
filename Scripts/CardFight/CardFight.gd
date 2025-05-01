@@ -45,6 +45,7 @@ class_name Card_Fight
 @export var CardSelectContainer : Control
 @export var ActionDeclaration : Control
 @export var ShipSpacer : Control
+@export var DeckButton : Button
 @export_group("FightSettings")
 @export var StartingCardAmm : int = 5
 @export var MaxCombatants : int = 5
@@ -100,11 +101,11 @@ func _ready() -> void:
 	EnergyBar.Init(10)
 	
 	
-	#for g in 10:
-		#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-	#for g in 10:
-		#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	for g in 10:
+		EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+	for g in 10:
+		PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
@@ -131,6 +132,8 @@ func _ready() -> void:
 	CreateDecks()
 	
 	#print("Card fight initialised. {0} player ship(s) VS {1} enemy ship(s)".format([PlayerShips.size(), EnemyShips.size()]))
+	
+	DeckButton.visible = false
 	
 	call_deferred("StoreContainerSize")
 	
@@ -363,7 +366,7 @@ func RunTurn() -> void:
 	await Tw2.finished
 	
 	CardSelectContainer.get_child(0).visible = true
-	
+	DeckButton.visible = true
 	CurrentTurn = 0
 	
 	for Ship in ShipTurns:
@@ -392,7 +395,7 @@ func RunTurn() -> void:
 	Tw.tween_property(CardSelectContainer.get_parent(), "custom_minimum_size", Vector2(0,0), 0.5)
 	await Tw.finished
 	CardSelectContainer.get_parent().visible = false
-	
+	DeckButton.visible = false
 	await DoActionDeclaration("Action Perform Phase")
 	
 	AnimationPlecement.visible = true
@@ -948,64 +951,84 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	#add_child(Minigame)
 	#var Resault = await Minigame.Ended
 	#Minigame.queue_free()
+
 	if (SelectingTarget):
 		return
 	
-	var Action : CardStats
-	if (C.CStats.SelectedOption != null):
-		Action = C.CStats.duplicate() as CardStats
-		Action.SelectedOption = C.CStats.SelectedOption
-	else:
-		Action = C.CStats
-	
-	
-	var CurrentShip = ShipTurns[CurrentTurn]
-	if (!Action.AllowDuplicates and ActionList.ShipHasAction(CurrentShip, Action)):
-		return
-	
-	var target
-	if (Action is OffensiveCardStats):
-		if (EnemyCombatants.size() == 1):
-			target = EnemyCombatants[0]
-		else:
-			TargetSelect.SetEnemies(EnemyCombatants)
-			SelectingTarget = true
-			target = await TargetSelect.EnemySelected
-			SelectingTarget = false
-			if (target == null):
-				return
-	else:
-		target = CurrentShip
-	#for g in C.CStats.Options:
-		#if (g.OptionName == Option):
-	#Action.SelectedOption = Option
-	var c = CardScene.instantiate() as Card
-	#if (Option != null):
-		#c.SetCardStats(Action, [Option])
-	#else:
-	
-	c.SetCardStats(Action, [])
-	if (Energy < c.GetCost()):
-		return
-	
-	UpdateEnergy(Energy - c.GetCost())
-	
-	#if (target != CurrentShip):
-	var TargetViz = GetShipViz(target)
-	c.TargetLoc = TargetViz.global_position + TargetViz.size / 2
+	if (C.CStats is ResupplyCardStats):
+		var resupplyamm = C.CStats.ResupplyAmmount
+		if (Energy + resupplyamm > 10):
+			return
+		UpdateEnergy(Energy + resupplyamm)
+		C.KillCard(0.5, true)
 		
-	c.connect("OnCardPressed", RemoveCard)
-	for g in SelectedCardPlecement.get_children():
-		if (g.get_child_count() == 0):
-			g.add_child(c)
-			break
-	#c.Dissable()
-	var ShipAction = CardFightAction.new()
-	ShipAction.Action = Action
-	ShipAction.Target = target
+		var S = DeletableSoundGlobal.new()
+		S.stream = RemoveCardSound
+		S.autoplay = true
+		add_child(S)
+		S.volume_db = -10
+		
+		return
 	
-	ActionList.AddAction(CurrentShip, ShipAction)
-	
+	else:
+		var Action : CardStats
+		if (C.CStats.SelectedOption != null):
+			Action = C.CStats.duplicate() as CardStats
+			Action.SelectedOption = C.CStats.SelectedOption
+		else:
+			Action = C.CStats
+		
+		
+		var CurrentShip = ShipTurns[CurrentTurn]
+		if (!Action.AllowDuplicates and ActionList.ShipHasAction(CurrentShip, Action)):
+			return
+		
+		var target
+		if (Action is OffensiveCardStats):
+			if (EnemyCombatants.size() == 1):
+				target = EnemyCombatants[0]
+			else:
+				TargetSelect.SetEnemies(EnemyCombatants)
+				SelectingTarget = true
+				target = await TargetSelect.EnemySelected
+				SelectingTarget = false
+				if (target == null):
+					return
+		else:
+			target = CurrentShip
+		#for g in C.CStats.Options:
+			#if (g.OptionName == Option):
+		#Action.SelectedOption = Option
+		var c = CardScene.instantiate() as Card
+		#if (Option != null):
+			#c.SetCardStats(Action, [Option])
+		#else:
+		
+		c.SetCardStats(Action, [])
+		if (Energy < c.GetCost()):
+			return
+		
+		UpdateEnergy(Energy - c.GetCost())
+		
+		#if (target != CurrentShip):
+		var TargetViz = GetShipViz(target)
+		c.TargetLoc = TargetViz.global_position + TargetViz.size / 2
+			
+		c.connect("OnCardPressed", RemoveCard)
+		for g in SelectedCardPlecement.get_children():
+			if (g.get_child_count() == 0):
+				g.add_child(c)
+				break
+		#c.Dissable()
+		var ShipAction = CardFightAction.new()
+		ShipAction.Action = Action
+		ShipAction.Target = target
+		
+		ActionList.AddAction(CurrentShip, ShipAction)
+		
+		call_deferred("DoCardPlecementAnimation", c, C.global_position)
+		C.queue_free()
+		
 	var Consumed : bool = false
 	#if (C.CStats is OffensiveCardStats):
 	if (C.CStats.Consume):
@@ -1029,8 +1052,7 @@ func OnCardSelected(C : Card, Option : CardOption) -> void:
 	if (!Consumed):
 		deck.DiscardPile.append(C.CStats)
 	#DoCardPlecementAnimation(c, C.global_position)
-	call_deferred("DoCardPlecementAnimation", c, C.global_position)
-	C.queue_free()
+	
 	#UpdateHandCards()
 	#PerformAction(CurrentShip, ShipAction)
 	
@@ -1144,16 +1166,66 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	else:
 		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain9.png")
 	
-	Stats.Cards[load("res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres")] = 1
-	Stats.Cards[load("res://Resources/Cards/Evasive.tres")] = 1
+	Stats.Cards[load("res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres")] = 10
+	Stats.Cards[load("res://Resources/Cards/Evasive.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/Missile.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/Flares.tres")] = 10
-	Stats.Cards[load("res://Resources/Cards/ShieldOverChargeTeam.tres")] = 1
+	Stats.Cards[load("res://Resources/Cards/ShieldOverChargeTeam.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/RadarBuff.tres")] = 1
 	
+	if (!enemy):
+		Stats.Cards[load("res://Resources/Cards/Energy.tres")] = 10
 	
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageAPOption.tres")] = 10
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageFireOption.tres")] = 10
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres")] = 10
 		
 	return Stats
+
+
+
+func _on_deck_button_pressed() -> void:
+	
+	if (Energy < 1):
+		return
+	
+	UpdateEnergy(Energy - 1)
+	
+	var D = PlayerDecks[ShipTurns[CurrentTurn]]
+	
+	if (D.DeckPile.size() == 0):
+		D.DeckPile.append_array(D.DiscardPile)
+		D.DiscardPile.clear()
+		
+	var C = D.DeckPile.pick_random()
+	D.Hand.append(C)
+	D.DeckPile.erase(C)
+	
+	var c = CardScene.instantiate() as Card
+	c.SetCardStats(C, [])
+	c.connect("OnCardPressed", OnCardSelected)
+
+	PlayerCardPlecement.add_child(c)
+	
+	call_deferred("DoCardPlecementAnimation", c, DeckButton.global_position)
+	
+	
+
+var DeckHoverTween : Tween
+
+func _on_deck_button_mouse_entered() -> void:
+	#z_index = 1
+	
+	if (DeckHoverTween and DeckHoverTween.is_running()):
+		DeckHoverTween.kill()
+	
+	DeckHoverTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
+	DeckHoverTween.tween_property(DeckButton,"scale", Vector2(1.2, 1.2), 0.55)
+
+
+func _on_deck_button_mouse_exited() -> void:
+	#z_index = 0
+	if (DeckHoverTween and DeckHoverTween.is_running()):
+		DeckHoverTween.kill()
+	DeckHoverTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	DeckHoverTween.tween_property(DeckButton,"scale", Vector2.ONE, 0.55)
