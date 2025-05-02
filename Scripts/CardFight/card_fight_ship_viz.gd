@@ -7,7 +7,7 @@ class_name CardFightShipViz
 @export var StatLabel : RichTextLabel
 @export var FriendlyPanel : Panel
 
-const StatText = "[color=#ffc315]HULL[/color] : {0}\n[color=#ffc315]SLD[/color] : {1}\n[color=#ffc315]SPD[/color] : {2}\n[color=#ffc315]FPWR[/color] : {3}"
+const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
 func _ready() -> void:
 	#$Panel.visible = false
@@ -22,9 +22,10 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	var Firep = var_to_str(snapped(S.GetFirePower(), 0.1)).replace(".0", "")
 	if (S.FirePowerBuff > 0):
 		Firep = "[color=#308a4d]" + Firep + "[/color]"
-	StatLabel.text = StatText.format([Hull, Shield, Speed, Firep])
-	ShipIcon.flip_v = Friendly
+	StatLabel.text = "[right]{0}[right]{1}[right]{2}[right]{3}".format([Hull, Shield, Speed, Firep])
+	#ShipIcon.flip_v = !Friendly
 	FriendlyPanel.visible = false
+	
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
 	ShipNameLabel.text = S.Name.substr(0, 3)
 	ShipIcon.texture = S.ShipIcon

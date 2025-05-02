@@ -23,7 +23,7 @@ static func IsActionCompleted(Act : Action) -> bool:
 
 static func OnActionCompleted(Act : Action) -> void:
 	CompletedActions.append(Act)
-	Save()
+
 
 func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Control], InScreen : bool) -> void:
 	if (!ShowTutorials):
@@ -92,9 +92,9 @@ static func Save() -> void:
 	if (sav == null):
 		sav = TutorialSaveData.new()
 	
-	for g in CompletedActions:
-		if (!sav.CompletedActions.has(g)):
-			sav.CompletedActions.append(g)
+	sav.CompletedActions.clear()
+	
+	sav.CompletedActions = CompletedActions
 
 	ResourceSaver.save(sav, "user://TutorialData.tres")
 	print("Saved tutorial data")
@@ -122,8 +122,7 @@ func DeleteSave() -> void:
 	
 	if (sav == null):
 		return
-	
-	CompletedActions.clear()
+
 	sav.CompletedActions.clear()
 	
 	ResourceSaver.save(sav, "user://TutorialData.tres")

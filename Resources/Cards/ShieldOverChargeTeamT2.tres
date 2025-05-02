@@ -7,9 +7,10 @@
 
 [resource]
 script = ExtResource("4_bwwdf")
+CanBeUsedOnOther = false
 Icon = ExtResource("1_cyky1")
-CardName = "Shield Overcharge Team"
-CardDescription = "Overcharge [color=#c19200]team[/color] shiels for temporary buff.[p][center][color=#c19200]+ 20 shield"
+CardName = "Team Shield Overcharge"
+CardDescription = "Overcharge [color=#c19200]team[/color] shiels for temporary buff.[p][center][color=#6be2e9]+ 20 SHIELD"
 Energy = 4
 Options = Array[ExtResource("2_4ip3l")]([])
 AllowDuplicates = true

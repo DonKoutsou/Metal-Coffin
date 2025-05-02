@@ -516,7 +516,7 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 	call_deferred("SpawnFin")
 
 func SpawnFin() -> void:
-	GenerationFinished.emit()
+	call_deferred("FGenerationFinished")
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
 	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy)
@@ -557,7 +557,7 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 			ship.Command = com
 			com.GetDroneDock().call_deferred("DockShip", ship)
 	
-	GenerationFinished.emit()
+	call_deferred("FGenerationFinished")
 	call_deferred("EnemySpawnFinished")
 
 var EnemsToSpawn : Dictionary
@@ -565,7 +565,7 @@ var EnemsToSpawn : Dictionary
 func _physics_process(_delta: float) -> void:
 	if (EnemsToSpawn.size() == 0):
 		set_physics_process(false)
-		GenerationFinished.emit()
+		call_deferred("FGenerationFinished")
 		return
 	var enem = EnemsToSpawn.keys()[0]
 	var pos = EnemsToSpawn[enem]
@@ -586,7 +586,8 @@ func FindEnemyByName(Name : String) -> HostileShip:
 	return null
 
 
-
+func FGenerationFinished() -> void:
+	GenerationFinished.emit()
 
 
 func RespawnMissiles(MissileData : Array[Resource]) -> void:

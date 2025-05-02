@@ -16,15 +16,16 @@ uniform sampler2D GroundNormalTexture: hint_normal, filter_nearest, repeat_enabl
 // Called for every pixel the material is visible on
 void fragment() {
 
-	float noise = texture(Alpha, UV).a;
-	vec4 n_out4p0;
-	// Texture2D:4
-	n_out4p0 = texture(GroundNormalTexture, UV);
+	float noise = texture(Alpha, UV).r;
+	vec4 Norm = texture(GroundNormalTexture, UV);
+	vec4 Col = texture(GroundTexture, UV);
+	Col.a = 1.0;
+	
     // Apply the fog effect
-    COLOR = texture(GroundTexture, UV);
+    COLOR = Col;
 	COLOR.a *= noise;
-	NORMAL_MAP = vec3(n_out4p0.xyz);
-	NORMAL_MAP_DEPTH = n_out4p0.x;
+	NORMAL_MAP = vec3(Norm.xyz);
+	NORMAL_MAP_DEPTH = Norm.x;
 	
 }
 "

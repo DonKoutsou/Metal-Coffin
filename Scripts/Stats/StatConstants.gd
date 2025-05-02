@@ -52,7 +52,7 @@ static func GetStatMetric(Stat : STATS) -> String:
 	return Metric
 
 static func GetStatItemBuff(Stat : STATS, Buffs : Array[float]) -> float:
-	var BuffAmm : float
+	var BuffAmm : float = 0
 	if (ShouldStatStack(Stat)):
 		for g in Buffs:
 			BuffAmm += g

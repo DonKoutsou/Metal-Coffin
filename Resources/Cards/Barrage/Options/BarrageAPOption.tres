@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_7f5u1")
-OptionName = "Armor Piercing"
+OptionName = "AP"
 OptionDescription = "Throws an armor piercing barragge on the enemy.[p][center]"
 NewPic = ExtResource("1_1vtlb")
 EnergyAdd = 1

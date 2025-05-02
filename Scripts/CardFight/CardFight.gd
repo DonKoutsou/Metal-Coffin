@@ -79,6 +79,7 @@ var EnemyCombatants : Array[BattleShipStats]
 var ShipsViz : Array[CardFightShipViz2]
 
 
+
 var ActionList = CardFightActionList.new()
 
 var SelectingTarget : bool = false
@@ -104,11 +105,11 @@ func _ready() -> void:
 	EnergyBar.Init(TurnEnergy)
 	
 	
-	#for g in 10:
-		#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-	#for g in 10:
-		#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	for g in 10:
+		EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+	for g in 10:
+		PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
@@ -822,6 +823,7 @@ func ShieldShip(Ship : BattleShipStats, Amm : float) -> void:
 
 func BuffShip(Ship : BattleShipStats, Amm : float) -> void:
 	Ship.FirePowerBuff = Amm
+	GetShipViz(Ship).ToggleDmgBuff(true)
 	UpdateShipStats(Ship)
 
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
@@ -974,7 +976,7 @@ func PlaceCardInPlayerHand(C : Card) -> bool:
 		#if (g.get_child_count() > 0):
 			#Cards += 1
 	
-	if (CardsInHand < 5):
+	if (CardsInHand < 4):
 		CanPlace = true
 			
 	var PlDeck = PlayerDecks[ShipTurns[CurrentTurn]]
@@ -1097,6 +1099,10 @@ func OnCardSelected(C : Card) -> void:
 		#if (Energy + resupplyamm > 10):
 			#return
 		UpdateEnergy(Energy, Energy + resupplyamm)
+		var pos = C.global_position
+		C.get_parent().remove_child(C)
+		add_child(C)
+		C.global_position = pos
 		C.KillCard(0.5, true)
 		
 		var S = DeletableSoundGlobal.new()
@@ -1224,7 +1230,7 @@ func RemoveCard(C : Card) -> void:
 	
 	var D = PlayerDecks[ShipTurns[CurrentTurn]]
 	
-	if (D.Hand.size() == 5):
+	if (D.Hand.size() == 4):
 		NotifyFullHand()
 		return
 	
@@ -1369,7 +1375,7 @@ func _on_deck_button_mouse_entered() -> void:
 		DeckHoverTween.kill()
 	
 	DeckHoverTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
-	DeckHoverTween.tween_property(DeckButton,"scale", Vector2(1.2, 1.2), 0.55)
+	DeckHoverTween.tween_property(DeckButton,"scale", Vector2(1.1, 1.1), 0.55)
 
 
 
@@ -1381,7 +1387,7 @@ func _on_deck_button_mouse_exited() -> void:
 	DeckHoverTween.tween_property(DeckButton,"scale", Vector2.ONE, 0.55)
 
 func UpdateHandAmount(NewAmm : int) -> void:
-	HandAmmountLabel.text = "In Hand \n{0}/5".format([NewAmm])
+	HandAmmountLabel.text = "In Hand \n{0}/4".format([NewAmm])
 
 var HandCountTween : Tween
 

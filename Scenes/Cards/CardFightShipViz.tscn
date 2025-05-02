@@ -65,7 +65,7 @@ theme = ExtResource("1_3u5gi")
 script = ExtResource("2_qce1f")
 ShipNameLabel = NodePath("HBoxContainer/VBoxContainer/Label")
 ShipIcon = NodePath("HBoxContainer/VBoxContainer/TextureRect")
-StatLabel = NodePath("HBoxContainer/RichTextLabel")
+StatLabel = NodePath("HBoxContainer/HBoxContainer/RichTextLabel2")
 FriendlyPanel = NodePath("Panel")
 
 [node name="Panel" type="Panel" parent="."]
@@ -83,8 +83,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
 layout_mode = 2
 offset_left = 3.0
 offset_top = 3.0
-offset_right = 201.0
-offset_bottom = 83.0
+offset_right = 174.0
+offset_bottom = 88.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
@@ -93,11 +93,12 @@ size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "GER"
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 1
+uppercase = true
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(52, 64)
@@ -107,9 +108,13 @@ texture = ExtResource("3_5ndf2")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/HBoxContainer"]
 clip_contents = false
-custom_minimum_size = Vector2(90, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -117,10 +122,25 @@ mouse_filter = 2
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "[color=#c19200]HULL[/color] : 100
-[color=#c19200]SLD[/color] : 10
-[color=#c19200]SPD[/color] : 3
-[color=#c19200]FPWR[/color] : 10"
+text = "[color=#c19200]HULL[/color]
+[color=#c19200]SLD[/color]
+[color=#c19200]SPD[/color]
+[color=#c19200]FPWR[/color]"
+fit_content = true
+scroll_active = false
+text_direction = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/HBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[right]100[right]200[right]300[right]400"
 fit_content = true
 scroll_active = false
 text_direction = 1

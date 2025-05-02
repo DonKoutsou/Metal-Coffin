@@ -64,7 +64,9 @@ func _on_button_pressed() -> void:
 
 
 func _on_load_prologue_pressed() -> void:
-	await ChooseTutorial()
+	var t = await ChooseTutorial()
+	if (t):
+		ActionTracker.GetInstance().Load()
 	PrologueStart.emit(true)
 
 func ChooseTutorial() -> bool:
@@ -72,8 +74,9 @@ func ChooseTutorial() -> bool:
 	var t = await ShowTutorial
 	
 	ActionTracker.ShowTutorials = t
-	if (t):
-		ActionTracker.GetInstance().DeleteSave()
+	ActionTracker.GetInstance().CompletedActions.clear()
+	#if (t):
+		#ActionTracker.GetInstance().DeleteSave()
 	
 	$Control.visible = false
 	return t

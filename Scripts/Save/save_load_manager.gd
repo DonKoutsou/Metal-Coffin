@@ -37,6 +37,7 @@ func Save() -> void:
 	
 	DataArray.append(Controller.GetSaveData())
 	
+	ActionTracker.Save()
 	
 	DataArray.append(DialogueProgressHolder.GetInstance().ToldDialogues)
 	var sav = SaveData.new()
