@@ -50,8 +50,18 @@ func SpawnMenu() -> void:
 	StMenu.connect("DelSave", DelSave)
 	UISoundMan.GetInstance().Refresh()
 
-func StartPrologue() -> void:
+func StartPrologue(Load : bool) -> void:
+	
+	
 	Wor = IntroGameScene.instantiate() as World
+	if (Load):
+		if (!SaveLoadManager.GetInstance().Load(Wor)):
+			var window = AcceptDialog.new()
+			add_child(window)
+			window.dialog_text = "Could't load save"
+			window.popup_centered()
+			return
+	
 	add_child(Wor)
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
@@ -83,7 +93,7 @@ func StartGame(Load : bool) -> void:
 		if (!SaveLoadManager.GetInstance().Load(Wor)):
 			var window = AcceptDialog.new()
 			add_child(window)
-			window.dialog_text = "No Save File Found"
+			window.dialog_text = "Could't load save"
 			window.popup_centered()
 			return
 	
@@ -100,7 +110,7 @@ func DelSave() -> void:
 	get_viewport().add_child(pop)
 	pop.popup_centered()
 	SaveLoadManager.GetInstance().DeleteSave()
-	ActionTracker.GetInstance().DeleteSave()
+	#ActionTracker.GetInstance().DeleteSave()
 	
 
 func OnGameEnded() -> void:

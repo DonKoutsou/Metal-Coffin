@@ -52,15 +52,15 @@ static func GetStatMetric(Stat : STATS) -> String:
 	return Metric
 
 static func GetStatItemBuff(Stat : STATS, Buffs : Array[float]) -> float:
-	var Buff : float
+	var BuffAmm : float
 	if (ShouldStatStack(Stat)):
 		for g in Buffs:
-			Buff += g
+			BuffAmm += g
 	else:
 		for g in Buffs:
-			if (g > Buff):
-				Buff = g
-	return Buff
+			if (g > BuffAmm):
+				BuffAmm = g
+	return BuffAmm
 
 static func ShouldStatStack(Stat : STATS) -> bool:
 	return StatShouldStack[Stat]

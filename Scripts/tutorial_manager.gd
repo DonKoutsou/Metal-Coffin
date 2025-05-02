@@ -9,6 +9,8 @@ static var CompletedActions : Array[Action]
 
 static var Instance : ActionTracker
 
+static var ShowTutorials : bool = false
+
 func _ready() -> void:
 	Instance = self
 	Load()
@@ -24,6 +26,9 @@ static func OnActionCompleted(Act : Action) -> void:
 	Save()
 
 func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Control], InScreen : bool) -> void:
+	if (!ShowTutorials):
+		return
+	
 	get_tree().paused = true
 
 	var Tut : Tutorial
@@ -73,6 +78,7 @@ func OnPrologueFinished() -> void:
 	
 	sav.CaptainsInPrologue = C
 	sav.CompletedPrologue = true
+	sav.WorldviewStats = WorldView.GetInstance().WorldviewStats
 	sav.LiedInPrologue = WorldView.GetInstance().Lied
 	ResourceSaver.save(sav, "user://TutorialData.tres")
 	print("Saved Fulfilled Prologue data")
@@ -109,8 +115,19 @@ func Load() -> void:
 	CompletedActions = sav.CompletedActions
 
 func DeleteSave() -> void:
-	DirAccess.remove_absolute("user://TutorialData.tres")
-	Load()
+	var sav : TutorialSaveData
+	
+	if (FileAccess.file_exists("user://TutorialData.tres")):
+		sav = load("user://TutorialData.tres") as TutorialSaveData
+	
+	if (sav == null):
+		return
+	
+	CompletedActions.clear()
+	sav.CompletedActions.clear()
+	
+	ResourceSaver.save(sav, "user://TutorialData.tres")
+	
 
 enum Action{
 	INVENTORY_OPEN,

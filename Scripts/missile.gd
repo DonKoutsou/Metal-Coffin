@@ -77,8 +77,8 @@ func _physics_process(delta: float) -> void:
 func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
 	var Body : Node2D
 	  # Calculate direction and distance
-	var direction = ((global_position + Dir) - global_position).normalized()
-	var distance_to_move = Dir
+	#var direction = ((global_position + Dir) - global_position).normalized()
+	#var distance_to_move = Dir
 	
 	var shape_cast = ShapeCast2D.new()
 	add_child(shape_cast)

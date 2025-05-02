@@ -199,7 +199,7 @@ func NeedsReload() -> bool:
 			return true
 	return !Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)
 
-func TogglePause(t : bool):
+func TogglePause(_t : bool):
 	pass
 #func TogglePause(t : bool):
 	#Paused = t
@@ -483,9 +483,9 @@ func BodyEnteredBody(Body : Area2D) -> void:
 					else:
 						plships.append(g)
 			else:
-				var Command = Ship.Command
-				plships.append(Command)
-				for g in Command.GetDroneDock().GetDockedShips():
+				var FleetCommander = Ship.Command
+				plships.append(FleetCommander)
+				for g in FleetCommander.GetDroneDock().GetDockedShips():
 					if (g is HostileShip):
 						hostships.append(g)
 					else:

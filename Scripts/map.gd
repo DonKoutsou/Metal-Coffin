@@ -334,7 +334,6 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	
 	var GeneratedSpots : Array[Town] = []
 	for g in MapSize :
-		var type : PackedScene
 
 		#SET THE TYPE
 		var sc = TownSpotScene.instantiate() as Town

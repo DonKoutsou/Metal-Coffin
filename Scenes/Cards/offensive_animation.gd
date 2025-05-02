@@ -42,8 +42,8 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		if (HasDef):
 			DefC = CardScene.instantiate() as Card
 			DefC.Dissable()
-			var Opts2 : Array[CardOption] = []
-			DefC.SetCardStats(AtackCard.GetCounter(), Opts2)
+			#var Opts2 : Array[CardOption] = []
+			DefC.SetCardStats(AtackCard.GetCounter())
 			$HBoxContainer.add_child(DefC)
 			DefC.size_flags_horizontal = Control.SIZE_EXPAND
 			DefC.show_behind_parent = true
@@ -52,8 +52,8 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		Targets.append_array(TargetShips)
 		AtC = CardScene.instantiate() as Card
 		AtC.Dissable()
-		var Opts : Array[CardOption] = []
-		AtC.SetCardStats(AtackCard, Opts)
+		#var Opts : Array[CardOption] = []
+		AtC.SetCardStats(AtackCard)
 		$HBoxContainer.add_child(AtC)
 		AtC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		AtC.show_behind_parent = true
@@ -73,8 +73,8 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		Targets.append_array(TargetShips)
 		AtC = CardScene.instantiate() as Card
 		AtC.Dissable()
-		var Opts : Array[CardOption] = []
-		AtC.SetCardStats(AtackCard, Opts)
+		#var Opts : Array[CardOption] = []
+		AtC.SetCardStats(AtackCard)
 		$HBoxContainer.add_child(AtC)
 		AtC.size_flags_horizontal = Control.SIZE_EXPAND
 		AtC.show_behind_parent = true
@@ -85,8 +85,8 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 		if (HasDef):
 			DefC = CardScene.instantiate() as Card
 			DefC.Dissable()
-			var Opts2 : Array[CardOption] = []
-			DefC.SetCardStats(AtackCard.GetCounter(), Opts2)
+			#var Opts2 : Array[CardOption] = []
+			DefC.SetCardStats(AtackCard.GetCounter())
 			$HBoxContainer.add_child(DefC)
 			DefC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 			DefC.show_behind_parent = true
@@ -215,12 +215,12 @@ func BuffTweenEnded(target : Control) -> void:
 	d.global_position = (target.global_position + (target.size / 2)) - d.size / 2
 	d.connect("Ended", AnimEnded)
 
-func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], FriendShip : bool) -> void:
+func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], _FriendShip : bool) -> void:
 
-	var Opts : Array[CardOption] = []
+	#var Opts : Array[CardOption] = []
 	DefC = CardScene.instantiate() as Card
 	DefC.Dissable()
-	DefC.SetCardStats(DefCard, Opts)
+	DefC.SetCardStats(DefCard)
 	$HBoxContainer.add_child(DefC)
 	#DefC.size_flags_horizontal = Control.SIZE_EXPAND
 	DefC.show_behind_parent = true

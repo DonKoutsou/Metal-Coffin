@@ -211,7 +211,7 @@ func _on_controlled_ship_return_pressed() -> void:
 func GetSaveData() -> PlayerSaveData:
 	var pldata = PlayerSaveData.new()
 	var Ships = get_tree().get_nodes_in_group("PlayerShips")
-	pldata.Worldview = WorldView.GetInstance().GetSaveData()
+	#pldata.Worldview = WorldView.GetInstance().GetSaveData()
 	for g : PlayerDrivenShip in Ships:
 		if (g.Command == null):
 			if g is PlayerShip:
@@ -231,7 +231,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 	var Player = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
 	Player.SetShipPosition(Data.Pos)
 	Player.global_rotation = Data.Rot
-	WorldView.GetInstance().LoadData(Data.Worldview)
+	#WorldView.GetInstance().LoadData(Data.Worldview)
 	for Ship in Data.PlayerFleet:
 		var DockedShip = DroneScene.instantiate() as Drone
 		DockedShip.Cpt = Ship.Cpt

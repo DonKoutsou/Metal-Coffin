@@ -20,7 +20,7 @@ func SetUpShip(Ship : BattleShipStats) -> void:
 	#ShipDesctext = Ship.
 	for g in Ship.Cards.keys():
 		var C = CardScene.instantiate() as Card
-		C.SetCardStats(g, [])
+		C.SetCardStats(g)
 		CardPlecement.add_child(C)
 		C.Dissable()
 func _on_scroll_container_gui_input(event: InputEvent) -> void:

@@ -126,10 +126,14 @@ func _ready() -> void:
 			PlayIntro()
 		PlayerWallet.SetFunds( StartingFunds)
 	else:
+		WorldView.GetInstance().Load()
+		
 		GetMap().GetScreenUi().ToggleFullScreen(false)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		GetMap().GetCamera().FrameCamToPlayer()
+	
+	
 
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
@@ -399,7 +403,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	Spot.OnSpotVisited()
 	return PlayedEvent
 	
-func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
+func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], _Ship : MapShip) -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(CapmaignFin)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()

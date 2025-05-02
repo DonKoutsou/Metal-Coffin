@@ -107,7 +107,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 			
 			if (It.CardOptionProviding != null):
 				CardS.SelectedOption = It.CardOptionProviding
-			card.SetCardStats(CardS, [], It.CardProviding.count(g))
+			card.SetCardStats(CardS, It.CardProviding.count(g))
 			CardPlecement.add_child(card)
 			card.Dissable()
 	else:

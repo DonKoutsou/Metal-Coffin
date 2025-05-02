@@ -12,6 +12,7 @@ SpotScene = ExtResource("2_l7yg4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." groups=["DissapearingMap"]]
 z_index = -1
+texture_filter = 1
 material = ExtResource("3_ot8kj")
 scale = Vector2(0.1875, 0.1875)
 texture = ExtResource("4_u3ytj")

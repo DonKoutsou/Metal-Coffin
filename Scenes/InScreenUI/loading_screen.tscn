@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bas2hvjynjr05"]
+[gd_scene load_steps=12 format=3 uid="uid://bas2hvjynjr05"]
 
 [ext_resource type="Script" uid="uid://b6akb2f5doubl" path="res://Scenes/loading_screen.gd" id="2_ehbru"]
-[ext_resource type="Texture2D" uid="uid://dmn5vs4kmksro" path="res://Assets/Logos/Name1438p.png" id="2_fo8k0"]
+[ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="3_jmxc3"]
+[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="3_qc4cv"]
 [ext_resource type="Texture2D" uid="uid://byfedq22uoe62" path="res://Assets/Logos/ΜΧΨ1.png" id="4_57mps"]
 [ext_resource type="Texture2D" uid="uid://cga2lurpwk4ft" path="res://Assets/Logos/ΜΧΨ2.png" id="5_bbvsw"]
 [ext_resource type="Texture2D" uid="uid://dni651daut8p5" path="res://Assets/Logos/ΜΧΨ3.png" id="6_pg350"]
@@ -91,7 +92,6 @@ script = ExtResource("2_ehbru")
 Labe = NodePath("Label")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +100,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect6" type="TextureRect" parent="."]
+[node name="TextureRect7" type="TextureRect" parent="."]
 modulate = Color(0.51218, 0.51218, 0.51218, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -108,7 +108,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_fo8k0")
+texture = ExtResource("3_qc4cv")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+modulate = Color(0.51218, 0.51218, 0.51218, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jmxc3")
+expand_mode = 1
+
+[node name="TextureRect8" type="TextureRect" parent="TextureRect6"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jmxc3")
 expand_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class ShipCameraC : Camera2D
 {
@@ -110,7 +111,7 @@ public partial class ShipCameraC : Camera2D
 
             Zoom = (start_zoom / zoom_factor).Clamp(new Vector2(0.045f, 0.045f), new Vector2(2.1f, 2.1f));
 
-            CallDeferred("OnZoomChanged", Zoom.X);
+            CallDeferred("OnZoomChanged", Zoom);
             _UpdateMapGridVisibility();
         }
         else
@@ -130,7 +131,7 @@ public partial class ShipCameraC : Camera2D
         EmitSignal(nameof(ZoomChanged), NewZoom.X);
     }
 
-    private void _UpdateMapGridVisibility()
+    private async Task _UpdateMapGridVisibility()
     {
         if (Zoom.X < 0.5f && !GridShowing)
         {
@@ -139,9 +140,16 @@ public partial class ShipCameraC : Camera2D
             Tween tw = CreateTween();
             tw.TweenProperty(Background, "modulate", new Color(1, 1, 1, 1), 0.5f);
             GridShowing = true;
+
+            await ToSignal(tw, "finished");
+
+            Clouds.Visible = false;
+            Ground.Visible = false;
         }
         else if (Zoom.X >= 0.5f && GridShowing)
         {
+            Clouds.Visible = true;
+            Ground.Visible = true;
             Tween tw = CreateTween();
             tw.TweenProperty(Background, "modulate", new Color(1, 1, 1, 0), 0.5f);
             Tween mtw = CreateTween();
@@ -149,6 +157,8 @@ public partial class ShipCameraC : Camera2D
             GridShowing = false;
         }
     }
+
+    
 
     private void UpdateCameraPos(Vector2 relativeMovement)
     {

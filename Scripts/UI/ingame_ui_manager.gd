@@ -36,7 +36,7 @@ func ToggleScreenGlitches(t : bool) -> void:
 	var ImageFlicker = 0
 	var Skip = 0
 	if (t):
-		ImageFlicker = 0.2
+		ImageFlicker = 0.05
 		Skip = 0.01
 		
 	mat.set_shader_parameter("image_flicker", ImageFlicker)

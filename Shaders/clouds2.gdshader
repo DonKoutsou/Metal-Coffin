@@ -21,6 +21,9 @@ void fragment() {
     // Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range
     // and clamp it between 0.0 and 1.0 again
     float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
+	
+	
     // Apply the fog effect
     COLOR.a *= fog * density;
+	//NORMAL_MAP = vec3(0,0,fog * density);
 }

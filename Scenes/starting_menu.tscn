@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=42 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -17,6 +17,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
 [ext_resource type="Shader" uid="uid://cmen5pp83lhs2" path="res://Shaders/clouds2.gdshader" id="14_7x35f"]
+[ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
 [ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_1p5b6"]
@@ -37,7 +38,6 @@ reflected_light_source = 1
 tonemap_mode = 2
 tonemap_exposure = 0.61
 tonemap_white = 16.0
-glow_enabled = true
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -151,6 +151,9 @@ anti_aliasing_size = 2.0
 light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1p5b6"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_srpg8"]
 light_mode = 1
 
 [node name="StartingMenu" type="CanvasLayer"]
@@ -353,15 +356,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -193.0
-offset_right = -109.0
-offset_bottom = -253.0
+offset_left = 1.0
+offset_top = -202.0
+offset_right = -128.0
+offset_bottom = -262.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6
-texture = ExtResource("7_aspsn")
+texture = ExtResource("14_61hxs")
 expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="w/TextureRect2"]
@@ -389,10 +392,10 @@ material = SubResource("CanvasItemMaterial_eb1s8")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 45.0
-offset_top = -387.0
-offset_right = 383.0
-offset_bottom = -28.0
+offset_left = 25.0
+offset_top = -398.0
+offset_right = 363.0
+offset_bottom = -20.0
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("9_3vvgq")
 
@@ -403,13 +406,30 @@ size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Prologue" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
+alignment = 1
+
+[node name="Prologue" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer3" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("6_gn124")
 action_mode = 0
-text = "- Prologue -"
+text = "- Start -
+Prologue"
+
+[node name="LoadPrologue" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer3" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("6_gn124")
+action_mode = 0
+text = "- Load -
+Prologue"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 use_parent_material = true
@@ -544,9 +564,68 @@ color = Color(0, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Prologue" to="." method="_on_prologue_pressed"]
+[node name="Control" type="Control" parent="."]
+material = SubResource("CanvasItemMaterial_srpg8")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.0
+offset_top = -94.0
+offset_right = 189.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("9_3vvgq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 31
+text = "Show Hints ?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="ShowTutorial" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 34
+text = "Yes"
+
+[node name="DontShowTutorial" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 34
+text = "No"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer3/Prologue" to="." method="_on_prologue_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer3/LoadPrologue" to="." method="_on_load_prologue_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/ShowTutorial" to="." method="_on_show_tutorial_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/DontShowTutorial" to="." method="_on_dont_show_tutorial_pressed"]

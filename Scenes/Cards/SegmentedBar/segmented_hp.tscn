@@ -37,9 +37,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_f37qp")
 script = ExtResource("1_f4xkd")
 SegmentScene = ExtResource("2_yg37y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Control" type="Control" parent="."]

@@ -7,7 +7,7 @@ var DroneScene : String = "res://Scenes/drone.tscn"
 #func _init() -> void:
 	#Dron = DroneScene.instantiate()
 
-func OptionResault(EventOrigin : MapSpot) -> String:
+func OptionResault(_EventOrigin : MapSpot) -> String:
 	return StringReply
 	
 func OptionOutCome(Instigator : MapShip) -> bool:

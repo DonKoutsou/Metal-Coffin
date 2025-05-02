@@ -18,7 +18,7 @@ func SetAccuracy() -> void:
 	$Panel.position.x = (size.x / 2) - percentSize / 2
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	Bar.value += 1
 	if (Bar.value == 100):
 		set_physics_process(false)

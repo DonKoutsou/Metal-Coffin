@@ -22,6 +22,7 @@ func DoPopUp(Text : String):
 func DoConfirm(Title : String, Text : String, ConfirmText : String, Method : Callable):
 	var dig = CustomConfirm.instantiate() as ConfirmationDialog
 	dig.connect("confirmed", Method)
+	dig.title = Title
 	#add_child(dig)
 	#dig.title = 
 	dig.dialog_text = Text

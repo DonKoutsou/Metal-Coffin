@@ -14,7 +14,7 @@ func _ready() -> void:
 func SetCards(Cards : Array[Card]) -> void:
 	for g in Cards:
 		var b = CardScene.instantiate() as Card
-		b.SetCardStats(g.CStats, [])
+		b.SetCardStats(g.CStats)
 		CardContainer.add_child(b)
 		b.OnCardPressed.connect(TargetSelected)
 		

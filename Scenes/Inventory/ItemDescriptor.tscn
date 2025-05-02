@@ -188,7 +188,7 @@ uppercase = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/CardsSection"]
 clip_contents = false
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 270)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 3
@@ -198,6 +198,7 @@ vertical_scroll_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer"]

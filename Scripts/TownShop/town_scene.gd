@@ -107,7 +107,7 @@ func SetHullData():
 		PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 
 func SetTownBuffs() -> void:
-	var Text : String
+	var Text : String = ""
 	if (TownSpot.HasFuel()):
 		Text += "[p][img]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
 	if (TownSpot.HasRepair()):

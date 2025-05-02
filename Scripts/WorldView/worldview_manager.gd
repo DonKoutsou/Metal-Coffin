@@ -67,7 +67,7 @@ func SkillCheck(Stat : WorldViews, Possetive : bool, Difficulty : int) -> bool:
 		print("Skill Check Failed!")
 		return false
 
-static func Save() -> void:
+static func SaveWorldview() -> void:
 	var sav : TutorialSaveData
 	
 	if (FileAccess.file_exists("user://TutorialData.tres")):

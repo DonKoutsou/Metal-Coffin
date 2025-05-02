@@ -11,12 +11,14 @@ static func GetInstance() -> SaveLoadManager:
 
 func DeleteSave() -> void:
 	DirAccess.remove_absolute("user://SavedGame.tres")
+	DirAccess.remove_absolute("user://PrologueSavedGame.tres")
+	
 # Called when the node enters the scene tree for the first time.
 func Save() -> void:
 	var world = World.GetInstance()
-	if (world.IsPrologue):
-		PopUpManager.GetInstance().DoPopUp("Can't save progress in prologue.")
-		return
+	#if (world.IsPrologue):
+		#PopUpManager.GetInstance().DoPopUp("Can't save progress in prologue.")
+		#return
 	var Mapz = world.GetMap() as Map
 	var Inv = InventoryManager.GetInstance()
 	var Controller = world.Controller
@@ -40,14 +42,30 @@ func Save() -> void:
 	var sav = SaveData.new()
 	sav.DataName = "Save"
 	sav.Datas = DataArray
-	ResourceSaver.save(sav, "user://SavedGame.tres")
+	
+	var SaveName : String
+	
+	WorldView.SaveWorldview()
+	
+	if (world.IsPrologue):
+		SaveName = "user://PrologueSavedGame.tres"
+	else:
+		SaveName = "user://SavedGame.tres"
+	
+	ResourceSaver.save(sav, SaveName)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func Load(world : World) ->bool:
-	if (!FileAccess.file_exists("user://SavedGame.tres")):
+	var SaveName : String
+	if (world.IsPrologue):
+		SaveName = "user://PrologueSavedGame.tres"
+	else:
+		SaveName = "user://SavedGame.tres"
+		
+	if (!FileAccess.file_exists(SaveName)):
 		return false
 	
-	var sav = load("user://SavedGame.tres") as SaveData
+	var sav = load(SaveName) as SaveData
 	
 	if (sav == null):
 		return false

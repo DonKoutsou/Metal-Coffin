@@ -18,7 +18,7 @@ class_name Happening_Option
 
 var CheckResault = true
 
-func OptionResault(EventOrigin : MapSpot) -> String:
+func OptionResault(_EventOrigin : MapSpot) -> String:
 	return ""
 	
 func OptionOutCome(_Instigator : MapShip)-> bool:

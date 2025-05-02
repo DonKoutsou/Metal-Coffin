@@ -28,7 +28,7 @@ func ForceValue(val : float) ->void:
 	#var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 	#AccelerationChanged.emit(newval)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (abs(accumulatedrelative) < step):
 		AccelerationChangeEnded.emit(0)
 		set_physics_process(false)

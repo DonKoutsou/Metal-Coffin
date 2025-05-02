@@ -39,7 +39,7 @@ func CompactCard() -> void:
 func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 	var KillTw = create_tween()
 	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	var mat = material as ShaderMaterial
+	#var mat = material as ShaderMaterial
 	KillTw.tween_method(UpdateShader, 1.0, 0.0,CustomTime)
 	#KillTw.tween_property(mat, "dissolve_value", 0, 0.2)
 	await KillTw.finished
@@ -60,8 +60,8 @@ func _ready() -> void:
 		Lines.append(NewLine)
 	set_physics_process(TargetLocs.size() > 0)
 	$Line2D.visible = TargetLocs.size() > 0
-
-func SetCardStats(Stats : CardStats, Options : Array[CardOption], Amm : int = 0) -> void:
+#func SetCardStats(Stats : CardStats, Options : Array[CardOption], Amm : int = 0) -> void:
+func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
 	Cost = Stats.Energy
 	var DescText =  "[center] {0}".format([Stats.GetDescription()])

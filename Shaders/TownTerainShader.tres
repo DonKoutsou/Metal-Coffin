@@ -8,7 +8,7 @@
 code = "shader_type canvas_item;
 
 // Noise texture
-uniform sampler2D Alpha;
+uniform sampler2D Alpha:  filter_nearest;
 uniform sampler2D GroundTexture: repeat_enable, filter_nearest;
 uniform sampler2D GroundNormalTexture: hint_normal, filter_nearest, repeat_enable;
 

@@ -210,7 +210,7 @@ func _physics_process(delta: float) -> void:
 						Marker.UpdateTime(timepast)
 		else:
 			if (ship is MapShip):
-				var docked = ship.Docked
+
 				Marker.global_position = ship.global_position
 				Marker.ToggleShipDetails(ship == ControlledShip)
 				

@@ -28,7 +28,7 @@ func _ready() -> void:
 	Possetivebar.value = Statvalue - AdjustedAmm
 	var DamageFloater = DamageFloaterScene.instantiate() as Floater
 	DamageFloater.text = var_to_str(AdjustedAmm)
-	DamageFloater.EndTimer.wait_time = 1
+	#DamageFloater.EndTimer.wait_time = 1
 	var Stat = WorldView.WorldViews.keys()[NotifStat].split("_")
 	$VBoxContainer/HBoxContainer2/Label.text = Stat[0]
 	$VBoxContainer/HBoxContainer2/Label2.text = Stat[1]

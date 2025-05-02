@@ -143,7 +143,7 @@ RemoveCardSound = ExtResource("18_wdur5")
 PlayerCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PlayerCardPlacement")
 SelectedCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements")
 AnimationPlecement = NodePath("SubViewport/Control2/VBoxContainer4/ShipSpacer")
-EnergyBar = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer/SegmentedHP")
+EnergyBar = NodePath("SubViewport/Control2/HBoxContainer/SegmentedHP")
 EnemyShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/EnemyShipPlecement")
 PlayerShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/PlayerShipPlecement")
 TargetSelect = NodePath("SubViewport/Control2/TargetSelect")
@@ -154,7 +154,7 @@ ShipSpacer = NodePath("SubViewport/Control2/VBoxContainer4/ShipSpacer")
 DeckButton = NodePath("SubViewport/Control2/DeckButton")
 HandAmmountLabel = NodePath("SubViewport/Control2/Label")
 StartingCardAmm = 4
-MaxCombatants = 4
+MaxCombatants = 3
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -274,54 +274,54 @@ alignment = 1
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
+size_flags_vertical = 3
 alignment = 1
 
 [node name="SelectedCardPlecements" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 10
-theme_override_constants/separation = -150
+size_flags_vertical = 3
+theme_override_constants/separation = -84
 alignment = 1
 
 [node name="CardPlecement1" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
 custom_minimum_size = Vector2(200, 113.47)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement2" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
 custom_minimum_size = Vector2(200, 113.47)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement3" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
 custom_minimum_size = Vector2(200, 113.47)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement4" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
 custom_minimum_size = Vector2(200, 113.47)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardPlecement5" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
 custom_minimum_size = Vector2(200, 113.47)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 6
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="PlayerCardPlacement" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer"]
@@ -366,22 +366,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-
-[node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
-layout_mode = 2
-theme_override_constants/separation = -12
-alignment = 1
-
-[node name="SegmentedHP" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer" instance=ExtResource("21_taaw1")]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("14_kl7fj")
-text = "End Turn"
 
 [node name="ShipSpacer" type="Control" parent="SubViewport/Control2/VBoxContainer4"]
 visible = false
@@ -499,6 +483,36 @@ offset_right = 169.0
 offset_bottom = -13.0
 grow_horizontal = 1
 grow_vertical = 0
+pivot_offset = Vector2(40, 160)
+
+[node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -141.0
+offset_top = -196.0
+offset_right = -36.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = -12
+alignment = 1
+
+[node name="SegmentedHP" parent="SubViewport/Control2/HBoxContainer" instance=ExtResource("21_taaw1")]
+custom_minimum_size = Vector2(83.245, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="SubViewport/Control2/HBoxContainer" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("14_kl7fj")
+text = "End Turn"
 
 [node name="Label" type="Label" parent="SubViewport/Control2"]
 layout_mode = 1
@@ -525,8 +539,8 @@ texture = ExtResource("29_hn1mp")
 texture_scale = 25.0
 height = 284.0
 
-[connection signal="pressed" from="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]
 [connection signal="mouse_entered" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_mouse_entered"]
 [connection signal="mouse_exited" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_mouse_exited"]
 [connection signal="pressed" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_pressed"]
+[connection signal="pressed" from="SubViewport/Control2/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]

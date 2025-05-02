@@ -15,7 +15,7 @@ func _ready() -> void:
 	value = Timeout
 	T.start()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	value = T.time_left
 	Text.text = var_to_str(roundi(value)) + " s"
 	if (value <= 3 and !S.playing):
