@@ -7,6 +7,11 @@
 
 [resource]
 script = ExtResource("2_kfy2h")
+Shield = false
+Buffs = false
+FireExt = true
+CanBeUsedOnOther = false
+UseInstant = true
 Icon = ExtResource("1_0cpai")
 CardName = "Extinguish fires"
 CardDescription = "Extinguishes [color=#ff3c22]fires[/color] on ship"
@@ -17,3 +22,4 @@ Consume = false
 RequiredPart = Array[ExtResource("3_0cpai")]([])
 WeapT = 0
 AOE = false
+Tier = 1

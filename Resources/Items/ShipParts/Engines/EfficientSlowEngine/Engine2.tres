@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://c8wthdbwacfhe"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://c8wthdbwacfhe"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_66jjj"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_6o1ql"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="3_q2ctq"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="4_q0elo"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_awpny"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_n7ikb"]
@@ -41,5 +42,5 @@ Tier = 1
 ItemName = "EcoDrive-100q \"Conserve\""
 ItemDesc = "Conserve is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, Conserve offers a balanced compromise for steady pacing over extended durations."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_6o1ql")]([ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("1_66jjj")])
+CardProviding = Array[ExtResource("2_6o1ql")]([ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("3_q2ctq"), ExtResource("3_q2ctq")])
 CanTransfer = false

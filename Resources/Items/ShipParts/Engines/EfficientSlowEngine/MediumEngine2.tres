@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://ctlms8do0piak"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://ctlms8do0piak"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_h3l1d"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_rjcvh"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="3_14ypp"]
 [ext_resource type="Resource" uid="uid://77852w5u88sm" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/LargeEngine2.tres" id="4_odx1v"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_m7n25"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_lldtj"]
@@ -41,5 +42,5 @@ Tier = 1
 ItemName = "EcoDrive-250 \"Sustain\""
 ItemDesc = "Sustain enhances fuel efficiency features while allowing for moderate improvements in speed. Utilizing advanced energy management systems, Sustain is perfect for tactical retreats or slow reconnaissance missions, conserving resources while maintaining operational readiness."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_rjcvh")]([ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d")])
+CardProviding = Array[ExtResource("2_rjcvh")]([ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("3_14ypp"), ExtResource("3_14ypp")])
 CanTransfer = false

@@ -288,6 +288,7 @@ environment = SubResource("Environment_h7q0i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
+follow_viewport_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer"]
 environment = SubResource("Environment_x3wib")

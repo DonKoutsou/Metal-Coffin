@@ -7,7 +7,11 @@
 
 [resource]
 script = ExtResource("4_i8eet")
+Shield = true
+Buffs = false
+FireExt = false
 CanBeUsedOnOther = false
+UseInstant = true
 Icon = ExtResource("1_okst8")
 CardName = "Shield Overcharge"
 CardDescription = "Overcharge shiels for temporary buff.[p][center][color=#6be2e9]+ 20 SHIELD"

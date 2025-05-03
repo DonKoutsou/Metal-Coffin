@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://bhlucco4xwaob"]
+
+[ext_resource type="Texture2D" uid="uid://d3g37qs6mb3rn" path="res://Assets/Cards/Revup.png" id="1_nqbud"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_r7uwp"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_xycns"]
+[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_bmx5i"]
+
+[resource]
+script = ExtResource("4_bmx5i")
+Shield = false
+Buffs = false
+SpeedBuffs = true
+FireExt = false
+CanBeUsedOnOther = false
+UseInstant = true
+Icon = ExtResource("1_nqbud")
+CardName = "Engine Revup"
+CardDescription = "Increace ships speed.[p][center][color=#308a4d] SPEED * 1.5 [p][center][color=#c19200]Doesn't Stack"
+Energy = 4
+Options = Array[ExtResource("2_r7uwp")]([])
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("3_xycns")]([])
+WeapT = 0
+AOE = false
+Tier = 1

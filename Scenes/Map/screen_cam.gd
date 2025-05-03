@@ -96,6 +96,17 @@ func _physics_process(delta: float) -> void:
 			PauseShake(true)
 		var of = RandomOffset()
 		offset = of
+	else:
+		offset = RandomOffset2()
+		
+var prev : Vector2 = Vector2.ZERO
+
+func RandomOffset2() -> Vector2:
+	var x = clamp(randf_range(prev.x - 0.1, prev.x + 0.1), -50, 50);
+	var y = clamp(randf_range(prev.y - 0.1, prev.y + 0.1), -50, 50);
+	prev = Vector2(x,y)
+	return prev;
+
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 var stattween : Tween

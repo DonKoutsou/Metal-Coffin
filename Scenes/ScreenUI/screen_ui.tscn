@@ -836,6 +836,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ScreenCam" type="Camera2D" parent="." node_paths=PackedStringArray("Cabled")]
+z_index = 1
 position = Vector2(640, 360)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")

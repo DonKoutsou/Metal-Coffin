@@ -99,7 +99,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 		var CardsChecked : Array[CardStats]
 		for g in It.CardProviding:
 			if (CardsChecked.has(g)):
-				return
+				continue
 			CardsChecked.append(g)
 			
 			var CardS = g.duplicate() as CardStats

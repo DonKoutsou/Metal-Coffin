@@ -5,13 +5,16 @@ class_name CardFightShipViz2
 @export var ShipNameLabel : Label
 @export var ShipIcon : TextureRect
 @export var StatLabel : RichTextLabel
-@export var FriendlyPanel : Panel
+@export var FriendlyPanel : PanelContainer
+@export var SpeedBuff : GPUParticles2D
+@export var FPBuff : GPUParticles2D
+@export var FirePart : GPUParticles2D
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
 func _ready() -> void:
 	#$Panel.visible = false
-	$HBoxContainer/HBoxContainer/RichTextLabel.text = StatText
+	$HBoxContainer/PanelContainer/HBoxContainer/RichTextLabel.text = StatText
 	ToggleFire(false)
 
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
@@ -19,17 +22,21 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	ShipIcon.texture = S.ShipIcon
 	var Hull = var_to_str(snapped(S.Hull, 0.1)).replace(".0", "")
 	var Shield = var_to_str(snapped(S.Shield, 0.1)).replace(".0", "")
-	var Speed = var_to_str(snapped(S.Speed, 0.1)).replace(".0", "")
+	var Speed = var_to_str(snapped(S.GetSpeed(), 0.1)).replace(".0", "")
 	var Firep = var_to_str(snapped(S.GetFirePower(), 0.1)).replace(".0", "")
 	if (S.FirePowerBuff > 0):
 		Firep = "[color=#308a4d]" + Firep + "[/color]"
+	if (S.SpeedBuff > 0):
+		Speed = "[color=#308a4d]" + Speed + "[/color]"
+	if (S.Shield > 0):
+		Shield = "[color=#308a4d]" + Shield + "[/color]"
 	StatLabel.text = "[right]{0}[right]{1}[right]{2}[right]{3}".format([Hull, Shield, Speed, Firep])
 	ShipIcon.flip_v = !Friendly
 	if (Friendly):
-		$HBoxContainer.move_child($HBoxContainer/HBoxContainer, 0)
+		$HBoxContainer.move_child($HBoxContainer/PanelContainer, 0)
 	else:
-		$HBoxContainer.move_child($HBoxContainer/HBoxContainer, 1)
-	FriendlyPanel.visible = false
+		$HBoxContainer.move_child($HBoxContainer/PanelContainer, 1)
+	FriendlyPanel.self_modulate.a = 0
 	
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
 	ShipNameLabel.text = S.Name.substr(0, 3)
@@ -37,35 +44,44 @@ func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
 	FriendlyPanel.visible = Friendly
 
 func Dissable() -> void:
-	FriendlyPanel.visible = false
+	FriendlyPanel.self_modulate.a = 0
+	Enabled = false
+	ModulateTween.kill()
+
+var Enabled : bool = false
+
+var ModulateTween : Tween
 
 func Enable() -> void:
-	FriendlyPanel.visible = true
-	var tw = create_tween()
+	Enabled = true
+	FriendlyPanel.self_modulate.a = 1
+	ModulateTween = create_tween()
 	#tw.set_trans(Tween.TRANS_CIRC)
-	tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,0), 1)
-	tw.tween_callback(TweenEnded)
+	ModulateTween.tween_property(FriendlyPanel, "self_modulate", Color(1,1,1,0), 1)
+	ModulateTween.tween_callback(TweenEnded)
 
 func TweenEnded() -> void:
-	var tw = create_tween()
+	if (!Enabled):
+		return
+	ModulateTween = create_tween()
 	#tw.set_trans(Tween.TRANS_CIRC)
-	if (FriendlyPanel.modulate == Color(1,1,1,0)):
-		tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,1), 1)
+	if (FriendlyPanel.self_modulate == Color(1,1,1,0)):
+		ModulateTween.tween_property(FriendlyPanel, "self_modulate", Color(1,1,1,1), 1)
 	else:
-		tw.tween_property(FriendlyPanel, "modulate", Color(1,1,1,0), 1)
-	tw.tween_callback(TweenEnded)
+		ModulateTween.tween_property(FriendlyPanel, "self_modulate", Color(1,1,1,0), 1)
+	ModulateTween.tween_callback(TweenEnded)
 
 func ToggleFire(t : bool) -> void:
-	$HBoxContainer/VBoxContainer/Control/GPUParticles2D.visible = t
+	FirePart.visible = t
 
 func ToggleDmgBuff(t : bool) -> void:
-	$HBoxContainer/HBoxContainer/RichTextLabel2/FirepowerBuff.visible = t
+	FPBuff.visible = t
 
 func ToggleSpeedBuff(t : bool) -> void:
-	$HBoxContainer/HBoxContainer/RichTextLabel2/SpeedBuff.visible = t
+	SpeedBuff.visible = t
 
 func IsOnFire() -> bool:
-	return $HBoxContainer/VBoxContainer/Control/GPUParticles2D.visible
+	return FirePart.visible
 
 func ShipDestroyed() -> void:
 	var tw = create_tween()

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=6 format=3 uid="uid://c16lcf8swpkjk"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://c16lcf8swpkjk"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_6ifd7"]
 [ext_resource type="Resource" uid="uid://5k4na6wpwyds" path="res://Resources/Cards/RadarBuffT3.tres" id="2_o8uu3"]
+[ext_resource type="Resource" uid="uid://5v0ixc1yjape" path="res://Resources/Cards/RadarBuffSingleT3.tres" id="3_o8uu3"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_ypyoy"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_qmdqt"]
 
@@ -24,5 +25,5 @@ Tier = 1
 ItemName = "RA-100"
 ItemDesc = "A superior radar array with far-reaching detection range. Utilizes phased array technology for unparalleled tracking specificity and enhanced situational awareness."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_6ifd7")]([ExtResource("2_o8uu3")])
+CardProviding = Array[ExtResource("1_6ifd7")]([ExtResource("2_o8uu3"), ExtResource("3_o8uu3")])
 CanTransfer = true

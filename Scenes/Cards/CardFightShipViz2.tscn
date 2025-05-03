@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_mg5jy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
+content_margin_left = 10.0
+content_margin_right = 10.0
 bg_color = Color(0.231024, 0.490544, 0.236315, 1)
 border_width_left = 1
 border_width_top = 1
@@ -74,7 +76,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
-[node name="CardFightShipViz" type="Control" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel")]
+[node name="CardFightShipViz" type="Control" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel", "SpeedBuff", "FPBuff", "FirePart")]
 custom_minimum_size = Vector2(180, 86)
 layout_mode = 3
 anchors_preset = 8
@@ -94,21 +96,11 @@ theme = ExtResource("1_ydw5a")
 script = ExtResource("2_ydw5a")
 ShipNameLabel = NodePath("HBoxContainer/VBoxContainer/Label")
 ShipIcon = NodePath("HBoxContainer/VBoxContainer/Control/TextureRect")
-StatLabel = NodePath("HBoxContainer/HBoxContainer/RichTextLabel2")
-FriendlyPanel = NodePath("Panel")
-
-[node name="Panel" type="Panel" parent="."]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_right = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
+StatLabel = NodePath("HBoxContainer/PanelContainer/HBoxContainer/RichTextLabel2")
+FriendlyPanel = NodePath("HBoxContainer/PanelContainer")
+SpeedBuff = NodePath("HBoxContainer/PanelContainer/HBoxContainer/RichTextLabel2/SpeedBuff")
+FPBuff = NodePath("HBoxContainer/PanelContainer/HBoxContainer/RichTextLabel2/FirepowerBuff")
+FirePart = NodePath("HBoxContainer/VBoxContainer/Control/GPUParticles2D")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -118,10 +110,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/HBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
@@ -139,7 +135,7 @@ fit_content = true
 scroll_active = false
 text_direction = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/HBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/PanelContainer/HBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -154,7 +150,7 @@ fit_content = true
 scroll_active = false
 text_direction = 1
 
-[node name="SpeedBuff" type="GPUParticles2D" parent="HBoxContainer/HBoxContainer/RichTextLabel2"]
+[node name="SpeedBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer/HBoxContainer/RichTextLabel2"]
 visible = false
 modulate = Color(0.311061, 0.899, 0.506367, 1)
 position = Vector2(-6, 38)
@@ -164,7 +160,7 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
-[node name="FirepowerBuff" type="GPUParticles2D" parent="HBoxContainer/HBoxContainer/RichTextLabel2"]
+[node name="FirepowerBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer/HBoxContainer/RichTextLabel2"]
 visible = false
 modulate = Color(0.952941, 0.313726, 0.2, 1)
 position = Vector2(-14, 47)

@@ -95,7 +95,7 @@ func On_Game_Lost_Button_Pressed() -> void:
 func _input(event: InputEvent) -> void:
 	#if (event.is_action_pressed("Pause")):
 		#Pause()
-	if (event.is_action_pressed("CommandLine")):
+	if (event.is_action_pressed("CommandLine") and OS.is_debug_build()):
 		$Control3/CommandLine.visible = !$Control3/CommandLine.visible
 		$Control3/CommandLine.call_deferred("Focus")
 		

@@ -209,7 +209,11 @@ public partial class ShipCameraC : Camera2D
             Vector2 of = RandomOffset();
             Offset = of;
         }
-
+        //else{
+        //    Vector2 of = RandomOffset2();
+        ///    Offset = of;
+        //}
+           
         Vector2 rel = Vector2.Zero;
 
         if (Input.IsActionPressed("MapDown"))
@@ -246,6 +250,14 @@ public partial class ShipCameraC : Camera2D
     private Vector2 RandomOffset()
     {
         return new Vector2((float)GD.RandRange((double)-shakestr, shakestr), (float)GD.RandRange((double)-shakestr, shakestr));
+    }
+    Vector2 prev = Vector2.Zero;
+    private Vector2 RandomOffset2()
+    {
+        float x = Mathf.Clamp((float)GD.RandRange(prev.X - 0.1, prev.X + 0.1), -10, 10);
+        float y = Mathf.Clamp((float)GD.RandRange(prev.Y - 0.1, prev.Y + 0.1), -10, 10);
+        prev = new Vector2(x, y);
+        return prev;
     }
 
     public void ShowStation()

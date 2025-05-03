@@ -7,9 +7,14 @@
 
 [resource]
 script = ExtResource("4_8niei")
+Shield = false
+Buffs = true
+SpeedBuffs = false
+FireExt = false
 CanBeUsedOnOther = true
+UseInstant = true
 Icon = ExtResource("1_uykab")
-CardName = "Radar Atack"
+CardName = "Team Radar Buff"
 CardDescription = "Buffs Other Ships.[p][center][color=#f35033] FPWR + 3[p][center][color=#c19200]Doesn't Stack"
 Energy = 6
 Options = Array[ExtResource("2_um806")]([])

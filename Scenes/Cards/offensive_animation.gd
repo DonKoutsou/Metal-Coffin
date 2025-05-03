@@ -26,6 +26,8 @@ var IcPos : Vector2
 var Targets : Array[Control]
 #var Ic2Pos : Vector2
 var fr : bool
+
+var BuffText : String
 #func _ready() -> void:
 	#set_physics_process(false)
 	#set_physics_process(true)
@@ -201,7 +203,7 @@ func TweenEnded(Damage : float) -> void:
 
 func ShieldTweenEnded(target : Control) -> void:
 	var d = DamageFloater.instantiate()
-	d.text = "Shield Added"
+	d.text = BuffText
 	d.modulate = Color(1,1,1,1)
 	add_child(d)
 	d.global_position = (target.global_position + (target.size / 2)) - d.size / 2
@@ -209,7 +211,7 @@ func ShieldTweenEnded(target : Control) -> void:
 
 func BuffTweenEnded(target : Control) -> void:
 	var d = DamageFloater.instantiate()
-	d.text = "Buffed"
+	d.text = BuffText
 	d.modulate = Color(1,1,1,1)
 	add_child(d)
 	d.global_position = (target.global_position + (target.size / 2)) - d.size / 2
@@ -230,10 +232,21 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], _FriendShip
 	tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.4)
 	#await tw2.finished
 	
-	if (DefCard.CardName == "Radar Atack"):
+	if (DefCard.Buffs):
+		BuffText = "Firepower\nBuffed"
 		for g in TargetShips:
 			call_deferred("SpawnUpVisual", g)
-	else:
+	else: if (DefCard.SpeedBuffs):
+		BuffText = "Speed\nBuffed"
+		for g in TargetShips:
+			call_deferred("SpawnUpVisual", g)
+	else: if (DefCard.Shield):
+		BuffText = "Shield\nAdded"
+		for g in TargetShips:
+			call_deferred("SpawnShieldVisual", g)
+	
+	else : if (DefCard.FireExt):
+		BuffText = "Fire\nExtinguished"
 		for g in TargetShips:
 			call_deferred("SpawnShieldVisual", g)
 	

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://5v0ixc1yjape"]
+
+[ext_resource type="Texture2D" uid="uid://builhul2oelnc" path="res://Assets/Cards/RadarBuffSingle.png" id="1_b4hfb"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_u3dy2"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_6cs6r"]
+[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_uoddv"]
+
+[resource]
+script = ExtResource("4_uoddv")
+Shield = false
+Buffs = true
+SpeedBuffs = false
+FireExt = false
+CanBeUsedOnOther = true
+UseInstant = true
+Icon = ExtResource("1_b4hfb")
+CardName = "Radar Buff"
+CardDescription = "Buffs One Other Ship.[p][center][color=#f35033] FPWR + 6 [p][center][color=#c19200]Doesn't Stack"
+Energy = 6
+Options = Array[ExtResource("2_u3dy2")]([])
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("3_6cs6r")]([])
+WeapT = 0
+AOE = false
+Tier = 3
