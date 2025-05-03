@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CardSpawn" load_steps=6 format=3 uid="uid://bl7mvgrw6tyes"]
+
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="1_00mwm"]
+[ext_resource type="Texture2D" uid="uid://bv3vkwi5obsul" path="res://Assets/Cards/BarrageReload.png" id="2_l4eym"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_e2oaq"]
+[ext_resource type="Script" uid="uid://ceqe8h8b7lrlm" path="res://Scripts/CardFight/CardSpawnCardStats.gd" id="4_p3hss"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_1yprs"]
+
+[resource]
+script = ExtResource("4_p3hss")
+CardToSpawn = ExtResource("1_00mwm")
+Icon = ExtResource("2_l4eym")
+CardName = "Emergency Reload!"
+CardDescription = "Draws a random Barrage card from the deck"
+Energy = 1
+Options = Array[ExtResource("3_e2oaq")]([])
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("5_1yprs")]([])
+WeapT = 0
+AOE = false
+Tier = 1

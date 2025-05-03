@@ -102,8 +102,8 @@ func _physics_process(delta: float) -> void:
 var prev : Vector2 = Vector2.ZERO
 
 func RandomOffset2() -> Vector2:
-	var x = clamp(randf_range(prev.x - 0.1, prev.x + 0.1), -50, 50);
-	var y = clamp(randf_range(prev.y - 0.1, prev.y + 0.1), -50, 50);
+	var x = clamp(randf_range(prev.x - 0.1, prev.x + 0.1), -5, 5);
+	var y = clamp(randf_range(prev.y - 0.1, prev.y + 0.1), -5, 5);
 	prev = Vector2(x,y)
 	return prev;
 

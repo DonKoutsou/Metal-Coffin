@@ -68,7 +68,7 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	
 	if Stats.SelectedOption !=  null:
 		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
-		DescText =  "[center] {0}".format([ Stats.SelectedOption.OptionDescription])
+		#DescText =  "[center] {0}".format([ Stats.SelectedOption.OptionDescription])
 		Cost += Stats.SelectedOption.EnergyAdd
 		CardTex.texture = Stats.SelectedOption.NewPic
 	else:

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://wdewnahxdu77"]
+[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://wdewnahxdu77"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_s4bbh"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_nhpak"]
@@ -10,6 +10,9 @@
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="5_csi3q"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_y78rd"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_iiysl"]
+[ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="8_iiysl"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="9_4fj2u"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_jklya"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_nhpak")
@@ -100,4 +103,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 50000
 ProvidingCaptains = Array[ExtResource("4_a63wb")]([])
-Cards = Array[ExtResource("3_shbq8")]([ExtResource("4_0y3bp"), ExtResource("5_csi3q"), ExtResource("6_y78rd"), ExtResource("7_iiysl")])
+Cards = Array[ExtResource("3_shbq8")]([ExtResource("4_0y3bp"), ExtResource("4_0y3bp"), ExtResource("4_0y3bp"), ExtResource("4_0y3bp"), ExtResource("4_0y3bp"), ExtResource("4_0y3bp"), ExtResource("4_0y3bp"), ExtResource("4_0y3bp"), ExtResource("5_csi3q"), ExtResource("6_y78rd"), ExtResource("7_iiysl"), ExtResource("5_csi3q"), ExtResource("8_iiysl"), ExtResource("8_iiysl"), ExtResource("8_iiysl"), ExtResource("5_csi3q"), ExtResource("7_iiysl"), ExtResource("7_iiysl"), ExtResource("7_iiysl"), ExtResource("7_iiysl"), ExtResource("7_iiysl"), ExtResource("7_iiysl"), ExtResource("9_4fj2u"), ExtResource("9_4fj2u"), ExtResource("9_4fj2u"), ExtResource("9_4fj2u"), ExtResource("10_jklya"), ExtResource("10_jklya"), ExtResource("10_jklya"), ExtResource("10_jklya"), ExtResource("10_jklya")])

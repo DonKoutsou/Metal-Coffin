@@ -28,5 +28,5 @@ func GetCounter() -> CardStats:
 
 func GetDescription() -> String:
 	if is_instance_valid(SelectedOption):
-		return SelectedOption.OptionDescription + "[color=#c19200]DMG = {0} * FPWR[/color]".format([GetDamage()])
-	return CardDescription + "[color=#c19200]DMG = {0} * FPWR[/color]".format([GetDamage()])
+		return SelectedOption.OptionDescription + "[color=#c19200]DMG = {0} * FPWR[/color]".format([var_to_str(snapped(GetDamage(), 0.1)).replace(".0", "")])
+	return CardDescription + "[color=#c19200]DMG = {0} * FPWR[/color]".format([var_to_str(snapped(GetDamage(), 0.1)).replace(".0", "")])

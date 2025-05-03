@@ -14,7 +14,7 @@ SpotScene = ExtResource("2_l7yg4")
 z_index = -1
 texture_filter = 1
 material = ExtResource("3_ot8kj")
-scale = Vector2(0.1875, 0.1875)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_ek6u8")
 region_rect = Rect2(251.179, 160.971, 745.969, 227.22)
 

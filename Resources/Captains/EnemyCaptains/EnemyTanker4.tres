@@ -1,15 +1,18 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://cvk1mvgokhtus"]
+[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://cvk1mvgokhtus"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_vh11m"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ag261"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="3_66sfh"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_lxbyk"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_nfki2"]
-[ext_resource type="Resource" uid="uid://ijdf67tiwcul" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl2.tres" id="4_hd254"]
+[ext_resource type="Resource" uid="uid://cbkme88wrncp4" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres" id="4_hnpg0"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_u3xj4"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="5_72sfo"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_8ojrt"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_hnpg0"]
+[ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="8_i6vnk"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="9_ubsps"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_s8jon"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_ag261")
@@ -100,4 +103,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 70000
 ProvidingCaptains = Array[ExtResource("4_u3xj4")]([])
-Cards = Array[ExtResource("3_nfki2")]([ExtResource("4_hd254"), ExtResource("5_72sfo"), ExtResource("6_8ojrt"), ExtResource("7_hnpg0")])
+Cards = Array[ExtResource("3_nfki2")]([ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("5_72sfo"), ExtResource("6_8ojrt"), ExtResource("7_hnpg0"), ExtResource("5_72sfo"), ExtResource("8_i6vnk"), ExtResource("8_i6vnk"), ExtResource("8_i6vnk"), ExtResource("5_72sfo"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon")])

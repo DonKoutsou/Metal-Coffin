@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://cf4b4c1bssfsr"]
+[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://cf4b4c1bssfsr"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_xdjf5"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7cq8r"]
@@ -10,6 +10,9 @@
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="5_l08pl"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="6_fl3ux"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="7_3g1ov"]
+[ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="8_l08pl"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="9_fl3ux"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_3g1ov"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_7cq8r")
@@ -100,4 +103,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 40000
 ProvidingCaptains = Array[ExtResource("4_lum0o")]([])
-Cards = Array[ExtResource("3_753m2")]([ExtResource("4_48ymf"), ExtResource("5_l08pl"), ExtResource("6_fl3ux"), ExtResource("7_3g1ov")])
+Cards = Array[ExtResource("3_753m2")]([ExtResource("4_48ymf"), ExtResource("4_48ymf"), ExtResource("4_48ymf"), ExtResource("4_48ymf"), ExtResource("4_48ymf"), ExtResource("4_48ymf"), ExtResource("4_48ymf"), ExtResource("4_48ymf"), ExtResource("7_3g1ov"), ExtResource("5_l08pl"), ExtResource("6_fl3ux"), ExtResource("7_3g1ov"), ExtResource("8_l08pl"), ExtResource("8_l08pl"), ExtResource("8_l08pl"), ExtResource("7_3g1ov"), ExtResource("6_fl3ux"), ExtResource("6_fl3ux"), ExtResource("6_fl3ux"), ExtResource("6_fl3ux"), ExtResource("6_fl3ux"), ExtResource("6_fl3ux"), ExtResource("9_fl3ux"), ExtResource("9_fl3ux"), ExtResource("9_fl3ux"), ExtResource("9_fl3ux"), ExtResource("10_3g1ov"), ExtResource("10_3g1ov"), ExtResource("10_3g1ov"), ExtResource("10_3g1ov"), ExtResource("10_3g1ov")])

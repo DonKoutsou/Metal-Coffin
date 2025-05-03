@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://mtu8yrc4q3l8"]
+[gd_resource type="Resource" script_class="Captain" load_steps=21 format=3 uid="uid://mtu8yrc4q3l8"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_ey02j"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_pl6a6"]
@@ -6,10 +6,11 @@
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="4_bip6n"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="5_0ohhi"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="6_340aw"]
-[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="6_rnln8"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="7_340aw"]
+[ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="7_rnln8"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="8_o2kyv"]
 [ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/Spaceship/Convoy.png" id="9_bip6n"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="9_ha1o8"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_pl6a6")
@@ -100,4 +101,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 50000
 ProvidingCaptains = Array[ExtResource("6_340aw")]([])
-Cards = Array[ExtResource("3_bip6n")]([ExtResource("4_bip6n"), ExtResource("5_0ohhi"), ExtResource("6_rnln8"), ExtResource("7_340aw")])
+Cards = Array[ExtResource("3_bip6n")]([ExtResource("7_340aw"), ExtResource("5_0ohhi"), ExtResource("4_bip6n"), ExtResource("7_340aw"), ExtResource("7_rnln8"), ExtResource("7_rnln8"), ExtResource("7_rnln8"), ExtResource("7_340aw"), ExtResource("4_bip6n"), ExtResource("4_bip6n"), ExtResource("4_bip6n"), ExtResource("4_bip6n"), ExtResource("4_bip6n"), ExtResource("4_bip6n"), ExtResource("9_ha1o8"), ExtResource("9_ha1o8"), ExtResource("9_ha1o8"), ExtResource("9_ha1o8"), ExtResource("9_ha1o8"), ExtResource("5_0ohhi")])

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://cphts382xybqn"]
+[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://cphts382xybqn"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_v2gom"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_qj8tl"]
@@ -7,9 +7,12 @@
 [ext_resource type="Resource" uid="uid://cbr17frcskpfb" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl3.tres" id="4_r5vcb"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_yo37a"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="5_k8r4a"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="6_58jbn"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_vqb3j"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_jfqs0"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="7_tkw6d"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/Spaceship/Scarab.png" id="9_4c3qg"]
+[ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_7qhjw"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_qj8tl")
@@ -100,4 +103,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 45000
 ProvidingCaptains = Array[ExtResource("4_yo37a")]([])
-Cards = Array[ExtResource("3_8k8jt")]([ExtResource("4_r5vcb"), ExtResource("5_k8r4a"), ExtResource("6_vqb3j"), ExtResource("7_jfqs0")])
+Cards = Array[ExtResource("3_8k8jt")]([ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("4_r5vcb"), ExtResource("5_k8r4a"), ExtResource("5_k8r4a"), ExtResource("5_k8r4a"), ExtResource("6_58jbn"), ExtResource("6_58jbn"), ExtResource("6_58jbn"), ExtResource("7_tkw6d"), ExtResource("7_tkw6d"), ExtResource("6_vqb3j"), ExtResource("6_vqb3j"), ExtResource("9_7qhjw"), ExtResource("9_7qhjw"), ExtResource("9_7qhjw"), ExtResource("9_7qhjw"), ExtResource("7_jfqs0"), ExtResource("7_jfqs0"), ExtResource("7_jfqs0"), ExtResource("7_jfqs0"), ExtResource("6_vqb3j")])

@@ -9,6 +9,7 @@
 script = ExtResource("4_i8eet")
 Shield = true
 Buffs = false
+SpeedBuffs = false
 FireExt = false
 CanBeUsedOnOther = false
 UseInstant = true

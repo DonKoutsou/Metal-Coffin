@@ -9,6 +9,7 @@
 script = ExtResource("4_7seka")
 Shield = true
 Buffs = false
+SpeedBuffs = false
 FireExt = false
 CanBeUsedOnOther = false
 UseInstant = true

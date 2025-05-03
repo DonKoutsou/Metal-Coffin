@@ -42,10 +42,6 @@ layout_mode = 2
 texture = ExtResource("2_ccovl")
 stretch_mode = 3
 
-[node name="Control2" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Developers"
@@ -72,6 +68,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Badon Gale - Soundtrack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10.24)
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Testers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Player2725"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "LuPáš"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -155,6 +173,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Control3" type="Control" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 

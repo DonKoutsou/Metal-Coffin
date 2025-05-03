@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://bfqcga4l0b5l5"]
+[gd_resource type="Resource" script_class="Captain" load_steps=26 format=3 uid="uid://bfqcga4l0b5l5"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_txr8i"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_mukc2"]
@@ -7,9 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_fyn4s"]
 [ext_resource type="Resource" uid="uid://ijdf67tiwcul" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl2.tres" id="4_vrfhx"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_wuex0"]
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="5_tdmd3"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="5_vrfhx"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="6_4cp6f"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_vrfhx"]
+[ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="8_brcnr"]
+[ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="10_050g1"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="11_x1006"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="13_25mu5"]
+[ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="14_p8wq8"]
 
 [sub_resource type="Resource" id="Resource_4xt1j"]
 script = ExtResource("2_mukc2")
@@ -100,4 +106,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 40000
 ProvidingCaptains = Array[ExtResource("4_wuex0")]([])
-Cards = Array[ExtResource("3_7br2c")]([ExtResource("4_vrfhx"), ExtResource("5_vrfhx"), ExtResource("6_4cp6f"), ExtResource("7_vrfhx")])
+Cards = Array[ExtResource("3_7br2c")]([ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("5_tdmd3"), ExtResource("5_vrfhx"), ExtResource("5_vrfhx"), ExtResource("5_vrfhx"), ExtResource("5_vrfhx"), ExtResource("5_vrfhx"), ExtResource("6_4cp6f"), ExtResource("6_4cp6f"), ExtResource("8_brcnr"), ExtResource("8_brcnr"), ExtResource("8_brcnr"), ExtResource("8_brcnr"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("4_vrfhx"), ExtResource("10_050g1"), ExtResource("10_050g1"), ExtResource("11_x1006"), ExtResource("11_x1006"), ExtResource("11_x1006"), ExtResource("7_vrfhx"), ExtResource("7_vrfhx"), ExtResource("7_vrfhx"), ExtResource("7_vrfhx"), ExtResource("13_25mu5"), ExtResource("13_25mu5"), ExtResource("13_25mu5"), ExtResource("14_p8wq8"), ExtResource("14_p8wq8")])
