@@ -37,6 +37,7 @@ func CompactCard() -> void:
 	set_anchors_preset(Control.PRESET_CENTER)
 
 func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
+	$Button.disabled = true
 	var KillTw = create_tween()
 	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	#var mat = material as ShaderMaterial

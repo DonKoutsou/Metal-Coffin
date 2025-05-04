@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://buuo261afg6tg"]
+[gd_scene load_steps=6 format=3 uid="uid://buuo261afg6tg"]
 
 [ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="1_3h0mn"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_bpcpi"]
+[ext_resource type="Script" uid="uid://cxu4xgn8lpth6" path="res://Scripts/DeckPile.gd" id="2_e8dky"]
+[ext_resource type="PackedScene" uid="uid://rwe63rpa83wb" path="res://Scenes/Cards/AtackEffects/CardThing.tscn" id="3_eb2m5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bpcpi"]
 texture = ExtResource("1_3h0mn")
@@ -14,8 +16,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -84.0
 offset_top = -114.0
-offset_right = 84.0
-offset_bottom = 114.0
+offset_right = 69.0
+offset_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(84, 114)
@@ -24,6 +26,8 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_bpcpi")
 theme_override_styles/hover = SubResource("StyleBoxTexture_bpcpi")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_bpcpi")
 theme_override_styles/normal = SubResource("StyleBoxTexture_bpcpi")
+script = ExtResource("2_e8dky")
+CardThing = ExtResource("3_eb2m5")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
@@ -116,3 +120,16 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "Draw"
 horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 131.0
+offset_top = 187.0
+offset_right = 164.0
+offset_bottom = 218.0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

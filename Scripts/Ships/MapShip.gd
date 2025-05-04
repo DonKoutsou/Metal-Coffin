@@ -385,7 +385,7 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 		else:
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
-				var TutText = "You are reaching one of the many friendly [color=#ffc315]villages[/color] in the dessert. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered."
+				var TutText = "You are reaching one of the many friendly [color=#ffc315]villages[/color] in the glacier. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered."
 				ActionTracker.GetInstance().ShowTutorial("Friendly Villages", TutText, [], true)
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()

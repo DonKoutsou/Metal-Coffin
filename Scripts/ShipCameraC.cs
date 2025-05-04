@@ -7,8 +7,8 @@ public partial class ShipCameraC : Camera2D
 {
     [Export]    
     Control Background;
-    [Export] 
-    Node2D CityLines;
+    //[Export] 
+   // Node2D CityLines;
     [Export]
     Control Clouds;
     [Export]
@@ -135,8 +135,8 @@ public partial class ShipCameraC : Camera2D
     {
         if (Zoom.X < 0.5f && !GridShowing)
         {
-            Tween mtw = CreateTween();
-            mtw.TweenProperty(CityLines, "modulate", new Color(1, 1, 1, 1), 0.5f);
+            //Tween mtw = CreateTween();
+            //mtw.TweenProperty(CityLines, "modulate", new Color(1, 1, 1, 1), 0.5f);
             Tween tw = CreateTween();
             tw.TweenProperty(Background, "modulate", new Color(1, 1, 1, 1), 0.5f);
             GridShowing = true;
@@ -152,8 +152,8 @@ public partial class ShipCameraC : Camera2D
             Ground.Visible = true;
             Tween tw = CreateTween();
             tw.TweenProperty(Background, "modulate", new Color(1, 1, 1, 0), 0.5f);
-            Tween mtw = CreateTween();
-            mtw.TweenProperty(CityLines, "modulate", new Color(1, 1, 1, 0), 0.5f);
+            //Tween mtw = CreateTween();
+           // mtw.TweenProperty(CityLines, "modulate", new Color(1, 1, 1, 0), 0.5f);
             GridShowing = false;
         }
     }

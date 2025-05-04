@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c5nqa1b7hofcs" path="res://Scenes/Inventory/TutorialOffScreen.tscn" id="3_3uedw"]
 
 [node name="TutorialManager" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_c5wer")
 TutorialScene = ExtResource("2_yiwus")
 OutTutorialScene = ExtResource("3_3uedw")

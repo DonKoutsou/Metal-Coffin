@@ -41,7 +41,7 @@ func _on_draw_text_pressed() -> void:
 
 func Toggle() -> void:
 	if ($AnimationPlayer.is_playing()):
-		await $AnimationPlayer.animation_finished
+		return
 	if (!Showing):
 		visible = true
 		TouchStopper.mouse_filter = MOUSE_FILTER_IGNORE

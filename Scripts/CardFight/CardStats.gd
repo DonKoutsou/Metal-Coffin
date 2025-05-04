@@ -19,6 +19,11 @@ class_name CardStats
 
 @export var Tier : int = 1
 
+func ShouldConsume() -> bool:
+	if is_instance_valid(SelectedOption):
+		return SelectedOption.CauseConsumption
+	return Consume
+
 func GetDescription() -> String:
 	if is_instance_valid(SelectedOption):
 		return SelectedOption.OptionDescription

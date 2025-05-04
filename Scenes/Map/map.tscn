@@ -201,13 +201,12 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "CityLines", "Clouds", "Ground") groups=["Clock"]]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "Clouds", "Ground") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("11_6an1p")
 Background = NodePath("DarkBlueBackground")
-CityLines = NodePath("../MapPointerManager/MapLines")
 Clouds = NodePath("Clouds")
 Ground = NodePath("Ground")
 

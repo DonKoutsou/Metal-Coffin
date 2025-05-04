@@ -2,6 +2,8 @@ extends Control
 
 class_name CardOffensiveAnimation
 
+signal AtackCardDestroyed(CardPos : Vector2)
+signal DeffenceCardDestroyed(CardPos : Vector2)
 signal AnimationFinished
 
 @export var CardScene : PackedScene
@@ -46,8 +48,14 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 			DefC.Dissable()
 			#var Opts2 : Array[CardOption] = []
 			DefC.SetCardStats(AtackCard.GetCounter())
-			$HBoxContainer.add_child(DefC)
-			DefC.size_flags_horizontal = Control.SIZE_EXPAND
+			add_child(DefC)
+			if (FriendShip):
+				var pos = Vector2(TargetShips[0].global_position.x + 200, TargetShips[0].global_position.y - (TargetShips[0].size.y / 2))
+				DefC.global_position = pos
+			else:
+				var pos = Vector2(TargetShips[0].global_position.x - 200, TargetShips[0].global_position.y - (TargetShips[0].size.y / 2))
+				DefC.global_position = pos
+			#DefC.size_flags_horizontal = Control.SIZE_EXPAND
 			DefC.show_behind_parent = true
 			DefC.modulate = Color(1,1,1,0)
 			
@@ -89,8 +97,16 @@ func DoOffensive(AtackCard : OffensiveCardStats, HasDef : bool, OriginShip : Bat
 			DefC.Dissable()
 			#var Opts2 : Array[CardOption] = []
 			DefC.SetCardStats(AtackCard.GetCounter())
-			$HBoxContainer.add_child(DefC)
-			DefC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+			add_child(DefC)
+			#DefC.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+			
+			if (FriendShip):
+				var pos = Vector2(Targets[0].global_position.x + 200, Targets[0].global_position.y - (Targets[0].size.y / 2))
+				DefC.global_position = pos
+			else:
+				var pos = Vector2(Targets[0].global_position.x - 200, Targets[0].global_position.y - (Targets[0].size.y / 2))
+				DefC.global_position = pos
+			
 			DefC.show_behind_parent = true
 			DefC.modulate = Color(1,1,1,0)
 			var tw2 = create_tween()
@@ -124,7 +140,7 @@ func SpawnVisual(Target : Control, Damage : float) -> void:
 	#tw.set_trans(Tween.TRANS_QUAD)
 	#tw.tween_property(AtC, "scale", Vector2.ZERO, 0.5)
 	AtC.KillCard(0.5, false)
-	
+	AtackCardDestroyed.emit(AtC.global_position + (AtC.size / 2))
 	var Visual = AtackVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = AtC.global_position + (AtC.size / 2)
@@ -142,7 +158,7 @@ func SpawnShieldVisual(Target : Control) -> void:
 	#tw.set_trans(Tween.TRANS_QUAD)
 	#tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
 	DefC.KillCard(0.5, false)
-	
+	DeffenceCardDestroyed.emit(DefC.global_position + (DefC.size / 2))
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefC.global_position + (DefC.size / 2)
@@ -158,7 +174,7 @@ func SpawnUpVisual(Target : Control) -> void:
 	#tw.set_trans(Tween.TRANS_QUAD)
 	#tw.tween_property(DefC, "scale", Vector2.ZERO, 0.5)
 	DefC.KillCard(0.5, false)
-	
+	DeffenceCardDestroyed.emit(DefC.global_position + (DefC.size / 2))
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefC.global_position + (DefC.size / 2)
@@ -181,7 +197,7 @@ func TweenEnded(Damage : float) -> void:
 		for g in Targets:
 			var d = DamageFloater.instantiate()
 			d.modulate = Color(1,0,0,1)
-			d.text = var_to_str(Damage)
+			d.text = var_to_str(Damage).replace(".0", "")
 			add_child(d)
 			d.global_position = (g.global_position + (g.size / 2)) - d.size / 2.
 			d.connect("Ended", AnimEnded)
@@ -195,7 +211,7 @@ func TweenEnded(Damage : float) -> void:
 		d.global_position = (DefC.global_position + (DefC.size / 2)) - d.size / 2
 		d.connect("Ended", AnimEnded)
 		DefC.KillCard(0.5, false)
-		
+		DeffenceCardDestroyed.emit(DefC.global_position + (DefC.size / 2))
 		var ShieldEff = DefVisual.instantiate() as BurstParticleGroup2D
 		add_child(ShieldEff)
 		ShieldEff.global_position = (DefC.global_position + (DefC.size / 2))

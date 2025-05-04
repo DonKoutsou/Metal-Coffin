@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=48 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_5p8hw"]
 [ext_resource type="PackedScene" uid="uid://chd8i7o8mqa5l" path="res://Scenes/Cards/CardFightShipViz2.tscn" id="5_f2au4"]
 [ext_resource type="PackedScene" uid="uid://mynuy3gwirlo" path="res://Scenes/Cards/atack_timer.tscn" id="6_iype3"]
+[ext_resource type="PackedScene" uid="uid://rwe63rpa83wb" path="res://Scenes/Cards/AtackEffects/CardThing.tscn" id="7_reii6"]
 [ext_resource type="PackedScene" uid="uid://djd1dfb5i6p0y" path="res://Scenes/FightMinigame.tscn" id="7_x1b75"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="10_084tn"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_5vvva"]
@@ -32,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="29_hn1mp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="30_xdq0f"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="30_yhraa"]
+[ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="31_aiu8p"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
 offsets = PackedFloat32Array(0, 0.51861, 0.997849)
@@ -133,7 +135,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing_size = 0.215
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "DeckButton", "HandAmmountLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "DiscardP", "DeckP") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -146,6 +148,7 @@ ShipVizScene = ExtResource("3_5p8hw")
 ShipVizScene2 = ExtResource("5_f2au4")
 AtackTime = ExtResource("6_iype3")
 FightGame = ExtResource("7_x1b75")
+CardThing = ExtResource("7_reii6")
 Cards = Array[ExtResource("3_3dpfm")]([ExtResource("11_5vvva"), ExtResource("12_a2cqf"), ExtResource("13_pchum"), ExtResource("14_ll7ew"), ExtResource("10_084tn")])
 ActionAnim = ExtResource("11_j66lv")
 EndScene = ExtResource("12_lqfcs")
@@ -165,8 +168,9 @@ CardSelect = NodePath("SubViewport/Control2/CardSelect")
 CardSelectContainer = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2")
 ActionDeclaration = NodePath("SubViewport/Control2/Action Declaration")
 ShipSpacer = NodePath("SubViewport/Control2/VBoxContainer4/ShipSpacer")
-DeckButton = NodePath("SubViewport/Control2/DeckButton")
 HandAmmountLabel = NodePath("SubViewport/Control2/Label")
+DiscardP = NodePath("SubViewport/Control2/DiscardPile")
+DeckP = NodePath("SubViewport/Control2/DeckButton")
 StartingCardAmm = 3
 MaxCombatants = 3
 
@@ -496,6 +500,13 @@ grow_horizontal = 1
 grow_vertical = 0
 pivot_offset = Vector2(40, 160)
 
+[node name="DiscardPile" parent="SubViewport/Control2" instance=ExtResource("31_aiu8p")]
+layout_mode = 1
+offset_left = -103.0
+offset_top = -190.0
+offset_right = -16.0
+offset_bottom = -72.0
+
 [node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2"]
 layout_mode = 1
 anchors_preset = 3
@@ -503,9 +514,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -151.0
+offset_left = -215.0
 offset_top = -209.0
-offset_right = -46.0
+offset_right = -110.0
 offset_bottom = -34.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -527,17 +538,20 @@ text = "End Turn"
 
 [node name="Label" type="Label" parent="SubViewport/Control2"]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 182.0
-offset_top = -53.0
-offset_right = 264.0
-offset_bottom = -8.0
+offset_left = -91.0
+offset_top = -24.0
+offset_right = 91.0
+offset_bottom = -3.0
+grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(41, 22.5)
-text = "In Hand
-3/5"
+text = "In Hand 3/5"
+horizontal_alignment = 1
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewport"]
 color = Color(0, 0, 0, 1)
