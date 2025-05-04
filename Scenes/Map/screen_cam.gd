@@ -85,7 +85,9 @@ func _physics_process(delta: float) -> void:
 	if (GoingDown):
 		GoDownValue -= delta / 4
 		shakestr = 1.5 * GoingDownC.sample(GoDownValue / 2)
-		
+	
+	offset = RandomOffset2()
+	
 	if Shake:
 		$Shake.volume_db =  min(5, 20 * GoingDownC.sample(GoDownValue / 2) - 10)
 		if (shakestr <= 0):
@@ -95,10 +97,8 @@ func _physics_process(delta: float) -> void:
 			#shakestr = 1.5
 			PauseShake(true)
 		var of = RandomOffset()
-		offset = of
-	else:
-		offset = RandomOffset2()
-		
+		offset = prev + of
+
 var prev : Vector2 = Vector2.ZERO
 
 func RandomOffset2() -> Vector2:

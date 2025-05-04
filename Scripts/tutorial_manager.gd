@@ -33,17 +33,17 @@ func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocus
 
 	var Tut : Tutorial
 	
-	if (InScreen):
-		Tut = TutorialScene.instantiate() as Tutorial
-	else:
-		Tut = OutTutorialScene.instantiate() as Tutorial
+	#if (InScreen):
+		#Tut = TutorialScene.instantiate() as Tutorial
+	#else:
+	Tut = OutTutorialScene.instantiate() as Tutorial
 	
 	Tut.SetData(TurotialTitle, TutorialText, ElementsToFocusOn)
 	
-	if (InScreen):
-		Ingame_UIManager.GetInstance().AddUI(Tut, false, true)
-	else:
-		add_child(Tut)
+	#if (InScreen):
+		#Ingame_UIManager.GetInstance().AddUI(Tut, false, true)
+	#else:
+	add_child(Tut)
 	
 	await Tut.Completed
 	

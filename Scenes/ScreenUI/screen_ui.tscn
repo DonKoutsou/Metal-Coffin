@@ -826,6 +826,7 @@ texture = ExtResource("33_vyv2f")
 expand_mode = 1
 
 [node name="Control" type="Control" parent="ScreenFrameLong2"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -877,7 +878,9 @@ texture_filter = 2
 position = Vector2(0, 2)
 color = Color(1, 0.974189, 0.876833, 1)
 energy = 2.0
+blend_mode = 2
 range_z_min = 0
+range_layer_min = 1
 range_layer_max = 2
 texture = ExtResource("36_xl4i0")
 offset = Vector2(0, 850)

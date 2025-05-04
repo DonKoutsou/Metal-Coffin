@@ -7,8 +7,8 @@
 [ext_resource type="Resource" uid="uid://1vptbvrlos7" path="res://Resources/MapSpots/CitySpots/FinalCity.tres" id="6_tftes"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/tutorial_trigger.tscn" id="9_6an1p"]
-[ext_resource type="Script" uid="uid://cok22sbmibwle" path="res://Scripts/ShipCameraC.cs" id="11_6an1p"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
+[ext_resource type="Script" uid="uid://cok22sbmibwle" path="res://Scripts/ShipCameraC.cs" id="11_a2ujk"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
 [ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="14_a2ujk"]
@@ -92,7 +92,7 @@ bg_color = Color(0.0755152, 0.146343, 0.151409, 1)
 light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.51861, 0.997849)
+offsets = PackedFloat32Array(0, 0.539863, 0.997849)
 colors = PackedColorArray(0, 0, 0, 1, 0.311519, 0.32502, 0.315282, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
@@ -104,8 +104,6 @@ background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
-tonemap_exposure = 0.9
-tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -117,10 +115,11 @@ glow_mix = 0.825
 glow_bloom = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
+adjustment_saturation = 0.95
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
 
 [sub_resource type="Gradient" id="Gradient_28wu2"]
-offsets = PackedFloat32Array(0, 0.929379, 1)
+offsets = PackedFloat32Array(0, 0.981777, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.916342, 0.951284, 0.926063, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6an1p"]
@@ -128,11 +127,10 @@ gradient = SubResource("Gradient_28wu2")
 
 [sub_resource type="Environment" id="Environment_x3wib"]
 background_mode = 3
-background_canvas_max_layer = 1
+background_canvas_max_layer = 3
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
-tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -143,8 +141,8 @@ glow_mix = 0.825
 glow_bloom = 0.85
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
-adjustment_contrast = 1.01
-adjustment_saturation = 0.8
+adjustment_contrast = 1.03
+adjustment_saturation = 0.9
 adjustment_color_correction = SubResource("GradientTexture1D_6an1p")
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
@@ -205,7 +203,7 @@ RoadLines = true
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
-script = ExtResource("11_6an1p")
+script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
 Clouds = NodePath("Clouds")
 Ground = NodePath("Ground")

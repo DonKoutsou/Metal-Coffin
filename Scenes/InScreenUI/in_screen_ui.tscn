@@ -337,7 +337,6 @@ layout_mode = 2
 
 [node name="Screen" type="ColorRect" parent="Control3"]
 process_mode = 3
-z_index = 10
 material = ExtResource("19_j7r7e")
 layout_mode = 1
 anchors_preset = 15

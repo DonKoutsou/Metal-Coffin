@@ -7,12 +7,14 @@
 
 [node name="Tutorial" type="Control" node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
 process_mode = 3
+z_index = 130
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_uf1g7")
 Pan = NodePath("VBoxContainer")
 TitleLabel = NodePath("VBoxContainer/PanelContainer/VBoxContainer2/Label")
@@ -61,6 +63,7 @@ offset_right = 252.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = -5
 alignment = 1
 
@@ -96,6 +99,7 @@ autowrap_mode = 2
 visible_characters_behavior = 1
 
 [node name="Button" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+process_mode = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

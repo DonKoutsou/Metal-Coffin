@@ -190,6 +190,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,6 +204,7 @@ stretch_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 visible = false
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -214,6 +216,7 @@ stretch_mode = 3
 
 [node name="TextureRect3" type="TextureRect" parent="."]
 visible = false
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,6 +228,7 @@ stretch_mode = 3
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 visible = false
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,6 +240,7 @@ stretch_mode = 3
 
 [node name="TextureRect5" type="TextureRect" parent="."]
 visible = false
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

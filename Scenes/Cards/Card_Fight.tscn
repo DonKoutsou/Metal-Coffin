@@ -30,10 +30,10 @@
 [ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="24_yhraa"]
 [ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="25_xdq0f"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="26_reii6"]
-[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="29_hn1mp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="30_xdq0f"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="30_yhraa"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="31_aiu8p"]
+[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="34_aiu8p"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
 offsets = PackedFloat32Array(0, 0.51861, 0.997849)
@@ -44,11 +44,11 @@ gradient = SubResource("Gradient_a2ujk")
 
 [sub_resource type="Environment" id="Environment_yhraa"]
 background_mode = 3
+background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
-tonemap_exposure = 0.9
-tonemap_white = 1.5
+tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -60,9 +60,8 @@ glow_mix = 0.825
 glow_bloom = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
-adjustment_brightness = 0.9
-adjustment_contrast = 1.02
-adjustment_saturation = 1.2
+adjustment_contrast = 0.95
+adjustment_saturation = 1.1
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
 
 [sub_resource type="World3D" id="World3D_f2au4"]
@@ -179,6 +178,7 @@ disable_3d = true
 own_world_3d = true
 world_3d = SubResource("World3D_f2au4")
 handle_input_locally = false
+snap_2d_vertices_to_pixel = true
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
@@ -502,10 +502,10 @@ pivot_offset = Vector2(40, 160)
 
 [node name="DiscardPile" parent="SubViewport/Control2" instance=ExtResource("31_aiu8p")]
 layout_mode = 1
-offset_left = -103.0
-offset_top = -190.0
-offset_right = -16.0
-offset_bottom = -72.0
+offset_left = -98.0
+offset_top = -152.0
+offset_right = -11.0
+offset_bottom = -34.0
 
 [node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2"]
 layout_mode = 1
@@ -557,12 +557,13 @@ horizontal_alignment = 1
 color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewport"]
-position = Vector2(638, 330)
+position = Vector2(555, 275)
+energy = 0.9
 blend_mode = 2
 range_layer_max = 1
-texture = ExtResource("29_hn1mp")
-texture_scale = 25.0
-height = 284.0
+texture = ExtResource("34_aiu8p")
+texture_scale = 30.0
+height = 100.0
 
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]
 [connection signal="mouse_entered" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_mouse_entered"]
