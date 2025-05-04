@@ -23,6 +23,8 @@ uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
 
+uniform float ColorAmm: hint_range(16, 256, 1.0) = 1.;
+
 float ToLinear1(float c){ return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
 vec3 ToLinear(vec3 c){ return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b)); }
 float ToSrgb1(float c){ return (c < 0.0031308) ? c * 12.92 : 1.055 * pow(c, 0.41666) - 0.055; }
@@ -41,7 +43,10 @@ float stripes(vec2 uv)
     return ramp(mod(uv.y * 4. * scanlines_spacing + TIME * scanlines_speed / (2. * scanlines_spacing) + sin(TIME * scanlines_speed + sin(TIME * scanlines_speed * 0.63 * scanlines_spacing)), 1.), scanline_thickness, .6) * noi;
 }
 
-
+vec3 to_indexed_palette(vec3 color) {
+    vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
+    return quant;
+}
 
 vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
 	pos = floor(pos * res + off) / res;
@@ -136,5 +141,6 @@ void fragment(){
 
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
-
+	//COLOR.rgb = to_indexed_palette(COLOR.rgb);
+	
 }

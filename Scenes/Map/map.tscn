@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=44 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
 [ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
+[ext_resource type="Shader" uid="uid://cl4oumrqvlmki" path="res://Shaders/ColorIndexMat.gdshader" id="28_x3wib"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 _limits = [0.0, 5.0, 0.0, 1.0]
@@ -86,14 +87,14 @@ shader_parameter/custom_time = 0.0
 light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujsvm"]
-bg_color = Color(0.0755152, 0.146343, 0.151409, 1)
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.539863, 0.997849)
-colors = PackedColorArray(0, 0, 0, 1, 0.311519, 0.32502, 0.315282, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.628906, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
 gradient = SubResource("Gradient_a2ujk")
@@ -103,7 +104,8 @@ background_mode = 3
 background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_mode = 2
+tonemap_mode = 3
+tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -115,35 +117,12 @@ glow_mix = 0.825
 glow_bloom = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
-adjustment_saturation = 0.95
+adjustment_contrast = 0.98
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
 
-[sub_resource type="Gradient" id="Gradient_28wu2"]
-offsets = PackedFloat32Array(0, 0.981777, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.916342, 0.951284, 0.926063, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6an1p"]
-gradient = SubResource("Gradient_28wu2")
-
-[sub_resource type="Environment" id="Environment_x3wib"]
-background_mode = 3
-background_canvas_max_layer = 3
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 2
-glow_levels/1 = 16.0
-glow_levels/2 = 16.0
-glow_levels/3 = 16.0
-glow_levels/5 = 0.0
-glow_normalized = true
-glow_intensity = 0.16
-glow_mix = 0.825
-glow_bloom = 0.85
-glow_hdr_threshold = 0.0
-adjustment_enabled = true
-adjustment_contrast = 1.03
-adjustment_saturation = 0.9
-adjustment_color_correction = SubResource("GradientTexture1D_6an1p")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_445lv"]
+shader = ExtResource("28_x3wib")
+shader_parameter/ColorAmm = 32.0
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
 layer = 0
@@ -287,13 +266,24 @@ environment = SubResource("Environment_h7q0i")
 layer = 2
 follow_viewport_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer"]
-environment = SubResource("Environment_x3wib")
-
 [node name="ScreenUI" parent="CanvasLayer" instance=ExtResource("24_e5um8")]
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_h7q0i")
 autoplay = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Screen" type="ColorRect" parent="CanvasLayer2"]
+process_mode = 3
+z_index = 1
+material = SubResource("ShaderMaterial_445lv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="GUI_Input" from="SubViewportContainer/ViewPort/InScreenUI" to="." method="_MAP_INPUT"]

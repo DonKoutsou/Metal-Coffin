@@ -36,18 +36,18 @@
 [ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="34_aiu8p"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.51861, 0.997849)
-colors = PackedColorArray(0, 0, 0, 1, 0.311519, 0.32502, 0.315282, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.484, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
 gradient = SubResource("Gradient_a2ujk")
 
 [sub_resource type="Environment" id="Environment_yhraa"]
 background_mode = 3
-background_canvas_max_layer = 1
+background_canvas_max_layer = -1
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_mode = 2
+tonemap_mode = 3
 tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
@@ -60,7 +60,7 @@ glow_mix = 0.825
 glow_bloom = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
-adjustment_contrast = 0.95
+adjustment_contrast = 0.98
 adjustment_saturation = 1.1
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
 
@@ -558,7 +558,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewport"]
 position = Vector2(555, 275)
-energy = 0.9
 blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("34_aiu8p")
