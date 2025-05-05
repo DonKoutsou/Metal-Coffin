@@ -136,7 +136,7 @@ point_count = 2
 [node name="MissileThing" type="Node2D"]
 rotation = -1.5708
 script = ExtResource("1_5lbu3")
-speed = 2000
+speed = 25
 base_curve_intensity = 0.2
 wiggle_amplitude = 0.0
 wiggle_frequency = 0.0

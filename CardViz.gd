@@ -81,7 +81,7 @@ func _process(delta: float) -> void:
 
 		# Move the missile forward
 		
-		position += Vector2(cos(rotation), sin(rotation)) * speed * delta
+		position += Vector2(cos(rotation), sin(rotation)) * speed
 	
 	if (global_position.distance_to(Target.global_position + (Target.size / 2)) < 50):
 		global_position = Target.global_position + (Target.size / 2)

@@ -41,7 +41,7 @@ func _ready() -> void:
 	$MultiParticleExample1.burst()
 	await $MultiParticleExample1.Finished
 	$MissileCruise.play()
-	look_at(Target.global_position + (Target.size / 2))
+	#look_at(Target.global_position + (Target.size / 2))
 	set_process(true)
 
 func _process(delta: float) -> void:
@@ -79,7 +79,7 @@ func _process(delta: float) -> void:
 
 		# Move the missile forward
 		
-		position += Vector2(cos(rotation), sin(rotation)) * speed * delta
+		position += Vector2(cos(rotation), sin(rotation)) * speed
 	
 	if (global_position.distance_to(Target.global_position + (Target.size / 2)) < 50):
 		global_position = Target.global_position + (Target.size / 2)
