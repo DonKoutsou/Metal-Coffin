@@ -6,7 +6,7 @@ class_name WeaponShipPart
 @export var WType : WeaponType
 
 func GetItemDesc() -> String:
-	var Desc = "WEAPON TYPE : [color=#ffc315]{0}[/color]\n".format([WeaponType.keys()[WType]])
+	var Desc = "WEAPON TYPE : [color=#ffc315]{0}[/color]\n[color=#ffc315]-------------[/color]\n".format([WeaponType.keys()[WType]])
 	Desc += super()
 
 	return Desc

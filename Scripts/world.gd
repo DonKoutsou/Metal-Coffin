@@ -141,7 +141,7 @@ func wait(secs : float) -> Signal:
 func GetSaveData() -> SaveData:
 	var Data = SaveData.new()
 	Data.DataName = "Wallet"
-	Data.Datas.append(PlayerWallet)
+	Data.Datas.append(PlayerWallet.duplicate())
 	return Data
 
 func LoadSaveData(PlWallet : Wallet) -> void:

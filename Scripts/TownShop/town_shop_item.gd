@@ -22,7 +22,7 @@ var BoughtAmm : int = 0
 
 func _ready() -> void:
 	ItemName.text = It.ItemName
-	ItPriceT.text = var_to_str(ItPrice)
+	ItPriceT.text = var_to_str(ItPrice).replace(".0", "")
 	ShopOwnedT.text = var_to_str(ShopAmm)
 	PlOwnedT.text = var_to_str(PlAmm)
 	Bar.max_value = ShopAmm + PlAmm
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 var Accum : float = 0
 func ItemBar_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var rel = event.relative
 		if (rel.x > 0 and Bar.max_value == Bar.value):
 			return
@@ -41,19 +41,10 @@ func ItemBar_gui_input(event: InputEvent) -> void:
 			return
 		UpdateBar(sign(Accum))
 		Accum = 0
-	else : if (event is InputEventScreenDrag):
-		var rel = event.relative
-		if (rel > 0 and Bar.max_value == Bar.value):
-			return
-		else : if (rel < 0 and Bar.value == 0):
-			return
-		Accum += rel.x / 2
-		if (abs(Accum) < 10):
-			return
-		UpdateBar(sign(Accum))
-		Accum = 0
 
 func UpdateBar(Added : int):
+	OnThingExchanged()
+	
 	$AudioStreamPlayer.play()
 	if (Added > 0):
 		if (!InventoryManager.GetInstance().FleetHasSpace(It, LandedShip)):
@@ -85,3 +76,17 @@ func UpdateBar(Added : int):
 func ToggleDetails(t : bool) -> void:
 	$VBoxContainer/HBoxContainer.visible = t
 	$VBoxContainer/ProgressBar.visible = t
+
+var TweenHover : Tween
+
+func OnThingExchanged() -> void:
+	
+	if (TweenHover and TweenHover.is_running()):
+		TweenHover.kill()
+	z_index = 1
+	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
+	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.25)
+	await TweenHover.finished
+	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.25)
+	z_index = 0

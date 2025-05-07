@@ -348,6 +348,7 @@ public partial class ShipCameraC : Camera2D
         GlobalPosition = Pos;
         SetShaderParameter(Clouds, "offset", GlobalPosition / 1500);
         SetShaderParameter(Ground, "offset", GlobalPosition / 1500);
+        EmitSignal(nameof(PositionChanged), Position);
     }
 
     void SetShaderParameter(Node node, string parameter, Variant value)

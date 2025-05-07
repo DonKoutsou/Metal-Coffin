@@ -91,6 +91,10 @@ func DroneDisharged(Dr : MapShip):
 	#if (FlyingDrones.has(Dr)):
 		#FlyingDrones.erase(Dr)
 
+func CaptiveDischarged(C : HostileShip) -> void:
+	DroneRemoved.emit()
+	UndockCaptive(C)
+
 func AddRecruit(Cpt : Captain, _Notify : bool = true) -> void:
 	#if (Notify):
 		#PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Cpt.ProvidingFunds]))
@@ -114,7 +118,7 @@ func AddCaptive(Captive : HostileShip) -> void:
 		#return
 		
 	#TODO new signal for captives
-	Captive.connect("OnShipDestroyed", DroneDisharged)
+	Captive.connect("OnShipDestroyed", CaptiveDischarged)
 	
 	call_deferred("DoCaptiveThing", Captive)
 	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
