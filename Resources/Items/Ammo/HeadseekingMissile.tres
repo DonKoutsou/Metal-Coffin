@@ -15,5 +15,6 @@ Type = 1
 ItemName = "Heat Seeking Missile"
 ItemDesc = "Close range head seeking missile, can be fired further that a few kilometers away, but within those ranges its deadly accurate. As the go to firearm for close range exchanges, it is also one of the most expensive ones. Use them with caution."
 MaxStackCount = 99
-CardProviding = Array[ExtResource("2_u57dd")]([ExtResource("1_c4tby")])
+CardProviding = Array[ExtResource("2_u57dd")]([])
+CardOptionProviding = ExtResource("1_lvy16")
 CanTransfer = true

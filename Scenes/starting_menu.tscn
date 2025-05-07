@@ -37,7 +37,6 @@ background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 3
-tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -49,11 +48,8 @@ glow_bloom = 0.85
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
-adjustment_contrast = 0.98
+adjustment_contrast = 0.91
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
-
-[sub_resource type="Compositor" id="Compositor_1p5b6"]
-compositor_effects = Array[CompositorEffect]([null])
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
@@ -168,7 +164,6 @@ CreditsScene = ExtResource("2_0pu32")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1p5b6")
-compositor = SubResource("Compositor_1p5b6")
 
 [node name="w" type="ColorRect" parent="."]
 z_index = -1

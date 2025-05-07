@@ -31,6 +31,11 @@ func GetDescription() -> String:
 
 var SelectedOption : CardOption
 
+func IsAOE() -> bool:
+	if (SelectedOption):
+		return SelectedOption.AOE
+	return AOE
+
 enum WeaponType{
 	NONE,
 	MG100mm,

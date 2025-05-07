@@ -19,7 +19,7 @@ class_name Card_Fight
 @export var AtackTime : PackedScene
 @export var FightGame : PackedScene
 @export var CardThing : PackedScene
-@export var Cards : Array[CardStats]
+
 #Animation of the atack
 @export var ActionAnim : PackedScene
 #Scene that shows the stats of the fight
@@ -106,12 +106,12 @@ func _ready() -> void:
 	
 	EnergyBar.Init(TurnEnergy)
 	
-	#if (OS.is_debug_build()):
-		#for g in 10:
-			#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-		#for g in 10:
-			#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	if (OS.is_debug_build()):
+		for g in 10:
+			EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+		for g in 10:
+			PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
@@ -579,13 +579,9 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			ActionsToBurn.append(ShipAction)
 			
 			var Counter = Action.GetCounter()
-			var HasDeff = false
+			#var HasDeff = false
 			
-			if (!Action.IsPorximityFuse()):
-				for g in Targets:
-					if (ActionList.ShipHasAction(g, Counter)):
-						HasDeff = true
-						break
+			
 			
 			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 			anim.DrawnLine = true
@@ -593,27 +589,41 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			AnimationPlecement.move_child(anim, 1)
 			#anim.Originator = GetShipViz(Ship)
 			var Vizs : Array[Control]
+			#List containing targets and a bool saying if target has def
+			var TargetList : Dictionary[BattleShipStats, bool]
 			for g in Targets:
 				Vizs.append(GetShipViz(g))
-				
-			anim.DoOffensive(Action, HasDeff, Ship, Vizs, EnemyCombatants.has(Ship))
 			
-			if (Friendly and !Action.ShouldConsume()):
-				DiscardP.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
-				DiscardP.visible = true
-				var pos = await anim.AtackCardDestroyed
-				DiscardP.OnCardDiscarded(pos)
-				
-			if (!Friendly and HasDeff and !Counter.ShouldConsume()):
-				var TargetDeck = GetShipDeck(Targets[0])
-				
-				DiscardP.UpdateDiscardPileAmmount(TargetDeck.DiscardPile.size())
-				DiscardP.visible = true
-				var pos = await anim.DeffenceCardDestroyed
-				DiscardP.OnCardDiscarded(pos)
+			if (Counter != null):
+				for g in Targets:
+					var HasDef : bool
+					if (ActionList.ShipHasAction(g, Counter)):
+						HasDef = true
+					TargetList[g] = HasDef
+			
+			anim.DoOffensive(Action, TargetList, Ship, Vizs, Friendly)
 			
 			if (!Action.ShouldConsume()):
-				Dec.DiscardPile.append(Counter)
+				Dec.DiscardPile.append(Action)
+				if (Friendly):
+					DiscardP.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
+					DiscardP.visible = true
+					var pos = await anim.AtackCardDestroyed
+					DiscardP.OnCardDiscarded(pos)
+			
+			for g in TargetList:
+				if (TargetList[g]):
+					ActionList.RemoveActionFromShip(g, Counter)
+					if (!Counter.ShouldConsume()):
+						var TargetDeck = GetShipDeck(Targets[0])
+						TargetDeck.DiscardPile.append(Counter)
+						if (!Friendly):
+							DiscardP.UpdateDiscardPileAmmount(TargetDeck.DiscardPile.size())
+							DiscardP.visible = true
+							var pos = await anim.DeffenceCardDestroyed
+							DiscardP.OnCardDiscarded(pos)
+					if (!Friendly):
+						DamageNeg += Action.GetDamage() * Ship.GetFirePower()
 			
 			await anim.AnimationFinished
 			
@@ -622,21 +632,12 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			anim.visible = false
 			anim.queue_free()
 			
-			if (HasDeff):
-				for g in Targets:
-					var TargetDeck = GetShipDeck(g)
-					ActionList.RemoveActionFromShip(g, Counter)
-					if (!Counter.ShouldConsume()):
-						TargetDeck.DiscardPile.append(Counter)
-				#print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName + " but was countered")
-				if (Friendly):
-					DamageNeg += Action.GetDamage() * Ship.GetFirePower()
-			else:
-				for g in Targets:
+			for g in TargetList:
+				if (TargetList[g]):
+					continue
+				else:
 					if (DamageShip(g, Action.GetDamage() * Ship.GetFirePower(), Action.CauseFire())):
 						break
-				
-				#print(Ship.Name + " has atacked " + Target.Name + " using " + Action.CardName)
 
 
 	for g in viz.get_parent().get_children():
@@ -676,7 +677,7 @@ func HandleShield(Performer : BattleShipStats, Action : CardStats) -> void:
 	for g in Targets:
 		TargetViz.append(GetShipViz(g))
 		
-	if (!Action.AOE):
+	if (!Action.IsAOE()):
 		ShieldAmm = 20
 	
 	for T in Targets:
@@ -689,7 +690,7 @@ func HandleBuff(Performer : BattleShipStats, Action : CardStats) -> void:
 	var TargetViz : Array[Control]
 	
 	var BuffAmm : float = 1
-	if (!Action.AOE):
+	if (!Action.IsAOE()):
 		BuffAmm = 2
 	
 	for g in Targets:
@@ -706,7 +707,7 @@ func HandleSpeedBuff(Performer : BattleShipStats, Action : CardStats) -> void:
 	var TargetViz : Array[Control]
 	
 	var BuffAmm : float = 0.2
-	if (!Action.AOE):
+	if (!Action.IsAOE()):
 		BuffAmm = 0.5
 		
 	for g in Targets:
@@ -725,7 +726,7 @@ func HandleTargets(Action : CardStats, User : BattleShipStats) -> Array[BattleSh
 	# we handle deffensive target picking a bit differently
 	if (Action is Deffensive):
 		#If aoe pick all team either if enemy of player
-		if (Action.AOE):
+		if (Action.IsAOE()):
 			Targets = GetShipsTeam(User)
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Action.CanBeUsedOnOther:
@@ -744,7 +745,7 @@ func HandleTargets(Action : CardStats, User : BattleShipStats) -> Array[BattleSh
 	else:
 		var EnemyTeam = GetShipEnemyTeam(User)
 		#If aoe pick all enemy team either if enemy of player
-		if (Action.AOE):
+		if (Action.IsAOE()):
 			Targets = EnemyTeam
 
 		#If there is only 1 
@@ -1484,7 +1485,7 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	#
 	Stats.Cards[load("res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres")] = 8
 	Stats.Cards[load("res://Resources/Cards/Evasive.tres")] = 4
-	Stats.Cards[load("res://Resources/Cards/Missile.tres")] = 2
+	Stats.Cards[load("res://Resources/Cards/Missile/Missile.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/Flares.tres")] = 3
 	Stats.Cards[load("res://Resources/Cards/ShieldOverChargeTeam.tres")] = 2
 	Stats.Cards[load("res://Resources/Cards/RadarBuff.tres")] = 1
@@ -1497,6 +1498,8 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageAPOption.tres")] = 2
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageFireOption.tres")] = 2
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres")] = 2
+	Stats.Ammo[load("res://Resources/Cards/Missile/Options/ClusterMissileOption.tres")] = 2
+	
 		
 	return Stats
 

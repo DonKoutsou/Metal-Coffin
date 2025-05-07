@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardOption" load_steps=3 format=3 uid="uid://bteykvlyy6ypk"]
+
+[ext_resource type="Texture2D" uid="uid://d15odwyfgk4ba" path="res://Assets/Cards/Missile.png" id="1_c20wf"]
+[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_hi278"]
+
+[resource]
+script = ExtResource("2_hi278")
+OptionName = "Cluster"
+OptionDescription = "Throws an [color=#ff3c22]Incendiary[/color] barragge on the enemy.[p][center]"
+NewPic = ExtResource("1_c20wf")
+EnergyAdd = 1
+DamageFlat = 0
+DamageMult = 0.8
+Fire = false
+AOE = true
+DamageMitigationFlat = 0
+DamageMitigationPercent = 0.0
+ComatibleWeapon = 2
+CauseConsumption = true
+NegateCounter = false
