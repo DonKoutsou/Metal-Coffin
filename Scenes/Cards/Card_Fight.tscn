@@ -220,6 +220,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Action Declaration" type="PanelContainer" parent="SubViewport/Control2"]
+z_index = 1
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
 anchors_preset = 8
@@ -243,6 +244,7 @@ theme_override_font_sizes/font_size = 40
 text = "ACTION PICK PHASE"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="VBoxContainer4" type="HBoxContainer" parent="SubViewport/Control2"]
 layout_mode = 1

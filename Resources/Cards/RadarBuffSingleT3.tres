@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://5v0ixc1yjape"]
+[gd_resource type="Resource" script_class="Buff" load_steps=5 format=3 uid="uid://5v0ixc1yjape"]
 
-[ext_resource type="Texture2D" uid="uid://builhul2oelnc" path="res://Assets/Cards/RadarBuffSingle.png" id="1_b4hfb"]
+[ext_resource type="Texture2D" uid="uid://bkh3eec3newwp" path="res://Assets/Cards/RadarBuffSingle.png" id="1_b4hfb"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_u3dy2"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_6cs6r"]
-[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_uoddv"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardStats.gd" id="4_b4hfb"]
 
 [resource]
-script = ExtResource("4_uoddv")
+script = ExtResource("4_b4hfb")
+StatToBuff = 0
+BuffDuration = 2
+BuffAmmount = 6.0
 Shield = false
-Buffs = true
-SpeedBuffs = false
 FireExt = false
 CanBeUsedOnOther = true
 UseInstant = true

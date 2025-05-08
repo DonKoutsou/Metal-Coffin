@@ -19,6 +19,7 @@ class_name Card_Fight
 @export var AtackTime : PackedScene
 @export var FightGame : PackedScene
 @export var CardThing : PackedScene
+@export var DamageFloater : PackedScene
 #Animation of the atack
 @export var ActionAnim : PackedScene
 #Scene that shows the stats of the fight
@@ -81,6 +82,7 @@ var ShipsViz : Dictionary[BattleShipStats, CardFightShipViz2]
 var ActionList = CardFightActionList.new()
 
 var SelectingTarget : bool = false
+var EnemyPickingMove : bool = false
 
 signal CardFightEnded(Survivors : Array[BattleShipStats])
 
@@ -100,12 +102,12 @@ var CardSelectSize : float
 func _ready() -> void:
 	EnergyBar.Init(TurnEnergy)
 	
-	if (OS.is_debug_build()):
-		for g in 10:
-			EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-		for g in 10:
-			PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#if (OS.is_debug_build()):
+		#for g in 10:
+			#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+		#for g in 10:
+			#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
@@ -219,15 +221,15 @@ func StoreContainerSize() -> void:
 	ActionDeclaration.get_child(0).modulate = Color(1,1,1,0)
 	ActionDeclaration.visible = false
 
-func DoActionDeclaration(ActionName : String) -> void:
+func DoActionDeclaration(ActionName : String, CustomTime : float = 3) -> void:
 	
-	ShipSpacer.visible = true
+	
 	ActionDeclaration.visible = true
 	ActionDeclaration.get_child(0).text = ActionName
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_OUT)
 	Tw.set_trans(Tween.TRANS_QUAD)
-	Tw.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(650, 80), 0.5)
+	Tw.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(650, 80), CustomTime/6)
 	
 	var InSound = DeletableSoundGlobal.new()
 	InSound.stream = UIInSound
@@ -243,15 +245,15 @@ func DoActionDeclaration(ActionName : String) -> void:
 	var Tw2 = create_tween()
 	Tw2.set_ease(Tween.EASE_OUT)
 	Tw2.set_trans(Tween.TRANS_QUAD)
-	Tw2.tween_property(ActionDeclaration.get_child(0), "modulate", Color(1,1,1,1), 0.5)
+	Tw2.tween_property(ActionDeclaration.get_child(0), "modulate", Color(1,1,1,1), CustomTime/6)
 	await Tw2.finished
 	
-	await wait(1)
+	await wait((CustomTime/6) *2)
 	
 	var Tw3 = create_tween()
 	Tw3.set_ease(Tween.EASE_OUT)
 	Tw3.set_trans(Tween.TRANS_QUAD)
-	Tw3.tween_property(ActionDeclaration.get_child(0), "modulate", Color(1,1,1,0), 0.5)
+	Tw3.tween_property(ActionDeclaration.get_child(0), "modulate", Color(1,1,1,0), CustomTime/6)
 	await Tw3.finished
 	
 	ActionDeclaration.get_child(0).visible = false
@@ -259,7 +261,7 @@ func DoActionDeclaration(ActionName : String) -> void:
 	var Tw4 = create_tween()
 	Tw4.set_ease(Tween.EASE_OUT)
 	Tw4.set_trans(Tween.TRANS_QUAD)
-	Tw4.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(0, 80), 0.5)
+	Tw4.tween_property(ActionDeclaration, "custom_minimum_size", Vector2(0, 80), CustomTime/6)
 	
 	var OutSound = DeletableSoundGlobal.new()
 	OutSound.stream = UIOutSound
@@ -269,7 +271,7 @@ func DoActionDeclaration(ActionName : String) -> void:
 	add_child(OutSound)
 	
 	await Tw4.finished
-	ShipSpacer.visible = false
+	#ShipSpacer.visible = false
 	ActionDeclaration.visible = false
 
 func wait(secs : float) -> Signal:
@@ -366,7 +368,25 @@ var GameOver : bool = false
 signal PlayerActionPickingEnded
 
 func RunTurn() -> void:
-	await DoActionDeclaration("Action Pick Phase")
+	ShipSpacer.visible = true
+	await DoActionDeclaration("Action Pick Phase", 2)
+	ShipSpacer.visible = false
+	
+	for Ship in ShipTurns:
+		var viz = GetShipViz(Ship)
+
+		var ExpiredBuffs = Ship.UpdateBuffs()
+		for g in ExpiredBuffs:
+			var d = DamageFloater.instantiate() as Floater
+			d.modulate = Color(1,0,0,1)
+			d.text = g + " +\nExpired"
+			add_child(d)
+			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
+			await d.Ended
+			
+		UpdateShipStats(Ship)
+	
+	ShipTurns.sort_custom(speed_comparator)
 	
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
@@ -381,28 +401,40 @@ func RunTurn() -> void:
 	await Tw2.finished
 	
 	CardSelectContainer.get_child(0).visible = true
-	DeckP.visible = true
-	DiscardP.visible = true
-	EnergyBar.get_parent().visible = true
-	HandAmmountLabel.visible = true
+	
 	CurrentTurn = 0
 	
+	
+	
 	for Ship in ShipTurns:
-		GetShipViz(Ship).Enable()
-		Ship.UpdateBuffs()
-		UpdateShipStats(Ship)
+		await DoActionDeclaration(Ship.Name + "'s turn", 1.5)
+		var viz = GetShipViz(Ship)
+		viz.Enable()
+		
 		ActionList.AddShip(Ship)
 		if (IsShipFriendly(Ship)):
+			DeckP.visible = true
+			DiscardP.visible = true
+			EnergyBar.get_parent().visible = true
+			HandAmmountLabel.visible = true
+			
 			RestartCards()
 			#var ATime = AtackTime.instantiate() as AtackTimer
 			#CardSelectContainer.get_parent().add_child(ATime)
 			#ATime.connect("Finished", PlayerActionSelectionEnded)
 			await PlayerActionPickingEnded
 			ClearCards()
+			
+			DeckP.visible = false
+			DiscardP.visible = false
+			EnergyBar.get_parent().visible = false
+			HandAmmountLabel.visible = false
 			#ATime.queue_free()
 		else:
+			EnemyPickingMove = true
 			DrawCardEnemy()
 			await EnemyActionSelection(Ship)
+			EnemyPickingMove = false
 		
 		GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 		CurrentTurn += 1
@@ -426,8 +458,10 @@ func RunTurn() -> void:
 	DiscardP.visible = false
 	EnergyBar.get_parent().visible = false
 	HandAmmountLabel.visible = false
-	await DoActionDeclaration("Action Perform Phase")
 	
+	ShipSpacer.visible = true
+	await DoActionDeclaration("Action Perform Phase", 2)
+	ShipSpacer.visible = false
 	#AnimationPlecement.visible = true
 	for Ship in ShipTurns:
 		var PerformedActions = await PerformActions(Ship)
@@ -510,13 +544,9 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			if (SelectedAction.Shield):
 				await HandleShield(Ship, SelectedAction)
 				EnemyDeck.DiscardPile.append(SelectedAction)
-				
-			if (SelectedAction.Buffs):
+			
+			if (SelectedAction is Buff):
 				await HandleBuff(Ship, SelectedAction)
-				EnemyDeck.DiscardPile.append(SelectedAction)
-				
-			else : if (SelectedAction.SpeedBuffs):
-				await HandleSpeedBuff(Ship, SelectedAction)
 				EnemyDeck.DiscardPile.append(SelectedAction)
 				
 			if (SelectedAction.FireExt):
@@ -536,6 +566,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			AvailableActions = EnemyDeck.Hand.duplicate()
 			
 		else:
+			await DoCardSelectAnimation(SelectedAction, GetShipViz(Ship))
 			ActionList.AddAction(Ship, ShipAction)
 		
 		t.call()
@@ -629,7 +660,7 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			anim.queue_free()
 			
 			for g in TargetList:
-				if (TargetList[g]):
+				if (TargetList[g]["HasDef"]):
 					continue
 				else:
 					if (DamageShip(g, Action.GetDamage() * Ship.GetFirePower(), Action.CauseFire())):
@@ -681,39 +712,22 @@ func HandleShield(Performer : BattleShipStats, Action : CardStats) -> void:
 	
 	await DoDeffenceAnim(Action, TargetViz, EnemyCombatants.has(Performer))
 
-func HandleBuff(Performer : BattleShipStats, Action : CardStats) -> void:
+func HandleBuff(Performer : BattleShipStats, Action : Buff) -> void:
 	var Targets = await HandleTargets(Action, Performer)
 	var TargetViz : Array[Control]
-	
-	var BuffAmm : float = 1
-	if (!Action.IsAOE()):
-		BuffAmm = 2
 	
 	for g in Targets:
 		TargetViz.append(GetShipViz(g))
 	
 	for T in Targets:
-		BuffShip(T, BuffAmm * Action.Tier)
+		if (Action.StatToBuff == Buff.Stat.FIREPOWER):
+			BuffShip(T, Action.BuffAmmount, Action.BuffDuration)
+		else : if (Action.StatToBuff == Buff.Stat.SPEED):
+			BuffShipSpeed(T, Action.BuffAmmount, Action.BuffDuration)
 	
 	await DoDeffenceAnim(Action, TargetViz, EnemyCombatants.has(Performer))
+	
 
-	
-func HandleSpeedBuff(Performer : BattleShipStats, Action : CardStats) -> void:
-	var Targets = await HandleTargets(Action, Performer)
-	var TargetViz : Array[Control]
-	
-	var BuffAmm : float = 0.2
-	if (!Action.IsAOE()):
-		BuffAmm = 0.5
-		
-	for g in Targets:
-		TargetViz.append(GetShipViz(g))
-	
-	for T in Targets:
-		BuffShipSpeed(T, BuffAmm * Action.Tier)
-
-	await DoDeffenceAnim(Action, TargetViz, EnemyCombatants.has(Performer))
-	
 #Used to handle targeting both for player and enemies
 func HandleTargets(Action : CardStats, User : BattleShipStats) -> Array[BattleShipStats]:
 	var Friendly = IsShipFriendly(User)
@@ -765,6 +779,24 @@ func DoDeffenceAnim(Action : CardStats, TargetViz : Array[Control], _FriendShip 
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
 	anim.DoDeffensive(Action, TargetViz, _FriendShip)
+	await(anim.AnimationFinished)
+	anim.visible = false
+	anim.queue_free()
+
+func DoCardSelectAnimation(Action : CardStats, User : Control) -> void:
+	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
+	AnimationPlecement.add_child(anim)
+	AnimationPlecement.move_child(anim, 1)
+	anim.DoSelection(Action, User)
+	
+	var S = DeletableSoundGlobal.new()
+	S.stream = CardPlecementSound
+	S.autoplay = true
+	S.pitch_scale = randf_range(0.8, 1.2)
+	#S.bus = "MapSounds"
+	add_child(S)
+	S.volume_db = - 20
+	
 	await(anim.AnimationFinished)
 	anim.visible = false
 	anim.queue_free()
@@ -933,7 +965,7 @@ func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	deck.DiscardPile.append(C)
 
 func PlayerActionSelectionEnded() -> void:
-	if (SelectingTarget):
+	if (SelectingTarget or EnemyPickingMove):
 		return
 	#GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 	PlayerActionPickingEnded.emit()
@@ -1209,7 +1241,7 @@ func OnCardSelected(C : Card) -> void:
 	#var Resault = await Minigame.Ended
 	#Minigame.queue_free()
 
-	if (SelectingTarget):
+	if (SelectingTarget or EnemyPickingMove):
 		return
 	
 	if (Energy < C.GetCost()):
@@ -1277,7 +1309,7 @@ func OnCardSelected(C : Card) -> void:
 			HandleShield(ShipTurns[CurrentTurn], C.CStats)
 			DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
 			return
-		else: if (C.CStats.Buffs):
+		else: if (C.CStats is Buff):
 			C.queue_free()
 			deck.Hand.erase(C.CStats)
 			deck.DiscardPile.append(C.CStats)
@@ -1285,14 +1317,7 @@ func OnCardSelected(C : Card) -> void:
 			HandleBuff(ShipTurns[CurrentTurn], C.CStats)
 			DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
 			return
-		else : if (C.CStats.SpeedBuffs):
-			C.queue_free()
-			deck.Hand.erase(C.CStats)
-			deck.DiscardPile.append(C.CStats)
-			UpdateEnergy(Energy, Energy - C.GetCost())
-			HandleSpeedBuff(ShipTurns[CurrentTurn], C.CStats)
-			DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
-			return
+
 		else: if (C.CStats.FireExt):
 			C.queue_free()
 			deck.Hand.erase(C.CStats)
@@ -1372,7 +1397,7 @@ func OnCardSelected(C : Card) -> void:
 	#PerformAction(CurrentShip, ShipAction)
 
 func RemoveCard(C : Card) -> void:
-	if (SelectingTarget):
+	if (SelectingTarget or EnemyPickingMove):
 		return
 	
 	var D = PlayerDecks[ShipTurns[CurrentTurn]]
@@ -1485,7 +1510,7 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 
 func _on_deck_button_pressed() -> void:
 	
-	if (SelectingTarget or Energy < 1):
+	if (SelectingTarget or Energy < 1 or EnemyPickingMove):
 		EnergyBar.NotifyNotEnough()
 		return
 	

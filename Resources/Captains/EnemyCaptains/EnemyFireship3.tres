@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_vqb3j"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_jfqs0"]
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="7_tkw6d"]
-[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/Spaceship/Scarab.png" id="9_4c3qg"]
+[ext_resource type="Texture2D" uid="uid://dwo83bk0vgwq4" path="res://Assets/Spaceship/Scarab.png" id="9_4c3qg"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_7qhjw"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]

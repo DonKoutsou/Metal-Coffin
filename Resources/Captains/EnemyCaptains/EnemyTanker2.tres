@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_s4bbh"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_nhpak"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="3_dssc8"]
+[ext_resource type="Texture2D" uid="uid://d0gebfkpi0seu" path="res://Assets/Spaceship/Tanker.png" id="3_dssc8"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_hsc4q"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_shbq8"]
 [ext_resource type="Resource" uid="uid://cbkme88wrncp4" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres" id="4_0y3bp"]

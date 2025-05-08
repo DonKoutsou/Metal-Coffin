@@ -10,11 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
 [ext_resource type="Script" uid="uid://cok22sbmibwle" path="res://Scripts/ShipCameraC.cs" id="11_a2ujk"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
-[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
-[ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="14_a2ujk"]
-[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="14_h7q0i"]
+[ext_resource type="Texture2D" uid="uid://clm5eqtlgiqgx" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
+[ext_resource type="Texture2D" uid="uid://3xyvos3xx5wp" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="14_a2ujk"]
+[ext_resource type="Texture2D" uid="uid://bi72i727dp3d2" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="14_h7q0i"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="15_a2ujk"]
-[ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="15_h7q0i"]
+[ext_resource type="Texture2D" uid="uid://b4c7ju8s26q7g" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="15_h7q0i"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
-[ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
+[ext_resource type="AudioStream" uid="uid://bvscl85iho5qp" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
 [ext_resource type="Shader" uid="uid://cl4oumrqvlmki" path="res://Shaders/ColorIndexMat.gdshader" id="28_x3wib"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
@@ -93,7 +93,7 @@ bg_color = Color(0.066982, 0.133257, 0.137998, 1)
 light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.628906, 1)
+offsets = PackedFloat32Array(0, 0.791667, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
@@ -101,10 +101,12 @@ gradient = SubResource("Gradient_a2ujk")
 
 [sub_resource type="Environment" id="Environment_h7q0i"]
 background_mode = 3
-background_canvas_max_layer = 1
+background_canvas_max_layer = 2
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 3
+tonemap_exposure = 1.2
+tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -116,12 +118,13 @@ glow_mix = 0.825
 glow_bloom = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
-adjustment_contrast = 0.98
+adjustment_brightness = 1.3
+adjustment_contrast = 0.8
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_445lv"]
 shader = ExtResource("28_x3wib")
-shader_parameter/ColorAmm = 32.0
+shader_parameter/ColorAmm = 30.0
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
 layer = 0
@@ -256,7 +259,7 @@ ShipControllerEvent = ExtResource("22_n73so")
 Col = Color(100, 0.395, 0.144, 1)
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" instance=ExtResource("23_53oad")]
-layer = 2
+layer = 3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort"]
 environment = SubResource("Environment_h7q0i")
@@ -272,7 +275,7 @@ stream = ExtResource("26_h7q0i")
 autoplay = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 
 [node name="Screen" type="ColorRect" parent="CanvasLayer2"]
 process_mode = 3

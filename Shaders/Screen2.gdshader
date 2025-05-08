@@ -5,7 +5,7 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform int mask_type : hint_range(0, 2) = 0;
 
 group_uniforms Vignette;
-uniform float vignette_strength : hint_range(0., 3., 0.01) = 1.;
+uniform float vignette_strength : hint_range(0., 10., 0.01) = 1.;
 uniform float image_flicker : hint_range(0., 1., .01) = 1.;
 uniform float skip : hint_range(0., 1., .01) = 1.;
 
@@ -137,7 +137,7 @@ void fragment(){
 	COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + blue_offset).b, 0.5);
 
 	float vigAmt = (3.3) * vignette_strength;
-	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 2.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 2.0));
+	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 4.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 4.0));
 
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);

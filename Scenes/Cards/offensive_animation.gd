@@ -121,7 +121,7 @@ func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card) -> void:
 		d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
 		d.connect("Ended", AnimEnded)
 	
-		if (fr):
+		if (!fr):
 			UIEventH.OnControlledShipDamaged(Damage)
 	else :
 		var d = DamageFloater.instantiate()
@@ -166,16 +166,15 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], _FriendShip
 	var DefCardTween = create_tween()
 	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.4)
 
-	if (DefCard.Buffs):
-		BuffText = "Firepower\nBuffed"
-		for Ship in TargetShips:
-			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
-	else: if (DefCard.SpeedBuffs):
-		BuffText = "Speed\nBuffed"
+	if (DefCard is Buff):
+		if (DefCard.StatToBuff == Buff.Stat.FIREPOWER):
+			BuffText = "Firepower +"
+		else : if(DefCard.StatToBuff == Buff.Stat.SPEED):
+			BuffText = "Speed +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
 	else: if (DefCard.Shield):
-		BuffText = "Shield\nAdded"
+		BuffText = "Shield +"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
 	
@@ -184,6 +183,34 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], _FriendShip
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
 
+func DoSelection(C : CardStats, User : Control) -> void:
+	var DeffenceCard = CardScene.instantiate() as Card
+	DeffenceCard.Dissable()
+	DeffenceCard.SetCardStats(C)
+	add_child(DeffenceCard)
+	
+	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (User.size.y / 2))
+	DeffenceCard.global_position = pos
+
+	DeffenceCard.show_behind_parent = true
+	DeffenceCard.modulate = Color(1,1,1,0)
+
+	var DefCardTween = create_tween()
+	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.4)
+	
+	var UpTween = create_tween()
+	UpTween.set_ease(Tween.EASE_OUT)
+	UpTween.set_trans(Tween.TRANS_BACK)
+	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y - 10), 0.4)
+	await UpTween.finished
+	
+	var DownTween = create_tween()
+	DownTween.set_ease(Tween.EASE_OUT)
+	DownTween.set_trans(Tween.TRANS_BACK)
+	DownTween.tween_property(DeffenceCard, "position", pos, 0.4)
+	await DownTween.finished
+	
+	AnimationFinished.emit()
 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	var Ship = ShipViz.instantiate() as CardFightShipViz

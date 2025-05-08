@@ -32,15 +32,7 @@ func EnableShake(amm : float):
 	PauseShake(false)
 	shakestr = max(amm, shakestr)
 	GoDownValue = max(amm, GoDownValue)
-	#var Tw = create_tween()
-	#Tw.set_ease(Tween.EASE_OUT)
-	#Tw.set_trans(Tween.TRANS_QUAD)
-	#Tw.tween_property(self, "shakestr", max(amm, shakestr), 1)
-#
-	#var Tw2 = create_tween()
-	#Tw2.set_ease(Tween.EASE_OUT)
-	#Tw2.set_trans(Tween.TRANS_QUAD)
-	#Tw2.tween_property(self, "GoDownValue", max(amm, GoDownValue), 1)
+
 
 func EnableMissileShake() -> void:
 	for g in Cabled:
@@ -54,18 +46,9 @@ func EnableMissileShake() -> void:
 	
 	shakestr = max(1.5, shakestr)
 	GoDownValue = 1
-	#var Tw = create_tween()
-	#Tw.set_ease(Tween.EASE_OUT)
-	#Tw.set_trans(Tween.TRANS_QUAD)
-	#Tw.tween_property(self, "shakestr", max(1.5, shakestr),1)
-#
-	#var Tw2 = create_tween()
-	#Tw2.set_ease(Tween.EASE_OUT)
-	#Tw2.set_trans(Tween.TRANS_QUAD)
-	#Tw2.tween_property(self, "GoDownValue", 1, 1)
-	#
-	#await Tw2.finished
+
 	GoingDown = true
+	
 func EnableDamageShake(amm : float) -> void:
 	for g in Cabled:
 		g.ApplyShake(amm)
@@ -86,6 +69,8 @@ func _physics_process(delta: float) -> void:
 		GoDownValue -= delta / 4
 		shakestr = 1.5 * GoingDownC.sample(GoDownValue / 2)
 	
+	_breath_time += delta
+	
 	offset = RandomOffset2()
 	
 	if Shake:
@@ -102,10 +87,28 @@ func _physics_process(delta: float) -> void:
 var prev : Vector2 = Vector2.ZERO
 
 func RandomOffset2() -> Vector2:
-	var x = clamp(randf_range(prev.x - 0.1, prev.x + 0.1), -5, 5);
-	var y = clamp(randf_range(prev.y - 0.1, prev.y + 0.1), -5, 5);
+	var x = clamp(randf_range(prev.x - 0.1, prev.x + 0.1), -1, 1)
+	var y = get_breath_offset()
+
 	prev = Vector2(x,y)
 	return prev;
+
+@export_group("Breath")
+@export var breath_amplitude : float = 10.0 # How far up/down the camera moves
+@export var breath_duration  : float = 2.0  # Time in seconds for a full cycle (in and out)
+@export var curve_power     : float = 2.0  # Exponent for extra easing (try 2..4)
+
+var _breath_time : float = 0.0
+
+func get_breath_offset() -> float:
+	var t = fmod(_breath_time, breath_duration) / breath_duration  # 0..1 over the cycle
+	# Sine wave between 0..1 (not -1..1): sin( t * PI * 2 ) * 0.5 + 0.5
+	var sin_val = sin(t * PI * 2) * 0.5 + 0.5
+	# Exaggerate easing
+	var eased = pow(sin_val, curve_power)
+	# Remap from 0..1 to -1..1
+	var y = (eased - 0.5) * 2.0
+	return y * breath_amplitude
 
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))

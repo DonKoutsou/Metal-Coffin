@@ -19,14 +19,18 @@ class_name BattleShipStats
 var FirePowerBuffTime : int = 0
 var SpeedBuffTime : int = 0
 
-func UpdateBuffs() -> void:
+func UpdateBuffs() -> Array[String]:
+	var ExpiredBuffs : Array[String]
 	FirePowerBuffTime = max(0, FirePowerBuffTime - 1)
 	SpeedBuffTime = max(0, SpeedBuffTime - 1)
-	if (FirePowerBuffTime == 0):
+	if (FirePowerBuffTime == 0 and FirePowerBuff > 0):
 		FirePowerBuff = 0
-	if (SpeedBuffTime == 0):
+		ExpiredBuffs.append("FirePower")
+	if (SpeedBuffTime == 0 and SpeedBuff > 0):
 		SpeedBuff = 0
-
+		ExpiredBuffs.append("Speed")
+	return ExpiredBuffs
+	
 func GetFirePower() -> float:
 	return FirePower + FirePowerBuff
 

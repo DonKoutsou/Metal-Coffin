@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=5 format=3 uid="uid://b30l72bpalbfy"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=6 format=3 uid="uid://b30l72bpalbfy"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_ap6kf"]
+[ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile/Missile.tres" id="2_7xojn"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="3_y540g"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_g1ywd"]
 
@@ -24,5 +25,5 @@ Tier = 1
 ItemName = "MP-9 \"Maelstrom\""
 ItemDesc = "Maelstrom represents the pinnacle of missile pod technology, offering advanced targeting algorithms and maximum payload flexibility. Capable of deploying a wide array of specialized missiles, Maelstrom delivers precise strikes against both single and multiple targets, making it indispensable for advanced combat operations."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_ap6kf")]([])
+CardProviding = Array[ExtResource("1_ap6kf")]([ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn")])
 CanTransfer = false
