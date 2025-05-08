@@ -1,39 +1,33 @@
-[gd_scene load_steps=48 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=42 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_ial63"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_3dpfm"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_5p8hw"]
 [ext_resource type="PackedScene" uid="uid://chd8i7o8mqa5l" path="res://Scenes/Cards/CardFightShipViz2.tscn" id="5_f2au4"]
 [ext_resource type="PackedScene" uid="uid://mynuy3gwirlo" path="res://Scenes/Cards/atack_timer.tscn" id="6_iype3"]
 [ext_resource type="PackedScene" uid="uid://rwe63rpa83wb" path="res://Scenes/Cards/AtackEffects/CardThing.tscn" id="7_reii6"]
 [ext_resource type="PackedScene" uid="uid://djd1dfb5i6p0y" path="res://Scenes/FightMinigame.tscn" id="7_x1b75"]
-[ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="10_084tn"]
-[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_5vvva"]
 [ext_resource type="PackedScene" uid="uid://cbdyafmynts2u" path="res://Scenes/Cards/OffensiveAnimation.tscn" id="11_j66lv"]
-[ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile.tres" id="12_a2cqf"]
 [ext_resource type="PackedScene" uid="uid://dfh0dm1lwcumv" path="res://Scenes/Cards/CardFightEndScene.tscn" id="12_lqfcs"]
-[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="13_pchum"]
 [ext_resource type="PackedScene" uid="uid://6hcd2pi6mky3" path="res://Scenes/Cards/CardFightShipInfo.tscn" id="13_wsi3m"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="14_kl7fj"]
-[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="14_ll7ew"]
-[ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="15_0nvmo"]
+[ext_resource type="AudioStream" uid="uid://d0xjs5goyfcry" path="res://Assets/Sounds/CardSound.mp3" id="15_0nvmo"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="15_dpyfj"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_1krry"]
-[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="17_r6l16"]
-[ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="18_wdur5"]
+[ext_resource type="AudioStream" uid="uid://co4gxohf2bei6" path="res://Assets/Sounds/UI_in.mp3" id="16_1krry"]
+[ext_resource type="AudioStream" uid="uid://c6ewhvjut1hq" path="res://Assets/Sounds/UI_out.mp3" id="17_r6l16"]
+[ext_resource type="AudioStream" uid="uid://r4airnis10pl" path="res://Assets/Sounds/BurnSound.mp3" id="18_wdur5"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Cards/SegmentedBar/segmented_hp.tscn" id="21_taaw1"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="21_vvcgs"]
-[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="22_hn1mp"]
-[ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="23_f2au4"]
-[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="24_yhraa"]
-[ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="25_xdq0f"]
+[ext_resource type="Texture2D" uid="uid://clm5eqtlgiqgx" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="22_hn1mp"]
+[ext_resource type="Texture2D" uid="uid://3xyvos3xx5wp" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="23_f2au4"]
+[ext_resource type="Texture2D" uid="uid://bi72i727dp3d2" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="24_yhraa"]
+[ext_resource type="Texture2D" uid="uid://b4c7ju8s26q7g" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="25_xdq0f"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="26_reii6"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="30_xdq0f"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="30_yhraa"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="31_aiu8p"]
-[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="34_aiu8p"]
+[ext_resource type="Texture2D" uid="uid://b75pku28h4b37" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="34_aiu8p"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
 offsets = PackedFloat32Array(0, 0.484, 1)
@@ -134,7 +128,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing_size = 0.215
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "DiscardP", "DeckP") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "Cloud", "DiscardP", "DeckP") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -167,6 +161,7 @@ CardSelectContainer = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContaine
 ActionDeclaration = NodePath("SubViewport/Control2/Action Declaration")
 ShipSpacer = NodePath("SubViewport/Control2/VBoxContainer4/ShipSpacer")
 HandAmmountLabel = NodePath("SubViewport/Control2/Label")
+Cloud = NodePath("SubViewport/Control2/Clouds")
 DiscardP = NodePath("SubViewport/Control2/DiscardPile")
 DeckP = NodePath("SubViewport/Control2/DeckButton")
 StartingCardAmm = 3

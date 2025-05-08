@@ -19,7 +19,6 @@ class_name Card_Fight
 @export var AtackTime : PackedScene
 @export var FightGame : PackedScene
 @export var CardThing : PackedScene
-
 #Animation of the atack
 @export var ActionAnim : PackedScene
 #Scene that shows the stats of the fight
@@ -32,7 +31,6 @@ class_name Card_Fight
 @export_group("Plecement Referances")
 #Plecement for any atack cards player can play
 @export var PlayerCardPlecement : Control
-
 #Plecement for any cards player selects to play
 @export var SelectedCardPlecement : Control
 @export var AnimationPlecement : Control
@@ -41,13 +39,11 @@ class_name Card_Fight
 @export var PlayerShipVisualPlecement : Control
 @export var TargetSelect : CardFightTargetSelection
 @export var CardSelect : CardFightDiscardSelection
-@export var CardScrollContainer : ScrollContainer
-@export var SelectedCardScrollContainer : ScrollContainer
-@export var EnergyLabel : Label
 @export var CardSelectContainer : Control
 @export var ActionDeclaration : Control
 @export var ShipSpacer : Control
 @export var HandAmmountLabel : Label
+@export var Cloud : ColorRect
 @export var DiscardP : DiscardPile
 @export var DeckP : DeckPile
 @export_group("FightSettings")
@@ -102,8 +98,6 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
-	set_physics_process(false)
-	
 	EnergyBar.Init(TurnEnergy)
 	
 	if (OS.is_debug_build()):
@@ -584,24 +578,25 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 			
 			
 			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
-			anim.DrawnLine = true
+			#anim.DrawnLine = true
 			AnimationPlecement.add_child(anim)
 			AnimationPlecement.move_child(anim, 1)
-			#anim.Originator = GetShipViz(Ship)
-			var Vizs : Array[Control]
+
 			#List containing targets and a bool saying if target has def
-			var TargetList : Dictionary[BattleShipStats, bool]
-			for g in Targets:
-				Vizs.append(GetShipViz(g))
+			var TargetList : Dictionary[BattleShipStats, Dictionary]
 			
-			if (Counter != null):
-				for g in Targets:
-					var HasDef : bool
+			for g in Targets:
+				var HasDef : bool = false
+				if (Counter != null):
 					if (ActionList.ShipHasAction(g, Counter)):
 						HasDef = true
-					TargetList[g] = HasDef
+				var Data : Dictionary
+				Data["HasDef"] = HasDef
+				Data["Viz"] = GetShipViz(g)
+				TargetList[g] = Data
 			
-			anim.DoOffensive(Action, TargetList, Ship, Vizs, Friendly)
+			
+			anim.DoOffensive(Action, TargetList, Ship, Friendly)
 			
 			if (!Action.ShouldConsume()):
 				Dec.DiscardPile.append(Action)
@@ -612,7 +607,8 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 					DiscardP.OnCardDiscarded(pos)
 			
 			for g in TargetList:
-				if (TargetList[g]):
+				var HadDef = TargetList[g]["HasDef"]
+				if (HadDef):
 					ActionList.RemoveActionFromShip(g, Counter)
 					if (!Counter.ShouldConsume()):
 						var TargetDeck = GetShipDeck(Targets[0])
@@ -1443,28 +1439,10 @@ func UpdateEnergy(OldEnergy : float, NewEnergy : float) -> void:
 		EnergyBar.ChangeSegmentAmm(Energy)
 
 
-var ScrollMomentum : float = 0
-
-func _on_scroll_container_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		set_physics_process(true)
-		ScrollMomentum += event.relative.x
-
-
 var cloudtime : float = 0
-func _process(delta: float) -> void:
-	cloudtime += delta * SimulationManager.SimSpeed()
-	$SubViewport/Control2/Clouds.material.set_shader_parameter("custom_time", cloudtime)
-
 func _physics_process(delta: float) -> void:
-	CardScrollContainer.scroll_horizontal -= ScrollMomentum
-	ScrollMomentum = move_toward(ScrollMomentum, 0, delta * 500)
-	if (ScrollMomentum == 0):
-		set_physics_process(false)
-
-func _on_selected_card_scroll_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		SelectedCardScrollContainer.scroll_vertical -= event.relative.y
+	cloudtime += delta * SimulationManager.SimSpeed()
+	Cloud.material.set_shader_parameter("custom_time", cloudtime)
 
 func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	var Stats = BattleShipStats.new()

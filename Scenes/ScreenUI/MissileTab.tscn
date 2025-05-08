@@ -1,21 +1,20 @@
-[gd_scene load_steps=22 format=3 uid="uid://cwnxxystgxrjm"]
+[gd_scene load_steps=21 format=3 uid="uid://cwnxxystgxrjm"]
 
 [ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_2m6j3"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_uy6ab"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_5j6a5"]
-[ext_resource type="Texture2D" uid="uid://7ukbsw5o0nhs" path="res://Assets/UIPiecies/Screen/MissileTab_FullQuality.png" id="4_nth3v"]
-[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="5_jqaeg"]
-[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="6_o630s"]
-[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="7_602df"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="8_tvoe2"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="9_5r1o0"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="10_ng7p5"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="11_4sk4u"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="12_q0qm5"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="13_y4ap4"]
+[ext_resource type="Texture2D" uid="uid://ri467jebrnnw" path="res://Assets/UIPiecies/Screen/MissileTab_FullQuality.png" id="4_nth3v"]
+[ext_resource type="Texture2D" uid="uid://b0eu853m2frcg" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="5_jqaeg"]
+[ext_resource type="Texture2D" uid="uid://d4jy5j7w8ex6p" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="6_o630s"]
+[ext_resource type="Texture2D" uid="uid://dm2ias21ul0i2" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="8_tvoe2"]
+[ext_resource type="Texture2D" uid="uid://cqragu8t7tr0q" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="9_5r1o0"]
+[ext_resource type="Texture2D" uid="uid://taaphgrg8xn0" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="10_ng7p5"]
+[ext_resource type="Texture2D" uid="uid://c5yjnx8e66owo" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="11_4sk4u"]
+[ext_resource type="Texture2D" uid="uid://csq0ghr285hon" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="12_q0qm5"]
+[ext_resource type="Texture2D" uid="uid://degaswgrnsjvw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="13_y4ap4"]
 [ext_resource type="Texture2D" uid="uid://cba3crf7vyc2x" path="res://Assets/Off.png" id="14_w0uv6"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
-[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
+[ext_resource type="FontFile" uid="uid://cpqupp1wiyo88" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
 
 [sub_resource type="Animation" id="Animation_brgwl"]
@@ -160,7 +159,6 @@ grow_vertical = 0
 rotation = -1.57079
 texture_normal = ExtResource("5_jqaeg")
 texture_pressed = ExtResource("6_o630s")
-texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -181,7 +179,6 @@ rotation = -1.57079
 scale = Vector2(1, 1.00062)
 texture_normal = ExtResource("8_tvoe2")
 texture_pressed = ExtResource("9_5r1o0")
-texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -201,7 +198,6 @@ grow_vertical = 0
 rotation = -1.57079
 texture_normal = ExtResource("10_ng7p5")
 texture_pressed = ExtResource("11_4sk4u")
-texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -221,7 +217,6 @@ grow_vertical = 0
 rotation = -1.57079
 texture_normal = ExtResource("12_q0qm5")
 texture_pressed = ExtResource("13_y4ap4")
-texture_click_mask = ExtResource("7_602df")
 ignore_texture_size = true
 stretch_mode = 0
 

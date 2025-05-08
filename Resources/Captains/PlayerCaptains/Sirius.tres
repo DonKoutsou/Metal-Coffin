@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=22 format=3 uid="uid://cga5buofwr6yr"]
 
-[ext_resource type="Texture2D" uid="uid://dlebd41j7q7s1" path="res://Assets/CaptainPortraits/Captain10.png" id="1_2qy3x"]
+[ext_resource type="Texture2D" uid="uid://bt647g030nod" path="res://Assets/CaptainPortraits/Captain10.png" id="1_2qy3x"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ot5w6"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_5m53b"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_43sb5"]

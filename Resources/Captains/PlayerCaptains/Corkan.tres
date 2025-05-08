@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://cnqhhk0a4yp6e"]
 
-[ext_resource type="Texture2D" uid="uid://c5rf570oonbbc" path="res://Assets/CaptainPortraits/Captain9.png" id="1_th4ne"]
+[ext_resource type="Texture2D" uid="uid://h68yf60yhy41" path="res://Assets/CaptainPortraits/Captain9.png" id="1_th4ne"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_wx6fp"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_4yl3g"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_knux0"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_mcko6"]
-[ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/Spaceship/ShipElena2.png" id="5_l1t0x"]
+[ext_resource type="Texture2D" uid="uid://b8pkwsimahol4" path="res://Assets/Spaceship/ShipElena2.png" id="5_l1t0x"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="10_0xigk"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="10_l1t0x"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="10_th4ne"]

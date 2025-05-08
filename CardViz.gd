@@ -27,24 +27,9 @@ func _ready() -> void:
 	
 	$Sprite2D.rotation_degrees = randf_range(0, 360)
 	
-	#if (Target.global_position.dot(global_position) > 0):
-		#rotation = 180
-	
-	
-	#$MissileCruise.pitch_scale = randf_range(0.8, 1.2)
-	
-
-	#$MultiParticleExample1.burst()
-	#await $MultiParticleExample1.Finished
-	#$MissileCruise.play()
-	
-	#var pos = Target.global_position + (Target.size / 2)
-	#pos.y += 800
-	#look_at(pos)
-	
 	$TrailLine.call_deferred("Init")
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	if (!Going or Target == null):
 		return

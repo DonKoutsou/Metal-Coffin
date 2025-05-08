@@ -5,12 +5,12 @@
 [ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="3_6elwd"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Cards/AtackEffects/RevEf.tscn" id="3_n0kd1"]
 [ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_pof7x"]
-[ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_q07tg"]
+[ext_resource type="AudioStream" uid="uid://c8uv70r535p5h" path="res://Assets/Sounds/BeamRev.mp3" id="3_q07tg"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_6elwd"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="5_ex23e"]
 [ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="7_1fv0c"]
-[ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="9_hv3nu"]
-[ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="9_n0kd1"]
+[ext_resource type="AudioStream" uid="uid://bb1fegu7lnq3t" path="res://Assets/Sounds/Explosion.wav" id="9_hv3nu"]
+[ext_resource type="AudioStream" uid="uid://7dfbpavh0bp1" path="res://Assets/Sounds/beam-fire-282361.mp3" id="9_n0kd1"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -133,7 +133,7 @@ point_count = 3
 _data = [Vector2(0, 1), 0.0, 0.0597402, 0, 0, Vector2(1, 0), -0.904178, 0.0, 0, 0]
 point_count = 2
 
-[node name="MissileThing" type="Node2D"]
+[node name="MissileThing" type="Node2D" node_paths=PackedStringArray("InitialParticle", "EndingParticle", "SoundNode", "Trail")]
 rotation = -1.5708
 script = ExtResource("1_5lbu3")
 speed = 25
@@ -142,6 +142,10 @@ wiggle_amplitude = 0.0
 wiggle_frequency = 0.0
 ExplosionSound = ExtResource("9_hv3nu")
 FireSound = ExtResource("3_q07tg")
+InitialParticle = NodePath("MultiParticleExample1")
+EndingParticle = NodePath("MultiParticleExample2")
+SoundNode = NodePath("MissileCruise")
+Trail = NodePath("TrailLine")
 
 [node name="MultiParticleExample1" parent="." instance=ExtResource("3_n0kd1")]
 

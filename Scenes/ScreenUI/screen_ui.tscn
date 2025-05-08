@@ -1,48 +1,47 @@
-[gd_scene load_steps=49 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=48 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
-[ext_resource type="AudioStream" uid="uid://idnn507tyewg" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
-[ext_resource type="Texture2D" uid="uid://bt5d4jvftjfin" path="res://Assets/UIPiecies/Screen/Screen2_FullQuality.png" id="5_ao4ul"]
+[ext_resource type="AudioStream" uid="uid://kv44sbge8ta6" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
+[ext_resource type="Texture2D" uid="uid://ch6npsr2w8h23" path="res://Assets/UIPiecies/Screen/Screen2_FullQuality.png" id="5_ao4ul"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
-[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="8_eamxa"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="9_3s488"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="10_3csbo"]
+[ext_resource type="Texture2D" uid="uid://csq0ghr285hon" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
+[ext_resource type="Texture2D" uid="uid://degaswgrnsjvw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
+[ext_resource type="Texture2D" uid="uid://dm2ias21ul0i2" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="9_3s488"]
+[ext_resource type="Texture2D" uid="uid://cqragu8t7tr0q" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="10_3csbo"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/SteeringWheelUI.tscn" id="11_s7gev"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="13_4xtjg"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_l0ryv"]
 [ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="14_ua54b"]
-[ext_resource type="Texture2D" uid="uid://cub3jskgpfw07" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality.png" id="15_tpyok"]
-[ext_resource type="Texture2D" uid="uid://diws0gke4cls1" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality_Pressed.png" id="16_sln7g"]
-[ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="17_07pwg"]
-[ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality_pressed.png" id="18_qqmpd"]
-[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="19_n4cku"]
-[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="20_sa8yb"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
+[ext_resource type="Texture2D" uid="uid://do25cu0iee7a5" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality.png" id="15_tpyok"]
+[ext_resource type="Texture2D" uid="uid://cbqvj3hlujrvr" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality_Pressed.png" id="16_sln7g"]
+[ext_resource type="Texture2D" uid="uid://c432f10yy2ihn" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="17_07pwg"]
+[ext_resource type="Texture2D" uid="uid://cmg6bn6fn2yb8" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality_pressed.png" id="18_qqmpd"]
+[ext_resource type="Texture2D" uid="uid://b0eu853m2frcg" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="19_n4cku"]
+[ext_resource type="Texture2D" uid="uid://d4jy5j7w8ex6p" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="20_sa8yb"]
+[ext_resource type="Texture2D" uid="uid://taaphgrg8xn0" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
+[ext_resource type="Texture2D" uid="uid://c5yjnx8e66owo" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="23_0465a"]
 [ext_resource type="PackedScene" uid="uid://c0fey2gjg1mvv" path="res://Scenes/ScreenUI/SimNob.tscn" id="27_67jhj"]
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
+[ext_resource type="FontFile" uid="uid://cmtqspe2qhwlv" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
-[ext_resource type="Texture2D" uid="uid://cj1erpjy550l3" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="30_ao4ul"]
+[ext_resource type="Texture2D" uid="uid://be3jqi61mh3ks" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="30_ao4ul"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="31_ua54b"]
-[ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
+[ext_resource type="Texture2D" uid="uid://darf33qcgrd55" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="33_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scenes/Map/screen_cam.gd" id="35_vmft1"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="36_ai3xr"]
 [ext_resource type="Script" uid="uid://30ku4j8kcjjm" path="res://Scripts/UI/light_pivot_1.gd" id="36_wetmy"]
-[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/LightCone.png" id="36_xl4i0"]
+[ext_resource type="Texture2D" uid="uid://c3gf77ytaspto" path="res://Assets/LightCone.png" id="36_xl4i0"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
-[ext_resource type="AudioStream" uid="uid://bir6mqhkctabs" path="res://Assets/Sounds/Sqeak2.mp3" id="38_ao4ul"]
-[ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="38_e7ydv"]
-[ext_resource type="AudioStream" uid="uid://ciq487snqicgb" path="res://Assets/Sounds/Sqeak1.mp3" id="39_ng3jm"]
-[ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="39_qac3v"]
+[ext_resource type="AudioStream" uid="uid://diacon5gn8b5q" path="res://Assets/Sounds/Sqeak2.mp3" id="38_ao4ul"]
+[ext_resource type="AudioStream" uid="uid://bb1fegu7lnq3t" path="res://Assets/Sounds/Explosion.wav" id="38_e7ydv"]
+[ext_resource type="AudioStream" uid="uid://6acqilgkw8ie" path="res://Assets/Sounds/Sqeak1.mp3" id="39_ng3jm"]
+[ext_resource type="AudioStream" uid="uid://p3alexqmbh8h" path="res://Assets/Sounds/ShakeLoop.wav" id="39_qac3v"]
 
 [sub_resource type="Curve" id="Curve_8gyii"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -417,7 +416,6 @@ grow_vertical = 0
 action_mode = 0
 texture_normal = ExtResource("19_n4cku")
 texture_pressed = ExtResource("20_sa8yb")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -436,7 +434,6 @@ grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("21_ue6hp")
 texture_pressed = ExtResource("22_oelfy")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -460,7 +457,6 @@ theme = ExtResource("14_l0ryv")
 action_mode = 0
 texture_normal = ExtResource("6_kbeeh")
 texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -483,7 +479,6 @@ focus_mode = 0
 theme = ExtResource("14_l0ryv")
 texture_normal = ExtResource("6_kbeeh")
 texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
@@ -507,7 +502,6 @@ focus_mode = 0
 theme = ExtResource("14_l0ryv")
 texture_normal = ExtResource("15_tpyok")
 texture_pressed = ExtResource("16_sln7g")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
@@ -527,7 +521,6 @@ grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("6_kbeeh")
 texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -546,7 +539,6 @@ grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("6_kbeeh")
 texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -565,7 +557,6 @@ grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("6_kbeeh")
 texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
@@ -585,7 +576,6 @@ grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("9_3s488")
 texture_pressed = ExtResource("10_3csbo")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -604,7 +594,6 @@ grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("17_07pwg")
 texture_pressed = ExtResource("18_qqmpd")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -636,7 +625,6 @@ focus_mode = 0
 theme = ExtResource("14_l0ryv")
 texture_normal = ExtResource("6_kbeeh")
 texture_pressed = ExtResource("7_t8pjf")
-texture_click_mask = ExtResource("8_eamxa")
 ignore_texture_size = true
 stretch_mode = 0
 
