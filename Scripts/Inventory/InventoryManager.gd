@@ -169,6 +169,7 @@ func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> v
 	OwnerInventory.StartUpgrade(Box, cit.HasUpgrade())
 	CloseDescriptor()
 	BoxSelected(Box, OwnerInventory)
+	
 func CancelUpgrades(Cha : Captain) -> void:
 	if (_CharacterInventories.has(Cha)):
 		var CharInv = _CharacterInventories[Cha] as CharacterInventory
@@ -264,7 +265,7 @@ func OnCharacterRemoved(Cha : Captain) -> void:
 	_CharacterInventories.erase(Cha)
 	
 func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
-	var CharInv
+	var CharInv : CharacterInventory
 	
 	if (_CharacterInventories.has(Cha)):
 		CharInv = _CharacterInventories[Cha]
@@ -274,13 +275,14 @@ func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
 		_CharacterInventories[Cha] = CharInv
 		CharacterPlace.add_child(CharInv)
 	
-		CharInv.connect("BoxSelected", BoxSelected)
-		CharInv.connect("ItemUpgrade", ItemUpdgrade)
-		CharInv.connect("OnItemAdded", OnItemAdded.bind(Cha))
-		CharInv.connect("OnItemRemoved", OnItemRemoved.bind(Cha))
-		CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
-		CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
-		CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
+		CharInv.BoxSelected.connect(BoxSelected)
+		CharInv.ItemUpgrade.connect(ItemUpdgrade)
+		CharInv.OnItemAdded.connect(OnItemAdded.bind(Cha))
+		CharInv.OnItemRemoved.connect(OnItemRemoved.bind(Cha))
+		CharInv.OnShipPartAdded.connect(Cha.OnShipPartAddedToInventory)
+		CharInv.OnShipPartRemoved.connect(Cha.OnShipPartRemovedFromInventory)
+		CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
+		CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 		
 	Cha._CharInv = CharInv
 	

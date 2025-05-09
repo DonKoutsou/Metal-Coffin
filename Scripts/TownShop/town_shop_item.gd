@@ -13,7 +13,7 @@ signal OnItemBought(It : Item)
 signal OnItemSold(It : Item)
 
 #var PlFunds : int = 10000
-var LandedShip : MapShip
+var LandedShips : Array[MapShip]
 var ItPrice : float = 10
 var It : Item
 var ShopAmm : int = 10
@@ -47,9 +47,16 @@ func UpdateBar(Added : int):
 	
 	$AudioStreamPlayer.play()
 	if (Added > 0):
-		if (!InventoryManager.GetInstance().FleetHasSpace(It, LandedShip)):
+		var HasSpace : bool
+		
+		for g in LandedShips:
+			if (g.Cpt.GetCharacterInventory().HasSpaceForItem(It)):
+				HasSpace = true
+		
+		if (!HasSpace):
 			PopUpManager.GetInstance().DoFadeNotif("No Space available to buy armament.")
 			return
+			
 		OnItemBought.emit(It)
 	else :
 		OnItemSold.emit(It)

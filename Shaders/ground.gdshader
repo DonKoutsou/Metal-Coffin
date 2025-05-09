@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 // Color textures
 uniform sampler2D GroundTexture: repeat_enable, filter_nearest_mipmap_anisotropic;
-uniform sampler2D GroundTextureMask: repeat_enable, filter_nearest_mipmap_anisotropic;
+//uniform sampler2D GroundTextureMask: repeat_enable, filter_nearest_mipmap_anisotropic;
 uniform sampler2D GroundTexture2: repeat_enable, filter_nearest_mipmap_anisotropic;
 
 // Noise texture

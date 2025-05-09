@@ -8,9 +8,7 @@ class_name ItemDescriptor
 #@export var ItemIcon : TextureRect
 @export var ItemName : Label
 @export var ItemDesc : RichTextLabel
-@export var UsableItemsActions : HBoxContainer
 @export var RepairButton : Button
-@export var UseButton : Button
 @export var TransferButton : Button
 @export var UpgradeButton : Button
 @export var UpgradeLabel : RichTextLabel
@@ -28,7 +26,7 @@ var DescribedContainer : Inventory_Box
 var UsingAmm : int = 1
 
 func _ready() -> void:
-	call_deferred("PlayIntroAnim")
+	#call_deferred("PlayIntroAnim")
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade)
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer)
 
@@ -40,7 +38,7 @@ func PlayIntroAnim() -> void:
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(self, "size", Vector2(size.x, size.y), 0.5)
+	tw.tween_property(self, "size", size, 0.5)
 	set_deferred("size", Vector2(size.x, 0))
 	await tw.finished
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
@@ -55,18 +53,12 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 	#ItemIcon.texture = It.ItemIcon
 	ItemDesc.text = It.GetItemDesc()
 	
-	#if (It is UsableItem):
-		#UsableItemsActions.visible = true
-		#ItemIcon.modulate = It.ItecColor
-	#else :
-	UsableItemsActions.visible = false
-	
-	TransferButton.visible = It.CanTransfer
+	#TransferButton.visible = It.CanTransfer
+	TransferButton.visible = true
 	
 	ItemName.text = It.ItemName
 	#Ship Parts
 	if (It is ShipPart):
-		UsableItemsActions.visible = false
 		
 		#ShipPartActions.visible = true
 		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
@@ -112,6 +104,65 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 			card.Dissable()
 	else:
 		CardSection.visible = false
+		
+func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
+	set_physics_process(false)
+	DescribedContainer = Box
+	var It = DescribedContainer.GetContainedItem()
+	#ItemIcon.texture = It.ItemIcon
+	#ItemDesc.text = It.GetItemDesc()
+	
+	#TransferButton.visible = It.CanTransfer
+	TransferButton.visible = false
+	
+	ItemName.text = It.ItemName
+	#Ship Parts
+	if (It is ShipPart):
+		
+		#ShipPartActions.visible = true
+		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
+		#if (CanUpgrade):
+		UpgradeLabel.visible = true
+		if (It.UpgradeVersion == null):
+			UpgradeButton.visible = false
+			UpgradeLabel.visible = false
+		else:
+			var inv = Owner.GetCharacterInventory()
+			if (inv.GetItemBeingUpgraded() == Box):
+				#set_physics_process(true)
+				UpgradeButton.visible = false
+			else:
+				UpgradeButton.visible = true
+				var UpTime = It.UpgradeTime
+				var UpCost = It.UpgradeCost
+				if (CanUpgrade):
+					UpTime /= 2
+					UpCost /= 2
+				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([UpTime, UpCost])
+		
+	else :
+		
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+	
+	#TODO Option doesent show when ship has upgraded weapons
+	if (It.CardProviding.size() > 0):
+		var CardsChecked : Array[CardStats]
+		for g in It.CardProviding:
+			if (CardsChecked.has(g)):
+				continue
+			CardsChecked.append(g)
+			
+			var CardS = g.duplicate() as CardStats
+			var card = CardScene.instantiate() as Card
+			
+			if (It.CardOptionProviding != null):
+				CardS.SelectedOption = It.CardOptionProviding
+			card.SetCardStats(CardS, It.CardProviding.count(g))
+			CardPlecement.add_child(card)
+			#card.Dissable()
+	else:
+		CardSection.visible = false
 #func _on_use_pressed() -> void:
 	#PopUpManager.GetInstance().DoConfirm("Are you sure you want to use this item ?", "Use", ConfirmUse)
 
@@ -137,16 +188,7 @@ func ConfirmDrop() -> void:
 func ConfirmUpgrade() -> void:
 	ItemUpgraded.emit(DescribedContainer)
 	#queue_free()
-	
-func _on_use_more_pressed() -> void:
-	UsingAmm = min(UsingAmm + 1, DescribedContainer.Ammount)
-	UseButton.text = "Use :" + var_to_str(UsingAmm) + "x"
-	
-	
-func _on_use_less_pressed() -> void:
-	UsingAmm = max(UsingAmm - 1, 1)
-	UseButton.text = "Use :" + var_to_str(UsingAmm) + "x"
-	
+
 	
 func _on_repair_pressed() -> void:
 	ItemRepaired.emit(DescribedContainer)

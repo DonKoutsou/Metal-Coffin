@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgs0u1j4mhhx5"]
+[gd_scene load_steps=7 format=3 uid="uid://cuutvp45vr0ew"]
 
-[ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="1_2v1h2"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_jut7c"]
-[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_40o7a"]
-[ext_resource type="FontFile" uid="uid://rnxb3tf6tyvv" path="res://Fonts/DOTMBold.TTF" id="4_fr5qk"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_bgbkq"]
+[ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_0fjjd"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_q7hfh"]
+[ext_resource type="FontFile" uid="uid://rnxb3tf6tyvv" path="res://Fonts/DOTMBold.TTF" id="4_r68kf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
 content_margin_left = 4.0
@@ -11,7 +11,6 @@ content_margin_right = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
-skew = Vector2(0.1, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -20,22 +19,23 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 
 [node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "RepairButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement", "DescScroll", "CardScroll") groups=["ItemDescriptor"]]
+custom_minimum_size = Vector2(0, 310)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 3
+size_flags_vertical = 10
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_jut7c")
-script = ExtResource("1_2v1h2")
-CardScene = ExtResource("3_40o7a")
+theme_override_styles/panel = ExtResource("1_bgbkq")
+script = ExtResource("2_0fjjd")
+CardScene = ExtResource("3_q7hfh")
 ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")
-ItemDesc = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
+ItemDesc = NodePath("")
 RepairButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair")
 TransferButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
 UpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
-UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
+UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("VBoxContainer/HBoxContainer/CardsSection")
 CardPlecement = NodePath("VBoxContainer/HBoxContainer/CardsSection/ScrollContainer/CardPlecement")
 DescScroll = NodePath("VBoxContainer")
@@ -47,19 +47,20 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_jut7c")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
@@ -67,7 +68,7 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("4_fr5qk")
+theme_override_fonts/font = ExtResource("4_r68kf")
 theme_override_font_sizes/font_size = 28
 text = "Item"
 horizontal_alignment = 1
@@ -84,44 +85,32 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
+theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Upgrade"
 
 [node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("4_fr5qk")
+theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Repair"
 
 [node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
-text = "Transfer"
-
-[node name="Drop" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
-text = "Drop"
+theme_override_fonts/font = ExtResource("4_r68kf")
+text = "Transfer"
 
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
-
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/normal_font = ExtResource("4_fr5qk")
+theme_override_fonts/normal_font = ExtResource("4_r68kf")
 theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
@@ -129,39 +118,25 @@ text = "[color=#c19200]Upgrade Time[/color] : 4x
 fit_content = true
 autowrap_mode = 2
 
-[node name="ItemDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/normal_font = ExtResource("4_fr5qk")
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
-fit_content = true
-autowrap_mode = 2
-
-[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
+[node name="Panel5" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
 [node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -20
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CardsSection"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_fr5qk")
+theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Providing Cards"
 horizontal_alignment = 1
 uppercase = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/CardsSection"]
 clip_contents = false
-custom_minimum_size = Vector2(0, 270)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 3
@@ -171,11 +146,11 @@ vertical_scroll_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = -90
 alignment = 1
 
-[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
+[node name="Panel6" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
@@ -183,5 +158,4 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Drop" to="." method="_on_drop_pressed"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer/CardsSection/ScrollContainer" to="." method="CardScrolInput"]

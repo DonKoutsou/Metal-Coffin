@@ -23,7 +23,7 @@ signal ItemUpgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal ItemTransf(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal OnCharacterInspectionPressed
 signal OnCharacterDeckInspectionPressed
-var _InventoryContents : Dictionary
+var _InventoryContents : Dictionary[Item, int]
 
 var _CardInventory : Dictionary
 var _CardAmmo : Dictionary
@@ -66,24 +66,65 @@ func HasItem(It : Item) -> bool:
 			return true
 	return false
 
-func GetInventoryContents() -> Dictionary:
+func GetInventoryContents() -> Dictionary[Item, int]:
 	return _InventoryContents
 
 func InitialiseInventory(Cha : Captain) -> void:
 	var CharInvSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.INVENTORY_SPACE)
+	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
+	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)
+	var CharFuelTankSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK_SLOTS)
+	var CharShieldSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SHIELD_SLOTS)
+	var CharWeaponSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.WEAPON_SLOTS)
+	
 	var CharName = Cha.CaptainName
 	for g in CharInvSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		Box.Initialise(self)
 		InventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
+	
+	for g in CharEngineSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		EngineInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+	
+	for g in CharSensorSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		SensorInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+	
+	for g in CharFuelTankSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		FuelTankInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+	
+	for g in CharShieldSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		ShieldInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+	
+	for g in CharWeaponSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		WeaponInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		
 	CaptainNameLabel.text = CharName
 
 func ItemSelected(Box : Inventory_Box) -> void:
 	BoxSelected.emit(Box, self)
 
 func AddItem(It : Item) -> void:
-	var boxes = _GetInventoryBoxes()
+	var boxes
+	if (It is ShipPart):
+		boxes = GetBoxParentForType(It.PartType).get_children()
+	else:
+		boxes = InventoryBoxParent.get_children()
 	var Empty : Inventory_Box = null
 
 	#try to find matching box for it and if not put it on any empty ones we found
@@ -127,9 +168,9 @@ func AddItem(It : Item) -> void:
 			
 		if (It is ShipPart):
 			var BoxParent = GetBoxParentForType(It.PartType)
-			if (Empty.get_parent() != BoxParent):
-				Empty.get_parent().remove_child(Empty)
-				BoxParent.add_child(Empty)
+			#if (Empty.get_parent() != BoxParent):
+				#Empty.get_parent().remove_child(Empty)
+				#BoxParent.add_child(Empty)
 			OnShipPartAdded.emit(It)
 		else:
 			var BoxParent = InventoryBoxParent
@@ -163,7 +204,11 @@ func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 	return BoxParent
 	
 func HasSpaceForItem(It : Item) -> bool:
-	var boxes = _GetInventoryBoxes()
+	var boxes
+	if (It is ShipPart):
+		boxes = GetBoxParentForType(It.PartType).get_children()
+	else:
+		boxes = InventoryBoxParent.get_children()
 	#try to find matching box for it and if not put it on any empty ones we found
 	for g in boxes:
 		if (g.IsEmpty()):

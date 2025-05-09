@@ -346,7 +346,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	fuel.BoughtFuel = spot.PlayerFuelReserves
 	fuel.BoughtRepairs = spot.PlayerRepairReserves
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
-	fuel.LandedShip = Ship
+	fuel.LandedShips.append_array(spot.VisitingShips)
 	fuel.TownSpot = spot
 	if (!skiptransition):
 		GetMap().GetScreenUi().ToggleFullScreen(true)
@@ -362,15 +362,29 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 		ActionTracker.GetInstance().ShowTutorial("Town Shop", text, [], true)
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
-func FuelTransactionFinished(BFuel : float, BRepair: float, Ship : MapShip, Scene : TownScene):
-	var spot = Ship.CurrentPort as MapSpot
+func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShip], Scene : TownScene):
+	var spot = Ships[0].CurrentPort as MapSpot
 	if (spot.PlayerFuelReserves != BFuel):
 		spot.CityFuelReserves -= BFuel
 	if (BFuel < 0):
+		var FuelToRemove = BFuel
+		for ship : MapShip in Ships:
+			var CurrentValue = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+			
+			var CurrentFuelToRemove = min(CurrentValue, abs(FuelToRemove))
+			
+			ship.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, CurrentFuelToRemove)
+			
+			#we add cause fuel to remove should be negative
+			FuelToRemove += CurrentFuelToRemove
+			
+			if (FuelToRemove == 0):
+				break
+
 		#if (Ship is PlayerShip):
 			#ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
 		#else:
-		Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
+		#Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
 
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)

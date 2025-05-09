@@ -15,6 +15,7 @@ class_name TownScene
 @export var HullBar : ProgressBar
 @export var ItemPlecement : Control
 @export var RepRefPlecement : Control
+@export var WorkSh : WorkShop
 @export_group("Values")
 @export var FuelPricePerTon : float = 100
 @export var RepairpricePerRepairValue : float = 100
@@ -37,7 +38,7 @@ var BoughtRepairs : float = 0
 
 signal TransactionFinished(BFuel : float, BRepair : float, Ship : MapShip, TradeScene : TownScene)
 
-var LandedShip : MapShip
+var LandedShips : Array[MapShip]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -65,7 +66,15 @@ func _ready() -> void:
 	HullBar.value = PlHull + BoughtRepairs
 	RepairPrice.text = var_to_str(RepairpricePerRepairValue)
 	
-	var Itms = InventoryManager.GetInstance().GetAllItemsInFleet(LandedShip)
+	var Itms : Dictionary[Item, int]
+	for g in LandedShips:
+		var InvContents = g.Cpt.GetCharacterInventory().GetInventoryContents()
+		for it in InvContents:
+			if (Itms.has(it)):
+				Itms[it] += 1
+			else:
+				Itms[it] = 1
+		
 	for g in TownSpot.Merch:
 		var It = g.It
 		for z in Merch:
@@ -75,34 +84,33 @@ func _ready() -> void:
 #signal OnItemSold(It : Item)
 	
 	for m : Merchandise in Merch:
-		if (m.Amm == 0 and Itms.count(m.It) == 0):
+		if (m.Amm == 0 and !Itms.has(m.It)):
 			continue
 
 		var ItScene = ItemScene.instantiate() as TownShopItem
 		ItScene.It = m.It
 		ItScene.ItPrice = m.Price
 		ItScene.ShopAmm = m.Amm
-		ItScene.PlAmm = Itms.count(m.It)
-		ItScene.LandedShip = LandedShip
+		if (Itms.has(m.It)):
+			ItScene.PlAmm = Itms[m.It]
+		else:
+			ItScene.PlAmm = 0
+		ItScene.LandedShips = LandedShips
 		ItScene.connect("OnItemBought", OnItemBought)
 		ItScene.connect("OnItemSold", OnItemSold)
 		ItemPlecement.visible = true
 		ItemPlecement.add_child(ItScene)
+	
+	WorkSh.Init(LandedShips)
+	
 	UISoundMan.GetInstance().Refresh()
 func SetFuelData():
-	PlFuel = LandedShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-	PlMaxFuel = LandedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-	var plship = LandedShip as MapShip
-	var dd = plship.GetDroneDock()
-	for g in dd.DockedDrones:
+	for g in LandedShips:
 		PlMaxFuel += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 		PlFuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		
 func SetHullData():
-	PlHull = LandedShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-	PlMaxHull = LandedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
-	var plship = LandedShip as MapShip
-	var dd = plship.GetDroneDock()
-	for g in dd.DockedDrones:
+	for g in LandedShips:
 		PlMaxHull += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 		PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 
@@ -169,7 +177,7 @@ func UpdateRepairBar(AddedRepair : float):
 	CurrentHull.text = var_to_str(roundi(PlHull + BoughtRepairs))
 func _on_button_pressed() -> void:
 	#PlayerWallet.Funds = PlFunds
-	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShip, self)
+	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShips, self)
 	#queue_free()
 
 
@@ -180,9 +188,11 @@ func On_MunitionShop_pressed() -> void:
 
 func OnMunitionShopToggled(toggled_on: bool) -> void:
 	ItemPlecement.get_parent().visible = toggled_on
+	WorkSh.visible = !toggled_on
 	RepRefPlecement.visible = !toggled_on
 	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(toggled_on)
 	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(!toggled_on)
+	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(toggled_on)
 
 func On_RefRef_Pressed() -> void:
 	ItemPlecement.get_parent().visible = false
@@ -191,19 +201,37 @@ func On_RefRef_Pressed() -> void:
 
 func OnRefuelShopPressed(toggled_on: bool) -> void:
 	ItemPlecement.get_parent().visible = !toggled_on
+	WorkSh.visible = !toggled_on
 	RepRefPlecement.visible = toggled_on
 	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(!toggled_on)
 	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(toggled_on)
+	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(toggled_on)
+
+func OnUpgradeShopPressed(toggled_on: bool) -> void:
+	WorkSh.visible = toggled_on
+	ItemPlecement.get_parent().visible = !toggled_on
+	RepRefPlecement.visible = !toggled_on
+	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(!toggled_on)
+	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(!toggled_on)
+	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(toggled_on)
 
 func OnItemSold(It : Item) -> void:
-	InventoryManager.GetInstance().RemoveItemFromFleet(It, LandedShip)
+	for g in LandedShips:
+		var inv = g.Cpt.GetCharacterInventory()
+		if (inv.HasItem(It)):
+			inv.RemoveItem(It)
+
 	for g in TownSpot.Merch:
 		if (g.It == It):
 			g.Amm += 1
 			break
 
 func OnItemBought(It : Item) -> void:
-	InventoryManager.GetInstance().AddItemToFleet(It, LandedShip)
+	for g in LandedShips:
+		var inv = g.Cpt.GetCharacterInventory()
+		if (inv.HasSpaceForItem(It)):
+			inv.AddItem(It)
+
 	for g in TownSpot.Merch:
 		if (g.It == It):
 			g.Amm -= 1
