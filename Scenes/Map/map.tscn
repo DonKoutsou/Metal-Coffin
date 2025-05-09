@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=43 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
 [ext_resource type="AudioStream" uid="uid://bvscl85iho5qp" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
-[ext_resource type="Shader" uid="uid://cl4oumrqvlmki" path="res://Shaders/ColorIndexMat.gdshader" id="28_x3wib"]
+[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="28_x3wib"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 _limits = [0.0, 5.0, 0.0, 1.0]
@@ -121,10 +121,6 @@ adjustment_enabled = true
 adjustment_brightness = 1.3
 adjustment_contrast = 0.8
 adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_445lv"]
-shader = ExtResource("28_x3wib")
-shader_parameter/ColorAmm = 30.0
 
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
 layer = 0
@@ -275,12 +271,12 @@ stream = ExtResource("26_h7q0i")
 autoplay = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 3
+layer = 4
 
 [node name="Screen" type="ColorRect" parent="CanvasLayer2"]
 process_mode = 3
 z_index = 1
-material = SubResource("ShaderMaterial_445lv")
+material = ExtResource("28_x3wib")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

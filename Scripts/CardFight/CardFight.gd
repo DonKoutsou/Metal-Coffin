@@ -102,12 +102,12 @@ var CardSelectSize : float
 func _ready() -> void:
 	EnergyBar.Init(TurnEnergy)
 	
-	#if (OS.is_debug_build()):
-		#for g in 10:
-			#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-		#for g in 10:
-			#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	if (OS.is_debug_build()):
+		for g in 10:
+			EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+		for g in 10:
+			PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
@@ -131,9 +131,7 @@ func _ready() -> void:
 	#Create the visualisation for each ship, basicly their stat holder
 	
 	CreateDecks()
-	
-	#print("Card fight initialised. {0} player ship(s) VS {1} enemy ship(s)".format([PlayerShips.size(), EnemyShips.size()]))
-	
+
 	DeckP.visible = false
 	DiscardP.visible = false
 	EnergyBar.get_parent().visible = false

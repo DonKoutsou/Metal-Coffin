@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dxt6oe4rhk3du"]
+
+[ext_resource type="Shader" uid="uid://cl4oumrqvlmki" path="res://Shaders/ColorIndexMat.gdshader" id="1_rg5ws"]
+
+[resource]
+shader = ExtResource("1_rg5ws")
+shader_parameter/ColorAmm = 16.0

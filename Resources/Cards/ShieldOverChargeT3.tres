@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://ckn3nw1x0omqr"]
 
-[ext_resource type="Texture2D" uid="uid://c221vevim2qk3" path="res://Assets/Cards/Shield.png" id="1_dotbb"]
+[ext_resource type="Texture2D" uid="uid://bx8tqigvs3lvx" path="res://Assets/Cards/Shield.png" id="1_dotbb"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_10cgk"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_8348h"]
 [ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_7seka"]
@@ -8,14 +8,12 @@
 [resource]
 script = ExtResource("4_7seka")
 Shield = true
-Buffs = false
-SpeedBuffs = false
 FireExt = false
 CanBeUsedOnOther = false
 UseInstant = true
 Icon = ExtResource("1_dotbb")
 CardName = "Shield Overcharge"
-CardDescription = "Overcharge shiels for temporary buff.[p][center][color=#6be2e9]+ 60 SHIELD"
+CardDescription = "Overcharge shields for temporary buff.[p][center][color=#6be2e9]+ 60 SHIELD"
 Energy = 3
 Options = Array[ExtResource("2_10cgk")]([])
 AllowDuplicates = true

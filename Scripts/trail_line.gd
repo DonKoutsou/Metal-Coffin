@@ -32,6 +32,7 @@ func Init() -> void:
 	add_point(Vector2(0,0))
 
 func Update(delta: float) -> void:
+
 	# Check if the position has changed
 	if last_position.distance_to(global_position) > min_distance:
 

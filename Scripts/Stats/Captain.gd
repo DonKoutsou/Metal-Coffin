@@ -7,6 +7,7 @@ class_name Captain
 @export var CaptainPortrait : Texture
 @export var ShipIcon : Texture
 @export var CaptainStats : Array[ShipStat]
+
 #var MappedStats : Array[STAT_CONST.STATS]
 @export var ShipCallsign : String = "P"
 @export var StartingItems : Array[Item]

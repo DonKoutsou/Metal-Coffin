@@ -12,6 +12,7 @@ class_name CharacterInventory
 @export var InventoryBoxParent : GridContainer
 @export var CaptainNameLabel : Label
 
+signal InventoryUpdated
 signal OnItemAdded(it : Item)
 signal OnItemRemoved(it : Item)
 signal OnShipPartAdded(it : ShipPart)
@@ -21,6 +22,7 @@ signal BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal ItemUpgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal ItemTransf(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal OnCharacterInspectionPressed
+signal OnCharacterDeckInspectionPressed
 var _InventoryContents : Dictionary
 
 var _CardInventory : Dictionary
@@ -31,10 +33,9 @@ var SimPaused : bool = false
 var _ItemBeingUpgraded : Inventory_Box
 var _UpgradeTime : float
 
-var OriginalSize : float
 
 func _ready() -> void:
-	OriginalSize = size.y
+
 	InventoryBoxParent.get_parent().get_parent().visible = false
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
@@ -84,6 +85,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 func AddItem(It : Item) -> void:
 	var boxes = _GetInventoryBoxes()
 	var Empty : Inventory_Box = null
+
 	#try to find matching box for it and if not put it on any empty ones we found
 	for g in boxes:
 		if (g.IsEmpty()):
@@ -93,15 +95,16 @@ func AddItem(It : Item) -> void:
 		if (g.GetContainedItemName() == It.ItemName and g.HasSpace()):
 			g.UpdateAmm(1)
 			_InventoryContents[It] += 1
-			OnItemAdded.emit(It)
+			
 			if (It.CardProviding.size() > 0):
 				for c in It.CardProviding:
 					_CardInventory[c] += 1
 			if (It.CardOptionProviding != null):
 				_CardAmmo[It.CardOptionProviding] += 1
-			#print("Added 1 {0}".format([It.ItemName]))
-			#if (It is MissileItem):
-				#MissileDockEventH.MissileAdded.emit(It)
+			
+			OnItemAdded.emit(It)
+			InventoryUpdated.emit()
+			
 			return
 	#try to find empty box
 	if (Empty != null):
@@ -134,9 +137,8 @@ func AddItem(It : Item) -> void:
 				Empty.get_parent().remove_child(Empty)
 				BoxParent.add_child(Empty)
 		OnItemAdded.emit(It)
-		#print("Added 1 {0}".format([It.ItemName]))
-		#if (It is MissileItem):
-			#MissileDockEventH.MissileAdded.emit(It)
+		InventoryUpdated.emit()
+		
 		return
 	ItemPlecementFailed.emit(It)
 	return
@@ -173,9 +175,7 @@ func HasSpaceForItem(It : Item) -> bool:
 #called for Item Descriptor once the Drop button is pressed. Signal is connected through Inventory manager when descriptor is created.
 func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	var It = Box.GetContainedItem()
-	if (It is ShipPart):
-		OnShipPartRemoved.emit(It)
-	OnItemRemoved.emit(It)
+	
 	#if (It is MissileItem):
 		#MissileDockEventH.MissileRemoved.emit(It)
 	Box.UpdateAmm(-1)
@@ -197,6 +197,11 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 		if (Box.get_parent() != BoxParent):
 			Box.get_parent().remove_child(Box)
 			BoxParent.add_child(Box)
+	
+	if (It is ShipPart):
+		OnShipPartRemoved.emit(It)
+	OnItemRemoved.emit(It)
+	InventoryUpdated.emit()
 	
 func RemoveItem(It : Item) -> void:
 	for g in _GetInventoryBoxes():
@@ -287,6 +292,8 @@ func GetItemBeingUpgraded() -> Inventory_Box:
 func _on_button_pressed() -> void:
 	OnCharacterInspectionPressed.emit()
 
+func _on_deck_pressed() -> void:
+	OnCharacterDeckInspectionPressed.emit()
 
 func _on_inventory_vis_toggle_pressed() -> void:
 	$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = true
@@ -299,7 +306,7 @@ func _on_inventory_vis_toggle_pressed() -> void:
 		TargetSize = 500
 		InventoryBoxParent.get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().visible
 	else:
-		TargetSize = OriginalSize
+		TargetSize = 0
 		custom_minimum_size.y = prevc
 		
 	var Tw = create_tween()
@@ -311,9 +318,9 @@ func _on_inventory_vis_toggle_pressed() -> void:
 	if (Show):
 		InventoryBoxParent.get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().visible
 
-	if (InventoryBoxParent.get_parent().get_parent().visible):
-		$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Hide Inventory"
-	else:
-		$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Show Inventory"
+	#if (InventoryBoxParent.get_parent().get_parent().visible):
+		#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Hide Inventory"
+	#else:
+		#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Show Inventory"
 	
 	$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = false

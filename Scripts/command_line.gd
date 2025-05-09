@@ -7,7 +7,7 @@ class_name CommandLine
 var Items : Array[Item]
 
 func _ready() -> void:
-	if (!OS.is_debug_build()):
+	if (!OS.is_debug_build() or OS.get_name() != "Windows"):
 		queue_free()
 		return
 	set_physics_process(false)

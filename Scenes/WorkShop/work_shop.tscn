@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhbyfc1rfad2f"]
+
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="1_p28a8"]
+[ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="2_6rtyi"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3yyhe"]
+noise = SubResource("FastNoiseLite_7mr5f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4uhfw"]
+resource_local_to_scene = true
+shader = ExtResource("2_6rtyi")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[node name="WorkShop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Card" parent="VBoxContainer/HBoxContainer" instance=ExtResource("1_p28a8")]
+material = SubResource("ShaderMaterial_4uhfw")
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2

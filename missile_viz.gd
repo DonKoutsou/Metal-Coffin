@@ -23,13 +23,15 @@ signal Finished
 signal Reached
 
 var Target : Control
-var Going = true
+var Going = false
 var SpawnPos : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	global_position = SpawnPos
 
 	Trail.Init()
+	
+	Going = true
 	
 	SoundNode.pitch_scale = randf_range(0.8, 1.2)
 	
@@ -89,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		EndingParticle.global_position = global_position
 		EndingParticle.global_rotation = 0
 		EndingParticle.burst()
-		Trail.queue_free()
+		Trail.free()
 		Going = false
 		Reached.emit()
 		SoundNode.stop()

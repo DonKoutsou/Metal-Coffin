@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://pf2kultlbpsk"]
 
-[ext_resource type="Texture2D" uid="uid://bq8q6bblntmdr" path="res://Assets/Cards/TeamShield.png" id="1_pvruc"]
+[ext_resource type="Texture2D" uid="uid://doas2ry6opth6" path="res://Assets/Cards/TeamShield.png" id="1_pvruc"]
 [ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_k4vh0"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_45agt"]
 [ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_ygkw4"]
@@ -8,13 +8,12 @@
 [resource]
 script = ExtResource("4_ygkw4")
 Shield = true
-Buffs = false
 FireExt = false
 CanBeUsedOnOther = false
 UseInstant = true
 Icon = ExtResource("1_pvruc")
 CardName = "Team Shield Overcharge"
-CardDescription = "Overcharge [color=#c19200]team[/color] shiels for temporary buff.[p][center][color=#6be2e9]+ 30 SHIELD"
+CardDescription = "Overcharge [color=#c19200]team[/color] shields for temporary buff.[p][center][color=#6be2e9]+ 30 SHIELD"
 Energy = 4
 Options = Array[ExtResource("2_k4vh0")]([])
 AllowDuplicates = true

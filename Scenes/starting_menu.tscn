@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=42 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://f6ifndd7j6l6" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_1p5b6"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
-[ext_resource type="Shader" uid="uid://cl4oumrqvlmki" path="res://Shaders/ColorIndexMat.gdshader" id="23_thqps"]
+[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="23_thqps"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
 offsets = PackedFloat32Array(0, 0.628906, 1)
@@ -151,10 +151,6 @@ light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_srpg8"]
 light_mode = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jns0o"]
-shader = ExtResource("23_thqps")
-shader_parameter/ColorAmm = 16.0
 
 [node name="StartingMenu" type="CanvasLayer"]
 process_mode = 3
@@ -624,7 +620,7 @@ text = "No"
 [node name="Screen" type="ColorRect" parent="CanvasLayer2"]
 process_mode = 3
 z_index = 1
-material = SubResource("ShaderMaterial_jns0o")
+material = ExtResource("23_thqps")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

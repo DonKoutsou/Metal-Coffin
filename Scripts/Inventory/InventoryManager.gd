@@ -12,6 +12,7 @@ class_name InventoryManager
 @export var CharacterPlace : Control
 @export var DescriptorPlace : Control
 @export var ShipStats : InventoryShipStats
+@export var ShipDeck : ShipDeckViz
 @export var InvScrol : ScrollContainer
 @export_group("Event Handlers")
 @export var MissileDockEventH : MissileDockEventHandler
@@ -236,16 +237,19 @@ func AddCharacter(Cha : Captain) -> void:
 	_CharacterInventories[Cha] = CharInv
 	CharacterPlace.add_child(CharInv)
 	
-	CharInv.connect("BoxSelected", BoxSelected)
-	CharInv.connect("ItemUpgrade", ItemUpdgrade)
-	CharInv.connect("OnItemAdded", OnItemAdded.bind(Cha))
-	CharInv.connect("OnItemRemoved", OnItemRemoved.bind(Cha))
-	CharInv.connect("OnShipPartAdded", Cha.OnShipPartAddedToInventory)
-	CharInv.connect("OnShipPartRemoved", Cha.OnShipPartRemovedFromInventory)
-	CharInv.connect("OnCharacterInspectionPressed", InspectCharacter.bind(Cha))
+	CharInv.BoxSelected.connect(BoxSelected)
+	CharInv.ItemUpgrade.connect(ItemUpdgrade)
+	CharInv.OnItemAdded.connect(OnItemAdded.bind(Cha))
+	CharInv.OnItemRemoved.connect(OnItemRemoved.bind(Cha))
+	CharInv.OnShipPartAdded.connect(Cha.OnShipPartAddedToInventory)
+	CharInv.OnShipPartRemoved.connect(Cha.OnShipPartRemovedFromInventory)
+	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
+	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 	
 	if (ShipStats.CurrentShownCaptain == null):
 		ShipStats.SetCaptain(Cha)
+		ShipDeck.visible = false
+		
 	
 	for g in Cha.StartingItems:
 		CharInv.AddItem(g)
@@ -301,7 +305,14 @@ func OnItemRemoved(It : Item, Owner : Captain) -> void:
 func InspectCharacter(Cha : Captain) -> void:
 	CloseDescriptor()
 	ShipStats.SetCaptain(Cha)
+	ShipStats.visible = true
+	ShipDeck.visible = false
 
+func InspectCharacterDeck(Cha : Captain) -> void:
+	CloseDescriptor()
+	ShipStats.visible = false
+	ShipDeck.SetDeck(Cha)
+	ShipDeck.visible = true
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):

@@ -14,6 +14,8 @@ func _ready() -> void:
 		statscene.SetData(StatsShown[g])
 		add_child(statscene)
 		Stats.append(statscene)
+	
+	
 		
 func UpdateValues() -> void:
 	for g in Stats.size():

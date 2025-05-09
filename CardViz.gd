@@ -13,7 +13,7 @@ class_name CardViz
 @export var min_distance = 100
 
 var Target : Control
-var Going = true
+var Going = false
 var SpawnPos : Vector2 = Vector2.ZERO
 # Wiggle amplitude and speed
 @export var wiggle_amplitude = 5.0
@@ -27,7 +27,11 @@ func _ready() -> void:
 	
 	$Sprite2D.rotation_degrees = randf_range(0, 360)
 	
-	$TrailLine.call_deferred("Init")
+	call_deferred("Init")
+
+func Init() -> void:
+	$TrailLine.Init()
+	Going = true
 
 func _physics_process(delta: float) -> void:
 	
