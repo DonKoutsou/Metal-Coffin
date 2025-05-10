@@ -44,7 +44,7 @@ static func GetInstance() -> World:
 
 func _ready() -> void:
 	Instance = self
-	GetMap().GetScreenUi().DoIntroFullScreen(true)
+	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	WorldSpawnTransitionFinished.emit()
 	#$Inventory.Player = GetMap().GetPlayerShip()
@@ -99,9 +99,9 @@ func _ready() -> void:
 	if (!Loading):
 		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
 		if (IsPrologue):
-			GetMap().GetScreenUi().ToggleFullScreen(true)
+			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		else:
-			GetMap().GetScreenUi().ToggleFullScreen(false)
+			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		
@@ -116,7 +116,7 @@ func _ready() -> void:
 			await GetMap().GetScreenUi().FullScreenToggleFinished
 			#await Loadingscr.LoadingDestroyed
 			await Questionair.Ended
-			GetMap().GetScreenUi().ToggleFullScreen(false)
+			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 			await GetMap().GetScreenUi().FullScreenToggleStarted
 			Questionair.queue_free()
 			PlayPrologue()
@@ -128,7 +128,7 @@ func _ready() -> void:
 	else:
 		WorldView.GetInstance().Load()
 		
-		GetMap().GetScreenUi().ToggleFullScreen(false)
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		GetMap().GetCamera().FrameCamToPlayer()
@@ -217,14 +217,14 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 		return
 	var sc = FleetSeparationScene.instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
-	GetMap().GetScreenUi().ToggleFullScreen(true)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Ingame_UIManager.GetInstance().AddUI(sc)
 	
 	sc.connect("SeperationFinished", ShipSeparationFinished)
 		
 func ShipSeparationFinished() -> void:
-	GetMap().GetScreenUi().ToggleFullScreen(false)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
 	
@@ -249,7 +249,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	CardF.EnemyReserves = EBattleStats
 	SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
-	GetMap().GetScreenUi().ToggleFullScreen(true)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
@@ -286,7 +286,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	FighingFriendlyUnits.clear()
 	
 	#GetMap().GetScreenUi().ToggleControllCover(false)
-	GetMap().GetScreenUi().ToggleFullScreen(false)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
 
@@ -349,7 +349,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	fuel.LandedShips.append_array(spot.VisitingShips)
 	fuel.TownSpot = spot
 	if (!skiptransition):
-		GetMap().GetScreenUi().ToggleFullScreen(true)
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
@@ -389,7 +389,7 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShi
 	spot.PlayerFuelReserves = max(0 , BFuel)
 	spot.PlayerRepairReserves = max(0, BRepair)
 	
-	GetMap().GetScreenUi().ToggleFullScreen(false)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await  GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
 	
@@ -406,7 +406,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 		var happeningui = HappeningUI.instantiate() as HappeningInstance
 		happeningui.EventSpot = Spot
 		happeningui.HappeningInstigator = Instigator
-		GetMap().GetScreenUi().ToggleFullScreen(true)
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
 		happeningui.PresentHappening(Spot.Event)
@@ -418,7 +418,10 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	return PlayedEvent
 	
 func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], _Ship : MapShip) -> void:
-	GetMap().GetScreenUi().ToggleFullScreen(CapmaignFin)
+	if (CapmaignFin):
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	else:
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
 	await GetMap().GetScreenUi().FullScreenToggleFinished

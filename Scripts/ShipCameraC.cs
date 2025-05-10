@@ -56,7 +56,7 @@ public partial class ShipCameraC : Camera2D
         ZoomTw.SetEase(Tween.EaseType.Out);
         ZoomTw.SetTrans(Tween.TransitionType.Quart);
 
-        Vector2 newzoom = (prevzoom * new Vector2(zoomval, zoomval)).Clamp(new Vector2(0.045f, 0.045f), new Vector2(5, 5));
+        Vector2 newzoom = (prevzoom * new Vector2(zoomval, zoomval)).Clamp(new Vector2(0.0225f, 0.0225f), new Vector2(2.5f, 2.5f));
         GD.Print(newzoom);
         Callable callable = new Callable(this, MethodName.UpdateZoom);
         ZoomTw.TweenMethod(callable, Zoom, newzoom, 1f);

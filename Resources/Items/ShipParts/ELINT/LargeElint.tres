@@ -12,7 +12,6 @@ PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("6_6tdai")
 Upgrades = Array[ExtResource("5_mb8i7")]([SubResource("Resource_pxbaq")])
 UpgradeTime = 100.0

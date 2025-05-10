@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuutvp45vr0ew"]
+[gd_scene load_steps=6 format=3 uid="uid://cuutvp45vr0ew"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_bgbkq"]
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_0fjjd"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_q7hfh"]
 [ext_resource type="FontFile" uid="uid://rnxb3tf6tyvv" path="res://Fonts/DOTMBold.TTF" id="4_r68kf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
-content_margin_left = 4.0
-content_margin_right = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
@@ -18,52 +14,55 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "RepairButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement", "DescScroll", "CardScroll") groups=["ItemDescriptor"]]
-custom_minimum_size = Vector2(0, 310)
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "RepairButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 10
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_bgbkq")
 script = ExtResource("2_0fjjd")
+Workshop = true
 CardScene = ExtResource("3_q7hfh")
-ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")
-ItemDesc = NodePath("")
-RepairButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair")
-TransferButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
-UpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
-UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/Label")
-CardSection = NodePath("VBoxContainer/HBoxContainer/CardsSection")
-CardPlecement = NodePath("VBoxContainer/HBoxContainer/CardsSection/ScrollContainer/CardPlecement")
-DescScroll = NodePath("VBoxContainer")
-CardScroll = NodePath("VBoxContainer/HBoxContainer/CardsSection/ScrollContainer")
+ItemName = NodePath("Control/HBoxContainer/HBoxContainer/ItemName")
+RepairButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Repair")
+TransferButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
+UpgradeButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
+UpgradeLabel = NodePath("Control/HBoxContainer/HBoxContainer/Label")
+CardSection = NodePath("Control/HBoxContainer/CardsSection")
+CardPlecement = NodePath("Control/HBoxContainer/CardsSection/CardPlecement")
 
-[node name="VBoxContainer" type="ScrollContainer" parent="."]
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 245)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_jut7c")
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 mouse_filter = 2
+alignment = 1
 
-[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel3" type="Panel" parent="Control/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
+alignment = 1
 
-[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="ItemName" type="Label" parent="Control/HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -76,26 +75,26 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="ShipPartActions" type="HBoxContainer" parent="Control/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="Upgrade" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Upgrade"
 
-[node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="Repair" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Repair"
 
-[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="Transfer" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -103,10 +102,11 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Transfer"
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="Control/HBoxContainer/HBoxContainer"]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
@@ -118,44 +118,34 @@ text = "[color=#c19200]Upgrade Time[/color] : 4x
 fit_content = true
 autowrap_mode = 2
 
-[node name="Panel5" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel5" type="Panel" parent="Control/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="CardsSection" type="VBoxContainer" parent="Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = -20
+alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CardsSection"]
+[node name="Label" type="Label" parent="Control/HBoxContainer/CardsSection"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Providing Cards"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/CardsSection"]
-clip_contents = false
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
-
-[node name="CardPlecement" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/CardsSection/ScrollContainer"]
+[node name="CardPlecement" type="HBoxContainer" parent="Control/HBoxContainer/CardsSection"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_constants/separation = -90
 alignment = 1
 
-[node name="Panel6" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel6" type="Panel" parent="Control/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[connection signal="gui_input" from="VBoxContainer" to="." method="OnDescScrollInput"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/CardsSection/ScrollContainer" to="." method="CardScrolInput"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]

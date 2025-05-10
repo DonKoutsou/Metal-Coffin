@@ -2,6 +2,7 @@ extends Control
 
 class_name ItemDescriptor
 
+@export var Workshop : bool = false
 @export_group("Scenes")
 @export var CardScene : PackedScene
 @export_group("UI Pieces")
@@ -26,21 +27,28 @@ var DescribedContainer : Inventory_Box
 var UsingAmm : int = 1
 
 func _ready() -> void:
-	#call_deferred("PlayIntroAnim")
-	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade)
-	UISoundMan.GetInstance().AddSelf($VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer)
+	Helper.GetInstance().CallLater(PlayIntroAnim, 0.01)
+	UISoundMan.GetInstance().AddSelf(UpgradeButton)
+	UISoundMan.GetInstance().AddSelf(TransferButton)
 
 
 func DescriptorTutorial() -> void:
 	pass
 
 func PlayIntroAnim() -> void:
+	#get_child(0).visible = false
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(self, "size", size, 0.5)
-	set_deferred("size", Vector2(size.x, 0))
+	if (Workshop):
+		get_child(0).get_child(0).visible = false
+		size = Vector2(0, size.y)
+		#set_deferred("size", Vector2(0, size.y))
+	else:
+		set_deferred("size", Vector2(size.x, 0))
 	await tw.finished
+	get_child(0).get_child(0).visible = true
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
 		var tuttext = "When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
@@ -73,7 +81,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 				set_physics_process(true)
 				UpgradeButton.visible = false
 			else:
-				UpgradeButton.visible = true
+				UpgradeButton.visible = false
 				var UpTime = It.UpgradeTime
 				var UpCost = It.UpgradeCost
 				if (CanUpgrade):
@@ -128,9 +136,11 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 			UpgradeLabel.visible = false
 		else:
 			var inv = Owner.GetCharacterInventory()
-			if (inv.GetItemBeingUpgraded() == Box):
+			if (inv.GetItemBeingUpgraded() != null and inv.GetItemBeingUpgraded().GetContainedItem() == It):
 				#set_physics_process(true)
 				UpgradeButton.visible = false
+				var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
+				UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
 			else:
 				UpgradeButton.visible = true
 				var UpTime = It.UpgradeTime

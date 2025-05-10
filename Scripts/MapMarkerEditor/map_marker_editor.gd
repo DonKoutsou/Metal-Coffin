@@ -5,17 +5,21 @@ class_name MapMarkerEditor
 @export var LineScene : PackedScene
 @export var TextScene : PackedScene
 
+
 var Line : MapMarkerLine
 var LineLeangth : float = 0
 
-@onready var ship_camera: Camera2D = $"../../../ShipCamera"
+var ship_camera: Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	call_deferred("SetCamera")
 	$MarkerTextEditor.visible = false
 	if (OS.get_name() == "Android"):
 		$MarkerTextEditor/VBoxContainer.position.y = 120
-	
+
+func SetCamera() -> void:
+	ship_camera = Map.GetInstance().GetCamera()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	#global_position = get_parent().global_position - (get_viewport_rect().size/2)
@@ -31,7 +35,8 @@ func _on_text_confirm_pressed() -> void:
 	$MarkerTextEditor.visible = false
 	var textblock = TextScene.instantiate() as MapMarkerText
 	var pos = ($Panel.position + ($Panel.size / 2)) - (get_viewport_rect().size / 2)
-	$"../../../MapPointerManager/MapLines".add_child(textblock)
+	
+	MapPointerManager.GetInstance().MapLonePos.add_child(textblock)
 	textblock.add_to_group("LineMarkers")
 	textblock.CamZoomUpdated(ship_camera.zoom.x)
 	textblock.global_position = ship_camera.global_position + (pos / ship_camera.zoom)
@@ -49,7 +54,7 @@ func _on_drone_button_pressed() -> void:
 	else:
 		var pos = Line.position - (get_viewport_rect().size / 2)
 		$Linetemp.remove_child(Line)
-		$"../../../MapPointerManager/MapLines".add_child(Line)
+		MapPointerManager.GetInstance().MapLonePos.add_child(Line)
 		Line.add_to_group("LineMarkers")
 		Line.CamZoomUpdated(ship_camera.zoom.x)
 		Line.global_position = ship_camera.global_position + (pos / ship_camera.zoom)
@@ -67,11 +72,11 @@ func _on_x_gas_range_changed(NewVal: float) -> void:
 func LoadData(Dat : SD_MapMarkerEditor) -> void:
 	for g in Dat.Lines:
 		var newline = LineScene.instantiate() as MapMarkerLine
-		$"../../../MapPointerManager/MapLines".add_child(newline)
+		MapPointerManager.GetInstance().MapLonePos.add_child(newline)
 		newline.LoadData(g)
 	for g in Dat.Texts:
 		var newtext = TextScene.instantiate() as MapMarkerText
-		$"../../../MapPointerManager/MapLines".add_child(newtext)
+		MapPointerManager.GetInstance().MapLonePos.add_child(newtext)
 		newtext.LoadData(g)
 
 func ToggleVisibilidy(t : bool) -> void:

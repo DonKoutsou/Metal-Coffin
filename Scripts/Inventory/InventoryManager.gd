@@ -151,6 +151,10 @@ func GetCity(CityName : String) -> MapSpot:
 	return CorrectCity
 
 func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
+	if (OwnerInventory._ItemBeingUpgraded != null):
+		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part.")
+		#print("Ship is already upgrading a part. Wait for it to finish first.")
+		return
 	var Cpt = GetBoxOwner(Box)
 	if (Cpt.CurrentPort == ""):
 		PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
@@ -170,6 +174,7 @@ func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> v
 	CloseDescriptor()
 	BoxSelected(Box, OwnerInventory)
 	
+
 func CancelUpgrades(Cha : Captain) -> void:
 	if (_CharacterInventories.has(Cha)):
 		var CharInv = _CharacterInventories[Cha] as CharacterInventory
@@ -253,7 +258,13 @@ func AddCharacter(Cha : Captain) -> void:
 		
 	
 	for g in Cha.StartingItems:
-		CharInv.AddItem(g)
+		if (g is ShipPart):
+			var Part = g.duplicate(true) as ShipPart
+			for Up in Part.Upgrades:
+				Up.CurrentValue = Up.UpgradeAmmount
+			CharInv.AddItem(Part)
+		else:
+			CharInv.AddItem(g)
 	UISoundMan.GetInstance().Refresh()
 
 func OnCharacterRemoved(Cha : Captain) -> void:
@@ -291,7 +302,10 @@ func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
 			CharInv.RemoveItemFromBox(g)
 	for g in LoadedItems:
 		for z in g.Ammount:
-			CharInv.AddItem(g.ItemType)
+			if (g.ItemType is ShipPart):
+				CharInv.AddItem(g.ItemType.duplicate(true))
+			else:
+				CharInv.AddItem(g.ItemType)
 
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):

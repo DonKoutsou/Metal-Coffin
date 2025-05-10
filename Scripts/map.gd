@@ -84,7 +84,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#place player close to first village
 	var pos = firstvilage.global_position
 	pos.y += 500
-	var PlShip = $SubViewportContainer/ViewPort/PlayerShip as MapShip
+	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/PlayerShip as MapShip
 	PlShip.SetShipPosition(pos)
 	_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
@@ -249,7 +249,7 @@ func GetMapMarkerEditorSaveData() -> SaveData:
 	var dat = SaveData.new().duplicate()
 	dat.DataName = "MarkerEditor"
 	var EditorData = SD_MapMarkerEditor.new()
-	for g in $SubViewportContainer/ViewPort/MapPointerManager/MapLines.get_children():
+	for g in $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLines.get_children():
 		if (g is MapMarkerLine):
 			EditorData.AddLine(g)
 		else : if (g is MapMarkerText):
@@ -266,7 +266,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		
 		var sc = load(dat.TownScenePath).instantiate() as Town
 		sc.LoadingData = true
-		$SubViewportContainer/ViewPort/MapSpots.add_child(sc)
+		$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
 		sc.connect("TownSpotAproached", Arrival)
 		
 		sc.LoadSaveData(dat)
@@ -308,7 +308,7 @@ var GenThread : Thread
 func GenerateMap() -> void:
 	#if (SpotList.size() == 0):
 	GenThread = Thread.new()
-	GenThread.start(GenerateMapThreaded.bind($SubViewportContainer/ViewPort/MapSpots))
+	GenThread.start(GenerateMapThreaded.bind($SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapSpots))
 	#_InitialPlayerPlacament()
 	ShowingTutorial = true
 
@@ -575,7 +575,7 @@ func _physics_process(_delta: float) -> void:
 
 func AddEnemyToHierarchy(en : HostileShip, pos : Vector2):
 	en.PosToSpawn = pos
-	$SubViewportContainer/ViewPort.add_child(en)
+	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(en)
 	en.connect("OnPlayerShipMet", EnemyMet)
 
 
@@ -726,7 +726,7 @@ func RoadFinished() -> void:
 		var l = g as Array[Vector2]
 		g[0] += (l[0].direction_to(l[l.size() - 1]) * 42)
 		g[l.size() - 1] += (l[l.size() - 1].direction_to(l[0]) * 42)
-	$SubViewportContainer/ViewPort/RoadLineDrawer.AddLines(Lines)
+	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/RoadLineDrawer.AddLines(Lines)
 	Roadt = null
 	GenerationFinished.emit()
 	
@@ -737,7 +737,7 @@ func MapLineFinished() -> void:
 		var l = g as Array[Vector2]
 		g[0] += (l[0].direction_to(l[1]) * 45)
 		g[1] += (l[1].direction_to(l[0]) * 45)
-	$SubViewportContainer/ViewPort/MapPointerManager/MapLineDrawer.AddLines(Lines)
+	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer.AddLines(Lines)
 	Maplt = null
 	GenerationFinished.emit()
 	
@@ -820,18 +820,26 @@ func _prim_mst_optimized(cities: Array) -> Array:
 	
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
+const ScreenPos = Vector2(80.0,76.0)
 const OriginalSize = Vector2(842.0, 565.0)
 const FullSize = Vector2(1124.0, 565.0)
 
-func ToggleFullScreen(toggle : bool) -> void:
+func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	
 	#$SubViewportContainer.visible = false
 	
 	#var toggle = await _ScreenUI.FullScreenToggleStarted
 	
-	if (toggle):
+	if (NewState == ScreenUI.ScreenState.FULL_SCREEN):
+		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = FullSize
-	else:
+		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
+	else: if (NewState == ScreenUI.ScreenState.HALF_SCREEN):
+		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize
-	
+		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
+	else:
+		$SubViewportContainer.position = Vector2.ZERO
+		$SubViewportContainer.size = get_viewport().get_visible_rect().size
+		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(false)
 	$SubViewportContainer.visible = true

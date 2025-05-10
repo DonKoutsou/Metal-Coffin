@@ -106,6 +106,8 @@ func _on_control_3_gui_input(event: InputEvent) -> void:
 #func Stuter() -> void:
 	#var mat : ShaderMaterial = $Control3/Screen.material
 
+func ToggleCrtEffect(T : bool) -> void:
+	$Control3/Screen.visible = T
 
 func _on_flight_manual_pressed() -> void:
 	Manual.visible = true

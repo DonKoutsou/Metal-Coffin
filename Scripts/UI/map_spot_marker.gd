@@ -8,6 +8,7 @@ class_name SpotMarker
 
 @export var BeepSound : AudioStream
 
+
 var TimeLastSeen : float
 
 func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
@@ -47,7 +48,7 @@ func OnAlarmRaised(Notify : bool) -> void:
 		add_child(Notif)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	SpotDropPosition.scale = Vector2(1,1) / NewZoom
+	SpotDropPosition.scale = Vector2(0.6,0.6) / NewZoom
 	$AnalyzeButton.visible = NewZoom <= 0.5
 
 func EnteredScreen() -> void:

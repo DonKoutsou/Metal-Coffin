@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=44 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -33,6 +33,39 @@
 _limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, 3.3398, 0, 0]
 point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_a2ujk"]
+offsets = PackedFloat32Array(0, 0.791667, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
+gradient = SubResource("Gradient_a2ujk")
+
+[sub_resource type="Environment" id="Environment_h7q0i"]
+background_mode = 3
+background_canvas_max_layer = 2
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_exposure = 1.2
+tonemap_white = 16.0
+glow_levels/1 = 16.0
+glow_levels/2 = 16.0
+glow_levels/3 = 16.0
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 1.0
+glow_strength = 0.5
+glow_mix = 0.825
+glow_bloom = 1.0
+glow_map_strength = 1.0
+adjustment_enabled = true
+adjustment_brightness = 1.3
+adjustment_contrast = 0.8
+adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
+
+[sub_resource type="World3D" id="World3D_x3wib"]
+environment = SubResource("Environment_h7q0i")
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
@@ -92,43 +125,13 @@ bg_color = Color(0.066982, 0.133257, 0.137998, 1)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.791667, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
-gradient = SubResource("Gradient_a2ujk")
-
-[sub_resource type="Environment" id="Environment_h7q0i"]
-background_mode = 3
-background_canvas_max_layer = 2
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 3
-tonemap_exposure = 1.2
-tonemap_white = 16.0
-glow_levels/1 = 16.0
-glow_levels/2 = 16.0
-glow_levels/3 = 16.0
-glow_levels/5 = 0.0
-glow_normalized = true
-glow_intensity = 1.0
-glow_strength = 0.5
-glow_mix = 0.825
-glow_bloom = 1.0
-glow_map_strength = 1.0
-adjustment_enabled = true
-adjustment_brightness = 1.3
-adjustment_contrast = 0.8
-adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
-
 [node name="Map" type="CanvasLayer" node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera")]
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
-_ScreenUI = NodePath("CanvasLayer/ScreenUI")
-_Camera = NodePath("SubViewportContainer/ViewPort/ShipCamera")
+_ScreenUI = NodePath("ScreenUI")
+_Camera = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera")
 TownSpotScene = ExtResource("7_0ker0")
 VillageSpotType = ExtResource("3_utnqo")
 CitySpotType = ExtResource("4_tftes")
@@ -159,6 +162,7 @@ stretch = true
 process_mode = 1
 disable_3d = true
 own_world_3d = true
+world_3d = SubResource("World3D_x3wib")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
@@ -166,17 +170,38 @@ positional_shadow_atlas_size = 512
 size = Vector2i(845, 565)
 render_target_update_mode = 4
 
-[node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/ViewPort"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer/ViewPort/SubViewportContainer"]
+disable_3d = true
+own_world_3d = true
+handle_input_locally = false
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+positional_shadow_atlas_size = 0
+positional_shadow_atlas_16_bits = false
+size = Vector2i(422, 282)
+render_target_update_mode = 4
+
+[node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
 
-[node name="RoadLineDrawer" parent="SubViewportContainer/ViewPort" instance=ExtResource("16_sp82o")]
+[node name="RoadLineDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("16_sp82o")]
 modulate = Color(1, 1, 1, 0.5)
 z_index = -1
 RoadLines = true
 
-[node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort"]
+[node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort" node_paths=PackedStringArray("Background", "Clouds", "Ground") groups=["Clock"]]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Clouds", "Ground") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
@@ -185,7 +210,7 @@ Background = NodePath("DarkBlueBackground")
 Clouds = NodePath("Clouds")
 Ground = NodePath("Ground")
 
-[node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
+[node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 z_index = -3
 texture_filter = 1
 material = SubResource("ShaderMaterial_28wu2")
@@ -199,7 +224,7 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Clouds" type="ColorRect" parent="SubViewportContainer/ViewPort/ShipCamera"]
+[node name="Clouds" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_x3wib")
 anchors_preset = 15
@@ -212,7 +237,7 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DarkBlueBackground" type="Panel" parent="SubViewportContainer/ViewPort/ShipCamera"]
+[node name="DarkBlueBackground" type="Panel" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 modulate = Color(1, 1, 1, 0)
 material = SubResource("CanvasItemMaterial_rrndq")
 anchors_preset = 15
@@ -227,13 +252,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ujsvm")
 
-[node name="PlayerShip" parent="SubViewportContainer/ViewPort" instance=ExtResource("17_21a23")]
-position = Vector2(167.19, 290.37)
+[node name="PlayerShip" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("17_21a23")]
+position = Vector2(126.5, 154.5)
 
-[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort"]
+[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("MapLonePos")]
 z_index = 100
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
+MapLonePos = NodePath("MapLines")
 MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.483, 100, 0.381, 1)
@@ -242,13 +268,13 @@ ConvoyColor = Color(100, 0.764, 0.081, 1)
 UIEventH = ExtResource("25_8mjbw")
 ControllerEventHandler = ExtResource("22_n73so")
 
-[node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager"]
+[node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager"]
 use_parent_material = true
 
-[node name="MapLineDrawer" parent="SubViewportContainer/ViewPort/MapPointerManager" instance=ExtResource("16_sp82o")]
+[node name="MapLineDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" instance=ExtResource("16_sp82o")]
 ResizeLinesWithZoom = true
 
-[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/MapPointerManager" groups=["LineMarkers"]]
+[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" groups=["LineMarkers"]]
 use_parent_material = true
 script = ExtResource("22_fa7wu")
 ShipControllerEvent = ExtResource("22_n73so")
@@ -257,21 +283,15 @@ Col = Color(100, 0.395, 0.144, 1)
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" instance=ExtResource("23_53oad")]
 layer = 3
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort"]
-environment = SubResource("Environment_h7q0i")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-follow_viewport_enabled = true
-
-[node name="ScreenUI" parent="CanvasLayer" instance=ExtResource("24_e5um8")]
+[node name="ScreenUI" parent="." instance=ExtResource("24_e5um8")]
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_h7q0i")
 autoplay = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 4
+layer = 3
+follow_viewport_enabled = true
 
 [node name="Screen" type="ColorRect" parent="CanvasLayer2"]
 process_mode = 3

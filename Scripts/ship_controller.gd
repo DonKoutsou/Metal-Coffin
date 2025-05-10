@@ -6,7 +6,7 @@ class_name ShipContoller
 @export var DroneDockEventH : DroneDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
-@onready var ship_camera: Camera2D = $"../Map/SubViewportContainer/ViewPort/ShipCamera"
+var ship_camera: Camera2D
 @export var CaptainSelectScreen : PackedScene
 @export var DroneScene : PackedScene
 
@@ -20,6 +20,7 @@ signal LandingRequested(ControlledShip : PlayerDrivenShip)
 static var Instance : ShipContoller
 
 func _ready() -> void:
+	call_deferred("SetCamera")
 	Instance = self
 	#DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	#DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
@@ -33,6 +34,9 @@ func _ready() -> void:
 	
 	#call_deferred("SetInitialShip")
 
+func SetCamera() -> void:
+	ship_camera = Map.GetInstance().GetCamera()
+
 static func GetInstance() -> ShipContoller:
 	return Instance
 
@@ -43,7 +47,7 @@ func InitiateFleetSeparation() -> void:
 	FleetSeperationRequested.emit(Instigator)
 	
 func SetInitialShip() -> void:
-	ControlledShip = $"../Map/SubViewportContainer/ViewPort/PlayerShip"
+	ControlledShip = get_tree().get_nodes_in_group("PlayerShips")[0]
 	
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	ControlledShip.connect("OnShipDamaged", OnShipDamaged)

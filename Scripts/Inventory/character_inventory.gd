@@ -216,7 +216,21 @@ func HasSpaceForItem(It : Item) -> bool:
 		if (g.GetContainedItemName() == It.ItemName and g.HasSpace()):
 			return true
 	return false
+
+func GetBoxContainingItem(It : Item) -> Inventory_Box:
+	var boxes
+	if (It is ShipPart):
+		boxes = GetBoxParentForType(It.PartType).get_children()
+	else:
+		boxes = InventoryBoxParent.get_children()
 	
+	var Box : Inventory_Box
+	
+	for g in boxes:
+		if (g.GetContainedItem() == It):
+			Box = g
+			
+	return Box
 #called for Item Descriptor once the Drop button is pressed. Signal is connected through Inventory manager when descriptor is created.
 func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	var It = Box.GetContainedItem()
@@ -237,11 +251,11 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 			_CardAmmo.erase(It.CardOptionProvidin)
 	if (_InventoryContents[It] == 0):
 		_InventoryContents.erase(It)
-	if (Box.IsEmpty()):
-		var BoxParent = InventoryBoxParent
-		if (Box.get_parent() != BoxParent):
-			Box.get_parent().remove_child(Box)
-			BoxParent.add_child(Box)
+	#if (Box.IsEmpty()):
+		#var BoxParent = InventoryBoxParent
+		#if (Box.get_parent() != BoxParent):
+			#Box.get_parent().remove_child(Box)
+			#BoxParent.add_child(Box)
 	
 	if (It is ShipPart):
 		OnShipPartRemoved.emit(It)
@@ -269,10 +283,7 @@ func _GetInventoryBoxes() -> Array:
 	return Boxes
 
 func UpgradeItem(Box : Inventory_Box) -> void:
-	if (_ItemBeingUpgraded != null):
-		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part.")
-		#print("Ship is already upgrading a part. Wait for it to finish first.")
-		return
+	
 	#else :if (!Player.cu):
 		#PopUpManager.GetInstance().DoFadeNotif("Cant upgrade ship in current port.")
 		#return
@@ -306,9 +317,10 @@ func CancelUpgrade() -> void:
 func ItemUpgradeFinished() -> void:
 	var Part = _ItemBeingUpgraded.GetContainedItem() as ShipPart
 	RemoveItemFromBox(_ItemBeingUpgraded)
+	var UpgradedItem = Part.UpgradeVersion.duplicate(true)
 	for g in Part.Upgrades.size():
-		Part.UpgradeVersion.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
-	AddItem(Part.UpgradeVersion)
+		UpgradedItem.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
+	AddItem(UpgradedItem)
 	_ItemBeingUpgraded = null
 
 func ForceUpgradeItem(Box : Inventory_Box) -> bool:
@@ -321,9 +333,11 @@ func ForceUpgradeItem(Box : Inventory_Box) -> bool:
 		return false
 	
 	RemoveItemFromBox(Box)
+	
+	var UpgradedItem = Part.UpgradeVersion.duplicate(true)
 	for g in Part.Upgrades.size():
-		Part.UpgradeVersion.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
-	AddItem(Part.UpgradeVersion)
+		UpgradedItem.CurrentValue = Part.Upgrades[g].CurrentValue
+	AddItem(UpgradedItem)
 	
 	return true
 

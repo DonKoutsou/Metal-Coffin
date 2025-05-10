@@ -14,7 +14,6 @@ PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("3_mhnw5")
 WType = 0
 Upgrades = Array[ExtResource("6_uw0hq")]([SubResource("Resource_fmxhr")])

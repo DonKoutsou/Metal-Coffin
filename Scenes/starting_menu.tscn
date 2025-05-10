@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=40 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://3xyvos3xx5wp" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="5_1p5b6"]
 [ext_resource type="Texture2D" uid="uid://bi72i727dp3d2" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="5_eb1s8"]
 [ext_resource type="Texture2D" uid="uid://b4c7ju8s26q7g" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="6_eb1s8"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_gn124"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Texture2D" uid="uid://5ldjl2ognehe" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Texture2D" uid="uid://b8pkwsimahol4" path="res://Assets/Spaceship/ShipElena2.png" id="7_ol3kq"]
@@ -21,34 +20,33 @@
 [ext_resource type="Texture2D" uid="uid://f6ifndd7j6l6" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_1p5b6"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
+[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
+[ext_resource type="Texture2D" uid="uid://ch6npsr2w8h23" path="res://Assets/UIPiecies/Screen/Screen2_FullQuality.png" id="22_thqps"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="23_thqps"]
+[ext_resource type="Texture2D" uid="uid://bk82chl8m6obv" path="res://Assets/UIPiecies/Screen/ButtonCover.png" id="24_7fs2i"]
 
-[sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.628906, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
-gradient = SubResource("Gradient_a2ujk")
-
-[sub_resource type="Environment" id="Environment_1p5b6"]
+[sub_resource type="Environment" id="Environment_7fs2i"]
 background_mode = 3
-background_canvas_max_layer = 1
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 3
+tonemap_white = 16.0
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
 glow_levels/5 = 0.0
 glow_normalized = true
-glow_intensity = 0.16
+glow_intensity = 1.0
+glow_strength = 0.5
 glow_mix = 0.825
-glow_bloom = 0.85
-glow_blend_mode = 1
-glow_hdr_threshold = 0.0
+glow_bloom = 1.0
+glow_map_strength = 1.0
 adjustment_enabled = true
-adjustment_contrast = 0.91
-adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
+adjustment_brightness = 1.1
+adjustment_contrast = 0.9
+
+[sub_resource type="World3D" id="World3D_jns0o"]
+environment = SubResource("Environment_7fs2i")
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
@@ -88,6 +86,9 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.719685, 1)
 colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.313, 0.313, 0.313, 0)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
+light_mode = 1
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5
 frequency = 0.0085
@@ -107,9 +108,6 @@ shader_parameter/density = 2.114
 shader_parameter/speed = Vector2(0.02, 0.01)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eb1s8"]
-light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bgwj"]
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
@@ -141,65 +139,73 @@ corner_detail = 2
 shadow_size = 5
 anti_aliasing_size = 2.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
-light_mode = 1
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1p5b6"]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_srpg8"]
-light_mode = 1
-
-[node name="StartingMenu" type="CanvasLayer"]
+[node name="StartingMenu" type="CanvasLayer" node_paths=PackedStringArray("Black", "LoadPrologueButton", "LoadButton", "HintDialogue", "Credits", "NormalUI")]
 process_mode = 3
 layer = 0
 script = ExtResource("1_y40tw")
+Black = NodePath("Black")
 CreditsScene = ExtResource("2_0pu32")
+LoadPrologueButton = NodePath("ScreenFrame2/VBoxContainer/HBoxContainer3/LoadPrologue")
+LoadButton = NodePath("ScreenFrame2/VBoxContainer/HBoxContainer/Load")
+HintDialogue = NodePath("SubViewportContainer/SubViewport/NormalUI/HintDialogue")
+Credits = NodePath("SubViewportContainer/SubViewport/Credits")
+NormalUI = NodePath("SubViewportContainer/SubViewport/NormalUI")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1p5b6")
-
-[node name="w" type="ColorRect" parent="."]
-z_index = -1
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = 74.0
+offset_right = -350.0
+offset_bottom = -76.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(1, 1, 1, 0)
+stretch = true
 
-[node name="Ground" type="ColorRect" parent="w"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+own_world_3d = true
+world_3d = SubResource("World3D_jns0o")
+handle_input_locally = false
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+positional_shadow_atlas_size = 0
+positional_shadow_atlas_16_bits = false
+size = Vector2i(854, 570)
+render_target_update_mode = 4
+
+[node name="Ground" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 z_index = -1
 texture_filter = 1
 material = SubResource("ShaderMaterial_yrlew")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -766.0
 offset_top = -775.0
-offset_right = 734.0
-offset_bottom = 725.0
+offset_right = 378.0
+offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="IntroMenuShips" type="Control" parent="w"]
-layout_mode = 1
+[node name="IntroMenuShips" type="Control" parent="SubViewportContainer/SubViewport"]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -32.0
-offset_right = -15.0
-offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_yrlew")
+Speed = 150.0
 
-[node name="TextureRect3" type="TextureRect" parent="w/IntroMenuShips"]
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
@@ -208,7 +214,7 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("16_2tj7v")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="w/IntroMenuShips/TextureRect3"]
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -218,7 +224,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(15, 15)
 
-[node name="TextureRect6" type="TextureRect" parent="w/IntroMenuShips/TextureRect3/Control"]
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3/Control"]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
 offset_left = -4.0
@@ -229,10 +235,9 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("16_2tj7v")
 expand_mode = 1
 
-[node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect3"]
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 position = Vector2(15, 7)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -243,7 +248,7 @@ trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="TextureRect4" type="TextureRect" parent="w/IntroMenuShips"]
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
 layout_mode = 0
 offset_left = -30.0
 offset_top = -30.0
@@ -252,7 +257,7 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("7_ol3kq")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="w/IntroMenuShips/TextureRect4"]
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -262,7 +267,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(15, 15)
 
-[node name="TextureRect6" type="TextureRect" parent="w/IntroMenuShips/TextureRect4/Control"]
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4/Control"]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
 offset_left = -4.0
@@ -273,10 +278,9 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("7_ol3kq")
 expand_mode = 1
 
-[node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect4"]
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 position = Vector2(15, 6)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -287,7 +291,7 @@ trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="TextureRect5" type="TextureRect" parent="w/IntroMenuShips"]
+[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
 layout_mode = 0
 offset_left = -30.0
 offset_top = 30.0
@@ -297,7 +301,7 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("7_ol3kq")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="w/IntroMenuShips/TextureRect5"]
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -307,7 +311,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(15, 15)
 
-[node name="TextureRect6" type="TextureRect" parent="w/IntroMenuShips/TextureRect5/Control"]
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5/Control"]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
 offset_left = -4.0
@@ -318,10 +322,9 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("7_ol3kq")
 expand_mode = 1
 
-[node name="TrailLine2" type="Line2D" parent="w/IntroMenuShips/TextureRect5"]
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 position = Vector2(15, 7)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -332,10 +335,34 @@ trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="Clouds" type="ColorRect" parent="w"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport"]
+material = SubResource("CanvasItemMaterial_yrlew")
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_top = -97.0
+offset_right = -40.0
+offset_bottom = -33.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("2_q14vk")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("3_s86m3")
+
+[node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_2tj7v")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -346,16 +373,36 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="w"]
+[node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
+color = Color(0, 0, 0, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(422, 234)
+texture = ExtResource("15_7x35f")
+texture_scale = 3.5
+height = 328.0
+
+[node name="Credits" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0pu32")]
+visible = false
+
+[node name="NormalUI" type="Control" parent="SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI"]
 texture_filter = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -202.0
-offset_right = -128.0
-offset_bottom = -262.0
+offset_left = 5.0
+offset_top = -38.0
+offset_right = -1.0
+offset_bottom = -137.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -363,7 +410,7 @@ size_flags_vertical = 6
 texture = ExtResource("14_61hxs")
 expand_mode = 1
 
-[node name="TextureRect3" type="TextureRect" parent="w/TextureRect2"]
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/TextureRect2"]
 self_modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
 texture_filter = 3
@@ -382,194 +429,22 @@ size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
 expand_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-z_index = -1
-material = SubResource("CanvasItemMaterial_eb1s8")
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = -398.0
-offset_right = 363.0
-offset_bottom = -20.0
-grow_vertical = 0
-theme_override_styles/panel = ExtResource("9_3vvgq")
+[node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" instance=ExtResource("21_srpg8")]
+layout_mode = 1
+offset_left = -300.0
+offset_top = -159.0
+offset_right = -32.0
+offset_bottom = -116.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-use_parent_material = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-use_parent_material = true
-layout_mode = 2
-alignment = 1
-
-[node name="Prologue" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer3" groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("6_gn124")
-action_mode = 0
-text = "- Start -
-Prologue"
-
-[node name="LoadPrologue" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer3" groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("6_gn124")
-action_mode = 0
-text = "- Load -
-Prologue"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-use_parent_material = true
-layout_mode = 2
-
-[node name="Play2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("6_gn124")
-action_mode = 0
-text = "- NEW -
-CAMPAIGN"
-
-[node name="Load" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("6_gn124")
-action_mode = 0
-text = "- LOAD -
-CAMPAIGN"
-
-[node name="Panel4" type="Panel" parent="PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
-
-[node name="Panel5" type="Panel" parent="PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
-
-[node name="Credits" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("6_gn124")
-action_mode = 0
-text = "- CREDITS -"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-use_parent_material = true
-layout_mode = 2
-
-[node name="SettingPanel" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_1p5b6")]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_yrlew")
-text = "Del
-Save"
-autowrap_mode = 2
-
-[node name="Panel6" type="Panel" parent="PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
-
-[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("6_gn124")
-action_mode = 0
-text = "- EXIT -"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-z_index = -1
-material = SubResource("CanvasItemMaterial_yrlew")
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -173.0
-offset_top = -100.0
-offset_right = -41.0
-offset_bottom = -36.0
-grow_horizontal = 0
-grow_vertical = 0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
-use_parent_material = true
-layout_mode = 2
-texture = ExtResource("2_q14vk")
-
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
-use_parent_material = true
-layout_mode = 2
-texture = ExtResource("3_s86m3")
-
-[node name="Button" parent="." instance=ExtResource("21_srpg8")]
-z_index = -1
-offset_left = -309.0
-offset_top = -152.0
-offset_right = -41.0
-offset_bottom = -109.0
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(618, 386)
-blend_mode = 2
-range_z_max = -1
-texture = ExtResource("15_7x35f")
-texture_scale = 7.21
-height = 328.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("CanvasItemMaterial_1p5b6")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="."]
-material = SubResource("CanvasItemMaterial_srpg8")
-layout_mode = 3
+[node name="HintDialogue" type="Control" parent="SubViewportContainer/SubViewport/NormalUI"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -585,11 +460,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("9_3vvgq")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer"]
 use_parent_material = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -598,27 +473,179 @@ text = "Show Hints ?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 
-[node name="ShowTutorial" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "Yes"
 
-[node name="DontShowTutorial" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="DontShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "No"
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+process_mode = 3
+z_index = 1
+material = ExtResource("22_jns0o")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="Screen" type="ColorRect" parent="CanvasLayer2"]
+[node name="ScreenFrame" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("22_thqps")
+expand_mode = 1
+
+[node name="ScreenFrame2" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 997.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("24_7fs2i")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenFrame2"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 35.0
+offset_right = -18.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ScreenFrame2/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+alignment = 1
+
+[node name="Prologue" type="Button" parent="ScreenFrame2/VBoxContainer/HBoxContainer3" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+text = "- Start -
+Prologue"
+
+[node name="LoadPrologue" type="Button" parent="ScreenFrame2/VBoxContainer/HBoxContainer3" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+text = "- Load -
+Prologue"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenFrame2/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="Play2" type="Button" parent="ScreenFrame2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+text = "- NEW -
+CAMPAIGN"
+
+[node name="Load" type="Button" parent="ScreenFrame2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+text = "- LOAD -
+CAMPAIGN"
+
+[node name="Panel4" type="Panel" parent="ScreenFrame2/VBoxContainer"]
+visible = false
+use_parent_material = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
+
+[node name="Panel5" type="Panel" parent="ScreenFrame2/VBoxContainer"]
+visible = false
+use_parent_material = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
+
+[node name="Credits" type="Button" parent="ScreenFrame2/VBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 3
+action_mode = 0
+text = "- CREDITS -"
+
+[node name="SettingPanel" parent="ScreenFrame2/VBoxContainer" instance=ExtResource("18_1p5b6")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScreenFrame2/VBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_yrlew")
+text = "Del
+Save"
+autowrap_mode = 2
+
+[node name="Panel6" type="Panel" parent="ScreenFrame2/VBoxContainer"]
+visible = false
+use_parent_material = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2bgwj")
+
+[node name="Exit" type="Button" parent="ScreenFrame2/VBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 3
+action_mode = 0
+text = "- EXIT -"
+
+[node name="Black" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_1p5b6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Screen" type="ColorRect" parent="."]
 process_mode = 3
 z_index = 1
 material = ExtResource("23_thqps")
@@ -629,12 +656,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer3/Prologue" to="." method="_on_prologue_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer3/LoadPrologue" to="." method="_on_load_prologue_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/ShowTutorial" to="." method="_on_show_tutorial_pressed"]
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/DontShowTutorial" to="." method="_on_dont_show_tutorial_pressed"]
+[connection signal="OnButtonPressed" from="SubViewportContainer/SubViewport/Credits" to="." method="_on_credits_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/ShowTutorial" to="." method="_on_show_tutorial_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/DontShowTutorial" to="." method="_on_dont_show_tutorial_pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/HBoxContainer3/Prologue" to="." method="_on_prologue_pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/HBoxContainer3/LoadPrologue" to="." method="_on_load_prologue_pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

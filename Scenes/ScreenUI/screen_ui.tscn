@@ -1,6 +1,5 @@
-[gd_scene load_steps=48 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=46 format=3 uid="uid://biel8sjt8vy5t"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7t5fk"]
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
 [ext_resource type="AudioStream" uid="uid://kv44sbge8ta6" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
@@ -23,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://taaphgrg8xn0" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
 [ext_resource type="Texture2D" uid="uid://c5yjnx8e66owo" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="23_0465a"]
-[ext_resource type="PackedScene" uid="uid://c0fey2gjg1mvv" path="res://Scenes/ScreenUI/SimNob.tscn" id="27_67jhj"]
 [ext_resource type="FontFile" uid="uid://cmtqspe2qhwlv" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
 [ext_resource type="Texture2D" uid="uid://be3jqi61mh3ks" path="res://Assets/UIPiecies/Screen/ScreenLong.png" id="30_ao4ul"]
@@ -294,17 +292,9 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="Control" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "NormalScreen", "FullScreenFrame", "ScreenPanel")]
+[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel")]
 process_mode = 1
-z_as_relative = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = ExtResource("1_7t5fk")
+layer = 2
 script = ExtResource("2_spr1r")
 _ScreenItems = NodePath("NormalScreen/ScreenUi")
 MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")
@@ -318,9 +308,11 @@ SimulationButton = NodePath("NormalScreen/SimulationButton")
 MapMarkerButton = NodePath("NormalScreen/MarkerPlecement")
 EventHandler = ExtResource("3_i441f")
 Cam = NodePath("ScreenCam")
+Cables = NodePath("Cables")
+DoorSound = NodePath("DoorSound")
 NormalScreen = NodePath("NormalScreen")
 FullScreenFrame = NodePath("ScreenFrameLong")
-ScreenPanel = NodePath("ScreenFrameLong2")
+ScreenPanel = NodePath("Panel")
 
 [node name="DoorSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wetmy")
@@ -328,7 +320,7 @@ volume_db = -12.0
 bus = &"MapSounds"
 
 [node name="NormalScreen" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -650,18 +642,6 @@ text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Simulation_Nob" parent="NormalScreen" instance=ExtResource("27_67jhj")]
-visible = false
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -58.4
-offset_top = -195.0
-offset_right = -58.4
-offset_bottom = -195.0
-grow_horizontal = 0
-
 [node name="Fund_Container" parent="NormalScreen" instance=ExtResource("28_qwofv")]
 layout_mode = 1
 anchors_preset = 1
@@ -676,7 +656,7 @@ offset_bottom = 96.0
 grow_horizontal = 0
 grow_vertical = 1
 
-[node name="AnimatedSprite2D" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
+[node name="Fan" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
 position = Vector2(982, -128)
 scale = Vector2(1.73438, 1.73438)
 frame_progress = 0.96041
@@ -686,7 +666,6 @@ frequency = 40.0
 visible = false
 texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -697,7 +676,7 @@ texture = ExtResource("30_ao4ul")
 expand_mode = 1
 
 [node name="Cables" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -781,11 +760,10 @@ mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
 
-[node name="ScreenFrameLong2" type="TextureRect" parent="."]
+[node name="Panel" type="TextureRect" parent="."]
 z_index = 1
 texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -797,7 +775,7 @@ mouse_filter = 0
 texture = ExtResource("33_vyv2f")
 expand_mode = 1
 
-[node name="ScreenFrameLong3" type="TextureRect" parent="ScreenFrameLong2"]
+[node name="PanelShadow" type="TextureRect" parent="Panel"]
 modulate = Color(0, 0, 0, 0.8)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 40)
@@ -813,8 +791,7 @@ mouse_filter = 0
 texture = ExtResource("33_vyv2f")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="ScreenFrameLong2"]
-visible = false
+[node name="ClickProtection" type="Control" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -829,7 +806,7 @@ z_index = 1
 position = Vector2(640, 360)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../NormalScreen/AnimatedSprite2D"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
+Cabled = [NodePath("../NormalScreen/Fan"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 breath_amplitude = 2.0
 breath_duration = 5.0
 
@@ -868,7 +845,6 @@ texture_filter = 2
 position = Vector2(0, 2)
 energy = 2.0
 range_z_min = 0
-range_z_max = 1022
 range_layer_min = 2
 range_layer_max = 2
 texture = ExtResource("36_xl4i0")
@@ -880,8 +856,7 @@ stream = ExtResource("38_ao4ul")
 volume_db = -20.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
-position = Vector2(-600, -324)
-color = Color(0.556953, 0.556953, 0.556953, 1)
+color = Color(0.5, 0.5, 0.5, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")
@@ -925,4 +900,3 @@ libraries = {
 [connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]
-[connection signal="StepChanged" from="NormalScreen/Simulation_Nob" to="." method="Simmulation_Step_Changed"]

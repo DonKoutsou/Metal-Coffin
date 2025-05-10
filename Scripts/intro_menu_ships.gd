@@ -5,6 +5,8 @@ class_name IntroMenuShips
 var CommingFromOut = false
 var centerpoint : Vector2
 
+@export var Speed : float = 100
+
 var RotTw : Tween
 
 
@@ -15,7 +17,7 @@ func _ready() -> void:
 	CommingFromOut = true
 
 func _physics_process(delta: float) -> void:
-	position += Vector2(delta * 100, 0).rotated(rotation) 
+	position += Vector2(delta * Speed, 0).rotated(rotation) 
 	$TextureRect3/TrailLine2.Update(delta)
 	$TextureRect4/TrailLine2.Update(delta)
 	$TextureRect5/TrailLine2.Update(delta)
@@ -26,7 +28,7 @@ func _physics_process(delta: float) -> void:
 			RotTw = create_tween()
 			RotTw.set_ease(Tween.EASE_IN)
 			RotTw.set_trans(Tween.TRANS_QUAD)
-			RotTw.tween_method(UpdateRotation, rotation, randf_range(rotation - deg_to_rad(90), rotation + deg_to_rad(90)), 8)
+			RotTw.tween_method(UpdateRotation, rotation, randf_range(rotation - deg_to_rad(180), rotation + deg_to_rad(180)), 8)
 			CommingFromOut = false
 		else:
 			return

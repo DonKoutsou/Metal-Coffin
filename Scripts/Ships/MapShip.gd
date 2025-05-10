@@ -178,19 +178,19 @@ func AccelerationChanged(value: float) -> void:
 	if (Landing):
 		LandingCanceled.emit(self)
 		Landing = false
-		
+
 	else : if (Altitude != 10000 and !TakingOff):
 		TakeoffStarted.emit()
 		TakingOff = true
-	
+
 	if (value > 0):
 		if (GetFuelRange() <= 0):
 			HaltShip()
 			PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
 			return
-	
+
 	AccelChanged = true
-	
+
 	SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
 	#GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed()) 
 

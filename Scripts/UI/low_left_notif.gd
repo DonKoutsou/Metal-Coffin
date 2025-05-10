@@ -39,9 +39,9 @@ func OnShipDeparted():
 	queue_free()
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	$Control.scale = Vector2(1,1) / NewZoom
+	$Control.scale = Vector2(0.6,0.6) / NewZoom
 	UpdateLine(NewZoom)
-	$Line2D.width =  2 / NewZoom
+	$Line2D.width =  1.5 / NewZoom
 	rotation = - get_parent().get_parent().rotation
 
 #func _physics_process(_delta: float) -> void:

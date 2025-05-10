@@ -23,7 +23,6 @@ CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("5_fgxqn")
 Upgrades = Array[ExtResource("4_nw4kc")]([SubResource("Resource_i41uq"), SubResource("Resource_u0ypt")])
 UpgradeVersion = ExtResource("3_o7sn3")

@@ -51,17 +51,7 @@ WorkSh = NodePath("VBoxContainer/HBoxContainer/WorkShop")
 PlayerWallet = ExtResource("3_u2135")
 ItemScene = ExtResource("4_wqnl6")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("15_baphb")
-
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.5)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,10 +65,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 60.0
-offset_top = 53.0
-offset_right = -60.0
-offset_bottom = -53.0
+offset_left = 14.0
+offset_top = 34.0
+offset_right = -14.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -150,7 +140,6 @@ size_flags_vertical = 2
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 toggle_mode = true
-button_pressed = true
 text = "WORKSHOP"
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
@@ -160,9 +149,10 @@ theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 text = "FINILIZE TRANSACTION"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 75
 alignment = 1
 
 [node name="Scroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
@@ -170,6 +160,7 @@ visible = false
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ayl0t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Scroll"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crsatqn78m71w" path="res://Scripts/Ships/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="3_fw0pf"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
-[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="4_nd4dw"]
+[ext_resource type="Texture2D" uid="uid://f6ifndd7j6l6" path="res://Assets/Spaceship/ShipElena.png" id="4_nd4dw"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="5_k2uly"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="9_82ju4"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_f4h60"]
@@ -66,9 +66,7 @@ scale = Vector2(10, 10)
 width = 1.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_xnk77")
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+round_precision = 1
 script = ExtResource("10_dxnd3")
 trail_fade_speed = 30.0
 min_distance = 1.0

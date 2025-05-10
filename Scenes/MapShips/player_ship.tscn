@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="2_ddg27"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="6_6lhcj"]
+[ext_resource type="Texture2D" uid="uid://0koxduux6kw8" path="res://Assets/Spaceship/Ship3_001.png" id="6_6lhcj"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="9_jx5d0"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="9_wfgcg"]
@@ -94,11 +94,11 @@ show_behind_parent = true
 position = Vector2(15, -120.006)
 rotation = 1.5708
 scale = Vector2(10, 10)
+points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
-begin_cap_mode = 2
-end_cap_mode = 2
+round_precision = 1
 script = ExtResource("9_wfgcg")
 trail_fade_speed = 30.0
 min_distance = 1.0
@@ -109,11 +109,11 @@ show_behind_parent = true
 position = Vector2(-15, -120.006)
 rotation = 1.5708
 scale = Vector2(10, 10)
+points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
-begin_cap_mode = 2
-end_cap_mode = 2
+round_precision = 1
 script = ExtResource("9_wfgcg")
 trail_fade_speed = 30.0
 min_distance = 1.0

@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 class_name ScreenUI
 
@@ -17,11 +17,13 @@ class_name ScreenUI
 @export var EventHandler : UIEventHandler
 @export var Cam : ScreenCamera
 @export_group("Screen")
+@export var Cables : Control
+@export var DoorSound : AudioStreamPlayer
 @export var NormalScreen : Control
 @export var FullScreenFrame : TextureRect
 @export var ScreenPanel : TextureRect
 
-signal FullScreenToggleStarted(t : bool)
+signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
 #signal FleetSeparationInitiated
 
@@ -30,76 +32,76 @@ var OpenTw : Tween
 
 func CloseScreen() -> void:
 	ScreenPanel.visible = true
-	$DoorSound.play()
+	DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
 	CloseTw = create_tween()
 	CloseTw.set_ease(Tween.EASE_OUT)
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
-	CloseTw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
+	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
 	await CloseTw.finished
 	
-	FullScreenToggleStarted.emit(true)
+	FullScreenToggleStarted.emit(ScreenState.HALF_SCREEN)
 
-func DoIntroFullScreen(toggle : bool) -> void:
+func DoIntroFullScreen(NewStat : ScreenState) -> void:
 	ScreenPanel.visible = true
-	$Cables.visible = false
-	$DoorSound.play()
+	Cables.visible = false
+	DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
 	CloseTw = create_tween()
 	CloseTw.set_ease(Tween.EASE_OUT)
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
-	CloseTw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
+	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
 	await CloseTw.finished
 	
-	FullScreenToggleStarted.emit(toggle)
+	FullScreenToggleStarted.emit(NewStat)
 	
 	await wait(0.2)
-	$Cables.visible = true
-	FullScreenFrame.visible = toggle
-	NormalScreen.visible = !toggle
+	Cables.visible = true
+	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
+	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
 	
 	
 	
 	OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
 	OpenTw.set_trans(Tween.TRANS_QUART)
-	OpenTw.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
+	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
 	await OpenTw.finished
 	ScreenPanel.visible = false
-	FullScreenToggleFinished.emit(toggle)
+	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
 
-func ToggleFullScreen(toggle : bool) -> void:
+func ToggleFullScreen(NewStat : ScreenState) -> void:
 	#FullScreenToggleStarted.emit()
 	#$ScreenFrameLong2.visible = true
 	ScreenPanel.visible = true
-	$DoorSound.play()
+	DoorSound.play()
 	Cam.EnableFullScreenShake()
 	await wait(0.5)
 	CloseTw = create_tween()
 	CloseTw.set_ease(Tween.EASE_OUT)
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
-	CloseTw.tween_property($ScreenFrameLong2, "position", Vector2.ZERO, 2)
+	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
 	await CloseTw.finished
 	
-	FullScreenToggleStarted.emit(toggle)
+	FullScreenToggleStarted.emit(NewStat)
 	
 	await wait(0.2)
-	
-	FullScreenFrame.visible = toggle
-	NormalScreen.visible = !toggle
+
+	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
+	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
 	
 	
 	
 	OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
 	OpenTw.set_trans(Tween.TRANS_QUART)
-	OpenTw.tween_property($ScreenFrameLong2, "position", Vector2(0, -$ScreenFrameLong2.size.y - 40), 1.6)
+	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
 	await OpenTw.finished
 	ScreenPanel.visible = false
-	FullScreenToggleFinished.emit(toggle)
+	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
@@ -209,12 +211,11 @@ func Regroup_Pressed() -> void:
 func Land_Pressed() -> void:
 	EventHandler.OnLandPressed()
 
-#Simulation
+#Simulation--------------------------------
 func Sim_Pause_Pressed() -> void:
 	var simmulationPaused = !SimulationManager.GetInstance().Paused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
 
-		
 func Simmulation_Step_Changed(NewStep: float) -> void:
 	#EventHandler.OnSimmulationStepChanged(NewStep)
 	SimulationManager.GetInstance().SetSimulationSpeed(NewStep)
@@ -225,24 +226,19 @@ func Sim_Speed_Pressed() -> void:
 func Sim_Speed_Released() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
 
-
 func Inventory_Pressed() -> void:
 	EventHandler.OnInventoryPressed()
 
 
 func Pause_Pressed() -> void:
 	EventHandler.OnPausePressed()
-	
-#func ToggleControllCover(t : bool) -> void:
-	#ButtonCover.visible = t
 
-func OnControlledShipDamaged(_DamageAmm : float) -> void:
-	#var tw = create_tween()
-	#tw.set_trans(Tween.TRANS_BOUNCE)
-	#tw.tween_property($ScreenCam, "shakestr", 0, 8)
-	Cam.EnableDamageShake(_DamageAmm / 10)
-	#$ScreenCam.Shake = false
-	
-	
+func OnControlledShipDamaged(DamageAmm : float) -> void:
+	Cam.EnableDamageShake(DamageAmm / 10)
 
-	
+
+enum ScreenState{
+	FULL_SCREEN,
+	HALF_SCREEN,
+	NO_SCREEN
+}

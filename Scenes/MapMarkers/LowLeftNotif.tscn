@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c54mqk4mcr360"]
 
 [ext_resource type="Script" uid="uid://b2gfvyf2wrlvn" path="res://Scripts/UI/low_left_notif.gd" id="1_er3bd"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="2_s4jaq"]
+[ext_resource type="FontFile" uid="uid://cmtqspe2qhwlv" path="res://Fonts/Bank Gothic Light Regular.otf" id="2_s4jaq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
 light_mode = 1
@@ -19,8 +19,7 @@ script = ExtResource("1_er3bd")
 use_parent_material = true
 points = PackedVector2Array(0, -94, 0, -38)
 width = 2.0
-begin_cap_mode = 2
-end_cap_mode = 2
+round_precision = 1
 
 [node name="Control" type="Control" parent="."]
 use_parent_material = true

@@ -188,11 +188,11 @@ func On_MunitionShop_pressed() -> void:
 
 func OnMunitionShopToggled(toggled_on: bool) -> void:
 	ItemPlecement.get_parent().visible = toggled_on
-	WorkSh.visible = !toggled_on
-	RepRefPlecement.visible = !toggled_on
+	WorkSh.visible = false
+	RepRefPlecement.visible = false
 	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(toggled_on)
-	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(!toggled_on)
-	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(toggled_on)
+	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(false)
+	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(false)
 
 func On_RefRef_Pressed() -> void:
 	ItemPlecement.get_parent().visible = false
@@ -200,19 +200,19 @@ func On_RefRef_Pressed() -> void:
 	$VBoxContainer/HBoxContainer2/Button2.pressed = false
 
 func OnRefuelShopPressed(toggled_on: bool) -> void:
-	ItemPlecement.get_parent().visible = !toggled_on
-	WorkSh.visible = !toggled_on
+	ItemPlecement.get_parent().visible = false
+	WorkSh.visible = false
 	RepRefPlecement.visible = toggled_on
-	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(!toggled_on)
+	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(false)
 	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(toggled_on)
-	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(toggled_on)
+	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(false)
 
 func OnUpgradeShopPressed(toggled_on: bool) -> void:
 	WorkSh.visible = toggled_on
-	ItemPlecement.get_parent().visible = !toggled_on
-	RepRefPlecement.visible = !toggled_on
-	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(!toggled_on)
-	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(!toggled_on)
+	ItemPlecement.get_parent().visible = false
+	RepRefPlecement.visible = false
+	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(false)
+	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(false)
 	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(toggled_on)
 
 func OnItemSold(It : Item) -> void:

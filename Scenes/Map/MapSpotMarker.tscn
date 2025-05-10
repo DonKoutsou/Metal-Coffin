@@ -3,21 +3,21 @@
 [ext_resource type="Script" uid="uid://c3wcxx1myg0wb" path="res://Scripts/UI/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
 [ext_resource type="AudioStream" uid="uid://hrwbq66p4fq8" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="3_625fb"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_ejl2a"]
+[ext_resource type="FontFile" uid="uid://cmtqspe2qhwlv" path="res://Fonts/Bank Gothic Light Regular.otf" id="4_ejl2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
 bg_color = Color(0, 0, 0, 1)
 draw_center = false
-border_width_left = 20
-border_width_top = 20
-border_width_right = 20
-border_width_bottom = 20
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 70
 corner_radius_top_right = 70
 corner_radius_bottom_right = 70
 corner_radius_bottom_left = 70
-corner_detail = 4
+corner_detail = 3
 anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_pxthd"]
@@ -276,10 +276,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_left = -70.0
+offset_top = -70.0
+offset_right = 70.0
+offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

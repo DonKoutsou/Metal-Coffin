@@ -102,12 +102,12 @@ var CardSelectSize : float
 func _ready() -> void:
 	EnergyBar.Init(TurnEnergy)
 	
-	if (OS.is_debug_build()):
-		for g in 10:
-			EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-
-		for g in 10:
-			PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	#if (OS.is_debug_build()):
+		#for g in 10:
+			#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+		#for g in 10:
+			#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):

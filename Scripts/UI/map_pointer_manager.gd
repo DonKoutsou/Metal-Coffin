@@ -1,7 +1,7 @@
 extends Node2D
 
 class_name MapPointerManager
-
+@export var MapLonePos : Node2D
 @export var MarkerScene : PackedScene
 @export var MapSpotMarkerScene : PackedScene
 @export var FriendlyColor : Color

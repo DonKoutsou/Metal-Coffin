@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dmtr88wf7mpm3" path="res://Scenes/PrologueEnd_trigger.tscn" id="7_8o37l"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="7_udtpl"]
 [ext_resource type="PackedScene" uid="uid://btb0vs0eaeg0m" path="res://Scenes/prologue_end.tscn" id="8_43ao6"]
-[ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/Ship_Controller.gd" id="8_qeah0"]
+[ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/ship_controller.gd" id="8_qeah0"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="9_ljctt"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="10_8o37l"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="11_43ao6"]

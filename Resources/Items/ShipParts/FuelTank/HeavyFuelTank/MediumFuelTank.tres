@@ -23,7 +23,6 @@ PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("3_4o074")
 Upgrades = Array[ExtResource("6_u32dk")]([SubResource("Resource_mdpmd"), SubResource("Resource_xgd67")])
 UpgradeVersion = ExtResource("4_eq04c")

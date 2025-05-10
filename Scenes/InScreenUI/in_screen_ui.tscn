@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b84obdsc4r2vk" path="res://Scenes/InScreenUI/fps_counter.tscn" id="3_y1d86"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/simulation_notification.tscn" id="5_g51f2"]
-[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="5_hx3hn"]
+[ext_resource type="Texture2D" uid="uid://dytrwgrhpl8fa" path="res://Assets/UIPiecies/network-bars.png" id="5_hx3hn"]
 [ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="6_awabe"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
@@ -14,13 +14,13 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="Script" uid="uid://cpu5xsyrg37ql" path="res://Scripts/UI/pop_up_manager.gd" id="9_jvf02"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="9_vr5ky"]
-[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="10_ct3x8"]
+[ext_resource type="Texture2D" uid="uid://bque475hj2cf1" path="res://Assets/Logos/BG.png" id="10_ct3x8"]
 [ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/InScreenUI/CustomPopUp.tscn" id="10_e626m"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
+[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
 [ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/InScreenUI/CustomConfirm.tscn" id="11_nk6oj"]
 [ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/InScreenUI/FadeNotif.tscn" id="12_1jh8x"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
+[ext_resource type="FontFile" uid="uid://rnxb3tf6tyvv" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
 [ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="18_in80l"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_rwdyb"]
@@ -193,21 +193,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PopUpManager" type="Control" parent="Control3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-script = ExtResource("9_jvf02")
-CustomPop = ExtResource("10_e626m")
-CustomConfirm = ExtResource("11_nk6oj")
-FadNot = ExtResource("12_1jh8x")
-
 [node name="PanelContainer" type="PanelContainer" parent="Control3"]
 process_mode = 3
 visible = false
@@ -334,6 +319,21 @@ offset_bottom = -25.0
 [node name="FlightManual" parent="Control3/PauseContainer" instance=ExtResource("18_in80l")]
 visible = false
 layout_mode = 2
+
+[node name="PopUpManager" type="Control" parent="Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("9_jvf02")
+CustomPop = ExtResource("10_e626m")
+CustomConfirm = ExtResource("11_nk6oj")
+FadNot = ExtResource("12_1jh8x")
 
 [node name="Screen" type="ColorRect" parent="Control3"]
 process_mode = 3
