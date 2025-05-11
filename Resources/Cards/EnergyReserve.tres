@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Reserve" load_steps=5 format=3 uid="uid://rwh3xjjlb0id"]
 
 [ext_resource type="Texture2D" uid="uid://cvhnj0qqcqvii" path="res://Assets/Cards/Energy.png" id="1_o4ebt"]
-[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_udpuf"]
+
 [ext_resource type="Script" uid="uid://bchkyl36yo5cq" path="res://Scripts/CardFight/ReserveCardStat.gd" id="3_35u34"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_vivg1"]
 
@@ -12,7 +12,7 @@ Icon = ExtResource("1_o4ebt")
 CardName = "Energy Reserve"
 CardDescription = "Adds 3 Reserve Energy"
 Energy = 3
-Options = Array[ExtResource("2_udpuf")]([])
+
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_vivg1")]([])

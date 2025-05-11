@@ -1,19 +1,24 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://bcyedao3gvdki"]
 
-[ext_resource type="Texture2D" uid="uid://cbd6as3e4rwp6" path="res://Assets/Cards/Flares.png" id="1_6wv8y"]
-[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_8hlof"]
+[ext_resource type="Texture2D" uid="uid://dy6qhqap0supp" path="res://Assets/Cards/Flares.png" id="1_6wv8y"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_6wv8y"]
 [ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_lxvii"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_6wv8y"]
 
 [resource]
 script = ExtResource("2_lxvii")
+Shield = false
+FireExt = false
+CanBeUsedOnOther = false
+UseInstant = false
 Icon = ExtResource("1_6wv8y")
 CardName = "Flare"
 CardDescription = "Avoid an incomming [color=#c19200]Heat Seeking Missile"
 Energy = 2
-Options = Array[ExtResource("2_8hlof")]([])
 AllowDuplicates = true
 Consume = true
 RequiredPart = Array[ExtResource("3_6wv8y")]([])
+Modules = Array[ExtResource("2_6wv8y")]([])
 WeapT = 0
 AOE = false
+Tier = 1

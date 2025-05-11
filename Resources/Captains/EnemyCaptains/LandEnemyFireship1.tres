@@ -1,15 +1,19 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=20 format=3 uid="uid://cta70yn02gqg5"]
+[gd_resource type="Resource" script_class="Captain" load_steps=25 format=3 uid="uid://cta70yn02gqg5"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_t248c"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7jpyg"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_kdirt"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_xtppk"]
-[ext_resource type="Resource" uid="uid://cbkme88wrncp4" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres" id="4_1kxyg"]
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="4_lvqa2"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_wk585"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="5_7ynpd"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="5_mwjps"]
+[ext_resource type="Texture2D" uid="uid://bkwvhr2kqn8rj" path="res://Assets/Cards/barrage.png" id="5_v0j1y"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="6_6spqc"]
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="6_iv6fn"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="7_aym15"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_yctwn"]
+[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="8_yduiv"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_7jpyg")
@@ -86,6 +90,24 @@ StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
+[sub_resource type="Resource" id="Resource_toygr"]
+script = ExtResource("8_yduiv")
+CounteredBy = ExtResource("4_lvqa2")
+Damage = 6.0
+Accuracy = 0.0
+CauseFile = false
+Icon = ExtResource("5_v0j1y")
+CardName = "Barragge"
+CardDescription = "Throws a barragge on the enemy.[p][center]"
+Energy = 3
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("7_yctwn")]([])
+Modules = Array[ExtResource("6_6spqc")]([])
+WeapT = 1
+AOE = false
+Tier = 1
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("5_mwjps")
@@ -100,4 +122,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 20000
 ProvidingCaptains = Array[ExtResource("5_mwjps")]([])
-Cards = Array[ExtResource("3_xtppk")]([ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("4_1kxyg"), ExtResource("5_7ynpd"), ExtResource("6_iv6fn"), ExtResource("7_aym15"), ExtResource("7_aym15"), ExtResource("7_aym15")])
+Cards = Array[ExtResource("3_xtppk")]([SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), ExtResource("5_7ynpd"), ExtResource("6_iv6fn"), ExtResource("7_aym15"), ExtResource("7_aym15"), ExtResource("7_aym15")])

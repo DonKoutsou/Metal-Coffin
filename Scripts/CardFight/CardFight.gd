@@ -172,7 +172,7 @@ func CreateDecks() -> void:
 		var D = Deck.new()
 		
 		var ShipCards = g.Cards.keys()
-		var ShipAmmo = g.Ammo.keys()
+		#var ShipAmmo = g.Ammo.keys()
 		
 		for Crd : CardStats in ShipCards:
 			var WType = Crd.WeapT
@@ -183,18 +183,18 @@ func CreateDecks() -> void:
 			for Dup in Amm:
 				D.DeckPile.append(Crd)
 			
-			for Ammo in ShipAmmo:
-				var am = Ammo as CardOption
-				if (am.ComatibleWeapon == WType):
-					#var c2 = CardScene.instantiate() as Card
-					var Cstats2 = Crd.duplicate()
-					Cstats2.SelectedOption = am
-					var Amm2 = 0
-					if (am.CauseConsumption):
-						Amm2 = g.Ammo[Ammo]
-					
-					for Dup in Amm2:
-						D.DeckPile.append(Cstats2)
+			#for Ammo in ShipAmmo:
+				#var am = Ammo as CardOption
+				#if (am.ComatibleWeapon == WType):
+					##var c2 = CardScene.instantiate() as Card
+					#var Cstats2 = Crd.duplicate()
+					#Cstats2.SelectedOption = am
+					#var Amm2 = 0
+					#if (am.CauseConsumption):
+						#Amm2 = g.Ammo[Ammo]
+					#
+					#for Dup in Amm2:
+						#D.DeckPile.append(Cstats2)
 		#Create Hand
 		D.DeckPile.shuffle()
 		for Hand in StartingCardAmm:
@@ -493,7 +493,6 @@ func RunTurn() -> void:
 
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	var EnemyEnergy = TurnEnergy + Ship.EnergyReserves
-	
 	Ship.EnergyReserves = 0
 	
 	var EnemyDeck = EnemyDecks[Ship]
@@ -1421,11 +1420,11 @@ func OnCardSelected(C : Card) -> void:
 			
 	else:
 		var Action : CardStats
-		if (C.CStats.SelectedOption != null):
-			Action = C.CStats.duplicate() as CardStats
-			Action.SelectedOption = C.CStats.SelectedOption
-		else:
-			Action = C.CStats
+		#if (C.CStats.SelectedOption != null):
+			#Action = C.CStats.duplicate() as CardStats
+			#Action.SelectedOption = C.CStats.SelectedOption
+		#else:
+		Action = C.CStats
 		
 		
 		var CurrentShip = ShipTurns[CurrentTurn]
@@ -1473,12 +1472,12 @@ func OnCardSelected(C : Card) -> void:
 		if (ShipCards[C.CStats] == 0):
 			ShipCards.erase(C.CStats)
 
-	if (C.CStats.SelectedOption != null):
-		if (C.CStats.SelectedOption.CauseConsumption):
-			var Ammo = ShipTurns[CurrentTurn].Ammo
-			Ammo[C.CStats.SelectedOption] -= 1
-			if (Ammo[C.CStats.SelectedOption] == 0):
-				Ammo.erase(C.CStats.SelectedOption)
+	#if (C.CStats.SelectedOption != null):
+		#if (C.CStats.SelectedOption.CauseConsumption):
+			#var Ammo = ShipTurns[CurrentTurn].Ammo
+			#Ammo[C.CStats.SelectedOption] -= 1
+			#if (Ammo[C.CStats.SelectedOption] == 0):
+				#Ammo.erase(C.CStats.SelectedOption)
 
 
 	deck.Hand.erase(C.CStats)
@@ -1518,13 +1517,13 @@ func RemoveCard(C : Card) -> void:
 		if (!HasCard):
 			ShipCards[C.CStats] = 1
 
-	if (C.CStats.SelectedOption != null):
-		if (C.CStats.SelectedOption.CauseConsumption):
-			var Ammo = ShipTurns[CurrentTurn].Ammo
-			if (!Ammo.has(C.CStats.SelectedOption)):
-				Ammo[C.CStats.SelectedOption] = 1
-			else:
-				Ammo[C.CStats.SelectedOption] += 1
+	#if (C.CStats.SelectedOption != null):
+		#if (C.CStats.SelectedOption.CauseConsumption):
+			#var Ammo = ShipTurns[CurrentTurn].Ammo
+			#if (!Ammo.has(C.CStats.SelectedOption)):
+				#Ammo[C.CStats.SelectedOption] = 1
+			#else:
+				#Ammo[C.CStats.SelectedOption] += 1
 
 	var CurrentShip = ShipTurns[CurrentTurn]
 	
@@ -1582,7 +1581,7 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	else:
 		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain9.png")
 	#
-	Stats.Cards[load("res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres")] = 8
+	Stats.Cards[load("res://Resources/Cards/Barrage/Barrage.tres")] = 8
 	Stats.Cards[load("res://Resources/Cards/Evasive.tres")] = 4
 	Stats.Cards[load("res://Resources/Cards/Missile/Missile.tres")] = 10
 	Stats.Cards[load("res://Resources/Cards/Flares.tres")] = 3
@@ -1593,13 +1592,13 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	Stats.Cards[load("res://Resources/Cards/Barrage/DrawRandomBarrage.tres")] = 3
 	
 	Stats.Cards[load("res://Resources/Cards/Energy.tres")] = 4
-	Stats.Cards[load("res://Resources/Cards/EnergyReserve.tres")] = 10
-	Stats.Cards[load("res://Resources/Cards/DrawDiscard.tres")] = 10
+	Stats.Cards[load("res://Resources/Cards/EnergyReserve.tres")] = 3
+	Stats.Cards[load("res://Resources/Cards/DrawDiscard.tres")] = 2
 	
-	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageAPOption.tres")] = 2
-	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageFireOption.tres")] = 2
-	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres")] = 2
-	Stats.Ammo[load("res://Resources/Cards/Missile/Options/ClusterMissileOption.tres")] = 2
+	Stats.Cards[load("res://Resources/Cards/Barrage/APBarrage.tres")] = 2
+	Stats.Cards[load("res://Resources/Cards/Barrage/IncendiaryBarrage.tres")] = 2
+	Stats.Cards[load("res://Resources/Cards/Barrage/ProxFuseBarrage.tres")] = 2
+	Stats.Cards[load("res://Resources/Cards/Missile/ClusterMissile.tres")] = 2
 	
 		
 	return Stats

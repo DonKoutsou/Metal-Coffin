@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://bihbbkeg0k2sc"]
 
-[ext_resource type="Texture2D" uid="uid://p6qnpajpo06p" path="res://Assets/Cards/FireSupression.png" id="1_0cpai"]
-[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_hfern"]
+[ext_resource type="Texture2D" uid="uid://cw0d8vnmpgp7o" path="res://Assets/Cards/FireSupression.png" id="1_0cpai"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_0cpai"]
 [ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_kfy2h"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_0cpai"]
 
 [resource]
 script = ExtResource("2_kfy2h")
 Shield = false
-Buffs = false
 FireExt = true
 CanBeUsedOnOther = false
 UseInstant = true
@@ -16,10 +15,10 @@ Icon = ExtResource("1_0cpai")
 CardName = "Extinguish fires"
 CardDescription = "Extinguishes [color=#ff3c22]fires[/color] on ship"
 Energy = 4
-Options = Array[ExtResource("2_hfern")]([])
 AllowDuplicates = false
 Consume = false
 RequiredPart = Array[ExtResource("3_0cpai")]([])
+Modules = Array[ExtResource("2_0cpai")]([])
 WeapT = 0
 AOE = false
 Tier = 1

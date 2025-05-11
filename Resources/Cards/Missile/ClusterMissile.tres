@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=6 format=3 uid="uid://b5dslr0dn6ox8"]
+
+[ext_resource type="Texture2D" uid="uid://d15odwyfgk4ba" path="res://Assets/Cards/Missile.png" id="1_5rv40"]
+[ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="1_n7xos"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_n7xos"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_k71ny"]
+[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="4_vxqdi"]
+
+[resource]
+script = ExtResource("4_vxqdi")
+CounteredBy = ExtResource("1_n7xos")
+Damage = 6.0
+Accuracy = 0.0
+CauseFile = false
+Icon = ExtResource("1_5rv40")
+CardName = "Heat Seeking Missile"
+CardDescription = "Throws an [color=#ff3c22]Incendiary[/color] barragge on the enemy.[p][center]"
+Energy = 4
+AllowDuplicates = true
+Consume = true
+RequiredPart = Array[ExtResource("3_k71ny")]([])
+Modules = Array[ExtResource("2_n7xos")]([])
+WeapT = 2
+AOE = true
+Tier = 1

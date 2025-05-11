@@ -32,14 +32,14 @@ func SetDeck(Ch : Captain) -> void:
 		c.SetCardStats(card, deck[card])
 		CardPosition.add_child(c)
 		
-		var WType = card.WeapT
+		#var WType = card.WeapT
 		
-		for Ammo : CardOption in ammo:
-			if (Ammo.ComatibleWeapon == WType):
+		#for Ammo : CardOption in ammo:
+			#if (Ammo.ComatibleWeapon == WType):
+				##var c2 = CardScene.instantiate() as Card
+				#var card2 = card.duplicate()
+				#card2.SelectedOption = Ammo
+				#
 				#var c2 = CardScene.instantiate() as Card
-				var card2 = card.duplicate()
-				card2.SelectedOption = Ammo
-				
-				var c2 = CardScene.instantiate() as Card
-				c2.SetCardStats(card2, ammo[Ammo])
+				#c2.SetCardStats(card2, ammo[Ammo])
 				

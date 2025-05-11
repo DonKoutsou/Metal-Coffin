@@ -67,14 +67,14 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	Cost = Stats.Energy
 	var DescText =  "[center] {0}".format([Stats.GetDescription()])
 	
-	if Stats.SelectedOption !=  null:
-		CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
-		#DescText =  "[center] {0}".format([ Stats.SelectedOption.OptionDescription])
-		Cost += Stats.SelectedOption.EnergyAdd
-		CardTex.texture = Stats.SelectedOption.NewPic
-	else:
-		CardName.text = Stats.CardName
-		CardTex.texture = Stats.Icon
+	#if Stats.SelectedOption !=  null:
+		#CardName.text = Stats.SelectedOption.OptionName + " " + Stats.CardName
+		##DescText =  "[center] {0}".format([ Stats.SelectedOption.OptionDescription])
+		#Cost += Stats.SelectedOption.EnergyAdd
+		#CardTex.texture = Stats.SelectedOption.NewPic
+	#else:
+	CardName.text = Stats.CardName
+	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
 	$Amm/Label.text = var_to_str(Amm) + "x"

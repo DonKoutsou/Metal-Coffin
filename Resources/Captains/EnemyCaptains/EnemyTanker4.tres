@@ -1,16 +1,20 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://cvk1mvgokhtus"]
+[gd_resource type="Resource" script_class="Captain" load_steps=28 format=3 uid="uid://cvk1mvgokhtus"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_vh11m"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ag261"]
 [ext_resource type="Texture2D" uid="uid://d0gebfkpi0seu" path="res://Assets/Spaceship/Tanker.png" id="3_66sfh"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_lxbyk"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_nfki2"]
-[ext_resource type="Resource" uid="uid://cbkme88wrncp4" path="res://Resources/Cards/EnemyCards/EnemyBarrageLvl1.tres" id="4_hnpg0"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_u3xj4"]
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="4_weviu"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="5_72sfo"]
+[ext_resource type="Texture2D" uid="uid://bkwvhr2kqn8rj" path="res://Assets/Cards/barrage.png" id="5_pv3ea"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_8ojrt"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="6_eghi0"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_hnpg0"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_kxbpq"]
 [ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="8_i6vnk"]
+[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="8_ra53v"]
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="9_ubsps"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_s8jon"]
 
@@ -89,6 +93,24 @@ StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
+[sub_resource type="Resource" id="Resource_toygr"]
+script = ExtResource("8_ra53v")
+CounteredBy = ExtResource("4_weviu")
+Damage = 6.0
+Accuracy = 0.0
+CauseFile = false
+Icon = ExtResource("5_pv3ea")
+CardName = "Barragge"
+CardDescription = "Throws a barragge on the enemy.[p][center]"
+Energy = 3
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("7_kxbpq")]([])
+Modules = Array[ExtResource("6_eghi0")]([])
+WeapT = 1
+AOE = false
+Tier = 1
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_u3xj4")
@@ -103,4 +125,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 70000
 ProvidingCaptains = Array[ExtResource("4_u3xj4")]([])
-Cards = Array[ExtResource("3_nfki2")]([ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("4_hnpg0"), ExtResource("5_72sfo"), ExtResource("6_8ojrt"), ExtResource("7_hnpg0"), ExtResource("5_72sfo"), ExtResource("8_i6vnk"), ExtResource("8_i6vnk"), ExtResource("8_i6vnk"), ExtResource("5_72sfo"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon")])
+Cards = Array[ExtResource("3_nfki2")]([SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), ExtResource("5_72sfo"), ExtResource("6_8ojrt"), ExtResource("7_hnpg0"), ExtResource("5_72sfo"), ExtResource("8_i6vnk"), ExtResource("8_i6vnk"), ExtResource("8_i6vnk"), ExtResource("5_72sfo"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("7_hnpg0"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("9_ubsps"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon"), ExtResource("10_s8jon")])

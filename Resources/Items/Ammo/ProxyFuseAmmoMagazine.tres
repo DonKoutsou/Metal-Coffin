@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="AmmoItem" load_steps=5 format=3 uid="uid://cnrek2mbia331"]
+[gd_resource type="Resource" script_class="AmmoItem" load_steps=4 format=3 uid="uid://cnrek2mbia331"]
 
-[ext_resource type="Resource" uid="uid://bo0job0edtbgf" path="res://Resources/Cards/Barrage/Options/BarrageProxyOption.tres" id="1_u2wrl"]
+[ext_resource type="Resource" uid="uid://dxmkl7xkl3qho" path="res://Resources/Cards/Barrage/ProxFuseBarrage.tres" id="2_80xfy"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_n3me5"]
 [ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_80xfy"]
-[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="3_bhpdf"]
 
 [resource]
 script = ExtResource("3_80xfy")
@@ -11,6 +10,5 @@ WType = 1
 ItemName = "Proximity Fuse Magazine"
 ItemDesc = "This magazine contains rounds equipped with proximity fuses, designed to detonate upon nearing a target. The sensor technology ensures activation within a specified range, providing effective engagement without requiring direct contact. Suitable for various combat scenarios, this ammunition type enhances hit probability against fast-moving targets."
 MaxStackCount = 99
-CardProviding = Array[ExtResource("2_n3me5")]([ExtResource("3_bhpdf")])
-CardOptionProviding = ExtResource("1_u2wrl")
+CardProviding = Array[ExtResource("2_n3me5")]([ExtResource("2_80xfy")])
 CanTransfer = true

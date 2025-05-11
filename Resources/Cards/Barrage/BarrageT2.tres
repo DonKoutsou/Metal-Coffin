@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=7 format=3 uid="uid://cnk24jchtyeco"]
+[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=6 format=3 uid="uid://cnk24jchtyeco"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_ju3qs"]
-[ext_resource type="Texture2D" uid="uid://cln0pmvmp4m00" path="res://Assets/Cards/barrage.png" id="2_h2vqb"]
-[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_ed674"]
-[ext_resource type="Resource" uid="uid://ktph3wbdfaxg" path="res://Resources/Cards/Barrage/Options/BarrageNormalOption.tres" id="4_22ux7"]
+[ext_resource type="Texture2D" uid="uid://bkwvhr2kqn8rj" path="res://Assets/Cards/barrage.png" id="2_h2vqb"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_yq0lb"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_ilila"]
 [ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="6_33upv"]
 
@@ -12,14 +11,15 @@ script = ExtResource("6_33upv")
 CounteredBy = ExtResource("1_ju3qs")
 Damage = 12.0
 Accuracy = 0.0
+CauseFile = false
 Icon = ExtResource("2_h2vqb")
 CardName = "Barragge"
 CardDescription = "Throws a barragge on the enemy.[p][center]"
 Energy = 3
-Options = Array[ExtResource("3_ed674")]([ExtResource("4_22ux7")])
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("5_ilila")]([])
+Modules = Array[ExtResource("3_yq0lb")]([])
 WeapT = 1
 AOE = false
 Tier = 2

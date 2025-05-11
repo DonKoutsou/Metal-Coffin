@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=6 format=3 uid="uid://doj6225gf2ja0"]
+
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_0otap"]
+[ext_resource type="Texture2D" uid="uid://bwvdqemo26rxi" path="res://Assets/Cards/BarraceIncendiery.png" id="2_0otap"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_0a432"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_2i4xi"]
+[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="5_2nghg"]
+
+[resource]
+script = ExtResource("5_2nghg")
+CounteredBy = ExtResource("1_0otap")
+Damage = 5.0
+Accuracy = 0.0
+CauseFile = true
+Icon = ExtResource("2_0otap")
+CardName = "Incendiary Barragge"
+CardDescription = "Throws an [color=#ff3c22]Incendiary[/color] barragge on the enemy.[p][center]"
+Energy = 4
+AllowDuplicates = true
+Consume = true
+RequiredPart = Array[ExtResource("4_2i4xi")]([])
+Modules = Array[ExtResource("3_0a432")]([])
+WeapT = 1
+AOE = false
+Tier = 1

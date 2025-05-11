@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=5 format=3 uid="uid://dxmkl7xkl3qho"]
+
+[ext_resource type="Texture2D" uid="uid://csrc50gpcghbg" path="res://Assets/Cards/BarrazeProxy.png" id="2_t1kv0"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_b1127"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_3yd26"]
+[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="5_wf17l"]
+
+[resource]
+script = ExtResource("5_wf17l")
+Damage = 4.0
+Accuracy = 0.0
+CauseFile = false
+Icon = ExtResource("2_t1kv0")
+CardName = "Proximity Fuse Barragge"
+CardDescription = "Throws a barragge on the enemy.[p][center]CAN'T BE AVOIDED[p][center]"
+Energy = 4
+AllowDuplicates = true
+Consume = true
+RequiredPart = Array[ExtResource("4_3yd26")]([])
+Modules = Array[ExtResource("3_b1127")]([])
+WeapT = 1
+AOE = false
+Tier = 1

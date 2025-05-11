@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://bhexp2x4a8iic"]
 
 [ext_resource type="Texture2D" uid="uid://bx8tqigvs3lvx" path="res://Assets/Cards/Shield.png" id="1_64erm"]
-[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_yolen"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_64erm"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_3m3m6"]
 [ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_x8n6g"]
 
@@ -15,10 +15,10 @@ Icon = ExtResource("1_64erm")
 CardName = "Shield Overcharge"
 CardDescription = "Overcharge shields for temporary buff.[p][center][color=#6be2e9]+ 40 SHIELD"
 Energy = 3
-Options = Array[ExtResource("2_yolen")]([])
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_3m3m6")]([])
+Modules = Array[ExtResource("2_64erm")]([])
 WeapT = 0
 AOE = false
 Tier = 2

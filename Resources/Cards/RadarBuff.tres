@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Buff" load_steps=5 format=3 uid="uid://d1oxwkmh155gc"]
 
 [ext_resource type="Texture2D" uid="uid://cn5lnqsa571lo" path="res://Assets/Cards/RadarBuff.png" id="2_8g4fu"]
-[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="3_l2s87"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_wl10h"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_uafpq"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardStats.gd" id="4_wl10h"]
 
 [resource]
 script = ExtResource("4_wl10h")
-StatToBuff = "Firepower"
+StatToBuff = 0
 BuffDuration = 2
 BuffAmmount = 1.0
 Shield = false
@@ -18,10 +18,10 @@ Icon = ExtResource("2_8g4fu")
 CardName = "Team Radar Buff"
 CardDescription = "Buffs Other Ships.[p][center][color=#f35033] FPWR + 1 [p][center][color=#c19200]Doesn't Stack"
 Energy = 6
-Options = Array[ExtResource("3_l2s87")]([])
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("4_uafpq")]([])
+Modules = Array[ExtResource("2_wl10h")]([])
 WeapT = 0
 AOE = true
 Tier = 1

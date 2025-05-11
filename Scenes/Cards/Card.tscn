@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="1_7mr5f"]
-[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Cards/card.gd" id="1_vr3r8"]
+[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scripts/CardFight/card.gd" id="1_vr3r8"]
 [ext_resource type="Texture2D" uid="uid://b3pxvm0bpgac0" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
 [ext_resource type="Texture2D" uid="uid://bwvdqemo26rxi" path="res://Assets/Cards/BarraceIncendiery.png" id="4_rd7hj"]
 

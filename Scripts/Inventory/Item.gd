@@ -9,7 +9,7 @@ class_name Item
 @export var MaxStackCount = 1
 #@export var RandomFindMaxCount = 1
 @export var CardProviding : Array[CardStats] = []
-@export var CardOptionProviding : CardOption
+#@export var CardOptionProviding : CardOption
 @export var CanTransfer : bool = true
 
 func GetItemDesc() -> String:

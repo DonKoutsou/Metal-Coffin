@@ -1,19 +1,24 @@
 [gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://sf8ron8y7g0l"]
 
-[ext_resource type="Texture2D" uid="uid://byjwh30dsj4l5" path="res://Assets/Cards/EvasiveManeuvers.png" id="1_nlrrw"]
-[ext_resource type="Script" uid="uid://clc8r8ruymsv7" path="res://Scripts/CardFight/CardOption.gd" id="2_1ikl0"]
+[ext_resource type="Texture2D" uid="uid://7g72rs22ia66" path="res://Assets/Cards/EvasiveManeuvers.png" id="1_nlrrw"]
 [ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_hgrwv"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_nlrrw"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_nlrrw"]
 
 [resource]
 script = ExtResource("2_hgrwv")
+Shield = false
+FireExt = false
+CanBeUsedOnOther = false
+UseInstant = false
 Icon = ExtResource("1_nlrrw")
 CardName = "Evasive Maneuvers"
 CardDescription = "Avoid an incomming [color=#c19200]barragge"
 Energy = 3
-Options = Array[ExtResource("2_1ikl0")]([])
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_nlrrw")]([])
+Modules = Array[ExtResource("2_nlrrw")]([])
 WeapT = 0
 AOE = false
+Tier = 1

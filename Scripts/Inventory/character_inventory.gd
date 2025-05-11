@@ -26,7 +26,7 @@ signal OnCharacterDeckInspectionPressed
 var _InventoryContents : Dictionary[Item, int]
 
 var _CardInventory : Dictionary
-var _CardAmmo : Dictionary
+#var _CardAmmo : Dictionary
 
 var SimPaused : bool = false
 #var SimSpeed : int = 1
@@ -56,8 +56,8 @@ func GetCards() -> Dictionary:
 		CardsInInventory[C] = _CardInventory[C]
 	return CardsInInventory
 
-func GetCardAmmo() -> Dictionary:
-	return _CardAmmo.duplicate()
+#func GetCardAmmo() -> Dictionary:
+	#return _CardAmmo.duplicate()
 
 func HasItem(It : Item) -> bool:
 	for g in _InventoryContents.keys():
@@ -140,8 +140,8 @@ func AddItem(It : Item) -> void:
 			if (It.CardProviding.size() > 0):
 				for c in It.CardProviding:
 					_CardInventory[c] += 1
-			if (It.CardOptionProviding != null):
-				_CardAmmo[It.CardOptionProviding] += 1
+			#if (It.CardOptionProviding != null):
+				#_CardAmmo[It.CardOptionProviding] += 1
 			
 			OnItemAdded.emit(It)
 			InventoryUpdated.emit()
@@ -163,8 +163,8 @@ func AddItem(It : Item) -> void:
 				else:
 					_CardInventory[c] = 1
 				
-		if (It.CardOptionProviding != null):
-			_CardAmmo[It.CardOptionProviding] = 1
+		#if (It.CardOptionProviding != null):
+			#_CardAmmo[It.CardOptionProviding] = 1
 			
 		if (It is ShipPart):
 			var BoxParent = GetBoxParentForType(It.PartType)
@@ -245,10 +245,10 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 			_CardInventory[g] -= 1
 			if (_CardInventory[g] == 0):
 				_CardInventory.erase(g)
-	if (It.CardOptionProviding != null):
-		_CardAmmo[It.CardOptionProviding] = 1
-		if (_CardAmmo[It.CardOptionProviding] == 0):
-			_CardAmmo.erase(It.CardOptionProvidin)
+	#if (It.CardOptionProviding != null):
+		#_CardAmmo[It.CardOptionProviding] = 1
+		#if (_CardAmmo[It.CardOptionProviding] == 0):
+			#_CardAmmo.erase(It.CardOptionProvidin)
 	if (_InventoryContents[It] == 0):
 		_InventoryContents.erase(It)
 	#if (Box.IsEmpty()):
