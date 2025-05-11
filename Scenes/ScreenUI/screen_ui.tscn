@@ -295,6 +295,7 @@ _data = {
 [node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel")]
 process_mode = 1
 layer = 2
+follow_viewport_enabled = true
 script = ExtResource("2_spr1r")
 _ScreenItems = NodePath("NormalScreen/ScreenUi")
 MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")

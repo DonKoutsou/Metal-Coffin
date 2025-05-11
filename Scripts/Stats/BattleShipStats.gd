@@ -11,6 +11,7 @@ class_name BattleShipStats
 @export var CaptainIcon : Texture
 @export var Speed : float
 @export var SpeedBuff : float
+@export var EnergyReserves : int
 @export var Cards : Dictionary
 @export var Ammo : Dictionary
 @export var Funds : int
@@ -30,7 +31,7 @@ func UpdateBuffs() -> Array[String]:
 		SpeedBuff = 0
 		ExpiredBuffs.append("Speed")
 	return ExpiredBuffs
-	
+
 func GetFirePower() -> float:
 	return FirePower + FirePowerBuff
 

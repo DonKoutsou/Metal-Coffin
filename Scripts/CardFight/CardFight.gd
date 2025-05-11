@@ -35,7 +35,9 @@ class_name Card_Fight
 #Plecement for any cards player selects to play
 @export var SelectedCardPlecement : Control
 @export var AnimationPlecement : Control
+@export var EnergyBarParent : Control
 @export var EnergyBar : SegmentedBar
+@export var ReservesBar : SegmentedBar
 @export var EnemyShipVisualPlecement : Control
 @export var PlayerShipVisualPlecement : Control
 @export var TargetSelect : CardFightTargetSelection
@@ -49,6 +51,7 @@ class_name Card_Fight
 @export var DeckP : DeckPile
 @export_group("FightSettings")
 @export var StartingCardAmm : int = 5
+@export var MaxCardsInHand : int = 10
 @export var MaxCombatants : int = 5
 @export var TurnEnergy : int = 10
 #Stats kept to show at the end screen
@@ -58,6 +61,7 @@ var DamageNeg : float = 0
 var FundsToWin : int = 0
 
 var Energy : int = 10
+var Reserv : int = 0
 
 #All ships are placed here based on their Speed stat, Once the turn starts this array is used for the turns
 var ShipTurns : Array[BattleShipStats]
@@ -101,13 +105,13 @@ var CardSelectSize : float
 
 func _ready() -> void:
 	EnergyBar.Init(TurnEnergy)
-	
-	#if (OS.is_debug_build()):
-		#for g in 10:
-			#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
-#
-		#for g in 10:
-			#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	ReservesBar.Init(0)
+	if (OS.is_debug_build()):
+		for g in 10:
+			EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+
+		for g in 10:
+			PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
@@ -134,7 +138,7 @@ func _ready() -> void:
 
 	DeckP.visible = false
 	DiscardP.visible = false
-	EnergyBar.get_parent().visible = false
+	EnergyBarParent.visible = false
 	HandAmmountLabel.visible = false
 	call_deferred("StoreContainerSize")
 	
@@ -413,7 +417,7 @@ func RunTurn() -> void:
 		if (IsShipFriendly(Ship)):
 			DeckP.visible = true
 			DiscardP.visible = true
-			EnergyBar.get_parent().visible = true
+			EnergyBarParent.visible = true
 			HandAmmountLabel.visible = true
 			
 			RestartCards()
@@ -425,7 +429,7 @@ func RunTurn() -> void:
 			
 			DeckP.visible = false
 			DiscardP.visible = false
-			EnergyBar.get_parent().visible = false
+			EnergyBarParent.visible = false
 			HandAmmountLabel.visible = false
 			#ATime.queue_free()
 		else:
@@ -454,7 +458,7 @@ func RunTurn() -> void:
 	CardSelectContainer.get_parent().visible = false
 	DeckP.visible = false
 	DiscardP.visible = false
-	EnergyBar.get_parent().visible = false
+	EnergyBarParent.visible = false
 	HandAmmountLabel.visible = false
 	
 	ShipSpacer.visible = true
@@ -488,7 +492,9 @@ func RunTurn() -> void:
 	call_deferred("RunTurn")
 
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
-	var EnemyEnergy = TurnEnergy
+	var EnemyEnergy = TurnEnergy + Ship.EnergyReserves
+	
+	Ship.EnergyReserves = 0
 	
 	var EnemyDeck = EnemyDecks[Ship]
 	
@@ -507,7 +513,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	var AvailableActions = EnemyDeck.Hand.duplicate()
 	
 	var t = func CheckIfToDraw() -> void:
-		if (AvailableActions.size() == 0 and EnemyEnergy > 1 and EnemyDeck.Hand.size() < 4):
+		if (AvailableActions.size() == 0 and EnemyEnergy > 1 and EnemyDeck.Hand.size() < MaxCardsInHand):
 			DrawCardEnemy()
 			AvailableActions.clear()
 			AvailableActions = EnemyDeck.Hand.duplicate()
@@ -971,8 +977,13 @@ func PlayerActionSelectionEnded() -> void:
 func RestartCards() -> void:
 	ClearCards()
 	
+	var currentship = ShipTurns[CurrentTurn]
+
 	EnergyBar.ChangeSegmentAmm(TurnEnergy)
+	ReservesBar.ChangeSegmentAmm(currentship.EnergyReserves)
+	
 	UpdateEnergy(0, TurnEnergy)
+	UpdateReserves(0, currentship.EnergyReserves)
 	UpdateHandCards()
 	
 	DiscardP.UpdateDiscardPileAmmount(PlayerDecks[ShipTurns[CurrentTurn]].DiscardPile.size())
@@ -993,7 +1004,7 @@ func DrawCardEnemy() -> void:
 	if (D.DeckPile.size() == 0):
 		ShuffleDiscardedIntoDeck(D, false)
 	
-	var C = D.DeckPile.pick_random()
+	var C = D.DeckPile.pop_front()
 	
 	await PlaceCardInEnemyHand(C)
 
@@ -1044,7 +1055,7 @@ func DrawCard() -> void:
 	if (D.DeckPile.size() == 0):
 		await ShuffleDiscardedIntoDeck(D)
 	
-	var C = D.DeckPile.pick_random()
+	var C = D.DeckPile.pop_front()
 	
 	var c = CardScene.instantiate() as Card
 	c.SetCardStats(C)
@@ -1091,8 +1102,7 @@ func DrawSpecificCard(Spawn : CardStats) -> void:
 
 func UpdateHandCards() -> void:
 	for g in PlayerCardPlecement.get_children():
-		for z in g.get_children():
-			z.queue_free()
+		g.queue_free()
 	
 
 	var CharDeck = PlayerDecks[ShipTurns[CurrentTurn]]
@@ -1103,10 +1113,8 @@ func UpdateHandCards() -> void:
 		c.SetCardStats(ran)
 		c.connect("OnCardPressed", OnCardSelected)
 		
-		for g in PlayerCardPlecement.get_children():
-			if (g.get_child_count() == 0):
-				g.add_child(c)
-				break
+		PlayerCardPlecement.add_child(c)
+
 		
 		call_deferred("DoCardPlecementAnimation", c, DeckP.global_position)
 	
@@ -1115,16 +1123,10 @@ func UpdateHandCards() -> void:
 func PlaceCardInPlayerHand(C : Card) -> bool:
 	var CanPlace : bool = false
 	
-	var CardsInHand : int = 0
+	var CardsInHand : int = PlayerCardPlecement.get_child_count()
 	
-	for g in PlayerCardPlecement.get_children():
-		if (g.get_child_count() > 0):
-			CardsInHand += 1
-	#for g in SelectedCardPlecement.get_children():
-		#if (g.get_child_count() > 0):
-			#Cards += 1
-	
-	if (CardsInHand < 4):
+
+	if (CardsInHand < MaxCardsInHand):
 		CanPlace = true
 			
 	var PlDeck = PlayerDecks[ShipTurns[CurrentTurn]]
@@ -1132,15 +1134,12 @@ func PlaceCardInPlayerHand(C : Card) -> bool:
 	
 	if (CanPlace):
 		PlDeck.Hand.append(C.CStats)
-		for g in PlayerCardPlecement.get_children():
-			if (g.get_child_count() == 0):
-				g.add_child(C)
-				break
+		PlayerCardPlecement.add_child(C)
+
 	else:
 		var Hand : Array[Card]
 		for g in PlayerCardPlecement.get_children():
-			if (g.get_child_count() > 0):
-				Hand.append(g.get_child(0))
+			Hand.append(g)
 		#for g in SelectedCardPlecement.get_children():
 			#if (g.get_child_count() > 0):
 				#Hand.append(g.get_child(0))
@@ -1159,12 +1158,12 @@ func PlaceCardInPlayerHand(C : Card) -> bool:
 
 		PlDeck.Hand.append(C.CStats)
 		
-		var Plecement = PlayerCardPlecement.get_child(ToDiscard)
-		var Discarded : Card = Plecement.get_child(0)
+		#var Plecement = PlayerCardPlecement.get_child(ToDiscard)
+		var Discarded : Card = PlayerCardPlecement.get_child(ToDiscard)
 		PlDeck.DiscardPile.append(Discarded.CStats)
 		DiscardP.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))
 		Discarded.queue_free()
-		Plecement.add_child(C)
+		PlayerCardPlecement.add_child(C)
 		PlDeck.Hand.erase(Discarded.CStats)
 	
 	UpdateHandAmount(PlDeck.Hand.size())
@@ -1177,7 +1176,7 @@ func PlaceCardInEnemyHand(C : CardStats) -> bool:
 	
 	var CardsInHand : int = EnemyDeck.Hand.size()
 
-	if (CardsInHand < 4):
+	if (CardsInHand < MaxCardsInHand):
 		CanPlace = true
 
 	EnemyDeck.DeckPile.erase(C)
@@ -1196,8 +1195,7 @@ func PlaceCardInEnemyHand(C : CardStats) -> bool:
 
 func ClearCards() -> void:
 	for g in PlayerCardPlecement.get_children():
-		for z in g.get_children():
-			z.free()
+		g.free()
 
 	for g in SelectedCardPlecement.get_children():
 		for z in g.get_children():
@@ -1207,7 +1205,7 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	var c = CardScene.instantiate() as Card
 	
 	c.SetCardStats(C.CStats)
-	c.TargetLocs = C.TargetLocs
+	#c.TargetLocs = C.TargetLocs
 	$SubViewport/Control2.add_child(c)
 	c.global_position = OriginalPos
 	#c.CompactCard()
@@ -1222,13 +1220,19 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	var PlecementTw = create_tween()
 	PlecementTw.set_ease(Tween.EASE_OUT)
 	PlecementTw.set_trans(Tween.TRANS_QUAD)
-	#PlecementTw.tween_method(MoveCard.bind(OriginalPos, c, C), 0, 1, 0.4)
+	var pos = C.global_position
 	PlecementTw.tween_property(c, "global_position", C.global_position, 0.4)
-	C.visible = false
+	var parent = C.get_parent()
+	parent.remove_child(C)
+	
+	#C.visible = false
 	await PlecementTw.finished
 	c.queue_free()
-	if (C != null):
-		C.visible = true
+	
+	parent.add_child(C)
+	C.global_position = pos
+	#if (C != null):
+		#C.visible = true
 	
 #func MoveCard(Val : float, origpos : Vector2, C : Card, C2 : Card)  -> void:
 	#C.global_position = lerp(origpos, C2.global_position, Val)
@@ -1253,6 +1257,30 @@ func OnCardSelected(C : Card) -> void:
 		#if (Energy + resupplyamm > 10):
 			#return
 		UpdateEnergy(Energy, Energy + resupplyamm)
+		var pos = C.global_position
+		C.get_parent().remove_child(C)
+		add_child(C)
+		C.global_position = pos
+		C.KillCard(0.5, true)
+		
+		var S = DeletableSoundGlobal.new()
+		S.stream = RemoveCardSound
+		S.autoplay = true
+		add_child(S)
+		S.volume_db = -10
+		
+		
+		deck.Hand.erase(C.CStats)
+		deck.DiscardPile.append(C.CStats)
+		DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
+		return
+	if (C.CStats is Reserve):
+		var Reserveamm = C.CStats.ReserveAmmount
+		#if (Energy + resupplyamm > 10):
+			#return
+		UpdateEnergy(Energy, Energy - C.GetCost())
+		
+		UpdateReserves(Reserv, Reserv + Reserveamm)
 		var pos = C.global_position
 		C.get_parent().remove_child(C)
 		add_child(C)
@@ -1446,11 +1474,9 @@ func RemoveCard(C : Card) -> void:
 	var c = CardScene.instantiate() as Card
 	c.SetCardStats(C.CStats)
 	c.connect("OnCardPressed", OnCardSelected)
+	
+	PlayerCardPlecement.add_child(c)
 
-	for g in PlayerCardPlecement.get_children():
-		if (g.get_child_count() == 0):
-			g.add_child(c)
-			break
 	call_deferred("DoCardPlecementAnimation", c, C.global_position)
 	
 	C.queue_free()
@@ -1458,9 +1484,15 @@ func RemoveCard(C : Card) -> void:
 func UpdateEnergy(OldEnergy : float, NewEnergy : float) -> void:
 	EnergyBar.UpdateAmmount(OldEnergy, NewEnergy)
 	Energy = NewEnergy
-	if (Energy > TurnEnergy):
+	if (NewEnergy > max(OldEnergy, TurnEnergy)):
 		EnergyBar.ChangeSegmentAmm(Energy)
 
+func UpdateReserves(OldEnergy : float, NewEnergy : float) -> void:
+	ReservesBar.UpdateAmmount(OldEnergy, NewEnergy)
+	if (NewEnergy > Reserv):
+		ReservesBar.ChangeSegmentAmm(NewEnergy)
+	Reserv = NewEnergy
+	
 
 var cloudtime : float = 0
 func _physics_process(delta: float) -> void:
@@ -1495,6 +1527,7 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	Stats.Cards[load("res://Resources/Cards/Barrage/DrawRandomBarrage.tres")] = 3
 	
 	Stats.Cards[load("res://Resources/Cards/Energy.tres")] = 4
+	Stats.Cards[load("res://Resources/Cards/EnergyReserve.tres")] = 10
 	
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageAPOption.tres")] = 2
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageFireOption.tres")] = 2
@@ -1539,7 +1572,7 @@ func _on_deck_button_mouse_exited() -> void:
 	DeckHoverTween.tween_property(DeckP,"scale", Vector2.ONE, 0.55)
 
 func UpdateHandAmount(NewAmm : int) -> void:
-	HandAmmountLabel.text = "In Hand {0}/4".format([NewAmm])
+	HandAmmountLabel.text = "In Hand {0}/{1}".format([NewAmm, MaxCardsInHand])
 
 var HandCountTween : Tween
 
@@ -1555,3 +1588,12 @@ func NotifyFullHand() -> void:
 	
 	HandCountTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	HandCountTween.tween_property(HandAmmountLabel,"scale", Vector2.ONE, 0.55)
+
+
+func _on_pull_reserves_pressed() -> void:
+	var currentship = ShipTurns[CurrentTurn]
+	
+	currentship.EnergyReserves = 0
+	UpdateEnergy(Energy, Energy + Reserv)
+	UpdateReserves(Reserv, 0)
+	

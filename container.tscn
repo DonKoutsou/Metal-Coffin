@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://bomenkdbpyd4t"]
+
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://CardHandContainer.gd" id="1_d0xxp"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_wndvp"]
+[ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="3_vcj71"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3yyhe"]
+noise = SubResource("FastNoiseLite_7mr5f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wndvp"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vcj71"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wl8kg"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hm8ms"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvgsy"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4ubf"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmgkm"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xmf1v"]
+resource_local_to_scene = true
+shader = ExtResource("3_vcj71")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[node name="Container" type="Container"]
+offset_right = 857.0
+offset_bottom = 123.0
+script = ExtResource("1_d0xxp")
+
+[node name="Card" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_wndvp")
+layout_mode = 2
+
+[node name="Card2" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_vcj71")
+layout_mode = 2
+
+[node name="Card3" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_wl8kg")
+layout_mode = 2
+
+[node name="Card4" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_hm8ms")
+layout_mode = 2
+
+[node name="Card5" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_tvgsy")
+layout_mode = 2
+
+[node name="Card6" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_d4ubf")
+layout_mode = 2
+
+[node name="Card7" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_nmgkm")
+layout_mode = 2
+
+[node name="Card8" parent="." instance=ExtResource("2_wndvp")]
+material = SubResource("ShaderMaterial_xmf1v")
+layout_mode = 2

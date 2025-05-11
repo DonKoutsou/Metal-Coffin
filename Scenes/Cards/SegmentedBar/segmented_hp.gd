@@ -32,9 +32,9 @@ var LabelTween : Tween
 var SegmentTween : Tween
 
 func UpdateSegments(NewAmm : int) -> void:
-	for g in $HBoxContainer.get_children().size():
+	for g in range( $HBoxContainer.get_children().size() - 1, -1 , -1):
 		var p = $HBoxContainer.get_child(g)
-		p.Toggle(g < NewAmm)
+		p.Toggle(g >= Segments - NewAmm)
 
 func NotifyNotEnough() -> void:
 	if (LabelTween and LabelTween.is_running()):
