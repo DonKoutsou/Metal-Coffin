@@ -1298,6 +1298,75 @@ func OnCardSelected(C : Card) -> void:
 		deck.DiscardPile.append(C.CStats)
 		DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
 		return
+	if (C.CStats is DrawCard):
+		UpdateEnergy(Energy, Energy - C.GetCost())
+		
+		var D = PlayerDecks[ShipTurns[CurrentTurn]]
+		
+		var DrawAmmount = C.CStats.DrawAmmount
+		var DiscardAmmount = C.CStats.DiscardAmmount
+		
+		var CardsToDraw : Array[Card] = []
+		var CardsToDiscard : Array[Card] = []
+		
+		for g in DrawAmmount:
+			if (D.DeckPile.size() == 0):
+				await ShuffleDiscardedIntoDeck(D)
+			
+			var ToDraw = D.DeckPile.pop_front()
+			var c = CardScene.instantiate() as Card
+			c.SetCardStats(ToDraw)
+			c.connect("OnCardPressed", OnCardSelected)
+			
+			DeckP.OnCardDrawn()
+			CardsToDraw.append(c)
+		
+		
+		
+		
+
+		while CardsToDiscard.size() < DiscardAmmount:
+			CardSelect.SetCards(CardsToDraw)
+			SelectingTarget = true
+			var ToDiscard : int = await CardSelect.CardSelected
+			SelectingTarget = false
+			var Ca = CardsToDraw[ToDiscard]
+			CardsToDraw.erase(Ca)
+			CardsToDiscard.append(Ca)
+			D.DiscardPile.append(Ca.CStats)
+			DeckP.OnCardDrawn()
+			DiscardP.OnCardDiscarded(DeckP.global_position)
+		
+		for g in CardsToDraw:
+			
+			var Placed = await PlaceCardInPlayerHand(g)
+			
+			DeckP.OnCardDrawn()
+			
+			if (Placed):
+				call_deferred("DoCardPlecementAnimation", g, DeckP.global_position)
+			else:
+				g.queue_free()
+
+
+		#UpdateReserves(Reserv, Reserv + Reserveamm)
+		var pos = C.global_position
+		C.get_parent().remove_child(C)
+		add_child(C)
+		C.global_position = pos
+		C.KillCard(0.5, true)
+		
+		var S = DeletableSoundGlobal.new()
+		S.stream = RemoveCardSound
+		S.autoplay = true
+		add_child(S)
+		S.volume_db = -10
+		
+		
+		deck.Hand.erase(C.CStats)
+		deck.DiscardPile.append(C.CStats)
+		DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
+		return
 	else :if (C.CStats is CardSpawn):
 		var CardToSpawn = C.CStats.CardToSpawn
 		
@@ -1528,6 +1597,7 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	
 	Stats.Cards[load("res://Resources/Cards/Energy.tres")] = 4
 	Stats.Cards[load("res://Resources/Cards/EnergyReserve.tres")] = 10
+	Stats.Cards[load("res://Resources/Cards/DrawDiscard.tres")] = 10
 	
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageAPOption.tres")] = 2
 	Stats.Ammo[load("res://Resources/Cards/Barrage/Options/BarrageFireOption.tres")] = 2
