@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://bhlucco4xwaob"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=9 format=3 uid="uid://bhlucco4xwaob"]
 
 [ext_resource type="Texture2D" uid="uid://ks8dxrbcbaqp" path="res://Assets/Cards/Revup.png" id="1_nqbud"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_nqbud"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardStats.gd" id="3_1vog6"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_xycns"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_nqbud"]
+[ext_resource type="Script" uid="uid://3ov8bjyrnlbj" path="res://Scripts/CardFight/CauseFireModule.gd" id="4_xycns"]
 
 [sub_resource type="Resource" id="Resource_r7uwp"]
 script = ExtResource("3_1vog6")
@@ -15,6 +16,12 @@ CanBeUsedOnOther = false
 AOE = false
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 
+[sub_resource type="Resource" id="Resource_bmx5i"]
+script = ExtResource("4_xycns")
+CanBeUsedOnOther = false
+AOE = false
+metadata/_custom_type_script = "uid://3ov8bjyrnlbj"
+
 [resource]
 script = ExtResource("4_nqbud")
 Icon = ExtResource("1_nqbud")
@@ -24,6 +31,6 @@ Energy = 4
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_xycns")]([])
-OnUseModules = Array[ExtResource("2_nqbud")]([SubResource("Resource_r7uwp")])
+OnUseModules = Array[ExtResource("2_nqbud")]([SubResource("Resource_r7uwp"), SubResource("Resource_bmx5i")])
 WeapT = 0
 Tier = 1

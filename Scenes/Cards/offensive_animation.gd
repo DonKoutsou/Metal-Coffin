@@ -4,6 +4,8 @@ class_name CardOffensiveAnimation
 
 signal AtackCardDestroyed(CardPos : Vector2)
 signal DeffenceCardDestroyed(CardPos : Vector2)
+signal AtackConnected
+signal DeffenceConnected
 signal AnimationFinished
 
 @export var CardScene : PackedScene
@@ -18,6 +20,8 @@ signal AnimationFinished
 
 var fr : bool
 var BuffText : String
+
+var Fin : bool = false
 
 func DoOffensive(AtackCard : CardStats, DeffenceList : Dictionary[BattleShipStats, Dictionary], OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	fr = FriendShip
@@ -90,7 +94,6 @@ func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Damage
 func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
 	await wait (0.15)
 
-	DefCard.KillCard(0.5, false)
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -101,8 +104,7 @@ func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
 
 func SpawnUpVisual(Target : Control, DefCard : Card) -> void:
 	await wait (0.4)
-
-	DefCard.KillCard(0.5, false)
+	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -116,6 +118,7 @@ func wait(secs : float) -> Signal:
 
 
 func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card) -> void:
+	AtackConnected.emit()
 	if (DeffenceCard == null):
 		var d = DamageFloater.instantiate()
 		d.modulate = Color(1,0,0,1)
@@ -141,6 +144,7 @@ func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card) -> void:
 		ShieldEff.burst()
 
 func ShieldTweenEnded(target : Control) -> void:
+	DeffenceConnected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
 	DFloater.text = BuffText
 	DFloater.modulate = Color(1,1,1,1)
@@ -149,6 +153,7 @@ func ShieldTweenEnded(target : Control) -> void:
 	DFloater.Ended.connect(AnimEnded)
 
 func BuffTweenEnded(target : Control) -> void:
+	DeffenceConnected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
 	DFloater.text = BuffText
 	DFloater.modulate = Color(1,1,1,1)
@@ -176,16 +181,26 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Con
 			BuffText = "Speed +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
+			await wait(0.2)
 	else: if (Mod is ShieldCardModule):
 		BuffText = "Shield +"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
-	
+			await wait(0.2)
+	else : if (Mod is CauseFireModule):
+		BuffText = "Fire"
+		for Ship in TargetShips:
+			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
+			await wait(0.2)
 	else : if (Mod is FireExtinguishModule):
 		BuffText = "Fire\nExtinguished"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
-
+			await wait(0.2)
+	
+	DeffenceCard.KillCard(0.5, false)
+	
+	
 func DoSelection(C : CardStats, User : Control) -> void:
 	var DeffenceCard = CardScene.instantiate() as Card
 	DeffenceCard.Dissable()
@@ -214,6 +229,7 @@ func DoSelection(C : CardStats, User : Control) -> void:
 	await DownTween.finished
 	
 	AnimationFinished.emit()
+	Fin = true
 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	var Ship = ShipViz.instantiate() as CardFightShipViz
@@ -235,3 +251,4 @@ func AnimEnded() -> void:
 		return
 	Finished = true
 	AnimationFinished.emit()
+	Fin = true
