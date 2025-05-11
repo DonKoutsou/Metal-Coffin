@@ -14,11 +14,12 @@ class_name CardStats
 ## Part that needs to be in inventory to be able to see this card in fight
 @export var RequiredPart : Array[ShipPart]
 
-@export var Modules : Array[CardModule]
+@export var OnUseModules : Array[CardModule]
+@export var OnPerformModule : CardModule
 
 @export var WeapT : WeaponType
 
-@export var AOE : bool = false
+
 
 @export var Tier : int = 1
 
@@ -32,12 +33,6 @@ func GetDescription() -> String:
 		#return SelectedOption.OptionDescription
 	return CardDescription
 
-#var SelectedOption : CardOption
-
-func IsAOE() -> bool:
-	#if (SelectedOption):
-		#return SelectedOption.AOE
-	return AOE
 
 enum WeaponType{
 	NONE,

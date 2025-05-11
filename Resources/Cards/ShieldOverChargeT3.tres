@@ -1,16 +1,20 @@
-[gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://ckn3nw1x0omqr"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://ckn3nw1x0omqr"]
 
 [ext_resource type="Texture2D" uid="uid://bx8tqigvs3lvx" path="res://Assets/Cards/Shield.png" id="1_dotbb"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_dotbb"]
+[ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://Scripts/CardFight/ShieldCardModule.gd" id="3_10cgk"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_8348h"]
-[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="4_7seka"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_8348h"]
+
+[sub_resource type="Resource" id="Resource_7seka"]
+script = ExtResource("3_10cgk")
+ShieldAmm = 60
+CanBeUsedOnOther = false
+AOE = false
+metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
 
 [resource]
-script = ExtResource("4_7seka")
-Shield = true
-FireExt = false
-CanBeUsedOnOther = false
-UseInstant = true
+script = ExtResource("5_8348h")
 Icon = ExtResource("1_dotbb")
 CardName = "Shield Overcharge"
 CardDescription = "Overcharge shields for temporary buff.[p][center][color=#6be2e9]+ 60 SHIELD"
@@ -18,7 +22,7 @@ Energy = 3
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_8348h")]([])
-Modules = Array[ExtResource("2_dotbb")]([])
+OnUseModules = Array[ExtResource("2_dotbb")]([SubResource("Resource_7seka")])
+OnPerformModules = Array[ExtResource("2_dotbb")]([])
 WeapT = 0
-AOE = false
 Tier = 3

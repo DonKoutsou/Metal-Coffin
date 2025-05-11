@@ -1,17 +1,22 @@
-[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=6 format=3 uid="uid://bblpmt5iq264c"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://bblpmt5iq264c"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_x3jk2"]
 [ext_resource type="Texture2D" uid="uid://ba6ka62j51syb" path="res://Assets/Cards/BarrageAP.png" id="2_a7j4u"]
-[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="3_a7j4u"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_pyhy7"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_x3jk2"]
+[ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="3_xre4x"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_xre4x"]
 
-[resource]
-script = ExtResource("3_a7j4u")
+[sub_resource type="Resource" id="Resource_fktga"]
+script = ExtResource("3_xre4x")
 CounteredBy = ExtResource("1_x3jk2")
 Damage = 9.0
-Accuracy = 0.0
 CauseFile = false
+AOE = false
+metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
+
+[resource]
+script = ExtResource("3_x3jk2")
 Icon = ExtResource("2_a7j4u")
 CardName = "AP Barragge"
 CardDescription = "Throws an armor piercing barragge on the enemy.[p][center]"
@@ -19,7 +24,7 @@ Energy = 4
 AllowDuplicates = true
 Consume = true
 RequiredPart = Array[ExtResource("4_xre4x")]([])
-Modules = Array[ExtResource("3_pyhy7")]([])
+OnUseModules = Array[ExtResource("3_pyhy7")]([])
+OnPerformModule = SubResource("Resource_fktga")
 WeapT = 1
-AOE = false
 Tier = 1

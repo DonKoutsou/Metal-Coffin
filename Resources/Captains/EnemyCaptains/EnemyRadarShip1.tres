@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=27 format=3 uid="uid://y1ohb6oss4v0"]
+[gd_resource type="Resource" script_class="Captain" load_steps=22 format=3 uid="uid://y1ohb6oss4v0"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_tfvmp"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_31e7m"]
@@ -7,13 +7,9 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_ucdyq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_nkros"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="5_5j1nr"]
-[ext_resource type="Texture2D" uid="uid://bkwvhr2kqn8rj" path="res://Assets/Cards/barrage.png" id="5_lq844"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="5_s2md0"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="6_2sj6o"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="6_45ts5"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_bid2u"]
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="7_qyt4v"]
-[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="8_etiea"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_jjv71"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_ewcq7"]
 
@@ -92,24 +88,6 @@ StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
-[sub_resource type="Resource" id="Resource_toygr"]
-script = ExtResource("8_etiea")
-CounteredBy = ExtResource("5_5j1nr")
-Damage = 6.0
-Accuracy = 0.0
-CauseFile = false
-Icon = ExtResource("5_lq844")
-CardName = "Barragge"
-CardDescription = "Throws a barragge on the enemy.[p][center]"
-Energy = 3
-AllowDuplicates = true
-Consume = false
-RequiredPart = Array[ExtResource("7_bid2u")]([])
-Modules = Array[ExtResource("6_2sj6o")]([])
-WeapT = 1
-AOE = false
-Tier = 1
-
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_nkros")
@@ -124,4 +102,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 30000
 ProvidingCaptains = Array[ExtResource("4_nkros")]([])
-Cards = Array[ExtResource("3_qc60d")]([SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), SubResource("Resource_toygr"), ExtResource("5_s2md0"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("6_45ts5"), ExtResource("6_45ts5"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("9_jjv71"), ExtResource("9_jjv71"), ExtResource("10_ewcq7"), ExtResource("10_ewcq7"), ExtResource("10_ewcq7")])
+Cards = Array[ExtResource("3_qc60d")]([ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("6_45ts5"), ExtResource("6_45ts5"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("9_jjv71"), ExtResource("9_jjv71"), ExtResource("10_ewcq7"), ExtResource("10_ewcq7"), ExtResource("10_ewcq7")])

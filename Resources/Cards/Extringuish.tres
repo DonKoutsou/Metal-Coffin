@@ -1,16 +1,19 @@
-[gd_resource type="Resource" script_class="Deffensive" load_steps=5 format=3 uid="uid://bihbbkeg0k2sc"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://bihbbkeg0k2sc"]
 
 [ext_resource type="Texture2D" uid="uid://cw0d8vnmpgp7o" path="res://Assets/Cards/FireSupression.png" id="1_0cpai"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_0cpai"]
-[ext_resource type="Script" uid="uid://3tqg8m3o4frn" path="res://Scripts/CardFight/DeffensiveCardStats.gd" id="2_kfy2h"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_0cpai"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_7633t"]
+[ext_resource type="Script" uid="uid://civogvyka6amw" path="res://Scripts/CardFight/FireExtinguishModule.gd" id="3_peqcn"]
+
+[sub_resource type="Resource" id="Resource_gl0km"]
+script = ExtResource("3_peqcn")
+CanBeUsedOnOther = false
+AOE = false
+metadata/_custom_type_script = "uid://civogvyka6amw"
 
 [resource]
-script = ExtResource("2_kfy2h")
-Shield = false
-FireExt = true
-CanBeUsedOnOther = false
-UseInstant = true
+script = ExtResource("3_7633t")
 Icon = ExtResource("1_0cpai")
 CardName = "Extinguish fires"
 CardDescription = "Extinguishes [color=#ff3c22]fires[/color] on ship"
@@ -18,7 +21,7 @@ Energy = 4
 AllowDuplicates = false
 Consume = false
 RequiredPart = Array[ExtResource("3_0cpai")]([])
-Modules = Array[ExtResource("2_0cpai")]([])
+OnUseModules = Array[ExtResource("2_0cpai")]([SubResource("Resource_gl0km")])
+OnPerformModules = Array[ExtResource("2_0cpai")]([])
 WeapT = 0
-AOE = false
 Tier = 1

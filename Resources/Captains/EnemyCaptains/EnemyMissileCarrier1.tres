@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://quqnjrytm6df"]
+[gd_resource type="Resource" script_class="Captain" load_steps=18 format=3 uid="uid://quqnjrytm6df"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_c8anm"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7forp"]
@@ -6,12 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://d0gebfkpi0seu" path="res://Assets/Spaceship/Tanker.png" id="3_lrwkv"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile/Missile.tres" id="4_didop"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_f3cc4"]
-[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="4_oarn3"]
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="4_oe3pw"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_sht43"]
-[ext_resource type="Texture2D" uid="uid://bkwvhr2kqn8rj" path="res://Assets/Cards/barrage.png" id="5_v41re"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="6_kfdj8"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_of877"]
-[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="8_op1dl"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_7forp")
@@ -88,24 +84,6 @@ StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
-[sub_resource type="Resource" id="Resource_toygr"]
-script = ExtResource("8_op1dl")
-CounteredBy = ExtResource("4_oarn3")
-Damage = 6.0
-Accuracy = 0.0
-CauseFile = false
-Icon = ExtResource("5_v41re")
-CardName = "Barragge"
-CardDescription = "Throws a barragge on the enemy.[p][center]"
-Energy = 3
-AllowDuplicates = true
-Consume = false
-RequiredPart = Array[ExtResource("7_of877")]([])
-Modules = Array[ExtResource("6_kfdj8")]([])
-WeapT = 1
-AOE = false
-Tier = 1
-
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_f3cc4")
@@ -120,4 +98,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 40000
 ProvidingCaptains = Array[ExtResource("4_f3cc4")]([])
-Cards = Array[ExtResource("3_56hd3")]([SubResource("Resource_toygr"), ExtResource("4_didop")])
+Cards = Array[ExtResource("3_56hd3")]([ExtResource("4_oe3pw"), ExtResource("4_didop"), ExtResource("4_oe3pw"), ExtResource("4_oe3pw"), ExtResource("4_oe3pw"), ExtResource("4_oe3pw"), ExtResource("4_oe3pw"), ExtResource("4_oe3pw"), ExtResource("4_oe3pw"), ExtResource("4_didop"), ExtResource("4_didop")])

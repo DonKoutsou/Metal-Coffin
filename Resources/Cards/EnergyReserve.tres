@@ -1,21 +1,27 @@
-[gd_resource type="Resource" script_class="Reserve" load_steps=5 format=3 uid="uid://rwh3xjjlb0id"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://rwh3xjjlb0id"]
 
 [ext_resource type="Texture2D" uid="uid://cvhnj0qqcqvii" path="res://Assets/Cards/Energy.png" id="1_o4ebt"]
-
-[ext_resource type="Script" uid="uid://bchkyl36yo5cq" path="res://Scripts/CardFight/ReserveCardStat.gd" id="3_35u34"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_o4ebt"]
+[ext_resource type="Script" uid="uid://bchkyl36yo5cq" path="res://Scripts/CardFight/ReserveModule.gd" id="3_udpuf"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_vivg1"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_udpuf"]
+
+[sub_resource type="Resource" id="Resource_vivg1"]
+script = ExtResource("3_udpuf")
+ReserveAmmount = 3
+metadata/_custom_type_script = "uid://bchkyl36yo5cq"
 
 [resource]
-script = ExtResource("3_35u34")
-ReserveAmmount = 3
+script = ExtResource("4_udpuf")
 Icon = ExtResource("1_o4ebt")
 CardName = "Energy Reserve"
 CardDescription = "Adds 3 Reserve Energy"
 Energy = 3
-
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_vivg1")]([])
+OnUseModules = Array[ExtResource("2_o4ebt")]([SubResource("Resource_vivg1")])
+OnPerformModules = Array[ExtResource("2_o4ebt")]([])
 WeapT = 0
 AOE = false
 Tier = 1

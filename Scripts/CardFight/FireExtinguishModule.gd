@@ -1,0 +1,3 @@
+extends DeffenceCardModule
+
+class_name FireExtinguishModule

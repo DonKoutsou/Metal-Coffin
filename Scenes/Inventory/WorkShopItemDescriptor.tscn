@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuutvp45vr0ew"]
+[gd_scene load_steps=7 format=3 uid="uid://cuutvp45vr0ew"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_bgbkq"]
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_0fjjd"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_q7hfh"]
 [ext_resource type="FontFile" uid="uid://rnxb3tf6tyvv" path="res://Fonts/DOTMBold.TTF" id="4_r68kf"]
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://CardHandContainer.gd" id="5_0fjjd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
 bg_color = Color(0.066982, 0.133257, 0.137998, 1)
@@ -32,7 +33,7 @@ TransferButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/T
 UpgradeButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
 UpgradeLabel = NodePath("Control/HBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("Control/HBoxContainer/CardsSection")
-CardPlecement = NodePath("Control/HBoxContainer/CardsSection/CardPlecement")
+CardPlecement = NodePath("")
 
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 245)
@@ -135,11 +136,11 @@ text = "Providing Cards"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="CardPlecement" type="HBoxContainer" parent="Control/HBoxContainer/CardsSection"]
+[node name="CardPlecement" type="Container" parent="Control/HBoxContainer/CardsSection"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = -90
-alignment = 1
+script = ExtResource("5_0fjjd")
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="Panel6" type="Panel" parent="Control/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)

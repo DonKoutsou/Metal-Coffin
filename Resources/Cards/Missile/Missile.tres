@@ -1,17 +1,22 @@
-[gd_resource type="Resource" script_class="OffensiveCardStats" load_steps=6 format=3 uid="uid://ducl6q2qs8a4d"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://ducl6q2qs8a4d"]
 
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="1_pee83"]
 [ext_resource type="Texture2D" uid="uid://d15odwyfgk4ba" path="res://Assets/Cards/Missile.png" id="2_yjru7"]
+[ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="3_03nyl"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_30ydj"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_mwgrq"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_nc52q"]
-[ext_resource type="Script" uid="uid://uph38ji4uip2" path="res://Scripts/CardFight/OffensiveCardStats.gd" id="8_g5xay"]
+
+[sub_resource type="Resource" id="Resource_nciiu"]
+script = ExtResource("3_03nyl")
+CounteredBy = ExtResource("1_pee83")
+Damage = 6.0
+CauseFile = false
+AOE = false
+metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]
-script = ExtResource("8_g5xay")
-CounteredBy = ExtResource("1_pee83")
-Damage = 10.0
-Accuracy = 0.0
-CauseFile = false
+script = ExtResource("4_mwgrq")
 Icon = ExtResource("2_yjru7")
 CardName = "Missile"
 CardDescription = "Throws a missile to enemy.[p][center]"
@@ -19,7 +24,7 @@ Energy = 3
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("4_nc52q")]([])
-Modules = Array[ExtResource("3_30ydj")]([])
+OnUseModules = Array[ExtResource("3_30ydj")]([])
+OnPerformModule = SubResource("Resource_nciiu")
 WeapT = 2
-AOE = false
 Tier = 1

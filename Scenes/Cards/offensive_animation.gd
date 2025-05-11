@@ -19,7 +19,7 @@ signal AnimationFinished
 var fr : bool
 var BuffText : String
 
-func DoOffensive(AtackCard : OffensiveCardStats, DeffenceList : Dictionary[BattleShipStats, Dictionary], OriginShip : BattleShipStats, FriendShip : bool) -> void:
+func DoOffensive(AtackCard : CardStats, DeffenceList : Dictionary[BattleShipStats, Dictionary], OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	fr = FriendShip
 	
 	var AttackCard = CardScene.instantiate() as Card
@@ -41,7 +41,9 @@ func DoOffensive(AtackCard : OffensiveCardStats, DeffenceList : Dictionary[Battl
 	var tw = create_tween()
 	tw.tween_property(AttackCard, "modulate", Color(1,1,1,1), 0.2)
 	await tw.finished
-
+	
+	var Mod = AtackCard.OnPerformModule as OffensiveCardModule
+	
 	for g in DeffenceList.values().size():
 			var HasDef = DeffenceList.values()[g]["HasDef"] as bool
 			var Viz = DeffenceList.values()[g]["Viz"] as Control
@@ -50,7 +52,8 @@ func DoOffensive(AtackCard : OffensiveCardStats, DeffenceList : Dictionary[Battl
 				DefC = CardScene.instantiate() as Card
 				DefC.Dissable()
 				#var Opts2 : Array[CardOption] = []
-				DefC.SetCardStats(AtackCard.GetCounter())
+				var Counter = Mod.CounteredBy
+				DefC.SetCardStats(Counter)
 				add_child(DefC)
 				if (!FriendShip):
 					var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
@@ -65,7 +68,7 @@ func DoOffensive(AtackCard : OffensiveCardStats, DeffenceList : Dictionary[Battl
 				var tw2 = create_tween()
 				tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.2)
 				
-			call_deferred("SpawnVisual", Viz, AttackCard, DefC, roundi(OriginShip.GetFirePower() * AtackCard.GetDamage()))
+			call_deferred("SpawnVisual", Viz, AttackCard, DefC, roundi(OriginShip.GetFirePower() * Mod.Damage))
 			await wait(0.2)
 			
 	AttackCard.KillCard(0.5, false)
@@ -153,7 +156,7 @@ func BuffTweenEnded(target : Control) -> void:
 	DFloater.global_position = (target.global_position + (target.size / 2)) - DFloater.size / 2
 	DFloater.Ended.connect(AnimEnded)
 
-func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], _FriendShip : bool) -> void:
+func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Control], _FriendShip : bool) -> void:
 
 	var DeffenceCard = CardScene.instantiate() as Card
 	DeffenceCard.Dissable()
@@ -166,19 +169,19 @@ func DoDeffensive(DefCard : CardStats, TargetShips : Array[Control], _FriendShip
 	var DefCardTween = create_tween()
 	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.4)
 
-	if (DefCard is Buff):
-		if (DefCard.StatToBuff == Buff.Stat.FIREPOWER):
+	if (Mod is BuffModule):
+		if (Mod.StatToBuff == BuffModule.Stat.FIREPOWER):
 			BuffText = "Firepower +"
-		else : if(DefCard.StatToBuff == Buff.Stat.SPEED):
+		else : if(Mod.StatToBuff == BuffModule.Stat.SPEED):
 			BuffText = "Speed +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
-	else: if (DefCard.Shield):
+	else: if (Mod is ShieldCardModule):
 		BuffText = "Shield +"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
 	
-	else : if (DefCard.FireExt):
+	else : if (Mod is FireExtinguishModule):
 		BuffText = "Fire\nExtinguished"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)

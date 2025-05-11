@@ -1,5 +1,5 @@
-extends Deffensive
-class_name Buff
+extends DeffenceCardModule
+class_name BuffModule
 
 @export var StatToBuff : Stat
 @export var BuffDuration : int

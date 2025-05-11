@@ -1,0 +1,3 @@
+extends CardModule
+
+class_name CounterCardModule

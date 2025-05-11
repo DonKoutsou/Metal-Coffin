@@ -1,14 +1,19 @@
-[gd_resource type="Resource" script_class="CardSpawn" load_steps=6 format=3 uid="uid://bl7mvgrw6tyes"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://bl7mvgrw6tyes"]
 
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="1_00mwm"]
 [ext_resource type="Texture2D" uid="uid://d28cr5h6l7tk5" path="res://Assets/Cards/BarrageReload.png" id="2_l4eym"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_l4eym"]
-[ext_resource type="Script" uid="uid://ceqe8h8b7lrlm" path="res://Scripts/CardFight/CardSpawnCardStats.gd" id="4_p3hss"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_wy8f1"]
+[ext_resource type="Script" uid="uid://ceqe8h8b7lrlm" path="res://Scripts/CardFight/CardSpawnModule.gd" id="4_00mwm"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_1yprs"]
 
-[resource]
-script = ExtResource("4_p3hss")
+[sub_resource type="Resource" id="Resource_phqjh"]
+script = ExtResource("4_00mwm")
 CardToSpawn = ExtResource("1_00mwm")
+metadata/_custom_type_script = "uid://ceqe8h8b7lrlm"
+
+[resource]
+script = ExtResource("3_wy8f1")
 Icon = ExtResource("2_l4eym")
 CardName = "Emergency Reload!"
 CardDescription = "Draws a random Barrage card from the deck"
@@ -16,7 +21,8 @@ Energy = 1
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("5_1yprs")]([])
-Modules = Array[ExtResource("3_l4eym")]([])
+OnUseModules = Array[ExtResource("3_l4eym")]([SubResource("Resource_phqjh")])
+OnPerformModules = Array[ExtResource("3_l4eym")]([])
 WeapT = 0
 AOE = false
 Tier = 1
