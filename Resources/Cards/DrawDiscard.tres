@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("3_8vv6a")
 DrawAmmount = 3
-DiscardAmmount = 2
+DiscardAmmount = 1
 CardName = "Draw Discard"
 CardDescription = "Draw 3 discard 2"
 Energy = 3

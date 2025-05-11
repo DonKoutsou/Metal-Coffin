@@ -1151,7 +1151,7 @@ func PlaceCardInPlayerHand(C : Card) -> bool:
 		var ToDiscard : int = await CardSelect.CardSelected
 		SelectingTarget = false
 
-		if (ToDiscard == 4):
+		if (ToDiscard == MaxCardsInHand):
 			PlDeck.DiscardPile.append(C.CStats)
 			DiscardP.OnCardDiscarded(DeckP.global_position)
 			return false
@@ -1300,6 +1300,23 @@ func OnCardSelected(C : Card) -> void:
 		return
 	if (C.CStats is DrawCard):
 		UpdateEnergy(Energy, Energy - C.GetCost())
+		#UpdateReserves(Reserv, Reserv + Reserveamm)
+		var pos = C.global_position
+		C.get_parent().remove_child(C)
+		add_child(C)
+		C.global_position = pos
+		C.KillCard(0.5, true)
+		
+		var S = DeletableSoundGlobal.new()
+		S.stream = RemoveCardSound
+		S.autoplay = true
+		add_child(S)
+		S.volume_db = -10
+		
+		
+		deck.Hand.erase(C.CStats)
+		deck.DiscardPile.append(C.CStats)
+		DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
 		
 		var D = PlayerDecks[ShipTurns[CurrentTurn]]
 		
@@ -1321,10 +1338,6 @@ func OnCardSelected(C : Card) -> void:
 			DeckP.OnCardDrawn()
 			CardsToDraw.append(c)
 		
-		
-		
-		
-
 		while CardsToDiscard.size() < DiscardAmmount:
 			CardSelect.SetCards(CardsToDraw)
 			SelectingTarget = true
@@ -1349,23 +1362,7 @@ func OnCardSelected(C : Card) -> void:
 				g.queue_free()
 
 
-		#UpdateReserves(Reserv, Reserv + Reserveamm)
-		var pos = C.global_position
-		C.get_parent().remove_child(C)
-		add_child(C)
-		C.global_position = pos
-		C.KillCard(0.5, true)
 		
-		var S = DeletableSoundGlobal.new()
-		S.stream = RemoveCardSound
-		S.autoplay = true
-		add_child(S)
-		S.volume_db = -10
-		
-		
-		deck.Hand.erase(C.CStats)
-		deck.DiscardPile.append(C.CStats)
-		DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
 		return
 	else :if (C.CStats is CardSpawn):
 		var CardToSpawn = C.CStats.CardToSpawn
@@ -1497,7 +1494,7 @@ func RemoveCard(C : Card) -> void:
 	
 	var D = PlayerDecks[ShipTurns[CurrentTurn]]
 	
-	if (D.Hand.size() == 4):
+	if (D.Hand.size() == MaxCardsInHand):
 		NotifyFullHand()
 		return
 	
