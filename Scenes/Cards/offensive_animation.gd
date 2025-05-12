@@ -27,14 +27,14 @@ func DoOffensive(AtackCard : CardStats, DeffenceList : Dictionary[BattleShipStat
 	fr = FriendShip
 	
 	var AttackCard = CardScene.instantiate() as Card
-	AttackCard.Dissable()
+	AttackCard.Dissable(true)
 	
-	if (!FriendShip):
-		$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_END)
-		AttackCard.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	else:
-		$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_BEGIN)
-		AttackCard.size_flags_horizontal = Control.SIZE_EXPAND
+	#if (!FriendShip):
+		#$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_END)
+		#AttackCard.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	#else:
+		#$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_BEGIN)
+		#AttackCard.size_flags_horizontal = Control.SIZE_EXPAND
 
 	AttackCard.SetCardStats(AtackCard)
 
@@ -54,7 +54,7 @@ func DoOffensive(AtackCard : CardStats, DeffenceList : Dictionary[BattleShipStat
 			var DefC
 			if (HasDef):
 				DefC = CardScene.instantiate() as Card
-				DefC.Dissable()
+				DefC.Dissable(true)
 				#var Opts2 : Array[CardOption] = []
 				var Counter = Mod.CounteredBy
 				DefC.SetCardStats(Counter)
@@ -164,7 +164,7 @@ func BuffTweenEnded(target : Control) -> void:
 func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Control], _FriendShip : bool) -> void:
 
 	var DeffenceCard = CardScene.instantiate() as Card
-	DeffenceCard.Dissable()
+	DeffenceCard.Dissable(true)
 	DeffenceCard.SetCardStats(DefCard)
 	$HBoxContainer.add_child(DeffenceCard)
 
@@ -203,7 +203,8 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Con
 	
 func DoSelection(C : CardStats, User : Control) -> void:
 	var DeffenceCard = CardScene.instantiate() as Card
-	DeffenceCard.Dissable()
+	DeffenceCard.Dissable(true)
+	
 	DeffenceCard.SetCardStats(C)
 	add_child(DeffenceCard)
 	
@@ -239,7 +240,7 @@ func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	
 	Ship.ToggleFire(true)
 	var d = DamageFloater.instantiate() as Floater
-	d.text = "Fire Damage - 10"
+	d.text = "Fire Damage\n- 10"
 	add_child(d)
 	d.global_position = (Ship.global_position + (Ship.size / 2)) - d.size / 2
 	d.Ended.connect(AnimEnded)

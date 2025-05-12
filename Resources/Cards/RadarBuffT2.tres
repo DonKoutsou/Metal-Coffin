@@ -25,6 +25,5 @@ AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_jigaf")]([])
 OnUseModules = Array[ExtResource("2_hgmgd")]([SubResource("Resource_jigaf")])
-OnPerformModules = Array[ExtResource("2_hgmgd")]([])
 WeapT = 0
 Tier = 2

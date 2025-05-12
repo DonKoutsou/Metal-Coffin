@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MissileItem" load_steps=5 format=3 uid="uid://c77l5prboewm2"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_1gcl3"]
+[ext_resource type="Resource" uid="uid://b5dslr0dn6ox8" path="res://Resources/Cards/Missile/ClusterMissile.tres" id="2_1gcl3"]
+[ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="3_ojala"]
+[ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="4_o7p4u"]
+
+[resource]
+script = ExtResource("4_o7p4u")
+MissileScene = ExtResource("3_ojala")
+Distance = 50
+Speed = 6.0
+Damage = 10
+Type = 1
+ItemName = "Cluster Missile"
+ItemDesc = "The cluster missile unleashes multiple explosive submunitions almost instantly after being fired, covering a wide area. Equipped with proximity sensors for precise detonation, it's perfect for disrupting enemy formations and clearing defensive positions with chaotic efficacy.\""
+MaxStackCount = 99
+CardProviding = Array[ExtResource("1_1gcl3")]([ExtResource("2_1gcl3")])
+CanTransfer = true

@@ -519,7 +519,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()
-	stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
+	#stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
 	stats.Funds = Cpt.ProvidingFunds
 	stats.Convoy = false
 	return stats

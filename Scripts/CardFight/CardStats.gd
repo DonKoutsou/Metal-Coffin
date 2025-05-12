@@ -29,8 +29,8 @@ func ShouldConsume() -> bool:
 	return Consume
 
 func GetDescription() -> String:
-	#if is_instance_valid(SelectedOption):
-		#return SelectedOption.OptionDescription
+	if is_instance_valid(OnPerformModule):
+		return CardDescription + " " + OnPerformModule.GetDesc()
 	return CardDescription
 
 

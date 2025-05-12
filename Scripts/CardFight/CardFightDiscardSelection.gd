@@ -15,8 +15,9 @@ func SetCards(Cards : Array[Card]) -> void:
 	for g in Cards.size():
 		var b = CardScene.instantiate() as Card
 		b.SetCardStats(Cards[g].CStats)
-		CardContainer.add_child(b)
+		
 		b.OnCardPressed.connect(TargetSelected.bind(g))
+		CardContainer.call_deferred("add_child", b)
 		
 	visible = true
 	

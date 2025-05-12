@@ -16,7 +16,7 @@ class_name ItemDescriptor
 @export var CardSection : Control
 @export var CardPlecement : Control
 @export var DescScroll : ScrollContainer
-@export var CardScroll : ScrollContainer
+#@export var CardScroll : ScrollContainer
 #signal ItemUsed(Box : Inventory_Box, Amm : int)
 signal ItemUpgraded(Box : Inventory_Box)
 signal ItemDropped(Box : Inventory_Box)
@@ -105,8 +105,8 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 			var CardS = g.duplicate() as CardStats
 			var card = CardScene.instantiate() as Card
 			
-			if (It.CardOptionProviding != null):
-				CardS.SelectedOption = It.CardOptionProviding
+			#if (It.CardOptionProviding != null):
+				#CardS.SelectedOption = It.CardOptionProviding
 			card.SetCardStats(CardS, It.CardProviding.count(g))
 			CardPlecement.add_child(card)
 			card.Dissable()
@@ -213,9 +213,9 @@ func _physics_process(_delta: float) -> void:
 	UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
 
 
-func CardScrolInput(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		CardScroll.scroll_horizontal -= event.relative.x
+#func CardScrolInput(event: InputEvent) -> void:
+	#if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		#CardScroll.scroll_horizontal -= event.relative.x
 
 func OnDescScrollInput(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

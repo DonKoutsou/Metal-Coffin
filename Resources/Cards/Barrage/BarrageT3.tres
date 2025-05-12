@@ -12,6 +12,7 @@ script = ExtResource("3_4hrbh")
 CounteredBy = ExtResource("1_4hrbh")
 Damage = 20.0
 CauseFile = false
+OnSuccesfullAtackModules = Array[ExtResource("3_ibrvx")]([])
 AOE = false
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 

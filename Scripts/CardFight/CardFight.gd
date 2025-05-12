@@ -84,6 +84,7 @@ var ActionList = CardFightActionList.new()
 
 var SelectingTarget : bool = false
 var EnemyPickingMove : bool = false
+var PlayerPerformingMove : bool = false
 
 signal CardFightEnded(Survivors : Array[BattleShipStats])
 
@@ -926,7 +927,7 @@ func DoFireDamage() -> void:
 		if (viz.IsOnFire()):
 			
 			var d = DamageFloater.instantiate() as Floater
-			d.text = "Fire Damage - 10"
+			d.text = "Fire Damage\n- 10"
 			viz.add_child(d)
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
 			
@@ -986,7 +987,7 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 func TrySetFire() -> bool:
 	randomize()
 	var random_value = randf()
-	return random_value < 0.5
+	return random_value < 0.2
 
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
@@ -1061,7 +1062,7 @@ func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	deck.DiscardPile.append(C)
 
 func PlayerActionSelectionEnded() -> void:
-	if (SelectingTarget or EnemyPickingMove):
+	if (SelectingTarget or EnemyPickingMove or PlayerPerformingMove):
 		return
 	#GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 	PlayerActionPickingEnded.emit()
@@ -1328,7 +1329,7 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 	#C.global_position = lerp(origpos, C2.global_position, Val)
 
 func OnCardSelected(C : Card) -> void:
-
+	
 	if (SelectingTarget or EnemyPickingMove or Shuffling):
 		return
 	
@@ -1337,6 +1338,8 @@ func OnCardSelected(C : Card) -> void:
 	if (Ship.Energy < C.GetCost()):
 		EnergyBar.NotifyNotEnough()
 		return
+	
+	PlayerPerformingMove = true
 	
 	var deck = PlayerDecks[ShipTurns[CurrentTurn]]
 	
@@ -1404,6 +1407,7 @@ func OnCardSelected(C : Card) -> void:
 	await HandleModules(C.CStats)
 
 	UpdateHandAmount(deck.Hand.size())
+	PlayerPerformingMove = false
 
 func HandleModules(C : CardStats) -> void:
 	for Mod in C.OnUseModules.size():
@@ -1568,7 +1572,7 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	Stats.Cards[load("res://Resources/Cards/RadarBuffSingle.tres")] = 2
 	Stats.Cards[load("res://Resources/Cards/SpeedBuff.tres")] = 2
 	Stats.Cards[load("res://Resources/Cards/Barrage/DrawRandomBarrage.tres")] = 3
-	
+	Stats.Cards[load("res://Resources/Cards/Extringuish.tres")] = 4
 	Stats.Cards[load("res://Resources/Cards/Energy.tres")] = 4
 	Stats.Cards[load("res://Resources/Cards/EnergyReserve.tres")] = 3
 	Stats.Cards[load("res://Resources/Cards/DrawDiscard.tres")] = 2

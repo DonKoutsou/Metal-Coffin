@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="8_lumq3"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="9_nheko"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="10_al4bv"]
-[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="11_6t7up"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/UnguidedMissile.tres" id="11_6t7up"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_8kp6e"]
 [ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/FuelTank2.tres" id="13_0d70u"]
 

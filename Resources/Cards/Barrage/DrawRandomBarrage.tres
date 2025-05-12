@@ -10,6 +10,7 @@
 [sub_resource type="Resource" id="Resource_phqjh"]
 script = ExtResource("4_00mwm")
 CardToSpawn = ExtResource("1_00mwm")
+AOE = false
 metadata/_custom_type_script = "uid://ceqe8h8b7lrlm"
 
 [resource]
@@ -22,7 +23,5 @@ AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("5_1yprs")]([])
 OnUseModules = Array[ExtResource("3_l4eym")]([SubResource("Resource_phqjh")])
-OnPerformModules = Array[ExtResource("3_l4eym")]([])
 WeapT = 0
-AOE = false
 Tier = 1

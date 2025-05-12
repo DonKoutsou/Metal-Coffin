@@ -25,13 +25,13 @@ func SetDeck(Ch : Captain) -> void:
 		g.queue_free()
 	
 	var deck = Inv.GetCards()
-	var ammo = Inv.GetCardAmmo()
+	#var ammo = Inv.GetCardAmmo()
 	
 	for card : CardStats in deck:
 		var c = CardScene.instantiate() as Card
 		c.SetCardStats(card, deck[card])
 		CardPosition.add_child(c)
-		
+		c.Dissable()
 		#var WType = card.WeapT
 		
 		#for Ammo : CardOption in ammo:

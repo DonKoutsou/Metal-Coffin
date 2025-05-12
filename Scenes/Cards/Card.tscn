@@ -139,7 +139,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_vr3r8")
 CardName = NodePath("VBoxContainer/HBoxContainer/Label")
-CardDesc = NodePath("VBoxContainer/CardDesc")
+CardDesc = NodePath("VBoxContainer/Control/CardDesc")
 CardCost = NodePath("VBoxContainer/HBoxContainer/CardCost")
 CardTex = NodePath("VBoxContainer/CardText")
 Lines = [NodePath("Line2D")]
@@ -156,6 +156,7 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4v2x1")
 
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
@@ -252,9 +253,17 @@ texture = ExtResource("4_rd7hj")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CardDesc" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardDesc" type="RichTextLabel" parent="VBoxContainer/Control"]
+use_parent_material = true
+layout_mode = 2
+offset_left = -8.0
+offset_right = 166.0
+offset_bottom = 89.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
@@ -295,6 +304,7 @@ offset_top = 103.0
 offset_right = 30.0
 offset_bottom = 127.0
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4r8q")
 
 [node name="Label" type="Label" parent="Amm"]

@@ -23,6 +23,5 @@ AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_f0bjb")]([])
 OnUseModules = Array[ExtResource("2_ywkdi")]([SubResource("Resource_plv6y")])
-OnPerformModules = Array[ExtResource("2_ywkdi")]([])
 WeapT = 0
 Tier = 1

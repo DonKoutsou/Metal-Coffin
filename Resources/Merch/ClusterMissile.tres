@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://dab42txern1sq"]
+
+[ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="1_uifmt"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_8pssw"]
+
+[resource]
+script = ExtResource("2_8pssw")
+It = ExtResource("1_uifmt")
+Price = 1200
+Amm = 0

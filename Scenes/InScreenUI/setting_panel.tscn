@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb2xsv1qpwei"]
+[gd_scene load_steps=4 format=3 uid="uid://bb2xsv1qpwei"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_go7bp"]
 [ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scripts/UI/setting_panel.gd" id="2_clx0a"]
+[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="3_os1sx"]
 
 [node name="SettingPanel" type="PanelContainer"]
 use_parent_material = true
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_go7bp")
 script = ExtResource("2_clx0a")
+mat = ExtResource("3_os1sx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 use_parent_material = true

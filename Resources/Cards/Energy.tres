@@ -9,6 +9,7 @@
 [sub_resource type="Resource" id="Resource_o5gji"]
 script = ExtResource("3_fosgn")
 ResupplyAmmount = 1
+AOE = false
 metadata/_custom_type_script = "uid://h6mrpid3a2ps"
 
 [resource]
@@ -21,7 +22,5 @@ AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_o5gji")]([])
 OnUseModules = Array[ExtResource("2_wqvsm")]([SubResource("Resource_o5gji")])
-OnPerformModules = Array[ExtResource("2_wqvsm")]([])
 WeapT = 0
-AOE = false
 Tier = 1

@@ -12,14 +12,15 @@ script = ExtResource("3_vxqdi")
 CounteredBy = ExtResource("1_n7xos")
 Damage = 6.0
 CauseFile = false
+OnSuccesfullAtackModules = Array[ExtResource("2_n7xos")]([])
 AOE = true
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]
 script = ExtResource("4_5rv40")
 Icon = ExtResource("1_5rv40")
-CardName = "Heat Seeking Missile"
-CardDescription = "Throws an [color=#ff3c22]Incendiary[/color] barragge on the enemy.[p][center]"
+CardName = "Cluster Missile"
+CardDescription = "Splits into multiple missiles that hit [color=#ff3c22]multiple[/color] targets.[p][center]"
 Energy = 4
 AllowDuplicates = true
 Consume = true

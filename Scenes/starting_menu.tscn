@@ -379,7 +379,7 @@ color = Color(0, 0, 0, 1)
 [node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(422, 234)
 texture = ExtResource("15_7x35f")
-texture_scale = 3.5
+texture_scale = 4.0
 height = 328.0
 
 [node name="Credits" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0pu32")]

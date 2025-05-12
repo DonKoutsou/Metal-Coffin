@@ -15,7 +15,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "RepairButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "RepairButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,7 +33,6 @@ TransferButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/T
 UpgradeButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
 UpgradeLabel = NodePath("Control/HBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("Control/HBoxContainer/CardsSection")
-CardPlecement = NodePath("")
 
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 245)

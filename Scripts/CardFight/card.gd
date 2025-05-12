@@ -106,12 +106,14 @@ func OnButtonPressed() -> void:
 	#else:
 	OnCardPressed.emit(self)
 
-func Dissable() -> void:
+func Dissable(MouseFilter : bool = false) -> void:
 	$Button.disabled = true
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.RemoveSelf($Button)
-	
+	if (MouseFilter):
+		$Button.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+
 #func OnOptionSelected(Option : CardOption) -> void:
 	#var but = get_viewport().gui_get_focus_owner() as Button
 	#Option = but.text
@@ -126,8 +128,8 @@ func GetCost() -> int:
 var TweenHover : Tween
 
 func _on_button_mouse_entered() -> void:
-	if ($Button.disabled):
-		return
+	#if ($Button.disabled):
+		#return
 	z_index = 1
 	
 	if (TweenHover and TweenHover.is_running()):
@@ -138,8 +140,8 @@ func _on_button_mouse_entered() -> void:
 
 
 func _on_button_mouse_exited() -> void:
-	if ($Button.disabled):
-		return
+	#if ($Button.disabled):
+		#return
 	z_index = 0
 	if (TweenHover and TweenHover.is_running()):
 		TweenHover.kill()

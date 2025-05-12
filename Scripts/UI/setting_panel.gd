@@ -2,10 +2,12 @@ extends PanelContainer
 
 class_name SettingsPanel
 
+@export var mat : ShaderMaterial
+
 static var HasGlitch = true
 
 func _ready() -> void:
-	$VBoxContainer/HBoxContainer3/GlitchesCheckBox.button_pressed = HasGlitch
+	$VBoxContainer/HBoxContainer3/GlitchesCheckBox.set_pressed_no_signal(HasGlitch)
 	$VBoxContainer/HBoxContainer/FullScreenCheckBox.button_pressed = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
 	$VBoxContainer/HBoxContainer2/SoundCheckBox.button_pressed = AudioServer.get_bus_volume_db(0) == 0
 
@@ -27,6 +29,15 @@ static func GetGlitch() -> bool:
 
 func _on_glitches_check_box_toggled(toggled_on: bool) -> void:
 	HasGlitch = toggled_on
-	var ui = Ingame_UIManager.GetInstance()
-	if (ui):
-		ui.ToggleScreenGlitches(toggled_on)
+	ToggleScreenGlitches(toggled_on)
+
+func ToggleScreenGlitches(t : bool) -> void:
+
+	var ImageFlicker = 0
+	var Skip = 0
+	if (t):
+		ImageFlicker = 0.25
+		Skip = 0.01
+		
+	mat.set_shader_parameter("image_flicker", ImageFlicker)
+	mat.set_shader_parameter("skip", Skip)

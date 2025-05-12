@@ -547,7 +547,7 @@ blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("34_aiu8p")
 texture_scale = 30.0
-height = 100.0
+height = 150.0
 
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]
 [connection signal="mouse_entered" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_mouse_entered"]

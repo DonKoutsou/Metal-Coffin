@@ -13,7 +13,7 @@
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="11_vw1qw"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="12_iodyk"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="13_cwgpc"]
-[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/HeadseekingMissile.tres" id="14_mcsu8"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/UnguidedMissile.tres" id="14_mcsu8"]
 
 [sub_resource type="Resource" id="Resource_w8w27"]
 script = ExtResource("2_sorvc")
