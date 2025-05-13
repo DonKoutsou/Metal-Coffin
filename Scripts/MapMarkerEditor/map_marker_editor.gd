@@ -19,7 +19,10 @@ func _ready() -> void:
 		$MarkerTextEditor/VBoxContainer.position.y = 120
 
 func SetCamera() -> void:
-	ship_camera = Map.GetInstance().GetCamera()
+	var map = Map.GetInstance()
+	if (!is_instance_valid(map)):
+		return
+	ship_camera = map.GetCamera()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	#global_position = get_parent().global_position - (get_viewport_rect().size/2)

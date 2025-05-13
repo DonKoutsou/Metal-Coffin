@@ -257,6 +257,7 @@ stretch_mode = 5
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="CardDesc" type="RichTextLabel" parent="VBoxContainer/Control"]
 use_parent_material = true

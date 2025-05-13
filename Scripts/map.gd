@@ -834,10 +834,12 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = FullSize
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
+		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(FullSize)
 	else: if (NewState == ScreenUI.ScreenState.HALF_SCREEN):
 		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
+		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(OriginalSize)
 	else:
 		$SubViewportContainer.position = Vector2.ZERO
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size

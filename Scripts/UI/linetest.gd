@@ -20,6 +20,7 @@ var playback : AudioStreamGeneratorPlayback
 @export var phase := 0.0
 @export var volume := 0.5
 @export var LineWidth : float = 2
+@export var PointRatio : float = 20.0
 var ContainerSize : Vector2
 
 #func _ready() -> void:
@@ -92,7 +93,7 @@ func _draw() -> void:
 	var step = 1.0 / waveform_points
 	var prev_point = Vector2(0, 0)
 	
-	for y in range(height):
+	for y in range((height/ PointRatio) + 1):
 		var t = y / height
 		var sine_value_1 = sin(t * TAU * frequency + phase_offset + ti)
 		var sine_value_2 = 0.5 * sin(t * TAU * frequency * 2 + phase_offset * 0.5)
@@ -103,7 +104,7 @@ func _draw() -> void:
 		if (OrientationUpDown):
 			point = Vector2(ContainerSize.x / 2 + x, y)
 		else:
-			point = Vector2(y, ContainerSize.y / 2 + x)
+			point = Vector2(y * PointRatio, ContainerSize.y / 2 + x)
 		if y > 0:
 			draw_line(prev_point, point, Col, LineWidth, true)
 		

@@ -8,7 +8,7 @@ var Stream : AudioStreamPlayer
 
 func _ready() -> void:
 	Stream = AudioStreamPlayer.new()
-	Stream.volume_db = -18
+	Stream.volume_db = -14
 	Stream.stream = AmbientMusic.pick_random()
 	Stream.finished.connect(OnMusicFinished)
 	add_child(Stream)
@@ -20,7 +20,7 @@ func OnMusicFinished() -> void:
 		Stream.play()
 	else:
 		Stream.stream = null
-		await wait(90)
+		Helper.GetInstance().CallLater(OnMusicFinished, 90)
 	
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout

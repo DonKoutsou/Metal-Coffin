@@ -268,7 +268,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 			if (Unit.GetShipName() == Nam):
 				Unit.Damage(Unit.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) - Surv.Hull, false)
 				if (Unit is not HostileShip):
-					FigureOutInventory(Unit.Cpt.GetCharacterInventory(), Surv.Cards, Surv.Ammo)
+					FigureOutInventory(Unit.Cpt.GetCharacterInventory(), Surv.Cards)
 				else: if (Unit.IsDead()):
 					Unit.DestroyEnemyDebry()
 					
@@ -441,7 +441,7 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 	#OnShipLanded(Ship, true)
 
 #Make sure to remove all items that their cards have been used
-func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo : Dictionary):
+func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary):
 	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
 	var Contents = CharInv.GetInventoryContents().duplicate()
 	for It in Contents.keys():
@@ -461,13 +461,13 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary, Ammo :
 			
 			if (Itm.CardOptionProviding != null):
 				#if it did remove it from dictionary and leave ininside inventory
-				if (Ammo.has(Itm.CardOptionProviding)):
-					Ammo[Itm.CardOptionProviding] -= 1
-					if (Ammo[Itm.CardOptionProviding] == 0):
-						Ammo.erase(Itm.CardOptionProviding)
+				#if (Ammo.has(Itm.CardOptionProviding)):
+					#Ammo[Itm.CardOptionProviding] -= 1
+					#if (Ammo[Itm.CardOptionProviding] == 0):
+						#Ammo.erase(Itm.CardOptionProviding)
 				#if it was used and we cant find it in the dictionary then remove it from inventory
-				else:
-					CharInv.RemoveItem(Itm)
+				#else:
+				CharInv.RemoveItem(Itm)
 #--------------------------------------------------------
 func GameLost(reason : String):
 	get_tree().paused = true

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=18 format=3 uid="uid://6n7k1biixh2y"]
+[gd_resource type="Resource" script_class="Captain" load_steps=19 format=3 uid="uid://6n7k1biixh2y"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_i0pba"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_en1ly"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_02u6x"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile/Missile.tres" id="4_xxcc6"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_f2hrv"]
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="6_jc4ql"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_en1ly")
@@ -87,7 +88,7 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_02u6x")
-CaptainName = "Grunt"
+CaptainName = "M2"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_i0pba")
 ShipIcon = ExtResource("3_02dye")
@@ -98,4 +99,4 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 45000
 ProvidingCaptains = Array[ExtResource("4_02u6x")]([])
-Cards = Array[ExtResource("3_syr2p")]([ExtResource("4_xxcc6"), ExtResource("6_f2hrv")])
+Cards = Array[ExtResource("3_syr2p")]([ExtResource("4_xxcc6"), ExtResource("6_f2hrv"), ExtResource("4_xxcc6"), ExtResource("4_xxcc6"), ExtResource("4_xxcc6"), ExtResource("4_xxcc6"), ExtResource("6_jc4ql"), ExtResource("6_jc4ql"), ExtResource("6_jc4ql"), ExtResource("6_jc4ql")])

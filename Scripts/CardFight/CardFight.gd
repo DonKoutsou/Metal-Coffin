@@ -104,13 +104,7 @@ var CardSelectSize : float
 func _ready() -> void:
 	EnergyBar.Init(TurnEnergy)
 	ReservesBar.Init(0)
-	if (OS.is_debug_build()):
-		for g in 10:
-			EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
 
-		for g in 10:
-			PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
-	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
 		var NewCombatant = EnemyReserves.pick_random()
@@ -141,6 +135,18 @@ func _ready() -> void:
 	call_deferred("StoreContainerSize")
 	
 	call_deferred("RunTurn")
+func InitRandomFight(ShipAmm : int) -> void:
+	#for g in ShipAmm:
+		#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
+#
+	#for g in ShipAmm:
+		#PlayerReserves.append(GenerateRandomisedShip("pl{0}".format([g]), false))
+	for g in ShipAmm:
+		EnemyReserves.append(load(GetRandomCaptain(true)).GetBattleStats())
+
+	for g in ShipAmm:
+		PlayerReserves.append(load(GetRandomCaptain(false)).GetBattleStats())
+
 
 func CheckForReserves() -> void:
 	if (PlayerCombatants.size() < MaxCombatants and PlayerReserves.size() > 0):
@@ -327,7 +333,7 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	var viz = GetShipViz(BattleS)
 	viz.SetStats(BattleS, Friendly)
 	viz.ToggleDmgBuff(BattleS.FirePowerBuff > 0)
-	viz.ToggleSpeedBuff(BattleS.SpeedBuff > 0)
+	viz.ToggleSpeedBuff(BattleS.SpeedBuff > 1)
 
 #atm of a ship is on fire is stored in the UI. Should change #TODO
 func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
@@ -505,14 +511,9 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				ExtinguishAction = g
 				EnemyEnergy -= ExtinguishAction.Energy
 				#TODO fix this
-				var Mod : FireExtinguishModule
+
 				
-				for z in g.OnPerformModule:
-					if (z is FireExtinguishModule):
-						Mod = z
-						break
-				
-				await HandleFireExtinguish(Ship, ExtinguishAction, Mod)
+				await HandleFireExtinguish(Ship, ExtinguishAction, g.OnPerformModule)
 				EnemyDeck.Hand.erase(g)
 				EnemyDeck.DiscardPile.append(g)
 	
@@ -1552,11 +1553,8 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	Stats.FirePower = randf_range(0.5, 3)
 	Stats.Hull = randf_range(10, 800)
 	Stats.Speed = randf_range(0.5, 3)
-	
-	if (!enemy):
-		Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_2_Main Camera.png")
-	else:
-		Stats.ShipIcon = load("res://Assets/Spaceship/Spaceship_top_Main Camera.png")
+
+	Stats.ShipIcon = load(GetRandomShipIcon())
 		
 	if (!enemy):
 		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain1.png")
@@ -1585,7 +1583,17 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 		
 	return Stats
 
-
+func GetRandomCaptain(Enemy : bool) -> String:
+	var Cpts
+	if (!Enemy):
+		Cpts = ["res://Resources/Captains/PlayerCaptains/Craden.tres", "res://Resources/Captains/PlayerCaptains/Amol.tres", "res://Resources/Captains/PlayerCaptains/Baron.tres", "res://Resources/Captains/PlayerCaptains/Corkan.tres", "res://Resources/Captains/PlayerCaptains/Dimitry.tres", "res://Resources/Captains/PlayerCaptains/Elena.tres", "res://Resources/Captains/PlayerCaptains/Gilian.tres", "res://Resources/Captains/PlayerCaptains/Jor.tres"]
+	else:
+		Cpts = ["res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship2.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship3.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship4.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier1.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier2.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier3.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier4.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip1.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip2.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip3.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip4.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker1.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker2.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker3.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker4.tres", "res://Resources/Captains/EnemyCaptains/LandEnemyFireship1.tres", "res://Resources/Captains/EnemyCaptains/LandEnemyFireship2.tres"]
+	return Cpts.pick_random()
+	
+func GetRandomShipIcon() -> String:
+	var Icons = ["res://Assets/Spaceship/Spaceship_top_2_Main Camera.png", "res://Assets/Spaceship/Spaceship_top_Main Camera.png", "res://Assets/Spaceship/Tanker2.png", "res://Assets/Spaceship/Tanker.png", "res://Assets/Spaceship/Convoy.png", "res://Assets/Spaceship/Scarab.png", "res://Assets/Spaceship/Ship3_001.png", "res://Assets/Spaceship/Ship4_001.png", "res://Assets/Spaceship/ShipElena2.png", "res://Assets/Spaceship/ShipElena.png"]
+	return Icons.pick_random()
 
 func _on_deck_button_pressed() -> void:
 	var Ship = ShipTurns[CurrentTurn]

@@ -17,6 +17,7 @@ var Selecting : bool
 
 signal GameStart(Load : bool)
 signal PrologueStart(Load : bool)
+signal FightStart()
 signal DelSave
 
 signal ShowTutorial(T : bool)
@@ -123,3 +124,10 @@ func _on_dont_show_tutorial_pressed() -> void:
 
 func _on_show_tutorial_pressed() -> void:
 	ShowTutorial.emit(true)
+
+
+func _on_fight_pressed() -> void:
+	if (Selecting):
+		return
+	FightStart.emit()
+	

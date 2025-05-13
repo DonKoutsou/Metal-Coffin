@@ -6,7 +6,7 @@ class_name StartingScreen
 @export var StudioAnim : PackedScene
 @export var GameScene : PackedScene
 @export var IntroGameScene : PackedScene
-
+@export var CageFightGameScene : PackedScene
 
 var StMenu : StartingMenu
 var Wor : World
@@ -48,10 +48,10 @@ func SpawnMenu() -> void:
 	StMenu.connect("GameStart", StartGame)
 	StMenu.connect("PrologueStart", StartPrologue)
 	StMenu.connect("DelSave", DelSave)
+	StMenu.FightStart.connect(StartCageFight)
 	UISoundMan.GetInstance().Refresh()
 
 func StartPrologue(Load : bool) -> void:
-	
 	
 	Wor = IntroGameScene.instantiate() as World
 	if (Load):
@@ -68,6 +68,17 @@ func StartPrologue(Load : bool) -> void:
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
+
+func StartCageFight() -> void:
+	
+	var fight = CageFightGameScene.instantiate() as CageFightWorld
+
+	add_child(fight)
+	await fight.FightTransitionFinished
+	StMenu.queue_free()
+	#$ColorRect.visible = false
+	#$PanelContainer.visible = false
+	fight.FightEnded.connect(FightEnded.bind(fight))
 
 func StartGame(Load : bool) -> void:
 	#TODO enable on full release
@@ -112,6 +123,9 @@ func DelSave() -> void:
 	SaveLoadManager.GetInstance().DeleteSave()
 	#ActionTracker.GetInstance().DeleteSave()
 	
+func FightEnded(Fight : CageFightWorld) -> void:
+	Fight.queue_free()
+	SpawnMenu()
 
 func OnGameEnded() -> void:
 	get_tree().paused = false

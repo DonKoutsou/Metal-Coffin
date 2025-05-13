@@ -29,10 +29,51 @@ func _init() -> void:
 	if (OS.is_debug_build() and CheckForErrors):
 		call_deferred("CheckForIssues")
 
-#func MapStats() -> void:
-	#MappedStats.clear()
-	#for g in CaptainStats:
-		#MappedStats.push_back(g.GetStatName())
+func GetBattleStats() -> BattleShipStats:
+	var stats = BattleShipStats.new()
+	var Hull = _GetStat(STAT_CONST.STATS.HULL).StatBase
+	var Thrust = _GetStat(STAT_CONST.STATS.THRUST).StatBase
+	var Weight = _GetStat(STAT_CONST.STATS.WEIGHT).StatBase
+	var Fp = _GetStat(STAT_CONST.STATS.FIREPOWER).StatBase
+	
+	
+	stats.ShipIcon = ShipIcon
+	stats.CaptainIcon = CaptainPortrait
+	stats.Name = CaptainName
+	var c : Dictionary
+	for g in StartingItems:
+		if (g is ShipPart):
+			for up : ShipPartUpgrade in g.Upgrades:
+				if (up.UpgradeName == STAT_CONST.STATS.HULL):
+					Hull += up.UpgradeAmmount
+					Hull -= up.PenaltyAmmount
+				if (up.UpgradeName == STAT_CONST.STATS.WEIGHT):
+					Weight += up.UpgradeAmmount
+					Weight -= up.PenaltyAmmount
+				if (up.UpgradeName == STAT_CONST.STATS.THRUST):
+					Thrust += up.UpgradeAmmount
+					Thrust -= up.PenaltyAmmount
+				if (up.UpgradeName == STAT_CONST.STATS.FIREPOWER):
+					Fp += up.UpgradeAmmount
+					Fp -= up.PenaltyAmmount
+					
+		for z in g.CardProviding:
+			if (c.has(z)):
+				c[z] += 1
+			else:
+				c[z] = 1
+	for g in Cards:
+		if (c.has(g)):
+			c[g] += 1
+		else:
+			c[g] = 1
+	stats.Hull = Hull
+	stats.Speed = (Thrust * 1000) / Weight
+	stats.FirePower = Fp
+
+	stats.Cards = c
+	stats.Convoy = false
+	return stats
 
 func CheckForIssues() -> void:
 	var Itms : Array[Item] = []

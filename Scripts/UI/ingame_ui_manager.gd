@@ -109,5 +109,8 @@ func _on_control_3_gui_input(event: InputEvent) -> void:
 func ToggleCrtEffect(T : bool) -> void:
 	$Control3/Screen.visible = T
 
+func SetScreenRes(Res : Vector2) -> void:
+	$Control3/Screen.material.set_shader_parameter("res", Res/2)
+
 func _on_flight_manual_pressed() -> void:
 	Manual.visible = true

@@ -57,6 +57,7 @@ OrientationUpDown = false
 Speed = 20.0
 amplitude = 10.0
 waveform_points = 1
+PointRatio = 10.0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 visible = false

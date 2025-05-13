@@ -72,12 +72,12 @@ func DoOffensive(AtackCard : CardStats, DeffenceList : Dictionary[BattleShipStat
 				var tw2 = create_tween()
 				tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.2)
 				
-			call_deferred("SpawnVisual", Viz, AttackCard, DefC, roundi(OriginShip.GetFirePower() * Mod.Damage))
+			call_deferred("SpawnVisual", Viz, AttackCard, DefC, OriginShip.GetFirePower() * Mod.Damage, DeffenceList.keys()[g].Shield)
 			await wait(0.2)
 			
 	AttackCard.KillCard(0.5, false)
 
-func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Damage : float) -> void:
+func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Damage : float, Shield : float) -> void:
 	await wait (0.15)
 	
 	AtackCardDestroyed.emit(AtackCard.global_position + (AtackCard.size / 2))
@@ -89,7 +89,7 @@ func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Damage
 	Visual.SpawnPos = AtackCard.global_position + (AtackCard.size / 2)
 	add_child(Visual)
 	
-	Visual.connect("Reached", TweenEnded.bind(Target , Damage, DeffenceCard))
+	Visual.connect("Reached", TweenEnded.bind(Target , Damage, DeffenceCard, Shield))
 
 func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
 	await wait (0.15)
@@ -117,16 +117,30 @@ func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
 
 
-func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card) -> void:
+func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card, Shield : float) -> void:
 	AtackConnected.emit()
 	if (DeffenceCard == null):
-		var d = DamageFloater.instantiate()
-		d.modulate = Color(1,0,0,1)
-		d.text = var_to_str(Damage).replace(".0", "")
-		add_child(d)
-		d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
-		d.connect("Ended", AnimEnded)
-	
+		var DamageTodo = Damage
+		if (Shield > 0):
+			var shieldDamage = min(Damage, Shield)
+			DamageTodo -= shieldDamage
+			var d = DamageFloater.instantiate()
+			d.modulate = Color(0.42,0.886,0.914)
+			d.text = var_to_str(shieldDamage).replace(".0", "")
+			add_child(d)
+			d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
+			if (DamageTodo == 0):
+				d.connect("Ended", AnimEnded)
+			else:
+				await wait(0.2)
+		if (DamageTodo > 0):
+			var d = DamageFloater.instantiate()
+			d.modulate = Color(1,0,0,1)
+			d.text = var_to_str(Damage).replace(".0", "")
+			add_child(d)
+			d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
+			d.connect("Ended", AnimEnded)
+		
 		if (!fr):
 			UIEventH.OnControlledShipDamaged(Damage)
 	else :

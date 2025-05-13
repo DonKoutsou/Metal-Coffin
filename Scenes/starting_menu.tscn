@@ -588,6 +588,14 @@ action_mode = 0
 text = "- LOAD -
 CAMPAIGN"
 
+[node name="Fight" type="Button" parent="ScreenFrame2/VBoxContainer" groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+text = "CageFight"
+
 [node name="Panel4" type="Panel" parent="ScreenFrame2/VBoxContainer"]
 visible = false
 use_parent_material = true
@@ -663,6 +671,7 @@ mouse_filter = 2
 [connection signal="pressed" from="ScreenFrame2/VBoxContainer/HBoxContainer3/LoadPrologue" to="." method="_on_load_prologue_pressed"]
 [connection signal="pressed" from="ScreenFrame2/VBoxContainer/HBoxContainer/Play2" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="ScreenFrame2/VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="ScreenFrame2/VBoxContainer/Fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="ScreenFrame2/VBoxContainer/Credits" to="." method="On_Credits_Pressed"]
 [connection signal="pressed" from="ScreenFrame2/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ScreenFrame2/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

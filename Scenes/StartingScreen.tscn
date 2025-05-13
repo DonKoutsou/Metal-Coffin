@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqxnjihcai1kd"]
+[gd_scene load_steps=7 format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="PackedScene" uid="uid://cbhf8nh85npqq" path="res://Scenes/World.tscn" id="3_lbc5q"]
 [ext_resource type="PackedScene" uid="uid://delsjvmgmdgcn" path="res://Scenes/starting_menu.tscn" id="3_pxh3m"]
 [ext_resource type="PackedScene" uid="uid://cmdvuq7n6nncl" path="res://Scenes/studio_anim.tscn" id="3_yypyw"]
 [ext_resource type="PackedScene" uid="uid://cid0s6uni7fky" path="res://Scenes/IntroWorld.tscn" id="4_r02ad"]
+[ext_resource type="PackedScene" uid="uid://b575fi0e44gkg" path="res://Scenes/CageFightWorld.tscn" id="6_lhmcv"]
 
 [node name="StartingScreen" type="Node"]
 process_mode = 3
@@ -13,3 +14,4 @@ StartingMenuScene = ExtResource("3_pxh3m")
 StudioAnim = ExtResource("3_yypyw")
 GameScene = ExtResource("3_lbc5q")
 IntroGameScene = ExtResource("4_r02ad")
+CageFightGameScene = ExtResource("6_lhmcv")

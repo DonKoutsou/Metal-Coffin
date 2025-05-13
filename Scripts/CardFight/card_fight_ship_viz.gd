@@ -19,7 +19,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	var Hull = var_to_str(snapped(S.Hull, 0.1)).replace(".0", "")
 	var Shield = var_to_str(snapped(S.Shield, 0.1)).replace(".0", "")
 	var Speed = var_to_str(snapped(S.Speed, 0.1)).replace(".0", "")
-	var Firep = var_to_str(snapped(S.GetFirePower(), 0.1)).replace(".0", "")
+	var Firep = var_to_str(S.GetFirePower()).replace(".0", "")
 	if (S.FirePowerBuff > 0):
 		Firep = "[color=#308a4d]" + Firep + "[/color]"
 	StatLabel.text = "[right]{0}[right]{1}[right]{2}[right]{3}".format([Hull, Shield, Speed, Firep])

@@ -1,0 +1,77 @@
+extends Control
+class_name CageFightWorld
+
+@export_group("Scenes")
+@export var CardFightScene : PackedScene
+@export var ScrUI : ScreenUI
+
+signal FightEnded
+signal FightTransitionFinished
+
+static var Instance : World
+
+static func GetInstance() -> World:
+	return Instance
+
+func _ready() -> void:
+	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	await ScrUI.FullScreenToggleStarted
+	ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	FightTransitionFinished.emit()
+	
+	StartDogFight()
+	#$Inventory.Player = GetMap().GetPlayerShip()
+
+#Dogfight-----------------------------------------------
+var FighingFriendlyUnits : Array[MapShip] = []
+var FighingEnemyUnits : Array[MapShip] = []
+func StartDogFight():
+
+	var CardF = CardFightScene.instantiate() as Card_Fight
+	CardF.connect("CardFightEnded", CardFightEnded)
+	CardF.InitRandomFight(5)
+	#SimulationManager.GetInstance().TogglePause(true)
+	#CardF.SetBattleData(FBattleStats, EBattleStats)
+	#ScrUI.ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	#await ScrUI.FullScreenToggleStarted
+	
+	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
+	#GetMap().GetScreenUi().ToggleControllCover(true)
+	UISoundMan.GetInstance().Refresh()
+	
+func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
+	
+	#GetMap().GetScreenUi().ToggleControllCover(false)
+	#ScrUI.ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	#await ScrUI.FullScreenToggleStarted
+	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
+	FightEnded.emit()
+
+#/////////////////////////////////////////////////////////////
+#SCREEN RESIZING
+const ScreenPos = Vector2(80.0,76.0)
+const OriginalSize = Vector2(842.0, 565.0)
+const FullSize = Vector2(1124.0, 565.0)
+
+func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
+	
+	#$SubViewportContainer.visible = false
+	
+	#var toggle = await _ScreenUI.FullScreenToggleStarted
+	
+	if (NewState == ScreenUI.ScreenState.FULL_SCREEN):
+		$SubViewportContainer.position = ScreenPos
+		$SubViewportContainer.size = FullSize
+		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
+		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(FullSize)
+		
+	else: if (NewState == ScreenUI.ScreenState.HALF_SCREEN):
+		$SubViewportContainer.position = ScreenPos
+		$SubViewportContainer.size = OriginalSize
+		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
+		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(OriginalSize)
+	else:
+		$SubViewportContainer.position = Vector2.ZERO
+		$SubViewportContainer.size = get_viewport().get_visible_rect().size
+		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(false)
+	$SubViewportContainer.visible = true
