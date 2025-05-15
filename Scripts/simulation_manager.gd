@@ -38,7 +38,7 @@ func TogglePause(t : bool) -> void:
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Simulation unpaused")
 	
-	get_child(0).TogglePause(t)
+	#get_child(0).TogglePause(t)
 		
 func SetSimulationSpeed(Speed : float) -> void:
 	simulation_notification.SimSpeedUpdated(Speed)
@@ -56,7 +56,7 @@ func SpeedToggle(t : bool) -> void:
 	else:
 		SimulationSpeed = 0.2
 	
-	get_child(0).SpeedToggle(t)
+	#get_child(0).SpeedToggle(t)
 	#get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	#_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
 	#get_tree().call_group("Clock", "SimulationSpeedChanged", SimulationSpeed)

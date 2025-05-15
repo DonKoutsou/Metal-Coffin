@@ -3,16 +3,20 @@ extends Camera2D
 class_name ShipCamera
 
 @export var Background : Control
-@export var CityLines : MapLineDrawer
+#@export var CityLines : MapLineDrawer
+
+@export var Cloud : Control
+@export var Ground : Control
 
 static var Instance : ShipCamera
 
 signal ZoomChanged(NewVal : float)
+signal PositionChanged(NewVal : float)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
-	$Ground.material.set_shader_parameter("offset", global_position / 1500)
+	Cloud.material.set_shader_parameter("offset", global_position / 1500)
+	Ground.material.set_shader_parameter("offset", global_position / 1500)
 	
 static func GetInstance() -> ShipCamera:
 	return Instance
@@ -24,6 +28,7 @@ var ZoomStageMulti = 0.5
 
 var ZoomTw : Tween
 var prevzoom = Vector2(1,1)
+
 func _HANDLE_ZOOM(zoomval : float):
 	#prevzoom = zoom
 	if (is_instance_valid(ZoomTw)):
@@ -78,25 +83,44 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 func OnZoomChanged(NewZoom : Vector2) -> void:
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, NewZoom.x / 2))
+		
 	get_tree().call_group("LineMarkers", "CamZoomUpdated", NewZoom.x)
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", NewZoom.x)
 	ZoomChanged.emit(NewZoom.x)
 	
 var GridShowing = false
+
+var MapGridTween : Tween
+
 func _UpdateMapGridVisibility():
 	if (zoom.x < 0.5 and !GridShowing):
-		var mtw = create_tween()
-		mtw.tween_property(CityLines, "modulate", Color(1,1,1,1), 0.5)
+		if (is_instance_valid(MapGridTween)):
+			MapGridTween.kill()
+			MapGridTween = null
+		#var mtw = create_tween()
+		#mtw.tween_property(CityLines, "modulate", Color(1,1,1,1), 0.5)
 		#$"../MapLines".visible = true
-		var tw = create_tween()
-		tw.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
+		MapGridTween = create_tween() as Tween
+		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
 		GridShowing = true
+		
+		MapGridTween.finished.connect(Cloud.hide)
+		MapGridTween.finished.connect(Ground.hide)
+		
+		
 	else: if (zoom.x >= 0.5 and GridShowing):
-		var tw = create_tween()
-		tw.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
-		var mtw = create_tween()
-		mtw.tween_property(CityLines, "modulate", Color(1,1,1,0), 0.5)
+		if (is_instance_valid(MapGridTween)):
+			MapGridTween.kill()
+			MapGridTween = null
+		Cloud.show()
+		Ground.show()
+		
+		MapGridTween = create_tween()
+		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
+		#var mtw = create_tween()
+		#mtw.tween_property(CityLines, "modulate", Color(1,1,1,0), 0.5)
 		GridShowing = false
+
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 func UpdateCameraPos(relativeMovement : Vector2):
 	if (FrameTween != null):
@@ -111,8 +135,10 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	if (newpos.y != position.y):
 		position.y = newpos.y
 
-	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
-	$Ground.material.set_shader_parameter("offset", global_position / 1500)
+	Cloud.material.set_shader_parameter("offset", global_position / 1500)
+	Ground.material.set_shader_parameter("offset", global_position / 1500)
+	
+	PositionChanged.emit(position)
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
 func applyshake():
@@ -125,7 +151,7 @@ var time_scale = 1.0  # 1.0 for normal, 2.0 for 2x, etc.
 func _physics_process(delta: float) -> void:
 	if (!SimulationManager.IsPaused()):
 		custom_time += delta * SimulationManager.SimSpeed()
-		$Clouds.material.set_shader_parameter("custom_time", custom_time)
+		Cloud.material.set_shader_parameter("custom_time", custom_time)
 
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
@@ -151,6 +177,17 @@ func _physics_process(delta: float) -> void:
 	
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
+	
+var prev: Vector2 = Vector2.ZERO
+
+# Function to generate a random offset based on the previous offset.
+func RandomOffset2() -> Vector2:
+	var x = clamp(randf_range(prev.x - 0.1, prev.x + 0.1), -10, 10)
+	var y = clamp(randf_range(prev.y - 0.1, prev.y + 0.1), -10, 10)
+	
+	prev = Vector2(x, y)
+	return prev
+
 var stattween : Tween
 
 func ShowStation():

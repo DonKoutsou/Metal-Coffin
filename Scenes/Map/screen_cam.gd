@@ -51,8 +51,8 @@ func EnableMissileShake() -> void:
 	
 func EnableDamageShake(amm : float) -> void:
 	for g in Cabled:
-		g.ApplyShake(amm)
-	$LightPivot1.ApplyShake(amm)
+		g.ApplyShake(min(2, amm))
+	$LightPivot1.ApplyShake(min(2, amm))
 	Shake = true
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")

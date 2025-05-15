@@ -15,11 +15,11 @@
 [ext_resource type="Resource" uid="uid://bjp66pbcmoto5" path="res://Resources/Merch/ProxAmmo.tres" id="10_vs4qv"]
 [ext_resource type="PackedScene" uid="uid://b6gyf4stqfreh" path="res://Resources/Funds/FundsDisplayTown.tscn" id="15_0uykb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
-[ext_resource type="Texture2D" uid="uid://dmjbvypdrdppq" path="res://Assets/TownBg_001.png" id="15_cp5cc"]
-[ext_resource type="AudioStream" uid="uid://co4gxohf2bei6" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
+[ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBg_001.png" id="15_cp5cc"]
+[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/WorkShop/work_shop.tscn" id="17_t244x"]
-[ext_resource type="AudioStream" uid="uid://cloh1gwym8i3a" path="res://Assets/Sounds/workshop.mp3" id="18_box5h"]
-[ext_resource type="Texture2D" uid="uid://sulgpuieqkg0" path="res://Assets/CaptainPortraits/Captain7.png" id="18_vaeb3"]
+[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="18_box5h"]
+[ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="18_vaeb3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
 content_margin_left = 5.0

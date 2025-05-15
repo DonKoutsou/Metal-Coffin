@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_c17ap"]
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="2_mdt2t"]
-[ext_resource type="Texture2D" uid="uid://bkwvhr2kqn8rj" path="res://Assets/Cards/barrage.png" id="2_tpj2d"]
+[ext_resource type="Texture2D" uid="uid://cln0pmvmp4m00" path="res://Assets/Cards/barrage.png" id="2_tpj2d"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_mdt2t"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_3kuj3"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_nwjey"]

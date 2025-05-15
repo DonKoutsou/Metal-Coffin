@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="6_7x2xh"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_ybob7"]
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="7_eydve"]
-[ext_resource type="Texture2D" uid="uid://dwo83bk0vgwq4" path="res://Assets/Spaceship/Scarab.png" id="8_rr16v"]
+[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/Spaceship/Scarab.png" id="8_rr16v"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_adqj8"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]

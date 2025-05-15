@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_c0l3y"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_3stwq"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_bql82"]
-[ext_resource type="Texture2D" uid="uid://d0gebfkpi0seu" path="res://Assets/Spaceship/Tanker.png" id="3_ksk0r"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="3_ksk0r"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="4_5ln6a"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile/Missile.tres" id="4_h61de"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_u75ab"]

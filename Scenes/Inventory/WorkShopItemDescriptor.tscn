@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_bgbkq"]
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_0fjjd"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_q7hfh"]
-[ext_resource type="FontFile" uid="uid://rnxb3tf6tyvv" path="res://Fonts/DOTMBold.TTF" id="4_r68kf"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_r68kf"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://CardHandContainer.gd" id="5_0fjjd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]

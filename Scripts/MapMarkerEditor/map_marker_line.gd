@@ -12,8 +12,8 @@ func UpdateLine(Pos : Vector2, CamZoom : float) -> void:
 	$Label.pivot_offset = $Label.size / 2
 
 func CamZoomUpdated(NewZoom : float) -> void:
-	width = 2 / NewZoom
-	$Label.scale = Vector2(1.5 / NewZoom, 1.5 / NewZoom)
+	width = 2 / (NewZoom * 2)
+	$Label.scale = Vector2(1.5 / (NewZoom * 2), 1.5 / (NewZoom * 2))
 
 func GetSaveData() -> SD_MapMarkerLine:
 	var saveData = SD_MapMarkerLine.new()

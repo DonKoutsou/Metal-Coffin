@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://cdkdu7girot7w"]
 
 [ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://missile_viz.gd" id="1_7v3o6"]
-[ext_resource type="AudioStream" uid="uid://c6tidxyko3npk" path="res://Assets/Sounds/Shield.mp3" id="2_lhd32"]
-[ext_resource type="AudioStream" uid="uid://c8uv70r535p5h" path="res://Assets/Sounds/BeamRev.mp3" id="3_gvfnl"]
+[ext_resource type="AudioStream" uid="uid://dtvbu1dtsfivv" path="res://Assets/Sounds/Shield.mp3" id="2_lhd32"]
+[ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_gvfnl"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Cards/AtackEffects/RevEf.tscn" id="4_24spn"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="5_jip2p"]
-[ext_resource type="AudioStream" uid="uid://7dfbpavh0bp1" path="res://Assets/Sounds/beam-fire-282361.mp3" id="6_820og"]
+[ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="6_820og"]
 [ext_resource type="PackedScene" uid="uid://5tjx6x3nbk1e" path="res://Scenes/Cards/AtackEffects/Buff.tscn" id="7_7v3o6"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]

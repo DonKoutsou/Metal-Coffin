@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://sf8ron8y7g0l"]
 
-[ext_resource type="Texture2D" uid="uid://7g72rs22ia66" path="res://Assets/Cards/EvasiveManeuvers.png" id="1_nlrrw"]
+[ext_resource type="Texture2D" uid="uid://byjwh30dsj4l5" path="res://Assets/Cards/EvasiveManeuvers.png" id="1_nlrrw"]
 [ext_resource type="Script" uid="uid://ddhital5xi55v" path="res://Scripts/CardFight/CounterCardModule.gd" id="2_0wgrv"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_nlrrw"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_nlrrw"]

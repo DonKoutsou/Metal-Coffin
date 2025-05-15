@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://bcyedao3gvdki"]
 
-[ext_resource type="Texture2D" uid="uid://dy6qhqap0supp" path="res://Assets/Cards/Flares.png" id="1_6wv8y"]
+[ext_resource type="Texture2D" uid="uid://cbd6as3e4rwp6" path="res://Assets/Cards/Flares.png" id="1_6wv8y"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_6wv8y"]
 [ext_resource type="Script" uid="uid://ddhital5xi55v" path="res://Scripts/CardFight/CounterCardModule.gd" id="2_q47wn"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_6wv8y"]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://dxkoglcdnoen2"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_gryuy"]
-[ext_resource type="Texture2D" uid="uid://25too0gnnd6a" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
-[ext_resource type="Texture2D" uid="uid://bque475hj2cf1" path="res://Assets/Logos/BG.png" id="2_1bamb"]
+[ext_resource type="Texture2D" uid="uid://8wnfauuuwprh" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
+[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="2_1bamb"]
 [ext_resource type="Script" uid="uid://be7e88egssi03" path="res://Scripts/credits.gd" id="2_xelri"]
-[ext_resource type="Texture2D" uid="uid://bip0di0xn8vbj" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
-[ext_resource type="Texture2D" uid="uid://cuxrlgvenpo5s" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
-[ext_resource type="FontFile" uid="uid://cg1v3rwo18jwh" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
+[ext_resource type="Texture2D" uid="uid://i0ngh8uftjja" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
+[ext_resource type="Texture2D" uid="uid://3ry1vwlq8lr7" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_803yc"]
 light_mode = 1

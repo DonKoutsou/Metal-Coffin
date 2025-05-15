@@ -26,5 +26,5 @@ Tier = 1
 ItemName = "MP-6 \"Cyclone\""
 ItemDesc = "Cyclone enhances missile deployment capabilities, featuring improved targeting systems and increased payload capacity. Compatible with intermediate missile types, Cyclone delivers effective firepower for tactical engagements, ensuring versatility and increased lethality on the battlefield."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_5pt53")]([ExtResource("2_67c8x"), ExtResource("2_67c8x"), ExtResource("2_67c8x"), ExtResource("2_67c8x")])
+CardProviding = Array[ExtResource("1_5pt53")]([ExtResource("2_67c8x"), ExtResource("2_67c8x"), ExtResource("2_67c8x"), ExtResource("2_67c8x"), ExtResource("2_67c8x"), ExtResource("2_67c8x")])
 CanTransfer = false

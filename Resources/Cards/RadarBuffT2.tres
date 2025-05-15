@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://bxeo4i816wq50"]
 
-[ext_resource type="Texture2D" uid="uid://cn5lnqsa571lo" path="res://Assets/Cards/RadarBuff.png" id="1_hgmgd"]
+[ext_resource type="Texture2D" uid="uid://biimea34gc828" path="res://Assets/Cards/RadarBuff.png" id="1_hgmgd"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_hgmgd"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_jigaf"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardStats.gd" id="4_hgmgd"]

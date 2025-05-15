@@ -49,6 +49,9 @@ class_name Card_Fight
 @export var Cloud : ColorRect
 @export var DiscardP : DiscardPile
 @export var DeckP : DeckPile
+@export var PlayerFleetSizeLabel : Label
+@export var EnemyFleetSizeLabel : Label
+
 @export_group("FightSettings")
 @export var StartingCardAmm : int = 5
 @export var MaxCardsInHand : int = 10
@@ -123,7 +126,8 @@ func _ready() -> void:
 
 	
 	ShipTurns.sort_custom(speed_comparator)
-
+	
+	UpdateFleetSizeAmmount()
 	#Create the visualisation for each ship, basicly their stat holder
 	
 	CreateDecks()
@@ -167,6 +171,8 @@ func CheckForReserves() -> void:
 		ShipTurns.sort_custom(speed_comparator)
 		CreateShipVisuals(NewCombatant, false)
 		CreateDecks()
+	
+	UpdateFleetSizeAmmount()
 		
 func CreateDecks() -> void:
 	#Create the deck
@@ -425,9 +431,7 @@ func RunTurn() -> void:
 			HandAmmountLabel.visible = true
 			
 			RestartCards()
-			#var ATime = AtackTime.instantiate() as AtackTimer
-			#CardSelectContainer.get_parent().add_child(ATime)
-			#ATime.connect("Finished", PlayerActionSelectionEnded)
+
 			await PlayerActionPickingEnded
 			ClearCards()
 			
@@ -628,8 +632,8 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 				if (Friendly):
 					DiscardP.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
 					DiscardP.visible = true
-					var pos = await anim.AtackCardDestroyed
-					DiscardP.OnCardDiscarded(pos)
+					
+					anim.AtackCardDestroyed.connect(DiscardP.OnCardDiscarded)
 			
 			for g in TargetList:
 				var HadDef = TargetList[g]["HasDef"]
@@ -641,15 +645,17 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 						if (!Friendly):
 							DiscardP.UpdateDiscardPileAmmount(TargetDeck.DiscardPile.size())
 							DiscardP.visible = true
-							var pos = await anim.DeffenceCardDestroyed
-							DiscardP.OnCardDiscarded(pos)
+							anim.DeffenceCardDestroyed.connect(DiscardP.OnCardDiscarded)
+							
 					if (!Friendly):
 						DamageNeg += Mod.Damage * Ship.GetFirePower()
 			
 			var AtackConnected : bool = false
 			
 			for g in TargetList:
+				print("Atack Started")
 				await anim.AtackConnected
+				print("Atack connected")
 				if (TargetList[g]["HasDef"]):
 					continue
 				else:
@@ -665,7 +671,9 @@ func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
 						HandleModulesEnemy(Action)
 			
 			if (!anim.Fin):
+				print("Animation Started")
 				await anim.AnimationFinished
+				print("Animation Finished")
 			
 			DiscardP.visible = false
 			
@@ -1485,11 +1493,11 @@ func RemoveCard(C : Card) -> void:
 	
 	C.disconnect("OnCardPressed", RemoveCard)
 	
-	var S = DeletableSoundGlobal.new()
-	S.stream = RemoveCardSound
-	S.autoplay = true
-	add_child(S)
-	S.volume_db = -10
+	#var S = DeletableSoundGlobal.new()
+	#S.stream = RemoveCardSound
+	#S.autoplay = true
+	#add_child(S)
+	#S.volume_db = -10
 
 	if (C.CStats.Consume):
 		var ShipCards = ShipTurns[CurrentTurn].Cards
@@ -1541,6 +1549,9 @@ func UpdateReserves(Ship : BattleShipStats, NewEnergy : float) -> void:
 		if (NewEnergy > OldEnergy):
 			ReservesBar.ChangeSegmentAmm(Ship.EnergyReserves)
 
+func UpdateFleetSizeAmmount() -> void:
+	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + PlayerCombatants.size()])
+	EnemyFleetSizeLabel.text = "Fleet Size\n{0}".format([EnemyReserves.size() + EnemyCombatants.size()])
 
 var cloudtime : float = 0
 func _physics_process(delta: float) -> void:

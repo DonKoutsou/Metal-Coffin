@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://dxmkl7xkl3qho"]
 
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="2_5gb4d"]
-[ext_resource type="Texture2D" uid="uid://csrc50gpcghbg" path="res://Assets/Cards/BarrazeProxy.png" id="2_t1kv0"]
+[ext_resource type="Texture2D" uid="uid://c85gq1kvhbjny" path="res://Assets/Cards/BarrazeProxy.png" id="2_t1kv0"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_b1127"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_3yd26"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_rtlnf"]

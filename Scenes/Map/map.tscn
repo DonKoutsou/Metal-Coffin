@@ -8,13 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/tutorial_trigger.tscn" id="9_6an1p"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
-[ext_resource type="Script" uid="uid://cok22sbmibwle" path="res://Scripts/ShipCameraC.cs" id="11_a2ujk"]
+[ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="11_a2ujk"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
-[ext_resource type="Texture2D" uid="uid://clm5eqtlgiqgx" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
-[ext_resource type="Texture2D" uid="uid://3xyvos3xx5wp" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="14_a2ujk"]
-[ext_resource type="Texture2D" uid="uid://bi72i727dp3d2" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="14_h7q0i"]
+[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
+[ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="14_a2ujk"]
+[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="14_h7q0i"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="15_a2ujk"]
-[ext_resource type="Texture2D" uid="uid://b4c7ju8s26q7g" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="15_h7q0i"]
+[ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="15_h7q0i"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
-[ext_resource type="AudioStream" uid="uid://bvscl85iho5qp" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
+[ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="28_x3wib"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
@@ -186,6 +186,7 @@ own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
 size = Vector2i(422, 282)
@@ -201,13 +202,13 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Clouds", "Ground") groups=["Clock"]]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "Ground") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
-Clouds = NodePath("Clouds")
+Cloud = NodePath("Clouds")
 Ground = NodePath("Ground")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]

@@ -4,12 +4,15 @@
 [ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scripts/UI/setting_panel.gd" id="2_clx0a"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="3_os1sx"]
 
-[node name="SettingPanel" type="PanelContainer"]
+[node name="SettingPanel" type="PanelContainer" node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton")]
 use_parent_material = true
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_go7bp")
 script = ExtResource("2_clx0a")
 mat = ExtResource("3_os1sx")
+GlitchButton = NodePath("VBoxContainer/HBoxContainer3/GlitchesCheckBox")
+FullScreenButton = NodePath("VBoxContainer/HBoxContainer/FullScreenCheckBox")
+SoundButton = NodePath("VBoxContainer/HBoxContainer2/SoundCheckBox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 use_parent_material = true
@@ -26,7 +29,7 @@ use_parent_material = true
 layout_mode = 2
 text = "Full Screen"
 
-[node name="FullScreenCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+[node name="FullScreenCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -41,7 +44,7 @@ use_parent_material = true
 layout_mode = 2
 text = "Sound"
 
-[node name="SoundCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2"]
+[node name="SoundCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -56,7 +59,7 @@ use_parent_material = true
 layout_mode = 2
 text = "Screen Glitches"
 
-[node name="GlitchesCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer3"]
+[node name="GlitchesCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer3" groups=["DigitalButtons"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10

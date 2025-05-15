@@ -13,7 +13,7 @@ config_version=5
 config/name="Metal Coffin"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.4", "C#", "Mobile")
+config/features=PackedStringArray("4.4", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Logos/LogoIcon.png"
@@ -35,7 +35,7 @@ AchMan="*res://Scripts/achievement_manager.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/mode=3
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [dotnet]
 

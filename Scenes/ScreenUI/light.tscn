@@ -12,7 +12,7 @@ corner_radius_top_right = 9
 corner_radius_bottom_right = 9
 corner_radius_bottom_left = 9
 shadow_color = Color(0, 0, 0, 1)
-shadow_size = 3
+shadow_size = 2
 
 [sub_resource type="Animation" id="Animation_5nwp6"]
 resource_name = "Flicket"
@@ -79,6 +79,9 @@ mouse_filter = 2
 texture = ExtResource("1_inquq")
 expand_mode = 1
 script = ExtResource("2_vy5gy")
+OffText = ExtResource("1_inquq")
+Red = ExtResource("3_scc6j")
+Green = ExtResource("4_16td6")
 
 [node name="Panel" type="Panel" parent="."]
 show_behind_parent = true

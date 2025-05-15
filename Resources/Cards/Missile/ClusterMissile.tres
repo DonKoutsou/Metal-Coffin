@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://b5dslr0dn6ox8"]
 
-[ext_resource type="Texture2D" uid="uid://d15odwyfgk4ba" path="res://Assets/Cards/Missile.png" id="1_5rv40"]
+[ext_resource type="Texture2D" uid="uid://bi0eebl0i1oyo" path="res://Assets/Cards/Missile.png" id="1_5rv40"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="1_n7xos"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_n7xos"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_k71ny"]

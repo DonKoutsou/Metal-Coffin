@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="7_jx810"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_vqo36"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_3iao1"]
-[ext_resource type="Texture2D" uid="uid://dwo83bk0vgwq4" path="res://Assets/Spaceship/Scarab.png" id="9_o8ada"]
+[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/Spaceship/Scarab.png" id="9_o8ada"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_xnlyj")

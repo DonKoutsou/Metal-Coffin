@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dhfqn405u7iov"]
 
 [ext_resource type="Script" uid="uid://c1614nt44tmoh" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="1_o7oni"]
-[ext_resource type="Texture2D" uid="uid://0koxduux6kw8" path="res://Assets/Spaceship/Ship3_001.png" id="2_lbgr3"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="2_lbgr3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
 bg_color = Color(0.231024, 0.490544, 0.236315, 1)

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://doj6225gf2ja0"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_0otap"]
-[ext_resource type="Texture2D" uid="uid://bwvdqemo26rxi" path="res://Assets/Cards/BarraceIncendiery.png" id="2_0otap"]
+[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="2_0otap"]
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="2_hvn5k"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_0a432"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_uxmcf"]

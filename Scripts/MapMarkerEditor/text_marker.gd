@@ -6,7 +6,7 @@ func SetText(T : String) -> void:
 	$Label.text = T
 	
 func CamZoomUpdated(NewZoom : float) -> void:
-	scale = Vector2(1.5 / NewZoom, 1.5/ NewZoom)
+	scale = Vector2(1.5 / (NewZoom * 2), 1.5/ (NewZoom * 2))
 
 func GetSaveData() -> SD_MapMarkerText:
 	var saveData = SD_MapMarkerText.new()

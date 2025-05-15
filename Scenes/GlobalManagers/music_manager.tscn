@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://btglsgwihfdpy"]
 
 [ext_resource type="Script" uid="uid://cipqdmo5r1cmp" path="res://Scripts/music_manager.gd" id="1_p2pcq"]
-[ext_resource type="AudioStream" uid="uid://y880c3qun0di" path="res://Assets/Music/1 - Wasteland Stars.mp3" id="2_vbvrh"]
-[ext_resource type="AudioStream" uid="uid://do6q4m6nelikt" path="res://Assets/Music/2 - Lost Signal.mp3" id="3_jd605"]
+[ext_resource type="AudioStream" uid="uid://bn0g20tuytfqs" path="res://Assets/Music/1 - Wasteland Stars.mp3" id="2_vbvrh"]
+[ext_resource type="AudioStream" uid="uid://dcnyle06oseb0" path="res://Assets/Music/2 - Lost Signal.mp3" id="3_jd605"]
 
 [node name="MusicManager" type="Node"]
 script = ExtResource("1_p2pcq")

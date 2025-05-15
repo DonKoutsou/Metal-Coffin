@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="7_340aw"]
 [ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="7_rnln8"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="8_o2kyv"]
-[ext_resource type="Texture2D" uid="uid://cpt3mpguni6hk" path="res://Assets/Spaceship/Convoy.png" id="9_bip6n"]
+[ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/Spaceship/Convoy.png" id="9_bip6n"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="9_ha1o8"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]

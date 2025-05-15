@@ -4,8 +4,8 @@ class_name StartingMenu
 
 @export var Black : ColorRect
 @export var CreditsScene : PackedScene
-@export var LoadPrologueButton : Button
-@export var LoadButton : Button
+@export var LoadPrologueLight : Light
+@export var LoadLight : Light
 @export var HintDialogue : Control
 @export var Credits : Control
 @export var NormalUI : Control
@@ -32,9 +32,9 @@ func _ready() -> void:
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(Black, "color", Color(0,0,0,0), 2)
 	
-	LoadPrologueButton.visible = FileAccess.file_exists("user://PrologueSavedGame.tres")
-	LoadButton.visible = FileAccess.file_exists("user://SavedGame.tres")
-		
+	LoadPrologueLight.ToggleNoAnim(true, FileAccess.file_exists("user://PrologueSavedGame.tres"))
+	LoadLight.ToggleNoAnim(true, FileAccess.file_exists("user://SavedGame.tres"))
+	
 	
 	#LoopAmp()
 
@@ -89,8 +89,8 @@ func _on_button_pressed() -> void:
 		return
 		
 	DelSave.emit()
-	LoadPrologueButton.visible = false
-	LoadButton.visible = false
+	LoadPrologueLight.ToggleNoAnim(true, false)
+	LoadLight.ToggleNoAnim(true, false)
 
 
 func _on_load_prologue_pressed() -> void:
