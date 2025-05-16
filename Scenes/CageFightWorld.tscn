@@ -8,8 +8,8 @@
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="10_7mma4"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.791667, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.786753, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.543861, 0.543861, 0.54386, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7mma4"]
 gradient = SubResource("Gradient_a2ujk")
@@ -20,8 +20,7 @@ background_canvas_max_layer = 2
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 3
-tonemap_exposure = 1.2
-tonemap_white = 16.0
+tonemap_exposure = 1.05
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 16.0
@@ -33,8 +32,7 @@ glow_mix = 0.825
 glow_bloom = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
-adjustment_brightness = 1.3
-adjustment_contrast = 0.8
+adjustment_brightness = 1.05
 adjustment_color_correction = SubResource("GradientTexture1D_7mma4")
 
 [sub_resource type="World3D" id="World3D_dgxs4"]

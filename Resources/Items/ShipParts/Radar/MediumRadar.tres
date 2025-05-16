@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://dxg1gr0twgav3"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://dxg1gr0twgav3"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_nfjge"]
 [ext_resource type="Resource" uid="uid://bxeo4i816wq50" path="res://Resources/Cards/RadarBuffT2.tres" id="2_8yoj1"]
 [ext_resource type="Resource" uid="uid://dj6yqk583tsni" path="res://Resources/Cards/RadarBuffSingleT2.tres" id="3_32k6s"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_r1wno"]
 [ext_resource type="Resource" uid="uid://c16lcf8swpkjk" path="res://Resources/Items/ShipParts/Radar/LargeRadar.tres" id="4_6ok2g"]
+[ext_resource type="Resource" uid="uid://cuhyegxnhjaq4" path="res://Resources/Cards/DrawDiscard.tres" id="4_wu8x8"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_ony00"]
 
 [sub_resource type="Resource" id="Resource_g0jur"]
@@ -26,5 +27,5 @@ Tier = 1
 ItemName = "RA-50"
 ItemDesc = "An advanced unit with extended detection capabilities. It uses adaptive filtering algorithms to enhance clarity in threat analysis."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_nfjge")]([ExtResource("2_8yoj1"), ExtResource("3_32k6s")])
+CardProviding = Array[ExtResource("1_nfjge")]([ExtResource("2_8yoj1"), ExtResource("3_32k6s"), ExtResource("4_wu8x8"), ExtResource("4_wu8x8")])
 CanTransfer = true

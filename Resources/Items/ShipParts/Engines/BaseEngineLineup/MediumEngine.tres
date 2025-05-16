@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://k0unclveytur"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://k0unclveytur"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_ro018"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_0ovoj"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_qr78f"]
 [ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/LargeEngine.tres" id="3_u0cql"]
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="3_y0fc0"]
+[ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="4_hehup"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_kd1ru"]
 
 [sub_resource type="Resource" id="Resource_nj3b7"]
@@ -41,5 +42,5 @@ Tier = 1
 ItemName = "EN-250"
 ItemDesc = "This intermediate engine integrates enhanced fuel management systems. Designed for improved performance, it maintains reliability under increased load conditions."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_0ovoj")]([ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("3_y0fc0"), ExtResource("3_y0fc0")])
+CardProviding = Array[ExtResource("2_0ovoj")]([ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("3_y0fc0"), ExtResource("3_y0fc0"), ExtResource("4_hehup"), ExtResource("4_hehup"), ExtResource("4_hehup")])
 CanTransfer = false

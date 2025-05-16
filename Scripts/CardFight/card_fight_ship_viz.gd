@@ -14,20 +14,20 @@ func _ready() -> void:
 	ToggleFire(false)
 
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
-	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
 	var Hull = var_to_str(snapped(S.Hull, 0.1)).replace(".0", "")
 	var Shield = var_to_str(snapped(S.Shield, 0.1)).replace(".0", "")
 	var Speed = var_to_str(snapped(S.Speed, 0.1)).replace(".0", "")
 	var Firep = var_to_str(S.GetFirePower()).replace(".0", "")
-	if (S.FirePowerBuff > 0):
+	if (S.FirePowerBuff > 1):
 		Firep = "[color=#308a4d]" + Firep + "[/color]"
 	StatLabel.text = "[right]{0}[right]{1}[right]{2}[right]{3}".format([Hull, Shield, Speed, Firep])
 	#ShipIcon.flip_v = !Friendly
 	FriendlyPanel.visible = false
 	
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
-	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
 	FriendlyPanel.visible = Friendly
 
@@ -51,10 +51,10 @@ func TweenEnded() -> void:
 	tw.tween_callback(TweenEnded)
 
 func ToggleFire(t : bool) -> void:
-	$GPUParticles2D.visible = t
+	$HBoxContainer/VBoxContainer/TextureRect/GPUParticles2D.visible = t
 
 func IsOnFire() -> bool:
-	return $GPUParticles2D.visible
+	return $HBoxContainer/VBoxContainer/TextureRect/GPUParticles2D.visible
 
 func ShipDestroyed() -> void:
 	var tw = create_tween()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=40 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
@@ -30,38 +30,6 @@
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="30_yhraa"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="31_aiu8p"]
 [ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="34_aiu8p"]
-
-[sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.484, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
-gradient = SubResource("Gradient_a2ujk")
-
-[sub_resource type="Environment" id="Environment_yhraa"]
-background_mode = 3
-background_canvas_max_layer = -1
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 3
-tonemap_white = 16.0
-glow_levels/1 = 16.0
-glow_levels/2 = 16.0
-glow_levels/3 = 16.0
-glow_levels/5 = 0.0
-glow_normalized = true
-glow_intensity = 1.0
-glow_strength = 0.5
-glow_mix = 0.825
-glow_bloom = 1.0
-glow_map_strength = 1.0
-adjustment_enabled = true
-adjustment_contrast = 0.98
-adjustment_saturation = 1.1
-adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
-
-[sub_resource type="World3D" id="World3D_f2au4"]
-environment = SubResource("Environment_yhraa")
 
 [sub_resource type="Gradient" id="Gradient_aiu8p"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
@@ -117,6 +85,10 @@ content_margin_right = 10.0
 content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdq0f"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 bg_color = Color(0.421, 0.887, 0.915, 0.1)
 border_width_left = 50
 border_width_top = 50
@@ -152,8 +124,8 @@ CardPlecementSound = ExtResource("15_0nvmo")
 UIInSound = ExtResource("16_1krry")
 UIOutSound = ExtResource("17_r6l16")
 RemoveCardSound = ExtResource("18_wdur5")
-PlayerCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PlayerCardPlacement")
-SelectedCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements")
+PlayerCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PanelContainer/PlayerCardPlacement")
+SelectedCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/PanelContainer/SelectedCardPlecements")
 AnimationPlecement = NodePath("SubViewport/Control2/Control")
 EnergyBarParent = NodePath("SubViewport/Control2/HBoxContainer")
 EnergyBar = NodePath("SubViewport/Control2/HBoxContainer/HBoxContainer2/SegmentedHP")
@@ -178,7 +150,6 @@ MaxCombatants = 3
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
 own_world_3d = true
-world_3d = SubResource("World3D_f2au4")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 size = Vector2i(1280, 720)
@@ -306,58 +277,39 @@ theme_override_constants/separation = -5
 alignment = 1
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
-custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="SelectedCardPlecements" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xdq0f")
+
+[node name="SelectedCardPlecements" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/PanelContainer"]
+custom_minimum_size = Vector2(678, 228)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_constants/separation = 2
-alignment = 1
-
-[node name="CardPlecement1" type="Panel" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(168, 228)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xdq0f")
-
-[node name="CardPlecement2" type="Panel" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(168, 228)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xdq0f")
-
-[node name="CardPlecement3" type="Panel" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(168, 228)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xdq0f")
-
-[node name="CardPlecement4" type="Panel" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/HBoxContainer2/SelectedCardPlecements"]
-custom_minimum_size = Vector2(168, 228)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xdq0f")
+script = ExtResource("23_yhraa")
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
+alignment = 1
 
-[node name="PlayerCardPlacement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xdq0f")
+
+[node name="PlayerCardPlacement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/VBoxContainer4/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(678, 228)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -513,8 +465,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -215.0
-offset_top = -209.0
+offset_left = -235.0
+offset_top = -247.0
 offset_right = -110.0
 offset_bottom = -34.0
 grow_horizontal = 0
@@ -526,7 +478,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SegmentedHP" parent="SubViewport/Control2/HBoxContainer/HBoxContainer2" instance=ExtResource("21_taaw1")]
-custom_minimum_size = Vector2(83.245, 0)
+custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -575,7 +527,7 @@ blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("34_aiu8p")
 texture_scale = 30.0
-height = 150.0
+height = 200.0
 
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]
 [connection signal="mouse_entered" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_mouse_entered"]

@@ -50,14 +50,13 @@ tonemap_mode = 3
 tonemap_exposure = 1.2
 tonemap_white = 16.0
 glow_levels/1 = 16.0
-glow_levels/2 = 16.0
-glow_levels/3 = 16.0
+glow_levels/3 = 0.0
 glow_levels/5 = 0.0
 glow_normalized = true
 glow_intensity = 1.0
 glow_strength = 0.5
 glow_mix = 0.825
-glow_bloom = 1.0
+glow_bloom = 0.63
 glow_map_strength = 1.0
 adjustment_enabled = true
 adjustment_brightness = 1.3
@@ -185,7 +184,6 @@ disable_3d = true
 own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
-canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
@@ -213,7 +211,6 @@ Ground = NodePath("Ground")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 z_index = -3
-texture_filter = 1
 material = SubResource("ShaderMaterial_28wu2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,7 +223,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
-texture_filter = 1
 material = SubResource("ShaderMaterial_x3wib")
 anchors_preset = 15
 anchor_right = 1.0

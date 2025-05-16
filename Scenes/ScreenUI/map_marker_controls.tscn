@@ -87,7 +87,6 @@ offset_right = 40.0
 offset_bottom = 203.0
 
 [node name="TextureRect2" type="TextureRect" parent="Control"]
-texture_filter = 1
 layout_mode = 0
 offset_left = -289.0
 offset_top = -90.0

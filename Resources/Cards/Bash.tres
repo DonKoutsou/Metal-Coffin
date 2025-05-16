@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=10 format=3 uid="uid://x7tg2mqpgqxm"]
+
+[ext_resource type="Texture2D" uid="uid://bhlgeictwnfyl" path="res://Assets/Cards/Bash.png" id="1_edcp3"]
+[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="2_hvupl"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_edcp3"]
+[ext_resource type="Script" uid="uid://cobl0n2wrxdk" path="res://Scripts/CardFight/SelfDamageModule.gd" id="3_wlvdj"]
+[ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="4_edcp3"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_hvupl"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_dubgi"]
+
+[sub_resource type="Resource" id="Resource_hvupl"]
+script = ExtResource("3_wlvdj")
+Damage = 10.0
+AOE = false
+metadata/_custom_type_script = "uid://cobl0n2wrxdk"
+
+[sub_resource type="Resource" id="Resource_dubgi"]
+script = ExtResource("4_edcp3")
+CounteredBy = ExtResource("2_hvupl")
+Damage = 20.0
+CauseFile = false
+OnSuccesfullAtackModules = Array[ExtResource("3_edcp3")]([SubResource("Resource_hvupl")])
+AOE = false
+metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
+
+[resource]
+script = ExtResource("5_dubgi")
+Icon = ExtResource("1_edcp3")
+CardName = "Bash"
+CardDescription = ""
+Energy = 2
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("4_hvupl")]([])
+OnUseModules = Array[ExtResource("3_edcp3")]([])
+OnPerformModule = SubResource("Resource_dubgi")
+WeapT = 0
+Tier = 1

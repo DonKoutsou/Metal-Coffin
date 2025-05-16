@@ -9,6 +9,8 @@
 [sub_resource type="Resource" id="Resource_o5gji"]
 script = ExtResource("3_fosgn")
 ResupplyAmmount = 1
+CanBeUsedOnOther = false
+SelfUse = true
 AOE = false
 metadata/_custom_type_script = "uid://h6mrpid3a2ps"
 
@@ -16,7 +18,7 @@ metadata/_custom_type_script = "uid://h6mrpid3a2ps"
 script = ExtResource("4_wqvsm")
 Icon = ExtResource("1_wqvsm")
 CardName = "Resupply"
-CardDescription = "Adds 1 Energy"
+CardDescription = ""
 Energy = 0
 AllowDuplicates = true
 Consume = false

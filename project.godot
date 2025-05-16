@@ -182,7 +182,6 @@ CommandLine={
 [rendering]
 
 occlusion_culling/bvh_build_quality=0
-textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 textures/default_filters/use_nearest_mipmap_filter=true

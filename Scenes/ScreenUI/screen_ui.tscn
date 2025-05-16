@@ -330,7 +330,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ScreenFrame" type="TextureRect" parent="NormalScreen"]
-texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15
@@ -665,7 +664,6 @@ frequency = 40.0
 
 [node name="ScreenFrameLong" type="TextureRect" parent="."]
 visible = false
-texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
 anchor_right = 1.0
@@ -763,7 +761,6 @@ expand_mode = 1
 
 [node name="Panel" type="TextureRect" parent="."]
 z_index = 1
-texture_filter = 1
 custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
 anchor_right = 1.0
@@ -861,7 +858,7 @@ color = Color(0.5, 0.5, 0.5, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")
-volume_db = -25.0
+volume_db = -35.0
 pitch_scale = 0.3
 bus = &"MapSounds"
 

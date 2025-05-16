@@ -166,8 +166,8 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 			var CardS = g.duplicate() as CardStats
 			var card = CardScene.instantiate() as Card
 			
-			if (It.CardOptionProviding != null):
-				CardS.SelectedOption = It.CardOptionProviding
+			#if (It.CardOptionProviding != null):
+				#CardS.SelectedOption = It.CardOptionProviding
 			card.SetCardStats(CardS, It.CardProviding.count(g))
 			CardPlecement.add_child(card)
 			#card.Dissable()

@@ -1,6 +1,6 @@
 extends TextureRect
 
-class_name DiscardPile
+class_name DiscardPileUI
 
 @export var CardThing : PackedScene
 

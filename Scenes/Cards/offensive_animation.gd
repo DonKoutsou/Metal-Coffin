@@ -23,7 +23,7 @@ var BuffText : String
 
 var Fin : bool = false
 
-func DoOffensive(AtackCard : CardStats, DeffenceList : Dictionary[BattleShipStats, Dictionary], OriginShip : BattleShipStats, FriendShip : bool) -> void:
+func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Dictionary[BattleShipStats, Dictionary], OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	fr = FriendShip
 	
 	var AttackCard = CardScene.instantiate() as Card
@@ -46,18 +46,16 @@ func DoOffensive(AtackCard : CardStats, DeffenceList : Dictionary[BattleShipStat
 	tw.tween_property(AttackCard, "modulate", Color(1,1,1,1), 0.2)
 	await tw.finished
 	
-	var Mod = AtackCard.OnPerformModule as OffensiveCardModule
-	
 	for g in DeffenceList.values().size():
-			var HasDef = DeffenceList.values()[g]["HasDef"] as bool
+			var Def = DeffenceList.values()[g]["Def"]
 			var Viz = DeffenceList.values()[g]["Viz"] as Control
 			var DefC
-			if (HasDef):
+			if (Def != null):
 				DefC = CardScene.instantiate() as Card
 				DefC.Dissable(true)
 				#var Opts2 : Array[CardOption] = []
-				var Counter = Mod.CounteredBy
-				DefC.SetCardStats(Counter)
+				
+				DefC.SetCardStats(Def)
 				add_child(DefC)
 				if (!FriendShip):
 					var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
@@ -95,6 +93,7 @@ func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
 	await wait (0.15)
 
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
@@ -120,26 +119,14 @@ func wait(secs : float) -> Signal:
 func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card, Shield : float) -> void:
 	AtackConnected.emit()
 	if (DeffenceCard == null):
-		var DamageTodo = Damage
-		if (Shield > 0):
-			var shieldDamage = min(Damage, Shield)
-			DamageTodo -= shieldDamage
-			var d = DamageFloater.instantiate()
-			d.modulate = Color(0.42,0.886,0.914)
-			d.text = var_to_str(shieldDamage).replace(".0", "")
-			add_child(d)
-			d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
-			if (DamageTodo == 0):
-				d.connect("Ended", AnimEnded)
-			else:
-				await wait(0.2)
-		if (DamageTodo > 0):
-			var d = DamageFloater.instantiate()
-			d.modulate = Color(1,0,0,1)
-			d.text = var_to_str(Damage).replace(".0", "")
-			add_child(d)
-			d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
-			d.connect("Ended", AnimEnded)
+		
+		#print("Damage Floater")
+		var d = DamageFloater.instantiate()
+		d.modulate = Color(1,0,0,1)
+		d.text = "Hit"
+		d.connect("Ended", AnimEnded)
+		add_child(d)
+		d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
 		
 		if (!fr):
 			UIEventH.OnControlledShipDamaged(Damage)
@@ -147,9 +134,10 @@ func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card, Shield : 
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
 		d.modulate = Color(1,1,1,1)
+		
+		d.connect("Ended", AnimEnded)
 		add_child(d)
 		d.global_position = (DeffenceCard.global_position + (DeffenceCard.size / 2)) - d.size / 2
-		d.connect("Ended", AnimEnded)
 		DeffenceCard.KillCard(0.5, false)
 		DeffenceCardDestroyed.emit(DeffenceCard.global_position + (DeffenceCard.size / 2))
 		var ShieldEff = DefVisual.instantiate() as BurstParticleGroup2D
@@ -211,6 +199,16 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Con
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
 			await wait(0.2)
+	else : if (Mod is ResupplyModule):
+		BuffText = "Energy +"
+		for Ship in TargetShips:
+			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
+			await wait(0.2)
+	else : if (Mod is ReserveModule):
+		BuffText = "Energy Reserve +"
+		for Ship in TargetShips:
+			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
+			await wait(0.2)
 	
 	DeffenceCard.KillCard(0.5, false)
 	
@@ -254,7 +252,7 @@ func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	
 	Ship.ToggleFire(true)
 	var d = DamageFloater.instantiate() as Floater
-	d.text = "Fire Damage\n- 10"
+	d.text = "Fire Damage"
 	add_child(d)
 	d.global_position = (Ship.global_position + (Ship.size / 2)) - d.size / 2
 	d.Ended.connect(AnimEnded)
@@ -263,7 +261,10 @@ var Finished : bool = false
 
 func AnimEnded() -> void:
 	if (Finished):
+		#print("Tried to finish but already finished")
 		return
 	Finished = true
-	AnimationFinished.emit()
 	Fin = true
+	AnimationFinished.emit()
+	#print("Animation Finised Emitted")
+	

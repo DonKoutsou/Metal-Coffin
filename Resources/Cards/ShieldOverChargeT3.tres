@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
 script = ExtResource("5_8348h")
 Icon = ExtResource("1_dotbb")
 CardName = "Shield Overcharge"
-CardDescription = "Overcharge shields for temporary buff.[p][center][color=#6be2e9]+ 60 SHIELD"
+CardDescription = ""
 Energy = 3
 AllowDuplicates = true
 Consume = false

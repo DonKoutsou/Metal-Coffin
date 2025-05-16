@@ -29,9 +29,15 @@ func ShouldConsume() -> bool:
 	return Consume
 
 func GetDescription() -> String:
+	var Desc = CardDescription
 	if is_instance_valid(OnPerformModule):
-		return CardDescription + " " + OnPerformModule.GetDesc()
-	return CardDescription
+		Desc += OnPerformModule.GetDesc()
+	if (OnUseModules.size() > 0):
+		Desc + "\nOn Use : "
+		for g in OnUseModules:
+			Desc += g.GetDesc() + "\n"
+
+	return Desc
 
 
 enum WeaponType{

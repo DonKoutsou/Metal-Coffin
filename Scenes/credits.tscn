@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxkoglcdnoen2"]
+[gd_scene load_steps=8 format=3 uid="uid://dxkoglcdnoen2"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_gryuy"]
 [ext_resource type="Texture2D" uid="uid://8wnfauuuwprh" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
@@ -8,11 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://3ry1vwlq8lr7" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_803yc"]
-light_mode = 1
-
 [node name="Credits" type="Control"]
-material = SubResource("CanvasItemMaterial_803yc")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +20,6 @@ script = ExtResource("2_xelri")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
-use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +29,6 @@ grow_vertical = 2
 texture = ExtResource("2_1bamb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +38,6 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Developers"
@@ -52,14 +45,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 text = "Koutsouradis Antonis - Main Develompent"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LinkButton2" type="LinkButton" parent="VBoxContainer"]
-use_parent_material = true
 custom_minimum_size = Vector2(300, 21)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -78,12 +69,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Control4" type="Control" parent="VBoxContainer"]
-use_parent_material = true
 custom_minimum_size = Vector2(0, 10.24)
 layout_mode = 2
 
 [node name="Label4" type="Label" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Testers"
@@ -91,21 +80,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label6" type="Label" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 text = "Player2725"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label7" type="Label" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 text = "LuPáš"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Addons Used"
@@ -113,18 +99,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 alignment = 1
 
 [node name="LinkButton2" type="LinkButton" parent="VBoxContainer/HBoxContainer"]
-use_parent_material = true
 custom_minimum_size = Vector2(415, 190)
 layout_mode = 2
 uri = "https://github.com/bitbrain/beehave"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/LinkButton2"]
-use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,14 +118,12 @@ texture = ExtResource("1_r18jl")
 stretch_mode = 6
 
 [node name="LinkButton" type="LinkButton" parent="VBoxContainer/HBoxContainer"]
-use_parent_material = true
 custom_minimum_size = Vector2(224, 190)
 layout_mode = 2
 size_flags_vertical = 3
 uri = "https://github.com/uzkbwza/BurstParticles2D"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/LinkButton"]
-use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,13 +132,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/LinkButton/VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 texture = ExtResource("6_7emq5")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/LinkButton/VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -167,7 +146,6 @@ text = "Burst Particles 2D"
 uppercase = true
 
 [node name="Label5" type="Label" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Textures used"
@@ -175,13 +153,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LinkButton" type="LinkButton" parent="VBoxContainer"]
-use_parent_material = true
 custom_minimum_size = Vector2(1280, 70)
 layout_mode = 2
 uri = "https://ambientcg.com/"
 
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer/LinkButton"]
-use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,12 +170,10 @@ stretch_mode = 5
 
 [node name="Control3" type="Control" parent="VBoxContainer"]
 visible = false
-use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Button" type="Button" parent="VBoxContainer"]
-use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

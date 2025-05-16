@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://cuhyegxnhjaq4"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://cuhyegxnhjaq4"]
 
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="1_8vv6a"]
+[ext_resource type="Texture2D" uid="uid://cvdow8jdssnac" path="res://Assets/Cards/CardDraw.png" id="1_agq3e"]
 [ext_resource type="Script" uid="uid://dlb0lqk4l5qdq" path="res://Scripts/CardFight/DrawModule.gd" id="2_6m3uu"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_6m3uu"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_wn7he"]
@@ -14,9 +15,10 @@ metadata/_custom_type_script = "uid://dlb0lqk4l5qdq"
 
 [resource]
 script = ExtResource("3_6m3uu")
+Icon = ExtResource("1_agq3e")
 CardName = "Draw Discard"
-CardDescription = "Draw 3 discard 1"
-Energy = 3
+CardDescription = ""
+Energy = 2
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_wn7he")]([])

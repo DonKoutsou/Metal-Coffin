@@ -42,7 +42,6 @@ UnderstatUI = NodePath("Control3/UnderStatUI")
 OverStatUI = NodePath("Control3/OverStatUI")
 
 [node name="Control3" type="Control" parent="."]
-texture_filter = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

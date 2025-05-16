@@ -1,6 +1,6 @@
 extends Button
 
-class_name DeckPile
+class_name DeckPileUI
 
 @export var CardThing : PackedScene
 

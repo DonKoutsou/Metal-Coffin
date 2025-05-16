@@ -3,14 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://builhul2oelnc" path="res://Assets/Cards/RadarBuffSingle.png" id="1_sp65p"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_sp65p"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_7jlqq"]
-[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardStats.gd" id="4_sp65p"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_r47o7"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_r47o7"]
 
 [sub_resource type="Resource" id="Resource_7jlqq"]
-script = ExtResource("4_sp65p")
+script = ExtResource("3_r47o7")
 StatToBuff = 0
 BuffDuration = 2
-BuffAmmount = 4.0
+BuffAmmount = 1.5
 CanBeUsedOnOther = true
 AOE = false
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 script = ExtResource("5_r47o7")
 Icon = ExtResource("1_sp65p")
 CardName = "Radar Buff"
-CardDescription = "Buffs One Other Ship.[p][center][color=#f35033] FPWR + 4 [p][center][color=#c19200]Doesn't Stack"
+CardDescription = ""
 Energy = 6
 AllowDuplicates = true
 Consume = false

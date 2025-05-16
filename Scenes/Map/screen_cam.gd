@@ -58,8 +58,8 @@ func EnableDamageShake(amm : float) -> void:
 	$AnimationPlayer.play("Damage")
 	$Boom.play()
 	PauseShake(false)
-	shakestr = max(amm, shakestr)
-	GoDownValue = max(amm, GoDownValue)
+	shakestr = max(min(2, amm), shakestr)
+	GoDownValue = max(min(2, amm), GoDownValue)
 	GoingDown = true
 func DissableShake() -> void:
 	GoingDown = true

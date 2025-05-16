@@ -47,7 +47,7 @@ scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
 [node name="CardFightShipViz" type="Button" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel")]
-custom_minimum_size = Vector2(180, 86)
+custom_minimum_size = Vector2(200, 86)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -69,27 +69,31 @@ StatLabel = NodePath("HBoxContainer/HBoxContainer/RichTextLabel2")
 FriendlyPanel = NodePath("Panel")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 2
-offset_left = 3.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
 offset_top = 3.0
-offset_right = 177.0
-offset_bottom = 83.0
+offset_right = -4.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 174.0
-offset_bottom = 88.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -106,9 +110,15 @@ layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_5ndf2")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/TextureRect"]
+position = Vector2(50, 17)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_on4wq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -144,8 +154,3 @@ text = "[right]100[right]200[right]300[right]400"
 fit_content = true
 scroll_active = false
 text_direction = 1
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(28, 41)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_on4wq")

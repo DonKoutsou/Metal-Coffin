@@ -4,45 +4,50 @@ class_name CardFightShipViz2
 
 @export var ShipNameLabel : Label
 @export var ShipIcon : TextureRect
-@export var StatLabel : RichTextLabel
+@export var HullBar : ProgressBar
+@export var ShieldBar : ProgressBar
 @export var FriendlyPanel : PanelContainer
 @export var SpeedBuff : GPUParticles2D
 @export var FPBuff : GPUParticles2D
 @export var FirePart : GPUParticles2D
+@export var FPLabel : RichTextLabel
+@export var SPDLabel : RichTextLabel
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
 func _ready() -> void:
-	#$Panel.visible = false
-	$HBoxContainer/PanelContainer/HBoxContainer/RichTextLabel.text = StatText
+
 	ToggleFire(false)
 
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
-	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
-	var Hull = var_to_str(snapped(S.Hull, 0.1)).replace(".0", "")
-	var Shield = var_to_str(snapped(S.Shield, 0.1)).replace(".0", "")
-	var Speed = var_to_str(snapped(S.GetSpeed(), 0.1)).replace(".0", "")
-	var Firep = var_to_str(S.GetFirePower()).replace(".0", "")
-	if (S.FirePowerBuff > 0):
-		Firep = "[color=#308a4d]" + Firep + "[/color]"
-	if (S.SpeedBuff > 1):
-		Speed = "[color=#308a4d]" + Speed + "[/color]"
-	#TODO speed debufs
-	#else: if (S.SpeedBuff < 1):
-		#Speed = "[color=#308a4d]" + Speed + "[/color]"
-	if (S.Shield > 0):
-		Shield = "[color=#308a4d]" + Shield + "[/color]"
-	StatLabel.text = "[right]{0}[right]{1}[right]{2}[right]{3}".format([Hull, Shield, Speed, Firep])
+	ShipIcon.get_child(0).texture = S.ShipIcon
+
+	HullBar.max_value = S.Hull
+	ShieldBar.max_value = S.Hull
+	HullBar.value = S.Hull
+	ShieldBar.value = 0
+	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")
+	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
+	
 	ShipIcon.flip_v = !Friendly
+	ShipIcon.get_child(0).flip_v = !Friendly
 	if (Friendly):
 		$HBoxContainer.move_child($HBoxContainer/PanelContainer, 0)
 	else:
+		ShipNameLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		$HBoxContainer.move_child($HBoxContainer/PanelContainer, 1)
 	FriendlyPanel.self_modulate.a = 0
-	
+
+func UpdateStats(S : BattleShipStats) -> void:
+	HullBar.value = S.Hull
+	ShieldBar.value = S.Shield
+	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")
+	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
+
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
-	ShipNameLabel.text = S.Name.substr(0, 3)
+	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
 	FriendlyPanel.visible = Friendly
 
@@ -77,10 +82,12 @@ func TweenEnded() -> void:
 func ToggleFire(t : bool) -> void:
 	FirePart.visible = t
 
-func ToggleDmgBuff(t : bool) -> void:
+func ToggleDmgBuff(t : bool, amm : float) -> void:
+	FPBuff.amount = 5 * amm
 	FPBuff.visible = t
 
-func ToggleSpeedBuff(t : bool) -> void:
+func ToggleSpeedBuff(t : bool, amm : float) -> void:
+	SpeedBuff.amount = 5 * amm
 	SpeedBuff.visible = t
 
 func IsOnFire() -> bool:

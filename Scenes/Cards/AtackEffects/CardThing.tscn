@@ -20,7 +20,7 @@ rotation = -1.5708
 script = ExtResource("1_pjehg")
 CardPlecementSound = ExtResource("2_0lrke")
 speed = 30
-base_curve_intensity = 0.2
+base_curve_intensity = 0.25
 wiggle_amplitude = 0.0
 wiggle_frequency = 0.0
 

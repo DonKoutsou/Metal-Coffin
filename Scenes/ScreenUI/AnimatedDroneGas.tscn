@@ -92,7 +92,6 @@ animations = [{
 }]
 
 [node name="DroneGas" type="AnimatedSprite2D"]
-texture_filter = 1
 position = Vector2(567, 332)
 scale = Vector2(0.42, 0.42)
 sprite_frames = SubResource("SpriteFrames_8cr6m")

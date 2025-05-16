@@ -16,8 +16,8 @@ metadata/_custom_type_script = "uid://civogvyka6amw"
 script = ExtResource("3_7633t")
 Icon = ExtResource("1_0cpai")
 CardName = "Extinguish fires"
-CardDescription = "Extinguishes [color=#ff3c22]fires[/color] on ship"
-Energy = 4
+CardDescription = ""
+Energy = 1
 AllowDuplicates = false
 Consume = false
 RequiredPart = Array[ExtResource("3_0cpai")]([])

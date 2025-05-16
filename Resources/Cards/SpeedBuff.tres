@@ -2,12 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://d3g37qs6mb3rn" path="res://Assets/Cards/Revup.png" id="1_nqbud"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_nqbud"]
-[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardStats.gd" id="3_1vog6"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_r7uwp"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_xycns"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_nqbud"]
 
 [sub_resource type="Resource" id="Resource_r7uwp"]
-script = ExtResource("3_1vog6")
+script = ExtResource("3_r7uwp")
 StatToBuff = 1
 BuffDuration = 2
 BuffAmmount = 1.5
@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 script = ExtResource("4_nqbud")
 Icon = ExtResource("1_nqbud")
 CardName = "Engine Revup"
-CardDescription = "Increace ships speed.[p][center][color=#308a4d] SPEED * 1.5 [p][center][color=#c19200]Doesn't Stack"
+CardDescription = ""
 Energy = 4
 AllowDuplicates = true
 Consume = false

@@ -459,7 +459,7 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary):
 					else:
 						CharInv.RemoveItem(Itm)
 			
-			if (Itm.CardOptionProviding != null):
+			#if (Itm.CardOptionProviding != null):
 				#if it did remove it from dictionary and leave ininside inventory
 				#if (Ammo.has(Itm.CardOptionProviding)):
 					#Ammo[Itm.CardOptionProviding] -= 1
