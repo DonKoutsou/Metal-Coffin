@@ -12,6 +12,7 @@ StatToBuff = 1
 BuffDuration = 2
 BuffAmmount = 1.5
 CanBeUsedOnOther = false
+SelfUse = true
 AOE = false
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 
@@ -19,7 +20,6 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 script = ExtResource("4_nqbud")
 Icon = ExtResource("1_nqbud")
 CardName = "Engine Revup"
-CardDescription = ""
 Energy = 4
 AllowDuplicates = true
 Consume = false

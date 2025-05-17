@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=41 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_defjt"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_5q24q"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="15_0nvmo"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="15_dpyfj"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_1krry"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_yhraa"]
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="17_r6l16"]
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="18_wdur5"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Cards/SegmentedBar/segmented_hp.tscn" id="21_taaw1"]
@@ -102,7 +103,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing_size = 0.215
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBarParent", "EnergyBar", "ReservesBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "Cloud", "DiscardP", "DeckP", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("PlayerCardPlecement", "SelectedCardPlecement", "AnimationPlecement", "EnergyBarParent", "EnergyBar", "ReservesBar", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "Cloud", "DiscardP", "DeckP", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "ShipFallBackButton") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -143,9 +144,11 @@ DiscardP = NodePath("SubViewport/Control2/DiscardPile")
 DeckP = NodePath("SubViewport/Control2/DeckButton")
 PlayerFleetSizeLabel = NodePath("SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/Control/Label")
 EnemyFleetSizeLabel = NodePath("SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/Control/Label")
+ShipFallBackButton = NodePath("SubViewport/Control2/SwitchShip")
 StartingCardAmm = 3
 MaxCardsInHand = 8
 MaxCombatants = 3
+UIEventH = ExtResource("16_yhraa")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -385,7 +388,7 @@ size_flags_vertical = 3
 [node name="Button" type="Button" parent="SubViewport/Control2/TargetSelect/VBoxContainer"]
 visible = false
 layout_mode = 2
-text = "Cancel Move"
+text = "Cancel"
 
 [node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("CardContainer")]
 z_index = 1
@@ -518,6 +521,22 @@ pivot_offset = Vector2(41, 22.5)
 text = "In Hand 3/5"
 horizontal_alignment = 1
 
+[node name="SwitchShip" type="Button" parent="SubViewport/Control2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -246.0
+offset_right = -14.0
+offset_bottom = -192.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "SWITCH
+SHIP"
+
 [node name="Darkness" type="CanvasModulate" parent="SubViewport"]
 color = Color(0, 0, 0, 1)
 
@@ -535,3 +554,4 @@ height = 200.0
 [connection signal="pressed" from="SubViewport/Control2/DeckButton" to="." method="_on_deck_button_pressed"]
 [connection signal="pressed" from="SubViewport/Control2/HBoxContainer/HBoxContainer2/VBoxContainer/PullReserves" to="." method="_on_pull_reserves_pressed"]
 [connection signal="pressed" from="SubViewport/Control2/HBoxContainer/Button" to="." method="PlayerActionSelectionEnded"]
+[connection signal="pressed" from="SubViewport/Control2/SwitchShip" to="." method="_on_switch_ship_pressed"]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_tfvmp"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_31e7m"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/Spaceship/Spaceship_top_2_Main Camera.png" id="3_53340"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_qc60d"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_ucdyq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_nkros"]
@@ -12,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="7_qyt4v"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_jjv71"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_ewcq7"]
+[ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/Spaceship/Ship11.png" id="11_qe0ne"]
 
 [sub_resource type="Resource" id="Resource_4xt1j"]
 script = ExtResource("2_31e7m")
@@ -94,7 +94,7 @@ script = ExtResource("4_nkros")
 CaptainName = "R1"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_tfvmp")
-ShipIcon = ExtResource("3_53340")
+ShipIcon = ExtResource("11_qe0ne")
 CaptainStats = Array[ExtResource("2_31e7m")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym"), SubResource("Resource_45ts5")])
 ShipCallsign = "R1"
 StartingItems = Array[ExtResource("3_ucdyq")]([])

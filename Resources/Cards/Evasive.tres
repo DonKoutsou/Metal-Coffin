@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_0wgrv"]
 script = ExtResource("2_0wgrv")
-CardToCounter = "Barrage"
+CounterType = 0
 AOE = false
 metadata/_custom_type_script = "uid://ddhital5xi55v"
 

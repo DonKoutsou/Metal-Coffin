@@ -7,10 +7,12 @@ class_name BattleShipStats
 @export var Shield : float
 @export var FirePower : float
 @export var FirePowerBuff : float = 1
+@export var FirePowerDeBuff : float = 0
 @export var ShipIcon : Texture
 @export var CaptainIcon : Texture
 @export var Speed : float
 @export var SpeedBuff : float = 1
+@export var SpeedDeBuff : float = 0
 @export var Energy : int
 @export var EnergyReserves : int
 @export var Cards : Dictionary
@@ -19,7 +21,9 @@ class_name BattleShipStats
 @export var Convoy : bool
 
 var FirePowerBuffTime : int = 0
+var FirePowerDeBuffTime : int = 0
 var SpeedBuffTime : int = 0
+var SpeedDeBuffTime : int = 0
 
 func UpdateBuffs() -> Array[String]:
 	var ExpiredBuffs : Array[String]
@@ -31,10 +35,16 @@ func UpdateBuffs() -> Array[String]:
 	if (SpeedBuffTime == 0 and SpeedBuff > 1):
 		SpeedBuff = 1
 		ExpiredBuffs.append("Speed")
+	if (FirePowerDeBuffTime == 0 and FirePowerDeBuff > 0):
+		FirePowerDeBuff = 0
+		ExpiredBuffs.append("DeFirePower")
+	if (SpeedDeBuffTime == 0 and SpeedDeBuff > 0):
+		SpeedDeBuff = 0
+		ExpiredBuffs.append("DeSpeed")
 	return ExpiredBuffs
 
 func GetFirePower() -> float:
-	return FirePower * FirePowerBuff
+	return FirePower * (FirePowerBuff - FirePowerDeBuff)
 
 func GetSpeed() -> float:
-	return Speed * SpeedBuff
+	return Speed * (SpeedBuff - SpeedDeBuff)

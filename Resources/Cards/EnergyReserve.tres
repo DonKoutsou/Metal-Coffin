@@ -9,6 +9,8 @@
 [sub_resource type="Resource" id="Resource_vivg1"]
 script = ExtResource("3_udpuf")
 ReserveAmmount = 3
+CanBeUsedOnOther = false
+SelfUse = true
 AOE = false
 metadata/_custom_type_script = "uid://bchkyl36yo5cq"
 
@@ -16,7 +18,6 @@ metadata/_custom_type_script = "uid://bchkyl36yo5cq"
 script = ExtResource("4_udpuf")
 Icon = ExtResource("1_o4ebt")
 CardName = "Energy Reserve"
-CardDescription = ""
 Energy = 3
 AllowDuplicates = true
 Consume = false

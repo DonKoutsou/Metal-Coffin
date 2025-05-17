@@ -9,6 +9,7 @@
 [sub_resource type="Resource" id="Resource_gl0km"]
 script = ExtResource("3_peqcn")
 CanBeUsedOnOther = false
+SelfUse = true
 AOE = false
 metadata/_custom_type_script = "uid://civogvyka6amw"
 

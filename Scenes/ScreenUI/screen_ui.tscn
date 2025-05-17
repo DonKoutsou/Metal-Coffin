@@ -139,7 +139,7 @@ resource_name = "Damage"
 length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -151,7 +151,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("AudioStreamPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -175,7 +175,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
@@ -199,7 +199,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = true
+tracks/5/enabled = false
 tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
@@ -868,7 +868,7 @@ bus = &"MapSounds"
 
 [node name="Shake" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("39_qac3v")
-volume_db = 10.0
+volume_db = 5.0
 bus = &"MapSounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenCam"]

@@ -9,6 +9,8 @@
 [sub_resource type="Resource" id="Resource_vivg1"]
 script = ExtResource("3_ju8wj")
 ReserveAmmount = 2
+CanBeUsedOnOther = false
+SelfUse = false
 AOE = true
 metadata/_custom_type_script = "uid://bchkyl36yo5cq"
 
@@ -16,7 +18,6 @@ metadata/_custom_type_script = "uid://bchkyl36yo5cq"
 script = ExtResource("5_e2pro")
 Icon = ExtResource("1_qx144")
 CardName = "Energy Share"
-CardDescription = ""
 Energy = 3
 AllowDuplicates = true
 Consume = false

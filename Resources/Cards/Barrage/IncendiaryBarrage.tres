@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://doj6225gf2ja0"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://doj6225gf2ja0"]
 
-[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_0otap"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="2_0otap"]
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="2_hvn5k"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_0a432"]
@@ -9,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_0a432"]
 script = ExtResource("2_hvn5k")
-CounteredBy = ExtResource("1_0otap")
+AtackType = 0
 Damage = 5.0
 CauseFile = true
 OnSuccesfullAtackModules = Array[ExtResource("3_0a432")]([])

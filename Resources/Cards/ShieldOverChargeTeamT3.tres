@@ -10,6 +10,7 @@
 script = ExtResource("3_k4vh0")
 ShieldAmm = 30
 CanBeUsedOnOther = false
+SelfUse = true
 AOE = true
 metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
 

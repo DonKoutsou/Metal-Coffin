@@ -3,7 +3,7 @@ class_name CardStats
 
 @export var Icon : Texture
 @export var CardName : String
-@export_multiline var CardDescription : String
+
 ## Energy consumption of card
 @export var Energy : int
 #@export var Options : Array[CardOption]
@@ -29,7 +29,7 @@ func ShouldConsume() -> bool:
 	return Consume
 
 func GetDescription() -> String:
-	var Desc = CardDescription
+	var Desc = ""
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetDesc()
 	if (OnUseModules.size() > 0):

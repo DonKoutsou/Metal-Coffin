@@ -15,8 +15,6 @@ signal AnimationFinished
 @export var DefVisual : PackedScene
 @export var ShieldVisual : PackedScene
 @export var BuffVisual : PackedScene
-@export_group("Event Handlers")
-@export var UIEventH : UIEventHandler
 
 var fr : bool
 var BuffText : String
@@ -28,13 +26,7 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 	
 	var AttackCard = CardScene.instantiate() as Card
 	AttackCard.Dissable(true)
-	
-	#if (!FriendShip):
-		#$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_END)
-		#AttackCard.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	#else:
-		#$HBoxContainer.set_alignment(BoxContainer.ALIGNMENT_BEGIN)
-		#AttackCard.size_flags_horizontal = Control.SIZE_EXPAND
+
 
 	AttackCard.SetCardStats(AtackCard)
 
@@ -69,13 +61,13 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 				
 				var tw2 = create_tween()
 				tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.2)
-				
-			call_deferred("SpawnVisual", Viz, AttackCard, DefC, OriginShip.GetFirePower() * Mod.Damage, DeffenceList.keys()[g].Shield)
+			
+			call_deferred("SpawnVisual", Viz, AttackCard, DefC)
 			await wait(0.2)
 			
 	AttackCard.KillCard(0.5, false)
 
-func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Damage : float, Shield : float) -> void:
+func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card) -> void:
 	await wait (0.15)
 	
 	AtackCardDestroyed.emit(AtackCard.global_position + (AtackCard.size / 2))
@@ -87,7 +79,7 @@ func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Damage
 	Visual.SpawnPos = AtackCard.global_position + (AtackCard.size / 2)
 	add_child(Visual)
 	
-	Visual.connect("Reached", TweenEnded.bind(Target , Damage, DeffenceCard, Shield))
+	Visual.connect("Reached", TweenEnded.bind(Target , DeffenceCard))
 
 func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
 	await wait (0.15)
@@ -116,7 +108,7 @@ func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
 
 
-func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card, Shield : float) -> void:
+func TweenEnded(Target : Control, DeffenceCard : Card) -> void:
 	AtackConnected.emit()
 	if (DeffenceCard == null):
 		
@@ -128,8 +120,7 @@ func TweenEnded(Target : Control, Damage : float, DeffenceCard : Card, Shield : 
 		add_child(d)
 		d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
 		
-		if (!fr):
-			UIEventH.OnControlledShipDamaged(Damage)
+		
 	else :
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
@@ -177,9 +168,9 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Con
 	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.4)
 
 	if (Mod is BuffModule):
-		if (Mod.StatToBuff == BuffModule.Stat.FIREPOWER):
+		if (Mod.StatToBuff == CardModule.Stat.FIREPOWER):
 			BuffText = "Firepower +"
-		else : if(Mod.StatToBuff == BuffModule.Stat.SPEED):
+		else : if(Mod.StatToBuff == CardModule.Stat.SPEED):
 			BuffText = "Speed +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
@@ -206,6 +197,14 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Con
 			await wait(0.2)
 	else : if (Mod is ReserveModule):
 		BuffText = "Energy Reserve +"
+		for Ship in TargetShips:
+			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
+			await wait(0.2)
+	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
+		if (Mod.StatToDeBuff == CardModule.Stat.FIREPOWER):
+			BuffText = "Firepower -"
+		else : if(Mod.StatToDeBuff == CardModule.Stat.SPEED):
+			BuffText = "Speed -"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
 			await wait(0.2)

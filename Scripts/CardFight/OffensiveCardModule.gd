@@ -4,16 +4,31 @@ class_name OffensiveCardModule
 
 @export var AtackType : AtackTypes
 @export var Damage : float
+@export var ScaleStat : CardModule.Stat
 @export var CauseFile : bool
 @export var OnSuccesfullAtackModules : Array[CardModule]
 
+func GetFinalDamage(Performer : BattleShipStats) -> float:
+	var Dmg : float
+	if (ScaleStat == CardModule.Stat.FIREPOWER):
+		Dmg = Damage * Performer.GetFirePower()
+	else: if (ScaleStat == CardModule.Stat.SPEED):
+		Dmg = Damage * Performer.GetSpeed()
+	return Dmg
+
 func GetDesc() -> String:
+	var TextColor : String
+	if (ScaleStat == Stat.FIREPOWER):
+		TextColor = "color=#f35033"
+	else : if (ScaleStat == Stat.SPEED):
+		TextColor = "color=#308a4d"
+		
 	var Desc = ""
 	if (AOE):
 		Desc = "Damage enemy team"
 	else:
 		Desc = "Damage enemy"
-	Desc += " for [color=#c19200]{0} * FPWR[/color]".format([var_to_str(snapped(Damage, 0.1)).replace(".0", "")])
+	Desc += " for [color=#c19200]{0} * [/color][{2}]{1}[/color]".format([var_to_str(snapped(Damage, 0.1)).replace(".0", ""), CardModule.Stat.keys()[ScaleStat],TextColor])
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#c19200]On Hit : [/color]"
 		for g in OnSuccesfullAtackModules:

@@ -11,7 +11,7 @@ signal EnemySelected(Enemy : BattleShipStats)
 func _ready() -> void:
 	visible = false
 
-func SetEnemies(EnemyList : Array[BattleShipStats]) -> void:
+func SetEnemies(EnemyList : Array[BattleShipStats], AllowMove : bool = false) -> void:
 	for g in EnemyList:
 		var b = ShipVizScene.instantiate() as CardFightShipViz
 		b.SetStats(g, false)
@@ -19,6 +19,7 @@ func SetEnemies(EnemyList : Array[BattleShipStats]) -> void:
 		
 		b.connect("pressed", TargetSelected.bind(g))
 	visible = true
+	$VBoxContainer/Button.visible = AllowMove
 	
 func TargetSelected(Target : BattleShipStats) -> void:
 	for g in ShipVizContainer.get_children():

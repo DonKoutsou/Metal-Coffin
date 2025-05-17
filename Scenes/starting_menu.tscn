@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=53 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -10,14 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="6_eb1s8"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
-[ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/Spaceship/ShipElena2.png" id="7_ol3kq"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
+[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="9_j43p8"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="11_23r0g"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/Spaceship/Tanker2.png" id="12_23r0g"]
 [ext_resource type="Shader" uid="uid://cmen5pp83lhs2" path="res://Shaders/clouds2.gdshader" id="14_7x35f"]
 [ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
-[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="16_2tj7v"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 [ext_resource type="Texture2D" uid="uid://cidal6q7hj1qj" path="res://Assets/UIPiecies/Screen/ButtonCover2_FullQuality.png" id="22_7fs2i"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
@@ -202,7 +203,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 rotation = -1.5708
 pivot_offset = Vector2(15, 15)
-texture = ExtResource("16_2tj7v")
+texture = ExtResource("9_j43p8")
 expand_mode = 1
 
 [node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
@@ -223,7 +224,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 34.0
 pivot_offset = Vector2(15, 15)
-texture = ExtResource("16_2tj7v")
+texture = ExtResource("9_j43p8")
 expand_mode = 1
 
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
@@ -241,11 +242,13 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
 layout_mode = 0
-offset_left = -30.0
+offset_left = -47.0
 offset_top = -30.0
+offset_right = 13.0
+offset_bottom = 30.0
 rotation = -1.5708
 pivot_offset = Vector2(15, 15)
-texture = ExtResource("7_ol3kq")
+texture = ExtResource("11_23r0g")
 expand_mode = 1
 
 [node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
@@ -261,17 +264,17 @@ pivot_offset = Vector2(15, 15)
 [node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4/Control"]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
-offset_left = -4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 34.0
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 68.0
 pivot_offset = Vector2(15, 15)
-texture = ExtResource("7_ol3kq")
+texture = ExtResource("11_23r0g")
 expand_mode = 1
 
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
-position = Vector2(15, 6)
+position = Vector2(30, 9.00005)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -284,12 +287,13 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
 layout_mode = 0
-offset_left = -30.0
-offset_top = 30.0
-offset_bottom = 60.0
+offset_left = -49.0
+offset_top = 47.0
+offset_right = 11.0
+offset_bottom = 107.0
 rotation = -1.5708
 pivot_offset = Vector2(15, 15)
-texture = ExtResource("7_ol3kq")
+texture = ExtResource("12_23r0g")
 expand_mode = 1
 
 [node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
@@ -305,17 +309,17 @@ pivot_offset = Vector2(15, 15)
 [node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5/Control"]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
-offset_left = -4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 34.0
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 68.0
 pivot_offset = Vector2(15, 15)
-texture = ExtResource("7_ol3kq")
+texture = ExtResource("12_23r0g")
 expand_mode = 1
 
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
-position = Vector2(15, 7)
+position = Vector2(30, 9.00005)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -352,6 +356,7 @@ layout_mode = 2
 texture = ExtResource("3_s86m3")
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_2tj7v")
 anchors_preset = 15

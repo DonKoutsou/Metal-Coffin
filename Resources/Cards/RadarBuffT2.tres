@@ -12,6 +12,7 @@ StatToBuff = 0
 BuffDuration = 2
 BuffAmmount = 1.4
 CanBeUsedOnOther = false
+SelfUse = true
 AOE = true
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 
@@ -20,7 +21,7 @@ script = ExtResource("5_301k5")
 Icon = ExtResource("1_hgmgd")
 CardName = "Team Radar Buff"
 CardDescription = ""
-Energy = 6
+Energy = 5
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("3_jigaf")]([])

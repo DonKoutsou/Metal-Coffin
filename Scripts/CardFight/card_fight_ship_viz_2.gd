@@ -8,15 +8,18 @@ class_name CardFightShipViz2
 @export var ShieldBar : ProgressBar
 @export var FriendlyPanel : PanelContainer
 @export var SpeedBuff : GPUParticles2D
+@export var SpeedDeBuff : GPUParticles2D
 @export var FPBuff : GPUParticles2D
+@export var FPDeBuff : GPUParticles2D
 @export var FirePart : GPUParticles2D
 @export var FPLabel : RichTextLabel
 @export var SPDLabel : RichTextLabel
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
-func _ready() -> void:
+signal OnFallbackPressed()
 
+func _ready() -> void:
 	ToggleFire(false)
 
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
@@ -33,6 +36,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	
 	ShipIcon.flip_v = !Friendly
 	ShipIcon.get_child(0).flip_v = !Friendly
+	#$HBoxContainer/PanelContainer/VBoxContainer/PanelContainer2.visible = Friendly
 	if (Friendly):
 		$HBoxContainer.move_child($HBoxContainer/PanelContainer, 0)
 	else:
@@ -54,7 +58,8 @@ func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
 func Dissable() -> void:
 	FriendlyPanel.self_modulate.a = 0
 	Enabled = false
-	ModulateTween.kill()
+	if (is_instance_valid(ModulateTween)):
+		ModulateTween.kill()
 
 var Enabled : bool = false
 
@@ -86,9 +91,15 @@ func ToggleDmgBuff(t : bool, amm : float) -> void:
 	FPBuff.amount = 5 * amm
 	FPBuff.visible = t
 
+func ToggleDmgDebuff(t : bool) -> void:
+	FPDeBuff.visible = t
+
 func ToggleSpeedBuff(t : bool, amm : float) -> void:
 	SpeedBuff.amount = 5 * amm
 	SpeedBuff.visible = t
+
+func ToggleSpeedDebuff(t : bool) -> void:
+	SpeedDeBuff.visible = t
 
 func IsOnFire() -> bool:
 	return FirePart.visible
@@ -98,3 +109,6 @@ func ShipDestroyed() -> void:
 	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
 	await tw.finished
 	queue_free()
+
+func _on_button_pressed() -> void:
+	OnFallbackPressed.emit()
