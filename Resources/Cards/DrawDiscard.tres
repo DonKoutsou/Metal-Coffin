@@ -17,7 +17,6 @@ metadata/_custom_type_script = "uid://dlb0lqk4l5qdq"
 script = ExtResource("3_6m3uu")
 Icon = ExtResource("1_agq3e")
 CardName = "Draw Discard"
-CardDescription = ""
 Energy = 2
 AllowDuplicates = true
 Consume = false

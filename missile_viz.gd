@@ -46,7 +46,7 @@ func _ready() -> void:
 	InitialParticle.burst()
 	await InitialParticle.Finished
 	SoundNode.play()
-	#look_at(Target.global_position + (Target.size / 2))
+	look_at(Target.global_position + (Target.size / 2))
 	set_physics_process(true)
 
 func _physics_process(delta: float) -> void:

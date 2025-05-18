@@ -14,11 +14,13 @@ static func GetInstance() -> World:
 	return Instance
 
 func _ready() -> void:
-	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await ScrUI.FullScreenToggleStarted
-	ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	FightTransitionFinished.emit()
 	
+	ScrUI.ToggleScreenUI(false)
+	ScrUI.ToggleCardFightUI(true)
 	StartDogFight()
 	#$Inventory.Player = GetMap().GetPlayerShip()
 
@@ -49,9 +51,9 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
-const ScreenPos = Vector2(80.0,76.0)
-const OriginalSize = Vector2(842.0, 565.0)
-const FullSize = Vector2(1124.0, 565.0)
+const ScreenPos = Vector2(67.0,62.0)
+const OriginalSize = Vector2(869, 595.0)
+const FullSize = Vector2(1148.0, 595.0)
 
 func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	

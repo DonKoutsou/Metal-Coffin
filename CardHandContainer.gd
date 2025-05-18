@@ -37,6 +37,8 @@ func _sort_children():
 		else:
 			if g.position != new_pos:
 				var tween = get_tree().create_tween()
+				tween.set_ease(Tween.EASE_OUT)
+				tween.set_trans(Tween.TRANS_BACK)
 				tween.tween_property(g, "position", new_pos, 0.25)\
 					.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	

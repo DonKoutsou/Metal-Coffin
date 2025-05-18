@@ -17,7 +17,6 @@ metadata/_custom_type_script = "uid://ceqe8h8b7lrlm"
 script = ExtResource("3_wy8f1")
 Icon = ExtResource("2_l4eym")
 CardName = "Emergency Reload!"
-CardDescription = ""
 Energy = 1
 AllowDuplicates = true
 Consume = false

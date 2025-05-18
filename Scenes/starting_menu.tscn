@@ -21,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 [ext_resource type="Texture2D" uid="uid://cidal6q7hj1qj" path="res://Assets/UIPiecies/Screen/ButtonCover2_FullQuality.png" id="22_7fs2i"]
+[ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="22_23r0g"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
-[ext_resource type="Texture2D" uid="uid://bt5d4jvftjfin" path="res://Assets/UIPiecies/Screen/Screen2_FullQuality.png" id="22_thqps"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="23_thqps"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="23_x4rct"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="24_nwvr6"]
@@ -151,10 +151,10 @@ NormalUI = NodePath("SubViewportContainer/SubViewport/NormalUI")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 76.0
-offset_top = 74.0
-offset_right = -350.0
-offset_bottom = -76.0
+offset_left = 68.0
+offset_top = 63.0
+offset_right = -344.0
+offset_bottom = -63.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -168,7 +168,7 @@ snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(854, 570)
+size = Vector2i(868, 594)
 render_target_update_mode = 4
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/SubViewport"]
@@ -504,7 +504,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("22_thqps")
+texture = ExtResource("22_23r0g")
 expand_mode = 1
 
 [node name="ScreenFrame2" type="TextureRect" parent="."]

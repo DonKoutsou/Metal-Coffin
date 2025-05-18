@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
-[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="2_0dp8t"]
+[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_0dp8t"]
 [ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/InScreenUI/loading_screen.tscn" id="3_0i6dt"]
 [ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/InScreenUI/FleetSparationScene.tscn" id="4_trvh7"]
 [ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/InScreenUI/HappeningUI.tscn" id="5_7no5x"]

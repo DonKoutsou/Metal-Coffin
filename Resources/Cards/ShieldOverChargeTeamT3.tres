@@ -18,7 +18,6 @@ metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
 script = ExtResource("5_45agt")
 Icon = ExtResource("1_pvruc")
 CardName = "Team Shield Overcharge"
-CardDescription = ""
 Energy = 4
 AllowDuplicates = true
 Consume = false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b575fi0e44gkg"]
 
 [ext_resource type="Script" uid="uid://bybwi8eqnkihq" path="res://Scripts/CageFightWorld.gd" id="1_ruv4p"]
-[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/Card_Fight.tscn" id="2_hv6vs"]
+[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_hv6vs"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="8_6fcln"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="8_77y8q"]
 [ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="9_77y8q"]
@@ -56,10 +56,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 80.0
-offset_top = 76.0
-offset_right = -355.0
-offset_bottom = -79.0
+offset_left = 67.0
+offset_top = 62.0
+offset_right = -344.0
+offset_bottom = -63.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -75,7 +75,7 @@ handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(845, 565)
+size = Vector2i(869, 595)
 render_target_update_mode = 4
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" instance=ExtResource("8_77y8q")]

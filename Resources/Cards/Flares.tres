@@ -16,7 +16,6 @@ metadata/_custom_type_script = "uid://ddhital5xi55v"
 script = ExtResource("5_q47wn")
 Icon = ExtResource("1_6wv8y")
 CardName = "Flare"
-CardDescription = ""
 Energy = 2
 AllowDuplicates = true
 Consume = true

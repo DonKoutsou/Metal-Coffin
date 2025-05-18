@@ -16,7 +16,6 @@ metadata/_custom_type_script = "uid://ddhital5xi55v"
 script = ExtResource("4_nlrrw")
 Icon = ExtResource("1_nlrrw")
 CardName = "Evasive Maneuvers"
-CardDescription = ""
 Energy = 3
 AllowDuplicates = true
 Consume = false

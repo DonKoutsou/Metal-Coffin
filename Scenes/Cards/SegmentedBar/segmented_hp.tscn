@@ -47,6 +47,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

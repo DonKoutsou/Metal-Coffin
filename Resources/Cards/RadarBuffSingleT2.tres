@@ -20,7 +20,6 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 script = ExtResource("5_r47o7")
 Icon = ExtResource("1_sp65p")
 CardName = "Radar Buff"
-CardDescription = ""
 Energy = 3
 AllowDuplicates = true
 Consume = false

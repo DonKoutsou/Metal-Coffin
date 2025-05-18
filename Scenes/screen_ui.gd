@@ -22,6 +22,7 @@ class_name ScreenUI
 @export var NormalScreen : Control
 @export var FullScreenFrame : TextureRect
 @export var ScreenPanel : TextureRect
+@export var CardFightUI : ExternalCardFightUI
 
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
@@ -72,6 +73,9 @@ func DoIntroFullScreen(NewStat : ScreenState) -> void:
 	ScreenPanel.visible = false
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
+
+func ToggleCardFightUI(t : bool) -> void:
+	CardFightUI.visible = t
 
 func ToggleFullScreen(NewStat : ScreenState) -> void:
 	#FullScreenToggleStarted.emit()

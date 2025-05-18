@@ -18,7 +18,6 @@ metadata/_custom_type_script = "uid://h6mrpid3a2ps"
 script = ExtResource("4_wqvsm")
 Icon = ExtResource("1_wqvsm")
 CardName = "Resupply"
-CardDescription = ""
 Energy = 0
 AllowDuplicates = true
 Consume = false

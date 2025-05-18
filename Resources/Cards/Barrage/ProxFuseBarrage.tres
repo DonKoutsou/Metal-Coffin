@@ -10,6 +10,7 @@
 script = ExtResource("2_5gb4d")
 AtackType = 2
 Damage = 4.0
+ScaleStat = 0
 CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("3_b1127")]([])
 AOE = false
@@ -19,7 +20,6 @@ metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 script = ExtResource("4_rtlnf")
 Icon = ExtResource("2_t1kv0")
 CardName = "Proximity Fuse Barragge"
-CardDescription = ""
 Energy = 4
 AllowDuplicates = true
 Consume = true

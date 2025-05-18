@@ -125,19 +125,28 @@ func GetCost() -> int:
 		#return Cost + CStats.SelectedOption.EnergyAdd
 	return Cost
 
+var OriginalRot : float
 var TweenHover : Tween
+var RotTweenHover : Tween
 
 func _on_button_mouse_entered() -> void:
 	#if ($Button.disabled):
 		#return
+	
 	z_index = 1
 	
 	if (TweenHover and TweenHover.is_running()):
 		TweenHover.kill()
+	#if (RotTweenHover and RotTweenHover.is_running()):
+		#RotTweenHover.kill()
+	#else:
+		#OriginalRot = rotation
 	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
-
+	#RotTweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
+	#RotTweenHover.tween_property(self,"rotation", 0, 0.55)
+	
 
 func _on_button_mouse_exited() -> void:
 	#if ($Button.disabled):
@@ -145,5 +154,10 @@ func _on_button_mouse_exited() -> void:
 	z_index = 0
 	if (TweenHover and TweenHover.is_running()):
 		TweenHover.kill()
+	#if (RotTweenHover and RotTweenHover.is_running()):
+		#RotTweenHover.kill()
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.55)
+	#RotTweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
+	#RotTweenHover.tween_property(self,"rotation", OriginalRot, 0.55)
+	

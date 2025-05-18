@@ -142,5 +142,5 @@ void fragment(){
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
 	//COLOR.rgb = to_indexed_palette(COLOR.rgb);
-	
+
 }
