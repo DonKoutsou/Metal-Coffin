@@ -62,6 +62,7 @@ texture = ExtResource("1_3h0mn")
 expand_mode = 1
 
 [node name="CardCost" type="Label" parent="."]
+visible = false
 use_parent_material = true
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1

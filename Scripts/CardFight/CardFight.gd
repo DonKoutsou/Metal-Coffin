@@ -111,9 +111,10 @@ var CardSelectSize : float
 
 func _ready() -> void:
 	ExternalUI = ExternalCardFightUI.GetInstacne()
+	ExternalUI.RegisterFight(self)
 	ExternalUI.OnDeckPressed.connect(_on_deck_button_pressed)
 	ExternalUI.OnEndTurnPressed.connect(PlayerActionSelectionEnded)
-	ExternalUI.CardPlayed.connect(OnCardSelected)
+	#ExternalUI.CardPlayed.connect(OnCardSelected)
 	ExternalUI.OnPullReserves.connect(_on_pull_reserves_pressed)
 	MusicManager.GetInstance().SwitchMusic(true)
 	ExternalUI.GetEnergyBar().Init(TurnEnergy)
@@ -772,11 +773,12 @@ func HandleDrawDriscard(Mod : DrawCardModule) -> void:
 	for g in CardsToDraw:
 		
 		var Placed = await PlaceCardInPlayerHand(g)
-		
+		await wait(0.2)
 		DeckP.OnCardDrawn()
 		
 		if (Placed):
-			call_deferred("DoCardPlecementAnimation", g, DeckP.global_position)
+			pass
+			#call_deferred("DoCardPlecementAnimation", g, DeckP.global_position)
 		else:
 			g.queue_free()
 
@@ -1312,7 +1314,7 @@ func DrawCard() -> bool:
 		#call_deferred("DoCardPlecementAnimation", c, ExternalUI.GetDeckkPile().global_position)
 	else:
 		c.queue_free()
-		return false
+		return true
 	
 	return true
 
@@ -1408,7 +1410,7 @@ func PlaceCardInPlayerHand(C : Card) -> bool:
 		PlDeck.DiscardPile.append(Discarded.CStats)
 		DiscardP.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))
 		Discarded.queue_free()
-		ExternalUI.AddCardToHand(C)
+		ExternalUI.OnCardDrawn(C)
 		PlDeck.Hand.erase(Discarded.CStats)
 	
 	UpdateHandAmount(PlDeck.Hand.size())
@@ -1484,16 +1486,17 @@ func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
 #func MoveCard(Val : float, origpos : Vector2, C : Card, C2 : Card)  -> void:
 	#C.global_position = lerp(origpos, C2.global_position, Val)
 
-func OnCardSelected(C : Card) -> void:
+func OnCardSelected(C : Card) -> bool:
 	
 	if (SelectingTarget or EnemyPickingMove or Shuffling):
-		return
+		return false
 	
 	var Ship = ShipTurns[CurrentTurn]
 	
 	if (Ship.Energy < C.GetCost()):
 		ExternalUI.GetEnergyBar().NotifyNotEnough()
-		return
+		PopUpManager.GetInstance().DoFadeNotif("Not enough energy")
+		return false
 	
 	PlayerPerformingMove = true
 	
@@ -1565,6 +1568,8 @@ func OnCardSelected(C : Card) -> void:
 
 	UpdateHandAmount(deck.Hand.size())
 	PlayerPerformingMove = false
+
+	return true
 
 func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 	for Mod in C.OnUseModules.size():
@@ -1681,9 +1686,9 @@ func RemoveCard(C : Card) -> void:
 	c.SetCardStats(C.CStats)
 	#c.connect("OnCardPressed", OnCardSelected)
 	
-	ExternalUI.AddCardToHand(c)
+	ExternalUI.OnCardDrawn(c)
 
-	call_deferred("DoCardPlecementAnimation", c, C.global_position)
+	#call_deferred("DoCardPlecementAnimation", c, C.global_position)
 	
 	C.queue_free()
 

@@ -105,7 +105,7 @@ offset_bottom = 590.0
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 
-[node name="PullReserves" type="TextureButton" parent="."]
+[node name="PullReserves" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
 offset_left = 1177.0
 offset_top = 637.0
@@ -116,7 +116,7 @@ texture_pressed = ExtResource("6_iexgv")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DrawCard" type="TextureButton" parent="."]
+[node name="DrawCard" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
 offset_left = 1041.0
 offset_top = 173.0
@@ -127,7 +127,7 @@ texture_pressed = ExtResource("8_iexgv")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Button" type="TextureButton" parent="." groups=["DigitalButtons"]]
+[node name="Button" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
 offset_left = 1076.0
 offset_top = 327.0
@@ -140,7 +140,7 @@ texture_pressed = ExtResource("5_flupv")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SwitchShip" type="TextureButton" parent="."]
+[node name="SwitchShip" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -158,24 +158,17 @@ texture_pressed = ExtResource("8_iexgv")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PlayInsert" type="PanelContainer" parent="."]
-z_index = 2
+[node name="PlayInsert3" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
 offset_left = 1047.0
-offset_top = 90.0
+offset_top = 266.0
 offset_right = 1237.0
-offset_bottom = 339.0
+offset_bottom = 515.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
 
-[node name="Control" type="Control" parent="PlayInsert"]
-show_behind_parent = true
-layout_mode = 2
-mouse_filter = 2
-
 [node name="DrawInsert" type="PanelContainer" parent="."]
-z_index = 1
 clip_contents = true
 layout_mode = 0
 offset_left = 1047.0
@@ -190,15 +183,20 @@ show_behind_parent = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PlayInsert3" type="PanelContainer" parent="."]
+[node name="PlayInsert" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
 offset_left = 1047.0
-offset_top = 266.0
+offset_top = 90.0
 offset_right = 1237.0
-offset_bottom = 515.0
+offset_bottom = 339.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
+
+[node name="Control" type="Control" parent="PlayInsert"]
+show_behind_parent = true
+layout_mode = 2
+mouse_filter = 2
 
 [connection signal="pressed" from="PullReserves" to="." method="_on_pull_reserves_pressed"]
 [connection signal="pressed" from="DrawCard" to="." method="_on_deck_button_pressed"]

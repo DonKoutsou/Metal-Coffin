@@ -394,6 +394,12 @@ grow_horizontal = 0
 [node name="MapMarkerControls" parent="NormalScreen/ScreenUi" instance=ExtResource("14_ua54b")]
 layout_mode = 1
 
+[node name="Fan" parent="NormalScreen/ScreenUi" instance=ExtResource("33_xl4i0")]
+position = Vector2(965, -116)
+scale = Vector2(1.73438, 1.73438)
+frame_progress = 0.96041
+frequency = 40.0
+
 [node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
@@ -662,12 +668,6 @@ grow_vertical = 1
 visible = false
 layout_mode = 1
 
-[node name="Fan" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
-position = Vector2(982, -156)
-scale = Vector2(1.73438, 1.73438)
-frame_progress = 0.96041
-frequency = 40.0
-
 [node name="ScreenFrameLong" type="TextureRect" parent="."]
 visible = false
 custom_minimum_size = Vector2(0, 38.045)
@@ -810,7 +810,7 @@ z_index = 1
 position = Vector2(640, 360)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../NormalScreen/Fan"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
+Cabled = [NodePath("../NormalScreen/ScreenUi/Fan"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 breath_amplitude = 2.0
 breath_duration = 5.0
 
