@@ -1,42 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b575fi0e44gkg"]
+[gd_scene load_steps=7 format=3 uid="uid://b575fi0e44gkg"]
 
 [ext_resource type="Script" uid="uid://bybwi8eqnkihq" path="res://Scripts/CageFightWorld.gd" id="1_ruv4p"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_hv6vs"]
+[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="3_hve4g"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="8_6fcln"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="8_77y8q"]
 [ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="9_77y8q"]
-[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="10_7mma4"]
-
-[sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.786753, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.543861, 0.543861, 0.54386, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mma4"]
-gradient = SubResource("Gradient_a2ujk")
-
-[sub_resource type="Environment" id="Environment_h7q0i"]
-background_mode = 3
-background_canvas_max_layer = 2
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 3
-tonemap_exposure = 1.05
-glow_levels/1 = 16.0
-glow_levels/2 = 16.0
-glow_levels/3 = 16.0
-glow_levels/5 = 0.0
-glow_normalized = true
-glow_intensity = 1.0
-glow_strength = 0.5
-glow_mix = 0.825
-glow_bloom = 1.0
-glow_map_strength = 1.0
-adjustment_enabled = true
-adjustment_brightness = 1.05
-adjustment_color_correction = SubResource("GradientTexture1D_7mma4")
-
-[sub_resource type="World3D" id="World3D_dgxs4"]
-environment = SubResource("Environment_h7q0i")
 
 [node name="CageFight" type="Control" node_paths=PackedStringArray("ScrUI")]
 process_mode = 3
@@ -70,9 +39,10 @@ stretch = true
 process_mode = 1
 disable_3d = true
 own_world_3d = true
-world_3d = SubResource("World3D_dgxs4")
+world_3d = ExtResource("3_hve4g")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
+anisotropic_filtering_level = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(869, 595)
@@ -86,18 +56,3 @@ layer = 3
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_77y8q")
 autoplay = true
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 3
-follow_viewport_enabled = true
-
-[node name="Screen" type="ColorRect" parent="CanvasLayer2"]
-process_mode = 3
-z_index = 1
-material = ExtResource("10_7mma4")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2

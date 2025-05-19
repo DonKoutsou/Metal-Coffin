@@ -41,7 +41,7 @@ func NotifyNotEnough() -> void:
 		LabelTween.kill()
 	
 	LabelTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
-	LabelTween.tween_property($Control/Label,"scale", Vector2(1.5, 1.5), 0.55)
+	LabelTween.tween_property($Control/Label,"scale", Vector2(1.2, 1.2), 0.55)
 	
 	await LabelTween.finished
 	
@@ -66,7 +66,7 @@ func UpdateAmmount(OldAmmd : int, NewAmm : int) -> void:
 		LabelTween.kill()
 	
 	LabelTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
-	LabelTween.tween_property($Control/Label,"scale", Vector2(1.5, 1.5), 0.55)
+	LabelTween.tween_property($Control/Label,"scale", Vector2(1.2, 1.2), 0.55)
 	
 	await LabelTween.finished
 	

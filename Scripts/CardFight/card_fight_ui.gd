@@ -13,6 +13,7 @@ class_name ExternalCardFightUI
 
 @export var PlayCardInsert : Control
 @export var DrawCardInsert : Control
+@export var DiscardInsert : Control
 
 signal OnDeckPressed
 signal OnShipFallbackPressed
@@ -55,7 +56,6 @@ func ToggleEnergyVisibility(t : bool) -> void:
 	#EnergyBarParent.visible = t
 	pass
 
-
 func _on_deck_button_pressed() -> void:
 	OnDeckPressed.emit()
 
@@ -64,27 +64,24 @@ func InserCardtoPlay(C : Card) -> void:
 	var pos = C.global_position
 	C.get_parent().remove_child(C)
 	add_child(C)
-	if (C.rotation > 0):
-		var RotTw = create_tween()
-		RotTw.set_ease(Tween.EASE_OUT)
-		RotTw.set_trans(Tween.TRANS_QUAD)
-		RotTw.tween_property(C, "rotation", 0, 0.25)
+	
+	C.rotation = 0
 	C.global_position = pos
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
 	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position, 0.5)
 	await Movetw.finished
-	
-	
+
 	var Cont = Control.new()
 	
 	Cont.size = PlayCardInsert.size
+	#Cont.scale.y = 0.8
 	C.get_parent().remove_child(C)
 	PlayCardInsert.add_child(Cont)
 	Cont.add_child(C)
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(15,3)
+	C.position = Vector2(20, -5)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
@@ -103,6 +100,35 @@ func InserCardtoPlay(C : Card) -> void:
 	#Cont.queue_free()
 	#C.queue_free()
 
+func InsertCardToDiscard(C : Card) -> void:
+	var pos = C.global_position
+	C.get_parent().remove_child(C)
+	add_child(C)
+	
+	C.rotation = 0
+	C.global_position = pos
+	var Movetw = create_tween()
+	Movetw.set_ease(Tween.EASE_OUT)
+	Movetw.set_trans(Tween.TRANS_QUAD)
+	Movetw.tween_property(C, "global_position", DiscardInsert.global_position, 0.5)
+	await Movetw.finished
+
+	var Cont = Control.new()
+	
+	Cont.size = DiscardInsert.size
+	#Cont.scale.y = 0.8
+	C.get_parent().remove_child(C)
+	DiscardInsert.add_child(Cont)
+	Cont.add_child(C)
+	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	C.position = Vector2(20, -5)
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_IN)
+	tw.set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(Cont, "size", Vector2(DiscardInsert.size.x, 0), 0.75)
+	await tw.finished
+	
+
 func OnCardDrawn(C : Card) -> void:
 	C.rotation = 0
 	var Cont = Control.new()
@@ -112,7 +138,7 @@ func OnCardDrawn(C : Card) -> void:
 	Cont.add_child(C)
 	Cont.size = DrawCardInsert.size
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(15,3)
+	C.position = Vector2(20, -5)
 	Cont.size = Vector2(DrawCardInsert.size.x, 0)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
@@ -134,4 +160,6 @@ func _on_switch_ship_pressed() -> void:
 
 
 func _on_button_pressed() -> void:
+	if (PlayCardInsert.get_child_count() > 0 or DrawCardInsert.get_child_count() > 0 or DiscardInsert.get_child_count()):
+		return
 	OnEndTurnPressed.emit()

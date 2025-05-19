@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="2_xxwjh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxwjh"]
-bg_color = Color(0.6, 0.6, 0.6, 0.113)
+bg_color = Color(0.110207, 0.110207, 0.110207, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j3ox"]
 

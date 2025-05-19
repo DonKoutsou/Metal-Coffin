@@ -18,12 +18,12 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="17_4tlnx"]
 [ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="18_kegx7"]
-[ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="19_qqkgf"]
-[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="20_phlyc"]
-[ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="21_ynkdq"]
+[ext_resource type="Texture2D" uid="uid://dnutjdpy3la0n" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="19_qcfdq"]
+[ext_resource type="Texture2D" uid="uid://chdov106pirvg" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="20_pw20f"]
+[ext_resource type="Texture2D" uid="uid://jxvcunva5h7a" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="21_qcfdq"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="22_gvlad"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="23_d5rtw"]
-[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://CardHandContainer.gd" id="24_d8sco"]
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="24_d8sco"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="27_rbthh"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="28_ang8x"]
@@ -35,7 +35,7 @@ offsets = PackedFloat32Array(0.52029, 0.550725)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vxorp"]
 noise_type = 3
-frequency = 0.0035
+frequency = 0.0011
 cellular_distance_function = 2
 cellular_return_type = 2
 
@@ -47,13 +47,13 @@ noise = SubResource("FastNoiseLite_vxorp")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f2au4"]
 shader = ExtResource("17_4tlnx")
-shader_parameter/GroundTexture = ExtResource("20_phlyc")
-shader_parameter/GroundTexture2 = ExtResource("21_ynkdq")
+shader_parameter/GroundTexture = ExtResource("20_pw20f")
+shader_parameter/GroundTexture2 = ExtResource("21_qcfdq")
 shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_hn1mp")
-shader_parameter/GroundNormalTexture = ExtResource("19_qqkgf")
+shader_parameter/GroundNormalTexture = ExtResource("19_qcfdq")
 shader_parameter/GroundNormal2Texture = ExtResource("18_kegx7")
 shader_parameter/NormalD = 1.0
-shader_parameter/offset = Vector2(0.865, -1.8)
+shader_parameter/offset = Vector2(2.37, -2.715)
 shader_parameter/Scale1 = Vector2(2.5, 2.5)
 shader_parameter/Scale2 = Vector2(5, 5)
 
@@ -127,9 +127,9 @@ UIEventH = ExtResource("16_734e5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
-own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
+anisotropic_filtering_level = 0
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
@@ -248,7 +248,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_f2au4")
 
 [node name="SelectedCardPlecements" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2"]
-custom_minimum_size = Vector2(400, 228)
+custom_minimum_size = Vector2(300, 228)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

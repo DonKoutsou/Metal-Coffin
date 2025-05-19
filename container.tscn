@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bomenkdbpyd4t"]
 
-[ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://FanCardHandContainer.gd" id="1_wndvp"]
+[ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_wndvp"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_wndvp"]
 [ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="3_vcj71"]
 

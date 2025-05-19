@@ -114,6 +114,7 @@ func _ready() -> void:
 	ExternalUI.RegisterFight(self)
 	ExternalUI.OnDeckPressed.connect(_on_deck_button_pressed)
 	ExternalUI.OnEndTurnPressed.connect(PlayerActionSelectionEnded)
+	ExternalUI.OnShipFallbackPressed.connect(_on_switch_ship_pressed)
 	#ExternalUI.CardPlayed.connect(OnCardSelected)
 	ExternalUI.OnPullReserves.connect(_on_pull_reserves_pressed)
 	MusicManager.GetInstance().SwitchMusic(true)
@@ -1402,14 +1403,17 @@ func PlaceCardInPlayerHand(C : Card) -> bool:
 			PlDeck.DiscardPile.append(C.CStats)
 			DiscardP.OnCardDiscarded(DeckP.global_position)
 			return false
-
+		
+		
+		
 		PlDeck.Hand.append(C.CStats)
 		
 		#var Plecement = PlayerCardPlecement.get_child(ToDiscard)
 		var Discarded : Card = ExternalUI.GetPlayerCardPlecement().get_child(ToDiscard)
+		await ExternalUI.InsertCardToDiscard(Discarded)
 		PlDeck.DiscardPile.append(Discarded.CStats)
 		DiscardP.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))
-		Discarded.queue_free()
+		Discarded.get_parent().queue_free()
 		ExternalUI.OnCardDrawn(C)
 		PlDeck.Hand.erase(Discarded.CStats)
 	
@@ -1539,7 +1543,9 @@ func OnCardSelected(C : Card) -> bool:
 
 	else:
 		var pos = C.global_position
-		C.get_parent().remove_child(C)
+		var parent = C.get_parent()
+		parent.remove_child(C)
+		parent.queue_free()
 		add_child(C)
 		C.global_position = pos
 		C.KillCard(0.5, true)

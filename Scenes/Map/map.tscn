@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=40 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -7,14 +7,15 @@
 [ext_resource type="Resource" uid="uid://1vptbvrlos7" path="res://Resources/MapSpots/CitySpots/FinalCity.tres" id="6_tftes"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/tutorial_trigger.tscn" id="9_6an1p"]
+[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="10_28wu2"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/Hostile_Patrol.tscn" id="11_323je"]
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="11_a2ujk"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Captains/EnemyCaptains/EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
-[ext_resource type="Texture2D" uid="uid://bs53j7ii6wra" path="res://Assets/Sand/Ice003_1K-PNG_NormalGL.png" id="14_a2ujk"]
-[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="14_h7q0i"]
+[ext_resource type="Texture2D" uid="uid://dnutjdpy3la0n" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="14_x3wib"]
+[ext_resource type="Texture2D" uid="uid://chdov106pirvg" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="15_28wu2"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="15_a2ujk"]
-[ext_resource type="Texture2D" uid="uid://boe6676mcgik8" path="res://Assets/Sand/Snow004_1K-PNG_Color.png" id="15_h7q0i"]
+[ext_resource type="Texture2D" uid="uid://jxvcunva5h7a" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="16_445lv"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
@@ -27,44 +28,11 @@
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
 [ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
-[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="28_x3wib"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 _limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, 3.3398, 0, 0]
 point_count = 1
-
-[sub_resource type="Gradient" id="Gradient_x3wib"]
-offsets = PackedFloat32Array(0, 0.791667, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.559888, 0.559888, 0.559887, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2ujk"]
-gradient = SubResource("Gradient_x3wib")
-
-[sub_resource type="Environment" id="Environment_28wu2"]
-background_mode = 3
-background_canvas_max_layer = 2
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 3
-tonemap_exposure = 1.2
-tonemap_white = 16.0
-glow_levels/1 = 16.0
-glow_levels/3 = 0.0
-glow_levels/5 = 0.0
-glow_normalized = true
-glow_intensity = 1.0
-glow_strength = 0.5
-glow_mix = 0.825
-glow_bloom = 0.63
-glow_map_strength = 1.0
-adjustment_enabled = true
-adjustment_brightness = 1.3
-adjustment_contrast = 0.8
-adjustment_color_correction = SubResource("GradientTexture1D_a2ujk")
-
-[sub_resource type="World3D" id="World3D_x3wib"]
-environment = SubResource("Environment_28wu2")
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
@@ -85,10 +53,10 @@ noise = SubResource("FastNoiseLite_eb1s8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28wu2"]
 shader = ExtResource("18_x3wib")
-shader_parameter/GroundTexture = ExtResource("14_h7q0i")
-shader_parameter/GroundTexture2 = ExtResource("15_h7q0i")
+shader_parameter/GroundTexture = ExtResource("15_28wu2")
+shader_parameter/GroundTexture2 = ExtResource("16_445lv")
 shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_445lv")
-shader_parameter/GroundNormalTexture = ExtResource("14_a2ujk")
+shader_parameter/GroundNormalTexture = ExtResource("14_x3wib")
 shader_parameter/GroundNormal2Texture = ExtResource("13_6an1p")
 shader_parameter/NormalD = 1.0
 shader_parameter/offset = Vector2(0, 0)
@@ -161,9 +129,10 @@ stretch = true
 process_mode = 1
 disable_3d = true
 own_world_3d = true
-world_3d = SubResource("World3D_x3wib")
+world_3d = ExtResource("10_28wu2")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
+anisotropic_filtering_level = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(869, 595)
@@ -184,6 +153,7 @@ disable_3d = true
 own_world_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
+anisotropic_filtering_level = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
@@ -285,20 +255,5 @@ layer = 3
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_h7q0i")
 autoplay = true
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 3
-follow_viewport_enabled = true
-
-[node name="Screen" type="ColorRect" parent="CanvasLayer2"]
-process_mode = 3
-z_index = 1
-material = ExtResource("28_x3wib")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [connection signal="GUI_Input" from="SubViewportContainer/ViewPort/InScreenUI" to="." method="_MAP_INPUT"]

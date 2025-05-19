@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cjbda0fdx38c4"]
 
-[ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://FanCardHandContainer.gd" id="1_8e13a"]
+[ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scripts/CardFight/card_fight_ui.gd" id="1_u6pkr"]
 [ext_resource type="Texture2D" uid="uid://bwbllo7gspe55" path="res://Assets/UIPiecies/Screen/ButtonCover3_FullQuality.png" id="2_fje4l"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="4_c6mlu"]
@@ -18,11 +18,12 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbx4b"]
 draw_center = false
-border_width_top = 6
+border_width_top = 8
 border_color = Color(0, 0, 0, 1)
 border_blend = true
+corner_detail = 1
 
-[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert")]
+[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,6 +37,7 @@ EnergyBar = NodePath("w")
 ReservesBar = NodePath("SegmentedHP2")
 PlayCardInsert = NodePath("PlayInsert/Control")
 DrawCardInsert = NodePath("DrawInsert/Control")
+DiscardInsert = NodePath("DiscardInsert/Control")
 
 [node name="ScreenFrame2" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 38.045)
@@ -54,17 +56,16 @@ texture = ExtResource("2_fje4l")
 expand_mode = 1
 
 [node name="PlayerCardPlacement" type="Container" parent="."]
-custom_minimum_size = Vector2(350, 228)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -382.0
-offset_top = -219.0
-offset_right = 96.0
-offset_bottom = 9.0
+offset_left = -385.0
+offset_top = -235.0
+offset_right = 99.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -83,9 +84,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 1067.0
-offset_top = 478.0
+offset_top = 509.0
 offset_right = 1106.0
-offset_bottom = 651.0
+offset_bottom = 650.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_vuvmf")
@@ -98,8 +99,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1176.0
-offset_top = 478.0
+offset_left = 1177.0
+offset_top = 509.0
 offset_right = 1215.0
 offset_bottom = 590.0
 size_flags_vertical = 3
@@ -107,10 +108,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 
 [node name="PullReserves" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
-offset_left = 1177.0
+offset_left = 1213.0
 offset_top = 637.0
-offset_right = 1212.0
-offset_bottom = 654.0
+offset_right = 1230.0
+offset_bottom = 672.0
+rotation = 1.57079
 texture_normal = ExtResource("5_vuvmf")
 texture_pressed = ExtResource("6_iexgv")
 ignore_texture_size = true
@@ -158,22 +160,27 @@ texture_pressed = ExtResource("8_iexgv")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PlayInsert3" type="PanelContainer" parent="."]
+[node name="DiscardInsert" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 1047.0
+offset_left = 1041.0
 offset_top = 266.0
-offset_right = 1237.0
+offset_right = 1241.0
 offset_bottom = 515.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
 
+[node name="Control" type="Control" parent="DiscardInsert"]
+show_behind_parent = true
+layout_mode = 2
+mouse_filter = 2
+
 [node name="DrawInsert" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 1047.0
+offset_left = 1040.0
 offset_top = 200.0
-offset_right = 1237.0
+offset_right = 1243.0
 offset_bottom = 449.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
@@ -186,9 +193,9 @@ mouse_filter = 2
 [node name="PlayInsert" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 1047.0
+offset_left = 1043.0
 offset_top = 90.0
-offset_right = 1237.0
+offset_right = 1240.0
 offset_bottom = 339.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
