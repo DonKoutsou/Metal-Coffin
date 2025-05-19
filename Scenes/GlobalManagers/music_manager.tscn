@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://c4s3om5jjrkng" path="res://Assets/Music/4- For The Cause.mp3" id="4_jd605"]
 
 [node name="MusicManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_p2pcq")
 AmbientMusic = Array[AudioStream]([ExtResource("2_vbvrh"), ExtResource("3_jd605")])
 FightMusic = ExtResource("4_jd605")

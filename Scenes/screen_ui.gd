@@ -233,9 +233,14 @@ func Sim_Speed_Released() -> void:
 func Inventory_Pressed() -> void:
 	EventHandler.OnInventoryPressed()
 
-
+var ScreenItemsStateBeforePause : bool
 func Pause_Pressed() -> void:
+	if (get_tree().paused):
+		ScreenItemsStateBeforePause = _ScreenItems.visible
+	else:
+		_ScreenItems.visible = ScreenItemsStateBeforePause
 	EventHandler.OnPausePressed()
+	
 
 func OnControlledShipDamaged(DamageAmm : float) -> void:
 	Cam.EnableDamageShake(DamageAmm / 10)

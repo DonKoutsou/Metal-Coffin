@@ -1,16 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjbda0fdx38c4"]
+[gd_scene load_steps=19 format=3 uid="uid://cjbda0fdx38c4"]
 
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scripts/CardFight/card_fight_ui.gd" id="1_u6pkr"]
+[ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="2_c6mlu"]
 [ext_resource type="Texture2D" uid="uid://bwbllo7gspe55" path="res://Assets/UIPiecies/Screen/ButtonCover3_FullQuality.png" id="2_fje4l"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="4_c6mlu"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Cards/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
+[ext_resource type="AudioStream" uid="uid://ccyskr8jt1vq6" path="res://Assets/Sounds/cash2.mp3" id="5_anehw"]
 [ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality_pressed.png" id="5_flupv"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="5_lleca"]
 [ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="5_vuvmf"]
 [ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="6_iexgv"]
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="7_vuvmf"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="8_iexgv"]
+[ext_resource type="AudioStream" uid="uid://bj6ftgg07o4t0" path="res://Assets/Sounds/CardIn.mp3" id="12_rpmjo"]
+[ext_resource type="AudioStream" uid="uid://8pdqtyhjkcvr" path="res://Assets/Sounds/CardOut2.mp3" id="13_w3ip8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vuvmf"]
 
@@ -38,6 +42,10 @@ ReservesBar = NodePath("SegmentedHP2")
 PlayCardInsert = NodePath("PlayInsert/Control")
 DrawCardInsert = NodePath("DrawInsert/Control")
 DiscardInsert = NodePath("DiscardInsert/Control")
+CardInsertSound = ExtResource("13_w3ip8")
+CardOutSound = ExtResource("12_rpmjo")
+CardDiscardSound = ExtResource("5_anehw")
+CardSound = ExtResource("2_c6mlu")
 
 [node name="ScreenFrame2" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 38.045)
@@ -108,10 +116,10 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 
 [node name="PullReserves" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
-offset_left = 1213.0
-offset_top = 637.0
-offset_right = 1230.0
-offset_bottom = 672.0
+offset_left = 1217.0
+offset_top = 632.0
+offset_right = 1243.0
+offset_bottom = 671.0
 rotation = 1.57079
 texture_normal = ExtResource("5_vuvmf")
 texture_pressed = ExtResource("6_iexgv")
@@ -120,10 +128,10 @@ stretch_mode = 0
 
 [node name="DrawCard" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
-offset_left = 1041.0
-offset_top = 173.0
-offset_right = 1076.0
-offset_bottom = 190.0
+offset_left = 1042.0
+offset_top = 172.0
+offset_right = 1083.0
+offset_bottom = 191.0
 texture_normal = ExtResource("7_vuvmf")
 texture_pressed = ExtResource("8_iexgv")
 ignore_texture_size = true
@@ -131,10 +139,10 @@ stretch_mode = 0
 
 [node name="Button" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
-offset_left = 1076.0
-offset_top = 327.0
-offset_right = 1092.0
-offset_bottom = 364.0
+offset_left = 1071.0
+offset_top = 323.0
+offset_right = 1097.0
+offset_bottom = 368.0
 size_flags_vertical = 4
 theme = ExtResource("5_lleca")
 texture_normal = ExtResource("4_c6mlu")
@@ -149,10 +157,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -87.0
-offset_top = -394.0
-offset_right = -71.0
-offset_bottom = -356.0
+offset_left = -93.0
+offset_top = -398.0
+offset_right = -65.0
+offset_bottom = -352.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("7_vuvmf")
@@ -194,9 +202,9 @@ mouse_filter = 2
 clip_contents = true
 layout_mode = 0
 offset_left = 1043.0
-offset_top = 90.0
+offset_top = 105.0
 offset_right = 1240.0
-offset_bottom = 339.0
+offset_bottom = 354.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
 

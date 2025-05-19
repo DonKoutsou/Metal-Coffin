@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=17 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="1_7mr5f"]
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scripts/CardFight/card.gd" id="1_vr3r8"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
+[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/UIPiecies/Screen/card.png" id="3_7mr5f"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="4_rd7hj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
@@ -180,6 +181,22 @@ icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_7mr5f")
+expand_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 use_parent_material = true
 layout_mode = 1
@@ -198,18 +215,17 @@ theme_override_constants/separation = 0
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 10
 
 [node name="CardCost" type="Label" parent="VBoxContainer/HBoxContainer"]
 use_parent_material = true
-custom_minimum_size = Vector2(10, 0)
+custom_minimum_size = Vector2(19, 0)
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "1"
-horizontal_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/CardCost"]
@@ -221,10 +237,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = -58.0
-offset_right = 28.0
-offset_bottom = -2.0
+offset_left = -29.5
+offset_top = -50.0
+offset_right = 26.5
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -237,7 +253,7 @@ use_parent_material = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 16
 text = "Incindiary Barrage"
 vertical_alignment = 1
 autowrap_mode = 2
@@ -262,8 +278,8 @@ mouse_filter = 2
 [node name="CardDesc" type="RichTextLabel" parent="VBoxContainer/Control"]
 use_parent_material = true
 layout_mode = 2
-offset_left = -8.0
-offset_right = 166.0
+offset_left = -2.0
+offset_right = 160.0
 offset_bottom = 89.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

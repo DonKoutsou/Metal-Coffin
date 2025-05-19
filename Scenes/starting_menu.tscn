@@ -198,6 +198,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -243,6 +244,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -288,6 +290,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -563,10 +566,10 @@ offset_bottom = 313.0
 
 [node name="Fight" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 165.0
-offset_top = 358.0
-offset_right = 201.0
-offset_bottom = 374.0
+offset_left = 157.0
+offset_top = 353.0
+offset_right = 209.0
+offset_bottom = 378.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -577,10 +580,10 @@ stretch_mode = 0
 
 [node name="Credits" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 196.0
-offset_top = 602.0
-offset_right = 213.0
-offset_bottom = 641.0
+offset_left = 184.0
+offset_top = 590.0
+offset_right = 211.0
+offset_bottom = 640.0
 size_flags_vertical = 3
 action_mode = 0
 texture_normal = ExtResource("27_s5mvh")
@@ -606,7 +609,14 @@ offset_right = 44.0
 offset_bottom = 448.0
 button_pressed = true
 
-[node name="GlitchesCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="2"]
+[node name="SoundCheckBox2" parent="ScreenFrame2/SettingPanel2/Control" index="2"]
+offset_left = 201.0
+offset_top = 412.0
+offset_right = 218.0
+offset_bottom = 451.0
+button_pressed = true
+
+[node name="GlitchesCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="3"]
 offset_left = 28.0
 offset_top = 449.0
 offset_right = 45.0
@@ -614,10 +624,10 @@ offset_bottom = 488.0
 
 [node name="Button" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 42.0
-offset_top = 533.0
-offset_right = 59.0
-offset_bottom = 571.0
+offset_left = 38.0
+offset_top = 517.0
+offset_right = 61.0
+offset_bottom = 575.0
 size_flags_horizontal = 3
 texture_normal = ExtResource("28_rjgxf")
 texture_pressed = ExtResource("29_4ybsj")
@@ -626,10 +636,10 @@ stretch_mode = 0
 
 [node name="Exit" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 42.0
-offset_top = 602.0
-offset_right = 59.0
-offset_bottom = 640.0
+offset_left = 41.0
+offset_top = 589.0
+offset_right = 68.0
+offset_bottom = 639.0
 size_flags_vertical = 3
 action_mode = 0
 texture_normal = ExtResource("28_6nrcu")

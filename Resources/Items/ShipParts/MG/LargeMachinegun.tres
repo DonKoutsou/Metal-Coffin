@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" load_steps=6 format=3 uid="uid://d3ll4cruuw7vf"]
 
-[ext_resource type="Resource" uid="uid://5t5xwv6k5qea" path="res://Resources/Cards/Barrage/BarrageT3.tres" id="2_7no4a"]
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="2_7no4a"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_cejtf"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="4_7no4a"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_oaj4l"]

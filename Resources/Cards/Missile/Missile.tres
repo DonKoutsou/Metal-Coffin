@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_nciiu"]
 script = ExtResource("3_03nyl")
 AtackType = 0
-Damage = 6.0
+Damage = 14.0
 ScaleStat = 0
 CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("3_30ydj")]([])

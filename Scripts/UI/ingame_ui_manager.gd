@@ -82,7 +82,7 @@ func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused
 	PauseContainer.visible = !paused
-	EventHandler.OnScreenUIToggled(paused)
+	#EventHandler.OnScreenUIToggled(paused)
 	
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save()

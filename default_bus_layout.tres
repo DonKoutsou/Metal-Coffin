@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://c3nyxeslcljc8"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://c3nyxeslcljc8"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_4chtb"]
 resource_name = "Reverb"
@@ -6,44 +6,36 @@ damping = 0.33
 spread = 0.31
 hipass = 0.2
 
-[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_oia26"]
-resource_name = "PitchShift"
-pitch_scale = 0.75
-oversampling = 6
-fft_size = 0
-
-[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_6ig65"]
-resource_name = "PitchShift"
-pitch_scale = 0.1
-
 [resource]
-bus/1/name = &"MapSounds"
+bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectReverb_4chtb")
-bus/1/effect/0/enabled = true
-bus/2/name = &"UI"
+bus/2/name = &"Sounds"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
-bus/2/send = &"MapSounds"
-bus/3/name = &"Music"
+bus/2/send = &"Master"
+bus/3/name = &"MapSounds"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.00282288
-bus/3/send = &"Master"
-bus/3/effect/0/effect = SubResource("AudioEffectPitchShift_oia26")
-bus/3/effect/0/enabled = false
-bus/4/name = &"Engine"
+bus/3/volume_db = 0.0
+bus/3/send = &"Sounds"
+bus/3/effect/0/effect = SubResource("AudioEffectReverb_4chtb")
+bus/3/effect/0/enabled = true
+bus/4/name = &"UI"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
 bus/4/volume_db = 0.0
 bus/4/send = &"MapSounds"
-bus/4/effect/0/effect = SubResource("AudioEffectPitchShift_6ig65")
-bus/4/effect/0/enabled = false
+bus/5/name = &"Engine"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Sounds"

@@ -7,13 +7,15 @@ class_name SettingsPanel
 @export var GlitchButton : Control
 @export var FullScreenButton : Control
 @export var SoundButton : Control
+@export var MusicButton : Control
 
 static var HasGlitch = true
 
 func _ready() -> void:
 	GlitchButton.set_pressed_no_signal(HasGlitch)
-	FullScreenButton.button_pressed = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
-	SoundButton.button_pressed = AudioServer.get_bus_volume_db(0) == 0
+	FullScreenButton.set_pressed_no_signal(DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
+	SoundButton.set_pressed_no_signal(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds")) == 0)
+	MusicButton.set_pressed_no_signal(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")) == 0)
 
 func _on_full_screen_check_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
@@ -24,9 +26,15 @@ func _on_full_screen_check_box_toggled(toggled_on: bool) -> void:
 
 func _on_sound_check_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
-		AudioServer.set_bus_volume_db(0, 0)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), 0)
 	else:
-		AudioServer.set_bus_volume_db(0, -64)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), -64)
+
+func _on_music_check_box_toggled(toggled_on: bool) -> void:
+	if (toggled_on):
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0)
+	else:
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), -64)
 
 static func GetGlitch() -> bool:
 	return HasGlitch

@@ -402,20 +402,20 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 42.0
-offset_top = -117.0
-offset_right = 111.0
-offset_bottom = -23.0
+offset_left = 26.0
+offset_top = -182.0
+offset_right = 132.0
+offset_bottom = -26.0
 grow_horizontal = 1
 grow_vertical = 0
 pivot_offset = Vector2(76.5, 104)
 
 [node name="DiscardPile" parent="SubViewport/Control2" instance=ExtResource("29_1c17m")]
 layout_mode = 1
-offset_left = -117.0
-offset_top = -134.0
-offset_right = -38.0
-offset_bottom = -27.0
+offset_left = -140.0
+offset_top = -180.0
+offset_right = -34.0
+offset_bottom = -24.0
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewport"]
 color = Color(0, 0, 0, 1)

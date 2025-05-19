@@ -20,12 +20,14 @@ func _ready() -> void:
 	Stream.volume_db = -14
 	Stream.stream = AmbientMusic.pick_random()
 	Stream.finished.connect(OnMusicFinished)
+	Stream.bus = "Music"
 	add_child(Stream)
 	
 	FightStream = AudioStreamPlayer.new()
 	FightStream.volume_db = -14
 	FightStream.stream = FightMusic
 	FightStream.finished.connect(OnFightMusicFinished)
+	FightStream.bus = "Music"
 	add_child(FightStream)
 	
 	Stream.play()

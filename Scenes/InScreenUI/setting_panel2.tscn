@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Switch.png" id="4_b4sbe"]
 [ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Switch2.png" id="5_a6mwh"]
 
-[node name="SettingPanel" type="PanelContainer" node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton")]
+[node name="SettingPanel" type="PanelContainer" node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton")]
 self_modulate = Color(1, 1, 1, 0)
 use_parent_material = true
 size_flags_vertical = 4
@@ -16,6 +16,7 @@ mat = ExtResource("3_b4sbe")
 GlitchButton = NodePath("Control/GlitchesCheckBox")
 FullScreenButton = NodePath("Control/FullScreenCheckBox")
 SoundButton = NodePath("Control/SoundCheckBox")
+MusicButton = NodePath("Control/SoundCheckBox2")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 2
@@ -45,6 +46,20 @@ texture_pressed = ExtResource("4_b4sbe")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="SoundCheckBox2" type="TextureButton" parent="Control" groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 2
+offset_left = 68.0
+offset_top = 57.0
+offset_right = 85.0
+offset_bottom = 96.0
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("5_a6mwh")
+texture_pressed = ExtResource("4_b4sbe")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="GlitchesCheckBox" type="TextureButton" parent="Control" groups=["Buttons"]]
 use_parent_material = true
 layout_mode = 2
@@ -60,4 +75,5 @@ stretch_mode = 0
 
 [connection signal="toggled" from="Control/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
 [connection signal="toggled" from="Control/SoundCheckBox" to="." method="_on_sound_check_box_toggled"]
+[connection signal="toggled" from="Control/SoundCheckBox2" to="." method="_on_music_check_box_toggled"]
 [connection signal="toggled" from="Control/GlitchesCheckBox" to="." method="_on_glitches_check_box_toggled"]

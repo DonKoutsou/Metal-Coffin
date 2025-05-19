@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" load_steps=7 format=3 uid="uid://hncmt3swcqbu"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_1qqs8"]
-[ext_resource type="Resource" uid="uid://cnk24jchtyeco" path="res://Resources/Cards/Barrage/BarrageT2.tres" id="2_arjqo"]
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="2_q5ys8"]
 [ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun.tres" id="3_q5ys8"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="4_arjqo"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_gbk8t"]
@@ -26,5 +26,5 @@ Tier = 1
 ItemName = "MG-20 \"Fury\""
 ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("2_arjqo"), ExtResource("2_arjqo"), ExtResource("2_arjqo"), ExtResource("2_arjqo"), ExtResource("2_arjqo")])
+CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8")])
 CanTransfer = false

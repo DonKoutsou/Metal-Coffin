@@ -14,6 +14,10 @@ class_name ExternalCardFightUI
 @export var PlayCardInsert : Control
 @export var DrawCardInsert : Control
 @export var DiscardInsert : Control
+@export var CardInsertSound : AudioStream
+@export var CardOutSound : AudioStream
+@export var CardDiscardSound : AudioStream
+@export var CardSound : AudioStream
 
 signal OnDeckPressed
 signal OnShipFallbackPressed
@@ -43,8 +47,10 @@ func ClearHand() -> void:
 		g.free()
 
 func AddCardToHand(C : Card) -> void:
+	C.SetRealistic()
 	PlayerCardPlecement.add_child(C)
 	C.OnCardPressed.connect(InserCardtoPlay)
+	PlayCardSound()
 
 func GetEnergyBar() -> SegmentedBar:
 	return EnergyBar
@@ -70,7 +76,9 @@ func InserCardtoPlay(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position, 0.5)
+	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(20, -5), 0.5)
+	PlayCardSound()
+	
 	await Movetw.finished
 
 	var Cont = Control.new()
@@ -86,6 +94,7 @@ func InserCardtoPlay(C : Card) -> void:
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(Cont, "size", Vector2(PlayCardInsert.size.x, 0), 0.75)
+	PlayCardInsertSound(CardSoundType.INSERT)
 	await tw.finished
 	#CardPlayed.emit(C)
 	if (!await FightScene.OnCardSelected(C)):
@@ -93,12 +102,17 @@ func InserCardtoPlay(C : Card) -> void:
 		tw.set_ease(Tween.EASE_OUT)
 		tw2.set_trans(Tween.TRANS_QUAD)
 		tw2.tween_property(Cont, "size", Vector2(PlayCardInsert.size), 0.5)
+		PlayCardInsertSound(CardSoundType.EXIT)
 		await tw2.finished
 		Cont.remove_child(C)
 		Cont.queue_free()
 		PlayerCardPlecement.add_child(C)
+		PlayCardSound()
 	#Cont.queue_free()
 	#C.queue_free()
+
+func PausePressed() -> void:
+	PlayerCardPlecement.visible = !get_tree().paused
 
 func InsertCardToDiscard(C : Card) -> void:
 	var pos = C.global_position
@@ -110,7 +124,9 @@ func InsertCardToDiscard(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", DiscardInsert.global_position, 0.5)
+	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(20, -5), 0.5)
+	
+	PlayCardSound()
 	await Movetw.finished
 
 	var Cont = Control.new()
@@ -126,13 +142,16 @@ func InsertCardToDiscard(C : Card) -> void:
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(Cont, "size", Vector2(DiscardInsert.size.x, 0), 0.75)
+	PlayCardInsertSound(CardSoundType.DISCARD)
 	await tw.finished
 	
 
 func OnCardDrawn(C : Card) -> void:
+	PlayCardInsertSound(CardSoundType.EXIT)
+	await Helper.GetInstance().wait(0.1)
 	C.rotation = 0
 	var Cont = Control.new()
-	
+	C.SetRealistic()
 	#C.get_parent().remove_child(C)
 	DrawCardInsert.add_child(Cont)
 	Cont.add_child(C)
@@ -142,8 +161,9 @@ func OnCardDrawn(C : Card) -> void:
 	Cont.size = Vector2(DrawCardInsert.size.x, 0)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
-	tw.set_trans(Tween.TRANS_EXPO)
+	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(Cont, "size", Vector2(DrawCardInsert.size), 0.75)
+	
 	await tw.finished
 	#await Helper.GetInstance().wait(0.25)
 	Cont.remove_child(C)
@@ -163,3 +183,38 @@ func _on_button_pressed() -> void:
 	if (PlayCardInsert.get_child_count() > 0 or DrawCardInsert.get_child_count() > 0 or DiscardInsert.get_child_count()):
 		return
 	OnEndTurnPressed.emit()
+
+func PlayCardSound() -> void:
+	var S = DeletableSoundGlobal.new()
+	S.stream = CardSound
+	S.autoplay = true
+	S.pitch_scale = randf_range(0.8, 1.2)
+	#S.bus = "MapSounds"
+	add_child(S)
+	S.volume_db = - 20
+
+func PlayCardInsertSound(type : CardSoundType) -> void:
+	var S = DeletableSoundGlobal.new()
+	S.stream = GetSoundSample(type)
+	S.autoplay = true
+	S.pitch_scale = randf_range(0.8, 1.2)
+	#S.bus = "MapSounds"
+	add_child(S)
+	S.volume_db = - 7
+
+func GetSoundSample(type : CardSoundType) -> AudioStream:
+	var Sample : AudioStream
+	if (type == CardSoundType.DISCARD):
+		Sample = CardDiscardSound
+	else : if (type == CardSoundType.INSERT):
+		Sample = CardInsertSound
+		
+	else : if (type == CardSoundType.EXIT):
+		Sample = CardOutSound
+	return Sample
+	
+enum CardSoundType{
+	DISCARD,
+	INSERT,
+	EXIT,
+}
