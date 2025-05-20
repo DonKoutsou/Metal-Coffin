@@ -18,7 +18,7 @@ func SetData(Won : bool, Funds : int, DoneDmg : float, GotDmg : float, NegDmg : 
 		text += "[center][color=#ffc315]Funds Earned[/color] : {0}\n".format([Funds])
 	else:
 		text += "[center][color=#ffc315]Funds Earned[/color] : {0}\n".format([0])
-	text += "[color=#ffc315]Damage Dealt[/color] : {0}\n".format([DoneDmg])
-	text += "[color=#ffc315]Damage Received [/color]: {0}\n".format([GotDmg])
-	text += "[color=#ffc315]Damage Negated[/color] : {0}\n".format([NegDmg])
+	text += "[color=#ffc315]Damage Dealt[/color] : {0}\n".format([roundi(DoneDmg)])
+	text += "[color=#ffc315]Damage Received [/color]: {0}\n".format([roundi(GotDmg)])
+	text += "[color=#ffc315]Damage Negated[/color] : {0}\n".format([roundi(NegDmg)])
 	$VBoxContainer/Label2.text = text

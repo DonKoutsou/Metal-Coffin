@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=24 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -12,14 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
 [ext_resource type="Script" uid="uid://cf7you43vrtlg" path="res://Scripts/UI/current_ship_text.gd" id="8_u111i"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
-[ext_resource type="Script" uid="uid://cpu5xsyrg37ql" path="res://Scripts/UI/pop_up_manager.gd" id="9_jvf02"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="9_vr5ky"]
 [ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="10_ct3x8"]
-[ext_resource type="PackedScene" uid="uid://dmgv2v8jsmief" path="res://Scenes/InScreenUI/CustomPopUp.tscn" id="10_e626m"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
-[ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/InScreenUI/CustomConfirm.tscn" id="11_nk6oj"]
-[ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/InScreenUI/FadeNotif.tscn" id="12_1jh8x"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
 [ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="18_in80l"]
@@ -29,7 +25,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
-[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual", "UnderstatUI", "OverStatUI")]
+[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual", "UnderstatUI", "OverStatUI", "PopupPlecement")]
 process_mode = 3
 script = ExtResource("1_3cf0e")
 _Inventory = NodePath("Control3/UnderStatUI/Inventory")
@@ -40,6 +36,7 @@ Manual = NodePath("Control3/PauseContainer/FlightManual")
 EventHandler = ExtResource("3_b4kau")
 UnderstatUI = NodePath("Control3/UnderStatUI")
 OverStatUI = NodePath("Control3/OverStatUI")
+PopupPlecement = NodePath("Control3/PopupPlecement")
 
 [node name="Control3" type="Control" parent="."]
 layout_mode = 3
@@ -169,7 +166,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="Inventory" parent="Control3/UnderStatUI" instance=ExtResource("6_u1p46")]
 visible = false
@@ -319,20 +316,14 @@ offset_bottom = -25.0
 visible = false
 layout_mode = 2
 
-[node name="PopUpManager" type="Control" parent="Control3"]
+[node name="PopupPlecement" type="Control" parent="Control3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("9_jvf02")
-CustomPop = ExtResource("10_e626m")
-CustomConfirm = ExtResource("11_nk6oj")
-FadNot = ExtResource("12_1jh8x")
 
 [node name="Screen" type="ColorRect" parent="Control3"]
 process_mode = 3

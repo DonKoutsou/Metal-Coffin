@@ -116,10 +116,9 @@ func StartGame(Load : bool) -> void:
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
 func DelSave() -> void:
-	var pop = ConfirmationDialog.new()
-	pop.dialog_text = "Saves have been nuked"
-	get_viewport().add_child(pop)
-	pop.popup_centered()
+	
+	PopUpManager.GetInstance().DoFadeNotif("Saves have been nuked", StMenu.GetVp())
+	
 	SaveLoadManager.GetInstance().DeleteSave()
 	#ActionTracker.GetInstance().DeleteSave()
 	

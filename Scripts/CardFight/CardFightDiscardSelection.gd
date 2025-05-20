@@ -21,6 +21,7 @@ func SetCards(Cards : Array[Card]) -> void:
 		
 	visible = true
 	
+	
 func TargetSelected(C : Card, index : int) -> void:
 	for g in CardContainer.get_children():
 		g.queue_free()

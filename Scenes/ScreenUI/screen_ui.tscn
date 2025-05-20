@@ -665,6 +665,7 @@ grow_horizontal = 0
 grow_vertical = 1
 
 [node name="CardFightExternalUI" parent="NormalScreen" instance=ExtResource("31_wetmy")]
+visible = false
 layout_mode = 1
 
 [node name="Pause" type="TextureButton" parent="NormalScreen/CardFightExternalUI" groups=["Buttons"]]

@@ -2,15 +2,10 @@ extends Control
 
 class_name ExternalCardFightUI
 
-@export var CardScene : PackedScene
-
 @export var PlayerCardPlecement : Control
 
 @export var EnergyBar : SegmentedBar
 @export var ReservesBar : SegmentedBar
-
-@export var ShipFallBackButton : Button
-
 @export var PlayCardInsert : Control
 @export var DrawCardInsert : Control
 @export var DiscardInsert : Control
@@ -18,6 +13,9 @@ class_name ExternalCardFightUI
 @export var CardOutSound : AudioStream
 @export var CardDiscardSound : AudioStream
 @export var CardSound : AudioStream
+@export var BeepSound : AudioStream
+@export var BeepNoSound : AudioStream
+@export var BeepLong : AudioStream
 
 signal OnDeckPressed
 signal OnShipFallbackPressed
@@ -66,7 +64,7 @@ func _on_deck_button_pressed() -> void:
 	OnDeckPressed.emit()
 
 func InserCardtoPlay(C : Card) -> void:
-	
+	PlayerCardPlecement.Blocked = true
 	var pos = C.global_position
 	C.get_parent().remove_child(C)
 	add_child(C)
@@ -76,11 +74,11 @@ func InserCardtoPlay(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(20, -5), 0.5)
+	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(20, 5), 0.5)
 	PlayCardSound()
-	
+	PlayerCardPlecement.Blocked = false
 	await Movetw.finished
-
+	C.TogglePerspective(true)
 	var Cont = Control.new()
 	
 	Cont.size = PlayCardInsert.size
@@ -96,20 +94,22 @@ func InserCardtoPlay(C : Card) -> void:
 	tw.tween_property(Cont, "size", Vector2(PlayCardInsert.size.x, 0), 0.75)
 	PlayCardInsertSound(CardSoundType.INSERT)
 	await tw.finished
-	#CardPlayed.emit(C)
+	PlayCardInsertSound(CardSoundType.BEEP)
 	if (!await FightScene.OnCardSelected(C)):
+		PlayCardInsertSound(CardSoundType.BEEPNO)
 		var tw2 = create_tween()
 		tw.set_ease(Tween.EASE_OUT)
 		tw2.set_trans(Tween.TRANS_QUAD)
-		tw2.tween_property(Cont, "size", Vector2(PlayCardInsert.size), 0.5)
+		tw2.tween_property(Cont, "size", Vector2(PlayCardInsert.size), 0.75)
 		PlayCardInsertSound(CardSoundType.EXIT)
+		C.TogglePerspective(false, 1)
 		await tw2.finished
 		Cont.remove_child(C)
 		Cont.queue_free()
 		PlayerCardPlecement.add_child(C)
 		PlayCardSound()
-	#Cont.queue_free()
-	#C.queue_free()
+
+		
 
 func PausePressed() -> void:
 	PlayerCardPlecement.visible = !get_tree().paused
@@ -124,13 +124,13 @@ func InsertCardToDiscard(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(20, -5), 0.5)
+	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(20, 5), 0.5)
 	
 	PlayCardSound()
 	await Movetw.finished
-
-	var Cont = Control.new()
 	
+	var Cont = Control.new()
+	C.TogglePerspective(true)
 	Cont.size = DiscardInsert.size
 	#Cont.scale.y = 0.8
 	C.get_parent().remove_child(C)
@@ -144,12 +144,17 @@ func InsertCardToDiscard(C : Card) -> void:
 	tw.tween_property(Cont, "size", Vector2(DiscardInsert.size.x, 0), 0.75)
 	PlayCardInsertSound(CardSoundType.DISCARD)
 	await tw.finished
+	PlayCardInsertSound(CardSoundType.BEEP)
 	
 
 func OnCardDrawn(C : Card) -> void:
+	PlayCardInsertSound(CardSoundType.BEEPLONG)
+	await Helper.GetInstance().wait(0.1)
 	PlayCardInsertSound(CardSoundType.EXIT)
 	await Helper.GetInstance().wait(0.1)
 	C.rotation = 0
+	C.ForcePersp(true)
+	C.TogglePerspective(false, 1)
 	var Cont = Control.new()
 	C.SetRealistic()
 	#C.get_parent().remove_child(C)
@@ -169,7 +174,7 @@ func OnCardDrawn(C : Card) -> void:
 	Cont.remove_child(C)
 	AddCardToHand(C)
 	Cont.queue_free()
-
+	
 
 func _on_pull_reserves_pressed() -> void:
 	OnPullReserves.emit()
@@ -211,10 +216,19 @@ func GetSoundSample(type : CardSoundType) -> AudioStream:
 		
 	else : if (type == CardSoundType.EXIT):
 		Sample = CardOutSound
+	else : if (type == CardSoundType.BEEP):
+		Sample = BeepSound
+	else : if (type == CardSoundType.BEEPNO):
+		Sample = BeepNoSound
+	else : if (type == CardSoundType.BEEPLONG):
+		Sample = BeepLong
 	return Sample
 	
 enum CardSoundType{
 	DISCARD,
 	INSERT,
 	EXIT,
+	BEEP,
+	BEEPNO,
+	BEEPLONG,
 }

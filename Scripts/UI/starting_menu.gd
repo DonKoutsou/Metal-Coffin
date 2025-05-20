@@ -97,12 +97,11 @@ func _on_load_prologue_pressed() -> void:
 	if (Selecting):
 		return
 		
-	var t = await ChooseTutorial()
-	if (t):
-		ActionTracker.GetInstance().Load()
+	await ChooseTutorial()
+	ActionTracker.GetInstance().Load()
 	PrologueStart.emit(true)
 
-func ChooseTutorial() -> bool:
+func ChooseTutorial() -> void:
 	var c = get_tree().get_nodes_in_group("Credits")
 	if (c.size() > 0):
 		c[0].queue_free()
@@ -116,7 +115,9 @@ func ChooseTutorial() -> bool:
 		#ActionTracker.GetInstance().DeleteSave()
 	
 	HintDialogue.visible = false
-	return t
+
+func GetVp() -> Control:
+	return $SubViewportContainer/SubViewport
 
 func _on_dont_show_tutorial_pressed() -> void:
 	ShowTutorial.emit(false)
@@ -129,5 +130,6 @@ func _on_show_tutorial_pressed() -> void:
 func _on_fight_pressed() -> void:
 	if (Selecting):
 		return
+	await ChooseTutorial()
 	FightStart.emit()
 	

@@ -29,6 +29,7 @@ UiSoundManager="*res://Scenes/GlobalManagers/ui_sound_manager.tscn"
 Save="*res://Scripts/Save/save_load_manager.gd"
 TutorialManager="*res://Scenes/InScreenUI/tutorial_manager.tscn"
 AchMan="*res://Scripts/achievement_manager.gd"
+PopupManager="*res://Scenes/PopupManager.tscn"
 
 [display]
 

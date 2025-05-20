@@ -22,7 +22,7 @@ func OnCommandEntered() -> void:
 		print("thing")
 		Command = Command.replace("\n", "")
 		var response = HandleCommand(Command)
-		PopUpManager.GetInstance().DoFadeNotif(response, 10)
+		PopUpManager.GetInstance().DoFadeNotif(response, null, 10)
 		
 		Text.text = ""
 	Text.set_caret_column(Text.text.length())

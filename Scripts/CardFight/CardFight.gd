@@ -152,7 +152,8 @@ func _ready() -> void:
 	HandAmmountLabel.visible = false
 	call_deferred("StoreContainerSize")
 	
-	call_deferred("RunTurn")
+	Helper.GetInstance().CallLater(RunTurn, 2)
+	
 func InitRandomFight(ShipAmm : int) -> void:
 	#for g in ShipAmm:
 		#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
@@ -438,17 +439,29 @@ func RunTurn() -> void:
 		await DoActionDeclaration(Ship.Name + "'s turn", 1.5)
 		var viz = GetShipViz(Ship)
 		viz.Enable()
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
+			await ActionTracker.GetInstance().ShowTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [viz], true)
 		
 		ActionList.AddShip(Ship)
 		if (IsShipFriendly(Ship)):
 			DeckP.visible = true
 			DiscardP.visible = true
 			ExternalUI.ToggleEnergyVisibility(true)
+			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
+				ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
+				await ActionTracker.GetInstance().ShowTutorial("Energy", "Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.", [ExternalUI.GetEnergyBar()], true)
 			#ShipFallBackButton.visible = true
+			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
+				ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
+				await ActionTracker.GetInstance().ShowTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [ExternalUI.GetReserveBar()], true)
+			
+			
+			
 			HandAmmountLabel.visible = true
 			
 			RestartCards()
-
+			
 			await PlayerActionPickingEnded
 			ClearCards()
 			
@@ -494,6 +507,10 @@ func RunTurn() -> void:
 	ShipSpacer.visible = true
 	await DoActionDeclaration("Action Perform Phase", 2)
 	ShipSpacer.visible = false
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PERFORM)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PERFORM)
+		ActionTracker.GetInstance().ShowTutorial("Action Perform Phase", "In the Action Perform Phase each ship performs the moves they've picked in the Action Pick Phase.\nIn the end of the phase any unused card, like an extra deffensive card, will be returned to the discard pile.", [], true)
+	
 	#AnimationPlecement.visible = true
 	CurrentTurn = 0
 	for Ship in ShipTurns:
@@ -921,6 +938,10 @@ func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardMod
 
 #Used to handle targeting both for player and enemies
 func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
+		ActionTracker.GetInstance().ShowTutorial("Target Picking", "Some cards require you to pick a target, weather that is a friendly or enemy depends on the card.\nOther cards can be multi target, meaning they instantly target the whole team, or self use meaning they are used by the performer. Those cards will be used instantly without asking for a target.", [], true)
+	
 	var Friendly = IsShipFriendly(User)
 	
 	var Targets : Array[BattleShipStats]
@@ -1086,6 +1107,11 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -
 		ToggleFireToShip(Ship, true)
 	
 	if (IsShipFriendly(Ship)):
+		
+		if (Ship.Hull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
+			ActionTracker.GetInstance().ShowTutorial("Lossing Ships", "When a ships hull reaches zero, they are threwn out of the fight and the capmaign. Make use of the 'Switch Ship' button to switch up ships in the fight. The ship that gets switched in loses one turn.", [], true)
+	
 		DamageGot += Dmg
 		if (Dmg > 0):
 			UIEventH.OnControlledShipDamaged(Dmg)
@@ -1142,6 +1168,8 @@ func TrySetFire() -> bool:
 
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
+	
+	
 	if (EnemyCombatants.has(Ship)):
 		FundsToWin += Ship.Funds
 	
@@ -1178,7 +1206,12 @@ func OnFightEnded(Won : bool) -> void:
 	Survivors.append_array(PlayerReserves)
 	Survivors.append_array(EnemyCombatants)
 	Survivors.append_array(EnemyReserves)
-
+	
+	for g in Survivors:
+		g.Cards.clear()
+		var D = GetShipDeck(g)
+		g.Cards = D.GetCardList()
+	
 	CardFightEnded.emit(Survivors)
 	
 	MusicManager.GetInstance().SwitchMusic(false)
@@ -1201,15 +1234,7 @@ func RefundUnusedCards() -> void:
 			RefundCardToShip(ShipAction.Action, Ship)
 
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
-	var HasCard = false
-	for c in Ship.Cards.keys():
-		if (c.CardName == C.CardName):
-			Ship.Cards[c] += 1
-			HasCard = true
-			break
-	if (!HasCard):
-		Ship.Cards[C] = 1
-		
+	
 	var deck = GetShipDeck(Ship)
 	deck.DiscardPile.append(C)
 
@@ -1396,6 +1421,10 @@ func PlaceCardInPlayerHand(C : Card) -> bool:
 		
 		CardSelect.SetCards(Hand)
 		SelectingTarget = true
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)
+			ActionTracker.GetInstance().ShowTutorial("Hand Limit", "At any time you can hold a max of {0} cards in your hand. If at any point an extra hand is about to be placed in your hand, you will be asked to choose one card to throw out. Picked card is placed on the discard pile.".format([MaxCardsInHand]), [], true)
+		
 		var ToDiscard : int = await CardSelect.CardSelected
 		SelectingTarget = false
 

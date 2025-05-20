@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqxnjihcai1kd"]
+
+[ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
+[ext_resource type="PackedScene" uid="uid://cbhf8nh85npqq" path="res://Scenes/World.tscn" id="3_lbc5q"]
+[ext_resource type="PackedScene" uid="uid://delsjvmgmdgcn" path="res://Scenes/starting_menu.tscn" id="3_pxh3m"]
+[ext_resource type="PackedScene" uid="uid://cmdvuq7n6nncl" path="res://Scenes/studio_anim.tscn" id="3_yypyw"]
+[ext_resource type="PackedScene" uid="uid://cid0s6uni7fky" path="res://Scenes/IntroWorld.tscn" id="4_r02ad"]
+[ext_resource type="PackedScene" uid="uid://b575fi0e44gkg" path="res://Scenes/CageFightWorld.tscn" id="6_lhmcv"]
+[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="7_mty3o"]
+
+[node name="StartingScreen" type="Node"]
+process_mode = 3
+script = ExtResource("1_kry56")
+StartingMenuScene = ExtResource("3_pxh3m")
+StudioAnim = ExtResource("3_yypyw")
+GameScene = ExtResource("3_lbc5q")
+IntroGameScene = ExtResource("4_r02ad")
+CageFightGameScene = ExtResource("6_lhmcv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Screen" type="ColorRect" parent="CanvasLayer"]
+process_mode = 3
+z_index = 1
+material = ExtResource("7_mty3o")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

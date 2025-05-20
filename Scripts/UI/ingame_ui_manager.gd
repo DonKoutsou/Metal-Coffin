@@ -10,6 +10,7 @@ class_name Ingame_UIManager
 @export var EventHandler : UIEventHandler
 @export var UnderstatUI : Control
 @export var OverStatUI : Control
+@export var PopupPlecement : Control
 
 signal GUI_Input(event)
 static var Instance :Ingame_UIManager
@@ -86,7 +87,7 @@ func Pause() -> void:
 	
 func _on_save_pressed() -> void:
 	SaveLoadManager.GetInstance().Save()
-	PopUpManager.GetInstance().DoFadeNotif("Save successful")
+	PopUpManager.GetInstance().DoFadeNotif("Save successful", PopupPlecement)
 func _on_exit_pressed() -> void:
 	World.GetInstance().EndGame()
 func On_Game_Lost_Button_Pressed() -> void:

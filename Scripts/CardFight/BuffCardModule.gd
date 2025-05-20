@@ -15,4 +15,6 @@ func GetDesc() -> String:
 		TextColor = "color=#308a4d"
 	if (AOE):
 		return "Buff team\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount, BuffDuration, TextColor])
+	else : if (CanBeUsedOnOther):
+		return "Buff a ship\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount, BuffDuration, TextColor])
 	return "Buff self\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount, BuffDuration, TextColor])

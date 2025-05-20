@@ -186,7 +186,7 @@ func AccelerationChanged(value: float) -> void:
 	if (value > 0):
 		if (GetFuelRange() <= 0):
 			HaltShip()
-			PopUpManager.GetInstance().DoPopUp("You have run out of fuel.")
+			PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
 			return
 
 	AccelChanged = true

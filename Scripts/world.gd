@@ -249,9 +249,11 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	CardF.EnemyReserves = EBattleStats
 	SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	
+	GetMap().GetScreenUi().ToggleScreenUI(false)
+	GetMap().GetScreenUi().ToggleCardFightUI(true)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
@@ -267,7 +269,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 			var Nam = Surv.Name
 			if (Unit.GetShipName() == Nam):
 				Unit.Damage(Unit.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) - Surv.Hull, false)
-				if (Unit is not HostileShip):
+				if (Unit is PlayerDrivenShip):
 					FigureOutInventory(Unit.Cpt.GetCharacterInventory(), Surv.Cards)
 				else: if (Unit.IsDead()):
 					Unit.DestroyEnemyDebry()
@@ -288,6 +290,8 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
+	GetMap().GetScreenUi().ToggleScreenUI(true)
+	GetMap().GetScreenUi().ToggleCardFightUI(false)
 	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
 
 #LANDING
@@ -467,7 +471,7 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary):
 						#Ammo.erase(Itm.CardOptionProviding)
 				#if it was used and we cant find it in the dictionary then remove it from inventory
 				#else:
-				CharInv.RemoveItem(Itm)
+				#CharInv.RemoveItem(Itm)
 #--------------------------------------------------------
 func GameLost(reason : String):
 	get_tree().paused = true

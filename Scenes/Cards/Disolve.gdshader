@@ -16,5 +16,4 @@ void fragment(){
 	float border = smoothstep(noise_texture.x, noise_texture.x + burn_size_step, dissolve_value);
 
 	COLOR.a *= threshold;
-	//COLOR.rgb = mix(burn_color.rgb, main_texture.rgb, border);
 }
