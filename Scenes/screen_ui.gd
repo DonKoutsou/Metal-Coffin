@@ -235,8 +235,9 @@ func Inventory_Pressed() -> void:
 
 var ScreenItemsStateBeforePause : bool
 func Pause_Pressed() -> void:
-	if (get_tree().paused):
+	if (!get_tree().paused):
 		ScreenItemsStateBeforePause = _ScreenItems.visible
+		_ScreenItems.visible = false
 	else:
 		_ScreenItems.visible = ScreenItemsStateBeforePause
 	EventHandler.OnPausePressed()

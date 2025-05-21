@@ -43,6 +43,7 @@ func Save() -> void:
 	var sav = SaveData.new()
 	sav.DataName = "Save"
 	sav.Datas = DataArray
+	sav.GameVersion = ProjectSettings.get_setting("application/config/version")
 	
 	var SaveName : String
 	
@@ -57,6 +58,8 @@ func Save() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func Load(world : World) ->bool:
+	var CurrentVersion = ProjectSettings.get_setting("application/config/version")
+	
 	var SaveName : String
 	if (world.IsPrologue):
 		SaveName = "user://PrologueSavedGame.tres"
@@ -64,12 +67,19 @@ func Load(world : World) ->bool:
 		SaveName = "user://SavedGame.tres"
 		
 	if (!FileAccess.file_exists(SaveName)):
+		PopUpManager.GetInstance().DoFadeNotif("Save file could not be found.")
 		return false
 	
 	var sav = load(SaveName) as SaveData
 	
 	if (sav == null):
 		return false
+	
+	if (sav.GameVersion != CurrentVersion):
+		PopUpManager.GetInstance().DoFadeNotif("Game Version doesen't match save file.\nSave File Version = {0}".format([sav.GameVersion]))
+		return false
+	
+	
 	
 	var Mapz = world.GetMap() as Map
 	#var Inv = Mapz.GetInScreenUI().GetInventory() as InventoryManager

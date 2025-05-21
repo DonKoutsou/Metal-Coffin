@@ -35,7 +35,7 @@ func _ready() -> void:
 	LoadPrologueLight.ToggleNoAnim(true, FileAccess.file_exists("user://PrologueSavedGame.tres"))
 	LoadLight.ToggleNoAnim(true, FileAccess.file_exists("user://SavedGame.tres"))
 	
-	
+	$SubViewportContainer/SubViewport/VersionLabel.text = "Demo Version v{0}".format([ProjectSettings.get_setting("application/config/version")])
 	#LoopAmp()
 
 func _on_play_pressed() -> void:

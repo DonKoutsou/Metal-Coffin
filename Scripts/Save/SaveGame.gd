@@ -3,6 +3,7 @@ class_name SaveData
 
 @export var DataName : String
 @export var Datas : Array[Resource]
+@export var GameVersion : String
 
 func GetData(DaName : String) -> Resource:
 	var index

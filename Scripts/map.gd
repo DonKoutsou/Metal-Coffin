@@ -418,31 +418,38 @@ func GenerateEventsThreaded() -> void:
 		
 		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		
-		while SpEvents.size() != 0:
+		while SpEvents.size() > 0 and Spots.size() > 0:
 			#var EventToGive = SpEvents[0]
+
 			var S = Spots.pick_random() as MapSpot
 			var YPos = S.get_parent().Pos.y
-			if (S.Event == null):
-				var E = FigureOutEvent(YPos, SpEvents)
-				if (E != null):
-					S.Event = E
-					E.PickedBy.append(S)
-					SpEvents.erase(E)
-					print("Picked happening {0} for {1}".format([E.HappeningName, S.GetSpotName()]))
-					if (E.CrewRecruit):
-						S.call_deferred("add_to_group", "CrewRecruitTown")
-		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
-		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
-		for S in Spots:
-			var Sp = S as MapSpot
-			if (Sp.Event != null):
-				continue
-			var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Events)
-			if (Hap != null):
-				print("Picked happening {0} for {1}".format([Hap.HappeningName, Sp.GetSpotName()]))
+			var E = FigureOutEvent(YPos, SpEvents)
+			if (E != null):
+				S.Event = E
+				E.PickedBy.append(S)
+				SpEvents.erase(E)
+				print("Picked happening {0} for {1}".format([E.HappeningName, S.GetSpotName()]))
+				if (E.CrewRecruit):
+					S.call_deferred("add_to_group", "CrewRecruitTown")
+					
+			Spots.erase(S)
 
-				Hap.PickedBy.append(Sp)
-				Sp.Event = Hap
+		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
+		Spots.clear()
+		Spots.append_array(get_tree().get_nodes_in_group(g))
+		Spots.shuffle()
+		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
+		while Events.size() > 0 and Spots.size() > 0:
+			var Sp = Spots.pick_random()
+			if (Sp.Event != null):
+				var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Events)
+				if (Hap != null):
+					print("Picked happening {0} for {1}".format([Hap.HappeningName, Sp.GetSpotName()]))
+
+					Hap.PickedBy.append(Sp)
+					Sp.Event = Hap
+			
+			Spots.erase(Sp)
 	call_deferred("EventGenFinished")
 
 func FigureOutEvent(YPos : float, Events : Array) -> Happening:
@@ -456,8 +463,6 @@ func FigureOutEvent(YPos : float, Events : Array) -> Happening:
 			continue
 		if (g.HappeningAppearance == GameSt or g.HappeningAppearance == Happening.GameStage.ANY):
 			PossibleHappenings.append(g)
-			PossibleHappenings.append(null)
-			PossibleHappenings.append(null)
 	
 	if (PossibleHappenings.size() > 0):
 		var Hap = PossibleHappenings.pick_random() as Happening

@@ -120,7 +120,9 @@ func _ready() -> void:
 	MusicManager.GetInstance().SwitchMusic(true)
 	ExternalUI.GetEnergyBar().Init(TurnEnergy)
 	ExternalUI.GetReserveBar().Init(0)
-
+	
+	CreateDecks()
+	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
 		var NewCombatant = EnemyReserves.pick_random()
@@ -143,7 +145,7 @@ func _ready() -> void:
 	UpdateFleetSizeAmmount()
 	#Create the visualisation for each ship, basicly their stat holder
 	
-	CreateDecks()
+	
 
 	DeckP.visible = false
 	DiscardP.visible = false
@@ -176,7 +178,7 @@ func CheckForReserves() -> void:
 		ShipTurns.append(NewCombatant)
 		ShipTurns.sort_custom(speed_comparator)
 		CreateShipVisuals(NewCombatant, true)
-		CreateDecks()
+		#CreateDecks()
 	if (EnemyCombatants.size() < MaxCombatants and EnemyReserves.size() > 0):
 		var NewCombatant = EnemyReserves.pick_random()
 		EnemyCombatants.append(NewCombatant)
@@ -185,15 +187,18 @@ func CheckForReserves() -> void:
 		ShipTurns.append(NewCombatant)
 		ShipTurns.sort_custom(speed_comparator)
 		CreateShipVisuals(NewCombatant, false)
-		CreateDecks()
+		#CreateDecks()
 	
 	UpdateFleetSizeAmmount()
 		
 func CreateDecks() -> void:
 	#Create the deck
-	for g in ShipTurns:
-		if PlayerDecks.keys().has(g) or EnemyDecks.keys().has(g):
-			continue
+	var Ships : Array[BattleShipStats]
+	Ships.append_array(PlayerReserves)
+	Ships.append_array(EnemyReserves)
+	for g in Ships:
+		#if PlayerDecks.keys().has(g) or EnemyDecks.keys().has(g):
+			#continue
 		var D = Deck.new()
 		
 		var ShipCards = g.Cards.keys()
@@ -1324,6 +1329,8 @@ func DrawSpecificCardEnemy(Performer : BattleShipStats,Spawn : CardStats) -> voi
 		if (D.DeckPile.size() == 0):
 			ShuffleDiscardedIntoDeck(D, false)
 	
+	D.DeckPile.erase(Spawn)
+	
 	PlaceCardInEnemyHand(Performer ,C)
 
 func DrawCard(Performer : BattleShipStats) -> bool:
@@ -1474,7 +1481,7 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 	if (CardsInHand < MaxCardsInHand):
 		CanPlace = true
 
-	EnemyDeck.DeckPile.erase(C)
+	#EnemyDeck.DeckPile.erase(C)
 	
 	if (CanPlace):
 		EnemyDeck.Hand.append(C)
@@ -1888,6 +1895,6 @@ func _on_switch_ship_pressed() -> void:
 	ShipTurns.insert(Spot, NewCombatant)
 	#ShipTurns.sort_custom(speed_comparator)
 	CreateShipVisuals(NewCombatant, true)
-	CreateDecks()
+	#CreateDecks()
 	
 	PlayerActionSelectionEnded()

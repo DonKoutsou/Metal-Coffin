@@ -323,6 +323,22 @@ use_parent_material = true
 layout_mode = 2
 texture = ExtResource("3_s86m3")
 
+[node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -43.0
+offset_right = 107.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Demo Version 0.61"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 visible = false
 texture_filter = 1

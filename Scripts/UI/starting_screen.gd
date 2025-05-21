@@ -56,10 +56,7 @@ func StartPrologue(Load : bool) -> void:
 	Wor = IntroGameScene.instantiate() as World
 	if (Load):
 		if (!SaveLoadManager.GetInstance().Load(Wor)):
-			var window = AcceptDialog.new()
-			add_child(window)
-			window.dialog_text = "Could't load save"
-			window.popup_centered()
+
 			return
 	
 	add_child(Wor)
