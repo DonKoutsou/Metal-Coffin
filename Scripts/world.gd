@@ -268,7 +268,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 		for Surv in Survivors:
 			var Nam = Surv.Name
 			if (Unit.GetShipName() == Nam):
-				Unit.Damage(Unit.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) - Surv.Hull, false)
+				Unit.Damage(Unit.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) - Surv.CurrentHull, false)
 				if (Unit is PlayerDrivenShip):
 					FigureOutInventory(Unit.Cpt.GetCharacterInventory(), Surv.Cards)
 				else: if (Unit.IsDead()):

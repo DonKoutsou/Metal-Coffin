@@ -109,7 +109,30 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	RealisticCardCost.text = var_to_str(Cost)
 	#if (Stats.OnPerformModule is OffensiveCardModule):
 		#CardTex.modulate = Color(1.0, 0.235, 0.132)
+
+func UpdateBattleStats(User : BattleShipStats) -> void:
+	var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
+	CardDesc.text = DescText
+	RealisticCardDesc.text = DescText
+
+func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
+	CStats = Stats
+	Cost = Stats.Energy
+	var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
+
+	CardName.text = Stats.CardName
+	RealisticCardname.text = Stats.CardName
+	CardTex.texture = Stats.Icon
 	
+	$Amm.visible = Amm > 1
+	$Amm/Label.text = var_to_str(Amm) + "x"
+	
+	CardDesc.text = DescText
+	RealisticCardDesc.text = DescText
+	
+	CardCost.text = var_to_str(Cost)
+	RealisticCardCost.text = var_to_str(Cost)
+
 func SetRealistic() -> void:
 	$SubViewportContainer/SubViewport/TextureRect.visible = true
 	$SubViewportContainer/SubViewport/Panel.visible = false

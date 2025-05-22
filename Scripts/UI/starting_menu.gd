@@ -105,10 +105,11 @@ func ChooseTutorial() -> void:
 	var c = get_tree().get_nodes_in_group("Credits")
 	if (c.size() > 0):
 		c[0].queue_free()
-		
+	
+	Selecting = true
 	HintDialogue.visible = true
 	var t = await ShowTutorial
-	
+	Selecting = false
 	ActionTracker.ShowTutorials = t
 	ActionTracker.GetInstance().CompletedActions.clear()
 	#if (t):

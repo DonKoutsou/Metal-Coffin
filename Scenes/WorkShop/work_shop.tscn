@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhbyfc1rfad2f"]
+[gd_scene load_steps=10 format=3 uid="uid://dhbyfc1rfad2f"]
 
 [ext_resource type="Script" uid="uid://cl0fuirqabjb0" path="res://Scripts/TownShop/work_shop.gd" id="1_4uhfw"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="1_6rtyi"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p28a8"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_bpcd3"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="3_4uhfw"]
+[ext_resource type="PackedScene" uid="uid://b6gyf4stqfreh" path="res://Resources/Funds/FundsDisplayTown.tscn" id="5_k666n"]
 [ext_resource type="PackedScene" uid="uid://cuutvp45vr0ew" path="res://Scenes/Inventory/WorkShopItemDescriptor.tscn" id="6_rs5of"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
@@ -29,7 +30,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_4uhfw")
-ShipButtonsParent = NodePath("PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer")
+ShipButtonsParent = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 EngineInventoryBoxParent = NodePath("PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer/Engines")
 SensorInventoryBoxParent = NodePath("PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer3/Sensors")
 FuelTankInventoryBoxParent = NodePath("PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer2/Fuel Tanks")
@@ -55,30 +56,47 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+
+[node name="Fund_Container" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_k666n")]
+custom_minimum_size = Vector2(222.475, 54.96)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Fund_Container" index="0"]
+theme_override_font_sizes/font_size = 36
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Docked Ships"
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rs5of")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Close"
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -187,3 +205,7 @@ size_flags_horizontal = 3
 texture = ExtResource("1_6rtyi")
 expand_mode = 1
 stretch_mode = 5
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+
+[editable path="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Fund_Container"]

@@ -7,6 +7,9 @@ class_name CardModule
 func GetDesc() -> String:
 	return ""
 
+func GetBattleDesc(User : BattleShipStats) -> String:
+	return GetDesc()
+
 func GetStatShortName(St : Stat) -> String:
 	var StatName : String
 	if (St == Stat.FIREPOWER):

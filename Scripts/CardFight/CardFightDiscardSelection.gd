@@ -11,10 +11,10 @@ signal CardSelected( Index : int )
 func _ready() -> void:
 	visible = false
 
-func SetCards(Cards : Array[Card]) -> void:
+func SetCards(User : BattleShipStats, Cards : Array[Card]) -> void:
 	for g in Cards.size():
 		var b = CardScene.instantiate() as Card
-		b.SetCardStats(Cards[g].CStats)
+		b.SetCardBattleStats(User, Cards[g].CStats)
 		
 		b.OnCardPressed.connect(TargetSelected.bind(g))
 		CardContainer.call_deferred("add_child", b)

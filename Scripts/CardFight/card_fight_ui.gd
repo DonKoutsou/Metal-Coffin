@@ -44,6 +44,10 @@ func ClearHand() -> void:
 	for g in PlayerCardPlecement.get_children():
 		g.free()
 
+func UpdateCardDesc(User : BattleShipStats) -> void:
+	for g : Card in PlayerCardPlecement.get_children():
+		g.UpdateBattleStats(User)
+
 func AddCardToHand(C : Card) -> void:
 	C.SetRealistic()
 	PlayerCardPlecement.add_child(C)
@@ -146,6 +150,9 @@ func InsertCardToDiscard(C : Card) -> void:
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
 	
+
+func CardDrawFail() -> void:
+	PlayCardInsertSound(CardSoundType.BEEPNO)
 
 func OnCardDrawn(C : Card) -> void:
 	PlayCardInsertSound(CardSoundType.BEEPLONG)

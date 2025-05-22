@@ -7,34 +7,26 @@ class_name TownScene
 #@export var FundAmm : Label
 @export var PortName : Label
 @export var PortBuffText : RichTextLabel
-@export var FuelPrice : Label
-@export var CurrentFuel : Label
-@export var FuelBar : ProgressBar
-@export var RepairPrice : Label
-@export var CurrentHull : Label
-@export var HullBar : ProgressBar
-@export var ItemPlecement : Control
-@export var RepRefPlecement : Control
-@export var WorkSh : WorkShop
-@export_group("Values")
-@export var FuelPricePerTon : float = 100
-@export var RepairpricePerRepairValue : float = 100
-@export var PlayerWallet : Wallet
+
+@export var TownBG : TownBackground
+
+@export_group("Buttons")
+@export var MerchendiseButton : Button
+@export var WorkshopButton : Button
+@export var FuelButton : Button
+
 @export_group("Scenes")
-@export var ItemScene : PackedScene
-@export var RestockStation : PackedScene
+
+@export var MerchShopScene : PackedScene
+@export var FuelStorageScene : PackedScene
+@export var WorkshopScene : PackedScene
 #"[color=#ffc315
 
 var TownFuel : float = 0
-#var PlFunds : float = 0
-var PlFuel : float = 0
-var PlMaxFuel : float = 0
 var BoughtFuel : float = 0
+var BoughtRepairs : float = 0
 
 var TownSpot : MapSpot
-var PlHull : float = 0
-var PlMaxHull : float = 0
-var BoughtRepairs : float = 0
 
 signal TransactionFinished(BFuel : float, BRepair : float, Ship : MapShip, TradeScene : TownScene)
 
@@ -45,74 +37,14 @@ func _ready() -> void:
 	PortName.text = TownSpot.GetSpotName() + " City Port"
 	SetTownBuffs()
 	
-	if (!TownSpot.HasFuel()):
-		FuelPricePerTon = 100
-	else:
-		FuelPricePerTon = 50
-
-	SetFuelData()
-	CurrentFuel.text = var_to_str(roundi(PlFuel + BoughtFuel))
-	FuelBar.max_value = PlMaxFuel
-	FuelBar.value = PlFuel + BoughtFuel
-	FuelPrice.text = var_to_str(FuelPricePerTon)
-	if (!TownSpot.HasRepair()):
-		RepairpricePerRepairValue = 200
-	else:
-		RepairpricePerRepairValue = 100
-
-	SetHullData()
-	CurrentHull.text = var_to_str(roundi(PlHull))
-	HullBar.max_value = PlMaxHull
-	HullBar.value = PlHull + BoughtRepairs
-	RepairPrice.text = var_to_str(RepairpricePerRepairValue)
-	
-	var Itms : Dictionary[Item, int]
-	for g in LandedShips:
-		var InvContents = g.Cpt.GetCharacterInventory().GetInventoryContents()
-		for it in InvContents:
-			if (Itms.has(it)):
-				Itms[it] += 1
-			else:
-				Itms[it] = 1
-		
 	for g in TownSpot.Merch:
 		var It = g.It
 		for z in Merch:
 			if (It == z.It):
 				z.Amm = g.Amm
 	#signal OnItemBought(It : Item)
-#signal OnItemSold(It : Item)
-	
-	for m : Merchandise in Merch:
-		if (m.Amm == 0 and !Itms.has(m.It)):
-			continue
 
-		var ItScene = ItemScene.instantiate() as TownShopItem
-		ItScene.It = m.It
-		ItScene.ItPrice = m.Price
-		ItScene.ShopAmm = m.Amm
-		if (Itms.has(m.It)):
-			ItScene.PlAmm = Itms[m.It]
-		else:
-			ItScene.PlAmm = 0
-		ItScene.LandedShips = LandedShips
-		ItScene.connect("OnItemBought", OnItemBought)
-		ItScene.connect("OnItemSold", OnItemSold)
-		ItemPlecement.visible = true
-		ItemPlecement.add_child(ItScene)
-	
-	WorkSh.Init(LandedShips)
-	
 	UISoundMan.GetInstance().Refresh()
-func SetFuelData():
-	for g in LandedShips:
-		PlMaxFuel += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-		PlFuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		
-func SetHullData():
-	for g in LandedShips:
-		PlMaxHull += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
-		PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 
 func SetTownBuffs() -> void:
 	var Text : String = ""
@@ -123,97 +55,52 @@ func SetTownBuffs() -> void:
 	if (TownSpot.HasUpgrade()):
 		Text += "[img]res://Assets/Items/materials-science.png[/img] UPGRADE TIME/COST -[p][p]"
 	PortBuffText.text = Text
-	
-func FuelBar_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
-		var rel = event.relative
-		var AddedFuel = roundi(((rel.x / 3) * (FuelBar.max_value / 100)))
-		UpdateFuelBar(AddedFuel)
-	
-func RepairBar_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
-		var rel = event.relative
-		var AddedRepair = roundi(((rel.x / 3) * (HullBar.max_value / 100)))
-		UpdateRepairBar(AddedRepair)
-		
-func UpdateFuelBar(AddedFuel : float):
-	$AudioStreamPlayer.play()
-	if (AddedFuel * FuelPricePerTon > PlayerWallet.Funds):
-		AddedFuel = PlayerWallet.Funds / FuelPricePerTon
-	if (AddedFuel > TownFuel):
-		AddedFuel = TownFuel
-	var NewPlFuel = PlFuel + BoughtFuel + AddedFuel
-	if (NewPlFuel < 0):
-		AddedFuel = 0 - (PlFuel + BoughtFuel)
-		NewPlFuel = 0
-	if (NewPlFuel > PlMaxFuel):
-		AddedFuel = PlMaxFuel - (PlFuel + BoughtFuel)
-		NewPlFuel = PlMaxFuel
-	TownFuel -= AddedFuel
-	BoughtFuel += AddedFuel
-	PlayerWallet.AddFunds(-(AddedFuel * FuelPricePerTon))
-	FuelBar.value = PlFuel + BoughtFuel
-	#FundAmm.text = var_to_str(roundi(PlayerWallet.Funds)) + " ₯"
-	CurrentFuel.text = var_to_str(roundi(PlFuel + BoughtFuel))
-	
-func UpdateRepairBar(AddedRepair : float):
-	$AudioStreamPlayer.play()
-	if (AddedRepair * RepairpricePerRepairValue > PlayerWallet.Funds):
-		AddedRepair = PlayerWallet.Funds / RepairpricePerRepairValue
-	var NewPlRepair = PlHull + BoughtRepairs + AddedRepair
-	
-	if (NewPlRepair < PlHull):
-		AddedRepair = 0
-		NewPlRepair = PlHull + BoughtRepairs
-
-	if (NewPlRepair > PlMaxHull):
-		AddedRepair = PlMaxHull - (PlHull + BoughtRepairs)
-		NewPlRepair = PlMaxHull
-
-	BoughtRepairs += AddedRepair
-	PlayerWallet.AddFunds(-(AddedRepair * RepairpricePerRepairValue))
-	HullBar.value = PlHull + BoughtRepairs
-	#FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
-	CurrentHull.text = var_to_str(roundi(PlHull + BoughtRepairs))
-func _on_button_pressed() -> void:
-	#PlayerWallet.Funds = PlFunds
-	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShips, self)
-	#queue_free()
-
 
 func On_MunitionShop_pressed() -> void:
-	ItemPlecement.get_parent().visible = true
-	RepRefPlecement.visible = false
-	$VBoxContainer/HBoxContainer2/Button3.pressed = false
+	MerchShop.visible = true
+	WorkshopButton.set_pressed_no_signal(false)
 
-func OnMunitionShopToggled(toggled_on: bool) -> void:
-	ItemPlecement.get_parent().visible = toggled_on
-	WorkSh.visible = false
-	RepRefPlecement.visible = false
-	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(toggled_on)
-	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(false)
-	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(false)
+
 
 func On_RefRef_Pressed() -> void:
-	ItemPlecement.get_parent().visible = false
-	RepRefPlecement.visible = true
-	$VBoxContainer/HBoxContainer2/Button2.pressed = false
+	MerchShop.visible = false
+	MerchendiseButton.set_pressed_no_signal(false)
 
-func OnRefuelShopPressed(toggled_on: bool) -> void:
-	ItemPlecement.get_parent().visible = false
-	WorkSh.visible = false
-	RepRefPlecement.visible = toggled_on
-	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(false)
-	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(toggled_on)
-	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(false)
+func OnRefuelShopPressed() -> void:
+	var Scene = FuelStorageScene.instantiate() as TownFuelStorages
+	add_child(Scene)
+	
+	var FuelPricePerTon : float
+	if (!TownSpot.HasFuel()):
+		FuelPricePerTon = 100
+	else:
+		FuelPricePerTon = 50
+	var RepairpricePerRepairValue : float
+	if (!TownSpot.HasRepair()):
+		RepairpricePerRepairValue = 200
+	else:
+		RepairpricePerRepairValue = 100
+	
+	Scene.Init(TownFuel, BoughtFuel, FuelPricePerTon, BoughtRepairs, RepairpricePerRepairValue, LandedShips)
+	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 
-func OnUpgradeShopPressed(toggled_on: bool) -> void:
-	WorkSh.visible = toggled_on
-	ItemPlecement.get_parent().visible = false
-	RepRefPlecement.visible = false
-	$VBoxContainer/HBoxContainer2/Button2.set_pressed_no_signal(false)
-	$VBoxContainer/HBoxContainer2/Button3.set_pressed_no_signal(false)
-	$VBoxContainer/HBoxContainer2/Button4.set_pressed_no_signal(toggled_on)
+func FuelExchangeFinished(RemainingReserves : float, Fuel : float, Repair : float) -> void:
+	TownFuel = RemainingReserves
+	BoughtFuel = Fuel
+	BoughtRepairs = Repair
+	
+
+func OnUpgradeShopPressed() -> void:
+	var WShop = WorkshopScene.instantiate() as WorkShop
+	add_child(WShop)
+	WShop.Init(LandedShips)
+
+func OnMunitionShopToggled() -> void:
+	var Scene = MerchShopScene.instantiate() as MerchShop
+	add_child(Scene)
+	Scene.ItemSold.connect(OnItemSold)
+	Scene.ItemBought.connect(OnItemBought)
+	Scene.Init(LandedShips, Merch)
 
 func OnItemSold(It : Item) -> void:
 	for g in LandedShips:
@@ -237,11 +124,10 @@ func OnItemBought(It : Item) -> void:
 			g.Amm -= 1
 			break
 
+func _on_town_background_position_changed() -> void:
+	WorkshopButton.global_position = TownBG.GetLocationForPosition(TownBackground.Location.WORKSHOP)
+	MerchendiseButton.global_position = TownBG.GetLocationForPosition(TownBackground.Location.MERCH)
+	FuelButton.global_position = TownBG.GetLocationForPosition(TownBackground.Location.FUEL)
 
-func _on_scroll_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
-		$VBoxContainer/HBoxContainer/Scroll.scroll_vertical -= event.relative.y
-		#UpdateShopItemsDetails()
-func UpdateShopItemsDetails() -> void:
-	for g:TownShopItem in $VBoxContainer/HBoxContainer/Scroll/VBoxContainer.get_children():
-		g.ToggleDetails(g.global_position.y > 0 and g.global_position.y < get_viewport_rect().size.y - 150)
+func _on_button_pressed() -> void:
+	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShips, self)

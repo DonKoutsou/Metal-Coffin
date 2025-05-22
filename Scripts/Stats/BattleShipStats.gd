@@ -3,6 +3,7 @@ extends Resource
 class_name BattleShipStats
 
 @export var Name : String
+@export var CurrentHull : float
 @export var Hull : float
 @export var Shield : float
 @export var FirePower : float

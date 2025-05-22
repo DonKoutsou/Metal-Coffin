@@ -39,6 +39,16 @@ func GetDescription() -> String:
 
 	return Desc
 
+func GetBattleDescription(User : BattleShipStats) -> String:
+	var Desc = ""
+	if is_instance_valid(OnPerformModule):
+		Desc += OnPerformModule.GetBattleDesc(User)
+	if (OnUseModules.size() > 0):
+		Desc + "\nOn Use : "
+		for g in OnUseModules:
+			Desc += g.GetBattleDesc(User) + "\n"
+
+	return Desc
 
 enum WeaponType{
 	NONE,

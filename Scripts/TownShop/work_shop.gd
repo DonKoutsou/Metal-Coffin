@@ -16,6 +16,8 @@ class_name WorkShop
 
 var CurrentShip : MapShip
 
+signal WorkshopClosed
+
 func Init(Ships : Array[MapShip]) -> void:
 	for g in Ships:
 		var b = Button.new()
@@ -137,3 +139,8 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	var box = Inv.GetBoxContainingItem(Box._ContainedItem)
 	
 	InventoryManager.GetInstance().ItemUpdgrade(box, Inv)
+
+
+func _on_button_pressed() -> void:
+	WorkshopClosed.emit()
+	queue_free()

@@ -1,0 +1,206 @@
+[gd_scene load_steps=16 format=3 uid="uid://d0ujbu68jgisw"]
+
+[ext_resource type="Texture2D" uid="uid://dflyqldu2cv8n" path="res://Assets/IndustrialLayer0.png" id="1_jxs1x"]
+[ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scenes/TownShop/parallax_background.gd" id="1_nakhd"]
+[ext_resource type="Texture2D" uid="uid://cs0gydlqe7kpf" path="res://Assets/IndustrialLayer1.png" id="2_0o5ko"]
+[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="3_cfcdw"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_gf58y"]
+[ext_resource type="Texture2D" uid="uid://dss36iha586s1" path="res://Assets/IndustrialLayer2.png" id="3_nakhd"]
+[ext_resource type="Texture2D" uid="uid://dsgqqj48iwm8p" path="res://Assets/IndustrialLayer-1.png" id="4_t75tb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 375
+border_blend = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t75tb"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 20, 1)
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 4.565
+initial_velocity_min = 73.57
+initial_velocity_max = 81.57
+angular_velocity_min = 2.99998
+angular_velocity_max = 2.99998
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.0
+
+[sub_resource type="Curve" id="Curve_cfcdw"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 28.2851), 0.0, -158.954, 0, 0, Vector2(1, -15.5318), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t75tb"]
+curve = SubResource("Curve_cfcdw")
+
+[sub_resource type="Curve" id="Curve_gf58y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cfcdw"]
+curve = SubResource("Curve_gf58y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cfcdw"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+spread = 12.392
+initial_velocity_min = 32.13
+initial_velocity_max = 32.13
+angular_velocity_min = 23.46
+angular_velocity_max = 23.46
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 4.0
+linear_accel_curve = SubResource("CurveTexture_t75tb")
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_cfcdw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gf58y"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 400, 1)
+direction = Vector3(-1, 0, 0)
+spread = 4.565
+initial_velocity_min = 389.56
+initial_velocity_max = 393.57
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+
+[node name="TownBackground" type="ParallaxBackground"]
+script = ExtResource("1_nakhd")
+LimitTop = 1920.0
+LimitSide = 160.0
+LocationPositions = Dictionary[int, NodePath]({
+0: NodePath("ParallaxLayer3/Parallax2D/WorkShop"),
+1: NodePath("ParallaxLayer3/Parallax2D/Fuel"),
+2: NodePath("ParallaxLayer3/Parallax2D/Merch")
+})
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gf58y")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D"]
+position = Vector2(640, 180)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("4_t75tb")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
+modulate = Color(1, 1, 1, 0.1)
+position = Vector2(1650, -18)
+amount = 20
+texture = ExtResource("3_cfcdw")
+lifetime = 30.0
+preprocess = 10.0
+randomness = 1.0
+visibility_rect = Rect2(-1920, 0, 1868.26, 800)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_t75tb")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
+position = Vector2(223, -270)
+amount = 20
+texture = ExtResource("3_gf58y")
+lifetime = 5.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_cfcdw")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
+position = Vector2(1288, -72)
+amount = 20
+texture = ExtResource("3_gf58y")
+lifetime = 5.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_cfcdw")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D"]
+position = Vector2(640, 180)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("1_jxs1x")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1.5, 1.5)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D"]
+position = Vector2(640, 180)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_0o5ko")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+modulate = Color(1, 1, 1, 0.1)
+position = Vector2(1650, 99)
+amount = 20
+texture = ExtResource("3_cfcdw")
+lifetime = 30.0
+preprocess = 10.0
+randomness = 1.0
+visibility_rect = Rect2(-1920, -200, 1868.26, 800)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_t75tb")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+position = Vector2(1650, 316)
+amount = 40
+texture = ExtResource("3_gf58y")
+lifetime = 6.0
+visibility_rect = Rect2(-1920, -400, 1868.26, 800)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gf58y")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(2, 2)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D"]
+position = Vector2(640, 180)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("3_nakhd")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer3/Parallax2D"]
+modulate = Color(1, 1, 1, 0.1)
+position = Vector2(1650, 343)
+amount = 20
+texture = ExtResource("3_cfcdw")
+lifetime = 30.0
+preprocess = 10.0
+randomness = 1.0
+visibility_rect = Rect2(-1920, -400, 1868.26, 800)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_t75tb")
+
+[node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+position = Vector2(-126, 503)
+
+[node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+position = Vector2(1222, 510)
+
+[node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+position = Vector2(787, 362)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(642, 359)
+position_smoothing_enabled = true

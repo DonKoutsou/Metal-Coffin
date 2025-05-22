@@ -1,10 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bahj28qps5ssw"]
+[gd_scene load_steps=23 format=3 uid="uid://bahj28qps5ssw"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="3_5r13l"]
-[ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_u2135"]
-[ext_resource type="PackedScene" uid="uid://bt2v8s1av0q6i" path="res://Scenes/TownShop/TownShopItem.tscn" id="4_wqnl6"]
 [ext_resource type="Resource" uid="uid://cgcfrrlvaj7mi" path="res://Resources/Merch/CruiseMissile.tres" id="4_ydye5"]
 [ext_resource type="Resource" uid="uid://fgpjo7b6j2lp" path="res://Resources/Merch/TacticalMissile.tres" id="5_11niw"]
 [ext_resource type="Resource" uid="uid://dpqowk6037rdv" path="res://Resources/Merch/UnguidedMissile.tres" id="6_31owc"]
@@ -13,21 +11,29 @@
 [ext_resource type="Resource" uid="uid://byfi8gb5rfaq5" path="res://Resources/Merch/Flares.tres" id="8_quutr"]
 [ext_resource type="Resource" uid="uid://csn5s05u6rd82" path="res://Resources/Merch/FireAmmo.tres" id="9_t8y33"]
 [ext_resource type="Resource" uid="uid://bjp66pbcmoto5" path="res://Resources/Merch/ProxAmmo.tres" id="10_vs4qv"]
+[ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/parallax_background.tscn" id="14_vaeb3"]
 [ext_resource type="PackedScene" uid="uid://b6gyf4stqfreh" path="res://Resources/Funds/FundsDisplayTown.tscn" id="15_0uykb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
-[ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBg_001.png" id="15_cp5cc"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/WorkShop/work_shop.tscn" id="17_t244x"]
+[ext_resource type="PackedScene" uid="uid://bhpyiqwlbnmad" path="res://Scenes/TownShop/merch_ship.tscn" id="17_vaeb3"]
 [ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="18_box5h"]
+[ext_resource type="PackedScene" uid="uid://c6pyjquo47hnr" path="res://Scenes/TownShop/fuel_storages.tscn" id="18_u4st4"]
 [ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="18_vaeb3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
+[sub_resource type="Environment" id="Environment_vaeb3"]
+background_mode = 3
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_white = 16.0
+adjustment_enabled = true
+adjustment_contrast = 1.28
 
-[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "PortBuffText", "FuelPrice", "CurrentFuel", "FuelBar", "RepairPrice", "CurrentHull", "HullBar", "ItemPlecement", "RepRefPlecement", "WorkSh")]
+[sub_resource type="World3D" id="World3D_oyy4e"]
+environment = SubResource("Environment_vaeb3")
+
+[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "PortBuffText", "TownBG", "MerchendiseButton", "WorkshopButton", "FuelButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,308 +44,160 @@ mouse_force_pass_scroll_events = false
 theme = ExtResource("1_ca22g")
 script = ExtResource("2_epy1b")
 Merch = Array[ExtResource("3_5r13l")]([ExtResource("10_vs4qv"), ExtResource("9_t8y33"), ExtResource("6_vlkdt"), ExtResource("6_31owc"), ExtResource("4_ydye5"), ExtResource("5_11niw"), ExtResource("7_bygo8"), ExtResource("8_quutr")])
-PortName = NodePath("VBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/CityName")
-PortBuffText = NodePath("VBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer/CityBuffs")
-FuelPrice = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
-CurrentFuel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
-FuelBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/ProgressBar")
-RepairPrice = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer2/RepairPrice")
-CurrentHull = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer/HullAmm")
-HullBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/ProgressBar")
-ItemPlecement = NodePath("VBoxContainer/HBoxContainer/Scroll/VBoxContainer")
-RepRefPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer3")
-WorkSh = NodePath("VBoxContainer/HBoxContainer/WorkShop")
-PlayerWallet = ExtResource("3_u2135")
-ItemScene = ExtResource("4_wqnl6")
+PortName = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/CityName")
+PortBuffText = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer/CityBuffs")
+TownBG = NodePath("SubViewportContainer/SubViewport/TownBackground")
+MerchendiseButton = NodePath("Button2")
+WorkshopButton = NodePath("Button3")
+FuelButton = NodePath("Button4")
+MerchShopScene = ExtResource("17_vaeb3")
+FuelStorageScene = ExtResource("18_u4st4")
+WorkshopScene = ExtResource("17_t244x")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("15_cp5cc")
+stretch = true
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = 34.0
-offset_right = -14.0
-offset_bottom = -34.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+world_3d = SubResource("World3D_oyy4e")
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+[node name="TownBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("14_vaeb3")]
+
+[node name="Button2" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
+offset_left = 462.0
+offset_top = 383.0
+offset_right = 762.0
+offset_bottom = 416.0
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "AMUNITION"
+
+[node name="Button3" type="Button" parent="." groups=["DigitalButtons"]]
+layout_mode = 2
+offset_left = 462.0
+offset_top = 431.0
+offset_right = 762.0
+offset_bottom = 464.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "REFUEL / REPAIR"
+
+[node name="Button4" type="Button" parent="." groups=["DigitalButtons"]]
+layout_mode = 2
+offset_left = 462.0
+offset_top = 479.0
+offset_right = 762.0
+offset_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "WORKSHOP"
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 30.0
+offset_right = 328.0
+offset_bottom = -30.0
+grow_vertical = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("15_baphb")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2"]
+[node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer2/PanelContainer2"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="CityName" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer"]
+[node name="CityName" type="Label" parent="HBoxContainer2/PanelContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 50
 text = "Alivia City Port"
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/PanelContainer2/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="CityBuffs" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer"]
+[node name="CityBuffs" type="RichTextLabel" parent="HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 bbcode_enabled = true
 fit_content = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Available Funds"
 
-[node name="Fund_Container" parent="VBoxContainer/HBoxContainer2/VBoxContainer" instance=ExtResource("15_0uykb")]
+[node name="Fund_Container" parent="HBoxContainer2/VBoxContainer" instance=ExtResource("15_0uykb")]
 custom_minimum_size = Vector2(300, 31.275)
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 10
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-toggle_mode = true
-text = "AMUNITION"
-
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-toggle_mode = true
-text = "REFUEL / REPAIR"
-
-[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 2
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-toggle_mode = true
-text = "WORKSHOP"
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 4
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 text = "FINILIZE TRANSACTION"
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 75
 alignment = 1
 
-[node name="Scroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ayl0t")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Scroll"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_constants/separation = 10
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_constants/separation = 40
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("15_baphb")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Fuel Reserves"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FuelAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "4214"
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 16
-text = "tons"
-horizontal_alignment = 2
-
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(6.86, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_ca22g")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 16
-text = "Ton Price:"
-
-[node name="TonPrice" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "202139"
-
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_vertical = 2
-value = 27.12
-show_percentage = false
-
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("15_baphb")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Hull Condition"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HullAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "100"
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 16
-text = "Hull Integrity"
-horizontal_alignment = 2
-
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(6.86, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_ca22g")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 16
-text = "Repair Price:"
-
-[node name="RepairPrice" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/HBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "202"
-
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_vertical = 3
-value = 27.12
-show_percentage = false
-
-[node name="WorkShop" parent="VBoxContainer/HBoxContainer" instance=ExtResource("17_t244x")]
-visible = false
-layout_mode = 2
-
-[node name="TownShowWelcomScreen" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="TownShowWelcomScreen" type="PanelContainer" parent="HBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("15_baphb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/TownShowWelcomScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/TownShowWelcomScreen"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/TownShowWelcomScreen/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TownShowWelcomScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -351,23 +209,23 @@ aw
 faw
 faw"
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = ExtResource("15_baphb")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 texture = ExtResource("18_vaeb3")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/TownShowWelcomScreen/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/TownShowWelcomScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer2"]
+[node name="Button" type="Button" parent="HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -380,10 +238,8 @@ bus = &"MapSounds"
 stream = ExtResource("18_box5h")
 autoplay = true
 
-[connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button2" to="." method="OnMunitionShopToggled"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button3" to="." method="OnRefuelShopPressed"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer2/Button4" to="." method="OnUpgradeShopPressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/Scroll" to="." method="_on_scroll_gui_input"]
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer2/VBoxContainer2/ProgressBar" to="." method="RepairBar_gui_input"]
+[connection signal="PositionChanged" from="SubViewportContainer/SubViewport/TownBackground" to="." method="_on_town_background_position_changed"]
+[connection signal="pressed" from="Button2" to="." method="OnMunitionShopToggled"]
+[connection signal="pressed" from="Button3" to="." method="OnRefuelShopPressed"]
+[connection signal="pressed" from="Button4" to="." method="OnUpgradeShopPressed"]
+[connection signal="pressed" from="HBoxContainer2/Button" to="." method="_on_button_pressed"]

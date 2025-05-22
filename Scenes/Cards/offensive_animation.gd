@@ -28,7 +28,7 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 	AttackCard.Dissable(true)
 
 
-	AttackCard.SetCardStats(AtackCard)
+	AttackCard.SetCardBattleStats(OriginShip, AtackCard)
 
 	$HBoxContainer.add_child(AttackCard)
 	
@@ -47,7 +47,7 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 				DefC.Dissable(true)
 				#var Opts2 : Array[CardOption] = []
 				
-				DefC.SetCardStats(Def)
+				DefC.SetCardBattleStats(g, Def)
 				add_child(DefC)
 				if (!FriendShip):
 					var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
@@ -154,11 +154,11 @@ func BuffTweenEnded(target : Control) -> void:
 	DFloater.global_position = (target.global_position + (target.size / 2)) - DFloater.size / 2
 	DFloater.Ended.connect(AnimEnded)
 
-func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Control], _FriendShip : bool) -> void:
+func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipStats, TargetShips : Array[Control], _FriendShip : bool) -> void:
 
 	var DeffenceCard = CardScene.instantiate() as Card
 	DeffenceCard.Dissable(true)
-	DeffenceCard.SetCardStats(DefCard)
+	DeffenceCard.SetCardBattleStats(Performer, DefCard)
 	$HBoxContainer.add_child(DeffenceCard)
 
 	DeffenceCard.show_behind_parent = true
@@ -212,11 +212,11 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, TargetShips : Array[Con
 	DeffenceCard.KillCard(0.5, false)
 	
 	
-func DoSelection(C : CardStats, User : Control) -> void:
+func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> void:
 	var DeffenceCard = CardScene.instantiate() as Card
 	DeffenceCard.Dissable(true)
 	
-	DeffenceCard.SetCardStats(C)
+	DeffenceCard.SetCardBattleStats(Performer, C)
 	add_child(DeffenceCard)
 	
 	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (User.size.y / 2))

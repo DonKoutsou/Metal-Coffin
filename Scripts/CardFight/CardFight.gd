@@ -51,6 +51,7 @@ class_name Card_Fight
 @export var DeckP : DeckPileUI
 @export var PlayerFleetSizeLabel : Label
 @export var EnemyFleetSizeLabel : Label
+@export var CurrentPlayerLabel : Label
 #@export var ShipFallBackButton : Button
 @export_group("FightSettings")
 @export var StartingCardAmm : int = 5
@@ -110,6 +111,8 @@ signal CardFightEnded(Survivors : Array[BattleShipStats])
 var CardSelectSize : float
 
 func _ready() -> void:
+	CurrentPlayerLabel.visible = false
+	
 	ExternalUI = ExternalCardFightUI.GetInstacne()
 	ExternalUI.RegisterFight(self)
 	ExternalUI.OnDeckPressed.connect(_on_deck_button_pressed)
@@ -362,6 +365,8 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	viz.ToggleSpeedBuff(BattleS.SpeedBuff > 1, BattleS.SpeedBuff)
 	viz.ToggleDmgDebuff(BattleS.FirePowerDeBuff > 0)
 	viz.ToggleSpeedDebuff(BattleS.SpeedDeBuff > 0)
+	if (ShipTurns[CurrentTurn] == BattleS):
+		UpdateCardDescriptions(BattleS)
 
 #atm of a ship is on fire is stored in the UI. Should change #TODO
 func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
@@ -438,9 +443,10 @@ func RunTurn() -> void:
 	
 	CurrentTurn = 0
 	
-	
+	CurrentPlayerLabel.visible = true
 	
 	for Ship in ShipTurns:
+		CurrentPlayerLabel.text = "{0} picking".format([Ship.Name])
 		await DoActionDeclaration(Ship.Name + "'s turn", 1.5)
 		var viz = GetShipViz(Ship)
 		viz.Enable()
@@ -485,7 +491,8 @@ func RunTurn() -> void:
 		GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 		CurrentTurn += 1
 	
-		
+	CurrentPlayerLabel.visible = false
+	
 	ClearCards()
 	
 	#Sort ships again to make sure speed buffs are taken into account
@@ -516,9 +523,11 @@ func RunTurn() -> void:
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PERFORM)
 		ActionTracker.GetInstance().ShowTutorial("Action Perform Phase", "In the Action Perform Phase each ship performs the moves they've picked in the Action Pick Phase.\nIn the end of the phase any unused card, like an extra deffensive card, will be returned to the discard pile.", [], true)
 	
+	CurrentPlayerLabel.visible = true
 	#AnimationPlecement.visible = true
 	CurrentTurn = 0
 	for Ship in ShipTurns:
+		CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
 		var PerformedActions = await PerformActions(Ship)
 		
 		var D = GetShipDeck(Ship)
@@ -532,7 +541,9 @@ func RunTurn() -> void:
 			return
 		
 		CurrentTurn += 1
-
+	
+	CurrentPlayerLabel.visible = false
+	
 	await DoFireDamage()
 	
 	#AnimationPlecement.visible = false
@@ -614,7 +625,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				print("{0} has been added to {1}'s discard pile.".format([SelectedAction.CardName, Ship.Name]))
 				EnemyDeck.DiscardPile.append(SelectedAction)
 			else:
-				await DoCardSelectAnimation(SelectedAction, GetShipViz(Ship))
+				await DoCardSelectAnimation(SelectedAction, Ship, GetShipViz(Ship))
 				
 				var ShipAction = CardFightAction.new()
 				ShipAction.Action = SelectedAction
@@ -781,14 +792,14 @@ func HandleDrawDriscard(Performer : BattleShipStats, Mod : DrawCardModule) -> vo
 		
 		var ToDraw = D.DeckPile.pop_front()
 		var c = CardScene.instantiate() as Card
-		c.SetCardStats(ToDraw)
+		c.SetCardBattleStats(Performer, ToDraw)
 		#c.connect("OnCardPressed", OnCardSelected)
 		
 		DeckP.OnCardDrawn()
 		CardsToDraw.append(c)
 	
 	while CardsToDiscard.size() < DiscardAmmount:
-		CardSelect.SetCards(CardsToDraw)
+		CardSelect.SetCards(Performer, CardsToDraw)
 		SelectingTarget = true
 		var ToDiscard : int = await CardSelect.CardSelected
 		SelectingTarget = false
@@ -851,7 +862,7 @@ func HandleResupply(Performer : BattleShipStats, Action : CardStats, Mod : Resup
 	for T in Targets:
 		UpdateEnergy(T, T.Energy + resupplyamm, T == Performer)
 			
-	await DoDeffenceAnim(Action, Mod, TargetViz, IsShipFriendly(Performer), [])
+	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, IsShipFriendly(Performer), [])
 
 func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : ReserveModule) -> void:
 	var resupplyamm = Mod.ReserveAmmount
@@ -865,12 +876,12 @@ func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : 
 	for T in Targets:
 		UpdateReserves(T, T.EnergyReserves + resupplyamm, T == Performer)
 			
-	await DoDeffenceAnim(Action, Mod, TargetViz, IsShipFriendly(Performer), [])
+	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, IsShipFriendly(Performer), [])
 
 func HandleFireExtinguish(Performer : BattleShipStats, Action : CardStats, Mod : CardModule) -> void:
 	var viz = GetShipViz(Performer)
 
-	await DoDeffenceAnim(Action, Mod, [viz], IsShipFriendly(Performer), [viz.ToggleFire.bind(false)])
+	await DoDeffenceAnim(Action, Mod, Performer, [viz], IsShipFriendly(Performer), [viz.ToggleFire.bind(false)])
 	
 	
 func HandleSelfDamage(Performer : BattleShipStats, Action : CardStats, Mod : SelfDamageModule) -> void:
@@ -900,7 +911,7 @@ func HandleShield(Performer : BattleShipStats, Action : CardStats, Mod : ShieldC
 	for T in Targets:
 		Callables.append(ShieldShip.bind(T, Mod.ShieldAmm * Action.Tier))
 	
-	await DoDeffenceAnim(Action, Mod, TargetViz, EnemyCombatants.has(Performer), Callables)
+	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
 func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : CauseFireModule) -> void:
 	var viz = GetShipViz(Performer)
@@ -915,7 +926,7 @@ func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : Caus
 	for T in Targets:
 		Callables.append(ToggleFireToShip.bind(T, true))
 		
-	await DoDeffenceAnim(Action, Mod, TargetViz, EnemyCombatants.has(Performer), Callables)
+	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
 func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModule) -> void:
 	var Targets = await HandleTargets(Mod, Performer)
@@ -931,7 +942,7 @@ func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModul
 		else : if (Mod.StatToBuff == CardModule.Stat.SPEED):
 			Callables.append(BuffShipSpeed.bind(T, Mod.BuffAmmount, Mod.BuffDuration))
 			
-	await DoDeffenceAnim(Action, Mod, TargetViz, EnemyCombatants.has(Performer), Callables)
+	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
 func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardModule) -> void:
 	var Targets = await HandleTargets(Mod, Performer)
@@ -947,7 +958,7 @@ func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardMod
 		else : if (Mod.StatToDeBuff == CardModule.Stat.SPEED):
 			Callables.append(DeBuffShipSpeed.bind(T, Mod.DeBuffAmmount, Mod.DeBuffDuration))
 			
-	await DoDeffenceAnim(Action, Mod, TargetViz, EnemyCombatants.has(Performer), Callables)
+	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
 #Used to handle targeting both for player and enemies
 func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
@@ -1004,12 +1015,12 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 	
 	return Targets
 
-func DoDeffenceAnim(Action : CardStats, Mod : CardModule, TargetViz : Array[Control], _FriendShip : bool, ToCallOnContact : Array[Callable]) -> void:
+func DoDeffenceAnim(Action : CardStats, Mod : CardModule, Performer : BattleShipStats, TargetViz : Array[Control], _FriendShip : bool, ToCallOnContact : Array[Callable]) -> void:
 	#print("Starting Def Anim")
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
-	anim.DoDeffensive(Action, Mod, TargetViz, _FriendShip)
+	anim.DoDeffensive(Action, Mod, Performer, TargetViz, _FriendShip)
 	
 	
 	for g in ToCallOnContact:
@@ -1045,11 +1056,11 @@ func DoOffenceAnim(Action : CardStats, Mod : CardModule, Targets : Array[BattleS
 	anim.visible = false
 	anim.queue_free()
 
-func DoCardSelectAnimation(Action : CardStats, User : Control) -> void:
+func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User : Control) -> void:
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
-	anim.DoSelection(Action, User)
+	anim.DoSelection(Action, Performer, User)
 	
 	var S = DeletableSoundGlobal.new()
 	S.stream = CardPlecementSound
@@ -1114,14 +1125,14 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -
 		var origshield = Ship.Shield
 		Ship.Shield = max(0,origshield - Amm)
 		Dmg -= origshield - Ship.Shield
-	Ship.Hull -= Dmg
+	Ship.CurrentHull -= Dmg
 
 	if (CauseFire or TrySetFire()):
 		ToggleFireToShip(Ship, true)
 	
 	if (IsShipFriendly(Ship)):
 		
-		if (Ship.Hull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
+		if (Ship.CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
 			ActionTracker.GetInstance().ShowTutorial("Lossing Ships", "When a ships hull reaches zero, they are threwn out of the fight and the capmaign. Make use of the 'Switch Ship' button to switch up ships in the fight. The ship that gets switched in loses one turn.", [], true)
 	
@@ -1131,7 +1142,7 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false) -
 	else:
 		DamageDone += Dmg
 	
-	if (Ship.Hull <= 0):
+	if (Ship.CurrentHull <= 0):
 		if (ShipDestroyed(Ship)):
 			return true
 		else:
@@ -1345,7 +1356,7 @@ func DrawCard(Performer : BattleShipStats) -> bool:
 	var C = D.DeckPile.pop_front()
 	
 	var c = CardScene.instantiate() as Card
-	c.SetCardStats(C)
+	c.SetCardBattleStats(Performer, C)
 	#c.connect("OnCardPressed", OnCardSelected)
 	
 	DeckP.OnCardDrawn()
@@ -1377,7 +1388,7 @@ func DrawSpecificCard(Performer : BattleShipStats, Spawn : CardStats) -> void:
 			await ShuffleDiscardedIntoDeck(D)
 	
 	var c = CardScene.instantiate() as Card
-	c.SetCardStats(Spawn)
+	c.SetCardBattleStats(Performer, Spawn)
 	#c.connect("OnCardPressed", OnCardSelected)
 	
 	DeckP.OnCardDrawn()
@@ -1395,22 +1406,24 @@ func DrawSpecificCard(Performer : BattleShipStats, Spawn : CardStats) -> void:
 func UpdateHandCards() -> void:
 	
 	ExternalUI.ClearHand()
-	
 
 	var CharDeck = GetShipDeck(ShipTurns[CurrentTurn])
 	
 	for ran in CharDeck.Hand:
 		var c = CardScene.instantiate() as Card
 		
-		c.SetCardStats(ran)
+		c.SetCardBattleStats(ShipTurns[CurrentTurn], ran)
 		#c.connect("OnCardPressed", OnCardSelected)
 		
 		ExternalUI.AddCardToHand(c)
-
-		
 		#call_deferred("DoCardPlecementAnimation", c, ExternalUI.GetDeckkPile().global_position)
 	
 	UpdateHandAmount(CharDeck.Hand.size())
+
+func UpdateCardDescriptions(User : BattleShipStats):
+	ExternalUI.UpdateCardDesc(User)
+	for g : Card in SelectedCardPlecement.get_children():
+		g.UpdateBattleStats(User)
 
 func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	var CanPlace : bool = false
@@ -1439,7 +1452,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 				
 		Hand.append(C)
 		
-		CardSelect.SetCards(Hand)
+		CardSelect.SetCards(Performer, Hand)
 		SelectingTarget = true
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)
@@ -1502,10 +1515,10 @@ func ClearCards() -> void:
 	for g in SelectedCardPlecement.get_children():
 		g.free()
 
-func DoCardPlecementAnimation(C : Card, OriginalPos : Vector2) -> void:
+func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Vector2) -> void:
 	var c = CardScene.instantiate() as Card
 	
-	c.SetCardStats(C.CStats)
+	c.SetCardBattleStats(User, C.CStats)
 	#c.TargetLocs = C.TargetLocs
 	$SubViewport/Control2.add_child(c)
 	c.global_position = OriginalPos
@@ -1566,7 +1579,7 @@ func OnCardSelected(C : Card) -> bool:
 		Action = C.CStats
 		
 		var c = CardScene.instantiate() as Card
-		c.SetCardStats(Action)
+		c.SetCardBattleStats(Ship, Action)
 		
 		var ShipAction = CardFightAction.new()
 		ShipAction.Action = Action
@@ -1590,7 +1603,7 @@ func OnCardSelected(C : Card) -> bool:
 
 		ActionList.AddAction(CurrentShip, ShipAction)
 		
-		call_deferred("DoCardPlecementAnimation", c, CardPosition)
+		call_deferred("DoCardPlecementAnimation", Ship, c, CardPosition)
 		C.get_parent().queue_free()
 
 	else:
@@ -1743,7 +1756,7 @@ func RemoveCard(C : Card) -> void:
 	
 	#UpdateHandCards()
 	var c = CardScene.instantiate() as Card
-	c.SetCardStats(C.CStats)
+	c.SetCardBattleStats(ShipTurns[CurrentTurn], C.CStats)
 	#c.connect("OnCardPressed", OnCardSelected)
 	
 	ExternalUI.OnCardDrawn(c)
@@ -1834,11 +1847,11 @@ func _on_deck_button_pressed() -> void:
 	
 	if (SelectingTarget or Energy < 1 or EnemyPickingMove):
 		ExternalUI.GetEnergyBar().NotifyNotEnough()
+		ExternalUI.CardDrawFail()
 		return
 	
 	if (await DrawCard(Ship)):
 		UpdateEnergy(Ship, Energy - 1, true)
-
 
 func UpdateHandAmount(NewAmm : int) -> void:
 	HandAmmountLabel.text = "In Hand {0}/{1}".format([NewAmm, MaxCardsInHand])

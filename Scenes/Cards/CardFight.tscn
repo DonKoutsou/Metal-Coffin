@@ -83,7 +83,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "Cloud", "DiscardP", "DeckP", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "Cloud", "DiscardP", "DeckP", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -120,6 +120,7 @@ DiscardP = NodePath("SubViewport/Control2/DiscardPile")
 DeckP = NodePath("SubViewport/Control2/DeckButton")
 PlayerFleetSizeLabel = NodePath("SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/Control/Label")
 EnemyFleetSizeLabel = NodePath("SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/Control/Label")
+CurrentPlayerLabel = NodePath("SubViewport/Control2/CurrentPlayerLabel")
 StartingCardAmm = 3
 MaxCardsInHand = 8
 MaxCombatants = 3
@@ -174,6 +175,21 @@ offset_right = 640.0
 offset_bottom = 640.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CurrentPlayerLabel" type="Label" parent="SubViewport/Control2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -198.0
+offset_top = 39.0
+offset_right = 198.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Amol Picking Moves"
+horizontal_alignment = 1
+uppercase = true
 
 [node name="Action Declaration" type="PanelContainer" parent="SubViewport/Control2"]
 z_index = 1
@@ -255,7 +271,7 @@ script = ExtResource("24_d8sco")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer"]
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 172.735)
 layout_mode = 2
 mouse_filter = 2
 
