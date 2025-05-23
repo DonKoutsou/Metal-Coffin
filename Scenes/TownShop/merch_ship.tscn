@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhpyiqwlbnmad"]
+[gd_scene load_steps=7 format=3 uid="uid://bhpyiqwlbnmad"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_bs0sk"]
 [ext_resource type="Script" uid="uid://lq5jxesgjrsy" path="res://Scripts/TownShop/merch_ship.gd" id="2_4302v"]
 [ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBg_001.png" id="2_u711y"]
 [ext_resource type="PackedScene" uid="uid://bt2v8s1av0q6i" path="res://Scenes/TownShop/TownShopItem.tscn" id="3_4302v"]
+[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="5_ahaja"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
 content_margin_left = 5.0
@@ -48,6 +49,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Leave"
+
+[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ahaja")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="gui_input" from="VBoxContainer/Scroll" to="." method="_on_scroll_gui_input"]
 [connection signal="pressed" from="VBoxContainer/LeaveMerch" to="." method="_on_leave_merch_pressed"]

@@ -24,7 +24,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_bf8ot"]
 script = ExtResource("2_7h107")
 StatName = 6
-StatBase = 100.0
+StatBase = 110.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -144,4 +144,4 @@ CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 0
 ProvidingCaptains = Array[ExtResource("1_phe2p")]([])
-Cards = Array[ExtResource("3_x13ps")]([])
+Cards = Dictionary[ExtResource("3_x13ps"), int]({})

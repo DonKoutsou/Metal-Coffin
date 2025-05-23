@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkl2a6ey2cxpg"]
+[gd_scene load_steps=10 format=3 uid="uid://bkl2a6ey2cxpg"]
 
 [ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://Scripts/MapSpot/Happenings/HappeningInstance.gd" id="2_nimax"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="4_6q6vd"]
@@ -8,13 +8,24 @@
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
 [ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="6_6q6vd"]
 
-[node name="HappeningInstance" type="PanelContainer" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "DiagButtons", "NextDialogueButton", "SkipDialogueButton", "Line", "Amp") groups=["Happening"]]
+[sub_resource type="Environment" id="Environment_vaeb3"]
+background_mode = 3
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_white = 16.0
+adjustment_enabled = true
+
+[sub_resource type="World3D" id="World3D_kvmkw"]
+environment = SubResource("Environment_vaeb3")
+
+[node name="HappeningInstance" type="Control" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "DiagButtons", "NextDialogueButton", "SkipDialogueButton", "Line", "Amp") groups=["Happening"]]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("4_gqhsy")
 script = ExtResource("2_nimax")
 OptionParent = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer")
 HappeningTitle = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/Label")
@@ -28,8 +39,33 @@ TextFloater = ExtResource("4_6q6vd")
 Line = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer/LineDrawer")
 Amp = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer/Control")
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+world_3d = SubResource("World3D_kvmkw")
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 17.0
+offset_right = -13.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
@@ -57,6 +93,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 2
+size_flags_vertical = 3
 texture = ExtResource("4_hqvhd")
 expand_mode = 1
 stretch_mode = 6
@@ -64,6 +101,7 @@ stretch_mode = 6
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="LineDrawer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("5_ylhno")]
 custom_minimum_size = Vector2(120, 0)

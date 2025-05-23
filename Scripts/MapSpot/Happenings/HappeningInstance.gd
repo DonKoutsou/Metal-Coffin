@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 class_name HappeningInstance
 
@@ -40,6 +40,10 @@ var CurrentText : int
 func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
 	#set_physics_process(false)
+	var TownBG = EventSpot.SpotType.BackgroundScene.instantiate() as TownBackground
+	$SubViewportContainer/SubViewport.add_child(TownBG)
+	TownBG.set_physics_process(false)
+	
 	Tw = create_tween()
 	Tw.set_trans(Tween.TRANS_BOUNCE)
 	Tw.tween_property(Line, "amplitude", randf_range(3, 20), 1)

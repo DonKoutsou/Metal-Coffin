@@ -138,4 +138,4 @@ CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 0
 ProvidingCaptains = Array[ExtResource("3_5m53b")]([])
-Cards = Array[ExtResource("3_alabf")]([])
+Cards = Dictionary[ExtResource("3_alabf"), int]({})

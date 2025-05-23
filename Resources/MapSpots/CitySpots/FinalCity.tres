@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://1vptbvrlos7"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://1vptbvrlos7"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_j1plu"]
+[ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="1_toe1d"]
 [ext_resource type="Resource" uid="uid://dppja8f62kfle" path="res://Resources/MapSpots/CitySpots/SpotInfo/Dormak.tres" id="2_toe1d"]
 [ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="3_0xhkr"]
 [ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="4_7vqyx"]
@@ -15,4 +16,5 @@ metadata/_custom_type_script = "uid://bqgyl8uqmo3sl"
 script = ExtResource("4_7vqyx")
 SpotK = 2
 VisibleOnStart = true
+BackgroundScene = ExtResource("1_toe1d")
 Data = SubResource("Resource_o1avt")

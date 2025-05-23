@@ -40,8 +40,8 @@ func _ready() -> void:
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
 
-func GetCards() -> Dictionary:
-	var CardsInInventory : Dictionary = {}
+func GetCards() -> Dictionary[CardStats, int]:
+	var CardsInInventory : Dictionary[CardStats, int] = {}
 	for C : CardStats in _CardInventory.keys():
 		for z : CardStats in CardsInInventory:
 			if (z.CardName == C.CardName and z.Tier < C.Tier):

@@ -16,7 +16,7 @@ class_name Captain
 @export var ProvidingFunds : int = 0
 @export var ProvidingCaptains : Array[Captain]
 #Only used by enemies
-@export var Cards : Array[CardStats]
+@export var Cards : Dictionary[CardStats, int]
 
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
@@ -41,7 +41,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.ShipIcon = ShipIcon
 	stats.CaptainIcon = CaptainPortrait
 	stats.Name = CaptainName
-	var c : Dictionary
+	var c : Dictionary[CardStats, int]
 	for g in StartingItems:
 		if (g is ShipPart):
 			for up : ShipPartUpgrade in g.Upgrades:
@@ -65,9 +65,9 @@ func GetBattleStats() -> BattleShipStats:
 				c[z] = 1
 	for g in Cards:
 		if (c.has(g)):
-			c[g] += 1
+			c[g] += Cards[g]
 		else:
-			c[g] = 1
+			c[g] = Cards[g]
 	stats.Hull = Hull
 	stats.CurrentHull = Hull
 	stats.Speed = (Thrust * 1000) / Weight

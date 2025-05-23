@@ -47,7 +47,7 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 				DefC.Dissable(true)
 				#var Opts2 : Array[CardOption] = []
 				
-				DefC.SetCardBattleStats(g, Def)
+				DefC.SetCardBattleStats(DeffenceList.values()[g], Def)
 				add_child(DefC)
 				if (!FriendShip):
 					var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))

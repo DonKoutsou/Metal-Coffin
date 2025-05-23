@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=6 format=3 uid="uid://q6pvyblp3f1r"]
+[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://q6pvyblp3f1r"]
 
+[ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="1_daran"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_hd55o"]
 [ext_resource type="Resource" uid="uid://eemvne8otjn4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Armak.tres" id="2_thg8v"]
 [ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="3_5cvix"]
@@ -15,4 +16,5 @@ metadata/_custom_type_script = "uid://bqgyl8uqmo3sl"
 script = ExtResource("4_5ie0d")
 SpotK = 0
 VisibleOnStart = true
+BackgroundScene = ExtResource("1_daran")
 Data = SubResource("Resource_daran")

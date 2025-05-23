@@ -343,6 +343,7 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> void:
 	#C.visible = false
 	
 	ShipsViz[BattleS] = t
+	NewTurnStarted.connect(t.OnNewTurnStarted)
 
 func ShipVizPressed(Ship : BattleShipStats) -> void:
 	var Scene = CardFightShipInfoScene.instantiate() as CardFightShipInfo
@@ -365,7 +366,7 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	viz.ToggleSpeedBuff(BattleS.SpeedBuff > 1, BattleS.SpeedBuff)
 	viz.ToggleDmgDebuff(BattleS.FirePowerDeBuff > 0)
 	viz.ToggleSpeedDebuff(BattleS.SpeedDeBuff > 0)
-	if (ShipTurns[CurrentTurn] == BattleS):
+	if (ShipTurns.find(BattleS) == CurrentTurn):
 		UpdateCardDescriptions(BattleS)
 
 #atm of a ship is on fire is stored in the UI. Should change #TODO
@@ -404,12 +405,17 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 #/////////////////////////////////////////////////
 var GameOver : bool = false
 
+signal NewTurnStarted
 signal PlayerActionPickingEnded
 
 func RunTurn() -> void:
 	ShipSpacer.visible = true
 	await DoActionDeclaration("Action Pick Phase", 2)
 	ShipSpacer.visible = false
+	
+	CurrentTurn = 0
+	
+	NewTurnStarted.emit()
 	
 	for Ship in ShipTurns:
 		var viz = GetShipViz(Ship)
@@ -441,8 +447,6 @@ func RunTurn() -> void:
 	
 	CardSelectContainer.get_child(0).visible = true
 	
-	CurrentTurn = 0
-	
 	CurrentPlayerLabel.visible = true
 	
 	for Ship in ShipTurns:
@@ -467,8 +471,6 @@ func RunTurn() -> void:
 				ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
 				await ActionTracker.GetInstance().ShowTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [ExternalUI.GetReserveBar()], true)
 			
-			
-			
 			HandAmmountLabel.visible = true
 			
 			RestartCards()
@@ -489,8 +491,8 @@ func RunTurn() -> void:
 			EnemyPickingMove = false
 		
 		GetShipViz(ShipTurns[CurrentTurn]).Dissable()
-		CurrentTurn += 1
-	
+		CurrentTurn = min(CurrentTurn + 1, ShipTurns.size() -1)
+		viz.OnActionsPerformed()
 	CurrentPlayerLabel.visible = false
 	
 	ClearCards()
@@ -540,7 +542,7 @@ func RunTurn() -> void:
 		if (GameOver):
 			return
 		
-		CurrentTurn += 1
+		CurrentTurn = min(CurrentTurn + 1, ShipTurns.size() - 1)
 	
 	CurrentPlayerLabel.visible = false
 	
@@ -1690,7 +1692,7 @@ func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModu
 	if (Mod is ResupplyModule):
 		await HandleResupply(Performer, C, Mod)
 	else : if (Mod is ReserveModule):
-		await HandleResupply(Performer, C, Mod)
+		await HandleReserveSupply(Performer, C, Mod)
 	if (Mod is CauseFireModule):
 		await HandleCauseFire(Performer, C, Mod)
 	else : if (Mod is DrawCardModule):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=39 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -27,7 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
-[ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="26_h7q0i"]
 
 [sub_resource type="Curve" id="Curve_rghuw"]
 _limits = [0.0, 5.0, 0.0, 1.0]
@@ -249,9 +248,5 @@ Col = Color(100, 0.395, 0.144, 1)
 layer = 3
 
 [node name="ScreenUI" parent="." instance=ExtResource("24_e5um8")]
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("26_h7q0i")
-autoplay = true
 
 [connection signal="GUI_Input" from="SubViewportContainer/ViewPort/InScreenUI" to="." method="_MAP_INPUT"]

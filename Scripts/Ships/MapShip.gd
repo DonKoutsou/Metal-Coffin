@@ -513,7 +513,7 @@ func GetBattleStats() -> BattleShipStats:
 	
 	var stats = BattleShipStats.new()
 	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-	stats.CurrentHull = stats.Hull
+	stats.CurrentHull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
 	stats.ShipIcon = Cpt.ShipIcon

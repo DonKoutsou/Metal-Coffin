@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bahj28qps5ssw"]
+[gd_scene load_steps=21 format=3 uid="uid://bahj28qps5ssw"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
@@ -11,29 +11,26 @@
 [ext_resource type="Resource" uid="uid://byfi8gb5rfaq5" path="res://Resources/Merch/Flares.tres" id="8_quutr"]
 [ext_resource type="Resource" uid="uid://csn5s05u6rd82" path="res://Resources/Merch/FireAmmo.tres" id="9_t8y33"]
 [ext_resource type="Resource" uid="uid://bjp66pbcmoto5" path="res://Resources/Merch/ProxAmmo.tres" id="10_vs4qv"]
-[ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/parallax_background.tscn" id="14_vaeb3"]
 [ext_resource type="PackedScene" uid="uid://b6gyf4stqfreh" path="res://Resources/Funds/FundsDisplayTown.tscn" id="15_0uykb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/WorkShop/work_shop.tscn" id="17_t244x"]
 [ext_resource type="PackedScene" uid="uid://bhpyiqwlbnmad" path="res://Scenes/TownShop/merch_ship.tscn" id="17_vaeb3"]
-[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="18_box5h"]
 [ext_resource type="PackedScene" uid="uid://c6pyjquo47hnr" path="res://Scenes/TownShop/fuel_storages.tscn" id="18_u4st4"]
 [ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="18_vaeb3"]
 
-[sub_resource type="Environment" id="Environment_vaeb3"]
+[sub_resource type="Environment" id="Environment_t244x"]
 background_mode = 3
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
 tonemap_white = 16.0
 adjustment_enabled = true
-adjustment_contrast = 1.28
 
 [sub_resource type="World3D" id="World3D_oyy4e"]
-environment = SubResource("Environment_vaeb3")
+environment = SubResource("Environment_t244x")
 
-[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "PortBuffText", "TownBG", "MerchendiseButton", "WorkshopButton", "FuelButton")]
+[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "PortBuffText", "MerchendiseButton", "WorkshopButton", "FuelButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +43,6 @@ script = ExtResource("2_epy1b")
 Merch = Array[ExtResource("3_5r13l")]([ExtResource("10_vs4qv"), ExtResource("9_t8y33"), ExtResource("6_vlkdt"), ExtResource("6_31owc"), ExtResource("4_ydye5"), ExtResource("5_11niw"), ExtResource("7_bygo8"), ExtResource("8_quutr")])
 PortName = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/CityName")
 PortBuffText = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer/CityBuffs")
-TownBG = NodePath("SubViewportContainer/SubViewport/TownBackground")
 MerchendiseButton = NodePath("Button2")
 WorkshopButton = NodePath("Button3")
 FuelButton = NodePath("Button4")
@@ -70,8 +66,6 @@ handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
-[node name="TownBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("14_vaeb3")]
-
 [node name="Button2" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
 offset_left = 462.0
@@ -83,6 +77,13 @@ size_flags_vertical = 10
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 text = "AMUNITION"
+
+[node name="Line2D" type="Line2D" parent="Button2"]
+show_behind_parent = true
+position = Vector2(0, 15)
+points = PackedVector2Array(0, 0, 0, 45.15)
+width = 2.0
+default_color = Color(1, 0.763983, 0.0812772, 1)
 
 [node name="Button3" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
@@ -96,6 +97,13 @@ theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 text = "REFUEL / REPAIR"
 
+[node name="Line2D" type="Line2D" parent="Button3"]
+show_behind_parent = true
+position = Vector2(0, 15)
+points = PackedVector2Array(0, 0, 0, 45.15)
+width = 2.0
+default_color = Color(1, 0.763983, 0.0812772, 1)
+
 [node name="Button4" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
 offset_left = 462.0
@@ -107,6 +115,13 @@ size_flags_vertical = 2
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
 text = "WORKSHOP"
+
+[node name="Line2D" type="Line2D" parent="Button4"]
+show_behind_parent = true
+position = Vector2(0, 15)
+points = PackedVector2Array(0, 0, 0, 45.15)
+width = 2.0
+default_color = Color(1, 0.763983, 0.0812772, 1)
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -170,7 +185,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
-text = "FINILIZE TRANSACTION"
+text = "LEAVE TOWN"
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -234,11 +249,6 @@ volume_db = -10.0
 pitch_scale = 4.0
 bus = &"MapSounds"
 
-[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_box5h")
-autoplay = true
-
-[connection signal="PositionChanged" from="SubViewportContainer/SubViewport/TownBackground" to="." method="_on_town_background_position_changed"]
 [connection signal="pressed" from="Button2" to="." method="OnMunitionShopToggled"]
 [connection signal="pressed" from="Button3" to="." method="OnRefuelShopPressed"]
 [connection signal="pressed" from="Button4" to="." method="OnUpgradeShopPressed"]

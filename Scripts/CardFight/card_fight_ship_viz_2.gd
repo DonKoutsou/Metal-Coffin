@@ -15,6 +15,8 @@ class_name CardFightShipViz2
 @export var FirePart : GPUParticles2D
 @export var FPLabel : RichTextLabel
 @export var SPDLabel : RichTextLabel
+@export var HasMovePanel : Control
+
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
@@ -45,7 +47,16 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 		ShipNameLabel.get_parent().move_child(ShipNameLabel, 1)
 		HullLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		$HBoxContainer.move_child($HBoxContainer/VBoxContainer, 1)
+		HasMovePanel.get_parent().move_child(HasMovePanel, 0)
+	
+	HasMovePanel.visible = false
 	TurnPanel.self_modulate.a = 0
+
+func OnNewTurnStarted() -> void:
+	HasMovePanel.visible = true
+
+func OnActionsPerformed() -> void:
+	HasMovePanel.visible = false
 
 func UpdateStats(S : BattleShipStats) -> void:
 	HullBar.value = S.CurrentHull

@@ -20,7 +20,7 @@ signal PrologueStart(Load : bool)
 signal FightStart()
 signal DelSave
 
-signal ShowTutorial(T : bool)
+signal ShowTutorial(i : int)
 
 func _ready() -> void:
 	HintDialogue.visible = false
@@ -42,7 +42,9 @@ func _on_play_pressed() -> void:
 	if (Selecting):
 		return
 		
-	await ChooseTutorial()
+	var Run = await ChooseTutorial()
+	if (!Run):
+		return
 	GameStart.emit(false)
 
 func _on_exit_pressed() -> void:
@@ -52,7 +54,9 @@ func _on_load_pressed() -> void:
 	if (Selecting):
 		return
 		
-	await ChooseTutorial()
+	var Run = await ChooseTutorial()
+	if (!Run):
+		return
 	GameStart.emit(true)
 
 
@@ -80,7 +84,9 @@ func _on_prologue_pressed() -> void:
 	if (Selecting):
 		return
 		
-	await ChooseTutorial()
+	var Run = await ChooseTutorial()
+	if (!Run):
+		return
 	PrologueStart.emit(false)
 	
 
@@ -97,11 +103,13 @@ func _on_load_prologue_pressed() -> void:
 	if (Selecting):
 		return
 		
-	await ChooseTutorial()
+	var Run = await ChooseTutorial()
+	if (!Run):
+		return
 	ActionTracker.GetInstance().Load()
 	PrologueStart.emit(true)
 
-func ChooseTutorial() -> void:
+func ChooseTutorial() -> bool:
 	var c = get_tree().get_nodes_in_group("Credits")
 	if (c.size() > 0):
 		c[0].queue_free()
@@ -109,28 +117,40 @@ func ChooseTutorial() -> void:
 	Selecting = true
 	HintDialogue.visible = true
 	var t = await ShowTutorial
-	Selecting = false
-	ActionTracker.ShowTutorials = t
-	ActionTracker.GetInstance().CompletedActions.clear()
-	#if (t):
-		#ActionTracker.GetInstance().DeleteSave()
 	
+	Selecting = false
 	HintDialogue.visible = false
+	if (t == 2):
+		return false
+	ActionTracker.ShowTutorials = t == 1
+	ActionTracker.GetInstance().CompletedActions.clear()
+	
+	
+	
+	
+	return true
 
 func GetVp() -> Control:
 	return $SubViewportContainer/SubViewport
 
 func _on_dont_show_tutorial_pressed() -> void:
-	ShowTutorial.emit(false)
+	ShowTutorial.emit(0)
 
 
 func _on_show_tutorial_pressed() -> void:
-	ShowTutorial.emit(true)
+	ShowTutorial.emit(1)
 
 
 func _on_fight_pressed() -> void:
 	if (Selecting):
 		return
-	await ChooseTutorial()
+	var Run = await ChooseTutorial()
+	if (!Run):
+		return
 	FightStart.emit()
+	
+
+
+func _on_cancel_pressed() -> void:
+	ShowTutorial.emit(2)
 	

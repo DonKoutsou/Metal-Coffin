@@ -445,7 +445,7 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 	#OnShipLanded(Ship, true)
 
 #Make sure to remove all items that their cards have been used
-func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary):
+func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary[CardStats, int]):
 	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
 	var Contents = CharInv.GetInventoryContents().duplicate()
 	for It in Contents.keys():

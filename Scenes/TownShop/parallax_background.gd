@@ -16,6 +16,9 @@ signal PositionChanged
 func GetLocationForPosition(Loc : Location) -> Vector2:
 	return get_node(LocationPositions[Loc]).global_position
 
+func GetNodeForPosition(Loc : Location) -> Node2D:
+	return get_node(LocationPositions[Loc])
+
 func _physics_process(delta: float) -> void:
 	var midpoint = get_viewport().get_visible_rect().size / 2
 	var Mousepos = get_viewport().get_mouse_position()

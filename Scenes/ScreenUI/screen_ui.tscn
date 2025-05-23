@@ -1,7 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=49 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
+[ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="3_ng3jm"]
+[ext_resource type="AudioStream" uid="uid://d0kopd5186laa" path="res://Assets/Sounds/Towns/Cave_Ambient.mp3" id="4_ao4ul"]
 [ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="4_j0j1u"]
 [ext_resource type="AudioStream" uid="uid://idnn507tyewg" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
@@ -316,6 +318,15 @@ NormalScreen = NodePath("NormalScreen")
 FullScreenFrame = NodePath("ScreenFrameLong")
 ScreenPanel = NodePath("Panel")
 CardFightUI = NodePath("NormalScreen/CardFightExternalUI")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ng3jm")
+autoplay = true
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ao4ul")
+volume_db = -6.0
+autoplay = true
 
 [node name="DoorSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wetmy")

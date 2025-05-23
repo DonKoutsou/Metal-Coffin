@@ -1,18 +1,21 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://cphts382xybqn"]
+[gd_resource type="Resource" script_class="Captain" load_steps=26 format=3 uid="uid://cphts382xybqn"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_v2gom"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_qj8tl"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_8k8jt"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_nbkb4"]
+[ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="4_cbum1"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="4_tkw6d"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_yo37a"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="5_k8r4a"]
+[ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="5_pk8jp"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="6_58jbn"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_vqb3j"]
+[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="7_goy68"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="7_jfqs0"]
-[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="7_tkw6d"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/Spaceship/Scarab.png" id="9_4c3qg"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_7qhjw"]
+[ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="9_toag1"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_qj8tl")
@@ -103,4 +106,15 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 45000
 ProvidingCaptains = Array[ExtResource("4_yo37a")]([])
-Cards = Array[ExtResource("3_8k8jt")]([ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("4_tkw6d"), ExtResource("5_k8r4a"), ExtResource("5_k8r4a"), ExtResource("5_k8r4a"), ExtResource("6_58jbn"), ExtResource("6_58jbn"), ExtResource("6_58jbn"), ExtResource("7_tkw6d"), ExtResource("7_tkw6d"), ExtResource("6_vqb3j"), ExtResource("6_vqb3j"), ExtResource("9_7qhjw"), ExtResource("9_7qhjw"), ExtResource("9_7qhjw"), ExtResource("9_7qhjw"), ExtResource("7_jfqs0"), ExtResource("7_jfqs0"), ExtResource("7_jfqs0"), ExtResource("7_jfqs0"), ExtResource("6_vqb3j")])
+Cards = Dictionary[ExtResource("3_8k8jt"), int]({
+ExtResource("4_cbum1"): 2,
+ExtResource("5_pk8jp"): 3,
+ExtResource("6_58jbn"): 6,
+ExtResource("7_goy68"): 1,
+ExtResource("4_tkw6d"): 22,
+ExtResource("9_toag1"): 2,
+ExtResource("6_vqb3j"): 2,
+ExtResource("9_7qhjw"): 12,
+ExtResource("5_k8r4a"): 6,
+ExtResource("7_jfqs0"): 4
+})

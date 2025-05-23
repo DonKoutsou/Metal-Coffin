@@ -7,9 +7,6 @@ class_name TownScene
 #@export var FundAmm : Label
 @export var PortName : Label
 @export var PortBuffText : RichTextLabel
-
-@export var TownBG : TownBackground
-
 @export_group("Buttons")
 @export var MerchendiseButton : Button
 @export var WorkshopButton : Button
@@ -27,13 +24,16 @@ var BoughtFuel : float = 0
 var BoughtRepairs : float = 0
 
 var TownSpot : MapSpot
-
+var TownBG : TownBackground
 signal TransactionFinished(BFuel : float, BRepair : float, Ship : MapShip, TradeScene : TownScene)
 
 var LandedShips : Array[MapShip]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	TownBG = TownSpot.SpotType.BackgroundScene.instantiate() as TownBackground
+	$SubViewportContainer/SubViewport.add_child(TownBG)
+	TownBG.PositionChanged.connect(_on_town_background_position_changed)
 	PortName.text = TownSpot.GetSpotName() + " City Port"
 	SetTownBuffs()
 	
@@ -125,9 +125,15 @@ func OnItemBought(It : Item) -> void:
 			break
 
 func _on_town_background_position_changed() -> void:
-	WorkshopButton.global_position = TownBG.GetLocationForPosition(TownBackground.Location.WORKSHOP)
-	MerchendiseButton.global_position = TownBG.GetLocationForPosition(TownBackground.Location.MERCH)
-	FuelButton.global_position = TownBG.GetLocationForPosition(TownBackground.Location.FUEL)
+	var WorkshopNode = TownBG.GetNodeForPosition(TownBackground.Location.WORKSHOP)
+	WorkshopButton.global_position = WorkshopNode.global_position
+	(WorkshopButton.get_child(0) as Line2D).set_point_position(1, (WorkshopButton.get_child(0) as Line2D).to_local(WorkshopNode.get_child(0).global_position))
+	var MerchendiseNode = TownBG.GetNodeForPosition(TownBackground.Location.MERCH)
+	MerchendiseButton.global_position = MerchendiseNode.global_position
+	(MerchendiseButton.get_child(0) as Line2D).set_point_position(1, (MerchendiseButton.get_child(0) as Line2D).to_local(MerchendiseNode.get_child(0).global_position))
+	var FuelNode = TownBG.GetNodeForPosition(TownBackground.Location.FUEL)
+	FuelButton.global_position = FuelNode.global_position
+	(FuelButton.get_child(0) as Line2D).set_point_position(1, (FuelButton.get_child(0) as Line2D).to_local(FuelNode.get_child(0).global_position))
 
 func _on_button_pressed() -> void:
 	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShips, self)

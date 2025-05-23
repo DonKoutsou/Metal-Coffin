@@ -1,16 +1,19 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=22 format=3 uid="uid://y1ohb6oss4v0"]
+[gd_resource type="Resource" script_class="Captain" load_steps=25 format=3 uid="uid://y1ohb6oss4v0"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_tfvmp"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_31e7m"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_qc60d"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_ucdyq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_nkros"]
-[ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="5_5j1nr"]
+[ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="4_qyt4v"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="5_s2md0"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="6_45ts5"]
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="7_qyt4v"]
+[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="7_s2md0"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_jjv71"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_ewcq7"]
+[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="10_spbky"]
+[ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="11_lq844"]
 [ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/Spaceship/Ship11.png" id="11_qe0ne"]
 
 [sub_resource type="Resource" id="Resource_4xt1j"]
@@ -102,4 +105,14 @@ CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 30000
 ProvidingCaptains = Array[ExtResource("4_nkros")]([])
-Cards = Array[ExtResource("3_qc60d")]([ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_s2md0"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("5_5j1nr"), ExtResource("6_45ts5"), ExtResource("6_45ts5"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("7_qyt4v"), ExtResource("9_jjv71"), ExtResource("9_jjv71"), ExtResource("10_ewcq7"), ExtResource("10_ewcq7"), ExtResource("10_ewcq7")])
+Cards = Dictionary[ExtResource("3_qc60d"), int]({
+ExtResource("4_qyt4v"): 3,
+ExtResource("7_qyt4v"): 2,
+ExtResource("10_ewcq7"): 3,
+ExtResource("7_s2md0"): 2,
+ExtResource("5_s2md0"): 4,
+ExtResource("6_45ts5"): 3,
+ExtResource("10_spbky"): 2,
+ExtResource("11_lq844"): 2,
+ExtResource("9_jjv71"): 2
+})
