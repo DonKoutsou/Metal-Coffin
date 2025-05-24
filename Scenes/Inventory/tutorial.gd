@@ -49,8 +49,8 @@ func DoFadeInAnim() -> void:
 	#position = get_viewport_rect().size / 2
 	
 	var Tw = create_tween()
-	Tw.set_ease(Tween.EASE_IN)
-	Tw.set_trans(Tween.TRANS_QUAD)
+	Tw.set_ease(Tween.EASE_OUT)
+	Tw.set_trans(Tween.TRANS_BACK)
 	Tw.tween_method(UpdateSize, Vector2.ZERO, OriginalSize, 1)
 	
 	var S = DeletableSoundGlobal.new()
@@ -95,7 +95,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	var Tw = create_tween()
-	Tw.set_ease(Tween.EASE_OUT)
+	Tw.set_ease(Tween.EASE_IN)
 	Tw.set_trans(Tween.TRANS_QUAD)
 	Tw.tween_method(UpdateSize, OriginalSize, Vector2.ZERO, 1)
 	
@@ -109,4 +109,5 @@ func _on_button_pressed() -> void:
 	
 	await Tw.finished
 	Completed.emit()
+	
 	queue_free()

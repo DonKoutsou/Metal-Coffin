@@ -100,7 +100,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	SimulationTrigger.TutorialTitle = "Simulation Managment"
 	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning. Use the [color=#ffc315]Simulation Buttons[/color] to either stop the simulation and think over your plans or speed up the simulations to speed through big protions of your voyage."
 	SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
-	$SubViewportContainer/ViewPort.add_child(SimulationTrigger)
+	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(SimulationTrigger)
 	var triggerpos = pos
 	triggerpos.y -= 100
 	SimulationTrigger.global_position = triggerpos
@@ -111,7 +111,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	MapMarkerTrigger.TutorialTitle = "Map Markers"
 	MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
 	MapMarkerTrigger.TutorialElement.append(GetScreenUi().MapMarkerButton)
-	$SubViewportContainer/ViewPort.add_child(MapMarkerTrigger)
+	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(MapMarkerTrigger)
 	var MapMarkerTriggerpos = pos
 	MapMarkerTriggerpos.y -= 750
 	MapMarkerTrigger.global_position = MapMarkerTriggerpos
@@ -133,7 +133,7 @@ func GetInScreenUI() -> Ingame_UIManager:
 func GetScreenUi() -> ScreenUI:
 	return _ScreenUI
 	
-func GetCamera() -> Camera2D:
+func GetCamera() -> ShipCamera:
 	return _Camera
 
 #CAMERA DATA

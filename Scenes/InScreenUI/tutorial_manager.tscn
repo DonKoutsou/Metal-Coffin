@@ -6,6 +6,7 @@
 
 [node name="TutorialManager" type="CanvasLayer"]
 layer = 3
+follow_viewport_enabled = true
 script = ExtResource("1_c5wer")
 TutorialScene = ExtResource("2_yiwus")
 OutTutorialScene = ExtResource("3_3uedw")

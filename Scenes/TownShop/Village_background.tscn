@@ -42,10 +42,11 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.1
 
-[node name="TownBackground" type="ParallaxBackground"]
+[node name="TownBackground" type="ParallaxBackground" node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_vcb2a")
 LimitTop = 1920.0
 LimitSide = 160.0
+Camera = NodePath("Camera2D")
 LocationPositions = Dictionary[int, NodePath]({
 0: NodePath("ParallaxLayer3/Parallax2D/WorkShop"),
 1: NodePath("ParallaxLayer3/Parallax2D/Fuel"),
@@ -71,7 +72,7 @@ motion_scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D"]
 position = Vector2(640, 180)
-scale = Vector2(1.6, 1.6)
+scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("3_vcb2a")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
@@ -86,13 +87,15 @@ texture = ExtResource("4_daw5n")
 lifetime = 30.0
 preprocess = 10.0
 randomness = 1.0
+fixed_fps = 8
+interpolate = false
 visibility_rect = Rect2(-1920, 0, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D"]
 position = Vector2(640, 180)
-scale = Vector2(1.6, 1.6)
+scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("4_vcb2a")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
@@ -102,7 +105,7 @@ motion_scale = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D"]
 position = Vector2(640, 180)
-scale = Vector2(1.6, 1.6)
+scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("5_vcb2a")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
@@ -113,6 +116,8 @@ texture = ExtResource("4_daw5n")
 lifetime = 30.0
 preprocess = 10.0
 randomness = 1.0
+fixed_fps = 8
+interpolate = false
 visibility_rect = Rect2(-1920, -200, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
@@ -122,6 +127,8 @@ position = Vector2(1650, 316)
 amount = 40
 texture = ExtResource("2_n0jph")
 lifetime = 6.0
+fixed_fps = 8
+interpolate = false
 visibility_rect = Rect2(-1920, -400, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gf58y")
@@ -133,7 +140,7 @@ motion_scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D"]
 position = Vector2(640, 180)
-scale = Vector2(1.6, 1.6)
+scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("7_vcb2a")
 
 [node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
@@ -155,5 +162,5 @@ position = Vector2(1150, 378)
 position = Vector2(181, 238)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(642, 359)
+position = Vector2(642, 360)
 position_smoothing_enabled = true

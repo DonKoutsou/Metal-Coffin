@@ -11,6 +11,7 @@ class_name World
 @export var FleetSeparationScene : PackedScene
 @export var HappeningUI : PackedScene
 @export var WorldViewQuestionairScene : PackedScene
+@export var IntroText : PackedScene
 @export_group("Prologue")
 @export var PrologueTrigger : PackedScene
 @export var PrologueEndScreen : PackedScene
@@ -34,6 +35,9 @@ signal WRLD_WorldReady
 signal WorldSpawnTransitionFinished
 #signal WRLD_StatsUpdated(StatN : String)
 signal WRLD_StatGotLow(StatN : String)
+
+var OverworldEventsToShow : Array[OverworldEventData]
+var TutorialsToShow : Array[ActionTracker.Action]
 
 var Loading = false
 
@@ -109,7 +113,12 @@ func _ready() -> void:
 			var Trigger = PrologueTrigger.instantiate() as PrologueEnd_Trigger
 			var Armak = Helper.GetInstance().GetSpotByName("Armak")
 			Armak.add_child(Trigger)
-			
+			var IntroTxt = IntroText.instantiate() as Intro
+			Ingame_UIManager.GetInstance().AddUI(IntroTxt, false, true)
+			await IntroTxt.IntroFinished
+			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+			await GetMap().GetScreenUi().FullScreenToggleStarted
+			IntroTxt.queue_free()
 			var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
 			Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
 			Questionair.Init()
@@ -158,7 +167,7 @@ func SteerTut() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
 		var text = "Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller"
-		ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust], false)
+		ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust.Handle], false)
 
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
@@ -222,6 +231,11 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	Ingame_UIManager.GetInstance().AddUI(sc)
 	
 	sc.connect("SeperationFinished", ShipSeparationFinished)
+	await GetMap().GetScreenUi().FullScreenToggleFinished
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FLEET_SEPARATION)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.FLEET_SEPARATION)
+		var text = "In the ship dock screen, you can effectively organize your current fleet. To create a new fleet, simply select the ships you wish to move from your existing fleet.\nDon't forget to allocate fuel appropriately! Use the sliders at the bottom of the screen to ensure each fleet has enough fuel to operate efficiently."
+		ActionTracker.GetInstance().ShowTutorial("Ship Dock", text, [], true)
 		
 func ShipSeparationFinished() -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
@@ -357,13 +371,14 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
+	
 	await GetMap().GetScreenUi().FullScreenToggleFinished
 
 		
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_SHOP)
-		var text = "When landing on a city you are able to refuel, repair and rearm your fleet. Each city provides cerain bonuses to price and speed of a service. The bonuses can be seen on the left bellow the port's name. Drag on the sliders to buy or sell the shown resource."
-		ActionTracker.GetInstance().ShowTutorial("Town Shop", text, [], true)
+		var text = "When landing on a town you are able to refuel, repair, rearm and upgrade your fleet.\n\nEach city provides certain bonuses to the price and speed of one or all services. The bonuses can be seen on the left bellow the port's name. Drag on the sliders to buy or sell the shown resource."
+		ActionTracker.GetInstance().ShowTutorial("Towns", text, [], true)
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
 func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShip], Scene : TownScene):
@@ -394,12 +409,26 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShi
 	spot.PlayerRepairReserves = max(0, BRepair)
 	
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	await  GetMap().GetScreenUi().FullScreenToggleStarted
+	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
+	await GetMap().GetScreenUi().FullScreenToggleFinished
+	#Play events saved from happening
+	for g in OverworldEventsToShow:
+		var Pos = g.GetFocusPos()
+		if (Pos != Vector2.ZERO):
+			GetMap().GetCamera().FrameCamToPos(Pos, 4.0, true)
+			Ingame_UIManager.GetInstance().CallbackDiag(g.Dialogues, null, "", ReturnCamToPlayer, true)
+	OverworldEventsToShow.clear()
 	
-	#UIEventH.OnScreenUIToggled(true)
-	##SimulationManager.GetInstance().TogglePause(false)
-	#UIEventH.OnButtonCoverToggled(false)
+	for g in TutorialsToShow:
+		if (g == ActionTracker.Action.RECRUIT and!ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
+			TutorialsToShow.append(ActionTracker.Action.RECRUIT)
+			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
+			var text = "Managing your fleet is key to a successful campaign. Ships in the same fleet share fuel, so adding a ship with extra fuel to a fleet can help it go further. To split or trade fuel between fleets, use the Ship Dock in the controller. To merge fleets, select Regroup and pick the target fleet. Switch between fleets with the Switch Ship button."
+			ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
+			
+	TutorialsToShow.clear()
+
 func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
@@ -420,29 +449,26 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 		PlayedEvent = true
 	Spot.OnSpotVisited()
 	return PlayedEvent
-	
-func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], _Ship : MapShip) -> void:
-	if (CapmaignFin):
-		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
-	else:
-		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+
+func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
+
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	#else:
+		#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
-	await GetMap().GetScreenUi().FullScreenToggleFinished
-	if (Recruited and !ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
-		var text = "Managing your fleet is key to a successful campaign. Ships in the same fleet share fuel, so adding a ship with extra fuel to a fleet can help it go further. To split or trade fuel between fleets, use the Ship Dock in the controller. To merge fleets, select Regroup and pick the target fleet. Switch between fleets with the Switch Ship button."
-		ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
+	#await GetMap().GetScreenUi().FullScreenToggleFinished
+	if (Recruited):
+		TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 	if (CapmaignFin):
 		Ingame_UIManager.GetInstance().CallbackDiag(["Time to head back people. The package has been delivered."], null, "", EndGame, true)
+		return
+	
+	#Save events to play once we left town
+	OverworldEventsToShow.append_array(Events)
 		
-	for g in Events:
-		var Pos = g.GetFocusPos()
-		if (Pos != Vector2.ZERO):
-			GetMap().GetCamera().FrameCamToPos(Pos, 4.0, true)
-			Ingame_UIManager.GetInstance().CallbackDiag(g.Dialogues, null, "", ReturnCamToPlayer, true)
-		
-	#OnShipLanded(Ship, true)
+	OnShipLanded(Ship, true)
+
 
 #Make sure to remove all items that their cards have been used
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary[CardStats, int]):

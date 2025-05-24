@@ -28,15 +28,15 @@ func GetDesc() -> String:
 		Desc = "Damage enemy team"
 	else:
 		Desc = "Damage enemy"
-	Desc += " for [color=#c19200]{0} * [/color][{2}]{1}[/color]".format([var_to_str(snapped(Damage, 0.1)).replace(".0", ""), CardModule.Stat.keys()[ScaleStat],TextColor])
+	Desc += " for [color=#ffc315]{0} * [/color][{2}]{1}[/color]".format([var_to_str(snapped(Damage, 0.1)).replace(".0", ""), CardModule.Stat.keys()[ScaleStat],TextColor])
 	if (OnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#c19200]On Hit : [/color]"
+		Desc += "\n[color=#ffc315]On Hit : [/color]"
 		for g in OnSuccesfullAtackModules:
 			Desc += g.GetDesc()
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 
-	Desc += "\n[color=#c19200]{0}[/color]".format([ AtackTypes.keys()[AtackType].replace("_", " ")])
+	Desc += "\n[color=#ffc315]{0}[/color]".format([ AtackTypes.keys()[AtackType].replace("_", " ")])
 	
 	return Desc
 
@@ -62,13 +62,13 @@ func GetBattleDesc(User : BattleShipStats) -> String:
 		
 	Desc += " for [{1}]{0}[/color] damage".format([snapped(FinalDamage, 0.1),TextColor]).replace(".0", "")
 	if (OnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#c19200]On Hit : [/color]"
+		Desc += "\n[color=#ffc315]On Hit : [/color]"
 		for g in OnSuccesfullAtackModules:
 			Desc += g.GetDesc()
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 
-	Desc += "\n[color=#c19200]{0}[/color]".format([ AtackTypes.keys()[AtackType].replace("_", " ")])
+	Desc += "\n[color=#ffc315]{0}[/color]".format([ AtackTypes.keys()[AtackType].replace("_", " ")])
 	
 	return Desc
 

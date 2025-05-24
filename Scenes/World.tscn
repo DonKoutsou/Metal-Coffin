@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=34 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="6_sol3n"]
 [ext_resource type="PackedScene" uid="uid://c2db1rw6borur" path="res://Scenes/WorldViewQuestionair.tscn" id="6_xiqgv"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="7_3dbmh"]
+[ext_resource type="PackedScene" uid="uid://cvr1a2nugdu2j" path="res://Scenes/intro.tscn" id="7_371b6"]
 [ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/ship_controller.gd" id="7_q720d"]
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_q55oc"]
@@ -51,6 +52,7 @@ LoadingScene = ExtResource("3_pocgy")
 FleetSeparationScene = ExtResource("10_8l3nt")
 HappeningUI = ExtResource("9_5gym6")
 WorldViewQuestionairScene = ExtResource("6_xiqgv")
+IntroText = ExtResource("7_371b6")
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
 IntroDialogues = Array[String](["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\", \"Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."])

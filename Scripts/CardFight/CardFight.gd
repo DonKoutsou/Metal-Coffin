@@ -156,9 +156,20 @@ func _ready() -> void:
 	#ShipFallBackButton.visible = false
 	HandAmmountLabel.visible = false
 	call_deferred("StoreContainerSize")
+
+	Helper.GetInstance().CallLater(StartFight, 2)
 	
-	Helper.GetInstance().CallLater(RunTurn, 2)
+
+func StartFight() -> void:
+	ShipSpacer.visible = true
+	await DoActionDeclaration("Fight Start", 2)
+	ShipSpacer.visible = false
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
+		await ActionTracker.GetInstance().ShowTutorial("Dog Fight", "Close quarters combat is conducted in two distinct phases: the [color=#ffc315]Action Picking Phase[/color] and the [color=#ffc315]Action Performing Phase[/color]. Each ship has their [color=#ffc315]deck[/color] composed out of the parts that exist on the ship. At any given time, a maximum of three ships from each side can engage in combat.\n\nWhen a ship is destroyed, it is immediately replaced by another from the fleet. [color=#ffc315]Victory[/color] is achieved when one side eliminates all enemy ships.\n\nHave faith in your crew captains and good luck!", [], true)
 	
+	call_deferred("RunTurn")
+
 func InitRandomFight(ShipAmm : int) -> void:
 	#for g in ShipAmm:
 		#EnemyReserves.append(GenerateRandomisedShip("en{0}".format([g]), true))
@@ -435,7 +446,7 @@ func RunTurn() -> void:
 	
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
-		ActionTracker.GetInstance().ShowTutorial("Action Picking Phase", "In the Action Picking Phase each ship picks their moves for the upcomming Action Performing Phase, the ships with the bigger speed get to pick and perform their moves first. Limited time is given for each ship to pick their moves. All offensive actions have a possible deffence, make sure you keep your ship's protected while maintaining a steady offensive.", [], true)
+		ActionTracker.GetInstance().ShowTutorial("Action Picking Phase", "During the Action Picking Phase, each ship selects its moves for the upcoming Action Performing Phase. Ships with higher speed have the advantage of choosing and executing their moves first.\nRemember that every offensive action has a corresponding defensive option, so it’s crucial to protect your ship while maintaining a strong offensive stance.", [], true)
 	
 	CardSelectContainer.get_parent().visible = true
 	CardSelectContainer.get_child(0).visible = false

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5nqa1b7hofcs"]
+[gd_scene load_steps=7 format=3 uid="uid://c5nqa1b7hofcs"]
 
 [ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Inventory/tutorial.gd" id="1_oa3kc"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_75yjj"]
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_r8gdu"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_pv2wc"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="5_75yjj"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="6_r8gdu"]
 
 [node name="Tutorial" type="Control" node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
 process_mode = 3
@@ -87,7 +88,7 @@ layout_mode = 2
 [node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/normal_font = ExtResource("5_75yjj")
+theme_override_fonts/normal_font = ExtResource("6_r8gdu")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "fwfwa

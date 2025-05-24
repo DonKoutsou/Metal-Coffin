@@ -83,6 +83,10 @@ func OnRefuelShopPressed() -> void:
 	
 	Scene.Init(TownFuel, BoughtFuel, FuelPricePerTon, BoughtRepairs, RepairpricePerRepairValue, LandedShips)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
+		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel your ships! You can see the full ammount of fuel/hull condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
+	
 
 func FuelExchangeFinished(RemainingReserves : float, Fuel : float, Repair : float) -> void:
 	TownFuel = RemainingReserves
@@ -94,6 +98,9 @@ func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop
 	add_child(WShop)
 	WShop.Init(LandedShips)
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.UPGRADE_SHOP)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
+		ActionTracker.GetInstance().ShowTutorial("Workshop", "In the workshop you can inspect your fleets and choose parts to upgrade. Upgraded parts provide better stats for the ship and also extra [color=#ffc315]cards[/color] for the ship's [color=#ffc315]deck[/color].\n\nEach ship can have one of their parts being upgraded at each time. Upgrade progress updates only while the simulation is running.", [], true)
 
 func OnMunitionShopToggled() -> void:
 	var Scene = MerchShopScene.instantiate() as MerchShop
@@ -101,6 +108,10 @@ func OnMunitionShopToggled() -> void:
 	Scene.ItemSold.connect(OnItemSold)
 	Scene.ItemBought.connect(OnItemBought)
 	Scene.Init(LandedShips, Merch)
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MERCH_SHOP)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
+		ActionTracker.GetInstance().ShowTutorial("Munition Shop", "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color]. Some of those items are ment to be used in the overworld while others will provide you with extra [color=#ffc315]cards[/color] in your [color=#ffc315]deck[/color].", [], true)
+	
 
 func OnItemSold(It : Item) -> void:
 	for g in LandedShips:

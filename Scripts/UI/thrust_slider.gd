@@ -28,6 +28,9 @@ func ForceValue(val : float) ->void:
 	#var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 	#AccelerationChanged.emit(newval)
 
+func GetThrustPosition() -> Vector2:
+	return Handle.global_position
+
 func _physics_process(_delta: float) -> void:
 	if (abs(accumulatedrelative) < step):
 		AccelerationChangeEnded.emit(0)

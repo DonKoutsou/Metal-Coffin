@@ -1,13 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8oenywljdoe2"]
+[gd_scene load_steps=9 format=3 uid="uid://b8oenywljdoe2"]
 
 [ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Inventory/tutorial.gd" id="1_uf1g7"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_k6wjy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_xacro"]
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_xy5n5"]
+[ext_resource type="FontFile" uid="uid://crgk2e3gswnr3" path="res://Fonts/DINEngschriftStd.otf" id="5_xy5n5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k6wjy"]
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_xy5n5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_k6wjy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Tutorial" type="Control" node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
 process_mode = 3
 z_index = 130
+material = SubResource("CanvasItemMaterial_k6wjy")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +38,7 @@ InSound = ExtResource("2_k6wjy")
 OutSound = ExtResource("3_xy5n5")
 
 [node name="Control" type="Control" parent="."]
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -37,20 +51,25 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Line2D" type="Line2D" parent="Control"]
+use_parent_material = true
 points = PackedVector2Array(0, 0, 0, 0)
+width_curve = SubResource("Curve_xy5n5")
 default_color = Color(1, 0.763983, 0.0812772, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 4
 
 [node name="Line2D2" type="Line2D" parent="Control"]
+use_parent_material = true
 points = PackedVector2Array(0, 0, 0, 0)
+width_curve = SubResource("Curve_k6wjy")
 default_color = Color(1, 0.763983, 0.0812772, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,24 +87,30 @@ theme_override_constants/separation = -5
 alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("2_xacro")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+use_parent_material = true
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer2"]
+use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Captain Inventory"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer2"]
+use_parent_material = true
 layout_mode = 2
 
 [node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("5_xy5n5")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "fwfwa
@@ -100,6 +125,7 @@ visible_characters_behavior = 1
 
 [node name="Button" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
 process_mode = 1
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

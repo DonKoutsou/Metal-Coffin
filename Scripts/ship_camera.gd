@@ -42,7 +42,18 @@ func _HANDLE_ZOOM(zoomval : float):
 	prevzoom = newzoom
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	call_deferred("OnZoomChanged", newzoom)
-	
+
+func ForceZoomOut() -> void:
+	if (is_instance_valid(ZoomTw)):
+		ZoomTw.kill()
+	ZoomTw = create_tween()
+	ZoomTw.set_ease(Tween.EASE_OUT)
+	ZoomTw.set_trans(Tween.TRANS_QUART)
+	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
+	ZoomTw.tween_method(UpdateZoom, zoom, Vector2(0.045, 0.045), 1)
+	prevzoom = Vector2(0.045, 0.045)
+	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	call_deferred("OnZoomChanged", Vector2(0.045, 0.045))
 
 func UpdateZoom(Zoom : Vector2) -> void:
 	zoom = Zoom
@@ -188,18 +199,18 @@ func RandomOffset2() -> Vector2:
 	prev = Vector2(x, y)
 	return prev
 
-var stattween : Tween
+var FrameTween : Tween
 
 func ShowStation():
-	stattween = create_tween()
+	FrameTween = create_tween()
 	var stations = get_tree().get_nodes_in_group("CAPITAL")
 	var stationpos
 	for g : MapSpot in stations:
 		if (g.GetSpotName() == "Dormak"):
 			stationpos = g.global_position
 			break
-	stattween.set_trans(Tween.TRANS_EXPO)
-	stattween.tween_property(self, "global_position", stationpos, 6)
+	FrameTween.set_trans(Tween.TRANS_EXPO)
+	FrameTween.tween_property(self, "global_position", stationpos, 6)
 	if (zoom.x > 1):
 		_HANDLE_ZOOM(0.05)
 	#var mattw = create_tween()
@@ -207,44 +218,37 @@ func ShowStation():
 	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
 
 func ShowArmak():
-	stattween = create_tween()
+	FrameTween = create_tween()
 	var stations = get_tree().get_nodes_in_group("CITY_CENTER")
 	var stationpos
 	for g : MapSpot in stations:
 		if (g.GetSpotName() == "Armak"):
 			stationpos = g.global_position
 			break
-	stattween.set_trans(Tween.TRANS_EXPO)
-	stattween.tween_property(self, "global_position", stationpos, 6)
+	FrameTween.set_trans(Tween.TRANS_EXPO)
+	FrameTween.tween_property(self, "global_position", stationpos, 6)
 	if (zoom.x > 1):
 		_HANDLE_ZOOM(0.05)
-	#var mattw = create_tween()
-	#mattw.set_trans(Tween.TRANS_EXPO)
-	#mattw.tween_property(GalaxyMat, "shader_parameter/thing", stationpos.x / 1800, 6)
-
-var FrameTween : Tween
 
 func FrameCamToPlayer():
-	if (stattween != null):
-		stattween.kill()
+	if (FrameTween != null):
+		FrameTween.kill()
 	FrameTween = create_tween()
 	var plpos = $"../PlayerShip".global_position
 	FrameTween.set_trans(Tween.TRANS_QUAD)
 	FrameTween.set_ease(Tween.EASE_OUT)
 	FrameTween.tween_method(ForceCamPosition, global_position, plpos, 6)
 
-
-
 func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true) -> void:
-	if (stattween != null):
-		stattween.kill()
+	if (FrameTween != null):
+		FrameTween.kill()
 	FrameTween = create_tween()
 	FrameTween.set_trans(Tween.TRANS_QUAD)
 	FrameTween.set_ease(Tween.EASE_OUT)
 	FrameTween.tween_method(ForceCamPosition, global_position, pos, OverrideTime)
 	
-	if (Unzoom and zoom.x > 1):
-		_HANDLE_ZOOM(0.05)
+	if (Unzoom):
+		ForceZoomOut()
 
 func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = Pos

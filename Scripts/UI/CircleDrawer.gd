@@ -20,6 +20,7 @@ var CamZoom = 1
 func _ready() -> void:
 	ControlledShip = ShipControllerEvent.CurrentControlled
 	ShipControllerEvent.connect("OnControlledShipChanged", UpdateControlledShip)
+	
 
 func UpdateControlledShip(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip = NewShip

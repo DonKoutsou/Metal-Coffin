@@ -50,6 +50,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 disable_3d = true
+own_world_3d = true
 world_3d = SubResource("World3D_kvmkw")
 handle_input_locally = false
 size = Vector2i(1280, 720)

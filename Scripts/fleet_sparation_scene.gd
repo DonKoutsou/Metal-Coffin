@@ -19,6 +19,7 @@ var CurrentFleet : Array[PlayerDrivenShip]
 var NewFleet : Array[PlayerDrivenShip]
 
 func _ready() -> void:
+	
 	for Ship in CurrentFleet.size():
 		var ShipCont = ShipContainer.instantiate() as CaptainButton
 		if (Ship == 0):

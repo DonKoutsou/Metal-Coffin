@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cid0s6uni7fky"]
+[gd_scene load_steps=33 format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_0dp8t"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c2db1rw6borur" path="res://Scenes/WorldViewQuestionair.tscn" id="6_8eeky"]
 [ext_resource type="PackedScene" uid="uid://dmtr88wf7mpm3" path="res://Scenes/PrologueEnd_trigger.tscn" id="7_8o37l"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="7_udtpl"]
+[ext_resource type="PackedScene" uid="uid://cvr1a2nugdu2j" path="res://Scenes/intro.tscn" id="7_ybi1w"]
 [ext_resource type="PackedScene" uid="uid://btb0vs0eaeg0m" path="res://Scenes/prologue_end.tscn" id="8_43ao6"]
 [ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/ship_controller.gd" id="8_qeah0"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="9_ljctt"]
@@ -54,6 +55,7 @@ LoadingScene = ExtResource("3_0i6dt")
 FleetSeparationScene = ExtResource("4_trvh7")
 HappeningUI = ExtResource("5_7no5x")
 WorldViewQuestionairScene = ExtResource("6_8eeky")
+IntroText = ExtResource("7_ybi1w")
 PrologueTrigger = ExtResource("7_8o37l")
 PrologueEndScreen = ExtResource("8_43ao6")
 StartingFunds = 400000
