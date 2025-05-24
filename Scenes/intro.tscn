@@ -22,6 +22,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_duh1u")
+Text = "Around the year 6000, the inhabitants of this world remain unaware of the passage of centuries. A planet scarred by relentless destruction has witnessed the rise and fall of civilizations, each cataclysm erasing fragments of history like ashes on the wind. Yet, amidst the ruin, tiny embers persist, igniting the flicker of humanity's spirit.
+
+This cycle has allowed some to endure; half soared into the stars while others sought refuge in the earth's depths. As millennia passed and the surface regained its livability, these fractured remnants began to unite.
+
+However, their diverse cultures have become a heavy shackle, fostering perpetual conflict and shifting power dynamics. Now, disarray reigns among the underground communities, their proud armies reduced to desperate scavengers. An oppressive regime manipulates the masses with iron fists.
+
+Is this yet another cycle leading humanity toward its inevitable end?"
 TextLabel = NodePath("Label")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -49,11 +56,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -638.0
+offset_left = -299.0
 offset_top = 720.0
-offset_right = 638.0
-offset_bottom = 741.0
+offset_right = 299.0
+offset_bottom = 1137.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
 text = "testes
 stestse
 set
@@ -70,3 +78,21 @@ te
 ts
 t"
 horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SkipButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -74.0
+offset_right = -53.0
+offset_bottom = -39.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Skip"
+
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

@@ -11,6 +11,7 @@ class_name TownShopItem
 
 signal OnItemBought(It : Item)
 signal OnItemSold(It : Item)
+signal OnItemInspected(It : Item)
 
 #var PlFunds : int = 10000
 var LandedShips : Array[MapShip]
@@ -97,3 +98,7 @@ func OnThingExchanged() -> void:
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.25)
 	z_index = 0
+
+
+func _on_inspect_button_pressed() -> void:
+	OnItemInspected.emit(It)

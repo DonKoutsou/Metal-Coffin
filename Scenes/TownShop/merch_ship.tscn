@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bhpyiqwlbnmad"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_bs0sk"]
 [ext_resource type="Script" uid="uid://lq5jxesgjrsy" path="res://Scripts/TownShop/merch_ship.gd" id="2_4302v"]
 [ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBg_001.png" id="2_u711y"]
 [ext_resource type="PackedScene" uid="uid://bt2v8s1av0q6i" path="res://Scenes/TownShop/TownShopItem.tscn" id="3_4302v"]
+[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://Scenes/Inventory/ItemDescriptor.tscn" id="3_ahaja"]
 [ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="5_ahaja"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
@@ -12,37 +12,63 @@ content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 
-[node name="MerchShop" type="PanelContainer" node_paths=PackedStringArray("Scroll", "ItemPlecement")]
+[node name="MerchShop" type="Control" node_paths=PackedStringArray("Scroll", "ItemPlecement", "Descriptor")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("1_bs0sk")
 script = ExtResource("2_4302v")
 ItemScene = ExtResource("3_4302v")
-Scroll = NodePath("VBoxContainer/Scroll")
-ItemPlecement = NodePath("VBoxContainer/Scroll/VBoxContainer")
+Scroll = NodePath("VBoxContainer/HBoxContainer/Scroll")
+ItemPlecement = NodePath("VBoxContainer/HBoxContainer/Scroll/VBoxContainer")
+Descriptor = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_u711y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 71.0
+offset_top = 23.0
+offset_right = -71.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
-[node name="Scroll" type="ScrollContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ayl0t")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Scroll"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Scroll"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_constants/separation = 10
+
+[node name="ItemDesc" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_ahaja")]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="LeaveMerch" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -55,5 +81,5 @@ stream = ExtResource("5_ahaja")
 volume_db = -5.0
 autoplay = true
 
-[connection signal="gui_input" from="VBoxContainer/Scroll" to="." method="_on_scroll_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/Scroll" to="." method="_on_scroll_gui_input"]
 [connection signal="pressed" from="VBoxContainer/LeaveMerch" to="." method="_on_leave_merch_pressed"]

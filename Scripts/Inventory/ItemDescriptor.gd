@@ -24,6 +24,7 @@ signal ItemRepaired(Box : Inventory_Box)
 signal ItemTransf(Box : Inventory_Box)
 
 var DescribedContainer : Inventory_Box
+var DescribedItem : Item
 var UsingAmm : int = 1
 
 func _ready() -> void:
@@ -148,7 +149,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 				if (CanUpgrade):
 					UpTime /= 2
 					UpCost /= 2
-				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([UpTime, UpCost])
+				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
 		
 	else :
 		
@@ -170,11 +171,66 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 				#CardS.SelectedOption = It.CardOptionProviding
 			card.SetCardStats(CardS, It.CardProviding.count(g))
 			CardPlecement.add_child(card)
-			#card.Dissable()
+			card.Dissable()
 	else:
 		CardSection.visible = false
 #func _on_use_pressed() -> void:
 	#PopUpManager.GetInstance().DoConfirm("Are you sure you want to use this item ?", "Use", ConfirmUse)
+
+func SetMerchData(Itm : Item) -> void:
+	for g in CardPlecement.get_children():
+		g.queue_free()
+		
+	set_physics_process(false)
+	DescribedItem = Itm
+	#ItemIcon.texture = It.ItemIcon
+	#ItemDesc.text = It.GetItemDesc()
+	ItemDesc.text = Itm.GetItemDesc()
+	#TransferButton.visible = It.CanTransfer
+	TransferButton.visible = false
+	
+	ItemName.text = Itm.ItemName
+	#Ship Parts
+	if (Itm is ShipPart):
+		
+		#ShipPartActions.visible = true
+		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
+		#if (CanUpgrade):
+		UpgradeLabel.visible = true
+		if (Itm.UpgradeVersion == null):
+			UpgradeButton.visible = false
+			UpgradeLabel.visible = false
+		else:
+
+			UpgradeButton.visible = true
+			var UpTime = Itm.UpgradeTime
+			var UpCost = Itm.UpgradeCost
+			UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
+	
+	else :
+		
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+	
+	#TODO Option doesent show when ship has upgraded weapons
+	if (Itm.CardProviding.size() > 0):
+		var CardsChecked : Array[CardStats]
+		for g in Itm.CardProviding:
+			if (CardsChecked.has(g)):
+				continue
+			CardsChecked.append(g)
+			
+			var CardS = g.duplicate() as CardStats
+			var card = CardScene.instantiate() as Card
+			
+			#if (It.CardOptionProviding != null):
+				#CardS.SelectedOption = It.CardOptionProviding
+			card.SetCardStats(CardS, Itm.CardProviding.count(g))
+			CardPlecement.add_child(card)
+			card.Dissable()
+		CardSection.visible = true
+	else:
+		CardSection.visible = false
 
 func _on_upgrade_pressed() -> void:
 	PopUpManager.GetInstance().DoConfirm("", "Are you sure you want to upgrade this item ?", "Upgrade", ConfirmUpgrade, Ingame_UIManager.GetInstance().PopupPlecement)

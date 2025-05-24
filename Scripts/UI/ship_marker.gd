@@ -151,7 +151,7 @@ func UpdateSpeed(Spd : float):
 	ShipSpeedLabel.text = "SPEED " + var_to_str(spd).replace(".0", "")
 	
 func UpdateAltitude(Alt : float):
-	LandingNotif.SetText("ALT : " + var_to_str(Alt))
+	LandingNotif.SetText("ALT : " + var_to_str(roundi(Alt)))
 	
 func UpdateDroneFuel(amm : float, maxamm : float):
 	FuelLabel.text = "FUEL {0}%".format([roundi(amm / maxamm * 100)])

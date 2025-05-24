@@ -199,6 +199,23 @@ func updatedronecourse():
 	# Get the current position and velocity of the ship
 	
 	var ship_position = plship.position
+	
+	var Distance = global_position.distance_to(ship_position)
+	
+	if (Distance < 10):
+		plship.GetDroneDock().DockDrone(self, true)
+		var MyDroneDock = GetDroneDock()
+		for g in MyDroneDock.DockedDrones:
+			MyDroneDock.UndockDrone(g)
+			plship.GetDroneDock().DockDrone(g, false)
+		for g in MyDroneDock.Captives:
+			MyDroneDock.UndockCaptive(g)
+			plship.GetDroneDock().DockCaptive(g)
+		#for g in MyDroneDock.FlyingDrones:
+			#g.Command = plship
+		CommingBack = false
+		return
+	
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
@@ -207,6 +224,8 @@ func updatedronecourse():
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	ShipLookAt(predicted_position)
+	
+	
 	
 func Steer(Rotation : float) -> void:
 	rotation += Rotation / 50
@@ -512,8 +531,8 @@ func GetFuelRange() -> float:
 func GetBattleStats() -> BattleShipStats:
 	
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-	stats.CurrentHull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.Hull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.CurrentHull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
 	stats.ShipIcon = Cpt.ShipIcon

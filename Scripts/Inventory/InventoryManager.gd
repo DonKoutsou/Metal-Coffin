@@ -394,8 +394,8 @@ func ToggleInventory() -> void:
 		visible = !visible
 
 func InventoryTutorial() -> void:
-	var TutorialText = "The [color=#ffc315Inventory panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
-	ActionTracker.GetInstance().ShowTutorial("Inventory", TutorialText, [], true)
+	var TutorialText = "The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
+	ActionTracker.GetInstance().ShowTutorial("Cargo", TutorialText, [], true)
 
 func _on_scroll_container_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

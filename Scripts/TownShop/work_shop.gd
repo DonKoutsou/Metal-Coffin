@@ -50,7 +50,7 @@ func OnShipSelected(Ship : MapShip) -> void:
 	for g in ShieldInventoryBoxParent.get_children():
 		g.free()
 	
-	$PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2/HBoxContainer/TextureRect.texture = Ship.Cpt.ShipIcon
+	$PanelContainer/VBoxContainer/HBoxContainer/TextureRect.texture = Ship.Cpt.ShipIcon
 	
 	var Cha = Ship.Cpt
 	
@@ -133,6 +133,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 	#Descriptor.connect("ItemTransf", ItemTranfer)
 	DescriptorPlace.add_child(Descriptor)
 	Descriptor.set_physics_process(false)
+	
 func UpgradeItem(Box : Inventory_Box) -> void:
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()
 	

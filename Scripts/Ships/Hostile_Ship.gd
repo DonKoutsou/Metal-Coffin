@@ -523,8 +523,8 @@ func BodyLeftBody(Body : Area2D) -> void:
 
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-	stats.CurrentHull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.Hull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.CurrentHull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.ShipIcon = Cpt.ShipIcon

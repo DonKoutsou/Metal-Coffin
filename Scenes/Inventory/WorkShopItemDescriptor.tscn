@@ -130,6 +130,7 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="Control/HBoxContainer/CardsSection"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Providing Cards"
