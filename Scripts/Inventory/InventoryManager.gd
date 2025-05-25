@@ -370,6 +370,9 @@ func ToggleInventory() -> void:
 	$AudioStreamPlayer.play()
 	ToggleTween = create_tween()
 	if (visible):
+		if (CaptainStats.CurrentlyShownCaptain == null):
+			CaptainStats.SetCaptain(_CharacterInventories.keys()[0])
+			CaptainStats.ShowStats()
 		size = Vector2(size.x, 0)
 		ToggleTween.set_ease(Tween.EASE_OUT)
 		ToggleTween.set_trans(Tween.TRANS_QUAD)
