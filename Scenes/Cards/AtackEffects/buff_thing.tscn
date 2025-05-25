@@ -49,5 +49,6 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 stream = ExtResource("6_820og")
 volume_db = -20.0
 pitch_scale = 1.13803
+bus = &"Sounds"
 
 [node name="MultiParticleExample2" parent="." instance=ExtResource("7_7v3o6")]

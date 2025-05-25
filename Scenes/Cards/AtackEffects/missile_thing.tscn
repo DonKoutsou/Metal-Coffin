@@ -325,3 +325,4 @@ alpha_curve = SubResource("Curve_2rqx3")
 stream = ExtResource("9_n0kd1")
 volume_db = -20.0
 pitch_scale = 0.857948
+bus = &"Sounds"

@@ -322,11 +322,13 @@ CardFightUI = NodePath("NormalScreen/CardFightExternalUI")
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ng3jm")
 autoplay = true
+bus = &"Sounds"
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ao4ul")
 volume_db = -6.0
 autoplay = true
+bus = &"Sounds"
 
 [node name="DoorSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wetmy")
