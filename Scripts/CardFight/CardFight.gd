@@ -620,7 +620,13 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			print("{0} cant use {1}, not enough energy".format([Ship.Name, Action.CardName]))
 			AvailableActions.erase(Action)
 			AvailableActions = t.call(AvailableActions)
-
+		
+		#for g in Action.OnUseModules:
+			#if (g is DeffenceCardModule):
+				#if (!g.SelfUse and EnemyCombatants.size() == 0):
+					#AvailableActions.erase(Action)
+					#AvailableActions = t.call(AvailableActions)
+			
 		else:
 			print("{0} uses {1}".format([Ship.Name, Action.CardName]))
 			var SelectedAction : CardStats = Action.duplicate()

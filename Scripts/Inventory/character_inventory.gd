@@ -32,6 +32,8 @@ var SimPaused : bool = false
 #var SimSpeed : int = 1
 var _ItemBeingUpgraded : Inventory_Box
 var _UpgradeTime : float
+var _ItemBeingEquipped : ShipPart
+var _EquipTime : float
 
 
 func _ready() -> void:
@@ -43,21 +45,30 @@ func _ready() -> void:
 func GetCards() -> Dictionary[CardStats, int]:
 	var CardsInInventory : Dictionary[CardStats, int] = {}
 	for C : CardStats in _CardInventory.keys():
-		for z : CardStats in CardsInInventory:
-			if (z.CardName == C.CardName and z.Tier < C.Tier):
-				CardsInInventory.erase(z)
-				break
-		if (C.RequiredPart.size() > 0):
-			for P in C.RequiredPart:
-				if (HasItem(P)):
-					CardsInInventory[C] = _CardInventory[C]
-					break
+		#for z : CardStats in CardsInInventory:
+			#if (z.CardName == C.CardName and z.Tier < C.Tier):
+				#CardsInInventory.erase(z)
+				#break
+		if (C.WeapT != CardStats.WeaponType.NONE and !HasWeapon(C.WeapT)):
 			continue
+		#if (C.RequiredPart.size() > 0):
+			#for P in C.RequiredPart:
+				#if (HasItem(P)):
+					#CardsInInventory[C] = _CardInventory[C]
+					#break
+			#continue
 		CardsInInventory[C] = _CardInventory[C]
 	return CardsInInventory
 
 #func GetCardAmmo() -> Dictionary:
 	#return _CardAmmo.duplicate()
+
+func HasWeapon(WType : CardStats.WeaponType) -> bool:
+	for g : Item in _InventoryContents.keys():
+		if (g is WeaponShipPart):
+			if (g.WType == WType):
+				return true
+	return false
 
 func HasItem(It : Item) -> bool:
 	for g in _InventoryContents.keys():
@@ -305,10 +316,15 @@ func _physics_process(delta: float) -> void:
 	if (SimPaused):
 		return
 	_UpgradeTime -= (delta * 10) * SimulationManager.SimSpeed()
+	_EquipTime -= (delta * 10) * SimulationManager.SimSpeed()
 	#_UpgradeTime -= (delta * 10)
 	if (_UpgradeTime <= 0):
 		ItemUpgradeFinished()
-		set_physics_process(false)
+	
+	if (_EquipTime <= 0):
+		ItemEquipFinished()
+	
+	set_physics_process(_UpgradeTime <= 0 and _EquipTime <= 0)
 
 func CancelUpgrade() -> void:
 	_ItemBeingUpgraded = null
@@ -321,6 +337,10 @@ func ItemUpgradeFinished() -> void:
 	for g in Part.Upgrades.size():
 		UpgradedItem.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
 	AddItem(UpgradedItem)
+	_ItemBeingUpgraded = null
+
+func ItemEquipFinished() -> void:
+	AddItem(_ItemBeingEquipped)
 	_ItemBeingUpgraded = null
 
 func ForceUpgradeItem(Box : Inventory_Box) -> bool:

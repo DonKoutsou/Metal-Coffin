@@ -13,6 +13,7 @@ class_name WorkShop
 
 @export var ItemDescriptorScene : PackedScene
 @export var InventoryBoxScene : PackedScene
+@export var StatComp : PackedScene
 
 var CurrentShip : MapShip
 
@@ -64,26 +65,31 @@ func OnShipSelected(Ship : MapShip) -> void:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		EngineInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
 	
 	for g in CharSensorSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		SensorInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
 	
 	for g in CharFuelTankSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		FuelTankInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
 	
 	for g in CharShieldSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		ShieldInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
 	
 	for g in CharWeaponSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		WeaponInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
 	
 	var inv = Cha.GetCharacterInventory()
 	
@@ -94,6 +100,8 @@ func OnShipSelected(Ship : MapShip) -> void:
 					box.RegisterItem(g)
 					box.UpdateAmm(1)
 					break
+	
+	
 func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 	var BoxParent : Control
 	if (PartType == ShipPart.ShipPartType.ENGINE):
@@ -108,7 +116,23 @@ func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 		BoxParent = ShieldInventoryBoxParent
 	return BoxParent
 
+func GetTypeOfBox(Box : Inventory_Box) -> ShipPart.ShipPartType:
+	var BoxParent = Box.get_parent()
+	var Type : ShipPart.ShipPartType
+	if (BoxParent == EngineInventoryBoxParent):
+		Type = ShipPart.ShipPartType.ENGINE
+	else : if (BoxParent == SensorInventoryBoxParent):
+		Type = ShipPart.ShipPartType.SENSOR
+	else : if (BoxParent == FuelTankInventoryBoxParent):
+		Type = ShipPart.ShipPartType.FUEL_TANK
+	else : if (BoxParent == WeaponInventoryBoxParent):
+		Type = ShipPart.ShipPartType.WEAPON
+	else : if (BoxParent == ShieldInventoryBoxParent):
+		Type = ShipPart.ShipPartType.SHIELD
+	return Type
+
 func ItemSelected(Box : Inventory_Box) -> void:
+	
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
@@ -116,31 +140,79 @@ func ItemSelected(Box : Inventory_Box) -> void:
 		desc.queue_free()
 		if (desc.DescribedContainer == Box):
 			return
-			
+	
 			
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
-	
-	
+	Descriptor.DescribedContainer = Box
+	if (Box.IsEmpty()):
+		Descriptor.SetEmptyShopData(GetTypeOfBox(Box))
+	else:
+		var HasUp = false
+		if (CurrentShip.Cpt.CurrentPort != ""):
 
-	var HasUp = false
-	if (CurrentShip.Cpt.CurrentPort != ""):
-
-		HasUp = CurrentShip.CurrentPort.HasUpgrade()
-	Descriptor.SetWorkShopData(Box, HasUp, CurrentShip.Cpt)
-	#Descriptor.connect("ItemUsed", UseItem)
-	Descriptor.connect("ItemUpgraded", UpgradeItem)
-	#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
-	#Descriptor.connect("ItemTransf", ItemTranfer)
+			HasUp = CurrentShip.CurrentPort.HasUpgrade()
+		Descriptor.SetWorkShopData(Box, HasUp, CurrentShip.Cpt)
+		#Descriptor.connect("ItemUsed", UseItem)
+		Descriptor.connect("ItemUpgraded", UpgradeItem)
+		#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
+		#Descriptor.connect("ItemTransf", ItemTranfer)
 	DescriptorPlace.add_child(Descriptor)
 	Descriptor.set_physics_process(false)
 	
 func UpgradeItem(Box : Inventory_Box) -> void:
+	
+	var OriginalItem : ShipPart = Box.GetContainedItem()
+	var UpgradedItem : ShipPart = OriginalItem.UpgradeVersion
+	
+	var OriginalCap = CurrentShip.Cpt
+	var OriginalInv = OriginalCap._CharInv
+	
+	if (OriginalInv._ItemBeingUpgraded != null):
+		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part")
+		#print("Ship is already upgrading a part. Wait for it to finish first.")
+		return
+	if (OriginalInv._ItemBeingEquipped != null):
+		PopUpManager.GetInstance().DoFadeNotif("Ship having a part equipped to it")
+		#print("Ship is already upgrading a part. Wait for it to finish first.")
+		return
+	#if (OriginalCap.CurrentPort == ""):
+		#PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
+		#return
+	
+	var NewCap = OriginalCap.duplicate(true) as Captain
+	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
+	NewCap._CharInv = NewInv
+	var NewStats : Array[ShipStat]
+	for g in OriginalCap.CaptainStats:
+		NewStats.append(g.duplicate())
+	NewCap.CaptainStats = NewStats
+	NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
+	NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
+	
+	NewInv.RemoveItem(OriginalItem)
+	NewInv.AddItem(UpgradedItem)
+
+	NewCap.OnShipPartRemovedFromInventory(OriginalItem)
+	NewCap.OnShipPartAddedToInventory(UpgradedItem)
+	
+	var StatC = StatComp.instantiate() as StatComperator
+	StatC.SetCaptainsToCompare(OriginalCap, NewCap)
+	add_child(StatC)
+	
+	var Resault = await StatC.TradeFinished
+	
+	StatC.queue_free()
+	
+	if (!Resault):
+		
+		return
+	
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()
 	
 	var box = Inv.GetBoxContainingItem(Box._ContainedItem)
 	
 	InventoryManager.GetInstance().ItemUpdgrade(box, Inv)
-
+	
 
 func _on_button_pressed() -> void:
 	WorkshopClosed.emit()

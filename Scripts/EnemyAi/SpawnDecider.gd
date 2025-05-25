@@ -7,6 +7,7 @@ class_name SpawnDecider
 @export var ConvoyUnits : Array[CaptainSpawnInfo]
 
 @export var MerchList : Array[MerchandiseInfo]
+@export var WorkshopList : Array[MerchandiseInfo]
 
 const LowestPrice : int = 50
 const MerchLowest : int = 2
@@ -33,6 +34,29 @@ func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 		var m = MerchList.pick_random() as MerchandiseInfo
 		if (m.DontGenerateBefore > stage):
 				continue
+		if (points > m.Cost):
+			var hasm = false
+			for g in available_merch:
+				if (m.Merch.It == g.It):
+					g.Amm += 1
+					hasm = true
+					break
+			if (!hasm):
+				var NewMerch = m.Merch.duplicate(false)
+				NewMerch.Amm = 1
+				available_merch.append(NewMerch)
+			points -= m.Cost
+	return available_merch
+
+func GetWorkshopMerchForPosition(YPos: float) -> Array[Merchandise]:
+	var available_merch: Array[Merchandise] = []
+	var points = GetPointsForPosition(abs(YPos))
+	var stage = Happening.GetStageForYPos(YPos)
+	# Iterate through the MerchList to select merchandise based on points
+	while points > MerchLowest:
+		var m = WorkshopList.pick_random() as MerchandiseInfo
+		if (m.DontGenerateBefore > stage):
+			continue
 		if (points > m.Cost):
 			var hasm = false
 			for g in available_merch:

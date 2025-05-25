@@ -64,7 +64,7 @@ func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 
-	#sMapPointerManager.GetInstance().AddShip(self, false)
+	MapPointerManager.GetInstance().AddShip(self, false)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	visible = NewZoom > 0.5
@@ -305,6 +305,11 @@ func IntersectPusruing() -> Vector2:
 	ship_position = PursuingShips[0].global_position
 	ship_velocity = PursuingShips[0].GetShipSpeedVec()
 
+	var Distance = global_position.distance_to(ship_position)
+	
+	if (Distance < 10):
+		OnReachedPursuing()
+	
 	# Predict where the ship will be in a future time `t`
 	var speed = GetShipSpeed()
 	var time_to_interception = (global_position.distance_to(ship_position)) / (speed / 360)
@@ -313,6 +318,35 @@ func IntersectPusruing() -> Vector2:
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	#print("Calculating Intersection Point took " + var_to_str(Time.get_ticks_msec() - ms) + " msec")
 	return predicted_position
+
+func OnReachedPursuing() -> void:
+	var plships : Array[MapShip] = []
+	var hostships : Array[MapShip] = []
+	if (Docked):
+		hostships.append(Command)
+		hostships.append_array(Command.GetDroneDock().DockedDrones)
+	else:
+		hostships.append(self)
+		hostships.append_array(GetDroneDock().DockedDrones)
+
+	var Ship : MapShip = PursuingShips[0]
+	if (Ship.Command == null):
+		plships.append(Ship)
+		for g in Ship.GetDroneDock().GetDockedShips():
+			if (g is HostileShip):
+				hostships.append(g)
+			else:
+				plships.append(g)
+	else:
+		var FleetCommander = Ship.Command
+		plships.append(FleetCommander)
+		for g in FleetCommander.GetDroneDock().GetDockedShips():
+			if (g is HostileShip):
+				hostships.append(g)
+			else:
+				plships.append(g)
+				
+	OnPlayerShipMet.emit(plships, hostships)
 
 func GetCurrentDestination() -> Vector2:
 	var destination
@@ -354,7 +388,7 @@ func OnShipSeen(SeenBy : Node2D):
 		g.VisibleBy.append(SeenBy)
 		MapPointerManager.GetInstance().AddShip(g, false)
 	#SimulationManager.GetInstance().TogglePause(true)
-	Map.GetInstance().GetCamera().FrameCamToPos(global_position,1, true)
+	Map.GetInstance().GetCamera().FrameCamToPos(global_position,1, false)
 
 func wait(seconds : float) -> Signal:
 	return get_tree().create_timer(seconds).timeout
@@ -456,42 +490,42 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Wonfunds]))
 			call_deferred("DestroyEnemyDebry")
 		#TODO expand logic to allow for convoys with guards
-		else : if (Convoy):
-			var Ship = Body.get_parent()
-			var FleetCommander : MapShip
-			if (Ship.Command == null):
-				FleetCommander = Ship
-			else:
-				FleetCommander = Ship.Command
-			FleetCommander.GetDroneDock().AddCaptive(self)
-		else:
-			var plships : Array[MapShip] = []
-			var hostships : Array[MapShip] = []
-			if (Docked):
-				hostships.append(Command)
-				hostships.append_array(Command.GetDroneDock().DockedDrones)
-			else:
-				hostships.append(self)
-				hostships.append_array(GetDroneDock().DockedDrones)
-			
-			var Ship : MapShip = Body.get_parent()
-			if (Ship.Command == null):
-				plships.append(Ship)
-				for g in Ship.GetDroneDock().GetDockedShips():
-					if (g is HostileShip):
-						hostships.append(g)
-					else:
-						plships.append(g)
-			else:
-				var FleetCommander = Ship.Command
-				plships.append(FleetCommander)
-				for g in FleetCommander.GetDroneDock().GetDockedShips():
-					if (g is HostileShip):
-						hostships.append(g)
-					else:
-						plships.append(g)
-						
-			OnPlayerShipMet.emit(plships, hostships)
+		#else : if (Convoy):
+			#var Ship = Body.get_parent()
+			#var FleetCommander : MapShip
+			#if (Ship.Command == null):
+				#FleetCommander = Ship
+			#else:
+				#FleetCommander = Ship.Command
+			#FleetCommander.GetDroneDock().AddCaptive(self)
+		#else:
+			#var plships : Array[MapShip] = []
+			#var hostships : Array[MapShip] = []
+			#if (Docked):
+				#hostships.append(Command)
+				#hostships.append_array(Command.GetDroneDock().DockedDrones)
+			#else:
+				#hostships.append(self)
+				#hostships.append_array(GetDroneDock().DockedDrones)
+			#
+			#var Ship : MapShip = Body.get_parent()
+			#if (Ship.Command == null):
+				#plships.append(Ship)
+				#for g in Ship.GetDroneDock().GetDockedShips():
+					#if (g is HostileShip):
+						#hostships.append(g)
+					#else:
+						#plships.append(g)
+			#else:
+				#var FleetCommander = Ship.Command
+				#plships.append(FleetCommander)
+				#for g in FleetCommander.GetDroneDock().GetDockedShips():
+					#if (g is HostileShip):
+						#hostships.append(g)
+					#else:
+						#plships.append(g)
+						#
+			#OnPlayerShipMet.emit(plships, hostships)
 	else : if (Body.get_parent() == Command and CommingBack):
 		var Ship = Body.get_parent() as HostileShip
 		Ship.GetDroneDock().DockDrone(self, true)

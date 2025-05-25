@@ -12,6 +12,7 @@ class_name ItemDescriptor
 @export var RepairButton : Button
 @export var TransferButton : Button
 @export var UpgradeButton : Button
+@export var AddItemButton : Button
 @export var UpgradeLabel : RichTextLabel
 @export var CardSection : Control
 @export var CardPlecement : Control
@@ -113,7 +114,14 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 			card.Dissable()
 	else:
 		CardSection.visible = false
-		
+
+func SetEmptyShopData(Type : ShipPart.ShipPartType) -> void:
+	UpgradeButton.visible = false
+	AddItemButton.visible = true
+	UpgradeLabel.visible = false
+	set_physics_process(false) 
+	ItemName.text = "Empty {0} Slot".format([ShipPart.ShipPartType.keys()[Type]])
+
 func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
 	set_physics_process(false)
 	DescribedContainer = Box
@@ -123,7 +131,8 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 	
 	#TransferButton.visible = It.CanTransfer
 	TransferButton.visible = false
-	
+	AddItemButton.visible = false
+	UpgradeButton.visible = true
 	ItemName.text = It.ItemName
 	#Ship Parts
 	if (It is ShipPart):
@@ -233,7 +242,8 @@ func SetMerchData(Itm : Item) -> void:
 		CardSection.visible = false
 
 func _on_upgrade_pressed() -> void:
-	PopUpManager.GetInstance().DoConfirm("", "Are you sure you want to upgrade this item ?", "Upgrade", ConfirmUpgrade, Ingame_UIManager.GetInstance().PopupPlecement)
+	ItemUpgraded.emit(DescribedContainer)
+	#PopUpManager.GetInstance().DoConfirm("", "Are you sure you want to upgrade this item ?", "Upgrade", ConfirmUpgrade, Ingame_UIManager.GetInstance().PopupPlecement)
 
 
 func _on_drop_pressed() -> void:
@@ -251,8 +261,8 @@ func ConfirmDrop() -> void:
 	#UseButton.text = "Use :" + var_to_str(UsingAmm) + "x"
 	
 	
-func ConfirmUpgrade() -> void:
-	ItemUpgraded.emit(DescribedContainer)
+#func ConfirmUpgrade() -> void:
+	
 	#queue_free()
 
 	
@@ -276,3 +286,7 @@ func _physics_process(_delta: float) -> void:
 func OnDescScrollInput(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		DescScroll.scroll_vertical -= event.relative.y
+
+
+func _on_add_item_pressed() -> void:
+	pass # Replace with function body.

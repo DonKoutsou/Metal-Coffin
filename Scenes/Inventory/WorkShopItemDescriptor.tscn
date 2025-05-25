@@ -15,7 +15,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "RepairButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "RepairButton", "TransferButton", "UpgradeButton", "AddItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,6 +31,7 @@ ItemName = NodePath("Control/HBoxContainer/HBoxContainer/ItemName")
 RepairButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Repair")
 TransferButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
 UpgradeButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
+AddItemButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/AddItem")
 UpgradeLabel = NodePath("Control/HBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("Control/HBoxContainer/CardsSection")
 CardPlecement = NodePath("Control/HBoxContainer/CardsSection/CardPlecement")
@@ -87,6 +88,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Upgrade"
+
+[node name="AddItem" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_r68kf")
+text = "Equip Item"
 
 [node name="Repair" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
@@ -150,5 +158,6 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/AddItem" to="." method="_on_add_item_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]

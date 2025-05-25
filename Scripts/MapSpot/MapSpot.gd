@@ -15,6 +15,7 @@ signal SpotAlarmRaised(Notify : bool)
 var SpotType : MapSpotType
 var SpotInfo : MapSpotCompleteInfo
 var Merch : Array[Merchandise] = []
+var WorkShopMerch : Array[Merchandise] = []
 var Pos : Vector2
 var Visited = false
 var Seen = false

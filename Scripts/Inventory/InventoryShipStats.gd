@@ -1,6 +1,5 @@
 extends VBoxContainer
 class_name InventoryShipStats
-@export var CharPortrait : TextureRect
 @export var ShipStatScene : PackedScene
 @export var StatsShown : Array[STAT_CONST.STATS]
 @export var ShipIcon : TextureRect
@@ -14,22 +13,17 @@ func _ready() -> void:
 		statscene.SetData(StatsShown[g])
 		add_child(statscene)
 		Stats.append(statscene)
-	
-	
-		
+
 func UpdateValues() -> void:
+	
 	for g in Stats.size():
-		#var Multiplier = 1
-		#if (Stats[g].STName == STAT_CONST.STATS.SPEED):
-			#Multiplier = 360
 		var value = CurrentShownCaptain.GetStatBaseValue(Stats[g].STName)
 		var ItemBuff = CurrentShownCaptain.GetStatShipPartBuff(Stats[g].STName)
 		var ItemPenalty = CurrentShownCaptain.GetStatShipPartPenalty(Stats[g].STName)
-		#var ShipValue = CurrentShownCaptain.GetStatShipBuff(Stats[g].STName)
 		Stats[g].UpdateStatValue(value , ItemBuff, ItemPenalty)
 
 func SetCaptain(Cpt : Captain) -> void:
-	CharPortrait.texture = Cpt.CaptainPortrait
 	CurrentShownCaptain = Cpt
-	UpdateValues()
+	call_deferred("UpdateValues")
+	#UpdateValues()
 	ShipIcon.texture = Cpt.ShipIcon

@@ -229,6 +229,7 @@ MapSpotMarkerScene = ExtResource("21_oyi6l")
 FriendlyColor = Color(0.483, 100, 0.381, 1)
 EnemyColor = Color(100, 0.094, 0, 1)
 ConvoyColor = Color(100, 0.764, 0.081, 1)
+EnemyDebug = true
 UIEventH = ExtResource("25_8mjbw")
 ControllerEventHandler = ExtResource("22_n73so")
 

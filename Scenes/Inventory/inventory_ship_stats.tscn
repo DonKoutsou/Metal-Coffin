@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr6qn30drails"]
+
+[ext_resource type="Script" uid="uid://djaksgs7n1q3d" path="res://Scripts/Inventory/InventoryShipStats.gd" id="1_oud7i"]
+[ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/Inventory/ShipStatContainer.tscn" id="2_82v18"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="3_pm5r7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.282501, 0.267741, 0.268801, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwjun"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.423551, 0.31482, 2.40654e-07, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
+[node name="InventoryShipStats" type="VBoxContainer" node_paths=PackedStringArray("CharPortrait", "ShipIcon")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_oud7i")
+CharPortrait = NodePath("")
+ShipStatScene = ExtResource("2_82v18")
+StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5])
+ShipIcon = NodePath("Legend/CaptainIcon2")
+
+[node name="Legend" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="CaptainIcon2" type="TextureRect" parent="Legend"]
+show_behind_parent = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("3_pm5r7")
+expand_mode = 1
+flip_v = true
+
+[node name="Label2" type="Label" parent="Legend"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Base Stats"
+
+[node name="Panel2" type="Panel" parent="Legend"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
+
+[node name="Label" type="Label" parent="Legend"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Ship Part Buffs"
+
+[node name="Panel" type="Panel" parent="Legend"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")

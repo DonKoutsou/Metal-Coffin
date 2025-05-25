@@ -10,7 +10,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		print(Ship.ShipName + " already has refuel spot")
 		return SUCCESS
 
-	var dist = Ship.GetFuelRange()
+	#var dist = Ship.GetFuelRange()
 	
 	var DistToSpot = 9999999999
 	
@@ -21,8 +21,8 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		var spot = g as MapSpot
 		var D = spot.global_position.distance_to(Ship.global_position)
 		#if we cant reach it look for another
-		if (D >= dist):
-			continue
+		#if (D >= dist):
+			#continue
 		
 		if (D > DistToSpot):
 			continue

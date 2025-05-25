@@ -210,7 +210,9 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 			await wait(0.2)
 	
 	DeffenceCard.KillCard(0.5, false)
-	
+	if (TargetShips.size() == 0):
+		await wait(0.2)
+		AnimEnded()
 	
 func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> void:
 	var DeffenceCard = CardScene.instantiate() as Card

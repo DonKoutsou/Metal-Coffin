@@ -15,7 +15,7 @@ CurrentValue = 0.0
 
 [resource]
 script = ExtResource("3_1oqec")
-WType = 0
+WType = 2
 Upgrades = Array[ExtResource("6_eoxlf")]([SubResource("Resource_fmxhr")])
 UpgradeVersion = ExtResource("2_74rgq")
 UpgradeTime = 600.0

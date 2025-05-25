@@ -188,7 +188,13 @@ func _physics_process(delta: float) -> void:
 
 				Marker.ToggleTimeLastSeend(false)
 				Marker.UpdateDroneHull(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
-				Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK))
+				var fuelstats
+				if (ship.Docked):
+					fuelstats = ship.Command.GetFuelStats()
+				else:
+					fuelstats = ship.GetFuelStats()
+				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
+				#Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK))
 				Marker.UpdateTrajectory(ship.global_rotation)
 			else:
 				if (ship.Destroyed):

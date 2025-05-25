@@ -199,11 +199,13 @@ func _enter_tree() -> void:
 
 func TerminateWorld() -> void:
 	#GetMap().GetInScreenUI().GetInventory().FlushInventory()
-	var PlShip = get_tree().get_nodes_in_group("Ships")[0]
-	if (PlShip is PlayerShip):
-		InventoryManager.GetInstance().OnCharacterRemoved(PlShip.Cpt)
-		PlShip.GetDroneDock().ClearAllDrones()
-
+	var PlShips = get_tree().get_nodes_in_group("PlayerShips")
+	for g : MapShip in PlShips:
+		if (g is PlayerShip):
+			InventoryManager.GetInstance().OnCharacterRemoved(g.Cpt)
+		else:
+			g.Kill()
+			
 func GetDialogueProgress() -> DialogueProgressHolder:
 	return $DialogueProgressHolder
 
@@ -246,7 +248,10 @@ func ShipSeparationFinished() -> void:
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
 func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
-	
+	#Temp solution to stop fight starting twice
+	if (get_tree().get_nodes_in_group("CardFight").size() > 0):
+		return
+	####
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
 		FighingFriendlyUnits.append(g)
@@ -471,15 +476,18 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 
 
 #Make sure to remove all items that their cards have been used
+#TODO fix this, ammo that wasnt brought into fight cause of lack of weapons will be deleted DONE 
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary[CardStats, int]):
 	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
 	var Contents = CharInv.GetInventoryContents().duplicate()
-	for It in Contents.keys():
-		var Itm = It as Item
+	for It : Item in Contents.keys():
+		if (It is AmmoItem and !CharInv.HasWeapon(It.WType)):
+			continue
+			
 		for g in Contents[It]:
 			#if item doesent provide a card then it def didnt get used
-			if (Itm.CardProviding.size() > 0):
-				for c in Itm.CardProviding:
+			if (It.CardProviding.size() > 0):
+				for c in It.CardProviding:
 				#if it did remove it from dictionary and leave ininside inventory
 					if (Cards.has(c)):
 						Cards[c] -= 1
@@ -487,17 +495,8 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary[CardSta
 							Cards.erase(c)
 				#if it was used and we cant find it in the dictionary then remove it from inventory
 					else:
-						CharInv.RemoveItem(Itm)
-			
-			#if (Itm.CardOptionProviding != null):
-				#if it did remove it from dictionary and leave ininside inventory
-				#if (Ammo.has(Itm.CardOptionProviding)):
-					#Ammo[Itm.CardOptionProviding] -= 1
-					#if (Ammo[Itm.CardOptionProviding] == 0):
-						#Ammo.erase(Itm.CardOptionProviding)
-				#if it was used and we cant find it in the dictionary then remove it from inventory
-				#else:
-				#CharInv.RemoveItem(Itm)
+						CharInv.RemoveItem(It)
+
 #--------------------------------------------------------
 func GameLost(reason : String):
 	get_tree().paused = true

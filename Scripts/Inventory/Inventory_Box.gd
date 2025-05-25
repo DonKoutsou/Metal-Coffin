@@ -53,6 +53,9 @@ func _UpdateAmmountLabel() -> void:
 	Text.text = var_to_str(_ContentAmmout)
 	$PanelContainer.visible = _ContentAmmout > 1
 
+func Enable() -> void:
+	Butto.disabled = false
+	Butto.mouse_filter = Control.MOUSE_FILTER_PASS
 func _UpdateItemIcon() -> void:
 	if (_ContainedItem):
 		$ItemButton.text = _ContainedItem.ItemName
@@ -66,6 +69,6 @@ func _UpdateItemIcon() -> void:
 		$ItemButton.text = ""
 
 func _On_Item_Pressed() -> void:
-	if (_ContentAmmout == 0):
-		return
+	#if (_ContentAmmout == 0):
+		#return
 	ItemSelected.emit(self)

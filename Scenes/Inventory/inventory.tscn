@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dslxdgbana1k1"]
+[gd_scene load_steps=13 format=3 uid="uid://dslxdgbana1k1"]
 
 [ext_resource type="Script" uid="uid://de8gy2g6upjg4" path="res://Scripts/Inventory/InventoryManager.gd" id="2_n8wv5"]
 [ext_resource type="PackedScene" uid="uid://cmvl7w65kwp5a" path="res://Scenes/Inventory/character_inventory.tscn" id="3_5gkpo"]
@@ -8,13 +8,8 @@
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="7_ffxnd"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_0fcos"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="8_n1gkd"]
-[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="9_37qp6"]
-[ext_resource type="Script" uid="uid://djaksgs7n1q3d" path="res://Scripts/Inventory/InventoryShipStats.gd" id="10_jwvgm"]
-[ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/Inventory/ShipStatContainer.tscn" id="11_lweht"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="12_gc8sd"]
-[ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="13_1cl0s"]
+[ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_o4jeo"]
 [ext_resource type="AudioStream" uid="uid://d4k7al36dc8er" path="res://Assets/Sounds/ScreenZap.wav" id="13_jjw7x"]
-[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="13_uuft3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1gkd"]
 content_margin_left = 0.0
@@ -37,64 +32,7 @@ border_blend = true
 corner_detail = 1
 shadow_size = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubet6"]
-bg_color = Color(0.066982, 0.133257, 0.137998, 1)
-border_width_left = 2
-border_width_top = 8
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.763983, 0.0812772, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_detail = 1
-shadow_size = 8
-anti_aliasing_size = 2.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12j2j"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
-draw_center = false
-border_width_bottom = 961
-border_color = Color(0.0053553, 0.00773166, 0.0116329, 1)
-border_blend = true
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.282501, 0.267741, 0.268801, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwjun"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.423551, 0.31482, 2.40654e-07, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 1
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uuft3"]
-content_margin_top = 20.0
-content_margin_bottom = 50.0
-
-[node name="Inventory" type="Control" node_paths=PackedStringArray("CharStatPanel", "CharacterPlace", "DescriptorPlace", "ShipStats", "ShipDeck", "InvScrol")]
+[node name="Inventory" type="Control" node_paths=PackedStringArray("CharacterPlace", "DescriptorPlace", "CaptainStats", "InvScrol")]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -107,11 +45,9 @@ CharInvScene = ExtResource("3_5gkpo")
 ItemDescriptorScene = ExtResource("4_8j1nc")
 ItemTransferScene = ExtResource("5_pqw7i")
 ItemNotifScene = ExtResource("6_q7t14")
-CharStatPanel = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2")
 CharacterPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/ScrollContainer/VBoxContainer")
 DescriptorPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer")
-ShipStats = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats")
-ShipDeck = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/ShipDeck")
+CaptainStats = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer")
 InvScrol = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/ScrollContainer")
 MissileDockEventH = ExtResource("7_ffxnd")
 DroneDockEventH = ExtResource("8_0fcos")
@@ -157,99 +93,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="CaptainStatContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("9_o4jeo")]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_ubet6")
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")
-
-[node name="CaptainIcon" type="TextureRect" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer"]
-self_modulate = Color(1, 1, 1, 0.414)
-show_behind_parent = true
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("9_37qp6")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="InventoryShipStats" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer" node_paths=PackedStringArray("CharPortrait", "ShipIcon")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("10_jwvgm")
-CharPortrait = NodePath("../CaptainIcon")
-ShipStatScene = ExtResource("11_lweht")
-StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5])
-ShipIcon = NodePath("Legend/CaptainIcon2")
-
-[node name="Legend" type="HBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats"]
-layout_mode = 2
-alignment = 1
-
-[node name="CaptainIcon2" type="TextureRect" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
-show_behind_parent = true
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture = ExtResource("12_gc8sd")
-expand_mode = 1
-flip_v = true
-
-[node name="Label2" type="Label" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Base Stats"
-
-[node name="Panel2" type="Panel" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
-
-[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Ship Part Buffs"
-
-[node name="Panel" type="Panel" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/InventoryShipStats/Legend"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
-
-[node name="ShipDeck" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer" node_paths=PackedStringArray("CharPortrait", "CardPosition")]
-layout_mode = 2
-script = ExtResource("13_1cl0s")
-CharPortrait = NodePath("../CaptainIcon")
-CardScene = ExtResource("13_uuft3")
-CardPosition = NodePath("ScrollContainer/HFlowContainer")
-
-[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/ShipDeck"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Deck"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/ShipDeck"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_uuft3")
-
-[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/PanelContainer/ShipDeck/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 14
-theme_override_constants/v_separation = -166
-alignment = 1
-last_wrap_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_jjw7x")

@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnonfp8ywr3vl"]
+
+[ext_resource type="Script" uid="uid://v1gumu5fm5sd" path="res://Scripts/Inventory/captain_stat_container.gd" id="1_gx6im"]
+[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="2_uviis"]
+[ext_resource type="PackedScene" uid="uid://cr6qn30drails" path="res://Scenes/Inventory/inventory_ship_stats.tscn" id="3_qyvw6"]
+[ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="4_7pj6b"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="5_gxgtf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubet6"]
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+border_width_left = 2
+border_width_top = 8
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_detail = 1
+shadow_size = 8
+anti_aliasing_size = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12j2j"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
+draw_center = false
+border_width_bottom = 961
+border_color = Color(0.0053553, 0.00773166, 0.0116329, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uuft3"]
+content_margin_top = 20.0
+content_margin_bottom = 50.0
+
+[node name="CaptainStatContainer" type="PanelContainer" node_paths=PackedStringArray("ShipStats", "ShipDeck", "CaptainIcon")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ubet6")
+script = ExtResource("1_gx6im")
+ShipStats = NodePath("PanelContainer/InventoryShipStats")
+ShipDeck = NodePath("PanelContainer/ShipDeck")
+CaptainIcon = NodePath("PanelContainer/CaptainIcon")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")
+
+[node name="CaptainIcon" type="TextureRect" parent="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0.414)
+show_behind_parent = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_uviis")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="InventoryShipStats" parent="PanelContainer" instance=ExtResource("3_qyvw6")]
+layout_mode = 2
+
+[node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" node_paths=PackedStringArray("CharPortrait", "CardPosition")]
+layout_mode = 2
+script = ExtResource("4_7pj6b")
+CharPortrait = NodePath("../CaptainIcon")
+CardScene = ExtResource("5_gxgtf")
+CardPosition = NodePath("ScrollContainer/HFlowContainer")
+
+[node name="Label" type="Label" parent="PanelContainer/ShipDeck"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Deck"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/ShipDeck"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_uuft3")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = -166
+alignment = 1
+last_wrap_alignment = 1

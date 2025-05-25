@@ -374,7 +374,7 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
 	
 	for g in GeneratedSpots:
-		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y))
+		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y))
 
 func CheckPlecement(pos : Vector2, places : Array[Town]) -> bool:
 	var TooClose = false

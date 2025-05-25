@@ -8,11 +8,9 @@ class_name InventoryManager
 @export var ItemTransferScene : PackedScene
 @export var ItemNotifScene : PackedScene
 @export_group("Nodes")
-@export var CharStatPanel : Control
 @export var CharacterPlace : Control
 @export var DescriptorPlace : Control
-@export var ShipStats : InventoryShipStats
-@export var ShipDeck : ShipDeckViz
+@export var CaptainStats : CaptainStatContainer
 @export var InvScrol : ScrollContainer
 @export_group("Event Handlers")
 @export var MissileDockEventH : MissileDockEventHandler
@@ -121,13 +119,13 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 		DescriptorPlace.remove_child(desc)
 		desc.queue_free()
 		if (desc.DescribedContainer == Box):
-			CharStatPanel.visible = true
+			CaptainStats.visible = true
 			return
 	
 	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
 	
 	DescriptorPlace.add_child(Descriptor)
-	CharStatPanel.visible = false
+	CaptainStats.visible = false
 	var cpt = GetBoxOwner(Box)
 	var HasUp = false
 	if (cpt.CurrentPort != ""):
@@ -151,14 +149,8 @@ func GetCity(CityName : String) -> MapSpot:
 	return CorrectCity
 
 func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
-	if (OwnerInventory._ItemBeingUpgraded != null):
-		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part.")
-		#print("Ship is already upgrading a part. Wait for it to finish first.")
-		return
+
 	var Cpt = GetBoxOwner(Box)
-	if (Cpt.CurrentPort == ""):
-		PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
-		return
 	var It = Box.GetContainedItem() as ShipPart
 	var cit = GetCity(Cpt.CurrentPort)
 	var HasUpgrade = cit.HasUpgrade()
@@ -252,9 +244,9 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
 	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 	
-	if (ShipStats.CurrentShownCaptain == null):
-		ShipStats.SetCaptain(Cha)
-		ShipDeck.visible = false
+	
+		#ShipStats.SetCaptain(Cha)
+		#ShipDeck.visible = false
 		
 	
 	for g in Cha.StartingItems:
@@ -310,31 +302,32 @@ func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileAdded(It, Owner)
-	ShipStats.UpdateValues()
+	CaptainStats.UpdateValues()
 	
 func OnItemRemoved(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileRemoved(It, Owner)
 	CloseDescriptor()
-	ShipStats.UpdateValues()
+	CaptainStats.UpdateValues()
 
 func InspectCharacter(Cha : Captain) -> void:
 	CloseDescriptor()
-	ShipStats.SetCaptain(Cha)
-	ShipStats.visible = true
-	ShipDeck.visible = false
+	CaptainStats.SetCaptain(Cha)
+	CaptainStats.ShowStats()
+	#ShipStats.visible = true
+	#ShipDeck.visible = false
 
 func InspectCharacterDeck(Cha : Captain) -> void:
 	CloseDescriptor()
-	ShipStats.visible = false
-	ShipDeck.SetDeck(Cha)
-	ShipDeck.visible = true
+	CaptainStats.SetCaptain(Cha)
+	CaptainStats.ShowDeck()
+
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		DescriptorPlace.remove_child(descriptors[0])
 		descriptors[0].queue_free()
-	CharStatPanel.visible = true
+	CaptainStats.visible = true
 
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
 	var Data = SD_CharacterInventory.new()

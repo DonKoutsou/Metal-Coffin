@@ -12,6 +12,7 @@ extends Node2D
 class_name Commander
 
 @export var Armaments : Dictionary
+@export var SimulationRange : int = 10000
 
 @export_flags_2d_physics var layers_2d_physics
 
@@ -92,7 +93,7 @@ func ProcessLODList() -> void:
 		var ShouldRun = false
 		
 		for Pl in PlayerShips:
-			if (ShipPos.distance_to(Pl.global_position) < 20000):
+			if (ShipPos.distance_to(Pl.global_position) < SimulationRange):
 				ShouldRun = true
 				break
 		
@@ -361,8 +362,8 @@ func FindRefugeForShip(Ship : HostileShip) -> MapSpot:
 		var D = spot.global_position.distance_to(Ship.global_position)
 		
 		#if we cant reach it look for another
-		if (D >= dist):
-			continue
+		#if (D >= dist):
+			#continue
 		
 		if (D > DistToSpot):
 			continue

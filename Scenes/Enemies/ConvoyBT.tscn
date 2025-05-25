@@ -16,9 +16,9 @@
 process_mode = 1
 script = ExtResource("1_vdj7f")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@217411")
+blackboard = NodePath("@Node@297988")
 custom_monitor = true
-actor = NodePath("..")
+actor = NodePath("")
 
 [node name="SelectorComposite" type="Node" parent="."]
 script = ExtResource("2_ohcew")
