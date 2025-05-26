@@ -125,7 +125,6 @@ CurrentPlayerLabel = NodePath("SubViewport/Control2/CurrentPlayerLabel")
 StartingCardAmm = 3
 MaxCardsInHand = 8
 MaxCombatants = 3
-TurnEnergy = null
 UIEventH = ExtResource("16_734e5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -258,6 +257,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 10.0
+alignment = 1
 
 [node name="PanelContainer2" type="PanelContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer"]
 layout_mode = 2

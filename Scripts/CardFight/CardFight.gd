@@ -416,49 +416,57 @@ func PickPhase() -> void:
 	CardSelectContainer.get_child(0).visible = true
 	
 	CurrentPlayerLabel.visible = true
+	
+	StartCurrentShipsPickTurn()
 
 func StartCurrentShipsPickTurn() -> void:
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = ShipTurns[CurrentTurn]
+		CurrentPlayerLabel.text = "{0} picking".format([Ship.Name])
 		ActionDeclaration.DoActionDeclaration(Ship.Name + "'s turn", 1.5)
 		ActionDeclaration.ActionDeclarationFinished.connect(RunShipsTurn.bind(Ship))
 	else:
 		StartActionPerform()
 		
 func RunShipsTurn(Ship : BattleShipStats) -> void:
-		ActionDeclaration.ActionDeclarationFinished.disconnect(RunShipsTurn)
+	ActionDeclaration.ActionDeclarationFinished.disconnect(RunShipsTurn)
 
-		var viz = GetShipViz(Ship)
-		viz.Enable()
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
-			await ActionTracker.GetInstance().ShowTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [viz], true)
+	var viz = GetShipViz(Ship)
+	viz.Enable()
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
+		await ActionTracker.GetInstance().ShowTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [viz], true)
+	
+	ActionList.AddShip(Ship)
+	if (IsShipFriendly(Ship)):
+		DeckP.visible = true
+		DiscardP.visible = true
+		ExternalUI.ToggleEnergyVisibility(true)
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
+			await ActionTracker.GetInstance().ShowTutorial("Energy", "Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.", [ExternalUI.GetEnergyBar()], true)
+		#ShipFallBackButton.visible = true
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
+			await ActionTracker.GetInstance().ShowTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [ExternalUI.GetReserveBar()], true)
 		
-		ActionList.AddShip(Ship)
-		if (IsShipFriendly(Ship)):
-			DeckP.visible = true
-			DiscardP.visible = true
-			ExternalUI.ToggleEnergyVisibility(true)
-			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
-				ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
-				await ActionTracker.GetInstance().ShowTutorial("Energy", "Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.", [ExternalUI.GetEnergyBar()], true)
-			#ShipFallBackButton.visible = true
-			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
-				ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
-				await ActionTracker.GetInstance().ShowTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [ExternalUI.GetReserveBar()], true)
-			
-			HandAmmountLabel.visible = true
-			
-			RestartCards()
-		else:
-			EnemyPickingMove = true
-			DrawCardEnemy(Ship)
-			await EnemyActionSelection(Ship)
-			CurrentEnemyTurnEnded()
+		HandAmmountLabel.visible = true
+		
+		RestartCards()
+	else:
+		EnemyPickingMove = true
+		DrawCardEnemy(Ship)
+		await EnemyActionSelection(Ship)
+		CurrentEnemyTurnEnded()
 
 func CurrentEnemyTurnEnded() -> void:
+	var Ship = ShipTurns[CurrentTurn]
+	var viz = GetShipViz(Ship)
+	viz.Dissable()
+	viz.OnActionsPerformed()
 	EnemyPickingMove = false
-	
+	CurrentTurn = CurrentTurn + 1
+	StartCurrentShipsPickTurn()
 
 func CurrentPlayerTurnEnded() -> void:
 	
@@ -476,7 +484,7 @@ func CurrentPlayerTurnEnded() -> void:
 	viz.Dissable()
 	viz.OnActionsPerformed()
 	
-	CurrentTurn = min(CurrentTurn + 1, ShipTurns.size() -1)
+	CurrentTurn = CurrentTurn + 1
 	
 	StartCurrentShipsPickTurn()
 
@@ -522,30 +530,20 @@ func ActionPerformPhase() -> void:
 	CurrentPlayerLabel.visible = true
 	#AnimationPlecement.visible = true
 	CurrentTurn = 0
+	
+	StartCurrentShipsPerformTurn()
 
 func StartCurrentShipsPerformTurn() -> void:
+	if (GameOver):
+		return
+		
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = ShipTurns[CurrentTurn]
 		CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
 
-
-	for Ship in ShipTurns:
-		CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
-		var PerformedActions = await PerformActions(Ship)
+		PerformActions(Ship)
+		return
 		
-		var D = GetShipDeck(Ship)
-		
-		for ToBurn in PerformedActions:
-			
-			ActionList.RemoveActionFromShip(Ship, ToBurn.Action)
-			
-			#Actions[Ship].erase(ToBurn)
-			
-		if (GameOver):
-			return
-		
-		CurrentTurn = min(CurrentTurn + 1, ShipTurns.size() - 1)
-	
 	CurrentPlayerLabel.visible = false
 	
 	await DoFireDamage()
@@ -650,42 +648,50 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			
 		print("{0} ended their turn with {1} exess energy".format([Ship.Name, EnemyEnergy]))
 
-func PerformActions(Ship : BattleShipStats) -> Array[CardFightAction]:
+func PerformActions(Ship : BattleShipStats) -> void:
 	
 	var ActionsToBurn : Array[CardFightAction]
-	var Friendly = IsShipFriendly(Ship)
 	var viz = GetShipViz(Ship)
-	var Dec = GetShipDeck(Ship)
 	for g in viz.get_parent().get_children():
 		if (g != viz):
 			var tw = create_tween()
 			tw.set_ease(Tween.EASE_OUT)
 			tw.set_trans(Tween.TRANS_QUAD)
 			tw.tween_property(g, "custom_minimum_size", Vector2(90, 0), 0.2)
-			tw.finished.connect(OnShipBroughtForward)
+			tw.finished.connect(PerformNextActionForShip.bind(0))
 			#g.visible = true
 
-func OnShipBroughtForward() -> void:
+func PerformNextActionForShip(ActionIndex : int) -> void:
+	var Ship = ShipTurns[CurrentTurn]
+	var Dec = GetShipDeck(Ship)
+	var Friendly = IsShipFriendly(Ship)
+	var viz = GetShipViz(Ship)
 	
-	for z in ActionList.GetShipsActions(Ship):
-		var ShipAction = z as CardFightAction
-		var Action = ShipAction.Action
+	var ShipActions = ActionList.GetShipsActions(Ship)
+	
+	if (ShipActions.size() - 1 < ActionIndex):
+		PerformTurnFinished()
+		return
+	
+	var ShipAction = ShipActions[ActionIndex] as CardFightAction
+	var Action = ShipAction.Action
+
+	var Targets = ShipAction.Targets
 		
-		var Targets = ShipAction.Targets
-			
-		for g in Targets:
-			if (!PlayerCombatants.has(g) and !EnemyCombatants.has(g)):
-				Targets.erase(g)
-		
-		if (Targets.size() == 0):
-			continue
-		
+	for g in Targets:
+		if (!PlayerCombatants.has(g) and !EnemyCombatants.has(g)):
+			Targets.erase(g)
+
+	if (Targets.size() == 0):
+		ActionIndex += 1
+		PerformNextActionForShip(ActionIndex)
+	else:
 		var Mod = Action.OnPerformModule
-		
+
 		if (Mod is OffensiveCardModule):
 
-			ActionsToBurn.append(ShipAction)
-			
+			#ActionsToBurn.append(ShipAction)
+			ActionList.RemoveActionFromShip(Ship, Action)
 			var Counter : CardStats
 			var AtackType = Mod.AtackType
 			#var HasDeff = false
@@ -762,28 +768,30 @@ func OnShipBroughtForward() -> void:
 
 			for g in TargetList:
 				#print("Atack Started")
-				await anim.AtackConnected
+				
+				#anim.AtackConnected.connect()
 				#print("Atack connected")
-				if (TargetList[g]["Def"] != null):
-					continue
-				else:
+				if (TargetList[g]["Def"] == null):
+					anim.AtackConnected.connect(DamageShip.bind(g, Mod.GetFinalDamage(Ship), Mod.CauseFile))
 
-					if (DamageShip(g, Mod.GetFinalDamage(Ship), Mod.CauseFile)):
-						break
 
 			if (!anim.Fin):
 				#print("Animation Started")
-				await anim.AnimationFinished
+				anim.AnimationFinished.connect(PerformAnimationFinished.bind(ActionIndex, anim))
 				#print("Animation Finished")
-			
-			DiscardP.visible = false
-			
-			anim.visible = false
-			#print("Deleting animation")
-			anim.queue_free()
-			
-			
+			else:
+				PerformAnimationFinished(ActionIndex, anim)
+		else:
+			ActionIndex += 1
+			PerformNextActionForShip(ActionIndex)
+func PerformAnimationFinished(ActionIndex : int, Anim : CardOffensiveAnimation) -> void:
+	DiscardP.visible = false
+	Anim.visible = false
+	Anim.queue_free()
+	PerformNextActionForShip(ActionIndex)
 
+func PerformTurnFinished() -> void:
+	var viz = GetShipViz(ShipTurns[CurrentTurn])
 	for g in viz.get_parent().get_children():
 		if (g != viz):
 			var tw = create_tween()
@@ -791,8 +799,8 @@ func OnShipBroughtForward() -> void:
 			tw.set_trans(Tween.TRANS_QUAD)
 			tw.tween_property(g, "custom_minimum_size", Vector2(0, 0), 0.2)
 			await tw.finished
-
-	return ActionsToBurn
+	CurrentTurn = CurrentTurn + 1
+	StartCurrentShipsPerformTurn()
 
 func HandleDrawDriscard(Performer : BattleShipStats, Mod : DrawCardModule) -> void:
 	var D = GetShipDeck(Performer)
@@ -1335,7 +1343,7 @@ func ShuffleDiscardedIntoDeck(D : Deck, DoAnim : bool = true) -> void:
 	
 	if (DoAnim):
 		for g in D.DeckPile.size():
-			await wait(0.05)
+			await Helper.GetInstance().wait(0.05)
 			DiscardP.OnCardRemoved()
 			DeckP.OnCardAdded(DiscardP.global_position)
 			if (g == D.DeckPile.size() - 1):
@@ -1674,7 +1682,7 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 			await HandleModule(Performer, C ,C.OnUseModules[Mod])
 		else:
 			HandleModule(Performer, C ,C.OnUseModules[Mod])
-			await wait(0.2)
+			await Helper.GetInstance().wait(0.2)
 
 func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule) -> void:
 	if (Mod is ResupplyModule):
@@ -1708,7 +1716,7 @@ func HandleModulesEnemy(Performer : BattleShipStats, C : CardStats) -> void:
 			await HandleModuleEnemy(Performer, C ,C.OnUseModules[Mod])
 		else:
 			HandleModuleEnemy(Performer, C ,C.OnUseModules[Mod])
-			await wait(0.2)
+			await Helper.GetInstance().wait(0.2)
 
 func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModule) -> void:
 	if (Mod is ResupplyModule):

@@ -22,7 +22,7 @@ func DoActionDeclaration(ActionName : String, CustomTime : float = 3) -> void:
 	InSound.pitch_scale = randf_range(0.9, 1.1)
 	add_child(InSound)
 	
-	Tw.finished.conne
+	Tw.finished.connect(ActionDeclarationStage1.bind(CustomTime))
 
 func ActionDeclarationStage1(CustomTime : float) -> void:
 	get_child(0).visible = true
@@ -31,17 +31,17 @@ func ActionDeclarationStage1(CustomTime : float) -> void:
 	Tw2.set_ease(Tween.EASE_OUT)
 	Tw2.set_trans(Tween.TRANS_QUAD)
 	Tw2.tween_property(get_child(0), "modulate", Color(1,1,1,1), CustomTime/6)
-	Tw2.finished.connect(ActionDeclarationStage2)
+	Tw2.finished.connect(ActionDeclarationStage2.bind(CustomTime))
 
 func ActionDeclarationStage2(CustomTime : float) -> void:
-	Helper.GetInstance().wait((CustomTime/6) *2).connect(ActionDeclarationStage3)
+	Helper.GetInstance().wait((CustomTime/6) *2).connect(ActionDeclarationStage3.bind(CustomTime))
 	
 func ActionDeclarationStage3(CustomTime : float) -> void:
 	var Tw3 = create_tween()
 	Tw3.set_ease(Tween.EASE_OUT)
 	Tw3.set_trans(Tween.TRANS_QUAD)
 	Tw3.tween_property(get_child(0), "modulate", Color(1,1,1,0), CustomTime/6)
-	Tw3.finished.connect(ActionDeclarationStage3)
+	Tw3.finished.connect(ActionDeclarationStage4.bind(CustomTime))
 	
 func ActionDeclarationStage4(CustomTime : float) -> void:
 	get_child(0).visible = false
