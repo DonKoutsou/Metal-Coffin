@@ -224,6 +224,7 @@ one_shot = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6q6vd")
 volume_db = -5.0
+bus = &"Sounds"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer/SkipDiag" to="." method="_on_skip_diag_pressed"]

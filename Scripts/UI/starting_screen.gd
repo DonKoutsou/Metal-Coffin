@@ -55,8 +55,9 @@ func StartPrologue(Load : bool) -> void:
 	
 	Wor = IntroGameScene.instantiate() as World
 	if (Load):
-		if (!SaveLoadManager.GetInstance().Load(Wor)):
-
+		var LoadResault = SaveLoadManager.GetInstance().Load(Wor)
+		if (!LoadResault["Succsess"]):
+			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
 	add_child(Wor)
@@ -98,11 +99,9 @@ func StartGame(Load : bool) -> void:
 	Wor = GameScene.instantiate() as World
 	#wor.Load
 	if (Load):
-		if (!SaveLoadManager.GetInstance().Load(Wor)):
-			var window = AcceptDialog.new()
-			add_child(window)
-			window.dialog_text = "Could't load save"
-			window.popup_centered()
+		var LoadResault = SaveLoadManager.GetInstance().Load(Wor)
+		if (!LoadResault["Succsess"]):
+			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
 	add_child(Wor)

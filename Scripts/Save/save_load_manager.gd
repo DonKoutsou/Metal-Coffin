@@ -12,7 +12,23 @@ static func GetInstance() -> SaveLoadManager:
 func DeleteSave() -> void:
 	DirAccess.remove_absolute("user://SavedGame.tres")
 	DirAccess.remove_absolute("user://PrologueSavedGame.tres")
+
+static func SaveExists(Sav : String) -> bool:
+	var CurrentVersion = ProjectSettings.get_setting("application/config/version")
+		
+	if (!FileAccess.file_exists(Sav)):
+		return false
 	
+	var sav = load(Sav) as SaveData
+	
+	if (sav == null):
+		return false
+	
+	if (sav.GameVersion != CurrentVersion):
+		return false
+	
+	return true
+
 # Called when the node enters the scene tree for the first time.
 func Save() -> void:
 	var world = World.GetInstance()
@@ -57,7 +73,8 @@ func Save() -> void:
 	ResourceSaver.save(sav, SaveName)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func Load(world : World) ->bool:
+func Load(world : World) ->Dictionary:
+	var Resaults : Dictionary
 	var CurrentVersion = ProjectSettings.get_setting("application/config/version")
 	
 	var SaveName : String
@@ -67,17 +84,21 @@ func Load(world : World) ->bool:
 		SaveName = "user://SavedGame.tres"
 		
 	if (!FileAccess.file_exists(SaveName)):
-		PopUpManager.GetInstance().DoFadeNotif("Save file could not be found.")
-		return false
+		Resaults["Succsess"] = false
+		Resaults["Reason"] = "Save file could not be found."
+		return Resaults
 	
 	var sav = load(SaveName) as SaveData
 	
 	if (sav == null):
-		return false
+		Resaults["Succsess"] = false
+		Resaults["Reason"] = "Couldn't load save."
+		return Resaults
 	
 	if (sav.GameVersion != CurrentVersion):
-		PopUpManager.GetInstance().DoFadeNotif("Game Version doesen't match save file.\nSave File Version = {0}".format([sav.GameVersion]))
-		return false
+		Resaults["Succsess"] = false
+		Resaults["Reason"] = "Game Version doesen't match save file.\nSave File Version = {0}".format([sav.GameVersion])
+		return Resaults
 	
 	
 	
@@ -100,7 +121,8 @@ func Load(world : World) ->bool:
 	world.Loading = true
 	#call_deferred("LoadStats", world, StatData)
 	call_deferred("LoadMapDat", world, WalletData, sav.GetData("PLData"), enems, misses, MarkerEditorData, InvestigationPositions, InvData)
-	return true
+	Resaults["Succsess"] = true
+	return Resaults
 
 func LoadMapDat(W : World, PlayerWallet : Wallet, PlayerData : PlayerSaveData, Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
 	await W.WRLD_WorldReady

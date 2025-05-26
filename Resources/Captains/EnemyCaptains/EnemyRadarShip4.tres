@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=25 format=3 uid="uid://bvv346qqjamj6"]
+[gd_resource type="Resource" script_class="Captain" load_steps=26 format=3 uid="uid://bvv346qqjamj6"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_h2nkx"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_rwhr3"]
@@ -13,13 +13,14 @@
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="10_db2kr"]
 [ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="11_md5cl"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="12_1jw2f"]
+[ext_resource type="Resource" uid="uid://dp1lgf8wdupg3" path="res://Resources/Cards/DroneStrike.tres" id="13_db2kr"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="13_euy3m"]
 [ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/Spaceship/Ship11.png" id="14_4cdhb"]
 
 [sub_resource type="Resource" id="Resource_4xt1j"]
 script = ExtResource("2_rwhr3")
 StatName = 2
-StatBase = 20.0
+StatBase = 40.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -44,7 +45,7 @@ CurrentValue = 0.0
 resource_local_to_scene = true
 script = ExtResource("2_rwhr3")
 StatName = 4
-StatBase = 50.0
+StatBase = 250.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -114,5 +115,6 @@ ExtResource("5_db2kr"): 6,
 ExtResource("6_6ynol"): 4,
 ExtResource("10_db2kr"): 3,
 ExtResource("11_md5cl"): 3,
-ExtResource("13_euy3m"): 3
+ExtResource("13_euy3m"): 3,
+ExtResource("13_db2kr"): 10
 })

@@ -141,6 +141,7 @@ LocationPositions = Dictionary[int, NodePath]({
 [node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0rigd")
 autoplay = true
+bus = &"Sounds"
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15

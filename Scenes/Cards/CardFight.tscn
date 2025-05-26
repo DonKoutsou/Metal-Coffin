@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=39 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
@@ -24,6 +24,7 @@
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="22_gvlad"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="23_d5rtw"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="24_d8sco"]
+[ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scripts/CardFight/action_declaration.gd" id="24_pw20f"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="27_rbthh"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="28_ang8x"]
@@ -118,12 +119,13 @@ HandAmmountLabel = NodePath("SubViewport/Control2/Label")
 Cloud = NodePath("SubViewport/Control2/Clouds")
 DiscardP = NodePath("SubViewport/Control2/DiscardPile")
 DeckP = NodePath("SubViewport/Control2/DeckButton")
-PlayerFleetSizeLabel = NodePath("SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/Control/Label")
-EnemyFleetSizeLabel = NodePath("SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/Control/Label")
+PlayerFleetSizeLabel = NodePath("SubViewport/Control2/Label2")
+EnemyFleetSizeLabel = NodePath("SubViewport/Control2/Label3")
 CurrentPlayerLabel = NodePath("SubViewport/Control2/CurrentPlayerLabel")
 StartingCardAmm = 3
 MaxCardsInHand = 8
 MaxCombatants = 3
+TurnEnergy = null
 UIEventH = ExtResource("16_734e5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -194,6 +196,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("23_d5rtw")
+script = ExtResource("24_pw20f")
 
 [node name="Label" type="Label" parent="SubViewport/Control2/Action Declaration"]
 layout_mode = 2
@@ -202,6 +205,34 @@ text = "ACTION PICK PHASE"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="Label2" type="Label" parent="SubViewport/Control2"]
+layout_mode = 1
+offset_left = 50.0
+offset_top = 15.0
+offset_right = 151.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 18
+text = "Fleet Size
+2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="SubViewport/Control2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -151.0
+offset_top = 14.0
+offset_right = -50.0
+offset_bottom = 55.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 18
+text = "Fleet Size
+2"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer4" type="HBoxContainer" parent="SubViewport/Control2"]
 layout_mode = 1
@@ -222,19 +253,6 @@ theme_override_constants/separation = 30
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 18
-text = "Fleet Size
-2"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
 layout_mode = 2
@@ -275,19 +293,6 @@ theme_override_constants/separation = 30
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 18
-text = "Fleet Size
-2"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("ShipVizContainer")]
 z_index = 2

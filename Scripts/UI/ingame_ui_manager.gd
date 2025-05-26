@@ -86,10 +86,20 @@ func Pause() -> void:
 	#EventHandler.OnScreenUIToggled(paused)
 	
 func _on_save_pressed() -> void:
+	if (CageFightWorld.GetInstance() != null):
+		PopUpManager.GetInstance().DoFadeNotif("Can't save in a cagefight", PopupPlecement)
+		return
 	SaveLoadManager.GetInstance().Save()
 	PopUpManager.GetInstance().DoFadeNotif("Save successful", PopupPlecement)
 func _on_exit_pressed() -> void:
-	World.GetInstance().EndGame()
+	var world = World.GetInstance()
+	if (world != null):
+		world.EndGame()
+		return
+	world = CageFightWorld.GetInstance()
+	if (world != null):
+		world.EndGame()
+		return
 func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().EndGame()
 	

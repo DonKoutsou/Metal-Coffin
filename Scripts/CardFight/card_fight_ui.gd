@@ -16,6 +16,7 @@ class_name ExternalCardFightUI
 @export var BeepSound : AudioStream
 @export var BeepNoSound : AudioStream
 @export var BeepLong : AudioStream
+@export var PlayerCardPlacementInputBlocker : Control
 
 signal OnDeckPressed
 signal OnShipFallbackPressed
@@ -30,6 +31,7 @@ static var Instance : ExternalCardFightUI
 
 func _ready() -> void:
 	Instance = self
+	PlayerCardPlacementInputBlocker.visible = false
 
 func RegisterFight(Scene : Card_Fight) -> void:
 	FightScene = Scene
@@ -40,6 +42,18 @@ static func GetInstacne() -> ExternalCardFightUI:
 func GetPlayerCardPlecement() -> Control:
 	return PlayerCardPlecement
 
+func GetCardsInHand() -> Array[Card]:
+	var HandList : Array[Card]
+	for g in PlayerCardPlecement.get_children():
+		HandList.append(g)
+	for g in PlayCardInsert.get_children():
+		HandList.append(g.get_child(0))
+	for g in DrawCardInsert.get_children():
+		HandList.append(g.get_child(0))
+	for g in DiscardInsert.get_children():
+		HandList.append(g.get_child(0))
+	return HandList
+	
 func ClearHand() -> void:
 	for g in PlayerCardPlecement.get_children():
 		g.free()
@@ -68,6 +82,7 @@ func _on_deck_button_pressed() -> void:
 	OnDeckPressed.emit()
 
 func InserCardtoPlay(C : Card) -> void:
+	C.Dissable(true)
 	PlayerCardPlecement.Blocked = true
 	var pos = C.global_position
 	C.get_parent().remove_child(C)
@@ -78,7 +93,7 @@ func InserCardtoPlay(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(20, 5), 0.5)
+	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(20, 5), 0.35)
 	PlayCardSound()
 	PlayerCardPlecement.Blocked = false
 	await Movetw.finished
@@ -99,6 +114,7 @@ func InserCardtoPlay(C : Card) -> void:
 	PlayCardInsertSound(CardSoundType.INSERT)
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
+	C.Enable()
 	if (!await FightScene.OnCardSelected(C)):
 		PlayCardInsertSound(CardSoundType.BEEPNO)
 		var tw2 = create_tween()
@@ -112,13 +128,17 @@ func InserCardtoPlay(C : Card) -> void:
 		Cont.queue_free()
 		PlayerCardPlecement.add_child(C)
 		PlayCardSound()
-
+	
 		
 
 func PausePressed() -> void:
 	PlayerCardPlecement.visible = !get_tree().paused
 
+func ToggleHandInput(t : bool) -> void:
+	PlayerCardPlacementInputBlocker.visible = !t
+
 func InsertCardToDiscard(C : Card) -> void:
+	C.Dissable(true)
 	var pos = C.global_position
 	C.get_parent().remove_child(C)
 	add_child(C)
@@ -149,12 +169,13 @@ func InsertCardToDiscard(C : Card) -> void:
 	PlayCardInsertSound(CardSoundType.DISCARD)
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
-	
+	C.Enable()
 
 func CardDrawFail() -> void:
 	PlayCardInsertSound(CardSoundType.BEEPNO)
 
 func OnCardDrawn(C : Card) -> void:
+	C.Dissable(true)
 	PlayCardInsertSound(CardSoundType.BEEPLONG)
 	await Helper.GetInstance().wait(0.1)
 	PlayCardInsertSound(CardSoundType.EXIT)
@@ -181,6 +202,7 @@ func OnCardDrawn(C : Card) -> void:
 	Cont.remove_child(C)
 	AddCardToHand(C)
 	Cont.queue_free()
+	C.Enable()
 	
 
 func _on_pull_reserves_pressed() -> void:

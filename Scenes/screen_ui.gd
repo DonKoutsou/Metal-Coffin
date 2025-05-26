@@ -63,8 +63,6 @@ func DoIntroFullScreen(NewStat : ScreenState) -> void:
 	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
 	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
 	
-	
-	
 	OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
 	OpenTw.set_trans(Tween.TRANS_QUART)

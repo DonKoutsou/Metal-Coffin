@@ -30,7 +30,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert")]
+[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert", "PlayerCardPlacementInputBlocker")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,6 +52,7 @@ CardSound = ExtResource("2_c6mlu")
 BeepSound = ExtResource("6_anehw")
 BeepNoSound = ExtResource("7_xj5gt")
 BeepLong = ExtResource("8_xj5gt")
+PlayerCardPlacementInputBlocker = NodePath("PlayerCardPlacementInputBlocker")
 
 [node name="ScreenFrame2" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 38.045)
@@ -83,10 +84,28 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 6
+mouse_force_pass_scroll_events = false
 script = ExtResource("1_8e13a")
 max_rotation_degrees = 25.0
 max_cards = 8
 metadata/_custom_type_script = "uid://bl8iy8s43qakx"
+
+[node name="PlayerCardPlacementInputBlocker" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -483.0
+offset_top = -293.0
+offset_right = 196.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_force_pass_scroll_events = false
 
 [node name="w" parent="." instance=ExtResource("4_fje4l")]
 layout_mode = 2

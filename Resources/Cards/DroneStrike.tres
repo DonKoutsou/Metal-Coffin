@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://dp1lgf8wdupg3"]
+
+[ext_resource type="Texture2D" uid="uid://co2rqhx2gyqvu" path="res://Assets/Cards/DroneStrike.png" id="1_dq567"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_4oqqa"]
+[ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="3_nyycn"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_j3gij"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_b6u8p"]
+
+[sub_resource type="Resource" id="Resource_mo274"]
+script = ExtResource("3_nyycn")
+AtackType = 1
+Damage = 8.0
+ScaleStat = 0
+CauseFile = false
+OnSuccesfullAtackModules = Array[ExtResource("2_4oqqa")]([])
+AOE = false
+metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
+
+[resource]
+script = ExtResource("5_b6u8p")
+Icon = ExtResource("1_dq567")
+CardName = "Drone Strike"
+Energy = 2
+AllowDuplicates = true
+Consume = true
+RequiredPart = Array[ExtResource("4_j3gij")]([])
+OnUseModules = Array[ExtResource("2_4oqqa")]([])
+OnPerformModule = SubResource("Resource_mo274")
+WeapT = 2
+Tier = 1

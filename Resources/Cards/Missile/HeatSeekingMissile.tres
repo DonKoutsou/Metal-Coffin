@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://7uk8xj2yft8v"]
 
+[ext_resource type="Texture2D" uid="uid://de7vcabckg00m" path="res://Assets/Cards/MissileHeatSeeking.png" id="1_ett3l"]
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="2_ett3l"]
-[ext_resource type="Texture2D" uid="uid://bi0eebl0i1oyo" path="res://Assets/Cards/Missile.png" id="2_mo274"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_nvkw5"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_8vdhr"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_ibr0y"]
@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]
 script = ExtResource("4_ibr0y")
-Icon = ExtResource("2_mo274")
+Icon = ExtResource("1_ett3l")
 CardName = "Heat Seeking Missile"
 Energy = 3
 AllowDuplicates = true

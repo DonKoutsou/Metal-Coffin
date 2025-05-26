@@ -623,21 +623,18 @@ offset_left = 27.0
 offset_top = 369.0
 offset_right = 44.0
 offset_bottom = 408.0
-button_pressed = true
 
 [node name="SoundCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="1"]
 offset_left = 27.0
 offset_top = 409.0
 offset_right = 44.0
 offset_bottom = 448.0
-button_pressed = true
 
 [node name="SoundCheckBox2" parent="ScreenFrame2/SettingPanel2/Control" index="2"]
 offset_left = 201.0
 offset_top = 412.0
 offset_right = 218.0
 offset_bottom = 451.0
-button_pressed = true
 
 [node name="GlitchesCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="3"]
 offset_left = 28.0

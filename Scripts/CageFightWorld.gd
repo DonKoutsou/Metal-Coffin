@@ -8,12 +8,13 @@ class_name CageFightWorld
 signal FightEnded
 signal FightTransitionFinished
 
-static var Instance : World
+static var Instance : CageFightWorld
 
-static func GetInstance() -> World:
+static func GetInstance() -> CageFightWorld:
 	return Instance
 
 func _ready() -> void:
+	Instance = self
 	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await ScrUI.FullScreenToggleStarted
 	ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
@@ -23,6 +24,10 @@ func _ready() -> void:
 	ScrUI.ToggleCardFightUI(true)
 	StartDogFight()
 	#$Inventory.Player = GetMap().GetPlayerShip()
+
+func EndGame() -> void:
+	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
+	FightEnded.emit()
 
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []

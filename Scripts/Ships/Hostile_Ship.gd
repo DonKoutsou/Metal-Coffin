@@ -64,7 +64,7 @@ func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 
-	MapPointerManager.GetInstance().AddShip(self, false)
+	#MapPointerManager.GetInstance().AddShip(self, false)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	visible = NewZoom > 0.5

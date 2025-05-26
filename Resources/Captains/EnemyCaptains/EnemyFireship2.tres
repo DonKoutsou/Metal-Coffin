@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=26 format=3 uid="uid://bipfcwumlbq7u"]
+[gd_resource type="Resource" script_class="Captain" load_steps=28 format=3 uid="uid://bipfcwumlbq7u"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_76con"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_eu6gc"]
@@ -9,18 +9,20 @@
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="4_vnlpj"]
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="5_3rhll"]
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="5_gin3q"]
-[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="6_7x2xh"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_ybob7"]
 [ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="7_akiln"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/Spaceship/Scarab.png" id="8_rr16v"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="9_06kto"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_adqj8"]
 [ext_resource type="Resource" uid="uid://bcyedao3gvdki" path="res://Resources/Cards/Flares.tres" id="13_4hv1g"]
+[ext_resource type="Resource" uid="uid://doj6225gf2ja0" path="res://Resources/Cards/Barrage/IncendiaryBarrage.tres" id="13_akiln"]
+[ext_resource type="Resource" uid="uid://dxmkl7xkl3qho" path="res://Resources/Cards/Barrage/ProxFuseBarrage.tres" id="14_06kto"]
+[ext_resource type="Resource" uid="uid://bblpmt5iq264c" path="res://Resources/Cards/Barrage/APBarrage.tres" id="15_4hv1g"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_eu6gc")
 StatName = 2
-StatBase = 20.0
+StatBase = 40.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -28,7 +30,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_bf8ot"]
 script = ExtResource("2_eu6gc")
 StatName = 6
-StatBase = 200.0
+StatBase = 90.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -45,7 +47,7 @@ CurrentValue = 0.0
 resource_local_to_scene = true
 script = ExtResource("2_eu6gc")
 StatName = 4
-StatBase = 90.0
+StatBase = 200.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -109,12 +111,14 @@ ProvidingCaptains = Array[ExtResource("4_4majv")]([])
 Cards = Dictionary[ExtResource("3_fc1kx"), int]({
 ExtResource("4_vnlpj"): 1,
 ExtResource("5_gin3q"): 2,
-ExtResource("6_7x2xh"): 6,
 ExtResource("7_akiln"): 1,
 ExtResource("4_adqj8"): 20,
 ExtResource("9_06kto"): 2,
 ExtResource("6_ybob7"): 2,
 ExtResource("9_adqj8"): 10,
 ExtResource("5_3rhll"): 4,
-ExtResource("13_4hv1g"): 4
+ExtResource("13_4hv1g"): 4,
+ExtResource("13_akiln"): 4,
+ExtResource("14_06kto"): 4,
+ExtResource("15_4hv1g"): 4
 })

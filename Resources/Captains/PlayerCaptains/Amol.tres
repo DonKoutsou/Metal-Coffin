@@ -16,7 +16,7 @@
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_7h107")
 StatName = 2
-StatBase = 2.0
+StatBase = 0.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -24,7 +24,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_bf8ot"]
 script = ExtResource("2_7h107")
 StatName = 6
-StatBase = 110.0
+StatBase = 90.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

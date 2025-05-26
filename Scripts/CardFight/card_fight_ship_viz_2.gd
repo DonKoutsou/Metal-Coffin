@@ -16,7 +16,7 @@ class_name CardFightShipViz2
 @export var FPLabel : RichTextLabel
 @export var SPDLabel : RichTextLabel
 @export var HasMovePanel : Control
-
+@export var ActionParent : Control
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
@@ -51,6 +51,19 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	
 	HasMovePanel.visible = false
 	TurnPanel.self_modulate.a = 0
+
+func ActionPicked(Text : Texture) -> void:
+	var TexNode = TextureRect.new()
+	TexNode.texture = Text
+	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	TexNode.custom_minimum_size = Vector2(38,22)
+	ActionParent.add_child(TexNode)
+
+func ActionRemoved(Tex : Texture) -> void:
+	for g : TextureRect in ActionParent.get_children():
+		if (g.texture == Tex):
+			g.free()
+			return
 
 func OnNewTurnStarted() -> void:
 	HasMovePanel.visible = true

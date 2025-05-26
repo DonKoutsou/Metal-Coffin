@@ -28,7 +28,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_nn3aw"]
 script = ExtResource("2_nhpak")
 StatName = 6
-StatBase = 350.0
+StatBase = 90.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

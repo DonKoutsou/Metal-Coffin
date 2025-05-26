@@ -32,11 +32,15 @@ func _ready() -> void:
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property(Black, "color", Color(0,0,0,0), 2)
 	
-	LoadPrologueLight.ToggleNoAnim(true, FileAccess.file_exists("user://PrologueSavedGame.tres"))
-	LoadLight.ToggleNoAnim(true, FileAccess.file_exists("user://SavedGame.tres"))
+	call_deferred("DoLights")
 	
 	$SubViewportContainer/SubViewport/VersionLabel.text = "Demo Version v{0}".format([ProjectSettings.get_setting("application/config/version")])
 	#LoopAmp()
+
+func DoLights() -> void:
+	LoadPrologueLight.ToggleNoAnim(true, SaveLoadManager.SaveExists("user://PrologueSavedGame.tres"))
+	
+	LoadLight.ToggleNoAnim(true, SaveLoadManager.SaveExists("user://SavedGame.tres"))
 
 func _on_play_pressed() -> void:
 	if (Selecting):
