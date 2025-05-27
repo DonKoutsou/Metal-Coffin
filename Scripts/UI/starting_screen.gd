@@ -119,6 +119,7 @@ func DelSave() -> void:
 	#ActionTracker.GetInstance().DeleteSave()
 	
 func FightEnded(Fight : CageFightWorld) -> void:
+	get_tree().paused = false
 	Fight.queue_free()
 	SpawnMenu()
 

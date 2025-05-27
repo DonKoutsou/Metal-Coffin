@@ -26,5 +26,5 @@ Consume = true
 RequiredPart = Array[ExtResource("4_j3gij")]([])
 OnUseModules = Array[ExtResource("2_4oqqa")]([])
 OnPerformModule = SubResource("Resource_mo274")
-WeapT = 2
+WeapT = 0
 Tier = 1

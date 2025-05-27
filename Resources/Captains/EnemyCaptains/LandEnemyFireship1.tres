@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=24 format=3 uid="uid://cta70yn02gqg5"]
+[gd_resource type="Resource" script_class="Captain" load_steps=25 format=3 uid="uid://cta70yn02gqg5"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_t248c"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7jpyg"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="7_yduiv"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="9_dogpg"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="12_3g2k8"]
+[ext_resource type="Resource" uid="uid://1n0lmrvfvrd2" path="res://Resources/Cards/Barrage/StackingBarrage.tres" id="12_v0j1y"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_7jpyg")
@@ -112,5 +113,6 @@ ExtResource("7_yduiv"): 1,
 ExtResource("4_iv6fn"): 12,
 ExtResource("9_dogpg"): 2,
 ExtResource("5_7ynpd"): 4,
-ExtResource("12_3g2k8"): 8
+ExtResource("12_3g2k8"): 8,
+ExtResource("12_v0j1y"): 1
 })

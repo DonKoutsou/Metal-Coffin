@@ -26,17 +26,14 @@ class_name ScreenUI
 
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
-#signal FleetSeparationInitiated
 
-var CloseTw : Tween
-var OpenTw : Tween
 
 func CloseScreen() -> void:
 	ScreenPanel.visible = true
 	DoorSound.play()
 	Cam.EnableFullScreenShake()
-	await wait(0.5)
-	CloseTw = create_tween()
+	await Helper.GetInstance().wait(0.5)
+	var CloseTw = create_tween()
 	CloseTw.set_ease(Tween.EASE_OUT)
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
 	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
@@ -49,21 +46,22 @@ func DoIntroFullScreen(NewStat : ScreenState) -> void:
 	Cables.visible = false
 	DoorSound.play()
 	Cam.EnableFullScreenShake()
-	await wait(0.5)
-	CloseTw = create_tween()
+	await Helper.GetInstance().wait(0.5)
+	var CloseTw = create_tween()
 	CloseTw.set_ease(Tween.EASE_OUT)
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
-	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
-	await CloseTw.finished
-	
+	CloseTw.tween_property(ScreenPanel, "position", Vector2(0,0), 2)
+	CloseTw.finished.connect(IntroCloseFinisehd.bind(NewStat))
+
+func IntroCloseFinisehd(NewStat : ScreenState) -> void:
 	FullScreenToggleStarted.emit(NewStat)
 	
-	await wait(0.2)
+	await Helper.GetInstance().wait(0.2)
 	Cables.visible = true
 	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
 	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
 	
-	OpenTw = create_tween()
+	var OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
 	OpenTw.set_trans(Tween.TRANS_QUART)
 	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
@@ -81,8 +79,8 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	ScreenPanel.visible = true
 	DoorSound.play()
 	Cam.EnableFullScreenShake()
-	await wait(0.5)
-	CloseTw = create_tween()
+	await Helper.GetInstance().wait(0.5)
+	var CloseTw = create_tween()
 	CloseTw.set_ease(Tween.EASE_OUT)
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
 	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
@@ -90,14 +88,14 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	
 	FullScreenToggleStarted.emit(NewStat)
 	
-	await wait(0.2)
+	await Helper.GetInstance().wait(0.2)
 
 	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
 	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
 	
 	
 	
-	OpenTw = create_tween()
+	var OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
 	OpenTw.set_trans(Tween.TRANS_QUART)
 	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
@@ -105,9 +103,6 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	ScreenPanel.visible = false
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
-func wait(secs : float) -> Signal:
-	return get_tree().create_timer(secs).timeout
-	
 
 func _ready() -> void:
 	NormalScreen.visible = false

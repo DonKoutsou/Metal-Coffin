@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://bwwby1vknkefj"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://bwwby1vknkefj"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_vievn"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_ki4vj"]
+[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_jb0ki"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_lu011"]
+[ext_resource type="Resource" uid="uid://c8reou7hykm77" path="res://Resources/Cards/ReserveConversion.tres" id="4_xg304"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_83sa7"]
+[ext_resource type="Resource" uid="uid://daou2wqtcgcxt" path="res://Resources/Cards/MaxEnergyReserve.tres" id="5_xg304"]
 
 [sub_resource type="Resource" id="Resource_o628u"]
 resource_local_to_scene = true
@@ -32,5 +35,5 @@ Tier = 3
 ItemName = "FT-2000"
 ItemDesc = "A high-capacity fuel tank built for extended missions. Made with proprietary composite materials, it maintains durability even under the most challenging conditions"
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_vievn")]([ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj")])
+CardProviding = Array[ExtResource("1_vievn")]([ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("3_jb0ki"), ExtResource("3_jb0ki"), ExtResource("3_jb0ki"), ExtResource("4_xg304"), ExtResource("4_xg304"), ExtResource("5_xg304"), ExtResource("5_xg304")])
 CanTransfer = false

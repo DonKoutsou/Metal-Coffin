@@ -1,12 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=19 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scripts/CardFight/card.gd" id="1_vr3r8"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
 [ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/UIPiecies/Screen/card.png" id="3_7mr5f"]
 [ext_resource type="Shader" uid="uid://dqjas3kma1fqo" path="res://Scenes/Cards/fake3d.gdshader" id="3_t4r8q"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="4_rd7hj"]
-[ext_resource type="FontFile" uid="uid://cimeixue3dr74" path="res://Fonts/DINMittelschriftStd.otf" id="6_4v2x1"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_t4r8q"]
+[ext_resource type="FontFile" uid="uid://d0r7lokuktq1c" path="res://Fonts/OCR-a___.ttf" id="6_yh81d"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
 
@@ -303,7 +302,7 @@ size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_t4r8q")
+theme_override_fonts/font = ExtResource("6_yh81d")
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
@@ -327,7 +326,7 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_4v2x1")
+theme_override_fonts/font = ExtResource("6_yh81d")
 theme_override_font_sizes/font_size = 15
 text = "Incindiary Barrage"
 vertical_alignment = 1
@@ -378,7 +377,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/outline_size = 8
-theme_override_fonts/normal_font = ExtResource("6_4v2x1")
+theme_override_fonts/normal_font = ExtResource("6_yh81d")
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "Throws a barragge on the enemy.

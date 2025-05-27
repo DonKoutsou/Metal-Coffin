@@ -7,6 +7,9 @@ class_name ActionDeclarationUI
 
 signal ActionDeclarationFinished
 
+func _ready() -> void:
+	visible = false
+
 func DoActionDeclaration(ActionName : String, CustomTime : float = 3) -> void:
 	visible = true
 	get_child(0).text = ActionName

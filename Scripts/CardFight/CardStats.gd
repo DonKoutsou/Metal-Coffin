@@ -33,7 +33,7 @@ func GetDescription() -> String:
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetDesc()
 	if (OnUseModules.size() > 0):
-		Desc + "\nOn Use : "
+		Desc += "On Use : "
 		for g in OnUseModules:
 			Desc += g.GetDesc() + "\n"
 
@@ -44,7 +44,7 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetBattleDesc(User)
 	if (OnUseModules.size() > 0):
-		Desc + "\nOn Use : "
+		Desc += "On Use : "
 		for g in OnUseModules:
 			Desc += g.GetBattleDesc(User) + "\n"
 

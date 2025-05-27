@@ -160,13 +160,14 @@ func Dissable(MouseFilter : bool = false) -> void:
 		SoundMan.RemoveSelf(But)
 	if (MouseFilter):
 		But.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
-
+		$SubViewportContainer.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 func Enable() -> void:
 	But.disabled = false
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf(But)
 	But.set_mouse_filter(Control.MOUSE_FILTER_STOP)
+	$SubViewportContainer.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	
 func GetCost() -> int:
 	return Cost

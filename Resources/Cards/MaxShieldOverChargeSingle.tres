@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://dbjcp32py84ba"]
+
+[ext_resource type="Texture2D" uid="uid://c221vevim2qk3" path="res://Assets/Cards/Shield.png" id="1_vjant"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_skuv8"]
+[ext_resource type="Script" uid="uid://ddob0fen8r2j2" path="res://Scripts/CardFight/MaxShieldCardModule.gd" id="3_vo1ml"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_p8n1h"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_6ufsw"]
+
+[sub_resource type="Resource" id="Resource_w7l7e"]
+script = ExtResource("3_vo1ml")
+ShieldPerEnergy = 5
+CanBeUsedOnOther = false
+SelfUse = true
+AOE = false
+metadata/_custom_type_script = "uid://ddob0fen8r2j2"
+
+[resource]
+script = ExtResource("5_6ufsw")
+Icon = ExtResource("1_vjant")
+CardName = "Shield Overcharge"
+Energy = 0
+AllowDuplicates = true
+Consume = false
+RequiredPart = Array[ExtResource("4_p8n1h")]([])
+OnUseModules = Array[ExtResource("2_skuv8")]([SubResource("Resource_w7l7e")])
+WeapT = 0
+Tier = 1

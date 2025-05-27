@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://d0a5l4aegq46m"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://d0a5l4aegq46m"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_tlvwb"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_372t0"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_34rnk"]
 [ext_resource type="Resource" uid="uid://bxnmuntwctjfi" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/LargeFuelTank2.tres" id="3_ku1j6"]
+[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_nmnbo"]
+[ext_resource type="Resource" uid="uid://c8reou7hykm77" path="res://Resources/Cards/ReserveConversion.tres" id="4_ewfkq"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_sjam0"]
+[ext_resource type="Resource" uid="uid://daou2wqtcgcxt" path="res://Resources/Cards/MaxEnergyReserve.tres" id="5_ewfkq"]
 
 [sub_resource type="Resource" id="Resource_i41uq"]
 resource_local_to_scene = true
@@ -34,5 +37,5 @@ Tier = 2
 ItemName = "SPT-200"
 ItemDesc = "A continuation of the SPT-100 model. This upgraded model provides an increased fuel capacity with a reduced weight ratio that the SPT series is known for."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_tlvwb")]([ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0")])
+CardProviding = Array[ExtResource("1_tlvwb")]([ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("3_nmnbo"), ExtResource("3_nmnbo"), ExtResource("3_nmnbo"), ExtResource("4_ewfkq"), ExtResource("5_ewfkq")])
 CanTransfer = false

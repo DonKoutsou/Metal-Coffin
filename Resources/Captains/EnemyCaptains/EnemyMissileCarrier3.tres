@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=23 format=3 uid="uid://dl7x2cmre3owx"]
+[gd_resource type="Resource" script_class="Captain" load_steps=24 format=3 uid="uid://dl7x2cmre3owx"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_iyumj"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_c0l3y"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="7_q7phx"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="8_451eo"]
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="10_ua7j4"]
+[ext_resource type="Resource" uid="uid://vk7sx0tcr6u8" path="res://Resources/Cards/MaxShieldOverCharge.tres" id="11_inwpa"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_c0l3y")
@@ -110,5 +111,6 @@ ExtResource("6_inwpa"): 2,
 ExtResource("7_q7phx"): 3,
 ExtResource("8_451eo"): 3,
 ExtResource("6_vghgo"): 6,
-ExtResource("10_ua7j4"): 3
+ExtResource("10_ua7j4"): 3,
+ExtResource("11_inwpa"): 2
 })

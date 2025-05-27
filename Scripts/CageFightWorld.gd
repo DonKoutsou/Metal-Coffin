@@ -26,8 +26,9 @@ func _ready() -> void:
 	#$Inventory.Player = GetMap().GetPlayerShip()
 
 func EndGame() -> void:
-	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
+	#get_tree().get_nodes_in_group("CardFight")[0].queue_free()
 	FightEnded.emit()
+	#queue_free()
 
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []

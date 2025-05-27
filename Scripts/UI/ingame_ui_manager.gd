@@ -96,10 +96,10 @@ func _on_exit_pressed() -> void:
 	if (world != null):
 		world.EndGame()
 		return
-	world = CageFightWorld.GetInstance()
-	if (world != null):
-		world.EndGame()
-		return
+	var cardworld = CageFightWorld.GetInstance()
+	if (cardworld != null):
+		cardworld.EndGame()
+
 func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().EndGame()
 	

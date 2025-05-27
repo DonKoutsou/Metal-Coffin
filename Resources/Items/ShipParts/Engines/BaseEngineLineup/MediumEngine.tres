@@ -42,5 +42,5 @@ Tier = 1
 ItemName = "EN-250"
 ItemDesc = "This intermediate engine integrates enhanced fuel management systems. Designed for improved performance, it maintains reliability under increased load conditions."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_0ovoj")]([ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("3_y0fc0"), ExtResource("3_y0fc0"), ExtResource("4_hehup"), ExtResource("4_hehup"), ExtResource("4_hehup")])
+CardProviding = Array[ExtResource("2_0ovoj")]([ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("3_y0fc0"), ExtResource("3_y0fc0"), ExtResource("4_hehup"), ExtResource("4_hehup")])
 CanTransfer = false

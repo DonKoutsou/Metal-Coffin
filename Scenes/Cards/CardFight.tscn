@@ -103,8 +103,6 @@ ActionAnim = ExtResource("9_b6m6l")
 EndScene = ExtResource("10_42bcn")
 CardFightShipInfoScene = ExtResource("11_fpjxy")
 CardPlecementSound = ExtResource("12_xtulq")
-UIInSound = ExtResource("13_boko4")
-UIOutSound = ExtResource("14_vn53x")
 RemoveCardSound = ExtResource("15_8bqim")
 SelectedCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/SelectedCardPlecements")
 AnimationPlecement = NodePath("SubViewport/Control2/Control")
@@ -194,6 +192,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("23_d5rtw")
 script = ExtResource("24_pw20f")
+UIInSound = ExtResource("13_boko4")
+UIOutSound = ExtResource("14_vn53x")
 
 [node name="Label" type="Label" parent="SubViewport/Control2/Action Declaration"]
 layout_mode = 2
@@ -329,7 +329,7 @@ visible = false
 layout_mode = 2
 text = "Cancel"
 
-[node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("CardContainer")]
+[node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("Title", "CardContainer")]
 z_index = 2
 layout_mode = 1
 anchors_preset = 8
@@ -349,6 +349,7 @@ mouse_filter = 2
 theme_override_styles/panel = ExtResource("23_d5rtw")
 script = ExtResource("27_rbthh")
 CardScene = ExtResource("2_yc7d8")
+Title = NodePath("VBoxContainer/Label")
 CardContainer = NodePath("VBoxContainer/HBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/CardSelect"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=26 format=3 uid="uid://y1ohb6oss4v0"]
+[gd_resource type="Resource" script_class="Captain" load_steps=25 format=3 uid="uid://y1ohb6oss4v0"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_tfvmp"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_31e7m"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_nkros"]
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="4_qyt4v"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="5_s2md0"]
-[ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="6_45ts5"]
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="7_qyt4v"]
 [ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="7_s2md0"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="9_jjv71"]
@@ -112,7 +111,6 @@ ExtResource("7_qyt4v"): 2,
 ExtResource("10_ewcq7"): 3,
 ExtResource("7_s2md0"): 2,
 ExtResource("5_s2md0"): 4,
-ExtResource("6_45ts5"): 3,
 ExtResource("10_spbky"): 2,
 ExtResource("11_lq844"): 2,
 ExtResource("9_jjv71"): 2,

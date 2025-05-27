@@ -175,7 +175,7 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
 			await wait(0.2)
-	else: if (Mod is ShieldCardModule):
+	else: if (Mod is ShieldCardModule or Mod is MaxShieldCardModule):
 		BuffText = "Shield +"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
@@ -190,12 +190,12 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
 			await wait(0.2)
-	else : if (Mod is ResupplyModule):
+	else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
 		BuffText = "Energy +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
 			await wait(0.2)
-	else : if (Mod is ReserveModule):
+	else : if (Mod is ReserveModule or Mod is MaxReserveModule):
 		BuffText = "Energy Reserve +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
@@ -208,7 +208,10 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
 			await wait(0.2)
-	
+	else : if (Mod is StackDamageCardModule):
+		BuffText = "Damage +"
+		call_deferred("SpawnUpVisual", DeffenceCard, DeffenceCard)
+		return
 	DeffenceCard.KillCard(0.5, false)
 	if (TargetShips.size() == 0):
 		await wait(0.2)
