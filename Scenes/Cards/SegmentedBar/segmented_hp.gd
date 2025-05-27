@@ -17,6 +17,9 @@ func Init(SegmentAmm : int) -> void:
 
 		$HBoxContainer.add_child(p)
 
+func GetSegmentAmm() -> int:
+	return Segments
+
 func ChangeSegmentAmm(NewAmm : int ) -> void:
 	Segments = NewAmm
 	for g in $HBoxContainer.get_children():

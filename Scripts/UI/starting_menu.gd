@@ -9,6 +9,7 @@ class_name StartingMenu
 @export var HintDialogue : Control
 @export var Credits : Control
 @export var NormalUI : Control
+@export var VersionLabel : Label
 
 var SpawnedCredits : Control
 
@@ -34,7 +35,7 @@ func _ready() -> void:
 	
 	call_deferred("DoLights")
 	
-	$SubViewportContainer/SubViewport/VersionLabel.text = "Demo Version v{0}".format([ProjectSettings.get_setting("application/config/version")])
+	VersionLabel.text = "Demo Version v{0}".format([ProjectSettings.get_setting("application/config/version")])
 	#LoopAmp()
 
 func DoLights() -> void:

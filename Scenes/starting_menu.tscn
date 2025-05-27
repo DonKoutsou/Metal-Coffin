@@ -103,7 +103,7 @@ shader_parameter/custom_time = 0.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1p5b6"]
 light_mode = 1
 
-[node name="StartingMenu" type="CanvasLayer" node_paths=PackedStringArray("Black", "LoadPrologueLight", "LoadLight", "HintDialogue", "Credits", "NormalUI")]
+[node name="StartingMenu" type="CanvasLayer" node_paths=PackedStringArray("Black", "LoadPrologueLight", "LoadLight", "HintDialogue", "Credits", "NormalUI", "VersionLabel")]
 process_mode = 3
 layer = 0
 script = ExtResource("1_y40tw")
@@ -114,6 +114,7 @@ LoadLight = NodePath("ScreenFrame2/CampaignLight")
 HintDialogue = NodePath("SubViewportContainer/SubViewport/NormalUI/HintDialogue")
 Credits = NodePath("SubViewportContainer/SubViewport/Credits")
 NormalUI = NodePath("SubViewportContainer/SubViewport/NormalUI")
+VersionLabel = NodePath("SubViewportContainer/SubViewport/NormalUI/VersionLabel")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -323,22 +324,6 @@ use_parent_material = true
 layout_mode = 2
 texture = ExtResource("3_s86m3")
 
-[node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -107.0
-offset_top = -43.0
-offset_right = 107.0
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Demo Version 0.61"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 visible = false
 texture_filter = 1
@@ -479,6 +464,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "No"
+
+[node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport/NormalUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -43.0
+offset_right = 107.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Demo Version 0.61"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 process_mode = 3

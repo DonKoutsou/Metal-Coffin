@@ -822,6 +822,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			anim.AnimationFinished.connect(PerformAnimationFinished.bind(Ship, ActionIndex))
 			
 			
+			var DamageCallables : Array[Callable]
 			
 			for g in TargetList:
 				#print("Atack Started")
@@ -829,7 +830,11 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 				#anim.AtackConnected.connect()
 				#print("Atack connected")
 				if (TargetList[g]["Def"] == null):
-					anim.AtackConnected.connect(DamageShip.bind(g, Mod.GetFinalDamage(Ship), Mod.CauseFile))
+					var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship), Mod.CauseFile)
+					DamageCallables.append(c)
+					#anim.AtackConnected.connect(c)
+			
+			anim.AtackConnected.connect(ConnectMoves.bind(DamageCallables))
 			
 			await anim.AtackConnected
 			for g in TargetList:
@@ -848,6 +853,10 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			ActionIndex += 1
 			PerformNextActionForShip(Ship, ActionIndex)
 
+func ConnectMoves(C : Array[Callable]) -> void:
+	var c = C.pop_front() as Callable
+	c.call()
+	
 
 func PerformAnimationFinished(Ship : BattleShipStats, ActionIndex : int) -> void:
 	DiscardP.visible = false
@@ -1863,7 +1872,7 @@ func UpdateEnergy(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) ->
 	Ship.Energy = NewEnergy
 	if (UpdateUI):
 		ExternalUI.GetEnergyBar().UpdateAmmount(OldEnergy, NewEnergy)
-		if (NewEnergy > max(OldEnergy, TurnEnergy)):
+		if (NewEnergy > ExternalUI.GetEnergyBar().GetSegmentAmm()):
 			ExternalUI.GetEnergyBar().ChangeSegmentAmm(Ship.Energy)
 
 
@@ -1873,7 +1882,7 @@ func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) 
 	Ship.EnergyReserves = NewEnergy
 	if (UpdateUI):
 		ExternalUI.GetReserveBar().UpdateAmmount(OldEnergy, NewEnergy)
-		if (NewEnergy > OldEnergy):
+		if (NewEnergy > ExternalUI.GetReserveBar().GetSegmentAmm()):
 			ExternalUI.GetReserveBar().ChangeSegmentAmm(Ship.EnergyReserves)
 
 

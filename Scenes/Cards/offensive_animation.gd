@@ -196,7 +196,7 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
 			await wait(0.2)
 	else : if (Mod is ReserveModule or Mod is MaxReserveModule):
-		BuffText = "Energy Reserve +"
+		BuffText = "Energy\nReserve +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
 			await wait(0.2)
