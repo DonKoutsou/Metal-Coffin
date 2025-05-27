@@ -244,6 +244,7 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	
 	AnimationFinished.emit()
 	Fin = true
+	queue_free()
 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	var Ship = ShipViz.instantiate() as CardFightShipViz
@@ -267,5 +268,6 @@ func AnimEnded() -> void:
 	Finished = true
 	Fin = true
 	AnimationFinished.emit()
+	queue_free()
 	#print("Animation Finised Emitted")
 	

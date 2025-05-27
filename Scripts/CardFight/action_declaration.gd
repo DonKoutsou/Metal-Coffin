@@ -12,7 +12,7 @@ func DoActionDeclaration(ActionName : String, CustomTime : float = 3) -> void:
 	get_child(0).text = ActionName
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_OUT)
-	Tw.set_trans(Tween.TRANS_QUAD)
+	Tw.set_trans(Tween.TRANS_BACK)
 	Tw.tween_property(self, "custom_minimum_size", Vector2(650, 80), CustomTime/6)
 	
 	var InSound = DeletableSoundGlobal.new()
@@ -47,8 +47,8 @@ func ActionDeclarationStage4(CustomTime : float) -> void:
 	get_child(0).visible = false
 	
 	var Tw4 = create_tween()
-	Tw4.set_ease(Tween.EASE_OUT)
-	Tw4.set_trans(Tween.TRANS_QUAD)
+	Tw4.set_ease(Tween.EASE_IN)
+	Tw4.set_trans(Tween.TRANS_BACK)
 	Tw4.tween_property(self, "custom_minimum_size", Vector2(0, 80), CustomTime/6)
 	
 	var OutSound = DeletableSoundGlobal.new()

@@ -84,7 +84,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "CardSelectContainer", "ActionDeclaration", "ShipSpacer", "HandAmmountLabel", "Cloud", "DiscardP", "DeckP", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclaration", "HandAmmountLabel", "Cloud", "DiscardP", "DeckP", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -112,9 +112,7 @@ EnemyShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/EnemySh
 PlayerShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/PlayerShipPlecement")
 TargetSelect = NodePath("SubViewport/Control2/TargetSelect")
 CardSelect = NodePath("SubViewport/Control2/CardSelect")
-CardSelectContainer = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2")
 ActionDeclaration = NodePath("SubViewport/Control2/Action Declaration")
-ShipSpacer = NodePath("SubViewport/Control2/VBoxContainer4/ShipSpacer")
 HandAmmountLabel = NodePath("SubViewport/Control2/Label")
 Cloud = NodePath("SubViewport/Control2/Clouds")
 DiscardP = NodePath("SubViewport/Control2/DiscardPile")
@@ -256,6 +254,7 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 size_flags_stretch_ratio = 10.0
 alignment = 1
 
@@ -276,12 +275,6 @@ metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer"]
 custom_minimum_size = Vector2(0, 172.735)
 layout_mode = 2
-mouse_filter = 2
-
-[node name="ShipSpacer" type="Control" parent="SubViewport/Control2/VBoxContainer4"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="EnemyShipPlecement" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
