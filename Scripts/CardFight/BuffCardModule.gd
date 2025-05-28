@@ -13,6 +13,10 @@ func GetDesc() -> String:
 		TextColor = "color=#f35033"
 	else : if (StatToBuff == Stat.SPEED):
 		TextColor = "color=#308a4d"
+	if (StatToBuff == Stat.WEIGHT):
+		TextColor = "color=#828dff"
+	else : if (StatToBuff == Stat.DEFENCE):
+		TextColor = "color=#7bb0b4"
 	if (AOE):
 		return "Buff team\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount, BuffDuration, TextColor])
 	else : if (CanBeUsedOnOther):

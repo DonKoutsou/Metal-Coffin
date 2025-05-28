@@ -245,7 +245,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 30
+theme_override_constants/separation = 18
 
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
 custom_minimum_size = Vector2(0, 50)
@@ -281,7 +281,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 3
-theme_override_constants/separation = 30
+theme_override_constants/separation = 18
 
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
 custom_minimum_size = Vector2(0, 50)
@@ -437,7 +437,7 @@ uppercase = true
 color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewport"]
-position = Vector2(555, 275)
+position = Vector2(463, 292)
 blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("32_1im06")

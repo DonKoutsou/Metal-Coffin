@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://b25yneeytw20f"]
 
-[ext_resource type="Texture2D" uid="uid://bv3vkwi5obsul" path="res://Assets/Cards/BarrageReload.png" id="1_gb7g0"]
+[ext_resource type="Texture2D" uid="uid://c2h6ewbftgoy8" path="res://Assets/Cards/OffensiveReload.png" id="1_wkh78"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_0dtqw"]
 [ext_resource type="Script" uid="uid://cla6ql5jn6sy5" path="res://Scripts/CardFight/MultiCardSpawnModule.gd" id="3_wkh78"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_iv5nw"]
@@ -14,12 +14,14 @@ metadata/_custom_type_script = "uid://cla6ql5jn6sy5"
 
 [resource]
 script = ExtResource("6_skwox")
-Icon = ExtResource("1_gb7g0")
-CardName = "Draw Random Offensive"
+Icon = ExtResource("1_wkh78")
+CardName = "Weapon Cache"
+CardDescriptionOverride = ""
 Energy = 1
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("5_iv5nw")]([])
 OnUseModules = Array[ExtResource("2_0dtqw")]([SubResource("Resource_gb7g0")])
+Type = 2
 WeapT = 0
 Tier = 1

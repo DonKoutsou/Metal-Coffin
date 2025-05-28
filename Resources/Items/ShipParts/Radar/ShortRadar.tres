@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://c6j0y0r05rijg"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://c6j0y0r05rijg"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_bgxiv"]
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="2_fcjh6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://cuhyegxnhjaq4" path="res://Resources/Cards/DrawDiscard.tres" id="4_2yc6c"]
 [ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="4_f476b"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_85il0"]
+[ext_resource type="Resource" uid="uid://cnet3bjwptmp7" path="res://Resources/Cards/VitalSpot.tres" id="5_pqt5y"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_sy8y8"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
@@ -27,5 +28,5 @@ Tier = 1
 ItemName = "RA-20"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_bgxiv")]([ExtResource("2_fcjh6"), ExtResource("3_y4qj5"), ExtResource("4_2yc6c"), ExtResource("4_2yc6c")])
+CardProviding = Array[ExtResource("1_bgxiv")]([ExtResource("2_fcjh6"), ExtResource("3_y4qj5"), ExtResource("4_2yc6c"), ExtResource("4_2yc6c"), ExtResource("5_pqt5y"), ExtResource("5_pqt5y")])
 CanTransfer = true

@@ -6,4 +6,4 @@ class_name ReserveConversionModule
 func GetDesc() -> String:
 	#if (AOE):
 		#return "Coverst remaining Energy Reserve to double the Energy to team"
-	return "Coverst remaining Energy Reserve to double the Energy"
+	return "Coverst remaining [color=#ffc315]Reserve[/color] to double the [color=#ffc315]Energy[/color]"

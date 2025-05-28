@@ -2,6 +2,7 @@ extends Resource
 
 class_name CardModule
 
+
 @export var AOE : bool = false
 
 func GetDesc() -> String:
@@ -16,9 +17,13 @@ func GetStatShortName(St : Stat) -> String:
 		return "FRPW"
 	if (St == Stat.SPEED):
 		return "SPD"
+	if (St == Stat.DEFENCE):
+		return "DEF"
 	
 	return StatName
 enum Stat{
 	FIREPOWER,
-	SPEED
+	SPEED,
+	DEFENCE,
+	WEIGHT,
 }

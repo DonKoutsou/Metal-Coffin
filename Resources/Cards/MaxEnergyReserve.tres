@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://daou2wqtcgcxt"]
 
-[ext_resource type="Texture2D" uid="uid://cngvmnworwmqg" path="res://Assets/Cards/Energy.png" id="1_rwtaf"]
+[ext_resource type="Texture2D" uid="uid://c6lfs6imu7yx0" path="res://Assets/Cards/MaxReserve.png" id="1_rwtaf"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_5uqf0"]
 [ext_resource type="Script" uid="uid://crxgf35d0q8o1" path="res://Scripts/CardFight/MaxReserveModule.gd" id="3_rwtaf"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_k4gvv"]
@@ -16,11 +16,13 @@ metadata/_custom_type_script = "uid://crxgf35d0q8o1"
 [resource]
 script = ExtResource("5_j56gx")
 Icon = ExtResource("1_rwtaf")
-CardName = "Max Energy Reserve"
+CardName = "Flux Converter"
+CardDescriptionOverride = ""
 Energy = 0
 AllowDuplicates = true
 Consume = false
 RequiredPart = Array[ExtResource("4_k4gvv")]([])
 OnUseModules = Array[ExtResource("2_5uqf0")]([SubResource("Resource_5uqf0")])
+Type = 2
 WeapT = 0
 Tier = 1

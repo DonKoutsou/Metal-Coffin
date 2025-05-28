@@ -12,11 +12,17 @@ class_name CardFightShipViz2
 @export var SpeedDeBuff : GPUParticles2D
 @export var FPBuff : GPUParticles2D
 @export var FPDeBuff : GPUParticles2D
+
 @export var FirePart : GPUParticles2D
 @export var FPLabel : RichTextLabel
 @export var SPDLabel : RichTextLabel
 @export var HasMovePanel : Control
 @export var ActionParent : Control
+
+@export var DefBuff : GPUParticles2D
+@export var DefDeBuff : GPUParticles2D
+@export var WeightLabel : RichTextLabel
+@export var DefenceLabel : RichTextLabel
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
@@ -36,6 +42,8 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	ShieldBar.value = 0
 	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")
 	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
+	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")
+	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([roundi(S.GetDef())])
 	
 	ShipIcon.flip_v = !Friendly
 	ShipIcon.get_child(0).flip_v = !Friendly
@@ -51,6 +59,9 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	
 	HasMovePanel.visible = false
 	TurnPanel.self_modulate.a = 0
+
+func GetShipPos() -> Vector2:
+	return $HBoxContainer/Control.global_position
 
 func ActionPicked(Text : Texture) -> void:
 	var TexNode = TextureRect.new()
@@ -77,6 +88,8 @@ func UpdateStats(S : BattleShipStats) -> void:
 	ShieldBar.value = S.Shield
 	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")
 	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
+	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")
+	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([S.GetDef()]).replace(".0", "")
 
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
 	ShipNameLabel.text = S.Name
@@ -121,6 +134,13 @@ func ToggleDmgBuff(t : bool, amm : float) -> void:
 
 func ToggleDmgDebuff(t : bool) -> void:
 	FPDeBuff.visible = t
+
+func ToggleDefBuff(t : bool, amm : float) -> void:
+	DefBuff.amount = 5 * amm
+	DefBuff.visible = t
+
+func ToggleDefDeBuff(t : bool) -> void:
+	DefDeBuff.visible = t
 
 func ToggleSpeedBuff(t : bool, amm : float) -> void:
 	SpeedBuff.amount = 5 * amm

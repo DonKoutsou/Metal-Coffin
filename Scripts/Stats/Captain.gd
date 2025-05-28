@@ -37,7 +37,6 @@ func GetBattleStats() -> BattleShipStats:
 	var Weight = _GetStat(STAT_CONST.STATS.WEIGHT).StatBase
 	var Fp = _GetStat(STAT_CONST.STATS.FIREPOWER).StatBase
 	
-	
 	stats.ShipIcon = ShipIcon
 	stats.CaptainIcon = CaptainPortrait
 	stats.Name = CaptainName
@@ -72,7 +71,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CurrentHull = Hull
 	stats.Speed = (Thrust * 1000) / Weight
 	stats.FirePower = Fp
-
+	stats.Weight = Weight
 	stats.Cards = c
 	stats.Convoy = false
 	return stats

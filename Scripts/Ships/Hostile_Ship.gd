@@ -565,6 +565,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
 	stats.Funds = Cpt.ProvidingFunds
+	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.Convoy = Convoy
 	stats.Cards = Cpt.Cards.duplicate()
 	return stats

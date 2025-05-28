@@ -3,7 +3,7 @@ class_name CardStats
 
 @export var Icon : Texture
 @export var CardName : String
-
+@export var CardDescriptionOverride : String
 ## Energy consumption of card
 @export var Energy : int
 #@export var Options : Array[CardOption]
@@ -16,7 +16,7 @@ class_name CardStats
 
 @export var OnUseModules : Array[CardModule]
 @export var OnPerformModule : CardModule
-
+@export var Type : CardType
 @export var WeapT : WeaponType
 
 
@@ -29,22 +29,26 @@ func ShouldConsume() -> bool:
 	return Consume
 
 func GetDescription() -> String:
+	if (CardDescriptionOverride != ""):
+		return CardDescriptionOverride
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetDesc()
 	if (OnUseModules.size() > 0):
-		Desc += "On Use : "
+		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
 			Desc += g.GetDesc() + "\n"
 
 	return Desc
 
 func GetBattleDescription(User : BattleShipStats) -> String:
+	if (CardDescriptionOverride != ""):
+		return CardDescriptionOverride
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetBattleDesc(User)
 	if (OnUseModules.size() > 0):
-		Desc += "On Use : "
+		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
 			Desc += g.GetBattleDesc(User) + "\n"
 
@@ -54,4 +58,10 @@ enum WeaponType{
 	NONE,
 	MG100mm,
 	ML,
+}
+
+enum CardType {
+	OFFENSIVE,
+	DEFFENSIVE,
+	UTILITY
 }
