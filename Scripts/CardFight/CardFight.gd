@@ -772,7 +772,7 @@ func FireDamageFinished() -> void:
 	call_deferred("RunTurn")
 
 func PerformActions(Ship : BattleShipStats) -> void:
-	var ActionsToBurn : Array[CardFightAction]
+	#var ActionsToBurn : Array[CardFightAction]
 	var viz = GetShipViz(Ship)
 	for g in viz.get_parent().get_children():
 		if (g != viz):
@@ -1040,7 +1040,6 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule) 
 		var CardToSpawn = Mod.CardToSpawn
 		HandleDrawSpecificCard(Performer, CardToSpawn)
 	else : if (Mod is MultiCardSpawnModule):
-		var CardToSpawn = Mod.CardToSpawn
 		HandleMultiDrawSpecific(Performer, C, Mod)
 	else: if (Mod is FireExtinguishModule):
 		await HandleFireExtinguish(Performer, C, Mod)
@@ -1087,7 +1086,6 @@ func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModu
 		var CardToSpawn = Mod.CardToSpawn
 		HandleDrawSpecificCardEnemy(Performer, CardToSpawn)
 	else : if (Mod is MultiCardSpawnModule):
-		var CardToSpawn = Mod.CardToSpawn
 		HandleMultiDrawSpecificEnemy(Performer, C, Mod)
 	else : if (Mod is FireExtinguishModule):
 		await HandleFireExtinguish(Performer, C, Mod)
@@ -1218,7 +1216,7 @@ func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : 
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, [])
 
 func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule) -> void:
-	var resupplyamm = Performer.EnergyReserves * Mod.ConversionMultiplication
+	var resupplyamm = Mod.GetConversionAmmount(Performer.EnergyReserves)
 	
 	var Friendly = IsShipFriendly(Performer)
 	
@@ -1975,7 +1973,7 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	viz.UpdateStats(BattleS)
 	viz.ToggleDmgBuff(BattleS.FirePowerBuff > 1, BattleS.FirePowerBuff)
 	viz.ToggleSpeedBuff(BattleS.SpeedBuff > 1, BattleS.SpeedBuff)
-	viz.ToggleDefBuff(BattleS.DefBuff > 1, BattleS.DefBuff)
+	viz.ToggleDefBuff(BattleS.DefBuff > 0, BattleS.DefBuff)
 	
 	viz.ToggleDmgDebuff(BattleS.FirePowerDeBuff > 0)
 	viz.ToggleSpeedDebuff(BattleS.SpeedDeBuff > 0)
@@ -1992,7 +1990,8 @@ func UpdateEnergy(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) ->
 		ExternalUI.GetEnergyBar().UpdateAmmount(OldEnergy, NewEnergy)
 		if (NewEnergy > ExternalUI.GetEnergyBar().GetSegmentAmm()):
 			ExternalUI.GetEnergyBar().ChangeSegmentAmm(Ship.Energy)
-
+	
+	UpdateCardDescriptions(Ship)
 
 func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) -> void:
 	var OldEnergy = Ship.EnergyReserves
@@ -2002,7 +2001,8 @@ func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) 
 		ExternalUI.GetReserveBar().UpdateAmmount(OldEnergy, NewEnergy)
 		if (NewEnergy > ExternalUI.GetReserveBar().GetSegmentAmm()):
 			ExternalUI.GetReserveBar().ChangeSegmentAmm(Ship.EnergyReserves)
-
+	
+	UpdateCardDescriptions(Ship)
 
 func UpdateHandAmount(NewAmm : int) -> void:
 	HandAmmountLabel.text = "In Hand {0}/{1}".format([NewAmm, MaxCardsInHand])
@@ -2109,7 +2109,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	if (CanPlace):
 		print("{0} added to {1}'s hand".format([C.CStats.CardName, Performer.Name]))
 		PlDeck.Hand.append(C.CStats)
-		await ExternalUI.OnCardDrawn(C)
+		ExternalUI.OnCardDrawn(C)
 
 	else:
 		ExternalUI.ToggleHandInput(false)
@@ -2147,7 +2147,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		PlDeck.DiscardPile.append(Discarded.CStats)
 		DiscardP.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))
 		Discarded.get_parent().queue_free()
-		await ExternalUI.OnCardDrawn(C)
+		ExternalUI.OnCardDrawn(C)
 		PlDeck.Hand.erase(Discarded.CStats)
 		
 		ExternalUI.ToggleHandInput(true)

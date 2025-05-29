@@ -136,7 +136,7 @@ func ToggleDmgDebuff(t : bool) -> void:
 	FPDeBuff.visible = t
 
 func ToggleDefBuff(t : bool, amm : float) -> void:
-	DefBuff.amount = 5 * amm
+	DefBuff.amount = max(5 * abs(amm), 1)
 	DefBuff.visible = t
 
 func ToggleDefDeBuff(t : bool) -> void:

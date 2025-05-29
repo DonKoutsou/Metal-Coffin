@@ -353,8 +353,8 @@ func UpdateElint(delta: float) -> void:
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > -1):
-		if (!ActionTracker.GetInstance().IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
-			ActionTracker.GetInstance().OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
 			ActionTracker.GetInstance().ShowTutorial("Electronic Intelligence", "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.", [], true)
 		Elint.emit(true, BiggestLevel, Helper.GetInstance().AngleToDirection(Dir))
 	else:
