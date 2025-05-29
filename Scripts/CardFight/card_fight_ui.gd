@@ -29,6 +29,8 @@ var FightScene : Card_Fight
 
 static var Instance : ExternalCardFightUI
 
+var AllowEnd : bool = true
+
 func _ready() -> void:
 	Instance = self
 	PlayerCardPlacementInputBlocker.visible = false
@@ -82,6 +84,7 @@ func _on_deck_button_pressed() -> void:
 	OnDeckPressed.emit()
 
 func InserCardtoPlay(C : Card) -> void:
+	AllowEnd = false
 	C.Dissable(true)
 	PlayerCardPlecement.Blocked = true
 	var pos = C.global_position
@@ -128,7 +131,7 @@ func InserCardtoPlay(C : Card) -> void:
 		Cont.queue_free()
 		PlayerCardPlecement.add_child(C)
 		PlayCardSound()
-	
+	AllowEnd = true
 		
 
 func PausePressed() -> void:
@@ -138,6 +141,7 @@ func ToggleHandInput(t : bool) -> void:
 	PlayerCardPlacementInputBlocker.visible = !t
 
 func InsertCardToDiscard(C : Card) -> void:
+	AllowEnd = false
 	C.Dissable(true)
 	var pos = C.global_position
 	C.get_parent().remove_child(C)
@@ -170,11 +174,13 @@ func InsertCardToDiscard(C : Card) -> void:
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
 	C.Enable()
+	AllowEnd = true
 
 func CardDrawFail() -> void:
 	PlayCardInsertSound(CardSoundType.BEEPNO)
 
 func OnCardDrawn(C : Card) -> void:
+	AllowEnd = false
 	C.Dissable(true)
 	PlayCardInsertSound(CardSoundType.BEEPLONG)
 	await Helper.GetInstance().wait(0.1)
@@ -203,7 +209,7 @@ func OnCardDrawn(C : Card) -> void:
 	AddCardToHand(C)
 	Cont.queue_free()
 	C.Enable()
-	
+	AllowEnd = true
 
 func _on_pull_reserves_pressed() -> void:
 	OnPullReserves.emit()

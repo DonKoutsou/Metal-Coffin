@@ -15,7 +15,7 @@ class_name BattleShipStats
 @export var Speed : float
 @export var SpeedBuff : float = 1
 @export var SpeedDeBuff : float = 0
-@export var Def : float = 1
+@export var Def : float = 0
 @export var DefBuff : float = 1
 @export var DefDebuff : float = 0
 @export var Energy : int
