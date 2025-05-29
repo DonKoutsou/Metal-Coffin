@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=25 format=3 uid="uid://y1ohb6oss4v0"]
+[gd_resource type="Resource" script_class="Captain" load_steps=27 format=3 uid="uid://y1ohb6oss4v0"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_tfvmp"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_31e7m"]
@@ -14,7 +14,9 @@
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="10_spbky"]
 [ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="11_lq844"]
 [ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/Spaceship/Ship11.png" id="11_qe0ne"]
+[ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="13_2sj6o"]
 [ext_resource type="Resource" uid="uid://dp1lgf8wdupg3" path="res://Resources/Cards/DroneStrike.tres" id="13_lq844"]
+[ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="14_bid2u"]
 
 [sub_resource type="Resource" id="Resource_4xt1j"]
 script = ExtResource("2_31e7m")
@@ -114,5 +116,7 @@ ExtResource("5_s2md0"): 4,
 ExtResource("10_spbky"): 2,
 ExtResource("11_lq844"): 2,
 ExtResource("9_jjv71"): 2,
-ExtResource("13_lq844"): 4
+ExtResource("13_lq844"): 4,
+ExtResource("13_2sj6o"): 2,
+ExtResource("14_bid2u"): 1
 })

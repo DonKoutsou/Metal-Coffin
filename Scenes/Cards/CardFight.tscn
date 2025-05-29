@@ -251,6 +251,24 @@ theme_override_constants/separation = 18
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer3"]
+layout_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -285,6 +303,27 @@ theme_override_constants/separation = 18
 
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
 custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
+layout_mode = 2
+alignment = 2
+
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
+layout_mode = 2
+alignment = 2
+
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
+layout_mode = 2
+alignment = 2
+
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer3"]
 layout_mode = 2
 
 [node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("ShipVizContainer")]

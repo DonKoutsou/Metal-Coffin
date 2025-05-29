@@ -156,7 +156,7 @@ func ShipDestroyed() -> void:
 	var tw = create_tween()
 	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
 	await tw.finished
-	get_parent().queue_free()
+	queue_free()
 
 func _on_button_pressed() -> void:
 	OnFallbackPressed.emit()

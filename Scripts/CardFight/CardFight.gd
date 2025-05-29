@@ -174,36 +174,47 @@ func IntroDeclarationFinished() -> void:
 func ReplaceShip(Ship : BattleShipStats) -> void:
 	var Friendly = IsShipFriendly(Ship)
 	
-	var ShipViz = GetShipViz(Ship)
-	ShipViz.ShipDestroyed()
+	var Viz = GetShipViz(Ship)
+	await Viz.ShipDestroyed()
 	ShipsViz.erase(Ship)
+	
+	Viz.get_parent().remove_child(Viz)
+	add_child(Viz)
 	
 	ActionList.RemoveShip(Ship)
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	ShipTurns.erase(Ship)
-	PlayerCombatants.erase(Ship)
-	EnemyCombatants.erase(Ship)
+	
+	
 	
 	if (Friendly):
+		var Index = PlayerCombatants.find(Ship)
+		PlayerCombatants.erase(Ship)
 		if (PlayerReserves.size() > 0):
 			var NewCombatant = PlayerReserves.pick_random()
-			PlayerCombatants.append(NewCombatant)
+			PlayerCombatants.insert(Index, NewCombatant)
 			PlayerReserves.erase(NewCombatant)
 			
 			ShipTurns.insert(TurnPosition, NewCombatant)
 			#ShipTurns.sort_custom(speed_comparator)
 			CreateShipVisuals(NewCombatant, true)
+		else:
+			PlayerReserves.insert(Index, null)
 	else:
+		var Index = EnemyCombatants.find(Ship)
+		EnemyCombatants.erase(Ship)
+		
 		if (EnemyReserves.size() > 0):
 			var NewCombatant = EnemyReserves.pick_random()
-			EnemyCombatants.append(NewCombatant)
+			EnemyCombatants.insert(Index, NewCombatant)
 			EnemyReserves.erase(NewCombatant)
 			
 			ShipTurns.insert(TurnPosition, NewCombatant)
 			#ShipTurns.sort_custom(speed_comparator)
 			CreateShipVisuals(NewCombatant, false)
-
+		else:
+			EnemyCombatants.insert(Index, null)
 	UpdateFleetSizeAmmount()
 
 func CheckForReserves() -> void:
@@ -267,20 +278,26 @@ static func speed_comparator(a, b):
 
 func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> void:
 	var t = ShipVizScene2.instantiate() as CardFightShipViz2
-	var Hbox = HBoxContainer.new()
-	var C = Control.new()
 
 	t.SetStats(BattleS, Friendly)
 	
+	var Parent : Control
+	
 	if (Friendly):
-		PlayerShipVisualPlecement.add_child(Hbox)
-		Hbox.add_child(C)
-		Hbox.add_child(t)
+		for g in PlayerShipVisualPlecement.get_children():
+			if (g is HBoxContainer and g.get_child_count() == 1):
+				Parent = g
+				break
+				
+		Parent.add_child(t)
 	else :
-		Hbox.alignment = BoxContainer.ALIGNMENT_END
-		EnemyShipVisualPlecement.add_child(Hbox)
-		Hbox.add_child(t)
-		Hbox.add_child(C)
+		for g in EnemyShipVisualPlecement.get_children():
+			if (g is HBoxContainer and g.get_child_count() == 1):
+				Parent = g
+				break
+		
+		Parent.add_child(t)
+		Parent.move_child(t, 0)
 	
 	ShipsViz[BattleS] = t
 	NewTurnStarted.connect(t.OnNewTurnStarted)
@@ -443,7 +460,6 @@ func OnCardSelected(C : Card) -> bool:
 		Action = C.CStats
 		
 		var c = CardScene.instantiate() as Card
-		c.SetCardBattleStats(Ship, Action)
 		
 		var ShipAction = CardFightAction.new()
 		ShipAction.Action = Action
@@ -453,6 +469,12 @@ func OnCardSelected(C : Card) -> bool:
 		var CardPosition = C.global_position
 		
 		if (Mod is OffensiveCardModule):
+			if (Mod is EnergyOffensiveCardModule):
+				var NewMod = Mod.duplicate()
+				NewMod.StoredEnergy = Ship.Energy
+				UpdateEnergy(Ship, 0, true)
+				Action.OnPerformModule = NewMod
+			
 			var targets = await HandleTargets(Mod, Ship)
 			for g in targets:
 				var TargetViz = GetShipViz(GetTarget(g))
@@ -460,7 +482,10 @@ func OnCardSelected(C : Card) -> bool:
 					continue
 				c.TargetLocs.append(TargetViz.GetShipPos())
 			ShipAction.Targets.append_array(targets)
-
+		
+		
+		c.SetCardBattleStats(Ship, Action)
+		
 		c.connect("OnCardPressed", RemoveCard)
 		
 		SelectedCardPlecement.add_child(c)
@@ -522,36 +547,43 @@ func RemoveCard(C : Card) -> void:
 		NotifyFullHand()
 		return
 	
-	if (C.CStats.OnUseModules.size() > 0):
+	var Stats = C.CStats
+	
+	if (Stats.OnUseModules.size() > 0):
 		return
 	
 	C.disconnect("OnCardPressed", RemoveCard)
 
-	if (C.CStats.Consume):
+	if (Stats.Consume):
 		var ShipCards = CurrentShip.Cards
 		var HasCard = false
 		for g in ShipCards.keys():
 			#print("Comparing {0} with {1}".format([g.resource_path, C.CStats.resource_path]))
-			if (g.CardName == C.CStats.CardName):
+			if (g.CardName == Stats.CardName):
 				HasCard = true
 				ShipCards[g] += 1
 				break
 		if (!HasCard):
-			ShipCards[C.CStats] = 1
+			ShipCards[Stats] = 1
 	
 	var viz = GetShipViz(CurrentShip)
-	viz.ActionRemoved(C.CStats.Icon)
-	ActionList.RemoveActionFromShip(CurrentShip, C.CStats)
+	viz.ActionRemoved(Stats.Icon)
+	ActionList.RemoveActionFromShip(CurrentShip, Stats)
 	
-	UpdateEnergy(CurrentShip, CurrentShip.Energy + C.GetCost(), true)
+	var PerformModule = Stats.OnPerformModule
+	if (PerformModule is EnergyOffensiveCardModule):
+		UpdateEnergy(CurrentShip, CurrentShip.Energy + PerformModule.StoredEnergy, true)
+		PerformModule.StoredEnergy = 0
+	else:
+		UpdateEnergy(CurrentShip, CurrentShip.Energy + C.GetCost(), true)
 	
-
-	D.Hand.append(C.CStats)
+	
+	D.Hand.append(Stats)
 	UpdateHandAmount(D.Hand.size())
 	
 	#UpdateHandCards()
 	var c = CardScene.instantiate() as Card
-	c.SetCardBattleStats(CurrentShip, C.CStats)
+	c.SetCardBattleStats(CurrentShip, Stats)
 	#c.connect("OnCardPressed", OnCardSelected)
 	
 	ExternalUI.OnCardDrawn(c)
@@ -799,12 +831,15 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	var Action = ShipAction.Action
 
 	var Targets = ShipAction.Targets
-		
-	#for g in Targets:
-		#if (!PlayerCombatants.has(g) and !EnemyCombatants.has(g)):
-			#Targets.erase(g)
-
-	if (Targets.size() == 0):
+	
+	var TargetShips : Array[BattleShipStats]
+	
+	for g in Targets:
+		var T = GetTarget(g)
+		if (T != null):
+			TargetShips.append(T)
+	
+	if (TargetShips.size() == 0):
 		ActionIndex += 1
 		PerformNextActionForShip(Ship, ActionIndex)
 	else:
@@ -818,8 +853,6 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			var AtackType = Mod.AtackType
 			#var HasDeff = false
 			
-			
-			
 			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 			#anim.DrawnLine = true
 			AnimationPlecement.add_child(anim)
@@ -828,11 +861,9 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			#List containing targets and a bool saying if target has def
 			var TargetList : Dictionary[BattleShipStats, Dictionary]
 			
-			for g in Targets:
-				var TargetShip = GetTarget(g)
-				if (TargetShip == null):
-					continue
-				for Act : CardFightAction in ActionList.GetShipsActions(TargetShip):
+			for g in TargetShips:
+
+				for Act : CardFightAction in ActionList.GetShipsActions(g):
 					var mod = Act.Action.OnPerformModule
 					if (mod is CounterCardModule):
 						if (mod.CounterType == AtackType):
@@ -841,8 +872,8 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					
 				var Data : Dictionary
 				Data["Def"] = Counter
-				Data["Viz"] = GetShipViz(TargetShip)
-				TargetList[TargetShip] = Data
+				Data["Viz"] = GetShipViz(g)
+				TargetList[g] = Data
 			
 			
 			if (!Action.ShouldConsume()):
@@ -1622,18 +1653,18 @@ var Shuffling : bool = false
 func HandleShuffleDiscardedIntoDeck(D : Deck, DoAnim : bool = true) -> void:
 	Shuffling = true
 	
+	if (DoAnim):
+		for g in D.DiscardPile.size():
+			await Helper.GetInstance().wait(0.05)
+			DiscardP.OnCardRemoved()
+			DeckP.OnCardAdded(DiscardP.global_position)
+			if (g == D.DiscardPile.size() - 1):
+				await DeckP.CardAddFinished
+				
 	D.DeckPile.append_array(D.DiscardPile)
 	D.DiscardPile.clear()
 	
 	D.DeckPile.shuffle()
-	
-	if (DoAnim):
-		for g in D.DeckPile.size():
-			await Helper.GetInstance().wait(0.05)
-			DiscardP.OnCardRemoved()
-			DeckP.OnCardAdded(DiscardP.global_position)
-			if (g == D.DeckPile.size() - 1):
-				await DeckP.CardAddFinished
 	
 	Shuffling = false
 
@@ -2072,7 +2103,11 @@ func _on_switch_ship_pressed() -> void:
 		return
 	
 	var ShipViz = GetShipViz(CurrentShip)
-	ShipViz.ShipDestroyed()
+	await ShipViz.ShipDestroyed()
+	
+	ShipViz.get_parent().remove_child(ShipViz)
+	add_child(ShipViz)
+	
 	ShipsViz.erase(CurrentShip)
 	
 	PlayerCombatants.erase(CurrentShip)

@@ -42,9 +42,9 @@ func GetDesc() -> String:
 		
 	var Desc = ""
 	if (AOE):
-		Desc = "Damage enemy team"
+		Desc = "Hit enemy team"
 	else:
-		Desc = "Damage enemy"
+		Desc = "Hit enemy"
 	
 	var DamageString : String = ""
 	for stat in ScaleStat.size():
@@ -63,7 +63,7 @@ func GetDesc() -> String:
 		DamageString += "[color=#ffc315]{0} * [/color][{2}]{1}[/color]".format([var_to_str(snapped(Damage, 0.1)).replace(".0", ""), StatText,TextColors[stat]])
 		
 		
-	Desc += " for {0}".format([DamageString])
+	Desc += " for {0} damage".format([DamageString])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit : [/color]"

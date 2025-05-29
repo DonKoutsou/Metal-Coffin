@@ -58,6 +58,7 @@ enum WeaponType{
 	NONE,
 	MG100mm,
 	ML,
+	COIL,
 }
 
 enum CardType {

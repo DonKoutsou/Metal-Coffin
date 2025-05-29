@@ -18,6 +18,7 @@ signal OnCardPressed(C : Card)
 var CStats : CardStats
 
 var Cost : int
+var ShownCost : int
 
 var TargetLocs : Array[Vector2]
 
@@ -106,6 +107,7 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CardDesc.text = DescText
 	RealisticCardDesc.text = DescText
 	
+	
 	CardCost.text = var_to_str(Cost)
 	RealisticCardCost.text = var_to_str(Cost)
 	
@@ -122,10 +124,15 @@ func UpdateBattleStats(User : BattleShipStats) -> void:
 	var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
 	CardDesc.text = DescText
 	RealisticCardDesc.text = DescText
+	ShownCost = GetBattleCost(User, CStats)
+	CardCost.text = var_to_str(ShownCost)
+	RealisticCardCost.text = var_to_str(ShownCost)
 
 func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
+
 	Cost = Stats.Energy
+	ShownCost = GetBattleCost(User, Stats)
 	var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
 
 	CardName.text = Stats.CardName
@@ -138,8 +145,8 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 	CardDesc.text = DescText
 	RealisticCardDesc.text = DescText
 	
-	CardCost.text = var_to_str(Cost)
-	RealisticCardCost.text = var_to_str(Cost)
+	CardCost.text = var_to_str(ShownCost)
+	RealisticCardCost.text = var_to_str(ShownCost)
 	
 	if (Stats.Type == CardStats.CardType.OFFENSIVE):
 		CardTypeEmblem.modulate = Color("ff3c22")
@@ -147,7 +154,22 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		CardTypeEmblem.modulate = Color("6be2e9")
 	else:
 		CardTypeEmblem.modulate = Color("8db354")
+
+func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
+	var CCost : int = 0
+	if (Stats.OnPerformModule is EnergyOffensiveCardModule):
+		if (Stats.OnPerformModule.StoredEnergy > 0):
+			CCost = Stats.OnPerformModule.StoredEnergy
+		else:
+			CCost = User.Energy
+	for St in Stats.OnUseModules:
+		if (St is MaxReserveModule or St is MaxShieldCardModule):
+			CCost = User.Energy
+	if (CCost == 0):
+		CCost = Stats.Energy
 	
+	return CCost
+
 func SetRealistic() -> void:
 	$SubViewportContainer/SubViewport/TextureRect.visible = true
 	$SubViewportContainer/SubViewport/Panel.visible = false

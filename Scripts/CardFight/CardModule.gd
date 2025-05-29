@@ -26,4 +26,5 @@ enum Stat{
 	SPEED,
 	DEFENCE,
 	WEIGHT,
+	ENERGY
 }
