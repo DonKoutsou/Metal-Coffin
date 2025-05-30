@@ -12,6 +12,7 @@ ShieldAmm = 10
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = true
+TierUpgrade = 1.2
 metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
 
 [resource]
@@ -26,4 +27,3 @@ RequiredPart = Array[ExtResource("3_f0bjb")]([])
 OnUseModules = Array[ExtResource("2_ywkdi")]([SubResource("Resource_plv6y")])
 Type = 1
 WeapT = 0
-Tier = 1

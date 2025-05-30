@@ -36,6 +36,9 @@ func GetItemDesc() -> String:
 	return "{0} {1}".format([ItemDesc, UpNames])
 
 
+
+
+
 enum ShipPartType{
 	NORMAL,
 	ENGINE,

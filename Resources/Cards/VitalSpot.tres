@@ -19,6 +19,7 @@ CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("2_612g0")]([])
 SkipShield = false
 AOE = false
+TierUpgrade = 1.0
 metadata/_custom_type_script = "uid://bu2ciutqs3t1b"
 
 [resource]
@@ -33,4 +34,3 @@ RequiredPart = Array[ExtResource("4_k3r12")]([])
 OnUseModules = Array[ExtResource("2_612g0")]([SubResource("Resource_612g0")])
 Type = 0
 WeapT = 0
-Tier = 2

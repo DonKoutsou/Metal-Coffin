@@ -10,6 +10,7 @@
 script = ExtResource("2_0wgrv")
 CounterType = 0
 AOE = false
+TierUpgrade = 1.0
 metadata/_custom_type_script = "uid://ddhital5xi55v"
 
 [resource]
@@ -25,4 +26,3 @@ OnUseModules = Array[ExtResource("2_nlrrw")]([])
 OnPerformModule = SubResource("Resource_0wgrv")
 Type = 1
 WeapT = 0
-Tier = 1

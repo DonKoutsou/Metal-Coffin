@@ -26,4 +26,3 @@ RequiredPart = Array[ExtResource("4_k4gvv")]([])
 OnUseModules = Array[ExtResource("2_5uqf0")]([SubResource("Resource_5uqf0")])
 Type = 2
 WeapT = 0
-Tier = 1

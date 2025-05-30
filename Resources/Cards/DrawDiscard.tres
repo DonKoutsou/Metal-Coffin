@@ -11,6 +11,7 @@ script = ExtResource("2_6m3uu")
 DrawAmmount = 3
 DiscardAmmount = 1
 AOE = false
+TierUpgrade = 1.0
 metadata/_custom_type_script = "uid://dlb0lqk4l5qdq"
 
 [resource]
@@ -25,4 +26,3 @@ RequiredPart = Array[ExtResource("3_wn7he")]([])
 OnUseModules = Array[ExtResource("1_8vv6a")]([SubResource("Resource_agq3e")])
 Type = 2
 WeapT = 0
-Tier = 1

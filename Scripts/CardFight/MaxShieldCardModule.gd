@@ -14,3 +14,6 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	if (AOE):
 		return "[color=#ffc315]{0}[/color] [color=#6be2e9]Shield[/color] for team".format([User.Energy * roundi(ShieldPerEnergy * max((TierUpgrade * Tier), 1))])
 	return "[color=#ffc315]{0}[/color] [color=#6be2e9]Shield[/color] for self".format([User.Energy * roundi(ShieldPerEnergy * max((TierUpgrade * Tier), 1))])
+
+func GetShieldPerEnergy(Tier : int) -> int:
+	return roundi(ShieldPerEnergy * max((TierUpgrade * Tier), 1))

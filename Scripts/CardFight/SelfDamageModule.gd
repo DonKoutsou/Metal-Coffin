@@ -4,4 +4,7 @@ class_name SelfDamageModule
 @export var Damage : float
 
 func GetDesc(Tier : int) -> String:
-	return "Cause [color=#ffc315]{0}[/color] damage to self".format([Damage * max((TierUpgrade * Tier), 1)]).replace(".0", "")
+	return "Cause [color=#ffc315]{0}[/color] damage to self".format([GetFinalDamage(Tier)]).replace(".0", "")
+
+func GetFinalDamage(Tier : int) -> float:
+	return Damage * max((TierUpgrade * Tier), 1)

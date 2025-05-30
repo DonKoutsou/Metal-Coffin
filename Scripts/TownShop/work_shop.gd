@@ -187,7 +187,7 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		NewStats.append(g.duplicate())
 	NewCap.CaptainStats = NewStats
 	NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
-	NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
+	#NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
 	
 	NewInv.RemoveItem(OriginalItem)
 	NewInv.AddItem(UpgradedItem)

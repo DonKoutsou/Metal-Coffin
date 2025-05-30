@@ -50,7 +50,7 @@ func GetCards() -> Array[CardStats]:
 		for A in Amm:
 			for z in g.CardProviding:
 				var C = z.duplicate() as CardStats
-				C.Tier = g
+				C.Tier = It.Tier
 				CardsInInventory.append(C)
 
 	return CardsInInventory
@@ -232,8 +232,8 @@ func GetBoxContainingItem(It : Item) -> Inventory_Box:
 	
 	var Box : Inventory_Box
 	
-	for g in boxes:
-		if (g.GetContainedItem() == It):
+	for g : Inventory_Box in boxes:
+		if (g.GetContainedItem().IsSame(It)):
 			Box = g
 			
 	return Box
@@ -306,6 +306,12 @@ func StartUpgrade(Box : Inventory_Box, UpgradeBuff : bool) -> void:
 		_UpgradeTime /= 2
 	_ItemBeingUpgraded = Box
 	set_physics_process(true)
+
+func ReStartUpgrade(Box : Inventory_Box, UpTime : float) -> void:
+	var Part = Box.GetContainedItem() as ShipPart
+	_UpgradeTime = UpTime
+	_ItemBeingUpgraded = Box
+	set_physics_process(true)
 	
 func _physics_process(delta: float) -> void:
 	if (SimPaused):
@@ -313,13 +319,13 @@ func _physics_process(delta: float) -> void:
 	_UpgradeTime -= (delta * 10) * SimulationManager.SimSpeed()
 	_EquipTime -= (delta * 10) * SimulationManager.SimSpeed()
 	#_UpgradeTime -= (delta * 10)
-	if (_UpgradeTime <= 0):
+	if (_ItemBeingUpgraded != null and _UpgradeTime <= 0):
 		ItemUpgradeFinished()
 	
-	if (_EquipTime <= 0):
+	if (_ItemBeingEquipped != null and _EquipTime <= 0):
 		ItemEquipFinished()
 	
-	set_physics_process(_UpgradeTime <= 0 and _EquipTime <= 0)
+	set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
 
 func CancelUpgrade() -> void:
 	_ItemBeingUpgraded = null
@@ -333,6 +339,7 @@ func ItemUpgradeFinished() -> void:
 		UpgradedItem.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
 	AddItem(UpgradedItem)
 	_ItemBeingUpgraded = null
+	PopUpManager.GetInstance().DoFadeNotif("{0}'s {1} has succsfully been upgraded to {2}".format([CaptainNameLabel.text, Part.ItemName, UpgradedItem.ItemName]), null, 8)
 
 func ItemEquipFinished() -> void:
 	AddItem(_ItemBeingEquipped)

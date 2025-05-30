@@ -14,6 +14,7 @@ BuffAmmount = 1.5
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = false
+TierUpgrade = 1.2
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 
 [resource]
@@ -28,4 +29,3 @@ RequiredPart = Array[ExtResource("3_xycns")]([])
 OnUseModules = Array[ExtResource("2_nqbud")]([SubResource("Resource_r7uwp")])
 Type = 2
 WeapT = 0
-Tier = 1

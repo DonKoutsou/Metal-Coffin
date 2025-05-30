@@ -1,22 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dci144io03ffa"]
 
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_ydicf"]
 [ext_resource type="Script" uid="uid://dvx4hdp7fvbi0" path="res://Scripts/fleet_separation_ship_viz.gd" id="2_f1v6n"]
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="4_5k7vr"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5k7vr"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
-skew = Vector2(0.1, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.482095, 0.689901, 0.704644, 1)
-border_blend = true
-corner_detail = 1
 
 [node name="FleetSeparationShipViz" type="PanelContainer" node_paths=PackedStringArray("CapPortrait", "CapName")]
 anchors_preset = 8
@@ -30,7 +16,7 @@ offset_right = 121.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5k7vr")
+theme_override_styles/panel = ExtResource("1_ydicf")
 script = ExtResource("2_f1v6n")
 CapPortrait = NodePath("VBoxContainer/CapPortrait")
 CapName = NodePath("VBoxContainer/CapName")
@@ -38,6 +24,7 @@ CapName = NodePath("VBoxContainer/CapName")
 [node name="Button" type="Button" parent="." groups=["DigitalButtons"]]
 layout_mode = 2
 focus_mode = 0
+action_mode = 0
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -58,4 +45,5 @@ texture = ExtResource("4_5k7vr")
 expand_mode = 1
 stretch_mode = 5
 
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

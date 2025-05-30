@@ -267,8 +267,10 @@ func OnCharacterRemoved(Cha : Captain) -> void:
 	Inv.queue_free()
 	_CharacterInventories.erase(Cha)
 	
-func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
+func LoadCharacter(Data : SD_CharacterInventory) -> void:
 	var CharInv : CharacterInventory
+	
+	var Cha = Data.Cpt
 	
 	if (_CharacterInventories.has(Cha)):
 		CharInv = _CharacterInventories[Cha]
@@ -292,23 +294,29 @@ func LoadCharacter(Cha : Captain, LoadedItems : Array[ItemContainer]) -> void:
 	for g in CharInv._GetInventoryBoxes():
 		for z in g._ContentAmmout:
 			CharInv.RemoveItemFromBox(g)
-	for g in LoadedItems:
+	for g in Data.Items:
 		for z in g.Ammount:
 			if (g.ItemType is ShipPart):
 				CharInv.AddItem(g.ItemType.duplicate(true))
 			else:
 				CharInv.AddItem(g.ItemType)
+	
+	if (Data.ItemBeingUpgraded != null):
+		CharInv.ReStartUpgrade(CharInv.GetBoxContainingItem(Data.ItemBeingUpgraded), Data.UpgradeTime)
+
 
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileAdded(It, Owner)
 	CaptainStats.UpdateValues()
 	
+	
 func OnItemRemoved(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileRemoved(It, Owner)
 	CloseDescriptor()
 	CaptainStats.UpdateValues()
+
 
 func InspectCharacter(Cha : Captain) -> void:
 	CloseDescriptor()
@@ -317,10 +325,12 @@ func InspectCharacter(Cha : Captain) -> void:
 	#ShipStats.visible = true
 	#ShipDeck.visible = false
 
+
 func InspectCharacterDeck(Cha : Captain) -> void:
 	CloseDescriptor()
 	CaptainStats.SetCaptain(Cha)
 	CaptainStats.ShowDeck()
+
 
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
@@ -329,11 +339,15 @@ func CloseDescriptor() -> void:
 		descriptors[0].queue_free()
 	CaptainStats.visible = true
 
+
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
 	var Data = SD_CharacterInventory.new()
 	Data.Cpt = Cpt
 	Data.Fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	Data.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
+	if (Inv._ItemBeingUpgraded != null):
+		Data.ItemBeingUpgraded = Inv._ItemBeingUpgraded.GetContainedItem()
+		Data.UpgradeTime = Inv._UpgradeTime
 	var Contents = Inv.GetInventoryContents()
 	for g in Contents.keys():
 		var Ic = ItemContainer.new()
@@ -352,13 +366,15 @@ func GetSaveData() ->SaveData:
 	dat.Datas = Datas
 	return dat
 	
+	
 func LoadSaveData(Data : SaveData) -> void:
 	#FlushInventory()
 	for g in Data.Datas:
 		var dat = g as SD_CharacterInventory
 		#call_deferred("LoadCharacter", dat.Cpt, dat.Items)
-		LoadCharacter(dat.Cpt, dat.Items)
+		LoadCharacter(dat)
 		dat.Cpt.LoadStats(dat.Fuel, dat.Hull)
+
 
 var ToggleTween : Tween
 

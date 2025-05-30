@@ -10,4 +10,5 @@ ItemName = "Thermal Decoy Flares"
 ItemDesc = "A defensive countermeasure that deploys a burst of decoy heat signatures to mislead incoming heat-seeking missiles. Best used in the moment before impact to throw off pursuit. Timing is everything."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_lbfjr")]([ExtResource("1_ts5ya")])
+Tier = 0
 CanTransfer = true

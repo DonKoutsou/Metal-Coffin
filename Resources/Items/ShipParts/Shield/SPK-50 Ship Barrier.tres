@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://carmmqiu3rn2f"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_hyayd"]
-[ext_resource type="Resource" uid="uid://bhexp2x4a8iic" path="res://Resources/Cards/ShieldOverChargeT2.tres" id="2_va7jv"]
+[ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_va7jv"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_30ir8"]
-[ext_resource type="Resource" uid="uid://ff1ftginwxie" path="res://Resources/Cards/ShieldOverChargeTeamT2.tres" id="3_385cy"]
+[ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="3_385cy"]
 [ext_resource type="Resource" uid="uid://dlkv8clb3piuw" path="res://Resources/Items/ShipParts/Shield/SPK-100 Ship Barrier.tres" id="3_ivh6q"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_n02hm"]
 

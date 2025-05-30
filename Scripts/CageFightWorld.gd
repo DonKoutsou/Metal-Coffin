@@ -4,25 +4,38 @@ class_name CageFightWorld
 @export_group("Scenes")
 @export var CardFightScene : PackedScene
 @export var ScrUI : ScreenUI
+@export var TeamComp : PackedScene
 
 signal FightEnded
 signal FightTransitionFinished
 
 static var Instance : CageFightWorld
 
+var TCompUI
+
 static func GetInstance() -> CageFightWorld:
 	return Instance
 
 func _ready() -> void:
 	Instance = self
-	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	await ScrUI.FullScreenToggleStarted
+	FightTransitionFinished.emit()
+	ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	TCompUI = TeamComp.instantiate() as CageFight_TeamComp
+	Ingame_UIManager.GetInstance().AddUI(TCompUI, true, false)
+	TCompUI.TeamReady.connect(TeamsPicked)
+	
+
+func TeamsPicked(PlTeam : Array[Captain], EnTeam : Array[Captain]) -> void:
+	ScrUI.ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await ScrUI.FullScreenToggleStarted
 	ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	FightTransitionFinished.emit()
+	TCompUI.queue_free()
 	
 	ScrUI.ToggleScreenUI(false)
 	ScrUI.ToggleCardFightUI(true)
-	StartDogFight()
+	StartDogFight(PlTeam, EnTeam)
 	#$Inventory.Player = GetMap().GetPlayerShip()
 
 func EndGame() -> void:
@@ -31,13 +44,19 @@ func EndGame() -> void:
 	#queue_free()
 
 #Dogfight-----------------------------------------------
-var FighingFriendlyUnits : Array[MapShip] = []
-var FighingEnemyUnits : Array[MapShip] = []
-func StartDogFight():
+
+func StartDogFight(PlTeam : Array[Captain], EnTeam : Array[Captain]):
 
 	var CardF = CardFightScene.instantiate() as Card_Fight
 	CardF.connect("CardFightEnded", CardFightEnded)
+	
+	for g in PlTeam:
+		CardF.PlayerReserves.append(g.GetBattleStats())
+	for g in EnTeam:
+		CardF.EnemyReserves.append(g.GetBattleStats())
+
 	CardF.InitRandomFight(5)
+	
 	#SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)
 	#ScrUI.ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)

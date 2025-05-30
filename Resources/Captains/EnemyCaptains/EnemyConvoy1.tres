@@ -92,7 +92,7 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 [resource]
 resource_local_to_scene = true
 script = ExtResource("6_340aw")
-CaptainName = "Grunt"
+CaptainName = "Convoy"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_ey02j")
 ShipIcon = ExtResource("9_bip6n")

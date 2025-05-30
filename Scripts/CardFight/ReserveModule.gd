@@ -5,5 +5,8 @@ class_name ReserveModule
 
 func GetDesc(Tier : int) -> String:
 	if (AOE):
-		return "Adds [color=#ffc315]{0}[/color] Energy Reserve to team".format([ReserveAmmount])
-	return "Adds [color=#ffc315]{0}[/color] Energy Reserve to self".format([ReserveAmmount])
+		return "Adds [color=#ffc315]{0}[/color] Energy Reserve to team".format([GetEnergy(Tier)])
+	return "Adds [color=#ffc315]{0}[/color] Energy Reserve to self".format([GetEnergy(Tier)])
+
+func GetEnergy(Tier : int) -> int:
+	return roundi(ReserveAmmount * max((Tier * TierUpgrade), 1))

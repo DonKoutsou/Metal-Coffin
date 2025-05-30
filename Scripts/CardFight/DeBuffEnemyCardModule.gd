@@ -16,8 +16,8 @@ func GetDesc(Tier : int) -> String:
 	else : if (StatToDeBuff == Stat.WEIGHT):
 		TextColor = "color=#828dff"
 	if (AOE):
-		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * (Tier * TierUpgrade)), TextColor])
-	return "Debuff enemy\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * (Tier * TierUpgrade)), TextColor])
+		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
+	return "Debuff enemy\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
 
 func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	var TextColor : String
@@ -30,5 +30,11 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	else : if (StatToDeBuff == Stat.WEIGHT):
 		TextColor = "color=#828dff"
 	if (AOE):
-		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * (Tier * TierUpgrade)), TextColor])
-	return "Debuff enemy\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * (Tier * TierUpgrade)), TextColor])
+		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
+	return "Debuff enemy\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
+
+func GetDebuffDuration(Tier : int) -> int:
+	return roundi(DeBuffDuration * max((TierUpgrade * Tier), 1))
+	
+func GetDebuffAmmount(Tier : int) -> float:
+	return DeBuffAmmount *  max((TierUpgrade * Tier), 1)

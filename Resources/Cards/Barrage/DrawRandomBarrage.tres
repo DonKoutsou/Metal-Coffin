@@ -11,6 +11,7 @@
 script = ExtResource("4_phqjh")
 CardToSpawn = ExtResource("3_00mwm")
 AOE = false
+TierUpgrade = 1.0
 metadata/_custom_type_script = "uid://ceqe8h8b7lrlm"
 
 [resource]
@@ -25,4 +26,3 @@ RequiredPart = Array[ExtResource("5_1yprs")]([])
 OnUseModules = Array[ExtResource("3_l4eym")]([SubResource("Resource_e2oaq")])
 Type = 2
 WeapT = 0
-Tier = 1

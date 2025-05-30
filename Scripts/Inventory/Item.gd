@@ -15,3 +15,6 @@ class_name Item
 
 func GetItemDesc() -> String:
 	return ItemDesc
+
+func IsSame(It : Item) -> bool:
+	return ItemName == It.ItemName

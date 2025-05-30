@@ -11,6 +11,7 @@ script = ExtResource("3_peqcn")
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = false
+TierUpgrade = 1.0
 metadata/_custom_type_script = "uid://civogvyka6amw"
 
 [resource]
@@ -25,4 +26,3 @@ RequiredPart = Array[ExtResource("3_0cpai")]([])
 OnUseModules = Array[ExtResource("2_0cpai")]([SubResource("Resource_gl0km")])
 Type = 1
 WeapT = 0
-Tier = 1

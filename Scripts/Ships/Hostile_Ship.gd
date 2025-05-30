@@ -567,7 +567,11 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Funds = Cpt.ProvidingFunds
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.Convoy = Convoy
-	stats.Cards = Cpt.Cards.duplicate()
+	var CList : Array[CardStats]
+	for g in Cpt.Cards:
+		for z in Cpt.Cards[g]:
+			CList.append(g)
+	stats.Cards = CList
 	return stats
 	
 func GetShipName() -> String:

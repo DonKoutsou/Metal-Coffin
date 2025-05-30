@@ -28,6 +28,6 @@ func SetDeck(Ch : Captain) -> void:
 	
 	for card : CardStats in deck:
 		var c = CardScene.instantiate() as Card
-		c.SetCardStats(card, deck[card])
+		c.SetCardStats(card)
 		CardPosition.add_child(c)
 		c.Dissable()

@@ -17,6 +17,7 @@ ConversionMultiplication = SubResource("Curve_4d6nm")
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = false
+TierUpgrade = 1.0
 metadata/_custom_type_script = "uid://b3ik3ixt10qr1"
 
 [resource]
@@ -31,4 +32,3 @@ RequiredPart = Array[ExtResource("4_q77k5")]([])
 OnUseModules = Array[ExtResource("2_7qc3q")]([SubResource("Resource_7qc3q")])
 Type = 2
 WeapT = 0
-Tier = 1

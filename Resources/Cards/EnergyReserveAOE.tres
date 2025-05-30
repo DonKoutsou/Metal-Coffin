@@ -12,6 +12,7 @@ ReserveAmmount = 2
 CanBeUsedOnOther = false
 SelfUse = false
 AOE = true
+TierUpgrade = 1.2
 metadata/_custom_type_script = "uid://bchkyl36yo5cq"
 
 [resource]
@@ -26,4 +27,3 @@ RequiredPart = Array[ExtResource("4_q8dnr")]([])
 OnUseModules = Array[ExtResource("2_hgi3i")]([SubResource("Resource_vivg1")])
 Type = 2
 WeapT = 0
-Tier = 1
