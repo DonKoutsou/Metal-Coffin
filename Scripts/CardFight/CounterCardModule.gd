@@ -4,5 +4,5 @@ class_name CounterCardModule
 
 @export var CounterType : OffensiveCardModule.AtackTypes
 
-func GetDesc() -> String:
+func GetDesc(Tier : int) -> String:
 	return "Avoid an incomming\n[color=#ffc315]{0}[/color]".format([OffensiveCardModule.AtackTypes.keys()[CounterType].replace("_", " ")])

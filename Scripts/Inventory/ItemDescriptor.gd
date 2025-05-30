@@ -102,9 +102,11 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool) -> void:
 		for g in It.CardProviding:
 			if (CardsChecked.has(g)):
 				continue
+			
 			CardsChecked.append(g)
 			
 			var CardS = g.duplicate() as CardStats
+			CardS.Tier = It.Tier
 			var card = CardScene.instantiate() as Card
 			
 			#if (It.CardOptionProviding != null):
@@ -174,6 +176,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 			CardsChecked.append(g)
 			
 			var CardS = g.duplicate() as CardStats
+			CardS.Tier = It.Tier
 			var card = CardScene.instantiate() as Card
 			
 			#if (It.CardOptionProviding != null):
@@ -230,6 +233,7 @@ func SetMerchData(Itm : Item) -> void:
 			CardsChecked.append(g)
 			
 			var CardS = g.duplicate() as CardStats
+			CardS.Tier = Itm.Tier
 			var card = CardScene.instantiate() as Card
 			
 			#if (It.CardOptionProviding != null):

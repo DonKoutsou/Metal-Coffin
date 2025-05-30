@@ -12,6 +12,7 @@
 script = ExtResource("3_n7g6o")
 BuffAmmount = 0.2
 AOE = false
+TierUpgrade = 1.2
 metadata/_custom_type_script = "uid://blbqbmqeeyld1"
 
 [sub_resource type="Resource" id="Resource_gqpsy"]
@@ -30,6 +31,7 @@ CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("2_n7g6o")]([SubResource("Resource_wkqih")])
 SkipShield = false
 AOE = false
+TierUpgrade = 1.2
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]
@@ -45,4 +47,3 @@ OnUseModules = Array[ExtResource("2_n7g6o")]([])
 OnPerformModule = SubResource("Resource_tpj2d")
 Type = 0
 WeapT = 1
-Tier = 1

@@ -207,6 +207,8 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		
 		return
 	
+	PopUpManager.GetInstance().DoFadeNotif("{0} upgrade initiated".format([OriginalItem.ItemName]))
+	
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()
 	
 	var box = Inv.GetBoxContainingItem(Box._ContainedItem)

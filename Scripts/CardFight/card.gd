@@ -97,8 +97,8 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	Cost = Stats.Energy
 	var DescText =  "[center] {0}".format([Stats.GetDescription()])
 
-	CardName.text = Stats.CardName
-	RealisticCardname.text = Stats.CardName
+	CardName.text = Stats.GetCardName()
+	RealisticCardname.text = Stats.GetCardName()
 	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
@@ -111,9 +111,9 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CardCost.text = var_to_str(Cost)
 	RealisticCardCost.text = var_to_str(Cost)
 	
-	if (Stats.OnPerformModule != null and Stats.OnPerformModule is OffensiveCardModule):
+	if (Stats.Type == CardStats.CardType.OFFENSIVE):
 		CardTypeEmblem.modulate = Color("ff3c22")
-	else : if (Stats.OnUseModules.size() > 0 and Stats.OnUseModules[0] is DeffenceCardModule):
+	else : if (Stats.Type == CardStats.CardType.DEFFENSIVE):
 		CardTypeEmblem.modulate = Color("6be2e9")
 	else:
 		CardTypeEmblem.modulate = Color("8db354")
@@ -135,8 +135,8 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 	ShownCost = GetBattleCost(User, Stats)
 	var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
 
-	CardName.text = Stats.CardName
-	RealisticCardname.text = Stats.CardName
+	CardName.text = Stats.GetCardName()
+	RealisticCardname.text = Stats.GetCardName()
 	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1

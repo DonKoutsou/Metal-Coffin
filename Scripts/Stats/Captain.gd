@@ -40,7 +40,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.ShipIcon = ShipIcon
 	stats.CaptainIcon = CaptainPortrait
 	stats.Name = CaptainName
-	var c : Dictionary[CardStats, int]
+	var c : Array[CardStats]
 	for g in StartingItems:
 		if (g is ShipPart):
 			for up : ShipPartUpgrade in g.Upgrades:
@@ -58,15 +58,13 @@ func GetBattleStats() -> BattleShipStats:
 					Fp -= up.PenaltyAmmount
 					
 		for z in g.CardProviding:
-			if (c.has(z)):
-				c[z] += 1
-			else:
-				c[z] = 1
+			var C = z.duplicate() as CardStats
+			C.Tier = g.Tier
+			c.append(C)
+			
 	for g in Cards:
-		if (c.has(g)):
-			c[g] += Cards[g]
-		else:
-			c[g] = Cards[g]
+		c.append(g)
+		
 	stats.Hull = Hull
 	stats.CurrentHull = Hull
 	stats.Speed = (Thrust * 1000) / Weight

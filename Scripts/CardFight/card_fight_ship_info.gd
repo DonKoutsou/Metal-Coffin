@@ -18,7 +18,7 @@ func SetUpShip(Ship : BattleShipStats) -> void:
 	ShipIcon.texture = Ship.ShipIcon
 	ShipName.text = Ship.Name
 	#ShipDesctext = Ship.
-	for g in Ship.Cards.keys():
+	for g in Ship.Cards:
 		var C = CardScene.instantiate() as Card
 		C.SetCardStats(g)
 		CardPlecement.add_child(C)

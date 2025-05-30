@@ -6,21 +6,11 @@ var DeckPile : Array[CardStats]
 var Hand : Array[CardStats]
 var DiscardPile : Array[CardStats]
 
-func GetCardList() -> Dictionary[CardStats, int]:
-	var List : Dictionary[CardStats, int]
-	for g in DeckPile:
-		if (List.has(g)):
-			List[g] += 1
-		else:
-			List[g] = 1
-	for g in Hand:
-		if (List.has(g)):
-			List[g] += 1
-		else:
-			List[g] = 1
-	for g in DiscardPile:
-		if (List.has(g)):
-			List[g] += 1
-		else:
-			List[g] = 1
+func GetCardList() -> Array[CardStats]:
+	var List : Array[CardStats]
+	
+	List.append_array(DeckPile)
+	List.append_array(Hand)
+	List.append_array(DiscardPile)
+
 	return List

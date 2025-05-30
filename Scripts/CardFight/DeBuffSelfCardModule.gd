@@ -5,7 +5,7 @@ class_name DeBuffSelfModule
 @export var DeBuffDuration : int
 @export var DeBuffAmmount : float
 
-func GetDesc() -> String:
+func GetDesc(Tier : int) -> String:
 	var TextColor : String
 	if (StatToDeBuff == Stat.FIREPOWER):
 		TextColor = "color=#f35033"
@@ -16,10 +16,10 @@ func GetDesc() -> String:
 	else : if (StatToDeBuff == Stat.WEIGHT):
 		TextColor = "color=#828dff"
 	if (AOE):
-		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount, DeBuffDuration, TextColor])
-	return "Debuff self\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount, DeBuffDuration, TextColor])
+		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * max((TierUpgrade * Tier), 1)), TextColor])
+	return "Debuff self\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * max((TierUpgrade * Tier), 1)), TextColor])
 
-func GetBattleDesc(User : BattleShipStats) -> String:
+func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	var TextColor : String
 	if (StatToDeBuff == Stat.FIREPOWER):
 		TextColor = "color=#f35033"
@@ -30,5 +30,5 @@ func GetBattleDesc(User : BattleShipStats) -> String:
 	else : if (StatToDeBuff == Stat.WEIGHT):
 		TextColor = "color=#828dff"
 	if (AOE):
-		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount, DeBuffDuration, TextColor])
-	return "Debuff self\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount, DeBuffDuration, TextColor])
+		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * max((TierUpgrade * Tier), 1)), TextColor])
+	return "Debuff self\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], DeBuffAmmount * (Tier * TierUpgrade), roundi(DeBuffDuration * max((TierUpgrade * Tier), 1)), TextColor])

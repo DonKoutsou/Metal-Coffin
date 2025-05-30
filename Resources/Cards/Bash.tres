@@ -12,6 +12,7 @@
 script = ExtResource("3_wlvdj")
 RecoilPercent = 25
 AOE = false
+TierUpgrade = 1.0
 metadata/_custom_type_script = "uid://cxb2rirvywgrv"
 
 [sub_resource type="Resource" id="Resource_s2y7c"]
@@ -37,6 +38,7 @@ CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("3_edcp3")]([SubResource("Resource_edcp3")])
 SkipShield = false
 AOE = false
+TierUpgrade = 1.1
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]
@@ -52,4 +54,3 @@ OnUseModules = Array[ExtResource("3_edcp3")]([])
 OnPerformModule = SubResource("Resource_dubgi")
 Type = 0
 WeapT = 0
-Tier = 1

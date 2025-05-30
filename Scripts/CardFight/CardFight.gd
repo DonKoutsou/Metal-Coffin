@@ -245,15 +245,8 @@ func CreateDecks() -> void:
 	Ships.append_array(EnemyReserves)
 	for g in Ships:
 		var D = Deck.new()
-		
-		var ShipCards = g.Cards.keys()
-		
-		for Crd : CardStats in ShipCards:
-			var Amm = 0
-			Amm = g.Cards[Crd]
-				
-			for Dup in Amm:
-				D.DeckPile.append(Crd)
+
+		D.DeckPile.append_array(g.Cards)
 
 		#Create Hand
 		D.DeckPile.shuffle()
@@ -451,7 +444,7 @@ func OnCardSelected(C : Card) -> bool:
 	var deck = GetShipDeck(Ship)
 	
 	UpdateEnergy(Ship, Ship.Energy - C.GetCost(), true)
-	print("{0} has been removed from {1}'s hand.".format([C.CStats.CardName, Ship.Name]))
+	print("{0} has been removed from {1}'s hand.".format([C.CStats.GetCardName(), Ship.Name]))
 	deck.Hand.erase(C.CStats)
 	
 	if (C.CStats.OnPerformModule != null):
@@ -514,7 +507,7 @@ func OnCardSelected(C : Card) -> bool:
 		S.volume_db = -10
 		
 		if (!C.CStats.Consume):
-			print("{0} has been added to {1}'s discard pile.".format([C.CStats.CardName, Ship.Name]))
+			print("{0} has been added to {1}'s discard pile.".format([C.CStats.GetCardName(), Ship.Name]))
 			deck.DiscardPile.append(C.CStats)
 			DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
 	
@@ -559,7 +552,7 @@ func RemoveCard(C : Card) -> void:
 		var HasCard = false
 		for g in ShipCards.keys():
 			#print("Comparing {0} with {1}".format([g.resource_path, C.CStats.resource_path]))
-			if (g.CardName == Stats.CardName):
+			if (g.GetCardName() == Stats.GetCardName()):
 				HasCard = true
 				ShipCards[g] += 1
 				break
@@ -610,14 +603,14 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				await HandleModulesEnemy(Ship, g)
 
 				EnemyDeck.Hand.erase(g)
-				print("{0} has been added to {1}'s discard pile.".format([g.CardName, Ship.Name]))
+				print("{0} has been added to {1}'s discard pile.".format([g.GetCardName(), Ship.Name]))
 				EnemyDeck.DiscardPile.append(g)
 				break
 	
 	var AvailableActions = EnemyDeck.Hand.duplicate()
 	var Actions = ""
 	for g : CardStats in AvailableActions:
-		Actions += g.CardName + ", "
+		Actions += g.GetCardName() + ", "
 	print("{0}'s hand : {1}".format([Ship.Name, Actions]))
 	
 	var t = func CheckIfToDraw(Actions : Array[CardStats]) -> Array[CardStats]:
@@ -631,25 +624,19 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	while (AvailableActions.size() > 0):
 		var Action = (AvailableActions.pick_random() as CardStats)
 		
-		print("{0} tries to player card {1}".format([Ship.Name, Action.CardName]))
+		print("{0} tries to player card {1}".format([Ship.Name, Action.GetCardName()]))
 		
 		if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
 			AvailableActions.erase(Action)
 			AvailableActions = t.call(AvailableActions)
 
 		else: if (Action.CardName == "Extinguish fires" or Action.Energy > Ship.Energy):
-			print("{0} cant use {1}, not enough energy".format([Ship.Name, Action.CardName]))
+			print("{0} cant use {1}, not enough energy".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = t.call(AvailableActions)
-		
-		#for g in Action.OnUseModules:
-			#if (g is DeffenceCardModule):
-				#if (!g.SelfUse and EnemyCombatants.size() == 0):
-					#AvailableActions.erase(Action)
-					#AvailableActions = t.call(AvailableActions)
 			
 		else:
-			print("{0} uses {1}".format([Ship.Name, Action.CardName]))
+			print("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
 			var SelectedAction : CardStats = Action.duplicate()
 			
 			Ship.Energy -= SelectedAction.Energy
@@ -662,9 +649,15 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			await HandleModulesEnemy(Ship, SelectedAction)
 			
 			if (SelectedAction.OnPerformModule == null):
-				print("{0} has been added to {1}'s discard pile.".format([SelectedAction.CardName, Ship.Name]))
+				print("{0} has been added to {1}'s discard pile.".format([SelectedAction.GetCardName(), Ship.Name]))
 				EnemyDeck.DiscardPile.append(SelectedAction)
 			else:
+				if (SelectedAction.OnPerformModule is EnergyOffensiveCardModule):
+					var NewMod = SelectedAction.OnPerformModule.duplicate()
+					NewMod.StoredEnergy = Ship.Energy
+					UpdateEnergy(Ship, 0, true)
+					SelectedAction.OnPerformModule = NewMod
+					
 				await DoCardSelectAnimation(SelectedAction, Ship, GetShipViz(Ship))
 				
 				var ShipAction = CardFightAction.new()
@@ -877,7 +870,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			
 			
 			if (!Action.ShouldConsume()):
-				print("{0} has been added to {1}'s discard pile.".format([Action.CardName, Ship.Name]))
+				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
 				Dec.DiscardPile.append(Action)
 				if (Friendly):
 					DiscardP.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
@@ -894,7 +887,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					ActionList.RemoveActionFromShip(g, Counter)
 					if (!Counter.ShouldConsume()):
 						var TargetDeck = GetShipDeck(g)
-						print("{0} has been added to {1}'s discard pile.".format([Counter.CardName, g.Name]))
+						print("{0} has been added to {1}'s discard pile.".format([Counter.GetCardName(), g.Name]))
 						TargetDeck.DiscardPile.append(Counter)
 						if (!Friendly):
 							DiscardP.UpdateDiscardPileAmmount(TargetDeck.DiscardPile.size())
@@ -988,9 +981,9 @@ func RefundUnusedCards() -> void:
 
 
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
-	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.CardName]))
+	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.GetCardName()]))
 	var deck = GetShipDeck(Ship)
-	print("{0} has been added to {1}'s discard pile.".format([C.CardName, Ship.Name]))
+	print("{0} has been added to {1}'s discard pile.".format([C.GetCardName(), Ship.Name]))
 	deck.DiscardPile.append(C)
 
 
@@ -1086,7 +1079,7 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule) 
 		await HandleSelfDamage(Performer, C, Mod)
 	else : if (Mod is RecoilDamageModule):
 		var AtackMod = C.OnPerformModule as OffensiveCardModule
-		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer), Mod)
+		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
 	else : if (Mod is StackDamageCardModule):
 		await HandleDamageStack(Performer, C, Mod)
 
@@ -1132,7 +1125,7 @@ func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModu
 		await HandleSelfDamage(Performer, C, Mod)
 	else : if (Mod is RecoilDamageModule):
 		var AtackMod = C.OnPerformModule as OffensiveCardModule
-		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer), Mod)
+		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
 	else : if (Mod is StackDamageCardModule):
 		await HandleDamageStack(Performer, C, Mod)
 
@@ -1165,7 +1158,7 @@ func HandleDrawDriscard(Performer : BattleShipStats, Mod : DrawCardModule) -> vo
 		var Ca = CardsToDraw[ToDiscard]
 		CardsToDraw.erase(Ca)
 		CardsToDiscard.append(Ca)
-		print("{0} has been added to {1}'s discard pile.".format([Ca.CStats.CardName, Performer.Name]))
+		print("{0} has been added to {1}'s discard pile.".format([Ca.CStats.GetCardName(), Performer.Name]))
 		D.DiscardPile.append(Ca.CStats)
 		DeckP.OnCardDrawn()
 		DiscardP.OnCardDiscarded(DeckP.global_position)
@@ -1203,7 +1196,7 @@ func HandleDrawDiscardEnemy(Performer : BattleShipStats,Mod : DrawCardModule) ->
 		var ToDiscard = CardsToDraw.pick_random()
 		CardsToDraw.erase(ToDiscard)
 		CardsToDiscard.append(ToDiscard)
-		print("{0} has been added to {1}'s discard pile.".format([ToDiscard.CardName, Performer.Name]))
+		print("{0} has been added to {1}'s discard pile.".format([ToDiscard.GetCardName(), Performer.Name]))
 		D.DiscardPile.append(ToDiscard)
 	
 	for g in CardsToDraw:
@@ -1247,7 +1240,7 @@ func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : 
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, [])
 
 func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule) -> void:
-	var resupplyamm = Mod.GetConversionAmmount(Performer.EnergyReserves)
+	var resupplyamm = Mod.GetConversionAmmount(Performer.EnergyReserves, Action.Tier)
 	
 	var Friendly = IsShipFriendly(Performer)
 	
@@ -1362,7 +1355,7 @@ func HandleDamageStack(Performer : BattleShipStats, Action : CardStats, Mod : St
 	var NewAction = Action.duplicate()
 	NewAction.OnPerformModule = OffensiveModule
 	Action = NewAction
-	OffensiveModule.Damage += OffensiveModule.Damage * Mod.BuffAmmount
+	OffensiveModule.Damage += OffensiveModule.Damage * Mod.GetStackDamage(Action.Tier)
 	
 	await DoDeffenceAnim(Action, Mod, Performer, [], EnemyCombatants.has(Performer), [])
 
@@ -1536,7 +1529,7 @@ func HandleDrawSpecificCard(Performer : BattleShipStats, Spawn : CardStats) -> v
 	var HasCardInDeck : bool = false
 	
 	for g : CardStats in D.DeckPile:
-		if (g.CardName == Spawn.CardName):
+		if (Spawn.IsSame(g)):
 			HasCardInDeck = true
 			break
 	
@@ -1569,14 +1562,19 @@ func HandleMultiDrawSpecific(Performer : BattleShipStats, Action : CardStats, Mo
 	var PossibleCards : Array[CardStats]
 	
 	for g : CardStats in D.DeckPile:
+		var Exists : bool = false
+		for C in PossibleCards:
+			if (C.IsSame(g)):
+				Exists = true
+				break
+		if (Exists):
+			continue
 		if (Mod.TestCard(g.OnPerformModule)):
-			if (!PossibleCards.has(g)):
-				PossibleCards.append(g)
+			PossibleCards.append(g)
 			continue
 		for m in g.OnUseModules:
 			if (Mod.TestCard(m)):
-				if (!PossibleCards.has(g)):
-					PossibleCards.append(g)
+				PossibleCards.append(g)
 				break
 	
 	CardSelect.SetCardsPick(Performer, PossibleCards)
@@ -1610,6 +1608,13 @@ func HandleMultiDrawSpecificEnemy(Performer : BattleShipStats, Action : CardStat
 	var PossibleCards : Array[CardStats]
 	
 	for g : CardStats in D.DeckPile:
+		var Exists : bool = false
+		for C in PossibleCards:
+			if (C.IsSame(g)):
+				Exists = true
+				break
+		if (Exists):
+			continue
 		if (Mod.TestCard(g.OnPerformModule)):
 			PossibleCards.append(g)
 			continue
@@ -1635,7 +1640,7 @@ func HandleDrawSpecificCardEnemy(Performer : BattleShipStats,Spawn : CardStats) 
 	var C : CardStats
 	
 	for g : CardStats in D.DeckPile:
-		if (g.CardName == Spawn.CardName):
+		if (Spawn.IsSame(g)):
 			HasCardInDeck = true
 			C = g
 			break
@@ -2022,7 +2027,7 @@ func UpdateEnergy(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) ->
 		if (NewEnergy > ExternalUI.GetEnergyBar().GetSegmentAmm()):
 			ExternalUI.GetEnergyBar().ChangeSegmentAmm(Ship.Energy)
 	
-	UpdateCardDescriptions(Ship)
+		UpdateCardDescriptions(Ship)
 
 func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) -> void:
 	var OldEnergy = Ship.EnergyReserves
@@ -2033,7 +2038,7 @@ func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) 
 		if (NewEnergy > ExternalUI.GetReserveBar().GetSegmentAmm()):
 			ExternalUI.GetReserveBar().ChangeSegmentAmm(Ship.EnergyReserves)
 	
-	UpdateCardDescriptions(Ship)
+		UpdateCardDescriptions(Ship)
 
 func UpdateHandAmount(NewAmm : int) -> void:
 	HandAmmountLabel.text = "In Hand {0}/{1}".format([NewAmm, MaxCardsInHand])
@@ -2068,20 +2073,27 @@ func NotifyFullHandStage2() -> void:
 
 
 func _on_deck_button_pressed() -> void:
+	if (SelectingTarget or EnemyPickingMove or PlayerPerformingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+		ExternalUI.CardDrawFail()
+		return
+	
 	var Ship = GetCurrentShip()
 
 	var Energy = Ship.Energy
 	
-	if (SelectingTarget or Energy < 1 or EnemyPickingMove):
+	if (Energy < 1):
 		ExternalUI.GetEnergyBar().NotifyNotEnough()
 		ExternalUI.CardDrawFail()
 		return
+	
 	
 	if (await HandleDrawCard(Ship)):
 		UpdateEnergy(Ship, Energy - 1, true)
 
 
 func _on_pull_reserves_pressed() -> void:
+	if (SelectingTarget or !PickingMoves or EnemyPickingMove or PlayerPerformingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+		return
 	var currentship = GetCurrentShip()
 	var Reserv = currentship.EnergyReserves
 	currentship.EnergyReserves = 0
@@ -2142,7 +2154,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	#PlDeck.DeckPile.erase(C.CStats)
 	
 	if (CanPlace):
-		print("{0} added to {1}'s hand".format([C.CStats.CardName, Performer.Name]))
+		print("{0} added to {1}'s hand".format([C.CStats.GetCardName(), Performer.Name]))
 		PlDeck.Hand.append(C.CStats)
 		ExternalUI.OnCardDrawn(C)
 
@@ -2167,7 +2179,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		SelectingTarget = false
 
 		if (ToDiscard == MaxCardsInHand):
-			print("{0} has been added to {1}'s discard pile.".format([C.CStats.CardName, Performer.Name]))
+			print("{0} has been added to {1}'s discard pile.".format([C.CStats.GetCardName(), Performer.Name]))
 			PlDeck.DiscardPile.append(C.CStats)
 			DiscardP.OnCardDiscarded(DeckP.global_position)
 			ExternalUI.ToggleHandInput(true)
@@ -2178,7 +2190,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		#var Plecement = PlayerCardPlecement.get_child(ToDiscard)
 		var Discarded : Card = ExternalUI.GetPlayerCardPlecement().get_child(ToDiscard)
 		await ExternalUI.InsertCardToDiscard(Discarded)
-		print("{0} has been added to {1}'s discard pile.".format([Discarded.CStats.CardName, Performer.Name]))
+		print("{0} has been added to {1}'s discard pile.".format([Discarded.CStats.GetCardName(), Performer.Name]))
 		PlDeck.DiscardPile.append(Discarded.CStats)
 		DiscardP.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))
 		Discarded.get_parent().queue_free()
@@ -2209,7 +2221,7 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 		EnemyDeck.Hand.append(C)
 		var ToDiscard = EnemyDeck.Hand.pick_random()
 		EnemyDeck.Hand.erase(ToDiscard)
-		print("{0} has been added to {1}'s discard pile.".format([ToDiscard.CardName, Performer.Name]))
+		print("{0} has been added to {1}'s discard pile.".format([ToDiscard.GetCardName(), Performer.Name]))
 		EnemyDeck.DiscardPile.append(ToDiscard)
 
 	return true

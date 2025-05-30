@@ -19,9 +19,13 @@ class_name CardStats
 @export var Type : CardType
 @export var WeapT : WeaponType
 
+var Tier : int = 0
 
-
-@export var Tier : int = 1
+func GetCardName() ->String:
+	if (Tier > 0):
+		return CardName + " +{0}".format([Tier])
+	
+	return CardName
 
 func ShouldConsume() -> bool:
 	#if is_instance_valid(SelectedOption):
@@ -33,11 +37,11 @@ func GetDescription() -> String:
 		return CardDescriptionOverride
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
-		Desc += OnPerformModule.GetDesc()
+		Desc += OnPerformModule.GetDesc(Tier)
 	if (OnUseModules.size() > 0):
 		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
-			Desc += g.GetDesc() + "\n"
+			Desc += g.GetDesc(Tier) + "\n"
 
 	return Desc
 
@@ -46,13 +50,16 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 		return CardDescriptionOverride
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
-		Desc += OnPerformModule.GetBattleDesc(User)
+		Desc += OnPerformModule.GetBattleDesc(User, Tier)
 	if (OnUseModules.size() > 0):
 		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
-			Desc += g.GetBattleDesc(User) + "\n"
+			Desc += g.GetBattleDesc(User, Tier) + "\n"
 
 	return Desc
+
+func IsSame(C : CardStats) -> bool:
+	return C.GetCardName() == GetCardName()
 
 enum WeaponType{
 	NONE,

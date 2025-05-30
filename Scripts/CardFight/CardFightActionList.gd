@@ -18,14 +18,14 @@ func AddAction(Instigator : BattleShipStats, Action : CardFightAction) -> void:
 func ShipHasAction(Ship : BattleShipStats, Action : CardStats) -> bool:
 	for g in List[Ship]:
 		var act = g as CardFightAction
-		if (act.Action.CardName == Action.CardName):
+		if (act.Action.GetCardName() == Action.GetCardName()):
 			return true
 	return false
 
 func RemoveActionFromShip(Ship : BattleShipStats, Action : CardStats) -> void:
 	for g in List[Ship]:
 		var act = g as CardFightAction
-		if (act.Action.CardName == Action.CardName):
+		if (act.Action.GetCardName() == Action.GetCardName()):
 			List[Ship].erase(act)
 			return
 

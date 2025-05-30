@@ -477,7 +477,7 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 
 #Make sure to remove all items that their cards have been used
 #TODO fix this, ammo that wasnt brought into fight cause of lack of weapons will be deleted DONE 
-func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary[CardStats, int]):
+func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
 	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
 	var Contents = CharInv.GetInventoryContents().duplicate()
 	for It : Item in Contents.keys():
@@ -489,10 +489,13 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Dictionary[CardSta
 			if (It.CardProviding.size() > 0):
 				for c in It.CardProviding:
 				#if it did remove it from dictionary and leave ininside inventory
-					if (Cards.has(c)):
-						Cards[c] -= 1
-						if (Cards[c] == 0):
-							Cards.erase(c)
+					var CardToRemove : CardStats
+					for C in Cards:
+						if (C.IsSame(c)):
+							CardToRemove = C
+							break
+					if (CardToRemove != null):
+						Cards.erase(CardToRemove)
 				#if it was used and we cant find it in the dictionary then remove it from inventory
 					else:
 						CharInv.RemoveItem(It)

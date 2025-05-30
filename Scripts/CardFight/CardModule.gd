@@ -4,12 +4,13 @@ class_name CardModule
 
 
 @export var AOE : bool = false
+@export var TierUpgrade : float = 1
 
-func GetDesc() -> String:
+func GetDesc(Tier : int) -> String:
 	return ""
 
-func GetBattleDesc(User : BattleShipStats) -> String:
-	return GetDesc()
+func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
+	return GetDesc(Tier)
 
 func GetStatShortName(St : Stat) -> String:
 	var StatName : String

@@ -25,7 +25,7 @@ signal OnCharacterInspectionPressed
 signal OnCharacterDeckInspectionPressed
 var _InventoryContents : Dictionary[Item, int]
 
-var _CardInventory : Dictionary
+#var _CardInventory : Dictionary
 #var _CardAmmo : Dictionary
 
 var SimPaused : bool = false
@@ -42,22 +42,17 @@ func _ready() -> void:
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
 
-func GetCards() -> Dictionary[CardStats, int]:
-	var CardsInInventory : Dictionary[CardStats, int] = {}
-	for C : CardStats in _CardInventory.keys():
-		#for z : CardStats in CardsInInventory:
-			#if (z.CardName == C.CardName and z.Tier < C.Tier):
-				#CardsInInventory.erase(z)
-				#break
-		if (C.WeapT != CardStats.WeaponType.NONE and !HasWeapon(C.WeapT)):
-			continue
-		#if (C.RequiredPart.size() > 0):
-			#for P in C.RequiredPart:
-				#if (HasItem(P)):
-					#CardsInInventory[C] = _CardInventory[C]
-					#break
-			#continue
-		CardsInInventory[C] = _CardInventory[C]
+func GetCards() -> Array[CardStats]:
+	var CardsInInventory : Array[CardStats]
+	for g in _InventoryContents:
+		var It = g
+		var Amm = _InventoryContents[g]
+		for A in Amm:
+			for z in g.CardProviding:
+				var C = z.duplicate() as CardStats
+				C.Tier = g
+				CardsInInventory.append(C)
+
 	return CardsInInventory
 
 #func GetCardAmmo() -> Dictionary:
@@ -148,9 +143,9 @@ func AddItem(It : Item) -> void:
 			g.UpdateAmm(1)
 			_InventoryContents[It] += 1
 			
-			if (It.CardProviding.size() > 0):
-				for c in It.CardProviding:
-					_CardInventory[c] += 1
+			#if (It.CardProviding.size() > 0):
+				#for c in It.CardProviding:
+					#_CardInventory[c] += 1
 			#if (It.CardOptionProviding != null):
 				#_CardAmmo[It.CardOptionProviding] += 1
 			
@@ -167,12 +162,12 @@ func AddItem(It : Item) -> void:
 		else:
 			_InventoryContents[It] = 1
 		
-		if (It.CardProviding.size() > 0):
-			for c in It.CardProviding:
-				if (_CardInventory.has(c)):
-					_CardInventory[c] += 1
-				else:
-					_CardInventory[c] = 1
+		#if (It.CardProviding.size() > 0):
+			#for c in It.CardProviding:
+				#if (_CardInventory.has(c)):
+					#_CardInventory[c] += 1
+				#else:
+					#_CardInventory[c] = 1
 				
 		#if (It.CardOptionProviding != null):
 			#_CardAmmo[It.CardOptionProviding] = 1
@@ -251,11 +246,11 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	Box.UpdateAmm(-1)
 	#print("Removed 1 {0}".format([It.ItemName]))
 	_InventoryContents[It] -= 1
-	if (It.CardProviding.size() > 0):
-		for g in It.CardProviding:
-			_CardInventory[g] -= 1
-			if (_CardInventory[g] == 0):
-				_CardInventory.erase(g)
+	#if (It.CardProviding.size() > 0):
+		#for g in It.CardProviding:
+			#_CardInventory[g] -= 1
+			#if (_CardInventory[g] == 0):
+				#_CardInventory.erase(g)
 	#if (It.CardOptionProviding != null):
 		#_CardAmmo[It.CardOptionProviding] = 1
 		#if (_CardAmmo[It.CardOptionProviding] == 0):

@@ -8,7 +8,7 @@ class_name ShipPart
 @export var UpgradeCost : float
 @export var IsDamaged : bool = false
 @export var PartType : ShipPartType
-@export var Tier : int = 1
+
 
 func _setup_local_to_scene() -> void:
 	for Up in Upgrades:

@@ -20,7 +20,7 @@ class_name BattleShipStats
 @export var DefDebuff : float = 0
 @export var Energy : int
 @export var EnergyReserves : int
-@export var Cards : Dictionary[CardStats, int]
+@export var Cards : Array[CardStats]
 
 #@export var Ammo : Dictionary
 @export var Funds : int

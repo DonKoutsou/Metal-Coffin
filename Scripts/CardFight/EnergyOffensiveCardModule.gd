@@ -4,29 +4,29 @@ class_name EnergyOffensiveCardModule
 
 var StoredEnergy : int = 0
 
-func GetFinalDamage(Performer : BattleShipStats) -> float:
+func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
 	var Dmg : float
 	
 	if (StoredEnergy > 0):
-		Dmg = Damage * StoredEnergy
+		Dmg = (Damage * max((TierUpgrade * Tier), 1)) * StoredEnergy
 	else:
-		Dmg = Damage * Performer.Energy
+		Dmg = (Damage * max((TierUpgrade * Tier), 1)) * Performer.Energy
 
 	return Dmg
 
-func GetDesc() -> String:
+func GetDesc(Tier : int) -> String:
 	var Desc = ""
 	if (AOE):
 		Desc = "Hit enemy team"
 	else:
 		Desc = "Hit enemy"
 		
-	Desc += " for {0} * [color=#ffc315]Remaining Energy[/color] damage".format([var_to_str(Damage)])
+	Desc += " for {0} * [color=#ffc315]Remaining Energy[/color] damage".format([var_to_str((Damage * max((TierUpgrade * Tier), 1)))])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit : [/color]"
 		for g in OnSuccesfullAtackModules:
-			Desc += g.GetDesc()
+			Desc += g.GetDesc(Tier)
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 	if (SkipShield):
@@ -35,7 +35,7 @@ func GetDesc() -> String:
 	
 	return Desc
 
-func GetBattleDesc(User : BattleShipStats) -> String:
+func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	var Desc = ""
 	if (AOE):
 		Desc = "Hit enemy team"
@@ -48,12 +48,12 @@ func GetBattleDesc(User : BattleShipStats) -> String:
 	else :
 		En = User.Energy
 		
-	Desc += " for\n[{0}]|[/color]{1}[{0}]|[/color] damage".format(["color=#ffc315", Damage * En])
+	Desc += " for\n[{0}]|[/color]{1}[{0}]|[/color] damage".format(["color=#ffc315", (Damage * max((TierUpgrade * Tier), 1)) * En])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit : [/color]"
 		for g in OnSuccesfullAtackModules:
-			Desc += g.GetDesc()
+			Desc += g.GetDesc(Tier)
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 	if (SkipShield):

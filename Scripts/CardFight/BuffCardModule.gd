@@ -7,7 +7,7 @@ class_name BuffModule
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
-func GetDesc() -> String:
+func GetDesc(Tier : int) -> String:
 	var TextColor : String
 	if (StatToBuff == Stat.FIREPOWER):
 		TextColor = "color=#f35033"
@@ -18,7 +18,7 @@ func GetDesc() -> String:
 	else : if (StatToBuff == Stat.DEFENCE):
 		TextColor = "color=#7bb0b4"
 	if (AOE):
-		return "Buff team\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount, BuffDuration, TextColor])
+		return "Buff team\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount * max((TierUpgrade * Tier), 1), roundi(BuffDuration * max((TierUpgrade * Tier), 1)), TextColor])
 	else : if (CanBeUsedOnOther):
-		return "Buff a ship\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount, BuffDuration, TextColor])
-	return "Buff self\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount, BuffDuration, TextColor])
+		return "Buff a ship\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount * max((TierUpgrade * Tier), 1), roundi(BuffDuration * max((TierUpgrade * Tier), 1)), TextColor])
+	return "Buff self\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], BuffAmmount * max((TierUpgrade * Tier), 1), roundi(BuffDuration * max((TierUpgrade * Tier), 1)), TextColor])
