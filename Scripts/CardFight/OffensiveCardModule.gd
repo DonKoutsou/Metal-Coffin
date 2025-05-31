@@ -23,10 +23,15 @@ func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
 			StatAmm = Performer.GetDef()
 		
 		if (Stat.Method == DamageInfo.CalcuationMethod.ADD):
-			Dmg += Stat.GetDamage(Damage * max((TierUpgrade * Tier), 1), StatAmm)
+			Dmg += Stat.GetDamage(GetTieredDamage(Tier), StatAmm)
 		else : if (Stat.Method == DamageInfo.CalcuationMethod.MULTIPLY):
-			Dmg *= Stat.GetDamage(Damage * max((TierUpgrade * Tier), 1), StatAmm)
+			Dmg *= Stat.GetDamage(GetTieredDamage(Tier), StatAmm)
 	return Dmg
+
+func GetTieredDamage(Tier : int) -> float:
+	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
+		return Damage + (TierUpgrade * Tier)
+	return Damage * max((TierUpgrade * Tier), 1)
 
 func GetDesc(Tier : int) -> String:
 	var TextColors : Array[String]
@@ -60,7 +65,7 @@ func GetDesc(Tier : int) -> String:
 			else : if (DmgInfo.Method == DamageInfo.CalcuationMethod.MULTIPLY):
 				DamageString += "*"
 				
-		DamageString += "[color=#ffc315]{0} * [/color][{2}]{1}[/color]".format([var_to_str(snapped(Damage * max((TierUpgrade * Tier), 1), 0.1)).replace(".0", ""), StatText,TextColors[stat]])
+		DamageString += "[color=#ffc315]{0} * [/color][{2}]{1}[/color]".format([var_to_str(snapped(GetTieredDamage(Tier), 0.001)).replace(".0", ""), StatText,TextColors[stat]])
 		
 		
 	Desc += " for {0} damage".format([DamageString])
@@ -100,13 +105,13 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	for stat in ScaleStat:
 		var Dmg : float
 		if (stat.ScalingStat == CardModule.Stat.FIREPOWER):
-			Dmg = stat.GetDamage(Damage * max((TierUpgrade * Tier), 1), User.GetFirePower())
+			Dmg = stat.GetDamage(GetTieredDamage(Tier), User.GetFirePower())
 			
 		else : if (stat.ScalingStat == CardModule.Stat.SPEED):
-			Dmg = stat.GetDamage(Damage * max((TierUpgrade * Tier), 1), User.GetSpeed())
+			Dmg = stat.GetDamage(GetTieredDamage(Tier), User.GetSpeed())
 		
 		else : if (stat.ScalingStat == CardModule.Stat.WEIGHT):
-			Dmg = stat.GetDamage(Damage * max((TierUpgrade * Tier), 1), User.GetWeight())
+			Dmg = stat.GetDamage(GetTieredDamage(Tier), User.GetWeight())
 		
 		if (stat.Method == DamageInfo.CalcuationMethod.ADD):
 			FinalDamage += Dmg

@@ -34,6 +34,8 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	return "Debuff self\n[{3}] {0}[/color] - [color=#308a4d]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
 
 func GetDebuffDuration(Tier : int) -> int:
+	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
+		return roundi(DeBuffDuration + max((TierUpgrade * Tier), 1))
 	return roundi(DeBuffDuration * max((TierUpgrade * Tier), 1))
 	
 func GetDebuffAmmount(Tier : int) -> float:

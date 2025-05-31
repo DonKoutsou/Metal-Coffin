@@ -1,0 +1,318 @@
+[gd_scene load_steps=36 format=3 uid="uid://cuek7mm0smt8c"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p5w00"]
+[ext_resource type="Script" uid="uid://bn6vwqvcv5ebb" path="res://Scripts/CardFight/team_equipment_setup.gd" id="1_xpgoa"]
+[ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_72sdo"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="2_xpgoa"]
+[ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="3_72sdo"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_c6o7f"]
+[ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="4_em7yw"]
+[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://Scenes/Inventory/ItemDescriptor.tscn" id="4_mgcdj"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="4_ngrgh"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="5_xd74m"]
+[ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine.tres" id="6_yjy3u"]
+[ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="7_e7yxr"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="8_ex5u7"]
+[ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine.tres" id="9_mohxi"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="11_mgcdj"]
+[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="11_qtc88"]
+[ext_resource type="Resource" uid="uid://ds7viiermptuq" path="res://Resources/Items/Ammo/Long-RangeMissile.tres" id="12_7josv"]
+[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="12_8ng8e"]
+[ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="13_p8h5v"]
+[ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="14_r3kd6"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/UnguidedMissile.tres" id="15_wx6ro"]
+[ext_resource type="Resource" uid="uid://b0oy34hfyku06" path="res://Resources/Items/ShipParts/Coil/ShortCoil.tres" id="16_e7yxr"]
+[ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="17_ex5u7"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="18_mohxi"]
+[ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="19_powfm"]
+[ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/FuelTank2.tres" id="20_qtc88"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="21_wx6ro"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="22_mgcdj"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="23_8ng8e"]
+[ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="24_r3qv5"]
+[ext_resource type="Resource" uid="uid://bja0tfjegmyxx" path="res://Resources/Items/ShipParts/Shield/SGP-1 Ship Barrier.tres" id="27_r3qv5"]
+[ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="28_8jud7"]
+[ext_resource type="Resource" uid="uid://by5pd080gjivc" path="res://Resources/Items/ShipParts/Shield/SGP-3 Ship Barrier.tres" id="29_53ory"]
+
+[sub_resource type="Resource" id="Resource_r3qv5"]
+resource_local_to_scene = true
+script = ExtResource("4_c6o7f")
+ItemName = "Fire Suppression Unit"
+ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
+MaxStackCount = 99
+CardProviding = Array[ExtResource("11_mgcdj")]([ExtResource("12_8ng8e")])
+Tier = 0
+CanTransfer = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rew5m"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[node name="TeamEquipmentSetup" type="PanelContainer" node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "DescriptorPlace", "DeckUI", "PlayerCaptainLocation", "EnemyCaptainLocation", "CaptainName", "ItemCatalogue", "ItemParent")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_p5w00")
+script = ExtResource("1_xpgoa")
+InventoryBoxScene = ExtResource("2_72sdo")
+EngineInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer/Engines")
+SensorInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer3/Sensors")
+FuelTankInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer2/Fuel Tanks")
+WeaponInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer5/Weapons")
+ShieldInventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer4/Shields")
+InventoryBoxParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer6/Inventory")
+DescriptorPlace = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer")
+DeckUI = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/ShipDeck")
+ItemDescriptorScene = ExtResource("4_mgcdj")
+PlayerCaptainLocation = NodePath("HBoxContainer/VBoxContainer2/PanelContainer/ScrollContainer/VBoxContainer")
+EnemyCaptainLocation = NodePath("HBoxContainer/VBoxContainer3/PanelContainer/ScrollContainer/VBoxContainer")
+Equipment = Array[ExtResource("4_c6o7f")]([ExtResource("5_xd74m"), ExtResource("6_yjy3u"), ExtResource("7_e7yxr"), ExtResource("8_ex5u7"), ExtResource("9_mohxi"), SubResource("Resource_r3qv5"), ExtResource("11_qtc88"), ExtResource("12_7josv"), ExtResource("13_p8h5v"), ExtResource("14_r3kd6"), ExtResource("15_wx6ro"), ExtResource("16_e7yxr"), ExtResource("17_ex5u7"), ExtResource("18_mohxi"), ExtResource("19_powfm"), ExtResource("20_qtc88"), ExtResource("21_wx6ro"), ExtResource("22_mgcdj"), ExtResource("23_8ng8e"), ExtResource("24_r3qv5"), ExtResource("27_r3qv5"), ExtResource("28_8jud7"), ExtResource("29_53ory")])
+CaptainName = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label")
+CaptainB = ExtResource("4_em7yw")
+ItemCatalogue = NodePath("ItemCatalogue")
+ItemParent = NodePath("ItemCatalogue/ScrollContainer/HFlowContainer2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Player
+Captains"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_p5w00")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_p5w00")
+
+[node name="VBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Ship Parts"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rew5m")
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xpgoa")
+text = "Engines"
+
+[node name="Engines" type="GridContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xpgoa")
+text = "Fuel Tanks"
+
+[node name="Fuel Tanks" type="GridContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+columns = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xpgoa")
+text = "Sensors"
+
+[node name="Sensors" type="GridContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+columns = 3
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xpgoa")
+text = "Shields"
+
+[node name="Shields" type="GridContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+columns = 3
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer5"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xpgoa")
+text = "Weapons"
+
+[node name="Weapons" type="GridContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+columns = 3
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer6"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xpgoa")
+text = "Cargo"
+
+[node name="Inventory" type="GridContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/VBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+columns = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_p5w00")
+
+[node name="ShipDeck" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PanelContainer" node_paths=PackedStringArray("CardPosition")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_72sdo")
+CardScene = ExtResource("4_ngrgh")
+CardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/ShipDeck"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/v_separation = -151
+alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Enemy
+Captains"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_p5w00")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer3/PanelContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer3/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ItemCatalogue" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_p5w00")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemCatalogue"]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rew5m")
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="ItemCatalogue/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

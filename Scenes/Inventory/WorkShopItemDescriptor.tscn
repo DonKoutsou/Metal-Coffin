@@ -15,7 +15,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "RepairButton", "TransferButton", "UpgradeButton", "AddItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "RepairButton", "TransferButton", "UpgradeButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,6 +32,8 @@ RepairButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Rep
 TransferButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
 UpgradeButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
 AddItemButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/AddItem")
+IncreaseItemButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/AddMore")
+RemoveItemButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem")
 UpgradeLabel = NodePath("Control/HBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("Control/HBoxContainer/CardsSection")
 CardPlecement = NodePath("Control/HBoxContainer/CardsSection/CardPlecement")
@@ -96,6 +98,22 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Equip Item"
 
+[node name="AddMore" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_r68kf")
+text = "Add More"
+
+[node name="RemoveItem" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_r68kf")
+text = "Remove Item"
+
 [node name="Repair" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
 layout_mode = 2
@@ -140,6 +158,8 @@ alignment = 1
 [node name="Label" type="Label" parent="Control/HBoxContainer/CardsSection"]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Providing Cards"
 horizontal_alignment = 1
@@ -159,5 +179,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/AddItem" to="." method="_on_add_item_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/AddMore" to="." method="_on_add_more_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem" to="." method="_on_remove_item_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]

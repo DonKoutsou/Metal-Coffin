@@ -9,4 +9,6 @@ func GetDesc(Tier : int) -> String:
 	return "Adds [color=#ffc315]{0}[/color] Energy Reserve to self".format([GetEnergy(Tier)])
 
 func GetEnergy(Tier : int) -> int:
+	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
+		return roundi(ReserveAmmount + (Tier * TierUpgrade))
 	return roundi(ReserveAmmount * max((Tier * TierUpgrade), 1))

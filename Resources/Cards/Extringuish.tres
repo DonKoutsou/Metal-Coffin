@@ -12,6 +12,7 @@ CanBeUsedOnOther = false
 SelfUse = true
 AOE = false
 TierUpgrade = 1.0
+TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://civogvyka6amw"
 
 [resource]

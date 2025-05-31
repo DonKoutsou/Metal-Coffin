@@ -530,6 +530,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 	for f in Fleet:
 		var Ship = EnemyScene.instantiate() as HostileShip
 		Ship.Cpt = f
+
 		Ship.CurrentPort = Spot
 		Ship.Patrol = Patrol
 		Ship.Convoy = Convoy

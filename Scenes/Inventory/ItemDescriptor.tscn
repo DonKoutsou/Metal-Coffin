@@ -20,7 +20,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "RepairButton", "TransferButton", "UpgradeButton", "UpgradeLabel", "CardSection", "CardPlecement", "DescScroll") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "RepairButton", "TransferButton", "UpgradeButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement", "DescScroll") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,6 +36,9 @@ ItemDesc = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
 RepairButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair")
 TransferButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
 UpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
+AddItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddItem")
+IncreaseItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddMore")
+RemoveItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem")
 UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("VBoxContainer/HBoxContainer/CardsSection")
 CardPlecement = NodePath("VBoxContainer/HBoxContainer/CardsSection/CardPlecement")
@@ -86,6 +89,30 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Upgrade"
+
+[node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_fr5qk")
+text = "Equip Item"
+
+[node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_fr5qk")
+text = "Add More"
+
+[node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_fr5qk")
+text = "Remove Item"
 
 [node name="Repair" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
 visible = false
@@ -174,6 +201,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
 [connection signal="gui_input" from="VBoxContainer" to="." method="OnDescScrollInput"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddItem" to="." method="_on_add_item_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddMore" to="." method="_on_add_more_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem" to="." method="_on_remove_item_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Repair" to="." method="_on_repair_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Drop" to="." method="_on_drop_pressed"]

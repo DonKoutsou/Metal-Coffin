@@ -57,6 +57,7 @@ var ElintContacts : Dictionary
 var Detectable = true
 
 
+
 func _ready() -> void:
 	ElintShape.connect("area_entered", BodyEnteredElint)
 	ElintShape.connect("area_exited", BodyLeftElint)

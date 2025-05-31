@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://bja0tfjegmyxx"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_sh338"]
+[ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_qi5xg"]
+[ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="3_sh338"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_j87bq"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_loqhs"]
+
+[sub_resource type="Resource" id="Resource_x1aim"]
+script = ExtResource("4_j87bq")
+UpgradeName = 4
+UpgradeAmmount = 50.0
+PenaltyAmmount = 0.0
+CurrentValue = 50.0
+
+[resource]
+script = ExtResource("5_loqhs")
+Upgrades = Array[ExtResource("4_j87bq")]([SubResource("Resource_x1aim")])
+UpgradeVersion = ExtResource("3_sh338")
+UpgradeTime = 500.0
+UpgradeCost = 40000.0
+IsDamaged = false
+PartType = 5
+ItemName = "SGP-1 Ship Barrier"
+ItemDesc = "A reliable entry-level barrier system designed to provide essential protection against incoming threats. Utilizing a compact energy field generator, it effectively neutralizes missiles and deflects heavy caliber rounds, offering robust frontline defense for smaller vessels engaged in skirmishes."
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_sh338")]([ExtResource("2_qi5xg"), ExtResource("2_qi5xg")])
+Tier = 0
+CanTransfer = false

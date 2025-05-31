@@ -13,6 +13,8 @@ class_name ItemDescriptor
 @export var TransferButton : Button
 @export var UpgradeButton : Button
 @export var AddItemButton : Button
+@export var IncreaseItemButton : Button
+@export var RemoveItemButton : Button
 @export var UpgradeLabel : RichTextLabel
 @export var CardSection : Control
 @export var CardPlecement : Control
@@ -23,6 +25,9 @@ signal ItemUpgraded(Box : Inventory_Box)
 signal ItemDropped(Box : Inventory_Box)
 signal ItemRepaired(Box : Inventory_Box)
 signal ItemTransf(Box : Inventory_Box)
+signal ItemRemove(Box : Inventory_Box)
+signal ItemAdd(Box : Inventory_Box)
+signal ItemIncrease(Box : Inventory_Box)
 
 var DescribedContainer : Inventory_Box
 var DescribedItem : Item
@@ -186,6 +191,53 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 			card.Dissable()
 	else:
 		CardSection.visible = false
+
+func SetCagefightData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
+	set_physics_process(false)
+	DescribedContainer = Box
+	var It = DescribedContainer.GetContainedItem()
+	#ItemIcon.texture = It.ItemIcon
+	#ItemDesc.text = It.GetItemDesc()
+	ItemDesc.text = It.GetItemDesc()
+	#TransferButton.visible = It.CanTransfer
+	TransferButton.visible = false	
+	AddItemButton.visible = Box.IsEmpty()
+	UpgradeButton.visible = true
+	RemoveItemButton.visible = true
+	ItemName.text = It.ItemName
+	#Ship Parts
+	if (It is ShipPart):
+		IncreaseItemButton.visible = false
+		#ShipPartActions.visible = true
+		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
+		#if (CanUpgrade):
+		UpgradeLabel.visible = false
+		if (It.UpgradeVersion == null):
+			UpgradeButton.visible = false
+	else :
+		IncreaseItemButton.visible = Box.HasSpace()
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+	
+	#TODO Option doesent show when ship has upgraded weapons
+	if (It.CardProviding.size() > 0):
+		var CardsChecked : Array[CardStats]
+		for g in It.CardProviding:
+			if (CardsChecked.has(g)):
+				continue
+			CardsChecked.append(g)
+			
+			var CardS = g.duplicate() as CardStats
+			CardS.Tier = It.Tier
+			var card = CardScene.instantiate() as Card
+			
+			#if (It.CardOptionProviding != null):
+				#CardS.SelectedOption = It.CardOptionProviding
+			card.SetCardStats(CardS, It.CardProviding.count(g))
+			CardPlecement.add_child(card)
+			card.Dissable()
+	else:
+		CardSection.visible = false
 #func _on_use_pressed() -> void:
 	#PopUpManager.GetInstance().DoConfirm("Are you sure you want to use this item ?", "Use", ConfirmUse)
 
@@ -293,4 +345,12 @@ func OnDescScrollInput(event: InputEvent) -> void:
 
 
 func _on_add_item_pressed() -> void:
-	pass # Replace with function body.
+	ItemAdd.emit(DescribedContainer)
+
+
+func _on_remove_item_pressed() -> void:
+	ItemRemove.emit(DescribedContainer)
+
+
+func _on_add_more_pressed() -> void:
+	ItemIncrease.emit(DescribedContainer)

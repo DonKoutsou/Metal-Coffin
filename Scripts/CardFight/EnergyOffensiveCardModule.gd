@@ -8,12 +8,17 @@ func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
 	var Dmg : float
 	
 	if (StoredEnergy > 0):
-		Dmg = (Damage * max((TierUpgrade * Tier), 1)) * StoredEnergy
+		Dmg = (Damage * GetTieredDamage(Tier)) * StoredEnergy
 	else:
-		Dmg = (Damage * max((TierUpgrade * Tier), 1)) * Performer.Energy
+		Dmg = (Damage * GetTieredDamage(Tier)) * Performer.Energy
 
 	return Dmg
 
+func GetTieredDamage(Tier : int) -> float:
+	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
+		return Damage + (TierUpgrade * Tier)
+	return Damage * max((TierUpgrade * Tier), 1)
+	
 func GetDesc(Tier : int) -> String:
 	var Desc = ""
 	if (AOE):
@@ -21,7 +26,7 @@ func GetDesc(Tier : int) -> String:
 	else:
 		Desc = "Hit enemy"
 		
-	Desc += " for {0} * [color=#ffc315]Remaining Energy[/color] damage".format([var_to_str((Damage * max((TierUpgrade * Tier), 1)))])
+	Desc += " for {0} * [color=#ffc315]Remaining Energy[/color] damage".format([var_to_str((GetTieredDamage(Tier)))])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit : [/color]"
@@ -48,7 +53,7 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	else :
 		En = User.Energy
 		
-	Desc += " for\n[{0}]|[/color]{1}[{0}]|[/color] damage".format(["color=#ffc315", (Damage * max((TierUpgrade * Tier), 1)) * En])
+	Desc += " for\n[{0}]|[/color]{1}[{0}]|[/color] damage".format(["color=#ffc315", GetTieredDamage(Tier) * En])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit : [/color]"

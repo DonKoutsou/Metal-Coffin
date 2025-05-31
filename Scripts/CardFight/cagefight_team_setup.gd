@@ -8,6 +8,8 @@ class_name CageFight_TeamComp
 @export var CharacterButtonPlacement : Control
 @export var PlayerTeamPlacement : Control
 @export var EnemyTeamPlacement : Control
+@export var TeamComp : Control
+@export var EquipmentComp : TeamEquipmentSetup
 
 var FloatingButton : CaptainButton
 
@@ -35,15 +37,19 @@ func OnCptButtonPressed(Cpt : Captain) -> void:
 func OnCptReleased(Cpt : Captain) -> void:
 	FloatingButton.queue_free()
 	FloatingButton = null
+	
+	var NewCpt = Cpt.duplicate()
+	
 	var CharB = CharButton.instantiate() as CaptainButton
-	CharB.SetCpt(Cpt)
+	CharB.SetCpt(NewCpt)
 	CharB.OnShipSelected.connect(RemoveFromTeam.bind(CharB))
 	if (OverPlayerTeam):
+		
 		PlayerTeamPlacement.add_child(CharB)
-		PlayerTeam.append(Cpt)
+		PlayerTeam.append(NewCpt)
 	else : if (OverEnemyTeam):
 		EnemyTeamPlacement.add_child(CharB)
-		EnemyTeam.append(Cpt)
+		EnemyTeam.append(NewCpt)
 	else:
 		CharB.queue_free()
 
@@ -81,3 +87,19 @@ func _on_random_pressed() -> void:
 	PlayerTeam.clear()
 	EnemyTeam.clear()
 	TeamReady.emit(PlayerTeam, EnemyTeam)
+
+
+func _on_pick_items_pressed() -> void:
+	if (EquipmentComp.visible):
+		return
+	TeamComp.visible = false
+	EquipmentComp.visible = true
+	EquipmentComp.Init(PlayerTeam, EnemyTeam)
+
+
+func _on_team_comp_pressed() -> void:
+	if (TeamComp.visible):
+		return
+	TeamComp.visible = true
+	EquipmentComp.visible = false
+	EquipmentComp.Clear()

@@ -5,6 +5,7 @@ class_name CardModule
 
 @export var AOE : bool = false
 @export var TierUpgrade : float = 1
+@export var TierUpgradeMethod : DamageInfo.CalcuationMethod
 
 func GetDesc(Tier : int) -> String:
 	return ""

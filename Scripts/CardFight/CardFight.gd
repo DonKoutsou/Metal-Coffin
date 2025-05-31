@@ -372,7 +372,7 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		
 		HandAmmountLabel.visible = true
 		
-		await RestartCards()
+		RestartCards()
 		
 		PickingMoves = true
 	else:
@@ -394,6 +394,8 @@ func OnCardSelected(C : Card) -> bool:
 		ExternalUI.GetEnergyBar().NotifyNotEnough()
 		PopUpManager.GetInstance().DoFadeNotif("Not enough energy")
 		return false
+	
+	
 	
 	PlayerPerformingMove = true
 	
@@ -614,7 +616,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				if (SelectedAction.OnPerformModule is EnergyOffensiveCardModule):
 					var NewMod = SelectedAction.OnPerformModule.duplicate()
 					NewMod.StoredEnergy = Ship.Energy
-					UpdateEnergy(Ship, 0, true)
+					UpdateEnergy(Ship, 0, false)
 					SelectedAction.OnPerformModule = NewMod
 					
 				await DoCardSelectAnimation(SelectedAction, Ship, GetShipViz(Ship))
@@ -1412,13 +1414,16 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[int]:
 	var Targets : Array[int]
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
+		var Team = GetShipsTeam(User)
 		#If aoe pick all team either if enemy of player
 		if (Mod.AOE):
-			var Team = GetShipsTeam(User)
 			for g in Team:
 				Targets.append(GetTargetIndex(g))
 			if (!Mod.SelfUse):
 				Targets.erase(GetTargetIndex(User))
+				
+		else: if Team.size() == 1:
+			Targets.append(GetTargetIndex(Team[0]))
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Mod.CanBeUsedOnOther:
 			if (Friendly):
@@ -1609,10 +1614,10 @@ func HandleMultiDrawSpecificEnemy(Performer : BattleShipStats, Action : CardStat
 	PlaceCardInEnemyHand(Performer, Picked)
 
 func HandleDrawSpecificCardEnemy(Performer : BattleShipStats,Spawn : CardStats) -> void:
-	var D = EnemyDecks[GetCurrentShip()]
+	var D = EnemyDecks[Performer]
 	
 	if (D.DeckPile.size() <= 0):
-			await HandleShuffleDiscardedIntoDeck(D)
+		await HandleShuffleDiscardedIntoDeck(D)
 	
 	var HasCardInDeck : bool = false
 	
@@ -1625,7 +1630,7 @@ func HandleDrawSpecificCardEnemy(Performer : BattleShipStats,Spawn : CardStats) 
 			break
 	
 	if (!HasCardInDeck):
-			HandleShuffleDiscardedIntoDeck(D, false)
+		HandleShuffleDiscardedIntoDeck(D, false)
 	
 	D.DeckPile.erase(Spawn)
 	
@@ -1844,9 +1849,14 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false, S
 			var origshield = Ship.Shield
 			Ship.Shield = max(0,origshield - Amm)
 			Dmg -= origshield - Ship.Shield
+	
+	#only do fire roll when shield didt absorb all the damage
+	if (Dmg > 0 and TrySetFire()):
+		ToggleFireToShip(Ship, true)
+	
 	Ship.CurrentHull -= Dmg
-
-	if (CauseFire or TrySetFire()):
+	
+	if (CauseFire):
 		ToggleFireToShip(Ship, true)
 	
 	if (IsShipFriendly(Ship)):
@@ -2009,13 +2019,13 @@ func UpdateHandCards() -> void:
 
 
 func UpdateCardDescriptions(User : BattleShipStats):
-	ExternalUI.UpdateCardDesc(User)
-	for g : Card in SelectedCardPlecement.get_children():
+	var Cards = get_tree().get_nodes_in_group("Card")
+	for g : Card in Cards:
 		g.UpdateBattleStats(User)
 
 
 func UpdateShipStats(BattleS : BattleShipStats) -> void:
-	var Friendly = IsShipFriendly(BattleS)
+	#var Friendly = IsShipFriendly(BattleS)
 	var viz = GetShipViz(BattleS)
 	viz.UpdateStats(BattleS)
 	viz.ToggleDmgBuff(BattleS.FirePowerBuff > 1, BattleS.FirePowerBuff)
@@ -2084,7 +2094,7 @@ func NotifyFullHandStage2() -> void:
 
 
 func _on_deck_button_pressed() -> void:
-	if (SelectingTarget or EnemyPickingMove or PlayerPerformingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+	if (SelectingTarget or EnemyPickingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
 		ExternalUI.CardDrawFail()
 		return
 	
@@ -2210,6 +2220,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		
 		ExternalUI.ToggleHandInput(true)
 	
+	C.call_deferred("UpdateBattleStats", Performer)
 	UpdateHandAmount(PlDeck.Hand.size())
 	return true
 

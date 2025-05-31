@@ -11,6 +11,7 @@ script = ExtResource("2_0wgrv")
 CounterType = 0
 AOE = false
 TierUpgrade = 1.0
+TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://ddhital5xi55v"
 
 [resource]

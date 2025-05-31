@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=24 format=3 uid="uid://6n7k1biixh2y"]
+[gd_resource type="Resource" script_class="Captain" load_steps=30 format=3 uid="uid://6n7k1biixh2y"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_i0pba"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_en1ly"]
@@ -6,19 +6,19 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_4bm2g"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_syr2p"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_02u6x"]
-[ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile/Missile.tres" id="4_xxcc6"]
-[ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="5_lql11"]
-[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="6_i6t26"]
-[ext_resource type="Resource" uid="uid://b5dslr0dn6ox8" path="res://Resources/Cards/Missile/ClusterMissile.tres" id="7_1gqed"]
-[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="7_1opqv"]
-[ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="8_lhmlk"]
-[ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="10_gwtb6"]
-[ext_resource type="Resource" uid="uid://vk7sx0tcr6u8" path="res://Resources/Cards/MaxShieldOverCharge.tres" id="11_i6t26"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="8_i6t26"]
+[ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="10_lhmlk"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/UnguidedMissile.tres" id="11_gwtb6"]
+[ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="13_1opqv"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="13_i6t26"]
+[ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="13_yjsxi"]
+[ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/LargeEngine.tres" id="14_1opqv"]
+[ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="14_i6t26"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_en1ly")
 StatName = 2
-StatBase = 32.0
+StatBase = 0.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -26,7 +26,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_nn3aw"]
 script = ExtResource("2_en1ly")
 StatName = 6
-StatBase = 150.0
+StatBase = 90.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -34,7 +34,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_0a6up"]
 script = ExtResource("2_en1ly")
 StatName = 3
-StatBase = 3.0
+StatBase = 0.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -43,7 +43,7 @@ CurrentValue = 0.0
 resource_local_to_scene = true
 script = ExtResource("2_en1ly")
 StatName = 4
-StatBase = 160.0
+StatBase = 130.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -59,7 +59,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_rpqpm"]
 script = ExtResource("2_en1ly")
 StatName = 1
-StatBase = 15.0
+StatBase = 0.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -68,7 +68,7 @@ CurrentValue = 0.0
 resource_local_to_scene = true
 script = ExtResource("2_en1ly")
 StatName = 0
-StatBase = 500.0
+StatBase = 0.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -84,11 +84,59 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_jc4ql"]
 script = ExtResource("2_en1ly")
 StatName = 9
-StatBase = 140.0
+StatBase = 60.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_i6t26"]
+script = ExtResource("2_en1ly")
+StatName = 5
+StatBase = 3.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_1opqv"]
+script = ExtResource("2_en1ly")
+StatName = 10
+StatBase = 1.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_lhmlk"]
+script = ExtResource("2_en1ly")
+StatName = 11
+StatBase = 1.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_gwtb6"]
+script = ExtResource("2_en1ly")
+StatName = 12
+StatBase = 2.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_nxmgj"]
+script = ExtResource("2_en1ly")
+StatName = 13
+StatBase = 1.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_yjsxi"]
+script = ExtResource("2_en1ly")
+StatName = 14
+StatBase = 2.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
 
 [resource]
 resource_local_to_scene = true
@@ -97,20 +145,11 @@ CaptainName = "M2"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_i0pba")
 ShipIcon = ExtResource("3_02dye")
-CaptainStats = Array[ExtResource("2_en1ly")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_jc4ql")])
+CaptainStats = Array[ExtResource("2_en1ly")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_jc4ql"), SubResource("Resource_i6t26"), SubResource("Resource_1opqv"), SubResource("Resource_lhmlk"), SubResource("Resource_gwtb6"), SubResource("Resource_nxmgj"), SubResource("Resource_yjsxi")])
 ShipCallsign = "M2"
-StartingItems = Array[ExtResource("3_4bm2g")]([])
+StartingItems = Array[ExtResource("3_4bm2g")]([ExtResource("14_1opqv"), ExtResource("8_i6t26"), ExtResource("13_i6t26"), ExtResource("13_1opqv"), ExtResource("14_i6t26"), ExtResource("14_i6t26"), ExtResource("11_gwtb6"), ExtResource("11_gwtb6"), ExtResource("11_gwtb6"), ExtResource("11_gwtb6"), ExtResource("11_gwtb6"), ExtResource("11_gwtb6"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk")])
 CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 45000
 ProvidingCaptains = Array[ExtResource("4_02u6x")]([])
-Cards = Dictionary[ExtResource("3_syr2p"), int]({
-ExtResource("4_xxcc6"): 8,
-ExtResource("5_lql11"): 3,
-ExtResource("6_i6t26"): 2,
-ExtResource("7_1opqv"): 3,
-ExtResource("8_lhmlk"): 3,
-ExtResource("7_1gqed"): 4,
-ExtResource("10_gwtb6"): 2,
-ExtResource("11_i6t26"): 1
-})
+Cards = Dictionary[ExtResource("3_syr2p"), int]({})

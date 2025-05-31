@@ -11,6 +11,7 @@ script = ExtResource("3_wkh78")
 CardToSpawn = 0
 AOE = false
 TierUpgrade = 1.0
+TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://cla6ql5jn6sy5"
 
 [resource]

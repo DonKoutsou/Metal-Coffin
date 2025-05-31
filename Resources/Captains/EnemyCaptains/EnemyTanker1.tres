@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=28 format=3 uid="uid://cf4b4c1bssfsr"]
+[gd_resource type="Resource" script_class="Captain" load_steps=34 format=3 uid="uid://cf4b4c1bssfsr"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_xdjf5"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7cq8r"]
@@ -94,6 +94,54 @@ StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
+[sub_resource type="Resource" id="Resource_ob426"]
+script = ExtResource("2_7cq8r")
+StatName = 5
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_yq5fi"]
+script = ExtResource("2_7cq8r")
+StatName = 10
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_j18yl"]
+script = ExtResource("2_7cq8r")
+StatName = 11
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_60vrc"]
+script = ExtResource("2_7cq8r")
+StatName = 12
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_l6v3e"]
+script = ExtResource("2_7cq8r")
+StatName = 13
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_i0q8q"]
+script = ExtResource("2_7cq8r")
+StatName = 14
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_lum0o")
@@ -101,7 +149,7 @@ CaptainName = "T1"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_xdjf5")
 ShipIcon = ExtResource("12_3g1ov")
-CaptainStats = Array[ExtResource("2_7cq8r")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_48ymf")])
+CaptainStats = Array[ExtResource("2_7cq8r")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_48ymf"), SubResource("Resource_ob426"), SubResource("Resource_yq5fi"), SubResource("Resource_j18yl"), SubResource("Resource_60vrc"), SubResource("Resource_l6v3e"), SubResource("Resource_i0q8q")])
 ShipCallsign = "T1"
 StartingItems = Array[ExtResource("3_h2as2")]([])
 CurrentPort = ""

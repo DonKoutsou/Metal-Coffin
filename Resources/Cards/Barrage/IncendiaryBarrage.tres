@@ -24,6 +24,7 @@ OnSuccesfullAtackModules = Array[ExtResource("3_0a432")]([])
 SkipShield = false
 AOE = false
 TierUpgrade = 1.2
+TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]

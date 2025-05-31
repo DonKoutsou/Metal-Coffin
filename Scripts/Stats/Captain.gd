@@ -28,6 +28,15 @@ func _init() -> void:
 	#call_deferred("MapStats")
 	if (OS.is_debug_build() and CheckForErrors):
 		call_deferred("CheckForIssues")
+	#call_deferred("SetUpStats")
+
+func SetUpStats() -> void:
+	for g in StartingItems:
+		if (g is ShipPart):
+			for st : ShipPartUpgrade in g.Upgrades:
+				_GetStat(st.UpgradeName).AddShipPartBuff(st.UpgradeAmmount)
+				_GetStat(st.UpgradeName).AddShipPartPenalty(st.PenaltyAmmount)
+				FullyRefilStat(st.UpgradeName)
 
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
@@ -63,7 +72,8 @@ func GetBattleStats() -> BattleShipStats:
 			c.append(C)
 			
 	for g in Cards:
-		c.append(g)
+		for z in Cards[g]:
+			c.append(g)
 		
 	stats.Hull = Hull
 	stats.CurrentHull = Hull
@@ -73,6 +83,35 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Cards = c
 	stats.Convoy = false
 	return stats
+
+func GetCards() -> Dictionary[CardStats, int]:
+	var c : Dictionary[CardStats, int]
+	for g in StartingItems:
+		for z in g.CardProviding:
+			var C = z.duplicate() as CardStats
+			C.Tier = g.Tier
+			
+			var Added = false
+			
+			for Ca : CardStats in c.keys():
+				if (Ca.IsSame(C)):
+					c[Ca] += 1
+					Added = true
+					break
+			if (!Added):
+				c[C] = 1
+			
+	for g in Cards:
+		var Added = false
+		for Ca : CardStats in c.keys():
+			if (Ca.IsSame(g)):
+				c[Ca] += 1
+				Added = true
+				break
+		if (!Added):
+			c[g] = 1
+
+	return c
 
 func CheckForIssues() -> void:
 	var Itms : Array[Item] = []
@@ -113,8 +152,11 @@ func CopyStats(Cpt : Captain) -> void:
 	ShipCallsign = Cpt.ShipCallsign
 	Cards = Cpt.Cards
 	ProvidingFunds = Cpt.ProvidingFunds
+	StartingItems = Cpt.StartingItems
 	for g in Cpt.CaptainStats:
 		CaptainStats.append(g.duplicate(true))
+	SetUpStats()
+	
 		
 func IsResourceFull(StatN : STAT_CONST.STATS) -> bool:
 	var stat = _GetStat(StatN)

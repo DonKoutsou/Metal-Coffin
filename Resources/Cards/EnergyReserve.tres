@@ -12,7 +12,8 @@ ReserveAmmount = 3
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = false
-TierUpgrade = 1.2
+TierUpgrade = 1.0
+TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://bchkyl36yo5cq"
 
 [resource]

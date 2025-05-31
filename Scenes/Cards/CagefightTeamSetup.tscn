@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dc1y0qs5n466n"]
+[gd_scene load_steps=48 format=3 uid="uid://dc1y0qs5n466n"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_dj5ey"]
 [ext_resource type="Script" uid="uid://c18s5swteqr3n" path="res://Scripts/CardFight/cagefight_team_setup.gd" id="1_enhfx"]
@@ -21,18 +21,43 @@
 [ext_resource type="Resource" uid="uid://6n7k1biixh2y" path="res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier2.tres" id="17_bwix1"]
 [ext_resource type="Resource" uid="uid://dl7x2cmre3owx" path="res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier3.tres" id="18_ap8tj"]
 [ext_resource type="Resource" uid="uid://3hahntw45cog" path="res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier4.tres" id="19_uhrxp"]
-[ext_resource type="Resource" uid="uid://y1ohb6oss4v0" path="res://Resources/Captains/EnemyCaptains/EnemyRadarShip1.tres" id="20_rndrq"]
-[ext_resource type="Resource" uid="uid://dakrxyltg3y8x" path="res://Resources/Captains/EnemyCaptains/EnemyRadarShip2.tres" id="21_kwn1m"]
-[ext_resource type="Resource" uid="uid://bfqcga4l0b5l5" path="res://Resources/Captains/EnemyCaptains/EnemyRadarShip3.tres" id="22_u0mhj"]
-[ext_resource type="Resource" uid="uid://bvv346qqjamj6" path="res://Resources/Captains/EnemyCaptains/EnemyRadarShip4.tres" id="23_a3j27"]
-[ext_resource type="Resource" uid="uid://cf4b4c1bssfsr" path="res://Resources/Captains/EnemyCaptains/EnemyTanker1.tres" id="24_uosmh"]
-[ext_resource type="Resource" uid="uid://wdewnahxdu77" path="res://Resources/Captains/EnemyCaptains/EnemyTanker2.tres" id="25_x7xa8"]
-[ext_resource type="Resource" uid="uid://b4smeavm0axw3" path="res://Resources/Captains/EnemyCaptains/EnemyTanker3.tres" id="26_kavl2"]
-[ext_resource type="Resource" uid="uid://cvk1mvgokhtus" path="res://Resources/Captains/EnemyCaptains/EnemyTanker4.tres" id="27_l2hbq"]
 [ext_resource type="Resource" uid="uid://cta70yn02gqg5" path="res://Resources/Captains/EnemyCaptains/LandEnemyFireship1.tres" id="28_8yqr3"]
 [ext_resource type="Resource" uid="uid://8nr6ss128jfn" path="res://Resources/Captains/EnemyCaptains/LandEnemyFireship2.tres" id="29_wis72"]
+[ext_resource type="PackedScene" uid="uid://cuek7mm0smt8c" path="res://Scenes/Cards/team_equipment_setup.tscn" id="32_5o5j4"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="33_ovnka"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="34_pefvv"]
+[ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine.tres" id="35_0skxp"]
+[ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="36_8pnpl"]
+[ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="37_2ldnj"]
+[ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine.tres" id="38_0gvoa"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="39_4wtn2"]
+[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="40_msu23"]
+[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="41_1dko6"]
+[ext_resource type="Resource" uid="uid://ds7viiermptuq" path="res://Resources/Items/Ammo/Long-RangeMissile.tres" id="42_vro0t"]
+[ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="43_r37ip"]
+[ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="44_k4l7a"]
+[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/UnguidedMissile.tres" id="45_ej3ya"]
+[ext_resource type="Resource" uid="uid://b0oy34hfyku06" path="res://Resources/Items/ShipParts/Coil/ShortCoil.tres" id="46_8unkc"]
+[ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="47_03j4m"]
+[ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="48_mscvp"]
+[ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="49_hswng"]
+[ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/FuelTank2.tres" id="50_clvof"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="51_fw80n"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="52_a07pj"]
+[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="53_dmw0h"]
+[ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="54_rrhts"]
 
-[node name="CagefightTeamComp" type="Control" node_paths=PackedStringArray("CharacterButtonPlacement", "PlayerTeamPlacement", "EnemyTeamPlacement")]
+[sub_resource type="Resource" id="Resource_kavl2"]
+resource_local_to_scene = true
+script = ExtResource("33_ovnka")
+ItemName = "Fire Suppression Unit"
+ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
+MaxStackCount = 99
+CardProviding = Array[ExtResource("39_4wtn2")]([ExtResource("40_msu23")])
+Tier = 0
+CanTransfer = true
+
+[node name="CagefightTeamComp" type="Control" node_paths=PackedStringArray("CharacterButtonPlacement", "PlayerTeamPlacement", "EnemyTeamPlacement", "TeamComp", "EquipmentComp")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,10 +66,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_enhfx")
 CharButton = ExtResource("1_ogj7o")
-PossibleCharacters = Array[ExtResource("3_dy7ir")]([ExtResource("4_vg4g5"), ExtResource("5_qxf1y"), ExtResource("6_pu3eg"), ExtResource("7_xqytu"), ExtResource("8_xrsg7"), ExtResource("9_gnfpf"), ExtResource("10_4dtwb"), ExtResource("11_nxwre"), ExtResource("12_5o5j4"), ExtResource("13_rew5m"), ExtResource("14_x78ca"), ExtResource("15_ghkrv"), ExtResource("16_0k8o1"), ExtResource("17_bwix1"), ExtResource("18_ap8tj"), ExtResource("19_uhrxp"), ExtResource("20_rndrq"), ExtResource("21_kwn1m"), ExtResource("22_u0mhj"), ExtResource("23_a3j27"), ExtResource("24_uosmh"), ExtResource("25_x7xa8"), ExtResource("26_kavl2"), ExtResource("27_l2hbq"), ExtResource("28_8yqr3"), ExtResource("29_wis72")])
-CharacterButtonPlacement = NodePath("PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/ScrollContainer/VBoxContainer")
-PlayerTeamPlacement = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PlayerTeam/VBoxContainer/CardHandContainer")
-EnemyTeamPlacement = NodePath("PanelContainer/HBoxContainer/VBoxContainer/EnemyTeam/VBoxContainer/CardHandContainer")
+PossibleCharacters = Array[ExtResource("3_dy7ir")]([ExtResource("4_vg4g5"), ExtResource("5_qxf1y"), ExtResource("6_pu3eg"), ExtResource("7_xqytu"), ExtResource("8_xrsg7"), ExtResource("9_gnfpf"), ExtResource("10_4dtwb"), ExtResource("11_nxwre"), ExtResource("12_5o5j4"), ExtResource("13_rew5m"), ExtResource("14_x78ca"), ExtResource("15_ghkrv"), ExtResource("16_0k8o1"), ExtResource("17_bwix1"), ExtResource("18_ap8tj"), ExtResource("19_uhrxp"), ExtResource("28_8yqr3"), ExtResource("29_wis72")])
+CharacterButtonPlacement = NodePath("PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2/PanelContainer/ScrollContainer/VBoxContainer")
+PlayerTeamPlacement = NodePath("PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam/VBoxContainer/CardHandContainer")
+EnemyTeamPlacement = NodePath("PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam/VBoxContainer/CardHandContainer")
+TeamComp = NodePath("PanelContainer/VBoxContainer/TeamCompSetup")
+EquipmentComp = NodePath("PanelContainer/VBoxContainer/TeamEquipmentSetup")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -53,31 +80,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_dj5ey")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="TeamCompSetup" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PlayerTeam" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerTeam" type="PanelContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_dj5ey")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PlayerTeam"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/PlayerTeam/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Player Team"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CardHandContainer" type="Container" parent="PanelContainer/HBoxContainer/VBoxContainer/PlayerTeam/VBoxContainer"]
+[node name="CardHandContainer" type="Container" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam/VBoxContainer"]
 custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 size_flags_vertical = 6
@@ -85,66 +117,93 @@ mouse_filter = 2
 script = ExtResource("3_k7fqh")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="EnemyTeam" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="EnemyTeam" type="PanelContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_dj5ey")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/EnemyTeam"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/EnemyTeam/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Enemy Team"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CardHandContainer" type="Container" parent="PanelContainer/HBoxContainer/VBoxContainer/EnemyTeam/VBoxContainer"]
+[node name="CardHandContainer" type="Container" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam/VBoxContainer"]
 custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 size_flags_vertical = 6
 script = ExtResource("3_k7fqh")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Random" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
-text = "Pick Random"
-
-[node name="Ready" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
-text = "Start Fight"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Available
+Captains"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_dj5ey")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2/PanelContainer"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2/PanelContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 alignment = 1
 
-[connection signal="mouse_entered" from="PanelContainer/HBoxContainer/VBoxContainer/PlayerTeam" to="." method="_on_player_team_mouse_entered"]
-[connection signal="mouse_exited" from="PanelContainer/HBoxContainer/VBoxContainer/PlayerTeam" to="." method="_on_player_team_mouse_exited"]
-[connection signal="mouse_entered" from="PanelContainer/HBoxContainer/VBoxContainer/EnemyTeam" to="." method="_on_enemy_team_mouse_entered"]
-[connection signal="mouse_exited" from="PanelContainer/HBoxContainer/VBoxContainer/EnemyTeam" to="." method="_on_enemy_team_mouse_exited"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/Random" to="." method="_on_random_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/Ready" to="." method="_on_ready_pressed"]
+[node name="TeamEquipmentSetup" parent="PanelContainer/VBoxContainer" instance=ExtResource("32_5o5j4")]
+visible = false
+layout_mode = 2
+Equipment = Array[ExtResource("33_ovnka")]([ExtResource("34_pefvv"), ExtResource("35_0skxp"), ExtResource("36_8pnpl"), ExtResource("37_2ldnj"), ExtResource("38_0gvoa"), SubResource("Resource_kavl2"), ExtResource("41_1dko6"), ExtResource("42_vro0t"), ExtResource("43_r37ip"), ExtResource("44_k4l7a"), ExtResource("45_ej3ya"), ExtResource("46_8unkc"), ExtResource("47_03j4m"), ExtResource("48_mscvp"), ExtResource("49_hswng"), ExtResource("50_clvof"), ExtResource("51_fw80n"), ExtResource("52_a07pj"), ExtResource("53_dmw0h"), ExtResource("54_rrhts")])
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Random" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Pick Random"
+
+[node name="TeamComp" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Team Composition"
+
+[node name="PickItems" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Pick Items"
+
+[node name="Ready" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Start Fight"
+
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam" to="." method="_on_player_team_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam" to="." method="_on_player_team_mouse_exited"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam" to="." method="_on_enemy_team_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam" to="." method="_on_enemy_team_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Random" to="." method="_on_random_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/TeamComp" to="." method="_on_team_comp_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/PickItems" to="." method="_on_pick_items_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Ready" to="." method="_on_ready_pressed"]

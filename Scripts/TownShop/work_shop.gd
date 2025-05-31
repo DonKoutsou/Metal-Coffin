@@ -154,6 +154,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 		Descriptor.SetWorkShopData(Box, HasUp, CurrentShip.Cpt)
 		#Descriptor.connect("ItemUsed", UseItem)
 		Descriptor.connect("ItemUpgraded", UpgradeItem)
+		
 		#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
 		#Descriptor.connect("ItemTransf", ItemTranfer)
 	DescriptorPlace.add_child(Descriptor)

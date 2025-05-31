@@ -64,7 +64,7 @@ func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 
-	#MapPointerManager.GetInstance().AddShip(self, false)
+	MapPointerManager.GetInstance().AddShip(self, false)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	visible = NewZoom > 0.5
@@ -567,11 +567,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Funds = Cpt.ProvidingFunds
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.Convoy = Convoy
-	var CList : Array[CardStats]
-	for g in Cpt.Cards:
-		for z in Cpt.Cards[g]:
-			CList.append(g)
-	stats.Cards = CList
+	stats.Cards = Cpt.GetCards()
 	return stats
 	
 func GetShipName() -> String:
@@ -615,6 +611,7 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 	Convoy = Dat.Convoy
 	#positioning happens on script wich respawns ship
 	#global_position = Dat.Position
+	
 	Cpt = Dat.Cpt
 	ShipName = Dat.ShipName
 	Destroyed = Dat.Destroyed

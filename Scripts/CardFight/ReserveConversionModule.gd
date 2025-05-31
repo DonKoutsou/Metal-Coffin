@@ -13,4 +13,6 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	return "Coverts remaining [color=#ffc315]Reserve[/color] to [color=#ffc315]{0} Energy[/color]".format([GetConversionAmmount(User.EnergyReserves, Tier)])
 
 func GetConversionAmmount(ReserveAmm : int, Tier : int) -> int:
+	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
+		return roundi(ReserveAmm + (ConversionMultiplication.sample(ReserveAmm) * (TierUpgrade * Tier)))
 	return roundi(ReserveAmm * (ConversionMultiplication.sample(ReserveAmm) * max((TierUpgrade * Tier), 1)))

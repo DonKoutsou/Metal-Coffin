@@ -24,7 +24,11 @@ func GetDesc(Tier : int) -> String:
 	return "Buff self\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
 
 func GetBuffDuration(Tier : int) -> int:
+	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
+		return roundi(BuffDuration + (TierUpgrade * Tier))
 	return roundi(BuffDuration * max((TierUpgrade * Tier), 1))
 	
 func GetBuffAmmount(Tier : int) -> float:
+	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
+		return BuffAmmount +(TierUpgrade * Tier)
 	return BuffAmmount * max((TierUpgrade * Tier), 1)

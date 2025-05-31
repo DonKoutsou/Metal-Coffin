@@ -12,6 +12,7 @@ DrawAmmount = 3
 DiscardAmmount = 1
 AOE = false
 TierUpgrade = 1.0
+TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://dlb0lqk4l5qdq"
 
 [resource]
