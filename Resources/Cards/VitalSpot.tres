@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://cnet3bjwptmp7"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://cnet3bjwptmp7"]
 
 [ext_resource type="Texture2D" uid="uid://d3mqr34v3ispw" path="res://Assets/Cards/VitalSpot.png" id="1_8d88m"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_612g0"]
 [ext_resource type="Script" uid="uid://bu2ciutqs3t1b" path="res://Scripts/CardFight/DeBuffEnemyCardModule.gd" id="3_8d88m"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_612g0"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_k3r12"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_j0buw"]
 
 [sub_resource type="Resource" id="Resource_612g0"]
@@ -31,7 +30,6 @@ CardDescriptionOverride = ""
 Energy = 3
 AllowDuplicates = true
 Consume = false
-RequiredPart = Array[ExtResource("4_k3r12")]([])
 OnUseModules = Array[ExtResource("2_612g0")]([SubResource("Resource_612g0")])
 Type = 0
 WeapT = 0

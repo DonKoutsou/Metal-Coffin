@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AmmoItem" load_steps=4 format=3 uid="uid://bcatusfs5ku3"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_o2jiq"]
+[ext_resource type="Resource" uid="uid://nq8mf6tl53fc" path="res://Resources/Cards/Barrage/LaserGuidedBarrage100mm.tres" id="2_o2jiq"]
+[ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_1mng2"]
+
+[resource]
+script = ExtResource("3_1mng2")
+WType = 1
+ItemName = "Proximity Fuse Magazine"
+ItemDesc = "This magazine contains rounds equipped with proximity fuses, designed to detonate upon nearing a target. The sensor technology ensures activation within a specified range, providing effective engagement without requiring direct contact. Suitable for various combat scenarios, this ammunition type enhances hit probability against fast-moving targets."
+MaxStackCount = 99
+CardProviding = Array[ExtResource("1_o2jiq")]([ExtResource("2_o2jiq")])
+Tier = 0
+CanTransfer = true

@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://c8reou7hykm77"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://c8reou7hykm77"]
 
 [ext_resource type="Texture2D" uid="uid://dep7qqw6mipy7" path="res://Assets/Cards/EnergyConvert.png" id="1_4d6nm"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_7qc3q"]
 [ext_resource type="Script" uid="uid://b3ik3ixt10qr1" path="res://Scripts/CardFight/ReserveConversionModule.gd" id="3_4d6nm"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_q77k5"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_vyo1w"]
 
 [sub_resource type="Curve" id="Curve_4d6nm"]
@@ -29,7 +28,6 @@ CardDescriptionOverride = ""
 Energy = 0
 AllowDuplicates = true
 Consume = false
-RequiredPart = Array[ExtResource("4_q77k5")]([])
 OnUseModules = Array[ExtResource("2_7qc3q")]([SubResource("Resource_7qc3q")])
 Type = 2
 WeapT = 0

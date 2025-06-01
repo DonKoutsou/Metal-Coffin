@@ -386,7 +386,7 @@ func CheckPlecement(pos : Vector2, places : Array[Town]) -> bool:
 		if (pos.distance_to(places[z].Pos) < 1500):
 			TooClose = true
 			break
-		if (pos.distance_to(places[z].Pos) < 8000):
+		if (pos.distance_to(places[z].Pos) < 5000):
 			TooFar = false
 
 	return !TooClose and !TooFar

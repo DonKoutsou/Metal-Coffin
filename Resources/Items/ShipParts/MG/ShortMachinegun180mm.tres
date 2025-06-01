@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=9 format=3 uid="uid://8kvrf75vxyp3"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_70g5e"]
+[ext_resource type="Resource" uid="uid://dynb44dpvv7bf" path="res://Resources/Cards/Barrage/Barrage180mm.tres" id="2_70g5e"]
+[ext_resource type="Resource" uid="uid://bvqg5vwgfx247" path="res://Resources/Cards/Barrage/DrawRandomBarrage180.tres" id="3_70g5e"]
+[ext_resource type="Resource" uid="uid://ts2dsdg3gbw8" path="res://Resources/Cards/Barrage/EngineShot.tres" id="4_4rjku"]
+[ext_resource type="Resource" uid="uid://ckmgfamc421e2" path="res://Resources/Items/ShipParts/MG/MediumMachinegun180mm.tres" id="4_70g5e"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_dexum"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="6_3qpgv"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("5_dexum")
+UpgradeName = 3
+UpgradeAmmount = 1.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("6_3qpgv")
+WType = 4
+Upgrades = Array[ExtResource("5_dexum")]([SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("4_70g5e")
+UpgradeTime = 600.0
+UpgradeCost = 25000.0
+IsDamaged = false
+PartType = 4
+ItemName = "KPH -02 \"Kokti\" 180mm"
+ItemDesc = "a basic machine gun turret designed for straightforward, high-rate-of-fire engagements. It offers standard round delivery with fundamental targeting precision, providing ships with an entry-level solution for close-range defense and suppression."
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_70g5e")]([ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("3_70g5e"), ExtResource("3_70g5e"), ExtResource("4_4rjku")])
+Tier = 0
+CanTransfer = false

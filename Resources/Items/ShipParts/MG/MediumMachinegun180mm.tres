@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=10 format=3 uid="uid://ckmgfamc421e2"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_diqh2"]
+[ext_resource type="Resource" uid="uid://dynb44dpvv7bf" path="res://Resources/Cards/Barrage/Barrage180mm.tres" id="2_diqh2"]
+[ext_resource type="Resource" uid="uid://b25yneeytw20f" path="res://Resources/Cards/Barrage/DrawRandomOffensive.tres" id="3_7vyp2"]
+[ext_resource type="Resource" uid="uid://bvqg5vwgfx247" path="res://Resources/Cards/Barrage/DrawRandomBarrage180.tres" id="4_diqh2"]
+[ext_resource type="Resource" uid="uid://ts2dsdg3gbw8" path="res://Resources/Cards/Barrage/EngineShot.tres" id="5_diqh2"]
+[ext_resource type="Resource" uid="uid://b38opwgqmdpro" path="res://Resources/Items/ShipParts/MG/LargeMachinegun180mm.tres" id="6_diqh2"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="7_gd467"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="8_7ajd8"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("7_gd467")
+UpgradeName = 3
+UpgradeAmmount = 2.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("8_7ajd8")
+WType = 4
+Upgrades = Array[ExtResource("7_gd467")]([SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("6_diqh2")
+UpgradeTime = 800.0
+UpgradeCost = 40000.0
+IsDamaged = false
+PartType = 4
+ItemName = "KPH -04 \"Pharo\" 180mm"
+ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_diqh2")]([ExtResource("2_diqh2"), ExtResource("2_diqh2"), ExtResource("2_diqh2"), ExtResource("2_diqh2"), ExtResource("2_diqh2"), ExtResource("2_diqh2"), ExtResource("2_diqh2"), ExtResource("2_diqh2"), ExtResource("3_7vyp2"), ExtResource("3_7vyp2"), ExtResource("4_diqh2"), ExtResource("4_diqh2"), ExtResource("4_diqh2"), ExtResource("5_diqh2"), ExtResource("5_diqh2")])
+Tier = 1
+CanTransfer = false

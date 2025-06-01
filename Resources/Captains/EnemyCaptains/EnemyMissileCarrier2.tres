@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=29 format=3 uid="uid://6n7k1biixh2y"]
+[gd_resource type="Resource" script_class="Captain" load_steps=30 format=3 uid="uid://6n7k1biixh2y"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_i0pba"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_en1ly"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="13_yjsxi"]
 [ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/LargeEngine.tres" id="14_1opqv"]
 [ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="14_i6t26"]
+[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="14_lhmlk"]
 
 [sub_resource type="Resource" id="Resource_k7kt8"]
 script = ExtResource("2_en1ly")
@@ -146,7 +147,7 @@ CaptainPortrait = ExtResource("1_i0pba")
 ShipIcon = ExtResource("3_02dye")
 CaptainStats = Array[ExtResource("2_en1ly")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_jc4ql"), SubResource("Resource_i6t26"), SubResource("Resource_1opqv"), SubResource("Resource_lhmlk"), SubResource("Resource_gwtb6"), SubResource("Resource_nxmgj"), SubResource("Resource_yjsxi")])
 ShipCallsign = "M2"
-StartingItems = Array[ExtResource("3_4bm2g")]([ExtResource("14_1opqv"), ExtResource("8_i6t26"), ExtResource("13_i6t26"), ExtResource("13_1opqv"), ExtResource("14_i6t26"), ExtResource("14_i6t26"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk")])
+StartingItems = Array[ExtResource("3_4bm2g")]([ExtResource("14_1opqv"), ExtResource("8_i6t26"), ExtResource("13_i6t26"), ExtResource("13_1opqv"), ExtResource("14_i6t26"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("14_lhmlk")])
 CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 45000

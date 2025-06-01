@@ -11,9 +11,6 @@ class_name CardStats
 @export var AllowDuplicates : bool
 ## Consume this card after use?
 @export var Consume : bool = false
-## Part that needs to be in inventory to be able to see this card in fight
-@export var RequiredPart : Array[ShipPart]
-
 @export var OnUseModules : Array[CardModule]
 @export var OnPerformModule : CardModule
 @export var Type : CardType
@@ -66,6 +63,7 @@ enum WeaponType{
 	MG100mm,
 	ML,
 	COIL,
+	MG180mm,
 }
 
 enum CardType {

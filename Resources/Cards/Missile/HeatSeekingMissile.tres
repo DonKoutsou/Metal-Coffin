@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=9 format=3 uid="uid://7uk8xj2yft8v"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://7uk8xj2yft8v"]
 
 [ext_resource type="Texture2D" uid="uid://de7vcabckg00m" path="res://Assets/Cards/MissileHeatSeeking.png" id="1_ett3l"]
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="2_ett3l"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_mo274"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_nvkw5"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_8vdhr"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_ibr0y"]
 
 [sub_resource type="Resource" id="Resource_nvkw5"]
@@ -17,7 +16,7 @@ metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 [sub_resource type="Resource" id="Resource_mo274"]
 script = ExtResource("2_ett3l")
 AtackType = 1
-Damage = 10.0
+Damage = 14.0
 ScaleStat = Array[ExtResource("3_mo274")]([SubResource("Resource_nvkw5")])
 CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("3_nvkw5")]([])
@@ -32,10 +31,9 @@ script = ExtResource("4_ibr0y")
 Icon = ExtResource("1_ett3l")
 CardName = "Heat Seeking Missile"
 CardDescriptionOverride = ""
-Energy = 3
+Energy = 4
 AllowDuplicates = true
 Consume = true
-RequiredPart = Array[ExtResource("4_8vdhr")]([])
 OnUseModules = Array[ExtResource("3_nvkw5")]([])
 OnPerformModule = SubResource("Resource_mo274")
 Type = 0

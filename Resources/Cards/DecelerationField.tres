@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://c2xdu0g24g84o"]
+
+[ext_resource type="Texture2D" uid="uid://chpdhvnha7hih" path="res://Assets/Cards/DecelerationField.png" id="1_432dy"]
+[ext_resource type="Script" uid="uid://cal2o02w6vol6" path="res://Scripts/CardFight/DamageReductionCardModule.gd" id="2_dcwc3"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_x7h2e"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_ftjex"]
+
+[sub_resource type="Resource" id="Resource_4hc72"]
+script = ExtResource("2_dcwc3")
+CounterType = 3
+ReductionPercent = 0.8
+AOE = false
+TierUpgrade = 1.0
+TierUpgradeMethod = 0
+metadata/_custom_type_script = "uid://cal2o02w6vol6"
+
+[resource]
+script = ExtResource("4_ftjex")
+Icon = ExtResource("1_432dy")
+CardName = "Deceleration Field"
+CardDescriptionOverride = ""
+Energy = 1
+AllowDuplicates = true
+Consume = false
+OnUseModules = Array[ExtResource("3_x7h2e")]([])
+OnPerformModule = SubResource("Resource_4hc72")
+Type = 1
+WeapT = 0

@@ -22,6 +22,8 @@ var BuffText : String
 
 var Fin : bool = false
 
+var DamageReductionCard : Card
+
 func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Dictionary[BattleShipStats, Dictionary], OriginShip : BattleShipStats, FriendShip : bool) -> void:
 	fr = FriendShip
 	
@@ -40,36 +42,43 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 	await tw.finished
 	
 	for g in DeffenceList.values().size():
-			var Def = DeffenceList.values()[g]["Def"]
+			var Def = DeffenceList.values()[g]["Def"] as CardStats
 			var Viz = DeffenceList.values()[g]["Viz"] as Control
 			var DefC
 			if (Def != null):
-				DefC = CardScene.instantiate() as Card
-				DefC.Dissable(true)
+				
+				var DefCard = CardScene.instantiate() as Card
+				DefCard.Dissable(true)
 				#var Opts2 : Array[CardOption] = []
 				
-				DefC.SetCardBattleStats(DeffenceList.keys()[g], Def)
-				add_child(DefC)
+				DefCard.SetCardBattleStats(DeffenceList.keys()[g], Def)
+				add_child(DefCard)
 				if (!FriendShip):
 					var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
-					DefC.global_position = pos
+					DefCard.global_position = pos
 				else:
 					var pos = Vector2(Viz.global_position.x - 200, Viz.global_position.y - (Viz.size.y / 2))
-					DefC.global_position = pos
+					DefCard.global_position = pos
 				#DefC.size_flags_horizontal = Control.SIZE_EXPAND
-				DefC.show_behind_parent = true
-				DefC.modulate = Color(1,1,1,0)
+				DefCard.show_behind_parent = true
+				DefCard.modulate = Color(1,1,1,0)
 				
 				var tw2 = create_tween()
-				tw2.tween_property(DefC, "modulate", Color(1,1,1,1), 0.2)
+				tw2.tween_property(DefCard, "modulate", Color(1,1,1,1), 0.2)
+				
+				var DefMod = Def.OnPerformModule
+				if (DefMod is CounterCardModule):
+					DefC = DefCard
+				else:
+					DamageReductionCard = DefCard
 			
 			call_deferred("SpawnVisual", Viz, AttackCard, DefC)
 			await wait(0.2)
 			
-	AttackCard.KillCard(0.5, false)
+	AttackCard.KillCard(0.35, false)
 
 func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card) -> void:
-	await wait (0.15)
+	#await wait (0.15)
 	
 	AtackCardDestroyed.emit(AtackCard.global_position + (AtackCard.size / 2))
 	var Visual = AtackVisual.instantiate() as MissileViz
@@ -142,7 +151,9 @@ func TweenEnded(Target : Control, DeffenceCard : Card) -> void:
 		d.connect("Ended", AnimEnded)
 		add_child(d)
 		d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
-		
+		if (DamageReductionCard != null):
+			DamageReductionCard.KillCard(0.5, false)
+			DeffenceCardDestroyed.emit(DamageReductionCard.global_position + (DamageReductionCard.size / 2))
 		
 	else :
 		var d = DamageFloater.instantiate()

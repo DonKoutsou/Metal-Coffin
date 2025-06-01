@@ -66,6 +66,9 @@ func GetBattleStats() -> BattleShipStats:
 					Fp += up.UpgradeAmmount
 					Fp -= up.PenaltyAmmount
 					
+		if (g is AmmoItem and !HasWeapon(g.WType)):
+			continue
+			
 		for z in g.CardProviding:
 			var C = z.duplicate() as CardStats
 			C.Tier = g.Tier
@@ -87,6 +90,8 @@ func GetBattleStats() -> BattleShipStats:
 func GetCards() -> Dictionary[CardStats, int]:
 	var c : Dictionary[CardStats, int]
 	for g in StartingItems:
+		if (g is AmmoItem and !HasWeapon(g.WType)):
+			continue
 		for z in g.CardProviding:
 			var C = z.duplicate() as CardStats
 			C.Tier = g.Tier
@@ -116,6 +121,8 @@ func GetCards() -> Dictionary[CardStats, int]:
 func GetCardList() -> Array[CardStats]:
 	var c : Array[CardStats]
 	for g in StartingItems:
+		if (g is AmmoItem and !HasWeapon(g.WType)):
+			continue
 		for z in g.CardProviding:
 			var C = z.duplicate() as CardStats
 			C.Tier = g.Tier
@@ -126,6 +133,13 @@ func GetCardList() -> Array[CardStats]:
 		c.append(g)
 
 	return c
+
+func HasWeapon(WType : CardStats.WeaponType) -> bool:
+	for g : Item in StartingItems:
+		if (g is WeaponShipPart):
+			if (g.WType == WType):
+				return true
+	return false
 
 func CheckForIssues() -> void:
 	var Itms : Array[Item] = []

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://by5pd080gjivc"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://by5pd080gjivc"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_us157"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_epvt7"]
+[ext_resource type="Resource" uid="uid://c2xdu0g24g84o" path="res://Resources/Cards/DecelerationField.tres" id="3_epvt7"]
 [ext_resource type="Resource" uid="uid://carmmqiu3rn2f" path="res://Resources/Items/ShipParts/Shield/SPK-50 Ship Barrier.tres" id="3_ugug2"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_80e6f"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_acgar"]
@@ -24,6 +25,6 @@ PartType = 5
 ItemName = "SGP-3 Ship Barrier"
 ItemDesc = "A reliable entry-level barrier system designed to provide essential protection against incoming threats. Utilizing a compact energy field generator, it effectively neutralizes missiles and deflects heavy caliber rounds, offering robust frontline defense for smaller vessels engaged in skirmishes."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_us157")]([ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7")])
+CardProviding = Array[ExtResource("1_us157")]([ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("3_epvt7")])
 Tier = 2
 CanTransfer = false

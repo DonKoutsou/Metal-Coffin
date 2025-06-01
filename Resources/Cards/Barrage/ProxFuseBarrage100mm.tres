@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=9 format=3 uid="uid://dxmkl7xkl3qho"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://dxmkl7xkl3qho"]
 
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="2_5gb4d"]
 [ext_resource type="Texture2D" uid="uid://c85gq1kvhbjny" path="res://Assets/Cards/BarrazeProxy.png" id="2_t1kv0"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_5gb4d"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_b1127"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_3yd26"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_rtlnf"]
 
 [sub_resource type="Resource" id="Resource_5gb4d"]
@@ -17,7 +16,7 @@ metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 [sub_resource type="Resource" id="Resource_b1127"]
 script = ExtResource("2_5gb4d")
 AtackType = 2
-Damage = 8.0
+Damage = 7.0
 ScaleStat = Array[ExtResource("3_5gb4d")]([SubResource("Resource_5gb4d")])
 CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("3_b1127")]([])
@@ -32,10 +31,9 @@ script = ExtResource("4_rtlnf")
 Icon = ExtResource("2_t1kv0")
 CardName = "Prox Fuse Barragge"
 CardDescriptionOverride = ""
-Energy = 3
+Energy = 2
 AllowDuplicates = true
 Consume = true
-RequiredPart = Array[ExtResource("4_3yd26")]([])
 OnUseModules = Array[ExtResource("3_b1127")]([])
 OnPerformModule = SubResource("Resource_b1127")
 Type = 0

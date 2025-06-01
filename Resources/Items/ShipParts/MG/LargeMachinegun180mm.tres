@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=9 format=3 uid="uid://b38opwgqmdpro"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_ycg0w"]
+[ext_resource type="Resource" uid="uid://dynb44dpvv7bf" path="res://Resources/Cards/Barrage/Barrage180mm.tres" id="2_ycg0w"]
+[ext_resource type="Resource" uid="uid://b25yneeytw20f" path="res://Resources/Cards/Barrage/DrawRandomOffensive.tres" id="3_f7oqs"]
+[ext_resource type="Resource" uid="uid://bvqg5vwgfx247" path="res://Resources/Cards/Barrage/DrawRandomBarrage180.tres" id="4_ycg0w"]
+[ext_resource type="Resource" uid="uid://ts2dsdg3gbw8" path="res://Resources/Cards/Barrage/EngineShot.tres" id="5_ycg0w"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_e766p"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="7_3u26k"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("6_e766p")
+UpgradeName = 3
+UpgradeAmmount = 3.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("7_3u26k")
+WType = 4
+Upgrades = Array[ExtResource("6_e766p")]([SubResource("Resource_fmxhr")])
+UpgradeTime = 1000.0
+UpgradeCost = 50000.0
+IsDamaged = false
+PartType = 4
+ItemName = "KPH -06 \"Garpa\" 100mm"
+ItemDesc = "the elite choice for those requiring ultimate firepower in critical scenarios. Featuring cutting-edge targeting and stabilization technology, 'Tempest' supports continuous and dynamic fire, overwhelming even the staunchest defenses with relentless precision and unmatched rate of fire."
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_ycg0w")]([ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("3_f7oqs"), ExtResource("4_ycg0w"), ExtResource("4_ycg0w"), ExtResource("4_ycg0w"), ExtResource("4_ycg0w"), ExtResource("3_f7oqs"), ExtResource("3_f7oqs"), ExtResource("5_ycg0w"), ExtResource("5_ycg0w"), ExtResource("5_ycg0w")])
+Tier = 2
+CanTransfer = false

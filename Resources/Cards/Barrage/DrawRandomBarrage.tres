@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://bl7mvgrw6tyes"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://bl7mvgrw6tyes"]
 
 [ext_resource type="Texture2D" uid="uid://bv3vkwi5obsul" path="res://Assets/Cards/BarrageReload.png" id="2_l4eym"]
-[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage.tres" id="3_00mwm"]
+[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage100mm.tres" id="3_00mwm"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_l4eym"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_wy8f1"]
 [ext_resource type="Script" uid="uid://ceqe8h8b7lrlm" path="res://Scripts/CardFight/CardSpawnModule.gd" id="4_phqjh"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_1yprs"]
 
 [sub_resource type="Resource" id="Resource_e2oaq"]
 script = ExtResource("4_phqjh")
@@ -23,7 +22,6 @@ CardDescriptionOverride = ""
 Energy = 1
 AllowDuplicates = true
 Consume = false
-RequiredPart = Array[ExtResource("5_1yprs")]([])
 OnUseModules = Array[ExtResource("3_l4eym")]([SubResource("Resource_e2oaq")])
 Type = 2
 WeapT = 0

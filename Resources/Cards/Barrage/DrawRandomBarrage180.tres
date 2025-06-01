@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://bvqg5vwgfx247"]
+
+[ext_resource type="Texture2D" uid="uid://bv3vkwi5obsul" path="res://Assets/Cards/BarrageReload.png" id="1_p10u3"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_57tt1"]
+[ext_resource type="Resource" uid="uid://dynb44dpvv7bf" path="res://Resources/Cards/Barrage/Barrage180mm.tres" id="3_p10u3"]
+[ext_resource type="Script" uid="uid://ceqe8h8b7lrlm" path="res://Scripts/CardFight/CardSpawnModule.gd" id="4_dahqf"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_uv0d4"]
+
+[sub_resource type="Resource" id="Resource_e2oaq"]
+script = ExtResource("4_dahqf")
+CardToSpawn = ExtResource("3_p10u3")
+AOE = false
+TierUpgrade = 1.0
+TierUpgradeMethod = 0
+metadata/_custom_type_script = "uid://ceqe8h8b7lrlm"
+
+[resource]
+script = ExtResource("5_uv0d4")
+Icon = ExtResource("1_p10u3")
+CardName = "Emergency Reload!"
+CardDescriptionOverride = ""
+Energy = 1
+AllowDuplicates = true
+Consume = false
+OnUseModules = Array[ExtResource("2_57tt1")]([SubResource("Resource_e2oaq")])
+Type = 2
+WeapT = 0

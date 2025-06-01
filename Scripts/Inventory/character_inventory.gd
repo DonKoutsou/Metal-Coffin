@@ -44,13 +44,14 @@ func _ready() -> void:
 
 func GetCards() -> Array[CardStats]:
 	var CardsInInventory : Array[CardStats]
-	for g in _InventoryContents:
-		var It = g
+	for g : Item in _InventoryContents:
 		var Amm = _InventoryContents[g]
+		if (g is AmmoItem and !HasWeapon(g.WType)):
+			continue
 		for A in Amm:
 			for z in g.CardProviding:
 				var C = z.duplicate() as CardStats
-				C.Tier = It.Tier
+				C.Tier = g.Tier
 				CardsInInventory.append(C)
 
 	return CardsInInventory

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cuek7mm0smt8c"]
+[gd_scene load_steps=56 format=3 uid="uid://cuek7mm0smt8c"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p5w00"]
 [ext_resource type="Script" uid="uid://bn6vwqvcv5ebb" path="res://Scripts/CardFight/team_equipment_setup.gd" id="1_xpgoa"]
@@ -10,30 +10,51 @@
 [ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://Scenes/Inventory/ItemDescriptor.tscn" id="4_mgcdj"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="4_ngrgh"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="5_xd74m"]
+[ext_resource type="Resource" uid="uid://8kvrf75vxyp3" path="res://Resources/Items/ShipParts/MG/ShortMachinegun180mm.tres" id="6_wydj4"]
 [ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine.tres" id="6_yjy3u"]
+[ext_resource type="Resource" uid="uid://ckmgfamc421e2" path="res://Resources/Items/ShipParts/MG/MediumMachinegun180mm.tres" id="7_8ynnw"]
 [ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="7_e7yxr"]
+[ext_resource type="Resource" uid="uid://b38opwgqmdpro" path="res://Resources/Items/ShipParts/MG/LargeMachinegun180mm.tres" id="8_20d3x"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="8_ex5u7"]
 [ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine.tres" id="9_mohxi"]
+[ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun100mm.tres" id="10_mn77v"]
+[ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun100mm.tres" id="11_6g7se"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="11_mgcdj"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="11_qtc88"]
 [ext_resource type="Resource" uid="uid://ds7viiermptuq" path="res://Resources/Items/Ammo/Long-RangeMissile.tres" id="12_7josv"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="12_8ng8e"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="13_p8h5v"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="13_yc5nm"]
+[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/LargeFuelTank.tres" id="14_5ptwe"]
 [ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="14_r3kd6"]
+[ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="16_3hcsc"]
 [ext_resource type="Resource" uid="uid://b0oy34hfyku06" path="res://Resources/Items/ShipParts/Coil/ShortCoil.tres" id="16_e7yxr"]
+[ext_resource type="Resource" uid="uid://bxnmuntwctjfi" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/LargeFuelTank2.tres" id="17_3pean"]
 [ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="17_ex5u7"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="18_mohxi"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="19_powfm"]
+[ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="19_xcv0u"]
 [ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/FuelTank2.tres" id="20_qtc88"]
-[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun.tres" id="21_wx6ro"]
+[ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/LargeEngine.tres" id="20_t0okq"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="21_wx6ro"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="22_mgcdj"]
+[ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="22_w5pwf"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="23_8ng8e"]
+[ext_resource type="Resource" uid="uid://77852w5u88sm" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/LargeEngine2.tres" id="23_cpg86"]
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="24_r3qv5"]
 [ext_resource type="Resource" uid="uid://bja0tfjegmyxx" path="res://Resources/Items/ShipParts/Shield/SGP-1 Ship Barrier.tres" id="27_r3qv5"]
+[ext_resource type="Resource" uid="uid://carmmqiu3rn2f" path="res://Resources/Items/ShipParts/Shield/SPK-50 Ship Barrier.tres" id="27_xou52"]
+[ext_resource type="Resource" uid="uid://dlkv8clb3piuw" path="res://Resources/Items/ShipParts/Shield/SPK-100 Ship Barrier.tres" id="28_3cojo"]
 [ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="28_8jud7"]
 [ext_resource type="Resource" uid="uid://by5pd080gjivc" path="res://Resources/Items/ShipParts/Shield/SGP-3 Ship Barrier.tres" id="29_53ory"]
+[ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="30_rc8xy"]
+[ext_resource type="Resource" uid="uid://c16lcf8swpkjk" path="res://Resources/Items/ShipParts/Radar/LargeRadar.tres" id="31_adw7l"]
+[ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="33_0ikp2"]
+[ext_resource type="Resource" uid="uid://22w1h832bsxa" path="res://Resources/Items/ShipParts/ELINT/LargeElint.tres" id="34_1uiem"]
+[ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="36_kg4rr"]
+[ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/ShipParts/MissilePods/LargeMissilePod.tres" id="37_ijiw4"]
 
-[sub_resource type="Resource" id="Resource_8ng8e"]
+[sub_resource type="Resource" id="Resource_8ynnw"]
 resource_local_to_scene = true
 script = ExtResource("4_c6o7f")
 ItemName = "Fire Suppression Unit"
@@ -70,7 +91,7 @@ DeckUI = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Pane
 ItemDescriptorScene = ExtResource("4_mgcdj")
 PlayerCaptainLocation = NodePath("HBoxContainer/VBoxContainer2/PanelContainer/ScrollContainer/VBoxContainer")
 EnemyCaptainLocation = NodePath("HBoxContainer/VBoxContainer3/PanelContainer/ScrollContainer/VBoxContainer")
-Equipment = Array[ExtResource("4_c6o7f")]([ExtResource("5_xd74m"), ExtResource("6_yjy3u"), ExtResource("7_e7yxr"), ExtResource("8_ex5u7"), ExtResource("9_mohxi"), SubResource("Resource_8ng8e"), ExtResource("11_qtc88"), ExtResource("12_7josv"), ExtResource("13_p8h5v"), ExtResource("14_r3kd6"), ExtResource("16_e7yxr"), ExtResource("17_ex5u7"), ExtResource("18_mohxi"), ExtResource("19_powfm"), ExtResource("20_qtc88"), ExtResource("21_wx6ro"), ExtResource("22_mgcdj"), ExtResource("23_8ng8e"), ExtResource("24_r3qv5"), ExtResource("27_r3qv5"), ExtResource("28_8jud7"), ExtResource("29_53ory")])
+Equipment = Array[ExtResource("4_c6o7f")]([ExtResource("6_wydj4"), ExtResource("7_8ynnw"), ExtResource("8_20d3x"), ExtResource("21_wx6ro"), ExtResource("10_mn77v"), ExtResource("11_6g7se"), ExtResource("5_xd74m"), ExtResource("13_yc5nm"), ExtResource("14_5ptwe"), ExtResource("20_qtc88"), ExtResource("16_3hcsc"), ExtResource("17_3pean"), ExtResource("18_mohxi"), ExtResource("19_xcv0u"), ExtResource("20_t0okq"), ExtResource("19_powfm"), ExtResource("22_w5pwf"), ExtResource("23_cpg86"), ExtResource("6_yjy3u"), ExtResource("7_e7yxr"), ExtResource("24_r3qv5"), ExtResource("27_xou52"), ExtResource("28_3cojo"), ExtResource("23_8ng8e"), ExtResource("30_rc8xy"), ExtResource("31_adw7l"), ExtResource("17_ex5u7"), ExtResource("33_0ikp2"), ExtResource("34_1uiem"), ExtResource("22_mgcdj"), ExtResource("36_kg4rr"), ExtResource("37_ijiw4"), ExtResource("8_ex5u7"), ExtResource("9_mohxi"), SubResource("Resource_8ynnw"), ExtResource("11_qtc88"), ExtResource("12_7josv"), ExtResource("13_p8h5v"), ExtResource("14_r3kd6"), ExtResource("16_e7yxr"), ExtResource("27_r3qv5"), ExtResource("28_8jud7"), ExtResource("29_53ory")])
 CaptainName = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label")
 CaptainB = ExtResource("4_em7yw")
 ItemCatalogue = NodePath("ItemCatalogue")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=31 format=3 uid="uid://5jwwsypnqyqo"]
+[gd_resource type="Resource" script_class="Captain" load_steps=32 format=3 uid="uid://5jwwsypnqyqo"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_647rd"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_xnlyj"]
@@ -6,10 +6,11 @@
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_vdf7e"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_7fnxg"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/Spaceship/Scarab.png" id="9_o8ada"]
+[ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun100mm.tres" id="16_2ynjo"]
 [ext_resource type="Resource" uid="uid://77852w5u88sm" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/LargeEngine2.tres" id="21_qlrpd"]
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/LargeFuelTank.tres" id="22_58kvj"]
 [ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="23_8as2c"]
-[ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun.tres" id="24_8frym"]
+[ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun100mm.tres" id="24_8frym"]
 [ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine.tres" id="25_pd0w2"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="26_vh5j7"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="27_osl34"]
@@ -148,7 +149,7 @@ CaptainPortrait = ExtResource("1_647rd")
 ShipIcon = ExtResource("9_o8ada")
 CaptainStats = Array[ExtResource("2_xnlyj")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_o8ada"), SubResource("Resource_7vblj"), SubResource("Resource_qlrpd"), SubResource("Resource_58kvj"), SubResource("Resource_8as2c"), SubResource("Resource_8frym"), SubResource("Resource_pd0w2")])
 ShipCallsign = "P4"
-StartingItems = Array[ExtResource("3_tfww2")]([ExtResource("21_qlrpd"), ExtResource("22_58kvj"), ExtResource("23_8as2c"), ExtResource("24_8frym"), ExtResource("24_8frym"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("26_vh5j7"), ExtResource("26_vh5j7"), ExtResource("26_vh5j7"), ExtResource("26_vh5j7"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("28_h853i"), ExtResource("28_h853i"), ExtResource("28_h853i"), ExtResource("28_h853i"), ExtResource("29_gvrwi"), ExtResource("29_gvrwi"), ExtResource("29_gvrwi"), ExtResource("29_gvrwi")])
+StartingItems = Array[ExtResource("3_tfww2")]([ExtResource("21_qlrpd"), ExtResource("22_58kvj"), ExtResource("23_8as2c"), ExtResource("24_8frym"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("25_pd0w2"), ExtResource("26_vh5j7"), ExtResource("26_vh5j7"), ExtResource("26_vh5j7"), ExtResource("26_vh5j7"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("27_osl34"), ExtResource("28_h853i"), ExtResource("28_h853i"), ExtResource("28_h853i"), ExtResource("28_h853i"), ExtResource("29_gvrwi"), ExtResource("29_gvrwi"), ExtResource("29_gvrwi"), ExtResource("29_gvrwi"), ExtResource("16_2ynjo")])
 CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 55000

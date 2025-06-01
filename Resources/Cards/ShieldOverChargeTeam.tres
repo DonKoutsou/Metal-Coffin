@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://dr3fmkjvlgj4l"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://dr3fmkjvlgj4l"]
 
 [ext_resource type="Texture2D" uid="uid://bq8q6bblntmdr" path="res://Assets/Cards/TeamShield.png" id="1_ywkdi"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_ywkdi"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_f0bjb"]
 [ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://Scripts/CardFight/ShieldCardModule.gd" id="3_yun5d"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_io2tw"]
 
@@ -24,7 +23,6 @@ CardDescriptionOverride = ""
 Energy = 4
 AllowDuplicates = true
 Consume = false
-RequiredPart = Array[ExtResource("3_f0bjb")]([])
 OnUseModules = Array[ExtResource("2_ywkdi")]([SubResource("Resource_plv6y")])
 Type = 1
 WeapT = 0

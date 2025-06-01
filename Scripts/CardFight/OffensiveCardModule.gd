@@ -71,7 +71,7 @@ func GetDesc(Tier : int) -> String:
 	Desc += " for {0} damage".format([DamageString])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#ffc315]On Hit : [/color]"
+		Desc += "\n[color=#ffc315]On Hit[/color] : "
 		for g in OnSuccesfullAtackModules:
 			Desc += g.GetDesc(Tier)
 	if (CauseFile):
@@ -142,9 +142,9 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	Desc += " for \n{0} damage".format([DamageString])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#ffc315]On Hit : [/color]"
+		Desc += "\n[color=#ffc315]On Hit [/color]: "
 		for g in OnSuccesfullAtackModules:
-			Desc += g.GetDesc(Tier)
+			Desc += g.GetBattleDesc(User, Tier)
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 
@@ -155,5 +155,6 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 enum AtackTypes{
 	DIRECT_ATACK,
 	HOMING_ATACK,
-	UNAVOIDABLE
+	UNAVOIDABLE,
+	ANY_ATACK
 }

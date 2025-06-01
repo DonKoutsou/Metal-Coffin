@@ -16,8 +16,8 @@ func GetDesc(Tier : int) -> String:
 	else : if (StatToDeBuff == Stat.WEIGHT):
 		TextColor = "color=#828dff"
 	if (AOE):
-		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
-	return "Debuff enemy\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
+		return "Debuff team\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
+	return "Debuff\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
 
 func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	var TextColor : String
@@ -30,8 +30,8 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	else : if (StatToDeBuff == Stat.WEIGHT):
 		TextColor = "color=#828dff"
 	if (AOE):
-		return "Debuff enemy team\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
-	return "Debuff enemy\n[{3}] {0}[/color] - [color=#f35033]{1}[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], GetDebuffAmmount(Tier), GetDebuffDuration(Tier), TextColor])
+		return "Debuff team\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
+	return "Debuff\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
 
 func GetDebuffDuration(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
@@ -40,5 +40,5 @@ func GetDebuffDuration(Tier : int) -> int:
 	
 func GetDebuffAmmount(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
-		return DeBuffAmmount + (TierUpgrade * Tier)
-	return DeBuffAmmount *  max((TierUpgrade * Tier), 1)
+		return snapped(DeBuffAmmount + (TierUpgrade * Tier), 0.1)
+	return snapped(DeBuffAmmount *  max((TierUpgrade * Tier), 1), 0.1)

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=7 format=3 uid="uid://dlkv8clb3piuw"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://dlkv8clb3piuw"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_7eit2"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_y570i"]
 [ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="3_8waow"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_c5tjm"]
+[ext_resource type="Resource" uid="uid://c2xdu0g24g84o" path="res://Resources/Cards/DecelerationField.tres" id="4_8waow"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_p5xd3"]
 
 [sub_resource type="Resource" id="Resource_x8weo"]
@@ -23,6 +24,6 @@ PartType = 5
 ItemName = "SPK-100 Ship Barrier"
 ItemDesc = "The SPK-100 represents the apex of modern barrier systems, generating an impervious energy shield capable of nullifying even the most formidable ballistic threats. Designed for flagship vessels, it provides unmatched protection, ensuring dominance in the most intense combat scenarios by neutralizing advanced ordnance with ease."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_7eit2")]([ExtResource("2_y570i"), ExtResource("3_8waow")])
+CardProviding = Array[ExtResource("2_7eit2")]([ExtResource("2_y570i"), ExtResource("3_8waow"), ExtResource("4_8waow")])
 Tier = 2
 CanTransfer = false

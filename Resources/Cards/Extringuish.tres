@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://bihbbkeg0k2sc"]
+[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://bihbbkeg0k2sc"]
 
 [ext_resource type="Texture2D" uid="uid://p6qnpajpo06p" path="res://Assets/Cards/FireSupression.png" id="1_0cpai"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_0cpai"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_0cpai"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_7633t"]
 [ext_resource type="Script" uid="uid://civogvyka6amw" path="res://Scripts/CardFight/FireExtinguishModule.gd" id="3_peqcn"]
 
@@ -23,7 +22,6 @@ CardDescriptionOverride = ""
 Energy = 1
 AllowDuplicates = false
 Consume = false
-RequiredPart = Array[ExtResource("3_0cpai")]([])
 OnUseModules = Array[ExtResource("2_0cpai")]([SubResource("Resource_gl0km")])
 Type = 1
 WeapT = 0

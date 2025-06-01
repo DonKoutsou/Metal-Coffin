@@ -123,13 +123,13 @@ func _ready() -> void:
 	
 	var EnReservesAmm : int = EnemyReserves.size()
 	for g in min(MaxCombatants, EnReservesAmm):
-		var NewCombatant = EnemyReserves.pick_random()
+		var NewCombatant = EnemyReserves.pop_front()
 		EnemyCombatants.append(NewCombatant)
 		EnemyReserves.erase(NewCombatant)
 		CreateShipVisuals(NewCombatant, false)
 	var PlReservesAmm : int = PlayerReserves.size()
 	for g in min(MaxCombatants, PlReservesAmm):
-		var NewCombatant = PlayerReserves.pick_random()
+		var NewCombatant = PlayerReserves.pop_front()
 		PlayerCombatants.append(NewCombatant)
 		PlayerReserves.erase(NewCombatant)
 		CreateShipVisuals(NewCombatant, true)
@@ -186,6 +186,10 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 	ActionList.RemoveShip(Ship)
 	#Save the ships index in the turns array so that we can add this ship on same position
 	var TurnPosition = ShipTurns.find(Ship)
+	
+	var Position = ShipTurns.find(Ship)
+	if (CurrentTurn > Position):
+		CurrentTurn -= 1
 	ShipTurns.erase(Ship)
 
 	if (IsShipFriendly(Ship)):
@@ -819,8 +823,8 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 
 				for Act : CardFightAction in ActionList.GetShipsActions(g):
 					var mod = Act.Action.OnPerformModule
-					if (mod is CounterCardModule):
-						if (mod.CounterType == AtackType):
+					if (mod is CounterCardModule or mod is DamageReductionCardModule):
+						if (mod.CounterType == AtackType or mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
 							Counter = Act.Action
 							break
 					
@@ -871,7 +875,13 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 				
 				#anim.AtackConnected.connect()
 				#print("Atack connected")
-				if (TargetList[g]["Def"] == null):
+				var Def = TargetList[g]["Def"] as CardStats
+				if (TargetList[g]["Def"] != null):
+					var CounterMod = Def.OnPerformModule
+					if (CounterMod == DamageReductionCardModule):
+						var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier) * CounterMod.ReductionPercent, Mod.CauseFile, Mod.SkipShield)
+						DamageCallables.append(c)
+				else:
 					var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier), Mod.CauseFile, Mod.SkipShield)
 					DamageCallables.append(c)
 					#anim.AtackConnected.connect(c)
@@ -881,17 +891,22 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			
 			await anim.AtackConnected
 			for g in TargetList:
-
-				if (TargetList[g]["Def"] != null):
-					continue
+				var Def = TargetList[g]["Def"] as CardStats
+				if (Def != null):
+					var CounterMod = Def.OnPerformModule
+					if (CounterMod is CounterCardModule):
+						for d in CounterMod.OnSuccesfullDeffenceModules:
+							if (!Friendly):
+								await HandleModule(Ship, Def, d)
+							else:
+								await HandleModuleEnemy(Ship, Def, d)
 				else:
 					for d in Mod.OnSuccesfullAtackModules:
 						if (Friendly):
-							await HandleModule(Ship, Action, d)
+							await HandleModule(Ship, Action, d, TargetList.keys())
 						else:
-							await HandleModuleEnemy(Ship, Action, d)
+							await HandleModuleEnemy(Ship, Action, d, TargetList.keys())
 					break
-			
 		else:
 			ActionIndex += 1
 			PerformNextActionForShip(Ship, ActionIndex)
@@ -1011,27 +1026,27 @@ func OnFightEnded(Won : bool) -> void:
 #██   ██ ██   ██ ██   ████ ██████  ███████ ███████ ██   ██ ███████ 
 #/////////////////////////////////////////////////////////////////////
 
-func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
+func HandleModules(Performer : BattleShipStats, C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	for Mod in C.OnUseModules.size():
 		if (Mod == C.OnUseModules.size() - 1):
-			await HandleModule(Performer, C ,C.OnUseModules[Mod])
+			await HandleModule(Performer, C ,C.OnUseModules[Mod], Targets)
 		else:
-			HandleModule(Performer, C ,C.OnUseModules[Mod])
+			HandleModule(Performer, C ,C.OnUseModules[Mod], Targets)
 			await Helper.GetInstance().wait(0.2)
 
 
 
-func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule) -> void:
+func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> void:
 	if (Mod is ResupplyModule):
-		await HandleResupply(Performer, C, Mod)
+		await HandleResupply(Performer, C, Mod, Targets)
 	else :if (Mod is CauseFireModule):
-		HandleCauseFire(Performer, C, Mod)
+		HandleCauseFire(Performer, C, Mod, Targets)
 	else : if (Mod is ReserveModule):
-		await HandleReserveSupply(Performer, C, Mod)
+		await HandleReserveSupply(Performer, C, Mod, Targets)
 	else : if (Mod is ReserveConversionModule):
-		await HandleReserveConversion(Performer, C, Mod)
+		await HandleReserveConversion(Performer, C, Mod, Targets)
 	else : if (Mod is MaxReserveModule):
-		await HandleMaxReserveSupply(Performer, C, Mod)
+		await HandleMaxReserveSupply(Performer, C, Mod, Targets)
 	else : if (Mod is DrawCardModule):
 		HandleDrawDriscard(Performer, Mod)
 	else : if (Mod is CardSpawnModule):
@@ -1042,13 +1057,13 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule) 
 	else: if (Mod is FireExtinguishModule):
 		await HandleFireExtinguish(Performer, C, Mod)
 	else : if (Mod is BuffModule):
-		await HandleBuff(Performer, C, Mod)
+		await HandleBuff(Performer, C, Mod, Targets)
 	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
-		await HandleDeBuff(Performer, C, Mod)
+		await HandleDeBuff(Performer, C, Mod, Targets)
 	else : if (Mod is ShieldCardModule):
-		await HandleShield(Performer, C, Mod)
+		await HandleShield(Performer, C, Mod, Targets)
 	else : if (Mod is MaxShieldCardModule):
-		await HandleMaxShield(Performer, C, Mod)
+		await HandleMaxShield(Performer, C, Mod, Targets)
 	else : if (Mod is SelfDamageModule):
 		await HandleSelfDamage(Performer, C, Mod)
 	else : if (Mod is RecoilDamageModule):
@@ -1058,7 +1073,7 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule) 
 		await HandleDamageStack(Performer, C, Mod)
 
 
-func HandleModulesEnemy(Performer : BattleShipStats, C : CardStats) -> void:
+func HandleModulesEnemy(Performer : BattleShipStats, C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	for Mod in C.OnUseModules.size():
 		if (Mod == C.OnUseModules.size() - 1):
 			await HandleModuleEnemy(Performer, C ,C.OnUseModules[Mod])
@@ -1067,17 +1082,17 @@ func HandleModulesEnemy(Performer : BattleShipStats, C : CardStats) -> void:
 			await Helper.GetInstance().wait(0.2)
 
 
-func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModule) -> void:
+func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModule, Targets : Array[BattleShipStats] = []) -> void:
 	if (Mod is ResupplyModule):
-		await HandleResupply(Performer, C, Mod)
+		await HandleResupply(Performer, C, Mod, Targets)
 	else : if (Mod is ReserveModule):
-		await HandleReserveSupply(Performer, C, Mod)
+		await HandleReserveSupply(Performer, C, Mod, Targets)
 	else : if (Mod is ReserveConversionModule):
-		await HandleReserveConversion(Performer, C, Mod)
+		await HandleReserveConversion(Performer, C, Mod, Targets)
 	else : if (Mod is MaxReserveModule):
-		await HandleMaxReserveSupply(Performer, C, Mod)
+		await HandleMaxReserveSupply(Performer, C, Mod, Targets)
 	else : if (Mod is CauseFireModule):
-		await HandleCauseFire(Performer, C, Mod)
+		await HandleCauseFire(Performer, C, Mod, Targets)
 	else : if (Mod is DrawCardModule):
 		HandleDrawDiscardEnemy(Performer ,Mod)
 	else : if (Mod is CardSpawnModule):
@@ -1088,13 +1103,13 @@ func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModu
 	else : if (Mod is FireExtinguishModule):
 		await HandleFireExtinguish(Performer, C, Mod)
 	else : if (Mod is BuffModule):
-		await HandleBuff(Performer, C, Mod)
+		await HandleBuff(Performer, C, Mod, Targets)
 	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
-		await HandleDeBuff(Performer, C, Mod)
+		await HandleDeBuff(Performer, C, Mod, Targets)
 	else : if (Mod is ShieldCardModule):
-		await HandleShield(Performer, C, Mod)
+		await HandleShield(Performer, C, Mod, Targets)
 	else : if (Mod is MaxShieldCardModule):
-		await HandleMaxShield(Performer, C, Mod)
+		await HandleMaxShield(Performer, C, Mod, Targets)
 	else : if (Mod is SelfDamageModule):
 		await HandleSelfDamage(Performer, C, Mod)
 	else : if (Mod is RecoilDamageModule):
@@ -1177,43 +1192,55 @@ func HandleDrawDiscardEnemy(Performer : BattleShipStats,Mod : DrawCardModule) ->
 		PlaceCardInEnemyHand(Performer, g)
 
 
-func HandleResupply(Performer : BattleShipStats, Action : CardStats, Mod : ResupplyModule) -> void:
+func HandleResupply(Performer : BattleShipStats, Action : CardStats, Mod : ResupplyModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	var resupplyamm = Mod.GetEnergyAmmount(Action.Tier)
-
-	var Targets = await HandleTargets(Mod, Performer)
+	
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
+	
 	var TargetViz : Array[Control]
 	
 	var Friendly = IsShipFriendly(Performer)
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
+		TargetViz.append(GetShipViz(g))
 
-		UpdateEnergy(TargetShip, TargetShip.Energy + resupplyamm, TargetShip == Performer and Friendly)
+		UpdateEnergy(g, g.Energy + resupplyamm, g == Performer and Friendly)
 			
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, [])
 
 
-func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : ReserveModule) -> void:
+func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : ReserveModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	var resupplyamm = Mod.GetEnergy(Action.Tier)
+	
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
 
-	var Targets = await HandleTargets(Mod, Performer)
 	var TargetViz : Array[Control]
 	
 	var Friendly = IsShipFriendly(Performer)
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
-		UpdateReserves(TargetShip, TargetShip.EnergyReserves + resupplyamm, TargetShip == Performer and Friendly)
+		TargetViz.append(GetShipViz(g))
+		UpdateReserves(g, g.EnergyReserves + resupplyamm, g == Performer and Friendly)
 			
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, [])
 
-func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule) -> void:
+func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	var resupplyamm = Mod.GetConversionAmmount(Performer.EnergyReserves, Action.Tier)
 	
 	var Friendly = IsShipFriendly(Performer)
@@ -1227,20 +1254,26 @@ func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mo
 			
 	await DoDeffenceAnim(Action, Mod, Performer, [GetShipViz(Performer)], Friendly, [])
 
-func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : MaxReserveModule) -> void:
+func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : MaxReserveModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	var resupplyamm = Performer.Energy
-
-	var Targets = await HandleTargets(Mod, Performer)
+	
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
+			
 	var TargetViz : Array[Control]
 	
 	var Friendly = IsShipFriendly(Performer)
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
-		UpdateReserves(TargetShip, TargetShip.EnergyReserves + resupplyamm, TargetShip == Performer and Friendly)
+		TargetViz.append(GetShipViz(g))
+		UpdateReserves(g, g.EnergyReserves + resupplyamm, g == Performer and Friendly)
 	
 	UpdateEnergy(Performer, 0, Friendly)
 			
@@ -1268,37 +1301,48 @@ func HandleRecoil(Performer : BattleShipStats, Action : CardStats, DamageAmm : f
 	await DoOffenceAnim(Action, Mod, [Performer], EnemyCombatants.has(Performer), Callables)
 
 
-func HandleShield(Performer : BattleShipStats, Action : CardStats, Mod : ShieldCardModule) -> void:
+func HandleShield(Performer : BattleShipStats, Action : CardStats, Mod : ShieldCardModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	#var viz = GetShipViz(Performer)
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
 
-	var Targets = await HandleTargets(Mod, Performer)
 	var TargetViz : Array[Control]
 	
 	var Callables : Array[Callable]
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
-		Callables.append(ShieldShip.bind(TargetShip, Mod.GetShieldAmm(Action.Tier)))
+		TargetViz.append(GetShipViz(g))
+		Callables.append(ShieldShip.bind(g, Mod.GetShieldAmm(Action.Tier)))
 	
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, IsShipFriendly(Performer), Callables)
 
-func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxShieldCardModule) -> void:
+func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxShieldCardModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	var ShieldAmm = Performer.Energy * Mod.GetShieldPerEnergy(Action.Tier)
 	
-	var Targets = await HandleTargets(Mod, Performer)
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
+
 	var TargetViz : Array[Control]
 	
 	var Callables : Array[Callable]
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
-		Callables.append(ShieldShip.bind(TargetShip, ShieldAmm))
+		TargetViz.append(GetShipViz(g))
+		Callables.append(ShieldShip.bind(g, ShieldAmm))
 	
 	var Friendly = IsShipFriendly(Performer)
 	
@@ -1306,20 +1350,24 @@ func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxS
 	
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, Callables)
 
-func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : CauseFireModule) -> void:
+func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : CauseFireModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	#var viz = GetShipViz(Performer)
-	
-	var Targets = await HandleTargets(Mod, Performer)
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
 	var TargetViz : Array[Control]
 	
 	var Callables : Array[Callable]
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
-		Callables.append(ToggleFireToShip.bind(TargetShip, true))
+		TargetViz.append(GetShipViz(g))
+		Callables.append(ToggleFireToShip.bind(g, true))
 		
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
@@ -1333,8 +1381,14 @@ func HandleDamageStack(Performer : BattleShipStats, Action : CardStats, Mod : St
 	
 	await DoDeffenceAnim(Action, Mod, Performer, [], EnemyCombatants.has(Performer), [])
 
-func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModule) -> void:
-	var Targets = await HandleTargets(Mod, Performer)
+func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
 	var TargetViz : Array[Control]
 	
 	var Callables : Array[Callable]
@@ -1343,23 +1397,29 @@ func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModul
 	var DebuffDurration = Mod.GetBuffDuration(Action.Tier)
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
+		TargetViz.append(GetShipViz(g))
 		
 		if (Mod.StatToBuff == CardModule.Stat.FIREPOWER):
-			Callables.append(BuffShip.bind(TargetShip, DebuffAmmount, DebuffDurration))
+			Callables.append(BuffShip.bind(g, DebuffAmmount, DebuffDurration))
 		else : if (Mod.StatToBuff == CardModule.Stat.SPEED):
-			Callables.append(BuffShipSpeed.bind(TargetShip, DebuffAmmount, DebuffDurration))
+			Callables.append(BuffShipSpeed.bind(g, DebuffAmmount, DebuffDurration))
 		else : if (Mod.StatToBuff == CardModule.Stat.DEFENCE):
-			Callables.append(DeBuffShipDefence.bind(TargetShip, DebuffAmmount, DebuffDurration))
+			Callables.append(DeBuffShipDefence.bind(g, DebuffAmmount, DebuffDurration))
 			
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
 
-func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardModule) -> void:
-	var Targets = await HandleTargets(Mod, Performer)
+func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
+		
 	var TargetViz : Array[Control]
 	
 	var Callables : Array[Callable]
@@ -1368,17 +1428,16 @@ func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardMod
 	var DebuffDurration = Mod.GetDebuffDuration(Action.Tier)
 	
 	for g in Targets:
-		var TargetShip = GetTarget(g)
-		if (TargetShip == null):
+		if (g == null):
 			continue
-		TargetViz.append(GetShipViz(TargetShip))
+		TargetViz.append(GetShipViz(g))
 
 		if (Mod.StatToDeBuff == CardModule.Stat.FIREPOWER):
-			Callables.append(DeBuffShipSpeed.bind(TargetShip, DebuffAmmount, DebuffDurration))
+			Callables.append(DeBuffShipSpeed.bind(g, DebuffAmmount, DebuffDurration))
 		else : if (Mod.StatToDeBuff == CardModule.Stat.SPEED):
-			Callables.append(DeBuffShipSpeed.bind(TargetShip, DebuffAmmount, DebuffDurration))
+			Callables.append(DeBuffShipSpeed.bind(g, DebuffAmmount, DebuffDurration))
 		else : if (Mod.StatToDeBuff == CardModule.Stat.DEFENCE):
-			Callables.append(DeBuffShipDefence.bind(TargetShip, DebuffAmmount, DebuffDurration))
+			Callables.append(DeBuffShipDefence.bind(g, DebuffAmmount, DebuffDurration))
 			
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
@@ -1414,27 +1473,22 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[int]:
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
 		var Team = GetShipsTeam(User)
-		
-		var PossibleTargets : Array[BattleShipStats]
-		for g in Team:
-			if (g != null):
-				PossibleTargets.append(g)
 				
 		#If aoe pick all team either if enemy of player
 		if (Mod.AOE):
-			for g in PossibleTargets:
+			for g in Team:
 				Targets.append(GetTargetIndex(g))
 			if (!Mod.SelfUse):
 				Targets.erase(GetTargetIndex(User))
 				
-		else: if PossibleTargets.size() == 1:
-			Targets.append(GetTargetIndex(PossibleTargets[0]))
+		else: if Team.size() == 1:
+			Targets.append(GetTargetIndex(Team[0]))
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Mod.CanBeUsedOnOther:
 			if (Friendly):
 				if (!Mod.SelfUse):
-					PossibleTargets.erase(User)
-				TargetSelect.SetEnemies(PossibleTargets)
+					Team.erase(User)
+				TargetSelect.SetEnemies(Team)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
 				if (Target != null):
@@ -1447,21 +1501,16 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[int]:
 			Targets = [GetTargetIndex(User)]
 	else:
 		var EnemyTeam = GetShipEnemyTeam(User)
-		
-		var PossibleTargets : Array[BattleShipStats]
-		for g in EnemyTeam:
-			if (g != null):
-				PossibleTargets.append(g)
 		#If aoe pick all enemy team either if enemy of player
 		if (Mod.AOE):
-			for g in PossibleTargets:
+			for g in EnemyTeam:
 				Targets.append(GetTargetIndex(g))
 		#If there is only 1 
-		else: if PossibleTargets.size() == 1:
-			Targets.append(GetTargetIndex(PossibleTargets[0]))
+		else: if EnemyTeam.size() == 1:
+			Targets.append(GetTargetIndex(EnemyTeam[0]))
 		else:
 			if (Friendly):
-				TargetSelect.SetEnemies(PossibleTargets)
+				TargetSelect.SetEnemies(EnemyTeam)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
 				if (Target != null):
@@ -1791,18 +1840,26 @@ func GetCurrentShip() -> BattleShipStats:
 func GetShipsTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
 	if (IsShipFriendly(Ship)):
-		Team.append_array(PlayerCombatants)
+		for g in PlayerCombatants:
+			if (g != null):
+				Team.append(g)
 	else:
-		Team.append_array(EnemyCombatants)
+		for g in EnemyCombatants:
+			if (g != null):
+				Team.append(g)
 	return Team
 
 
 func GetShipEnemyTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
 	if (IsShipFriendly(Ship)):
-		Team.append_array(EnemyCombatants)
+		for g in EnemyCombatants:
+			if (g != null):
+				Team.append(g)
 	else:
-		Team.append_array(PlayerCombatants)
+		for g in PlayerCombatants:
+			if (g != null):
+				Team.append(g)
 	return Team
 
 
@@ -2074,8 +2131,16 @@ func UpdateHandAmount(NewAmm : int) -> void:
 
 
 func UpdateFleetSizeAmmount() -> void:
-	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + PlayerCombatants.size()])
-	EnemyFleetSizeLabel.text = "Fleet Size\n{0}".format([EnemyReserves.size() + EnemyCombatants.size()])
+	var TeamSize : int
+	for g in TeamSize:
+		if (g != null):
+			TeamSize += 1
+	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + TeamSize])
+	var EnemyTeamSize : int
+	for g in EnemyCombatants:
+		if (g != null):
+			EnemyTeamSize += 1
+	EnemyFleetSizeLabel.text = "Fleet Size\n{0}".format([EnemyReserves.size() + EnemyTeamSize])
 	
 
 func ClearCards() -> void:
