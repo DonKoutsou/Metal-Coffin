@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dc1y0qs5n466n"]
+[gd_scene load_steps=47 format=3 uid="uid://dc1y0qs5n466n"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_dj5ey"]
 [ext_resource type="Script" uid="uid://c18s5swteqr3n" path="res://Scripts/CardFight/cagefight_team_setup.gd" id="1_enhfx"]
@@ -36,7 +36,6 @@
 [ext_resource type="Resource" uid="uid://ds7viiermptuq" path="res://Resources/Items/Ammo/Long-RangeMissile.tres" id="42_vro0t"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine.tres" id="43_r37ip"]
 [ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="44_k4l7a"]
-[ext_resource type="Resource" uid="uid://60cqxlcirs15" path="res://Resources/Items/Ammo/UnguidedMissile.tres" id="45_ej3ya"]
 [ext_resource type="Resource" uid="uid://b0oy34hfyku06" path="res://Resources/Items/ShipParts/Coil/ShortCoil.tres" id="46_8unkc"]
 [ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="47_03j4m"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="48_mscvp"]
@@ -47,7 +46,7 @@
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="53_dmw0h"]
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="54_rrhts"]
 
-[sub_resource type="Resource" id="Resource_kavl2"]
+[sub_resource type="Resource" id="Resource_x7xa8"]
 resource_local_to_scene = true
 script = ExtResource("33_ovnka")
 ItemName = "Fire Suppression Unit"
@@ -170,7 +169,7 @@ alignment = 1
 [node name="TeamEquipmentSetup" parent="PanelContainer/VBoxContainer" instance=ExtResource("32_5o5j4")]
 visible = false
 layout_mode = 2
-Equipment = Array[ExtResource("33_ovnka")]([ExtResource("34_pefvv"), ExtResource("35_0skxp"), ExtResource("36_8pnpl"), ExtResource("37_2ldnj"), ExtResource("38_0gvoa"), SubResource("Resource_kavl2"), ExtResource("41_1dko6"), ExtResource("42_vro0t"), ExtResource("43_r37ip"), ExtResource("44_k4l7a"), ExtResource("45_ej3ya"), ExtResource("46_8unkc"), ExtResource("47_03j4m"), ExtResource("48_mscvp"), ExtResource("49_hswng"), ExtResource("50_clvof"), ExtResource("51_fw80n"), ExtResource("52_a07pj"), ExtResource("53_dmw0h"), ExtResource("54_rrhts")])
+Equipment = Array[ExtResource("33_ovnka")]([ExtResource("34_pefvv"), ExtResource("35_0skxp"), ExtResource("36_8pnpl"), ExtResource("37_2ldnj"), ExtResource("38_0gvoa"), SubResource("Resource_x7xa8"), ExtResource("41_1dko6"), ExtResource("42_vro0t"), ExtResource("43_r37ip"), ExtResource("44_k4l7a"), ExtResource("46_8unkc"), ExtResource("47_03j4m"), ExtResource("48_mscvp"), ExtResource("49_hswng"), ExtResource("50_clvof"), ExtResource("51_fw80n"), ExtResource("52_a07pj"), ExtResource("53_dmw0h"), ExtResource("54_rrhts")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

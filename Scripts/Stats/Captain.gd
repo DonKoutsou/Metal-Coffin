@@ -112,6 +112,20 @@ func GetCards() -> Dictionary[CardStats, int]:
 			c[g] = 1
 
 	return c
+	
+func GetCardList() -> Array[CardStats]:
+	var c : Array[CardStats]
+	for g in StartingItems:
+		for z in g.CardProviding:
+			var C = z.duplicate() as CardStats
+			C.Tier = g.Tier
+
+			c.append(C)
+			
+	for g in Cards:
+		c.append(g)
+
+	return c
 
 func CheckForIssues() -> void:
 	var Itms : Array[Item] = []

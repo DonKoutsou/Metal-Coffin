@@ -143,7 +143,7 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 func UpdateLine(Zoom : float)-> void:
 	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / Zoom)
+	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / (Zoom * 2))
 
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
@@ -187,7 +187,7 @@ func UpdateSignRotation() -> void:
 	$Control/PanelContainer.rotation -= 0.01
 	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / CurrentZoom)
+	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / (CurrentZoom * 2))
 
 func OnHostileShipDestroyed() -> void:
 	modulate = Color(1,1,1)

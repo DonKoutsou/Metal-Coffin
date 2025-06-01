@@ -66,30 +66,35 @@ func OnShipSelected(Ship : MapShip) -> void:
 		EngineInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
 	
 	for g in CharSensorSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		SensorInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
 	
 	for g in CharFuelTankSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		FuelTankInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
 	
 	for g in CharShieldSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		ShieldInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
 	
 	for g in CharWeaponSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		WeaponInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 	
 	var inv = Cha.GetCharacterInventory()
 	

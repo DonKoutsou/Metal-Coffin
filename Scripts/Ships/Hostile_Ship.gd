@@ -64,7 +64,7 @@ func  _ready() -> void:
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 
-	MapPointerManager.GetInstance().AddShip(self, false)
+	#MapPointerManager.GetInstance().AddShip(self, false)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	visible = NewZoom > 0.5
@@ -567,7 +567,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Funds = Cpt.ProvidingFunds
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.Convoy = Convoy
-	stats.Cards = Cpt.GetCards()
+	stats.Cards = Cpt.GetCardList()
 	return stats
 	
 func GetShipName() -> String:

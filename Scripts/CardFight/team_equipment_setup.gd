@@ -57,7 +57,7 @@ func Clear() -> void:
 		g.free()
 	
 	DeckUI.Clear()
-	
+	CurrentCpt = null
 
 func Init(PlayerCaptains : Array[Captain], EnemyCaptains : Array[Captain]) -> void:
 
@@ -82,6 +82,7 @@ func OnCaptainSelected(Cpt : Captain) -> void:
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
 		DescriptorPlace.remove_child(desc)
+		DeckUI.get_parent().visible = true
 		desc.queue_free()
 	
 	CurrentCpt = Cpt
@@ -112,36 +113,42 @@ func OnCaptainSelected(Cpt : Captain) -> void:
 		EngineInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
 	
 	for g in CharSensorSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		SensorInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
 	
 	for g in CharFuelTankSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		FuelTankInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
 	
 	for g in CharShieldSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		ShieldInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
 	
 	for g in CharWeaponSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		WeaponInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 	
 	for g in CharInventorySpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		InventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
+		InventoryBoxParent.columns = min(2, CharInventorySpace)
 	
 	var itms = Cpt.StartingItems
 	
@@ -269,6 +276,7 @@ func OnItemSelected(Box : Inventory_Box) -> void:
 	ItemCatalogue.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
+	CurrentCpt.StartingItems.append(Box.GetContainedItem())
 	SelectedContainer.RegisterItem(Box.GetContainedItem())
 	SelectedContainer.UpdateAmm(1)
 	DeckUI.SetDeck2(CurrentCpt)

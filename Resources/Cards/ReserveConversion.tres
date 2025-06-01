@@ -8,7 +8,7 @@
 
 [sub_resource type="Curve" id="Curve_4d6nm"]
 _limits = [0.0, 2.0, 0.0, 50.0]
-_data = [Vector2(0, 1.99615), 0.0, -0.0948171, 0, 0, Vector2(35, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1.99615), 0.0, -0.0639142, 0, 0, Vector2(50, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Resource" id="Resource_7qc3q"]
@@ -17,8 +17,8 @@ ConversionMultiplication = SubResource("Curve_4d6nm")
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = false
-TierUpgrade = 1.0
-TierUpgradeMethod = 0
+TierUpgrade = 1.2
+TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://b3ik3ixt10qr1"
 
 [resource]

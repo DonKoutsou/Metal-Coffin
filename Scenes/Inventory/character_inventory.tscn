@@ -21,12 +21,12 @@ mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_sxetj")
 script = ExtResource("1_i6whi")
 InventoryBoxScene = ExtResource("2_e1s57")
-EngineInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer/Engines")
-SensorInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer3/Sensors")
-FuelTankInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer2/Fuel Tanks")
-WeaponInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer5/Weapons")
-ShieldInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer4/Shields")
-InventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer6/Inventory")
+EngineInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer/Engines")
+SensorInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3/Sensors")
+FuelTankInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2/Fuel Tanks")
+WeaponInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5/Weapons")
+ShieldInventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4/Shields")
+InventoryBoxParent = NodePath("VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6/Inventory")
 CaptainNameLabel = NodePath("VBoxContainer2/VBoxContainer/HBoxContainer2/Label")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -101,86 +101,120 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sxetj")
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Engines"
 
-[node name="Engines" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer"]
+[node name="Engines" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sxetj")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Fuel Tanks"
 
-[node name="Fuel Tanks" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer2"]
+[node name="Fuel Tanks" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sxetj")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer3"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Sensors"
 
-[node name="Sensors" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer3"]
+[node name="Sensors" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3"]
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sxetj")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer4"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Shields"
 
-[node name="Shields" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer4"]
+[node name="Shields" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+[node name="PanelContainer5" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sxetj")
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer5"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Weapons"
 
-[node name="Weapons" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer5"]
+[node name="Weapons" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
 
-[node name="VBoxContainer6" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+[node name="PanelContainer6" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_sxetj")
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer6"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Cargo"
 
-[node name="Inventory" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/VBoxContainer6"]
+[node name="Inventory" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2

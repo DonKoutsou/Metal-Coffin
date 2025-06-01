@@ -32,11 +32,10 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 1
 
-[node name="InventoryShipStats" type="VBoxContainer" node_paths=PackedStringArray("CharPortrait", "ShipIcon")]
+[node name="InventoryShipStats" type="VBoxContainer" node_paths=PackedStringArray("ShipIcon")]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_oud7i")
-CharPortrait = NodePath("")
 ShipStatScene = ExtResource("2_82v18")
 StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5])
 ShipIcon = NodePath("Legend/CaptainIcon2")

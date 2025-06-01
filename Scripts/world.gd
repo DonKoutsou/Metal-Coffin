@@ -243,15 +243,18 @@ func ShipSeparationFinished() -> void:
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
-	
+
+var InFight : bool = false
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
 func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	#Temp solution to stop fight starting twice
-	if (get_tree().get_nodes_in_group("CardFight").size() > 0):
+	if (InFight):
 		return
 	####
+	InFight = true
+	
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
 		FighingFriendlyUnits.append(g)
@@ -312,6 +315,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
 	GetMap().GetScreenUi().ToggleScreenUI(true)
 	GetMap().GetScreenUi().ToggleCardFightUI(false)
 	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
+	InFight = false
 
 #LANDING
 func OnLandRequested(ControlledShip : MapShip) -> void:

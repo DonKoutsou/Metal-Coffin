@@ -778,7 +778,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	var ShipActions = ActionList.GetShipsActions(Ship)
 	
 	if (ShipActions.size() - 1 < ActionIndex):
-		PerformTurnFinished()
+		PerformTurnFinished(Ship)
 		return
 	
 	var ShipAction = ShipActions[ActionIndex] as CardFightAction
@@ -906,8 +906,7 @@ func PerformAnimationFinished(Ship : BattleShipStats, ActionIndex : int) -> void
 	PerformNextActionForShip(Ship, ActionIndex)
 
 
-func PerformTurnFinished() -> void:
-	var Ship = GetCurrentShip()
+func PerformTurnFinished(Ship : BattleShipStats) -> void:
 	if (Ship != null):
 		var viz = GetShipViz(Ship)
 		for g in viz.get_parent().get_children():
@@ -1415,19 +1414,24 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[int]:
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
 		var Team = GetShipsTeam(User)
+		
+		var PossibleTargets : Array[BattleShipStats]
+		for g in Team:
+			if (g != null):
+				PossibleTargets.append(g)
+				
 		#If aoe pick all team either if enemy of player
 		if (Mod.AOE):
-			for g in Team:
+			for g in PossibleTargets:
 				Targets.append(GetTargetIndex(g))
 			if (!Mod.SelfUse):
 				Targets.erase(GetTargetIndex(User))
 				
-		else: if Team.size() == 1:
-			Targets.append(GetTargetIndex(Team[0]))
+		else: if PossibleTargets.size() == 1:
+			Targets.append(GetTargetIndex(PossibleTargets[0]))
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Mod.CanBeUsedOnOther:
 			if (Friendly):
-				var PossibleTargets = PlayerCombatants
 				if (!Mod.SelfUse):
 					PossibleTargets.erase(User)
 				TargetSelect.SetEnemies(PossibleTargets)
@@ -1443,17 +1447,21 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[int]:
 			Targets = [GetTargetIndex(User)]
 	else:
 		var EnemyTeam = GetShipEnemyTeam(User)
+		
+		var PossibleTargets : Array[BattleShipStats]
+		for g in EnemyTeam:
+			if (g != null):
+				PossibleTargets.append(g)
 		#If aoe pick all enemy team either if enemy of player
 		if (Mod.AOE):
-			for g in EnemyTeam:
+			for g in PossibleTargets:
 				Targets.append(GetTargetIndex(g))
-
 		#If there is only 1 
-		else: if EnemyTeam.size() == 1:
-			Targets.append(GetTargetIndex(EnemyTeam[0]))
+		else: if PossibleTargets.size() == 1:
+			Targets.append(GetTargetIndex(PossibleTargets[0]))
 		else:
 			if (Friendly):
-				TargetSelect.SetEnemies(EnemyCombatants)
+				TargetSelect.SetEnemies(PossibleTargets)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
 				if (Target != null):
