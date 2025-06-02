@@ -64,6 +64,7 @@ enum WeaponType{
 	ML,
 	COIL,
 	MG180mm,
+	DRONE_DOCK,
 }
 
 enum CardType {

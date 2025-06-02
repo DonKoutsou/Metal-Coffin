@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=7 format=3 uid="uid://coeod5yhsw6es"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_28fx2"]
+[ext_resource type="Resource" uid="uid://dp1lgf8wdupg3" path="res://Resources/Cards/DroneStrike.tres" id="2_7su56"]
+[ext_resource type="Resource" uid="uid://c46f6ph2spg1r" path="res://Resources/Cards/DroneWall.tres" id="3_xs53l"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_aol0t"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="5_n6yym"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("4_aol0t")
+UpgradeName = 3
+UpgradeAmmount = 3.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("5_n6yym")
+WType = 5
+Upgrades = Array[ExtResource("4_aol0t")]([SubResource("Resource_fmxhr")])
+UpgradeTime = 600.0
+UpgradeCost = 25000.0
+IsDamaged = false
+PartType = 4
+ItemName = "Drone Dock + 2"
+ItemDesc = "WIP"
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_28fx2")]([ExtResource("2_7su56"), ExtResource("2_7su56"), ExtResource("2_7su56"), ExtResource("2_7su56"), ExtResource("2_7su56"), ExtResource("2_7su56"), ExtResource("2_7su56"), ExtResource("2_7su56"), ExtResource("3_xs53l"), ExtResource("3_xs53l"), ExtResource("3_xs53l"), ExtResource("3_xs53l"), ExtResource("3_xs53l"), ExtResource("2_7su56"), ExtResource("2_7su56")])
+Tier = 0
+CanTransfer = false

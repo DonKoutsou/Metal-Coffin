@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://732b0m15lc18"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://732b0m15lc18"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_bifgn"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_trv85"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="2_w2xra"]
-[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="3_i65tx"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/RevUp.tres" id="3_413pk"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="4_adnd2"]
 [ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="4_ugp5x"]
+[ext_resource type="Resource" uid="uid://bhbf1ia1lwyhx" path="res://Resources/Cards/Overheat.tres" id="5_p1uix"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_hho6w"]
 
 [sub_resource type="Resource" id="Resource_y5vig"]
@@ -41,6 +42,6 @@ PartType = 1
 ItemName = "EN-100"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_trv85")]([ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("3_i65tx"), ExtResource("3_i65tx"), ExtResource("4_ugp5x"), ExtResource("4_ugp5x")])
+CardProviding = Array[ExtResource("2_trv85")]([ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("3_413pk"), ExtResource("3_413pk"), ExtResource("4_ugp5x"), ExtResource("4_ugp5x"), ExtResource("5_p1uix")])
 Tier = 0
 CanTransfer = false

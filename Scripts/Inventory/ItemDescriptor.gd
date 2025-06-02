@@ -126,6 +126,7 @@ func SetEmptyShopData(Type : ShipPart.ShipPartType) -> void:
 	UpgradeButton.visible = false
 	AddItemButton.visible = true
 	UpgradeLabel.visible = false
+	ItemDesc.visible = false
 	set_physics_process(false) 
 	ItemName.text = "Empty {0} Slot".format([ShipPart.ShipPartType.keys()[Type]])
 

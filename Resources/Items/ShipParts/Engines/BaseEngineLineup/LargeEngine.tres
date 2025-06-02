@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://cxum5qaw20d1q"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://cxum5qaw20d1q"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_t7h3x"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_x01tj"]
-[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/SpeedBuff.tres" id="3_m01d6"]
+[ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/RevUp.tres" id="3_j5fk8"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_s64vj"]
+[ext_resource type="Resource" uid="uid://bhbf1ia1lwyhx" path="res://Resources/Cards/Overheat.tres" id="4_tq668"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_0moyl"]
 
 [sub_resource type="Resource" id="Resource_1w3hf"]
@@ -38,6 +39,6 @@ PartType = 1
 ItemName = "EN-500"
 ItemDesc = "The pinnacle of engineering, this engine includes advanced fuel atomization technology. It excels in long-haul missions, ensuring optimal energy distribution for maximum efficiency."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_x01tj")]([ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("3_m01d6"), ExtResource("3_m01d6")])
+CardProviding = Array[ExtResource("2_x01tj")]([ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("3_j5fk8"), ExtResource("3_j5fk8"), ExtResource("4_tq668")])
 Tier = 2
 CanTransfer = false

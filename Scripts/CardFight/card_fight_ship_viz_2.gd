@@ -37,7 +37,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	ShipIcon.get_child(0).texture = S.ShipIcon
 	HullLabel.text = "{0}/{1}".format([snapped(S.CurrentHull + S.Shield, 0.1), S.Hull]).replace(".0", "")
 	HullBar.max_value = S.Hull
-	ShieldBar.max_value = S.Hull * 2
+	ShieldBar.max_value = S.Hull
 	HullBar.value = S.CurrentHull
 	ShieldBar.value = 0
 	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")

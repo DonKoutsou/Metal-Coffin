@@ -733,15 +733,15 @@ func DoCurrentShipFireDamage() -> void:
 			viz.add_child(d)
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
 			d.Ended.connect(DoCurrentShipFireDamage)
-			var GameEnded = await DamageShip(CurrentShip, 10, false, true)
+			var GameEnded = await DamageShip(CurrentShip, 10 + (5 * CurrentShip.FireTurns), false, true)
+			
+			CurrentShip.FireTurns += 1
 			
 			if (GameEnded):
 				return
 			
 			CurrentTurn = CurrentTurn + 1
-			
-			
-				
+
 			return
 		
 		else:
@@ -1404,7 +1404,7 @@ func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModul
 		else : if (Mod.StatToBuff == CardModule.Stat.SPEED):
 			Callables.append(BuffShipSpeed.bind(g, DebuffAmmount, DebuffDurration))
 		else : if (Mod.StatToBuff == CardModule.Stat.DEFENCE):
-			Callables.append(DeBuffShipDefence.bind(g, DebuffAmmount, DebuffDurration))
+			Callables.append(BuffShipDefence.bind(g, DebuffAmmount, DebuffDurration))
 			
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
@@ -2005,6 +2005,13 @@ func DeBuffShipSpeed(Ship : BattleShipStats, Amm : float, Turns : int = 2) -> vo
 	
 	UpdateShipStats(Ship)
 
+func BuffShipDefence(Ship : BattleShipStats, Amm : float, Turns : int = 2) -> void:
+	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
+	Ship.DefBuff += Amm
+	Ship.DefBuffTime = Turns
+	
+	UpdateShipStats(Ship)
+
 func DeBuffShipDefence(Ship : BattleShipStats, Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	Ship.DefDebuff += Amm
@@ -2040,6 +2047,7 @@ func TrySetFire() -> bool:
 
 #atm of a ship is on fire is stored in the UI. Should change #TODO
 func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
+	BattleS.FireTurns = 0
 	GetShipViz(BattleS).ToggleFire(Fire)
 
 
@@ -2210,7 +2218,7 @@ func _on_deck_button_pressed() -> void:
 
 
 func _on_pull_reserves_pressed() -> void:
-	if (SelectingTarget or !PickingMoves or EnemyPickingMove or PlayerPerformingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+	if (SelectingTarget or !PickingMoves or EnemyPickingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
 		return
 	var currentship = GetCurrentShip()
 	var Reserv = currentship.EnergyReserves
@@ -2220,7 +2228,7 @@ func _on_pull_reserves_pressed() -> void:
 	
 
 func _on_switch_ship_pressed() -> void:
-	if (SelectingTarget or !PickingMoves or EnemyPickingMove or PlayerPerformingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+	if (SelectingTarget or !PickingMoves or EnemyPickingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
 		return
 	var CurrentShip = GetCurrentShip()
 

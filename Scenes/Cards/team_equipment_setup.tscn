@@ -364,3 +364,4 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_rew5m")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1

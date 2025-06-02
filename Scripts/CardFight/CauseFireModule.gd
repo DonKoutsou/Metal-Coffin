@@ -3,4 +3,4 @@ extends DeffenceCardModule
 class_name CauseFireModule
 
 func GetDesc(Tier : int) -> String:
-	return "Cause fire on self"
+	return "[color=#ff3c22]Cause fire on self[/color]"
