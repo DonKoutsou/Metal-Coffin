@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_w7l7e"]
 script = ExtResource("3_vo1ml")
-ShieldPerEnergy = 5
+ShieldPerEnergy = 10
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = false

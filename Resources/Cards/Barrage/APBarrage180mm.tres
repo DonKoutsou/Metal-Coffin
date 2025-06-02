@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 [sub_resource type="Resource" id="Resource_fktga"]
 script = ExtResource("4_dkq1a")
 AtackType = 0
-Damage = 10.0
+Damage = 18.0
 ScaleStat = Array[ExtResource("3_llx4w")]([SubResource("Resource_tmbps")])
 CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("2_n00g4")]([])
@@ -31,7 +31,7 @@ script = ExtResource("5_2j3qj")
 Icon = ExtResource("1_gkd8j")
 CardName = "AP Barragge"
 CardDescriptionOverride = ""
-Energy = 3
+Energy = 2
 AllowDuplicates = true
 Consume = true
 OnUseModules = Array[ExtResource("2_n00g4")]([])

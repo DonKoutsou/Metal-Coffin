@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=7 format=3 uid="uid://ch5wc05kfabp5"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_0il23"]
+[ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2_yyojb"]
+[ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="3_jfk13"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_cmn6p"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="5_mkyh2"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("4_cmn6p")
+UpgradeName = 3
+UpgradeAmmount = 3.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("5_mkyh2")
+WType = 3
+Upgrades = Array[ExtResource("4_cmn6p")]([SubResource("Resource_fmxhr")])
+UpgradeTime = 600.0
+UpgradeCost = 25000.0
+IsDamaged = false
+PartType = 4
+ItemName = "Coil + 2"
+ItemDesc = "WIP"
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_0il23")]([ExtResource("2_yyojb"), ExtResource("2_yyojb"), ExtResource("2_yyojb"), ExtResource("2_yyojb"), ExtResource("3_jfk13"), ExtResource("3_jfk13"), ExtResource("3_jfk13")])
+Tier = 0
+CanTransfer = false

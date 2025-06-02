@@ -19,7 +19,7 @@ colors = PackedColorArray(0.421311, 0.88706, 0.915024, 1, 0.810676, 0.304988, 0.
 
 [node name="MissileThing" type="Node2D" node_paths=PackedStringArray("InitialParticle", "EndingParticle", "SoundNode", "Trail")]
 script = ExtResource("1_qklay")
-speed = 25
+speed = 30
 base_curve_intensity = 0.2
 wiggle_amplitude = 0.0
 wiggle_frequency = 0.0

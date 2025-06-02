@@ -136,7 +136,7 @@ point_count = 2
 [node name="MissileThing" type="Node2D" node_paths=PackedStringArray("InitialParticle", "EndingParticle", "SoundNode", "Trail")]
 rotation = -1.5708
 script = ExtResource("1_5lbu3")
-speed = 25
+speed = 30
 base_curve_intensity = 0.25
 wiggle_amplitude = 0.0
 wiggle_frequency = 0.0

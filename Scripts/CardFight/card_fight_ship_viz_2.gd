@@ -83,9 +83,12 @@ func OnActionsPerformed() -> void:
 	HasMovePanel.visible = false
 
 func UpdateStats(S : BattleShipStats) -> void:
-	HullBar.value = S.CurrentHull
+	var HullTween = create_tween()
+	HullTween.tween_property(HullBar, "value", S.CurrentHull, 1)
+	#HullBar.value = S.CurrentHull
 	HullLabel.text = "{0}/{1}".format([snapped(S.CurrentHull + S.Shield, 0.1), S.Hull]).replace(".0", "")
-	ShieldBar.value = S.Shield
+	var ShieldTween = create_tween()
+	ShieldTween.tween_property(ShieldBar, "value", S.Shield, 1)
 	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")
 	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
 	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")

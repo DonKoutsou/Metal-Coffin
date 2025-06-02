@@ -173,6 +173,46 @@ func IntroDeclarationFinished() -> void:
 
 func ReplaceShip(Ship : BattleShipStats) -> void:
 	
+	ActionList.RemoveShip(Ship)
+	#Save the ships index in the turns array so that we can add this ship on same position
+	var TurnPosition = ShipTurns.find(Ship)
+	
+	var Position = ShipTurns.find(Ship)
+	if (CurrentTurn > Position):
+		CurrentTurn -= 1
+	ShipTurns.erase(Ship)
+	
+	var NewCombatant : BattleShipStats
+	var Friendly = IsShipFriendly(Ship)
+	
+	if (Friendly):
+		#save index so we can add any replacement on that position
+		var Index = PlayerCombatants.find(Ship)
+		PlayerCombatants.erase(Ship)
+		if (PlayerReserves.size() > 0):
+			NewCombatant = PlayerReserves.pop_front()
+			PlayerCombatants.insert(Index, NewCombatant)
+			PlayerReserves.erase(NewCombatant)
+			
+			ShipTurns.insert(TurnPosition, NewCombatant)
+			#ShipTurns.sort_custom(speed_comparator)
+		else:
+			PlayerReserves.insert(Index, null)
+	else:
+		#save index so we can add any replacement on that position
+		var Index = EnemyCombatants.find(Ship)
+		EnemyCombatants.erase(Ship)
+		
+		if (EnemyReserves.size() > 0):
+			NewCombatant = EnemyReserves.pop_front()
+			EnemyCombatants.insert(Index, NewCombatant)
+			EnemyReserves.erase(NewCombatant)
+			
+			ShipTurns.insert(TurnPosition, NewCombatant)
+			#ShipTurns.sort_custom(speed_comparator)
+		else:
+			EnemyCombatants.insert(Index, null)
+	
 	#Play the dead animation on the ShipViz
 	var Viz = GetShipViz(Ship)
 	await Viz.ShipDestroyed()
@@ -183,44 +223,8 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 	Viz.get_parent().remove_child(Viz)
 	add_child(Viz)
 	
-	ActionList.RemoveShip(Ship)
-	#Save the ships index in the turns array so that we can add this ship on same position
-	var TurnPosition = ShipTurns.find(Ship)
-	
-	var Position = ShipTurns.find(Ship)
-	if (CurrentTurn > Position):
-		CurrentTurn -= 1
-	ShipTurns.erase(Ship)
-
-	if (IsShipFriendly(Ship)):
-		#save index so we can add any replacement on that position
-		var Index = PlayerCombatants.find(Ship)
-		PlayerCombatants.erase(Ship)
-		if (PlayerReserves.size() > 0):
-			var NewCombatant = PlayerReserves.pop_front()
-			PlayerCombatants.insert(Index, NewCombatant)
-			PlayerReserves.erase(NewCombatant)
-			
-			ShipTurns.insert(TurnPosition, NewCombatant)
-			#ShipTurns.sort_custom(speed_comparator)
-			CreateShipVisuals(NewCombatant, true)
-		else:
-			PlayerReserves.insert(Index, null)
-	else:
-		#save index so we can add any replacement on that position
-		var Index = EnemyCombatants.find(Ship)
-		EnemyCombatants.erase(Ship)
-		
-		if (EnemyReserves.size() > 0):
-			var NewCombatant = EnemyReserves.pop_front()
-			EnemyCombatants.insert(Index, NewCombatant)
-			EnemyReserves.erase(NewCombatant)
-			
-			ShipTurns.insert(TurnPosition, NewCombatant)
-			#ShipTurns.sort_custom(speed_comparator)
-			CreateShipVisuals(NewCombatant, false)
-		else:
-			EnemyCombatants.insert(Index, null)
+	if (NewCombatant != null):
+		CreateShipVisuals(NewCombatant, Friendly)
 			
 	UpdateFleetSizeAmmount()
 
@@ -515,14 +519,7 @@ func RemoveCard(C : Card) -> void:
 	if (Stats.Consume):
 		var ShipCards = CurrentShip.Cards
 		var HasCard = false
-		for g in ShipCards.keys():
-			#print("Comparing {0} with {1}".format([g.resource_path, C.CStats.resource_path]))
-			if (g.GetCardName() == Stats.GetCardName()):
-				HasCard = true
-				ShipCards[g] += 1
-				break
-		if (!HasCard):
-			ShipCards[Stats] = 1
+		ShipCards.append(Stats)
 	
 	var viz = GetShipViz(CurrentShip)
 	viz.ActionRemoved(Stats.Icon)
@@ -581,6 +578,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	var t = func CheckIfToDraw(Acts : Array[CardStats]) -> Array[CardStats]:
 		if (Acts.size() == 0 and Ship.Energy > 0 and EnemyDeck.Hand.size() < MaxCardsInHand):
 			print("{0} draws a card".format([Ship.Name]))
+			Ship.Energy -= 1
 			HandleDrawCardEnemy(Ship)
 			Acts.clear()
 			return EnemyDeck.Hand.duplicate()
@@ -734,7 +732,7 @@ func DoCurrentShipFireDamage() -> void:
 			d.text = "Fire Damage"
 			viz.add_child(d)
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
-			
+			d.Ended.connect(DoCurrentShipFireDamage)
 			var GameEnded = await DamageShip(CurrentShip, 10, false, true)
 			
 			if (GameEnded):
@@ -742,7 +740,7 @@ func DoCurrentShipFireDamage() -> void:
 			
 			CurrentTurn = CurrentTurn + 1
 			
-			d.Ended.connect(DoCurrentShipFireDamage)
+			
 				
 			return
 		
@@ -1410,6 +1408,27 @@ func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModul
 			
 	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
+func HandleDebuffCleanse(Performer : BattleShipStats, Action : CardStats, Mod : CleanseDebuffModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+	var Targets : Array[BattleShipStats]
+	if (TargetOverride.size() > 0):
+		Targets = TargetOverride
+	else:
+		var Ts = await HandleTargets(Mod, Performer)
+		for g in Ts:
+			Targets.append(GetTarget(g))
+		
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(GetShipViz(g))
+
+		Callables.append(CleanseShipDebuffs.bind(g))
+			
+	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
 
 func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardModule, TargetOverride : Array[BattleShipStats] = []) -> void:
 	var Targets : Array[BattleShipStats]
@@ -1973,6 +1992,11 @@ func BuffShipSpeed(Ship : BattleShipStats, Amm : float, Turns : int = 2) -> void
 	
 	UpdateShipStats(Ship)
 
+func CleanseShipDebuffs(Ship : BattleShipStats) -> void:
+	Ship.FirePowerDeBuff = 0
+	Ship.SpeedDeBuff = 0
+	Ship.DefDebuff = 0
+	UpdateShipStats(Ship)
 
 func DeBuffShipSpeed(Ship : BattleShipStats, Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
@@ -2132,7 +2156,7 @@ func UpdateHandAmount(NewAmm : int) -> void:
 
 func UpdateFleetSizeAmmount() -> void:
 	var TeamSize : int
-	for g in TeamSize:
+	for g in PlayerCombatants:
 		if (g != null):
 			TeamSize += 1
 	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + TeamSize])

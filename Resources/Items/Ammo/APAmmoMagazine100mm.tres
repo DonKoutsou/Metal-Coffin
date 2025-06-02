@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("3_3xkxt")
 WType = 1
-ItemName = "Armor-Piercing (AP) Ammo Magazine"
+ItemName = "Armor-Piercing (AP) Ammo Magazine 100mm"
 ItemDesc = "This magazine contains high-velocity rounds with reinforced cores, optimized for penetrating heavy armor and fortified hulls. The dense material composition minimizes deformation upon impact, allowing for deep penetration and critical internal damage."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_4abif")]([ExtResource("2_3xkxt")])

@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 [sub_resource type="Resource" id="Resource_b1127"]
 script = ExtResource("4_nw78c")
 AtackType = 2
-Damage = 9.0
+Damage = 14.0
 ScaleStat = Array[ExtResource("3_71kga")]([SubResource("Resource_5gb4d")])
 CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("2_vfx1b")]([])
@@ -31,7 +31,7 @@ script = ExtResource("5_ysgw6")
 Icon = ExtResource("1_t2djk")
 CardName = "Prox Fuse Barragge"
 CardDescriptionOverride = ""
-Energy = 3
+Energy = 2
 AllowDuplicates = true
 Consume = true
 OnUseModules = Array[ExtResource("2_vfx1b")]([])

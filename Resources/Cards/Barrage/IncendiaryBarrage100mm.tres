@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 [sub_resource type="Resource" id="Resource_0a432"]
 script = ExtResource("2_hvn5k")
 AtackType = 0
-Damage = 7.0
+Damage = 10.0
 ScaleStat = Array[ExtResource("3_hvn5k")]([SubResource("Resource_2i4xi")])
 CauseFile = true
 OnSuccesfullAtackModules = Array[ExtResource("3_0a432")]([])
@@ -31,7 +31,7 @@ script = ExtResource("3_uxmcf")
 Icon = ExtResource("2_0otap")
 CardName = "Incendiary Barragge"
 CardDescriptionOverride = ""
-Energy = 2
+Energy = 1
 AllowDuplicates = true
 Consume = true
 OnUseModules = Array[ExtResource("3_0a432")]([])

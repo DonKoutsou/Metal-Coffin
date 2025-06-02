@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://bohupsgl50ar7"]
+
+[ext_resource type="Texture2D" uid="uid://0ypiq7t350b8" path="res://Assets/Cards/Repairs.png" id="1_qkl5d"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_6ksfr"]
+[ext_resource type="Script" uid="uid://4ixtbetsek8s" path="res://Scripts/CardFight/CleanseDeBuffCardModule.gd" id="3_qkl5d"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_nypad"]
+
+[sub_resource type="Resource" id="Resource_6ksfr"]
+script = ExtResource("3_qkl5d")
+CanBeUsedOnOther = false
+SelfUse = true
+AOE = false
+TierUpgrade = 1.0
+TierUpgradeMethod = 0
+metadata/_custom_type_script = "uid://4ixtbetsek8s"
+
+[resource]
+script = ExtResource("4_nypad")
+Icon = ExtResource("1_qkl5d")
+CardName = "Emergency Repairs"
+CardDescriptionOverride = ""
+Energy = 5
+AllowDuplicates = true
+Consume = false
+OnUseModules = Array[ExtResource("2_6ksfr")]([SubResource("Resource_6ksfr")])
+Type = 2
+WeapT = 0

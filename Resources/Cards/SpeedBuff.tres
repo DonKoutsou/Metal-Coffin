@@ -9,7 +9,7 @@
 script = ExtResource("3_r7uwp")
 StatToBuff = 1
 BuffDuration = 2
-BuffAmmount = 1.5
+BuffAmmount = 1.2
 CanBeUsedOnOther = false
 SelfUse = true
 AOE = false
@@ -22,7 +22,7 @@ script = ExtResource("4_nqbud")
 Icon = ExtResource("1_nqbud")
 CardName = "Engine Revup"
 CardDescriptionOverride = ""
-Energy = 4
+Energy = 3
 AllowDuplicates = true
 Consume = false
 OnUseModules = Array[ExtResource("2_nqbud")]([SubResource("Resource_r7uwp")])

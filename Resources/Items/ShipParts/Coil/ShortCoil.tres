@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=7 format=3 uid="uid://b0oy34hfyku06"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=8 format=3 uid="uid://b0oy34hfyku06"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_3xmbh"]
 [ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2_aagpo"]
 [ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="3_j17v7"]
+[ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="4_j17v7"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="7_yug86"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="8_7eamt"]
 
@@ -17,6 +18,7 @@ CurrentValue = 0.0
 script = ExtResource("8_7eamt")
 WType = 3
 Upgrades = Array[ExtResource("7_yug86")]([SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("4_j17v7")
 UpgradeTime = 600.0
 UpgradeCost = 25000.0
 IsDamaged = false

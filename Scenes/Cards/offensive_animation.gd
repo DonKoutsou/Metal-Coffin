@@ -246,6 +246,10 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 		for Ship in TargetShips:
 			call_deferred("SpawnDownVisual", Ship, DeffenceCard)
 			await wait(0.2)
+	else : if (Mod is CleanseDebuffModule):
+		BuffText = "Debuffs\nCleansed"
+		call_deferred("SpawnShieldVisual", DeffenceCard, DeffenceCard)
+		await wait(0.2)
 	else : if (Mod is StackDamageCardModule):
 		BuffText = "Damage +"
 		call_deferred("SpawnUpDamageVisual", DeffenceCard, DeffenceCard)

@@ -8,9 +8,9 @@ func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
 	var Dmg : float
 	
 	if (StoredEnergy > 0):
-		Dmg = (Damage * GetTieredDamage(Tier)) * StoredEnergy
+		Dmg = GetTieredDamage(Tier) * StoredEnergy
 	else:
-		Dmg = (Damage * GetTieredDamage(Tier)) * Performer.Energy
+		Dmg = GetTieredDamage(Tier) * Performer.Energy
 
 	return Dmg
 
@@ -46,14 +46,8 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 		Desc = "Hit enemy team"
 	else:
 		Desc = "Hit enemy"
-	
-	var En : int
-	if (StoredEnergy > 0):
-		En = StoredEnergy
-	else :
-		En = User.Energy
 		
-	Desc += " for\n[{0}]|[/color]{1}[{0}]|[/color] damage".format(["color=#ffc315", GetTieredDamage(Tier) * En])
+	Desc += " for\n[{0}]|[/color]{1}[{0}]|[/color] damage".format(["color=#ffc315", GetFinalDamage(User, Tier)])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit : [/color]"

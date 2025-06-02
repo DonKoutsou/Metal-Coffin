@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_1x6pr"]
 script = ExtResource("4_j4ns4")
 AtackType = 2
-Damage = 4.0
+Damage = 6.0
 ScaleStat = Array[ExtResource("3_jag0f")]([])
 CauseFile = false
 OnSuccesfullAtackModules = Array[ExtResource("2_48pk0")]([])
