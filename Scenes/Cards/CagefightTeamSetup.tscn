@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://dc1y0qs5n466n"]
+[gd_scene load_steps=80 format=3 uid="uid://dc1y0qs5n466n"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_dj5ey"]
 [ext_resource type="Script" uid="uid://c18s5swteqr3n" path="res://Scripts/CardFight/cagefight_team_setup.gd" id="1_enhfx"]
@@ -32,6 +32,7 @@
 [ext_resource type="Resource" uid="uid://cvk1mvgokhtus" path="res://Resources/Captains/EnemyCaptains/EnemyTanker4.tres" id="29_u7u5a"]
 [ext_resource type="Resource" uid="uid://8nr6ss128jfn" path="res://Resources/Captains/EnemyCaptains/LandEnemyFireship2.tres" id="29_wis72"]
 [ext_resource type="PackedScene" uid="uid://cuek7mm0smt8c" path="res://Scenes/Cards/team_equipment_setup.tscn" id="32_5o5j4"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://InputScroll.gd" id="32_mgnjr"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="33_ovnka"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="34_pefvv"]
 [ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine100mm.tres" id="35_0skxp"]
@@ -78,7 +79,7 @@
 [ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="67_mscvp"]
 [ext_resource type="Resource" uid="uid://by5pd080gjivc" path="res://Resources/Items/ShipParts/Shield/SGP-3 Ship Barrier.tres" id="68_hswng"]
 
-[sub_resource type="Resource" id="Resource_b8xut"]
+[sub_resource type="Resource" id="Resource_mgnjr"]
 resource_local_to_scene = true
 script = ExtResource("33_ovnka")
 ItemName = "Fire Suppression Unit"
@@ -191,17 +192,20 @@ theme_override_styles/panel = ExtResource("1_dj5ey")
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2/PanelContainer"]
 layout_mode = 2
 horizontal_scroll_mode = 0
+script = ExtResource("32_mgnjr")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2/PanelContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="TeamEquipmentSetup" parent="PanelContainer/VBoxContainer" instance=ExtResource("32_5o5j4")]
 visible = false
 layout_mode = 2
-Equipment = Array[ExtResource("33_ovnka")]([ExtResource("46_ufipr"), ExtResource("47_rxtc1"), ExtResource("49_jjr6e"), ExtResource("51_fw80n"), ExtResource("48_o8d3c"), ExtResource("50_ovnka"), ExtResource("34_pefvv"), ExtResource("57_ej3ya"), ExtResource("58_8unkc"), ExtResource("50_clvof"), ExtResource("55_r37ip"), ExtResource("56_k4l7a"), ExtResource("48_mscvp"), ExtResource("61_hswng"), ExtResource("62_clvof"), ExtResource("49_hswng"), ExtResource("59_03j4m"), ExtResource("60_mscvp"), ExtResource("35_0skxp"), ExtResource("36_8pnpl"), ExtResource("54_rrhts"), ExtResource("47_r37ip"), ExtResource("48_k4l7a"), ExtResource("53_dmw0h"), ExtResource("53_1dko6"), ExtResource("54_vro0t"), ExtResource("47_03j4m"), ExtResource("53_ej3ya"), ExtResource("54_8unkc"), ExtResource("52_a07pj"), ExtResource("51_o8d3c"), ExtResource("52_jjr6e"), ExtResource("37_2ldnj"), ExtResource("38_0gvoa"), SubResource("Resource_b8xut"), ExtResource("41_1dko6"), ExtResource("42_vro0t"), ExtResource("43_r37ip"), ExtResource("44_k4l7a"), ExtResource("46_8unkc"), ExtResource("66_03j4m"), ExtResource("67_mscvp"), ExtResource("68_hswng")])
+Equipment = Array[ExtResource("33_ovnka")]([ExtResource("46_ufipr"), ExtResource("47_rxtc1"), ExtResource("49_jjr6e"), ExtResource("51_fw80n"), ExtResource("48_o8d3c"), ExtResource("50_ovnka"), ExtResource("34_pefvv"), ExtResource("57_ej3ya"), ExtResource("58_8unkc"), ExtResource("50_clvof"), ExtResource("55_r37ip"), ExtResource("56_k4l7a"), ExtResource("48_mscvp"), ExtResource("61_hswng"), ExtResource("62_clvof"), ExtResource("49_hswng"), ExtResource("59_03j4m"), ExtResource("60_mscvp"), ExtResource("35_0skxp"), ExtResource("36_8pnpl"), ExtResource("54_rrhts"), ExtResource("47_r37ip"), ExtResource("48_k4l7a"), ExtResource("53_dmw0h"), ExtResource("53_1dko6"), ExtResource("54_vro0t"), ExtResource("47_03j4m"), ExtResource("53_ej3ya"), ExtResource("54_8unkc"), ExtResource("52_a07pj"), ExtResource("51_o8d3c"), ExtResource("52_jjr6e"), ExtResource("37_2ldnj"), ExtResource("38_0gvoa"), SubResource("Resource_mgnjr"), ExtResource("41_1dko6"), ExtResource("42_vro0t"), ExtResource("43_r37ip"), ExtResource("44_k4l7a"), ExtResource("46_8unkc"), ExtResource("66_03j4m"), ExtResource("67_mscvp"), ExtResource("68_hswng")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

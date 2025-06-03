@@ -392,9 +392,16 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 
 
 func OnCardSelected(C : Card) -> bool:
-	
-	if (SelectingTarget or EnemyPickingMove or Shuffling):
+	if (SelectingTarget):
+		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return false
+	if (EnemyPickingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
+		return false
+	if (Shuffling):
+		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
+		return false
+
 	
 	var Ship = GetCurrentShip()
 	
@@ -498,8 +505,13 @@ func OnCardSelected(C : Card) -> bool:
 
 
 func RemoveCard(C : Card) -> void:
-	if (SelectingTarget or EnemyPickingMove):
+	if (SelectingTarget):
+		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return
+	if (EnemyPickingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
+		return
+
 	
 	var CurrentShip = GetCurrentShip()
 	
@@ -637,7 +649,16 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 
 
 func PlayerActionSelectionEnded() -> void:
-	if (SelectingTarget or !PickingMoves or EnemyPickingMove or PlayerPerformingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+	if (SelectingTarget):
+		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
+		return
+	if (EnemyPickingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
+		return
+	if (CurrentPhase != CardFightPhase.ACTION_PICK):
+		PopUpManager.GetInstance().DoFadeNotif("Can't perform outside of Action Pick phase")
+		return
+	if (!PickingMoves):
 		return
 	#GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 	PlayerActionPickingEnded.emit()
@@ -876,7 +897,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 				var Def = TargetList[g]["Def"] as CardStats
 				if (TargetList[g]["Def"] != null):
 					var CounterMod = Def.OnPerformModule
-					if (CounterMod == DamageReductionCardModule):
+					if (CounterMod is DamageReductionCardModule):
 						var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier) * CounterMod.ReductionPercent, Mod.CauseFile, Mod.SkipShield)
 						DamageCallables.append(c)
 				else:
@@ -1245,9 +1266,6 @@ func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mo
 	
 	UpdateReserves(Performer, 0, Friendly)
 
-	#var Targets = await HandleTargets(Mod, Performer)
-	#var TargetViz : Array[Control]
-
 	UpdateEnergy(Performer, Performer.Energy + resupplyamm, Friendly)
 			
 	await DoDeffenceAnim(Action, Mod, Performer, [GetShipViz(Performer)], Friendly, [])
@@ -1543,6 +1561,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[int]:
 
 func HandleDrawCard(Performer : BattleShipStats) -> bool:
 	if (Shuffling):
+		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
 		return false
 	
 	var D = GetShipDeck(Performer)
@@ -2183,6 +2202,7 @@ func ClearCards() -> void:
 var HandCountTween : Tween
 
 func NotifyFullHand() -> void:
+	PopUpManager.GetInstance().DoFadeNotif("Hand is full")
 	if (HandCountTween and HandCountTween.is_running()):
 		HandCountTween.kill()
 	
@@ -2199,7 +2219,19 @@ func NotifyFullHandStage2() -> void:
 
 
 func _on_deck_button_pressed() -> void:
-	if (SelectingTarget or EnemyPickingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+	if (SelectingTarget):
+		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
+		ExternalUI.CardDrawFail()
+		return
+	if (EnemyPickingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
+		ExternalUI.CardDrawFail()
+		return
+	if (CurrentPhase != CardFightPhase.ACTION_PICK):
+		PopUpManager.GetInstance().DoFadeNotif("Can't perform outside of Action Pick phase")
+		ExternalUI.CardDrawFail()
+		return
+	if (!PickingMoves):
 		ExternalUI.CardDrawFail()
 		return
 	
@@ -2210,6 +2242,7 @@ func _on_deck_button_pressed() -> void:
 	if (Energy < 1):
 		ExternalUI.GetEnergyBar().NotifyNotEnough()
 		ExternalUI.CardDrawFail()
+		PopUpManager.GetInstance().DoFadeNotif("Not enough energy")
 		return
 	
 	
@@ -2218,8 +2251,18 @@ func _on_deck_button_pressed() -> void:
 
 
 func _on_pull_reserves_pressed() -> void:
-	if (SelectingTarget or !PickingMoves or EnemyPickingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+	if (SelectingTarget):
+		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return
+	if (EnemyPickingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
+		return
+	if (CurrentPhase != CardFightPhase.ACTION_PICK):
+		PopUpManager.GetInstance().DoFadeNotif("Can't perform outside of Action Pick phase")
+		return
+	if (!PickingMoves):
+		return
+		
 	var currentship = GetCurrentShip()
 	var Reserv = currentship.EnergyReserves
 	currentship.EnergyReserves = 0
@@ -2228,8 +2271,18 @@ func _on_pull_reserves_pressed() -> void:
 	
 
 func _on_switch_ship_pressed() -> void:
-	if (SelectingTarget or !PickingMoves or EnemyPickingMove or CurrentPhase != CardFightPhase.ACTION_PICK):
+	if (SelectingTarget):
+		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return
+	if (EnemyPickingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
+		return
+	if (CurrentPhase != CardFightPhase.ACTION_PICK):
+		PopUpManager.GetInstance().DoFadeNotif("Can't perform outside of Action Pick phase")
+		return
+	if (!PickingMoves):
+		return
+		
 	var CurrentShip = GetCurrentShip()
 
 	TargetSelect.SetEnemies(PlayerReserves, true)

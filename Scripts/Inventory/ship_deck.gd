@@ -23,12 +23,11 @@ func SetDeck(Ch : Captain) -> void:
 	for g in CardPosition.get_children():
 		g.queue_free()
 	
-	var deck = Inv.GetCards()
-	#var ammo = Inv.GetCardAmmo()
+	var deck = Inv.GetCardDictionary()
 	
 	for card : CardStats in deck:
 		var c = CardScene.instantiate() as Card
-		c.SetCardStats(card)
+		c.SetCardStats(card, deck[card])
 		CardPosition.add_child(c)
 		c.Dissable()
 

@@ -56,7 +56,7 @@ func DoIntroFullScreen(NewStat : ScreenState) -> void:
 func IntroCloseFinisehd(NewStat : ScreenState) -> void:
 	FullScreenToggleStarted.emit(NewStat)
 	
-	await Helper.GetInstance().wait(0.2)
+	#await Helper.GetInstance().wait(0.2)
 	Cables.visible = true
 	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
 	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
@@ -87,14 +87,10 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	await CloseTw.finished
 	
 	FullScreenToggleStarted.emit(NewStat)
-	
-	await Helper.GetInstance().wait(0.2)
 
 	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
 	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
-	
-	
-	
+
 	var OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
 	OpenTw.set_trans(Tween.TRANS_QUART)
@@ -109,24 +105,12 @@ func _ready() -> void:
 	FullScreenFrame.visible = false
 	ScreenPanel.visible = false
 	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
-	#EventHandler.connect("AccelerationForced", Acceleration_Forced)
-	#EventHandler.connect("SteerDirForced", Steer_Forced)
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
-	#EventHandler.connect("CoverToggled", ToggleControllCover)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
 	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
 
-	#OnControlledShipDamaged()
-#
-#func _input(event: InputEvent) -> void:
-	#if (event.is_action_pressed("Click")):
-		#ToggleFullScreen(true)
-
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)
-	#var tw = create_tween()
-	#tw.set_trans(Tween.TRANS_BOUNCE)
-	#tw.tween_property($ScreenCam, "shakestr", 0, $ScreenCam.shakestr * 3)
 	Cam.DissableShake()
 	
 func Acceleration_Changed(value: float) -> void:
@@ -168,9 +152,6 @@ func ControlledShipSwitched(NewShip : MapShip) -> void:
 	MissileUI.UpdateConnectedShip(NewShip)
 	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
 	Steer.ForceSteer(NewShip.rotation)
-	#UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	#UIEventH.OnSteerDirForced(ControlledShip.rotation)
-	#DroneUI.UpdateConnectedShip(NewShip)
 
 # Marker editor
 func Marker_Editor_Pressed() -> void:

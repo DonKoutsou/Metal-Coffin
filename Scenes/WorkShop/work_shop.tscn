@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhbyfc1rfad2f"]
+[gd_scene load_steps=13 format=3 uid="uid://dhbyfc1rfad2f"]
 
 [ext_resource type="Script" uid="uid://cl0fuirqabjb0" path="res://Scripts/TownShop/work_shop.gd" id="1_4uhfw"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="1_6rtyi"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://mcrp4chqoake" path="res://Scenes/TownShop/StatComperator.tscn" id="4_r5mim"]
 [ext_resource type="PackedScene" uid="uid://b6gyf4stqfreh" path="res://Resources/Funds/FundsDisplayTown.tscn" id="5_k666n"]
 [ext_resource type="PackedScene" uid="uid://cuutvp45vr0ew" path="res://Scenes/Inventory/WorkShopItemDescriptor.tscn" id="6_rs5of"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://InputScroll.gd" id="7_itsvt"]
 [ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="8_jmydl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
@@ -95,6 +96,8 @@ autowrap_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rs5of")
+script = ExtResource("7_itsvt")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -133,19 +136,24 @@ custom_minimum_size = Vector2(270, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bpcd3")
+script = ExtResource("7_itsvt")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="HFlowContainer2" type="HFlowContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -156,14 +164,17 @@ text = "Engines"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 columns = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
@@ -174,14 +185,17 @@ text = "Fuel Tanks"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+mouse_filter = 2
 columns = 3
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3/VBoxContainer3"]
 layout_mode = 2
@@ -192,14 +206,17 @@ text = "Sensors"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 2
+mouse_filter = 2
 columns = 3
 
 [node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4/VBoxContainer4"]
 layout_mode = 2
@@ -210,14 +227,17 @@ text = "Shields"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+mouse_filter = 2
 columns = 3
 
 [node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
 [node name="VBoxContainer5" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5/VBoxContainer5"]
 layout_mode = 2
@@ -228,6 +248,7 @@ text = "Weapons"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+mouse_filter = 2
 columns = 3
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]

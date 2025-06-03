@@ -19,7 +19,7 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_kvmkw"]
 environment = SubResource("Environment_vaeb3")
 
-[node name="HappeningInstance" type="Control" node_paths=PackedStringArray("OptionParent", "HappeningTitle", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "DiagButtons", "NextDialogueButton", "SkipDialogueButton", "Line", "Amp") groups=["Happening"]]
+[node name="HappeningInstance" type="Control" node_paths=PackedStringArray("OptionParent", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "DiagButtons", "NextDialogueButton", "SkipDialogueButton", "Line", "Amp") groups=["Happening"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +28,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_nimax")
 OptionParent = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer")
-HappeningTitle = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/Label")
 HappeningText = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/Label2")
 HappeningBackgroundTexture = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/TextureRect")
 ProgBar = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/ProgressBar")
@@ -131,15 +130,6 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Test"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-uppercase = true
 
 [node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 1)

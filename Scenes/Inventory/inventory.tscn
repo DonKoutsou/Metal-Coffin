@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dslxdgbana1k1"]
+[gd_scene load_steps=14 format=3 uid="uid://dslxdgbana1k1"]
 
 [ext_resource type="Script" uid="uid://de8gy2g6upjg4" path="res://Scripts/Inventory/InventoryManager.gd" id="2_n8wv5"]
 [ext_resource type="PackedScene" uid="uid://cmvl7w65kwp5a" path="res://Scenes/Inventory/character_inventory.tscn" id="3_5gkpo"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_0fcos"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="8_n1gkd"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_o4jeo"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://InputScroll.gd" id="9_ubet6"]
 [ext_resource type="AudioStream" uid="uid://d4k7al36dc8er" path="res://Assets/Sounds/ScreenZap.wav" id="13_jjw7x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1gkd"]
@@ -32,7 +33,7 @@ border_blend = true
 corner_detail = 1
 shadow_size = 4
 
-[node name="Inventory" type="Control" node_paths=PackedStringArray("CharacterPlace", "DescriptorPlace", "CaptainStats", "InvScrol")]
+[node name="Inventory" type="Control" node_paths=PackedStringArray("CharacterPlace", "DescriptorPlace", "CaptainStats")]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -48,7 +49,6 @@ ItemNotifScene = ExtResource("6_q7t14")
 CharacterPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/ScrollContainer/VBoxContainer")
 DescriptorPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer")
 CaptainStats = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer")
-InvScrol = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/ScrollContainer")
 MissileDockEventH = ExtResource("7_ffxnd")
 DroneDockEventH = ExtResource("8_0fcos")
 
@@ -76,6 +76,8 @@ size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_n1gkd")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
+script = ExtResource("9_ubet6")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -99,5 +101,3 @@ layout_mode = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_jjw7x")
 bus = &"Sounds"
-
-[connection signal="gui_input" from="VBoxContainer2/PanelContainer/HBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]

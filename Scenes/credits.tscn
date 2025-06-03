@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxkoglcdnoen2"]
+[gd_scene load_steps=10 format=3 uid="uid://dxkoglcdnoen2"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_gryuy"]
 [ext_resource type="Texture2D" uid="uid://8wnfauuuwprh" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
 [ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="2_1bamb"]
 [ext_resource type="Script" uid="uid://be7e88egssi03" path="res://Scripts/credits.gd" id="2_xelri"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://InputScroll.gd" id="4_1wbrc"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="4_803yc"]
 [ext_resource type="Texture2D" uid="uid://i0ngh8uftjja" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
 [ext_resource type="Texture2D" uid="uid://3ry1vwlq8lr7" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
@@ -34,20 +35,25 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 29.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("4_1wbrc")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 3
 alignment = 1
 

@@ -4,7 +4,6 @@ class_name HappeningInstance
 
 #@export var TestHappening : Happening
 @export var OptionParent : Control
-@export var HappeningTitle : Label
 @export var HappeningText : RichTextLabel
 @export var HappeningBackgroundTexture : TextureRect
 @export var ProgBar : ProgressBar
@@ -54,10 +53,6 @@ func _ready() -> void:
 
 func PresentHappening(Hap : Happening):
 	SimulationManager.GetInstance().TogglePause(true)
-
-	#set_physics_process(true)
-	
-	HappeningTitle.text = Hap.HappeningName
 
 	Hapen = Hap
 	CurrentBranch = Hap.Stages

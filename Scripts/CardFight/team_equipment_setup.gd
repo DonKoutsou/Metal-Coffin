@@ -22,6 +22,7 @@ class_name TeamEquipmentSetup
 @export var ItemParent : Control
 
 var CurrentCpt : Captain
+var CurrentDescriptor : ItemDescriptor
 
 #func _ready() -> void:
 	#var b = CaptainB.instantiate() as CaptainButton
@@ -201,35 +202,38 @@ func GetTypeOfBox(Box : Inventory_Box) -> ShipPart.ShipPartType:
 	else : if (BoxParent == ShieldInventoryBoxParent):
 		Type = ShipPart.ShipPartType.SHIELD
 	else: 
-		Type = ShipPart.ShipPartType.NORMAL
+		Type = ShipPart.ShipPartType.INVENTORY
 	return Type
 
 func ItemSelected(Box : Inventory_Box) -> void:
-	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-	if (descriptors.size() > 0):
-		var desc = descriptors[0] as ItemDescriptor
-		DescriptorPlace.remove_child(desc)
-		desc.queue_free()
+	if (CurrentDescriptor != null):
+		#var desc = descriptors[0] as ItemDescriptor
+		DescriptorPlace.remove_child(CurrentDescriptor)
+		CurrentDescriptor.queue_free()
 		DeckUI.get_parent().visible = true
-		if (desc.DescribedContainer == Box):
+		if (CurrentDescriptor.DescribedContainer == Box):
 			return
-
 	
-	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
-	Descriptor.DescribedContainer = Box
+	CurrentDescriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
+	CurrentDescriptor.DescribedContainer = Box
 	if (Box.IsEmpty()):
-		Descriptor.SetEmptyShopData(GetTypeOfBox(Box))
-		Descriptor.ItemAdd.connect(AddItem)
+		CurrentDescriptor.SetEmptyShopData(GetTypeOfBox(Box))
 	else:
-		Descriptor.SetCagefightData(Box, true, CurrentCpt)
-		Descriptor.ItemUpgraded.connect(UpgradeItem)
-		Descriptor.ItemRemove.connect(RemoveItem)
-		Descriptor.ItemIncrease.connect(IncreaseItem)
-
-	DescriptorPlace.add_child(Descriptor)
+		CurrentDescriptor.SetData(Box, true, true, false, true, true, true)
+	
+	CurrentDescriptor.ItemAdd.connect(AddItem)
+	CurrentDescriptor.ItemUpgraded.connect(UpgradeItem)
+	CurrentDescriptor.ItemRemove.connect(RemoveItem)
+	CurrentDescriptor.ItemIncrease.connect(IncreaseItem)
+	
+	DescriptorPlace.add_child(CurrentDescriptor)
 	DeckUI.get_parent().visible = false
-	Descriptor.set_physics_process(false)
-	Descriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	CurrentDescriptor.set_physics_process(false)
+	CurrentDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+func UpdateDescriptor(Box : Inventory_Box) -> void:
+	if (CurrentDescriptor != null):
+		CurrentDescriptor.SetData(Box, true, true, false, true, true, true)
 
 func UpgradeItem(Box : Inventory_Box) -> void:
 	var OriginalItem = Box.GetContainedItem() as ShipPart
@@ -239,8 +243,8 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	Box.RegisterItem(UpgradedItem)
 	#Box.UpdateAmm(1)
 	DeckUI.SetDeck2(CurrentCpt)
-	ItemSelected(Box)
-
+	UpdateDescriptor(Box)
+	PopUpManager.GetInstance().DoFadeNotif("{0} Upgraded".format([OriginalItem.ItemName]))
 
 var SelectedContainer : Inventory_Box
 func AddItem(Box : Inventory_Box) -> void:
@@ -255,7 +259,7 @@ func AddItem(Box : Inventory_Box) -> void:
 		if (g is ShipPart):
 			if (Type == g.PartType):
 				ItemCatalogue.append(g)
-		else: if (Type == ShipPart.ShipPartType.NORMAL):
+		else: if (Type == ShipPart.ShipPartType.INVENTORY):
 			ItemCatalogue.append(g)
 	
 	for g in ItemCatalogue:
@@ -267,6 +271,7 @@ func AddItem(Box : Inventory_Box) -> void:
 	
 
 func IncreaseItem(Box : Inventory_Box) -> void:
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().ItemName]))
 	Box.UpdateAmm(1)
 	CurrentCpt.StartingItems.append(Box.GetContainedItem())
 	DeckUI.SetDeck2(CurrentCpt)
@@ -280,11 +285,14 @@ func OnItemSelected(Box : Inventory_Box) -> void:
 	SelectedContainer.RegisterItem(Box.GetContainedItem())
 	SelectedContainer.UpdateAmm(1)
 	DeckUI.SetDeck2(CurrentCpt)
-	ItemSelected(SelectedContainer)
+	UpdateDescriptor(SelectedContainer)
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().ItemName]))
 
 func RemoveItem(Box : Inventory_Box) -> void:
+	PopUpManager.GetInstance().DoFadeNotif("{0} Removed".format([Box.GetContainedItem().ItemName]))
 	var OriginalItem = Box.GetContainedItem()
 	CurrentCpt.StartingItems.erase(OriginalItem)
 	Box.UpdateAmmNoDissable(-1)
 	DeckUI.SetDeck2(CurrentCpt)
-	ItemSelected(Box)
+	if (Box.IsEmpty()):
+		ItemSelected(Box)

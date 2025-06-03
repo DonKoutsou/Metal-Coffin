@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=23 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -13,15 +13,14 @@
 [ext_resource type="Script" uid="uid://cf7you43vrtlg" path="res://Scripts/UI/current_ship_text.gd" id="8_u111i"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="9_vr5ky"]
-[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="10_ct3x8"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
 [ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="18_in80l"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_rwdyb"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="18_u111i"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
-[ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="25_nvtku"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
@@ -73,31 +72,27 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -10.0
-offset_top = -2.0
+offset_top = -18.0
 offset_right = -10.0
-offset_bottom = -2.0
+offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
 
 [node name="CurrentShipText" type="Label" parent="Control3"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -246.0
+offset_left = 18.0
 offset_top = -20.5
-offset_right = -13.0
+offset_right = 251.0
 offset_bottom = 20.5
-grow_horizontal = 0
 grow_vertical = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("13_lb8ei")
 theme_override_font_sizes/font_size = 18
 text = "Current Captain Craden
 HULL : 100%"
-horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("8_u111i")
 ShipControllerEventH = ExtResource("9_vr5ky")
@@ -236,28 +231,35 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_0vqem")
 
-[node name="TextureRect" type="TextureRect" parent="Control3/PauseContainer"]
+[node name="TextureRect" type="ColorRect" parent="Control3/PauseContainer"]
 layout_mode = 2
-texture = ExtResource("10_ct3x8")
-expand_mode = 1
+color = Color(0.11435, 0.205627, 0.212156, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control3/PauseContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control3/PauseContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 20
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("18_u111i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control3/PauseContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
 alignment = 1
 
-[node name="PauseLabel" type="Label" parent="Control3/PauseContainer/VBoxContainer"]
+[node name="PauseLabel" type="Label" parent="Control3/PauseContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("9_8iafl")
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 50
-text = "Device
- on standby"
+theme_override_fonts/font = ExtResource("10_ljnge")
+theme_override_font_sizes/font_size = 56
+text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Return" type="Button" parent="Control3/PauseContainer/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Return" type="Button" parent="Control3/PauseContainer/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
 visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -266,51 +268,41 @@ theme_override_font_sizes/font_size = 34
 text = "Return
 "
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control3/PauseContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control3/PauseContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 60
 alignment = 1
 
-[node name="SettingPanel" parent="Control3/PauseContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_rwdyb")]
+[node name="SettingPanel" parent="Control3/PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_rwdyb")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="Control3/PauseContainer/VBoxContainer/HBoxContainer2"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Control3/PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 25
 alignment = 1
 
-[node name="Save" type="Button" parent="Control3/PauseContainer/VBoxContainer/HBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Save" type="Button" parent="Control3/PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("9_8iafl")
 theme_override_font_sizes/font_size = 34
-text = "Save"
+text = "Save Game"
 
-[node name="Flight Manual" type="Button" parent="Control3/PauseContainer/VBoxContainer/HBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Flight Manual" type="Button" parent="Control3/PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("9_8iafl")
 theme_override_font_sizes/font_size = 34
 text = "Flight Manual"
 
-[node name="Exit" type="Button" parent="Control3/PauseContainer/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Exit" type="Button" parent="Control3/PauseContainer/PanelContainer/VBoxContainer" groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("9_8iafl")
 theme_override_font_sizes/font_size = 34
-text = "Exit"
-
-[node name="Control" type="Control" parent="Control3/PauseContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="Control3/PauseContainer/Control" instance=ExtResource("25_nvtku")]
-layout_mode = 1
-offset_left = -293.0
-offset_top = -68.0
-offset_right = -25.0
-offset_bottom = -25.0
+text = "Exit To Main Menu"
 
 [node name="FlightManual" parent="Control3/PauseContainer" instance=ExtResource("18_in80l")]
 visible = false
@@ -339,7 +331,7 @@ mouse_filter = 2
 
 [connection signal="gui_input" from="Control3" to="." method="_on_control_3_gui_input"]
 [connection signal="pressed" from="Control3/PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]
-[connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/Return" to="." method="Pause"]
-[connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
-[connection signal="pressed" from="Control3/PauseContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control3/PauseContainer/PanelContainer/VBoxContainer/Return" to="." method="Pause"]
+[connection signal="pressed" from="Control3/PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Control3/PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
+[connection signal="pressed" from="Control3/PauseContainer/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

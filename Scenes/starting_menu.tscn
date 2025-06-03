@@ -39,7 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/LightCone.png" id="36_j43p8"]
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
-offsets = PackedFloat32Array(0.52029, 0.550725)
+offsets = PackedFloat32Array(0.504407, 0.550725)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1p5b6"]
 noise_type = 3

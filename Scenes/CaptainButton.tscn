@@ -1,8 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dci144io03ffa"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_ydicf"]
 [ext_resource type="Script" uid="uid://dvx4hdp7fvbi0" path="res://Scripts/fleet_separation_ship_viz.gd" id="2_f1v6n"]
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="4_5k7vr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g6ucl"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
 
 [node name="FleetSeparationShipViz" type="PanelContainer" node_paths=PackedStringArray("CapPortrait", "CapName")]
 anchors_preset = 8
@@ -13,10 +18,11 @@ anchor_bottom = 0.5
 offset_left = -121.0
 offset_top = -52.0
 offset_right = 121.0
-offset_bottom = 24.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_ydicf")
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g6ucl")
 script = ExtResource("2_f1v6n")
 CapPortrait = NodePath("VBoxContainer/CapPortrait")
 CapName = NodePath("VBoxContainer/CapName")

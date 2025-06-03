@@ -114,6 +114,7 @@ func OnMunitionShopToggled() -> void:
 	
 
 func OnItemSold(It : Item) -> void:
+	PopupManager.GetInstance().DoFadeNotif("{0} has been sold".format([It.ItemName]))
 	for g in LandedShips:
 		var inv = g.Cpt.GetCharacterInventory()
 		if (inv.HasItem(It)):
@@ -125,6 +126,7 @@ func OnItemSold(It : Item) -> void:
 			break
 
 func OnItemBought(It : Item) -> void:
+	PopupManager.GetInstance().DoFadeNotif("{0} bought".format([It.ItemName]))
 	for g in LandedShips:
 		var inv = g.Cpt.GetCharacterInventory()
 		if (inv.HasSpaceForItem(It)):

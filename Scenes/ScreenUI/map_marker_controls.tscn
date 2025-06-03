@@ -109,7 +109,7 @@ texture = ExtResource("1_sg83c")
 expand_mode = 1
 
 [node name="YGas" parent="Control" instance=ExtResource("2_67mm3")]
-position = Vector2(-117, 34)
+position = Vector2(-118, 34)
 scale = Vector2(0.520363, 0.520363)
 
 [node name="XGas" parent="Control" instance=ExtResource("2_67mm3")]
@@ -123,10 +123,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 84.0
-offset_top = -6.0
-offset_right = 147.0
-offset_bottom = 17.0
+offset_left = 85.0
+offset_top = -5.0
+offset_right = 149.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("3_djntk")
@@ -144,8 +144,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 84.0
 offset_top = -46.0
-offset_right = 145.0
-offset_bottom = -24.0
+offset_right = 148.0
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("6_i6u6v")

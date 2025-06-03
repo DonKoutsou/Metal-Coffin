@@ -40,7 +40,7 @@ func GetItemDesc() -> String:
 
 
 enum ShipPartType{
-	NORMAL,
+	INVENTORY,
 	ENGINE,
 	SENSOR,
 	FUEL_TANK,

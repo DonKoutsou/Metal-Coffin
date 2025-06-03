@@ -203,7 +203,7 @@ func Enable() -> void:
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf(But)
-	But.set_mouse_filter(Control.MOUSE_FILTER_STOP)
+	But.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	$SubViewportContainer.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	
 func GetCost() -> int:

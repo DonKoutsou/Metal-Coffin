@@ -35,10 +35,10 @@ func DoFadeNotif(Text : String, Parent : Node = null, overridetime : float = 4):
 		f[0].queue_free()
 	var dig = FadNot.instantiate() as FadeNotif
 	dig.alph = overridetime
-	
+	dig.SetText(Text)
 	if (is_instance_valid(Parent)):
 		Parent.add_child(dig)
 	else:
 		Ingame_UIManager.GetInstance().PopupPlecement.add_child(dig)
 		
-	dig.SetText(Text)
+	

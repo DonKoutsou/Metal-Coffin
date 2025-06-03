@@ -44,10 +44,11 @@ func OnCptReleased(Cpt : Captain) -> void:
 	CharB.SetCpt(NewCpt)
 	CharB.OnShipSelected.connect(RemoveFromTeam.bind(CharB))
 	if (OverPlayerTeam):
-		
+		PopupManager.GetInstance().DoFadeNotif("{0} added to Player's team".format([Cpt.CaptainName]))
 		PlayerTeamPlacement.add_child(CharB)
 		PlayerTeam.append(NewCpt)
 	else : if (OverEnemyTeam):
+		PopupManager.GetInstance().DoFadeNotif("{0} added to Enemy's team".format([Cpt.CaptainName]))
 		EnemyTeamPlacement.add_child(CharB)
 		EnemyTeam.append(NewCpt)
 	else:
@@ -55,8 +56,13 @@ func OnCptReleased(Cpt : Captain) -> void:
 
 func RemoveFromTeam(B : CaptainButton) -> void:
 	B.queue_free()
-	PlayerTeam.erase(B.ContainedCaptain)
-	EnemyTeam.erase(B.ContainedCaptain)
+	if (PlayerTeam.has(B)):
+		PopupManager.GetInstance().DoFadeNotif("{0} removed from Player's team".format([B.ContainedCaptain.CaptainName]))
+		PlayerTeam.erase(B.ContainedCaptain)
+	else:
+		PopupManager.GetInstance().DoFadeNotif("{0} removed from Enemy's team".format([B.ContainedCaptain.CaptainName]))
+		EnemyTeam.erase(B.ContainedCaptain)
+	
 
 func _physics_process(delta: float) -> void:
 	if (FloatingButton != null):
@@ -80,6 +86,12 @@ func _on_enemy_team_mouse_exited() -> void:
 	OverEnemyTeam = false
 
 func _on_ready_pressed() -> void:
+	if (PlayerTeam.size() == 0):
+		PopUpManager.GetInstance().DoFadeNotif("Can't start fight\n Player Team is empty")
+		return
+	if (EnemyTeam.size() == 0):
+		PopUpManager.GetInstance().DoFadeNotif("Can't start fight\n Enemy Team is empty")
+		return
 	TeamReady.emit(PlayerTeam, EnemyTeam)
 
 

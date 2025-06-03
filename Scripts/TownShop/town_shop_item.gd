@@ -29,6 +29,13 @@ func _ready() -> void:
 	Bar.max_value = ShopAmm + PlAmm
 	Bar.value = PlAmm
 
+func Init(ShopItem : Item, Price : float, ShopAmmount : int, PlayerAmmount : int, Ships : Array[MapShip]) -> void:
+	It = ShopItem
+	ItPrice = Price
+	ShopAmm = ShopAmmount
+	PlAmm = PlayerAmmount
+	LandedShips = Ships
+
 var Accum : float = 0
 func ItemBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):

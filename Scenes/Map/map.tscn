@@ -86,7 +86,7 @@ shader_parameter/custom_time = 0.0
 light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujsvm"]
-bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+bg_color = Color(0.11435, 0.205627, 0.212156, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -130,7 +130,6 @@ disable_3d = true
 own_world_3d = true
 world_3d = ExtResource("10_28wu2")
 handle_input_locally = false
-snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(869, 595)
@@ -150,7 +149,6 @@ stretch_shrink = 2
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
-snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cid0s6uni7fky"]
+[gd_scene load_steps=34 format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_0dp8t"]
@@ -31,6 +31,7 @@
 [ext_resource type="Resource" uid="uid://bwwb3anxj624k" path="res://Resources/Happenings/The evangelist.tres" id="22_8o37l"]
 [ext_resource type="Resource" uid="uid://c5n56ywx45ilm" path="res://Resources/Happenings/The execution.tres" id="23_43ao6"]
 [ext_resource type="Resource" uid="uid://cxkj2k4llta37" path="res://Resources/Happenings/YoungCrewDiscussion.tres" id="24_8o37l"]
+[ext_resource type="Resource" uid="uid://bcorxmnws22bw" path="res://Resources/Happenings/The Evaluation.tres" id="28_32m5b"]
 
 [sub_resource type="Curve" id="Curve_0dp8t"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -90,7 +91,7 @@ WorldviewAdjustNotif = ExtResource("18_567dx")
 [node name="EventManager" type="Node" parent="."]
 script = ExtResource("19_0dp8t")
 EventsPerSpot = Dictionary[int, Array]({
-0: [ExtResource("20_8eeky"), ExtResource("21_ljctt"), ExtResource("22_8o37l"), ExtResource("23_43ao6"), ExtResource("24_8o37l")],
+0: [ExtResource("20_8eeky"), ExtResource("21_ljctt"), ExtResource("22_8o37l"), ExtResource("23_43ao6"), ExtResource("24_8o37l"), ExtResource("28_32m5b")],
 1: [ExtResource("20_7no5x")],
 2: []
 })

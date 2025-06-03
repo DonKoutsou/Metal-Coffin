@@ -81,6 +81,7 @@ func _on_skip_pressed() -> void:
 
 
 func _on_next_pressed() -> void:
-	if (CharactersShowing < textToShow[0].length()):
+	if (textToShow.size() > 0 and CharactersShowing < textToShow[0].length()):
 		CharactersShowing = textToShow[0].length()
+		return
 	SkipLine()

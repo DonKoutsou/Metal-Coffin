@@ -10,6 +10,7 @@ var txt : String
 func SetText(t : String):
 	txt = t
 	T.text = t
+	T.visible_characters = 0
 
 func _physics_process(_delta: float) -> void:
 	if (txt.length() > T.visible_characters):

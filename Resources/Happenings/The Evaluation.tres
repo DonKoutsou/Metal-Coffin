@@ -1,0 +1,114 @@
+[gd_resource type="Resource" script_class="Happening" load_steps=10 format=3 uid="uid://bcorxmnws22bw"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_d3qx6"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_r15pu"]
+[ext_resource type="Script" uid="uid://dbopqdo4787oe" path="res://Scripts/MapSpot/Happenings/TownFuelHappeningOption.gd" id="3_d3qx6"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="4_48yxy"]
+
+[sub_resource type="Resource" id="Resource_r15pu"]
+script = ExtResource("1_d3qx6")
+HappeningTexts = Array[String](["Your acts wont work here boy.... Get back to your ship, the fuel will arrive soon. May whoever be up there help us.........."])
+Options = Array[ExtResource("2_r15pu")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_rgmjt"]
+script = ExtResource("3_d3qx6")
+FuelToGive = 250.0
+StringReply = "The man seems to cringe away for a second. He stares at you reading your expression, waiting for ..... no... hoping for it to break. But it doesent.
+\"Maybe to beat the devil, another devil is needed... Go on, son, I’ll send the fuel in a moment. A small gift from us as well—go give them hell.\""
+OptionName = "Let me see them try."
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_d3qx6")]([])
+WorldviewEffect = 1
+WorldviewEffectAmm = 10
+WorldviewCheck = 1
+CheckPossetive = true
+CheckDifficulty = 60
+WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_r15pu")])
+ReverseEffectOnFail = false
+metadata/_custom_type_script = "uid://dbopqdo4787oe"
+
+[sub_resource type="Resource" id="Resource_48yxy"]
+script = ExtResource("1_d3qx6")
+HappeningTexts = Array[String](["\"You are giving away your life for nothing kid. And life is a big thing to give away like that. Do as you please, but keep it away from here. Go, we'll bring the fuel...\""])
+Options = Array[ExtResource("2_r15pu")]([])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[sub_resource type="Resource" id="Resource_d3qx6"]
+script = ExtResource("3_d3qx6")
+FuelToGive = 500.0
+StringReply = "The man's expression shifts; you can’t tell if it's disbelief or pity. He slowly raises his arm and lets it fall on your shoulder, a soft smile forming on his face. \"Your recklessness might actually shake this world enough to change it. May whoever is up there bless your journey, son. You’ll have my support nonetheless. Go back to your ship, son; we’ll be bringing the fuel shortly.\""
+OptionName = "“They might, but that won’t stop us from trying.”"
+FinishDiag = false
+BranchContinuation = Array[ExtResource("1_d3qx6")]([])
+WorldviewEffect = 2
+WorldviewEffectAmm = 10
+WorldviewCheck = 2
+CheckPossetive = true
+CheckDifficulty = 40
+WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_48yxy")])
+ReverseEffectOnFail = false
+metadata/_custom_type_script = "uid://dbopqdo4787oe"
+
+[sub_resource type="Resource" id="Resource_hv8jm"]
+script = ExtResource("1_d3qx6")
+HappeningTexts = Array[String](["As you step off the ship, you sense a lot of eyes on you. The crowd bustling around the port seems wary of your presence.", "People are moving left and right, carrying goods, guiding visitors, and salespeople shouting about their commerce. Suddenly, everything comes to a halt.", "As if on cue, the moment you notice this, it all goes back to normal, as though nothing ever happened.", "You make your way toward the shipyard to order some fuel for your vessel. Upon entering the shipyard, you find people moving about just like in the port.", "You attempt to say a word to one of the workers, but he instantly points you toward a room in the back, as if he knows exactly why you’re here.", "Indeed, the room at the back appears to be the accountant's office. He barely looks up, seemingly busy punching numbers into a machine, with more and more paper coming out of it.", "spell check this text and try to improve it a bit without changing it too much
+
+As you come out of the ship you sense alot of eyes on you. The crowd going around in the port seems to wary of you. 
+
+People going left and right all over the place, carrying stuff, guiding people, sales people shouting about their comerce... All for a second stops.
+
+As if by chance the moment you notice about it, it all goese back to normal, like norhing has happened.
+
+You make your way towards the shipyard to order some fure for your ships. Entering the shipyard there are people goin all over the place, just as the port.
+
+You try to say a word at one of the workers and he instantly points you towards a room on the back, as if he knew what you were here for.
+
+Indeed the room at the back seemed to have been the acountant's office. He barely looks up, seems to be punching in numbers on a machine, more and more paper comming out of it.
+
+You gently knock on the door trying to get his atention. Without even lifting his head he asks you about the ship's callsign and the amount of fuel you will be needing.
+
+You ask for a full restock. As you mention your ship's callsign it seems to grab his atention for a second. He lifts up his head as if to take a look at you.
+
+Behind his huge googles you see a wide glance weighing you up and down. The man leaves his deck and step infront of you. \"You with the rebelion aren't you son?\"
+
+\"What are you all even trying to do here? You think you are some heroes or something? You wont make it but for the next few towns. The regime will obliterate you.\"
+
+1st response option
+\"Let me see them try.\"
+
+response
+\"Maybe to beat the devil another devil is needed\".... \"Go on son, i'll send the fuel in a sec. A small gift from us as well, go give them hell.\"
+
+2nd response option
+They might,but that wont stop us from trying.
+
+response
+The man's look changes, you cant make if its a look of dissbelief or if he just feels sorry for you. He slowly raises his arm and lets it fall on your shoulder. A soft smile comes on his face. \"You recklesness might actually shake this word enough to change it. May whoever is up there bless your journey son. You'll be having my support nonetheless. Go back to your ship son, we will be bringing the fuel in a bit.
+
+Here's a revised and spell-checked version, maintaining the essence of your original text:
+
+As you step off the ship, you sense a lot of eyes on you. The crowd bustling around the port seems wary of your presence.
+
+People are moving left and right, carrying goods, guiding visitors, and salespeople shouting about their commerce. Suddenly, everything comes to a halt.
+
+As if on cue, the moment you notice this, it all goes back to normal, as though nothing ever happened.
+
+You make your way toward the shipyard to order some fuel for your vessel. Upon entering the shipyard, you find people moving about just like in the port.
+
+You attempt to say a word to one of the workers, but he instantly points you toward a room in the back, as if he knows exactly why you’re here.
+
+Indeed, the room at the back appears to be the accountant's office. He barely looks up, seemingly busy punching numbers into a machine, with more and more paper coming out of it.
+
+You gently knock on the door to get his attention. Without lifting his head, he asks you about your ship's callsign and how much fuel you will need.", "You request a full restock. As you mention your ship's callsign, you notice it grabs his attention momentarily. He lifts his head to take a look at you.", "Behind his large goggles, you see a scrutinizing glance measuring you up and down. The man leaves his desk and steps in front of you. \"You're with the rebellion, aren't you, son?\"", "\"What are you all even trying to do here? Do you think you're some sort of heroes? You won’t make it past the next few towns. The regime will obliterate you.\""])
+Options = Array[ExtResource("2_r15pu")]([SubResource("Resource_rgmjt"), SubResource("Resource_d3qx6")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[resource]
+script = ExtResource("4_48yxy")
+HappeningName = "The Evaluation"
+Stages = Array[ExtResource("1_d3qx6")]([SubResource("Resource_hv8jm")])
+HappeningAppearance = 1
+Special = true
+CrewRecruit = false
+AllowedAppearances = 1

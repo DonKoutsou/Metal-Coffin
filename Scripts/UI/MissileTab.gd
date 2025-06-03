@@ -124,7 +124,7 @@ func OnLaunchPressed() -> void:
 	
 func OnArmPressed() -> void:
 	if (AvailableMissiles.size() == 0):
-		PopUpManager.GetInstance().DoFadeNotif("No missiles available")
+		PopUpManager.GetInstance().Do("No missiles available")
 		DissarmMiss()
 		return
 	if (Armed):

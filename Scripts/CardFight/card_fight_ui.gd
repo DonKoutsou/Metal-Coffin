@@ -221,6 +221,7 @@ func _on_switch_ship_pressed() -> void:
 
 func _on_button_pressed() -> void:
 	if (PlayCardInsert.get_child_count() > 0 or DrawCardInsert.get_child_count() > 0 or DiscardInsert.get_child_count()):
+		PopUpManager.GetInstance().DoFadeNotif("Can't End Turn while playing a card")
 		return
 	OnEndTurnPressed.emit()
 

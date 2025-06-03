@@ -1,0 +1,192 @@
+[gd_scene load_steps=9 format=3 uid="uid://blgxtaj45pjfs"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_uhv8j"]
+[ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_1gff0"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_c5c2l"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://InputScroll.gd" id="4_ji6lp"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_tvvk2"]
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="6_pe6aq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
+bg_color = Color(0.066982, 0.133257, 0.137998, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_uhv8j")
+script = ExtResource("2_1gff0")
+CardScene = ExtResource("3_c5c2l")
+ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")
+ItemDesc = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
+TransferButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
+UpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
+AddItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddItem")
+IncreaseItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddMore")
+RemoveItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem")
+UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
+CardSection = NodePath("VBoxContainer/HBoxContainer/CardsSection")
+CardPlecement = NodePath("VBoxContainer/HBoxContainer/CardsSection/CardPlecement")
+
+[node name="VBoxContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jut7c")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("4_ji6lp")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("5_tvvk2")
+theme_override_font_sizes/font_size = 28
+text = "Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_tvvk2")
+text = "Upgrade"
+
+[node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_tvvk2")
+text = "Equip Item"
+
+[node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_tvvk2")
+text = "Add More"
+
+[node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_tvvk2")
+text = "Remove Item"
+
+[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_tvvk2")
+text = "Transfer"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/normal_font = ExtResource("5_tvvk2")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[color=#c19200]Upgrade Time[/color] : 4x
+"
+fit_content = true
+autowrap_mode = 2
+
+[node name="ItemDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/normal_font = ExtResource("5_tvvk2")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
+fit_content = true
+autowrap_mode = 2
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+
+[node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CardsSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tvvk2")
+text = "Providing Cards"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="CardPlecement" type="Container" parent="VBoxContainer/HBoxContainer/CardsSection"]
+custom_minimum_size = Vector2(0, 270)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("6_pe6aq")
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
+
+[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddItem" to="." method="_on_add_item_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddMore" to="." method="_on_add_more_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem" to="." method="_on_remove_item_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]

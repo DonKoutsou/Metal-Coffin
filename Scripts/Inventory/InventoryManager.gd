@@ -131,7 +131,7 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	if (cpt.CurrentPort != ""):
 		var cit = GetCity(cpt.CurrentPort)
 		HasUp = cit.HasUpgrade()
-	Descriptor.SetData(Box, HasUp)
+	Descriptor.SetData(Box, HasUp, false, Box.GetContainedItem().CanTransfer, false, false, true)
 	#Descriptor.connect("ItemUsed", UseItem)
 	Descriptor.connect("ItemUpgraded", OwnerInventory.UpgradeItem)
 	Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
@@ -408,7 +408,3 @@ func ToggleInventory() -> void:
 func InventoryTutorial() -> void:
 	var TutorialText = "The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
 	ActionTracker.GetInstance().ShowTutorial("Cargo", TutorialText, [], true)
-
-func _on_scroll_container_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		InvScrol.scroll_vertical -= event.relative.y

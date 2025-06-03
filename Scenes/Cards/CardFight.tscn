@@ -399,7 +399,6 @@ CardContainer = NodePath("VBoxContainer/HBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/CardSelect"]
 layout_mode = 2
-theme_override_constants/separation = 30
 
 [node name="Label" type="Label" parent="SubViewport/Control2/CardSelect/VBoxContainer"]
 layout_mode = 2

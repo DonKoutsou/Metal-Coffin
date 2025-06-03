@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_sfmn7"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_l7yg4"]
 [ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_ot8kj"]
-[ext_resource type="Texture2D" uid="uid://dvky5ro1x854j" path="res://Assets/Sand/Ice003_1K-PNG_Color.png" id="4_ek6u8"]
+[ext_resource type="Texture2D" uid="uid://chdov106pirvg" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="4_ek6u8"]
 
 [node name="Town2" type="Node2D"]
 position = Vector2(608, 338)

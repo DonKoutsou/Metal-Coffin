@@ -56,6 +56,25 @@ func GetCards() -> Array[CardStats]:
 
 	return CardsInInventory
 
+func GetCardDictionary() -> Dictionary[CardStats, int]:
+	var c : Dictionary[CardStats, int]
+	for g in _InventoryContents:
+		if (g is AmmoItem and !HasWeapon(g.WType)):
+			continue
+		for z in g.CardProviding:
+			var C = z.duplicate() as CardStats
+			C.Tier = g.Tier
+			
+			var Added = false
+			
+			for Ca : CardStats in c.keys():
+				if (Ca.IsSame(C)):
+					c[Ca] += 1
+					Added = true
+					break
+			if (!Added):
+				c[C] = 1
+	return c
 #func GetCardAmmo() -> Dictionary:
 	#return _CardAmmo.duplicate()
 
@@ -195,7 +214,7 @@ func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 		BoxParent = WeaponInventoryBoxParent
 	else : if (PartType == ShipPart.ShipPartType.SHIELD):
 		BoxParent = ShieldInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.NORMAL):
+	else : if (PartType == ShipPart.ShipPartType.INVENTORY):
 		BoxParent = InventoryBoxParent
 	return BoxParent
 	
@@ -223,6 +242,8 @@ func GetBoxContainingItem(It : Item) -> Inventory_Box:
 	var Box : Inventory_Box
 	
 	for g : Inventory_Box in boxes:
+		if (g.IsEmpty()):
+			continue
 		if (g.GetContainedItem().IsSame(It)):
 			Box = g
 			
