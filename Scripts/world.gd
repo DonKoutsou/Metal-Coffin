@@ -376,11 +376,12 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	fuel.LandedShips.append_array(spot.VisitingShips)
 	fuel.TownSpot = spot
 	if (!skiptransition):
-		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
-	
+	GetMap().GetScreenUi().ToggleTownUI(true)
+	GetMap().GetScreenUi().TownVisited(true)
 	await GetMap().GetScreenUi().FullScreenToggleFinished
 
 		
@@ -420,6 +421,8 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShi
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
+	GetMap().GetScreenUi().TownVisited(false)
+	GetMap().GetScreenUi().ToggleTownUI(false)
 	await GetMap().GetScreenUi().FullScreenToggleFinished
 	#Play events saved from happening
 	for g in OverworldEventsToShow:
@@ -461,7 +464,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 
 func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
 
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	#else:
 		#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted

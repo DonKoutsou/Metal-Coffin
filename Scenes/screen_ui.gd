@@ -23,6 +23,7 @@ class_name ScreenUI
 @export var FullScreenFrame : TextureRect
 @export var ScreenPanel : TextureRect
 @export var CardFightUI : ExternalCardFightUI
+@export var TownUI : TownExternalUI
 
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
@@ -72,6 +73,10 @@ func IntroCloseFinisehd(NewStat : ScreenState) -> void:
 
 func ToggleCardFightUI(t : bool) -> void:
 	CardFightUI.visible = t
+
+func ToggleTownUI(t : bool) -> void:
+	TownUI.visible = t
+	TownUI.TimesToPlay = 0
 
 func ToggleFullScreen(NewStat : ScreenState) -> void:
 	#FullScreenToggleStarted.emit()
@@ -216,6 +221,12 @@ func Pause_Pressed() -> void:
 		_ScreenItems.visible = ScreenItemsStateBeforePause
 	EventHandler.OnPausePressed()
 	
+func TownVisited(t : bool) -> void:
+	if (t):
+		ScreenItemsStateBeforePause = _ScreenItems.visible
+		_ScreenItems.visible = false
+	else:
+		_ScreenItems.visible = ScreenItemsStateBeforePause
 
 func OnControlledShipDamaged(DamageAmm : float) -> void:
 	Cam.EnableDamageShake(DamageAmm / 10)

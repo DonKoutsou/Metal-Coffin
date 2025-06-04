@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=50 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
@@ -28,6 +28,7 @@
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
+[ext_resource type="PackedScene" uid="uid://bvduhiu1v7ywh" path="res://Scenes/Cards/TownExternalUI.tscn" id="30_myhbu"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="31_ua54b"]
 [ext_resource type="PackedScene" uid="uid://cjbda0fdx38c4" path="res://Scenes/Cards/card_fight_ui.tscn" id="31_wetmy"]
@@ -295,7 +296,7 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI")]
+[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI")]
 process_mode = 1
 layer = 2
 follow_viewport_enabled = true
@@ -318,6 +319,7 @@ NormalScreen = NodePath("NormalScreen")
 FullScreenFrame = NodePath("ScreenFrameLong")
 ScreenPanel = NodePath("Panel")
 CardFightUI = NodePath("NormalScreen/CardFightExternalUI")
+TownUI = NodePath("NormalScreen/TownUI")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ng3jm")
@@ -724,6 +726,10 @@ theme_override_font_sizes/font_size = 40
 text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TownUI" parent="NormalScreen" instance=ExtResource("30_myhbu")]
+visible = false
+layout_mode = 1
 
 [node name="ScreenFrameLong" type="TextureRect" parent="."]
 visible = false

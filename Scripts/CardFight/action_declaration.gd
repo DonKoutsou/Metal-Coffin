@@ -10,7 +10,7 @@ signal ActionDeclarationFinished
 func _ready() -> void:
 	visible = false
 
-func DoActionDeclaration(ActionName : String, CustomTime : float = 3) -> void:
+func DoActionDeclaration(ActionName : String, CustomTime : float = 2) -> void:
 	visible = true
 	get_child(0).text = ActionName
 	var Tw = create_tween()

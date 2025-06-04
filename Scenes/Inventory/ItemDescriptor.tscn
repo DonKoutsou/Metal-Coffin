@@ -170,9 +170,9 @@ horizontal_alignment = 1
 uppercase = true
 
 [node name="CardPlecement" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection"]
-custom_minimum_size = Vector2(0, 270)
+custom_minimum_size = Vector2(350, 270)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 3
 script = ExtResource("5_si1ht")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"

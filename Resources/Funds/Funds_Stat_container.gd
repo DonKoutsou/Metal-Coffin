@@ -15,6 +15,8 @@ func _ready() -> void:
 	PlayerWallet.connect("OnFundsUpdated", UpDateFunds)
 
 func UpDateFunds(NewAmm : int) -> void:
+	if (NewAmm == CurrentAmm):
+		return
 	if (tw != null):
 		tw.kill()
 	tw = create_tween()

@@ -45,7 +45,7 @@ scale_max = 0.1
 [node name="TownBackground" type="ParallaxBackground" node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_vcb2a")
 LimitTop = 1920.0
-LimitSide = 160.0
+LimitSide = 300.0
 Camera = NodePath("Camera2D")
 LocationPositions = Dictionary[int, NodePath]({
 0: NodePath("ParallaxLayer3/Parallax2D/WorkShop"),

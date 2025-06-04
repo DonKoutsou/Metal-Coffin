@@ -61,6 +61,124 @@ func PlayIntroAnim() -> void:
 		var tuttext = "When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
 		ActionTracker.GetInstance().ShowTutorial("Item Inspection", tuttext, [self], true)
 
+func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
+	set_physics_process(false)
+	DescribedContainer = Box
+	var It = DescribedContainer.GetContainedItem()
+	#ItemIcon.texture = It.ItemIcon
+	#ItemDesc.text = It.GetItemDesc()
+	
+	#TransferButton.visible = It.CanTransfer
+	TransferButton.visible = false
+	AddItemButton.visible = false
+	UpgradeButton.visible = true
+	ItemName.text = It.ItemName
+	#Ship Parts
+	if (It is ShipPart):
+		
+		#ShipPartActions.visible = true
+		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
+		#if (CanUpgrade):
+		UpgradeLabel.visible = true
+		if (It.UpgradeVersion == null):
+			UpgradeButton.visible = false
+			UpgradeLabel.visible = false
+		else:
+			var inv = Owner.GetCharacterInventory()
+			if (inv.GetItemBeingUpgraded() != null and inv.GetItemBeingUpgraded().GetContainedItem() == It):
+				#set_physics_process(true)
+				UpgradeButton.visible = false
+				var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
+				UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
+			else:
+				UpgradeButton.visible = true
+				var UpTime = It.UpgradeTime
+				var UpCost = It.UpgradeCost
+				if (CanUpgrade):
+					UpTime /= 2
+					UpCost /= 2
+				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
+		
+	else :
+		
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+	
+	#TODO Option doesent show when ship has upgraded weapons
+	if (It.CardProviding.size() > 0):
+		var CardsChecked : Array[CardStats]
+		for g in It.CardProviding:
+			if (CardsChecked.has(g)):
+				continue
+			CardsChecked.append(g)
+			
+			var CardS = g.duplicate() as CardStats
+			CardS.Tier = It.Tier
+			var card = CardScene.instantiate() as Card
+			
+			#if (It.CardOptionProviding != null):
+				#CardS.SelectedOption = It.CardOptionProviding
+			card.SetCardStats(CardS, It.CardProviding.count(g))
+			CardPlecement.add_child(card)
+			card.Dissable()
+	else:
+		CardSection.visible = false
+
+func SetMerchData(Itm : Item) -> void:
+	for g in CardPlecement.get_children():
+		g.queue_free()
+		
+	set_physics_process(false)
+	DescribedItem = Itm
+	#ItemIcon.texture = It.ItemIcon
+	#ItemDesc.text = It.GetItemDesc()
+	ItemDesc.text = Itm.GetItemDesc()
+	#TransferButton.visible = It.CanTransfer
+	TransferButton.visible = false
+	
+	ItemName.text = Itm.ItemName
+	#Ship Parts
+	if (Itm is ShipPart):
+		
+		#ShipPartActions.visible = true
+		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
+		#if (CanUpgrade):
+		UpgradeLabel.visible = true
+		if (Itm.UpgradeVersion == null):
+			UpgradeButton.visible = false
+			UpgradeLabel.visible = false
+		else:
+
+			UpgradeButton.visible = true
+			var UpTime = Itm.UpgradeTime
+			var UpCost = Itm.UpgradeCost
+			UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
+	
+	else :
+		
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+	
+	#TODO Option doesent show when ship has upgraded weapons
+	if (Itm.CardProviding.size() > 0):
+		var CardsChecked : Array[CardStats]
+		for g in Itm.CardProviding:
+			if (CardsChecked.has(g)):
+				continue
+			CardsChecked.append(g)
+			
+			var CardS = g.duplicate() as CardStats
+			CardS.Tier = Itm.Tier
+			var card = CardScene.instantiate() as Card
+			
+			#if (It.CardOptionProviding != null):
+				#CardS.SelectedOption = It.CardOptionProviding
+			card.SetCardStats(CardS, Itm.CardProviding.count(g))
+			CardPlecement.add_child(card)
+			card.Dissable()
+		CardSection.visible = true
+	else:
+		CardSection.visible = false
 
 func SetData(Box : Inventory_Box, UpgradeBoost : bool, CanUpgrade : bool, CanTransfer : bool, CanAdd : bool, CanRemove : bool, ShowDescription : bool) -> void:
 	set_physics_process(false)

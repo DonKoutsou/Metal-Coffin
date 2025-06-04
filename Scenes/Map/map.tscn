@@ -136,14 +136,12 @@ size = Vector2i(869, 595)
 render_target_update_mode = 4
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/ViewPort"]
-texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer/ViewPort/SubViewportContainer"]
 disable_3d = true
@@ -152,7 +150,7 @@ handle_input_locally = false
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(434, 297)
+size = Vector2i(869, 595)
 render_target_update_mode = 4
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]

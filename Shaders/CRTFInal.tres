@@ -4,7 +4,7 @@
 
 [resource]
 shader = ExtResource("1_wo0vq")
-shader_parameter/res = Vector2(396, 254.5)
+shader_parameter/res = Vector2(792, 509)
 shader_parameter/mask_type = 2
 shader_parameter/vignette_strength = 4.0
 shader_parameter/image_flicker = 0.25

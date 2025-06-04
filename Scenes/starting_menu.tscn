@@ -572,7 +572,7 @@ stretch_mode = 0
 layout_mode = 2
 offset_left = 40.0
 offset_top = 270.0
-offset_right = 57.0
+offset_right = 56.0
 offset_bottom = 309.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -591,10 +591,10 @@ offset_bottom = 313.0
 
 [node name="Fight" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 157.0
-offset_top = 353.0
-offset_right = 209.0
-offset_bottom = 378.0
+offset_left = 158.0
+offset_top = 354.0
+offset_right = 208.0
+offset_bottom = 377.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -605,9 +605,9 @@ stretch_mode = 0
 
 [node name="Credits" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 184.0
-offset_top = 590.0
-offset_right = 211.0
+offset_left = 185.0
+offset_top = 591.0
+offset_right = 210.0
 offset_bottom = 640.0
 size_flags_vertical = 3
 action_mode = 0
@@ -655,10 +655,10 @@ offset_bottom = 492.0
 
 [node name="Button" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 38.0
-offset_top = 517.0
-offset_right = 61.0
-offset_bottom = 575.0
+offset_left = 39.0
+offset_top = 518.0
+offset_right = 60.0
+offset_bottom = 574.0
 size_flags_horizontal = 3
 texture_normal = ExtResource("28_rjgxf")
 texture_pressed = ExtResource("29_4ybsj")
@@ -667,9 +667,9 @@ stretch_mode = 0
 
 [node name="Exit" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
-offset_left = 41.0
-offset_top = 589.0
-offset_right = 68.0
+offset_left = 42.0
+offset_top = 590.0
+offset_right = 67.0
 offset_bottom = 639.0
 size_flags_vertical = 3
 action_mode = 0

@@ -23,8 +23,9 @@ func PlayDialogue(Text : Array[String], Avatar : Texture, Name : String):
 	ApplyNextText()
 	
 func DialogueEnded():
+	pass
 	#$AudioStreamPlayer.stop()
-	textToShow.remove_at(0)
+	#textToShow.remove_at(0)
 
 func SkipLine() -> void:
 	CharactersShowing = 0
@@ -68,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	if (CharactersShowing >= textToShow[0].length()):
 		DialogueEnded()
 		set_physics_process(false)
-		CharactersShowing = 0
+		
 		return
 	CharactersShowing += 1
 

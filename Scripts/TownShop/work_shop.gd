@@ -156,7 +156,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 		if (CurrentShip.Cpt.CurrentPort != ""):
 
 			HasUp = CurrentShip.CurrentPort.HasUpgrade()
-		Descriptor.SetData(Box, HasUp, true, false, true, true, false)
+		Descriptor.SetWorkShopData(Box, HasUp, CurrentShip.Cpt)
 		#Descriptor.connect("ItemUsed", UseItem)
 		Descriptor.connect("ItemUpgraded", UpgradeItem)
 		

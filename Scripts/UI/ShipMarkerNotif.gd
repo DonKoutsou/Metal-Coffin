@@ -30,10 +30,11 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	queue_free()
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	$Control.scale = Vector2(0.6,0.6) / NewZoom
+	$Control.scale = Vector2(1,1) / NewZoom
 	UpdateLine(NewZoom)
 	$Line2D.width =  1.5 / NewZoom
 	CurrentZoom = NewZoom
+	
 func UpdateLine(Zoom : float)-> void:
 	var c = $Control as Control
 	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)

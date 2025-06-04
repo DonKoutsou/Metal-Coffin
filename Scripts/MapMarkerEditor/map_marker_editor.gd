@@ -42,7 +42,7 @@ func _on_text_confirm_pressed() -> void:
 	MapPointerManager.GetInstance().MapLonePos.add_child(textblock)
 	textblock.add_to_group("LineMarkers")
 	textblock.CamZoomUpdated(ship_camera.zoom.x)
-	textblock.global_position = ship_camera.global_position + (pos / (ship_camera.zoom * 2))
+	textblock.global_position = ship_camera.global_position + (pos / (ship_camera.zoom))
 	textblock.SetText($MarkerTextEditor/VBoxContainer/TextEdit.text)
 	$MarkerTextEditor/VBoxContainer/TextEdit.text = ""
 	PopUpManager.GetInstance().DoFadeNotif("Text marker placed")
@@ -60,8 +60,8 @@ func _on_drone_button_pressed() -> void:
 		MapPointerManager.GetInstance().MapLonePos.add_child(Line)
 		Line.add_to_group("LineMarkers")
 		Line.CamZoomUpdated(ship_camera.zoom.x)
-		Line.global_position = ship_camera.global_position + (pos / (ship_camera.zoom * 2))
-		Line.set_point_position(1, Line.get_point_position(1) / (ship_camera.zoom * 2))
+		Line.global_position = ship_camera.global_position + (pos / (ship_camera.zoom))
+		Line.set_point_position(1, Line.get_point_position(1) / (ship_camera.zoom))
 		Line.get_child(0).position = (Line.get_point_position(1) / 2) - (Line.get_child(0).size / 2)
 		Line = null
 		PopUpManager.GetInstance().DoFadeNotif("Line marker placed")

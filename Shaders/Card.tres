@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dwvsafe1eaxbk"]
+
+[ext_resource type="Shader" uid="uid://dqjas3kma1fqo" path="res://Scenes/Cards/fake3d.gdshader" id="1_ndm65"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3yyhe"]
+noise = SubResource("FastNoiseLite_7mr5f")
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_ndm65")
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.19
+shader_parameter/burn_color = Color(0, 0, 0, 1)

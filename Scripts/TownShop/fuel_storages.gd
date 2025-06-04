@@ -57,7 +57,7 @@ func SetHullData(Ships : Array[MapShip]):
 	for g in Ships:
 		PlMaxHull += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 		PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-
+var SpentFunds : int = 0
 func UpdateFuelBar(AddedFuel : float):
 	#$AudioStreamPlayer.play()
 	if (AddedFuel * FuelPricePerTon > PlayerWallet.Funds):
@@ -74,6 +74,18 @@ func UpdateFuelBar(AddedFuel : float):
 	TownFuelReserves -= AddedFuel
 	PlayerBoughtFuel += AddedFuel
 	
+	var MoneySpent = AddedFuel * FuelPricePerTon
+	if (MoneySpent > 0):
+		SpentFunds += (AddedFuel * FuelPricePerTon)
+		if (roundi(SpentFunds/1000) > 1):
+			Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(SpentFunds / 1000))
+			SpentFunds = 0
+	else:
+		SpentFunds += (AddedFuel * FuelPricePerTon)
+		var z = roundi(SpentFunds/1000)
+		if (z < -1):
+			Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(abs(z))
+			SpentFunds = 0
 	PlayerWallet.AddFunds(-(AddedFuel * FuelPricePerTon))
 
 	#PlayerWallet.AddFunds(-(AddedFuel * FuelPricePerTon))

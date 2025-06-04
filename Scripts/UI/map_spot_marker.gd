@@ -22,7 +22,7 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	for g in Spot.SpotInfo.PossibleDrops:
 		var text = TextureRect.new()
 		text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		text.custom_minimum_size = Vector2(17,17)
+		text.custom_minimum_size = Vector2(26,26)
 		text.texture = g.ItemIcon
 		if (g is UsableItem):
 			text.self_modulate = g.ItecColor
@@ -48,7 +48,7 @@ func OnAlarmRaised(Notify : bool) -> void:
 		add_child(Notif)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	SpotDropPosition.scale = Vector2(0.6,0.6) / NewZoom
+	SpotDropPosition.scale = Vector2(1,1) / NewZoom
 	$AnalyzeButton.visible = NewZoom <= 0.5
 
 func EnteredScreen() -> void:

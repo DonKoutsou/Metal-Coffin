@@ -121,7 +121,7 @@ func ToggleCrtEffect(T : bool) -> void:
 	$Control3/Screen.visible = T
 
 func SetScreenRes(Res : Vector2) -> void:
-	$Control3/Screen.material.set_shader_parameter("res", Res/2)
+	$Control3/Screen.material.set_shader_parameter("res", Res)
 
 func _on_flight_manual_pressed() -> void:
 	Manual.visible = true

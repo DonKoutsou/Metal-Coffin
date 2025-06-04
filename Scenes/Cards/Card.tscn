@@ -1,26 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=16 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scripts/CardFight/card.gd" id="1_vr3r8"]
+[ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="2_3yyhe"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
 [ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/UIPiecies/Screen/card.png" id="3_7mr5f"]
-[ext_resource type="Shader" uid="uid://dqjas3kma1fqo" path="res://Scenes/Cards/fake3d.gdshader" id="3_t4r8q"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="4_rd7hj"]
 [ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_t4r8q"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3yyhe"]
-noise = SubResource("FastNoiseLite_7mr5f")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4v2x1"]
-resource_local_to_scene = true
-shader = ExtResource("3_t4r8q")
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
-shader_parameter/dissolve_value = 1.0
-shader_parameter/burn_size = 0.19
-shader_parameter/burn_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
 bg_color = Color(1, 1, 1, 1)
@@ -47,24 +32,6 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd7hj"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.11435, 0.205627, 0.212156, 1)
-border_width_left = 2
-border_width_top = 42
-border_width_right = 2
-border_width_bottom = 90
-border_color = Color(1, 0.763983, 0.0812772, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 4
-anti_aliasing_size = 2.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh81d"]
 content_margin_left = 8.0
 content_margin_top = 8.0
@@ -74,7 +41,7 @@ bg_color = Color(0.11435, 0.205627, 0.212156, 1)
 border_width_left = 2
 border_width_top = 42
 border_width_right = 2
-border_width_bottom = 90
+border_width_bottom = 103
 border_color = Color(1, 0.763983, 0.0812772, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -92,7 +59,7 @@ bg_color = Color(1, 0.763983, 0.0812772, 1)
 border_width_left = 2
 border_width_top = 42
 border_width_right = 2
-border_width_bottom = 90
+border_width_bottom = 97
 border_color = Color(0.11435, 0.205627, 0.212156, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -168,7 +135,7 @@ Lines = [NodePath("Line2D")]
 CardTypeEmblem = NodePath("SubViewportContainer/SubViewport/Panel2")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-material = SubResource("ShaderMaterial_4v2x1")
+material = ExtResource("2_3yyhe")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,7 +183,7 @@ focus_mode = 0
 mouse_filter = 1
 theme_override_font_sizes/font_size = 26
 theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_rd7hj")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_yh81d")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yh81d")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7mr5f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yh81d")
@@ -288,6 +255,7 @@ theme_override_constants/separation = -3
 custom_minimum_size = Vector2(30.26, 27.33)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 18
 text = "1"
@@ -321,9 +289,8 @@ visible = false
 custom_minimum_size = Vector2(30.26, 27.33)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.11435, 0.205627, 0.212156, 1)
-theme_override_colors/font_outline_color = Color(0.11435, 0.205627, 0.212156, 1)
-theme_override_constants/outline_size = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("6_t4r8q")
 theme_override_font_sizes/font_size = 18
 text = "1"
@@ -335,6 +302,8 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 16
 text = "Incindiary Barrage"
 vertical_alignment = 1
@@ -346,7 +315,7 @@ custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("6_t4r8q")
 theme_override_font_sizes/font_size = 15
 text = "Incindiary Barrage"
@@ -354,7 +323,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CardText" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer"]
-custom_minimum_size = Vector2(0, 92)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -369,15 +338,18 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/Control"]
-layout_mode = 2
-offset_left = -2.0
-offset_right = 160.0
-offset_bottom = 89.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.211454, 0.150914, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 text = "Throws a barragge on the enemy.
 CAN'T BE AVOIDED
@@ -390,15 +362,18 @@ visible_characters_behavior = 1
 
 [node name="RealisticDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/Control"]
 visible = false
-layout_mode = 2
-offset_left = 3.0
-offset_right = 155.0
-offset_bottom = 89.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
+theme_override_colors/font_outline_color = Color(0.163848, 0.114124, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/normal_font = ExtResource("6_t4r8q")
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true

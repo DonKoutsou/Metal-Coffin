@@ -38,8 +38,8 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 			AmmountPlayerHas = 0
 			
 		ItScene.Init(m.It, m.Price, m.Amm, AmmountPlayerHas, LandedShips)
-		ItScene.OnItemBought.connect(OnItemBought)
-		ItScene.OnItemSold.connect(OnItemSold)
+		ItScene.OnItemBought.connect(OnItemBought.bind(m.Price))
+		ItScene.OnItemSold.connect(OnItemSold.bind(m.Price))
 
 		ItemPlecement.visible = true
 		ItemPlecement.add_child(ItScene)
@@ -62,14 +62,16 @@ func _physics_process(delta: float) -> void:
 			Dist = NewDest
 			Closest = g
 	if (Descriptor.DescribedItem != Closest.It):
-		Descriptor.SetData(Closest.It, false, false, false, false, false, true)
+		Descriptor.SetMerchData(Closest.It)
 	
 	
-func OnItemSold(It : Item) -> void:
+func OnItemSold(It : Item, Price : float) -> void:
 	ItemSold.emit(It)
+	Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(roundi(Price / 100))
 
-func OnItemBought(It : Item) -> void:
+func OnItemBought(It : Item, Price : float) -> void:
 	ItemBought.emit(It)
+	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Price / 100))
 
 func _on_leave_merch_pressed() -> void:
 	queue_free()

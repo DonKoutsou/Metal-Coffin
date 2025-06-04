@@ -119,7 +119,7 @@ func OnItemSold(It : Item) -> void:
 		var inv = g.Cpt.GetCharacterInventory()
 		if (inv.HasItem(It)):
 			inv.RemoveItem(It)
-
+			break
 	for g in TownSpot.Merch:
 		if (g.It == It):
 			g.Amm += 1
@@ -131,6 +131,7 @@ func OnItemBought(It : Item) -> void:
 		var inv = g.Cpt.GetCharacterInventory()
 		if (inv.HasSpaceForItem(It)):
 			inv.AddItem(It)
+			break
 
 	for g in TownSpot.Merch:
 		if (g.It == It):
