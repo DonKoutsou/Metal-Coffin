@@ -45,10 +45,10 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")
 	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([roundi(S.GetDef())])
 	
-	ShipIcon.flip_v = !Friendly
-	ShipIcon.get_child(0).flip_v = !Friendly
+	ShipIcon.flip_v = Friendly
+	ShipIcon.get_child(0).flip_v = Friendly
 	#$HBoxContainer/PanelContainer/VBoxContainer/PanelContainer2.visible = Friendly
-	if (Friendly):
+	if (!Friendly):
 		$HBoxContainer.move_child($HBoxContainer/VBoxContainer, 0)
 	else:
 		ShipNameLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT

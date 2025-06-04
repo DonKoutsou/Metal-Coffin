@@ -70,8 +70,9 @@ func SetData(Box : Inventory_Box, UpgradeBoost : bool, CanUpgrade : bool, CanTra
 	var It = DescribedContainer.GetContainedItem()
 	
 	ItemName.text = It.ItemName
-	ItemDesc.text = It.GetItemDesc()
-	ItemDesc.visible = ShowDescription
+	if (ItemDesc != null):
+		ItemDesc.text = It.GetItemDesc()
+		ItemDesc.visible = ShowDescription
 	
 	TransferButton.visible = CanTransfer and !DescribedContainer.IsEmpty()
 	UpgradeButton.visible = CanUpgrade
@@ -123,6 +124,62 @@ func SetData(Box : Inventory_Box, UpgradeBoost : bool, CanUpgrade : bool, CanTra
 	else:
 		CardSection.get_parent().visible = false
 
+func SetMerchData(Itm : Item) -> void:
+	for g in CardPlecement.get_children():
+		g.queue_free()
+		
+	set_physics_process(false)
+	DescribedItem = Itm
+	#ItemIcon.texture = It.ItemIcon
+	#ItemDesc.text = It.GetItemDesc()
+	ItemDesc.text = Itm.GetItemDesc()
+	#TransferButton.visible = It.CanTransfer
+	TransferButton.visible = false
+	
+	ItemName.text = Itm.ItemName
+	#Ship Parts
+	if (Itm is ShipPart):
+		
+		#ShipPartActions.visible = true
+		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
+		#if (CanUpgrade):
+		UpgradeLabel.visible = true
+		if (Itm.UpgradeVersion == null):
+			UpgradeButton.visible = false
+			UpgradeLabel.visible = false
+		else:
+
+			UpgradeButton.visible = true
+			var UpTime = Itm.UpgradeTime
+			var UpCost = Itm.UpgradeCost
+			UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
+	
+	else :
+		
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+	
+	#TODO Option doesent show when ship has upgraded weapons
+	if (Itm.CardProviding.size() > 0):
+		var CardsChecked : Array[CardStats]
+		for g in Itm.CardProviding:
+			if (CardsChecked.has(g)):
+				continue
+			CardsChecked.append(g)
+			
+			var CardS = g.duplicate() as CardStats
+			CardS.Tier = Itm.Tier
+			var card = CardScene.instantiate() as Card
+			
+			#if (It.CardOptionProviding != null):
+				#CardS.SelectedOption = It.CardOptionProviding
+			card.SetCardStats(CardS, Itm.CardProviding.count(g))
+			CardPlecement.add_child(card)
+			card.Dissable()
+		CardSection.visible = true
+	else:
+		CardSection.visible = false
+
 func SetEmptyShopData(Type : ShipPart.ShipPartType) -> void:
 	UpgradeButton.visible = false
 	AddItemButton.visible = true
@@ -159,7 +216,6 @@ func _physics_process(_delta: float) -> void:
 	var inv = DescribedContainer.GetParentInventory()
 	var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
 	UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
-
 
 func _on_add_item_pressed() -> void:
 	ItemAdd.emit(DescribedContainer)

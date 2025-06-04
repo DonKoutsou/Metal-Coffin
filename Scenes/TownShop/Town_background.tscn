@@ -127,6 +127,7 @@ scale_min = 0.1
 scale_max = 0.1
 
 [node name="TownBackground" type="ParallaxBackground" node_paths=PackedStringArray("Animated", "Camera")]
+scroll_base_offset = Vector2(50, 0)
 script = ExtResource("1_0rigd")
 LimitTop = 1920.0
 LimitSide = 160.0
@@ -152,12 +153,13 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gf58y")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2(960, 540)
 motion_scale = Vector2(0.5, 0.5)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(-222, -21)
+position = Vector2(-1303, -572)
 amount = 20
 texture = ExtResource("3_81jbw")
 lifetime = 5.0
@@ -167,7 +169,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(1116, 36)
+position = Vector2(695, -482)
 amount = 20
 texture = ExtResource("3_81jbw")
 lifetime = 5.0
@@ -177,18 +179,19 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(0, -270)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_7gruq")
 frame_progress = 0.543139
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+position = Vector2(960, 540)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
 modulate = Color(1, 1, 1, 0.1)
-position = Vector2(1650, -18)
+position = Vector2(1529, -42)
 amount = 20
 texture = ExtResource("5_u7aao")
 lifetime = 30.0
@@ -201,23 +204,24 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(0, -270)
+scale = Vector2(4, 4)
 texture = ExtResource("5_0rigd")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+position = Vector2(960, 540)
 motion_scale = Vector2(1.5, 1.5)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(0, -270)
+scale = Vector2(4, 4)
 texture = ExtResource("6_ly0hr")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
 modulate = Color(1, 1, 1, 0.1)
-position = Vector2(1650, 99)
+position = Vector2(1524, 48)
 amount = 20
 texture = ExtResource("5_u7aao")
 lifetime = 30.0
@@ -230,7 +234,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
-position = Vector2(1650, 316)
+position = Vector2(1556, -51)
 amount = 40
 texture = ExtResource("3_81jbw")
 lifetime = 6.0
@@ -241,33 +245,34 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gf58y")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+position = Vector2(960, 540)
 motion_scale = Vector2(2, 2)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(0, -270)
+scale = Vector2(4, 4)
 texture = ExtResource("7_ly0hr")
 
 [node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(723, 446)
+position = Vector2(50, 220)
 
 [node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop"]
 position = Vector2(-60, 162)
 
 [node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(109, 452)
+position = Vector2(-768, 203)
 
 [node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel"]
 position = Vector2(-102, 133)
 
 [node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(1150, 378)
+position = Vector2(981, 114)
 
 [node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch"]
 position = Vector2(181, 238)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
+position = Vector2(960, 540)
 position_smoothing_enabled = true

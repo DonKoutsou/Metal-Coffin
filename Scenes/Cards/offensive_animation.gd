@@ -54,10 +54,10 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 				DefCard.SetCardBattleStats(DeffenceList.keys()[g], Def)
 				add_child(DefCard)
 				if (!FriendShip):
-					var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
+					var pos = Vector2(Viz.global_position.x, Viz.global_position.y)
 					DefCard.global_position = pos
 				else:
-					var pos = Vector2(Viz.global_position.x - 200, Viz.global_position.y - (Viz.size.y / 2))
+					var pos = Vector2(Viz.global_position.x, Viz.global_position.y)
 					DefCard.global_position = pos
 				#DefC.size_flags_horizontal = Control.SIZE_EXPAND
 				DefCard.show_behind_parent = true
@@ -268,7 +268,7 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	DeffenceCard.SetCardBattleStats(Performer, C)
 	add_child(DeffenceCard)
 	
-	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (User.size.y / 2))
+	var pos = Vector2(User.global_position.x, User.global_position.y)
 	DeffenceCard.global_position = pos
 
 	DeffenceCard.show_behind_parent = true
@@ -280,7 +280,7 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	var UpTween = create_tween()
 	UpTween.set_ease(Tween.EASE_OUT)
 	UpTween.set_trans(Tween.TRANS_BACK)
-	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y - 10), 0.4)
+	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y + 10), 0.4)
 	await UpTween.finished
 	
 	var DownTween = create_tween()

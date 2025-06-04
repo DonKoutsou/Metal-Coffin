@@ -55,7 +55,7 @@ alignment = 1
 [node name="Label" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 57
 text = "wafwafwafwafwafawafwafwa
 fwafwa
 faw
@@ -79,7 +79,7 @@ phase = inf
 PointRatio = 30.0
 
 [node name="Control" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 8
 
@@ -96,13 +96,13 @@ alignment = 1
 [node name="Button" type="Button" parent="VBoxContainer/Control/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "Next"
 
 [node name="Button2" type="Button" parent="VBoxContainer/Control/HBoxContainer2" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "Skip"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
@@ -121,7 +121,7 @@ alignment = 1
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "Option1"
 autowrap_mode = 2
 
@@ -129,7 +129,7 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "Option 2"
 autowrap_mode = 2
 

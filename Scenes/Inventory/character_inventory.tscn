@@ -54,7 +54,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Char name"
 
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
@@ -65,18 +65,21 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 30
 text = "Stats"
 
 [node name="Deck" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 30
 text = "Deck"
 
 [node name="InventoryVisToggle" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 30
 text = "Inventory"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]

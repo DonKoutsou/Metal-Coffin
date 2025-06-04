@@ -788,7 +788,7 @@ func PerformActions(Ship : BattleShipStats) -> void:
 			var tw = create_tween()
 			tw.set_ease(Tween.EASE_OUT)
 			tw.set_trans(Tween.TRANS_QUAD)
-			tw.tween_property(g, "custom_minimum_size", Vector2(90, 0), 0.2)
+			tw.tween_property(g, "custom_minimum_size", Vector2(0, 90), 0.2)
 			tw.finished.connect(PerformNextActionForShip.bind(Ship, 0))
 			#g.visible = true
 
@@ -2097,19 +2097,20 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> void:
 	
 	if (Friendly):
 		for g in PlayerShipVisualPlecement.get_children():
-			if (g is HBoxContainer and g.get_child_count() == 1):
+			if (g is VBoxContainer and g.get_child_count() == 1):
 				Parent = g
 				break
 				
 		Parent.add_child(t)
+		Parent.move_child(t, 0)
 	else :
 		for g in EnemyShipVisualPlecement.get_children():
-			if (g is HBoxContainer and g.get_child_count() == 1):
+			if (g is VBoxContainer and g.get_child_count() == 1):
 				Parent = g
 				break
 		
 		Parent.add_child(t)
-		Parent.move_child(t, 0)
+		
 	
 	ShipsViz[BattleS] = t
 	NewTurnStarted.connect(t.OnNewTurnStarted)

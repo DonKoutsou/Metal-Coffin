@@ -139,10 +139,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -360.0
-offset_right = -460.0
-offset_bottom = -260.0
+offset_left = -90.0
+offset_top = -50.0
+offset_right = 90.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -232,7 +232,7 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -380,6 +380,7 @@ vertical_alignment = 1
 show_behind_parent = true
 z_index = -1
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 6
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control"]
@@ -393,7 +394,6 @@ offset_left = -26.0
 offset_right = 38.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = -1.5708
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(26, 0)
 mouse_filter = 2
@@ -425,5 +425,6 @@ expand_mode = 2
 stretch_mode = 3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/Control"]
+position = Vector2(6, 22)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_on4wq")

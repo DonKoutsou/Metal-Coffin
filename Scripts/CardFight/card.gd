@@ -171,21 +171,21 @@ func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 	return CCost
 
 func SetRealistic() -> void:
-	$SubViewportContainer/SubViewport/TextureRect.visible = true
-	$SubViewportContainer/SubViewport/Panel.visible = false
-	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
-	
-	CardName.visible = false
-	RealisticCardname.visible = true
-	CardDesc.visible = false
-	RealisticCardDesc.visible = true
-	CardCost.visible = false
-	RealisticCardCost.visible = true
+	#$SubViewportContainer/SubViewport/TextureRect.visible = true
+	#$SubViewportContainer/SubViewport/Panel.visible = false
+	#$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
+	#
+	#CardName.visible = false
+	#RealisticCardname.visible = true
+	#CardDesc.visible = false
+	#RealisticCardDesc.visible = true
+	#CardCost.visible = false
+	#RealisticCardCost.visible = true
 	#$VBoxContainer/HBoxContainer/Label.add_theme_font_override("font",load("res://Fonts/DINEngschriftStd.otf"))
 	#$VBoxContainer/HBoxContainer/CardCost.add_theme_font_override("font",load("res://Fonts/DINEngschriftStd.otf"))
 	#
 	#$VBoxContainer/Control/CardDesc.add_theme_font_override("font", load("res://Fonts/DINEngschriftStd.otf"))
-
+	pass
 func OnButtonPressed() -> void:
 
 	OnCardPressed.emit(self)

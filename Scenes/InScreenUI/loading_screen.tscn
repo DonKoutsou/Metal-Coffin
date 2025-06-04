@@ -98,9 +98,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.11435, 0.205627, 0.212156, 1)
 
 [node name="TextureRect7" type="TextureRect" parent="."]
+visible = false
 modulate = Color(0.51218, 0.51218, 0.51218, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -112,6 +113,7 @@ texture = ExtResource("3_qc4cv")
 expand_mode = 1
 
 [node name="TextureRect6" type="TextureRect" parent="."]
+visible = false
 modulate = Color(0.51218, 0.51218, 0.51218, 1)
 layout_mode = 1
 anchors_preset = 15

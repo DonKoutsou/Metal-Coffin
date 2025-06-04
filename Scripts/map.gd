@@ -826,9 +826,9 @@ func _prim_mst_optimized(cities: Array) -> Array:
 	
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
-const ScreenPos = Vector2(67.0,62.0)
-const OriginalSize = Vector2(869, 595.0)
-const FullSize = Vector2(1148.0, 595.0)
+const ScreenPos = Vector2(102.0,93.0)
+const OriginalSize = Vector2(1300.0, 892.0)
+const FullSize = Vector2(1718.0, 892.0)
 
 func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	

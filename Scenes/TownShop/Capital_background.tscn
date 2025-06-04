@@ -153,18 +153,19 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gf58y")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2(320, 360)
 motion_scale = Vector2(0.5, 0.5)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer"]
 
 [node name="Sprite2D2" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(640, -90)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ri552")
 frame_progress = 0.0845768
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(314, 11)
+position = Vector2(-362, -413)
 amount = 20
 texture = ExtResource("3_kl0cj")
 lifetime = 5.0
@@ -174,7 +175,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(866, 94)
+position = Vector2(976, -218)
 amount = 20
 texture = ExtResource("3_kl0cj")
 lifetime = 5.0
@@ -184,7 +185,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(595, 51)
+position = Vector2(587, -270)
 amount = 20
 texture = ExtResource("3_kl0cj")
 lifetime = 5.0
@@ -194,7 +195,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="GPUParticles2D4" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(-21, -48)
+position = Vector2(144, -330)
 amount = 20
 texture = ExtResource("3_kl0cj")
 lifetime = 5.0
@@ -204,17 +205,18 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(640, -90)
+scale = Vector2(4, 4)
 texture = ExtResource("4_coxqh")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+position = Vector2(320, 360)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
 modulate = Color(1, 1, 1, 0.1)
-position = Vector2(1650, -18)
+position = Vector2(2100, -18)
 amount = 20
 texture = ExtResource("5_6jamx")
 lifetime = 30.0
@@ -227,7 +229,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
-position = Vector2(223, -199)
+position = Vector2(1, -667)
 amount = 20
 texture = ExtResource("3_kl0cj")
 lifetime = 5.0
@@ -237,23 +239,24 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(640, -90)
+scale = Vector2(4, 4)
 texture = ExtResource("6_iecnu")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+position = Vector2(320, 360)
 motion_scale = Vector2(1.5, 1.5)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(640, -90)
+scale = Vector2(4, 4)
 texture = ExtResource("7_p3jms")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
 modulate = Color(1, 1, 1, 0.1)
-position = Vector2(1650, 99)
+position = Vector2(2122, 126)
 amount = 20
 texture = ExtResource("5_6jamx")
 lifetime = 30.0
@@ -266,7 +269,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
-position = Vector2(1650, 316)
+position = Vector2(2131, 239)
 amount = 40
 texture = ExtResource("3_kl0cj")
 lifetime = 6.0
@@ -277,6 +280,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gf58y")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+position = Vector2(320, 360)
 motion_scale = Vector2(2, 2)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3"]
@@ -292,13 +296,13 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(640, 180)
-scale = Vector2(2.66667, 2.66667)
+position = Vector2(640, -90)
+scale = Vector2(4, 4)
 texture = ExtResource("8_woovf")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer3/Parallax2D"]
 modulate = Color(1, 1, 1, 0.1)
-position = Vector2(1650, 343)
+position = Vector2(2115, 282)
 amount = 20
 texture = ExtResource("5_6jamx")
 lifetime = 30.0
@@ -311,23 +315,23 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(723, 446)
+position = Vector2(688, 400)
 
 [node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop"]
 position = Vector2(-60, 162)
 
 [node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(109, 452)
+position = Vector2(-137, 392)
 
 [node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel"]
 position = Vector2(-102, 133)
 
 [node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(1150, 378)
+position = Vector2(1515, 345)
 
 [node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch"]
 position = Vector2(181, 238)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(642, 360)
+position = Vector2(960, 540)
 position_smoothing_enabled = true

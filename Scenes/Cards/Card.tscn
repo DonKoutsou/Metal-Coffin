@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene load_steps=19 format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scripts/CardFight/card.gd" id="1_vr3r8"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
@@ -47,24 +47,6 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd7hj"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.11435, 0.205627, 0.212156, 1)
-border_width_left = 2
-border_width_top = 42
-border_width_right = 2
-border_width_bottom = 90
-border_color = Color(1, 0.763983, 0.0812772, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 4
-anti_aliasing_size = 2.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh81d"]
 content_margin_left = 8.0
 content_margin_top = 8.0
@@ -72,9 +54,9 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.11435, 0.205627, 0.212156, 1)
 border_width_left = 2
-border_width_top = 42
+border_width_top = 51
 border_width_right = 2
-border_width_bottom = 90
+border_width_bottom = 113
 border_color = Color(1, 0.763983, 0.0812772, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -90,9 +72,9 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 border_width_left = 2
-border_width_top = 42
+border_width_top = 51
 border_width_right = 2
-border_width_bottom = 90
+border_width_bottom = 113
 border_color = Color(0.11435, 0.205627, 0.212156, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -138,17 +120,17 @@ shadow_size = 8
 anti_aliasing_size = 2.0
 
 [node name="Card" type="Control" node_paths=PackedStringArray("CardName", "RealisticCardname", "CardDesc", "RealisticCardDesc", "CardCost", "RealisticCardCost", "CardTex", "But", "Lines", "CardTypeEmblem") groups=["Card"]]
-custom_minimum_size = Vector2(160, 220)
+custom_minimum_size = Vector2(200, 275)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -110.0
-offset_right = 80.0
-offset_bottom = 110.0
+offset_left = -100.0
+offset_top = -137.0
+offset_right = 100.0
+offset_bottom = 138.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(80, 110)
@@ -186,7 +168,7 @@ disable_3d = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(186, 256)
+size = Vector2i(226, 311)
 render_target_update_mode = 4
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport"]
@@ -216,7 +198,7 @@ focus_mode = 0
 mouse_filter = 1
 theme_override_font_sizes/font_size = 26
 theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_rd7hj")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_yh81d")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yh81d")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7mr5f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yh81d")
@@ -259,9 +241,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 19.0
-offset_top = -196.0
+offset_top = -243.0
 offset_right = 21.0
-offset_bottom = -186.0
+offset_bottom = -233.0
 grow_vertical = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_nilbr")
@@ -285,7 +267,7 @@ mouse_filter = 2
 theme_override_constants/separation = -3
 
 [node name="CardCost" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30.26, 27.33)
+custom_minimum_size = Vector2(35.7, 33.895)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/outline_size = 8
@@ -303,10 +285,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -9.13
-offset_top = -52.33
-offset_right = 46.87
-offset_bottom = 3.67
+offset_left = -8.85
+offset_top = -62.895
+offset_right = 58.15
+offset_bottom = 1.105
 grow_horizontal = 2
 grow_vertical = 0
 rotation = 0.619955
@@ -318,7 +300,7 @@ stretch_mode = 5
 
 [node name="RealisticCardCost" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
 visible = false
-custom_minimum_size = Vector2(30.26, 27.33)
+custom_minimum_size = Vector2(35.7, 33.895)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.11435, 0.205627, 0.212156, 1)
@@ -332,7 +314,7 @@ vertical_alignment = 2
 autowrap_mode = 2
 
 [node name="Label" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 42)
+custom_minimum_size = Vector2(0, 51.885)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
@@ -354,7 +336,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CardText" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer"]
-custom_minimum_size = Vector2(0, 92)
+custom_minimum_size = Vector2(0, 115.11)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -369,10 +351,12 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/Control"]
-layout_mode = 2
-offset_left = -2.0
-offset_right = 160.0
-offset_bottom = 89.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
@@ -390,10 +374,12 @@ visible_characters_behavior = 1
 
 [node name="RealisticDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/Control"]
 visible = false
-layout_mode = 2
-offset_left = 3.0
-offset_right = 155.0
-offset_bottom = 89.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2

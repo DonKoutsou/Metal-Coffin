@@ -127,7 +127,7 @@ UIEventH = ExtResource("16_734e5")
 disable_3d = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
-size = Vector2i(1280, 720)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Control2" type="Control" parent="SubViewport"]
@@ -149,10 +149,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -640.0
-offset_right = 640.0
-offset_bottom = 640.0
+offset_left = -964.0
+offset_top = -964.0
+offset_right = 964.0
+offset_bottom = 964.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -166,10 +166,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -640.0
-offset_right = 640.0
-offset_bottom = 640.0
+offset_left = -962.0
+offset_top = -962.0
+offset_right = 962.0
+offset_bottom = 962.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -231,7 +231,7 @@ text = "Fleet Size
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer4" type="HBoxContainer" parent="SubViewport/Control2"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="SubViewport/Control2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -241,41 +241,42 @@ grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="PlayerShipPlecement" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4"]
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-size_flags_horizontal = 2
+
+[node name="EnemyShipPlecement" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 18
+theme_override_constants/separation = 200
+alignment = 1
 
-[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 50)
+[node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer"]
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer"]
+[node name="HBoxContainer2" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer2"]
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer2"]
+[node name="HBoxContainer3" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer3"]
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer3"]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
 alignment = 1
 
@@ -286,7 +287,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_f2au4")
 
 [node name="SelectedCardPlecements" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2"]
-custom_minimum_size = Vector2(300, 228)
+custom_minimum_size = Vector2(1500, 228)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -294,42 +295,44 @@ script = ExtResource("24_d8sco")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 172.735)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="EnemyShipPlecement" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+[node name="PlayerShipPlecement" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 18
+theme_override_constants/separation = 200
+alignment = 1
 
-[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
+[node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer"]
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-alignment = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer2"]
-layout_mode = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
+[node name="HBoxContainer2" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer3"]
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("ShipVizContainer")]
@@ -364,7 +367,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/TargetSelect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/TargetSelect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -419,6 +422,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 117.0
+offset_bottom = -204.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

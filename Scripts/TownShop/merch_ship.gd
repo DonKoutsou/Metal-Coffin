@@ -22,7 +22,7 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 	#Spacer
 	var C = Control.new()
 	ItemPlecement.add_child(C)
-	C.custom_minimum_size.y = 150
+	C.custom_minimum_size.y = 500
 	
 	for m : Merchandise in Merch:
 		#If neither player or shop has any of selected Merch dont add the UI for it
@@ -46,7 +46,7 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 	#End Spacer
 	var C2 = Control.new()
 	ItemPlecement.add_child(C2)
-	C2.custom_minimum_size.y = 150
+	C2.custom_minimum_size.y = 500
 
 
 func _physics_process(delta: float) -> void:
@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 			Dist = NewDest
 			Closest = g
 	if (Descriptor.DescribedItem != Closest.It):
-		Descriptor.SetData(Closest.It, false, false, false, false, false, true)
+		Descriptor.SetMerchData(Closest.It)
 	
 	
 func OnItemSold(It : Item) -> void:
