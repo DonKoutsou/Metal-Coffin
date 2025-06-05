@@ -16,4 +16,6 @@ ItemName = "Cluster Missile"
 ItemDesc = "The cluster missile unleashes multiple explosive submunitions almost instantly after being fired, covering a wide area. Equipped with proximity sensors for precise detonation, it's perfect for disrupting enemy formations and clearing defensive positions with chaotic efficacy.\""
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_1gcl3")]([ExtResource("2_1gcl3")])
+Tier = 0
 CanTransfer = true
+Cost = 1500

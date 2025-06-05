@@ -37,9 +37,9 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 		else:
 			AmmountPlayerHas = 0
 			
-		ItScene.Init(m.It, m.Price, m.Amm, AmmountPlayerHas, LandedShips)
-		ItScene.OnItemBought.connect(OnItemBought.bind(m.Price))
-		ItScene.OnItemSold.connect(OnItemSold.bind(m.Price))
+		ItScene.Init(m.It, m.It.Cost, m.Amm, AmmountPlayerHas, LandedShips)
+		ItScene.OnItemBought.connect(OnItemBought.bind( m.It.Cost))
+		ItScene.OnItemSold.connect(OnItemSold.bind( m.It.Cost))
 
 		ItemPlecement.visible = true
 		ItemPlecement.add_child(ItScene)

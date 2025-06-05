@@ -15,4 +15,6 @@ ItemName = "Long-Range Missile"
 ItemDesc = "Low-speed, high-range projectile optimized for distant bombardments. Lacks agility, but when it hits—ships feel it. Best used in large-scale engagements or siege scenarios."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_pj6tu")]([])
+Tier = 0
 CanTransfer = true
+Cost = 1300

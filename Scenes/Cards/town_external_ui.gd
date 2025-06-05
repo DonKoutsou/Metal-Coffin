@@ -32,7 +32,7 @@ func DropCoins(Amm : int) -> void:
 		AnimPlayer.play("DropCoin")
 
 func CoinsReceived(Amm : int)-> void:
-	CoinsGot += Amm
+	CoinsGot = min(20, CoinsGot + Amm)
 
 func _physics_process(delta: float) -> void:
 	var offset = 0

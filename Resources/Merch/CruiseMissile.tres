@@ -7,7 +7,6 @@
 [sub_resource type="Resource" id="Resource_knsb7"]
 script = ExtResource("2_4ax7c")
 It = ExtResource("1_pyqfi")
-Price = 3
 Amm = 1200
 
 [resource]

@@ -64,6 +64,7 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("11_mgcdj")]([ExtResource("12_8ng8e")])
 Tier = 0
 CanTransfer = true
+Cost = 0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rew5m"]
 content_margin_left = 5.0

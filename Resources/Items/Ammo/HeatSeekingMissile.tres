@@ -18,3 +18,4 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("1_72gep")]([ExtResource("2_mdy32")])
 Tier = 0
 CanTransfer = true
+Cost = 800

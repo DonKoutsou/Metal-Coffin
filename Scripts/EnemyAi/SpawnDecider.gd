@@ -19,7 +19,8 @@ var sorted_convoy_captain_list
 @export var Switch: bool:
 	set(Thing):
 		Switch = false
-		RefrshExistingItems()
+		if (Thing):
+			RefrshExistingItems()
 
 func RefrshExistingItems() -> void:
 	#WorkshopList.clear()

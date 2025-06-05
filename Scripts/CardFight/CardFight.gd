@@ -33,9 +33,9 @@ class_name Card_Fight
 #Animation of used cards will be placed here
 @export var AnimationPlecement : Control
 #Container for Enemy ship UI
-@export var EnemyShipVisualPlecement : Control
+@export var EnemyShipVisualPlecement : Array[Control]
 #Container for Player ship UI
-@export var PlayerShipVisualPlecement : Control
+@export var PlayerShipVisualPlecement : Array[Control]
 #UI for selecting a target
 @export var TargetSelect : CardFightTargetSelection
 #UI for selecting a card to discard
@@ -1011,8 +1011,7 @@ func OnFightEnded(Won : bool) -> void:
 	var End = EndScene.instantiate() as CardFightEndScene
 	End.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg)
 	add_child(End)
-	PlayerShipVisualPlecement.visible = false
-	EnemyShipVisualPlecement.visible = false
+
 	await End.ContinuePressed
 	var Survivors : Array[BattleShipStats]
 	RefundUnusedCards()
@@ -2096,14 +2095,14 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> void:
 	var Parent : Control
 	
 	if (Friendly):
-		for g in PlayerShipVisualPlecement.get_children():
+		for g in PlayerShipVisualPlecement:
 			if (g is HBoxContainer and g.get_child_count() == 1):
 				Parent = g
 				break
 				
 		Parent.add_child(t)
 	else :
-		for g in EnemyShipVisualPlecement.get_children():
+		for g in EnemyShipVisualPlecement:
 			if (g is HBoxContainer and g.get_child_count() == 1):
 				Parent = g
 				break

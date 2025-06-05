@@ -12,7 +12,6 @@ class_name TownScene
 @export var FuelButton : Button
 
 @export_group("Scenes")
-
 @export var MerchShopScene : PackedScene
 @export var FuelStorageScene : PackedScene
 @export var WorkshopScene : PackedScene
@@ -29,15 +28,14 @@ var LandedShips : Array[MapShip]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#Setting up background, different for village/city/capital
 	TownBG = TownSpot.SpotType.BackgroundScene.instantiate() as TownBackground
 	$SubViewportContainer/SubViewport.add_child(TownBG)
 	TownBG.PositionChanged.connect(_on_town_background_position_changed)
+	#Set the port's name on the UI along with the town's buffs
 	PortName.text = TownSpot.GetSpotName() + " City Port"
 	SetTownBuffs()
 	
-	#Merch.append_array(TownSpot.Merch)
-	#WorkShopMerch.append_array(TownSpot.WorkShopMerch)
-
 	UISoundMan.GetInstance().Refresh()
 
 func SetTownBuffs() -> void:

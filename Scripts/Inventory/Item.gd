@@ -12,6 +12,7 @@ class_name Item
 @export var Tier : int = 0
 #@export var CardOptionProviding : CardOption
 @export var CanTransfer : bool = true
+@export var Cost : int = 0
 
 func GetItemDesc() -> String:
 	return ItemDesc

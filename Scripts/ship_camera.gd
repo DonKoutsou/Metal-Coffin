@@ -238,6 +238,7 @@ func FrameCamToPlayer():
 	FrameTween.set_trans(Tween.TRANS_QUAD)
 	FrameTween.set_ease(Tween.EASE_OUT)
 	FrameTween.tween_method(ForceCamPosition, global_position, plpos, 6)
+	
 
 func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true) -> void:
 	if (FrameTween != null):
@@ -255,3 +256,4 @@ func ForceCamPosition(Pos : Vector2) -> void:
 	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
 	#$Clouds2.material.set_shader_parameter("offset", global_position / 1500)
 	$Ground.material.set_shader_parameter("offset", global_position / 1500)
+	PositionChanged.emit(position)

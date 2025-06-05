@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_wut3d"]
 [ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_46qpr"]
 
-[sub_resource type="Resource" id="Resource_febx1"]
+[sub_resource type="Resource" id="Resource_w4cjc"]
 script = ExtResource("2_wut3d")
 It = ExtResource("1_febx1")
 Price = 0
@@ -12,7 +12,7 @@ Amm = 0
 
 [resource]
 script = ExtResource("3_46qpr")
-Merch = SubResource("Resource_febx1")
+Merch = SubResource("Resource_w4cjc")
 Cost = 0
 MaxAmmPerStage = 0
 DontGenerateBefore = 0

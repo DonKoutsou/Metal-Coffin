@@ -262,7 +262,18 @@ func UpdateDescriptor(Box : Inventory_Box) -> void:
 		var desc = descriptors[0] as ItemDescriptor
 		desc.SetWorkShopData(Box, HasUpgrade, CurrentShip.Cpt)
 
+func CloseDescriptor() -> void:
+	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+	if (descriptors.size() > 0):
+		descriptors[0].queue_free()
+
 func RemoveItem(Box : Inventory_Box) -> void:
+	var Cost = Box.GetContainedItem().Cost
+	
+	Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(roundi(Cost / 1000))
+	var PLWallet = World.GetInstance().PlayerWallet
+	PLWallet.AddFunds(Cost)
+	PopUpManager.GetInstance().DoFadeNotif("{0} removed from {1}'s ship")
 	CurrentShip.Cpt.GetCharacterInventory().RemoveItem(Box.GetContainedItem())
 	RefreshInventory()
 
@@ -276,11 +287,13 @@ func AddItem(Box : Inventory_Box) -> void:
 
 	var Amm : int = 0
 	for g in WorkShopMerch:
+		if (g.Amm == 0):
+			continue
 		var It = g.It as ShipPart
 		if (Type == It.PartType):
 			var B = WorkshopItemUI.instantiate() as WorkShopItem
-			B.Init(It, g.Price, g.Amm)
-			B.OnItemBought.connect(ItemToAddSelected)
+			B.Init(g)
+			B.OnItemBought.connect(ItemToAddSelected.bind(g))
 			ItemParent.add_child(B)
 			Amm += 1
 	
@@ -296,13 +309,26 @@ func AddItem(Box : Inventory_Box) -> void:
 	ItemParent.add_child(c2)
 	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-func ItemToAddSelected(It : Item) -> void:
+func ItemToAddSelected(M : Merchandise) -> void:
+	var Cost = M.It.Cost
+	var PLWallet = World.GetInstance().PlayerWallet
+	if (PLWallet.Funds < Cost):
+		PopUpManager.GetInstance().DoFadeNotif("Cant pay for upgrade")
+		return
+	
+	M.Amm -= 1
+	
+	PLWallet.AddFunds(-Cost)
+	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Cost / 100))
+	
 	ItemCat.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
-	CurrentShip.Cpt.GetCharacterInventory().AddItem(It)
-	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.ItemName]))
+	CurrentShip.Cpt.GetCharacterInventory().AddItem(M.It)
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([M.It.ItemName]))
 	RefreshInventory()
+	CloseDescriptor()
+	
 
 func UpgradeItem(Box : Inventory_Box) -> void:
 	

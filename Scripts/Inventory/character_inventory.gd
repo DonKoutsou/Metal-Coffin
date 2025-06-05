@@ -59,21 +59,22 @@ func GetCards() -> Array[CardStats]:
 func GetCardDictionary() -> Dictionary[CardStats, int]:
 	var c : Dictionary[CardStats, int]
 	for g in _InventoryContents:
-		if (g is AmmoItem and !HasWeapon(g.WType)):
-			continue
-		for z in g.CardProviding:
-			var C = z.duplicate() as CardStats
-			C.Tier = g.Tier
-			
-			var Added = false
-			
-			for Ca : CardStats in c.keys():
-				if (Ca.IsSame(C)):
-					c[Ca] += 1
-					Added = true
-					break
-			if (!Added):
-				c[C] = 1
+		for v in _InventoryContents[g]:
+			if (g is AmmoItem and !HasWeapon(g.WType)):
+				continue
+			for z in g.CardProviding:
+				var C = z.duplicate() as CardStats
+				C.Tier = g.Tier
+				
+				var Added = false
+				
+				for Ca : CardStats in c.keys():
+					if (Ca.IsSame(C)):
+						c[Ca] += 1
+						Added = true
+						break
+				if (!Added):
+					c[C] = 1
 	return c
 #func GetCardAmmo() -> Dictionary:
 	#return _CardAmmo.duplicate()

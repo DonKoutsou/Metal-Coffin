@@ -585,7 +585,7 @@ func GetClosestElint() -> Vector2:
 func GetElintLevel(Dist : float, RadarL : float) -> int:
 	var Lvl = -1
 	var ElintDist = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
-	if (ElintDist == 0):
+	if (ElintDist == 0 or RadarL <= 90):
 		return Lvl
 	if (Dist < RadarL):
 		Lvl = 3

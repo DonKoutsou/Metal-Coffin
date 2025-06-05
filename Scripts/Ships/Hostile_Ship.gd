@@ -490,14 +490,14 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Wonfunds]))
 			call_deferred("DestroyEnemyDebry")
 		#TODO expand logic to allow for convoys with guards
-		#else : if (Convoy):
-			#var Ship = Body.get_parent()
-			#var FleetCommander : MapShip
-			#if (Ship.Command == null):
-				#FleetCommander = Ship
-			#else:
-				#FleetCommander = Ship.Command
-			#FleetCommander.GetDroneDock().AddCaptive(self)
+		else : if (Convoy):
+			var Ship = Body.get_parent()
+			var FleetCommander : MapShip
+			if (Ship.Command == null):
+				FleetCommander = Ship
+			else:
+				FleetCommander = Ship.Command
+			FleetCommander.GetDroneDock().AddCaptive(self)
 		#else:
 			#var plships : Array[MapShip] = []
 			#var hostships : Array[MapShip] = []

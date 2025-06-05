@@ -28,3 +28,4 @@ MaxStackCount = 1
 CardProviding = Array[ExtResource("1_eopay")]([ExtResource("2_lb2hx"), ExtResource("2_lb2hx"), ExtResource("2_lb2hx"), ExtResource("2_lb2hx"), ExtResource("3_lb2hx")])
 Tier = 1
 CanTransfer = false
+Cost = 35000

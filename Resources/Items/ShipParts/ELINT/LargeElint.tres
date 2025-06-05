@@ -15,8 +15,8 @@ CurrentValue = 0.0
 [resource]
 script = ExtResource("6_6tdai")
 Upgrades = Array[ExtResource("5_mb8i7")]([SubResource("Resource_pxbaq")])
-UpgradeTime = 100.0
-UpgradeCost = 0.0
+UpgradeTime = 2500.0
+UpgradeCost = 85000.0
 IsDamaged = false
 PartType = 2
 ItemName = "ELINT-100 \"Oracle\" "
@@ -25,3 +25,4 @@ MaxStackCount = 1
 CardProviding = Array[ExtResource("1_eay5v")]([ExtResource("2_u3lcv"), ExtResource("2_u3lcv"), ExtResource("2_u3lcv"), ExtResource("2_u3lcv")])
 Tier = 2
 CanTransfer = true
+Cost = 60000

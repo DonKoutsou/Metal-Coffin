@@ -22,6 +22,7 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	for g in Spot.SpotInfo.PossibleDrops:
 		var text = TextureRect.new()
 		text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		text.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		text.custom_minimum_size = Vector2(26,26)
 		text.texture = g.ItemIcon
 		if (g is UsableItem):

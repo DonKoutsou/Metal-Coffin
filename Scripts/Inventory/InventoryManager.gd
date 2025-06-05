@@ -298,14 +298,16 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileAdded(It, Owner)
-	CaptainStats.UpdateValues()
+	if (visible):
+		CaptainStats.UpdateValues()
 	
 	
 func OnItemRemoved(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileRemoved(It, Owner)
 	CloseDescriptor()
-	CaptainStats.UpdateValues()
+	if (visible):
+		CaptainStats.UpdateValues()
 
 
 func InspectCharacter(Cha : Captain) -> void:
@@ -379,6 +381,8 @@ func ToggleInventory() -> void:
 		if (CaptainStats.CurrentlyShownCaptain == null):
 			CaptainStats.SetCaptain(_CharacterInventories.keys()[0])
 			CaptainStats.ShowStats()
+		else:
+			CaptainStats.UpdateValues()
 		size = Vector2(size.x, 0)
 		ToggleTween.set_ease(Tween.EASE_OUT)
 		ToggleTween.set_trans(Tween.TRANS_QUAD)

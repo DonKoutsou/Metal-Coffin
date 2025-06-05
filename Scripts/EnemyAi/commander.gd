@@ -316,7 +316,7 @@ var AlarmCooldown : float
 func CheckAlarm() -> void:
 	if (SimPaused):
 		return
-	var Events = PursuitOrders.size() + InvestigationOrders.size() + EnemyPositionsToInvestigate.size()
+	var Events = PursuitOrders.size() + InvestigationOrders.size() + EnemyPositionsToInvestigate.size() + KnownEnemies.size()
 	if (Events > 0):
 		if (!Alarmed and  KnownEnemies.size() > 0):
 			OnAlarmRaised()

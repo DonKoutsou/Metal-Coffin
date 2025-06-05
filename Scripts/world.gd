@@ -346,6 +346,9 @@ func OnLandingCanceled(Ship : MapShip) -> void:
 	Ship.disconnect("LandingCanceled", OnLandingCanceled)
 
 func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
+	var Inventory = InventoryManager.GetInstance()
+	if (Inventory.visible):
+		Inventory.ToggleInventory()
 	if (Ship.GetDroneDock().Captives.size() > 0):
 		var Earnings = 0
 		for g in Ship.GetDroneDock().Captives:

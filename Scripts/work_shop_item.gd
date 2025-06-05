@@ -6,7 +6,7 @@ class_name WorkShopItem
 @export var ShopOwnedT : Label
 @export var ItPriceT : Label
 
-signal OnItemBought(It : Item)
+signal OnItemBought()
 
 var ItPrice : float = 10
 var It : Item
@@ -17,14 +17,14 @@ func _ready() -> void:
 	ItPriceT.text = var_to_str(ItPrice).replace(".0", "")
 	ShopOwnedT.text = var_to_str(ShopAmm)
 
-func Init(ShopItem : Item, Price : float, ShopAmmount : int) -> void:
-	It = ShopItem
-	ItPrice = Price
-	ShopAmm = ShopAmmount
+func Init(M : Merchandise) -> void:
+	It = M.It
+	ItPrice = M.It.Cost
+	ShopAmm = M.Amm
 
 var Accum : float = 0
 func InstallButtonPressed() -> void:
-	OnItemBought.emit(It)
+	OnItemBought.emit()
 
 func ToggleDetails(t : bool) -> void:
 	$VBoxContainer/HBoxContainer.visible = t

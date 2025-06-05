@@ -13,3 +13,4 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("1_orrcq")]([ExtResource("2_orrcq")])
 Tier = 0
 CanTransfer = true
+Cost = 700
