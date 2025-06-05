@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://e2gxy77ln06v"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://1ydt58vyloug"]
 
 [ext_resource type="Resource" uid="uid://coeod5yhsw6es" path="res://Resources/Items/ShipParts/DroneDock/LargeDroneDock.tres" id="1_t15ik"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_gvopr"]
 [ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_vbv0o"]
 
-[sub_resource type="Resource" id="Resource_ivqko"]
+[sub_resource type="Resource" id="Resource_t15ik"]
 script = ExtResource("2_gvopr")
 It = ExtResource("1_t15ik")
 Price = 0
@@ -12,7 +12,7 @@ Amm = 0
 
 [resource]
 script = ExtResource("3_vbv0o")
-Merch = SubResource("Resource_ivqko")
+Merch = SubResource("Resource_t15ik")
 Cost = 0
 MaxAmmPerStage = 0
 DontGenerateBefore = 0

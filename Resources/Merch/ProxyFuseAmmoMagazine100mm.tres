@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://oj6lcuu57q86"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://b3xjmb23iyo5"]
 
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="1_k1y3b"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_ai3so"]

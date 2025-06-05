@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cjjjpohc36g86"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://76ap120n4m0t"]
 
 [ext_resource type="Resource" uid="uid://cs7tt5vt7hc45" path="res://Resources/Items/Ammo/LaserGuidedAmmoMagazine180mm.tres" id="1_6rede"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_iuixx"]

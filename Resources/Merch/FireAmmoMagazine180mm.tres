@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://dk3pedjo8rqvu"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://c2ju7tm25b42y"]
 
 [ext_resource type="Resource" uid="uid://cvfvjs8k8hqxm" path="res://Resources/Items/Ammo/FireAmmoMagazine180mm.tres" id="1_npsvi"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_wdiws"]

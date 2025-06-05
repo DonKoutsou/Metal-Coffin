@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cmhi7djbve0nt"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://x66yawmjduwi"]
 
 [ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/LargeEngine.tres" id="1_566o3"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_n6fjr"]
 [ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_5pj43"]
 
-[sub_resource type="Resource" id="Resource_wktaj"]
+[sub_resource type="Resource" id="Resource_566o3"]
 script = ExtResource("2_n6fjr")
 It = ExtResource("1_566o3")
 Price = 0
@@ -12,7 +12,7 @@ Amm = 0
 
 [resource]
 script = ExtResource("3_5pj43")
-Merch = SubResource("Resource_wktaj")
+Merch = SubResource("Resource_566o3")
 Cost = 0
 MaxAmmPerStage = 0
 DontGenerateBefore = 0

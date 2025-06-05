@@ -104,7 +104,8 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 		
 		UpgradeButton.visible = false
 		UpgradeLabel.visible = false
-	
+	for g in CardPlecement.get_children():
+		g.queue_free()
 	#TODO Option doesent show when ship has upgraded weapons
 	if (It.CardProviding.size() > 0):
 		var CardsChecked : Array[CardStats]
@@ -275,6 +276,7 @@ func _on_transfer_pressed() -> void:
 	#queue_free()
 
 func _physics_process(_delta: float) -> void:
+	return
 	var inv = DescribedContainer.GetParentInventory()
 	var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
 	UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])

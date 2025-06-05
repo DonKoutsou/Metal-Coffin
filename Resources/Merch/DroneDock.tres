@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://bejc1w1j6ylpm"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://c4245ovobbj7l"]
 
 [ext_resource type="Resource" uid="uid://ccj6j18nyucrl" path="res://Resources/Items/ShipParts/DroneDock/DroneDock.tres" id="1_ey0hc"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_sw2k5"]

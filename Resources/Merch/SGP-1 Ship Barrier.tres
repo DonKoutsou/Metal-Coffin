@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://b6lswfnpqchoa"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://bqpuuxe8s87wc"]
 
 [ext_resource type="Resource" uid="uid://bja0tfjegmyxx" path="res://Resources/Items/ShipParts/Shield/SGP-1 Ship Barrier.tres" id="1_1lp41"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_ppcwn"]

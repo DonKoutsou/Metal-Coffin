@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://crv8h5k7ugljj"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cnrk727cubsak"]
 
 [ext_resource type="Resource" uid="uid://by5pd080gjivc" path="res://Resources/Items/ShipParts/Shield/SGP-3 Ship Barrier.tres" id="1_eyg0l"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_uf7nr"]
 [ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_vc5rd"]
 
-[sub_resource type="Resource" id="Resource_pmkhe"]
+[sub_resource type="Resource" id="Resource_eyg0l"]
 script = ExtResource("2_uf7nr")
 It = ExtResource("1_eyg0l")
 Price = 0
@@ -12,7 +12,7 @@ Amm = 0
 
 [resource]
 script = ExtResource("3_vc5rd")
-Merch = SubResource("Resource_pmkhe")
+Merch = SubResource("Resource_eyg0l")
 Cost = 0
 MaxAmmPerStage = 0
 DontGenerateBefore = 0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://vv4s3jolyps2"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://pru1dyotl5qk"]
 
 [ext_resource type="Resource" uid="uid://cq0vggs5aaeg7" path="res://Resources/Items/Ammo/APAmmoMagazine180mm.tres" id="1_cdk0y"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_b870j"]

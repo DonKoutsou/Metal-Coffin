@@ -24,6 +24,8 @@ var sorted_convoy_captain_list
 func RefrshExistingItems() -> void:
 	#WorkshopList.clear()
 	#MerchList.clear()
+	if (!Engine.is_editor_hint()):
+		return
 	var DirsToExplore :Array[String] = ["res://Resources/Items"]
 	for g in DirsToExplore:
 		var dir = DirAccess.open(g)

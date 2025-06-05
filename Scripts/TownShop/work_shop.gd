@@ -10,18 +10,35 @@ class_name WorkShop
 @export var WeaponInventoryBoxParent : GridContainer
 @export var ShieldInventoryBoxParent : GridContainer
 @export var DescriptorPlace : Control
-
+@export var WorkshopItemUI : PackedScene
 @export var ItemDescriptorScene : PackedScene
 @export var InventoryBoxScene : PackedScene
 @export var StatComp : PackedScene
 @export var ItemParent : Control
 @export var ItemCat : Control
-
+@export var Descr : ItemDescriptor
 var CurrentShip : MapShip
 var WorkShopMerch : Array[Merchandise]
 
 var HasUpgrade : bool = false
 signal WorkshopClosed
+
+func _physics_process(delta: float) -> void:
+	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
+	var midpoint = get_viewport_rect().size/2
+	var Closest : Control
+	var Dist : float = 9999999
+	for g : Control in ItemParent.get_children():
+		if (g is not WorkShopItem):
+			continue
+		var NewDest = (g.global_position + (g.size / 2)).distance_to(midpoint)
+		if (NewDest < Dist):
+			Dist = NewDest
+			Closest = g
+	if (Closest == null):
+		return
+	if (Descr.DescribedItem != Closest.It):
+		Descr.SetMerchData(Closest.It)
 
 func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise]) -> void:
 	WorkShopMerch.append_array(Merch)
@@ -252,29 +269,39 @@ func RemoveItem(Box : Inventory_Box) -> void:
 func AddItem(Box : Inventory_Box) -> void:
 	var Type = GetTypeOfBox(Box)
 	
-	var ItemCatalogue : Array[Item]
-	ItemCat.visible = true
-	for g in WorkShopMerch:
-		var It = g.It
-		if (It is ShipPart):
-			if (Type == It.PartType):
-				ItemCatalogue.append(It)
-		else: if (Type == ShipPart.ShipPartType.INVENTORY):
-			ItemCatalogue.append(It)
-	
-	for g in ItemCatalogue:
-		var B = InventoryBoxScene.instantiate() as Inventory_Box
-		B.RegisterItem(g)
-		B.UpdateAmm(1)
-		ItemParent.add_child(B)
-		B.ItemSelected.connect(ItemToAddSelected)
+	var c1 = Control.new()
+	c1.custom_minimum_size.y = 200
+	ItemParent.add_child(c1)
+	c1.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-func ItemToAddSelected(Box : Inventory_Box) -> void:
+	var Amm : int = 0
+	for g in WorkShopMerch:
+		var It = g.It as ShipPart
+		if (Type == It.PartType):
+			var B = WorkshopItemUI.instantiate() as WorkShopItem
+			B.Init(It, g.Price, g.Amm)
+			B.OnItemBought.connect(ItemToAddSelected)
+			ItemParent.add_child(B)
+			Amm += 1
+	
+	if (Amm == 0):
+		PopUpManager.GetInstance().DoFadeNotif("No available parts for slot found")
+		for g in ItemParent.get_children():
+			g.queue_free()
+		return
+	PopUpManager.GetInstance().DoFadeNotif("{0} combatible parts found".format([Amm]))
+	ItemCat.visible = true
+	var c2 = Control.new()
+	c2.custom_minimum_size.y = 200
+	ItemParent.add_child(c2)
+	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+func ItemToAddSelected(It : Item) -> void:
 	ItemCat.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
-	CurrentShip.Cpt.GetCharacterInventory().AddItem(Box.GetContainedItem())
-	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().ItemName]))
+	CurrentShip.Cpt.GetCharacterInventory().AddItem(It)
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.ItemName]))
 	RefreshInventory()
 
 func UpgradeItem(Box : Inventory_Box) -> void:
@@ -346,3 +373,9 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 func _on_button_pressed() -> void:
 	WorkshopClosed.emit()
 	queue_free()
+
+
+func _on_cancel_button_pressed() -> void:
+	ItemCat.visible = false
+	for g in ItemParent.get_children():
+		g.queue_free()
