@@ -43,8 +43,8 @@ script = ExtResource("1_0hew0")
 ItemName = NodePath("VBoxContainer/HBoxContainer3/Label")
 Bar = NodePath("VBoxContainer/ProgressBar")
 PlOwnedT = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/PlAmm")
-ShopOwnedT = NodePath("VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/ShopAmm")
-ItPriceT = NodePath("VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/Price")
+ShopOwnedT = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ShopAmm")
+ItPriceT = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Price")
 PlWallet = ExtResource("2_7jnpa")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -65,48 +65,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer3/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 14
-text = "Price:"
-
-[node name="Price" type="Label" parent="VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 26
-text = "50"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer3/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 14
-text = "Shop Inventory:"
-
-[node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 6
-theme_override_font_sizes/font_size = 26
-text = "1"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -146,6 +104,48 @@ layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ql3kp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "Price:"
+
+[node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "50"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "Shop Inventory:"
+
+[node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 26
+text = "1"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)

@@ -73,6 +73,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 	AddItemButton.visible = false
 	UpgradeButton.visible = true
 	ItemName.text = It.ItemName
+	RemoveItemButton.visible = true
 	#Ship Parts
 	if (It is ShipPart):
 		

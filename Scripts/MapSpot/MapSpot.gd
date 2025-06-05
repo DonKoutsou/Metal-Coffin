@@ -79,6 +79,7 @@ func GetSaveData() -> Resource:
 	datas.AlarmRaised = AlarmRaised
 	datas.AlarmProgress = AlarmProgress
 	datas.Merch = Merch
+	datas.WorkShopMerch = WorkShopMerch
 	datas.Evnt = Event
 	return datas
 

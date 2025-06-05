@@ -3,6 +3,7 @@ extends Control
 class_name TownScene
 @export_group("Merchandise")
 @export var Merch : Array[Merchandise]
+@export var WorkShopMerch : Array[Merchandise]
 @export_group("Nodes")
 #@export var FundAmm : Label
 @export var PortName : Label
@@ -40,7 +41,12 @@ func _ready() -> void:
 	for g in TownSpot.Merch:
 		var It = g.It
 		for z in Merch:
-			if (It == z.It):
+			if (It.IsSame(z.It)):
+				z.Amm = g.Amm
+	for g in TownSpot.WorkShopMerch:
+		var It = g.It
+		for z in WorkShopMerch:
+			if (It.IsSame(z.It)):
 				z.Amm = g.Amm
 	#signal OnItemBought(It : Item)
 
@@ -97,7 +103,7 @@ func FuelExchangeFinished(RemainingReserves : float, Fuel : float, Repair : floa
 func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop
 	add_child(WShop)
-	WShop.Init(LandedShips)
+	WShop.Init(LandedShips, TownSpot.HasUpgrade(), WorkShopMerch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.UPGRADE_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
 		ActionTracker.GetInstance().ShowTutorial("Workshop", "In the workshop you can inspect your fleets and choose parts to upgrade. Upgraded parts provide better stats for the ship and also extra [color=#ffc315]cards[/color] for the ship's [color=#ffc315]deck[/color].\n\nEach ship can have one of their parts being upgraded at each time. Upgrade progress updates only while the simulation is running.", [], true)

@@ -87,7 +87,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("Coin", "AnimPlayer", "Sound", "CoinPlecement")]
+[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("Coin", "AnimPlayer", "CoinPlecement")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,9 +98,9 @@ mouse_filter = 2
 script = ExtResource("1_8r5c3")
 Coin = NodePath("DiscardInsert/Control/TextureRect")
 AnimPlayer = NodePath("AnimationPlayer")
-Sound = NodePath("AudioStreamPlayer")
 CoinTexture = ExtResource("6_j05jt")
 CoinPlecement = NodePath("DiscardInsert2/Control")
+CoinSlideInSound = ExtResource("5_yen4x")
 CoinSlideSound = ExtResource("3_3jwvr")
 
 [node name="ScreenFrame2" type="TextureRect" parent="."]
@@ -121,10 +121,10 @@ expand_mode = 1
 
 [node name="Fund_Container" parent="." instance=ExtResource("2_u4bsh")]
 layout_mode = 1
-offset_left = 402.0
+offset_left = 401.0
 offset_top = -286.0
 offset_right = 497.0
-offset_bottom = -239.0
+offset_bottom = -240.0
 
 [node name="DiscardInsert" type="PanelContainer" parent="."]
 clip_contents = true
@@ -156,11 +156,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_j05jt")
 }
 speed_scale = 0.6
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_yen4x")
-volume_db = -6.0
-bus = &"Sounds"
 
 [node name="DiscardInsert2" type="PanelContainer" parent="."]
 clip_contents = true

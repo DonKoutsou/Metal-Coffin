@@ -151,20 +151,10 @@ func GetCity(CityName : String) -> MapSpot:
 func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
 
 	var Cpt = GetBoxOwner(Box)
-	var It = Box.GetContainedItem() as ShipPart
 	var cit = GetCity(Cpt.CurrentPort)
 	var HasUpgrade = cit.HasUpgrade()
-	var Cost = It.UpgradeCost
-	if (HasUpgrade):
-		Cost /= 2
-	var PLWallet = World.GetInstance().PlayerWallet
-	if (PLWallet.Funds < Cost):
-		PopUpManager.GetInstance().DoFadeNotif("Cant pay for upgrade")
-		return
-	PLWallet.AddFunds(-Cost)
+
 	OwnerInventory.StartUpgrade(Box, cit.HasUpgrade())
-	CloseDescriptor()
-	BoxSelected(Box, OwnerInventory)
 	
 
 func CancelUpgrades(Cha : Captain) -> void:

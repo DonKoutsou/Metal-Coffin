@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bahj28qps5ssw"]
+[gd_scene load_steps=21 format=3 uid="uid://bahj28qps5ssw"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
@@ -10,12 +10,20 @@
 [ext_resource type="Resource" uid="uid://byfi8gb5rfaq5" path="res://Resources/Merch/Flares.tres" id="8_quutr"]
 [ext_resource type="Resource" uid="uid://csn5s05u6rd82" path="res://Resources/Merch/FireAmmo.tres" id="9_t8y33"]
 [ext_resource type="Resource" uid="uid://bjp66pbcmoto5" path="res://Resources/Merch/ProxAmmo.tres" id="10_vs4qv"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="11_cp5cc"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/WorkShop/work_shop.tscn" id="17_t244x"]
 [ext_resource type="PackedScene" uid="uid://bhpyiqwlbnmad" path="res://Scenes/TownShop/merch_ship.tscn" id="17_vaeb3"]
 [ext_resource type="PackedScene" uid="uid://c6pyjquo47hnr" path="res://Scenes/TownShop/fuel_storages.tscn" id="18_u4st4"]
 [ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="18_vaeb3"]
+
+[sub_resource type="Resource" id="Resource_box5h"]
+script = ExtResource("3_5r13l")
+It = ExtResource("11_cp5cc")
+Price = 100
+Amm = 0
+metadata/_custom_type_script = "uid://ymki3tqy3opd"
 
 [sub_resource type="Environment" id="Environment_t244x"]
 background_mode = 3
@@ -39,6 +47,7 @@ mouse_force_pass_scroll_events = false
 theme = ExtResource("1_ca22g")
 script = ExtResource("2_epy1b")
 Merch = Array[ExtResource("3_5r13l")]([ExtResource("10_vs4qv"), ExtResource("9_t8y33"), ExtResource("6_vlkdt"), ExtResource("4_ydye5"), ExtResource("5_11niw"), ExtResource("7_bygo8"), ExtResource("8_quutr")])
+WorkShopMerch = Array[ExtResource("3_5r13l")]([SubResource("Resource_box5h")])
 PortName = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/CityName")
 PortBuffText = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer/CityBuffs")
 MerchendiseButton = NodePath("Button2")

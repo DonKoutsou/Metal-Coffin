@@ -14,12 +14,17 @@ class_name WorkShop
 @export var ItemDescriptorScene : PackedScene
 @export var InventoryBoxScene : PackedScene
 @export var StatComp : PackedScene
+@export var ItemParent : Control
+@export var ItemCat : Control
 
 var CurrentShip : MapShip
+var WorkShopMerch : Array[Merchandise]
 
+var HasUpgrade : bool = false
 signal WorkshopClosed
 
-func Init(Ships : Array[MapShip]) -> void:
+func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise]) -> void:
+	WorkShopMerch.append_array(Merch)
 	for g in Ships:
 		var b = Button.new()
 		ShipButtonsParent.add_child(b)
@@ -105,8 +110,75 @@ func OnShipSelected(Ship : MapShip) -> void:
 					box.RegisterItem(g)
 					box.UpdateAmm(1)
 					break
+
+func RefreshInventory() -> void:
+	for g in EngineInventoryBoxParent.get_children():
+		g.free()
+	for g in SensorInventoryBoxParent.get_children():
+		g.free()
+	for g in FuelTankInventoryBoxParent.get_children():
+		g.free()
+	for g in WeaponInventoryBoxParent.get_children():
+		g.free()
+	for g in ShieldInventoryBoxParent.get_children():
+		g.free()
 	
+	$PanelContainer/VBoxContainer/HBoxContainer/TextureRect.texture = CurrentShip.Cpt.ShipIcon
 	
+	var Cha = CurrentShip.Cpt
+	
+	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
+	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)
+	var CharFuelTankSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK_SLOTS)
+	var CharShieldSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SHIELD_SLOTS)
+	var CharWeaponSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.WEAPON_SLOTS)
+	
+	for g in CharEngineSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		EngineInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
+		EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
+	
+	for g in CharSensorSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		SensorInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
+		SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
+	
+	for g in CharFuelTankSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		FuelTankInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
+		FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
+	
+	for g in CharShieldSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		ShieldInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
+		ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
+	
+	for g in CharWeaponSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		WeaponInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		Box.Enable()
+		WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
+	
+	var inv = Cha.GetCharacterInventory()
+	var Contents = inv.GetInventoryContents()
+	for g in Contents:
+		if (g is ShipPart):
+			for z in Contents[g]:
+				for box : Inventory_Box in GetBoxParentForType(g.PartType).get_children():
+					if box.IsEmpty():
+						box.RegisterItem(g)
+						box.UpdateAmm(1)
+						break
+
 func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 	var BoxParent : Control
 	if (PartType == ShipPart.ShipPartType.ENGINE):
@@ -151,20 +223,60 @@ func ItemSelected(Box : Inventory_Box) -> void:
 	Descriptor.DescribedContainer = Box
 	if (Box.IsEmpty()):
 		Descriptor.SetEmptyShopData(GetTypeOfBox(Box))
+		Descriptor.connect("ItemAdd", AddItem)
 	else:
 		var HasUp = false
 		if (CurrentShip.Cpt.CurrentPort != ""):
-
 			HasUp = CurrentShip.CurrentPort.HasUpgrade()
 		Descriptor.SetWorkShopData(Box, HasUp, CurrentShip.Cpt)
-		#Descriptor.connect("ItemUsed", UseItem)
+		Descriptor.connect("ItemAdd", AddItem)
+		Descriptor.connect("ItemRemove", RemoveItem)
 		Descriptor.connect("ItemUpgraded", UpgradeItem)
 		
 		#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
 		#Descriptor.connect("ItemTransf", ItemTranfer)
 	DescriptorPlace.add_child(Descriptor)
 	Descriptor.set_physics_process(false)
+
+func UpdateDescriptor(Box : Inventory_Box) -> void:
 	
+	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+	if (descriptors.size() > 0):
+		var desc = descriptors[0] as ItemDescriptor
+		desc.SetWorkShopData(Box, HasUpgrade, CurrentShip.Cpt)
+
+func RemoveItem(Box : Inventory_Box) -> void:
+	CurrentShip.Cpt.GetCharacterInventory().RemoveItem(Box.GetContainedItem())
+	RefreshInventory()
+
+func AddItem(Box : Inventory_Box) -> void:
+	var Type = GetTypeOfBox(Box)
+	
+	var ItemCatalogue : Array[Item]
+	ItemCat.visible = true
+	for g in WorkShopMerch:
+		var It = g.It
+		if (It is ShipPart):
+			if (Type == It.PartType):
+				ItemCatalogue.append(It)
+		else: if (Type == ShipPart.ShipPartType.INVENTORY):
+			ItemCatalogue.append(It)
+	
+	for g in ItemCatalogue:
+		var B = InventoryBoxScene.instantiate() as Inventory_Box
+		B.RegisterItem(g)
+		B.UpdateAmm(1)
+		ItemParent.add_child(B)
+		B.ItemSelected.connect(ItemToAddSelected)
+
+func ItemToAddSelected(Box : Inventory_Box) -> void:
+	ItemCat.visible = false
+	for g in ItemParent.get_children():
+		g.queue_free()
+	CurrentShip.Cpt.GetCharacterInventory().AddItem(Box.GetContainedItem())
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().ItemName]))
+	RefreshInventory()
+
 func UpgradeItem(Box : Inventory_Box) -> void:
 	
 	var OriginalItem : ShipPart = Box.GetContainedItem()
@@ -181,9 +293,15 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Ship having a part equipped to it")
 		#print("Ship is already upgrading a part. Wait for it to finish first.")
 		return
-	#if (OriginalCap.CurrentPort == ""):
-		#PopUpManager.GetInstance().DoFadeNotif("Ship needs to be docked to upgrade")
-		#return
+
+	var Cost = OriginalItem.UpgradeCost
+	if (HasUpgrade):
+		Cost /= 2
+	var PLWallet = World.GetInstance().PlayerWallet
+	if (PLWallet.Funds < Cost):
+		PopUpManager.GetInstance().DoFadeNotif("Cant pay for upgrade")
+		return
+	
 	
 	var NewCap = OriginalCap.duplicate(true) as Captain
 	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
@@ -213,6 +331,9 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		
 		return
 	
+	PLWallet.AddFunds(-Cost)
+	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Cost / 100))
+	
 	PopUpManager.GetInstance().DoFadeNotif("{0} upgrade initiated".format([OriginalItem.ItemName]))
 	
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()
@@ -220,7 +341,7 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	var box = Inv.GetBoxContainingItem(Box._ContainedItem)
 	
 	InventoryManager.GetInstance().ItemUpdgrade(box, Inv)
-	
+	UpdateDescriptor(Box)
 
 func _on_button_pressed() -> void:
 	WorkshopClosed.emit()

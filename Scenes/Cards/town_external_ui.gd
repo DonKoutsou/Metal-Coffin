@@ -4,10 +4,11 @@ class_name TownExternalUI
 
 @export var Coin : TextureRect
 @export var AnimPlayer : AnimationPlayer
-@export var Sound : AudioStreamPlayer
 @export var Flap : Control
 @export var CoinTexture : Texture
 @export var CoinPlecement : Control
+
+@export var CoinSlideInSound :AudioStream
 @export var CoinSlideSound : AudioStream
 
 var MoneySpent : int = 0
@@ -22,6 +23,12 @@ func DropCoins(Amm : int) -> void:
 	
 	TimesToPlay = min(TimesToPlay + Amm, 6)
 	if (!AnimPlayer.is_playing()):
+		var Delsound = DeletableSoundGlobal.new()
+		Delsound.stream = CoinSlideInSound
+		Delsound.pitch_scale = randf_range(0.95, 1.05)
+		add_child(Delsound)
+		Delsound.volume_db = -5
+		Delsound.play()
 		AnimPlayer.play("DropCoin")
 
 func CoinsReceived(Amm : int)-> void:
@@ -46,6 +53,8 @@ func OnCoinsGot() -> void:
 	text.texture = CoinTexture
 	text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	text.size = Vector2(32,32)
+	text.pivot_offset = Vector2(16,16)
+	text.rotation_degrees = randf_range(0,360)
 	CoinPlecement.add_child(text)
 	var selectedx = randf_range(-25, 35)
 	text.position = Vector2(selectedx, -45)
@@ -82,7 +91,12 @@ func SetFlapParam(value : float) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	TimesToPlay -= 1
-	Sound.pitch_scale = randf_range(0.95, 1.05)
-	Sound.play()
+	
 	if (TimesToPlay > 0):
+		var Delsound = DeletableSoundGlobal.new()
+		Delsound.stream = CoinSlideInSound
+		Delsound.pitch_scale = randf_range(0.95, 1.05)
+		add_child(Delsound)
+		Delsound.volume_db = -5
+		Delsound.play()
 		AnimPlayer.play("DropCoin")
