@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cjjjpohc36g86"]
+
+[ext_resource type="Resource" uid="uid://cs7tt5vt7hc45" path="res://Resources/Items/Ammo/LaserGuidedAmmoMagazine180mm.tres" id="1_6rede"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_iuixx"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_b61ao"]
+
+[sub_resource type="Resource" id="Resource_li6k5"]
+script = ExtResource("2_iuixx")
+It = ExtResource("1_6rede")
+Price = 1100
+Amm = 0
+
+[resource]
+script = ExtResource("3_b61ao")
+Merch = SubResource("Resource_li6k5")
+Cost = 3
+MaxAmmPerStage = 3
+DontGenerateBefore = 4

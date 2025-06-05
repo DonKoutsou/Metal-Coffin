@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://oj6lcuu57q86"]
+
+[ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="1_k1y3b"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_ai3so"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_ohqrg"]
+
+[sub_resource type="Resource" id="Resource_18jxi"]
+script = ExtResource("2_ai3so")
+It = ExtResource("1_k1y3b")
+Price = 900
+Amm = 0
+
+[resource]
+script = ExtResource("3_ohqrg")
+Merch = SubResource("Resource_18jxi")
+Cost = 2
+MaxAmmPerStage = 4
+DontGenerateBefore = 2

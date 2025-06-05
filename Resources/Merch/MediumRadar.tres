@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://bb6uepyka4juq"]
+
+[ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="1_sjry2"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_iq8ao"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_oy2r2"]
+
+[sub_resource type="Resource" id="Resource_17tml"]
+script = ExtResource("2_iq8ao")
+It = ExtResource("1_sjry2")
+Price = 0
+Amm = 0
+
+[resource]
+script = ExtResource("3_oy2r2")
+Merch = SubResource("Resource_17tml")
+Cost = 0
+MaxAmmPerStage = 0
+DontGenerateBefore = 0

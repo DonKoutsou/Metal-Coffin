@@ -1,10 +1,18 @@
-[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://cgcfrrlvaj7mi"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cgcfrrlvaj7mi"]
 
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="1_pyqfi"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_4ax7c"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_eiiqw"]
 
-[resource]
+[sub_resource type="Resource" id="Resource_knsb7"]
 script = ExtResource("2_4ax7c")
 It = ExtResource("1_pyqfi")
-Price = 1000
-Amm = 0
+Price = 3
+Amm = 1200
+
+[resource]
+script = ExtResource("3_eiiqw")
+Merch = SubResource("Resource_knsb7")
+Cost = 3
+MaxAmmPerStage = 2
+DontGenerateBefore = 1

@@ -1,3 +1,4 @@
+@tool
 extends Resource
 
 class_name SpawnDecider
@@ -15,6 +16,55 @@ var sorted_captain_list
 var sorted_ground_captain_list
 var sorted_convoy_captain_list
 
+@export var Switch: bool:
+	set(Thing):
+		Switch = false
+		RefrshExistingItems()
+
+func RefrshExistingItems() -> void:
+	#WorkshopList.clear()
+	#MerchList.clear()
+	var DirsToExplore :Array[String] = ["res://Resources/Items"]
+	for g in DirsToExplore:
+		var dir = DirAccess.open(g)
+		if dir:
+			dir.list_dir_begin()
+			var file_name = dir.get_next()
+			while file_name != "":
+				if dir.current_is_dir():
+					print("Found directory: " + file_name)
+					DirsToExplore.append(g + "/" + file_name)
+				else:
+					print("Found file: " + file_name)
+					var It = load(g + "/" + file_name)
+					AddMerchToLists(It, file_name)
+					
+				file_name = dir.get_next()
+
+func AddMerchToLists(It : Item, FileName :String) -> void:
+	var MerInfo = MerchandiseInfo.new()
+	var Mer = Merchandise.new()
+	MerInfo.Merch = Mer
+	Mer.It = It
+	if (It is ShipPart):
+		for g in WorkshopList.size():
+			if (WorkshopList[g].Merch.It.IsSame(It)):
+				ResourceSaver.save(WorkshopList[g], "res://Resources/Merch/" + FileName)
+				WorkshopList.remove_at(g)
+				WorkshopList.insert(g, load("res://Resources/Merch/" + FileName))
+				return
+		
+		ResourceSaver.save(MerInfo, "res://Resources/Merch/" + FileName)
+		WorkshopList.append(load("res://Resources/Merch/" + FileName))
+	else:
+		for g in MerchList.size():
+			if (MerchList[g].Merch.It.IsSame(It)):
+				ResourceSaver.save(MerchList[g], "res://Resources/Merch/" + FileName)
+				MerchList.remove_at(g)
+				MerchList.insert(g, load("res://Resources/Merch/" + FileName))
+				return
+		ResourceSaver.save(MerInfo, "res://Resources/Merch/" + FileName)
+		MerchList.append(load("res://Resources/Merch/" + FileName))
 
 func Init() -> void:
 	# Sort CaptainList by cost descending to prioritize more powerful ships

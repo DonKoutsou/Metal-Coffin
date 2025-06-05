@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cuod8e77nhkfk"]
+
+[ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="1_3ndg4"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_ue0ok"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_kilkf"]
+
+[sub_resource type="Resource" id="Resource_jbnp8"]
+script = ExtResource("2_ue0ok")
+It = ExtResource("1_3ndg4")
+Price = 0
+Amm = 0
+
+[resource]
+script = ExtResource("3_kilkf")
+Merch = SubResource("Resource_jbnp8")
+Cost = 0
+MaxAmmPerStage = 0
+DontGenerateBefore = 0

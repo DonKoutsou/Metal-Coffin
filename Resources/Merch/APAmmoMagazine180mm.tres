@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://vv4s3jolyps2"]
+
+[ext_resource type="Resource" uid="uid://cq0vggs5aaeg7" path="res://Resources/Items/Ammo/APAmmoMagazine180mm.tres" id="1_cdk0y"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_b870j"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_77ci1"]
+
+[sub_resource type="Resource" id="Resource_ytgtf"]
+script = ExtResource("2_b870j")
+It = ExtResource("1_cdk0y")
+Price = 900
+Amm = 0
+
+[resource]
+script = ExtResource("3_77ci1")
+Merch = SubResource("Resource_ytgtf")
+Cost = 2
+MaxAmmPerStage = 4
+DontGenerateBefore = 2

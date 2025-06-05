@@ -1,10 +1,18 @@
-[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://dab42txern1sq"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://dab42txern1sq"]
 
 [ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="1_uifmt"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_8pssw"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_8pssw"]
 
-[resource]
+[sub_resource type="Resource" id="Resource_dgsn5"]
 script = ExtResource("2_8pssw")
 It = ExtResource("1_uifmt")
 Price = 1200
 Amm = 0
+
+[resource]
+script = ExtResource("3_8pssw")
+Merch = SubResource("Resource_dgsn5")
+Cost = 4
+MaxAmmPerStage = 2
+DontGenerateBefore = 3

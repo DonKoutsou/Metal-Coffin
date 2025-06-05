@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://b06ytaddlsb38"]
+
+[ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine100mm.tres" id="1_w4vy1"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_kmcdc"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_cl433"]
+
+[sub_resource type="Resource" id="Resource_3p2d8"]
+script = ExtResource("2_kmcdc")
+It = ExtResource("1_w4vy1")
+Price = 600
+Amm = 0
+
+[resource]
+script = ExtResource("3_cl433")
+Merch = SubResource("Resource_3p2d8")
+Cost = 2
+MaxAmmPerStage = 6
+DontGenerateBefore = 0

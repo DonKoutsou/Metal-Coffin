@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cs0pupceitbrc"]
+
+[ext_resource type="Resource" uid="uid://b38opwgqmdpro" path="res://Resources/Items/ShipParts/MG/LargeMachinegun180mm.tres" id="1_oqin3"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_74lgm"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_8v83h"]
+
+[sub_resource type="Resource" id="Resource_x1tqe"]
+script = ExtResource("2_74lgm")
+It = ExtResource("1_oqin3")
+Price = 0
+Amm = 0
+
+[resource]
+script = ExtResource("3_8v83h")
+Merch = SubResource("Resource_x1tqe")
+Cost = 0
+MaxAmmPerStage = 0
+DontGenerateBefore = 0

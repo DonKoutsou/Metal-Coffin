@@ -1,9 +1,7 @@
 extends Control
 
 class_name TownScene
-@export_group("Merchandise")
-@export var Merch : Array[Merchandise]
-@export var WorkShopMerch : Array[Merchandise]
+
 @export_group("Nodes")
 #@export var FundAmm : Label
 @export var PortName : Label
@@ -18,7 +16,6 @@ class_name TownScene
 @export var MerchShopScene : PackedScene
 @export var FuelStorageScene : PackedScene
 @export var WorkshopScene : PackedScene
-#"[color=#ffc315
 
 var TownFuel : float = 0
 var BoughtFuel : float = 0
@@ -38,17 +35,8 @@ func _ready() -> void:
 	PortName.text = TownSpot.GetSpotName() + " City Port"
 	SetTownBuffs()
 	
-	for g in TownSpot.Merch:
-		var It = g.It
-		for z in Merch:
-			if (It.IsSame(z.It)):
-				z.Amm = g.Amm
-	for g in TownSpot.WorkShopMerch:
-		var It = g.It
-		for z in WorkShopMerch:
-			if (It.IsSame(z.It)):
-				z.Amm = g.Amm
-	#signal OnItemBought(It : Item)
+	#Merch.append_array(TownSpot.Merch)
+	#WorkShopMerch.append_array(TownSpot.WorkShopMerch)
 
 	UISoundMan.GetInstance().Refresh()
 
@@ -65,8 +53,6 @@ func SetTownBuffs() -> void:
 func On_MunitionShop_pressed() -> void:
 	MerchShop.visible = true
 	WorkshopButton.set_pressed_no_signal(false)
-
-
 
 func On_RefRef_Pressed() -> void:
 	MerchShop.visible = false
@@ -103,7 +89,7 @@ func FuelExchangeFinished(RemainingReserves : float, Fuel : float, Repair : floa
 func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop
 	add_child(WShop)
-	WShop.Init(LandedShips, TownSpot.HasUpgrade(), WorkShopMerch)
+	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.WorkShopMerch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.UPGRADE_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
 		ActionTracker.GetInstance().ShowTutorial("Workshop", "In the workshop you can inspect your fleets and choose parts to upgrade. Upgraded parts provide better stats for the ship and also extra [color=#ffc315]cards[/color] for the ship's [color=#ffc315]deck[/color].\n\nEach ship can have one of their parts being upgraded at each time. Upgrade progress updates only while the simulation is running.", [], true)
@@ -113,7 +99,7 @@ func OnMunitionShopToggled() -> void:
 	add_child(Scene)
 	Scene.ItemSold.connect(OnItemSold)
 	Scene.ItemBought.connect(OnItemBought)
-	Scene.Init(LandedShips, Merch)
+	Scene.Init(LandedShips, TownSpot.Merch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MERCH_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
 		ActionTracker.GetInstance().ShowTutorial("Munition Shop", "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color]. Some of those items are ment to be used in the overworld while others will provide you with extra [color=#ffc315]cards[/color] in your [color=#ffc315]deck[/color].", [], true)
