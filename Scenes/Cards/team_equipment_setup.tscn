@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cuek7mm0smt8c"]
+[gd_scene load_steps=61 format=3 uid="uid://cuek7mm0smt8c"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p5w00"]
 [ext_resource type="Script" uid="uid://bn6vwqvcv5ebb" path="res://Scripts/CardFight/team_equipment_setup.gd" id="1_xpgoa"]
@@ -53,7 +53,9 @@
 [ext_resource type="Resource" uid="uid://22w1h832bsxa" path="res://Resources/Items/ShipParts/ELINT/LargeElint.tres" id="34_1uiem"]
 [ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="36_kg4rr"]
 [ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/ShipParts/MissilePods/LargeMissilePod.tres" id="37_ijiw4"]
+[ext_resource type="PackedScene" uid="uid://bt6th215x5s5m" path="res://Scenes/TownShop/CageFightItem.tscn" id="51_6g7se"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://InputScroll.gd" id="51_20d3x"]
+[ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="55_mn77v"]
 
 [sub_resource type="Resource" id="Resource_20d3x"]
 resource_local_to_scene = true
@@ -72,7 +74,16 @@ content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 
-[node name="TeamEquipmentSetup" type="PanelContainer" node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "DescriptorPlace", "DeckUI", "PlayerCaptainLocation", "EnemyCaptainLocation", "CaptainName", "ItemCatalogue", "ItemParent")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6g7se"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc5nm"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+
+[node name="TeamEquipmentSetup" type="PanelContainer" node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "DescriptorPlace", "DeckUI", "PlayerCaptainLocation", "EnemyCaptainLocation", "CaptainName", "ItemCatalogue", "ItemParent", "Desc")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -96,8 +107,10 @@ EnemyCaptainLocation = NodePath("HBoxContainer/VBoxContainer3/PanelContainer/Scr
 Equipment = Array[ExtResource("4_c6o7f")]([ExtResource("6_wydj4"), ExtResource("7_8ynnw"), ExtResource("8_20d3x"), ExtResource("21_wx6ro"), ExtResource("10_mn77v"), ExtResource("11_6g7se"), ExtResource("5_xd74m"), ExtResource("13_yc5nm"), ExtResource("14_5ptwe"), ExtResource("20_qtc88"), ExtResource("16_3hcsc"), ExtResource("17_3pean"), ExtResource("18_mohxi"), ExtResource("19_xcv0u"), ExtResource("20_t0okq"), ExtResource("19_powfm"), ExtResource("22_w5pwf"), ExtResource("23_cpg86"), ExtResource("6_yjy3u"), ExtResource("7_e7yxr"), ExtResource("24_r3qv5"), ExtResource("27_xou52"), ExtResource("28_3cojo"), ExtResource("23_8ng8e"), ExtResource("30_rc8xy"), ExtResource("31_adw7l"), ExtResource("17_ex5u7"), ExtResource("33_0ikp2"), ExtResource("34_1uiem"), ExtResource("22_mgcdj"), ExtResource("36_kg4rr"), ExtResource("37_ijiw4"), ExtResource("8_ex5u7"), ExtResource("9_mohxi"), SubResource("Resource_20d3x"), ExtResource("11_qtc88"), ExtResource("12_7josv"), ExtResource("13_p8h5v"), ExtResource("14_r3kd6"), ExtResource("16_e7yxr"), ExtResource("27_r3qv5"), ExtResource("28_8jud7"), ExtResource("29_53ory")])
 CaptainName = NodePath("HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label")
 CaptainB = ExtResource("4_em7yw")
-ItemCatalogue = NodePath("ItemCatalogue")
-ItemParent = NodePath("ItemCatalogue/ScrollContainer/HFlowContainer2")
+CagefightItemUI = ExtResource("51_6g7se")
+ItemCatalogue = NodePath("PanelContainer2")
+ItemParent = NodePath("PanelContainer2/VBoxContainer/HBoxContainer/Scroll/VBoxContainer")
+Desc = NodePath("PanelContainer2/VBoxContainer/HBoxContainer/ItemDesc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -391,19 +404,50 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ItemCatalogue" type="PanelContainer" parent="."]
+[node name="PanelContainer2" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p5w00")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ItemCatalogue"]
-custom_minimum_size = Vector2(270, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_rew5m")
 
-[node name="HFlowContainer2" type="HFlowContainer" parent="ItemCatalogue/ScrollContainer"]
+[node name="Scroll" type="ScrollContainer" parent="PanelContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6g7se")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("51_20d3x")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/VBoxContainer/HBoxContainer/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 10
 alignment = 1
+
+[node name="ItemDesc" parent="PanelContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("55_mn77v")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Panel" type="Panel" parent="PanelContainer2"]
+custom_minimum_size = Vector2(15, 2)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_yc5nm")
+
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

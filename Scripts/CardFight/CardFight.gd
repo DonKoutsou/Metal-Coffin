@@ -33,9 +33,9 @@ class_name Card_Fight
 #Animation of used cards will be placed here
 @export var AnimationPlecement : Control
 #Container for Enemy ship UI
-@export var EnemyShipVisualPlecement : Array[Control]
+@export var EnemyShipVisualPlecement : Control
 #Container for Player ship UI
-@export var PlayerShipVisualPlecement : Array[Control]
+@export var PlayerShipVisualPlecement : Control
 #UI for selecting a target
 @export var TargetSelect : CardFightTargetSelection
 #UI for selecting a card to discard
@@ -860,7 +860,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					DiscardP.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
 					DiscardP.visible = true
 					
-					anim.AtackCardDestroyed.connect(DiscardP.OnCardDiscarded)
+					
 			
 			for g in TargetList:
 				var Def = TargetList[g]["Def"]
@@ -884,6 +884,9 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			viz.ActionRemoved(Action.Icon)
 			
 			anim.DoOffensive(Action, Mod, TargetList, Ship, Friendly)
+			var pos = await anim.AtackCardDestroyed
+			if (Friendly):
+				DiscardP.OnCardDiscarded(pos)
 			anim.AnimationFinished.connect(PerformAnimationFinished.bind(Ship, ActionIndex))
 			
 			
@@ -2095,14 +2098,14 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> void:
 	var Parent : Control
 	
 	if (Friendly):
-		for g in PlayerShipVisualPlecement:
+		for g in PlayerShipVisualPlecement.get_children():
 			if (g is HBoxContainer and g.get_child_count() == 1):
 				Parent = g
 				break
 				
 		Parent.add_child(t)
 	else :
-		for g in EnemyShipVisualPlecement:
+		for g in EnemyShipVisualPlecement.get_children():
 			if (g is HBoxContainer and g.get_child_count() == 1):
 				Parent = g
 				break

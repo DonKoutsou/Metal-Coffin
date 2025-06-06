@@ -87,6 +87,23 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Convoy = false
 	return stats
 
+func GetFuelStats() -> Dictionary:
+	var FuelStats = {
+		"FUEL" : _GetStat(STAT_CONST.STATS.FUEL_TANK).StatBase,
+		"F_EFF" : _GetStat(STAT_CONST.STATS.FUEL_EFFICIENCY).StatBase,
+	}
+	for g in StartingItems:
+		if (g is ShipPart):
+			for up : ShipPartUpgrade in g.Upgrades:
+				if (up.UpgradeName == STAT_CONST.STATS.FUEL_TANK):
+					FuelStats["FUEL"] += up.UpgradeAmmount
+					FuelStats["FUEL"] -= up.PenaltyAmmount
+				if (up.UpgradeName == STAT_CONST.STATS.FUEL_EFFICIENCY):
+					FuelStats["F_EFF"] += up.UpgradeAmmount
+					FuelStats["F_EFF"] -= up.PenaltyAmmount
+					
+	return FuelStats
+
 func GetCards() -> Dictionary[CardStats, int]:
 	var c : Dictionary[CardStats, int]
 	for g in StartingItems:

@@ -18,8 +18,10 @@ class_name TeamEquipmentSetup
 @export var CaptainName : Label
 @export var CaptainB : PackedScene
 @export_group("ItemCatalogue")
+@export var CagefightItemUI : PackedScene
 @export var ItemCatalogue : Control
 @export var ItemParent : Control
+@export var Desc : ItemDescriptor
 
 var CurrentCpt : Captain
 var CurrentDescriptor : ItemDescriptor
@@ -83,9 +85,9 @@ func OnCaptainSelected(Cpt : Captain) -> void:
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
 		DescriptorPlace.remove_child(desc)
-		DeckUI.get_parent().visible = true
 		desc.queue_free()
-	
+		
+	DeckUI.get_parent().visible = true
 	CurrentCpt = Cpt
 	
 	for g in EngineInventoryBoxParent.get_children():
@@ -248,26 +250,37 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 
 var SelectedContainer : Inventory_Box
 func AddItem(Box : Inventory_Box) -> void:
-	ItemCatalogue.visible = true
 	SelectedContainer = Box
-	
 	var Type = GetTypeOfBox(Box)
 	
-	var ItemCatalogue : Array[Item]
-	
+	var c1 = Control.new()
+	c1.custom_minimum_size.y = 200
+	ItemParent.add_child(c1)
+	c1.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var Amm : int = 0
 	for g in Equipment:
-		if (g is ShipPart):
-			if (Type == g.PartType):
-				ItemCatalogue.append(g)
-		else: if (Type == ShipPart.ShipPartType.INVENTORY):
-			ItemCatalogue.append(g)
-	
-	for g in ItemCatalogue:
-		var B = InventoryBoxScene.instantiate() as Inventory_Box
-		B.RegisterItem(g)
-		B.UpdateAmm(1)
+		if (g is ShipPart and Type != g.PartType):
+			continue
+		if (g is not ShipPart and Type != ShipPart.ShipPartType.INVENTORY):
+			continue
+		var B = CagefightItemUI.instantiate() as CageFightItem
+		B.Init(g)
+		B.OnItemBought.connect(OnItemSelected.bind(g))
 		ItemParent.add_child(B)
-		B.ItemSelected.connect(OnItemSelected)
+		Amm += 1
+	
+	if (Amm == 0):
+		PopUpManager.GetInstance().DoFadeNotif("No available parts for slot found")
+		for g in ItemParent.get_children():
+			g.queue_free()
+		return
+	PopUpManager.GetInstance().DoFadeNotif("{0} combatible parts found".format([Amm]))
+	ItemCatalogue.visible = true
+	var c2 = Control.new()
+	c2.custom_minimum_size.y = 200
+	ItemParent.add_child(c2)
+	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 
 func IncreaseItem(Box : Inventory_Box) -> void:
@@ -277,16 +290,16 @@ func IncreaseItem(Box : Inventory_Box) -> void:
 	DeckUI.SetDeck2(CurrentCpt)
 	
 
-func OnItemSelected(Box : Inventory_Box) -> void:
+func OnItemSelected(It : Item) -> void:
 	ItemCatalogue.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
-	CurrentCpt.StartingItems.append(Box.GetContainedItem())
-	SelectedContainer.RegisterItem(Box.GetContainedItem())
+	CurrentCpt.StartingItems.append(It)
+	SelectedContainer.RegisterItem(It)
 	SelectedContainer.UpdateAmm(1)
 	DeckUI.SetDeck2(CurrentCpt)
 	UpdateDescriptor(SelectedContainer)
-	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.ItemName]))
 
 func RemoveItem(Box : Inventory_Box) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} Removed".format([Box.GetContainedItem().ItemName]))
@@ -296,3 +309,25 @@ func RemoveItem(Box : Inventory_Box) -> void:
 	DeckUI.SetDeck2(CurrentCpt)
 	if (Box.IsEmpty()):
 		ItemSelected(Box)
+
+func _physics_process(delta: float) -> void:
+	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
+	var midpoint = get_viewport_rect().size/2
+	var Closest : Control
+	var Dist : float = 9999999
+	for g : Control in ItemParent.get_children():
+		if (g is not CageFightItem):
+			continue
+		var NewDest = (g.global_position + (g.size / 2)).distance_to(midpoint)
+		if (NewDest < Dist):
+			Dist = NewDest
+			Closest = g
+	if (Closest == null):
+		return
+	if (Desc.DescribedItem != Closest.Itm):
+		Desc.SetMerchData(Closest.Itm, [])
+
+func _on_cancel_button_pressed() -> void:
+	ItemCatalogue.visible = false
+	for g in ItemParent.get_children():
+		g.queue_free()

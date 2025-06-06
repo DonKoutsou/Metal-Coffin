@@ -39,17 +39,20 @@ radius = 150.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c58ob"]
 light_mode = 1
 
-[node name="Drone" type="Node2D" node_paths=PackedStringArray("AccelerationAudio", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines", "Acceleration") groups=["PlayerShips", "Ships", "ZoomAffected"]]
+[node name="Drone" type="Node2D" node_paths=PackedStringArray("AccelerationAudio", "TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "ShipShadow", "ShadowPivot", "Acceleration") groups=["PlayerShips", "Ships", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_p3smt")
 script = ExtResource("1_vfr1e")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
+LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
+Cpt = ExtResource("3_fw0pf")
+TrailLines = [NodePath("PlayerShipSpr/TrailLine")]
 RadarShape = NodePath("Radar")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
 DroneDok = NodePath("DroneDock")
-LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
-Cpt = ExtResource("3_fw0pf")
-TrailLines = [NodePath("PlayerShipSpr/TrailLine")]
+ShipSprite = NodePath("PlayerShipSpr")
+ShipShadow = NodePath("PlayerShipSpr/ShadowPivot/Shadow")
+ShadowPivot = NodePath("PlayerShipSpr/ShadowPivot")
 Acceleration = NodePath("Aceleration")
 
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]

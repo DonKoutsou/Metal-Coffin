@@ -47,6 +47,20 @@ func GetCityByName(CityName : String) -> MapSpot:
 			break
 	return CorrectCity
 
+func GetClosestSpot(Pos : Vector2) -> MapSpot:
+	var SpotGroups = ["City"]
+	var Closest : MapSpot
+	var Dist = 99999999999999
+	for g in get_tree().get_nodes_in_group("City"):
+		var Dist2 = Pos.distance_to(g.global_position)
+		if (Dist2 < Dist):
+			Dist = Dist2
+			Closest = g
+			if (Dist < 200):
+				break
+
+	return Closest
+
 func GetSpotByName(CityName : String) -> MapSpot:
 	var SpotGroups = ["City"]
 	var cities = []

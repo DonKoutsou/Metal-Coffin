@@ -6,12 +6,14 @@ class_name MerchShop
 @export var ItemPlecement : Control
 @export var Descriptor : ItemDescriptor
 
+var AvailableShips : Array[MapShip]
+
 signal ItemSold(It : Item)
 signal ItemBought(It : Item)
 
 func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 	var Itms : Dictionary[Item, int]
-	
+	AvailableShips.append_array(LandedShips)
 	for ship in LandedShips:
 		var InvContents = ship.Cpt.GetCharacterInventory().GetInventoryContents()
 		for it in InvContents:
@@ -62,7 +64,7 @@ func _physics_process(delta: float) -> void:
 			Dist = NewDest
 			Closest = g
 	if (Descriptor.DescribedItem != Closest.It):
-		Descriptor.SetMerchData(Closest.It)
+		Descriptor.SetMerchData(Closest.It, AvailableShips)
 	
 	
 func OnItemSold(It : Item, Price : float) -> void:

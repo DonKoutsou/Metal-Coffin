@@ -111,7 +111,7 @@ func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
 	Ship.LaunchMissile(Armament, Target.global_position)
 	
 func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
-	Ship.PursuingShips.append(Target)
+	Ship.SetPursuitTarget(Target)
 	for g in PursuitOrders:
 		if (g.Target == Target):
 			g.Receivers.append(Ship)
@@ -143,7 +143,7 @@ func PursuitOrderCanceled(TargetShip : MapShip) -> void:
 			return
 
 func OrderShipToInvestigate(Ship : HostileShip, Target : Vector2, SignalOrigin : MapShip) -> void:
-	Ship.PositionToInvestigate = Target
+	Ship.SetPositionToInvestigate(Target)
 	for g in InvestigationOrders:
 		if (g.ShipTrigger == SignalOrigin):
 			g.Receivers.append(Ship)
@@ -163,7 +163,7 @@ func UpdateInvestigationPos(newpos : Vector2, originship : MapShip) -> void:
 		if (g.ShipTrigger == originship):
 			g.Target = newpos
 			for z in g.Receivers:
-				z.PositionToInvestigate = newpos
+				z.SetPositionToInvestigate(newpos)
 	print("Investigation position updated to : " + var_to_str(newpos))
 	
 func InvestigationOrderComplete(Pos : Vector2) -> void:
@@ -171,7 +171,7 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 		if (g.Target == Pos):
 			for z in g.Receivers:
 				z.disconnect("OnPositionInvestigated", InvestigationOrderComplete)
-				z.PositionToInvestigate = Vector2.ZERO
+				z.SetPositionToInvestigate(Vector2.ZERO)
 				#z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
 			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
@@ -267,11 +267,6 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 			Info.Speed = Ship.GetShipSpeed()
 			Info.Direction = Ship.global_rotation
 			EnemyPositionsToInvestigate[Ship] = Info
-#func OnPositionInvestigated(Pos : Vector2) -> void:
-	#for g in EnemyPositionsToInvestigate.size():
-		#if (EnemyPositionsToInvestigate.values()[g] == Pos):
-			#EnemyPositionsToInvestigate.erase(EnemyPositionsToInvestigate.keys()[g])
-			#break
 
 #/////////////////////////////////////////////////////////////
 
@@ -411,7 +406,7 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 		if (g.Docked or g.Command != null):
 			continue
 		if (free):
-			if (g.PursuingShips.size() > 0 or g.PositionToInvestigate != Vector2.ZERO or !g.CanReachPosition(Pos)):
+			if (g.PursuingShips.size() > 0 or g.PositionToInvestigate != Vector2.ZERO):
 				continue
 		if (patrol):
 			if (!g.Patrol):

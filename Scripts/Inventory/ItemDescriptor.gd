@@ -126,7 +126,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 	else:
 		CardSection.visible = false
 
-func SetMerchData(Itm : Item) -> void:
+func SetMerchData(Itm : Item, Ships : Array[MapShip]) -> void:
 	for g in CardPlecement.get_children():
 		g.queue_free()
 		
@@ -155,7 +155,14 @@ func SetMerchData(Itm : Item) -> void:
 			var UpTime = Itm.UpgradeTime
 			var UpCost = Itm.UpgradeCost
 			UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
-	
+	else: if (Itm is AmmoItem):
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+		ItemDesc.text = Itm.GetMerchItemDesc(Ships)
+	else: if (Itm is MissileItem):
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+		ItemDesc.text = Itm.GetMerchItemDesc(Ships)
 	else :
 		
 		UpgradeButton.visible = false

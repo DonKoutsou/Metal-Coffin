@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_ii2ar")
-WType = 1
+WType = 4
 ItemName = "Incendiary ammo magazine 180mm"
 ItemDesc = "This magazine contains rounds engineered with incendiary payloads, designed to ignite upon impact with enemy hulls or systems. The chemical composition ensures rapid ignition and sustained burn, inflicting ongoing thermal damage post-impact."
 MaxStackCount = 99

@@ -96,7 +96,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_0y3bp"]
 script = ExtResource("2_nhpak")
 StatName = 9
-StatBase = 80.0
+StatBase = 50.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -129,7 +129,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_37pgh"]
 script = ExtResource("2_nhpak")
 StatName = 12
-StatBase = 2.0
+StatBase = 4.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -159,7 +159,7 @@ CaptainPortrait = ExtResource("1_s4bbh")
 ShipIcon = ExtResource("12_iiysl")
 CaptainStats = Array[ExtResource("2_nhpak")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_0y3bp"), SubResource("Resource_vppjj"), SubResource("Resource_g5n4n"), SubResource("Resource_35qqk"), SubResource("Resource_37pgh"), SubResource("Resource_jy3ac"), SubResource("Resource_udlwg")])
 ShipCallsign = "T2"
-StartingItems = Array[ExtResource("3_hsc4q")]([ExtResource("19_g5n4n"), ExtResource("20_35qqk"), ExtResource("21_37pgh"), ExtResource("22_jy3ac"), ExtResource("23_udlwg"), ExtResource("24_fdpd8"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("27_y82q1")])
+StartingItems = Array[ExtResource("3_hsc4q")]([ExtResource("19_g5n4n"), ExtResource("20_35qqk"), ExtResource("21_37pgh"), ExtResource("22_jy3ac"), ExtResource("23_udlwg"), ExtResource("24_fdpd8"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("21_37pgh")])
 CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 50000

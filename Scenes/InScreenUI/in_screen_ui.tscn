@@ -169,6 +169,7 @@ layout_mode = 1
 mouse_force_pass_scroll_events = false
 
 [node name="CommandLine" parent="Control3" instance=ExtResource("17_aessx")]
+visible = false
 layout_mode = 1
 offset_left = 222.0
 offset_top = -173.5
@@ -222,6 +223,7 @@ text = "OK"
 
 [node name="PauseContainer" type="PanelContainer" parent="Control3"]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

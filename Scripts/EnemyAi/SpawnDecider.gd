@@ -135,11 +135,7 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool) -> Array[C
 		var cpt = Captain.new()
 		cpt.call_deferred("CopyStats", g.Cpt)
 		Fleet.append(cpt)
-	#print("Generating fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
-	#var FleetNames = "Fleet : "
-	#for g in Fleet:
-		#FleetNames += "\n" + g.ShipCallsign
-	#print(FleetNames)
+
 	return Fleet
 
 func GetPointsForPosition(YPos : float) -> int:
@@ -147,6 +143,12 @@ func GetPointsForPosition(YPos : float) -> int:
 
 func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:
 	var fleet : Array[CaptainSpawnInfo] = []
+	var fleetFuelStats : Array[Dictionary]
+	var MinimumRange = 0
+	
+	if (Patrol):
+		MinimumRange = 8000
+		
 	var available_ships: Array = sorted_captain_list.duplicate()
 	if (Patrol):
 		points *= 3
@@ -167,38 +169,52 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 		#var best_value = 0
 
 		# Consider each ship for inclusion
-		for ship in available_ships:
-			var ship_info = ship as CaptainSpawnInfo
+		for ship : CaptainSpawnInfo in available_ships:
+			if (ship.DontGenerateBefore > stage):
+				continue
+			if (fleet.size() == 0 and !ship.SpawnAlone):
+				continue
 			
-			if (ship_info.DontGenerateBefore > stage):
+			var ShipRange = ship.Cpt.GetFuelStats()
+			
+			var FleetRange = GetFleetRange(fleetFuelStats, ShipRange)
+			
+			if (FleetRange < MinimumRange):
 				continue
-			if (fleet.size() == 0 and !ship_info.SpawnAlone):
-				continue
+			
 			# Calculate how many we can afford and consider its strategic value
-			var max_ships = min(points / ship_info.Cost, ship_info.MaxAmmInFleet - fleet.count(ship_info))
+			var max_ships = min(points / ship.Cost, ship.MaxAmmInFleet - fleet.count(ship))
 			if max_ships > 0:
-				
-				selected_ship = ship_info
+				selected_ship = ship
 				break
-				## Calculate ship value by some heuristic (e.g., cost efficiency)
-				#var value = ship_info.Cost  # Add your strategy metric here
-				#
-				## Decide if this ship is worth adding to the fleet
-				#if value > best_value:
-					#best_value = value
-					#selected_ship = ship_info
 
-		# If a valid ship is selected, add to the fleet
 		if selected_ship:
-			#var to_add = min(points / selected_ship.Cost, selected_ship.MaxAmmInFleet, 7 - fleet.size())
-			#for i in range(to_add):
 			if points >= selected_ship.Cost:
 				fleet.append(selected_ship)
+				fleetFuelStats.append(selected_ship.Cpt.GetFuelStats())
 				points -= selected_ship.Cost
 			#else:
 				#break
 
 	return fleet
+
+func GetFleetRange(OriginalFleetFuelStats : Array[Dictionary], NewShip : Dictionary) -> float:
+	var fuel = NewShip["FUEL"]
+	var fuel_ef = NewShip["F_EFF"]
+	var fleetsize = 1 + OriginalFleetFuelStats.size()
+	var total_fuel = fuel
+	var inverse_ef_sum = 1.0 / fuel_ef
+	
+	# Group ships fuel and efficiency calculations
+	for g in OriginalFleetFuelStats:
+		var ship_fuel = g["FUEL"]
+		var ship_efficiency = g["F_EFF"]
+		total_fuel += ship_fuel
+		inverse_ef_sum += 1.0 / ship_efficiency
+
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	return (total_fuel * effective_efficiency) / fleetsize
 
 # Custom sort function: Sort by cost descending
 static func SortByCostDescending(a :CaptainSpawnInfo, b : CaptainSpawnInfo):

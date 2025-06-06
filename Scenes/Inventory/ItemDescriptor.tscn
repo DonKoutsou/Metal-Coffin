@@ -170,7 +170,7 @@ horizontal_alignment = 1
 uppercase = true
 
 [node name="CardPlecement" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection"]
-custom_minimum_size = Vector2(350, 270)
+custom_minimum_size = Vector2(325, 270)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3

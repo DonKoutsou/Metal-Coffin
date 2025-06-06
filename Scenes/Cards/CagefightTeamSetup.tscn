@@ -88,6 +88,7 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("39_4wtn2")]([ExtResource("40_msu23")])
 Tier = 0
 CanTransfer = true
+Cost = 0
 
 [node name="CagefightTeamComp" type="Control" node_paths=PackedStringArray("CharacterButtonPlacement", "PlayerTeamPlacement", "EnemyTeamPlacement", "TeamComp", "EquipmentComp")]
 layout_mode = 3

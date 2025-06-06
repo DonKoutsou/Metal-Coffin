@@ -12,14 +12,20 @@ extends Node2D
 #/////////////////////////////////////////////////////////////
 class_name MapShip
 
+@export var LowStatsToNotifyAbout : Array[String]
+@export var Cpt : Captain
+@export var TrailLines : Array[TrailLine]
+
+@export_group("Nodes")
 @export var RadarShape : Area2D
 @export var ElintShape : Area2D
 @export var BodyShape : Area2D
 @export var DroneDok : Node2D
-@export var LowStatsToNotifyAbout : Array[String]
-@export var Cpt : Captain
-@export var TrailLines : Array[TrailLine]
+@export var ShipSprite : Sprite2D
+@export var ShipShadow : Sprite2D
+@export var ShadowPivot : Node2D
 @export var Acceleration : Node2D
+
 
 var Paused = true
 #var SimulationSpeed : float = 1
@@ -79,8 +85,6 @@ func _ready() -> void:
 func _draw() -> void:
 	if (ShowFuelRange):
 		draw_circle(Vector2.ZERO, GetFuelRange(), Color(0.3, 0.7, 0.915), false, 2.0 / CamZoom, true)
-		
-
 
 func Refuel() -> void:
 	if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
@@ -159,8 +163,8 @@ func OnStatLow(StatName : String) -> void:
 	StatLow.emit(StatName)
 
 func _UpdateShipIcon(Tex : Texture) -> void:
-	$PlayerShipSpr.texture = Tex
-	$PlayerShipSpr/ShadowPivot/Shadow.texture = Tex
+	ShipSprite.texture = Tex
+	ShipShadow.texture = Tex
 	
 #///////////////////////////////////////////////
 #███████ ██   ██ ██ ██████       ██████  ██████  ███    ██ ████████ ██████   ██████  ██      ██      ██ ███    ██  ██████  
@@ -230,28 +234,22 @@ func updatedronecourse():
 	
 func Steer(Rotation : float) -> void:
 	rotation += Rotation / 50
-	var piv = $PlayerShipSpr/ShadowPivot as Node2D
-	piv.global_rotation = deg_to_rad(-90)
-	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
-	shadow.rotation = rotation
+	ShadowPivot.global_rotation = deg_to_rad(-90)
+	ShipShadow.rotation = rotation
 	for g in GetDroneDock().GetDockedShips():
 		g.ForceSteer(rotation)
 
 func ForceSteer(Rotation : float) -> void:
 	rotation = Rotation
-	var piv = $PlayerShipSpr/ShadowPivot as Node2D
-	piv.global_rotation = deg_to_rad(-90)
-	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
-	shadow.rotation = rotation
+	ShadowPivot.global_rotation = deg_to_rad(-90)
+	ShipShadow.rotation = rotation
 		
 func ShipLookAt(pos : Vector2) -> void:
 	if (is_equal_approx(global_position.angle_to_point(pos), global_rotation)):
 		return
 	look_at(pos)
-	var piv = $PlayerShipSpr/ShadowPivot as Node2D
-	piv.global_rotation = deg_to_rad(-90)
-	var shadow = $PlayerShipSpr/ShadowPivot/Shadow as Node2D
-	shadow.rotation = rotation
+	ShadowPivot.global_rotation = deg_to_rad(-90)
+	ShipShadow.rotation = rotation
 	for g in GetDroneDock().GetDockedShips():
 		g.ForceSteer(rotation)
 
@@ -303,8 +301,8 @@ func Landed() -> bool:
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
-	$PlayerShipSpr.scale = Vector2(lerp(0.03, 0.1, Altitude / 10000.0), lerp(0.03, 0.1, Altitude / 10000.0))
-	$PlayerShipSpr/ShadowPivot/Shadow.position = Vector2(lerp(0, -40, Altitude / 10000.0), lerp(0, -40, Altitude / 10000.0))
+	ShipSprite.scale = Vector2(lerp(0.03, 0.1, Altitude / 10000.0), lerp(0.03, 0.1, Altitude / 10000.0))
+	ShipShadow.position = Vector2(lerp(0, -40, Altitude / 10000.0), lerp(0, -40, Altitude / 10000.0))
 	for g in GetDroneDock().GetDockedShips():
 		g.UpdateAltitude(NewAlt)
 	
@@ -451,16 +449,16 @@ func BodyLeftBody(Body : Area2D) -> void:
  #██████  ███████    ██       ██    ███████ ██   ██ ███████ 
 
 func GetShipBodyArea() -> Area2D:
-	return $ShipBody
+	return BodyShape
 	
 func GetShipRadarArea() -> Area2D:
-	return $Radar
+	return RadarShape
 
 func GetShipAcelerationNode() -> Node2D:
 	return Acceleration
 	
 func GetShipIcon() -> Node2D:
-	return $PlayerShipSpr
+	return ShipSprite
 
 func GetFuelStats() -> Dictionary[String, float]:
 	var Stats : Dictionary[String, float]
@@ -618,3 +616,6 @@ func TogglePause(t : bool):
 	Paused = t
 	$AudioStreamPlayer2D.playing = !t
 #/////////////////////////////////////
+
+func UpdateCameraZoom(NewZoom : float) -> void:
+	visible = NewZoom > 0.5

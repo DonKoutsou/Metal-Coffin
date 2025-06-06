@@ -63,11 +63,10 @@ func  _ready() -> void:
 	
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
-
+	
+	#ENABLE FOR DEBUG PURPOSES
 	#MapPointerManager.GetInstance().AddShip(self, false)
 
-func UpdateCameraZoom(NewZoom : float) -> void:
-	visible = NewZoom > 0.5
 
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
@@ -227,6 +226,21 @@ var Path : Array = []
 #Current Stage of the path
 var PathPart : int = 0
 
+var PursuitPath : Array = []
+var PursuitPathPart : int = 0
+
+func SetPositionToInvestigate(Pos : Vector2) -> void:
+	PositionToInvestigate = Pos
+	if (Pos != Vector2(0,0)):
+		if (!CanReachPosition(Pos)):
+			FindPursuitPath(Pos)
+
+func SetPursuitTarget(Target : MapShip) -> void:
+	PursuingShips.append(Target)
+	var Pos = Target.global_position
+	if (!CanReachPosition(Pos)):
+		FindPursuitPath(Pos)
+
 #Crates a path to the destination city
 func FigureOutPath() -> void:
 	var cities = get_tree().get_nodes_in_group("EnemyDestinations")
@@ -280,6 +294,17 @@ func ToFarFromRefuel() -> bool:
 
 func SetNewDestination(DistName : String) -> void:
 	Path = Helper.GetInstance().FindPath(CurrentPort.GetSpotName(), DistName)
+	PathPart = 1
+
+func FindPursuitPath(Pos : Vector2) -> void:
+	var ClosestToPosition = Helper.GetInstance().GetClosestSpot(Pos)
+	var Closest : MapSpot
+	if (CurrentPort != null):
+		Closest = CurrentPort
+	else:
+		Closest = Helper.GetInstance().GetClosestSpot(global_position)
+	Path = Helper.GetInstance().FindPath(Closest.GetSpotName(), ClosestToPosition.GetSpotName())
+	print("{0} has created a pursuit path from {1} to {2}".format([GetShipName(), Closest.GetSpotName(), ClosestToPosition.GetSpotName()]))
 	PathPart = 1
 
 func SetCurrentPort(P : MapSpot) -> void:
@@ -355,9 +380,12 @@ func GetCurrentDestination() -> Vector2:
 	if (PursuingShips.size() > 0):
 		destination = IntersectPusruing()
 	else : if(PositionToInvestigate != Vector2.ZERO):
-		destination = PositionToInvestigate
-		if (PositionToInvestigate.distance_to(global_position) <= 4):
-			OnPositionInvestigated.emit(PositionToInvestigate)
+		if (PursuitPath.size() - 1 > PursuitPathPart):
+			destination = Helper.GetInstance().GetCityByName(PursuitPath[PursuitPathPart]).global_position
+		else:
+			destination = PositionToInvestigate
+			if (PositionToInvestigate.distance_to(global_position) <= 4):
+				OnPositionInvestigated.emit(PositionToInvestigate)
 	else: if(RefugeSpot != null) :
 		destination = RefugeSpot.global_position
 	else : if (Path.size() > 0):
@@ -476,11 +504,13 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			SetCurrentPort(spot)
 			spot.OnSpotAproached(g)
 		if (Path.has(spot.GetSpotName())):
-
 			PathPart = Path.find(spot.GetSpotName())
 			if (PathPart == Path.size() - 1):
 				OnDestinationReached.emit(self)
 			else :
+				PathPart += 1
+		if (PursuitPath.has(spot.GetSpotName())):
+			if (PursuitPathPart < PursuitPath.size() - 1):
 				PathPart += 1
 
 	else :if (Body.get_parent() is PlayerDrivenShip):

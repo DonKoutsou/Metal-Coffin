@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene load_steps=14 format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
@@ -28,40 +28,33 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
 radius = 1000.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3uei4"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
-
-[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "DroneDok", "TrailLines", "Acceleration") groups=["Enemy", "Ships", "ZoomAffected"]]
+[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "ShipShadow", "ShadowPivot", "Acceleration") groups=["Enemy", "Ships", "ZoomAffected"]]
 process_mode = 1
 script = ExtResource("1_dinuw")
 Patrol = false
 BT = ExtResource("8_w8ob0")
 AlarmVisual = ExtResource("3_ty6mh")
+Cpt = ExtResource("2_lpij7")
+TrailLines = [NodePath("ShipSprite/TrailLine")]
 RadarShape = NodePath("Radar")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
 DroneDok = NodePath("DroneDock")
-Cpt = ExtResource("2_lpij7")
-TrailLines = [NodePath("PlayerShipSpr/TrailLine")]
+ShipSprite = NodePath("ShipSprite")
+ShipShadow = NodePath("ShipSprite/ShadowPivot/Shadow")
+ShadowPivot = NodePath("ShipSprite/ShadowPivot")
 Acceleration = NodePath("Aceleration")
 
-[node name="PlayerShipSpr" type="Sprite2D" parent="."]
+[node name="Aceleration" type="Node2D" parent="."]
+position = Vector2(0.5, 0)
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_xxp8j")
 
-[node name="TrailLine" type="Line2D" parent="PlayerShipSpr"]
+[node name="TrailLine" type="Line2D" parent="ShipSprite"]
 show_behind_parent = true
 position = Vector2(3.61999e-05, -10)
 rotation = 1.5708
@@ -77,10 +70,10 @@ trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="ShadowPivot" type="Node2D" parent="PlayerShipSpr"]
+[node name="ShadowPivot" type="Node2D" parent="ShipSprite"]
 show_behind_parent = true
 
-[node name="Shadow" type="Sprite2D" parent="PlayerShipSpr/ShadowPivot"]
+[node name="Shadow" type="Sprite2D" parent="ShipSprite/ShadowPivot"]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 position = Vector2(-13.9999, -14.0001)
@@ -91,9 +84,6 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
 shape = SubResource("CircleShape2D_jc744")
-
-[node name="Aceleration" type="Node2D" parent="."]
-position = Vector2(0.5, 0)
 
 [node name="Radar" type="Area2D" parent="."]
 collision_layer = 2
@@ -112,9 +102,6 @@ shape = SubResource("CircleShape2D_t084r")
 
 [node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
 collision_layer = 8
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_3uei4")
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]
