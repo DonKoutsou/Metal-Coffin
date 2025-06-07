@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scenes/TownShop/parallax_background.gd" id="1_vcb2a"]
 [ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_b7hnn"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="2_n0jph"]
-[ext_resource type="Texture2D" uid="uid://cjf0vmhy4dani" path="res://Assets/VillageLayer-1.png" id="3_vcb2a"]
+[ext_resource type="Texture2D" uid="uid://cjf0vmhy4dani" path="res://Assets/TownBackgrounds/VillageLayer-1.png" id="3_vcb2a"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="4_daw5n"]
-[ext_resource type="Texture2D" uid="uid://dnov545306pe8" path="res://Assets/VillageLayer0.png" id="4_vcb2a"]
-[ext_resource type="Texture2D" uid="uid://b1bmabo625ov0" path="res://Assets/VillageLayer1.png" id="5_vcb2a"]
-[ext_resource type="Texture2D" uid="uid://bxhipk08h52xs" path="res://Assets/VillageLayer2.png" id="7_vcb2a"]
+[ext_resource type="Texture2D" uid="uid://dnov545306pe8" path="res://Assets/TownBackgrounds/VillageLayer0.png" id="4_vcb2a"]
+[ext_resource type="Texture2D" uid="uid://b1bmabo625ov0" path="res://Assets/TownBackgrounds/VillageLayer1.png" id="5_vcb2a"]
+[ext_resource type="Texture2D" uid="uid://bxhipk08h52xs" path="res://Assets/TownBackgrounds/VillageLayer2.png" id="7_vcb2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)

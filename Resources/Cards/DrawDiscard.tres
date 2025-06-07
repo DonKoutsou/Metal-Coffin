@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_agq3e"]
 script = ExtResource("2_6m3uu")
-DrawAmmount = 3
+DrawAmmount = 2
 DiscardAmmount = 1
 AOE = false
 TierUpgrade = 1.0

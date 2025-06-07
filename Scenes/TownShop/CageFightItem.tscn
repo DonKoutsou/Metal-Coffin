@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt6th215x5s5m"]
+[gd_scene load_steps=6 format=3 uid="uid://bt6th215x5s5m"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7pcmt"]
 [ext_resource type="Script" uid="uid://dic8mxk80agpa" path="res://Scripts/cage_fight_item.gd" id="2_7pcmt"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_imkj1"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="4_uulej"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pcmt"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
 
 [node name="TownShopItem" type="PanelContainer" node_paths=PackedStringArray("ItemName")]
 anchors_preset = 8
@@ -23,18 +32,15 @@ size_flags_vertical = 6
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_7pcmt")
 script = ExtResource("2_7pcmt")
-ItemName = NodePath("VBoxContainer/HBoxContainer3/Label")
+ItemName = NodePath("VBoxContainer/Label")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 theme = ExtResource("3_imkj1")
 alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
@@ -43,6 +49,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(12.43, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_7pcmt")
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2

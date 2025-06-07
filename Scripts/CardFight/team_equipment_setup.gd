@@ -61,6 +61,10 @@ func Clear() -> void:
 	
 	DeckUI.Clear()
 	CurrentCpt = null
+	
+	ItemCatalogue.visible = false
+	for g in ItemParent.get_children():
+		g.queue_free()
 
 func Init(PlayerCaptains : Array[Captain], EnemyCaptains : Array[Captain]) -> void:
 

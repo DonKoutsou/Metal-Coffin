@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=7 format=3 uid="uid://bav565dxuwg4b"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_spvt5"]
+[ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2_258l4"]
+[ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="3_xechu"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_hl4b1"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="5_kd0m3"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("4_hl4b1")
+UpgradeName = 3
+UpgradeAmmount = 1.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[resource]
+script = ExtResource("5_kd0m3")
+WType = 6
+Upgrades = Array[ExtResource("4_hl4b1")]([SubResource("Resource_fmxhr")])
+UpgradeTime = 600.0
+UpgradeCost = 25000.0
+IsDamaged = false
+PartType = 4
+ItemName = "Flame Thrower"
+ItemDesc = "WIP"
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_spvt5")]([ExtResource("2_258l4"), ExtResource("2_258l4"), ExtResource("2_258l4"), ExtResource("3_xechu"), ExtResource("3_xechu")])
+Tier = 0
+CanTransfer = false
+Cost = 15000

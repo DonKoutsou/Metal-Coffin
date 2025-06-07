@@ -32,7 +32,7 @@
 [ext_resource type="Resource" uid="uid://cvk1mvgokhtus" path="res://Resources/Captains/EnemyCaptains/EnemyTanker4.tres" id="29_u7u5a"]
 [ext_resource type="Resource" uid="uid://8nr6ss128jfn" path="res://Resources/Captains/EnemyCaptains/LandEnemyFireship2.tres" id="29_wis72"]
 [ext_resource type="PackedScene" uid="uid://cuek7mm0smt8c" path="res://Scenes/Cards/team_equipment_setup.tscn" id="32_5o5j4"]
-[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://InputScroll.gd" id="32_mgnjr"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="32_mgnjr"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="33_ovnka"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="34_pefvv"]
 [ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine100mm.tres" id="35_0skxp"]

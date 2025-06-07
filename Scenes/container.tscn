@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://bomenkdbpyd4t"]
+
+[ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_cvqip"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_uf04f"]
+[ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="3_ki0jm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3yyhe"]
+noise = SubResource("FastNoiseLite_7mr5f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxq11"]
+resource_local_to_scene = true
+shader = ExtResource("3_ki0jm")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pr5b5"]
+resource_local_to_scene = true
+shader = ExtResource("3_ki0jm")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5x2gk"]
+resource_local_to_scene = true
+shader = ExtResource("3_ki0jm")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iobc"]
+resource_local_to_scene = true
+shader = ExtResource("3_ki0jm")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3od77"]
+resource_local_to_scene = true
+shader = ExtResource("3_ki0jm")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.04
+shader_parameter/burn_color = Color(0, 0, 0, 1)
+
+[node name="Container" type="Container"]
+offset_right = 124.0
+offset_bottom = 123.0
+script = ExtResource("1_cvqip")
+max_rotation_degrees = 35.0
+max_cards = 8
+
+[node name="Card" parent="." instance=ExtResource("2_uf04f")]
+material = SubResource("ShaderMaterial_yxq11")
+layout_mode = 2
+
+[node name="Card2" parent="." instance=ExtResource("2_uf04f")]
+material = SubResource("ShaderMaterial_pr5b5")
+layout_mode = 2
+
+[node name="Card3" parent="." instance=ExtResource("2_uf04f")]
+material = SubResource("ShaderMaterial_5x2gk")
+layout_mode = 2
+
+[node name="Card4" parent="." instance=ExtResource("2_uf04f")]
+material = SubResource("ShaderMaterial_8iobc")
+layout_mode = 2
+
+[node name="Card5" parent="." instance=ExtResource("2_uf04f")]
+material = SubResource("ShaderMaterial_3od77")
+layout_mode = 2

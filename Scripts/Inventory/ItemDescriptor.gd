@@ -141,20 +141,9 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip]) -> void:
 	ItemName.text = Itm.ItemName
 	#Ship Parts
 	if (Itm is ShipPart):
-		
-		#ShipPartActions.visible = true
-		#RepairButton.visible = DescribedContainer.ItemType.IsDamaged
-		#if (CanUpgrade):
-		UpgradeLabel.visible = true
-		if (Itm.UpgradeVersion == null):
-			UpgradeButton.visible = false
-			UpgradeLabel.visible = false
-		else:
-
-			UpgradeButton.visible = true
-			var UpTime = Itm.UpgradeTime
-			var UpCost = Itm.UpgradeCost
-			UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
+		UpgradeButton.visible = false
+		UpgradeLabel.visible = false
+		#UpgradeLabel.visible = true
 	else: if (Itm is AmmoItem):
 		UpgradeButton.visible = false
 		UpgradeLabel.visible = false

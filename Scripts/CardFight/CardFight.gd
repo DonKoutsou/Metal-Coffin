@@ -813,7 +813,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	
 	for g in Targets:
 		var T = GetTarget(g)
-		if (T != null):
+		if (T != null and ShipTurns.has(T)):
 			TargetShips.append(T)
 	
 	if (TargetShips.size() == 0):
