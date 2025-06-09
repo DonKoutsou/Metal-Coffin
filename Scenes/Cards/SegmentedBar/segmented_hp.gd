@@ -34,6 +34,11 @@ var LabelTween : Tween
 
 var SegmentTween : Tween
 
+func HideAmm() -> void:
+	$Control/Label.text = "X"
+	for g in $HBoxContainer.get_children():
+		g.free()
+
 func UpdateSegments(NewAmm : int) -> void:
 	for g in range( $HBoxContainer.get_children().size() - 1, -1 , -1):
 		var p = $HBoxContainer.get_child(g)

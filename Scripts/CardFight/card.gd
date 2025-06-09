@@ -12,6 +12,8 @@ class_name Card
 @export var But : Button
 @export var Lines : Array[Line2D]
 @export var CardTypeEmblem : Panel
+@export var FrontSide : Control
+@export var BackSide : Control
 
 signal OnCardPressed(C : Card)
 
@@ -52,11 +54,11 @@ func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 		queue_free()
 
 func UpdateBurnShader(Value : float) -> void:
-	var mat = $SubViewportContainer.material as ShaderMaterial
+	var mat = FrontSide.material as ShaderMaterial
 	mat.set_shader_parameter("dissolve_value", Value)
 
 func ForcePersp(t : bool) -> void:
-	var mat = $SubViewportContainer.material as ShaderMaterial
+	var mat = FrontSide.material as ShaderMaterial
 	var Value : float
 	if (t):
 		Value = 25
@@ -65,7 +67,7 @@ func ForcePersp(t : bool) -> void:
 	mat.set_shader_parameter("x_rot", Value)
 
 func TogglePerspective(t : bool, tOverride : float = 0.75) -> void:
-	var mat = $SubViewportContainer.material as ShaderMaterial
+	var mat = FrontSide.material as ShaderMaterial
 	var Value : float
 	if (t):
 		Value = 25
@@ -127,6 +129,11 @@ func UpdateBattleStats(User : BattleShipStats) -> void:
 	ShownCost = GetBattleCost(User, CStats)
 	CardCost.text = var_to_str(ShownCost)
 	RealisticCardCost.text = var_to_str(ShownCost)
+
+func Flip() -> void:
+	FrontSide.visible = false
+	BackSide.visible = true
+	$Amm.visible = false
 
 func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
@@ -197,14 +204,14 @@ func Dissable(MouseFilter : bool = false) -> void:
 		SoundMan.RemoveSelf(But)
 	if (MouseFilter):
 		But.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
-		$SubViewportContainer.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+		FrontSide.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 func Enable() -> void:
 	But.disabled = false
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf(But)
 	But.set_mouse_filter(Control.MOUSE_FILTER_PASS)
-	$SubViewportContainer.set_mouse_filter(Control.MOUSE_FILTER_PASS)
+	FrontSide.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	
 func GetCost() -> int:
 	return Cost

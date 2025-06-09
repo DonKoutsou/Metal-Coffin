@@ -30,7 +30,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert", "PlayerCardPlacementInputBlocker")]
+[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert", "PlayerCardPlacementInputBlocker", "HardCardLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,6 +53,7 @@ BeepSound = ExtResource("6_anehw")
 BeepNoSound = ExtResource("7_xj5gt")
 BeepLong = ExtResource("8_xj5gt")
 PlayerCardPlacementInputBlocker = NodePath("PlayerCardPlacementInputBlocker")
+HardCardLabel = NodePath("Label")
 
 [node name="ScreenFrame2" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 38.045)
@@ -69,6 +70,21 @@ grow_vertical = 2
 mouse_filter = 0
 texture = ExtResource("2_fje4l")
 expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 566.0
+offset_top = 172.0
+offset_right = 603.0
+offset_bottom = 194.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlayerCardPlacement" type="Container" parent="."]
 layout_mode = 1
@@ -115,9 +131,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 1067.0
-offset_top = 509.0
+offset_top = 516.0
 offset_right = 1106.0
-offset_bottom = 650.0
+offset_bottom = 671.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_vuvmf")
@@ -131,18 +147,18 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 1177.0
-offset_top = 509.0
+offset_top = 516.0
 offset_right = 1215.0
-offset_bottom = 590.0
+offset_bottom = 607.0
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 
 [node name="PullReserves" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
 offset_left = 1217.0
-offset_top = 632.0
+offset_top = 645.0
 offset_right = 1243.0
-offset_bottom = 671.0
+offset_bottom = 684.0
 rotation = 1.57079
 texture_normal = ExtResource("5_vuvmf")
 texture_pressed = ExtResource("6_iexgv")

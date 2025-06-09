@@ -56,7 +56,7 @@ func OnCptReleased(Cpt : Captain) -> void:
 
 func RemoveFromTeam(B : CaptainButton) -> void:
 	B.queue_free()
-	if (PlayerTeam.has(B)):
+	if (PlayerTeam.has(B.ContainedCaptain)):
 		PopupManager.GetInstance().DoFadeNotif("{0} removed from Player's team".format([B.ContainedCaptain.CaptainName]))
 		PlayerTeam.erase(B.ContainedCaptain)
 	else:

@@ -17,6 +17,7 @@ class_name ExternalCardFightUI
 @export var BeepNoSound : AudioStream
 @export var BeepLong : AudioStream
 @export var PlayerCardPlacementInputBlocker : Control
+@export var HardCardLabel : Label
 
 signal OnDeckPressed
 signal OnShipFallbackPressed
@@ -31,12 +32,20 @@ static var Instance : ExternalCardFightUI
 
 var AllowEnd : bool = true
 
+func HideInfo() -> void:
+	HardCardLabel.text = "X"
+	EnergyBar.HideAmm()
+	ReservesBar.HideAmm()
+
 func _ready() -> void:
 	Instance = self
 	PlayerCardPlacementInputBlocker.visible = false
 
 func RegisterFight(Scene : Card_Fight) -> void:
 	FightScene = Scene
+
+func UpdateCardsInHandAmm(Amm : int, Max : int) -> void:
+	HardCardLabel.text = "{0}/{1}".format([Amm, Max])
 
 static func GetInstacne() -> ExternalCardFightUI:
 	return Instance

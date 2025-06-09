@@ -14,6 +14,7 @@ signal AnimationFinished
 @export var AtackVisual : PackedScene
 @export var DefVisual : PackedScene
 @export var ShieldVisual : PackedScene
+@export var EnergyVisual : PackedScene
 @export var BuffVisual : PackedScene
 @export var DeBuffVisual : PackedScene
 
@@ -97,6 +98,18 @@ func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
 	var Visual = ShieldVisual.instantiate() as MissileViz
+	Visual.Target = Target
+	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
+	add_child(Visual)
+
+	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
+
+func SpawnEnergyVisual(Target : Control, DefCard : Card) -> void:
+	await wait (0.15)
+
+	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	
+	var Visual = EnergyVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)
@@ -229,12 +242,12 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 	else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
 		BuffText = "Energy +"
 		for Ship in TargetShips:
-			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
+			call_deferred("SpawnEnergyVisual", Ship, DeffenceCard)
 			await wait(0.2)
 	else : if (Mod is ReserveModule or Mod is MaxReserveModule):
 		BuffText = "Energy\nReserve +"
 		for Ship in TargetShips:
-			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
+			call_deferred("SpawnEnergyVisual", Ship, DeffenceCard)
 			await wait(0.2)
 	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
 		if (Mod.StatToDeBuff == CardModule.Stat.FIREPOWER):
@@ -266,6 +279,38 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	DeffenceCard.Dissable(true)
 	
 	DeffenceCard.SetCardBattleStats(Performer, C)
+	add_child(DeffenceCard)
+	
+	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (User.size.y / 2))
+	DeffenceCard.global_position = pos
+
+	DeffenceCard.show_behind_parent = true
+	DeffenceCard.modulate = Color(1,1,1,0)
+
+	var DefCardTween = create_tween()
+	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.4)
+	
+	var UpTween = create_tween()
+	UpTween.set_ease(Tween.EASE_OUT)
+	UpTween.set_trans(Tween.TRANS_BACK)
+	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y - 10), 0.4)
+	await UpTween.finished
+	
+	var DownTween = create_tween()
+	DownTween.set_ease(Tween.EASE_OUT)
+	DownTween.set_trans(Tween.TRANS_BACK)
+	DownTween.tween_property(DeffenceCard, "position", pos, 0.4)
+	await DownTween.finished
+	
+	AnimationFinished.emit()
+	Fin = true
+	queue_free()
+
+func DoDraw(User : Control) -> void:
+	var DeffenceCard = CardScene.instantiate() as Card
+	DeffenceCard.Dissable(true)
+	
+	DeffenceCard.Flip()
 	add_child(DeffenceCard)
 	
 	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (User.size.y / 2))
