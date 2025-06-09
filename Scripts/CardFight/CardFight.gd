@@ -565,6 +565,9 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	Ship.EnergyReserves = 0
 	var viz = GetShipViz(Ship)
 	var EnemyDeck = EnemyDecks[Ship]
+	var TeamSize = EnemyCombatants.size()
+	
+	var FireExtinguishToUse : CardStats
 	
 	if (GetShipViz(Ship).IsOnFire()):
 		var ExtinguishAction
@@ -572,9 +575,8 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			if (g.CardName == "Extinguish fires"):
 				ExtinguishAction = g
 				Ship.Energy -= ExtinguishAction.Energy
-				#TODO fix this
 
-				await HandleModulesEnemy(Ship, g)
+				FireExtinguishToUse = g
 
 				EnemyDeck.Hand.erase(g)
 				print("{0} has been added to {1}'s discard pile.".format([g.GetCardName(), Ship.Name]))
@@ -609,7 +611,14 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			print("{0} cant use {1}, not enough energy".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = t.call(AvailableActions)
-			
+		else: if (Action.UseConditions.has(CardStats.CardUseCondition.NO_SOLO) and TeamSize == 1):
+			print("{0} cant use {1}, team too small".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = t.call(AvailableActions)
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT) and Ship.Energy == 0):
+			print("{0} cant use {1}, card is scales with energy and ship has none".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = t.call(AvailableActions)
 		else:
 			print("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
 			var SelectedAction : CardStats = Action.duplicate()
@@ -643,10 +652,13 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				ActionList.AddAction(Ship, ShipAction)
 
 			AvailableActions = t.call(AvailableActions)
-			
+	
+	if (FireExtinguishToUse != null):
+		await HandleModulesEnemy(Ship, FireExtinguishToUse)
+		
 	print("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
 	EnemyActionPickedEnded.emit()
-
+	
 
 func PlayerActionSelectionEnded() -> void:
 	if (SelectingTarget):
@@ -1561,7 +1573,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[int]:
 	return Targets
 
 
-func HandleDrawCard(Performer : BattleShipStats) -> bool:
+func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -> bool:
 	if (Shuffling):
 		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
 		return false
@@ -1570,6 +1582,9 @@ func HandleDrawCard(Performer : BattleShipStats) -> bool:
 	
 	if (D.DeckPile.size() <= 0):
 		await HandleShuffleDiscardedIntoDeck(D)
+	
+	if (ConsumeEnergy):
+		UpdateEnergy(Performer, Performer.Energy - 1, true)
 	
 	var C = D.DeckPile.pop_front()
 	
@@ -2248,8 +2263,7 @@ func _on_deck_button_pressed() -> void:
 		return
 	
 	
-	if (await HandleDrawCard(Ship)):
-		UpdateEnergy(Ship, Energy - 1, true)
+	await HandleDrawCard(Ship, true)
 
 
 func _on_pull_reserves_pressed() -> void:

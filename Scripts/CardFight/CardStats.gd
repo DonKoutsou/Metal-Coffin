@@ -15,6 +15,7 @@ class_name CardStats
 @export var OnPerformModule : CardModule
 @export var Type : CardType
 @export var WeapT : WeaponType
+@export var UseConditions : Array[CardUseCondition]
 
 var Tier : int = 0
 
@@ -72,4 +73,10 @@ enum CardType {
 	OFFENSIVE,
 	DEFFENSIVE,
 	UTILITY
+}
+
+enum CardUseCondition{
+	NONE,
+	NO_SOLO,
+	ENERGY_DEPENDANT,
 }

@@ -28,17 +28,29 @@ func DoConfirm(Title : String, Text : String, ConfirmText : String, Method : Cal
 	dig.dialog_text = Text
 	dig.ok_button_text = ConfirmText
 	dig.popup_exclusive_centered(Parent)
-	
+
+var CurrentlyShownFade : Array[String]
+
 func DoFadeNotif(Text : String, Parent : Node = null, overridetime : float = 4):
+	if (CurrentlyShownFade.has(Text)):
+		return
+	
+	CurrentlyShownFade.append(Text)
+	
 	var f = get_tree().get_nodes_in_group("FadeNotif")
-	if (f.size() > 0):
-		f[0].queue_free()
+	for g in f:
+		g.queue_free()
+		
 	var dig = FadNot.instantiate() as FadeNotif
 	dig.alph = overridetime
+	dig.Finished.connect(FadeFinished.bind(Text))
 	dig.SetText(Text)
 	if (is_instance_valid(Parent)):
 		Parent.add_child(dig)
 	else:
 		Ingame_UIManager.GetInstance().PopupPlecement.add_child(dig)
-		
+	
+func FadeFinished(Text : String) -> void:
+	CurrentlyShownFade.erase(Text)
+	
 	

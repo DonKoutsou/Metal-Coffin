@@ -192,26 +192,33 @@ func FrameCamToShip():
 	#camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
 	ship_camera.FrameCamToPos(ControlledShip.global_position, 1, false)
 func _on_controlled_ship_return_pressed() -> void:
-	if (ControlledShip is Drone and !ControlledShip.CommingBack):
-		var CaptainSelect = CaptainSelectScreen.instantiate() as ItemTransfer
-		
-		var ShipList = get_tree().get_nodes_in_group("PlayerShips")
-		var CapList : Array[Captain]
-		for g in range(ShipList.size() - 1, -1, -1):
-			if (ShipList[g].Docked or ShipList[g] == ControlledShip):
-				ShipList.remove_at(g)
-				continue
-				
-			CapList.append(ShipList[g].Cpt)
-		
-		CaptainSelect.SetData(CapList, "Choose Fleet to Regroup With")
-		
-		Ingame_UIManager.GetInstance().AddUI(CaptainSelect)
-		
-		await CaptainSelect.CharacterSelected
-		if (CaptainSelect.SelectedCharacter != null):
-			ControlledShip.Regroup(CaptainSelect.SelectedCharacter.CaptainShip)
-
+	
+	if (ControlledShip is PlayerShip):
+		PopupManager.GetInstance().DoFadeNotif("Can't merge flagship with other fleets")
+		return
+	
+	var ShipList = get_tree().get_nodes_in_group("PlayerShips")
+	var CapList : Array[Captain]
+	for Ship in ShipList:
+		if (Ship.Docked or Ship == ControlledShip or Ship == ControlledShip.Command):
+			continue
+			
+		CapList.append(Ship.Cpt)
+	
+	if (CapList.size() == 0):
+		PopupManager.GetInstance().DoFadeNotif("No available captains to regroup with")
+		return
+	
+	
+	var CaptainSelect = CaptainSelectScreen.instantiate() as ItemTransfer
+	CaptainSelect.SetData(CapList, "Choose Fleet to Regroup With")
+	
+	Ingame_UIManager.GetInstance().AddUI(CaptainSelect)
+	
+	await CaptainSelect.CharacterSelected
+	if (CaptainSelect.SelectedCharacter != null):
+		ControlledShip.Regroup(CaptainSelect.SelectedCharacter.CaptainShip)
+			
 func GetSaveData() -> PlayerSaveData:
 	var pldata = PlayerSaveData.new()
 	var Ships = get_tree().get_nodes_in_group("PlayerShips")

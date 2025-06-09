@@ -26,3 +26,4 @@ Consume = false
 OnUseModules = Array[ExtResource("2_o4ebt")]([SubResource("Resource_vivg1")])
 Type = 2
 WeapT = 0
+UseCondition = 0

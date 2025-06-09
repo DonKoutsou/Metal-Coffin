@@ -73,7 +73,6 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.position = CSpot.position
 		sc.SpotInfo = spotdat.SpotInfo
 		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
-		sc.CityFuelReserves = spotdat.CityFuelReserves
 		sc.AlarmRaised = spotdat.AlarmRaised
 		sc.AlarmProgress = spotdat.AlarmProgress
 		sc.Merch = spotdat.Merch

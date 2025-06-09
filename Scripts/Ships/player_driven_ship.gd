@@ -95,17 +95,22 @@ func _HandleRestock() -> void:
 
 func _HandleLanding(SimulationSpeed : float) -> void:
 	if (Landing):
-		UpdateAltitude(Altitude - (60 * SimulationSpeed))
+		UpdateAltitude(max(0, Altitude - (60 * SimulationSpeed)))
 		if (Altitude <= 0):
 			Altitude = 0
 			LandingEnded.emit(self)
 			Landing = false
 	if (TakingOff):
-		UpdateAltitude(Altitude + (60 * SimulationSpeed))
+		UpdateAltitude(min(10000, Altitude + (60 * SimulationSpeed)))
 		if (Altitude >= 10000):
 			Altitude = 10000
 			TakeoffEnded.emit(self)
 			TakingOff = false
+	if (MatchingAltitude):
+		UpdateAltitude(clamp(move_toward(Altitude, Command.Altitude, 60 * SimulationSpeed), 0, 10000))
+		if (Altitude == Command.Altitude):
+			MatchingAltitudeEnded.emit(self)
+			MatchingAltitude = false
 
 func BodyEnteredElint(Body: Area2D) -> void:
 	if (Body.get_parent() is PlayerDrivenShip):

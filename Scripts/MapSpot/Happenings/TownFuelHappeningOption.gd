@@ -5,6 +5,6 @@ class_name TownFuelHappeningOption
 
 func OptionResault(EventOrigin : MapSpot) -> String:
 	PopupManager.GetInstance().DoFadeNotif("{0} tons of fuel added to {1}'s reserve.".format([FuelToGive, EventOrigin.GetSpotName()]))
-	EventOrigin.CityFuelReserves = FuelToGive
+	EventOrigin.PlayerFuelReserves = FuelToGive
 	
 	return StringReply

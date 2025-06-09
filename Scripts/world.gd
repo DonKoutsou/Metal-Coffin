@@ -372,7 +372,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	#fuel.TownMerch = spot.SpotInfo.Merchendise
 	#fuel.HasFuel = spot.HasFuel()
 	#fuel.HasRepair = spot.HasRepair()
-	fuel.TownFuel = spot.CityFuelReserves
+	#fuel.TownFuel = spot.CityFuelReserves
 	fuel.BoughtFuel = spot.PlayerFuelReserves
 	fuel.BoughtRepairs = spot.PlayerRepairReserves
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
@@ -396,8 +396,6 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	#UIEventH.OnButtonCoverToggled(true)
 func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShip], Scene : TownScene):
 	var spot = Ships[0].CurrentPort as MapSpot
-	if (spot.PlayerFuelReserves != BFuel):
-		spot.CityFuelReserves -= BFuel
 	if (BFuel < 0):
 		var FuelToRemove = BFuel
 		for ship : MapShip in Ships:

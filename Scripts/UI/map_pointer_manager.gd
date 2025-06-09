@@ -92,6 +92,8 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 		Ship.LandingEnded.connect(marker.OnLandingEnded)
 		Ship.TakeoffStarted.connect(marker.OnLandingStarted)
 		Ship.TakeoffEnded.connect(marker.OnLandingEnded)
+		Ship.MatchingAltitudeStarted.connect(marker.OnLandingStarted)
+		Ship.MatchingAltitudeEnded.connect(marker.OnLandingEnded)
 		#Ship.connect("LandingCanceled", marker.OnLandingEnded)
 
 		marker.call_deferred("ToggleShipDetails", true)
@@ -228,7 +230,7 @@ func _physics_process(delta: float) -> void:
 				Marker.UpdateTrajectory(ship.global_rotation)
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				
-				if (ship.Landing or ship.TakingOff):
+				if (ship.Landing or ship.TakingOff or ship.MatchingAltitude):
 					#TODO find proper fix
 					if (Marker.LandingNotif == null):
 						Marker.OnLandingStarted()

@@ -7,6 +7,8 @@ var alph = 4
 
 var txt : String
 
+signal Finished
+
 func SetText(t : String):
 	txt = t
 	T.text = t
@@ -18,6 +20,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	if (alph <= 0):
 		queue_free()
+		Finished.emit()
 	alph -= 0.05
 	modulate.a = min(1, alph)
 

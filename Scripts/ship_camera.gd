@@ -17,6 +17,7 @@ func _ready() -> void:
 	Instance = self
 	Cloud.material.set_shader_parameter("offset", global_position / 1500)
 	Ground.material.set_shader_parameter("offset", global_position / 1500)
+	call_deferred("OnZoomChanged", zoom)
 	
 static func GetInstance() -> ShipCamera:
 	return Instance

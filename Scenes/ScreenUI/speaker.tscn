@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cbg33obslhrhy" path="res://Assets/UIPiecies/Screen/Speaker_FullQuality.png" id="13_xhvq3"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_3b7e2"]
 
-[node name="Speaker" type="Control"]
+[node name="Speaker" type="Control" node_paths=PackedStringArray("L")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
@@ -34,6 +34,7 @@ SoundList = Dictionary[int, Array]({
 7: [ExtResource("11_cotvj")],
 8: [ExtResource("12_4ylf7")]
 })
+L = NodePath("Light")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0

@@ -20,18 +20,18 @@ func AccelerationChanged(value: float) -> void:
 
 func EnableDrone():
 	#set_physics_process(true)`
-	if (Altitude != 10000):
-		if (Landing):
-			LandingCanceled.emit(self)
-			Landing = false
-		TakeoffStarted.emit()
-		TakingOff = true
+	#if (Altitude != 10000):
+		#if (Landing):
+			#LandingCanceled.emit(self)
+			#Landing = false
+		#TakeoffStarted.emit()
+		#TakingOff = true
 	#$AudioStreamPlayer2D.play()
 	#var Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	#GetShipAcelerationNode().position.x =  Speed / 360
 	#ToggleRadar()
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
-	#
+	pass
 
 func Regroup(NewCommander : MapShip):
 	Command = NewCommander

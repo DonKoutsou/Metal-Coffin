@@ -2,7 +2,7 @@ extends Node2D
 class_name MapSpot
 
 @export var FuelTradeScene : PackedScene
-@export var CityFuelReserves : float = 1000
+#@export var CityFuelReserves : float = 1000
 @export var AlarmVisual : PackedScene
 
 var PlayerFuelReserves : float = 0
@@ -73,7 +73,6 @@ func GetSaveData() -> Resource:
 	datas.SpotLoc = position
 	datas.Seen = Seen
 	datas.Visited = Visited
-	datas.CityFuelReserves = CityFuelReserves
 	datas.PlayerFuelReserves = PlayerFuelReserves
 	datas.SpotInfo = SpotInfo
 	datas.AlarmRaised = AlarmRaised

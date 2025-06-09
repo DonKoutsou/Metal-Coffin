@@ -54,6 +54,9 @@ signal LandingEnded(Ship : MapShip)
 var TakingOff : bool = false
 signal TakeoffStarted
 signal TakeoffEnded(Ship : MapShip)
+var MatchingAltitude : bool = false
+signal MatchingAltitudeStarted
+signal MatchingAltitudeEnded(Ship : MapShip)
 
 signal PortChanged(P : MapSpot)
 
