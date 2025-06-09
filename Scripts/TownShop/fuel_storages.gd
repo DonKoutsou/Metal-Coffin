@@ -14,7 +14,7 @@ class_name TownFuelStorages
 var FuelPricePerTon : float
 var RepairPricePerUnit : float
 
-var TownFuelReserves : float = 0
+
 var PlFuel : float = 0
 var PlMaxFuel : float = 0
 var PlayerBoughtFuel : float = 0
@@ -27,8 +27,7 @@ var PlayerBoughtRepairs : float = 0
 
 signal FuelTransactionFinished(RemainingReserves : float, BoughtFuel : float, BoughtRepair : float)
 
-func Init(FuelReserves : float, BoughtFuel : float, FuelPrice : float, BoughtRepairs : float, RepairPrice : float, LandedShips : Array[MapShip]) -> void:
-	TownFuelReserves = FuelReserves
+func Init(BoughtFuel : float, FuelPrice : float, BoughtRepairs : float, RepairPrice : float, LandedShips : Array[MapShip]) -> void:
 	PlayerBoughtFuel = BoughtFuel
 	PlayerBoughtRepairs = BoughtRepairs
 	FuelPricePerTon = FuelPrice
@@ -62,8 +61,6 @@ func UpdateFuelBar(AddedFuel : float):
 	#$AudioStreamPlayer.play()
 	if (AddedFuel * FuelPricePerTon > PlayerWallet.Funds):
 		AddedFuel = PlayerWallet.Funds / FuelPricePerTon
-	if (AddedFuel > TownFuelReserves):
-		AddedFuel = TownFuelReserves
 	var NewPlFuel = PlFuel + PlayerBoughtFuel + AddedFuel
 	if (NewPlFuel < 0):
 		AddedFuel = 0 - (PlFuel + PlayerBoughtFuel)
@@ -71,7 +68,7 @@ func UpdateFuelBar(AddedFuel : float):
 	if (NewPlFuel > PlMaxFuel):
 		AddedFuel = PlMaxFuel - (PlFuel + PlayerBoughtFuel)
 		NewPlFuel = PlMaxFuel
-	TownFuelReserves -= AddedFuel
+		
 	PlayerBoughtFuel += AddedFuel
 	
 	var MoneySpent = AddedFuel * FuelPricePerTon
@@ -128,5 +125,5 @@ func RepairBar_gui_input(event: InputEvent) -> void:
 		UpdateRepairBar(AddedRepair)
 
 func _on_leave_fuel_storage_pressed() -> void:
-	FuelTransactionFinished.emit(TownFuelReserves, PlayerBoughtFuel, PlayerBoughtRepairs)
+	FuelTransactionFinished.emit(PlayerBoughtFuel, PlayerBoughtRepairs)
 	queue_free()

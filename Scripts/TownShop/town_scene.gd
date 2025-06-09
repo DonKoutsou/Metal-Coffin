@@ -16,7 +16,6 @@ class_name TownScene
 @export var FuelStorageScene : PackedScene
 @export var WorkshopScene : PackedScene
 
-var TownFuel : float = 0
 var BoughtFuel : float = 0
 var BoughtRepairs : float = 0
 
@@ -71,15 +70,14 @@ func OnRefuelShopPressed() -> void:
 	else:
 		RepairpricePerRepairValue = 100
 	
-	Scene.Init(TownFuel, BoughtFuel, FuelPricePerTon, BoughtRepairs, RepairpricePerRepairValue, LandedShips)
+	Scene.Init(BoughtFuel, FuelPricePerTon, BoughtRepairs, RepairpricePerRepairValue, LandedShips)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
 		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel your ships! You can see the full ammount of fuel/hull condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
 	
 
-func FuelExchangeFinished(RemainingReserves : float, Fuel : float, Repair : float) -> void:
-	TownFuel = RemainingReserves
+func FuelExchangeFinished(Fuel : float, Repair : float) -> void:
 	BoughtFuel = Fuel
 	BoughtRepairs = Repair
 	

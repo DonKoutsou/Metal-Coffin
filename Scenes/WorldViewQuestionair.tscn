@@ -136,6 +136,7 @@ autowrap_mode = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("29_0ey4p")
 volume_db = -5.0
+bus = &"Sounds"
 
 [connection signal="pressed" from="VBoxContainer/Control/HBoxContainer2/Button" to="." method="NextButtonPressed"]
 [connection signal="pressed" from="VBoxContainer/Control/HBoxContainer2/Button2" to="." method="SkipButton"]

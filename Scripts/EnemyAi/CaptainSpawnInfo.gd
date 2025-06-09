@@ -7,4 +7,4 @@ class_name CaptainSpawnInfo
 @export var Cost : int
 @export var MaxAmmInFleet : int
 @export var DontGenerateBefore : Happening.GameStage
-@export var SpawnAlone : bool = true
+#@export var SpawnAlone : bool = true

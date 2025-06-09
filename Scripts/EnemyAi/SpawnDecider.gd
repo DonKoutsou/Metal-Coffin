@@ -172,8 +172,8 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 		for ship : CaptainSpawnInfo in available_ships:
 			if (ship.DontGenerateBefore > stage):
 				continue
-			if (fleet.size() == 0 and !ship.SpawnAlone):
-				continue
+			#if (fleet.size() == 0 and !ship.SpawnAlone):
+				#continue
 			
 			var ShipRange = ship.Cpt.GetFuelStats()
 			
