@@ -25,7 +25,7 @@ var PlayerBoughtRepairs : float = 0
 
 #var AvailableFunds : float = 0
 
-signal FuelTransactionFinished(RemainingReserves : float, BoughtFuel : float, BoughtRepair : float)
+signal FuelTransactionFinished(BoughtFuel : float, BoughtRepair : float)
 
 func Init(BoughtFuel : float, FuelPrice : float, BoughtRepairs : float, RepairPrice : float, LandedShips : Array[MapShip]) -> void:
 	PlayerBoughtFuel = BoughtFuel
