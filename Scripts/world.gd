@@ -498,13 +498,17 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
 			if (It.CardProviding.size() > 0):
 				for c in It.CardProviding:
 				#if it did remove it from dictionary and leave ininside inventory
+					var CartToCompare = c.duplicate() as CardStats
+					CartToCompare.Tier = It.Tier
+					
 					var CardToRemove : CardStats
 					for C in Cards:
-						if (C.IsSame(c)):
+						if (C.IsSame(CartToCompare)):
 							CardToRemove = C
 							break
 					if (CardToRemove != null):
 						Cards.erase(CardToRemove)
+					
 				#if it was used and we cant find it in the dictionary then remove it from inventory
 					else:
 						CharInv.RemoveItem(It)

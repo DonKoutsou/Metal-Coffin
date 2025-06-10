@@ -45,7 +45,7 @@ func ClearLines() -> void:
 		g.queue_free()
 	PopUpManager.GetInstance().DoFadeNotif("Marker Cleared")
 	
-func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
+func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	if (Ships.has(Ship)):
 		if (Ship is HostileShip and !Ship.Destroyed and notify):
 			_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship Located")
@@ -66,9 +66,9 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 	if (Ship is HostileShip):
 		if (Ship.Convoy):
 			marker.modulate = ConvoyColor
-		if (EnemyDebug):
+		#if (EnemyDebug):
 			#HOSTILE_SHIP_DEBUG
-			marker.ToggleFriendlyShipDetails(true)
+			#marker.ToggleFriendlyShipDetails(true)
 			#////
 		
 		marker.ToggleShipDetails(true)
@@ -97,7 +97,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 		#Ship.connect("LandingCanceled", marker.OnLandingEnded)
 
 		marker.call_deferred("ToggleShipDetails", true)
-		marker.call_deferred("ToggleFriendlyShipDetails", true)
+		#marker.call_deferred("ToggleFriendlyShipDetails", true)
 		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
 		marker.SetType("Ship")
 	else : if (Ship is Missile):
@@ -107,6 +107,8 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 		marker.SetType("Missile")
 	_ShipMarkers.append(marker)
+	
+	return marker
 
 func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	if (Spots.has(Spot)):
@@ -162,16 +164,11 @@ func FixLabelClipping() -> void:
 				if (tries > 10):
 					return
 
-var d = 0.1
 var Circles : Array[PackedVector2Array] = []
 func _physics_process(delta: float) -> void:
 	FixLabelClipping()
-	
-	d -= delta
-	if (d > 0):
-		return
-	d = 0.1
 	Circles.clear()
+	
 	for g in _ShipMarkers.size():
 		var ship = Ships[g]
 		var Marker = _ShipMarkers[g]
@@ -180,35 +177,31 @@ func _physics_process(delta: float) -> void:
 			Marker.ToggleShipDetails(!ship.Docked)
 			Marker.ToggleVisualContactProgress(ship.VisualContactCountdown < 10)
 			if (ship.VisualContactCountdown < 10):
-				
 				Marker.UpdateVisualContactProgress(ship.VisualContactCountdown)
 			if (EnemyDebug):
 				Marker.global_position = ship.global_position
 				Marker.UpdateSpeed(ship.GetShipSpeed())
-
-				Marker.ToggleTimeLastSeend(false)
-				Marker.UpdateDroneHull(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
+				
+				Marker.ClearTime()
 				var fuelstats
 				if (ship.Docked):
 					fuelstats = ship.Command.GetFuelStats()
 				else:
 					fuelstats = ship.GetFuelStats()
 				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
-				#Marker.UpdateDroneFuel(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK))
 				Marker.UpdateTrajectory(ship.global_rotation)
 			else:
+				Marker.ClearFuel()
+				
 				if (ship.Destroyed):
 					Marker.SetMarkerDetails("Ship Debris", "" ,0)
-					
 				else: if (ship.VisibleBy.size() > 0):
 					Marker.global_position = ship.global_position
 					Marker.UpdateSpeed(ship.GetShipSpeed())
-					
-					Marker.ToggleTimeLastSeend(false)
+					Marker.ClearTime()
+					Marker.SetTime()
 					Marker.UpdateTrajectory(ship.global_rotation)
 				else :
-					###Marker.ToggleThreat(false)
-					Marker.ToggleTimeLastSeend(true)
 					var timepast = Clock.GetInstance().GetHoursSince(Marker.TimeLastSeen)
 					if (timepast > 24):
 						call_deferred("RemoveShip", ship)
@@ -219,6 +212,7 @@ func _physics_process(delta: float) -> void:
 
 				Marker.global_position = ship.global_position
 				Marker.ToggleShipDetails(ship == ControlledShip)
+				
 				
 				if (ship.RadarWorking):
 					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 90), 0)]))
@@ -236,41 +230,45 @@ func _physics_process(delta: float) -> void:
 				
 				if (ship != ControlledShip):
 					continue
-				#if (ship.GetDroneDock().DockedDrones.size() > 0):
-					#var fuel = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-					#var MaxFuel = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-					#for z in ship.GetDroneDock().DockedDrones:
-						#fuel += z.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-						#MaxFuel += z.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-					#Marker.UpdateDroneFuel(roundi(fuel), MaxFuel)
-				#else:
 				var fuelstats
 				if (ship.Docked):
 					fuelstats = ship.Command.GetFuelStats()
 				else:
 					fuelstats = ship.GetFuelStats()
 				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
-				Marker.UpdateDroneHull(roundi(ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL))
-				
-				
-				
 
-				
-				
-				#Marker.UpdateSpeed(ship.GetSpeed())
 			else : if (ship is Missile):
 				if (ship.FiredBy is PlayerDrivenShip or ship.VisibleBy.size() > 0):
 					Marker.global_position = ship.global_position
-					#Marker.UpdateSpeed(ship.GetShipSpeed())
 					Marker.visible = true
-					Marker.ToggleTimeLastSeend(false)
+					Marker.ClearTime()
 					Marker.UpdateTrajectory(ship.global_rotation)
 				else :
-					###Marker.ToggleThreat(false)
 					Marker.visible = false
-				#Marker.UpdateTrajectory(ship.global_rotation)
-			
+		Marker.UpdateTexts()
 	$CircleDrawer.UpdateCircles(Circles)
-	
-	
+
+func GetSaveData() -> SaveData:
+	var Dat = SaveData.new()
+	Dat.DataName = "Markers"
+	for g in _ShipMarkers.size():
 		
+		var ship = Ships[g]
+		var Marker = _ShipMarkers[g]
+		
+		if (ship is HostileShip):
+			if (!ship.Destroyed and ship.VisibleBy.size() == 0):
+				Dat.Datas.append(Marker.GetSaveData())
+	return Dat
+
+func LoadSaveData(Data : SaveData) -> void:
+	var Ships = get_tree().get_nodes_in_group("Enemy")
+	for D in Data.Datas:
+		var SavedName = D.ShipName
+		var Ship : HostileShip
+		for S : HostileShip in Ships:
+			var Name = S.GetShipName()
+			if (SavedName == Name):
+				var marker = AddShip(S, false, false)
+				marker.TimeLastSeen = D.TimeLastSeen
+				marker.global_position = D.Pos

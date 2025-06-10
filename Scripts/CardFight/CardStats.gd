@@ -16,11 +16,11 @@ class_name CardStats
 @export var Type : CardType
 @export var WeapT : WeaponType
 @export var UseConditions : Array[CardUseCondition]
-
+@export var AllowTier : bool = true
 var Tier : int = 0
 
 func GetCardName() ->String:
-	if (Tier > 0):
+	if (Tier > 0 and AllowTier):
 		return CardName + " +{0}".format([Tier])
 	
 	return CardName
@@ -31,28 +31,37 @@ func ShouldConsume() -> bool:
 	return Consume
 
 func GetDescription() -> String:
+	var RealTier = 0
+	if (AllowTier):
+		RealTier = Tier
+		
 	if (CardDescriptionOverride != ""):
 		return CardDescriptionOverride
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
-		Desc += OnPerformModule.GetDesc(Tier)
+		Desc += OnPerformModule.GetDesc(RealTier)
 	if (OnUseModules.size() > 0):
 		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
-			Desc += g.GetDesc(Tier) + "\n"
+			Desc += g.GetDesc(RealTier) + "\n"
 
 	return Desc
 
 func GetBattleDescription(User : BattleShipStats) -> String:
 	if (CardDescriptionOverride != ""):
 		return CardDescriptionOverride
+	
+	var RealTier = 0
+	if (AllowTier):
+		RealTier = Tier
+	
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
-		Desc += OnPerformModule.GetBattleDesc(User, Tier)
+		Desc += OnPerformModule.GetBattleDesc(User, RealTier)
 	if (OnUseModules.size() > 0):
 		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
-			Desc += g.GetBattleDesc(User, Tier) + "\n"
+			Desc += g.GetBattleDesc(User, RealTier) + "\n"
 
 	return Desc
 

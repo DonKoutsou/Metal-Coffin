@@ -27,3 +27,4 @@ OnPerformModule = SubResource("Resource_v8m8y")
 Type = 1
 WeapT = 0
 UseConditions = Array[int]([])
+AllowTier = false

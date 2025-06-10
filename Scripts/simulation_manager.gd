@@ -9,16 +9,15 @@ static var SimulationSpeed : float = 0.2
 
 signal SpeedChanged(t : bool)
 
-@onready var simulation_notification: SimulationNotification = $"../Map/SubViewportContainer/ViewPort/InScreenUI/Control3/SimulationNotification"
-
-
 static  var Instance : SimulationManager
+
+var SimulationNotif : SimulationNotification
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
 	Paused = false
 	SimulationSpeed = 0.2
-	#simulation_notification.set_physics_process(false)
+	SimulationNotif = SimulationNotification.GetInstance()
 
 static func GetInstance() -> SimulationManager:
 	return Instance
@@ -30,7 +29,7 @@ static func SimSpeed() -> float:
 	return SimulationSpeed
 
 func TogglePause(t : bool) -> void:
-	simulation_notification.SimPaused(t)
+	SimulationNotification.GetInstance().SimPaused(t)
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
 	#Inventory.GetInstance().OnSimulationPaused(t)
@@ -45,7 +44,7 @@ func TogglePause(t : bool) -> void:
 	#get_child(0).TogglePause(t)
 		
 func SetSimulationSpeed(Speed : float) -> void:
-	simulation_notification.SimSpeedUpdated(Speed)
+	SimulationNotification.GetInstance().SimSpeedUpdated(Speed > 1)
 	SimulationSpeed = Speed
 	get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)
@@ -61,6 +60,7 @@ func SpeedToggle(t : bool) -> void:
 		SimulationSpeed = 0.2
 		PopUpManager.GetInstance().DoFadeNotif("Simulation speed dissabled")
 	SpeedChanged.emit(t)
+	SimulationNotification.GetInstance().SimSpeedUpdated(t)
 	#get_child(0).SpeedToggle(t)
 	#get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	#_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)

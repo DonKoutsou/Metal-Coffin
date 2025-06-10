@@ -41,4 +41,4 @@ func GetDebuffDuration(Tier : int) -> int:
 func GetDebuffAmmount(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return snapped(DeBuffAmmount + (TierUpgrade * Tier), 0.1)
-	return snapped(DeBuffAmmount *  max((TierUpgrade * Tier), 1), 0.1)
+	return snapped(DeBuffAmmount *  max(pow(TierUpgrade, Tier), 1), 0.01)

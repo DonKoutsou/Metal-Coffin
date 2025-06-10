@@ -880,7 +880,7 @@ breath_amplitude = 2.0
 breath_duration = 5.0
 
 [node name="LightPivot1" type="Node2D" parent="ScreenCam" node_paths=PackedStringArray("SoundPlayer")]
-position = Vector2(0, -1609)
+position = Vector2(6.99998, -1659)
 script = ExtResource("36_wetmy")
 LeftSound = ExtResource("39_ng3jm")
 RightSound = ExtResource("38_ao4ul")
@@ -918,7 +918,7 @@ range_layer_min = 2
 range_layer_max = 2
 texture = ExtResource("36_xl4i0")
 offset = Vector2(0, 1000)
-texture_scale = 6.0
+texture_scale = 7.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ScreenCam/LightPivot1/LightPivot2"]
 stream = ExtResource("38_ao4ul")
@@ -926,7 +926,7 @@ volume_db = -20.0
 bus = &"Sounds"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
-color = Color(0.5, 0.5, 0.5, 1)
+color = Color(0.3084, 0.3084, 0.3084, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")

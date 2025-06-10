@@ -28,13 +28,15 @@ func UpdateControlledShip(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip = NewShip
 
 func UpdateCircles(Circl : Array[PackedVector2Array])-> void:
-	circles.clear()
-	circles.append_array(Circl)
 	if (ClusterTH != null):
 		ClusterTH.wait_to_finish()
+		
+	circles.clear()
+	circles.append_array(Circl)
+	
 	ClusterTH = Thread.new()
 	ClusterTH.start(ThreadProcessIntersections)
-	#PackedVector2Array([g.global_position, Vector2(100, 0)])
+
 func find_or_create_cluster(clusters, circle_index):
 		for cluster in clusters:
 			if circle_index in cluster:
@@ -44,13 +46,7 @@ func find_or_create_cluster(clusters, circle_index):
 		return new_cluster
 
 func ThreadProcessIntersections() -> Dictionary:
-	#circles.clear()
 	var clusters = []
-	#clusters.clear()
-	#$Area2D3.global_position = get_global_mouse_position()
-	#for g in get_children():
-		#if g is Node2D:
-			#circles.append(PackedVector2Array([g.global_position, Vector2(100, 0)]))
 	for i in range(0, circles.size()):
 		for j in range(i + 1, circles.size()):
 			var circle1_center = circles[i][0]
@@ -86,8 +82,9 @@ func ThreadProcessIntersections() -> Dictionary:
 	return intersects
 
 func ClusterCalcFinished() -> void:
-	intersections = ClusterTH.wait_to_finish()
-	ClusterTH = null
+	if (ClusterTH != null):
+		intersections = ClusterTH.wait_to_finish()
+		ClusterTH = null
 	queue_redraw()
 
 

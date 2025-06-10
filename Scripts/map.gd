@@ -563,7 +563,7 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 			ship.Command = com
 			com.GetDroneDock().call_deferred("DockShip", ship)
 	
-	call_deferred("FGenerationFinished")
+	#call_deferred("FGenerationFinished")
 	call_deferred("EnemySpawnFinished")
 
 var EnemsToSpawn : Dictionary

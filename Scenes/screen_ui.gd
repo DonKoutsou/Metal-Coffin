@@ -114,7 +114,9 @@ func _ready() -> void:
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
 	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
-	SimulationManager.GetInstance().SpeedChanged.connect(SpeedUpdated)
+	var SimulationMan = SimulationManager.GetInstance()
+	if (SimulationMan != null):
+		SimulationMan.SpeedChanged.connect(SpeedUpdated)
 
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)

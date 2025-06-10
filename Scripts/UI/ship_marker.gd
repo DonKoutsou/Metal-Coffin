@@ -5,12 +5,14 @@ class_name ShipMarker
 @export_group("Nodes")
 @export var Direction : Label
 @export var ShipCallsign : Label
-@export var ShipNameLabel : Label
-@export var ShipSpeedLabel : Label
-@export var TimeSeenLabel : Label
-@export var ThreatLabel : Label
-@export var FuelLabel : Label
-@export var HullLabel : Label
+@export var ShipDetailLabel : Label
+
+var ShipNameText : String = ""
+var ShipSpeedText : String = ""
+var TimeSeenText : String = ""
+var FuelText : String = ""
+var HullText : String = ""
+
 @export var DetailPanel : Control
 @export var ShipIcon : TextureRect
 @export var VisualContactCountdown : ProgressBar
@@ -41,12 +43,22 @@ signal ShipDeparted
 func _ready() -> void:
 	DetailPanel.visible = false
 	$Line2D.visible = false
-	TimeSeenLabel.visible = false
-	FuelLabel.visible = false
-	HullLabel.visible = false
+
 	VisualContactCountdown.visible = false
 	#set_physics_process(false)
 	UpdateCameraZoom(Map.GetCameraZoom())
+
+func UpdateTexts() -> void:
+	var T = ""
+	T += ShipNameText + "\n"
+	T += ShipSpeedText + "\n"
+	if (TimeSeenText != ""):
+		T += TimeSeenText + "\n"
+	if (FuelText != ""):
+		T += FuelText + "\n"
+	if (HullText != ""):
+		T += HullText + "\n"
+	ShipDetailLabel.text = T
 	
 func PlayHostileShipNotif(text : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
@@ -108,6 +120,7 @@ func OnLandingStarted():
 	LandingNotif.Blink = false
 	#connect("ShipDeparted", notif.OnShipDeparted)
 	add_child(LandingNotif)
+	
 func OnLandingEnded(_Ship : MapShip):
 	LandingNotif.queue_free()
 	LandingNotif = null
@@ -117,9 +130,7 @@ func ToggleShipDetails(T : bool):
 	$Line2D.visible = T
 	#Direction.visible = T
 	#set_physics_process(T)
-func ToggleFriendlyShipDetails(T : bool):
-	FuelLabel.visible = T
-	#HullLabel.visible = T
+
 func OnStatLow(StatName : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText(StatName + " bellow 20%")
@@ -129,7 +140,7 @@ func OnStatLow(StatName : String) -> void:
 	add_child(notif)
 	
 func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : float):
-	ShipNameLabel.text = ShipName
+	ShipNameText = ShipName
 	UpdateSpeed(ShipSpeed)
 	ShipCallsign.text = ShipCasllSign
 	
@@ -145,31 +156,9 @@ func UpdateLine(Zoom : float)-> void:
 	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / (Zoom))
-
-func UpdateSpeed(Spd : float):
-	Direction.visible = Spd > 0
-	var spd = roundi(Map.SpeedToKmH(Spd))
-	ShipSpeedLabel.text = "SPEED " + var_to_str(spd).replace(".0", "")
 	
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(roundi(Alt)))
-	
-func UpdateDroneFuel(amm : float, maxamm : float):
-	FuelLabel.text = "FUEL {0}%".format([roundi(amm / maxamm * 100)])
-	#roundi(amm / maxamm * 100)
-func UpdateDroneHull(amm : float, maxamm : float):
-	HullLabel.text = "HULL {0}%".format([roundi(amm / maxamm * 100)])
-	#roundi(amm / maxamm * 100)
-func ToggleTimeLastSeend(T : bool):
-	if (!T):
-		TimeLastSeen = 0
-	else: if (TimeLastSeen == 0):
-		TimeLastSeen = Clock.GetInstance().GetTimeInHours()
-	TimeSeenLabel.visible = T
-
-func UpdateTime(timepast : float):
-	
-	TimeSeenLabel.text = var_to_str(snappedf((timepast) , 0.01)) + "h ago"
 
 func EnteredScreen() -> void:
 	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
@@ -194,7 +183,6 @@ func OnHostileShipDestroyed() -> void:
 	modulate = Color(1,1,1)
 	ShipCallsign.text = ""
 	UpdateSpeed(0)
-	ShipSpeedLabel.visible = false
 	SetType("Wreck")
 
 func get_closest_point_on_rect(rect: Rect2, point: Vector2) -> Vector2:
@@ -207,3 +195,35 @@ func UpdateVisualContactProgress(val : float) -> void:
 
 func ToggleVisualContactProgress(t : bool) -> void:
 	VisualContactCountdown.visible = t
+
+func ClearTime() -> void:
+	TimeSeenText = ""
+
+func SetTime() -> void:
+	TimeLastSeen = Clock.GetInstance().GetTimeInHours() 
+
+func UpdateTime(timepast : float):
+	TimeSeenText = var_to_str(snappedf((timepast) , 0.01)) + "h ago"
+
+func ClearFuel() -> void:
+	FuelText = ""
+
+func UpdateDroneFuel(amm : float, maxamm : float):
+	FuelText = "FUEL {0}%".format([roundi(amm / maxamm * 100)])
+	#roundi(amm / maxamm * 100)
+
+func ClearSpeed() -> void:
+	ShipSpeedText = ""
+
+func UpdateSpeed(Spd : float):
+	Direction.visible = Spd > 0
+	var spd = roundi(Map.SpeedToKmH(Spd))
+	ShipSpeedText = "SPEED " + var_to_str(spd).replace(".0", "")
+
+func GetSaveData() -> SD_ShipMarker:
+	var Data = SD_ShipMarker.new()
+	Data.ShipName = ShipNameText
+	Data.TimeLastSeen = TimeLastSeen
+	Data.Pos = global_position
+	
+	return Data

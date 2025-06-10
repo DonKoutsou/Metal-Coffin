@@ -17,7 +17,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6175k"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipNameLabel", "ShipSpeedLabel", "TimeSeenLabel", "ThreatLabel", "FuelLabel", "HullLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown")]
+[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown")]
 z_index = 1
 use_parent_material = true
 layout_mode = 3
@@ -37,12 +37,7 @@ theme = ExtResource("1_7vk35")
 script = ExtResource("1_y30vi")
 Direction = NodePath("Icon/ShipSymbol/Direction")
 ShipCallsign = NodePath("Icon/ShipSymbol")
-ShipNameLabel = NodePath("Control/PanelContainer/VBoxContainer/ShipName")
-ShipSpeedLabel = NodePath("Control/PanelContainer/VBoxContainer/ShipName2")
-TimeSeenLabel = NodePath("Control/PanelContainer/VBoxContainer/TimeSeen")
-ThreatLabel = NodePath("Control/PanelContainer/VBoxContainer/Threat")
-FuelLabel = NodePath("Control/PanelContainer/VBoxContainer/Fuel")
-HullLabel = NodePath("Control/PanelContainer/VBoxContainer/Hull")
+ShipDetailLabel = NodePath("Control/PanelContainer/VBoxContainer/ShipName")
 DetailPanel = NodePath("Control")
 ShipIcon = NodePath("Icon")
 VisualContactCountdown = NodePath("Icon/VisualContactCountdown")
@@ -108,61 +103,6 @@ SPEED 100
 Last Seen 1h ago
 Fuel : 10 / 250 Tons
 Hull Condition : 10 / 100"
-vertical_alignment = 1
-uppercase = true
-
-[node name="Fuel" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 18
-text = "Fuel : 10 / 250 Tons"
-vertical_alignment = 1
-uppercase = true
-
-[node name="ShipName2" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 18
-text = "SPEED 100"
-vertical_alignment = 1
-uppercase = true
-
-[node name="TimeSeen" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 18
-text = "Last Seen 1h ago"
-vertical_alignment = 1
-uppercase = true
-
-[node name="Threat" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 18
-text = "Threat Level : 10"
-vertical_alignment = 1
-uppercase = true
-
-[node name="Hull" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-visible = false
-use_parent_material = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 18
-text = "Hull Condition : 10 / 100"
 vertical_alignment = 1
 uppercase = true
 

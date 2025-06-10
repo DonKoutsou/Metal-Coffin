@@ -54,6 +54,10 @@ func Save() -> void:
 	
 	DataArray.append(Controller.GetSaveData())
 	
+	DataArray.append(MapPointerManager.GetInstance().GetSaveData())
+	
+	DataArray.append(Clock.GetInstance().GetSaveData())
+	
 	ActionTracker.Save()
 	
 	DataArray.append(DialogueProgressHolder.GetInstance().ToldDialogues)
@@ -108,12 +112,15 @@ func Load(world : World) ->Dictionary:
 	var DiagHolder = world.GetDialogueProgress()
 	var mapdata : Array[Resource] = (sav.GetData("Towns") as SaveData).Datas
 	var WalletData : Wallet = (sav.GetData("Wallet") as SaveData).Datas[0]
-	var InvData : SaveData = sav.GetData("InventoryContents") as SaveData
+	var InvData = sav.GetData("InventoryContents") as SaveData
 	#var StatData : Resource = sav.GetData("Stats")
 	#var ShipDat : BaseShip = (sav.GetData("Ship") as SaveData).Datas[0]
 	DiagHolder.ToldDialogues =  sav.GetData("SpokenDiags") as SpokenDialogueEntry
 	#world.StartingShip = ShipDat
 	Mapz.LoadSaveData(mapdata)
+	
+	var Markers = sav.GetData("Markers") as SaveData
+	var ClockData = sav.GetData("Clock") as SaveData
 	
 	var enems : Array[Resource] = (sav.GetData("Enemies") as SaveData).Datas
 	var misses : Array[Resource] = (sav.GetData("Missiles") as SaveData).Datas
@@ -121,11 +128,12 @@ func Load(world : World) ->Dictionary:
 	var InvestigationPositions = sav.GetData("PositionsToInvestigate") as SaveData
 	world.Loading = true
 	#call_deferred("LoadStats", world, StatData)
-	call_deferred("LoadMapDat", world, WalletData, sav.GetData("PLData"), enems, misses, MarkerEditorData, InvestigationPositions, InvData)
+	call_deferred("LoadMapDat", WalletData, sav.GetData("PLData"), enems, misses, MarkerEditorData, InvestigationPositions, InvData, Markers, ClockData)
 	Resaults["Succsess"] = true
 	return Resaults
 
-func LoadMapDat(W : World, PlayerWallet : Wallet, PlayerData : PlayerSaveData, Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData) -> void:
+func LoadMapDat(PlayerWallet : Wallet, PlayerData : PlayerSaveData, Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData, HostileMapMarkerData : SaveData, ClockData : SaveData) -> void:
+	var W = World.GetInstance()
 	await W.WRLD_WorldReady
 	var Mp = W.GetMap()
 	#var Ships = get_tree().get_nodes_in_group("Ships")
@@ -134,6 +142,9 @@ func LoadMapDat(W : World, PlayerWallet : Wallet, PlayerData : PlayerSaveData, E
 	W.LoadSaveData(PlayerWallet)
 	Mp.RespawnEnemies( Enems )
 	Mp.RespawnMissiles( Missiles )
+	await Mp.GenerationFinished
 	Mp.LoadMapMarkerEditorSaveData(Data)
 	W.GetCommander().LoadSaveData(InvestigationData)
 	Mp.GetInScreenUI().GetInventory().LoadSaveData(InvData)
+	Clock.GetInstance().LoadData(ClockData)
+	MapPointerManager.GetInstance().LoadSaveData(HostileMapMarkerData)

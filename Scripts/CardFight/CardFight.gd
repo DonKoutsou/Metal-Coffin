@@ -302,6 +302,8 @@ func RunTurn() -> void:
 
 
 func PickPhase() -> void:
+	if (GameOver):
+		return
 	ActionDeclaration.ActionDeclarationFinished.disconnect(PickPhase)
 	CurrentPhase = CardFightPhase.ACTION_PICK
 	CurrentTurn = 0
@@ -312,6 +314,8 @@ func PickPhase() -> void:
 	
 
 func ProgressBuffsForCurrentShip() -> void:
+	if (GameOver):
+		return
 	if (CurrentTurn < ShipTurns.size()):
 		var CurrentShip = GetCurrentShip()
 		var viz = GetShipViz(CurrentShip)
@@ -337,6 +341,8 @@ func ProgressBuffsForCurrentShip() -> void:
 	
 	
 func PickPhaseStart() -> void:
+	if (GameOver):
+		return
 	CurrentTurn = 0
 	
 	ShipTurns.sort_custom(speed_comparator)
@@ -351,6 +357,8 @@ func PickPhaseStart() -> void:
 
 
 func StartCurrentShipsPickTurn() -> void:
+	if (GameOver):
+		return
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = GetCurrentShip()
 		CurrentPlayerLabel.text = "{0} picking".format([Ship.Name])
@@ -362,6 +370,8 @@ func StartCurrentShipsPickTurn() -> void:
 
 
 func RunShipsTurn(Ship : BattleShipStats) -> void:
+	if (GameOver):
+		return
 	ActionDeclaration.ActionDeclarationFinished.disconnect(RunShipsTurn)
 	
 	var viz = GetShipViz(Ship)

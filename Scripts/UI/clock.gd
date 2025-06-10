@@ -92,3 +92,24 @@ func GetDaysInMonth(Month : int) -> int:
 	if (Month == 12):
 		return 30
 	return 0
+
+func GetSaveData() -> SaveData:
+	var SaveD = SaveData.new()
+	SaveD.DataName = "Clock"
+	
+	var Data = SD_Clock.new()
+	Data.CurrentDay = CurrentDay
+	Data.CurrentMonth = CurrentMonth
+	Data.CurrentYear = CurrentYear
+	Data.currentHour = currentHour
+	Data.currentMin = currentMin
+	SaveD.Datas.append(Data)
+	return SaveD
+
+func LoadData(Data : SaveData) -> void:
+	var ClockData = Data.Datas[0] as SD_Clock
+	CurrentDay = ClockData.CurrentDay
+	CurrentMonth = ClockData.CurrentMonth
+	CurrentYear = ClockData.CurrentYear
+	currentHour = ClockData.currentHour
+	currentMin = ClockData.currentMin

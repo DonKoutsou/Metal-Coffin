@@ -2,31 +2,27 @@ extends Control
 class_name SimulationNotification
 
 @export var SimulationPColor: Color
+@export var SimulationSpeedColor : Color
 @export var SimulationRColor: Color
 
-#var CurrentSimSpeed = 1
-
-var In : bool = false
-var d : float = 0.1
-var Paused : bool = false
-var Text : String = ""
-
 var Arrow : bool = false
+var In : bool = false
+
+var Paused : bool = false
+var Sped : bool = false
+
+static var Instance : SimulationNotification
+
+static func GetInstance() -> SimulationNotification:
+	return Instance
 
 func _ready() -> void:
+	Instance = self
 	SimPaused(SimulationManager.IsPaused())
-#TODO probably a bettr wayto do this
+	SimSpeedUpdated(SimulationManager.SimSpeed() > 1)
+
+var d : float = 0.1
 func _physics_process(delta: float) -> void:
-	
-	#var SpeedText = "[{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}]"
-	#var FormatSpeedPlace = []
-	#for g in range(10, 0, -1):
-		#if (g - 1>= CurrentSimSpeed):
-			#FormatSpeedPlace.append(" ")
-		#else:
-			#FormatSpeedPlace.append("I")
-	
-	#$VBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer/SimulationNotification2.text = Text.format([SpeedText.format(FormatSpeedPlace)])
 	d -= delta
 	if (d > 0):
 		return
@@ -38,6 +34,8 @@ func _physics_process(delta: float) -> void:
 		$VBoxContainer2/HBoxContainer2/Label4.text = "SIM PAUSE\nTO TOGGLE\n>>>>>>>>  "
 		Arrow = true
 	if (Paused):
+		modulate = SimulationPColor
+		
 		var Tw = create_tween()
 		if (In):
 			Tw.tween_property($VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification, "modulate", Color(1,1,1,1), 0.4)
@@ -45,19 +43,20 @@ func _physics_process(delta: float) -> void:
 		else:
 			Tw.tween_property($VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification, "modulate", Color(1,1,1,0), 0.4)
 			In = true
+	else:
+		if (Sped):
+			modulate = SimulationSpeedColor
+		else:
+			modulate = SimulationRColor
 	
 func SimPaused(t : bool) -> void:
 	if (t):
-		modulate = SimulationPColor
 		$VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification.text = "SIMULATION\nPAUSED"
-		Text = "SPEED\n{0}"
 	else:
-		modulate = SimulationRColor
 		$VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification.text = "SIMULATION\nRUNNING"
-		Text = "SPEED\n{0}"
 		var Tw = create_tween()
 		Tw.tween_property($VBoxContainer2/HBoxContainer/VBoxContainer/SimulationNotification, "modulate", Color(1,1,1,1), 0.4)
-	#set_physics_process(t)
 	Paused = t
-#func SimSpeedUpdated(Speed : int) -> void:
-	#CurrentSimSpeed = Speed
+	
+func SimSpeedUpdated(SpedUp : bool) -> void:
+	Sped = SpedUp
