@@ -415,7 +415,9 @@ func OnShipSeen(SeenBy : Node2D):
 	for g in GetDroneDock().DockedDrones:
 		g.VisibleBy.append(SeenBy)
 		MapPointerManager.GetInstance().AddShip(g, false)
-	#SimulationManager.GetInstance().TogglePause(true)
+		
+	SimulationManager.GetInstance().SpeedToggle(false)
+	
 	Map.GetInstance().GetCamera().FrameCamToPos(global_position,1, false)
 
 func wait(seconds : float) -> Signal:

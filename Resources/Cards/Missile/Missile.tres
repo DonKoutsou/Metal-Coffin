@@ -38,3 +38,4 @@ OnUseModules = Array[ExtResource("3_30ydj")]([])
 OnPerformModule = SubResource("Resource_nciiu")
 Type = 0
 WeapT = 2
+UseConditions = Array[int]([])

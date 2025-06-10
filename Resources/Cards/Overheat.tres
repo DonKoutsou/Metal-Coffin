@@ -38,3 +38,4 @@ Consume = false
 OnUseModules = Array[ExtResource("2_l7hmv")]([SubResource("Resource_r7uwp"), SubResource("Resource_l7hmv")])
 Type = 2
 WeapT = 0
+UseConditions = Array[int]([])

@@ -145,7 +145,7 @@ func OnSpotSeen(PlayAnim : bool = true) -> void:
 func AddMapSpot(PlayAnim : bool) -> void:
 	MapPointerManager.GetInstance().AddSpot( self, PlayAnim)
 	Seen = true
-	#SimulationManager.GetInstance().TogglePause(true)
+	SimulationManager.GetInstance().SpeedToggle(false)
 
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
@@ -174,6 +174,8 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 		return
 	
 	if (AproachedBy.Command == null):
+		SimulationManager.GetInstance().SpeedToggle(false)
+		Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
 		SpotAproached.emit(self)
 	
 	if (!Seen):
@@ -195,7 +197,7 @@ func OnSpotDeparture(DepartingShip : MapShip) -> void:
 func OnAlarmRaised(Notify : bool = false) -> void:
 	var AlarmViz = AlarmVisual.instantiate()
 	add_child(AlarmViz)
-	SimulationManager.GetInstance().TogglePause(true)
+	SimulationManager.GetInstance().SpeedToggle(false)
 	Map.GetInstance().GetCamera().FrameCamToPos(global_position)
 	SpotAlarmRaised.emit(Notify)
 	AlarmRaised = true

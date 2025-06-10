@@ -107,8 +107,6 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> void:
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 		marker.SetType("Missile")
 	_ShipMarkers.append(marker)
-	
-	marker.UpdateCameraZoom(Map.GetCameraZoom())
 
 func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	if (Spots.has(Spot)):
@@ -168,7 +166,7 @@ var d = 0.1
 var Circles : Array[PackedVector2Array] = []
 func _physics_process(delta: float) -> void:
 	FixLabelClipping()
-	$CircleDrawer.UpdateCircles(Circles)
+	
 	d -= delta
 	if (d > 0):
 		return
@@ -223,9 +221,9 @@ func _physics_process(delta: float) -> void:
 				Marker.ToggleShipDetails(ship == ControlledShip)
 				
 				if (ship.RadarWorking):
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 105), 0)]))
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 90), 0)]))
 				else:
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(105, 0)]))
+					Circles.append(PackedVector2Array([ship.global_position, Vector2(90, 0)]))
 				
 				Marker.UpdateTrajectory(ship.global_rotation)
 				Marker.UpdateSpeed(ship.GetShipSpeed())
@@ -272,7 +270,7 @@ func _physics_process(delta: float) -> void:
 					Marker.visible = false
 				#Marker.UpdateTrajectory(ship.global_rotation)
 			
-		
+	$CircleDrawer.UpdateCircles(Circles)
 	
 	
 		

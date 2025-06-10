@@ -46,6 +46,7 @@ func _ready() -> void:
 	HullLabel.visible = false
 	VisualContactCountdown.visible = false
 	#set_physics_process(false)
+	UpdateCameraZoom(Map.GetCameraZoom())
 	
 func PlayHostileShipNotif(text : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif

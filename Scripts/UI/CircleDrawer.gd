@@ -13,6 +13,8 @@ var intersections = {}
 var ControlledShip : PlayerDrivenShip
 
 var CamZoom = 1
+
+var ClusterTH : Thread
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#$AnimationPlayer.play("loop")
@@ -28,6 +30,10 @@ func UpdateControlledShip(NewShip : PlayerDrivenShip) -> void:
 func UpdateCircles(Circl : Array[PackedVector2Array])-> void:
 	circles.clear()
 	circles.append_array(Circl)
+	if (ClusterTH != null):
+		ClusterTH.wait_to_finish()
+	ClusterTH = Thread.new()
+	ClusterTH.start(ThreadProcessIntersections)
 	#PackedVector2Array([g.global_position, Vector2(100, 0)])
 func find_or_create_cluster(clusters, circle_index):
 		for cluster in clusters:
@@ -84,12 +90,7 @@ func ClusterCalcFinished() -> void:
 	ClusterTH = null
 	queue_redraw()
 
-var ClusterTH : Thread
-func _physics_process(_delta: float) -> void:
-	if (ClusterTH == null):
-		ClusterTH = Thread.new()
-		ClusterTH.start(ThreadProcessIntersections)
-	
+
 
 func get_circle_polygon(center: Vector2, rad : float) -> PackedVector2Array:
 	var points = PackedVector2Array()
@@ -144,7 +145,7 @@ func DrawRuller() -> void:
 	var LineW = 1/CamZoom
 	var vizrange = ControlledShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	if(!ControlledShip.RadarWorking):
-		vizrange = 105
+		vizrange = 90
 	
 	
 	for g in 3:

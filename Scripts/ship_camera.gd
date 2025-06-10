@@ -17,7 +17,7 @@ func _ready() -> void:
 	Instance = self
 	Cloud.material.set_shader_parameter("offset", global_position / 1500)
 	Ground.material.set_shader_parameter("offset", global_position / 1500)
-	call_deferred("OnZoomChanged", zoom)
+	#call_deferred("OnZoomChanged", zoom)
 	
 static func GetInstance() -> ShipCamera:
 	return Instance
@@ -40,9 +40,8 @@ func _HANDLE_ZOOM(zoomval : float):
 	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(5,5))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
 	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
-	prevzoom = newzoom
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	call_deferred("OnZoomChanged", newzoom)
+	prevzoom = newzoom
 
 func ForceZoomOut() -> void:
 	if (is_instance_valid(ZoomTw)):
@@ -54,9 +53,18 @@ func ForceZoomOut() -> void:
 	ZoomTw.tween_method(UpdateZoom, zoom, Vector2(0.045, 0.045), 1)
 	prevzoom = Vector2(0.045, 0.045)
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	call_deferred("OnZoomChanged", Vector2(0.045, 0.045))
 
 func UpdateZoom(Zoom : Vector2) -> void:
+	zoom = Zoom
+	for g in get_tree().get_nodes_in_group("MapLines"):
+		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, Zoom.x / 2))
+	get_tree().call_group("LineMarkers", "CamZoomUpdated", Zoom.x)
+	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
+	ZoomChanged.emit(Zoom.x)
+	_UpdateMapGridVisibility()
+
+func ForceZoom(Zoom : Vector2) -> void:
+	prevzoom = Zoom
 	zoom = Zoom
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, Zoom.x / 2))
@@ -86,19 +94,9 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		var touch_point_positions = touch_points.values()
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
-		zoom = clamp(start_zoom / zoom_factor, Vector2(0.045,0.045), Vector2(2.1,2.1))
-		call_deferred("OnZoomChanged", zoom)
-		_UpdateMapGridVisibility()
+		UpdateZoom(clamp(start_zoom / zoom_factor, Vector2(0.045,0.045), Vector2(2.1,2.1)))
 	else:
 		UpdateCameraPos(event.relative)
-
-func OnZoomChanged(NewZoom : Vector2) -> void:
-	for g in get_tree().get_nodes_in_group("MapLines"):
-		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, NewZoom.x / 2))
-		
-	get_tree().call_group("LineMarkers", "CamZoomUpdated", NewZoom.x)
-	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", NewZoom.x)
-	ZoomChanged.emit(NewZoom.x)
 	
 var GridShowing = false
 
@@ -109,9 +107,6 @@ func _UpdateMapGridVisibility():
 		if (is_instance_valid(MapGridTween)):
 			MapGridTween.kill()
 			MapGridTween = null
-		#var mtw = create_tween()
-		#mtw.tween_property(CityLines, "modulate", Color(1,1,1,1), 0.5)
-		#$"../MapLines".visible = true
 		MapGridTween = create_tween() as Tween
 		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
 		GridShowing = true
@@ -129,8 +124,6 @@ func _UpdateMapGridVisibility():
 		
 		MapGridTween = create_tween()
 		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
-		#var mtw = create_tween()
-		#mtw.tween_property(CityLines, "modulate", Color(1,1,1,0), 0.5)
 		GridShowing = false
 
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)

@@ -86,7 +86,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	pos.y += 500
 	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/PlayerShip as MapShip
 	PlShip.SetShipPosition(pos)
-	_Camera.FrameCamToPlayer()
+	#_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
 	PlShip.Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	if (IsPrologue):
@@ -273,7 +273,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		SpotList.insert(g, sc)
 	
 	#call_deferred("GenerateRoads")
-	_Camera.call_deferred("FrameCamToPlayer")
+	#_Camera.call_deferred("FrameCamToPlayer")
 
 #/////////////////////////////////////////////////////////////
 #██ ███    ██ ██████  ██    ██ ████████     ██   ██  █████  ███    ██ ██████  ██      ██ ███    ██  ██████  

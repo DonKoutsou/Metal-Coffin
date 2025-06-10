@@ -102,6 +102,7 @@ func _ready() -> void:
 	WRLD_WorldReady.emit()
 	if (!Loading):
 		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
+		GetMap().GetCamera().FrameCamToPlayer()
 		if (IsPrologue):
 			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		else:
@@ -140,7 +141,7 @@ func _ready() -> void:
 		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
-		GetMap().GetCamera().FrameCamToPlayer()
+		
 	
 	
 

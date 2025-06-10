@@ -13,14 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="10_3csbo"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/SteeringWheelUI.tscn" id="11_s7gev"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="13_4xtjg"]
+[ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Switch.png" id="13_myhbu"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_l0ryv"]
+[ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Switch2.png" id="14_ruc6v"]
 [ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="14_ua54b"]
 [ext_resource type="Texture2D" uid="uid://cub3jskgpfw07" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality.png" id="15_tpyok"]
 [ext_resource type="Texture2D" uid="uid://diws0gke4cls1" path="res://Assets/UIPiecies/Screen/Button6_Camera 1_FullQuality_Pressed.png" id="16_sln7g"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="17_07pwg"]
 [ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality_pressed.png" id="18_qqmpd"]
-[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality.png" id="19_n4cku"]
-[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Button3_Camera 1_FullQuality_Pressed.png" id="20_sa8yb"]
 [ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
 [ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="23_0465a"]
@@ -296,7 +296,7 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI")]
+[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI")]
 process_mode = 1
 layer = 2
 follow_viewport_enabled = true
@@ -310,6 +310,7 @@ LandButton = NodePath("NormalScreen/LandButton")
 ShipDockButton = NodePath("NormalScreen/DroneButton")
 RegroupButton = NodePath("NormalScreen/ControlledShipReturn")
 SimulationButton = NodePath("NormalScreen/SimulationButton")
+SpeedSimulationButton = NodePath("NormalScreen/SpeedSimulation")
 MapMarkerButton = NodePath("NormalScreen/MarkerPlecement")
 EventHandler = ExtResource("3_i441f")
 Cam = NodePath("ScreenCam")
@@ -424,15 +425,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -49.0
-offset_top = -599.0
-offset_right = -30.0
-offset_bottom = -553.0
+offset_left = -51.0
+offset_top = -606.0
+offset_right = -25.0
+offset_bottom = -546.0
 grow_horizontal = 0
 grow_vertical = 0
+toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource("19_n4cku")
-texture_pressed = ExtResource("20_sa8yb")
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -956,8 +958,7 @@ libraries = {
 [connection signal="ExitPressed" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="Exit_Marker_Editor_Pressed"]
 [connection signal="MarkerHorizontalMove" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="MarkerEditorXRangeChanged"]
 [connection signal="MarkerVerticalMove" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="MarkerEditorYRangeChanged"]
-[connection signal="button_up" from="NormalScreen/SpeedSimulation" to="." method="Sim_Speed_Released"]
-[connection signal="pressed" from="NormalScreen/SpeedSimulation" to="." method="Sim_Speed_Pressed"]
+[connection signal="toggled" from="NormalScreen/SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="pressed" from="NormalScreen/SimulationButton" to="." method="Sim_Pause_Pressed"]
 [connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
 [connection signal="pressed" from="NormalScreen/ControlledShipSwitch" to="." method="Ship_Switch_Pressed"]

@@ -11,6 +11,7 @@ class_name ScreenUI
 @export var ShipDockButton : TextureButton
 @export var RegroupButton : TextureButton
 @export var SimulationButton : TextureButton
+@export var SpeedSimulationButton : TextureButton
 @export var MapMarkerButton : TextureButton
 #@export var DroneUI : DroneTab
 #@export var ButtonCover : TextureRect
@@ -113,6 +114,7 @@ func _ready() -> void:
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
 	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
+	SimulationManager.GetInstance().SpeedChanged.connect(SpeedUpdated)
 
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)
@@ -208,6 +210,12 @@ func Sim_Speed_Pressed() -> void:
 
 func Sim_Speed_Released() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
+
+func _on_speed_simulation_toggled(toggled_on: bool) -> void:
+	SimulationManager.GetInstance().SpeedToggle(toggled_on)
+
+func SpeedUpdated(t : bool) -> void:
+	SpeedSimulationButton.set_pressed_no_signal(t)
 
 func Inventory_Pressed() -> void:
 	EventHandler.OnInventoryPressed()

@@ -26,6 +26,7 @@
 
 [node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual", "UnderstatUI", "OverStatUI", "PopupPlecement")]
 process_mode = 3
+follow_viewport_enabled = true
 script = ExtResource("1_3cf0e")
 _Inventory = NodePath("Control3/UnderStatUI/Inventory")
 _MapMarkerEditor = NodePath("Control3/MapMarkerEditor")

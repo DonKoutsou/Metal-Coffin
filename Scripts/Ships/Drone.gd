@@ -77,6 +77,7 @@ func GetSaveData() -> DroneSaveData:
 	dat.Docked = Docked
 	dat.Pos = global_position
 	dat.Rot = global_rotation
+	dat.Speed = GetShipSpeed()
 	for g in GetDroneDock().DockedDrones:
 		dat.DockedDrones.append(g.GetSaveData())
 

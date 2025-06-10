@@ -222,6 +222,10 @@ func _on_controlled_ship_return_pressed() -> void:
 func GetSaveData() -> PlayerSaveData:
 	var pldata = PlayerSaveData.new()
 	var Ships = get_tree().get_nodes_in_group("PlayerShips")
+	var Cam = ShipCamera.GetInstance()
+	pldata.CameraPos = Cam.global_position
+	pldata.CameraZoom = Cam.zoom
+	
 	#pldata.Worldview = WorldView.GetInstance().GetSaveData()
 	for g : PlayerDrivenShip in Ships:
 		if (g.Command == null):
@@ -229,6 +233,7 @@ func GetSaveData() -> PlayerSaveData:
 				pldata.Pos = g.global_position
 				pldata.Rot = g.global_rotation
 				pldata.PlayerFleet = g.GetDroneDock().GetSaveData()
+				pldata.Speed = g.GetShipSpeed()
 			else :
 				var FleetData = FleetSaveData.new()
 				if (g is Drone):
@@ -242,12 +247,13 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 	var Player = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
 	Player.SetShipPosition(Data.Pos)
 	Player.global_rotation = Data.Rot
+	
 	#WorldView.GetInstance().LoadData(Data.Worldview)
 	for Ship in Data.PlayerFleet:
 		var DockedShip = DroneScene.instantiate() as Drone
 		DockedShip.Cpt = Ship.Cpt
 		Player.GetDroneDock().AddDrone(DockedShip)
-	
+	Player.SetSpeed(Data.Speed)
 	var ShipPlecement = Player.get_parent()
 	
 	for Command in Data.FleetData:
@@ -256,7 +262,12 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		ShipPlecement.add_child(CommanderShip)
 		CommanderShip.SetShipPosition(Command.CommanderData.Pos)
 		CommanderShip.global_rotation = Command.CommanderData.Rot
+		CommanderShip.SetSpeed(Command.CommanderData.Speed)
 		for Ship in Command.DockedShips:
 			var DockedShip = DroneScene.instantiate() as Drone
 			DockedShip.Cpt = Ship.Cpt
 			CommanderShip.GetDroneDock().AddDrone(DockedShip)
+	
+	var Cam = ShipCamera.GetInstance()
+	Cam.ForceZoom(Data.CameraZoom)
+	Cam.ForceCamPosition(Data.CameraPos)

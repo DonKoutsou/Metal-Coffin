@@ -201,7 +201,7 @@ func OnShipSeen(SeenBy : MapShip):
 	if (VisibleBy.size() > 1):
 		return
 	MapPointerManager.GetInstance().AddShip(self, false)
-	#SimulationManager.GetInstance().TogglePause(true)
+	SimulationManager.GetInstance().SpeedToggle(false)
 	Map.GetInstance().GetCamera().FrameCamToPos(global_position)
 func OnShipUnseen(UnSeenBy : MapShip):
 	VisibleBy.erase(UnSeenBy)

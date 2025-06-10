@@ -20,11 +20,11 @@ func _physics_process(_delta: float) -> void:
 		return
 	if (alph <= 0):
 		queue_free()
-		Finished.emit()
 	alph -= 0.05
 	modulate.a = min(1, alph)
 
-
+func _exit_tree() -> void:
+	Finished.emit()
 #func _ready() -> void:
 	#set_anchors_preset(Control.PRESET_CENTER_LEFT, true)
 	
