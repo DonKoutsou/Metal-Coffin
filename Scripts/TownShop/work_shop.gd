@@ -347,7 +347,7 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		#print("Ship is already upgrading a part. Wait for it to finish first.")
 		return
 
-	var Cost = OriginalItem.UpgradeCost
+	var Cost = UpgradedItem.Cost
 	if (HasUpgrade):
 		Cost /= 2
 	var PLWallet = World.GetInstance().PlayerWallet

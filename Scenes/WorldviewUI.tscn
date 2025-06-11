@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://biiakq2r2vasn"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_b325w"]
+[ext_resource type="Script" uid="uid://bg5rdvie6bf4v" path="res://Scripts/WorldView/worldview_ui.gd" id="2_omcf4"]
+[ext_resource type="PackedScene" uid="uid://dlkrd1kwoocdb" path="res://Scenes/worldviewUIContainer.tscn" id="3_ratq7"]
+
+[node name="WorldviewUI" type="Control"]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -22.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("2_omcf4")
+WorldviewStatScene = ExtResource("3_ratq7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -17.5
+offset_right = 48.0
+offset_bottom = 17.5
+grow_vertical = 2
+theme_override_constants/separation = -2
+
+[node name="Button" type="Button" parent="HBoxContainer" groups=["DigitalButtons"]]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "<<"
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_b325w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

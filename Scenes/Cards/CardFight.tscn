@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=36 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://chd8i7o8mqa5l" path="res://Scenes/Cards/CardFightShipViz2.tscn" id="4_hty1i"]
 [ext_resource type="PackedScene" uid="uid://mynuy3gwirlo" path="res://Scenes/Cards/atack_timer.tscn" id="5_q6kaa"]
 [ext_resource type="PackedScene" uid="uid://djd1dfb5i6p0y" path="res://Scenes/FightMinigame.tscn" id="6_l6rgq"]
-[ext_resource type="PackedScene" uid="uid://rwe63rpa83wb" path="res://Scenes/Cards/AtackEffects/CardThing.tscn" id="7_2ppo7"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
 [ext_resource type="PackedScene" uid="uid://cbdyafmynts2u" path="res://Scenes/Cards/OffensiveAnimation.tscn" id="9_b6m6l"]
 [ext_resource type="PackedScene" uid="uid://dfh0dm1lwcumv" path="res://Scenes/CardFightEndScene.tscn" id="10_42bcn"]
@@ -27,8 +26,6 @@
 [ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scripts/CardFight/action_declaration.gd" id="24_pw20f"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="27_rbthh"]
-[ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="28_ang8x"]
-[ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="29_1c17m"]
 [ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
 
 [sub_resource type="Gradient" id="Gradient_aiu8p"]
@@ -84,7 +81,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclaration", "Cloud", "DiscardP", "DeckP", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclaration", "Cloud", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -97,7 +94,6 @@ ShipVizScene = ExtResource("3_n2sfr")
 ShipVizScene2 = ExtResource("4_hty1i")
 AtackTime = ExtResource("5_q6kaa")
 FightGame = ExtResource("6_l6rgq")
-CardThing = ExtResource("7_2ppo7")
 DamageFloater = ExtResource("8_yl0qx")
 ActionAnim = ExtResource("9_b6m6l")
 EndScene = ExtResource("10_42bcn")
@@ -106,14 +102,12 @@ CardPlecementSound = ExtResource("12_xtulq")
 RemoveCardSound = ExtResource("15_8bqim")
 SelectedCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/SelectedCardPlecements")
 AnimationPlecement = NodePath("SubViewport/Control2/Control")
-EnemyShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/EnemyShipPlecement")
-PlayerShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/PlayerShipPlecement")
+EnemyShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer3/EnemyShipPlecement")
+PlayerShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer2/PlayerShipPlecement")
 TargetSelect = NodePath("SubViewport/Control2/TargetSelect")
 CardSelect = NodePath("SubViewport/Control2/CardSelect")
 ActionDeclaration = NodePath("SubViewport/Control2/Action Declaration")
 Cloud = NodePath("SubViewport/Control2/Clouds")
-DiscardP = NodePath("SubViewport/Control2/DiscardPile")
-DeckP = NodePath("SubViewport/Control2/DeckButton")
 PlayerFleetSizeLabel = NodePath("SubViewport/Control2/Label2")
 EnemyFleetSizeLabel = NodePath("SubViewport/Control2/Label3")
 CurrentPlayerLabel = NodePath("SubViewport/Control2/CurrentPlayerLabel")
@@ -238,38 +232,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-alignment = 1
 
-[node name="PlayerShipPlecement" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="PlayerShipPlecement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 18
-
-[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer2"]
-layout_mode = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/PlayerShipPlecement/HBoxContainer3"]
-layout_mode = 2
+script = ExtResource("24_d8sco")
+Vertical = true
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
 layout_mode = 2
@@ -297,39 +275,21 @@ custom_minimum_size = Vector2(0, 172.735)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="EnemyShipPlecement" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="EnemyShipPlecement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 3
-theme_override_constants/separation = 18
-
-[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-alignment = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-alignment = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer2"]
-layout_mode = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-alignment = 2
-
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/EnemyShipPlecement/HBoxContainer3"]
-layout_mode = 2
+script = ExtResource("24_d8sco")
+Vertical = true
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("ShipVizContainer")]
 z_index = 2
@@ -340,9 +300,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -91.0
-offset_top = -134.0
+offset_top = -46.0
 offset_right = 91.0
-offset_bottom = -42.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -382,9 +342,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -372.0
-offset_top = -263.0
+offset_top = -149.0
 offset_right = 372.0
-offset_bottom = 35.0
+offset_bottom = 149.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -421,28 +381,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="DeckButton" parent="SubViewport/Control2" instance=ExtResource("28_ang8x")]
-layout_mode = 1
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-offset_left = 26.0
-offset_top = -182.0
-offset_right = 132.0
-offset_bottom = -26.0
-grow_horizontal = 1
-grow_vertical = 0
-pivot_offset = Vector2(76.5, 104)
-
-[node name="DiscardPile" parent="SubViewport/Control2" instance=ExtResource("29_1c17m")]
-layout_mode = 1
-offset_left = -140.0
-offset_top = -180.0
-offset_right = -34.0
-offset_bottom = -24.0
 
 [node name="CurrentPlayerLabel" type="Label" parent="SubViewport/Control2"]
 layout_mode = 1

@@ -18,7 +18,6 @@ class_name Card_Fight
 @export var ShipVizScene2 : PackedScene
 @export var AtackTime : PackedScene
 @export var FightGame : PackedScene
-@export var CardThing : PackedScene
 @export var DamageFloater : PackedScene
 #Animation of the atack
 @export var ActionAnim : PackedScene
@@ -43,8 +42,6 @@ class_name Card_Fight
 #UI for action declaration
 @export var ActionDeclaration : ActionDeclarationUI
 @export var Cloud : ColorRect
-@export var DiscardP : DiscardPileUI
-@export var DeckP : DeckPileUI
 #Showing size of player fleet
 @export var PlayerFleetSizeLabel : Label
 #Showing size of enemy fleet
@@ -141,9 +138,6 @@ func _ready() -> void:
 	
 	UpdateFleetSizeAmmount()
 	#Create the visualisation for each ship, basicly their stat holder
-
-	DeckP.visible = false
-	DiscardP.visible = false
 	ExternalUI.ToggleEnergyVisibility(false)
 	ExternalUI.HideInfo()
 
@@ -382,8 +376,6 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):
-		DeckP.visible = true
-		DiscardP.visible = true
 		ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
@@ -495,7 +487,7 @@ func OnCardSelected(C : Card) -> bool:
 		if (!C.CStats.Consume):
 			print("{0} has been added to {1}'s discard pile.".format([C.CStats.GetCardName(), Ship.Name]))
 			deck.DiscardPile.append(C.CStats)
-			DiscardP.OnCardDiscarded(C.global_position + (C.size / 2))
+			ExternalUI.DiscardPile.OnCardDiscarded(C.global_position + (C.size / 2))
 	
 	ExternalUI.UpdateCardsInHandAmm(deck.Hand.size(), MaxCardsInHand)
 	
@@ -702,9 +694,7 @@ func CurrentEnemyTurnEnded() -> void:
 func CurrentPlayerTurnEnded() -> void:
 	PickingMoves = false
 	ClearCards()
-	
-	DeckP.visible = false
-	DiscardP.visible = false
+
 	ExternalUI.HideInfo()
 	var Ship = GetCurrentShip()
 	var viz = GetShipViz(Ship)
@@ -724,8 +714,6 @@ func StartActionPerform() -> void:
 	#Sort ships again to make sure speed buffs are taken into account
 	ShipTurns.sort_custom(speed_comparator)
 
-	DeckP.visible = false
-	DiscardP.visible = false
 	ExternalUI.HideInfo()
 	CurrentPhase = CardFightPhase.ACTION_PERFORM
 	ActionDeclaration.DoActionDeclaration("Action Perform Phase", 2)
@@ -805,15 +793,9 @@ func FireDamageFinished() -> void:
 func PerformActions(Ship : BattleShipStats) -> void:
 	#var ActionsToBurn : Array[CardFightAction]
 	var viz = GetShipViz(Ship)
-	for g in viz.get_parent().get_children():
-		if (g != viz):
-			var tw = create_tween()
-			tw.set_ease(Tween.EASE_OUT)
-			tw.set_trans(Tween.TRANS_QUAD)
-			tw.tween_property(g, "custom_minimum_size", Vector2(90, 0), 0.2)
-			tw.finished.connect(PerformNextActionForShip.bind(Ship, 0))
-			#g.visible = true
-
+	await viz.Pop(true)
+	#viz.Enable()
+	PerformNextActionForShip(Ship, 0)
 
 func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void:
 	if (GameOver):
@@ -882,8 +864,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
 				Dec.DiscardPile.append(Action)
 				if (Friendly):
-					DiscardP.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
-					DiscardP.visible = true
+					ExternalUI.DiscardPile.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
 					
 					
 			
@@ -899,9 +880,8 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 						print("{0} has been added to {1}'s discard pile.".format([Counter.GetCardName(), g.Name]))
 						TargetDeck.DiscardPile.append(Counter)
 						if (!Friendly):
-							DiscardP.UpdateDiscardPileAmmount(TargetDeck.DiscardPile.size())
-							DiscardP.visible = true
-							anim.DeffenceCardDestroyed.connect(DiscardP.OnCardDiscarded)
+							ExternalUI.DiscardPile.UpdateDiscardPileAmmount(TargetDeck.DiscardPile.size())
+							anim.DeffenceCardDestroyed.connect(ExternalUI.DiscardPile.OnCardDiscarded)
 							
 					if (!Friendly):
 						DamageNeg += Mod.GetFinalDamage(Ship, Action.Tier)
@@ -911,7 +891,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			anim.DoOffensive(Action, Mod, TargetList, Ship, Friendly)
 			var pos = await anim.AtackCardDestroyed
 			if (Friendly):
-				DiscardP.OnCardDiscarded(pos)
+				ExternalUI.DiscardPile.OnCardDiscarded(pos)
 			anim.AnimationFinished.connect(PerformAnimationFinished.bind(Ship, ActionIndex))
 			
 			
@@ -964,20 +944,13 @@ func ConnectMoves(C : Array[Callable]) -> void:
 	
 
 func PerformAnimationFinished(Ship : BattleShipStats, ActionIndex : int) -> void:
-	DiscardP.visible = false
 	PerformNextActionForShip(Ship, ActionIndex)
 
 
 func PerformTurnFinished(Ship : BattleShipStats) -> void:
 	if (Ship != null):
 		var viz = GetShipViz(Ship)
-		for g in viz.get_parent().get_children():
-			if (g != viz):
-				var tw = create_tween()
-				tw.set_ease(Tween.EASE_OUT)
-				tw.set_trans(Tween.TRANS_QUAD)
-				tw.tween_property(g, "custom_minimum_size", Vector2(0, 0), 0.2)
-				await tw.finished
+		await viz.Pop(false)
 	CurrentTurn = CurrentTurn + 1
 	StartCurrentShipsPerformTurn()
 
@@ -1028,8 +1001,8 @@ func RestartCards() -> void:
 	UpdateReserves(currentship, currentship.EnergyReserves, true)
 	UpdateHandCards()
 	
-	DiscardP.UpdateDiscardPileAmmount(D.DiscardPile.size())
-	DeckP.UpdateDeckPileAmmount(D.DeckPile.size())
+	ExternalUI.DiscardPile.UpdateDiscardPileAmmount(D.DiscardPile.size())
+	ExternalUI.DeckUI.UpdateDeckPileAmmount(D.DeckPile.size())
 	#GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
 	HandleDrawCard(currentship)
@@ -1117,7 +1090,8 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, 
 		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
 	else : if (Mod is StackDamageCardModule):
 		await HandleDamageStack(Performer, C, Mod)
-
+	else : if (Mod is CleanseDebuffModule):
+		await HandleDebuffCleanse(Performer, C, Mod)
 
 func HandleModulesEnemy(Performer : BattleShipStats, C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	for Mod in C.OnUseModules.size():
@@ -1163,6 +1137,8 @@ func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModu
 		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
 	else : if (Mod is StackDamageCardModule):
 		await HandleDamageStack(Performer, C, Mod)
+	else : if (Mod is CleanseDebuffModule):
+		await HandleDebuffCleanse(Performer, C, Mod)
 
 func HandleDrawDriscard(Performer : BattleShipStats, Mod : DrawCardModule) -> void:
 	var D = GetShipDeck(Performer)
@@ -1182,7 +1158,7 @@ func HandleDrawDriscard(Performer : BattleShipStats, Mod : DrawCardModule) -> vo
 		c.SetCardBattleStats(Performer, ToDraw)
 		#c.connect("OnCardPressed", OnCardSelected)
 		
-		DeckP.OnCardDrawn()
+		ExternalUI.DeckUI.OnCardDrawn()
 		CardsToDraw.append(c)
 	
 	while CardsToDiscard.size() < DiscardAmmount:
@@ -1195,14 +1171,14 @@ func HandleDrawDriscard(Performer : BattleShipStats, Mod : DrawCardModule) -> vo
 		CardsToDiscard.append(Ca)
 		print("{0} has been added to {1}'s discard pile.".format([Ca.CStats.GetCardName(), Performer.Name]))
 		D.DiscardPile.append(Ca.CStats)
-		DeckP.OnCardDrawn()
-		DiscardP.OnCardDiscarded(DeckP.global_position)
+		ExternalUI.DeckUI.OnCardDrawn()
+		ExternalUI.DiscardPile.OnCardDiscarded(ExternalUI.DeckUI.global_position)
 	
 	for g in CardsToDraw:
 		
 		var Placed = await PlaceCardInPlayerHand(Performer, g)
 		await Helper.GetInstance().wait(0.2)
-		DeckP.OnCardDrawn()
+		ExternalUI.DeckUI.OnCardDrawn()
 		
 		if (Placed):
 			pass
@@ -1605,7 +1581,7 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 	c.SetCardBattleStats(Performer, C)
 	#c.connect("OnCardPressed", OnCardSelected)
 	
-	DeckP.OnCardDrawn()
+	ExternalUI.DeckUI.OnCardDrawn()
 	
 	var Placed = await PlaceCardInPlayerHand(Performer, c)
 	
@@ -1651,7 +1627,7 @@ func HandleDrawSpecificCard(Performer : BattleShipStats, Spawn : CardStats) -> v
 	c.SetCardBattleStats(Performer, Spawn)
 	#c.connect("OnCardPressed", OnCardSelected)
 	
-	DeckP.OnCardDrawn()
+	ExternalUI.DeckUI.OnCardDrawn()
 	
 	D.DeckPile.erase(Spawn)
 	
@@ -1697,7 +1673,7 @@ func HandleMultiDrawSpecific(Performer : BattleShipStats, Action : CardStats, Mo
 	var c = CardScene.instantiate() as Card
 	c.SetCardBattleStats(Performer, PossibleCards[Picked])
 
-	DeckP.OnCardDrawn()
+	ExternalUI.DeckUI.OnCardDrawn()
 	
 	D.DeckPile.erase(PossibleCards[Picked])
 	
@@ -1776,10 +1752,10 @@ func HandleShuffleDiscardedIntoDeck(D : Deck, DoAnim : bool = true) -> void:
 	if (DoAnim):
 		for g in D.DiscardPile.size():
 			await Helper.GetInstance().wait(0.05)
-			DiscardP.OnCardRemoved()
-			DeckP.OnCardAdded(DiscardP.global_position)
+			ExternalUI.DiscardPile.OnCardRemoved()
+			ExternalUI.DeckUI.OnCardAdded(ExternalUI.DiscardPile.global_position)
 			if (g == D.DiscardPile.size() - 1):
-				await DeckP.CardAddFinished
+				await ExternalUI.DeckUI.CardAddFinished
 				
 	D.DeckPile.append_array(D.DiscardPile)
 	D.DiscardPile.clear()
@@ -1904,14 +1880,6 @@ func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Ve
 	#if (C != null):
 		#C.visible = true
 
-
-func DoCardAnim(OriginalPos : Vector2, Target : Control) -> void:
-	var c = CardThing.instantiate() as CardViz
-	c.Target = Target
-	AnimationPlecement.add_child(c)
-	c.global_position = OriginalPos
-
-#
 #////////////////////////////////////////////////////////////////////////////
  #██████  ███████ ████████ ████████ ███████ ██████  ███████ 
 #██       ██         ██       ██    ██      ██   ██ ██      
@@ -2144,23 +2112,10 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 
 	t.SetStats(BattleS, Friendly)
 	
-	var Parent : Control
-	
 	if (Friendly):
-		for g in PlayerShipVisualPlecement.get_children():
-			if (g is HBoxContainer and g.get_child_count() == 1):
-				Parent = g
-				break
-				
-		Parent.add_child(t)
+		PlayerShipVisualPlecement.add_child(t)
 	else :
-		for g in EnemyShipVisualPlecement.get_children():
-			if (g is HBoxContainer and g.get_child_count() == 1):
-				Parent = g
-				break
-		
-		Parent.add_child(t)
-		Parent.move_child(t, 0)
+		EnemyShipVisualPlecement.add_child(t)
 	
 	ShipsViz[BattleS] = t
 	NewTurnStarted.connect(t.OnNewTurnStarted)
@@ -2345,7 +2300,6 @@ func _on_switch_ship_pressed() -> void:
 	
 	ShipViz.get_parent().remove_child(ShipViz)
 	add_child(ShipViz)
-	
 	ShipsViz.erase(CurrentShip)
 	
 	PlayerCombatants.erase(CurrentShip)
@@ -2407,7 +2361,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		if (ToDiscard == MaxCardsInHand):
 			print("{0} has been added to {1}'s discard pile.".format([C.CStats.GetCardName(), Performer.Name]))
 			PlDeck.DiscardPile.append(C.CStats)
-			DiscardP.OnCardDiscarded(DeckP.global_position)
+			ExternalUI.DiscardPile.OnCardDiscarded(ExternalUI.DeckUI.global_position)
 			ExternalUI.ToggleHandInput(true)
 			return false
 		
@@ -2418,7 +2372,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		await ExternalUI.InsertCardToDiscard(Discarded)
 		print("{0} has been added to {1}'s discard pile.".format([Discarded.CStats.GetCardName(), Performer.Name]))
 		PlDeck.DiscardPile.append(Discarded.CStats)
-		DiscardP.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))
+		ExternalUI.DiscardPile.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))
 		Discarded.get_parent().queue_free()
 		ExternalUI.OnCardDrawn(C)
 		PlDeck.Hand.erase(Discarded.CStats)

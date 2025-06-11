@@ -39,12 +39,19 @@ func DoFadeNotif(Text : String, Parent : Node = null, overridetime : float = 4):
 	
 	var f = get_tree().get_nodes_in_group("FadeNotif")
 	for g in f:
+		g.Finished.emit()
 		g.queue_free()
-		
+	
+	var UpdatedText = Text
+	for g in Text.length():
+		if (g > 25 and Text.substr(g, 1) == " "):
+			UpdatedText = Text.insert(g, "\n")
+			break
+	
 	var dig = FadNot.instantiate() as FadeNotif
 	dig.alph = overridetime
 	dig.Finished.connect(FadeFinished.bind(Text))
-	dig.SetText(Text)
+	dig.SetText(UpdatedText)
 	if (is_instance_valid(Parent)):
 		Parent.add_child(dig)
 	else:

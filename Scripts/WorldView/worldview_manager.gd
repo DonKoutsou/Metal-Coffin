@@ -7,6 +7,8 @@ class_name WorldView
 
 var Lied : bool = false
 
+signal StatsChanged
+
 static var WorldviewStats : Dictionary[WorldViews, int] = {
 	WorldViews.COMPOSURE_AGITATION : 0,
 	WorldViews.LOGIC_BELIEF : 0,
@@ -35,8 +37,9 @@ func AdjustStat(Stat : WorldViews, Amm : int, Notify : bool) -> void:
 		notif.AdjustedAmm = Amm
 		notif.NotifStat = Stat
 		Ingame_UIManager.GetInstance().AddUI(notif, false, true)
+	StatsChanged.emit()
 	
-func GetStatValue(StatName : WorldViews) -> int:
+static func GetStatValue(StatName : WorldViews) -> int:
 	return WorldviewStats[StatName]
 
 func GetSaveData() -> Array[int]:

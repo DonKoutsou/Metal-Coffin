@@ -94,7 +94,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 			else:
 				UpgradeButton.visible = true
 				var UpTime = It.UpgradeTime
-				var UpCost = It.UpgradeCost
+				var UpCost = It.UpgradeVersion.Cost
 				if (CanUpgrade):
 					UpTime /= 2
 					UpCost /= 2
@@ -208,7 +208,7 @@ func SetData(Box : Inventory_Box, UpgradeBoost : bool, CanUpgrade : bool, CanTra
 			else:
 				UpgradeButton.visible = CanUpgrade
 				var UpTime = It.UpgradeTime
-				var UpCost = It.UpgradeCost
+				var UpCost = It.UpgradeVersion.Cost
 				if (CanUpgrade):
 					UpTime /= 2
 					UpCost /= 2

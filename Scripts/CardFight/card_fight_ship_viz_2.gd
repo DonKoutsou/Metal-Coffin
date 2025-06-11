@@ -28,14 +28,35 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 
 signal OnFallbackPressed()
 
+var Fr : bool
+
 func _ready() -> void:
 	ToggleFire(false)
 
+func Pop(t : bool):
+	var PopTween = create_tween()
+	var FinalPos : Vector2 = Vector2(0, 50)
+	if (t):
+		if (Fr):
+			FinalPos.x = 270
+		else:
+			FinalPos.x = -90
+	else:
+		if (Fr):
+			FinalPos.x = 180
+		else:
+			FinalPos.x = 0
+	PopTween.set_ease(Tween.EASE_OUT)
+	PopTween.set_trans(Tween.TRANS_QUAD)
+	PopTween.tween_property($HBoxContainer/Control, "position", FinalPos, 0.2)
+	await PopTween.finished
+	
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
+	Fr = Friendly
 	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
 	ShipIcon.get_child(0).texture = S.ShipIcon
-	HullLabel.text = "{0}/{1}".format([snapped(S.CurrentHull + S.Shield, 0.1), S.Hull]).replace(".0", "")
+	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	HullBar.max_value = S.Hull
 	ShieldBar.max_value = S.Hull
 	HullBar.value = S.CurrentHull
@@ -86,7 +107,7 @@ func UpdateStats(S : BattleShipStats) -> void:
 	var HullTween = create_tween()
 	HullTween.tween_property(HullBar, "value", S.CurrentHull, 1)
 	#HullBar.value = S.CurrentHull
-	HullLabel.text = "{0}/{1}".format([snapped(S.CurrentHull + S.Shield, 0.1), S.Hull]).replace(".0", "")
+	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	var ShieldTween = create_tween()
 	ShieldTween.tween_property(ShieldBar, "value", S.Shield, 1)
 	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")

@@ -347,7 +347,7 @@ func FindRefugeForShip(Ship : HostileShip) -> MapSpot:
 	
 	var DistToSpot = 9999999999
 	
-	var DistToEnemy = 0
+	#var DistToEnemy = 0
 	
 	var RefugeSpot
 	
@@ -365,10 +365,10 @@ func FindRefugeForShip(Ship : HostileShip) -> MapSpot:
 		
 		var DistToDanger = GetClosestKnownDanger(spot.global_position).distance_to(spot.global_position)
 		
-		if (DistToDanger < DistToEnemy):
+		if (DistToDanger < D):
 			continue
 		
-		DistToEnemy = DistToDanger
+		#DistToEnemy = DistToDanger
 		DistToSpot = D
 		RefugeSpot = spot
 		if (DistToSpot < 10):

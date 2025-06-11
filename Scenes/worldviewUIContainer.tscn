@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5vi65a1j0fjf"]
+[gd_scene load_steps=7 format=3 uid="uid://dlkrd1kwoocdb"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_jidor"]
-[ext_resource type="Script" uid="uid://cs5fudgijb2eo" path="res://Scripts/WorldView/worldview_notif.gd" id="2_hjag5"]
-[ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_jidor"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_rbex0"]
+[ext_resource type="Script" uid="uid://c6pk6gqsxutl2" path="res://Scripts/WorldView/worldview_ui_container.gd" id="2_6pg0c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pg0c"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
@@ -44,19 +43,21 @@ expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
 [node name="WorldviewNotif" type="PanelContainer" node_paths=PackedStringArray("Negativebar", "Possetivebar")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -531.0
-offset_top = 50.0
-offset_right = -53.0
-offset_bottom = 116.0
-grow_horizontal = 0
-theme_override_styles/panel = ExtResource("1_jidor")
-script = ExtResource("2_hjag5")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -33.0
+offset_right = 239.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_rbex0")
+script = ExtResource("2_6pg0c")
 Negativebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")
 Possetivebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar2")
-DamageFloaterScene = ExtResource("3_jidor")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -77,6 +78,7 @@ text = "AGITATION"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
@@ -89,6 +91,7 @@ size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_6pg0c")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4iy22")
 step = 1.0
+value = 48.0
 fill_mode = 1
 show_percentage = false
 
@@ -99,5 +102,4 @@ size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_rbex0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cmob4")
 step = 1.0
-value = 11.0
 show_percentage = false

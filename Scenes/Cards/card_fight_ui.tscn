@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cjbda0fdx38c4"]
+[gd_scene load_steps=24 format=3 uid="uid://cjbda0fdx38c4"]
 
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scripts/CardFight/card_fight_ui.gd" id="1_u6pkr"]
@@ -16,8 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://c43kn36ymgltb" path="res://Assets/Sounds/BeepReject.mp3" id="7_xj5gt"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="8_iexgv"]
 [ext_resource type="AudioStream" uid="uid://djpdmpewc6sg" path="res://Assets/Sounds/BeepLong.mp3" id="8_xj5gt"]
+[ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="11_omcrt"]
 [ext_resource type="AudioStream" uid="uid://bj6ftgg07o4t0" path="res://Assets/Sounds/CardIn.mp3" id="12_rpmjo"]
 [ext_resource type="AudioStream" uid="uid://8pdqtyhjkcvr" path="res://Assets/Sounds/CardOut2.mp3" id="13_w3ip8"]
+[ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="19_1bbav"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vuvmf"]
 
@@ -30,7 +32,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert", "PlayerCardPlacementInputBlocker", "HardCardLabel")]
+[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert", "PlayerCardPlacementInputBlocker", "HardCardLabel", "DeckUI", "DiscardPile")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,6 +56,8 @@ BeepNoSound = ExtResource("7_xj5gt")
 BeepLong = ExtResource("8_xj5gt")
 PlayerCardPlacementInputBlocker = NodePath("PlayerCardPlacementInputBlocker")
 HardCardLabel = NodePath("Label")
+DeckUI = NodePath("DeckButton")
+DiscardPile = NodePath("DiscardPile")
 
 [node name="ScreenFrame2" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 38.045)
@@ -71,15 +75,36 @@ mouse_filter = 0
 texture = ExtResource("2_fje4l")
 expand_mode = 1
 
+[node name="DeckButton" parent="." instance=ExtResource("19_1bbav")]
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 1233.0
+offset_top = -590.0
+offset_right = 1233.0
+offset_bottom = -590.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="DiscardPile" parent="." instance=ExtResource("11_omcrt")]
+layout_mode = 1
+offset_left = 592.0
+offset_top = -86.0
+offset_right = 592.0
+offset_bottom = -86.0
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 566.0
-offset_top = 172.0
-offset_right = 603.0
-offset_bottom = 194.0
+offset_left = 574.0
+offset_top = 189.0
+offset_right = 611.0
+offset_bottom = 210.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 16
 text = "?"
@@ -167,10 +192,10 @@ stretch_mode = 0
 
 [node name="DrawCard" type="TextureButton" parent="." groups=["Buttons"]]
 layout_mode = 2
-offset_left = 1042.0
-offset_top = 172.0
-offset_right = 1083.0
-offset_bottom = 191.0
+offset_left = 1036.0
+offset_top = 184.0
+offset_right = 1078.0
+offset_bottom = 204.0
 texture_normal = ExtResource("7_vuvmf")
 texture_pressed = ExtResource("8_iexgv")
 ignore_texture_size = true
@@ -210,10 +235,11 @@ stretch_mode = 0
 [node name="DiscardInsert" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 1041.0
-offset_top = 266.0
-offset_right = 1241.0
-offset_bottom = 515.0
+offset_left = 1034.0
+offset_top = 271.0
+offset_right = 1226.0
+offset_bottom = 533.0
+scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
 
@@ -225,10 +251,11 @@ mouse_filter = 2
 [node name="DrawInsert" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 1040.0
-offset_top = 200.0
-offset_right = 1243.0
-offset_bottom = 449.0
+offset_left = 1034.0
+offset_top = 212.0
+offset_right = 1227.0
+offset_bottom = 474.0
+scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
 
@@ -240,10 +267,11 @@ mouse_filter = 2
 [node name="PlayInsert" type="PanelContainer" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 1043.0
-offset_top = 105.0
-offset_right = 1240.0
-offset_bottom = 354.0
+offset_left = 1034.0
+offset_top = 126.0
+offset_right = 1226.0
+offset_bottom = 388.0
+scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
 

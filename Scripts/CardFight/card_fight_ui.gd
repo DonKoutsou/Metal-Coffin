@@ -18,6 +18,8 @@ class_name ExternalCardFightUI
 @export var BeepLong : AudioStream
 @export var PlayerCardPlacementInputBlocker : Control
 @export var HardCardLabel : Label
+@export var DeckUI : DeckPileUI
+@export var DiscardPile : DiscardPileUI
 
 signal OnDeckPressed
 signal OnShipFallbackPressed
@@ -36,6 +38,8 @@ func HideInfo() -> void:
 	HardCardLabel.text = "X"
 	EnergyBar.HideAmm()
 	ReservesBar.HideAmm()
+	DeckUI.HideAmm()
+	DiscardPile.HideAmm()
 
 func _ready() -> void:
 	Instance = self
@@ -105,7 +109,13 @@ func InserCardtoPlay(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(20, 5), 0.35)
+	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -5), 0.35)
+	
+	var ScaleTw = create_tween()
+	ScaleTw.set_ease(Tween.EASE_OUT)
+	ScaleTw.set_trans(Tween.TRANS_QUAD)
+	ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.35)
+	
 	PlayCardSound()
 	PlayerCardPlecement.Blocked = false
 	await Movetw.finished
@@ -118,7 +128,7 @@ func InserCardtoPlay(C : Card) -> void:
 	PlayCardInsert.add_child(Cont)
 	Cont.add_child(C)
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(20, -5)
+	C.position = Vector2(15, -5)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
@@ -161,7 +171,7 @@ func InsertCardToDiscard(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(20, 5), 0.5)
+	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(15, 5), 0.5)
 	
 	PlayCardSound()
 	await Movetw.finished
@@ -174,7 +184,7 @@ func InsertCardToDiscard(C : Card) -> void:
 	DiscardInsert.add_child(Cont)
 	Cont.add_child(C)
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(20, -5)
+	C.position = Vector2(15, -5)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
@@ -205,7 +215,7 @@ func OnCardDrawn(C : Card) -> void:
 	Cont.add_child(C)
 	Cont.size = DrawCardInsert.size
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(20, -5)
+	C.position = Vector2(15, -5)
 	Cont.size = Vector2(DrawCardInsert.size.x, 0)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)

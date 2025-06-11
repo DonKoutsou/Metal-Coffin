@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://cdwrypr6ltbch" path="res://Scripts/UI/Damage_Floater.gd" id="1_nmcop"]
 
 [node name="DamageFloater" type="Label"]
-modulate = Color(1, 0.161135, 0.371105, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

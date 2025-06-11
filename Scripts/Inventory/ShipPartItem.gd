@@ -5,7 +5,6 @@ class_name ShipPart
 @export var Upgrades : Array[ShipPartUpgrade]
 @export var UpgradeVersion : ShipPart
 @export var UpgradeTime : float
-@export var UpgradeCost : float
 @export var IsDamaged : bool = false
 @export var PartType : ShipPartType
 

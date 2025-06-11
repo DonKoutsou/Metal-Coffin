@@ -288,18 +288,18 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	DeffenceCard.modulate = Color(1,1,1,0)
 
 	var DefCardTween = create_tween()
-	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.4)
+	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.3)
 	
 	var UpTween = create_tween()
 	UpTween.set_ease(Tween.EASE_OUT)
 	UpTween.set_trans(Tween.TRANS_BACK)
-	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y - 10), 0.4)
+	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y - 10), 0.3)
 	await UpTween.finished
 	
 	var DownTween = create_tween()
 	DownTween.set_ease(Tween.EASE_OUT)
 	DownTween.set_trans(Tween.TRANS_BACK)
-	DownTween.tween_property(DeffenceCard, "position", pos, 0.4)
+	DownTween.tween_property(DeffenceCard, "position", pos, 0.2)
 	await DownTween.finished
 	
 	AnimationFinished.emit()
@@ -320,18 +320,18 @@ func DoDraw(User : Control) -> void:
 	DeffenceCard.modulate = Color(1,1,1,0)
 
 	var DefCardTween = create_tween()
-	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.4)
+	DefCardTween.tween_property(DeffenceCard, "modulate", Color(1,1,1,1), 0.2)
 	
 	var UpTween = create_tween()
 	UpTween.set_ease(Tween.EASE_OUT)
 	UpTween.set_trans(Tween.TRANS_BACK)
-	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y - 10), 0.4)
+	UpTween.tween_property(DeffenceCard, "position", Vector2(pos.x, pos.y - 10), 0.3)
 	await UpTween.finished
 	
 	var DownTween = create_tween()
 	DownTween.set_ease(Tween.EASE_OUT)
 	DownTween.set_trans(Tween.TRANS_BACK)
-	DownTween.tween_property(DeffenceCard, "position", pos, 0.4)
+	DownTween.tween_property(DeffenceCard, "position", pos, 0.3)
 	await DownTween.finished
 	
 	AnimationFinished.emit()

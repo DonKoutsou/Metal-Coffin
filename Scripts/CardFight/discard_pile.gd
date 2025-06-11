@@ -1,12 +1,15 @@
-extends TextureRect
+extends Control
 
 class_name DiscardPileUI
 
-@export var CardThing : PackedScene
+#@export var CardThing : PackedScene
 
 var DeckHoverTween : Tween
 
 var CurrentAmm : int = 0
+
+func HideAmm() -> void:
+	$Label.text = "X"
 
 func UpdateDiscardPileAmmount(NewAmm : int) -> void:
 	CurrentAmm = NewAmm
@@ -27,12 +30,12 @@ func OnCardRemoved() -> void:
 	DeckHoverTween.tween_property(self,"scale", Vector2.ONE, 0.2)
 
 func OnCardDiscarded(CardPos : Vector2) -> void:
-	var C = CardThing.instantiate() as CardViz
-	C.Target = self
-	add_child(C)
-	C.global_position = CardPos
-	
-	await C.Finished
+	#var C = CardThing.instantiate() as CardViz
+	#C.Target = self
+	#add_child(C)
+	#C.global_position = CardPos
+	#
+	#await C.Finished
 	
 	CurrentAmm += 1
 	

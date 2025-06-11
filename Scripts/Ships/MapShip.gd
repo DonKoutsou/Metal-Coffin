@@ -91,7 +91,10 @@ func _draw() -> void:
 
 func Refuel() -> void:
 	if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
-		var SimulationSpeed = SimulationManager.SimSpeed()
+		var Simulationp = 0
+		if (!SimulationManager.IsPaused()):
+			Simulationp = 1
+		var SimulationSpeed = SimulationManager.SimSpeed() * Simulationp
 		var TimeMulti = 0.05
 		
 		if (CurrentPort.HasFuel()):
@@ -108,7 +111,10 @@ func Refuel() -> void:
 
 func Repair() -> void:
 	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and CurrentPort.PlayerRepairReserves > 0):
-		var SimulationSpeed = SimulationManager.SimSpeed()
+		var Simulationp = 0
+		if (!SimulationManager.IsPaused()):
+			Simulationp = 1
+		var SimulationSpeed = SimulationManager.SimSpeed() * Simulationp
 		var TimeMulti = 0.05
 		
 		if (CurrentPort.HasRepair()):
@@ -280,6 +286,8 @@ func Kill() -> void:
 	OnShipDestroyed.emit(self)
 	queue_free()
 	get_parent().remove_child(self)
+	if (CurrentPort != null):
+		CurrentPort.OnSpotDeparture(self)
 
 func IsDead() -> bool:
 	return Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) <= 0

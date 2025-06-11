@@ -20,6 +20,9 @@ func _physics_process(delta: float) -> void:
 	for g in TrailLines:
 		g.Update(delta)
 	
+	if (CurrentPort != null):
+		_HandleRestock()
+	
 	if (Paused):
 		return
 	
@@ -30,9 +33,6 @@ func _physics_process(delta: float) -> void:
 	#HandleAcceleration
 	if (AccelChanged):
 		_HandleAccelerationSound()
-
-	if (CurrentPort != null):
-		_HandleRestock()
 
 	if (Docked or GetShipSpeedVec() == Vector2.ZERO):
 		return

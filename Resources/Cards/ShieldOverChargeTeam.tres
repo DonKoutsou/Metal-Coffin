@@ -27,3 +27,4 @@ OnUseModules = Array[ExtResource("2_ywkdi")]([SubResource("Resource_plv6y")])
 Type = 1
 WeapT = 0
 UseConditions = Array[int]([2])
+AllowTier = true

@@ -206,7 +206,7 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 	var SelectedCharInventory = _CharacterInventories[SelectedChar] as CharacterInventory
 	SelectedCharInventory.AddItem(It)
 	OwnerInventory.RemoveItemFromBox(Box)
-	
+	PopUpManager.GetInstance().DoFadeNotif("Transfered {0} to {1}'s inventory".format([It.ItemName, SelectedChar.CaptainName]))
 	
 func GetBoxOwner(Box : Inventory_Box) -> Captain:
 	for g in _CharacterInventories.keys():

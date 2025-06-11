@@ -1,8 +1,8 @@
-extends Button
+extends Control
 
 class_name DeckPileUI
 
-@export var CardThing : PackedScene
+#@export var CardThing : PackedScene
 
 var CurrentAmm : int = 0
 
@@ -14,13 +14,16 @@ func UpdateDeckPileAmmount(NewAmm : int) -> void:
 
 var DeckHoverTween : Tween
 
+func HideAmm() -> void:
+	$Label2.text = "X"
+
 func OnCardAdded(CardPos : Vector2) -> void:
-	var C = CardThing.instantiate() as CardViz
-	C.Target = self
-	add_child(C)
-	C.global_position = CardPos
-	
-	await C.Finished
+	#var C = CardThing.instantiate() as CardViz
+	#C.Target = self
+	#add_child(C)
+	#C.global_position = CardPos
+	#
+	#await C.Finished
 	
 	CurrentAmm += 1
 	$Label2.text = var_to_str(CurrentAmm)
