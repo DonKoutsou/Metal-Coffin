@@ -254,6 +254,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		DockedShip.Cpt = Ship.Cpt
 		Player.GetDroneDock().AddDrone(DockedShip)
 	Player.SetSpeed(Data.Speed)
+	Player.UpdateAltitude(Data.Altitude)
 	var ShipPlecement = Player.get_parent()
 	
 	for Command in Data.FleetData:
@@ -263,6 +264,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		CommanderShip.SetShipPosition(Command.CommanderData.Pos)
 		CommanderShip.global_rotation = Command.CommanderData.Rot
 		CommanderShip.SetSpeed(Command.CommanderData.Speed)
+		CommanderShip.UpdateAltitude(Command.CommanderData.Altitude)
 		for Ship in Command.DockedShips:
 			var DockedShip = DroneScene.instantiate() as Drone
 			DockedShip.Cpt = Ship.Cpt

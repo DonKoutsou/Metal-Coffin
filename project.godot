@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Metal Coffin"
-config/version="0.6.14"
+config/version="0.6.16"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Mobile")
@@ -181,6 +181,8 @@ CommandLine={
 
 [physics]
 
+2d/run_on_separate_thread=true
+3d/physics_engine="Dummy"
 2d/solver/solver_iterations=4
 
 [rendering]
@@ -188,9 +190,9 @@ CommandLine={
 occlusion_culling/bvh_build_quality=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+2d/shadow_atlas/size=128
 textures/default_filters/use_nearest_mipmap_filter=true
 textures/default_filters/anisotropic_filtering_level=0
-camera/depth_of_field/depth_of_field_bokeh_shape=0
 environment/ssao/quality=0
 environment/ssil/quality=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false

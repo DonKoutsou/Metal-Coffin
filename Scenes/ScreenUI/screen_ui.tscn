@@ -378,10 +378,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Speaker" parent="NormalScreen/ScreenUi" instance=ExtResource("33_wetmy")]
-offset_left = 17.0
-offset_top = 13.0
-offset_right = 57.0
-offset_bottom = 53.0
+offset_left = -8.0
+offset_top = 2.0
+offset_right = 32.0
+offset_bottom = 42.0
 frequency = 15.0
 max_rotation = 0.02
 
@@ -413,7 +413,7 @@ offset_left = -465.0
 offset_right = -425.0
 
 [node name="Fan" parent="NormalScreen/ScreenUi" instance=ExtResource("33_xl4i0")]
-position = Vector2(965, -116)
+position = Vector2(989, -122)
 scale = Vector2(1.73438, 1.73438)
 frame_progress = 0.96041
 frequency = 40.0
@@ -759,10 +759,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 679.0
-offset_top = -249.0
-offset_right = -127.0
-offset_bottom = -475.0
+offset_left = 595.0
+offset_top = -237.0
+offset_right = -211.0
+offset_bottom = -463.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
@@ -798,9 +798,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 17.0
-offset_top = -318.0
+offset_top = -303.0
 offset_right = -781.0
-offset_bottom = -535.0
+offset_bottom = -520.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(178, 0)

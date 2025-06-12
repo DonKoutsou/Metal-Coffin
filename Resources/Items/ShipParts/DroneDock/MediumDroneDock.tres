@@ -20,7 +20,6 @@ WType = 5
 Upgrades = Array[ExtResource("4_lntls")]([SubResource("Resource_fmxhr")])
 UpgradeVersion = ExtResource("4_j7t3l")
 UpgradeTime = 600.0
-UpgradeCost = 25000.0
 IsDamaged = false
 PartType = 4
 ItemName = "Drone Dock + 1"

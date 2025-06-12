@@ -20,7 +20,7 @@ class_name WorkShop
 var CurrentShip : MapShip
 var WorkShopMerch : Array[Merchandise]
 
-var HasUpgrade : bool = false
+var HasUpgradeBuff : bool = false
 signal WorkshopClosed
 
 func _physics_process(delta: float) -> void:
@@ -41,7 +41,8 @@ func _physics_process(delta: float) -> void:
 		Descr.SetMerchData(Closest.It, [])
 
 func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise]) -> void:
-	WorkShopMerch.append_array(Merch)
+	HasUpgradeBuff = HasUpgrade
+	WorkShopMerch = Merch
 	for g in Ships:
 		var b = Button.new()
 		ShipButtonsParent.add_child(b)
@@ -242,10 +243,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 		Descriptor.SetEmptyShopData(GetTypeOfBox(Box))
 		Descriptor.connect("ItemAdd", AddItem)
 	else:
-		var HasUp = false
-		if (CurrentShip.Cpt.CurrentPort != ""):
-			HasUp = CurrentShip.CurrentPort.HasUpgrade()
-		Descriptor.SetWorkShopData(Box, HasUp, CurrentShip.Cpt)
+		Descriptor.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
 		Descriptor.connect("ItemAdd", AddItem)
 		Descriptor.connect("ItemRemove", RemoveItem)
 		Descriptor.connect("ItemUpgraded", UpgradeItem)
@@ -260,7 +258,7 @@ func UpdateDescriptor(Box : Inventory_Box) -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
-		desc.SetWorkShopData(Box, HasUpgrade, CurrentShip.Cpt)
+		desc.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
 
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
@@ -269,13 +267,23 @@ func CloseDescriptor() -> void:
 
 func RemoveItem(Box : Inventory_Box) -> void:
 	var Cost = Box.GetContainedItem().Cost
-	
+	var It = Box.GetContainedItem()
 	Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(roundi(Cost / 1000))
 	var PLWallet = World.GetInstance().PlayerWallet
 	PLWallet.AddFunds(Cost)
 	PopUpManager.GetInstance().DoFadeNotif("{0} removed from {1}'s ship")
-	CurrentShip.Cpt.GetCharacterInventory().RemoveItem(Box.GetContainedItem())
+	CurrentShip.Cpt.GetCharacterInventory().RemoveItem(It)
 	RefreshInventory()
+	
+	for g in WorkShopMerch:
+		if (g.It.IsSame(It)):
+			g.Amm += 1
+			return
+	
+	var NewMerch = Merchandise.new()
+	NewMerch.It = It
+	NewMerch.Amm = 1
+	WorkShopMerch.append(NewMerch)
 
 func AddItem(Box : Inventory_Box) -> void:
 	var Type = GetTypeOfBox(Box)
@@ -348,8 +356,8 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		return
 
 	var Cost = UpgradedItem.Cost
-	if (HasUpgrade):
-		Cost /= 2
+	if (HasUpgradeBuff):
+		Cost *= 0.75
 	var PLWallet = World.GetInstance().PlayerWallet
 	if (PLWallet.Funds < Cost):
 		PopUpManager.GetInstance().DoFadeNotif("Cant pay for upgrade")

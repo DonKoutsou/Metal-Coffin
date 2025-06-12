@@ -15,7 +15,7 @@ var Friendly = false
 
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
-
+var FirePos : Vector2
 signal OnShipDestroyed(Mis : Missile)
 
 func SetData(Dat : MissileItem) -> void:
@@ -30,13 +30,12 @@ func TogglePause(t : bool):
 	#SimulationSpeed = i
 
 func GetSpeed() -> float:
-	return Speed * 360
+	return Speed
 
 func GetShipName() -> String:
 	return MissileName
 
 func _ready() -> void:
-	#SimulationSpeed = SimulationManager.SimulationSpeed
 	Paused = SimulationManager.IsPaused()
 	if (FiredBy is not HostileShip):
 		var s = DeletableSound.new()
@@ -46,39 +45,28 @@ func _ready() -> void:
 		s.autoplay = true
 		s.max_distance = 20000
 		get_parent().add_child(s)
-	$AccelPosition.position.x = Speed
+	$AccelPosition.position.x = Speed / 360
 	$Radar_Range.visible = Friendly
+	FirePos = global_position
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
 	if (FoundShips.size() > 0):
 		HoneAtEnemy()
 	
-	var offset = GetShipSpeedVec()
-	
-	#var Col = CheckForBodiesOnTrajectory(offset)
-	#if (Col != null and Col.get_parent() != self and Col.get_parent() != FiredBy):
-		#global_position = Col.global_position
-	#else:
-	var PosBefore = global_position
-	
-	for g in SimulationManager.SimSpeed():
-		global_position += offset
+	var offset = GetShipSpeedVec() * SimulationManager.SimSpeed()
+
+	global_position += offset
 		
-	Distance -= PosBefore.distance_to(global_position)
-		
-	if (Distance <= 0):
+	if (global_position.distance_to(FirePos) > Distance):
 		Kill()
 		
 	$TrailLine.Update(delta)
 	
 func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
 	var Body : Node2D
-	  # Calculate direction and distance
-	#var direction = ((global_position + Dir) - global_position).normalized()
-	#var distance_to_move = Dir
 	
 	var shape_cast = ShapeCast2D.new()
 	add_child(shape_cast)
@@ -192,6 +180,7 @@ func GetSaveData() -> MissileSaveData:
 	dat.MisSpeed = Speed
 	dat.Distance = Distance
 	dat.Scene = scene_file_path
+	dat.FirePos = FirePos
 	return dat
 	
 func OnShipSeen(SeenBy : MapShip):

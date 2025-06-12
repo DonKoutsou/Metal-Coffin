@@ -74,7 +74,7 @@ func DoOffensive(AtackCard : CardStats, Mod : CardModule, DeffenceList : Diction
 					DamageReductionCard = DefCard
 			
 			call_deferred("SpawnVisual", Viz, AttackCard, DefC)
-			await wait(0.2)
+			#await wait(0.2)
 			
 	AttackCard.KillCard(0.35, false)
 
@@ -93,7 +93,7 @@ func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card) -> voi
 	Visual.connect("Reached", TweenEnded.bind(Target , DeffenceCard))
 
 func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
-	await wait (0.15)
+	#await wait (0.15)
 
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
@@ -105,7 +105,7 @@ func SpawnShieldVisual(Target : Control, DefCard : Card) -> void:
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
 
 func SpawnEnergyVisual(Target : Control, DefCard : Card) -> void:
-	await wait (0.15)
+	#await wait (0.15)
 
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
@@ -117,7 +117,7 @@ func SpawnEnergyVisual(Target : Control, DefCard : Card) -> void:
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target))
 
 func SpawnUpVisual(Target : Control, DefCard : Card) -> void:
-	await wait (0.4)
+	#await wait (0.4)
 	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var Visual = BuffVisual.instantiate() as MissileViz
@@ -128,7 +128,7 @@ func SpawnUpVisual(Target : Control, DefCard : Card) -> void:
 	Visual.connect("Reached", BuffTweenEnded.bind(Target))
 
 func SpawnDownVisual(Target : Control, DefCard : Card) -> void:
-	await wait (0.4)
+	#await wait (0.4)
 	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var Visual = DeBuffVisual.instantiate() as MissileViz
@@ -223,32 +223,32 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 			BuffText = "Defence +"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
-			await wait(0.2)
+			#await wait(0.2)
 	else: if (Mod is ShieldCardModule or Mod is MaxShieldCardModule):
 		BuffText = "Shield +"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
-			await wait(0.2)
+			#await wait(0.2)
 	else : if (Mod is CauseFireModule):
 		BuffText = "Fire"
 		for Ship in TargetShips:
 			call_deferred("SpawnUpVisual", Ship, DeffenceCard)
-			await wait(0.2)
+			#await wait(0.2)
 	else : if (Mod is FireExtinguishModule):
 		BuffText = "Fire\nExtinguished"
 		for Ship in TargetShips:
 			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
-			await wait(0.2)
+			#await wait(0.2)
 	else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
 		BuffText = "Energy +"
 		for Ship in TargetShips:
 			call_deferred("SpawnEnergyVisual", Ship, DeffenceCard)
-			await wait(0.2)
+			#await wait(0.2)
 	else : if (Mod is ReserveModule or Mod is MaxReserveModule):
 		BuffText = "Energy\nReserve +"
 		for Ship in TargetShips:
 			call_deferred("SpawnEnergyVisual", Ship, DeffenceCard)
-			await wait(0.2)
+			#await wait(0.2)
 	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
 		if (Mod.StatToDeBuff == CardModule.Stat.FIREPOWER):
 			BuffText = "Firepower -"
@@ -258,17 +258,19 @@ func DoDeffensive(DefCard : CardStats, Mod : CardModule, Performer : BattleShipS
 			BuffText = "Defence -"
 		for Ship in TargetShips:
 			call_deferred("SpawnDownVisual", Ship, DeffenceCard)
-			await wait(0.2)
+			#await wait(0.2)
 	else : if (Mod is CleanseDebuffModule):
 		BuffText = "Debuffs\nCleansed"
-		call_deferred("SpawnShieldVisual", DeffenceCard, DeffenceCard)
-		await wait(0.2)
+		for Ship in TargetShips:
+			call_deferred("SpawnShieldVisual", Ship, DeffenceCard)
+		#call_deferred("SpawnShieldVisual", DeffenceCard, DeffenceCard)
+		#await wait(0.2)
 	else : if (Mod is StackDamageCardModule):
 		BuffText = "Damage +"
 		call_deferred("SpawnUpDamageVisual", DeffenceCard, DeffenceCard)
 		DeffenceCard.KillCard(0.5, false)
 		return
-
+	
 	DeffenceCard.KillCard(0.5, false)
 	if (TargetShips.size() == 0):
 		await wait(0.2)

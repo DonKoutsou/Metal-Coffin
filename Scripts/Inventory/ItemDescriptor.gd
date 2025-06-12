@@ -96,8 +96,8 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 				var UpTime = It.UpgradeTime
 				var UpCost = It.UpgradeVersion.Cost
 				if (CanUpgrade):
-					UpTime /= 2
-					UpCost /= 2
+					UpTime *= 0.75
+					UpCost *= 0.75
 				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
 		
 	else :

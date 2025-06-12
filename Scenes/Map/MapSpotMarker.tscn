@@ -7,16 +7,16 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
 bg_color = Color(0, 0, 0, 1)
 draw_center = false
-border_width_left = 30
-border_width_top = 30
-border_width_right = 30
-border_width_bottom = 30
+border_width_left = 25
+border_width_top = 25
+border_width_right = 25
+border_width_bottom = 25
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 70
 corner_radius_top_right = 70
 corner_radius_bottom_right = 70
 corner_radius_bottom_left = 70
-corner_detail = 3
+corner_detail = 4
 anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_pxthd"]
@@ -321,6 +321,7 @@ offset_right = 69.0
 offset_bottom = -57.0
 grow_horizontal = 2
 mouse_filter = 2
+theme_override_constants/separation = -2
 
 [node name="TextureRect2" type="Label" parent="HBoxContainer"]
 use_parent_material = true

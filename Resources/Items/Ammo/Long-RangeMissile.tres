@@ -8,7 +8,7 @@
 script = ExtResource("3_x23ej")
 MissileScene = ExtResource("2_raeam")
 Distance = 3500
-Speed = 1.0
+Speed = 200.0
 Damage = 200
 Type = 0
 ItemName = "Long-Range Missile"

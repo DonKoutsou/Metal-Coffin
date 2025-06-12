@@ -41,4 +41,4 @@ MaxStackCount = 1
 CardProviding = Array[ExtResource("2_x01tj")]([ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("3_j5fk8"), ExtResource("3_j5fk8"), ExtResource("4_tq668")])
 Tier = 2
 CanTransfer = false
-Cost = 180000
+Cost = 280000

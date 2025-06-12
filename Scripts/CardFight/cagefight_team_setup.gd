@@ -62,7 +62,11 @@ func RemoveFromTeam(B : CaptainButton) -> void:
 	else:
 		PopupManager.GetInstance().DoFadeNotif("{0} removed from Enemy's team".format([B.ContainedCaptain.CaptainName]))
 		EnemyTeam.erase(B.ContainedCaptain)
-	
+		
+	FloatingButton = CharButton.instantiate() as CaptainButton
+	FloatingButton.SetCpt(B.ContainedCaptain)
+	add_child(FloatingButton)
+	FloatingButton.Dissable()
 
 func _physics_process(delta: float) -> void:
 	if (FloatingButton != null):

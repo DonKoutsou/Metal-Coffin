@@ -17,7 +17,6 @@ CurrentValue = 0.0
 script = ExtResource("6_6tdai")
 Upgrades = Array[ExtResource("5_mb8i7")]([SubResource("Resource_pxbaq")])
 UpgradeTime = 2500.0
-UpgradeCost = 85000.0
 IsDamaged = false
 PartType = 2
 ItemName = "ELINT-100 \"Oracle\" "

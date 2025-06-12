@@ -17,7 +17,7 @@ CurrentValue = 0.0
 [resource]
 script = ExtResource("3_ypyoy")
 Upgrades = Array[ExtResource("6_qmdqt")]([SubResource("Resource_8wfub")])
-UpgradeTime = 1500.0
+UpgradeTime = 2000.0
 IsDamaged = false
 PartType = 2
 ItemName = "RA-100"
@@ -26,4 +26,4 @@ MaxStackCount = 1
 CardProviding = Array[ExtResource("1_6ifd7")]([ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("4_3otxc"), ExtResource("4_3otxc")])
 Tier = 2
 CanTransfer = true
-Cost = 250000
+Cost = 280000

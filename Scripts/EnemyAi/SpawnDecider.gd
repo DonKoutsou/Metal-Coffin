@@ -78,9 +78,11 @@ func Init() -> void:
 	sorted_ground_captain_list.sort_custom(SortByCostDescending)
 	sorted_convoy_captain_list.sort_custom(SortByCostDescending)
 	
-func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
+func GetMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
-	var points = GetPointsForPosition(abs(YPos))
+	var points = GetMerchPointsForPosition(abs(YPos))
+	if (HasUp):
+		points *= 2
 	var stage = Happening.GetStageForYPos(YPos)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
@@ -101,9 +103,11 @@ func GetMerchForPosition(YPos: float) -> Array[Merchandise]:
 			points -= m.Cost
 	return available_merch
 
-func GetWorkshopMerchForPosition(YPos: float) -> Array[Merchandise]:
+func GetWorkshopMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
-	var points = GetPointsForPosition(abs(YPos))
+	var points = GetMerchPointsForPosition(abs(YPos))
+	if (HasUp):
+		points *= 2
 	var stage = Happening.GetStageForYPos(YPos)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
@@ -140,6 +144,9 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool) -> Array[C
 
 func GetPointsForPosition(YPos : float) -> int:
 	return roundi(max(50, YPos / 100))
+
+func GetMerchPointsForPosition(YPos : float) -> int:
+	return roundi(max(20, YPos / 500))
 
 func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:
 	var fleet : Array[CaptainSpawnInfo] = []

@@ -179,31 +179,31 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 	
 	if (Friendly):
 		#save index so we can add any replacement on that position
-		var Index = PlayerCombatants.find(Ship)
+		#var Index = PlayerCombatants.find(Ship)
 		PlayerCombatants.erase(Ship)
 		if (PlayerReserves.size() > 0):
 			NewCombatant = PlayerReserves.pop_front()
-			PlayerCombatants.insert(Index, NewCombatant)
+			PlayerCombatants.append(NewCombatant)
 			PlayerReserves.erase(NewCombatant)
 			
 			ShipTurns.insert(TurnPosition, NewCombatant)
 			#ShipTurns.sort_custom(speed_comparator)
-		else:
-			PlayerReserves.insert(Index, null)
+		#else:
+			#PlayerReserves.insert(Index, null)
 	else:
 		#save index so we can add any replacement on that position
-		var Index = EnemyCombatants.find(Ship)
+		#var Index = EnemyCombatants.find(Ship)
 		EnemyCombatants.erase(Ship)
 		
 		if (EnemyReserves.size() > 0):
 			NewCombatant = EnemyReserves.pop_front()
-			EnemyCombatants.insert(Index, NewCombatant)
+			EnemyCombatants.append(NewCombatant)
 			EnemyReserves.erase(NewCombatant)
 			
 			ShipTurns.insert(TurnPosition, NewCombatant)
 			#ShipTurns.sort_custom(speed_comparator)
-		else:
-			EnemyCombatants.insert(Index, null)
+		#else:
+			#EnemyCombatants.insert(Index, null)
 			
 	var Viz = GetShipViz(Ship)
 	var Pos = Viz.global_position
@@ -958,8 +958,6 @@ func PerformTurnFinished(Ship : BattleShipStats) -> void:
 #Refunds cards that consume inventory items if the card wasnt used in the end
 func RefundUnusedCards() -> void:
 	for Ship in PlayerCombatants:
-		if (Ship == null):
-			continue
 		var Acts = ActionList.GetShipsActions(Ship)
 		var viz = GetShipViz(Ship)
 		for z in Acts:
@@ -1017,17 +1015,13 @@ func OnFightEnded(Won : bool) -> void:
 	var Survivors : Array[BattleShipStats]
 	RefundUnusedCards()
 	for g in PlayerCombatants:
-		if g != null:
-			Survivors.append(g)
+		Survivors.append(g)
 	for g in PlayerReserves:
-		if g != null:
-			Survivors.append(g)
+		Survivors.append(g)
 	for g in EnemyCombatants:
-		if g != null:
-			Survivors.append(g)
+		Survivors.append(g)
 	for g in EnemyReserves:
-		if g != null:
-			Survivors.append(g)
+		Survivors.append(g)
 	
 	for g in Survivors:
 		g.Cards.clear()
@@ -1898,12 +1892,10 @@ func GetShipsTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
 	if (IsShipFriendly(Ship)):
 		for g in PlayerCombatants:
-			if (g != null):
-				Team.append(g)
+			Team.append(g)
 	else:
 		for g in EnemyCombatants:
-			if (g != null):
-				Team.append(g)
+			Team.append(g)
 	return Team
 
 
@@ -1911,12 +1903,10 @@ func GetShipEnemyTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
 	if (IsShipFriendly(Ship)):
 		for g in EnemyCombatants:
-			if (g != null):
-				Team.append(g)
+			Team.append(g)
 	else:
 		for g in PlayerCombatants:
-			if (g != null):
-				Team.append(g)
+			Team.append(g)
 	return Team
 
 
@@ -2186,15 +2176,8 @@ func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) 
 
 func UpdateFleetSizeAmmount() -> void:
 	var TeamSize : int
-	for g in PlayerCombatants:
-		if (g != null):
-			TeamSize += 1
-	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + TeamSize])
-	var EnemyTeamSize : int
-	for g in EnemyCombatants:
-		if (g != null):
-			EnemyTeamSize += 1
-	EnemyFleetSizeLabel.text = "Fleet Size\n{0}".format([EnemyReserves.size() + EnemyTeamSize])
+	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + PlayerCombatants.size()])
+	EnemyFleetSizeLabel.text = "Fleet Size\n{0}".format([EnemyReserves.size() + EnemyCombatants.size()])
 	
 
 func ClearCards() -> void:

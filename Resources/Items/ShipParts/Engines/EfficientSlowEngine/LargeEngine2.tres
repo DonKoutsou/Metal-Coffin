@@ -31,7 +31,7 @@ metadata/_custom_type_script = "uid://dfaauelrksdv8"
 [resource]
 script = ExtResource("5_kft5x")
 Upgrades = Array[ExtResource("4_vcqkx")]([SubResource("Resource_y5vig"), SubResource("Resource_05yu7"), SubResource("Resource_lv2ox")])
-UpgradeTime = 2500.0
+UpgradeTime = 2000.0
 IsDamaged = false
 PartType = 1
 ItemName = "EcoDrive-500 \"Preserve\""
@@ -40,4 +40,4 @@ MaxStackCount = 1
 CardProviding = Array[ExtResource("2_cueu2")]([ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("3_mybqa"), ExtResource("3_mybqa")])
 Tier = 2
 CanTransfer = false
-Cost = 100000
+Cost = 200000
