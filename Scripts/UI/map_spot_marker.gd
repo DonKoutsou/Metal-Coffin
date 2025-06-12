@@ -23,14 +23,14 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		var text = TextureRect.new()
 		text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		text.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		text.custom_minimum_size = Vector2(26,26)
+		text.custom_minimum_size = Vector2(18,18)
 		text.texture = g.ItemIcon
 		if (g is UsableItem):
 			text.self_modulate = g.ItecColor
 		text.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		text.use_parent_material = true
 		SpotDropPosition.add_child(text)
-	SpotDropPosition.pivot_offset.y = SpotDropPosition.size.y
+	$HBoxContainer.pivot_offset.y = $HBoxContainer.size.y
 
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
@@ -49,7 +49,7 @@ func OnAlarmRaised(Notify : bool) -> void:
 		add_child(Notif)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	SpotDropPosition.scale = Vector2(1,1) / NewZoom
+	$HBoxContainer.scale = Vector2(1,1) / NewZoom
 	$AnalyzeButton.visible = NewZoom <= 0.5
 
 func EnteredScreen() -> void:

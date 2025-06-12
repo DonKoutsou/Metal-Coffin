@@ -64,5 +64,5 @@ func ActionDeclarationStage4(CustomTime : float) -> void:
 	Tw4.finished.connect(FinishActionDeclaration)
 
 func FinishActionDeclaration() -> void:
-	ActionDeclarationFinished.emit()
 	visible = false
+	ActionDeclarationFinished.emit()

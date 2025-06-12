@@ -434,7 +434,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 	if (Parent is MapSpot):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.LANDING)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
-			ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a town. To visit the town's verdors to resuply you need to land your fleet. To do so click the Land button next to the thrust lever to initiate the landing procedure.", [World.GetInstance().GetMap().GetScreenUi().LandButton], false)
+			ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure.", [World.GetInstance().GetMap().GetScreenUi().LandButton], false)
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
 		for g in GetDroneDock().GetDockedShips():

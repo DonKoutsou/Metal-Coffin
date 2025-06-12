@@ -262,8 +262,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_5x46s")
-SpotNameLabel = NodePath("HBoxContainer/TextureRect2")
-SpotDropPosition = NodePath("HBoxContainer")
+SpotNameLabel = NodePath("HBoxContainer/VBoxContainer/TextureRect2")
+SpotDropPosition = NodePath("HBoxContainer/VBoxContainer/HBoxContainer")
 NofiticationScene = ExtResource("2_b0564")
 BeepSound = ExtResource("3_625fb")
 
@@ -312,18 +312,27 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2ey58")
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 use_parent_material = true
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -69.0
-offset_top = -90.0
-offset_right = 69.0
-offset_bottom = -57.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -138.0
+offset_right = -33.0
+offset_bottom = -105.0
+grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="TextureRect2" type="Label" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect2" type="Label" parent="HBoxContainer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -332,7 +341,7 @@ theme_override_colors/font_shadow_color = Color(0.0522618, 0.0522618, 0.0522618,
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 8
 theme_override_font_sizes/font_size = 18
-text = "Curdawa"
+text = "Cwa"
 vertical_alignment = 1
 justification_flags = 227
 uppercase = true

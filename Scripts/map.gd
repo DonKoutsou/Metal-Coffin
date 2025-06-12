@@ -97,8 +97,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	var SimulationTrigger = TutorialTrigger.instantiate() as TutTrigger
 	SimulationTrigger.Inscreen = false
 	SimulationTrigger.TutorialToShow = ActionTracker.Action.SIMULATION
-	SimulationTrigger.TutorialTitle = "Simulation Managment"
-	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning. Use the [color=#ffc315]Simulation Buttons[/color] to either stop the simulation and think over your plans or speed up the simulations to speed through big protions of your voyage."
+	SimulationTrigger.TutorialTitle = "Simulation Management"
+	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
 	SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
 	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(SimulationTrigger)
 	var triggerpos = pos

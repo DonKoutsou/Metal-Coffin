@@ -74,7 +74,7 @@ func OnRefuelShopPressed() -> void:
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
-		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel your ships! You can see the full ammount of fuel/hull condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
+		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] and [color=#ffc315]hull[/color] condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
 	
 
 func FuelExchangeFinished(Fuel : float, Repair : float) -> void:
@@ -88,7 +88,7 @@ func OnUpgradeShopPressed() -> void:
 	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.WorkShopMerch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.UPGRADE_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
-		ActionTracker.GetInstance().ShowTutorial("Workshop", "In the workshop you can inspect your fleets and choose parts to upgrade. Upgraded parts provide better stats for the ship and also extra [color=#ffc315]cards[/color] for the ship's [color=#ffc315]deck[/color].\n\nEach ship can have one of their parts being upgraded at each time. Upgrade progress updates only while the simulation is running.", [], true)
+		ActionTracker.GetInstance().ShowTutorial("Workshop", "In the workshop you can inspect your fleet and choose parts to [color=#ffc315]Upgrade[/color] or [color=#ffc315]Install[/color].\nUpgraded parts provide better stats and also extra [color=#ffc315]Cards[/color] for the ship's [color=#ffc315]deck[/color].\nEach ship can have only one of their parts being upgraded at each time.\n[color=#ffc315]Upgrade[/color] progress updates only while the simulation is running.", [], true)
 
 func OnMunitionShopToggled() -> void:
 	var Scene = MerchShopScene.instantiate() as MerchShop
@@ -98,7 +98,7 @@ func OnMunitionShopToggled() -> void:
 	Scene.Init(LandedShips, TownSpot.Merch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MERCH_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
-		ActionTracker.GetInstance().ShowTutorial("Munition Shop", "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color]. Some of those items are ment to be used in the overworld while others will provide you with extra [color=#ffc315]cards[/color] in your [color=#ffc315]deck[/color].", [], true)
+		ActionTracker.GetInstance().ShowTutorial("Munition Shop", "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color].\nSome of those [color=#ffc315]Items[/color] are ment to be used in the overworld while others will provide you with extra [color=#ffc315]Cards[/color] for your [color=#ffc315]Deck[/color].", [], true)
 	
 
 func OnItemSold(It : Item) -> void:

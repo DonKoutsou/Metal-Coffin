@@ -14,3 +14,6 @@ func GetCardList() -> Array[CardStats]:
 	List.append_array(DiscardPile)
 
 	return List
+
+func GetCardAmm() -> int:
+	return DeckPile.size() + Hand.size() + DiscardPile.size()

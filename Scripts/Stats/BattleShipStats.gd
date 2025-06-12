@@ -73,3 +73,6 @@ func GetDef() -> float:
 
 func GetWeight() -> float:
 	return Weight
+
+func HasDebuff() -> bool:
+	return DefDebuff > 0 or SpeedDeBuff > 0 or FirePowerDeBuff > 0

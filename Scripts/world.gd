@@ -165,10 +165,16 @@ func ShowArmak():
 	GetMap().GetCamera().ShowArmak()
 
 func SteerTut() -> void:
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CAMERA_CONTROL)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CAMERA_CONTROL)
+		var text = "Use the [color=#ffc315]WASD[/color] keys or [color=#ffc315]Left Click[/color] and drag the mouse to move the camera. To [color=#ffc315]Zoom In/Out[/color] use the [color=#ffc315]Mouse Wheel[/color]."
+		await ActionTracker.GetInstance().ShowTutorial("Camera Controls", text, [], false)
+	
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
 		var text = "Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller"
-		ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust.Handle], false)
+		await ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust.Handle], false)
+	
 
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
@@ -438,7 +444,7 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShi
 		if (g == ActionTracker.Action.RECRUIT and!ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
 			TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
-			var text = "Managing your fleet is key to a successful campaign. Ships in the same fleet share fuel, so adding a ship with extra fuel to a fleet can help it go further. To split or trade fuel between fleets, use the Ship Dock in the controller. To merge fleets, select Regroup and pick the target fleet. Switch between fleets with the Switch Ship button."
+			var text = "Managing your fleet is key to a successful campaign.\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\nSwitch between fleets with the Switch Ship button."
 			ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
 			
 	TutorialsToShow.clear()

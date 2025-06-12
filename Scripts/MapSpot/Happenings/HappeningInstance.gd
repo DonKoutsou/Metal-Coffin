@@ -125,7 +125,7 @@ func NextStage() -> void:
 				
 				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)):
 					ActionTracker.OnActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)
-					var text = "Certain dialogue options require a stat check to happen. This check will determine if the option will have the outcome you want."
+					var text = "Certain dialogue options require a stat check to happen.\nThis check will determine if the option will have the outcome you want or not."
 					ActionTracker.GetInstance().ShowTutorial("Worldview Checks", text, [but], true)
 
 		

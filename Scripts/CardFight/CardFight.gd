@@ -241,7 +241,8 @@ func CreateDecks() -> void:
 		D.DeckPile.shuffle()
 		for Hand in StartingCardAmm:
 			var C = D.DeckPile.pop_front()
-			D.Hand.append(C)
+			if (C != null):
+				D.Hand.append(C)
 			
 		if (IsShipFriendly(g)):
 			PlayerDecks[g] = D
@@ -369,6 +370,7 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	ActionDeclaration.ActionDeclarationFinished.disconnect(RunShipsTurn)
 	
 	var viz = GetShipViz(Ship)
+	var D = GetShipDeck(Ship)
 	viz.Enable()
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
@@ -376,6 +378,10 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):
+		if (D.GetCardAmm() == 0):
+			PopUpManager.GetInstance().DoFadeNotif("{0}'s deck is empty. Turn skipped".format([Ship.Name]))
+			PlayerActionPickingEnded.emit()
+			return
 		ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
@@ -389,6 +395,10 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		
 		PickingMoves = true
 	else:
+		if (D.GetCardAmm() == 0):
+			PopUpManager.GetInstance().DoFadeNotif("{0}'s deck is empty. Turn skipped".format([Ship.Name]))
+			EnemyActionPickedEnded.emit()
+			return
 		EnemyPickingMove = true
 		await HandleDrawCardEnemy(Ship)
 		EnemyActionSelection(Ship)
@@ -496,11 +506,7 @@ func OnCardSelected(C : Card) -> bool:
 			if (g.IsSame(C.CStats)):
 				Ship.Cards.erase(g)
 				break
-		#ShipCards[C.CStats] -= 1
-		#if (ShipCards[C.CStats] == 0):
-			#ShipCards.erase(C.CStats)
-	
-	#var Stats  = C.CStats
+				
 	await HandleModules(Ship, C.CStats)
 	
 	
@@ -535,7 +541,6 @@ func RemoveCard(C : Card) -> void:
 
 	if (Stats.Consume):
 		var ShipCards = CurrentShip.Cards
-		var HasCard = false
 		ShipCards.append(Stats)
 	
 	var viz = GetShipViz(CurrentShip)
@@ -553,14 +558,10 @@ func RemoveCard(C : Card) -> void:
 	D.Hand.append(Stats)
 	ExternalUI.UpdateCardsInHandAmm(D.Hand.size(), MaxCardsInHand)
 	
-	#UpdateHandCards()
 	var c = CardScene.instantiate() as Card
 	c.SetCardBattleStats(CurrentShip, Stats)
-	#c.connect("OnCardPressed", OnCardSelected)
 	
 	ExternalUI.OnCardDrawn(c)
-
-	#call_deferred("DoCardPlecementAnimation", c, C.global_position)
 	
 	C.queue_free()
 
@@ -624,6 +625,11 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			print("{0} cant use {1}, card is scales with energy and ship has none".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.HAS_DEBUFF) and !Ship.HasDebuff()):
+			print("{0} cant use {1}, card is cleansing debuffs and ship has none".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await t.call(AvailableActions)
+			
 		else:
 			print("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
 			var SelectedAction : CardStats = Action.duplicate()
@@ -635,7 +641,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			AvailableActions.erase(Action)
 
 			
-			await HandleModulesEnemy(Ship, SelectedAction)
+			await HandleModules(Ship, SelectedAction)
 			
 			if (SelectedAction.OnPerformModule == null):
 				print("{0} has been added to {1}'s discard pile.".format([SelectedAction.GetCardName(), Ship.Name]))
@@ -659,7 +665,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			AvailableActions = await t.call(AvailableActions)
 	
 	if (FireExtinguishToUse != null):
-		await HandleModulesEnemy(Ship, FireExtinguishToUse)
+		await HandleModules(Ship, FireExtinguishToUse)
 		
 	print("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
 	EnemyActionPickedEnded.emit()
@@ -830,17 +836,10 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 		var Mod = Action.OnPerformModule
 
 		if (Mod is OffensiveCardModule):
-
-			#ActionsToBurn.append(ShipAction)
 			ActionList.RemoveActionFromShip(Ship, Action)
 			var Counter : CardStats
 			var AtackType = Mod.AtackType
-			#var HasDeff = false
-			
-			var anim = ActionAnim.instantiate() as CardOffensiveAnimation
-			#anim.DrawnLine = true
-			AnimationPlecement.add_child(anim)
-			AnimationPlecement.move_child(anim, 1)
+
 
 			#List containing targets and a bool saying if target has def
 			var TargetList : Dictionary[BattleShipStats, Dictionary]
@@ -858,20 +857,26 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 				Data["Def"] = Counter
 				Data["Viz"] = GetShipViz(g)
 				TargetList[g] = Data
+				
+
+			viz.ActionRemoved(Action.Icon)
 			
+			var AtackData = OffensiveAnimationData.new()
 			
-			if (!Action.ShouldConsume()):
-				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
-				Dec.DiscardPile.append(Action)
-				if (Friendly):
-					ExternalUI.DiscardPile.UpdateDiscardPileAmmount(Dec.DiscardPile.size())
-					
-					
+			AtackData.Mod = Mod
+			AtackData.DeffenceList = TargetList
+			
+			var Data : Array[AnimationData]
+			Data.append(AtackData)
+			
+			var DamageCallables : Array[Callable]
 			
 			for g in TargetList:
-				var Def = TargetList[g]["Def"]
 				
-				if (Def != null):
+				var Def = TargetList[g]["Def"] as CardStats
+				
+				if (TargetList[g]["Def"] != null):
+					
 					var TargetViz = TargetList[g]["Viz"]
 					TargetViz.ActionRemoved(Counter.Icon)
 					ActionList.RemoveActionFromShip(g, Counter)
@@ -879,61 +884,35 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 						var TargetDeck = GetShipDeck(g)
 						print("{0} has been added to {1}'s discard pile.".format([Counter.GetCardName(), g.Name]))
 						TargetDeck.DiscardPile.append(Counter)
-						if (!Friendly):
-							ExternalUI.DiscardPile.UpdateDiscardPileAmmount(TargetDeck.DiscardPile.size())
-							anim.DeffenceCardDestroyed.connect(ExternalUI.DiscardPile.OnCardDiscarded)
 							
 					if (!Friendly):
 						DamageNeg += Mod.GetFinalDamage(Ship, Action.Tier)
-
-			viz.ActionRemoved(Action.Icon)
-			
-			anim.DoOffensive(Action, Mod, TargetList, Ship, Friendly)
-			var pos = await anim.AtackCardDestroyed
-			if (Friendly):
-				ExternalUI.DiscardPile.OnCardDiscarded(pos)
-			anim.AnimationFinished.connect(PerformAnimationFinished.bind(Ship, ActionIndex))
-			
-			
-			var DamageCallables : Array[Callable]
-			
-			for g in TargetList:
-				#print("Atack Started")
-				
-				#anim.AtackConnected.connect()
-				#print("Atack connected")
-				var Def = TargetList[g]["Def"] as CardStats
-				if (TargetList[g]["Def"] != null):
+						
 					var CounterMod = Def.OnPerformModule
+					
 					if (CounterMod is DamageReductionCardModule):
 						var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier), Mod.CauseFile, Mod.SkipShield)
 						DamageCallables.append(c)
+						
+					if (CounterMod is CounterCardModule):
+						for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
+							Data.append(await HandleModule(Ship, Def, SDefMod))
 				else:
+					for SAtMod in Mod.OnSuccesfullAtackModules:
+						Data.append(await HandleModule(Ship, Action, SAtMod, TargetList.keys()))
+						
 					var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier), Mod.CauseFile, Mod.SkipShield)
 					DamageCallables.append(c)
-					#anim.AtackConnected.connect(c)
+
+
+			AtackData.Callables = DamageCallables
 			
-			if (DamageCallables.size() > 0):
-				anim.AtackConnected.connect(ConnectMoves.bind(DamageCallables))
+			if (!Action.ShouldConsume()):
+				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
+				Dec.DiscardPile.append(Action)
 			
-			await anim.AtackConnected
-			for g in TargetList:
-				var Def = TargetList[g]["Def"] as CardStats
-				if (Def != null):
-					var CounterMod = Def.OnPerformModule
-					if (CounterMod is CounterCardModule):
-						for d in CounterMod.OnSuccesfullDeffenceModules:
-							if (!Friendly):
-								await HandleModule(Ship, Def, d)
-							else:
-								await HandleModuleEnemy(Ship, Def, d)
-				else:
-					for d in Mod.OnSuccesfullAtackModules:
-						if (Friendly):
-							await HandleModule(Ship, Action, d, TargetList.keys())
-						else:
-							await HandleModuleEnemy(Ship, Action, d, TargetList.keys())
-					break
+			await DoCardAnim(Action, Data, Ship, Friendly)
+			PerformAnimationFinished(Ship, ActionIndex)
 		else:
 			ActionIndex += 1
 			PerformNextActionForShip(Ship, ActionIndex)
@@ -1040,100 +1019,83 @@ func OnFightEnded(Won : bool) -> void:
 #/////////////////////////////////////////////////////////////////////
 
 func HandleModules(Performer : BattleShipStats, C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
+	var AnimData : Array[AnimationData]
 	for Mod in C.OnUseModules.size():
-		if (Mod == C.OnUseModules.size() - 1):
-			await HandleModule(Performer, C ,C.OnUseModules[Mod], Targets)
-		else:
-			HandleModule(Performer, C ,C.OnUseModules[Mod], Targets)
+		var Data : AnimationData
+		
+		Data = await HandleModule(Performer, C ,C.OnUseModules[Mod], Targets)
+		
+		if (Mod < C.OnUseModules.size() - 1):
 			await Helper.GetInstance().wait(0.2)
+			
+		if (Data != null):
+			AnimData.append(Data)
+			
+	if (AnimData.size() > 0):
+		await DoCardAnim(C, AnimData, Performer, true)
 
 
-
-func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> void:
+func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	var AnimData :AnimationData
 	if (Mod is ResupplyModule):
-		await HandleResupply(Performer, C, Mod, Targets)
+		AnimData = await HandleResupply(Performer, C, Mod, Targets)
+		
 	else :if (Mod is CauseFireModule):
-		HandleCauseFire(Performer, C, Mod, Targets)
+		AnimData = await HandleCauseFire(Performer, C, Mod, Targets)
+		
 	else : if (Mod is ReserveModule):
-		await HandleReserveSupply(Performer, C, Mod, Targets)
+		AnimData = await HandleReserveSupply(Performer, C, Mod, Targets)
+		
 	else : if (Mod is ReserveConversionModule):
-		await HandleReserveConversion(Performer, C, Mod, Targets)
+		AnimData = await HandleReserveConversion(Performer, C, Mod, Targets)
+		
 	else : if (Mod is MaxReserveModule):
-		await HandleMaxReserveSupply(Performer, C, Mod, Targets)
+		AnimData = await HandleMaxReserveSupply(Performer, C, Mod, Targets)
+		
 	else : if (Mod is DrawCardModule):
-		HandleDrawDriscard(Performer, Mod)
-	else : if (Mod is CardSpawnModule):
-		var CardToSpawn = Mod.CardToSpawn
-		HandleDrawSpecificCard(Performer, CardToSpawn)
-	else : if (Mod is MultiCardSpawnModule):
-		HandleMultiDrawSpecific(Performer, C, Mod)
-	else: if (Mod is FireExtinguishModule):
-		await HandleFireExtinguish(Performer, C, Mod)
-	else : if (Mod is BuffModule):
-		await HandleBuff(Performer, C, Mod, Targets)
-	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
-		await HandleDeBuff(Performer, C, Mod, Targets)
-	else : if (Mod is ShieldCardModule):
-		await HandleShield(Performer, C, Mod, Targets)
-	else : if (Mod is MaxShieldCardModule):
-		await HandleMaxShield(Performer, C, Mod, Targets)
-	else : if (Mod is SelfDamageModule):
-		await HandleSelfDamage(Performer, C, Mod)
-	else : if (Mod is RecoilDamageModule):
-		var AtackMod = C.OnPerformModule as OffensiveCardModule
-		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
-	else : if (Mod is StackDamageCardModule):
-		await HandleDamageStack(Performer, C, Mod)
-	else : if (Mod is CleanseDebuffModule):
-		await HandleDebuffCleanse(Performer, C, Mod)
-
-func HandleModulesEnemy(Performer : BattleShipStats, C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
-	for Mod in C.OnUseModules.size():
-		if (Mod == C.OnUseModules.size() - 1):
-			await HandleModuleEnemy(Performer, C ,C.OnUseModules[Mod])
+		if (IsShipFriendly(Performer)):
+			HandleDrawDriscard(Performer, Mod)
 		else:
-			HandleModuleEnemy(Performer, C ,C.OnUseModules[Mod])
-			await Helper.GetInstance().wait(0.2)
-
-
-func HandleModuleEnemy(Performer : BattleShipStats, C : CardStats,Mod : CardModule, Targets : Array[BattleShipStats] = []) -> void:
-	if (Mod is ResupplyModule):
-		await HandleResupply(Performer, C, Mod, Targets)
-	else : if (Mod is ReserveModule):
-		await HandleReserveSupply(Performer, C, Mod, Targets)
-	else : if (Mod is ReserveConversionModule):
-		await HandleReserveConversion(Performer, C, Mod, Targets)
-	else : if (Mod is MaxReserveModule):
-		await HandleMaxReserveSupply(Performer, C, Mod, Targets)
-	else : if (Mod is CauseFireModule):
-		await HandleCauseFire(Performer, C, Mod, Targets)
-	else : if (Mod is DrawCardModule):
-		HandleDrawDiscardEnemy(Performer ,Mod)
+			HandleDrawDiscardEnemy(Performer, Mod)
 	else : if (Mod is CardSpawnModule):
-		var CardToSpawn = Mod.CardToSpawn
-		HandleDrawSpecificCardEnemy(Performer, CardToSpawn)
+		if (IsShipFriendly(Performer)):
+			HandleDrawSpecificCard(Performer, Mod.CardToSpawn)
+		else:
+			HandleDrawSpecificCardEnemy(Performer, Mod.CardToSpawn)
+		
+		
 	else : if (Mod is MultiCardSpawnModule):
-		HandleMultiDrawSpecificEnemy(Performer, C, Mod)
-	else : if (Mod is FireExtinguishModule):
-		await HandleFireExtinguish(Performer, C, Mod)
+		if (IsShipFriendly(Performer)):
+			HandleMultiDrawSpecific(Performer, Mod)
+		else:
+			HandleMultiDrawSpecificEnemy(Performer, Mod)
+			
+	else: if (Mod is FireExtinguishModule):
+		AnimData = await HandleFireExtinguish(Performer, C, Mod)
+		
 	else : if (Mod is BuffModule):
-		await HandleBuff(Performer, C, Mod, Targets)
+		AnimData = await HandleBuff(Performer, C, Mod, Targets)
+		
 	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
-		await HandleDeBuff(Performer, C, Mod, Targets)
+		AnimData = await HandleDeBuff(Performer, C, Mod, Targets)
+		
 	else : if (Mod is ShieldCardModule):
-		await HandleShield(Performer, C, Mod, Targets)
+		AnimData = await HandleShield(Performer, C, Mod, Targets)
+		
 	else : if (Mod is MaxShieldCardModule):
-		await HandleMaxShield(Performer, C, Mod, Targets)
+		AnimData = await HandleMaxShield(Performer, C, Mod, Targets)
 	else : if (Mod is SelfDamageModule):
-		await HandleSelfDamage(Performer, C, Mod)
+		AnimData = await HandleSelfDamage(Performer, C, Mod)
 	else : if (Mod is RecoilDamageModule):
 		var AtackMod = C.OnPerformModule as OffensiveCardModule
-		await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
+		AnimData = await HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
 	else : if (Mod is StackDamageCardModule):
-		await HandleDamageStack(Performer, C, Mod)
+		AnimData = await HandleDamageStack(Performer, C, Mod)
 	else : if (Mod is CleanseDebuffModule):
-		await HandleDebuffCleanse(Performer, C, Mod)
+		AnimData = await HandleDebuffCleanse(Performer, Mod)
+	return AnimData
 
+	
 func HandleDrawDriscard(Performer : BattleShipStats, Mod : DrawCardModule) -> void:
 	var D = GetShipDeck(Performer)
 			
@@ -1208,7 +1170,7 @@ func HandleDrawDiscardEnemy(Performer : BattleShipStats,Mod : DrawCardModule) ->
 		PlaceCardInEnemyHand(Performer, g)
 
 
-func HandleResupply(Performer : BattleShipStats, Action : CardStats, Mod : ResupplyModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleResupply(Performer : BattleShipStats, Action : CardStats, Mod : ResupplyModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var resupplyamm = Mod.GetEnergyAmmount(Action.Tier)
 	
 	var Targets : Array[BattleShipStats]
@@ -1229,11 +1191,14 @@ func HandleResupply(Performer : BattleShipStats, Action : CardStats, Mod : Resup
 		TargetViz.append(GetShipViz(g))
 
 		UpdateEnergy(g, g.Energy + resupplyamm, g == Performer and Friendly)
-			
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, [])
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	return Data
+	
 
-
-func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : ReserveModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : ReserveModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var resupplyamm = Mod.GetEnergy(Action.Tier)
 	
 	var Targets : Array[BattleShipStats]
@@ -1254,9 +1219,12 @@ func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : 
 		TargetViz.append(GetShipViz(g))
 		UpdateReserves(g, g.EnergyReserves + resupplyamm, g == Performer and Friendly)
 			
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, [])
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	return Data
 
-func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var resupplyamm = Mod.GetConversionAmmount(Performer.EnergyReserves, Action.Tier)
 	
 	var Friendly = IsShipFriendly(Performer)
@@ -1265,9 +1233,12 @@ func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mo
 
 	UpdateEnergy(Performer, Performer.Energy + resupplyamm, Friendly)
 			
-	await DoDeffenceAnim(Action, Mod, Performer, [GetShipViz(Performer)], Friendly, [])
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = [GetShipViz(Performer)]
+	return Data
 
-func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : MaxReserveModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : MaxReserveModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var resupplyamm = Performer.Energy
 	
 	var Targets : Array[BattleShipStats]
@@ -1289,32 +1260,65 @@ func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod
 		UpdateReserves(g, g.EnergyReserves + resupplyamm, g == Performer and Friendly)
 	
 	UpdateEnergy(Performer, 0, Friendly)
-			
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, [])
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	return Data
 
-func HandleFireExtinguish(Performer : BattleShipStats, Action : CardStats, Mod : CardModule) -> void:
+func HandleFireExtinguish(Performer : BattleShipStats, Action : CardStats, Mod : CardModule) -> DeffensiveAnimationData:
 	var viz = GetShipViz(Performer)
-
-	await DoDeffenceAnim(Action, Mod, Performer, [viz], IsShipFriendly(Performer), [viz.ToggleFire.bind(false)])
+	var Callables : Array[Callable]
+	
+	Callables.append(viz.ToggleFire.bind(false))
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets.append(viz)
+	Data.Callables = Callables
+	return Data
 	
 	
-func HandleSelfDamage(Performer : BattleShipStats, Action : CardStats, Mod : SelfDamageModule) -> void:
+func HandleSelfDamage(Performer : BattleShipStats, Action : CardStats, Mod : SelfDamageModule) -> OffensiveAnimationData:
 
 	var Callables : Array[Callable]
 	Callables.append(DamageShip.bind(Performer, Mod.GetFinalDamage(Action.Tier)))
 	
-	await DoOffenceAnim(Action, Mod, [Performer], EnemyCombatants.has(Performer), Callables)
+	var AnimData = OffensiveAnimationData.new()
+	AnimData.Mod = Mod
+	
+	var Data : Dictionary
+	Data["Def"] = null
+	Data["Viz"] = GetShipViz(Performer)
+	var DefList : Dictionary[BattleShipStats, Dictionary]
+	DefList[Performer] = Data
+	AnimData.DeffenceList = DefList
+	
+	AnimData.Callables = Callables
+	
+	return AnimData
 
 
-func HandleRecoil(Performer : BattleShipStats, Action : CardStats, DamageAmm : float, Mod : RecoilDamageModule) -> void:
+func HandleRecoil(Performer : BattleShipStats, Action : CardStats, DamageAmm : float, Mod : RecoilDamageModule) -> OffensiveAnimationData:
 	var Callables : Array[Callable]
 	var Recoil = Mod.GetRecoilAmmount(DamageAmm)
 	Callables.append(DamageShip.bind(Performer, Recoil))
 	
-	await DoOffenceAnim(Action, Mod, [Performer], EnemyCombatants.has(Performer), Callables)
+	var AnimData = OffensiveAnimationData.new()
+	AnimData.Mod = Mod
+	
+	var Data : Dictionary
+	Data["Def"] = null
+	Data["Viz"] = GetShipViz(Performer)
+	var DefList : Dictionary[BattleShipStats, Dictionary]
+	DefList[Performer] = Data
+	AnimData.DeffenceList = DefList
+	AnimData.Callables = Callables
+	
+	return AnimData
 
 
-func HandleShield(Performer : BattleShipStats, Action : CardStats, Mod : ShieldCardModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleShield(Performer : BattleShipStats, Action : CardStats, Mod : ShieldCardModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	#var viz = GetShipViz(Performer)
 	var Targets : Array[BattleShipStats]
 	if (TargetOverride.size() > 0):
@@ -1334,9 +1338,13 @@ func HandleShield(Performer : BattleShipStats, Action : CardStats, Mod : ShieldC
 		TargetViz.append(GetShipViz(g))
 		Callables.append(ShieldShip.bind(g, Mod.GetShieldAmm(Action.Tier)))
 	
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, IsShipFriendly(Performer), Callables)
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data
 
-func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxShieldCardModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxShieldCardModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var ShieldAmm = Performer.Energy * Mod.GetShieldPerEnergy(Action.Tier)
 	
 	var Targets : Array[BattleShipStats]
@@ -1361,9 +1369,13 @@ func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxS
 	
 	UpdateEnergy(Performer, 0, Friendly)
 	
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, Friendly, Callables)
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data
 
-func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : CauseFireModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : CauseFireModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	#var viz = GetShipViz(Performer)
 	var Targets : Array[BattleShipStats]
 	if (TargetOverride.size() > 0):
@@ -1382,19 +1394,26 @@ func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : Caus
 		TargetViz.append(GetShipViz(g))
 		Callables.append(ToggleFireToShip.bind(g, true))
 		
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data
 
 
-func HandleDamageStack(Performer : BattleShipStats, Action : CardStats, Mod : StackDamageCardModule) -> void:
+func HandleDamageStack(Performer : BattleShipStats, Action : CardStats, Mod : StackDamageCardModule) -> DeffensiveAnimationData:
 	var OffensiveModule = Action.OnPerformModule.duplicate() as OffensiveCardModule
 	var NewAction = Action.duplicate()
 	NewAction.OnPerformModule = OffensiveModule
 	Action = NewAction
 	OffensiveModule.Damage += OffensiveModule.Damage * Mod.GetStackDamage(Action.Tier)
 	
-	await DoDeffenceAnim(Action, Mod, Performer, [], EnemyCombatants.has(Performer), [])
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = []
+	return Data
 
-func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var Targets : Array[BattleShipStats]
 	if (TargetOverride.size() > 0):
 		Targets = TargetOverride
@@ -1420,10 +1439,14 @@ func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModul
 			Callables.append(BuffShipSpeed.bind(g, DebuffAmmount, DebuffDurration))
 		else : if (Mod.StatToBuff == CardModule.Stat.DEFENCE):
 			Callables.append(BuffShipDefence.bind(g, DebuffAmmount, DebuffDurration))
-			
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
+		
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data
 
-func HandleDebuffCleanse(Performer : BattleShipStats, Action : CardStats, Mod : CleanseDebuffModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleDebuffCleanse(Performer : BattleShipStats, Mod : CleanseDebuffModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var Targets : Array[BattleShipStats]
 	if (TargetOverride.size() > 0):
 		Targets = TargetOverride
@@ -1442,10 +1465,14 @@ func HandleDebuffCleanse(Performer : BattleShipStats, Action : CardStats, Mod : 
 		TargetViz.append(GetShipViz(g))
 
 		Callables.append(CleanseShipDebuffs.bind(g))
-			
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data
 
-func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardModule, TargetOverride : Array[BattleShipStats] = []) -> void:
+func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var Targets : Array[BattleShipStats]
 	if (TargetOverride.size() > 0):
 		Targets = TargetOverride
@@ -1473,7 +1500,11 @@ func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardMod
 		else : if (Mod.StatToDeBuff == CardModule.Stat.DEFENCE):
 			Callables.append(DeBuffShipDefence.bind(g, DebuffAmmount, DebuffDurration))
 			
-	await DoDeffenceAnim(Action, Mod, Performer, TargetViz, EnemyCombatants.has(Performer), Callables)
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data
 
 func GetTargetIndex(Target : BattleShipStats) -> int:
 	var Index : int
@@ -1633,7 +1664,7 @@ func HandleDrawSpecificCard(Performer : BattleShipStats, Spawn : CardStats) -> v
 	else:
 		c.queue_free()
 
-func HandleMultiDrawSpecific(Performer : BattleShipStats, Action : CardStats, Mod : MultiCardSpawnModule) -> void:
+func HandleMultiDrawSpecific(Performer : BattleShipStats, Mod : MultiCardSpawnModule) -> void:
 	
 	var D = GetShipDeck(Performer)
 	
@@ -1679,7 +1710,7 @@ func HandleMultiDrawSpecific(Performer : BattleShipStats, Action : CardStats, Mo
 	else:
 		c.queue_free()
 
-func HandleMultiDrawSpecificEnemy(Performer : BattleShipStats, Action : CardStats, Mod : MultiCardSpawnModule) -> void:
+func HandleMultiDrawSpecificEnemy(Performer : BattleShipStats, Mod : MultiCardSpawnModule) -> void:
 	
 	var D = GetShipDeck(Performer)
 	
@@ -1717,22 +1748,14 @@ func HandleDrawSpecificCardEnemy(Performer : BattleShipStats,Spawn : CardStats) 
 		await HandleShuffleDiscardedIntoDeck(D)
 	
 	var HasCardInDeck : bool = false
-	
-	var C : CardStats
-	
+
 	for g : CardStats in D.DeckPile:
 		if (Spawn.IsSame(g)):
 			HasCardInDeck = true
-			C = g
 			break
 	
 	if (!HasCardInDeck):
 		HandleShuffleDiscardedIntoDeck(D, false)
-		for g : CardStats in D.DeckPile:
-			if (Spawn.IsSame(g)):
-				HasCardInDeck = true
-				C = g
-				break
 	
 	D.DeckPile.erase(Spawn)
 	
@@ -1742,14 +1765,12 @@ var Shuffling : bool = false
 
 func HandleShuffleDiscardedIntoDeck(D : Deck, DoAnim : bool = true) -> void:
 	Shuffling = true
-	
+	PopUpManager.GetInstance().DoFadeNotif("Shuffling Deck")
 	if (DoAnim):
 		for g in D.DiscardPile.size():
 			await Helper.GetInstance().wait(0.05)
 			ExternalUI.DiscardPile.OnCardRemoved()
 			ExternalUI.DeckUI.OnCardAdded(ExternalUI.DiscardPile.global_position)
-			if (g == D.DiscardPile.size() - 1):
-				await ExternalUI.DeckUI.CardAddFinished
 				
 	D.DeckPile.append_array(D.DiscardPile)
 	D.DiscardPile.clear()
@@ -1765,45 +1786,26 @@ func HandleShuffleDiscardedIntoDeck(D : Deck, DoAnim : bool = true) -> void:
 #██   ██ ██   ████ ██ ██      ██ ██   ██    ██    ██  ██████  ██   ████
 #//////////////////////////////////////////////////////////////////////
 
-func DoDeffenceAnim(Action : CardStats, Mod : CardModule, Performer : BattleShipStats, TargetViz : Array[Control], _FriendShip : bool, ToCallOnContact : Array[Callable]) -> void:
+func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : BattleShipStats, _FriendShip : bool) -> void:
 	#print("Starting Def Anim")
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
-	anim.DoDeffensive(Action, Mod, Performer, TargetViz, _FriendShip)
+	anim.DoAnimation(Action, Data, Performer, _FriendShip)
 	
-	for g in ToCallOnContact:
-		await anim.DeffenceConnected
-		g.call()
-	#print("Deffence Connected")
+	for g in Data:
+		if (g is OffensiveAnimationData):
+			for C in g.Callables:
+				await anim.AtackConnected
+				C.call()
+		else : if (g is DeffensiveAnimationData):
+			for C in g.Callables:
+				await anim.DeffenceConnected
+				C.call()
 	
 	await(anim.AnimationFinished)
-	#print("Animation Finished")
 	anim.visible = false
 	anim.queue_free()
-
-
-func DoOffenceAnim(Action : CardStats, Mod : CardModule, Targets : Array[BattleShipStats], _FriendShip : bool, ToCallOnContact : Array[Callable]) -> void:
-	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
-	AnimationPlecement.add_child(anim)
-	AnimationPlecement.move_child(anim, 1)
-	
-	var targs : Dictionary[BattleShipStats, Dictionary]
-	for g in Targets:
-		targs[g] = {
-			"Def" : null,
-			"Viz" : GetShipViz(g)
-		}
-		
-	anim.DoOffensive(Action, Mod, targs, GetCurrentShip(), _FriendShip)
-	
-	
-	for g in ToCallOnContact:
-		await anim.AtackConnected
-		g.call()
-	
-	await(anim.AnimationFinished)
-
 
 func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User : Control) -> void:
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
@@ -2175,7 +2177,6 @@ func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) 
 		UpdateCardDescriptions(Ship)
 
 func UpdateFleetSizeAmmount() -> void:
-	var TeamSize : int
 	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + PlayerCombatants.size()])
 	EnemyFleetSizeLabel.text = "Fleet Size\n{0}".format([EnemyReserves.size() + EnemyCombatants.size()])
 	
