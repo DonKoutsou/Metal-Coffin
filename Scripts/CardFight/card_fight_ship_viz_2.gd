@@ -30,9 +30,37 @@ signal OnFallbackPressed()
 
 var Fr : bool
 
+func Destroy() -> void:
+	var RandomPos = global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
+	var MoveTw = create_tween()
+	MoveTw.set_ease(Tween.EASE_IN)
+	MoveTw.set_trans(Tween.TRANS_QUAD)
+	MoveTw.tween_property($HBoxContainer/Control/TextureRect, "global_position", RandomPos, 2.5)
+	var ScaleTw = create_tween()
+	ScaleTw.set_ease(Tween.EASE_IN)
+	ScaleTw.set_trans(Tween.TRANS_QUAD)
+	ScaleTw.tween_property($HBoxContainer/Control/TextureRect, "scale", Vector2(0.2, 0.2), 2.5)
+	var RandomRot = randf_range(0, 360)
+	var RotTween = create_tween()
+	RotTween.set_ease(Tween.EASE_IN)
+	RotTween.set_trans(Tween.TRANS_QUAD)
+	RotTween.tween_property($HBoxContainer/Control/TextureRect, "rotation_degrees", RandomRot, 2.5)
+	var ShadowPosTween = create_tween()
+	ShadowPosTween.set_ease(Tween.EASE_IN)
+	ShadowPosTween.set_trans(Tween.TRANS_QUAD)
+	ShadowPosTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "position", Vector2(32.25, 0), 2.5)
+	var ShadowScaleTween = create_tween()
+	ShadowScaleTween.set_ease(Tween.EASE_IN)
+	ShadowScaleTween.set_trans(Tween.TRANS_QUAD)
+	ShadowScaleTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "scale", Vector2(1,1), 2.5)
+	ToggleFire(false)
+	MoveTw.finished.connect(EnableSmoke)
+	$HBoxContainer/VBoxContainer.queue_free()
+	
+
 func _ready() -> void:
 	ToggleFire(false)
-
+	
 func Pop(t : bool):
 	var PopTween = create_tween()
 	var FinalPos : Vector2 = Vector2(0, 50)
@@ -152,6 +180,9 @@ func TweenEnded() -> void:
 func ToggleFire(t : bool) -> void:
 	FirePart.visible = t
 
+func EnableSmoke() -> void:
+	$HBoxContainer/Control/TextureRect/Smoke.visible = true
+
 func ToggleDmgBuff(t : bool, amm : float) -> void:
 	FPBuff.amount = 5 * amm
 	FPBuff.visible = t
@@ -177,10 +208,11 @@ func IsOnFire() -> bool:
 	return FirePart.visible
 
 func ShipDestroyed() -> void:
-	var tw = create_tween()
-	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
-	await tw.finished
-	queue_free()
+	Destroy()
+	#var tw = create_tween()
+	#tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
+	#await tw.finished
+	#queue_free()
 
 func _on_button_pressed() -> void:
 	OnFallbackPressed.emit()

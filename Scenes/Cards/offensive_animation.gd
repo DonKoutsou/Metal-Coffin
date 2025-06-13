@@ -71,7 +71,10 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 					else:
 						DamageReductionCard = DefCard
 				
-				call_deferred("SpawnVisual", Viz, card, DefC)
+				if (Mod is OffensiveCardModule):
+					call_deferred("SpawnVisual", Viz, card, DefC, "Hit")
+				else : if (Mod is RecoilDamageModule):
+					call_deferred("SpawnVisual", Viz, card, DefC, "Recoil")
 				
 		if (AnimData is DeffensiveAnimationData):
 
@@ -136,7 +139,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 		AnimEnded()
 
 
-func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card) -> void:
+func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, FloaterText : String) -> void:
 	#await wait (0.15)
 	
 	AtackCardDestroyed.emit(AtackCard.global_position + (AtackCard.size / 2))
@@ -148,7 +151,7 @@ func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card) -> voi
 	Visual.SpawnPos = AtackCard.global_position + (AtackCard.size / 2)
 	add_child(Visual)
 	
-	Visual.connect("Reached", TweenEnded.bind(Target , DeffenceCard))
+	Visual.connect("Reached", TweenEnded.bind(Target , DeffenceCard, FloaterText))
 
 func SpawnShieldVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
 	#await wait (0.15)
@@ -211,14 +214,14 @@ func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
 
 
-func TweenEnded(Target : Control, DeffenceCard : Card) -> void:
+func TweenEnded(Target : Control, DeffenceCard : Card, FloaterText : String) -> void:
 	AtackConnected.emit()
 	if (DeffenceCard == null):
 		
 		#print("Damage Floater")
 		var d = DamageFloater.instantiate()
 		d.modulate = Color(1,0,0,1)
-		d.text = "Hit"
+		d.text = FloaterText
 		d.connect("Ended", AnimEnded)
 		add_child(d)
 		d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.

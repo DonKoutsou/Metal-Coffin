@@ -208,7 +208,7 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 	var Viz = GetShipViz(Ship)
 	var Pos = Viz.global_position
 	Viz.get_parent().remove_child(Viz)
-	add_child(Viz)
+	$SubViewport/Control2/DeadShipLoc.add_child(Viz)
 	Viz.global_position = Pos
 	var NewVisuals 
 	if (NewCombatant != null):
@@ -216,8 +216,8 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 		NewVisuals.visible = false
 	#Play the dead animation on the ShipViz
 	
-	await Viz.ShipDestroyed()
-	
+	Viz.ShipDestroyed()
+	NewTurnStarted.disconnect(Viz.OnNewTurnStarted)
 	#Get Rid of the viz
 	ShipsViz.erase(Ship)
 	
@@ -767,6 +767,7 @@ func DoCurrentShipFireDamage() -> void:
 			
 			var d = DamageFloater.instantiate() as Floater
 			d.text = "Fire Damage"
+			d.modulate = Color(1,0,0,1)
 			viz.add_child(d)
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
 			d.Ended.connect(DoCurrentShipFireDamage)
@@ -2064,6 +2065,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	if (EnemiesDead or PlayerDead):
 		
 		GameOver = true
+		await Helper.GetInstance().wait(3)
 		call_deferred("OnFightEnded", EnemiesDead)
 		return true
 		

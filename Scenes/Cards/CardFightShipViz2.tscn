@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://chd8i7o8mqa5l"]
+[gd_scene load_steps=27 format=3 uid="uid://chd8i7o8mqa5l"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ydw5a"]
 [ext_resource type="Script" uid="uid://cgsbkqrd6pbkq" path="res://Scripts/CardFight/card_fight_ship_viz_2.gd" id="2_ydw5a"]
 [ext_resource type="Texture2D" uid="uid://b870cywtujqjn" path="res://Assets/Cards/Arrow.png" id="3_avrvh"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_mg5jy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="4_cmntb"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
 
 [sub_resource type="Gradient" id="Gradient_avrvh"]
 offsets = PackedFloat32Array(0, 0.763085, 1)
@@ -108,28 +109,49 @@ colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.957883, 0.775879, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_x4s8m"]
 gradient = SubResource("Gradient_iq4iy")
 
-[sub_resource type="Curve" id="Curve_e1h5p"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0604554), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_wmwbv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_tsd2f"]
-curve = SubResource("Curve_e1h5p")
+curve = SubResource("Curve_wmwbv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_on4wq"]
 particle_flag_disable_z = true
 angle_min = 1.07288e-05
 angle_max = 360.0
-direction = Vector3(0, -1, 0)
+direction = Vector3(0, 0, 0)
 spread = 22.226
-initial_velocity_min = 35.93
-initial_velocity_max = 35.93
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
 angular_velocity_min = -1.60933e-05
 angular_velocity_max = 316.1
 gravity = Vector3(0, 0, 0)
-scale_min = 5.0
-scale_max = 10.0
+scale_min = 15.0
+scale_max = 20.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
+
+[sub_resource type="Gradient" id="Gradient_mg5jy"]
+offsets = PackedFloat32Array(0, 0.147975, 0.272586, 0.825545, 1)
+colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.957883, 0.775879, 0, 1, 0.440007, 0.41714, 0.319656, 1, 0.928817, 0.92606, 0.913978, 1, 0.802, 0.802, 0.802, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wmwbv"]
+gradient = SubResource("Gradient_mg5jy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cmntb"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, 0, 0)
+spread = 8.613
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 58.65
+radial_velocity_min = 2.99998
+radial_velocity_max = 2.99998
+gravity = Vector3(-6, 3, 0)
+scale_curve = SubResource("CurveTexture_tsd2f")
+color_ramp = SubResource("GradientTexture1D_wmwbv")
 
 [node name="CardFightShipViz" type="Control" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "HullBar", "HullLabel", "ShieldBar", "TurnPanel", "SpeedBuff", "SpeedDeBuff", "FPBuff", "FPDeBuff", "FirePart", "FPLabel", "SPDLabel", "HasMovePanel", "ActionParent", "DefBuff", "DefDeBuff", "WeightLabel", "DefenceLabel")]
 custom_minimum_size = Vector2(180, 100)
@@ -139,10 +161,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -360.0
-offset_right = -460.0
-offset_bottom = -260.0
+offset_left = 14.0
+offset_top = -59.0
+offset_right = 194.0
+offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -159,7 +181,7 @@ SpeedBuff = NodePath("SpeedBuff")
 SpeedDeBuff = NodePath("SpeedDeBuff")
 FPBuff = NodePath("FirepowerBuff")
 FPDeBuff = NodePath("FirepowerDeBuff")
-FirePart = NodePath("HBoxContainer/Control/GPUParticles2D")
+FirePart = NodePath("HBoxContainer/Control/TextureRect/GPUParticles2D")
 FPLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label")
 SPDLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2")
 HasMovePanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/Panel")
@@ -393,7 +415,7 @@ offset_left = -26.0
 offset_right = 38.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = -1.5708
+rotation = -1.57079
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(26, 0)
 mouse_filter = 2
@@ -404,26 +426,41 @@ stretch_mode = 3
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/TextureRect"]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
-custom_minimum_size = Vector2(52, 64)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = 18.0
-offset_right = -18.0
-offset_bottom = 82.0
+offset_left = -63.0
+offset_top = 37.0
+offset_right = -63.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(26, 32)
 mouse_filter = 2
 texture = ExtResource("3_mg5jy")
-expand_mode = 2
+expand_mode = 1
 stretch_mode = 3
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/Control"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect"]
+visible = false
+position = Vector2(26, 1.1365e-06)
+scale = Vector2(5.24097, 5.24097)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_on4wq")
+
+[node name="Smoke" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect"]
+visible = false
+position = Vector2(26, 1.1365e-06)
+scale = Vector2(5.24097, 5.24097)
+amount = 50
+texture = ExtResource("6_wmwbv")
+lifetime = 8.0
+speed_scale = 0.7
+randomness = 0.23
+fixed_fps = 20
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_cmntb")
