@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://c16lcf8swpkjk"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://c16lcf8swpkjk"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_6ifd7"]
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="2_5sfyj"]
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="3_71foa"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_ypyoy"]
 [ext_resource type="Resource" uid="uid://cuhyegxnhjaq4" path="res://Resources/Cards/DrawDiscard.tres" id="4_3otxc"]
+[ext_resource type="Resource" uid="uid://jnfgjdqcwc7o" path="res://Resources/Cards/Intercept.tres" id="5_jjqow"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_qmdqt"]
 
 [sub_resource type="Resource" id="Resource_8wfub"]
@@ -23,7 +24,7 @@ PartType = 2
 ItemName = "RA-100"
 ItemDesc = "A superior radar array with far-reaching detection range. Utilizes phased array technology for unparalleled tracking specificity and enhanced situational awareness."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_6ifd7")]([ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("4_3otxc"), ExtResource("4_3otxc")])
+CardProviding = Array[ExtResource("1_6ifd7")]([ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("4_3otxc"), ExtResource("4_3otxc"), ExtResource("5_jjqow"), ExtResource("5_jjqow")])
 Tier = 2
 CanTransfer = true
 Cost = 280000

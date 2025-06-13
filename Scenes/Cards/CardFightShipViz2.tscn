@@ -225,7 +225,7 @@ DefenceLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContain
 [node name="SpeedBuff" type="GPUParticles2D" parent="."]
 visible = false
 modulate = Color(0.311061, 0.899, 0.506367, 1)
-position = Vector2(101, 33)
+position = Vector2(93, 42)
 amount = 5
 texture = ExtResource("3_avrvh")
 lifetime = 3.0
@@ -235,7 +235,7 @@ process_material = SubResource("ParticleProcessMaterial_mg5jy")
 [node name="SpeedDeBuff" type="GPUParticles2D" parent="."]
 visible = false
 modulate = Color(0.311061, 0.899, 0.506367, 1)
-position = Vector2(101, 33)
+position = Vector2(93, 42)
 rotation = 3.14159
 amount = 5
 texture = ExtResource("3_avrvh")

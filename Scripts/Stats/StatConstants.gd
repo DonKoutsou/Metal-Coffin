@@ -18,8 +18,8 @@ const StatMaxValues : Dictionary = {
 	STATS.SENSOR_SLOTS : 2,
 	STATS.FUEL_TANK_SLOTS : 4,
 	STATS.SHIELD_SLOTS : 2,
-	STATS.WEAPON_SLOTS : 10
-	
+	STATS.WEAPON_SLOTS : 10,
+	STATS.MAX_SHIELD : 1000,
 }
 const StatShouldStack : Dictionary = {
 	STATS.FUEL_TANK : true,
@@ -36,7 +36,8 @@ const StatShouldStack : Dictionary = {
 	STATS.SENSOR_SLOTS : false,
 	STATS.FUEL_TANK_SLOTS : false,
 	STATS.SHIELD_SLOTS : false,
-	STATS.WEAPON_SLOTS : false
+	STATS.WEAPON_SLOTS : false,
+	STATS.MAX_SHIELD : true
 }
 
 static func StringToEnum(Stat : String) -> STATS:
@@ -95,4 +96,5 @@ enum STATS{
 	FUEL_TANK_SLOTS,
 	SHIELD_SLOTS,
 	WEAPON_SLOTS,
+	MAX_SHIELD,
 }

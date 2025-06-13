@@ -45,6 +45,7 @@ func GetBattleStats() -> BattleShipStats:
 	var Thrust = _GetStat(STAT_CONST.STATS.THRUST).StatBase
 	var Weight = _GetStat(STAT_CONST.STATS.WEIGHT).StatBase
 	var Fp = _GetStat(STAT_CONST.STATS.FIREPOWER).StatBase
+	var MaxShield = _GetStat(STAT_CONST.STATS.MAX_SHIELD).StatBase
 	
 	stats.ShipIcon = ShipIcon
 	stats.CaptainIcon = CaptainPortrait
@@ -65,6 +66,9 @@ func GetBattleStats() -> BattleShipStats:
 				if (up.UpgradeName == STAT_CONST.STATS.FIREPOWER):
 					Fp += up.UpgradeAmmount
 					Fp -= up.PenaltyAmmount
+				if (up.UpgradeName == STAT_CONST.STATS.MAX_SHIELD):
+					MaxShield += up.UpgradeAmmount
+					MaxShield -= up.PenaltyAmmount
 					
 		if (g is AmmoItem and !HasWeapon(g.WType)):
 			continue
@@ -85,6 +89,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Weight = Weight
 	stats.Cards = c
 	stats.Convoy = false
+	stats.MaxShield = MaxShield
 	return stats
 
 func GetFuelStats() -> Dictionary:

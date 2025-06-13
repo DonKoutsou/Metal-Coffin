@@ -32,7 +32,7 @@ var Fr : bool
 
 func Destroy() -> void:
 	var mat = $HBoxContainer/Control/TextureRect/GPUParticles2D2.process_material as ParticleProcessMaterial
-	mat.scale_max = 1
+	mat.scale_max = 0.6
 	$HBoxContainer/Control/TextureRect/GPUParticles2D2.emitting = true
 	$HBoxContainer/Control/TextureRect/ExplosionSound.play()
 	var RandomPos = $HBoxContainer/Control/TextureRect.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
@@ -58,13 +58,21 @@ func Destroy() -> void:
 	ShadowScaleTween.set_trans(Tween.TRANS_QUAD)
 	ShadowScaleTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "scale", Vector2(1,1), 3)
 	ToggleFire(false)
+	ToggleDefBuff(false, 1)
+	ToggleDefDeBuff(false)
+	ToggleDmgBuff(false, 1)
+	ToggleDmgDebuff(false)
+	ToggleSpeedBuff(false, 1)
+	ToggleSpeedDebuff(false)
+	
+	
 	EnableSmoke()
 	$HBoxContainer/VBoxContainer/PanelContainer2.queue_free()
 	
 	await MoveTw.finished
 	$HBoxContainer/Control/TextureRect/LandSound.play()
 	#var mat = $HBoxContainer/Control/TextureRect/GPUParticles2D2.process_material as ParticleProcessMaterial
-	mat.scale_max = 0.2
+	mat.scale_max = 0.1
 	$HBoxContainer/Control/TextureRect/GPUParticles2D2.restart()
 	$HBoxContainer/Control/TextureRect/GPUParticles2D2.emitting = true
 	
@@ -98,7 +106,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	ShipIcon.get_child(0).texture = S.ShipIcon
 	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	HullBar.max_value = S.Hull
-	ShieldBar.max_value = S.Hull
+	ShieldBar.max_value = S.MaxShield
 	HullBar.value = S.CurrentHull
 	ShieldBar.value = 0
 	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")

@@ -598,6 +598,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Name = GetShipName()
 	stats.Funds = Cpt.ProvidingFunds
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	stats.MaxShield =  Cpt.GetStatFinalValue(STAT_CONST.STATS.MAX_SHIELD)
 	stats.Convoy = Convoy
 	stats.Cards = Cpt.GetCardList()
 	return stats

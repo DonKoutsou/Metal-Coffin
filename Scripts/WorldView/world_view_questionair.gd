@@ -82,7 +82,7 @@ func DissText() -> void:
 	DissapearingTween = create_tween()
 	DissapearingTween.set_ease(Tween.EASE_OUT)
 	DissapearingTween.set_trans(Tween.TRANS_QUAD)
-	DissapearingTween.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,0), 0.5)
+	DissapearingTween.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,0), 0.25)
 	await DissapearingTween.finished
 	DissapearingTween = null
 	
@@ -94,7 +94,7 @@ func NextButtonPressed() -> void:
 	var Tw2 = create_tween()
 	Tw2.set_ease(Tween.EASE_OUT)
 	Tw2.set_trans(Tween.TRANS_QUAD)
-	Tw2.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,1), 0.5)
+	Tw2.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,1), 0.25)
 	if (ShowingOutro):
 		CurrentOutroDialogue += 1
 		if (OutroDialogue.size() <= CurrentOutroDialogue):
@@ -121,7 +121,7 @@ func SkipButton() -> void:
 	var Tw2 = create_tween()
 	Tw2.set_ease(Tween.EASE_OUT)
 	Tw2.set_trans(Tween.TRANS_QUAD)
-	Tw2.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,1), 0.5)
+	Tw2.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,1), 0.25)
 	if (ShowingOutro):
 		Ended.emit()
 		$VBoxContainer.visible = false
@@ -138,7 +138,7 @@ func UpdateQuestion() -> void:
 	var Tw2 = create_tween()
 	Tw2.set_ease(Tween.EASE_OUT)
 	Tw2.set_trans(Tween.TRANS_QUAD)
-	Tw2.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,1), 0.5)
+	Tw2.tween_property($VBoxContainer/Control, "modulate", Color(1,1,1,1), 0.25)
 	
 	if (PickedQuestions.size() <= CurrentQuestion):
 		ShowingOutro = true

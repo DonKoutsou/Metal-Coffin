@@ -2,5 +2,5 @@ extends Object
 
 class_name CardFightAction
 
-var Targets : Array[int]
+var Targets : Array[BattleShipStats]
 var Action : CardStats

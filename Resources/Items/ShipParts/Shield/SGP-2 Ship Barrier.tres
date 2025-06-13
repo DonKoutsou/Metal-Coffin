@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://cs6mrrxnafmbt"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://cs6mrrxnafmbt"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_eopay"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_lb2hx"]
@@ -14,9 +14,17 @@ UpgradeAmmount = 100.0
 PenaltyAmmount = 0.0
 CurrentValue = 100.0
 
+[sub_resource type="Resource" id="Resource_lb2hx"]
+script = ExtResource("4_85e80")
+UpgradeName = 15
+UpgradeAmmount = 200.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("5_enexi")
-Upgrades = Array[ExtResource("4_85e80")]([SubResource("Resource_x1aim")])
+Upgrades = Array[ExtResource("4_85e80")]([SubResource("Resource_x1aim"), SubResource("Resource_lb2hx")])
 UpgradeVersion = ExtResource("3_eopay")
 UpgradeTime = 240.0
 IsDamaged = false

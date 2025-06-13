@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Metal Coffin"
-config/version="0.6.16"
+config/version="0.6.17"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Mobile")
@@ -198,3 +198,4 @@ environment/ssil/quality=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/glow/upscale_mode=0
 environment/volumetric_fog/use_filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

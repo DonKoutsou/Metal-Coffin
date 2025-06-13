@@ -114,7 +114,9 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 			else : if (Mod is ReserveModule or Mod is MaxReserveModule):
 				for Ship in TargetShips:
 					call_deferred("SpawnEnergyVisual", Ship, card, "Energy\nReserve +")
-
+			else : if (Mod is InterceptModule):
+				for Ship in TargetShips:
+					call_deferred("SpawnShieldVisual", Ship, card, "Interceptor")
 					
 			else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
 				var BuffText : String

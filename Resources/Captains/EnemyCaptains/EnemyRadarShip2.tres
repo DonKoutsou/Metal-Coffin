@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=45 format=3 uid="uid://dakrxyltg3y8x"]
+[gd_resource type="Resource" script_class="Captain" load_steps=46 format=3 uid="uid://dakrxyltg3y8x"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_dwq70"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7ui3p"]
@@ -153,6 +153,14 @@ StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_nm1k5"]
+script = ExtResource("2_7ui3p")
+StatName = 15
+StatBase = 200.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_lt3ml")
@@ -160,7 +168,7 @@ CaptainName = "R2"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_dwq70")
 ShipIcon = ExtResource("14_baw5i")
-CaptainStats = Array[ExtResource("2_7ui3p")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym"), SubResource("Resource_ey4en"), SubResource("Resource_l56e0"), SubResource("Resource_nat6l"), SubResource("Resource_vcm85"), SubResource("Resource_33b80"), SubResource("Resource_yo27p"), SubResource("Resource_u2ux1")])
+CaptainStats = Array[ExtResource("2_7ui3p")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym"), SubResource("Resource_ey4en"), SubResource("Resource_l56e0"), SubResource("Resource_nat6l"), SubResource("Resource_vcm85"), SubResource("Resource_33b80"), SubResource("Resource_yo27p"), SubResource("Resource_u2ux1"), SubResource("Resource_nm1k5")])
 ShipCallsign = "R2"
 StartingItems = Array[ExtResource("3_uv4n8")]([ExtResource("19_nat6l"), ExtResource("20_vcm85"), ExtResource("22_yo27p"), ExtResource("22_u2ux1"), ExtResource("25_3uti3"), ExtResource("26_gdx68"), ExtResource("27_5lree"), ExtResource("27_5lree"), ExtResource("27_5lree"), ExtResource("27_5lree"), ExtResource("27_5lree"), ExtResource("27_5lree"), ExtResource("28_pltfi"), ExtResource("29_nm1k5"), ExtResource("29_nm1k5"), ExtResource("29_nm1k5"), ExtResource("29_nm1k5"), ExtResource("29_nm1k5"), ExtResource("29_nm1k5"), ExtResource("29_butqu"), ExtResource("29_up2xx"), ExtResource("29_up2xx"), ExtResource("29_up2xx"), ExtResource("29_up2xx"), ExtResource("29_up2xx"), ExtResource("29_up2xx")])
 CurrentPort = ""

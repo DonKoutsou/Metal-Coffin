@@ -6,6 +6,7 @@ class_name BattleShipStats
 @export var CurrentHull : float
 @export var Hull : float
 @export var Shield : float
+@export var MaxShield : float
 @export var FirePower : float
 @export var FirePowerBuff : float = 1
 @export var FirePowerDeBuff : float = 0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=27 format=3 uid="uid://c6f3bxpe2rsxd"]
+[gd_resource type="Resource" script_class="Captain" load_steps=28 format=3 uid="uid://c6f3bxpe2rsxd"]
 
 [ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="1_min30"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_sorvc"]
@@ -138,13 +138,21 @@ StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_ti2mu"]
+script = ExtResource("2_sorvc")
+StatName = 15
+StatBase = 200.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
 [resource]
 script = ExtResource("4_ti2mu")
 CaptainName = "Baron"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_min30")
 ShipIcon = ExtResource("7_tb2uj")
-CaptainStats = Array[ExtResource("2_sorvc")]([SubResource("Resource_w8w27"), SubResource("Resource_134fm"), SubResource("Resource_an27y"), SubResource("Resource_15w3p"), SubResource("Resource_pasmb"), SubResource("Resource_s1ct5"), SubResource("Resource_8yg4b"), SubResource("Resource_ewkhp"), SubResource("Resource_yi35u"), SubResource("Resource_lfaem"), SubResource("Resource_0vq7m"), SubResource("Resource_5tody"), SubResource("Resource_min30"), SubResource("Resource_sorvc"), SubResource("Resource_jg56d")])
+CaptainStats = Array[ExtResource("2_sorvc")]([SubResource("Resource_w8w27"), SubResource("Resource_134fm"), SubResource("Resource_an27y"), SubResource("Resource_15w3p"), SubResource("Resource_pasmb"), SubResource("Resource_s1ct5"), SubResource("Resource_8yg4b"), SubResource("Resource_ewkhp"), SubResource("Resource_yi35u"), SubResource("Resource_lfaem"), SubResource("Resource_0vq7m"), SubResource("Resource_5tody"), SubResource("Resource_min30"), SubResource("Resource_sorvc"), SubResource("Resource_jg56d"), SubResource("Resource_ti2mu")])
 ShipCallsign = "P"
 StartingItems = Array[ExtResource("8_bl7ko")]([ExtResource("9_3eyyc"), ExtResource("10_nrwnm"), ExtResource("11_lfaem"), ExtResource("11_lfaem")])
 CurrentPort = ""
