@@ -1556,21 +1556,17 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
 		var Team = GetShipsTeam(User)
-				
+		if (!Mod.SelfUse):
+			Team.erase(User)
 		#If aoe pick all team either if enemy of player
 		if (Mod.AOE):
 			for g in Team:
 				Targets.append(g)
-			if (!Mod.SelfUse):
-				Targets.erase(User)
-				
 		else: if Team.size() == 1:
 			Targets.append(Team[0])
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Mod.CanBeUsedOnOther:
 			if (Friendly):
-				if (!Mod.SelfUse):
-					Team.erase(User)
 				TargetSelect.SetEnemies(Team)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
@@ -1578,7 +1574,10 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 					Targets.append(Target)
 				SelectingTarget = false
 			else:
-				Targets.append(EnemyCombatants.pick_random())
+				if (Mod is BuffModule):
+					Targets.append(GetTargetWithBiggestStat(Team, Mod.Stat))
+				else:
+					Targets.append(EnemyCombatants.pick_random())
 		#if nothing of the above counts pick the user as the target
 		else:
 			Targets = [User]
@@ -1600,7 +1599,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 					Targets.append(Target)
 				SelectingTarget = false
 			else:
-				Targets.append(GetBestTargetForAtack(PlayerCombatants))
+				Targets.append(GetBestTargetForAtack(EnemyTeam))
 	
 	return Targets
 
@@ -1613,6 +1612,25 @@ func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipSta
 		if (CurrentBiggestPoints > Points):
 			CurrentTarget = g
 			CurrentBiggestPoints = Points
+	
+	return CurrentTarget
+
+func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModule.Stat) -> BattleShipStats:
+	var CurrentBiggestStat: float = 0
+	var CurrentTarget : BattleShipStats
+	
+	for g in Candidates:
+		var Stat : float
+		if (St== CardModule.Stat.FIREPOWER):
+			Stat = g.GetFirePower()
+		else : if (St == CardModule.Stat.SPEED):
+			Stat = g.GetSpeed()
+		else : if (St == CardModule.Stat.DEFENCE):
+			Stat = g.GetDef()
+
+		if (CurrentBiggestStat < Stat):
+			CurrentTarget = g
+			CurrentBiggestStat = Stat
 	
 	return CurrentTarget
 
