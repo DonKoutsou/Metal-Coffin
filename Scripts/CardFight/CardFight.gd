@@ -1059,10 +1059,12 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, 
 		else:
 			HandleDrawDiscardEnemy(Performer, Mod)
 	else : if (Mod is CardSpawnModule):
+		var CardToSpawn = Mod.CardToSpawn.duplicate() as CardStats
+		CardToSpawn.Tier = C.Tier
 		if (IsShipFriendly(Performer)):
-			HandleDrawSpecificCard(Performer, Mod.CardToSpawn)
+			HandleDrawSpecificCard(Performer, CardToSpawn)
 		else:
-			HandleDrawSpecificCardEnemy(Performer, Mod.CardToSpawn)
+			HandleDrawSpecificCardEnemy(Performer, CardToSpawn)
 		
 		
 	else : if (Mod is MultiCardSpawnModule):
@@ -1233,10 +1235,11 @@ func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mo
 	UpdateReserves(Performer, 0, Friendly)
 
 	UpdateEnergy(Performer, Performer.Energy + resupplyamm, Friendly)
-			
+	var TargetViz : Array[Control]
+	TargetViz.append(GetShipViz(Performer))
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
-	Data.Targets = [GetShipViz(Performer)]
+	Data.Targets = TargetViz
 	return Data
 
 func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : MaxReserveModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
@@ -1408,10 +1411,10 @@ func HandleDamageStack(Performer : BattleShipStats, Action : CardStats, Mod : St
 	NewAction.OnPerformModule = OffensiveModule
 	Action = NewAction
 	OffensiveModule.Damage += OffensiveModule.Damage * Mod.GetStackDamage(Action.Tier)
-	
+	var Targets : Array[Control]
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
-	Data.Targets = []
+	Data.Targets = Targets
 	return Data
 
 func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:

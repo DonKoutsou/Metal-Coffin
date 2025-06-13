@@ -31,34 +31,46 @@ signal OnFallbackPressed()
 var Fr : bool
 
 func Destroy() -> void:
-	var RandomPos = global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
+	var mat = $HBoxContainer/Control/TextureRect/GPUParticles2D2.process_material as ParticleProcessMaterial
+	mat.scale_max = 1
+	$HBoxContainer/Control/TextureRect/GPUParticles2D2.emitting = true
+	$HBoxContainer/Control/TextureRect/ExplosionSound.play()
+	var RandomPos = $HBoxContainer/Control/TextureRect.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	var MoveTw = create_tween()
 	MoveTw.set_ease(Tween.EASE_IN)
 	MoveTw.set_trans(Tween.TRANS_QUAD)
-	MoveTw.tween_property($HBoxContainer/Control/TextureRect, "global_position", RandomPos, 2.5)
+	MoveTw.tween_property($HBoxContainer/Control/TextureRect, "global_position", RandomPos, 3)
 	var ScaleTw = create_tween()
 	ScaleTw.set_ease(Tween.EASE_IN)
 	ScaleTw.set_trans(Tween.TRANS_QUAD)
-	ScaleTw.tween_property($HBoxContainer/Control/TextureRect, "scale", Vector2(0.2, 0.2), 2.5)
-	var RandomRot = randf_range(0, 360)
+	ScaleTw.tween_property($HBoxContainer/Control/TextureRect, "scale", Vector2(0.2, 0.2), 3)
+	var RandomRot = randf_range(-720, 720)
 	var RotTween = create_tween()
 	RotTween.set_ease(Tween.EASE_IN)
 	RotTween.set_trans(Tween.TRANS_QUAD)
-	RotTween.tween_property($HBoxContainer/Control/TextureRect, "rotation_degrees", RandomRot, 2.5)
+	RotTween.tween_property($HBoxContainer/Control/TextureRect, "rotation_degrees", RandomRot, 3)
 	var ShadowPosTween = create_tween()
 	ShadowPosTween.set_ease(Tween.EASE_IN)
 	ShadowPosTween.set_trans(Tween.TRANS_QUAD)
-	ShadowPosTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "position", Vector2(32.25, 0), 2.5)
+	ShadowPosTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "position", Vector2(32.25, 0), 3)
 	var ShadowScaleTween = create_tween()
 	ShadowScaleTween.set_ease(Tween.EASE_IN)
 	ShadowScaleTween.set_trans(Tween.TRANS_QUAD)
-	ShadowScaleTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "scale", Vector2(1,1), 2.5)
+	ShadowScaleTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "scale", Vector2(1,1), 3)
 	ToggleFire(false)
-	MoveTw.finished.connect(EnableSmoke)
-	$HBoxContainer/VBoxContainer.queue_free()
+	EnableSmoke()
+	$HBoxContainer/VBoxContainer/PanelContainer2.queue_free()
+	
+	await MoveTw.finished
+	$HBoxContainer/Control/TextureRect/LandSound.play()
+	#var mat = $HBoxContainer/Control/TextureRect/GPUParticles2D2.process_material as ParticleProcessMaterial
+	mat.scale_max = 0.2
+	$HBoxContainer/Control/TextureRect/GPUParticles2D2.restart()
+	$HBoxContainer/Control/TextureRect/GPUParticles2D2.emitting = true
 	
 
 func _ready() -> void:
+	#Destroy()
 	ToggleFire(false)
 	
 func Pop(t : bool):
