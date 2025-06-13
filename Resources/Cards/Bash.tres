@@ -54,5 +54,5 @@ OnUseModules = Array[ExtResource("3_edcp3")]([])
 OnPerformModule = SubResource("Resource_dubgi")
 Type = 0
 WeapT = 0
-UseConditions = Array[int]([])
+UseConditions = Array[int]([4])
 AllowTier = true

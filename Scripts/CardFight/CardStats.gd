@@ -89,4 +89,5 @@ enum CardUseCondition{
 	NO_SOLO,
 	ENERGY_DEPENDANT,
 	HAS_DEBUFF,
+	ENOUGH_HP,
 }

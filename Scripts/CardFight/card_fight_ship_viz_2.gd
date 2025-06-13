@@ -228,11 +228,11 @@ func IsOnFire() -> bool:
 	return FirePart.visible
 
 func ShipDestroyed() -> void:
-	Destroy()
-	#var tw = create_tween()
-	#tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
-	#await tw.finished
-	#queue_free()
+	#Destroy()
+	var tw = create_tween()
+	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
+	await tw.finished
+	queue_free()
 
 func _on_button_pressed() -> void:
 	OnFallbackPressed.emit()

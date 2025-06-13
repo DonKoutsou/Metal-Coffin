@@ -639,7 +639,10 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			print("{0} cant use {1}, card is cleansing debuffs and ship has none".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
-			
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_HP) and (Ship.CurrentHull / Ship.Hull) * 100 > 10):
+			print("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await t.call(AvailableActions)
 		else:
 			print("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
 			var SelectedAction : CardStats = Action.duplicate()
