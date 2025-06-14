@@ -230,7 +230,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 		else:
 			pos = Vector2(-Offset, Offset)
 			Offset += 10
-
+	drone.ToggleLight(false)
 	var trans = RemoteTransform2D.new()
 	trans.update_rotation = false
 	$DroneSpots.add_child(trans)
@@ -297,7 +297,7 @@ func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)
 
 	drone.Command = null
-	
+	drone.ToggleLight(true)
 	DroneDockEventH.OnDroneUnDocked(drone, get_parent())
 	var docks = $DroneSpots.get_children()
 	for g in docks:

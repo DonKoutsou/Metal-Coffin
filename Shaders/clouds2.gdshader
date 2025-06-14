@@ -1,6 +1,6 @@
 shader_type canvas_item;
 //render_mode blend_disabled; // optional
-
+uniform vec4 cloud_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 // Noise texture
 uniform sampler2D noise_texture: repeat_enable, filter_nearest_mipmap;
 // Fog density
@@ -22,8 +22,8 @@ void fragment() {
     // and clamp it between 0.0 and 1.0 again
     //float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
 	
-	
+	vec4 color = vec4(cloud_color.rgb, noise * density);
     // Apply the fog effect
-    COLOR.a *= noise * density;
+    COLOR = color;
 	//NORMAL_MAP = vec3(0,0,fog * density);
 }

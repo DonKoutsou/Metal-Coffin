@@ -15,7 +15,7 @@ func _ready() -> void:
 		#return
 	if (!LoadingData):
 		position = Pos
-		rotation = randf_range(0, 360)
+		#rotation = randf_range(0, 360)
 		#GenerateCity()
 	
 func GenerateCity(Type : MapSpotType) -> void:
@@ -42,7 +42,7 @@ func GetSpot() -> MapSpot:
 func GetSaveData() -> TownSaveData:
 	var datas = TownSaveData.new().duplicate()
 	datas.TownLoc = position
-	datas.TownRot = rotation
+	#datas.TownRot = rotation
 	datas.TownScenePath = scene_file_path
 	var spotdata : Array[MapSpotSaveData]
 	spotdata.append(Spot.GetSaveData())
@@ -58,7 +58,7 @@ func GetCityName() -> String:
 	
 func LoadSaveData(Dat : TownSaveData) -> void:
 	position = Dat.TownLoc
-	rotation = Dat.TownRot
+	#rotation = Dat.TownRot
 	for g in Dat.Spots.size():
 		var spotdat = Dat.Spots[g] as MapSpotSaveData
 		var sc = SpotScene.instantiate() as MapSpot

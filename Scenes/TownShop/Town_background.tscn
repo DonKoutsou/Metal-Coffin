@@ -187,7 +187,7 @@ frame_progress = 0.543139
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
-modulate = Color(1, 1, 1, 0.1)
+modulate = Color(0.882717, 0.827769, 0.76046, 0.1)
 position = Vector2(1650, -18)
 amount = 20
 texture = ExtResource("5_u7aao")
@@ -216,7 +216,7 @@ scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("6_ly0hr")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
-modulate = Color(1, 1, 1, 0.1)
+modulate = Color(0.882717, 0.827769, 0.76046, 0.1)
 position = Vector2(1650, 99)
 amount = 20
 texture = ExtResource("5_u7aao")

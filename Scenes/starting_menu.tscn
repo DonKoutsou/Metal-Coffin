@@ -1,21 +1,17 @@
-[gd_scene load_steps=49 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=41 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="3_t54ed"]
-[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="4_yrlew"]
-[ext_resource type="Texture2D" uid="uid://dnutjdpy3la0n" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="5_23r0g"]
-[ext_resource type="Texture2D" uid="uid://chdov106pirvg" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="6_t54ed"]
+[ext_resource type="Material" uid="uid://dio5yb12em5uk" path="res://Shaders/StartingMenuGround.tres" id="4_4ybsj"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
-[ext_resource type="Texture2D" uid="uid://jxvcunva5h7a" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="7_23r0g"]
 [ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="9_j43p8"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="11_23r0g"]
-[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
 [ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/Spaceship/Tanker2.png" id="12_23r0g"]
 [ext_resource type="Shader" uid="uid://cmen5pp83lhs2" path="res://Shaders/clouds2.gdshader" id="14_7x35f"]
 [ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
@@ -37,36 +33,6 @@
 [ext_resource type="PackedScene" uid="uid://cix2emi1smed2" path="res://Scenes/InScreenUI/setting_panel2.tscn" id="30_aa43b"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
 [ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/LightCone.png" id="36_j43p8"]
-
-[sub_resource type="Gradient" id="Gradient_eb1s8"]
-offsets = PackedFloat32Array(0.504407, 0.550725)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1p5b6"]
-noise_type = 3
-frequency = 0.0023
-offset = Vector3(7.99, 365.66, 0)
-cellular_distance_function = 2
-cellular_return_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_srpg8"]
-width = 2048
-height = 2048
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_eb1s8")
-noise = SubResource("FastNoiseLite_1p5b6")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
-shader = ExtResource("11_j424g")
-shader_parameter/GroundTexture = ExtResource("6_t54ed")
-shader_parameter/GroundTexture2 = ExtResource("7_23r0g")
-shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_srpg8")
-shader_parameter/GroundNormalTexture = ExtResource("5_23r0g")
-shader_parameter/GroundNormal2Texture = ExtResource("4_yrlew")
-shader_parameter/NormalD = 1.0
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale1 = Vector2(5, 5)
-shader_parameter/Scale2 = Vector2(10, 10)
 
 [sub_resource type="Curve" id="Curve_1p5b6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
@@ -94,6 +60,7 @@ noise = SubResource("FastNoiseLite_a2ujk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2tj7v"]
 shader = ExtResource("14_7x35f")
+shader_parameter/cloud_color = Color(0.809225, 0.775079, 0.725751, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
 shader_parameter/density = 2.114
 shader_parameter/speed = Vector2(0.02, 0.01)
@@ -143,7 +110,7 @@ render_target_update_mode = 4
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 z_index = -1
 texture_filter = 1
-material = SubResource("ShaderMaterial_yrlew")
+material = ExtResource("4_4ybsj")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -325,7 +292,6 @@ layout_mode = 2
 texture = ExtResource("3_s86m3")
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_2tj7v")
 anchors_preset = 15

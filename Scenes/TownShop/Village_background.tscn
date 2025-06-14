@@ -12,6 +12,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
 border_width_top = 375
+border_color = Color(0.832818, 0.744471, 0.644163, 1)
 border_blend = true
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t75tb"]
@@ -81,7 +82,7 @@ texture = ExtResource("3_vcb2a")
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
-modulate = Color(1, 1, 1, 0.1)
+modulate = Color(0.882717, 0.827769, 0.76046, 0.1)
 position = Vector2(1650, -18)
 amount = 20
 texture = ExtResource("4_daw5n")
@@ -110,7 +111,7 @@ scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("5_vcb2a")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
-modulate = Color(1, 1, 1, 0.1)
+modulate = Color(0.882717, 0.827769, 0.76046, 0.1)
 position = Vector2(1650, 99)
 amount = 20
 texture = ExtResource("4_daw5n")

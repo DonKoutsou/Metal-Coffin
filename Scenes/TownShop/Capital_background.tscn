@@ -213,7 +213,7 @@ texture = ExtResource("4_coxqh")
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
-modulate = Color(1, 1, 1, 0.1)
+modulate = Color(0.882717, 0.827769, 0.76046, 0.1)
 position = Vector2(1650, -18)
 amount = 20
 texture = ExtResource("5_6jamx")
@@ -252,7 +252,7 @@ scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("7_p3jms")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
-modulate = Color(1, 1, 1, 0.1)
+modulate = Color(0.882717, 0.827769, 0.76046, 0.1)
 position = Vector2(1650, 99)
 amount = 20
 texture = ExtResource("5_6jamx")
@@ -297,7 +297,7 @@ scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("8_woovf")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer3/Parallax2D"]
-modulate = Color(1, 1, 1, 0.1)
+modulate = Color(0.882717, 0.827769, 0.76046, 0.1)
 position = Vector2(1650, 343)
 amount = 20
 texture = ExtResource("5_6jamx")

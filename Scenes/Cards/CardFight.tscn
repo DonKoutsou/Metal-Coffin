@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=29 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
@@ -12,14 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://6hcd2pi6mky3" path="res://Scenes/Cards/CardFightShipInfo.tscn" id="11_fpjxy"]
 [ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
+[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="14_hlnl3"]
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="14_vn53x"]
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
+[ext_resource type="Material" uid="uid://cleto7y4gyshk" path="res://Shaders/CardfightGround.tres" id="15_hlnl3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
-[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="17_4tlnx"]
-[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="18_kegx7"]
-[ext_resource type="Texture2D" uid="uid://dnutjdpy3la0n" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="19_qcfdq"]
-[ext_resource type="Texture2D" uid="uid://chdov106pirvg" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="20_pw20f"]
-[ext_resource type="Texture2D" uid="uid://jxvcunva5h7a" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="21_qcfdq"]
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="22_gvlad"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="23_d5rtw"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="24_d8sco"]
@@ -28,34 +25,7 @@
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="27_rbthh"]
 [ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
 
-[sub_resource type="Gradient" id="Gradient_aiu8p"]
-offsets = PackedFloat32Array(0.52029, 0.550725)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vxorp"]
-noise_type = 3
-frequency = 0.0011
-cellular_distance_function = 2
-cellular_return_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hn1mp"]
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_aiu8p")
-noise = SubResource("FastNoiseLite_vxorp")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f2au4"]
-shader = ExtResource("17_4tlnx")
-shader_parameter/GroundTexture = ExtResource("20_pw20f")
-shader_parameter/GroundTexture2 = ExtResource("21_qcfdq")
-shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_hn1mp")
-shader_parameter/GroundNormalTexture = ExtResource("19_qcfdq")
-shader_parameter/GroundNormal2Texture = ExtResource("18_kegx7")
-shader_parameter/NormalD = 1.0
-shader_parameter/offset = Vector2(2.37, -2.715)
-shader_parameter/Scale1 = Vector2(2.5, 2.5)
-shader_parameter/Scale2 = Vector2(5, 5)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a2ujk"]
 noise_type = 5
 frequency = 0.0085
 fractal_lacunarity = 5.77
@@ -65,13 +35,14 @@ domain_warp_frequency = 0.015
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
 seamless = true
-noise = SubResource("FastNoiseLite_n7y6y")
+noise = SubResource("FastNoiseLite_a2ujk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xr0yy"]
 shader = ExtResource("22_gvlad")
+shader_parameter/cloud_color = Color(0.809225, 0.775079, 0.725751, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
 shader_parameter/density = 1.229
-shader_parameter/speed = Vector2(0.03, -0.01)
+shader_parameter/speed = Vector2(0.01, -0.003)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
 
@@ -118,6 +89,7 @@ UIEventH = ExtResource("16_734e5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
+world_3d = ExtResource("14_hlnl3")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 size = Vector2i(1280, 720)
@@ -135,7 +107,7 @@ mouse_filter = 2
 [node name="Ground" type="ColorRect" parent="SubViewport/Control2"]
 z_index = -3
 texture_filter = 1
-material = SubResource("ShaderMaterial_f2au4")
+material = ExtResource("15_hlnl3")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -409,11 +381,12 @@ uppercase = true
 color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewport"]
-position = Vector2(463, 292)
+position = Vector2(447, 321)
+color = Color(0.840214, 0.800564, 0.733499, 1)
 blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("32_1im06")
 texture_scale = 30.0
-height = 200.0
+height = 70.0
 
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]

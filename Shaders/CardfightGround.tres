@@ -1,0 +1,42 @@
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://cleto7y4gyshk"]
+
+[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="1_mjecm"]
+[ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="2_8uhgy"]
+[ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="3_ol4lr"]
+[ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="4_sgv5m"]
+[ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="5_d85am"]
+[ext_resource type="Texture2D" uid="uid://cgv0gmhv2v36u" path="res://Assets/Sand/Rock062_1K-PNG_AmbientOcclusion.png" id="6_c1ikg"]
+
+[sub_resource type="Gradient" id="Gradient_eb1s8"]
+offsets = PackedFloat32Array(0.392555, 0.451777)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1p5b6"]
+noise_type = 3
+frequency = 0.0023
+offset = Vector3(7.99, 365.66, 0)
+fractal_octaves = 10
+fractal_lacunarity = 3.0
+cellular_distance_function = 2
+cellular_return_type = 2
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_srpg8"]
+width = 2048
+height = 2048
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_eb1s8")
+noise = SubResource("FastNoiseLite_1p5b6")
+
+[resource]
+shader = ExtResource("1_mjecm")
+shader_parameter/GroundTexture = ExtResource("4_sgv5m")
+shader_parameter/GroundNormalTexture = ExtResource("3_ol4lr")
+shader_parameter/GroundTextureMask = ExtResource("6_c1ikg")
+shader_parameter/GroundTexture2 = ExtResource("5_d85am")
+shader_parameter/GroundNormal2Texture = ExtResource("2_8uhgy")
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_srpg8")
+shader_parameter/NormalD = 0.8
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/Scale1 = Vector2(15, 15)
+shader_parameter/Scale2 = Vector2(10, 10)
