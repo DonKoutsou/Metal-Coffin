@@ -22,10 +22,23 @@ class_name BattleShipStats
 @export var Energy : int
 @export var EnergyReserves : int
 @export var Cards : Array[CardStats]
-@export var FireTurns : int
 #@export var Ammo : Dictionary
 @export var Funds : int
 @export var Convoy : bool
+
+@export var IsOnFire : bool
+@export var TurnsOnFire : int
+
+func IsSeverelyBurnt() -> bool:
+	return TurnsOnFire > 3
+
+func GetFireDamage() -> float:
+	var Dmg = 0
+	if (IsOnFire):
+		Dmg += 10
+		if (IsSeverelyBurnt()):
+			Dmg += 20
+	return Dmg
 
 var FirePowerBuffTime : int = 0
 var FirePowerDeBuffTime : int = 0

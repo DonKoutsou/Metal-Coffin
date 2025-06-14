@@ -143,11 +143,11 @@ default_color = Color(0.908948, 0.280129, 0.164634, 1)
 [node name="DroneDock" parent="." instance=ExtResource("9_82ju4")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.25
+energy = 0.5
 blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
-texture_scale = 2.0
-height = 328.0
+texture_scale = 1.3
+height = 70.0
 
 [connection signal="area_entered" from="ReturnSoundTrigger" to="." method="_on_return_sound_trigger_area_entered"]

@@ -17,7 +17,7 @@ CurrentValue = 150.0
 [sub_resource type="Resource" id="Resource_epvt7"]
 script = ExtResource("4_80e6f")
 UpgradeName = 15
-UpgradeAmmount = 300.0
+UpgradeAmmount = 100.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
@@ -32,7 +32,7 @@ PartType = 5
 ItemName = "SGP-3 Ship Barrier"
 ItemDesc = "A reliable entry-level barrier system designed to provide essential protection against incoming threats. Utilizing a compact energy field generator, it effectively neutralizes missiles and deflects heavy caliber rounds, offering robust frontline defense for smaller vessels engaged in skirmishes."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_us157")]([ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("3_epvt7")])
+CardProviding = Array[ExtResource("1_us157")]([ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("2_epvt7"), ExtResource("3_epvt7"), ExtResource("3_epvt7")])
 Tier = 2
 CanTransfer = false
 Cost = 120000

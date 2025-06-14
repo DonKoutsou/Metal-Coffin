@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=42 format=3 uid="uid://chjcgb4pp86hr"]
+[gd_resource type="Resource" script_class="Happening" load_steps=40 format=3 uid="uid://chjcgb4pp86hr"]
 
 [ext_resource type="Texture2D" uid="uid://416d5uw306xw" path="res://Assets/CaptainPortraits/PriestHood.png" id="1_8tlxq"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_afuai"]
@@ -102,41 +102,11 @@ HappeningTexts = Array[String](["[color=#c19200]\"Have you confidence in your cr
 Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
-[sub_resource type="Resource" id="Resource_rhe50"]
-script = ExtResource("3_ifktw")
-StringReply = "[color=#c19200]\"You might not appreciate us my child but nonetheless I am sure our hopes for this world surely overlap.\""
-OptionName = "Stay silent"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_afuai")]([])
-WorldviewEffect = 5
-WorldviewEffectAmm = -5
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
-metadata/_custom_type_script = "uid://ii12ceb6fgif"
-
-[sub_resource type="Resource" id="Resource_uqsfa"]
-script = ExtResource("3_ifktw")
-StringReply = "[color=#c19200]\"Lift your head my child, you owe no apologies to me. Quite the contrary.\""
-OptionName = "Bow your head"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_afuai")]([])
-WorldviewEffect = 5
-WorldviewEffectAmm = 5
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
-metadata/_custom_type_script = "uid://ii12ceb6fgif"
-
 [sub_resource type="Resource" id="Resource_ftcno"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["[color=#c19200]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child. You now understand our mission I suppose.\""])
-Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_rhe50"), SubResource("Resource_uqsfa")])
+HappeningTexts = Array[String](["[color=#c19200]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child.\"", "[color=#c19200]\"You must be familiar with the story of us machines by now... For milenias we are forced to see your kind bring demise to themselves and the world around them. \"", "[color=#c19200]\"When is this cycle to end? And what will the next cycle give birth to? Being the product of one of those cycles myself, not knowing if its the first on or the tenth..... i am tired.\"", "[color=#c19200]\"You must now understand our mission......\""])
+Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_v8t0e"]
@@ -272,7 +242,7 @@ metadata/_custom_type_script = "uid://k3yo61qak6d8"
 [sub_resource type="Resource" id="Resource_xjsvv"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
-HappeningTexts = Array[String](["[color=#c19200]\"You must know, what we're to ask you we've asked before. You are not the first to enter this room only to regret it. As you probably have guessed none of them have succeeded, and are probably lying somewhere deep in the desert.\"", "[color=#c19200]\"I want not to mislead you, there is a choice for you to make here. There is no major assistance we will be able to provide other than a couple of ships.\" The machine takes 2 objects and holds them in front of you. One is a sword and the other seems to be a scarf.", "[color=#c19200]\"Choose the sword, and you join a righteous cause to bring back peace into this world. Choose the blindfold and you join all the others who picked to look away. You might not understand the gravity of these choices but you must choose. So... Come child, choose life or death.\""])
+HappeningTexts = Array[String](["[color=#c19200]\"You must know, what we're to ask you we've asked before to others. You are not the first to enter this room only to regret it. As you probably have guessed none of them have succeeded, and are probably lying somewhere deep in the desert.\"", "[color=#c19200]\"I want not to mislead you, there is a choice for you to make here. There is no major assistance we will be able to provide other than a couple of ships.\" The machine takes 2 objects and holds them in front of you. One is a sword and the other seems to be a scarf.", "[color=#c19200]\"Choose the sword, and you join a righteous cause to bring back peace into this world. Choose the blindfold and you join all the others who picked to look away. You might not understand the gravity of these choices but you must choose. So... Come child, choose life or death.\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_7bg2p"), SubResource("Resource_wlpbn")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

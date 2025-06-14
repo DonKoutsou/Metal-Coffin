@@ -145,6 +145,9 @@ func _ready() -> void:
 	ExternalUI.HideInfo()
 
 	Helper.GetInstance().CallLater(StartFight, 2)
+	
+	var Mat = $SubViewport/Control2/Ground.material as ShaderMaterial
+	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
 
 var cloudtime : float = 0
 func _physics_process(delta: float) -> void:
@@ -612,12 +615,12 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
 			
-		else : if (Action.CardName == "Extinguish fires" and !viz.IsOnFire()):
+		else : if (Action.CardName == "Extinguish fires" and !Ship.IsOnFire):
 			print("{0} cant use {1}, not on fire".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
 			
-		else : if (Action.CardName == "Extinguish fires" and viz.IsOnFire()):
+		else : if (Action.CardName == "Extinguish fires" and Ship.IsOnFire):
 			Ship.Energy -= Action.Energy
 			FireExtinguishToUse = Action
 			EnemyDeck.Hand.erase(Action)
@@ -639,10 +642,22 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			print("{0} cant use {1}, card is cleansing debuffs and ship has none".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_HP) and (Ship.CurrentHull / Ship.Hull) * 100 > 10):
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_HP) and (Ship.CurrentHull / Ship.Hull) * 100 < 10):
 			print("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_DEF) and Ship.GetDef() <= 0):
+			print("{0} cant use {1}, it's defense is too low.".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await t.call(AvailableActions)
+		#else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_FP) and Ship.GetFirePower() <= 0):
+			#print("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
+			#AvailableActions.erase(Action)
+			#AvailableActions = await t.call(AvailableActions)
+		#else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGHT_SPEED) and Ship.GetSpeed() <= 0):
+			#print("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
+			#AvailableActions.erase(Action)
+			#AvailableActions = await t.call(AvailableActions)
 		else:
 			print("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
 			var SelectedAction : CardStats = Action.duplicate()
@@ -776,17 +791,20 @@ func DoCurrentShipFireDamage() -> void:
 		var CurrentShip = GetCurrentShip()
 
 		var viz = GetShipViz(CurrentShip)
-		if (viz.IsOnFire()):
+		if (CurrentShip.IsOnFire):
 			
 			var d = DamageFloater.instantiate() as Floater
-			d.text = "Fire Damage"
+			if (CurrentShip.IsSeverelyBurnt):
+				d.text = "Severe Fire Damage"
+			else:
+				d.text = "Fire Damage"
 			d.modulate = Color(1,0,0,1)
 			viz.add_child(d)
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
 			d.Ended.connect(DoCurrentShipFireDamage)
-			var GameEnded = await DamageShip(CurrentShip, 10 + (5 * CurrentShip.FireTurns), false, true)
+			var GameEnded = await DamageShip(CurrentShip, CurrentShip.GetFireDamage(), false, true)
 			
-			CurrentShip.FireTurns += 1
+			CurrentShip.TurnsOnFire += 1
 			
 			if (GameEnded):
 				return
@@ -906,6 +924,8 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					if (CounterMod is DamageReductionCardModule):
 						var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier), Mod.CauseFile, Mod.SkipShield)
 						DamageCallables.append(c)
+						for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
+							Data.append(await HandleModule(Ship, Def, SDefMod))
 						
 					if (CounterMod is CounterCardModule):
 						for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
@@ -916,7 +936,9 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 						
 					var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier), Mod.CauseFile, Mod.SkipShield)
 					DamageCallables.append(c)
-
+			
+			for SAtMod in Mod.OnAtackModules:
+				Data.append(await HandleModule(Ship, Action, SAtMod, TargetList.keys()))
 
 			AtackData.Callables = DamageCallables
 			
@@ -1097,7 +1119,10 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, 
 		
 	else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
 		AnimData = await HandleDeBuff(Performer, C, Mod, Targets)
-		
+	
+	else : if (Mod is LoseBuffSelfModule):
+		AnimData = await HandleBuffStrip(Performer, Mod)
+	
 	else : if (Mod is ShieldCardModule):
 		AnimData = await HandleShield(Performer, C, Mod, Targets)
 		
@@ -1311,7 +1336,7 @@ func HandleFireExtinguish(Performer : BattleShipStats, Action : CardStats, Mod :
 	var viz = GetShipViz(Performer)
 	var Callables : Array[Callable]
 	
-	Callables.append(viz.ToggleFire.bind(false))
+	Callables.append(CombustFire.bind(Performer))
 	
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
@@ -1433,7 +1458,7 @@ func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : Caus
 		if (g == null):
 			continue
 		TargetViz.append(GetShipViz(g))
-		Callables.append(ToggleFireToShip.bind(g, true))
+		Callables.append(CauseFire.bind(g))
 		
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
@@ -1452,6 +1477,29 @@ func HandleDamageStack(Performer : BattleShipStats, Action : CardStats, Mod : St
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
 	Data.Targets = Targets
+	return Data
+
+func HandleBuffStrip(Performer : BattleShipStats, Mod : LoseBuffSelfModule) -> DeffensiveAnimationData:
+	var Targets : Array[BattleShipStats]
+
+	var Ts = await HandleTargets(Mod, Performer)
+	for g in Ts:
+		Targets.append(g)
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(GetShipViz(g))
+		Callables.append(StripBuffFromShip.bind(g, Mod.StatToStrip))
+
+		
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = Mod
+	Data.Targets = TargetViz
+	Data.Callables = Callables
 	return Data
 
 func HandleBuff(Performer : BattleShipStats, Action : CardStats, Mod : BuffModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
@@ -1580,7 +1628,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 				if (Mod is BuffModule):
 					Targets.append(GetTargetWithBiggestStat(Team, Mod.Stat))
 				else:
-					Targets.append(EnemyCombatants.pick_random())
+					Targets.append(Team.pick_random())
 		#if nothing of the above counts pick the user as the target
 		else:
 			Targets = [User]
@@ -1611,7 +1659,7 @@ func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipSta
 	var CurrentTarget : BattleShipStats
 	
 	for g in Candidates:
-		var Points = g.CurrentHull + (g.DefDebuff * 1000)
+		var Points = g.CurrentHull + (g.DefDebuff * 1000) + (g.GetFirePower() * 100)
 		if (CurrentBiggestPoints > Points):
 			CurrentTarget = g
 			CurrentBiggestPoints = Points
@@ -2007,7 +2055,7 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 
 # RETURNΣ TRUE IF FIGHT IS OVER
 func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false, SkipShield : bool = false) -> bool:
-	var Dmg = Amm - (Amm * Ship.GetDef())
+	var Dmg = Amm - min(1, (Amm * Ship.GetDef()))
 	if (!SkipShield):
 		if Ship.Shield > 0:
 			var origshield = Ship.Shield
@@ -2016,12 +2064,12 @@ func DamageShip(Ship : BattleShipStats, Amm : float, CauseFire : bool = false, S
 	
 	#only do fire roll when shield didt absorb all the damage
 	if (Dmg > 0 and TrySetFire()):
-		ToggleFireToShip(Ship, true)
+		CauseFire(Ship)
 	
 	Ship.CurrentHull -= Dmg
 	
 	if (CauseFire):
-		ToggleFireToShip(Ship, true)
+		CauseFire(Ship)
 	
 	if (IsShipFriendly(Ship)):
 		
@@ -2049,6 +2097,17 @@ func ShieldShip(Ship : BattleShipStats, Amm : float) -> void:
 	Ship.Shield = min(Ship.Shield + Amm, Ship.MaxShield)
 	UpdateShipStats(Ship)
 
+func StripBuffFromShip(Ship : BattleShipStats, Stat : CardModule.Stat) -> void:
+	if (Stat == CardModule.Stat.FIREPOWER):
+		Ship.FirePowerBuff = 1
+		Ship.FirePowerBuffTime = 0
+	if (Stat == CardModule.Stat.SPEED):
+		Ship.SpeedBuff = 1
+		Ship.SpeedBuffTime = 0
+	if (Stat == CardModule.Stat.DEFENCE):
+		Ship.DefBuff = 0
+		Ship.DefBuffTime = 0
+	UpdateShipStats(Ship)
 
 func BuffShip(Ship : BattleShipStats, Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
@@ -2127,10 +2186,18 @@ func TrySetFire() -> bool:
 	return random_value < 0.2
 
 #atm of a ship is on fire is stored in the UI. Should change #TODO
-func ToggleFireToShip(BattleS : BattleShipStats, Fire : bool) -> void:
-	BattleS.FireTurns = 0
-	GetShipViz(BattleS).ToggleFire(Fire)
+func CauseFire(BattleS : BattleShipStats) -> void:
+	if (BattleS.IsOnFire):
+		BattleS.TurnsOnFire += 1
+	else:
+		BattleS.IsOnFire = true
+		BattleS.TurnsOnFire = 0
+	UpdateShipStats(BattleS)
 
+func CombustFire(BattleS : BattleShipStats) -> void:
+	BattleS.IsOnFire = false
+	BattleS.TurnsOnFire = 0
+	UpdateShipStats(BattleS)
 
 func RemoveShip(Ship : BattleShipStats) -> void:
 	var ShipViz = GetShipViz(Ship)
@@ -2203,6 +2270,7 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	viz.ToggleDefDeBuff(BattleS.DefDebuff > 0)
 	if (ShipTurns.find(BattleS) == CurrentTurn):
 		UpdateCardDescriptions(BattleS)
+	viz.ToggleFire(BattleS.IsOnFire)
 
 
 func UpdateEnergy(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) -> void:

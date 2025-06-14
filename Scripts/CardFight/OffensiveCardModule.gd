@@ -6,6 +6,7 @@ class_name OffensiveCardModule
 @export var Damage : float
 @export var ScaleStat : Array[DamageInfo]
 @export var CauseFile : bool
+@export var OnAtackModules : Array[CardModule]
 @export var OnSuccesfullAtackModules : Array[CardModule]
 @export var SkipShield : bool
 
@@ -26,7 +27,7 @@ func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
 			Dmg += Stat.GetDamage(GetTieredDamage(Tier), StatAmm)
 		else : if (Stat.Method == DamageInfo.CalcuationMethod.MULTIPLY):
 			Dmg *= Stat.GetDamage(GetTieredDamage(Tier), StatAmm)
-	return Dmg
+	return max(0, Dmg)
 
 func GetTieredDamage(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
@@ -74,10 +75,14 @@ func GetDesc(Tier : int) -> String:
 		Desc += "\n[color=#ffc315]On Hit[/color] : "
 		for g in OnSuccesfullAtackModules:
 			Desc += g.GetDesc(Tier)
+	if (OnAtackModules.size() > 0):
+		Desc += "\n[color=#ffc315]On Atack[/color] : "
+		for g in OnAtackModules:
+			Desc += g.GetDesc(Tier)
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 	if (SkipShield):
-		Desc += " [color=#ffc315]Skip's Shields[/color]"
+		Desc += " [color=#ffc315]Skips Shields[/color]"
 	Desc += "\n[color=#ffc315]{0}[/color]".format([ AtackTypes.keys()[AtackType].replace("_", " ")])
 	
 	return Desc
@@ -113,12 +118,15 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 		else : if (stat.ScalingStat == CardModule.Stat.WEIGHT):
 			Dmg = stat.GetDamage(GetTieredDamage(Tier), User.GetWeight())
 		
+		else : if (stat.ScalingStat == CardModule.Stat.DEFENCE):
+			Dmg = stat.GetDamage(GetTieredDamage(Tier), User.GetDef())
+		
 		if (stat.Method == DamageInfo.CalcuationMethod.ADD):
 			FinalDamage += Dmg
 		if (stat.Method == DamageInfo.CalcuationMethod.MULTIPLY):
 			FinalDamage *= Dmg
 		
-	var DamageString : String = var_to_str(snapped(FinalDamage, 0.1)).replace(".0", "")
+	var DamageString : String = var_to_str(snapped(max(0, FinalDamage), 0.1)).replace(".0", "")
 	for stat in ScaleStat.size():
 		DamageString = "[{0}]|[/color]{1}[{0}]|[/color]".format([TextColors[stat], DamageString])
 
@@ -144,6 +152,10 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit [/color]: "
 		for g in OnSuccesfullAtackModules:
+			Desc += g.GetBattleDesc(User, Tier)
+	if (OnAtackModules.size() > 0):
+		Desc += "\n[color=#ffc315]On Atack[/color] : "
+		for g in OnAtackModules:
 			Desc += g.GetBattleDesc(User, Tier)
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"

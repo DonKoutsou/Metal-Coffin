@@ -81,13 +81,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 			var TargetShips = AnimData.Targets
 			
 			if (Mod is BuffModule):
-				var BuffText : String
-				if (Mod.StatToBuff == CardModule.Stat.FIREPOWER):
-					BuffText = "Firepower +"
-				else : if(Mod.StatToBuff == CardModule.Stat.SPEED):
-					BuffText = "Speed +"
-				else : if(Mod.StatToBuff == CardModule.Stat.DEFENCE):
-					BuffText = "Defence +"
+				var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToBuff]])
 				for Ship in TargetShips:
 					call_deferred("SpawnUpVisual", Ship, card, BuffText)
 					
@@ -102,7 +96,12 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 			else : if (Mod is CleanseDebuffModule):
 				for Ship in TargetShips:
 					call_deferred("SpawnShieldVisual", Ship, card, "Debuffs\nCleansed")
-					
+			
+			else : if (Mod is LoseBuffSelfModule):
+				var BuffText = "{0}\nRemoved".format([CardModule.Stat.keys()[Mod.StatToStrip]])
+				for Ship in TargetShips:
+					call_deferred("SpawnDownVisual", Ship, card, BuffText)
+			
 			else : if (Mod is CauseFireModule):
 				for Ship in TargetShips:
 					call_deferred("SpawnUpVisual", Ship, card, "Fire")
@@ -119,13 +118,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 					call_deferred("SpawnShieldVisual", Ship, card, "Interceptor")
 					
 			else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
-				var BuffText : String
-				if (Mod.StatToDeBuff == CardModule.Stat.FIREPOWER):
-					BuffText = "Firepower -"
-				else : if(Mod.StatToDeBuff == CardModule.Stat.SPEED):
-					BuffText = "Speed -"
-				else : if(Mod.StatToDeBuff == CardModule.Stat.DEFENCE):
-					BuffText = "Defence -"
+				var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToDeBuff]])
 				for Ship in TargetShips:
 					call_deferred("SpawnDownVisual", Ship, card, BuffText)
 

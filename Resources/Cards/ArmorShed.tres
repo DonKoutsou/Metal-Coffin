@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://bc28324vb6uij"]
+
+[ext_resource type="Texture2D" uid="uid://d1v41qnvdps7y" path="res://Assets/Cards/ArmorShed.png" id="1_h4odj"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_ybmh8"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_tenw4"]
+[ext_resource type="Script" uid="uid://cp4u0xqx1hi1a" path="res://Scripts/CardFight/DeBuffSelfCardModule.gd" id="4_kr1d6"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_r681m"]
+
+[sub_resource type="Resource" id="Resource_r7uwp"]
+script = ExtResource("3_tenw4")
+StatToBuff = 1
+BuffDuration = 2
+BuffAmmount = 1.5
+CanBeUsedOnOther = false
+SelfUse = true
+AOE = false
+TierUpgrade = 1.2
+TierUpgradeMethod = 1
+metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
+
+[sub_resource type="Resource" id="Resource_y46tu"]
+script = ExtResource("4_kr1d6")
+StatToDeBuff = 2
+DeBuffDuration = 2
+DeBuffAmmount = 0.2
+CanBeUsedOnOther = false
+SelfUse = true
+AOE = false
+TierUpgrade = 1.1
+TierUpgradeMethod = 1
+metadata/_custom_type_script = "uid://cp4u0xqx1hi1a"
+
+[resource]
+script = ExtResource("5_r681m")
+Icon = ExtResource("1_h4odj")
+CardName = "Armor Shed"
+CardDescriptionOverride = ""
+Energy = 2
+AllowDuplicates = true
+Consume = false
+OnUseModules = Array[ExtResource("2_ybmh8")]([SubResource("Resource_r7uwp"), SubResource("Resource_y46tu")])
+Type = 2
+WeapT = 0
+UseConditions = Array[int]([])
+AllowTier = true

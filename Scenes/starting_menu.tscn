@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="3_t54ed"]
-[ext_resource type="Texture2D" uid="uid://bx5jb0eqim37w" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="4_yrlew"]
-[ext_resource type="Texture2D" uid="uid://dnutjdpy3la0n" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="5_23r0g"]
-[ext_resource type="Texture2D" uid="uid://chdov106pirvg" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="6_t54ed"]
+[ext_resource type="Texture2D" uid="uid://bbflwo1xyqt7h" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="4_yrlew"]
+[ext_resource type="Texture2D" uid="uid://b6pk05fgqu1do" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="5_23r0g"]
+[ext_resource type="Texture2D" uid="uid://xjpx02shay16" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="6_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
-[ext_resource type="Texture2D" uid="uid://jxvcunva5h7a" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="7_23r0g"]
+[ext_resource type="Texture2D" uid="uid://diq6pmys4cr8f" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="7_23r0g"]
 [ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
@@ -325,7 +325,6 @@ layout_mode = 2
 texture = ExtResource("3_s86m3")
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_2tj7v")
 anchors_preset = 15

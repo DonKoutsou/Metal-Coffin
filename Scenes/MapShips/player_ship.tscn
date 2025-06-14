@@ -137,10 +137,9 @@ volume_db = -20.0
 bus = &"Engine"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(0.736328, 0.736328)
-energy = 0.25
+energy = 0.5
 blend_mode = 2
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")
-texture_scale = 2.0
-height = 328.0
+texture_scale = 1.3
+height = 70.0

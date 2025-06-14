@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://b6441eghjnus8"]
+
+[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="1_kyov3"]
+[ext_resource type="Texture2D" uid="uid://bbflwo1xyqt7h" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="2_mjecm"]
+[ext_resource type="Texture2D" uid="uid://b6pk05fgqu1do" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="3_8uhgy"]
+[ext_resource type="Texture2D" uid="uid://xjpx02shay16" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="4_ol4lr"]
+[ext_resource type="Texture2D" uid="uid://diq6pmys4cr8f" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="5_sgv5m"]
+
+[sub_resource type="Gradient" id="Gradient_kyov3"]
+offsets = PackedFloat32Array(0.409475, 0.463621)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mjecm"]
+noise_type = 3
+frequency = 0.0039
+fractal_lacunarity = 4.0
+fractal_gain = 0.4
+cellular_distance_function = 2
+cellular_return_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8uhgy"]
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_kyov3")
+noise = SubResource("FastNoiseLite_mjecm")
+
+[resource]
+shader = ExtResource("1_kyov3")
+shader_parameter/GroundTexture = ExtResource("4_ol4lr")
+shader_parameter/GroundTexture2 = ExtResource("5_sgv5m")
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_8uhgy")
+shader_parameter/GroundNormalTexture = ExtResource("3_8uhgy")
+shader_parameter/GroundNormal2Texture = ExtResource("2_mjecm")
+shader_parameter/NormalD = 1.0
+shader_parameter/offset = Vector2(2.37, -2.715)
+shader_parameter/Scale1 = Vector2(5, 5)
+shader_parameter/Scale2 = Vector2(5, 5)

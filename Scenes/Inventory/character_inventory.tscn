@@ -172,7 +172,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-text = "Shields"
+text = "Fortifications"
 
 [node name="Shields" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4"]
 layout_mode = 2

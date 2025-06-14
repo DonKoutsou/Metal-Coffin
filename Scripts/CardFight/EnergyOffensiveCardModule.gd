@@ -26,7 +26,7 @@ func GetDesc(Tier : int) -> String:
 	else:
 		Desc = "Hit enemy"
 		
-	Desc += " for {0} * [color=#ffc315]Remaining Energy[/color] damage".format([var_to_str((GetTieredDamage(Tier)))])
+	Desc += " for {0} * [color=#ffc315]Current Energy[/color] damage".format([var_to_str((GetTieredDamage(Tier)))])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Hit : [/color]"
@@ -35,7 +35,7 @@ func GetDesc(Tier : int) -> String:
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 	if (SkipShield):
-		Desc += " [color=#ffc315]Skip's Shields[/color]"
+		Desc += "\n[color=#ffc315]Skips Shields[/color]"
 	Desc += "\n[color=#ffc315]{0}[/color]".format([ AtackTypes.keys()[AtackType].replace("_", " ")])
 	
 	return Desc
@@ -56,7 +56,7 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	if (CauseFile):
 		Desc += "\n[color=#ff3c22]Causes fire[/color]"
 	if (SkipShield):
-		Desc += " [color=#ffc315]Skip's Shields[/color]"
+		Desc += "\n[color=#ffc315]Skips Shields[/color]"
 	Desc += "\n[color=#ffc315]{0}[/color]".format([ AtackTypes.keys()[AtackType].replace("_", " ")])
 	
 	return Desc

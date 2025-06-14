@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://cenglxsgq1pg0"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_j120b"]
+[ext_resource type="Resource" uid="uid://csgrtdu16q72h" path="res://Resources/Items/ShipParts/Shield/CompositeTitaniumPlates.tres" id="2_40bkx"]
+[ext_resource type="Resource" uid="uid://bc28324vb6uij" path="res://Resources/Cards/ArmorShed.tres" id="2_fj2g5"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="2_xiw0n"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_40bkx"]
+[ext_resource type="Resource" uid="uid://bx0i03i2fgvwm" path="res://Resources/Cards/Safeguard .tres" id="3_fj2g5"]
+[ext_resource type="Resource" uid="uid://cdkivk50mv55h" path="res://Resources/Cards/Rupture.tres" id="4_4nvt2"]
+
+[sub_resource type="Resource" id="Resource_x1aim"]
+script = ExtResource("2_xiw0n")
+UpgradeName = 4
+UpgradeAmmount = 200.0
+PenaltyAmmount = 0.0
+CurrentValue = 200.0
+
+[resource]
+script = ExtResource("3_40bkx")
+Upgrades = Array[ExtResource("2_xiw0n")]([SubResource("Resource_x1aim")])
+UpgradeVersion = ExtResource("2_40bkx")
+UpgradeTime = 120.0
+IsDamaged = false
+PartType = 5
+ItemName = "Reinforced Titanium Plates"
+ItemDesc = "WIP"
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_j120b")]([ExtResource("2_fj2g5"), ExtResource("2_fj2g5"), ExtResource("3_fj2g5"), ExtResource("3_fj2g5"), ExtResource("3_fj2g5"), ExtResource("4_4nvt2")])
+Tier = 1
+CanTransfer = false
+Cost = 100000

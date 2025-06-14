@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://carmmqiu3rn2f"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://carmmqiu3rn2f"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_hyayd"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_va7jv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dlkv8clb3piuw" path="res://Resources/Items/ShipParts/Shield/SPK-100 Ship Barrier.tres" id="3_ivh6q"]
 [ext_resource type="Resource" uid="uid://c2xdu0g24g84o" path="res://Resources/Cards/DecelerationField.tres" id="4_385cy"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_n02hm"]
+[ext_resource type="Resource" uid="uid://vk7sx0tcr6u8" path="res://Resources/Cards/MaxShieldOverCharge.tres" id="4_o58x0"]
 
 [sub_resource type="Resource" id="Resource_mhm0j"]
 script = ExtResource("3_30ir8")
@@ -18,7 +19,7 @@ CurrentValue = 600.0
 [sub_resource type="Resource" id="Resource_385cy"]
 script = ExtResource("3_30ir8")
 UpgradeName = 15
-UpgradeAmmount = 350.0
+UpgradeAmmount = 150.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
@@ -33,7 +34,7 @@ PartType = 5
 ItemName = "SPK-50 Ship Barrier"
 ItemDesc = "The SPK-50 enhances barrier technology with a fortified energy lattice, expanding its coverage and strength. Capable of withstanding greater impacts, it ensures superior defense against concentrated missile volleys and sustained heavy weapons fire. Ideal for medium-class ships requiring enhanced survivability in high-stakes confrontations."
 MaxStackCount = 1
-CardProviding = Array[ExtResource("2_hyayd")]([ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("4_385cy")])
+CardProviding = Array[ExtResource("2_hyayd")]([ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("4_o58x0"), ExtResource("4_385cy")])
 Tier = 1
 CanTransfer = false
 Cost = 180000

@@ -21,7 +21,7 @@ func GetDesc(Tier : int) -> String:
 		return "Buff team\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
 	else : if (CanBeUsedOnOther):
 		return "Buff a ship\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
-	return "Buff self\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
+	return "Buff\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
 
 func GetBuffDuration(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

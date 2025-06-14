@@ -224,9 +224,6 @@ func ToggleSpeedBuff(t : bool, amm : float) -> void:
 func ToggleSpeedDebuff(t : bool) -> void:
 	SpeedDeBuff.visible = t
 
-func IsOnFire() -> bool:
-	return FirePart.visible
-
 func ShipDestroyed() -> void:
 	#Destroy()
 	var tw = create_tween()

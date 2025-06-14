@@ -126,3 +126,6 @@ func AccelerationChanged(value: float) -> void:
 	for g in GetDroneDock().GetDockedShips():
 		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
 		g.AccelChanged = true
+
+func ToggleLight(t : bool) -> void:
+	$PointLight2D.visible = t

@@ -216,7 +216,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	#drone.DissableDrone()
 	
 	var Command = get_parent() as MapShip
-	
+	drone.ToggleLight(false)
 	drone.Command = Command
 	DroneDockEventH.OnDroneDocked(drone, Command)
 	
@@ -297,7 +297,7 @@ func UndockDrone(drone : Drone):
 	DockedDrones.erase(drone)
 
 	drone.Command = null
-	
+	drone.ToggleLight(true)
 	DroneDockEventH.OnDroneUnDocked(drone, get_parent())
 	var docks = $DroneSpots.get_children()
 	for g in docks:

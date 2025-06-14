@@ -53,9 +53,6 @@ func TweenEnded() -> void:
 func ToggleFire(t : bool) -> void:
 	$HBoxContainer/VBoxContainer/TextureRect/GPUParticles2D.visible = t
 
-func IsOnFire() -> bool:
-	return $HBoxContainer/VBoxContainer/TextureRect/GPUParticles2D.visible
-
 func ShipDestroyed() -> void:
 	var tw = create_tween()
 	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
