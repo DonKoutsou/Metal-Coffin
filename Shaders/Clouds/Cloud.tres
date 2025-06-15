@@ -1,16 +1,17 @@
-[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://dadw4sq24u4ow"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dadw4sq24u4ow"]
 
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/Clouds/clouds.gdshader" id="1_cfcwv"]
 [ext_resource type="Texture2D" uid="uid://d1tknmqoiysie" path="res://Shaders/Clouds/CloudNormal.tres" id="2_kjxov"]
 
 [sub_resource type="Gradient" id="Gradient_l2i77"]
-offsets = PackedFloat32Array(0.0974729, 0.190101, 0.1991, 0.687726)
-colors = PackedColorArray(0, 0, 0, 1, 0.0660349, 0.0660349, 0.0660349, 1, 0.0453971, 0.0453971, 0.0453971, 1, 0.735, 0.735, 0.735, 1)
+offsets = PackedFloat32Array(0, 0.624799)
+colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
 noise_type = 0
 seed = 4
-frequency = 0.0217
+frequency = 0.0039
+fractal_octaves = 7
 fractal_lacunarity = 2.2
 fractal_gain = 0.57
 domain_warp_frequency = 0.095
@@ -18,35 +19,23 @@ domain_warp_fractal_type = 0
 domain_warp_fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
-width = 1024
+width = 2048
 height = 1024
 seamless = true
 seamless_blend_skirt = 1.0
 color_ramp = SubResource("Gradient_l2i77")
 noise = SubResource("FastNoiseLite_n7y6y")
 
-[sub_resource type="Gradient" id="Gradient_wk0si"]
-offsets = PackedFloat32Array(0.142198, 0.482918)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ioe4c"]
-frequency = 0.0441
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i6krx"]
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_wk0si")
-noise = SubResource("FastNoiseLite_ioe4c")
-
 [resource]
 shader = ExtResource("1_cfcwv")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
-shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_i6krx")
 shader_parameter/noise_texturenormal = ExtResource("2_kjxov")
-shader_parameter/density = 1.8
-shader_parameter/speed = Vector2(0.01, -0.005)
+shader_parameter/density = 2.0
+shader_parameter/speed = Vector2(0.005, -0.005)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
 shader_parameter/UseCustomTime = false
-shader_parameter/NormalStr = 0.35
+shader_parameter/NormalStr = -0.6
 shader_parameter/shadow_strength = 0.273
-shader_parameter/shadow_parallax_amount = -0.025
+shader_parameter/shadow_parallax_amount = -0.054
+shader_parameter/rotation_angle = -0.85

@@ -637,6 +637,16 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			print("{0} cant use {1}, card is scales with energy and ship has none".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
+		
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.RESERVE_DEPENDANT) and Ship.EnergyReserves == 0):
+			print("{0} cant use {1}, card is scales with reserve and ship has none".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await t.call(AvailableActions)
+		
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_TURNS_PASSED) and CurrentTurn > ShipTurns.size() / 2):
+			print("{0} cant use {1}, not enought turns passed".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await t.call(AvailableActions)
 			
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.HAS_DEBUFF) and !Ship.HasDebuff()):
 			print("{0} cant use {1}, card is cleansing debuffs and ship has none".format([Ship.Name, Action.GetCardName()]))

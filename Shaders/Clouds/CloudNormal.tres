@@ -6,9 +6,10 @@ colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1)
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_i6krx"]
 noise_type = 2
 seed = 4
-frequency = 0.1438
-fractal_lacunarity = 1.805
-fractal_gain = 0.23
+frequency = 0.0592
+fractal_type = 3
+fractal_weighted_strength = 1.0
+fractal_ping_pong_strength = 1.265
 cellular_return_type = 3
 domain_warp_frequency = 0.095
 domain_warp_fractal_type = 0

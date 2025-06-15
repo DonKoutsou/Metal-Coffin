@@ -81,7 +81,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 			var TargetShips = AnimData.Targets
 			
 			if (Mod is BuffModule):
-				var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToBuff]])
+				var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])
 				for Ship in TargetShips:
 					call_deferred("SpawnUpVisual", Ship, card, BuffText)
 					

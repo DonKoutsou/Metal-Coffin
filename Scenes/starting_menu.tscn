@@ -304,6 +304,39 @@ use_parent_material = true
 layout_mode = 2
 texture = ExtResource("3_s86m3")
 
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -38.0
+offset_right = -1.0
+offset_bottom = -137.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("14_61hxs")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRect2"]
+self_modulate = Color(0, 0, 0, 0.6)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("7_aspsn")
+expand_mode = 1
+
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 texture_filter = 1
 material = ExtResource("16_23r0g")
@@ -337,40 +370,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = -38.0
-offset_right = -1.0
-offset_bottom = -137.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 6
-texture = ExtResource("14_61hxs")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/TextureRect2"]
-self_modulate = Color(0, 0, 0, 0.6)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 6
-texture = ExtResource("7_aspsn")
-expand_mode = 1
 
 [node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" instance=ExtResource("21_srpg8")]
 layout_mode = 1
