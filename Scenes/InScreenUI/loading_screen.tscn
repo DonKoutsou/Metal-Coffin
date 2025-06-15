@@ -1,14 +1,24 @@
-[gd_scene load_steps=12 format=3 uid="uid://bas2hvjynjr05"]
+[gd_scene load_steps=13 format=3 uid="uid://bas2hvjynjr05"]
 
 [ext_resource type="Script" uid="uid://b6akb2f5doubl" path="res://Scenes/loading_screen.gd" id="2_ehbru"]
-[ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="3_jmxc3"]
-[ext_resource type="Texture2D" uid="uid://b4jeo40dhrvho" path="res://Assets/Logos/BG.png" id="3_qc4cv"]
+[ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="3_jmxc3"]
 [ext_resource type="Texture2D" uid="uid://byfedq22uoe62" path="res://Assets/Logos/ΜΧΨ1.png" id="4_57mps"]
 [ext_resource type="Texture2D" uid="uid://cga2lurpwk4ft" path="res://Assets/Logos/ΜΧΨ2.png" id="5_bbvsw"]
 [ext_resource type="Texture2D" uid="uid://dni651daut8p5" path="res://Assets/Logos/ΜΧΨ3.png" id="6_pg350"]
 [ext_resource type="Texture2D" uid="uid://c0od8ddjkv4ks" path="res://Assets/Logos/ΜΧΨ4.png" id="7_6jo5o"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="7_s87fu"]
 [ext_resource type="Texture2D" uid="uid://dssiekrv78ooj" path="res://Assets/Logos/ΜΧΨ5.png" id="8_1dav1"]
+
+[sub_resource type="Environment" id="Environment_t244x"]
+background_mode = 3
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_white = 16.0
+adjustment_enabled = true
+
+[sub_resource type="World3D" id="World3D_qc4cv"]
+environment = SubResource("Environment_t244x")
 
 [sub_resource type="Animation" id="Animation_n8xlk"]
 resource_name = "Logo"
@@ -80,7 +90,7 @@ _data = {
 &"Logo": SubResource("Animation_n8xlk")
 }
 
-[node name="LoadingScreen" type="Control" node_paths=PackedStringArray("Labe")]
+[node name="LoadingScreen" type="Control" node_paths=PackedStringArray("SkipButton", "TextLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,137 +99,171 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_s87fu")
 script = ExtResource("2_ehbru")
-Labe = NodePath("Label")
+Text = "Around the year 6000, the inhabitants of this world remain unaware of the passage of centuries. A planet scarred by relentless destruction has witnessed the rise and fall of civilizations, each cataclysm erasing fragments of history like ashes on the wind. Yet, amidst the ruin, tiny embers persist, igniting the flicker of humanity's spirit.
 
-[node name="ColorRect" type="ColorRect" parent="."]
+This cycle has allowed some to endure; half soared into the stars while others sought refuge in the earth's depths. As millennia passed and the surface regained its livability, these fractured remnants began to unite.
+
+However, their diverse cultures have become a heavy shackle, fostering perpetual conflict and shifting power dynamics. Now, disarray reigns among the underground communities, their proud armies reduced to desperate scavengers. An oppressive regime manipulates the masses with iron fists.
+
+Is this yet another cycle leading humanity toward its inevitable end?"
+SkipButton = NodePath("SkipButton")
+TextLabel = NodePath("Label2")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.11435, 0.205627, 0.212156, 1)
+size_flags_vertical = 3
+stretch = true
 
-[node name="TextureRect7" type="TextureRect" parent="."]
-modulate = Color(0.51218, 0.51218, 0.51218, 1)
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+own_world_3d = true
+world_3d = SubResource("World3D_qc4cv")
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="TownBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_jmxc3")]
+Zoom = 0.67
+
+[node name="Label2" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -378.0
+offset_right = 378.0
+offset_bottom = 417.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "testes
+stestse
+set
+set
+es
+tes
+t
+se
+te
+st
+es
+te
+te
+ts
+t"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = -42.0
+offset_right = -74.0
+offset_bottom = -21.0
 grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_qc4cv")
-expand_mode = 1
+grow_vertical = 0
 
-[node name="TextureRect6" type="TextureRect" parent="."]
-modulate = Color(0.51218, 0.51218, 0.51218, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -56.0
-offset_bottom = -56.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_jmxc3")
-expand_mode = 1
-
-[node name="TextureRect8" type="TextureRect" parent="TextureRect6"]
-modulate = Color(0, 0, 0, 0.5)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = 8.0
-offset_right = 7.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_jmxc3")
-expand_mode = 1
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
+[node name="SkipButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -166.0
-offset_top = -136.0
-offset_right = -116.0
-offset_bottom = -86.0
+offset_left = -130.0
+offset_top = -50.0
+offset_right = -72.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Skip"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -59.0
+offset_top = -56.0
+offset_right = -9.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("4_57mps")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -166.0
-offset_top = -136.0
-offset_right = -116.0
-offset_bottom = -86.0
+offset_left = -59.0
+offset_top = -56.0
+offset_right = -9.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("5_bbvsw")
 expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -166.0
-offset_top = -136.0
-offset_right = -116.0
-offset_bottom = -86.0
+offset_left = -59.0
+offset_top = -56.0
+offset_right = -9.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("6_pg350")
 expand_mode = 1
 
 [node name="TextureRect4" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -166.0
-offset_top = -136.0
-offset_right = -116.0
-offset_bottom = -86.0
+offset_left = -59.0
+offset_top = -56.0
+offset_right = -9.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("7_6jo5o")
 expand_mode = 1
 
 [node name="TextureRect5" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -166.0
-offset_top = -136.0
-offset_right = -116.0
-offset_bottom = -86.0
+offset_left = -59.0
+offset_top = -56.0
+offset_right = -9.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("8_1dav1")
@@ -231,31 +275,4 @@ libraries = {
 }
 autoplay = "LogoDraw"
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 174.0
-offset_top = -124.0
-offset_right = -174.0
-offset_bottom = -103.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 172.0
-offset_top = -168.0
-offset_right = -172.0
-offset_bottom = -145.0
-grow_horizontal = 2
-grow_vertical = 0
-vertical_alignment = 2
-autowrap_mode = 1
-visible_characters = 0
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

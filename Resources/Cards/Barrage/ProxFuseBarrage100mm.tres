@@ -19,6 +19,7 @@ AtackType = 2
 Damage = 10.0
 ScaleStat = Array[ExtResource("3_5gb4d")]([SubResource("Resource_5gb4d")])
 CauseFile = false
+OnAtackModules = Array[ExtResource("3_b1127")]([])
 OnSuccesfullAtackModules = Array[ExtResource("3_b1127")]([])
 SkipShield = false
 AOE = false

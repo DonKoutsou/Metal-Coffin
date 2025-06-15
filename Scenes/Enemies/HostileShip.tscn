@@ -51,7 +51,7 @@ position = Vector2(0.5, 0)
 [node name="ShipSprite" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_xxp8j")
 
 [node name="TrailLine" type="Line2D" parent="ShipSprite"]
@@ -59,7 +59,7 @@ show_behind_parent = true
 position = Vector2(3.61999e-05, -10)
 rotation = 1.5708
 scale = Vector2(10, 10)
-width = 1.0
+width = 3.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_hjoyl")
 joint_mode = 2

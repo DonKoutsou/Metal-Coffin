@@ -1,8 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccmwul4ncd4dx"]
+[gd_scene load_steps=17 format=3 uid="uid://ccmwul4ncd4dx"]
 
 [ext_resource type="Script" uid="uid://e20sht2jh3tt" path="res://Scripts/EnemyAi/commander.gd" id="1_2gt3m"]
+[ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="2_3pmjh"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="2_fb4ti"]
 [ext_resource type="Script" uid="uid://b2gyfw6gh37hb" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_7gsnn"]
+[ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="3_n65wb"]
+[ext_resource type="Resource" uid="uid://ds7viiermptuq" path="res://Resources/Items/Ammo/Long-RangeMissile.tres" id="4_0ik2s"]
 [ext_resource type="Script" uid="uid://c8jxlsxyeh3y" path="res://addons/beehave/nodes/composites/selector.gd" id="4_2bbgj"]
 [ext_resource type="Script" uid="uid://duypquk8en6g3" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_smsg2"]
 [ext_resource type="Script" uid="uid://dyxwpkc3fr5yh" path="res://Scripts/BeehaveNodes/UnhandledEnemies_Condition.gd" id="7_3q3c6"]
@@ -17,9 +20,11 @@
 [node name="Commander" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_2gt3m")
-Armaments = {
-ExtResource("2_fb4ti"): 2
-}
+Armaments = Dictionary[ExtResource("2_3pmjh"), int]({
+ExtResource("2_fb4ti"): 2,
+ExtResource("3_n65wb"): 1,
+ExtResource("4_0ik2s"): 3
+})
 layers_2d_physics = 1
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]

@@ -16,10 +16,11 @@ class_name WorkShop
 @export var StatComp : PackedScene
 @export var ItemParent : Control
 @export var ItemCat : Control
+@export var ShipIcons : TextureRect
 @export var Descr : ItemDescriptor
 var CurrentShip : MapShip
 var WorkShopMerch : Array[Merchandise]
-
+var WorkshopDescriptor : ItemDescriptor
 var HasUpgradeBuff : bool = false
 signal WorkshopClosed
 
@@ -55,11 +56,7 @@ func OnShipSelected(Ship : MapShip) -> void:
 	if (Ship == CurrentShip):
 		return
 	
-	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-	if (descriptors.size() > 0):
-		var desc = descriptors[0] as ItemDescriptor
-		DescriptorPlace.remove_child(desc)
-		desc.queue_free()
+	CloseDescriptor()
 	
 	CurrentShip = Ship
 	
@@ -74,7 +71,7 @@ func OnShipSelected(Ship : MapShip) -> void:
 	for g in ShieldInventoryBoxParent.get_children():
 		g.free()
 	
-	$PanelContainer/VBoxContainer/HBoxContainer/TextureRect.texture = Ship.Cpt.ShipIcon
+	ShipIcons.texture = Ship.Cpt.ShipIcon
 	
 	var Cha = Ship.Cpt
 	
@@ -141,7 +138,7 @@ func RefreshInventory() -> void:
 	for g in ShieldInventoryBoxParent.get_children():
 		g.free()
 	
-	$PanelContainer/VBoxContainer/HBoxContainer/TextureRect.texture = CurrentShip.Cpt.ShipIcon
+	ShipIcons.texture = CurrentShip.Cpt.ShipIcon
 	
 	var Cha = CurrentShip.Cpt
 	
@@ -228,42 +225,42 @@ func GetTypeOfBox(Box : Inventory_Box) -> ShipPart.ShipPartType:
 
 func ItemSelected(Box : Inventory_Box) -> void:
 	
-	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-	if (descriptors.size() > 0):
-		var desc = descriptors[0] as ItemDescriptor
-		DescriptorPlace.remove_child(desc)
-		desc.queue_free()
-		if (desc.DescribedContainer == Box):
+	if (WorkshopDescriptor != null):
+		DescriptorPlace.remove_child(WorkshopDescriptor)
+		WorkshopDescriptor.queue_free()
+		if (WorkshopDescriptor.DescribedContainer == Box):
+			ShipIcons.visible = true
 			return
 	
 			
-	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
-	Descriptor.DescribedContainer = Box
+	WorkshopDescriptor= ItemDescriptorScene.instantiate() as ItemDescriptor
+	WorkshopDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	ShipIcons.visible = false
+	WorkshopDescriptor.DescribedContainer = Box
 	if (Box.IsEmpty()):
-		Descriptor.SetEmptyShopData(GetTypeOfBox(Box))
-		Descriptor.connect("ItemAdd", AddItem)
+		WorkshopDescriptor.SetEmptyShopData(GetTypeOfBox(Box))
+		WorkshopDescriptor.connect("ItemAdd", AddItem)
 	else:
-		Descriptor.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
-		Descriptor.connect("ItemAdd", AddItem)
-		Descriptor.connect("ItemRemove", RemoveItem)
-		Descriptor.connect("ItemUpgraded", UpgradeItem)
+		WorkshopDescriptor.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
+		WorkshopDescriptor.connect("ItemAdd", AddItem)
+		WorkshopDescriptor.connect("ItemRemove", RemoveItem)
+		WorkshopDescriptor.connect("ItemUpgraded", UpgradeItem)
 		
 		#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
 		#Descriptor.connect("ItemTransf", ItemTranfer)
-	DescriptorPlace.add_child(Descriptor)
-	Descriptor.set_physics_process(false)
+	DescriptorPlace.add_child(WorkshopDescriptor)
+	WorkshopDescriptor.set_physics_process(false)
 
 func UpdateDescriptor(Box : Inventory_Box) -> void:
-	
-	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-	if (descriptors.size() > 0):
-		var desc = descriptors[0] as ItemDescriptor
-		desc.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
+
+	if (WorkshopDescriptor != null):
+		WorkshopDescriptor.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
 
 func CloseDescriptor() -> void:
-	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
-	if (descriptors.size() > 0):
-		descriptors[0].queue_free()
+	#var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
+	if (WorkshopDescriptor != null):
+		WorkshopDescriptor.queue_free()
+	ShipIcons.visible = true
 
 func RemoveItem(Box : Inventory_Box) -> void:
 	var Cost = Box.GetContainedItem().Cost
@@ -274,7 +271,7 @@ func RemoveItem(Box : Inventory_Box) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} removed from {1}'s ship")
 	CurrentShip.Cpt.GetCharacterInventory().RemoveItem(It)
 	RefreshInventory()
-	
+	CloseDescriptor()
 	for g in WorkShopMerch:
 		if (g.It.IsSame(It)):
 			g.Amm += 1

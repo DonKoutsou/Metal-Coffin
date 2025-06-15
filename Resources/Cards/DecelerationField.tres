@@ -9,6 +9,7 @@
 script = ExtResource("2_dcwc3")
 CounterType = 3
 ReductionPercent = 50
+OnSuccesfullDeffenceModules = Array[ExtResource("3_x7h2e")]([])
 AOE = false
 TierUpgrade = 1.2
 TierUpgradeMethod = 1

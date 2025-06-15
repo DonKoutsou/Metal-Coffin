@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=25 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
@@ -15,34 +15,14 @@
 [ext_resource type="Material" uid="uid://b6441eghjnus8" path="res://Shaders/CardfightGround.tres" id="14_l2i77"]
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="14_vn53x"]
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
+[ext_resource type="Material" uid="uid://du775m4kpfmqe" path="res://Shaders/Clouds/CloudCagefight.tres" id="15_l2i77"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
-[ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="22_gvlad"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="23_d5rtw"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="24_d8sco"]
 [ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scripts/CardFight/action_declaration.gd" id="24_pw20f"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="27_rbthh"]
 [ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
-noise_type = 5
-frequency = 0.0085
-fractal_lacunarity = 5.77
-fractal_weighted_strength = 1.0
-domain_warp_enabled = true
-domain_warp_frequency = 0.015
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
-seamless = true
-noise = SubResource("FastNoiseLite_n7y6y")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xr0yy"]
-shader = ExtResource("22_gvlad")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
-shader_parameter/density = 1.229
-shader_parameter/speed = Vector2(0.01, -0.005)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/custom_time = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2au4"]
 content_margin_left = 10.0
@@ -128,7 +108,7 @@ grow_vertical = 2
 
 [node name="Clouds" type="ColorRect" parent="SubViewport/Control2"]
 texture_filter = 1
-material = SubResource("ShaderMaterial_xr0yy")
+material = ExtResource("15_l2i77")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -143,6 +123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Action Declaration" type="PanelContainer" parent="SubViewport/Control2"]
+visible = false
 z_index = 1
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
@@ -379,11 +360,11 @@ uppercase = true
 color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewport"]
-position = Vector2(463, 292)
+position = Vector2(445, 311)
 blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("32_1im06")
 texture_scale = 30.0
-height = 200.0
+height = 100.0
 
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]

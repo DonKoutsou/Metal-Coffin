@@ -85,7 +85,7 @@
 [ext_resource type="Resource" uid="uid://cdjjdfdrhljqx" path="res://Resources/Items/ShipParts/FlameThrower/MediumFlameThrower.tres" id="83_3wwnn"]
 [ext_resource type="Resource" uid="uid://bdo3te0i8x0f" path="res://Resources/Items/ShipParts/FlameThrower/LargeFlameThrower.tres" id="84_pv6be"]
 
-[sub_resource type="Resource" id="Resource_c4mfw"]
+[sub_resource type="Resource" id="Resource_jwfxs"]
 resource_local_to_scene = true
 script = ExtResource("33_ovnka")
 ItemName = "Fire Suppression Unit"
@@ -212,7 +212,7 @@ alignment = 1
 [node name="TeamEquipmentSetup" parent="PanelContainer/VBoxContainer" instance=ExtResource("32_5o5j4")]
 visible = false
 layout_mode = 2
-Equipment = Array[ExtResource("33_ovnka")]([ExtResource("46_ufipr"), ExtResource("47_rxtc1"), ExtResource("49_jjr6e"), ExtResource("51_fw80n"), ExtResource("48_o8d3c"), ExtResource("50_ovnka"), ExtResource("34_pefvv"), ExtResource("57_ej3ya"), ExtResource("58_8unkc"), ExtResource("50_clvof"), ExtResource("55_r37ip"), ExtResource("56_k4l7a"), ExtResource("48_mscvp"), ExtResource("61_hswng"), ExtResource("62_clvof"), ExtResource("49_hswng"), ExtResource("59_03j4m"), ExtResource("60_mscvp"), ExtResource("35_0skxp"), ExtResource("36_8pnpl"), ExtResource("54_rrhts"), ExtResource("47_r37ip"), ExtResource("48_k4l7a"), ExtResource("53_dmw0h"), ExtResource("53_1dko6"), ExtResource("54_vro0t"), ExtResource("47_03j4m"), ExtResource("53_ej3ya"), ExtResource("54_8unkc"), ExtResource("52_a07pj"), ExtResource("51_o8d3c"), ExtResource("52_jjr6e"), ExtResource("37_2ldnj"), ExtResource("38_0gvoa"), SubResource("Resource_c4mfw"), ExtResource("41_1dko6"), ExtResource("42_vro0t"), ExtResource("43_r37ip"), ExtResource("44_k4l7a"), ExtResource("46_8unkc"), ExtResource("66_03j4m"), ExtResource("67_mscvp"), ExtResource("68_hswng"), ExtResource("79_2hfuq"), ExtResource("80_mtho0"), ExtResource("81_w7xmh"), ExtResource("82_jwfxs"), ExtResource("83_3wwnn"), ExtResource("84_pv6be")])
+Equipment = Array[ExtResource("33_ovnka")]([ExtResource("46_ufipr"), ExtResource("47_rxtc1"), ExtResource("49_jjr6e"), ExtResource("51_fw80n"), ExtResource("48_o8d3c"), ExtResource("50_ovnka"), ExtResource("34_pefvv"), ExtResource("57_ej3ya"), ExtResource("58_8unkc"), ExtResource("50_clvof"), ExtResource("55_r37ip"), ExtResource("56_k4l7a"), ExtResource("48_mscvp"), ExtResource("61_hswng"), ExtResource("62_clvof"), ExtResource("49_hswng"), ExtResource("59_03j4m"), ExtResource("60_mscvp"), ExtResource("35_0skxp"), ExtResource("36_8pnpl"), ExtResource("54_rrhts"), ExtResource("47_r37ip"), ExtResource("48_k4l7a"), ExtResource("53_dmw0h"), ExtResource("53_1dko6"), ExtResource("54_vro0t"), ExtResource("47_03j4m"), ExtResource("53_ej3ya"), ExtResource("54_8unkc"), ExtResource("52_a07pj"), ExtResource("51_o8d3c"), ExtResource("52_jjr6e"), ExtResource("37_2ldnj"), ExtResource("38_0gvoa"), SubResource("Resource_jwfxs"), ExtResource("41_1dko6"), ExtResource("42_vro0t"), ExtResource("43_r37ip"), ExtResource("44_k4l7a"), ExtResource("46_8unkc"), ExtResource("66_03j4m"), ExtResource("67_mscvp"), ExtResource("68_hswng"), ExtResource("79_2hfuq"), ExtResource("80_mtho0"), ExtResource("81_w7xmh"), ExtResource("82_jwfxs"), ExtResource("83_3wwnn"), ExtResource("84_pv6be")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="1_b226h"]
 [ext_resource type="Script" uid="uid://bsaj48imrffw" path="res://Scripts/intro.gd" id="1_duh1u"]
 
-[sub_resource type="Environment" id="Environment_t244x"]
+[sub_resource type="Environment" id="Environment_duh1u"]
 background_mode = 3
 ambient_light_source = 1
 reflected_light_source = 1
@@ -12,7 +12,7 @@ tonemap_white = 16.0
 adjustment_enabled = true
 
 [sub_resource type="World3D" id="World3D_oyy4e"]
-environment = SubResource("Environment_t244x")
+environment = SubResource("Environment_duh1u")
 
 [node name="Intro" type="Control" node_paths=PackedStringArray("TextLabel")]
 layout_mode = 3

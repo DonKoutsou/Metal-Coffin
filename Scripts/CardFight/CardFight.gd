@@ -795,7 +795,7 @@ func DoCurrentShipFireDamage() -> void:
 			
 			var d = DamageFloater.instantiate() as Floater
 			if (CurrentShip.IsSeverelyBurnt):
-				d.text = "Severe Fire Damage"
+				d.text = "Severe\nFire Damage"
 			else:
 				d.text = "Fire Damage"
 			d.modulate = Color(1,0,0,1)
@@ -1626,7 +1626,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 				SelectingTarget = false
 			else:
 				if (Mod is BuffModule):
-					Targets.append(GetTargetWithBiggestStat(Team, Mod.Stat))
+					Targets.append(GetTargetWithBiggestStat(Team, Mod.StatToBuff))
 				else:
 					Targets.append(Team.pick_random())
 		#if nothing of the above counts pick the user as the target

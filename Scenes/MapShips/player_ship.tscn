@@ -51,7 +51,7 @@ Acceleration = NodePath("Aceleration")
 [node name="PlayerShipSpr" type="Sprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("6_6lhcj")
 
 [node name="TrailLine" type="Line2D" parent="PlayerShipSpr"]
@@ -59,7 +59,7 @@ show_behind_parent = true
 position = Vector2(30.0009, -240)
 rotation = 1.5708
 scale = Vector2(10, 10)
-width = 2.0
+width = 3.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
 round_precision = 1
@@ -73,7 +73,7 @@ show_behind_parent = true
 position = Vector2(-29.9991, -240)
 rotation = 1.5708
 scale = Vector2(10, 10)
-width = 2.0
+width = 3.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
 round_precision = 1

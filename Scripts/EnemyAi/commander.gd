@@ -11,7 +11,7 @@ extends Node2D
 #/////////////////////////////////////////////////////////////
 class_name Commander
 
-@export var Armaments : Dictionary
+@export var Armaments : Dictionary[MissileItem, int]
 @export var SimulationRange : int = 10000
 
 @export_flags_2d_physics var layers_2d_physics

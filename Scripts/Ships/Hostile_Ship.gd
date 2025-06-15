@@ -523,41 +523,11 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			call_deferred("DestroyEnemyDebry")
 		#TODO expand logic to allow for convoys with guards
 		else : if (Convoy):
-			var Ship = Body.get_parent()
-			var FleetCommander : MapShip
-			if (Ship.Command == null):
-				FleetCommander = Ship
-			else:
-				FleetCommander = Ship.Command
-			FleetCommander.GetDroneDock().AddCaptive(self)
-		#else:
-			#var plships : Array[MapShip] = []
-			#var hostships : Array[MapShip] = []
-			#if (Docked):
-				#hostships.append(Command)
-				#hostships.append_array(Command.GetDroneDock().DockedDrones)
-			#else:
-				#hostships.append(self)
-				#hostships.append_array(GetDroneDock().DockedDrones)
-			#
-			#var Ship : MapShip = Body.get_parent()
-			#if (Ship.Command == null):
-				#plships.append(Ship)
-				#for g in Ship.GetDroneDock().GetDockedShips():
-					#if (g is HostileShip):
-						#hostships.append(g)
-					#else:
-						#plships.append(g)
-			#else:
-				#var FleetCommander = Ship.Command
-				#plships.append(FleetCommander)
-				#for g in FleetCommander.GetDroneDock().GetDockedShips():
-					#if (g is HostileShip):
-						#hostships.append(g)
-					#else:
-						#plships.append(g)
-						#
-			#OnPlayerShipMet.emit(plships, hostships)
+			Evaporate()
+			World.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
+			PopUpManager.GetInstance().DoFadeNotif("Convoy Plundered\n{0} Drahma added".format([Cpt.ProvidingFunds]))
+
+
 	else : if (Body.get_parent() == Command and CommingBack):
 		var Ship = Body.get_parent() as HostileShip
 		Ship.GetDroneDock().DockDrone(self, true)

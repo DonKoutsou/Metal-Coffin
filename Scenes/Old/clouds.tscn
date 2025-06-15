@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ddbxni7fgqwdh"]
 
-[ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/clouds.gdshader" id="1_n86u7"]
+[ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/Clouds/clouds.gdshader" id="1_n86u7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_x4uwu"]
 frequency = 0.0375
@@ -15,6 +15,10 @@ shader_parameter/density = 0.25
 shader_parameter/speed = Vector2(0.02, 0.01)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
+shader_parameter/UseCustomTime = false
+shader_parameter/NormalStr = 0.5
+shader_parameter/shadow_strength = 0.3
+shader_parameter/shadow_parallax_amount = 0.5
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4lisr"]
 noise_type = 5
@@ -33,6 +37,10 @@ shader_parameter/density = 0.25
 shader_parameter/speed = Vector2(0.02, 0.01)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
+shader_parameter/UseCustomTime = false
+shader_parameter/NormalStr = 0.5
+shader_parameter/shadow_strength = 0.3
+shader_parameter/shadow_parallax_amount = 0.5
 
 [node name="Clouds" type="ParallaxBackground"]
 layer = 1

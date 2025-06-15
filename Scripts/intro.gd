@@ -15,7 +15,7 @@ func _ready() -> void:
 	$SubViewportContainer/SubViewport/TownBackground.Dissable()
 	TextLabel.text = Text
 	Tw = create_tween()
-	Tw.tween_property(TextLabel, "position", Vector2(TextLabel.position.x,-TextLabel.size.y - get_viewport_rect().size.y), 2.5 * TextLabel.get_line_count())
+	Tw.tween_property(TextLabel, "position", Vector2(TextLabel.position.x,-TextLabel.size.y - get_viewport_rect().size.y), 4 * TextLabel.get_line_count())
 	await Tw.finished
 	IntroFinished.emit()
 	#queue_free()

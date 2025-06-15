@@ -66,7 +66,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 	DescribedContainer = Box
 	var It = DescribedContainer.GetContainedItem()
 	#ItemIcon.texture = It.ItemIcon
-	#ItemDesc.text = It.GetItemDesc()
+	ItemDesc.visible = false
 	
 	#TransferButton.visible = It.CanTransfer
 	TransferButton.visible = false

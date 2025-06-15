@@ -54,6 +54,7 @@ func _ready() -> void:
 	#$Inventory.Player = GetMap().GetPlayerShip()
 	var Loadingscr = LoadingScene.instantiate() as LoadingScreen
 	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, false)
+	
 	#add_child(Loadingscr)
 	#TODO needs fix
 	if (!Loading):
@@ -68,6 +69,8 @@ func _ready() -> void:
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Events")
 		await wait(1)
+	else:
+		Loadingscr.DissableText()
 	Loadingscr.UpdateProgress(20)
 	Loadingscr.ProcessStarted("Generating Road Networks")
 	GetMap().GenerateRoads()
@@ -93,8 +96,8 @@ func _ready() -> void:
 		await wait(1)
 	Loadingscr.UpdateProgress(100)
 	await wait(1)
-	
-	#Loadingscr.StartDest()
+	Loadingscr.StartDest()
+	await Loadingscr.IntroFinished
 	
 	$ShipController.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
@@ -114,12 +117,12 @@ func _ready() -> void:
 			var Trigger = PrologueTrigger.instantiate() as PrologueEnd_Trigger
 			var Armak = Helper.GetInstance().GetSpotByName("Armak")
 			Armak.add_child(Trigger)
-			var IntroTxt = IntroText.instantiate() as Intro
-			Ingame_UIManager.GetInstance().AddUI(IntroTxt, false, true)
-			await IntroTxt.IntroFinished
-			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
-			await GetMap().GetScreenUi().FullScreenToggleStarted
-			IntroTxt.queue_free()
+			#var IntroTxt = IntroText.instantiate() as Intro
+			#Ingame_UIManager.GetInstance().AddUI(IntroTxt, false, true)
+			#await IntroTxt.IntroFinished
+			#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+			#await GetMap().GetScreenUi().FullScreenToggleStarted
+			#IntroTxt.queue_free()
 			var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
 			Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
 			Questionair.Init()
@@ -356,14 +359,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var Inventory = InventoryManager.GetInstance()
 	if (Inventory.visible):
 		Inventory.ToggleInventory()
-	if (Ship.GetDroneDock().Captives.size() > 0):
-		var Earnings = 0
-		for g in Ship.GetDroneDock().Captives:
-			Ship.GetDroneDock().UndockCaptive(g)
-			Earnings += g.Cpt.ProvidingFunds * 2
-			g.Evaporate()
-			
-		World.GetInstance().PlayerWallet.AddFunds(Earnings)
+	
 		
 	if (Ship.is_connected("LandingEnded", OnShipLanded)):
 		Ship.disconnect("LandingEnded", OnShipLanded)
