@@ -315,7 +315,7 @@ func CheckAlarm() -> void:
 	if (Events > 0):
 		if (!Alarmed and  KnownEnemies.size() > 0):
 			OnAlarmRaised()
-			AlarmCooldown = 20
+			AlarmCooldown = 200
 			
 		else : if (KnownEnemies.size() == 0):
 			

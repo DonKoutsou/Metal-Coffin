@@ -16,7 +16,7 @@ signal GUI_Input(event)
 static var Instance :Ingame_UIManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Control3/CommandLine.visible = false
+	
 	PauseContainer.visible = false
 	Instance = self
 	EventHandler.connect("PausePressed", Pause)
@@ -103,12 +103,7 @@ func _on_exit_pressed() -> void:
 func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().EndGame()
 	
-func _input(event: InputEvent) -> void:
-	#if (event.is_action_pressed("Pause")):
-		#Pause()
-	if (event.is_action_pressed("CommandLine") and OS.is_debug_build()):
-		$Control3/CommandLine.visible = !$Control3/CommandLine.visible
-		$Control3/CommandLine.call_deferred("Focus")
+
 		
 		
 func _on_control_3_gui_input(event: InputEvent) -> void:

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://bhevqygxeb34e"]
+
+[ext_resource type="Resource" uid="uid://csgrtdu16q72h" path="res://Resources/Items/ShipParts/Shield/CompositeTitaniumPlates.tres" id="1_shiyx"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_aabid"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_pyh21"]
+
+[sub_resource type="Resource" id="Resource_r63ls"]
+script = ExtResource("2_aabid")
+It = ExtResource("1_shiyx")
+Amm = 0
+
+[resource]
+script = ExtResource("3_pyh21")
+Merch = SubResource("Resource_r63ls")
+Cost = 0
+MaxAmmPerStage = 0
+DontGenerateBefore = 0

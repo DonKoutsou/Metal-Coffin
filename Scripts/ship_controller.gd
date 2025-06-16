@@ -247,7 +247,7 @@ func GetSaveData() -> PlayerSaveData:
 func LoadSaveData(Data : PlayerSaveData) -> void:
 	var Player = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
 	Player.SetShipPosition(Data.Pos)
-	Player.global_rotation = Data.Rot
+	Player.ForceSteer(Data.Rot)
 	
 	#WorldView.GetInstance().LoadData(Data.Worldview)
 	for Ship in Data.PlayerFleet:
@@ -263,7 +263,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		CommanderShip.Cpt = Command.CommanderData.Cpt
 		ShipPlecement.add_child(CommanderShip)
 		CommanderShip.SetShipPosition(Command.CommanderData.Pos)
-		CommanderShip.global_rotation = Command.CommanderData.Rot
+		CommanderShip.ForceSteer(Command.CommanderData.Rot)
 		CommanderShip.SetSpeed(Command.CommanderData.Speed)
 		CommanderShip.UpdateAltitude(Command.CommanderData.Altitude)
 		for Ship in Command.DockedShips:

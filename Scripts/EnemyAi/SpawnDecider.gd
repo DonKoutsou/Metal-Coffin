@@ -89,14 +89,18 @@ func GetMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 		var m = MerchList.pick_random() as MerchandiseInfo
 		if (m.DontGenerateBefore > stage):
 				continue
+		var M : Merchandise
+		for g in available_merch:
+			if (m.Merch.It == g.It):
+				M = g
+				break
+		
 		if (points > m.Cost):
-			var hasm = false
-			for g in available_merch:
-				if (m.Merch.It == g.It):
-					g.Amm += 1
-					hasm = true
-					break
-			if (!hasm):
+			if (M != null):
+				#if (M.Amm >= m.MaxAmmPerStage):
+					#continue
+				M.Amm += 1
+			else:
 				var NewMerch = m.Merch.duplicate(false)
 				NewMerch.Amm = 1
 				available_merch.append(NewMerch)
@@ -114,14 +118,18 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise
 		var m = WorkshopList.pick_random() as MerchandiseInfo
 		if (m.DontGenerateBefore > stage):
 			continue
+		var M : Merchandise
+		for g in available_merch:
+			if (m.Merch.It == g.It):
+				M = g
+				break
+		
 		if (points > m.Cost):
-			var hasm = false
-			for g in available_merch:
-				if (m.Merch.It == g.It):
-					g.Amm += 1
-					hasm = true
-					break
-			if (!hasm):
+			if (M != null):
+				#if (M.Amm >= m.MaxAmmPerStage):
+					#continue
+				M.Amm += 1
+			else:
 				var NewMerch = m.Merch.duplicate(false)
 				NewMerch.Amm = 1
 				available_merch.append(NewMerch)

@@ -11,12 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/HostileShip.tscn" id="11_323je"]
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="11_a2ujk"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
-[ext_resource type="Texture2D" uid="uid://bbflwo1xyqt7h" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="13_6an1p"]
-[ext_resource type="Texture2D" uid="uid://b6pk05fgqu1do" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="14_x3wib"]
-[ext_resource type="Texture2D" uid="uid://xjpx02shay16" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="15_28wu2"]
-[ext_resource type="Texture2D" uid="uid://diq6pmys4cr8f" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="16_445lv"]
+[ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="14_a2ujk"]
+[ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="15_x3wib"]
+[ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="16_28wu2"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
+[ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="17_445lv"]
 [ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="18_a2ujk"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
@@ -52,11 +52,11 @@ noise = SubResource("FastNoiseLite_eb1s8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28wu2"]
 shader = ExtResource("18_x3wib")
-shader_parameter/GroundTexture = ExtResource("15_28wu2")
-shader_parameter/GroundTexture2 = ExtResource("16_445lv")
+shader_parameter/GroundTexture = ExtResource("16_28wu2")
+shader_parameter/GroundTexture2 = ExtResource("17_445lv")
 shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_445lv")
-shader_parameter/GroundNormalTexture = ExtResource("14_x3wib")
-shader_parameter/GroundNormal2Texture = ExtResource("13_6an1p")
+shader_parameter/GroundNormalTexture = ExtResource("15_x3wib")
+shader_parameter/GroundNormal2Texture = ExtResource("14_a2ujk")
 shader_parameter/NormalD = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(10, 10)
@@ -138,7 +138,6 @@ render_target_update_mode = 4
 color = Color(0, 0, 0, 1)
 
 [node name="RoadLineDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("16_sp82o")]
-modulate = Color(1, 1, 1, 0.5)
 z_index = -1
 RoadLines = true
 

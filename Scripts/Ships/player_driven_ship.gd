@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 	
 	for g in TrailLines:
-		g.UpdateProjected(delta, ParalaxMulti)
+		g.UpdateProjected(delta, Altitude / 10000.0)
 	
 	if (CurrentPort != null):
 		_HandleRestock()

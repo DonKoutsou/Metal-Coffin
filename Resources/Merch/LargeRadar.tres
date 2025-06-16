@@ -7,7 +7,6 @@
 [sub_resource type="Resource" id="Resource_pqvxf"]
 script = ExtResource("2_1ovhm")
 It = ExtResource("1_mnbal")
-Price = 0
 Amm = 0
 
 [resource]

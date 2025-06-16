@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpawnDecider" load_steps=51 format=3 uid="uid://c1buiwym6qkh8"]
+[gd_resource type="Resource" script_class="SpawnDecider" load_steps=54 format=3 uid="uid://c1buiwym6qkh8"]
 
 [ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_87ibq"]
 [ext_resource type="Resource" uid="uid://ctb0bey42ck18" path="res://Resources/Captains/SpawnInfos/FireshipLvl1.tres" id="2_wdg75"]
@@ -37,6 +37,7 @@
 [ext_resource type="Resource" uid="uid://bww138fvog6ub" path="res://Resources/Merch/ProxyFuseAmmoMagazine180mm.tres" id="35_6tuc6"]
 [ext_resource type="Resource" uid="uid://ddianchuh5iur" path="res://Resources/Merch/TacticalMissile.tres" id="36_e63t2"]
 [ext_resource type="Resource" uid="uid://blsmdai2hgyx8" path="res://Resources/Merch/ShortCoil.tres" id="39_nwwh6"]
+[ext_resource type="Resource" uid="uid://0km40duhdlcp" path="res://Resources/Merch/ExplosiveDrone.tres" id="40_hn1fl"]
 [ext_resource type="Resource" uid="uid://c4245ovobbj7l" path="res://Resources/Merch/DroneDock.tres" id="40_ymg10"]
 [ext_resource type="Resource" uid="uid://bih2oy6q0lw16" path="res://Resources/Merch/ShortElint.tres" id="45_rfrj6"]
 [ext_resource type="Resource" uid="uid://cfrm7gd27ssgm" path="res://Resources/Merch/ShortMachinegun100mm.tres" id="50_mdoiy"]
@@ -44,11 +45,13 @@
 [ext_resource type="Resource" uid="uid://cojlsut62exlt" path="res://Resources/Merch/ShortMissilePod.tres" id="54_wjgph"]
 [ext_resource type="Resource" uid="uid://cfsvj1gty2thk" path="res://Resources/Merch/ShortRadar.tres" id="57_adowj"]
 [ext_resource type="Resource" uid="uid://bqpuuxe8s87wc" path="res://Resources/Merch/SGP-1 Ship Barrier.tres" id="59_4akpv"]
+[ext_resource type="Resource" uid="uid://cbjfuhajoaepk" path="res://Resources/Merch/ShortFlameThrower.tres" id="62_e0tbx"]
 [ext_resource type="Resource" uid="uid://ckec7gk7u8deb" path="res://Resources/Merch/SPK-25 Ship Barrier.tres" id="63_1c3sd"]
 [ext_resource type="Resource" uid="uid://8cds15m853c4" path="res://Resources/Merch/Engine.tres" id="65_3oetp"]
 [ext_resource type="Resource" uid="uid://lxwxme7j6jy5" path="res://Resources/Merch/Engine2.tres" id="68_gv8v6"]
 [ext_resource type="Resource" uid="uid://dw0bitpaoxkxh" path="res://Resources/Merch/FuelTank.tres" id="72_lsbtd"]
 [ext_resource type="Resource" uid="uid://dfkuuikjxrlsx" path="res://Resources/Merch/FuelTank2.tres" id="75_wb6f4"]
+[ext_resource type="Resource" uid="uid://dpv1xl8cl3dei" path="res://Resources/Merch/TitaniumPlates.tres" id="78_nwwh6"]
 [ext_resource type="Script" uid="uid://orkurt2hukf6" path="res://Scripts/EnemyAi/SpawnDecider.gd" id="78_yg7ff"]
 
 [resource]
@@ -56,6 +59,6 @@ script = ExtResource("78_yg7ff")
 CaptainList = Array[ExtResource("1_87ibq")]([ExtResource("2_wdg75"), ExtResource("3_2eb0g"), ExtResource("4_r0vc0"), ExtResource("5_c68la"), ExtResource("6_iqlvy"), ExtResource("7_n8h36"), ExtResource("8_dofu4"), ExtResource("9_exmfb"), ExtResource("10_pui15"), ExtResource("11_h16mj"), ExtResource("12_0su1b"), ExtResource("13_ns8om"), ExtResource("14_hn1fl"), ExtResource("15_1pv0s"), ExtResource("16_oscns"), ExtResource("17_fdaa0")])
 GroundUnits = Array[ExtResource("1_87ibq")]([ExtResource("19_4glqq"), ExtResource("20_u7j23")])
 ConvoyUnits = Array[ExtResource("1_87ibq")]([ExtResource("18_5ajvh")])
-MerchList = Array[ExtResource("21_0l8w1")]([ExtResource("22_n5x2f"), ExtResource("23_e0tbx"), ExtResource("24_7csm4"), ExtResource("25_1jucq"), ExtResource("26_fxbmr"), ExtResource("27_eko6l"), ExtResource("28_ndjdo"), ExtResource("29_5gpoi"), ExtResource("30_mbacr"), ExtResource("31_2npr6"), ExtResource("32_472ag"), ExtResource("33_4ck5a"), ExtResource("34_0mi3x"), ExtResource("35_6tuc6"), ExtResource("36_e63t2")])
-WorkshopList = Array[ExtResource("21_0l8w1")]([ExtResource("39_nwwh6"), ExtResource("40_ymg10"), ExtResource("45_rfrj6"), ExtResource("50_mdoiy"), ExtResource("51_u2hn7"), ExtResource("54_wjgph"), ExtResource("57_adowj"), ExtResource("59_4akpv"), ExtResource("63_1c3sd"), ExtResource("65_3oetp"), ExtResource("68_gv8v6"), ExtResource("72_lsbtd"), ExtResource("75_wb6f4")])
+MerchList = Array[ExtResource("21_0l8w1")]([ExtResource("22_n5x2f"), ExtResource("23_e0tbx"), ExtResource("24_7csm4"), ExtResource("25_1jucq"), ExtResource("26_fxbmr"), ExtResource("27_eko6l"), ExtResource("28_ndjdo"), ExtResource("29_5gpoi"), ExtResource("30_mbacr"), ExtResource("31_2npr6"), ExtResource("32_472ag"), ExtResource("33_4ck5a"), ExtResource("34_0mi3x"), ExtResource("35_6tuc6"), ExtResource("36_e63t2"), ExtResource("40_hn1fl")])
+WorkshopList = Array[ExtResource("21_0l8w1")]([ExtResource("39_nwwh6"), ExtResource("40_ymg10"), ExtResource("45_rfrj6"), ExtResource("50_mdoiy"), ExtResource("51_u2hn7"), ExtResource("54_wjgph"), ExtResource("57_adowj"), ExtResource("59_4akpv"), ExtResource("63_1c3sd"), ExtResource("65_3oetp"), ExtResource("68_gv8v6"), ExtResource("72_lsbtd"), ExtResource("75_wb6f4"), ExtResource("62_e0tbx"), ExtResource("78_nwwh6")])
 Switch = false

@@ -19,8 +19,7 @@ domain_warp_fractal_type = 0
 domain_warp_fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
-width = 2048
-height = 1024
+width = 1024
 seamless = true
 seamless_blend_skirt = 1.0
 color_ramp = SubResource("Gradient_l2i77")

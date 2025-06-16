@@ -1,6 +1,5 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene load_steps=12 format=3 uid="uid://c3l8v8l2e2pkt"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7vk35"]
 [ext_resource type="Script" uid="uid://we85k2ntvck5" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
@@ -17,23 +16,10 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6175k"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="ShipMarker" type="Control" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown")]
+[node name="ShipMarker" type="Node2D" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown")]
 z_index = 1
+texture_filter = 2
 use_parent_material = true
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = ExtResource("1_7vk35")
 script = ExtResource("1_y30vi")
 Direction = NodePath("Icon/ShipSymbol/Direction")
 ShipCallsign = NodePath("Icon/ShipSymbol")
@@ -64,6 +50,7 @@ round_precision = 1
 [node name="Control" type="Control" parent="."]
 z_index = 5
 use_parent_material = true
+layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 
@@ -108,7 +95,6 @@ uppercase = true
 
 [node name="Icon" type="TextureRect" parent="." groups=["MapShipVizualiser"]]
 use_parent_material = true
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

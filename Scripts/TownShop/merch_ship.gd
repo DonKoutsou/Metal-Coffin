@@ -18,9 +18,9 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 		var InvContents = ship.Cpt.GetCharacterInventory().GetInventoryContents()
 		for it in InvContents:
 			if (Itms.has(it)):
-				Itms[it] += 1
+				Itms[it] += InvContents[it]
 			else:
-				Itms[it] = 1
+				Itms[it] = InvContents[it]
 	#Spacer
 	var C = Control.new()
 	ItemPlecement.add_child(C)

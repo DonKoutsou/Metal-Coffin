@@ -16,8 +16,8 @@ var SpawnedCredits : Control
 var Selecting : bool
 
 
-signal GameStart(Load : bool)
-signal PrologueStart(Load : bool)
+signal GameStart(Load : bool, SkipStory : bool)
+signal PrologueStart(Load : bool, SkipStory : bool)
 signal FightStart()
 signal DelSave
 
@@ -159,3 +159,23 @@ func _on_fight_pressed() -> void:
 func _on_cancel_pressed() -> void:
 	ShowTutorial.emit(2)
 	
+
+
+func _on_command_line_start_campaign(SkipStory: bool) -> void:
+	if (Selecting):
+		return
+		
+	var Run = await ChooseTutorial()
+	if (!Run):
+		return
+	GameStart.emit(false, SkipStory)
+
+
+func _on_command_line_start_prologue(SkipStory: bool) -> void:
+	if (Selecting):
+		return
+		
+	var Run = await ChooseTutorial()
+	if (!Run):
+		return
+	PrologueStart.emit(false, SkipStory)

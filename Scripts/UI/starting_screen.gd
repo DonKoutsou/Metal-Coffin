@@ -51,7 +51,7 @@ func SpawnMenu() -> void:
 	StMenu.FightStart.connect(StartCageFight)
 	UISoundMan.GetInstance().Refresh()
 
-func StartPrologue(Load : bool) -> void:
+func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
 	
 	Wor = IntroGameScene.instantiate() as World
 	if (Load):
@@ -61,6 +61,7 @@ func StartPrologue(Load : bool) -> void:
 			return
 	
 	add_child(Wor)
+	Wor.SkipStory = SkipStory
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false
@@ -78,7 +79,7 @@ func StartCageFight() -> void:
 	#$PanelContainer.visible = false
 	fight.FightEnded.connect(FightEnded.bind(fight))
 
-func StartGame(Load : bool) -> void:
+func StartGame(Load : bool, SkipStory : bool = false) -> void:
 	#TODO enable on full release
 	if (!ActionTracker.GetInstance().DidPrologue()):
 		var window = AcceptDialog.new()

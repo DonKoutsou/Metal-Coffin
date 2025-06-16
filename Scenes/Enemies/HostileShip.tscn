@@ -12,7 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7v2kq"]
 resource_local_to_scene = true
 shader = ExtResource("5_7v2kq")
-shader_parameter/ShipSize = 0.15
+shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_strength = 0.5
 shader_parameter/shadow_parallax_amount = 0.2
 shader_parameter/sprite_rotation = -1.57
@@ -58,7 +58,6 @@ position = Vector2(0.5, 0)
 z_index = -1
 material = SubResource("ShaderMaterial_7v2kq")
 rotation = -1.57078
-scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_xxp8j")
 
 [node name="TrailLine" type="Line2D" parent="ColorRect"]
@@ -82,6 +81,7 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
+visible = false
 shape = SubResource("CircleShape2D_jc744")
 
 [node name="Radar" type="Area2D" parent="."]
@@ -89,6 +89,7 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
+visible = false
 shape = SubResource("CircleShape2D_63pb3")
 
 [node name="Elint" type="Area2D" parent="."]
@@ -97,6 +98,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+visible = false
 shape = SubResource("CircleShape2D_t084r")
 
 [node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]

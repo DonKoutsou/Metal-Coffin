@@ -29,7 +29,7 @@ class_name World
 
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
-
+var SkipStory : bool
 signal WRLD_OnGameEnded
 signal WRLD_WorldReady
 signal WorldSpawnTransitionFinished
@@ -106,7 +106,7 @@ func _ready() -> void:
 	if (!Loading):
 		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
 		GetMap().GetCamera().FrameCamToPlayer()
-		if (IsPrologue):
+		if (IsPrologue and !SkipStory):
 			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		else:
 			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
@@ -117,22 +117,24 @@ func _ready() -> void:
 			var Trigger = PrologueTrigger.instantiate() as PrologueEnd_Trigger
 			var Armak = Helper.GetInstance().GetSpotByName("Armak")
 			Armak.add_child(Trigger)
-			#var IntroTxt = IntroText.instantiate() as Intro
-			#Ingame_UIManager.GetInstance().AddUI(IntroTxt, false, true)
-			#await IntroTxt.IntroFinished
-			#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
-			#await GetMap().GetScreenUi().FullScreenToggleStarted
-			#IntroTxt.queue_free()
-			var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
-			Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
-			Questionair.Init()
-			await GetMap().GetScreenUi().FullScreenToggleFinished
-			#await Loadingscr.LoadingDestroyed
-			await Questionair.Ended
-			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-			await GetMap().GetScreenUi().FullScreenToggleStarted
-			Questionair.queue_free()
-			PlayPrologue()
+			
+			if (!SkipStory):
+				var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
+				Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
+				Questionair.Init()
+				await GetMap().GetScreenUi().FullScreenToggleFinished
+				#await Loadingscr.LoadingDestroyed
+				await Questionair.Ended
+				GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+				await GetMap().GetScreenUi().FullScreenToggleStarted
+				Questionair.queue_free()
+				PlayPrologue()
+			else:
+				var Cardi = Helper.GetInstance().GetSpotByName("Cardi")
+				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
+				Pl.global_position = Cardi.global_position
+				Cardi.Event.SkipStory(Pl)
+				Cardi.Visited = true
 		else:
 			#Load worldview from prologue
 			WorldView.GetInstance().Load()

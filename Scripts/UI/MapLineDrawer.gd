@@ -27,13 +27,20 @@ func DrawLines() -> void:
 		
 		L.use_parent_material = true
 		L.width = 20
+		
+		
+		
+		
 		if (!RoadLines):
 			L.default_color = Color(1,1,1, 1)
 		else:
+			L.texture = load("res://Assets/path.png")
+			L.texture_mode = Line2D.LINE_TEXTURE_TILE
+			L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 			#L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 			#L.texture = load("res://Assets/Sand/Tiles093_1K-PNG_Color.png")
-			L.default_color = Color(0,0,0, 1)
-			L.width = 1
+			#L.default_color = Color(0,0,0, 1)
+			L.width = 20
 		add_child(L)
 		L.global_position = points[0]
 		#L.default_color = Color("0ca50a")

@@ -1,10 +1,10 @@
 [gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://b6441eghjnus8"]
 
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="1_kyov3"]
-[ext_resource type="Texture2D" uid="uid://bbflwo1xyqt7h" path="res://Assets/Sand/Snow004_1K-PNG_NormalGL.png" id="2_mjecm"]
-[ext_resource type="Texture2D" uid="uid://b6pk05fgqu1do" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="3_8uhgy"]
-[ext_resource type="Texture2D" uid="uid://xjpx02shay16" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="4_ol4lr"]
-[ext_resource type="Texture2D" uid="uid://diq6pmys4cr8f" path="res://Assets/Sand/Snow008A_1K-PNG_Color.png" id="5_sgv5m"]
+[ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="2_kyov3"]
+[ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="3_mjecm"]
+[ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="4_8uhgy"]
+[ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="5_ol4lr"]
 
 [sub_resource type="Gradient" id="Gradient_kyov3"]
 offsets = PackedFloat32Array(0.409475, 0.463621)
@@ -25,11 +25,11 @@ noise = SubResource("FastNoiseLite_mjecm")
 
 [resource]
 shader = ExtResource("1_kyov3")
-shader_parameter/GroundTexture = ExtResource("4_ol4lr")
-shader_parameter/GroundTexture2 = ExtResource("5_sgv5m")
+shader_parameter/GroundTexture = ExtResource("4_8uhgy")
+shader_parameter/GroundTexture2 = ExtResource("5_ol4lr")
 shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_8uhgy")
-shader_parameter/GroundNormalTexture = ExtResource("3_8uhgy")
-shader_parameter/GroundNormal2Texture = ExtResource("2_mjecm")
+shader_parameter/GroundNormalTexture = ExtResource("3_mjecm")
+shader_parameter/GroundNormal2Texture = ExtResource("2_kyov3")
 shader_parameter/NormalD = 1.0
 shader_parameter/offset = Vector2(2.37, -2.715)
 shader_parameter/Scale1 = Vector2(5, 5)

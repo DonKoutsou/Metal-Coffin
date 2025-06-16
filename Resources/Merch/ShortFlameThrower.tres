@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cbjfuhajoaepk"]
+
+[ext_resource type="Resource" uid="uid://yvvekkrks7h7" path="res://Resources/Items/ShipParts/FlameThrower/ShortFlameThrower.tres" id="1_ffevr"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_hrhju"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_4g3ma"]
+
+[sub_resource type="Resource" id="Resource_wfb06"]
+script = ExtResource("2_hrhju")
+It = ExtResource("1_ffevr")
+Amm = 0
+
+[resource]
+script = ExtResource("3_4g3ma")
+Merch = SubResource("Resource_wfb06")
+Cost = 3
+MaxAmmPerStage = 1
+DontGenerateBefore = 2

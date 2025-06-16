@@ -61,14 +61,14 @@ func OnRefuelShopPressed() -> void:
 	
 	var FuelPricePerTon : float
 	if (!TownSpot.HasFuel()):
-		FuelPricePerTon = 200
-	else:
 		FuelPricePerTon = 100
+	else:
+		FuelPricePerTon = 50
 	var RepairpricePerRepairValue : float
 	if (!TownSpot.HasRepair()):
-		RepairpricePerRepairValue = 400
-	else:
 		RepairpricePerRepairValue = 200
+	else:
+		RepairpricePerRepairValue = 100
 	
 	Scene.Init(BoughtFuel, FuelPricePerTon, BoughtRepairs, RepairpricePerRepairValue, LandedShips)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)

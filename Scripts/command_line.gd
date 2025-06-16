@@ -6,23 +6,29 @@ class_name CommandLine
 
 var Items : Array[Item]
 
+@export var StartingMen : bool
+
 func _ready() -> void:
 	if (!OS.is_debug_build() or OS.get_name() != "Windows"):
 		queue_free()
 		return
+	visible = false
 	set_physics_process(false)
 	RefrshExistingItems()
 
 func OnCommandEntered() -> void:
 	var Command = Text.text
 	
-	UpdateRecomendations()
+	#UpdateRecomendations()
 	
 	if (Command.substr(Command.length() - 1, Command.length()) == "\n"):
 		print("thing")
 		Command = Command.replace("\n", "")
 		var response = HandleCommand(Command)
-		PopUpManager.GetInstance().DoFadeNotif(response, null, 10)
+		if (StartingMen):
+			PopUpManager.GetInstance().DoFadeNotif(response, get_parent())
+		else:
+			PopUpManager.GetInstance().DoFadeNotif(response, null)
 		
 		Text.text = ""
 	Text.set_caret_column(Text.text.length())
@@ -41,6 +47,8 @@ func HandleCommand(Command : String) -> String:
 	var firstword = CommandList[0].to_lower()
 	
 	match firstword:
+		"prologue":
+			return HandlePrologueCommand(CommandList)
 		"inv":
 			return HandleInventoryCommand(CommandList)
 		"stat":
@@ -49,6 +57,33 @@ func HandleCommand(Command : String) -> String:
 			return HandleLocationCommand(CommandList)
 	
 	return "Couldnt match command"
+
+signal StartPrologue(SkipStory : bool)
+signal StartCampaign(SkipStory : bool)
+
+func HandlePrologueCommand(Command) -> String:
+	if (Command.size() == 1):
+		StartPrologue.emit(false)
+		return "Starting Prologue"
+	
+	match (Command[1].to_lower()):
+		"skip":
+			StartPrologue.emit(true)
+			return "Starting Prologue\nSkipping Story"
+	
+	return "Error Handling Location Command"
+
+func HandleCampaignCommand(Command) -> String:
+	if (Command.size() == 1):
+		return "Prologue What?"
+	
+	match (Command[1].to_lower()):
+		"print":
+			return PrintLocations(Command[1])
+		"tp":
+			return HandleTeleport(Command[1], str_to_var(Command[3]) , str_to_var(Command[4]))
+	
+	return "Error Handling Location Command"
 
 func HandleLocationCommand(Command) -> String:
 	
@@ -189,38 +224,42 @@ func _physics_process(_delta: float) -> void:
 func OnCloseButtonPressed() -> void:
 	visible = false
 
-func UpdateRecomendations() -> void:
-	ClearRecomendations()
-	if (Text.text.length() == 0):
-		AddRecomendation("inv")
-		AddRecomendation("loc")
-		AddRecomendation("stat")
-	else:
-		var text = Text.text.split(" ")
-		if (text[0] == "inv"):
-			AddRecomendation("add")
-			AddRecomendation("upgrade")
-		if (text[0] == "stat"):
-			AddRecomendation("add")
-			AddRecomendation("upgrade")
-		if (text[0] == "loc"):
-			AddRecomendation("add")
-			AddRecomendation("upgrade")
+#func UpdateRecomendations() -> void:
+	#ClearRecomendations()
+	#if (Text.text.length() == 0):
+		#AddRecomendation("inv")
+		#AddRecomendation("loc")
+		#AddRecomendation("stat")
+	#else:
+		#var text = Text.text.split(" ")
+		#if (text[0] == "inv"):
+			#AddRecomendation("add")
+			#AddRecomendation("upgrade")
+		#if (text[0] == "stat"):
+			#AddRecomendation("add")
+			#AddRecomendation("upgrade")
+		#if (text[0] == "loc"):
+			#AddRecomendation("add")
+			#AddRecomendation("upgrade")
 		
-func RecomendationPressed(text : String) -> void:
-	Text.text += text + " "
-	UpdateRecomendations()
+#func RecomendationPressed(text : String) -> void:
+	#Text.text += text + " "
+	#UpdateRecomendations()
 	
-func OnCommandLineFocused() -> void:
-	UpdateRecomendations()
+#func OnCommandLineFocused() -> void:
+	#UpdateRecomendations()
 		
-func AddRecomendation(RecText : String) -> void:
-	var butn = Button.new()
-	butn.connect("pressed", RecomendationPressed.bind(RecText))
-	$VBoxContainer/TextEdit/VBoxContainer.add_child(butn)
-	butn.text = RecText
+#func AddRecomendation(RecText : String) -> void:
+	#var butn = Button.new()
+	#butn.connect("pressed", RecomendationPressed.bind(RecText))
+	#$VBoxContainer/TextEdit/VBoxContainer.add_child(butn)
+	#butn.text = RecText
 
 func ClearRecomendations() -> void:
 	for g in $VBoxContainer/TextEdit/VBoxContainer.get_children():
 		g.queue_free()
 	
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("CommandLine") and OS.is_debug_build()):
+		visible = !visible
+		call_deferred("Focus")

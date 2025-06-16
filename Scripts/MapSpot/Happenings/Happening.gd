@@ -22,6 +22,13 @@ static var WorldSize : float = 0
 	#if (Special):
 		#Specials.append(self)
 
+func SkipStory(Instigator : MapShip) -> void:
+	for g in Stages:
+		if (g.Options.size() > 0):
+			for Opt in g.Options:
+				if (Opt is Drone_Happening_Option):
+					Opt.OptionOutCome(Instigator)
+
 static func OnWorldGenerated(Size : float) -> void:
 	WorldSize = Size
 
