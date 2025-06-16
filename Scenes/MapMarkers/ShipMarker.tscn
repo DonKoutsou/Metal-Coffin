@@ -123,7 +123,6 @@ grow_vertical = 2
 pivot_offset = Vector2(17, 17)
 texture = ExtResource("7_kn8g7")
 expand_mode = 1
-stretch_mode = 3
 
 [node name="ShipSymbol" type="Label" parent="Icon"]
 use_parent_material = true

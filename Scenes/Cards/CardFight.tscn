@@ -107,6 +107,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Clouds" type="ColorRect" parent="SubViewport/Control2"]
+z_index = -1
 texture_filter = 1
 material = ExtResource("15_l2i77")
 layout_mode = 1

@@ -11,14 +11,14 @@ func  _ready() -> void:
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
 	queue_redraw()
-
+	
 func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)
 	queue_redraw()
 	
 	for g in TrailLines:
-		g.Update(delta)
+		g.UpdateProjected(delta, ParalaxMulti)
 	
 	if (CurrentPort != null):
 		_HandleRestock()

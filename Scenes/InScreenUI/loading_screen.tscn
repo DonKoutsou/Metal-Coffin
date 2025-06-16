@@ -169,7 +169,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 21.0
 offset_top = -42.0
-offset_right = -74.0
+offset_right = -146.0
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -190,6 +190,7 @@ grow_vertical = 0
 text = "Skip"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -202,10 +203,12 @@ offset_right = -9.0
 offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("4_57mps")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -218,10 +221,12 @@ offset_right = -9.0
 offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("5_bbvsw")
 expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -234,10 +239,12 @@ offset_right = -9.0
 offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("6_pg350")
 expand_mode = 1
 
 [node name="TextureRect4" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -250,10 +257,12 @@ offset_right = -9.0
 offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("7_6jo5o")
 expand_mode = 1
 
 [node name="TextureRect5" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -266,6 +275,7 @@ offset_right = -9.0
 offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("8_1dav1")
 expand_mode = 1
 

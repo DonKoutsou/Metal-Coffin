@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://vle20x3cbxms"]
+
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="1_4etdb"]
+
+[node name="ColorRect" type="Sprite2D"]
+position = Vector2(229, 340)
+rotation = -6.28319
+texture = ExtResource("1_4etdb")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-63, -141)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -522.0
+offset_top = -447.0
+offset_right = 277.0
+offset_bottom = 168.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(799, 615)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+show_behind_parent = true
+offset_left = 118.0
+offset_top = 205.0
+offset_right = 400.0
+offset_bottom = 519.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer/SubViewport"]
+layer = 0
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/ParallaxBackground"]
+position = Vector2(405, 332)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.115143, 0.115143, 0.115143, 1)
+texture = ExtResource("1_4etdb")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/ParallaxBackground"]
+position = Vector2(405, 332)
+motion_scale = Vector2(1.32, 1.32)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("1_4etdb")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(351, 418)

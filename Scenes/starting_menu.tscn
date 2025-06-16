@@ -68,6 +68,9 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(5, 5)
 shader_parameter/Scale2 = Vector2(10, 10)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
+light_mode = 1
+
 [sub_resource type="Curve" id="Curve_1p5b6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -76,9 +79,6 @@ point_count = 2
 interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.719685, 1)
 colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.313, 0.313, 0.313, 0)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
-light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1p5b6"]
 light_mode = 1
@@ -133,151 +133,6 @@ offset_right = 378.0
 offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="IntroMenuShips" type="Control" parent="SubViewportContainer/SubViewport"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_yrlew")
-Speed = 150.0
-
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-rotation = -1.5708
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("9_j43p8")
-expand_mode = 1
-
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(15, 15)
-
-[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3/Control"]
-modulate = Color(0, 0, 0, 0.6)
-layout_mode = 0
-offset_left = -4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 34.0
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("9_j43p8")
-expand_mode = 1
-
-[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
-show_behind_parent = true
-position = Vector2(15, 7)
-width = 4.0
-width_curve = SubResource("Curve_1p5b6")
-gradient = SubResource("Gradient_srpg8")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("8_eb1s8")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
-[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
-layout_mode = 0
-offset_left = -47.0
-offset_top = -30.0
-offset_right = 13.0
-offset_bottom = 30.0
-rotation = -1.5708
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("11_23r0g")
-expand_mode = 1
-
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(15, 15)
-
-[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4/Control"]
-modulate = Color(0, 0, 0, 0.6)
-layout_mode = 0
-offset_left = -8.0
-offset_top = 8.0
-offset_right = 52.0
-offset_bottom = 68.0
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("11_23r0g")
-expand_mode = 1
-
-[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
-show_behind_parent = true
-position = Vector2(30, 9.00005)
-width = 4.0
-width_curve = SubResource("Curve_1p5b6")
-gradient = SubResource("Gradient_srpg8")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("8_eb1s8")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
-[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
-layout_mode = 0
-offset_left = -49.0
-offset_top = 47.0
-offset_right = 11.0
-offset_bottom = 107.0
-rotation = -1.5708
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("12_23r0g")
-expand_mode = 1
-
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(15, 15)
-
-[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5/Control"]
-modulate = Color(0, 0, 0, 0.6)
-layout_mode = 0
-offset_left = -8.0
-offset_top = 8.0
-offset_right = 52.0
-offset_bottom = 68.0
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("12_23r0g")
-expand_mode = 1
-
-[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
-show_behind_parent = true
-position = Vector2(30, 9.00005)
-width = 4.0
-width_curve = SubResource("Curve_1p5b6")
-gradient = SubResource("Gradient_srpg8")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("8_eb1s8")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport"]
 material = SubResource("CanvasItemMaterial_yrlew")
@@ -336,6 +191,154 @@ size_flags_horizontal = 8
 size_flags_vertical = 6
 texture = ExtResource("7_aspsn")
 expand_mode = 1
+
+[node name="IntroMenuShips" type="Control" parent="SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_yrlew")
+Speed = 150.0
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+rotation = -1.5708
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("9_j43p8")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(15, 15)
+
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3/Control"]
+modulate = Color(0, 0, 0, 0.6)
+layout_mode = 0
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 34.0
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("9_j43p8")
+expand_mode = 1
+
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
+show_behind_parent = true
+position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
+width = 4.0
+width_curve = SubResource("Curve_1p5b6")
+gradient = SubResource("Gradient_srpg8")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_eb1s8")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
+layout_mode = 0
+offset_left = -47.0
+offset_top = -30.0
+offset_right = 13.0
+offset_bottom = 30.0
+rotation = -1.5708
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("11_23r0g")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(15, 15)
+
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4/Control"]
+modulate = Color(0, 0, 0, 0.6)
+layout_mode = 0
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 68.0
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("11_23r0g")
+expand_mode = 1
+
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
+show_behind_parent = true
+position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
+width = 4.0
+width_curve = SubResource("Curve_1p5b6")
+gradient = SubResource("Gradient_srpg8")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_eb1s8")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
+layout_mode = 0
+offset_left = -49.0
+offset_top = 47.0
+offset_right = 11.0
+offset_bottom = 107.0
+rotation = -1.5708
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("12_23r0g")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(15, 15)
+
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5/Control"]
+modulate = Color(0, 0, 0, 0.6)
+layout_mode = 0
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 68.0
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("12_23r0g")
+expand_mode = 1
+
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
+show_behind_parent = true
+position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
+width = 4.0
+width_curve = SubResource("Curve_1p5b6")
+gradient = SubResource("Gradient_srpg8")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_eb1s8")
+trail_fade_speed = 30.0
+min_distance = 1.0
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 texture_filter = 1

@@ -804,7 +804,7 @@ func DoCurrentShipFireDamage() -> void:
 		if (CurrentShip.IsOnFire):
 			
 			var d = DamageFloater.instantiate() as Floater
-			if (CurrentShip.IsSeverelyBurnt):
+			if (CurrentShip.IsSeverelyBurnt()):
 				d.text = "Severe\nFire Damage"
 			else:
 				d.text = "Fire Damage"

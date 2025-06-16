@@ -234,6 +234,7 @@ func GetSaveData() -> PlayerSaveData:
 				pldata.Rot = g.global_rotation
 				pldata.PlayerFleet = g.GetDroneDock().GetSaveData()
 				pldata.Speed = g.GetShipSpeed()
+				pldata.Altitude = g.Altitude
 			else :
 				var FleetData = FleetSaveData.new()
 				if (g is Drone):

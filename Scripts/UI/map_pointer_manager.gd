@@ -169,6 +169,9 @@ func _physics_process(delta: float) -> void:
 	FixLabelClipping()
 	Circles.clear()
 	
+	var CamPos = ShipCamera.GetInstance().get_screen_center_position()
+	var Zoom = ShipCamera.GetInstance().zoom.x
+	
 	for g in _ShipMarkers.size():
 		var ship = Ships[g]
 		var Marker = _ShipMarkers[g]
@@ -210,7 +213,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			if (ship is MapShip):
 
-				Marker.global_position = ship.global_position
+				Marker.global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
 				Marker.ToggleShipDetails(ship == ControlledShip)
 				
 				

@@ -1,8 +1,8 @@
 shader_type canvas_item;
 
 // === TEXTURES ===
-uniform sampler2D noise_texture : repeat_enable, filter_nearest_mipmap;
-uniform sampler2D noise_texturenormal : repeat_enable, filter_nearest_mipmap;
+uniform sampler2D noise_texture : repeat_enable, filter_linear;
+uniform sampler2D noise_texturenormal : repeat_enable, filter_linear;
 
 // === CLOUD SETTINGS ===
 uniform float density : hint_range(0.0, 3.0) = 0.25;

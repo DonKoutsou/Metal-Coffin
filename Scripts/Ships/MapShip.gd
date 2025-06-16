@@ -22,8 +22,6 @@ class_name MapShip
 @export var BodyShape : Area2D
 @export var DroneDok : Node2D
 @export var ShipSprite : Sprite2D
-@export var ShipShadow : Sprite2D
-@export var ShadowPivot : Node2D
 @export var Acceleration : Node2D
 
 
@@ -171,9 +169,11 @@ func OnStatLow(StatName : String) -> void:
 		return
 	StatLow.emit(StatName)
 
-func _UpdateShipIcon(Tex : Texture) -> void:
+var ParalaxMulti : float
+
+func _UpdateShipIcon(Tex : Texture2D) -> void:
+	ParalaxMulti = 250 / Tex.get_size().x
 	ShipSprite.texture = Tex
-	ShipShadow.texture = Tex
 	
 #///////////////////////////////////////////////
 #███████ ██   ██ ██ ██████       ██████  ██████  ███    ██ ████████ ██████   ██████  ██      ██      ██ ███    ██  ██████  
@@ -243,22 +243,25 @@ func updatedronecourse():
 	
 func Steer(Rotation : float) -> void:
 	rotation += Rotation / 50
-	ShadowPivot.global_rotation = deg_to_rad(-90)
-	ShipShadow.rotation = rotation
+	
+	var Mat = ShipSprite.material as ShaderMaterial
+	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+
 	for g in GetDroneDock().GetDockedShips():
 		g.ForceSteer(rotation)
 
 func ForceSteer(Rotation : float) -> void:
 	rotation = Rotation
-	ShadowPivot.global_rotation = deg_to_rad(-90)
-	ShipShadow.rotation = rotation
+	var Mat = ShipSprite.material as ShaderMaterial
+	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 		
 func ShipLookAt(pos : Vector2) -> void:
 	if (is_equal_approx(global_position.angle_to_point(pos), global_rotation)):
 		return
 	look_at(pos)
-	ShadowPivot.global_rotation = deg_to_rad(-90)
-	ShipShadow.rotation = rotation
+	var Mat = ShipSprite.material as ShaderMaterial
+	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+
 	for g in GetDroneDock().GetDockedShips():
 		g.ForceSteer(rotation)
 
@@ -312,11 +315,19 @@ func Landed() -> bool:
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
-	ShipSprite.scale = Vector2(lerp(0.02, 0.05, Altitude / 10000.0), lerp(0.02, 0.05, Altitude / 10000.0))
-	ShipShadow.position = Vector2(lerp(0, -40, Altitude / 10000.0), lerp(0, -40, Altitude / 10000.0))
+	ShipSprite.scale = Vector2(lerp(0.05, 0.8, Altitude / 10000.0), lerp(0.05, 0.8, Altitude / 10000.0))
+	
+	var Mat = ShipSprite.material as ShaderMaterial
+	Mat.set_shader_parameter("shadow_parallax_amount", lerp(0.0, ParalaxMulti, Altitude / 10000.0))
+
 	for g in GetDroneDock().GetDockedShips():
 		g.UpdateAltitude(NewAlt)
-	
+
+func GetShipParalaxPosition(CamPos : Vector2, Zoom : float) -> Vector2:
+	var offset = (CamPos - global_position) * Zoom * lerp(0.0, 0.07, Altitude / 10000.0)
+	offset.x /= 1.7
+	return global_position - offset
+
 func UpdateELINTTRange(rang : float):
 	var ElintRangeCollisionShape = ElintShape.get_node("CollisionShape2D")
 	#scalling collision

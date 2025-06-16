@@ -37,7 +37,7 @@ func _HANDLE_ZOOM(zoomval : float):
 	ZoomTw = create_tween()
 	ZoomTw.set_ease(Tween.EASE_OUT)
 	ZoomTw.set_trans(Tween.TRANS_QUART)
-	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(5,5))
+	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(3,3))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
 	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)

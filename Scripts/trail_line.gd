@@ -33,9 +33,9 @@ func Init() -> void:
 
 func Update(delta: float) -> void:
 
+	#global_position - (CamPos - global_position) * Zoom * lerp(0.0, 0.03, Altitude / 10000.0)
 	# Check if the position has changed
 	if last_position.distance_to(global_position) > min_distance:
-
 		PointPos.insert(1, last_position)
 		#print(last_position)
 		#print (PointPos)
@@ -55,10 +55,50 @@ func Update(delta: float) -> void:
 			
 	if (get_point_count() > 1):
 		for g in range(1, get_point_count(), 1):
+
+			set_point_position(g, to_local(PointPos[g]))
+			#print(g, PointPos[g])
+	# Keep the number of points under the max_points limit
+	while points.size() > max_points:
+		PointPos.remove_at(PointPos.size() - 1)
+		remove_point(get_point_count() - 1)
+
+func UpdateProjected(delta: float, paralax : float) -> void:
+	
+	var Cam = ShipCamera.GetInstance()
+	var CamPos = Cam.get_screen_center_position()
+	var Zoom = Cam.zoom.x
+	var Offset = ((CamPos - global_position)) * Zoom * 0.07
+	Offset.x /= 1.5
+	#global_position - (CamPos - global_position) * Zoom * lerp(0.0, 0.03, Altitude / 10000.0)
+	# Check if the position has changed
+	if last_position.distance_to(global_position) > min_distance:
+		PointPos.insert(1, last_position)
+		#print(last_position)
+		#print (PointPos)
+		add_point(to_local(last_position))
+		last_position =  global_position
+		#stationary_time = 0.0
+
+	stationary_time += delta
+	if stationary_time >= trail_fade_speed:
+		if get_point_count() > 1:
+			#print(PointPos)
+			#print("remove")
+			PointPos.remove_at(PointPos.size() - 1)
+			remove_point(get_point_count() - 1)
+			stationary_time = 0
+			#print(PointPos)
+	
+	set_point_position(0, to_local(global_position - Offset))
+	
+	if (get_point_count() > 1):
+		for g in range(1, get_point_count(), 1):
 			#if (g == get_point_count()  - 1):
 			#print(g)
 			#print (PointPos)
-			set_point_position(g, to_local(PointPos[g]))
+
+			set_point_position(g, to_local(PointPos[g] - Offset))
 			#print(g, PointPos[g])
 	# Keep the number of points under the max_points limit
 	while points.size() > max_points:
