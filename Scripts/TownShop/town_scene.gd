@@ -17,11 +17,10 @@ class_name TownScene
 @export var WorkshopScene : PackedScene
 
 var BoughtFuel : float = 0
-var BoughtRepairs : float = 0
 
 var TownSpot : MapSpot
 var TownBG : TownBackground
-signal TransactionFinished(BFuel : float, BRepair : float, Ship : MapShip, TradeScene : TownScene)
+signal TransactionFinished(BFuel : float,  Ship : MapShip, TradeScene : TownScene)
 
 var LandedShips : Array[MapShip]
 
@@ -64,22 +63,16 @@ func OnRefuelShopPressed() -> void:
 		FuelPricePerTon = 100
 	else:
 		FuelPricePerTon = 50
-	var RepairpricePerRepairValue : float
-	if (!TownSpot.HasRepair()):
-		RepairpricePerRepairValue = 200
-	else:
-		RepairpricePerRepairValue = 100
 	
-	Scene.Init(BoughtFuel, FuelPricePerTon, BoughtRepairs, RepairpricePerRepairValue, LandedShips)
+	Scene.Init(BoughtFuel, FuelPricePerTon, TownSpot.HasRepair(), LandedShips)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
 		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] and [color=#ffc315]hull[/color] condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
 	
 
-func FuelExchangeFinished(Fuel : float, Repair : float) -> void:
+func FuelExchangeFinished(Fuel : float) -> void:
 	BoughtFuel = Fuel
-	BoughtRepairs = Repair
 	
 
 func OnUpgradeShopPressed() -> void:
@@ -111,8 +104,12 @@ func OnItemSold(It : Item) -> void:
 	for g in TownSpot.Merch:
 		if (g.It == It):
 			g.Amm += 1
-			break
-
+			return
+	var Merch = Merchandise.new()
+	Merch.It = It
+	Merch.Amm = 1
+	TownSpot.Merch.append(Merch)
+	
 func OnItemBought(It : Item) -> void:
 	PopupManager.GetInstance().DoFadeNotif("{0} bought".format([It.ItemName]))
 	for g in LandedShips:
@@ -138,4 +135,4 @@ func _on_town_background_position_changed() -> void:
 	(FuelButton.get_child(0) as Line2D).set_point_position(1, (FuelButton.get_child(0) as Line2D).to_local(FuelNode.get_child(0).global_position))
 
 func _on_button_pressed() -> void:
-	TransactionFinished.emit(BoughtFuel, BoughtRepairs, LandedShips, self)
+	TransactionFinished.emit(BoughtFuel, LandedShips, self)

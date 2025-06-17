@@ -379,7 +379,6 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	#fuel.HasRepair = spot.HasRepair()
 	#fuel.TownFuel = spot.CityFuelReserves
 	fuel.BoughtFuel = spot.PlayerFuelReserves
-	fuel.BoughtRepairs = spot.PlayerRepairReserves
 	fuel.connect("TransactionFinished", FuelTransactionFinished)
 	fuel.LandedShips.append_array(spot.VisitingShips)
 	fuel.TownSpot = spot
@@ -399,7 +398,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 		ActionTracker.GetInstance().ShowTutorial("Towns", text, [], true)
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
-func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShip], Scene : TownScene):
+func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : TownScene):
 	var spot = Ships[0].CurrentPort as MapSpot
 	if (BFuel < 0):
 		var FuelToRemove = BFuel
@@ -422,7 +421,6 @@ func FuelTransactionFinished(BFuel : float, BRepair: float, Ships : Array[MapShi
 		#Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
 
 	spot.PlayerFuelReserves = max(0 , BFuel)
-	spot.PlayerRepairReserves = max(0, BRepair)
 	
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted

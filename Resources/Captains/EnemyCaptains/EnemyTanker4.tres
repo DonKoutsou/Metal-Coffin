@@ -1,23 +1,12 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=42 format=3 uid="uid://cvk1mvgokhtus"]
+[gd_resource type="Resource" script_class="Captain" load_steps=32 format=3 uid="uid://cvk1mvgokhtus"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_vh11m"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ag261"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_lxbyk"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_nfki2"]
-[ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage100mm.tres" id="4_hnpg0"]
-[ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="4_s8jon"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_u3xj4"]
-[ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="5_72sfo"]
-[ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="5_weviu"]
-[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="6_8ojrt"]
-[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="7_pv3ea"]
-[ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="8_i6vnk"]
-[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="10_s8jon"]
-[ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="11_eghi0"]
 [ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/Spaceship/Ship10.png" id="12_hnpg0"]
-[ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="12_kxbpq"]
-[ext_resource type="Resource" uid="uid://vk7sx0tcr6u8" path="res://Resources/Cards/MaxShieldOverCharge.tres" id="14_weviu"]
-[ext_resource type="Resource" uid="uid://dbjcp32py84ba" path="res://Resources/Cards/MaxShieldOverChargeSingle.tres" id="15_pv3ea"]
+[ext_resource type="Resource" uid="uid://cqdmkivwv1bth" path="res://Resources/Items/ShipParts/Radar/LargeCheapRadar.tres" id="14_i6vnk"]
 [ext_resource type="Resource" uid="uid://77852w5u88sm" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/LargeEngine2.tres" id="19_eghi0"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="20_kxbpq"]
 [ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="21_ra53v"]
@@ -157,6 +146,14 @@ StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_i6vnk"]
+script = ExtResource("2_ag261")
+StatName = 16
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_u3xj4")
@@ -164,24 +161,12 @@ CaptainName = "T4"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_vh11m")
 ShipIcon = ExtResource("12_hnpg0")
-CaptainStats = Array[ExtResource("2_ag261")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_hd254"), SubResource("Resource_pv3ea"), SubResource("Resource_eghi0"), SubResource("Resource_kxbpq"), SubResource("Resource_ra53v"), SubResource("Resource_vpad1"), SubResource("Resource_dsu7x"), SubResource("Resource_hby5y")])
+CaptainStats = Array[ExtResource("2_ag261")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_hd254"), SubResource("Resource_pv3ea"), SubResource("Resource_eghi0"), SubResource("Resource_kxbpq"), SubResource("Resource_ra53v"), SubResource("Resource_vpad1"), SubResource("Resource_dsu7x"), SubResource("Resource_hby5y"), SubResource("Resource_i6vnk")])
 ShipCallsign = "T4"
-StartingItems = Array[ExtResource("3_lxbyk")]([ExtResource("19_eghi0"), ExtResource("20_kxbpq"), ExtResource("21_ra53v"), ExtResource("21_ra53v"), ExtResource("22_vpad1"), ExtResource("23_dsu7x"), ExtResource("24_ybv8b"), ExtResource("24_ybv8b"), ExtResource("24_ybv8b"), ExtResource("24_ybv8b"), ExtResource("25_hby5y"), ExtResource("25_hby5y"), ExtResource("25_hby5y"), ExtResource("25_hby5y")])
+StartingItems = Array[ExtResource("3_lxbyk")]([ExtResource("19_eghi0"), ExtResource("20_kxbpq"), ExtResource("21_ra53v"), ExtResource("21_ra53v"), ExtResource("22_vpad1"), ExtResource("23_dsu7x"), ExtResource("24_ybv8b"), ExtResource("24_ybv8b"), ExtResource("24_ybv8b"), ExtResource("24_ybv8b"), ExtResource("25_hby5y"), ExtResource("25_hby5y"), ExtResource("25_hby5y"), ExtResource("25_hby5y"), ExtResource("14_i6vnk")])
 CurrentPort = ""
 CheckForErrors = false
 ProvidingFunds = 70000
 ProvidingCaptains = Array[ExtResource("4_u3xj4")]([])
-Cards = Dictionary[ExtResource("3_nfki2"), int]({
-ExtResource("4_s8jon"): 5,
-ExtResource("5_weviu"): 3,
-ExtResource("10_s8jon"): 5,
-ExtResource("7_pv3ea"): 12,
-ExtResource("4_hnpg0"): 8,
-ExtResource("5_72sfo"): 8,
-ExtResource("6_8ojrt"): 6,
-ExtResource("11_eghi0"): 4,
-ExtResource("12_kxbpq"): 3,
-ExtResource("8_i6vnk"): 6,
-ExtResource("14_weviu"): 3,
-ExtResource("15_pv3ea"): 1
-})
+Cards = Dictionary[ExtResource("3_nfki2"), int]({})
+Repair_Parts = 0.0

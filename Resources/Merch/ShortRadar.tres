@@ -12,6 +12,6 @@ Amm = 0
 [resource]
 script = ExtResource("3_k5uxg")
 Merch = SubResource("Resource_ja4xn")
-Cost = 2
+Cost = 3
 MaxAmmPerStage = 1
 DontGenerateBefore = 2

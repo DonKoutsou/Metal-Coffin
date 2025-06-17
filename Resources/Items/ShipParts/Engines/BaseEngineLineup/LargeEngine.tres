@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://cxum5qaw20d1q"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://cxum5qaw20d1q"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_t7h3x"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_x01tj"]
@@ -29,9 +29,17 @@ PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
+[sub_resource type="Resource" id="Resource_tq668"]
+script = ExtResource("5_0moyl")
+UpgradeName = 16
+UpgradeAmmount = 50.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("3_s64vj")
-Upgrades = Array[ExtResource("5_0moyl")]([SubResource("Resource_1w3hf"), SubResource("Resource_uftnd"), SubResource("Resource_j5fk8")])
+Upgrades = Array[ExtResource("5_0moyl")]([SubResource("Resource_1w3hf"), SubResource("Resource_uftnd"), SubResource("Resource_j5fk8"), SubResource("Resource_tq668")])
 UpgradeTime = 2000.0
 IsDamaged = false
 PartType = 1

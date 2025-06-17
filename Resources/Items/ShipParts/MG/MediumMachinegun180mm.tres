@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=10 format=3 uid="uid://ckmgfamc421e2"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=11 format=3 uid="uid://ckmgfamc421e2"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_diqh2"]
 [ext_resource type="Resource" uid="uid://dynb44dpvv7bf" path="res://Resources/Cards/Barrage/Barrage180mm.tres" id="2_diqh2"]
@@ -16,10 +16,18 @@ UpgradeAmmount = 2.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_diqh2"]
+script = ExtResource("7_gd467")
+UpgradeName = 16
+UpgradeAmmount = 10.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("8_7ajd8")
 WType = 4
-Upgrades = Array[ExtResource("7_gd467")]([SubResource("Resource_fmxhr")])
+Upgrades = Array[ExtResource("7_gd467")]([SubResource("Resource_fmxhr"), SubResource("Resource_diqh2")])
 UpgradeVersion = ExtResource("6_diqh2")
 UpgradeTime = 800.0
 IsDamaged = false

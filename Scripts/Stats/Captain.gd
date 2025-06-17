@@ -17,7 +17,7 @@ class_name Captain
 @export var ProvidingCaptains : Array[Captain]
 #Only used by enemies
 @export var Cards : Dictionary[CardStats, int]
-
+@export var Repair_Parts : float = 0
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
 signal StatChanged(NewVal : float)
@@ -203,6 +203,7 @@ func CopyStats(Cpt : Captain) -> void:
 	Cards = Cpt.Cards
 	ProvidingFunds = Cpt.ProvidingFunds
 	StartingItems = Cpt.StartingItems
+	Repair_Parts = Cpt.Repair_Parts
 	for g in Cpt.CaptainStats:
 		CaptainStats.append(g.duplicate(true))
 	SetUpStats()

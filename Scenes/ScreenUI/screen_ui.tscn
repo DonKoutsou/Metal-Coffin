@@ -412,8 +412,8 @@ layout_mode = 1
 offset_left = -465.0
 offset_right = -425.0
 
-[node name="Fan" parent="NormalScreen/ScreenUi" instance=ExtResource("33_xl4i0")]
-position = Vector2(989, -122)
+[node name="Fan" parent="NormalScreen" instance=ExtResource("33_xl4i0")]
+position = Vector2(991, -122)
 scale = Vector2(1.73438, 1.73438)
 frame_progress = 0.96041
 frequency = 40.0
@@ -875,7 +875,7 @@ z_index = 1
 position = Vector2(640, 360)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../NormalScreen/ScreenUi/Fan"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
+Cabled = [NodePath("../NormalScreen/Fan"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 breath_amplitude = 2.0
 breath_duration = 5.0
 

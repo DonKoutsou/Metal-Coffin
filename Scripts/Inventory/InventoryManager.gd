@@ -250,6 +250,7 @@ func AddCharacter(Cha : Captain) -> void:
 	UISoundMan.GetInstance().Refresh()
 
 func OnCharacterRemoved(Cha : Captain) -> void:
+	Cha.Repair_Parts = 0
 	var Inv = _CharacterInventories[Cha] as CharacterInventory
 	for z in Inv._GetInventoryBoxes():
 		for i in z._ContentAmmout:

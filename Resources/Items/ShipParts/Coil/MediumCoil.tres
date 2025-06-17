@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=8 format=3 uid="uid://gcxghv6bm43p"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=9 format=3 uid="uid://gcxghv6bm43p"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_a7bk0"]
 [ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2_42npr"]
@@ -14,10 +14,18 @@ UpgradeAmmount = 2.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_42npr"]
+script = ExtResource("4_ag4wd")
+UpgradeName = 16
+UpgradeAmmount = 10.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("5_ri1cq")
 WType = 3
-Upgrades = Array[ExtResource("4_ag4wd")]([SubResource("Resource_fmxhr")])
+Upgrades = Array[ExtResource("4_ag4wd")]([SubResource("Resource_fmxhr"), SubResource("Resource_42npr")])
 UpgradeVersion = ExtResource("4_42npr")
 UpgradeTime = 600.0
 IsDamaged = false

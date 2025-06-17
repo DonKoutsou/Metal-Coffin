@@ -36,5 +36,5 @@ shader_parameter/custom_time = 0.0
 shader_parameter/UseCustomTime = true
 shader_parameter/NormalStr = -2.0
 shader_parameter/shadow_strength = 0.3
-shader_parameter/shadow_parallax_amount = -0.1
+shader_parameter/shadow_parallax_amount = -0.05
 shader_parameter/rotation_angle = -0.85

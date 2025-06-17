@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://c16lcf8swpkjk"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://c16lcf8swpkjk"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_6ifd7"]
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="2_5sfyj"]
@@ -15,9 +15,17 @@ UpgradeAmmount = 1000.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_jjqow"]
+script = ExtResource("6_qmdqt")
+UpgradeName = 16
+UpgradeAmmount = 30.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("3_ypyoy")
-Upgrades = Array[ExtResource("6_qmdqt")]([SubResource("Resource_8wfub")])
+Upgrades = Array[ExtResource("6_qmdqt")]([SubResource("Resource_8wfub"), SubResource("Resource_jjqow")])
 UpgradeTime = 2000.0
 IsDamaged = false
 PartType = 2

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=30 format=3 uid="uid://22pk1grsmvjx"]
+[gd_resource type="Resource" script_class="Captain" load_steps=31 format=3 uid="uid://22pk1grsmvjx"]
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_rer20"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_5r51y"]
@@ -193,6 +193,14 @@ StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_22qwx"]
+script = ExtResource("2_5r51y")
+StatName = 16
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_b2ula")
@@ -200,7 +208,7 @@ CaptainName = "Grunt"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_rer20")
 ShipIcon = ExtResource("3_ln4rf")
-CaptainStats = Array[ExtResource("2_5r51y")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_hg1bf"), SubResource("Resource_62pqv"), SubResource("Resource_njxg2"), SubResource("Resource_2igpr"), SubResource("Resource_ox4id"), SubResource("Resource_hl4y2"), SubResource("Resource_1abhi"), SubResource("Resource_14la3"), SubResource("Resource_y6u8d"), SubResource("Resource_hkump"), SubResource("Resource_t7jp6"), SubResource("Resource_ebwde"), SubResource("Resource_lk4qj"), SubResource("Resource_gdj07"), SubResource("Resource_253vf")])
+CaptainStats = Array[ExtResource("2_5r51y")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_hg1bf"), SubResource("Resource_62pqv"), SubResource("Resource_njxg2"), SubResource("Resource_2igpr"), SubResource("Resource_ox4id"), SubResource("Resource_hl4y2"), SubResource("Resource_1abhi"), SubResource("Resource_14la3"), SubResource("Resource_y6u8d"), SubResource("Resource_hkump"), SubResource("Resource_t7jp6"), SubResource("Resource_ebwde"), SubResource("Resource_lk4qj"), SubResource("Resource_gdj07"), SubResource("Resource_253vf"), SubResource("Resource_22qwx")])
 ShipCallsign = "T"
 StartingItems = Array[ExtResource("5_62pqv")]([])
 CurrentPort = ""
@@ -208,3 +216,4 @@ CheckForErrors = false
 ProvidingFunds = 0
 ProvidingCaptains = Array[ExtResource("4_b2ula")]([])
 Cards = Dictionary[ExtResource("3_hg1bf"), int]({})
+Repair_Parts = 0.0

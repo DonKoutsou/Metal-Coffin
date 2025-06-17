@@ -11,6 +11,8 @@ class_name ShipCamera
 
 static var Instance : ShipCamera
 
+static var WorldBounds : Vector2
+
 signal ZoomChanged(NewVal : float)
 signal PositionChanged(NewVal : float)
 # Called when the node enters the scene tree for the first time.
@@ -39,7 +41,7 @@ func _HANDLE_ZOOM(zoomval : float):
 	ZoomTw = create_tween()
 	ZoomTw.set_ease(Tween.EASE_OUT)
 	ZoomTw.set_trans(Tween.TRANS_QUART)
-	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.045,0.045), Vector2(3,3))
+	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.1,0.1), Vector2(3,3))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
 	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
@@ -134,11 +136,11 @@ func _UpdateMapGridVisibility():
 func UpdateCameraPos(relativeMovement : Vector2):
 	if (FrameTween != null):
 		FrameTween.kill()
-	var maxposY = 999999
+	var maxposY = WorldBounds.y
 	var vpsizehalf = (get_viewport_rect().size.x / 2)
-	var maxposX = Vector2(vpsizehalf - 11000, vpsizehalf + 11000)
+	var maxposX = Vector2(-(WorldBounds.x / 2), WorldBounds.x / 2)
 	var rel = relativeMovement / zoom
-	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, -maxposY,1000) )
+	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY,1000) )
 	if (newpos.x != position.x):
 		position.x = newpos.x
 	if (newpos.y != position.y):

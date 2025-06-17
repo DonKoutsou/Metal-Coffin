@@ -10,3 +10,4 @@ var DataName = "PLData"
 @export var PlayerFleet : Array[DroneSaveData]
 @export var CameraPos : Vector2
 @export var CameraZoom : Vector2
+@export var RepairParts : float

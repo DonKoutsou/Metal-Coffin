@@ -1664,17 +1664,38 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 	
 	return Targets
 
-func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipStats:
-	var CurrentBiggestPoints : float = 999999999999
-	var CurrentTarget : BattleShipStats
-	
+#func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipStats:
+	#var CurrentBiggestPoints : float = 999999999999
+	#var CurrentTarget : BattleShipStats
+	#
+	#for g in Candidates:
+		#var Points = g.CurrentHull + (g.DefDebuff * 1000) + (g.GetFirePower() * 500)
+		#if (CurrentBiggestPoints > Points):
+			#CurrentTarget = g
+			#CurrentBiggestPoints = Points
+	#
+	#return CurrentTarget
+
+func GetBestTargetForAtack(Candidates : Array) -> BattleShipStats:
+	var points_list = []
 	for g in Candidates:
-		var Points = g.CurrentHull + (g.DefDebuff * 1000) + (g.GetFirePower() * 100)
-		if (CurrentBiggestPoints > Points):
-			CurrentTarget = g
-			CurrentBiggestPoints = Points
+		var points = (g.DefDebuff * 1000) + (g.GetFirePower() * 500) - g.CurrentHull
+		points_list.append(points)
 	
-	return CurrentTarget
+	var total_points = 0.0
+	for p in points_list:
+		total_points += max(0, p) # avoid negatives
+	
+	# Pick based on weighted chance
+	var rand = randf() * total_points
+	var cumulative = 0.0
+	for i in range(Candidates.size()):
+		cumulative += max(0, points_list[i])
+		if rand <= cumulative:
+			return Candidates[i]
+
+	# As fallback (should not happen), return a random one
+	return Candidates[randi() % Candidates.size()]
 
 func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModule.Stat) -> BattleShipStats:
 	var CurrentBiggestStat: float = 0
@@ -1850,7 +1871,7 @@ func HandleMultiDrawSpecificEnemy(Performer : BattleShipStats, Mod : MultiCardSp
 	PlaceCardInEnemyHand(Performer, Picked)
 
 func HandleDrawSpecificCardEnemy(Performer : BattleShipStats,Spawn : CardStats) -> void:
-	var D = EnemyDecks[Performer]
+	var D = GetShipDeck(Performer)
 	
 	if (D.DeckPile.size() <= 0):
 		await HandleShuffleDiscardedIntoDeck(D)

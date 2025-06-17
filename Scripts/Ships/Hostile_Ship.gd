@@ -642,7 +642,8 @@ func Evaporate() -> void:
 	Destroyed = true
 	if (ElintShape != null):
 		ElintShape.queue_free()
-		
+	if (CurrentPort != null):
+		CurrentPort.OnSpotDeparture(self)
 	RadarShape.queue_free()
 	MapPointerManager.GetInstance().RemoveShip(self)
 	queue_free()

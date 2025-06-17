@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://yxrblna0s1bo"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://yxrblna0s1bo"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_pwfb6"]
 [ext_resource type="Resource" uid="uid://bc28324vb6uij" path="res://Resources/Cards/ArmorShed.tres" id="2_44fvt"]
@@ -15,9 +15,17 @@ UpgradeAmmount = 100.0
 PenaltyAmmount = 0.0
 CurrentValue = 100.0
 
+[sub_resource type="Resource" id="Resource_44fvt"]
+script = ExtResource("5_kfr6a")
+UpgradeName = 16
+UpgradeAmmount = 5.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("6_sxy5e")
-Upgrades = Array[ExtResource("5_kfr6a")]([SubResource("Resource_x1aim")])
+Upgrades = Array[ExtResource("5_kfr6a")]([SubResource("Resource_x1aim"), SubResource("Resource_44fvt")])
 UpgradeVersion = ExtResource("2_tqj0t")
 UpgradeTime = 120.0
 IsDamaged = false

@@ -38,10 +38,22 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 			AmmountPlayerHas = Itms[m.It]
 		else:
 			AmmountPlayerHas = 0
-			
+		Itms.erase(m.It)
 		ItScene.Init(m.It, m.It.Cost, m.Amm, AmmountPlayerHas, LandedShips)
 		ItScene.OnItemBought.connect(OnItemBought.bind( m.It.Cost))
 		ItScene.OnItemSold.connect(OnItemSold.bind( m.It.Cost))
+
+		ItemPlecement.visible = true
+		ItemPlecement.add_child(ItScene)
+	for it : Item in Itms:
+		if (it is ShipPart):
+			continue
+		#If neither player or shop has any of selected Merch dont add the UI for it
+		
+		var ItScene = ItemScene.instantiate() as TownShopItem
+		ItScene.Init(it, it.Cost, 0, Itms[it], LandedShips)
+		ItScene.OnItemBought.connect(OnItemBought.bind( it.Cost))
+		ItScene.OnItemSold.connect(OnItemSold.bind( it.Cost))
 
 		ItemPlecement.visible = true
 		ItemPlecement.add_child(ItScene)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" load_steps=21 format=3 uid="uid://cga5buofwr6yr"]
+[gd_resource type="Resource" script_class="Captain" load_steps=24 format=3 uid="uid://cga5buofwr6yr"]
 
 [ext_resource type="Texture2D" uid="uid://dlebd41j7q7s1" path="res://Assets/CaptainPortraits/Captain10.png" id="1_2qy3x"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ot5w6"]
@@ -125,13 +125,37 @@ StatShipPartPenalty = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
+[sub_resource type="Resource" id="Resource_ynkuk"]
+script = ExtResource("2_ot5w6")
+StatName = 8
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_opkhg"]
+script = ExtResource("2_ot5w6")
+StatName = 15
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_lumq3"]
+script = ExtResource("2_ot5w6")
+StatName = 16
+StatBase = 0.0
+StatShipPartBuff = Array[float]([])
+StatShipPartPenalty = 0.0
+CurrentValue = 0.0
+
 [resource]
 script = ExtResource("3_5m53b")
 CaptainName = "Sirius"
 CaptainBio = "Missile Carrier"
 CaptainPortrait = ExtResource("1_2qy3x")
 ShipIcon = ExtResource("3_kc55u")
-CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), SubResource("Resource_48366"), SubResource("Resource_hl7ky"), SubResource("Resource_1mnok"), SubResource("Resource_8kp6e"), SubResource("Resource_0d70u"), SubResource("Resource_2b1rh"), SubResource("Resource_eugd7"), SubResource("Resource_qfj73")])
+CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), SubResource("Resource_48366"), SubResource("Resource_hl7ky"), SubResource("Resource_1mnok"), SubResource("Resource_8kp6e"), SubResource("Resource_0d70u"), SubResource("Resource_2b1rh"), SubResource("Resource_eugd7"), SubResource("Resource_qfj73"), SubResource("Resource_ynkuk"), SubResource("Resource_opkhg"), SubResource("Resource_lumq3")])
 ShipCallsign = "P"
 StartingItems = Array[ExtResource("3_43sb5")]([])
 CurrentPort = ""
@@ -139,3 +163,4 @@ CheckForErrors = true
 ProvidingFunds = 0
 ProvidingCaptains = Array[ExtResource("3_5m53b")]([])
 Cards = Dictionary[ExtResource("3_alabf"), int]({})
+Repair_Parts = 0.0

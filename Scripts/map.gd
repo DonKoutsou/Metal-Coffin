@@ -161,7 +161,7 @@ func Arrival(Spot : MapSpot) -> void:
 	
 	#TODO find better way for this
 	for Ship in Spot.VisitingShips:
-		if (Ship is not HostileShip and !PlayerShips.has(Ship)):
+		if (!PlayerShips.has(Ship)):
 			PlayerShips.append(Ship)
 			if (Ship.Command == null):
 				for Docked in Ship.GetDroneDock().GetDockedShips():
@@ -170,17 +170,17 @@ func Arrival(Spot : MapSpot) -> void:
 					else: if (Docked is HostileShip and !HostileShips.has(Docked)):
 						HostileShips.append(Docked)
 						Convoys.append(Docked)
-						
-		else : if (Ship is HostileShip and  !HostileShips.has(Ship)):
-				HostileShips.append(Ship)
-				if (Ship.Convoy):
-					Convoys.append(Ship)
-				if (Ship.Command == null):
-					for Docked in Ship.GetDroneDock().GetDockedShips():
-						if (!HostileShips.has(Docked)):
-							HostileShips.append(Docked)
-						if (Docked.Convoy):
-							Convoys.append(Docked)
+	for Ship in Spot.VisitingHostiles:
+		if (!HostileShips.has(Ship)):
+			HostileShips.append(Ship)
+			if (Ship.Convoy):
+				Convoys.append(Ship)
+			if (Ship.Command == null):
+				for Docked in Ship.GetDroneDock().GetDockedShips():
+					if (!HostileShips.has(Docked)):
+						HostileShips.append(Docked)
+					if (Docked.Convoy):
+						Convoys.append(Docked)
 	
 	var StartFight : bool = false
 	
@@ -236,7 +236,7 @@ func LandTutorialShown():
 #███████ ██   ██   ████   ███████ ██     ███████  ██████  ██   ██ ██████ 
  
 func GetSaveData() ->SaveData:
-	var dat = SaveData.new().duplicate()
+	var dat = SaveData.new()
 	dat.DataName = "Towns"
 	var Datas : Array[Resource] = []
 	for g in SpotList.size():
@@ -247,7 +247,7 @@ func GetSaveData() ->SaveData:
 	return dat
 
 func GetMapMarkerEditorSaveData() -> SaveData:
-	var dat = SaveData.new().duplicate()
+	var dat = SaveData.new()
 	dat.DataName = "MarkerEditor"
 	var EditorData = SD_MapMarkerEditor.new()
 	for g in $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLines.get_children():
@@ -262,6 +262,7 @@ func LoadMapMarkerEditorSaveData(Data : SD_MapMarkerEditor) -> void:
 	GetMapMarkerEditor().LoadData(Data)
 
 func LoadSaveData(Data : Array[Resource]) -> void:
+	var WorldSize : float = 100000
 	for g in Data.size():
 		var dat = Data[g] as TownSaveData
 		
@@ -272,7 +273,11 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		
 		sc.LoadSaveData(dat)
 		SpotList.insert(g, sc)
-	
+		
+		if (dat.TownLoc.y < WorldSize):
+			WorldSize = dat.TownLoc.y
+			
+	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
 	#call_deferred("GenerateRoads")
 	#_Camera.call_deferred("FrameCamToPlayer")
 
@@ -383,7 +388,7 @@ func sort_positions_by_y(positions: Array) -> Array:
 	)
 	return sorted
 
-const K := 30 # samples per point
+const K := 45 # samples per point
 func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: int = 0) -> Array:
 	var cell_size = min_dist / sqrt(2)
 	var grid_size = Vector2(ceil(region_size.x / cell_size), ceil(region_size.y / cell_size))
@@ -449,6 +454,7 @@ func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
 	SpotList.append_array(Spots)
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()
+	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
 
 var EventThread : Thread
 
@@ -804,7 +810,7 @@ func AddExtraLines(cities : Array, Lines : Array) -> Array:
 	for g in cities:
 		var ConnectionAmmount : int = 0
 		for z in cities:
-			if (Lines.has([g, z]) or Lines.has([z, g])):
+			if (Lines.has([g, z])):
 				ConnectionAmmount += 1
 		#for z in cities:
 			#if (ConnectionAmmount > 2):
@@ -817,6 +823,8 @@ func AddExtraLines(cities : Array, Lines : Array) -> Array:
 		var Dist = 2000
 		while (ConnectionAmmount < 3):
 			Dist += 500
+			if (Dist >= 4000):
+				break
 			for z in cities:
 				if (ConnectionAmmount > 2):
 					break

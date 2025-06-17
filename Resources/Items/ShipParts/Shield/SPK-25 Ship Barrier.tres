@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://ycrdbo5lywoa"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://ycrdbo5lywoa"]
 
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="1_fj3gd"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="1_uxjth"]
@@ -24,9 +24,17 @@ PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
+[sub_resource type="Resource" id="Resource_jn2ke"]
+script = ExtResource("1_uxjth")
+UpgradeName = 16
+UpgradeAmmount = 20.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("2_x5ol2")
-Upgrades = Array[ExtResource("1_uxjth")]([SubResource("Resource_x1aim"), SubResource("Resource_6lkpi")])
+Upgrades = Array[ExtResource("1_uxjth")]([SubResource("Resource_x1aim"), SubResource("Resource_6lkpi"), SubResource("Resource_jn2ke")])
 UpgradeVersion = ExtResource("3_x0l6p")
 UpgradeTime = 800.0
 IsDamaged = false

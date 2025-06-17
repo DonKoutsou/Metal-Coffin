@@ -108,7 +108,7 @@ func Refuel() -> void:
 		ShipDockActions.emit("Refueling", false, 0)
 
 func Repair() -> void:
-	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and CurrentPort.PlayerRepairReserves > 0):
+	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.Repair_Parts > 0):
 		var Simulationp = 0
 		if (!SimulationManager.IsPaused()):
 			Simulationp = 1
@@ -120,7 +120,7 @@ func Repair() -> void:
 		var timeleft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / TimeMulti / 6)
 		ShipDockActions.emit("Repairing", true, roundi(timeleft))
 		Cpt.RefillResource(STAT_CONST.STATS.HULL ,TimeMulti * SimulationSpeed)
-		CurrentPort.PlayerRepairReserves -= TimeMulti * SimulationSpeed
+		Cpt.Repair_Parts -= TimeMulti * SimulationSpeed
 	else:
 		ShipDockActions.emit("Repairing", false, 0)
 

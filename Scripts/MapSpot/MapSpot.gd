@@ -6,7 +6,6 @@ class_name MapSpot
 @export var AlarmVisual : PackedScene
 
 var PlayerFuelReserves : float = 0
-var PlayerRepairReserves : float = 0
 
 signal SpotAproached(Type :MapSpotType)
 signal SpotLanded(Type : MapSpotType)
@@ -166,13 +165,12 @@ func _physics_process(delta: float) -> void:
 		OnAlarmRaised(true)
 
 var VisitingShips : Array[MapShip] = []
-
+var VisitingHostiles : Array[MapShip] = []
 func OnSpotAproached(AproachedBy : MapShip) -> void:
-	VisitingShips.append(AproachedBy)
-	
 	if (AproachedBy is HostileShip):
+		VisitingHostiles.append(AproachedBy)
 		return
-	
+	VisitingShips.append(AproachedBy)
 	if (AproachedBy.Command == null):
 		SimulationManager.GetInstance().SpeedToggle(false)
 		Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
@@ -188,12 +186,17 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 			set_physics_process(true)
 
 func OnSpotDeparture(DepartingShip : MapShip) -> void:
+	if (DepartingShip is HostileShip):
+		VisitingHostiles.erase(DepartingShip)
+		return
+		
 	VisitingShips.erase(DepartingShip)
 	if (SpotInfo.EnemyCity):
 		if (AlarmRaised):
 			Commander.GetInstance().OnEnemyVisualLost(DepartingShip)
 		else :if (VisitingShips.size() == 0):
 			set_physics_process(false)
+			
 func OnAlarmRaised(Notify : bool = false) -> void:
 	var AlarmViz = AlarmVisual.instantiate()
 	add_child(AlarmViz)

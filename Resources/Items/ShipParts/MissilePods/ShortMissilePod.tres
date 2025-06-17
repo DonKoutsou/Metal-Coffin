@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=8 format=3 uid="uid://cxrq5fe4uqxsf"]
+[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=9 format=3 uid="uid://cxrq5fe4uqxsf"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_lhpej"]
 [ext_resource type="Resource" uid="uid://boh6gvavu4h2c" path="res://Resources/Items/ShipParts/MissilePods/MediumMissilePod.tres" id="2_74rgq"]
@@ -14,10 +14,18 @@ UpgradeAmmount = 1.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_a5n0p"]
+script = ExtResource("6_eoxlf")
+UpgradeName = 16
+UpgradeAmmount = 10.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("3_1oqec")
 WType = 2
-Upgrades = Array[ExtResource("6_eoxlf")]([SubResource("Resource_fmxhr")])
+Upgrades = Array[ExtResource("6_eoxlf")]([SubResource("Resource_fmxhr"), SubResource("Resource_a5n0p")])
 UpgradeVersion = ExtResource("2_74rgq")
 UpgradeTime = 1000.0
 IsDamaged = false

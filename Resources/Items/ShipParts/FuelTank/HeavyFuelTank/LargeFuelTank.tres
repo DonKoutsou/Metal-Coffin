@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://bwwby1vknkefj"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://bwwby1vknkefj"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_vievn"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_ki4vj"]
@@ -22,16 +22,24 @@ UpgradeAmmount = 30.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_ffkco"]
+script = ExtResource("5_83sa7")
+UpgradeName = 16
+UpgradeAmmount = 20.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("3_lu011")
-Upgrades = Array[ExtResource("5_83sa7")]([SubResource("Resource_o628u"), SubResource("Resource_pmgj3")])
+Upgrades = Array[ExtResource("5_83sa7")]([SubResource("Resource_o628u"), SubResource("Resource_pmgj3"), SubResource("Resource_ffkco")])
 UpgradeTime = 1500.0
 IsDamaged = false
 PartType = 3
 ItemName = "FT-2000"
 ItemDesc = "A high-capacity fuel tank built for extended missions. Made with proprietary composite materials, it maintains durability even under the most challenging conditions"
 MaxStackCount = 1
-CardProviding = Array[ExtResource("1_vievn")]([ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("3_jb0ki"), ExtResource("3_jb0ki"), ExtResource("3_jb0ki")])
+CardProviding = Array[ExtResource("1_vievn")]([ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("2_ki4vj"), ExtResource("3_jb0ki"), ExtResource("3_jb0ki")])
 Tier = 2
 CanTransfer = false
 Cost = 60000

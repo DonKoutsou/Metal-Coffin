@@ -20,6 +20,7 @@ const StatMaxValues : Dictionary = {
 	STATS.SHIELD_SLOTS : 2,
 	STATS.WEAPON_SLOTS : 10,
 	STATS.MAX_SHIELD : 1000,
+	STATS.REPAIR_PRICE : 1000,
 }
 const StatShouldStack : Dictionary = {
 	STATS.FUEL_TANK : true,
@@ -37,7 +38,8 @@ const StatShouldStack : Dictionary = {
 	STATS.FUEL_TANK_SLOTS : false,
 	STATS.SHIELD_SLOTS : false,
 	STATS.WEAPON_SLOTS : false,
-	STATS.MAX_SHIELD : true
+	STATS.MAX_SHIELD : true,
+	STATS.REPAIR_PRICE : true
 }
 
 static func StringToEnum(Stat : String) -> STATS:
@@ -61,6 +63,8 @@ static func GetStatMetric(Stat : STATS) -> String:
 			Metric = "km"
 		STATS.WEIGHT:
 			Metric = "tons"
+		STATS.REPAIR_PRICE:
+			Metric = "Drahma"
 	return Metric
 
 static func GetStatItemBuff(Stat : STATS, Buffs : Array[float]) -> float:
@@ -97,4 +101,5 @@ enum STATS{
 	SHIELD_SLOTS,
 	WEAPON_SLOTS,
 	MAX_SHIELD,
+	REPAIR_PRICE,
 }

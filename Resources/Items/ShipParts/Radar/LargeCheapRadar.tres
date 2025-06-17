@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=8 format=3 uid="uid://cqdmkivwv1bth"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_bt202"]
+[ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="2_sloj8"]
+[ext_resource type="Resource" uid="uid://cnet3bjwptmp7" path="res://Resources/Cards/VitalSpot.tres" id="3_klrb1"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_7i8k6"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_uw7gr"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("4_7i8k6")
+UpgradeName = 6
+UpgradeAmmount = 800.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_bt202"]
+script = ExtResource("4_7i8k6")
+UpgradeName = 16
+UpgradeAmmount = 20.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[resource]
+script = ExtResource("5_uw7gr")
+Upgrades = Array[ExtResource("4_7i8k6")]([SubResource("Resource_fmxhr"), SubResource("Resource_bt202")])
+UpgradeTime = 1200.0
+IsDamaged = false
+PartType = 2
+ItemName = "BT-3"
+ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_bt202")]([ExtResource("2_sloj8"), ExtResource("2_sloj8"), ExtResource("3_klrb1"), ExtResource("3_klrb1")])
+Tier = 0
+CanTransfer = true
+Cost = 120000

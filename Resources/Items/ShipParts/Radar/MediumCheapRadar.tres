@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://dn2krxo3cw830"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_udgm1"]
+[ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="3_56rqp"]
+[ext_resource type="Resource" uid="uid://cnet3bjwptmp7" path="res://Resources/Cards/VitalSpot.tres" id="3_vwv22"]
+[ext_resource type="Resource" uid="uid://cqdmkivwv1bth" path="res://Resources/Items/ShipParts/Radar/LargeCheapRadar.tres" id="4_q8syq"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_7vkck"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="7_0g2sd"]
+
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("6_7vkck")
+UpgradeName = 6
+UpgradeAmmount = 500.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+
+[sub_resource type="Resource" id="Resource_q8syq"]
+script = ExtResource("6_7vkck")
+UpgradeName = 16
+UpgradeAmmount = 15.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[resource]
+script = ExtResource("7_0g2sd")
+Upgrades = Array[ExtResource("6_7vkck")]([SubResource("Resource_fmxhr"), SubResource("Resource_q8syq")])
+UpgradeVersion = ExtResource("4_q8syq")
+UpgradeTime = 1200.0
+IsDamaged = false
+PartType = 2
+ItemName = "BT-2"
+ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+MaxStackCount = 1
+CardProviding = Array[ExtResource("1_udgm1")]([ExtResource("3_56rqp"), ExtResource("3_56rqp"), ExtResource("3_vwv22"), ExtResource("3_vwv22")])
+Tier = 0
+CanTransfer = true
+Cost = 80000
