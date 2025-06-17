@@ -274,7 +274,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		sc.LoadSaveData(dat)
 		SpotList.insert(g, sc)
 		
-		if (dat.TownLoc.y < WorldSize):
+		if (dat.TownLoc.y < WorldSize): 
 			WorldSize = dat.TownLoc.y
 			
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))

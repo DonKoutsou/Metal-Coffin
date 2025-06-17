@@ -302,6 +302,8 @@ signal PlayerActionPickingEnded
 signal EnemyActionPickedEnded
 
 func RunTurn() -> void:
+	if (GameOver):
+		return
 	ActionDeclaration.DoActionDeclaration("Action Pick Phase", 2)
 	ActionDeclaration.ActionDeclarationFinished.connect(PickPhase)
 	#await DoActionDeclaration("Action Pick Phase", 2)

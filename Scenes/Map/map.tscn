@@ -60,8 +60,8 @@ shader_parameter/Scale1 = Vector2(10, 10)
 shader_parameter/Scale2 = Vector2(20, 20)
 
 [sub_resource type="Gradient" id="Gradient_l2i77"]
-offsets = PackedFloat32Array(0, 0.624799)
-colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1)
+offsets = PackedFloat32Array(0, 0.624799, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1, 0.856354, 0.856354, 0.856354, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
 noise_type = 0
