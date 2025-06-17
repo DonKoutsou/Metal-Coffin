@@ -6,6 +6,7 @@ class_name ShipCamera
 #@export var CityLines : MapLineDrawer
 
 @export var Cloud : Control
+@export var Cloud2 : Control
 @export var Ground : Control
 
 static var Instance : ShipCamera
@@ -16,6 +17,7 @@ signal PositionChanged(NewVal : float)
 func _ready() -> void:
 	Instance = self
 	Cloud.material.set_shader_parameter("offset", global_position / 1500)
+	Cloud2.material.set_shader_parameter("offset", (global_position / 1500) + Vector2(500,500))
 	Ground.material.set_shader_parameter("offset", global_position / 1500)
 	#call_deferred("OnZoomChanged", zoom)
 	
@@ -112,6 +114,7 @@ func _UpdateMapGridVisibility():
 		GridShowing = true
 		
 		MapGridTween.finished.connect(Cloud.hide)
+		MapGridTween.finished.connect(Cloud2.hide)
 		MapGridTween.finished.connect(Ground.hide)
 		
 		
@@ -120,6 +123,7 @@ func _UpdateMapGridVisibility():
 			MapGridTween.kill()
 			MapGridTween = null
 		Cloud.show()
+		Cloud2.show()
 		Ground.show()
 		
 		MapGridTween = create_tween()
@@ -141,6 +145,7 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		position.y = newpos.y
 
 	Cloud.material.set_shader_parameter("offset", global_position / 1500)
+	Cloud2.material.set_shader_parameter("offset", (global_position / 1500) + Vector2(500,500))
 	Ground.material.set_shader_parameter("offset", global_position / 1500)
 	
 	PositionChanged.emit(position)
@@ -157,6 +162,7 @@ func _physics_process(delta: float) -> void:
 	if (!SimulationManager.IsPaused()):
 		custom_time += delta * SimulationManager.SimSpeed()
 		Cloud.material.set_shader_parameter("custom_time", custom_time)
+		Cloud2.material.set_shader_parameter("custom_time", custom_time + 500)
 
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
@@ -248,6 +254,7 @@ func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true
 func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = Pos
 	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
+	$Clouds2.material.set_shader_parameter("offset", (global_position / 1500) + Vector2(500,500))
 	#$Clouds2.material.set_shader_parameter("offset", global_position / 1500)
 	$Ground.material.set_shader_parameter("offset", global_position / 1500)
 	PositionChanged.emit(position)

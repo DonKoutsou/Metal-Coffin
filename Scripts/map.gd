@@ -17,6 +17,8 @@ class_name Map
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var TownSpotScene : PackedScene
+@export var EnemyScene : PackedScene
+@export var TutorialTrigger : PackedScene
 #@export var Village : PackedScene
 @export var VillageSpotType : MapSpotType
 #@export var City : PackedScene
@@ -25,14 +27,13 @@ class_name Map
 @export var CapitalSpotType : MapSpotType
 #@export var FinalCity : PackedScene
 @export var FinalCitySpotType : MapSpotType
-@export var MapSize : int
-@export var MapGenerationDistanceCurve : Curve
-@export var EnemyScene : PackedScene
-@export var EnSpawner : SpawnDecider
 @export var EnemyShipNames : Array[String]
-@export var SpawningBoundsX : float = 10000
-
-@export var TutorialTrigger : PackedScene
+#@export var MapGenerationDistanceCurve : Curve
+@export var MapSize : int
+@export var VillageAmm : int
+@export var MinDistance : float = 3000
+@export var SpawningBounds : Vector2
+@export var EnSpawner : SpawnDecider
 
 signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
 #Signal called when all cities have their neighbors configured
@@ -313,17 +314,20 @@ func GenerateMap() -> void:
 	ShowingTutorial = true
 
 func GenerateMapThreaded(SpotParent : Node2D) -> void:
-	#DECIDE ON PLECEMENT OF STATIONS
+	
+	var town_positions = poisson_disk_sampling(SpawningBounds, MinDistance, MapSize)
+	var sorted_positions = sort_positions_by_y(town_positions)
+	
 	var CapitalCitySpots : Array[int] = []
-	for z in MapSize / 3:
+	for z in sorted_positions.size() / 3:
 		if (z == 0):
 			continue
 		CapitalCitySpots.append(z * 6)
 		
 	var VillageSpots : Array[int] = []
 	
-	for z in MapSize/10:
-		var spot = z * 10
+	for z in VillageAmm:
+		var spot = roundi(MapSize/VillageAmm * z)
 		if (CapitalCitySpots.has(spot)):
 			spot += 1
 		VillageSpots.append(spot)
@@ -333,12 +337,18 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	var WorldSize : float = 100000
 	
 	var GeneratedSpots : Array[Town] = []
-	for g in MapSize :
+	for g in sorted_positions.size() :
 
 		#SET THE TYPE
 		var sc = TownSpotScene.instantiate() as Town
+		var pos = sorted_positions[g]
 		
-		if (g == max(roundi(MapSize * 0.9), MapSize - 10)):
+		#centering positions
+		pos.x -= SpawningBounds.x / 2
+		#algorith gives values from 0 towards possetive y, we want the opposite
+		pos.y -= sorted_positions[0].y
+		
+		if (g == sorted_positions.size() - 1):
 			sc.GenerateCity(FinalCitySpotType)
 		else : if (CapitalCitySpots.has(g)):
 			sc.GenerateCity(CapitalSpotType)
@@ -348,27 +358,15 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 			sc.GenerateCity(CitySpotType)
 		
 		sc.connect("TownSpotAproached", Arrival)
-		#DECIDE ON ITS PLACEMENT
-		var Distanceval = MapGenerationDistanceCurve.sample(g / (MapSize as float))
-		#PICK A SPOT BETWEEN THE PREVIUSLY PLACED MAP SPOT AND THE MAX ALLOWED BASED ON THE CURVE
-		var pos = GetNextRandomPos(Prevpos, Distanceval)
-		#MAKE SURE WE DONT PLACE IT TO CLOSE TO ANOTHER TIME
-		#HASCLOSE COULD BE DONE BETTER TO NOT ITTERATE OVER ALL MAP SPOTS PLACED
-		while (!CheckPlecement(pos, GeneratedSpots)):
-			pos = GetNextRandomPos(Prevpos, Distanceval)
-		#POSITIONS IT AND ADD IT TO MAP SPOT LIST
+
 		sc.Pos = pos
 		if (pos.y < WorldSize):
 			WorldSize = pos.y
 		SpotParent.call_deferred("add_child", sc)
 		
 		GeneratedSpots.append(sc)
-		#MAKE SURE TO SAVE POSITION OF PLACED MAP SPOT FOR NEXT ITERRATION
 		Prevpos = pos
-	
-	
-	
-	
+		
 	#var time = Time.get_ticks_msec()
 	
 	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
@@ -376,23 +374,75 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	for g in GeneratedSpots:
 		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()))
 
-func CheckPlecement(pos : Vector2, places : Array[Town]) -> bool:
-	var TooClose = false
-	var TooFar = true
-	if (places.size() < 1):
-		return true
-		
-	for z in places.size():
-		if (pos.distance_to(places[z].Pos) < 1500):
-			TooClose = true
+
+func sort_positions_by_y(positions: Array) -> Array:
+	var sorted = positions.duplicate()
+	sorted.sort_custom(
+		func(a: Vector2, b: Vector2) -> bool:
+			return a.y > b.y
+	)
+	return sorted
+
+const K := 30 # samples per point
+func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: int = 0) -> Array:
+	var cell_size = min_dist / sqrt(2)
+	var grid_size = Vector2(ceil(region_size.x / cell_size), ceil(region_size.y / cell_size))
+	var grid = []
+	for i in range(int(grid_size.x * grid_size.y)):
+		grid.append(null)
+	
+	var points = []
+	var spawn_points = []
+	
+	var initial_point = Vector2(
+		randf_range(0, region_size.x),
+		randf_range(0, region_size.y)
+	)
+	points.append(initial_point)
+	spawn_points.append(initial_point)
+	grid[_grid_index(initial_point, cell_size, grid_size)] = initial_point
+	
+	while spawn_points.size() > 0:
+		var spawn_index = randi() % spawn_points.size()
+		var center = spawn_points[spawn_index]
+		var found = false
+		for i in range(K):
+			var angle = randf() * PI * 2.0
+			var rad = randf_range(min_dist, min_dist * 2.0)
+			var dir = Vector2(cos(angle), sin(angle))
+			var candidate = center + dir * rad
+			if _is_valid(candidate, region_size, cell_size, grid, grid_size, min_dist):
+				points.append(candidate)
+				spawn_points.append(candidate)
+				grid[_grid_index(candidate, cell_size, grid_size)] = candidate
+				found = true
+				break
+		if not found:
+			spawn_points.remove_at(spawn_index)
+		if max_samples > 0 and points.size() >= max_samples:
 			break
-		if (pos.distance_to(places[z].Pos) < 3000):
-			TooFar = false
+	return points
 
-	return !TooClose and !TooFar
+func _is_valid(point: Vector2, region_size: Vector2, cell_size: float, grid: Array, grid_size: Vector2, min_dist: float) -> bool:
+	# Check within bounds
+	if point.x < 0 or point.x >= region_size.x or point.y < 0 or point.y >= region_size.y:
+		return false
 
-func GetNextRandomPos(PrevPos : Vector2, Distance : float) -> Vector2:
-	return Vector2(randf_range(-SpawningBoundsX, SpawningBoundsX), randf_range(PrevPos.y, PrevPos.y - (200 * Distance)))
+	var cell = Vector2i(point / cell_size)
+	for y in range(max(cell.y - 2, 0), min(cell.y + 3, grid_size.y)):
+		for x in range(max(cell.x - 2, 0), min(cell.x + 3, grid_size.x)):
+			var idx = x + y * int(grid_size.x)
+			var other = grid[idx]
+			if other != null and point.distance_to(other) < min_dist:
+				return false
+	return true
+
+func _grid_index(point: Vector2, cell_size: float, grid_size: Vector2) -> int:
+	var x = int(point.x / cell_size)
+	var y = int(point.y / cell_size)
+	x = clamp(x, 0, int(grid_size.x) - 1)
+	y = clamp(y, 0, int(grid_size.y) - 1)
+	return x + y * int(grid_size.x)
 
 func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
 	Happening.OnWorldGenerated(WorldSize)
@@ -412,9 +462,7 @@ func GenerateEventsThreaded() -> void:
 	for g in SpotGroups:
 		var Spots : Array
 		Spots.append_array(get_tree().get_nodes_in_group(g))
-		Spots.shuffle()
-		
-		
+		Spots.shuffle()		
 		
 		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		
@@ -691,6 +739,8 @@ func GeneratePathsFromLines(Lines : Array):
 func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : bool = false) -> Array:
 	var time = Time.get_ticks_msec()
 	var lines = _prim_mst_optimized(SpotLocs)
+	lines = AddExtraLines(SpotLocs, lines.duplicate())
+	
 	if (GenerateNeighbors):
 		call_deferred("GeneratePathsFromLines", lines)
 	print("Figuring out lines took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
@@ -720,7 +770,8 @@ func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : 
 		call_deferred("MapLineFinished")
 		
 	return lines
-	
+
+
 	
 func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
 	for g in Points:
@@ -748,7 +799,34 @@ func MapLineFinished() -> void:
 	Maplt = null
 	GenerationFinished.emit()
 	
-	
+#NEW MUCH SIMPLER ALGORITH FOR LINES
+func AddExtraLines(cities : Array, Lines : Array) -> Array:
+	for g in cities:
+		var ConnectionAmmount : int = 0
+		for z in cities:
+			if (Lines.has([g, z]) or Lines.has([z, g])):
+				ConnectionAmmount += 1
+		#for z in cities:
+			#if (ConnectionAmmount > 2):
+				#break
+			#if (Lines.has([g, z]) or Lines.has([z, g])):
+				#continue
+			#if (z.distance_to(g) < 3000):
+				#Lines.append([g, z])
+				#ConnectionAmmount += 1
+		var Dist = 2000
+		while (ConnectionAmmount < 3):
+			Dist += 500
+			for z in cities:
+				if (ConnectionAmmount > 2):
+					break
+				if (Lines.has([g, z]) or Lines.has([z, g])):
+					continue
+				if (z.distance_to(g) < Dist):
+					Lines.append([g, z])
+					ConnectionAmmount += 1
+	return Lines
+#OLD ALGORITH FOR LINES
 # Helper function: Push an element to the heap
 func _heap_push(heap: Array, element: Array):
 	heap.append(element)
@@ -789,7 +867,7 @@ func _heap_pop(heap: Array) -> Array:
 	
 	return result
 	
-	
+
 func _prim_mst_optimized(cities: Array) -> Array:
 	var num_cities = cities.size()
 	if num_cities <= 1:

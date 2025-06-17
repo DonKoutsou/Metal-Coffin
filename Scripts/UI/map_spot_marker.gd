@@ -31,6 +31,7 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		text.use_parent_material = true
 		SpotDropPosition.add_child(text)
 	$HBoxContainer.pivot_offset.y = $HBoxContainer.size.y
+	$HBoxContainer.pivot_offset.x = $HBoxContainer.size.x/2
 
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()

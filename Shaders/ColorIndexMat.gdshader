@@ -13,5 +13,5 @@ void fragment(){
 	COLOR.rgb = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
 
 	COLOR.rgb = to_indexed_palette(COLOR.rgb);
-	
+
 }

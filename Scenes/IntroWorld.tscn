@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cid0s6uni7fky"]
+[gd_scene load_steps=33 format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_0dp8t"]
@@ -32,11 +32,6 @@
 [ext_resource type="Resource" uid="uid://c5n56ywx45ilm" path="res://Resources/Happenings/The execution.tres" id="23_43ao6"]
 [ext_resource type="Resource" uid="uid://cxkj2k4llta37" path="res://Resources/Happenings/YoungCrewDiscussion.tres" id="24_8o37l"]
 [ext_resource type="Resource" uid="uid://bcorxmnws22bw" path="res://Resources/Happenings/The Evaluation.tres" id="28_32m5b"]
-
-[sub_resource type="Curve" id="Curve_0dp8t"]
-_limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 10), 0.0, 3.3398, 0, 0]
-point_count = 1
 
 [node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
@@ -100,6 +95,6 @@ metadata/_custom_type_script = "uid://s3ha37qvdear"
 [node name="Map" parent="." instance=ExtResource("19_3v2l7")]
 VillageSpotType = ExtResource("21_0i6dt")
 FinalCitySpotType = ExtResource("21_0dp8t")
-MapSize = 25
-MapGenerationDistanceCurve = SubResource("Curve_0dp8t")
-SpawningBoundsX = 10000.0
+MapSize = 35
+VillageAmm = 3
+SpawningBounds = Vector2(12000, 250000)
