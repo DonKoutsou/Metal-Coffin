@@ -37,7 +37,7 @@ func _ready() -> void:
 	UISoundMan.GetInstance().AddSelf(AddItemButton)
 	UISoundMan.GetInstance().AddSelf(IncreaseItemButton)
 	UISoundMan.GetInstance().AddSelf(RemoveItemButton)
-	
+
 
 func DescriptorTutorial() -> void:
 	pass

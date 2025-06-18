@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://db0e2caembxle"]
+[gd_scene load_steps=13 format=3 uid="uid://db0e2caembxle"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_sdl3v"]
 [ext_resource type="Script" uid="uid://ysm54y3gb5lt" path="res://Scripts/FlightManual/flight_manual.gd" id="1_xll1p"]
@@ -34,6 +34,85 @@ EntryName = "Missile Types"
 EntryDesc = "[color=#ffc315]Missile Types[/color][p]In the realm of strategic warfare, the effective use of missiles is paramount. Two primary missile categories exist: Beyond Visual Range (BVR) and Within Visual Range (WVR), each suited for distinct combat scenarios.[p][color=#ffc315]Beyond Visual Range (BVR) Missiles[/color][p]    [color=#ffc315]Usage:[/color][p]        Utilized when commanding the fleet in the overworld.[p]        Ideal for engaging targets from a distance before visual contact.[p]    [color=#ffc315]Characteristics:[/color][p]        Long-range capabilities allow for pre-emptive strikes and strategic targeting ahead of engagements.[p]        Varying speed and ranges depending on the model.[p]    [color=#ffc315]Strategic Advantage:[/color][p]        Use BVR missiles to weaken or eliminate enemy fleets before direct confrontation, creating opportunities for tactical superiority.[p][color=#ffc315]Within Visual Range (WVR) Missiles[/color][p]    [color=#ffc315]Usage:[/color][p]        Deployed during direct combat encounters.[p]        Designed for engagements where the enemy is within sight.[p]    [color=#ffc315]Characteristics:[/color][p]        Shorter range but highly maneuverable, suited for dynamic combat scenarios.[p]        Quick response times and agility make them ideal for close-quarter combat.[p]    [color=#ffc315]Strategic Advantage:[/color][p]        Employ WVR missiles to quickly neutralize threats during intense combat, leveraging their agility to gain the upper hand.[p]By understanding and utilizing the distinct capabilities of BVR and WVR missiles, you can adapt strategies to the evolving battlefield, ensuring readiness and effectiveness in both long-range and close-range engagements."
 metadata/_custom_type_script = "uid://cvx22oa8uksuj"
 
+[sub_resource type="Resource" id="Resource_h7m2u"]
+script = ExtResource("2_x06mv")
+EntryName = "Ship Stats"
+EntryDesc = "Each ship has a set of stats that determine its performance in travel and combat. Some stats are inherent to the ship itself, such as hull or base weight, while others are influenced by the ship’s installed parts. Ship parts contribute additional bonuses or penalties to various stats. When inspecting an item, you'll see which stats it affects.
+
+Different classes of ship parts offer different benefits. For example, Armaments increase firepower, while Fuel Tanks expand fuel capacity. Most parts, however, also increase the overall weight of the ship.
+
+The main ship stats are as follows:
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]FUEL TANK[/color] | Measured in Cubic Meters
+Indicates how much fuel a ship can carry. Combined with fuel efficiency, this determines the ship’s maximum travel distance without refueling.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]FUEL EFFICIENCY[/color] | Measured in Kilometers per Cubic Meter
+Determines how far a ship can travel per unit of fuel. Higher fuel efficiency means longer travel on less fuel. Heavier ships suffer from reduced fuel efficiency.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]THRUST[/color] | Measured in Mega-Newtons
+Represents the propulsion power of the ship. When combined with the ship's [color=#ffc315]WEIGHT[/color], it determines the ship’s top speed.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]FIREPOWER[/color]
+Used during close-quarters combat encounters. Offensive actions scale with your [color=#ffc315]FIREPOWER[/color] stat. [color=#ffc315]FIREPOWER[/color] can also be temporarily increased during battle. Inspect each combat card to see how it scales with [color=#ffc315]FIREPOWER[/color].
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]HULL[/color]
+Represents the ship’s health. As long as [color=#ffc315]HULL[/color] is above 0, your ship remains operational. Ships can be repaired at ports, though repairs take time—larger [color=#ffc315]HULL[/color] values require longer to mend.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]INVENTORY SPACE[/color]
+Reflects how much cargo the ship can carry. Cargo, such as missiles or fire suppression units, can be purchased from ports and is typically single-use.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]VISUAL RANGE[/color] | Measured in Kilometers
+Determines how far your ship can visually detect enemies or objects in space.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]ELINT[/color] | Measured in Kilometers
+Electronic Intelligence allows your ship to detect enemy radar signals at greater distances.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]WEIGHT[/color] | Measured in Tons
+Total mass of your ship and its equipment. [color=#ffc315]WEIGHT[/color] affects multiple aspects of performance, including [color=#ffc315]SPEED[/color] and [color=#ffc315]FUEL EFFICIENCY[/color].
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]SPEED[/color] | Measured in Kilometers per Hour
+Derived stat calculated from other attributes:
+[color=#ffc315]SPEED[/color] = ([color=#ffc315]THRUST[/color] × 1000) / [color=#ffc315]WEIGHT[/color]
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]REPAIR PRICE[/color] | Measured in Drahma
+The cost to repair one point of [color=#ffc315]HULL[/color] health. All ship parts contribute to this value—the lower it is, the cheaper your ship is to maintain.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]"
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"
+
+[sub_resource type="Resource" id="Resource_qao64"]
+script = ExtResource("2_x06mv")
+EntryName = "Ship Deck"
+EntryDesc = "Each ship has a deck of cards that is determined by its equipped parts. Every ship part contributes a specific set of cards, and together they form the ship’s final deck. When selecting ship parts, consider not only the stats they provide but also the cards they add to your deck.
+
+There is no limit to the number of cards your ship’s deck can contain.
+
+When building a deck, keep in mind the three main classes of cards:
+
+[color=#ff3c22]Offensive[/color] Cards
+Primarily focused on attacking. These cards typically scale with the ship's [color=#ffc315]FIREPOWER[/color] stat.
+
+[color=#6be2e9]Defensive[/color] Cards
+Provide shields or counter incoming attacks, helping to mitigate damage.
+
+[color=#8db354]Utility[/color] Cards
+Comprise all other card types, such as those that buff your ship, debuff enemy ships, generate energy, and more.
+
+When evaluating cards, pay attention to their timing and any special effects they may have, as well as the conditions under which those effects are activated.
+
+    * [color=#ff3c22]Offensive[/color] Cards are used during the Action Perform Phase of combat. This means they are not triggered instantly; instead, all players select their cards first, and then actions are resolved together. This delay gives your opponents a chance to react or prepare counters.
+    [color=#ff3c22]Offensive[/color] cards can have two types of effects:
+   		* [color=#ffc315]On Successful Attack:[/color] These effects activate only if the attack hits its target. If the attack is countered, the effect does not trigger.
+        * [color=#ffc315]On Attack Modules:[/color] These effects trigger as soon as the attack is initiated, regardless of whether it hits or is countered.
+
+    * [color=#6be2e9]Defensive[/color] Cards may be played instantly or during the Action Perform Phase, depending on their type. Generally, counter cards are reserved for the Action Perform Phase and are only activated if the ship is attacked by an appropriate offensive card. Other defensive cards marked with “On Use” are played instantly.
+    [color=#6be2e9]Defensive[/color] cards can also have effects such as:
+        * [color=#ffc315]On Successful Defense:[/color] These effects trigger when a counter card successfully blocks an attack.
+
+    * [color=#8db354]Utility[/color] Cards are always played instantly upon use.
+
+By thoughtfully combining ship parts and understanding each card’s timing and effects, you can create a deck that supports your ship’s strengths and your preferred strategy."
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lm06n"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -53,7 +132,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xll1p")
-FlightManualEntries = Array[ExtResource("2_x06mv")]([SubResource("Resource_lm06n"), SubResource("Resource_6btdu"), SubResource("Resource_ia3ty"), SubResource("Resource_x06mv"), SubResource("Resource_m4vth")])
+FlightManualEntries = Array[ExtResource("2_x06mv")]([SubResource("Resource_lm06n"), SubResource("Resource_6btdu"), SubResource("Resource_ia3ty"), SubResource("Resource_x06mv"), SubResource("Resource_m4vth"), SubResource("Resource_h7m2u"), SubResource("Resource_qao64")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

@@ -15,7 +15,7 @@ var PlMaxHull : float = 0
 var CurrentShip : Captain
 
 func Init(Ship : Captain, HasRepair : bool) -> void:
-	CaptainNameLabel.text = Ship.CaptainName
+	CaptainNameLabel.text = Ship.GetCaptainName()
 	CurrentShip = Ship
 	RepairPricePerUnit = Ship.GetStatFinalValue(STAT_CONST.STATS.REPAIR_PRICE)
 	if (HasRepair):

@@ -14,6 +14,8 @@ class_name CardFightShipViz2
 @export var FPDeBuff : GPUParticles2D
 
 @export var FirePart : GPUParticles2D
+@export var ExplosionPart : GPUParticles2D
+@export var SmokePart : GPUParticles2D
 @export var FPLabel : RichTextLabel
 @export var SPDLabel : RichTextLabel
 @export var HasMovePanel : Control
@@ -31,32 +33,32 @@ signal OnFallbackPressed()
 var Fr : bool
 
 func Destroy() -> void:
-	var mat = $HBoxContainer/Control/TextureRect/GPUParticles2D2.process_material as ParticleProcessMaterial
+	var mat = ExplosionPart.process_material as ParticleProcessMaterial
 	mat.scale_max = 0.6
-	$HBoxContainer/Control/TextureRect/GPUParticles2D2.emitting = true
+	ExplosionPart.emitting = true
 	$HBoxContainer/Control/TextureRect/ExplosionSound.play()
-	var RandomPos = $HBoxContainer/Control/TextureRect.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
+	var RandomPos = ShipIcon.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	var MoveTw = create_tween()
 	MoveTw.set_ease(Tween.EASE_IN)
 	MoveTw.set_trans(Tween.TRANS_QUAD)
-	MoveTw.tween_property($HBoxContainer/Control/TextureRect, "global_position", RandomPos, 3)
+	MoveTw.tween_property(ShipIcon, "global_position", RandomPos, 3)
 	var ScaleTw = create_tween()
 	ScaleTw.set_ease(Tween.EASE_IN)
 	ScaleTw.set_trans(Tween.TRANS_QUAD)
-	ScaleTw.tween_property($HBoxContainer/Control/TextureRect, "scale", Vector2(0.2, 0.2), 3)
+	ScaleTw.tween_property(ShipIcon, "scale", Vector2(0.2, 0.2), 3)
 	var RandomRot = randf_range(-720, 720)
 	var RotTween = create_tween()
 	RotTween.set_ease(Tween.EASE_IN)
 	RotTween.set_trans(Tween.TRANS_QUAD)
-	RotTween.tween_property($HBoxContainer/Control/TextureRect, "rotation_degrees", RandomRot, 3)
+	RotTween.tween_property(ShipIcon, "rotation_degrees", RandomRot, 3)
 	var ShadowPosTween = create_tween()
 	ShadowPosTween.set_ease(Tween.EASE_IN)
 	ShadowPosTween.set_trans(Tween.TRANS_QUAD)
-	ShadowPosTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "position", Vector2(32.25, 0), 3)
+	ShadowPosTween.tween_property(ShipIcon.get_child(0), "position", Vector2(32.25, 0), 3)
 	var ShadowScaleTween = create_tween()
 	ShadowScaleTween.set_ease(Tween.EASE_IN)
 	ShadowScaleTween.set_trans(Tween.TRANS_QUAD)
-	ShadowScaleTween.tween_property($HBoxContainer/Control/TextureRect/TextureRect2, "scale", Vector2(1,1), 3)
+	ShadowScaleTween.tween_property(ShipIcon.get_child(0), "scale", Vector2(1,1), 3)
 	ToggleFire(false)
 	ToggleDefBuff(false, 1)
 	ToggleDefDeBuff(false)
@@ -71,10 +73,9 @@ func Destroy() -> void:
 	
 	await MoveTw.finished
 	$HBoxContainer/Control/TextureRect/LandSound.play()
-	#var mat = $HBoxContainer/Control/TextureRect/GPUParticles2D2.process_material as ParticleProcessMaterial
 	mat.scale_max = 0.1
-	$HBoxContainer/Control/TextureRect/GPUParticles2D2.restart()
-	$HBoxContainer/Control/TextureRect/GPUParticles2D2.emitting = true
+	ExplosionPart.restart()
+	ExplosionPart.emitting = true
 	
 
 func _ready() -> void:
@@ -116,7 +117,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	
 	ShipIcon.flip_v = !Friendly
 	ShipIcon.get_child(0).flip_v = !Friendly
-	#$HBoxContainer/PanelContainer/VBoxContainer/PanelContainer2.visible = Friendly
+	
 	if (Friendly):
 		$HBoxContainer.move_child($HBoxContainer/VBoxContainer, 0)
 	else:
@@ -130,7 +131,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	TurnPanel.self_modulate.a = 0
 
 func GetShipPos() -> Vector2:
-	return $HBoxContainer/Control.global_position
+	return ShipIcon.global_position
 
 func ActionPicked(Text : Texture) -> void:
 	var TexNode = TextureRect.new()
@@ -153,11 +154,16 @@ func OnActionsPerformed() -> void:
 
 func UpdateStats(S : BattleShipStats) -> void:
 	var HullTween = create_tween()
+	HullTween.set_ease(Tween.EASE_OUT)
+	HullTween.set_trans(Tween.TRANS_QUAD)
 	HullTween.tween_property(HullBar, "value", S.CurrentHull, 1)
-	#HullBar.value = S.CurrentHull
-	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
+	
 	var ShieldTween = create_tween()
+	ShieldTween.set_ease(Tween.EASE_OUT)
+	ShieldTween.set_trans(Tween.TRANS_QUAD)
 	ShieldTween.tween_property(ShieldBar, "value", S.Shield, 1)
+	
+	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")
 	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
 	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")
@@ -182,7 +188,6 @@ func Enable() -> void:
 	Enabled = true
 	TurnPanel.self_modulate.a = 1
 	ModulateTween = create_tween()
-	#tw.set_trans(Tween.TRANS_CIRC)
 	ModulateTween.tween_property(TurnPanel, "self_modulate", Color(1,1,1,0), 1)
 	ModulateTween.tween_callback(TweenEnded)
 
@@ -201,7 +206,7 @@ func ToggleFire(t : bool) -> void:
 	FirePart.visible = t
 
 func EnableSmoke() -> void:
-	$HBoxContainer/Control/TextureRect/Smoke.visible = true
+	SmokePart.visible = true
 
 func ToggleDmgBuff(t : bool, amm : float) -> void:
 	FPBuff.amount = 5 * amm

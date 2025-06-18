@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 [sub_resource type="Resource" id="Resource_fktga"]
 script = ExtResource("4_qk6tc")
 AtackType = 0
-Damage = 14.0
+Damage = 18.0
 ScaleStat = Array[ExtResource("3_5te48")]([SubResource("Resource_tmbps")])
 CauseFile = false
 OnAtackModules = Array[ExtResource("2_e3knc")]([])

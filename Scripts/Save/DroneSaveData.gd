@@ -11,3 +11,4 @@ class_name DroneSaveData
 @export var Altitude : float
 @export var DockedDrones : Array[DroneSaveData]
 @export var RepairParts : float
+@export var TempName : String

@@ -87,7 +87,7 @@ NonBluredSpriteFrames = ExtResource("3_nsl5r")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
-position = Vector2(19, 10)
+position = Vector2(16.5565, 2.78261)
 sprite_frames = SubResource("SpriteFrames_jvc5q")
 speed_scale = -1.0
 offset = Vector2(0, 128)

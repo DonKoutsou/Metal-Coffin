@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://csgrtdu16q72h"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://csgrtdu16q72h"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_5pyc2"]
 [ext_resource type="Resource" uid="uid://bc28324vb6uij" path="res://Resources/Cards/ArmorShed.tres" id="2_lyeu3"]
@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_x1aim"]
 script = ExtResource("2_tosgp")
 UpgradeName = 4
-UpgradeAmmount = 300.0
+UpgradeAmmount = 150.0
 PenaltyAmmount = 0.0
 CurrentValue = 300.0
 
@@ -22,10 +22,18 @@ PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
+[sub_resource type="Resource" id="Resource_5pohb"]
+script = ExtResource("2_tosgp")
+UpgradeName = 9
+UpgradeAmmount = 30.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("3_57yoy")
-Upgrades = Array[ExtResource("2_tosgp")]([SubResource("Resource_x1aim"), SubResource("Resource_lyeu3")])
-UpgradeTime = 120.0
+Upgrades = Array[ExtResource("2_tosgp")]([SubResource("Resource_x1aim"), SubResource("Resource_lyeu3"), SubResource("Resource_5pohb")])
+UpgradeTime = 200.0
 IsDamaged = false
 PartType = 5
 ItemName = "Composite Titanium Plates"

@@ -88,17 +88,19 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 			Ship.connect("DroneReturning", marker.DroneReturning)
 
 		Ship.Elint.connect(marker.ToggleShowElint)
+		Ship.Cpt.OnNameChanged.connect(marker.OnCaptainNameChanged)
 		Ship.LandingStarted.connect(marker.OnLandingStarted)
 		Ship.LandingEnded.connect(marker.OnLandingEnded)
 		Ship.TakeoffStarted.connect(marker.OnLandingStarted)
 		Ship.TakeoffEnded.connect(marker.OnLandingEnded)
 		Ship.MatchingAltitudeStarted.connect(marker.OnLandingStarted)
 		Ship.MatchingAltitudeEnded.connect(marker.OnLandingEnded)
+		
 		#Ship.connect("LandingCanceled", marker.OnLandingEnded)
 
 		marker.call_deferred("ToggleShipDetails", true)
 		#marker.call_deferred("ToggleFriendlyShipDetails", true)
-		marker.SetMarkerDetails(Ship.Cpt.CaptainName, "F",Ship.GetShipSpeed())
+		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetShipSpeed())
 		marker.SetType("Ship")
 	else : if (Ship is Missile):
 		if (!Friend):
@@ -266,7 +268,7 @@ func GetSaveData() -> SaveData:
 
 func LoadSaveData(Data : SaveData) -> void:
 	var Ships = get_tree().get_nodes_in_group("Enemy")
-	for D in Data.Datas:
+	for D : SD_ShipMarker in Data.Datas:
 		var SavedName = D.ShipName
 		var Ship : HostileShip
 		for S : HostileShip in Ships:
@@ -275,3 +277,4 @@ func LoadSaveData(Data : SaveData) -> void:
 				var marker = AddShip(S, false, false)
 				marker.TimeLastSeen = D.TimeLastSeen
 				marker.global_position = D.Pos
+				marker.UpdateTrajectory(D.Trajectory)

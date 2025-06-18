@@ -11,7 +11,7 @@ func TestCard(Mod : CardModule) -> bool:
 	return false
 
 func GetDesc(Tier : int) -> String:
-	return "Choose one {0} card from the deck".format([CardType.keys()[CardToSpawn]])
+	return "Put one {0} card from the deck to you hand.".format([CardType.keys()[CardToSpawn]])
 
 enum CardType {
 	OFFENSIVE,

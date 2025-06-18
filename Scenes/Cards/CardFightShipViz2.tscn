@@ -184,7 +184,7 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_r755l")
 color_ramp = SubResource("GradientTexture1D_r755l")
 
-[node name="CardFightShipViz" type="Control" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "HullBar", "HullLabel", "ShieldBar", "TurnPanel", "SpeedBuff", "SpeedDeBuff", "FPBuff", "FPDeBuff", "FirePart", "FPLabel", "SPDLabel", "HasMovePanel", "ActionParent", "DefBuff", "DefDeBuff", "WeightLabel", "DefenceLabel")]
+[node name="CardFightShipViz" type="Control" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "HullBar", "HullLabel", "ShieldBar", "TurnPanel", "SpeedBuff", "SpeedDeBuff", "FPBuff", "FPDeBuff", "FirePart", "ExplosionPart", "SmokePart", "FPLabel", "SPDLabel", "HasMovePanel", "ActionParent", "DefBuff", "DefDeBuff", "WeightLabel", "DefenceLabel")]
 custom_minimum_size = Vector2(180, 100)
 layout_mode = 3
 anchors_preset = 8
@@ -213,6 +213,8 @@ SpeedDeBuff = NodePath("SpeedDeBuff")
 FPBuff = NodePath("FirepowerBuff")
 FPDeBuff = NodePath("FirepowerDeBuff")
 FirePart = NodePath("HBoxContainer/Control/TextureRect/GPUParticles2D")
+ExplosionPart = NodePath("HBoxContainer/Control/TextureRect/Explosion")
+SmokePart = NodePath("HBoxContainer/Control/TextureRect/Smoke")
 FPLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label")
 SPDLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2")
 HasMovePanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/Panel")
@@ -333,9 +335,11 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-text = "GER"
+text = "GERdwadwadwa"
 vertical_alignment = 2
+clip_text = true
 uppercase = true
 
 [node name="Hull" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer"]
@@ -495,14 +499,14 @@ fixed_fps = 20
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_rmogf")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect"]
+[node name="Explosion" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect"]
 position = Vector2(32.25, -0.000202349)
 emitting = false
 amount = 3
 texture = ExtResource("7_cmntb")
 lifetime = 2.0
 one_shot = true
-explosiveness = 0.85
+explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_0orxy")
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/TextureRect"]

@@ -12,6 +12,8 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
 	queue_redraw()
 	
+
+
 func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)
@@ -88,7 +90,7 @@ func _HandleRestock() -> void:
 	Repair()
 	
 	var inv = Cpt.GetCharacterInventory()
-	if (inv._ItemBeingUpgraded != null):
+	if (inv != null and inv._ItemBeingUpgraded != null):
 		ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
 	else:
 		ShipDockActions.emit("Upgrading", false, 0)

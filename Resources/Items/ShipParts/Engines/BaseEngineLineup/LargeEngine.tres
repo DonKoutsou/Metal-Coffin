@@ -24,7 +24,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_j5fk8"]
 script = ExtResource("5_0moyl")
 UpgradeName = 9
-UpgradeAmmount = 70.0
+UpgradeAmmount = 120.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"

@@ -143,7 +143,7 @@ func UpdateSelected(Dir : bool) -> void:
 func UpdateCrewSelect(Select : int = 0):
 	if (DockedDrones[ConnectedShip].size() > Select):
 		CurrentlySelectedDrone = DockedDrones[ConnectedShip][Select]
-		$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
+		$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.GetCaptainName()
 		$Control/TextureRect/Light.Toggle(true, true)
 	else:
 		$Control/TextureRect/Label2.text = "No Drones"
@@ -161,7 +161,7 @@ func ProgressCrewSelect(_Front : bool = true):
 			i = 0
 		CurrentlySelectedDrone = DockedDrones[ConnectedShip][i]
 	$Control/TextureRect/Light.Toggle(true, true)
-	$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.CaptainName
+	$Control/TextureRect/Label2.text = CurrentlySelectedDrone.Cpt.GetCaptainName()
 
 func _on_turn_off_button_pressed() -> void:
 	$Control/TouchStopper.mouse_filter = MOUSE_FILTER_STOP

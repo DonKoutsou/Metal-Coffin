@@ -27,12 +27,12 @@ func SetCpt(Cpt : Captain) -> void:
 func SetVisuals(Cap : Captain) -> void:
 	CapPortrait.texture = Cap.CaptainPortrait
 
-	CapName.text = Cap.CaptainName
+	CapName.text = Cap.GetCaptainName()
 
 func SetVisuals2(Cap : Captain) -> void:
 	CapPortrait.texture = Cap.ShipIcon
 
-	CapName.text = Cap.CaptainName
+	CapName.text = Cap.GetCaptainName()
 
 func _on_button_pressed() -> void:
 	OnShipSelected.emit()

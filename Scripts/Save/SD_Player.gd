@@ -11,3 +11,4 @@ var DataName = "PLData"
 @export var CameraPos : Vector2
 @export var CameraZoom : Vector2
 @export var RepairParts : float
+@export var TempName : String

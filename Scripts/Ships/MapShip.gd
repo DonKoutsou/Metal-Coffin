@@ -582,7 +582,7 @@ func GetShipMaxSpeed() -> float:
 	return Spd
 	
 func GetShipName() -> String:
-	return Cpt.CaptainName
+	return Cpt.GetCaptainName()
 	
 func GetShipSpeed() -> float:
 	if (Docked):

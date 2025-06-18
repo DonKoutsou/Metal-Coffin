@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=51 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -38,6 +38,10 @@
 [ext_resource type="PackedScene" uid="uid://cix2emi1smed2" path="res://Scenes/InScreenUI/setting_panel2.tscn" id="30_aa43b"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
 [ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/LightCone.png" id="36_j43p8"]
+[ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
+[ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
+[ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
+[ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.504407, 0.550725)
@@ -137,16 +141,13 @@ grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport"]
 material = SubResource("CanvasItemMaterial_yrlew")
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -172.0
-offset_top = -97.0
-offset_right = -40.0
-offset_bottom = -33.0
-grow_horizontal = 0
+offset_left = 17.0
+offset_top = -86.0
+offset_right = 149.0
+offset_bottom = -22.0
 grow_vertical = 0
 alignment = 1
 
@@ -159,39 +160,6 @@ texture = ExtResource("2_q14vk")
 use_parent_material = true
 layout_mode = 2
 texture = ExtResource("3_s86m3")
-
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = -38.0
-offset_right = -1.0
-offset_bottom = -137.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 6
-texture = ExtResource("14_61hxs")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRect2"]
-self_modulate = Color(0, 0, 0, 0.6)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 6
-texture = ExtResource("7_aspsn")
-expand_mode = 1
 
 [node name="IntroMenuShips" type="Control" parent="SubViewportContainer/SubViewport"]
 layout_mode = 3
@@ -372,12 +340,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 10.0
+offset_right = -3.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("14_61hxs")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/TextureRect2"]
+self_modulate = Color(0, 0, 0, 0.6)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("7_aspsn")
+expand_mode = 1
+
 [node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" instance=ExtResource("21_srpg8")]
 layout_mode = 1
-offset_left = -300.0
-offset_top = -159.0
-offset_right = -32.0
-offset_bottom = -116.0
+offset_left = -293.0
+offset_top = -70.0
+offset_right = -25.0
+offset_bottom = -27.0
 
 [node name="HintDialogue" type="Control" parent="SubViewportContainer/SubViewport/NormalUI"]
 layout_mode = 1
@@ -446,17 +448,14 @@ text = "No"
 
 [node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport/NormalUI"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
 offset_left = -107.0
-offset_top = -43.0
+offset_top = 24.0
 offset_right = 107.0
-offset_bottom = -22.0
+offset_bottom = 45.0
 grow_horizontal = 2
-grow_vertical = 0
 text = "Demo Version 0.61"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -509,9 +508,9 @@ expand_mode = 1
 [node name="Prologue" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
 offset_left = 40.0
-offset_top = 52.0
+offset_top = 104.0
 offset_right = 57.0
-offset_bottom = 90.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -523,9 +522,9 @@ stretch_mode = 0
 [node name="LoadPrologue" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
 offset_left = 40.0
-offset_top = 114.0
+offset_top = 156.0
 offset_right = 57.0
-offset_bottom = 153.0
+offset_bottom = 195.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -537,16 +536,16 @@ stretch_mode = 0
 [node name="PrologueLight" parent="ScreenFrame2" instance=ExtResource("34_aa43b")]
 layout_mode = 0
 offset_left = 138.0
-offset_top = 115.0
+offset_top = 167.0
 offset_right = 178.0
-offset_bottom = 155.0
+offset_bottom = 207.0
 
 [node name="Play2" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
 offset_left = 40.0
-offset_top = 200.0
+offset_top = 234.0
 offset_right = 57.0
-offset_bottom = 239.0
+offset_bottom = 273.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -558,9 +557,9 @@ stretch_mode = 0
 [node name="Load" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
 offset_left = 40.0
-offset_top = 270.0
+offset_top = 287.0
 offset_right = 56.0
-offset_bottom = 309.0
+offset_bottom = 326.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -572,9 +571,9 @@ stretch_mode = 0
 [node name="CampaignLight" parent="ScreenFrame2" instance=ExtResource("34_aa43b")]
 layout_mode = 0
 offset_left = 138.0
-offset_top = 273.0
+offset_top = 293.0
 offset_right = 178.0
-offset_bottom = 313.0
+offset_bottom = 333.0
 
 [node name="Fight" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
@@ -664,6 +663,97 @@ texture_normal = ExtResource("28_6nrcu")
 texture_pressed = ExtResource("29_rb62o")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="Fan" parent="." instance=ExtResource("39_nthvp")]
+position = Vector2(954, -120)
+scale = Vector2(1.73438, 1.73438)
+frame_progress = 0.96041
+frequency = 40.0
+
+[node name="Cables" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScreenFrame4" type="TextureRect" parent="Cables"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 487.0
+offset_top = -216.0
+offset_right = -319.0
+offset_bottom = -442.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 0)
+mouse_filter = 2
+texture = ExtResource("40_xqmn8")
+expand_mode = 1
+script = ExtResource("41_sjyyd")
+frequency = 10.0
+phase_offset = 1.265
+max_rotation = 0.0
+max_scale_x = 0.0
+
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame4"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = 12.0
+offset_right = -25.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("40_xqmn8")
+expand_mode = 1
+
+[node name="ScreenFrame3" type="TextureRect" parent="Cables"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -248.0
+offset_right = -901.0
+offset_bottom = -465.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(178, 0)
+mouse_filter = 2
+texture = ExtResource("42_67h1o")
+expand_mode = 1
+script = ExtResource("41_sjyyd")
+frequency = 10.0
+phase_offset = 1.265
+max_rotation = 0.0
+max_scale_x = 0.0
+
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame3"]
+modulate = Color(0, 0, 0, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 19.0
+offset_right = 12.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("42_67h1o")
+expand_mode = 1
 
 [node name="Black" type="ColorRect" parent="."]
 material = SubResource("CanvasItemMaterial_1p5b6")

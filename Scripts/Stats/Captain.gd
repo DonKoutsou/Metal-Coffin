@@ -18,12 +18,23 @@ class_name Captain
 #Only used by enemies
 @export var Cards : Dictionary[CardStats, int]
 @export var Repair_Parts : float = 0
+@export var TempName : String = ""
 #used to signal ship so it can change size of colliders
 signal ShipPartChanged(P : ShipPart)
 signal StatChanged(NewVal : float)
+signal OnNameChanged(NewName : String)
 var CaptainShip : MapShip
 var _CharInv : CharacterInventory
 
+func OnCharacterNameChanged(NewName : String) -> void:
+	TempName = NewName
+	OnNameChanged.emit(GetCaptainName())
+
+func GetCaptainName() -> String:
+	if (TempName != ""):
+		return TempName
+	return CaptainName
+	
 func _init() -> void:
 	#call_deferred("MapStats")
 	if (OS.is_debug_build() and CheckForErrors):
@@ -49,7 +60,7 @@ func GetBattleStats() -> BattleShipStats:
 	
 	stats.ShipIcon = ShipIcon
 	stats.CaptainIcon = CaptainPortrait
-	stats.Name = CaptainName
+	stats.Name = GetCaptainName()
 	var c : Array[CardStats]
 	for g in StartingItems:
 		if (g is ShipPart):
@@ -171,7 +182,7 @@ func CheckForIssues() -> void:
 	
 	var Inv = _GetStat(STAT_CONST.STATS.INVENTORY_SPACE).GetStat()
 	if (Itms.size() > Inv):
-		printerr("Character {0} has more items configured than inventory space.".format([CaptainName]))
+		printerr("Character {0} has more items configured than inventory space.".format([GetCaptainName()]))
 
 func _GetStat(StatN : STAT_CONST.STATS) -> ShipStat:
 	for g in CaptainStats:
@@ -196,6 +207,7 @@ func GetStatCurrentValue(StatN : STAT_CONST.STATS) -> float:
 
 func CopyStats(Cpt : Captain) -> void:
 	CaptainName = Cpt.CaptainName
+	TempName = Cpt.TempName
 	CaptainBio = Cpt.CaptainBio
 	CaptainPortrait = Cpt.CaptainPortrait
 	ShipIcon = Cpt.ShipIcon

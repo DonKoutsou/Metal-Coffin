@@ -47,7 +47,7 @@ func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise])
 	for g in Ships:
 		var b = Button.new()
 		ShipButtonsParent.add_child(b)
-		b.text = g.Cpt.CaptainName
+		b.text = g.Cpt.GetCaptainName()
 		b.pressed.connect(OnShipSelected.bind(g))
 	
 	OnShipSelected(Ships[0])

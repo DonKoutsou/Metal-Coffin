@@ -27,7 +27,7 @@ func GetMerchItemDesc(Ships : Array[MapShip]) -> String:
 	Desc += "CAN BE USED BY : [color=#ffc315]"
 	if (UsableOn.size() > 0):
 		for g in UsableOn:
-			Desc += g.Cpt.CaptainName + ", "
+			Desc += g.Cpt.GetCaptainName() + ", "
 			
 	Desc += "[/color]\n"
 		

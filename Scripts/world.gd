@@ -95,15 +95,16 @@ func _ready() -> void:
 		Loadingscr.ProcesFinished("Placing Fleets In World")
 		await wait(1)
 	Loadingscr.UpdateProgress(100)
-	await wait(1)
-	Loadingscr.StartDest()
-	await Loadingscr.IntroFinished
+	
+	
 	
 	$ShipController.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
-	
+	await wait(1)
 	WRLD_WorldReady.emit()
 	if (!Loading):
+		Loadingscr.StartDest()
+		await Loadingscr.IntroFinished
 		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
 		GetMap().GetCamera().FrameCamToPlayer()
 		if (IsPrologue and !SkipStory):

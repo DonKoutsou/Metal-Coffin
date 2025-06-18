@@ -104,7 +104,7 @@ func HandleLocationCommand(Command) -> String:
 func HandleTeleport(CharName : String, Locx : float, Locy : float) -> String:
 	for g in get_tree().get_nodes_in_group("PlayerShips"):
 		var ship = g as MapShip
-		if ship.Cpt.CaptainName.to_lower() == CharName.to_lower():
+		if ship.Cpt.GetCaptainName().to_lower() == CharName.to_lower():
 			ship.global_position = Vector2(Locx, Locy)
 			return "Successfully teleported {0} to pos |{1}|".format([CharName, ship.global_position])
 	
@@ -113,7 +113,7 @@ func HandleTeleport(CharName : String, Locx : float, Locy : float) -> String:
 func PrintLocations(CharName : String) -> String:
 	for g in get_tree().get_nodes_in_group("PlayerShips"):
 		var ship = g as MapShip
-		if ship.Cpt.CaptainName.to_lower() == CharName.to_lower():
+		if ship.Cpt.GetCaptainName().to_lower() == CharName.to_lower():
 			return "{0}'s position is |x: {1}, y : {2}|".format([CharName, ship.global_position.x, ship.global_position.y])
 	
 	return "Location Print Failed"

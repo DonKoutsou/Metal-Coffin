@@ -26,7 +26,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_hehup"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 9
-UpgradeAmmount = 60.0
+UpgradeAmmount = 100.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"

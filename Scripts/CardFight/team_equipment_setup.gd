@@ -84,7 +84,7 @@ func OnCaptainSelected(Cpt : Captain) -> void:
 	if (Cpt == CurrentCpt):
 		return
 	
-	CaptainName.text = Cpt.CaptainName
+	CaptainName.text = Cpt.GetCaptainName()
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://carmmqiu3rn2f"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=13 format=3 uid="uid://carmmqiu3rn2f"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_hyayd"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_va7jv"]
@@ -12,7 +12,7 @@
 [sub_resource type="Resource" id="Resource_mhm0j"]
 script = ExtResource("3_30ir8")
 UpgradeName = 4
-UpgradeAmmount = 400.0
+UpgradeAmmount = 250.0
 PenaltyAmmount = 0.0
 CurrentValue = 600.0
 
@@ -32,9 +32,17 @@ PenaltyAmmount = 0.0
 CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
+[sub_resource type="Resource" id="Resource_c0jg3"]
+script = ExtResource("3_30ir8")
+UpgradeName = 9
+UpgradeAmmount = 25.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("4_n02hm")
-Upgrades = Array[ExtResource("3_30ir8")]([SubResource("Resource_mhm0j"), SubResource("Resource_385cy"), SubResource("Resource_o58x0")])
+Upgrades = Array[ExtResource("3_30ir8")]([SubResource("Resource_mhm0j"), SubResource("Resource_385cy"), SubResource("Resource_o58x0"), SubResource("Resource_c0jg3")])
 UpgradeVersion = ExtResource("3_ivh6q")
 UpgradeTime = 1200.0
 IsDamaged = false

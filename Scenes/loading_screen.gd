@@ -70,3 +70,5 @@ func StartDest():
 	#await t.timeout
 	#LoadingDestroyed.emit()
 	#queue_free()
+func Dest():
+	return

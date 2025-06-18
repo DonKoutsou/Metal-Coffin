@@ -39,13 +39,13 @@ func GetCharacterInventory(Cha : Captain) -> CharacterInventory:
 
 func GetCharacterInventoryByName(CharName : String) -> CharacterInventory:
 	for g in _CharacterInventories:
-		if (g.CaptainName.to_lower() == CharName.to_lower()):
+		if (g.GetCaptainName().to_lower() == CharName.to_lower()):
 			return _CharacterInventories[g]
 	return null
 
 func GetCharacterByName(CharName : String) -> Captain:
 	for g in _CharacterInventories:
-		if (g.CaptainName.to_lower() == CharName.to_lower()):
+		if (g.GetCaptainName().to_lower() == CharName.to_lower()):
 			return g
 	return null
 	
@@ -206,7 +206,7 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 	var SelectedCharInventory = _CharacterInventories[SelectedChar] as CharacterInventory
 	SelectedCharInventory.AddItem(It)
 	OwnerInventory.RemoveItemFromBox(Box)
-	PopUpManager.GetInstance().DoFadeNotif("Transfered {0} to {1}'s inventory".format([It.ItemName, SelectedChar.CaptainName]))
+	PopUpManager.GetInstance().DoFadeNotif("Transfered {0} to {1}'s inventory".format([It.ItemName, SelectedChar.GetCaptainName()]))
 	
 func GetBoxOwner(Box : Inventory_Box) -> Captain:
 	for g in _CharacterInventories.keys():
@@ -251,6 +251,7 @@ func AddCharacter(Cha : Captain) -> void:
 
 func OnCharacterRemoved(Cha : Captain) -> void:
 	Cha.Repair_Parts = 0
+	Cha.TempName = ""
 	var Inv = _CharacterInventories[Cha] as CharacterInventory
 	for z in Inv._GetInventoryBoxes():
 		for i in z._ContentAmmout:

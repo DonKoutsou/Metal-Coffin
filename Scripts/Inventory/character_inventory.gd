@@ -10,7 +10,7 @@ class_name CharacterInventory
 @export var WeaponInventoryBoxParent : GridContainer
 @export var ShieldInventoryBoxParent : GridContainer
 @export var InventoryBoxParent : GridContainer
-@export var CaptainNameLabel : Label
+@export var CaptainNameLabel : LineEdit
 
 signal InventoryUpdated
 signal OnItemAdded(it : Item)
@@ -23,8 +23,9 @@ signal ItemUpgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal ItemTransf(Box : Inventory_Box, OwnerInventory : CharacterInventory)
 signal OnCharacterInspectionPressed
 signal OnCharacterDeckInspectionPressed
-var _InventoryContents : Dictionary[Item, int]
 
+var _InventoryContents : Dictionary[Item, int]
+signal CharNameChanged(NewName : String)
 #var _CardInventory : Dictionary
 #var _CardAmmo : Dictionary
 
@@ -48,6 +49,8 @@ func GetCards() -> Array[CardStats]:
 		var Amm = _InventoryContents[g]
 		if (g is AmmoItem and !HasWeapon(g.WType)):
 			continue
+		if (g is MissileItem and !HasWeapon(CardStats.WeaponType.ML)):
+			continue
 		for A in Amm:
 			for z in g.CardProviding:
 				var C = z.duplicate() as CardStats
@@ -61,6 +64,8 @@ func GetCardDictionary() -> Dictionary[CardStats, int]:
 	for g in _InventoryContents:
 		for v in _InventoryContents[g]:
 			if (g is AmmoItem and !HasWeapon(g.WType)):
+				continue
+			if (g is MissileItem and !HasWeapon(CardStats.WeaponType.ML)):
 				continue
 			for z in g.CardProviding:
 				var C = z.duplicate() as CardStats
@@ -97,6 +102,9 @@ func GetInventoryContents() -> Dictionary[Item, int]:
 	return _InventoryContents
 
 func InitialiseInventory(Cha : Captain) -> void:
+	CharNameChanged.connect(Cha.OnCharacterNameChanged)
+	Cha.OnNameChanged.connect(CharacterNameChange)
+	
 	var CharInvSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.INVENTORY_SPACE)
 	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
 	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)
@@ -104,7 +112,7 @@ func InitialiseInventory(Cha : Captain) -> void:
 	var CharShieldSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SHIELD_SLOTS)
 	var CharWeaponSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.WEAPON_SLOTS)
 	
-	var CharName = Cha.CaptainName
+	var CharName = Cha.GetCaptainName()
 	for g in CharInvSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		Box.Initialise(self)
@@ -185,7 +193,7 @@ func AddItem(It : Item) -> void:
 
 			
 		if (It is ShipPart):
-			var BoxParent = GetBoxParentForType(It.PartType)
+			#var BoxParent = GetBoxParentForType(It.PartType)
 
 			OnShipPartAdded.emit(It)
 		else:
@@ -303,7 +311,7 @@ func StartUpgrade(Box : Inventory_Box, UpgradeBuff : bool) -> void:
 	set_physics_process(true)
 
 func ReStartUpgrade(Box : Inventory_Box, UpTime : float) -> void:
-	var Part = Box.GetContainedItem() as ShipPart
+	#var Part = Box.GetContainedItem() as ShipPart
 	_UpgradeTime = UpTime
 	_ItemBeingUpgraded = Box
 	set_physics_process(true)
@@ -400,3 +408,10 @@ func _on_inventory_vis_toggle_pressed() -> void:
 		#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Show Inventory"
 	
 	$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = false
+
+func CharacterNameChange(NewNae : String) -> void:
+	if (CaptainNameLabel.text != NewNae):
+		CaptainNameLabel.text = NewNae
+
+func _on_character_name_text_changed(NewText : String) -> void:
+	CharNameChanged.emit(NewText)

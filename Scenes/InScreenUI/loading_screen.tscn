@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bas2hvjynjr05"]
+[gd_scene load_steps=14 format=3 uid="uid://bas2hvjynjr05"]
 
 [ext_resource type="Script" uid="uid://b6akb2f5doubl" path="res://Scenes/loading_screen.gd" id="2_ehbru"]
 [ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="3_jmxc3"]
 [ext_resource type="Texture2D" uid="uid://byfedq22uoe62" path="res://Assets/Logos/ΜΧΨ1.png" id="4_57mps"]
+[ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="4_nnckq"]
 [ext_resource type="Texture2D" uid="uid://cga2lurpwk4ft" path="res://Assets/Logos/ΜΧΨ2.png" id="5_bbvsw"]
 [ext_resource type="Texture2D" uid="uid://dni651daut8p5" path="res://Assets/Logos/ΜΧΨ3.png" id="6_pg350"]
 [ext_resource type="Texture2D" uid="uid://c0od8ddjkv4ks" path="res://Assets/Logos/ΜΧΨ4.png" id="7_6jo5o"]
@@ -129,6 +130,21 @@ render_target_update_mode = 4
 
 [node name="TownBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_jmxc3")]
 Zoom = 0.67
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("4_nnckq")
+expand_mode = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 1

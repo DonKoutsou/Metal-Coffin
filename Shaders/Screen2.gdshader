@@ -1,9 +1,10 @@
 shader_type canvas_item;
 render_mode unshaded;
 uniform vec2 res = vec2(864, 486);
+uniform float Scanres = 500;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform int mask_type : hint_range(0, 2) = 0;
-
+uniform vec3 Tint : source_color;
 group_uniforms Vignette;
 uniform float vignette_strength : hint_range(0., 10., 0.01) = 1.;
 uniform float image_flicker : hint_range(0., 1., .01) = 1.;
@@ -22,6 +23,7 @@ uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
 uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
+uniform float scanline_intensity : hint_range(0.0, 10.0) = 0;
 
 uniform float ColorAmm: hint_range(16, 256, 1.0) = 1.;
 
@@ -127,7 +129,8 @@ void fragment(){
 	look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;
 	float vShift = 0.4 * onOff(2.0, 3.0, 0.9) * (pow(sin(TIME) * sin(TIME * 20.0) + (0.5 + 0.1 * sin(TIME * 200.0) * cos(TIME)), 2.0)) * skip;
 	look.y = mod(look.y + vShift, 1.0);
-
+	
+	
 	float aberration_amount = 0.005 * window * 5.0;
 	vec2 red_offset = vec2(-aberration_amount, 0.0);
 	vec2 blue_offset = vec2(aberration_amount, 0.0);
@@ -138,7 +141,13 @@ void fragment(){
 
 	float vigAmt = (3.3) * vignette_strength;
 	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 4.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 4.0));
+	
+	float color_dark_offset = 0.0;
+	int y_pos = int(floor(SCREEN_UV.y * Scanres * 2.0));
+	if (int(floor((float(y_pos) / 2.0))) * 2 == y_pos)
+		color_dark_offset = scanline_intensity;
 
+	//COLOR.rgb += mix(Tint, vec3(color_dark_offset), 0.5);
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
 	//COLOR.rgb = to_indexed_palette(COLOR.rgb);

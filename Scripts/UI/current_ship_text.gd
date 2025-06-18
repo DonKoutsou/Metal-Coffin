@@ -27,9 +27,9 @@ func _physics_process(delta: float) -> void:
 		commander = currentShip
 		
 	var hull = commander.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / commander.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-	var Ships = "-FLEET-\n--------\n{0}\nHULL:{1}%\n--------".format([commander.Cpt.CaptainName.to_upper(), roundi(hull)])
+	var Ships = "-FLEET-\n--------\n{0}\nHULL:{1}%\n--------".format([commander.Cpt.GetCaptainName().to_upper(), roundi(hull)])
 	for g in commander.GetDroneDock().DockedDrones:
 		var h = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-		Ships += "\n{0}\nHULL:{1}%\n--------".format([g.Cpt.CaptainName.to_upper(), roundi(h)])
+		Ships += "\n{0}\nHULL:{1}%\n--------".format([g.Cpt.GetCaptainName().to_upper(), roundi(h)])
 	text = Ships
 #roundi(hull)

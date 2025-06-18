@@ -112,6 +112,9 @@ func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 		#connect("ShipDeparted", notif.OnShipDeparted)
 		add_child(ElintNotif)
 
+func OnCaptainNameChanged(NewName : String) -> void:
+	ShipNameText = NewName
+
 func OnLandingStarted():
 	if (is_instance_valid(LandingNotif)):
 		return
@@ -225,5 +228,6 @@ func GetSaveData() -> SD_ShipMarker:
 	Data.ShipName = ShipNameText
 	Data.TimeLastSeen = TimeLastSeen
 	Data.Pos = global_position
+	Data.Trajectory = Direction.rotation
 	
 	return Data

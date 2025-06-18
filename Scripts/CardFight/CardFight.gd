@@ -103,6 +103,7 @@ enum CardFightPhase{
 signal CardFightEnded(Survivors : Array[BattleShipStats])
 
 func _ready() -> void:
+	
 	CurrentPlayerLabel.visible = false
 	
 	ExternalUI = ExternalCardFightUI.GetInstacne()
@@ -151,6 +152,7 @@ func _ready() -> void:
 
 var cloudtime : float = 0
 func _physics_process(delta: float) -> void:
+	
 	cloudtime += delta
 	Cloud.material.set_shader_parameter("custom_time", cloudtime)
 
@@ -170,7 +172,6 @@ func IntroDeclarationFinished() -> void:
 
 
 func ReplaceShip(Ship : BattleShipStats) -> void:
-	
 	ActionList.RemoveShip(Ship)
 	#Save the ships index in the turns array so that we can add this ship on same position
 	var TurnPosition = ShipTurns.find(Ship)

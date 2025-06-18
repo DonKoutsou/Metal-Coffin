@@ -236,6 +236,7 @@ func GetSaveData() -> PlayerSaveData:
 				pldata.Speed = g.GetShipSpeed()
 				pldata.Altitude = g.Altitude
 				pldata.RepairParts = g.Cpt.Repair_Parts
+				pldata.TempName = g.Cpt.TempName
 			else :
 				var FleetData = FleetSaveData.new()
 				if (g is Drone):
@@ -250,11 +251,13 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 	Player.SetShipPosition(Data.Pos)
 	Player.ForceSteer(Data.Rot)
 	Player.Cpt.Repair_Parts = Data.RepairParts
+	Player.Cpt.OnCharacterNameChanged(Data.TempName)
 	#WorldView.GetInstance().LoadData(Data.Worldview)
 	for Ship in Data.PlayerFleet:
 		var DockedShip = DroneScene.instantiate() as Drone
 		DockedShip.Cpt = Ship.Cpt
 		DockedShip.Cpt.Repair_Parts = Ship.RepairParts
+		DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
 		Player.GetDroneDock().AddDrone(DockedShip)
 	Player.SetSpeed(Data.Speed)
 	Player.UpdateAltitude(Data.Altitude)
@@ -265,6 +268,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		
 		CommanderShip.Cpt = Command.CommanderData.Cpt
 		CommanderShip.Cpt.Repair_Parts = Command.CommanderData.RepairParts
+		CommanderShip.Cpt.OnCharacterNameChanged(Command.CommanderData.TempName)
 		ShipPlecement.add_child(CommanderShip)
 		CommanderShip.SetShipPosition(Command.CommanderData.Pos)
 		CommanderShip.ForceSteer(Command.CommanderData.Rot)
@@ -273,7 +277,8 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		for Ship in Command.DockedShips:
 			var DockedShip = DroneScene.instantiate() as Drone
 			DockedShip.Cpt = Ship.Cpt
-			DockedShip.Cpt.Repair_Parts = Ship.Cpt.RepairParts
+			DockedShip.Cpt.Repair_Parts = Ship.RepairParts
+			DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
 			CommanderShip.GetDroneDock().AddDrone(DockedShip)
 	
 	var Cam = ShipCamera.GetInstance()
