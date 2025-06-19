@@ -82,10 +82,13 @@ func _physics_process(delta: float) -> void:
 func OnItemSold(It : Item, Price : float) -> void:
 	ItemSold.emit(It)
 	Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(roundi(Price / 100))
+	AchievementManager.GetInstance().IncrementStatFloat("MERCHSAM", Price)
 
 func OnItemBought(It : Item, Price : float) -> void:
 	ItemBought.emit(It)
 	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Price / 100))
+	AchievementManager.GetInstance().IncrementStatFloat("MERCHBAM", Price)
+	
 
 func _on_leave_merch_pressed() -> void:
 	queue_free()

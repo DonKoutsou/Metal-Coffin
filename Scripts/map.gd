@@ -319,6 +319,7 @@ func GenerateMap() -> void:
 	ShowingTutorial = true
 
 func GenerateMapThreaded(SpotParent : Node2D) -> void:
+	var time = Time.get_ticks_msec()
 	
 	var town_positions = poisson_disk_sampling(SpawningBounds, MinDistance, MapSize)
 	var sorted_positions = sort_positions_by_y(town_positions)
@@ -336,8 +337,6 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		if (CapitalCitySpots.has(spot)):
 			spot += 1
 		VillageSpots.append(spot)
-	#LOCATION OF PREVIUSLY PLACED MAP SPOT
-	var Prevpos : Vector2 = Vector2(250,250)
 	
 	var WorldSize : float = 100000
 	
@@ -370,15 +369,14 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		SpotParent.call_deferred("add_child", sc)
 		
 		GeneratedSpots.append(sc)
-		Prevpos = pos
-		
-	#var time = Time.get_ticks_msec()
-	
+
 	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
 	
 	for g in GeneratedSpots:
 		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()))
-
+	
+	if (OS.is_debug_build()):
+		print("Generating map took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 
 func sort_positions_by_y(positions: Array) -> Array:
 	var sorted = positions.duplicate()
@@ -717,6 +715,10 @@ func GenerateRoads() -> void:
 	
 	
 func GeneratePathsFromLines(Lines : Array):
+	var time = Time.get_ticks_msec()
+	if (OS.is_debug_build()):
+		print("Connecting neighboring cities based on generated paths")
+		
 	var SpotGroups = ["CAPITAL", "CITY_CENTER"]
 	var Cits : Array
 	for g in SpotGroups:
@@ -738,19 +740,22 @@ func GeneratePathsFromLines(Lines : Array):
 						break
 		g.SetNeighbord(Neighbors)
 	MAP_NeighborsSet.emit()
-	#print(find_path("Amarta", "Blanst"))
-	#print(find_path("Tsard", "Witra"))
+	
+	if (OS.is_debug_build()):
+		print("Connection of neighboring cities finished in {0} ms".format([Time.get_ticks_msec() - time]))
 	
 	
 func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : bool = false) -> Array:
 	var time = Time.get_ticks_msec()
+	if (OS.is_debug_build()):
+		print("Started generating paths between cities")
+		
 	var lines = _prim_mst_optimized(SpotLocs)
 	lines = AddExtraLines(SpotLocs, lines.duplicate())
 	
 	if (GenerateNeighbors):
 		call_deferred("GeneratePathsFromLines", lines)
-	print("Figuring out lines took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
-			
+	
 	if (RandomiseLines):
 		for l in lines:
 			var Line = l as Array
@@ -774,9 +779,13 @@ func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : 
 		call_deferred("RoadFinished")
 	else:
 		call_deferred("MapLineFinished")
-		
+	
+	if (OS.is_debug_build()):
+		print("Generating paths finished in " + var_to_str(Time.get_ticks_msec() - time) + " ms")
+	
 	return lines
-
+	
+	
 
 	
 func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
@@ -812,14 +821,6 @@ func AddExtraLines(cities : Array, Lines : Array) -> Array:
 		for z in cities:
 			if (Lines.has([g, z])):
 				ConnectionAmmount += 1
-		#for z in cities:
-			#if (ConnectionAmmount > 2):
-				#break
-			#if (Lines.has([g, z]) or Lines.has([z, g])):
-				#continue
-			#if (z.distance_to(g) < 3000):
-				#Lines.append([g, z])
-				#ConnectionAmmount += 1
 		var Dist = 2000
 		while (ConnectionAmmount < 3):
 			Dist += 500

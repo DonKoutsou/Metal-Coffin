@@ -52,55 +52,7 @@ metadata/_custom_type_script = "uid://dbopqdo4787oe"
 
 [sub_resource type="Resource" id="Resource_hv8jm"]
 script = ExtResource("1_d3qx6")
-HappeningTexts = Array[String](["As you step off the ship, you sense a lot of eyes on you. The crowd bustling around the port seems wary of your presence.", "People are moving left and right, carrying goods, guiding visitors, and salespeople shouting about their commerce. Suddenly, everything comes to a halt.", "As if on cue, the moment you notice this, it all goes back to normal, as though nothing ever happened.", "You make your way toward the shipyard to order some fuel for your vessel. Upon entering the shipyard, you find people moving about just like in the port.", "You attempt to say a word to one of the workers, but he instantly points you toward a room in the back, as if he knows exactly why you’re here.", "Indeed, the room at the back appears to be the accountant's office. He barely looks up, seemingly busy punching numbers into a machine, with more and more paper coming out of it.", "spell check this text and try to improve it a bit without changing it too much
-
-As you come out of the ship you sense alot of eyes on you. The crowd going around in the port seems to wary of you. 
-
-People going left and right all over the place, carrying stuff, guiding people, sales people shouting about their comerce... All for a second stops.
-
-As if by chance the moment you notice about it, it all goese back to normal, like norhing has happened.
-
-You make your way towards the shipyard to order some fure for your ships. Entering the shipyard there are people goin all over the place, just as the port.
-
-You try to say a word at one of the workers and he instantly points you towards a room on the back, as if he knew what you were here for.
-
-Indeed the room at the back seemed to have been the acountant's office. He barely looks up, seems to be punching in numbers on a machine, more and more paper comming out of it.
-
-You gently knock on the door trying to get his atention. Without even lifting his head he asks you about the ship's callsign and the amount of fuel you will be needing.
-
-You ask for a full restock. As you mention your ship's callsign it seems to grab his atention for a second. He lifts up his head as if to take a look at you.
-
-Behind his huge googles you see a wide glance weighing you up and down. The man leaves his deck and step infront of you. \"You with the rebelion aren't you son?\"
-
-\"What are you all even trying to do here? You think you are some heroes or something? You wont make it but for the next few towns. The regime will obliterate you.\"
-
-1st response option
-\"Let me see them try.\"
-
-response
-\"Maybe to beat the devil another devil is needed\".... \"Go on son, i'll send the fuel in a sec. A small gift from us as well, go give them hell.\"
-
-2nd response option
-They might,but that wont stop us from trying.
-
-response
-The man's look changes, you cant make if its a look of dissbelief or if he just feels sorry for you. He slowly raises his arm and lets it fall on your shoulder. A soft smile comes on his face. \"You recklesness might actually shake this word enough to change it. May whoever is up there bless your journey son. You'll be having my support nonetheless. Go back to your ship son, we will be bringing the fuel in a bit.
-
-Here's a revised and spell-checked version, maintaining the essence of your original text:
-
-As you step off the ship, you sense a lot of eyes on you. The crowd bustling around the port seems wary of your presence.
-
-People are moving left and right, carrying goods, guiding visitors, and salespeople shouting about their commerce. Suddenly, everything comes to a halt.
-
-As if on cue, the moment you notice this, it all goes back to normal, as though nothing ever happened.
-
-You make your way toward the shipyard to order some fuel for your vessel. Upon entering the shipyard, you find people moving about just like in the port.
-
-You attempt to say a word to one of the workers, but he instantly points you toward a room in the back, as if he knows exactly why you’re here.
-
-Indeed, the room at the back appears to be the accountant's office. He barely looks up, seemingly busy punching numbers into a machine, with more and more paper coming out of it.
-
-You gently knock on the door to get his attention. Without lifting his head, he asks you about your ship's callsign and how much fuel you will need.", "You request a full restock. As you mention your ship's callsign, you notice it grabs his attention momentarily. He lifts his head to take a look at you.", "Behind his large goggles, you see a scrutinizing glance measuring you up and down. The man leaves his desk and steps in front of you. \"You're with the rebellion, aren't you, son?\"", "\"What are you all even trying to do here? Do you think you're some sort of heroes? You won’t make it past the next few towns. The regime will obliterate you.\""])
+HappeningTexts = Array[String](["As you step off the ship, you sense a lot of eyes on you. The crowd bustling around the port seems wary of your presence.", "People are moving left and right, carrying goods, guiding visitors, and salespeople shouting about their commerce. Suddenly, everything comes to a halt.", "As if on cue, the moment you notice this, it all goes back to normal, as though nothing ever happened.", "You make your way toward the shipyard to order some fuel for your vessel. Upon entering the shipyard, you find people moving about just like in the port.", "You attempt to say a word to one of the workers, but he instantly points you toward a room in the back, as if he knows exactly why you’re here.", "Indeed, the room at the back appears to be the accountant's office. He barely looks up, seemingly busy punching numbers into a machine, with more and more paper coming out of it.", "You gently knock on the door to get his attention. Without lifting his head, he asks you about your ship's callsign and how much fuel you will need.", "You request a full restock. As you mention your ship's callsign, you notice it grabs his attention momentarily. He lifts his head to take a look at you.", "Behind his large goggles, you see a scrutinizing glance measuring you up and down. The man leaves his desk and steps in front of you. \"You're with the rebellion, aren't you, son?\"", "\"What are you all even trying to do here? Do you think you're some sort of heroes? You won’t make it past the next few towns. The regime will obliterate you.\""])
 Options = Array[ExtResource("2_r15pu")]([SubResource("Resource_rgmjt"), SubResource("Resource_d3qx6")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

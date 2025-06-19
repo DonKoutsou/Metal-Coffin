@@ -129,8 +129,8 @@ void fragment(){
 	look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;
 	float vShift = 0.4 * onOff(2.0, 3.0, 0.9) * (pow(sin(TIME) * sin(TIME * 20.0) + (0.5 + 0.1 * sin(TIME * 200.0) * cos(TIME)), 2.0)) * skip;
 	look.y = mod(look.y + vShift, 1.0);
-	
-	
+
+
 	float aberration_amount = 0.005 * window * 5.0;
 	vec2 red_offset = vec2(-aberration_amount, 0.0);
 	vec2 blue_offset = vec2(aberration_amount, 0.0);
@@ -141,7 +141,7 @@ void fragment(){
 
 	float vigAmt = (3.3) * vignette_strength;
 	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 4.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 4.0));
-	
+
 	float color_dark_offset = 0.0;
 	int y_pos = int(floor(SCREEN_UV.y * Scanres * 2.0));
 	if (int(floor((float(y_pos) / 2.0))) * 2 == y_pos)

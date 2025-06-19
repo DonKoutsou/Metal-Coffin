@@ -2,4 +2,4 @@ extends Resource
 
 class_name SD_PositionsToInvestigate
 
-@export var Pos : Dictionary
+@export var Pos : Dictionary[String, VisualLostInfo]

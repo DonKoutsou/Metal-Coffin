@@ -23,7 +23,7 @@ var Fleet : Array[HostileShip] = []
 var PursuitOrders : Array[PursuitOrder]
 var InvestigationOrders : Array[InvestigationOrder]
 
-var EnemyPositionsToInvestigate : Dictionary
+var EnemyPositionsToInvestigate : Dictionary[MapShip, VisualLostInfo]
 var KnownEnemies : Dictionary
 
 var Alarmed : bool = false
@@ -329,6 +329,7 @@ func CheckAlarm() -> void:
 			
 func OnAlarmRaised() -> void:
 	print("Alarm has been raised")
+	PopUpManager.GetInstance().DoFadeNotif("The Alarm has been raised")
 	Alarmed = true
 	for g in Fleet:
 		if (g.Command == null and g.Convoy):
@@ -343,7 +344,7 @@ func OnAlarmDissabled() -> void:
 			g.RefugeSpot = null
 
 func FindRefugeForShip(Ship : HostileShip) -> MapSpot:
-	var dist = Ship.GetFuelRange()
+	#var dist = Ship.GetFuelRange()
 	
 	var DistToSpot = 9999999999
 	
@@ -508,9 +509,11 @@ func GetSaveData() -> SaveData:
 	var Save = SaveData.new()
 	Save.DataName = "PositionsToInvestigate"
 	var SavedData = SD_PositionsToInvestigate.new()
-	var Poses : Dictionary
+	var Poses : Dictionary[String, VisualLostInfo]
+	
 	for g in EnemyPositionsToInvestigate:
 		Poses[g.GetShipName()] = EnemyPositionsToInvestigate[g]
+		
 	SavedData.Pos = Poses
 	Save.Datas.append(SavedData)
 	return Save
@@ -528,7 +531,7 @@ func GetEnemySaveData() ->SaveData:
 func LoadSaveData(Save : SaveData) -> void:
 	var ships = get_tree().get_nodes_in_group("Ships")
 	var Pos = (Save.Datas[0] as SD_PositionsToInvestigate).Pos
-	for g in ships:
-		var ShipName = g.GetShipName()
+	for ship : MapShip in ships:
+		var ShipName = ship.GetShipName()
 		if (Pos.has(ShipName)):
-			EnemyPositionsToInvestigate[g] = Pos[ShipName]
+			EnemyPositionsToInvestigate[ship] = Pos[ShipName]

@@ -2,6 +2,6 @@ extends Resource
 
 class_name VisualLostInfo
 
-var Position : Vector2
-var Speed : float
-var Direction : float
+@export var Position : Vector2
+@export var Speed : float
+@export var Direction : float

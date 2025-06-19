@@ -36,9 +36,12 @@ func TeamsPicked(PlTeam : Array[Captain], EnTeam : Array[Captain]) -> void:
 	ScrUI.ToggleScreenUI(false)
 	ScrUI.ToggleCardFightUI(true)
 	StartDogFight(PlTeam, EnTeam)
+	
+	AchievementManager.GetInstance().IncrementStatInt("CF", 1)
 	#$Inventory.Player = GetMap().GetPlayerShip()
 
 func EndGame() -> void:
+	
 	#get_tree().get_nodes_in_group("CardFight")[0].queue_free()
 	FightEnded.emit()
 	#queue_free()
@@ -66,8 +69,12 @@ func StartDogFight(PlTeam : Array[Captain], EnTeam : Array[Captain]):
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
 	
-func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
+func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 	
+	if (won):
+		AchievementManager.GetInstance().IncrementStatInt("CFW", 1)
+	else:
+		AchievementManager.GetInstance().IncrementStatInt("CFL", 1)
 	#GetMap().GetScreenUi().ToggleControllCover(false)
 	#ScrUI.ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	#await ScrUI.FullScreenToggleStarted

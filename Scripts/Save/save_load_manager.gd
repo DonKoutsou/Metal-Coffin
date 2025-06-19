@@ -12,6 +12,7 @@ static func GetInstance() -> SaveLoadManager:
 func DeleteSave() -> void:
 	DirAccess.remove_absolute("user://SavedGame.tres")
 	DirAccess.remove_absolute("user://PrologueSavedGame.tres")
+	TutorialManager.GetInstance().DeleteSave()
 
 static func SaveExists(Sav : String) -> bool:
 	var CurrentVersion = ProjectSettings.get_setting("application/config/version")

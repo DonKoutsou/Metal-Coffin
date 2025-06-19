@@ -84,7 +84,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_jnhcl"]
 script = ExtResource("2_ttymy")
 StatName = 9
-StatBase = 300.0
+StatBase = 200.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -174,3 +174,4 @@ ProvidingFunds = 20000
 ProvidingCaptains = Array[ExtResource("14_8itwo")]([ExtResource("5_tcmus")])
 Cards = Dictionary[ExtResource("3_i1vcp"), int]({})
 Repair_Parts = 0.0
+TempName = ""

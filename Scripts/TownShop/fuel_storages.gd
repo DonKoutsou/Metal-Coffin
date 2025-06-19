@@ -66,7 +66,10 @@ func UpdateFuelBar(AddedFuel : float):
 		if (z < -1):
 			Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(abs(z))
 			SpentFunds = 0
-	PlayerWallet.AddFunds(-(AddedFuel * FuelPricePerTon))
+
+	PlayerWallet.AddFunds(-MoneySpent)
+	if (MoneySpent > 0):
+		AchievementManager.GetInstance().IncrementStatFloat("FUELAM", MoneySpent)
 
 	#PlayerWallet.AddFunds(-(AddedFuel * FuelPricePerTon))
 	FuelBar.value = PlFuel + PlayerBoughtFuel

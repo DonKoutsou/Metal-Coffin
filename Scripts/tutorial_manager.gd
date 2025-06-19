@@ -124,6 +124,7 @@ func DeleteSave() -> void:
 		return
 
 	sav.CompletedActions.clear()
+	sav.CompletedPrologue = false
 	
 	ResourceSaver.save(sav, "user://TutorialData.tres")
 	

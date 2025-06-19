@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwjp7q1w18u4p"]
+[gd_scene load_steps=5 format=3 uid="uid://cwjp7q1w18u4p"]
 
 [ext_resource type="Script" uid="uid://dai8r8wn5redq" path="res://Scripts/fleet_sparation_scene.gd" id="1_mh7sl"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_mxuxe"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="2_mxuxe"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_wglh3"]
 
 [node name="FleetSeparationScene" type="PanelContainer" node_paths=PackedStringArray("CurrentFleetRangeText", "CurrentFleetFuelBar", "CurrentFleetCommanderPlecemenet", "CurrentFleetShipPlecement", "NewFleetRangeText", "NewFleetFuelBar", "NewFleetShipPlecement", "NewFleetCommanderPlecemenet") groups=["FleetSep"]]
 anchors_preset = 15
@@ -14,12 +15,12 @@ theme_override_styles/panel = ExtResource("1_mxuxe")
 script = ExtResource("1_mh7sl")
 CurrentFleetRangeText = NodePath("VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/CurrentFleetRange")
 CurrentFleetFuelBar = NodePath("VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/CurrentFleetFuel")
-CurrentFleetCommanderPlecemenet = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/PanelContainer/VBoxContainer/CurrentFleetCommanderPlecement")
-CurrentFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/PanelContainer/VBoxContainer/VBoxContainer")
+CurrentFleetCommanderPlecemenet = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/CurrentFleetCommanderPlecement")
+CurrentFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll/VBoxContainer")
 NewFleetRangeText = NodePath("VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/NewFleetRange")
 NewFleetFuelBar = NodePath("VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer/NewFleetFuel")
-NewFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/ScrollContainer2/PanelContainer/VBoxContainer/VBoxContainer")
-NewFleetCommanderPlecemenet = NodePath("VBoxContainer/HBoxContainer/ScrollContainer2/PanelContainer/VBoxContainer/NewFleetCommanderPlecement")
+NewFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll/VBoxContainer")
+NewFleetCommanderPlecemenet = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/NewFleetCommanderPlecement")
 ShipContainer = ExtResource("2_mxuxe")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -29,69 +30,87 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="CurrentFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
+[node name="CurrentFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/PanelContainer/VBoxContainer/CurrentFleetCommanderPlecement"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/CurrentFleetCommanderPlecement"]
 layout_mode = 2
 text = "Fleet Commander"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Suad Members"
 horizontal_alignment = 1
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_wglh3")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer2/PanelContainer"]
-layout_mode = 2
-
-[node name="NewFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer2/PanelContainer/VBoxContainer"]
+[node name="NewFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2"]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer2/PanelContainer/VBoxContainer/NewFleetCommanderPlecement"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/NewFleetCommanderPlecement"]
 layout_mode = 2
 text = "Fleet Commander"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer2/PanelContainer/VBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_mxuxe")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2"]
+layout_mode = 2
+text = "Squad Members"
+horizontal_alignment = 1
+
+[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_wglh3")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer2/PanelContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Suad Members"
-horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

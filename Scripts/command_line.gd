@@ -3,10 +3,12 @@ extends PanelContainer
 class_name CommandLine
 
 @export var Text : TextEdit
+@export var StartingMen : bool
 
 var Items : Array[Item]
 
-@export var StartingMen : bool
+signal StartPrologue(SkipStory : bool)
+signal StartCampaign(SkipStory : bool)
 
 func _ready() -> void:
 	if (!OS.is_debug_build() or OS.get_name() != "Windows"):
@@ -14,7 +16,7 @@ func _ready() -> void:
 		return
 	visible = false
 	set_physics_process(false)
-	RefrshExistingItems()
+	#RefrshExistingItems()
 
 func OnCommandEntered() -> void:
 	var Command = Text.text
@@ -22,7 +24,6 @@ func OnCommandEntered() -> void:
 	#UpdateRecomendations()
 	
 	if (Command.substr(Command.length() - 1, Command.length()) == "\n"):
-		print("thing")
 		Command = Command.replace("\n", "")
 		var response = HandleCommand(Command)
 		if (StartingMen):
@@ -58,8 +59,7 @@ func HandleCommand(Command : String) -> String:
 	
 	return "Couldnt match command"
 
-signal StartPrologue(SkipStory : bool)
-signal StartCampaign(SkipStory : bool)
+
 
 func HandlePrologueCommand(Command) -> String:
 	if (Command.size() == 1):
@@ -202,7 +202,7 @@ func RefrshExistingItems() -> void:
 					print("Found directory: " + file_name)
 					DirsToExplore.append(g + "/" + file_name)
 				else:
-					print("Found file: " + file_name)
+					printraw("Found file: " + file_name)
 					var It = load(g + "/" + file_name)
 					Items.append(It)
 				

@@ -241,8 +241,9 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 		return
 	var sc = FleetSeparationScene.instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
-	await GetMap().GetScreenUi().FullScreenToggleStarted
+	GetMap().GetScreenUi().ToggleScreenUI(false)
+	GetMap().GetScreenUi().ShipTradeInProgress = true
+	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	Ingame_UIManager.GetInstance().AddUI(sc)
 	
 	sc.connect("SeperationFinished", ShipSeparationFinished)
@@ -253,9 +254,11 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 		ActionTracker.GetInstance().ShowTutorial("Ship Dock", text, [], true)
 		
 func ShipSeparationFinished() -> void:
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	await GetMap().GetScreenUi().FullScreenToggleStarted
+	#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
+	GetMap().GetScreenUi().ToggleScreenUI(true)
+	GetMap().GetScreenUi().ShipTradeInProgress = false
 
 var InFight : bool = false
 #Dogfight-----------------------------------------------
@@ -293,7 +296,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
 	
-func CardFightEnded(Survivors : Array[BattleShipStats]) -> void:
+func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 	var AllUnits : Array[MapShip]
 	AllUnits.append_array(FighingFriendlyUnits)
 	AllUnits.append_array(FighingEnemyUnits)
@@ -533,6 +536,7 @@ func EndPrologue() -> void:
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	
 	var ProgEnd = PrologueEndScreen.instantiate() as PrologueEnd
+	AchievementManager.GetInstance().IncrementStatInt("PROFIN", 1)
 	GetMap().GetScreenUi().add_child(ProgEnd)
 	await ProgEnd.Finished
 	WRLD_OnGameEnded.emit()

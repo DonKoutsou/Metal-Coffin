@@ -169,3 +169,4 @@ ProvidingFunds = 50000
 ProvidingCaptains = Array[ExtResource("4_ti2mu")]([ExtResource("5_jhww0"), ExtResource("6_q28hl")])
 Cards = Dictionary[ExtResource("3_jg56d"), int]({})
 Repair_Parts = 0.0
+TempName = ""

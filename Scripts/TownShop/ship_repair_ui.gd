@@ -47,7 +47,11 @@ func UpdateRepairBar(AddedRepair : float):
 
 	CurrentShip.Repair_Parts += AddedRepair
 	
-	PlayerWallet.AddFunds(-(AddedRepair * RepairPricePerUnit))
+	var MoneySpent = AddedRepair * RepairPricePerUnit
+	if (MoneySpent > 0):
+		AchievementManager.GetInstance().IncrementStatFloat("REPAM", MoneySpent)
+	
+	PlayerWallet.AddFunds(-MoneySpent)
 	#PlayerWallet.AddFunds(-(AddedRepair * RepairpricePerRepairValue))
 	HullBar.value = PlHull + CurrentShip.Repair_Parts
 	#FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"

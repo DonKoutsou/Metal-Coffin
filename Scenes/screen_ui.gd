@@ -29,6 +29,7 @@ class_name ScreenUI
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
 
+var ShipTradeInProgress : bool = false
 
 func CloseScreen() -> void:
 	ScreenPanel.visible = true
@@ -127,6 +128,9 @@ func Acceleration_Changed(value: float) -> void:
 	Cam.EnableShake(value * 1.5)
 
 func Drone_Button_Pressed() -> void:
+	if (ShipTradeInProgress):
+		PopUpManager.GetInstance().DoFadeNotif("Fleet separation in progress")
+		return
 	EventHandler.OnFleetSeparationPressed()
 	#DroneUI._on_toggle_drone_tab_pressed()
 	#MissileUI.TurnOff()
@@ -155,6 +159,9 @@ func Steer_Offseted(Offset: float) -> void:
 	Cam.DissableShake()
 
 func Ship_Switch_Pressed() -> void:
+	if (ShipTradeInProgress):
+		PopUpManager.GetInstance().DoFadeNotif("Fleet separation in progress")
+		return
 	EventHandler.OnShipSwitchPressed()
 
 func ControlledShipSwitched(NewShip : MapShip) -> void:
@@ -192,6 +199,9 @@ func MarkerEditorXRangeChanged(NewVal: float) -> void:
 #
 
 func Regroup_Pressed() -> void:
+	if (ShipTradeInProgress):
+		PopUpManager.GetInstance().DoFadeNotif("Fleet separation in progress")
+		return
 	EventHandler.OnRegroupPressed()
 
 
@@ -200,6 +210,9 @@ func Land_Pressed() -> void:
 
 #Simulation--------------------------------
 func Sim_Pause_Pressed() -> void:
+	if (ShipTradeInProgress):
+		PopUpManager.GetInstance().DoFadeNotif("Fleet separation in progress")
+		return
 	var simmulationPaused = !SimulationManager.GetInstance().Paused
 	SimulationManager.GetInstance().TogglePause(simmulationPaused)
 
@@ -220,6 +233,9 @@ func SpeedUpdated(t : bool) -> void:
 	SpeedSimulationButton.set_pressed_no_signal(t)
 
 func Inventory_Pressed() -> void:
+	if (ShipTradeInProgress):
+		PopUpManager.GetInstance().DoFadeNotif("Fleet separation in progress")
+		return
 	EventHandler.OnInventoryPressed()
 
 var ScreenItemsStateBeforePause : bool

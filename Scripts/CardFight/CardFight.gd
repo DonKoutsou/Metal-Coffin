@@ -100,7 +100,7 @@ enum CardFightPhase{
 	ACTION_PERFORM,
 }
 
-signal CardFightEnded(Survivors : Array[BattleShipStats])
+signal CardFightEnded(Survivors : Array[BattleShipStats], won : bool)
 
 func _ready() -> void:
 	
@@ -1059,7 +1059,8 @@ func OnFightEnded(Won : bool) -> void:
 		var D = GetShipDeck(g)
 		g.Cards = D.GetCardList()
 	
-	CardFightEnded.emit(Survivors)
+	var won = EnemyCombatants.size() + EnemyReserves.size() < PlayerCombatants.size() + PlayerReserves.size()
+	CardFightEnded.emit(Survivors, won)
 	
 	MusicManager.GetInstance().SwitchMusic(false)
 #/////////////////////////////////////////////////////////////////////

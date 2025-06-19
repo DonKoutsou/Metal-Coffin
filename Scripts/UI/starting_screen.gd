@@ -12,7 +12,7 @@ var StMenu : StartingMenu
 var Wor : World
 
 
-const APPID = "3679120"
+const APPID = "3679430"
  #Called when the node enters the scene tree for the first time.
 
 #func _init() -> void:
@@ -82,23 +82,15 @@ func StartCageFight() -> void:
 func StartGame(Load : bool, SkipStory : bool = false) -> void:
 	#TODO enable on full release
 	if (!ActionTracker.GetInstance().DidPrologue()):
-		var window = AcceptDialog.new()
-		add_child(window)
-		window.dialog_text = "Prologue needs to be completed before moving to the campaign"
-		window.popup_centered()
+		PopupManager.DoFadeNotif("Prologue needs to be completed before moving to the campaign", StMenu.GetVp())
 		return
 		
 	if (!OS.is_debug_build()):
-		var window = AcceptDialog.new()
-		add_child(window)
-		window.dialog_text = "Not available on Demo"
-		window.popup_centered()
+		PopupManager.DoFadeNotif("Not available on Demo", StMenu.GetVp())
 		return
-		
-	
-		
+
 	Wor = GameScene.instantiate() as World
-	#wor.Load
+
 	if (Load):
 		var LoadResault = SaveLoadManager.GetInstance().Load(Wor)
 		if (!LoadResault["Succsess"]):

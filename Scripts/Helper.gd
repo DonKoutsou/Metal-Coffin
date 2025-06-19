@@ -48,7 +48,6 @@ func GetCityByName(CityName : String) -> MapSpot:
 	return CorrectCity
 
 func GetClosestSpot(Pos : Vector2) -> MapSpot:
-	var SpotGroups = ["City"]
 	var Closest : MapSpot
 	var Dist = 99999999999999
 	for g in get_tree().get_nodes_in_group("City"):
@@ -62,12 +61,8 @@ func GetClosestSpot(Pos : Vector2) -> MapSpot:
 	return Closest
 
 func GetSpotByName(CityName : String) -> MapSpot:
-	var SpotGroups = ["City"]
-	var cities = []
-	for g in SpotGroups:
-		cities.append_array( get_tree().get_nodes_in_group(g))
 	var CorrectCity : MapSpot
-	for g in cities:
+	for g in get_tree().get_nodes_in_group("City"):
 		var cit = g as MapSpot
 		if (cit.GetSpotName() == CityName):
 			CorrectCity = cit

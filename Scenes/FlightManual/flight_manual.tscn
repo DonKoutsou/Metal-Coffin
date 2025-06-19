@@ -196,7 +196,6 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 31
-text = "ENTRIES NAME"
 autowrap_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
@@ -204,16 +203,6 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 bbcode_enabled = true
-text = "Entry desc
-fa
-ba
-avav
-
-vwavawv
-vf fwajfwao fwao f
-fa wfojwajfoaw  a
-wfwa fwafo wajo
-"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
