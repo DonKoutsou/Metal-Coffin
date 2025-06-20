@@ -8,8 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://1m0dd6hxjs7v" path="res://Assets/Sounds/Alarm.mp3" id="5_sh16h"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="7_voacc"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="8_6hshm"]
-[ext_resource type="Texture2D" uid="uid://da27xfif878pc" path="res://Assets/UIPiecies/Autofill_button_Camera 1.png" id="9_644ma"]
-[ext_resource type="Texture2D" uid="uid://cxmiuhrg1etpr" path="res://Assets/UIPiecies/Autofill_button_on_Camera 1.png" id="10_u6875"]
+[ext_resource type="Texture2D" uid="uid://da27xfif878pc" path="res://Assets/UIPiecies/Screen/Buttons/Autofill_button_Camera 1.png" id="9_644ma"]
+[ext_resource type="Texture2D" uid="uid://cxmiuhrg1etpr" path="res://Assets/UIPiecies/Screen/Buttons/Autofill_button_on_Camera 1.png" id="10_u6875"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75nru"]
 draw_center = false

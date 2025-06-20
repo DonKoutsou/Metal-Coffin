@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwjp7q1w18u4p"]
+[gd_scene load_steps=6 format=3 uid="uid://cwjp7q1w18u4p"]
 
 [ext_resource type="Script" uid="uid://dai8r8wn5redq" path="res://Scripts/fleet_sparation_scene.gd" id="1_mh7sl"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_mxuxe"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="2_mxuxe"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_wglh3"]
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="5_wfwr5"]
 
 [node name="FleetSeparationScene" type="PanelContainer" node_paths=PackedStringArray("CurrentFleetRangeText", "CurrentFleetFuelBar", "CurrentFleetCommanderPlecemenet", "CurrentFleetShipPlecement", "NewFleetRangeText", "NewFleetFuelBar", "NewFleetShipPlecement", "NewFleetCommanderPlecemenet") groups=["FleetSep"]]
 anchors_preset = 15
@@ -16,10 +17,10 @@ script = ExtResource("1_mh7sl")
 CurrentFleetRangeText = NodePath("VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/CurrentFleetRange")
 CurrentFleetFuelBar = NodePath("VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/CurrentFleetFuel")
 CurrentFleetCommanderPlecemenet = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/CurrentFleetCommanderPlecement")
-CurrentFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll/VBoxContainer")
+CurrentFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll/CardHandContainer")
 NewFleetRangeText = NodePath("VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/NewFleetRange")
 NewFleetFuelBar = NodePath("VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer/NewFleetFuel")
-NewFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll/VBoxContainer")
+NewFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll/CardHandContainer")
 NewFleetCommanderPlecemenet = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/NewFleetCommanderPlecement")
 ShipContainer = ExtResource("2_mxuxe")
 
@@ -66,10 +67,13 @@ size_flags_vertical = 3
 script = ExtResource("4_wglh3")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll"]
+[node name="CardHandContainer" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("5_wfwr5")
+Vertical = true
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -107,10 +111,13 @@ size_flags_vertical = 3
 script = ExtResource("4_wglh3")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll"]
+[node name="CardHandContainer" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("5_wfwr5")
+Vertical = true
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

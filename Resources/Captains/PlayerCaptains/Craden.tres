@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://baiwp3ejwapub" path="res://Assets/CaptainPortraits/Captain11.png" id="1_2va48"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ttymy"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_i1vcp"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="3_nr51w"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="3_nr51w"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_y0oxi"]
 [ext_resource type="Resource" uid="uid://c8b3lpqbi11up" path="res://Resources/Captains/PlayerCaptains/Jor.tres" id="5_tcmus"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="10_2fph2"]

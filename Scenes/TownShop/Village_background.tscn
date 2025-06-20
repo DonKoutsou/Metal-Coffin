@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dw6dy4uoxiju5"]
 
-[ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scenes/TownShop/parallax_background.gd" id="1_vcb2a"]
+[ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_vcb2a"]
 [ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_b7hnn"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="2_n0jph"]
 [ext_resource type="Texture2D" uid="uid://cjf0vmhy4dani" path="res://Assets/TownBackgrounds/VillageLayer-1.png" id="3_vcb2a"]

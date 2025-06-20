@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="FlightManualEntry" load_steps=2 format=3 uid="uid://dv741f7fcu3lu"]
+
+[ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scenes/FlightManual/flight_manual_entry.gd" id="1_b6q2g"]
+
+[resource]
+script = ExtResource("1_b6q2g")
+EntryName = "Ship Stats"
+EntryDesc = "Each ship has a set of stats that determine its performance in travel and combat. Some stats are inherent to the ship itself, such as hull or base weight, while others are influenced by the ship’s installed parts. Ship parts contribute additional bonuses or penalties to various stats. When inspecting an item, you'll see which stats it affects.
+
+Different classes of ship parts offer different benefits. For example, Armaments increase firepower, while Fuel Tanks expand fuel capacity. Most parts, however, also increase the overall weight of the ship.
+
+The main ship stats are as follows:
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]FUEL TANK[/color] | Measured in Cubic Meters
+Indicates how much fuel a ship can carry. Combined with fuel efficiency, this determines the ship’s maximum travel distance without refueling.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]FUEL EFFICIENCY[/color] | Measured in Kilometers per Cubic Meter
+Determines how far a ship can travel per unit of fuel. Higher fuel efficiency means longer travel on less fuel. Heavier ships suffer from reduced fuel efficiency.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]THRUST[/color] | Measured in Mega-Newtons
+Represents the propulsion power of the ship. When combined with the ship's [color=#ffc315]WEIGHT[/color], it determines the ship’s top speed.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]FIREPOWER[/color]
+Used during close-quarters combat encounters. Offensive actions scale with your [color=#ffc315]FIREPOWER[/color] stat. [color=#ffc315]FIREPOWER[/color] can also be temporarily increased during battle. Inspect each combat card to see how it scales with [color=#ffc315]FIREPOWER[/color].
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]HULL[/color]
+Represents the ship’s health. As long as [color=#ffc315]HULL[/color] is above 0, your ship remains operational. Ships can be repaired at ports, though repairs take time—larger [color=#ffc315]HULL[/color] values require longer to mend.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]INVENTORY SPACE[/color]
+Reflects how much cargo the ship can carry. Cargo, such as missiles or fire suppression units, can be purchased from ports and is typically single-use.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]VISUAL RANGE[/color] | Measured in Kilometers
+Determines how far your ship can visually detect enemies or objects in space.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]ELINT[/color] | Measured in Kilometers
+Electronic Intelligence allows your ship to detect enemy radar signals at greater distances.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]WEIGHT[/color] | Measured in Tons
+Total mass of your ship and its equipment. [color=#ffc315]WEIGHT[/color] affects multiple aspects of performance, including [color=#ffc315]SPEED[/color] and [color=#ffc315]FUEL EFFICIENCY[/color].
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]SPEED[/color] | Measured in Kilometers per Hour
+Derived stat calculated from other attributes:
+[color=#ffc315]SPEED[/color] = ([color=#ffc315]THRUST[/color] × 1000) / [color=#ffc315]WEIGHT[/color]
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]REPAIR PRICE[/color] | Measured in Drahma
+The cost to repair one point of [color=#ffc315]HULL[/color] health. All ship parts contribute to this value—the lower it is, the cheaper your ship is to maintain.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]"
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mqqrbhnagjvi"]
+
+[ext_resource type="Script" uid="uid://b6ekpg378n2t4" path="res://Scenes/GlobalManagers/Simulation_Manager.gd" id="2_hmp7x"]
+
+[node name="SimulationManager" type="Node"]
+script = ExtResource("2_hmp7x")

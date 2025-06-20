@@ -6,6 +6,7 @@ var Lines : Array
 
 @export var RoadLines : bool = false
 @export var ResizeLinesWithZoom : bool = false
+@export var PathTexture : Texture2D
 
 func AddLines(L : Array) -> void:
 	if (ResizeLinesWithZoom):

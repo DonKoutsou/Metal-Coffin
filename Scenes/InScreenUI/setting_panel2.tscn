@@ -3,8 +3,8 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_pslkc"]
 [ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scripts/UI/setting_panel.gd" id="2_vwwor"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="3_b4sbe"]
-[ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Switch.png" id="4_b4sbe"]
-[ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Switch2.png" id="5_a6mwh"]
+[ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="4_b4sbe"]
+[ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_a6mwh"]
 
 [node name="SettingPanel" type="PanelContainer" node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton")]
 self_modulate = Color(1, 1, 1, 0)

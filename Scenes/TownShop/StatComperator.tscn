@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7ppks"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="2_qdj1a"]
-[ext_resource type="Script" uid="uid://bul44eo0uywkb" path="res://Scenes/TownShop/stat_comperator.gd" id="2_r4pak"]
+[ext_resource type="Script" uid="uid://bul44eo0uywkb" path="res://Scripts/stat_comperator.gd" id="2_r4pak"]
 
 [node name="StatComperator" type="PanelContainer" node_paths=PackedStringArray("ContainerBefore", "ContainerAfter")]
 anchors_preset = 15

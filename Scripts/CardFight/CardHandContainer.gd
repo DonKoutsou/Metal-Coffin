@@ -22,12 +22,14 @@ func _sort_children():
 	if child_count == 0:
 		return
 	
-	var card_width: float = visible_children[0].size.x
+	var card_width: float
 	var max_width: float
 	if (Vertical):
 		max_width = size.y
+		card_width = visible_children[0].size.y
 	else:
 		max_width = size.x
+		card_width = visible_children[0].size.x
 	var overlap: float = 0.0
 	
 	# If cards can't all fit, compute overlap

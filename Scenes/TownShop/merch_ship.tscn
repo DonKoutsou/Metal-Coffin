@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bhpyiqwlbnmad"]
 
 [ext_resource type="Script" uid="uid://lq5jxesgjrsy" path="res://Scripts/TownShop/merch_ship.gd" id="2_4302v"]
-[ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBg_001.png" id="2_u711y"]
+[ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBackgrounds/TownBg_001.png" id="2_u711y"]
 [ext_resource type="PackedScene" uid="uid://bt2v8s1av0q6i" path="res://Scenes/TownShop/TownShopItem.tscn" id="3_4302v"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_5ggyd"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="5_5ggyd"]

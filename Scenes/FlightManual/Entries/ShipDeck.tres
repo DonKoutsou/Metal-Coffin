@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="FlightManualEntry" load_steps=2 format=3 uid="uid://cvfuunncgb30h"]
+
+[ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scenes/FlightManual/flight_manual_entry.gd" id="1_6sxfn"]
+
+[resource]
+script = ExtResource("1_6sxfn")
+EntryName = "Ship Deck"
+EntryDesc = "Each ship has a deck of cards that is determined by its equipped parts. Every ship part contributes a specific set of cards, and together they form the ship’s final deck. When selecting ship parts, consider not only the stats they provide but also the cards they add to your deck.
+
+There is no limit to the number of cards your ship’s deck can contain.
+
+When building a deck, keep in mind the three main classes of cards:
+
+[color=#ff3c22]Offensive[/color] Cards
+Primarily focused on attacking. These cards typically scale with the ship's [color=#ffc315]FIREPOWER[/color] stat.
+
+[color=#6be2e9]Defensive[/color] Cards
+Provide shields or counter incoming attacks, helping to mitigate damage.
+
+[color=#8db354]Utility[/color] Cards
+Comprise all other card types, such as those that buff your ship, debuff enemy ships, generate energy, and more.
+
+When evaluating cards, pay attention to their timing and any special effects they may have, as well as the conditions under which those effects are activated.
+
+    * [color=#ff3c22]Offensive[/color] Cards are used during the Action Perform Phase of combat. This means they are not triggered instantly; instead, all players select their cards first, and then actions are resolved together. This delay gives your opponents a chance to react or prepare counters.
+    [color=#ff3c22]Offensive[/color] cards can have two types of effects:
+   		* [color=#ffc315]On Successful Attack:[/color] These effects activate only if the attack hits its target. If the attack is countered, the effect does not trigger.
+        * [color=#ffc315]On Attack Modules:[/color] These effects trigger as soon as the attack is initiated, regardless of whether it hits or is countered.
+
+    * [color=#6be2e9]Defensive[/color] Cards may be played instantly or during the Action Perform Phase, depending on their type. Generally, counter cards are reserved for the Action Perform Phase and are only activated if the ship is attacked by an appropriate offensive card. Other defensive cards marked with “On Use” are played instantly.
+    [color=#6be2e9]Defensive[/color] cards can also have effects such as:
+        * [color=#ffc315]On Successful Defense:[/color] These effects trigger when a counter card successfully blocks an attack.
+
+    * [color=#8db354]Utility[/color] Cards are always played instantly upon use.
+
+By thoughtfully combining ship parts and understanding each card’s timing and effects, you can create a deck that supports your ship’s strengths and your preferred strategy."
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"

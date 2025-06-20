@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://xva4nxui76gv"]
 
-[ext_resource type="Script" uid="uid://bdyunkmrrtpmv" path="res://Scripts/Audio/UISoundManager.gd" id="1_rf4sq"]
+[ext_resource type="Script" uid="uid://bdyunkmrrtpmv" path="res://Scenes/GlobalManagers/UISoundManager.gd" id="1_rf4sq"]
 [ext_resource type="AudioStream" uid="uid://oyvpm41u3k5x" path="res://Assets/Sounds/ButtonIn.wav" id="2_6djbc"]
 [ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="3_tx5of"]
 [ext_resource type="AudioStream" uid="uid://ups7egvp1xc5" path="res://Assets/Sounds/Hover.mp3" id="4_llfjl"]

@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scripts/CardFight/action_declaration.gd" id="24_pw20f"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="27_rbthh"]
-[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
+[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2au4"]
 content_margin_left = 10.0

@@ -29,9 +29,9 @@ MusicMan="*res://Scenes/GlobalManagers/music_manager.tscn"
 Help="*res://Scripts/Helper.gd"
 UiSoundManager="*res://Scenes/GlobalManagers/ui_sound_manager.tscn"
 Save="*res://Scripts/Save/save_load_manager.gd"
-TutorialManager="*res://Scenes/InScreenUI/tutorial_manager.tscn"
-AchMan="*res://Scripts/achievement_manager.gd"
-PopupManager="*res://Scenes/PopupManager.tscn"
+TutorialManager="*res://Scenes/GlobalManagers/tutorial_manager.tscn"
+AchMan="*res://Scenes/GlobalManagers/achievement_manager.gd"
+PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 
 [display]
 

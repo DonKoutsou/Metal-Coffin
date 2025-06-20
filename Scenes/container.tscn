@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_cvqip"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_uf04f"]
-[ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Scenes/Cards/Disolve.gdshader" id="3_ki0jm"]
+[ext_resource type="Shader" uid="uid://c82xmsgebrx1i" path="res://Shaders/Disolve.gdshader" id="3_ki0jm"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
 

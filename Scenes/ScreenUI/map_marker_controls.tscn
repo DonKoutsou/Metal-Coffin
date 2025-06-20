@@ -1,15 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://cugmsxkuwcfc4"]
 
 [ext_resource type="Script" uid="uid://bdyul5l380bmt" path="res://Scripts/UI/map_marker_controls.gd" id="1_67mm3"]
-[ext_resource type="Texture2D" uid="uid://b0qmg8dqfxxyf" path="res://Assets/UIPiecies/Screen/Panel_FullQuality.png" id="1_sg83c"]
+[ext_resource type="Texture2D" uid="uid://b0qmg8dqfxxyf" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_sg83c"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_67mm3"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="3_djntk"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="4_gq5gp"]
-[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/ButtonMask_Camera 1_FullQuality.png" id="5_ukqae"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="6_i6u6v"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="7_g7jsi"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="8_u42xd"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="9_sxrep"]
+[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="3_djntk"]
+[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="4_gq5gp"]
+[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/Buttons/ButtonMask_Camera 1_FullQuality.png" id="5_ukqae"]
+[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="6_i6u6v"]
+[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="7_g7jsi"]
+[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="8_u42xd"]
+[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="9_sxrep"]
 
 [sub_resource type="Animation" id="Animation_67mm3"]
 resource_name = "Hide"

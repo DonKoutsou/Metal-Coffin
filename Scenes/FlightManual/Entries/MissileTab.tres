@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FlightManualEntry" load_steps=2 format=3 uid="uid://c5y6h7d0jsj15"]
+
+[ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scenes/FlightManual/flight_manual_entry.gd" id="1_dd8w2"]
+
+[resource]
+script = ExtResource("1_dd8w2")
+EntryName = "Missile Tab"
+EntryDesc = "[color=#ffc315]Missile Tab[/color][p]The Missile Tab is the dedicated interface for aiming and firing BVR missiles, providing streamlined control over your ship's offensive capabilities.[p]Only ships equipped with a Missile Pos are able to fire any kind of missile.[p][color=#ffc315]Controls and Functions[/color][p]    [color=#ffc315]RING[/color][p]        Missile Selection: When no missile is armed, rotate the ring to cycle through the available missiles in the ship's inventory. The selected missile is displayed on the central device screen.[p]        Aiming: Once a missile is armed, the ring transitions to control the missile's aim, allowing precise targeting of the desired coordinates.[p]    [color=#ffc315]ARM[/color][p]    Activates the selected missile, unlocking aiming controls. The missile's range is displayed on the map, aiding in accurate targeting.[p]    [color=#ffc315]DISARM[/color][p]    Safely deactivates the armed missile, resetting the device and allowing for the selection of a different missile if needed.[p]    [color=#ffc315]LAUNCH[/color][p]    Fires the armed missile toward the designated target. After launch, the device resets, ready for the next operation.[p]    [color=#ffc315]CLOSE[/color][p]    Exits the Missile Tab, maintaining the current operational state.[p]Utilize the Missile Tab to effectively manage and deploy your ship's arsenal, ensuring tactical advantages in combat scenarios with precision targeting and execution.[p]"
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djaksgs7n1q3d" path="res://Scripts/Inventory/InventoryShipStats.gd" id="1_oud7i"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/Inventory/ShipStatContainer.tscn" id="2_82v18"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="3_pm5r7"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="3_pm5r7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
 bg_color = Color(1, 1, 1, 1)

@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://bvduhiu1v7ywh"]
 
-[ext_resource type="Script" uid="uid://caqrcv56sac2a" path="res://Scenes/Cards/town_external_ui.gd" id="1_8r5c3"]
+[ext_resource type="Script" uid="uid://caqrcv56sac2a" path="res://Scripts/CardFight/town_external_ui.gd" id="1_8r5c3"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="2_u4bsh"]
 [ext_resource type="AudioStream" uid="uid://dnly626tg06nb" path="res://Assets/Sounds/CoinSlide22.mp3" id="3_3jwvr"]
 [ext_resource type="Texture2D" uid="uid://dcagjig448xtx" path="res://Assets/UIPiecies/Screen/Coin2_FullQuality.png" id="4_acv7r"]
 [ext_resource type="AudioStream" uid="uid://iilvk0u0kfff" path="res://Assets/Sounds/CoinSlide.mp3" id="5_yen4x"]
 [ext_resource type="Texture2D" uid="uid://cghnkjw6wxy7c" path="res://Assets/UIPiecies/Screen/Coin_FullQuality.png" id="6_j05jt"]
-[ext_resource type="Texture2D" uid="uid://5u5shqmajwwn" path="res://Assets/UIPiecies/Screen/DispencePanel_FullQuality.png" id="9_kj8r2"]
+[ext_resource type="Texture2D" uid="uid://5u5shqmajwwn" path="res://Assets/UIPiecies/Screen/SidePanels/DispencePanel_FullQuality.png" id="9_kj8r2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acv7r"]
 draw_center = false

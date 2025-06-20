@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://vle20x3cbxms"]
 
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="1_4etdb"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="1_4etdb"]
 
 [node name="ColorRect" type="Sprite2D"]
 position = Vector2(229, 340)

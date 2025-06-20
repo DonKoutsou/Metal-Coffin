@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bl1t8w4ot467w"]
 
-[ext_resource type="Texture2D" uid="uid://cx6fk232wq523" path="res://Assets/UIPiecies/arm_button_Camera 1.png" id="1_mepyr"]
-[ext_resource type="Texture2D" uid="uid://86iic6oblp47" path="res://Assets/UIPiecies/arm_button_on_Camera 1.png" id="2_brb37"]
+[ext_resource type="Texture2D" uid="uid://cx6fk232wq523" path="res://Assets/UIPiecies/Screen/Buttons/arm_button_Camera 1.png" id="1_mepyr"]
+[ext_resource type="Texture2D" uid="uid://86iic6oblp47" path="res://Assets/UIPiecies/Screen/Buttons/arm_button_on_Camera 1.png" id="2_brb37"]
 [ext_resource type="Script" uid="uid://gx2hpsdt504h" path="res://Scripts/UI/animated_button.gd" id="2_srf4c"]
 [ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="4_eac37"]
 
@@ -114,7 +114,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_cd4vr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_d3ury")
+&"": SubResource("AnimationLibrary_d3ury")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

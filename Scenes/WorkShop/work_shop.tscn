@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dhbyfc1rfad2f"]
 
 [ext_resource type="Script" uid="uid://cl0fuirqabjb0" path="res://Scripts/TownShop/work_shop.gd" id="1_4uhfw"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/Spaceship/Ship3_001.png" id="1_6rtyi"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="1_6rtyi"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p28a8"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_bpcd3"]
 [ext_resource type="PackedScene" uid="uid://iv5o83jfm5t6" path="res://Scenes/TownShop/WorkShopItem.tscn" id="2_gy23n"]

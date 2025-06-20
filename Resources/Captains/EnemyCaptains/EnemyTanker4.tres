@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=32 format=3 uid="uid://cvk1mvgokhtus"]
 
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/plane_Wheel_BaseColor.png" id="1_vh11m"]
+[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_vh11m"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ag261"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_lxbyk"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_nfki2"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_u3xj4"]
-[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/Spaceship/Ship10.png" id="12_hnpg0"]
+[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Ship10.png" id="12_hnpg0"]
 [ext_resource type="Resource" uid="uid://cqdmkivwv1bth" path="res://Resources/Items/ShipParts/Radar/LargeCheapRadar.tres" id="14_i6vnk"]
 [ext_resource type="Resource" uid="uid://77852w5u88sm" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/LargeEngine2.tres" id="19_eghi0"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="20_kxbpq"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scripts/CardFight/card.gd" id="1_vr3r8"]
 [ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="2_3yyhe"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
-[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/UIPiecies/Screen/card.png" id="3_7mr5f"]
+[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="3_7mr5f"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="4_rd7hj"]
 [ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_t4r8q"]
 [ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_yh81d"]

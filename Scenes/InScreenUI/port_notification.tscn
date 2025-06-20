@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://yin8tcre8wf8"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_rpr4c"]
-[ext_resource type="Script" uid="uid://wsdodkllx8nn" path="res://Scenes/InScreenUI/port_notification.gd" id="1_xoog0"]
+[ext_resource type="Script" uid="uid://wsdodkllx8nn" path="res://Scripts/port_notification.gd" id="1_xoog0"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_3wc5p"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_5iliw"]
 

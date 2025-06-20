@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy1ohrkbe4n1e"]
+[gd_scene load_steps=4 format=3 uid="uid://cy1ohrkbe4n1e"]
 
 [ext_resource type="Script" uid="uid://cwsqpf7lee1hv" path="res://Scenes/Cards/SegmentedBar/segmented_hp.gd" id="1_f4xkd"]
 [ext_resource type="PackedScene" uid="uid://bogrgwq53r7oo" path="res://Scenes/Cards/SegmentedBar/Segment.tscn" id="2_yg37y"]
-[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_nvaog"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f37qp"]
 content_margin_left = 3.0
@@ -60,22 +59,3 @@ theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="Control/Label"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -38.5
-offset_top = -20.5
-offset_right = 37.5
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("4_nvaog")
-expand_mode = 1

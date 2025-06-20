@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bas2hvjynjr05"]
 
-[ext_resource type="Script" uid="uid://b6akb2f5doubl" path="res://Scenes/loading_screen.gd" id="2_ehbru"]
+[ext_resource type="Script" uid="uid://b6akb2f5doubl" path="res://Scripts/loading_screen.gd" id="2_ehbru"]
 [ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="3_jmxc3"]
 [ext_resource type="Texture2D" uid="uid://byfedq22uoe62" path="res://Assets/Logos/ΜΧΨ1.png" id="4_57mps"]
 [ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="4_nnckq"]

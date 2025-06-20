@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dvkf4xl23yb3n"]
 
-[ext_resource type="Script" uid="uid://c1ciyx5wjndht" path="res://Scenes/InScreenUI/CaptainRepairStation.gd" id="1_bt8au"]
+[ext_resource type="Script" uid="uid://c1ciyx5wjndht" path="res://Scripts/CaptainRepairStation.gd" id="1_bt8au"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_l6oop"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_bt8au"]
 

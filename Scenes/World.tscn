@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="12_rwt1y"]
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="13_mvfa8"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="15_kwl8l"]
-[ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/simulation_manager.tscn" id="16_mq4nq"]
+[ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/GlobalManagers/simulation_manager.tscn" id="16_mq4nq"]
 [ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="16_waglr"]
 [ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_b5aes"]
 [ext_resource type="Resource" uid="uid://b8kumsjf70n22" path="res://Resources/Happenings/Nomads.tres" id="20_371b6"]

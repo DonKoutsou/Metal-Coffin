@@ -5,10 +5,10 @@ class_name FleetSeparation
 @export var CurrentFleetRangeText : Label
 @export var CurrentFleetFuelBar : ProgressBar
 @export var CurrentFleetCommanderPlecemenet :VBoxContainer
-@export var CurrentFleetShipPlecement : VBoxContainer
+@export var CurrentFleetShipPlecement : Control
 @export var NewFleetRangeText : Label
 @export var NewFleetFuelBar : ProgressBar
-@export var NewFleetShipPlecement : VBoxContainer
+@export var NewFleetShipPlecement : Control
 @export var NewFleetCommanderPlecemenet :VBoxContainer
 
 @export var ShipContainer : PackedScene

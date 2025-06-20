@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=54 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -8,36 +8,39 @@
 [ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="5_23r0g"]
 [ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="6_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
-[ext_resource type="Texture2D" uid="uid://bs7kno5ohwjrv" path="res://Assets/Logos/Untitled_001.png" id="7_aspsn"]
 [ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="7_qskuh"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="8_xop3l"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
-[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="9_j43p8"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/Spaceship/Tanker.png" id="11_23r0g"]
+[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/Spaceship/Tanker2.png" id="12_23r0g"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
 [ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
-[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/Light.png" id="15_7x35f"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
 [ext_resource type="Material" uid="uid://dadw4sq24u4ow" path="res://Shaders/Clouds/Cloud.tres" id="16_23r0g"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
-[ext_resource type="Texture2D" uid="uid://cidal6q7hj1qj" path="res://Assets/UIPiecies/Screen/ButtonCover2_FullQuality.png" id="22_7fs2i"]
+[ext_resource type="Texture2D" uid="uid://cidal6q7hj1qj" path="res://Assets/UIPiecies/Screen/SidePanels/ButtonCover2_FullQuality.png" id="22_7fs2i"]
 [ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="22_23r0g"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="23_t54ed"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality.png" id="23_x4rct"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Button2_Camera 1_FullQuality_Pressed.png" id="24_nwvr6"]
-[ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality.png" id="25_qhtmf"]
-[ext_resource type="Texture2D" uid="uid://dlaoa5dhbn3h5" path="res://Assets/UIPiecies/Screen/Button1_Camera 1_FullQuality_Pressed.png" id="26_i6qwf"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality.png" id="27_s5mvh"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality.png" id="28_6nrcu"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Button5_Camera 1_FullQuality_Pressed.png" id="28_aa43b"]
-[ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality.png" id="28_rjgxf"]
-[ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Button10_Camera 1_FullQuality_pressed.png" id="29_4ybsj"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Button4_Camera 1_FullQuality_Pressed.png" id="29_rb62o"]
+[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="23_x4rct"]
+[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="24_nwvr6"]
+[ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality.png" id="25_qhtmf"]
+[ext_resource type="Texture2D" uid="uid://dlaoa5dhbn3h5" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality_Pressed.png" id="26_i6qwf"]
+[ext_resource type="Texture2D" uid="uid://72l45pouumfk" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHT_Camera 1.png" id="28_lhecl"]
+[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality.png" id="29_aa43b"]
+[ext_resource type="Texture2D" uid="uid://c1mhc4vevx68e" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTON_Camera 1.png" id="29_ossme"]
+[ext_resource type="Texture2D" uid="uid://w1jutcwdpnr0" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTONGreen_Camera 1.png" id="30_2ea6n"]
 [ext_resource type="PackedScene" uid="uid://cix2emi1smed2" path="res://Scenes/InScreenUI/setting_panel2.tscn" id="30_aa43b"]
+[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="32_qskuh"]
+[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="33_xop3l"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
-[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/LightCone.png" id="36_j43p8"]
+[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="35_nthvp"]
+[ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
+[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="36_rh5bc"]
+[ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
@@ -206,6 +209,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -251,6 +255,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -296,6 +301,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -371,7 +377,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6
-texture = ExtResource("7_aspsn")
+texture = ExtResource("14_61hxs")
 expand_mode = 1
 
 [node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" instance=ExtResource("21_srpg8")]
@@ -535,10 +541,13 @@ stretch_mode = 0
 
 [node name="PrologueLight" parent="ScreenFrame2" instance=ExtResource("34_aa43b")]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 167.0
-offset_right = 178.0
-offset_bottom = 207.0
+offset_left = 147.0
+offset_top = 176.0
+offset_right = 169.0
+offset_bottom = 198.0
+OffText = ExtResource("28_lhecl")
+Red = ExtResource("29_ossme")
+Green = ExtResource("30_2ea6n")
 
 [node name="Play2" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
@@ -563,17 +572,20 @@ offset_bottom = 326.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-texture_normal = ExtResource("23_x4rct")
-texture_pressed = ExtResource("24_nwvr6")
+texture_normal = ExtResource("24_nwvr6")
+texture_pressed = ExtResource("29_aa43b")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="CampaignLight" parent="ScreenFrame2" instance=ExtResource("34_aa43b")]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 293.0
-offset_right = 178.0
-offset_bottom = 333.0
+offset_left = 147.0
+offset_top = 302.0
+offset_right = 169.0
+offset_bottom = 324.0
+OffText = ExtResource("28_lhecl")
+Red = ExtResource("29_ossme")
+Green = ExtResource("30_2ea6n")
 
 [node name="Fight" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
@@ -597,8 +609,8 @@ offset_right = 210.0
 offset_bottom = 640.0
 size_flags_vertical = 3
 action_mode = 0
-texture_normal = ExtResource("27_s5mvh")
-texture_pressed = ExtResource("28_aa43b")
+texture_normal = ExtResource("32_qskuh")
+texture_pressed = ExtResource("33_xop3l")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -646,8 +658,8 @@ offset_top = 518.0
 offset_right = 60.0
 offset_bottom = 574.0
 size_flags_horizontal = 3
-texture_normal = ExtResource("28_rjgxf")
-texture_pressed = ExtResource("29_4ybsj")
+texture_normal = ExtResource("35_xqmn8")
+texture_pressed = ExtResource("36_sjyyd")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -659,8 +671,8 @@ offset_right = 67.0
 offset_bottom = 639.0
 size_flags_vertical = 3
 action_mode = 0
-texture_normal = ExtResource("28_6nrcu")
-texture_pressed = ExtResource("29_rb62o")
+texture_normal = ExtResource("35_nthvp")
+texture_pressed = ExtResource("36_rh5bc")
 ignore_texture_size = true
 stretch_mode = 0
 

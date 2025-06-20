@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_ti2mu"]
 [ext_resource type="Resource" uid="uid://cga5buofwr6yr" path="res://Resources/Captains/PlayerCaptains/Sirius.tres" id="5_jhww0"]
 [ext_resource type="Resource" uid="uid://disqw5cbdncos" path="res://Resources/Captains/PlayerCaptains/Samir.tres" id="6_q28hl"]
-[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/Spaceship/Ship4_001.png" id="7_tb2uj"]
+[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Ship4_001.png" id="7_tb2uj"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="8_bl7ko"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="9_3eyyc"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="10_nrwnm"]

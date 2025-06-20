@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="6_38vj0"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="7_777j8"]
 [ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun100mm.tres" id="7_b2r4g"]
-[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/Spaceship/ShipElena.png" id="7_pbppl"]
+[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/ShipTextures/ShipElena.png" id="7_pbppl"]
 [ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="8_khliy"]
 [ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="9_gnr4m"]
 [ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine100mm.tres" id="10_4nffx"]

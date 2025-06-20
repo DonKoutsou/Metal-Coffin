@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://tasusoxua525" path="res://Scripts/UI/linetest.gd" id="1_jknyh"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ylop2"]
-[ext_resource type="Script" uid="uid://bqkd76q3l7cn0" path="res://Scenes/Dialogue/testaudio.gd" id="3_uq335"]
+[ext_resource type="Script" uid="uid://bqkd76q3l7cn0" path="res://Scripts/testaudio.gd" id="3_uq335"]
 
 [node name="LineDrawer" type="PanelContainer" node_paths=PackedStringArray("AudiostreamPlayer")]
 anchors_preset = 15

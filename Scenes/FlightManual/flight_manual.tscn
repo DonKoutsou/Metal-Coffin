@@ -1,129 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://db0e2caembxle"]
+[gd_scene load_steps=12 format=3 uid="uid://db0e2caembxle"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_sdl3v"]
-[ext_resource type="Script" uid="uid://ysm54y3gb5lt" path="res://Scripts/FlightManual/flight_manual.gd" id="1_xll1p"]
-[ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scripts/FlightManual/flight_manual_entry.gd" id="2_x06mv"]
+[ext_resource type="Script" uid="uid://ysm54y3gb5lt" path="res://Scenes/FlightManual/flight_manual.gd" id="1_xll1p"]
+[ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scenes/FlightManual/flight_manual_entry.gd" id="2_x06mv"]
+[ext_resource type="Resource" uid="uid://dthctvjanglms" path="res://Scenes/FlightManual/Entries/Ports.tres" id="3_3gukv"]
+[ext_resource type="Resource" uid="uid://d150lv6nflbgq" path="res://Scenes/FlightManual/Entries/Simulation.tres" id="4_82ypx"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_lm06n"]
+[ext_resource type="Resource" uid="uid://b4wu5sag14tkv" path="res://Scenes/FlightManual/Entries/MapMarkerEditor.tres" id="5_yadiy"]
+[ext_resource type="Resource" uid="uid://c5y6h7d0jsj15" path="res://Scenes/FlightManual/Entries/MissileTab.tres" id="6_7fhkt"]
+[ext_resource type="Resource" uid="uid://dx6k7ujf6hpkg" path="res://Scenes/FlightManual/Entries/MissileTypes.tres" id="7_u7g5t"]
+[ext_resource type="Resource" uid="uid://dv741f7fcu3lu" path="res://Scenes/FlightManual/Entries/ShipStats.tres" id="8_2kj71"]
+[ext_resource type="Resource" uid="uid://cvfuunncgb30h" path="res://Scenes/FlightManual/Entries/ShipDeck.tres" id="9_oivmy"]
 
-[sub_resource type="Resource" id="Resource_lm06n"]
-script = ExtResource("2_x06mv")
-EntryName = "Ports"
-EntryDesc = "[color=#ffc315]Ports Overview[/color][p][p]In the vast expanse of your journey, ports serve as essential havens where ships can safely land. These designated areas are the only permissible landing zones, ensuring that every descent is both secure and efficient. As a critical component of flight operations, understanding the strategic advantages of each port is paramount.[p][color=#ffc315]Functions and Services[/color][p][p]When over a city press the LAND button on the lower right part of your Ship Controller to initiate the decent to the port. Upon landing, access is granted to several vital services. Ports offer refueling facilities, ensuring vessels are prepared for the next leg of the journey. Additionally, they provide repair services to fix any damages sustained during flights. Upgrading a ship's systems is also possible here, allowing for enhancements that can improve performance and resilience. Lastly, ammo can be purchased, ensuring readiness for any challenges that lie ahead.[p][color=#ffc315]City-Specific Buffs[/color][p][p]Each port is situated in a city that boasts unique attributes, granting specific buffs to visiting vessels. These enhancements might include faster and more cost-effective refueling, reduced repair times and costs, or discounts on upgrades. Understanding these distinct advantages is crucial for optimizing strategic planning and resource management throughout the adventure.[p][img]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p][img]res://Assets/Items/cubeforce.png[/img] REPAIR TIME/COST -[p][img]res://Assets/Items/materials-science.png[/img] UPGRADE TIME/COST -[p][p]By familiarizing oneself with the nuances of each port, the journey can be effectively planned, ensuring maximum efficiency and preparedness for the challenges that await."
-metadata/_custom_type_script = "uid://cvx22oa8uksuj"
-
-[sub_resource type="Resource" id="Resource_6btdu"]
-script = ExtResource("2_x06mv")
-EntryName = "Simulation"
-EntryDesc = "[color=#ffc315]Simulation Control Manual[/color][p]In the intricacies of command, mastering the simulation tools is essential to effectively manage and strategize. The controls at your disposal—SIM PAUSE and SIM SPEED—grant comprehensive oversight of the world simulation, allowing for meticulous planning and execution. The controls can be found on the top right of your ship controller panel.[p][color=#ffc315]SIM PAUSE[/color][p]The SIM PAUSE function serves as your gateway to toggling the simulation between active and paused states. This feature is indispensable for assessing the environment, analyzing potential threats, and devising strategies without the pressures of real-time events. Use it to halt the simulation and carefully evaluate your current status, resources, and objectives.[p][color=#ffc315]SIM SPEED[/color][p]The SIM SPEED control enables you to accelerate the passage of time, allowing for rapid progression through less eventful periods. By holding this button, you can expedite processes such as refueling, repairs, or travel between locations, effectively optimizing time management. Release to return to normal speed, ensuring precision when timing is critical.[p][color=#ffc315]Strategic Use[/color][p]Employ these controls to your strategic advantage. Pause the simulation to contemplate intricate maneuvers, foresee possible challenges, and prepare contingencies. Speed up during routine operations to minimize downtime and maintain momentum.[p]By mastering the simulation controls, you ensure that every decision is deliberate and well-informed, enhancing your capability to navigate the complexities of the mission with confidence and precision.[p]"
-metadata/_custom_type_script = "uid://cvx22oa8uksuj"
-
-[sub_resource type="Resource" id="Resource_ia3ty"]
-script = ExtResource("2_x06mv")
-EntryName = "Map Marker Editor"
-EntryDesc = "[color=#ffc315]Map Marker Editor[/color][p][p]The Map Marker Editor is a crucial tool for strategic planning and battlefield management. It allows for the addition of markers and measuring lines on the map, providing essential information and enabling precise calculations of distances and interception trajectories.[p][color=#ffc315]Controls and Functions[/color][p][p]    [color=#ffc315]MOVE HORIZONTAL RING[/color][p]    Adjusts the placement target horizontally across the screen, allowing for exact positioning of markers and lines.[p]    [color=#ffc315]MOVE VERTICAL RING[/color][p]    Moves the placement target vertically, ensuring precise alignment with the desired map location.[p]    [color=#ffc315]LINE[/color][p]    Initiates the drawing of a line. Pressing this button places the start point at the placement target's location. Move the target to adjust the line’s trajectory, and press the button again to finalize the line on the map.[p]    [color=#ffc315]TEXT[/color][p]    Prompts for text input to create a marker. Enter the desired information, and a marker displaying this text will appear at the placement target’s location.[p]    [color=#ffc315]CLEAR[/color][p]    Removes all markers and lines, providing a clean slate for new strategic planning.[p]    [color=#ffc315]CLOSE[/color][p]    Exits the Map Marker Editor, saving all current placements and modifications.[p]By adeptly using the Map Marker Editor, you can meticulously chart the battlefield, gauge distances between ships and towns, and accurately plan interception and engagement strategies. This tool is indispensable for achieving tactical supremacy.[p]"
-metadata/_custom_type_script = "uid://cvx22oa8uksuj"
-
-[sub_resource type="Resource" id="Resource_x06mv"]
-script = ExtResource("2_x06mv")
-EntryName = "Missile Tab"
-EntryDesc = "[color=#ffc315]Missile Tab[/color][p]The Missile Tab is the dedicated interface for aiming and firing BVR missiles, providing streamlined control over your ship's offensive capabilities.[p]Only ships equipped with a Missile Pos are able to fire any kind of missile.[p][color=#ffc315]Controls and Functions[/color][p]    [color=#ffc315]RING[/color][p]        Missile Selection: When no missile is armed, rotate the ring to cycle through the available missiles in the ship's inventory. The selected missile is displayed on the central device screen.[p]        Aiming: Once a missile is armed, the ring transitions to control the missile's aim, allowing precise targeting of the desired coordinates.[p]    [color=#ffc315]ARM[/color][p]    Activates the selected missile, unlocking aiming controls. The missile's range is displayed on the map, aiding in accurate targeting.[p]    [color=#ffc315]DISARM[/color][p]    Safely deactivates the armed missile, resetting the device and allowing for the selection of a different missile if needed.[p]    [color=#ffc315]LAUNCH[/color][p]    Fires the armed missile toward the designated target. After launch, the device resets, ready for the next operation.[p]    [color=#ffc315]CLOSE[/color][p]    Exits the Missile Tab, maintaining the current operational state.[p]Utilize the Missile Tab to effectively manage and deploy your ship's arsenal, ensuring tactical advantages in combat scenarios with precision targeting and execution.[p]"
-metadata/_custom_type_script = "uid://cvx22oa8uksuj"
-
-[sub_resource type="Resource" id="Resource_m4vth"]
-script = ExtResource("2_x06mv")
-EntryName = "Missile Types"
-EntryDesc = "[color=#ffc315]Missile Types[/color][p]In the realm of strategic warfare, the effective use of missiles is paramount. Two primary missile categories exist: Beyond Visual Range (BVR) and Within Visual Range (WVR), each suited for distinct combat scenarios.[p][color=#ffc315]Beyond Visual Range (BVR) Missiles[/color][p]    [color=#ffc315]Usage:[/color][p]        Utilized when commanding the fleet in the overworld.[p]        Ideal for engaging targets from a distance before visual contact.[p]    [color=#ffc315]Characteristics:[/color][p]        Long-range capabilities allow for pre-emptive strikes and strategic targeting ahead of engagements.[p]        Varying speed and ranges depending on the model.[p]    [color=#ffc315]Strategic Advantage:[/color][p]        Use BVR missiles to weaken or eliminate enemy fleets before direct confrontation, creating opportunities for tactical superiority.[p][color=#ffc315]Within Visual Range (WVR) Missiles[/color][p]    [color=#ffc315]Usage:[/color][p]        Deployed during direct combat encounters.[p]        Designed for engagements where the enemy is within sight.[p]    [color=#ffc315]Characteristics:[/color][p]        Shorter range but highly maneuverable, suited for dynamic combat scenarios.[p]        Quick response times and agility make them ideal for close-quarter combat.[p]    [color=#ffc315]Strategic Advantage:[/color][p]        Employ WVR missiles to quickly neutralize threats during intense combat, leveraging their agility to gain the upper hand.[p]By understanding and utilizing the distinct capabilities of BVR and WVR missiles, you can adapt strategies to the evolving battlefield, ensuring readiness and effectiveness in both long-range and close-range engagements."
-metadata/_custom_type_script = "uid://cvx22oa8uksuj"
-
-[sub_resource type="Resource" id="Resource_h7m2u"]
-script = ExtResource("2_x06mv")
-EntryName = "Ship Stats"
-EntryDesc = "Each ship has a set of stats that determine its performance in travel and combat. Some stats are inherent to the ship itself, such as hull or base weight, while others are influenced by the ship’s installed parts. Ship parts contribute additional bonuses or penalties to various stats. When inspecting an item, you'll see which stats it affects.
-
-Different classes of ship parts offer different benefits. For example, Armaments increase firepower, while Fuel Tanks expand fuel capacity. Most parts, however, also increase the overall weight of the ship.
-
-The main ship stats are as follows:
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]FUEL TANK[/color] | Measured in Cubic Meters
-Indicates how much fuel a ship can carry. Combined with fuel efficiency, this determines the ship’s maximum travel distance without refueling.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]FUEL EFFICIENCY[/color] | Measured in Kilometers per Cubic Meter
-Determines how far a ship can travel per unit of fuel. Higher fuel efficiency means longer travel on less fuel. Heavier ships suffer from reduced fuel efficiency.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]THRUST[/color] | Measured in Mega-Newtons
-Represents the propulsion power of the ship. When combined with the ship's [color=#ffc315]WEIGHT[/color], it determines the ship’s top speed.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]FIREPOWER[/color]
-Used during close-quarters combat encounters. Offensive actions scale with your [color=#ffc315]FIREPOWER[/color] stat. [color=#ffc315]FIREPOWER[/color] can also be temporarily increased during battle. Inspect each combat card to see how it scales with [color=#ffc315]FIREPOWER[/color].
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]HULL[/color]
-Represents the ship’s health. As long as [color=#ffc315]HULL[/color] is above 0, your ship remains operational. Ships can be repaired at ports, though repairs take time—larger [color=#ffc315]HULL[/color] values require longer to mend.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]INVENTORY SPACE[/color]
-Reflects how much cargo the ship can carry. Cargo, such as missiles or fire suppression units, can be purchased from ports and is typically single-use.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]VISUAL RANGE[/color] | Measured in Kilometers
-Determines how far your ship can visually detect enemies or objects in space.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]ELINT[/color] | Measured in Kilometers
-Electronic Intelligence allows your ship to detect enemy radar signals at greater distances.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]WEIGHT[/color] | Measured in Tons
-Total mass of your ship and its equipment. [color=#ffc315]WEIGHT[/color] affects multiple aspects of performance, including [color=#ffc315]SPEED[/color] and [color=#ffc315]FUEL EFFICIENCY[/color].
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]SPEED[/color] | Measured in Kilometers per Hour
-Derived stat calculated from other attributes:
-[color=#ffc315]SPEED[/color] = ([color=#ffc315]THRUST[/color] × 1000) / [color=#ffc315]WEIGHT[/color]
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
-[color=#ffc315]REPAIR PRICE[/color] | Measured in Drahma
-The cost to repair one point of [color=#ffc315]HULL[/color] health. All ship parts contribute to this value—the lower it is, the cheaper your ship is to maintain.
-[color=#ffc315]-------------------------------------------------------------------------------------------[/color]"
-metadata/_custom_type_script = "uid://cvx22oa8uksuj"
-
-[sub_resource type="Resource" id="Resource_qao64"]
-script = ExtResource("2_x06mv")
-EntryName = "Ship Deck"
-EntryDesc = "Each ship has a deck of cards that is determined by its equipped parts. Every ship part contributes a specific set of cards, and together they form the ship’s final deck. When selecting ship parts, consider not only the stats they provide but also the cards they add to your deck.
-
-There is no limit to the number of cards your ship’s deck can contain.
-
-When building a deck, keep in mind the three main classes of cards:
-
-[color=#ff3c22]Offensive[/color] Cards
-Primarily focused on attacking. These cards typically scale with the ship's [color=#ffc315]FIREPOWER[/color] stat.
-
-[color=#6be2e9]Defensive[/color] Cards
-Provide shields or counter incoming attacks, helping to mitigate damage.
-
-[color=#8db354]Utility[/color] Cards
-Comprise all other card types, such as those that buff your ship, debuff enemy ships, generate energy, and more.
-
-When evaluating cards, pay attention to their timing and any special effects they may have, as well as the conditions under which those effects are activated.
-
-    * [color=#ff3c22]Offensive[/color] Cards are used during the Action Perform Phase of combat. This means they are not triggered instantly; instead, all players select their cards first, and then actions are resolved together. This delay gives your opponents a chance to react or prepare counters.
-    [color=#ff3c22]Offensive[/color] cards can have two types of effects:
-   		* [color=#ffc315]On Successful Attack:[/color] These effects activate only if the attack hits its target. If the attack is countered, the effect does not trigger.
-        * [color=#ffc315]On Attack Modules:[/color] These effects trigger as soon as the attack is initiated, regardless of whether it hits or is countered.
-
-    * [color=#6be2e9]Defensive[/color] Cards may be played instantly or during the Action Perform Phase, depending on their type. Generally, counter cards are reserved for the Action Perform Phase and are only activated if the ship is attacked by an appropriate offensive card. Other defensive cards marked with “On Use” are played instantly.
-    [color=#6be2e9]Defensive[/color] cards can also have effects such as:
-        * [color=#ffc315]On Successful Defense:[/color] These effects trigger when a counter card successfully blocks an attack.
-
-    * [color=#8db354]Utility[/color] Cards are always played instantly upon use.
-
-By thoughtfully combining ship parts and understanding each card’s timing and effects, you can create a deck that supports your ship’s strengths and your preferred strategy."
-metadata/_custom_type_script = "uid://cvx22oa8uksuj"
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lm06n"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x06mv"]
-content_margin_top = 10.0
-content_margin_bottom = 10.0
-
-[node name="FlightManual" type="Control"]
+[node name="FlightManual" type="Control" node_paths=PackedStringArray("EntryNameLabel", "EntryLabel", "EntryButtonLocation")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -132,7 +21,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xll1p")
-FlightManualEntries = Array[ExtResource("2_x06mv")]([SubResource("Resource_lm06n"), SubResource("Resource_6btdu"), SubResource("Resource_ia3ty"), SubResource("Resource_x06mv"), SubResource("Resource_m4vth"), SubResource("Resource_h7m2u"), SubResource("Resource_qao64")])
+FlightManualEntries = Array[ExtResource("2_x06mv")]([ExtResource("3_3gukv"), ExtResource("4_82ypx"), ExtResource("5_yadiy"), ExtResource("6_7fhkt"), ExtResource("7_u7g5t"), ExtResource("8_2kj71"), ExtResource("9_oivmy")])
+EntryNameLabel = NodePath("HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer/Label")
+EntryLabel = NodePath("HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer/RichTextLabel")
+EntryButtonLocation = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -154,20 +46,25 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 theme_override_styles/panel = ExtResource("1_sdl3v")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_lm06n")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/ScrollContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+text = "FLIGHT MANUAL ENTRIES"
+autowrap_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_lm06n")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "FLIGHT MANUAL ENTRIES"
-autowrap_mode = 2
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -181,10 +78,10 @@ theme_override_styles/panel = ExtResource("1_sdl3v")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PanelContainer"]
 layout_mode = 2
-mouse_filter = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_x06mv")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
+script = ExtResource("4_lm06n")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
@@ -207,6 +104,6 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 
-[connection signal="gui_input" from="HBoxContainer/VBoxContainer/PanelContainer2/ScrollContainer" to="." method="_on_scroll2_container_gui_input"]
+[connection signal="gui_input" from="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer" to="." method="_on_scroll2_container_gui_input"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="gui_input" from="HBoxContainer/PanelContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]
