@@ -10,9 +10,8 @@
 [ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="6_awabe"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
-[ext_resource type="Script" uid="uid://cf7you43vrtlg" path="res://Scripts/UI/current_ship_text.gd" id="8_u111i"]
+[ext_resource type="PackedScene" uid="uid://wmmp1fq7nbhf" path="res://Scenes/ScreenUI/current_ship_text.tscn" id="8_avpxw"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="9_vr5ky"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
@@ -21,6 +20,17 @@
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_rwdyb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="18_u111i"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u111i"]
+bg_color = Color(0.114, 0.206, 0.212, 0.3)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_detail = 1
+shadow_size = 8
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
@@ -53,46 +63,21 @@ layout_mode = 1
 
 [node name="SimulationNotification" parent="Control3" instance=ExtResource("5_g51f2")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-offset_left = -19.0
-offset_top = 7.0
-offset_right = -19.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 1
+offset_top = 173.0
+offset_bottom = 173.0
 
 [node name="PortNotification" parent="Control3" instance=ExtResource("7_4bt5v")]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -18.0
-offset_right = -10.0
-offset_bottom = -18.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 0.0
+grow_vertical = 1
 
-[node name="CurrentShipText" type="Label" parent="Control3"]
+[node name="CurrentShipText" parent="Control3" instance=ExtResource("8_avpxw")]
 layout_mode = 1
-offset_left = 22.0
-offset_top = 20.0
-offset_right = 255.0
-offset_bottom = 61.0
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("13_lb8ei")
-theme_override_font_sizes/font_size = 18
-text = "Current Captain Craden
-HULL : 100%"
-vertical_alignment = 1
-script = ExtResource("8_u111i")
-ShipControllerEventH = ExtResource("9_vr5ky")
+offset_left = -1.0
 
 [node name="VBoxContainer" type="HBoxContainer" parent="Control3"]
 visible = false
@@ -129,22 +114,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("6_awabe")
 
-[node name="CursorPos" type="Label" parent="Control3"]
+[node name="PanelContainer2" type="PanelContainer" parent="Control3"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -72.0
-offset_top = -49.0
-offset_right = 73.0
-offset_bottom = -17.0
+offset_left = -84.0
+offset_top = -43.0
+offset_right = 85.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u111i")
+
+[node name="CursorPos" type="Label" parent="Control3/PanelContainer2"]
+layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("13_lb8ei")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 18
 text = "28°22' 24°12'"
 horizontal_alignment = 1
 vertical_alignment = 1

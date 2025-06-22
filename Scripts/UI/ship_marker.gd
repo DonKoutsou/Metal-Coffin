@@ -156,7 +156,7 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 	CurrentZoom = NewZoom
 
 func UpdateLine(Zoom : float)-> void:
-	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
+	var locp = get_closest_point_on_rect($Control/PanelContainer/ShipName.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / (Zoom))
 	
@@ -164,21 +164,21 @@ func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(roundi(Alt)))
 
 func EnteredScreen() -> void:
-	$Control/PanelContainer/VBoxContainer.add_to_group("MapInfo")
+	$Control/PanelContainer/ShipName.add_to_group("MapInfo")
 	ShipIcon.add_to_group("UnmovableMapInfo")
 	add_to_group("ZoomAffected")
 	UpdateCameraZoom(Map.GetCameraZoom())
 
 func ExitedScreen() -> void:
-	$Control/PanelContainer/VBoxContainer.remove_from_group("MapInfo")
+	$Control/PanelContainer/ShipName.remove_from_group("MapInfo")
 	ShipIcon.remove_from_group("UnmovableMapInfo")
 	remove_from_group("ZoomAffected")
 	
 func UpdateSignRotation() -> void:
 	DetailPanel.rotation += 0.01
-	$Control/PanelContainer.pivot_offset = $Control/PanelContainer.size / 2
+	$Control/PanelContainer/ShipName.pivot_offset = $Control/PanelContainer/ShipName.size / 2
 	$Control/PanelContainer.rotation -= 0.01
-	var locp = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), DetailPanel.global_position)
+	var locp = get_closest_point_on_rect($Control/PanelContainer/ShipName.get_global_rect(), DetailPanel.global_position)
 	$Line2D.set_point_position(1, locp - $Line2D.global_position)
 	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / (CurrentZoom))
 

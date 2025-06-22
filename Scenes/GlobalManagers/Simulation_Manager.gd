@@ -60,7 +60,7 @@ func SpeedToggle(t : bool) -> void:
 		SimulationSpeed = 0.2
 		PopUpManager.GetInstance().DoFadeNotif("Simulation speed dissabled")
 	SpeedChanged.emit(t)
-	SimulationNotification.GetInstance().SimSpeedUpdated(t)
+	#SimulationNotification.GetInstance().SimSpeedUpdated(t)
 	#get_child(0).SpeedToggle(t)
 	#get_tree().call_group("Ships", "ChangeSimulationSpeed", SimulationSpeed)
 	#_Map.GetInScreenUI().GetInventory().OnSimulationSpeedChanged(SimulationSpeed)

@@ -15,7 +15,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0, 100, 0.157, 1)
+border_color = Color(0.483, 100, 0.381, 1)
 corner_radius_top_left = 13
 corner_radius_top_right = 13
 corner_radius_bottom_right = 13
@@ -40,14 +40,14 @@ use_parent_material = true
 position = Vector2(0, 290)
 points = PackedVector2Array(-1000, 0, 2000, 0)
 width = 2.0
-default_color = Color(0, 100, 0.157, 1)
+default_color = Color(0.483, 100, 0.381, 1)
 
 [node name="XLine" type="Line2D" parent="."]
 use_parent_material = true
 position = Vector2(595, 0)
 points = PackedVector2Array(0, -2000, 0, 2000)
 width = 2.0
-default_color = Color(0, 100, 0.157, 1)
+default_color = Color(0.483, 100, 0.381, 1)
 
 [node name="Linetemp" type="Node2D" parent="."]
 

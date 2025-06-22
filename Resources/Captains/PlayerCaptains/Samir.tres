@@ -26,7 +26,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_34f4w"]
 script = ExtResource("2_ufoo0")
 StatName = 5
-StatBase = 6.0
+StatBase = 8.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

@@ -62,7 +62,7 @@ func _on_drone_button_pressed() -> void:
 		Line.CamZoomUpdated(ship_camera.zoom.x)
 		Line.global_position = ship_camera.global_position + (pos / (ship_camera.zoom))
 		Line.set_point_position(1, Line.get_point_position(1) / (ship_camera.zoom))
-		Line.get_child(0).position = (Line.get_point_position(1) / 2) - (Line.get_child(0).size / 2)
+		#Line.get_child(0).position = (Line.get_point_position(1) / 2) - (Line.get_child(0).size / 2)
 		Line = null
 		PopUpManager.GetInstance().DoFadeNotif("Line marker placed")
 

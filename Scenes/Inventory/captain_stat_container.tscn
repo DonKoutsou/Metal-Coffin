@@ -62,7 +62,7 @@ layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("2_uviis")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 3
 
 [node name="InventoryShipStats" parent="PanelContainer" instance=ExtResource("3_qyvw6")]
 layout_mode = 2

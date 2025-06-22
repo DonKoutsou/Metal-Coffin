@@ -12,7 +12,7 @@ func SetCaptain(Cha : Captain) -> void:
 	CurrentlyShownCaptain = Cha
 	ShipStats.SetCaptain(Cha)
 	ShipDeck.SetDeck(Cha)
-	CaptainIcon.texture = Cha.CaptainPortrait
+	CaptainIcon.texture = Cha.ShipIcon
 
 func ShowStats() -> void:
 	ShipStats.visible = true

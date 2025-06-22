@@ -255,8 +255,8 @@ func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true
 
 func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = Pos
-	$Clouds.material.set_shader_parameter("offset", global_position / 1500)
+	Cloud.material.set_shader_parameter("offset", global_position / 1500)
 	#$Clouds2.material.set_shader_parameter("offset", (global_position / 1500) + Vector2(500,500))
 	#$Clouds2.material.set_shader_parameter("offset", global_position / 1500)
-	$Ground.material.set_shader_parameter("offset", global_position / 1500)
+	Ground.material.set_shader_parameter("offset", global_position / 1500)
 	PositionChanged.emit(position)

@@ -4,6 +4,9 @@ class_name PlayerDrivenShip
 
 @export var AccelerationAudio : AudioStreamPlayer2D
 
+var CommingBack = false
+var RegroupTarget : MapShip
+
 func  _ready() -> void:
 	super()
 	Paused = SimulationManager.IsPaused()
@@ -11,8 +14,38 @@ func  _ready() -> void:
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
 	queue_redraw()
-	
 
+func updatedronecourse():
+	var plship = RegroupTarget
+	# Get the current position and velocity of the ship
+	
+	var ship_position = plship.position
+	
+	var Distance = global_position.distance_to(ship_position)
+	
+	if (Distance < 10):
+		plship.GetDroneDock().DockDrone(self, true)
+		var MyDroneDock = GetDroneDock()
+		for g in MyDroneDock.DockedDrones:
+			MyDroneDock.UndockDrone(g)
+			plship.GetDroneDock().DockDrone(g, false)
+		for g in MyDroneDock.Captives:
+			MyDroneDock.UndockCaptive(g)
+			plship.GetDroneDock().DockCaptive(g)
+		#for g in MyDroneDock.FlyingDrones:
+			#g.Command = plship
+		
+		CommingBack = false
+		return
+	
+	var ship_velocity = plship.GetShipSpeedVec()
+
+	# Predict where the ship will be in a future time `t`
+	var time_to_interception = (position.distance_to(ship_position)) / (GetShipSpeed() / 360)
+
+	# Calculate the predicted interception point
+	var predicted_position = ship_position + ship_velocity * time_to_interception
+	ShipLookAt(predicted_position)
 
 func _physics_process(delta: float) -> void:
 	

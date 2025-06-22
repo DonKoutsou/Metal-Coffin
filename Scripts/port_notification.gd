@@ -3,6 +3,8 @@ class_name PortNotification
 @export var PortAvailableCol: Color
 @export var PortUnAvailableCol: Color
 @export var ShipControllerEventH : ShipControllerEventHandler
+@export var BuffText : Label
+@export var LandingText : Label
 
 var CurrentShip : PlayerDrivenShip
 
@@ -19,18 +21,18 @@ func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
 	
 func PortUpdated(NewPort : MapSpot) -> void:
 	if (NewPort == null):
-		modulate = PortUnAvailableCol
-		$VBoxContainer/HBoxContainer/SimulationNotification.text = "NO PORTS NEARBY\nLANDING DENIED"
-		$VBoxContainer/SimulationNotification2.text = ""
+		#$PanelContainer4/VBoxContainer.modulate = PortUnAvailableCol
+		LandingText.text = "NO PORTS NEARBY\nLANDING DENIED"
+		#BuffText.text = ""
 	else:
-		modulate = PortAvailableCol
-		$VBoxContainer/HBoxContainer/SimulationNotification.text = "FLYING OVER {0}\nCLEAR TO LAND".format([NewPort.GetSpotName()])
-		var PortThings = ""
-		if (NewPort.HasFuel()):
-			PortThings += "REFUEL TIME/COST -\n"
-		if (NewPort.HasRepair()):
-			PortThings += "REPAIR TIME/COST -\n"
-		if (NewPort.HasUpgrade()):
-			PortThings += "UPGRADE TIME/COST -\n"
-		$VBoxContainer/SimulationNotification2.text = PortThings
-	$VBoxContainer/SimulationNotification2.visible = NewPort != null
+		#$PanelContainer4/VBoxContainer.modulate = PortAvailableCol
+		LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([NewPort.GetSpotName()])
+		#var PortThings = ""
+		#if (NewPort.HasFuel()):
+			#PortThings += "REFUEL TIME/COST -\n"
+		#if (NewPort.HasRepair()):
+			#PortThings += "REPAIR TIME/COST -\n"
+		#if (NewPort.HasUpgrade()):
+			#PortThings += "UPGRADE TIME/COST -\n"
+		#BuffText.text = PortThings
+	#BuffText.visible = NewPort != null

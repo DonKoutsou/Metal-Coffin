@@ -16,6 +16,9 @@ func ToggleSimulation(t : bool) -> void:
 		else:
 			$AnimationPlayer.pause()
 			$AudioStreamPlayer.stop()
+			$Control/PanelContainer.visible = true
+			
+			
 func _ready() -> void:
 	if (Blink):
 		$AnimationPlayer.play("Show")

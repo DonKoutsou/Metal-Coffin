@@ -33,8 +33,9 @@ func EnableDrone():
 	#$ShipBody/CollisionShape2D.set_deferred("disabled", false)
 	pass
 
+
 func Regroup(NewCommander : MapShip):
-	Command = NewCommander
+	RegroupTarget = NewCommander
 	SetSpeed(GetShipMaxSpeed())
 	#rotation = 0.0
 	CommingBack = true
@@ -45,34 +46,18 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
-	if (area.get_parent() == Command and CommingBack):
+	if (area.get_parent() == RegroupTarget and CommingBack):
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.APROACHING)
 		
 func BodyEnteredBody(Body: Area2D) -> void:
 	if (Docked):
 		return
-	
 	super(Body)
-	
-	#if (Body.get_parent() == Command and CommingBack):
-		#var plship = Body.get_parent() as MapShip
-		#plship.GetDroneDock().DockDrone(self, true)
-		#var MyDroneDock = GetDroneDock()
-		#for g in MyDroneDock.DockedDrones:
-			#MyDroneDock.UndockDrone(g)
-			#plship.GetDroneDock().DockDrone(g, false)
-		#for g in MyDroneDock.Captives:
-			#MyDroneDock.UndockCaptive(g)
-			#plship.GetDroneDock().DockCaptive(g)
-		##for g in MyDroneDock.FlyingDrones:
-			##g.Command = plship
-		#CommingBack = false
-		
-
 
 func GetSaveData() -> DroneSaveData:
 	var dat = DroneSaveData.new()
 	dat.CommingBack = CommingBack
+	dat.RegroupTargetName = RegroupTarget.GetShipName()
 	dat.Cpt = Cpt
 	dat.Docked = Docked
 	dat.Pos = global_position

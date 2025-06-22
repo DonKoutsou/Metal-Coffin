@@ -32,10 +32,10 @@ var CurrentPort : MapSpot
 var RadarWorking = true
 var Altitude = 10000
 var Command : MapShip
+
 var ShowFuelRange = true
 var Docked = false
 var CamZoom = 1
-var CommingBack = false
 
 
 
@@ -85,7 +85,9 @@ func _ready() -> void:
 		
 func _draw() -> void:
 	if (ShowFuelRange):
-		draw_circle(Vector2.ZERO, GetFuelRange(), Color(0.3, 0.7, 0.915), false, 2.0 / CamZoom, true)
+		var range = GetFuelRange()
+		draw_circle(Vector2.ZERO, range, Color(0.3, 0.7, 0.915), false, 2.0 / CamZoom, true)
+		draw_line(Vector2(max(0, range - 50), 0), Vector2(range, 0), Color(0.3, 0.7, 0.915), 2.0 / CamZoom, true)
 
 func Refuel() -> void:
 	if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
@@ -209,36 +211,7 @@ func AccelerationChanged(value: float) -> void:
 	SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
 	#GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed()) 
 
-func updatedronecourse():
-	var plship = Command
-	# Get the current position and velocity of the ship
-	
-	var ship_position = plship.position
-	
-	var Distance = global_position.distance_to(ship_position)
-	
-	if (Distance < 10):
-		plship.GetDroneDock().DockDrone(self, true)
-		var MyDroneDock = GetDroneDock()
-		for g in MyDroneDock.DockedDrones:
-			MyDroneDock.UndockDrone(g)
-			plship.GetDroneDock().DockDrone(g, false)
-		for g in MyDroneDock.Captives:
-			MyDroneDock.UndockCaptive(g)
-			plship.GetDroneDock().DockCaptive(g)
-		#for g in MyDroneDock.FlyingDrones:
-			#g.Command = plship
-		CommingBack = false
-		return
-	
-	var ship_velocity = plship.GetShipSpeedVec()
 
-	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (GetShipSpeed() / 360)
-
-	# Calculate the predicted interception point
-	var predicted_position = ship_position + ship_velocity * time_to_interception
-	ShipLookAt(predicted_position)
 	
 	
 	

@@ -263,9 +263,14 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 	Player.UpdateAltitude(Data.Altitude)
 	var ShipPlecement = Player.get_parent()
 	
+	var RegroupingShips : Dictionary[Drone, String]
+	
 	for Command in Data.FleetData:
 		var CommanderShip = DroneScene.instantiate() as Drone
 		
+		if (Command.CommanderData.CommingBack):
+			RegroupingShips[CommanderShip] = Command.CommanderData.RegroupTargetName
+
 		CommanderShip.Cpt = Command.CommanderData.Cpt
 		CommanderShip.Cpt.Repair_Parts = Command.CommanderData.RepairParts
 		CommanderShip.Cpt.OnCharacterNameChanged(Command.CommanderData.TempName)
@@ -280,6 +285,13 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 			DockedShip.Cpt.Repair_Parts = Ship.RepairParts
 			DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
 			CommanderShip.GetDroneDock().AddDrone(DockedShip)
+	
+	var AllShips = get_tree().get_nodes_in_group("PlayerShips")
+	for ToRegoup in RegroupingShips:
+		for Target : PlayerDrivenShip in AllShips:
+			if Target.GetShipName() == RegroupingShips[ToRegoup]:
+				ToRegoup.Regroup(Target)
+				break
 	
 	var Cam = ShipCamera.GetInstance()
 	Cam.ForceZoom(Data.CameraZoom)

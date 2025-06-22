@@ -528,16 +528,16 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			PopUpManager.GetInstance().DoFadeNotif("Convoy Plundered\n{0} Drahma added".format([Cpt.ProvidingFunds]))
 
 
-	else : if (Body.get_parent() == Command and CommingBack):
-		var Ship = Body.get_parent() as HostileShip
-		Ship.GetDroneDock().DockDrone(self, true)
-		var MyDroneDock = GetDroneDock()
-		for g in MyDroneDock.DockedDrones:
-			MyDroneDock.UndockDrone(g)
-			Ship.GetDroneDock().DockDrone(g, false)
-		#for g in MyDroneDock.FlyingDrones:
-			#g.Command = Ship
-		CommingBack = false
+	#else : if (Body.get_parent() == RegroupTarget and CommingBack):
+		#var Ship = Body.get_parent() as HostileShip
+		#Ship.GetDroneDock().DockDrone(self, true)
+		#var MyDroneDock = GetDroneDock()
+		#for g in MyDroneDock.DockedDrones:
+			#MyDroneDock.UndockDrone(g)
+			#Ship.GetDroneDock().DockDrone(g, false)
+		##for g in MyDroneDock.FlyingDrones:
+			##g.Command = Ship
+		#CommingBack = false
 	
 func BodyLeftBody(Body : Area2D) -> void:
 	if (Body.get_parent() == CurrentPort):

@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://df70pkcnq556g"]
+
+[ext_resource type="Script" uid="uid://b2b2y5d4ayiko" path="res://Scripts/UI/curent_ship_panel.gd" id="1_aaq8a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxjk1"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.114, 0.206, 0.212, 0.3)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+shadow_size = 8
+
+[node name="PanelContainer" type="PanelContainer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -28.0
+offset_bottom = 29.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxjk1")
+script = ExtResource("1_aaq8a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+alignment = 1

@@ -1,15 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://yin8tcre8wf8"]
+[gd_scene load_steps=7 format=3 uid="uid://yin8tcre8wf8"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_rpr4c"]
 [ext_resource type="Script" uid="uid://wsdodkllx8nn" path="res://Scripts/port_notification.gd" id="1_xoog0"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_3wc5p"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_5iliw"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhye7"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 10.0
+content_margin_bottom = 20.0
+bg_color = Color(0.099, 0.183, 0.188, 0.3)
+border_width_left = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 1
+shadow_size = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5djm"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="PortNotification" type="Control"]
-modulate = Color(0.483, 100, 0.381, 1)
+[node name="PortNotification" type="Control" node_paths=PackedStringArray("BuffText", "LandingText")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 8
@@ -27,35 +41,28 @@ script = ExtResource("1_xoog0")
 PortAvailableCol = Color(0.483, 100, 0.381, 1)
 PortUnAvailableCol = Color(100, 0, 0.163, 1)
 ShipControllerEventH = ExtResource("2_3wc5p")
+BuffText = NodePath("PanelContainer4/VBoxContainer/SimulationNotification2")
+LandingText = NodePath("PanelContainer4/VBoxContainer/HBoxContainer/SimulationNotification")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer4" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -306.0
-offset_top = -168.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -123.0
+offset_right = 123.0
+offset_bottom = 30.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vhye7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer4"]
+layout_mode = 2
 theme_override_constants/separation = 0
-alignment = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="SimulationNotification2" type="Label" parent="PanelContainer4/VBoxContainer"]
+visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.00302346, 0.00302346, 0.00302346, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("5_5iliw")
-text = "- - - - - - - - - "
-horizontal_alignment = 2
-
-[node name="SimulationNotification2" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.00302346, 0.00302346, 0.00302346, 1)
-theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 18
 text = "REFUEL TIME/COST -
 REPAIR TIME/COST -
@@ -64,30 +71,39 @@ horizontal_alignment = 2
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Label2" type="Label" parent="PanelContainer4/VBoxContainer"]
+visible = false
 layout_mode = 2
-alignment = 2
-
-[node name="SimulationNotification" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.00302346, 0.00302346, 0.00302346, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_5iliw")
+text = "- - - - - - - - - "
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer4/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="SimulationNotification" type="Label" parent="PanelContainer4/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 text = "FLYING OVER CARDI
 PERSMISSION TO LAND 
 RECEIVED"
-horizontal_alignment = 2
+horizontal_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="PanelContainer4/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g5djm")
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer4/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.00302346, 0.00302346, 0.00302346, 1)
