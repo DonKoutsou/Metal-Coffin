@@ -206,7 +206,16 @@ func Regroup_Pressed() -> void:
 
 
 func Land_Pressed() -> void:
+	if (ShipTradeInProgress):
+		PopUpManager.GetInstance().DoFadeNotif("Fleet separation in progress")
+		return
 	EventHandler.OnLandPressed()
+
+func _on_open_hatch_button_pressed() -> void:
+	if (ShipTradeInProgress):
+		PopUpManager.GetInstance().DoFadeNotif("Fleet separation in progress")
+		return
+	EventHandler.OnOpenHatchPressed()
 
 #Simulation--------------------------------
 func Sim_Pause_Pressed() -> void:

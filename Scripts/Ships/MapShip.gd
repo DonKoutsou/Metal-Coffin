@@ -90,7 +90,7 @@ func _draw() -> void:
 		draw_line(Vector2(max(0, range - 50), 0), Vector2(range, 0), Color(0.3, 0.7, 0.915), 2.0 / CamZoom, true)
 
 func Refuel() -> void:
-	if (!Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
+	if (Altitude == 0 and !Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
 		var Simulationp = 0
 		if (!SimulationManager.IsPaused()):
 			Simulationp = 1
@@ -110,7 +110,7 @@ func Refuel() -> void:
 		ShipDockActions.emit("Refueling", false, 0)
 
 func Repair() -> void:
-	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.Repair_Parts > 0):
+	if (Altitude == 0 and !Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.Repair_Parts > 0):
 		var Simulationp = 0
 		if (!SimulationManager.IsPaused()):
 			Simulationp = 1

@@ -29,35 +29,41 @@ func _physics_process(delta: float) -> void:
 			continue
 		Commanders.append(Ship)
 	
-	if (PanelLocation.get_child_count() != Commanders.size()):
+	if (PanelLocation.get_child_count() != Ships.size() + Commanders.size()):
 		for g in PanelLocation.get_children():
 			g.free()
-		for g in Commanders.size():
-			PanelLocation.add_child(CurrentShipPanelScene.instantiate())
+		for g in Ships.size() + Commanders.size():
+			var Pan = CurrentShipPanelScene.instantiate() as CurrentShipPanel
+			PanelLocation.add_child(Pan)
+			Pan.Selected.connect(Selected)
+	var Index = 0
 	
 	for Command in Commanders.size():
 		var CurrentCommand = Commanders[Command]
 		
-		var FleetPanel = PanelLocation.get_child(Command) as CurrentShipPanel
+		var FleetPanel = PanelLocation.get_child(Index) as CurrentShipPanel
+		FleetPanel.SetText("", false)
+		Index += 1
 		
-		var Text : Array[String] = []
-		var Selected = -1
-		Text.append("-Fleet{0}-".format([Command + 1]))
 		var hull = CurrentCommand.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / CurrentCommand.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-		Text.append("{0}\nHULL:{1}%".format([ CurrentCommand.Cpt.GetCaptainName().to_upper(), roundi(hull)]))
-		if (CurrentCommand == currentShip):
-			Selected = 1
+		var CommanderPanel = PanelLocation.get_child(Index) as CurrentShipPanel
+		CommanderPanel.SetText("{0}\nHull:{1}%".format([ CurrentCommand.Cpt.GetCaptainName(), roundi(hull)]), false)
+		CommanderPanel.SetSelected(CurrentCommand == currentShip)
+		CommanderPanel.ConnectedShip = CurrentCommand
+		Index += 1
 		
 		var DockedShips = CurrentCommand.GetDroneDock().DockedDrones
 		
-		for Docked in DockedShips.size():
-			var D = DockedShips[Docked]
-			var h = D.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / D.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-			Text.append("{0}\nHULL:{1}%".format([D.Cpt.GetCaptainName().to_upper(), roundi(h)]))
-			if (D == currentShip):
-				Selected = Docked + 2
-		
-		FleetPanel.SetText(Text)
-		FleetPanel.SetSelected(Selected)
+		for Docked in DockedShips:
+			var DockedPanel = PanelLocation.get_child(Index) as CurrentShipPanel
+			
+			var h = Docked.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / Docked.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
+			DockedPanel.SetText("{0}\nHull:{1}%".format([Docked.Cpt.GetCaptainName(), roundi(h)]), false)
+			DockedPanel.SetSelected(Docked == currentShip)
+			DockedPanel.ConnectedShip = Docked
+			Index += 1
 		
 #roundi(hull)
+
+func Selected(Ship : PlayerDrivenShip) -> void:
+	ShipControllerEventH.ShipChanged(Ship)

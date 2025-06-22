@@ -15,6 +15,8 @@ static var WorldBounds : Vector2
 
 signal ZoomChanged(NewVal : float)
 signal PositionChanged(NewVal : float)
+
+var FocusedShip : PlayerDrivenShip
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
@@ -136,6 +138,8 @@ func _UpdateMapGridVisibility():
 func UpdateCameraPos(relativeMovement : Vector2):
 	if (FrameTween != null):
 		FrameTween.kill()
+	if (FocusedShip != null):
+		FocusedShip = null
 	var maxposY = WorldBounds.y
 	var vpsizehalf = (get_viewport_rect().size.x / 2)
 	var maxposX = Vector2(-(WorldBounds.x / 2), WorldBounds.x / 2)
@@ -165,7 +169,10 @@ func _physics_process(delta: float) -> void:
 		custom_time += delta * SimulationManager.SimSpeed()
 		Cloud.material.set_shader_parameter("custom_time", custom_time)
 		#Cloud2.material.set_shader_parameter("custom_time", custom_time + 500)
-
+	
+	if (FocusedShip != null):
+		ForceCamPosition(FocusedShip.global_position)
+	
 	if shakestr > 0.0:
 		shakestr = lerpf(shakestr, 0, 5.0 * delta)
 		var of = RandomOffset()
@@ -235,6 +242,8 @@ func ShowArmak():
 func FrameCamToPlayer():
 	if (FrameTween != null):
 		FrameTween.kill()
+	if (FocusedShip != null):
+		FocusedShip = null
 	FrameTween = create_tween()
 	var plpos = $"../PlayerShip".global_position
 	FrameTween.set_trans(Tween.TRANS_QUAD)
@@ -245,6 +254,8 @@ func FrameCamToPlayer():
 func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true) -> void:
 	if (FrameTween != null):
 		FrameTween.kill()
+	if (FocusedShip != null):
+		FocusedShip = null
 	FrameTween = create_tween()
 	FrameTween.set_trans(Tween.TRANS_QUAD)
 	FrameTween.set_ease(Tween.EASE_OUT)
@@ -252,6 +263,17 @@ func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true
 	
 	if (Unzoom):
 		ForceZoomOut()
+
+func FrameCamToShip(Ship : PlayerDrivenShip, OverrideTime : float = 1, Unzoom : bool = true) -> void:
+	if (FrameTween != null):
+		FrameTween.kill()
+	#FrameTween = create_tween()
+	#FrameTween.set_trans(Tween.TRANS_QUAD)
+	#FrameTween.set_ease(Tween.EASE_OUT)
+	#FrameTween.tween_method(ForceCamPosition, global_position, Ship.global_position, OverrideTime)
+	FocusedShip = Ship
+	#if (Unzoom):
+		#ForceZoomOut()
 
 func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = Pos

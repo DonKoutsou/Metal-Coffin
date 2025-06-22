@@ -20,13 +20,13 @@ void fragment() {
 	vec4 Norm = texture(GroundNormalTexture, UV);
 	vec4 Col = texture(GroundTexture, UV);
 	Col.a = 1.0;
-	
+
     // Apply the fog effect
     COLOR = Col;
 	COLOR.a *= noise;
 	NORMAL_MAP = vec3(Norm.xyz);
 	NORMAL_MAP_DEPTH = Norm.x;
-	
+
 }
 "
 

@@ -26,6 +26,7 @@ signal MarkerEditorXRangeChanged(NewVlaue : float)
 
 signal RegroupPressed()
 signal LandPressed()
+signal OpenHatchPressed()
 #signal SimPausePressed()
 signal InventoryPressed()
 signal PausePressed()
@@ -104,6 +105,8 @@ func OnRegroupPressed() -> void:
 func OnLandPressed() -> void:
 	LandPressed.emit()
 
+func OnOpenHatchPressed() -> void:
+	OpenHatchPressed.emit()
 
 #func OnSimPausePressed() -> void:
 	#SimPausePressed.emit()

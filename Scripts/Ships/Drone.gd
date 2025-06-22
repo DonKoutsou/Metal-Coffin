@@ -57,7 +57,8 @@ func BodyEnteredBody(Body: Area2D) -> void:
 func GetSaveData() -> DroneSaveData:
 	var dat = DroneSaveData.new()
 	dat.CommingBack = CommingBack
-	dat.RegroupTargetName = RegroupTarget.GetShipName()
+	if (RegroupTarget != null):
+		dat.RegroupTargetName = RegroupTarget.GetShipName()
 	dat.Cpt = Cpt
 	dat.Docked = Docked
 	dat.Pos = global_position

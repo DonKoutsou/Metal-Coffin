@@ -15,25 +15,25 @@ var Wor : World
 const APPID = "3679430"
  #Called when the node enters the scene tree for the first time.
 
-#func _init() -> void:
-	#if (OS.get_name() == "Windows"):
-		#OS.set_environment("SteamAppID", APPID)
-		#OS.set_environment("SteamGameID", APPID)
+func _init() -> void:
+	if (OS.get_name() == "Windows"):
+		OS.set_environment("SteamAppID", APPID)
+		OS.set_environment("SteamGameID", APPID)
 	
 func _ready() -> void:
-	#if (OS.get_name() == "Windows"):
-		#Steam.steamInit()
-		#var IsRunning = Steam.isSteamRunning()
-		#
-		#if (!IsRunning):
-			#printerr("Steam Is Not Running")
-		#else:
-			#print("Steam Is Running")
-			#var ID = Steam.getSteamID()
-			#var name = Steam.getFriendPersonaName(ID)
-			#print("Username : ", str(name))
-			#AchievementManager.GetInstance().SteamRunning = true
-			#print("Achievement Tracking Enabled")
+	if (OS.get_name() == "Windows"):
+		Steam.steamInit()
+		var IsRunning = Steam.isSteamRunning()
+		
+		if (!IsRunning):
+			printerr("Steam Is Not Running")
+		else:
+			print("Steam Is Running")
+			var ID = Steam.getSteamID()
+			var name = Steam.getFriendPersonaName(ID)
+			print("Username : ", str(name))
+			AchievementManager.GetInstance().SteamRunning = true
+			print("Achievement Tracking Enabled")
 	
 	var vidpl = StudioAnim.instantiate() as StudioAnimation
 	add_child(vidpl)

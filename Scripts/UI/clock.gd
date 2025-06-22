@@ -4,7 +4,7 @@ class_name  Clock
 
 var CurrentDay : int = 10
 var CurrentMonth : int = 4
-var CurrentYear : int = 3874
+var CurrentYear : int = 6129
 var currentHour : int = 13
 var currentMin : float = 0
 

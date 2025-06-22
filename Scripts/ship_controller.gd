@@ -6,7 +6,7 @@ class_name ShipContoller
 @export var DroneDockEventH : DroneDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
-var ship_camera: Camera2D
+var ship_camera: ShipCamera
 @export var CaptainSelectScreen : PackedScene
 @export var DroneScene : PackedScene
 
@@ -16,6 +16,7 @@ var ControlledShip : PlayerDrivenShip
 
 signal FleetSeperationRequested(ControlledShip : PlayerDrivenShip)
 signal LandingRequested(ControlledShip : PlayerDrivenShip)
+signal OpenHatchRequested(ControlledShip : PlayerDrivenShip)
 
 static var Instance : ShipContoller
 
@@ -25,12 +26,15 @@ func _ready() -> void:
 	#DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	#DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	UIEventH.connect("LandPressed", _on_land_button_pressed)
+	UIEventH.OpenHatchPressed.connect(OnOpenHatchPressed)
 	UIEventH.connect("RadarButtonPressed", _on_radar_button_pressed)
 	UIEventH.connect("FleetSeparationPressed", InitiateFleetSeparation)
 	UIEventH.connect("RegroupPressed", _on_controlled_ship_return_pressed)
 	UIEventH.connect("AccelerationChanged", AccelerationChanged)
 	UIEventH.connect("SteerOffseted", SteerChanged)
 	UIEventH.connect("ShipSwitchPressed", _on_controlled_ship_swtich_range_changed)
+	
+	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
 	
 	#call_deferred("SetInitialShip")
 
@@ -88,7 +92,14 @@ func _on_land_button_pressed() -> void:
 		Instigator = ControlledShip.Command
 	
 	LandingRequested.emit(Instigator)
+
+func OnOpenHatchPressed() -> void:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
 	
+	OpenHatchRequested.emit(Instigator)
+
 #Called from accelerator UI to change acceleration of currently controlled ship
 func AccelerationChanged(value: float) -> void:
 	if (ControlledShip.Docked):
@@ -176,12 +187,19 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	
 	#UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
 	#UIEventH.OnSteerDirForced(ControlledShip.rotation)
-	UIEventH.OnShipUpdated(ControlledShip)
-	ControlledShip.ToggleFuelRangeVisibility(true)
-	FrameCamToShip()
+	
+	
+	
 	#_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	ShipControllerEventH.ShipChanged(ControlledShip)
-	
+
+func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
+	ControlledShip.ToggleFuelRangeVisibility(false)
+	ControlledShip = NewShip
+	UIEventH.OnShipUpdated(NewShip)
+	NewShip.ToggleFuelRangeVisibility(true)
+	FrameCamToShip()
+
 var camtw : Tween
 func FrameCamToShip():
 	#if (camtw != null):
@@ -190,7 +208,7 @@ func FrameCamToShip():
 	#var plpos = ControlledShip.global_position
 	#camtw.set_trans(Tween.TRANS_EXPO)
 	#camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
-	ship_camera.FrameCamToPos(ControlledShip.global_position, 1, false)
+	ship_camera.FrameCamToShip(ControlledShip, 1, false)
 func _on_controlled_ship_return_pressed() -> void:
 	
 	if (ControlledShip is PlayerShip):

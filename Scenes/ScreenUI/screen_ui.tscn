@@ -479,29 +479,6 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ControlledShipSwitch" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -161.0
-offset_top = -49.0
-offset_right = -117.0
-offset_bottom = -30.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-focus_mode = 0
-theme = ExtResource("14_l0ryv")
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-
 [node name="ControlledShipReturn" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
@@ -550,10 +527,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -244.0
-offset_top = -294.0
-offset_right = -225.0
-offset_bottom = -249.0
+offset_left = -160.0
+offset_top = -409.0
+offset_right = -116.0
+offset_bottom = -390.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("6_kbeeh")
@@ -580,6 +557,25 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
+[node name="OpenHatchButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -244.0
+offset_top = -77.0
+offset_right = -225.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("6_kbeeh")
+texture_pressed = ExtResource("7_t8pjf")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
 [node name="RadarButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
@@ -588,9 +584,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -244.0
-offset_top = -149.0
+offset_top = -294.0
 offset_right = -225.0
-offset_bottom = -104.0
+offset_bottom = -249.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("9_3s488")
@@ -606,9 +602,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -244.0
-offset_top = -77.0
+offset_top = -149.0
 offset_right = -225.0
-offset_bottom = -32.0
+offset_bottom = -104.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("17_07pwg")
@@ -960,11 +956,11 @@ libraries = {
 [connection signal="toggled" from="NormalScreen/SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="pressed" from="NormalScreen/SimulationButton" to="." method="Sim_Pause_Pressed"]
 [connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
-[connection signal="pressed" from="NormalScreen/ControlledShipSwitch" to="." method="Ship_Switch_Pressed"]
 [connection signal="pressed" from="NormalScreen/ControlledShipReturn" to="." method="Regroup_Pressed"]
 [connection signal="pressed" from="NormalScreen/MarkerPlecement" to="." method="Marker_Editor_Pressed"]
 [connection signal="pressed" from="NormalScreen/DroneButton" to="." method="Drone_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/MissileButton" to="." method="Missile_Button_Pressed"]
+[connection signal="pressed" from="NormalScreen/OpenHatchButton" to="." method="_on_open_hatch_button_pressed"]
 [connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]

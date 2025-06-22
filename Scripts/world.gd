@@ -203,6 +203,7 @@ func _enter_tree() -> void:
 	map.connect("MAP_EnemyArrival", StartDogFight)
 	Controller.connect("FleetSeperationRequested", StartShipTrade)
 	Controller.connect("LandingRequested", OnLandRequested)
+	Controller.OpenHatchRequested.connect(OnOpenHatchRequested)
 	#var statp = GetStatPanel()
 	##connect("WRLD_StatsUpdated", statp.StatsUp)
 	#connect("WRLD_StatGotLow", statp.StatsLow)
@@ -354,25 +355,39 @@ func OnLandRequested(ControlledShip : MapShip) -> void:
 	Instigator.StartLanding()
 	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
-	Instigator.connect("LandingEnded", OnShipLanded)
+	Instigator.connect("LandingEnded", OnLandingFinished)
 	Instigator.connect("LandingCanceled", OnLandingCanceled)
+
+func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+		
+	var spot = Instigator.CurrentPort as MapSpot
+
+	if (Instigator.Altitude > 0):
+		PopUpManager.GetInstance().DoFadeNotif("Can't open hatch while ship is on floating")
+		return
+	
+	OnShipLanded(Instigator)
 
 func OnLandingCanceled(Ship : MapShip) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence canceled")
-	Ship.disconnect("LandingEnded", OnShipLanded)
+	Ship.disconnect("LandingEnded", OnLandingFinished)
 	Ship.disconnect("LandingCanceled", OnLandingCanceled)
+
+func OnLandingFinished(Ship : MapShip) -> void:
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
+	if (Ship.is_connected("LandingEnded", OnLandingFinished)):
+		Ship.disconnect("LandingEnded", OnLandingFinished)
+	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):
+		Ship.disconnect("LandingCanceled", OnLandingCanceled)
 
 func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var Inventory = InventoryManager.GetInstance()
 	if (Inventory.visible):
 		Inventory.ToggleInventory()
-	
-	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
-		
-	if (Ship.is_connected("LandingEnded", OnShipLanded)):
-		Ship.disconnect("LandingEnded", OnShipLanded)
-	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):
-		Ship.disconnect("LandingCanceled", OnLandingCanceled)
+
 	SimulationManager.GetInstance().TogglePause(true)
 	var spot = Ship.CurrentPort as MapSpot
 	var PlayedEvent = await Land(spot, Ship)

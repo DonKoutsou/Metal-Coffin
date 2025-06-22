@@ -24,7 +24,7 @@ func SetCamera() -> void:
 		return
 	ship_camera = map.GetCamera()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
+func update() -> void:
 	#global_position = get_parent().global_position - (get_viewport_rect().size/2)
 	var psize = $Panel.size / 2
 	$Panel.position = Vector2($XLine.position.x - psize.x, $YLine.position.y - psize.y)
@@ -46,6 +46,7 @@ func _on_text_confirm_pressed() -> void:
 	textblock.SetText($MarkerTextEditor/VBoxContainer/TextEdit.text)
 	$MarkerTextEditor/VBoxContainer/TextEdit.text = ""
 	PopUpManager.GetInstance().DoFadeNotif("Text marker placed")
+	
 func _on_drone_button_pressed() -> void:
 	if (Line == null):
 		Line = LineScene.instantiate() as MapMarkerLine
@@ -68,10 +69,11 @@ func _on_drone_button_pressed() -> void:
 
 func _on_y_gas_range_changed(NewVal: float) -> void:
 	$YLine.global_position.y = clamp($YLine.global_position.y + NewVal * 5, 0, get_viewport_rect().size.y)
-	
+	update()
 func _on_x_gas_range_changed(NewVal: float) -> void:
 	$XLine.global_position.x = clamp($XLine.global_position.x + NewVal * 5, 0, get_viewport_rect().size.x)
-
+	update()
+	
 func LoadData(Dat : SD_MapMarkerEditor) -> void:
 	for g in Dat.Lines:
 		var newline = LineScene.instantiate() as MapMarkerLine

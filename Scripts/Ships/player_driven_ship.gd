@@ -23,7 +23,7 @@ func updatedronecourse():
 	
 	var Distance = global_position.distance_to(ship_position)
 	
-	if (Distance < 10):
+	if (Distance < 30):
 		plship.GetDroneDock().DockDrone(self, true)
 		var MyDroneDock = GetDroneDock()
 		for g in MyDroneDock.DockedDrones:
@@ -71,7 +71,10 @@ func _physics_process(delta: float) -> void:
 
 	if (Docked or GetShipSpeedVec() == Vector2.ZERO):
 		return
-
+	
+	if (CommingBack):
+		updatedronecourse()
+		
 	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var ShipEfficiency = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - ShipWeight / 40
 	var FuelConsumtion = Acceleration.position.x / ShipEfficiency * SimulationSpeed
@@ -87,8 +90,7 @@ func _physics_process(delta: float) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
 		return
 
-	if (CommingBack):
-		updatedronecourse()
+	
 	
 	for g in GetDroneDock().GetDockedShips():
 		var Cap = g.Cpt as Captain
@@ -123,7 +125,7 @@ func _HandleRestock() -> void:
 	Repair()
 	
 	var inv = Cpt.GetCharacterInventory()
-	if (inv != null and inv._ItemBeingUpgraded != null):
+	if (Altitude == 0 and inv != null and inv._ItemBeingUpgraded != null):
 		ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
 	else:
 		ShipDockActions.emit("Upgrading", false, 0)

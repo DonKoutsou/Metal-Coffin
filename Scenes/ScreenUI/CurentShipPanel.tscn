@@ -7,7 +7,7 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
-bg_color = Color(0.114, 0.206, 0.212, 0.3)
+bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_bottom = 4
@@ -17,25 +17,35 @@ corner_radius_bottom_left = 10
 corner_detail = 1
 shadow_size = 8
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("Sep")]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -28.0
-offset_bottom = 29.0
+offset_left = -111.0
+offset_top = -18.0
+offset_bottom = 19.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mxjk1")
 script = ExtResource("1_aaq8a")
+Sep = NodePath("HBoxContainer/Control")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "faawfwwfa"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(-6.86, 0)
+layout_mode = 2
 mouse_filter = 2
-alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -35,7 +35,7 @@ func DrawLines() -> void:
 		if (!RoadLines):
 			L.default_color = Color(1,1,1, 1)
 		else:
-			L.texture = load("res://Assets/path.png")
+			L.texture = PathTexture
 			L.texture_mode = Line2D.LINE_TEXTURE_TILE
 			L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 			#L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED

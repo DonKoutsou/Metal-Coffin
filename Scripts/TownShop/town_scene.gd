@@ -112,11 +112,27 @@ func OnItemSold(It : Item) -> void:
 	
 func OnItemBought(It : Item) -> void:
 	PopupManager.GetInstance().DoFadeNotif("{0} bought".format([It.ItemName]))
+	
+	var Added = false
+	
 	for g in LandedShips:
 		var inv = g.Cpt.GetCharacterInventory()
-		if (inv.HasSpaceForItem(It)):
+		if (!inv.HasSpaceForItem(It)):
+			continue
+		if (It is AmmoItem and inv.HasWeapon(It.WType)):
 			inv.AddItem(It)
+			Added = true
 			break
+		else : if (It is MissileItem and inv.HasWeapon(CardStats.WeaponType.ML)):
+			inv.AddItem(It)
+			Added = true
+			break
+	if (!Added):
+		for g in LandedShips:
+			var inv = g.Cpt.GetCharacterInventory()
+			if (inv.HasSpaceForItem(It)):
+				inv.AddItem(It)
+				break
 
 	for g in TownSpot.Merch:
 		if (g.It == It):

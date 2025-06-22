@@ -109,7 +109,7 @@ func _Update(delta: float) -> void:
 		#return
 	
 	for g in TrailLines:
-		g.UpdateProjected(delta, ParalaxMulti)
+		g.UpdateProjected(delta, 1)
 	
 	if (UseDefaultBehavior):
 		var SimulationSpeed = SimulationManager.SimSpeed()
