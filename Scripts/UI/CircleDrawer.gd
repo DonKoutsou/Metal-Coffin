@@ -146,12 +146,12 @@ func DrawRuller() -> void:
 	
 	
 	for g in 3:
-		draw_circle(shippos, vizrange / 3 * (g + 1), Color(100, 100, 100), false, LineW, true)
+		draw_circle(shippos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, true)
 
 	var Next = rotation_degrees
 	var Num = 90
 	for g in 12:
-		draw_line(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + shippos, Vector2(vizrange,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100), LineW, true)
+		draw_line(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + shippos, Vector2(vizrange,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100, 0.3), LineW, true)
 
 
 

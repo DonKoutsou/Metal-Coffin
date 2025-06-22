@@ -13,7 +13,7 @@ TimesPlayed = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_jjfkd")
-volume_db = -13.546
+volume_db = -22.0
 pitch_scale = 0.8
 autoplay = true
 bus = &"MapSounds"

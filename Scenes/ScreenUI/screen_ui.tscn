@@ -910,7 +910,6 @@ texture = ExtResource("36_ai3xr")
 texture_scale = 13.0
 
 [node name="AlarmLight2" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
-texture_filter = 2
 position = Vector2(0, 2)
 energy = 2.0
 range_z_min = 0

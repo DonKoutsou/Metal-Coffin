@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=35 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -19,9 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="17_445lv"]
 [ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="18_a2ujk"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
-[ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/Clouds/clouds.gdshader" id="19_28wu2"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
-[ext_resource type="Texture2D" uid="uid://d1tknmqoiysie" path="res://Shaders/Clouds/CloudNormal.tres" id="20_445lv"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
 [ext_resource type="Script" uid="uid://c2ufjbkhk6v0q" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
@@ -58,42 +56,6 @@ shader_parameter/NormalD = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(10, 10)
 shader_parameter/Scale2 = Vector2(20, 20)
-
-[sub_resource type="Gradient" id="Gradient_l2i77"]
-offsets = PackedFloat32Array(0, 0.624799, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1, 0.856354, 0.856354, 0.856354, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
-noise_type = 0
-seed = 4
-frequency = 0.0039
-fractal_octaves = 7
-fractal_lacunarity = 2.2
-fractal_gain = 0.57
-domain_warp_frequency = 0.095
-domain_warp_fractal_type = 0
-domain_warp_fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
-width = 1024
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_l2i77")
-noise = SubResource("FastNoiseLite_n7y6y")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1lxys"]
-shader = ExtResource("19_28wu2")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
-shader_parameter/noise_texturenormal = ExtResource("20_445lv")
-shader_parameter/density = 2.2
-shader_parameter/speed = Vector2(0.01, -0.01)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/custom_time = 0.0
-shader_parameter/UseCustomTime = true
-shader_parameter/NormalStr = -2.0
-shader_parameter/shadow_strength = 0.3
-shader_parameter/shadow_parallax_amount = -0.1
-shader_parameter/rotation_angle = -0.85
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]
 light_mode = 1
@@ -176,14 +138,13 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "Cloud2", "Ground") groups=["Clock"]]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "Ground") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
 Cloud = NodePath("Clouds")
-Cloud2 = NodePath("Clouds2")
 Ground = NodePath("Ground")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
@@ -201,18 +162,6 @@ grow_vertical = 2
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 material = ExtResource("18_a2ujk")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -766.0
-offset_top = -775.0
-offset_right = 734.0
-offset_bottom = 725.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Clouds2" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
-material = SubResource("ShaderMaterial_1lxys")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

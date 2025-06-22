@@ -108,12 +108,12 @@ func InserCardtoPlay(C : Card) -> void:
 	C.global_position = pos
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
-	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -5), 0.35)
+	Movetw.set_trans(Tween.TRANS_EXPO)
+	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -15), 0.35)
 	
 	var ScaleTw = create_tween()
-	ScaleTw.set_ease(Tween.EASE_OUT)
-	ScaleTw.set_trans(Tween.TRANS_QUAD)
+	#ScaleTw.set_ease(Tween.EASE_IN)
+	#ScaleTw.set_trans(Tween.TRANS_CUBIC)
 	ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.35)
 	
 	PlayCardSound()

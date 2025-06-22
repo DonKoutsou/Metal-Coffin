@@ -37,8 +37,14 @@ func _sort_children():
 		var needed_width: float = card_width * child_count
 		if needed_width > max_width:
 			overlap = (needed_width - max_width) / (child_count - 1)
+			
+	var step
+	if (Vertical):
+		step = (max_width / child_count) - overlap
+	else:
+		step = card_width - overlap
+		
 	
-	var step = card_width - overlap
 	var total_width = step * (child_count - 1) + card_width
 	var start_x = (max_width - total_width) / 2.0
 

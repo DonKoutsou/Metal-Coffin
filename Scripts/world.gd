@@ -352,6 +352,7 @@ func OnLandRequested(ControlledShip : MapShip) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Ship cant land while moving")
 		return
 	Instigator.StartLanding()
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
 	Instigator.connect("LandingEnded", OnShipLanded)
 	Instigator.connect("LandingCanceled", OnLandingCanceled)
@@ -366,6 +367,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	if (Inventory.visible):
 		Inventory.ToggleInventory()
 	
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
 		
 	if (Ship.is_connected("LandingEnded", OnShipLanded)):
 		Ship.disconnect("LandingEnded", OnShipLanded)

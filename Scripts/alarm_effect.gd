@@ -31,5 +31,5 @@ func _draw():
 	for i in range(num_circles):
 		var radius = i * circle_spacing + expansion_rate * ((timer.wait_time - timer.time_left) - (timer.wait_time / 2))
 		if radius <= max_radius and radius > 0:
-			draw_circle(Vector2.ZERO, radius, Color(1, 0, 0, 1), false, line_width)
+			draw_circle(Vector2.ZERO, radius, Color(1, 1, 1, 0.3), false, line_width)
 	

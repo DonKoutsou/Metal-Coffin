@@ -1,5 +1,7 @@
 shader_type canvas_item;
 
+render_mode blend_mix;
+
 // === TEXTURES ===
 uniform sampler2D noise_texture : repeat_enable, filter_linear;
 uniform sampler2D noise_texturenormal : repeat_enable, filter_linear;

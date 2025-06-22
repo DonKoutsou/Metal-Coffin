@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Captain" load_steps=24 format=3 uid="uid://disqw5cbdncos"]
 
-[ext_resource type="Texture2D" uid="uid://cyt6r2lakmb36" path="res://Assets/CaptainPortraits/Captain6.png" id="1_xqxow"]
+[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_ofvjl"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_ufoo0"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_3cbbo"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_52iue"]
@@ -148,7 +148,7 @@ CurrentValue = 0.0
 script = ExtResource("3_3cbbo")
 CaptainName = "Samir"
 CaptainBio = "Shithead"
-CaptainPortrait = ExtResource("1_xqxow")
+CaptainPortrait = ExtResource("1_ofvjl")
 ShipIcon = ExtResource("3_yl744")
 CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs"), SubResource("Resource_wxl3a"), SubResource("Resource_haf7u"), SubResource("Resource_knqm1"), SubResource("Resource_fwmht"), SubResource("Resource_ofvjl"), SubResource("Resource_el1gt"), SubResource("Resource_e88pt"), SubResource("Resource_3h6tm"), SubResource("Resource_dtywx"), SubResource("Resource_v30r8"), SubResource("Resource_heiep"), SubResource("Resource_cmo0y"), SubResource("Resource_nx2e3")])
 ShipCallsign = "P"

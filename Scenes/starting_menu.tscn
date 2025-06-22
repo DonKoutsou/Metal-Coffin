@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=51 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
@@ -28,10 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="24_nwvr6"]
 [ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality.png" id="25_qhtmf"]
 [ext_resource type="Texture2D" uid="uid://dlaoa5dhbn3h5" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality_Pressed.png" id="26_i6qwf"]
-[ext_resource type="Texture2D" uid="uid://72l45pouumfk" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHT_Camera 1.png" id="28_lhecl"]
 [ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality.png" id="29_aa43b"]
-[ext_resource type="Texture2D" uid="uid://c1mhc4vevx68e" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTON_Camera 1.png" id="29_ossme"]
-[ext_resource type="Texture2D" uid="uid://w1jutcwdpnr0" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTONGreen_Camera 1.png" id="30_2ea6n"]
 [ext_resource type="PackedScene" uid="uid://cix2emi1smed2" path="res://Scenes/InScreenUI/setting_panel2.tscn" id="30_aa43b"]
 [ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="32_qskuh"]
 [ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="33_xop3l"]
@@ -209,7 +206,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 position = Vector2(15, 7)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -255,7 +251,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -301,7 +296,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -545,9 +539,6 @@ offset_left = 147.0
 offset_top = 176.0
 offset_right = 169.0
 offset_bottom = 198.0
-OffText = ExtResource("28_lhecl")
-Red = ExtResource("29_ossme")
-Green = ExtResource("30_2ea6n")
 
 [node name="Play2" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2
@@ -583,9 +574,6 @@ offset_left = 147.0
 offset_top = 302.0
 offset_right = 169.0
 offset_bottom = 324.0
-OffText = ExtResource("28_lhecl")
-Red = ExtResource("29_ossme")
-Green = ExtResource("30_2ea6n")
 
 [node name="Fight" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
 layout_mode = 2

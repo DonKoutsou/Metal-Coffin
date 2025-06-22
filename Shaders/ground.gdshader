@@ -1,16 +1,16 @@
 shader_type canvas_item;
 
 // Color textures
-uniform sampler2D GroundTexture: repeat_enable, filter_linear_mipmap_anisotropic;
+uniform sampler2D GroundTexture: repeat_enable, filter_linear_mipmap;
 //uniform sampler2D GroundTextureMask: repeat_enable, filter_nearest_mipmap_anisotropic;
-uniform sampler2D GroundTexture2: repeat_enable, filter_linear_mipmap_anisotropic;
+uniform sampler2D GroundTexture2: repeat_enable, filter_linear_mipmap;
 
 // Noise texture
-uniform sampler2D NoiseTexture: repeat_enable, filter_linear_mipmap_anisotropic;  // Add noise texture
+uniform sampler2D NoiseTexture: repeat_enable, filter_linear_mipmap;  // Add noise texture
 
 // Normal texture
-uniform sampler2D GroundNormalTexture: hint_normal, filter_linear_mipmap_anisotropic, repeat_enable;
-uniform sampler2D GroundNormal2Texture: hint_normal, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D GroundNormalTexture: hint_normal, filter_linear_mipmap, repeat_enable;
+uniform sampler2D GroundNormal2Texture: hint_normal, filter_linear_mipmap, repeat_enable;
 uniform float NormalD = 1.0;
 
 // Custom offset for camera movement

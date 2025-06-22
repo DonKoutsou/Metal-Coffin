@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://d1tknmqoiysie" path="res://Shaders/Clouds/CloudNormal.tres" id="2_ykjet"]
 
 [sub_resource type="Gradient" id="Gradient_l2i77"]
-offsets = PackedFloat32Array(0, 0.624799, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.82777, 0.82777, 0.827769, 1, 0.807863, 0.807863, 0.807863, 1)
+offsets = PackedFloat32Array(0.168605, 0.565407, 0.75)
+colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1, 0.856354, 0.856354, 0.856354, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
-noise_type = 0
+noise_type = 3
 seed = 4
-frequency = 0.0039
+frequency = 0.0234
 fractal_octaves = 7
 fractal_lacunarity = 2.2
 fractal_gain = 0.57

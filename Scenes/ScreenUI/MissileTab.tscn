@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cwnxxystgxrjm"]
+[gd_scene load_steps=21 format=3 uid="uid://cwnxxystgxrjm"]
 
 [ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_2m6j3"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_uy6ab"]
@@ -13,11 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="12_q0qm5"]
 [ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="13_y4ap4"]
 [ext_resource type="Texture2D" uid="uid://cba3crf7vyc2x" path="res://Assets/UIPiecies/Off.png" id="14_w0uv6"]
-[ext_resource type="Texture2D" uid="uid://72l45pouumfk" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHT_Camera 1.png" id="15_5j6a5"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
-[ext_resource type="Texture2D" uid="uid://c1mhc4vevx68e" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTON_Camera 1.png" id="16_nth3v"]
-[ext_resource type="Texture2D" uid="uid://w1jutcwdpnr0" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTONGreen_Camera 1.png" id="17_jqaeg"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
 
 [sub_resource type="Animation" id="Animation_brgwl"]
@@ -246,9 +243,6 @@ offset_left = 104.0
 offset_top = -33.0
 offset_right = 144.0
 offset_bottom = 7.0
-OffText = ExtResource("15_5j6a5")
-Red = ExtResource("16_nth3v")
-Green = ExtResource("17_jqaeg")
 
 [node name="AngleSelectLight" parent="Control/Control" instance=ExtResource("15_pknbg")]
 layout_mode = 0
@@ -256,9 +250,6 @@ offset_left = 104.0
 offset_top = -3.0
 offset_right = 144.0
 offset_bottom = 37.0
-OffText = ExtResource("15_5j6a5")
-Red = ExtResource("16_nth3v")
-Green = ExtResource("17_jqaeg")
 
 [node name="RangeText" type="Label" parent="Control/Control"]
 texture_filter = 6
