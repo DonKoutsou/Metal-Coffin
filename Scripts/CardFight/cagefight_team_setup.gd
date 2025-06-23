@@ -68,7 +68,7 @@ func RemoveFromTeam(B : CaptainButton) -> void:
 	add_child(FloatingButton)
 	FloatingButton.Dissable()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (FloatingButton != null):
 		FloatingButton.global_position = get_global_mouse_position() - FloatingButton.size / 2
 		if (Input.is_action_just_released("Click")):

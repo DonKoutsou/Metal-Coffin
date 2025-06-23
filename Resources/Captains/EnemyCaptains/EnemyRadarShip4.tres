@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_lp6tg"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_mdyxk"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_7qlk6"]
-[ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Ship11.png" id="14_4cdhb"]
+[ext_resource type="Texture2D" uid="uid://bbknduw5emfut" path="res://Assets/ShipTextures/Ship12.png" id="5_md5cl"]
 [ext_resource type="Resource" uid="uid://cxum5qaw20d1q" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/LargeEngine.tres" id="20_1jw2f"]
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="21_euy3m"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="22_kvpm1"]
@@ -163,7 +163,7 @@ script = ExtResource("4_7qlk6")
 CaptainName = "R4"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_h2nkx")
-ShipIcon = ExtResource("14_4cdhb")
+ShipIcon = ExtResource("5_md5cl")
 CaptainStats = Array[ExtResource("2_rwhr3")]([SubResource("Resource_4xt1j"), SubResource("Resource_lwofe"), SubResource("Resource_evefn"), SubResource("Resource_cx83o"), SubResource("Resource_do68y"), SubResource("Resource_kxkd2"), SubResource("Resource_hkfj7"), SubResource("Resource_hx3ym"), SubResource("Resource_0vknq"), SubResource("Resource_md5cl"), SubResource("Resource_hdk7n"), SubResource("Resource_20tdb"), SubResource("Resource_1jw2f"), SubResource("Resource_euy3m"), SubResource("Resource_kvpm1"), SubResource("Resource_6c4ti"), SubResource("Resource_427xj")])
 ShipCallsign = "R4"
 StartingItems = Array[ExtResource("3_mdyxk")]([ExtResource("20_1jw2f"), ExtResource("20_1jw2f"), ExtResource("21_euy3m"), ExtResource("22_kvpm1"), ExtResource("23_427xj"), ExtResource("24_lmnq2"), ExtResource("25_ni2sd"), ExtResource("29_k0vt0"), ExtResource("29_k0vt0"), ExtResource("29_k0vt0"), ExtResource("29_k0vt0"), ExtResource("29_k0vt0"), ExtResource("29_k0vt0"), ExtResource("29_pvwpr"), ExtResource("29_pvwpr"), ExtResource("29_pvwpr"), ExtResource("29_pvwpr"), ExtResource("29_pvwpr"), ExtResource("29_pvwpr"), ExtResource("28_6c4ti"), ExtResource("29_7yuaq"), ExtResource("28_k0vt0"), ExtResource("28_k0vt0"), ExtResource("28_k0vt0"), ExtResource("28_k0vt0"), ExtResource("28_k0vt0"), ExtResource("28_k0vt0"), ExtResource("28_k0vt0"), ExtResource("28_k0vt0")])

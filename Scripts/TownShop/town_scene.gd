@@ -10,10 +10,12 @@ class_name TownScene
 @export var MerchendiseButton : Button
 @export var WorkshopButton : Button
 @export var FuelButton : Button
+@export var RepairButton : Button
 
 @export_group("Scenes")
 @export var MerchShopScene : PackedScene
 @export var FuelStorageScene : PackedScene
+@export var RepairStationScene : PackedScene
 @export var WorkshopScene : PackedScene
 
 var BoughtFuel : float = 0
@@ -64,12 +66,22 @@ func OnRefuelShopPressed() -> void:
 	else:
 		FuelPricePerTon = 50
 	
-	Scene.Init(BoughtFuel, FuelPricePerTon, TownSpot.HasRepair(), LandedShips)
+	Scene.Init(BoughtFuel, FuelPricePerTon, LandedShips)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
 		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] and [color=#ffc315]hull[/color] condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
-	
+
+func OnRepairStationPressed() -> void:
+	var Scene = RepairStationScene.instantiate() as RepairStation
+	add_child(Scene)
+
+	Scene.Init(TownSpot.HasRepair(), LandedShips)
+	#Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.REPAIR_SHOP)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.REPAIR_SHOP)
+		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] and [color=#ffc315]hull[/color] condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
+
 
 func FuelExchangeFinished(Fuel : float) -> void:
 	BoughtFuel = Fuel
@@ -143,12 +155,18 @@ func _on_town_background_position_changed() -> void:
 	var WorkshopNode = TownBG.GetNodeForPosition(TownBackground.Location.WORKSHOP)
 	WorkshopButton.global_position = WorkshopNode.global_position
 	(WorkshopButton.get_child(0) as Line2D).set_point_position(1, (WorkshopButton.get_child(0) as Line2D).to_local(WorkshopNode.get_child(0).global_position))
+	
 	var MerchendiseNode = TownBG.GetNodeForPosition(TownBackground.Location.MERCH)
 	MerchendiseButton.global_position = MerchendiseNode.global_position
 	(MerchendiseButton.get_child(0) as Line2D).set_point_position(1, (MerchendiseButton.get_child(0) as Line2D).to_local(MerchendiseNode.get_child(0).global_position))
+	
 	var FuelNode = TownBG.GetNodeForPosition(TownBackground.Location.FUEL)
 	FuelButton.global_position = FuelNode.global_position
 	(FuelButton.get_child(0) as Line2D).set_point_position(1, (FuelButton.get_child(0) as Line2D).to_local(FuelNode.get_child(0).global_position))
+
+	var RepairNode = TownBG.GetNodeForPosition(TownBackground.Location.REPAIR)
+	RepairButton.global_position = RepairNode.global_position
+	(RepairButton.get_child(0) as Line2D).set_point_position(1, (RepairButton.get_child(0) as Line2D).to_local(RepairNode.get_child(0).global_position))
 
 func _on_button_pressed() -> void:
 	TransactionFinished.emit(BoughtFuel, LandedShips, self)

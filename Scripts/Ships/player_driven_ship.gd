@@ -149,6 +149,10 @@ func _HandleLanding(SimulationSpeed : float) -> void:
 			MatchingAltitudeEnded.emit(self)
 			MatchingAltitude = false
 
+func _UpdateShipIcon(Tex : Texture2D) -> void:
+	super(Tex)
+	
+
 func BodyEnteredElint(Body: Area2D) -> void:
 	if (Body.get_parent() is PlayerDrivenShip):
 		return

@@ -17,7 +17,7 @@ var DeckHoverTween : Tween
 func HideAmm() -> void:
 	$Label2.text = "X"
 
-func OnCardAdded(CardPos : Vector2) -> void:
+func OnCardAdded(_CardPos : Vector2) -> void:
 	#var C = CardThing.instantiate() as CardViz
 	#C.Target = self
 	#add_child(C)

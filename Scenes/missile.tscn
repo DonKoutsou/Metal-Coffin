@@ -23,8 +23,8 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_5epdn"]
 interpolation_color_space = 1
-offsets = PackedFloat32Array(0, 0.715481, 1)
-colors = PackedColorArray(1, 0.234572, 0.131967, 1, 0, 0, 0, 1, 0.313, 0.313, 0.313, 0)
+offsets = PackedFloat32Array(0, 0.505804, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
 [node name="Missile" type="Node2D" groups=["Missiles", "Ships"]]
 script = ExtResource("1_dxfkf")

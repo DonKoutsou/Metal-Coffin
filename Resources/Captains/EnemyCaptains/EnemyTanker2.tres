@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_hsc4q"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_shbq8"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_a63wb"]
-[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Ship10.png" id="12_iiysl"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="5_jklya"]
 [ext_resource type="Resource" uid="uid://bv1syjs12hg14" path="res://Resources/Items/ShipParts/Radar/ShortCheapRadar.tres" id="15_jklya"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="19_g5n4n"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="20_35qqk"]
@@ -161,7 +161,7 @@ script = ExtResource("4_a63wb")
 CaptainName = "T2"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_s4bbh")
-ShipIcon = ExtResource("12_iiysl")
+ShipIcon = ExtResource("5_jklya")
 CaptainStats = Array[ExtResource("2_nhpak")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_0y3bp"), SubResource("Resource_vppjj"), SubResource("Resource_g5n4n"), SubResource("Resource_35qqk"), SubResource("Resource_37pgh"), SubResource("Resource_jy3ac"), SubResource("Resource_udlwg"), SubResource("Resource_i7vcv"), SubResource("Resource_jklya")])
 ShipCallsign = "T2"
 StartingItems = Array[ExtResource("3_hsc4q")]([ExtResource("19_g5n4n"), ExtResource("20_35qqk"), ExtResource("21_37pgh"), ExtResource("22_jy3ac"), ExtResource("23_udlwg"), ExtResource("24_fdpd8"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("25_74hwk"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("27_y82q1"), ExtResource("21_37pgh"), ExtResource("15_jklya")])

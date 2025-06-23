@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 	get_child(0).visible = true
 	
-	var Statvalue = WorldView.GetInstance().GetStatValue(NotifStat)
+	var Statvalue = WorldView.GetStatValue(NotifStat)
 	#var Statvalue = -10
 	Negativebar.value = (Statvalue * -1) + AdjustedAmm
 	Possetivebar.value = Statvalue - AdjustedAmm

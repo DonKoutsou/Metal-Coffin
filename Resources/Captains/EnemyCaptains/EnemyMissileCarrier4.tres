@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_lt5sl"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_hlmp3"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_lldrx"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="3_y7ggd"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_apvlk"]
+[ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Ship11.png" id="5_2uwu7"]
 [ext_resource type="Resource" uid="uid://by5pd080gjivc" path="res://Resources/Items/ShipParts/Shield/SGP-3 Ship Barrier.tres" id="8_uppi0"]
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/LargeFuelTank.tres" id="10_5wl4n"]
 [ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="10_oedrd"]
@@ -160,7 +160,7 @@ script = ExtResource("4_apvlk")
 CaptainName = "M4"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_o0yja")
-ShipIcon = ExtResource("3_y7ggd")
+ShipIcon = ExtResource("5_2uwu7")
 CaptainStats = Array[ExtResource("2_lt5sl")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_sl0l1"), SubResource("Resource_2uwu7"), SubResource("Resource_jrwu2"), SubResource("Resource_oedrd"), SubResource("Resource_jtvsn"), SubResource("Resource_dmh0p"), SubResource("Resource_epfl7"), SubResource("Resource_tucd1"), SubResource("Resource_xsppg")])
 ShipCallsign = "M4"
 StartingItems = Array[ExtResource("3_lldrx")]([ExtResource("8_uppi0"), ExtResource("13_oedrd"), ExtResource("10_5wl4n"), ExtResource("10_5wl4n"), ExtResource("11_sl0l1"), ExtResource("11_sl0l1"), ExtResource("10_oedrd"), ExtResource("10_oedrd"), ExtResource("10_oedrd"), ExtResource("10_oedrd"), ExtResource("10_oedrd"), ExtResource("10_oedrd"), ExtResource("14_2uwu7"), ExtResource("14_2uwu7"), ExtResource("14_2uwu7"), ExtResource("14_2uwu7"), ExtResource("14_2uwu7"), ExtResource("14_2uwu7"), ExtResource("13_epfl7"), ExtResource("13_epfl7"), ExtResource("13_epfl7"), ExtResource("13_epfl7"), ExtResource("13_epfl7"), ExtResource("13_epfl7"), ExtResource("13_epfl7"), ExtResource("14_jrwu2")])

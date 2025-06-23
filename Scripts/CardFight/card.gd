@@ -202,12 +202,12 @@ func OnButtonPressed() -> void:
 	OnCardPressed.emit(self)
 
 
-func Dissable(MouseFilter : bool = false) -> void:
+func Dissable(Filter : bool = false) -> void:
 	But.disabled = true
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.RemoveSelf(But)
-	if (MouseFilter):
+	if (Filter):
 		But.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 		FrontSide.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 func Enable() -> void:

@@ -11,22 +11,22 @@ class_name OffensiveCardModule
 @export var SkipShield : bool
 
 func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
-	var Dmg : float
-	for Stat in ScaleStat:
+	var Dmg = 0.0
+	for DmgInfo in ScaleStat:
 		var StatAmm : float
-		if (Stat.ScalingStat == CardModule.Stat.FIREPOWER):
+		if (DmgInfo.ScalingStat == CardModule.Stat.FIREPOWER):
 			StatAmm = Performer.GetFirePower()
-		else: if (Stat.ScalingStat == CardModule.Stat.SPEED):
+		else: if (DmgInfo.ScalingStat == CardModule.Stat.SPEED):
 			StatAmm = Performer.GetSpeed()
-		else: if (Stat.ScalingStat == CardModule.Stat.WEIGHT):
+		else: if (DmgInfo.ScalingStat == CardModule.Stat.WEIGHT):
 			StatAmm = Performer.GetWeight()
-		else: if (Stat.ScalingStat == CardModule.Stat.DEFENCE):
+		else: if (DmgInfo.ScalingStat == CardModule.Stat.DEFENCE):
 			StatAmm = Performer.GetDef()
 		
-		if (Stat.Method == DamageInfo.CalcuationMethod.ADD):
-			Dmg += Stat.GetDamage(GetTieredDamage(Tier), StatAmm)
-		else : if (Stat.Method == DamageInfo.CalcuationMethod.MULTIPLY):
-			Dmg *= Stat.GetDamage(GetTieredDamage(Tier), StatAmm)
+		if (DmgInfo.Method == DamageInfo.CalcuationMethod.ADD):
+			Dmg += DmgInfo.GetDamage(GetTieredDamage(Tier), StatAmm)
+		else : if (DmgInfo.Method == DamageInfo.CalcuationMethod.MULTIPLY):
+			Dmg *= DmgInfo.GetDamage(GetTieredDamage(Tier), StatAmm)
 	return max(0, Dmg)
 
 func GetTieredDamage(Tier : int) -> float:
@@ -105,7 +105,7 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	else:
 		Desc = "Hit enemy"
 	
-	var FinalDamage : float
+	var FinalDamage = 0.0
 	
 	for stat in ScaleStat:
 		var Dmg : float

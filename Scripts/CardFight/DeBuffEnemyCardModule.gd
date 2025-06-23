@@ -19,7 +19,7 @@ func GetDesc(Tier : int) -> String:
 		return "Debuff team\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
 	return "Debuff\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
 
-func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
+func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
 	var TextColor : String
 	if (StatToDeBuff == Stat.FIREPOWER):
 		TextColor = "color=#f35033"

@@ -43,7 +43,8 @@ func DescriptorTutorial() -> void:
 	pass
 
 func PlayIntroAnim() -> void:
-	#get_child(0).visible = false
+	var scroll = get_child(0) as Control
+	scroll.visible = false
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
@@ -55,6 +56,7 @@ func PlayIntroAnim() -> void:
 		size = Vector2(size.x, 0)
 		#set_deferred("size", Vector2(size.x, 0))
 	await tw.finished
+	scroll.visible = true
 	get_child(0).get_child(0).visible = true
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
@@ -62,7 +64,8 @@ func PlayIntroAnim() -> void:
 		ActionTracker.GetInstance().ShowTutorial("Item Inspection", tuttext, [self], true)
 
 func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
-	set_physics_process(false)
+	var scroll = get_child(0) as Control
+	scroll.clip_contents = false
 	DescribedContainer = Box
 	var It = DescribedContainer.GetContainedItem()
 	#ItemIcon.texture = It.ItemIcon
@@ -129,33 +132,33 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 func SetMerchData(Itm : Item, Ships : Array[MapShip]) -> void:
 	for g in CardPlecement.get_children():
 		g.queue_free()
-		
-	set_physics_process(false)
+	
+	#set_physics_process(false)
 	DescribedItem = Itm
 	#ItemIcon.texture = It.ItemIcon
 	#ItemDesc.text = It.GetItemDesc()
 	ItemDesc.text = Itm.GetItemDesc()
 	#TransferButton.visible = It.CanTransfer
 	TransferButton.visible = false
-	
+	ItemDesc.text = Itm.GetMerchItemDesc(Ships)
 	ItemName.text = Itm.ItemName
 	#Ship Parts
-	if (Itm is ShipPart):
-		UpgradeButton.visible = false
-		UpgradeLabel.visible = false
+	#if (Itm is ShipPart):
+	UpgradeButton.visible = false
+	UpgradeLabel.visible = false
 		#UpgradeLabel.visible = true
-	else: if (Itm is AmmoItem):
-		UpgradeButton.visible = false
-		UpgradeLabel.visible = false
-		ItemDesc.text = Itm.GetMerchItemDesc(Ships)
-	else: if (Itm is MissileItem):
-		UpgradeButton.visible = false
-		UpgradeLabel.visible = false
-		ItemDesc.text = Itm.GetMerchItemDesc(Ships)
-	else :
-		
-		UpgradeButton.visible = false
-		UpgradeLabel.visible = false
+	#else: if (Itm is AmmoItem):
+		#UpgradeButton.visible = false
+		#UpgradeLabel.visible = false
+		#
+	#else: if (Itm is MissileItem):
+		#UpgradeButton.visible = false
+		#UpgradeLabel.visible = false
+		#ItemDesc.text = Itm.GetMerchItemDesc(Ships)
+	#else :
+		#
+		#UpgradeButton.visible = false
+		#UpgradeLabel.visible = false
 	
 	#TODO Option doesent show when ship has upgraded weapons
 	if (Itm.CardProviding.size() > 0):
@@ -178,8 +181,8 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip]) -> void:
 	else:
 		CardSection.visible = false
 
-func SetData(Box : Inventory_Box, UpgradeBoost : bool, CanUpgrade : bool, CanTransfer : bool, CanAdd : bool, CanRemove : bool, ShowDescription : bool) -> void:
-	set_physics_process(false)
+func SetData(Box : Inventory_Box, CanUpgrade : bool, CanTransfer : bool, CanAdd : bool, CanRemove : bool, ShowDescription : bool) -> void:
+	#set_physics_process(false)
 	
 	
 	DescribedContainer = Box
@@ -203,7 +206,7 @@ func SetData(Box : Inventory_Box, UpgradeBoost : bool, CanUpgrade : bool, CanTra
 		else:
 			var inv = Box.GetParentInventory()
 			if (inv != null and inv.GetItemBeingUpgraded() == Box):
-				set_physics_process(true)
+				#set_physics_process(true)
 				UpgradeButton.visible = CanUpgrade
 			else:
 				UpgradeButton.visible = CanUpgrade
@@ -246,7 +249,7 @@ func SetEmptyShopData(Type : ShipPart.ShipPartType) -> void:
 	UpgradeLabel.visible = false
 	if (ItemDesc != null):
 		ItemDesc.visible = false
-	set_physics_process(false) 
+	#set_physics_process(false) 
 	ItemName.text = "Empty {0} Slot".format([ShipPart.ShipPartType.keys()[Type]])
 	CardSection.get_parent().visible = false
 
@@ -271,11 +274,11 @@ func _on_transfer_pressed() -> void:
 	ItemTransf.emit(DescribedContainer)
 	#queue_free()
 
-func _physics_process(_delta: float) -> void:
-	return
-	var inv = DescribedContainer.GetParentInventory()
-	var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
-	UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
+#func _physics_process(_delta: float) -> void:
+	#return
+	#var inv = DescribedContainer.GetParentInventory()
+	#var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
+	#UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
 
 
 func _on_add_item_pressed() -> void:

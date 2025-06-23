@@ -89,6 +89,9 @@ func _on_save_pressed() -> void:
 	if (CageFightWorld.GetInstance() != null):
 		PopUpManager.GetInstance().DoFadeNotif("Can't save in a cagefight", PopupPlecement)
 		return
+	if (get_tree().get_nodes_in_group("CardFight").size() > 0):
+		PopUpManager.GetInstance().DoFadeNotif("Can't save while in a fight", PopupPlecement)
+		return
 	SaveLoadManager.GetInstance().Save()
 	PopUpManager.GetInstance().DoFadeNotif("Save successful", PopupPlecement)
 func _on_exit_pressed() -> void:

@@ -141,7 +141,6 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	if (FocusedShip != null):
 		FocusedShip = null
 	var maxposY = WorldBounds.y
-	var vpsizehalf = (get_viewport_rect().size.x / 2)
 	var maxposX = Vector2(-(WorldBounds.x / 2), WorldBounds.x / 2)
 	var rel = relativeMovement / zoom
 	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY,1000) )
@@ -264,7 +263,7 @@ func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true
 	if (Unzoom):
 		ForceZoomOut()
 
-func FrameCamToShip(Ship : PlayerDrivenShip, OverrideTime : float = 1, Unzoom : bool = true) -> void:
+func FrameCamToShip(Ship : PlayerDrivenShip, _OverrideTime : float = 1, Unzoom : bool = true) -> void:
 	if (FrameTween != null):
 		FrameTween.kill()
 	#FrameTween = create_tween()

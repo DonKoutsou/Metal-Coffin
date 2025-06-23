@@ -101,15 +101,14 @@ func InitialiseShip() -> void:
 	
 	#TogglePause(SimulationManager.IsPaused())
 
+func _physics_process(delta: float) -> void:
+	for g in TrailLines:
+		g.UpdateProjected(delta, 1)
 
 func _Update(delta: float) -> void:
 		
 	UpdateElint(delta)
-	#if (Paused):
-		#return
 	
-	for g in TrailLines:
-		g.UpdateProjected(delta, 1)
 	
 	if (UseDefaultBehavior):
 		var SimulationSpeed = SimulationManager.SimSpeed()

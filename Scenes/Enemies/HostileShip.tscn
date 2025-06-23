@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
 [ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="3_ty6mh"]
-[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/ShipTextures/Spaceship_top_Main Camera.png" id="4_xxp8j"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="5_7v2kq"]
+[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Scarab.png" id="6_tlfh0"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/Enemies/HostileDroneDock.tscn" id="7_hahnw"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_kunx8"]
 [ext_resource type="PackedScene" uid="uid://b0gylky44tnsw" path="res://Scenes/Enemies/PatrolBT.tscn" id="8_w8ob0"]
@@ -12,9 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7v2kq"]
 resource_local_to_scene = true
 shader = ExtResource("5_7v2kq")
-shader_parameter/ShipSize = 0.08
-shader_parameter/shadow_strength = 0.5
-shader_parameter/shadow_parallax_amount = 0.2
+shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
 [sub_resource type="Curve" id="Curve_mktum"]
@@ -57,15 +55,14 @@ position = Vector2(0.5, 0)
 [node name="ColorRect" type="Sprite2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_7v2kq")
-rotation = -1.57078
-texture = ExtResource("4_xxp8j")
+rotation = -1.5708
+texture = ExtResource("6_tlfh0")
 
 [node name="TrailLine" type="Line2D" parent="ColorRect"]
 show_behind_parent = true
 position = Vector2(-3.233e-05, -2.77778)
 rotation = 1.57078
-scale = Vector2(2.77778, 2.77778)
-width = 3.0
+width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_hjoyl")
 joint_mode = 2

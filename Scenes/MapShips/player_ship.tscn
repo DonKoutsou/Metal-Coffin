@@ -17,8 +17,6 @@ light_mode = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mktum"]
 resource_local_to_scene = true
 shader = ExtResource("11_ogc8b")
-shader_parameter/ShipSize = 0.08
-shader_parameter/shadow_strength = 0.7
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 

@@ -136,7 +136,8 @@ Camera = NodePath("Camera2D")
 LocationPositions = Dictionary[int, NodePath]({
 0: NodePath("ParallaxLayer3/Parallax2D/WorkShop"),
 1: NodePath("ParallaxLayer3/Parallax2D/Fuel"),
-2: NodePath("ParallaxLayer3/Parallax2D/Merch")
+2: NodePath("ParallaxLayer3/Parallax2D/Merch"),
+3: NodePath("ParallaxLayer3/Parallax2D/Repair")
 })
 
 [node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
@@ -311,9 +312,15 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(723, 446)
+position = Vector2(537, 446)
 
 [node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop"]
+position = Vector2(92, 166)
+
+[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+position = Vector2(867, 455)
+
+[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair"]
 position = Vector2(-60, 162)
 
 [node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]

@@ -7,10 +7,10 @@ class_name CardModule
 @export var TierUpgrade : float = 1
 @export var TierUpgradeMethod : DamageInfo.CalcuationMethod
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(_Tier : int) -> String:
 	return ""
 
-func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
+func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
 	return GetDesc(Tier)
 
 func GetStatShortName(St : Stat) -> String:

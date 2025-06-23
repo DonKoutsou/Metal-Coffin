@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_rg5ws")
-shader_parameter/ColorAmm = 36.0
+shader_parameter/ColorAmm = 12.0

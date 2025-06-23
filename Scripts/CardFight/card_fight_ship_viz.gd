@@ -13,7 +13,7 @@ func _ready() -> void:
 	#$Panel.visible = false
 	ToggleFire(false)
 
-func SetStats(S : BattleShipStats, Friendly : bool) -> void:
+func SetStats(S : BattleShipStats) -> void:
 	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
 	var Hull = var_to_str(snapped(S.Hull, 0.1)).replace(".0", "")
@@ -23,7 +23,6 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	if (S.FirePowerBuff > 1):
 		Firep = "[color=#308a4d]" + Firep + "[/color]"
 	StatLabel.text = "[right]{0}[right]{1}[right]{2}[right]{3}".format([Hull, Shield, Speed, Firep])
-	#ShipIcon.flip_v = !Friendly
 	FriendlyPanel.visible = false
 	
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:

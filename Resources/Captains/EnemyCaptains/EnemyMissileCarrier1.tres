@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_c8anm"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_7forp"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_56hd3"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="3_lrwkv"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_f3cc4"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_sht43"]
+[ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Ship11.png" id="5_kfdj8"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="12_oarn3"]
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="13_kfdj8"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="13_v41re"]
@@ -157,10 +157,10 @@ CurrentValue = 0.0
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_f3cc4")
-CaptainName = "M1"
+CaptainName = "Missile Carrier"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_c8anm")
-ShipIcon = ExtResource("3_lrwkv")
+ShipIcon = ExtResource("5_kfdj8")
 CaptainStats = Array[ExtResource("2_7forp")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_oe3pw"), SubResource("Resource_of877"), SubResource("Resource_op1dl"), SubResource("Resource_p41wt"), SubResource("Resource_ryu25"), SubResource("Resource_rf2ih"), SubResource("Resource_v2ogn"), SubResource("Resource_v41re"), SubResource("Resource_kfdj8")])
 ShipCallsign = "M1"
 StartingItems = Array[ExtResource("4_sht43")]([ExtResource("21_al5oc"), ExtResource("21_al5oc"), ExtResource("18_rf2ih"), ExtResource("13_v41re"), ExtResource("13_v41re"), ExtResource("13_v41re"), ExtResource("13_v41re"), ExtResource("21_al5oc"), ExtResource("13_kfdj8"), ExtResource("14_op1dl"), ExtResource("12_oarn3"), ExtResource("14_kfdj8"), ExtResource("14_kfdj8"), ExtResource("14_of877")])

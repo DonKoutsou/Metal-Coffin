@@ -225,7 +225,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 	if (Box.IsEmpty()):
 		CurrentDescriptor.SetEmptyShopData(GetTypeOfBox(Box))
 	else:
-		CurrentDescriptor.SetData(Box, true, true, false, true, true, true)
+		CurrentDescriptor.SetData(Box, true, false, true, true, true)
 	
 	CurrentDescriptor.ItemAdd.connect(AddItem)
 	CurrentDescriptor.ItemUpgraded.connect(UpgradeItem)
@@ -239,7 +239,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 
 func UpdateDescriptor(Box : Inventory_Box) -> void:
 	if (CurrentDescriptor != null):
-		CurrentDescriptor.SetData(Box, true, true, false, true, true, true)
+		CurrentDescriptor.SetData(Box, true, false, true, true, true)
 
 func UpgradeItem(Box : Inventory_Box) -> void:
 	var OriginalItem = Box.GetContainedItem() as ShipPart
@@ -314,7 +314,7 @@ func RemoveItem(Box : Inventory_Box) -> void:
 	if (Box.IsEmpty()):
 		ItemSelected(Box)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
 	var midpoint = get_viewport_rect().size/2
 	var Closest : Control

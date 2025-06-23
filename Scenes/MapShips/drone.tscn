@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crsatqn78m71w" path="res://Scripts/Ships/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="3_fw0pf"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="3_qb3w4"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="4_dxnd3"]
+[ext_resource type="Texture2D" uid="uid://bbknduw5emfut" path="res://Assets/ShipTextures/Ship12.png" id="4_dxnd3"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="5_k2uly"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="9_82ju4"]
@@ -17,8 +17,6 @@ light_mode = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxnd3"]
 resource_local_to_scene = true
 shader = ExtResource("3_qb3w4")
-shader_parameter/ShipSize = 0.08
-shader_parameter/shadow_strength = 0.7
 shader_parameter/shadow_parallax_amount = 5.0
 shader_parameter/sprite_rotation = -1.57
 

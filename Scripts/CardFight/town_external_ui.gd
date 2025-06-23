@@ -34,7 +34,7 @@ func DropCoins(Amm : int) -> void:
 func CoinsReceived(Amm : int)-> void:
 	CoinsGot = min(20, CoinsGot + Amm)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var offset = 0
 	for g in CoinsGot:
 		Helper.GetInstance().CallLater(OnCoinsGot, offset)
@@ -89,7 +89,7 @@ func SetFlapParam(value : float) -> void:
 	var mat = Flap.material as ShaderMaterial
 	mat.set_shader_parameter("x_rot", value)
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	TimesToPlay -= 1
 	
 	if (TimesToPlay > 0):

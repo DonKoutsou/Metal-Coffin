@@ -7,7 +7,7 @@ class_name DamageReductionCardModule
 @export var OnSuccesfullDeffenceModules : Array[CardModule]
 
 func GetDesc(Tier : int) -> String:
-	var Desc : String
+	var Desc = ""
 	if (ReductionPercent > 0):
 		Desc += "Reduce the damage of \n[color=#ffc315]{0}[/color] by {1}%".format([OffensiveCardModule.AtackTypes.keys()[CounterType].replace("_", " "), roundi(GetReductionPercent(Tier) * 100)])
 	if (OnSuccesfullDeffenceModules.size() > 0):
@@ -17,7 +17,7 @@ func GetDesc(Tier : int) -> String:
 	return Desc
 
 func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
-	var Desc : String
+	var Desc = ""
 	if (ReductionPercent > 0):
 		Desc += "Reduce the damage of \n[color=#ffc315]{0}[/color] by {1}%".format([OffensiveCardModule.AtackTypes.keys()[CounterType].replace("_", " "), roundi(GetReductionPercent(Tier) * 100)])
 	if (OnSuccesfullDeffenceModules.size() > 0):

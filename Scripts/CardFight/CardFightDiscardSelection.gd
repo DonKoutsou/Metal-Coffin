@@ -34,7 +34,7 @@ func SetCardsPick(User : BattleShipStats, Cards : Array[CardStats]) -> void:
 		
 	visible = true
 	
-func TargetSelected(C : Card, index : int) -> void:
+func TargetSelected(_C : Card, index : int) -> void:
 	for g in CardContainer.get_children():
 		g.queue_free()
 	visible = false

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_753m2"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_h2as2"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_lum0o"]
-[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Ship10.png" id="12_3g1ov"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="5_fl3ux"]
 [ext_resource type="Resource" uid="uid://bv1syjs12hg14" path="res://Resources/Items/ShipParts/Radar/ShortCheapRadar.tres" id="12_fl3ux"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="19_yq5fi"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="20_j18yl"]
@@ -155,10 +155,10 @@ CurrentValue = 0.0
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_lum0o")
-CaptainName = "T1"
+CaptainName = "Tanker"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_xdjf5")
-ShipIcon = ExtResource("12_3g1ov")
+ShipIcon = ExtResource("5_fl3ux")
 CaptainStats = Array[ExtResource("2_7cq8r")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_48ymf"), SubResource("Resource_ob426"), SubResource("Resource_yq5fi"), SubResource("Resource_j18yl"), SubResource("Resource_60vrc"), SubResource("Resource_l6v3e"), SubResource("Resource_i0q8q"), SubResource("Resource_xmrqi"), SubResource("Resource_fl3ux")])
 ShipCallsign = "T1"
 StartingItems = Array[ExtResource("3_h2as2")]([ExtResource("20_j18yl"), ExtResource("20_j18yl"), ExtResource("19_yq5fi"), ExtResource("19_yq5fi"), ExtResource("21_60vrc"), ExtResource("22_l6v3e"), ExtResource("22_l6v3e"), ExtResource("22_l6v3e"), ExtResource("22_l6v3e"), ExtResource("22_l6v3e"), ExtResource("22_l6v3e"), ExtResource("23_i0q8q"), ExtResource("23_i0q8q"), ExtResource("20_j18yl"), ExtResource("12_fl3ux")])

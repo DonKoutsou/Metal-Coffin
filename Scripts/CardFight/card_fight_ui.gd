@@ -89,9 +89,9 @@ func GetEnergyBar() -> SegmentedBar:
 func GetReserveBar() -> SegmentedBar:
 	return ReservesBar
 
-func ToggleEnergyVisibility(t : bool) -> void:
-	#EnergyBarParent.visible = t
-	pass
+#func ToggleEnergyVisibility(t : bool) -> void:
+	##EnergyBarParent.visible = t
+	#pass
 
 func _on_deck_button_pressed() -> void:
 	OnDeckPressed.emit()
@@ -108,7 +108,7 @@ func InserCardtoPlay(C : Card) -> void:
 	C.global_position = pos
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
-	Movetw.set_trans(Tween.TRANS_EXPO)
+	Movetw.set_trans(Tween.TRANS_QUAD)
 	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -15), 0.35)
 	
 	var ScaleTw = create_tween()

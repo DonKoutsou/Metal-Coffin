@@ -45,7 +45,7 @@ func GetLocationForPosition(Loc : Location) -> Vector2:
 func GetNodeForPosition(Loc : Location) -> Node2D:
 	return get_node(LocationPositions[Loc])
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (Engine.is_editor_hint()):
 		Camera.zoom = Vector2(Zoom, Zoom)
 		var vpsize = ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -65,4 +65,5 @@ enum Location {
 	WORKSHOP,
 	FUEL,
 	MERCH,
+	REPAIR,
 }

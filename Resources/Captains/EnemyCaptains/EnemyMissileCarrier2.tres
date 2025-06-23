@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_i0pba"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_en1ly"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="3_02dye"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_4bm2g"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_syr2p"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_02u6x"]
+[ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Ship11.png" id="5_1opqv"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="8_i6t26"]
 [ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="10_lhmlk"]
 [ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="13_1opqv"]
@@ -161,7 +161,7 @@ script = ExtResource("4_02u6x")
 CaptainName = "M2"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_i0pba")
-ShipIcon = ExtResource("3_02dye")
+ShipIcon = ExtResource("5_1opqv")
 CaptainStats = Array[ExtResource("2_en1ly")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_jc4ql"), SubResource("Resource_i6t26"), SubResource("Resource_1opqv"), SubResource("Resource_lhmlk"), SubResource("Resource_gwtb6"), SubResource("Resource_nxmgj"), SubResource("Resource_yjsxi"), SubResource("Resource_5yg2s"), SubResource("Resource_2dbl5")])
 ShipCallsign = "M2"
 StartingItems = Array[ExtResource("3_4bm2g")]([ExtResource("14_1opqv"), ExtResource("8_i6t26"), ExtResource("13_i6t26"), ExtResource("13_1opqv"), ExtResource("14_i6t26"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("14_lhmlk"), ExtResource("15_1opqv")])

@@ -25,7 +25,7 @@ static func OnActionCompleted(Act : Action) -> void:
 	CompletedActions.append(Act)
 
 
-func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Control], InScreen : bool) -> void:
+func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Control], _InScreen : bool) -> void:
 	if (!ShowTutorials):
 		return
 	
@@ -149,6 +149,7 @@ enum Action{
 	LANDING,
 	TOWN_SHOP,
 	FUEL_SHOP,
+	REPAIR_SHOP,
 	MERCH_SHOP,
 	UPGRADE_SHOP,
 	FLEET_SEPARATION,

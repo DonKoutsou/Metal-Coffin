@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bahj28qps5ssw"]
+[gd_scene load_steps=12 format=3 uid="uid://bahj28qps5ssw"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
+[ext_resource type="PackedScene" uid="uid://d3irrnfaw10g4" path="res://Scenes/TownShop/RepairStation.tscn" id="5_otyss"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/WorkShop/work_shop.tscn" id="17_t244x"]
@@ -20,7 +21,7 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_oyy4e"]
 environment = SubResource("Environment_t244x")
 
-[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "PortBuffText", "MerchendiseButton", "WorkshopButton", "FuelButton")]
+[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "PortBuffText", "MerchendiseButton", "WorkshopButton", "FuelButton", "RepairButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,8 +36,10 @@ PortBuffText = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContai
 MerchendiseButton = NodePath("Button2")
 WorkshopButton = NodePath("Button3")
 FuelButton = NodePath("Button4")
+RepairButton = NodePath("Button5")
 MerchShopScene = ExtResource("17_vaeb3")
 FuelStorageScene = ExtResource("18_u4st4")
+RepairStationScene = ExtResource("5_otyss")
 WorkshopScene = ExtResource("17_t244x")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -84,7 +87,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
-text = "SHIPYARD"
+text = "WORKSHOP"
 
 [node name="Line2D" type="Line2D" parent="Button3"]
 show_behind_parent = true
@@ -103,9 +106,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
-text = "WORKSHOP"
+text = "FUEL STORAGE"
 
 [node name="Line2D" type="Line2D" parent="Button4"]
+show_behind_parent = true
+position = Vector2(0, 15)
+points = PackedVector2Array(0, 0, 0, 45.15)
+width = 2.0
+default_color = Color(1, 0.763983, 0.0812772, 1)
+
+[node name="Button5" type="Button" parent="." groups=["DigitalButtons"]]
+layout_mode = 2
+offset_left = 462.0
+offset_top = 528.0
+offset_right = 762.0
+offset_bottom = 561.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "REPAIR SHOP"
+
+[node name="Line2D" type="Line2D" parent="Button5"]
 show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
@@ -224,6 +246,7 @@ pitch_scale = 4.0
 bus = &"MapSounds"
 
 [connection signal="pressed" from="Button2" to="." method="OnMunitionShopToggled"]
-[connection signal="pressed" from="Button3" to="." method="OnRefuelShopPressed"]
-[connection signal="pressed" from="Button4" to="." method="OnUpgradeShopPressed"]
+[connection signal="pressed" from="Button3" to="." method="OnUpgradeShopPressed"]
+[connection signal="pressed" from="Button4" to="." method="OnRefuelShopPressed"]
+[connection signal="pressed" from="Button5" to="." method="OnRepairStationPressed"]
 [connection signal="pressed" from="HBoxContainer2/Button" to="." method="_on_button_pressed"]

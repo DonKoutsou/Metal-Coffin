@@ -27,7 +27,7 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 draw_center = false
-border_width_bottom = 961
+border_width_bottom = 730
 border_color = Color(0.0053553, 0.00773166, 0.0116329, 1)
 border_blend = true
 corner_detail = 1
@@ -56,7 +56,6 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")
 
 [node name="CaptainIcon" type="TextureRect" parent="PanelContainer"]
-self_modulate = Color(1, 1, 1, 0.414)
 show_behind_parent = true
 layout_mode = 2
 size_flags_vertical = 3

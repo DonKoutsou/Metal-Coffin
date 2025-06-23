@@ -10,7 +10,7 @@ func TestCard(Mod : CardModule) -> bool:
 		return true
 	return false
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(_Tier : int) -> String:
 	return "Put one {0} card from the deck to you hand.".format([CardType.keys()[CardToSpawn]])
 
 enum CardType {

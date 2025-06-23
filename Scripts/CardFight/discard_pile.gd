@@ -29,7 +29,7 @@ func OnCardRemoved() -> void:
 	DeckHoverTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	DeckHoverTween.tween_property(self,"scale", Vector2.ONE, 0.2)
 
-func OnCardDiscarded(CardPos : Vector2) -> void:
+func OnCardDiscarded(_CardPos : Vector2) -> void:
 	#var C = CardThing.instantiate() as CardViz
 	#C.Target = self
 	#add_child(C)

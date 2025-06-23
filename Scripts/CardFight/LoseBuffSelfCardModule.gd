@@ -3,7 +3,7 @@ class_name LoseBuffSelfModule
 
 @export var StatToStrip : Stat
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(_Tier : int) -> String:
 	var TextColor : String
 	if (StatToStrip == Stat.FIREPOWER):
 		TextColor = "color=#f35033"

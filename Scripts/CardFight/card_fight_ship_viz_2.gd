@@ -20,6 +20,7 @@ class_name CardFightShipViz2
 @export var SPDLabel : RichTextLabel
 @export var HasMovePanel : Control
 @export var ActionParent : Control
+@export var ShadowPivot : Control
 
 @export var DefBuff : GPUParticles2D
 @export var DefDeBuff : GPUParticles2D
@@ -54,11 +55,19 @@ func Destroy() -> void:
 	var ShadowPosTween = create_tween()
 	ShadowPosTween.set_ease(Tween.EASE_IN)
 	ShadowPosTween.set_trans(Tween.TRANS_QUAD)
-	ShadowPosTween.tween_property(ShipIcon.get_child(0), "position", Vector2(32.25, 0), 3)
+	ShadowPosTween.tween_property(ShadowPivot.get_child(0), "position", Vector2(0, 0), 3)
 	var ShadowScaleTween = create_tween()
 	ShadowScaleTween.set_ease(Tween.EASE_IN)
 	ShadowScaleTween.set_trans(Tween.TRANS_QUAD)
-	ShadowScaleTween.tween_property(ShipIcon.get_child(0), "scale", Vector2(1,1), 3)
+	ShadowScaleTween.tween_property(ShadowPivot.get_child(0), "scale", Vector2(1,1), 3)
+	var ShadowPivotRotTween = create_tween()
+	ShadowPivotRotTween.set_ease(Tween.EASE_IN)
+	ShadowPivotRotTween.set_trans(Tween.TRANS_QUAD)
+	ShadowPivotRotTween.tween_property(ShadowPivot, "rotation_degrees", -RandomRot, 3)
+	var ShadowRotTween = create_tween()
+	ShadowRotTween.set_ease(Tween.EASE_IN)
+	ShadowRotTween.set_trans(Tween.TRANS_QUAD)
+	ShadowRotTween.tween_property(ShadowPivot.get_child(0), "rotation_degrees", RandomRot, 3)
 	ToggleFire(false)
 	ToggleDefBuff(false, 1)
 	ToggleDefDeBuff(false)
@@ -104,7 +113,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	Fr = Friendly
 	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
-	ShipIcon.get_child(0).texture = S.ShipIcon
+	ShadowPivot.get_child(0).texture = S.ShipIcon
 	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	HullBar.max_value = S.Hull
 	ShieldBar.max_value = S.MaxShield
@@ -116,7 +125,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([roundi(S.GetDef())])
 	
 	ShipIcon.flip_v = !Friendly
-	ShipIcon.get_child(0).flip_v = !Friendly
+	ShadowPivot.get_child(0).flip_v = !Friendly
 	
 	if (Friendly):
 		$HBoxContainer.move_child($HBoxContainer/VBoxContainer, 0)

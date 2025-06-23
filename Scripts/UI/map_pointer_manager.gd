@@ -167,7 +167,7 @@ func FixLabelClipping() -> void:
 					return
 
 var Circles : Array[PackedVector2Array] = []
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	FixLabelClipping()
 	Circles.clear()
 	
@@ -184,7 +184,7 @@ func _physics_process(delta: float) -> void:
 			if (ship.VisualContactCountdown < 10):
 				Marker.UpdateVisualContactProgress(ship.VisualContactCountdown)
 			if (EnemyDebug):
-				Marker.global_position = ship.global_position
+				Marker.global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
 				Marker.UpdateSpeed(ship.GetShipSpeed())
 				
 				Marker.ClearTime()
@@ -201,7 +201,7 @@ func _physics_process(delta: float) -> void:
 				if (ship.Destroyed):
 					Marker.SetMarkerDetails("Ship Debris", "" ,0)
 				else: if (ship.VisibleBy.size() > 0):
-					Marker.global_position = ship.global_position
+					Marker.global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
 					Marker.UpdateSpeed(ship.GetShipSpeed())
 					Marker.ClearTime()
 					Marker.SetTime()
@@ -267,11 +267,10 @@ func GetSaveData() -> SaveData:
 	return Dat
 
 func LoadSaveData(Data : SaveData) -> void:
-	var Ships = get_tree().get_nodes_in_group("Enemy")
+	var Enemies = get_tree().get_nodes_in_group("Enemy")
 	for D : SD_ShipMarker in Data.Datas:
 		var SavedName = D.ShipName
-		var Ship : HostileShip
-		for S : HostileShip in Ships:
+		for S : HostileShip in Enemies:
 			var Name = S.GetShipName()
 			if (SavedName == Name):
 				var marker = AddShip(S, false, false)

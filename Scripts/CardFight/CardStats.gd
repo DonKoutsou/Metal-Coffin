@@ -70,10 +70,10 @@ func IsSame(C : CardStats) -> bool:
 
 enum WeaponType{
 	NONE,
-	MG100mm,
+	MG_100mm,
 	ML,
 	COIL,
-	MG180mm,
+	MG_180mm,
 	DRONE_DOCK,
 	FLAME_THROWER,
 }

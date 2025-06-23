@@ -85,9 +85,9 @@ func _ready() -> void:
 		
 func _draw() -> void:
 	if (ShowFuelRange):
-		var range = GetFuelRange()
-		draw_circle(Vector2.ZERO, range, Color(0.3, 0.7, 0.915), false, 2.0 / CamZoom, true)
-		draw_line(Vector2(max(0, range - 50), 0), Vector2(range, 0), Color(0.3, 0.7, 0.915), 2.0 / CamZoom, true)
+		var FRange = GetFuelRange()
+		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 2.0 / CamZoom, true)
+		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 2.0 / CamZoom, true)
 
 func Refuel() -> void:
 	if (Altitude == 0 and !Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
@@ -177,7 +177,6 @@ func _UpdateShipIcon(Tex : Texture2D) -> void:
 	ParalaxMulti = 500 / Tex.get_size().x
 	ShipSprite.texture = Tex
 	UpdateAltitude(Altitude)
-	
 #///////////////////////////////////////////////
 #███████ ██   ██ ██ ██████       ██████  ██████  ███    ██ ████████ ██████   ██████  ██      ██      ██ ███    ██  ██████  
 #██      ██   ██ ██ ██   ██     ██      ██    ██ ████   ██    ██    ██   ██ ██    ██ ██      ██      ██ ████   ██ ██       

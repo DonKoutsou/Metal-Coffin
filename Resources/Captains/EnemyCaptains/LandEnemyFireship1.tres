@@ -155,7 +155,7 @@ CurrentValue = 0.0
 [resource]
 resource_local_to_scene = true
 script = ExtResource("5_mwjps")
-CaptainName = "LF1"
+CaptainName = "Land Unit"
 CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_t248c")
 ShipIcon = ExtResource("3_kdirt")

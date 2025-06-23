@@ -135,7 +135,8 @@ Camera = NodePath("Camera2D")
 LocationPositions = Dictionary[int, NodePath]({
 0: NodePath("ParallaxLayer3/Parallax2D/WorkShop"),
 1: NodePath("ParallaxLayer3/Parallax2D/Fuel"),
-2: NodePath("ParallaxLayer3/Parallax2D/Merch")
+2: NodePath("ParallaxLayer3/Parallax2D/Merch"),
+3: NodePath("ParallaxLayer3/Parallax2D/Repair")
 })
 
 [node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
@@ -251,16 +252,22 @@ scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("7_ly0hr")
 
 [node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
-position = Vector2(723, 446)
+position = Vector2(522, 437)
 
 [node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop"]
-position = Vector2(-60, 162)
+position = Vector2(105, 179)
 
 [node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
 position = Vector2(109, 452)
 
 [node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel"]
 position = Vector2(-102, 133)
+
+[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+position = Vector2(940, 516)
+
+[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair"]
+position = Vector2(-132, 101)
 
 [node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
 position = Vector2(1150, 378)

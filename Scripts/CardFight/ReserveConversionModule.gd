@@ -3,7 +3,7 @@ class_name ReserveConversionModule
 
 @export var ConversionMultiplication : Curve
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(_Tier : int) -> String:
 	#if (AOE):
 		#return "Coverst remaining Energy Reserve to double the Energy to team"
 	return "Coverts remaining [color=#ffc315]Reserve[/color] to [color=#ffc315]Energy[/color]"

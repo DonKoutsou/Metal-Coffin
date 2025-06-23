@@ -14,7 +14,7 @@ func _ready() -> void:
 func SetEnemies(EnemyList : Array[BattleShipStats], AllowMove : bool = false) -> void:
 	for g in EnemyList:
 		var b = ShipVizScene.instantiate() as CardFightShipViz
-		b.SetStats(g, false)
+		b.SetStats(g)
 		ShipVizContainer.add_child(b)
 		
 		b.connect("pressed", TargetSelected.bind(g))

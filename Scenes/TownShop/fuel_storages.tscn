@@ -1,22 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6pyjquo47hnr"]
+[gd_scene load_steps=5 format=3 uid="uid://c6pyjquo47hnr"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_ac0ke"]
 [ext_resource type="Script" uid="uid://y4a4umcapt0y" path="res://Scripts/TownShop/fuel_storages.gd" id="2_tywce"]
-[ext_resource type="PackedScene" uid="uid://c7ojj8un8chim" path="res://Scenes/TownShop/ShipRepairUI.tscn" id="3_4cp6u"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_tywce"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_jvdwb"]
-[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="5_4cp6u"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-
-[node name="Fuel Storages" type="PanelContainer" node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar", "RepairUIPlacement")]
+[node name="Fuel Storages" type="PanelContainer" node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,61 +14,22 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_ac0ke")
 script = ExtResource("2_tywce")
-FuelPriceLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
-CurrentFuelLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
-FuelBar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ProgressBar")
-RepairUI = ExtResource("3_4cp6u")
-RepairUIPlacement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/InputScroll/VBoxContainer")
+FuelPriceLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
+CurrentFuelLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
+FuelBar = NodePath("VBoxContainer/VBoxContainer/ProgressBar")
 PlayerWallet = ExtResource("3_tywce")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Hull Integrity"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("1_ac0ke")
-
-[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
-script = ExtResource("5_4cp6u")
-metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/InputScroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(19.345, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Fuel Reserves"
@@ -87,34 +37,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("1_ac0ke")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FuelAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="FuelAmm" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "4214"
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -123,18 +60,18 @@ theme_override_font_sizes/font_size = 16
 text = "tons"
 horizontal_alignment = 2
 
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(6.86, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jvdwb")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -142,23 +79,21 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Ton Price:"
 
-[node name="TonPrice" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="TonPrice" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "202139"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
+size_flags_vertical = 4
 value = 27.12
-fill_mode = 3
 show_percentage = false
 
 [node name="LeaveFuelStorage" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Leave"
 
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
 [connection signal="pressed" from="VBoxContainer/LeaveFuelStorage" to="." method="_on_leave_fuel_storage_pressed"]

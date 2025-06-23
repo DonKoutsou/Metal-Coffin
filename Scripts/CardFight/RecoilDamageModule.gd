@@ -3,7 +3,7 @@ class_name RecoilDamageModule
 
 @export var RecoilPercent : int
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(_Tier : int) -> String:
 	return "[color=#ffc315]{0}%[/color] recoil damage.".format([RecoilPercent])
 
 

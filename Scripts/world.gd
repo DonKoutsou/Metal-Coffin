@@ -297,7 +297,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
 	
-func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
+func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 	var AllUnits : Array[MapShip]
 	AllUnits.append_array(FighingFriendlyUnits)
 	AllUnits.append_array(FighingEnemyUnits)
@@ -362,11 +362,9 @@ func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
 		Instigator = ControlledShip.Command
-		
-	var spot = Instigator.CurrentPort as MapSpot
 
 	if (Instigator.Altitude > 0):
-		PopUpManager.GetInstance().DoFadeNotif("Can't open hatch while ship is on floating")
+		PopUpManager.GetInstance().DoFadeNotif("Can't open hatch while ship is floating")
 		return
 	
 	OnShipLanded(Instigator)

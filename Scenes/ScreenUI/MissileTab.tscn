@@ -239,17 +239,17 @@ expand_mode = 1
 
 [node name="MissileSelectLight" parent="Control/Control" instance=ExtResource("15_pknbg")]
 layout_mode = 0
-offset_left = 104.0
-offset_top = -33.0
-offset_right = 144.0
-offset_bottom = 7.0
+offset_left = 120.0
+offset_top = -23.0
+offset_right = 140.0
+offset_bottom = -3.0
 
 [node name="AngleSelectLight" parent="Control/Control" instance=ExtResource("15_pknbg")]
 layout_mode = 0
-offset_left = 104.0
-offset_top = -3.0
-offset_right = 144.0
-offset_bottom = 37.0
+offset_left = 120.0
+offset_top = 7.0
+offset_right = 140.0
+offset_bottom = 27.0
 
 [node name="RangeText" type="Label" parent="Control/Control"]
 texture_filter = 6
@@ -300,10 +300,10 @@ scale = Vector2(0.529254, 0.369254)
 [node name="TouchStopper" type="Control" parent="Control"]
 layout_mode = 2
 anchors_preset = 0
-offset_left = -282.0
-offset_top = -121.0
-offset_right = 244.0
-offset_bottom = 51.0
+offset_left = -271.0
+offset_top = -119.0
+offset_right = 255.0
+offset_bottom = 53.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Control/Control/LaunchButton" to="." method="OnLaunchPressed"]

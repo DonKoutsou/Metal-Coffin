@@ -63,7 +63,7 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 	C2.custom_minimum_size.y = 150
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
 	var midpoint = get_viewport_rect().size/2
 	var Closest : Control

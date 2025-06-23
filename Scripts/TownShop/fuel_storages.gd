@@ -5,8 +5,6 @@ class_name TownFuelStorages
 @export var FuelPriceLabel : Label
 @export var CurrentFuelLabel : Label
 @export var FuelBar : ProgressBar
-@export var RepairUI : PackedScene
-@export var RepairUIPlacement : Node
 @export var PlayerWallet : Wallet
 
 var FuelPricePerTon : float
@@ -18,7 +16,7 @@ var PlayerBoughtFuel : float = 0
 
 signal FuelTransactionFinished(BoughtFuel : float)
 
-func Init(BoughtFuel : float, FuelPrice : float, HasRepair : bool, LandedShips : Array[MapShip]) -> void:
+func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip]) -> void:
 	PlayerBoughtFuel = BoughtFuel
 	FuelPricePerTon = FuelPrice
 
@@ -27,11 +25,6 @@ func Init(BoughtFuel : float, FuelPrice : float, HasRepair : bool, LandedShips :
 	FuelBar.max_value = PlMaxFuel
 	FuelBar.value = PlFuel + BoughtFuel
 	FuelPriceLabel.text = var_to_str(FuelPricePerTon)
-	
-	for g in LandedShips:
-		var RUI = RepairUI.instantiate() as ShipRepairUI
-		RepairUIPlacement.add_child(RUI)
-		RUI.Init(g.Cpt, HasRepair)
 
 func SetFuelData(Ships : Array[MapShip]):
 	for g in Ships:
@@ -79,7 +72,7 @@ func UpdateFuelBar(AddedFuel : float):
 func FuelBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var rel = event.relative
-		var AddedFuel = roundi(((-rel.y / 3) * (FuelBar.max_value / 100)))
+		var AddedFuel = roundi(((rel.x / 3) * (FuelBar.max_value / 100)))
 		UpdateFuelBar(AddedFuel)
 
 func _on_leave_fuel_storage_pressed() -> void:

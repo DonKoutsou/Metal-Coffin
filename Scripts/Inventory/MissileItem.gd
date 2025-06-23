@@ -25,16 +25,18 @@ func GetMerchItemDesc(Ships : Array[MapShip]) -> String:
 			UsableOn.append(g)
 	
 	Desc += "CAN BE USED BY : [color=#ffc315]"
-	if (UsableOn.size() > 0):
-		for g in UsableOn:
-			Desc += g.Cpt.GetCaptainName() + ", "
+	
+	for g in UsableOn.size():
+		Desc += UsableOn[g].Cpt.GetCaptainName()
+		if (g < UsableOn.size() - 1):
+			Desc += ", "
 			
 	Desc += "[/color]\n"
 		
 	if (Type == 0):
-		Desc += "\n{0}\n[color=#ffc315]Range[/color] : {1} km\n[color=#ffc315]Speed[/color] : {2} km/h\n[color=#ffc315]Damage[/color] : {3}\n[color=#ffc315]Type[/color] : {4}".format([ItemDesc, Distance, roundi(Speed), Damage, MissileType.find_key(Type)])
+		Desc += "\n[color=#ffc315]Range[/color] : {1} km\n[color=#ffc315]Speed[/color] : {2} km/h\n[color=#ffc315]Damage[/color] : {3}\n[color=#ffc315]Type[/color] : {4}".format([ItemDesc, Distance, roundi(Speed), Damage, MissileType.find_key(Type)])
 	else :
-		Desc += "\n{0} \n[color=#ffc315]Type[/color] : {1}".format([ItemDesc, MissileType.find_key(Type)])
+		Desc += "\n[color=#ffc315]Type[/color] : {1}".format([ItemDesc, MissileType.find_key(Type)])
 
 	return Desc
 enum MissileType

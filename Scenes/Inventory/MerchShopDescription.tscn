@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://blgxtaj45pjfs"]
+[gd_scene load_steps=9 format=3 uid="uid://blgxtaj45pjfs"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_uhv8j"]
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_1gff0"]
@@ -10,16 +10,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
 content_margin_left = 4.0
 content_margin_right = 4.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
-bg_color = Color(0.066982, 0.133257, 0.137998, 1)
-skew = Vector2(0.1, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhv8j"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
@@ -69,7 +59,7 @@ mouse_filter = 2
 [node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+theme_override_styles/panel = SubResource("StyleBoxFlat_uhv8j")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

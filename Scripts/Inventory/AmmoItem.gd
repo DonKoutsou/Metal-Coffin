@@ -17,11 +17,12 @@ func GetMerchItemDesc(Ships : Array[MapShip]) -> String:
 	
 	var UsableOnText = "CAN BE USED BY : [color=#ffc315]"
 	
-	if (UsableOn.size() > 0):
-		for g in UsableOn:
-			UsableOnText += g.Cpt.GetCaptainName() + ", "
+	for g in UsableOn.size():
+		UsableOnText += UsableOn[g].Cpt.GetCaptainName()
+		if (g < UsableOn.size() - 1):
+			UsableOnText += ", "
 			
 	UsableOnText += "[/color]\n"
 		
-	var Desc = "[color=#ffc315]REQUIRES {0}[/color]\n{2}\n{1}".format([CardStats.WeaponType.keys()[WType] ,ItemDesc, UsableOnText])
+	var Desc = "[color=#ffc315]REQUIRES {0}[/color]\n{2}".format([CardStats.WeaponType.keys()[WType] ,ItemDesc, UsableOnText])
 	return Desc
