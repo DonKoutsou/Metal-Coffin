@@ -49,7 +49,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_1apas"]
 script = ExtResource("2_rura2")
 StatName = 4
-StatBase = 150.0
+StatBase = 120.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -90,7 +90,7 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 [sub_resource type="Resource" id="Resource_0l4hh"]
 script = ExtResource("2_rura2")
 StatName = 10
-StatBase = 1.0
+StatBase = 2.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -143,7 +143,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_04s81"]
 script = ExtResource("2_rura2")
 StatName = 15
-StatBase = 200.0
+StatBase = 120.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -159,7 +159,6 @@ CurrentValue = 0.0
 [resource]
 script = ExtResource("2_mv381")
 CaptainName = "Dimitry"
-CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_0l4hh")
 ShipIcon = ExtResource("3_0gtvo")
 CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), SubResource("Resource_v6t2m"), SubResource("Resource_g5q3n"), SubResource("Resource_qsyx2"), SubResource("Resource_1apas"), SubResource("Resource_8oau1"), SubResource("Resource_g3wpv"), SubResource("Resource_8tqmo"), SubResource("Resource_vxgw7"), SubResource("Resource_0l4hh"), SubResource("Resource_dn4w7"), SubResource("Resource_b7sqh"), SubResource("Resource_jhil0"), SubResource("Resource_qf4jf"), SubResource("Resource_3cfo8"), SubResource("Resource_04s81"), SubResource("Resource_epxoh")])

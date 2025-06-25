@@ -198,6 +198,7 @@ func AccelerationChanged(value: float) -> void:
 	else : if (Altitude != 10000 and !TakingOff):
 		TakeoffStarted.emit()
 		TakingOff = true
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LIFTOFF)
 
 	if (value > 0):
 		if (GetFuelRange() <= 0):
@@ -418,7 +419,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 	if (Parent is MapSpot):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.LANDING)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
-			ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure.", [World.GetInstance().GetMap().GetScreenUi().LandButton], false)
+			ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [World.GetInstance().GetMap().GetScreenUi().LandButton, World.GetInstance().GetMap().GetScreenUi().HatchButton], false)
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
 		for g in GetDroneDock().GetDockedShips():
@@ -477,13 +478,12 @@ func GetFuelStats() -> Dictionary[String, float]:
 		total_fuel += ship_fuel
 		total_maxfuel += ship_maxfuel
 		inverse_ef_sum += 1.0 / (ship_efficiency - ship_weight / 40)
-		
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
 	Stats["CurrentFuel"] = total_fuel
 	Stats["MaxFuel"] = total_maxfuel
-	Stats["FleetRange"] = total_fuel * effective_efficiency / fleetsize
+	Stats["FleetRange"] = (50 * pow(total_fuel * effective_efficiency, 0.55)) / fleetsize
 	return Stats
 
 func GetFleet() -> Array[MapShip]:
@@ -520,7 +520,7 @@ func GetFuelRange() -> float:
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
-	return total_fuel * effective_efficiency / fleetsize
+	return(50 * pow(total_fuel * effective_efficiency, 0.55)) / fleetsize
 	
 func GetBattleStats() -> BattleShipStats:
 	

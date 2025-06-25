@@ -70,7 +70,7 @@ func OnRefuelShopPressed() -> void:
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
-		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] and [color=#ffc315]hull[/color] condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
+		ActionTracker.GetInstance().ShowTutorial("Fuel Storage", "In the Fuel Storage you can buy fuel for your fleet.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships.\nEnsure your fleet is fully refueled before embarking on your next mission!", [], true)
 
 func OnRepairStationPressed() -> void:
 	var Scene = RepairStationScene.instantiate() as RepairStation
@@ -80,7 +80,7 @@ func OnRepairStationPressed() -> void:
 	#Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.REPAIR_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.REPAIR_SHOP)
-		ActionTracker.GetInstance().ShowTutorial("Shipyard", "Here in the Shipyard, you can repair and refuel.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] and [color=#ffc315]hull[/color] condition of you landed ships.\nEnsure your fleet is fully refueled and all necessary repairs are completed before embarking on your next mission!", [], true)
+		ActionTracker.GetInstance().ShowTutorial("Repair Bay", "In the Repair Bay you can buy repair parts for your fleet.\nYou can see the hull condition of each of your ships and also their repair price. Buying all the nececary repair parts will allow the ship to slowly repair itself.\nAfter buying the parts the fleet can depart and keep repairing on another port, bought ship parts stay with the ship.", [], true)
 
 
 func FuelExchangeFinished(Fuel : float) -> void:

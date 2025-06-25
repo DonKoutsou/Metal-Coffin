@@ -42,7 +42,7 @@ func _ready() -> void:
 static func GetInstance() -> UISoundMan:
 	return Instance
 
-func AddSelf(But : Button) -> void:
+func AddSelf(But : Control) -> void:
 	if (But.is_in_group("Buttons")):
 		if (But.is_connected("button_down", OnButtonClicked)):
 			return
@@ -55,7 +55,7 @@ func AddSelf(But : Button) -> void:
 		But.connect("button_down", OnDigitalButtonClicked)
 		But.connect("mouse_entered", OnButtonHovered)
 
-func RemoveSelf(But : Button) -> void:
+func RemoveSelf(But : Control) -> void:
 	if (But.is_in_group("Buttons")):
 		if (!But.is_connected("button_down", OnButtonClicked)):
 			return

@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("2_1xl8p")
 Cpt = ExtResource("1_fmd77")
-Cost = 50
+Cost = 25
 MaxAmmInFleet = 7
 DontGenerateBefore = 0
-SpawnAlone = true

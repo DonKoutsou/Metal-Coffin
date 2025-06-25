@@ -89,16 +89,18 @@ func InitialiseShip() -> void:
 		ElintShape.queue_free()
 	else:
 		UpdateELINTTRange(ElintRange)
-
-	UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 	
+	var VisRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+
 	if (Patrol or Convoy):
 		if (Command == null):
 			FigureOutPath()
 	else:
+		VisRange = max(VisRange / 2, 90)
 		SetSpeed(0)
 		UseDefaultBehavior = true
 	
+	UpdateVizRange(VisRange)
 	#TogglePause(SimulationManager.IsPaused())
 
 func _physics_process(delta: float) -> void:
@@ -464,7 +466,7 @@ var VisualContactCountdown = 10
 func GarissonVisualContact(Ship : MapShip) -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.GARISSION_ALARM)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.GARISSION_ALARM)
-		ActionTracker.GetInstance().ShowTutorial("Surprise Atack", "When entering enemy cities you are given a small time frame where you can surprise the enemy, that time is signified by the red bar above the enemies ship marker. If the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected", [], true)
+		ActionTracker.GetInstance().ShowTutorial("Surprise Atack", "When entering enemy cities you are given a small time frame where you can surprise the enemy\n That time is signified by the red bar bellow the enemie's ship marker.\nIf the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected", [], true)
 		
 	if (GarrissonVisualContacts.size() == 0):
 		#if (Patrol):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=36 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -20,6 +20,7 @@
 [ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="18_a2ujk"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
+[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="19_x3wib"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
 [ext_resource type="Script" uid="uid://c2ufjbkhk6v0q" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
@@ -138,7 +139,7 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "Ground") groups=["Clock"]]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "Ground", "ClickSound") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
@@ -146,6 +147,7 @@ script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
 Cloud = NodePath("Clouds")
 Ground = NodePath("Ground")
+ClickSound = NodePath("AudioStreamPlayer")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 z_index = -3
@@ -186,6 +188,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ujsvm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
+stream = ExtResource("19_x3wib")
+volume_db = -5.0
+pitch_scale = 1.7
+bus = &"MapSounds"
 
 [node name="PlayerShip" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("17_21a23")]
 position = Vector2(126.5, 154.5)

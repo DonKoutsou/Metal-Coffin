@@ -8,6 +8,7 @@ class_name ScreenUI
 @export var Steer : SteeringWheelUI
 @export var MissileUI : MissileTab
 @export var LandButton : TextureButton
+@export var HatchButton : TextureButton
 @export var ShipDockButton : TextureButton
 @export var RegroupButton : TextureButton
 @export var SimulationButton : TextureButton
@@ -240,6 +241,7 @@ func _on_speed_simulation_toggled(toggled_on: bool) -> void:
 
 func SpeedUpdated(t : bool) -> void:
 	SpeedSimulationButton.set_pressed_no_signal(t)
+	SpeedSimulationButton.button_down.emit()
 
 func Inventory_Pressed() -> void:
 	if (ShipTradeInProgress):

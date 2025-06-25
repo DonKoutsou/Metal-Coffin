@@ -576,6 +576,7 @@ func SpawnFin() -> void:
 	call_deferred("FGenerationFinished")
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
+	print("Spawning for {0}".format([Spot.GetSpotName()]))
 	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy)
 	var SpawnedFleet = []
 	var SpawnedCallsigns = []

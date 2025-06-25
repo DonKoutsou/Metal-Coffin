@@ -1,13 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=21 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_b4kau"]
-[ext_resource type="PackedScene" uid="uid://b84obdsc4r2vk" path="res://Scenes/InScreenUI/fps_counter.tscn" id="3_y1d86"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/simulation_notification.tscn" id="5_g51f2"]
-[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="5_hx3hn"]
-[ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="6_awabe"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
 [ext_resource type="PackedScene" uid="uid://wmmp1fq7nbhf" path="res://Scenes/ScreenUI/current_ship_text.tscn" id="8_avpxw"]
@@ -20,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_rwdyb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="18_u111i"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
+[ext_resource type="PackedScene" uid="uid://dtym0y7dgx7iv" path="res://Scenes/ScreenUI/ZoomLevel.tscn" id="21_u111i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u111i"]
 bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
@@ -79,40 +77,12 @@ grow_vertical = 1
 layout_mode = 1
 offset_left = -1.0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Control3"]
-visible = false
-modulate = Color(1, 0.763983, 0.0812772, 1)
+[node name="VBoxContainer2" parent="Control3" instance=ExtResource("21_u111i")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -145.5
-offset_right = 145.5
-offset_bottom = 32.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="Control3/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("5_hx3hn")
-
-[node name="FpsCounter" parent="Control3/VBoxContainer" instance=ExtResource("3_y1d86")]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "FPS : 60.0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ZoomLevel" type="Label" parent="Control3/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Zoom Level : 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("6_awabe")
+offset_left = 0.0
+offset_top = 157.0
+offset_right = 79.0
+offset_bottom = -157.0
 
 [node name="PanelContainer2" type="PanelContainer" parent="Control3"]
 layout_mode = 1

@@ -3,7 +3,6 @@ extends Resource
 class_name Captain
 
 @export var CaptainName : String
-@export var CaptainBio : String
 @export var CaptainPortrait : Texture
 @export var ShipIcon : Texture
 @export var CaptainStats : Array[ShipStat]
@@ -208,7 +207,6 @@ func GetStatCurrentValue(StatN : STAT_CONST.STATS) -> float:
 func CopyStats(Cpt : Captain) -> void:
 	CaptainName = Cpt.CaptainName
 	TempName = Cpt.TempName
-	CaptainBio = Cpt.CaptainBio
 	CaptainPortrait = Cpt.CaptainPortrait
 	ShipIcon = Cpt.ShipIcon
 	ShipCallsign = Cpt.ShipCallsign

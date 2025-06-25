@@ -139,7 +139,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_dgaf7"]
 script = ExtResource("2_7jpyg")
 StatName = 15
-StatBase = 200.0
+StatBase = 120.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -156,7 +156,6 @@ CurrentValue = 0.0
 resource_local_to_scene = true
 script = ExtResource("5_mwjps")
 CaptainName = "Land Unit"
-CaptainBio = "Shithead"
 CaptainPortrait = ExtResource("1_t248c")
 ShipIcon = ExtResource("3_kdirt")
 CaptainStats = Array[ExtResource("2_7jpyg")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_1kxyg"), SubResource("Resource_v0j1y"), SubResource("Resource_6spqc"), SubResource("Resource_yctwn"), SubResource("Resource_yduiv"), SubResource("Resource_dogpg"), SubResource("Resource_05tkb"), SubResource("Resource_dgaf7"), SubResource("Resource_ntqid")])

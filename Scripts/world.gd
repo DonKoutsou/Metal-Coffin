@@ -459,7 +459,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 		if (g == ActionTracker.Action.RECRUIT and!ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
 			TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
-			var text = "Managing your fleet is key to a successful campaign.\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\nSwitch between fleets with the Switch Ship button."
+			var text = "Managing your fleet is key to a successful campaign.\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\nSelect a different ship to control by clicking on their name on the right part of the screen."
 			ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
 			
 	TutorialsToShow.clear()

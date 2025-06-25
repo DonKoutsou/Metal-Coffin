@@ -125,7 +125,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 theme = ExtResource("1_ca22g")
 theme_override_font_sizes/font_size = 16
-text = "REPAIR SHOP"
+text = "REPAIR BAY"
 
 [node name="Line2D" type="Line2D" parent="Button5"]
 show_behind_parent = true

@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("4_7i8k6")
 UpgradeName = 6
-UpgradeAmmount = 800.0
+UpgradeAmmount = 500.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 

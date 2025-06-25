@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func SetShip(Ship : MapShip) -> void:
 	ContainedShip = Ship
-	SetVisuals(Ship.Cpt)
+	SetVisuals2(Ship.Cpt)
 
 func SetCpt(Cpt : Captain) -> void:
 	ContainedCaptain = Cpt

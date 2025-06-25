@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtym0y7dgx7iv"]
+
+[ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="1_a2q7o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxxxr"]
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_detail = 1
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1b55r"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2q7o"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="VBoxContainer" type="PanelContainer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 138.0
+offset_right = 68.0
+offset_bottom = -138.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vxxxr")
+script = ExtResource("1_a2q7o")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(21.41, 0)
+layout_mode = 2
+theme_override_constants/line_spacing = 4
+text = "ZOOM LEVEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "4x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1b55r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a2q7o")
+value = 72.84
+fill_mode = 3
+show_percentage = false

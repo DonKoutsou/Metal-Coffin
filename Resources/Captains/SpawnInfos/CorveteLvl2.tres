@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://clant8bk2jbqh"]
+
+[ext_resource type="Resource" uid="uid://bbwgf8gho2f6u" path="res://Resources/Captains/EnemyCaptains/EnemyCorvete2.tres" id="1_cdb54"]
+[ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_risto"]
+
+[resource]
+script = ExtResource("2_risto")
+Cpt = ExtResource("1_cdb54")
+Cost = 50
+MaxAmmInFleet = 7
+DontGenerateBefore = 0

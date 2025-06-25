@@ -29,7 +29,11 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 				FuelToConsume += dronefuel
 		
 		var Weight = MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-		FuelToConsume += Speed / (MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - Weight / 40)* TickRate * SimulationSpeed
+		
+		#var eff_eff = MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - (Weight / 40.0)
+		#var ShipRange = roundi(50 * pow(FuelTank * (FuelEfficiency - (Weight / 40.0)), 0.55))
+		
+		FuelToConsume += pow(Speed / 50, 1 / 0.55) / (MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - (MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT) / 40)) * TickRate * SimulationSpeed
 		if (MainShipFuelReserves - FuelToConsume > 0):
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelToConsume)
 		else: if (DroneD.DronesHaveFuel(FuelToConsume)):

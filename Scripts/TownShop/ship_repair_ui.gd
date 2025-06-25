@@ -14,6 +14,8 @@ var PlHull : float = 0
 var PlMaxHull : float = 0
 var CurrentShip : Captain
 
+var SpentFunds : float
+
 func Init(Ship : Captain, HasRepair : bool) -> void:
 	CaptainNameLabel.text = Ship.GetCaptainName()
 	CurrentShip = Ship
@@ -48,6 +50,18 @@ func UpdateRepairBar(AddedRepair : float):
 	CurrentShip.Repair_Parts += AddedRepair
 	
 	var MoneySpent = AddedRepair * RepairPricePerUnit
+	if (MoneySpent > 0):
+		SpentFunds += MoneySpent
+		if (roundi(SpentFunds/1000) > 1):
+			Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(SpentFunds / 1000))
+			SpentFunds = 0
+	else:
+		SpentFunds += MoneySpent
+		var z = roundi(SpentFunds/1000)
+		if (z < -1):
+			Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(abs(z))
+			SpentFunds = 0
+			
 	if (MoneySpent > 0):
 		AchievementManager.GetInstance().IncrementStatFloat("REPAM", MoneySpent)
 	

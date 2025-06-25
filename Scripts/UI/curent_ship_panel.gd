@@ -5,11 +5,18 @@ class_name CurrentShipPanel
 @export var Sep : Control
 
 signal Selected(Cpt : PlayerDrivenShip)
+signal button_down
 
 var ConnectedShip : PlayerDrivenShip
 
 var IsSelected : bool
 var Hovered : bool
+
+func _ready() -> void:
+	UiSoundManager.GetInstance().AddSelf(self)
+
+func _exit_tree() -> void:
+	UiSoundManager.GetInstance().RemoveSelf(self)
 
 func SetText(Text : String, Capital : bool) -> void:
 	$HBoxContainer/Label.text = Text
@@ -64,6 +71,7 @@ func SetSelected(t : bool) -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Click") and ConnectedShip != null):
 		Selected.emit(ConnectedShip)
+		button_down.emit()
 		Hovered = false
 
 

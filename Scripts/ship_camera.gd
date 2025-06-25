@@ -8,6 +8,9 @@ class_name ShipCamera
 @export var Cloud : Control
 #@export var Cloud2 : Control
 @export var Ground : Control
+@export var MinZoom : float = 0.1
+@export var MaxZoom : float = 3.0
+@export var ClickSound : AudioStreamPlayer
 
 static var Instance : ShipCamera
 
@@ -43,9 +46,11 @@ func _HANDLE_ZOOM(zoomval : float):
 	ZoomTw = create_tween()
 	ZoomTw.set_ease(Tween.EASE_OUT)
 	ZoomTw.set_trans(Tween.TRANS_QUART)
-	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(0.1,0.1), Vector2(3,3))
+	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(MinZoom,MinZoom), Vector2(MaxZoom,MaxZoom))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
 	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
+	if (prevzoom != newzoom):
+		ClickSound.play()
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	prevzoom = newzoom
 
@@ -56,8 +61,8 @@ func ForceZoomOut() -> void:
 	ZoomTw.set_ease(Tween.EASE_OUT)
 	ZoomTw.set_trans(Tween.TRANS_QUART)
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
-	ZoomTw.tween_method(UpdateZoom, zoom, Vector2(0.045, 0.045), 1)
-	prevzoom = Vector2(0.045, 0.045)
+	ZoomTw.tween_method(UpdateZoom, zoom, Vector2(MinZoom, MinZoom), 1)
+	prevzoom = Vector2(MinZoom, MinZoom)
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 
 func UpdateZoom(Zoom : Vector2) -> void:
@@ -68,6 +73,7 @@ func UpdateZoom(Zoom : Vector2) -> void:
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
 	ZoomChanged.emit(Zoom.x)
 	_UpdateMapGridVisibility()
+	
 
 func ForceZoom(Zoom : Vector2) -> void:
 	prevzoom = Zoom
@@ -101,6 +107,8 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
 		UpdateZoom(clamp(start_zoom / zoom_factor, Vector2(0.045,0.045), Vector2(2.1,2.1)))
+		if (!ClickSound.playing):
+			ClickSound.play()
 	else:
 		UpdateCameraPos(event.relative)
 	

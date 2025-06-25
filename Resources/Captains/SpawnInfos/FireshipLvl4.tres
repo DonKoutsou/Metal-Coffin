@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("2_jwqdb")
 Cpt = ExtResource("1_32jbt")
-Cost = 200
+Cost = 60
 MaxAmmInFleet = 7
 DontGenerateBefore = 3
-SpawnAlone = true

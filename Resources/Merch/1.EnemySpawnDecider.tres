@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpawnDecider" load_steps=54 format=3 uid="uid://c1buiwym6qkh8"]
+[gd_resource type="Resource" script_class="SpawnDecider" load_steps=58 format=3 uid="uid://c1buiwym6qkh8"]
 
 [ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_87ibq"]
 [ext_resource type="Resource" uid="uid://ctb0bey42ck18" path="res://Resources/Captains/SpawnInfos/FireshipLvl1.tres" id="2_wdg75"]
@@ -17,10 +17,14 @@
 [ext_resource type="Resource" uid="uid://bcsspmo5nnyvm" path="res://Resources/Captains/SpawnInfos/TankerLvl2.tres" id="15_1pv0s"]
 [ext_resource type="Resource" uid="uid://g2a8jt5yrgwr" path="res://Resources/Captains/SpawnInfos/TankerLvl3.tres" id="16_oscns"]
 [ext_resource type="Resource" uid="uid://d17h4a7ifln30" path="res://Resources/Captains/SpawnInfos/TankerLvl4.tres" id="17_fdaa0"]
+[ext_resource type="Resource" uid="uid://bjtu5mgi855ge" path="res://Resources/Captains/SpawnInfos/CorveteLvl1.tres" id="18_3hc0a"]
 [ext_resource type="Resource" uid="uid://di5eydm5e8bvx" path="res://Resources/Captains/SpawnInfos/ConvoyLvl1.tres" id="18_5ajvh"]
 [ext_resource type="Resource" uid="uid://1dcxgrpt06te" path="res://Resources/Captains/SpawnInfos/LandFireshipLvl1.tres" id="19_4glqq"]
+[ext_resource type="Resource" uid="uid://clant8bk2jbqh" path="res://Resources/Captains/SpawnInfos/CorveteLvl2.tres" id="19_hvwho"]
+[ext_resource type="Resource" uid="uid://cmf0n4eco02nt" path="res://Resources/Captains/SpawnInfos/CorveteLvl3.tres" id="20_ahk72"]
 [ext_resource type="Resource" uid="uid://dx7unrtjdflj2" path="res://Resources/Captains/SpawnInfos/LandFireshipLvl2.tres" id="20_u7j23"]
 [ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="21_0l8w1"]
+[ext_resource type="Resource" uid="uid://2ii8eoq0203v" path="res://Resources/Captains/SpawnInfos/CorveteLvl4.tres" id="21_12d78"]
 [ext_resource type="Resource" uid="uid://2r8sbt2ykylv" path="res://Resources/Merch/APAmmoMagazine100mm.tres" id="22_n5x2f"]
 [ext_resource type="Resource" uid="uid://pru1dyotl5qk" path="res://Resources/Merch/APAmmoMagazine180mm.tres" id="23_e0tbx"]
 [ext_resource type="Resource" uid="uid://da8lhovbqgu36" path="res://Resources/Merch/ClusterMissile.tres" id="24_7csm4"]
@@ -56,7 +60,7 @@
 
 [resource]
 script = ExtResource("78_yg7ff")
-CaptainList = Array[ExtResource("1_87ibq")]([ExtResource("2_wdg75"), ExtResource("3_2eb0g"), ExtResource("4_r0vc0"), ExtResource("5_c68la"), ExtResource("6_iqlvy"), ExtResource("7_n8h36"), ExtResource("8_dofu4"), ExtResource("9_exmfb"), ExtResource("10_pui15"), ExtResource("11_h16mj"), ExtResource("12_0su1b"), ExtResource("13_ns8om"), ExtResource("14_hn1fl"), ExtResource("15_1pv0s"), ExtResource("16_oscns"), ExtResource("17_fdaa0")])
+CaptainList = Array[ExtResource("1_87ibq")]([ExtResource("2_wdg75"), ExtResource("3_2eb0g"), ExtResource("4_r0vc0"), ExtResource("5_c68la"), ExtResource("6_iqlvy"), ExtResource("7_n8h36"), ExtResource("8_dofu4"), ExtResource("9_exmfb"), ExtResource("10_pui15"), ExtResource("11_h16mj"), ExtResource("12_0su1b"), ExtResource("13_ns8om"), ExtResource("14_hn1fl"), ExtResource("15_1pv0s"), ExtResource("16_oscns"), ExtResource("17_fdaa0"), ExtResource("18_3hc0a"), ExtResource("19_hvwho"), ExtResource("20_ahk72"), ExtResource("21_12d78")])
 GroundUnits = Array[ExtResource("1_87ibq")]([ExtResource("19_4glqq"), ExtResource("20_u7j23")])
 ConvoyUnits = Array[ExtResource("1_87ibq")]([ExtResource("18_5ajvh")])
 MerchList = Array[ExtResource("21_0l8w1")]([ExtResource("22_n5x2f"), ExtResource("23_e0tbx"), ExtResource("24_7csm4"), ExtResource("25_1jucq"), ExtResource("26_fxbmr"), ExtResource("27_eko6l"), ExtResource("28_ndjdo"), ExtResource("29_5gpoi"), ExtResource("30_mbacr"), ExtResource("31_2npr6"), ExtResource("32_472ag"), ExtResource("33_4ck5a"), ExtResource("34_0mi3x"), ExtResource("35_6tuc6"), ExtResource("36_e63t2")])

@@ -296,7 +296,7 @@ _data = {
 &"RESET": SubResource("Animation_ad6t0")
 }
 
-[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI")]
+[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI")]
 process_mode = 1
 layer = 2
 follow_viewport_enabled = true
@@ -307,6 +307,7 @@ Thrust = NodePath("NormalScreen/ThrustSlider")
 Steer = NodePath("NormalScreen/ScreenUi/SteeringWheel")
 MissileUI = NodePath("NormalScreen/ScreenUi/Missile Tab")
 LandButton = NodePath("NormalScreen/LandButton")
+HatchButton = NodePath("NormalScreen/OpenHatchButton")
 ShipDockButton = NodePath("NormalScreen/DroneButton")
 RegroupButton = NodePath("NormalScreen/ControlledShipReturn")
 SimulationButton = NodePath("NormalScreen/SimulationButton")
@@ -378,10 +379,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Speaker" parent="NormalScreen/ScreenUi" instance=ExtResource("33_wetmy")]
-offset_left = -7.0
-offset_top = 2.0
-offset_right = 33.0
-offset_bottom = 42.0
+offset_left = 9.0
+offset_top = -23.0
+offset_right = 49.0
+offset_bottom = 17.0
 frequency = 15.0
 max_rotation = 0.02
 
