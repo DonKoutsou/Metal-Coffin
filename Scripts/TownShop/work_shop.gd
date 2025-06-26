@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 	if (Closest == null):
 		return
 	if (Descr.DescribedItem != Closest.It):
-		Descr.SetMerchData(Closest.It, [])
+		Descr.SetMerchData(Closest.It, [], true)
 
 func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise]) -> void:
 	HasUpgradeBuff = HasUpgrade

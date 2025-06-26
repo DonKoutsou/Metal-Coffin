@@ -8,8 +8,8 @@
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="3_4uhfw"]
 [ext_resource type="PackedScene" uid="uid://mcrp4chqoake" path="res://Scenes/TownShop/StatComperator.tscn" id="4_r5mim"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="7_itsvt"]
-[ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="8_jmydl"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="9_itsvt"]
+[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
 content_margin_left = 5.0
@@ -314,8 +314,9 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_gy23n")
 
 [node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_jmydl")
+stream = ExtResource("10_itsvt")
 autoplay = true
+bus = &"Sounds"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/PanelContainer2/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

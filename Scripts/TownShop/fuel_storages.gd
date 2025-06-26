@@ -23,18 +23,18 @@ var Ships : Array[MapShip]
 var Rng = 0
 
 func _draw() -> void:
-	var font = load("res://Fonts/P22 Typewriter Regular.ttf") as Font
+	var font = load("res://Fonts/DOTMBold.TTF") as Font
 	for g in Spots:
 		if (!g.SpotType.VisibleOnStart and !g.Seen):
 			continue
 		for z in Spots:
 			if (g.NeighboringCities.has(z.GetSpotName())):
-				draw_line(Spots[g], Spots[z], Color(0,0,0,0.3), 3)
+				draw_line(Spots[g], Spots[z], Color(1, 1, 1, 0.1), 3)
 		draw_circle(Spots[g], 2, Color(1,1,1), true)
 		var textpos = Spots[g]
 		textpos.y -= 10
 		textpos.x -= (g.GetSpotName().length() / 2) * 15
-		draw_string(font, textpos, g.GetSpotName(), HORIZONTAL_ALIGNMENT_CENTER, -1, 24, Color(1,1,1))
+		draw_string(font, textpos, g.GetSpotName(), HORIZONTAL_ALIGNMENT_CENTER, -1, 24,  Color(1, 1,1))
 	draw_circle(get_viewport_rect().size / 2, Rng / 15, Color(0.3, 0.7, 0.915), false, 4)
 
 func RedrawThing() -> void:

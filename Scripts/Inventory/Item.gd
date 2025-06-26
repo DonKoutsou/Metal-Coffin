@@ -21,3 +21,6 @@ func IsSame(It : Item) -> bool:
 
 func GetMerchItemDesc(Ships : Array[MapShip]) -> String:
 	return ""
+
+func GetWorkshopItemDesc() -> String:
+	return ""

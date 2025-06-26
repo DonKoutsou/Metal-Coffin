@@ -90,7 +90,7 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 [sub_resource type="Resource" id="Resource_0l4hh"]
 script = ExtResource("2_rura2")
 StatName = 10
-StatBase = 2.0
+StatBase = 1.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

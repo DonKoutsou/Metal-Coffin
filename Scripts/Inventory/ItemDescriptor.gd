@@ -69,8 +69,8 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 	DescribedContainer = Box
 	var It = DescribedContainer.GetContainedItem()
 	#ItemIcon.texture = It.ItemIcon
-	ItemDesc.visible = false
-	
+	ItemDesc.visible = true
+	ItemDesc.text = It.GetItemDesc()
 	#TransferButton.visible = It.CanTransfer
 	TransferButton.visible = false
 	AddItemButton.visible = false
@@ -129,7 +129,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 	else:
 		CardSection.visible = false
 
-func SetMerchData(Itm : Item, Ships : Array[MapShip]) -> void:
+func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -> void:
 	for g in CardPlecement.get_children():
 		g.queue_free()
 	
@@ -140,7 +140,10 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip]) -> void:
 	ItemDesc.text = Itm.GetItemDesc()
 	#TransferButton.visible = It.CanTransfer
 	TransferButton.visible = false
-	ItemDesc.text = Itm.GetMerchItemDesc(Ships)
+	if (!ShowDesc):
+		ItemDesc.text = Itm.GetMerchItemDesc(Ships)
+	else:
+		ItemDesc.text = Itm.GetWorkshopItemDesc()
 	ItemName.text = Itm.ItemName
 	#Ship Parts
 	#if (Itm is ShipPart):

@@ -35,6 +35,26 @@ func GetItemDesc() -> String:
 	return "{0} {1}".format([ItemDesc, UpNames])
 
 
+func GetWorkshopItemDesc() -> String:
+	var UpNames = "PROVIDING STATS"
+	for g in Upgrades.size():
+		#var Multiplier = 1
+		#if (Upgrades[g].UpgradeName == STAT_CONST.STATS.THRUST):
+			#Multiplier = 360
+		var UpName = STAT_CONST.STATS.keys()[Upgrades[g].UpgradeName].replace("_", " ")
+		var UpAmm
+		var UpSymbol
+		var Col
+		if (Upgrades[g].UpgradeAmmount > 0):
+			UpAmm = Upgrades[g].UpgradeAmmount
+			UpSymbol = "+"
+			Col = "ffc315"
+		else : if (Upgrades[g].PenaltyAmmount > 0):
+			UpAmm = Upgrades[g].PenaltyAmmount
+			UpSymbol = "-"
+			Col = "db2c36"
+		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, STAT_CONST.GetStatMetric(Upgrades[g].UpgradeName), UpSymbol, Col])
+	return UpNames
 
 
 

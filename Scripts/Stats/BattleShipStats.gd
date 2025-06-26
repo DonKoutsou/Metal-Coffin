@@ -2,32 +2,44 @@ extends Resource
 
 class_name BattleShipStats
 
-@export var Name : String
-@export var CurrentHull : float
-@export var Hull : float
-@export var Shield : float
-@export var MaxShield : float
-@export var FirePower : float
-@export var FirePowerBuff : float = 1
-@export var FirePowerDeBuff : float = 0
-@export var ShipIcon : Texture
-@export var CaptainIcon : Texture
-@export var Weight : float
-@export var Speed : float
-@export var SpeedBuff : float = 1
-@export var SpeedDeBuff : float = 0
-@export var Def : float = 0
-@export var DefBuff : float = 0
-@export var DefDebuff : float = 0
-@export var Energy : int
-@export var EnergyReserves : int
-@export var Cards : Array[CardStats]
-#@export var Ammo : Dictionary
-@export var Funds : int
-@export var Convoy : bool
+var Name : String
 
-@export var IsOnFire : bool
-@export var TurnsOnFire : int
+var ShipIcon : Texture
+var CaptainIcon : Texture
+
+var Funds : int
+var Convoy : bool
+
+var Energy : int
+var EnergyReserves : int
+var Cards : Array[CardStats]
+
+var ShipViz : CardFightShipViz2
+
+#STATS
+var Weight : float
+
+var CurrentHull : float
+var Hull : float
+
+var Shield : float
+var MaxShield : float
+
+var FirePower : float
+var FirePowerBuff : float = 1
+var FirePowerDeBuff : float = 0
+
+var Speed : float
+var SpeedBuff : float = 1
+var SpeedDeBuff : float = 0
+
+var Def : float = 0
+var DefBuff : float = 0
+var DefDebuff : float = 0
+
+#FIRE
+var IsOnFire : bool
+var TurnsOnFire : int
 
 func IsSeverelyBurnt() -> bool:
 	return TurnsOnFire > 3

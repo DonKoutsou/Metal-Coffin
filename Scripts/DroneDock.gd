@@ -243,8 +243,8 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	
 	if (Command.GetShipSpeed() > 0):
 		Command.AccelerationChanged(Command.GetShipSpeed() / Command.GetShipMaxSpeed())
-
-	if (Command.CurrentPort != null):
+	
+	if (Command.CurrentPort != drone.CurrentPort):
 		drone.SetCurrentPort(Command.CurrentPort)
 		Command.CurrentPort.OnSpotAproached(drone)
 	if (!Command.Detectable):

@@ -169,12 +169,14 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 	if (AproachedBy is HostileShip):
 		VisitingHostiles.append(AproachedBy)
 		return
+		
 	VisitingShips.append(AproachedBy)
 	if (AproachedBy.Command == null):
 		SimulationManager.GetInstance().SpeedToggle(false)
 		Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
 		SpotAproached.emit(self)
-	
+	else:
+		AproachedBy.GetDroneDock()
 	if (!Seen):
 		OnSpotSeen()
 	
@@ -188,7 +190,7 @@ func OnSpotDeparture(DepartingShip : MapShip) -> void:
 	if (DepartingShip is HostileShip):
 		VisitingHostiles.erase(DepartingShip)
 		return
-		
+	
 	VisitingShips.erase(DepartingShip)
 	if (SpotInfo.EnemyCity):
 		if (AlarmRaised):

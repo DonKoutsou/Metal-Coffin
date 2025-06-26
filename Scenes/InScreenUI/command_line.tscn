@@ -32,7 +32,9 @@ focus_mode = 0
 [node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+theme_override_font_sizes/font_size = 10
 text = "X"
+icon_alignment = 1
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
 clip_contents = false
