@@ -85,9 +85,9 @@ func _physics_process(delta: float) -> void:
 		updatedronecourse()
 		
 	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	var ShipEfficiency = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
-	var f = fuel_used_for_distance(Acceleration.position.x, Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK), ShipEfficiency, ShipWeight)
-	var FuelConsumtion = f * SimulationSpeed
+	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
+	#var f = Acceleration.position.x / ShipEfficiency * SimulationSpeed
+	var FuelConsumtion = Acceleration.position.x / ShipEfficiency * SimulationSpeed
 	#Consume fuel on shif if enough
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
 		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
@@ -106,9 +106,9 @@ func _physics_process(delta: float) -> void:
 		var Cap = g.Cpt as Captain
 		
 		var DroneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-		var DroneEfficiency = Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - DroneWeight / 40
+		var DroneEfficiency = (Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(DroneWeight, 0.5)) * 10
 		
-		var DroneFuelConsumtion = pow(Acceleration.position.x / 50, 1 / 0.55) / (DroneEfficiency - (DroneWeight / 40)) * SimulationSpeed
+		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency * SimulationSpeed
 		
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,DroneFuelConsumtion)

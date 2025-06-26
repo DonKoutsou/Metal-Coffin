@@ -170,22 +170,24 @@ func UpdateElint(delta: float) -> void:
 			ElintContact.emit(ClosestShip ,true)
 
 func GetFuelRange() -> float:
+	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
 	var total_fuel = fuel
-	var inverse_ef_sum = 1.0 / fuel_ef
+	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
 	
 	# Group ships fuel and efficiency calculations
 	for g in GetDroneDock().DockedDrones:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		total_fuel += ship_fuel
-		inverse_ef_sum += 1.0 / ship_efficiency
+		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
-	return (total_fuel * effective_efficiency) / fleetsize
+	return total_fuel * effective_efficiency / fleetsize
 
 func IsFuelFull() -> bool:
 	for g in GetDroneDock().DockedDrones:

@@ -60,6 +60,15 @@ func GetClosestSpot(Pos : Vector2) -> MapSpot:
 
 	return Closest
 
+func GetSpotsCloserThan(Pos : Vector2, Dist : float) -> Array[MapSpot]:
+	var Spots : Array[MapSpot]
+	for g in get_tree().get_nodes_in_group("City"):
+		var Dist2 = Pos.distance_to(g.global_position)
+		if (Dist2 < Dist):
+			Spots.append(g)
+
+	return Spots
+
 func GetSpotByName(CityName : String) -> MapSpot:
 	var CorrectCity : MapSpot
 	for g in get_tree().get_nodes_in_group("City"):

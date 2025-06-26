@@ -66,7 +66,7 @@ func OnRefuelShopPressed() -> void:
 	else:
 		FuelPricePerTon = 50
 	
-	Scene.Init(BoughtFuel, FuelPricePerTon, LandedShips)
+	Scene.Init(BoughtFuel, FuelPricePerTon, LandedShips, TownSpot)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)

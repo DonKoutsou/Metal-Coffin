@@ -10,4 +10,5 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_srtw7")
 start_eff = 12
-points = 5
+W = 25
+points = 10

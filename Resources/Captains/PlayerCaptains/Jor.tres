@@ -109,7 +109,7 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 [sub_resource type="Resource" id="Resource_1itiu"]
 script = ExtResource("2_6dx32")
 StatName = 12
-StatBase = 2.0
+StatBase = 1.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0
@@ -164,7 +164,7 @@ CaptainPortrait = ExtResource("1_xaias")
 ShipIcon = ExtResource("5_so2fg")
 CaptainStats = Array[ExtResource("2_6dx32")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_5nith"), SubResource("Resource_1yc5b"), SubResource("Resource_2jxnm"), SubResource("Resource_rn88p"), SubResource("Resource_3a3o1"), SubResource("Resource_wmdyx"), SubResource("Resource_xaias"), SubResource("Resource_so2fg"), SubResource("Resource_1itiu"), SubResource("Resource_j45r4"), SubResource("Resource_304dd"), SubResource("Resource_hxcxl"), SubResource("Resource_vbshx"), SubResource("Resource_5eec5")])
 ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("8_nxfpy"), ExtResource("11_so2fg"), ExtResource("8_u6p3e"), ExtResource("10_so2fg"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("11_so2fg")])
+StartingItems = Array[ExtResource("3_urdjp")]([ExtResource("8_nxfpy"), ExtResource("8_u6p3e"), ExtResource("10_so2fg"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("10_xaias"), ExtResource("11_so2fg")])
 CurrentPort = ""
 CheckForErrors = true
 ProvidingFunds = 40000

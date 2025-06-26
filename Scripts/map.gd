@@ -725,7 +725,7 @@ func GeneratePathsFromLines(Lines : Array):
 	for g in SpotGroups:
 		Cits.append_array(get_tree().get_nodes_in_group(g))
 
-	for g in Cits:
+	for g : MapSpot in Cits:
 		var SpotPos = g.global_position
 		var Neighbors : Array[String] = []
 		for Line in Lines:

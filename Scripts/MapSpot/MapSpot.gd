@@ -48,8 +48,7 @@ func ToggleSimulation(t : bool) -> void:
 
 func SetNeighbord(N : Array) -> void:
 	NeighboringCities = N
-	#print(GetSpotName() + " get their neighbors || " + var_to_str(NeighboringCities))
-	
+
 func SpawnEnemyPatrol():
 	var host = SpotInfo.HostilePatrolShipScene.instantiate() as HostileShip
 	host.CurrentPort = self

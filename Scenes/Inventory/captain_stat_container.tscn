@@ -27,7 +27,6 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.0515312, 0.0690738, 0.0920171, 1)
 draw_center = false
-border_width_bottom = 730
 border_color = Color(0.0053553, 0.00773166, 0.0116329, 1)
 border_blend = true
 corner_detail = 1

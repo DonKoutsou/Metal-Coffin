@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6pyjquo47hnr"]
+[gd_scene load_steps=6 format=3 uid="uid://c6pyjquo47hnr"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_ac0ke"]
 [ext_resource type="Script" uid="uid://y4a4umcapt0y" path="res://Scripts/TownShop/fuel_storages.gd" id="2_tywce"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_tywce"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_jvdwb"]
+[ext_resource type="Texture2D" uid="uid://dy0i72dpxefsl" path="res://Assets/PaperBg.png" id="4_tywce"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ac0ke"]
+texture = ExtResource("4_tywce")
+expand_margin_left = 100.0
+expand_margin_right = 100.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="Fuel Storages" type="PanelContainer" node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar")]
 anchors_preset = 15
@@ -12,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("1_ac0ke")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ac0ke")
 script = ExtResource("2_tywce")
 FuelPriceLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
 CurrentFuelLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
@@ -27,7 +34,13 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/separation = 10
-alignment = 1
+alignment = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fleet Range : 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -90,6 +103,10 @@ layout_mode = 2
 size_flags_vertical = 4
 value = 27.12
 show_percentage = false
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 31.43)
+layout_mode = 2
 
 [node name="LeaveFuelStorage" type="Button" parent="VBoxContainer"]
 layout_mode = 2

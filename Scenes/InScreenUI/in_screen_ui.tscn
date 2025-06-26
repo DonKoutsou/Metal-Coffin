@@ -54,7 +54,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("9_8iafl")
 
 [node name="MapMarkerEditor" parent="Control3" instance=ExtResource("4_w862u")]
 layout_mode = 1

@@ -2,6 +2,7 @@ extends Control
 
 @export var start_eff = 6
 @export var start_cap = 100
+@export var W = 10
 @export var points = 8   # how many "doublings" you want to look at
 
 func _physics_process(delta: float) -> void:
@@ -10,10 +11,10 @@ func _physics_process(delta: float) -> void:
 func _draw():
 	var font = get_theme_default_font()
 	var font_size = 16
-	var g_width = 450
-	var g_height = 250
+	var g_width = get_viewport_rect().size.x - 200
+	var g_height = get_viewport_rect().size.y - 100
 	var origin_x = 40
-	var origin_y = 310
+	var origin_y = get_viewport_rect().size.y - 60
 
 	var max_range = 0.0
 	var ranges = []
@@ -23,12 +24,14 @@ func _draw():
 	for i in points:
 		var FuelEf = start_eff * pow(2, float(i)/(points-1))  # doubles over range
 		var FuelCap = start_cap * pow(6, float(i)/(points-1))
-		var rng =  50 * pow(FuelCap * FuelEf, 0.55)
-		rng = FuelCap * FuelEf
+		var w =  W * pow(20, float(i)/(points-1))
+		var rng =  500 * pow(FuelCap * FuelEf, 0.3)
+		rng = FuelCap * ((FuelEf / pow(w, 0.5)) * 10)
+		#rng = FuelCap * FuelEf
 		#rng = 30 * log(1 + FuelCap * FuelEf)
 		ranges.append(rng)
 		max_range = max(max_range, rng)
-		labels.append(str(roundi(FuelEf)) + " Ef, " + str(roundi(FuelCap)) + " Cap")
+		labels.append(str(roundi(FuelEf)) + " E " + str(roundi(FuelCap)) + " C " + str(roundi(w)) + " W ")
 
 	# Plot
 	for i in points - 1:
@@ -50,5 +53,6 @@ func _draw():
 	# Axes
 	draw_line(Vector2(origin_x, origin_y-g_height), Vector2(origin_x, origin_y), Color.WHITE, 2)
 	draw_line(Vector2(origin_x, origin_y), Vector2(origin_x+g_width, origin_y), Color.WHITE, 2)
-	draw_string(font, Vector2(origin_x+g_width/2-40, origin_y+50), "Efficiency + Fuel Cap Scaling", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+	draw_string(font, Vector2(origin_x+g_width/2-40, origin_y+40), "Efficiency + Fuel Cap Scaling", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+	draw_string(font, Vector2(origin_x+g_width/2-100, origin_y+55), "E = FUEL EFFICIENCY | C = FUEL CAPACITY | W = WEIGHT", HORIZONTAL_ALIGNMENT_LEFT, -1, 12)
 	draw_string(font, Vector2(origin_x-30, origin_y-g_height-10), "ShipRange", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)

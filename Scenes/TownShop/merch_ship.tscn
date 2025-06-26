@@ -87,6 +87,7 @@ text = "Leave"
 stream = ExtResource("5_ahaja")
 volume_db = -5.0
 autoplay = true
+bus = &"Sounds"
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(15, 2)

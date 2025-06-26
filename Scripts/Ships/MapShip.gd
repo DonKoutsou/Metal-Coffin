@@ -466,7 +466,7 @@ func GetFuelStats() -> Dictionary[String, float]:
 	var fleetsize = 1 + Fleet.size()
 	var total_fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var total_maxfuel = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-	var inverse_ef_sum = 1.0 / (fuel_ef - Weight / 40)
+	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
 	
 	# Group ships fuel and efficiency calculations
 	for g in Fleet:
@@ -477,13 +477,13 @@ func GetFuelStats() -> Dictionary[String, float]:
 		
 		total_fuel += ship_fuel
 		total_maxfuel += ship_maxfuel
-		inverse_ef_sum += 1.0 / (ship_efficiency - ship_weight / 40)
+		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
 	Stats["CurrentFuel"] = total_fuel
 	Stats["MaxFuel"] = total_maxfuel
-	Stats["FleetRange"] = (50 * pow(total_fuel * effective_efficiency, 0.55)) / fleetsize
+	Stats["FleetRange"] = total_fuel * effective_efficiency / fleetsize
 	return Stats
 
 func GetFleet() -> Array[MapShip]:
@@ -507,7 +507,7 @@ func GetFuelRange() -> float:
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var fleetsize = 1 + Fleet.size()
 	var total_fuel = fuel
-	var inverse_ef_sum = 1.0 / (fuel_ef - Weight / 40)
+	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
 	
 	# Group ships fuel and efficiency calculations
 	for g in Fleet:
@@ -515,13 +515,38 @@ func GetFuelRange() -> float:
 		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		total_fuel += ship_fuel
-		inverse_ef_sum += 1.0 / (ship_efficiency - ship_weight / 40)
+		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
 		
 
 	var effective_efficiency = fleetsize / inverse_ef_sum
 	# Calculate average efficiency for the group
-	return(50 * pow(total_fuel * effective_efficiency, 0.55)) / fleetsize
+	return total_fuel * effective_efficiency / fleetsize
+
+func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
+	if (Command != null):
+		return Command.GetFuelRange()
+	var Fleet = GetDroneDock().GetDockedShips()
 	
+	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+	var fleetsize = 1 + Fleet.size()
+	var total_fuel = fuel + ExtraFuel
+	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
+	
+	# Group ships fuel and efficiency calculations
+	for g in Fleet:
+		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		total_fuel += ship_fuel
+		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
+		
+
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	return total_fuel * effective_efficiency / fleetsize
+
 func GetBattleStats() -> BattleShipStats:
 	
 	var stats = BattleShipStats.new()

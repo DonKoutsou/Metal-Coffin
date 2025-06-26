@@ -5,7 +5,7 @@ class_name ToFarToRefuelCondition
 func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MainShip = actor as HostileShip
 
-	var dist = MainShip.GetFuelRange()
+	var dist = MainShip.()
 	#var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot

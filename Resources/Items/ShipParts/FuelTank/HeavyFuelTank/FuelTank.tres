@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://33sxgbk0di7b"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://33sxgbk0di7b"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_yqtop"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_7lqrd"]
@@ -11,21 +11,29 @@
 resource_local_to_scene = true
 script = ExtResource("6_bxopk")
 UpgradeName = 0
-UpgradeAmmount = 300.0
+UpgradeAmmount = 250.0
 PenaltyAmmount = 0.0
-CurrentValue = 300.0
+CurrentValue = 250.0
 
 [sub_resource type="Resource" id="Resource_ygi31"]
 resource_local_to_scene = true
 script = ExtResource("6_bxopk")
 UpgradeName = 9
-UpgradeAmmount = 20.0
+UpgradeAmmount = 40.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 
+[sub_resource type="Resource" id="Resource_lptv5"]
+script = ExtResource("6_bxopk")
+UpgradeName = 16
+UpgradeAmmount = 10.0
+PenaltyAmmount = 0.0
+CurrentValue = 0.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
 [resource]
 script = ExtResource("2_sc66u")
-Upgrades = Array[ExtResource("6_bxopk")]([SubResource("Resource_i41uq"), SubResource("Resource_ygi31")])
+Upgrades = Array[ExtResource("6_bxopk")]([SubResource("Resource_i41uq"), SubResource("Resource_ygi31"), SubResource("Resource_lptv5")])
 UpgradeVersion = ExtResource("4_ox6xo")
 UpgradeTime = 1000.0
 IsDamaged = false

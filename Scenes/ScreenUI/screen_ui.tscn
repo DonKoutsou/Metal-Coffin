@@ -922,7 +922,7 @@ volume_db = -20.0
 bus = &"Sounds"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
-color = Color(0.3084, 0.3084, 0.3084, 1)
+color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")

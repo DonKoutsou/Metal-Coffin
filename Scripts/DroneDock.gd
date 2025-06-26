@@ -155,12 +155,8 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
 	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
 	AddDroneToHierarchy(Drne)
-	var pl = get_parent() as MapShip
-	if (pl.CurrentPort != null):
-		Drne.SetCurrentPort(pl.CurrentPort)
-		pl.CurrentPort.OnSpotAproached(Drne)
-	if (!pl.Detectable):
-		Drne.ToggleRadar()
+	
+	
 
 func SoundEnded() -> void:
 	for g in $Sounds.get_child_count():
@@ -247,7 +243,13 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	
 	if (Command.GetShipSpeed() > 0):
 		Command.AccelerationChanged(Command.GetShipSpeed() / Command.GetShipMaxSpeed())
-	
+
+	if (Command.CurrentPort != null):
+		drone.SetCurrentPort(Command.CurrentPort)
+		Command.CurrentPort.OnSpotAproached(drone)
+	if (!Command.Detectable):
+		drone.ToggleRadar()
+		
 	DroneAdded.emit()
 		
 func is_even(number: int) -> bool:

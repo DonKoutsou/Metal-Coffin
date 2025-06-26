@@ -18,7 +18,7 @@ CurrentValue = 400.0
 resource_local_to_scene = true
 script = ExtResource("5_83sa7")
 UpgradeName = 9
-UpgradeAmmount = 30.0
+UpgradeAmmount = 60.0
 PenaltyAmmount = 0.0
 CurrentValue = 0.0
 

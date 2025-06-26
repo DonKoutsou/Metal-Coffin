@@ -347,10 +347,10 @@ func OnLandRequested(ControlledShip : MapShip) -> void:
 	if (Instigator.Landing):
 		return
 	if (Instigator.Altitude == 0):
-		OnShipLanded(Instigator)
+		PopUpManager.GetInstance().DoFadeNotif("Fleet already on the ground")
 		return
 	if (Instigator.GetShipSpeed() > 0):
-		PopUpManager.GetInstance().DoFadeNotif("Ship cant land while moving")
+		PopUpManager.GetInstance().DoFadeNotif("Fleet can't land while moving")
 		return
 	Instigator.StartLanding()
 	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
