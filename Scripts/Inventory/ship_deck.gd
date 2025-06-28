@@ -20,16 +20,27 @@ func SetDeck(Ch : Captain) -> void:
 		CurrentlyShownCharacter = Ch
 		Inv.InventoryUpdated.connect(InventoryUpdated)
 	
+	var PooledCards : Array[Card]
 	for g in CardPosition.get_children():
-		g.queue_free()
+		PooledCards.append(g)
+		#g.queue_free()
 	
 	var deck = Inv.GetCardDictionary()
 	
 	for card : CardStats in deck:
-		var c = CardScene.instantiate() as Card
+		var c : Card
+		if (PooledCards.size() > 0):
+			c = PooledCards.pop_back()
+			
+		else:
+			c = CardScene.instantiate()
+			CardPosition.add_child(c)
 		c.SetCardStats(card, deck[card])
-		CardPosition.add_child(c)
+		
 		c.Dissable()
+	
+	for g in PooledCards:
+		g.queue_free()
 
 func Clear() -> void:
 	for g in CardPosition.get_children():

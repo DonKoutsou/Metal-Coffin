@@ -3,17 +3,18 @@ extends Control
 class_name Card
 
 @export var CardName : Label
-@export var RealisticCardname : Label
 @export var CardDesc : RichTextLabel
-@export var RealisticCardDesc : RichTextLabel
 @export var CardCost : Label
-@export var RealisticCardCost : Label
 @export var CardTex : TextureRect
 @export var But : Button
 @export var Lines : Array[Line2D]
 @export var CardTypeEmblem : Panel
 @export var FrontSide : Control
 @export var BackSide : Control
+@export var Line : Line2D
+@export var AmmountLabel : Label
+
+@export var RealisticFont : Font
 
 signal OnCardPressed(C : Card)
 
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 
 func UpdateLine() -> void:
 	for g in TargetLocs.size():
-		Lines[g].set_point_position(1, lerp(Vector2.ZERO ,$Line2D.to_local(TargetLocs[g]),InterpolationValue))
+		Lines[g].set_point_position(1, lerp(Vector2.ZERO ,Line.to_local(TargetLocs[g]),InterpolationValue))
 
 
 func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
@@ -87,11 +88,11 @@ func _ready() -> void:
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf(But)
 	for g in TargetLocs.size() - 1:
-		var NewLine = $Line2D.duplicate()
+		var NewLine = Line.duplicate()
 		add_child(NewLine)
 		Lines.append(NewLine)
 	set_physics_process(TargetLocs.size() > 0)
-	$Line2D.visible = TargetLocs.size() > 0
+	Line.visible = TargetLocs.size() > 0
 	
 
 func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
@@ -100,18 +101,14 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	var DescText =  "[center] {0}".format([Stats.GetDescription()])
 
 	CardName.text = Stats.GetCardName()
-	RealisticCardname.text = Stats.GetCardName()
 	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
-	$Amm/Label.text = var_to_str(Amm) + "x"
+	AmmountLabel.text = var_to_str(Amm) + "x"
 	
 	CardDesc.text = DescText
-	RealisticCardDesc.text = DescText
-	
 	
 	CardCost.text = var_to_str(Cost)
-	RealisticCardCost.text = var_to_str(Cost)
 	
 	if (Stats.Type == CardStats.CardType.OFFENSIVE):
 		CardTypeEmblem.modulate = Color("ff3c22")
@@ -126,10 +123,8 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 func UpdateBattleStats(User : BattleShipStats) -> void:
 	var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
 	CardDesc.text = DescText
-	RealisticCardDesc.text = DescText
 	ShownCost = GetBattleCost(User, CStats)
 	CardCost.text = var_to_str(ShownCost)
-	RealisticCardCost.text = var_to_str(ShownCost)
 
 
 func Flip() -> void:
@@ -146,17 +141,14 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 	var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
 
 	CardName.text = Stats.GetCardName()
-	RealisticCardname.text = Stats.GetCardName()
 	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
-	$Amm/Label.text = var_to_str(Amm) + "x"
+	AmmountLabel.text = var_to_str(Amm) + "x"
 	
 	CardDesc.text = DescText
-	RealisticCardDesc.text = DescText
 	
 	CardCost.text = var_to_str(ShownCost)
-	RealisticCardCost.text = var_to_str(ShownCost)
 	
 	if (Stats.Type == CardStats.CardType.OFFENSIVE):
 		CardTypeEmblem.modulate = Color("ff3c22")
@@ -189,12 +181,10 @@ func SetRealistic() -> void:
 	$SubViewportContainer/SubViewport/Panel.visible = false
 	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
 	
-	CardName.visible = false
-	RealisticCardname.visible = true
-	CardDesc.visible = false
-	RealisticCardDesc.visible = true
-	CardCost.visible = false
-	RealisticCardCost.visible = true
+	CardName.add_theme_font_override("font", RealisticFont)
+	CardCost.add_theme_font_override("font", RealisticFont)
+	CardDesc.add_theme_font_override("normal_font", RealisticFont)
+	CardCost.get_child(0).visible = false
 
 
 func OnButtonPressed() -> void:

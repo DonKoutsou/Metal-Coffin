@@ -68,19 +68,19 @@ expand_to_text_length = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Stats"
 
-[node name="Deck" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalButtons"]]
+[node name="Deck" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
 text = "Deck"
 
-[node name="InventoryVisToggle" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalButtons"]]
+[node name="InventoryVisToggle" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")

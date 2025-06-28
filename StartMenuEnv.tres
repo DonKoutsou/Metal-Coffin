@@ -1,11 +1,11 @@
-[gd_resource type="World3D" load_steps=4 format=3 uid="uid://bt2lx0rufeimw"]
+[gd_resource type="World3D" load_steps=4 format=3 uid="uid://dfavnsxfxt715"]
 
-[sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.598039, 1)
+[sub_resource type="Gradient" id="Gradient_xpuxe"]
+offsets = PackedFloat32Array(0, 0.615686, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.509698, 0.524902, 0.54199, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mma4"]
-gradient = SubResource("Gradient_a2ujk")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k2vuv"]
+gradient = SubResource("Gradient_xpuxe")
 width = 64
 
 [sub_resource type="Environment" id="Environment_h7q0i"]
@@ -13,6 +13,7 @@ background_mode = 3
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 4
+tonemap_exposure = 1.1
 tonemap_white = 16.0
 glow_enabled = true
 glow_levels/1 = 1.0
@@ -26,7 +27,9 @@ glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 1.0
 glow_map_strength = 1.0
 adjustment_enabled = true
-adjustment_color_correction = SubResource("GradientTexture1D_7mma4")
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+adjustment_color_correction = SubResource("GradientTexture1D_k2vuv")
 
 [resource]
 environment = SubResource("Environment_h7q0i")

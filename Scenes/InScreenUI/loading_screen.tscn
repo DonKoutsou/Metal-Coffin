@@ -190,7 +190,7 @@ offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="SkipButton" type="Button" parent="."]
+[node name="SkipButton" type="Button" parent="." groups=["DigitalBouncingButton"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

@@ -18,7 +18,7 @@ IntroGameScene = ExtResource("4_r02ad")
 CageFightGameScene = ExtResource("6_lhmcv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 6
+layer = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource("7_mty3o")

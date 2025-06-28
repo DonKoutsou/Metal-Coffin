@@ -11,11 +11,12 @@ config_version=5
 [application]
 
 config/name="Metal Coffin"
-config/version="0.6.23"
+config/version="0.6.25"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Mobile")
 run/max_fps=60
+run/low_processor_mode=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Logos/LogoIcon.png"
 config/windows_native_icon="res://Assets/Logos/LogoIc.ico"
@@ -81,6 +82,7 @@ CrewRecruitTown=""
 DissapearingMap=""
 DiscardPile=""
 Card=""
+DigitalBouncingButton=""
 
 [gui]
 

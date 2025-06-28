@@ -83,14 +83,14 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("5_tvvk2")
 text = "Upgrade"
 
-[node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -98,7 +98,7 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("5_tvvk2")
 text = "Equip Item"
 
-[node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -106,7 +106,7 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("5_tvvk2")
 text = "Add More"
 
-[node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -114,7 +114,7 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("5_tvvk2")
 text = "Remove Item"
 
-[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalButtons"]]
+[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8

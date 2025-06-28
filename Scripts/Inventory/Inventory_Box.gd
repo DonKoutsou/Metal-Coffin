@@ -13,6 +13,11 @@ signal ItemSelected(Box : Inventory_Box)
 func Initialise(Parent : CharacterInventory):
 	_ParentInventory = Parent
 
+func _ready() -> void:
+	UISoundMan.GetInstance().AddSelf(Butto)
+
+func _exit_tree() -> void:
+	UISoundMan.GetInstance().RemoveSelf(Butto)
 
 func GetParentInventory() -> CharacterInventory:
 	return _ParentInventory
@@ -60,9 +65,9 @@ func HasSpace() -> bool:
 	return _ContentAmmout < _ContainedItem.MaxStackCount
 
 func _UpdateAmmountLabel() -> void:
-	var Text = $PanelContainer/Label
+	var Text = $ItemButton/PanelContainer/Label
 	Text.text = var_to_str(_ContentAmmout)
-	$PanelContainer.visible = _ContentAmmout > 1
+	$ItemButton/PanelContainer.visible = _ContentAmmout > 1
 
 func Enable() -> void:
 	Butto.disabled = false

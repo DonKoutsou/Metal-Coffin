@@ -1,10 +1,10 @@
-[gd_scene load_steps=51 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene load_steps=52 format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
+[ext_resource type="World3D" uid="uid://dfavnsxfxt715" path="res://StartMenuEnv.tres" id="3_rh5bc"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
-[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="3_t54ed"]
 [ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="5_23r0g"]
 [ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="6_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
 [ext_resource type="Material" uid="uid://dadw4sq24u4ow" path="res://Shaders/Clouds/Cloud.tres" id="16_23r0g"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
+[ext_resource type="Texture2D" uid="uid://tklv7f2e06gq" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
 [ext_resource type="Texture2D" uid="uid://cidal6q7hj1qj" path="res://Assets/UIPiecies/Screen/SidePanels/ButtonCover2_FullQuality.png" id="22_7fs2i"]
 [ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="22_23r0g"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
@@ -116,7 +117,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 disable_3d = true
 own_world_3d = true
-world_3d = ExtResource("3_t54ed")
+world_3d = ExtResource("3_rh5bc")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
@@ -206,6 +207,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -251,6 +253,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -296,6 +299,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -405,7 +409,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("9_3vvgq")
 
-[node name="Cancel" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer"]
+[node name="Cancel" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer" groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -432,14 +436,14 @@ use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "Yes"
 
-[node name="DontShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="DontShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -459,6 +463,37 @@ grow_horizontal = 2
 text = "Demo Version 0.61"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="SubViewportContainer/SubViewport/NormalUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -95.0
+offset_right = 121.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Join Discord"
+underline = 1
+uri = "https://discord.gg/srMt8dGRWW"
+language = "w"
+
+[node name="Button" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/LinkButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 26.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_xqmn8")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 process_mode = 3
@@ -770,7 +805,7 @@ color = Color(0.5, 0.5, 0.5, 1)
 
 [node name="AlarmLight2" type="PointLight2D" parent="."]
 texture_filter = 2
-position = Vector2(610, -710)
+position = Vector2(597, -710)
 texture = ExtResource("36_j43p8")
 offset = Vector2(0, 1000)
 texture_scale = 7.0

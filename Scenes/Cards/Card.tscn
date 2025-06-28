@@ -105,7 +105,7 @@ corner_detail = 2
 shadow_size = 8
 anti_aliasing_size = 2.0
 
-[node name="Card" type="Control" node_paths=PackedStringArray("CardName", "RealisticCardname", "CardDesc", "RealisticCardDesc", "CardCost", "RealisticCardCost", "CardTex", "But", "Lines", "CardTypeEmblem", "FrontSide", "BackSide") groups=["Card"]]
+[node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "Lines", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel") groups=["Card"]]
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 3
 anchors_preset = 8
@@ -125,17 +125,17 @@ size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_vr3r8")
 CardName = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/Label")
-RealisticCardname = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/RealisticLabel")
-CardDesc = NodePath("SubViewportContainer/SubViewport/VBoxContainer/Control/CardDesc")
-RealisticCardDesc = NodePath("SubViewportContainer/SubViewport/VBoxContainer/Control/RealisticDesc")
+CardDesc = NodePath("SubViewportContainer/SubViewport/VBoxContainer/CardDesc")
 CardCost = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost")
-RealisticCardCost = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/RealisticCardCost")
 CardTex = NodePath("SubViewportContainer/SubViewport/VBoxContainer/CardText")
 But = NodePath("SubViewportContainer/SubViewport/Button")
 Lines = [NodePath("Line2D")]
 CardTypeEmblem = NodePath("SubViewportContainer/SubViewport/Panel2")
 FrontSide = NodePath("SubViewportContainer")
 BackSide = NodePath("TextureRect")
+Line = NodePath("Line2D")
+AmmountLabel = NodePath("Amm/Label")
+RealisticFont = ExtResource("6_t4r8q")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = ExtResource("2_3yyhe")
@@ -259,7 +259,7 @@ custom_minimum_size = Vector2(30.26, 27.33)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 7
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
@@ -287,39 +287,12 @@ texture = ExtResource("2_rd7hj")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RealisticCardCost" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(30.26, 27.33)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("6_t4r8q")
-theme_override_font_sizes/font_size = 18
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 2
-autowrap_mode = 2
-
 [node name="Label" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
-text = "Incindiary Barrage"
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="RealisticLabel" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 42)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("6_t4r8q")
+theme_override_constants/outline_size = 7
 theme_override_font_sizes/font_size = 15
 text = "Incindiary Barrage"
 vertical_alignment = 1
@@ -335,49 +308,14 @@ texture = ExtResource("4_rd7hj")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/VBoxContainer"]
+[node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0.211454, 0.150914, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 15
-bbcode_enabled = true
-text = "Throws a barragge on the enemy.
-CAN'T BE AVOIDED
-"
-fit_content = true
-autowrap_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-visible_characters_behavior = 1
-
-[node name="RealisticDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.163848, 0.114124, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/normal_font = ExtResource("6_t4r8q")
+theme_override_colors/font_outline_color = Color(0.211454, 0.150914, 0, 1)
+theme_override_constants/outline_size = 7
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "Throws a barragge on the enemy.

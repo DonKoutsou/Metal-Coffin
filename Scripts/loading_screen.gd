@@ -20,6 +20,7 @@ func _on_skip_button_pressed() -> void:
 	
 
 func _ready() -> void:
+	UISoundMan.GetInstance().AddSelf(SkipButton)
 	SkipButton.visible = false
 	$AnimationPlayer.play("Logo")
 	$SubViewportContainer/SubViewport/TownBackground.set_physics_process(false)
