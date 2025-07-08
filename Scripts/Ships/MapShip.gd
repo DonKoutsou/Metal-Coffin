@@ -86,8 +86,8 @@ func _ready() -> void:
 func _draw() -> void:
 	if (ShowFuelRange):
 		var FRange = GetFuelRange()
-		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 2.0 / CamZoom, true)
-		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 2.0 / CamZoom, true)
+		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 1 / CamZoom, true)
+		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 1 / CamZoom, true)
 
 func Refuel() -> void:
 	if (Altitude == 0 and !Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
@@ -639,4 +639,4 @@ func TogglePause(t : bool):
 #/////////////////////////////////////
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	visible = NewZoom > 0.5
+	visible = NewZoom > 0.8

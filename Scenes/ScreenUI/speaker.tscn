@@ -19,8 +19,9 @@
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
+offset_top = -118.0
 offset_right = 60.0
-offset_bottom = 40.0
+offset_bottom = -78.0
 pivot_offset = Vector2(40, 20)
 script = ExtResource("1_mivq8")
 SoundList = Dictionary[int, Array]({
@@ -38,10 +39,10 @@ L = NodePath("Light")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -35.0
-offset_top = -94.0
-offset_right = 114.0
-offset_bottom = 204.0
+offset_left = -11.0
+offset_top = 32.0
+offset_right = 138.0
+offset_bottom = 330.0
 scale = Vector2(0.980121, 0.980121)
 texture = ExtResource("13_xhvq3")
 expand_mode = 1
@@ -68,8 +69,8 @@ flip_h = true
 
 [node name="Light" parent="." instance=ExtResource("15_3b7e2")]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 61.0
-offset_right = 68.0
-offset_bottom = 81.0
+offset_left = 72.0
+offset_top = 187.0
+offset_right = 92.0
+offset_bottom = 207.0
 scale = Vector2(0.65693, 0.65693)

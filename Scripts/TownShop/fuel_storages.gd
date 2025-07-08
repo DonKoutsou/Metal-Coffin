@@ -34,7 +34,12 @@ func _draw() -> void:
 		var textpos = Spots[g]
 		textpos.y -= 10
 		textpos.x -= (g.GetSpotName().length() / 2) * 15
-		draw_string(font, textpos, g.GetSpotName(), HORIZONTAL_ALIGNMENT_CENTER, -1, 24,  Color(1, 1,1))
+		var SpotString = g.GetSpotName()
+		
+		draw_string(font, textpos, SpotString, HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
+		if (g.HasFuel()):
+			draw_texture_rect(load("res://Assets/Items/Fuel.png"), Rect2(Vector2(textpos.x - 20, textpos.y - 14), Vector2(16,16)), false, Color("a29752"))
+			#draw_string(font, Vector2(textpos.x - 18, textpos.y + 16), "Fuel Depot", HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
 	draw_circle(get_viewport_rect().size / 2, Rng / 15, Color(0.3, 0.7, 0.915), false, 4)
 
 func RedrawThing() -> void:

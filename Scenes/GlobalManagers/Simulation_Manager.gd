@@ -42,7 +42,16 @@ func TogglePause(t : bool) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Simulation unpaused")
 	
 	#get_child(0).TogglePause(t)
-		
+
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("PauseSim")):
+		TogglePause(!Paused)
+	if (event.is_action_pressed("SpeedSim")):
+		SpeedToggle(true)
+	if (event.is_action_released("SpeedSim")):
+		SpeedToggle(false)
+	
+
 func SetSimulationSpeed(Speed : float) -> void:
 	SimulationNotification.GetInstance().SimSpeedUpdated(Speed > 1)
 	SimulationSpeed = Speed

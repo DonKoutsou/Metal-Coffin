@@ -33,7 +33,7 @@ func _ready() -> void:
 	ToggleScreenGlitches(SettingsPanel.GetGlitch())
 
 func ToggleScreenGlitches(t : bool) -> void:
-	var mat = $Control3/Screen.material as ShaderMaterial
+	var mat = $CanvasLayer/Screen.material as ShaderMaterial
 	var ImageFlicker = 0
 	var Skip = 0
 	if (t):
@@ -116,10 +116,10 @@ func _on_control_3_gui_input(event: InputEvent) -> void:
 	#var mat : ShaderMaterial = $Control3/Screen.material
 
 func ToggleCrtEffect(T : bool) -> void:
-	$Control3/Screen.visible = T
+	$CanvasLayer/Screen.visible = T
 
 func SetScreenRes(Res : Vector2) -> void:
-	$Control3/Screen.material.set_shader_parameter("res", Res)
+	$CanvasLayer/Screen.material.set_shader_parameter("res", Res)
 
 func _on_flight_manual_pressed() -> void:
 	Manual.visible = true

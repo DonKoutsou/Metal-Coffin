@@ -127,11 +127,11 @@ func _draw():
 				newpolygon = Geometry2D.merge_polygons(newpolygon[0],polyg[f])
 			for f in newpolygon.size():
 				newpolygon[f].append(newpolygon[f][0])
-				draw_polyline(newpolygon[f], Col, 2 / CamZoom, true)
+				draw_polyline(newpolygon[f], Col, 1 / CamZoom, true)
 	for g in circles.size():
 		if (intersectingcircles.has(g)):
 			continue
-		draw_polyline(get_circle_polygon(circles[g][0], circles[g][1].x), Col, 2 / CamZoom, true)
+		draw_polyline(get_circle_polygon(circles[g][0], circles[g][1].x), Col, 1 / CamZoom, true)
 	
 	
 			
@@ -139,7 +139,7 @@ func DrawRuller() -> void:
 	if (ControlledShip == null or !ControlledShip.RadarWorking):
 		return
 	var shippos = ControlledShip.global_position
-	var LineW = 1/CamZoom
+	var LineW = 0.5/CamZoom
 	var vizrange = ControlledShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	if(!ControlledShip.RadarWorking):
 		vizrange = 90

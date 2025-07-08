@@ -207,7 +207,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
 show_behind_parent = true
 position = Vector2(15, 7)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -253,7 +252,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -299,7 +297,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")

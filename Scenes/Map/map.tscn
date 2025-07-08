@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="17_445lv"]
 [ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="18_a2ujk"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
+[ext_resource type="PackedScene" uid="uid://boe0re3ai5qdj" path="res://dark_blue_background.tscn" id="19_28wu2"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="19_x3wib"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
@@ -58,11 +59,8 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(10, 10)
 shader_parameter/Scale2 = Vector2(20, 20)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rrndq"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28wu2"]
 light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujsvm"]
-bg_color = Color(0.11435, 0.205627, 0.212156, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -105,6 +103,7 @@ stretch = true
 process_mode = 1
 disable_3d = true
 own_world_3d = true
+world_3d = ExtResource("10_28wu2")
 handle_input_locally = false
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
@@ -122,7 +121,6 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer/ViewPort/SubViewportContainer"]
 disable_3d = true
 own_world_3d = true
-world_3d = ExtResource("10_28wu2")
 handle_input_locally = false
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
@@ -147,6 +145,7 @@ script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
 Cloud = NodePath("Clouds")
 Ground = NodePath("Ground")
+MinZoom = 0.08
 ClickSound = NodePath("AudioStreamPlayer")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
@@ -174,20 +173,14 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DarkBlueBackground" type="Panel" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
-modulate = Color(1, 1, 1, 0)
-material = SubResource("CanvasItemMaterial_rrndq")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -15000.0
-offset_top = -15000.0
-offset_right = 15000.0
-offset_bottom = 15000.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ujsvm")
+[node name="DarkBlueBackground" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" instance=ExtResource("19_28wu2")]
+material = SubResource("CanvasItemMaterial_28wu2")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+color = Color(0.167403, 0.285599, 0.294053, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 stream = ExtResource("19_x3wib")

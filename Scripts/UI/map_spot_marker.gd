@@ -51,7 +51,7 @@ func OnAlarmRaised(Notify : bool) -> void:
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	$HBoxContainer.scale = Vector2(1,1) / NewZoom
-	$AnalyzeButton.visible = NewZoom <= 0.5
+	$AnalyzeButton.visible = NewZoom <= 0.8
 
 func EnteredScreen() -> void:
 	$AnalyzeButton.add_to_group("UnmovableMapInfo")

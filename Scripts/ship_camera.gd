@@ -117,7 +117,7 @@ var GridShowing = false
 var MapGridTween : Tween
 
 func _UpdateMapGridVisibility():
-	if (zoom.x < 0.5 and !GridShowing):
+	if (zoom.x < 0.8 and !GridShowing):
 		if (is_instance_valid(MapGridTween)):
 			MapGridTween.kill()
 			MapGridTween = null
@@ -130,7 +130,7 @@ func _UpdateMapGridVisibility():
 		MapGridTween.finished.connect(Ground.hide)
 		
 		
-	else: if (zoom.x >= 0.5 and GridShowing):
+	else: if (zoom.x >= 0.8 and GridShowing):
 		if (is_instance_valid(MapGridTween)):
 			MapGridTween.kill()
 			MapGridTween = null
@@ -141,6 +141,12 @@ func _UpdateMapGridVisibility():
 		MapGridTween = create_tween()
 		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
 		GridShowing = false
+	
+	
+	#Background.size = Vector2(30000,30000) / zoom
+	#Background.position = -Background.size /2
+	Background.UpdateZoom(zoom.x)
+	
 
 	#$"../InScreenUI/Control3/Rulers/Panel3".material.set_shader_parameter("zoom", zoom.x * 2)
 func UpdateCameraPos(relativeMovement : Vector2):
@@ -150,6 +156,8 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		FocusedShip = null
 	var maxposY = WorldBounds.y
 	var maxposX = Vector2(-(WorldBounds.x / 2), WorldBounds.x / 2)
+	#var maxposY = -99999999999999999
+	#var maxposX = Vector2(-1000000,1000000)
 	var rel = relativeMovement / zoom
 	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY,1000) )
 	if (newpos.x != position.x):
@@ -160,7 +168,7 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	Cloud.material.set_shader_parameter("offset", global_position / 1500)
 	#Cloud2.material.set_shader_parameter("offset", (global_position / 1500) + Vector2(500,500))
 	Ground.material.set_shader_parameter("offset", global_position / 1500)
-	
+	Background.UpdateOffset(global_position)
 	PositionChanged.emit(position)
 #SCREEN SHAKE///////////////////////////////////
 var shakestr = 0.0
@@ -289,3 +297,4 @@ func ForceCamPosition(Pos : Vector2) -> void:
 	#$Clouds2.material.set_shader_parameter("offset", global_position / 1500)
 	Ground.material.set_shader_parameter("offset", global_position / 1500)
 	PositionChanged.emit(position)
+	Background.UpdateOffset(global_position)
