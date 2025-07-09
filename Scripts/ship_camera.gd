@@ -17,7 +17,7 @@ static var Instance : ShipCamera
 static var WorldBounds : Vector2
 
 signal ZoomChanged(NewVal : float)
-signal PositionChanged(NewVal : float)
+signal PositionChanged(NewVal : Vector2)
 
 var FocusedShip : PlayerDrivenShip
 # Called when the node enters the scene tree for the first time.

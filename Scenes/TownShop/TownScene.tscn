@@ -21,7 +21,7 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_oyy4e"]
 environment = SubResource("Environment_t244x")
 
-[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "PortBuffText", "MerchendiseButton", "WorkshopButton", "FuelButton", "RepairButton")]
+[node name="TownScene" type="Control" node_paths=PackedStringArray("PortName", "Population", "PortBuffText", "MerchendiseButton", "WorkshopButton", "FuelButton", "RepairButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,6 +32,7 @@ mouse_force_pass_scroll_events = false
 theme = ExtResource("1_ca22g")
 script = ExtResource("2_epy1b")
 PortName = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/CityName")
+Population = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/CityName2")
 PortBuffText = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer/CityBuffs")
 MerchendiseButton = NodePath("Button2")
 WorkshopButton = NodePath("Button3")
@@ -165,6 +166,15 @@ theme_override_font_sizes/font_size = 50
 text = "Alivia City Port"
 autowrap_mode = 2
 
+[node name="CityName2" type="Label" parent="HBoxContainer2/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "Pupulation : 140000"
+autowrap_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/PanelContainer2/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -174,6 +184,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 bbcode_enabled = true
+text = "[p][img]res://Assets/Items/Fuelsmall.png[/img] REFUEL TIME/COST -[p]"
 fit_content = true
 
 [node name="Button" type="Button" parent="HBoxContainer2" groups=["DigitalButtons"]]

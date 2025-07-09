@@ -135,7 +135,7 @@ func _ready() -> void:
 				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
 				Pl.global_position = Cardi.global_position
 				Cardi.Event.SkipStory(Pl)
-				Cardi.Visited = true
+				Cardi.OnSpotVisited(false)
 		else:
 			#Load worldview from prologue
 			WorldView.GetInstance().Load()
@@ -439,7 +439,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 		#else:
 		#Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
 
-	spot.PlayerFuelReserves = max(0 , BFuel)
+	spot.AddToFuelReserves(BFuel)
 	
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted

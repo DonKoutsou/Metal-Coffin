@@ -65,7 +65,7 @@ func _draw() -> void:
 				var YPosO = YPosT + (size.y / (Siz * 100)) * One
 				
 				
-				var DrawOneLine = ZoomLevel > 0.25
+				var DrawOneLine = ZoomLevel > 0.15
 				
 				if (DrawOneLine and One == 0):
 					DrawOneLine = !DrawTenLine

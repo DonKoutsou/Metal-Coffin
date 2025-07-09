@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://dobir15ooa8uf"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://dobir15ooa8uf"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_ldj7b"]
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_uthrk"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_wlpxv"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_50l7f"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="6_36t7x"]
@@ -12,4 +11,3 @@ script = ExtResource("1_ldj7b")
 SpotName = "Cirkari"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("4_wlpxv")]([ExtResource("5_50l7f"), ExtResource("6_36t7x"), ExtResource("7_gc4lx")])
-Merchendise = Array[ExtResource("2_uthrk")]([])

@@ -11,6 +11,7 @@ class_name Ingame_UIManager
 @export var UnderstatUI : Control
 @export var OverStatUI : Control
 @export var PopupPlecement : Control
+@export var Screen : Control
 
 signal GUI_Input(event)
 static var Instance :Ingame_UIManager
@@ -33,7 +34,7 @@ func _ready() -> void:
 	ToggleScreenGlitches(SettingsPanel.GetGlitch())
 
 func ToggleScreenGlitches(t : bool) -> void:
-	var mat = $CanvasLayer/Screen.material as ShaderMaterial
+	var mat = Screen.material as ShaderMaterial
 	var ImageFlicker = 0
 	var Skip = 0
 	if (t):
@@ -116,10 +117,10 @@ func _on_control_3_gui_input(event: InputEvent) -> void:
 	#var mat : ShaderMaterial = $Control3/Screen.material
 
 func ToggleCrtEffect(T : bool) -> void:
-	$CanvasLayer/Screen.visible = T
+	Screen.visible = T
 
 func SetScreenRes(Res : Vector2) -> void:
-	$CanvasLayer/Screen.material.set_shader_parameter("res", Res)
+	Screen.material.set_shader_parameter("res", Res)
 
 func _on_flight_manual_pressed() -> void:
 	Manual.visible = true

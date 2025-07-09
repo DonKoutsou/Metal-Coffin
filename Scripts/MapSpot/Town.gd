@@ -31,7 +31,13 @@ func GenerateCity(Type : MapSpotType) -> void:
 	
 	sc.SetSpotData(Type)
 	
+	SetSize()
+	
 	spt.free()
+
+func SetSize() -> void:
+	var SizeThing = ( Spot.Population / 150000.0) as float
+	$Sprite2D2.scale = lerp(Vector2(0.3,0.3), Vector2(1.7,1.7),SizeThing)
 
 func IsEnemy() -> bool:
 	return Spot.SpotInfo.EnemyCity
@@ -71,6 +77,7 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		CSpot.replace_by(sc)
 		Spot = sc
 		sc.position = CSpot.position
+		sc.Population = spotdat.Population
 		sc.SpotInfo = spotdat.SpotInfo
 		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
 		sc.AlarmRaised = spotdat.AlarmRaised
@@ -78,6 +85,9 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.Merch = spotdat.Merch
 		sc.WorkShopMerch = spotdat.WorkShopMerch
 		sc.Event = spotdat.Evnt
+		
+		sc.SetSize()
+		SetSize()
 		if (sc.Event != null and spotdat.Evnt.CrewRecruit):
 			sc.add_to_group("CrewRecruitTown")
 		CSpot.free()

@@ -807,10 +807,10 @@ func RoadFinished() -> void:
 	
 func MapLineFinished() -> void:
 	var Lines = Maplt.wait_to_finish()
-	for g in Lines:
-		var l = g as Array[Vector2]
-		g[0] += (l[0].direction_to(l[1]) * 45)
-		g[1] += (l[1].direction_to(l[0]) * 45)
+	#for g in Lines:
+		#var l = g as Array[Vector2]
+		#g[0] += (l[0].direction_to(l[1]) * 45)
+		#g[1] += (l[1].direction_to(l[0]) * 45)
 	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer.AddLines(Lines)
 	Maplt = null
 	GenerationFinished.emit()

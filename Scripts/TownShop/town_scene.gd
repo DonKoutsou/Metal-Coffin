@@ -5,6 +5,7 @@ class_name TownScene
 @export_group("Nodes")
 #@export var FundAmm : Label
 @export var PortName : Label
+@export var Population : Label
 @export var PortBuffText : RichTextLabel
 @export_group("Buttons")
 @export var MerchendiseButton : Button
@@ -34,6 +35,7 @@ func _ready() -> void:
 	TownBG.PositionChanged.connect(_on_town_background_position_changed)
 	#Set the port's name on the UI along with the town's buffs
 	PortName.text = TownSpot.GetSpotName() + " City Port"
+	Population.text = "Population : {0}".format([snapped(TownSpot.Population, 1000)])
 	SetTownBuffs()
 	
 	UISoundMan.GetInstance().Refresh()
@@ -41,11 +43,11 @@ func _ready() -> void:
 func SetTownBuffs() -> void:
 	var Text : String = ""
 	if (TownSpot.HasFuel()):
-		Text += "[p][img]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
+		Text += "[p][img]res://Assets/Items/Fuelsmall.png[/img] REFUEL TIME/COST -[p]"
 	if (TownSpot.HasRepair()):
-		Text += "[img]res://Assets/Items/cubeforce.png[/img] REPAIR TIME/COST -[p]"
+		Text += "[img]res://Assets/Items/cubeforcesmol.png[/img] REPAIR TIME/COST -[p]"
 	if (TownSpot.HasUpgrade()):
-		Text += "[img]res://Assets/Items/materials-science.png[/img] UPGRADE TIME/COST -[p][p]"
+		Text += "[img]res://Assets/Items/Wrenchsmol.png[/img] UPGRADE TIME/COST -[p][p]"
 	PortBuffText.text = Text
 
 func On_MunitionShop_pressed() -> void:

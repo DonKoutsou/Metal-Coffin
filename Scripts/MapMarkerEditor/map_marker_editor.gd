@@ -23,14 +23,26 @@ func SetCamera() -> void:
 	if (!is_instance_valid(map)):
 		return
 	ship_camera = map.GetCamera()
+	ship_camera.ZoomChanged.connect(ZoomChanged)
+	ship_camera.PositionChanged.connect(CamMoved)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func ZoomChanged(NewZoom : float) -> void:
+	update()
+
+func CamMoved(NewPos : Vector2) -> void:
+	update()
+
 func update() -> void:
 	#global_position = get_parent().global_position - (get_viewport_rect().size/2)
 	var psize = $Panel.size / 2
 	$Panel.position = Vector2($XLine.position.x - psize.x, $YLine.position.y - psize.y)
 	if (Line != null):
+		Line.StartingPos = Line.to_local(ship_camera.global_position)
 		Line.UpdateLine(($Panel.global_position + psize) - Line.position, ship_camera.zoom.x)
 		Line.queue_redraw()
+
+
 func _OnTextButtonPressed() -> void:
 	$MarkerTextEditor.visible = true
 
@@ -52,6 +64,7 @@ func _on_drone_button_pressed() -> void:
 		Line = LineScene.instantiate() as MapMarkerLine
 		$Linetemp.add_child(Line)
 		Line.global_position = $Panel.global_position + ($Panel.size / 2)
+		Line.StartingPos = ship_camera.global_position
 		Line.add_point(Vector2(0,0))
 		Line.add_point(Vector2(0,0))
 		LineLeangth = 0

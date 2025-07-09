@@ -4,6 +4,7 @@ class_name  MapSpotSaveData
 #@export var SpotName : String
 @export var SpotLoc : Vector2
 @export var SpotType : MapSpotType
+@export var Population : int
 @export var Seen : bool
 @export var Visited : bool
 @export var Analyzed : bool

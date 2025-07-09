@@ -22,8 +22,8 @@ void fragment() {
 	Col.a = 1.0;
 
     // Apply the fog effect
-    COLOR = Col;
-	COLOR.a *= noise;
+    //COLOR = Col;
+	COLOR.a = noise;
 	NORMAL_MAP = vec3(Norm.xyz);
 	NORMAL_MAP_DEPTH = Norm.x;
 

@@ -180,7 +180,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-color = Color(0.167403, 0.285599, 0.294053, 1)
+color = Color(0.11435, 0.205627, 0.212156, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 stream = ExtResource("19_x3wib")

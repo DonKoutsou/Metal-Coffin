@@ -10,9 +10,9 @@ width = 64
 
 [sub_resource type="Environment" id="Environment_h7q0i"]
 background_mode = 3
+background_canvas_max_layer = -1
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_mode = 4
 tonemap_white = 16.0
 glow_enabled = true
 glow_levels/1 = 1.0
@@ -25,7 +25,6 @@ glow_blend_mode = 1
 glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 1.0
 glow_map_strength = 1.0
-adjustment_enabled = true
 adjustment_color_correction = SubResource("GradientTexture1D_uk868")
 
 [resource]

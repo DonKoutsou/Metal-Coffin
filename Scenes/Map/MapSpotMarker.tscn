@@ -12,10 +12,10 @@ border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 70
-corner_radius_top_right = 70
-corner_radius_bottom_right = 70
-corner_radius_bottom_left = 70
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
 corner_detail = 4
 anti_aliasing = false
 
@@ -268,13 +268,16 @@ NofiticationScene = ExtResource("2_b0564")
 BeepSound = ExtResource("3_625fb")
 
 [node name="AnalyzeButton" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.3)
 show_behind_parent = true
 texture_filter = 4
 use_parent_material = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -56.0
 offset_top = -56.0
 offset_right = 56.0
@@ -353,6 +356,24 @@ uppercase = true
 [node name="VisibilityNotif" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -16.5)
 scale = Vector2(7, 8.65)
+
+[node name="Label" type="Label" parent="."]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 76.0
+offset_right = 20.0
+offset_bottom = 97.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.051, 0.051, 0.051, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+uppercase = true
 
 [connection signal="screen_entered" from="VisibilityNotif" to="." method="EnteredScreen"]
 [connection signal="screen_exited" from="VisibilityNotif" to="." method="ExitedScreen"]

@@ -2,15 +2,19 @@ extends Line2D
 
 class_name MapMarkerLine
 
+var StartingPos : Vector2
 var LineLeangth : float = 0
 var w : float = 2
 
 func UpdateLine(Pos : Vector2, CamZoom : float) -> void:
+	#global_position = StartingPos
 	set_point_position(1, Pos)
 	LineLeangth = Vector2(0,0).distance_to(get_point_position(1))
 	$Label.text = "{0} km\n{1}°".format([roundi(Map.PixelDistanceToKm(LineLeangth / CamZoom)), roundi(rad_to_deg(Vector2.ZERO.angle_to_point(Pos.rotated(deg_to_rad(-90)))) + 180)])
 	$Label.position = get_point_position(0) - ($Label.size / 2)
 	$Label.pivot_offset = $Label.size / 2
+
+
 
 func CamZoomUpdated(NewZoom : float) -> void:
 	width = 2 / (NewZoom)

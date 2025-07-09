@@ -105,7 +105,8 @@ func Refuel() -> void:
 		ShipDockActions.emit("Refueling", true, roundi(timeleft))
 		#ToggleShowRefuel("Refueling", true, roundi(timeleft))
 		Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, TimeMulti * SimulationSpeed)
-		CurrentPort.PlayerFuelReserves -= TimeMulti * SimulationSpeed
+		
+		CurrentPort.AddToFuelReserves(-(TimeMulti * SimulationSpeed))
 	else:
 		ShipDockActions.emit("Refueling", false, 0)
 

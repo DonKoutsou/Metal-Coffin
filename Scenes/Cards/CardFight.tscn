@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene load_steps=25 format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://6hcd2pi6mky3" path="res://Scenes/Cards/CardFightShipInfo.tscn" id="11_fpjxy"]
 [ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
-[ext_resource type="World3D" uid="uid://bjr0yavhvw3tv" path="res://CardfightEnv.tres" id="14_hlnl3"]
 [ext_resource type="Material" uid="uid://b6441eghjnus8" path="res://Shaders/CardfightGround.tres" id="14_l2i77"]
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="14_vn53x"]
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
@@ -69,7 +68,6 @@ UIEventH = ExtResource("16_734e5")
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
 own_world_3d = true
-world_3d = ExtResource("14_hlnl3")
 handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4

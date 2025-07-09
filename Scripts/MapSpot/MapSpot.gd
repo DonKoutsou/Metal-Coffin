@@ -7,15 +7,17 @@ class_name MapSpot
 
 var PlayerFuelReserves : float = 0
 
-signal SpotAproached(Type :MapSpotType)
-signal SpotLanded(Type : MapSpotType)
+signal SpotAproached(Type :MapSpot)
+signal SpotLanded(Type : MapSpot)
 signal SpotAlarmRaised(Notify : bool)
+signal FuelReservesChanged(NewAmm : float)
 
 var SpotType : MapSpotType
 var SpotInfo : MapSpotCompleteInfo
 var Merch : Array[Merchandise] = []
 var WorkShopMerch : Array[Merchandise] = []
 var Pos : Vector2
+var Population : int
 var Visited = false
 var Seen = false
 var AlarmRaised = false
@@ -67,6 +69,7 @@ func SpawnEnemyGarison():
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
 	var datas = MapSpotSaveData.new()
+	datas.Population = Population
 	datas.SpotType = SpotType
 	datas.SpotLoc = position
 	datas.Seen = Seen
@@ -84,6 +87,15 @@ func SetSpotData(Type : MapSpotType) -> void:
 	SpotType = Type
 	var Data = Type.Data as MapSpotCustomData_CompleteInfo
 	
+	if (Type.SpotK == MapSpotType.SpotKind.CITY_CENTER):
+		Population = randi_range(10000, 50000)
+	else : if (Type.SpotK == MapSpotType.SpotKind.CAPITAL):
+		Population = randi_range(80000, 150000)
+	else : if (Type.SpotK == MapSpotType.SpotKind.VILLAGE):
+		Population = randi_range(2000, 6000)
+	
+	SetSize()
+	
 	for z in Data.PossibleIds:
 		if (z.PickedBy != null):
 			continue
@@ -100,6 +112,12 @@ func SetSpotData(Type : MapSpotType) -> void:
 		#OnSpotAnalyzed(false)
 
 	add_to_group(SpotType.GetSpotEnumString())
+
+func SetSize() -> void:
+	var sizething = (Population / 150000.0) as float
+	var collider = $AreaNotif/CollisionShape2D.shape as CircleShape2D
+	collider.radius = lerp(30, 250, sizething) / 2
+
 func GetSpotName() -> String:
 	return SpotInfo.SpotName
 func GetPossibleDrops() -> Array:
@@ -207,6 +225,14 @@ func OnAlarmRaised(Notify : bool = false) -> void:
 	AlarmRaised = true
 	for g in VisitingShips:
 		Commander.GetInstance().OnEnemySeen(g, null)
+
+func SetFuelReserves(NewAmm : float) -> void:
+	PlayerFuelReserves = NewAmm
+	FuelReservesChanged.emit(PlayerFuelReserves)
+
+func AddToFuelReserves(Amm : float) -> void:
+	PlayerFuelReserves = max(0, PlayerFuelReserves + Amm)
+	FuelReservesChanged.emit(PlayerFuelReserves)
 
 func PlayerHasFuelReserves() -> bool:
 	return PlayerFuelReserves > 0
