@@ -8,7 +8,7 @@
 script = ExtResource("1_ov1vt")
 MissileScene = ExtResource("1_evrf7")
 Distance = 1500
-Speed = 300.0
+Speed = 900.0
 Damage = 50
 Type = 0
 ItemName = "Cruise Missile"

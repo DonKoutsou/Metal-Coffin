@@ -56,7 +56,7 @@ shader_parameter/GroundNormalTexture = ExtResource("15_x3wib")
 shader_parameter/GroundNormal2Texture = ExtResource("14_a2ujk")
 shader_parameter/NormalD = 1.0
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale1 = Vector2(10, 10)
+shader_parameter/Scale1 = Vector2(20, 20)
 shader_parameter/Scale2 = Vector2(20, 20)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28wu2"]

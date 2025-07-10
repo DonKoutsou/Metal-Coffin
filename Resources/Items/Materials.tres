@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://clyeusyxaqgda"]
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://clyeusyxaqgda"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_315qu"]
 [ext_resource type="Texture2D" uid="uid://cw7pry6dv5w2k" path="res://Assets/Items/materials-science.png" id="1_pfi5x"]
-[ext_resource type="Texture2D" uid="uid://com40xglelaik" path="res://Assets/Items/materials-science_smol.png" id="2_s3yb4"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_yyjv6"]
 
 [resource]
 script = ExtResource("2_yyjv6")
 ItemIcon = ExtResource("1_pfi5x")
-ItemIconSmol = ExtResource("2_s3yb4")
 ItemName = "Material"
 ItemDesc = "ItemDesc"
 MaxStackCount = 10
 CardProviding = Array[ExtResource("1_315qu")]([])
+Tier = 0
+CanTransfer = true
+Cost = 0

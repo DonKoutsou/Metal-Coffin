@@ -8,7 +8,7 @@
 script = ExtResource("4_1mwvx")
 MissileScene = ExtResource("3_j5y6l")
 Distance = 900
-Speed = 500.0
+Speed = 1200.0
 Damage = 50
 Type = 0
 ItemName = "Tactical Missile"

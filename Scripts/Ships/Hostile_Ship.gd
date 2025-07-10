@@ -19,7 +19,7 @@ class_name HostileShip
 @export var BT : PackedScene
 @export var AlarmVisual : PackedScene
 #This array will be filled by commander when this ship is sent after another ship
-var PursuingShips : Array[Node2D]
+var PursuingShips : Array[PlayerDrivenShip]
 #This value will be filled by commander when this ship is sent to investigate a position
 var PositionToInvestigate : Vector2
 
@@ -138,12 +138,26 @@ func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var missile = Mis.MissileScene.instantiate() as Missile
 	missile.FiredBy = self
 	missile.SetData(Mis)
-	get_parent().add_child(missile)
 	if (Command != null):
 		missile.global_position = Command.global_position
 	else:
 		missile.global_position = global_position
+	get_parent().add_child(missile)
+	
 	missile.look_at(Pos)
+
+func Steer(Rotation : float) -> void:
+	while rotation_degrees > 180:
+		rotation -= 180
+	while rotation_degrees < -180:
+		rotation += 180
+	rotation += Rotation
+	
+	var Mat = ShipSprite.material as ShaderMaterial
+	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+
+	for g in GetDroneDock().DockedDrones:
+		g.ForceSteer(rotation)
 
 func UpdateElint(delta: float) -> void:
 	d -= delta
@@ -325,27 +339,50 @@ func RemovePort():
 		g.CurrentPort = null
 
 func IntersectPusruing() -> Vector2:
-	#var ms = Time.get_ticks_msec()
-	# Get the current position and velocity of the ship
-	var ship_position
-	var ship_velocity
+	var pursuing_ship_position = PursuingShips[0].global_position
+	var pursuing_ship_velocity = PursuingShips[0].GetShipSpeedVec()
+	var pursuing_ship_speed = PursuingShips[0].GetShipSpeed() / 360
 	
-	ship_position = PursuingShips[0].global_position
-	ship_velocity = PursuingShips[0].GetShipSpeedVec()
-
-	var Distance = global_position.distance_to(ship_position)
+	if (pursuing_ship_speed == 0):
+		return pursuing_ship_position
+	
+	var Distance = global_position.distance_to(pursuing_ship_position)
 	
 	if (Distance < 10):
 		OnReachedPursuing()
 	
-	# Predict where the ship will be in a future time `t`
-	var speed = GetShipSpeed()
-	var time_to_interception = (global_position.distance_to(ship_position)) / (speed / 360)
+	var DirToPrey = global_position.direction_to(pursuing_ship_position)
+	var speed = GetShipMaxSpeed() / 360
+	
+	var time_to_interception = global_position.distance_to(pursuing_ship_position) / speed
+	
+	var magnitude = 1
+	magnitude += (pursuing_ship_velocity.normalized().dot(DirToPrey) + 1) * 2
+	magnitude *= (speed / pursuing_ship_speed)
 
-	# Calculate the predicted interception point
-	var predicted_position = ship_position + ship_velocity * time_to_interception
-	#print("Calculating Intersection Point took " + var_to_str(Time.get_ticks_msec() - ms) + " msec")
-	return predicted_position
+	var PositionInFuture = pursuing_ship_position + pursuing_ship_velocity * (time_to_interception * magnitude)
+	
+	var OffsetToPositionInFuture = (PositionInFuture - pursuing_ship_position) / 10
+	
+	var BestInterceptionPoint : Vector2
+	var TimeToPoint : float = 99999999999
+	var TimeOffset : float = 99999999
+
+	for g in range(10, 1, -1):
+		var pos = pursuing_ship_position + (OffsetToPositionInFuture * g)
+
+		var TimeToPos = global_position.distance_to(pos) / speed
+		var PreyTime = pursuing_ship_position.distance_to(pos) / pursuing_ship_speed
+		
+		if (abs(TimeToPos - PreyTime) > TimeOffset):
+			continue
+
+		BestInterceptionPoint = pos
+		TimeToPoint = TimeToPos
+		TimeOffset = abs(TimeToPos - PreyTime)
+
+	return BestInterceptionPoint
+
 
 func OnReachedPursuing() -> void:
 	var plships : Array[MapShip] = []

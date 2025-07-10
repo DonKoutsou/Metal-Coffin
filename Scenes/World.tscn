@@ -1,18 +1,12 @@
-[gd_scene load_steps=34 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene load_steps=28 format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
-[ext_resource type="PackedScene" uid="uid://bas2hvjynjr05" path="res://Scenes/InScreenUI/loading_screen.tscn" id="3_pocgy"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="6_1ajha"]
-[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="6_sol3n"]
-[ext_resource type="PackedScene" uid="uid://c2db1rw6borur" path="res://Scenes/WorldViewQuestionair.tscn" id="6_xiqgv"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="7_3dbmh"]
-[ext_resource type="PackedScene" uid="uid://cvr1a2nugdu2j" path="res://Scenes/intro.tscn" id="7_371b6"]
 [ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/ship_controller.gd" id="7_q720d"]
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_q55oc"]
-[ext_resource type="PackedScene" uid="uid://bkl2a6ey2cxpg" path="res://Scenes/InScreenUI/HappeningUI.tscn" id="9_5gym6"]
-[ext_resource type="PackedScene" uid="uid://cwjp7q1w18u4p" path="res://Scenes/InScreenUI/FleetSparationScene.tscn" id="10_8l3nt"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
 [ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="12_rwt1y"]
@@ -47,12 +41,11 @@ script = ExtResource("1_sc0wx")
 _Map = NodePath("Map")
 _Command = NodePath("Commander")
 Controller = NodePath("ShipController")
-CardFightScene = ExtResource("6_sol3n")
-LoadingScene = ExtResource("3_pocgy")
-FleetSeparationScene = ExtResource("10_8l3nt")
-HappeningUI = ExtResource("9_5gym6")
-WorldViewQuestionairScene = ExtResource("6_xiqgv")
-IntroText = ExtResource("7_371b6")
+CardFightScene = "res://Scenes/Cards/CardFight.tscn"
+LoadingScene = "res://Scenes/InScreenUI/loading_screen.tscn"
+FleetSeparationScene = "res://Scenes/InScreenUI/FleetSparationScene.tscn"
+HappeningUI = "res://Scenes/InScreenUI/HappeningUI.tscn"
+WorldViewQuestionairScene = "res://Scenes/WorldViewQuestionair.tscn"
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
 IntroDialogues = Array[String](["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\", \"Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."])

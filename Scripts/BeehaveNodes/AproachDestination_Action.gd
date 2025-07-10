@@ -42,7 +42,10 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		MainShip.SetSpeed(MainShipMaxSpeed)
 		#var SimulationSpeed = Ship.SimulationSpeed
 		MainShip.global_position += MainShip.GetShipSpeedVec() * TickRate * SimulationSpeed
-		MainShip.ShipLookAt(DestinationPos)
+		var directiontoDestination = MainShip.global_position.direction_to(DestinationPos).angle()
+		if (MainShip.rotation != directiontoDestination):
+			MainShip.Steer(clamp((directiontoDestination - MainShip.rotation) * TickRate * SimulationSpeed, -0.01, 0.01))
+		#MainShip.ShipLookAt(DestinationPos)
 		return SUCCESS
 	
 	MainShip.SetSpeed(0)

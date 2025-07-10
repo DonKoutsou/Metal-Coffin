@@ -43,11 +43,11 @@ func _ready() -> void:
 func SetTownBuffs() -> void:
 	var Text : String = ""
 	if (TownSpot.HasFuel()):
-		Text += "[p][img]res://Assets/Items/Fuelsmall.png[/img] REFUEL TIME/COST -[p]"
+		Text += "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
 	if (TownSpot.HasRepair()):
-		Text += "[img]res://Assets/Items/cubeforcesmol.png[/img] REPAIR TIME/COST -[p]"
+		Text += "[img={32}x{32}]res://Assets/Items/cubeforce.png[/img] REPAIR TIME/COST -[p]"
 	if (TownSpot.HasUpgrade()):
-		Text += "[img]res://Assets/Items/Wrenchsmol.png[/img] UPGRADE TIME/COST -[p][p]"
+		Text += "[img={32}x{32}]res://Assets/Items/Wrench.png[/img] UPGRADE TIME/COST -[p][p]"
 	PortBuffText.text = Text
 
 func On_MunitionShop_pressed() -> void:

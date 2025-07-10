@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		
 		var hull = CurrentCommand.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / CurrentCommand.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
 		var CommanderPanel = PanelLocation.get_child(Index) as CurrentShipPanel
-		CommanderPanel.SetText("{0}\nHull:{1}%".format([ CurrentCommand.Cpt.GetCaptainName(), roundi(hull)]), false)
+		CommanderPanel.SetText("{0} {1}%".format([ CurrentCommand.Cpt.GetCaptainName(), roundi(hull)]), false)
 		CommanderPanel.SetSelected(CurrentCommand == currentShip)
 		CommanderPanel.ConnectedShip = CurrentCommand
 		Index += 1
@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 			var DockedPanel = PanelLocation.get_child(Index) as CurrentShipPanel
 			
 			var h = Docked.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / Docked.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-			DockedPanel.SetText("{0}\nHull:{1}%".format([Docked.Cpt.GetCaptainName(), roundi(h)]), false)
+			DockedPanel.SetText("{0} {1}%".format([Docked.Cpt.GetCaptainName(), roundi(h)]), false)
 			DockedPanel.SetSelected(Docked == currentShip)
 			DockedPanel.ConnectedShip = Docked
 			Index += 1

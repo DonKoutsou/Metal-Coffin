@@ -6,12 +6,12 @@ class_name World
 @export var _Command : Commander
 @export var Controller : ShipContoller
 @export_group("Scenes")
-@export var CardFightScene : PackedScene
-@export var LoadingScene : PackedScene
-@export var FleetSeparationScene : PackedScene
-@export var HappeningUI : PackedScene
-@export var WorldViewQuestionairScene : PackedScene
-@export var IntroText : PackedScene
+@export var CardFightScene : String
+@export var LoadingScene : String
+@export var FleetSeparationScene : String
+@export var HappeningUI : String
+@export var WorldViewQuestionairScene : String
+@export var IntroText : String
 @export_group("Prologue")
 @export var PrologueTrigger : PackedScene
 @export var PrologueEndScreen : PackedScene
@@ -52,7 +52,7 @@ func _ready() -> void:
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	WorldSpawnTransitionFinished.emit()
 	#$Inventory.Player = GetMap().GetPlayerShip()
-	var Loadingscr = LoadingScene.instantiate() as LoadingScreen
+	var Loadingscr = load(LoadingScene).instantiate() as LoadingScreen
 	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, false)
 	
 	#add_child(Loadingscr)
@@ -120,7 +120,7 @@ func _ready() -> void:
 			Armak.add_child(Trigger)
 			
 			if (!SkipStory):
-				var Questionair = WorldViewQuestionairScene.instantiate() as WorldViewQuestionair
+				var Questionair = load(WorldViewQuestionairScene).instantiate() as WorldViewQuestionair
 				Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
 				Questionair.Init()
 				await GetMap().GetScreenUi().FullScreenToggleFinished
@@ -240,7 +240,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	if (CurrentFleet.size() == 1):
 		PopUpManager.GetInstance().DoFadeNotif("Cant separate current fleet")
 		return
-	var sc = FleetSeparationScene.instantiate() as FleetSeparation
+	var sc = load(FleetSeparationScene).instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
 	GetMap().GetScreenUi().ToggleScreenUI(false)
 	GetMap().GetScreenUi().ShipTradeInProgress = true
@@ -282,7 +282,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 			continue
 		FighingEnemyUnits.append(g)
 		EBattleStats.append(g.GetBattleStats())
-	var CardF = CardFightScene.instantiate() as Card_Fight
+	var CardF = load(CardFightScene).instantiate() as Card_Fight
 	CardF.connect("CardFightEnded", CardFightEnded)
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
@@ -471,7 +471,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	#ControlledShip.HaltShip()
 	var PlayedEvent = false
 	if (Spot.Event != null and !Spot.Visited):
-		var happeningui = HappeningUI.instantiate() as HappeningInstance
+		var happeningui = load(HappeningUI).instantiate() as HappeningInstance
 		happeningui.EventSpot = Spot
 		happeningui.HappeningInstigator = Instigator
 		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)

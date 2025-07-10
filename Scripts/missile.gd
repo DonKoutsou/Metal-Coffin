@@ -18,6 +18,8 @@ var VisibleBy : Array[MapShip]
 var FirePos : Vector2
 signal OnShipDestroyed(Mis : Missile)
 
+var activationdistance : float = 0
+
 func SetData(Dat : MissileItem) -> void:
 	Speed = Dat.Speed
 	MissileName = Dat.ItemName
@@ -53,17 +55,26 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
-	if (FoundShips.size() > 0):
-		HoneAtEnemy()
-	
+
 	var offset = GetShipSpeedVec() * SimulationManager.SimSpeed()
 
 	global_position += offset
-		
+	
+	
+	
 	if (global_position.distance_to(FirePos) > Distance):
 		Kill()
-		
+	
+	
 	$TrailLine.Update(delta)
+	
+	activationdistance += offset.length()
+	
+	if (activationdistance < 50):
+		return
+	
+	if (FoundShips.size() > 0):
+		HoneAtEnemy()
 	
 func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
 	var Body : Node2D

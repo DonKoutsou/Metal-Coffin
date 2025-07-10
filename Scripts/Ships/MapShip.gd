@@ -583,7 +583,7 @@ func GetShipName() -> String:
 	return Cpt.GetCaptainName()
 	
 func GetShipSpeed() -> float:
-	if (Docked):
+	if (Command != null):
 		return Command.GetShipSpeed()
 	return Acceleration.position.x * 360
 	
