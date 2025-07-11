@@ -62,7 +62,6 @@ texture = ExtResource("6_tlfh0")
 show_behind_parent = true
 position = Vector2(-3.233e-05, -2.77778)
 rotation = 1.57078
-points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_hjoyl")
@@ -70,7 +69,7 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 script = ExtResource("8_kunx8")
-trail_fade_speed = 30.0
+trail_fade_speed = 0.1
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 

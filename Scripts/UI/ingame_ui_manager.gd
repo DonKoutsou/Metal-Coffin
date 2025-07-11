@@ -13,7 +13,6 @@ class_name Ingame_UIManager
 @export var PopupPlecement : Control
 @export var Screen : Control
 
-signal GUI_Input(event)
 static var Instance :Ingame_UIManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,7 +21,6 @@ func _ready() -> void:
 	Instance = self
 	EventHandler.connect("PausePressed", Pause)
 	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
-	
 	GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
 	EventHandler.connect("DrawLinePressed", _MapMarkerEditor._on_drone_button_pressed)
 	EventHandler.connect("DrawTextPressed", _MapMarkerEditor._OnTextButtonPressed)
@@ -106,12 +104,6 @@ func _on_exit_pressed() -> void:
 
 func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().EndGame()
-	
-
-		
-		
-func _on_control_3_gui_input(event: InputEvent) -> void:
-	GUI_Input.emit(event)
 
 #func Stuter() -> void:
 	#var mat : ShaderMaterial = $Control3/Screen.material

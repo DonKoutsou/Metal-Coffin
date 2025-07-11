@@ -67,7 +67,6 @@ width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
 round_precision = 1
 script = ExtResource("9_wfgcg")
-trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
@@ -79,7 +78,6 @@ width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
 round_precision = 1
 script = ExtResource("9_wfgcg")
-trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 

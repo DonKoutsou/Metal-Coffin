@@ -7,9 +7,18 @@ class_name PlayerDrivenShip
 var CommingBack = false
 var RegroupTarget : MapShip
 
+var TargetLocation : Vector2
+
 func  _ready() -> void:
 	super()
 	Paused = SimulationManager.IsPaused()
+
+func _draw() -> void:
+	super()
+	
+	if (TargetLocation != Vector2.ZERO):
+		var pos = to_local(TargetLocation)
+		draw_line(Vector2.ZERO, pos, Color("ffc315"), 1 / CamZoom)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
@@ -56,23 +65,41 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 	var FuelAfter = pow(arg, 1.0/0.55) / eff_eff
 	return FuelNow - FuelAfter
 
+func SetTargetLocation(pos : Vector2) -> void:
+	
+	AccelerationChanged(GetShipMaxSpeed())
+	TargetLocation = pos
+
 func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)
 	queue_redraw()
 	
+	var SimulationSpeed = SimulationManager.SimSpeed()
+	
+	var traildelta = delta
+	if (Paused): 
+		traildelta = 0
+	
 	for g in TrailLines:
-		g.UpdateProjected(delta, Altitude / 10000.0)
+		g.UpdateProjected(traildelta, Altitude / 10000.0)
 	
 	if (CurrentPort != null):
 		_HandleRestock()
 	
 	if (Paused):
 		return
-	
-	var SimulationSpeed = SimulationManager.SimSpeed()
-	
+
 	_HandleLanding(SimulationSpeed)
+	
+	if (TargetLocation != Vector2.ZERO):
+		if (TargetLocation.distance_to(global_position) < 5):
+			TargetLocation = Vector2.ZERO
+			AccelerationChanged(0)
+		
+		var directiontoDestination = (TargetLocation - global_position).normalized().angle()
+		if (rotation != directiontoDestination):
+			ForceSteer(lerp_angle(rotation, directiontoDestination, delta * SimulationSpeed))
 	
 	#HandleAcceleration
 	if (AccelChanged):
@@ -99,8 +126,6 @@ func _physics_process(delta: float) -> void:
 		HaltShip()
 		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
 		return
-
-	
 	
 	for g in GetDroneDock().GetDockedShips():
 		var Cap = g.Cpt as Captain
@@ -119,7 +144,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
-
+	
+	
+	
 	var offset = GetShipSpeedVec()
 	global_position += offset * SimulationSpeed
 

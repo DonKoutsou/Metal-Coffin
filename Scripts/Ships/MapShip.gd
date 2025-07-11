@@ -45,6 +45,8 @@ signal StatLow(StatName : String)
 signal OnShipDamaged(Amm : float, ShowVisuals : bool)
 signal OnShipDestroyed(Sh : MapShip)
 
+
+signal AChanged(NewAccel : float)
 var Landing : bool = false
 signal LandingStarted
 signal LandingCanceled(Ship : MapShip)
@@ -186,7 +188,7 @@ func _UpdateShipIcon(Tex : Texture2D) -> void:
 #███████ ██   ██ ██ ██           ██████  ██████  ██   ████    ██    ██   ██  ██████  ███████ ███████ ██ ██   ████  ██████ 
 
 func HaltShip():
-	SetSpeed(0)
+	AccelerationChanged(0)
 	#AccelerationChanged(0)
 
 var AccelChanged = false
@@ -208,8 +210,11 @@ func AccelerationChanged(value: float) -> void:
 			return
 
 	AccelChanged = true
-
-	SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
+	
+	var NewSpeed = max(0,min(value,1) * GetShipMaxSpeed())
+	
+	SetSpeed(NewSpeed)
+	AChanged.emit(NewSpeed)
 	#GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed()) 
 
 
@@ -229,6 +234,8 @@ func ForceSteer(Rotation : float) -> void:
 	rotation = Rotation
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+	for g in GetDroneDock().GetDockedShips():
+		g.ForceSteer(rotation)
 		
 func ShipLookAt(pos : Vector2) -> void:
 	if (is_equal_approx(global_position.angle_to_point(pos), global_rotation)):

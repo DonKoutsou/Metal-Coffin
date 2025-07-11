@@ -198,15 +198,16 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 		return
 	var Transfer = ItemTransferScene.instantiate() as ItemTransfer
 	add_child(Transfer)
-	Transfer.SetData(AvailableCaptains)
-	await Transfer.CharacterSelected
+	Transfer.SetTransferData(AvailableCaptains, Box._ContentAmmout, It)
+	var amm = await Transfer.CharacterSelected
 	var SelectedChar = Transfer.SelectedCharacter
 	if (SelectedChar == null):
 		return
 	var SelectedCharInventory = _CharacterInventories[SelectedChar] as CharacterInventory
-	SelectedCharInventory.AddItem(It)
-	OwnerInventory.RemoveItemFromBox(Box)
-	PopUpManager.GetInstance().DoFadeNotif("Transfered {0} to {1}'s inventory".format([It.ItemName, SelectedChar.GetCaptainName()]))
+	for i in amm:
+		SelectedCharInventory.AddItem(It)
+		OwnerInventory.RemoveItemFromBox(Box)
+	PopUpManager.GetInstance().DoFadeNotif("Transfered {2}x of {0} to {1}'s inventory".format([It.ItemName, SelectedChar.GetCaptainName(), amm]))
 	
 func GetBoxOwner(Box : Inventory_Box) -> Captain:
 	for g in _CharacterInventories.keys():

@@ -26,14 +26,16 @@ func _ready() -> void:
 	#DroneDockEventH.connect("DroneDocked", OnDroneDocked)
 	#DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
 	UIEventH.connect("LandPressed", _on_land_button_pressed)
-	UIEventH.OpenHatchPressed.connect(OnOpenHatchPressed)
-	UIEventH.connect("RadarButtonPressed", _on_radar_button_pressed)
-	UIEventH.connect("FleetSeparationPressed", InitiateFleetSeparation)
-	UIEventH.connect("RegroupPressed", _on_controlled_ship_return_pressed)
-	UIEventH.connect("AccelerationChanged", AccelerationChanged)
-	UIEventH.connect("SteerOffseted", SteerChanged)
-	UIEventH.connect("ShipSwitchPressed", _on_controlled_ship_swtich_range_changed)
 	
+	UIEventH.OpenHatchPressed.connect(OnOpenHatchPressed)
+	UIEventH.RadarButtonPressed.connect(RadarButtonPressed)
+	UIEventH.FleetSeparationPressed.connect(InitiateFleetSeparation)
+	UIEventH.RegroupPressed.connect(RegroupPressed)
+	UIEventH.AccelerationChanged.connect(SetControlledShipSpeed)
+	UIEventH.SteerOffseted.connect(SteerChanged)
+	UIEventH.ShipSwitchPressed.connect(ControlledShipSwitch)
+	
+	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
 	
 	#call_deferred("SetInitialShip")
@@ -56,6 +58,7 @@ func SetInitialShip() -> void:
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
 	
+	
 	var dock = ControlledShip.GetDroneDock() as DroneDock
 	
 	dock.DroneAdded.connect(RefreshUI)
@@ -74,8 +77,10 @@ func RegisterSelf(D : MapShip) -> void:
 
 	D.ToggleFuelRangeVisibility(false)
 	D.connect("OnShipDestroyed", OnShipDestroyed)
+	D.connect("OnShipDamaged", OnShipDamaged)
+	D.AChanged.connect(OnControlledShipSpeedChanged)
 
-func _on_radar_button_pressed() -> void:
+func RadarButtonPressed() -> void:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
 		Instigator = ControlledShip.Command
@@ -101,11 +106,15 @@ func OnOpenHatchPressed() -> void:
 	OpenHatchRequested.emit(Instigator)
 
 #Called from accelerator UI to change acceleration of currently controlled ship
-func AccelerationChanged(value: float) -> void:
+func SetControlledShipSpeed(value: float) -> void:
 	if (ControlledShip.Docked):
 		ControlledShip.Command.AccelerationChanged(value)
 	else:
 		ControlledShip.AccelerationChanged(value)
+
+func OnControlledShipSpeedChanged(NewSpeed : float) -> void:
+	UIEventH.OnSpeedSet(NewSpeed / ControlledShip.GetShipMaxSpeed())
+
 #Called from steering wheel to change tragectory of currently controlled ship
 func SteerChanged(value: float) -> void:
 	if (ControlledShip.Docked):
@@ -145,22 +154,24 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 
 	AvailableShips.erase(Sh)
 	if (Sh == ControlledShip):
-		_on_controlled_ship_swtich_range_changed()
+		ControlledShipSwitch()
 
-func _on_controlled_ship_swtich_range_changed() -> void:
-	var currentcontrolled = AvailableShips.find(ControlledShip)
-	#ControlledShip.disconnect("OnShipDestroyed", OnShipDestroyed)
-	if (currentcontrolled + 1 > AvailableShips.size() - 1):
+#Switched to the next ship inside the Available Ships list
+
+func ControlledShipSwitch() -> void:
+	var CurrentlyControlledIndex = AvailableShips.find(ControlledShip)
+
+	if (CurrentlyControlledIndex + 1 > AvailableShips.size() - 1):
 		var newcont = 0
-		if (newcont == currentcontrolled):
+		if (newcont == CurrentlyControlledIndex):
 			PopUpManager.GetInstance().DoFadeNotif("No ship to switch to")
 			return
 		ControlledShip.ToggleFuelRangeVisibility(false)
-
-		ControlledShip.disconnect("OnShipDamaged", OnShipDamaged)
+		
+		ControlledShip.AChanged.disconnect(OnControlledShipSpeedChanged)
 		
 		var dock = ControlledShip.GetDroneDock() as DroneDock
-	
+		
 		dock.DroneAdded.disconnect(RefreshUI)
 		dock.DroneRemoved.disconnect(RefreshUI)
 		
@@ -168,22 +179,22 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	else:
 		ControlledShip.ToggleFuelRangeVisibility(false)
 
-		ControlledShip.disconnect("OnShipDamaged", OnShipDamaged)
+		ControlledShip.AChanged.disconnect(OnControlledShipSpeedChanged)
 		
 		var dock = ControlledShip.GetDroneDock() as DroneDock
 	
 		dock.DroneAdded.disconnect(RefreshUI)
 		dock.DroneRemoved.disconnect(RefreshUI)
 		
-		ControlledShip = AvailableShips[currentcontrolled + 1]
-	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
-	#ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
-	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
+		ControlledShip = AvailableShips[CurrentlyControlledIndex + 1]
+
+	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
 	
 	var NewDock = ControlledShip.GetDroneDock() as DroneDock
 	
 	NewDock.DroneAdded.connect(RefreshUI)
 	NewDock.DroneRemoved.connect(RefreshUI)
+	
 	
 	#UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
 	#UIEventH.OnSteerDirForced(ControlledShip.rotation)
@@ -193,12 +204,20 @@ func _on_controlled_ship_swtich_range_changed() -> void:
 	#_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
+func OnTargetPositionChanged(Pos : Vector2) -> void:
+	if (ControlledShip.Command != null):
+		ControlledShip.Command.SetTargetLocation(Pos)
+	else:
+		ControlledShip.SetTargetLocation(Pos)
+
 func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip.ToggleFuelRangeVisibility(false)
 	ControlledShip = NewShip
 	UIEventH.OnShipUpdated(NewShip)
 	NewShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
+	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
+	
 
 var camtw : Tween
 func FrameCamToShip():
@@ -209,7 +228,8 @@ func FrameCamToShip():
 	#camtw.set_trans(Tween.TRANS_EXPO)
 	#camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
 	ship_camera.FrameCamToShip(ControlledShip, 1, false)
-func _on_controlled_ship_return_pressed() -> void:
+	
+func RegroupPressed() -> void:
 	
 	if (ControlledShip is PlayerShip):
 		PopupManager.GetInstance().DoFadeNotif("Can't merge flagship with other fleets")

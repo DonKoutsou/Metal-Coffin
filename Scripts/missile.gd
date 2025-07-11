@@ -48,7 +48,7 @@ func _ready() -> void:
 		s.max_distance = 20000
 		get_parent().add_child(s)
 	$AccelPosition.position.x = Speed / 360
-	$Radar_Range.visible = Friendly
+	
 	FirePos = global_position
 	
 
@@ -72,6 +72,8 @@ func _physics_process(delta: float) -> void:
 	
 	if (activationdistance < 50):
 		return
+	
+	$Radar_Range.visible = Friendly
 	
 	if (FoundShips.size() > 0):
 		HoneAtEnemy()
@@ -130,14 +132,10 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 func _on_missile_body_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == FiredBy):
 		return
-	##MapPointerManager.GetInstance().RemoveShip(area)
-	##area.queue_free()
-	#var IsRadar = area.get_collision_layer_value(2)
-	#if (IsRadar):
-		#if (area.get_parent() is PlayerShip or area.get_parent() is Drone):
-			#OnShipSeen(area.get_parent())
-			##MapPointerManager.GetInstance().AddShip(self, false)
-	#else:
+	
+	if (activationdistance < 50):
+		return
+	
 	var Bod = area.get_parent()
 	
 	if (FoundShips.size() == 0):

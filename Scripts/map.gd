@@ -12,6 +12,7 @@ extends CanvasLayer
 class_name Map
 @export_group("Nodes")
 @export var _InScreenUI : Ingame_UIManager
+
 @export var _ScreenUI : ScreenUI
 @export var _Camera : Camera2D
 #@export var _StatPanel : StatPanel
@@ -34,6 +35,7 @@ class_name Map
 @export var MinDistance : float = 3000
 @export var SpawningBounds : Vector2
 @export var EnSpawner : SpawnDecider
+@export var ControllerEvH : ShipControllerEventHandler
 
 signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
 #Signal called when all cities have their neighbors configured
@@ -300,7 +302,11 @@ func _MAP_INPUT(event: InputEvent) -> void:
 		_Camera._HANDLE_ZOOM(0.75)
 	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		_Camera.UpdateCameraPos(event.relative)
-		
+	else : if (event is InputEventMouseButton ):
+		if (event.button_index == MOUSE_BUTTON_RIGHT):
+			_Camera.get_global_mouse_position()
+			var pos = _Camera.get_global_mouse_position()
+			ControllerEvH.OnTargetPositionPicked(pos)
 
 #/////////////////////////////////////////////////////////////
 #███    ███  █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 

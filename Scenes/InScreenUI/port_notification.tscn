@@ -39,6 +39,7 @@ offset_top = 19.0
 offset_right = 108.0
 offset_bottom = 104.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="SimulationNotification2" type="Label" parent="VBoxContainer"]
@@ -64,6 +65,7 @@ horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="SimulationNotification" type="Label" parent="VBoxContainer/HBoxContainer"]

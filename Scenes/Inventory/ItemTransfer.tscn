@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3361rn6kikh1"]
+[gd_scene load_steps=5 format=3 uid="uid://d3361rn6kikh1"]
 
 [ext_resource type="Script" uid="uid://ct6jtj6oya27k" path="res://Scripts/Inventory/item_transfer.gd" id="1_jxlxb"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_vvfaq"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="3_ucstj"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_lsd4b"]
 
 [node name="ItemTransfer" type="PanelContainer" node_paths=PackedStringArray("ButtonPlecements")]
 anchors_preset = 15
@@ -13,16 +14,67 @@ grow_vertical = 2
 theme = ExtResource("1_vvfaq")
 script = ExtResource("1_jxlxb")
 CptnButton = ExtResource("3_ucstj")
-ButtonPlecements = NodePath("VBoxContainer")
+ButtonPlecements = NodePath("VBoxContainer/PanelContainer/VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Transfer Text" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Transfering"
+horizontal_alignment = 1
+
+[node name="ItemName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Missile"
+horizontal_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_lsd4b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Ammount"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "-"
+
+[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_lsd4b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Transfer To"
 horizontal_alignment = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]

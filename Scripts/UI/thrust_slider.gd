@@ -21,10 +21,20 @@ func _ready() -> void:
 func ZeroAcceleration():
 	Handle.position.y = MinVelocityLoc
 
+var forceTw : Tween
 func ForceValue(val : float) ->void:
 	var ForcedValue = clamp(val, 0, 1)
-	var newpos = ForcedValue * (MaxVelocityLoc - MinVelocityLoc) + MinVelocityLoc;
-	Handle.position.y = newpos
+	var newpos = ForcedValue * (MaxVelocityLoc - MinVelocityLoc) + MinVelocityLoc
+	if (forceTw != null):
+		forceTw.kill()
+	
+	forceTw = create_tween()
+	
+	var NewPositio = Vector2(Handle.position.x, newpos)
+	
+	forceTw.tween_property(Handle, "position", NewPositio, NewPositio.distance_to(Handle.position) / 1000)
+	
+	#Handle.position.y = newpos
 	#var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 	#AccelerationChanged.emit(newval)
 
@@ -44,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 		newpos = clamp(Handle.position.y - step, MaxVelocityLoc, MinVelocityLoc)
 		accumulatedrelative += step
 
-	Handle.position.y = newpos
+	#Handle.position.y = newpos
 	$AudioStreamPlayer.play()
 	Input.vibrate_handheld(30)
 	var newval = snapped((newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc), 0.01)

@@ -84,7 +84,7 @@ CurrentValue = 0.0
 [sub_resource type="Resource" id="Resource_jnhcl"]
 script = ExtResource("2_ttymy")
 StatName = 9
-StatBase = 120.0
+StatBase = 216.0
 StatShipPartBuff = Array[float]([])
 StatShipPartPenalty = 0.0
 CurrentValue = 0.0

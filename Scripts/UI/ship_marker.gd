@@ -6,6 +6,13 @@ class_name ShipMarker
 @export var Direction : Label
 @export var ShipCallsign : Label
 @export var ShipDetailLabel : Label
+@export var DetailPanel : Control
+@export var ShipIcon : TextureRect
+@export var VisualContactCountdown : ProgressBar
+@export_group("Resources")
+@export var ResuplyNotificationScene : PackedScene
+@export var NotificationScene : PackedScene
+@export var Icons : Dictionary
 
 var ShipNameText : String = ""
 var ShipSpeedText : String = ""
@@ -13,32 +20,16 @@ var TimeSeenText : String = ""
 var FuelText : String = ""
 var HullText : String = ""
 
-@export var DetailPanel : Control
-@export var ShipIcon : TextureRect
-@export var VisualContactCountdown : ProgressBar
-@export_group("Resources")
-#@export var EnemyLocatedNotifScene : PackedScene
-
-#@export var DroneReturnNotif : PackedScene
-
-@export var ResuplyNotificationScene : PackedScene
-
-@export var NotificationScene : PackedScene
-
-@export var Icons : Dictionary
-
 var TimeLastSeen : float
-
-#var DetailInitialPos : Vector2
-
 var Showspeed : bool = false
 
 var ElintNotif : ShipMarkerNotif
 var LandingNotif : ShipMarkerNotif
+var ResuplyNotif : ResuplyNotification
 
 var CurrentZoom : float
 
-signal ShipDeparted
+signal ShipSelected
 
 func _ready() -> void:
 	DetailPanel.visible = false
@@ -67,7 +58,8 @@ func PlayHostileShipNotif(text : String) -> void:
 	add_child(notif)
 	
 func OnShipDeparted() -> void:
-	ShipDeparted.emit()
+	if (ResuplyNotif != null):
+		ResuplyNotif.OnShipDeparted()
 	ToggleShowRefuel("Refueling", false, 0)
 	ToggleShowRefuel("Repairing", false, 0)
 	ToggleShowRefuel("Upgrading", false, 0)
@@ -77,23 +69,21 @@ func UpdateTrajectory(Dir : float) -> void:
 
 func DroneReturning() -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
-	notif.SetText("Drone Returning To Base")
+	notif.SetText("Regrouping with fleet")
 	add_child(notif)
 
 func SetType(T : String) -> void:
 	ShipIcon.texture = Icons[T]
 	
 func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
-	var notif : ResuplyNotification
-	for g in get_children():
-		if g is ResuplyNotification:
-			g.ToggleStat(Stats, t, timel)
-			return
+	if (ResuplyNotif != null):
+		ResuplyNotif.ToggleStat(Stats, t, timel)
+		return
 	if (t):
-		notif = ResuplyNotificationScene.instantiate() as ResuplyNotification
-		notif.ToggleStat(Stats, t, timel)
-		connect("ShipDeparted", notif.OnShipDeparted)
-		add_child(notif)
+		ResuplyNotif = ResuplyNotificationScene.instantiate() as ResuplyNotification
+		ResuplyNotif.ToggleStat(Stats, t, timel)
+		connect("ShipDeparted", ResuplyNotif.OnShipDeparted)
+		add_child(ResuplyNotif)
 
 func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 	if ElintNotif != null:
@@ -231,3 +221,8 @@ func GetSaveData() -> SD_ShipMarker:
 	Data.Trajectory = Direction.rotation
 	
 	return Data
+
+
+func _on_icon_gui_input(event: InputEvent) -> void:
+	if (event.is_action_pressed("Click")):
+		ShipSelected.emit()

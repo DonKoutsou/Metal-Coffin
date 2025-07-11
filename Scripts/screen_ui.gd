@@ -43,6 +43,7 @@ func CloseScreen() -> void:
 	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
 	await CloseTw.finished
 	
+	
 	FullScreenToggleStarted.emit(ScreenState.HALF_SCREEN)
 
 func DoIntroFullScreen(NewStat : ScreenState) -> void:
@@ -116,6 +117,9 @@ func _ready() -> void:
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
 	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
+	
+	EventHandler.SpeedSet.connect(ShipSpeedSet)
+	
 	var SimulationMan = SimulationManager.GetInstance()
 	if (SimulationMan != null):
 		SimulationMan.SpeedChanged.connect(SpeedUpdated)
@@ -158,6 +162,9 @@ func Steer_Offseted(Offset: float) -> void:
 	EventHandler.OnSteerOffseted(Offset)
 	Cam.EnableShake(0.5)
 	Cam.DissableShake()
+
+func ShipSpeedSet(NewSpeed : float) -> void:
+	Thrust.ForceValue(NewSpeed)
 
 func Ship_Switch_Pressed() -> void:
 	if (ShipTradeInProgress):

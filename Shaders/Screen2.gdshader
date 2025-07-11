@@ -1,10 +1,10 @@
 shader_type canvas_item;
 render_mode unshaded;
 uniform vec2 res = vec2(864, 486);
-uniform float Scanres = 500;
+//uniform float Scanres = 500;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform int mask_type : hint_range(0, 2) = 0;
-uniform vec3 Tint : source_color;
+
 group_uniforms Vignette;
 uniform float vignette_strength : hint_range(0., 10., 0.01) = 1.;
 uniform float image_flicker : hint_range(0., 1., .01) = 1.;
@@ -25,7 +25,7 @@ uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
 uniform float scanline_intensity : hint_range(0.0, 10.0) = 0;
 
-uniform float ColorAmm: hint_range(16, 256, 1.0) = 1.;
+//uniform float ColorAmm: hint_range(16, 256, 1.0) = 1.;
 
 float ToLinear1(float c){ return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
 vec3 ToLinear(vec3 c){ return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b)); }
@@ -45,10 +45,10 @@ float stripes(vec2 uv)
     return ramp(mod(uv.y * 4. * scanlines_spacing + TIME * scanlines_speed / (2. * scanlines_spacing) + sin(TIME * scanlines_speed + sin(TIME * scanlines_speed * 0.63 * scanlines_spacing)), 1.), scanline_thickness, .6) * noi;
 }
 
-vec3 to_indexed_palette(vec3 color) {
-    vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
-    return quant;
-}
+//vec3 to_indexed_palette(vec3 color) {
+    //vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
+    //return quant;
+//}
 
 vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
 	pos = floor(pos * res + off) / res;
@@ -142,10 +142,10 @@ void fragment(){
 	float vigAmt = (3.3) * vignette_strength;
 	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 4.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 4.0));
 
-	float color_dark_offset = 0.0;
-	int y_pos = int(floor(SCREEN_UV.y * Scanres * 2.0));
-	if (int(floor((float(y_pos) / 2.0))) * 2 == y_pos)
-		color_dark_offset = scanline_intensity;
+	//float color_dark_offset = 0.0;
+	//int y_pos = int(floor(SCREEN_UV.y * Scanres * 2.0));
+	//if (int(floor((float(y_pos) / 2.0))) * 2 == y_pos)
+		//color_dark_offset = scanline_intensity;
 
 	//COLOR.rgb += mix(Tint, vec3(color_dark_offset), 0.5);
 	COLOR.rgb *= vignette;

@@ -1,6 +1,10 @@
 extends Node2D
 
+#This script manages all the Ship and Town markers. 
 class_name MapPointerManager
+
+@export var CircleDr : CircleDrawer
+
 @export var MapLonePos : Node2D
 @export var MarkerScene : PackedScene
 @export var MapSpotMarkerScene : PackedScene
@@ -11,6 +15,7 @@ class_name MapPointerManager
 @export var UIEventH : UIEventHandler
 @export var ControllerEventHandler : ShipControllerEventHandler
 #@export var SpotColor : Color
+
 var Ships : Array[Node2D] = []
 var _ShipMarkers : Array[ShipMarker] = []
 var Spots : Array[Node2D] = []
@@ -33,12 +38,6 @@ func OnControlledShipChanged(Ship : PlayerDrivenShip) -> void:
 
 static func GetInstance() -> MapPointerManager:
 	return Instance
-#
-#func _draw() -> void:
-	#pass
-#
-#func DrawLines() -> void:
-	#pass
 
 func ClearLines() -> void:
 	for g in $MapLines.get_children():
@@ -48,7 +47,10 @@ func ClearLines() -> void:
 func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	if (Ships.has(Ship)):
 		if (Ship is HostileShip and !Ship.Destroyed and notify):
-			_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship Located")
+			if (Ship.Convoy):
+				_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Convoy\nLocated")
+			else:
+				_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship\nLocated")
 		return
 		
 	Ships.append(Ship)
@@ -77,13 +79,14 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 		else:
 			marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
 			if (notify):
-				marker.PlayHostileShipNotif("Hostile Ship Located")
+				marker.PlayHostileShipNotif("Hostile Ship\nLocated")
 			marker.SetType("Ship")
 			Ship.connect("ShipWrecked", marker.OnHostileShipDestroyed)
 		
 	else : if (Ship is MapShip):
 		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
 		Ship.connect("ShipDeparted", marker.OnShipDeparted)
+		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
 		if (Ship is Drone):
 			Ship.connect("DroneReturning", marker.DroneReturning)
 
@@ -119,17 +122,13 @@ func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	var marker = MapSpotMarkerScene.instantiate() as SpotMarker
 	
 	add_child(marker)
-	
-	#marker.modulate = SpotColor
-	
-	#marker.ToggleShipDetails(true)
+
 	marker.SetMarkerDetails(Spot, PlayAnim)
 	
 	if (Spot.AlarmRaised):
 		marker.OnAlarmRaised(false)
 	else:
 		Spot.connect("SpotAlarmRaised", marker.OnAlarmRaised)
-	#Spot.connect("SpotAnalazyed", marker.OnSpotAnalyzed)
 	
 	_SpotMarkers.append(marker)
 	
@@ -197,16 +196,18 @@ func _physics_process(_delta: float) -> void:
 				Marker.UpdateTrajectory(ship.global_rotation)
 			else:
 				Marker.ClearFuel()
-				
+				Marker.modulate.a = 1
 				if (ship.Destroyed):
 					Marker.SetMarkerDetails("Ship Debris", "" ,0)
 				else: if (ship.VisibleBy.size() > 0):
+					
 					Marker.global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
 					Marker.UpdateSpeed(ship.GetShipSpeed())
 					Marker.ClearTime()
 					Marker.SetTime()
 					Marker.UpdateTrajectory(ship.global_rotation)
 				else :
+					Marker.modulate.a = 0.5
 					var timepast = Clock.GetInstance().GetHoursSince(Marker.TimeLastSeen)
 					if (timepast > 24):
 						call_deferred("RemoveShip", ship)
@@ -251,7 +252,7 @@ func _physics_process(_delta: float) -> void:
 				else :
 					Marker.visible = false
 		Marker.UpdateTexts()
-	$CircleDrawer.UpdateCircles(Circles)
+	CircleDr.UpdateCircles(Circles)
 
 func GetSaveData() -> SaveData:
 	var Dat = SaveData.new()

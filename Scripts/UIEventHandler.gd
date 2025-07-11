@@ -4,6 +4,7 @@ class_name UIEventHandler
 
 signal AccelerationEnded(Value : float)
 signal AccelerationChanged(Value : float)
+signal SpeedSet(Value : float)
 #signal AccelerationForced(ForceVal : float)
 signal DroneButtonPressed()
 signal MissileButtonPressed()
@@ -35,9 +36,13 @@ signal FleetSeparationPressed()
 
 signal ScreenUIToggled(t : bool)
 
+
 #signal AlarmRaised
 
 signal ShipDamaged(DammageAmm : float)
+
+func OnSpeedSet(Speed : float) -> void:
+	SpeedSet.emit(Speed)
 
 func OnScreenUIToggled(t : bool):
 	ScreenUIToggled.emit(t)

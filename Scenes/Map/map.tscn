@@ -84,6 +84,7 @@ MapSize = 100
 MinDistance = 1500.0
 SpawningBounds = Vector2(8000, 250000)
 EnSpawner = ExtResource("12_m1k6s")
+ControllerEvH = ExtResource("22_n73so")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -191,10 +192,11 @@ bus = &"MapSounds"
 [node name="PlayerShip" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("17_21a23")]
 position = Vector2(126.5, 154.5)
 
-[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("MapLonePos")]
+[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("CircleDr", "MapLonePos")]
 z_index = 100
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
+CircleDr = NodePath("CircleDrawer")
 MapLonePos = NodePath("MapLines")
 MarkerScene = ExtResource("20_anlpp")
 MapSpotMarkerScene = ExtResource("21_oyi6l")
@@ -222,4 +224,4 @@ layer = 3
 
 [node name="ScreenUI" parent="." instance=ExtResource("24_e5um8")]
 
-[connection signal="GUI_Input" from="SubViewportContainer/ViewPort/InScreenUI" to="." method="_MAP_INPUT"]
+[connection signal="gui_input" from="SubViewportContainer/ViewPort/SubViewportContainer" to="." method="_MAP_INPUT"]

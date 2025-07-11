@@ -36,6 +36,7 @@ func MissileArmed(Mis : MissileItem, Owner : Captain) -> void:
 	if (!IsOwner(Owner)):
 		return
 	$MissileLine.set_point_position(1, Vector2(Mis.Distance, 0))
+	$MissileLine.set_point_position(0, Vector2(50, 0))
 	$MissileLine.visible = true
 
 func MissileDissarmed(Owner : Captain) -> void:

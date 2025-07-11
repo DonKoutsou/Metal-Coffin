@@ -11,7 +11,7 @@ class_name World
 @export var FleetSeparationScene : String
 @export var HappeningUI : String
 @export var WorldViewQuestionairScene : String
-@export var IntroText : String
+#@export var IntroText : String
 @export_group("Prologue")
 @export var PrologueTrigger : PackedScene
 @export var PrologueEndScreen : PackedScene
