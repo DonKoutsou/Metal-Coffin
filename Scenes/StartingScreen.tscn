@@ -19,7 +19,6 @@ CageFightGameScene = ExtResource("6_lhmcv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource("7_mty3o")

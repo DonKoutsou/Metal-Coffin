@@ -22,7 +22,8 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 corner_detail = 1
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jokjb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jokjb"]
+bg_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v3x0"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
@@ -74,6 +75,7 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 20
 text = "12 / 23"
@@ -97,7 +99,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_jokjb")
+theme_override_styles/background = SubResource("StyleBoxFlat_jokjb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5v3x0")
 value = 60.17
 show_percentage = false

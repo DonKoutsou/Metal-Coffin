@@ -57,11 +57,13 @@ Acceleration = NodePath("Aceleration")
 z_index = -1
 material = SubResource("ShaderMaterial_mktum")
 rotation = -1.5708
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_6lhcj")
 
 [node name="TrailLine" type="Line2D" parent="ColorRect"]
 show_behind_parent = true
 position = Vector2(2, -15)
+points = PackedVector2Array(0, 0)
 width = 3.345
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
@@ -73,6 +75,7 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 [node name="TrailLine2" type="Line2D" parent="ColorRect"]
 show_behind_parent = true
 position = Vector2(-2, -15)
+points = PackedVector2Array(0, 0)
 width = 3.345
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")

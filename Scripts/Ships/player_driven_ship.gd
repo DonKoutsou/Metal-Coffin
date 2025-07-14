@@ -12,6 +12,10 @@ var TargetLocation : Vector2
 func  _ready() -> void:
 	super()
 	Paused = SimulationManager.IsPaused()
+	#call_deferred("_postready")
+
+#func _postready() -> void:
+	#InventoryManager.GetInstance().AddCharacter(Cpt)
 
 func _draw() -> void:
 	super()

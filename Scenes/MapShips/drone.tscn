@@ -64,13 +64,13 @@ Acceleration = NodePath("Aceleration")
 z_index = -1
 material = SubResource("ShaderMaterial_dxnd3")
 rotation = -1.57078
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_dxnd3")
 
 [node name="TrailLine" type="Line2D" parent="ColorRect"]
 show_behind_parent = true
 position = Vector2(-1.60877e-05, -1.38889)
 rotation = 1.57078
-points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_xnk77")

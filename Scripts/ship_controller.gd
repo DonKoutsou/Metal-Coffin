@@ -2,13 +2,12 @@ extends Node
 
 class_name ShipContoller
 
-@export var _Map : Map
-@export var DroneDockEventH : DroneDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
-var ship_camera: ShipCamera
 @export var CaptainSelectScreen : PackedScene
 @export var DroneScene : PackedScene
+
+var ship_camera: ShipCamera
 
 var AvailableShips : Array[PlayerDrivenShip] = []
 
@@ -22,11 +21,9 @@ static var Instance : ShipContoller
 
 func _ready() -> void:
 	call_deferred("SetCamera")
-	Instance = self
-	#DroneDockEventH.connect("DroneDocked", OnDroneDocked)
-	#DroneDockEventH.connect("DroneUndocked", OnDroneUnDocked)
-	UIEventH.connect("LandPressed", _on_land_button_pressed)
 	
+	Instance = self
+	UIEventH.LandPressed.connect(_on_land_button_pressed)
 	UIEventH.OpenHatchPressed.connect(OnOpenHatchPressed)
 	UIEventH.RadarButtonPressed.connect(RadarButtonPressed)
 	UIEventH.FleetSeparationPressed.connect(InitiateFleetSeparation)
@@ -38,7 +35,7 @@ func _ready() -> void:
 	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
 	
-	#call_deferred("SetInitialShip")
+	
 
 func SetCamera() -> void:
 	ship_camera = Map.GetInstance().GetCamera()
@@ -55,9 +52,10 @@ func InitiateFleetSeparation() -> void:
 func SetInitialShip() -> void:
 	ControlledShip = get_tree().get_nodes_in_group("PlayerShips")[0]
 	
+	InventoryManager.GetInstance().AddCharacter(ControlledShip.Cpt)
+	
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
-	
 	
 	var dock = ControlledShip.GetDroneDock() as DroneDock
 	
@@ -66,7 +64,6 @@ func SetInitialShip() -> void:
 	
 	AvailableShips.append(ControlledShip)
 
-	_Map.GetInScreenUI().GetInventory().AddCharacter(ControlledShip.Cpt)
 	
 	UIEventH.OnShipUpdated(ControlledShip)
 
@@ -194,14 +191,7 @@ func ControlledShipSwitch() -> void:
 	
 	NewDock.DroneAdded.connect(RefreshUI)
 	NewDock.DroneRemoved.connect(RefreshUI)
-	
-	
-	#UIEventH.OnAccelerationForced(ControlledShip.GetShipSpeed() / ControlledShip.GetShipMaxSpeed())
-	#UIEventH.OnSteerDirForced(ControlledShip.rotation)
-	
-	
-	
-	#_Map.GetInScreenUI().GetInventory().ShipStats.SetCaptain(ControlledShip.Cpt)
+
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
 func OnTargetPositionChanged(Pos : Vector2) -> void:

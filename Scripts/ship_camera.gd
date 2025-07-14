@@ -130,19 +130,20 @@ func _UpdateMapGridVisibility():
 		MapGridTween.finished.connect(Ground.hide)
 		
 		
-	else: if (zoom.x >= 0.8 and GridShowing):
-		if (is_instance_valid(MapGridTween)):
-			MapGridTween.kill()
-			MapGridTween = null
-		Cloud.show()
-		#Cloud2.show()
-		Ground.show()
-		
-		MapGridTween = create_tween()
-		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
-		GridShowing = false
+	else: if (zoom.x >= 0.8):
+		Cloud.visible = zoom.x < 4.0
+		if (GridShowing):
+			if (is_instance_valid(MapGridTween)):
+				MapGridTween.kill()
+				MapGridTween = null
+			#Cloud2.show()
+			Ground.show()
+			
+			MapGridTween = create_tween()
+			MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
+			GridShowing = false
 	
-	
+	#Cloud.visible = zoom.x > 0.8
 	#Background.size = Vector2(30000,30000) / zoom
 	#Background.position = -Background.size /2
 	Background.UpdateZoom(zoom.x)

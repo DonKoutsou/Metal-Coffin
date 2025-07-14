@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Metal Coffin"
-config/version="0.6.25"
+config/version="0.7.01"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Mobile")
