@@ -99,6 +99,14 @@ pos *= vec2(1.0 + (pos.y * pos.y) * 1.0 / warp.x, 1.0 + (pos.x * pos.x) * 1.0/ w
 return pos * 0.5+0.5;
 
 }
+vec2 warp2(vec2 uv){
+	vec2 delta = uv - 0.5;
+	float delta2 = dot(delta.xy, delta.xy);
+	float delta4 = delta2 * delta2;
+	float delta_offset = delta4 * warp.x;
+	
+	return uv + delta * delta_offset;
+}
 
 vec3 Mask(vec2 pos){
 	if(mask_type == 0){
@@ -120,6 +128,15 @@ float onOff(float a, float b, float c){
     return step(c, sin(TIME + a * cos(TIME * b)));
 }
 
+float border (vec2 uv){
+	float radius = min(warp.x, 0.08);
+	radius = max(min(min(abs(radius * 2.0), abs(1.0)), abs(1.0)), 1e-5);
+	vec2 abs_uv = abs(uv * 2.0 - 1.0) - vec2(1.0, 1.0) + radius;
+	float dist = length(max(vec2(0.0), abs_uv)) / radius;
+	float square = smoothstep(0.96, 1.0, dist);
+	return clamp(1.0 - square, 0.0, 1.0);
+}
+
 void fragment(){
 	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
 
@@ -129,7 +146,18 @@ void fragment(){
 	look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;
 	float vShift = 0.4 * onOff(2.0, 3.0, 0.9) * (pow(sin(TIME) * sin(TIME * 20.0) + (0.5 + 0.1 * sin(TIME * 200.0) * cos(TIME)), 2.0)) * skip;
 	look.y = mod(look.y + vShift, 1.0);
-
+	
+	//float g_r = smoothstep(0.85, 0.95, abs(sin(look.x * (res.x * 3.14159265))));
+	//COLOR.r = mix(COLOR.r, COLOR.r * g_r, 0.5);
+	//
+	//float g_g = smoothstep(0.85, 0.95, abs(sin(1.05 + look.x * (res.x * 3.14159265))));
+	//COLOR.g = mix(COLOR.g, COLOR.g * g_g, 0.5);
+	//
+	//float b_b = smoothstep(0.85, 0.95, abs(sin(2.1 + look.x * (res.x * 3.14159265))));
+	//COLOR.b = mix(COLOR.b, COLOR.b * b_b, 0.5);
+	//float scanlines = 0.5;
+	//scanlines = mod(sin(pos.y + (res.y * 3.14159265)), 2.0);
+	//COLOR.rgb = mix(COLOR.rgb, COLOR.rgb * vec3(scanlines), scanlines_opacity);
 
 	float aberration_amount = 0.005 * window * 5.0;
 	vec2 red_offset = vec2(-aberration_amount, 0.0);
@@ -141,7 +169,9 @@ void fragment(){
 
 	float vigAmt = (3.3) * vignette_strength;
 	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 4.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 4.0));
-
+	
+	
+	
 	//float color_dark_offset = 0.0;
 	//int y_pos = int(floor(SCREEN_UV.y * Scanres * 2.0));
 	//if (int(floor((float(y_pos) / 2.0))) * 2 == y_pos)
@@ -151,5 +181,5 @@ void fragment(){
 	COLOR.rgb *= vignette;
 	COLOR.rgb = ToSrgb(COLOR.rgb);
 	//COLOR.rgb = to_indexed_palette(COLOR.rgb);
-
+	//COLOR.a = border(look);
 }

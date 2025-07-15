@@ -152,9 +152,29 @@ func DrawRuller() -> void:
 	var Num = 90
 	for g in 12:
 		draw_line(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + shippos, Vector2(vizrange,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100, 0.3), LineW, true)
-
-
-
+		
+		Next -= 30
+		Num -= 30
+		if (Num == 0):
+			Num = 360
+	
+	#Num = 0
+	#
+	#for g in 4:
+		#var text = "Visual Range"
+		#if (g % 2):
+			#var pos = Vector2(100,0).rotated(deg_to_rad(Next)) + shippos
+			#draw_string(ThemeDB.fallback_font, pos, text, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1), TextServer.JUSTIFICATION_AFTER_LAST_TAB,TextServer.DIRECTION_AUTO, TextServer.ORIENTATION_HORIZONTAL)
+		#else:
+			#var pos = Vector2(100,0).rotated(deg_to_rad(Next)) + shippos
+			#pos.y -= 4 * 8
+			#draw_string(ThemeDB.fallback_font, pos, text, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1), TextServer.JUSTIFICATION_AFTER_LAST_TAB,TextServer.DIRECTION_AUTO, TextServer.ORIENTATION_VERTICAL)
+		#
+		#Next -= 90
+		#Num -= 90
+		#if (Num == 0):
+			#Num = 360
+	
 
 
 		#var Text = var_to_str(Num).replace(".0", "")
@@ -165,10 +185,7 @@ func DrawRuller() -> void:
 		#Textpos.y += TextSize / 4
 		#draw_string(ThemeDB.fallback_font, Textpos + shippos, Text, HORIZONTAL_ALIGNMENT_LEFT, -1, TextSize)
 
-		Next -= 30
-		Num -= 30
-		if (Num == 0):
-			Num = 360
+		
 	#for g in 3:
 		#draw_circle(shippos, 50 / CamZoom * (g + 1), Color(100, 100, 100), false, 1/CamZoom, true)
 	#var Next = rotation_degrees

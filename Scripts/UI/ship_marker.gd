@@ -29,7 +29,10 @@ var ResuplyNotif : ResuplyNotification
 
 var CurrentZoom : float
 
+var TargetLocations : Array[Vector2]
+
 signal ShipSelected
+signal RemoveSelf
 
 func _ready() -> void:
 	DetailPanel.visible = false
@@ -38,6 +41,97 @@ func _ready() -> void:
 	VisualContactCountdown.visible = false
 	#set_physics_process(false)
 	UpdateCameraZoom(Map.GetCameraZoom())
+
+func _draw() -> void:
+	#TODO fix zoom affecting distance text
+	for g in TargetLocations.size():
+		var origin = Vector2.ZERO
+		var topos = to_local(TargetLocations[g])
+		if (g > 0):
+			origin = to_local(TargetLocations[g - 1])
+
+		draw_line(origin, topos, Color(1,1,1), 1 / CurrentZoom)
+		
+		var pos = origin + origin.direction_to(topos) * (origin.distance_to(topos) / 2)
+		var string = "{0} km".format([roundi(origin.distance_to(topos))])
+		var fontsize = roundi(10 / CurrentZoom)
+		#pos.x -= string.length() / 2 * fontsize
+		
+		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize)
+
+func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
+	queue_redraw()
+	
+	if (ship is HostileShip):
+		
+		ToggleShipDetails(!ship.Docked)
+		ToggleVisualContactProgress(ship.VisualContactCountdown < 10)
+		if (ship.VisualContactCountdown < 10):
+			UpdateVisualContactProgress(ship.VisualContactCountdown)
+		#if (EnemyDebug):
+			#global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
+			#UpdateSpeed(ship.GetShipSpeed())
+			#
+			#Marker.ClearTime()
+			#var fuelstats
+			#if (ship.Docked):
+				#fuelstats = ship.Command.GetFuelStats()
+			#else:
+				#fuelstats = ship.GetFuelStats()
+			#Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
+			#Marker.UpdateTrajectory(ship.global_rotation)
+		#else:
+		ClearFuel()
+		modulate.a = 1
+		if (ship.Destroyed):
+			SetMarkerDetails("Ship Debris", "" ,0)
+		else: if (ship.VisibleBy.size() > 0):
+			
+			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
+			UpdateSpeed(ship.GetShipSpeed())
+			ClearTime()
+			SetTime()
+			UpdateTrajectory(ship.global_rotation)
+		else :
+			modulate.a = 0.5
+			var timepast = Clock.GetInstance().GetHoursSince(TimeLastSeen)
+			if (timepast > 24):
+				RemoveSelf.emit
+			else:
+				UpdateTime(timepast)
+	else:
+		if (ship is PlayerDrivenShip):
+			TargetLocations = ship.TargetLocations
+			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
+			ToggleShipDetails(IsControlled)
+		
+			UpdateTrajectory(ship.global_rotation)
+			UpdateSpeed(ship.GetShipSpeed())
+			
+			if (ship.Landing or ship.TakingOff or ship.MatchingAltitude):
+				#TODO find proper fix
+				if (LandingNotif == null):
+					OnLandingStarted()
+				UpdateAltitude(ship.Altitude)
+			
+			if (!IsControlled):
+				return
+			var fuelstats
+			if (ship.Docked):
+				fuelstats = ship.Command.GetFuelStats()
+			else:
+				fuelstats = ship.GetFuelStats()
+			UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
+
+		else : if (ship is Missile):
+			if (ship.FiredBy is PlayerDrivenShip or ship.VisibleBy.size() > 0):
+				global_position = ship.global_position
+				visible = true
+				ClearTime()
+				UpdateTrajectory(ship.global_rotation)
+			else :
+				visible = false
+	UpdateTexts()
 
 func UpdateTexts() -> void:
 	var T = ""

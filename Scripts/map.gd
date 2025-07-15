@@ -302,11 +302,14 @@ func _MAP_INPUT(event: InputEvent) -> void:
 		_Camera._HANDLE_ZOOM(0.75)
 	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		_Camera.UpdateCameraPos(event.relative)
-	else : if (event is InputEventMouseButton ):
-		if (event.button_index == MOUSE_BUTTON_RIGHT):
+	else : if (event is InputEventMouseButton):
+		if (event.button_index == MOUSE_BUTTON_RIGHT and event.pressed):
 			_Camera.get_global_mouse_position()
 			var pos = _Camera.get_global_mouse_position()
-			ControllerEvH.OnTargetPositionPicked(pos)
+			if (Input.is_action_pressed("Cnt")):
+				ControllerEvH.OnTargetPositionAdded(pos)
+			else:
+				ControllerEvH.OnTargetPositionPicked(pos)
 
 #/////////////////////////////////////////////////////////////
 #███    ███  █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 
@@ -696,6 +699,7 @@ func EnemySpawnFinished() -> void:
 
 var Maplt : Thread
 var Roadt : Thread
+var Regiont : Thread
 var Mut : Mutex
 
 func GenerateRoads() -> void:
@@ -714,11 +718,16 @@ func GenerateRoads() -> void:
 	var cityloc2 : Array[Vector2]
 	for g in Spots2:
 		cityloc2.append(g.global_position)
+		
+	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer._DrawBorders(Spots)
+	
 	Mut = Mutex.new()
 	Maplt = Thread.new()
 	Maplt.start(_DrawMapLines.bind(cityloc, true))
 	Roadt = Thread.new()
 	Roadt.start(_DrawMapLines.bind(cityloc2, false, true))
+	#Regiont = Thread.new()
+	#Regiont.start(_DrawBorders.bind(Spots2))
 	
 	
 func GeneratePathsFromLines(Lines : Array):
@@ -750,8 +759,11 @@ func GeneratePathsFromLines(Lines : Array):
 	
 	if (OS.is_debug_build()):
 		print("Connection of neighboring cities finished in {0} ms".format([Time.get_ticks_msec() - time]))
-	
-	
+
+
+
+
+
 func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : bool = false) -> Array:
 	var time = Time.get_ticks_msec()
 	if (OS.is_debug_build()):
@@ -792,14 +804,19 @@ func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : 
 	
 	return lines
 	
-	
-
-	
 func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
 	for g in Points:
 		Lne.add_point(g)
 		
 		
+#func RegionsFinished() -> void:
+	#var Lines = Regiont.wait_to_finish()
+	#for g : Array[Vector2] in Lines:
+		#var L = Line2D.new()
+		#for point in g:
+			#L.points.append(point)
+		#$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(L)
+
 func RoadFinished() -> void:
 	var Lines = Roadt.wait_to_finish()
 	for g in Lines:

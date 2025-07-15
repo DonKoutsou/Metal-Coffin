@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://bwitpv7g6re5n"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://bwitpv7g6re5n"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_fsxqc"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_u0hqa"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_kxtac"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_abq6a"]
@@ -8,6 +7,6 @@
 [resource]
 script = ExtResource("3_abq6a")
 SpotName = "Trotalia"
+Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_u0hqa")]([ExtResource("2_kxtac")])
-Merchendise = Array[ExtResource("1_fsxqc")]([])

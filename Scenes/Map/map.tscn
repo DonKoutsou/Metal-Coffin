@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=37 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
+[ext_resource type="Script" uid="uid://uwtcmr8brr2" path="res://Scripts/UI/RegionLineDrawer.gd" id="27_445lv"]
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
@@ -181,7 +182,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-color = Color(0.11435, 0.205627, 0.212156, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 stream = ExtResource("19_x3wib")
@@ -193,7 +193,6 @@ bus = &"MapSounds"
 position = Vector2(126.5, 154.5)
 
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("CircleDr", "MapLonePos")]
-z_index = 100
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
 CircleDr = NodePath("CircleDrawer")
@@ -205,6 +204,11 @@ EnemyColor = Color(100, 0.094, 0, 1)
 ConvoyColor = Color(100, 0.764, 0.081, 1)
 UIEventH = ExtResource("25_8mjbw")
 ControllerEventHandler = ExtResource("22_n73so")
+
+[node name="RegionMapDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" instance=ExtResource("16_sp82o")]
+modulate = Color(1, 1, 1, 0.05)
+script = ExtResource("27_445lv")
+ResizeLinesWithZoom = true
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager"]
 use_parent_material = true

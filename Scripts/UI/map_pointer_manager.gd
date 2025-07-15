@@ -171,87 +171,17 @@ func _physics_process(_delta: float) -> void:
 	Circles.clear()
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()
-	var Zoom = ShipCamera.GetInstance().zoom.x
+	#var Zoom = ShipCamera.GetInstance().zoom.x
 	
 	for g in _ShipMarkers.size():
-		var ship = Ships[g]
-		var Marker = _ShipMarkers[g]
-		
-		if (ship is HostileShip):
-			Marker.ToggleShipDetails(!ship.Docked)
-			Marker.ToggleVisualContactProgress(ship.VisualContactCountdown < 10)
-			if (ship.VisualContactCountdown < 10):
-				Marker.UpdateVisualContactProgress(ship.VisualContactCountdown)
-			if (EnemyDebug):
-				Marker.global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
-				Marker.UpdateSpeed(ship.GetShipSpeed())
-				
-				Marker.ClearTime()
-				var fuelstats
-				if (ship.Docked):
-					fuelstats = ship.Command.GetFuelStats()
-				else:
-					fuelstats = ship.GetFuelStats()
-				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
-				Marker.UpdateTrajectory(ship.global_rotation)
+		var Ship = Ships[g]
+		if (Ship is MapShip):
+			if (Ship.RadarWorking):
+				Circles.append(PackedVector2Array([Ship.global_position, Vector2(max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 90), 0)]))
 			else:
-				Marker.ClearFuel()
-				Marker.modulate.a = 1
-				if (ship.Destroyed):
-					Marker.SetMarkerDetails("Ship Debris", "" ,0)
-				else: if (ship.VisibleBy.size() > 0):
-					
-					Marker.global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
-					Marker.UpdateSpeed(ship.GetShipSpeed())
-					Marker.ClearTime()
-					Marker.SetTime()
-					Marker.UpdateTrajectory(ship.global_rotation)
-				else :
-					Marker.modulate.a = 0.5
-					var timepast = Clock.GetInstance().GetHoursSince(Marker.TimeLastSeen)
-					if (timepast > 24):
-						call_deferred("RemoveShip", ship)
-					else:
-						Marker.UpdateTime(timepast)
-		else:
-			if (ship is MapShip):
-
-				Marker.global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
-				Marker.ToggleShipDetails(ship == ControlledShip)
+				Circles.append(PackedVector2Array([Ship.global_position, Vector2(90, 0)]))
 				
-				
-				if (ship.RadarWorking):
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(max(ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 90), 0)]))
-				else:
-					Circles.append(PackedVector2Array([ship.global_position, Vector2(90, 0)]))
-				
-				Marker.UpdateTrajectory(ship.global_rotation)
-				Marker.UpdateSpeed(ship.GetShipSpeed())
-				
-				if (ship.Landing or ship.TakingOff or ship.MatchingAltitude):
-					#TODO find proper fix
-					if (Marker.LandingNotif == null):
-						Marker.OnLandingStarted()
-					Marker.UpdateAltitude(ship.Altitude)
-				
-				if (ship != ControlledShip):
-					continue
-				var fuelstats
-				if (ship.Docked):
-					fuelstats = ship.Command.GetFuelStats()
-				else:
-					fuelstats = ship.GetFuelStats()
-				Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
-
-			else : if (ship is Missile):
-				if (ship.FiredBy is PlayerDrivenShip or ship.VisibleBy.size() > 0):
-					Marker.global_position = ship.global_position
-					Marker.visible = true
-					Marker.ClearTime()
-					Marker.UpdateTrajectory(ship.global_rotation)
-				else :
-					Marker.visible = false
-		Marker.UpdateTexts()
+		_ShipMarkers[g].Update(Ship, Ship == ControlledShip, CamPos)
 	CircleDr.UpdateCircles(Circles)
 
 func GetSaveData() -> SaveData:

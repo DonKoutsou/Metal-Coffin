@@ -19,6 +19,8 @@ func DrawLines() -> void:
 		g.queue_free()
 	
 	for points in Lines:
+		if (points.size() == 0):
+			continue
 		var L = Line2D.new()
 		
 		L.joint_mode = Line2D.LINE_JOINT_ROUND
@@ -28,9 +30,6 @@ func DrawLines() -> void:
 		
 		L.use_parent_material = true
 		L.width = 20
-		
-		
-		
 		
 		if (!RoadLines):
 			L.default_color = Color(1,1,1, 1)

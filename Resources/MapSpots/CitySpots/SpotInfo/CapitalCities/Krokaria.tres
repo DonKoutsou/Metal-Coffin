@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://ltonn44hg1kq"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=6 format=3 uid="uid://ltonn44hg1kq"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_0i2ro"]
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_lw67w"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_wykv5"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_xi5bn"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_33fax"]
@@ -10,6 +9,6 @@
 [resource]
 script = ExtResource("1_0i2ro")
 SpotName = "Krokaria"
+Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("3_wykv5")]([ExtResource("4_xi5bn"), ExtResource("5_33fax"), ExtResource("6_l7vk7")])
-Merchendise = Array[ExtResource("1_lw67w")]([])

@@ -9,5 +9,6 @@
 [resource]
 script = ExtResource("1_ldj7b")
 SpotName = "Cirkari"
+Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("4_wlpxv")]([ExtResource("5_50l7f"), ExtResource("6_36t7x"), ExtResource("7_gc4lx")])

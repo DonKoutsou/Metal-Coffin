@@ -7,7 +7,7 @@ class_name PlayerDrivenShip
 var CommingBack = false
 var RegroupTarget : MapShip
 
-var TargetLocation : Vector2
+var TargetLocations : Array[Vector2]
 
 func  _ready() -> void:
 	super()
@@ -20,9 +20,13 @@ func  _ready() -> void:
 func _draw() -> void:
 	super()
 	
-	if (TargetLocation != Vector2.ZERO):
-		var pos = to_local(TargetLocation)
-		draw_line(Vector2.ZERO, pos, Color("ffc315"), 1 / CamZoom)
+	#for g in TargetLocations.size():
+		#var pos = to_local(TargetLocations[g])
+		#if (g > 0):
+			#draw_line(to_local(TargetLocations[g - 1]), pos, Color("ffc315"), 1 / CamZoom)
+		#else:
+			#draw_line(Vector2.ZERO, pos, Color("ffc315"), 1 / CamZoom)
+		
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
@@ -72,7 +76,12 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 func SetTargetLocation(pos : Vector2) -> void:
 	
 	AccelerationChanged(GetShipMaxSpeed())
-	TargetLocation = pos
+	TargetLocations.clear()
+	TargetLocations.append(pos)
+
+func AddTargetLocation(pos : Vector2) -> void:
+	AccelerationChanged(GetShipMaxSpeed())
+	TargetLocations.append(pos)
 
 func _physics_process(delta: float) -> void:
 	
@@ -96,12 +105,14 @@ func _physics_process(delta: float) -> void:
 
 	_HandleLanding(SimulationSpeed)
 	
-	if (TargetLocation != Vector2.ZERO):
-		if (TargetLocation.distance_to(global_position) < 5):
-			TargetLocation = Vector2.ZERO
-			AccelerationChanged(0)
+	if (TargetLocations.size() > 0):
+		var NextLoc = TargetLocations[0]
+		if (NextLoc.distance_to(global_position) < 5):
+			TargetLocations.remove_at(0)
+			if (TargetLocations.size() == 0):
+				AccelerationChanged(0)
 		
-		var directiontoDestination = (TargetLocation - global_position).normalized().angle()
+		var directiontoDestination = (NextLoc - global_position).normalized().angle()
 		if (rotation != directiontoDestination):
 			ForceSteer(lerp_angle(rotation, directiontoDestination, delta * SimulationSpeed))
 	

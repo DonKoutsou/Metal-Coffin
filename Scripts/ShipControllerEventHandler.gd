@@ -10,7 +10,10 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	CurrentControlled = NewShip
 	OnControlledShipChanged.emit(NewShip)
 
-signal TargetPositionPicked(pos : Vector2)
+signal TargetPositionPicked(pos : Vector2, Add : bool)
 
 func OnTargetPositionPicked(pos : Vector2) -> void:
-	TargetPositionPicked.emit(pos)
+	TargetPositionPicked.emit(pos, false)
+
+func OnTargetPositionAdded(pos : Vector2) -> void:
+	TargetPositionPicked.emit(pos, true)

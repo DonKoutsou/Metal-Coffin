@@ -177,7 +177,7 @@ func OnStatLow(StatName : String) -> void:
 var ParalaxMulti : float
 
 func _UpdateShipIcon(Tex : Texture2D) -> void:
-	ParalaxMulti = 500 / Tex.get_size().x
+	ParalaxMulti = 250 / Tex.get_size().x
 	ShipSprite.texture = Tex
 	UpdateAltitude(Altitude)
 #///////////////////////////////////////////////

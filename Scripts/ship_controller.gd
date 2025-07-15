@@ -194,11 +194,17 @@ func ControlledShipSwitch() -> void:
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
-func OnTargetPositionChanged(Pos : Vector2) -> void:
+func OnTargetPositionChanged(Pos : Vector2, Add : bool) -> void:
 	if (ControlledShip.Command != null):
-		ControlledShip.Command.SetTargetLocation(Pos)
+		if (Add):
+			ControlledShip.Command.AddTargetLocation(Pos)
+		else:
+			ControlledShip.Command.SetTargetLocation(Pos)
 	else:
-		ControlledShip.SetTargetLocation(Pos)
+		if (Add):
+			ControlledShip.AddTargetLocation(Pos)
+		else:
+			ControlledShip.SetTargetLocation(Pos)
 
 func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip.ToggleFuelRangeVisibility(false)

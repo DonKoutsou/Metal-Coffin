@@ -7,5 +7,6 @@
 [resource]
 script = ExtResource("2_vvnwc")
 SpotName = "Ocelia"
+Region = 0
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_kftin")]([ExtResource("3_en8v4")])

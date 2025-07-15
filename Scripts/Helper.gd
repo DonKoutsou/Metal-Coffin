@@ -120,3 +120,12 @@ func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 		
 	path.reverse()  # Reverse the path to get it from start to end
 	return path
+
+static func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
+	if (R == MapSpotCompleteInfo.REGIONS.MAMDU):
+		return Color(1,0,0)
+	if (R == MapSpotCompleteInfo.REGIONS.BAKYS):
+		return Color(0,1,0)
+	if (R == MapSpotCompleteInfo.REGIONS.KIRS):
+		return Color(0,0,1)
+	return Color(1,1,1)
