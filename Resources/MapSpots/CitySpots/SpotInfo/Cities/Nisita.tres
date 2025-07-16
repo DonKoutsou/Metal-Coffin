@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cu0q3ogq3xdae"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cu0q3ogq3xdae"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_6kmee"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_68sk7"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_p20qu"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_bcdrt"]
@@ -8,6 +7,6 @@
 [resource]
 script = ExtResource("3_bcdrt")
 SpotName = "Nisita"
+Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_68sk7")]([ExtResource("2_p20qu")])
-Merchendise = Array[ExtResource("1_6kmee")]([])

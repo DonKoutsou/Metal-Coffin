@@ -68,7 +68,7 @@ func UpdateProjected(delta: float, paralax : float) -> void:
 	var Cam = ShipCamera.GetInstance()
 	var CamPos = Cam.get_screen_center_position()
 	var Zoom = Cam.zoom.x
-	var Offset = (CamPos - global_position) * Zoom * 0.08 * paralax * 0.5
+	var Offset = (CamPos - global_position) * Zoom * 0.08 * paralax * 0.25
 	Offset.x /= 1.5
 
 	#global_position - (CamPos - global_position) * Zoom * lerp(0.0, 0.03, Altitude / 10000.0)

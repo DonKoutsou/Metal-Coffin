@@ -117,7 +117,7 @@ var GridShowing = false
 var MapGridTween : Tween
 
 func _UpdateMapGridVisibility():
-	if (zoom.x < 0.8 and !GridShowing):
+	if (zoom.x < 1.5 and !GridShowing):
 		if (is_instance_valid(MapGridTween)):
 			MapGridTween.kill()
 			MapGridTween = null
@@ -130,7 +130,7 @@ func _UpdateMapGridVisibility():
 		MapGridTween.finished.connect(Ground.hide)
 		
 		
-	else: if (zoom.x >= 0.8):
+	else: if (zoom.x >= 1.5):
 		Cloud.visible = zoom.x < 4.0
 		if (GridShowing):
 			if (is_instance_valid(MapGridTween)):

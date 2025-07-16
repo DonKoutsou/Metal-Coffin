@@ -51,7 +51,7 @@ func DrawLines() -> void:
 func UpdateCameraZoom(NewZoom : float) -> void:
 	for g in get_children():
 		g.width =  1 / NewZoom
-		g.visible = NewZoom < 0.8
+		g.visible = NewZoom < 1.5
 
 #func _draw() -> void:
 	#

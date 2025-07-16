@@ -78,7 +78,7 @@ func OnVisited(Type : MapSpot) -> void:
 func UpdateCameraZoom(NewZoom : float) -> void:
 	$HBoxContainer.scale = Vector2(1,1) / NewZoom
 	$Label.scale = Vector2(1,1) / NewZoom
-	$AnalyzeButton.visible = NewZoom <= 0.8
+	$AnalyzeButton.visible = NewZoom <= 1.5
 
 func EnteredScreen() -> void:
 	$AnalyzeButton.add_to_group("UnmovableMapInfo")

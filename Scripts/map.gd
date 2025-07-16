@@ -32,6 +32,7 @@ class_name Map
 #@export var MapGenerationDistanceCurve : Curve
 @export var MapSize : int
 @export var VillageAmm : int
+@export var CapitalAmm : int = 3
 @export var MinDistance : float = 3000
 @export var SpawningBounds : Vector2
 @export var EnSpawner : SpawnDecider
@@ -334,10 +335,9 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 	var sorted_positions = sort_positions_by_y(town_positions)
 	
 	var CapitalCitySpots : Array[int] = []
-	for z in sorted_positions.size() / 3:
-		if (z == 0):
-			continue
-		CapitalCitySpots.append(z * 6)
+	for z in CapitalAmm:
+		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - randi_range(2, 5)
+		CapitalCitySpots.append(spot)
 		
 	var VillageSpots : Array[int] = []
 	

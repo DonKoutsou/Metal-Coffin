@@ -10,7 +10,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1, 0.856354, 0.856354
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
 noise_type = 3
 seed = 4
-frequency = 0.0234
+frequency = 0.0163
 fractal_octaves = 7
 fractal_lacunarity = 2.2
 fractal_gain = 0.57
@@ -36,5 +36,5 @@ shader_parameter/custom_time = 0.0
 shader_parameter/UseCustomTime = true
 shader_parameter/NormalStr = -2.0
 shader_parameter/shadow_strength = 0.3
-shader_parameter/shadow_parallax_amount = -0.02
+shader_parameter/shadow_parallax_amount = -0.04
 shader_parameter/rotation_angle = -0.85

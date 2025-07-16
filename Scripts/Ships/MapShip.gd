@@ -647,4 +647,4 @@ func TogglePause(t : bool):
 #/////////////////////////////////////
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	visible = NewZoom > 0.8
+	visible = NewZoom > 1.5

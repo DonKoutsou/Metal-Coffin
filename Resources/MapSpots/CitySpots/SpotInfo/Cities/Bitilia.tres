@@ -7,6 +7,6 @@
 [resource]
 script = ExtResource("3_3s876")
 SpotName = "Bitilia"
-Region = 2
+Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_y7cwe")]([ExtResource("2_jwgua")])

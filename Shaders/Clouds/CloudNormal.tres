@@ -16,6 +16,8 @@ domain_warp_fractal_type = 0
 domain_warp_fractal_octaves = 1
 
 [resource]
+width = 1024
+height = 1024
 seamless = true
 seamless_blend_skirt = 1.0
 as_normal_map = true

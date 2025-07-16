@@ -206,8 +206,8 @@ UIEventH = ExtResource("25_8mjbw")
 ControllerEventHandler = ExtResource("22_n73so")
 
 [node name="RegionMapDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" instance=ExtResource("16_sp82o")]
-modulate = Color(1, 1, 1, 0.05)
 script = ExtResource("27_445lv")
+RegionTrans = 0.05
 ResizeLinesWithZoom = true
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager"]
