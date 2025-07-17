@@ -84,7 +84,7 @@ func _on_mouse_entered() -> void:
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(Sep, "custom_minimum_size", Vector2(30, 0), 0.3)
+	tw.tween_property(Sep, "custom_minimum_size", Vector2(50, 0), 0.3)
 
 
 func _on_mouse_exited() -> void:

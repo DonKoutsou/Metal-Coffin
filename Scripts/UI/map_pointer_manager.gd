@@ -175,7 +175,7 @@ func _physics_process(_delta: float) -> void:
 	
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]
-		if (Ship is MapShip):
+		if (Ship is PlayerDrivenShip):
 			if (Ship.RadarWorking):
 				Circles.append(PackedVector2Array([Ship.global_position, Vector2(max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 90), 0)]))
 			else:

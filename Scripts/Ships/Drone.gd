@@ -40,6 +40,7 @@ func Regroup(NewCommander : MapShip):
 	#rotation = 0.0
 	CommingBack = true
 	DroneReturning.emit()
+	TargetLocations.clear()
 	#Docked = false
 
 func _physics_process(delta: float) -> void:

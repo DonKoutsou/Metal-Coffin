@@ -27,8 +27,8 @@ func _draw() -> void:
 	var vpmin = (campos - (get_viewport_rect().size / 2 / ZoomLevel))
 	var vpmax = (campos + (get_viewport_rect().size / 2 / ZoomLevel))
 
-	Offset.x = wrap(Offset.x, 0, size.x / Siz)
-	Offset.y = wrap(Offset.y, 0, size.y / Siz)
+	Offset.x = wrap(Offset.x, -(size.x / Siz), size.x / Siz)
+	Offset.y = wrap(Offset.y, -(size.y / Siz), size.y / Siz)
 	
 	var stringsdrew = 0
 	
@@ -40,16 +40,16 @@ func _draw() -> void:
 		var DrawHundreadLine = ZoomLevel < 0.15 and Hundread > 0
 		
 		if (DrawHundreadLine):
-			draw_line(Vector2(XPos, 0), Vector2(XPos, size.y), Col, 100 - (ZoomLevel * 200), true)
-			draw_line(Vector2(0, YPos), Vector2(size.x, YPos), Col, 100 - (ZoomLevel * 200), true)
+			draw_line(Vector2(XPos, 0), Vector2(XPos, size.y), Color(0,0,0,0.2), max(8, 40 - (ZoomLevel * 80)), true)
+			draw_line(Vector2(0, YPos), Vector2(size.x, YPos), Color(0,0,0,0.2), max(8, 40 - (ZoomLevel * 80)), true)
 			
 			
-			var text_pos = Vector2(XPos + 50, YPos - 100)  # Slight offset for visibility relative to the grid square
-			var globpos = global_position + Vector2(XPos, YPos)
-			var coordinate_text = "{0} {1}".format([roundi(globpos.x) / 1000, roundi(globpos.y)/ 1000])
-
-			draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.3))
-			stringsdrew += 1
+			#var text_pos = Vector2(XPos + 30, YPos - 50)  # Slight offset for visibility relative to the grid square
+			#var globpos = global_position + Vector2(XPos, YPos)
+			#var coordinate_text = "X{0}Y{1}".format([roundi(globpos.x) / 1000, roundi(globpos.y)/ 1000])
+#
+			#draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.1))
+			#stringsdrew += 1
 			
 		for Ten in 10:
 			var XPosT = XPos + (size.x / (Siz * 10)) * Ten
@@ -67,16 +67,16 @@ func _draw() -> void:
 			#if (!drawx and !drawy):
 				#continue
 			
-			var DrawTenLine = ZoomLevel < 0.5
+			var DrawTenLine = ZoomLevel < 0.8
 			
 			
-			if (DrawTenLine):
+			if (DrawTenLine and ZoomLevel > 0.08):
 				for g in range(-10,20):
-					if (DrawHundreadLine and g == 0 and Ten == 0):
-						continue
+					#if (g == 0 and Ten == 0):
+						#continue
 					
 					var ything = YPos + ((size.y / (Siz * 10)) * g)
-					var text_pos = Vector2(XPosT + 5, ything - 20)  # Slight offset for visibility relative to the grid square
+					var text_pos = Vector2(XPosT + 10, ything - 20)  # Slight offset for visibility relative to the grid square
 					var globpos = global_position + Vector2(XPosT, ything)
 					var coordinate_text = "X{0}Y{1}".format([roundi(globpos.x)/ 1000, roundi(globpos.y) / 1000])
 					
@@ -85,7 +85,7 @@ func _draw() -> void:
 						continue
 					
 				# Adjust drawing to consider the color and font setup
-					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.3))
+					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.1))
 					stringsdrew += 1
 			
 			if (DrawHundreadLine and Ten == 0):
@@ -124,7 +124,7 @@ func _draw() -> void:
 					if (drawyO):
 						draw_line(Vector2(0, YPosO), Vector2(size.x, YPosO), Col, max(2, 10 - (ZoomLevel * 20)), true)
 				
-				if (ZoomLevel < 0.5):
+				if (ZoomLevel < 0.8):
 					continue
 				for g in range(-100,100):
 					if (DrawTenLine and g == 0 and One == 0):
@@ -140,6 +140,6 @@ func _draw() -> void:
 						continue
 					
 				# Adjust drawing to consider the color and font setup
-					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(1,1,1, 0.3))
+					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(1,1,1, 0.1))
 					stringsdrew += 1
 	print("draw {0} strings".format([stringsdrew]))

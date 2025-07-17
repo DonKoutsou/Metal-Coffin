@@ -50,7 +50,7 @@ func _draw() -> void:
 		if (g > 0):
 			origin = to_local(TargetLocations[g - 1])
 
-		draw_line(origin, topos, Color(1,1,1), 1 / CurrentZoom)
+		draw_dashed_line(origin, topos, Color(1,1,1), 1 / CurrentZoom, 10 / CurrentZoom)
 		
 		var pos = origin + origin.direction_to(topos) * (origin.distance_to(topos) / 2)
 		var string = "{0} km".format([roundi(origin.distance_to(topos))])

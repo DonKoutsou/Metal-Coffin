@@ -72,7 +72,7 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 14
 text = "FLYING OVER CARDI
 PERSMISSION TO LAND 
 RECEIVED"

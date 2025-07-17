@@ -140,10 +140,10 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_sb2tx"]
 resource_name = "Damage"
-length = 5.0
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -155,7 +155,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("AudioStreamPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -167,48 +167,36 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("CanvasModulate:visible")
+tracks/2/enabled = true
+tracks/2/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.00232568, 0.0333333, 1.4, 1.46667, 1.76666, 2.03333, 2.70465, 2.77132, 2.90465, 2.97132, 3.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.00465136, 0.035659, 4.86667, 4.96667),
+"times": PackedFloat32Array(0.00465136, 0.035659, 3.86667, 3.96667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [false, true, true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0310076, 1.39535, 1.46201, 1.76201, 2.02868, 2.7, 2.76667, 2.9, 2.96667, 3.09535, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false, true]
+}
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
-tracks/4/interp = 2
+tracks/4/enabled = true
+tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
+tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.0310076, 1.39535, 1.46201, 1.76201, 2.02868, 2.7, 2.76667, 2.9, 2.96667, 3.09535),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true, false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = false
-tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.166667, 4.86667, 4.96667),
+"times": PackedFloat32Array(0, 0.166667, 3.9, 4),
 "transitions": PackedFloat32Array(1, 2.43104, 2.43104, 1),
 "update": 0,
 "values": [2.0, 0.18, 0.18, 2.0]
@@ -934,7 +922,7 @@ color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")
-volume_db = -35.0
+volume_db = -45.0
 pitch_scale = 0.3
 bus = &"MapSounds"
 

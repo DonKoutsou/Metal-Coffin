@@ -73,7 +73,7 @@ func UpdateZoom(Zoom : Vector2) -> void:
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
 	ZoomChanged.emit(Zoom.x)
 	_UpdateMapGridVisibility()
-	
+	UpdateCameraPos(Vector2.ZERO)
 
 func ForceZoom(Zoom : Vector2) -> void:
 	prevzoom = Zoom
@@ -155,12 +155,16 @@ func UpdateCameraPos(relativeMovement : Vector2):
 		FrameTween.kill()
 	if (FocusedShip != null):
 		FocusedShip = null
-	var maxposY = WorldBounds.y
-	var maxposX = Vector2(-(WorldBounds.x / 2), WorldBounds.x / 2)
-	#var maxposY = -99999999999999999
-	#var maxposX = Vector2(-1000000,1000000)
+	
+	
+	var extent = get_viewport_rect().size / 2 / zoom.x
+	
+	var maxposY = Vector2(-(0 - 1000 + extent.y), WorldBounds.y - 1000 + extent.y)
+	
+	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x), (WorldBounds.x + 3000) / 2 - extent.x)
+
 	var rel = relativeMovement / zoom
-	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY,1000) )
+	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY.y, maxposY.x) )
 	if (newpos.x != position.x):
 		position.x = newpos.x
 	if (newpos.y != position.y):

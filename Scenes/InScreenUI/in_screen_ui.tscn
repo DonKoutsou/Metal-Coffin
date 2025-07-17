@@ -40,8 +40,8 @@ Screen = NodePath("Screen")
 [node name="MapMarkerEditor" parent="." instance=ExtResource("4_w862u")]
 
 [node name="SimulationNotification" parent="." instance=ExtResource("5_g51f2")]
-offset_top = 173.0
-offset_bottom = 173.0
+offset_top = 187.0
+offset_bottom = 187.0
 
 [node name="PortNotification" parent="." instance=ExtResource("7_4bt5v")]
 anchors_preset = 5
@@ -52,7 +52,8 @@ offset_bottom = 0.0
 grow_vertical = 1
 
 [node name="CurrentShipText" parent="." instance=ExtResource("8_avpxw")]
-offset_left = -1.0
+offset_left = 52.0
+offset_right = 53.0
 
 [node name="VBoxContainer2" parent="." instance=ExtResource("21_u111i")]
 offset_left = 0.0
@@ -75,7 +76,7 @@ grow_vertical = 0
 size_flags_vertical = 1
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("13_lb8ei")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 14
 text = "28°22' 24°12'"
 horizontal_alignment = 1
 vertical_alignment = 1

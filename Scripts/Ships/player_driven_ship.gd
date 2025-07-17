@@ -74,12 +74,15 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 	return FuelNow - FuelAfter
 
 func SetTargetLocation(pos : Vector2) -> void:
-	
+	if (CommingBack):
+		return
 	AccelerationChanged(GetShipMaxSpeed())
 	TargetLocations.clear()
 	TargetLocations.append(pos)
 
 func AddTargetLocation(pos : Vector2) -> void:
+	if (CommingBack):
+		return
 	AccelerationChanged(GetShipMaxSpeed())
 	TargetLocations.append(pos)
 

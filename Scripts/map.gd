@@ -150,6 +150,9 @@ func CamPosChanged(NewPos : Vector2) -> void:
 func CamZoomChanged(NewZoom : float) -> void:
 	CamZoom = NewZoom
 
+func GetCPos() -> Vector2:
+	return $SubViewportContainer/ViewPort/SubViewportContainer.get_global_mouse_position()
+
 static func GetCameraPosition() -> Vector2:
 	return CamPos
 
@@ -719,7 +722,7 @@ func GenerateRoads() -> void:
 	for g in Spots2:
 		cityloc2.append(g.global_position)
 		
-	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer._DrawBorders(Spots)
+	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer._DrawBorders(Spots2)
 	
 	Mut = Mutex.new()
 	Maplt = Thread.new()

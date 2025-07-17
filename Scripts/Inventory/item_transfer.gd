@@ -18,7 +18,7 @@ func SetData(Characters : Array[Captain], HeaderText : String = "Transfer To") -
 		ButtonPlecements.add_child(B)
 		B.connect("OnShipSelected", OnCharacterSelected.bind(g))
 
-	$VBoxContainer/Label.text = HeaderText
+	$VBoxContainer/PanelContainer/VBoxContainer/Label.text = HeaderText
 	$"VBoxContainer/Transfer Text".visible = false
 	$VBoxContainer/ItemName.visible = false
 	$VBoxContainer/Panel.visible = false
