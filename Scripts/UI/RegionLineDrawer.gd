@@ -14,7 +14,7 @@ var Labels : Array[Label]
 func UpdateCameraZoom(NewZoom : float) -> void:
 	visible = NewZoom < 1.5
 	for g in BLines:
-		g.width = 3 / NewZoom
+		g.width = 20 / NewZoom
 	#for g in Labels:
 		##g.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		#g.set("theme_override_font_sizes/font_size", 120 / NewZoom)
@@ -72,12 +72,12 @@ func _DrawingEnded() -> void:
 		if (points.size() == 0):
 			continue
 		
-		var poly = Polygon2D.new()
-		poly.use_parent_material = true
-		poly.polygon = points
-		poly.color = Helper.GetColorForRegion(g)
-		poly.color.a = RegionTrans
-		add_child(poly)
+		#var poly = Polygon2D.new()
+		#poly.use_parent_material = true
+		#poly.polygon = points
+		#poly.color = Helper.GetInstance().GetColorForRegion(g)
+		#poly.color.a = RegionTrans
+		#add_child(poly)
 		
 		var l = Label.new()
 		l.text = MapSpotCompleteInfo.REGIONS.keys()[g]
@@ -94,7 +94,7 @@ func _DrawingEnded() -> void:
 		var l = Line2D.new()
 		add_child(l)
 		l.use_parent_material = true
-		l.joint_mode = Line2D.LINE_JOINT_BEVEL
+		l.joint_mode = Line2D.LINE_JOINT_ROUND
 		l.default_color = Color(0,0,0,0.1)
 		for p in g:
 			l.add_point(p)
@@ -324,11 +324,20 @@ func create_convex_hull(points: Array) -> Dictionary:
 	TopPoints.sort_custom(sort_ascending)
 	BottomPOints.sort_custom(sort_descending)
 	
-	TopPoints.insert(0, Vector2(-15000, TopPoints[0].y))
-	TopPoints.append((Vector2(15000, TopPoints[TopPoints.size() - 1].y)))
+	var midpoint = TopPoints[0].y + abs(TopPoints[0].y - BottomPOints[0].y)
 	
-	BottomPOints.insert(0, Vector2(15000, BottomPOints[BottomPOints.size() - 1].y))
-	BottomPOints.append(Vector2(-15000, BottomPOints[0].y))
+	TopPoints.insert(0, Vector2(-8000, TopPoints[0].y))
+	#TopPoints.insert(0, Vector2(-9000, midpoint))
+	#TopPoints.insert(0, Vector2(-8000, BottomPOints[0].y))
+	
+	
+	TopPoints.append((Vector2(8000, TopPoints[TopPoints.size() - 1].y)))
+	#TopPoints.append((Vector2(9000, midpoint)))
+	#TopPoints.append((Vector2(8000, BottomPOints[BottomPOints.size() - 1].y)))
+	
+	BottomPOints.insert(0, Vector2(8000, BottomPOints[BottomPOints.size() - 1].y))
+	BottomPOints.append(Vector2(-8000, BottomPOints[0].y))
+	#BottomPOints.append(Vector2(-5000, midpoint))
 	
 	HullPoints["TopPoints"] = TopPoints
 	HullPoints["BottomPoints"] = BottomPOints

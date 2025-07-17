@@ -340,6 +340,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureRect2" type="Label" parent="HBoxContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.3)
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://yl3b5a3c2vdb"]
+
+[ext_resource type="Script" uid="uid://1f2otbxhjnv4" path="res://Scripts/Helper.gd" id="1_fiwlt"]
+
+[node name="Helper" type="Node"]
+script = ExtResource("1_fiwlt")
+RegionColors = Dictionary[int, Color]({
+0: Color(0.66723, 0.176217, 0.170208, 1),
+1: Color(0.5516, 0.7, 0.329, 1),
+2: Color(0.482095, 0.689901, 0.704644, 1)
+})

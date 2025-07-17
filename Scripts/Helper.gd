@@ -2,6 +2,8 @@ extends Node
 
 class_name Helper
 
+@export var RegionColors : Dictionary[MapSpotCompleteInfo.REGIONS, Color]
+
 static var Instance : Helper
 
 func _ready() -> void:
@@ -16,6 +18,9 @@ func CallLater(Call : Callable, t : float = 1) -> void:
 
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
+
+static func mapvalue(val : float, min : float, max : float) -> float:
+	return min + (max - min) * val
 
 func AngleToDirection(angle: float) -> String:
 	var directions = ["East", "Southeast",  "South", "Southwest", "West", "Northwest", "North","Northeast"]
@@ -121,11 +126,5 @@ func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 	path.reverse()  # Reverse the path to get it from start to end
 	return path
 
-static func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
-	if (R == MapSpotCompleteInfo.REGIONS.MAMDU):
-		return Color(1,0,0)
-	if (R == MapSpotCompleteInfo.REGIONS.BAKYS):
-		return Color(0,1,0)
-	if (R == MapSpotCompleteInfo.REGIONS.KIRS):
-		return Color(0,0,1)
-	return Color(1,1,1)
+func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
+	return RegionColors[R]

@@ -366,7 +366,7 @@ func UpdateElint(delta: float) -> void:
 func UpdateVizRange(rang : float):
 	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 90)
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 110)
 
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 

@@ -30,6 +30,7 @@ var ResuplyNotif : ResuplyNotification
 var CurrentZoom : float
 
 var TargetLocations : Array[Vector2]
+var range : float
 
 signal ShipSelected
 signal RemoveSelf
@@ -43,21 +44,46 @@ func _ready() -> void:
 	UpdateCameraZoom(Map.GetCameraZoom())
 
 func _draw() -> void:
+	if (TargetLocations.size() == 0):
+		return
+	var distancetotravel : float
+	
+	var fontsize = roundi(10 / CurrentZoom)
+	
+	var LinesToDraw : Array[Array]
 	#TODO fix zoom affecting distance text
 	for g in TargetLocations.size():
 		var origin = Vector2.ZERO
 		var topos = to_local(TargetLocations[g])
 		if (g > 0):
 			origin = to_local(TargetLocations[g - 1])
-
-		draw_dashed_line(origin, topos, Color(1,1,1), 1 / CurrentZoom, 10 / CurrentZoom)
+		
+		distancetotravel += origin.distance_to(topos)
+		LinesToDraw.append([origin, topos])
+		
+		var Col = Color(1,1,1)
+		
+		if (distancetotravel > range):
+			Col = (Color(100,0,0))
+		
+		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
 		var pos = origin + origin.direction_to(topos) * (origin.distance_to(topos) / 2)
 		var string = "{0} km".format([roundi(origin.distance_to(topos))])
-		var fontsize = roundi(10 / CurrentZoom)
+		
 		#pos.x -= string.length() / 2 * fontsize
 		
-		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize)
+		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
+	
+	var canreach = distancetotravel < range
+	if (!canreach):
+		draw_string(ThemeDB.fallback_font, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach destination", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
+	
+	#for g in LinesToDraw:
+		#if (!canreach):
+			#draw_dashed_line(g[0], g[1], Color(100,0,0), 1 / CurrentZoom, 10 / CurrentZoom)
+		#else:
+			#draw_dashed_line(g[0], g[1], Color(1,1,1), 1 / CurrentZoom, 10 / CurrentZoom)
 
 func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 	queue_redraw()
@@ -102,6 +128,7 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 	else:
 		if (ship is PlayerDrivenShip):
 			TargetLocations = ship.TargetLocations
+			range = ship.GetFuelRange()
 			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
 			ToggleShipDetails(IsControlled)
 		

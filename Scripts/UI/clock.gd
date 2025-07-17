@@ -2,6 +2,12 @@ extends Control
 
 class_name  Clock
 
+@export var StartingDay : int = 10
+@export var StartingMonth : int = 4
+@export var StartingYear : int = 6129
+@export var StartingHour : int = 13
+@export var StartingMin : float = 0
+
 var CurrentDay : int = 10
 var CurrentMonth : int = 4
 var CurrentYear : int = 6129
@@ -13,8 +19,33 @@ var SimulationPaused : bool = false
 
 static var Instance : Clock
 
+func TimePassedInMinutes() -> int:
+	var DaysPassed = CurrentDay - StartingDay
+	var MonthsPassed = CurrentMonth - StartingMonth
+	var YearsPassed = CurrentYear - StartingYear
+	var HoursPassed = currentHour - StartingHour
+	var MinPassed = currentMin - StartingMin
+	
+	while MonthsPassed > 0:
+		DaysPassed += GetDaysInMonth(wrap(StartingMonth + MonthsPassed, 1, 12))
+		MonthsPassed -= 1
+	while DaysPassed > 0:
+		HoursPassed += 24
+		DaysPassed -= 1
+	while HoursPassed > 0:
+		MinPassed += 60
+		HoursPassed -= 1
+	
+	return MinPassed
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	CurrentDay = StartingDay
+	CurrentMonth = StartingMonth
+	CurrentYear = StartingYear
+	currentHour = StartingHour
+	currentMin = StartingMin
+	
 	Instance = self
 	#var rot = (360.0/12.0)*currentHour
 	#$Hour.rotation = deg_to_rad(rot)
@@ -63,6 +94,9 @@ func ToggleSimulation(t : bool) -> void:
 func GetTimeInHours() -> float:
 	var t = (CurrentDay * 24) + currentHour + (currentMin / 60)
 	return t
+
+func GetHours() -> float:
+	return currentHour + (currentMin / 60.0)
 func GetHoursSince(time : float) -> float:
 	return GetTimeInHours() - time
 

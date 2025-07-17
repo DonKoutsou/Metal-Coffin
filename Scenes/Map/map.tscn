@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=40 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -10,6 +10,7 @@
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="10_28wu2"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/HostileShip.tscn" id="11_323je"]
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="11_a2ujk"]
+[ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/weather_manager.gd" id="12_1lxys"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="14_a2ujk"]
 [ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="15_x3wib"]
@@ -62,6 +63,18 @@ shader_parameter/Scale2 = Vector2(20, 20)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28wu2"]
 light_mode = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1lxys"]
+noise_type = 0
+frequency = 0.002
+fractal_octaves = 4
+fractal_ping_pong_strength = 0.1
+
+[sub_resource type="Curve" id="Curve_1lxys"]
+_limits = [0.0, 1.0, 0.0, 24.0]
+bake_resolution = 10
+_data = [Vector2(0, 0.8), 0.0, 0.0, 0, 0, Vector2(4.8, 0.8), 0.00229647, 0.00229647, 0, 0, Vector2(10.5861, 1), 0.0, 0.0, 0, 0, Vector2(16.3867, 1), 0.0, 0.0, 0, 0, Vector2(21.6, 0.8), 0.0, 0.0, 0, 0, Vector2(24, 0.8), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -147,7 +160,7 @@ script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
 Cloud = NodePath("Clouds")
 Ground = NodePath("Ground")
-MinZoom = 0.07
+MinZoom = 0.08
 ClickSound = NodePath("AudioStreamPlayer")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
@@ -191,6 +204,11 @@ bus = &"MapSounds"
 
 [node name="PlayerShip" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("17_21a23")]
 position = Vector2(126.5, 154.5)
+
+[node name="WeatherManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
+script = ExtResource("12_1lxys")
+N = SubResource("FastNoiseLite_1lxys")
+LighAmm = SubResource("Curve_1lxys")
 
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("CircleDr", "MapLonePos")]
 material = SubResource("CanvasItemMaterial_w8yg2")

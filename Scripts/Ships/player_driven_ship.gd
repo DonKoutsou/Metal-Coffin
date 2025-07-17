@@ -105,7 +105,9 @@ func _physics_process(delta: float) -> void:
 	
 	if (Paused):
 		return
-
+	
+	
+	
 	_HandleLanding(SimulationSpeed)
 	
 	if (TargetLocations.size() > 0):

@@ -142,7 +142,10 @@ func DrawRuller() -> void:
 	var LineW = 0.5/CamZoom
 	var vizrange = ControlledShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	if(!ControlledShip.RadarWorking):
-		vizrange = 90
+		vizrange = 110
+	
+	if (vizrange == 110):
+		vizrange *= WeatherManage.GetInstance().GetVisibilityInPosition(shippos)
 	
 	
 	for g in 3:

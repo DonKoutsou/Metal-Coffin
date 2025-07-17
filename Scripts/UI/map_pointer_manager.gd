@@ -176,10 +176,11 @@ func _physics_process(_delta: float) -> void:
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]
 		if (Ship is PlayerDrivenShip):
+			var visibility = WeatherManage.GetInstance().GetVisibilityInPosition(Ship.global_position)
 			if (Ship.RadarWorking):
-				Circles.append(PackedVector2Array([Ship.global_position, Vector2(max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 90), 0)]))
+				Circles.append(PackedVector2Array([Ship.global_position, Vector2(max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 110 * visibility), 0)]))
 			else:
-				Circles.append(PackedVector2Array([Ship.global_position, Vector2(90, 0)]))
+				Circles.append(PackedVector2Array([Ship.global_position, Vector2(110 * visibility, 0)]))
 				
 		_ShipMarkers[g].Update(Ship, Ship == ControlledShip, CamPos)
 	CircleDr.UpdateCircles(Circles)

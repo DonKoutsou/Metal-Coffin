@@ -28,8 +28,10 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		text.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		text.custom_minimum_size = Vector2(18,18)
 		text.texture = g.ItemIcon
-		if (g is UsableItem):
-			text.self_modulate = g.ItecColor
+		text.modulate.a = 0.3
+		$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 0.3
+		#if (g is UsableItem):
+			#text.self_modulate = g.ItecColor
 		text.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		text.use_parent_material = true
 		SpotDropPosition.add_child(text)
@@ -42,9 +44,11 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	Spot.FuelReservesChanged.connect(UpdateFuelAmm)
 	
 	if (!Spot.Visited):
-		$AnalyzeButton.modulate = Color(1,1,1, 0.3)
+		$AnalyzeButton.modulate.a = 0.3
+		$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 0.3
 	else:
-		$AnalyzeButton.modulate = Color(1,1,1, 1)
+		$AnalyzeButton.modulate.a = 1
+		$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 1
 	
 func SetSize(Spot : MapSpot) -> void:
 	var sizething = (Spot.Population / 150000.0) as float
@@ -73,7 +77,8 @@ func OnAlarmRaised(Notify : bool) -> void:
 		add_child(Notif)
 
 func OnVisited(Type : MapSpot) -> void:
-	$AnalyzeButton.modulate = Color(1,1,1, 1)
+	$AnalyzeButton.modulate.a = 1
+	$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 1
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	$HBoxContainer.scale = Vector2(1,1) / NewZoom

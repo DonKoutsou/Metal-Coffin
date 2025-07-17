@@ -49,7 +49,7 @@ func _draw() -> void:
 	var MidLinePos = MidPoint + Offset
 	
 	var ZoomPerStep = MaxZoom / Steps
-	var MidZoom = snapped(ZoomPerStep * (Steps / 2) + MinZoom, 0.01)
+	var MidZoom = snapped(ZoomPerStep * (Steps / 2) + MinZoom, 0.1)
 	
 	if (MidLinePos > 0 and MidLinePos < ContainerSize):
 		draw_line(Vector2(15 + Off, MidLinePos) , Vector2(25 + Off, MidLinePos), Color("ffc315"), 2)
