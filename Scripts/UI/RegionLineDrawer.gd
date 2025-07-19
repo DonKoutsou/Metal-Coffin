@@ -247,41 +247,17 @@ func calculate_convex_hulls(Lines : Dictionary[MapSpotCompleteInfo.REGIONS, Arra
 	for g in hulls.keys():
 		var currenthull = hulls[g]
 		var points : Array
-		var toppoints = SmoothLine(currenthull["TopPoints"])
+		var toppoints = Helper.SmoothLine(currenthull["TopPoints"])
 		points.append_array(toppoints)
 		BorderLines.append(toppoints)
-		var bottompoints = SmoothLine(currenthull["BottomPoints"])
+		var bottompoints = Helper.SmoothLine(currenthull["BottomPoints"])
 		points.append_array(bottompoints)
 		finalhulls[g] = points
 		
 	return finalhulls
 
 
-func SmoothLine(L : Array[Vector2]) -> Array[Vector2]:
-	var newline : Array[Vector2]
-	for pointIndex in range(0, L.size()-1):
-		var currentpoint = L[pointIndex]
-		newline.append(currentpoint)
-		var nextpoint = L[pointIndex + 1]
-		var dist = currentpoint.distance_to(nextpoint)
-		var direction = currentpoint.direction_to(nextpoint)
-		if (currentpoint.y == nextpoint.y):
-			continue
-		for g in range(1, dist / 200):
-			
-			var newpoint = currentpoint + (direction * (200 * g))
-			
-			var newdist = abs(currentpoint.y - newpoint.y)
-			var ydist = abs(currentpoint.y - nextpoint.y)
-			
-			var d = newdist / ydist
-			var s = smoothstep(currentpoint.y, nextpoint.y, newpoint.y)
-			newpoint.y = lerp(currentpoint.y, nextpoint.y, s)
-			newline.append(newpoint)
-	
-	newline.append(L[L.size() - 1])
-	
-	return newline
+
 
 func create_convex_hull(points: Array) -> Dictionary:
 	

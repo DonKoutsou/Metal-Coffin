@@ -13,7 +13,7 @@ uniform vec2 offset;
 uniform float custom_time;
 uniform bool UseCustomTime;
 uniform float NormalStr = 0.5;
-
+uniform float Light = 1.0;
 // === SHADOW SETTINGS ===
 uniform float shadow_strength : hint_range(0.0, 1.0) = 0.15;
 uniform float shadow_parallax_amount : hint_range(-1.0, 1.0) = 0.5;
@@ -61,6 +61,7 @@ void fragment() {
 
     // === FINAL OUTPUT ===
     COLOR = mix(shadow, cloud, cloud.a);
+	COLOR.rgb *= Light;
     NORMAL_MAP = normal_noise;
     NORMAL_MAP_DEPTH = NormalStr;
 }

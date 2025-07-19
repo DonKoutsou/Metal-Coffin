@@ -27,6 +27,60 @@ func AngleToDirection(angle: float) -> String:
 	var index = int(fmod((angle + PI/8 + TAU), TAU) / (PI / 4)) % 8
 	return directions[index]
 
+static func SmoothLine(L : Array, res : float = 200) -> Array[Vector2]:
+	var newline : Array[Vector2]
+	for pointIndex in range(0, L.size()-1):
+		var currentpoint = L[pointIndex]
+		newline.append(currentpoint)
+		var nextpoint = L[pointIndex + 1]
+		var dist = currentpoint.distance_to(nextpoint)
+		var direction = currentpoint.direction_to(nextpoint)
+		if (currentpoint.y == nextpoint.y):
+			continue
+		for g in range(1, dist / res):
+			
+			var newpoint = currentpoint + (direction * (res * g))
+			
+			var newdist = abs(currentpoint.y - newpoint.y)
+			var ydist = abs(currentpoint.y - nextpoint.y)
+			
+			var d = newdist / ydist
+			var s = smoothstep(currentpoint.y, nextpoint.y, newpoint.y)
+			newpoint.y = lerp(currentpoint.y, nextpoint.y, s)
+			newline.append(newpoint)
+	
+	newline.append(L[L.size() - 1])
+	
+	return newline
+
+static func SmoothLine2(L : Array, res : float = 200) -> Array[Vector2]:
+	var newline : Array[Vector2]
+	for pointIndex in range(0, L.size()-1):
+		var currentpoint = L[pointIndex]
+		newline.append(currentpoint)
+		var nextpoint = L[pointIndex + 1]
+		var dist = currentpoint.distance_to(nextpoint)
+		var direction = currentpoint.direction_to(nextpoint)
+		if (currentpoint.y == nextpoint.y):
+			continue
+		for g in range(1, dist / res):
+			
+			var newpoint = currentpoint + (direction * (res * g))
+			
+			var newdist = abs(currentpoint.y - newpoint.y)
+			var ydist = abs(currentpoint.y - nextpoint.y)
+			
+			var d = newdist / ydist
+			var s = smoothstep(currentpoint.y, nextpoint.y, newpoint.y)
+			var s2 = smoothstep(currentpoint.x, nextpoint.x, newpoint.x)
+			newpoint.y = lerp(currentpoint.y, nextpoint.y, s)
+			newpoint.x = lerp(currentpoint.x, nextpoint.x, s2)
+			newline.append(newpoint)
+	
+	newline.append(L[L.size() - 1])
+	
+	return newline
+
 func DistanceToDistance(Dist: float) -> String:
 	if Dist > 8000:
 		return "very far"

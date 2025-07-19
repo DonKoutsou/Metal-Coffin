@@ -3,6 +3,7 @@ extends MapShip
 class_name PlayerDrivenShip
 
 @export var AccelerationAudio : AudioStreamPlayer2D
+@export var L : PointLight2D
 
 var CommingBack = false
 var RegroupTarget : MapShip
@@ -125,7 +126,13 @@ func _physics_process(delta: float) -> void:
 	if (AccelChanged):
 		_HandleAccelerationSound()
 
-	if (Docked or GetShipSpeedVec() == Vector2.ZERO):
+	if (Docked):
+		return
+		
+	L.color = Color(1,1,1) * WeatherManage.GetInstance().GetLightAmm()
+	L.texture_scale = WeatherManage.GetInstance().GetVisibilityInPosition(global_position)
+	
+	if (GetShipSpeedVec() == Vector2.ZERO):
 		return
 	
 	if (CommingBack):

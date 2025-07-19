@@ -31,6 +31,7 @@ shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_8uhgy")
 shader_parameter/GroundNormalTexture = ExtResource("3_mjecm")
 shader_parameter/GroundNormal2Texture = ExtResource("2_kyov3")
 shader_parameter/NormalD = 1.0
+shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(2.37, -2.715)
 shader_parameter/Scale1 = Vector2(5, 5)
 shader_parameter/Scale2 = Vector2(5, 5)

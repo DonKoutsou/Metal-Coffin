@@ -19,8 +19,16 @@ func DrawLines() -> void:
 		g.queue_free()
 	
 	for points in Lines:
+		
 		if (points.size() == 0):
 			continue
+		
+		
+		var smoothedline
+		if (RoadLines):
+			smoothedline = Helper.SmoothLine2(points, 5)
+		else:
+			smoothedline = points
 		var L = Line2D.new()
 		
 		L.joint_mode = Line2D.LINE_JOINT_ROUND
@@ -40,13 +48,13 @@ func DrawLines() -> void:
 			#L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 			#L.texture = load("res://Assets/Sand/Tiles093_1K-PNG_Color.png")
 			#L.default_color = Color(0,0,0, 1)
-			L.width = 20
+			L.width = 5
 		add_child(L)
 		L.global_position = points[0]
 		#L.default_color = Color("0ca50a")
 		#L.add_point(Vector2.ZERO, 0)
-		for z in points.size():
-			L.add_point(points[z] - L.global_position, z)
+		for z in smoothedline.size():
+			L.add_point(smoothedline[z] - L.global_position, z)
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	for g in get_children():

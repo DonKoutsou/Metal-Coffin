@@ -30,7 +30,7 @@ func _ready() -> void:
 	UIEventH.RegroupPressed.connect(RegroupPressed)
 	UIEventH.AccelerationChanged.connect(SetControlledShipSpeed)
 	UIEventH.SteerOffseted.connect(SteerChanged)
-	UIEventH.ShipSwitchPressed.connect(ControlledShipSwitch)
+	#UIEventH.ShipSwitchPressed.connect(ControlledShipSwitch)
 	
 	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
@@ -73,8 +73,9 @@ func RegisterSelf(D : MapShip) -> void:
 	AvailableShips.append(D)
 
 	D.ToggleFuelRangeVisibility(false)
-	D.connect("OnShipDestroyed", OnShipDestroyed)
-	D.connect("OnShipDamaged", OnShipDamaged)
+	
+	D.OnShipDestroyed.connect(OnShipDestroyed)
+	D.OnShipDamaged.connect(OnShipDamaged)
 	D.AChanged.connect(OnControlledShipSpeedChanged)
 
 func RadarButtonPressed() -> void:
@@ -150,49 +151,12 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 			Sh.GetDroneDock().ReleaseCaptive(Captive)
 
 	AvailableShips.erase(Sh)
+	
 	if (Sh == ControlledShip):
-		ControlledShipSwitch()
-
-#Switched to the next ship inside the Available Ships list
-
-func ControlledShipSwitch() -> void:
-	var CurrentlyControlledIndex = AvailableShips.find(ControlledShip)
-
-	if (CurrentlyControlledIndex + 1 > AvailableShips.size() - 1):
-		var newcont = 0
-		if (newcont == CurrentlyControlledIndex):
-			PopUpManager.GetInstance().DoFadeNotif("No ship to switch to")
-			return
-		ControlledShip.ToggleFuelRangeVisibility(false)
-		
-		ControlledShip.AChanged.disconnect(OnControlledShipSpeedChanged)
-		
-		var dock = ControlledShip.GetDroneDock() as DroneDock
-		
-		dock.DroneAdded.disconnect(RefreshUI)
-		dock.DroneRemoved.disconnect(RefreshUI)
-		
-		ControlledShip = AvailableShips[newcont]
-	else:
-		ControlledShip.ToggleFuelRangeVisibility(false)
-
-		ControlledShip.AChanged.disconnect(OnControlledShipSpeedChanged)
-		
-		var dock = ControlledShip.GetDroneDock() as DroneDock
-	
-		dock.DroneAdded.disconnect(RefreshUI)
-		dock.DroneRemoved.disconnect(RefreshUI)
-		
-		ControlledShip = AvailableShips[CurrentlyControlledIndex + 1]
-
-	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
-	
-	var NewDock = ControlledShip.GetDroneDock() as DroneDock
-	
-	NewDock.DroneAdded.connect(RefreshUI)
-	NewDock.DroneRemoved.connect(RefreshUI)
-
-	ShipControllerEventH.ShipChanged(ControlledShip)
+		if (Sh.Command != null):
+			OnShipChanged(Sh.Command)
+		else:
+			OnShipChanged(AvailableShips[0])
 
 func OnTargetPositionChanged(Pos : Vector2, Add : bool) -> void:
 	if (ControlledShip.Command != null):
@@ -212,7 +176,7 @@ func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	UIEventH.OnShipUpdated(NewShip)
 	NewShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
-	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
+	#ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
 	
 
 var camtw : Tween

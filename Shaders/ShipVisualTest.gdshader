@@ -33,7 +33,7 @@ void fragment() {
     vec4 Ship = texture(TEXTURE, shadow_uv);
     vec4 Shadow = texture(TEXTURE, base_uv);
     Shadow.rgb *= 0.0;
-	Shadow.a *= 0.7;
+	Shadow.a *= 0.5;
 
     COLOR = mix(Shadow, Ship, Ship.a);
 }

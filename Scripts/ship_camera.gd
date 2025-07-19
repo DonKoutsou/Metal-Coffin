@@ -6,6 +6,7 @@ class_name ShipCamera
 #@export var CityLines : MapLineDrawer
 
 @export var Cloud : Control
+@export var WeatherMan : WeatherManage
 #@export var Cloud2 : Control
 @export var Ground : Control
 @export var MinZoom : float = 0.1
@@ -111,18 +112,25 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 			ClickSound.play()
 	else:
 		UpdateCameraPos(event.relative)
-	
+
+var CloudShowing = true
 var GridShowing = false
 
 var MapGridTween : Tween
+var WeatherTween : Tween
+
+func ToggleWeatherMan() -> void:
+	WeatherMan.visible = !WeatherMan.visible
 
 func _UpdateMapGridVisibility():
 	if (zoom.x < 1.5 and !GridShowing):
 		if (is_instance_valid(MapGridTween)):
 			MapGridTween.kill()
 			MapGridTween = null
-		MapGridTween = create_tween() as Tween
+		MapGridTween = create_tween()
 		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
+		WeatherTween = create_tween()
+		WeatherTween.tween_property(WeatherMan, "modulate", Color(1,1,1,1), 0.5)
 		GridShowing = true
 		
 		MapGridTween.finished.connect(Cloud.hide)
@@ -131,7 +139,7 @@ func _UpdateMapGridVisibility():
 		
 		
 	else: if (zoom.x >= 1.5):
-		Cloud.visible = zoom.x < 4.0
+		Cloud.visible = zoom.x < 8.0
 		if (GridShowing):
 			if (is_instance_valid(MapGridTween)):
 				MapGridTween.kill()
@@ -141,8 +149,17 @@ func _UpdateMapGridVisibility():
 			
 			MapGridTween = create_tween()
 			MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
+			WeatherTween = create_tween()
+			WeatherTween.tween_property(WeatherMan, "modulate", Color(1,1,1,0), 0.5)
 			GridShowing = false
-	
+	#if (zoom.x < 4.0 and CloudShowing):
+		#var cloudtw = create_tween()
+		#cloudtw.tween_property(Cloud, "modulate", Color(1,1,1,0), 0.5)
+		#CloudShowing = false
+	#else : if (zoom.x > 4.0 and !CloudShowing):
+		#var cloudtw = create_tween()
+		#cloudtw.tween_property(Cloud, "modulate", Color(1,1,1,1), 0.5)
+		#CloudShowing = true
 	#Cloud.visible = zoom.x > 0.8
 	#Background.size = Vector2(30000,30000) / zoom
 	#Background.position = -Background.size /2
@@ -214,6 +231,11 @@ func _physics_process(delta: float) -> void:
 	
 	if (rel != Vector2.ZERO):
 		UpdateCameraPos(rel)
+	
+	if (!GridShowing):
+		var light = WeatherManage.GetInstance().GetLightAmm()
+		Cloud.material.set_shader_parameter("Light", light)
+		Ground.material.set_shader_parameter("Light", light)
 	
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))

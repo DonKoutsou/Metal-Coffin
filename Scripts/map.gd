@@ -284,7 +284,8 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 			WorldSize = dat.TownLoc.y
 			
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
-	WeatherManage.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
+	WeatherManage.GetInstance().SetWorldBounds(Vector2(SpawningBounds.x, WorldSize))
+	#WeatherManage.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
 	#call_deferred("GenerateRoads")
 	#_Camera.call_deferred("FrameCamToPlayer")
 
@@ -466,7 +467,7 @@ func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
-	WeatherManage.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
+	WeatherManage.GetInstance().SetWorldBounds(Vector2(SpawningBounds.x, WorldSize))
 
 var EventThread : Thread
 
@@ -644,7 +645,7 @@ func _physics_process(_delta: float) -> void:
 	var pos = EnemsToSpawn[enem]
 	EnemsToSpawn.erase(enem)
 	AddEnemyToHierarchy(enem, pos)
-	return
+	
 
 func AddEnemyToHierarchy(en : HostileShip, pos : Vector2):
 	en.PosToSpawn = pos

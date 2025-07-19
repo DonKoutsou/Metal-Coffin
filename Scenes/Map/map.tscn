@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=42 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
 [ext_resource type="Script" uid="uid://uwtcmr8brr2" path="res://Scripts/UI/RegionLineDrawer.gd" id="27_445lv"]
+[ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://weathernoise.tres" id="30_xwtib"]
+[ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://testnoise.tres" id="31_xwtib"]
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
@@ -57,18 +59,16 @@ shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_445lv")
 shader_parameter/GroundNormalTexture = ExtResource("15_x3wib")
 shader_parameter/GroundNormal2Texture = ExtResource("14_a2ujk")
 shader_parameter/NormalD = 1.0
+shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale1 = Vector2(20, 20)
-shader_parameter/Scale2 = Vector2(20, 20)
+shader_parameter/Scale1 = Vector2(40, 40)
+shader_parameter/Scale2 = Vector2(40, 40)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28wu2"]
 light_mode = 1
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1lxys"]
-noise_type = 0
-frequency = 0.002
-fractal_octaves = 4
-fractal_ping_pong_strength = 0.1
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kgrij"]
+light_mode = 1
 
 [sub_resource type="Curve" id="Curve_1lxys"]
 _limits = [0.0, 1.0, 0.0, 24.0]
@@ -152,15 +152,17 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "Ground", "ClickSound") groups=["Clock"]]
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "WeatherMan", "Ground", "ClickSound") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
 Cloud = NodePath("Clouds")
+WeatherMan = NodePath("../WeatherManager")
 Ground = NodePath("Ground")
 MinZoom = 0.08
+MaxZoom = 12.0
 ClickSound = NodePath("AudioStreamPlayer")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
@@ -202,13 +204,31 @@ volume_db = -5.0
 pitch_scale = 1.7
 bus = &"MapSounds"
 
+[node name="WeatherManager" type="TextureRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
+visible = false
+modulate = Color(0.850623, 0.850623, 0.850623, 1)
+material = SubResource("CanvasItemMaterial_kgrij")
+custom_minimum_size = Vector2(41.6, 40.6)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1551.0
+offset_top = -1551.0
+offset_right = 1551.0
+offset_bottom = 1551.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_xwtib")
+stretch_mode = 5
+script = ExtResource("12_1lxys")
+N = ExtResource("31_xwtib")
+LighAmm = SubResource("Curve_1lxys")
+Debug = true
+
 [node name="PlayerShip" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("17_21a23")]
 position = Vector2(126.5, 154.5)
-
-[node name="WeatherManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
-script = ExtResource("12_1lxys")
-N = SubResource("FastNoiseLite_1lxys")
-LighAmm = SubResource("Curve_1lxys")
 
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("CircleDr", "MapLonePos")]
 material = SubResource("CanvasItemMaterial_w8yg2")

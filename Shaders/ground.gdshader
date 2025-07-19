@@ -12,7 +12,7 @@ uniform sampler2D NoiseTexture: repeat_enable, filter_linear_mipmap;  // Add noi
 uniform sampler2D GroundNormalTexture: hint_normal, filter_linear_mipmap, repeat_enable;
 uniform sampler2D GroundNormal2Texture: hint_normal, filter_linear_mipmap, repeat_enable;
 uniform float NormalD = 1.0;
-
+uniform float Light = 1.0;
 // Custom offset for camera movement
 uniform vec2 offset;
 uniform vec2 Scale1;
@@ -42,6 +42,7 @@ void fragment() {
 	texNormal2.b = clamp(texNormal2.b + patternNoise, 0, 1);
     // Blend colors based on sampled noise
     COLOR = mix(texColor1, texColor2, patternNoise);
+	COLOR.rgb *= Light;
 	//COLOR = t;
 	NORMAL_MAP = mix(texNormal1, texNormal2, patternNoise);
 

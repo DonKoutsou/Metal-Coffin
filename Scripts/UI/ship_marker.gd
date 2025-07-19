@@ -259,7 +259,7 @@ func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : flo
 	ShipCallsign.text = ShipCasllSign
 	
 func UpdateCameraZoom(NewZoom : float) -> void:
-	DetailPanel.scale = Vector2(1,1) / NewZoom
+	DetailPanel.scale = Vector2(1.0,1.0) / NewZoom
 	ShipIcon.scale = (Vector2(0.7,0.7) / NewZoom)
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine(NewZoom)

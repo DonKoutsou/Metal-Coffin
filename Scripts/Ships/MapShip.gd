@@ -177,7 +177,7 @@ func OnStatLow(StatName : String) -> void:
 var ParalaxMulti : float
 
 func _UpdateShipIcon(Tex : Texture2D) -> void:
-	ParalaxMulti = 250 / Tex.get_size().x
+	ParalaxMulti = 2000 / Tex.get_size().x
 	ShipSprite.texture = Tex
 	UpdateAltitude(Altitude)
 #///////////////////////////////////////////////
@@ -297,7 +297,7 @@ func Landed() -> bool:
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
-	ShipSprite.scale = Vector2(lerp(0.05, 0.5, Altitude / 10000.0), lerp(0.05, 0.5, Altitude / 10000.0))
+	ShipSprite.scale = Vector2(lerp(0.05, 0.1, Altitude / 10000.0), lerp(0.05, 0.1, Altitude / 10000.0))
 	
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("shadow_parallax_amount", lerp(0.0, ParalaxMulti, Altitude / 10000.0))
@@ -306,7 +306,7 @@ func UpdateAltitude(NewAlt : float) -> void:
 		g.UpdateAltitude(NewAlt)
 
 func GetShipParalaxPosition(CamPos : Vector2, Zoom : float) -> Vector2:
-	var offset = (CamPos - global_position) * Zoom * lerp(0.0, 0.08, Altitude / 10000.0) * 0.5
+	var offset = (CamPos - global_position) * Zoom * lerp(0.0, 0.64, Altitude / 10000.0) * 0.05
 	offset.x /= 1.5
 	return global_position - offset
 

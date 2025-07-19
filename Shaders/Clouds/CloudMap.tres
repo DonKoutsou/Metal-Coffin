@@ -35,6 +35,7 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/custom_time = 0.0
 shader_parameter/UseCustomTime = true
 shader_parameter/NormalStr = -2.0
+shader_parameter/Light = 0.8
 shader_parameter/shadow_strength = 0.3
 shader_parameter/shadow_parallax_amount = -0.04
 shader_parameter/rotation_angle = -0.85
