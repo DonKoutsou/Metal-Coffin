@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cyujmksfffet"]
+[gd_scene load_steps=41 format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
 [ext_resource type="Resource" uid="uid://df37gonu46vbl" path="res://Resources/MapSpots/CitySpots/Villages.tres" id="3_utnqo"]
@@ -34,6 +34,9 @@
 [ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://weathernoise.tres" id="30_xwtib"]
 [ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://testnoise.tres" id="31_xwtib"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kgrij"]
+light_mode = 1
+
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.52029, 0.550725)
 
@@ -66,15 +69,6 @@ shader_parameter/Scale2 = Vector2(40, 40)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28wu2"]
 light_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kgrij"]
-light_mode = 1
-
-[sub_resource type="Curve" id="Curve_1lxys"]
-_limits = [0.0, 1.0, 0.0, 24.0]
-bake_resolution = 10
-_data = [Vector2(0, 0.8), 0.0, 0.0, 0, 0, Vector2(4.8, 0.8), 0.00229647, 0.00229647, 0, 0, Vector2(10.5861, 1), 0.0, 0.0, 0, 0, Vector2(16.3867, 1), 0.0, 0.0, 0, 0, Vector2(21.6, 0.8), 0.0, 0.0, 0, 0, Vector2(24, 0.8), 0.0, 0.0, 0, 0]
-point_count = 6
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
@@ -152,17 +146,41 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
 
-[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Cloud", "WeatherMan", "Ground", "ClickSound") groups=["Clock"]]
+[node name="WeatherManager" type="TextureRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
+visible = false
+modulate = Color(0.82, 0.82, 0.82, 1)
+z_index = 1
+material = SubResource("CanvasItemMaterial_kgrij")
+custom_minimum_size = Vector2(41.6, 40.6)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1551.0
+offset_top = -1551.0
+offset_right = 1551.0
+offset_bottom = 1551.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_xwtib")
+stretch_mode = 5
+script = ExtResource("12_1lxys")
+N = ExtResource("31_xwtib")
+EventHandler = ExtResource("25_8mjbw")
+Debug = true
+
+[node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Grid", "Cloud", "Ground", "WeatherMan", "ClickSound") groups=["Clock"]]
 position = Vector2(576, 324)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("11_a2ujk")
 Background = NodePath("DarkBlueBackground")
+Grid = NodePath("Grid")
 Cloud = NodePath("Clouds")
-WeatherMan = NodePath("../WeatherManager")
 Ground = NodePath("Ground")
+WeatherMan = NodePath("../WeatherManager")
 MinZoom = 0.08
-MaxZoom = 12.0
 ClickSound = NodePath("AudioStreamPlayer")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
@@ -190,13 +208,32 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DarkBlueBackground" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" instance=ExtResource("19_28wu2")]
+[node name="DarkBlueBackground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 material = SubResource("CanvasItemMaterial_28wu2")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -15000.0
+offset_top = -15000.0
+offset_right = 15000.0
+offset_bottom = 15000.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.167403, 0.285599, 0.294053, 1)
+
+[node name="Grid" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" instance=ExtResource("19_28wu2")]
+z_index = 1
+material = SubResource("CanvasItemMaterial_28wu2")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+Col = Color(0, 0, 0, 0.2)
+EventHandler = ExtResource("25_8mjbw")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]
 stream = ExtResource("19_x3wib")
@@ -204,33 +241,11 @@ volume_db = -5.0
 pitch_scale = 1.7
 bus = &"MapSounds"
 
-[node name="WeatherManager" type="TextureRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport"]
-visible = false
-modulate = Color(0.850623, 0.850623, 0.850623, 1)
-material = SubResource("CanvasItemMaterial_kgrij")
-custom_minimum_size = Vector2(41.6, 40.6)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1551.0
-offset_top = -1551.0
-offset_right = 1551.0
-offset_bottom = 1551.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("30_xwtib")
-stretch_mode = 5
-script = ExtResource("12_1lxys")
-N = ExtResource("31_xwtib")
-LighAmm = SubResource("Curve_1lxys")
-Debug = true
-
 [node name="PlayerShip" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" instance=ExtResource("17_21a23")]
 position = Vector2(126.5, 154.5)
 
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("CircleDr", "MapLonePos")]
+z_index = 1
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
 CircleDr = NodePath("CircleDrawer")
@@ -245,7 +260,7 @@ ControllerEventHandler = ExtResource("22_n73so")
 
 [node name="RegionMapDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" instance=ExtResource("16_sp82o")]
 script = ExtResource("27_445lv")
-RegionTrans = 0.05
+RegionTrans = 0.2
 ResizeLinesWithZoom = true
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager"]
@@ -255,7 +270,7 @@ use_parent_material = true
 modulate = Color(1, 1, 1, 0.2)
 ResizeLinesWithZoom = true
 
-[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" groups=["LineMarkers"]]
+[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" groups=["ZoomAffected"]]
 use_parent_material = true
 script = ExtResource("22_fa7wu")
 ShipControllerEvent = ExtResource("22_n73so")

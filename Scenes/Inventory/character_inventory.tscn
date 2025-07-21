@@ -104,7 +104,7 @@ text = "Cards"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer2/HBoxContainer"]
+[node name="HFlowContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -120,13 +120,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 18
 text = "Engines"
 
-[node name="Engines" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer"]
+[node name="Engines" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
@@ -140,13 +140,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 18
 text = "Fuel Tanks"
 
-[node name="Fuel Tanks" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2"]
+[node name="Fuel Tanks" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
-columns = 3
 
 [node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
@@ -160,12 +160,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 18
 text = "Sensors"
 
-[node name="Sensors" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3"]
+[node name="Sensors" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 2
-columns = 3
 
 [node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
@@ -179,13 +179,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 18
 text = "Fortifications"
 
-[node name="Shields" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4"]
+[node name="Shields" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
-columns = 3
 
 [node name="PanelContainer5" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
@@ -199,13 +199,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 18
 text = "Weapons"
 
-[node name="Weapons" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5"]
+[node name="Weapons" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
-columns = 3
 
 [node name="PanelContainer6" type="PanelContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer"]
 layout_mode = 2
@@ -219,13 +219,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 18
 text = "Cargo"
 
-[node name="Inventory" type="GridContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6"]
+[node name="Inventory" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
-columns = 3
 
 [connection signal="text_changed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/CharacterName" to="." method="_on_character_name_text_changed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]

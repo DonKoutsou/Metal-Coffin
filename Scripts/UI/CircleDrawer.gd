@@ -11,6 +11,7 @@ var circles = []
 var intersections = {}
 
 var ControlledShip : PlayerDrivenShip
+var ControlledShipPos : Vector2
 
 var CamZoom = 1
 
@@ -26,6 +27,7 @@ func _ready() -> void:
 
 func UpdateControlledShip(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip = NewShip
+	ControlledShipPos = ControlledShip.global_position
 
 func UpdateCircles(Circl : Array[PackedVector2Array])-> void:
 	if (ClusterTH != null):
@@ -85,6 +87,8 @@ func ClusterCalcFinished() -> void:
 	if (ClusterTH != null):
 		intersections = ClusterTH.wait_to_finish()
 		ClusterTH = null
+	if (ControlledShip != null):
+		ControlledShipPos = ControlledShip.global_position
 	queue_redraw()
 
 
@@ -97,7 +101,7 @@ func get_circle_polygon(center: Vector2, rad : float) -> PackedVector2Array:
 	points.append(points[0])
 	return points
 
-func CamZoomUpdated(NewVal : float) -> void:
+func UpdateCameraZoom(NewVal : float) -> void:
 	CamZoom = NewVal
 
 func _draw():
@@ -138,23 +142,23 @@ func _draw():
 func DrawRuller() -> void:
 	if (ControlledShip == null or !ControlledShip.RadarWorking):
 		return
-	var shippos = ControlledShip.global_position
+	#var shippos = ControlledShip.global_position
 	var LineW = 0.5/CamZoom
 	var vizrange = ControlledShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	if(!ControlledShip.RadarWorking):
 		vizrange = 110
 	
 	if (vizrange == 110):
-		vizrange *= WeatherManage.GetInstance().GetVisibilityInPosition(shippos)
+		vizrange *= WeatherManage.GetVisibilityInPosition(ControlledShipPos)
 	
 	
 	for g in 3:
-		draw_circle(shippos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, true)
+		draw_circle(ControlledShipPos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, true)
 
 	var Next = rotation_degrees
 	var Num = 90
 	for g in 12:
-		draw_line(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + shippos, Vector2(vizrange,0).rotated(deg_to_rad(Next)) + shippos, Color(100, 100, 100, 0.3), LineW, true)
+		draw_line(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + ControlledShipPos, Vector2(vizrange,0).rotated(deg_to_rad(Next)) + ControlledShipPos, Color(100, 100, 100, 0.3), LineW, true)
 		
 		Next -= 30
 		Num -= 30

@@ -116,6 +116,7 @@ func _ready() -> void:
 	EventHandler.connect("ScreenUIToggled", ToggleScreenUI)
 	EventHandler.connect("ShipUpdated", ControlledShipSwitched)
 	EventHandler.connect("ShipDamaged", OnControlledShipDamaged)
+	EventHandler.connect("Storm", Storm)
 	MissileUI.connect("MissileLaunched", Cam.EnableMissileShake)
 	
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
@@ -131,6 +132,9 @@ func Acceleration_Ended(value_changed: float) -> void:
 func Acceleration_Changed(value: float) -> void:
 	EventHandler.OnAccelerationChanged(value)
 	Cam.EnableShake(value * 1.5)
+	
+func Storm(value : float) -> void:
+	Cam.EnableStormShake(value)
 
 func Drone_Button_Pressed() -> void:
 	if (ShipTradeInProgress):
@@ -243,6 +247,12 @@ func Sim_Speed_Pressed() -> void:
 func Sim_Speed_Released() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
 
+func _on_forecast_button_pressed() -> void:
+	EventHandler.OnForecastPressed()
+
+func _on_grid_button_pressed() -> void:
+	EventHandler.OnGridPressed()
+
 func _on_speed_simulation_toggled(toggled_on: bool) -> void:
 	SimulationManager.GetInstance().SpeedToggle(toggled_on)
 
@@ -281,3 +291,7 @@ enum ScreenState{
 	HALF_SCREEN,
 	NO_SCREEN
 }
+
+
+func _on_steer_button_pressed() -> void:
+	Steer.Toggle()

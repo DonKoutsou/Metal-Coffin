@@ -16,7 +16,7 @@ func UpdateLine(Pos : Vector2, CamZoom : float) -> void:
 
 
 
-func CamZoomUpdated(NewZoom : float) -> void:
+func UpdateCameraZoom(NewZoom : float) -> void:
 	width = 2 / (NewZoom)
 	w = 2 / (NewZoom)
 	$Label.scale = Vector2(1 / (NewZoom), 1 / (NewZoom))
@@ -38,7 +38,7 @@ func LoadData(Data : SD_MapMarkerLine):
 	$Label.text = var_to_str(roundi(LineLeangth)) + " km"
 	$Label.position = get_point_position(0) - ($Label.size / 2)
 	$Label.pivot_offset = $Label.size / 2
-	add_to_group("LineMarkers")
+	add_to_group("ZoomAffected")
 
 func _draw() -> void:
 	draw_circle(points[0], points[0].distance_to(points[1]), Color(1,0.274,0.083), false, w)

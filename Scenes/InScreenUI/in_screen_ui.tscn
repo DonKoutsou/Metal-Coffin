@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://buj48d65j7y07"]
+[gd_scene load_steps=21 format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
@@ -11,8 +11,7 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
-[ext_resource type="Script" uid="uid://dr3s8ms8g256f" path="res://Scripts/UI/visibility_text.gd" id="11_j7r7e"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="12_avpxw"]
+[ext_resource type="PackedScene" uid="uid://dncqbpsg58qgq" path="res://Scenes/InScreenUI/weather_ui.tscn" id="11_j7r7e"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
 [ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="18_in80l"]
@@ -84,28 +83,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("11_avpxw")
 
-[node name="VisibilityText" type="Label" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -185.0
-offset_top = -49.0
-offset_right = -18.0
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_vertical = 1
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("13_lb8ei")
-theme_override_font_sizes/font_size = 16
-text = "Visibility : Clear"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-script = ExtResource("11_j7r7e")
-ShipControllerEventH = ExtResource("12_avpxw")
+[node name="WeatherUI" parent="." instance=ExtResource("11_j7r7e")]
 
 [node name="UnderStatUI" type="Control" parent="."]
 process_mode = 1
@@ -281,23 +259,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -172.0
-offset_top = -83.0
-offset_right = -15.0
-offset_bottom = -48.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Forecast Vis"
-
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]
 [connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/Return" to="." method="Pause"]
 [connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
 [connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

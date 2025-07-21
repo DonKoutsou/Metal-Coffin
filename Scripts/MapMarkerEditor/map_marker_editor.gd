@@ -52,8 +52,8 @@ func _on_text_confirm_pressed() -> void:
 	var pos = ($Panel.position + ($Panel.size / 2)) - (get_viewport_rect().size / 2)
 	
 	MapPointerManager.GetInstance().MapLonePos.add_child(textblock)
-	textblock.add_to_group("LineMarkers")
-	textblock.CamZoomUpdated(ship_camera.zoom.x)
+	textblock.add_to_group("ZoomAffected")
+	textblock.UpdateCameraZoom(ship_camera.zoom.x)
 	textblock.global_position = ship_camera.global_position + (pos / (ship_camera.zoom))
 	textblock.SetText($MarkerTextEditor/VBoxContainer/TextEdit.text)
 	$MarkerTextEditor/VBoxContainer/TextEdit.text = ""
@@ -72,8 +72,8 @@ func _on_drone_button_pressed() -> void:
 		var pos = Line.position - (get_viewport_rect().size / 2)
 		$Linetemp.remove_child(Line)
 		MapPointerManager.GetInstance().MapLonePos.add_child(Line)
-		Line.add_to_group("LineMarkers")
-		Line.CamZoomUpdated(ship_camera.zoom.x)
+		Line.add_to_group("ZoomAffected")
+		Line.UpdateCameraZoom(ship_camera.zoom.x)
 		Line.global_position = ship_camera.global_position + (pos / (ship_camera.zoom))
 		Line.set_point_position(1, Line.get_point_position(1) / (ship_camera.zoom))
 		#Line.get_child(0).position = (Line.get_point_position(1) / 2) - (Line.get_child(0).size / 2)

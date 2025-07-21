@@ -8,7 +8,40 @@ static var Instance : Helper
 
 func _ready() -> void:
 	Instance = self
+	set_physics_process(false)
+	$CanvasLayer.visible = false
 
+func _physics_process(delta: float) -> void:
+	$CanvasLayer/TextureRect.pivot_offset = $CanvasLayer/TextureRect.size / 2
+	$CanvasLayer/TextureRect.rotation = wrap($CanvasLayer/TextureRect.rotation + delta, 0, PI * 4)
+	
+
+func LoadThreaded(File : String) -> SignalObject:
+	var Sign = SignalObject.new()
+	
+	#var t = Thread.new()
+	ResourceLoader.load_threaded_request(File)
+	
+	#t.start(LoadSceneTh.bind(Sign, File))
+	call_deferred("CheckForFinishedLoad", Sign, File)
+	
+	$CanvasLayer.visible = true
+	set_physics_process(true)
+	
+	return Sign
+
+func CheckForFinishedLoad(Sign : SignalObject, File : String) -> void:
+	var Status = ResourceLoader.load_threaded_get_status(File)
+	if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
+		LoadFinished(Sign, ResourceLoader.load_threaded_get(File))
+	else:
+		CallLater(CheckForFinishedLoad.bind(Sign, File), 0.1)
+
+func LoadFinished(Sign : SignalObject, File : PackedScene) -> void:
+	Sign.Sign.emit(File)
+	$CanvasLayer.visible = false
+	set_physics_process(false)
+	
 static func GetInstance() -> Helper:
 	return Instance
 
@@ -94,7 +127,7 @@ func DistanceToDistance(Dist: float) -> String:
 		return "very close"
 		
 func GetCityByName(CityName : String) -> MapSpot:
-	var SpotGroups = ["CAPITAL", "CITY_CENTER"]
+	var SpotGroups = ["CAPITAL", "CITY_CENTER", "VILLAGE"]
 	var cities = []
 	for g in SpotGroups:
 		cities.append_array( get_tree().get_nodes_in_group(g))

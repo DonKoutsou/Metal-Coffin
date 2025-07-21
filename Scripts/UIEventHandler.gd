@@ -36,7 +36,9 @@ signal FleetSeparationPressed()
 
 signal ScreenUIToggled(t : bool)
 
-
+signal Storm(value : float)
+signal ForecastToggled
+signal GridPressed
 #signal AlarmRaised
 
 signal ShipDamaged(DammageAmm : float)
@@ -126,6 +128,8 @@ func OnFleetSeparationPressed() -> void:
 func OnPausePressed() -> void:
 	PausePressed.emit()
 
+func OnStorm(value : float) -> void:
+	Storm.emit(value)
 #func OnButtonCoverToggled(t : bool) -> void:
 	#CoverToggled.emit(t)
 
@@ -133,3 +137,9 @@ func OnControlledShipDamaged(DammageAmm : float) -> void:
 	ShipDamaged.emit(DammageAmm)
 #func OnSimmulationStepChanged(NewStep: int) -> void:
 	#SimStepChanged.emit(NewStep)
+
+func OnForecastPressed() -> void:
+	ForecastToggled.emit()
+
+func OnGridPressed() -> void:
+	GridPressed.emit()

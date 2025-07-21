@@ -3,35 +3,64 @@ extends TextureRect
 class_name WeatherManage
 
 @export var N : FastNoiseLite
-@export var LighAmm : Curve
+@export var EventHandler : UIEventHandler
 @export var Debug : bool = false
 
 static var WorldBounds : Vector2
-
 static var Instance : WeatherManage
 
-var tx : Image
+static var tx : Image
+static var LighAmm : Curve = preload("res://Resources/LightCurve.tres")
+static var inverse_transform
+static var rect_size
+static var ShipsToUpdate : Array[MapShip]
+
+static func RegisterShip(Ship : MapShip) -> void:
+	ShipsToUpdate.append(Ship)
+
+static func UnregisterShip(Ship : MapShip) -> void:
+	ShipsToUpdate.erase(Ship)
 
 static func GetInstance() -> WeatherManage:
 	return Instance
 
 func _ready() -> void:
+	EventHandler.ForecastToggled.connect(ToggleWeatherMan)
 	Instance = self
 	tx = texture.get_image()
+	var global_transform = get_global_transform()
+	inverse_transform = global_transform.affine_inverse()
+	rect_size = get_rect().size
+
+func ToggleWeatherMan() -> void:
+	visible = !visible
 
 func SetWorldBounds(WB : Vector2) -> void:
 	WorldBounds = WB
 	position = Vector2(-WorldBounds.x, WorldBounds.y * 2)
 	size = Vector2(WorldBounds.x * 2, -WorldBounds.y * 3)
+	
+	var global_transform = get_global_transform()
+	inverse_transform = global_transform.affine_inverse()
+	rect_size = get_rect().size
 
 var d = 0.2
 func _physics_process(delta: float) -> void:
 	d -= delta
 	if (d <= 0):
 		var t = Clock.GetInstance().TimePassedInMinutes()
-		N.offset.y = -t / 10
+		N.offset.y = -t / 20
 		d = 0.2
 		tx = texture.get_image()
+		
+	var L = GetLightAmm()
+		
+	for g in ShipsToUpdate:
+		var viz = GetVisibilityInPosition(g.global_position)
+		g.StormValue = 1 - (viz - 0.5)
+		if (g is PlayerDrivenShip):
+			g.UpdateLight(L, viz)
+		g.RephreshVisRange(viz)
 		#queue_redraw()
 
 #func _draw() -> void:
@@ -48,37 +77,25 @@ func _physics_process(delta: float) -> void:
 			#Col.a = 1
 			#draw_circle(loc, 50, Col)
 
-func GetVisibilityInPosition(pos : Vector2) -> float:
-	#N.offset.y = -Clock.GetInstance().TimePassedInMinutes()
-	var t = Clock.GetInstance().GetHours()
-	var Maxv = LighAmm.sample(t)
-	#if (t < 20 and t > 6):
-		#Maxv = 1
+static func GetVisibilityInPosition(pos : Vector2) -> float:
+	var Maxv = GetLightAmm()
 	var value = Helper.mapvalue(1 - get_color_at_global_position(pos).r, 0.5, Maxv)
 	return value
 
-func GetLightAmm() -> float:
-	var t = Clock.GetInstance().GetHours()
+static func GetLightAmm() -> float:
+	var t = Clock.GetHours()
 	return LighAmm.sample(t)
 
-func get_color_at_global_position(pos: Vector2) -> Color:
-	# Step 1: Get the global transform
-	var global_transform = get_global_transform()
-	
-	# Step 2: Invert the transformation matrix
-	var inverse_transform = global_transform.affine_inverse()
-
+static func get_color_at_global_position(pos: Vector2) -> Color:
 	# Step 3: Use the inverse transform to get the local position
 	var local_position = (inverse_transform * Vector2(pos.x, pos.y))
-	
-	var rect_size = get_rect().size
 	
 	# Step 3: Ensure the position is within the bounds of the TextureRect
 	if local_position.x < 0 or local_position.x > rect_size.x or local_position.y < 0 or local_position.y > rect_size.y:
 		return Color(0, 0, 0, 0)  # Return transparent color if out of bounds
 
 	 # Step 5: Calculate UV coordinates based on Keep Aspect Covered
-	var texture_size = texture.get_size()
+	var texture_size = tx.get_size()
 	var rect_aspect_ratio = rect_size.x / rect_size.y
 	var texture_aspect_ratio = texture_size.x / texture_size.y
 

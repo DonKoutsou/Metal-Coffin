@@ -16,11 +16,11 @@ func SetText(t : String):
 
 func _physics_process(_delta: float) -> void:
 	if (txt.length() > T.visible_characters):
-		T.visible_characters += 1
+		T.visible_characters += 2
 		return
 	if (alph <= 0):
 		queue_free()
-	alph -= 0.05
+	alph -= 0.1
 	modulate.a = min(1, alph)
 
 func _exit_tree() -> void:

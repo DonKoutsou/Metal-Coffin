@@ -34,8 +34,13 @@ func _ready() -> void:
 	
 	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
+	set_physics_process(false)
 	
-	
+func _physics_process(delta: float) -> void:
+	if (SimulationManager.IsPaused()):
+		return
+	if (ControlledShip.StormValue >= 0.9):
+		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
 
 func SetCamera() -> void:
 	ship_camera = Map.GetInstance().GetCamera()
@@ -50,6 +55,7 @@ func InitiateFleetSeparation() -> void:
 	FleetSeperationRequested.emit(Instigator)
 	
 func SetInitialShip() -> void:
+	
 	ControlledShip = get_tree().get_nodes_in_group("PlayerShips")[0]
 	
 	InventoryManager.GetInstance().AddCharacter(ControlledShip.Cpt)
@@ -63,11 +69,13 @@ func SetInitialShip() -> void:
 	dock.DroneRemoved.connect(RefreshUI)
 	
 	AvailableShips.append(ControlledShip)
-
+	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
 	
 	UIEventH.OnShipUpdated(ControlledShip)
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
+	
+	set_physics_process(true)
 
 func RegisterSelf(D : MapShip) -> void:
 	AvailableShips.append(D)

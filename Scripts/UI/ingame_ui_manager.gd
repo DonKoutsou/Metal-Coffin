@@ -116,7 +116,3 @@ func SetScreenRes(Res : Vector2) -> void:
 
 func _on_flight_manual_pressed() -> void:
 	Manual.visible = true
-
-
-func _on_button_pressed() -> void:
-	ShipCamera.GetInstance().ToggleWeatherMan()

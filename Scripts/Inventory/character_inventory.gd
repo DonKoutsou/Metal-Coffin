@@ -4,12 +4,12 @@ class_name CharacterInventory
 
 @export_group("Nodes")
 @export var InventoryBoxScene : PackedScene
-@export var EngineInventoryBoxParent : GridContainer
-@export var SensorInventoryBoxParent : GridContainer
-@export var FuelTankInventoryBoxParent : GridContainer
-@export var WeaponInventoryBoxParent : GridContainer
-@export var ShieldInventoryBoxParent : GridContainer
-@export var InventoryBoxParent : GridContainer
+@export var EngineInventoryBoxParent : VBoxContainer
+@export var SensorInventoryBoxParent : VBoxContainer
+@export var FuelTankInventoryBoxParent : VBoxContainer
+@export var WeaponInventoryBoxParent : VBoxContainer
+@export var ShieldInventoryBoxParent : VBoxContainer
+@export var InventoryBoxParent : VBoxContainer
 @export var CaptainNameLabel : LineEdit
 
 signal InventoryUpdated
@@ -118,42 +118,42 @@ func InitialiseInventory(Cha : Captain) -> void:
 		Box.Initialise(self)
 		InventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
-		InventoryBoxParent.columns = min(2, CharInvSpace)
+		#InventoryBoxParent.columns = min(2, CharInvSpace)
 	
 	for g in CharEngineSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		Box.Initialise(self)
 		EngineInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
-		EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
+		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
 	
 	for g in CharSensorSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		Box.Initialise(self)
 		SensorInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
-		SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
+		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
 	
 	for g in CharFuelTankSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		Box.Initialise(self)
 		FuelTankInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
-		FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
+		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
 	
 	for g in CharShieldSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		Box.Initialise(self)
 		ShieldInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
-		ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
+		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
 	
 	for g in CharWeaponSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		Box.Initialise(self)
 		WeaponInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
-		WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
+		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 		
 	CaptainNameLabel.text = CharName
 

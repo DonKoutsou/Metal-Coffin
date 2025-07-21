@@ -74,3 +74,5 @@ offset_top = 187.0
 offset_right = 92.0
 offset_bottom = 207.0
 scale = Vector2(0.65693, 0.65693)
+
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]

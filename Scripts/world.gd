@@ -168,7 +168,7 @@ func PlayPrologue():
 
 func ShowArmak():
 	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialogues2, null, "Seg", ReturnCamToPlayer, true)
-	GetMap().GetCamera().ShowArmak()
+	GetMap().GetCamera().FrameCamToPos(Helper.GetInstance().GetCityByName("Armak").global_position, 6)
 
 func SteerTut() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CAMERA_CONTROL)):
@@ -188,7 +188,7 @@ func PlayIntro():
 
 func ShowStation():
 	Ingame_UIManager.GetInstance().CallbackDiag(IntroDialogue2, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
-	GetMap().GetCamera().ShowStation()
+	GetMap().GetCamera().FrameCamToPos(Helper.GetInstance().GetCityByName("Dormak").global_position, 6)
 
 func ReturnCamToPlayer():
 	#EnableBackUI()

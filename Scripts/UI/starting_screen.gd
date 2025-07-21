@@ -2,15 +2,14 @@ extends Node
 
 class_name StartingScreen
 
-@export var StartingMenuScene : PackedScene
+@export var StartingMenuScene : String = "res://Scenes/starting_menu.tscn"
 @export var StudioAnim : PackedScene
-@export var GameScene : PackedScene
-@export var IntroGameScene : PackedScene
-@export var CageFightGameScene : PackedScene
+@export var GameScene : String = "res://Scenes/World.tscn"
+@export var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
+@export var CageFightGameScene : String = "res://Scenes/CageFightWorld.tscn"
 
 var StMenu : StartingMenu
 var Wor : World
-
 
 const APPID = "3679120"
  #Called when the node enters the scene tree for the first time.
@@ -19,7 +18,8 @@ const APPID = "3679120"
 	#if (OS.get_name() == "Windows"):
 		#OS.set_environment("SteamAppID", APPID)
 		#OS.set_environment("SteamGameID", APPID)
-	
+
+
 func _ready() -> void:
 	#if (OS.get_name() == "Windows"):
 		#Steam.steamInit()
@@ -34,16 +34,20 @@ func _ready() -> void:
 			#print("Username : ", str(name))
 			#AchievementManager.GetInstance().SteamRunning = true
 			#print("Achievement Tracking Enabled")
-	
+	call_deferred("Start")
+
+func Start() -> void:
 	var vidpl = StudioAnim.instantiate() as StudioAnimation
 	add_child(vidpl)
+	
 	await vidpl.Finished
+	
 	vidpl.queue_free()
-
 	SpawnMenu()
 
 func SpawnMenu() -> void:
-	StMenu = StartingMenuScene.instantiate() as StartingMenu
+	var Menu = await Helper.GetInstance().LoadThreaded(StartingMenuScene).Sign
+	StMenu = Menu.instantiate() as StartingMenu
 	add_child(StMenu)
 	StMenu.connect("GameStart", StartGame)
 	StMenu.connect("PrologueStart", StartPrologue)
@@ -52,8 +56,8 @@ func SpawnMenu() -> void:
 	UISoundMan.GetInstance().Refresh()
 
 func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
-	
-	Wor = IntroGameScene.instantiate() as World
+	var IntroScene = await Helper.GetInstance().LoadThreaded(IntroGameScene).Sign
+	Wor = IntroScene.instantiate() as World
 	if (Load):
 		var LoadResault = SaveLoadManager.GetInstance().Load(Wor)
 		if (!LoadResault["Succsess"]):
@@ -69,8 +73,8 @@ func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
 func StartCageFight() -> void:
-	
-	var fight = CageFightGameScene.instantiate() as CageFightWorld
+	var FightScene = await Helper.GetInstance().LoadThreaded(CageFightGameScene).Sign
+	var fight = FightScene.instantiate() as CageFightWorld
 
 	add_child(fight)
 	await fight.FightTransitionFinished
@@ -88,8 +92,9 @@ func StartGame(Load : bool, SkipStory : bool = false) -> void:
 	if (!OS.is_debug_build()):
 		PopupManager.DoFadeNotif("Not available on Demo", StMenu.GetVp())
 		return
-
-	Wor = GameScene.instantiate() as World
+	
+	var WorldScene = await Helper.GetInstance().LoadThreaded(GameScene).Sign
+	Wor = WorldScene.instantiate() as World
 
 	if (Load):
 		var LoadResault = SaveLoadManager.GetInstance().Load(Wor)

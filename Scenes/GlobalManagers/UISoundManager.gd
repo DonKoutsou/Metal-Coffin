@@ -130,7 +130,7 @@ func OnBouncingButtonHovered(But : Control) -> void:
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BACK)
-	tw.tween_property(But, "scale", Vector2(1.1,1.1), 0.25)
+	tw.tween_property(But, "scale", Vector2(1.02,1.1), 0.25)
 	#But.scale = Vector2(1.1, 1.1)
 	#But.z_index = 1
 

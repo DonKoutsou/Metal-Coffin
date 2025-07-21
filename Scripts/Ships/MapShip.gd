@@ -65,7 +65,7 @@ var ElintContacts : Dictionary
 
 var Detectable = true
 
-
+var StormValue : float = 0
 
 func _ready() -> void:
 	ElintShape.connect("area_entered", BodyEnteredElint)
@@ -367,6 +367,13 @@ func UpdateVizRange(rang : float):
 	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 110)
+
+func RephreshVisRange(Visibility : float) -> void:
+	var range = Visibility
+	if (RadarWorking):
+		range = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(range, Visibility)
 
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 

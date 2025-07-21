@@ -112,12 +112,24 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 		if (ship.Destroyed):
 			SetMarkerDetails("Ship Debris", "" ,0)
 		else: if (ship.VisibleBy.size() > 0):
-			
+			#if (ship.StormValue > 0.9):
+				#var newpos = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
+				#newpos += Vector2(randf_range(20, -20), randf_range(20, -20))
+				#global_position = newpos
+				#UpdateTrajectory(randf_range(PI * 2, PI * -2))
+			#else:
 			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
-			UpdateSpeed(ship.GetShipSpeed())
+			
+			if (ship.ExposedValue > 2):
+				UpdateSpeed(ship.GetShipSpeed())
+			else:
+				SetSpeedUnknown()
+			if (ship.ExposedValue > 4):
+				UpdateTrajectory(ship.global_rotation)
+			else:
+				HideTrajectory()
 			ClearTime()
 			SetTime()
-			UpdateTrajectory(ship.global_rotation)
 		else :
 			modulate.a = 0.5
 			var timepast = Clock.GetInstance().GetHoursSince(TimeLastSeen)
@@ -129,10 +141,17 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 		if (ship is PlayerDrivenShip):
 			TargetLocations = ship.TargetLocations
 			range = ship.GetFuelRange()
+			
+			#if (ship.StormValue > 0.9):
+				#var newpos = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
+				#newpos += Vector2(randf_range(50, -50), randf_range(50, -50))
+				#global_position = newpos
+				#UpdateTrajectory(randf_range(PI * 2, PI * -2))
+			#else:
 			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
-			ToggleShipDetails(IsControlled)
-		
 			UpdateTrajectory(ship.global_rotation)
+				
+			ToggleShipDetails(IsControlled)
 			UpdateSpeed(ship.GetShipSpeed())
 			
 			if (ship.Landing or ship.TakingOff or ship.MatchingAltitude):
@@ -162,14 +181,15 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 
 func UpdateTexts() -> void:
 	var T = ""
-	T += ShipNameText + "\n"
-	T += ShipSpeedText + "\n"
+	T += ShipNameText
+	if (ShipSpeedText != ""):
+		T += "\n" + ShipSpeedText
 	if (TimeSeenText != ""):
-		T += TimeSeenText + "\n"
+		T += "\n" + TimeSeenText
 	if (FuelText != ""):
-		T += FuelText + "\n"
+		T += "\n" + FuelText
 	if (HullText != ""):
-		T += HullText + "\n"
+		T += "\n" + HullText
 	ShipDetailLabel.text = T
 	
 func PlayHostileShipNotif(text : String) -> void:
@@ -265,6 +285,7 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 	UpdateLine(NewZoom)
 	$Line2D.width =  1.5 / NewZoom
 	CurrentZoom = NewZoom
+	queue_redraw()
 
 func UpdateLine(Zoom : float)-> void:
 	var locp = get_closest_point_on_rect($Control/PanelContainer/ShipName.get_global_rect(), DetailPanel.global_position)
@@ -326,8 +347,14 @@ func UpdateDroneFuel(amm : float, maxamm : float):
 	FuelText = "FUEL {0}%".format([roundi(amm / maxamm * 100)])
 	#roundi(amm / maxamm * 100)
 
+func HideTrajectory() -> void:
+	Direction.visible = false
+
 func ClearSpeed() -> void:
 	ShipSpeedText = ""
+
+func SetSpeedUnknown() -> void:
+	ShipSpeedText = "SPEED⊗"
 
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0

@@ -8,11 +8,11 @@ class_name  Clock
 @export var StartingHour : int = 13
 @export var StartingMin : float = 0
 
-var CurrentDay : int = 10
-var CurrentMonth : int = 4
-var CurrentYear : int = 6129
-var currentHour : int = 13
-var currentMin : float = 0
+static var CurrentDay : int = 10
+static var CurrentMonth : int = 4
+static var CurrentYear : int = 6129
+static var currentHour : int = 13
+static var currentMin : float = 0
 
 #var SimulationSpeed : float = 1
 var SimulationPaused : bool = false
@@ -91,16 +91,15 @@ func ToggleSimulation(t : bool) -> void:
 	SimulationPaused = t
 #func SimulationSpeedChanged(i : float) -> void:
 	#SimulationSpeed = i
-func GetTimeInHours() -> float:
-	var t = (CurrentDay * 24) + currentHour + (currentMin / 60)
-	return t
+static func GetTimeInHours() -> float:
+	return (CurrentDay * 24) + currentHour + (currentMin / 60)
 
-func GetHours() -> float:
+static func GetHours() -> float:
 	return currentHour + (currentMin / 60.0)
-func GetHoursSince(time : float) -> float:
+static func GetHoursSince(time : float) -> float:
 	return GetTimeInHours() - time
 
-func GetDaysInMonth(Month : int) -> int:
+static func GetDaysInMonth(Month : int) -> int:
 	if (Month == 1):
 		return 31
 	if (Month == 2):

@@ -14,7 +14,7 @@ class_name Map
 @export var _InScreenUI : Ingame_UIManager
 
 @export var _ScreenUI : ScreenUI
-@export var _Camera : Camera2D
+@export var _Camera : ShipCamera
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var TownSpotScene : PackedScene
@@ -314,8 +314,10 @@ func _MAP_INPUT(event: InputEvent) -> void:
 			var pos = _Camera.get_global_mouse_position()
 			if (Input.is_action_pressed("Cnt")):
 				ControllerEvH.OnTargetPositionAdded(pos)
+				PopUpManager.GetInstance().DoFadeNotif("Updating Course")
 			else:
 				ControllerEvH.OnTargetPositionPicked(pos)
+				PopUpManager.GetInstance().DoFadeNotif("Updating Course")
 
 #/////////////////////////////////////////////////////////////
 #███    ███  █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="6_pyrhj"]
 
 [node name="ShipController" type="Node"]
+process_mode = 1
 script = ExtResource("1_32yxj")
 ShipControllerEventH = ExtResource("3_gvhav")
 UIEventH = ExtResource("4_drmyg")

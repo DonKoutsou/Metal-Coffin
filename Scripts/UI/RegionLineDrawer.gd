@@ -95,7 +95,7 @@ func _DrawingEnded() -> void:
 		add_child(l)
 		l.use_parent_material = true
 		l.joint_mode = Line2D.LINE_JOINT_ROUND
-		l.default_color = Color(0,0,0,0.1)
+		l.default_color = Color(0,0,0,RegionTrans)
 		for p in g:
 			l.add_point(p)
 		BLines.append(l)

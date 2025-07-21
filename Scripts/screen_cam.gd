@@ -33,6 +33,20 @@ func EnableShake(amm : float):
 	shakestr = max(amm, shakestr)
 	GoDownValue = max(amm, GoDownValue)
 
+func EnableStormShake(amm : float) -> void:
+	for g in Cabled:
+		g.ApplyShake(amm)
+	$LightPivot1.ApplyShake(amm)
+	Shake = true
+	#if (!$AnimationPlayer.is_playing()):
+		#$AnimationPlayer.stop()
+		#$AnimationPlayer.play("Alarm")
+	PauseShake(false)
+	
+	shakestr = max(amm, shakestr)
+	GoDownValue = amm
+
+	GoingDown = true
 
 func EnableMissileShake() -> void:
 	for g in Cabled:

@@ -5,7 +5,7 @@ class_name MapMarkerText
 func SetText(T : String) -> void:
 	$Label.text = T
 	
-func CamZoomUpdated(NewZoom : float) -> void:
+func UpdateCameraZoom(NewZoom : float) -> void:
 	scale = Vector2(1.5 / (NewZoom), 1.5/ (NewZoom))
 
 func GetSaveData() -> SD_MapMarkerText:
@@ -17,4 +17,4 @@ func GetSaveData() -> SD_MapMarkerText:
 func LoadData(Data : SD_MapMarkerText):
 	position = Data.pos
 	$Label.text = Data.Text
-	add_to_group("LineMarkers")
+	add_to_group("ZoomAffected")

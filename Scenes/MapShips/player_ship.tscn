@@ -38,6 +38,7 @@ radius = 350.0
 radius = 1000.0
 
 [node name="w" type="Node2D" node_paths=PackedStringArray("AccelerationAudio", "L", "TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["PlayerShips", "Ships", "ZoomAffected"]]
+z_index = 1
 material = SubResource("CanvasItemMaterial_vppi8")
 script = ExtResource("1_ekbhy")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
@@ -55,7 +56,7 @@ Acceleration = NodePath("Aceleration")
 [node name="Aceleration" type="Node2D" parent="."]
 
 [node name="ColorRect" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -2
 material = SubResource("ShaderMaterial_mktum")
 rotation = -1.5708
 scale = Vector2(0.1, 0.1)

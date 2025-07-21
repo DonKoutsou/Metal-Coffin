@@ -55,8 +55,9 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 		
 	Ships.append(Ship)
 	var marker = MarkerScene.instantiate() as ShipMarker
-	
+
 	add_child(marker)
+	_ShipMarkers.append(marker)
 	
 	marker.global_position = Ship.global_position
 	
@@ -83,13 +84,9 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 			marker.SetType("Ship")
 			Ship.connect("ShipWrecked", marker.OnHostileShipDestroyed)
 		
-	else : if (Ship is MapShip):
-		Ship.connect("ShipDockActions", marker.ToggleShowRefuel)
-		Ship.connect("ShipDeparted", marker.OnShipDeparted)
-		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
-		if (Ship is Drone):
-			Ship.connect("DroneReturning", marker.DroneReturning)
-
+	else : if (Ship is PlayerDrivenShip):
+		Ship.ShipDockActions.connect(marker.ToggleShowRefuel)
+		Ship.ShipDeparted.connect(marker.OnShipDeparted)
 		Ship.Elint.connect(marker.ToggleShowElint)
 		Ship.Cpt.OnNameChanged.connect(marker.OnCaptainNameChanged)
 		Ship.LandingStarted.connect(marker.OnLandingStarted)
@@ -99,19 +96,21 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 		Ship.MatchingAltitudeStarted.connect(marker.OnLandingStarted)
 		Ship.MatchingAltitudeEnded.connect(marker.OnLandingEnded)
 		
-		#Ship.connect("LandingCanceled", marker.OnLandingEnded)
-
+		if (Ship is Drone):
+			Ship.DroneReturning.connect(marker.DroneReturning)
+		
+		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
 		marker.call_deferred("ToggleShipDetails", true)
-		#marker.call_deferred("ToggleFriendlyShipDetails", true)
 		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetShipSpeed())
 		marker.SetType("Ship")
+		
 	else : if (Ship is Missile):
 		if (!Friend):
 			marker.PlayHostileShipNotif("Hostile Missile Located")
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 		marker.SetType("Missile")
-	_ShipMarkers.append(marker)
+	
 	
 	return marker
 
@@ -122,16 +121,15 @@ func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	var marker = MapSpotMarkerScene.instantiate() as SpotMarker
 	
 	add_child(marker)
-
+	
+	_SpotMarkers.append(marker)
 	marker.SetMarkerDetails(Spot, PlayAnim)
 	
 	if (Spot.AlarmRaised):
 		marker.OnAlarmRaised(false)
 	else:
-		Spot.connect("SpotAlarmRaised", marker.OnAlarmRaised)
-	
-	_SpotMarkers.append(marker)
-	
+		Spot.SpotAlarmRaised.connect(marker.OnAlarmRaised)
+
 	marker.global_position = Spot.global_position
 	
 func RemoveShip(Ship : Node2D) -> void:
@@ -166,17 +164,27 @@ func FixLabelClipping() -> void:
 					return
 
 var Circles : Array[PackedVector2Array] = []
+
+var d = 0.6
+
 func _physics_process(_delta: float) -> void:
+	d -= _delta
+	
+	#CircleDr.queue_redraw()
 	FixLabelClipping()
+	#if (d > 0):
+		#return
+	#d = 1.0
+	
+	
 	Circles.clear()
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()
-	#var Zoom = ShipCamera.GetInstance().zoom.x
-	
+
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]
 		if (Ship is PlayerDrivenShip):
-			var visibility = WeatherManage.GetInstance().GetVisibilityInPosition(Ship.global_position)
+			var visibility = WeatherManage.GetVisibilityInPosition(Ship.global_position)
 			if (Ship.RadarWorking):
 				Circles.append(PackedVector2Array([Ship.global_position, Vector2(max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 110 * visibility), 0)]))
 			else:

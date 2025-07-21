@@ -1,18 +1,26 @@
-@tool
-extends ColorRect
+extends Control
+
+class_name MapGrid
 
 @export var Col : Color
 @export var ZoomLevel = 1.0
+@export var EventHandler : UIEventHandler
 var Offset : Vector2
 
 #func _physics_process(delta: float) -> void:
 	#queue_redraw()
 
+func _ready() -> void:
+	EventHandler.GridPressed.connect(ToggleGrid)
+
+func ToggleGrid() -> void:
+	visible = !visible
+
 func UpdateOffset(NewOffset : Vector2) -> void:
 	Offset = NewOffset
 	queue_redraw()
 
-func UpdateZoom(NewZoom : float) -> void:
+func UpdateCameraZoom(NewZoom : float) -> void:
 	ZoomLevel = NewZoom
 	queue_redraw()
 
@@ -41,8 +49,8 @@ func _draw() -> void:
 		var DrawHundreadLine = ZoomLevel < 0.15 and Hundread > 0
 		
 		if (DrawHundreadLine):
-			draw_line(Vector2(XPos, 0), Vector2(XPos, size.y), Color(0,0,0,0.2), max(8, 40 - (ZoomLevel * 80)), true)
-			draw_line(Vector2(0, YPos), Vector2(size.x, YPos), Color(0,0,0,0.2), max(8, 40 - (ZoomLevel * 80)), true)
+			draw_line(Vector2(XPos, 0), Vector2(XPos, size.y), Color(0,0,0,0.3), max(8, 40 - (ZoomLevel * 80)), true)
+			draw_line(Vector2(0, YPos), Vector2(size.x, YPos), Color(0,0,0,0.3), max(8, 40 - (ZoomLevel * 80)), true)
 			
 			
 			#var text_pos = Vector2(XPos + 30, YPos - 50)  # Slight offset for visibility relative to the grid square
@@ -86,7 +94,7 @@ func _draw() -> void:
 						continue
 					
 				# Adjust drawing to consider the color and font setup
-					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.1))
+					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
 					stringsdrew += 1
 			
 			if (DrawHundreadLine and Ten == 0):
@@ -141,6 +149,6 @@ func _draw() -> void:
 						continue
 					
 				# Adjust drawing to consider the color and font setup
-					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(1,1,1, 0.1))
+					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(1,1,1, 0.2))
 					stringsdrew += 1
 	print("draw {0} strings".format([stringsdrew]))

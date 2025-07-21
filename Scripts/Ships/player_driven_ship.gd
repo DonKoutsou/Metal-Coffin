@@ -8,12 +8,18 @@ class_name PlayerDrivenShip
 var CommingBack = false
 var RegroupTarget : MapShip
 
+
+
 var TargetLocations : Array[Vector2]
 
 func  _ready() -> void:
 	super()
 	Paused = SimulationManager.IsPaused()
+	WeatherManage.RegisterShip(self)
 	#call_deferred("_postready")
+
+func _exit_tree() -> void:
+	WeatherManage.UnregisterShip(self)
 
 #func _postready() -> void:
 	#InventoryManager.GetInstance().AddCharacter(Cpt)
@@ -87,6 +93,12 @@ func AddTargetLocation(pos : Vector2) -> void:
 	AccelerationChanged(GetShipMaxSpeed())
 	TargetLocations.append(pos)
 
+func Steer(Rotation : float) -> void:
+	super(Rotation)
+	if (TargetLocations.size() > 0):
+		TargetLocations.clear()
+		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
+
 func _physics_process(delta: float) -> void:
 	
 	UpdateElint(delta)
@@ -106,9 +118,7 @@ func _physics_process(delta: float) -> void:
 	
 	if (Paused):
 		return
-	
-	
-	
+
 	_HandleLanding(SimulationSpeed)
 	
 	if (TargetLocations.size() > 0):
@@ -129,8 +139,7 @@ func _physics_process(delta: float) -> void:
 	if (Docked):
 		return
 		
-	L.color = Color(1,1,1) * WeatherManage.GetInstance().GetLightAmm()
-	L.texture_scale = WeatherManage.GetInstance().GetVisibilityInPosition(global_position)
+	
 	
 	if (GetShipSpeedVec() == Vector2.ZERO):
 		return
@@ -142,6 +151,8 @@ func _physics_process(delta: float) -> void:
 	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
 	#var f = Acceleration.position.x / ShipEfficiency * SimulationSpeed
 	var FuelConsumtion = Acceleration.position.x / ShipEfficiency * SimulationSpeed
+	if (StormValue > 0.9):
+		FuelConsumtion *= 1.05
 	#Consume fuel on shif if enough
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
 		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
@@ -161,7 +172,8 @@ func _physics_process(delta: float) -> void:
 		var DroneEfficiency = (Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(DroneWeight, 0.5)) * 10
 		
 		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency * SimulationSpeed
-		
+		if (StormValue > 0.9):
+			DroneFuelConsumtion *= 1.05
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,DroneFuelConsumtion)
 		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= DroneFuelConsumtion):
@@ -183,6 +195,10 @@ func _HandleAccelerationSound() -> void:
 	if (!AccelerationAudio.playing):
 		AccelerationAudio.play()
 	AccelChanged = false
+
+func UpdateLight(LightAmm : float, Viz : float) -> void:
+	L.color = Color(1,1,1) * LightAmm
+	L.texture_scale = Viz
 
 func _HandleRestock() -> void:
 	Refuel()

@@ -43,10 +43,11 @@ func DoFadeNotif(Text : String, Parent : Node = null, overridetime : float = 4):
 		g.queue_free()
 	
 	var UpdatedText = Text
-	for g in Text.length():
-		if (g > 25 and Text.substr(g, 1) == " "):
-			UpdatedText = Text.insert(g, "\n")
-			break
+	if (Text.find("\n") == 0):
+		for g in Text.length():
+			if (g > 25 and Text.substr(g, 1) == " "):
+				UpdatedText = Text.insert(g, "\n")
+				break
 	
 	var dig = FadNot.instantiate() as FadeNotif
 	dig.alph = overridetime

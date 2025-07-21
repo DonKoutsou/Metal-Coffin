@@ -13,6 +13,23 @@ signal SteeringOffseted(Offset : float)
 
 var DistanceTraveled = 0
 
+var Showing = true
+var MoveTw : Tween
+
+func Toggle() -> void:
+	if (Showing):
+		MoveTw = create_tween()
+		MoveTw.set_ease(Tween.EASE_IN)
+		MoveTw.set_trans(Tween.TRANS_BACK)
+		MoveTw.tween_property(self, "position", Vector2(-300, position.y), 0.5)
+		Showing = false
+	else:
+		MoveTw = create_tween()
+		MoveTw.set_ease(Tween.EASE_OUT)
+		MoveTw.set_trans(Tween.TRANS_BACK)
+		MoveTw.tween_property(self, "position", Vector2(0, position.y), 0.5)
+		Showing = true
+
 func _ready() -> void:
 	set_physics_process(false)
 	if (PositionOnStart):

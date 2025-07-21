@@ -40,14 +40,14 @@ func PlaySound(Sound : RadioSound) -> void:
 		L.Toggle(false)
 
 func ApplyShake(amm : float = 1) -> void:
-	max_rotation = max(max_rotation, 0.04 * amm)
+	max_rotation = min(0.1, max_rotation + (0.004 * amm))
 
 func _physics_process(delta: float) -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 
 	var rotation_angle = max_rotation * sin(frequency * 1.2 * time + phase_offset)  # Slightly different frequency
 
-	max_rotation = max(max_rotation - delta / 60, 0.003)
+	max_rotation = max(max_rotation - delta / 10, 0.003)
 
 	rotation = rotation_angle
 	
@@ -68,3 +68,8 @@ enum RadioSound{
 	TARGET_DEST,
 	APROACHING
 }
+
+
+func _on_texture_rect_gui_input(event: InputEvent) -> void:
+	if (event.is_action_pressed("Click")):
+		ApplyShake(10)

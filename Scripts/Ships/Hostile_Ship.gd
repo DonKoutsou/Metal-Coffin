@@ -43,6 +43,8 @@ var Spawned : bool = false
 #if lodded it means it should not process
 var Lodded : bool = true
 
+var ExposedValue : float = 0.0
+
 signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip])
 signal OnDestinationReached(Ship : HostileShip)
 signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
@@ -51,6 +53,19 @@ signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
 signal ShipWrecked
+
+func ToggleLod(t : bool) -> void:
+	if (Lodded == t):
+		return
+	
+	Lodded = t
+	if (!t):
+		WeatherManage.RegisterShip(self)
+	else:
+		WeatherManage.UnregisterShip(self)
+
+func _exit_tree() -> void:
+	WeatherManage.UnregisterShip(self)
 
 func  _ready() -> void:
 	ElintShape.connect("area_entered", BodyEnteredElint)
@@ -68,6 +83,7 @@ func  _ready() -> void:
 	#MapPointerManager.GetInstance().AddShip(self, false)
 
 
+
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
 	ShipSpawned.emit()
@@ -82,6 +98,7 @@ func InitialiseShip() -> void:
 		return
 	
 	Commander.GetInstance().RegisterSelf(self)
+	
 	
 	_UpdateShipIcon(Cpt.ShipIcon)
 	var ElintRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
@@ -103,17 +120,22 @@ func InitialiseShip() -> void:
 	UpdateVizRange(VisRange)
 	#TogglePause(SimulationManager.IsPaused())
 
-func _physics_process(delta: float) -> void:
-	for g in TrailLines:
-		g.UpdateProjected(delta, 1)
 
 func _Update(delta: float) -> void:
 		
 	UpdateElint(delta)
 	
 	
+	var SimulationSpeed = SimulationManager.SimSpeed()
+	
+	for g in TrailLines:
+		g.UpdateProjected(delta, 1)
+	
+	if (VisibleBy.size() > 0):
+		ExposedValue += delta * SimulationSpeed
+	
 	if (UseDefaultBehavior):
-		var SimulationSpeed = SimulationManager.SimSpeed()
+		
 		if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):
 			VisualContactCountdown -= 0.1 * SimulationSpeed
 			if (VisualContactCountdown < 0):
@@ -471,6 +493,9 @@ func OnShipUnseen(UnSeenBy : Node2D):
 	VisibleBy.erase(UnSeenBy)
 	for g in GetDroneDock().DockedDrones:
 		g.VisibleBy.erase(UnSeenBy)
+		
+	if (VisibleBy.size() == 0):
+		ExposedValue = 0
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
 	
 func BodyEnteredElint(area: Area2D) -> void:

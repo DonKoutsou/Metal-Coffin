@@ -12,7 +12,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(1, 0.763983, 0.0812772, 1)
+border_color = Color(100, 0.764, 0.081, 1)
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_detail = 1
@@ -50,6 +50,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_a2q7o")
 [node name="Label" type="Label" parent="PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(100, 0.764, 0.081, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "4x"
