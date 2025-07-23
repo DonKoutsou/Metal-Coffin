@@ -18,11 +18,11 @@ class_name HostileShip
 @export var Convoy : bool = false
 @export var BT : PackedScene
 @export var AlarmVisual : PackedScene
+
 #This array will be filled by commander when this ship is sent after another ship
 var PursuingShips : Array[PlayerDrivenShip]
 #This value will be filled by commander when this ship is sent to investigate a position
 var PositionToInvestigate : Vector2
-
 #Spot that was chosen to stop and refuel
 var RefuelSpot : MapSpot
 #Spot that was chosen to hide until alarm goese of
@@ -42,7 +42,7 @@ var Spawned : bool = false
 
 #if lodded it means it should not process
 var Lodded : bool = true
-
+#Until this value reaches a certain threashold ships speed or trajectory are not known
 var ExposedValue : float = 0.0
 
 signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip])
@@ -64,9 +64,6 @@ func ToggleLod(t : bool) -> void:
 	else:
 		WeatherManage.UnregisterShip(self)
 
-func _exit_tree() -> void:
-	WeatherManage.UnregisterShip(self)
-
 func  _ready() -> void:
 	ElintShape.connect("area_entered", BodyEnteredElint)
 	ElintShape.connect("area_exited", BodyLeftElint)
@@ -82,7 +79,8 @@ func  _ready() -> void:
 	#ENABLE FOR DEBUG PURPOSES
 	#MapPointerManager.GetInstance().AddShip(self, false)
 
-
+func _exit_tree() -> void:
+	WeatherManage.UnregisterShip(self)
 
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
@@ -120,7 +118,7 @@ func InitialiseShip() -> void:
 	UpdateVizRange(VisRange)
 	#TogglePause(SimulationManager.IsPaused())
 
-
+#Update function called by Commander class. Updating only ships that are not lodded
 func _Update(delta: float) -> void:
 		
 	UpdateElint(delta)
@@ -525,7 +523,8 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 			OnPlayerVisualContact.emit(Body.get_parent(), self)
 
 var GarrissonVisualContacts : Array[MapShip]
-var VisualContactCountdown = 10
+var VisualContactCountdown = 20
+signal VisualContactCountdownStarted(Value : float)
 
 func GarissonVisualContact(Ship : MapShip) -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.GARISSION_ALARM)):
@@ -536,7 +535,9 @@ func GarissonVisualContact(Ship : MapShip) -> void:
 		#if (Patrol):
 			#VisualContactCountdown = 5
 		#else:
-		VisualContactCountdown = 10
+		var HeatSignature = Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)
+		VisualContactCountdown = 20 - (20 * (HeatSignature / 100))
+		VisualContactCountdownStarted.emit(VisualContactCountdown)
 			
 	if (VisualContactCountdown < 0):
 		OnPlayerVisualContact.emit(Ship, self)
@@ -549,7 +550,7 @@ func GarissonLostVisualContact(Ship : MapShip) -> void:
 
 	GarrissonVisualContacts.erase(Ship)
 	if (GarrissonVisualContacts.size() == 0):
-		VisualContactCountdown = 10
+		VisualContactCountdown = 20
 
 func BodyLeftRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerDrivenShip):

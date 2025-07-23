@@ -4,11 +4,10 @@ class_name WeatherManage
 
 @export var N : FastNoiseLite
 @export var EventHandler : UIEventHandler
-@export var Debug : bool = false
 
 static var WorldBounds : Vector2
 static var Instance : WeatherManage
-
+static var WindDirection : Vector2
 static var tx : Image
 static var LighAmm : Curve = preload("res://Resources/LightCurve.tres")
 static var inverse_transform
@@ -25,12 +24,19 @@ static func GetInstance() -> WeatherManage:
 	return Instance
 
 func _ready() -> void:
+	#Init wind direction, setting it to random dir
+	WindDirection = Vector2.RIGHT.rotated(randf_range(-2 * PI, 2 * PI))
+	
 	EventHandler.ForecastToggled.connect(ToggleWeatherMan)
 	Instance = self
+	
+	N.offset = Vector3(randf_range(-10000, 10000), randf_range(-10000, 10000), 0)
 	tx = texture.get_image()
 	var global_transform = get_global_transform()
 	inverse_transform = global_transform.affine_inverse()
 	rect_size = get_rect().size
+	
+	SetWorldBounds(WorldBounds)
 
 func ToggleWeatherMan() -> void:
 	visible = !visible
@@ -46,36 +52,27 @@ func SetWorldBounds(WB : Vector2) -> void:
 
 var d = 0.2
 func _physics_process(delta: float) -> void:
+	if (SimulationManager.IsPaused()):
+		return
 	d -= delta
 	if (d <= 0):
-		var t = Clock.GetInstance().TimePassedInMinutes()
-		N.offset.y = -t / 20
 		d = 0.2
+		
+		var simspeed = SimulationManager.SimSpeed()
+		#Update wind direction
+		WindDirection = WindDirection.rotated(randf_range(-0.001, 0.001) * simspeed)
+		#Add the new offset of the weather to the noise and produce the new texture
+		N.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 30)
 		tx = texture.get_image()
 		
-	var L = GetLightAmm()
-		
-	for g in ShipsToUpdate:
-		var viz = GetVisibilityInPosition(g.global_position)
-		g.StormValue = 1 - (viz - 0.5)
-		if (g is PlayerDrivenShip):
-			g.UpdateLight(L, viz)
-		g.RephreshVisRange(viz)
-		#queue_redraw()
-
-#func _draw() -> void:
-	#if (!Debug):
-		#return
-	#
-	#for g : float in range(-10, 11):
-		#var locx = (WorldBounds.x / 2) * (g / 10.0) - position.x
-		#for z in range(-10, 10):
-			#var loc = Vector2(locx, WorldBounds.y * (z / 10.0))
-			#
-			#var Col = Color(1,1,1)
-			#Col *= get_color_at_global_position(loc)
-			#Col.a = 1
-			#draw_circle(loc, 50, Col)
+		var L = GetLightAmm()
+			
+		for g in ShipsToUpdate:
+			var viz = GetVisibilityInPosition(g.global_position)
+			g.StormValue = 1 - (viz - 0.5)
+			if (g is PlayerDrivenShip):
+				g.UpdateLight(L, viz)
+			g.RephreshVisRange(viz)
 
 static func GetVisibilityInPosition(pos : Vector2) -> float:
 	var Maxv = GetLightAmm()
@@ -122,3 +119,20 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 	#tx.unlock()  # Unlock after accessing
 
 	return color
+
+
+func GetSaveData() -> SaveData:
+	var Sav = SaveData.new()
+	Sav.DataName = "Weather"
+	
+	var Data = SD_WeatherMan.new()
+	Data.WindDirection = WindDirection
+	Data.Offset = N.offset
+	
+	Sav.Datas.append(Data)
+	return Sav
+
+func LoadSaveData(Data : SD_WeatherMan) -> void:
+	WindDirection = Data.WindDirection
+	N.offset = Data.Offset
+	tx = texture.get_image()

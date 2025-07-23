@@ -28,7 +28,7 @@ func _ready() -> void:
 	CloudMat = Cloud.material
 	GroundMat = Ground.material
 	
-	CloudMat.set_shader_parameter("offset", global_position / 1500)
+	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
 	
 static func GetInstance() -> ShipCamera:
@@ -178,17 +178,20 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	if (newpos.y != position.y):
 		position.y = newpos.y
 
-	CloudMat.set_shader_parameter("offset", global_position / 1500)
+	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
 	Grid.UpdateOffset(global_position)
 	PositionChanged.emit(position)
 
-var CloudTime = 0.0
+#var CloudTime = 0.0
+var CloudOffset = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	if (!SimulationManager.IsPaused()):
-		CloudTime += delta * SimulationManager.SimSpeed()
-		CloudMat.set_shader_parameter("custom_time", CloudTime)
+		#CloudTime += delta * SimulationManager.SimSpeed()
+		#CloudMat.set_shader_parameter("custom_time", CloudTime)
+		CloudOffset += WeatherMan.WindDirection * (SimulationManager.SimSpeed() / 10000)
+		CloudMat.set_shader_parameter("Offset", CloudOffset)
 	
 	if (FocusedShip != null):
 		ForceCamPosition(FocusedShip.global_position)
@@ -243,7 +246,7 @@ func FrameCamToShip(Ship : PlayerDrivenShip, _OverrideTime : float = 1, Unzoom :
 
 func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = Pos
-	CloudMat.set_shader_parameter("offset", global_position / 1500)
+	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
 	PositionChanged.emit(position)
 	Grid.UpdateOffset(global_position)

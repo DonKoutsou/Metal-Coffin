@@ -43,6 +43,15 @@ func _ready() -> void:
 	#set_physics_process(false)
 	UpdateCameraZoom(Map.GetCameraZoom())
 
+func Init(Ship : Node2D) -> void:
+	if (Ship is HostileShip):
+		Ship.VisualContactCountdownStarted.connect(VisualCountountStarted)
+		ToggleVisualContactProgress(true)
+	
+func VisualCountountStarted(Value : float) -> void:
+	VisualContactCountdown.max_value = Value
+	VisualContactCountdown.size.x = Value * 4
+
 func _draw() -> void:
 	if (TargetLocations.size() == 0):
 		return
@@ -91,8 +100,8 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 	if (ship is HostileShip):
 		
 		ToggleShipDetails(!ship.Docked)
-		ToggleVisualContactProgress(ship.VisualContactCountdown < 10)
-		if (ship.VisualContactCountdown < 10):
+		ToggleVisualContactProgress(ship.VisualContactCountdown < 20)
+		if (ship.VisualContactCountdown < 20):
 			UpdateVisualContactProgress(ship.VisualContactCountdown)
 		#if (EnemyDebug):
 			#global_position = ship.GetShipParalaxPosition(CamPos, Zoom)

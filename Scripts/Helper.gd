@@ -23,21 +23,21 @@ func LoadThreaded(File : String) -> SignalObject:
 	ResourceLoader.load_threaded_request(File)
 	
 	#t.start(LoadSceneTh.bind(Sign, File))
-	call_deferred("CheckForFinishedLoad", Sign, File)
+	call_deferred("_CheckForFinishedLoad", Sign, File)
 	
 	$CanvasLayer.visible = true
 	set_physics_process(true)
 	
 	return Sign
 
-func CheckForFinishedLoad(Sign : SignalObject, File : String) -> void:
+func _CheckForFinishedLoad(Sign : SignalObject, File : String) -> void:
 	var Status = ResourceLoader.load_threaded_get_status(File)
 	if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
-		LoadFinished(Sign, ResourceLoader.load_threaded_get(File))
+		_LoadFinished(Sign, ResourceLoader.load_threaded_get(File))
 	else:
-		CallLater(CheckForFinishedLoad.bind(Sign, File), 0.1)
+		CallLater(_CheckForFinishedLoad.bind(Sign, File), 0.1)
 
-func LoadFinished(Sign : SignalObject, File : PackedScene) -> void:
+func _LoadFinished(Sign : SignalObject, File : PackedScene) -> void:
 	Sign.Sign.emit(File)
 	$CanvasLayer.visible = false
 	set_physics_process(false)
@@ -55,7 +55,7 @@ func wait(secs : float) -> Signal:
 static func mapvalue(val : float, min : float, max : float) -> float:
 	return min + (max - min) * val
 
-func AngleToDirection(angle: float) -> String:
+static func AngleToDirection(angle: float) -> String:
 	var directions = ["East", "Southeast",  "South", "Southwest", "West", "Northwest", "North","Northeast"]
 	var index = int(fmod((angle + PI/8 + TAU), TAU) / (PI / 4)) % 8
 	return directions[index]

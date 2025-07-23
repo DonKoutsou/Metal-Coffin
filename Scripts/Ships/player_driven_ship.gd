@@ -150,9 +150,15 @@ func _physics_process(delta: float) -> void:
 	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
 	#var f = Acceleration.position.x / ShipEfficiency * SimulationSpeed
-	var FuelConsumtion = Acceleration.position.x / ShipEfficiency * SimulationSpeed
+	var FuelConsumtion = Acceleration.position.x / ShipEfficiency
+	
+	#Apply a small penalty durring storms
 	if (StormValue > 0.9):
-		FuelConsumtion *= 1.05
+		FuelConsumtion *= 1.3
+	#Apply wind buff debuff
+	FuelConsumtion *= 1 - (Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.3)
+	
+	FuelConsumtion *= SimulationSpeed
 	#Consume fuel on shif if enough
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
 		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)

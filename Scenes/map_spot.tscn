@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://djtjqkmdep3dh"]
+[gd_scene load_steps=4 format=3 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" uid="uid://3v0ad04orqrb" path="res://Scripts/MapSpot/MapSpot.gd" id="1_x7uyn"]
-[ext_resource type="PackedScene" uid="uid://bahj28qps5ssw" path="res://Scenes/TownShop/TownScene.tscn" id="2_yj7um"]
 [ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="3_i2dyh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ymfd"]
@@ -10,7 +9,6 @@ radius = 40.0
 
 [node name="MapSpot" type="Node2D" groups=["City", "Clock", "Pausable"]]
 script = ExtResource("1_x7uyn")
-FuelTradeScene = ExtResource("2_yj7um")
 AlarmVisual = ExtResource("3_i2dyh")
 
 [node name="AreaNotif" type="Area2D" parent="."]

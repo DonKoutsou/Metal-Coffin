@@ -1,7 +1,7 @@
 extends Node2D
 class_name MapSpot
 
-@export var FuelTradeScene : PackedScene
+
 #@export var CityFuelReserves : float = 1000
 @export var AlarmVisual : PackedScene
 

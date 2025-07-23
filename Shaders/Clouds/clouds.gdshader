@@ -8,10 +8,8 @@ uniform sampler2D noise_texturenormal : repeat_enable, filter_linear;
 
 // === CLOUD SETTINGS ===
 uniform float density : hint_range(0.0, 3.0) = 0.25;
-uniform vec2 speed = vec2(0.02, 0.01);
-uniform vec2 offset;
-uniform float custom_time;
-uniform bool UseCustomTime;
+uniform vec2 Camera_Offset;
+uniform vec2 Offset;
 uniform float NormalStr = 0.5;
 uniform float Light = 1.0;
 // === SHADOW SETTINGS ===
@@ -30,8 +28,7 @@ vec2 rotate(vec2 uv, float angle) {
 }
 
 void fragment() {
-    float T = UseCustomTime ? custom_time : TIME / 2.0;
-    vec2 motion = speed * T + offset;
+    vec2 motion = -Offset + Camera_Offset;
     vec2 center = vec2(0.5);
 
     vec2 screen_uv = SCREEN_UV;

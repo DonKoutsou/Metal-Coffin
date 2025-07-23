@@ -10,7 +10,7 @@
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="10_28wu2"]
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/HostileShip.tscn" id="11_323je"]
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="11_a2ujk"]
-[ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/weather_manager.gd" id="12_1lxys"]
+[ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/WeatherMan/weather_manager.gd" id="12_1lxys"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="14_a2ujk"]
 [ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="15_x3wib"]
@@ -31,8 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
 [ext_resource type="Script" uid="uid://uwtcmr8brr2" path="res://Scripts/UI/RegionLineDrawer.gd" id="27_445lv"]
-[ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://weathernoise.tres" id="30_xwtib"]
-[ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://testnoise.tres" id="31_xwtib"]
+[ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Scenes/WeatherMan/weathernoise.tres" id="30_xwtib"]
+[ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Scenes/WeatherMan/testnoise.tres" id="31_xwtib"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kgrij"]
 light_mode = 1
@@ -168,7 +168,6 @@ stretch_mode = 5
 script = ExtResource("12_1lxys")
 N = ExtResource("31_xwtib")
 EventHandler = ExtResource("25_8mjbw")
-Debug = true
 
 [node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("Background", "Grid", "Cloud", "Ground", "WeatherMan", "ClickSound") groups=["Clock"]]
 position = Vector2(576, 324)

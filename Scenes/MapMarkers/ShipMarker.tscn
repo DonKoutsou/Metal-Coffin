@@ -36,8 +36,7 @@ Icons = {
 }
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-4, -5)
-scale = Vector2(3, 2.9)
+scale = Vector2(17.1, 16.53)
 
 [node name="Line2D" type="Line2D" parent="."]
 use_parent_material = true
@@ -153,14 +152,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -26.0
-offset_top = 18.0
+offset_top = 21.0
 offset_right = 26.0
-offset_bottom = 31.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_12u8d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6175k")
-max_value = 10.0
+max_value = 20.0
 value = 10.0
 show_percentage = false
 

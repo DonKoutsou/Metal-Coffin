@@ -38,6 +38,12 @@ func _ready() -> void:
 	VersionLabel.text = "Demo Version v{0}".format([ProjectSettings.get_setting("application/config/version")])
 	#LoopAmp()
 
+var CloudOffset = Vector2.ZERO
+func _physics_process(delta: float) -> void:
+	var cloudmat = $SubViewportContainer/SubViewport/Clouds.material as ShaderMaterial
+	CloudOffset += Vector2(-0.0001, 0.0001)
+	cloudmat.set_shader_parameter("Offset", CloudOffset)
+
 func DoLights() -> void:
 	LoadPrologueLight.ToggleNoAnim(true, SaveLoadManager.SaveExists("user://PrologueSavedGame.tres"))
 	

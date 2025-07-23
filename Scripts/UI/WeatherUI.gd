@@ -19,9 +19,15 @@ var d = 0.2
 func _physics_process(delta: float) -> void:
 	if (CurrentShip == null):
 		return
-		
+	
+	var wd = Helper.GetInstance().AngleToDirection(WeatherManage.WindDirection.angle())
+	VizText.text = "Wind Direction : {0}\n".format([wd])
+	
 	var vis = WeatherManage.GetVisibilityInPosition(CurrentShip.global_position)
-	VizText.text = "Visibility : {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])
+	VizText.text += "Visibility : {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])
+	
+	
+	
 	
 	if (vis > 0.6):
 		DangerLabel.visible = false

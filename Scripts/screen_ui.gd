@@ -42,9 +42,20 @@ func CloseScreen() -> void:
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
 	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
 	await CloseTw.finished
-	
-	
 	FullScreenToggleStarted.emit(ScreenState.HALF_SCREEN)
+
+func OpenScreen(NewStat : ScreenState) -> void:
+	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
+	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
+
+	var OpenTw = create_tween()
+	OpenTw.set_ease(Tween.EASE_IN)
+	OpenTw.set_trans(Tween.TRANS_QUART)
+	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
+	await OpenTw.finished
+	ScreenPanel.visible = false
+	FullScreenToggleFinished.emit()
+	Cam.EnableFullScreenShake()
 
 func DoIntroFullScreen(NewStat : ScreenState) -> void:
 	ScreenPanel.visible = true
@@ -108,6 +119,7 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	ScreenPanel.visible = false
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
+
 
 func _ready() -> void:
 	NormalScreen.visible = false

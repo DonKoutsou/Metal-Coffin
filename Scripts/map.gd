@@ -284,7 +284,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 			WorldSize = dat.TownLoc.y
 			
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
-	WeatherManage.GetInstance().SetWorldBounds(Vector2(SpawningBounds.x, WorldSize))
+	WeatherManage.WorldBounds = Vector2(SpawningBounds.x, WorldSize)
 	#WeatherManage.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
 	#call_deferred("GenerateRoads")
 	#_Camera.call_deferred("FrameCamToPlayer")
@@ -798,9 +798,9 @@ func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : 
 			var offsetperpoint = dist/pointamm
 			for g in pointamm:
 				var offs = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
-				Mut.lock()
+				#Mut.lock()
 				Line.append(point1 + offs)
-				Mut.unlock()
+				#Mut.unlock()
 			Line.append(point2)
 			
 		call_deferred("RoadFinished")

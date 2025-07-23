@@ -150,11 +150,12 @@ func _ready() -> void:
 	var Mat = $SubViewport/Control2/Ground.material as ShaderMaterial
 	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
 
-var cloudtime : float = 0
+
+var CloudOffset = Vector2.ZERO
+
 func _physics_process(delta: float) -> void:
-	
-	cloudtime += delta
-	Cloud.material.set_shader_parameter("custom_time", cloudtime)
+	CloudOffset += Vector2(-0.0001, 0.0001)
+	Cloud.material.set_shader_parameter("Offset", CloudOffset)
 
 
 func StartFight() -> void:

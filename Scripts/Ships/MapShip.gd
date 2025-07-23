@@ -141,7 +141,6 @@ func ToggleFuelRangeVisibility(t : bool) -> void:
 	ShowFuelRange = t
 
 
-
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	Cpt.CurrentPort = Port.GetSpotName()

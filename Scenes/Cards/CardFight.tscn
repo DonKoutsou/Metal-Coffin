@@ -371,6 +371,6 @@ blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("32_1im06")
 texture_scale = 30.0
-height = 120.0
+height = 237.0
 
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]

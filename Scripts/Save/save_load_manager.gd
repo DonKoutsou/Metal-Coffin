@@ -43,7 +43,7 @@ func Save() -> void:
 	DataArray.append(world.GetSaveData())
 	DataArray.append(Mapz.GetSaveData())
 	DataArray.append(Mapz.GetMapMarkerEditorSaveData())
-	
+	DataArray.append(WeatherManage.GetInstance().GetSaveData())
 	DataArray.append(Mapz.GetMissileSaveData())
 	
 	DataArray.append(Inv.GetSaveData())
@@ -109,43 +109,30 @@ func Load(world : World) ->Dictionary:
 	
 	
 	var Mapz = world.GetMap() as Map
-	#var Inv = Mapz.GetInScreenUI().GetInventory() as InventoryManager
 	var DiagHolder = world.GetDialogueProgress()
 	var mapdata : Array[Resource] = (sav.GetData("Towns") as SaveData).Datas
-	var WalletData : Wallet = (sav.GetData("Wallet") as SaveData).Datas[0]
-	var InvData = sav.GetData("InventoryContents") as SaveData
-	#var StatData : Resource = sav.GetData("Stats")
-	#var ShipDat : BaseShip = (sav.GetData("Ship") as SaveData).Datas[0]
 	DiagHolder.ToldDialogues =  sav.GetData("SpokenDiags") as SpokenDialogueEntry
-	#world.StartingShip = ShipDat
 	Mapz.LoadSaveData(mapdata)
-	
-	var Markers = sav.GetData("Markers") as SaveData
-	var ClockData = sav.GetData("Clock") as SaveData
-	
-	var enems : Array[Resource] = (sav.GetData("Enemies") as SaveData).Datas
-	var misses : Array[Resource] = (sav.GetData("Missiles") as SaveData).Datas
-	var MarkerEditorData : SD_MapMarkerEditor = (sav.GetData("MarkerEditor") as SaveData).Datas[0]
-	var InvestigationPositions = sav.GetData("PositionsToInvestigate") as SaveData
+
 	world.Loading = true
-	#call_deferred("LoadStats", world, StatData)
-	call_deferred("LoadMapDat", WalletData, sav.GetData("PLData"), enems, misses, MarkerEditorData, InvestigationPositions, InvData, Markers, ClockData)
+
+	call_deferred("LoadMapDat", sav)
 	Resaults["Succsess"] = true
 	return Resaults
 
-func LoadMapDat(PlayerWallet : Wallet, PlayerData : PlayerSaveData, Enems : Array[Resource], Missiles : Array[Resource], Data : SD_MapMarkerEditor, InvestigationData : SaveData, InvData : SaveData, HostileMapMarkerData : SaveData, ClockData : SaveData) -> void:
+func LoadMapDat(Data : SaveData) -> void:
 	var W = World.GetInstance()
 	await W.WRLD_WorldReady
 	var Mp = W.GetMap()
 	#var Ships = get_tree().get_nodes_in_group("Ships")
 	var Controller = W.Controller
-	Controller.LoadSaveData(PlayerData)
-	W.LoadSaveData(PlayerWallet)
-	Mp.RespawnEnemies( Enems )
-	Mp.RespawnMissiles( Missiles )
+	Controller.LoadSaveData(Data.GetData("PLData"))
+	W.LoadSaveData((Data.GetData("Wallet") as SaveData).Datas[0])
+	Mp.RespawnEnemies((Data.GetData("Enemies") as SaveData).Datas)
+	Mp.RespawnMissiles((Data.GetData("Missiles") as SaveData).Datas)
 	await Mp.GenerationFinished
-	Mp.LoadMapMarkerEditorSaveData(Data)
-	W.GetCommander().LoadSaveData(InvestigationData)
-	Mp.GetInScreenUI().GetInventory().LoadSaveData(InvData)
-	Clock.GetInstance().LoadData(ClockData)
-	MapPointerManager.GetInstance().LoadSaveData(HostileMapMarkerData)
+	Mp.LoadMapMarkerEditorSaveData((Data.GetData("MarkerEditor") as SaveData).Datas[0])
+	W.GetCommander().LoadSaveData(Data.GetData("PositionsToInvestigate") as SaveData)
+	Mp.GetInScreenUI().GetInventory().LoadSaveData(Data.GetData("InventoryContents") as SaveData)
+	Clock.GetInstance().LoadData(Data.GetData("Clock") as SaveData)
+	WeatherManage.GetInstance().LoadSaveData((Data.GetData("Weather") as SaveData).Datas[0])

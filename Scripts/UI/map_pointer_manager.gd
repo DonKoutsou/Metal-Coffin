@@ -111,6 +111,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 		marker.SetType("Missile")
 	
+	marker.Init(Ship)
 	
 	return marker
 

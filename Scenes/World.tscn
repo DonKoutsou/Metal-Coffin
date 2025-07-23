@@ -23,7 +23,7 @@
 [ext_resource type="Resource" uid="uid://gvu43lp4i4y6" path="res://Resources/Happenings/CrewRecruitHappeningBaron.tres" id="30_bbwj2"]
 [ext_resource type="Resource" uid="uid://r5k7lwi7y3wa" path="res://Resources/Happenings/CrewRecruitHappeningAmol.tres" id="31_ivfu3"]
 
-[node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command")]
+[node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -35,11 +35,7 @@ mouse_filter = 2
 script = ExtResource("1_sc0wx")
 _Map = NodePath("Map")
 _Command = NodePath("Commander")
-CardFightScene = "res://Scenes/Cards/CardFight.tscn"
-LoadingScene = "res://Scenes/InScreenUI/loading_screen.tscn"
-FleetSeparationScene = "res://Scenes/InScreenUI/FleetSparationScene.tscn"
-HappeningUI = "res://Scenes/InScreenUI/HappeningUI.tscn"
-WorldViewQuestionairScene = "res://Scenes/WorldViewQuestionair.tscn"
+Controller = NodePath("ShipController")
 StartingFunds = 400000
 PlayerWallet = ExtResource("3_inc6i")
 IntroDialogues = Array[String](["Operator.....", "Are you awake ?...", "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\", \"Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."])

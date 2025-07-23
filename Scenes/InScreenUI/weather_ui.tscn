@@ -34,8 +34,9 @@ size_flags_vertical = 1
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("1_fim28")
 theme_override_font_sizes/font_size = 16
-text = "Visibility : Clear"
-horizontal_alignment = 1
+text = "Wind Direction : North
+Visibility : Clear"
+horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
 

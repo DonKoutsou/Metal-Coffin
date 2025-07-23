@@ -64,7 +64,6 @@ texture = ExtResource("6_tlfh0")
 show_behind_parent = true
 position = Vector2(-3.233e-05, -2.77778)
 rotation = 1.57078
-points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_hjoyl")

@@ -6,11 +6,12 @@ class_name World
 @export var _Command : Commander
 @export var Controller : ShipContoller
 @export_group("Scenes")
-@export var CardFightScene : String
-@export var LoadingScene : String
-@export var FleetSeparationScene : String
-@export var HappeningUI : String
-@export var WorldViewQuestionairScene : String
+@export var CardFightScene : String = "res://Scenes/Cards/CardFight.tscn"
+@export var LoadingScene : String = "res://Scenes/InScreenUI/loading_screen.tscn"
+@export var FleetSeparationScene : String = "res://Scenes/InScreenUI/FleetSparationScene.tscn"
+@export var HappeningUI : String = "res://Scenes/InScreenUI/HappeningUI.tscn"
+@export var WorldViewQuestionairScene : String = "res://Scenes/WorldViewQuestionair.tscn"
+@export var FuelTradeScene : String = "res://Scenes/TownShop/TownScene.tscn"
 #@export var IntroText : String
 @export_group("Prologue")
 @export var PrologueTrigger : PackedScene
@@ -98,7 +99,7 @@ func _ready() -> void:
 	
 	
 	
-	$ShipController.SetInitialShip()
+	Controller.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
 	await wait(1)
 	WRLD_WorldReady.emit()
@@ -282,20 +283,26 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 			continue
 		FighingEnemyUnits.append(g)
 		EBattleStats.append(g.GetBattleStats())
-	var CardF = load(CardFightScene).instantiate() as Card_Fight
+	
+	SimulationManager.GetInstance().TogglePause(true)
+	
+	#CardF.SetBattleData(FBattleStats, EBattleStats)
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	
+	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
+	var CardF = FightScene.instantiate() as Card_Fight
 	CardF.connect("CardFightEnded", CardFightEnded)
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
-	SimulationManager.GetInstance().TogglePause(true)
-	#CardF.SetBattleData(FBattleStats, EBattleStats)
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	await GetMap().GetScreenUi().FullScreenToggleStarted
 	
 	GetMap().GetScreenUi().ToggleScreenUI(false)
 	GetMap().GetScreenUi().ToggleCardFightUI(true)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
+	
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	
 func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 	var AllUnits : Array[MapShip]
@@ -391,7 +398,9 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var PlayedEvent = await Land(spot, Ship)
 	if (PlayedEvent):
 		return
-	var sc = spot.FuelTradeScene as PackedScene
+	
+	var TownSc = await Helper.GetInstance().LoadThreaded(FuelTradeScene).Sign
+	var sc = TownSc as PackedScene
 	var fuel = sc.instantiate() as TownScene
 	#fuel.TownMerch = spot.SpotInfo.Merchendise
 	#fuel.HasFuel = spot.HasFuel()
