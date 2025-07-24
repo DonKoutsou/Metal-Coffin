@@ -161,7 +161,7 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 			UpdateTrajectory(ship.global_rotation)
 				
 			ToggleShipDetails(IsControlled)
-			UpdateSpeed(ship.GetShipSpeed())
+			UpdateSpeed(ship.GetAffectedShipSpeed())
 			
 			if (ship.Landing or ship.TakingOff or ship.MatchingAltitude):
 				#TODO find proper fix
@@ -184,6 +184,7 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 				visible = true
 				ClearTime()
 				UpdateTrajectory(ship.global_rotation)
+				UpdateSpeed(ship.GetAffectedSpeed())
 			else :
 				visible = false
 	UpdateTexts()

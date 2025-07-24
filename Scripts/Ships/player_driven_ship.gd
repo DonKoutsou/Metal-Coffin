@@ -62,10 +62,11 @@ func updatedronecourse():
 		CommingBack = false
 		return
 	
+	#NEEDS WIND
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (GetShipSpeed() / 360)
+	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedShipSpeed() / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -79,6 +80,16 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 		return FuelNow # not enough fuel: use what's left 
 	var FuelAfter = pow(arg, 1.0/0.55) / eff_eff
 	return FuelNow - FuelAfter
+
+func GetAffectedShipSpeed() -> float:
+	if (Command != null):
+		return Command.GetAffectedShipSpeed()
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
+	return (Acceleration.position.x * 360) * (1 + WindVel)
+
+func GetShipSpeedVec() -> Vector2:
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
+	return (Acceleration.global_position - global_position) * (1 + WindVel)
 
 func SetTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
@@ -138,9 +149,7 @@ func _physics_process(delta: float) -> void:
 
 	if (Docked):
 		return
-		
-	
-	
+
 	if (GetShipSpeedVec() == Vector2.ZERO):
 		return
 	
@@ -156,7 +165,8 @@ func _physics_process(delta: float) -> void:
 	if (StormValue > 0.9):
 		FuelConsumtion *= 1.3
 	#Apply wind buff debuff
-	FuelConsumtion *= 1 - (Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.3)
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection)
+	FuelConsumtion *= 1 - WindVel * 0.3
 	
 	FuelConsumtion *= SimulationSpeed
 	#Consume fuel on shif if enough
@@ -189,8 +199,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
-	
-	
 	
 	var offset = GetShipSpeedVec()
 	global_position += offset * SimulationSpeed

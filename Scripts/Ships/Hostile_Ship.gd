@@ -361,7 +361,7 @@ func RemovePort():
 func IntersectPusruing() -> Vector2:
 	var pursuing_ship_position = PursuingShips[0].global_position
 	var pursuing_ship_velocity = PursuingShips[0].GetShipSpeedVec()
-	var pursuing_ship_speed = PursuingShips[0].GetShipSpeed() / 360
+	var pursuing_ship_speed = PursuingShips[0].GetAffectedShipSpeed() / 360
 	
 	if (pursuing_ship_speed == 0):
 		return pursuing_ship_position

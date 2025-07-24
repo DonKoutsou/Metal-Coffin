@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b575fi0e44gkg"]
+[gd_scene load_steps=7 format=3 uid="uid://b575fi0e44gkg"]
 
 [ext_resource type="Script" uid="uid://bybwi8eqnkihq" path="res://Scripts/CageFightWorld.gd" id="1_ruv4p"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_hv6vs"]
 [ext_resource type="PackedScene" uid="uid://dc1y0qs5n466n" path="res://Scenes/Cards/CagefightTeamSetup.tscn" id="3_fhjeu"]
+[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="4_fhjeu"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="8_6fcln"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="8_77y8q"]
 
@@ -39,6 +40,7 @@ stretch = true
 process_mode = 1
 disable_3d = true
 own_world_3d = true
+world_3d = ExtResource("4_fhjeu")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true

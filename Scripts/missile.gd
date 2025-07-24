@@ -13,9 +13,11 @@ var FoundShips : Array[Node2D] = []
 var Paused = false
 var Friendly = false
 
+var DistanceTraveled : float
+
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
-var FirePos : Vector2
+
 signal OnShipDestroyed(Mis : Missile)
 
 var activationdistance : float = 0
@@ -49,26 +51,26 @@ func _ready() -> void:
 		get_parent().add_child(s)
 	$AccelPosition.position.x = Speed / 360
 	
-	FirePos = global_position
-	
 
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
 
-	var offset = GetShipSpeedVec() * SimulationManager.SimSpeed()
+	var offset = GetShipSpeedVec()
+	
+	DistanceTraveled += offset.length() * SimulationManager.SimSpeed()
 
-	global_position += offset
-	
-	
-	
-	if (global_position.distance_to(FirePos) > Distance):
+	if (DistanceTraveled > Distance):
 		Kill()
+	
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
+	var affectedoffset = (offset * (1 + WindVel)) * SimulationManager.SimSpeed()
+	global_position += affectedoffset
 	
 	
 	$TrailLine.Update(delta)
 	
-	activationdistance += offset.length()
+	activationdistance += offset.length() * SimulationManager.SimSpeed()
 	
 	if (activationdistance < 50):
 		return
@@ -169,14 +171,19 @@ func HoneAtEnemy():
 	# Get the current position and velocity of the ship
 	var ship_position = Ship.global_position
 	var ship_velocity = Ship.GetShipSpeedVec()
-
+	
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (global_position.distance_to(ship_position) / $AccelPosition.position.x) / 60
+	var time_to_interception = (global_position.distance_to(ship_position) / ($AccelPosition.position.x * (1 + WindVel))) / 60
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 
 	look_at(predicted_position)
+
+func GetAffectedSpeed() -> float:
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
+	return ($AccelPosition.position.x * 360) * (1 + WindVel)
 
 func GetShipSpeedVec() -> Vector2:
 	return $AccelPosition.global_position - global_position
@@ -189,7 +196,8 @@ func GetSaveData() -> MissileSaveData:
 	dat.MisSpeed = Speed
 	dat.Distance = Distance
 	dat.Scene = scene_file_path
-	dat.FirePos = FirePos
+	dat.DistanceTraveled = DistanceTraveled
+	
 	return dat
 	
 func OnShipSeen(SeenBy : MapShip):

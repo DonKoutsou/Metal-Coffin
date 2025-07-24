@@ -598,8 +598,8 @@ func GetShipName() -> String:
 func GetShipSpeed() -> float:
 	if (Command != null):
 		return Command.GetShipSpeed()
-	return Acceleration.position.x * 360
-	
+	return (Acceleration.position.x * 360)
+
 func GetShipSpeedVec() -> Vector2:
 	return Acceleration.global_position - global_position
 	

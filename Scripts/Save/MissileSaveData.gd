@@ -8,4 +8,4 @@ class_name MissileSaveData
 @export var MisName : String
 @export var MisSpeed : float
 @export var Scene : String
-@export var FirePos : Vector2
+@export var DistanceTraveled : Vector2

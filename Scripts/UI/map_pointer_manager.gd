@@ -101,7 +101,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 		
 		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
 		marker.call_deferred("ToggleShipDetails", true)
-		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetShipSpeed())
+		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetAffectedShipSpeed())
 		marker.SetType("Ship")
 		
 	else : if (Ship is Missile):

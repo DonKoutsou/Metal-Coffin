@@ -676,7 +676,7 @@ func RespawnMissiles(MissileData : Array[Resource]) -> void:
 		$SubViewportContainer/ViewPort.add_child(missile)
 		missile.global_position = dat.Pos
 		missile.global_rotation = dat.Rot
-		missile.FirePos = dat.FirePos
+		missile.DistanceTraveled = dat.DistanceTraveled
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
 
