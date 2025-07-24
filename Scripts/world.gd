@@ -296,6 +296,15 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
 	
+	var AveragePos : Vector2
+	for g in Enemies:
+		AveragePos += g.global_position
+	for g in Friendlies:
+		AveragePos += g.global_position
+	AveragePos /= Friendlies.size() + Enemies.size()
+	
+	CardF.FightLoc = AveragePos
+	
 	GetMap().GetScreenUi().ToggleScreenUI(false)
 	GetMap().GetScreenUi().ToggleCardFightUI(true)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)

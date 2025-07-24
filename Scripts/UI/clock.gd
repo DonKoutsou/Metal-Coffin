@@ -38,6 +38,9 @@ func TimePassedInMinutes() -> int:
 	
 	return MinPassed
 
+static func GetDateTimeString() -> String:
+	return "{0}/{1}/{2} {3}:{4}".format([CurrentDay, CurrentMonth, CurrentYear, currentHour, roundi(currentMin)])
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	CurrentDay = StartingDay

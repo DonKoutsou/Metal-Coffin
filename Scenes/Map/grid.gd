@@ -39,7 +39,7 @@ func _draw() -> void:
 	Offset.x = wrap(Offset.x, -(size.x / Siz), size.x / Siz)
 	Offset.y = wrap(Offset.y, -(size.y / Siz), size.y / Siz)
 	
-	var stringsdrew = 0
+	#var stringsdrew = 0
 	
 	for Hundread in range(0, Siz):
 		
@@ -95,7 +95,7 @@ func _draw() -> void:
 					
 				# Adjust drawing to consider the color and font setup
 					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
-					stringsdrew += 1
+					#stringsdrew += 1
 			
 			if (DrawHundreadLine and Ten == 0):
 				DrawTenLine = !DrawHundreadLine
@@ -150,5 +150,5 @@ func _draw() -> void:
 					
 				# Adjust drawing to consider the color and font setup
 					draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1, 0.2))
-					stringsdrew += 1
-	print("draw {0} strings".format([stringsdrew]))
+					#stringsdrew += 1
+	#print("draw {0} strings".format([stringsdrew]))

@@ -56,6 +56,8 @@ class_name Card_Fight
 @export_group("Event Handlers")
 @export var UIEventH : UIEventHandler
 
+var FightLoc : Vector2
+
 var ExternalUI : ExternalCardFightUI
 
 #Stats kept to show at the end screen
@@ -71,9 +73,11 @@ var CurrentTurn : int = 0
 #Combatants are ships fighting atm, ships from reserves will be pulled to fill combatants when they are less than MaxCombatants
 var PlayerReserves : Array[BattleShipStats]
 var PlayerCombatants : Array[BattleShipStats]
+var PlayerCasualties : Array[BattleShipStats]
 
 var EnemyReserves : Array[BattleShipStats]
 var EnemyCombatants : Array[BattleShipStats]
+var EnemyCasualties : Array[BattleShipStats]
 
 #Decks holding info about cards in hand/discard pile/deck pile
 var PlayerDecks : Dictionary[BattleShipStats, Deck]
@@ -189,6 +193,7 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 		#save index so we can add any replacement on that position
 		#var Index = PlayerCombatants.find(Ship)
 		PlayerCombatants.erase(Ship)
+		PlayerCasualties.append(Ship)
 		if (PlayerReserves.size() > 0):
 			NewCombatant = PlayerReserves.pop_front()
 			PlayerCombatants.append(NewCombatant)
@@ -202,6 +207,7 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 		#save index so we can add any replacement on that position
 		#var Index = EnemyCombatants.find(Ship)
 		EnemyCombatants.erase(Ship)
+		EnemyCasualties.append(Ship)
 		
 		if (EnemyReserves.size() > 0):
 			NewCombatant = EnemyReserves.pop_front()
@@ -1032,7 +1038,7 @@ func RestartCards() -> void:
 # CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 
 func OnFightEnded(Won : bool) -> void:
 	var End = EndScene.instantiate() as CardFightEndScene
-	End.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg)
+	End.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg, PlayerCasualties, EnemyCasualties, FightLoc)
 	add_child(End)
 
 	await End.ContinuePressed
