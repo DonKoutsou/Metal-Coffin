@@ -18,7 +18,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var TickRate = _blackboard.get_value("TickRate")
 	var DestinationPos = MainShip.RefuelSpot.global_position
 
-	if (Pos.distance_to(DestinationPos) > 10):
+	if (Pos.distance_squared_to(DestinationPos) > 100):
 		for g in MainShip.GetDroneDock().DockedDrones:
 			var Ship = g as HostileShip
 			

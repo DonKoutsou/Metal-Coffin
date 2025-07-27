@@ -52,7 +52,7 @@ func RedrawThing() -> void:
 
 func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], Pos : MapSpot) -> void:
 	var CenterSpot = Pos.global_position
-	var SpotsInRange = Helper.GetInstance().GetSpotsCloserThan(Pos.global_position, 8000)
+	var SpotsInRange = Helper.GetInstance().GetSpotsCloserThan(Pos.global_position, 64000000)
 	Spots[Pos] = get_viewport_rect().size / 2
 	for g in SpotsInRange:
 		if (g == Pos):

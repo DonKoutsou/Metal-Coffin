@@ -12,14 +12,14 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 
 	#var dist = Ship.GetFuelRange()
 	
-	var DistToSpot = 9999999999
+	var DistToSpot = 999999999999999
 	
 	var RefuelSpot
 	
 	#var DistanceToDestination = ship.global_position.distance_to(ship.GetCurrentDestination())
 	for g in get_tree().get_nodes_in_group("EnemyDestinations"):
 		var spot = g as MapSpot
-		var D = spot.global_position.distance_to(Ship.global_position)
+		var D = spot.global_position.distance_squared_to(Ship.global_position)
 		#if we cant reach it look for another
 		#if (D >= dist):
 			#continue

@@ -35,7 +35,7 @@ func Update(delta: float) -> void:
 
 	#global_position - (CamPos - global_position) * Zoom * lerp(0.0, 0.03, Altitude / 10000.0)
 	# Check if the position has changed
-	if last_position.distance_to(global_position) > min_distance:
+	if last_position.distance_squared_to(global_position) > min_distance * min_distance:
 		PointPos.insert(1, last_position)
 		#print(last_position)
 		#print (PointPos)
@@ -73,7 +73,7 @@ func UpdateProjected(delta: float, paralax : float) -> void:
 
 	#global_position - (CamPos - global_position) * Zoom * lerp(0.0, 0.03, Altitude / 10000.0)
 	# Check if the position has changed
-	if last_position.distance_to(global_position) > min_distance:
+	if last_position.distance_squared_to(global_position) > min_distance * min_distance:
 		PointPos.insert(1, last_position)
 		#print(last_position)
 		#print (PointPos)

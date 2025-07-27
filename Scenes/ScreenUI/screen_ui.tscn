@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/SteeringWheelUI.tscn" id="11_s7gev"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="13_4xtjg"]
 [ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="13_myhbu"]
+[ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Aerophone.tscn" id="13_ruc6v"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_l0ryv"]
 [ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="14_ruc6v"]
 [ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="14_ua54b"]
@@ -33,7 +34,6 @@
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="31_ua54b"]
 [ext_resource type="PackedScene" uid="uid://cjbda0fdx38c4" path="res://Scenes/Cards/card_fight_ui.tscn" id="31_wetmy"]
 [ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
-[ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="33_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scripts/screen_cam.gd" id="35_vmft1"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="36_ai3xr"]
@@ -366,14 +366,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Speaker" parent="NormalScreen/ScreenUi" instance=ExtResource("33_wetmy")]
-offset_left = -4.0
-offset_top = -120.0
-offset_right = 36.0
-offset_bottom = -80.0
-frequency = 15.0
-max_rotation = 0.02
-
 [node name="SteeringWheel" parent="NormalScreen/ScreenUi" instance=ExtResource("11_s7gev")]
 layout_mode = 1
 anchors_preset = 2
@@ -406,6 +398,9 @@ position = Vector2(982, -105)
 scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
+
+[node name="Control" parent="NormalScreen/ScreenUi" instance=ExtResource("13_ruc6v")]
+layout_mode = 1
 
 [node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
@@ -804,7 +799,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ScreenFrame4" type="TextureRect" parent="Cables"]
+[node name="ScreenFrame4" type="TextureRect" parent="Cables" groups=["Shakable"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -842,7 +837,7 @@ mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 
-[node name="ScreenFrame3" type="TextureRect" parent="Cables"]
+[node name="ScreenFrame3" type="TextureRect" parent="Cables" groups=["Shakable"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -920,13 +915,12 @@ offset_bottom = 751.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScreenCam" type="Camera2D" parent="." node_paths=PackedStringArray("Cabled")]
+[node name="ScreenCam" type="Camera2D" parent="."]
 process_mode = 1
 z_index = 1
 position = Vector2(640, 360)
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
-Cabled = [NodePath("../NormalScreen/ScreenUi/Fan"), NodePath("../NormalScreen/ScreenUi/Speaker"), NodePath("../Cables/ScreenFrame4"), NodePath("../Cables/ScreenFrame3")]
 breath_amplitude = 2.0
 breath_duration = 5.0
 

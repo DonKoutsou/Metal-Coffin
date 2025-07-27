@@ -348,7 +348,7 @@ func UpdateElint(delta: float) -> void:
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g] as MapShip
 		var lvl = ElintContacts.values()[g]
-		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
 			Dir = global_position.angle_to_point(ship.global_position)
@@ -600,6 +600,11 @@ func GetShipSpeed() -> float:
 		return Command.GetShipSpeed()
 	return (Acceleration.position.x * 360)
 
+func GetShipThrust() -> float:
+	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * (GetShipSpeed() / GetShipMaxSpeed())
+	
+	return Thrust
+
 func GetShipSpeedVec() -> Vector2:
 	return Acceleration.global_position - global_position
 	
@@ -615,16 +620,17 @@ func GetClosestElint() -> Vector2:
 	
 	return closest
 	
-func GetElintLevel(Dist : float, RadarL : float) -> int:
+func GetElintLevel(DistSq : float, RadarL : float) -> int:
 	var Lvl = -1
+	var RadarLSq = RadarL * RadarL
 	var ElintDist = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
 	if (ElintDist == 0 or RadarL <= 90):
 		return Lvl
-	if (Dist < RadarL):
+	if (DistSq < RadarLSq):
 		Lvl = 3
-	else : if (Dist < RadarL * 2):
+	else : if (DistSq < RadarLSq * 2):
 		Lvl = 2
-	else : if (Dist < RadarL * 10):
+	else : if (DistSq < RadarLSq * 10):
 		Lvl = 1
 	return Lvl
 	

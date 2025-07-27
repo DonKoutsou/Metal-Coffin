@@ -4,19 +4,40 @@ class_name PlayerDrivenShip
 
 @export var AccelerationAudio : AudioStreamPlayer2D
 @export var L : PointLight2D
+@export var SonalVisual : ColorRect
+@export var SonarShape : Area2D
 
 var CommingBack = false
 var RegroupTarget : MapShip
 
-
-
 var TargetLocations : Array[Vector2]
+
+var SonarTargets : Array[MapShip]
 
 func  _ready() -> void:
 	super()
+	SonarShape.connect("area_entered", BodyEnteredSonar)
+	SonarShape.connect("area_exited", BodyLeftSonar)
+	
 	Paused = SimulationManager.IsPaused()
 	WeatherManage.RegisterShip(self)
 	#call_deferred("_postready")
+
+func ToggleSonarVisual(t : bool) -> void:
+	SonalVisual.visible = t
+
+func SetSonarDirection(Dir : float) -> void:
+	SonalVisual.rotation = Dir - global_rotation
+
+func BodyEnteredSonar(Body : Area2D) -> void:
+	if (Body.get_parent() is MapShip):
+		#ShipEnteredSonar.emit(Body.get_parent())
+		SonarTargets.append(Body.get_parent())
+
+func BodyLeftSonar(Body : Area2D) -> void:
+	if (Body.get_parent() is MapShip):
+		#ShipLeftSonar.emit(Body.get_parent())
+		SonarTargets.erase(Body.get_parent())
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)

@@ -60,10 +60,23 @@ static func AngleToDirection(angle: float) -> String:
 	var index = int(fmod((angle + PI/8 + TAU), TAU) / (PI / 4)) % 8
 	return directions[index]
 
+static func angle_difference_radians(angle1: float, angle2: float) -> float:
+
+	# Calculate the difference
+	var difference = angle2 - angle1
+
+	# Adjust for wrap around
+	if difference > PI:
+		difference -= TAU
+	elif difference < -PI:
+		difference += TAU
+
+	return difference
+
 static func SmoothLine(L : Array, res : float = 200) -> Array[Vector2]:
 	var newline : Array[Vector2]
 	for pointIndex in range(0, L.size()-1):
-		var currentpoint = L[pointIndex]
+		var currentpoint = L[pointIndex] as Vector2
 		newline.append(currentpoint)
 		var nextpoint = L[pointIndex + 1]
 		var dist = currentpoint.distance_to(nextpoint)
@@ -96,7 +109,7 @@ static func SmoothLine2(L : Array, res : float = 200) -> Array[Vector2]:
 		var direction = currentpoint.direction_to(nextpoint)
 		if (currentpoint.y == nextpoint.y):
 			continue
-		for g in range(1, dist / res):
+		for g in range(1, dist / res ):
 			
 			var newpoint = currentpoint + (direction * (res * g))
 			
@@ -141,9 +154,9 @@ func GetCityByName(CityName : String) -> MapSpot:
 
 func GetClosestSpot(Pos : Vector2) -> MapSpot:
 	var Closest : MapSpot
-	var Dist = 99999999999999
+	var Dist = 99999999999999999
 	for g in get_tree().get_nodes_in_group("City"):
-		var Dist2 = Pos.distance_to(g.global_position)
+		var Dist2 = Pos.distance_squared_to(g.global_position)
 		if (Dist2 < Dist):
 			Dist = Dist2
 			Closest = g
@@ -152,11 +165,11 @@ func GetClosestSpot(Pos : Vector2) -> MapSpot:
 
 	return Closest
 
-func GetSpotsCloserThan(Pos : Vector2, Dist : float) -> Array[MapSpot]:
+func GetSpotsCloserThan(Pos : Vector2, DistSquared : float) -> Array[MapSpot]:
 	var Spots : Array[MapSpot]
 	for g in get_tree().get_nodes_in_group("City"):
-		var Dist2 = Pos.distance_to(g.global_position)
-		if (Dist2 < Dist):
+		var Dist2 = Pos.distance_squared_to(g.global_position)
+		if (Dist2 < DistSquared):
 			Spots.append(g)
 
 	return Spots

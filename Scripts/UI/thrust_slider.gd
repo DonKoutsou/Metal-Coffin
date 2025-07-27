@@ -32,7 +32,7 @@ func ForceValue(val : float) ->void:
 	
 	var NewPositio = Vector2(Handle.position.x, newpos)
 	
-	forceTw.tween_property(Handle, "position", NewPositio, NewPositio.distance_to(Handle.position) / 1000)
+	forceTw.tween_property(Handle, "position", NewPositio, NewPositio.distance_squared_to(Handle.position) / 1000000)
 	
 	#Handle.position.y = newpos
 	#var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)

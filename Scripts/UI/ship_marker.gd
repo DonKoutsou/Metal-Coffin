@@ -67,7 +67,8 @@ func _draw() -> void:
 		if (g > 0):
 			origin = to_local(TargetLocations[g - 1])
 		
-		distancetotravel += origin.distance_to(topos)
+		var disttopos = origin.distance_to(topos)
+		distancetotravel += disttopos
 		LinesToDraw.append([origin, topos])
 		
 		var Col = Color(1,1,1)
@@ -77,8 +78,8 @@ func _draw() -> void:
 		
 		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
-		var pos = origin + origin.direction_to(topos) * (origin.distance_to(topos) / 2)
-		var string = "{0} km".format([roundi(origin.distance_to(topos))])
+		var pos = origin + origin.direction_to(topos) * (disttopos / 2)
+		var string = "{0} km".format([roundi(disttopos)])
 		
 		#pos.x -= string.length() / 2 * fontsize
 		

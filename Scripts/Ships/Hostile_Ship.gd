@@ -191,7 +191,7 @@ func UpdateElint(delta: float) -> void:
 		if (!ship.RadarWorking):
 			continue
 		var lvl = ElintContacts.values()[g]
-		var Newlvl = GetElintLevel(global_position.distance_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
 			ClosestShip = ship
@@ -444,7 +444,7 @@ func GetCurrentDestination() -> Vector2:
 			destination = Helper.GetInstance().GetCityByName(PursuitPath[PursuitPathPart]).global_position
 		else:
 			destination = PositionToInvestigate
-			if (PositionToInvestigate.distance_to(global_position) <= 4):
+			if (PositionToInvestigate.distance_squared_to(global_position) <= 20):
 				OnPositionInvestigated.emit(PositionToInvestigate)
 	else: if(RefugeSpot != null) :
 		destination = RefugeSpot.global_position

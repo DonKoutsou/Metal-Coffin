@@ -11,6 +11,8 @@ var SoundsOnCooldown : Dictionary[RadioSound, float]
 
 static var Instance : RadioSpeaker
 
+signal Clicked
+
 func _ready() -> void:
 	Instance = self
 	phase_offset = randf_range(0.0, TAU)
@@ -73,3 +75,4 @@ enum RadioSound{
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Click")):
 		ApplyShake(10)
+		Clicked.emit()

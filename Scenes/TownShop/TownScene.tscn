@@ -184,7 +184,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 bbcode_enabled = true
-text = "[p][img]res://Assets/Items/Fuelsmall.png[/img] REFUEL TIME/COST -[p]"
+text = "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
 fit_content = true
 
 [node name="Button" type="Button" parent="HBoxContainer2" groups=["DigitalButtons"]]

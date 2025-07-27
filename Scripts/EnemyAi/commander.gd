@@ -93,7 +93,7 @@ func ProcessLODList() -> void:
 		var ShouldRun = false
 		
 		for Pl in PlayerShips:
-			if (ShipPos.distance_to(Pl.global_position) < SimulationRange):
+			if (ShipPos.distance_squared_to(Pl.global_position) < SimulationRange * SimulationRange):
 				ShouldRun = true
 				break
 		
@@ -107,7 +107,7 @@ func ProcessLODList() -> void:
  #██████  ██   ██ ██████  ███████ ██   ██     ██      ██ ██   ██ ██   ████ ██   ██  ██████  ███████ ██      ██ ███████ ██   ████    ██    
 
 func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
-	var Armament = GetCheapestArmamentForDistance(Ship.global_position.distance_to(Target.global_position))
+	var Armament = GetCheapestArmamentForDistance(Ship.global_position.distance_squared_to(Target.global_position))
 	Ship.Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, Armaments[Armament])
 	Ship.LaunchMissile(Armament, Target.global_position)
 	
@@ -427,7 +427,7 @@ func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
 	for g in Fleet:
 		#if g.Reloading > 0:
 			#continue
-		var dist = Pos.distance_to(g.global_position)
+		var dist = Pos.distance_squared_to(g.global_position)
 		var PossibleArmament = GetCheapestArmamentForDistance(dist)
 		if (PossibleArmament == null):
 			continue
@@ -443,7 +443,7 @@ func FindMissileCarrierAbleToFireToShip(Ship : MapShip) -> HostileShip:
 	for g in Fleet:
 		#if g.Reloading > 0:
 			#continue
-		var dist = Ship.global_position.distance_to(g.global_position)
+		var dist = Ship.global_position.distance_squared_to(g.global_position)
 		var PossibleArmament = GetCheapestArmamentForDistance(dist)
 		if (PossibleArmament == null):
 			continue
@@ -485,11 +485,12 @@ func shapecast_2d(from : MapShip, to: MapShip, margin: float = 1) -> bool:
 	# Return true if the shape cast collides, false otherwise
 	return false
 
-func GetCheapestArmamentForDistance(Dist : float) -> MissileItem:
+func GetCheapestArmamentForDistance(DistSquared : float) -> MissileItem:
 	var CheapestPrice = 10000
 	var CheapestArmament
 	for g in Armaments:
-		if (Dist > g.Distance):
+		var ArmDist = g.Distance * g.Distance
+		if (DistSquared > ArmDist):
 			continue
 		if (Armaments[g] < CheapestPrice):
 			CheapestArmament = g

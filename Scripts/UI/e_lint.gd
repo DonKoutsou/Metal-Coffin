@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 			FoundContact = true
 			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
 		SetDirection(rad_to_deg(ConnectedShip.global_position.angle_to_point(Elint)) + 180)
-		SetDistance(ConnectedShip.global_position.distance_to(Elint))
+		SetDistance(ConnectedShip.global_position.distance_squared_to(Elint))
 	
 	for g in Lights:
 		g.visible = !g.visible
@@ -72,7 +72,7 @@ func UpdateBasedOnMouse() -> void:
 	var pos = $Control.global_position as Vector2
 	var ang = (rad_to_deg(pos.angle_to_point(mpos))) + 180
 	SetDirection(ang)
-	SetDistance(pos.distance_to(mpos))
+	SetDistance(pos.distance_squared_to(mpos))
 
 func SetDirection(dir : float):
 	#print(dir)
@@ -93,14 +93,14 @@ static func DegreesToElintAngle(Deg : float) -> int:
 func SetDistance(dist : float):
 	var maxdist
 	maxdist = ConnectedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
-	if (dist < maxdist * 0.3):
+	if (dist < (maxdist * maxdist) * 0.3):
 		if ($RangeIndicator.texture != DistanceMasks[2]):
 			$RangeIndicator.texture = DistanceMasks[2]
 			Lights.append($DangerCloseLight)
 			$DangerCloseLight.visible = $DirectionLight.visible
 			$AudioStreamPlayer.stream = Alarm
 			$AudioStreamPlayer.pitch_scale = 4
-	else : if (dist < maxdist * 0.6):
+	else : if (dist < (maxdist * maxdist) * 0.6):
 		if ( $RangeIndicator.texture != DistanceMasks[1]):
 			$RangeIndicator.texture = DistanceMasks[1]
 			Lights.erase($DangerCloseLight)

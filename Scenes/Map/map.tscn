@@ -244,7 +244,7 @@ bus = &"MapSounds"
 position = Vector2(126.5, 154.5)
 
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" node_paths=PackedStringArray("CircleDr", "MapLonePos")]
-z_index = 1
+z_index = 1025
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
 CircleDr = NodePath("CircleDrawer")

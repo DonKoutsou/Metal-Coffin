@@ -144,7 +144,7 @@ vertical_scroll_mode = 3
 script = ExtResource("7_itsvt")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="HFlowContainer2" type="HFlowContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="HFlowContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -165,12 +165,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Engines"
 
-[node name="Engines" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer/VBoxContainer"]
+[node name="Engines" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-columns = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
@@ -187,12 +186,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Fuel Tanks"
 
-[node name="Fuel Tanks" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2/VBoxContainer2"]
+[node name="Fuel Tanks" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 mouse_filter = 2
-columns = 3
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
@@ -209,11 +207,10 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Sensors"
 
-[node name="Sensors" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3/VBoxContainer3"]
+[node name="Sensors" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3/VBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 2
 mouse_filter = 2
-columns = 3
 
 [node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
@@ -230,12 +227,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Fortifications"
 
-[node name="Shields" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4/VBoxContainer4"]
+[node name="Shields" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 mouse_filter = 2
-columns = 3
 
 [node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
 layout_mode = 2
@@ -252,12 +248,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Weapons"
 
-[node name="Weapons" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5/VBoxContainer5"]
+[node name="Weapons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5/VBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 mouse_filter = 2
-columns = 3
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(180, 0)

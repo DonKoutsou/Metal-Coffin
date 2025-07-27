@@ -51,4 +51,10 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		var rel = clamp(event.relative / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
 		accumulatedrel += rel.x
 		set_physics_process(true)
+	if (event.is_action_pressed("ZoomOut")):
+		accumulatedrel += 0.4
+		set_physics_process(true)
+	if (event.is_action_pressed("ZoomIn")):
+		accumulatedrel -= 0.4
+		set_physics_process(true)
 		

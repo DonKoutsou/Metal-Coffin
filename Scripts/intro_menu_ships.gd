@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	$TextureRect4/TrailLine2.Update(delta)
 	$TextureRect5/TrailLine2.Update(delta)
 	if (CommingFromOut):
-		if (centerpoint.distance_to(position) < 300):
+		if (centerpoint.distance_squared_to(position) < 90000):
 			if (is_instance_valid(RotTw)):
 				RotTw.kill()
 			RotTw = create_tween()

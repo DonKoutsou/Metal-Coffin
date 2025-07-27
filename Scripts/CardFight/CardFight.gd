@@ -105,6 +105,7 @@ enum CardFightPhase{
 }
 
 signal CardFightEnded(Survivors : Array[BattleShipStats], won : bool)
+signal CardFightDestroyed()
 
 func _ready() -> void:
 	
@@ -1038,10 +1039,23 @@ func RestartCards() -> void:
 # CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 
 func OnFightEnded(Won : bool) -> void:
 	var End = EndScene.instantiate() as CardFightEndScene
-	End.SetData(Won, FundsToWin, DamageDone, DamageGot, DamageNeg, PlayerCasualties, EnemyCasualties, FightLoc)
+	var FrCombatants : Array[BattleShipStats]
+	FrCombatants.append_array(PlayerCombatants)
+	FrCombatants.append_array(PlayerReserves)
+	FrCombatants.append_array(PlayerCasualties)
+	
+	var EnCombatants : Array[BattleShipStats]
+	EnCombatants.append_array(EnemyCombatants)
+	EnCombatants.append_array(EnemyReserves)
+	EnCombatants.append_array(EnemyCasualties)
+	
+	var Data = BattleReportData.new()
+	Data.SetData(Won, Clock.GetDateTimeString(), FundsToWin, DamageDone, DamageGot, DamageNeg, FrCombatants, EnCombatants, PlayerCasualties, EnemyCasualties, FightLoc)
+	
+	End.SetData(Data)
 	add_child(End)
 
-	await End.ContinuePressed
+	
 	var Survivors : Array[BattleShipStats]
 	RefundUnusedCards()
 	for g in PlayerCombatants:
@@ -1060,6 +1074,11 @@ func OnFightEnded(Won : bool) -> void:
 	
 	var won = EnemyCombatants.size() + EnemyReserves.size() < PlayerCombatants.size() + PlayerReserves.size()
 	CardFightEnded.emit(Survivors, won)
+	
+	await End.ContinuePressed
+	
+	CardFightDestroyed.emit()
+	#queue_free()
 	
 	MusicManager.GetInstance().SwitchMusic(false)
 #/////////////////////////////////////////////////////////////////////

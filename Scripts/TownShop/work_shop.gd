@@ -4,11 +4,11 @@ class_name WorkShop
 
 @export var ShipButtonsParent : Control
 
-@export var EngineInventoryBoxParent : GridContainer
-@export var SensorInventoryBoxParent : GridContainer
-@export var FuelTankInventoryBoxParent : GridContainer
-@export var WeaponInventoryBoxParent : GridContainer
-@export var ShieldInventoryBoxParent : GridContainer
+@export var EngineInventoryBoxParent : Control
+@export var SensorInventoryBoxParent : Control
+@export var FuelTankInventoryBoxParent : Control
+@export var WeaponInventoryBoxParent : Control
+@export var ShieldInventoryBoxParent : Control
 @export var DescriptorPlace : Control
 @export var WorkshopItemUI : PackedScene
 @export var ItemDescriptorScene : PackedScene
@@ -28,11 +28,11 @@ func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
 	var midpoint = get_viewport_rect().size/2
 	var Closest : Control
-	var Dist : float = 9999999
+	var Dist : float = 99999999999999
 	for g : Control in ItemParent.get_children():
 		if (g is not WorkShopItem):
 			continue
-		var NewDest = (g.global_position + (g.size / 2)).distance_to(midpoint)
+		var NewDest = (g.global_position + (g.size / 2)).distance_squared_to(midpoint)
 		if (NewDest < Dist):
 			Dist = NewDest
 			Closest = g
@@ -86,35 +86,35 @@ func OnShipSelected(Ship : MapShip) -> void:
 		EngineInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
+		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
 	
 	for g in CharSensorSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		SensorInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
+		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
 	
 	for g in CharFuelTankSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		FuelTankInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
+		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
 	
 	for g in CharShieldSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		ShieldInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
+		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
 	
 	for g in CharWeaponSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		WeaponInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
+		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 	
 	var inv = Cha.GetCharacterInventory()
 	

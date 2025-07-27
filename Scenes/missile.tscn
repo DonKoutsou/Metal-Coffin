@@ -34,7 +34,6 @@ MissileLaunchSound = ExtResource("4_v3idv")
 position = Vector2(29, 0)
 
 [node name="Radar_Range" type="ColorRect" parent="." groups=["MapLines"]]
-visible = false
 z_index = 2
 material = SubResource("ShaderMaterial_qemak")
 anchors_preset = 8
@@ -67,7 +66,6 @@ shape = SubResource("CircleShape2D_xahj0")
 
 [node name="TrailLine" type="Line2D" parent="."]
 z_index = -2
-points = PackedVector2Array(0, 0)
 width = 1.0
 width_curve = SubResource("Curve_5epdn")
 gradient = SubResource("Gradient_5epdn")

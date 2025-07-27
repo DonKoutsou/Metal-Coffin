@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		
 		position += Vector2(cos(rotation), sin(rotation)) * speed
 	
-	if (global_position.distance_to(Target.global_position + (Target.size / 2)) < 50):
+	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500):
 		global_position = Target.global_position + (Target.size / 2)
 		Going = false
 		Reached.emit()

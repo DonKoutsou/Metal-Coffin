@@ -69,7 +69,7 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="q" type="AnimatedSprite2D"]
+[node name="q" type="AnimatedSprite2D" groups=["Shakable"]]
 position = Vector2(0, -792)
 scale = Vector2(7.1875, 7.1875)
 sprite_frames = ExtResource("1_gqt8n")

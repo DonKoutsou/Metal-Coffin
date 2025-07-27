@@ -67,11 +67,11 @@ func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
 	var midpoint = get_viewport_rect().size/2
 	var Closest : Control
-	var Dist : float = 9999999
+	var Dist : float = 99999999999999
 	for g : Control in ItemPlecement.get_children():
 		if (g is not TownShopItem):
 			continue
-		var NewDest = (g.global_position + (g.size / 2)).distance_to(midpoint)
+		var NewDest = (g.global_position + (g.size / 2)).distance_squared_to(midpoint)
 		if (NewDest < Dist):
 			Dist = NewDest
 			Closest = g

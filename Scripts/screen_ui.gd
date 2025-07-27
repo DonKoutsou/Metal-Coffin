@@ -86,6 +86,7 @@ func IntroCloseFinisehd(NewStat : ScreenState) -> void:
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
 
+
 func ToggleCardFightUI(t : bool) -> void:
 	CardFightUI.visible = t
 

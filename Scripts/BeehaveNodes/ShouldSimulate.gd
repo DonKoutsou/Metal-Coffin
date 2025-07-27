@@ -9,7 +9,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var MainShipPos : Vector2 = actor.global_position
 	
 	for g in PlayerShips:
-		if (MainShipPos.distance_to(g.global_position) > 10000):
+		if (MainShipPos.distance_squared_to(g.global_position) > 100000000):
 			return SUCCESS
 
 	return FAILURE

@@ -51,7 +51,8 @@ func EndGame() -> void:
 func StartDogFight(PlTeam : Array[Captain], EnTeam : Array[Captain]):
 
 	var CardF = CardFightScene.instantiate() as Card_Fight
-	CardF.connect("CardFightEnded", CardFightEnded)
+	CardF.CardFightEnded.connect(CardFightEnded)
+	CardF.CardFightDestroyed.connect(CardFightDestroyed)
 	
 	for g in PlTeam:
 		CardF.PlayerReserves.append(g.GetBattleStats())
@@ -77,10 +78,11 @@ func CardFightEnded(_Survivors : Array[BattleShipStats], won : bool) -> void:
 		AchievementManager.GetInstance().IncrementStatInt("CFL", 1)
 	#GetMap().GetScreenUi().ToggleControllCover(false)
 	#ScrUI.ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	#await ScrUI.FullScreenToggleStarted
+	
+
+func CardFightDestroyed() -> void:
 	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
 	FightEnded.emit()
-
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
 const ScreenPos = Vector2(67.0,62.0)

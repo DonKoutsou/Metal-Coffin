@@ -5,8 +5,10 @@ class_name CardFightEndScene
 @export var DateLabel : Label
 @export var LocationLabel : Label
 @export var DataLabel : RichTextLabel
-@export var FriendlyCasualtiesLabel : Label
-@export var EnemyCasualtiesLabal : Label
+@export var FriendlyCombatantsLabel : RichTextLabel
+@export var EnemyCombatantsLabel : RichTextLabel
+@export var FriendlyCasualtiesLabel : RichTextLabel
+@export var EnemyCasualtiesLabal : RichTextLabel
 
 signal ContinuePressed
 
@@ -16,26 +18,28 @@ func _ready() -> void:
 func _on_continue_button_pressed() -> void:
 	ContinuePressed.emit()
 
-func SetData(Won : bool, Funds : int, DoneDmg : float, GotDmg : float, NegDmg : float, FRCasualties : Array[BattleShipStats], ENCasualties : Array[BattleShipStats], Loc : Vector2) -> void:
+func SetData(Data : BattleReportData) -> void:
 
 	var text = ""
-	if (Won):
-		text += "[center][color=#ffc315]Funds Earned[/color] : {0}\n".format([Funds])
+	if (Data.Won):
+		text += "[center][color=#ffc315]Funds Earned[/color] : {0}\n".format([Data.FundWon])
 	else:
 		text += "[center][color=#ffc315]Funds Earned[/color] : {0}\n".format([0])
-	text += "[color=#ffc315]Damage Dealt[/color] : {0}\n".format([roundi(DoneDmg)])
-	text += "[color=#ffc315]Damage Received [/color]: {0}\n".format([roundi(GotDmg)])
-	text += "[color=#ffc315]Damage Negated[/color] : {0}\n".format([roundi(NegDmg)])
+	text += "[color=#ffc315]Damage Dealt[/color] : {0}\n".format([roundi(Data.DamageDone)])
+	text += "[color=#ffc315]Damage Received [/color]: {0}\n".format([roundi(Data.DamageGot)])
+	text += "[color=#ffc315]Damage Negated[/color] : {0}\n".format([roundi(Data.DamageNegated)])
 	DataLabel.text = text
 	
-	for g in FRCasualties:
-		FriendlyCasualtiesLabel.text += "\n{0}".format([g.Name])
-	for g in ENCasualties:
-		EnemyCasualtiesLabal.text += "\n{0}".format([g.Name])
+	for g in Data.FriendlyCasualties:
+		FriendlyCasualtiesLabel.text += "[p][center]{0}".format([g])
+	for g in Data.EnemyCasualties:
+		EnemyCasualtiesLabal.text += "[p][center]{0}".format([g])
 	
-	DateLabel.text = Clock.GetDateTimeString()
-	var closest = Helper.GetInstance().GetClosestSpot(Loc)
-	if (closest.global_position.distance_to(Loc) < 1000):
-		LocationLabel.text = "Location : {0}".format([closest.GetSpotName()])
-	else:
-		LocationLabel.text = "Location : {0} of {1}".format([Helper.AngleToDirection(closest.global_position.angle_to_point(Loc)) ,closest.GetSpotName()])
+	for g in Data.FriendlyCombatants:
+		FriendlyCombatantsLabel.text += "[p][center]{0}".format([g])
+	for g in Data.EnemyCombatants:
+		EnemyCombatantsLabel.text += "[p][center]{0}".format([g])
+	
+	DateLabel.text = Data.Date
+	
+	LocationLabel.text = Data.Location

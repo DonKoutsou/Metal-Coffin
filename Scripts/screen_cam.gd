@@ -4,7 +4,6 @@ class_name ScreenCamera
 
 #SCREEN SHAKE///////////////////////////////////
 @export var GoingDownC : Curve
-@export var Cabled : Array[Node]
 var GoDownValue = 1
 var Shake = false
 var GoingDown = false
@@ -24,7 +23,7 @@ func _ready() -> void:
 	PauseShake(true)
 
 func EnableShake(amm : float):
-	for g in Cabled:
+	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(amm)
 	$LightPivot1.ApplyShake(amm)
 	Shake = true
@@ -34,7 +33,7 @@ func EnableShake(amm : float):
 	GoDownValue = max(amm, GoDownValue)
 
 func EnableStormShake(amm : float) -> void:
-	for g in Cabled:
+	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(amm)
 	$LightPivot1.ApplyShake(amm)
 	Shake = true
@@ -49,7 +48,7 @@ func EnableStormShake(amm : float) -> void:
 	GoingDown = true
 
 func EnableMissileShake() -> void:
-	for g in Cabled:
+	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(2)
 	$LightPivot1.ApplyShake(1)
 	Shake = true
@@ -64,7 +63,7 @@ func EnableMissileShake() -> void:
 	GoingDown = true
 	
 func EnableDamageShake(amm : float) -> void:
-	for g in Cabled:
+	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(min(2, amm))
 	$LightPivot1.ApplyShake(min(2, amm))
 	Shake = true
@@ -128,7 +127,7 @@ func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 var stattween : Tween
 func EnableFullScreenShake() -> void:
-	for g in Cabled:
+	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(2)
 	$LightPivot1.ApplyShake(1)
 	Shake = true

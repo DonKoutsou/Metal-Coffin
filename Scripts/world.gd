@@ -292,7 +292,8 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	
 	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
 	var CardF = FightScene.instantiate() as Card_Fight
-	CardF.connect("CardFightEnded", CardFightEnded)
+	CardF.CardFightEnded.connect(CardFightEnded)
+	CardF.CardFightDestroyed.connect(CardFightDestroyed)
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
 	
@@ -312,7 +313,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	UISoundMan.GetInstance().Refresh()
 	
 	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	
+
 func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 	var AllUnits : Array[MapShip]
 	AllUnits.append_array(FighingFriendlyUnits)
@@ -341,7 +342,8 @@ func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([WonFunds]))
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()
-	
+
+func CardFightDestroyed() -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted

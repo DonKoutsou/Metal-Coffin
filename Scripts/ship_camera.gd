@@ -96,7 +96,7 @@ func _HANDLE_TOUCH(event: InputEventScreenTouch):
 
 	if touch_points.size() == 2:
 		var touch_point_positions = touch_points.values()
-		start_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
+		start_dist = touch_point_positions[0].distance_squared_to(touch_point_positions[1])
 		start_zoom = zoom
 		#start_dist = 0
 
@@ -104,7 +104,7 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 	touch_points[event.index] = event.position
 	if touch_points.size() == 2 :
 		var touch_point_positions = touch_points.values()
-		var current_dist = touch_point_positions[0].distance_to(touch_point_positions[1])
+		var current_dist = touch_point_positions[0].distance_squared_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
 		UpdateZoom(clamp(start_zoom / zoom_factor, Vector2(0.045,0.045), Vector2(2.1,2.1)))
 		if (!ClickSound.playing):

@@ -57,10 +57,10 @@ func ThreadProcessIntersections() -> Dictionary:
 			var circle2_radius = circles[j][1].x
 
 			# Calculate distance between the centers
-			var distance = circle1_center.distance_to(circle2_center)
+			var distance = circle1_center.distance_squared_to(circle2_center)
 
 			# Check if circles intersect
-			if distance < (circle1_radius + circle2_radius):
+			if distance < (circle1_radius + circle2_radius) * (circle1_radius + circle2_radius):
 				var cluster1 = find_or_create_cluster(clusters, i)
 				var cluster2 = find_or_create_cluster(clusters, j)
 
