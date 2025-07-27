@@ -6,6 +6,8 @@ class_name  AeroSonar
 @export var OffsetAmmount : float
 @export var LineContainer : AeroSonarLine
 @export var SonalVisual : TextureRect
+@export var GainLabel : Label
+@export var Spkr : RadioSpeaker
 
 var Offset = 0.0
 var CurrentAngle : float
@@ -15,8 +17,12 @@ var Working : bool = false
 func _ready() -> void:
 	#Controller = ControllerEventH.CurrentControlled
 	ControllerEventH.OnControlledShipChanged.connect(ControlledShipUpdated)
+	LineContainer.Found.connect(SignalFound)
 	set_physics_process(false)
 	SonalVisual.hide()
+
+func SignalFound(Str : float) -> void:
+	Spkr.PlaySound(RadioSpeaker.RadioSound.STATIC, Str - 20)
 
 func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 	if (Controller != null):
@@ -28,7 +34,7 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 
 
 func SonarRotationChanged(NewVal: float) -> void:
-	CurrentAngle = wrap(CurrentAngle + (NewVal / 100), -PI, PI)
+	CurrentAngle = wrap(CurrentAngle + (NewVal / 20), -PI, PI)
 	Controller.SetSonarDirection(CurrentAngle)
 
 func _physics_process(delta: float) -> void:
@@ -72,3 +78,9 @@ func OnRadioClicked() -> void:
 	set_physics_process(true)
 	Controller.ToggleSonarVisual(true)
 	Working = true
+
+
+func _on_gein_control_range_changed(NewVal: float) -> void:
+	var newoffset = clamp(LineContainer.OffsetAmmount + (-NewVal / 2), 1 ,25)
+	LineContainer.OffsetAmmount = newoffset
+	GainLabel.text = "Gain:{0}".format([snapped(newoffset, 0.1)]).replace(".0", "")

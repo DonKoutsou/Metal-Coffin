@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7cgarcbvixw6"]
+[gd_scene load_steps=16 format=3 uid="uid://b7cgarcbvixw6"]
 
 [ext_resource type="Script" uid="uid://jj8scn4ef501" path="res://Scripts/speaker.gd" id="1_mivq8"]
 [ext_resource type="AudioStream" uid="uid://bymb44f8ge1q3" path="res://Assets/Sounds/VoiceLines/LandingStart.mp3" id="2_kxl5j"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://bm6ss6aupjt2y" path="res://Assets/Sounds/VoiceLines/VisualContact.mp3" id="10_3smau"]
 [ext_resource type="AudioStream" uid="uid://ceoxpuch57wsg" path="res://Assets/Sounds/VoiceLines/TargetDestr.mp3" id="11_cotvj"]
 [ext_resource type="AudioStream" uid="uid://bgg5wwdq877gi" path="res://Assets/Sounds/VoiceLines/Aproaching.mp3" id="12_4ylf7"]
+[ext_resource type="AudioStream" uid="uid://cb8ocm3v0c4rx" path="res://Assets/Sounds/statics.mp3" id="13_mivq8"]
 [ext_resource type="Texture2D" uid="uid://cbg33obslhrhy" path="res://Assets/UIPiecies/Screen/SidePanels/Speaker_FullQuality.png" id="13_xhvq3"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_3b7e2"]
 
@@ -33,7 +34,8 @@ SoundList = Dictionary[int, Array]({
 5: [ExtResource("9_gm48c")],
 6: [ExtResource("10_3smau")],
 7: [ExtResource("11_cotvj")],
-8: [ExtResource("12_4ylf7")]
+8: [ExtResource("12_4ylf7")],
+9: [ExtResource("13_mivq8")]
 })
 L = NodePath("Light")
 

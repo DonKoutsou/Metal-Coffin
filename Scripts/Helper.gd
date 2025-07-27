@@ -99,6 +99,14 @@ static func SmoothLine(L : Array, res : float = 200) -> Array[Vector2]:
 	
 	return newline
 
+static func UpDownLerp(Max : float, t: float) -> float:
+	# If t <= 0.5, interpolate from 0 to midpoint
+	if t * 2 <= Max:
+		return lerp(0.0, 1.0, t / (Max / 2))  # Scale t for the first half (0 to 1)
+	else:
+		# If t > 0.5, interpolate from midpoint to 0
+		return lerp(1.0, 0.0, t / Max)  # Scale t for the first half (0 to 1)
+
 static func SmoothLine2(L : Array, res : float = 200) -> Array[Vector2]:
 	var newline : Array[Vector2]
 	for pointIndex in range(0, L.size()-1):

@@ -21,17 +21,19 @@ static func GetInstance() -> RadioSpeaker:
 	return Instance
 
 var PlayingSounds : int = 0
-func PlaySound(Sound : RadioSound) -> void:
+func PlaySound(Sound : RadioSound, Volume : float = 0) -> void:
 	if (SoundsOnCooldown.has(Sound)):
 		return
 	
-	SoundsOnCooldown[Sound] = 2
+	
 	
 	var List = SoundList[Sound]
-	var SoundStream = List.pick_random()
+	var SoundStream = List.pick_random() as AudioStream
 	var DelSound = DeletableSound.new()
 	DelSound.stream = SoundStream
+	SoundsOnCooldown[Sound] = SoundStream.get_length()
 	DelSound.bus = "MapSounds"
+	DelSound.volume_db = Volume
 	DelSound.autoplay = true
 	add_child(DelSound)
 	PlayingSounds += 1
@@ -68,7 +70,8 @@ enum RadioSound{
 	ELINT_DETECTED,
 	VISUAL_CONTACT,
 	TARGET_DEST,
-	APROACHING
+	APROACHING,
+	STATIC,
 }
 
 
