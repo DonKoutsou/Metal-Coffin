@@ -12,7 +12,7 @@ var RegroupTarget : MapShip
 
 var TargetLocations : Array[Vector2]
 
-var SonarTargets : Array[MapShip]
+var SonarTargets : Array[Node2D]
 
 func  _ready() -> void:
 	super()
@@ -23,6 +23,20 @@ func  _ready() -> void:
 	WeatherManage.RegisterShip(self)
 	#call_deferred("_postready")
 
+func PartChanged(It : ShipPart) -> void:
+	for g in It.Upgrades:
+		if (g.UpgradeName == STAT_CONST.STATS.VISUAL_RANGE):
+			UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+		else : if (g.UpgradeName == STAT_CONST.STATS.ELINT):
+			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
+		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
+			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE))
+			
+func UpdateELINTTRange(rang : float):
+	var SonarCollisionShape = SonarShape.get_node("CollisionShape2D")
+	#scalling collision
+	(SonarCollisionShape.shape as CircleShape2D).radius = rang
+
 func ToggleSonarVisual(t : bool) -> void:
 	SonalVisual.visible = t
 
@@ -30,14 +44,16 @@ func SetSonarDirection(Dir : float) -> void:
 	SonalVisual.rotation = Dir - global_rotation
 
 func BodyEnteredSonar(Body : Area2D) -> void:
-	if (Body.get_parent() is MapShip):
+	var Parent = Body.get_parent()
+	if (Parent is MapShip or Parent is Missile):
 		#ShipEnteredSonar.emit(Body.get_parent())
-		SonarTargets.append(Body.get_parent())
+		SonarTargets.append(Parent)
 
 func BodyLeftSonar(Body : Area2D) -> void:
-	if (Body.get_parent() is MapShip):
+	var Parent = Body.get_parent()
+	if (Parent is MapShip or Parent is Missile):
 		#ShipLeftSonar.emit(Body.get_parent())
-		SonarTargets.erase(Body.get_parent())
+		SonarTargets.erase(Parent)
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)

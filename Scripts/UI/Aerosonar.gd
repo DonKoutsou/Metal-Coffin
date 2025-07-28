@@ -13,6 +13,7 @@ var Offset = 0.0
 var CurrentAngle : float
 var Controller : PlayerDrivenShip
 var Working : bool = false
+var Vol : float
 
 func _ready() -> void:
 	#Controller = ControllerEventH.CurrentControlled
@@ -22,7 +23,7 @@ func _ready() -> void:
 	SonalVisual.hide()
 
 func SignalFound(Str : float) -> void:
-	Spkr.PlaySound(RadioSpeaker.RadioSound.STATIC, Str - 20)
+	Spkr.PlaySound(RadioSpeaker.RadioSound.BEEP, Str - 35)
 
 func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 	if (Controller != null):
@@ -30,6 +31,8 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 		#Implement deactivation of sonar collider
 	
 	Controller = NewController
+	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):
+		_on_close_pressed()
 	Controller.ToggleSonarVisual(Working)
 
 
@@ -41,6 +44,7 @@ func _physics_process(delta: float) -> void:
 	Controller.SetSonarDirection(CurrentAngle)
 	Offset = wrap(Offset + (delta * 10), 0, 2)
 	UpdateContacts()
+	Spkr.PlaySound(RadioSpeaker.RadioSound.STATIC, Vol - 15)
 	#queue_redraw()
 
 func UpdateContacts() -> void:
@@ -54,7 +58,12 @@ func UpdateContacts() -> void:
 			continue
 		var RoundedAngle = roundi(rad_to_deg(dif) + 25)
 		var Dist = Controller.global_position.distance_squared_to(g.global_position) / 1000000
-		var Thrust = g.GetShipThrust() / 30
+		var Thrust : float
+		if (g is MapShip):
+			Thrust = g.GetShipThrust() / 30
+		else : if (g is Missile):
+			Thrust = 1
+		
 		if (ContactList.has(RoundedAngle)):
 			ContactList[RoundedAngle] += (1 - Dist) * Thrust
 		else:
@@ -72,6 +81,8 @@ func _on_close_pressed() -> void:
 	Working = false
 
 func OnRadioClicked() -> void:
+	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):
+		return
 	var tw = create_tween()
 	tw.tween_property(SonalVisual, "position", Vector2(-SonalVisual.size.x / 3, SonalVisual.position.y), 0.5)
 	SonalVisual.show()
@@ -82,5 +93,6 @@ func OnRadioClicked() -> void:
 
 func _on_gein_control_range_changed(NewVal: float) -> void:
 	var newoffset = clamp(LineContainer.OffsetAmmount + (-NewVal / 2), 1 ,25)
+	Vol = newoffset
 	LineContainer.OffsetAmmount = newoffset
 	GainLabel.text = "Gain:{0}".format([snapped(newoffset, 0.1)]).replace(".0", "")

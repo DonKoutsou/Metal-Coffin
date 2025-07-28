@@ -29,6 +29,7 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		text.custom_minimum_size = Vector2(18,18)
 		text.texture = g.ItemIcon
 		text.modulate.a = 0.3
+		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 0.3
 		#if (g is UsableItem):
 			#text.self_modulate = g.ItecColor

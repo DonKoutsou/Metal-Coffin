@@ -8,6 +8,7 @@ class_name RadioSpeaker
 @export var L : Light
 
 var SoundsOnCooldown : Dictionary[RadioSound, float]
+var CurrentlyPlayed : Dictionary[RadioSound, DeletableSound]
 
 static var Instance : RadioSpeaker
 
@@ -22,26 +23,29 @@ static func GetInstance() -> RadioSpeaker:
 
 var PlayingSounds : int = 0
 func PlaySound(Sound : RadioSound, Volume : float = 0) -> void:
+	if (CurrentlyPlayed.has(Sound)):
+		CurrentlyPlayed[Sound].volume_db = Volume
 	if (SoundsOnCooldown.has(Sound)):
 		return
-	
-	
-	
+
 	var List = SoundList[Sound]
 	var SoundStream = List.pick_random() as AudioStream
 	var DelSound = DeletableSound.new()
+	CurrentlyPlayed[Sound] = DelSound
 	DelSound.stream = SoundStream
-	SoundsOnCooldown[Sound] = SoundStream.get_length()
+	SoundsOnCooldown[Sound] = SoundStream.get_length() + 0.1
 	DelSound.bus = "MapSounds"
 	DelSound.volume_db = Volume
 	DelSound.autoplay = true
 	add_child(DelSound)
 	PlayingSounds += 1
 	L.Toggle(true, true)
+	
 	await DelSound.finished
 	PlayingSounds -= 1
 	if (PlayingSounds == 0):
 		L.Toggle(false)
+	CurrentlyPlayed.erase(Sound)
 
 func ApplyShake(amm : float = 1) -> void:
 	max_rotation = min(0.1, max_rotation + (0.004 * amm))
@@ -72,6 +76,7 @@ enum RadioSound{
 	TARGET_DEST,
 	APROACHING,
 	STATIC,
+	BEEP,
 }
 
 

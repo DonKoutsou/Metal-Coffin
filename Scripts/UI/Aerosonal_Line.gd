@@ -45,21 +45,23 @@ func _draw() -> void:
 		var amm = 0
 		if (Contacts.has(roundedmapped)):
 			amm = Contacts[roundedmapped]
-			if (amm * OffsetAmmount > BiggestFind):
-				BiggestFind = amm * OffsetAmmount
+			
 			#if (amm * 20 < OffsetAmmount):
 				#amm = 0
 		var magnitude = amm - (mapped_value - roundedmapped)
 		#var l = Helper.UpDownLerp(PointAmm, g)
 		#magnitude *= l
 		#print(mapped_value)
-		
+		var Dif : float = 0
 		var Height = MidPoint
 		if (CurrentOffset == 0):
-			Height += clamp(OffsetAmmount * (magnitude + 1), 0, 20)
+			Dif = clamp(OffsetAmmount * (magnitude + 1), 0, 20)
+			Height += Dif
 		else : if (CurrentOffset == 2):
-			Height -= clamp(OffsetAmmount * (magnitude + 1), 0, 20)
-		
+			Dif = clamp(OffsetAmmount * (magnitude + 1), 0, 20)
+			Height -= Dif
+		if (Dif > BiggestFind and amm > 0):
+			BiggestFind = Dif
 		
 		#Height += Contacts.count(g)
 		#Height += (CurrentOffset2 - 5) * Offset2Ammount
@@ -75,5 +77,5 @@ func _draw() -> void:
 			var v = wrap(roundi(rad_to_deg(CurrentA) - roundedmapped) + 25, 0, 360)
 			draw_string(get_theme_default_font(), Vector2(Step * g, 10), var_to_str(v), HORIZONTAL_ALIGNMENT_FILL, -1, 5, Color(1,0,0))
 	
-	if (BiggestFind > 2):
+	if (BiggestFind > 3 and BiggestFind > OffsetAmmount):
 		Found.emit(BiggestFind)

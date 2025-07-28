@@ -51,7 +51,6 @@ func SetUpStats() -> void:
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	var Hull = _GetStat(STAT_CONST.STATS.HULL).StatBase
-	
 	var Thrust = _GetStat(STAT_CONST.STATS.THRUST).StatBase
 	var Weight = _GetStat(STAT_CONST.STATS.WEIGHT).StatBase
 	var Fp = _GetStat(STAT_CONST.STATS.FIREPOWER).StatBase
