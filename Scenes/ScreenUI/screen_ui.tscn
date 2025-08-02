@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=51 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scripts/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="18_qqmpd"]
 [ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
 [ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="22_ruc6v"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="23_0465a"]
 [ext_resource type="Texture2D" uid="uid://c1a25ki32jj1" path="res://Assets/UIPiecies/Screen/ScreenLong3.png" id="27_j0j1u"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
@@ -507,62 +508,128 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ForecastButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="PanelContainer" type="PanelContainer" parent="NormalScreen"]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 3
 anchor_left = 1.0
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -304.0
-offset_top = -6.0
-offset_right = -285.0
-offset_bottom = 38.0
+anchor_bottom = 1.0
+offset_left = -606.0
+offset_top = -68.0
+offset_right = -278.0
 grow_horizontal = 0
-grow_vertical = 2
-focus_mode = 0
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-ignore_texture_size = true
-stretch_mode = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("22_ruc6v")
 
-[node name="GridButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -304.0
-offset_top = 46.0
-offset_right = -285.0
-offset_bottom = 90.0
-grow_horizontal = 0
-grow_vertical = 2
-focus_mode = 0
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-ignore_texture_size = true
-stretch_mode = 0
+[node name="HBoxContainer" type="HBoxContainer" parent="NormalScreen/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
 
-[node name="SteerButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -304.0
-offset_top = 113.0
-offset_right = -285.0
-offset_bottom = 157.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Forecast"
+
+[node name="ForecastButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 focus_mode = 0
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-ignore_texture_size = true
-stretch_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label2" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Grid"
+
+[node name="GridButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label3" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Steer"
+
+[node name="SteerButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label4" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zoom"
+
+[node name="ZoomLevelButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Team"
+
+[node name="TeamButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
 
 [node name="DroneButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
@@ -916,9 +983,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ScreenCam" type="Camera2D" parent="."]
-process_mode = 1
+process_mode = 3
 z_index = 1
 position = Vector2(640, 360)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 script = ExtResource("35_vmft1")
 GoingDownC = SubResource("Curve_8gyii")
 breath_amplitude = 2.0
@@ -955,14 +1024,14 @@ texture = ExtResource("36_ai3xr")
 texture_scale = 13.0
 
 [node name="AlarmLight2" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
-position = Vector2(0, 2)
+position = Vector2(0, 8.84003)
 energy = 2.0
 range_z_min = 0
 range_layer_min = 2
 range_layer_max = 2
 texture = ExtResource("36_xl4i0")
 offset = Vector2(0, 1000)
-texture_scale = 7.0
+texture_scale = 6.03
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ScreenCam/LightPivot1/LightPivot2"]
 stream = ExtResource("38_ao4ul")
@@ -970,7 +1039,7 @@ volume_db = -20.0
 bus = &"Sounds"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.216142, 0.216142, 0.216142, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
 stream = ExtResource("37_dgs2i")
@@ -1007,9 +1076,11 @@ libraries = {
 [connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
 [connection signal="pressed" from="NormalScreen/ControlledShipReturn" to="." method="Regroup_Pressed"]
 [connection signal="pressed" from="NormalScreen/MarkerPlecement" to="." method="Marker_Editor_Pressed"]
-[connection signal="pressed" from="NormalScreen/ForecastButton" to="." method="_on_forecast_button_pressed"]
-[connection signal="pressed" from="NormalScreen/GridButton" to="." method="_on_grid_button_pressed"]
-[connection signal="pressed" from="NormalScreen/SteerButton" to="." method="_on_steer_button_pressed"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="." method="_on_grid_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4/ZoomLevelButton" to="." method="_on_zoom_level_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5/TeamButton" to="." method="_on_team_button_toggled"]
 [connection signal="pressed" from="NormalScreen/DroneButton" to="." method="Drone_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/MissileButton" to="." method="Missile_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/OpenHatchButton" to="." method="_on_open_hatch_button_pressed"]

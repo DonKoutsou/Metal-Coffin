@@ -260,11 +260,17 @@ func Sim_Speed_Pressed() -> void:
 func Sim_Speed_Released() -> void:
 	SimulationManager.GetInstance().SpeedToggle(false)
 
-func _on_forecast_button_pressed() -> void:
-	EventHandler.OnForecastPressed()
+func _on_forecast_button_toggled(toggled_on: bool) -> void:
+	EventHandler.OnForecastPressed(toggled_on)
 
-func _on_grid_button_pressed() -> void:
-	EventHandler.OnGridPressed()
+func _on_grid_button_toggled(toggled_on: bool) -> void:
+	EventHandler.OnGridPressed(toggled_on)
+
+func _on_zoom_level_button_toggled(toggled_on: bool) -> void:
+	EventHandler.OnZoomTogglePressed(toggled_on)
+
+func _on_team_button_toggled(toggled_on: bool) -> void:
+	EventHandler.OnTeamTogglePressed(toggled_on)
 
 func _on_speed_simulation_toggled(toggled_on: bool) -> void:
 	SimulationManager.GetInstance().SpeedToggle(toggled_on)
@@ -305,6 +311,5 @@ enum ScreenState{
 	NO_SCREEN
 }
 
-
-func _on_steer_button_pressed() -> void:
-	Steer.Toggle()
+func _on_steer_button_toggled(toggled_on: bool) -> void:
+	Steer.Toggle(toggled_on)

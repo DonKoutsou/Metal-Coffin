@@ -8,7 +8,7 @@ var GoDownValue = 1
 var Shake = false
 var GoingDown = false
 var shakestr = 1.5
-
+var OriginalPos : Vector2
 var ShakePos
 func PauseShake(t : bool) -> void:
 	if t and $Shake.playing:
@@ -21,6 +21,7 @@ func PauseShake(t : bool) -> void:
 func _ready() -> void:
 	$Shake.play()
 	PauseShake(true)
+	OriginalPos = position
 
 func EnableShake(amm : float):
 	for g in get_tree().get_nodes_in_group("Shakable"):
@@ -96,6 +97,11 @@ func _physics_process(delta: float) -> void:
 			PauseShake(true)
 		var of = RandomOffset()
 		offset = prev + of
+	
+	
+	#var mpos = get_global_mouse_position()
+	#var offs = mpos - global_position
+	#position = OriginalPos + offs / 5
 
 var prev : Vector2 = Vector2.ZERO
 

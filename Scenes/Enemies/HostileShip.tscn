@@ -12,6 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7v2kq"]
 resource_local_to_scene = true
 shader = ExtResource("5_7v2kq")
+shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 

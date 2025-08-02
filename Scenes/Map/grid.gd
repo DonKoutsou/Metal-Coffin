@@ -13,8 +13,8 @@ var Offset : Vector2
 func _ready() -> void:
 	EventHandler.GridPressed.connect(ToggleGrid)
 
-func ToggleGrid() -> void:
-	visible = !visible
+func ToggleGrid(t : bool) -> void:
+	visible = t
 
 func UpdateOffset(NewOffset : Vector2) -> void:
 	Offset = NewOffset

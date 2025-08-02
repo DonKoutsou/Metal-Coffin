@@ -1,10 +1,13 @@
 extends Control
 
+class_name TeamUI
+
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var CurrentShipPanelScene : PackedScene
 @export var PanelLocation : Control
 
 var currentShip : PlayerDrivenShip
+var Working : bool = true
 
 func _ready() -> void:
 	currentShip = ShipControllerEventH.CurrentControlled
@@ -14,8 +17,15 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	currentShip = NewShip
 	d = 0
 
+func Toggle(t : bool) -> void:
+	Working = t
+	visible = Working
+
 var d = 0.4
 func _physics_process(delta: float) -> void:
+	if (!Working):
+		return
+		
 	d -= delta
 	if d > 0:
 		return

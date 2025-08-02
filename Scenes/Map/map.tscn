@@ -180,6 +180,7 @@ Cloud = NodePath("Clouds")
 Ground = NodePath("Ground")
 WeatherMan = NodePath("../WeatherManager")
 MinZoom = 0.08
+MaxZoom = 15.0
 ClickSound = NodePath("AudioStreamPlayer")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera"]

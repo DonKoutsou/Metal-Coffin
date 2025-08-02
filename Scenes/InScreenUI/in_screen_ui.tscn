@@ -22,7 +22,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
 
-[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual", "UnderstatUI", "OverStatUI", "PopupPlecement", "Screen")]
+[node name="InScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual", "UnderstatUI", "OverStatUI", "PopupPlecement", "Screen", "ZoomUI", "TUI")]
 process_mode = 3
 layer = 0
 follow_viewport_enabled = true
@@ -37,6 +37,8 @@ UnderstatUI = NodePath("UnderStatUI")
 OverStatUI = NodePath("OverStatUI")
 PopupPlecement = NodePath("PopupPlecement")
 Screen = NodePath("Screen")
+ZoomUI = NodePath("ZoomUI")
+TUI = NodePath("CurrentShipText")
 
 [node name="MapMarkerEditor" parent="." instance=ExtResource("4_w862u")]
 
@@ -56,7 +58,7 @@ grow_vertical = 1
 offset_left = 52.0
 offset_right = 53.0
 
-[node name="VBoxContainer2" parent="." instance=ExtResource("21_u111i")]
+[node name="ZoomUI" parent="." instance=ExtResource("21_u111i")]
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 72.0

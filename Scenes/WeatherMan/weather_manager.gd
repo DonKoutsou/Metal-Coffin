@@ -38,8 +38,8 @@ func _ready() -> void:
 	
 	SetWorldBounds(WorldBounds)
 
-func ToggleWeatherMan() -> void:
-	visible = !visible
+func ToggleWeatherMan(t : bool) -> void:
+	visible = t
 
 func SetWorldBounds(WB : Vector2) -> void:
 	WorldBounds = WB

@@ -18,7 +18,8 @@ light_mode = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxnd3"]
 resource_local_to_scene = true
 shader = ExtResource("3_qb3w4")
-shader_parameter/shadow_parallax_amount = 5.0
+shader_parameter/ShipSize = 0.008
+shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
 [sub_resource type="Curve" id="Curve_mktum"]
@@ -81,14 +82,13 @@ Acceleration = NodePath("Aceleration")
 z_index = -2
 material = SubResource("ShaderMaterial_dxnd3")
 rotation = -1.57078
-scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_dxnd3")
 
 [node name="TrailLine" type="Line2D" parent="ColorRect"]
 show_behind_parent = true
-position = Vector2(-1.60877e-05, -1.38889)
+position = Vector2(6.53448e-06, 0)
 rotation = 1.57078
-width = 8.0
+width = 1.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_xnk77")
 round_precision = 1

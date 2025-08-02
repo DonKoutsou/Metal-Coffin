@@ -65,11 +65,18 @@ func Update(delta: float) -> void:
 
 func UpdateProjected(delta: float, paralax : float) -> void:
 	
+	#var base_uv = (global_position / lerp(0.0, 0.008, paralax)) / 2.0 + Vector2(0.5, 0.5)
+	
+	
 	var Cam = ShipCamera.GetInstance()
 	var CamPos = Cam.get_screen_center_position()
+	#var screen_uv = (CamPos / get_viewport_rect().size) # Use your viewport's size to normalize
+	#var offset = (screen_uv - Vector2(0.5, 0.5)) * paralax
+	#var shadow_uv = base_uv - offset
+	#var new_position = (shadow_uv - Vector2(0.5, 0.5)) * lerp(0.0, 0.008, paralax) # Scale back to world space
 	var Zoom = Cam.zoom.x
-	var Offset = (CamPos - global_position) * Zoom * 0.64 * paralax * 0.05
-	Offset.x /= 1.5
+	var Offset = (CamPos - global_position) * Zoom * 0.88 * paralax * 0.05
+	Offset.x /= 1.65
 
 	#global_position - (CamPos - global_position) * Zoom * lerp(0.0, 0.03, Altitude / 10000.0)
 	# Check if the position has changed

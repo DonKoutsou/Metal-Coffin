@@ -14,8 +14,8 @@ class_name MapShip
 
 @export var LowStatsToNotifyAbout : Array[String]
 @export var Cpt : Captain
-@export var TrailLines : Array[TrailLine]
 
+@export var TrailLines : Array[TrailLine]
 @export_group("Nodes")
 @export var RadarShape : Area2D
 @export var ElintShape : Area2D
@@ -296,17 +296,19 @@ func Landed() -> bool:
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
-	ShipSprite.scale = Vector2(lerp(0.05, 0.1, Altitude / 10000.0), lerp(0.05, 0.1, Altitude / 10000.0))
+	#var S = lerp(0.05, 0.1, Altitude / 10000.0)
+	#ShipSprite.scale = Vector2(lerp(0.05, 0.1, Altitude / 10000.0), lerp(0.05, 0.1, Altitude / 10000.0))
 	
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("shadow_parallax_amount", lerp(0.0, ParalaxMulti, Altitude / 10000.0))
+	Mat.set_shader_parameter("ShipSize", lerp(0.001, 0.008, Altitude / 10000.0))
 
 	for g in GetDroneDock().GetDockedShips():
 		g.UpdateAltitude(NewAlt)
 
 func GetShipParalaxPosition(CamPos : Vector2, Zoom : float) -> Vector2:
-	var offset = (CamPos - global_position) * Zoom * lerp(0.0, 0.64, Altitude / 10000.0) * 0.05
-	offset.x /= 1.5
+	var offset = (CamPos - global_position) * Zoom * lerp(0.0, 0.88, Altitude / 10000.0) * 0.05
+	offset.x /= 1.65
 	return global_position - offset
 
 func UpdateELINTTRange(rang : float):

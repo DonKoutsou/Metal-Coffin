@@ -27,6 +27,7 @@ shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mktum"]
 resource_local_to_scene = true
 shader = ExtResource("11_ogc8b")
+shader_parameter/ShipSize = 0.008
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
@@ -93,13 +94,12 @@ mouse_filter = 2
 z_index = -2
 material = SubResource("ShaderMaterial_mktum")
 rotation = -1.5708
-scale = Vector2(0.1, 0.1)
 texture = ExtResource("6_6lhcj")
 
 [node name="TrailLine" type="Line2D" parent="ColorRect"]
 show_behind_parent = true
-position = Vector2(2, -15)
-width = 16.0
+position = Vector2(0.445, -1.655)
+width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
 round_precision = 1
@@ -109,8 +109,8 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="TrailLine2" type="Line2D" parent="ColorRect"]
 show_behind_parent = true
-position = Vector2(-2, -15)
-width = 16.0
+position = Vector2(-0.285, -1.76)
+width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")
 round_precision = 1

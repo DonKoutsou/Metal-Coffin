@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-//uniform float ShipSize : hint_range(0.0, 1.0) = 0.15;
+uniform float ShipSize : hint_range(0.0, 1.0) = 0.08;
 //uniform float shadow_strength : hint_range(0.0, 1.0) = 0.15;
 uniform float shadow_parallax_amount : hint_range(0.0, 5.0) = 0.5;
 
@@ -20,7 +20,7 @@ void fragment() {
     vec2 screen_uv = SCREEN_UV;
 
     // Scale UVs from center
-    vec2 base_uv = (UV - 0.5) / 0.08 + 0.5;
+    vec2 base_uv = (UV - 0.5) / ShipSize + 0.5;
 
     // Parallax offset in screen space (unrotated)e
     vec2 offset = (screen_uv - 0.5) * shadow_parallax_amount;

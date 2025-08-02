@@ -9,6 +9,7 @@ var MaxZoom : float
 var MinZoom : float
 
 var CurrentZoom : float = 0.5
+var Working : bool = true
 
 func _ready() -> void:
 	var map = Map.GetInstance()
@@ -22,12 +23,18 @@ func _ready() -> void:
 	#$HBoxContainer/VBoxContainer/ProgressBar.value = cam.zoom.x - MinZoom
 
 func ZoomUpdated(NewZoom : float) -> void:
+	if (!Working):
+		return
 	CurrentZoom = NewZoom - MinZoom
 	Text.text = var_to_str(snappedf(NewZoom - MinZoom, 0.1)) + "X"
 	queue_redraw()
 	#$HBoxContainer/VBoxContainer/ProgressBar.value = NewZoom - MinZoom
 	#queue_redraw()
-	
+
+func Toggle(t) -> void:
+	Working = t
+	visible = t
+
 @export var Off : float = 1
 func _draw() -> void:
 	var ContainerSize = size.y
