@@ -28,6 +28,17 @@ class_name World
 @export_multiline var PrologueDialgues : Array[String]
 @export_multiline var PrologueDialogues2 : Array[String]
 
+################ WORLD STATE #################
+
+static var WORLDST : WORLDSTATE = WORLDSTATE.NORMAL
+
+enum WORLDSTATE{
+	NORMAL,
+	FIGHT,
+	TRADE,
+	TOWN,
+}
+
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 var SkipStory : bool
@@ -244,7 +255,8 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	var sc = load(FleetSeparationScene).instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
 	GetMap().GetScreenUi().ToggleScreenUI(false)
-	GetMap().GetScreenUi().ShipTradeInProgress = true
+	
+	WORLDST = WORLDSTATE.TRADE
 	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	Ingame_UIManager.GetInstance().AddUI(sc)
 	
@@ -260,19 +272,17 @@ func ShipSeparationFinished() -> void:
 	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
 	GetMap().GetScreenUi().ToggleScreenUI(true)
-	GetMap().GetScreenUi().ShipTradeInProgress = false
+	
+	WORLDST = WORLDSTATE.NORMAL
 
-var InFight : bool = false
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
 func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	#Temp solution to stop fight starting twice
-	if (InFight):
-		return
 	####
-	InFight = true
-	
+	WORLDST = WORLDSTATE.FIGHT
+
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
 		FighingFriendlyUnits.append(g)
@@ -350,7 +360,8 @@ func CardFightDestroyed() -> void:
 	GetMap().GetScreenUi().ToggleScreenUI(true)
 	GetMap().GetScreenUi().ToggleCardFightUI(false)
 	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
-	InFight = false
+	
+	WORLDST = WORLDSTATE.NORMAL
 
 #LANDING
 func OnLandRequested(ControlledShip : MapShip) -> void:
@@ -405,6 +416,8 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 		Inventory.ToggleInventory()
 
 	SimulationManager.GetInstance().TogglePause(true)
+	WORLDST = WORLDSTATE.TOWN
+	
 	var spot = Ship.CurrentPort as MapSpot
 	var PlayedEvent = await Land(spot, Ship)
 	if (PlayedEvent):
@@ -483,6 +496,8 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 			ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
 			
 	TutorialsToShow.clear()
+	
+	WORLDST = WORLDSTATE.NORMAL
 
 func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	var Instigator = ControlledShip

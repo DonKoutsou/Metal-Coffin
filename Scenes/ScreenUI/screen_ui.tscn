@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene load_steps=38 format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scripts/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
@@ -36,256 +36,9 @@
 [ext_resource type="PackedScene" uid="uid://cjbda0fdx38c4" path="res://Scenes/Cards/card_fight_ui.tscn" id="31_wetmy"]
 [ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
-[ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scripts/screen_cam.gd" id="35_vmft1"]
-[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="36_ai3xr"]
-[ext_resource type="Script" uid="uid://30ku4j8kcjjm" path="res://Scripts/UI/light_pivot_1.gd" id="36_wetmy"]
-[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="36_xl4i0"]
-[ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="37_dgs2i"]
-[ext_resource type="AudioStream" uid="uid://bir6mqhkctabs" path="res://Assets/Sounds/Sqeak2.mp3" id="38_ao4ul"]
-[ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="38_e7ydv"]
-[ext_resource type="AudioStream" uid="uid://ciq487snqicgb" path="res://Assets/Sounds/Sqeak1.mp3" id="39_ng3jm"]
-[ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="39_qac3v"]
+[ext_resource type="PackedScene" uid="uid://nt73d42f2o1p" path="res://Scenes/ScreenUI/screen_cam.tscn" id="37_6aw6g"]
 
-[sub_resource type="Curve" id="Curve_8gyii"]
-_limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.766188, 0, 0, Vector2(1, 2), 3.01002, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Animation" id="Animation_bbf4s"]
-resource_name = "Alarm"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.466667, 1.46667, 2.37132, 2.43798, 2.46667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [true, true, false, true, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("CanvasModulate:visible")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.00232568, 0.0333333, 0.366663, 0.433333, 0.733323, 0.999993, 1.3, 1.36667, 1.5, 1.56667, 1.69535),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true, false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.00465136, 0.035659, 1.79535, 1.89535),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [false, true, true, false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = false
-tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.0310076, 0.362013, 0.428673, 0.728673, 0.995343, 1.29535, 1.36202, 1.49535, 1.56202, 1.6907),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true, false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.166667, 1.79535, 1.89535),
-"transitions": PackedFloat32Array(1, 2.43104, 2.43104, 1),
-"update": 0,
-"values": [2.0, 0.18, 0.18, 2.0]
-}
-
-[sub_resource type="Animation" id="Animation_sb2tx"]
-resource_name = "Damage"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 4.96667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.466667, 1.46667, 2.37132, 2.43798, 2.46667, 3.46667, 4.46667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [true, true, false, true, true, true, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.00465136, 0.035659, 3.86667, 3.96667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [false, true, true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0310076, 1.39535, 1.46201, 1.76201, 2.02868, 2.7, 2.76667, 2.9, 2.96667, 3.09535, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true, false, true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.166667, 3.9, 4),
-"transitions": PackedFloat32Array(1, 2.43104, 2.43104, 1),
-"update": 0,
-"values": [2.0, 0.18, 0.18, 2.0]
-}
-
-[sub_resource type="Animation" id="Animation_ad6t0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("CanvasModulate:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8scw"]
-_data = {
-&"Alarm": SubResource("Animation_bbf4s"),
-&"Damage": SubResource("Animation_sb2tx"),
-&"RESET": SubResource("Animation_ad6t0")
-}
-
-[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cam", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI")]
+[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI", "Sonar")]
 process_mode = 1
 layer = 2
 follow_viewport_enabled = true
@@ -295,15 +48,15 @@ MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")
 Thrust = NodePath("NormalScreen/ThrustSlider")
 Steer = NodePath("NormalScreen/ScreenUi/SteeringWheel")
 MissileUI = NodePath("NormalScreen/ScreenUi/Missile Tab")
-LandButton = NodePath("NormalScreen/LandButton")
-HatchButton = NodePath("NormalScreen/OpenHatchButton")
-ShipDockButton = NodePath("NormalScreen/DroneButton")
-RegroupButton = NodePath("NormalScreen/ControlledShipReturn")
-SimulationButton = NodePath("NormalScreen/SimulationButton")
-SpeedSimulationButton = NodePath("NormalScreen/SpeedSimulation")
-MapMarkerButton = NodePath("NormalScreen/MarkerPlecement")
 EventHandler = ExtResource("3_i441f")
 Cam = NodePath("ScreenCam")
+LandButton = NodePath("NormalScreen/LandButton")
+HatchButton = NodePath("NormalScreen/OpenHatchButton")
+ShipDockButton = NodePath("NormalScreen/ShipDockButton")
+RegroupButton = NodePath("NormalScreen/Regroup")
+SimulationButton = NodePath("NormalScreen/SimulationButton")
+SpeedSimulationButton = NodePath("NormalScreen/SpeedSimulation")
+MapMarkerButton = NodePath("NormalScreen/MarkerEditorButton")
 Cables = NodePath("Cables")
 DoorSound = NodePath("DoorSound")
 NormalScreen = NodePath("NormalScreen")
@@ -311,6 +64,7 @@ FullScreenFrame = NodePath("ScreenFrameLong")
 ScreenPanel = NodePath("Panel")
 CardFightUI = NodePath("NormalScreen/CardFightExternalUI")
 TownUI = NodePath("NormalScreen/TownUI")
+Sonar = NodePath("NormalScreen/ScreenUi/Sonar")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ng3jm")
@@ -400,7 +154,7 @@ scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="Control" parent="NormalScreen/ScreenUi" instance=ExtResource("13_ruc6v")]
+[node name="Sonar" parent="NormalScreen/ScreenUi" instance=ExtResource("13_ruc6v")]
 layout_mode = 1
 
 [node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
@@ -466,7 +220,7 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ControlledShipReturn" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="Regroup" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -489,7 +243,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="MarkerPlecement" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="MarkerEditorButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -631,7 +385,27 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
-[node name="DroneButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="VBoxContainer6" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AeroSonar"
+
+[node name="SonarButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="ShipDockButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -982,108 +756,27 @@ offset_bottom = 751.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScreenCam" type="Camera2D" parent="."]
-process_mode = 3
-z_index = 1
+[node name="ScreenCam" parent="." instance=ExtResource("37_6aw6g")]
 position = Vector2(640, 360)
-position_smoothing_enabled = true
-position_smoothing_speed = 8.0
-script = ExtResource("35_vmft1")
-GoingDownC = SubResource("Curve_8gyii")
-breath_amplitude = 2.0
-breath_duration = 5.0
-
-[node name="LightPivot1" type="Node2D" parent="ScreenCam" node_paths=PackedStringArray("SoundPlayer")]
-position = Vector2(6.99998, -1659)
-script = ExtResource("36_wetmy")
-LeftSound = ExtResource("39_ng3jm")
-RightSound = ExtResource("38_ao4ul")
-SoundPlayer = NodePath("LightPivot2/AudioStreamPlayer2D")
-frequency = 6.0
-max_rotation = 0.2
-
-[node name="LightPivot2" type="Node2D" parent="ScreenCam/LightPivot1"]
-position = Vector2(0, 514)
-
-[node name="ScreenLight" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
-visible = false
-color = Color(0.21411, 0.398386, 0.176593, 1)
-energy = 2.71
-blend_mode = 2
-range_layer_max = 2
-texture = ExtResource("36_ai3xr")
-texture_scale = 13.0
-
-[node name="AlarmLight" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
-visible = false
-color = Color(0.851914, 0.187693, 0, 1)
-energy = 1.69
-blend_mode = 2
-range_layer_max = 2
-texture = ExtResource("36_ai3xr")
-texture_scale = 13.0
-
-[node name="AlarmLight2" type="PointLight2D" parent="ScreenCam/LightPivot1/LightPivot2"]
-position = Vector2(0, 8.84003)
-energy = 2.0
-range_z_min = 0
-range_layer_min = 2
-range_layer_max = 2
-texture = ExtResource("36_xl4i0")
-offset = Vector2(0, 1000)
-texture_scale = 6.03
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ScreenCam/LightPivot1/LightPivot2"]
-stream = ExtResource("38_ao4ul")
-volume_db = -20.0
-bus = &"Sounds"
-
-[node name="CanvasModulate" type="CanvasModulate" parent="ScreenCam"]
-color = Color(0.216142, 0.216142, 0.216142, 1)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenCam"]
-stream = ExtResource("37_dgs2i")
-volume_db = -45.0
-pitch_scale = 0.3
-bus = &"MapSounds"
-
-[node name="Boom" type="AudioStreamPlayer" parent="ScreenCam"]
-stream = ExtResource("38_e7ydv")
-bus = &"MapSounds"
-
-[node name="Shake" type="AudioStreamPlayer" parent="ScreenCam"]
-stream = ExtResource("39_qac3v")
-volume_db = 5.0
-bus = &"MapSounds"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenCam"]
-libraries = {
-&"": SubResource("AnimationLibrary_i8scw")
-}
 
 [connection signal="AccelerationChangeEnded" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Changed"]
 [connection signal="SteeringDitChanged" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steering_Direction_Changed"]
 [connection signal="SteeringOffseted" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steer_Offseted"]
-[connection signal="ClearPressed" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="Clear_Lines_Pressed"]
-[connection signal="DrawLine" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="Draw_Line_Pressed"]
-[connection signal="DrawText" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="Draw_Text_Pressed"]
-[connection signal="ExitPressed" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="Exit_Marker_Editor_Pressed"]
-[connection signal="MarkerHorizontalMove" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="MarkerEditorXRangeChanged"]
-[connection signal="MarkerVerticalMove" from="NormalScreen/ScreenUi/MapMarkerControls" to="." method="MarkerEditorYRangeChanged"]
 [connection signal="toggled" from="NormalScreen/SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="pressed" from="NormalScreen/SimulationButton" to="." method="Sim_Pause_Pressed"]
 [connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
-[connection signal="pressed" from="NormalScreen/ControlledShipReturn" to="." method="Regroup_Pressed"]
-[connection signal="pressed" from="NormalScreen/MarkerPlecement" to="." method="Marker_Editor_Pressed"]
+[connection signal="pressed" from="NormalScreen/Regroup" to="." method="Regroup_Pressed"]
+[connection signal="pressed" from="NormalScreen/MarkerEditorButton" to="." method="Marker_Editor_Button_Pressed"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="." method="_on_grid_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4/ZoomLevelButton" to="." method="_on_zoom_level_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5/TeamButton" to="." method="_on_team_button_toggled"]
-[connection signal="pressed" from="NormalScreen/DroneButton" to="." method="Drone_Button_Pressed"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6/SonarButton" to="." method="_on_sonar_button_toggled"]
+[connection signal="pressed" from="NormalScreen/ShipDockButton" to="." method="Ship_Dock_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/MissileButton" to="." method="Missile_Button_Pressed"]
-[connection signal="pressed" from="NormalScreen/OpenHatchButton" to="." method="_on_open_hatch_button_pressed"]
+[connection signal="pressed" from="NormalScreen/OpenHatchButton" to="." method="Open_Hatch_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]

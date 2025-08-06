@@ -9,6 +9,7 @@ class_name ShipMarker
 @export var DetailPanel : Control
 @export var ShipIcon : TextureRect
 @export var VisualContactCountdown : ProgressBar
+@export var Line : Line2D
 @export_group("Resources")
 @export var ResuplyNotificationScene : PackedScene
 @export var NotificationScene : PackedScene
@@ -37,11 +38,14 @@ signal RemoveSelf
 
 func _ready() -> void:
 	DetailPanel.visible = false
-	$Line2D.visible = false
+	Line.visible = false
 
 	VisualContactCountdown.visible = false
 	#set_physics_process(false)
 	UpdateCameraZoom(Map.GetCameraZoom())
+	ShipDetailLabel.add_to_group("MapInfo")
+	ShipIcon.add_to_group("UnmovableMapInfo")
+	add_to_group("ZoomAffected")
 
 func Init(Ship : Node2D) -> void:
 	if (Ship is HostileShip):
@@ -272,7 +276,7 @@ func OnLandingEnded(_Ship : MapShip):
 
 func ToggleShipDetails(T : bool):
 	DetailPanel.visible = T
-	$Line2D.visible = T
+	Line.visible = T
 	#Direction.visible = T
 	#set_physics_process(T)
 
@@ -294,36 +298,36 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 	ShipIcon.scale = (Vector2(0.7,0.7) / NewZoom)
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom
 	UpdateLine(NewZoom)
-	$Line2D.width =  1.5 / NewZoom
+	Line.width =  1.5 / NewZoom
 	CurrentZoom = NewZoom
 	queue_redraw()
 
 func UpdateLine(Zoom : float)-> void:
-	var locp = get_closest_point_on_rect($Control/PanelContainer/ShipName.get_global_rect(), DetailPanel.global_position)
-	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / (Zoom))
+	var locp = get_closest_point_on_rect(ShipDetailLabel.get_global_rect(), DetailPanel.global_position)
+	Line.set_point_position(1, locp - Line.global_position)
+	Line.set_point_position(0, global_position.direction_to(locp) * 30 / (Zoom))
 	
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(roundi(Alt)))
 
-func EnteredScreen() -> void:
-	$Control/PanelContainer/ShipName.add_to_group("MapInfo")
-	ShipIcon.add_to_group("UnmovableMapInfo")
-	add_to_group("ZoomAffected")
-	UpdateCameraZoom(Map.GetCameraZoom())
-
-func ExitedScreen() -> void:
-	$Control/PanelContainer/ShipName.remove_from_group("MapInfo")
-	ShipIcon.remove_from_group("UnmovableMapInfo")
-	remove_from_group("ZoomAffected")
+#func EnteredScreen() -> void:
+	#ShipDetailLabel.add_to_group("MapInfo")
+	#ShipIcon.add_to_group("UnmovableMapInfo")
+	#add_to_group("ZoomAffected")
+	#UpdateCameraZoom(Map.GetCameraZoom())
+#
+#func ExitedScreen() -> void:
+	#ShipDetailLabel.remove_from_group("MapInfo")
+	#ShipIcon.remove_from_group("UnmovableMapInfo")
+	#remove_from_group("ZoomAffected")
 	
 func UpdateSignRotation() -> void:
 	DetailPanel.rotation += 0.01
-	$Control/PanelContainer/ShipName.pivot_offset = $Control/PanelContainer/ShipName.size / 2
+	ShipDetailLabel.pivot_offset = ShipDetailLabel.size / 2
 	$Control/PanelContainer.rotation -= 0.01
-	var locp = get_closest_point_on_rect($Control/PanelContainer/ShipName.get_global_rect(), DetailPanel.global_position)
-	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / (CurrentZoom))
+	var locp = get_closest_point_on_rect(ShipDetailLabel.get_global_rect(), DetailPanel.global_position)
+	Line.set_point_position(1, locp - Line.global_position)
+	Line.set_point_position(0, global_position.direction_to(locp) * 30 / (CurrentZoom))
 
 func OnHostileShipDestroyed() -> void:
 	modulate = Color(1,1,1)
@@ -365,7 +369,7 @@ func ClearSpeed() -> void:
 	ShipSpeedText = ""
 
 func SetSpeedUnknown() -> void:
-	ShipSpeedText = "SPEED⊗"
+	ShipSpeedText = "CALCULATING SPEED"
 
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0

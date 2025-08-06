@@ -43,7 +43,11 @@ func HideInfo() -> void:
 
 func _ready() -> void:
 	Instance = self
+	PlayerCardPlecement.visible = true
 	PlayerCardPlacementInputBlocker.visible = false
+
+func TogglePlayerCardPlacement(t : bool) -> void:
+	PlayerCardPlecement.visible = t
 
 func RegisterFight(Scene : Card_Fight) -> void:
 	FightScene = Scene

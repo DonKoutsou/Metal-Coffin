@@ -1075,6 +1075,8 @@ func OnFightEnded(Won : bool) -> void:
 	var won = EnemyCombatants.size() + EnemyReserves.size() < PlayerCombatants.size() + PlayerReserves.size()
 	CardFightEnded.emit(Survivors, won)
 	
+	ExternalUI.TogglePlayerCardPlacement(false)
+	
 	await End.ContinuePressed
 	
 	CardFightDestroyed.emit()

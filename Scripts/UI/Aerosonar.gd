@@ -71,9 +71,18 @@ func UpdateContacts() -> void:
 			
 	LineContainer.Update(ContactList, Vector2.RIGHT.rotated((-PI / 2) + CurrentAngle).angle() + PI)
 
-
-func _on_close_pressed() -> void:
+func Toggle(t : bool) -> void:
 	var tw = create_tween()
+	if (!t):
+		_on_close_pressed()
+	else:
+		OnRadioClicked()
+
+var tw : Tween
+func _on_close_pressed() -> void:
+	if (is_instance_valid(tw)):
+		tw.kill()
+	tw = create_tween()
 	tw.tween_property(SonalVisual, "position", Vector2(-SonalVisual.size.x, SonalVisual.position.y), 0.5)
 	tw.finished.connect(SonalVisual.hide)
 	set_physics_process(false)
@@ -81,10 +90,13 @@ func _on_close_pressed() -> void:
 	Working = false
 
 func OnRadioClicked() -> void:
+	if (is_instance_valid(tw)):
+		tw.kill()
 	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):
 		return
-	var tw = create_tween()
+	tw = create_tween()
 	tw.tween_property(SonalVisual, "position", Vector2(-SonalVisual.size.x / 3, SonalVisual.position.y), 0.5)
+	tw.finished.connect(SonalVisual.show)
 	SonalVisual.show()
 	set_physics_process(true)
 	Controller.ToggleSonarVisual(true)

@@ -44,6 +44,8 @@ func TogglePause(t : bool) -> void:
 	#get_child(0).TogglePause(t)
 
 func _input(event: InputEvent) -> void:
+	if (World.WORLDST != World.WORLDSTATE.NORMAL):
+		return
 	if (event.is_action_pressed("PauseSim")):
 		TogglePause(!Paused)
 	if (event.is_action_pressed("SpeedSim")):

@@ -41,6 +41,7 @@ signal ForecastToggled(t : bool)
 signal GridPressed(t : bool)
 signal ZoomToggled(t : bool)
 signal TeamToggled(t : bool)
+signal SonarToggled(t : bool)
 #signal AlarmRaised
 
 signal ShipDamaged(DammageAmm : float)
@@ -151,3 +152,6 @@ func OnZoomTogglePressed(t : bool) -> void:
 
 func OnTeamTogglePressed(t : bool) -> void:
 	TeamToggled.emit(t)
+
+func OnSonarPressed(t : bool) -> void:
+	SonarToggled.emit(t)

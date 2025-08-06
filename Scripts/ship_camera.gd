@@ -72,7 +72,7 @@ func UpdateZoom(Zoom : Vector2) -> void:
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
 	ZoomChanged.emit(Zoom.x)
 	_UpdateMapGridVisibility()
-	UpdateCameraPos(Vector2.ZERO)
+	#UpdateCameraPos(Vector2.ZERO)
 
 func ForceZoom(Zoom : Vector2) -> void:
 	prevzoom = Zoom
@@ -163,7 +163,7 @@ func _UpdateMapGridVisibility():
 func UpdateCameraPos(relativeMovement : Vector2):
 	if (FrameTween != null):
 		FrameTween.kill()
-
+	
 	FocusedShip = null
 	
 	var extent = get_viewport_rect().size / 2 / zoom.x
@@ -180,7 +180,7 @@ func UpdateCameraPos(relativeMovement : Vector2):
 
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
-	Grid.UpdateOffset(global_position)
+	Grid.UpdateOffset(position)
 	PositionChanged.emit(position)
 
 #var CloudTime = 0.0

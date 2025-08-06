@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cugmsxkuwcfc4"]
+[gd_scene load_steps=16 format=3 uid="uid://cugmsxkuwcfc4"]
 
 [ext_resource type="Script" uid="uid://bdyul5l380bmt" path="res://Scripts/UI/map_marker_controls.gd" id="1_67mm3"]
 [ext_resource type="Texture2D" uid="uid://b0qmg8dqfxxyf" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_sg83c"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_67mm3"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
 [ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="3_djntk"]
 [ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="4_gq5gp"]
 [ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/Buttons/ButtonMask_Camera 1_FullQuality.png" id="5_ukqae"]
@@ -79,6 +80,7 @@ grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_67mm3")
 TouchStopper = NodePath("Control/Control")
+EventHandler = ExtResource("2_djntk")
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0

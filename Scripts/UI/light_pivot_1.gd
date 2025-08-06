@@ -8,6 +8,7 @@ var StartingScale :Vector2
 @export var LeftSound : AudioStream
 @export var RightSound : AudioStream
 @export var SoundPlayer : AudioStreamPlayer2D
+@export var LightPivot : Node2D
 
 # Variables to control the wiggle effect
 #@export var amplitude: float = 1.0  # Maximum vertical movement
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	var rotation_angle = max_rotation * sin(frequency * 1.2 * time + phase_offset)  # Slightly different frequency
 
 	rotation = rotation_angle
-	$LightPivot2.rotation = lerp($LightPivot2.rotation, rotation, 0.5)
+	LightPivot.rotation = lerp(LightPivot.rotation, rotation, 0.5)
 	
 	# Detect crossing the center and determine direction
 	if abs(rotation_angle) > 0.0005 and sign(previous_rotation) != sign(rotation_angle):

@@ -16,7 +16,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6175k"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="ShipMarker" type="Node2D" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown")]
+[node name="ShipMarker" type="Node2D" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown", "Line")]
 z_index = 1
 texture_filter = 2
 use_parent_material = true
@@ -27,6 +27,7 @@ ShipDetailLabel = NodePath("Control/PanelContainer/ShipName")
 DetailPanel = NodePath("Control")
 ShipIcon = NodePath("Icon")
 VisualContactCountdown = NodePath("Icon/VisualContactCountdown")
+Line = NodePath("Line2D")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
 Icons = {
@@ -34,9 +35,6 @@ Icons = {
 "Ship": ExtResource("7_kn8g7"),
 "Wreck": ExtResource("8_143co")
 }
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(17.1, 16.53)
 
 [node name="Line2D" type="Line2D" parent="."]
 use_parent_material = true
@@ -163,6 +161,4 @@ max_value = 20.0
 value = 10.0
 show_percentage = false
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="EnteredScreen"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ExitedScreen"]
 [connection signal="gui_input" from="Icon" to="." method="_on_icon_gui_input"]

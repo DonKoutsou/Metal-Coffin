@@ -3,41 +3,38 @@ extends Control
 class_name MapMarkerControls
 
 @export var TouchStopper : Control
+@export var EventHandler : UIEventHandler
 
 var Showing = false
-
-signal MarkerHorizontalMove(Amm : float)
-signal MarkerVerticalMove(Amm : float)
-signal ExitPressed
-signal ClearPressed
-signal DrawLine
-signal DrawText
 
 func _ready() -> void:
 	visible = false
 
+
 func _on_y_gas_range_changed(NewVal: float) -> void:
-	MarkerVerticalMove.emit(NewVal)
+	EventHandler.OnMarkerEditorYRangeChanged(NewVal)
 
 
 func _on_x_gas_range_changed(NewVal: float) -> void:
-	MarkerHorizontalMove.emit(NewVal)
-	
+	EventHandler.OnMarkerEditorXRangeChanged(NewVal)
+
 
 func _on_exit_map_marker_pressed() -> void:
-	ExitPressed.emit()
+	EventHandler.OnMarkerEditorToggled(false)
+	TurnOff()
 
 
 func _on_clear_lines_pressed() -> void:
-	ClearPressed.emit()
+	EventHandler.OnMarkerEditorClearLinesPressed()
 
 
 func _on_draw_line_pressed() -> void:
-	DrawLine.emit()
+	EventHandler.OnMarkerEditorDrawLinePressed()
 
 
 func _on_draw_text_pressed() -> void:
-	DrawText.emit()
+	EventHandler.OnMarkerEditorDrawTextPressed()
+
 
 func Toggle() -> void:
 	if ($AnimationPlayer.is_playing()):
@@ -55,11 +52,11 @@ func Toggle() -> void:
 	else:
 		TurnOffPressed()
 
+
 func TurnOffPressed() -> void:
 	TouchStopper.mouse_filter = MOUSE_FILTER_STOP
 	$AnimationPlayer.play("Hide")
 	Showing = false
-
 
 
 func TurnOff() -> void:
