@@ -30,7 +30,7 @@ func UpdateStatCustom(StatVal : float, ItemVar : float, ItemPenalty : float) -> 
 	$ProgressBar.value = StatVal
 	$ProgressBar/ItemBar.value = StatVal + ItemVar
 	$ProgressBar/ItemNegBar.value = StatVal + ItemVar - ItemPenalty
-	var Max = var_to_str($ProgressBar.max_value).replace(".0", "")
+	#var Max = var_to_str($ProgressBar.max_value).replace(".0", "")
 	$HBoxContainer/Label2.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
 
 func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
@@ -41,7 +41,7 @@ func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> v
 	$ProgressBar/ItemBar.value = StatVal + ItemVar
 	$ProgressBar/ItemNegBar.value = StatVal + ItemVar - ItemPenalty
 	#$ProgressBar/ShipBar.value = StatVal + ItemVar + ShipVar
-	var Max = var_to_str($ProgressBar.max_value).replace(".0", "")
+	#var Max = var_to_str($ProgressBar.max_value).replace(".0", "")
 	if (!STAT_CONST.ShouldStatStack(STName)):
 		$HBoxContainer/Label2.text = "{0} {1}".format([var_to_str(max(StatVal, ItemVar) - ItemPenalty).replace(".0", ""), Metric])
 	else:

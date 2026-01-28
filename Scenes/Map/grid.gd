@@ -52,7 +52,6 @@ func _draw() -> void:
 			draw_line(Vector2(XPos, 0), Vector2(XPos, size.y), Color(0,0,0,0.3), max(8, 40 - (ZoomLevel * 80)), true)
 			draw_line(Vector2(0, YPos), Vector2(size.x, YPos), Color(0,0,0,0.3), max(8, 40 - (ZoomLevel * 80)), true)
 			
-			
 			#var text_pos = Vector2(XPos + 30, YPos - 50)  # Slight offset for visibility relative to the grid square
 			#var globpos = global_position + Vector2(XPos, YPos)
 			#var coordinate_text = "X{0}Y{1}".format([roundi(globpos.x) / 1000, roundi(globpos.y)/ 1000])

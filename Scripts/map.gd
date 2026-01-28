@@ -84,8 +84,6 @@ func _exit_tree() -> void:
 		Maplt.wait_to_finish()
 
 
-
-
 func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#find first village and make sure its visible
 	var firstvilage = get_tree().get_nodes_in_group("VILLAGE")[0] as MapSpot
@@ -93,7 +91,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#place player close to first village
 	var pos = firstvilage.global_position
 	pos.y += 500
-	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/CanvasGroup/PlayerShip as MapShip
+	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/PlayerShip as MapShip
 	PlShip.SetShipPosition(pos)
 	#_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)

@@ -22,6 +22,7 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneLaunched", LaunchDrone)
 	DroneDockEventH.connect("DroneRangeChanged", DroneRangeChanged)
 	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
+	
 func AnyDroneNeedsFuel() -> bool:
 	for g in DockedDrones:
 		if (g.Fuel < 50):

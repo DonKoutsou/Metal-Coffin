@@ -10,6 +10,8 @@ class_name PlayerDrivenShip
 var CommingBack = false
 var RegroupTarget : MapShip
 
+var StoredSteer : float = 0.0
+
 var TargetLocations : Array[Vector2]
 
 var SonarTargets : Array[Node2D]
@@ -142,7 +144,13 @@ func AddTargetLocation(pos : Vector2) -> void:
 	TargetLocations.append(pos)
 
 func Steer(Rotation : float) -> void:
-	super(Rotation)
+	StoredSteer += Rotation / 50
+	
+	var Mat = ShipSprite.material as ShaderMaterial
+	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+
+	for g in GetDroneDock().GetDockedShips():
+		g.ForceSteer(rotation)
 	if (TargetLocations.size() > 0):
 		TargetLocations.clear()
 		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
@@ -159,7 +167,7 @@ func _physics_process(delta: float) -> void:
 		traildelta = 0
 	
 	for g in TrailLines:
-		g.UpdateProjected(traildelta, Altitude / 10000.0)
+		g.UpdateProjected(traildelta * SimulationSpeed, Altitude / 10000.0)
 	
 	if (CurrentPort != null):
 		_HandleRestock()
@@ -180,6 +188,10 @@ func _physics_process(delta: float) -> void:
 		if (rotation != directiontoDestination):
 			ForceSteer(lerp_angle(rotation, directiontoDestination, delta * SimulationSpeed))
 	
+	if (StoredSteer != 0):
+		var SteertToAdd = StoredSteer * (delta * SimulationSpeed)
+		StoredSteer -= SteertToAdd
+		ForceSteer(rotation + SteertToAdd)
 	#HandleAcceleration
 	if (AccelChanged):
 		_HandleAccelerationSound()

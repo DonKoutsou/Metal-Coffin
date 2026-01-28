@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://kealc8fl34qi"]
+
+[ext_resource type="Script" uid="uid://ciisw7s8eeoi2" path="res://Scenes/InScreenUI/PauseMenu.gd" id="1_etjji"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_wl1jv"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_m40rn"]
+[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="4_kqklq"]
+[ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="5_qcvvw"]
+[ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="6_1ia1i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
+
+[node name="PauseContainer" type="PanelContainer" unique_id=92918920 node_paths=PackedStringArray("Manual")]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0vqem")
+script = ExtResource("1_etjji")
+Manual = NodePath("FlightManual")
+
+[node name="TextureRect" type="ColorRect" parent="." unique_id=2125711568]
+layout_mode = 2
+color = Color(0.11435, 0.205627, 0.212156, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1269403657]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_wl1jv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=888745063]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="PauseLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1019745852]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_m40rn")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_kqklq")
+theme_override_font_sizes/font_size = 56
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Return" type="Button" parent="PanelContainer/VBoxContainer" unique_id=319486056 groups=["DigitalButtons"]]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = ExtResource("3_m40rn")
+theme_override_font_sizes/font_size = 34
+text = "Return
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=121249064]
+layout_mode = 2
+alignment = 1
+
+[node name="SettingPanel" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1258850840 instance=ExtResource("5_qcvvw")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2092298172]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Save" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=124362621 groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_m40rn")
+theme_override_font_sizes/font_size = 34
+text = "Save Game"
+
+[node name="Flight Manual" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=614392475 groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_m40rn")
+theme_override_font_sizes/font_size = 34
+text = "Flight Manual"
+
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" unique_id=42466374 groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_m40rn")
+theme_override_font_sizes/font_size = 34
+text = "Exit To Main Menu"
+
+[node name="FlightManual" parent="." unique_id=1037505951 instance=ExtResource("6_1ia1i")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

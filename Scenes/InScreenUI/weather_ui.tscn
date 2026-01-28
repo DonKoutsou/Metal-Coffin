@@ -2,7 +2,6 @@
 
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="1_fim28"]
 [ext_resource type="Script" uid="uid://dr3s8ms8g256f" path="res://Scripts/UI/WeatherUI.gd" id="2_s1gtg"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_g8y88"]
 
 [node name="WeatherUI" type="Control" unique_id=1637731237 node_paths=PackedStringArray("VizText", "DangerLabel")]
 layout_mode = 3
@@ -13,7 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_s1gtg")
-ShipControllerEventH = ExtResource("3_g8y88")
 VizText = NodePath("VisibilityText")
 DangerLabel = NodePath("VisibilityText2")
 

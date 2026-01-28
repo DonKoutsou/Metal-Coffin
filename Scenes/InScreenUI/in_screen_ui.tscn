@@ -14,31 +14,50 @@
 [ext_resource type="PackedScene" uid="uid://dncqbpsg58qgq" path="res://Scenes/InScreenUI/weather_ui.tscn" id="11_j7r7e"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
-[ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="18_in80l"]
-[ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/setting_panel.tscn" id="18_rwdyb"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="18_u111i"]
+[ext_resource type="PackedScene" uid="uid://kealc8fl34qi" path="res://Scenes/InScreenUI/pause_container.tscn" id="17_lbfwx"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
 [ext_resource type="PackedScene" uid="uid://dtym0y7dgx7iv" path="res://Scenes/ScreenUI/ZoomLevel.tscn" id="21_u111i"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vqem"]
-
-[node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PauseContainer", "Manual", "UnderstatUI", "OverStatUI", "PopupPlecement", "Screen", "ZoomUI", "TUI")]
+[node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "Screen", "ZoomUI", "TUI")]
 process_mode = 3
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_3cf0e")
 _Inventory = NodePath("UnderStatUI/Inventory")
 _MapMarkerEditor = NodePath("MapMarkerEditor")
-PauseContainer = NodePath("PauseContainer")
+PopupPlecement = NodePath("CanvasLayer/PopupPlecement")
 DiagplScene = ExtResource("2_ehn1p")
-Manual = NodePath("PauseContainer/FlightManual")
 EventHandler = ExtResource("3_b4kau")
 UnderstatUI = NodePath("UnderStatUI")
 OverStatUI = NodePath("OverStatUI")
-PopupPlecement = NodePath("PopupPlecement")
-Screen = NodePath("Screen")
+Screen = NodePath("CanvasLayer/Screen")
 ZoomUI = NodePath("ZoomUI")
 TUI = NodePath("CurrentShipText")
+PauseMenuScene = ExtResource("17_lbfwx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1658011768]
+layer = 4
+follow_viewport_enabled = true
+
+[node name="PopupPlecement" type="Control" parent="CanvasLayer" unique_id=173542646]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Screen" type="ColorRect" parent="CanvasLayer" unique_id=1451653030]
+process_mode = 3
+z_index = 1
+material = ExtResource("19_j7r7e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
 
@@ -153,116 +172,4 @@ theme = ExtResource("9_8iafl")
 theme_override_font_sizes/font_size = 26
 text = "OK"
 
-[node name="PauseContainer" type="PanelContainer" parent="." unique_id=1246722996]
-process_mode = 3
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_0vqem")
-
-[node name="TextureRect" type="ColorRect" parent="PauseContainer" unique_id=246605478]
-layout_mode = 2
-color = Color(0.11435, 0.205627, 0.212156, 1)
-
-[node name="PanelContainer" type="PanelContainer" parent="PauseContainer" unique_id=242861477]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("18_u111i")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseContainer/PanelContainer" unique_id=873952949]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="PauseLabel" type="Label" parent="PauseContainer/PanelContainer/VBoxContainer" unique_id=830710680]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("9_8iafl")
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("10_ljnge")
-theme_override_font_sizes/font_size = 56
-text = "PAUSED"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Return" type="Button" parent="PauseContainer/PanelContainer/VBoxContainer" unique_id=824528905 groups=["DigitalButtons"]]
-visible = false
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme = ExtResource("9_8iafl")
-theme_override_font_sizes/font_size = 34
-text = "Return
-"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PauseContainer/PanelContainer/VBoxContainer" unique_id=894598956]
-layout_mode = 2
-alignment = 1
-
-[node name="SettingPanel" parent="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=670762333 instance=ExtResource("18_rwdyb")]
-layout_mode = 2
-
-[node name="HBoxContainer" type="VBoxContainer" parent="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=810740672]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="Save" type="Button" parent="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=408451275 groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("9_8iafl")
-theme_override_font_sizes/font_size = 34
-text = "Save Game"
-
-[node name="Flight Manual" type="Button" parent="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=961086453 groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("9_8iafl")
-theme_override_font_sizes/font_size = 34
-text = "Flight Manual"
-
-[node name="Exit" type="Button" parent="PauseContainer/PanelContainer/VBoxContainer" unique_id=2065433370 groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("9_8iafl")
-theme_override_font_sizes/font_size = 34
-text = "Exit To Main Menu"
-
-[node name="FlightManual" parent="PauseContainer" unique_id=1641702852 instance=ExtResource("18_in80l")]
-visible = false
-layout_mode = 2
-
-[node name="PopupPlecement" type="Control" parent="." unique_id=173542646]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Screen" type="ColorRect" parent="." unique_id=1451653030]
-process_mode = 3
-z_index = 1
-material = ExtResource("19_j7r7e")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]
-[connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/Return" to="." method="Pause"]
-[connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
-[connection signal="pressed" from="PauseContainer/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

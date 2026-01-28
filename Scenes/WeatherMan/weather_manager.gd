@@ -96,15 +96,15 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 	var rect_aspect_ratio = rect_size.x / rect_size.y
 	var texture_aspect_ratio = texture_size.x / texture_size.y
 
-	var scale = 1.0
+	var Scl = 1.0
 	if texture_aspect_ratio > rect_aspect_ratio:
-		scale = rect_size.x / texture_size.x  # Scale by the width
+		Scl = rect_size.x / texture_size.x  # Scale by the width
 	else:
-		scale = rect_size.y / texture_size.y  # Scale by the height
+		Scl = rect_size.y / texture_size.y  # Scale by the height
 
 	# Scaled dimensions
-	var scaled_width = texture_size.x * scale
-	var scaled_height = texture_size.y * scale
+	var scaled_width = texture_size.x * Scl
+	var scaled_height = texture_size.y * Scl
 
 	# Offsets to center the texture based on the clipping
 	var offset_x = (rect_size.x - scaled_width) / 2.0

@@ -4,22 +4,24 @@ class_name Ingame_UIManager
 @export var _Inventory : InventoryManager
 #@export var _CaptainUI : CaptainUI
 @export var _MapMarkerEditor : MapMarkerEditor
-@export var PauseContainer : Control
+@export var PopupPlecement : Control
 @export var DiagplScene : PackedScene
-@export var Manual : FlightManual
+
 @export var EventHandler : UIEventHandler
 @export var UnderstatUI : Control
 @export var OverStatUI : Control
-@export var PopupPlecement : Control
+
 @export var Screen : Control
 @export var ZoomUI : ZoomLvevel
 @export var TUI : TeamUI
 
+@export_group("Scenes")
+@export var PauseMenuScene : PackedScene
+var PauseContainer : PauseMenu
+
 static var Instance :Ingame_UIManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
-	PauseContainer.visible = false
 	Instance = self
 	EventHandler.connect("PausePressed", Pause)
 	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
@@ -92,26 +94,12 @@ func GetMapMarkerEditor() -> MapMarkerEditor:
 func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused
-	PauseContainer.visible = !paused
-	#EventHandler.OnScreenUIToggled(paused)
-	
-func _on_save_pressed() -> void:
-	if (CageFightWorld.GetInstance() != null):
-		PopUpManager.GetInstance().DoFadeNotif("Can't save in a cagefight", PopupPlecement)
-		return
-	if (get_tree().get_nodes_in_group("CardFight").size() > 0):
-		PopUpManager.GetInstance().DoFadeNotif("Can't save while in a fight", PopupPlecement)
-		return
-	SaveLoadManager.GetInstance().Save()
-	PopUpManager.GetInstance().DoFadeNotif("Save successful", PopupPlecement)
-func _on_exit_pressed() -> void:
-	var world = World.GetInstance()
-	if (world != null):
-		world.EndGame()
-		return
-	var cardworld = CageFightWorld.GetInstance()
-	if (cardworld != null):
-		cardworld.EndGame()
+	if (paused):
+		PauseContainer.queue_free()
+	else:
+		PauseContainer = PauseMenuScene.instantiate()
+		add_child(PauseContainer)
+
 
 func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().EndGame()
@@ -124,6 +112,3 @@ func ToggleCrtEffect(T : bool) -> void:
 
 func SetScreenRes(Res : Vector2) -> void:
 	Screen.material.set_shader_parameter("res", Res)
-
-func _on_flight_manual_pressed() -> void:
-	Manual.visible = true

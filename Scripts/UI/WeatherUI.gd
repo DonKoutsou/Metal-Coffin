@@ -2,32 +2,16 @@ extends Control
 
 class_name WeatherUI
 
-@export var ShipControllerEventH : ShipControllerEventHandler
 @export var VizText : Label
 @export var DangerLabel : Label
 
-var CurrentShip : PlayerDrivenShip
-
-func _ready() -> void:
-	ShipControllerEventH.connect("OnControlledShipChanged", ControlledShipChanged)
-	CurrentShip = ShipControllerEventH.CurrentControlled
-
-func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
-	CurrentShip = NewShip
-
 var d = 0.2
 func _physics_process(delta: float) -> void:
-	if (CurrentShip == null):
-		return
-	
-	var wd = Helper.GetInstance().AngleToDirection(WeatherManage.WindDirection.angle())
+	var wd = Helper.AngleToDirection(WeatherManage.WindDirection.angle())
 	VizText.text = "Wind Direction : {0}\n".format([wd])
 	
-	var vis = WeatherManage.GetVisibilityInPosition(CurrentShip.global_position)
+	var vis = WeatherManage.GetVisibilityInPosition(ShipContoller.ControlledShipPosition)
 	VizText.text += "Visibility : {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])
-	
-	
-	
 	
 	if (vis > 0.6):
 		DangerLabel.visible = false
@@ -40,9 +24,10 @@ func _physics_process(delta: float) -> void:
 func GetTextForVis(Vis : float) -> String:
 	if (Vis > 0.9):
 		return "Clear"
-	if (Vis > 0.7):
+	else: if (Vis > 0.7):
 		return "Dim"
-	return "Low"
+	else:
+		return "Low"
 
 func _on_button_pressed() -> void:
 	ShipCamera.GetInstance().ToggleWeatherMan()

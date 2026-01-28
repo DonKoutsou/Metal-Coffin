@@ -52,11 +52,11 @@ func CallLater(Call : Callable, t : float = 1) -> void:
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout
 
-static func mapvalue(val : float, min : float, max : float) -> float:
-	return min + (max - min) * val
+static func mapvalue(val : float, minimum : float, maximum : float) -> float:
+	return minimum + (maximum - minimum) * val
 
-static func normalize_value(value: float, min: float, max: float) -> float:
-	return (value - min) / (max - min)
+static func normalize_value(value: float, minimum: float, maximum: float) -> float:
+	return (value - minimum) / (maximum - minimum)
 
 static func AngleToDirection(angle: float) -> String:
 	var directions = ["East", "Southeast",  "South", "Southwest", "West", "Northwest", "North","Northeast"]
@@ -90,10 +90,10 @@ static func SmoothLine(L : Array, res : float = 200) -> Array[Vector2]:
 			
 			var newpoint = currentpoint + (direction * (res * g))
 			
-			var newdist = abs(currentpoint.y - newpoint.y)
-			var ydist = abs(currentpoint.y - nextpoint.y)
+			#var newdist = abs(currentpoint.y - newpoint.y)
+			#var ydist = abs(currentpoint.y - nextpoint.y)
 			
-			var d = newdist / ydist
+			#var d = newdist / ydist
 			var s = smoothstep(currentpoint.y, nextpoint.y, newpoint.y)
 			newpoint.y = lerp(currentpoint.y, nextpoint.y, s)
 			newline.append(newpoint)
@@ -124,10 +124,10 @@ static func SmoothLine2(L : Array, res : float = 200) -> Array[Vector2]:
 			
 			var newpoint = currentpoint + (direction * (res * g))
 			
-			var newdist = abs(currentpoint.y - newpoint.y)
-			var ydist = abs(currentpoint.y - nextpoint.y)
+			#var newdist = abs(currentpoint.y - newpoint.y)
+			#var ydist = abs(currentpoint.y - nextpoint.y)
 			
-			var d = newdist / ydist
+			#var d = newdist / ydist
 			var s = smoothstep(currentpoint.y, nextpoint.y, newpoint.y)
 			var s2 = smoothstep(currentpoint.x, nextpoint.x, newpoint.x)
 			newpoint.y = lerp(currentpoint.y, nextpoint.y, s)

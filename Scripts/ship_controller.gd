@@ -11,7 +11,8 @@ var ship_camera: ShipCamera
 
 var AvailableShips : Array[PlayerDrivenShip] = []
 
-var ControlledShip : PlayerDrivenShip
+static var ControlledShip : PlayerDrivenShip
+static var ControlledShipPosition : Vector2
 
 signal FleetSeperationRequested(ControlledShip : PlayerDrivenShip)
 signal LandingRequested(ControlledShip : PlayerDrivenShip)
@@ -39,6 +40,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if (SimulationManager.IsPaused()):
 		return
+	ControlledShipPosition = ControlledShip.global_position
 	if (ControlledShip.StormValue >= 0.9):
 		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
 

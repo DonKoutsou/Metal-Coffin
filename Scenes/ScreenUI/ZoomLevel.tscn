@@ -29,8 +29,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_a2q7o")
 Text = NodePath("PanelContainer/Label")
-MaxStep = 2.0
-Off = 35.0
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=777832042]
 custom_minimum_size = Vector2(50, 0)

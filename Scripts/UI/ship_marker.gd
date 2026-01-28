@@ -31,7 +31,7 @@ var ResuplyNotif : ResuplyNotification
 var CurrentZoom : float
 
 var TargetLocations : Array[Vector2]
-var range : float
+var Fuel_Range : float
 
 signal ShipSelected
 signal RemoveSelf
@@ -59,9 +59,9 @@ func VisualCountountStarted(Value : float) -> void:
 func _draw() -> void:
 	if (TargetLocations.size() == 0):
 		return
-	var distancetotravel : float
+	var distancetotravel : float = 0.0
 	
-	var fontsize = roundi(10 / CurrentZoom)
+	var fontsize = 20.0 / CurrentZoom
 	
 	var LinesToDraw : Array[Array]
 	#TODO fix zoom affecting distance text
@@ -77,7 +77,7 @@ func _draw() -> void:
 		
 		var Col = Color(1,1,1)
 		
-		if (distancetotravel > range):
+		if (distancetotravel > Fuel_Range):
 			Col = (Color(100,0,0))
 		
 		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
@@ -89,7 +89,7 @@ func _draw() -> void:
 		
 		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
 	
-	var canreach = distancetotravel < range
+	var canreach = distancetotravel < Fuel_Range
 	if (!canreach):
 		draw_string(ThemeDB.fallback_font, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach destination", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
 	
@@ -146,24 +146,18 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 			SetTime()
 		else :
 			modulate.a = 0.5
-			var timepast = Clock.GetInstance().GetHoursSince(TimeLastSeen)
+			var timepast = Clock.GetHoursSince(TimeLastSeen)
 			if (timepast > 24):
-				RemoveSelf.emit
+				RemoveSelf.emit()
 			else:
 				UpdateTime(timepast)
 	else:
 		if (ship is PlayerDrivenShip):
 			TargetLocations = ship.TargetLocations
-			range = ship.GetFuelRange()
-			
-			#if (ship.StormValue > 0.9):
-				#var newpos = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
-				#newpos += Vector2(randf_range(50, -50), randf_range(50, -50))
-				#global_position = newpos
-				#UpdateTrajectory(randf_range(PI * 2, PI * -2))
-			#else:
+			Fuel_Range = ship.GetFuelRange()
+
 			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
-			UpdateTrajectory(ship.global_rotation)
+			UpdateTrajectory(ship.global_rotation + ship.StoredSteer)
 				
 			ToggleShipDetails(IsControlled)
 			UpdateSpeed(ship.GetAffectedShipSpeed())
@@ -350,7 +344,7 @@ func ClearTime() -> void:
 	TimeSeenText = ""
 
 func SetTime() -> void:
-	TimeLastSeen = Clock.GetInstance().GetTimeInHours() 
+	TimeLastSeen = Clock.GetTimeInHours() 
 
 func UpdateTime(timepast : float):
 	TimeSeenText = var_to_str(snappedf((timepast) , 0.01)) + "h ago"

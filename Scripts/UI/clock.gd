@@ -25,7 +25,9 @@ func TimePassedInMinutes() -> int:
 	var YearsPassed = CurrentYear - StartingYear
 	var HoursPassed = currentHour - StartingHour
 	var MinPassed = currentMin - StartingMin
-	
+	while YearsPassed > 0:
+		MonthsPassed += 12
+		YearsPassed -= 1
 	while MonthsPassed > 0:
 		DaysPassed += GetDaysInMonth(wrap(StartingMonth + MonthsPassed, 1, 12))
 		MonthsPassed -= 1
