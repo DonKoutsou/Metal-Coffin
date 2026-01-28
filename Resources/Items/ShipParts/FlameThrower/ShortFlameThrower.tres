@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=10 format=3 uid="uid://yvvekkrks7h7"]
+[gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://yvvekkrks7h7"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_2l8m7"]
 [ext_resource type="Resource" uid="uid://b3fntysvgjvac" path="res://Resources/Cards/Barrage/Scorch.tres" id="2_2l8m7"]
@@ -12,15 +12,11 @@
 script = ExtResource("4_tx48s")
 UpgradeName = 3
 UpgradeAmmount = 1.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_sc5qk"]
 script = ExtResource("4_tx48s")
 UpgradeName = 16
 UpgradeAmmount = 10.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -29,12 +25,9 @@ WType = 6
 Upgrades = Array[ExtResource("4_tx48s")]([SubResource("Resource_fmxhr"), SubResource("Resource_sc5qk")])
 UpgradeVersion = ExtResource("4_4fml1")
 UpgradeTime = 600.0
-IsDamaged = false
 PartType = 4
 ItemName = "Flamethrower"
 ItemDesc = "WIP"
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_2l8m7")]([ExtResource("2_2l8m7"), ExtResource("2_2l8m7"), ExtResource("2_2l8m7"), ExtResource("3_4fml1"), ExtResource("3_4fml1"), ExtResource("4_sc5qk"), ExtResource("4_sc5qk")])
-Tier = 0
 CanTransfer = false
 Cost = 60000

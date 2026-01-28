@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6gyf4stqfreh"]
+[gd_scene format=3 uid="uid://b6gyf4stqfreh"]
 
 [ext_resource type="Script" uid="uid://brbba7olbisek" path="res://Resources/Funds/Funds_Stat_container.gd" id="1_vcr36"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_lq3s3"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="3_jxphn"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="3_jxphn"]
 
-[node name="Fund_Container" type="Control" node_paths=PackedStringArray("Sound", "Text")]
+[node name="Fund_Container" type="Control" unique_id=1670082304 node_paths=PackedStringArray("Sound", "Text")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -25,7 +25,7 @@ PlayerWallet = ExtResource("2_lq3s3")
 Sound = NodePath("AudioStreamPlayer2D")
 Text = NodePath("Label")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=116148428]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,7 @@ text = "1214124 ₯"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=372219490]
 stream = ExtResource("3_jxphn")
 volume_db = -80.0
 pitch_scale = 2.0

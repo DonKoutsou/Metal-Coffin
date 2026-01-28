@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dadw4sq24u4ow"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dadw4sq24u4ow"]
 
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/Clouds/clouds.gdshader" id="1_cfcwv"]
 [ext_resource type="Texture2D" uid="uid://d1tknmqoiysie" path="res://Shaders/Clouds/CloudNormal.tres" id="2_kjxov"]
@@ -20,10 +20,10 @@ domain_warp_fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
 width = 1024
+noise = SubResource("FastNoiseLite_n7y6y")
+color_ramp = SubResource("Gradient_l2i77")
 seamless = true
 seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_l2i77")
-noise = SubResource("FastNoiseLite_n7y6y")
 
 [resource]
 shader = ExtResource("1_cfcwv")

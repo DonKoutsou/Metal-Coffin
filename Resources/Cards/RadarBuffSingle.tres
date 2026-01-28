@@ -1,18 +1,15 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://fc28s5epe4ye"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://fc28s5epe4ye"]
 
-[ext_resource type="Texture2D" uid="uid://builhul2oelnc" path="res://Assets/Cards/RadarBuffSingle.png" id="1_deq30"]
+[ext_resource type="Texture2D" uid="uid://ctfxh7fnhdvft" path="res://Assets/Cards/RadarBuffSingle.png" id="1_deq30"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_deq30"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_ohdyu"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_ohdyu"]
 
 [sub_resource type="Resource" id="Resource_fjbey"]
 script = ExtResource("3_ohdyu")
-StatToBuff = 0
 BuffDuration = 2
 BuffAmmount = 1.3
 CanBeUsedOnOther = true
-SelfUse = true
-AOE = false
 TierUpgrade = 1.2
 TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
@@ -21,12 +18,7 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 script = ExtResource("5_ohdyu")
 Icon = ExtResource("1_deq30")
 CardName = "Radar Buff"
-CardDescriptionOverride = ""
 Energy = 3
 AllowDuplicates = true
-Consume = false
 OnUseModules = Array[ExtResource("2_deq30")]([SubResource("Resource_fjbey")])
 Type = 2
-WeapT = 0
-UseConditions = Array[int]([])
-AllowTier = true

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://dd8qwufafqdn8"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://dd8qwufafqdn8"]
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_asnb0"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_jfepl"]

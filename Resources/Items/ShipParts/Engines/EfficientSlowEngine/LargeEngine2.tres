@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=10 format=3 uid="uid://77852w5u88sm"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://77852w5u88sm"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_2vnos"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_cueu2"]
@@ -10,41 +10,31 @@
 script = ExtResource("4_vcqkx")
 UpgradeName = 1
 UpgradeAmmount = 26.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_05yu7"]
 script = ExtResource("4_vcqkx")
 UpgradeName = 2
 UpgradeAmmount = 20.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_lv2ox"]
 script = ExtResource("4_vcqkx")
 UpgradeName = 9
 UpgradeAmmount = 25.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_mybqa"]
 script = ExtResource("4_vcqkx")
 UpgradeName = 16
 UpgradeAmmount = 40.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
 script = ExtResource("5_kft5x")
 Upgrades = Array[ExtResource("4_vcqkx")]([SubResource("Resource_y5vig"), SubResource("Resource_05yu7"), SubResource("Resource_lv2ox"), SubResource("Resource_mybqa")])
 UpgradeTime = 2000.0
-IsDamaged = false
 PartType = 1
 ItemName = "EcoDrive-500 \"Preserve\""
 ItemDesc = "Preserve is the pinnacle of efficient propulsion technology, boasting exceptional fuel conservation for prolonged deployments. While it forgoes high-velocity capabilities, Preserve provides unparalleled range and endurance, making it the engine of choice for missions where resource management is critical."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("2_cueu2")]([ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("3_mybqa"), ExtResource("3_mybqa")])
 Tier = 2
 CanTransfer = false

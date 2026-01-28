@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MissileItem" load_steps=4 format=3 uid="uid://da5wwxg8h0n50"]
+[gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://da5wwxg8h0n50"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_0rlix"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="3_j5y6l"]
@@ -10,11 +10,7 @@ MissileScene = ExtResource("3_j5y6l")
 Distance = 900
 Speed = 1200.0
 Damage = 50
-Type = 0
 ItemName = "Tactical Missile"
 ItemDesc = "High-speed, short-range missile designed for rapid engagements. Ideal for fast-strike tactics and finishing off nearby threats before they can retaliate."
 MaxStackCount = 99
-CardProviding = Array[ExtResource("1_0rlix")]([])
-Tier = 0
-CanTransfer = true
 Cost = 1200

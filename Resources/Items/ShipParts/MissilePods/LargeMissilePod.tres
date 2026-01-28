@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponShipPart" load_steps=9 format=3 uid="uid://b30l72bpalbfy"]
+[gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://b30l72bpalbfy"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_ap6kf"]
 [ext_resource type="Resource" uid="uid://ducl6q2qs8a4d" path="res://Resources/Cards/Missile/Missile.tres" id="2_7xojn"]
@@ -10,23 +10,17 @@
 script = ExtResource("6_g1ywd")
 UpgradeName = 3
 UpgradeAmmount = 3.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_x71d7"]
 script = ExtResource("6_g1ywd")
 UpgradeName = 16
 UpgradeAmmount = 20.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_gvpjr"]
 script = ExtResource("6_g1ywd")
 UpgradeName = 9
 UpgradeAmmount = 15.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -34,11 +28,9 @@ script = ExtResource("3_y540g")
 WType = 2
 Upgrades = Array[ExtResource("6_g1ywd")]([SubResource("Resource_fmxhr"), SubResource("Resource_x71d7"), SubResource("Resource_gvpjr")])
 UpgradeTime = 1600.0
-IsDamaged = false
 PartType = 4
 ItemName = "MP-9 \"Maelstrom\""
 ItemDesc = "Maelstrom represents the pinnacle of missile pod technology, offering advanced targeting algorithms and maximum payload flexibility. Capable of deploying a wide array of specialized missiles, Maelstrom delivers precise strikes against both single and multiple targets, making it indispensable for advanced combat operations."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_ap6kf")]([ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("2_7xojn"), ExtResource("3_x71d7"), ExtResource("3_x71d7"), ExtResource("3_x71d7")])
 Tier = 2
 CanTransfer = false

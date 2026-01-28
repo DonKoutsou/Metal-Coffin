@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://doq7bspt0uqb4"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://doq7bspt0uqb4"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_8cefi"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_n84cu"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_tsi4u"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="2_gfa8b"]
@@ -8,6 +7,4 @@
 [resource]
 script = ExtResource("1_n84cu")
 SpotName = "Moldi"
-EnemyCity = false
 PossibleDrops = Array[ExtResource("1_tsi4u")]([ExtResource("2_gfa8b")])
-Merchendise = Array[ExtResource("1_8cefi")]([])

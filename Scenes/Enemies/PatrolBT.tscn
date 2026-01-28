@@ -1,40 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0gylky44tnsw"]
+[gd_scene format=3 uid="uid://b0gylky44tnsw"]
 
-[ext_resource type="Script" uid="uid://b2gyfw6gh37hb" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_vo0jh"]
-[ext_resource type="Script" uid="uid://duypquk8en6g3" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_ovbxk"]
+[ext_resource type="Script" uid="uid://by87skfk300cb" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_vo0jh"]
+[ext_resource type="Script" uid="uid://cl2xhuxlthbjw" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_ovbxk"]
 [ext_resource type="Script" uid="uid://r532wmd5ansi" path="res://Scripts/BeehaveNodes/NeedsStop.gd" id="4_jdy2q"]
-[ext_resource type="Script" uid="uid://c8jxlsxyeh3y" path="res://addons/beehave/nodes/composites/selector.gd" id="4_mvm57"]
+[ext_resource type="Script" uid="uid://cmocj1bpphkfi" path="res://addons/beehave/nodes/composites/selector.gd" id="4_mvm57"]
 [ext_resource type="Script" uid="uid://c5o5dema4c2sm" path="res://Scripts/BeehaveNodes/FindRefuelSpot_Action.gd" id="9_r0x3t"]
 [ext_resource type="Script" uid="uid://ybncdxyaxqt2" path="res://Scripts/BeehaveNodes/AproachRefuelSpot_Action.gd" id="10_wywiw"]
 [ext_resource type="Script" uid="uid://dr6ay8yryfcr5" path="res://Scripts/BeehaveNodes/Refuel_Action.gd" id="11_lt8fk"]
 [ext_resource type="Script" uid="uid://clyyb6l3bp12a" path="res://Scripts/BeehaveNodes/AproachDestination_Action.gd" id="12_dvl3g"]
 
-[node name="BeehaveTree" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+[node name="BeehaveTree" type="Node" unique_id=295104681 node_paths=PackedStringArray("blackboard", "actor")]
 process_mode = 1
 script = ExtResource("1_vo0jh")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@22225")
+blackboard = NodePath("@Node@19408")
 custom_monitor = true
-actor = NodePath("")
+actor = NodePath("..")
 
-[node name="SelectorComposite" type="Node" parent="."]
+[node name="SelectorComposite" type="Node" parent="." unique_id=17216184]
 script = ExtResource("4_mvm57")
 
-[node name="SequenceComposite" type="Node" parent="SelectorComposite"]
+[node name="SequenceComposite" type="Node" parent="SelectorComposite" unique_id=948033065]
 script = ExtResource("3_ovbxk")
 
-[node name="NeedStopCondition" type="Node" parent="SelectorComposite/SequenceComposite"]
+[node name="NeedStopCondition" type="Node" parent="SelectorComposite/SequenceComposite" unique_id=1653735238]
 script = ExtResource("4_jdy2q")
 metadata/_custom_type_script = "uid://r532wmd5ansi"
 
-[node name="FindRefuelSpotAction" type="Node" parent="SelectorComposite/SequenceComposite"]
+[node name="FindRefuelSpotAction" type="Node" parent="SelectorComposite/SequenceComposite" unique_id=1479848237]
 script = ExtResource("9_r0x3t")
 
-[node name="AproachRefuelSpotAction" type="Node" parent="SelectorComposite/SequenceComposite"]
+[node name="AproachRefuelSpotAction" type="Node" parent="SelectorComposite/SequenceComposite" unique_id=385234429]
 script = ExtResource("10_wywiw")
 
-[node name="RefuelAction" type="Node" parent="SelectorComposite/SequenceComposite"]
+[node name="RefuelAction" type="Node" parent="SelectorComposite/SequenceComposite" unique_id=965787904]
 script = ExtResource("11_lt8fk")
 
-[node name="ApreachDestinationAction" type="Node" parent="SelectorComposite"]
+[node name="ApreachDestinationAction" type="Node" parent="SelectorComposite" unique_id=681375677]
 script = ExtResource("12_dvl3g")

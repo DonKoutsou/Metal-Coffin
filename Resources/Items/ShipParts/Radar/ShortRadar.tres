@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://c6j0y0r05rijg"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://c6j0y0r05rijg"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_bgxiv"]
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="2_fcjh6"]
@@ -13,23 +13,17 @@
 script = ExtResource("6_sy8y8")
 UpgradeName = 6
 UpgradeAmmount = 400.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_nmdsm"]
 script = ExtResource("6_sy8y8")
 UpgradeName = 9
 UpgradeAmmount = 10.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_pqt5y"]
 script = ExtResource("6_sy8y8")
 UpgradeName = 16
 UpgradeAmmount = 20.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -37,12 +31,8 @@ script = ExtResource("5_85il0")
 Upgrades = Array[ExtResource("6_sy8y8")]([SubResource("Resource_fmxhr"), SubResource("Resource_nmdsm"), SubResource("Resource_pqt5y")])
 UpgradeVersion = ExtResource("4_f476b")
 UpgradeTime = 1200.0
-IsDamaged = false
 PartType = 2
 ItemName = "RA-20"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_bgxiv")]([ExtResource("2_fcjh6"), ExtResource("3_y4qj5"), ExtResource("4_2yc6c"), ExtResource("4_2yc6c"), ExtResource("5_pqt5y"), ExtResource("5_pqt5y")])
-Tier = 0
-CanTransfer = true
 Cost = 120000

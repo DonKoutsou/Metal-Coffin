@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldviewQuestion" load_steps=2 format=3 uid="uid://btbe6q2hdw557"]
+[gd_resource type="Resource" script_class="WorldviewQuestion" format=3 uid="uid://btbe6q2hdw557"]
 
 [ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="1_ljuem"]
 

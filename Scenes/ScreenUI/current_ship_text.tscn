@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://wmmp1fq7nbhf"]
+[gd_scene format=3 uid="uid://wmmp1fq7nbhf"]
 
 [ext_resource type="Script" uid="uid://cf7you43vrtlg" path="res://Scripts/UI/current_ship_text.gd" id="2_88xau"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_8xbql"]
 [ext_resource type="PackedScene" uid="uid://df70pkcnq556g" path="res://Scenes/ScreenUI/CurentShipPanel.tscn" id="3_74j5h"]
 
-[node name="CurrentShipText" type="Control" node_paths=PackedStringArray("PanelLocation")]
+[node name="CurrentShipText" type="Control" unique_id=1294112950 node_paths=PackedStringArray("PanelLocation")]
 layout_mode = 3
 anchors_preset = 11
 anchor_left = 1.0
@@ -18,7 +18,7 @@ ShipControllerEventH = ExtResource("3_8xbql")
 CurrentShipPanelScene = ExtResource("3_74j5h")
 PanelLocation = NodePath("VBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=551071895]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=13 format=3 uid="uid://732b0m15lc18"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://732b0m15lc18"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_bifgn"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_trv85"]
@@ -13,30 +13,22 @@
 script = ExtResource("6_hho6w")
 UpgradeName = 1
 UpgradeAmmount = 12.5
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_05yu7"]
 script = ExtResource("6_hho6w")
 UpgradeName = 2
 UpgradeAmmount = 30.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_ugp5x"]
 script = ExtResource("6_hho6w")
 UpgradeName = 9
 UpgradeAmmount = 80.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_413pk"]
 script = ExtResource("6_hho6w")
 UpgradeName = 16
 UpgradeAmmount = 35.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -44,12 +36,9 @@ script = ExtResource("2_w2xra")
 Upgrades = Array[ExtResource("6_hho6w")]([SubResource("Resource_y5vig"), SubResource("Resource_05yu7"), SubResource("Resource_ugp5x"), SubResource("Resource_413pk")])
 UpgradeVersion = ExtResource("4_adnd2")
 UpgradeTime = 1000.0
-IsDamaged = false
 PartType = 1
 ItemName = "EN-100"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("2_trv85")]([ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("3_413pk"), ExtResource("3_413pk"), ExtResource("4_ugp5x"), ExtResource("4_ugp5x"), ExtResource("5_p1uix")])
-Tier = 0
 CanTransfer = false
 Cost = 120000

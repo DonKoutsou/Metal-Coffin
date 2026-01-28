@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cg0iuyn66iwk3"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://cg0iuyn66iwk3"]
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_gxos6"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_dl81w"]
@@ -7,6 +7,5 @@
 [resource]
 script = ExtResource("2_dl81w")
 SpotName = "Koptala"
-Region = 0
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_gxos6")]([ExtResource("3_kbnug")])

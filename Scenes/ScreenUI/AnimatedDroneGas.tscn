@@ -1,27 +1,27 @@
-[gd_scene load_steps=24 format=3 uid="uid://ckhssy2ej85mq"]
+[gd_scene format=3 uid="uid://ckhssy2ej85mq"]
 
-[ext_resource type="Texture2D" uid="uid://csx7t2eglno2i" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1.png" id="1_dv1jt"]
-[ext_resource type="Texture2D" uid="uid://dpdtscernry21" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_001.png" id="2_847b5"]
-[ext_resource type="Texture2D" uid="uid://j23s8g4wpxb0" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_002.png" id="3_48mob"]
-[ext_resource type="Texture2D" uid="uid://dh1irjtwh0n57" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_003.png" id="4_lyrsm"]
-[ext_resource type="Texture2D" uid="uid://b646gx2bnq4wo" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_004.png" id="5_5k2a6"]
-[ext_resource type="Texture2D" uid="uid://dm3srayb8uh2w" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_005.png" id="6_gvpts"]
-[ext_resource type="Texture2D" uid="uid://chsf28sr6fngb" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_006.png" id="7_k4ggg"]
-[ext_resource type="Texture2D" uid="uid://ch4vsxlpuj52n" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_007.png" id="8_icm5g"]
-[ext_resource type="Texture2D" uid="uid://b4dfnhkljhnpc" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_008.png" id="9_ghfdq"]
-[ext_resource type="Texture2D" uid="uid://brgtutcdnl6t" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_009.png" id="10_bgi6n"]
-[ext_resource type="Texture2D" uid="uid://x23so8eplxlg" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_010.png" id="11_quqmp"]
-[ext_resource type="Texture2D" uid="uid://c448sbpj5ay2p" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_011.png" id="12_vfb4a"]
-[ext_resource type="Texture2D" uid="uid://d1lfdg1txa058" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_012.png" id="13_e1l1m"]
-[ext_resource type="Texture2D" uid="uid://c0j4pdmjl38kq" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_013.png" id="14_gnsnm"]
-[ext_resource type="Texture2D" uid="uid://dt2ub46gvcwfp" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_014.png" id="15_cosx5"]
-[ext_resource type="Texture2D" uid="uid://domexrkjnb6ye" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_015.png" id="16_54n4s"]
-[ext_resource type="Texture2D" uid="uid://bu3h5wfwo8iqu" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_016.png" id="17_cuul0"]
-[ext_resource type="Texture2D" uid="uid://di7s7gbaldbrb" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_017.png" id="18_t6y3d"]
-[ext_resource type="Texture2D" uid="uid://bayeskgot2rr1" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_018.png" id="19_jtyie"]
-[ext_resource type="Texture2D" uid="uid://b1uos50fmh2da" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_019.png" id="20_lod21"]
+[ext_resource type="Texture2D" uid="uid://cuwj2brayao0i" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1.png" id="1_dv1jt"]
+[ext_resource type="Texture2D" uid="uid://b4kfqnr71ltph" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_001.png" id="2_847b5"]
+[ext_resource type="Texture2D" uid="uid://dynhp3sftgr3e" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_002.png" id="3_48mob"]
+[ext_resource type="Texture2D" uid="uid://b4fxm467ncgow" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_003.png" id="4_lyrsm"]
+[ext_resource type="Texture2D" uid="uid://0x2e0tmghs23" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_004.png" id="5_5k2a6"]
+[ext_resource type="Texture2D" uid="uid://2m1oiu8dgrlu" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_005.png" id="6_gvpts"]
+[ext_resource type="Texture2D" uid="uid://dc6ducxas8mjc" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_006.png" id="7_k4ggg"]
+[ext_resource type="Texture2D" uid="uid://dtthgh5g10mu6" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_007.png" id="8_icm5g"]
+[ext_resource type="Texture2D" uid="uid://cklq6jjv0awy1" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_008.png" id="9_ghfdq"]
+[ext_resource type="Texture2D" uid="uid://c1or46yckrp0n" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_009.png" id="10_bgi6n"]
+[ext_resource type="Texture2D" uid="uid://bh8tmfg65te5m" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_010.png" id="11_quqmp"]
+[ext_resource type="Texture2D" uid="uid://0yumfgr7b4nf" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_011.png" id="12_vfb4a"]
+[ext_resource type="Texture2D" uid="uid://cv7kycuy8fsmd" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_012.png" id="13_e1l1m"]
+[ext_resource type="Texture2D" uid="uid://cra8kf20gpsyv" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_013.png" id="14_gnsnm"]
+[ext_resource type="Texture2D" uid="uid://bpqf5go3t8158" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_014.png" id="15_cosx5"]
+[ext_resource type="Texture2D" uid="uid://dspnyplvx6tye" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_015.png" id="16_54n4s"]
+[ext_resource type="Texture2D" uid="uid://bgi51ikp7nkv1" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_016.png" id="17_cuul0"]
+[ext_resource type="Texture2D" uid="uid://beml322du5nli" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_017.png" id="18_t6y3d"]
+[ext_resource type="Texture2D" uid="uid://b0pe73rdu6e86" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_018.png" id="19_jtyie"]
+[ext_resource type="Texture2D" uid="uid://cj2x4bu14as58" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_019.png" id="20_lod21"]
 [ext_resource type="Script" uid="uid://byieey8mlbces" path="res://Scripts/UI/animated_drone_gas.gd" id="21_2eusn"]
-[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="22_mtsvb"]
+[ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="22_mtsvb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8cr6m"]
 animations = [{
@@ -91,7 +91,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="DroneGas" type="AnimatedSprite2D"]
+[node name="DroneGas" type="AnimatedSprite2D" unique_id=456827188]
 position = Vector2(567, 332)
 scale = Vector2(0.42, 0.42)
 sprite_frames = SubResource("SpriteFrames_8cr6m")
@@ -99,7 +99,7 @@ frame = 3
 frame_progress = 0.736569
 script = ExtResource("21_2eusn")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1083185122]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -113,7 +113,7 @@ offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1894735125]
 stream = ExtResource("22_mtsvb")
 volume_db = -15.0
 pitch_scale = 1.03

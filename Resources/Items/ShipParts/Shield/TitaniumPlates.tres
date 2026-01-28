@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://yxrblna0s1bo"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://yxrblna0s1bo"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_pwfb6"]
 [ext_resource type="Resource" uid="uid://bc28324vb6uij" path="res://Resources/Cards/ArmorShed.tres" id="2_44fvt"]
@@ -12,23 +12,18 @@
 script = ExtResource("5_kfr6a")
 UpgradeName = 4
 UpgradeAmmount = 50.0
-PenaltyAmmount = 0.0
 CurrentValue = 100.0
 
 [sub_resource type="Resource" id="Resource_44fvt"]
 script = ExtResource("5_kfr6a")
 UpgradeName = 16
 UpgradeAmmount = 5.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_4chja"]
 script = ExtResource("5_kfr6a")
 UpgradeName = 9
 UpgradeAmmount = 20.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -36,12 +31,9 @@ script = ExtResource("6_sxy5e")
 Upgrades = Array[ExtResource("5_kfr6a")]([SubResource("Resource_x1aim"), SubResource("Resource_44fvt"), SubResource("Resource_4chja")])
 UpgradeVersion = ExtResource("2_tqj0t")
 UpgradeTime = 120.0
-IsDamaged = false
 PartType = 5
 ItemName = "Titanium Plates"
 ItemDesc = "WIP"
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_pwfb6")]([ExtResource("2_44fvt"), ExtResource("2_44fvt"), ExtResource("3_44fvt"), ExtResource("3_44fvt"), ExtResource("4_4chja")])
-Tier = 0
 CanTransfer = false
 Cost = 50000

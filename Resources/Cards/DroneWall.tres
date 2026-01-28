@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://c46f6ph2spg1r"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c46f6ph2spg1r"]
 
-[ext_resource type="Texture2D" uid="uid://d2n56kikurw0r" path="res://Assets/Cards/DroneWall.png" id="1_yi4ne"]
+[ext_resource type="Texture2D" uid="uid://boj58ktakmajr" path="res://Assets/Cards/DroneWall.png" id="1_yi4ne"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_wgxcq"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_diejq"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_pcr61"]
@@ -10,9 +10,6 @@ script = ExtResource("3_diejq")
 StatToBuff = 2
 BuffDuration = 2
 BuffAmmount = 0.2
-CanBeUsedOnOther = false
-SelfUse = true
-AOE = false
 TierUpgrade = 1.2
 TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
@@ -21,12 +18,8 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 script = ExtResource("5_pcr61")
 Icon = ExtResource("1_yi4ne")
 CardName = "Drone Wall"
-CardDescriptionOverride = ""
 Energy = 2
 AllowDuplicates = true
-Consume = false
 OnUseModules = Array[ExtResource("2_wgxcq")]([SubResource("Resource_yi4ne")])
 Type = 1
 WeapT = 5
-UseConditions = Array[int]([])
-AllowTier = true

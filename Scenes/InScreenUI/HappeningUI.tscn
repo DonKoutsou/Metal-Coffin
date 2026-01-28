@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkl2a6ey2cxpg"]
+[gd_scene format=3 uid="uid://bkl2a6ey2cxpg"]
 
 [ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://Scripts/MapSpot/Happenings/HappeningInstance.gd" id="2_nimax"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="4_6q6vd"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_gqhsy"]
-[ext_resource type="Texture2D" uid="uid://b680xs4rw5ro1" path="res://Assets/CaptainPortraits/Priest.png" id="4_hqvhd"]
+[ext_resource type="Texture2D" uid="uid://dmnqi5wuws6wi" path="res://Assets/CaptainPortraits/Priest.png" id="4_hqvhd"]
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Equalizer.tscn" id="5_fjydm"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
-[ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="6_6q6vd"]
+[ext_resource type="AudioStream" uid="uid://b5e6m5xcjj8wb" path="res://Assets/Sounds/TextSound.mp3" id="6_6q6vd"]
 [ext_resource type="PackedScene" uid="uid://biiakq2r2vasn" path="res://Scenes/WorldviewUI.tscn" id="8_gqhsy"]
 
 [sub_resource type="Environment" id="Environment_vaeb3"]
@@ -20,7 +20,7 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_kvmkw"]
 environment = SubResource("Environment_vaeb3")
 
-[node name="HappeningInstance" type="Control" node_paths=PackedStringArray("OptionParent", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "DiagButtons", "NextDialogueButton", "SkipDialogueButton", "Line", "Amp") groups=["Happening"]]
+[node name="HappeningInstance" type="Control" unique_id=1355977286 node_paths=PackedStringArray("OptionParent", "HappeningText", "HappeningBackgroundTexture", "ProgBar", "DiagButtons", "NextDialogueButton", "SkipDialogueButton", "Line", "Amp") groups=["Happening"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,7 +39,7 @@ TextFloater = ExtResource("4_6q6vd")
 Line = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer/LineDrawer")
 Amp = NodePath("VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer/Control")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1517454354]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=932574381]
 disable_3d = true
 own_world_3d = true
 world_3d = SubResource("World3D_kvmkw")
@@ -56,7 +56,7 @@ handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=1295708852]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,17 +68,17 @@ offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1400518156]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer2"]
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer2" unique_id=1408134854]
 clip_contents = true
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/Control"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/Control" unique_id=1237515156]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,10 +88,10 @@ grow_vertical = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = ExtResource("4_gqhsy")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer" unique_id=751429611]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3" unique_id=1585824409]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 2
 size_flags_vertical = 3
@@ -99,12 +99,12 @@ texture = ExtResource("4_hqvhd")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3" unique_id=486485597]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="LineDrawer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("5_ylhno")]
+[node name="LineDrawer" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer" unique_id=277357346 instance=ExtResource("5_ylhno")]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -115,24 +115,24 @@ OrientationUpDown = false
 frequency = 10.0
 amplitude = 27.745
 
-[node name="Control" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("5_fjydm")]
+[node name="Control" parent="VBoxContainer/HBoxContainer2/Control/PanelContainer/VBoxContainer3/VBoxContainer" unique_id=940430060 instance=ExtResource("5_fjydm")]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2" unique_id=459015728]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2"]
+[node name="Control2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=914227486]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2" unique_id=621816629]
 layout_mode = 2
 
-[node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer" unique_id=874813156]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_vertical = 3
@@ -149,35 +149,35 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer" unique_id=21693268]
 layout_mode = 2
 max_value = 3.0
 value = 3.0
 show_percentage = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer" unique_id=1471844406]
 layout_mode = 2
 
-[node name="NextDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+[node name="NextDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer" unique_id=646246649 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Next"
 expand_icon = true
 
-[node name="SkipDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer" groups=["DigitalButtons"]]
+[node name="SkipDiag" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer" unique_id=2124686601 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Skip"
 expand_icon = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=1708432337]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Option1" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=1235719916 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
@@ -187,37 +187,37 @@ faw"
 autowrap_mode = 2
 expand_icon = true
 
-[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Option2" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=2131187080 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Option 1"
 autowrap_mode = 2
 
-[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Option3" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=626496877 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Option 1"
 autowrap_mode = 2
 
-[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Option4" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=93852581 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Option 1"
 autowrap_mode = 2
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=2092235453]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1259341533]
 stream = ExtResource("6_6q6vd")
 volume_db = -5.0
 bus = &"Sounds"
 
-[node name="WorldviewUI" parent="." instance=ExtResource("8_gqhsy")]
+[node name="WorldviewUI" parent="." unique_id=761672627 instance=ExtResource("8_gqhsy")]
 layout_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2/VBoxContainer/HBoxContainer/NextDiag" to="." method="_on_next_diag_pressed"]

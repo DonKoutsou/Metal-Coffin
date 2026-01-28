@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://yxu4yok1d0e"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://yxu4yok1d0e"]
 
-[ext_resource type="Texture2D" uid="uid://dh6wd06k2k65r" path="res://Assets/Cards/Discharge.png" id="1_qs1r5"]
+[ext_resource type="Texture2D" uid="uid://cnpth8t3bt4tq" path="res://Assets/Cards/Discharge.png" id="1_qs1r5"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_48pk0"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_jag0f"]
 [ext_resource type="Script" uid="uid://kct7kkjke6ao" path="res://Scripts/CardFight/EnergyOffensiveCardModule.gd" id="4_j4ns4"]
@@ -10,27 +10,15 @@
 script = ExtResource("4_j4ns4")
 AtackType = 2
 Damage = 4.0
-ScaleStat = Array[ExtResource("3_jag0f")]([])
-CauseFile = false
-OnAtackModules = Array[ExtResource("2_48pk0")]([])
-OnSuccesfullAtackModules = Array[ExtResource("2_48pk0")]([])
-SkipShield = false
 AOE = true
 TierUpgrade = 1.2
-TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://kct7kkjke6ao"
 
 [resource]
 script = ExtResource("6_784wd")
 Icon = ExtResource("1_qs1r5")
 CardName = "Discharge"
-CardDescriptionOverride = ""
-Energy = 0
 AllowDuplicates = true
-Consume = false
-OnUseModules = Array[ExtResource("2_48pk0")]([])
 OnPerformModule = SubResource("Resource_1x6pr")
-Type = 0
 WeapT = 3
 UseConditions = Array[int]([2])
-AllowTier = true

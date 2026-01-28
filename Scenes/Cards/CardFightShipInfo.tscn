@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://6hcd2pi6mky3"]
+[gd_scene format=3 uid="uid://6hcd2pi6mky3"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_1k1nx"]
-[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_67igm"]
+[ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="1_67igm"]
 [ext_resource type="Script" uid="uid://c3h40cgun3it3" path="res://Scripts/CardFight/card_fight_ship_info.gd" id="1_dmg4y"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="2_yr62a"]
+[ext_resource type="Texture2D" uid="uid://clj76ltt2catq" path="res://Assets/ShipTextures/Tanker2.png" id="2_yr62a"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_yr62a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmg4y"]
@@ -12,7 +12,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFightShipInfo" type="PanelContainer" node_paths=PackedStringArray("CaptainPortrait", "ShipIcon", "ShipName", "ShipDesc", "CardPlecement")]
+[node name="CardFightShipInfo" type="PanelContainer" unique_id=1034096047 node_paths=PackedStringArray("CaptainPortrait", "ShipIcon", "ShipName", "ShipDesc", "CardPlecement")]
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,57 +28,57 @@ ShipDesc = NodePath("VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Ca
 CardPlecement = NodePath("VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer/Cards/HBoxContainer")
 CardScene = ExtResource("3_yr62a")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=779747913]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1310818611]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Captain Name : Amol"
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1611970543]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1672286776]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_1k1nx")
 
-[node name="CapPortrait" type="TextureRect" parent="VBoxContainer/HBoxContainer/PanelContainer2"]
+[node name="CapPortrait" type="TextureRect" parent="VBoxContainer/HBoxContainer/PanelContainer2" unique_id=1320136214]
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("1_67igm")
 expand_mode = 2
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer2" unique_id=187930797]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Captain Portrait"
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=256619027]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_1k1nx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer" unique_id=442606474]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=909709604]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Captain Bio"
 
-[node name="CapBio" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="CapBio" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=554833453]
 layout_mode = 2
 text = "Bount Hunter Strong Atack, strong def"
 autowrap_mode = 2
 
-[node name="ShipIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="ShipIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=204152448]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -86,21 +86,21 @@ size_flags_vertical = 6
 texture = ExtResource("2_yr62a")
 expand_mode = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=20349211]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("1_1k1nx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer3" unique_id=584881810]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer" unique_id=158832629]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Cards"
 
-[node name="Cards" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer"]
+[node name="Cards" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer" unique_id=1528283434]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -108,13 +108,13 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_dmg4y")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer/Cards"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer/Cards" unique_id=1471640528]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_override_constants/separation = -15
 
-[node name="Button" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=752004356 groups=["DigitalButtons"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "CLOSE"

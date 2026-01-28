@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dw6dy4uoxiju5"]
+[gd_scene format=3 uid="uid://dw6dy4uoxiju5"]
 
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_vcb2a"]
-[ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_b7hnn"]
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="2_n0jph"]
-[ext_resource type="Texture2D" uid="uid://cjf0vmhy4dani" path="res://Assets/TownBackgrounds/VillageLayer-1.png" id="3_vcb2a"]
-[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="4_daw5n"]
-[ext_resource type="Texture2D" uid="uid://dnov545306pe8" path="res://Assets/TownBackgrounds/VillageLayer0.png" id="4_vcb2a"]
-[ext_resource type="Texture2D" uid="uid://b1bmabo625ov0" path="res://Assets/TownBackgrounds/VillageLayer1.png" id="5_vcb2a"]
-[ext_resource type="Texture2D" uid="uid://bxhipk08h52xs" path="res://Assets/TownBackgrounds/VillageLayer2.png" id="7_vcb2a"]
+[ext_resource type="AudioStream" uid="uid://ufp2v886p70v" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_b7hnn"]
+[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="2_n0jph"]
+[ext_resource type="Texture2D" uid="uid://bwhrn4wnfr4vs" path="res://Assets/TownBackgrounds/VillageLayer-1.png" id="3_vcb2a"]
+[ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="4_daw5n"]
+[ext_resource type="Texture2D" uid="uid://cn5amkftj7nwh" path="res://Assets/TownBackgrounds/VillageLayer0.png" id="4_vcb2a"]
+[ext_resource type="Texture2D" uid="uid://c2yrr7g6s64b" path="res://Assets/TownBackgrounds/VillageLayer1.png" id="5_vcb2a"]
+[ext_resource type="Texture2D" uid="uid://n0us6ah5crfx" path="res://Assets/TownBackgrounds/VillageLayer2.png" id="7_vcb2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -42,7 +42,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.1
 
-[node name="TownBackground" type="ParallaxBackground" node_paths=PackedStringArray("Camera")]
+[node name="TownBackground" type="ParallaxBackground" unique_id=832065722 node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_vcb2a")
 LimitTop = 1920.0
 LimitSide = 300.0
@@ -54,12 +54,12 @@ LocationPositions = Dictionary[int, NodePath]({
 3: NodePath("ParallaxLayer3/Parallax2D/Repair")
 })
 
-[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
+[node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=1395285480]
 stream = ExtResource("2_b7hnn")
 autoplay = true
 bus = &"Sounds"
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=83605514]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -67,21 +67,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gf58y")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="." unique_id=610806351]
 motion_scale = Vector2(0.5, 0.5)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer" unique_id=141873960]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D" unique_id=303085301]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("3_vcb2a")
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="." unique_id=1581780658]
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4" unique_id=1329174425]
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D" unique_id=1357514322]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(1650, -18)
 amount = 20
@@ -95,22 +95,22 @@ visibility_rect = Rect2(-1920, 0, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D" unique_id=1297006715]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("4_vcb2a")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="." unique_id=713381755]
 motion_scale = Vector2(1.5, 1.5)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2" unique_id=1485653372]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D" unique_id=2090989880]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("5_vcb2a")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D" unique_id=241672069]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(1650, 99)
 amount = 20
@@ -124,7 +124,7 @@ visibility_rect = Rect2(-1920, -200, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D" unique_id=750292094]
 position = Vector2(1650, 316)
 amount = 40
 texture = ExtResource("2_n0jph")
@@ -135,40 +135,40 @@ visibility_rect = Rect2(-1920, -400, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gf58y")
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="." unique_id=1009742261]
 motion_scale = Vector2(2, 2)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3" unique_id=1263254727]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D" unique_id=1697576910]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("7_vcb2a")
 
-[node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=483534151]
 position = Vector2(453, 418)
 
-[node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop"]
+[node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop" unique_id=1999300657]
 position = Vector2(174, 196)
 
-[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=240947102]
 position = Vector2(870, 452)
 
-[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair"]
+[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair" unique_id=1734065363]
 position = Vector2(-60, 162)
 
-[node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=1871388674]
 position = Vector2(109, 452)
 
-[node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel"]
+[node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel" unique_id=1130358627]
 position = Vector2(-102, 133)
 
-[node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=704424854]
 position = Vector2(1150, 378)
 
-[node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch"]
+[node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch" unique_id=1345336933]
 position = Vector2(181, 238)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=652188506]
 position = Vector2(642, 360)
 position_smoothing_enabled = true

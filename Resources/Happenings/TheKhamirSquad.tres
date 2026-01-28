@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=14 format=3 uid="uid://cjywrm3yoyv76"]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://cjywrm3yoyv76"]
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_aoe7e"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_13uso"]
@@ -7,32 +7,12 @@
 
 [sub_resource type="Resource" id="Resource_afxht"]
 script = ExtResource("3_afxht")
-StringReply = ""
 OptionName = "Accept"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_aoe7e")]([])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_qybly"]
 script = ExtResource("3_afxht")
-StringReply = ""
 OptionName = "Decline"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_aoe7e")]([])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_13uso"]
@@ -45,15 +25,9 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("3_afxht")
 StringReply = "\"I must admit, i accepted your request before i figured out who you were. Had i had a better memory this meeting would have probably not been made.\""
 OptionName = "Respond"
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_aoe7e")]([SubResource("Resource_13uso")])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
 WorldviewCheck = 1
-CheckPossetive = false
 CheckDifficulty = 40
-WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_udrsw"]
@@ -66,36 +40,19 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("3_afxht")
 StringReply = "\"You honor me.\" She and the people that stand around her get up and bow. \"Lets both land and i'll be expecting you ...\" The transmission ends..."
 OptionName = "Accept"
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_aoe7e")]([SubResource("Resource_udrsw")])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_r1uac"]
 script = ExtResource("1_aoe7e")
 HappeningTexts = Array[String](["The transmission ends."])
-Options = Array[ExtResource("2_13uso")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_72crc"]
 script = ExtResource("3_afxht")
 StringReply = "\"You make me sad captain. We could have done great thing together.\""
 OptionName = "Decline"
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_aoe7e")]([SubResource("Resource_r1uac")])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_aoe7e")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_3ealn"]
@@ -107,7 +64,5 @@ Options = Array[ExtResource("2_13uso")]([SubResource("Resource_ee684"), SubResou
 script = ExtResource("6_jxpfh")
 HappeningName = "The Khamir squad"
 Stages = Array[ExtResource("1_aoe7e")]([SubResource("Resource_3ealn")])
-HappeningAppearance = 0
 Special = true
 CrewRecruit = true
-AllowedAppearances = 1

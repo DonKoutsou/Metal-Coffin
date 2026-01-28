@@ -7,9 +7,10 @@ class_name ShipCamera
 @export var Cloud : Control
 @export var Ground : Control
 @export var WeatherMan : WeatherManage
-@export var MinZoom : float = 0.1
-@export var MaxZoom : float = 3.0
 @export var ClickSound : AudioStreamPlayer
+
+static var MinZoom = 0.08
+static var MaxZoom = 15.0
 
 static var Instance : ShipCamera
 static var WorldBounds : Vector2

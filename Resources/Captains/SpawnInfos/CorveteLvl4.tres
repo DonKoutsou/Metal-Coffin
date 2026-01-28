@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://2ii8eoq0203v"]
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" format=3 uid="uid://2ii8eoq0203v"]
 
 [ext_resource type="Resource" uid="uid://dyp56hloowbhq" path="res://Resources/Captains/EnemyCaptains/EnemyCorvete4.tres" id="1_hgsw8"]
 [ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="2_bmt6r"]

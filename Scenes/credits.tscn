@@ -1,15 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxkoglcdnoen2"]
+[gd_scene format=3 uid="uid://dxkoglcdnoen2"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_gryuy"]
-[ext_resource type="Texture2D" uid="uid://8wnfauuuwprh" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
+[ext_resource type="Texture2D" uid="uid://cbr3doqbirgp5" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
 [ext_resource type="Script" uid="uid://be7e88egssi03" path="res://Scripts/credits.gd" id="2_xelri"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_1wbrc"]
-[ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="4_803yc"]
-[ext_resource type="Texture2D" uid="uid://i0ngh8uftjja" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
-[ext_resource type="Texture2D" uid="uid://3ry1vwlq8lr7" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
+[ext_resource type="Texture2D" uid="uid://cs1i38munqjqo" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="4_803yc"]
+[ext_resource type="Texture2D" uid="uid://c4ajuc5oggttd" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
+[ext_resource type="Texture2D" uid="uid://614an3fvuyhc" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
+[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
 
-[node name="Credits" type="Control"]
+[node name="Credits" type="Control" unique_id=392640743]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ grow_vertical = 2
 theme = ExtResource("1_gryuy")
 script = ExtResource("2_xelri")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2009158845]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +31,7 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=554651441]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
@@ -39,40 +39,40 @@ vertical_scroll_mode = 3
 script = ExtResource("4_1wbrc")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=1760667390]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1848319746]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 texture = ExtResource("4_803yc")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1466459938]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Developers"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=537866358]
 layout_mode = 2
 text = "Koutsouradis Antonis - Main Develompent"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LinkButton2" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="LinkButton2" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1921702486]
 custom_minimum_size = Vector2(300, 21)
 layout_mode = 2
 size_flags_horizontal = 4
 uri = "https://soundcloud.com/badon_gale"
 
-[node name="Label4" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/LinkButton2"]
+[node name="Label4" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/LinkButton2" unique_id=264709429]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
@@ -84,13 +84,13 @@ text = "Badon Gale - Soundtrack"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LinkButton3" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="LinkButton3" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1336728501]
 custom_minimum_size = Vector2(300, 21)
 layout_mode = 2
 size_flags_horizontal = 4
 uri = "https://linktr.ee/hidris.uiux"
 
-[node name="Label4" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/LinkButton3"]
+[node name="Label4" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/LinkButton3" unique_id=1079671447]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
@@ -102,46 +102,46 @@ text = "Hadjoudj Mohammed Islam (Idris) - Card Icons"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control4" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Control4" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1215275535]
 custom_minimum_size = Vector2(0, 10.24)
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=261392651]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Testers"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label6" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label6" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1595253841]
 layout_mode = 2
 text = "Player2725"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label7" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label7" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1635553692]
 layout_mode = 2
 text = "LuPáš"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=792500813]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Addons Used"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1776262190]
 layout_mode = 2
 alignment = 1
 
-[node name="LinkButton2" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="LinkButton2" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=965243369]
 custom_minimum_size = Vector2(224, 190)
 layout_mode = 2
 uri = "https://github.com/bitbrain/beehave"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton2"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton2" unique_id=1738160172]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,13 +151,13 @@ grow_vertical = 2
 texture = ExtResource("1_r18jl")
 stretch_mode = 6
 
-[node name="LinkButton" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=706025466]
 custom_minimum_size = Vector2(224, 190)
 layout_mode = 2
 size_flags_vertical = 3
 uri = "https://github.com/uzkbwza/BurstParticles2D"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton" unique_id=2122382642]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,12 +165,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton/VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton/VBoxContainer" unique_id=1092879705]
 layout_mode = 2
 texture = ExtResource("6_7emq5")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/LinkButton/VBoxContainer" unique_id=1972686599]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -179,21 +179,21 @@ theme_override_font_sizes/font_size = 22
 text = "Burst Particles 2D"
 uppercase = true
 
-[node name="Label5" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label5" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=295628115]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Textures used"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LinkButton" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2075831966]
 custom_minimum_size = Vector2(600, 70)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 uri = "https://ambientcg.com/"
 
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/LinkButton"]
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/LinkButton" unique_id=844409911]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -204,12 +204,12 @@ texture = ExtResource("6_uah1q")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Control3" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Control3" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=407890701]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1545940802]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

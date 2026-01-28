@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://cbyjupye1mn88"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://cbyjupye1mn88"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_kj6e2"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_6he2x"]
@@ -7,6 +7,5 @@
 [resource]
 script = ExtResource("1_kj6e2")
 SpotName = "Vorkla"
-Region = 0
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_6he2x")]([ExtResource("3_6he2x")])

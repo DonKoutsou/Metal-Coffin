@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnonfp8ywr3vl"]
+[gd_scene format=3 uid="uid://bnonfp8ywr3vl"]
 
 [ext_resource type="Script" uid="uid://v1gumu5fm5sd" path="res://Scripts/Inventory/captain_stat_container.gd" id="1_gx6im"]
-[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="2_uviis"]
+[ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="2_uviis"]
 [ext_resource type="PackedScene" uid="uid://cr6qn30drails" path="res://Scenes/Inventory/inventory_ship_stats.tscn" id="3_qyvw6"]
 [ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="4_7pj6b"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="5_gxgtf"]
@@ -35,7 +35,7 @@ corner_detail = 1
 content_margin_top = 20.0
 content_margin_bottom = 50.0
 
-[node name="CaptainStatContainer" type="PanelContainer" node_paths=PackedStringArray("ShipStats", "ShipDeck", "CaptainIcon")]
+[node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "CaptainIcon")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,13 +48,13 @@ ShipStats = NodePath("PanelContainer/InventoryShipStats")
 ShipDeck = NodePath("PanelContainer/ShipDeck")
 CaptainIcon = NodePath("PanelContainer/CaptainIcon")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=383408915]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")
 
-[node name="CaptainIcon" type="TextureRect" parent="PanelContainer"]
+[node name="CaptainIcon" type="TextureRect" parent="PanelContainer" unique_id=274165875]
 show_behind_parent = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -62,25 +62,25 @@ texture = ExtResource("2_uviis")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="InventoryShipStats" parent="PanelContainer" instance=ExtResource("3_qyvw6")]
+[node name="InventoryShipStats" parent="PanelContainer" unique_id=1343149227 instance=ExtResource("3_qyvw6")]
 layout_mode = 2
 StatsShown = Array[int]([4, 16, 15, 6, 7, 17, 3, 0, 1, 2, 9])
 
-[node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" node_paths=PackedStringArray("CharPortrait", "CardPosition")]
+[node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" unique_id=1467780086 node_paths=PackedStringArray("CharPortrait", "CardPosition")]
 layout_mode = 2
 script = ExtResource("4_7pj6b")
 CharPortrait = NodePath("../CaptainIcon")
 CardScene = ExtResource("5_gxgtf")
 CardPosition = NodePath("ScrollContainer/HFlowContainer")
 
-[node name="Label" type="Label" parent="PanelContainer/ShipDeck"]
+[node name="Label" type="Label" parent="PanelContainer/ShipDeck" unique_id=1390508395]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Deck"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/ShipDeck"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/ShipDeck" unique_id=591578839]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_uuft3")
@@ -89,7 +89,7 @@ vertical_scroll_mode = 3
 script = ExtResource("6_uviis")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer"]
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer" unique_id=784004703]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

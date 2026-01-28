@@ -1,29 +1,19 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://daou2wqtcgcxt"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://daou2wqtcgcxt"]
 
-[ext_resource type="Texture2D" uid="uid://c6lfs6imu7yx0" path="res://Assets/Cards/MaxReserve.png" id="1_rwtaf"]
+[ext_resource type="Texture2D" uid="uid://b1qh7d3rq6j4t" path="res://Assets/Cards/MaxReserve.png" id="1_rwtaf"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_5uqf0"]
 [ext_resource type="Script" uid="uid://crxgf35d0q8o1" path="res://Scripts/CardFight/MaxReserveModule.gd" id="3_rwtaf"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_j56gx"]
 
 [sub_resource type="Resource" id="Resource_5uqf0"]
 script = ExtResource("3_rwtaf")
-CanBeUsedOnOther = false
-SelfUse = true
-AOE = false
-TierUpgrade = 1.0
-TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://crxgf35d0q8o1"
 
 [resource]
 script = ExtResource("5_j56gx")
 Icon = ExtResource("1_rwtaf")
 CardName = "Flux Converter"
-CardDescriptionOverride = ""
-Energy = 0
 AllowDuplicates = true
-Consume = false
 OnUseModules = Array[ExtResource("2_5uqf0")]([SubResource("Resource_5uqf0")])
 Type = 2
-WeapT = 0
 UseConditions = Array[int]([2])
-AllowTier = true

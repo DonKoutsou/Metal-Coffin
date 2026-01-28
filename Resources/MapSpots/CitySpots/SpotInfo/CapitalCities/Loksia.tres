@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://cixdtluk2fh7m"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://cixdtluk2fh7m"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_6yvmr"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_1aq5r"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="4_6nopb"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_saxi1"]
@@ -12,4 +11,3 @@ script = ExtResource("4_6nopb")
 SpotName = "Loksia"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("4_1aq5r")]([ExtResource("5_saxi1"), ExtResource("6_ycedl"), ExtResource("7_sv6dk")])
-Merchendise = Array[ExtResource("1_6yvmr")]([])

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://c73neyutnlw0l"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://c73neyutnlw0l"]
 
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="1_w82kf"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_37qgu"]
@@ -7,11 +7,7 @@
 [sub_resource type="Resource" id="Resource_a2bye"]
 script = ExtResource("2_37qgu")
 It = ExtResource("1_w82kf")
-Amm = 0
 
 [resource]
 script = ExtResource("3_ny7oh")
 Merch = SubResource("Resource_a2bye")
-Cost = 0
-MaxAmmPerStage = 0
-DontGenerateBefore = 0

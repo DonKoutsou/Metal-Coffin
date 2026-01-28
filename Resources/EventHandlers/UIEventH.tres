@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="UIEventHandler" load_steps=2 format=3 uid="uid://dblsu2gs81rs6"]
+[gd_resource type="Resource" script_class="UIEventHandler" format=3 uid="uid://dblsu2gs81rs6"]
 
 [ext_resource type="Script" uid="uid://bcxeicwavwg7s" path="res://Scripts/UIEventHandler.gd" id="1_kwgsq"]
 

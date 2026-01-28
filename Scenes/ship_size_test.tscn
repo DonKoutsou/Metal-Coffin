@@ -1,58 +1,58 @@
-[gd_scene load_steps=12 format=3 uid="uid://ch5wka76gr5r0"]
+[gd_scene format=3 uid="uid://ch5wka76gr5r0"]
 
-[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Ship4_001.png" id="1_l0ax8"]
-[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Ship10.png" id="1_p21nc"]
-[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Scarab.png" id="2_xe7ge"]
-[ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/ShipTextures/Convoy.png" id="3_el075"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="4_x62tc"]
-[ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/ShipTextures/ShipElena2.png" id="6_el075"]
-[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/ShipTextures/ShipElena.png" id="7_x62tc"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Spaceship_top_2_Main Camera.png" id="8_k2oqf"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="9_2so6o"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="10_2so6o"]
-[ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Ship11.png" id="11_t2rfa"]
+[ext_resource type="Texture2D" uid="uid://qi37jxow82md" path="res://Assets/ShipTextures/Ship4_001.png" id="1_l0ax8"]
+[ext_resource type="Texture2D" uid="uid://dw75fupkyb6cd" path="res://Assets/ShipTextures/Ship10.png" id="1_p21nc"]
+[ext_resource type="Texture2D" uid="uid://clst6a32c5mmn" path="res://Assets/ShipTextures/Scarab.png" id="2_xe7ge"]
+[ext_resource type="Texture2D" uid="uid://bqlgnd62ipvtw" path="res://Assets/ShipTextures/Convoy.png" id="3_el075"]
+[ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="4_x62tc"]
+[ext_resource type="Texture2D" uid="uid://dtrrhbntf02a3" path="res://Assets/ShipTextures/ShipElena2.png" id="6_el075"]
+[ext_resource type="Texture2D" uid="uid://ce210p2nc54np" path="res://Assets/ShipTextures/ShipElena.png" id="7_x62tc"]
+[ext_resource type="Texture2D" uid="uid://ni44btp4i83f" path="res://Assets/ShipTextures/Spaceship_top_2_Main Camera.png" id="8_k2oqf"]
+[ext_resource type="Texture2D" uid="uid://dapth5q2elnm6" path="res://Assets/ShipTextures/Tanker.png" id="9_2so6o"]
+[ext_resource type="Texture2D" uid="uid://clj76ltt2catq" path="res://Assets/ShipTextures/Tanker2.png" id="10_2so6o"]
+[ext_resource type="Texture2D" uid="uid://cc84mplir548f" path="res://Assets/ShipTextures/Ship11.png" id="11_t2rfa"]
 
-[node name="ShipSizeTest" type="Node2D"]
+[node name="ShipSizeTest" type="Node2D" unique_id=1312695390]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=356743018]
 texture = ExtResource("1_l0ax8")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=88193764]
 position = Vector2(78, 0)
 texture = ExtResource("2_xe7ge")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1118271456]
 position = Vector2(151, 0)
 texture = ExtResource("3_el075")
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1063055662]
 position = Vector2(235, 0)
 texture = ExtResource("4_x62tc")
 
-[node name="Sprite2D5" type="Sprite2D" parent="."]
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=253918933]
 position = Vector2(351, 0)
 texture = ExtResource("1_p21nc")
 
-[node name="Sprite2D6" type="Sprite2D" parent="."]
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=89115949]
 position = Vector2(498, 0)
 texture = ExtResource("6_el075")
 
-[node name="Sprite2D7" type="Sprite2D" parent="."]
+[node name="Sprite2D7" type="Sprite2D" parent="." unique_id=484442752]
 position = Vector2(596, 0)
 texture = ExtResource("7_x62tc")
 
-[node name="Sprite2D8" type="Sprite2D" parent="."]
+[node name="Sprite2D8" type="Sprite2D" parent="." unique_id=257752200]
 position = Vector2(692, 0)
 texture = ExtResource("8_k2oqf")
 
-[node name="Sprite2D9" type="Sprite2D" parent="."]
+[node name="Sprite2D9" type="Sprite2D" parent="." unique_id=1865357995]
 position = Vector2(784, 2)
 texture = ExtResource("9_2so6o")
 
-[node name="Sprite2D10" type="Sprite2D" parent="."]
+[node name="Sprite2D10" type="Sprite2D" parent="." unique_id=1360580850]
 position = Vector2(902, 0)
 texture = ExtResource("10_2so6o")
 
-[node name="Sprite2D11" type="Sprite2D" parent="."]
+[node name="Sprite2D11" type="Sprite2D" parent="." unique_id=1337914732]
 position = Vector2(1041, 0)
 texture = ExtResource("11_t2rfa")

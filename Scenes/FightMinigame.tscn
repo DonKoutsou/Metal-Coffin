@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://djd1dfb5i6p0y"]
+[gd_scene format=3 uid="uid://djd1dfb5i6p0y"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_7ge77"]
 [ext_resource type="Script" uid="uid://dq8ut66nbknul" path="res://Scripts/fight_minigame.gd" id="2_j7j1y"]
@@ -6,7 +6,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mrgae"]
 
-[node name="FigthMinigame" type="Control" node_paths=PackedStringArray("Bar")]
+[node name="FigthMinigame" type="Control" unique_id=1711268401 node_paths=PackedStringArray("Bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,7 @@ script = ExtResource("2_j7j1y")
 Float = ExtResource("3_qapge")
 Bar = NodePath("ProgressBar")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1230326952]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 8
@@ -33,7 +33,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=931551094]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,7 +49,7 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_mrgae")
 show_percentage = false
 
-[node name="StopButton" type="Button" parent="."]
+[node name="StopButton" type="Button" parent="." unique_id=793271519]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

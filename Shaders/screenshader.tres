@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bhyfvqbv3uyoq"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bhyfvqbv3uyoq"]
 
 [ext_resource type="Shader" uid="uid://b2f8vrdyl4bp7" path="res://Shaders/Crt.gdshader" id="1_64gv1"]
 
@@ -8,8 +8,8 @@ frequency = 0.417
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w8jme"]
 generate_mipmaps = false
-normalize = false
 noise = SubResource("FastNoiseLite_qsdd3")
+normalize = false
 
 [resource]
 shader = ExtResource("1_64gv1")

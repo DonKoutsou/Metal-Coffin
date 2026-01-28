@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=21 format=3 uid="uid://d1ccujxqp1ci3"]
+[gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://d1ccujxqp1ci3"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_g8ta7"]
 [ext_resource type="PackedScene" uid="uid://dw6dy4uoxiju5" path="res://Scenes/TownShop/Village_background.tscn" id="1_kxr5r"]
@@ -23,11 +23,9 @@
 [sub_resource type="Resource" id="Resource_3mffu"]
 script = ExtResource("18_lge3k")
 PossibleIds = Array[ExtResource("1_g8ta7")]([ExtResource("3_gb170"), ExtResource("4_ak3j5"), ExtResource("5_6uouu"), ExtResource("6_06u6k"), ExtResource("7_i0547"), ExtResource("8_02wg2"), ExtResource("9_koedv"), ExtResource("10_rda5d"), ExtResource("11_lyam5"), ExtResource("12_a1t0w"), ExtResource("13_70dk6"), ExtResource("14_4smce"), ExtResource("15_0v1fn"), ExtResource("16_6xkuq"), ExtResource("17_hdf04")])
-DataName = ""
 
 [resource]
 script = ExtResource("19_nhoy7")
 SpotK = 1
-VisibleOnStart = false
 BackgroundScene = ExtResource("1_kxr5r")
 Data = SubResource("Resource_3mffu")

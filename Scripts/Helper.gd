@@ -55,6 +55,9 @@ func wait(secs : float) -> Signal:
 static func mapvalue(val : float, min : float, max : float) -> float:
 	return min + (max - min) * val
 
+static func normalize_value(value: float, min: float, max: float) -> float:
+	return (value - min) / (max - min)
+
 static func AngleToDirection(angle: float) -> String:
 	var directions = ["East", "Southeast",  "South", "Southwest", "West", "Northwest", "North","Northeast"]
 	var index = int(fmod((angle + PI/8 + TAU), TAU) / (PI / 4)) % 8

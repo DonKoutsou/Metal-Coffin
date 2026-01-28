@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://buuo261afg6tg"]
+[gd_scene format=3 uid="uid://buuo261afg6tg"]
 
 [ext_resource type="Script" uid="uid://cxu4xgn8lpth6" path="res://Scripts/DeckPile.gd" id="2_e8dky"]
 
-[node name="DeckButton" type="Control"]
+[node name="DeckButton" type="Control" unique_id=69575806]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_e8dky")
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="." unique_id=1263801776]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

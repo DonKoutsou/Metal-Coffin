@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://iv5o83jfm5t6"]
+[gd_scene format=3 uid="uid://iv5o83jfm5t6"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p43is"]
 [ext_resource type="Script" uid="uid://cdp015csgi2pb" path="res://Scripts/work_shop_item.gd" id="2_jf3g0"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_dunc5"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="5_nlcni"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="5_nlcni"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ql3kp"]
 content_margin_left = 8.0
@@ -21,7 +21,7 @@ border_blend = true
 corner_detail = 1
 shadow_size = 5
 
-[node name="TownShopItem" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ShopOwnedT", "ItPriceT")]
+[node name="TownShopItem" type="PanelContainer" unique_id=822499005 node_paths=PackedStringArray("ItemName", "ShopOwnedT", "ItPriceT")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -43,16 +43,16 @@ ItemName = NodePath("VBoxContainer/HBoxContainer3/Label")
 ShopOwnedT = NodePath("VBoxContainer/HBoxContainer/HBoxContainer3/ShopAmm")
 ItPriceT = NodePath("VBoxContainer/HBoxContainer/HBoxContainer2/Price")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=875351086]
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("4_dunc5")
 alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=559714462]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=589277247]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
@@ -62,16 +62,16 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1122491245]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=215094175]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3"]
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3" unique_id=1724350175]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
@@ -80,17 +80,17 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "Shop Inventory:"
 
-[node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3"]
+[node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3" unique_id=608838190]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 26
 text = "1"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=426161136]
 layout_mode = 2
 alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=957861777]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -99,14 +99,14 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "Price:"
 
-[node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1793901805]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 26
 text = "50"
 
-[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=1710344132]
 visible = false
 custom_minimum_size = Vector2(6.86, 0)
 layout_mode = 2
@@ -114,14 +114,14 @@ size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ql3kp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=665365225]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1195491785]
 layout_mode = 2
 text = "INSTALL"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=602900518]
 stream = ExtResource("5_nlcni")
 volume_db = -10.0
 pitch_scale = 3.06

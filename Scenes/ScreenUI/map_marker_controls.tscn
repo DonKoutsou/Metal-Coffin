@@ -1,16 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cugmsxkuwcfc4"]
+[gd_scene format=3 uid="uid://cugmsxkuwcfc4"]
 
 [ext_resource type="Script" uid="uid://bdyul5l380bmt" path="res://Scripts/UI/map_marker_controls.gd" id="1_67mm3"]
-[ext_resource type="Texture2D" uid="uid://b0qmg8dqfxxyf" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_sg83c"]
+[ext_resource type="Texture2D" uid="uid://bhijweehoxrmw" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_sg83c"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_67mm3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="3_djntk"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="4_gq5gp"]
-[ext_resource type="BitMap" uid="uid://1fe3bd6jslqu" path="res://Assets/UIPiecies/Screen/Buttons/ButtonMask_Camera 1_FullQuality.png" id="5_ukqae"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="6_i6u6v"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="7_g7jsi"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="8_u42xd"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="9_sxrep"]
+[ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="3_djntk"]
+[ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="4_gq5gp"]
+[ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="6_i6u6v"]
+[ext_resource type="Texture2D" uid="uid://770ytc3dmn3u" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="7_g7jsi"]
+[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="8_u42xd"]
+[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="9_sxrep"]
 
 [sub_resource type="Animation" id="Animation_67mm3"]
 resource_name = "Hide"
@@ -64,7 +63,7 @@ _data = {
 &"Show": SubResource("Animation_gq5gp")
 }
 
-[node name="MapMarkerControls" type="Control" node_paths=PackedStringArray("TouchStopper")]
+[node name="MapMarkerControls" type="Control" unique_id=329577773 node_paths=PackedStringArray("TouchStopper")]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -82,13 +81,13 @@ script = ExtResource("1_67mm3")
 TouchStopper = NodePath("Control/Control")
 EventHandler = ExtResource("2_djntk")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=726361025]
 anchors_preset = 0
 offset_top = 163.0
 offset_right = 40.0
 offset_bottom = 203.0
 
-[node name="TextureRect2" type="TextureRect" parent="Control"]
+[node name="TextureRect2" type="TextureRect" parent="Control" unique_id=1256885502]
 layout_mode = 0
 offset_left = -289.0
 offset_top = -90.0
@@ -98,7 +97,7 @@ mouse_filter = 0
 texture = ExtResource("1_sg83c")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Control/TextureRect2"]
+[node name="TextureRect2" type="TextureRect" parent="Control/TextureRect2" unique_id=490127833]
 modulate = Color(0, 0, 0, 0.518)
 show_behind_parent = true
 layout_mode = 0
@@ -110,15 +109,15 @@ mouse_filter = 2
 texture = ExtResource("1_sg83c")
 expand_mode = 1
 
-[node name="YGas" parent="Control" instance=ExtResource("2_67mm3")]
+[node name="YGas" parent="Control" unique_id=1853660991 instance=ExtResource("2_67mm3")]
 position = Vector2(-118, 34)
 scale = Vector2(0.520363, 0.520363)
 
-[node name="XGas" parent="Control" instance=ExtResource("2_67mm3")]
+[node name="XGas" parent="Control" unique_id=1191937950 instance=ExtResource("2_67mm3")]
 position = Vector2(72, -55)
 scale = Vector2(0.787035, 0.787035)
 
-[node name="ExitMapMarker" type="TextureButton" parent="Control" groups=["Buttons"]]
+[node name="ExitMapMarker" type="TextureButton" parent="Control" unique_id=1340846565 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -133,11 +132,10 @@ grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("3_djntk")
 texture_pressed = ExtResource("4_gq5gp")
-texture_click_mask = ExtResource("5_ukqae")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ClearLines" type="TextureButton" parent="Control" groups=["Buttons"]]
+[node name="ClearLines" type="TextureButton" parent="Control" unique_id=1330142097 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -152,11 +150,10 @@ grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("6_i6u6v")
 texture_pressed = ExtResource("7_g7jsi")
-texture_click_mask = ExtResource("5_ukqae")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DrawLine" type="TextureButton" parent="Control" groups=["Buttons"]]
+[node name="DrawLine" type="TextureButton" parent="Control" unique_id=1079720396 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -171,11 +168,10 @@ grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("8_u42xd")
 texture_pressed = ExtResource("9_sxrep")
-texture_click_mask = ExtResource("5_ukqae")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DrawText" type="TextureButton" parent="Control" groups=["Buttons"]]
+[node name="DrawText" type="TextureButton" parent="Control" unique_id=785232804 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -190,11 +186,10 @@ grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("8_u42xd")
 texture_pressed = ExtResource("9_sxrep")
-texture_click_mask = ExtResource("5_ukqae")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Control" type="Control" parent="Control"]
+[node name="Control" type="Control" parent="Control" unique_id=1989557570]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -208,10 +203,8 @@ offset_bottom = 51.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_djntk")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1125316786]
+libraries/ = SubResource("AnimationLibrary_djntk")
 
 [connection signal="RangeChanged" from="Control/YGas" to="." method="_on_y_gas_range_changed"]
 [connection signal="RangeChanged" from="Control/XGas" to="." method="_on_x_gas_range_changed"]

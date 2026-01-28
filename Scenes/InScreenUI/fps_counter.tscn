@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b84obdsc4r2vk"]
+[gd_scene format=3 uid="uid://b84obdsc4r2vk"]
 
 [ext_resource type="Script" uid="uid://o8engdxaicd4" path="res://Scripts/UI/fps_counter.gd" id="1_kwpo2"]
 
-[node name="FpsCounter" type="Label"]
+[node name="FpsCounter" type="Label" unique_id=282947167]
 offset_right = 40.0
 offset_bottom = 23.0
 size_flags_vertical = 1

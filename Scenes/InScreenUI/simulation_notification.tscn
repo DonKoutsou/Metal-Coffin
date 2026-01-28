@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccmqbt58qk8rv"]
+[gd_scene format=3 uid="uid://ccmqbt58qk8rv"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_olgxh"]
 [ext_resource type="Script" uid="uid://dpnur6jb3ppgl" path="res://Scripts/UI/Simulation_Notification.gd" id="2_jnlvy"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_mcsd0"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="4_mcsd0"]
 
-[node name="SimulationNotification" type="Control"]
+[node name="SimulationNotification" type="Control" unique_id=735458710]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 8
@@ -18,7 +18,7 @@ mouse_filter = 2
 theme = ExtResource("1_olgxh")
 script = ExtResource("2_jnlvy")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1022027959]
 modulate = Color(100, 0, 0.163, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -36,7 +36,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer2"]
+[node name="Label3" type="Label" parent="VBoxContainer2" unique_id=532665944]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.00302346, 0.00302346, 0.00302346, 1)
@@ -45,7 +45,7 @@ theme_override_fonts/font = ExtResource("4_mcsd0")
 text = "- - - - - -"
 horizontal_alignment = 1
 
-[node name="SimulationNotification" type="Label" parent="VBoxContainer2"]
+[node name="SimulationNotification" type="Label" parent="VBoxContainer2" unique_id=754028539]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.00302346, 0.00302346, 0.00302346, 1)
@@ -57,7 +57,7 @@ PAUSED"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="VBoxContainer2"]
+[node name="Label4" type="Label" parent="VBoxContainer2" unique_id=1651466467]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.00302346, 0.00302346, 0.00302346, 1)

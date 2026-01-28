@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AmmoItem" load_steps=4 format=3 uid="uid://cq0vggs5aaeg7"]
+[gd_resource type="Resource" script_class="AmmoItem" format=3 uid="uid://cq0vggs5aaeg7"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_orrcq"]
 [ext_resource type="Resource" uid="uid://u3qkikjc8ya7" path="res://Resources/Cards/Barrage/APBarrage180mm.tres" id="2_orrcq"]
@@ -11,6 +11,4 @@ ItemName = "Armor-Piercing Ammo Magazine 180mm"
 ItemDesc = "This magazine contains high-velocity rounds with reinforced cores, optimized for penetrating heavy armor and fortified hulls. The dense material composition minimizes deformation upon impact, allowing for deep penetration and critical internal damage."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_orrcq")]([ExtResource("2_orrcq")])
-Tier = 0
-CanTransfer = true
 Cost = 700

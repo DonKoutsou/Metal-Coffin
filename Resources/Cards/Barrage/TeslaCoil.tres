@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://dyc7jktln3i74"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://dyc7jktln3i74"]
 
-[ext_resource type="Texture2D" uid="uid://b6k631ygnoe06" path="res://Assets/Cards/TeslaCoil.png" id="1_1v4y5"]
+[ext_resource type="Texture2D" uid="uid://b0t4ea3ekppeb" path="res://Assets/Cards/TeslaCoil.png" id="1_1v4y5"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_duro0"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_h0k6c"]
 [ext_resource type="Script" uid="uid://kct7kkjke6ao" path="res://Scripts/CardFight/EnergyOffensiveCardModule.gd" id="4_q7bqr"]
@@ -10,12 +10,6 @@
 script = ExtResource("4_q7bqr")
 AtackType = 2
 Damage = 6.0
-ScaleStat = Array[ExtResource("3_h0k6c")]([])
-CauseFile = false
-OnAtackModules = Array[ExtResource("2_duro0")]([])
-OnSuccesfullAtackModules = Array[ExtResource("2_duro0")]([])
-SkipShield = false
-AOE = false
 TierUpgrade = 1.2
 TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://kct7kkjke6ao"
@@ -24,13 +18,7 @@ metadata/_custom_type_script = "uid://kct7kkjke6ao"
 script = ExtResource("6_gqsau")
 Icon = ExtResource("1_1v4y5")
 CardName = "Tesla Coil"
-CardDescriptionOverride = ""
-Energy = 0
 AllowDuplicates = true
-Consume = false
-OnUseModules = Array[ExtResource("2_duro0")]([])
 OnPerformModule = SubResource("Resource_1x6pr")
-Type = 0
 WeapT = 3
 UseConditions = Array[int]([2])
-AllowTier = true

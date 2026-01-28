@@ -4,6 +4,7 @@ class_name ZoomLvevel
 
 @export var Steps : int = 20
 @export var Text : Label
+@export var MaxStep : float = 10.0
 
 var MaxZoom : float
 var MinZoom : float
@@ -12,21 +13,17 @@ var CurrentZoom : float = 0.5
 var Working : bool = true
 
 func _ready() -> void:
-	var map = Map.GetInstance()
-	if (!is_instance_valid(map)):
-		return
-	var cam = map.GetCamera()
-	MaxZoom = cam.MaxZoom
-	MinZoom = cam.MinZoom
-	cam.connect("ZoomChanged", ZoomUpdated)
+	MaxZoom = ShipCamera.MaxZoom
+	MinZoom = ShipCamera.MinZoom
 	#$HBoxContainer/VBoxContainer/ProgressBar.max_value = MaxZoom - MinZoom
 	#$HBoxContainer/VBoxContainer/ProgressBar.value = cam.zoom.x - MinZoom
 
-func ZoomUpdated(NewZoom : float) -> void:
+func UpdateCameraZoom(NewZoom : float) -> void:
 	if (!Working):
 		return
-	CurrentZoom = NewZoom - MinZoom
-	Text.text = var_to_str(snappedf(NewZoom - MinZoom, 0.1)) + "X"
+	CurrentZoom = snapped(NewZoom, 0.01)
+	
+	#print("New zoom = {0}".format([CurrentZoom]))
 	queue_redraw()
 	#$HBoxContainer/VBoxContainer/ProgressBar.value = NewZoom - MinZoom
 	#queue_redraw()
@@ -39,15 +36,19 @@ func Toggle(t) -> void:
 func _draw() -> void:
 	var ContainerSize = size.y
 	
-	var StepSize = (ContainerSize ) / Steps
+	var Z = Helper.normalize_value(CurrentZoom, MinZoom, MaxZoom)
 	
-	var CurrentStep =((CurrentZoom  - MinZoom * 2) / MaxZoom) * Steps
+	var T = "{0}X".format([snappedf(Z * MaxStep, 0.1)])
 	
-	var MidPoint = ContainerSize / 2
+	Text.text = T.replace(".0", "")
 	
-	var HighestPos = -2
+	var StepSize = (ContainerSize) / Steps
 	
-	var CurrentStepPosition = HighestPos + (StepSize * CurrentStep)
+	var CurrentStep = Z * Steps
+	
+	var MidPoint = (ContainerSize / 2.0)
+	
+	var CurrentStepPosition = StepSize * CurrentStep
 	
 	var Offset = CurrentStepPosition - MidPoint
 	
@@ -55,8 +56,8 @@ func _draw() -> void:
 	
 	var MidLinePos = MidPoint + Offset
 	
-	var ZoomPerStep = MaxZoom / Steps
-	var MidZoom = snapped(ZoomPerStep * (Steps / 2) + MinZoom, 0.1)
+	var ZoomPerStep = MaxStep / Steps
+	var MidZoom = snapped(ZoomPerStep * (Steps / 2.0), 0.10)
 	
 	if (MidLinePos > 0 and MidLinePos < ContainerSize):
 		draw_line(Vector2(15 + Off, MidLinePos) , Vector2(25 + Off, MidLinePos), Color(100, 0.764, 0.081), 2)
@@ -66,20 +67,20 @@ func _draw() -> void:
 		var UpOffset = MidPoint + Offset + (StepSize * g)
 		if (UpOffset > 0 and UpOffset < ContainerSize):
 			var StepZoom = snapped(MidZoom - (ZoomPerStep * g), 0.1)
-			
-			if (var_to_str(StepZoom).contains(".0")):
+			var ZoomStr = "{0}".format([StepZoom])
+			if (ZoomStr.contains(".0")):
 				draw_line(Vector2(15 + Off, UpOffset), Vector2(25 + Off, UpOffset), Color(100, 0.764, 0.081), 3)
-				draw_string(get_theme_default_font(), Vector2(26 + Off, UpOffset + 6), var_to_str(roundi(StepZoom)),HORIZONTAL_ALIGNMENT_CENTER, -1, 20, Color(100, 0.764, 0.081))
+				draw_string(get_theme_default_font(), Vector2(26 + Off, UpOffset + 6), ZoomStr.replace(".0", ""),HORIZONTAL_ALIGNMENT_CENTER, -1, 20, Color(100, 0.764, 0.081))
 			else:
 				draw_line(Vector2(15 + Off, UpOffset), Vector2(25 + Off, UpOffset), Color(100, 0.764, 0.081), 1)
-				draw_string(get_theme_default_font(), Vector2(26 + Off, UpOffset + 3), var_to_str(StepZoom),HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(100, 0.764, 0.081))
+				draw_string(get_theme_default_font(), Vector2(26 + Off, UpOffset + 3), ZoomStr,HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(100, 0.764, 0.081))
 		var DownOffset = MidPoint + Offset + (StepSize * -g)
 		if (DownOffset > 0 and DownOffset < ContainerSize):
 			var StepZoom = snapped(MidZoom + (ZoomPerStep * g), 0.1)
-			
-			if (var_to_str(StepZoom).contains(".0")):
+			var ZoomStr = "{0}".format([StepZoom])
+			if (ZoomStr.contains(".0")):
 				draw_line(Vector2(15 + Off, DownOffset), Vector2(25 + Off, DownOffset), Color(100, 0.764, 0.081), 3)
-				draw_string(get_theme_default_font(), Vector2(26 + Off, DownOffset + 6), var_to_str(roundi(StepZoom)),HORIZONTAL_ALIGNMENT_CENTER, -1, 20, Color(100, 0.764, 0.081))
+				draw_string(get_theme_default_font(), Vector2(26 + Off, DownOffset + 6), ZoomStr.replace(".0", ""),HORIZONTAL_ALIGNMENT_CENTER, -1, 20, Color(100, 0.764, 0.081))
 			else:
 				draw_line(Vector2(15 + Off, DownOffset), Vector2(25 + Off, DownOffset), Color(100, 0.764, 0.081), 1)
-				draw_string(get_theme_default_font(), Vector2(26 + Off, DownOffset + 3), var_to_str(StepZoom),HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(100, 0.764, 0.081))
+				draw_string(get_theme_default_font(), Vector2(26 + Off, DownOffset + 3), ZoomStr,HORIZONTAL_ALIGNMENT_CENTER, -1, 12, Color(100, 0.764, 0.081))

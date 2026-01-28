@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr6qn30drails"]
+[gd_scene format=3 uid="uid://cr6qn30drails"]
 
 [ext_resource type="Script" uid="uid://djaksgs7n1q3d" path="res://Scripts/Inventory/InventoryShipStats.gd" id="1_oud7i"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/Inventory/ShipStatContainer.tscn" id="2_82v18"]
@@ -31,53 +31,53 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 1
 
-[node name="InventoryShipStats" type="VBoxContainer"]
+[node name="InventoryShipStats" type="VBoxContainer" unique_id=826388942]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_oud7i")
 ShipStatScene = ExtResource("2_82v18")
 StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5])
 
-[node name="Legend" type="HBoxContainer" parent="."]
+[node name="Legend" type="HBoxContainer" parent="." unique_id=948479179]
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Legend"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Legend" unique_id=1199180011]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Legend/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Legend/VBoxContainer" unique_id=1177119062]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="Panel2" type="Panel" parent="Legend/VBoxContainer/HBoxContainer"]
+[node name="Panel2" type="Panel" parent="Legend/VBoxContainer/HBoxContainer" unique_id=1456020470]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
 
-[node name="Label2" type="Label" parent="Legend/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="Legend/VBoxContainer/HBoxContainer" unique_id=1693731232]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16
 text = "Base Stats"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Legend/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Legend/VBoxContainer" unique_id=54657979]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="Panel" type="Panel" parent="Legend/VBoxContainer/HBoxContainer2"]
+[node name="Panel" type="Panel" parent="Legend/VBoxContainer/HBoxContainer2" unique_id=815045265]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
 
-[node name="Label" type="Label" parent="Legend/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Legend/VBoxContainer/HBoxContainer2" unique_id=1978544067]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Ship Part Buffs"

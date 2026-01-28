@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3361rn6kikh1"]
+[gd_scene format=3 uid="uid://d3361rn6kikh1"]
 
 [ext_resource type="Script" uid="uid://ct6jtj6oya27k" path="res://Scripts/Inventory/item_transfer.gd" id="1_jxlxb"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_vvfaq"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="3_ucstj"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_lsd4b"]
 
-[node name="ItemTransfer" type="PanelContainer" node_paths=PackedStringArray("ButtonPlecements")]
+[node name="ItemTransfer" type="PanelContainer" unique_id=1648113572 node_paths=PackedStringArray("ButtonPlecements")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,61 +16,61 @@ script = ExtResource("1_jxlxb")
 CptnButton = ExtResource("3_ucstj")
 ButtonPlecements = NodePath("VBoxContainer/PanelContainer/VBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1806143625]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Transfer Text" type="Label" parent="VBoxContainer"]
+[node name="Transfer Text" type="Label" parent="VBoxContainer" unique_id=994588449]
 layout_mode = 2
 text = "Transfering"
 horizontal_alignment = 1
 
-[node name="ItemName" type="Label" parent="VBoxContainer"]
+[node name="ItemName" type="Label" parent="VBoxContainer" unique_id=1913741498]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Missile"
 horizontal_alignment = 1
 
-[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="VBoxContainer" unique_id=954869302]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_lsd4b")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel" unique_id=2062586010]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer" unique_id=1923419112]
 layout_mode = 2
 text = "Ammount"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel/VBoxContainer" unique_id=1879529058]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=2134372374]
 layout_mode = 2
 text = "-"
 
-[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=1213659913]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=255523237]
 layout_mode = 2
 text = "+"
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1878307333]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_lsd4b")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=457446556]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1750510632]
 layout_mode = 2
 text = "Transfer To"
 horizontal_alignment = 1

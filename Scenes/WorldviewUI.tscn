@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://biiakq2r2vasn"]
+[gd_scene format=3 uid="uid://biiakq2r2vasn"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_b325w"]
 [ext_resource type="Script" uid="uid://bg5rdvie6bf4v" path="res://Scripts/WorldView/worldview_ui.gd" id="2_omcf4"]
 [ext_resource type="PackedScene" uid="uid://dlkrd1kwoocdb" path="res://Scenes/worldviewUIContainer.tscn" id="3_ratq7"]
 
-[node name="WorldviewUI" type="Control"]
+[node name="WorldviewUI" type="Control" unique_id=138104391]
 layout_mode = 3
 anchors_preset = 6
 anchor_left = 1.0
@@ -19,7 +19,7 @@ grow_vertical = 2
 script = ExtResource("2_omcf4")
 WorldviewStatScene = ExtResource("3_ratq7")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=738096337]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -30,21 +30,21 @@ offset_bottom = 17.5
 grow_vertical = 2
 theme_override_constants/separation = -2
 
-[node name="Button" type="Button" parent="HBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=1278830344 groups=["DigitalButtons"]]
 z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "<<"
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1065715405]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_b325w")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer" unique_id=651405988]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=2114639455]
 layout_mode = 2
 text = "Worldview"
 horizontal_alignment = 1

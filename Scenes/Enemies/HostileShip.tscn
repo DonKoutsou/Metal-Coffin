@@ -1,10 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://kwr75a1p3qrm"]
+[gd_scene format=3 uid="uid://kwr75a1p3qrm"]
 
 [ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
 [ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="3_ty6mh"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="5_7v2kq"]
-[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Scarab.png" id="6_tlfh0"]
+[ext_resource type="Texture2D" uid="uid://clst6a32c5mmn" path="res://Assets/ShipTextures/Scarab.png" id="6_tlfh0"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/Enemies/HostileDroneDock.tscn" id="7_hahnw"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_kunx8"]
 [ext_resource type="PackedScene" uid="uid://b0gylky44tnsw" path="res://Scenes/Enemies/PatrolBT.tscn" id="8_w8ob0"]
@@ -35,7 +35,7 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
 radius = 1000.0
 
-[node name="HostileShip" type="Node2D" node_paths=PackedStringArray("TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["Enemy", "Ships", "ZoomAffected"]]
+[node name="HostileShip" type="Node2D" unique_id=974765209 node_paths=PackedStringArray("TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["Enemy", "Ships", "ZoomAffected"]]
 process_mode = 1
 z_index = 1
 script = ExtResource("1_dinuw")
@@ -51,20 +51,21 @@ DroneDok = NodePath("DroneDock")
 ShipSprite = NodePath("ColorRect")
 Acceleration = NodePath("Aceleration")
 
-[node name="Aceleration" type="Node2D" parent="."]
+[node name="Aceleration" type="Node2D" parent="." unique_id=2079415444]
 position = Vector2(0.5, 0)
 
-[node name="ColorRect" type="Sprite2D" parent="."]
+[node name="ColorRect" type="Sprite2D" parent="." unique_id=1708187202]
 z_index = -2
 material = SubResource("ShaderMaterial_7v2kq")
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_tlfh0")
 
-[node name="TrailLine" type="Line2D" parent="ColorRect"]
+[node name="TrailLine" type="Line2D" parent="ColorRect" unique_id=994780843]
 show_behind_parent = true
 position = Vector2(-3.233e-05, -2.77778)
 rotation = 1.57078
+points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_hjoyl")
@@ -76,30 +77,30 @@ trail_fade_speed = 0.1
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="ShipBody" type="Area2D" parent="."]
+[node name="ShipBody" type="Area2D" parent="." unique_id=1910492064]
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody" unique_id=243368945]
 shape = SubResource("CircleShape2D_jc744")
 
-[node name="Radar" type="Area2D" parent="."]
+[node name="Radar" type="Area2D" parent="." unique_id=1177421846]
 collision_layer = 2
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar" unique_id=689109080]
 visible = false
 shape = SubResource("CircleShape2D_63pb3")
 
-[node name="Elint" type="Area2D" parent="."]
+[node name="Elint" type="Area2D" parent="." unique_id=268938013]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Elint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elint" unique_id=1911328555]
 visible = false
 shape = SubResource("CircleShape2D_t084r")
 
-[node name="DroneDock" parent="." instance=ExtResource("7_hahnw")]
+[node name="DroneDock" parent="." unique_id=1435620375 instance=ExtResource("7_hahnw")]
 collision_layer = 8
 
 [connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]

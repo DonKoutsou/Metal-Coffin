@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmgv2v8jsmief"]
+[gd_scene format=3 uid="uid://dmgv2v8jsmief"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_5y82r"]
 
-[node name="AcceptDialog" type="AcceptDialog"]
+[node name="AcceptDialog" type="AcceptDialog" unique_id=1872039763]
+oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(160, 103)
 visible = true

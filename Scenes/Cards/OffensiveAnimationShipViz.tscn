@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhfqn405u7iov"]
+[gd_scene format=3 uid="uid://dhfqn405u7iov"]
 
 [ext_resource type="Script" uid="uid://c1614nt44tmoh" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="1_o7oni"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="2_lbgr3"]
+[ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="2_lbgr3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
 bg_color = Color(0.231024, 0.490544, 0.236315, 1)
@@ -33,7 +33,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
-[node name="CardFightShipViz" type="Button" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "FriendlyPanel")]
+[node name="CardFightShipViz" type="Button" unique_id=1247899577 node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "FriendlyPanel")]
 custom_minimum_size = Vector2(70, 70)
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,32 +53,32 @@ ShipNameLabel = NodePath("HBoxContainer/Label")
 ShipIcon = NodePath("HBoxContainer/TextureRect")
 FriendlyPanel = NodePath("Panel")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 2
+[node name="Panel" type="Panel" parent="." unique_id=223157029]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 68.0
 offset_bottom = 68.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1738997181]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 73.0
 offset_bottom = 68.0
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=675017378]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "GER"
 autowrap_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1923837237]
 layout_mode = 2
 texture = ExtResource("2_lbgr3")
 expand_mode = 2
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2098314865]
 position = Vector2(39.5, 38.5)
 process_material = SubResource("ParticleProcessMaterial_on4wq")

@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7ojj8un8chim"]
+[gd_scene format=3 uid="uid://c7ojj8un8chim"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_k73m2"]
 [ext_resource type="Script" uid="uid://bbqhblx2swobg" path="res://Scripts/TownShop/ship_repair_ui.gd" id="2_k73m2"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_0m2lf"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_c743t"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="5_tw0o4"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="5_tw0o4"]
 
-[node name="ShipRepairUI" type="PanelContainer" node_paths=PackedStringArray("RepairPriceLabel", "CurrentHullLabel", "HullBar", "CaptainNameLabel")]
+[node name="ShipRepairUI" type="PanelContainer" unique_id=504060236 node_paths=PackedStringArray("RepairPriceLabel", "CurrentHullLabel", "HullBar", "CaptainNameLabel")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,13 +30,13 @@ HullBar = NodePath("VBoxContainer2/ProgressBar")
 CaptainNameLabel = NodePath("VBoxContainer2/Label")
 PlayerWallet = ExtResource("3_0m2lf")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1591314270]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer2" unique_id=230578061]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Craden"
@@ -44,21 +44,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2" unique_id=15696963]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/HBoxContainer" unique_id=1787289469]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HullAmm" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer"]
+[node name="HullAmm" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer" unique_id=935500527]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "100"
 
-[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer" unique_id=229031892]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -67,18 +67,18 @@ theme_override_font_sizes/font_size = 16
 text = "Hull Integrity"
 horizontal_alignment = 2
 
-[node name="Panel" type="Panel" parent="VBoxContainer2/HBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer2/HBoxContainer" unique_id=1583750185]
 custom_minimum_size = Vector2(6.86, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_c743t")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/HBoxContainer" unique_id=2017209200]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Label3" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer2" unique_id=1034113116]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -86,19 +86,19 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Repair Price:"
 
-[node name="RepairPrice" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer2"]
+[node name="RepairPrice" type="Label" parent="VBoxContainer2/HBoxContainer/HBoxContainer2" unique_id=415369690]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "202"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2" unique_id=1876089438]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 3
 value = 27.12
 show_percentage = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=53776335]
 stream = ExtResource("5_tw0o4")
 volume_db = -10.0
 pitch_scale = 3.06

@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://cphwc10ye3ddr"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://cphwc10ye3ddr"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_l5xag"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_ps5ad"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_8yu52"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_qmjm8"]
@@ -10,4 +9,3 @@ script = ExtResource("3_qmjm8")
 SpotName = "Gigila"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_ps5ad")]([ExtResource("2_8yu52")])
-Merchendise = Array[ExtResource("1_l5xag")]([])

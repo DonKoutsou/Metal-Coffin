@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cgma68ateq86o"]
+[gd_resource type="Theme" format=3 uid="uid://cgma68ateq86o"]
 
-[ext_resource type="FontFile" uid="uid://by0ihctjvtjh2" path="res://Fonts/Caudex-Regular.ttf" id="1_3ukfs"]
+[ext_resource type="FontFile" uid="uid://c3k8jjlxcwhwc" path="res://Fonts/Caudex-Regular.ttf" id="1_3ukfs"]
 [ext_resource type="StyleBox" uid="uid://7ith0ajugsk2" path="res://Theme/ButtonDissabled.tres" id="2_w1a50"]
 [ext_resource type="StyleBox" uid="uid://bf8ldnyjyuff" path="res://Theme/ButtonHover.tres" id="3_w04hi"]
 [ext_resource type="StyleBox" uid="uid://cakd87dtiyrm2" path="res://Theme/ButtonNormal.tres" id="4_2mufa"]

@@ -1,8 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://g4nd4xc327yt"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://g4nd4xc327yt"]
 
-[ext_resource type="Texture2D" uid="uid://dp2vcww2oabjp" path="res://Assets/MapElements/Grayscale.png" id="1_q20aw"]
-[ext_resource type="Texture2D" uid="uid://ckh8skdhkuf7x" path="res://Assets/MapElements/plane_Town1_Normal.png" id="2_q20aw"]
-[ext_resource type="Texture2D" uid="uid://bn7tbt6reetit" path="res://Assets/MapElements/plane_Town1_BaseColor.png" id="3_lw8bi"]
+[ext_resource type="Texture2D" uid="uid://cbniv37ovcf1l" path="res://Assets/MapElements/Grayscale.png" id="1_q20aw"]
+[ext_resource type="Texture2D" uid="uid://brlhkt6uwpnuj" path="res://Assets/MapElements/plane_Town1_Normal.png" id="2_q20aw"]
+[ext_resource type="Texture2D" uid="uid://cgyhcishe7xfb" path="res://Assets/MapElements/plane_Town1_BaseColor.png" id="3_lw8bi"]
 
 [sub_resource type="Shader" id="Shader_cns0g"]
 code = "shader_type canvas_item;

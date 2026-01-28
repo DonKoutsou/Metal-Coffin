@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://ctlms8do0piak"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://ctlms8do0piak"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_h3l1d"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_rjcvh"]
@@ -12,30 +12,22 @@
 script = ExtResource("5_m7n25")
 UpgradeName = 1
 UpgradeAmmount = 15.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_05yu7"]
 script = ExtResource("5_m7n25")
 UpgradeName = 2
 UpgradeAmmount = 18.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_1lv6k"]
 script = ExtResource("5_m7n25")
 UpgradeName = 9
 UpgradeAmmount = 20.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_sks0f"]
 script = ExtResource("5_m7n25")
 UpgradeName = 16
 UpgradeAmmount = 35.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -43,11 +35,9 @@ script = ExtResource("6_lldtj")
 Upgrades = Array[ExtResource("5_m7n25")]([SubResource("Resource_y5vig"), SubResource("Resource_05yu7"), SubResource("Resource_1lv6k"), SubResource("Resource_sks0f")])
 UpgradeVersion = ExtResource("4_odx1v")
 UpgradeTime = 1400.0
-IsDamaged = false
 PartType = 1
 ItemName = "EcoDrive-250 \"Sustain\""
 ItemDesc = "Sustain enhances fuel efficiency features while allowing for moderate improvements in speed. Utilizing advanced energy management systems, Sustain is perfect for tactical retreats or slow reconnaissance missions, conserving resources while maintaining operational readiness."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("2_rjcvh")]([ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("1_h3l1d"), ExtResource("3_14ypp"), ExtResource("3_14ypp"), ExtResource("4_1lv6k"), ExtResource("4_1lv6k")])
 Tier = 1
 CanTransfer = false

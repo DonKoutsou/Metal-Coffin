@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1j8lcr2bwkvf"]
+[gd_scene format=3 uid="uid://b1j8lcr2bwkvf"]
 
 [ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scripts/CardFight/missile_viz.gd" id="1_qklay"]
-[ext_resource type="AudioStream" uid="uid://dtvbu1dtsfivv" path="res://Assets/Sounds/Shield.mp3" id="2_eyuio"]
-[ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_v2lcc"]
+[ext_resource type="AudioStream" uid="uid://brxf1b36dtg2" path="res://Assets/Sounds/Shield.mp3" id="2_eyuio"]
+[ext_resource type="AudioStream" uid="uid://dnwyg3sfnsrux" path="res://Assets/Sounds/BeamRev.mp3" id="3_v2lcc"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Cards/AtackEffects/RevEf.tscn" id="4_gkt80"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="5_qxb8c"]
-[ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="6_shvw3"]
+[ext_resource type="AudioStream" uid="uid://1xjym344ayqp" path="res://Assets/Sounds/beam-fire-282361.mp3" id="6_shvw3"]
 [ext_resource type="PackedScene" uid="uid://5tjx6x3nbk1e" path="res://Scenes/Cards/AtackEffects/Buff.tscn" id="7_tiime"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
@@ -17,7 +17,7 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.71, 1)
 colors = PackedColorArray(0.421311, 0.88706, 0.915024, 1, 0.810676, 0.304988, 0.106007, 1, 1, 1, 1, 0)
 
-[node name="MissileThing" type="Node2D" node_paths=PackedStringArray("InitialParticle", "EndingParticle", "SoundNode", "Trail")]
+[node name="MissileThing" type="Node2D" unique_id=926013770 node_paths=PackedStringArray("InitialParticle", "EndingParticle", "SoundNode", "Trail")]
 script = ExtResource("1_qklay")
 speed = 30
 base_curve_intensity = 0.2
@@ -30,9 +30,9 @@ EndingParticle = NodePath("MultiParticleExample2")
 SoundNode = NodePath("MissileCruise")
 Trail = NodePath("TrailLine")
 
-[node name="MultiParticleExample1" parent="." instance=ExtResource("4_gkt80")]
+[node name="MultiParticleExample1" parent="." unique_id=1854600069 instance=ExtResource("4_gkt80")]
 
-[node name="TrailLine" type="Line2D" parent="."]
+[node name="TrailLine" type="Line2D" parent="." unique_id=1812445464]
 width_curve = SubResource("Curve_5lbu3")
 gradient = SubResource("Gradient_p7sl4")
 joint_mode = 2
@@ -44,11 +44,11 @@ trail_fade_speed = 0.02
 ManualInit = true
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="MissileCruise" type="AudioStreamPlayer" parent="."]
+[node name="MissileCruise" type="AudioStreamPlayer" parent="." unique_id=2092272728]
 stream = ExtResource("6_shvw3")
 volume_db = -20.0
 pitch_scale = 1.13803
 bus = &"Sounds"
 
-[node name="MultiParticleExample2" parent="." instance=ExtResource("7_tiime")]
+[node name="MultiParticleExample2" parent="." unique_id=562133116 instance=ExtResource("7_tiime")]
 rotation = -3.14159

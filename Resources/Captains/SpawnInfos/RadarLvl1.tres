@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CaptainSpawnInfo" load_steps=3 format=3 uid="uid://cl0a8poce0hjq"]
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" format=3 uid="uid://cl0a8poce0hjq"]
 
 [ext_resource type="Resource" uid="uid://y1ohb6oss4v0" path="res://Resources/Captains/EnemyCaptains/EnemyRadarShip1.tres" id="1_d1c8n"]
 [ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_sy6du"]
@@ -9,4 +9,3 @@ Cpt = ExtResource("1_d1c8n")
 Cost = 30
 MaxAmmInFleet = 1
 DontGenerateBefore = 1
-SpawnAlone = false

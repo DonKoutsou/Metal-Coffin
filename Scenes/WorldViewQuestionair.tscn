@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c2db1rw6borur"]
+[gd_scene format=3 uid="uid://c2db1rw6borur"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_0ey4p"]
 [ext_resource type="Script" uid="uid://feql74pw4kam" path="res://Scripts/WorldView/world_view_questionair.gd" id="2_wn0u1"]
@@ -27,11 +27,11 @@
 [ext_resource type="Resource" uid="uid://dmfaobxfl2bks" path="res://Resources/Worldview/Questions/LogivBelief/Question14.tres" id="26_vfqru"]
 [ext_resource type="Resource" uid="uid://dnuaid5mx6umc" path="res://Resources/Worldview/Questions/LogivBelief/Question15.tres" id="27_fl7up"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="28_0jjjo"]
-[ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="29_0ey4p"]
+[ext_resource type="AudioStream" uid="uid://b5e6m5xcjj8wb" path="res://Assets/Sounds/TextSound.mp3" id="29_0ey4p"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ey4p"]
 
-[node name="WorldViewQuestionair" type="PanelContainer" node_paths=PackedStringArray("Text", "QuestionAnswers", "DiagButtons", "Line")]
+[node name="WorldViewQuestionair" type="PanelContainer" unique_id=605806469 node_paths=PackedStringArray("Text", "QuestionAnswers", "DiagButtons", "Line")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -47,12 +47,12 @@ IntroDialogue = Array[String]([".................................", "...........
 PossibleQuestions = Array[ExtResource("3_5vy1l")]([ExtResource("4_0jjjo"), ExtResource("5_0ey4p"), ExtResource("6_mkbl6"), ExtResource("7_gij2h"), ExtResource("8_6xjrs"), ExtResource("9_cphet"), ExtResource("10_dx0y0"), ExtResource("11_1cuev"), ExtResource("12_yejad"), ExtResource("14_6iaxw"), ExtResource("15_e18fm"), ExtResource("16_jtjw7"), ExtResource("17_dymyh"), ExtResource("18_ucmj5"), ExtResource("19_8f5b7"), ExtResource("20_s1878"), ExtResource("21_fmooa"), ExtResource("22_a01bo"), ExtResource("23_l0coj"), ExtResource("24_ra63j"), ExtResource("25_3hoxt"), ExtResource("26_vfqru"), ExtResource("27_fl7up")])
 OutroDialogue = Array[String]([".................................", "TEST ENDED", "A cold sweat washes over you. How did you do? Was there a wrong answer? You go through the answers in your head trying to see where you could have gone wrong.", "Suddenly the female voice reaches you again. \"Relax pilot. It's all gone well. We apreciate your honesty in ansewring.", "I will not be able to give you an answer about your results, the flying test is next as you know  and the results of both will determine your if you get your pilot license.", "For a moment you let go. The excitement seems to be getting the best of you. For a moment you close your eyes and drift of........."])
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1284427443]
 layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=603943328]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -65,7 +65,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 visible_characters_behavior = 1
 
-[node name="LineDrawer" parent="VBoxContainer" instance=ExtResource("28_0jjjo")]
+[node name="LineDrawer" parent="VBoxContainer" unique_id=862634650 instance=ExtResource("28_0jjjo")]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 1
@@ -78,12 +78,12 @@ buffer_size = 471
 phase = inf
 PointRatio = 30.0
 
-[node name="Control" type="Control" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=572856331]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Control"]
+[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Control" unique_id=498643203]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -93,19 +93,19 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/Control/HBoxContainer2" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer/Control/HBoxContainer2" unique_id=596351049 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Next"
 
-[node name="Button2" type="Button" parent="VBoxContainer/Control/HBoxContainer2" groups=["DigitalButtons"]]
+[node name="Button2" type="Button" parent="VBoxContainer/Control/HBoxContainer2" unique_id=671614938 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Skip"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control" unique_id=1883017570]
 visible = false
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
@@ -117,7 +117,7 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/Control/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer/Control/HBoxContainer" unique_id=25454454 groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -125,7 +125,7 @@ theme_override_font_sizes/font_size = 26
 text = "Option1"
 autowrap_mode = 2
 
-[node name="Button2" type="Button" parent="VBoxContainer/Control/HBoxContainer" groups=["DigitalButtons"]]
+[node name="Button2" type="Button" parent="VBoxContainer/Control/HBoxContainer" unique_id=1220092465 groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -133,7 +133,7 @@ theme_override_font_sizes/font_size = 26
 text = "Option 2"
 autowrap_mode = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=207892714]
 stream = ExtResource("29_0ey4p")
 volume_db = -5.0
 bus = &"Sounds"

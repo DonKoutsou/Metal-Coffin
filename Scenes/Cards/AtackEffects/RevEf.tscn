@@ -1,7 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://dlkjo56vcapoo"]
+[gd_scene format=3 uid="uid://dlkjo56vcapoo"]
 
-[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_p26ww"]
-[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_esykf"]
+[ext_resource type="Script" uid="uid://dsoavxwjjlytc" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_p26ww"]
+[ext_resource type="Script" uid="uid://d2bgkrovxloh1" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_esykf"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_xiof4"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_m40so"]
 
@@ -82,12 +82,12 @@ point_count = 3
 _data = [Vector2(1e-05, 0), -0.0743434, 4.0269, 0, 0, Vector2(0.29823, 0.764712), 0.866446, 0.866446, 0, 0, Vector2(1, 1), 0.0, -0.0557579, 0, 0]
 point_count = 3
 
-[node name="MultiParticleExample2" type="Node2D"]
+[node name="MultiParticleExample2" type="Node2D" unique_id=840921557]
 script = ExtResource("1_p26ww")
 repeat = false
 autostart = false
 
-[node name="Flash" type="Node2D" parent="."]
+[node name="Flash" type="Node2D" parent="." unique_id=1089305532]
 script = ExtResource("2_esykf")
 num_particles = 1
 lifetime = 0.75
@@ -107,7 +107,7 @@ scale_curve = SubResource("Curve_whlsl")
 color_offset_curve = SubResource("Curve_bvb0m")
 alpha_curve = SubResource("Curve_g0j12")
 
-[node name="Orb3" type="Node2D" parent="."]
+[node name="Orb3" type="Node2D" parent="." unique_id=347077696]
 script = ExtResource("2_esykf")
 num_particles = 32
 lifetime = 0.75

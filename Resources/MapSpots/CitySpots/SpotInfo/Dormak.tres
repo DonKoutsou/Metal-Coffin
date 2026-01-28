@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://dppja8f62kfle"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://dppja8f62kfle"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_g7huy"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_t42l3"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_g0f4y"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_tggho"]
@@ -12,4 +11,3 @@ script = ExtResource("1_t42l3")
 SpotName = "Dormak"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("3_g0f4y")]([ExtResource("4_tggho"), ExtResource("5_40shu"), ExtResource("6_4to3w")])
-Merchendise = Array[ExtResource("1_g7huy")]([])

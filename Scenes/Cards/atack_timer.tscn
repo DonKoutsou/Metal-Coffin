@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://mynuy3gwirlo"]
+[gd_scene format=3 uid="uid://mynuy3gwirlo"]
 
 [ext_resource type="Script" uid="uid://yryotxutpsur" path="res://Scripts/CardFight/atack_timer.gd" id="1_sxahx"]
-[ext_resource type="AudioStream" uid="uid://dppa5wcyhh4an" path="res://Assets/Sounds/Clock.mp3" id="2_8m7rj"]
+[ext_resource type="AudioStream" uid="uid://bkb13xc10n4l0" path="res://Assets/Sounds/Clock.mp3" id="2_8m7rj"]
 
-[node name="AtackTimer" type="ProgressBar" node_paths=PackedStringArray("T", "S", "Text")]
+[node name="AtackTimer" type="ProgressBar" unique_id=484084761 node_paths=PackedStringArray("T", "S", "Text")]
 custom_minimum_size = Vector2(0, 21)
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,9 +17,9 @@ T = NodePath("Timer")
 S = NodePath("AudioStreamPlayer")
 Text = NodePath("Label")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=2086259487]
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=353768665]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ text = "4s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1542730990]
 stream = ExtResource("2_8m7rj")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt2v8s1av0q6i"]
+[gd_scene format=3 uid="uid://bt2v8s1av0q6i"]
 
 [ext_resource type="Script" uid="uid://bxpxh7q0trjjy" path="res://Scripts/TownShop/town_shop_item.gd" id="1_0hew0"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_vpph7"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_xvjp2"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_7jnpa"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="5_0ij4u"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="5_0ij4u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ql3kp"]
 content_margin_left = 8.0
@@ -22,7 +22,7 @@ border_blend = true
 corner_detail = 1
 shadow_size = 5
 
-[node name="TownShopItem" type="PanelContainer" node_paths=PackedStringArray("ItemName", "Bar", "PlOwnedT", "ShopOwnedT", "ItPriceT")]
+[node name="TownShopItem" type="PanelContainer" unique_id=1071944652 node_paths=PackedStringArray("ItemName", "Bar", "PlOwnedT", "ShopOwnedT", "ItPriceT")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -47,16 +47,16 @@ ShopOwnedT = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/
 ItPriceT = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Price")
 PlWallet = ExtResource("2_7jnpa")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=621105454]
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("1_vpph7")
 alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=1925102445]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=491419952]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
@@ -66,16 +66,16 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1407113466]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=2014638273]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=182204401]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -83,13 +83,13 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "Owned:"
 
-[node name="PlAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="PlAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=669844078]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "1"
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=302790850]
 visible = false
 custom_minimum_size = Vector2(6.86, 0)
 layout_mode = 2
@@ -97,7 +97,7 @@ size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ql3kp")
 
-[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=1574600386]
 visible = false
 custom_minimum_size = Vector2(6.86, 0)
 layout_mode = 2
@@ -105,14 +105,14 @@ size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ql3kp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=171895050]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2047161525]
 layout_mode = 2
 alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1808452005]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -121,18 +121,18 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "Price:"
 
-[node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=967828033]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 26
 text = "50"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1307830253]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=760308380]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
@@ -141,20 +141,20 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "Shop Inventory:"
 
-[node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=1944206039]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 26
 text = "1"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1908675969]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 2
 value = 27.12
 show_percentage = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1837225259]
 stream = ExtResource("5_0ij4u")
 volume_db = -10.0
 pitch_scale = 3.06

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy1ohrkbe4n1e"]
+[gd_scene format=3 uid="uid://cy1ohrkbe4n1e"]
 
 [ext_resource type="Script" uid="uid://cwsqpf7lee1hv" path="res://Scenes/Cards/SegmentedBar/segmented_hp.gd" id="1_f4xkd"]
 [ext_resource type="PackedScene" uid="uid://bogrgwq53r7oo" path="res://Scenes/Cards/SegmentedBar/Segment.tscn" id="2_yg37y"]
@@ -19,7 +19,7 @@ corner_detail = 2
 shadow_size = 8
 anti_aliasing_size = 2.0
 
-[node name="SegmentedHP" type="PanelContainer"]
+[node name="SegmentedHP" type="PanelContainer" unique_id=287180056]
 custom_minimum_size = Vector2(0, 6)
 anchors_preset = 8
 anchor_left = 0.5
@@ -36,16 +36,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_f37qp")
 script = ExtResource("1_f4xkd")
 SegmentScene = ExtResource("2_yg37y")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=441084360]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=951634517]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Control" unique_id=1122631290]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

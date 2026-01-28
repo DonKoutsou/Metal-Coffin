@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MissileItem" load_steps=4 format=3 uid="uid://brv8sagucvpb2"]
+[gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://brv8sagucvpb2"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_61ala"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="1_evrf7"]
@@ -7,14 +7,9 @@
 [resource]
 script = ExtResource("1_ov1vt")
 MissileScene = ExtResource("1_evrf7")
-Distance = 1500
 Speed = 900.0
 Damage = 50
-Type = 0
 ItemName = "Cruise Missile"
 ItemDesc = "A balanced missile system offering medium range and speed. Suited for general-purpose combat where flexibility and reliability matter most."
 MaxStackCount = 99
-CardProviding = Array[ExtResource("1_61ala")]([])
-Tier = 0
-CanTransfer = true
 Cost = 1200

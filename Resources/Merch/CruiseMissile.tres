@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://dtsgrchftsfnf"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://dtsgrchftsfnf"]
 
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="1_pyqfi"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_4ax7c"]

@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://btglsgwihfdpy"]
+[gd_scene format=3 uid="uid://btglsgwihfdpy"]
 
 [ext_resource type="Script" uid="uid://cipqdmo5r1cmp" path="res://Scenes/GlobalManagers/music_manager.gd" id="1_p2pcq"]
-[ext_resource type="AudioStream" uid="uid://bn0g20tuytfqs" path="res://Assets/Music/1 - Wasteland Stars.mp3" id="2_vbvrh"]
-[ext_resource type="AudioStream" uid="uid://dcnyle06oseb0" path="res://Assets/Music/2 - Lost Signal.mp3" id="3_jd605"]
-[ext_resource type="AudioStream" uid="uid://c4s3om5jjrkng" path="res://Assets/Music/4- For The Cause.mp3" id="4_jd605"]
-[ext_resource type="AudioStream" uid="uid://banuy0eem8o48" path="res://Assets/Music/3- Whispers don't lie.mp3" id="4_kf0yg"]
-[ext_resource type="AudioStream" uid="uid://ccxnkc1e5qqh7" path="res://Assets/Music/5- Eyes in the sand.mp3" id="5_6yudi"]
+[ext_resource type="AudioStream" uid="uid://dxivjdfmn6we3" path="res://Assets/Music/1 - Wasteland Stars.mp3" id="2_vbvrh"]
+[ext_resource type="AudioStream" uid="uid://bpjxxdikyfatx" path="res://Assets/Music/2 - Lost Signal.mp3" id="3_jd605"]
+[ext_resource type="AudioStream" uid="uid://ei0urssg3qoq" path="res://Assets/Music/4- For The Cause.mp3" id="4_jd605"]
+[ext_resource type="AudioStream" uid="uid://dj8cwukqvw78k" path="res://Assets/Music/3- Whispers don't lie.mp3" id="4_kf0yg"]
+[ext_resource type="AudioStream" uid="uid://wg0grrukjgfa" path="res://Assets/Music/5- Eyes in the sand.mp3" id="5_6yudi"]
 
-[node name="MusicManager" type="Node"]
+[node name="MusicManager" type="Node" unique_id=477629023]
 process_mode = 3
 script = ExtResource("1_p2pcq")
 AmbientMusic = Array[AudioStream]([ExtResource("2_vbvrh"), ExtResource("3_jd605"), ExtResource("4_kf0yg"), ExtResource("5_6yudi")])

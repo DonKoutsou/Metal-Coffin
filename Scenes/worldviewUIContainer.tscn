@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlkrd1kwoocdb"]
+[gd_scene format=3 uid="uid://dlkrd1kwoocdb"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_rbex0"]
 [ext_resource type="Script" uid="uid://c6pk6gqsxutl2" path="res://Scripts/WorldView/worldview_ui_container.gd" id="2_6pg0c"]
@@ -42,7 +42,7 @@ expand_margin_left = 1.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[node name="WorldviewNotif" type="PanelContainer" node_paths=PackedStringArray("Negativebar", "Possetivebar")]
+[node name="WorldviewNotif" type="PanelContainer" unique_id=1397958000 node_paths=PackedStringArray("Negativebar", "Possetivebar")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -59,32 +59,32 @@ script = ExtResource("2_6pg0c")
 Negativebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")
 Possetivebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1484783357]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1348697691]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=515054014]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "COMPOSURE"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=557612034]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "AGITATION"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=697535740]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=992079797]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -95,7 +95,7 @@ value = 48.0
 fill_mode = 1
 show_percentage = false
 
-[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=1439070944]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1

@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://rwe63rpa83wb"]
+[gd_scene format=3 uid="uid://rwe63rpa83wb"]
 
 [ext_resource type="Script" uid="uid://cmtemjrp17cgm" path="res://Scripts/CardFight/CardViz.gd" id="1_pjehg"]
-[ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="2_0lrke"]
-[ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="3_dw01p"]
+[ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="2_0lrke"]
+[ext_resource type="Texture2D" uid="uid://b0pqpqkcdgign" path="res://Assets/Cards/CardBack.png" id="3_dw01p"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="5_4eeik"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
@@ -14,7 +14,7 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.71, 1)
 colors = PackedColorArray(0.482095, 0.689901, 0.704644, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="CardThing" type="Node2D"]
+[node name="CardThing" type="Node2D" unique_id=1082876190]
 z_index = 10
 rotation = -1.5708
 script = ExtResource("1_pjehg")
@@ -24,7 +24,7 @@ base_curve_intensity = 0.25
 wiggle_amplitude = 0.0
 wiggle_frequency = 0.0
 
-[node name="TrailLine" type="Line2D" parent="."]
+[node name="TrailLine" type="Line2D" parent="." unique_id=1935572844]
 width_curve = SubResource("Curve_5lbu3")
 gradient = SubResource("Gradient_dw01p")
 joint_mode = 2
@@ -36,6 +36,6 @@ trail_fade_speed = 0.02
 ManualInit = true
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=979617739]
 scale = Vector2(0.216511, 0.216511)
 texture = ExtResource("3_dw01p")

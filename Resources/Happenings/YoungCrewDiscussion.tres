@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=12 format=3 uid="uid://cxkj2k4llta37"]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://cxkj2k4llta37"]
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_qaalc"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_3td2i"]
@@ -8,22 +8,15 @@
 [sub_resource type="Resource" id="Resource_ni7lq"]
 script = ExtResource("1_qaalc")
 HappeningTexts = Array[String](["You sit next to the boy and you take it in your embrace. You sit there for what feels like an hour.", "The twitching slowly fades away, the boy is slowly takes control back of his body. The silence is quickly broken as the boy breaks into a sobbing cry.", "It was clear to you, this is not a place for a boy. Going through your mind is all the possible circumances that could make the boy want to fight, but alas the purity of his soul had been tarnished enough by this conflict.", "You take the boy and you lead it out the ship. You task a couple of the crew to make sure to find a place for the boy to stay in the town, he's seen enough of this conflict.", ""])
-Options = Array[ExtResource("2_3td2i")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_qaalc"]
 script = ExtResource("3_c5nxy")
 StringReply = "You take out your coat and place it over the boys shoulders."
 OptionName = "Offer help"
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_qaalc")]([SubResource("Resource_ni7lq")])
 WorldviewEffect = 3
 WorldviewEffectAmm = 20
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_qaalc")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_3td2i"]
@@ -31,14 +24,8 @@ script = ExtResource("3_c5nxy")
 StringReply = "You ask one of the crew members to grab the boy and take them to the medical. The boy is lost in the darkness of the coridors."
 OptionName = "Ask a crew member to take them to a medic"
 FinishDiag = true
-BranchContinuation = Array[ExtResource("1_qaalc")]([])
 WorldviewEffect = 3
 WorldviewEffectAmm = -10
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_qaalc")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_c5nxy"]
@@ -51,15 +38,7 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("3_c5nxy")
 StringReply = "You make your way to the boy, you extend your arm and place it onto its shoulder. You steal his gaze, but it looks like he sees through you and not you."
 OptionName = "Aproach the boy."
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_qaalc")]([SubResource("Resource_c5nxy")])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_qaalc")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_qurqx"]
@@ -67,14 +46,8 @@ script = ExtResource("3_c5nxy")
 StringReply = "You ask one of the crew members to pick him up and put him back to work, this is no time to stand idly, we are at war."
 OptionName = "Ask one of the crew members to pick him up"
 FinishDiag = true
-BranchContinuation = Array[ExtResource("1_qaalc")]([])
 WorldviewEffect = 3
 WorldviewEffectAmm = 20
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_qaalc")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_okl8h"]
@@ -89,5 +62,3 @@ HappeningName = "The young recruit"
 Stages = Array[ExtResource("1_qaalc")]([SubResource("Resource_okl8h")])
 HappeningAppearance = 1
 Special = true
-CrewRecruit = false
-AllowedAppearances = 1

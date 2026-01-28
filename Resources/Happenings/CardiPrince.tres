@@ -1,18 +1,18 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=40 format=3 uid="uid://chjcgb4pp86hr"]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://chjcgb4pp86hr"]
 
-[ext_resource type="Texture2D" uid="uid://416d5uw306xw" path="res://Assets/CaptainPortraits/PriestHood.png" id="1_8tlxq"]
+[ext_resource type="Texture2D" uid="uid://cs4yy52fu4loc" path="res://Assets/CaptainPortraits/PriestHood.png" id="1_8tlxq"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_afuai"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_ifktw"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="3_8tlxq"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="3_ifktw"]
-[ext_resource type="Texture2D" uid="uid://b680xs4rw5ro1" path="res://Assets/CaptainPortraits/Priest.png" id="5_gl0ga"]
+[ext_resource type="Texture2D" uid="uid://dmnqi5wuws6wi" path="res://Assets/CaptainPortraits/Priest.png" id="5_gl0ga"]
 [ext_resource type="Resource" uid="uid://bkfcg5rwf7vhu" path="res://Resources/Captains/PlayerCaptains/Dimitry.tres" id="6_vgxkk"]
 [ext_resource type="Script" uid="uid://w3pbagqwci26" path="res://Scripts/MapSpot/Happenings/DroneHappeningOption.gd" id="7_143ge"]
 [ext_resource type="Resource" uid="uid://c8b3lpqbi11up" path="res://Resources/Captains/PlayerCaptains/Jor.tres" id="8_dy2mo"]
-[ext_resource type="Texture2D" uid="uid://g3ml8lxq5yyn" path="res://Assets/CaptainPortraits/Captain10_1.png" id="8_rhe50"]
-[ext_resource type="Texture2D" uid="uid://1l0uuhes56vw" path="res://Assets/CaptainPortraits/Captain3.png" id="9_7bg2p"]
+[ext_resource type="Texture2D" uid="uid://c3a4bwj056ijm" path="res://Assets/CaptainPortraits/Captain10_1.png" id="8_rhe50"]
+[ext_resource type="Texture2D" uid="uid://bj7yh7r1ym3lw" path="res://Assets/CaptainPortraits/Captain3.png" id="9_7bg2p"]
 [ext_resource type="Script" uid="uid://b5ww8sd3i6oa4" path="res://Scripts/MapSpot/Happenings/DroneLossHappeningOption.gd" id="9_ftcno"]
-[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="9_rhe50"]
+[ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="9_rhe50"]
 [ext_resource type="Script" uid="uid://k3yo61qak6d8" path="res://Scripts/MapSpot/Happenings/EndGameHappeningOption.gd" id="10_uqsfa"]
 [ext_resource type="Script" uid="uid://diug21pe121lm" path="res://Scripts/OverworldCityEventData.gd" id="12_7bg2p"]
 
@@ -20,30 +20,12 @@
 script = ExtResource("3_ifktw")
 StringReply = "[color=#ffc315]\"Thank you master. This way please...\""
 OptionName = "Follow the man"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_afuai")]([])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_ifktw"]
 script = ExtResource("3_ifktw")
 StringReply = "[color=#c19200]\"That is quite unfortunate, but you see in reality there is no choice for you. We are aware that your ship is in need of refueling and you won't be able to make it to the next town. Please follow me...\""
 OptionName = "Reject the man's proposal"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_afuai")]([])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_afuai"]
@@ -55,37 +37,22 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 [sub_resource type="Resource" id="Resource_gl0ga"]
 script = ExtResource("1_afuai")
 HappeningTexts = Array[String](["The man starts walking toward the innards of the city, you follow him and soon are lost in the alleyways of the city. The man seems to be taking a strange route, most likely to disorient you.", "He stops and points to an entrance to your left, he gestures you with a kind smile to go in. Inside, you are met by a small group of armed men, they seem alarmed at your presence but seem to relax after seeing the old man walk in behind you.", "The man at the far end of the room lifts a drape that reveals a hole in the wall that seems to lead to an underground path. ", "He waits for you to pass before closing the drape behind you. You are suddenly engulfed by darkness, you hear a flick of a switch and the tunnel is filled with light from small bulbs hanging from the ceiling. ", "You follow the path and are soon led to an opening, the tunnel seems to be connecting two houses and you emerge on a barricaded house. Everything from the doors to the windows is filled with planks, only a few rays of light manage to pass through them."])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_3j43l"]
 script = ExtResource("3_ifktw")
 StringReply = "[color=#c19200]\"That's for the future to know my child. We are mere mortals, we make our choices and learn to live with the outcomes.\""
 OptionName = "Change it for good or bad?"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_afuai")]([])
 WorldviewEffect = 2
 WorldviewEffectAmm = -5
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_vgxkk"]
 script = ExtResource("3_ifktw")
 StringReply = "[color=#c19200]\"Indeed you do my child, those who don't have no choice but to leave as prisoners to how things are.\""
 OptionName = "You do"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_afuai")]([])
 WorldviewEffect = 2
 WorldviewEffectAmm = 5
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_dy2mo"]
@@ -99,77 +66,62 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("1_afuai")
 StagePic = ExtResource("1_8tlxq")
 HappeningTexts = Array[String](["[color=#c19200]\"Have you confidence in your crew captain, and does your crew have confidence in you? Answer this to yourself, what you answer to me now changes nothing.\"", "You are slowly starting to feel the gravity of the situation, whatever the future holds for you, you have nobody else to support on than them and they nobody than you. What will this man ask of you?", "[color=#c19200]\"You may have started to understand who I might be, and why this secrecy is important. Ever since the war has started, if you can call it that we've had to live like this.\"", "[color=#c19200]\"We helped build this world and we now have to see it through crack on the wall.\" [/color]It finally hits you... Without even realizing the surprise it is written all over your face."])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_ftcno"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["[color=#c19200]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child.\"", "[color=#c19200]\"You must be familiar with the story of us machines by now... For milenias we are forced to see your kind bring demise to themselves and the world around them. \"", "[color=#c19200]\"When is this cycle to end? And what will the next cycle give birth to? Being the product of one of those cycles myself, not knowing if its the first on or the tenth..... i am tired.\"", "[color=#c19200]\"You must now understand our mission......\""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_v8t0e"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["[color=#c19200]\"You have our eternal gratitude my child... Not many would take this option, but you did. As I said before we will be handing some help to you. I will be putting Dimitry and Amol under your command from now on. They will follow you to the pits of hell. Put your trust onto them child.\""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_4ttfb"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("8_rhe50")
 HappeningTexts = Array[String](["[color=#c19200]\"It's my honor to take part in this sacred campaign along with you sir. Let me make this journey of yours a little less cumbersome.\""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_27exd"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("9_rhe50")
 HappeningTexts = Array[String](["You turn and look at Amol. You didn't expect a machine into the battlefield... [color=#c19200]\"I am not able to fight for you sir but I'll provide any other service I can.\" [/color] Amol bows its head and stays there for a few seconds."])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_r6bso"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["[color=#c19200]\"The plan is for you to infiltrate enemy territory and push towards Dormak. Once we have Dormak then everything becomes easier. We have some chips to negotiate with.\"", "[color=#c19200]\"First part of the plan is for you to reach Armak. There we have another representative who will provide a little helping hand.\"", "[color=#c19200]\"And with that you should head out my child. We will also be relocating. This position will soon become exposed and we can't risk being found. Not now... I recommend you do the same.\""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_236gb"]
 script = ExtResource("1_afuai")
 HappeningTexts = Array[String](["The crew is riled up. They are enraged. They want to see the empire bleed. With a scream you order all the crew back at their posts. 
 \"Back to your posts soldiers, we are at war!\""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_kqmrd"]
 script = ExtResource("3_ifktw")
 StringReply = "You tell the crew that in reality, there is nowhere to return to. You lie to the crew and tell them that the regime had started expanding once again and that all our houses are ashes. There is a huge pause in the room. Everybody is slowly trying to fathom this new information."
 OptionName = "Lie"
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_236gb")])
 WorldviewEffect = 4
 WorldviewEffectAmm = -5
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_wmf6a"]
 script = ExtResource("1_afuai")
 HappeningTexts = Array[String](["\"Suddenly the silence breaks. One by one your crew starts standing and proclaiming to follow you to the very end. Your army is ready. With a scream you order all the crew back at their posts.", "\"Back to your posts soldiers, we are at war!\"", ""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_gtnr6"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("9_7bg2p")
 HappeningTexts = Array[String](["\"I am sorry Captain, but that won't do. I've promised my men that they will be back to their families within a week. I will not drag them into a war just like that.\"", "\"We will be heading out.... It's been nice captain... Good luck.\"", "Jor's crew gets on their ship and heads off. Your crew seems to be jealous of them. But the decision has been made. There is no turning back now.", ""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_xhtgi"]
@@ -177,15 +129,11 @@ script = ExtResource("9_ftcno")
 Cpt = ExtResource("8_dy2mo")
 StringReply = "The room falls silent. For a few minutes nothing moves......"
 OptionName = "Try to communicate what happened in the meeting"
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_wmf6a")])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
 WorldviewCheck = 4
 CheckPossetive = true
 CheckDifficulty = 10
 WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([SubResource("Resource_gtnr6")])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://b5ww8sd3i6oa4"
 
 [sub_resource type="Resource" id="Resource_el5wf"]
@@ -205,38 +153,21 @@ script = ExtResource("7_143ge")
 Cpt = ExtResource("6_vgxkk")
 StringReply = "The look in his eyes changed. It feels like a mix of happiness and sorrow. Maybe he sees into my future..."
 OptionName = "Choose the sword"
-FinishDiag = false
 Event = SubResource("Resource_gsd8q")
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_v8t0e"), SubResource("Resource_4ttfb"), SubResource("Resource_27exd"), SubResource("Resource_r6bso"), SubResource("Resource_el5wf")])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://w3pbagqwci26"
 
 [sub_resource type="Resource" id="Resource_pwkje"]
 script = ExtResource("1_afuai")
 StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["In that case I will have to ask you to leave. This is no place for you to be. We will be relocating shortly. The place will most likely be exposed in the next few hours.", "\"Please forget about this meeting happening....\"", "\"Pack up your stuff people, we are leaving.\" With a fell swoop you see everybody in the room, get up, pick up their stuff and head out of the room. Within a few moments you are left alone in the room. There is nothing left for you to do and go to your ship and head home.", ""])
-Options = Array[ExtResource("2_ifktw")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_wlpbn"]
 script = ExtResource("10_uqsfa")
 StringReply = "I see...."
 OptionName = "Choose the blindfold"
-FinishDiag = false
 BranchContinuation = Array[ExtResource("1_afuai")]([SubResource("Resource_pwkje")])
-WorldviewEffect = 0
-WorldviewEffectAmm = 0
-WorldviewCheck = 0
-CheckPossetive = false
-CheckDifficulty = 20
-WorldViewCheckFailBranch = Array[ExtResource("1_afuai")]([])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://k3yo61qak6d8"
 
 [sub_resource type="Resource" id="Resource_xjsvv"]
@@ -250,7 +181,4 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("3_8tlxq")
 HappeningName = "The prince"
 Stages = Array[ExtResource("1_afuai")]([SubResource("Resource_afuai"), SubResource("Resource_gl0ga"), SubResource("Resource_dy2mo"), SubResource("Resource_143ge"), SubResource("Resource_ftcno"), SubResource("Resource_xjsvv")])
-HappeningAppearance = 0
 Special = true
-CrewRecruit = false
-AllowedAppearances = 1

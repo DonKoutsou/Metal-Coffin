@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddbxni7fgqwdh"]
+[gd_scene format=3 uid="uid://ddbxni7fgqwdh"]
 
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/Clouds/clouds.gdshader" id="1_n86u7"]
 
@@ -12,13 +12,13 @@ noise = SubResource("FastNoiseLite_x4uwu")
 shader = ExtResource("1_n86u7")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_xcrok")
 shader_parameter/density = 0.25
-shader_parameter/speed = Vector2(0.02, 0.01)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/custom_time = 0.0
-shader_parameter/UseCustomTime = false
+shader_parameter/Camera_Offset = Vector2(0, 0)
+shader_parameter/Offset = Vector2(0, 0)
 shader_parameter/NormalStr = 0.5
+shader_parameter/Light = 1.0
 shader_parameter/shadow_strength = 0.3
 shader_parameter/shadow_parallax_amount = 0.5
+shader_parameter/rotation_angle = 0.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4lisr"]
 noise_type = 5
@@ -27,29 +27,29 @@ frequency = 0.063
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h6fo2"]
 width = 1024
 height = 1024
-seamless = true
 noise = SubResource("FastNoiseLite_4lisr")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d8iju"]
 shader = ExtResource("1_n86u7")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_h6fo2")
 shader_parameter/density = 0.25
-shader_parameter/speed = Vector2(0.02, 0.01)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/custom_time = 0.0
-shader_parameter/UseCustomTime = false
+shader_parameter/Camera_Offset = Vector2(0, 0)
+shader_parameter/Offset = Vector2(0, 0)
 shader_parameter/NormalStr = 0.5
+shader_parameter/Light = 1.0
 shader_parameter/shadow_strength = 0.3
 shader_parameter/shadow_parallax_amount = 0.5
+shader_parameter/rotation_angle = 0.0
 
-[node name="Clouds" type="ParallaxBackground"]
+[node name="Clouds" type="ParallaxBackground" unique_id=1542620151]
 layer = 1
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="." unique_id=202165233]
 material = SubResource("ShaderMaterial_wmnfe")
 motion_mirroring = Vector2(1000, 1000)
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=68228240]
 material = SubResource("ShaderMaterial_d8iju")
 anchors_preset = 15
 anchor_right = 1.0

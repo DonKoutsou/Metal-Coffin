@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=7 format=3 uid="uid://q6pvyblp3f1r"]
+[gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://q6pvyblp3f1r"]
 
 [ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="1_daran"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_hd55o"]
@@ -9,12 +9,10 @@
 [sub_resource type="Resource" id="Resource_daran"]
 script = ExtResource("3_5cvix")
 PossibleIds = Array[ExtResource("1_hd55o")]([ExtResource("2_thg8v")])
-DataName = ""
 metadata/_custom_type_script = "uid://bqgyl8uqmo3sl"
 
 [resource]
 script = ExtResource("4_5ie0d")
-SpotK = 0
 VisibleOnStart = true
 BackgroundScene = ExtResource("1_daran")
 Data = SubResource("Resource_daran")

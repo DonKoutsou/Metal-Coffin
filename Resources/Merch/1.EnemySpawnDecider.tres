@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpawnDecider" load_steps=58 format=3 uid="uid://c1buiwym6qkh8"]
+[gd_resource type="Resource" script_class="SpawnDecider" format=3 uid="uid://c1buiwym6qkh8"]
 
 [ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_87ibq"]
 [ext_resource type="Resource" uid="uid://ctb0bey42ck18" path="res://Resources/Captains/SpawnInfos/FireshipLvl1.tres" id="2_wdg75"]
@@ -65,4 +65,3 @@ GroundUnits = Array[ExtResource("1_87ibq")]([ExtResource("19_4glqq"), ExtResourc
 ConvoyUnits = Array[ExtResource("1_87ibq")]([ExtResource("18_5ajvh")])
 MerchList = Array[ExtResource("21_0l8w1")]([ExtResource("22_n5x2f"), ExtResource("23_e0tbx"), ExtResource("24_7csm4"), ExtResource("25_1jucq"), ExtResource("26_fxbmr"), ExtResource("27_eko6l"), ExtResource("28_ndjdo"), ExtResource("29_5gpoi"), ExtResource("30_mbacr"), ExtResource("31_2npr6"), ExtResource("32_472ag"), ExtResource("33_4ck5a"), ExtResource("34_0mi3x"), ExtResource("35_6tuc6"), ExtResource("36_e63t2")])
 WorkshopList = Array[ExtResource("21_0l8w1")]([ExtResource("39_nwwh6"), ExtResource("40_ymg10"), ExtResource("45_rfrj6"), ExtResource("50_mdoiy"), ExtResource("51_u2hn7"), ExtResource("54_wjgph"), ExtResource("57_adowj"), ExtResource("59_4akpv"), ExtResource("63_1c3sd"), ExtResource("65_3oetp"), ExtResource("68_gv8v6"), ExtResource("72_lsbtd"), ExtResource("75_wb6f4"), ExtResource("62_e0tbx"), ExtResource("78_nwwh6"), ExtResource("74_e63t2")])
-Switch = false

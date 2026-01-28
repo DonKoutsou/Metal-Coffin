@@ -1,15 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://dhbyfc1rfad2f"]
+[gd_scene format=3 uid="uid://dhbyfc1rfad2f"]
 
 [ext_resource type="Script" uid="uid://cl0fuirqabjb0" path="res://Scripts/TownShop/work_shop.gd" id="1_4uhfw"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="1_6rtyi"]
+[ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="1_6rtyi"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p28a8"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_bpcd3"]
 [ext_resource type="PackedScene" uid="uid://iv5o83jfm5t6" path="res://Scenes/TownShop/WorkShopItem.tscn" id="2_gy23n"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="3_4uhfw"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="3_4uhfw"]
 [ext_resource type="PackedScene" uid="uid://mcrp4chqoake" path="res://Scenes/TownShop/StatComperator.tscn" id="4_r5mim"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="7_itsvt"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="9_itsvt"]
-[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
+[ext_resource type="AudioStream" uid="uid://c866lg2xo47bl" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
 content_margin_left = 5.0
@@ -32,7 +32,7 @@ content_margin_bottom = 5.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy23n"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 
-[node name="WorkShop" type="Control" node_paths=PackedStringArray("ShipButtonsParent", "EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "DescriptorPlace", "ItemParent", "ItemCat", "ShipIcons", "Descr")]
+[node name="WorkShop" type="Control" unique_id=398074188 node_paths=PackedStringArray("ShipButtonsParent", "EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "DescriptorPlace", "ItemParent", "ItemCat", "ShipIcons", "Descr")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +58,7 @@ ItemCat = NodePath("PanelContainer/PanelContainer2")
 ShipIcons = NodePath("PanelContainer/VBoxContainer/HBoxContainer/TextureRect")
 Descr = NodePath("PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer/ItemDesc")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1464941558]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,33 +67,33 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=992835766]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=432730740]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1531908430]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1379977091]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=2120448741]
 custom_minimum_size = Vector2(112, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=498202856]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Docked Ships"
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1345407154]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rs5of")
@@ -102,39 +102,39 @@ vertical_scroll_mode = 3
 script = ExtResource("7_itsvt")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=209076296]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1965928851]
 layout_mode = 2
 text = "Close"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=976521014]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=14692894]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2" unique_id=1902120053]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer" unique_id=118096959]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer" unique_id=1867703182]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Ship Parts"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer" unique_id=1592551215]
 custom_minimum_size = Vector2(270, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -144,117 +144,117 @@ vertical_scroll_mode = 3
 script = ExtResource("7_itsvt")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="HFlowContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="HFlowContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer" unique_id=1379808057]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2" unique_id=165377193]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer" unique_id=266339409]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer/VBoxContainer" unique_id=1174003953]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Engines"
 
-[node name="Engines" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer/VBoxContainer"]
+[node name="Engines" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer/VBoxContainer" unique_id=211480111]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2" unique_id=119249377]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2" unique_id=1648481558]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2/VBoxContainer2"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2/VBoxContainer2" unique_id=1432013494]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Fuel Tanks"
 
-[node name="Fuel Tanks" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2/VBoxContainer2"]
+[node name="Fuel Tanks" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer2/VBoxContainer2" unique_id=1634468202]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 mouse_filter = 2
 
-[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2" unique_id=252023887]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3" unique_id=1031105217]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3/VBoxContainer3"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3/VBoxContainer3" unique_id=1480580101]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Sensors"
 
-[node name="Sensors" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3/VBoxContainer3"]
+[node name="Sensors" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer3/VBoxContainer3" unique_id=973024124]
 layout_mode = 2
 size_flags_vertical = 2
 mouse_filter = 2
 
-[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2" unique_id=1054012593]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4" unique_id=1611036837]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4/VBoxContainer4"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4/VBoxContainer4" unique_id=90124191]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Fortifications"
 
-[node name="Shields" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4/VBoxContainer4"]
+[node name="Shields" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer4/VBoxContainer4" unique_id=1073725142]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 mouse_filter = 2
 
-[node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2"]
+[node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2" unique_id=759678630]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5"]
+[node name="VBoxContainer5" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5" unique_id=339675958]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5/VBoxContainer5"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5/VBoxContainer5" unique_id=1173952264]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4uhfw")
 text = "Weapons"
 
-[node name="Weapons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5/VBoxContainer5"]
+[node name="Weapons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/ScrollContainer/HFlowContainer2/PanelContainer5/VBoxContainer5" unique_id=1576689766]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=924552109]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -262,20 +262,20 @@ texture = ExtResource("1_6rtyi")
 expand_mode = 5
 stretch_mode = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer" unique_id=339938003]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_p28a8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer2" unique_id=1281017568]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer2/VBoxContainer" unique_id=79424221]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Scroll" type="ScrollContainer" parent="PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Scroll" type="ScrollContainer" parent="PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=1281634381]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -285,7 +285,7 @@ vertical_scroll_mode = 3
 script = ExtResource("7_itsvt")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer/Scroll"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer/Scroll" unique_id=1653200139]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -293,22 +293,22 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ItemDesc" parent="PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("9_itsvt")]
+[node name="ItemDesc" parent="PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=1933622895 instance=ExtResource("9_itsvt")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CancelButton" type="Button" parent="PanelContainer/PanelContainer2/VBoxContainer"]
+[node name="CancelButton" type="Button" parent="PanelContainer/PanelContainer2/VBoxContainer" unique_id=1288863118]
 layout_mode = 2
 text = "Cancel"
 
-[node name="Panel" type="Panel" parent="PanelContainer/PanelContainer2"]
+[node name="Panel" type="Panel" parent="PanelContainer/PanelContainer2" unique_id=1527099633]
 custom_minimum_size = Vector2(15, 2)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_gy23n")
 
-[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
+[node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=1351277791]
 stream = ExtResource("10_itsvt")
 autoplay = true
 bus = &"Sounds"

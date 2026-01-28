@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://bcyedao3gvdki"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bcyedao3gvdki"]
 
-[ext_resource type="Texture2D" uid="uid://cbd6as3e4rwp6" path="res://Assets/Cards/Flares.png" id="1_6wv8y"]
+[ext_resource type="Texture2D" uid="uid://baklt3cd1hyyu" path="res://Assets/Cards/Flares.png" id="1_6wv8y"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_6wv8y"]
 [ext_resource type="Script" uid="uid://ddhital5xi55v" path="res://Scripts/CardFight/CounterCardModule.gd" id="2_q47wn"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_q47wn"]
@@ -8,23 +8,15 @@
 [sub_resource type="Resource" id="Resource_v8m8y"]
 script = ExtResource("2_q47wn")
 CounterType = 1
-OnSuccesfullDeffenceModules = Array[ExtResource("2_6wv8y")]([])
-AOE = false
-TierUpgrade = 1.0
-TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://ddhital5xi55v"
 
 [resource]
 script = ExtResource("5_q47wn")
 Icon = ExtResource("1_6wv8y")
 CardName = "Flare"
-CardDescriptionOverride = ""
 Energy = 1
 AllowDuplicates = true
 Consume = true
-OnUseModules = Array[ExtResource("2_6wv8y")]([])
 OnPerformModule = SubResource("Resource_v8m8y")
 Type = 1
-WeapT = 0
-UseConditions = Array[int]([])
 AllowTier = false

@@ -1,12 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scripts/CardFight/card.gd" id="1_vr3r8"]
 [ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="2_3yyhe"]
-[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
-[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="3_7mr5f"]
-[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="4_rd7hj"]
-[ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_t4r8q"]
-[ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_yh81d"]
+[ext_resource type="Texture2D" uid="uid://bpaqpfwi60rbb" path="res://Assets/UIPiecies/Bolt.png" id="2_rd7hj"]
+[ext_resource type="Texture2D" uid="uid://bocf54aohej8x" path="res://Assets/Cards/card.png" id="3_7mr5f"]
+[ext_resource type="Texture2D" uid="uid://jiray4gr382m" path="res://Assets/Cards/BarraceIncendiery.png" id="4_rd7hj"]
+[ext_resource type="FontFile" uid="uid://m8psk06kkwa4" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_t4r8q"]
+[ext_resource type="Texture2D" uid="uid://b0pqpqkcdgign" path="res://Assets/Cards/CardBack.png" id="7_yh81d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
 bg_color = Color(1, 1, 1, 1)
@@ -15,23 +15,6 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh81d"]
 content_margin_left = 8.0
@@ -69,6 +52,23 @@ corner_radius_bottom_left = 5
 corner_detail = 4
 shadow_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yyhe"]
 bg_color = Color(1, 1, 1, 0)
 corner_radius_top_left = 5
@@ -105,7 +105,7 @@ corner_detail = 2
 shadow_size = 8
 anti_aliasing_size = 2.0
 
-[node name="Card" type="Control" node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "Lines", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel") groups=["Card"]]
+[node name="Card" type="Control" unique_id=1687597269 node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "Lines", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel") groups=["Card"]]
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 3
 anchors_preset = 8
@@ -137,7 +137,7 @@ Line = NodePath("Line2D")
 AmmountLabel = NodePath("Amm/Label")
 RealisticFont = ExtResource("6_t4r8q")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2087537965]
 material = ExtResource("2_3yyhe")
 layout_mode = 1
 anchors_preset = 15
@@ -151,7 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1413988983]
 disable_3d = true
 own_world_3d = true
 transparent_bg = true
@@ -159,7 +159,7 @@ handle_input_locally = false
 size = Vector2i(186, 256)
 render_target_update_mode = 4
 
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport"]
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -172,7 +172,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4v2x1")
 
-[node name="Button" type="Button" parent="SubViewportContainer/SubViewport" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="SubViewportContainer/SubViewport" unique_id=110634723 groups=["DigitalButtons"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -185,17 +185,17 @@ grow_vertical = 2
 focus_mode = 0
 mouse_filter = 1
 theme_override_font_sizes/font_size = 26
-theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_yh81d")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yh81d")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_7mr5f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yh81d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7mr5f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yh81d")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_yh81d")
+theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
 autowrap_mode = 3
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=61408993]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,7 +210,7 @@ mouse_filter = 2
 texture = ExtResource("3_7mr5f")
 expand_mode = 1
 
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/TextureRect"]
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/TextureRect" unique_id=879423676]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -224,7 +224,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3yyhe")
 
-[node name="Panel2" type="Panel" parent="SubViewportContainer/SubViewport"]
+[node name="Panel2" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1580813051]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -236,7 +236,7 @@ grow_vertical = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_nilbr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport" unique_id=1862675400]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -249,12 +249,12 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=388063333]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -3
 
-[node name="CardCost" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
+[node name="CardCost" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=1986374705]
 custom_minimum_size = Vector2(30.26, 27.33)
 layout_mode = 2
 size_flags_vertical = 0
@@ -266,7 +266,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost"]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost" unique_id=1348593253]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 7
@@ -287,7 +287,7 @@ texture = ExtResource("2_rd7hj")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=29740889]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -298,7 +298,7 @@ text = "Incindiary Barrage"
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="CardText" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer"]
+[node name="CardText" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=403974655]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -308,7 +308,7 @@ texture = ExtResource("4_rd7hj")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer"]
+[node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=2019122254]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -327,7 +327,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1274712658]
 visible = false
 layout_mode = 0
 offset_left = -4.0
@@ -337,7 +337,7 @@ offset_bottom = 225.0
 texture = ExtResource("7_yh81d")
 expand_mode = 1
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=798469361]
 z_index = 2
 position = Vector2(100, 125)
 points = PackedVector2Array(0, 0, 0, 0)
@@ -347,7 +347,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 2
 
-[node name="Amm" type="PanelContainer" parent="."]
+[node name="Amm" type="PanelContainer" parent="." unique_id=949896521]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 2
@@ -361,7 +361,7 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4r8q")
 
-[node name="Label" type="Label" parent="Amm"]
+[node name="Label" type="Label" parent="Amm" unique_id=445580958]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4

@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://1vnrpn8q4byq"]
+[gd_scene format=3 uid="uid://1vnrpn8q4byq"]
 
 [ext_resource type="Script" uid="uid://clk1tqw1y8r5" path="res://Scripts/UI/fade_notif.gd" id="2_k1b3j"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="2_xxwjh"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="2_xxwjh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxwjh"]
 content_margin_top = 5.0
@@ -10,7 +10,7 @@ bg_color = Color(0.11, 0.11, 0.11, 0.8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j3ox"]
 
-[node name="FadeNotif" type="PanelContainer" node_paths=PackedStringArray("T") groups=["FadeNotif", "ItemNotification"]]
+[node name="FadeNotif" type="PanelContainer" unique_id=689629442 node_paths=PackedStringArray("T") groups=["FadeNotif", "ItemNotification"]]
 process_mode = 3
 modulate = Color(1, 0.763983, 0.0812772, 1)
 anchors_preset = 8
@@ -31,18 +31,18 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xxwjh")
 script = ExtResource("2_k1b3j")
 T = NodePath("HBoxContainer/Label")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1209036438]
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="HBoxContainer"]
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1060292891]
 custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3j3ox")
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=740365164]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -53,7 +53,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Panel2" type="Panel" parent="HBoxContainer"]
+[node name="Panel2" type="Panel" parent="HBoxContainer" unique_id=524623242]
 custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 mouse_filter = 2

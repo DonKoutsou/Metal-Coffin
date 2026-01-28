@@ -1,13 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccmwul4ncd4dx"]
+[gd_scene format=3 uid="uid://ccmwul4ncd4dx"]
 
 [ext_resource type="Script" uid="uid://e20sht2jh3tt" path="res://Scripts/EnemyAi/commander.gd" id="1_2gt3m"]
 [ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="2_3pmjh"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="2_fb4ti"]
-[ext_resource type="Script" uid="uid://b2gyfw6gh37hb" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_7gsnn"]
+[ext_resource type="Script" uid="uid://by87skfk300cb" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_7gsnn"]
 [ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="3_n65wb"]
 [ext_resource type="Resource" uid="uid://ds7viiermptuq" path="res://Resources/Items/Ammo/Long-RangeMissile.tres" id="4_0ik2s"]
-[ext_resource type="Script" uid="uid://c8jxlsxyeh3y" path="res://addons/beehave/nodes/composites/selector.gd" id="4_2bbgj"]
-[ext_resource type="Script" uid="uid://duypquk8en6g3" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_smsg2"]
+[ext_resource type="Script" uid="uid://cmocj1bpphkfi" path="res://addons/beehave/nodes/composites/selector.gd" id="4_2bbgj"]
+[ext_resource type="Script" uid="uid://cl2xhuxlthbjw" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_smsg2"]
 [ext_resource type="Script" uid="uid://dyxwpkc3fr5yh" path="res://Scripts/BeehaveNodes/UnhandledEnemies_Condition.gd" id="7_3q3c6"]
 [ext_resource type="Script" uid="uid://bc848p65pfktw" path="res://Scripts/BeehaveNodes/FindCloseShipAndOrderForPursuit_Action.gd" id="8_xcs4j"]
 [ext_resource type="Script" uid="uid://cr4w3s2bjah8" path="res://Scripts/BeehaveNodes/UnhandledSignals_Condition.gd" id="9_jbplp"]
@@ -15,9 +15,9 @@
 [ext_resource type="Script" uid="uid://baerrjbpu5t24" path="res://Scripts/BeehaveNodes/HasKnownEnemies_Condition.gd" id="11_2v8ck"]
 [ext_resource type="Script" uid="uid://cknahlbc8ucxy" path="res://Scripts/BeehaveNodes/MissileCarrierInPosition_Condition.gd" id="12_qpqk6"]
 [ext_resource type="Script" uid="uid://ftuq6keo4muc" path="res://Scripts/BeehaveNodes/AtackOrder_Action.gd" id="13_obikj"]
-[ext_resource type="Script" uid="uid://dw6p3i3ui48x7" path="res://addons/beehave/blackboard.gd" id="14_ny52o"]
+[ext_resource type="Script" uid="uid://bby1sn3novpec" path="res://addons/beehave/blackboard.gd" id="14_ny52o"]
 
-[node name="Commander" type="Node2D"]
+[node name="Commander" type="Node2D" unique_id=193911798]
 process_mode = 1
 script = ExtResource("1_2gt3m")
 Armaments = Dictionary[ExtResource("2_3pmjh"), int]({
@@ -27,45 +27,45 @@ ExtResource("4_0ik2s"): 3
 })
 layers_2d_physics = 1
 
-[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+[node name="BeehaveTree" type="Node" parent="." unique_id=92991087 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("3_7gsnn")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../Blackboard")
 custom_monitor = true
 actor = NodePath("..")
 
-[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+[node name="SelectorComposite" type="Node" parent="BeehaveTree" unique_id=927824720]
 script = ExtResource("4_2bbgj")
 
-[node name="FindUnhandledEnemies" type="Node" parent="BeehaveTree/SelectorComposite"]
+[node name="FindUnhandledEnemies" type="Node" parent="BeehaveTree/SelectorComposite" unique_id=815566656]
 script = ExtResource("6_smsg2")
 
-[node name="UnhandledEnemiesCondition" type="Node" parent="BeehaveTree/SelectorComposite/FindUnhandledEnemies"]
+[node name="UnhandledEnemiesCondition" type="Node" parent="BeehaveTree/SelectorComposite/FindUnhandledEnemies" unique_id=406995354]
 script = ExtResource("7_3q3c6")
 
-[node name="FindCloseShipAndOrderForPursuit_Action" type="Node" parent="BeehaveTree/SelectorComposite/FindUnhandledEnemies"]
+[node name="FindCloseShipAndOrderForPursuit_Action" type="Node" parent="BeehaveTree/SelectorComposite/FindUnhandledEnemies" unique_id=1719142183]
 script = ExtResource("8_xcs4j")
 
-[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorComposite"]
+[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorComposite" unique_id=2037449271]
 script = ExtResource("6_smsg2")
 
-[node name="UnhandledSignalsCondition" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
+[node name="UnhandledSignalsCondition" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2" unique_id=1483758111]
 script = ExtResource("9_jbplp")
 
-[node name="FindCloseShipAndOrderInvestigation_Action" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
+[node name="FindCloseShipAndOrderInvestigation_Action" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2" unique_id=563630518]
 script = ExtResource("10_x4oqt")
 
-[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorComposite"]
+[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorComposite" unique_id=1970705441]
 script = ExtResource("6_smsg2")
 
-[node name="HasKnownEnemiesCondition" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite"]
+[node name="HasKnownEnemiesCondition" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite" unique_id=1149378849]
 script = ExtResource("11_2v8ck")
 
-[node name="MissileCarrierInPositionCondition" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite"]
+[node name="MissileCarrierInPositionCondition" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite" unique_id=9070293]
 script = ExtResource("12_qpqk6")
 
-[node name="AtackAction" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite"]
+[node name="AtackAction" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite" unique_id=1960177282]
 script = ExtResource("13_obikj")
 
-[node name="Blackboard" type="Node" parent="."]
+[node name="Blackboard" type="Node" parent="." unique_id=438384038]
 script = ExtResource("14_ny52o")

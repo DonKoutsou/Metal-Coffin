@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://dymr3kp27n5to"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://dymr3kp27n5to"]
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_7sxud"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_ycksc"]
@@ -7,6 +7,4 @@
 [resource]
 script = ExtResource("2_ycksc")
 SpotName = "Cardi"
-Region = 0
-EnemyCity = false
 PossibleDrops = Array[ExtResource("2_7sxud")]([ExtResource("3_vr4ve")])

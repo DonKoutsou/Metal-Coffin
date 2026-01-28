@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://eemvne8otjn4"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://eemvne8otjn4"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_eytgd"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_vytmo"]
@@ -8,5 +8,4 @@
 script = ExtResource("2_eytgd")
 SpotName = "Armak"
 Region = 2
-EnemyCity = false
 PossibleDrops = Array[ExtResource("2_vytmo")]([ExtResource("3_o7gig")])

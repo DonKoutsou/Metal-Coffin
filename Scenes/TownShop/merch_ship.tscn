@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhpyiqwlbnmad"]
+[gd_scene format=3 uid="uid://bhpyiqwlbnmad"]
 
 [ext_resource type="Script" uid="uid://lq5jxesgjrsy" path="res://Scripts/TownShop/merch_ship.gd" id="2_4302v"]
-[ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBackgrounds/TownBg_001.png" id="2_u711y"]
+[ext_resource type="Texture2D" uid="uid://bk14vgvib8rqq" path="res://Assets/TownBackgrounds/TownBg_001.png" id="2_u711y"]
 [ext_resource type="PackedScene" uid="uid://bt2v8s1av0q6i" path="res://Scenes/TownShop/TownShopItem.tscn" id="3_4302v"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_5ggyd"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="5_5ggyd"]
-[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="5_ahaja"]
+[ext_resource type="AudioStream" uid="uid://c866lg2xo47bl" path="res://Assets/Sounds/workshop.mp3" id="5_ahaja"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
 content_margin_left = 5.0
@@ -16,7 +16,7 @@ content_margin_bottom = 5.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ggyd"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 
-[node name="MerchShop" type="Control" node_paths=PackedStringArray("ItemPlecement", "Descriptor")]
+[node name="MerchShop" type="Control" unique_id=1387783063 node_paths=PackedStringArray("ItemPlecement", "Descriptor")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ ItemScene = ExtResource("3_4302v")
 ItemPlecement = NodePath("VBoxContainer/HBoxContainer/Scroll/VBoxContainer")
 Descriptor = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=119572753]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_u711y")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=167661714]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,11 +51,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2135754073]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Scroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="Scroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer" unique_id=748483770]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -66,30 +66,30 @@ vertical_scroll_mode = 3
 script = ExtResource("4_5ggyd")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Scroll"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Scroll" unique_id=1312933190]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ItemDesc" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_5ggyd")]
+[node name="ItemDesc" parent="VBoxContainer/HBoxContainer" unique_id=1476076330 instance=ExtResource("5_5ggyd")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LeaveMerch" type="Button" parent="VBoxContainer"]
+[node name="LeaveMerch" type="Button" parent="VBoxContainer" unique_id=1463405966]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Leave"
 
-[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
+[node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=1890337388]
 stream = ExtResource("5_ahaja")
 volume_db = -5.0
 autoplay = true
 bus = &"Sounds"
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1926178712]
 custom_minimum_size = Vector2(15, 2)
 layout_mode = 1
 anchors_preset = 8

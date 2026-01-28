@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://c8wthdbwacfhe"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://c8wthdbwacfhe"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_66jjj"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_6o1ql"]
@@ -12,30 +12,22 @@
 script = ExtResource("5_awpny")
 UpgradeName = 1
 UpgradeAmmount = 12.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_05yu7"]
 script = ExtResource("5_awpny")
 UpgradeName = 2
 UpgradeAmmount = 12.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_32fsc"]
 script = ExtResource("5_awpny")
 UpgradeName = 9
 UpgradeAmmount = 15.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_kg1u8"]
 script = ExtResource("5_awpny")
 UpgradeName = 16
 UpgradeAmmount = 30.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -43,12 +35,9 @@ script = ExtResource("6_n7ikb")
 Upgrades = Array[ExtResource("5_awpny")]([SubResource("Resource_y5vig"), SubResource("Resource_05yu7"), SubResource("Resource_32fsc"), SubResource("Resource_kg1u8")])
 UpgradeVersion = ExtResource("4_q0elo")
 UpgradeTime = 800.0
-IsDamaged = false
 PartType = 1
 ItemName = "EcoDrive-100q \"Conserve\""
 ItemDesc = "Conserve is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, Conserve offers a balanced compromise for steady pacing over extended durations."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("2_6o1ql")]([ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("3_q2ctq"), ExtResource("3_q2ctq"), ExtResource("4_32fsc"), ExtResource("4_32fsc")])
-Tier = 0
 CanTransfer = false
 Cost = 80000

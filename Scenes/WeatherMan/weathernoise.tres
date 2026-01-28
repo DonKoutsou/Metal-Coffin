@@ -1,8 +1,8 @@
-[gd_resource type="NoiseTexture2D" load_steps=3 format=3 uid="uid://bpghre0s4hi8"]
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://bpghre0s4hi8"]
 
 [ext_resource type="Gradient" uid="uid://yscbyv660v33" path="res://Scenes/WeatherMan/new_gradient.tres" id="1_n0i4l"]
 [ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Scenes/WeatherMan/testnoise.tres" id="1_v2ynt"]
 
 [resource]
-color_ramp = ExtResource("1_n0i4l")
 noise = ExtResource("1_v2ynt")
+color_ramp = ExtResource("1_n0i4l")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MissileItem" load_steps=5 format=3 uid="uid://cn37ky4htb58u"]
+[gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://cn37ky4htb58u"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_72gep"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="2_i6fef"]
@@ -8,7 +8,6 @@
 [resource]
 script = ExtResource("3_mdy32")
 MissileScene = ExtResource("2_i6fef")
-Distance = 1500
 Speed = 2.0
 Damage = 50
 Type = 1
@@ -16,6 +15,4 @@ ItemName = "Heat Seeking Missile"
 ItemDesc = "A balanced missile system offering medium range and speed. Suited for general-purpose combat where flexibility and reliability matter most."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_72gep")]([ExtResource("2_mdy32")])
-Tier = 0
-CanTransfer = true
 Cost = 800

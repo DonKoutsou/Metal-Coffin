@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://5wbjoitcn62y"]
 
-[node name="HandContainer" type="Container"]
+[node name="HandContainer" type="Container" unique_id=1110175161]
 offset_right = 40.0
 offset_bottom = 40.0

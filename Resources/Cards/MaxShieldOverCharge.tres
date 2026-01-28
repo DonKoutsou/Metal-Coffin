@@ -1,30 +1,20 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://vk7sx0tcr6u8"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://vk7sx0tcr6u8"]
 
-[ext_resource type="Texture2D" uid="uid://droreje2r3m31" path="res://Assets/Cards/ShieldSurgeTeam.png" id="1_vu6ef"]
+[ext_resource type="Texture2D" uid="uid://c0urhl8vko6ip" path="res://Assets/Cards/ShieldSurgeTeam.png" id="1_vu6ef"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_602bs"]
 [ext_resource type="Script" uid="uid://ddob0fen8r2j2" path="res://Scripts/CardFight/MaxShieldCardModule.gd" id="3_vu6ef"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_2dpia"]
 
 [sub_resource type="Resource" id="Resource_w7l7e"]
 script = ExtResource("3_vu6ef")
-ShieldPerEnergy = 10
-CanBeUsedOnOther = false
-SelfUse = true
 AOE = true
-TierUpgrade = 1.0
-TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://ddob0fen8r2j2"
 
 [resource]
 script = ExtResource("5_2dpia")
 Icon = ExtResource("1_vu6ef")
 CardName = "Team Shield Surge"
-CardDescriptionOverride = ""
-Energy = 0
 AllowDuplicates = true
-Consume = false
 OnUseModules = Array[ExtResource("2_602bs")]([SubResource("Resource_w7l7e")])
 Type = 1
-WeapT = 0
 UseConditions = Array[int]([1, 2])
-AllowTier = true

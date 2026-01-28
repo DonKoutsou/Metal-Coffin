@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2srq1vxysnra"]
+[gd_scene format=3 uid="uid://d2srq1vxysnra"]
 
 [ext_resource type="Script" uid="uid://cgah610f2hvyu" path="res://Scenes/GlobalManagers/tutorial_manager.gd" id="1_yjbhx"]
 [ext_resource type="PackedScene" uid="uid://b8oenywljdoe2" path="res://Scenes/Inventory/Tutorial.tscn" id="2_tvhwd"]
 [ext_resource type="PackedScene" uid="uid://c5nqa1b7hofcs" path="res://Scenes/Inventory/TutorialOffScreen.tscn" id="3_0sq1f"]
 
-[node name="TutorialManager" type="CanvasLayer"]
+[node name="TutorialManager" type="CanvasLayer" unique_id=526988957]
 layer = 3
 follow_viewport_enabled = true
 script = ExtResource("1_yjbhx")

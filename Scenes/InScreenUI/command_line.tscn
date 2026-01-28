@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0iiqaijsg1y1"]
+[gd_scene format=3 uid="uid://d0iiqaijsg1y1"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_s0ja4"]
 [ext_resource type="Script" uid="uid://djw0qatbronxr" path="res://Scripts/command_line.gd" id="2_svsqk"]
 
-[node name="CommandLine" type="PanelContainer" node_paths=PackedStringArray("Text")]
+[node name="CommandLine" type="PanelContainer" unique_id=1154400603 node_paths=PackedStringArray("Text")]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -18,32 +18,31 @@ theme = ExtResource("1_s0ja4")
 script = ExtResource("2_svsqk")
 Text = NodePath("VBoxContainer/TextEdit")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=259234709]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1833009837]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=504438264]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1103346464]
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "X"
 icon_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
-clip_contents = false
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer" unique_id=740363938]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Cheat Code Here"
 scroll_fit_content_height = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TextEdit"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TextEdit" unique_id=1536794461]
 layout_mode = 0
 offset_top = 43.5
 offset_right = 87.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://shtkd2xxb6e4"]
+[gd_scene format=3 uid="uid://shtkd2xxb6e4"]
 
 [ext_resource type="Shader" uid="uid://cb0dm0o4762nl" path="res://Shaders/Clouds/cloud.gdshader" id="1_cbqnv"]
 [ext_resource type="Script" uid="uid://cuoiyspw87y75" path="res://Scripts/clouds_2.gd" id="2_hw6sj"]
@@ -14,10 +14,10 @@ domain_warp_fractal_octaves = 10
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fsyna"]
 width = 1024
 height = 1024
-seamless = true
-seamless_blend_skirt = 1.0
-normalize = false
 noise = SubResource("FastNoiseLite_rjx82")
+seamless = true
+normalize = false
+seamless_blend_skirt = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vciop"]
 shader = ExtResource("1_cbqnv")
@@ -30,7 +30,7 @@ shader_parameter/hole_positions = PackedVector2Array(0.64, 0.545)
 shader_parameter/hole_radius = 0.135
 shader_parameter/hole_count = 1
 
-[node name="ColorRect" type="ColorRect"]
+[node name="ColorRect" type="ColorRect" unique_id=1233545249]
 material = SubResource("ShaderMaterial_vciop")
 anchors_preset = 15
 anchor_right = 1.0

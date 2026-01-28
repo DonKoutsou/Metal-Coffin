@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3l8v8l2e2pkt"]
+[gd_scene format=3 uid="uid://c3l8v8l2e2pkt"]
 
 [ext_resource type="Script" uid="uid://we85k2ntvck5" path="res://Scripts/UI/ship_marker.gd" id="1_y30vi"]
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
+[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
-[ext_resource type="Texture2D" uid="uid://crn46j7x7kq6m" path="res://Assets/MapElements/Ship.png" id="7_kn8g7"]
-[ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
-[ext_resource type="Texture2D" uid="uid://revc6taisn70" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
-[ext_resource type="Texture2D" uid="uid://bbvfo5xkwu8pg" path="res://Assets/MapElements/triangle-target.png" id="8_143co"]
+[ext_resource type="Texture2D" uid="uid://bjesc4kqfeb2b" path="res://Assets/MapElements/Ship.png" id="7_kn8g7"]
+[ext_resource type="FontFile" uid="uid://dxpb6gd77jbk5" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
+[ext_resource type="Texture2D" uid="uid://3bd1jkpj1pod" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
+[ext_resource type="Texture2D" uid="uid://drfh18glib4hb" path="res://Assets/MapElements/triangle-target.png" id="8_143co"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tc2tu"]
 
@@ -16,7 +16,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6175k"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="ShipMarker" type="Node2D" node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown", "Line")]
+[node name="ShipMarker" type="Node2D" unique_id=443548216 node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown", "Line")]
 z_index = 1
 texture_filter = 2
 use_parent_material = true
@@ -36,7 +36,7 @@ Icons = {
 "Wreck": ExtResource("8_143co")
 }
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=1290798982]
 use_parent_material = true
 points = PackedVector2Array(0, -94, 0, -30)
 width = 4.0
@@ -44,14 +44,14 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1398465392]
 z_index = 5
 use_parent_material = true
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=437351215]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -67,7 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tc2tu")
 
-[node name="ShipName" type="Label" parent="Control/PanelContainer"]
+[node name="ShipName" type="Label" parent="Control/PanelContainer" unique_id=1016113574]
 use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -82,7 +82,7 @@ Hull Condition : 10 / 100"
 vertical_alignment = 1
 uppercase = true
 
-[node name="Icon" type="TextureRect" parent="." groups=["MapShipVizualiser"]]
+[node name="Icon" type="TextureRect" parent="." unique_id=1946680749 groups=["MapShipVizualiser"]]
 use_parent_material = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,7 +100,7 @@ mouse_filter = 0
 texture = ExtResource("7_kn8g7")
 expand_mode = 1
 
-[node name="ShipSymbol" type="Label" parent="Icon"]
+[node name="ShipSymbol" type="Label" parent="Icon" unique_id=1047617609]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 5
@@ -121,7 +121,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Direction" type="Label" parent="Icon/ShipSymbol"]
+[node name="Direction" type="Label" parent="Icon/ShipSymbol" unique_id=895729482]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 4
@@ -141,7 +141,7 @@ text = "->"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VisualContactCountdown" type="ProgressBar" parent="Icon"]
+[node name="VisualContactCountdown" type="ProgressBar" parent="Icon" unique_id=1276540579]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=80 format=3 uid="uid://du24ilvkea51x"]
+[gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://du24ilvkea51x"]
 
 [ext_resource type="PackedScene" uid="uid://bbfxceg5vwl1x" path="res://Scenes/TownShop/Town_background.tscn" id="1_eoubr"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_npnnf"]
@@ -82,11 +82,9 @@
 [sub_resource type="Resource" id="Resource_m1q4d"]
 script = ExtResource("4_u8h8q")
 PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("76_ce8sp"), ExtResource("32_eih60"), ExtResource("32_1cfk8"), ExtResource("45_ehgi0"), ExtResource("30_okb20"), ExtResource("33_k0fjb"), ExtResource("52_f0raw"), ExtResource("29_qgork"), ExtResource("15_01qsy"), ExtResource("71_5xt0p"), ExtResource("16_kg810"), ExtResource("49_6mxfb"), ExtResource("23_ff2ip"), ExtResource("73_vpmq3"), ExtResource("71_vbj0k"), ExtResource("43_toy1p"), ExtResource("3_ag8h5"), ExtResource("44_s6jw0"), ExtResource("65_ymjmp"), ExtResource("20_1iex0"), ExtResource("7_ahngf"), ExtResource("36_3dmxa"), ExtResource("10_6n0um"), ExtResource("36_aptn8"), ExtResource("59_oqkro"), ExtResource("18_afsen"), ExtResource("5_f2xt1"), ExtResource("64_7vksa"), ExtResource("55_6r1rl"), ExtResource("53_e2fqx"), ExtResource("14_vaem1"), ExtResource("53_waju0"), ExtResource("4_jl05r"), ExtResource("24_4va3m"), ExtResource("17_814d0"), ExtResource("53_3opna"), ExtResource("12_h17fg"), ExtResource("56_hmcrm"), ExtResource("24_bt0t3"), ExtResource("70_uyqk5"), ExtResource("6_tqj8y"), ExtResource("34_4el3t"), ExtResource("21_hoeoy"), ExtResource("52_tl3je"), ExtResource("69_kk6x1"), ExtResource("63_dg2qr"), ExtResource("74_3y7b2"), ExtResource("68_b2a0o"), ExtResource("26_4cwk1"), ExtResource("19_sxhmp"), ExtResource("46_1jrhg"), ExtResource("37_ututg"), ExtResource("38_7fr85"), ExtResource("67_rydkg"), ExtResource("46_o7q6v"), ExtResource("22_70rm0"), ExtResource("9_1qn8w"), ExtResource("45_6ts64"), ExtResource("75_84c2c"), ExtResource("8_mj5gy"), ExtResource("25_famtp"), ExtResource("27_8yqns"), ExtResource("61_8fhaj"), ExtResource("41_2j024"), ExtResource("11_glwy5"), ExtResource("68_kggl6"), ExtResource("51_aoqar"), ExtResource("31_vac3m"), ExtResource("50_3v1gm"), ExtResource("13_7rbke"), ExtResource("40_fd016"), ExtResource("66_rlrhj"), ExtResource("60_vf4x6"), ExtResource("62_j2r13")])
-DataName = ""
 
 [resource]
 script = ExtResource("11_2pbl6")
-SpotK = 0
 VisibleOnStart = true
 BackgroundScene = ExtResource("1_eoubr")
 Data = SubResource("Resource_m1q4d")

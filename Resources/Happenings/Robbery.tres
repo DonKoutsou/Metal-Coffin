@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=5 format=3 uid="uid://bi5laknt8ktr6"]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://bi5laknt8ktr6"]
 
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_ye3m0"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="3_f0q5s"]
@@ -7,7 +7,6 @@
 [sub_resource type="Resource" id="Resource_tahtp"]
 script = ExtResource("3_f0q5s")
 HappeningTexts = Array[String](["As you happen to "])
-Options = Array[ExtResource("2_ye3m0")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [resource]
@@ -15,6 +14,4 @@ script = ExtResource("3_tmcok")
 HappeningName = "Robbery"
 Stages = Array[ExtResource("3_f0q5s")]([SubResource("Resource_tahtp")])
 HappeningAppearance = 5
-Special = false
-CrewRecruit = false
 AllowedAppearances = 4

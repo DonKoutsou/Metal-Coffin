@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://cnet3bjwptmp7"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://cnet3bjwptmp7"]
 
-[ext_resource type="Texture2D" uid="uid://d3mqr34v3ispw" path="res://Assets/Cards/VitalSpot.png" id="1_8d88m"]
+[ext_resource type="Texture2D" uid="uid://dutasyqrlajyw" path="res://Assets/Cards/VitalSpot.png" id="1_8d88m"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_612g0"]
 [ext_resource type="Script" uid="uid://bu2ciutqs3t1b" path="res://Scripts/CardFight/DeBuffEnemyCardModule.gd" id="3_8d88m"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_612g0"]
@@ -12,13 +12,6 @@ StatToDeBuff = 2
 DeBuffDuration = 2
 DeBuffAmmount = 0.2
 AtackType = 2
-Damage = 0.0
-ScaleStat = Array[ExtResource("3_612g0")]([])
-CauseFile = false
-OnAtackModules = Array[ExtResource("2_612g0")]([])
-OnSuccesfullAtackModules = Array[ExtResource("2_612g0")]([])
-SkipShield = false
-AOE = false
 TierUpgrade = 1.3
 TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://bu2ciutqs3t1b"
@@ -27,12 +20,6 @@ metadata/_custom_type_script = "uid://bu2ciutqs3t1b"
 script = ExtResource("5_j0buw")
 Icon = ExtResource("1_8d88m")
 CardName = "Weak Point Id"
-CardDescriptionOverride = ""
 Energy = 3
 AllowDuplicates = true
-Consume = false
 OnUseModules = Array[ExtResource("2_612g0")]([SubResource("Resource_612g0")])
-Type = 0
-WeapT = 0
-UseConditions = Array[int]([])
-AllowTier = true

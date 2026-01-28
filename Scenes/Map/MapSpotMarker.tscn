@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgsgcnyyv1gxm"]
+[gd_scene format=3 uid="uid://bgsgcnyyv1gxm"]
 
 [ext_resource type="Script" uid="uid://c3wcxx1myg0wb" path="res://Scripts/UI/map_spot_marker.gd" id="1_5x46s"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
-[ext_resource type="AudioStream" uid="uid://hrwbq66p4fq8" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="3_625fb"]
+[ext_resource type="AudioStream" uid="uid://cnetiaqcwgcdv" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="3_625fb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
 bg_color = Color(0, 0, 0, 1)
@@ -246,7 +246,7 @@ corner_radius_bottom_left = 1024
 corner_detail = 20
 anti_aliasing = false
 
-[node name="SpotMarker" type="Control" node_paths=PackedStringArray("SpotNameLabel", "SpotDropPosition")]
+[node name="SpotMarker" type="Control" unique_id=1554798351 node_paths=PackedStringArray("SpotNameLabel", "SpotDropPosition")]
 use_parent_material = true
 layout_mode = 3
 anchors_preset = 8
@@ -267,7 +267,7 @@ SpotDropPosition = NodePath("HBoxContainer/VBoxContainer/HBoxContainer")
 NofiticationScene = ExtResource("2_b0564")
 BeepSound = ExtResource("3_625fb")
 
-[node name="AnalyzeButton" type="Panel" parent="."]
+[node name="AnalyzeButton" type="Panel" parent="." unique_id=347315360]
 modulate = Color(1, 1, 1, 0.3)
 show_behind_parent = true
 texture_filter = 4
@@ -287,12 +287,10 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gjj15")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_4iew2")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=880244481]
+libraries/ = SubResource("AnimationLibrary_4iew2")
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=257972934]
 visible = false
 z_index = 2
 use_parent_material = true
@@ -312,7 +310,7 @@ pivot_offset = Vector2(20, 20)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ey58")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=313281553]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 7
@@ -330,18 +328,18 @@ mouse_filter = 2
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=226659585]
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1105010127]
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="TextureRect2" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="TextureRect2" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1665220381]
 modulate = Color(1, 1, 1, 0.3)
 use_parent_material = true
 layout_mode = 2
@@ -356,11 +354,11 @@ vertical_alignment = 1
 justification_flags = 227
 uppercase = true
 
-[node name="VisibilityNotif" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibilityNotif" type="VisibleOnScreenNotifier2D" parent="." unique_id=1569909601]
 position = Vector2(0, -16.5)
 scale = Vector2(7, 8.65)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=2031343539]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 5

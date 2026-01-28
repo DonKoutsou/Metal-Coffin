@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dp1kurhtal0no"]
+[gd_scene format=3 uid="uid://dp1kurhtal0no"]
 
 [ext_resource type="Script" uid="uid://o3ui2v0rd8py" path="res://Scripts/CardFight/discard_pile.gd" id="2_cbj6q"]
 
-[node name="DiscardPile" type="Control" groups=["DiscardPile"]]
+[node name="DiscardPile" type="Control" unique_id=333127963 groups=["DiscardPile"]]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_cbj6q")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=244832385]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

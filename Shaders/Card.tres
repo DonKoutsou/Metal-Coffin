@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dwvsafe1eaxbk"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dwvsafe1eaxbk"]
 
 [ext_resource type="Shader" uid="uid://dqjas3kma1fqo" path="res://Shaders/fake3d.gdshader" id="1_ndm65"]
 

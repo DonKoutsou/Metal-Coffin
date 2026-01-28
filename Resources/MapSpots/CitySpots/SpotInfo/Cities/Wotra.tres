@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://bqngc8efqwjsk"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://bqngc8efqwjsk"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_jj8ga"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_0jpk8"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_rvosk"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_y27xx"]
@@ -10,4 +9,3 @@ script = ExtResource("3_y27xx")
 SpotName = "Wotra"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_0jpk8")]([ExtResource("3_rvosk")])
-Merchendise = Array[ExtResource("1_jj8ga")]([])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvr1a2nugdu2j"]
+[gd_scene format=3 uid="uid://cvr1a2nugdu2j"]
 
 [ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="1_b226h"]
 [ext_resource type="Script" uid="uid://bsaj48imrffw" path="res://Scripts/intro.gd" id="1_duh1u"]
@@ -14,7 +14,7 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_oyy4e"]
 environment = SubResource("Environment_duh1u")
 
-[node name="Intro" type="Control" node_paths=PackedStringArray("TextLabel")]
+[node name="Intro" type="Control" unique_id=1950349529 node_paths=PackedStringArray("TextLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +31,7 @@ However, their diverse cultures have become a heavy shackle, fostering perpetual
 Is this yet another cycle leading humanity toward its inevitable end?"
 TextLabel = NodePath("Label")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1060795668]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,7 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1740033412]
 disable_3d = true
 own_world_3d = true
 world_3d = SubResource("World3D_oyy4e")
@@ -48,10 +48,10 @@ handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
-[node name="TownBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_b226h")]
+[node name="TownBackground" parent="SubViewportContainer/SubViewport" unique_id=820992415 instance=ExtResource("1_b226h")]
 Zoom = 0.67
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=624843301]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -82,7 +82,7 @@ t"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="SkipButton" type="Button" parent="."]
+[node name="SkipButton" type="Button" parent="." unique_id=1847060564]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

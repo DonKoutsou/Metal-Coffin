@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://yin8tcre8wf8"]
+[gd_scene format=3 uid="uid://yin8tcre8wf8"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_rpr4c"]
 [ext_resource type="Script" uid="uid://wsdodkllx8nn" path="res://Scripts/port_notification.gd" id="1_xoog0"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_3wc5p"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_5iliw"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="5_5iliw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5djm"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="PortNotification" type="Control" node_paths=PackedStringArray("BuffText", "LandingText")]
+[node name="PortNotification" type="Control" unique_id=810620805 node_paths=PackedStringArray("BuffText", "LandingText")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 8
@@ -29,7 +29,7 @@ ShipControllerEventH = ExtResource("2_3wc5p")
 BuffText = NodePath("VBoxContainer/SimulationNotification2")
 LandingText = NodePath("VBoxContainer/HBoxContainer/SimulationNotification")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1457091682]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -42,7 +42,7 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="SimulationNotification2" type="Label" parent="VBoxContainer"]
+[node name="SimulationNotification2" type="Label" parent="VBoxContainer" unique_id=826674576]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
@@ -53,7 +53,7 @@ horizontal_alignment = 2
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=804512270]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -63,12 +63,12 @@ theme_override_fonts/font = ExtResource("5_5iliw")
 text = "- - - - - - - - - "
 horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2024879389]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="SimulationNotification" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="SimulationNotification" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=656646334]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 0
@@ -80,13 +80,13 @@ horizontal_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=1253082020]
 visible = false
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g5djm")
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=23980089]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)

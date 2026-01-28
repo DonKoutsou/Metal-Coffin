@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://8h0appdsfp2i"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://8h0appdsfp2i"]
 
 [ext_resource type="Resource" uid="uid://dn2krxo3cw830" path="res://Resources/Items/ShipParts/Radar/MediumCheapRadar.tres" id="1_cwlc3"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_kku8l"]
@@ -7,11 +7,7 @@
 [sub_resource type="Resource" id="Resource_rreu3"]
 script = ExtResource("2_kku8l")
 It = ExtResource("1_cwlc3")
-Amm = 0
 
 [resource]
 script = ExtResource("3_pbrpx")
 Merch = SubResource("Resource_rreu3")
-Cost = 0
-MaxAmmPerStage = 0
-DontGenerateBefore = 0

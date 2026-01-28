@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvduhiu1v7ywh"]
+[gd_scene format=3 uid="uid://bvduhiu1v7ywh"]
 
 [ext_resource type="Script" uid="uid://caqrcv56sac2a" path="res://Scripts/CardFight/town_external_ui.gd" id="1_8r5c3"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="2_u4bsh"]
-[ext_resource type="AudioStream" uid="uid://dnly626tg06nb" path="res://Assets/Sounds/CoinSlide22.mp3" id="3_3jwvr"]
-[ext_resource type="Texture2D" uid="uid://dcagjig448xtx" path="res://Assets/UIPiecies/Screen/Coin2_FullQuality.png" id="4_acv7r"]
-[ext_resource type="AudioStream" uid="uid://iilvk0u0kfff" path="res://Assets/Sounds/CoinSlide.mp3" id="5_yen4x"]
-[ext_resource type="Texture2D" uid="uid://cghnkjw6wxy7c" path="res://Assets/UIPiecies/Screen/Coin_FullQuality.png" id="6_j05jt"]
-[ext_resource type="Texture2D" uid="uid://5u5shqmajwwn" path="res://Assets/UIPiecies/Screen/SidePanels/DispencePanel_FullQuality.png" id="9_kj8r2"]
+[ext_resource type="AudioStream" uid="uid://bnxacviep83jt" path="res://Assets/Sounds/CoinSlide22.mp3" id="3_3jwvr"]
+[ext_resource type="Texture2D" uid="uid://ixkmygkrcy5r" path="res://Assets/UIPiecies/Screen/Coin2_FullQuality.png" id="4_acv7r"]
+[ext_resource type="AudioStream" uid="uid://xxmlvkwrpbol" path="res://Assets/Sounds/CoinSlide.mp3" id="5_yen4x"]
+[ext_resource type="Texture2D" uid="uid://nossylu05qvk" path="res://Assets/UIPiecies/Screen/Coin_FullQuality.png" id="6_j05jt"]
+[ext_resource type="Texture2D" uid="uid://dbh0tnskuitfy" path="res://Assets/UIPiecies/Screen/SidePanels/DispencePanel_FullQuality.png" id="9_kj8r2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acv7r"]
 draw_center = false
@@ -87,7 +87,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFightExternalUI" type="Control" node_paths=PackedStringArray("Coin", "AnimPlayer", "CoinPlecement")]
+[node name="CardFightExternalUI" type="Control" unique_id=1279918844 node_paths=PackedStringArray("Coin", "AnimPlayer", "CoinPlecement")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,7 +103,7 @@ CoinPlecement = NodePath("DiscardInsert2/Control")
 CoinSlideInSound = ExtResource("5_yen4x")
 CoinSlideSound = ExtResource("3_3jwvr")
 
-[node name="ScreenFrame2" type="TextureRect" parent="."]
+[node name="ScreenFrame2" type="TextureRect" parent="." unique_id=19489388]
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15
@@ -119,14 +119,14 @@ mouse_filter = 0
 texture = ExtResource("9_kj8r2")
 expand_mode = 1
 
-[node name="Fund_Container" parent="." instance=ExtResource("2_u4bsh")]
+[node name="Fund_Container" parent="." unique_id=164260139 instance=ExtResource("2_u4bsh")]
 layout_mode = 1
 offset_left = 401.0
 offset_top = -286.0
 offset_right = 497.0
 offset_bottom = -240.0
 
-[node name="DiscardInsert" type="PanelContainer" parent="."]
+[node name="DiscardInsert" type="PanelContainer" parent="." unique_id=297766887]
 clip_contents = true
 layout_mode = 0
 offset_left = 1065.0
@@ -136,13 +136,13 @@ offset_bottom = 270.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_acv7r")
 
-[node name="Control" type="Control" parent="DiscardInsert"]
+[node name="Control" type="Control" parent="DiscardInsert" unique_id=437721954]
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 19.715)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="DiscardInsert/Control"]
+[node name="TextureRect" type="TextureRect" parent="DiscardInsert/Control" unique_id=1514876995]
 layout_mode = 0
 offset_left = -4.0
 offset_top = 3.0
@@ -151,13 +151,11 @@ offset_bottom = 42.0
 texture = ExtResource("4_acv7r")
 expand_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_j05jt")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=620324247]
+libraries/ = SubResource("AnimationLibrary_j05jt")
 speed_scale = 0.6
 
-[node name="DiscardInsert2" type="PanelContainer" parent="."]
+[node name="DiscardInsert2" type="PanelContainer" parent="." unique_id=1209302865]
 clip_contents = true
 layout_mode = 0
 offset_left = 1064.0
@@ -167,7 +165,7 @@ offset_bottom = 646.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yen4x")
 
-[node name="Control" type="Control" parent="DiscardInsert2"]
+[node name="Control" type="Control" parent="DiscardInsert2" unique_id=622095983]
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 19.715)
 layout_mode = 2

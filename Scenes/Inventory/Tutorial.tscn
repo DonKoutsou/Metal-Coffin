@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8oenywljdoe2"]
+[gd_scene format=3 uid="uid://b8oenywljdoe2"]
 
 [ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Inventory/tutorial.gd" id="1_uf1g7"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_k6wjy"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="2_k6wjy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_xacro"]
-[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_xy5n5"]
-[ext_resource type="FontFile" uid="uid://crgk2e3gswnr3" path="res://Fonts/DINEngschriftStd.otf" id="5_xy5n5"]
+[ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="3_xy5n5"]
+[ext_resource type="FontFile" uid="uid://cbf5rlpa38bj3" path="res://Fonts/DINEngschriftStd.otf" id="5_xy5n5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k6wjy"]
 light_mode = 1
@@ -17,7 +17,7 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Tutorial" type="Control" node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
+[node name="Tutorial" type="Control" unique_id=1159867214 node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
 process_mode = 3
 z_index = 130
 material = SubResource("CanvasItemMaterial_k6wjy")
@@ -37,7 +37,7 @@ Line2 = NodePath("Control/Line2D2")
 InSound = ExtResource("2_k6wjy")
 OutSound = ExtResource("3_xy5n5")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1139684181]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -50,7 +50,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Line2D" type="Line2D" parent="Control"]
+[node name="Line2D" type="Line2D" parent="Control" unique_id=941344578]
 use_parent_material = true
 points = PackedVector2Array(0, 0, 0, 0)
 width_curve = SubResource("Curve_xy5n5")
@@ -59,7 +59,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 4
 
-[node name="Line2D2" type="Line2D" parent="Control"]
+[node name="Line2D2" type="Line2D" parent="Control" unique_id=1842798753]
 use_parent_material = true
 points = PackedVector2Array(0, 0, 0, 0)
 width_curve = SubResource("Curve_k6wjy")
@@ -68,7 +68,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=965129877]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -86,27 +86,27 @@ mouse_filter = 2
 theme_override_constants/separation = -5
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=716385856]
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("2_xacro")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1615479839]
 use_parent_material = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=2054468136]
 use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Captain Inventory"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=1881589102]
 use_parent_material = true
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer" unique_id=2091802626]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -123,7 +123,7 @@ fit_content = true
 autowrap_mode = 2
 visible_characters_behavior = 1
 
-[node name="Button" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1586374127 groups=["DigitalButtons"]]
 process_mode = 1
 use_parent_material = true
 layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://cs6mrrxnafmbt"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://cs6mrrxnafmbt"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_eopay"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_lb2hx"]
@@ -11,31 +11,24 @@
 script = ExtResource("4_85e80")
 UpgradeName = 4
 UpgradeAmmount = 100.0
-PenaltyAmmount = 0.0
 CurrentValue = 100.0
 
 [sub_resource type="Resource" id="Resource_lb2hx"]
 script = ExtResource("4_85e80")
 UpgradeName = 15
 UpgradeAmmount = 75.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_qean4"]
 script = ExtResource("4_85e80")
 UpgradeName = 16
 UpgradeAmmount = 15.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_85e80"]
 script = ExtResource("4_85e80")
 UpgradeName = 9
 UpgradeAmmount = 15.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -43,11 +36,9 @@ script = ExtResource("5_enexi")
 Upgrades = Array[ExtResource("4_85e80")]([SubResource("Resource_x1aim"), SubResource("Resource_lb2hx"), SubResource("Resource_qean4"), SubResource("Resource_85e80")])
 UpgradeVersion = ExtResource("3_eopay")
 UpgradeTime = 240.0
-IsDamaged = false
 PartType = 5
 ItemName = "SGP-2 Ship Barrier"
 ItemDesc = "A reliable entry-level barrier system designed to provide essential protection against incoming threats. Utilizing a compact energy field generator, it effectively neutralizes missiles and deflects heavy caliber rounds, offering robust frontline defense for smaller vessels engaged in skirmishes."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_eopay")]([ExtResource("2_lb2hx"), ExtResource("2_lb2hx"), ExtResource("2_lb2hx"), ExtResource("3_lb2hx")])
 Tier = 1
 CanTransfer = false

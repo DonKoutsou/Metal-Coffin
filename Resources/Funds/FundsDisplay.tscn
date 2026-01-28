@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://djgy3lp61vapo"]
+[gd_scene format=3 uid="uid://djgy3lp61vapo"]
 
 [ext_resource type="Script" uid="uid://brbba7olbisek" path="res://Resources/Funds/Funds_Stat_container.gd" id="1_lghqb"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_gmtu8"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="4_xg8vb"]
-[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="7_xbk7s"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="4_xg8vb"]
+[ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="7_xbk7s"]
 
-[node name="Fund_Container" type="Control" node_paths=PackedStringArray("Sound", "Text")]
+[node name="Fund_Container" type="Control" unique_id=1956462459 node_paths=PackedStringArray("Sound", "Text")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,7 +26,7 @@ PlayerWallet = ExtResource("2_gmtu8")
 Sound = NodePath("AudioStreamPlayer2D")
 Text = NodePath("Label")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=775818526]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,7 +50,7 @@ text = "Funds
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1800985644]
 stream = ExtResource("4_xg8vb")
 pitch_scale = 4.0
 bus = &"MapSounds"

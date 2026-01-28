@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://crwbxcbj81jvc"]
+[gd_scene format=3 uid="uid://crwbxcbj81jvc"]
 
 [ext_resource type="Script" uid="uid://bnn7lbnheu20l" path="res://Scripts/stat_panel.gd" id="2_3iuan"]
 [ext_resource type="PackedScene" uid="uid://carxyijo0mekn" path="res://Scenes/Old/UISTatContainer.tscn" id="3_6v150"]
 
-[node name="Stat_Panel" type="PanelContainer"]
+[node name="Stat_Panel" type="PanelContainer" unique_id=47889320]
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 3
 anchor_left = 1.0
@@ -19,7 +19,7 @@ script = ExtResource("2_3iuan")
 StatScene = ExtResource("3_6v150")
 StatsToShow = Array[String](["OXYGEN", "HP", "HULL", "FUEL"])
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1362642367]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/h_separation = 0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://p0sngnrp8hgi"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://p0sngnrp8hgi"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_axxoo"]
 [ext_resource type="Resource" uid="uid://cuhyegxnhjaq4" path="res://Resources/Cards/DrawDiscard.tres" id="2_g2oyd"]
@@ -11,15 +11,11 @@
 script = ExtResource("6_bgqm5")
 UpgradeName = 7
 UpgradeAmmount = 1500.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_g2oyd"]
 script = ExtResource("6_bgqm5")
 UpgradeName = 16
 UpgradeAmmount = 20.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -27,12 +23,9 @@ script = ExtResource("6_2djwj")
 Upgrades = Array[ExtResource("6_bgqm5")]([SubResource("Resource_55hsq"), SubResource("Resource_g2oyd")])
 UpgradeVersion = ExtResource("5_n5pci")
 UpgradeTime = 1200.0
-IsDamaged = false
 PartType = 2
 ItemName = "ELINT-50 \"Watcher"
 ItemDesc = "Watcher offers a significant upgrade in sensitivity and processing power, capable of discerning radar signatures from greater distances and with improved accuracy. Equipped with advanced signal filtering algorithms, 'Watcher' reduces noise interference, delivering clearer insights into enemy radar activity. This makes it a valuable asset for strategic operations in moderately hostile regions."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_axxoo")]([ExtResource("2_g2oyd"), ExtResource("2_g2oyd"), ExtResource("3_g2oyd"), ExtResource("3_g2oyd")])
 Tier = 1
-CanTransfer = true
 Cost = 150000

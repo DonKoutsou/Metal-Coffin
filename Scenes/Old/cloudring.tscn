@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpdjsljrku63t"]
+[gd_scene format=3 uid="uid://bpdjsljrku63t"]
 
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="1_gnsfh"]
+[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="1_gnsfh"]
 
 [sub_resource type="Gradient" id="Gradient_itxm5"]
 offsets = PackedFloat32Array(0, 0.315, 0.535993, 0.775, 1)
@@ -48,7 +48,7 @@ collision_use_scale = true
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvtr6"]
 polygon = PackedVector2Array(0, -95, 77, -77, 95, 0, 77, 77, 0, 95, -77, 77, -95, 0, -77, -77)
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1844664200]
 process_mode = 3
 amount = 50
 texture = ExtResource("1_gnsfh")
@@ -57,6 +57,6 @@ randomness = 0.62
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_ooyv3")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=476809617]
 position = Vector2(1, -2)
 occluder = SubResource("OccluderPolygon2D_xvtr6")

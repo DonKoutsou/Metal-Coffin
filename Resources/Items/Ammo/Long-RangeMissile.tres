@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MissileItem" load_steps=4 format=3 uid="uid://ds7viiermptuq"]
+[gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://ds7viiermptuq"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_pj6tu"]
 [ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="2_raeam"]
@@ -10,11 +10,7 @@ MissileScene = ExtResource("2_raeam")
 Distance = 3500
 Speed = 200.0
 Damage = 200
-Type = 0
 ItemName = "Long-Range Missile"
 ItemDesc = "Low-speed, high-range projectile optimized for distant bombardments. Lacks agility, but when it hits—ships feel it. Best used in large-scale engagements or siege scenarios."
 MaxStackCount = 99
-CardProviding = Array[ExtResource("1_pj6tu")]([])
-Tier = 0
-CanTransfer = true
 Cost = 1300

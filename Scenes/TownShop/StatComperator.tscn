@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://mcrp4chqoake"]
+[gd_scene format=3 uid="uid://mcrp4chqoake"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7ppks"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="2_qdj1a"]
 [ext_resource type="Script" uid="uid://bul44eo0uywkb" path="res://Scripts/stat_comperator.gd" id="2_r4pak"]
 
-[node name="StatComperator" type="PanelContainer" node_paths=PackedStringArray("ContainerBefore", "ContainerAfter")]
+[node name="StatComperator" type="PanelContainer" unique_id=723853942 node_paths=PackedStringArray("ContainerBefore", "ContainerAfter")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,10 +15,10 @@ script = ExtResource("2_r4pak")
 ContainerBefore = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/CaptainStatContainer")
 ContainerAfter = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/CaptainStatContainer2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=756279310]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=932139957]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Are you sure you want to upgrade ?"
@@ -26,64 +26,64 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=1546514418]
 layout_mode = 2
 
-[node name="Accept" type="Button" parent="VBoxContainer/HBoxContainer3"]
+[node name="Accept" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=179605351]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "ACCEPT"
 
-[node name="Decline" type="Button" parent="VBoxContainer/HBoxContainer3"]
+[node name="Decline" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=83217091]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "DECLINE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1761822800]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=2134611485]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=988168894]
 layout_mode = 2
 text = "Stats Before"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="CaptainStatContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_qdj1a")]
+[node name="CaptainStatContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=849932410 instance=ExtResource("2_qdj1a")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1476254203]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=170189733]
 layout_mode = 2
 text = "Stats After"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="CaptainStatContainer2" parent="VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("2_qdj1a")]
+[node name="CaptainStatContainer2" parent="VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1708558353 instance=ExtResource("2_qdj1a")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1746412606]
 layout_mode = 2
 
-[node name="ShowStats" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="ShowStats" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1999035061]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "STATS"
 
-[node name="ShowDeck" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="ShowDeck" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=2144779646]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DECK"

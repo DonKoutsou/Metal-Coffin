@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://dt51jwok5axck"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://dt51jwok5axck"]
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_4xn3g"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_7qkd6"]
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_uhhum"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_qftlf"]
 
 [resource]
@@ -10,4 +9,3 @@ script = ExtResource("1_7qkd6")
 SpotName = "Corvakia"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_4xn3g")]([ExtResource("2_qftlf")])
-Merchendise = Array[ExtResource("1_uhhum")]([])

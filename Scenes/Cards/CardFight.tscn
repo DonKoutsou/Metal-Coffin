@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bg4oh7r4qnxy8"]
+[gd_scene format=3 uid="uid://bg4oh7r4qnxy8"]
 
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
@@ -10,11 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://cbdyafmynts2u" path="res://Scenes/Cards/OffensiveAnimation.tscn" id="9_b6m6l"]
 [ext_resource type="PackedScene" uid="uid://dfh0dm1lwcumv" path="res://Scenes/CardFightEndScene.tscn" id="10_42bcn"]
 [ext_resource type="PackedScene" uid="uid://6hcd2pi6mky3" path="res://Scenes/Cards/CardFightShipInfo.tscn" id="11_fpjxy"]
-[ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
+[ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
 [ext_resource type="Material" uid="uid://b6441eghjnus8" path="res://Shaders/CardfightGround.tres" id="14_l2i77"]
-[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="14_vn53x"]
-[ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
+[ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="14_vn53x"]
+[ext_resource type="AudioStream" uid="uid://dgx7q2i37ubea" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Material" uid="uid://du775m4kpfmqe" path="res://Shaders/Clouds/CloudCagefight.tres" id="15_l2i77"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="23_d5rtw"]
@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scripts/CardFight/action_declaration.gd" id="24_pw20f"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scripts/CardFight/CardFightDiscardSelection.gd" id="27_rbthh"]
-[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
+[ext_resource type="Texture2D" uid="uid://cxurnij711kgj" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2au4"]
 content_margin_left = 10.0
@@ -30,7 +30,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclaration", "Cloud", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" unique_id=1710302720 node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclaration", "Cloud", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,14 +65,14 @@ MaxCardsInHand = 8
 MaxCombatants = 3
 UIEventH = ExtResource("16_734e5")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1458276238]
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
-[node name="Control2" type="Control" parent="SubViewport"]
+[node name="Control2" type="Control" parent="SubViewport" unique_id=887734984]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,7 +81,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Ground" type="ColorRect" parent="SubViewport/Control2"]
+[node name="Ground" type="ColorRect" parent="SubViewport/Control2" unique_id=1742857488]
 z_index = -3
 texture_filter = 1
 material = ExtResource("14_l2i77")
@@ -98,7 +98,7 @@ offset_bottom = 640.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DeadShipLoc" type="Control" parent="SubViewport/Control2"]
+[node name="DeadShipLoc" type="Control" parent="SubViewport/Control2" unique_id=807772456]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,7 +106,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Clouds" type="ColorRect" parent="SubViewport/Control2"]
+[node name="Clouds" type="ColorRect" parent="SubViewport/Control2" unique_id=759849753]
 z_index = -1
 texture_filter = 1
 material = ExtResource("15_l2i77")
@@ -123,7 +123,7 @@ offset_bottom = 640.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Action Declaration" type="PanelContainer" parent="SubViewport/Control2"]
+[node name="Action Declaration" type="PanelContainer" parent="SubViewport/Control2" unique_id=1853583110]
 visible = false
 z_index = 1
 custom_minimum_size = Vector2(0, 80)
@@ -146,7 +146,7 @@ script = ExtResource("24_pw20f")
 UIInSound = ExtResource("13_boko4")
 UIOutSound = ExtResource("14_vn53x")
 
-[node name="Label" type="Label" parent="SubViewport/Control2/Action Declaration"]
+[node name="Label" type="Label" parent="SubViewport/Control2/Action Declaration" unique_id=28578033]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "ACTION PICK PHASE"
@@ -154,7 +154,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Label2" type="Label" parent="SubViewport/Control2"]
+[node name="Label2" type="Label" parent="SubViewport/Control2" unique_id=612841877]
 layout_mode = 1
 offset_left = 50.0
 offset_top = 15.0
@@ -166,7 +166,7 @@ text = "Fleet Size
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="SubViewport/Control2"]
+[node name="Label3" type="Label" parent="SubViewport/Control2" unique_id=28334821]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -182,7 +182,7 @@ text = "Fleet Size
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer4" type="HBoxContainer" parent="SubViewport/Control2"]
+[node name="VBoxContainer4" type="HBoxContainer" parent="SubViewport/Control2" unique_id=352745804]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,14 +191,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4" unique_id=1571183883]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2"]
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2" unique_id=952041932]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
-[node name="PlayerShipPlecement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2"]
+[node name="PlayerShipPlecement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2" unique_id=1637451095]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -207,24 +207,24 @@ script = ExtResource("24_d8sco")
 Vertical = true
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2"]
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer2" unique_id=619771845]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4" unique_id=432327581]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 10.0
 alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer" unique_id=1158664171]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_f2au4")
 
-[node name="SelectedCardPlecements" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2"]
+[node name="SelectedCardPlecements" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2" unique_id=278719319]
 custom_minimum_size = Vector2(300, 228)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -232,19 +232,19 @@ size_flags_vertical = 6
 script = ExtResource("24_d8sco")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer"]
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer" unique_id=800616280]
 custom_minimum_size = Vector2(0, 172.735)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="SubViewport/Control2/VBoxContainer4" unique_id=841680704]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3"]
+[node name="Control" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3" unique_id=1213333661]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
-[node name="EnemyShipPlecement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3"]
+[node name="EnemyShipPlecement" type="Container" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3" unique_id=2007953978]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -253,11 +253,11 @@ script = ExtResource("24_d8sco")
 Vertical = true
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3"]
+[node name="Control2" type="Control" parent="SubViewport/Control2/VBoxContainer4/VBoxContainer3" unique_id=1298166318]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
-[node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("ShipVizContainer")]
+[node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" unique_id=1032550551 node_paths=PackedStringArray("ShipVizContainer")]
 visible = false
 z_index = 2
 layout_mode = 1
@@ -280,27 +280,27 @@ script = ExtResource("26_712dp")
 ShipVizScene = ExtResource("3_n2sfr")
 ShipVizContainer = NodePath("VBoxContainer/HBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/TargetSelect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/TargetSelect" unique_id=835310415]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SubViewport/Control2/TargetSelect/VBoxContainer"]
+[node name="Label" type="Label" parent="SubViewport/Control2/TargetSelect/VBoxContainer" unique_id=69944086]
 layout_mode = 2
 text = "Select Target"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/TargetSelect/VBoxContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/TargetSelect/VBoxContainer" unique_id=2098546914]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="SubViewport/Control2/TargetSelect/VBoxContainer"]
+[node name="Button" type="Button" parent="SubViewport/Control2/TargetSelect/VBoxContainer" unique_id=128082095]
 visible = false
 layout_mode = 2
 text = "Cancel"
 
-[node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" node_paths=PackedStringArray("Title", "CardContainer")]
+[node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" unique_id=647099741 node_paths=PackedStringArray("Title", "CardContainer")]
 z_index = 2
 layout_mode = 1
 anchors_preset = 8
@@ -323,23 +323,23 @@ CardScene = ExtResource("2_yc7d8")
 Title = NodePath("VBoxContainer/Label")
 CardContainer = NodePath("VBoxContainer/HBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/CardSelect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/CardSelect" unique_id=1940505378]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SubViewport/Control2/CardSelect/VBoxContainer"]
+[node name="Label" type="Label" parent="SubViewport/Control2/CardSelect/VBoxContainer" unique_id=94989821]
 layout_mode = 2
 text = "Discard one"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer" type="Container" parent="SubViewport/Control2/CardSelect/VBoxContainer"]
+[node name="HBoxContainer" type="Container" parent="SubViewport/Control2/CardSelect/VBoxContainer" unique_id=2113163757]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("24_d8sco")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="Control" type="Control" parent="SubViewport/Control2"]
+[node name="Control" type="Control" parent="SubViewport/Control2" unique_id=412634086]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -349,7 +349,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CurrentPlayerLabel" type="Label" parent="SubViewport/Control2"]
+[node name="CurrentPlayerLabel" type="Label" parent="SubViewport/Control2" unique_id=1697104601]
 visible = false
 layout_mode = 1
 anchors_preset = 5
@@ -365,7 +365,7 @@ text = "Amol Picking Moves"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="PointLight2D" type="PointLight2D" parent="SubViewport"]
+[node name="PointLight2D" type="PointLight2D" parent="SubViewport" unique_id=212615134]
 position = Vector2(445, 311)
 blend_mode = 2
 range_layer_max = 1

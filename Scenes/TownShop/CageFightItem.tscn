@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt6th215x5s5m"]
+[gd_scene format=3 uid="uid://bt6th215x5s5m"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7pcmt"]
 [ext_resource type="Script" uid="uid://dic8mxk80agpa" path="res://Scripts/cage_fight_item.gd" id="2_7pcmt"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_imkj1"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="4_uulej"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="4_uulej"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pcmt"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
@@ -14,7 +14,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="TownShopItem" type="PanelContainer" node_paths=PackedStringArray("ItemName")]
+[node name="TownShopItem" type="PanelContainer" unique_id=374761390 node_paths=PackedStringArray("ItemName")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -34,13 +34,13 @@ theme_override_styles/panel = ExtResource("1_7pcmt")
 script = ExtResource("2_7pcmt")
 ItemName = NodePath("VBoxContainer/Label")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=1094304977]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_imkj1")
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=311021654]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
@@ -50,17 +50,17 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Panel" type="Panel" parent="VBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1461949565]
 custom_minimum_size = Vector2(12.43, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_7pcmt")
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1817864668]
 layout_mode = 2
 text = "INSTALL"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=349952228]
 stream = ExtResource("4_uulej")
 volume_db = -10.0
 pitch_scale = 3.06

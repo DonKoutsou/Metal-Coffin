@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://db0e2caembxle"]
+[gd_scene format=3 uid="uid://db0e2caembxle"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_sdl3v"]
 [ext_resource type="Script" uid="uid://ysm54y3gb5lt" path="res://Scenes/FlightManual/flight_manual.gd" id="1_xll1p"]
@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://dv741f7fcu3lu" path="res://Scenes/FlightManual/Entries/ShipStats.tres" id="8_2kj71"]
 [ext_resource type="Resource" uid="uid://cvfuunncgb30h" path="res://Scenes/FlightManual/Entries/ShipDeck.tres" id="9_oivmy"]
 
-[node name="FlightManual" type="Control" node_paths=PackedStringArray("EntryNameLabel", "EntryLabel", "EntryButtonLocation")]
+[node name="FlightManual" type="Control" unique_id=1037505951 node_paths=PackedStringArray("EntryNameLabel", "EntryLabel", "EntryButtonLocation")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -26,7 +26,7 @@ EntryNameLabel = NodePath("HBoxContainer/PanelContainer/ScrollContainer/VBoxCont
 EntryLabel = NodePath("HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer/RichTextLabel")
 EntryButtonLocation = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1672890512]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,68 +34,68 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=240132264]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=1830290624]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 theme_override_styles/panel = ExtResource("1_sdl3v")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=442723853]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=288703083]
 layout_mode = 2
 text = "FLIGHT MANUAL ENTRIES"
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=659059376]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_lm06n")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer" unique_id=2139703934]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1353291354]
 layout_mode = 2
 text = "CLOSE"
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1620426926]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_sdl3v")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PanelContainer" unique_id=585960925]
 layout_mode = 2
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("4_lm06n")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/ScrollContainer" unique_id=1319974070]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=662760024]
 layout_mode = 2
 theme_override_font_sizes/font_size = 31
 autowrap_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1990409183]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2

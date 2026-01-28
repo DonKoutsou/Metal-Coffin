@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bl1t8w4ot467w"]
+[gd_scene format=3 uid="uid://bl1t8w4ot467w"]
 
-[ext_resource type="Texture2D" uid="uid://cx6fk232wq523" path="res://Assets/UIPiecies/Screen/Buttons/arm_button_Camera 1.png" id="1_mepyr"]
-[ext_resource type="Texture2D" uid="uid://86iic6oblp47" path="res://Assets/UIPiecies/Screen/Buttons/arm_button_on_Camera 1.png" id="2_brb37"]
+[ext_resource type="Texture2D" uid="uid://bwrb5td2axn7a" path="res://Assets/UIPiecies/Screen/Buttons/arm_button_Camera 1.png" id="1_mepyr"]
+[ext_resource type="Texture2D" uid="uid://bgcjq6ej1llej" path="res://Assets/UIPiecies/Screen/Buttons/arm_button_on_Camera 1.png" id="2_brb37"]
 [ext_resource type="Script" uid="uid://gx2hpsdt504h" path="res://Scripts/UI/animated_button.gd" id="2_srf4c"]
-[ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="4_eac37"]
+[ext_resource type="AudioStream" uid="uid://bt1nyguladffd" path="res://Assets/Sounds/beep.mp3" id="4_eac37"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd4vr"]
 corner_radius_top_left = 1
@@ -77,7 +77,7 @@ _data = {
 &"Tick": SubResource("Animation_dsoe7")
 }
 
-[node name="AnimatedTexture" type="TextureButton" groups=["Buttons"]]
+[node name="AnimatedTexture" type="TextureButton" unique_id=1577539890 groups=["Buttons"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -97,7 +97,7 @@ script = ExtResource("2_srf4c")
 OffTexture = ExtResource("1_mepyr")
 OnTexture = ExtResource("2_brb37")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1405612521]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -112,12 +112,10 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cd4vr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_d3ury")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1972214408]
+libraries/ = SubResource("AnimationLibrary_d3ury")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1243583971]
 stream = ExtResource("4_eac37")
 volume_db = -35.0
 pitch_scale = 0.5

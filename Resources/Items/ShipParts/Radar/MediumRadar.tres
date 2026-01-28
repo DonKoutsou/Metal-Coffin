@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://dxg1gr0twgav3"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://dxg1gr0twgav3"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_nfjge"]
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="2_ewb3g"]
@@ -13,23 +13,17 @@
 script = ExtResource("6_ony00")
 UpgradeName = 6
 UpgradeAmmount = 700.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_ewb3g"]
 script = ExtResource("6_ony00")
 UpgradeName = 9
 UpgradeAmmount = 15.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_btbhb"]
 script = ExtResource("6_ony00")
 UpgradeName = 16
 UpgradeAmmount = 25.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -37,12 +31,9 @@ script = ExtResource("3_r1wno")
 Upgrades = Array[ExtResource("6_ony00")]([SubResource("Resource_g0jur"), SubResource("Resource_ewb3g"), SubResource("Resource_btbhb")])
 UpgradeVersion = ExtResource("4_6ok2g")
 UpgradeTime = 1500.0
-IsDamaged = false
 PartType = 2
 ItemName = "RA-50"
 ItemDesc = "An advanced unit with extended detection capabilities. It uses adaptive filtering algorithms to enhance clarity in threat analysis."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_nfjge")]([ExtResource("2_ewb3g"), ExtResource("2_ewb3g"), ExtResource("3_4fb27"), ExtResource("3_4fb27"), ExtResource("4_wu8x8"), ExtResource("4_wu8x8"), ExtResource("5_btbhb"), ExtResource("5_btbhb")])
 Tier = 1
-CanTransfer = true
 Cost = 200000

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://c16lcf8swpkjk"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://c16lcf8swpkjk"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_6ifd7"]
 [ext_resource type="Resource" uid="uid://d1oxwkmh155gc" path="res://Resources/Cards/RadarBuff.tres" id="2_5sfyj"]
@@ -12,35 +12,26 @@
 script = ExtResource("6_qmdqt")
 UpgradeName = 6
 UpgradeAmmount = 1000.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_5sfyj"]
 script = ExtResource("6_qmdqt")
 UpgradeName = 9
 UpgradeAmmount = 20.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_jjqow"]
 script = ExtResource("6_qmdqt")
 UpgradeName = 16
 UpgradeAmmount = 30.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
 script = ExtResource("3_ypyoy")
 Upgrades = Array[ExtResource("6_qmdqt")]([SubResource("Resource_8wfub"), SubResource("Resource_5sfyj"), SubResource("Resource_jjqow")])
 UpgradeTime = 2000.0
-IsDamaged = false
 PartType = 2
 ItemName = "RA-100"
 ItemDesc = "A superior radar array with far-reaching detection range. Utilizes phased array technology for unparalleled tracking specificity and enhanced situational awareness."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_6ifd7")]([ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("2_5sfyj"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("3_71foa"), ExtResource("4_3otxc"), ExtResource("4_3otxc"), ExtResource("5_jjqow"), ExtResource("5_jjqow")])
 Tier = 2
-CanTransfer = true
 Cost = 280000

@@ -1,22 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://dwhre3xvmvjwf"]
+[gd_scene format=3 uid="uid://dwhre3xvmvjwf"]
 
-[ext_resource type="Texture2D" uid="uid://bh6thi4rfkofn" path="res://Assets/FanFrames/Untitled_FullQuality_00000.png" id="1_5gwwt"]
+[ext_resource type="Texture2D" uid="uid://8fald613074b" path="res://Assets/FanFrames/Untitled_FullQuality_00000.png" id="1_5gwwt"]
 [ext_resource type="SpriteFrames" uid="uid://c7vu3uj21sfwr" path="res://Assets/FanFrames/Blur.tres" id="1_gqt8n"]
-[ext_resource type="Texture2D" uid="uid://bjxyw6juxpub1" path="res://Assets/FanFrames/Untitled_FullQuality_00001.png" id="2_33lmu"]
+[ext_resource type="Texture2D" uid="uid://m7nnsxgrcd4o" path="res://Assets/FanFrames/Untitled_FullQuality_00001.png" id="2_33lmu"]
 [ext_resource type="SpriteFrames" uid="uid://bcjshj6q538a4" path="res://Assets/FanFrames/NoBlur.tres" id="3_nsl5r"]
-[ext_resource type="Texture2D" uid="uid://yq5tfnlcudof" path="res://Assets/FanFrames/Untitled_FullQuality_00002.png" id="3_o0r8h"]
-[ext_resource type="Texture2D" uid="uid://bmy8f6cn0bipy" path="res://Assets/FanFrames/Untitled_FullQuality_00003.png" id="4_t27gr"]
-[ext_resource type="Texture2D" uid="uid://by1ikfkpwsavr" path="res://Assets/FanFrames/Untitled_FullQuality_00004.png" id="5_dhdtk"]
-[ext_resource type="Texture2D" uid="uid://d3dt6mh6jq4s8" path="res://Assets/FanFrames/Untitled_FullQuality_00005.png" id="6_1h2ui"]
-[ext_resource type="Texture2D" uid="uid://koyxyaq3o7s4" path="res://Assets/FanFrames/Untitled_FullQuality_00006.png" id="7_ubkin"]
-[ext_resource type="Texture2D" uid="uid://b0k1isina30l4" path="res://Assets/FanFrames/Untitled_FullQuality_00007.png" id="8_yt8ca"]
-[ext_resource type="Texture2D" uid="uid://pwod10h8ow0l" path="res://Assets/FanFrames/Untitled_FullQuality_00008.png" id="9_fssmw"]
-[ext_resource type="Texture2D" uid="uid://dmq11s1ix424g" path="res://Assets/FanFrames/Untitled_FullQuality_00009.png" id="10_rkxns"]
-[ext_resource type="Texture2D" uid="uid://drecjndk0mqbg" path="res://Assets/FanFrames/Untitled_FullQuality_00010.png" id="11_hac8f"]
-[ext_resource type="Texture2D" uid="uid://bq6uga4vpyuds" path="res://Assets/FanFrames/Untitled_FullQuality_00011.png" id="12_e8wiv"]
-[ext_resource type="Texture2D" uid="uid://c0p7mh3af8pow" path="res://Assets/FanFrames/Untitled_FullQuality_00012.png" id="13_wew1k"]
-[ext_resource type="Texture2D" uid="uid://0y77tmnexp1n" path="res://Assets/FanFrames/Untitled_FullQuality_00013.png" id="14_gyl7m"]
-[ext_resource type="AudioStream" uid="uid://b12e3df8bnif4" path="res://Assets/Sounds/Fan.mp3" id="18_3ie5m"]
+[ext_resource type="Texture2D" uid="uid://cltsk3q1hwxxa" path="res://Assets/FanFrames/Untitled_FullQuality_00002.png" id="3_o0r8h"]
+[ext_resource type="Texture2D" uid="uid://7gws5lbp62mo" path="res://Assets/FanFrames/Untitled_FullQuality_00003.png" id="4_t27gr"]
+[ext_resource type="Texture2D" uid="uid://iheo2wbgialp" path="res://Assets/FanFrames/Untitled_FullQuality_00004.png" id="5_dhdtk"]
+[ext_resource type="Texture2D" uid="uid://y2ghwcf5l68v" path="res://Assets/FanFrames/Untitled_FullQuality_00005.png" id="6_1h2ui"]
+[ext_resource type="Texture2D" uid="uid://bujcvc5dag1c3" path="res://Assets/FanFrames/Untitled_FullQuality_00006.png" id="7_ubkin"]
+[ext_resource type="Texture2D" uid="uid://fpf5r8h4p68l" path="res://Assets/FanFrames/Untitled_FullQuality_00007.png" id="8_yt8ca"]
+[ext_resource type="Texture2D" uid="uid://c7kpto8vwh6x8" path="res://Assets/FanFrames/Untitled_FullQuality_00008.png" id="9_fssmw"]
+[ext_resource type="Texture2D" uid="uid://b34psyajvagww" path="res://Assets/FanFrames/Untitled_FullQuality_00009.png" id="10_rkxns"]
+[ext_resource type="Texture2D" uid="uid://ctxe14rh7pf10" path="res://Assets/FanFrames/Untitled_FullQuality_00010.png" id="11_hac8f"]
+[ext_resource type="Texture2D" uid="uid://c716vvoyg5cwu" path="res://Assets/FanFrames/Untitled_FullQuality_00011.png" id="12_e8wiv"]
+[ext_resource type="Texture2D" uid="uid://chso61of6gp0i" path="res://Assets/FanFrames/Untitled_FullQuality_00012.png" id="13_wew1k"]
+[ext_resource type="Texture2D" uid="uid://cgsva87ebtpa8" path="res://Assets/FanFrames/Untitled_FullQuality_00013.png" id="14_gyl7m"]
+[ext_resource type="AudioStream" uid="uid://d3b26by6x3yig" path="res://Assets/Sounds/Fan.mp3" id="18_3ie5m"]
 [ext_resource type="Script" uid="uid://djvoh3v6ya70x" path="res://Scripts/fan.gd" id="25_33lmu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jvc5q"]
@@ -69,7 +69,7 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="q" type="AnimatedSprite2D" groups=["Shakable"]]
+[node name="q" type="AnimatedSprite2D" unique_id=159958918 groups=["Shakable"]]
 position = Vector2(0, -792)
 scale = Vector2(7.1875, 7.1875)
 sprite_frames = ExtResource("1_gqt8n")
@@ -84,7 +84,7 @@ max_scale_x = 0.0
 BluredSpriteFrames = ExtResource("1_gqt8n")
 NonBluredSpriteFrames = ExtResource("3_nsl5r")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2147339927]
 modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
 position = Vector2(16.5565, 2.78261)
@@ -92,7 +92,7 @@ sprite_frames = SubResource("SpriteFrames_jvc5q")
 speed_scale = -1.0
 offset = Vector2(0, 128)
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1610909767]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -107,7 +107,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=198393022]
 stream = ExtResource("18_3ie5m")
 volume_db = 4.0
 autoplay = true

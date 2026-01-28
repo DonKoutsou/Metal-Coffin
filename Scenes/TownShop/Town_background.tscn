@@ -1,23 +1,23 @@
-[gd_scene load_steps=28 format=3 uid="uid://bbfxceg5vwl1x"]
+[gd_scene format=3 uid="uid://bbfxceg5vwl1x"]
 
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_0rigd"]
-[ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_0rigd"]
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_81jbw"]
-[ext_resource type="Texture2D" uid="uid://cca0r7n4ybrnx" path="res://Assets/TownBackgrounds/TownLayer-1.png" id="3_ly0hr"]
-[ext_resource type="Texture2D" uid="uid://cmx4d3kw0bqo5" path="res://Assets/TownBackgrounds/TownLayer0.png" id="5_0rigd"]
-[ext_resource type="Texture2D" uid="uid://bxlu7qfr0nme1" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.5.png" id="5_7gruq"]
-[ext_resource type="Texture2D" uid="uid://daxjodai3thnm" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.png" id="5_23crs"]
-[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="5_u7aao"]
-[ext_resource type="Texture2D" uid="uid://chem806g1ncdt" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.png" id="6_eh2cq"]
-[ext_resource type="Texture2D" uid="uid://b6grma87uw02i" path="res://Assets/TownBackgrounds/TownLayer1.png" id="6_ly0hr"]
-[ext_resource type="Texture2D" uid="uid://ciibrgvvuerjb" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.png" id="7_8gplc"]
-[ext_resource type="Texture2D" uid="uid://lpw5d8jw6pil" path="res://Assets/TownBackgrounds/TownLayer2.png" id="7_ly0hr"]
-[ext_resource type="Texture2D" uid="uid://bq4mulj40ff0q" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.5.png" id="7_rq3u2"]
-[ext_resource type="Texture2D" uid="uid://cys3dsxco0b4o" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.png" id="8_kcqko"]
-[ext_resource type="Texture2D" uid="uid://qtxmsr27pjtl" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.5.png" id="9_aokwu"]
-[ext_resource type="Texture2D" uid="uid://cqsitb0msodg2" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.png" id="9_gl47p"]
-[ext_resource type="Texture2D" uid="uid://cqcdrkg1buq35" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.5.png" id="11_s8jj8"]
-[ext_resource type="Texture2D" uid="uid://cro2ryppy8tge" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.5.png" id="13_x3e2u"]
+[ext_resource type="AudioStream" uid="uid://ufp2v886p70v" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_0rigd"]
+[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="3_81jbw"]
+[ext_resource type="Texture2D" uid="uid://dxromrurusrnr" path="res://Assets/TownBackgrounds/TownLayer-1.png" id="3_ly0hr"]
+[ext_resource type="Texture2D" uid="uid://bpiy4qlsidlxu" path="res://Assets/TownBackgrounds/TownLayer0.png" id="5_0rigd"]
+[ext_resource type="Texture2D" uid="uid://b2ueuob1cu4cd" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.5.png" id="5_7gruq"]
+[ext_resource type="Texture2D" uid="uid://c3f6vbaefuesr" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.png" id="5_23crs"]
+[ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="5_u7aao"]
+[ext_resource type="Texture2D" uid="uid://xtijyop2vfnx" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.png" id="6_eh2cq"]
+[ext_resource type="Texture2D" uid="uid://blpneaj52suny" path="res://Assets/TownBackgrounds/TownLayer1.png" id="6_ly0hr"]
+[ext_resource type="Texture2D" uid="uid://d3ieoecc7ejrg" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.png" id="7_8gplc"]
+[ext_resource type="Texture2D" uid="uid://cte4smp7xi68r" path="res://Assets/TownBackgrounds/TownLayer2.png" id="7_ly0hr"]
+[ext_resource type="Texture2D" uid="uid://bni8k7k7tp3ul" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.5.png" id="7_rq3u2"]
+[ext_resource type="Texture2D" uid="uid://deeqf8dsa64w4" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.png" id="8_kcqko"]
+[ext_resource type="Texture2D" uid="uid://nycv382q8o3t" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.5.png" id="9_aokwu"]
+[ext_resource type="Texture2D" uid="uid://brtwmug0fxgd3" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.png" id="9_gl47p"]
+[ext_resource type="Texture2D" uid="uid://b7rc0fafi1bsj" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.5.png" id="11_s8jj8"]
+[ext_resource type="Texture2D" uid="uid://q4id364s5cur" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.5.png" id="13_x3e2u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -126,7 +126,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.1
 
-[node name="TownBackground" type="ParallaxBackground" node_paths=PackedStringArray("Animated", "Camera")]
+[node name="TownBackground" type="ParallaxBackground" unique_id=885435211 node_paths=PackedStringArray("Animated", "Camera")]
 script = ExtResource("1_0rigd")
 LimitTop = 1920.0
 LimitSide = 300.0
@@ -139,12 +139,12 @@ LocationPositions = Dictionary[int, NodePath]({
 3: NodePath("ParallaxLayer3/Parallax2D/Repair")
 })
 
-[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
+[node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=1159834750]
 stream = ExtResource("2_0rigd")
 autoplay = true
 bus = &"Sounds"
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=215763699]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -152,12 +152,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gf58y")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="." unique_id=1030167471]
 motion_scale = Vector2(0.5, 0.5)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer" unique_id=1282911426]
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=1319085848]
 position = Vector2(-222, -21)
 amount = 20
 texture = ExtResource("3_81jbw")
@@ -167,7 +167,7 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=643754984]
 position = Vector2(1116, 36)
 amount = 20
 texture = ExtResource("3_81jbw")
@@ -177,17 +177,17 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D" unique_id=1020081051]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 sprite_frames = SubResource("SpriteFrames_7gruq")
 frame_progress = 0.543139
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="." unique_id=496937133]
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4" unique_id=2100417516]
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D" unique_id=1267554698]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(1650, -18)
 amount = 20
@@ -201,22 +201,22 @@ visibility_rect = Rect2(-1920, 0, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D" unique_id=367474307]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("5_0rigd")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="." unique_id=1754928573]
 motion_scale = Vector2(1.5, 1.5)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2" unique_id=1189764013]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D" unique_id=1226604672]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("6_ly0hr")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D" unique_id=1122987142]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(1650, 99)
 amount = 20
@@ -230,7 +230,7 @@ visibility_rect = Rect2(-1920, -200, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D" unique_id=1858060150]
 position = Vector2(1650, 316)
 amount = 40
 texture = ExtResource("3_81jbw")
@@ -241,40 +241,40 @@ visibility_rect = Rect2(-1920, -400, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gf58y")
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="." unique_id=334256862]
 motion_scale = Vector2(2, 2)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3" unique_id=368100892]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D" unique_id=1734863224]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("7_ly0hr")
 
-[node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=1843992007]
 position = Vector2(522, 437)
 
-[node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop"]
+[node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop" unique_id=562841939]
 position = Vector2(105, 179)
 
-[node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=594555408]
 position = Vector2(109, 452)
 
-[node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel"]
+[node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel" unique_id=1738361570]
 position = Vector2(-102, 133)
 
-[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=1831644732]
 position = Vector2(940, 516)
 
-[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair"]
+[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair" unique_id=1365424054]
 position = Vector2(-132, 101)
 
-[node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=676224417]
 position = Vector2(1150, 378)
 
-[node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch"]
+[node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch" unique_id=366037182]
 position = Vector2(181, 238)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1576235899]
 position = Vector2(640, 360)
 position_smoothing_enabled = true

@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0fey2gjg1mvv"]
+[gd_scene format=3 uid="uid://c0fey2gjg1mvv"]
 
 [ext_resource type="Script" uid="uid://6u5mppl6etjl" path="res://Scripts/UI/Nob.gd" id="1_qphjf"]
-[ext_resource type="Texture2D" uid="uid://cd8ggnco2dv3d" path="res://Assets/UIPiecies/Screen/Nob.png" id="2_alpln"]
-[ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="3_6xwkf"]
+[ext_resource type="Texture2D" uid="uid://c5mb3dk73qip1" path="res://Assets/UIPiecies/Screen/Nob.png" id="2_alpln"]
+[ext_resource type="AudioStream" uid="uid://cxlvxd4r17w0m" path="res://Assets/Sounds/ButtonOut.wav" id="3_6xwkf"]
 
-[node name="SteeringWheel" type="Control"]
+[node name="SteeringWheel" type="Control" unique_id=1305523294]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -16,7 +16,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_qphjf")
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="TextureButton" type="TextureButton" parent="." unique_id=2055512568]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -31,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1729424797]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,7 +49,7 @@ mouse_filter = 2
 texture = ExtResource("2_alpln")
 expand_mode = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1943622899]
 stream = ExtResource("3_6xwkf")
 volume_db = -5.0
 pitch_scale = 1.8

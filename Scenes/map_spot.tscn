@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://djtjqkmdep3dh"]
+[gd_scene format=3 uid="uid://djtjqkmdep3dh"]
 
 [ext_resource type="Script" uid="uid://3v0ad04orqrb" path="res://Scripts/MapSpot/MapSpot.gd" id="1_x7uyn"]
 [ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="3_i2dyh"]
@@ -7,19 +7,19 @@
 resource_local_to_scene = true
 radius = 40.0
 
-[node name="MapSpot" type="Node2D" groups=["City", "Clock", "Pausable"]]
+[node name="MapSpot" type="Node2D" unique_id=1034729285 groups=["City", "Clock", "Pausable"]]
 script = ExtResource("1_x7uyn")
 AlarmVisual = ExtResource("3_i2dyh")
 
-[node name="AreaNotif" type="Area2D" parent="."]
+[node name="AreaNotif" type="Area2D" parent="." unique_id=992721627]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaNotif"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaNotif" unique_id=1852757682]
 shape = SubResource("CircleShape2D_4ymfd")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1399329601]
 
 [connection signal="area_entered" from="AreaNotif" to="." method="AreaEntered"]
 [connection signal="area_exited" from="AreaNotif" to="." method="AreaExited"]

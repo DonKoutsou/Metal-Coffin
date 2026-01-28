@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cbhf8nh85npqq"]
+[gd_scene format=3 uid="uid://cbhf8nh85npqq"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
@@ -23,7 +23,7 @@
 [ext_resource type="Resource" uid="uid://gvu43lp4i4y6" path="res://Resources/Happenings/CrewRecruitHappeningBaron.tres" id="30_bbwj2"]
 [ext_resource type="Resource" uid="uid://r5k7lwi7y3wa" path="res://Resources/Happenings/CrewRecruitHappeningAmol.tres" id="31_ivfu3"]
 
-[node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
+[node name="World" type="Control" unique_id=1553865631 node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -43,20 +43,20 @@ IntroDialogue2 = Array[String](["Dormak is a few killometers away.", "Lets be ca
 PrologueDialgues = Array[String](["Operator we are almost at Cardi.", "Thankfully we didn't meet any empire patrols.", "\"We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\"", "Our journey is comming to an end slowly...", "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."])
 PrologueDialogues2 = Array[String](["Armak is a few days away. Lets be cautious and slowly make our way there.", "Multiple cities exist on the way. Most of them occupied by the regime. We need to make sure not to raise any alarms. Doing so will atract the regime's patrols.", "Lets take it slow and study our every move. One slip and we fall."])
 
-[node name="ShipController" parent="." instance=ExtResource("3_w0bku")]
+[node name="ShipController" parent="." unique_id=1833243847 instance=ExtResource("3_w0bku")]
 
-[node name="Commander" parent="." instance=ExtResource("10_15dwo")]
+[node name="Commander" parent="." unique_id=505803959 instance=ExtResource("10_15dwo")]
 
-[node name="DialogueProgressHolder" type="Node" parent="."]
+[node name="DialogueProgressHolder" type="Node" parent="." unique_id=1756460440]
 script = ExtResource("8_6vv6u")
 
-[node name="SimulationManager" parent="." instance=ExtResource("16_mq4nq")]
+[node name="SimulationManager" parent="." unique_id=1179049765 instance=ExtResource("16_mq4nq")]
 
-[node name="WorldviewManager" type="Node" parent="."]
+[node name="WorldviewManager" type="Node" parent="." unique_id=1459586989]
 script = ExtResource("15_kwl8l")
 WorldviewAdjustNotif = ExtResource("16_waglr")
 
-[node name="EventManager" type="Node" parent="."]
+[node name="EventManager" type="Node" parent="." unique_id=396610964]
 script = ExtResource("19_b5aes")
 EventsPerSpot = Dictionary[int, Array]({
 0: [ExtResource("20_371b6"), ExtResource("21_ao4cr"), ExtResource("22_irg3d"), ExtResource("23_y8a40"), ExtResource("24_n1aqv"), ExtResource("25_d2jk0"), ExtResource("26_5dli4"), ExtResource("27_uvb3s"), ExtResource("28_crxrm"), ExtResource("29_d4o7i"), ExtResource("30_bbwj2"), ExtResource("31_ivfu3")],
@@ -64,4 +64,4 @@ EventsPerSpot = Dictionary[int, Array]({
 2: []
 })
 
-[node name="Map" parent="." instance=ExtResource("12_11aq8")]
+[node name="Map" parent="." unique_id=1572158328 instance=ExtResource("12_11aq8")]

@@ -15,6 +15,11 @@ class_name Map
 
 @export var _ScreenUI : ScreenUI
 @export var _Camera : ShipCamera
+@export var MapLines : Node2D
+@export var MapSpots : Node2D
+@export var Region : RegionLineDrawer
+@export var Road : MapLineDrawer
+@export var MapLine : MapLineDrawer
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var TownSpotScene : PackedScene
@@ -88,7 +93,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#place player close to first village
 	var pos = firstvilage.global_position
 	pos.y += 500
-	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/PlayerShip as MapShip
+	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/CanvasGroup/PlayerShip as MapShip
 	PlShip.SetShipPosition(pos)
 	#_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
@@ -256,7 +261,7 @@ func GetMapMarkerEditorSaveData() -> SaveData:
 	var dat = SaveData.new()
 	dat.DataName = "MarkerEditor"
 	var EditorData = SD_MapMarkerEditor.new()
-	for g in $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLines.get_children():
+	for g in MapLines.get_children():
 		if (g is MapMarkerLine):
 			EditorData.AddLine(g)
 		else : if (g is MapMarkerText):
@@ -274,7 +279,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 		
 		var sc = load(dat.TownScenePath).instantiate() as Town
 		sc.LoadingData = true
-		$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapSpots.add_child(sc)
+		MapSpots.add_child(sc)
 		sc.connect("TownSpotAproached", Arrival)
 		
 		sc.LoadSaveData(dat)
@@ -331,11 +336,11 @@ var GenThread : Thread
 func GenerateMap() -> void:
 	#if (SpotList.size() == 0):
 	GenThread = Thread.new()
-	GenThread.start(GenerateMapThreaded.bind($SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapSpots))
+	GenThread.start(GenerateMapThreaded)
 	#_InitialPlayerPlacament()
 	ShowingTutorial = true
 
-func GenerateMapThreaded(SpotParent : Node2D) -> void:
+func GenerateMapThreaded() -> void:
 	var time = Time.get_ticks_msec()
 	
 	var town_positions = poisson_disk_sampling(SpawningBounds, MinDistance, MapSize)
@@ -382,7 +387,7 @@ func GenerateMapThreaded(SpotParent : Node2D) -> void:
 		sc.Pos = pos
 		if (pos.y < WorldSize):
 			WorldSize = pos.y
-		SpotParent.call_deferred("add_child", sc)
+		MapSpots.call_deferred("add_child", sc)
 		
 		GeneratedSpots.append(sc)
 
@@ -727,7 +732,7 @@ func GenerateRoads() -> void:
 	for g in Spots2:
 		cityloc2.append(g.global_position)
 		
-	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer._DrawBorders(Spots2)
+	Region._DrawBorders(Spots2)
 	
 	Mut = Mutex.new()
 	Maplt = Thread.new()
@@ -831,7 +836,7 @@ func RoadFinished() -> void:
 		var l = g as Array[Vector2]
 		g[0] += (l[0].direction_to(l[l.size() - 1]) * 42)
 		g[l.size() - 1] += (l[l.size() - 1].direction_to(l[0]) * 42)
-	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/RoadLineDrawer.AddLines(Lines)
+	Road.AddLines(Lines)
 	Roadt = null
 	GenerationFinished.emit()
 	
@@ -842,7 +847,7 @@ func MapLineFinished() -> void:
 		#var l = g as Array[Vector2]
 		#g[0] += (l[0].direction_to(l[1]) * 45)
 		#g[1] += (l[1].direction_to(l[0]) * 45)
-	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer.AddLines(Lines)
+	MapLine.AddLines(Lines)
 	Maplt = null
 	GenerationFinished.emit()
 	

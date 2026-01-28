@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c812ersqwg8p1"]
+[gd_scene format=3 uid="uid://c812ersqwg8p1"]
 
-[ext_resource type="Texture2D" uid="uid://72l45pouumfk" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHT_Camera 1.png" id="1_inquq"]
+[ext_resource type="Texture2D" uid="uid://dyjwfuoe0p1gl" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHT_Camera 1.png" id="1_inquq"]
 [ext_resource type="Script" uid="uid://b1dh8kccjlm56" path="res://Scripts/UI/light.gd" id="2_vy5gy"]
-[ext_resource type="Texture2D" uid="uid://c1mhc4vevx68e" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTON_Camera 1.png" id="3_scc6j"]
-[ext_resource type="Texture2D" uid="uid://w1jutcwdpnr0" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTONGreen_Camera 1.png" id="4_16td6"]
+[ext_resource type="Texture2D" uid="uid://b6dlrixyeg1if" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTON_Camera 1.png" id="3_scc6j"]
+[ext_resource type="Texture2D" uid="uid://cflim6hk05wja" path="res://Assets/UIPiecies/Screen/SidePanels/LIGHTONGreen_Camera 1.png" id="4_16td6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5tot"]
 draw_center = false
@@ -72,7 +72,7 @@ _data = {
 &"flickergreen": SubResource("Animation_3u0b5")
 }
 
-[node name="Light" type="TextureRect"]
+[node name="Light" type="TextureRect" unique_id=958426316]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
@@ -83,7 +83,7 @@ OffText = ExtResource("1_inquq")
 Red = ExtResource("3_scc6j")
 Green = ExtResource("4_16td6")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=764562076]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 8
@@ -100,7 +100,5 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a5tot")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mpsgf")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1236790839]
+libraries/ = SubResource("AnimationLibrary_mpsgf")

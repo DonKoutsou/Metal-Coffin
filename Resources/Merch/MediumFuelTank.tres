@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://ussf8w5051h7"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://ussf8w5051h7"]
 
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="1_xkco0"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_iv1p0"]
@@ -7,11 +7,7 @@
 [sub_resource type="Resource" id="Resource_72lrd"]
 script = ExtResource("2_iv1p0")
 It = ExtResource("1_xkco0")
-Amm = 0
 
 [resource]
 script = ExtResource("3_bcdk2")
 Merch = SubResource("Resource_72lrd")
-Cost = 0
-MaxAmmPerStage = 0
-DontGenerateBefore = 0

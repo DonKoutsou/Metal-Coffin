@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwjp7q1w18u4p"]
+[gd_scene format=3 uid="uid://cwjp7q1w18u4p"]
 
 [ext_resource type="Script" uid="uid://dai8r8wn5redq" path="res://Scripts/fleet_sparation_scene.gd" id="1_mh7sl"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_mxuxe"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_wglh3"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="5_wfwr5"]
 
-[node name="FleetSeparationScene" type="PanelContainer" node_paths=PackedStringArray("CurrentFleetRangeText", "CurrentFleetFuelBar", "CurrentFleetCommanderPlecemenet", "CurrentFleetShipPlecement", "NewFleetRangeText", "NewFleetFuelBar", "NewFleetShipPlecement", "NewFleetCommanderPlecemenet") groups=["FleetSep"]]
+[node name="FleetSeparationScene" type="PanelContainer" unique_id=1170944527 node_paths=PackedStringArray("CurrentFleetRangeText", "CurrentFleetFuelBar", "CurrentFleetCommanderPlecemenet", "CurrentFleetShipPlecement", "NewFleetRangeText", "NewFleetFuelBar", "NewFleetShipPlecement", "NewFleetCommanderPlecemenet") groups=["FleetSep"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,50 +24,50 @@ NewFleetShipPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/Pan
 NewFleetCommanderPlecemenet = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/NewFleetCommanderPlecement")
 ShipContainer = ExtResource("2_mxuxe")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=338991396]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=900508658]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1151872174]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=655060755]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="CurrentFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="CurrentFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=741197674]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/CurrentFleetCommanderPlecement"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/CurrentFleetCommanderPlecement" unique_id=987700747]
 layout_mode = 2
 text = "Fleet Commander"
 horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1645738401]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2" unique_id=68706379]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1623712742]
 layout_mode = 2
 text = "Suad Members"
 horizontal_alignment = 1
 
-[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1139106515]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_wglh3")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="CardHandContainer" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll"]
+[node name="CardHandContainer" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/InputScroll" unique_id=2101183364]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -75,43 +75,43 @@ script = ExtResource("5_wfwr5")
 Vertical = true
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=621209402]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1220783568]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="NewFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2"]
+[node name="NewFleetCommanderPlecement" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2" unique_id=827497086]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/NewFleetCommanderPlecement"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/NewFleetCommanderPlecement" unique_id=590857756]
 layout_mode = 2
 text = "Fleet Commander"
 horizontal_alignment = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1622581363]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3" unique_id=386296405]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2" unique_id=131788999]
 layout_mode = 2
 text = "Squad Members"
 horizontal_alignment = 1
 
-[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2"]
+[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2" unique_id=26304218]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_wglh3")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="CardHandContainer" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll"]
+[node name="CardHandContainer" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer3/VBoxContainer2/InputScroll" unique_id=266708018]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -119,59 +119,59 @@ script = ExtResource("5_wfwr5")
 Vertical = true
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1065543936]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer2" unique_id=126518550]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer" unique_id=74978809]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer" unique_id=1274559626]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer" unique_id=903069917]
 layout_mode = 2
 text = "FUEL"
 
-[node name="CurrentFleetFuel" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="CurrentFleetFuel" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer" unique_id=295602827]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CurrentFleetRange" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer"]
+[node name="CurrentFleetRange" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer/VBoxContainer" unique_id=177087566]
 layout_mode = 2
 text = "Range : 155 km"
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2" unique_id=864950194]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_mxuxe")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2" unique_id=1397530670]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer" unique_id=65284174]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=1041988701]
 layout_mode = 2
 text = "FUEL"
 
-[node name="NewFleetFuel" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="NewFleetFuel" type="ProgressBar" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=676405991]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NewFleetRange" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer"]
+[node name="NewFleetRange" type="Label" parent="VBoxContainer/HBoxContainer2/PanelContainer2/VBoxContainer" unique_id=1949503931]
 layout_mode = 2
 text = "Range : 155 km"
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=87464557]
 layout_mode = 2
 text = "FINISH"
 

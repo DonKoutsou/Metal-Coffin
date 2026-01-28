@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsw1gh7af04md"]
+[gd_scene format=3 uid="uid://dsw1gh7af04md"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_bai2p"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_sjwff"]
@@ -10,7 +10,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lndbu"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 
-[node name="Control" type="PanelContainer" node_paths=PackedStringArray("Eqs")]
+[node name="Control" type="PanelContainer" unique_id=992997414 node_paths=PackedStringArray("Eqs")]
 custom_minimum_size = Vector2(100, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,222 +28,222 @@ theme_override_styles/panel = ExtResource("2_sjwff")
 script = ExtResource("3_xg1e4")
 Eqs = [NodePath("HBoxContainer/Eq"), NodePath("HBoxContainer/Eq2"), NodePath("HBoxContainer/Eq3"), NodePath("HBoxContainer/Eq4"), NodePath("HBoxContainer/Eq5"), NodePath("HBoxContainer/Eq6")]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=134553475]
 custom_minimum_size = Vector2(30.555, 0)
 layout_mode = 2
 
-[node name="Eq" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Eq" type="VBoxContainer" parent="HBoxContainer" unique_id=838772946]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("4_obufj")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Eq"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Eq" unique_id=528371916]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdmwb")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Eq"]
+[node name="Panel2" type="Panel" parent="HBoxContainer/Eq" unique_id=979866849]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel3" type="Panel" parent="HBoxContainer/Eq"]
+[node name="Panel3" type="Panel" parent="HBoxContainer/Eq" unique_id=1211315982]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel4" type="Panel" parent="HBoxContainer/Eq"]
+[node name="Panel4" type="Panel" parent="HBoxContainer/Eq" unique_id=361652682]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel5" type="Panel" parent="HBoxContainer/Eq"]
+[node name="Panel5" type="Panel" parent="HBoxContainer/Eq" unique_id=1984851988]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel6" type="Panel" parent="HBoxContainer/Eq"]
+[node name="Panel6" type="Panel" parent="HBoxContainer/Eq" unique_id=1740438365]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Eq2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Eq2" type="VBoxContainer" parent="HBoxContainer" unique_id=1321995835]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("4_obufj")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Eq2"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Eq2" unique_id=1371205584]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdmwb")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Eq2"]
+[node name="Panel2" type="Panel" parent="HBoxContainer/Eq2" unique_id=1234019655]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel3" type="Panel" parent="HBoxContainer/Eq2"]
+[node name="Panel3" type="Panel" parent="HBoxContainer/Eq2" unique_id=522957358]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel4" type="Panel" parent="HBoxContainer/Eq2"]
+[node name="Panel4" type="Panel" parent="HBoxContainer/Eq2" unique_id=1494597997]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel5" type="Panel" parent="HBoxContainer/Eq2"]
+[node name="Panel5" type="Panel" parent="HBoxContainer/Eq2" unique_id=1376899683]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel6" type="Panel" parent="HBoxContainer/Eq2"]
+[node name="Panel6" type="Panel" parent="HBoxContainer/Eq2" unique_id=1685620981]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Eq3" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Eq3" type="VBoxContainer" parent="HBoxContainer" unique_id=1065831371]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("4_obufj")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Eq3"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Eq3" unique_id=567128144]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdmwb")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Eq3"]
+[node name="Panel2" type="Panel" parent="HBoxContainer/Eq3" unique_id=640749973]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel3" type="Panel" parent="HBoxContainer/Eq3"]
+[node name="Panel3" type="Panel" parent="HBoxContainer/Eq3" unique_id=1071840844]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel4" type="Panel" parent="HBoxContainer/Eq3"]
+[node name="Panel4" type="Panel" parent="HBoxContainer/Eq3" unique_id=540694903]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel5" type="Panel" parent="HBoxContainer/Eq3"]
+[node name="Panel5" type="Panel" parent="HBoxContainer/Eq3" unique_id=1970724563]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel6" type="Panel" parent="HBoxContainer/Eq3"]
+[node name="Panel6" type="Panel" parent="HBoxContainer/Eq3" unique_id=1681547303]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Eq4" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Eq4" type="VBoxContainer" parent="HBoxContainer" unique_id=1748095080]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("4_obufj")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Eq4"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Eq4" unique_id=1995424657]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdmwb")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Eq4"]
+[node name="Panel2" type="Panel" parent="HBoxContainer/Eq4" unique_id=808235685]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel3" type="Panel" parent="HBoxContainer/Eq4"]
+[node name="Panel3" type="Panel" parent="HBoxContainer/Eq4" unique_id=1729385213]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel4" type="Panel" parent="HBoxContainer/Eq4"]
+[node name="Panel4" type="Panel" parent="HBoxContainer/Eq4" unique_id=102896724]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel5" type="Panel" parent="HBoxContainer/Eq4"]
+[node name="Panel5" type="Panel" parent="HBoxContainer/Eq4" unique_id=339278153]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel6" type="Panel" parent="HBoxContainer/Eq4"]
+[node name="Panel6" type="Panel" parent="HBoxContainer/Eq4" unique_id=1935630578]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Eq5" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Eq5" type="VBoxContainer" parent="HBoxContainer" unique_id=1221014855]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("4_obufj")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Eq5"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Eq5" unique_id=1773941820]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdmwb")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Eq5"]
+[node name="Panel2" type="Panel" parent="HBoxContainer/Eq5" unique_id=1085606939]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel3" type="Panel" parent="HBoxContainer/Eq5"]
+[node name="Panel3" type="Panel" parent="HBoxContainer/Eq5" unique_id=1695684115]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel4" type="Panel" parent="HBoxContainer/Eq5"]
+[node name="Panel4" type="Panel" parent="HBoxContainer/Eq5" unique_id=1558306748]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel5" type="Panel" parent="HBoxContainer/Eq5"]
+[node name="Panel5" type="Panel" parent="HBoxContainer/Eq5" unique_id=214574953]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel6" type="Panel" parent="HBoxContainer/Eq5"]
+[node name="Panel6" type="Panel" parent="HBoxContainer/Eq5" unique_id=685410082]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Eq6" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Eq6" type="VBoxContainer" parent="HBoxContainer" unique_id=532438301]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("4_obufj")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Eq6"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Eq6" unique_id=988094551]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdmwb")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Eq6"]
+[node name="Panel2" type="Panel" parent="HBoxContainer/Eq6" unique_id=1433260278]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel3" type="Panel" parent="HBoxContainer/Eq6"]
+[node name="Panel3" type="Panel" parent="HBoxContainer/Eq6" unique_id=1185071843]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel4" type="Panel" parent="HBoxContainer/Eq6"]
+[node name="Panel4" type="Panel" parent="HBoxContainer/Eq6" unique_id=1148559396]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel5" type="Panel" parent="HBoxContainer/Eq6"]
+[node name="Panel5" type="Panel" parent="HBoxContainer/Eq6" unique_id=238375167]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")
 
-[node name="Panel6" type="Panel" parent="HBoxContainer/Eq6"]
+[node name="Panel6" type="Panel" parent="HBoxContainer/Eq6" unique_id=230679608]
 custom_minimum_size = Vector2(0, 9.55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lndbu")

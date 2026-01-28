@@ -1,20 +1,20 @@
-[gd_scene load_steps=21 format=3 uid="uid://cwnxxystgxrjm"]
+[gd_scene format=3 uid="uid://cwnxxystgxrjm"]
 
 [ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_2m6j3"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_uy6ab"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_5j6a5"]
-[ext_resource type="Texture2D" uid="uid://7ukbsw5o0nhs" path="res://Assets/UIPiecies/Screen/SidePanels/MissileTab_FullQuality.png" id="4_nth3v"]
-[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality.png" id="5_jqaeg"]
-[ext_resource type="Texture2D" uid="uid://lsqk1x3emjbs" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality_Pressed.png" id="6_o630s"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="8_tvoe2"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="9_5r1o0"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="10_ng7p5"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="11_4sk4u"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="12_q0qm5"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="13_y4ap4"]
-[ext_resource type="Texture2D" uid="uid://cba3crf7vyc2x" path="res://Assets/UIPiecies/Off.png" id="14_w0uv6"]
+[ext_resource type="Texture2D" uid="uid://dete7kwckvyap" path="res://Assets/UIPiecies/Screen/SidePanels/MissileTab_FullQuality.png" id="4_nth3v"]
+[ext_resource type="Texture2D" uid="uid://bxmncoxii6jcx" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality.png" id="5_jqaeg"]
+[ext_resource type="Texture2D" uid="uid://dsntoyv148q77" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality_Pressed.png" id="6_o630s"]
+[ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="8_tvoe2"]
+[ext_resource type="Texture2D" uid="uid://770ytc3dmn3u" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="9_5r1o0"]
+[ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="10_ng7p5"]
+[ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="11_4sk4u"]
+[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="12_q0qm5"]
+[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="13_y4ap4"]
+[ext_resource type="Texture2D" uid="uid://d551gd6uliuh" path="res://Assets/UIPiecies/Off.png" id="14_w0uv6"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
-[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
+[ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
 
 [sub_resource type="Animation" id="Animation_brgwl"]
@@ -69,7 +69,7 @@ _data = {
 &"Show": SubResource("Animation_stsyt")
 }
 
-[node name="Missile Tab" type="Control" node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TouchStopper")]
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TouchStopper")]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -91,12 +91,10 @@ RangeText = NodePath("Control/Control/RangeText")
 SelectedMissileText = NodePath("Control/Control/SelectedMissileText")
 TouchStopper = NodePath("Control/TouchStopper")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kt4fa")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=673255826]
+libraries/ = SubResource("AnimationLibrary_kt4fa")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1220579677]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -111,8 +109,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="Control"]
-layout_mode = 2
+[node name="Control" type="Control" parent="Control" unique_id=212056163]
 anchors_preset = 0
 offset_left = 20.0
 offset_top = -34.0
@@ -121,7 +118,7 @@ offset_bottom = -34.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="Control/Control"]
+[node name="TextureRect" type="TextureRect" parent="Control/Control" unique_id=641583344]
 layout_mode = 0
 offset_left = -352.0
 offset_top = -90.0
@@ -131,7 +128,7 @@ mouse_filter = 0
 texture = ExtResource("4_nth3v")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Control/Control/TextureRect" unique_id=258856403]
 modulate = Color(0, 0, 0, 0.518)
 show_behind_parent = true
 layout_mode = 0
@@ -143,7 +140,7 @@ mouse_filter = 2
 texture = ExtResource("4_nth3v")
 expand_mode = 1
 
-[node name="LaunchButton" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+[node name="LaunchButton" type="TextureButton" parent="Control/Control" unique_id=132458517 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -162,7 +159,7 @@ texture_pressed = ExtResource("6_o630s")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DissarmButton" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+[node name="DissarmButton" type="TextureButton" parent="Control/Control" unique_id=1752502398 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -182,7 +179,7 @@ texture_pressed = ExtResource("9_5r1o0")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ArmButton" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+[node name="ArmButton" type="TextureButton" parent="Control/Control" unique_id=2126969578 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -201,7 +198,7 @@ texture_pressed = ExtResource("11_4sk4u")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="TurnOff" type="TextureButton" parent="Control/Control" groups=["Buttons"]]
+[node name="TurnOff" type="TextureButton" parent="Control/Control" unique_id=1145318112 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -220,7 +217,7 @@ texture_pressed = ExtResource("13_y4ap4")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="Control/Control/TurnOff"]
+[node name="TextureRect" type="TextureRect" parent="Control/Control/TurnOff" unique_id=325670099]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -237,24 +234,24 @@ rotation = 1.5708
 texture = ExtResource("14_w0uv6")
 expand_mode = 1
 
-[node name="MissileSelectLight" parent="Control/Control" instance=ExtResource("15_pknbg")]
+[node name="MissileSelectLight" parent="Control/Control" unique_id=1859413600 instance=ExtResource("15_pknbg")]
 layout_mode = 0
 offset_left = 120.0
 offset_top = -23.0
 offset_right = 140.0
 offset_bottom = -3.0
 
-[node name="AngleSelectLight" parent="Control/Control" instance=ExtResource("15_pknbg")]
+[node name="AngleSelectLight" parent="Control/Control" unique_id=705276192 instance=ExtResource("15_pknbg")]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 7.0
 offset_right = 140.0
 offset_bottom = 27.0
 
-[node name="RangeText" type="Label" parent="Control/Control"]
+[node name="RangeText" type="Label" parent="Control/Control" unique_id=1306899280]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
-layout_mode = 2
+layout_mode = 0
 offset_left = -24.0
 offset_top = -67.0
 offset_right = 108.0
@@ -269,7 +266,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="SelectedMissileText" type="Label" parent="Control/Control"]
+[node name="SelectedMissileText" type="Label" parent="Control/Control" unique_id=1069982182]
 texture_filter = 6
 layout_mode = 1
 anchors_preset = 8
@@ -292,13 +289,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="DroneGas" parent="Control/Control" instance=ExtResource("17_ptq1t")]
+[node name="DroneGas" parent="Control/Control" unique_id=1046752902 instance=ExtResource("17_ptq1t")]
 position = Vector2(179, -1.36424e-12)
 rotation = 1.57079
 scale = Vector2(0.529254, 0.369254)
 
-[node name="TouchStopper" type="Control" parent="Control"]
-layout_mode = 2
+[node name="TouchStopper" type="Control" parent="Control" unique_id=321448098]
 anchors_preset = 0
 offset_left = -271.0
 offset_top = -119.0

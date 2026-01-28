@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://bdmgdubj6nbwg"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://bdmgdubj6nbwg"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_m8nxg"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_yrvwk"]
@@ -7,6 +7,5 @@
 [resource]
 script = ExtResource("1_m8nxg")
 SpotName = "Gart"
-Region = 0
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_yrvwk")]([ExtResource("3_yrvwk")])

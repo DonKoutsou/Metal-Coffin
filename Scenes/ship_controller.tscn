@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://o2g164rxtchr"]
+[gd_scene format=3 uid="uid://o2g164rxtchr"]
 
 [ext_resource type="Script" uid="uid://c6jrt6nte58rh" path="res://Scripts/ship_controller.gd" id="1_32yxj"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_gvhav"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="5_s7os8"]
 [ext_resource type="PackedScene" uid="uid://4pq5t6l3c55k" path="res://Scenes/MapShips/drone.tscn" id="6_pyrhj"]
 
-[node name="ShipController" type="Node"]
+[node name="ShipController" type="Node" unique_id=1687035603]
 process_mode = 1
 script = ExtResource("1_32yxj")
 ShipControllerEventH = ExtResource("3_gvhav")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotType" load_steps=22 format=3 uid="uid://df37gonu46vbl"]
+[gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://df37gonu46vbl"]
 
 [ext_resource type="PackedScene" uid="uid://dw6dy4uoxiju5" path="res://Scenes/TownShop/Village_background.tscn" id="1_2vijd"]
 [ext_resource type="Resource" uid="uid://eemvne8otjn4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Armak.tres" id="3_b6ce5"]
@@ -24,11 +24,9 @@
 [sub_resource type="Resource" id="Resource_3mffu"]
 script = ExtResource("4_ha07c")
 PossibleIds = Array[ExtResource("3_i4484")]([ExtResource("3_b6ce5"), ExtResource("3_snnyn"), ExtResource("5_6lban"), ExtResource("6_65daw"), ExtResource("7_0pbcu"), ExtResource("8_7g68p"), ExtResource("9_i5pti"), ExtResource("10_jk2bs"), ExtResource("11_xaq2r"), ExtResource("12_gewg4"), ExtResource("13_mr6b2"), ExtResource("14_egjsd"), ExtResource("15_2pkn4"), ExtResource("16_hubos"), ExtResource("17_a77xt"), ExtResource("18_tsgiu")])
-DataName = ""
 
 [resource]
 script = ExtResource("10_ex7ij")
 SpotK = 1
-VisibleOnStart = false
 BackgroundScene = ExtResource("1_2vijd")
 Data = SubResource("Resource_3mffu")

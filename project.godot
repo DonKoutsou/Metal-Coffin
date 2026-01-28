@@ -14,13 +14,17 @@ config/name="Metal Coffin"
 config/version="0.7.04"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Logos/LogoIcon.png"
 config/windows_native_icon="res://Assets/Logos/LogoIc.ico"
 config/demo=true
+
+[audio]
+
+buses/default_bus_layout="uid://c3nyxeslcljc8"
 
 [autoload]
 
@@ -38,8 +42,7 @@ PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=3
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -52,7 +55,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/cptcreator/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/CaptainCreatorPlugin/plugin.cfg")
 
 [global_group]
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp5ghsxs3xitl"]
+[gd_scene format=3 uid="uid://dp5ghsxs3xitl"]
 
 [ext_resource type="Script" uid="uid://tasusoxua525" path="res://Scripts/UI/linetest.gd" id="1_jknyh"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ylop2"]
 [ext_resource type="Script" uid="uid://bqkd76q3l7cn0" path="res://Scripts/testaudio.gd" id="3_uq335"]
 
-[node name="LineDrawer" type="PanelContainer" node_paths=PackedStringArray("AudiostreamPlayer")]
+[node name="LineDrawer" type="PanelContainer" unique_id=959627120 node_paths=PackedStringArray("AudiostreamPlayer")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,5 +26,5 @@ buffer_size = 748
 phase = 0.861716
 LineWidth = -1.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=573331100]
 script = ExtResource("3_uq335")

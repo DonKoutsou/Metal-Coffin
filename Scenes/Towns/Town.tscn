@@ -1,25 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgf0r7r507qef"]
+[gd_scene format=3 uid="uid://dgf0r7r507qef"]
 
 [ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_sfmn7"]
 [ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_l7yg4"]
 [ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_ot8kj"]
-[ext_resource type="Texture2D" uid="uid://bn7tbt6reetit" path="res://Assets/MapElements/plane_Town1_BaseColor.png" id="4_ek6u8"]
-[ext_resource type="Texture2D" uid="uid://ckh8skdhkuf7x" path="res://Assets/MapElements/plane_Town1_Normal.png" id="4_oe7lg"]
+[ext_resource type="Texture2D" uid="uid://cgyhcishe7xfb" path="res://Assets/MapElements/plane_Town1_BaseColor.png" id="4_ek6u8"]
+[ext_resource type="Texture2D" uid="uid://brlhkt6uwpnuj" path="res://Assets/MapElements/plane_Town1_Normal.png" id="4_oe7lg"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vjjth"]
 diffuse_texture = ExtResource("4_ek6u8")
 normal_texture = ExtResource("4_oe7lg")
 
-[node name="Town2" type="Node2D"]
+[node name="Town2" type="Node2D" unique_id=1913969858]
 position = Vector2(608, 338)
 script = ExtResource("1_sfmn7")
 SpotScene = ExtResource("2_l7yg4")
 
-[node name="Sprite2D2" type="Sprite2D" parent="." groups=["DissapearingMap"]]
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=315587572 groups=["DissapearingMap"]]
 z_index = -1
 texture_filter = 1
 material = ExtResource("3_ot8kj")
 texture = SubResource("CanvasTexture_vjjth")
 region_rect = Rect2(251.179, 160.971, 745.969, 227.22)
 
-[node name="CitySpot" type="Node2D" parent="."]
+[node name="CitySpot" type="Node2D" parent="." unique_id=409066220]

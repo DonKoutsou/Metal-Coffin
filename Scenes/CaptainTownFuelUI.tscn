@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5se0wqet47ca"]
+[gd_scene format=3 uid="uid://b5se0wqet47ca"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7hm0o"]
-[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="2_vtyam"]
+[ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="2_vtyam"]
 
-[node name="FleetSeparationShipViz" type="PanelContainer"]
+[node name="FleetSeparationShipViz" type="PanelContainer" unique_id=852316311]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -19,20 +19,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_7hm0o")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=2016539151]
 layout_mode = 2
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer2" unique_id=419590960]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CapName" type="Label" parent="VBoxContainer2/VBoxContainer"]
+[node name="CapName" type="Label" parent="VBoxContainer2/VBoxContainer" unique_id=311868265]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Craden"
 horizontal_alignment = 2
 
-[node name="CapPortrait" type="TextureRect" parent="VBoxContainer2/VBoxContainer"]
+[node name="CapPortrait" type="TextureRect" parent="VBoxContainer2/VBoxContainer" unique_id=530603772]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -41,33 +41,33 @@ texture = ExtResource("2_vtyam")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2" unique_id=1701442986]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer" unique_id=1263801995]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1954465469]
 layout_mode = 2
 text = "Fuel"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=755094369]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 2
 value = 27.12
 show_percentage = false
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer" unique_id=1037820006]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1963005592]
 layout_mode = 2
 text = "Hull"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1670792635]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 2

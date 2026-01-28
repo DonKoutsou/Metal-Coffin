@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=13 format=3 uid="uid://k0unclveytur"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://k0unclveytur"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_ro018"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_0ovoj"]
@@ -13,30 +13,22 @@
 script = ExtResource("6_kd1ru")
 UpgradeName = 1
 UpgradeAmmount = 15.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_qf4d6"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 2
 UpgradeAmmount = 35.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_hehup"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 9
 UpgradeAmmount = 100.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_nw0c3"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 16
 UpgradeAmmount = 40.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -44,11 +36,9 @@ script = ExtResource("3_qr78f")
 Upgrades = Array[ExtResource("6_kd1ru")]([SubResource("Resource_nj3b7"), SubResource("Resource_qf4d6"), SubResource("Resource_hehup"), SubResource("Resource_nw0c3")])
 UpgradeVersion = ExtResource("3_u0cql")
 UpgradeTime = 1400.0
-IsDamaged = false
 PartType = 1
 ItemName = "EN-250"
 ItemDesc = "This intermediate engine integrates enhanced fuel management systems. Designed for improved performance, it maintains reliability under increased load conditions."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("2_0ovoj")]([ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("3_nw0c3"), ExtResource("3_nw0c3"), ExtResource("4_hehup"), ExtResource("4_hehup"), ExtResource("5_f5x4x")])
 Tier = 1
 CanTransfer = false

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=10 format=3 uid="uid://cdkivk50mv55h"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://cdkivk50mv55h"]
 
-[ext_resource type="Texture2D" uid="uid://c8q224j8pwjre" path="res://Assets/Cards/Rupture.png" id="1_75awf"]
+[ext_resource type="Texture2D" uid="uid://dxjulo33felpe" path="res://Assets/Cards/Rupture.png" id="1_75awf"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_nulkh"]
 [ext_resource type="Script" uid="uid://hkltim4mpjml" path="res://Scripts/CardFight/LoseBuffSelfCardModule.gd" id="3_75awf"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_nulkh"]
@@ -10,45 +10,27 @@
 [sub_resource type="Resource" id="Resource_u4tf1"]
 script = ExtResource("3_75awf")
 StatToStrip = 2
-CanBeUsedOnOther = false
-SelfUse = true
-AOE = false
-TierUpgrade = 1.0
-TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://hkltim4mpjml"
 
 [sub_resource type="Resource" id="Resource_7h3er"]
 script = ExtResource("3_nulkh")
 ScalingStat = 2
-Method = 0
-SelfMethod = 0
 metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 
 [sub_resource type="Resource" id="Resource_4hsju"]
 script = ExtResource("4_75awf")
-AtackType = 0
 Damage = 300.0
 ScaleStat = Array[ExtResource("3_nulkh")]([SubResource("Resource_7h3er")])
-CauseFile = false
 OnAtackModules = Array[ExtResource("2_nulkh")]([SubResource("Resource_u4tf1")])
-OnSuccesfullAtackModules = Array[ExtResource("2_nulkh")]([])
-SkipShield = false
-AOE = false
 TierUpgrade = 1.2
-TierUpgradeMethod = 0
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]
 script = ExtResource("4_7h3er")
 Icon = ExtResource("1_75awf")
 CardName = "Rupture"
-CardDescriptionOverride = ""
 Energy = 2
 AllowDuplicates = true
-Consume = false
-OnUseModules = Array[ExtResource("2_nulkh")]([])
 OnPerformModule = SubResource("Resource_4hsju")
 Type = 1
-WeapT = 0
 UseConditions = Array[int]([5])
-AllowTier = true

@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgs0u1j4mhhx5"]
+[gd_scene format=3 uid="uid://cgs0u1j4mhhx5"]
 
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="1_2v1h2"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_jut7c"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_40o7a"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_fr5qk"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="4_fr5qk"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_ytvfy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="5_si1ht"]
 
@@ -20,7 +20,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" unique_id=784805534 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,7 +42,7 @@ UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/CardsSection")
 CardPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/CardsSection/CardPlecement")
 
-[node name="VBoxContainer" type="ScrollContainer" parent="."]
+[node name="VBoxContainer" type="ScrollContainer" parent="." unique_id=966295129]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jut7c")
 horizontal_scroll_mode = 3
@@ -50,17 +50,17 @@ vertical_scroll_mode = 3
 script = ExtResource("4_ytvfy")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=295165886]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1664219088]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1666121310]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -73,19 +73,19 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=596959331]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
+[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1997235462 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Upgrade"
 
-[node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
+[node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1141385224 groups=["DigitalBouncingButton"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -93,7 +93,7 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Install Part"
 
-[node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
+[node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=2070343834 groups=["DigitalBouncingButton"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -101,7 +101,7 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Add More"
 
-[node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
+[node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1922293720 groups=["DigitalBouncingButton"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -109,19 +109,19 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Remove Item"
 
-[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" groups=["DigitalBouncingButton"]]
+[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1150997006 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Transfer"
 
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=569619456]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1157459895]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -136,7 +136,7 @@ text = "[color=#c19200]Upgrade Time[/color] : 4x
 fit_content = true
 autowrap_mode = 2
 
-[node name="ItemDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+[node name="ItemDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1248046445]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -151,25 +151,25 @@ text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
 fit_content = true
 autowrap_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=66956775]
 layout_mode = 2
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=167877657]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=861473671]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection" unique_id=1357927910]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Providing Cards"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="CardPlecement" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection"]
+[node name="CardPlecement" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection" unique_id=1037286587]
 custom_minimum_size = Vector2(325, 270)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -177,7 +177,7 @@ size_flags_vertical = 3
 script = ExtResource("5_si1ht")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1832707288]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")

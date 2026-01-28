@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=7 format=3 uid="uid://cau8rjgorpmtu"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://cau8rjgorpmtu"]
 
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_r53si"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_1p1c1"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_dvn88"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_rkon4"]
@@ -12,4 +11,3 @@ script = ExtResource("2_1p1c1")
 SpotName = "Alivia"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("3_dvn88")]([ExtResource("4_rkon4"), ExtResource("5_c76ag"), ExtResource("6_pelbf")])
-Merchendise = Array[ExtResource("1_r53si")]([])

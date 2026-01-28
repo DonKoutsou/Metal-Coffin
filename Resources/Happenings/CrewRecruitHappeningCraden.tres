@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=3 format=3 uid="uid://dijsq004n7ouw"]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://dijsq004n7ouw"]
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_ti0nw"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="5_wlaaf"]
@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("5_wlaaf")
 HappeningName = "Crew Recruit"
-Stages = Array[ExtResource("5_ti0nw")]([])
 HappeningAppearance = 1
 Special = true
 CrewRecruit = true

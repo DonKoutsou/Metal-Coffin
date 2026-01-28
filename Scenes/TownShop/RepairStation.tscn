@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3irrnfaw10g4"]
+[gd_scene format=3 uid="uid://d3irrnfaw10g4"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_5dv8f"]
 [ext_resource type="Script" uid="uid://elkiv7nl5gfy" path="res://Scripts/TownShop/RepairStation.gd" id="2_iywg0"]
@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="4_xts26"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="5_0bh7o"]
 
-[node name="Fuel Storages" type="PanelContainer" node_paths=PackedStringArray("RepairUIPlacement")]
+[node name="Fuel Storages" type="PanelContainer" unique_id=2004608452 node_paths=PackedStringArray("RepairUIPlacement")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,18 +19,18 @@ RepairUI = ExtResource("3_272ke")
 RepairUIPlacement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/InputScroll/VBoxContainer")
 PlayerWallet = ExtResource("4_xts26")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1874656674]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=170897135]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1593116661]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1178221120]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Repair Bay"
@@ -38,12 +38,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1629466987]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_5dv8f")
 
-[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="InputScroll" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1114687647]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -52,12 +52,12 @@ vertical_scroll_mode = 3
 script = ExtResource("5_0bh7o")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/InputScroll"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/InputScroll" unique_id=289140107]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LeaveFuelStorage" type="Button" parent="VBoxContainer"]
+[node name="LeaveFuelStorage" type="Button" parent="VBoxContainer" unique_id=350283990]
 layout_mode = 2
 text = "Leave"
 

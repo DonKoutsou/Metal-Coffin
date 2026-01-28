@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b5mce733abxqu"]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b5mce733abxqu"]
 
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="1_wh627"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_ddlmt"]
@@ -11,6 +11,4 @@ ItemName = "Fire Suppression Unit"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("2_ddlmt")]([ExtResource("1_wh627")])
-Tier = 0
-CanTransfer = true
 Cost = 200

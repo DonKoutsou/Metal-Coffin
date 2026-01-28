@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgm8bfli1toeq"]
+[gd_scene format=3 uid="uid://bgm8bfli1toeq"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7ej3v"]
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" unique_id=90436407]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1478668832]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

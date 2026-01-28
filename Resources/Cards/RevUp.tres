@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=6 format=3 uid="uid://bhlucco4xwaob"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bhlucco4xwaob"]
 
-[ext_resource type="Texture2D" uid="uid://d3g37qs6mb3rn" path="res://Assets/Cards/Revup.png" id="1_uoini"]
+[ext_resource type="Texture2D" uid="uid://caiahji60muq5" path="res://Assets/Cards/Revup.png" id="1_uoini"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_7u3dc"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_p8lq8"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_8gxxu"]
@@ -10,9 +10,6 @@ script = ExtResource("3_p8lq8")
 StatToBuff = 1
 BuffDuration = 2
 BuffAmmount = 1.2
-CanBeUsedOnOther = false
-SelfUse = true
-AOE = false
 TierUpgrade = 1.2
 TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
@@ -21,12 +18,7 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 script = ExtResource("4_8gxxu")
 Icon = ExtResource("1_uoini")
 CardName = "Engine Revup"
-CardDescriptionOverride = ""
 Energy = 3
 AllowDuplicates = true
-Consume = false
 OnUseModules = Array[ExtResource("2_7u3dc")]([SubResource("Resource_r7uwp")])
 Type = 2
-WeapT = 0
-UseConditions = Array[int]([])
-AllowTier = true

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=7 format=3 uid="uid://c8reou7hykm77"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c8reou7hykm77"]
 
-[ext_resource type="Texture2D" uid="uid://dep7qqw6mipy7" path="res://Assets/Cards/EnergyConvert.png" id="1_4d6nm"]
+[ext_resource type="Texture2D" uid="uid://8aqc0ml74us5" path="res://Assets/Cards/EnergyConvert.png" id="1_4d6nm"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_7qc3q"]
 [ext_resource type="Script" uid="uid://b3ik3ixt10qr1" path="res://Scripts/CardFight/ReserveConversionModule.gd" id="3_4d6nm"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_vyo1w"]
@@ -13,9 +13,6 @@ point_count = 2
 [sub_resource type="Resource" id="Resource_7qc3q"]
 script = ExtResource("3_4d6nm")
 ConversionMultiplication = SubResource("Curve_4d6nm")
-CanBeUsedOnOther = false
-SelfUse = true
-AOE = false
 TierUpgrade = 1.2
 TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://b3ik3ixt10qr1"
@@ -24,12 +21,7 @@ metadata/_custom_type_script = "uid://b3ik3ixt10qr1"
 script = ExtResource("5_vyo1w")
 Icon = ExtResource("1_4d6nm")
 CardName = "Reserve Conversion"
-CardDescriptionOverride = ""
-Energy = 0
 AllowDuplicates = true
-Consume = false
 OnUseModules = Array[ExtResource("2_7qc3q")]([SubResource("Resource_7qc3q")])
 Type = 2
-WeapT = 0
 UseConditions = Array[int]([8])
-AllowTier = true

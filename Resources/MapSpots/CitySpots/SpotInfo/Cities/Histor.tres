@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=4 format=3 uid="uid://b7cfe1e6i2knc"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://b7cfe1e6i2knc"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_ea05s"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_1ok7s"]
@@ -7,6 +7,5 @@
 [resource]
 script = ExtResource("1_ea05s")
 SpotName = "Histor"
-Region = 0
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_1ok7s")]([ExtResource("3_1ok7s")])

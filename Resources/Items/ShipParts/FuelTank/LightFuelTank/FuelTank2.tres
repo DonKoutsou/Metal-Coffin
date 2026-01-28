@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=12 format=3 uid="uid://cwoay1furrmi7"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://cwoay1furrmi7"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_5kv6q"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_vlra8"]
@@ -12,25 +12,19 @@
 [sub_resource type="Resource" id="Resource_i41uq"]
 resource_local_to_scene = true
 script = ExtResource("4_nw4kc")
-UpgradeName = 0
 UpgradeAmmount = 100.0
-PenaltyAmmount = 0.0
 CurrentValue = 100.0
 
 [sub_resource type="Resource" id="Resource_u0ypt"]
 script = ExtResource("4_nw4kc")
 UpgradeName = 9
 UpgradeAmmount = 2.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_udr7u"]
 script = ExtResource("4_nw4kc")
 UpgradeName = 16
 UpgradeAmmount = 5.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -38,12 +32,9 @@ script = ExtResource("5_fgxqn")
 Upgrades = Array[ExtResource("4_nw4kc")]([SubResource("Resource_i41uq"), SubResource("Resource_u0ypt"), SubResource("Resource_udr7u")])
 UpgradeVersion = ExtResource("3_o7sn3")
 UpgradeTime = 600.0
-IsDamaged = false
 PartType = 3
 ItemName = "SPT-100"
 ItemDesc = "A light weight fuel tank with reduced size. Constructed from lightweight materials for reliability in combat operations. Finds its uses in smaller and more adgile ships."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_5kv6q")]([ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("3_ry7j3"), ExtResource("3_ry7j3"), ExtResource("4_udr7u"), ExtResource("5_udr7u")])
-Tier = 0
 CanTransfer = false
 Cost = 25000

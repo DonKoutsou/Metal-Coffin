@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://duns2geut7ygv"]
+[gd_scene format=3 uid="uid://duns2geut7ygv"]
 
 [sub_resource type="Curve" id="Curve_wmbnf"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -30,11 +30,11 @@ turbulence_noise_strength = 0.19
 turbulence_noise_scale = 4.568
 turbulence_noise_speed_random = 3.96
 
-[node name="Flare" type="GPUParticles2D"]
+[node name="Flare" type="GPUParticles2D" unique_id=456531762]
 amount = 5
-process_material = SubResource("ParticleProcessMaterial_uvf0q")
 lifetime = 2.0
 explosiveness = 0.84
 trail_lifetime = 0.17
 trail_sections = 4
 trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_uvf0q")

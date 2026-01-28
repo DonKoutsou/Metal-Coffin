@@ -1,10 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://5ubeqcn5eqt5"]
+[gd_scene format=3 uid="uid://5ubeqcn5eqt5"]
 
-[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_8p2dm"]
-[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_6ixy4"]
+[ext_resource type="Script" uid="uid://dsoavxwjjlytc" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_8p2dm"]
+[ext_resource type="Script" uid="uid://d2bgkrovxloh1" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_6ixy4"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_l7ile"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_w1pge"]
-[ext_resource type="Texture2D" uid="uid://c7fenkw1dbam" path="res://Assets/Cards/shield.svg" id="5_8p2dm"]
+[ext_resource type="Texture2D" uid="uid://ccjvcv0w1rqnd" path="res://Assets/Cards/shield.svg" id="5_8p2dm"]
 
 [sub_resource type="Gradient" id="Gradient_bclkm"]
 interpolation_mode = 2
@@ -96,12 +96,12 @@ point_count = 3
 _data = [Vector2(0, 1), 0.0, 0.0597402, 0, 0, Vector2(1, 0), -0.904178, 0.0, 0, 0]
 point_count = 2
 
-[node name="MultiParticleExample2" type="Node2D"]
+[node name="MultiParticleExample2" type="Node2D" unique_id=394356354]
 script = ExtResource("1_8p2dm")
 repeat = false
 autostart = false
 
-[node name="Flash" type="Node2D" parent="."]
+[node name="Flash" type="Node2D" parent="." unique_id=988063799]
 script = ExtResource("2_6ixy4")
 num_particles = 1
 lifetime = 0.5
@@ -121,7 +121,7 @@ scale_curve = SubResource("Curve_whlsl")
 color_offset_curve = SubResource("Curve_bvb0m")
 alpha_curve = SubResource("Curve_g0j12")
 
-[node name="Orb3" type="Node2D" parent="."]
+[node name="Orb3" type="Node2D" parent="." unique_id=2008484765]
 script = ExtResource("2_6ixy4")
 num_particles = 32
 lifetime = 0.5
@@ -147,7 +147,7 @@ y_scale_curve = SubResource("Curve_hxrsk")
 color_offset_curve = SubResource("Curve_nvnu3")
 alpha_curve = SubResource("Curve_4xw1d")
 
-[node name="Ring" type="Node2D" parent="."]
+[node name="Ring" type="Node2D" parent="." unique_id=1604769424]
 modulate = Color(1, 1, 1, 0.505882)
 script = ExtResource("2_6ixy4")
 num_particles = 1

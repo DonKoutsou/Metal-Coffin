@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn356hqaf372p"]
+[gd_scene format=3 uid="uid://dn356hqaf372p"]
 
 [ext_resource type="Script" uid="uid://b7vls3p4lfb5v" path="res://Scripts/UI/thrust_slider.gd" id="1_cn7hu"]
-[ext_resource type="Texture2D" uid="uid://cppak6y6wit6" path="res://Assets/UIPiecies/Screen/SidePanels/handle_Camera 3.png" id="2_l8mv8"]
-[ext_resource type="Texture2D" uid="uid://c2f4quec7hbw0" path="res://Assets/UIPiecies/Screen/SidePanels/handleshadow_Camera 3.png" id="3_wavdi"]
-[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="4_150ym"]
+[ext_resource type="Texture2D" uid="uid://xhd53g36p6gd" path="res://Assets/UIPiecies/Screen/SidePanels/handle_Camera 3.png" id="2_l8mv8"]
+[ext_resource type="Texture2D" uid="uid://p3h2a0mgmb12" path="res://Assets/UIPiecies/Screen/SidePanels/handleshadow_Camera 3.png" id="3_wavdi"]
+[ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="4_150ym"]
 
-[node name="ThrustSlider" type="Control" node_paths=PackedStringArray("Handle")]
+[node name="ThrustSlider" type="Control" unique_id=1806408407 node_paths=PackedStringArray("Handle")]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -23,8 +23,8 @@ script = ExtResource("1_cn7hu")
 Handle = NodePath("Handle")
 StepCOunt = 12
 
-[node name="Handle" type="TextureRect" parent="."]
-layout_mode = 2
+[node name="Handle" type="TextureRect" parent="." unique_id=821941112]
+layout_mode = 0
 offset_left = -14.0
 offset_top = 215.0
 offset_right = 106.0
@@ -33,7 +33,7 @@ mouse_filter = 0
 texture = ExtResource("2_l8mv8")
 expand_mode = 1
 
-[node name="Handle2" type="TextureRect" parent="Handle"]
+[node name="Handle2" type="TextureRect" parent="Handle" unique_id=1270334709]
 modulate = Color(1, 1, 1, 0.654)
 show_behind_parent = true
 layout_mode = 1
@@ -52,7 +52,7 @@ mouse_filter = 2
 texture = ExtResource("3_wavdi")
 expand_mode = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1516683677]
 stream = ExtResource("4_150ym")
 volume_db = -10.0
 pitch_scale = 4.0

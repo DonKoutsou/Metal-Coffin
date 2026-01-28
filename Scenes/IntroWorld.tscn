@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cid0s6uni7fky"]
+[gd_scene format=3 uid="uid://cid0s6uni7fky"]
 
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_7wuav"]
 [ext_resource type="PackedScene" uid="uid://o2g164rxtchr" path="res://Scenes/ship_controller.tscn" id="5_0dp8t"]
@@ -22,7 +22,7 @@
 [ext_resource type="Resource" uid="uid://cxkj2k4llta37" path="res://Resources/Happenings/YoungCrewDiscussion.tres" id="24_8o37l"]
 [ext_resource type="Resource" uid="uid://bcorxmnws22bw" path="res://Resources/Happenings/The Evaluation.tres" id="28_32m5b"]
 
-[node name="World" type="Control" node_paths=PackedStringArray("_Map", "_Command", "Controller")]
+[node name="World" type="Control" unique_id=327614426 node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -45,21 +45,21 @@ IntroDialogue2 = Array[String](["Dormak is a few killometers away.", "Lets be ca
 PrologueDialgues = Array[String](["You open your eyes, it seems that you fell asleep. ", "The dream slowly fades away, but before it doese you have a moment to apreciate your early days in the pilot academy.", "Life was different back then.", "Your illusion is broken by a loud voice from outside your door.", "Captain ! We are almost at Cardi. ETA 10 minutes...", "We should make this stop fast and head back you think to yourself. Patrols dont frequent around here but we shouldn't play with our luck."])
 PrologueDialogues2 = Array[String](["Armak is a few days away. Lets be cautious and slowly make our way there.", "Multiple cities exist on the way. Most of them occupied by the regime. We need to make sure not to raise any alarms. Doing so will atract the regime's patrols.", "Lets take it slow and study our every move. One slip and we fall."])
 
-[node name="ShipController" parent="." instance=ExtResource("5_0dp8t")]
+[node name="ShipController" parent="." unique_id=1528525167 instance=ExtResource("5_0dp8t")]
 
-[node name="Commander" parent="." instance=ExtResource("14_m5d6e")]
+[node name="Commander" parent="." unique_id=1757352793 instance=ExtResource("14_m5d6e")]
 
-[node name="DialogueProgressHolder" type="Node" parent="."]
+[node name="DialogueProgressHolder" type="Node" parent="." unique_id=563979000]
 script = ExtResource("15_g1jcv")
 
-[node name="SimulationManager" parent="." node_paths=PackedStringArray("_Map") instance=ExtResource("18_43ao6")]
+[node name="SimulationManager" parent="." unique_id=2098095482 node_paths=PackedStringArray("_Map") instance=ExtResource("18_43ao6")]
 _Map = NodePath("../Map")
 
-[node name="WorldviewManager" type="Node" parent="."]
+[node name="WorldviewManager" type="Node" parent="." unique_id=1648406804]
 script = ExtResource("17_18b7g")
 WorldviewAdjustNotif = ExtResource("18_567dx")
 
-[node name="EventManager" type="Node" parent="."]
+[node name="EventManager" type="Node" parent="." unique_id=998249353]
 script = ExtResource("19_0dp8t")
 EventsPerSpot = Dictionary[int, Array]({
 0: [ExtResource("20_8eeky"), ExtResource("21_ljctt"), ExtResource("22_8o37l"), ExtResource("23_43ao6"), ExtResource("24_8o37l"), ExtResource("28_32m5b")],
@@ -68,7 +68,7 @@ EventsPerSpot = Dictionary[int, Array]({
 })
 metadata/_custom_type_script = "uid://s3ha37qvdear"
 
-[node name="Map" parent="." instance=ExtResource("19_3v2l7")]
+[node name="Map" parent="." unique_id=94153298 instance=ExtResource("19_3v2l7")]
 VillageSpotType = ExtResource("21_0i6dt")
 FinalCitySpotType = ExtResource("21_0dp8t")
 MapSize = 35

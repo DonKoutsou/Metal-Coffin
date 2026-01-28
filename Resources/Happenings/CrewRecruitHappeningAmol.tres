@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=6 format=3 uid="uid://r5k7lwi7y3wa"]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://r5k7lwi7y3wa"]
 
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="1_084du"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="5_oufnu"]
@@ -7,18 +7,14 @@
 [sub_resource type="Resource" id="Resource_3oa6o"]
 script = ExtResource("5_oufnu")
 HappeningTexts = Array[String](["Landing on the port after a while and the Chief officer offers you a tour to the city. He's spent part of his early adult life on this town and thinks a small walk will take the preasure out of you for a bit."])
-Options = Array[ExtResource("1_084du")]([])
 
 [sub_resource type="Resource" id="Resource_22y04"]
 script = ExtResource("5_oufnu")
 HappeningTexts = Array[String](["You take his offer and "])
-Options = Array[ExtResource("1_084du")]([])
 
 [resource]
 script = ExtResource("5_vub4e")
 HappeningName = "The sand hill"
 Stages = Array[ExtResource("5_oufnu")]([SubResource("Resource_3oa6o"), SubResource("Resource_22y04")])
-HappeningAppearance = 0
 Special = true
 CrewRecruit = true
-AllowedAppearances = 1

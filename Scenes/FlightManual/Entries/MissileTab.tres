@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FlightManualEntry" load_steps=2 format=3 uid="uid://c5y6h7d0jsj15"]
+[gd_resource type="Resource" script_class="FlightManualEntry" format=3 uid="uid://c5y6h7d0jsj15"]
 
 [ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scenes/FlightManual/flight_manual_entry.gd" id="1_dd8w2"]
 

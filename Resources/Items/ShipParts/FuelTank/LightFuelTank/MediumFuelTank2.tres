@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=9 format=3 uid="uid://d0a5l4aegq46m"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://d0a5l4aegq46m"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_tlvwb"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_372t0"]
@@ -9,25 +9,19 @@
 [sub_resource type="Resource" id="Resource_i41uq"]
 resource_local_to_scene = true
 script = ExtResource("3_34rnk")
-UpgradeName = 0
 UpgradeAmmount = 150.0
-PenaltyAmmount = 0.0
 CurrentValue = 150.0
 
 [sub_resource type="Resource" id="Resource_bic66"]
 script = ExtResource("3_34rnk")
 UpgradeName = 9
 UpgradeAmmount = 4.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_372t0"]
 script = ExtResource("3_34rnk")
 UpgradeName = 16
 UpgradeAmmount = 10.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
@@ -35,11 +29,9 @@ script = ExtResource("4_sjam0")
 Upgrades = Array[ExtResource("3_34rnk")]([SubResource("Resource_i41uq"), SubResource("Resource_bic66"), SubResource("Resource_372t0")])
 UpgradeVersion = ExtResource("3_ku1j6")
 UpgradeTime = 900.0
-IsDamaged = false
 PartType = 3
 ItemName = "SPT-200"
 ItemDesc = "A continuation of the SPT-100 model. This upgraded model provides an increased fuel capacity with a reduced weight ratio that the SPT series is known for."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("1_tlvwb")]([ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0")])
 Tier = 1
 CanTransfer = false

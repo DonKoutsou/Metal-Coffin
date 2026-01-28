@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv64iu4t4ja87"]
+[gd_scene format=3 uid="uid://dv64iu4t4ja87"]
 
 [ext_resource type="Script" uid="uid://pvaiu0d2ou72" path="res://Scripts/HostileDroneDock.gd" id="1_civqe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xe3xl"]
 
-[node name="DroneDock" type="Area2D"]
+[node name="DroneDock" type="Area2D" unique_id=2097404777]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_civqe")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1501189733]
 shape = SubResource("CircleShape2D_xe3xl")
 
-[node name="DroneSpots" type="Node2D" parent="."]
+[node name="DroneSpots" type="Node2D" parent="." unique_id=190520455]

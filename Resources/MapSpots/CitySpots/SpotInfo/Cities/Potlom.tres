@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="MapSpotCompleteInfo" load_steps=5 format=3 uid="uid://y637ffnqtrca"]
+[gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://y637ffnqtrca"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_n1ciw"]
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="1_t3hkb"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_5fkko"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="3_5fkko"]
 
@@ -10,4 +9,3 @@ script = ExtResource("1_n1ciw")
 SpotName = "Potlom"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_5fkko")]([ExtResource("3_5fkko")])
-Merchendise = Array[ExtResource("1_t3hkb")]([])

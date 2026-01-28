@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1k2h35khc40y"]
+[gd_scene format=3 uid="uid://b1k2h35khc40y"]
 
 [ext_resource type="Script" uid="uid://faswynkmbrw2" path="res://Scripts/Inventory/Inventory_Box.gd" id="1_1cx5j"]
 
@@ -29,7 +29,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="InventoryBox" type="PanelContainer" node_paths=PackedStringArray("Butto")]
+[node name="InventoryBox" type="PanelContainer" unique_id=1449330592 node_paths=PackedStringArray("Butto")]
 custom_minimum_size = Vector2(110, 30)
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +45,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3xrnb")
 script = ExtResource("1_1cx5j")
 Butto = NodePath("ItemButton")
 
-[node name="ItemButton" type="Button" parent="." groups=["DigitalBouncingButton"]]
+[node name="ItemButton" type="Button" parent="." unique_id=1170581497 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 2
@@ -55,7 +55,7 @@ action_mode = 0
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ItemButton"]
+[node name="TextureRect" type="TextureRect" parent="ItemButton" unique_id=845723903]
 visible = false
 texture_filter = 1
 layout_mode = 1
@@ -66,7 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 3
 
-[node name="ItemName" type="Label" parent="ItemButton"]
+[node name="ItemName" type="Label" parent="ItemButton" unique_id=2110085130]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -78,7 +78,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="ItemButton"]
+[node name="PanelContainer" type="PanelContainer" parent="ItemButton" unique_id=1159467317]
 visible = false
 layout_mode = 1
 anchors_preset = 6
@@ -96,7 +96,7 @@ size_flags_vertical = 8
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_708pr")
 
-[node name="Label" type="Label" parent="ItemButton/PanelContainer"]
+[node name="Label" type="Label" parent="ItemButton/PanelContainer" unique_id=834797717]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 24

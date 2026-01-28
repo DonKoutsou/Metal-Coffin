@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq8y4l8uapojy"]
+[gd_scene format=3 uid="uid://cq8y4l8uapojy"]
 
 [ext_resource type="Script" uid="uid://bn0w6hkd0jgv6" path="res://Scripts/UI/Dialogue_Player.gd" id="1_xcud3"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_rodwx"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="3_h75l1"]
-[ext_resource type="Texture2D" uid="uid://d2m66tlt5cl4b" path="res://Assets/artificial-hive.png" id="4_kc08c"]
+[ext_resource type="Texture2D" uid="uid://bdkhr0sdf64jo" path="res://Assets/artificial-hive.png" id="4_kc08c"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_j0ljn"]
-[ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="5_p12ba"]
+[ext_resource type="AudioStream" uid="uid://b5e6m5xcjj8wb" path="res://Assets/Sounds/TextSound.mp3" id="5_p12ba"]
 
-[node name="PanelContainer" type="Control"]
+[node name="PanelContainer" type="Control" unique_id=968936853]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xcud3")
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1622959331]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -33,7 +33,7 @@ mouse_filter = 2
 theme = ExtResource("2_rodwx")
 theme_override_styles/panel = ExtResource("3_h75l1")
 
-[node name="Label" type="Label" parent="PanelContainer2"]
+[node name="Label" type="Label" parent="PanelContainer2" unique_id=2104639469]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_vertical = 1
@@ -41,7 +41,7 @@ theme_override_font_sizes/font_size = 24
 autowrap_mode = 2
 visible_characters_behavior = 1
 
-[node name="LineDrawer" parent="." instance=ExtResource("5_j0ljn")]
+[node name="LineDrawer" parent="." unique_id=1943059065 instance=ExtResource("5_j0ljn")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -59,7 +59,7 @@ amplitude = 10.0
 waveform_points = 1
 PointRatio = 10.0
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1097572770]
 visible = false
 layout_mode = 1
 anchors_preset = 2
@@ -74,18 +74,18 @@ mouse_filter = 2
 theme = ExtResource("2_rodwx")
 theme_override_styles/panel = ExtResource("3_h75l1")
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=1993598219]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_kc08c")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="PanelContainer"]
+[node name="Label" type="Label" parent="PanelContainer" unique_id=2004717841]
 layout_mode = 2
 text = "fawfwa"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1433864158]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -101,19 +101,19 @@ grow_vertical = 0
 theme_override_constants/separation = 70
 alignment = 1
 
-[node name="Skip" type="Button" parent="HBoxContainer" groups=["DigitalButtons"]]
+[node name="Skip" type="Button" parent="HBoxContainer" unique_id=1293361346 groups=["DigitalButtons"]]
 layout_mode = 2
 theme = ExtResource("2_rodwx")
 theme_override_font_sizes/font_size = 21
 text = "SKIP"
 
-[node name="Next" type="Button" parent="HBoxContainer" groups=["DigitalButtons"]]
+[node name="Next" type="Button" parent="HBoxContainer" unique_id=1782951668 groups=["DigitalButtons"]]
 layout_mode = 2
 theme = ExtResource("2_rodwx")
 theme_override_font_sizes/font_size = 21
 text = "NEXT"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1534790837]
 stream = ExtResource("5_p12ba")
 volume_db = -5.0
 bus = &"UI"

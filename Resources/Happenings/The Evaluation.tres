@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Happening" load_steps=10 format=3 uid="uid://bcorxmnws22bw"]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://bcorxmnws22bw"]
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_d3qx6"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_r15pu"]
@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_r15pu"]
 script = ExtResource("1_d3qx6")
 HappeningTexts = Array[String](["Your acts wont work here boy.... Get back to your ship, the fuel will arrive soon. May whoever be up there help us.........."])
-Options = Array[ExtResource("2_r15pu")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_rgmjt"]
@@ -17,37 +16,29 @@ FuelToGive = 250.0
 StringReply = "The man seems to cringe away for a second. He stares at you reading your expression, waiting for ..... no... hoping for it to break. But it doesent.
 \"Maybe to beat the devil, another devil is needed... Go on, son, I’ll send the fuel in a moment. A small gift from us as well—go give them hell.\""
 OptionName = "Let me see them try."
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_d3qx6")]([])
 WorldviewEffect = 1
 WorldviewEffectAmm = 10
 WorldviewCheck = 1
 CheckPossetive = true
 CheckDifficulty = 60
 WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_r15pu")])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://dbopqdo4787oe"
 
 [sub_resource type="Resource" id="Resource_48yxy"]
 script = ExtResource("1_d3qx6")
 HappeningTexts = Array[String](["\"You are giving away your life for nothing kid. And life is a big thing to give away like that. Do as you please, but keep it away from here. Go, we'll bring the fuel...\""])
-Options = Array[ExtResource("2_r15pu")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_d3qx6"]
 script = ExtResource("3_d3qx6")
-FuelToGive = 500.0
 StringReply = "The man's expression shifts; you can’t tell if it's disbelief or pity. He slowly raises his arm and lets it fall on your shoulder, a soft smile forming on his face. \"Your recklessness might actually shake this world enough to change it. May whoever is up there bless your journey, son. You’ll have my support nonetheless. Go back to your ship, son; we’ll be bringing the fuel shortly.\""
 OptionName = "“They might, but that won’t stop us from trying.”"
-FinishDiag = false
-BranchContinuation = Array[ExtResource("1_d3qx6")]([])
 WorldviewEffect = 2
 WorldviewEffectAmm = 10
 WorldviewCheck = 2
 CheckPossetive = true
 CheckDifficulty = 40
 WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_48yxy")])
-ReverseEffectOnFail = false
 metadata/_custom_type_script = "uid://dbopqdo4787oe"
 
 [sub_resource type="Resource" id="Resource_hv8jm"]
@@ -62,5 +53,3 @@ HappeningName = "The Evaluation"
 Stages = Array[ExtResource("1_d3qx6")]([SubResource("Resource_hv8jm")])
 HappeningAppearance = 1
 Special = true
-CrewRecruit = false
-AllowedAppearances = 1

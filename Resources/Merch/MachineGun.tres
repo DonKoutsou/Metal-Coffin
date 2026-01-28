@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://djvvj73a7tpqa"]
+[gd_resource type="Resource" script_class="Merchandise" format=3 uid="uid://djvvj73a7tpqa"]
 
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="1_7tifu"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_eh1dj"]
@@ -6,5 +6,3 @@
 [resource]
 script = ExtResource("2_eh1dj")
 It = ExtResource("1_7tifu")
-Price = 100
-Amm = 0

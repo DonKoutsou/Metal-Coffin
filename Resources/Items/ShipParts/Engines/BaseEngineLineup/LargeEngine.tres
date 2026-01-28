@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=11 format=3 uid="uid://cxum5qaw20d1q"]
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://cxum5qaw20d1q"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_t7h3x"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_x01tj"]
@@ -11,41 +11,31 @@
 script = ExtResource("5_0moyl")
 UpgradeName = 1
 UpgradeAmmount = 17.5
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_uftnd"]
 script = ExtResource("5_0moyl")
 UpgradeName = 2
 UpgradeAmmount = 40.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 
 [sub_resource type="Resource" id="Resource_j5fk8"]
 script = ExtResource("5_0moyl")
 UpgradeName = 9
 UpgradeAmmount = 120.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_tq668"]
 script = ExtResource("5_0moyl")
 UpgradeName = 16
 UpgradeAmmount = 50.0
-PenaltyAmmount = 0.0
-CurrentValue = 0.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]
 script = ExtResource("3_s64vj")
 Upgrades = Array[ExtResource("5_0moyl")]([SubResource("Resource_1w3hf"), SubResource("Resource_uftnd"), SubResource("Resource_j5fk8"), SubResource("Resource_tq668")])
 UpgradeTime = 2000.0
-IsDamaged = false
 PartType = 1
 ItemName = "EN-500"
 ItemDesc = "The pinnacle of engineering, this engine includes advanced fuel atomization technology. It excels in long-haul missions, ensuring optimal energy distribution for maximum efficiency."
-MaxStackCount = 1
 CardProviding = Array[ExtResource("2_x01tj")]([ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("3_j5fk8"), ExtResource("3_j5fk8"), ExtResource("4_tq668")])
 Tier = 2
 CanTransfer = false

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Merchandise" load_steps=3 format=3 uid="uid://d3j55mje35quu"]
+[gd_resource type="Resource" script_class="Merchandise" format=3 uid="uid://d3j55mje35quu"]
 
 [ext_resource type="Resource" uid="uid://bcatusfs5ku3" path="res://Resources/Items/Ammo/LaserGuidedAmmoMagazine100mm.tres" id="1_wo6lx"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_s8o1x"]
@@ -6,5 +6,3 @@
 [resource]
 script = ExtResource("2_s8o1x")
 It = ExtResource("1_wo6lx")
-Price = 300
-Amm = 0

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://nt0q5le0g6aj"]
+[gd_scene format=3 uid="uid://nt0q5le0g6aj"]
 
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="1_gxbtn"]
+[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="1_gxbtn"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gxbtn"]
 light_mode = 2
@@ -40,7 +40,7 @@ gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_gsb7r")
 emission_curve = SubResource("CurveTexture_ejgp5")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1894986371]
 process_mode = 3
 material = SubResource("CanvasItemMaterial_gxbtn")
 texture = ExtResource("1_gxbtn")

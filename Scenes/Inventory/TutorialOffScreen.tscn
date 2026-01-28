@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5nqa1b7hofcs"]
+[gd_scene format=3 uid="uid://c5nqa1b7hofcs"]
 
 [ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Inventory/tutorial.gd" id="1_oa3kc"]
-[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_75yjj"]
-[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_r8gdu"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="2_75yjj"]
+[ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="3_r8gdu"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_pv2wc"]
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="5_75yjj"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="6_r8gdu"]
+[ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="5_75yjj"]
+[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="6_r8gdu"]
 
-[node name="Tutorial" type="Control" node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
+[node name="Tutorial" type="Control" unique_id=1937603570 node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -25,7 +25,7 @@ Line2 = NodePath("Control/Line2D2")
 InSound = ExtResource("2_75yjj")
 OutSound = ExtResource("3_r8gdu")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=174366279]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -37,21 +37,21 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Line2D" type="Line2D" parent="Control"]
+[node name="Line2D" type="Line2D" parent="Control" unique_id=1383959805]
 points = PackedVector2Array(0, 0, 0, 0)
 default_color = Color(1, 0.763983, 0.0812772, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 4
 
-[node name="Line2D2" type="Line2D" parent="Control"]
+[node name="Line2D2" type="Line2D" parent="Control" unique_id=2026653101]
 points = PackedVector2Array(0, 0, 0, 0)
 default_color = Color(1, 0.763983, 0.0812772, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=282141562]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,24 +68,24 @@ mouse_filter = 2
 theme_override_constants/separation = -5
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=952852243]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("4_pv2wc")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1455678652]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=810350338]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_75yjj")
 theme_override_font_sizes/font_size = 30
 text = "Captain Inventory"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=1332461594]
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer" unique_id=1625003274]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/normal_font = ExtResource("6_r8gdu")
@@ -95,7 +95,7 @@ fit_content = true
 autowrap_mode = 2
 visible_characters_behavior = 1
 
-[node name="Button" type="Button" parent="VBoxContainer" groups=["DigitalButtons"]]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=907575995 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

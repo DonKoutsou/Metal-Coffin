@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=8 format=3 uid="uid://u3qkikjc8ya7"]
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://u3qkikjc8ya7"]
 
-[ext_resource type="Texture2D" uid="uid://ibittqkk7man" path="res://Assets/Cards/BarrageAP180.png" id="1_gkd8j"]
+[ext_resource type="Texture2D" uid="uid://bwaaoabvwswjw" path="res://Assets/Cards/BarrageAP180.png" id="1_gkd8j"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_n00g4"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scripts/CardFight/DamageInfo.gd" id="3_llx4w"]
 [ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scripts/CardFight/OffensiveCardModule.gd" id="4_dkq1a"]
@@ -8,21 +8,13 @@
 
 [sub_resource type="Resource" id="Resource_tmbps"]
 script = ExtResource("3_llx4w")
-ScalingStat = 0
-Method = 0
-SelfMethod = 0
 metadata/_custom_type_script = "uid://c4p5ur132vdkj"
 
 [sub_resource type="Resource" id="Resource_fktga"]
 script = ExtResource("4_dkq1a")
-AtackType = 0
 Damage = 18.0
 ScaleStat = Array[ExtResource("3_llx4w")]([SubResource("Resource_tmbps")])
-CauseFile = false
-OnAtackModules = Array[ExtResource("2_n00g4")]([])
-OnSuccesfullAtackModules = Array[ExtResource("2_n00g4")]([])
 SkipShield = true
-AOE = false
 TierUpgrade = 1.2
 TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
@@ -31,13 +23,8 @@ metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 script = ExtResource("5_2j3qj")
 Icon = ExtResource("1_gkd8j")
 CardName = "AP Barragge"
-CardDescriptionOverride = ""
 Energy = 2
 AllowDuplicates = true
 Consume = true
-OnUseModules = Array[ExtResource("2_n00g4")]([])
 OnPerformModule = SubResource("Resource_fktga")
-Type = 0
 WeapT = 4
-UseConditions = Array[int]([])
-AllowTier = true

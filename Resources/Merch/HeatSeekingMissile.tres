@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://cirdai3bi4cde"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://cirdai3bi4cde"]
 
 [ext_resource type="Resource" uid="uid://cn37ky4htb58u" path="res://Resources/Items/Ammo/HeatSeekingMissile.tres" id="1_wyd5d"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_i0na4"]
@@ -7,7 +7,6 @@
 [sub_resource type="Resource" id="Resource_ks7jq"]
 script = ExtResource("2_i0na4")
 It = ExtResource("1_wyd5d")
-Amm = 0
 
 [resource]
 script = ExtResource("3_i0na4")

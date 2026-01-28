@@ -1,24 +1,24 @@
-[gd_scene load_steps=29 format=3 uid="uid://d0ujbu68jgisw"]
+[gd_scene format=3 uid="uid://d0ujbu68jgisw"]
 
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_y52c6"]
-[ext_resource type="Texture2D" uid="uid://bvxgotu4e723h" path="res://Assets/TownBackgrounds/IndustrialLayer-2.png" id="2_eg41f"]
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_kl0cj"]
-[ext_resource type="Texture2D" uid="uid://d1p7ntae2wlxa" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png" id="4_cjb24"]
-[ext_resource type="Texture2D" uid="uid://dsgqqj48iwm8p" path="res://Assets/TownBackgrounds/IndustrialLayer-1.png" id="4_coxqh"]
-[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="5_6jamx"]
-[ext_resource type="Texture2D" uid="uid://84c6n4dbdx5h" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame3.png" id="5_s3kbl"]
-[ext_resource type="Texture2D" uid="uid://dflyqldu2cv8n" path="res://Assets/TownBackgrounds/IndustrialLayer0.png" id="6_iecnu"]
-[ext_resource type="Texture2D" uid="uid://mkxoebe40ppx" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame4.png" id="6_qnoug"]
-[ext_resource type="Texture2D" uid="uid://s0b48mnwlo4s" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame5.png" id="7_633vk"]
-[ext_resource type="Texture2D" uid="uid://cs0gydlqe7kpf" path="res://Assets/TownBackgrounds/IndustrialLayer1.png" id="7_p3jms"]
-[ext_resource type="Texture2D" uid="uid://urrhkq4j2n8a" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame6.png" id="8_hxouk"]
-[ext_resource type="Texture2D" uid="uid://dss36iha586s1" path="res://Assets/TownBackgrounds/IndustrialLayer2.png" id="8_woovf"]
-[ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="9_eg41f"]
-[ext_resource type="Texture2D" uid="uid://cn7d7fvgc38af" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame7.png" id="9_rn35e"]
-[ext_resource type="Texture2D" uid="uid://cb8bwhtvlo6ig" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame8.png" id="10_plr8s"]
-[ext_resource type="Texture2D" uid="uid://b25b3kqpagiyd" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame9.png" id="11_xlvej"]
-[ext_resource type="Texture2D" uid="uid://chjjt4cq58jan" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame10.png" id="12_aelfl"]
-[ext_resource type="Texture2D" uid="uid://c6q2y8r7ojth2" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame11.png" id="13_pee3d"]
+[ext_resource type="Texture2D" uid="uid://daiqqrmr82num" path="res://Assets/TownBackgrounds/IndustrialLayer-2.png" id="2_eg41f"]
+[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="3_kl0cj"]
+[ext_resource type="Texture2D" uid="uid://6x5a6qg1tf01" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png" id="4_cjb24"]
+[ext_resource type="Texture2D" uid="uid://d341y1ia5ms2h" path="res://Assets/TownBackgrounds/IndustrialLayer-1.png" id="4_coxqh"]
+[ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="5_6jamx"]
+[ext_resource type="Texture2D" uid="uid://c3wlbqusi7y3k" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame3.png" id="5_s3kbl"]
+[ext_resource type="Texture2D" uid="uid://cme53v0ooefwa" path="res://Assets/TownBackgrounds/IndustrialLayer0.png" id="6_iecnu"]
+[ext_resource type="Texture2D" uid="uid://b1v5wi2uqg3d1" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame4.png" id="6_qnoug"]
+[ext_resource type="Texture2D" uid="uid://61y40b6fj4m4" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame5.png" id="7_633vk"]
+[ext_resource type="Texture2D" uid="uid://yxk64ola1nhk" path="res://Assets/TownBackgrounds/IndustrialLayer1.png" id="7_p3jms"]
+[ext_resource type="Texture2D" uid="uid://bbphcu8j0hnrc" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame6.png" id="8_hxouk"]
+[ext_resource type="Texture2D" uid="uid://dj7pjvptun2iq" path="res://Assets/TownBackgrounds/IndustrialLayer2.png" id="8_woovf"]
+[ext_resource type="AudioStream" uid="uid://ufp2v886p70v" path="res://Assets/Sounds/Towns/WindSound.mp3" id="9_eg41f"]
+[ext_resource type="Texture2D" uid="uid://dxvvx3iwfny14" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame7.png" id="9_rn35e"]
+[ext_resource type="Texture2D" uid="uid://ds3wouwsccnqy" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame8.png" id="10_plr8s"]
+[ext_resource type="Texture2D" uid="uid://bf060wydpafym" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame9.png" id="11_xlvej"]
+[ext_resource type="Texture2D" uid="uid://d15th0qd1kpuh" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame10.png" id="12_aelfl"]
+[ext_resource type="Texture2D" uid="uid://gvowmoav76n6" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame11.png" id="13_pee3d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -127,7 +127,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.1
 
-[node name="TownBackground" type="ParallaxBackground" node_paths=PackedStringArray("Animated", "Camera")]
+[node name="TownBackground" type="ParallaxBackground" unique_id=435978849 node_paths=PackedStringArray("Animated", "Camera")]
 script = ExtResource("1_y52c6")
 LimitTop = 1920.0
 LimitSide = 300.0
@@ -140,12 +140,12 @@ LocationPositions = Dictionary[int, NodePath]({
 3: NodePath("ParallaxLayer3/Parallax2D/Repair")
 })
 
-[node name="WorkShopSound" type="AudioStreamPlayer" parent="."]
+[node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=718927093]
 stream = ExtResource("9_eg41f")
 autoplay = true
 bus = &"Sounds"
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=356830100]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -153,18 +153,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gf58y")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="." unique_id=1378433781]
 motion_scale = Vector2(0.5, 0.5)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer" unique_id=428946363]
 
-[node name="Sprite2D2" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D"]
+[node name="Sprite2D2" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D" unique_id=852055646]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 sprite_frames = SubResource("SpriteFrames_ri552")
 frame_progress = 0.0845768
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=1096321809]
 position = Vector2(314, 11)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -174,7 +174,7 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=86635795]
 position = Vector2(866, 94)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -184,7 +184,7 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=965614122]
 position = Vector2(595, 51)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -194,7 +194,7 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="GPUParticles2D4" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D"]
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=260064080]
 position = Vector2(-21, -48)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -204,16 +204,16 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D" unique_id=753749268]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("4_coxqh")
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="." unique_id=1435749754]
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer4" unique_id=899481752]
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D" unique_id=868728482]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(1650, -18)
 amount = 20
@@ -227,7 +227,7 @@ visibility_rect = Rect2(-1920, 0, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer4/Parallax2D" unique_id=634397854]
 position = Vector2(223, -199)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -237,22 +237,22 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D" unique_id=2045819160]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("6_iecnu")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="." unique_id=1065803844]
 motion_scale = Vector2(1.5, 1.5)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2" unique_id=1963985475]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D" unique_id=94302610]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("7_p3jms")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D" unique_id=1415409943]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(1650, 99)
 amount = 20
@@ -266,7 +266,7 @@ visibility_rect = Rect2(-1920, -200, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D" unique_id=1399785054]
 position = Vector2(1650, 316)
 amount = 40
 texture = ExtResource("3_kl0cj")
@@ -277,12 +277,12 @@ visibility_rect = Rect2(-1920, -400, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gf58y")
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="." unique_id=448774240]
 motion_scale = Vector2(2, 2)
 
-[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3"]
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer3" unique_id=931469814]
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer3/Parallax2D" unique_id=1288847598]
 position = Vector2(1331, 23)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -292,12 +292,12 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D" unique_id=1109645419]
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("8_woovf")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer3/Parallax2D" unique_id=1403324380]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(1650, 343)
 amount = 20
@@ -311,30 +311,30 @@ visibility_rect = Rect2(-1920, -400, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
-[node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=379905028]
 position = Vector2(537, 446)
 
-[node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop"]
+[node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop" unique_id=1772330765]
 position = Vector2(92, 166)
 
-[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=1634810477]
 position = Vector2(867, 455)
 
-[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair"]
+[node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair" unique_id=1892193727]
 position = Vector2(-60, 162)
 
-[node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=1642406104]
 position = Vector2(109, 452)
 
-[node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel"]
+[node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel" unique_id=1838896920]
 position = Vector2(-102, 133)
 
-[node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D"]
+[node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=1083433750]
 position = Vector2(1150, 378)
 
-[node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch"]
+[node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch" unique_id=215679661]
 position = Vector2(181, 238)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1898189999]
 position = Vector2(642, 360)
 position_smoothing_enabled = true

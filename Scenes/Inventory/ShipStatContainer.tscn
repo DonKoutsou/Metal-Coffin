@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://r8hnhjq1f0q0"]
+[gd_scene format=3 uid="uid://r8hnhjq1f0q0"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_netfp"]
 [ext_resource type="Script" uid="uid://ba6i2l3wt1dop" path="res://Scripts/UI/ShipStatContainer.gd" id="2_hehea"]
@@ -53,7 +53,7 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 corner_detail = 1
 
-[node name="ShipStatContainer" type="VBoxContainer"]
+[node name="ShipStatContainer" type="VBoxContainer" unique_id=1703653256]
 custom_minimum_size = Vector2(200, 0)
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -61,11 +61,11 @@ theme = ExtResource("1_netfp")
 theme_override_constants/separation = 0
 script = ExtResource("2_hehea")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1997813860]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1253538186]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -73,7 +73,7 @@ theme_override_font_sizes/font_size = 18
 text = "stat"
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=510749827]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -82,7 +82,7 @@ text = "12 / 23"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=327418]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 6
@@ -91,7 +91,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
 value = 19.17
 show_percentage = false
 
-[node name="ItemBar" type="ProgressBar" parent="ProgressBar"]
+[node name="ItemBar" type="ProgressBar" parent="ProgressBar" unique_id=515354391]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -104,7 +104,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5v3x0")
 value = 60.17
 show_percentage = false
 
-[node name="ItemNegBar" type="ProgressBar" parent="ProgressBar"]
+[node name="ItemNegBar" type="ProgressBar" parent="ProgressBar" unique_id=1067938817]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

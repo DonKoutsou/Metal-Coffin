@@ -1,48 +1,48 @@
-[gd_scene load_steps=52 format=3 uid="uid://delsjvmgmdgcn"]
+[gd_scene format=3 uid="uid://delsjvmgmdgcn"]
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
-[ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
+[ext_resource type="Texture2D" uid="uid://cs1i38munqjqo" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="World3D" uid="uid://dfavnsxfxt715" path="res://StartMenuEnv.tres" id="3_rh5bc"]
-[ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
-[ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="5_23r0g"]
-[ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="6_t54ed"]
+[ext_resource type="Texture2D" uid="uid://k821yd6qs51r" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
+[ext_resource type="Texture2D" uid="uid://0o8p7b3b8vyl" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="5_23r0g"]
+[ext_resource type="Texture2D" uid="uid://bd38upwrq6cdy" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="6_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
-[ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="7_qskuh"]
+[ext_resource type="Texture2D" uid="uid://oviytxhbkdkv" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="7_qskuh"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
-[ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="8_xop3l"]
+[ext_resource type="Texture2D" uid="uid://dwkm7bjn0sv1p" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="8_xop3l"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
-[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
+[ext_resource type="Texture2D" uid="uid://qi37jxow82md" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
+[ext_resource type="Texture2D" uid="uid://dapth5q2elnm6" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
-[ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
-[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
+[ext_resource type="Texture2D" uid="uid://clj76ltt2catq" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
+[ext_resource type="Texture2D" uid="uid://cdjyh4jw770am" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
+[ext_resource type="Texture2D" uid="uid://bn3s18w1rjx3d" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
 [ext_resource type="Material" uid="uid://dadw4sq24u4ow" path="res://Shaders/Clouds/Cloud.tres" id="16_23r0g"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
-[ext_resource type="Texture2D" uid="uid://tklv7f2e06gq" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
-[ext_resource type="Texture2D" uid="uid://cidal6q7hj1qj" path="res://Assets/UIPiecies/Screen/SidePanels/ButtonCover2_FullQuality.png" id="22_7fs2i"]
-[ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="22_23r0g"]
+[ext_resource type="Texture2D" uid="uid://cjguecyn4l2m7" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://b4qd4xv3jgi4s" path="res://Assets/UIPiecies/Screen/SidePanels/ButtonCover2_FullQuality.png" id="22_7fs2i"]
+[ext_resource type="Texture2D" uid="uid://cxo14pw1ry2k" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="22_23r0g"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="23_t54ed"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="23_x4rct"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="24_nwvr6"]
-[ext_resource type="Texture2D" uid="uid://bdhncjici2ae7" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality.png" id="25_qhtmf"]
-[ext_resource type="Texture2D" uid="uid://dlaoa5dhbn3h5" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality_Pressed.png" id="26_i6qwf"]
-[ext_resource type="Texture2D" uid="uid://breuf54l2kc5u" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality.png" id="29_aa43b"]
+[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="23_x4rct"]
+[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="24_nwvr6"]
+[ext_resource type="Texture2D" uid="uid://j88m03ju0nyx" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality.png" id="25_qhtmf"]
+[ext_resource type="Texture2D" uid="uid://7vcun6g5f3a4" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality_Pressed.png" id="26_i6qwf"]
+[ext_resource type="Texture2D" uid="uid://bxmncoxii6jcx" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality.png" id="29_aa43b"]
 [ext_resource type="PackedScene" uid="uid://cix2emi1smed2" path="res://Scenes/InScreenUI/setting_panel2.tscn" id="30_aa43b"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="32_qskuh"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="33_xop3l"]
+[ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="32_qskuh"]
+[ext_resource type="Texture2D" uid="uid://770ytc3dmn3u" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="33_xop3l"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="35_nthvp"]
-[ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
-[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="36_rh5bc"]
-[ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
+[ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="35_nthvp"]
+[ext_resource type="Texture2D" uid="uid://26rhnah0tact" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://yfbhxkpe3ani" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
+[ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="36_rh5bc"]
+[ext_resource type="Texture2D" uid="uid://bdwuh13c5yg07" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
-[ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://co2070b5ddh8o" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
-[ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
+[ext_resource type="Texture2D" uid="uid://pbq8ib83s6uw" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
 offsets = PackedFloat32Array(0.504407, 0.550725)
@@ -57,10 +57,10 @@ cellular_return_type = 2
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_srpg8"]
 width = 2048
 height = 2048
+noise = SubResource("FastNoiseLite_1p5b6")
+color_ramp = SubResource("Gradient_eb1s8")
 seamless = true
 seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_eb1s8")
-noise = SubResource("FastNoiseLite_1p5b6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
 shader = ExtResource("11_j424g")
@@ -90,7 +90,7 @@ colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.313, 0.313, 0.313, 0)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1p5b6"]
 light_mode = 1
 
-[node name="StartingMenu" type="CanvasLayer" node_paths=PackedStringArray("Black", "LoadPrologueLight", "LoadLight", "HintDialogue", "Credits", "NormalUI", "VersionLabel")]
+[node name="StartingMenu" type="CanvasLayer" unique_id=2007448128 node_paths=PackedStringArray("Black", "LoadPrologueLight", "LoadLight", "HintDialogue", "Credits", "NormalUI", "VersionLabel")]
 process_mode = 3
 layer = 0
 script = ExtResource("1_y40tw")
@@ -103,7 +103,7 @@ Credits = NodePath("SubViewportContainer/SubViewport/Credits")
 NormalUI = NodePath("SubViewportContainer/SubViewport/NormalUI")
 VersionLabel = NodePath("SubViewportContainer/SubViewport/NormalUI/VersionLabel")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2040979612]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -115,7 +115,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=147509232]
 disable_3d = true
 own_world_3d = true
 world_3d = ExtResource("3_rh5bc")
@@ -127,7 +127,7 @@ positional_shadow_atlas_16_bits = false
 size = Vector2i(868, 594)
 render_target_update_mode = 4
 
-[node name="Ground" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+[node name="Ground" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=779152545]
 z_index = -1
 texture_filter = 1
 material = SubResource("ShaderMaterial_yrlew")
@@ -141,7 +141,7 @@ offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport" unique_id=965143308]
 material = SubResource("CanvasItemMaterial_yrlew")
 anchors_preset = 2
 anchor_top = 1.0
@@ -153,17 +153,17 @@ offset_bottom = -22.0
 grow_vertical = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer" unique_id=1471011218]
 use_parent_material = true
 layout_mode = 2
 texture = ExtResource("2_q14vk")
 
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer" unique_id=985508431]
 use_parent_material = true
 layout_mode = 2
 texture = ExtResource("3_s86m3")
 
-[node name="IntroMenuShips" type="Control" parent="SubViewportContainer/SubViewport"]
+[node name="IntroMenuShips" type="Control" parent="SubViewportContainer/SubViewport" unique_id=2129188864]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -175,7 +175,7 @@ grow_vertical = 2
 script = ExtResource("6_yrlew")
 Speed = 150.0
 
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips" unique_id=1906594528]
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
@@ -184,7 +184,7 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("9_j43p8")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3" unique_id=2104819922]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -194,7 +194,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(15, 15)
 
-[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3/Control"]
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3/Control" unique_id=334930658]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
 offset_left = -4.0
@@ -205,9 +205,10 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("9_j43p8")
 expand_mode = 1
 
-[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3"]
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3" unique_id=971039501]
 show_behind_parent = true
 position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -218,7 +219,7 @@ trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips" unique_id=2006467409]
 layout_mode = 0
 offset_left = -47.0
 offset_top = -30.0
@@ -229,7 +230,7 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("11_23r0g")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=1140628634]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -239,7 +240,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(15, 15)
 
-[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4/Control"]
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4/Control" unique_id=1446384975]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
 offset_left = -8.0
@@ -250,9 +251,10 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("11_23r0g")
 expand_mode = 1
 
-[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4"]
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=620173937]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -263,7 +265,7 @@ trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips"]
+[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips" unique_id=2055639107]
 layout_mode = 0
 offset_left = -49.0
 offset_top = 47.0
@@ -274,7 +276,7 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("12_23r0g")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=678784665]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -284,7 +286,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(15, 15)
 
-[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5/Control"]
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5/Control" unique_id=234782464]
 modulate = Color(0, 0, 0, 0.6)
 layout_mode = 0
 offset_left = -8.0
@@ -295,9 +297,10 @@ pivot_offset = Vector2(15, 15)
 texture = ExtResource("12_23r0g")
 expand_mode = 1
 
-[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5"]
+[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=1499058002]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -308,7 +311,7 @@ trail_fade_speed = 30.0
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+[node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1027507446]
 texture_filter = 1
 material = ExtResource("16_23r0g")
 anchors_preset = 15
@@ -321,20 +324,20 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
+[node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport" unique_id=1434908220]
 color = Color(0, 0, 0, 1)
 
-[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport"]
+[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport" unique_id=1720222894]
 position = Vector2(422, 234)
 blend_mode = 2
 texture = ExtResource("15_7x35f")
 texture_scale = 5.0
 height = 150.0
 
-[node name="Credits" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0pu32")]
+[node name="Credits" parent="SubViewportContainer/SubViewport" unique_id=1882358830 instance=ExtResource("2_0pu32")]
 visible = false
 
-[node name="NormalUI" type="Control" parent="SubViewportContainer/SubViewport"]
+[node name="NormalUI" type="Control" parent="SubViewportContainer/SubViewport" unique_id=916121772]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -342,7 +345,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI"]
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=755983019]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -358,7 +361,7 @@ size_flags_vertical = 6
 texture = ExtResource("14_61hxs")
 expand_mode = 1
 
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/TextureRect2"]
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/TextureRect2" unique_id=439566271]
 self_modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
 layout_mode = 1
@@ -376,14 +379,14 @@ size_flags_vertical = 6
 texture = ExtResource("14_61hxs")
 expand_mode = 1
 
-[node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" instance=ExtResource("21_srpg8")]
+[node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=755058510 instance=ExtResource("21_srpg8")]
 layout_mode = 1
 offset_left = -293.0
 offset_top = -70.0
 offset_right = -25.0
 offset_bottom = -27.0
 
-[node name="HintDialogue" type="Control" parent="SubViewportContainer/SubViewport/NormalUI"]
+[node name="HintDialogue" type="Control" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=1587002589]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -391,7 +394,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue"]
+[node name="PanelContainer" type="PanelContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue" unique_id=1979379147]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -407,7 +410,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("9_3vvgq")
 
-[node name="Cancel" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer" groups=["DigitalBouncingButton"]]
+[node name="Cancel" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer" unique_id=2087269759 groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -415,12 +418,12 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "x"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer" unique_id=1295373498]
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer" unique_id=1997034343]
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -429,26 +432,26 @@ text = "Show Hints ?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer" unique_id=1849744011]
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalBouncingButton"]]
+[node name="ShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" unique_id=2118259799 groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "Yes"
 
-[node name="DontShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" groups=["DigitalBouncingButton"]]
+[node name="DontShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1962805735 groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "No"
 
-[node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport/NormalUI"]
+[node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=524740930]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -462,7 +465,7 @@ text = "Demo Version 0.61"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LinkButton" type="LinkButton" parent="SubViewportContainer/SubViewport/NormalUI"]
+[node name="LinkButton" type="LinkButton" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=1204925577]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -480,7 +483,7 @@ underline = 1
 uri = "https://discord.gg/srMt8dGRWW"
 language = "w"
 
-[node name="Button" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/LinkButton"]
+[node name="Button" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/LinkButton" unique_id=1341467663]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -493,7 +496,7 @@ texture = ExtResource("21_xqmn8")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+[node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=210530036]
 process_mode = 3
 z_index = 1
 material = ExtResource("22_jns0o")
@@ -504,7 +507,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CommandLine" parent="SubViewportContainer/SubViewport" instance=ExtResource("23_t54ed")]
+[node name="CommandLine" parent="SubViewportContainer/SubViewport" unique_id=277886953 instance=ExtResource("23_t54ed")]
 visible = false
 offset_left = 222.0
 offset_top = -173.5
@@ -512,7 +515,7 @@ offset_right = -222.0
 offset_bottom = -81.5
 StartingMen = true
 
-[node name="ScreenFrame" type="TextureRect" parent="."]
+[node name="ScreenFrame" type="TextureRect" parent="." unique_id=2087125541]
 custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
 anchor_right = 1.0
@@ -523,7 +526,7 @@ mouse_filter = 2
 texture = ExtResource("22_23r0g")
 expand_mode = 1
 
-[node name="ScreenFrame2" type="TextureRect" parent="."]
+[node name="ScreenFrame2" type="TextureRect" parent="." unique_id=798823383]
 custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
 anchor_right = 1.0
@@ -538,8 +541,8 @@ mouse_filter = 2
 texture = ExtResource("22_7fs2i")
 expand_mode = 1
 
-[node name="Prologue" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="Prologue" type="TextureButton" parent="ScreenFrame2" unique_id=1305109111 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 104.0
 offset_right = 57.0
@@ -552,8 +555,8 @@ texture_pressed = ExtResource("24_nwvr6")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="LoadPrologue" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="LoadPrologue" type="TextureButton" parent="ScreenFrame2" unique_id=1352412946 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 156.0
 offset_right = 57.0
@@ -566,15 +569,15 @@ texture_pressed = ExtResource("24_nwvr6")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PrologueLight" parent="ScreenFrame2" instance=ExtResource("34_aa43b")]
+[node name="PrologueLight" parent="ScreenFrame2" unique_id=2000029858 instance=ExtResource("34_aa43b")]
 layout_mode = 0
 offset_left = 147.0
 offset_top = 176.0
 offset_right = 169.0
 offset_bottom = 198.0
 
-[node name="Play2" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="Play2" type="TextureButton" parent="ScreenFrame2" unique_id=1434390632 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 234.0
 offset_right = 57.0
@@ -587,8 +590,8 @@ texture_pressed = ExtResource("24_nwvr6")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Load" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="Load" type="TextureButton" parent="ScreenFrame2" unique_id=58334576 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 287.0
 offset_right = 56.0
@@ -601,15 +604,15 @@ texture_pressed = ExtResource("29_aa43b")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="CampaignLight" parent="ScreenFrame2" instance=ExtResource("34_aa43b")]
+[node name="CampaignLight" parent="ScreenFrame2" unique_id=871809701 instance=ExtResource("34_aa43b")]
 layout_mode = 0
 offset_left = 147.0
 offset_top = 302.0
 offset_right = 169.0
 offset_bottom = 324.0
 
-[node name="Fight" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="Fight" type="TextureButton" parent="ScreenFrame2" unique_id=961686342 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 158.0
 offset_top = 354.0
 offset_right = 208.0
@@ -622,8 +625,8 @@ texture_pressed = ExtResource("26_i6qwf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Credits" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="Credits" type="TextureButton" parent="ScreenFrame2" unique_id=257312861 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 185.0
 offset_top = 591.0
 offset_right = 210.0
@@ -635,7 +638,7 @@ texture_pressed = ExtResource("33_xop3l")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SettingPanel2" parent="ScreenFrame2" instance=ExtResource("30_aa43b")]
+[node name="SettingPanel2" parent="ScreenFrame2" unique_id=1686978607 instance=ExtResource("30_aa43b")]
 use_parent_material = false
 layout_mode = 1
 anchors_preset = 15
@@ -649,31 +652,35 @@ mouse_filter = 2
 mouse_filter = 2
 
 [node name="FullScreenCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="0"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 382.0
 offset_right = 50.0
 offset_bottom = 421.0
 
 [node name="SoundCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="1"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 422.0
 offset_right = 50.0
 offset_bottom = 461.0
 
 [node name="SoundCheckBox2" parent="ScreenFrame2/SettingPanel2/Control" index="2"]
+layout_mode = 0
 offset_left = 207.0
 offset_top = 425.0
 offset_right = 224.0
 offset_bottom = 464.0
 
 [node name="GlitchesCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="3"]
+layout_mode = 0
 offset_left = 34.0
 offset_top = 462.0
 offset_right = 51.0
 offset_bottom = 501.0
 
-[node name="Button" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="Button" type="TextureButton" parent="ScreenFrame2" unique_id=449412107 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 39.0
 offset_top = 518.0
 offset_right = 60.0
@@ -684,8 +691,8 @@ texture_pressed = ExtResource("36_sjyyd")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Exit" type="TextureButton" parent="ScreenFrame2" groups=["Buttons"]]
-layout_mode = 2
+[node name="Exit" type="TextureButton" parent="ScreenFrame2" unique_id=127956372 groups=["Buttons"]]
+layout_mode = 0
 offset_left = 42.0
 offset_top = 590.0
 offset_right = 67.0
@@ -697,13 +704,13 @@ texture_pressed = ExtResource("36_rh5bc")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Fan" parent="." instance=ExtResource("39_nthvp")]
+[node name="Fan" parent="." unique_id=238039746 instance=ExtResource("39_nthvp")]
 position = Vector2(954, -120)
 scale = Vector2(1.73438, 1.73438)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="Cables" type="Control" parent="."]
+[node name="Cables" type="Control" parent="." unique_id=1402348129]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -712,7 +719,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ScreenFrame4" type="TextureRect" parent="Cables"]
+[node name="ScreenFrame4" type="TextureRect" parent="Cables" unique_id=1339450052]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -733,7 +740,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame4"]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame4" unique_id=1394673127]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -750,7 +757,7 @@ mouse_filter = 2
 texture = ExtResource("40_xqmn8")
 expand_mode = 1
 
-[node name="ScreenFrame3" type="TextureRect" parent="Cables"]
+[node name="ScreenFrame3" type="TextureRect" parent="Cables" unique_id=1854091624]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -771,7 +778,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame3"]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame3" unique_id=602605996]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -788,7 +795,7 @@ mouse_filter = 2
 texture = ExtResource("42_67h1o")
 expand_mode = 1
 
-[node name="Black" type="ColorRect" parent="."]
+[node name="Black" type="ColorRect" parent="." unique_id=1362917256]
 material = SubResource("CanvasItemMaterial_1p5b6")
 anchors_preset = 15
 anchor_right = 1.0
@@ -798,10 +805,10 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=826289740]
 color = Color(0.5, 0.5, 0.5, 1)
 
-[node name="AlarmLight2" type="PointLight2D" parent="."]
+[node name="AlarmLight2" type="PointLight2D" parent="." unique_id=368259133]
 texture_filter = 2
 position = Vector2(597, -710)
 texture = ExtResource("36_j43p8")

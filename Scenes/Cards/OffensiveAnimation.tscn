@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbdyafmynts2u"]
+[gd_scene format=3 uid="uid://cbdyafmynts2u"]
 
 [ext_resource type="Script" uid="uid://bdvm3q5rknxlm" path="res://Scripts/CardFight/offensive_animation.gd" id="1_jaurs"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_jp0up"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cirgeti4ije63" path="res://Scenes/Cards/AtackEffects/Energy_Thing.tscn" id="8_q2u0g"]
 [ext_resource type="PackedScene" uid="uid://b1j8lcr2bwkvf" path="res://Scenes/Cards/AtackEffects/Debuff_thing.tscn" id="9_bwlgq"]
 
-[node name="CardOffensiveAnimation" type="Control"]
+[node name="CardOffensiveAnimation" type="Control" unique_id=1215573475]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -33,7 +33,7 @@ EnergyVisual = ExtResource("8_q2u0g")
 BuffVisual = ExtResource("8_bwlgq")
 DeBuffVisual = ExtResource("9_bwlgq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=81172635]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

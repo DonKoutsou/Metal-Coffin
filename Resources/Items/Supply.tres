@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://cf3nxx0s2bsn5"]
+[gd_resource type="Resource" script_class="UsableItem" format=3 uid="uid://cf3nxx0s2bsn5"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_w8wc6"]
-[ext_resource type="Texture2D" uid="uid://3q376ia6bctu" path="res://Assets/Items/Wrench.png" id="2_0kf6o"]
+[ext_resource type="Texture2D" uid="uid://c54wcb3ctsi1e" path="res://Assets/Items/Wrench.png" id="2_0kf6o"]
 [ext_resource type="Script" uid="uid://c2hy2hwaqy0vp" path="res://Scripts/Inventory/UsableItem.gd" id="3_c4cjt"]
 
 [resource]
@@ -12,7 +12,3 @@ ItemIcon = ExtResource("2_0kf6o")
 ItemName = "Supply"
 ItemDesc = "Used to repair damages to the hull of the ship"
 MaxStackCount = 10
-CardProviding = Array[ExtResource("1_w8wc6")]([])
-Tier = 0
-CanTransfer = true
-Cost = 0

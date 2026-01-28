@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://yl3b5a3c2vdb"]
+[gd_scene format=3 uid="uid://yl3b5a3c2vdb"]
 
 [ext_resource type="Script" uid="uid://1f2otbxhjnv4" path="res://Scripts/Helper.gd" id="1_fiwlt"]
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="2_jkjhg"]
-[ext_resource type="Texture2D" uid="uid://dekdqwypsxis1" path="res://Assets/UIPiecies/Screen/SidePanels/Steer_FullQuality.png" id="2_wimof"]
+[ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="2_jkjhg"]
+[ext_resource type="Texture2D" uid="uid://rxtmxyrt7f07" path="res://Assets/UIPiecies/Screen/SidePanels/Steer_FullQuality.png" id="2_wimof"]
 
-[node name="Helper" type="Node"]
+[node name="Helper" type="Node" unique_id=1156631636]
 script = ExtResource("1_fiwlt")
 RegionColors = Dictionary[int, Color]({
 0: Color(0.66723, 0.176217, 0.170208, 1),
@@ -12,10 +12,10 @@ RegionColors = Dictionary[int, Color]({
 2: Color(0.482095, 0.689901, 0.704644, 1)
 })
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1190422538]
 layer = 127
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=113728620]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1956045743]
 custom_minimum_size = Vector2(53, 53)
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,7 +41,7 @@ mouse_filter = 2
 texture = ExtResource("2_wimof")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=740471012]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

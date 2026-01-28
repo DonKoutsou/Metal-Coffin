@@ -1,44 +1,44 @@
-[gd_scene load_steps=38 format=3 uid="uid://biel8sjt8vy5t"]
+[gd_scene format=3 uid="uid://biel8sjt8vy5t"]
 
 [ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scripts/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_i441f"]
-[ext_resource type="AudioStream" uid="uid://bwi4dj7l6pjg1" path="res://Assets/Sounds/Static.wav" id="3_ng3jm"]
-[ext_resource type="AudioStream" uid="uid://d0kopd5186laa" path="res://Assets/Sounds/Towns/Cave_Ambient.mp3" id="4_ao4ul"]
-[ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="4_j0j1u"]
-[ext_resource type="AudioStream" uid="uid://idnn507tyewg" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
+[ext_resource type="AudioStream" uid="uid://cldd76tc7yo40" path="res://Assets/Sounds/Static.wav" id="3_ng3jm"]
+[ext_resource type="AudioStream" uid="uid://cswf3fsn5sfm5" path="res://Assets/Sounds/Towns/Cave_Ambient.mp3" id="4_ao4ul"]
+[ext_resource type="Texture2D" uid="uid://cxo14pw1ry2k" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="4_j0j1u"]
+[ext_resource type="AudioStream" uid="uid://cfm6b8h8fuyfy" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
-[ext_resource type="Texture2D" uid="uid://kxagwb8gq1pm" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
-[ext_resource type="Texture2D" uid="uid://byy7qb0rfhypw" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
-[ext_resource type="Texture2D" uid="uid://bxkdjy0yeuig4" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="9_3s488"]
-[ext_resource type="Texture2D" uid="uid://2gkqio6ka74a" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="10_3csbo"]
+[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
+[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
+[ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="9_3s488"]
+[ext_resource type="Texture2D" uid="uid://770ytc3dmn3u" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="10_3csbo"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/SteeringWheelUI.tscn" id="11_s7gev"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="13_4xtjg"]
-[ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="13_myhbu"]
+[ext_resource type="Texture2D" uid="uid://bi5udi6g78ajr" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="13_myhbu"]
 [ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Aerophone.tscn" id="13_ruc6v"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_l0ryv"]
-[ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="14_ruc6v"]
+[ext_resource type="Texture2D" uid="uid://bvk1d6i2dr1sf" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="14_ruc6v"]
 [ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="14_ua54b"]
-[ext_resource type="Texture2D" uid="uid://cub3jskgpfw07" path="res://Assets/UIPiecies/Screen/Buttons/Button6_Camera 1_FullQuality.png" id="15_tpyok"]
-[ext_resource type="Texture2D" uid="uid://diws0gke4cls1" path="res://Assets/UIPiecies/Screen/Buttons/Button6_Camera 1_FullQuality_Pressed.png" id="16_sln7g"]
-[ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="17_07pwg"]
-[ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="18_qqmpd"]
-[ext_resource type="Texture2D" uid="uid://cl1clnce643mg" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
-[ext_resource type="Texture2D" uid="uid://bgecu1r7dbryn" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
+[ext_resource type="Texture2D" uid="uid://l6nbrbftyppn" path="res://Assets/UIPiecies/Screen/Buttons/Button6_Camera 1_FullQuality.png" id="15_tpyok"]
+[ext_resource type="Texture2D" uid="uid://cdps8bwq7wdw2" path="res://Assets/UIPiecies/Screen/Buttons/Button6_Camera 1_FullQuality_Pressed.png" id="16_sln7g"]
+[ext_resource type="Texture2D" uid="uid://26rhnah0tact" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="17_07pwg"]
+[ext_resource type="Texture2D" uid="uid://bdwuh13c5yg07" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="18_qqmpd"]
+[ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
+[ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="22_ruc6v"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="23_0465a"]
-[ext_resource type="Texture2D" uid="uid://c1a25ki32jj1" path="res://Assets/UIPiecies/Screen/ScreenLong3.png" id="27_j0j1u"]
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
+[ext_resource type="Texture2D" uid="uid://cta21sa447sbq" path="res://Assets/UIPiecies/Screen/ScreenLong3.png" id="27_j0j1u"]
+[ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
-[ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
+[ext_resource type="Texture2D" uid="uid://co2070b5ddh8o" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
 [ext_resource type="PackedScene" uid="uid://bvduhiu1v7ywh" path="res://Scenes/Cards/TownExternalUI.tscn" id="30_myhbu"]
-[ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
+[ext_resource type="Texture2D" uid="uid://pbq8ib83s6uw" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="31_ua54b"]
 [ext_resource type="PackedScene" uid="uid://cjbda0fdx38c4" path="res://Scenes/Cards/card_fight_ui.tscn" id="31_wetmy"]
-[ext_resource type="Texture2D" uid="uid://cyf3f6jnxbppj" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
+[ext_resource type="Texture2D" uid="uid://b4hidsx46gkgt" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
 [ext_resource type="PackedScene" uid="uid://nt73d42f2o1p" path="res://Scenes/ScreenUI/screen_cam.tscn" id="37_6aw6g"]
 
-[node name="ScreenUI" type="CanvasLayer" node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI", "Sonar")]
+[node name="ScreenUI" type="CanvasLayer" unique_id=1773636653 node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI", "Sonar")]
 process_mode = 1
 layer = 2
 follow_viewport_enabled = true
@@ -66,23 +66,23 @@ CardFightUI = NodePath("NormalScreen/CardFightExternalUI")
 TownUI = NodePath("NormalScreen/TownUI")
 Sonar = NodePath("NormalScreen/ScreenUi/Sonar")
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=51637005]
 stream = ExtResource("3_ng3jm")
 autoplay = true
 bus = &"Sounds"
 
-[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=635683774]
 stream = ExtResource("4_ao4ul")
 volume_db = -6.0
 autoplay = true
 bus = &"Sounds"
 
-[node name="DoorSound" type="AudioStreamPlayer" parent="."]
+[node name="DoorSound" type="AudioStreamPlayer" parent="." unique_id=1667632027]
 stream = ExtResource("4_wetmy")
 volume_db = -12.0
 bus = &"MapSounds"
 
-[node name="NormalScreen" type="Control" parent="."]
+[node name="NormalScreen" type="Control" parent="." unique_id=2111759005]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,7 +91,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ScreenFrame" type="TextureRect" parent="NormalScreen"]
+[node name="ScreenFrame" type="TextureRect" parent="NormalScreen" unique_id=11116163]
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15
@@ -103,14 +103,14 @@ mouse_filter = 2
 texture = ExtResource("4_j0j1u")
 expand_mode = 1
 
-[node name="ThrustSlider" parent="NormalScreen" instance=ExtResource("5_mda8n")]
+[node name="ThrustSlider" parent="NormalScreen" unique_id=1408977985 instance=ExtResource("5_mda8n")]
 layout_mode = 1
 offset_left = -114.0
 offset_top = -371.0
 offset_right = -13.0
 offset_bottom = -46.0
 
-[node name="ScreenUi" type="Control" parent="NormalScreen"]
+[node name="ScreenUi" type="Control" parent="NormalScreen" unique_id=725286896]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SteeringWheel" parent="NormalScreen/ScreenUi" instance=ExtResource("11_s7gev")]
+[node name="SteeringWheel" parent="NormalScreen/ScreenUi" unique_id=183033337 instance=ExtResource("11_s7gev")]
 layout_mode = 1
 anchors_preset = 2
 anchor_left = 0.0
@@ -132,7 +132,7 @@ grow_horizontal = 1
 grow_vertical = 0
 PositionOnStart = false
 
-[node name="Missile Tab" parent="NormalScreen/ScreenUi" instance=ExtResource("13_4xtjg")]
+[node name="Missile Tab" parent="NormalScreen/ScreenUi" unique_id=1950136315 instance=ExtResource("13_4xtjg")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -143,21 +143,21 @@ offset_right = -493.0
 offset_bottom = -1.0
 grow_horizontal = 0
 
-[node name="MapMarkerControls" parent="NormalScreen/ScreenUi" instance=ExtResource("14_ua54b")]
+[node name="MapMarkerControls" parent="NormalScreen/ScreenUi" unique_id=1309500929 instance=ExtResource("14_ua54b")]
 layout_mode = 1
 offset_left = -465.0
 offset_right = -425.0
 
-[node name="Fan" parent="NormalScreen/ScreenUi" instance=ExtResource("33_xl4i0")]
+[node name="Fan" parent="NormalScreen/ScreenUi" unique_id=102008870 instance=ExtResource("33_xl4i0")]
 position = Vector2(982, -105)
 scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="Sonar" parent="NormalScreen/ScreenUi" instance=ExtResource("13_ruc6v")]
+[node name="Sonar" parent="NormalScreen/ScreenUi" unique_id=83353684 instance=ExtResource("13_ruc6v")]
 layout_mode = 1
 
-[node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" unique_id=263195442 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -178,7 +178,7 @@ texture_pressed = ExtResource("13_myhbu")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SimulationButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="SimulationButton" type="TextureButton" parent="NormalScreen" unique_id=1666693440 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -197,7 +197,7 @@ texture_pressed = ExtResource("22_oelfy")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="InventoryButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="InventoryButton" type="TextureButton" parent="NormalScreen" unique_id=1531490181 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -220,7 +220,7 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Regroup" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="Regroup" type="TextureButton" parent="NormalScreen" unique_id=1030002673 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -243,7 +243,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_v = true
 
-[node name="MarkerEditorButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="MarkerEditorButton" type="TextureButton" parent="NormalScreen" unique_id=897986248 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -262,7 +262,7 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="NormalScreen"]
+[node name="PanelContainer" type="PanelContainer" parent="NormalScreen" unique_id=610920880]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -277,21 +277,21 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("22_ruc6v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NormalScreen/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="NormalScreen/PanelContainer" unique_id=2023549532]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=155813622]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -25
 
-[node name="Label" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" unique_id=603464856]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Forecast"
 
-[node name="ForecastButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" groups=["Buttons"]]
+[node name="ForecastButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1969023456 groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -301,17 +301,17 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1014707617]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -25
 
-[node name="Label2" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label2" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=878529539]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Grid"
 
-[node name="GridButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" groups=["Buttons"]]
+[node name="GridButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1168177073 groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -322,17 +322,17 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1456177738]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -25
 
-[node name="Label3" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3"]
+[node name="Label3" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" unique_id=1179518340]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Steer"
 
-[node name="SteerButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" groups=["Buttons"]]
+[node name="SteerButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" unique_id=403456389 groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -343,17 +343,17 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=246380873]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -25
 
-[node name="Label4" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4"]
+[node name="Label4" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=5484486]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zoom"
 
-[node name="ZoomLevelButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" groups=["Buttons"]]
+[node name="ZoomLevelButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1423962257 groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -364,17 +364,17 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer5" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1284078477]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -25
 
-[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5"]
+[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" unique_id=1468069]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Team"
 
-[node name="TeamButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" groups=["Buttons"]]
+[node name="TeamButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" unique_id=1870047177 groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -385,17 +385,17 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
-[node name="VBoxContainer6" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer6" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=232222863]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -25
 
-[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6"]
+[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" unique_id=511326746]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "AeroSonar"
 
-[node name="SonarButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" groups=["Buttons"]]
+[node name="SonarButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" unique_id=122039278 groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -405,7 +405,7 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
-[node name="ShipDockButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="ShipDockButton" type="TextureButton" parent="NormalScreen" unique_id=303756727 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -424,7 +424,7 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="MissileButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="MissileButton" type="TextureButton" parent="NormalScreen" unique_id=177967110 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -444,7 +444,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="OpenHatchButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="OpenHatchButton" type="TextureButton" parent="NormalScreen" unique_id=1751322945 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -464,7 +464,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="RadarButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="RadarButton" type="TextureButton" parent="NormalScreen" unique_id=317448105 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -483,7 +483,7 @@ texture_pressed = ExtResource("10_3csbo")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="LandButton" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="LandButton" type="TextureButton" parent="NormalScreen" unique_id=877111141 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -502,7 +502,7 @@ texture_pressed = ExtResource("18_qqmpd")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Clock" parent="NormalScreen" instance=ExtResource("23_0465a")]
+[node name="Clock" parent="NormalScreen" unique_id=12926261 instance=ExtResource("23_0465a")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -513,7 +513,7 @@ offset_right = -113.0
 offset_bottom = -157.0
 grow_horizontal = 0
 
-[node name="Pause" type="TextureButton" parent="NormalScreen" groups=["Buttons"]]
+[node name="Pause" type="TextureButton" parent="NormalScreen" unique_id=87097972 groups=["Buttons"]]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 1
@@ -533,7 +533,7 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="NormalScreen/Pause"]
+[node name="Label" type="Label" parent="NormalScreen/Pause" unique_id=625067001]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -555,7 +555,7 @@ text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Fund_Container" parent="NormalScreen" instance=ExtResource("28_qwofv")]
+[node name="Fund_Container" parent="NormalScreen" unique_id=1246376963 instance=ExtResource("28_qwofv")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -569,11 +569,11 @@ offset_bottom = 96.0
 grow_horizontal = 0
 grow_vertical = 1
 
-[node name="CardFightExternalUI" parent="NormalScreen" instance=ExtResource("31_wetmy")]
+[node name="CardFightExternalUI" parent="NormalScreen" unique_id=1928367206 instance=ExtResource("31_wetmy")]
 visible = false
 layout_mode = 1
 
-[node name="Pause" type="TextureButton" parent="NormalScreen/CardFightExternalUI" groups=["Buttons"]]
+[node name="Pause" type="TextureButton" parent="NormalScreen/CardFightExternalUI" unique_id=1850147505 groups=["Buttons"]]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 1
@@ -593,7 +593,7 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="NormalScreen/CardFightExternalUI/Pause"]
+[node name="Label" type="Label" parent="NormalScreen/CardFightExternalUI/Pause" unique_id=2070702645]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -615,11 +615,11 @@ text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TownUI" parent="NormalScreen" instance=ExtResource("30_myhbu")]
+[node name="TownUI" parent="NormalScreen" unique_id=1760107429 instance=ExtResource("30_myhbu")]
 visible = false
 layout_mode = 1
 
-[node name="ScreenFrameLong" type="TextureRect" parent="."]
+[node name="ScreenFrameLong" type="TextureRect" parent="." unique_id=306644524]
 visible = false
 custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
@@ -631,7 +631,7 @@ mouse_filter = 2
 texture = ExtResource("27_j0j1u")
 expand_mode = 1
 
-[node name="Cables" type="Control" parent="."]
+[node name="Cables" type="Control" parent="." unique_id=726149118]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -640,7 +640,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ScreenFrame4" type="TextureRect" parent="Cables" groups=["Shakable"]]
+[node name="ScreenFrame4" type="TextureRect" parent="Cables" unique_id=562916491 groups=["Shakable"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -661,7 +661,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame4"]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame4" unique_id=678775481]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -678,7 +678,7 @@ mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 
-[node name="ScreenFrame3" type="TextureRect" parent="Cables" groups=["Shakable"]]
+[node name="ScreenFrame3" type="TextureRect" parent="Cables" unique_id=1737756607 groups=["Shakable"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -699,7 +699,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame3"]
+[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame3" unique_id=1085101243]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -716,7 +716,7 @@ mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
 
-[node name="Panel" type="TextureRect" parent="."]
+[node name="Panel" type="TextureRect" parent="." unique_id=1200783412]
 z_index = 1
 custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
@@ -730,7 +730,7 @@ mouse_filter = 0
 texture = ExtResource("33_vyv2f")
 expand_mode = 1
 
-[node name="PanelShadow" type="TextureRect" parent="Panel"]
+[node name="PanelShadow" type="TextureRect" parent="Panel" unique_id=1274972558]
 modulate = Color(0, 0, 0, 0.8)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 40)
@@ -746,7 +746,7 @@ mouse_filter = 0
 texture = ExtResource("33_vyv2f")
 expand_mode = 1
 
-[node name="ClickProtection" type="Control" parent="Panel"]
+[node name="ClickProtection" type="Control" parent="Panel" unique_id=1970974327]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -756,7 +756,7 @@ offset_bottom = 751.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScreenCam" parent="." instance=ExtResource("37_6aw6g")]
+[node name="ScreenCam" parent="." unique_id=1291979417 instance=ExtResource("37_6aw6g")]
 position = Vector2(640, 360)
 
 [connection signal="AccelerationChangeEnded" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Ended"]

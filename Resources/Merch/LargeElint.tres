@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MerchandiseInfo" load_steps=5 format=3 uid="uid://1oh54dj10nam"]
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://1oh54dj10nam"]
 
 [ext_resource type="Resource" uid="uid://22w1h832bsxa" path="res://Resources/Items/ShipParts/ELINT/LargeElint.tres" id="1_h5wgb"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_nng6w"]
@@ -7,11 +7,7 @@
 [sub_resource type="Resource" id="Resource_gyl2p"]
 script = ExtResource("2_nng6w")
 It = ExtResource("1_h5wgb")
-Amm = 0
 
 [resource]
 script = ExtResource("3_7hok3")
 Merch = SubResource("Resource_gyl2p")
-Cost = 0
-MaxAmmPerStage = 0
-DontGenerateBefore = 0

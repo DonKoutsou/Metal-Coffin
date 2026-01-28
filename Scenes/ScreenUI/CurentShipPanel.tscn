@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://df70pkcnq556g"]
+[gd_scene format=3 uid="uid://df70pkcnq556g"]
 
 [ext_resource type="Script" uid="uid://b2b2y5d4ayiko" path="res://Scripts/UI/curent_ship_panel.gd" id="1_aaq8a"]
 
@@ -15,7 +15,7 @@ border_blend = true
 corner_detail = 1
 shadow_size = 3
 
-[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("Sep") groups=["DigitalButtons"]]
+[node name="PanelContainer" type="PanelContainer" unique_id=1643134124 node_paths=PackedStringArray("Sep") groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(80, 0)
 anchors_preset = 6
 anchor_left = 1.0
@@ -32,16 +32,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_mxjk1")
 script = ExtResource("1_aaq8a")
 Sep = NodePath("HBoxContainer/Control")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1358086112]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1091962052]
 layout_mode = 2
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "faawfwwfa"
 
-[node name="Control" type="Control" parent="HBoxContainer"]
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=199119304]
 custom_minimum_size = Vector2(-6.86, 0)
 layout_mode = 2
 mouse_filter = 2

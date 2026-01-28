@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmq4aarkkp044"]
+[gd_scene format=3 uid="uid://dmq4aarkkp044"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_3u5gi"]
 [ext_resource type="Script" uid="uid://c1614nt44tmoh" path="res://Scripts/CardFight/card_fight_ship_viz.gd" id="2_qce1f"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="3_5ndf2"]
+[ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="3_5ndf2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
 bg_color = Color(0.231024, 0.490544, 0.236315, 1)
@@ -46,7 +46,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_tsd2f")
 color_ramp = SubResource("GradientTexture1D_x4s8m")
 
-[node name="CardFightShipViz" type="Button" node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel")]
+[node name="CardFightShipViz" type="Button" unique_id=339576566 node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "StatLabel", "FriendlyPanel")]
 custom_minimum_size = Vector2(200, 86)
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,7 +68,7 @@ ShipIcon = NodePath("HBoxContainer/VBoxContainer/TextureRect")
 StatLabel = NodePath("HBoxContainer/HBoxContainer/RichTextLabel2")
 FriendlyPanel = NodePath("Panel")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1869021252]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,7 +82,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1038148236]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,11 +91,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1659796090]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=365632573]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "GER"
@@ -104,7 +104,7 @@ vertical_alignment = 2
 autowrap_mode = 1
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer" unique_id=236174643]
 custom_minimum_size = Vector2(52, 64)
 layout_mode = 2
 mouse_filter = 2
@@ -112,17 +112,17 @@ texture = ExtResource("3_5ndf2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/TextureRect"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/TextureRect" unique_id=1689149295]
 position = Vector2(50, 17)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_on4wq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=229626084]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/HBoxContainer" unique_id=2086488251]
 clip_contents = false
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
@@ -140,7 +140,7 @@ fit_content = true
 scroll_active = false
 text_direction = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/HBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/HBoxContainer" unique_id=1360399659]
 clip_contents = false
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2

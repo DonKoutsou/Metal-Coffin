@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://buaaiy1bjp87q"]
+[gd_scene format=3 uid="uid://buaaiy1bjp87q"]
 
 [ext_resource type="Script" uid="uid://b2ogrmsyy136g" path="res://Scripts/alarm_effect.gd" id="1_bronl"]
-[ext_resource type="AudioStream" uid="uid://cgv5pjrrq85xp" path="res://Assets/Sounds/beep-beep-beep-beep-80262.mp3" id="2_jjfkd"]
+[ext_resource type="AudioStream" uid="uid://cbiytlyhkkavg" path="res://Assets/Sounds/beep-beep-beep-beep-80262.mp3" id="2_jjfkd"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bronl"]
 light_mode = 1
 
-[node name="AlarmEffect" type="Node2D"]
+[node name="AlarmEffect" type="Node2D" unique_id=1815319040]
 material = SubResource("CanvasItemMaterial_bronl")
 script = ExtResource("1_bronl")
 TimesPlayed = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1690106546]
 stream = ExtResource("2_jjfkd")
 volume_db = -22.0
 pitch_scale = 0.8
