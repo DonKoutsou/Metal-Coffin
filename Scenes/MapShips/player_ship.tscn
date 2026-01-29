@@ -92,7 +92,7 @@ mouse_filter = 2
 
 [node name="ColorRect" type="Sprite2D" parent="." unique_id=905533760]
 z_index = -2
-texture_filter = 1
+texture_filter = 4
 material = SubResource("ShaderMaterial_mktum")
 rotation = -1.5708
 texture = ExtResource("6_6lhcj")

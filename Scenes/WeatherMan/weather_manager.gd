@@ -63,10 +63,11 @@ func _physics_process(delta: float) -> void:
 		WindDirection = WindDirection.rotated(randf_range(-0.001, 0.001) * simspeed)
 		#Add the new offset of the weather to the noise and produce the new texture
 		N.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 30)
+		N.fractal_gain = clamp(N.fractal_gain + randf_range(-0.02, 0.02) * simspeed, -10, 10)
 		tx = texture.get_image()
 		
 		var L = GetLightAmm()
-			
+		
 		for g in ShipsToUpdate:
 			var viz = GetVisibilityInPosition(g.global_position)
 			g.StormValue = 1 - (viz - 0.5)
@@ -115,7 +116,7 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 					 (local_position.y - offset_y) / scaled_height)
 
 	#tx.lock()  # Lock the image for pixel access
-	var color = tx.get_pixel(uv.x * texture_size.x, clamp(uv.y * texture_size.y, 0, 511))
+	var color = tx.get_pixel(uv.x * texture_size.x, clamp(uv.y * texture_size.y, 0, texture_size.y - 1))
 	#tx.unlock()  # Unlock after accessing
 
 	return color

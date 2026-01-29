@@ -77,7 +77,7 @@ func OnAlarmRaised(Notify : bool) -> void:
 		Notif.modulate = Color(1, 0.1, 0)
 		add_child(Notif)
 
-func OnVisited(Type : MapSpot) -> void:
+func OnVisited(_Type : MapSpot) -> void:
 	$AnalyzeButton.modulate.a = 1
 	$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 1
 

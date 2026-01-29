@@ -138,7 +138,7 @@ static func SmoothLine2(L : Array, res : float = 200) -> Array[Vector2]:
 	
 	return newline
 
-func DistanceToDistance(Dist: float) -> String:
+static func DistanceToDistance(Dist: float) -> String:
 	if Dist > 8000:
 		return "very far"
 	elif Dist > 5000:

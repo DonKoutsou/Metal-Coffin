@@ -159,12 +159,14 @@ motion_scale = Vector2(0.5, 0.5)
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer" unique_id=428946363]
 
 [node name="Sprite2D2" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D" unique_id=852055646]
+texture_filter = 1
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 sprite_frames = SubResource("SpriteFrames_ri552")
 frame_progress = 0.0845768
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=1096321809]
+texture_filter = 1
 position = Vector2(314, 11)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -175,6 +177,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=86635795]
+texture_filter = 1
 position = Vector2(866, 94)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -185,6 +188,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=965614122]
+texture_filter = 1
 position = Vector2(595, 51)
 amount = 20
 texture = ExtResource("3_kl0cj")
@@ -195,6 +199,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="GPUParticles2D4" type="GPUParticles2D" parent="ParallaxLayer/Parallax2D" unique_id=260064080]
+texture_filter = 1
 position = Vector2(-21, -48)
 amount = 20
 texture = ExtResource("3_kl0cj")

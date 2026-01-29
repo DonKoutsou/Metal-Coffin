@@ -3,15 +3,17 @@ shader_type canvas_item;
 render_mode blend_mix;
 
 // === TEXTURES ===
-uniform sampler2D noise_texture : repeat_enable, filter_linear;
-uniform sampler2D noise_texturenormal : repeat_enable, filter_linear;
+uniform sampler2D noise_texture : repeat_enable, filter_linear_mipmap;
+uniform sampler2D noise_texturenormal : repeat_enable, filter_nearest_mipmap;
 
 // === CLOUD SETTINGS ===
 uniform float density : hint_range(0.0, 3.0) = 0.25;
 uniform vec2 Camera_Offset;
 uniform vec2 Offset;
+uniform vec2 WindDir;
 uniform float NormalStr = 0.5;
 uniform float Light = 1.0;
+uniform float Alpha = 1.0;
 // === SHADOW SETTINGS ===
 uniform float shadow_strength : hint_range(0.0, 1.0) = 0.15;
 uniform float shadow_parallax_amount : hint_range(-1.0, 1.0) = 0.5;
@@ -34,7 +36,7 @@ void fragment() {
     vec2 screen_uv = SCREEN_UV;
 
     // === SHADOW LAYER ===
-    vec2 shadow_uv = UV + motion;
+    vec2 shadow_uv = (UV + motion) * (vec2(1,1) - abs(WindDir));
     // Apply parallax before rotation
     shadow_uv += (screen_uv - 0.5) * shadow_parallax_amount;
     shadow_uv = rotate(shadow_uv - center, rotation_angle) + center;
@@ -45,7 +47,7 @@ void fragment() {
     vec4 cloud = vec4(vec3(1.0), main_alpha);
 
     // === SHADOW (SCREEN SPACE) ===
-    vec2 cloud_uv = UV + motion;
+    vec2 cloud_uv = (UV + motion);
     cloud_uv = rotate(cloud_uv - center, rotation_angle) + center;
 
     float raw_shadow_noise = texture(noise_texture, cloud_uv).r;
@@ -59,6 +61,7 @@ void fragment() {
     // === FINAL OUTPUT ===
     COLOR = mix(shadow, cloud, cloud.a);
 	COLOR.rgb *= Light;
+	COLOR.a *= Alpha;
     NORMAL_MAP = normal_noise;
     NORMAL_MAP_DEPTH = NormalStr;
 }

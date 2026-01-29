@@ -6,7 +6,7 @@ class_name Item
 @export var ItemName = "ItemName"
 @export_multiline var ItemDesc = "ItemDesc"
 @export var MaxStackCount = 1
-#@export var RandomFindMaxCount = 1
+#@export var RandomFindMaxCount = 1s
 @export var CardProviding : Array[CardStats] = []
 @export var Tier : int = 0
 #@export var CardOptionProviding : CardOption
@@ -19,7 +19,7 @@ func GetItemDesc() -> String:
 func IsSame(It : Item) -> bool:
 	return ItemName == It.ItemName
 
-func GetMerchItemDesc(Ships : Array[MapShip]) -> String:
+func GetMerchItemDesc(_Ships : Array[MapShip]) -> String:
 	return ""
 
 func GetWorkshopItemDesc() -> String:

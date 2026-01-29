@@ -19,7 +19,6 @@ domain_warp_fractal_type = 0
 domain_warp_fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
-width = 1024
 noise = SubResource("FastNoiseLite_n7y6y")
 color_ramp = SubResource("Gradient_l2i77")
 seamless = true
@@ -32,8 +31,10 @@ shader_parameter/noise_texturenormal = ExtResource("2_ykjet")
 shader_parameter/density = 2.2
 shader_parameter/Camera_Offset = Vector2(0, 0)
 shader_parameter/Offset = Vector2(0, 0)
+shader_parameter/WindDir = Vector2(0, 0)
 shader_parameter/NormalStr = -2.0
 shader_parameter/Light = 0.8
+shader_parameter/Alpha = 1.0
 shader_parameter/shadow_strength = 0.3
 shader_parameter/shadow_parallax_amount = -0.04
-shader_parameter/rotation_angle = -0.85
+shader_parameter/rotation_angle = 0.0

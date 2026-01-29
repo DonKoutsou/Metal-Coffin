@@ -37,6 +37,7 @@ Icons = {
 }
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1290798982]
+texture_filter = 3
 use_parent_material = true
 points = PackedVector2Array(0, -94, 0, -30)
 width = 4.0
@@ -68,6 +69,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tc2tu")
 
 [node name="ShipName" type="Label" parent="Control/PanelContainer" unique_id=1016113574]
+texture_filter = 1
 use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -83,6 +85,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1946680749 groups=["MapShipVizualiser"]]
+texture_filter = 1
 use_parent_material = true
 anchors_preset = 8
 anchor_left = 0.5

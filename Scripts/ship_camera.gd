@@ -73,6 +73,7 @@ func UpdateZoom(Zoom : Vector2) -> void:
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
 	ZoomChanged.emit(Zoom.x)
 	_UpdateMapGridVisibility()
+	UpdateCameraPos(Vector2.ZERO)
 	#UpdateCameraPos(Vector2.ZERO)
 
 func ForceZoom(Zoom : Vector2) -> void:
@@ -142,7 +143,9 @@ func _UpdateMapGridVisibility():
 		GridShowing = true
 
 	else: if (zoom.x >= 1.5):
-		Cloud.visible = zoom.x < 8.0
+		Cloud.visible = true
+		var cloudv = clamp(zoom.x -2, 0, 5) / 5
+		CloudMat.set_shader_parameter("Alpha", 1 - cloudv)
 		if (GridShowing):
 			if (is_instance_valid(MapGridTween)):
 				MapGridTween.kill()
@@ -169,16 +172,13 @@ func UpdateCameraPos(relativeMovement : Vector2):
 	
 	var extent = get_viewport_rect().size / 2 / zoom.x
 	
-	var maxposY = Vector2(-(0 - 1000 + extent.y), WorldBounds.y - 1000 + extent.y)
+	var maxposY = Vector2(1000 - extent.y, WorldBounds.y - 1000 + extent.y)
 	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x), (WorldBounds.x + 3000) / 2 - extent.x)
 
 	var rel = relativeMovement / zoom
 	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY.y, maxposY.x) )
-	if (newpos.x != position.x):
-		position.x = newpos.x
-	if (newpos.y != position.y):
-		position.y = newpos.y
-
+	position = newpos
+	
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
 	Grid.UpdateOffset(position)
@@ -200,15 +200,16 @@ func _physics_process(delta: float) -> void:
 	var rel : Vector2
 	if (Input.is_action_pressed("MapDown")):
 		rel.y -= 10
-	if (Input.is_action_pressed("MapUp")):
+	else: if (Input.is_action_pressed("MapUp")):
 		rel.y += 10
-	if (Input.is_action_pressed("MapRight")):
+	else: if (Input.is_action_pressed("MapRight")):
 		rel.x -= 10
-	if (Input.is_action_pressed("MapLeft")):
+	else: if (Input.is_action_pressed("MapLeft")):
 		rel.x += 10
+		
 	if (Input.is_action_pressed("ZoomIn")):
 		_HANDLE_ZOOM(1.1)
-	if (Input.is_action_pressed("ZoomOut")):
+	else: if (Input.is_action_pressed("ZoomOut")):
 		_HANDLE_ZOOM(0.9)
 	
 	if (rel != Vector2.ZERO):
