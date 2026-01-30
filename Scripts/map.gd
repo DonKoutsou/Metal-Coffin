@@ -950,7 +950,9 @@ func _prim_mst_optimized(cities: Array) -> Array:
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
 const ScreenPos = Vector2(67.0,62.0)
+const NormalPos = Vector2(342, 62)
 const OriginalSize = Vector2(869, 595.0)
+const NormalSize = Vector2(595, 595)
 const FullSize = Vector2(1148.0, 595.0)
 
 func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
@@ -969,6 +971,11 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = OriginalSize
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
 		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(OriginalSize)
+	else: if (NewState == ScreenUI.ScreenState.NORMAL_SCREEN):
+		$SubViewportContainer.position = NormalPos
+		$SubViewportContainer.size = NormalSize
+		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
+		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(NormalSize)
 	else:
 		$SubViewportContainer.position = Vector2.ZERO
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size

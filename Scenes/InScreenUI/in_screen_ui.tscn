@@ -18,6 +18,9 @@
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
 [ext_resource type="PackedScene" uid="uid://dtym0y7dgx7iv" path="res://Scenes/ScreenUI/ZoomLevel.tscn" id="21_u111i"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbfwx"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "Screen", "ZoomUI", "TUI")]
 process_mode = 3
 layer = 0
@@ -59,29 +62,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
-
-[node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
-offset_top = 187.0
-offset_bottom = 187.0
-
-[node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
-anchors_preset = 5
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_top = 0.0
-offset_bottom = 0.0
-grow_vertical = 1
-
-[node name="CurrentShipText" parent="." unique_id=1331498325 instance=ExtResource("8_avpxw")]
-offset_left = 52.0
-offset_right = 53.0
-
 [node name="ZoomUI" parent="." unique_id=1715592095 instance=ExtResource("21_u111i")]
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 72.0
 offset_bottom = 0.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=562179179]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
+
+[node name="PanelContainer3" type="PanelContainer" parent="." unique_id=542795109]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
+
+[node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
+
+[node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
+offset_top = -144.0
+offset_bottom = -144.0
+
+[node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
+offset_bottom = 80.0
+
+[node name="CurrentShipText" parent="." unique_id=1331498325 instance=ExtResource("8_avpxw")]
+offset_left = 52.0
+offset_right = 53.0
 
 [node name="CursorPos" type="Label" parent="." unique_id=498847629]
 anchors_preset = 7
@@ -92,7 +107,6 @@ anchor_bottom = 1.0
 offset_left = -80.5
 offset_top = -50.0
 offset_right = 80.5
-offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 1

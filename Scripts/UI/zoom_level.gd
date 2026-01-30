@@ -6,7 +6,7 @@ class_name ZoomLvevel
 @export var Text : Label
 @export var MaxStep : float = 10.0
 
-const NUMBER_OFFSET : int = 35
+const NUMBER_OFFSET : int = 10
 const TEXT_COLOR : Color = Color(100, 0.764, 0.081)
 
 var CurrentZoom : float = 0.5
@@ -31,7 +31,7 @@ func _draw() -> void:
 	var Z = Helper.normalize_value(CurrentZoom, ShipCamera.MinZoom, ShipCamera.MaxZoom)
 
 	#Text sting
-	var T = "{0}X".format([snapped(Z * MaxStep, 0.01)])
+	var T = "{0}X".format([snapped(Z * MaxStep, 0.1)])
 	Text.text = T
 
 	#Based on the size of the container we figure out how much distance each step has from each other
@@ -75,14 +75,14 @@ func _draw() -> void:
 		if (ZoomStr.contains(".0")):
 			
 			TextPos += Vector2(0,6)
-			draw_string(get_theme_default_font(), TextPos, ZoomStr.replace(".0", ""),HORIZONTAL_ALIGNMENT_CENTER, -1, 20, TEXT_COLOR)
+			draw_string(get_theme_default_font(), TextPos, ZoomStr.replace(".0", ""),HORIZONTAL_ALIGNMENT_CENTER, -1, 12, TEXT_COLOR)
 			
 			draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 3)
 			
 		else:
 			
 			TextPos += Vector2(0,3)
-			draw_string(get_theme_default_font(), TextPos, ZoomStr,HORIZONTAL_ALIGNMENT_CENTER, -1, 12, TEXT_COLOR)
+			draw_string(get_theme_default_font(), TextPos, ZoomStr,HORIZONTAL_ALIGNMENT_CENTER, -1, 8, TEXT_COLOR)
 			
 			draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 1)
 			

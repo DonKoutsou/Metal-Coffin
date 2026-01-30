@@ -21,7 +21,7 @@ z_index = 1
 texture_filter = 2
 use_parent_material = true
 script = ExtResource("1_y30vi")
-Direction = NodePath("Icon/ShipSymbol/Direction")
+Direction = NodePath("Icon/Direction")
 ShipCallsign = NodePath("Icon/ShipSymbol")
 ShipDetailLabel = NodePath("Control/PanelContainer/ShipName")
 DetailPanel = NodePath("Control")
@@ -104,6 +104,7 @@ texture = ExtResource("7_kn8g7")
 expand_mode = 1
 
 [node name="ShipSymbol" type="Label" parent="Icon" unique_id=1047617609]
+texture_filter = 3
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 5
@@ -124,16 +125,19 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Direction" type="Label" parent="Icon/ShipSymbol" unique_id=895729482]
+[node name="Direction" type="Label" parent="Icon" unique_id=895729482]
+texture_filter = 1
 use_parent_material = true
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1.0
-offset_top = -11.0
-offset_right = 61.0
-offset_bottom = 69.0
+offset_top = -40.0
+offset_right = 60.0
+offset_bottom = 40.0
+grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(0, 40)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -145,6 +149,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="VisualContactCountdown" type="ProgressBar" parent="Icon" unique_id=1276540579]
+texture_filter = 1
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8

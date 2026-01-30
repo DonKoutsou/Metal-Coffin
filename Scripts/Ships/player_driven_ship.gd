@@ -145,7 +145,7 @@ func AddTargetLocation(pos : Vector2) -> void:
 
 func Steer(Rotation : float) -> void:
 	StoredSteer += Rotation / 50
-	
+	StoredSteer = wrap(StoredSteer, -PI, PI)
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
@@ -189,7 +189,7 @@ func _physics_process(delta: float) -> void:
 			ForceSteer(lerp_angle(rotation, directiontoDestination, delta * SimulationSpeed))
 	
 	if (StoredSteer != 0):
-		var SteertToAdd = StoredSteer * (delta * SimulationSpeed)
+		var SteertToAdd = min((delta * SimulationSpeed), abs(StoredSteer)) * sign(StoredSteer)
 		StoredSteer -= SteertToAdd
 		ForceSteer(rotation + SteertToAdd)
 	#HandleAcceleration

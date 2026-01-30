@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cxo14pw1ry2k" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="4_j0j1u"]
 [ext_resource type="AudioStream" uid="uid://cfm6b8h8fuyfy" path="res://Assets/Sounds/Door.mp3" id="4_wetmy"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="5_mda8n"]
+[ext_resource type="Texture2D" uid="uid://s464nk64miu8" path="res://Assets/UIPiecies/Screen/Screen2_FullQuality.png" id="6_6aw6g"]
 [ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="6_kbeeh"]
 [ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="7_t8pjf"]
 [ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="9_3s488"]
@@ -24,7 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://bdwuh13c5yg07" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="18_qqmpd"]
 [ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
 [ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="22_ruc6v"]
+[ext_resource type="Texture2D" uid="uid://ebrqin4q01s6" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="22_ua54b"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="23_0465a"]
 [ext_resource type="Texture2D" uid="uid://cta21sa447sbq" path="res://Assets/UIPiecies/Screen/ScreenLong3.png" id="27_j0j1u"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
@@ -38,7 +39,14 @@
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
 [ext_resource type="PackedScene" uid="uid://nt73d42f2o1p" path="res://Scenes/ScreenUI/screen_cam.tscn" id="37_6aw6g"]
 
-[node name="ScreenUI" type="CanvasLayer" unique_id=1773636653 node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cables", "DoorSound", "NormalScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI", "Sonar")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xl4i0"]
+texture = ExtResource("22_ua54b")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[node name="ScreenUI" type="CanvasLayer" unique_id=1773636653 node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cables", "DoorSound", "NormalScreen", "MeduimScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI", "Sonar")]
 process_mode = 1
 layer = 2
 follow_viewport_enabled = true
@@ -46,7 +54,7 @@ script = ExtResource("2_spr1r")
 _ScreenItems = NodePath("NormalScreen/ScreenUi")
 MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")
 Thrust = NodePath("NormalScreen/ThrustSlider")
-Steer = NodePath("NormalScreen/ScreenUi/SteeringWheel")
+Steer = NodePath("NormalScreen/SteeringWheel")
 MissileUI = NodePath("NormalScreen/ScreenUi/Missile Tab")
 EventHandler = ExtResource("3_i441f")
 Cam = NodePath("ScreenCam")
@@ -60,11 +68,12 @@ MapMarkerButton = NodePath("NormalScreen/MarkerEditorButton")
 Cables = NodePath("Cables")
 DoorSound = NodePath("DoorSound")
 NormalScreen = NodePath("NormalScreen")
+MeduimScreen = NodePath("MediumScreen")
 FullScreenFrame = NodePath("ScreenFrameLong")
 ScreenPanel = NodePath("Panel")
-CardFightUI = NodePath("NormalScreen/CardFightExternalUI")
-TownUI = NodePath("NormalScreen/TownUI")
-Sonar = NodePath("NormalScreen/ScreenUi/Sonar")
+CardFightUI = NodePath("MediumScreen/CardFightExternalUI")
+TownUI = NodePath("MediumScreen/TownUI")
+Sonar = NodePath("NormalScreen/Sonar")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=51637005]
 stream = ExtResource("3_ng3jm")
@@ -83,6 +92,7 @@ volume_db = -12.0
 bus = &"MapSounds"
 
 [node name="NormalScreen" type="Control" parent="." unique_id=2111759005]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +110,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_j0j1u")
+texture = ExtResource("6_6aw6g")
 expand_mode = 1
 
 [node name="ThrustSlider" parent="NormalScreen" unique_id=1408977985 instance=ExtResource("5_mda8n")]
@@ -109,6 +119,172 @@ offset_left = -114.0
 offset_top = -371.0
 offset_right = -13.0
 offset_bottom = -46.0
+
+[node name="PanelContainer" type="PanelContainer" parent="NormalScreen" unique_id=610920880]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -193.0
+offset_right = 274.0
+offset_bottom = -49.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xl4i0")
+
+[node name="HBoxContainer" type="GridContainer" parent="NormalScreen/PanelContainer" unique_id=1483961050]
+layout_mode = 2
+mouse_filter = 2
+columns = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=155813622]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" unique_id=603464856]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Forecast"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ForecastButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1969023456 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1014707617]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label2" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=878529539]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Grid"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1168177073 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=246380873]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label4" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=5484486]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zoom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZoomLevelButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1423962257 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1456177738]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label3" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" unique_id=1179518340]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Steer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SteerButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" unique_id=403456389 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1284078477]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" unique_id=1468069]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Team"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" unique_id=1870047177 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=232222863]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" unique_id=511326746]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AeroSonar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SonarButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" unique_id=122039278 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
 
 [node name="ScreenUi" type="Control" parent="NormalScreen" unique_id=725286896]
 layout_mode = 1
@@ -120,17 +296,6 @@ offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="SteeringWheel" parent="NormalScreen/ScreenUi" unique_id=183033337 instance=ExtResource("11_s7gev")]
-layout_mode = 1
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-grow_horizontal = 1
-grow_vertical = 0
-PositionOnStart = false
 
 [node name="Missile Tab" parent="NormalScreen/ScreenUi" unique_id=1950136315 instance=ExtResource("13_4xtjg")]
 layout_mode = 1
@@ -154,8 +319,25 @@ scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="Sonar" parent="NormalScreen/ScreenUi" unique_id=83353684 instance=ExtResource("13_ruc6v")]
+[node name="SteeringWheel" parent="NormalScreen" unique_id=183033337 instance=ExtResource("11_s7gev")]
 layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 1
+grow_vertical = 0
+PositionOnStart = false
+
+[node name="Sonar" parent="NormalScreen" unique_id=83353684 instance=ExtResource("13_ruc6v")]
+layout_mode = 1
+offset_left = 15.0
+offset_top = -20.0
+offset_right = 55.0
+offset_bottom = 20.0
 
 [node name="SpeedSimulation" type="TextureButton" parent="NormalScreen" unique_id=263195442 groups=["Buttons"]]
 layout_mode = 1
@@ -261,149 +443,6 @@ texture_normal = ExtResource("6_kbeeh")
 texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="NormalScreen" unique_id=610920880]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -606.0
-offset_top = -68.0
-offset_right = -278.0
-grow_horizontal = 0
-grow_vertical = 0
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("22_ruc6v")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NormalScreen/PanelContainer" unique_id=2023549532]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=155813622]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" unique_id=603464856]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Forecast"
-
-[node name="ForecastButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1969023456 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1014707617]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label2" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=878529539]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Grid"
-
-[node name="GridButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1168177073 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1456177738]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label3" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" unique_id=1179518340]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Steer"
-
-[node name="SteerButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3" unique_id=403456389 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
-
-[node name="VBoxContainer4" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=246380873]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label4" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=5484486]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Zoom"
-
-[node name="ZoomLevelButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1423962257 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
-
-[node name="VBoxContainer5" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1284078477]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" unique_id=1468069]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Team"
-
-[node name="TeamButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5" unique_id=1870047177 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
-
-[node name="VBoxContainer6" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=232222863]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label5" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" unique_id=511326746]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "AeroSonar"
-
-[node name="SonarButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6" unique_id=122039278 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
 
 [node name="ShipDockButton" type="TextureButton" parent="NormalScreen" unique_id=303756727 groups=["Buttons"]]
 layout_mode = 1
@@ -569,11 +608,33 @@ offset_bottom = 96.0
 grow_horizontal = 0
 grow_vertical = 1
 
-[node name="CardFightExternalUI" parent="NormalScreen" unique_id=1928367206 instance=ExtResource("31_wetmy")]
+[node name="MediumScreen" type="Control" parent="." unique_id=1961272173]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScreenFrame" type="TextureRect" parent="MediumScreen" unique_id=1511602994]
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_j0j1u")
+expand_mode = 1
+
+[node name="CardFightExternalUI" parent="MediumScreen" unique_id=1928367206 instance=ExtResource("31_wetmy")]
 visible = false
 layout_mode = 1
 
-[node name="Pause" type="TextureButton" parent="NormalScreen/CardFightExternalUI" unique_id=1850147505 groups=["Buttons"]]
+[node name="Pause" type="TextureButton" parent="MediumScreen/CardFightExternalUI" unique_id=1850147505 groups=["Buttons"]]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 1
@@ -593,7 +654,7 @@ texture_pressed = ExtResource("7_t8pjf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="NormalScreen/CardFightExternalUI/Pause" unique_id=2070702645]
+[node name="Label" type="Label" parent="MediumScreen/CardFightExternalUI/Pause" unique_id=2070702645]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -615,7 +676,7 @@ text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TownUI" parent="NormalScreen" unique_id=1760107429 instance=ExtResource("30_myhbu")]
+[node name="TownUI" parent="MediumScreen" unique_id=1760107429 instance=ExtResource("30_myhbu")]
 visible = false
 layout_mode = 1
 
@@ -683,9 +744,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 17.0
+offset_left = 143.0
 offset_top = -303.0
-offset_right = -781.0
+offset_right = -655.0
 offset_bottom = -520.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -761,24 +822,24 @@ position = Vector2(640, 360)
 
 [connection signal="AccelerationChangeEnded" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Changed"]
-[connection signal="SteeringDitChanged" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steering_Direction_Changed"]
-[connection signal="SteeringOffseted" from="NormalScreen/ScreenUi/SteeringWheel" to="." method="Steer_Offseted"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="." method="_on_grid_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4/ZoomLevelButton" to="." method="_on_zoom_level_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5/TeamButton" to="." method="_on_team_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6/SonarButton" to="." method="_on_sonar_button_toggled"]
+[connection signal="SteeringDitChanged" from="NormalScreen/SteeringWheel" to="." method="Steering_Direction_Changed"]
+[connection signal="SteeringOffseted" from="NormalScreen/SteeringWheel" to="." method="Steer_Offseted"]
 [connection signal="toggled" from="NormalScreen/SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="pressed" from="NormalScreen/SimulationButton" to="." method="Sim_Pause_Pressed"]
 [connection signal="pressed" from="NormalScreen/InventoryButton" to="." method="Inventory_Pressed"]
 [connection signal="pressed" from="NormalScreen/Regroup" to="." method="Regroup_Pressed"]
 [connection signal="pressed" from="NormalScreen/MarkerEditorButton" to="." method="Marker_Editor_Button_Pressed"]
-[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
-[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="." method="_on_grid_button_toggled"]
-[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
-[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4/ZoomLevelButton" to="." method="_on_zoom_level_button_toggled"]
-[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5/TeamButton" to="." method="_on_team_button_toggled"]
-[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6/SonarButton" to="." method="_on_sonar_button_toggled"]
 [connection signal="pressed" from="NormalScreen/ShipDockButton" to="." method="Ship_Dock_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/MissileButton" to="." method="Missile_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/OpenHatchButton" to="." method="Open_Hatch_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]
-[connection signal="pressed" from="NormalScreen/CardFightExternalUI/Pause" to="." method="Pause_Pressed"]
-[connection signal="pressed" from="NormalScreen/CardFightExternalUI/Pause" to="NormalScreen/CardFightExternalUI" method="PausePressed"]
+[connection signal="pressed" from="MediumScreen/CardFightExternalUI/Pause" to="." method="Pause_Pressed"]
+[connection signal="pressed" from="MediumScreen/CardFightExternalUI/Pause" to="MediumScreen/CardFightExternalUI" method="PausePressed"]

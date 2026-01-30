@@ -122,7 +122,7 @@ func _ready() -> void:
 		if (IsPrologue and !SkipStory):
 			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		else:
-			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		
@@ -474,7 +474,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 
 	spot.AddToFuelReserves(BFuel)
 	
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
 	GetMap().GetScreenUi().TownVisited(false)

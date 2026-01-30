@@ -23,6 +23,7 @@ class_name ScreenUI
 @export var Cables : Control
 @export var DoorSound : AudioStreamPlayer
 @export var NormalScreen : Control
+@export var MeduimScreen : Control
 @export var FullScreenFrame : TextureRect
 @export var ScreenPanel : TextureRect
 @export var CardFightUI : ExternalCardFightUI
@@ -206,6 +207,7 @@ func _on_steer_button_toggled(toggled_on: bool) -> void:
 enum ScreenState{
 	FULL_SCREEN,
 	HALF_SCREEN,
+	NORMAL_SCREEN,
 	NO_SCREEN
 }
 
@@ -264,7 +266,6 @@ func IntroCloseFinisehd(NewStat : ScreenState) -> void:
 	Cam.EnableFullScreenShake()
 
 func ToggleFullScreen(NewStat : ScreenState) -> void:
-
 	ScreenPanel.visible = true
 	DoorSound.play()
 	Cam.EnableFullScreenShake()
@@ -278,7 +279,8 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	FullScreenToggleStarted.emit(NewStat)
 
 	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
-	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
+	NormalScreen.visible = NewStat == ScreenState.NORMAL_SCREEN
+	MeduimScreen.visible = NewStat == ScreenState.HALF_SCREEN
 
 	var OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)

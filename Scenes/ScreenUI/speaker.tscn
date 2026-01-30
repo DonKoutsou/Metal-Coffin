@@ -47,7 +47,7 @@ offset_left = -11.0
 offset_top = 32.0
 offset_right = 138.0
 offset_bottom = 330.0
-scale = Vector2(0.980121, 0.980121)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("13_xhvq3")
 expand_mode = 1
 flip_h = true
@@ -73,10 +73,10 @@ flip_h = true
 
 [node name="Light" parent="." unique_id=1806660906 instance=ExtResource("15_3b7e2")]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 187.0
-offset_right = 92.0
-offset_bottom = 207.0
-scale = Vector2(0.65693, 0.65693)
+offset_left = 34.0
+offset_top = 117.0
+offset_right = 54.0
+offset_bottom = 137.0
+scale = Vector2(0.422, 0.422)
 
 [connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]

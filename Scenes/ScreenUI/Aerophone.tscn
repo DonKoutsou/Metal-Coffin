@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://cvhgybnbwc0e4"]
 
 [ext_resource type="Script" uid="uid://bxtv6l5octf8v" path="res://Scripts/UI/Aerosonar.gd" id="1_5vs2h"]
-[ext_resource type="Texture2D" uid="uid://bhijweehoxrmw" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_cx85v"]
 [ext_resource type="Script" uid="uid://cvjx6yhssr224" path="res://Scripts/UI/Aerosonal_Line.gd" id="1_u0q8c"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_6guy7"]
+[ext_resource type="Texture2D" uid="uid://byfcxaxg7epni" path="res://Assets/UIPiecies/Screen/SidePanels/Sonar.png" id="3_mi4l8"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="6_jiwdy"]
 [ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="6_mi4l8"]
 [ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="7_fw736"]
 
 [node name="Control" type="Control" unique_id=1555836270 node_paths=PackedStringArray("LineContainer", "SonalVisual", "GainLabel", "Spkr")]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -24,55 +25,44 @@ Spkr = NodePath("Speaker")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=788212122]
 layout_mode = 1
-offset_left = -471.0
-offset_top = 57.0
-offset_bottom = 221.0
+offset_left = -96.0
+offset_top = 21.0
+offset_right = 259.2766
+offset_bottom = 186.0
 mouse_filter = 0
-texture = ExtResource("1_cx85v")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="TextureRect2" unique_id=2033285381]
-modulate = Color(0, 0, 0, 0.518)
-show_behind_parent = true
-layout_mode = 0
-offset_left = 9.50004
-offset_top = -5.99998
-offset_right = 480.5
-offset_bottom = 158.0
-mouse_filter = 2
-texture = ExtResource("1_cx85v")
+texture = ExtResource("3_mi4l8")
 expand_mode = 1
 
 [node name="Control" type="Control" parent="TextureRect2" unique_id=1384447880]
 anchors_preset = 0
-offset_left = 264.5
+offset_left = 142.0
 offset_top = 12.0006
-offset_right = 459.5
+offset_right = 337.0
 offset_bottom = 57.0006
 script = ExtResource("1_u0q8c")
 OffsetAmmount = 5.0
 
 [node name="YGas" parent="TextureRect2" unique_id=480843960 instance=ExtResource("2_6guy7")]
-position = Vector2(398.606, 95)
+position = Vector2(282.46765, 96.00907)
 scale = Vector2(0.520363, 0.520363)
 
 [node name="GeinControl" parent="TextureRect2" unique_id=1393905736 instance=ExtResource("2_6guy7")]
-position = Vector2(398.606, 136)
+position = Vector2(282.46765, 139)
 scale = Vector2(0.520363, 0.520363)
 
 [node name="Close" type="TextureButton" parent="TextureRect2" unique_id=2115969672 groups=["Buttons"]]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 28.5
-offset_top = -39.0
-offset_right = 93.5
-offset_bottom = -14.0
+anchor_bottom = 0.5
+offset_left = -47.638306
+offset_top = 41.5
+offset_right = 28.361694
+offset_bottom = 70.50906
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 texture_normal = ExtResource("6_mi4l8")
 texture_pressed = ExtResource("7_fw736")
 ignore_texture_size = true
@@ -80,9 +70,9 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="TextureRect2" unique_id=733326543]
 layout_mode = 0
-offset_left = 260.0
+offset_left = 132.0
 offset_top = 86.0
-offset_right = 332.0
+offset_right = 204.0
 offset_bottom = 107.0
 theme_override_colors/font_color = Color(0.978254, 0, 0.0338846, 1)
 theme_override_constants/outline_size = 0
@@ -93,10 +83,10 @@ vertical_alignment = 1
 
 [node name="Speaker" parent="." unique_id=1248031779 instance=ExtResource("6_jiwdy")]
 layout_mode = 0
-offset_left = -21.0
-offset_top = -79.0
-offset_right = 19.0
-offset_bottom = -39.0
+offset_left = -42.0
+offset_top = -78.0
+offset_right = -2.0
+offset_bottom = -38.0
 frequency = 15.0
 max_rotation = 0.02
 

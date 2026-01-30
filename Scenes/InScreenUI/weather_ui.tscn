@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="1_fim28"]
 [ext_resource type="Script" uid="uid://dr3s8ms8g256f" path="res://Scripts/UI/WeatherUI.gd" id="2_s1gtg"]
 
-[node name="WeatherUI" type="Control" unique_id=1637731237 node_paths=PackedStringArray("VizText", "DangerLabel")]
+[node name="WeatherUI" type="Control" unique_id=1637731237 node_paths=PackedStringArray("VizText", "WindText", "DangerLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,31 +12,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_s1gtg")
-VizText = NodePath("VisibilityText")
+VizText = NodePath("HBoxContainer/Visibility")
+WindText = NodePath("HBoxContainer/Wind Direction")
 DangerLabel = NodePath("VisibilityText2")
-
-[node name="VisibilityText" type="Label" parent="." unique_id=1914941164]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -185.0
-offset_top = -49.0
-offset_right = -18.0
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_vertical = 1
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("1_fim28")
-theme_override_font_sizes/font_size = 16
-text = "Wind Direction : North
-Visibility : Clear"
-horizontal_alignment = 2
-vertical_alignment = 1
-uppercase = true
 
 [node name="VisibilityText2" type="Label" parent="." unique_id=1088892575]
 layout_mode = 1
@@ -60,5 +38,39 @@ text = "---------------
 STORM WARNING
 ---------------"
 horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1045793697]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -50.0
+offset_right = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Wind Direction" type="Label" parent="HBoxContainer" unique_id=1914941164]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "Wind Dir : North"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+
+[node name="Visibility" type="Label" parent="HBoxContainer" unique_id=124546585]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "Vis : Clear"
+horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true

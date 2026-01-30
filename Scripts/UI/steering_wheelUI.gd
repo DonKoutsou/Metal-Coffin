@@ -43,6 +43,10 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 		#$TextureRect.rotation += rel.x + rel.y /20
 		SteeringDir += rel.x + rel.y
 
+func UpdateSteerFloat(Dir : float) -> void:
+	set_physics_process(true)
+	SteeringDir += Dir
+
 func ForceSteer(st : float) -> void:
 	$TextureRect.rotation = rad_to_deg(st)
 
@@ -77,5 +81,9 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if (event is InputEventScreenDrag):
 		UpdateSteer(event.relative, event.position)
 
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+	else: if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		UpdateSteer(event.relative, event.position)
+
+	var axis = Input.get_axis("ZoomIn", "ZoomOut")
+	if (axis != 0):
+		UpdateSteerFloat(axis * 0.4)

@@ -3,15 +3,16 @@ extends Control
 class_name WeatherUI
 
 @export var VizText : Label
+@export var WindText : Label
 @export var DangerLabel : Label
 
 var d = 0.2
 func _physics_process(delta: float) -> void:
-	var wd = Helper.AngleToDirection(WeatherManage.WindDirection.angle())
-	VizText.text = "Wind Direction : {0}\n".format([wd])
+	var wd = Helper.AngleToDirectionShort(WeatherManage.WindDirection.angle())
+	WindText.text = "Wind Dir = {0}".format([wd])
 	
 	var vis = WeatherManage.GetVisibilityInPosition(ShipContoller.ControlledShipPosition)
-	VizText.text += "Visibility : {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])
+	VizText.text = "Visibility = {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])
 	
 	if (vis > 0.6):
 		DangerLabel.visible = false

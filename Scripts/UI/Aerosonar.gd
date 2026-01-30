@@ -20,7 +20,9 @@ func _ready() -> void:
 	ControllerEventH.OnControlledShipChanged.connect(ControlledShipUpdated)
 	LineContainer.Found.connect(SignalFound)
 	set_physics_process(false)
-	SonalVisual.hide()
+	LineContainer.visible = false
+	GainLabel.visible = false
+	#SonalVisual.hide()
 
 func SignalFound(Str : float) -> void:
 	Spkr.PlaySound(RadioSpeaker.RadioSound.BEEP, Str - 35)
@@ -31,8 +33,9 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 		#Implement deactivation of sonar collider
 	
 	Controller = NewController
-	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):
-		_on_close_pressed()
+	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0 and Working):
+		PopUpManager.GetInstance().DoFadeNotif("Unable to locate sonar on ship.\nDissabling interface...")
+		ToggleSonar(false)
 	Controller.ToggleSonarVisual(Working)
 
 
@@ -78,25 +81,29 @@ func Toggle(t : bool) -> void:
 	else:
 		OnRadioClicked()
 
-var tw : Tween
+#var tw : Tween
 func _on_close_pressed() -> void:
-	if (is_instance_valid(tw)):
-		tw.kill()
-	tw = create_tween()
-	tw.tween_property(SonalVisual, "position", Vector2(-SonalVisual.size.x, SonalVisual.position.y), 0.5)
-	tw.finished.connect(SonalVisual.hide)
-	set_physics_process(false)
-	Controller.ToggleSonarVisual(false)
-	Working = false
+	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):
+		PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
+		return
+	ToggleSonar(!Working)
+
+func ToggleSonar(t : bool) -> void:
+	LineContainer.visible = t
+	GainLabel.visible = t
+	set_physics_process(t)
+	Controller.ToggleSonarVisual(t)
+	Working = t
+
 
 func OnRadioClicked() -> void:
-	if (is_instance_valid(tw)):
-		tw.kill()
+	#if (is_instance_valid(tw)):
+		#tw.kill()
 	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):
 		return
-	tw = create_tween()
-	tw.tween_property(SonalVisual, "position", Vector2(-SonalVisual.size.x / 3, SonalVisual.position.y), 0.5)
-	tw.finished.connect(SonalVisual.show)
+	#tw = create_tween()
+	#tw.tween_property(SonalVisual, "position", Vector2(-SonalVisual.size.x / 3, SonalVisual.position.y), 0.5)
+	#tw.finished.connect(SonalVisual.show)
 	SonalVisual.show()
 	set_physics_process(true)
 	Controller.ToggleSonarVisual(true)
