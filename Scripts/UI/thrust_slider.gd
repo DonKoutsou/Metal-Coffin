@@ -29,14 +29,30 @@ func ForceValue(val : float) ->void:
 		forceTw.kill()
 	
 	forceTw = create_tween()
-	
+	forceTw.set_ease(Tween.EASE_OUT)
+	forceTw.set_trans(Tween.TRANS_QUINT)
 	var NewPositio = Vector2(Handle.position.x, newpos)
 	
-	forceTw.tween_property(Handle, "position", NewPositio, NewPositio.distance_squared_to(Handle.position) / 1000000)
+	#forceTw.custom_step(0.3)
+	forceTw.tween_method(UpdateHandlePosition, Handle.position, NewPositio, NewPositio.distance_squared_to(Handle.position) / 100000)
+	#forceTw.tween_property(Handle, "position", NewPositio, NewPositio.distance_squared_to(Handle.position) / 100000)
 	
 	#Handle.position.y = newpos
 	#var newval = (newpos - MinVelocityLoc) / (MaxVelocityLoc - MinVelocityLoc)
 	#AccelerationChanged.emit(newval)
+
+func UpdateHandle(val : float) -> void:
+	var ForcedValue = clamp(val, 0, 1)
+	var newpos = ForcedValue * (MaxVelocityLoc - MinVelocityLoc) + MinVelocityLoc
+	var NewPositio = Vector2(Handle.position.x, newpos)
+	Handle.position = NewPositio
+
+func UpdateHandlePosition(NewPos : Vector2) -> void:
+
+	if (!$AudioStreamPlayer.playing):
+		$AudioStreamPlayer.play()
+		Input.vibrate_handheld(30)
+	Handle.position = NewPos
 
 func GetThrustPosition() -> Vector2:
 	return Handle.global_position

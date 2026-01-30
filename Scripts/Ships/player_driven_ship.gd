@@ -133,14 +133,14 @@ func GetShipSpeedVec() -> Vector2:
 func SetTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
 		return
-	AccelerationChanged(GetShipMaxSpeed())
+	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.clear()
 	TargetLocations.append(pos)
 
 func AddTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
 		return
-	AccelerationChanged(GetShipMaxSpeed())
+	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.append(pos)
 
 func Steer(Rotation : float) -> void:
@@ -182,7 +182,7 @@ func _physics_process(delta: float) -> void:
 		if (NextLoc.distance_to(global_position) < 5):
 			TargetLocations.remove_at(0)
 			if (TargetLocations.size() == 0):
-				AccelerationChanged(0)
+				HaltShip()
 		
 		var directiontoDestination = (NextLoc - global_position).normalized().angle()
 		if (rotation != directiontoDestination):
@@ -304,8 +304,8 @@ func BodyLeftElint(Body: Area2D) -> void:
 	if (Body.get_parent() is PlayerShip):
 		return
 	super(Body)
-func AccelerationChanged(value: float) -> void:
-	super(value)
+func AccelerationChanged(value: float, forced : bool = false) -> void:
+	super(value, forced)
 	
 	for g in GetDroneDock().GetDockedShips():
 		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )

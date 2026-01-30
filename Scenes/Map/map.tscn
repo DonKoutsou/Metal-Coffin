@@ -136,6 +136,7 @@ stretch = true
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false

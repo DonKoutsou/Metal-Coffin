@@ -59,6 +59,7 @@ static func GetInstance() -> World:
 	return Instance
 
 func _ready() -> void:
+	WORLDST = WORLDSTATE.NORMAL
 	Instance = self
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
@@ -138,7 +139,7 @@ func _ready() -> void:
 				await GetMap().GetScreenUi().FullScreenToggleFinished
 				#await Loadingscr.LoadingDestroyed
 				await Questionair.Ended
-				GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+				GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 				await GetMap().GetScreenUi().FullScreenToggleStarted
 				Questionair.queue_free()
 				PlayPrologue()
@@ -156,7 +157,7 @@ func _ready() -> void:
 	else:
 		WorldView.GetInstance().Load()
 		
-		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		
@@ -315,14 +316,12 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	AveragePos /= Friendlies.size() + Enemies.size()
 	
 	CardF.FightLoc = AveragePos
-	
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	GetMap().GetScreenUi().ToggleScreenUI(false)
 	GetMap().GetScreenUi().ToggleCardFightUI(true)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
-	
-	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 
 func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 	var AllUnits : Array[MapShip]
@@ -355,7 +354,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 
 func CardFightDestroyed() -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	GetMap().GetScreenUi().ToggleScreenUI(true)
 	GetMap().GetScreenUi().ToggleCardFightUI(false)
@@ -522,7 +521,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 
 func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
 
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 	#else:
 		#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted

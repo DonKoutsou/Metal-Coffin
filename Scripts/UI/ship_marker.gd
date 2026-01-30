@@ -59,6 +59,9 @@ func VisualCountountStarted(Value : float) -> void:
 func _draw() -> void:
 	if (TargetLocations.size() == 0):
 		return
+	
+	var f = load("res://Fonts/Bank Gothic Light Regular.otf")
+	
 	var distancetotravel : float = 0.0
 	
 	var fontsize = 20.0 / CurrentZoom
@@ -82,16 +85,16 @@ func _draw() -> void:
 		
 		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
-		var pos = origin + origin.direction_to(topos) * (disttopos / 2)
+		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0))
 		var string = "{0} km".format([roundi(disttopos)])
 		
 		#pos.x -= string.length() / 2 * fontsize
 		
-		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
+		draw_string(f, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
 	
 	var canreach = distancetotravel < Fuel_Range
 	if (!canreach):
-		draw_string(ThemeDB.fallback_font, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach destination", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
+		draw_string(f, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
 	
 	#for g in LinesToDraw:
 		#if (!canreach):
@@ -288,6 +291,7 @@ func SetMarkerDetails(ShipName : String, ShipCasllSign : String, ShipSpeed : flo
 	ShipCallsign.text = ShipCasllSign
 	
 func UpdateCameraZoom(NewZoom : float) -> void:
+	#scale = Vector2(1.0,1.0) / NewZoom
 	DetailPanel.scale = Vector2(1.0,1.0) / NewZoom
 	ShipIcon.scale = (Vector2(0.7,0.7) / NewZoom)
 	#$ShipSymbol.scale = Vector2(1,1) / camera.zoom

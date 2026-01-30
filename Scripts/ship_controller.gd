@@ -72,7 +72,7 @@ func SetInitialShip() -> void:
 	
 	AvailableShips.append(ControlledShip)
 	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
-	
+	ControlledShip.AForced.connect(OnControlledShipSpeedForced)
 	UIEventH.OnShipUpdated(ControlledShip)
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
@@ -87,6 +87,7 @@ func RegisterSelf(D : MapShip) -> void:
 	D.OnShipDestroyed.connect(OnShipDestroyed)
 	D.OnShipDamaged.connect(OnShipDamaged)
 	D.AChanged.connect(OnControlledShipSpeedChanged)
+	D.AForced.connect(OnControlledShipSpeedForced)
 
 func RadarButtonPressed() -> void:
 	var Instigator = ControlledShip
@@ -116,12 +117,15 @@ func OnOpenHatchPressed() -> void:
 #Called from accelerator UI to change acceleration of currently controlled ship
 func SetControlledShipSpeed(value: float) -> void:
 	if (ControlledShip.Docked):
-		ControlledShip.Command.AccelerationChanged(value)
+		ControlledShip.Command.AccelerationChanged(value, false)
 	else:
-		ControlledShip.AccelerationChanged(value)
+		ControlledShip.AccelerationChanged(value, false)
 
 func OnControlledShipSpeedChanged(NewSpeed : float) -> void:
 	UIEventH.OnSpeedSet(NewSpeed / ControlledShip.GetShipMaxSpeed())
+
+func OnControlledShipSpeedForced(NewSpeed : float) -> void:
+	UIEventH.OnSpeedForced(NewSpeed / ControlledShip.GetShipMaxSpeed())
 
 #Called from steering wheel to change tragectory of currently controlled ship
 func SteerChanged(value: float) -> void:

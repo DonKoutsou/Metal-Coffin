@@ -13,10 +13,10 @@ func Steer(Rotation : float) -> void:
 		return
 	super(Rotation)
 
-func AccelerationChanged(value: float) -> void:
+func AccelerationChanged(value: float, forced : bool = false) -> void:
 	if (Docked):
 		return
-	super(value)
+	super(value, forced)
 
 func EnableDrone():
 	#set_physics_process(true)`

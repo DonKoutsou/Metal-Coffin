@@ -156,6 +156,9 @@ func _ready() -> void:
 	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
 
 
+func _exit_tree() -> void:
+	MusicManager.GetInstance().SwitchMusic(false)
+
 var CloudOffset = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
@@ -1082,7 +1085,7 @@ func OnFightEnded(Won : bool) -> void:
 	CardFightDestroyed.emit()
 	#queue_free()
 	
-	MusicManager.GetInstance().SwitchMusic(false)
+	
 #/////////////////////////////////////////////////////////////////////
 #██   ██  █████  ███    ██ ██████  ██      ███████ ██████  ███████ 
 #██   ██ ██   ██ ████   ██ ██   ██ ██      ██      ██   ██ ██      

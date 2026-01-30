@@ -73,7 +73,7 @@ func UpdateZoom(Zoom : Vector2) -> void:
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
 	ZoomChanged.emit(Zoom.x)
 	_UpdateMapGridVisibility()
-	UpdateCameraPos(Vector2.ZERO)
+	UpdateCameraPos(Vector2.ZERO, false)
 	#UpdateCameraPos(Vector2.ZERO)
 
 func ForceZoom(Zoom : Vector2) -> void:
@@ -164,11 +164,12 @@ func _UpdateMapGridVisibility():
 
 			GridShowing = false
 
-func UpdateCameraPos(relativeMovement : Vector2):
+func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true):
 	if (FrameTween != null):
 		FrameTween.kill()
 	
-	FocusedShip = null
+	if (Unfocus):
+		FocusedShip = null
 	
 	var extent = get_viewport_rect().size / 2 / zoom.x
 	

@@ -97,6 +97,7 @@ func ToggleSonar(t : bool) -> void:
 
 
 func OnRadioClicked() -> void:
+	return
 	#if (is_instance_valid(tw)):
 		#tw.kill()
 	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):

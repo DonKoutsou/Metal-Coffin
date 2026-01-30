@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="7_fw736"]
 
 [node name="Control" type="Control" unique_id=1555836270 node_paths=PackedStringArray("LineContainer", "SonalVisual", "GainLabel", "Spkr")]
-texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

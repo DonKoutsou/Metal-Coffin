@@ -47,6 +47,7 @@ signal OnShipDestroyed(Sh : MapShip)
 
 
 signal AChanged(NewAccel : float)
+signal AForced(NewAccel : float)
 var Landing : bool = false
 signal LandingStarted
 signal LandingCanceled(Ship : MapShip)
@@ -187,12 +188,12 @@ func _UpdateShipIcon(Tex : Texture2D) -> void:
 #███████ ██   ██ ██ ██           ██████  ██████  ██   ████    ██    ██   ██  ██████  ███████ ███████ ██ ██   ████  ██████ 
 
 func HaltShip():
-	AccelerationChanged(0)
+	AccelerationChanged(0, true)
 	#AccelerationChanged(0)
 
 var AccelChanged = false
 
-func AccelerationChanged(value: float) -> void:
+func AccelerationChanged(value: float, forced : bool = false) -> void:
 	if (Landing):
 		LandingCanceled.emit(self)
 		Landing = false
@@ -213,12 +214,11 @@ func AccelerationChanged(value: float) -> void:
 	var NewSpeed = max(0,min(value,1) * GetShipMaxSpeed())
 	
 	SetSpeed(NewSpeed)
-	AChanged.emit(NewSpeed)
+	if (forced):
+		AForced.emit(NewSpeed)
+	else:
+		AChanged.emit(NewSpeed)
 	#GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed()) 
-
-
-	
-	
 	
 func Steer(Rotation : float) -> void:
 	rotation += Rotation / 50

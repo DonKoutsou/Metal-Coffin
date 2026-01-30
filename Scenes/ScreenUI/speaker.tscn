@@ -73,10 +73,10 @@ flip_h = true
 
 [node name="Light" parent="." unique_id=1806660906 instance=ExtResource("15_3b7e2")]
 layout_mode = 0
-offset_left = 34.0
-offset_top = 117.0
-offset_right = 54.0
-offset_bottom = 137.0
+offset_left = 49.0
+offset_top = 143.0
+offset_right = 69.0
+offset_bottom = 163.0
 scale = Vector2(0.422, 0.422)
 
 [connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]

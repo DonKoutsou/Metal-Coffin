@@ -92,7 +92,6 @@ volume_db = -12.0
 bus = &"MapSounds"
 
 [node name="NormalScreen" type="Control" parent="." unique_id=2111759005]
-texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -313,8 +312,8 @@ layout_mode = 1
 offset_left = -465.0
 offset_right = -425.0
 
-[node name="Fan" parent="NormalScreen/ScreenUi" unique_id=102008870 instance=ExtResource("33_xl4i0")]
-position = Vector2(982, -105)
+[node name="Fan" parent="NormalScreen" unique_id=102008870 instance=ExtResource("33_xl4i0")]
+position = Vector2(984, -105)
 scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0

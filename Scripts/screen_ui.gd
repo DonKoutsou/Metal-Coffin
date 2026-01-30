@@ -45,6 +45,7 @@ func _ready() -> void:
 	EventHandler.Storm.connect(Storm)
 	MissileUI.MissileLaunched.connect(Cam.EnableMissileShake)
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
+	EventHandler.SpeedForced.connect(ShipSpeedForced)
 	
 	var SimulationMan = SimulationManager.GetInstance()
 	if (SimulationMan != null):
@@ -90,8 +91,10 @@ func Steer_Offseted(Offset: float) -> void:
 
 
 func ShipSpeedSet(NewSpeed : float) -> void:
-	Thrust.ForceValue(NewSpeed)
+	Thrust.UpdateHandle(NewSpeed)
 
+func ShipSpeedForced(NewSpeed : float) -> void:
+	Thrust.ForceValue(NewSpeed)
 
 func ControlledShipSwitched(NewShip : MapShip) -> void:
 	MissileUI.UpdateConnectedShip(NewShip)
