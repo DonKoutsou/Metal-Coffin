@@ -44,7 +44,7 @@ func _DrawBorders(Spots : Array) -> void:
 	}
 	
 	for g in Spots:
-		Regions[g.SpotInfo.Region].append(g)
+		Regions[g.Region].append(g)
 	
 	for Region in Regions.keys():
 		var Line : Array[Vector2]

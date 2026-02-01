@@ -16,13 +16,13 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		if (!Spot.Seen):
 			$AnimationPlayer.play("SpotFound")
 			PlaySound()
-	SpotNameLabel.text = Spot.SpotInfo.SpotName
+	SpotNameLabel.text = Spot.SpotName
 	
 	call_deferred("SetSize", Spot)
 	
-	if (Spot.SpotInfo.PossibleDrops.size() == 0):
+	if (Spot.PossibleDrops.size() == 0):
 		print(Spot.GetSpotName() + " has no drops")
-	for g in Spot.SpotInfo.PossibleDrops:
+	for g in Spot.PossibleDrops:
 		var text = TextureRect.new()
 		text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		text.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -30,14 +30,14 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		text.texture = g.ItemIcon
 		text.modulate.a = 0.3
 		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 0.3
+		$VBoxContainer/TextureRect2.modulate.a = 0.3
 		#if (g is UsableItem):
 			#text.self_modulate = g.ItecColor
 		text.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		text.use_parent_material = true
 		SpotDropPosition.add_child(text)
-	$HBoxContainer.pivot_offset.y = $HBoxContainer.size.y
-	$HBoxContainer.pivot_offset.x = $HBoxContainer.size.x/2
+	$VBoxContainer.pivot_offset.y = $VBoxContainer.size.y
+	$VBoxContainer.pivot_offset.x = $VBoxContainer.size.x/2
 	
 	UpdateFuelAmm(Spot.PlayerFuelReserves)
 	
@@ -46,10 +46,10 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	
 	if (!Spot.Visited):
 		$AnalyzeButton.modulate.a = 0.3
-		$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 0.3
+		$VBoxContainer/TextureRect2.modulate.a = 0.3
 	else:
 		$AnalyzeButton.modulate.a = 1
-		$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 1
+		$VBoxContainer/TextureRect2.modulate.a = 1
 	
 func SetSize(Spot : MapSpot) -> void:
 	var sizething = (Spot.Population / 150000.0) as float
@@ -79,10 +79,10 @@ func OnAlarmRaised(Notify : bool) -> void:
 
 func OnVisited(_Type : MapSpot) -> void:
 	$AnalyzeButton.modulate.a = 1
-	$HBoxContainer/VBoxContainer/TextureRect2.modulate.a = 1
+	$VBoxContainer/TextureRect2.modulate.a = 1
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	$HBoxContainer.scale = Vector2(1,1) / NewZoom
+	$VBoxContainer.scale = Vector2(1,1) / NewZoom
 	$Label.scale = Vector2(1,1) / NewZoom
 	$AnalyzeButton.visible = NewZoom <= 1.5
 

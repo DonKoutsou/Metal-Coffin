@@ -12,6 +12,9 @@ func GetEnumString() -> String:
 func GetSpotEnumString() -> String:
 	return SpotKind.keys()[SpotK]
 
+func GetData() -> MapSpotCustomData:
+	return Data
+
 enum SpotKind{
 CITY_CENTER,
 VILLAGE,

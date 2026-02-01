@@ -26,10 +26,12 @@ class_name ScreenUI
 @export var MeduimScreen : Control
 @export var FullScreenFrame : TextureRect
 @export var ScreenPanel : TextureRect
-@export var CardFightUI : ExternalCardFightUI
-@export var TownUI : TownExternalUI
+@export_file("*.tscn") var CardFightUIScene : String
+@export_file("*.tscn") var TownUIScene : String
 @export var Sonar : AeroSonar
 
+var CardFightUI : ExternalCardFightUI
+var TownUi : TownExternalUI
 
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
@@ -56,12 +58,21 @@ func Storm(value : float) -> void:
 	
 	
 func ToggleCardFightUI(t : bool) -> void:
-	CardFightUI.visible = t
+	if (t):
+		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(CardFightUIScene).Sign
+		CardFightUI = Sc.instantiate()
+		$MediumScreen.add_child(CardFightUI)
+	else:
+		CardFightUI.queue_free()
 
 
 func ToggleTownUI(t : bool) -> void:
-	TownUI.visible = t
-	TownUI.TimesToPlay = 0
+	if (t):
+		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(TownUIScene).Sign
+		TownUi = Sc.instantiate()
+		$MediumScreen.add_child(TownUi)
+	else:
+		TownUi.queue_free()
 
 
 func ToggleScreenUI(t : bool) -> void:

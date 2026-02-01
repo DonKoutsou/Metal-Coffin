@@ -25,15 +25,13 @@ class_name Map
 @export var TownSpotScene : PackedScene
 @export var EnemyScene : PackedScene
 @export var TutorialTrigger : PackedScene
-#@export var Village : PackedScene
-@export var VillageSpotType : MapSpotType
-#@export var City : PackedScene
-@export var CitySpotType : MapSpotType
-#@export var CapitalCity : PackedScene
-@export var CapitalSpotType : MapSpotType
-#@export var FinalCity : PackedScene
-@export var FinalCitySpotType : MapSpotType
-@export var EnemyShipNames : Array[String]
+
+@export_file("*.tres") var VillageType : String
+@export_file("*.tres") var CityType : String
+@export_file("*.tres") var CapitalType : String
+@export_file("*.tres") var FinalCityType : String
+
+@export_file("*.tres") var EnemyShipNameList : String
 #@export var MapGenerationDistanceCurve : Curve
 @export var MapSize : int
 @export var VillageAmm : int
@@ -359,6 +357,15 @@ func GenerateMapThreaded() -> void:
 	
 	var WorldSize : float = 100000
 	
+	var FinalCitySpotType = load(FinalCityType) as MapSpotType
+	var FinalCityData = FinalCitySpotType.GetData()
+	var CapitalSpotType = load(CapitalType) as MapSpotType
+	var CapitalData = CapitalSpotType.GetData()
+	var VillageSpotType = load(VillageType) as MapSpotType
+	var VillageData = VillageSpotType.GetData()
+	var CitySpotType = load(CityType) as MapSpotType
+	var CityData = CitySpotType.GetData()
+	
 	var GeneratedSpots : Array[Town] = []
 	for g in sorted_positions.size() :
 
@@ -371,14 +378,17 @@ func GenerateMapThreaded() -> void:
 		#algorith gives values from 0 towards possetive y, we want the opposite
 		pos.y -= sorted_positions[0].y
 		
+		
 		if (g == sorted_positions.size() - 1):
-			sc.GenerateCity(FinalCitySpotType)
+			sc.GenerateCity(FinalCitySpotType, FinalCityData)
 		else : if (CapitalCitySpots.has(g)):
-			sc.GenerateCity(CapitalSpotType)
+			sc.GenerateCity(CapitalSpotType, CapitalData)
 		else :if (VillageSpots.has(g)):
-			sc.GenerateCity(VillageSpotType)
+			sc.GenerateCity(VillageSpotType, VillageData)
 		else:
-			sc.GenerateCity(CitySpotType)
+			sc.GenerateCity(CitySpotType, CityData)
+			
+		
 		
 		sc.connect("TownSpotAproached", Arrival)
 
@@ -388,7 +398,7 @@ func GenerateMapThreaded() -> void:
 		MapSpots.call_deferred("add_child", sc)
 		
 		GeneratedSpots.append(sc)
-
+	
 	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
 	
 	for g in GeneratedSpots:
@@ -486,7 +496,7 @@ func GenerateEventsThreaded() -> void:
 	for g in SpotGroups:
 		var Spots : Array
 		Spots.append_array(get_tree().get_nodes_in_group(g))
-		Spots.shuffle()		
+		Spots.shuffle()
 		
 		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		
@@ -560,7 +570,8 @@ var EnemySpawnTh : Thread
 func SpawnTownEnemies() -> void:
 	EnSpawner.Init()
 	TempEnemyNames.clear()
-	TempEnemyNames.append_array(EnemyShipNames)
+	var List : StringList = await Helper.GetInstance().LoadThreaded(EnemyShipNameList).Sign
+	TempEnemyNames.append_array(List.Strings)
 	EnemySpawnTh = Thread.new()
 	EnemySpawnTh.start(SpawnTownEnemiesThreaded.bind(SpotList))
 	
@@ -618,7 +629,8 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 			Ship.Command = SpawnedFleet[0]
 			SpawnedFleet[0].GetDroneDock().call_deferred("DockShip", Ship)
 	#print("A fleet consisting of {0} was spawned at the port of {1}. Patrol = {2}".format([var_to_str(SpawnedCallsigns), Spot.GetSpotName(), Patrol]))
-
+	#TempEnemyNames.clear()
+	
 func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 	var SpawnedEnems : Array[HostileShip] = []
 	for g in EnemyData:
@@ -759,11 +771,11 @@ func GeneratePathsFromLines(Lines : Array):
 				for v in Cits:
 					if (v == g):
 						continue
-					if (Neighbors.has(v.SpotInfo.SpotName)):
+					if (Neighbors.has(v.SpotName)):
 						continue
 					var SpotPos2 = v.global_position
 					if (Line.has(SpotPos2)):
-						Neighbors.append(v.SpotInfo.SpotName)
+						Neighbors.append(v.SpotName)
 						break
 		g.SetNeighbord(Neighbors)
 	MAP_NeighborsSet.emit()

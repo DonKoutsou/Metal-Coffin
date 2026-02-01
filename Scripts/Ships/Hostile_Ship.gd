@@ -54,17 +54,22 @@ signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
 signal ShipWrecked
 
+
+#var SavedParent : Node
+
 func ToggleLod(t : bool) -> void:
 	if (Lodded == t):
 		return
-	
 	Lodded = t
 	if (!t):
 		WeatherManage.RegisterShip(self)
+		#get_parent().remove_child(self)
 	else:
 		WeatherManage.UnregisterShip(self)
-
+		#SavedParent.add_child(self)
+	
 func  _ready() -> void:
+	#SavedParent = get_parent()
 	ElintShape.connect("area_entered", BodyEnteredElint)
 	ElintShape.connect("area_exited", BodyLeftElint)
 	RadarShape.connect("area_entered", BodyEnteredRadar)

@@ -237,7 +237,7 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.252517, 0.622353, 0.846633, 1)
+border_color = Color(0.0486369, 0.645335, 0.0400367, 1)
 border_blend = true
 corner_radius_top_left = 1024
 corner_radius_top_right = 1024
@@ -262,8 +262,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_5x46s")
-SpotNameLabel = NodePath("HBoxContainer/VBoxContainer/TextureRect2")
-SpotDropPosition = NodePath("HBoxContainer/VBoxContainer/HBoxContainer")
+SpotNameLabel = NodePath("VBoxContainer/TextureRect2")
+SpotDropPosition = NodePath("VBoxContainer/HBoxContainer")
 NofiticationScene = ExtResource("2_b0564")
 BeepSound = ExtResource("3_625fb")
 
@@ -310,36 +310,22 @@ pivot_offset = Vector2(20, 20)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ey58")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=313281553]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=226659585]
 use_parent_material = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -51.5
+layout_mode = 0
+offset_left = -31.5
 offset_top = -115.0
-offset_right = 51.5
+offset_right = 31.5
 offset_bottom = -82.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_constants/separation = -2
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=226659585]
-use_parent_material = true
-layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1105010127]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1105010127]
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="TextureRect2" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1665220381]
+[node name="TextureRect2" type="Label" parent="VBoxContainer" unique_id=1665220381]
 modulate = Color(1, 1, 1, 0.3)
 use_parent_material = true
 layout_mode = 2

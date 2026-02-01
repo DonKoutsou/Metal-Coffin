@@ -408,7 +408,7 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 		if (Parent.FiredBy is HostileShip):
 			Parent.OnShipSeen(self)
 	else : if (Parent is MapSpot):
-		if (Parent.SpotInfo.EnemyCity):
+		if (Parent.EnemyCity):
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
 				var TutText = "You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."

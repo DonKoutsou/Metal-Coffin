@@ -18,7 +18,7 @@ func _ready() -> void:
 		#rotation = randf_range(0, 360)
 		#GenerateCity()
 	
-func GenerateCity(Type : MapSpotType) -> void:
+func GenerateCity(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> void:
 	var spt = $CitySpot
 	var sc = SpotScene.instantiate() as MapSpot
 	#var spottype = spt.MapSpotTypes.pick_random() as MapSpotType
@@ -29,7 +29,7 @@ func GenerateCity(Type : MapSpotType) -> void:
 	sc.position = pos
 	spt.replace_by(sc)
 	
-	sc.SetSpotData(Type)
+	sc.SetSpotData(Type, Data)
 	
 	SetSize()
 	
@@ -40,7 +40,7 @@ func SetSize() -> void:
 	$Sprite2D2.scale = lerp(Vector2(0.3,0.3), Vector2(1.7,1.7),SizeThing)
 
 func IsEnemy() -> bool:
-	return Spot.SpotInfo.EnemyCity
+	return Spot.EnemyCity
 
 func GetSpot() -> MapSpot:
 	return Spot
@@ -71,7 +71,7 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.connect("SpotAproached", _TownSpotApreached)
 		sc.connect("SpotLanded", _TownSpotLanded)
 		
-		sc.SetSpotData(spotdat.SpotType)
+		sc.SetSpotData(spotdat.SpotType, spotdat.SpotType.GetData())
 		
 		var CSpot = $CitySpot
 		CSpot.replace_by(sc)
@@ -79,6 +79,10 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		sc.position = CSpot.position
 		sc.Population = spotdat.Population
 		sc.SpotInfo = spotdat.SpotInfo
+		sc.SpotName = spotdat.SpotName
+		sc.EnemyCity = spotdat.EnemyCity
+		sc.PossibleDrops = spotdat.PossibleDrops
+		sc.Region = spotdat.Region
 		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
 		sc.AlarmRaised = spotdat.AlarmRaised
 		sc.AlarmProgress = spotdat.AlarmProgress

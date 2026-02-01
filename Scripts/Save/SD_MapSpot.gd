@@ -10,6 +10,10 @@ class_name  MapSpotSaveData
 @export var Analyzed : bool
 @export var Evnt : Happening
 @export var PlayerFuelReserves : float
+@export var SpotName : String
+@export var Region : MapSpotCompleteInfo.REGIONS
+@export var EnemyCity : bool = false
+@export var PossibleDrops : Array[Item]
 #@export var EnemyCity : bool
 #@export var PossibleDrops : Array[Item]
 @export var SpotInfo : MapSpotCompleteInfo

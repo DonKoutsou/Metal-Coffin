@@ -15,3 +15,4 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_08rl4")
+AxisColor = Color(1, 0.7647059, 0.08235294, 1)

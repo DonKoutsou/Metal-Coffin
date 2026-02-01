@@ -13,7 +13,12 @@ signal SpotAlarmRaised(Notify : bool)
 signal FuelReservesChanged(NewAmm : float)
 
 var SpotType : MapSpotType
-var SpotInfo : MapSpotCompleteInfo
+
+var SpotName : String
+var Region : MapSpotCompleteInfo.REGIONS
+#@export var Event : Happening
+var EnemyCity : bool = false
+var PossibleDrops : Array[Item]
 var Merch : Array[Merchandise] = []
 var WorkShopMerch : Array[Merchandise] = []
 var Pos : Vector2
@@ -51,20 +56,6 @@ func ToggleSimulation(t : bool) -> void:
 func SetNeighbord(N : Array) -> void:
 	NeighboringCities = N
 
-func SpawnEnemyPatrol():
-	var host = SpotInfo.HostilePatrolShipScene.instantiate() as HostileShip
-	host.CurrentPort = self
-	host.ShipName = SpotInfo.HostilePatrolShipName
-	get_parent().get_parent().get_parent().get_parent().add_child(host)
-	host.global_position = global_position
-	
-func SpawnEnemyGarison():
-	var host = SpotInfo.HostileShipScene.instantiate() as HostileShip
-	host.CurrentPort = self
-	host.ShipName = SpotInfo.HostileShipName
-	get_parent().get_parent().get_parent().get_parent().add_child(host)
-	host.global_position = global_position
-
 
 #//////////////////////////////////////////////////////////////////
 func GetSaveData() -> Resource:
@@ -75,7 +66,10 @@ func GetSaveData() -> Resource:
 	datas.Seen = Seen
 	datas.Visited = Visited
 	datas.PlayerFuelReserves = PlayerFuelReserves
-	datas.SpotInfo = SpotInfo
+	datas.SpotName =SpotName
+	datas.Region = Region
+	datas.EnemyCity = EnemyCity
+	datas.PossibleDrops = PossibleDrops
 	datas.AlarmRaised = AlarmRaised
 	datas.AlarmProgress = AlarmProgress
 	datas.Merch = Merch
@@ -83,9 +77,8 @@ func GetSaveData() -> Resource:
 	datas.Evnt = Event
 	return datas
 
-func SetSpotData(Type : MapSpotType) -> void:
+func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> void:
 	SpotType = Type
-	var Data = Type.Data as MapSpotCustomData_CompleteInfo
 	
 	if (Type.SpotK == MapSpotType.SpotKind.CITY_CENTER):
 		Population = randi_range(10000, 50000)
@@ -96,20 +89,20 @@ func SetSpotData(Type : MapSpotType) -> void:
 	
 	SetSize()
 	
-	for z in Data.PossibleIds:
+	for z : MapSpotCompleteInfo in Data.PossibleIds:
 		if (z.PickedBy != null):
 			continue
-		SpotInfo = z as MapSpotCompleteInfo
+		
+		SpotName = z.SpotName
+		Region = z.Region
+		EnemyCity = z.EnemyCity
+		PossibleDrops = z.PossibleDrops
 
-		if (SpotInfo.EnemyCity):
+		if (EnemyCity):
 			add_to_group("EnemyDestinations")
 		#IDs.PossibleIds.erase(ID)
-		SpotInfo.PickedBy = self
+		z.PickedBy = self
 		break
-				
-		
-	
-		#OnSpotAnalyzed(false)
 
 	add_to_group(SpotType.GetSpotEnumString())
 
@@ -119,13 +112,13 @@ func SetSize() -> void:
 	collider.radius = lerp(30, 250, sizething) / 2
 
 func GetSpotName() -> String:
-	return SpotInfo.SpotName
+	return SpotName
 func GetPossibleDrops() -> Array:
-	return SpotInfo.PossibleDrops
+	return PossibleDrops
 func HasFuel() -> bool:
 	var hasf = false
 	
-	for g in SpotInfo.PossibleDrops:
+	for g in PossibleDrops:
 		if g is UsableItem and g.StatUseName == STAT_CONST.STATS.FUEL_TANK:
 			hasf = true
 			break
@@ -133,14 +126,14 @@ func HasFuel() -> bool:
 	return hasf
 func HasRepair() -> bool:
 	var hasf = false
-	for g in SpotInfo.PossibleDrops:
+	for g in PossibleDrops:
 		if g is UsableItem and g.StatUseName == STAT_CONST.STATS.HULL:
 			hasf = true
 			break
 	return hasf
 func HasUpgrade() -> bool:
 	var hasu = false
-	for g in SpotInfo.PossibleDrops:
+	for g in PossibleDrops:
 		if g.ItemName == "Material":
 			hasu = true
 			break
@@ -198,7 +191,7 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 	if (!Seen):
 		OnSpotSeen()
 	
-	if (SpotInfo.EnemyCity):
+	if (EnemyCity):
 		if (AlarmRaised):
 			Commander.GetInstance().OnEnemySeen(AproachedBy, null)
 		else:
@@ -210,7 +203,7 @@ func OnSpotDeparture(DepartingShip : MapShip) -> void:
 		return
 	
 	VisitingShips.erase(DepartingShip)
-	if (SpotInfo.EnemyCity):
+	if (EnemyCity):
 		if (AlarmRaised):
 			Commander.GetInstance().OnEnemyVisualLost(DepartingShip)
 		else :if (VisitingShips.size() == 0):

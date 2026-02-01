@@ -14,8 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
 [ext_resource type="Resource" uid="uid://chjcgb4pp86hr" path="res://Resources/Happenings/CardiPrince.tres" id="20_7no5x"]
 [ext_resource type="Resource" uid="uid://b2cbd58y7piwy" path="res://Resources/Happenings/NomadsIntro.tres" id="20_8eeky"]
-[ext_resource type="Resource" uid="uid://q6pvyblp3f1r" path="res://Resources/MapSpots/CitySpots/PrologueSpots/PrologueFinalCity.tres" id="21_0dp8t"]
-[ext_resource type="Resource" uid="uid://d1ccujxqp1ci3" path="res://Resources/MapSpots/CitySpots/PrologueSpots/PrologueVillages.tres" id="21_0i6dt"]
 [ext_resource type="Resource" uid="uid://cpj4icaudta0f" path="res://Resources/Happenings/The Adressing.tres" id="21_ljctt"]
 [ext_resource type="Resource" uid="uid://bwwb3anxj624k" path="res://Resources/Happenings/The evangelist.tres" id="22_8o37l"]
 [ext_resource type="Resource" uid="uid://c5n56ywx45ilm" path="res://Resources/Happenings/The execution.tres" id="23_43ao6"]
@@ -69,8 +67,8 @@ EventsPerSpot = Dictionary[int, Array]({
 metadata/_custom_type_script = "uid://s3ha37qvdear"
 
 [node name="Map" parent="." unique_id=94153298 instance=ExtResource("19_3v2l7")]
-VillageSpotType = ExtResource("21_0i6dt")
-FinalCitySpotType = ExtResource("21_0dp8t")
+VillageType = "uid://d1ccujxqp1ci3"
+FinalCityType = "uid://q6pvyblp3f1r"
 MapSize = 35
 VillageAmm = 3
 SpawningBounds = Vector2(12000, 250000)

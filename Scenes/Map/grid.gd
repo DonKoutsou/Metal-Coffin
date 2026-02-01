@@ -3,9 +3,13 @@ extends Control
 class_name MapGrid
 
 @export var Col : Color
+@export var AxisColor : Color
 @export var ZoomLevel = 1.0
 @export var EventHandler : UIEventHandler
 var Offset : Vector2
+
+var FreeLabels : Array[RichTextLabel]
+var UsedLabels : Array[RichTextLabel]
 
 var M : Mutex
 #func _physics_process(delta: float) -> void:
@@ -15,16 +19,52 @@ func _ready() -> void:
 	M = Mutex.new()
 	EventHandler.GridPressed.connect(ToggleGrid)
 
+func CreateRichText() -> RichTextLabel:
+	var L = RichTextLabel.new()
+	L.fit_content = true
+	L.bbcode_enabled = true
+	L.use_parent_material = true
+	L.autowrap_mode = TextServer.AUTOWRAP_OFF
+	L.modulate = Color(1,1,1, 0.2)
+	L.add_theme_font_override("normal_font", ThemeDB.fallback_font)
+	FreeLabels.append(L)
+	add_child(L)
+	return L
+
+func ResetLabels() -> void:
+	for g in range(UsedLabels.size() - 1, -1, -1):
+		ToggleLabelUsed(UsedLabels[g], false)
+
+func HideUnused() -> void:
+	for g in FreeLabels:
+		g.hide()
+
+func ToggleLabelUsed(L : RichTextLabel, t : bool) -> void:
+	if (t):
+		UsedLabels.append(L)
+		FreeLabels.erase(L)
+	else:
+		FreeLabels.append(L)
+		UsedLabels.erase(L)
+
+func GetFreeLabel() -> RichTextLabel:
+	var L = FreeLabels.pop_back()
+	if (L == null):
+		L = CreateRichText()
+	L.show()
+	return L
+
 func ToggleGrid(t : bool) -> void:
 	visible = t
 
 func UpdateOffset(NewOffset : Vector2) -> void:
 	Offset = NewOffset
-	ReprocessLines()
+	if (visible):
+		ReprocessLines()
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	ZoomLevel = NewZoom
-	ReprocessLines()
+	#ReprocessLines()
 
 
 func ReprocessLines() -> void:
@@ -34,6 +74,7 @@ func ReprocessLines() -> void:
 
 var TLines : Array[Array]
 var TLines2 : Array[Array]
+var TLines3 : Array[Array]
 var TStrings : Dictionary[String, Vector2]
 var TStrings2 : Dictionary[String, Vector2]
 var TStrings3 : Dictionary[String, Vector2]
@@ -41,6 +82,7 @@ var TStrings3 : Dictionary[String, Vector2]
 func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vector2, campos : Vector2, T : Thread) -> void:
 	var Lines : Array[Array]
 	var Lines2 : Array[Array]
+	var Lines3 : Array[Array]
 	var Strings : Dictionary[String, Vector2]
 	var Strings2 : Dictionary[String, Vector2]
 	var Strings3 : Dictionary[String, Vector2]
@@ -68,15 +110,12 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 		if (DrawHundreadLine):
 			Lines.append([Vector2(XPos, 0), Vector2(XPos, ContainerSize.y)])
 			Lines.append([Vector2(0, YPos), Vector2(ContainerSize.x, YPos)])
-			#draw_line(Vector2(XPos, 0), Vector2(XPos, size.y), Color(0,0,0,0.3), max(8, 40 - (ZoomLevel * 80)), true)
-			#draw_line(Vector2(0, YPos), Vector2(size.x, YPos), Color(0,0,0,0.3), max(8, 40 - (ZoomLevel * 80)), true)
-			
-			#var text_pos = Vector2(XPos + 30, YPos - 50)  # Slight offset for visibility relative to the grid square
-			#var globpos = global_position + Vector2(XPos, YPos)
-			#var coordinate_text = "X{0}Y{1}".format([roundi(globpos.x) / 1000, roundi(globpos.y)/ 1000])
-#
-			#draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.1))
-			#stringsdrew += 1
+
+			var text_pos = Vector2(XPos + 30, YPos - 50)  # Slight offset for visibility relative to the grid square
+			var globpos = ContainerPos + Vector2(XPos, YPos)
+			var coordinate_text = "[color=#ffc315]X[/color]{0}[color=#ffc315]Y[/color]{1}".format([roundi(globpos.x/ 100.0) + 50, roundi(globpos.y / 100.0) + 50])
+			Strings[coordinate_text] = text_pos
+
 			
 		for Ten in 10:
 			var XPosT = XPos + (ContainerSize.x / (Siz * 10)) * Ten
@@ -88,47 +127,38 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 			
 			var globalyPos = ContainerPos.y + YPosT
 			var drawy = globalyPos > vpmin.y and globalyPos < vpmax.y
-			#
-			#if (globalyPos < vpmin.y or globalyPos > vpmax.y):
-				#continue
-			#if (!drawx and !drawy):
-				#continue
 			
 			var DrawTenLine = ZoomLevel < 0.8
-			
-			
-			if (DrawTenLine and ZoomLevel > 0.08):
-				for g in range(-10,20):
-					#if (g == 0 and Ten == 0):
-						#continue
-					
-					var ything = YPos + ((ContainerSize.y / (Siz * 10)) * g)
-					var text_pos = Vector2(XPosT + 10, ything - 20)  # Slight offset for visibility relative to the grid square
-					var globpos = ContainerPos + Vector2(XPosT, ything)
-					var coordinate_text = "X{0}Y{1}".format([roundi(globpos.x)/ 1000, roundi(globpos.y) / 1000])
-					
-					var globaltextpos = ContainerPos + text_pos
-					if (globaltextpos.x < vpmin.x or globaltextpos.x > vpmax.x or globaltextpos.y < vpmin.y or globaltextpos.y > vpmax.y):
-						continue
-					
-				# Adjust drawing to consider the color and font setup
-					Strings2[coordinate_text] = text_pos
-					#draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
-					#stringsdrew += 1
-			
-			if (DrawHundreadLine and Ten == 0):
-				DrawTenLine = !DrawHundreadLine
 
 			if (DrawTenLine):
 				if (drawx):
-					Lines.append([Vector2(XPosT, 0), Vector2(XPosT, ContainerSize.y)])
-					#draw_line(Vector2(XPosT, 0), Vector2(XPosT, size.y), Col, max(8, 40 - (ZoomLevel * 80)), true)
-				if (drawy):
-					Lines.append([Vector2(0, YPosT), Vector2(ContainerSize.x, YPosT)])
-					#draw_line(Vector2(0, YPosT), Vector2(size.x, YPosT), Col, max(8, 40 - (ZoomLevel * 80)), true)
+					Lines2.append([Vector2(XPosT, 0), Vector2(XPosT, ContainerSize.y)])
 					
-			if (ZoomLevel < 0.15):
+				if (drawy):
+					Lines2.append([Vector2(0, YPosT), Vector2(ContainerSize.x, YPosT)])
+					
+			if (ZoomLevel < 0.1):
 				continue
+				
+			if (DrawTenLine):
+				for g in range(-10,20):
+					if (DrawHundreadLine and g == 0 and Ten == 0):
+						continue
+					var ything = YPos + ((ContainerSize.y / (Siz * 10.0)) * g)
+					var text_pos = Vector2(XPosT + 10, ything - 20)  # Slight offset for visibility relative to the grid square
+					var globpos = ContainerPos + Vector2(XPosT, ything)
+					var coordinate_text = "[color=#ffc315]X[/color]{0}[color=#ffc315]Y[/color]{1}".format([roundi(globpos.x/ 100.0) + 50, roundi(globpos.y / 100.0) + 50])
+					
+					var globaltextpos = ContainerPos + text_pos
+					
+					var DrawXTex = globaltextpos.x > vpmin.x and globaltextpos.x < vpmax.x 
+					var DrawTTen = globaltextpos.y > vpmin.y and globaltextpos.y < vpmax.y
+					
+					if (!DrawXTex and !DrawTTen):
+						continue
+
+					Strings2[coordinate_text] = text_pos
+					
 			for One in range(0, 10):
 				
 				var XPosO = XPosT + (ContainerSize.x / (Siz * 100)) * One
@@ -150,43 +180,35 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 				
 				if (DrawOneLine):
 					if (drawxO):
-						Lines2.append([Vector2(XPosO, 0), Vector2(XPosO, ContainerSize.y)])
-						#draw_line(Vector2(XPosO, 0), Vector2(XPosO, size.y), Col, max(2, 10 - (ZoomLevel * 20)), true)
+						Lines3.append([Vector2(XPosO, 0), Vector2(XPosO, ContainerSize.y)])
+
 					if (drawyO):
-						Lines2.append([Vector2(0, YPosO), Vector2(ContainerSize.x, YPosO)])
-						#draw_line(Vector2(0, YPosO), Vector2(size.x, YPosO), Col, max(2, 10 - (ZoomLevel * 20)), true)
-				
+						Lines3.append([Vector2(0, YPosO), Vector2(ContainerSize.x, YPosO)])
+
 				if (ZoomLevel < 0.8):
 					continue
 				for g in range(-100,100):
 					if (DrawTenLine and g == 0 and One == 0):
 						continue
 					
-					var ything = YPosT + ((ContainerSize.y / (Siz * 100)) * g)
+					var ything = YPosT + ((ContainerSize.y / (Siz * 100.0)) * g)
 					var text_pos = Vector2(XPosO + 3, ything - 5)  # Slight offset for visibility relative to the grid square
 					var globpos = ContainerPos + Vector2(XPosO, ything)
-					var coordinate_text = "X{0}Y{1}".format([roundi(globpos.x)/ 100, roundi(globpos.y) / 100])
+					var coordinate_text = "[color=#ffc315]X[/color]{0}[color=#ffc315]Y[/color]{1}".format([roundi(globpos.x/ 100.0) + 50, roundi(globpos.y / 100.0) + 50])
 					
 					var globaltextpos = ContainerPos + text_pos
 					if (globaltextpos.x < vpmin.x or globaltextpos.x > vpmax.x or globaltextpos.y < vpmin.y or globaltextpos.y > vpmax.y):
 						continue
-					
-				# Adjust drawing to consider the color and font setup
+
 					Strings3[coordinate_text] = text_pos
-					#draw_string(get_theme_default_font(), text_pos, coordinate_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1, 0.2))
-					#stringsdrew += 1
-	#print("draw {0} strings".format([stringsdrew]))
+
 	M.lock()
-	TLines.clear()
-	TLines.append_array(Lines)
-	TLines2.clear()
-	TLines2.append_array(Lines2)
-	TStrings.clear()
-	TStrings.assign(Strings)
-	TStrings2.clear()
-	TStrings2.assign(Strings2)
-	TStrings3.clear()
-	TStrings3.assign(Strings3)
+	TLines = Lines
+	TLines2 = Lines2
+	TLines3 = Lines3
+	TStrings = Strings
+	TStrings2 = Strings2
+	TStrings3 = Strings3
 	M.unlock()
 	call_deferred("LinesUpdateFinished", T)
 	
@@ -195,13 +217,33 @@ func LinesUpdateFinished(T : Thread) -> void:
 	queue_redraw()
 
 func _draw() -> void:
+	M.lock()
 	for g in TLines:
-		draw_line(g[0], g[1], Col, max(8, 40 - (ZoomLevel * 80)), true)
+		draw_line(g[0], g[1], Col, max(16, 80 - (ZoomLevel * 160)), true)
 	for g in TLines2:
+		draw_line(g[0], g[1], Col, max(8, 40 - (ZoomLevel * 80)), true)
+	for g in TLines3:
 		draw_line(g[0], g[1], Col, max(2, 10 - (ZoomLevel * 20)), true)
+	
+	ResetLabels()
+	
 	for g in TStrings:
-		draw_string(get_theme_default_font(), TStrings[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.2))
+		var L = GetFreeLabel()
+		L.position = TStrings[g] - Vector2(0,300)
+		L.text = "[font_size=300]" + g
+		ToggleLabelUsed(L, true)
+		#draw_string(get_theme_default_font(), TStrings[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.2))
 	for g in TStrings2:
-		draw_string(get_theme_default_font(), TStrings2[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
+		var L = GetFreeLabel()
+		L.position = TStrings2[g] - Vector2(0,100)
+		L.text = "[font_size=100]" + g
+		ToggleLabelUsed(L, true)
+		#draw_string(get_theme_default_font(), TStrings2[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
 	for g in TStrings3:
-		draw_string(get_theme_default_font(), TStrings3[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1, 0.2))
+		var L = GetFreeLabel()
+		L.position = TStrings3[g] - Vector2(0,10)
+		L.text = "[font_size=10]" + g
+		ToggleLabelUsed(L, true)
+		#draw_string(get_theme_default_font(), TStrings3[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1, 0.2))
+	HideUnused()
+	M.unlock()

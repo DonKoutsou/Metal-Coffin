@@ -37,7 +37,7 @@ func _CheckForFinishedLoad(Sign : SignalObject, File : String) -> void:
 	else:
 		CallLater(_CheckForFinishedLoad.bind(Sign, File), 0.1)
 
-func _LoadFinished(Sign : SignalObject, File : PackedScene) -> void:
+func _LoadFinished(Sign : SignalObject, File : Object) -> void:
 	Sign.Sign.emit(File)
 	$CanvasLayer.visible = false
 	set_physics_process(false)

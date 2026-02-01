@@ -30,10 +30,8 @@
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
 [ext_resource type="Texture2D" uid="uid://co2070b5ddh8o" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
-[ext_resource type="PackedScene" uid="uid://bvduhiu1v7ywh" path="res://Scenes/Cards/TownExternalUI.tscn" id="30_myhbu"]
 [ext_resource type="Texture2D" uid="uid://pbq8ib83s6uw" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="31_ua54b"]
-[ext_resource type="PackedScene" uid="uid://cjbda0fdx38c4" path="res://Scenes/Cards/card_fight_ui.tscn" id="31_wetmy"]
 [ext_resource type="Texture2D" uid="uid://b4hidsx46gkgt" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="33_vyv2f"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="33_xl4i0"]
 [ext_resource type="PackedScene" uid="uid://nt73d42f2o1p" path="res://Scenes/ScreenUI/screen_cam.tscn" id="37_6aw6g"]
@@ -45,7 +43,7 @@ texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
-[node name="ScreenUI" type="CanvasLayer" unique_id=1773636653 node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cables", "DoorSound", "NormalScreen", "MeduimScreen", "FullScreenFrame", "ScreenPanel", "CardFightUI", "TownUI", "Sonar")]
+[node name="ScreenUI" type="CanvasLayer" unique_id=1773636653 node_paths=PackedStringArray("_ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "Cam", "LandButton", "HatchButton", "ShipDockButton", "RegroupButton", "SimulationButton", "SpeedSimulationButton", "MapMarkerButton", "Cables", "DoorSound", "NormalScreen", "MeduimScreen", "FullScreenFrame", "ScreenPanel", "Sonar")]
 process_mode = 1
 layer = 2
 follow_viewport_enabled = true
@@ -70,8 +68,8 @@ NormalScreen = NodePath("NormalScreen")
 MeduimScreen = NodePath("MediumScreen")
 FullScreenFrame = NodePath("ScreenFrameLong")
 ScreenPanel = NodePath("Panel")
-CardFightUI = NodePath("MediumScreen/CardFightExternalUI")
-TownUI = NodePath("MediumScreen/TownUI")
+CardFightUIScene = "uid://cjbda0fdx38c4"
+TownUIScene = "uid://bvduhiu1v7ywh"
 Sonar = NodePath("NormalScreen/Sonar")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=51637005]
@@ -609,7 +607,6 @@ grow_horizontal = 0
 grow_vertical = 1
 
 [node name="MediumScreen" type="Control" parent="." unique_id=1961272173]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -619,6 +616,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ScreenFrame" type="TextureRect" parent="MediumScreen" unique_id=1511602994]
+visible = false
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15
@@ -629,56 +627,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("4_j0j1u")
 expand_mode = 1
-
-[node name="CardFightExternalUI" parent="MediumScreen" unique_id=1928367206 instance=ExtResource("31_wetmy")]
-visible = false
-layout_mode = 1
-
-[node name="Pause" type="TextureButton" parent="MediumScreen/CardFightExternalUI" unique_id=1850147505 groups=["Buttons"]]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -106.0
-offset_top = 25.0
-offset_right = -45.0
-offset_bottom = 58.0
-grow_horizontal = 0
-size_flags_horizontal = 0
-size_flags_vertical = 4
-focus_mode = 0
-theme = ExtResource("14_l0ryv")
-texture_normal = ExtResource("6_kbeeh")
-texture_pressed = ExtResource("7_t8pjf")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="MediumScreen/CardFightExternalUI/Pause" unique_id=2070702645]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -25.5
-offset_right = 27.0
-offset_bottom = 26.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.651769, 0.651769, 0.651769, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("28_ng3jm")
-theme_override_font_sizes/font_size = 40
-text = "II"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TownUI" parent="MediumScreen" unique_id=1760107429 instance=ExtResource("30_myhbu")]
-visible = false
-layout_mode = 1
 
 [node name="ScreenFrameLong" type="TextureRect" parent="." unique_id=306644524]
 visible = false
@@ -841,5 +789,3 @@ position = Vector2(640, 360)
 [connection signal="pressed" from="NormalScreen/RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="NormalScreen/LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="NormalScreen/Pause" to="." method="Pause_Pressed"]
-[connection signal="pressed" from="MediumScreen/CardFightExternalUI/Pause" to="." method="Pause_Pressed"]
-[connection signal="pressed" from="MediumScreen/CardFightExternalUI/Pause" to="MediumScreen/CardFightExternalUI" method="PausePressed"]

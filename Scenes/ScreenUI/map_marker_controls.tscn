@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="8_u42xd"]
 [ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="9_sxrep"]
 
-[node name="MapMarkerControls" type="Control" unique_id=329577773 node_paths=PackedStringArray("TouchStopper")]
+[node name="MapMarkerControls" type="Control" unique_id=329577773]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,7 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_67mm3")
-TouchStopper = NodePath("")
 EventHandler = ExtResource("2_djntk")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1256885502]
