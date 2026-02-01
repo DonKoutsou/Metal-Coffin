@@ -248,7 +248,13 @@ func FrameCamToShip(Ship : PlayerDrivenShip, _OverrideTime : float = 1, Unzoom :
 
 
 func ForceCamPosition(Pos : Vector2) -> void:
-	global_position = Pos
+	var extent = get_viewport_rect().size / 2 / zoom.x
+	
+	var maxposY = Vector2(1000 - extent.y, WorldBounds.y - 1000 + extent.y)
+	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x), (WorldBounds.x + 3000) / 2 - extent.x)
+
+	var newpos = Vector2(clamp(Pos.x, maxposX.x, maxposX.y) ,clamp(Pos.y, maxposY.y, maxposY.x) )
+	global_position = newpos
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
 	PositionChanged.emit(position)

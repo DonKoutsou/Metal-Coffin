@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="21_ue6hp"]
 [ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="22_oelfy"]
 [ext_resource type="Texture2D" uid="uid://ebrqin4q01s6" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="22_ua54b"]
-[ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="23_0465a"]
 [ext_resource type="Texture2D" uid="uid://cta21sa447sbq" path="res://Assets/UIPiecies/Screen/ScreenLong3.png" id="27_j0j1u"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="28_ng3jm"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="28_qwofv"]
@@ -314,7 +313,7 @@ grow_horizontal = 1
 grow_vertical = 2
 
 [node name="Fan" parent="NormalScreen" unique_id=102008870 instance=ExtResource("33_xl4i0")]
-position = Vector2(984, -105)
+position = Vector2(1002, -125.00001)
 scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
@@ -553,17 +552,6 @@ texture_pressed = ExtResource("18_qqmpd")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Clock" parent="NormalScreen" unique_id=12926261 instance=ExtResource("23_0465a")]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -228.0
-offset_top = -209.0
-offset_right = -113.0
-offset_bottom = -157.0
-grow_horizontal = 0
-
 [node name="Pause" type="TextureButton" parent="NormalScreen" unique_id=87097972 groups=["Buttons"]]
 process_mode = 3
 layout_mode = 1
@@ -718,10 +706,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 595.0
-offset_top = -237.0
-offset_right = -211.0
-offset_bottom = -463.0
+offset_left = 647.0
+offset_top = -245.0
+offset_right = -159.0
+offset_bottom = -471.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
@@ -756,10 +744,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 143.0
-offset_top = -303.0
-offset_right = -655.0
-offset_bottom = -520.0
+offset_left = 107.0
+offset_top = -312.0
+offset_right = -691.0
+offset_bottom = -529.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(178, 0)

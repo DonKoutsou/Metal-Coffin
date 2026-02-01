@@ -57,7 +57,8 @@ func _ready() -> void:
 	#SimulationSpeed = SimulationManager.SimSpeed()
 	var HourString = CheckNumber(var_to_str(currentHour)) + " : " + CheckNumber(var_to_str(roundi(currentMin)))
 	var DayString = CheckNumber(var_to_str(CurrentDay)) + " / " + CheckNumber(var_to_str(CurrentMonth)) + " / " + var_to_str(CurrentYear)
-	$Label.text = HourString + "\n" + DayString
+	$HBoxContainer/Label.text = HourString
+	$HBoxContainer/Label2.text = DayString
 static func GetInstance() -> Clock:
 	return Instance
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -86,7 +87,8 @@ func _physics_process(delta: float) -> void:
 	#$Label2.text = CheckNumber(var_to_str(CurrentDay)) + " / " + CheckNumber(var_to_str(CurrentMonth)) + " / " + var_to_str(CurrentYear)
 	var HourString = CheckNumber(var_to_str(currentHour)) + " : " + CheckNumber(var_to_str(roundi(currentMin)))
 	var DayString = CheckNumber(var_to_str(CurrentDay)) + " / " + CheckNumber(var_to_str(CurrentMonth)) + " / " + var_to_str(CurrentYear)
-	$Label.text = HourString + "\n" + DayString
+	$HBoxContainer/Label.text = HourString
+	$HBoxContainer/Label2.text = DayString
 
 func CheckNumber(NumString : String) -> String:
 	if (NumString.length() == 1):

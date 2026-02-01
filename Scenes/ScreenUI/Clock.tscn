@@ -1,44 +1,36 @@
 [gd_scene format=3 uid="uid://diq2p5s5u6bc0"]
 
 [ext_resource type="Script" uid="uid://bhjvlymp807sj" path="res://Scripts/UI/clock.gd" id="1_1k7lr"]
-[ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="4_s5u7i"]
 
 [node name="Clock" type="Control" unique_id=104315517 groups=["Clock", "Pausable"]]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.5
-offset_top = -44.0
-offset_right = 45.5
-offset_bottom = 44.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
 grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_1k7lr")
 
-[node name="Label" type="Label" parent="." unique_id=1929676687]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1519941522]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -57.5
-offset_top = -17.0
-offset_right = 57.5
-offset_bottom = 21.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.652075, 0.999652, 0.623239, 1)
-theme_override_colors/font_outline_color = Color(0.0182532, 0.372706, 0.014834, 1)
-theme_override_constants/line_spacing = 5
-theme_override_constants/outline_size = 1
-theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("4_s5u7i")
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1929676687]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 18
-text = "10/4/3874
-21/03/1995"
-horizontal_alignment = 1
+text = "10/4/3874"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=278608333]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "10/4/3874"
+horizontal_alignment = 2
 vertical_alignment = 1
