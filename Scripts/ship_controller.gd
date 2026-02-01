@@ -38,11 +38,12 @@ func _ready() -> void:
 	set_physics_process(false)
 	
 func _physics_process(delta: float) -> void:
+	if (ControlledShip.StormValue >= 0.9):
+		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
 	if (SimulationManager.IsPaused()):
 		return
 	ControlledShipPosition = ControlledShip.global_position
-	if (ControlledShip.StormValue >= 0.9):
-		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
+	
 
 func SetCamera() -> void:
 	ship_camera = Map.GetInstance().GetCamera()

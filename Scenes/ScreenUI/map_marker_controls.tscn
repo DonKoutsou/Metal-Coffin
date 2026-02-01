@@ -11,113 +11,43 @@
 [ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="8_u42xd"]
 [ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="9_sxrep"]
 
-[sub_resource type="Animation" id="Animation_67mm3"]
-resource_name = "Hide"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 163)]
-}
-
-[sub_resource type="Animation" id="Animation_djntk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 163)]
-}
-
-[sub_resource type="Animation" id="Animation_gq5gp"]
-resource_name = "Show"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 163), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_djntk"]
-_data = {
-&"Hide": SubResource("Animation_67mm3"),
-&"RESET": SubResource("Animation_djntk"),
-&"Show": SubResource("Animation_gq5gp")
-}
-
 [node name="MapMarkerControls" type="Control" unique_id=329577773 node_paths=PackedStringArray("TouchStopper")]
 layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -441.0
-offset_top = -74.0
-offset_right = -401.0
-offset_bottom = -34.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_67mm3")
-TouchStopper = NodePath("Control/Control")
+TouchStopper = NodePath("")
 EventHandler = ExtResource("2_djntk")
 
-[node name="Control" type="Control" parent="." unique_id=726361025]
-anchors_preset = 0
-offset_top = 163.0
-offset_right = 40.0
-offset_bottom = 203.0
-
-[node name="TextureRect2" type="TextureRect" parent="Control" unique_id=1256885502]
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1256885502]
 layout_mode = 0
 offset_left = -289.0
 offset_top = -90.0
 offset_right = 182.0
 offset_bottom = 74.0
-mouse_filter = 0
 texture = ExtResource("1_sg83c")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Control/TextureRect2" unique_id=490127833]
-modulate = Color(0, 0, 0, 0.518)
-show_behind_parent = true
-layout_mode = 0
-offset_left = -11.0
-offset_top = -10.0
-offset_right = 460.0
-offset_bottom = 154.0
-mouse_filter = 2
-texture = ExtResource("1_sg83c")
-expand_mode = 1
-
-[node name="YGas" parent="Control" unique_id=1853660991 instance=ExtResource("2_67mm3")]
-position = Vector2(-118, 34)
+[node name="YGas" parent="." unique_id=1853660991 instance=ExtResource("2_67mm3")]
+position = Vector2(-58, -8)
+rotation = -1.5707964
 scale = Vector2(0.520363, 0.520363)
 
-[node name="XGas" parent="Control" unique_id=1191937950 instance=ExtResource("2_67mm3")]
+[node name="XGas" parent="." unique_id=1191937950 instance=ExtResource("2_67mm3")]
 position = Vector2(72, -55)
 scale = Vector2(0.787035, 0.787035)
 
-[node name="ExitMapMarker" type="TextureButton" parent="Control" unique_id=1340846565 groups=["Buttons"]]
+[node name="ExitMapMarker" type="TextureButton" parent="." unique_id=1340846565 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -135,7 +65,7 @@ texture_pressed = ExtResource("4_gq5gp")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ClearLines" type="TextureButton" parent="Control" unique_id=1330142097 groups=["Buttons"]]
+[node name="ClearLines" type="TextureButton" parent="." unique_id=1330142097 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -153,7 +83,7 @@ texture_pressed = ExtResource("7_g7jsi")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DrawLine" type="TextureButton" parent="Control" unique_id=1079720396 groups=["Buttons"]]
+[node name="DrawLine" type="TextureButton" parent="." unique_id=1079720396 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -171,7 +101,7 @@ texture_pressed = ExtResource("9_sxrep")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DrawText" type="TextureButton" parent="Control" unique_id=785232804 groups=["Buttons"]]
+[node name="DrawText" type="TextureButton" parent="." unique_id=785232804 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -189,27 +119,9 @@ texture_pressed = ExtResource("9_sxrep")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Control" type="Control" parent="Control" unique_id=1989557570]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -214.0
-offset_top = -105.0
-offset_right = 160.0
-offset_bottom = 51.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1125316786]
-libraries/ = SubResource("AnimationLibrary_djntk")
-
-[connection signal="RangeChanged" from="Control/YGas" to="." method="_on_y_gas_range_changed"]
-[connection signal="RangeChanged" from="Control/XGas" to="." method="_on_x_gas_range_changed"]
-[connection signal="pressed" from="Control/ExitMapMarker" to="." method="_on_exit_map_marker_pressed"]
-[connection signal="pressed" from="Control/ClearLines" to="." method="_on_clear_lines_pressed"]
-[connection signal="pressed" from="Control/DrawLine" to="." method="_on_draw_line_pressed"]
-[connection signal="pressed" from="Control/DrawText" to="." method="_on_draw_text_pressed"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="RangeChanged" from="YGas" to="." method="_on_y_gas_range_changed"]
+[connection signal="RangeChanged" from="XGas" to="." method="_on_x_gas_range_changed"]
+[connection signal="pressed" from="ExitMapMarker" to="." method="_on_exit_map_marker_pressed"]
+[connection signal="pressed" from="ClearLines" to="." method="_on_clear_lines_pressed"]
+[connection signal="pressed" from="DrawLine" to="." method="_on_draw_line_pressed"]
+[connection signal="pressed" from="DrawText" to="." method="_on_draw_text_pressed"]

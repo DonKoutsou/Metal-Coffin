@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scripts/UI/setting_panel.gd" id="2_clx0a"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="3_os1sx"]
 
-[node name="SettingPanel" type="PanelContainer" unique_id=1258850840 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton")]
+[node name="SettingPanel" type="PanelContainer" unique_id=1258850840 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton", "ShakeEffectButton")]
 use_parent_material = true
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_go7bp")
@@ -14,6 +14,7 @@ GlitchButton = NodePath("VBoxContainer/HBoxContainer3/GlitchesCheckBox")
 FullScreenButton = NodePath("VBoxContainer/HBoxContainer/FullScreenCheckBox")
 SoundButton = NodePath("VBoxContainer/HBoxContainer2/SoundCheckBox")
 MusicButton = NodePath("VBoxContainer/HBoxContainer4/MusicCheckBox")
+ShakeEffectButton = NodePath("VBoxContainer/HBoxContainer5/ShakeCheckBox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=475330512]
 use_parent_material = true
@@ -80,7 +81,23 @@ use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
 
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer" unique_id=753203121]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer5" unique_id=1695300166]
+use_parent_material = true
+layout_mode = 2
+text = "Shake Effects"
+
+[node name="ShakeCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer5" unique_id=1086984495 groups=["DigitalButtons"]]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 10
+
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer2/SoundCheckBox" to="." method="_on_sound_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer4/MusicCheckBox" to="." method="_on_music_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer3/GlitchesCheckBox" to="." method="_on_glitches_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer5/ShakeCheckBox" to="." method="_on_shake_check_box_toggled"]

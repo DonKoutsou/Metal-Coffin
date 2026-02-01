@@ -8,6 +8,7 @@ class_name SettingsPanel
 @export var FullScreenButton : Control
 @export var SoundButton : Control
 @export var MusicButton : Control
+@export var ShakeEffectButton : Control
 
 static var HasGlitch = true
 
@@ -16,7 +17,8 @@ func _ready() -> void:
 	FullScreenButton.set_pressed_no_signal(DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 	SoundButton.set_pressed_no_signal(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds")) == 0)
 	MusicButton.set_pressed_no_signal(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")) == 0)
-
+	ShakeEffectButton.set_pressed_no_signal(ScreenCamera.ShakeEffects)
+	
 func _on_full_screen_check_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
@@ -53,3 +55,7 @@ func ToggleScreenGlitches(t : bool) -> void:
 		
 	mat.set_shader_parameter("image_flicker", ImageFlicker)
 	mat.set_shader_parameter("skip", Skip)
+
+
+func _on_shake_check_box_toggled(toggled_on: bool) -> void:
+	ScreenCamera.ShakeEffects = toggled_on

@@ -9,6 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="6_mi4l8"]
 [ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="7_fw736"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mi4l8"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4wgxe"]
+light_mode = 1
+
 [node name="Control" type="Control" unique_id=1555836270 node_paths=PackedStringArray("LineContainer", "SonalVisual", "GainLabel", "Spkr")]
 layout_mode = 3
 anchors_preset = 0
@@ -33,6 +39,7 @@ texture = ExtResource("3_mi4l8")
 expand_mode = 1
 
 [node name="Control" type="Control" parent="TextureRect2" unique_id=1384447880]
+material = SubResource("CanvasItemMaterial_mi4l8")
 anchors_preset = 0
 offset_left = 142.0
 offset_top = 12.0006
@@ -68,6 +75,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="TextureRect2" unique_id=733326543]
+material = SubResource("CanvasItemMaterial_4wgxe")
 layout_mode = 0
 offset_left = 132.0
 offset_top = 86.0

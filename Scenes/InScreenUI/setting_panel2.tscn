@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bi5udi6g78ajr" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="4_b4sbe"]
 [ext_resource type="Texture2D" uid="uid://bvk1d6i2dr1sf" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_a6mwh"]
 
-[node name="SettingPanel" type="PanelContainer" unique_id=392127877 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton")]
+[node name="SettingPanel" type="PanelContainer" unique_id=392127877 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton", "ShakeEffectButton")]
 self_modulate = Color(1, 1, 1, 0)
 use_parent_material = true
 size_flags_vertical = 4
@@ -17,6 +17,7 @@ GlitchButton = NodePath("Control/GlitchesCheckBox")
 FullScreenButton = NodePath("Control/FullScreenCheckBox")
 SoundButton = NodePath("Control/SoundCheckBox")
 MusicButton = NodePath("Control/SoundCheckBox2")
+ShakeEffectButton = NodePath("Control/ShakeEffectsBox")
 
 [node name="Control" type="Control" parent="." unique_id=1770304556]
 layout_mode = 2
@@ -73,7 +74,22 @@ texture_pressed = ExtResource("4_b4sbe")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="ShakeEffectsBox" type="TextureButton" parent="Control" unique_id=1138728248 groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 0
+offset_left = 67.0
+offset_top = 110.0
+offset_right = 84.0
+offset_bottom = 149.0
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("5_a6mwh")
+texture_pressed = ExtResource("4_b4sbe")
+ignore_texture_size = true
+stretch_mode = 0
+
 [connection signal="toggled" from="Control/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
 [connection signal="toggled" from="Control/SoundCheckBox" to="." method="_on_sound_check_box_toggled"]
 [connection signal="toggled" from="Control/SoundCheckBox2" to="." method="_on_music_check_box_toggled"]
 [connection signal="toggled" from="Control/GlitchesCheckBox" to="." method="_on_glitches_check_box_toggled"]
+[connection signal="toggled" from="Control/ShakeEffectsBox" to="." method="_on_glitches_check_box_toggled"]

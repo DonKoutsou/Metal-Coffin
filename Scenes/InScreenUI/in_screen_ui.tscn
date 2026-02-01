@@ -88,8 +88,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
 [node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
 
 [node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
-offset_top = -144.0
-offset_bottom = -144.0
 
 [node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
 offset_bottom = 80.0

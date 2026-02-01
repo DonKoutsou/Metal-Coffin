@@ -60,7 +60,7 @@ func _draw() -> void:
 	if (TargetLocations.size() == 0):
 		return
 	
-	var f = load("res://Fonts/Bank Gothic Light Regular.otf")
+	#var f = load("res://Fonts/Bank Gothic Light Regular.otf")
 	
 	var distancetotravel : float = 0.0
 	
@@ -90,11 +90,11 @@ func _draw() -> void:
 		
 		#pos.x -= string.length() / 2 * fontsize
 		
-		draw_string(f, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
+		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
 	
 	var canreach = distancetotravel < Fuel_Range
 	if (!canreach):
-		draw_string(f, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
+		draw_string(ThemeDB.fallback_font, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
 	
 	#for g in LinesToDraw:
 		#if (!canreach):

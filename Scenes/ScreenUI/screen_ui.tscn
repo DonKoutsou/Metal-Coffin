@@ -52,7 +52,7 @@ layer = 2
 follow_viewport_enabled = true
 script = ExtResource("2_spr1r")
 _ScreenItems = NodePath("NormalScreen/ScreenUi")
-MarkerEditorControls = NodePath("NormalScreen/ScreenUi/MapMarkerControls")
+MarkerEditorControls = NodePath("NormalScreen/MapMarkerControls")
 Thrust = NodePath("NormalScreen/ThrustSlider")
 Steer = NodePath("NormalScreen/SteeringWheel")
 MissileUI = NodePath("NormalScreen/ScreenUi/Missile Tab")
@@ -121,18 +121,18 @@ offset_bottom = -46.0
 
 [node name="PanelContainer" type="PanelContainer" parent="NormalScreen" unique_id=610920880]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -193.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
 offset_right = 274.0
-offset_bottom = -49.0
-grow_vertical = 2
+grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_xl4i0")
 
 [node name="HBoxContainer" type="GridContainer" parent="NormalScreen/PanelContainer" unique_id=1483961050]
 layout_mode = 2
+size_flags_horizontal = 8
 mouse_filter = 2
 columns = 3
 
@@ -156,56 +156,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 focus_mode = 0
 toggle_mode = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1014707617]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label2" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=878529539]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Grid"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1168177073 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("14_ruc6v")
-texture_pressed = ExtResource("13_myhbu")
-stretch_mode = 5
-
-[node name="VBoxContainer4" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=246380873]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_constants/separation = -25
-
-[node name="Label4" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=5484486]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Zoom"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ZoomLevelButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1423962257 groups=["Buttons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
 texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
@@ -235,7 +185,60 @@ texture_normal = ExtResource("14_ruc6v")
 texture_pressed = ExtResource("13_myhbu")
 stretch_mode = 5
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1014707617]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label2" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=878529539]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Grid"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1168177073 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=246380873]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -25
+
+[node name="Label4" type="Label" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=5484486]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zoom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZoomLevelButton" type="TextureButton" parent="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1423962257 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("14_ruc6v")
+texture_pressed = ExtResource("13_myhbu")
+stretch_mode = 5
+
 [node name="VBoxContainer5" type="VBoxContainer" parent="NormalScreen/PanelContainer/HBoxContainer" unique_id=1284078477]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -298,25 +301,34 @@ mouse_filter = 2
 
 [node name="Missile Tab" parent="NormalScreen/ScreenUi" unique_id=1950136315 instance=ExtResource("13_4xtjg")]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -533.0
-offset_top = -41.0
-offset_right = -493.0
-offset_bottom = -1.0
-grow_horizontal = 0
-
-[node name="MapMarkerControls" parent="NormalScreen/ScreenUi" unique_id=1309500929 instance=ExtResource("14_ua54b")]
-layout_mode = 1
-offset_left = -465.0
-offset_right = -425.0
+anchors_preset = 4
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 118.0
+offset_top = -230.0
+offset_right = 158.0
+offset_bottom = -190.0
+grow_horizontal = 1
+grow_vertical = 2
 
 [node name="Fan" parent="NormalScreen" unique_id=102008870 instance=ExtResource("33_xl4i0")]
 position = Vector2(984, -105)
 scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
+
+[node name="MapMarkerControls" parent="NormalScreen" unique_id=1309500929 instance=ExtResource("14_ua54b")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 91.0
+offset_top = 78.0
+offset_right = 131.0
+offset_bottom = 118.0
+grow_horizontal = 1
 
 [node name="SteeringWheel" parent="NormalScreen" unique_id=183033337 instance=ExtResource("11_s7gev")]
 layout_mode = 1
@@ -329,6 +341,7 @@ offset_left = 2.0
 offset_right = 2.0
 grow_horizontal = 1
 grow_vertical = 0
+scale = Vector2(0.8, 0.8)
 PositionOnStart = false
 
 [node name="Sonar" parent="NormalScreen" unique_id=83353684 instance=ExtResource("13_ruc6v")]
@@ -822,9 +835,9 @@ position = Vector2(640, 360)
 [connection signal="AccelerationChangeEnded" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="NormalScreen/ThrustSlider" to="." method="Acceleration_Changed"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
+[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="." method="_on_grid_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer4/ZoomLevelButton" to="." method="_on_zoom_level_button_toggled"]
-[connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer5/TeamButton" to="." method="_on_team_button_toggled"]
 [connection signal="toggled" from="NormalScreen/PanelContainer/HBoxContainer/VBoxContainer6/SonarButton" to="." method="_on_sonar_button_toggled"]
 [connection signal="SteeringDitChanged" from="NormalScreen/SteeringWheel" to="." method="Steering_Direction_Changed"]

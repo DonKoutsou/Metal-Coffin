@@ -21,6 +21,7 @@ var Shake = false
 var GoingDown = false
 var shakestr = 1.5
 
+static var ShakeEffects : bool = true
 
 func _ready() -> void:
 	ShakeSound.play()
@@ -40,6 +41,8 @@ func PauseShake(t : bool) -> void:
 
 
 func EnableShake(amm : float):
+	if (!ShakeEffects):
+		return
 	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(amm)
 	LightPivot1.ApplyShake(amm)
@@ -51,9 +54,11 @@ func EnableShake(amm : float):
 
 
 func EnableStormShake(amm : float) -> void:
+	if (!ShakeEffects):
+		return
 	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(amm)
-		
+#	Anim.play("Damage")
 	LightPivot1.ApplyShake(amm)
 	Shake = true
 	
@@ -66,6 +71,8 @@ func EnableStormShake(amm : float) -> void:
 
 
 func EnableMissileShake() -> void:
+	if (!ShakeEffects):
+		return
 	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(2)
 	LightPivot1.ApplyShake(1)
@@ -82,6 +89,8 @@ func EnableMissileShake() -> void:
 	
 	
 func EnableDamageShake(amm : float) -> void:
+	if (!ShakeEffects):
+		return
 	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(min(2, amm))
 	LightPivot1.ApplyShake(min(2, amm))
@@ -96,6 +105,8 @@ func EnableDamageShake(amm : float) -> void:
 
 
 func EnableFullScreenShake() -> void:
+	if (!ShakeEffects):
+		return
 	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(2)
 	LightPivot1.ApplyShake(1)

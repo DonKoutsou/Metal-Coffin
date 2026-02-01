@@ -57,6 +57,7 @@ autowrap_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=659059376]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 script = ExtResource("4_lm06n")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
