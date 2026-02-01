@@ -357,13 +357,13 @@ func GenerateMapThreaded() -> void:
 	
 	var WorldSize : float = 100000
 	
-	var FinalCitySpotType = load(FinalCityType) as MapSpotType
+	var FinalCitySpotType = ResourceLoader.load(FinalCityType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
 	var FinalCityData = FinalCitySpotType.GetData()
-	var CapitalSpotType = load(CapitalType) as MapSpotType
+	var CapitalSpotType = ResourceLoader.load(CapitalType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
 	var CapitalData = CapitalSpotType.GetData()
-	var VillageSpotType = load(VillageType) as MapSpotType
+	var VillageSpotType = ResourceLoader.load(VillageType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
 	var VillageData = VillageSpotType.GetData()
-	var CitySpotType = load(CityType) as MapSpotType
+	var CitySpotType = ResourceLoader.load(CityType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
 	var CityData = CitySpotType.GetData()
 	
 	var GeneratedSpots : Array[Town] = []
