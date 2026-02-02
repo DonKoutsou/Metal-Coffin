@@ -390,7 +390,7 @@ func IntersectPusruing() -> Vector2:
 	var OffsetToPositionInFuture = (PositionInFuture - pursuing_ship_position) / 10
 	
 	var BestInterceptionPoint : Vector2
-	var TimeToPoint : float = 99999999999
+	#var TimeToPoint : float = 99999999999
 	var TimeOffset : float = 99999999
 
 	for g in range(10, 1, -1):
@@ -403,7 +403,7 @@ func IntersectPusruing() -> Vector2:
 			continue
 
 		BestInterceptionPoint = pos
-		TimeToPoint = TimeToPos
+		#TimeToPoint = TimeToPos
 		TimeOffset = abs(TimeToPos - PreyTime)
 
 	return BestInterceptionPoint

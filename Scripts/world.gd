@@ -308,7 +308,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
 	
-	var AveragePos : Vector2
+	var AveragePos : Vector2 = Vector2.ZERO
 	for g in Enemies:
 		AveragePos += g.global_position
 	for g in Friendlies:
@@ -439,7 +439,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 		
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
 	GetMap().GetScreenUi().ToggleTownUI(true)
-	GetMap().GetScreenUi().TownVisited(true)
+	#GetMap().GetScreenUi().TownVisited(true)
 	await GetMap().GetScreenUi().FullScreenToggleFinished
 
 		
@@ -476,7 +476,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
-	GetMap().GetScreenUi().TownVisited(false)
+	#GetMap().GetScreenUi().TownVisited(false)
 	GetMap().GetScreenUi().ToggleTownUI(false)
 	await GetMap().GetScreenUi().FullScreenToggleFinished
 	#Play events saved from happening

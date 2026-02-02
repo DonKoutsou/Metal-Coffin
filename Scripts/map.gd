@@ -104,7 +104,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	SimulationTrigger.TutorialToShow = ActionTracker.Action.SIMULATION
 	SimulationTrigger.TutorialTitle = "Simulation Management"
 	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
-	SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
+	#TODO fix this
+	#SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
 	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(SimulationTrigger)
 	var triggerpos = pos
 	triggerpos.y -= 100
@@ -115,7 +116,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	MapMarkerTrigger.TutorialToShow = ActionTracker.Action.MAP_MARKER
 	MapMarkerTrigger.TutorialTitle = "Map Markers"
 	MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
-	MapMarkerTrigger.TutorialElement.append(GetScreenUi().MapMarkerButton)
+	#TODO fix this
+	#MapMarkerTrigger.TutorialElement.append(GetScreenUi().MapMarkerButton)
 	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(MapMarkerTrigger)
 	var MapMarkerTriggerpos = pos
 	MapMarkerTriggerpos.y -= 750
@@ -594,7 +596,7 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 		#print("Spawning fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 	
 	#spawn convoy
-	for g in Towns.size() / 3:
+	for g in Towns.size() / 3.0:
 		var T = Towns[g * 3]
 		var Spot = T.GetSpot()
 		if (T.IsEnemy()):

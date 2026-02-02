@@ -21,6 +21,7 @@ var Vol : float
 func _ready() -> void:
 	#connect to be notified that the controlled ship has changed
 	ControllerEventH.OnControlledShipChanged.connect(ControlledShipUpdated)
+	Controller = ControllerEventH.CurrentControlled
 	#connect to the found signal. when a signal is visible in the sonar we call a function
 	LineContainer.Found.connect(SignalFound)
 	#turn everything off

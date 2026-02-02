@@ -10,7 +10,7 @@ var CurrentAmm :int = 0
 var tw : Tween
 func _ready() -> void:
 	Text.text = "{0} {1}".format([roundi(PlayerWallet.Funds), FundsThing])
-	CurrentAmm = PlayerWallet.Funds
+	CurrentAmm = roundi(PlayerWallet.Funds)
 	UpDateFunds(CurrentAmm)
 	PlayerWallet.connect("OnFundsUpdated", UpDateFunds)
 

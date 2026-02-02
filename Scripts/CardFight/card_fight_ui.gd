@@ -4,6 +4,7 @@ class_name ExternalCardFightUI
 
 @export var PlayerCardPlecement : Control
 
+@export var EventH : UIEventHandler
 @export var EnergyBar : SegmentedBar
 @export var ReservesBar : SegmentedBar
 @export var PlayCardInsert : Control
@@ -291,3 +292,7 @@ enum CardSoundType{
 	BEEPNO,
 	BEEPLONG,
 }
+
+
+func _on_pause_pressed() -> void:
+	EventH.OnPausePressed()

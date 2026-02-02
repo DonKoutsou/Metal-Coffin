@@ -130,10 +130,10 @@ func calculate_convex_hulls(Lines : Dictionary[MapSpotCompleteInfo.REGIONS, Arra
 	}
 	
 	for g in hulls.keys().size():
-		var CurrentKey = hulls.keys()[g]
-		var NextKey = hulls.keys()[g]
+		#var CurrentKey = hulls.keys()[g]
+		#var NextKey = hulls.keys()[g]
 		
-		var CurrentFinalHull : Array
+		#var CurrentFinalHull : Array
 		
 		#if (hulls.keys().size() < g + 1):
 			#break
@@ -300,7 +300,7 @@ func create_convex_hull(points: Array) -> Dictionary:
 	TopPoints.sort_custom(sort_ascending)
 	BottomPOints.sort_custom(sort_descending)
 	
-	var midpoint = TopPoints[0].y + abs(TopPoints[0].y - BottomPOints[0].y)
+	#var midpoint = TopPoints[0].y + abs(TopPoints[0].y - BottomPOints[0].y)
 	
 	TopPoints.insert(0, Vector2(-8000, TopPoints[0].y))
 	#TopPoints.insert(0, Vector2(-9000, midpoint))

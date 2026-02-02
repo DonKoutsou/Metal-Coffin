@@ -1,220 +1,71 @@
 extends CanvasLayer
 
 class_name ScreenUI
-
-@export var _ScreenItems : Control
-@export var MarkerEditorControls : MapMarkerControls
-@export var Thrust : ThrustSlider
-@export var Steer : SteeringWheelUI
-@export var MissileUI : MissileTab
-@export var EventHandler : UIEventHandler
 @export var Cam : ScreenCamera
-
-@export_group("Buttons")
-@export var LandButton : TextureButton
-@export var HatchButton : TextureButton
-@export var ShipDockButton : TextureButton
-@export var RegroupButton : TextureButton
-@export var SimulationButton : TextureButton
-@export var SpeedSimulationButton : TextureButton
-@export var MapMarkerButton : TextureButton
 
 @export_group("Screen")
 @export var Cables : Control
 @export var DoorSound : AudioStreamPlayer
-@export var NormalScreen : Control
-@export var MeduimScreen : Control
-@export var FullScreenFrame : TextureRect
 @export var ScreenPanel : TextureRect
 @export_file("*.tscn") var CardFightUIScene : String
 @export_file("*.tscn") var TownUIScene : String
-@export var Sonar : AeroSonar
+@export_file("*.tscn") var PilotScreenScene : String
+@export_file("*.tscn") var FullScreenScene : String
 
 var CardFightUI : ExternalCardFightUI
 var TownUi : TownExternalUI
+var PilotScreen : PilotScreenUI
+var FullScreen : Control
+
+var CurrentScreenState : ScreenState
 
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
 
 
 func _ready() -> void:
-	NormalScreen.visible = false
-	FullScreenFrame.visible = false
 	ScreenPanel.visible = false
-	EventHandler.ScreenUIToggled.connect(ToggleScreenUI)
-	EventHandler.ShipUpdated.connect(ControlledShipSwitched)
-	EventHandler.ShipDamaged.connect(OnControlledShipDamaged)
-	EventHandler.Storm.connect(Storm)
-	MissileUI.MissileLaunched.connect(Cam.EnableMissileShake)
-	EventHandler.SpeedSet.connect(ShipSpeedSet)
-	EventHandler.SpeedForced.connect(ShipSpeedForced)
-	
-	var SimulationMan = SimulationManager.GetInstance()
-	if (SimulationMan != null):
-		SimulationMan.SpeedChanged.connect(SpeedUpdated)
-
-func Storm(value : float) -> void:
-	Cam.EnableStormShake(value)
-	
 	
 func ToggleCardFightUI(t : bool) -> void:
 	if (t):
 		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(CardFightUIScene).Sign
 		CardFightUI = Sc.instantiate()
-		$MediumScreen.add_child(CardFightUI)
+		add_child(CardFightUI)
+		move_child(CardFightUI,0)
 	else:
 		CardFightUI.queue_free()
-
 
 func ToggleTownUI(t : bool) -> void:
 	if (t):
 		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(TownUIScene).Sign
 		TownUi = Sc.instantiate()
-		$MediumScreen.add_child(TownUi)
+		add_child(TownUi)
+		move_child(TownUi,0)
 	else:
 		TownUi.queue_free()
 
-
-func ToggleScreenUI(t : bool) -> void:
-	_ScreenItems.visible = t
-	
-
-func Acceleration_Ended(value_changed: float) -> void:
-	EventHandler.OnAccelerationEnded(value_changed)
-	Cam.DissableShake()
-	
-	
-func Acceleration_Changed(value: float) -> void:
-	EventHandler.OnAccelerationChanged(value)
-	Cam.EnableShake(value * 1.5)
-	
-
-func Steering_Direction_Changed(NewValue: float) -> void:
-	EventHandler.OnSteeringDirectionChanged(NewValue)
-	Cam.EnableShake(0.5)
-	Cam.DissableShake()
-
-
-func Steer_Offseted(Offset: float) -> void:
-	EventHandler.OnSteerOffseted(Offset)
-	Cam.EnableShake(0.5)
-	Cam.DissableShake()
-
-
-func ShipSpeedSet(NewSpeed : float) -> void:
-	Thrust.UpdateHandle(NewSpeed)
-
-func ShipSpeedForced(NewSpeed : float) -> void:
-	Thrust.ForceValue(NewSpeed)
-
-func ControlledShipSwitched(NewShip : MapShip) -> void:
-	MissileUI.UpdateConnectedShip(NewShip)
-	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
-	Steer.ForceSteer(NewShip.rotation)
-
-
-########## BUTTON PRESS EVENTS ###########
-func Marker_Editor_Button_Pressed() -> void:
-	MissileUI.TurnOff()
-	MarkerEditorControls.Toggle()
-	EventHandler.OnMarkerEditorToggled(MarkerEditorControls.Showing)
-
-
-func Ship_Dock_Button_Pressed() -> void:
-	if (World.WORLDST != World.WORLDSTATE.NORMAL):
-		return
-	EventHandler.OnFleetSeparationPressed()
-
-
-func Missile_Button_Pressed() -> void:
-	MissileUI.Toggle()
-	MarkerEditorControls.TurnOff()
-	
-	
-func Radar_Button_Pressed() -> void:
-	EventHandler.OnRadarButtonPressed()
-	
-	
-func Regroup_Pressed() -> void:
-	if (World.WORLDST != World.WORLDSTATE.NORMAL):
-		return
-	EventHandler.OnRegroupPressed()
-
-
-func Land_Pressed() -> void:
-	if (World.WORLDST != World.WORLDSTATE.NORMAL):
-		return
-	EventHandler.OnLandPressed()
-
-
-func Open_Hatch_Button_Pressed() -> void:
-	if (World.WORLDST != World.WORLDSTATE.NORMAL):
-		return
-	EventHandler.OnOpenHatchPressed()
-
-
-func Sim_Pause_Pressed() -> void:
-	if (World.WORLDST != World.WORLDSTATE.NORMAL):
-		return
-	var simmulationPaused = !SimulationManager.GetInstance().Paused
-	SimulationManager.GetInstance().TogglePause(simmulationPaused)
-
-
-########## BUTTON TOGGLE EVENTS ###########
-
-func _on_forecast_button_toggled(toggled_on: bool) -> void:
-	EventHandler.OnForecastPressed(toggled_on)
-
-func _on_grid_button_toggled(toggled_on: bool) -> void:
-	EventHandler.OnGridPressed(toggled_on)
-
-func _on_zoom_level_button_toggled(toggled_on: bool) -> void:
-	EventHandler.OnZoomTogglePressed(toggled_on)
-
-func _on_team_button_toggled(toggled_on: bool) -> void:
-	EventHandler.OnTeamTogglePressed(toggled_on)
-
-func _on_sonar_button_toggled(toggled_on: bool) -> void:
-	EventHandler.OnSonarPressed(toggled_on)
-	Sonar.Toggle(toggled_on)
-
-func _on_speed_simulation_toggled(toggled_on: bool) -> void:
-	SimulationManager.GetInstance().SpeedToggle(toggled_on)
-
-func SpeedUpdated(t : bool) -> void:
-	SpeedSimulationButton.set_pressed_no_signal(t)
-	SpeedSimulationButton.button_down.emit()
-
-func Inventory_Pressed() -> void:
-	if (World.WORLDST != World.WORLDSTATE.NORMAL):
-		return
-	EventHandler.OnInventoryPressed()
-
-
-var ScreenItemsStateBeforePause : bool
-
-func Pause_Pressed() -> void:
-	if (!get_tree().paused):
-		ScreenItemsStateBeforePause = _ScreenItems.visible
-		_ScreenItems.visible = false
-	else:
-		_ScreenItems.visible = ScreenItemsStateBeforePause
-	EventHandler.OnPausePressed()
-	
-func TownVisited(t : bool) -> void:
+func ToggleFullScreenUI(t : bool) -> void:
 	if (t):
-		ScreenItemsStateBeforePause = _ScreenItems.visible
-		_ScreenItems.visible = false
+		var SC : PackedScene = await Helper.GetInstance().LoadThreaded(FullScreenScene).Sign
+		FullScreen = SC.instantiate()
+		add_child(FullScreen)
+		move_child(FullScreen, 0)
 	else:
-		_ScreenItems.visible = ScreenItemsStateBeforePause
+		FullScreen.queue_free()
 
+func ToggleForegroundUI(t : bool) -> void:
+	if (t):
+		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(PilotScreenScene).Sign
+		PilotScreen = Sc.instantiate()
+		add_child(PilotScreen)
+		move_child(PilotScreen,0)
 
-func OnControlledShipDamaged(DamageAmm : float) -> void:
-	Cam.EnableDamageShake(DamageAmm / 10)
+		var SimulationMan = SimulationManager.GetInstance()
+		if (SimulationMan != null):
+			SimulationMan.SpeedChanged.connect(PilotScreen.SpeedUpdated)
+	else:
+		PilotScreen.queue_free()
 
-
-func _on_steer_button_toggled(toggled_on: bool) -> void:
-	Steer.Toggle(toggled_on)
 
 ################## SCREEN TRANSITION ########################
 
@@ -238,8 +89,11 @@ func CloseScreen() -> void:
 	FullScreenToggleStarted.emit(ScreenState.HALF_SCREEN)
 
 func OpenScreen(NewStat : ScreenState) -> void:
-	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
-	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
+	match (NewStat):
+		ScreenState.FULL_SCREEN:
+			ToggleFullScreenUI(true)
+		ScreenState.NORMAL_SCREEN:
+			ToggleForegroundUI(true)
 
 	var OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
@@ -267,8 +121,11 @@ func IntroCloseFinisehd(NewStat : ScreenState) -> void:
 	
 	#await Helper.GetInstance().wait(0.2)
 	Cables.visible = true
-	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
-	NormalScreen.visible = NewStat == ScreenState.HALF_SCREEN
+	match (NewStat):
+		ScreenState.FULL_SCREEN:
+			ToggleFullScreenUI(true)
+		ScreenState.NORMAL_SCREEN:
+			ToggleForegroundUI(true)
 	
 	var OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)
@@ -291,10 +148,20 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	await CloseTw.finished
 	
 	FullScreenToggleStarted.emit(NewStat)
-
-	FullScreenFrame.visible = NewStat == ScreenState.FULL_SCREEN
-	NormalScreen.visible = NewStat == ScreenState.NORMAL_SCREEN
-	MeduimScreen.visible = NewStat == ScreenState.HALF_SCREEN
+	
+	match(CurrentScreenState):
+		ScreenState.NORMAL_SCREEN:
+			ToggleForegroundUI(false)
+		ScreenState.FULL_SCREEN:
+			ToggleFullScreenUI(false)
+		
+	CurrentScreenState = NewStat
+	
+	match (NewStat):
+		ScreenState.FULL_SCREEN:
+			ToggleFullScreenUI(true)
+		ScreenState.NORMAL_SCREEN:
+			ToggleForegroundUI(true)
 
 	var OpenTw = create_tween()
 	OpenTw.set_ease(Tween.EASE_IN)

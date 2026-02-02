@@ -28,7 +28,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 			else : if (MainShipFuelReserves - FuelToConsume >= dronefuel):
 				FuelToConsume += dronefuel
 		
-		var Weight = MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		#var Weight = MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		
 		#var eff_eff = MainShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) - (Weight / 40.0)
 		#var ShipRange = roundi(50 * pow(FuelTank * (FuelEfficiency - (Weight / 40.0)), 0.55))

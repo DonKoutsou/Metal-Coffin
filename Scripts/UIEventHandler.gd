@@ -43,6 +43,10 @@ signal GridPressed(t : bool)
 signal ZoomToggled(t : bool)
 signal TeamToggled(t : bool)
 signal SonarToggled(t : bool)
+
+signal Shake(Amm : float)
+signal DamageShake(Amm : float)
+signal DissableShake
 #signal AlarmRaised
 
 signal ShipDamaged(DammageAmm : float)
@@ -58,11 +62,11 @@ func OnScreenUIToggled(t : bool):
 
 func OnAccelerationEnded(value_changed: float) -> void:
 	AccelerationEnded.emit(value_changed)
-
+	DissableShake.emit()
 
 func OnAccelerationChanged(value: float) -> void:
 	AccelerationChanged.emit(value)
-
+	Shake.emit(value * 1.5)
 #func OnAccelerationForced(NewVal : float) -> void:
 	#AccelerationForced.emit(NewVal)
 
@@ -79,11 +83,12 @@ func OnRadarButtonPressed() -> void:
 
 func OnSteeringDirectionChanged(NewValue: float) -> void:
 	SteerDirChanged.emit(NewValue)
+	Shake.emit(0.5)
 
 
 func OnSteerOffseted(Offset: float) -> void:
 	SteerOffseted.emit(Offset)
-
+	Shake.emit(0.5)
 
 func OnShipSwitchPressed() -> void:
 	ShipSwitchPressed.emit()
@@ -142,6 +147,7 @@ func OnStorm(value : float) -> void:
 
 func OnControlledShipDamaged(DammageAmm : float) -> void:
 	ShipDamaged.emit(DammageAmm)
+	DamageShake.emit(DammageAmm / 10)
 #func OnSimmulationStepChanged(NewStep: int) -> void:
 	#SimStepChanged.emit(NewStep)
 

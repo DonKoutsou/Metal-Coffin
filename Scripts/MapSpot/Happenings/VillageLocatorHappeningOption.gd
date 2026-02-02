@@ -5,8 +5,8 @@ func OptionResault(EventOrigin : MapSpot) -> String:
 	var ClosestRecruitLoc = FindClosestRecruit(EventOrigin)
 	if (ClosestRecruitLoc == Vector2.ZERO):
 		return "There are no rebel villages that i know of nearby, sorry."
-	var Dir = Helper.GetInstance().AngleToDirection(EventOrigin.global_position.angle_to_point(ClosestRecruitLoc))
-	var Dist = Helper.GetInstance().DistanceToDistance(EventOrigin.global_position.distance_to(ClosestRecruitLoc))
+	var Dir = Helper.AngleToDirection(EventOrigin.global_position.angle_to_point(ClosestRecruitLoc))
+	var Dist = Helper.DistanceToDistance(EventOrigin.global_position.distance_to(ClosestRecruitLoc))
 	
 	return "I know of a small rebel town, it's {0} to the {1}.".format([Dist, Dir])
 

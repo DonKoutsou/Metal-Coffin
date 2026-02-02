@@ -2,6 +2,7 @@ extends Camera2D
 
 class_name ScreenCamera
 
+@export var EventHandler : UIEventHandler
 @export var GoingDownC : Curve
 @export_group("Nodes")
 @export var Anim : AnimationPlayer
@@ -24,6 +25,10 @@ var shakestr = 1.5
 static var ShakeEffects : bool = true
 
 func _ready() -> void:
+	EventHandler.Shake.connect(EnableShake)
+	EventHandler.DissableShake.connect(DissableShake)
+	EventHandler.DamageShake.connect(EnableDamageShake)
+	EventHandler.Storm.connect(EnableStormShake)
 	ShakeSound.play()
 	PauseShake(true)
 	OriginalPos = position

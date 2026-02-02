@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bnxacviep83jt" path="res://Assets/Sounds/CoinSlide22.mp3" id="3_3jwvr"]
 [ext_resource type="Texture2D" uid="uid://ixkmygkrcy5r" path="res://Assets/UIPiecies/Screen/Coin2_FullQuality.png" id="4_acv7r"]
 [ext_resource type="AudioStream" uid="uid://xxmlvkwrpbol" path="res://Assets/Sounds/CoinSlide.mp3" id="5_yen4x"]
+[ext_resource type="Texture2D" uid="uid://cxo14pw1ry2k" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="5_yl304"]
 [ext_resource type="Texture2D" uid="uid://nossylu05qvk" path="res://Assets/UIPiecies/Screen/Coin_FullQuality.png" id="6_j05jt"]
 [ext_resource type="Texture2D" uid="uid://dbh0tnskuitfy" path="res://Assets/UIPiecies/Screen/SidePanels/DispencePanel_FullQuality.png" id="9_kj8r2"]
 
@@ -104,6 +105,18 @@ CoinSlideInSound = ExtResource("5_yen4x")
 CoinSlideSound = ExtResource("3_3jwvr")
 
 [node name="ScreenFrame2" type="TextureRect" parent="." unique_id=19489388]
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("5_yl304")
+expand_mode = 1
+
+[node name="ScreenFrame3" type="TextureRect" parent="." unique_id=54430736]
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 1
 anchors_preset = 15

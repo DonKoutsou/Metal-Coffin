@@ -2314,10 +2314,10 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 
 func UpdateEnergy(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) -> void:
 	var OldEnergy = Ship.Energy
-	
-	Ship.Energy = NewEnergy
+	var RoundedEnergy = roundi(NewEnergy)
+	Ship.Energy = RoundedEnergy
 	if (UpdateUI):
-		ExternalUI.GetEnergyBar().UpdateAmmount(OldEnergy, NewEnergy)
+		ExternalUI.GetEnergyBar().UpdateAmmount(OldEnergy, RoundedEnergy)
 		if (NewEnergy > ExternalUI.GetEnergyBar().GetSegmentAmm()):
 			ExternalUI.GetEnergyBar().ChangeSegmentAmm(Ship.Energy)
 	
@@ -2325,10 +2325,10 @@ func UpdateEnergy(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) ->
 
 func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) -> void:
 	var OldEnergy = Ship.EnergyReserves
-	
-	Ship.EnergyReserves = NewEnergy
+	var RoundedEnergy = roundi(NewEnergy)
+	Ship.EnergyReserves = RoundedEnergy
 	if (UpdateUI):
-		ExternalUI.GetReserveBar().UpdateAmmount(OldEnergy, NewEnergy)
+		ExternalUI.GetReserveBar().UpdateAmmount(OldEnergy, RoundedEnergy)
 		if (NewEnergy > ExternalUI.GetReserveBar().GetSegmentAmm()):
 			ExternalUI.GetReserveBar().ChangeSegmentAmm(Ship.EnergyReserves)
 	

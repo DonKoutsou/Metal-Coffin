@@ -27,10 +27,10 @@ func SetCamera() -> void:
 	ship_camera.PositionChanged.connect(CamMoved)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func ZoomChanged(NewZoom : float) -> void:
+func ZoomChanged(_NewZoom : float) -> void:
 	update()
 
-func CamMoved(NewPos : Vector2) -> void:
+func CamMoved(_NewPos : Vector2) -> void:
 	update()
 
 func update() -> void:

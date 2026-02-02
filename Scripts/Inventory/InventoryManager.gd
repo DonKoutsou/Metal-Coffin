@@ -126,7 +126,7 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	
 	DescriptorPlace.add_child(Descriptor)
 	CaptainStats.visible = false
-	var cpt = GetBoxOwner(Box)
+	#var cpt = GetBoxOwner(Box)
 	#var HasUp = false
 	#if (cpt.CurrentPort != ""):
 		#var cit = GetCity(cpt.CurrentPort)

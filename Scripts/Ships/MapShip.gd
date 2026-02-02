@@ -89,8 +89,8 @@ func _ready() -> void:
 func _draw() -> void:
 	if (ShowFuelRange):
 		var FRange = GetFuelRange()
-		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 1 / CamZoom, true)
-		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 1 / CamZoom, true)
+		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 1.0 / CamZoom, true)
+		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 1.0 / CamZoom, true)
 
 func Refuel() -> void:
 	if (Altitude == 0 and !Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
@@ -361,7 +361,7 @@ func UpdateElint(delta: float) -> void:
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
 			ActionTracker.GetInstance().ShowTutorial("Electronic Intelligence", "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.", [], true)
-		Elint.emit(true, BiggestLevel, Helper.GetInstance().AngleToDirection(Dir))
+		Elint.emit(true, BiggestLevel, Helper.AngleToDirection(Dir))
 	else:
 		Elint.emit(false, -1, "")
 
@@ -371,11 +371,11 @@ func UpdateVizRange(rang : float):
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 110)
 
 func RephreshVisRange(Visibility : float) -> void:
-	var range = Visibility
+	var VisualRange = Visibility
 	if (RadarWorking):
-		range = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+		VisualRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(range, Visibility)
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(VisualRange, Visibility)
 
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 
@@ -436,7 +436,8 @@ func BodyEnteredBody(Body : Area2D) -> void:
 	if (Parent is MapSpot):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.LANDING)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
-			ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [World.GetInstance().GetMap().GetScreenUi().LandButton, World.GetInstance().GetMap().GetScreenUi().HatchButton], false)
+			#TODO fix this
+			#ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [World.GetInstance().GetMap().GetScreenUi().LandButton, World.GetInstance().GetMap().GetScreenUi().HatchButton], false)
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
 		for g in GetDroneDock().GetDockedShips():

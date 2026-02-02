@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://nt73d42f2o1p"]
 
 [ext_resource type="Script" uid="uid://bf4h0gpgat4vx" path="res://Scripts/screen_cam.gd" id="1_2pp86"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_mgwm0"]
 [ext_resource type="Script" uid="uid://30ku4j8kcjjm" path="res://Scripts/UI/light_pivot_1.gd" id="2_t2svi"]
 [ext_resource type="AudioStream" uid="uid://oh1o18edfpxt" path="res://Assets/Sounds/Sqeak1.mp3" id="3_mgwm0"]
 [ext_resource type="AudioStream" uid="uid://dbypo20bfwwml" path="res://Assets/Sounds/Sqeak2.mp3" id="4_i8m08"]
@@ -255,6 +256,7 @@ z_index = 1
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 script = ExtResource("1_2pp86")
+EventHandler = ExtResource("2_mgwm0")
 GoingDownC = SubResource("Curve_8gyii")
 Anim = NodePath("AnimationPlayer")
 LightPivot1 = NodePath("LightPivot1")

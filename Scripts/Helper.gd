@@ -3,6 +3,7 @@ extends Node
 class_name Helper
 
 @export var RegionColors : Dictionary[MapSpotCompleteInfo.REGIONS, Color]
+@export var Cog : TextureRect
 
 static var Instance : Helper
 
@@ -10,10 +11,11 @@ func _ready() -> void:
 	Instance = self
 	set_physics_process(false)
 	$CanvasLayer.visible = false
+	Cog.pivot_offset = Cog.size / 2
 
 func _physics_process(delta: float) -> void:
-	$CanvasLayer/TextureRect.pivot_offset = $CanvasLayer/TextureRect.size / 2
-	$CanvasLayer/TextureRect.rotation = wrap($CanvasLayer/TextureRect.rotation + delta, 0, PI * 4)
+	
+	Cog.rotation = wrap(Cog.rotation + delta, 0, PI * 4)
 	
 
 func LoadThreaded(File : String) -> SignalObject:

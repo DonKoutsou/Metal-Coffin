@@ -72,6 +72,7 @@ Acceleration = NodePath("Aceleration")
 [node name="Aceleration" type="Node2D" parent="." unique_id=1564058399]
 
 [node name="SonarRange" type="ColorRect" parent="." unique_id=1070034204]
+visible = false
 z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_7aewx")

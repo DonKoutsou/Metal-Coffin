@@ -33,7 +33,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 			break
 		
 	if (RefuelSpot != null):
-		print(Ship.ShipName + " will take a detour through " + RefuelSpot.SpotInfo.SpotName + " to refuel")
+		print(Ship.ShipName + " will take a detour through " + RefuelSpot.SpotName + " to refuel")
 		Ship.RefuelSpot = RefuelSpot
 		return SUCCESS
 	else:

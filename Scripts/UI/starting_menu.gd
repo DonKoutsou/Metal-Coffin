@@ -39,7 +39,7 @@ func _ready() -> void:
 	#LoopAmp()
 
 var CloudOffset = Vector2.ZERO
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var cloudmat = $SubViewportContainer/SubViewport/Clouds.material as ShaderMaterial
 	CloudOffset += Vector2(-0.0001, 0.0001)
 	cloudmat.set_shader_parameter("Offset", CloudOffset)

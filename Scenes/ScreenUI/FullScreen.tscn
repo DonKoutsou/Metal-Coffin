@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://baempq3grl4bd"]
+
+[ext_resource type="Texture2D" uid="uid://cta21sa447sbq" path="res://Assets/UIPiecies/Screen/ScreenLong3.png" id="1_q2ft4"]
+
+[node name="Foreground" type="Control" unique_id=1109053421]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScreenBackground" type="TextureRect" parent="." unique_id=776636619]
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_q2ft4")
+expand_mode = 1

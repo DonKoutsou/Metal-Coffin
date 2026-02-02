@@ -4,13 +4,14 @@
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="2_jkjhg"]
 [ext_resource type="Texture2D" uid="uid://rxtmxyrt7f07" path="res://Assets/UIPiecies/Screen/SidePanels/Steer_FullQuality.png" id="2_wimof"]
 
-[node name="Helper" type="Node" unique_id=1156631636]
+[node name="Helper" type="Node" unique_id=1156631636 node_paths=PackedStringArray("Cog")]
 script = ExtResource("1_fiwlt")
 RegionColors = Dictionary[int, Color]({
 0: Color(0.66723, 0.176217, 0.170208, 1),
 1: Color(0.5516, 0.7, 0.329, 1),
 2: Color(0.482095, 0.689901, 0.704644, 1)
 })
+Cog = NodePath("CanvasLayer/TextureRect")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1190422538]
 layer = 127
@@ -24,33 +25,22 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1956045743]
-custom_minimum_size = Vector2(53, 53)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.5
-offset_top = -26.5
-offset_right = 26.5
-offset_bottom = 26.5
+offset_left = 1013.0
+offset_top = 654.0
+offset_right = 1079.0
+offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(22.5, 22.5)
+pivot_offset = Vector2(33, 33)
 mouse_filter = 2
 texture = ExtResource("2_wimof")
-expand_mode = 1
+expand_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=740471012]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -89.0
-offset_top = -10.5
-offset_right = 89.0
-offset_bottom = 10.5
+offset_left = 1083.0
+offset_top = 676.0
+offset_right = 1261.0
+offset_bottom = 697.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
