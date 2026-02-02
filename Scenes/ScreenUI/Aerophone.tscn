@@ -5,9 +5,9 @@
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_6guy7"]
 [ext_resource type="Texture2D" uid="uid://byfcxaxg7epni" path="res://Assets/UIPiecies/Screen/SidePanels/Sonar.png" id="3_mi4l8"]
+[ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="6_4wgxe"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="6_jiwdy"]
-[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="6_mi4l8"]
-[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="7_fw736"]
+[ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="7_mi4l8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mi4l8"]
 light_mode = 1
@@ -56,7 +56,7 @@ scale = Vector2(0.520363, 0.520363)
 position = Vector2(282.46765, 139)
 scale = Vector2(0.520363, 0.520363)
 
-[node name="Close" type="TextureButton" parent="TextureRect2" unique_id=2115969672 groups=["Buttons"]]
+[node name="Close" type="Button" parent="TextureRect2" unique_id=617694193 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,15 +64,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -47.638306
-offset_top = 41.5
-offset_right = 28.361694
-offset_bottom = 70.50906
+offset_top = 40.5
+offset_right = 29.361694
+offset_bottom = 71.5
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("6_mi4l8")
-texture_pressed = ExtResource("7_fw736")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("6_4wgxe")
+theme_override_styles/pressed = ExtResource("7_mi4l8")
+theme_override_styles/hover = ExtResource("6_4wgxe")
 
 [node name="Label" type="Label" parent="TextureRect2" unique_id=733326543]
 material = SubResource("CanvasItemMaterial_4wgxe")

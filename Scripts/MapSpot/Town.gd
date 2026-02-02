@@ -37,7 +37,7 @@ func GenerateCity(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> 
 
 func SetSize() -> void:
 	var SizeThing = ( Spot.Population / 150000.0) as float
-	$Sprite2D2.scale = lerp(Vector2(0.3,0.3), Vector2(1.7,1.7),SizeThing)
+	$ColorRect.scale = lerp(Vector2(0.3,0.3), Vector2(1.7,1.7),SizeThing)
 
 func IsEnemy() -> bool:
 	return Spot.EnemyCity

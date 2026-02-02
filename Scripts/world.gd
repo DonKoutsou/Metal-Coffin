@@ -255,7 +255,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 		return
 	var sc = load(FleetSeparationScene).instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
-	GetMap().GetScreenUi().ToggleScreenUI(false)
+	#GetMap().GetScreenUi().ToggleScreenUI(false)
 	
 	WORLDST = WORLDSTATE.TRADE
 	#await GetMap().GetScreenUi().FullScreenToggleStarted
@@ -272,7 +272,7 @@ func ShipSeparationFinished() -> void:
 	#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
-	GetMap().GetScreenUi().ToggleScreenUI(true)
+	#GetMap().GetScreenUi().ToggleScreenUI(true)
 	
 	WORLDST = WORLDSTATE.NORMAL
 

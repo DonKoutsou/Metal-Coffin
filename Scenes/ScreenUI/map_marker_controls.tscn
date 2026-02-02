@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://bhijweehoxrmw" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_sg83c"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_67mm3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
-[ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="3_djntk"]
-[ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="4_gq5gp"]
-[ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="6_i6u6v"]
-[ext_resource type="Texture2D" uid="uid://770ytc3dmn3u" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="7_g7jsi"]
-[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="8_u42xd"]
-[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="9_sxrep"]
+[ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="5_67mm3"]
+[ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="6_djntk"]
+[ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="7_67mm3"]
+[ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="8_djntk"]
+[ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="9_gq5gp"]
+[ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="10_ukqae"]
 
 [node name="MapMarkerControls" type="Control" unique_id=329577773]
 layout_mode = 3
@@ -46,77 +46,73 @@ scale = Vector2(0.520363, 0.520363)
 position = Vector2(72, -55)
 scale = Vector2(0.787035, 0.787035)
 
-[node name="ExitMapMarker" type="TextureButton" parent="." unique_id=1340846565 groups=["Buttons"]]
+[node name="ExitMapMarker" type="Button" parent="." unique_id=1966900206 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 85.0
-offset_top = -5.0
-offset_right = 149.0
-offset_bottom = 19.0
+offset_left = 83.0
+offset_top = -7.0
+offset_right = 152.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("3_djntk")
-texture_pressed = ExtResource("4_gq5gp")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("5_67mm3")
+theme_override_styles/pressed = ExtResource("6_djntk")
+theme_override_styles/hover = ExtResource("5_67mm3")
 
-[node name="ClearLines" type="TextureButton" parent="." unique_id=1330142097 groups=["Buttons"]]
+[node name="ClearLines" type="Button" parent="." unique_id=1847480924 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 84.0
-offset_top = -46.0
-offset_right = 148.0
-offset_bottom = -23.0
+offset_left = 83.0
+offset_top = -48.0
+offset_right = 151.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("6_i6u6v")
-texture_pressed = ExtResource("7_g7jsi")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("7_67mm3")
+theme_override_styles/pressed = ExtResource("8_djntk")
+theme_override_styles/hover = ExtResource("7_67mm3")
 
-[node name="DrawLine" type="TextureButton" parent="." unique_id=1079720396 groups=["Buttons"]]
+[node name="DrawLine" type="Button" parent="." unique_id=1318466251 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -46.0
-offset_top = -47.0
-offset_right = 19.0
-offset_bottom = -22.0
+offset_left = -49.0
+offset_top = -49.0
+offset_right = 23.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("8_u42xd")
-texture_pressed = ExtResource("9_sxrep")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("9_gq5gp")
+theme_override_styles/pressed = ExtResource("10_ukqae")
+theme_override_styles/hover = ExtResource("9_gq5gp")
 
-[node name="DrawText" type="TextureButton" parent="." unique_id=785232804 groups=["Buttons"]]
+[node name="DrawText" type="Button" parent="." unique_id=107084690 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -6.0
-offset_right = 19.0
-offset_bottom = 18.0
+offset_left = -49.0
+offset_top = -8.0
+offset_right = 24.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("8_u42xd")
-texture_pressed = ExtResource("9_sxrep")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("9_gq5gp")
+theme_override_styles/pressed = ExtResource("10_ukqae")
+theme_override_styles/hover = ExtResource("9_gq5gp")
 
 [connection signal="RangeChanged" from="YGas" to="." method="_on_y_gas_range_changed"]
 [connection signal="RangeChanged" from="XGas" to="." method="_on_x_gas_range_changed"]

@@ -25,20 +25,19 @@
 [ext_resource type="Texture2D" uid="uid://cxo14pw1ry2k" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="22_23r0g"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="23_t54ed"]
-[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="23_x4rct"]
-[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="24_nwvr6"]
-[ext_resource type="Texture2D" uid="uid://j88m03ju0nyx" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality.png" id="25_qhtmf"]
-[ext_resource type="Texture2D" uid="uid://7vcun6g5f3a4" path="res://Assets/UIPiecies/Screen/Buttons/Button1_Camera 1_FullQuality_Pressed.png" id="26_i6qwf"]
-[ext_resource type="Texture2D" uid="uid://bxmncoxii6jcx" path="res://Assets/UIPiecies/Screen/Buttons/Button3_Camera 1_FullQuality.png" id="29_aa43b"]
+[ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="26_67h1o"]
+[ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
+[ext_resource type="StyleBox" uid="uid://bblal3stslrb1" path="res://Theme/Buttons/ButtonWhite.tres" id="29_rh5bc"]
 [ext_resource type="PackedScene" uid="uid://cix2emi1smed2" path="res://Scenes/InScreenUI/setting_panel2.tscn" id="30_aa43b"]
-[ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="32_qskuh"]
-[ext_resource type="Texture2D" uid="uid://770ytc3dmn3u" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="33_xop3l"]
+[ext_resource type="StyleBox" uid="uid://cwsk20kaf6n22" path="res://Theme/Buttons/ButtonWhite_Pressed.tres" id="30_xqmn8"]
+[ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="32_xqmn8"]
+[ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="33_sjyyd"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
-[ext_resource type="Texture2D" uid="uid://dqxbuk83cw3ko" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality.png" id="35_nthvp"]
 [ext_resource type="Texture2D" uid="uid://26rhnah0tact" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
 [ext_resource type="Texture2D" uid="uid://yfbhxkpe3ani" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
-[ext_resource type="Texture2D" uid="uid://dk83o628qhwwq" path="res://Assets/UIPiecies/Screen/Buttons/Button4_Camera 1_FullQuality_Pressed.png" id="36_rh5bc"]
 [ext_resource type="Texture2D" uid="uid://bdwuh13c5yg07" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
+[ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="37_xqmn8"]
+[ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="38_sjyyd"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
 [ext_resource type="Texture2D" uid="uid://co2070b5ddh8o" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
@@ -541,33 +540,31 @@ mouse_filter = 2
 texture = ExtResource("22_7fs2i")
 expand_mode = 1
 
-[node name="Prologue" type="TextureButton" parent="ScreenFrame2" unique_id=1305109111 groups=["Buttons"]]
+[node name="Prologue" type="Button" parent="ScreenFrame2" unique_id=1915175625 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 104.0
-offset_right = 57.0
-offset_bottom = 142.0
+offset_left = 36.0
+offset_top = 102.0
+offset_right = 60.0
+offset_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
-texture_normal = ExtResource("23_x4rct")
-texture_pressed = ExtResource("24_nwvr6")
-ignore_texture_size = true
-stretch_mode = 0
 
-[node name="LoadPrologue" type="TextureButton" parent="ScreenFrame2" unique_id=1352412946 groups=["Buttons"]]
+[node name="LoadPrologue" type="Button" parent="ScreenFrame2" unique_id=1420192485 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 156.0
-offset_right = 57.0
-offset_bottom = 195.0
+offset_left = 36.0
+offset_top = 155.0
+offset_right = 60.0
+offset_bottom = 198.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
-texture_normal = ExtResource("23_x4rct")
-texture_pressed = ExtResource("24_nwvr6")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="PrologueLight" parent="ScreenFrame2" unique_id=2000029858 instance=ExtResource("34_aa43b")]
 layout_mode = 0
@@ -576,33 +573,31 @@ offset_top = 176.0
 offset_right = 169.0
 offset_bottom = 198.0
 
-[node name="Play2" type="TextureButton" parent="ScreenFrame2" unique_id=1434390632 groups=["Buttons"]]
+[node name="Play2" type="Button" parent="ScreenFrame2" unique_id=1317648141 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 234.0
-offset_right = 57.0
-offset_bottom = 273.0
+offset_left = 36.0
+offset_top = 233.0
+offset_right = 60.0
+offset_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
-texture_normal = ExtResource("23_x4rct")
-texture_pressed = ExtResource("24_nwvr6")
-ignore_texture_size = true
-stretch_mode = 0
 
-[node name="Load" type="TextureButton" parent="ScreenFrame2" unique_id=58334576 groups=["Buttons"]]
+[node name="Load" type="Button" parent="ScreenFrame2" unique_id=813462728 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 287.0
-offset_right = 56.0
-offset_bottom = 326.0
+offset_left = 35.0
+offset_top = 286.0
+offset_right = 59.0
+offset_bottom = 330.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
-texture_normal = ExtResource("24_nwvr6")
-texture_pressed = ExtResource("29_aa43b")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="CampaignLight" parent="ScreenFrame2" unique_id=871809701 instance=ExtResource("34_aa43b")]
 layout_mode = 0
@@ -611,32 +606,30 @@ offset_top = 302.0
 offset_right = 169.0
 offset_bottom = 324.0
 
-[node name="Fight" type="TextureButton" parent="ScreenFrame2" unique_id=961686342 groups=["Buttons"]]
+[node name="Fight" type="Button" parent="ScreenFrame2" unique_id=174179254 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 158.0
-offset_top = 354.0
-offset_right = 208.0
-offset_bottom = 377.0
+offset_left = 154.0
+offset_top = 352.0
+offset_right = 209.0
+offset_bottom = 380.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("29_rh5bc")
+theme_override_styles/pressed = ExtResource("30_xqmn8")
+theme_override_styles/hover = ExtResource("29_rh5bc")
 action_mode = 0
-texture_normal = ExtResource("25_qhtmf")
-texture_pressed = ExtResource("26_i6qwf")
-ignore_texture_size = true
-stretch_mode = 0
 
-[node name="Credits" type="TextureButton" parent="ScreenFrame2" unique_id=257312861 groups=["Buttons"]]
+[node name="Credits" type="Button" parent="ScreenFrame2" unique_id=524956029 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 591.0
+offset_left = 181.0
+offset_top = 590.0
 offset_right = 210.0
-offset_bottom = 640.0
+offset_bottom = 641.0
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("32_xqmn8")
+theme_override_styles/pressed = ExtResource("33_sjyyd")
+theme_override_styles/hover = ExtResource("32_xqmn8")
 action_mode = 0
-texture_normal = ExtResource("32_qskuh")
-texture_pressed = ExtResource("33_xop3l")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="SettingPanel2" parent="ScreenFrame2" unique_id=1686978607 instance=ExtResource("30_aa43b")]
 use_parent_material = false
@@ -648,36 +641,38 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control" parent="ScreenFrame2/SettingPanel2" index="0"]
+[node name="Control" parent="ScreenFrame2/SettingPanel2" index="0" unique_id=1770304556]
 mouse_filter = 2
 
-[node name="FullScreenCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="0"]
-layout_mode = 0
+[node name="FullScreenCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="0" unique_id=1652792594]
 offset_left = 33.0
 offset_top = 382.0
 offset_right = 50.0
 offset_bottom = 421.0
 
-[node name="SoundCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="1"]
-layout_mode = 0
+[node name="SoundCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="1" unique_id=1813530860]
 offset_left = 33.0
 offset_top = 422.0
 offset_right = 50.0
 offset_bottom = 461.0
 
-[node name="SoundCheckBox2" parent="ScreenFrame2/SettingPanel2/Control" index="2"]
-layout_mode = 0
+[node name="SoundCheckBox2" parent="ScreenFrame2/SettingPanel2/Control" index="2" unique_id=278533649]
 offset_left = 207.0
 offset_top = 425.0
 offset_right = 224.0
 offset_bottom = 464.0
 
-[node name="GlitchesCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="3"]
-layout_mode = 0
+[node name="GlitchesCheckBox" parent="ScreenFrame2/SettingPanel2/Control" index="3" unique_id=1603069750]
 offset_left = 34.0
 offset_top = 462.0
 offset_right = 51.0
 offset_bottom = 501.0
+
+[node name="ShakeEffectsBox" parent="ScreenFrame2/SettingPanel2/Control" index="4" unique_id=1138728248]
+offset_left = 187.0
+offset_top = 386.0
+offset_right = 204.0
+offset_bottom = 425.0
 
 [node name="Button" type="TextureButton" parent="ScreenFrame2" unique_id=449412107 groups=["Buttons"]]
 layout_mode = 0
@@ -691,18 +686,17 @@ texture_pressed = ExtResource("36_sjyyd")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Exit" type="TextureButton" parent="ScreenFrame2" unique_id=127956372 groups=["Buttons"]]
+[node name="Exit" type="Button" parent="ScreenFrame2" unique_id=2017627404 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 42.0
-offset_top = 590.0
-offset_right = 67.0
-offset_bottom = 639.0
+offset_left = 39.0
+offset_top = 589.0
+offset_right = 69.0
+offset_bottom = 641.0
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("37_xqmn8")
+theme_override_styles/pressed = ExtResource("38_sjyyd")
+theme_override_styles/hover = ExtResource("37_xqmn8")
 action_mode = 0
-texture_normal = ExtResource("35_nthvp")
-texture_pressed = ExtResource("36_rh5bc")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="Fan" parent="." unique_id=238039746 instance=ExtResource("39_nthvp")]
 position = Vector2(954, -120)

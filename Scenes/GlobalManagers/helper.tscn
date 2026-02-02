@@ -25,6 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1956045743]
+texture_filter = 4
 offset_left = 1013.0
 offset_top = 654.0
 offset_right = 1079.0

@@ -1,29 +1,25 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://g4nd4xc327yt"]
 
-[ext_resource type="Texture2D" uid="uid://cbniv37ovcf1l" path="res://Assets/MapElements/Grayscale.png" id="1_q20aw"]
 [ext_resource type="Texture2D" uid="uid://brlhkt6uwpnuj" path="res://Assets/MapElements/plane_Town1_Normal.png" id="2_q20aw"]
 [ext_resource type="Texture2D" uid="uid://cgyhcishe7xfb" path="res://Assets/MapElements/plane_Town1_BaseColor.png" id="3_lw8bi"]
 
 [sub_resource type="Shader" id="Shader_cns0g"]
 code = "shader_type canvas_item;
 
-// Noise texture
-uniform sampler2D Alpha:  filter_nearest;
+
 uniform sampler2D GroundTexture: repeat_enable, filter_nearest;
 uniform sampler2D GroundNormalTexture: hint_normal, filter_nearest, repeat_enable;
 
 
 // Called for every pixel the material is visible on
 void fragment() {
-
-	float noise = texture(Alpha, UV).r;
 	vec4 Norm = texture(GroundNormalTexture, UV);
 	vec4 Col = texture(GroundTexture, UV);
-	Col.a = 1.0;
+	//Col.a = 1.0;
 
     // Apply the fog effect
     //COLOR = Col;
-	COLOR.a = noise;
+	COLOR = Col;
 	NORMAL_MAP = vec3(Norm.xyz);
 	NORMAL_MAP_DEPTH = Norm.x;
 
@@ -32,6 +28,5 @@ void fragment() {
 
 [resource]
 shader = SubResource("Shader_cns0g")
-shader_parameter/Alpha = ExtResource("1_q20aw")
 shader_parameter/GroundTexture = ExtResource("3_lw8bi")
 shader_parameter/GroundNormalTexture = ExtResource("2_q20aw")
