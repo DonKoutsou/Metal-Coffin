@@ -15,7 +15,7 @@ config/version="0.7.04"
 run/main_scene="res://Scenes/StartingScreen.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Mobile")
-run/max_fps=60
+run/max_fps=120
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Logos/LogoIcon.png"
@@ -43,6 +43,7 @@ PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+window/vsync/vsync_mode=0
 
 [dotnet]
 
