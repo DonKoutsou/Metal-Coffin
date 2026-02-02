@@ -39,7 +39,8 @@ var CurrentText : int
 func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
 	#set_physics_process(false)
-	var TownBG = EventSpot.SpotType.BackgroundScene.instantiate() as TownBackground
+	var BackgroundScene = ResourceLoader.load(EventSpot.SpotType.BackgroundFile)
+	var TownBG = BackgroundScene.instantiate() as TownBackground
 	$SubViewportContainer/SubViewport.add_child(TownBG)
 	TownBG.set_physics_process(false)
 	

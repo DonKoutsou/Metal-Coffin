@@ -2,11 +2,8 @@ extends CanvasLayer
 class_name Ingame_UIManager
 
 @export var _Inventory : InventoryManager
-#@export var _CaptainUI : CaptainUI
 @export var _MapMarkerEditor : MapMarkerEditor
 @export var PopupPlecement : Control
-@export var DiagplScene : PackedScene
-
 @export var EventHandler : UIEventHandler
 @export var UnderstatUI : Control
 @export var OverStatUI : Control
@@ -16,7 +13,9 @@ class_name Ingame_UIManager
 @export var TUI : TeamUI
 
 @export_group("Scenes")
-@export var PauseMenuScene : PackedScene
+@export_file("*.tscn") var PauseMenuSceneFile : String
+@export_file("*.tscn") var DialogueSceneFile : String
+
 var PauseContainer : PauseMenu
 
 static var Instance :Ingame_UIManager
@@ -67,6 +66,7 @@ func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 		add_child(Scene)
 
 func PlayDiag(Diags : Array[String], Avatar : Texture, TalkerName : String, StopInput : bool = false):
+	var DiagplScene = ResourceLoader.load(DialogueSceneFile)
 	var diag = DiagplScene.instantiate() as DialoguePlayer
 	if (StopInput):
 		diag.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -74,6 +74,7 @@ func PlayDiag(Diags : Array[String], Avatar : Texture, TalkerName : String, Stop
 	diag.PlayDialogue(Diags, Avatar, TalkerName)
 
 func CallbackDiag (Diags : Array[String], Avatar : Texture, TalkerName : String, Callback : Callable, StopInput : bool = false):
+	var DiagplScene = ResourceLoader.load(DialogueSceneFile)
 	var diag = DiagplScene.instantiate() as DialoguePlayer
 	if (StopInput):
 		diag.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -97,6 +98,7 @@ func Pause() -> void:
 	if (paused):
 		PauseContainer.queue_free()
 	else:
+		var PauseMenuScene = ResourceLoader.load(PauseMenuSceneFile)
 		PauseContainer = PauseMenuScene.instantiate()
 		add_child(PauseContainer)
 

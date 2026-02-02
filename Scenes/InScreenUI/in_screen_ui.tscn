@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://buj48d65j7y07"]
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
-[ext_resource type="PackedScene" uid="uid://cq8y4l8uapojy" path="res://Scenes/InScreenUI/DialoguePlayer.tscn" id="2_ehn1p"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_b4kau"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/simulation_notification.tscn" id="5_g51f2"]
@@ -14,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://dncqbpsg58qgq" path="res://Scenes/InScreenUI/weather_ui.tscn" id="11_j7r7e"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
-[ext_resource type="PackedScene" uid="uid://kealc8fl34qi" path="res://Scenes/InScreenUI/pause_container.tscn" id="17_lbfwx"]
 [ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="18_adjny"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
 [ext_resource type="PackedScene" uid="uid://dtym0y7dgx7iv" path="res://Scenes/ScreenUI/ZoomLevel.tscn" id="21_u111i"]
@@ -30,14 +28,14 @@ script = ExtResource("1_3cf0e")
 _Inventory = NodePath("UnderStatUI/Inventory")
 _MapMarkerEditor = NodePath("MapMarkerEditor")
 PopupPlecement = NodePath("CanvasLayer/PopupPlecement")
-DiagplScene = ExtResource("2_ehn1p")
 EventHandler = ExtResource("3_b4kau")
 UnderstatUI = NodePath("UnderStatUI")
 OverStatUI = NodePath("OverStatUI")
 Screen = NodePath("CanvasLayer/Screen")
 ZoomUI = NodePath("ZoomUI")
 TUI = NodePath("CurrentShipText")
-PauseMenuScene = ExtResource("17_lbfwx")
+PauseMenuSceneFile = "uid://kealc8fl34qi"
+DialogueSceneFile = "uid://cq8y4l8uapojy"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1658011768]
 layer = 4

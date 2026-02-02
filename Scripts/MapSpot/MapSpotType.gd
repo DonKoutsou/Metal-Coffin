@@ -3,7 +3,7 @@ class_name MapSpotType
 
 @export var SpotK : SpotKind
 @export var VisibleOnStart : bool = false
-@export var BackgroundScene : PackedScene
+@export_file("*.tscn") var BackgroundFile : String
 @export var Data : MapSpotCustomData
 
 func GetEnumString() -> String:

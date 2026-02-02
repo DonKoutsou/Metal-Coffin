@@ -30,7 +30,8 @@ var LandedShips : Array[MapShip]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Setting up background, different for village/city/capital
-	TownBG = TownSpot.SpotType.BackgroundScene.instantiate() as TownBackground
+	var BackgroundScene = ResourceLoader.load(TownSpot.SpotType.BackgroundFile)
+	TownBG = BackgroundScene.instantiate() as TownBackground
 	$SubViewportContainer/SubViewport.add_child(TownBG)
 	TownBG.PositionChanged.connect(_on_town_background_position_changed)
 	#Set the port's name on the UI along with the town's buffs

@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://du24ilvkea51x"]
 
-[ext_resource type="PackedScene" uid="uid://bbfxceg5vwl1x" path="res://Scenes/TownShop/Town_background.tscn" id="1_eoubr"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_npnnf"]
 [ext_resource type="Resource" uid="uid://cymxwbov1pdsm" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Tsard.tres" id="3_ag8h5"]
 [ext_resource type="Resource" uid="uid://dm38q3okq43cs" path="res://Resources/MapSpots/CitySpots/SpotInfo/Cities/Ziliniara.tres" id="4_jl05r"]
@@ -86,5 +85,5 @@ PossibleIds = Array[ExtResource("2_npnnf")]([ExtResource("76_ce8sp"), ExtResourc
 [resource]
 script = ExtResource("11_2pbl6")
 VisibleOnStart = true
-BackgroundScene = ExtResource("1_eoubr")
+BackgroundFile = "uid://bbfxceg5vwl1x"
 Data = SubResource("Resource_m1q4d")

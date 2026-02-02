@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://dyvpncg7tolc7"]
 
-[ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="1_xsylx"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_khihf"]
 [ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Alivia.tres" id="3_u02hr"]
 [ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Curd.tres" id="4_mjh1h"]
@@ -28,5 +27,5 @@ PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_u02hr"), ExtResource
 script = ExtResource("10_jgsae")
 SpotK = 2
 VisibleOnStart = true
-BackgroundScene = ExtResource("1_xsylx")
+BackgroundFile = "uid://d0ujbu68jgisw"
 Data = SubResource("Resource_k4o2w")

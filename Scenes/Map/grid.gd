@@ -12,12 +12,15 @@ var FreeLabels : Array[RichTextLabel]
 var UsedLabels : Array[RichTextLabel]
 
 var M : Mutex
+var S : Semaphore
 #func _physics_process(delta: float) -> void:
 	#queue_redraw()
 
 func _ready() -> void:
 	M = Mutex.new()
 	EventHandler.GridPressed.connect(ToggleGrid)
+
+
 
 func CreateRichText() -> RichTextLabel:
 	var L = RichTextLabel.new()
@@ -28,7 +31,8 @@ func CreateRichText() -> RichTextLabel:
 	L.modulate = Color(1,1,1, 0.2)
 	L.add_theme_font_override("normal_font", ThemeDB.fallback_font)
 	FreeLabels.append(L)
-	add_child(L)
+	call_deferred("add_child", L)
+	#add_child(L)
 	return L
 
 func ResetLabels() -> void:
@@ -37,7 +41,7 @@ func ResetLabels() -> void:
 
 func HideUnused() -> void:
 	for g in FreeLabels:
-		g.hide()
+		g.call_deferred("hide")
 
 func ToggleLabelUsed(L : RichTextLabel, t : bool) -> void:
 	if (t):
@@ -51,7 +55,7 @@ func GetFreeLabel() -> RichTextLabel:
 	var L = FreeLabels.pop_back()
 	if (L == null):
 		L = CreateRichText()
-	L.show()
+	L.call_deferred("show")
 	return L
 
 func ToggleGrid(t : bool) -> void:
@@ -72,6 +76,8 @@ func ReprocessLines() -> void:
 	T.start(UpdateLines.bind(global_position, size, get_viewport_rect().size, ShipCamera.GetInstance().global_position, T))
 	
 
+var Threads : int = 0
+
 var TLines : Array[Array]
 var TLines2 : Array[Array]
 var TLines3 : Array[Array]
@@ -80,6 +86,9 @@ var TStrings2 : Dictionary[String, Vector2]
 var TStrings3 : Dictionary[String, Vector2]
 
 func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vector2, campos : Vector2, T : Thread) -> void:
+	M.lock()
+	Threads += 1
+	M.unlock()
 	var Lines : Array[Array]
 	var Lines2 : Array[Array]
 	var Lines3 : Array[Array]
@@ -203,15 +212,83 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 					Strings3[coordinate_text] = text_pos
 
 	M.lock()
+	if (Threads > 1):
+		#a thread recalculating everything has already started so we cancel this
+		Threads -= 1
+		M.unlock()
+		call_deferred("LinesUpdateAborted", T)
+		return
+	#print("Thread amm : {0}".format([Threads]))
 	TLines = Lines
 	TLines2 = Lines2
 	TLines3 = Lines3
 	TStrings = Strings
 	TStrings2 = Strings2
 	TStrings3 = Strings3
+	ResetLabels()
+	UpdateStrings()
+	HideUnused()
+	Threads -= 1
 	M.unlock()
 	call_deferred("LinesUpdateFinished", T)
 	
+
+func UpdateStrings() -> void:
+	for g in TStrings:
+		var L = GetFreeLabel()
+		L.call_deferred("set_position", TStrings[g] - Vector2(0,300))
+		L.call_deferred("set", "text","[font_size=300]" + g)
+		ToggleLabelUsed(L, true)
+		#draw_string(get_theme_default_font(), TStrings[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.2))
+	for g in TStrings2:
+		var L = GetFreeLabel()
+		L.call_deferred("set_position", TStrings2[g] - Vector2(0,100))
+		L.call_deferred("set", "text","[font_size=100]" + g)
+		ToggleLabelUsed(L, true)
+		#draw_string(get_theme_default_font(), TStrings2[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
+	for g in TStrings3:
+		var L = GetFreeLabel()
+		L.call_deferred("set_position", TStrings3[g] - Vector2(0,10))
+		L.call_deferred("set", "text","[font_size=10]" + g)
+		ToggleLabelUsed(L, true)
+		#draw_string(get_theme_default_font(), TStrings3[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1, 0.2))
+
+
+#func _physics_process(_delta: float) -> void:
+	#
+	#for g in 10:
+		#var stringtorender : String
+		#var pos : Vector2
+		#var fontsize : String
+		#M.lock()
+		#if (TStrings.size() > 0):
+			#stringtorender = TStrings.keys()[TStrings.keys().size() - 1]
+			#pos = TStrings[stringtorender] - Vector2(0,300)
+			#fontsize = "[font_size=300]"
+			#TStrings.erase(stringtorender)
+		#else: if (TStrings2.size() > 0):
+			#stringtorender = TStrings2.keys()[TStrings2.keys().size() - 1]
+			#pos = TStrings2[stringtorender] - Vector2(0,100)
+			#fontsize = "[font_size=100]"
+			#TStrings2.erase(stringtorender)
+		#else: if (TStrings3.size() > 0):
+			#stringtorender = TStrings3.keys()[TStrings3.keys().size() - 1]
+			#pos = TStrings3[stringtorender] - Vector2(0,10)
+			#fontsize = "[font_size=10]"
+			#TStrings3.erase(stringtorender)
+		#else:
+			#M.unlock()
+			#return
+		#
+		#var L = GetFreeLabel()
+		#L.position = pos
+		#L.text = fontsize + stringtorender
+		#ToggleLabelUsed(L, true)
+		#M.unlock()
+
+func LinesUpdateAborted(T : Thread) -> void:
+	T.wait_to_finish()
+
 func LinesUpdateFinished(T : Thread) -> void:
 	T.wait_to_finish()
 	queue_redraw()
@@ -224,26 +301,25 @@ func _draw() -> void:
 		draw_line(g[0], g[1], Col, max(8, 40 - (ZoomLevel * 80)), true)
 	for g in TLines3:
 		draw_line(g[0], g[1], Col, max(2, 10 - (ZoomLevel * 20)), true)
-	
-	ResetLabels()
-	
-	for g in TStrings:
-		var L = GetFreeLabel()
-		L.position = TStrings[g] - Vector2(0,300)
-		L.text = "[font_size=300]" + g
-		ToggleLabelUsed(L, true)
-		#draw_string(get_theme_default_font(), TStrings[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.2))
-	for g in TStrings2:
-		var L = GetFreeLabel()
-		L.position = TStrings2[g] - Vector2(0,100)
-		L.text = "[font_size=100]" + g
-		ToggleLabelUsed(L, true)
-		#draw_string(get_theme_default_font(), TStrings2[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
-	for g in TStrings3:
-		var L = GetFreeLabel()
-		L.position = TStrings3[g] - Vector2(0,10)
-		L.text = "[font_size=10]" + g
-		ToggleLabelUsed(L, true)
-		#draw_string(get_theme_default_font(), TStrings3[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1, 0.2))
-	HideUnused()
 	M.unlock()
+	
+	#for g in TStrings:
+		#var L = GetFreeLabel()
+		#L.position = TStrings[g] - Vector2(0,300)
+		#L.text = "[font_size=300]" + g
+		#ToggleLabelUsed(L, true)
+		##draw_string(get_theme_default_font(), TStrings[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 300, Color(1,1,1, 0.2))
+	#for g in TStrings2:
+		#var L = GetFreeLabel()
+		#L.position = TStrings2[g] - Vector2(0,100)
+		#L.text = "[font_size=100]" + g
+		#ToggleLabelUsed(L, true)
+		##draw_string(get_theme_default_font(), TStrings2[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 100, Color(1,1,1, 0.2))
+	#for g in TStrings3:
+		#var L = GetFreeLabel()
+		#L.position = TStrings3[g] - Vector2(0,10)
+		#L.text = "[font_size=10]" + g
+		#ToggleLabelUsed(L, true)
+		#draw_string(get_theme_default_font(), TStrings3[g], g, HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(1,1,1, 0.2))
+	
+	

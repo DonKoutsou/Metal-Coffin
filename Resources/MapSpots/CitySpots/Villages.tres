@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://df37gonu46vbl"]
 
-[ext_resource type="PackedScene" uid="uid://dw6dy4uoxiju5" path="res://Scenes/TownShop/Village_background.tscn" id="1_2vijd"]
 [ext_resource type="Resource" uid="uid://eemvne8otjn4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Armak.tres" id="3_b6ce5"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_i4484"]
 [ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_snnyn"]
@@ -28,5 +27,5 @@ PossibleIds = Array[ExtResource("3_i4484")]([ExtResource("3_b6ce5"), ExtResource
 [resource]
 script = ExtResource("10_ex7ij")
 SpotK = 1
-BackgroundScene = ExtResource("1_2vijd")
+BackgroundFile = "uid://dw6dy4uoxiju5"
 Data = SubResource("Resource_3mffu")

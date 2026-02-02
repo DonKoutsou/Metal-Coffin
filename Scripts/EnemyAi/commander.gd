@@ -287,7 +287,7 @@ func OnDestinationReached(Ship : HostileShip) -> void:
 	if (nextcity < 0 or nextcity > cities.size() - 1):
 		Ship.Direction *= -1
 		nextcity = cities.find(Ship.CurrentPort) + Ship.Direction
-	print(Ship.ShipName + " has reached " + Ship.CurrentPort.SpotInfo.SpotName + "|| Rerouting ship towards " + cities[nextcity].SpotInfo.SpotName)
+	print(Ship.ShipName + " has reached " + Ship.CurrentPort.SpotName + "|| Rerouting ship towards " + cities[nextcity].SpotName)
 	Ship.SetNewDestination(cities[nextcity].GetSpotName())
 	#Ship.ShipLookAt(Ship.DestinationCity.global_position)
 

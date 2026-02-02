@@ -3,7 +3,7 @@ extends Node
 class_name StartingScreen
 
 @export var StartingMenuScene : String = "res://Scenes/starting_menu.tscn"
-@export var StudioAnim : PackedScene
+@export_file("*.tscn") var StudioAnim : String
 @export var GameScene : String = "res://Scenes/World.tscn"
 @export var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
 @export var CageFightGameScene : String = "res://Scenes/CageFightWorld.tscn"
@@ -37,7 +37,8 @@ func _ready() -> void:
 	call_deferred("Start")
 
 func Start() -> void:
-	var vidpl = StudioAnim.instantiate() as StudioAnimation
+	var StudioAnimScene = ResourceLoader.load(StudioAnim)
+	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
 	add_child(vidpl)
 	
 	await vidpl.Finished
