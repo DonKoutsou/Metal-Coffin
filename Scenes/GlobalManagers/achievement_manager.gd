@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 
 func _exit_tree() -> void:
-	IncrementStatFloat("AVGT", Time.get_ticks_msec() / 60000)
+	IncrementStatFloat("AVGT", Time.get_ticks_msec() / 60000.0)
 
 static func GetInstance() -> AchievementManager:
 	return Instance

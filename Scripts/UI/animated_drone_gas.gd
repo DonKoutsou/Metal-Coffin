@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 class_name Dial
 
-@export var Sound : AudioStreamPlayer
+@export var Sound : AudioStreamPlayer2D
 
 signal RangeChanged(NewVal : float)
 signal RangeSnapedChaned(Dir : bool)

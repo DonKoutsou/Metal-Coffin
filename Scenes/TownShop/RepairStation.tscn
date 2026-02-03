@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c7ojj8un8chim" path="res://Scenes/TownShop/ShipRepairUI.tscn" id="3_272ke"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="4_xts26"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="5_0bh7o"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="5_5dv8f"]
 
 [node name="Fuel Storages" type="PanelContainer" unique_id=2004608452 node_paths=PackedStringArray("RepairUIPlacement")]
 anchors_preset = 15
@@ -32,6 +33,7 @@ size_flags_horizontal = 3
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1178221120]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_5dv8f")
 theme_override_font_sizes/font_size = 50
 text = "Repair Bay"
 horizontal_alignment = 1

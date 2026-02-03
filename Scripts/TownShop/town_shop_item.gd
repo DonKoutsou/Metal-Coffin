@@ -70,7 +70,7 @@ func UpdateBar(Added : int):
 		OnItemSold.emit(It)
 		
 	if (Added * ItPrice > PlWallet.Funds):
-		Added = PlWallet.Funds / ItPrice
+		Added = roundi(PlWallet.Funds / ItPrice)
 	if (Added > ShopAmm):
 		Added = ShopAmm
 	var NowPlAmm = PlAmm + BoughtAmm + Added

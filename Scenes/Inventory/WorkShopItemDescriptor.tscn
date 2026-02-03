@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cuutvp45vr0ew"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_bgbkq"]
+[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="1_0fjjd"]
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_0fjjd"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_q7hfh"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="4_r68kf"]
@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_bgbkq")
+theme_override_styles/panel = ExtResource("1_0fjjd")
 script = ExtResource("2_0fjjd")
 Workshop = true
 CardScene = ExtResource("3_q7hfh")

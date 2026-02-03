@@ -4,7 +4,7 @@ class_name LoadingScreen
 
 #@export var Labe : Label
 
-signal LoadingDestroyed
+#signal LoadingDestroyed
 
 @export_multiline var Text : String
 @export var SkipButton : Button
@@ -36,13 +36,14 @@ func _ready() -> void:
 func DissableText() -> void:
 	TextLabel.visible = false
 
-func ProcessStarted(ProcessName : String) -> void:
+func ProcessStarted(_ProcessName : String) -> void:
 	#var l = Label.new()
-	#Labe.text += "\n{0} {1} : Process Started...".format([Time.get_time_string_from_system(),ProcessName])
+	#l.text += "\n{0} {1} : Process Started...".format([Time.get_time_string_from_system(),ProcessName])
+	#$VBoxContainer.add_child(l)
 	pass
-func ProcesFinished(ProcessName : String) -> void:
+func ProcesFinished(_ProcessName : String) -> void:
 	#var l = Label.new()
-	#Labe.text += "\n{0} {1} : Process Finished".format([Time.get_time_string_from_system(),ProcessName])
+	#l.text += "\n{0} {1} : Process Finished".format([Time.get_time_string_from_system(),ProcessName])
 	#$VBoxContainer.add_child(l)
 	pass
 func UpdateProgress(Precent : float) -> void:

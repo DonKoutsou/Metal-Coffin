@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
 [ext_resource type="PackedScene" uid="uid://d3irrnfaw10g4" path="res://Scenes/TownShop/RepairStation.tscn" id="5_otyss"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="8_2uwot"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/WorkShop/work_shop.tscn" id="17_t244x"]
@@ -183,6 +184,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_fonts/bold_font = ExtResource("8_2uwot")
 bbcode_enabled = true
 text = "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
 fit_content = true

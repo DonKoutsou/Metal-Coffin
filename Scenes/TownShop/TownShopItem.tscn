@@ -5,6 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_xvjp2"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_7jnpa"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="5_0ij4u"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="5_y3v6e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ql3kp"]
 content_margin_left = 8.0
@@ -59,6 +60,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=491419952]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 34
 text = "Cruise Missile"
 horizontal_alignment = 1
@@ -80,12 +82,14 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 14
 text = "Owned:"
 
 [node name="PlAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=669844078]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 26
 text = "1"
 
@@ -118,6 +122,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 14
 text = "Price:"
 
@@ -125,6 +130,7 @@ text = "Price:"
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 26
 text = "50"
 
@@ -138,12 +144,14 @@ size_flags_horizontal = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 14
 text = "Shop Inventory:"
 
 [node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=1944206039]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 26
 text = "1"
 

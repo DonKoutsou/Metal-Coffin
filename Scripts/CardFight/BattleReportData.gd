@@ -14,7 +14,7 @@ class_name BattleReportData
 @export var Location : String
 @export var Date : String
 
-func SetData(Won : bool, DateString : String, Funds : int, DoneDmg : float, GotDmg : float, NegDmg : float, FRCombatants : Array[BattleShipStats], ENCombatants : Array[BattleShipStats],FRCasualties : Array[BattleShipStats], ENCasualties : Array[BattleShipStats], Loc : Vector2) -> void:
+func SetData(_Win : bool, DateString : String, Funds : int, DoneDmg : float, GotDmg : float, NegDmg : float, FRCombatants : Array[BattleShipStats], ENCombatants : Array[BattleShipStats],FRCasualties : Array[BattleShipStats], ENCasualties : Array[BattleShipStats], Loc : Vector2) -> void:
 	for g in FRCasualties:
 		FriendlyCasualties.append(g.Name)
 		

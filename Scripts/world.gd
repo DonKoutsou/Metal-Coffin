@@ -46,7 +46,7 @@ signal WRLD_OnGameEnded
 signal WRLD_WorldReady
 signal WorldSpawnTransitionFinished
 #signal WRLD_StatsUpdated(StatN : String)
-signal WRLD_StatGotLow(StatN : String)
+#signal WRLD_StatGotLow(StatN : String)
 
 var OverworldEventsToShow : Array[OverworldEventData]
 var TutorialsToShow : Array[ActionTracker.Action]

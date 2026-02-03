@@ -33,14 +33,14 @@ func _draw() -> void:
 		draw_circle(Spots[g], 2, Color(1,1,1), true)
 		var textpos = Spots[g]
 		textpos.y -= 10
-		textpos.x -= (g.GetSpotName().length() / 2) * 15
+		textpos.x -= (g.GetSpotName().length() / 2.0) * 15.0
 		var SpotString = g.GetSpotName()
 		
 		draw_string(font, textpos, SpotString, HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
 		if (g.HasFuel()):
 			draw_texture_rect(load("res://Assets/Items/Fuel.png"), Rect2(Vector2(textpos.x - 20, textpos.y - 14), Vector2(16,16)), false, Color("a29752"))
 			#draw_string(font, Vector2(textpos.x - 18, textpos.y + 16), "Fuel Depot", HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
-	draw_circle(get_viewport_rect().size / 2, Rng / 15, Color(0.3, 0.7, 0.915), false, 4)
+	draw_circle(get_viewport_rect().size / 2.0, Rng / 15.0, Color(0.3, 0.7, 0.915), false, 4)
 
 func RedrawThing() -> void:
 	Rng = 0
@@ -78,8 +78,8 @@ func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], P
 	FuelBar.value = PlFuel + BoughtFuel
 	FuelPriceLabel.text = var_to_str(FuelPricePerTon)
 
-func SetFuelData(Ships : Array[MapShip]):
-	for g in Ships:
+func SetFuelData(ShipsToSet : Array[MapShip]):
+	for g in ShipsToSet:
 		PlMaxFuel += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 		PlFuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		
@@ -101,13 +101,13 @@ func UpdateFuelBar(AddedFuel : float):
 	
 	var MoneySpent = AddedFuel * FuelPricePerTon
 	if (MoneySpent > 0):
-		SpentFunds += (AddedFuel * FuelPricePerTon)
-		if (roundi(SpentFunds/1000) > 1):
-			Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(SpentFunds / 1000))
+		SpentFunds += roundi(AddedFuel * FuelPricePerTon)
+		if (SpentFunds > 1000):
+			Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(SpentFunds / 1000.0))
 			SpentFunds = 0
 	else:
-		SpentFunds += (AddedFuel * FuelPricePerTon)
-		var z = roundi(SpentFunds/1000)
+		SpentFunds += roundi(AddedFuel * FuelPricePerTon)
+		var z = roundi(SpentFunds/1000.0)
 		if (z < -1):
 			Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(abs(z))
 			SpentFunds = 0

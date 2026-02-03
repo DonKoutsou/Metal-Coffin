@@ -205,7 +205,7 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 #var CloudTime = 0.0
 var CloudOffset = Vector2.ZERO
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (!SimulationManager.IsPaused()):
 		#CloudTime += delta * SimulationManager.SimSpeed()
 		#CloudMat.set_shader_parameter("custom_time", CloudTime)
@@ -257,7 +257,7 @@ func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true
 	if (Unzoom):
 		ForceZoomOut()
 
-func FrameCamToShip(Ship : PlayerDrivenShip, _OverrideTime : float = 1, Unzoom : bool = true) -> void:
+func FrameCamToShip(Ship : PlayerDrivenShip, _OverrideTime : float = 1, _Unzoom : bool = true) -> void:
 	if (FrameTween != null):
 		FrameTween.kill()
 

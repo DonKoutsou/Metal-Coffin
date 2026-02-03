@@ -20,7 +20,7 @@ class_name ItemDescriptor
 
 signal ItemUpgraded(Box : Inventory_Box)
 signal ItemDropped(Box : Inventory_Box)
-signal ItemRepaired(Box : Inventory_Box)
+#signal ItemRepaired(Box : Inventory_Box)
 signal ItemTransf(Box : Inventory_Box)
 signal ItemRemove(Box : Inventory_Box)
 signal ItemAdd(Box : Inventory_Box)

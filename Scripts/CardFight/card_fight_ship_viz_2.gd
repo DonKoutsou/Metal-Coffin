@@ -218,7 +218,7 @@ func EnableSmoke() -> void:
 	SmokePart.visible = true
 
 func ToggleDmgBuff(t : bool, amm : float) -> void:
-	FPBuff.amount = 5 * amm
+	FPBuff.amount = roundi(5.0 * amm)
 	FPBuff.visible = t
 
 func ToggleDmgDebuff(t : bool) -> void:
@@ -232,7 +232,7 @@ func ToggleDefDeBuff(t : bool) -> void:
 	DefDeBuff.visible = t
 
 func ToggleSpeedBuff(t : bool, amm : float) -> void:
-	SpeedBuff.amount = 5 * amm
+	SpeedBuff.amount = roundi(5.0 * amm)
 	SpeedBuff.visible = t
 
 func ToggleSpeedDebuff(t : bool) -> void:

@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://hbnehjln8dhp" path="res://Scripts/missile.gd" id="1_dxfkf"]
 [ext_resource type="Shader" uid="uid://coc3mor33lg72" path="res://Shaders/missileCone.gdshader" id="1_hg5k0"]
+[ext_resource type="AudioStream" uid="uid://bsmp34u1oty24" path="res://Assets/Sounds/missile_launch_01.mp3" id="2_d3kn2"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="4_5epdn"]
-[ext_resource type="AudioStream" uid="uid://bmv461hq0lkmm" path="res://Assets/Sounds/missile_launch_02.ogg" id="4_v3idv"]
+[ext_resource type="AudioStream" uid="uid://cdltvihh7rmac" path="res://Assets/Sounds/missile_launch_02.mp3" id="4_d3kn2"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_brtn2"]
+streams_count = 2
+stream_0/stream = ExtResource("2_d3kn2")
+stream_1/stream = ExtResource("4_d3kn2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qemak"]
 shader = ExtResource("1_hg5k0")
@@ -28,7 +34,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
 [node name="Missile" type="Node2D" unique_id=1696527019 groups=["Missiles", "Ships"]]
 script = ExtResource("1_dxfkf")
-MissileLaunchSound = ExtResource("4_v3idv")
+MissileLaunchSound = SubResource("AudioStreamRandomizer_brtn2")
 
 [node name="AccelPosition" type="Node2D" parent="." unique_id=1303542076]
 position = Vector2(29, 0)
@@ -61,8 +67,6 @@ polygon = PackedVector2Array(5.5, 0, 200, 100, 220, 0, 200, -100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MissileBody" unique_id=2017869157]
 shape = SubResource("CircleShape2D_xahj0")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1077036536]
 
 [node name="TrailLine" type="Line2D" parent="." unique_id=2050878307]
 z_index = -2

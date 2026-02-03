@@ -1,6 +1,7 @@
 [gd_resource type="Theme" format=4 uid="uid://de7fb8k462lxb"]
 
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="1_30fba"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="2_yv80o"]
 [ext_resource type="StyleBox" uid="uid://bf8ldnyjyuff" path="res://Theme/ButtonHover.tres" id="3_n3ok3"]
 [ext_resource type="StyleBox" uid="uid://dv72od2tskfeh" path="res://Theme/DarkBluePanel.tres" id="4_apdyr"]
 [ext_resource type="StyleBox" uid="uid://cakd87dtiyrm2" path="res://Theme/ButtonNormal.tres" id="4_dknas"]
@@ -2778,7 +2779,7 @@ Button/constants/h_separation = 10
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 6
 Button/font_sizes/font_size = 18
-Button/fonts/font = ExtResource("1_30fba")
+Button/fonts/font = ExtResource("2_yv80o")
 Button/styles/disabled = ExtResource("4_dknas")
 Button/styles/focus = SubResource("StyleBoxFlat_mvyjv")
 Button/styles/hover = ExtResource("3_n3ok3")
@@ -2814,7 +2815,7 @@ Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = 0
 Label/constants/shadow_outline_size = 0
 Label/font_sizes/font_size = 20
-Label/fonts/font = ExtResource("1_30fba")
+Label/fonts/font = ExtResource("2_yv80o")
 LineEdit/colors/caret_color = Color(1, 0.763983, 0.0812772, 1)
 LineEdit/colors/selection_color = Color(1, 0.763983, 0.0812772, 1)
 LinkButton/styles/focus = ExtResource("9_udhci")
@@ -2887,7 +2888,7 @@ RichTextLabel/fonts/bold_font = SubResource("FontVariation_tjrxs")
 RichTextLabel/fonts/bold_italics_font = SubResource("FontVariation_xtlfm")
 RichTextLabel/fonts/italics_font = SubResource("FontVariation_is7i8")
 RichTextLabel/fonts/mono_font = SubResource("FontFile_swemc")
-RichTextLabel/fonts/normal_font = ExtResource("1_30fba")
+RichTextLabel/fonts/normal_font = ExtResource("2_yv80o")
 RichTextLabel/styles/focus = SubResource("StyleBoxFlat_n0pe3")
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_8xmx0")
 TabContainer/colors/drop_mark_color = Color(0, 0, 0, 1)

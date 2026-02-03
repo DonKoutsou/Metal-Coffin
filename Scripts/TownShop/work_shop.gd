@@ -265,7 +265,7 @@ func CloseDescriptor() -> void:
 func RemoveItem(Box : Inventory_Box) -> void:
 	var Cost = Box.GetContainedItem().Cost
 	var It = Box.GetContainedItem()
-	Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(roundi(Cost / 1000))
+	Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(roundi(Cost / 1000.0))
 	var PLWallet = World.GetInstance().PlayerWallet
 	PLWallet.AddFunds(Cost)
 	PopUpManager.GetInstance().DoFadeNotif("{0} removed from {1}'s ship")
@@ -324,7 +324,7 @@ func ItemToAddSelected(M : Merchandise) -> void:
 	M.Amm -= 1
 	
 	PLWallet.AddFunds(-Cost)
-	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Cost / 100))
+	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Cost / 100.0))
 	
 	ItemCat.visible = false
 	for g in ItemParent.get_children():

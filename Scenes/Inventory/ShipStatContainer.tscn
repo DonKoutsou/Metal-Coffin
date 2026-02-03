@@ -3,12 +3,6 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_netfp"]
 [ext_resource type="Script" uid="uid://ba6i2l3wt1dop" path="res://Scripts/UI/ShipStatContainer.gd" id="2_hehea"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8fht"]
-bg_color = Color(1, 0.7647059, 0.08235294, 1)
-border_width_top = 10
-border_width_bottom = 10
-border_color = Color(0.8001019, 0.8001019, 0.8001019, 0)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvfpq"]
 content_margin_left = 2.0
 content_margin_top = 2.0
@@ -76,16 +70,11 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1253538186]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 18
 text = "stat"
 vertical_alignment = 1
-
-[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=87363620]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_q8fht")
 
 [node name="Label2" type="Label" parent="HBoxContainer" unique_id=510749827]
 layout_mode = 2

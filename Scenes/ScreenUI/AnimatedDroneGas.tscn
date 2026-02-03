@@ -114,7 +114,7 @@ offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1894735125]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1757883521]
 stream = ExtResource("22_mtsvb")
 volume_db = -15.0
 pitch_scale = 0.8

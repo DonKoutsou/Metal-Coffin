@@ -44,7 +44,7 @@ func ToggleWeatherMan(t : bool) -> void:
 func SetWorldBounds(WB : Vector2) -> void:
 	WorldBounds = WB
 	position = Vector2(-WorldBounds.x, WorldBounds.y * 2)
-	size = Vector2(WorldBounds.x * 2, -WorldBounds.y * 3)
+	set_deferred("size", Vector2(WorldBounds.x * 2, -WorldBounds.y * 3))
 	
 	var global_transform = get_global_transform()
 	inverse_transform = global_transform.affine_inverse()

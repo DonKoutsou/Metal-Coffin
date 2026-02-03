@@ -8,5 +8,5 @@ func GetDesc(Tier : int) -> String:
 
 func GetEnergyAmmount(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
-		return ResupplyAmmount + (TierUpgrade * Tier)
+		return roundi(ResupplyAmmount + (TierUpgrade * Tier))
 	return ResupplyAmmount * max((TierUpgrade * Tier), 1)

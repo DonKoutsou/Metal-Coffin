@@ -161,7 +161,7 @@ func _exit_tree() -> void:
 
 var CloudOffset = Vector2.ZERO
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	CloudOffset += Vector2(-0.0001, 0.0001)
 	Cloud.material.set_shader_parameter("Offset", CloudOffset)
 
@@ -649,7 +649,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
 		
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_TURNS_PASSED) and CurrentTurn > ShipTurns.size() / 2):
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_TURNS_PASSED) and CurrentTurn > ShipTurns.size() / 2.0):
 			print("{0} cant use {1}, not enought turns passed".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
@@ -1324,7 +1324,7 @@ func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : 
 	Data.Targets = TargetViz
 	return Data
 
-func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mod : ReserveConversionModule, _TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var resupplyamm = Mod.GetConversionAmmount(Performer.EnergyReserves, Action.Tier)
 	
 	var Friendly = IsShipFriendly(Performer)
@@ -1339,7 +1339,7 @@ func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mo
 	Data.Targets = TargetViz
 	return Data
 
-func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : MaxReserveModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func HandleMaxReserveSupply(Performer : BattleShipStats, _Action : CardStats, Mod : MaxReserveModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	var resupplyamm = Performer.Energy
 	
 	var Targets : Array[BattleShipStats]
@@ -1367,7 +1367,7 @@ func HandleMaxReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod
 	Data.Targets = TargetViz
 	return Data
 
-func HandleFireExtinguish(Performer : BattleShipStats, Action : CardStats, Mod : CardModule) -> DeffensiveAnimationData:
+func HandleFireExtinguish(Performer : BattleShipStats, _Action : CardStats, Mod : CardModule) -> DeffensiveAnimationData:
 	
 	var Callables : Array[Callable] = [CombustFire.bind(Performer)]
 	
@@ -1398,7 +1398,7 @@ func HandleSelfDamage(Performer : BattleShipStats, Action : CardStats, Mod : Sel
 	return AnimData
 
 
-func HandleRecoil(Performer : BattleShipStats, Action : CardStats, DamageAmm : float, Mod : RecoilDamageModule) -> OffensiveAnimationData:
+func HandleRecoil(Performer : BattleShipStats, _Action : CardStats, DamageAmm : float, Mod : RecoilDamageModule) -> OffensiveAnimationData:
 	var Callables : Array[Callable]
 	var Recoil = Mod.GetRecoilAmmount(DamageAmm)
 	Callables.append(DamageShip.bind(Performer, Recoil))
@@ -1474,7 +1474,7 @@ func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxS
 	Data.Callables = Callables
 	return Data
 
-func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : CauseFireModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func HandleCauseFire(Performer : BattleShipStats, _Action : CardStats, Mod : CauseFireModule, TargetOverride : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	#var viz = GetShipViz(Performer)
 	var Targets : Array[BattleShipStats]
 	if (TargetOverride.size() > 0):
@@ -1500,7 +1500,7 @@ func HandleCauseFire(Performer : BattleShipStats, Action : CardStats, Mod : Caus
 	return Data
 
 
-func HandleDamageStack(Performer : BattleShipStats, Action : CardStats, Mod : StackDamageCardModule) -> DeffensiveAnimationData:
+func HandleDamageStack(_Performer : BattleShipStats, Action : CardStats, Mod : StackDamageCardModule) -> DeffensiveAnimationData:
 	var OffensiveModule = Action.OnPerformModule.duplicate() as OffensiveCardModule
 	var NewAction = Action.duplicate()
 	NewAction.OnPerformModule = OffensiveModule
