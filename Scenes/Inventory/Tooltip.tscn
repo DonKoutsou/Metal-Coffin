@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cqjgceykpax6c"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_y2t8f"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=861191945]
+offset_right = 318.0
+offset_bottom = 110.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_y2t8f")
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=442661117]
+layout_mode = 2
+bbcode_enabled = true
+text = "Represents the ship’s health. As long as [color=#ffc315]HULL[/color] is above 0, your ship remains operational. Ships can be repaired at ports, though repairs take time—larger [color=#ffc315]HULL[/color] values require longer to mend."
+fit_content = true
+scroll_active = false
+autowrap_mode = 2

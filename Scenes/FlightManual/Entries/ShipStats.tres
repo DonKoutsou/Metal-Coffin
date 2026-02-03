@@ -44,5 +44,9 @@ Derived stat calculated from other attributes:
 [color=#ffc315]-------------------------------------------------------------------------------------------[/color]
 [color=#ffc315]REPAIR PRICE[/color] | Measured in Drahma
 The cost to repair one point of [color=#ffc315]HULL[/color] health. All ship parts contribute to this value—the lower it is, the cheaper your ship is to maintain.
+[color=#ffc315]-------------------------------------------------------------------------------------------[/color]
+[color=#ffc315]RANGE[/color] | Measured in Kilometers
+Derived stat calculated from other attributes:
+[color=#ffc315]RANGE[/color] = [color=#ffc315]FUEL TANK[/color] * (([color=#ffc315]FUEL EFFICIENCY[/color] / pow([color=#ffc315]WEIGHT[/color], 0.5)) * 10)
 [color=#ffc315]-------------------------------------------------------------------------------------------[/color]"
 metadata/_custom_type_script = "uid://cvx22oa8uksuj"

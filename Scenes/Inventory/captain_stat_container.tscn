@@ -93,7 +93,6 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 14
 theme_override_constants/v_separation = -166
 alignment = 1
 last_wrap_alignment = 1

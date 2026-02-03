@@ -3,6 +3,12 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_netfp"]
 [ext_resource type="Script" uid="uid://ba6i2l3wt1dop" path="res://Scripts/UI/ShipStatContainer.gd" id="2_hehea"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8fht"]
+bg_color = Color(1, 0.7647059, 0.08235294, 1)
+border_width_top = 10
+border_width_bottom = 10
+border_color = Color(0.8001019, 0.8001019, 0.8001019, 0)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvfpq"]
 content_margin_left = 2.0
 content_margin_top = 2.0
@@ -57,21 +63,29 @@ corner_detail = 1
 custom_minimum_size = Vector2(200, 0)
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 0
 theme = ExtResource("1_netfp")
 theme_override_constants/separation = 0
 script = ExtResource("2_hehea")
+Tooltipscene = "uid://cqjgceykpax6c"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1997813860]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1253538186]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 18
 text = "stat"
 vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=87363620]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q8fht")
 
 [node name="Label2" type="Label" parent="HBoxContainer" unique_id=510749827]
 layout_mode = 2
@@ -86,6 +100,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 6
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_jvfpq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
 value = 19.17
@@ -99,6 +114,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_jokjb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5v3x0")
 value = 60.17
@@ -111,7 +127,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_ueh8q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nasb0")
 value = 10.0
 show_percentage = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

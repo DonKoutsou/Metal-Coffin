@@ -3,9 +3,19 @@ extends VBoxContainer
 
 class_name ShipStatContainer
 
-var STName
+@export_file("*.tscn") var Tooltipscene : String
+
+var STName = -1
 
 var Metric = ""
+
+var Tooltip : Control
+
+func _ready() -> void:
+	set_physics_process(false)
+
+func _physics_process(delta: float) -> void:
+	Tooltip.global_position = get_global_mouse_position()
 
 func SetData(Stat : STAT_CONST.STATS) -> void:
 	STName = Stat
@@ -18,7 +28,8 @@ func SetData(Stat : STAT_CONST.STATS) -> void:
 	$ProgressBar/ItemBar.max_value = MaxVal
 	$ProgressBar/ItemNegBar.max_value = MaxVal
 
-func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String) -> void:
+func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Stat : STAT_CONST.STATS) -> void:
+	STName = Stat
 	Metric = StatMetric
 	$HBoxContainer/Label.text = StatName
 	$ProgressBar.max_value = MaxValue
@@ -46,3 +57,26 @@ func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> v
 		$HBoxContainer/Label2.text = "{0} {1}".format([var_to_str(max(StatVal, ItemVar) - ItemPenalty).replace(".0", ""), Metric])
 	else:
 		$HBoxContainer/Label2.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
+
+
+func _on_mouse_entered() -> void:
+	if (STName == -1):
+		return
+	var tipscene : PackedScene = ResourceLoader.load(Tooltipscene)
+	Tooltip = tipscene.instantiate()
+	
+	
+	
+	Ingame_UIManager.GetInstance().add_child(Tooltip)
+	
+	Tooltip.get_child(0).text = STAT_CONST.GetTooltip(STName)
+	Tooltip.size.y = 0
+	Tooltip.global_position = get_global_mouse_position()
+	
+	set_physics_process(true)
+
+func _on_mouse_exited() -> void:
+	if (Tooltip == null):
+		return
+	Tooltip.queue_free()
+	set_physics_process(false)

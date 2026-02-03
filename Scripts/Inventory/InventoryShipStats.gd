@@ -18,11 +18,11 @@ func _ready() -> void:
 		Stats.append(statscene)
 	
 	SpeedStat = ShipStatScene.instantiate() as ShipStatContainer
-	SpeedStat.SetDataCustom(1000, "km/h", "SPEED")
+	SpeedStat.SetDataCustom(1000, "km/h", "SPEED", STAT_CONST.STATS.SPEED)
 	add_child(SpeedStat)
 	
 	Rangestat = ShipStatScene.instantiate() as ShipStatContainer
-	Rangestat.SetDataCustom(10000, "km", "RANGE")
+	Rangestat.SetDataCustom(10000, "km", "RANGE", STAT_CONST.STATS.RANGE)
 	add_child(Rangestat)
 
 func UpdateValues() -> void:

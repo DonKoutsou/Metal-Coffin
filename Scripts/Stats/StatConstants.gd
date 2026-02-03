@@ -3,6 +3,29 @@ extends Node
 
 class_name STAT_CONST
 
+const StatToolTips : Dictionary = {
+	STATS.FUEL_TANK : "Indicates how much fuel a ship can carry. Combined with fuel efficiency, this determines the ship’s maximum travel distance without refueling.",
+	STATS.FUEL_EFFICIENCY : "Determines how far a ship can travel per unit of fuel. Higher fuel efficiency means longer travel on less fuel. Heavier ships suffer from reduced fuel efficiency.",
+	STATS.THRUST : "Represents the propulsion power of the ship. When combined with the ship's [color=#ffc315]WEIGHT[/color], it determines the ship’s top speed.",
+	STATS.FIREPOWER : "Used during close-quarters combat encounters. Offensive actions scale with your [color=#ffc315]FIREPOWER[/color] stat. [color=#ffc315]FIREPOWER[/color] can also be temporarily increased during battle. Inspect each combat card to see how it scales with [color=#ffc315]FIREPOWER[/color].",
+	STATS.HULL : "Represents the ship’s health. As long as [color=#ffc315]HULL[/color] is above 0, your ship remains operational. Ships can be repaired at ports, though repairs take time—larger [color=#ffc315]HULL[/color] values require longer to mend.",
+	STATS.INVENTORY_SPACE : "Reflects how much cargo the ship can carry. Cargo, such as missiles or fire suppression units, can be purchased from ports and is typically single-use.",
+	STATS.VISUAL_RANGE : "Determines how far your ship can visually detect enemies or objects in space.",
+	STATS.ELINT : "Electronic Intelligence allows your ship to detect enemy radar signals at greater distances.",
+	STATS.MISSILE_SPACE : "Ammount of fuel ship can carry",
+	STATS.WEIGHT : "Total mass of your ship and its equipment. [color=#ffc315]WEIGHT[/color] affects multiple aspects of performance, including [color=#ffc315]SPEED[/color] and [color=#ffc315]FUEL EFFICIENCY[/color].",
+	STATS.ENGINES_SLOTS : "Ammount of fuel ship can carry",
+	STATS.SENSOR_SLOTS : "Ammount of fuel ship can carry",
+	STATS.FUEL_TANK_SLOTS : "Ammount of fuel ship can carry",
+	STATS.SHIELD_SLOTS : "Ammount of fuel ship can carry",
+	STATS.WEAPON_SLOTS : "Ammount of fuel ship can carry",
+	STATS.MAX_SHIELD : "Ammount of fuel ship can carry",
+	STATS.REPAIR_PRICE : "The cost to repair one point of [color=#ffc315]HULL[/color] health. All ship parts contribute to this value—the lower it is, the cheaper your ship is to maintain.",
+	STATS.AEROSONAR_RANGE : "Ammount of fuel ship can carry",
+	STATS.SPEED : "Derived stat calculated from other attributes:[p][color=#ffc315]SPEED[/color] = ([color=#ffc315]THRUST[/color] × 1000) / [color=#ffc315]WEIGHT[/color]",
+	STATS.RANGE : "Derived stat calculated from other attributes:[p][color=#ffc315]RANGE[/color] = [color=#ffc315]FUEL TANK[/color] * (([color=#ffc315]FUEL EFFICIENCY[/color] / pow([color=#ffc315]WEIGHT[/color], 0.5)) * 10)"
+}
+
 const StatMaxValues : Dictionary = {
 	STATS.FUEL_TANK : 1000,
 	STATS.FUEL_EFFICIENCY : 50,
@@ -43,6 +66,9 @@ const StatShouldStack : Dictionary = {
 	STATS.REPAIR_PRICE : true,
 	STATS.AEROSONAR_RANGE : false
 }
+
+static func GetTooltip(Stat : STATS) -> String:
+	return StatToolTips[Stat]
 
 static func StringToEnum(Stat : String) -> STATS:
 	for g in STATS.keys():
@@ -107,4 +133,6 @@ enum STATS{
 	MAX_SHIELD,
 	REPAIR_PRICE,
 	AEROSONAR_RANGE,
+	SPEED,
+	RANGE,
 }
