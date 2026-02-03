@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_e1s57"]
 [ext_resource type="Texture2D" uid="uid://smcigb5qkren" path="res://Assets/CaptainPortraits/Captain7.png" id="3_1f7qw"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="5_c3lfk"]
+[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="6_tv6q8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3lfk"]
 
@@ -114,7 +115,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_sxetj")
+theme_override_styles/panel = ExtResource("6_tv6q8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer" unique_id=1959035554]
 layout_mode = 2
@@ -122,7 +123,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer" unique_id=657880210]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Engines"
 uppercase = true
 
@@ -135,7 +136,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_sxetj")
+theme_override_styles/panel = ExtResource("6_tv6q8")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2" unique_id=1990982709]
 layout_mode = 2
@@ -143,7 +144,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2" unique_id=764125027]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Fuel Tanks"
 uppercase = true
 
@@ -156,7 +157,7 @@ size_flags_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_sxetj")
+theme_override_styles/panel = ExtResource("6_tv6q8")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3" unique_id=307309254]
 layout_mode = 2
@@ -164,7 +165,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3" unique_id=2023558435]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Sensors"
 uppercase = true
 
@@ -176,7 +177,7 @@ size_flags_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_sxetj")
+theme_override_styles/panel = ExtResource("6_tv6q8")
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4" unique_id=1501067862]
 layout_mode = 2
@@ -184,7 +185,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4" unique_id=1299575924]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Fortifications"
 uppercase = true
 
@@ -197,7 +198,7 @@ size_flags_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_sxetj")
+theme_override_styles/panel = ExtResource("6_tv6q8")
 
 [node name="VBoxContainer5" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5" unique_id=224854820]
 layout_mode = 2
@@ -205,7 +206,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5" unique_id=934015092]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Weapons"
 uppercase = true
 
@@ -218,7 +219,7 @@ size_flags_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_sxetj")
+theme_override_styles/panel = ExtResource("6_tv6q8")
 
 [node name="VBoxContainer6" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6" unique_id=1481423577]
 layout_mode = 2
@@ -226,7 +227,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6" unique_id=1343099106]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Cargo"
 uppercase = true
 
