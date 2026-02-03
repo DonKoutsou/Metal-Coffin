@@ -235,7 +235,6 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
 	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 	
-	
 		#ShipStats.SetCaptain(Cha)
 		#ShipDeck.visible = false
 		

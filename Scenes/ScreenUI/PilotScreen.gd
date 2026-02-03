@@ -9,21 +9,22 @@ class_name PilotScreenUI
 @export var MissileUI : MissileTab
 @export var EventHandler : UIEventHandler
 @export_group("Buttons")
-@export var LandButton : TextureButton
-@export var HatchButton : TextureButton
-@export var ShipDockButton : TextureButton
-@export var RegroupButton : TextureButton
-@export var SimulationButton : TextureButton
 @export var SpeedSimulationButton : TextureButton
-@export var MapMarkerButton : TextureButton
+@export var ZoomDial : Dial
+@export var YDial : Dial
+@export var XDial : Dial
 
 
 func _ready() -> void:
-	#MissileUI.MissileLaunched.connect(Cam.EnableMissileShake)
+	MissileUI.MissileLaunched.connect(EventHandler.OnMissilgeLaunched)
 	EventHandler.ScreenUIToggled.connect(ToggleScreenUI)
 	EventHandler.ShipUpdated.connect(ControlledShipSwitched)
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
 	EventHandler.SpeedForced.connect(ShipSpeedForced)
+	EventHandler.ZoomChangedFromScreen.connect(ZoomDial.AddCustomMovement)
+	EventHandler.YChangedFromScreen.connect(YDial.AddCustomMovement)
+	EventHandler.XChangedFromScreen.connect(XDial.AddCustomMovement)
+	UISoundMan.GetInstance().Refresh()
 
 var ScreenItemsStateBeforePause : bool
 
@@ -146,3 +147,12 @@ func _on_team_button_toggled(toggled_on: bool) -> void:
 
 func _on_sonar_button_toggled(toggled_on: bool) -> void:
 	EventHandler.OnSonarPressed(toggled_on)
+
+func _on_zoom_dial_range_changed(NewVal: float) -> void:
+	EventHandler.OnZoomDialMoved(-NewVal / 10)
+
+func _on_y_dial_range_changed(NewVal: float) -> void:
+	EventHandler.OnYDialMoved(-NewVal * 10)
+
+func _on_x_dial_range_changed(NewVal: float) -> void:
+	EventHandler.OnXDialMoved(-NewVal * 10)

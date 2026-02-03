@@ -40,6 +40,12 @@ signal ScreenUIToggled(t : bool)
 signal Storm(value : float)
 signal ForecastToggled(t : bool)
 signal GridPressed(t : bool)
+signal ZoomDialMoved(value : float)
+signal YDialMoved(value : float)
+signal XDialMoved(value : float)
+signal ZoomChangedFromScreen(value : float)
+signal YChangedFromScreen(value : float)
+signal XChangedFromScreen(value : float)
 signal ZoomToggled(t : bool)
 signal TeamToggled(t : bool)
 signal SonarToggled(t : bool)
@@ -47,6 +53,7 @@ signal SonarToggled(t : bool)
 signal Shake(Amm : float)
 signal DamageShake(Amm : float)
 signal DissableShake
+signal MissileShake
 #signal AlarmRaised
 
 signal ShipDamaged(DammageAmm : float)
@@ -142,6 +149,9 @@ func OnPausePressed() -> void:
 
 func OnStorm(value : float) -> void:
 	Storm.emit(value)
+
+func OnMissilgeLaunched() -> void:
+	MissileShake.emit()
 #func OnButtonCoverToggled(t : bool) -> void:
 	#CoverToggled.emit(t)
 
@@ -165,3 +175,21 @@ func OnTeamTogglePressed(t : bool) -> void:
 
 func OnSonarPressed(t : bool) -> void:
 	SonarToggled.emit(t)
+
+func OnZoomChangedFromScreen(value : float) -> void:
+	ZoomChangedFromScreen.emit(value)
+
+func OnYChangedFromScreen(value : float) -> void:
+	YChangedFromScreen.emit(value)
+	
+func OnXchangedFromScreen(value : float) -> void:
+	XChangedFromScreen.emit(value)
+
+func OnZoomDialMoved(value : float) -> void:
+	ZoomDialMoved.emit(value)
+
+func OnYDialMoved(value : float) -> void:
+	YDialMoved.emit(value)
+
+func OnXDialMoved(value : float) -> void:
+	XDialMoved.emit(value)

@@ -29,6 +29,7 @@ func _ready() -> void:
 	EventHandler.DissableShake.connect(DissableShake)
 	EventHandler.DamageShake.connect(EnableDamageShake)
 	EventHandler.Storm.connect(EnableStormShake)
+	EventHandler.MissileShake.connect(EnableMissileShake)
 	ShakeSound.play()
 	PauseShake(true)
 	OriginalPos = position

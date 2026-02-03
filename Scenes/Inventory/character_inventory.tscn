@@ -63,7 +63,7 @@ text = "Char Name"
 max_length = 20
 expand_to_text_length = true
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=1672330738]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=502793764]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -71,20 +71,22 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
-text = "Stats"
+theme_override_font_sizes/font_size = 22
+text = "SHIP STATS"
 
 [node name="Deck" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=755038022 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
-text = "Deck"
+theme_override_font_sizes/font_size = 22
+text = "SHIP DECK"
 
 [node name="InventoryVisToggle" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=2138011353 groups=["DigitalBouncingButton"]]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_c3lfk")
-text = "Inventory"
+theme_override_font_sizes/font_size = 22
+text = "INVENTORY"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer" unique_id=842790455]
 visible = false
@@ -120,8 +122,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer" unique_id=657880210]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Engines"
+uppercase = true
 
 [node name="Engines" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer/VBoxContainer" unique_id=1110226895]
 layout_mode = 2
@@ -140,8 +143,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2" unique_id=764125027]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Fuel Tanks"
+uppercase = true
 
 [node name="Fuel Tanks" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer2/VBoxContainer2" unique_id=1766142018]
 layout_mode = 2
@@ -160,8 +164,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3" unique_id=2023558435]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Sensors"
+uppercase = true
 
 [node name="Sensors" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer3/VBoxContainer3" unique_id=65720169]
 layout_mode = 2
@@ -179,8 +184,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4" unique_id=1299575924]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Fortifications"
+uppercase = true
 
 [node name="Shields" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer4/VBoxContainer4" unique_id=1898557495]
 layout_mode = 2
@@ -199,8 +205,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5" unique_id=934015092]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Weapons"
+uppercase = true
 
 [node name="Weapons" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer5/VBoxContainer5" unique_id=178553751]
 layout_mode = 2
@@ -219,8 +226,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6" unique_id=1343099106]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Cargo"
+uppercase = true
 
 [node name="Inventory" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer/HFlowContainer/PanelContainer6/VBoxContainer6" unique_id=2062436510]
 layout_mode = 2

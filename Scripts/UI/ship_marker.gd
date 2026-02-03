@@ -33,6 +33,8 @@ var CurrentZoom : float
 var TargetLocations : Array[Vector2]
 var Fuel_Range : float
 
+var CurrentShipLocation : Vector2
+
 signal ShipSelected
 signal RemoveSelf
 
@@ -69,10 +71,12 @@ func _draw() -> void:
 	var LinesToDraw : Array[Array]
 	#TODO fix zoom affecting distance text
 	for g in TargetLocations.size():
-		var origin = Vector2.ZERO
+		var origin = to_local(CurrentShipLocation)
+		var LineOrigin = Vector2.ZERO
 		var topos = to_local(TargetLocations[g])
 		if (g > 0):
 			origin = to_local(TargetLocations[g - 1])
+			LineOrigin = to_local(TargetLocations[g - 1])
 		
 		var disttopos = origin.distance_to(topos)
 		distancetotravel += disttopos
@@ -83,7 +87,7 @@ func _draw() -> void:
 		if (distancetotravel > Fuel_Range):
 			Col = (Color(100,0,0))
 		
-		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
+		draw_dashed_line(LineOrigin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
 		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0))
 		var string = "{0} km".format([roundi(disttopos)])
@@ -103,6 +107,7 @@ func _draw() -> void:
 			#draw_dashed_line(g[0], g[1], Color(1,1,1), 1 / CurrentZoom, 10 / CurrentZoom)
 
 func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
+	CurrentShipLocation = ship.global_position
 	queue_redraw()
 	
 	if (ship is HostileShip):

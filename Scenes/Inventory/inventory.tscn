@@ -28,7 +28,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 356
-border_color = Color(0.482095, 0.689901, 0.704644, 1)
+border_color = Color(1, 0.7647059, 0.08235294, 1)
 border_blend = true
 corner_detail = 1
 shadow_size = 4
@@ -90,7 +90,7 @@ size_flags_vertical = 2
 
 [node name="Panel2" type="Panel" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=375629562]
 visible = false
-custom_minimum_size = Vector2(25, 0)
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4fam5")
 

@@ -91,13 +91,14 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="DroneGas" type="AnimatedSprite2D" unique_id=456827188]
+[node name="DroneGas" type="AnimatedSprite2D" unique_id=456827188 node_paths=PackedStringArray("Sound")]
 position = Vector2(567, 332)
 scale = Vector2(0.42, 0.42)
 sprite_frames = SubResource("SpriteFrames_8cr6m")
 frame = 3
 frame_progress = 0.736569
 script = ExtResource("21_2eusn")
+Sound = NodePath("AudioStreamPlayer")
 
 [node name="Control" type="Control" parent="." unique_id=1083185122]
 layout_mode = 3
@@ -116,7 +117,7 @@ grow_vertical = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1894735125]
 stream = ExtResource("22_mtsvb")
 volume_db = -15.0
-pitch_scale = 1.03
+pitch_scale = 0.8
 bus = &"MapSounds"
 
 [connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

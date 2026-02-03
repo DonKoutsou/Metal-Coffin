@@ -8,6 +8,7 @@ class_name ShipCamera
 @export var Ground : Control
 @export var WeatherMan : WeatherManage
 @export var ClickSound : AudioStreamPlayer
+@export var UIEventHandle : UIEventHandler
 
 static var MinZoom = 0.08
 static var MaxZoom = 15.0
@@ -32,6 +33,10 @@ func _ready() -> void:
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
 	
+	UIEventHandle.ZoomDialMoved.connect(_HANDLE_ZOOM.bind(false))
+	UIEventHandle.YDialMoved.connect(MoveCameraY)
+	UIEventHandle.XDialMoved.connect(MoveCameraX)
+	
 static func GetInstance() -> ShipCamera:
 	return Instance
 
@@ -42,18 +47,19 @@ var ZoomStageMulti = 0.5
 var ZoomTw : Tween
 var prevzoom = Vector2(1,1)
 
-func _HANDLE_ZOOM(zoomval : float):
+func _HANDLE_ZOOM(zoomval : float, FromSelf : bool = true):
 	#prevzoom = zoom
 	if (is_instance_valid(ZoomTw)):
 		ZoomTw.kill()
 	ZoomTw = create_tween()
 	ZoomTw.set_ease(Tween.EASE_OUT)
 	ZoomTw.set_trans(Tween.TRANS_QUART)
-	var newzoom = clamp(prevzoom * Vector2(zoomval, zoomval), Vector2(MinZoom,MinZoom), Vector2(MaxZoom,MaxZoom))
+	var newzoom = clamp(prevzoom * Vector2(1 + zoomval, 1 + zoomval), Vector2(MinZoom,MinZoom), Vector2(MaxZoom,MaxZoom))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
 	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
-	if (prevzoom != newzoom):
-		ClickSound.play()
+
+	if (FromSelf):
+		UIEventHandle.OnZoomChangedFromScreen(zoomval)
 	ZoomTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	prevzoom = newzoom
 
@@ -165,12 +171,22 @@ func _UpdateMapGridVisibility():
 			GridTween.finished.connect(Grid.hide)
 			GridShowing = false
 
-func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true):
+func MoveCameraY(value : float) -> void:
+	UpdateCameraPos(Vector2(0, value), true , false)
+
+func MoveCameraX(value : float) -> void:
+	UpdateCameraPos(Vector2(value, 0), true, false)
+
+func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf : bool = true):
 	if (FrameTween != null):
 		FrameTween.kill()
 	
 	if (Unfocus):
 		FocusedShip = null
+	
+	if (FromSelf):
+		UIEventHandle.OnYChangedFromScreen(relativeMovement.y / 100)
+		UIEventHandle.OnXchangedFromScreen(relativeMovement.x / 100)
 	
 	var extent = get_viewport_rect().size / 2 / zoom.x
 	
@@ -210,9 +226,9 @@ func _physics_process(delta: float) -> void:
 		rel.x += 10
 		
 	if (Input.is_action_pressed("ZoomIn")):
-		_HANDLE_ZOOM(1.1)
+		_HANDLE_ZOOM(0.1)
 	else: if (Input.is_action_pressed("ZoomOut")):
-		_HANDLE_ZOOM(0.9)
+		_HANDLE_ZOOM(-0.1)
 	
 	if (rel != Vector2.ZERO):
 		UpdateCameraPos(rel)

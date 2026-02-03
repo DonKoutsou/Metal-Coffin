@@ -25,6 +25,7 @@
 [ext_resource type="StyleBox" uid="uid://ttlagq0nmcyb" path="res://Theme/Buttons/ButtonYellowStripe_Pressed.tres" id="23_eeg0m"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_j5ioc"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="24_hpjxi"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="26_ecvfe"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xl4i0"]
 texture = ExtResource("4_uojtp")
@@ -33,7 +34,7 @@ texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
-[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "SpeedSimulationButton")]
+[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("ScreenItems", "MarkerEditorControls", "Thrust", "Steer", "MissileUI", "SpeedSimulationButton", "ZoomDial", "YDial", "XDial")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,6 +50,9 @@ Steer = NodePath("SteeringWheel")
 MissileUI = NodePath("ScreenUi/Missile Tab")
 EventHandler = ExtResource("2_ecvfe")
 SpeedSimulationButton = NodePath("SpeedSimulation")
+ZoomDial = NodePath("ZoomDial")
+YDial = NodePath("YDial")
+XDial = NodePath("XDial")
 
 [node name="ScreenBackground" type="TextureRect" parent="." unique_id=776636619]
 custom_minimum_size = Vector2(0, 38.045)
@@ -550,6 +554,21 @@ offset_bottom = 96.0
 grow_horizontal = 0
 grow_vertical = 1
 
+[node name="ZoomDial" parent="." unique_id=456827188 instance=ExtResource("26_ecvfe")]
+position = Vector2(307, 378)
+rotation = 1.5707964
+scale = Vector2(0.9196628, 0.9196628)
+
+[node name="YDial" parent="." unique_id=1133286453 instance=ExtResource("26_ecvfe")]
+position = Vector2(492.00003, 684.00006)
+rotation = -3.1415927
+scale = Vector2(0.9196628, 0.9196628)
+
+[node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
+position = Vector2(765, 684.00006)
+rotation = -3.1415927
+scale = Vector2(0.9196628, 0.9196628)
+
 [connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
@@ -567,3 +586,6 @@ grow_vertical = 1
 [connection signal="pressed" from="RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
+[connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]
+[connection signal="RangeChanged" from="YDial" to="." method="_on_y_dial_range_changed"]
+[connection signal="RangeChanged" from="XDial" to="." method="_on_x_dial_range_changed"]

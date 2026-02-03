@@ -178,6 +178,7 @@ Cloud = NodePath("Clouds")
 Ground = NodePath("Ground")
 WeatherMan = NodePath("../WeatherManager")
 ClickSound = NodePath("AudioStreamPlayer")
+UIEventHandle = ExtResource("25_8mjbw")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=2027882013]
 z_index = -3

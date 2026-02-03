@@ -12,7 +12,6 @@ extends CanvasLayer
 class_name Map
 @export_group("Nodes")
 @export var _InScreenUI : Ingame_UIManager
-
 @export var _ScreenUI : ScreenUI
 @export var _Camera : ShipCamera
 @export var MapLines : Node2D
@@ -40,6 +39,7 @@ class_name Map
 @export var SpawningBounds : Vector2
 @export var EnSpawner : SpawnDecider
 @export var ControllerEvH : ShipControllerEventHandler
+
 
 signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
 #Signal called when all cities have their neighbors configured
@@ -71,7 +71,6 @@ func _ready() -> void:
 	set_physics_process(false)
 	$SubViewportContainer.visible = false
 	_ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
-	
 	_Camera.connect("PositionChanged", CamPosChanged)
 	_Camera.connect("ZoomChanged", CamZoomChanged)
 
@@ -306,9 +305,9 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	else : if (event is InputEventScreenDrag):
 		_Camera._HANDLE_DRAG(event)
 	else : if (event.is_action_pressed("ZoomIn")):
-		_Camera._HANDLE_ZOOM(1.25)
+		_Camera._HANDLE_ZOOM(0.25)
 	else : if (event.is_action_pressed("ZoomOut")):
-		_Camera._HANDLE_ZOOM(0.75)
+		_Camera._HANDLE_ZOOM(-0.25)
 	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		_Camera.UpdateCameraPos(event.relative)
 	else : if (event is InputEventMouseButton):

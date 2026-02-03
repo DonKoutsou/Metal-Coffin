@@ -63,6 +63,17 @@ static func GetInstance() -> Clock:
 	return Instance
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	var HourString = CheckNumber(var_to_str(currentHour)) + " : " + CheckNumber(var_to_str(roundi(currentMin)))
+	var DayString = CheckNumber(var_to_str(CurrentDay)) + " / " + CheckNumber(var_to_str(CurrentMonth)) + " / " + var_to_str(CurrentYear)
+	$HBoxContainer/Label.text = HourString
+	if (SimulationManager.IsPaused()):
+		$HBoxContainer/Label.text += " ||"
+	else: if (SimulationManager.SimSpeed() > 1):
+		$HBoxContainer/Label.text += " >>"
+	else:
+		$HBoxContainer/Label.text += " >"
+	$HBoxContainer/Label2.text = DayString
+	
 	if (SimulationPaused):
 		return
 	currentMin += (delta * 10) * SimulationManager.SimSpeed()
@@ -85,10 +96,7 @@ func _physics_process(delta: float) -> void:
 	#var Hrot = (360.0/12.0)* currentHour
 	#$Hour.rotation = deg_to_rad(Hrot + (rot / 12))
 	#$Label2.text = CheckNumber(var_to_str(CurrentDay)) + " / " + CheckNumber(var_to_str(CurrentMonth)) + " / " + var_to_str(CurrentYear)
-	var HourString = CheckNumber(var_to_str(currentHour)) + " : " + CheckNumber(var_to_str(roundi(currentMin)))
-	var DayString = CheckNumber(var_to_str(CurrentDay)) + " / " + CheckNumber(var_to_str(CurrentMonth)) + " / " + var_to_str(CurrentYear)
-	$HBoxContainer/Label.text = HourString
-	$HBoxContainer/Label2.text = DayString
+	
 
 func CheckNumber(NumString : String) -> String:
 	if (NumString.length() == 1):
