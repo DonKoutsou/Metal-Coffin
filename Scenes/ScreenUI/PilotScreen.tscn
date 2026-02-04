@@ -552,7 +552,7 @@ grow_horizontal = 0
 grow_vertical = 1
 
 [node name="ZoomDial" parent="." unique_id=456827188 instance=ExtResource("26_ecvfe")]
-position = Vector2(307, 378)
+position = Vector2(307, 476)
 rotation = 1.5707964
 scale = Vector2(0.9196628, 0.9196628)
 

@@ -316,10 +316,10 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	AveragePos /= Friendlies.size() + Enemies.size()
 	
 	CardF.FightLoc = AveragePos
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	#GetMap().GetScreenUi().ToggleScreenUI(false)
 	await GetMap().GetScreenUi().ToggleCardFightUI(true)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
 

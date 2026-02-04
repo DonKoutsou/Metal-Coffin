@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cj2x4bu14as58" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_019.png" id="20_lod21"]
 [ext_resource type="Script" uid="uid://byieey8mlbces" path="res://Scripts/UI/animated_drone_gas.gd" id="21_2eusn"]
 [ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="22_mtsvb"]
+[ext_resource type="Texture2D" uid="uid://c3bat4r1285kg" path="res://Assets/UIPiecies/Screen/SidePanels/Panel.png" id="23_lh4h6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8cr6m"]
 animations = [{
@@ -91,6 +92,15 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4fau7"]
+texture = ExtResource("23_lh4h6")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
 [node name="DroneGas" type="AnimatedSprite2D" unique_id=456827188 node_paths=PackedStringArray("Sound")]
 position = Vector2(567, 332)
 scale = Vector2(0.42, 0.42)
@@ -119,5 +129,14 @@ stream = ExtResource("22_mtsvb")
 volume_db = -15.0
 pitch_scale = 0.8
 bus = &"MapSounds"
+
+[node name="Panel" type="Panel" parent="." unique_id=465109606]
+show_behind_parent = true
+offset_left = -138.09523
+offset_top = -38.09527
+offset_right = 135.71422
+offset_bottom = 33.33332
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4fau7")
 
 [connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

@@ -271,6 +271,9 @@ func ForceCamPosition(Pos : Vector2) -> void:
 	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x), (WorldBounds.x + 3000) / 2 - extent.x)
 
 	var newpos = Vector2(clamp(Pos.x, maxposX.x, maxposX.y) ,clamp(Pos.y, maxposY.y, maxposY.x) )
+	var RelMovement = newpos - global_position
+	UIEventHandle.OnYChangedFromScreen(RelMovement.y / 100)
+	UIEventHandle.OnXchangedFromScreen(RelMovement.x / 100)
 	global_position = newpos
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)

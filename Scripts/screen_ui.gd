@@ -86,6 +86,14 @@ func CloseScreen() -> void:
 	FullScreenToggleStarted.emit(ScreenState.HALF_SCREEN)
 
 func OpenScreen(NewStat : ScreenState) -> void:
+	match(CurrentScreenState):
+		ScreenState.NORMAL_SCREEN:
+			ToggleForegroundUI(false)
+		ScreenState.FULL_SCREEN:
+			ToggleFullScreenUI(false)
+			
+	CurrentScreenState = NewStat
+	
 	match (NewStat):
 		ScreenState.FULL_SCREEN:
 			ToggleFullScreenUI(true)
