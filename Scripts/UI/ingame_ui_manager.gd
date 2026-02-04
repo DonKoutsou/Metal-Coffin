@@ -9,8 +9,8 @@ class_name Ingame_UIManager
 @export var OverStatUI : Control
 
 @export var Screen : Control
-@export var ZoomUI : ZoomLvevel
-@export var TUI : TeamUI
+#@export var ZoomUI : ZoomLvevel
+#@export var TUI : TeamUI
 
 @export_group("Scenes")
 @export_file("*.tscn") var PauseMenuSceneFile : String
@@ -30,18 +30,18 @@ func _ready() -> void:
 	EventHandler.connect("MarkerEditorYRangeChanged", _MapMarkerEditor._on_y_gas_range_changed)
 	EventHandler.connect("MarkerEditorXRangeChanged", _MapMarkerEditor._on_x_gas_range_changed)
 	EventHandler.connect("MarkerEditorToggled", _MapMarkerEditor.ToggleVisibilidy)
-	EventHandler.ZoomToggled.connect(ToggleZoomUI)
-	EventHandler.TeamToggled.connect(ToggleTeamUI)
+	#EventHandler.ZoomToggled.connect(ToggleZoomUI)
+	#EventHandler.TeamToggled.connect(ToggleTeamUI)
 	_MapMarkerEditor.visible = false
 	
 	
 	ToggleScreenGlitches(SettingsPanel.GetGlitch())
 
-func ToggleZoomUI(t : bool) -> void:
-	ZoomUI.Toggle(t)
+#func ToggleZoomUI(t : bool) -> void:
+	#ZoomUI.Toggle(t)
 
-func ToggleTeamUI(t : bool) -> void:
-	TUI.Toggle(t)
+#func ToggleTeamUI(t : bool) -> void:
+	#TUI.Toggle(t)
 
 func ToggleScreenGlitches(t : bool) -> void:
 	var mat = Screen.material as ShaderMaterial

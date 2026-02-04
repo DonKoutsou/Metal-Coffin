@@ -10,8 +10,8 @@ static var Instance : WeatherManage
 static var WindDirection : Vector2
 static var tx : Image
 static var LighAmm : Curve = preload("res://Resources/LightCurve.tres")
-static var inverse_transform
-static var rect_size
+static var inverse_transform : Transform2D
+static var rect_size : Vector2
 static var ShipsToUpdate : Array[MapShip]
 
 static func RegisterShip(Ship : MapShip) -> void:

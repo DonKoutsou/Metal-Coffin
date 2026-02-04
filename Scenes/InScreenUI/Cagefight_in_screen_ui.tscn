@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://ijv7nlfv5kot"]
+
+[ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_wbhxx"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_wgin8"]
+[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="3_munnc"]
+[ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="5_8ltns"]
+[ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="13_ral86"]
+[ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="14_cqdt6"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="15_6hexg"]
+[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="16_axjrj"]
+
+[node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "Screen")]
+process_mode = 3
+layer = 0
+follow_viewport_enabled = true
+script = ExtResource("1_wbhxx")
+_Inventory = NodePath("UnderStatUI/Inventory")
+_MapMarkerEditor = NodePath("MapMarkerEditor")
+PopupPlecement = NodePath("CanvasLayer/PopupPlecement")
+EventHandler = ExtResource("2_wgin8")
+UnderstatUI = NodePath("UnderStatUI")
+OverStatUI = NodePath("OverStatUI")
+Screen = NodePath("CanvasLayer/Screen")
+PauseMenuSceneFile = "uid://kealc8fl34qi"
+DialogueSceneFile = "uid://cq8y4l8uapojy"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1658011768]
+layer = 4
+follow_viewport_enabled = true
+
+[node name="PopupPlecement" type="Control" parent="CanvasLayer" unique_id=173542646]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Screen" type="ColorRect" parent="CanvasLayer" unique_id=1451653030]
+process_mode = 3
+z_index = 1
+material = ExtResource("3_munnc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("5_8ltns")]
+
+[node name="UnderStatUI" type="Control" parent="." unique_id=154155135]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Inventory" parent="UnderStatUI" unique_id=431787009 instance=ExtResource("13_ral86")]
+visible = false
+layout_mode = 1
+mouse_force_pass_scroll_events = false
+
+[node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("14_cqdt6")]
+visible = false
+offset_left = 222.0
+offset_top = -173.5
+offset_right = -222.0
+offset_bottom = -81.5
+
+[node name="OverStatUI" type="Control" parent="." unique_id=2088496302]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1581311938]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = -100.0
+offset_right = 143.5
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_6hexg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=2007596262]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=2091356244]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("16_axjrj")
+theme_override_font_sizes/font_size = 41
+text = "Game Lost"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1313575743 groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("15_6hexg")
+theme_override_font_sizes/font_size = 26
+text = "OK"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]

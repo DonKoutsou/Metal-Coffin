@@ -23,7 +23,7 @@ var CurrentScreenState : ScreenState
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
 
-	
+
 func ToggleCardFightUI(t : bool) -> void:
 	if (t):
 		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(CardFightUIScene).Sign

@@ -33,8 +33,11 @@ func SetData(_Win : bool, DateString : String, Funds : int, DoneDmg : float, Got
 	DamageNegated = NegDmg
 	Date = DateString
 	
+	
 	var closest = Helper.GetInstance().GetClosestSpot(Loc)
-	if (closest.global_position.distance_squared_to(Loc) < 1000000):
+	if (closest == null):
+		Location = "Custom Match"
+	else: if (closest.global_position.distance_squared_to(Loc) < 1000000):
 		Location = "Location : {0}".format([closest.GetSpotName()])
 	else:
 		Location = "Location : {0} of {1}".format([Helper.AngleToDirection(closest.global_position.angle_to_point(Loc)) ,closest.GetSpotName()])

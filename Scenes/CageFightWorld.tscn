@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_hv6vs"]
 [ext_resource type="PackedScene" uid="uid://dc1y0qs5n466n" path="res://Scenes/Cards/CagefightTeamSetup.tscn" id="3_fhjeu"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="4_fhjeu"]
+[ext_resource type="PackedScene" uid="uid://ijv7nlfv5kot" path="res://Scenes/InScreenUI/Cagefight_in_screen_ui.tscn" id="5_fhjeu"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="8_6fcln"]
-[ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="8_77y8q"]
 
 [node name="CageFight" type="Control" unique_id=96047136 node_paths=PackedStringArray("ScrUI")]
 process_mode = 3
@@ -48,7 +48,6 @@ positional_shadow_atlas_size = 512
 size = Vector2i(869, 595)
 render_target_update_mode = 4
 
-[node name="InScreenUI" parent="SubViewportContainer/ViewPort" unique_id=272149421 instance=ExtResource("8_77y8q")]
-layer = 3
+[node name="InScreenUI" parent="SubViewportContainer/ViewPort" unique_id=1660404704 instance=ExtResource("5_fhjeu")]
 
 [node name="ScreenUI" parent="." unique_id=1869325632 instance=ExtResource("8_6fcln")]

@@ -49,18 +49,6 @@ mouse_filter = 0
 texture = ExtResource("4_nth3v")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="TextureRect" unique_id=258856403]
-modulate = Color(0, 0, 0, 0.518)
-show_behind_parent = true
-layout_mode = 0
-offset_left = -11.0
-offset_top = -10.0
-offset_right = 569.0
-offset_bottom = 170.0
-mouse_filter = 2
-texture = ExtResource("4_nth3v")
-expand_mode = 1
-
 [node name="LaunchButton" type="Button" parent="." unique_id=1478424702 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3

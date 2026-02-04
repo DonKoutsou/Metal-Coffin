@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scripts/CardFight/card_fight_ui.gd" id="1_u6pkr"]
 [ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="2_c6mlu"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Cards/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
 [ext_resource type="AudioStream" uid="uid://demm6a82oqqil" path="res://Assets/Sounds/cash2.mp3" id="5_anehw"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="5_lleca"]
@@ -44,6 +45,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_u6pkr")
 PlayerCardPlecement = NodePath("PlayerCardPlacement")
+EventH = ExtResource("2_lf8xs")
 EnergyBar = NodePath("w")
 ReservesBar = NodePath("SegmentedHP2")
 PlayCardInsert = NodePath("PlayInsert/Control")
