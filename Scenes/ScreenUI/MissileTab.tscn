@@ -16,7 +16,7 @@
 [ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
 
-[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText")]
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TurnOffButton")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -37,6 +37,7 @@ MissileSelectLight = NodePath("MissileSelectLight")
 AngleSelectLight = NodePath("AngleSelectLight")
 RangeText = NodePath("RangeText")
 SelectedMissileText = NodePath("SelectedMissileText")
+TurnOffButton = NodePath("TurnOff")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=641583344]
 layout_mode = 0
@@ -67,9 +68,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -154.0
+offset_left = -92.99997
 offset_top = -11.0
-offset_right = -130.0
+offset_right = -68.99997
 offset_bottom = 35.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -85,9 +86,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -157.0
+offset_left = -95.99997
 offset_top = -65.20151
-offset_right = -129.74454
+offset_right = -68.74451
 offset_bottom = -15.12442
 grow_horizontal = 0
 grow_vertical = 0
@@ -104,9 +105,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -158.00003
+offset_left = -97.0
 offset_top = -116.73563
-offset_right = -130.08276
+offset_right = -69.08273
 offset_bottom = -66.33618
 grow_horizontal = 0
 grow_vertical = 0

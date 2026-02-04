@@ -13,8 +13,10 @@ class_name TownExternalUI
 
 var MoneySpent : int = 0
 var CoinsGot : int = 0
+
 func _ready() -> void:
 	Coin.visible = false
+	UISoundMan.GetInstance().Refresh()
 	#CoinsReceived(10)
 	#Power = 1
 	#Anim2()

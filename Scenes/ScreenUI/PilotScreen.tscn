@@ -26,6 +26,7 @@
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_j5ioc"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="24_hpjxi"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="26_ecvfe"]
+[ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/ELint.tscn" id="27_uojtp"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xl4i0"]
 texture = ExtResource("4_uojtp")
@@ -242,6 +243,13 @@ texture_normal = ExtResource("5_hc833")
 texture_pressed = ExtResource("6_gmup4")
 stretch_mode = 5
 
+[node name="Elint" parent="." unique_id=502600520 instance=ExtResource("27_uojtp")]
+layout_mode = 1
+offset_left = 385.0
+offset_top = -269.0
+offset_right = 553.0
+offset_bottom = -101.0
+
 [node name="ScreenUi" type="Control" parent="." unique_id=1868534827]
 layout_mode = 1
 anchors_preset = 15
@@ -264,10 +272,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
-offset_left = 127.0
-offset_top = -66.0
-offset_right = 167.0
-offset_bottom = -26.0
+offset_left = 24.0
+offset_top = -68.0
+offset_right = 64.0
+offset_bottom = -28.0
 grow_horizontal = 1
 
 [node name="MapMarkerControls" parent="." unique_id=329577773 instance=ExtResource("9_yjfdw")]
@@ -552,19 +560,19 @@ grow_horizontal = 0
 grow_vertical = 1
 
 [node name="ZoomDial" parent="." unique_id=456827188 instance=ExtResource("26_ecvfe")]
-position = Vector2(307, 476)
+position = Vector2(304, 350.99997)
 rotation = 1.5707964
-scale = Vector2(0.9196628, 0.9196628)
+scale = Vector2(0.8, 0.8)
 
 [node name="YDial" parent="." unique_id=1133286453 instance=ExtResource("26_ecvfe")]
-position = Vector2(492.00003, 684.00006)
-rotation = -3.1415927
-scale = Vector2(0.9196628, 0.9196628)
+position = Vector2(976, 351)
+rotation = -1.5707964
+scale = Vector2(0.8, 0.8)
 
 [node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
-position = Vector2(765, 684.00006)
+position = Vector2(639.99994, 688)
 rotation = -3.1415927
-scale = Vector2(0.9196628, 0.9196628)
+scale = Vector2(0.8, 0.8)
 
 [connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]

@@ -356,7 +356,7 @@ func SetTime() -> void:
 	TimeLastSeen = Clock.GetTimeInHours() 
 
 func UpdateTime(timepast : float):
-	TimeSeenText = var_to_str(snappedf((timepast) , 0.01)) + "h ago"
+	TimeSeenText = "{0}h ago".format([snappedf((timepast) , 0.01)])
 
 func ClearFuel() -> void:
 	FuelText = ""

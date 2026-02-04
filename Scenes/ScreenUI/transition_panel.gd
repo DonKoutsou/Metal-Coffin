@@ -21,6 +21,7 @@ func _Close() -> void:
 	PlaySound(DoorCloseSound)
 	await Helper.GetInstance().wait(0.5)
 	var CloseTw = create_tween()
+	CloseTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	CloseTw.set_ease(Tween.EASE_OUT)
 	CloseTw.set_trans(Tween.TRANS_BOUNCE)
 	CloseTw.tween_property(PanelTexture, "position", Vector2.ZERO, 2)
@@ -31,6 +32,7 @@ func _Close() -> void:
 func _Open() -> void:
 	PlaySound(DoorOpenSound)
 	var OpenTw = create_tween()
+	OpenTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	OpenTw.set_ease(Tween.EASE_IN)
 	OpenTw.set_trans(Tween.TRANS_QUART)
 	OpenTw.tween_property(PanelTexture, "position", Vector2(0, -PanelTexture.size.y - 40), 1.6)

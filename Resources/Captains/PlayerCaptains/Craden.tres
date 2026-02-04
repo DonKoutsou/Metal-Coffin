@@ -15,7 +15,7 @@
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="14_tfttw"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="15_5588k"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="16_tcmus"]
-[ext_resource type="Resource" uid="uid://cykf6xqhg77rm" path="res://Resources/Items/ShipParts/Sonar/ShortSonar.tres" id="17_bcr2s"]
+[ext_resource type="Resource" uid="uid://22w1h832bsxa" path="res://Resources/Items/ShipParts/ELINT/LargeElint.tres" id="17_bcr2s"]
 [ext_resource type="Resource" uid="uid://brv8sagucvpb2" path="res://Resources/Items/Ammo/CruiseMissile.tres" id="17_jnhcl"]
 
 [sub_resource type="Resource" id="Resource_bp15r"]

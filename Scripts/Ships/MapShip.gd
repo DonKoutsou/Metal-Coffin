@@ -621,8 +621,20 @@ func GetClosestElint() -> Vector2:
 		if (closestdist > dist):
 			closest = ship.global_position
 			closestdist = dist
-	
 	return closest
+
+func GetClosestElintLevel() -> int:
+	var closest : MapShip
+	var closestdist : float = 999999999999
+	for g in ElintContacts.size():
+		var ship = ElintContacts.keys()[g]
+		var dist = global_position.distance_to(ship.global_position)
+		if (closestdist > dist):
+			closest = ship
+			closestdist = dist
+
+	var Newlvl = GetElintLevel(global_position.distance_squared_to(closest.global_position), closest.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+	return Newlvl
 	
 func GetElintLevel(DistSq : float, RadarL : float) -> int:
 	var Lvl = -1

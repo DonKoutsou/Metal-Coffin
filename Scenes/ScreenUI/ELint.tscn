@@ -1,32 +1,19 @@
 [gd_scene format=3 uid="uid://c2tp3xgyap8ar"]
 
 [ext_resource type="Script" uid="uid://fn1kaffx2hk3" path="res://Scripts/UI/e_lint.gd" id="1_n0goy"]
-[ext_resource type="Texture2D" uid="uid://c8gnd6jqgk74r" path="res://Assets/UIPiecies/Elint/transparent/Opacity5.png" id="3_wx2vp"]
-[ext_resource type="Texture2D" uid="uid://c5hol5t0a73p3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="4_1dajb"]
-[ext_resource type="Texture2D" uid="uid://dttfd7x7b0vx8" path="res://Assets/UIPiecies/Elint/transparent/Opacity6.png" id="4_bj32c"]
-[ext_resource type="Texture2D" uid="uid://dsmban541ughh" path="res://Assets/UIPiecies/Elint/transparent/Opacity2.png" id="4_h0jj8"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_ca4np"]
 [ext_resource type="Texture2D" uid="uid://dmch6syuq4dtd" path="res://Assets/UIPiecies/Elint/transparent/Opacity4.png" id="5_2ueie"]
 [ext_resource type="Texture2D" uid="uid://b4u2mrkevjlxt" path="res://Assets/UIPiecies/Elint/transparent/Opacity17.png" id="5_fn607"]
-[ext_resource type="Texture2D" uid="uid://inxbuomyat5c" path="res://Assets/UIPiecies/Elint/transparent/Opacity7.png" id="5_kw5sy"]
-[ext_resource type="Texture2D" uid="uid://dxp0wi8qyxog2" path="res://Assets/UIPiecies/Elint/transparent/Opacity10.png" id="5_op54w"]
 [ext_resource type="Texture2D" uid="uid://bg7v7oxyuv58x" path="res://Assets/UIPiecies/Elint/transparent/Opacity16.png" id="6_heli2"]
-[ext_resource type="Texture2D" uid="uid://dygexoaacwvpg" path="res://Assets/UIPiecies/Elint/transparent/Opacity8.png" id="6_m61b5"]
-[ext_resource type="Texture2D" uid="uid://dulcbyi3eiu3l" path="res://Assets/UIPiecies/Elint/transparent/Opacity9.png" id="7_8juqy"]
-[ext_resource type="Texture2D" uid="uid://cw1pap746hyo2" path="res://Assets/UIPiecies/Elint/transparent/Opacity11.png" id="9_n1ofx"]
-[ext_resource type="Texture2D" uid="uid://ninlhvpib1o5" path="res://Assets/UIPiecies/Elint/transparent/Opacity12.png" id="10_pyudk"]
-[ext_resource type="Texture2D" uid="uid://dowcqyn6iow3x" path="res://Assets/UIPiecies/Elint/transparent/Opacity13.png" id="11_ck10t"]
-[ext_resource type="Texture2D" uid="uid://d30qxxj4xlary" path="res://Assets/UIPiecies/Elint/transparent/Opacity14.png" id="12_lbulf"]
-[ext_resource type="Texture2D" uid="uid://ctwsbm2u6d6ll" path="res://Assets/UIPiecies/Elint/transparent/Opacity15.png" id="13_8vbyf"]
-[ext_resource type="Texture2D" uid="uid://34ji62wwy8yq" path="res://Assets/UIPiecies/Elint/transparent/Opacity.png" id="14_qls7h"]
+[ext_resource type="Texture2D" uid="uid://c5hol5t0a73p3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="6_xuume"]
 [ext_resource type="Texture2D" uid="uid://c4mbjo352ubgo" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1_FullQuality.png" id="17_bii6e"]
 [ext_resource type="AudioStream" uid="uid://baeo387gdnixa" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]
-[ext_resource type="Texture2D" uid="uid://cpafcfc34nmst" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="21_h2hwe"]
 [ext_resource type="AudioStream" uid="uid://cu2vd0ho6rwfm" path="res://Assets/Sounds/alarm_01.wav" id="21_w3va6"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ilvog"]
 light_mode = 1
 
-[node name="Elint" type="Control" unique_id=502600520]
+[node name="Elint" type="Control" unique_id=502600520 node_paths=PackedStringArray("RangeIndicator", "AlertLight", "DangerCloseLight", "DirectionLight", "ElintText", "BeepSound")]
 material = SubResource("CanvasItemMaterial_ilvog")
 layout_mode = 3
 anchors_preset = 8
@@ -41,23 +28,16 @@ offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n0goy")
-DirectionMasks = {
-0: ExtResource("11_ck10t"),
-30: ExtResource("12_lbulf"),
-60: ExtResource("13_8vbyf"),
-90: ExtResource("5_2ueie"),
-120: ExtResource("3_wx2vp"),
-150: ExtResource("4_bj32c"),
-180: ExtResource("5_kw5sy"),
-210: ExtResource("6_m61b5"),
-240: ExtResource("7_8juqy"),
-270: ExtResource("5_op54w"),
-300: ExtResource("9_n1ofx"),
-330: ExtResource("10_pyudk"),
-350: ExtResource("10_pyudk")
-}
-DistanceMasks = Array[Texture2D]([ExtResource("14_qls7h"), ExtResource("4_h0jj8"), ExtResource("4_1dajb")])
-OnOffTextures = Array[Texture2D]([ExtResource("17_bii6e"), ExtResource("21_h2hwe")])
+ShipControllerEvenH = ExtResource("2_ca4np")
+DirectionMaskFiles = Array[String](["uid://dowcqyn6iow3x", "uid://d30qxxj4xlary", "uid://ctwsbm2u6d6ll", "uid://dmch6syuq4dtd", "uid://c8gnd6jqgk74r", "uid://dttfd7x7b0vx8", "uid://inxbuomyat5c", "uid://dygexoaacwvpg", "uid://dulcbyi3eiu3l", "uid://dxp0wi8qyxog2", "uid://cw1pap746hyo2", "uid://ninlhvpib1o5"])
+DistanceMasks = Array[String](["uid://34ji62wwy8yq", "uid://dsmban541ughh", "uid://c5hol5t0a73p3"])
+OnOffTextures = Array[String](["uid://c4mbjo352ubgo", "uid://ebrqin4q01s6"])
+RangeIndicator = NodePath("RangeIndicator")
+AlertLight = NodePath("AlertLight")
+DangerCloseLight = NodePath("DangerCloseLight")
+DirectionLight = NodePath("DirectionLight")
+ElintText = NodePath("TextureRect")
+BeepSound = NodePath("AudioStreamPlayer")
 Alarm = ExtResource("21_w3va6")
 Beep = ExtResource("20_7y4w8")
 
@@ -74,39 +54,36 @@ expand_mode = 1
 [node name="RangeIndicator" type="PointLight2D" parent="." unique_id=504806615]
 position = Vector2(83.8, 83.8)
 color = Color(0.811384, 0.567062, 0.119301, 1)
-texture = ExtResource("4_h0jj8")
+range_layer_max = 2
+texture = ExtResource("6_xuume")
 texture_scale = 0.65
 
 [node name="AlertLight" type="PointLight2D" parent="." unique_id=1900549746]
 position = Vector2(83.8, 83.8)
 color = Color(0.979746, 0.18299, 7.70092e-07, 1)
-energy = 4.0
+energy = 16.0
+range_layer_max = 2
 texture = ExtResource("5_fn607")
 texture_scale = 0.65
 
 [node name="DangerCloseLight" type="PointLight2D" parent="." unique_id=539837348]
 position = Vector2(83.8, 83.8)
 color = Color(0.855231, 0.38363, 0, 1)
+energy = 16.0
+range_layer_max = 2
 texture = ExtResource("6_heli2")
 texture_scale = 0.65
 
 [node name="DirectionLight" type="PointLight2D" parent="." unique_id=2093360211]
 position = Vector2(83.8, 83.8)
 color = Color(0.811384, 0.567062, 0.119301, 1)
+energy = 16.0
+range_layer_max = 2
 texture = ExtResource("5_2ueie")
 texture_scale = 0.65
 
-[node name="Control" type="Control" parent="." unique_id=2107023711]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2021219940]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1038564048]
+position = Vector2(85, 85)
 stream = ExtResource("20_7y4w8")
 volume_db = -20.0
 bus = &"MapSounds"

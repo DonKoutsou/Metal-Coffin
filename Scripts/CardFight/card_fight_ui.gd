@@ -46,6 +46,7 @@ func _ready() -> void:
 	Instance = self
 	PlayerCardPlecement.visible = true
 	PlayerCardPlacementInputBlocker.visible = false
+	UISoundMan.GetInstance().Refresh()
 
 func TogglePlayerCardPlacement(t : bool) -> void:
 	PlayerCardPlecement.visible = t

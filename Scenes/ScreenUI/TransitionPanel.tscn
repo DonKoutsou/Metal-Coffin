@@ -90,8 +90,8 @@ angle_min = -720.0
 angle_max = 720.0
 direction = Vector3(0, -1, 0)
 spread = 12.5
-initial_velocity_min = 300.0
-initial_velocity_max = 500.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
 angular_velocity_min = -500.0
 angular_velocity_max = 499.99997
 gravity = Vector3(0, 0, 0)
@@ -142,6 +142,8 @@ texture = ExtResource("1_iek8p")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=251335124]
+callback_mode_process = 0
+callback_mode_method = 1
 libraries/ = SubResource("AnimationLibrary_qa6vo")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=136205391]
