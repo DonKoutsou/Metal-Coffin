@@ -82,13 +82,9 @@ func CallbackDiag (Diags : Array[String], Avatar : Texture, TalkerName : String,
 	diag.PlayDialogue(Diags, Avatar, TalkerName)
 	diag.Callback = Callback
 
-func ToggleInventoryButton(t : bool):
-	$VBoxContainer/HBoxContainer/Panel/InventoryButton.disabled = !t
-
 func GetInventory() -> InventoryManager:
 	return _Inventory
-#func GetCapUI() -> CaptainUI:
-	#return _CaptainUI
+	
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return _MapMarkerEditor
 
@@ -106,11 +102,10 @@ func Pause() -> void:
 func On_Game_Lost_Button_Pressed() -> void:
 	World.GetInstance().EndGame()
 
-#func Stuter() -> void:
-	#var mat : ShaderMaterial = $Control3/Screen.material
 
 func ToggleCrtEffect(T : bool) -> void:
 	Screen.visible = T
+
 
 func SetScreenRes(Res : Vector2) -> void:
 	Screen.material.set_shader_parameter("res", Res)

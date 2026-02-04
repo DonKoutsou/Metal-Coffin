@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ivgnk2dd66ef"]
+
+[ext_resource type="Shader" uid="uid://7q1jltmsd8pb" path="res://Scenes/Dither.gdshader" id="1_u14xi"]
+[ext_resource type="Texture2D" uid="uid://chlkwju4hw0lw" path="res://Assets/DitherTexture.png" id="2_3waiy"]
+
+[resource]
+shader = ExtResource("1_u14xi")
+shader_parameter/levels = 8
+shader_parameter/threshold = 1.0
+shader_parameter/colors = 8
+shader_parameter/pixelate = 1
+shader_parameter/dither_texture = ExtResource("2_3waiy")
+shader_parameter/ScreenSize = Vector2(0, 0)

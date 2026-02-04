@@ -33,8 +33,8 @@ func TeamsPicked(PlTeam : Array[Captain], EnTeam : Array[Captain]) -> void:
 	ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	TCompUI.queue_free()
 	
-	ScrUI.ToggleScreenUI(false)
-	ScrUI.ToggleCardFightUI(true)
+	#ScrUI.ToggleScreenUI(false)
+	await ScrUI.ToggleCardFightUI(true)
 	StartDogFight(PlTeam, EnTeam)
 	
 	AchievementManager.GetInstance().IncrementStatInt("CF", 1)

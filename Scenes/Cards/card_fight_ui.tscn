@@ -3,24 +3,23 @@
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scripts/CardFight/card_fight_ui.gd" id="1_u6pkr"]
 [ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="2_c6mlu"]
-[ext_resource type="Texture2D" uid="uid://c0js5lp4ncruk" path="res://Assets/UIPiecies/Screen/SidePanels/ButtonCover3_FullQuality.png" id="2_fje4l"]
-[ext_resource type="Texture2D" uid="uid://26rhnah0tact" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="4_c6mlu"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Cards/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
 [ext_resource type="AudioStream" uid="uid://demm6a82oqqil" path="res://Assets/Sounds/cash2.mp3" id="5_anehw"]
-[ext_resource type="Texture2D" uid="uid://bdwuh13c5yg07" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="5_flupv"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="5_lleca"]
-[ext_resource type="Texture2D" uid="uid://btjmdx1ok8w2r" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png" id="5_vuvmf"]
 [ext_resource type="AudioStream" uid="uid://bp73cekansu4g" path="res://Assets/Sounds/BeepConfirm.mp3" id="6_anehw"]
-[ext_resource type="Texture2D" uid="uid://770ytc3dmn3u" path="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality_Pressed.png" id="6_iexgv"]
-[ext_resource type="Texture2D" uid="uid://qsh4878cc3hs" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality.png" id="7_vuvmf"]
 [ext_resource type="AudioStream" uid="uid://dsflespepg17h" path="res://Assets/Sounds/BeepReject.mp3" id="7_xj5gt"]
-[ext_resource type="Texture2D" uid="uid://c2yp7vecjlnri" path="res://Assets/UIPiecies/Screen/Buttons/Button2_Camera 1_FullQuality_Pressed.png" id="8_iexgv"]
 [ext_resource type="AudioStream" uid="uid://qbcciug7j8jy" path="res://Assets/Sounds/BeepLong.mp3" id="8_xj5gt"]
-[ext_resource type="Texture2D" uid="uid://cxo14pw1ry2k" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="9_ef7uc"]
+[ext_resource type="Texture2D" uid="uid://vejt8vmsfnfl" path="res://Assets/UIPiecies/Screen/ScreenFrames/CardFightScreen.png" id="9_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="11_omcrt"]
 [ext_resource type="AudioStream" uid="uid://er1a6ts6crml" path="res://Assets/Sounds/CardIn.mp3" id="12_rpmjo"]
 [ext_resource type="AudioStream" uid="uid://bkvuy1fav1gyx" path="res://Assets/Sounds/CardOut2.mp3" id="13_w3ip8"]
+[ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="14_80dwx"]
+[ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="15_lf8xs"]
+[ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="16_ksx0p"]
+[ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="17_w6rgp"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Cards/Deck.tscn" id="19_1bbav"]
+[ext_resource type="StyleBox" uid="uid://b7suo0ob4kefv" path="res://Theme/Buttons/ButtonYellowStripe.tres" id="19_ksx0p"]
+[ext_resource type="StyleBox" uid="uid://ttlagq0nmcyb" path="res://Theme/Buttons/ButtonYellowStripe_Pressed.tres" id="20_w6rgp"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="22_lf8xs"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_ksx0p"]
 
@@ -71,23 +70,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
-texture = ExtResource("9_ef7uc")
-expand_mode = 1
-
-[node name="ScreenFrame3" type="TextureRect" parent="." unique_id=963201506]
-custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1016.0
-offset_top = 13.0
-offset_right = -13.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 0
-texture = ExtResource("2_fje4l")
+texture = ExtResource("9_lf8xs")
 expand_mode = 1
 
 [node name="DeckButton" parent="." unique_id=997840762 instance=ExtResource("19_1bbav")]
@@ -197,67 +180,63 @@ grow_vertical = 1
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 
-[node name="PullReserves" type="TextureButton" parent="." unique_id=964614674 groups=["Buttons"]]
+[node name="PullReserves" type="Button" parent="." unique_id=2065884608 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1217.0
-offset_top = 645.0
-offset_right = 1243.0
-offset_bottom = 684.0
+offset_left = 1217.86
+offset_top = 641.43744
+offset_right = 1247.4225
+offset_bottom = 684.00006
 rotation = 1.57079
-texture_normal = ExtResource("5_vuvmf")
-texture_pressed = ExtResource("6_iexgv")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("14_80dwx")
+theme_override_styles/pressed = ExtResource("15_lf8xs")
+theme_override_styles/hover = ExtResource("14_80dwx")
 
-[node name="DrawCard" type="TextureButton" parent="." unique_id=604521615 groups=["Buttons"]]
+[node name="DrawCard" type="Button" parent="." unique_id=1230920392 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1036.0
-offset_top = 184.0
-offset_right = 1078.0
-offset_bottom = 204.0
-texture_normal = ExtResource("7_vuvmf")
-texture_pressed = ExtResource("8_iexgv")
-ignore_texture_size = true
-stretch_mode = 0
+offset_left = 1034.0
+offset_top = 181.0
+offset_right = 1080.0
+offset_bottom = 205.0
+theme_override_styles/normal = ExtResource("16_ksx0p")
+theme_override_styles/pressed = ExtResource("17_w6rgp")
+theme_override_styles/hover = ExtResource("16_ksx0p")
 
-[node name="Button" type="TextureButton" parent="." unique_id=1759365849 groups=["Buttons"]]
+[node name="Button" type="Button" parent="." unique_id=565274018 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1071.0
-offset_top = 323.0
+offset_left = 1070.0
+offset_top = 322.0
 offset_right = 1097.0
-offset_bottom = 368.0
+offset_bottom = 366.0
 size_flags_vertical = 4
 theme = ExtResource("5_lleca")
-texture_normal = ExtResource("4_c6mlu")
-texture_pressed = ExtResource("5_flupv")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("19_ksx0p")
+theme_override_styles/pressed = ExtResource("20_w6rgp")
+theme_override_styles/hover = ExtResource("19_ksx0p")
 
-[node name="SwitchShip" type="TextureButton" parent="." unique_id=453767180 groups=["Buttons"]]
+[node name="SwitchShip" type="Button" parent="." unique_id=1588933994 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -93.0
-offset_top = -398.0
-offset_right = -65.0
-offset_bottom = -352.0
+offset_left = -94.0
+offset_top = -399.0
+offset_right = -64.0
+offset_bottom = -353.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("7_vuvmf")
-texture_pressed = ExtResource("8_iexgv")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("16_ksx0p")
+theme_override_styles/pressed = ExtResource("17_w6rgp")
+theme_override_styles/hover = ExtResource("16_ksx0p")
 
 [node name="DiscardInsert" type="PanelContainer" parent="." unique_id=1911246089]
 clip_contents = true
 layout_mode = 0
 offset_left = 1034.0
-offset_top = 271.0
+offset_top = 269.0
 offset_right = 1226.0
-offset_bottom = 533.0
+offset_bottom = 531.0
 scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
@@ -271,9 +250,9 @@ mouse_filter = 2
 clip_contents = true
 layout_mode = 0
 offset_left = 1034.0
-offset_top = 212.0
+offset_top = 209.99998
 offset_right = 1227.0
-offset_bottom = 474.0
+offset_bottom = 472.0
 scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
@@ -287,9 +266,9 @@ mouse_filter = 2
 clip_contents = true
 layout_mode = 0
 offset_left = 1034.0
-offset_top = 126.0
+offset_top = 125.0
 offset_right = 1226.0
-offset_bottom = 388.0
+offset_bottom = 387.0
 scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
@@ -299,25 +278,24 @@ show_behind_parent = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Pause" type="TextureButton" parent="." unique_id=664904408 groups=["Buttons"]]
+[node name="Pause" type="Button" parent="." unique_id=974089572 groups=["Buttons"]]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -106.0
-offset_top = 25.0
-offset_right = -47.0
+offset_top = 24.0
+offset_right = -44.0
 offset_bottom = 59.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 theme = ExtResource("22_lf8xs")
-texture_normal = ExtResource("7_vuvmf")
-texture_pressed = ExtResource("8_iexgv")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_styles/normal = ExtResource("16_ksx0p")
+theme_override_styles/pressed = ExtResource("17_w6rgp")
+theme_override_styles/hover = ExtResource("16_ksx0p")
 
 [node name="Label" type="Label" parent="Pause" unique_id=315080587]
 texture_filter = 1

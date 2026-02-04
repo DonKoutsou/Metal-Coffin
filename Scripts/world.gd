@@ -317,8 +317,8 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	
 	CardF.FightLoc = AveragePos
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	GetMap().GetScreenUi().ToggleScreenUI(false)
-	GetMap().GetScreenUi().ToggleCardFightUI(true)
+	#GetMap().GetScreenUi().ToggleScreenUI(false)
+	await GetMap().GetScreenUi().ToggleCardFightUI(true)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
@@ -356,7 +356,7 @@ func CardFightDestroyed() -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
-	GetMap().GetScreenUi().ToggleScreenUI(true)
+	#GetMap().GetScreenUi().ToggleScreenUI(true)
 	GetMap().GetScreenUi().ToggleCardFightUI(false)
 	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
 	

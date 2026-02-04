@@ -39,7 +39,6 @@ func ShipSpeedForced(NewSpeed : float) -> void:
 	Thrust.ForceValue(NewSpeed)
 
 func ControlledShipSwitched(NewShip : MapShip) -> void:
-	MissileUI.UpdateConnectedShip(NewShip)
 	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
 	Steer.ForceSteer(NewShip.rotation)
 

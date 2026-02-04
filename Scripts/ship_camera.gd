@@ -218,11 +218,11 @@ func _physics_process(_delta: float) -> void:
 	var rel : Vector2
 	if (Input.is_action_pressed("MapDown")):
 		rel.y -= 10
-	else: if (Input.is_action_pressed("MapUp")):
+	if (Input.is_action_pressed("MapUp")):
 		rel.y += 10
-	else: if (Input.is_action_pressed("MapRight")):
+	if (Input.is_action_pressed("MapRight")):
 		rel.x -= 10
-	else: if (Input.is_action_pressed("MapLeft")):
+	if (Input.is_action_pressed("MapLeft")):
 		rel.x += 10
 		
 	if (Input.is_action_pressed("ZoomIn")):

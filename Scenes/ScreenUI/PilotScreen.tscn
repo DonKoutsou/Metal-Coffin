@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwb4h83od4vgp" path="res://Scenes/ScreenUI/PilotScreen.gd" id="1_fq67n"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_ecvfe"]
-[ext_resource type="Texture2D" uid="uid://s464nk64miu8" path="res://Assets/UIPiecies/Screen/Screen2_FullQuality.png" id="2_eeg0m"]
+[ext_resource type="Texture2D" uid="uid://s464nk64miu8" path="res://Assets/UIPiecies/Screen/ScreenFrames/Screen2_FullQuality.png" id="2_eeg0m"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="3_ecvfe"]
 [ext_resource type="Texture2D" uid="uid://ebrqin4q01s6" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="4_uojtp"]
 [ext_resource type="Texture2D" uid="uid://bvk1d6i2dr1sf" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_hc833"]
@@ -47,7 +47,7 @@ ScreenItems = NodePath("ScreenUi")
 MarkerEditorControls = NodePath("MapMarkerControls")
 Thrust = NodePath("ThrustSlider")
 Steer = NodePath("SteeringWheel")
-MissileUI = NodePath("ScreenUi/Missile Tab")
+MissileUI = NodePath("Missile Tab")
 EventHandler = ExtResource("2_ecvfe")
 SpeedSimulationButton = NodePath("SpeedSimulation")
 ZoomDial = NodePath("ZoomDial")
@@ -253,25 +253,22 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Missile Tab" parent="ScreenUi" unique_id=1968593876 instance=ExtResource("7_ojc6g")]
-layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.5
-offset_left = 118.0
-offset_top = -230.0
-offset_right = 158.0
-offset_bottom = -190.0
-grow_horizontal = 1
-grow_vertical = 2
-
 [node name="Fan" parent="." unique_id=159958918 instance=ExtResource("8_bpouu")]
 position = Vector2(1002, -125.00001)
 scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
+
+[node name="Missile Tab" parent="." unique_id=1968593876 instance=ExtResource("7_ojc6g")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 127.0
+offset_top = -66.0
+offset_right = 167.0
+offset_bottom = -26.0
+grow_horizontal = 1
 
 [node name="MapMarkerControls" parent="." unique_id=329577773 instance=ExtResource("9_yjfdw")]
 layout_mode = 1

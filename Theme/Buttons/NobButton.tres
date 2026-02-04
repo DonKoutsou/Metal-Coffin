@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bc1y4hhkl7ce6"]
+
+[ext_resource type="Texture2D" uid="uid://bkvbomqe6vv4l" path="res://Assets/UIPiecies/Screen/Buttons/Switch_Alt2.png" id="1_5xonn"]
+
+[resource]
+texture = ExtResource("1_5xonn")

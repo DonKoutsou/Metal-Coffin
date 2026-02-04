@@ -26,6 +26,7 @@ func DropCoins(Amm : int) -> void:
 		var Delsound = DeletableSoundGlobal.new()
 		Delsound.stream = CoinSlideInSound
 		Delsound.pitch_scale = randf_range(0.95, 1.05)
+		Delsound.bus = "MapSounds"
 		add_child(Delsound)
 		Delsound.volume_db = -5
 		Delsound.play()
@@ -45,6 +46,7 @@ func OnCoinsGot() -> void:
 	var Delsound = DeletableSoundGlobal.new()
 	Delsound.stream = CoinSlideSound
 	Delsound.pitch_scale = randf_range(0.95, 1.05)
+	Delsound.bus = "MapSounds"
 	add_child(Delsound)
 	Delsound.volume_db = -5
 	Delsound.play()
@@ -96,6 +98,7 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 		var Delsound = DeletableSoundGlobal.new()
 		Delsound.stream = CoinSlideInSound
 		Delsound.pitch_scale = randf_range(0.95, 1.05)
+		Delsound.bus = "MapSounds"
 		add_child(Delsound)
 		Delsound.volume_db = -5
 		Delsound.play()

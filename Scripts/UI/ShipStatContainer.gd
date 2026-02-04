@@ -4,6 +4,12 @@ extends VBoxContainer
 class_name ShipStatContainer
 
 @export_file("*.tscn") var Tooltipscene : String
+@export_group("Nodes")
+@export var StatNameLabel : Label
+@export var StatValueLabel : Label
+@export var ShipStatBar : ProgressBar
+@export var ItemStatBar : ProgressBar
+@export var ItemNegativeBar : ProgressBar
 
 var STName = -1
 
@@ -35,50 +41,58 @@ func PositionTooltip() -> void:
 	#Tooltip.global_position = get_global_mouse_position()
 
 func SetData(Stat : STAT_CONST.STATS) -> void:
+	#store stat type and the metric
 	STName = Stat
-	$HBoxContainer/Label.text = STAT_CONST.STATS.keys()[Stat].replace("_", " ")
 	Metric =  STAT_CONST.GetStatMetric(STName)
+	
+	#Set the stat name to the label
+	StatNameLabel.text = STAT_CONST.STATS.keys()[Stat].replace("_", " ")
+	
+	#assign the max possible value of the stat to the progress bars
 	var MaxVal = STAT_CONST.GetStatMaxValue(Stat)
 
-	$ProgressBar.max_value = MaxVal
+	ShipStatBar.max_value = MaxVal
+	ItemStatBar.max_value = MaxVal
+	ItemNegativeBar.max_value = MaxVal
 
-	$ProgressBar/ItemBar.max_value = MaxVal
-	$ProgressBar/ItemNegBar.max_value = MaxVal
-
+#used for "custom" stats that are pseudo stat, created from the combination of others, like speed and range
 func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Stat : STAT_CONST.STATS) -> void:
+	#store stat type and the metric
 	STName = Stat
 	Metric = StatMetric
-	$HBoxContainer/Label.text = StatName
-	$ProgressBar.max_value = MaxValue
-	$ProgressBar/ItemBar.max_value = MaxValue
-	$ProgressBar/ItemNegBar.max_value = MaxValue
+	
+	#Set the stat name on the label
+	StatNameLabel.text = StatName
+	
+	#assign the max possible value of the stat to the progress bars
+	ShipStatBar.max_value = MaxValue
+	ItemStatBar.max_value = MaxValue
+	ItemNegativeBar.max_value = MaxValue
+
 
 func UpdateStatCustom(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
-	$ProgressBar/ItemNegBar.visible = ItemPenalty > 0
-	$ProgressBar.value = StatVal
-	$ProgressBar/ItemBar.value = StatVal + ItemVar
-	$ProgressBar/ItemNegBar.value = StatVal + ItemVar - ItemPenalty
-	#var Max = var_to_str($ProgressBar.max_value).replace(".0", "")
-	$HBoxContainer/Label2.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
+	
+	StatValueLabel.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
 
+	ShipStatBar.value = StatVal
+	ItemStatBar.value = StatVal + ItemVar
+	
+	ItemNegativeBar.visible = ItemPenalty > 0
+	ItemNegativeBar.value = StatVal + ItemVar - ItemPenalty
+	
 func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
 
-	$ProgressBar/ItemNegBar.visible = ItemPenalty > 0
-	
-	$ProgressBar.value = StatVal
-	$ProgressBar/ItemBar.value = StatVal + ItemVar
-	$ProgressBar/ItemNegBar.value = StatVal + ItemVar - ItemPenalty
-	#$ProgressBar/ShipBar.value = StatVal + ItemVar + ShipVar
-	#var Max = var_to_str($ProgressBar.max_value).replace(".0", "")
 	if (!STAT_CONST.ShouldStatStack(STName)):
-		$HBoxContainer/Label2.text = "{0} {1}".format([var_to_str(max(StatVal, ItemVar) - ItemPenalty).replace(".0", ""), Metric])
+		StatValueLabel.text = "{0} {1}".format([var_to_str(max(StatVal, ItemVar) - ItemPenalty).replace(".0", ""), Metric])
 	else:
-		$HBoxContainer/Label2.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
-
+		StatValueLabel.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
+	
+	ShipStatBar.value = StatVal
+	ItemStatBar.value = StatVal + ItemVar
+	ItemNegativeBar.visible = ItemPenalty > 0
+	ItemNegativeBar.value = StatVal + ItemVar - ItemPenalty
 
 func _on_mouse_entered() -> void:
-	if (STName == -1):
-		return
 	var tipscene : PackedScene = ResourceLoader.load(Tooltipscene)
 	Tooltip = tipscene.instantiate()
 	
@@ -88,11 +102,9 @@ func _on_mouse_entered() -> void:
 	
 	Tooltip.global_position = get_global_mouse_position()
 	
-	set_physics_process(true)
 	PositionTooltip()
+	set_physics_process(true)
 
 func _on_mouse_exited() -> void:
-	if (Tooltip == null):
-		return
 	Tooltip.queue_free()
 	set_physics_process(false)

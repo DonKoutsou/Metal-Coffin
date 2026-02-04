@@ -5,12 +5,13 @@ class_name ScreenUI
 
 @export_group("Screen")
 @export var Cables : Control
-@export var DoorSound : AudioStreamPlayer
-@export var ScreenPanel : TextureRect
+@export_file("*.tscn") var TransitionScreenScene : String
 @export_file("*.tscn") var CardFightUIScene : String
 @export_file("*.tscn") var TownUIScene : String
 @export_file("*.tscn") var PilotScreenScene : String
 @export_file("*.tscn") var FullScreenScene : String
+
+var Transition : TransitionPanel
 
 var CardFightUI : ExternalCardFightUI
 var TownUi : TownExternalUI
@@ -22,9 +23,6 @@ var CurrentScreenState : ScreenState
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
 
-
-func _ready() -> void:
-	ScreenPanel.visible = false
 	
 func ToggleCardFightUI(t : bool) -> void:
 	if (t):
@@ -77,15 +75,14 @@ enum ScreenState{
 }
 
 func CloseScreen() -> void:
-	ScreenPanel.visible = true
-	DoorSound.play()
+	var TransitionSc : PackedScene = ResourceLoader.load(TransitionScreenScene)
+	Transition = TransitionSc.instantiate()
+	
+	add_child(Transition)
+	Transition.Close()
 	Cam.EnableFullScreenShake()
-	await Helper.GetInstance().wait(0.5)
-	var CloseTw = create_tween()
-	CloseTw.set_ease(Tween.EASE_OUT)
-	CloseTw.set_trans(Tween.TRANS_BOUNCE)
-	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
-	await CloseTw.finished
+
+	await Transition.PanelClosed
 	FullScreenToggleStarted.emit(ScreenState.HALF_SCREEN)
 
 func OpenScreen(NewStat : ScreenState) -> void:
@@ -94,29 +91,25 @@ func OpenScreen(NewStat : ScreenState) -> void:
 			ToggleFullScreenUI(true)
 		ScreenState.NORMAL_SCREEN:
 			ToggleForegroundUI(true)
-
-	var OpenTw = create_tween()
-	OpenTw.set_ease(Tween.EASE_IN)
-	OpenTw.set_trans(Tween.TRANS_QUART)
-	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
-	await OpenTw.finished
-	ScreenPanel.visible = false
+	
+	Transition.Open()
+	await Transition.PanelOpened
+	Transition.queue_free()
+	
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
 
 func DoIntroFullScreen(NewStat : ScreenState) -> void:
-	ScreenPanel.visible = true
-	Cables.visible = false
-	DoorSound.play()
-	Cam.EnableFullScreenShake()
-	await Helper.GetInstance().wait(0.5)
-	var CloseTw = create_tween()
-	CloseTw.set_ease(Tween.EASE_OUT)
-	CloseTw.set_trans(Tween.TRANS_BOUNCE)
-	CloseTw.tween_property(ScreenPanel, "position", Vector2(0,0), 2)
-	CloseTw.finished.connect(IntroCloseFinisehd.bind(NewStat))
+	var TransitionSc : PackedScene = ResourceLoader.load(TransitionScreenScene)
+	Transition = TransitionSc.instantiate()
+	
+	add_child(Transition)
+	Transition.Close()
 
-func IntroCloseFinisehd(NewStat : ScreenState) -> void:
+	Cables.visible = false
+	Cam.EnableFullScreenShake()
+	
+	await Transition.PanelClosed
 	FullScreenToggleStarted.emit(NewStat)
 	
 	#await Helper.GetInstance().wait(0.2)
@@ -127,25 +120,23 @@ func IntroCloseFinisehd(NewStat : ScreenState) -> void:
 		ScreenState.NORMAL_SCREEN:
 			ToggleForegroundUI(true)
 	
-	var OpenTw = create_tween()
-	OpenTw.set_ease(Tween.EASE_IN)
-	OpenTw.set_trans(Tween.TRANS_QUART)
-	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
-	await OpenTw.finished
-	ScreenPanel.visible = false
+	Transition.Open()
+	await Transition.PanelOpened
+	Transition.queue_free()
+	
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
 
 func ToggleFullScreen(NewStat : ScreenState) -> void:
-	ScreenPanel.visible = true
-	DoorSound.play()
+	var TransitionSc : PackedScene = ResourceLoader.load(TransitionScreenScene)
+	Transition = TransitionSc.instantiate()
+	
+	add_child(Transition)
+	Transition.Close()
+
 	Cam.EnableFullScreenShake()
-	await Helper.GetInstance().wait(0.5)
-	var CloseTw = create_tween()
-	CloseTw.set_ease(Tween.EASE_OUT)
-	CloseTw.set_trans(Tween.TRANS_BOUNCE)
-	CloseTw.tween_property(ScreenPanel, "position", Vector2.ZERO, 2)
-	await CloseTw.finished
+
+	await Transition.PanelClosed
 	
 	FullScreenToggleStarted.emit(NewStat)
 	
@@ -163,11 +154,9 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 		ScreenState.NORMAL_SCREEN:
 			ToggleForegroundUI(true)
 
-	var OpenTw = create_tween()
-	OpenTw.set_ease(Tween.EASE_IN)
-	OpenTw.set_trans(Tween.TRANS_QUART)
-	OpenTw.tween_property(ScreenPanel, "position", Vector2(0, -ScreenPanel.size.y - 40), 1.6)
-	await OpenTw.finished
-	ScreenPanel.visible = false
+	Transition.Open()
+	await Transition.PanelOpened
+	Transition.queue_free()
+	
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()

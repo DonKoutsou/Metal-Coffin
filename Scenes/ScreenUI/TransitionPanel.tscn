@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://c3ev6wyyc7j75"]
+
+[ext_resource type="Script" uid="uid://csr430cdphqjd" path="res://Scenes/ScreenUI/transition_panel.gd" id="1_h0tkp"]
+[ext_resource type="Texture2D" uid="uid://b4hidsx46gkgt" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="1_iek8p"]
+[ext_resource type="AudioStream" uid="uid://wkejeryqqtkt" path="res://Assets/Sounds/DoorClose.mp3" id="2_7bj5d"]
+[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="3_h0tkp"]
+[ext_resource type="AudioStream" uid="uid://cnlneyxq8xeau" path="res://Assets/Sounds/DoorOpen.mp3" id="3_u62qe"]
+
+[sub_resource type="Animation" id="Animation_h0tkp"]
+resource_name = "Close"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_Close"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qa6vo"]
+resource_name = "Open"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_Open"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7bj5d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qa6vo"]
+_data = {
+&"Close": SubResource("Animation_h0tkp"),
+&"Open": SubResource("Animation_qa6vo"),
+&"RESET": SubResource("Animation_7bj5d")
+}
+
+[sub_resource type="Curve" id="Curve_h0tkp"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.048717953, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qa6vo"]
+curve = SubResource("Curve_h0tkp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bqtfu"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(640, 0, 1)
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 12.5
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+angular_velocity_min = -500.0
+angular_velocity_max = 499.99997
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_qa6vo")
+
+[node name="Control" type="Control" unique_id=1747163891 node_paths=PackedStringArray("PanelTexture", "Anim")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h0tkp")
+DoorCloseSound = ExtResource("2_7bj5d")
+DoorOpenSound = ExtResource("3_u62qe")
+PanelTexture = NodePath("Panel")
+Anim = NodePath("AnimationPlayer")
+
+[node name="Panel" type="TextureRect" parent="." unique_id=682446634]
+z_index = 1
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -751.0
+offset_bottom = -751.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("1_iek8p")
+expand_mode = 1
+
+[node name="PanelShadow" type="TextureRect" parent="Panel" unique_id=806008219]
+modulate = Color(0, 0, 0, 0.8)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("1_iek8p")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=251335124]
+libraries/ = SubResource("AnimationLibrary_qa6vo")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=136205391]
+z_index = 1
+position = Vector2(640, 720)
+emitting = false
+amount = 30
+texture = ExtResource("3_h0tkp")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_bqtfu")

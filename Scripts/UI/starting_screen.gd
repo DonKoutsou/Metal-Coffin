@@ -3,6 +3,7 @@ extends Node
 class_name StartingScreen
 
 @export var StartingMenuScene : String = "res://Scenes/starting_menu.tscn"
+@export var DitherShader : ShaderMaterial
 @export_file("*.tscn") var StudioAnim : String
 @export var GameScene : String = "res://Scenes/World.tscn"
 @export var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
@@ -21,6 +22,11 @@ const APPID = "3679120"
 
 
 func _ready() -> void:
+	var siz =  DisplayServer.screen_get_size()
+	siz.x = min(siz.x, 1920)
+	siz.y = min(siz.y, 1080)
+	DitherShader.set_shader_parameter("ScreenSize",siz)
+	print("Screen Size = {0}".format([siz]))
 	#if (OS.get_name() == "Windows"):
 		#Steam.steamInit()
 		#var IsRunning = Steam.isSteamRunning()
@@ -39,7 +45,7 @@ func _ready() -> void:
 func Start() -> void:
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)
 	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
-	add_child(vidpl)
+	$SubViewportContainer/SubViewport.add_child(vidpl)
 	
 	await vidpl.Finished
 	
@@ -49,7 +55,7 @@ func Start() -> void:
 func SpawnMenu() -> void:
 	var Menu = await Helper.GetInstance().LoadThreaded(StartingMenuScene).Sign
 	StMenu = Menu.instantiate() as StartingMenu
-	add_child(StMenu)
+	$SubViewportContainer/SubViewport.add_child(StMenu)
 	StMenu.connect("GameStart", StartGame)
 	StMenu.connect("PrologueStart", StartPrologue)
 	StMenu.connect("DelSave", DelSave)
@@ -65,7 +71,7 @@ func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
-	add_child(Wor)
+	$SubViewportContainer/SubViewport.add_child(Wor)
 	Wor.SkipStory = SkipStory
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
@@ -77,7 +83,7 @@ func StartCageFight() -> void:
 	var FightScene = await Helper.GetInstance().LoadThreaded(CageFightGameScene).Sign
 	var fight = FightScene.instantiate() as CageFightWorld
 
-	add_child(fight)
+	$SubViewportContainer/SubViewport.add_child(fight)
 	await fight.FightTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false
@@ -103,7 +109,7 @@ func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
-	add_child(Wor)
+	$SubViewportContainer/SubViewport.add_child(Wor)
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false

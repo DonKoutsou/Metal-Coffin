@@ -12,6 +12,7 @@ SpotScene = ExtResource("2_l7yg4")
 [node name="CitySpot" type="Node2D" parent="." unique_id=409066220]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=571244990 groups=["DissapearingMap"]]
+z_index = -1
 material = ExtResource("3_ot8kj")
 anchors_preset = 8
 anchor_left = 0.5

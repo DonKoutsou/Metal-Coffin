@@ -235,10 +235,6 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
 	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 	
-		#ShipStats.SetCaptain(Cha)
-		#ShipDeck.visible = false
-		
-	
 	for g in Cha.StartingItems:
 		if (g is ShipPart):
 			var Part = g.duplicate(true) as ShipPart
@@ -247,6 +243,7 @@ func AddCharacter(Cha : Captain) -> void:
 			CharInv.AddItem(Part)
 		else:
 			CharInv.AddItem(g)
+			
 	UISoundMan.GetInstance().Refresh()
 
 func OnCharacterRemoved(Cha : Captain) -> void:

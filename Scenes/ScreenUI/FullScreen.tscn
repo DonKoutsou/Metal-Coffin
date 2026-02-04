@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://baempq3grl4bd"]
 
-[ext_resource type="Texture2D" uid="uid://cta21sa447sbq" path="res://Assets/UIPiecies/Screen/ScreenLong3.png" id="1_q2ft4"]
+[ext_resource type="Texture2D" uid="uid://cta21sa447sbq" path="res://Assets/UIPiecies/Screen/ScreenFrames/ScreenLong3.png" id="1_q2ft4"]
 
 [node name="Foreground" type="Control" unique_id=1109053421]
 layout_mode = 3

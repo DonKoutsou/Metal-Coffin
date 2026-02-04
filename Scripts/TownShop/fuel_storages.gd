@@ -103,13 +103,13 @@ func UpdateFuelBar(AddedFuel : float):
 	if (MoneySpent > 0):
 		SpentFunds += roundi(AddedFuel * FuelPricePerTon)
 		if (SpentFunds > 1000):
-			Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(SpentFunds / 1000.0))
+			Map.GetInstance().GetScreenUi().TownUi.DropCoins(roundi(SpentFunds / 1000.0))
 			SpentFunds = 0
 	else:
 		SpentFunds += roundi(AddedFuel * FuelPricePerTon)
 		var z = roundi(SpentFunds/1000.0)
 		if (z < -1):
-			Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(abs(z))
+			Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(abs(z))
 			SpentFunds = 0
 
 	PlayerWallet.AddFunds(-MoneySpent)

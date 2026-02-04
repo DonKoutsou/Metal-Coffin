@@ -251,3 +251,4 @@ stretch_mode = 3
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1820030369]
 stream = ExtResource("6_cf7bt")
 volume_db = -10.0
+bus = &"MapSounds"

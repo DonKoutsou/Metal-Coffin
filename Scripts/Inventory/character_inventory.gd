@@ -101,6 +101,16 @@ func HasItem(It : Item) -> bool:
 func GetInventoryContents() -> Dictionary[Item, int]:
 	return _InventoryContents
 
+func GetMissile() -> Array[Item]:
+	var Missiles : Array[Item]
+	
+	for g in _InventoryContents:
+		if (g is MissileItem):
+			for Mis in _InventoryContents[g]:
+				Missiles.append(g)
+			
+	return Missiles
+	
 func InitialiseInventory(Cha : Captain) -> void:
 	CharNameChanged.connect(Cha.OnCharacterNameChanged)
 	Cha.OnNameChanged.connect(CharacterNameChange)

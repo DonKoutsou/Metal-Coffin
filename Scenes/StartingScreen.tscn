@@ -1,21 +1,28 @@
 [gd_scene format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
-[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="7_mty3o"]
+[ext_resource type="Material" uid="uid://ivgnk2dd66ef" path="res://Shaders/Dither.tres" id="2_7bhdu"]
 
 [node name="StartingScreen" type="Node" unique_id=64991473]
 process_mode = 3
 script = ExtResource("1_kry56")
+DitherShader = ExtResource("2_7bhdu")
 StudioAnim = "uid://cmdvuq7n6nncl"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2054653349]
-layer = 128
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1847058524]
-material = ExtResource("7_mty3o")
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1758213328]
+material = ExtResource("2_7bhdu")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2015624308]
+disable_3d = true
+handle_input_locally = false
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+oversampling = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
