@@ -10,13 +10,14 @@ signal AnimationFinished
 
 @export var CardScene : PackedScene
 @export var DamageFloater : PackedScene
-@export var ShipViz : PackedScene
-@export var AtackVisual : PackedScene
-@export var DefVisual : PackedScene
-@export var ShieldVisual : PackedScene
-@export var EnergyVisual : PackedScene
-@export var BuffVisual : PackedScene
-@export var DeBuffVisual : PackedScene
+
+@export_file("*.tscn") var ShipVizFile : String
+@export_file("*.tscn") var AtackVisualFile : String
+@export_file("*.tscn") var DefVisualFile : String
+@export_file("*.tscn") var ShieldVisualFile : String
+@export_file("*.tscn") var EnergyVisualFile : String
+@export_file("*.tscn") var BuffVisualFile : String
+@export_file("*.tscn") var DebuffVisualFile : String
 
 var Fin : bool = false
 
@@ -138,6 +139,7 @@ func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Floate
 	#await wait (0.15)
 	
 	AtackCardDestroyed.emit(AtackCard.global_position + (AtackCard.size / 2))
+	var AtackVisual : PackedScene = ResourceLoader.load(AtackVisualFile)
 	var Visual = AtackVisual.instantiate() as MissileViz
 	if (DeffenceCard != null):
 		Visual.Target = DeffenceCard
@@ -153,6 +155,7 @@ func SpawnShieldVisual(Target : Control, DefCard : Card, FloaterText : String) -
 
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
+	var ShieldVisual : PackedScene = ResourceLoader.load(ShieldVisualFile)
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
@@ -165,6 +168,7 @@ func SpawnEnergyVisual(Target : Control, DefCard : Card, FloaterText : String) -
 
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
+	var EnergyVisual : PackedScene = ResourceLoader.load(EnergyVisualFile)
 	var Visual = EnergyVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
@@ -176,6 +180,7 @@ func SpawnUpVisual(Target : Control, DefCard : Card, FloaterText : String) -> vo
 	#await wait (0.4)
 	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
@@ -187,6 +192,7 @@ func SpawnDownVisual(Target : Control, DefCard : Card, FloaterText : String) -> 
 	#await wait (0.4)
 	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
 	var Visual = DeBuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
@@ -198,6 +204,7 @@ func SpawnUpDamageVisual(Target : Control, DefCard : Card, FloaterText : String)
 	#await wait (0.2)
 	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
@@ -234,6 +241,7 @@ func TweenEnded(Target : Control, DeffenceCard : Card, FloaterText : String) -> 
 		d.global_position = (DeffenceCard.global_position + (DeffenceCard.size / 2)) - d.size / 2
 		DeffenceCard.KillCard(0.5, false)
 		DeffenceCardDestroyed.emit(DeffenceCard.global_position + (DeffenceCard.size / 2))
+		var DefVisual : PackedScene = ResourceLoader.load(DefVisualFile)
 		var ShieldEff = DefVisual.instantiate() as BurstParticleGroup2D
 		add_child(ShieldEff)
 		ShieldEff.global_position = (DeffenceCard.global_position + (DeffenceCard.size / 2))
@@ -324,6 +332,7 @@ func DoDraw(User : Control) -> void:
 	queue_free()
 
 func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
+	var ShipViz : PackedScene = ResourceLoader.load(ShipVizFile)
 	var Ship = ShipViz.instantiate() as CardFightShipViz
 	Ship.disabled = true
 	Ship.SetStatsAnimation(OriginShip, FriendShip)

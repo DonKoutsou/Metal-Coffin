@@ -3,13 +3,6 @@
 [ext_resource type="Script" uid="uid://bdvm3q5rknxlm" path="res://Scripts/CardFight/offensive_animation.gd" id="1_jaurs"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_jp0up"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_d0xxj"]
-[ext_resource type="PackedScene" uid="uid://dhfqn405u7iov" path="res://Scenes/Cards/OffensiveAnimationShipViz.tscn" id="4_p073m"]
-[ext_resource type="PackedScene" uid="uid://cqejjvj1hassq" path="res://Scenes/Cards/AtackEffects/missile_thing.tscn" id="5_f7v70"]
-[ext_resource type="PackedScene" uid="uid://5ubeqcn5eqt5" path="res://Scenes/Cards/AtackEffects/ShieldEffect.tscn" id="6_mj77s"]
-[ext_resource type="PackedScene" uid="uid://bu0gnwclyuygc" path="res://Scenes/Cards/AtackEffects/Shield_thing.tscn" id="7_o02sb"]
-[ext_resource type="PackedScene" uid="uid://cdkdu7girot7w" path="res://Scenes/Cards/AtackEffects/buff_thing.tscn" id="8_bwlgq"]
-[ext_resource type="PackedScene" uid="uid://cirgeti4ije63" path="res://Scenes/Cards/AtackEffects/Energy_Thing.tscn" id="8_q2u0g"]
-[ext_resource type="PackedScene" uid="uid://b1j8lcr2bwkvf" path="res://Scenes/Cards/AtackEffects/Debuff_thing.tscn" id="9_bwlgq"]
 
 [node name="CardOffensiveAnimation" type="Control" unique_id=1215573475]
 z_index = 1
@@ -25,13 +18,13 @@ mouse_filter = 2
 script = ExtResource("1_jaurs")
 CardScene = ExtResource("2_jp0up")
 DamageFloater = ExtResource("3_d0xxj")
-ShipViz = ExtResource("4_p073m")
-AtackVisual = ExtResource("5_f7v70")
-DefVisual = ExtResource("6_mj77s")
-ShieldVisual = ExtResource("7_o02sb")
-EnergyVisual = ExtResource("8_q2u0g")
-BuffVisual = ExtResource("8_bwlgq")
-DeBuffVisual = ExtResource("9_bwlgq")
+ShipVizFile = "uid://dhfqn405u7iov"
+AtackVisualFile = "uid://cqejjvj1hassq"
+DefVisualFile = "uid://5ubeqcn5eqt5"
+ShieldVisualFile = "uid://bu0gnwclyuygc"
+EnergyVisualFile = "uid://cirgeti4ije63"
+BuffVisualFile = "uid://cdkdu7girot7w"
+DebuffVisualFile = "uid://b1j8lcr2bwkvf"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=81172635]
 layout_mode = 1

@@ -14,16 +14,14 @@ class_name Card_Fight
 #Any atack can have a counter, so a barrage from the machine guns can be "blocked" from an enemy doing evasive manuvers
 #/////////////////////////////////////////////////////////////
 @export var CardScene : PackedScene
-@export var ShipVizScene : PackedScene
-@export var ShipVizScene2 : PackedScene
-@export var AtackTime : PackedScene
-@export var FightGame : PackedScene
+@export_file var ShipVizScene : String
 @export var DamageFloater : PackedScene
 #Animation of the atack
-@export var ActionAnim : PackedScene
+@export_file("*.tscn") var ActionAnimFile : String
 #Scene that shows the stats of the fight
-@export var EndScene : PackedScene
-@export var CardFightShipInfoScene : PackedScene
+@export_file("*.tscn") var EndSceneFile : String
+@export_file("*.tscn") var ShipInfoSceneFile : String
+
 @export var CardPlecementSound : AudioStream
 @export var RemoveCardSound : AudioStream
 @export_group("Plecement Referances")
@@ -276,6 +274,7 @@ static func speed_comparator(a, b):
 
 
 func ShipVizPressed(Ship : BattleShipStats) -> void:
+	var CardFightShipInfoScene : PackedScene = ResourceLoader.load(ShipInfoSceneFile)
 	var Scene = CardFightShipInfoScene.instantiate() as CardFightShipInfo
 	Scene.SetUpShip(Ship)
 	add_child(Scene)
@@ -1041,6 +1040,7 @@ func RestartCards() -> void:
 
 # CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 
 func OnFightEnded(Won : bool) -> void:
+	var EndScene : PackedScene = ResourceLoader.load(EndSceneFile)
 	var End = EndScene.instantiate() as CardFightEndScene
 	var FrCombatants : Array[BattleShipStats]
 	FrCombatants.append_array(PlayerCombatants)
@@ -1940,6 +1940,7 @@ func HandleShuffleDiscardedIntoDeck(D : Deck, DoAnim : bool = true) -> void:
 
 func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : BattleShipStats, _FriendShip : bool) -> void:
 	#print("Starting Def Anim")
+	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
@@ -1960,6 +1961,7 @@ func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : Bat
 	anim.queue_free()
 
 func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User : Control) -> void:
+	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
@@ -1976,6 +1978,7 @@ func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User
 	await(anim.AnimationFinished)
 
 func DoCardDrawAnimation(User : Control) -> void:
+	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
@@ -2256,7 +2259,8 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 #////////////////////////////////////////////////////////////////////////////
 
 func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightShipViz2:
-	var ShipVisuals = ShipVizScene2.instantiate() as CardFightShipViz2
+	var VizScene : PackedScene = ResourceLoader.load(ShipVizScene)
+	var ShipVisuals = VizScene.instantiate() as CardFightShipViz2
 
 	ShipVisuals.SetStats(BattleS, Friendly)
 	

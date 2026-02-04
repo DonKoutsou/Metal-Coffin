@@ -1,12 +1,8 @@
 extends Control
 
 class_name PilotScreenUI
-
-@export var ScreenItems : Control
-@export var MarkerEditorControls : MapMarkerControls
 @export var Thrust : ThrustSlider
 @export var Steer : SteeringWheelUI
-@export var MissileUI : MissileTab
 @export var EventHandler : UIEventHandler
 @export_group("Buttons")
 @export var SpeedSimulationButton : TextureButton
@@ -16,8 +12,6 @@ class_name PilotScreenUI
 
 
 func _ready() -> void:
-	MissileUI.MissileLaunched.connect(EventHandler.OnMissilgeLaunched)
-	EventHandler.ScreenUIToggled.connect(ToggleScreenUI)
 	EventHandler.ShipUpdated.connect(ControlledShipSwitched)
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
 	EventHandler.SpeedForced.connect(ShipSpeedForced)
@@ -25,8 +19,6 @@ func _ready() -> void:
 	EventHandler.YChangedFromScreen.connect(YDial.AddCustomMovement)
 	EventHandler.XChangedFromScreen.connect(XDial.AddCustomMovement)
 	UISoundMan.GetInstance().Refresh()
-
-var ScreenItemsStateBeforePause : bool
 
 func SpeedUpdated(t : bool) -> void:
 	SpeedSimulationButton.set_pressed_no_signal(t)
@@ -42,8 +34,7 @@ func ControlledShipSwitched(NewShip : MapShip) -> void:
 	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
 	Steer.ForceSteer(NewShip.rotation)
 
-func ToggleScreenUI(t : bool) -> void:
-	ScreenItems.visible = t
+
 
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)
@@ -98,35 +89,17 @@ func Land_Pressed() -> void:
 		return
 	EventHandler.OnLandPressed()
 
-func TownVisited(t : bool) -> void:
-	if (t):
-		ScreenItemsStateBeforePause = ScreenItems.visible
-		ScreenItems.visible = false
-	else:
-		ScreenItems.visible = ScreenItemsStateBeforePause
-
 func Pause_Pressed() -> void:
-	if (!get_tree().paused):
-		ScreenItemsStateBeforePause = ScreenItems.visible
-		ScreenItems.visible = false
-	else:
-		ScreenItems.visible = ScreenItemsStateBeforePause
 	EventHandler.OnPausePressed()
 
 ########## BUTTON PRESS EVENTS ###########
 func Marker_Editor_Button_Pressed() -> void:
-	MissileUI.TurnOff()
 	EventHandler.OnMarkerEditorToggled(false)
 
 func Ship_Dock_Button_Pressed() -> void:
 	if (World.WORLDST != World.WORLDSTATE.NORMAL):
 		return
 	EventHandler.OnFleetSeparationPressed()
-
-
-func Missile_Button_Pressed() -> void:
-	MissileUI.Toggle()
-	#MarkerEditorControls.TurnOff()
 
 func _on_steer_button_toggled(toggled_on: bool) -> void:
 	Steer.Toggle(toggled_on)

@@ -3,6 +3,8 @@ extends Control
 class_name ElingUI
 
 @export var ShipControllerEvenH : ShipControllerEventHandler
+
+@export_group("Files")
 @export_file var DirectionMaskFiles : Array[String]
 @export_file("*.png") var DistanceMasks : Array[String]
 @export_file("*.png") var OnOffTextures : Array[String]
@@ -15,15 +17,20 @@ class_name ElingUI
 @export var ElintText : TextureRect
 @export var BeepSound : AudioStreamPlayer2D
 
+@export_group("Sounds")
 @export var Alarm : AudioStream
 @export var Beep : AudioStream
 
+#List is used durring process, its itterated though and all lights in it are toggled
 var Lights : Array[Light2D] = []
 
+#Currently controlled ship
 var ConnectedShip : MapShip
 
+#Used to declare when a contact is found
 var FoundContact : bool = false
 
+#Current elint state, cached to avoid redoing stuff
 var CurrentState : ELINTSTATE
 
 enum ELINTSTATE{
@@ -40,17 +47,15 @@ func _ready() -> void:
 			Lights.append(g)
 			g.visible = false
 	
+	#Set up currently controlled and registering to event
 	UpdateConnectedShip(ShipControllerEvenH.CurrentControlled)
 	ShipControllerEvenH.OnControlledShipChanged.connect(UpdateConnectedShip)
-	#SetDirection(67)
-	#SetDistance(800)
 
 func ToggleElint(t : bool) -> void:
 	if (t):
 		var tex = ResourceLoader.load(OnOffTextures[0])
 		ElintText.texture = tex
 		set_physics_process(true)
-		
 	else:
 		var tex = ResourceLoader.load(OnOffTextures[1])
 		ElintText.texture = tex
@@ -59,35 +64,34 @@ func ToggleElint(t : bool) -> void:
 func UpdateConnectedShip(Sh : MapShip) -> void:
 	ConnectedShip = Sh
 	ToggleElint(Sh.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0)
-	#if Sh is Drone:
-		#ToggleElint(Sh.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0)
-	#else :
-		#ToggleElint(true)
 		
 var d = 0.4
 func _physics_process(delta: float) -> void:
-	#UpdateBasedOnMouse()
-	
+
 	d -= delta
 	if (d > 0):
 		return
-	d = 0.6
+	d = 0.4
 	
-	var Elint = ConnectedShip.GetClosestElintLevel()
-	if (Elint < 0):
-		#RangeIndicator.visible = false
+	var ElintLevel = ConnectedShip.GetClosestElintLevel()
+	
+	if (ElintLevel < 0):
+		
 		CurrentState = ELINTSTATE.NONE
 		FoundContact = false
 		for g in Lights:
 			g.visible = false
+			
 		return
+		
 	else :
+		
 		if (!FoundContact):
 			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
+			
 		FoundContact = true
-		#RangeIndicator.show()
 		SetDirection(rad_to_deg(ConnectedShip.global_position.angle_to_point(ConnectedShip.GetClosestElint())) + 180)
-		SetDistance(Elint)
+		SetElintLevel(ElintLevel)
 	
 	for g in Lights:
 		g.visible = !g.visible
@@ -95,12 +99,12 @@ func _physics_process(delta: float) -> void:
 	if (CurrentState != ELINTSTATE.NONE):
 		BeepSound.play()
 
-func UpdateBasedOnMouse() -> void:
-	var mpos = get_global_mouse_position()
-	var pos = global_position + (size / 2)
-	var ang = (rad_to_deg(pos.angle_to_point(mpos))) + 180
-	SetDirection(ang)
-	SetDistance(pos.distance_squared_to(mpos))
+#func UpdateBasedOnMouse() -> void:
+	#var mpos = get_global_mouse_position()
+	#var pos = global_position + (size / 2)
+	#var ang = (rad_to_deg(pos.angle_to_point(mpos))) + 180
+	#SetDirection(ang)
+	#SetDistance(pos.distance_squared_to(mpos))
 
 func SetDirection(dir : float) -> void:
 	#print(dir)
@@ -119,38 +123,36 @@ static func DegreesToElintAngle(Deg : float) -> int:
 		return dirs[g]
 	return 0
 	
-func SetDistance(dist : int) -> void:
-	#var maxdist = ConnectedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
-	if (dist == 3):
-		if (CurrentState != ELINTSTATE.CLOSE):
-			CurrentState = ELINTSTATE.CLOSE
-			var text = ResourceLoader.load(DistanceMasks[2])
-			RangeIndicator.texture = text
-			if (!Lights.has(DangerCloseLight)):
-				Lights.append(DangerCloseLight)
-			DangerCloseLight.visible = DirectionLight.visible
-			BeepSound.stream = Alarm
-			BeepSound.pitch_scale = 4
+func SetElintLevel(ElintLevel : int) -> void:
+	match(ElintLevel):
+		3:
+			if (CurrentState != ELINTSTATE.CLOSE):
+				CurrentState = ELINTSTATE.CLOSE
+				var text = ResourceLoader.load(DistanceMasks[2])
+				RangeIndicator.texture = text
+				if (!Lights.has(DangerCloseLight)):
+					Lights.append(DangerCloseLight)
+				DangerCloseLight.visible = DirectionLight.visible
+				BeepSound.stream = Alarm
+				BeepSound.pitch_scale = 4
+				
+		2:
+			if (CurrentState != ELINTSTATE.MEDIUM):
+				CurrentState = ELINTSTATE.MEDIUM
+				var text = ResourceLoader.load(DistanceMasks[1])
+				RangeIndicator.texture = text
+				Lights.erase(DangerCloseLight)
+				DangerCloseLight.visible = false
+				BeepSound.stream = Beep
+				BeepSound.pitch_scale = 1
 			
-	else : if (dist == 2):
-		if (CurrentState != ELINTSTATE.MEDIUM):
-			CurrentState = ELINTSTATE.MEDIUM
-			var text = ResourceLoader.load(DistanceMasks[1])
-			RangeIndicator.texture = text
-			Lights.erase(DangerCloseLight)
-			DangerCloseLight.visible = false
-			#$AudioStreamPlayer.playing = false
-			BeepSound.stream = Beep
-			BeepSound.pitch_scale = 1
-			
-	else :
-		if (CurrentState != ELINTSTATE.FAR):
-			CurrentState = ELINTSTATE.FAR
-			var text = load(DistanceMasks[0])
-			RangeIndicator.texture = text
-			Lights.erase(DangerCloseLight)
-			DangerCloseLight.visible = false
-			BeepSound.stream = Beep
-			BeepSound.pitch_scale = 1
-			#$AudioStreamPlayer.playing = false
+		1:
+			if (CurrentState != ELINTSTATE.FAR):
+				CurrentState = ELINTSTATE.FAR
+				var text = ResourceLoader.load(DistanceMasks[0])
+				RangeIndicator.texture = text
+				Lights.erase(DangerCloseLight)
+				DangerCloseLight.visible = false
+				BeepSound.stream = Beep
+				BeepSound.pitch_scale = 1
 	

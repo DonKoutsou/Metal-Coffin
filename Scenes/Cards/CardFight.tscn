@@ -3,13 +3,7 @@
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_n2sfr"]
-[ext_resource type="PackedScene" uid="uid://chd8i7o8mqa5l" path="res://Scenes/Cards/CardFightShipViz2.tscn" id="4_hty1i"]
-[ext_resource type="PackedScene" uid="uid://mynuy3gwirlo" path="res://Scenes/Cards/atack_timer.tscn" id="5_q6kaa"]
-[ext_resource type="PackedScene" uid="uid://djd1dfb5i6p0y" path="res://Scenes/FightMinigame.tscn" id="6_l6rgq"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
-[ext_resource type="PackedScene" uid="uid://cbdyafmynts2u" path="res://Scenes/Cards/OffensiveAnimation.tscn" id="9_b6m6l"]
-[ext_resource type="PackedScene" uid="uid://dfh0dm1lwcumv" path="res://Scenes/CardFightEndScene.tscn" id="10_42bcn"]
-[ext_resource type="PackedScene" uid="uid://6hcd2pi6mky3" path="res://Scenes/Cards/CardFightShipInfo.tscn" id="11_fpjxy"]
 [ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
 [ext_resource type="Material" uid="uid://b6441eghjnus8" path="res://Shaders/CardfightGround.tres" id="14_l2i77"]
@@ -39,14 +33,11 @@ grow_vertical = 2
 stretch = true
 script = ExtResource("1_kpwgu")
 CardScene = ExtResource("2_yc7d8")
-ShipVizScene = ExtResource("3_n2sfr")
-ShipVizScene2 = ExtResource("4_hty1i")
-AtackTime = ExtResource("5_q6kaa")
-FightGame = ExtResource("6_l6rgq")
+ShipVizScene = "uid://chd8i7o8mqa5l"
 DamageFloater = ExtResource("8_yl0qx")
-ActionAnim = ExtResource("9_b6m6l")
-EndScene = ExtResource("10_42bcn")
-CardFightShipInfoScene = ExtResource("11_fpjxy")
+ActionAnimFile = "uid://cbdyafmynts2u"
+EndSceneFile = "uid://dfh0dm1lwcumv"
+ShipInfoSceneFile = "uid://6hcd2pi6mky3"
 CardPlecementSound = ExtResource("12_xtulq")
 RemoveCardSound = ExtResource("15_8bqim")
 SelectedCardPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer/PanelContainer2/SelectedCardPlecements")

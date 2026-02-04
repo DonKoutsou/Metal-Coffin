@@ -3,8 +3,8 @@ class_name MissileTab
 
 var Armed = false
 @export var MissileDockEventH : MissileDockEventHandler
-#@export var DroneDockEventH : DroneDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
+@export var UIEventH : UIEventHandler
 
 @export_group("Nodes")
 @export var MissileSelectLight : Light
@@ -29,6 +29,7 @@ var Showing = false
 
 func _ready() -> void:
 	Initialise()
+	MissileLaunched.connect(UIEventH.OnMissilgeLaunched)
 	#visible = false
 	
 func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
