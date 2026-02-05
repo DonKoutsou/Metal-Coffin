@@ -160,7 +160,8 @@ func DoAlarmVisual() -> void:
 	add_child(AlarmVisual.instantiate())
 
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
-	var missile = Mis.MissileScene.instantiate() as Missile
+	var MissileScene : PackedScene = ResourceLoader.load(Mis.MissileFile)
+	var missile = MissileScene.instantiate() as Missile
 	missile.FiredBy = self
 	missile.SetData(Mis)
 	if (Command != null):
@@ -304,7 +305,7 @@ func FigureOutPath() -> void:
 		PathPart = 1
 	
 	BTree = BT.instantiate() as BeehaveTree
-	#TODO Test different tickrateson android
+	#TODO Test different tickrate on android
 	BBoard = Blackboard.new()
 	add_child(BBoard)
 	BBoard.set_value("TickRate", 1)

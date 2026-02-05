@@ -69,7 +69,7 @@ func _draw() -> void:
 	var fontsize = 20.0 / CurrentZoom
 	
 	var LinesToDraw : Array[Array]
-	#TODO fix zoom affecting distance text
+
 	for g in TargetLocations.size():
 		var origin = to_local(CurrentShipLocation)
 		var LineOrigin = Vector2.ZERO

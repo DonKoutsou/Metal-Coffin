@@ -25,7 +25,7 @@ static func OnActionCompleted(Act : Action) -> void:
 	CompletedActions.append(Act)
 
 
-func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Control], _InScreen : bool) -> void:
+func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT], _InScreen : bool) -> void:
 	if (!ShowTutorials):
 		return
 	

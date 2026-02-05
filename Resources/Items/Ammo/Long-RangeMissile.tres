@@ -1,12 +1,11 @@
 [gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://ds7viiermptuq"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_pj6tu"]
-[ext_resource type="PackedScene" uid="uid://dvdaxeaw05g4k" path="res://Scenes/missile.tscn" id="2_raeam"]
 [ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="3_x23ej"]
 
 [resource]
 script = ExtResource("3_x23ej")
-MissileScene = ExtResource("2_raeam")
+MissileFile = "uid://dvdaxeaw05g4k"
 Distance = 3500
 Speed = 200.0
 Damage = 200

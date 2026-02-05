@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="15_g1jcv"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scripts/WorldView/worldview_manager.gd" id="17_18b7g"]
 [ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/GlobalManagers/simulation_manager.tscn" id="18_43ao6"]
-[ext_resource type="PackedScene" uid="uid://b5vi65a1j0fjf" path="res://Scenes/worldview_notif.tscn" id="18_567dx"]
 [ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_0dp8t"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
 [ext_resource type="Resource" uid="uid://chjcgb4pp86hr" path="res://Resources/Happenings/CardiPrince.tres" id="20_7no5x"]
@@ -55,7 +54,7 @@ _Map = NodePath("../Map")
 
 [node name="WorldviewManager" type="Node" parent="." unique_id=1648406804]
 script = ExtResource("17_18b7g")
-WorldviewAdjustNotif = ExtResource("18_567dx")
+Notif_File = "uid://b5vi65a1j0fjf"
 
 [node name="EventManager" type="Node" parent="." unique_id=998249353]
 script = ExtResource("19_0dp8t")

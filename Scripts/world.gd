@@ -540,7 +540,6 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 
 
 #Make sure to remove all items that their cards have been used
-#TODO fix this, ammo that wasnt brought into fight cause of lack of weapons will be deleted DONE 
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
 	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
 	var Contents = CharInv.GetInventoryContents().duplicate()

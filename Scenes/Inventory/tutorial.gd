@@ -21,13 +21,13 @@ var OriginalSize : Vector2
 
 signal Completed
 
-func SetData(Title : String, Text : String, TutorialSubjects : Array[Control]) -> void:
+func SetData(Title : String, Text : String, TutorialSubjects : Array[Map.UI_ELEMENT]) -> void:
 	TitleLabel.text = Title
 	TextLabel.text = Text
 	if (TutorialSubjects.size() > 0):
-		Target = TutorialSubjects[0]
+		Target = Map.GetInstance().GetUIElement(TutorialSubjects[0])
 	if (TutorialSubjects.size() > 1):
-		Target2 = TutorialSubjects[1]
+		Target2 = Map.GetInstance().GetUIElement(TutorialSubjects[1])
 		
 func _ready() -> void:
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)

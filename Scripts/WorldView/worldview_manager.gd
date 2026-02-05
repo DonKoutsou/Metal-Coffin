@@ -3,7 +3,7 @@ extends Node
 class_name WorldView
 
 @export_group("WorldviewNotif")
-@export var WorldviewAdjustNotif : PackedScene
+@export_file("*.tscn") var Notif_File : String
 
 var Lied : bool = false
 
@@ -33,6 +33,7 @@ func AdjustStat(Stat : WorldViews, Amm : int, Notify : bool) -> void:
 	WorldviewStats[Stat] += Amm
 	print("Worldview stat {0} new value is {1}".format([WorldViews.keys()[Stat], WorldviewStats[Stat]]))
 	if (Notify):
+		var WorldviewAdjustNotif : PackedScene = ResourceLoader.load(Notif_File)
 		var notif = WorldviewAdjustNotif.instantiate() as WorldviewNotif
 		notif.AdjustedAmm = Amm
 		notif.NotifStat = Stat

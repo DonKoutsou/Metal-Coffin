@@ -402,11 +402,11 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		#ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
-			await ActionTracker.GetInstance().ShowTutorial("Energy", "Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.", [ExternalUI.GetEnergyBar()], true)
+			await ActionTracker.GetInstance().ShowTutorial("Energy", "Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR], true)
 
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
-			await ActionTracker.GetInstance().ShowTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [ExternalUI.GetReserveBar()], true)
+			await ActionTracker.GetInstance().ShowTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [Map.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR], true)
 		
 		RestartCards()
 		
@@ -2227,7 +2227,7 @@ func TrySetFire() -> bool:
 	var random_value = randf()
 	return random_value < 0.2
 
-#atm of a ship is on fire is stored in the UI. Should change #TODO
+
 func CauseFire(BattleS : BattleShipStats) -> void:
 	if (BattleS.IsOnFire):
 		BattleS.TurnsOnFire += 1

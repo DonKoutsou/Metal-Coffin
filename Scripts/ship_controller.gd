@@ -4,8 +4,9 @@ class_name ShipContoller
 
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
-@export var CaptainSelectScreen : PackedScene
-@export var DroneScene : PackedScene
+
+@export_file("*.tscn") var CptSelectSceneFile : String
+@export_file("*.tscn") var DroneSceneFile : String
 
 var ship_camera: ShipCamera
 
@@ -222,7 +223,7 @@ func RegroupPressed() -> void:
 		PopupManager.GetInstance().DoFadeNotif("No available captains to regroup with")
 		return
 	
-	
+	var CaptainSelectScreen : PackedScene = ResourceLoader.load(CptSelectSceneFile)
 	var CaptainSelect = CaptainSelectScreen.instantiate() as ItemTransfer
 	CaptainSelect.SetData(CapList, "Choose Fleet to Regroup With")
 	
@@ -267,6 +268,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 	Player.Cpt.OnCharacterNameChanged(Data.TempName)
 	#WorldView.GetInstance().LoadData(Data.Worldview)
 	for Ship in Data.PlayerFleet:
+		var DroneScene : PackedScene = ResourceLoader.load(DroneSceneFile)
 		var DockedShip = DroneScene.instantiate() as Drone
 		DockedShip.Cpt = Ship.Cpt
 		DockedShip.Cpt.Repair_Parts = Ship.RepairParts
@@ -279,6 +281,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 	var RegroupingShips : Dictionary[Drone, String]
 	
 	for Command in Data.FleetData:
+		var DroneScene : PackedScene = ResourceLoader.load(DroneSceneFile)
 		var CommanderShip = DroneScene.instantiate() as Drone
 		
 		if (Command.CommanderData.CommingBack):

@@ -11,7 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="9_gq5gp"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="10_ukqae"]
 
-[node name="MapMarkerControls" type="Control" unique_id=329577773]
+[node name="MapMarkerControls" type="Control" unique_id=329577773 node_paths=PackedStringArray("ToggleButton")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_67mm3")
+ToggleButton = NodePath("ExitMapMarker")
 EventHandler = ExtResource("2_djntk")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1256885502]

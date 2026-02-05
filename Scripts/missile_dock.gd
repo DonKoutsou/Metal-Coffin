@@ -52,7 +52,8 @@ func MissileAimDirChanged(NewDir : float, Owner : Captain) -> void:
 func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	if (!IsOwner(User)):
 		return
-	var missile = Mis.MissileScene.instantiate() as Missile
+	var MissileScene : PackedScene = ResourceLoader.load(Mis.MissileFile)
+	var missile = MissileScene.instantiate() as Missile
 	missile.FiredBy = get_parent()
 	missile.SetData(Mis)
 	missile.global_rotation = $MissileLine.global_rotation

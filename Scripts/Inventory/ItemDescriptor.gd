@@ -61,7 +61,7 @@ func PlayIntroAnim() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
 		var tuttext = "When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
-		ActionTracker.GetInstance().ShowTutorial("Item Inspection", tuttext, [self], true)
+		ActionTracker.GetInstance().ShowTutorial("Item Inspection", tuttext, [], true)
 
 func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
 	var scroll = get_child(0) as Control
@@ -109,7 +109,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 		UpgradeLabel.visible = false
 	for g in CardPlecement.get_children():
 		g.queue_free()
-	#TODO Option doesent show when ship has upgraded weapons
+
 	if (It.CardProviding.size() > 0):
 		var CardsChecked : Array[CardStats]
 		for g in It.CardProviding:
@@ -120,9 +120,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 			var CardS = g.duplicate() as CardStats
 			CardS.Tier = It.Tier
 			var card = CardScene.instantiate() as Card
-			
-			#if (It.CardOptionProviding != null):
-				#CardS.SelectedOption = It.CardOptionProviding
+
 			card.SetCardStats(CardS, It.CardProviding.count(g))
 			CardPlecement.add_child(card)
 			card.Dissable()
@@ -162,8 +160,7 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -
 		#
 		#UpgradeButton.visible = false
 		#UpgradeLabel.visible = false
-	
-	#TODO Option doesent show when ship has upgraded weapons
+
 	if (Itm.CardProviding.size() > 0):
 		var CardsChecked : Array[CardStats]
 		for g in Itm.CardProviding:
@@ -174,9 +171,7 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -
 			var CardS = g.duplicate() as CardStats
 			CardS.Tier = Itm.Tier
 			var card = CardScene.instantiate() as Card
-			
-			#if (It.CardOptionProviding != null):
-				#CardS.SelectedOption = It.CardOptionProviding
+
 			card.SetCardStats(CardS, Itm.CardProviding.count(g))
 			CardPlecement.add_child(card)
 			card.Dissable()

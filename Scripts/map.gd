@@ -50,8 +50,28 @@ var TempEnemyNames: Array[String]
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
+enum UI_ELEMENT{
+	PILOT_SIMULATION_BUTTON,
+	PILOT_SIMULATION_SPEED_BUTTON,
+	PILOT_MAP_MARKER_TOGGLE,
+	CARD_FIGHT_ENERGY_BAR,
+	CARD_FIGHT_RESERVE_BAR,
+}
 
-
+func GetUIElement(Element : UI_ELEMENT) -> Control:
+	match(Element):
+		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
+			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.SIMULATION_BUTTON)
+		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
+			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.SPEED_SIMULATION_BUTTON)
+		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
+			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.MAP_MARKER_TOGGLE)
+		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
+			return _ScreenUI.CardFightUI.GetEnergyBar()
+		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
+			return _ScreenUI.CardFightUI.GetReserveBar()
+	return null
+	
 static var Instance : Map
 
 static func PixelDistanceToKm(Dist : float) -> float:
@@ -104,7 +124,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	SimulationTrigger.TutorialTitle = "Simulation Management"
 	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
 	#TODO fix this
-	#SimulationTrigger.TutorialElement.append(GetScreenUi().SimulationButton)
+	SimulationTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_SIMULATION_BUTTON)
 	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(SimulationTrigger)
 	var triggerpos = pos
 	triggerpos.y -= 100
@@ -116,7 +136,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	MapMarkerTrigger.TutorialTitle = "Map Markers"
 	MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
 	#TODO fix this
-	#MapMarkerTrigger.TutorialElement.append(GetScreenUi().MapMarkerButton)
+	MapMarkerTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE)
 	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(MapMarkerTrigger)
 	var MapMarkerTriggerpos = pos
 	MapMarkerTriggerpos.y -= 750
@@ -151,9 +171,6 @@ func CamPosChanged(NewPos : Vector2) -> void:
 
 func CamZoomChanged(NewZoom : float) -> void:
 	CamZoom = NewZoom
-
-func GetCPos() -> Vector2:
-	return $SubViewportContainer/ViewPort/SubViewportContainer.get_global_mouse_position()
 
 static func GetCameraPosition() -> Vector2:
 	return CamPos

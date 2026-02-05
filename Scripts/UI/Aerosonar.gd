@@ -71,13 +71,14 @@ func UpdateContacts() -> void:
 		var dif = Helper.angle_difference_radians(dir, CurrentAngle)
 		if (abs(dif) > PI / 4):
 			continue
+			
 		#get ship thrust value
 		var Thrust : float
 		if (g is MapShip):
 			Thrust = g.GetShipThrust() / 30
 		else : if (g is Missile):
-			#TODO find better solution for missiles
-			Thrust = 1
+			Thrust = g.Speed / 500
+			
 		#if current angle exis we add the thrust to it if not we create the new entry
 		var Dist = Controller.global_position.distance_squared_to(g.global_position) / 1000000
 		var RoundedAngle = roundi(rad_to_deg(dif) + 25)

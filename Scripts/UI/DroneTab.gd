@@ -135,6 +135,7 @@ func UpdateDroneRange(Rang : float):
 		
 		DroneDockEventH.OnDronRangeChanged(roundi(RangeDir), ConnectedShip)
 		$Control/Control/Label.text = "Fuel Cost : " + var_to_str(roundi(RangeDir / 10 / eff))
+		
 func UpdateSelected(Dir : bool) -> void:
 	if (!Armed):
 		ProgressCrewSelect(Dir)

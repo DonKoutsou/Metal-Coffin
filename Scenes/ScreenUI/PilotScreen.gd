@@ -10,7 +10,23 @@ class_name PilotScreenUI
 @export var YDial : Dial
 @export var XDial : Dial
 
+enum PILOT_UI_ELEMENTS{
+	SIMULATION_BUTTON,
+	SPEED_SIMULATION_BUTTON,
+	MAP_MARKER_TOGGLE,
+}
 
+func GetUIElement(Element : PILOT_UI_ELEMENTS) -> Control:
+	match(Element):
+		PILOT_UI_ELEMENTS.SIMULATION_BUTTON:
+			return $SimulationButton
+		PILOT_UI_ELEMENTS.SPEED_SIMULATION_BUTTON:
+			return $SpeedSimulation
+		PILOT_UI_ELEMENTS.MAP_MARKER_TOGGLE:
+			return $MapMarkerControls.ToggleButton
+	return null
+	
+	
 func _ready() -> void:
 	EventHandler.ShipUpdated.connect(ControlledShipSwitched)
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
