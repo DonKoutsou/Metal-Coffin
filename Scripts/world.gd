@@ -259,6 +259,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	
 	WORLDST = WORLDSTATE.TRADE
 	#await GetMap().GetScreenUi().FullScreenToggleStarted
+	#GetMap().GetInScreenUI()
 	Ingame_UIManager.GetInstance().AddUI(sc)
 	
 	sc.connect("SeperationFinished", ShipSeparationFinished)
@@ -269,10 +270,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 		ActionTracker.GetInstance().ShowTutorial("Ship Dock", text, [], true)
 		
 func ShipSeparationFinished() -> void:
-	#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
-	#GetMap().GetScreenUi().ToggleScreenUI(true)
 	
 	WORLDST = WORLDSTATE.NORMAL
 
@@ -283,11 +281,23 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	#Temp solution to stop fight starting twice
 	####
 	WORLDST = WORLDSTATE.FIGHT
+	
+	SimulationManager.GetInstance().TogglePause(true)
 
+	await GetMap().GetScreenUi().CloseScreen()
+	
+	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
+	var CardF = FightScene.instantiate() as Card_Fight
+	CardF.CardFightEnded.connect(CardFightEnded)
+	CardF.CardFightDestroyed.connect(CardFightDestroyed)
+	
+	#Player battle stats
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
 		FighingFriendlyUnits.append(g)
 		FBattleStats.append(g.GetBattleStats())
+		
+	#Enemy battle stats
 	var EBattleStats : Array[BattleShipStats] = []
 	for g : HostileShip in Enemies:
 		if (g.Destroyed):
@@ -295,19 +305,10 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 		FighingEnemyUnits.append(g)
 		EBattleStats.append(g.GetBattleStats())
 	
-	SimulationManager.GetInstance().TogglePause(true)
-	
-	#CardF.SetBattleData(FBattleStats, EBattleStats)
-	GetMap().GetScreenUi().CloseScreen()
-	await GetMap().GetScreenUi().FullScreenToggleStarted
-	
-	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
-	var CardF = FightScene.instantiate() as Card_Fight
-	CardF.CardFightEnded.connect(CardFightEnded)
-	CardF.CardFightDestroyed.connect(CardFightDestroyed)
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
 	
+	#Store location of fight to add the location at the ending screen
 	var AveragePos : Vector2 = Vector2.ZERO
 	for g in Enemies:
 		AveragePos += g.global_position
@@ -316,11 +317,10 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	AveragePos /= Friendlies.size() + Enemies.size()
 	
 	CardF.FightLoc = AveragePos
-	#GetMap().GetScreenUi().ToggleScreenUI(false)
+	
 	await GetMap().GetScreenUi().ToggleCardFightUI(true)
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
-	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
 
 func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
@@ -505,7 +505,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	#ControlledShip.HaltShip()
 	var PlayedEvent = false
 	if (Spot.Event != null and !Spot.Visited):
-		var happeningui = load(HappeningUI).instantiate() as HappeningInstance
+		var happeningui = ResourceLoader.load(HappeningUI).instantiate() as HappeningInstance
 		happeningui.EventSpot = Spot
 		happeningui.HappeningInstigator = Instigator
 		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
