@@ -27,7 +27,7 @@ func _ready() -> void:
 	HintDialogue.visible = false
 	Credits.visible = false
 	
-	Black.color = Color(0,0,0,1)
+	#Black.color = Color(0,0,0,1)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_EXPO)

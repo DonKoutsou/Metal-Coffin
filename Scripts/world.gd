@@ -192,7 +192,7 @@ func SteerTut() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
 		var text = "Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller"
-		await ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [GetMap().GetScreenUi().Steer, GetMap().GetScreenUi().Thrust.Handle], false)
+		await ActionTracker.GetInstance().ShowTutorial("Controlling the fleet", text, [], false)
 	
 
 func PlayIntro():
@@ -492,7 +492,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 			TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
 			var text = "Managing your fleet is key to a successful campaign.\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\nSelect a different ship to control by clicking on their name on the right part of the screen."
-			ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [GetMap().GetScreenUi().ShipDockButton, GetMap().GetScreenUi().RegroupButton], false)
+			ActionTracker.GetInstance().ShowTutorial("Managing a fleet", text, [], false)
 			
 	TutorialsToShow.clear()
 	

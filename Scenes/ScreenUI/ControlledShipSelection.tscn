@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://dmmhk1exrryca"]
 
-[ext_resource type="Texture2D" uid="uid://c1dhvumsd5xdo" path="res://Assets/UIPiecies/Screen/Panel.png" id="1_4eteg"]
 [ext_resource type="Script" uid="uid://cmbh7qwscnfdd" path="res://Scenes/ScreenUI/controlled_ship_selection.gd" id="1_5p1jf"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_7r4pq"]
 [ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="3_qsb3g"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="4_kobgw"]
+[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="6_q82w3"]
+[ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="7_8snke"]
+[ext_resource type="StyleBox" uid="uid://qpvte6fabtg4" path="res://Theme/Monitor_Panel.tres" id="7_h1y7v"]
+[ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="8_knyjj"]
 
 [node name="ControledShipSelector" type="Control" unique_id=397832360 node_paths=PackedStringArray("CurrentCaptainLabel")]
 layout_mode = 3
@@ -13,44 +16,47 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -131.0
+offset_top = -55.0
+offset_right = 143.0
+offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p1jf")
 ShipControllerEventH = ExtResource("2_7r4pq")
-CurrentCaptainLabel = NodePath("TextureRect/CaptainName")
+CurrentCaptainLabel = NodePath("PanelContainer/PanelContainer/CaptainName")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=955146914]
+[node name="PanelContainer" type="Panel" parent="." unique_id=1460591157]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -189.69672
-offset_top = -63.0
-offset_right = 189.88495
-offset_bottom = 63.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_4eteg")
-expand_mode = 1
+theme_override_styles/panel = ExtResource("6_q82w3")
 
-[node name="CaptainName" type="Label" parent="TextureRect" unique_id=1035186908]
+[node name="DroneGas" parent="PanelContainer" unique_id=456827188 instance=ExtResource("4_kobgw")]
+position = Vector2(101, 94)
+scale = Vector2(0.61999935, 0.61999935)
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=1978145618]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -121.5
+offset_top = 8.0
+offset_right = 121.5
+offset_bottom = 69.0
+grow_horizontal = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/panel = ExtResource("7_h1y7v")
+
+[node name="CaptainName" type="Label" parent="PanelContainer/PanelContainer" unique_id=1035186908]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -166.88495
-offset_top = 11.0
-offset_right = -10.884949
-offset_bottom = 44.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_constants/outline_size = 0
@@ -61,8 +67,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="DroneGas" parent="TextureRect" unique_id=456827188 instance=ExtResource("4_kobgw")]
-position = Vector2(290.69672, 96.00001)
-scale = Vector2(0.61999935, 0.61999935)
+[node name="Button" type="Button" parent="PanelContainer" unique_id=1540363474 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 77.0
+offset_right = 257.0
+offset_bottom = 108.0
+theme_override_styles/normal = ExtResource("7_8snke")
+theme_override_styles/pressed = ExtResource("8_knyjj")
+theme_override_styles/hover = ExtResource("7_8snke")
 
-[connection signal="RangeSnapedChaned" from="TextureRect/DroneGas" to="." method="_on_drone_gas_range_snaped_chaned"]
+[connection signal="RangeSnapedChaned" from="PanelContainer/DroneGas" to="." method="_on_drone_gas_range_snaped_chaned"]
+[connection signal="pressed" from="PanelContainer/Button" to="." method="_on_button_pressed"]
