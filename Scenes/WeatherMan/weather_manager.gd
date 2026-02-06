@@ -32,6 +32,7 @@ func _ready() -> void:
 	
 	N.offset = Vector3(randf_range(-10000, 10000), randf_range(-10000, 10000), 0)
 	tx = texture.get_image()
+	
 	var global_transform = get_global_transform()
 	inverse_transform = global_transform.affine_inverse()
 	rect_size = get_rect().size
@@ -46,6 +47,11 @@ func SetWorldBounds(WB : Vector2) -> void:
 	position = Vector2(-WorldBounds.x, WorldBounds.y * 2)
 	set_deferred("size", Vector2(WorldBounds.x * 2, -WorldBounds.y * 3))
 	
+	var global_transform = get_global_transform()
+	inverse_transform = global_transform.affine_inverse()
+	rect_size = get_rect().size
+
+func UpdateData() -> void:
 	var global_transform = get_global_transform()
 	inverse_transform = global_transform.affine_inverse()
 	rect_size = get_rect().size
@@ -70,6 +76,7 @@ func _physics_process(delta: float) -> void:
 		
 		for g in ShipsToUpdate:
 			var viz = GetVisibilityInPosition(g.global_position)
+			g.VisibilityValue = viz
 			g.StormValue = 1 - (viz - 0.5)
 			if (g is PlayerDrivenShip):
 				g.UpdateLight(L, viz)
@@ -116,7 +123,7 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 					 (local_position.y - offset_y) / scaled_height)
 
 	#tx.lock()  # Lock the image for pixel access
-	var color = tx.get_pixel(uv.x * texture_size.x, clamp(uv.y * texture_size.y, 0, texture_size.y - 1))
+	var color = tx.get_pixel(clamp(uv.x * texture_size.x, 0, texture_size.x - 1), clamp(uv.y * texture_size.y, 0, texture_size.y - 1))
 	#tx.unlock()  # Unlock after accessing
 
 	return color

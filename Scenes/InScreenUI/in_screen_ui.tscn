@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_b4kau"]
+[ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor.tscn" id="3_lbfwx"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/simulation_notification.tscn" id="5_g51f2"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
-[ext_resource type="PackedScene" uid="uid://wmmp1fq7nbhf" path="res://Scenes/ScreenUI/current_ship_text.tscn" id="8_avpxw"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
@@ -20,7 +20,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbfwx"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "Screen")]
+[node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "Screen")]
 process_mode = 3
 layer = 0
 follow_viewport_enabled = true
@@ -31,6 +31,7 @@ PopupPlecement = NodePath("CanvasLayer/PopupPlecement")
 EventHandler = ExtResource("3_b4kau")
 UnderstatUI = NodePath("UnderStatUI")
 OverStatUI = NodePath("OverStatUI")
+MousePointer = NodePath("CanvasLayer/InScreenMouse")
 Screen = NodePath("CanvasLayer/Screen")
 PauseMenuSceneFile = "uid://kealc8fl34qi"
 DialogueSceneFile = "uid://cq8y4l8uapojy"
@@ -47,6 +48,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="InScreenMouse" parent="CanvasLayer" unique_id=804818995 instance=ExtResource("3_lbfwx")]
 
 [node name="Screen" type="ColorRect" parent="CanvasLayer" unique_id=1451653030]
 process_mode = 3
@@ -65,6 +68,8 @@ offset_top = 0.0
 offset_right = 72.0
 offset_bottom = 0.0
 
+[node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
+
 [node name="PanelContainer2" type="PanelContainer" parent="." unique_id=562179179]
 anchors_preset = 10
 anchor_right = 1.0
@@ -82,8 +87,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
 
-[node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
-
 [node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
 anchors_preset = 7
 anchor_top = 1.0
@@ -94,10 +97,6 @@ grow_vertical = 0
 
 [node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
 offset_bottom = 80.0
-
-[node name="CurrentShipText" parent="." unique_id=1331498325 instance=ExtResource("8_avpxw")]
-offset_left = 52.0
-offset_right = 53.0
 
 [node name="Clock" parent="." unique_id=104315517 instance=ExtResource("18_adjny")]
 offset_left = 20.0

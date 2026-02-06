@@ -24,6 +24,7 @@
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="23_t54ed"]
 [ext_resource type="Texture2D" uid="uid://c0ekv76h4ymbt" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="24_nthvp"]
+[ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor.tscn" id="24_rh5bc"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="26_67h1o"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
 [ext_resource type="StyleBox" uid="uid://bblal3stslrb1" path="res://Theme/Buttons/ButtonWhite.tres" id="29_rh5bc"]
@@ -513,6 +514,8 @@ offset_right = -222.0
 offset_bottom = -81.5
 StartingMen = true
 
+[node name="InScreenMouse" parent="SubViewportContainer/SubViewport" unique_id=804818995 instance=ExtResource("24_rh5bc")]
+
 [node name="ScreenFrame" type="TextureRect" parent="." unique_id=2087125541]
 custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
@@ -774,7 +777,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=826289740]
 color = Color(0.5, 0.5, 0.5, 1)

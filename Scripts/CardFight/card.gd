@@ -104,11 +104,11 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
-	AmmountLabel.text = var_to_str(Amm) + "x"
+	AmmountLabel.text = "{0}x".format([Amm])
 	
 	CardDesc.text = DescText
 	
-	CardCost.text = var_to_str(Cost)
+	CardCost.text = "{0}".format([Cost])
 	
 	if (Stats.Type == CardStats.CardType.OFFENSIVE):
 		CardTypeEmblem.modulate = Color("ff3c22")
@@ -124,7 +124,7 @@ func UpdateBattleStats(User : BattleShipStats) -> void:
 	var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
 	CardDesc.text = DescText
 	ShownCost = GetBattleCost(User, CStats)
-	CardCost.text = var_to_str(ShownCost)
+	CardCost.text = "{0}".format([ShownCost])
 
 
 func Flip() -> void:
@@ -144,11 +144,11 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
-	AmmountLabel.text = var_to_str(Amm) + "x"
+	AmmountLabel.text = "{0}x".format([Amm])
 	
 	CardDesc.text = DescText
 	
-	CardCost.text = var_to_str(ShownCost)
+	CardCost.text = "{0}".format([ShownCost])
 	
 	if (Stats.Type == CardStats.CardType.OFFENSIVE):
 		CardTypeEmblem.modulate = Color("ff3c22")

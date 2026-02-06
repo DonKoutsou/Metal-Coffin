@@ -66,7 +66,7 @@ func GetDesc(Tier : int) -> String:
 			else : if (DmgInfo.Method == DamageInfo.CalcuationMethod.MULTIPLY):
 				DamageString += " * "
 				
-		DamageString += "[color=#ffc315]{0}% [/color][{2}]{1}[/color]".format([var_to_str(snapped(GetTieredDamage(Tier), 0.001) * 100).replace(".0", ""), StatText,TextColors[stat]])
+		DamageString += "[color=#ffc315]{0}% [/color][{2}]{1}[/color]".format([snapped(GetTieredDamage(Tier), 0.001) * 100, StatText,TextColors[stat]]).replace(".0", "")
 		
 		
 	Desc += " for {0}".format([DamageString])
@@ -126,7 +126,7 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 		if (stat.Method == DamageInfo.CalcuationMethod.MULTIPLY):
 			FinalDamage *= Dmg
 		
-	var DamageString : String = var_to_str(snapped(max(0, FinalDamage), 0.1)).replace(".0", "")
+	var DamageString : String = "{0}".format([snapped(max(0, FinalDamage), 0.1)]).replace(".0", "")
 	for stat in ScaleStat.size():
 		DamageString = "[{0}]|[/color]{1}[{0}]|[/color]".format([TextColors[stat], DamageString])
 

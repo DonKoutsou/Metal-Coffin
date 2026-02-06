@@ -66,6 +66,7 @@ var ElintContacts : Dictionary
 
 var Detectable = true
 
+var VisibilityValue : float = 0
 var StormValue : float = 0
 
 func _ready() -> void:
@@ -624,6 +625,8 @@ func GetClosestElint() -> Vector2:
 	return closest
 
 func GetClosestElintLevel() -> int:
+	if (ElintContacts.size() == 0):
+		return -1
 	var closest : MapShip
 	var closestdist : float = 999999999999
 	for g in ElintContacts.size():

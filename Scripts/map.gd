@@ -19,6 +19,7 @@ class_name Map
 @export var Region : RegionLineDrawer
 @export var Road : MapLineDrawer
 @export var MapLine : MapLineDrawer
+@export var WeatherMan : WeatherManage
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var TownSpotScene : PackedScene
@@ -325,8 +326,13 @@ func _MAP_INPUT(event: InputEvent) -> void:
 		_Camera._HANDLE_ZOOM(0.25)
 	else : if (event.is_action_pressed("ZoomOut")):
 		_Camera._HANDLE_ZOOM(-0.25)
-	else : if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		_Camera.UpdateCameraPos(event.relative)
+	else : if (event is InputEventMouseMotion):
+		if (Input.is_action_pressed("Click")):
+			_Camera.UpdateCameraPos(event.relative)
+			_InScreenUI.MousePointer.SwitchMouse(InScreenCursor.MouseMode.DIRECTIONAL)
+	else : if (event.is_action_released("Click")):
+		_InScreenUI.MousePointer.SwitchMouse(InScreenCursor.MouseMode.NORMAL)
+		#_InScreenUI.MousePosChanged(event.position)
 	else : if (event is InputEventMouseButton):
 		if (event.button_index == MOUSE_BUTTON_RIGHT and event.pressed):
 			_Camera.get_global_mouse_position()
@@ -1011,3 +1017,4 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(false)
 	$SubViewportContainer.visible = true
+	WeatherMan.UpdateData()

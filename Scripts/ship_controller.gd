@@ -13,6 +13,7 @@ var ship_camera: ShipCamera
 var AvailableShips : Array[PlayerDrivenShip] = []
 
 static var ControlledShip : PlayerDrivenShip
+static var ControlledShipVisibilityValue : float = 1
 static var ControlledShipPosition : Vector2
 
 signal FleetSeperationRequested(ControlledShip : PlayerDrivenShip)
@@ -44,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 	if (SimulationManager.IsPaused()):
 		return
 	ControlledShipPosition = ControlledShip.global_position
-	
+	ControlledShipVisibilityValue = ControlledShip.VisibilityValue
 
 func SetCamera() -> void:
 	ship_camera = Map.GetInstance().GetCamera()

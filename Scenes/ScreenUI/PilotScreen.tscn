@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="24_hpjxi"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="26_ecvfe"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/ELint.tscn" id="27_uojtp"]
+[ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/ControlledShipSelection.tscn" id="28_hc833"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xl4i0"]
 texture = ExtResource("4_uojtp")
@@ -285,6 +286,13 @@ offset_top = 78.0
 offset_right = 131.0
 offset_bottom = 118.0
 grow_horizontal = 1
+
+[node name="ControledShipSelector" parent="." unique_id=397832360 instance=ExtResource("28_hc833")]
+layout_mode = 1
+offset_left = -576.0
+offset_top = 195.0
+offset_right = -536.0
+offset_bottom = 235.0
 
 [node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]
 layout_mode = 1

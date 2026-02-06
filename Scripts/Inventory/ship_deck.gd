@@ -4,7 +4,9 @@ class_name ShipDeckViz
 
 @export var CharPortrait : TextureRect
 @export var CardScene : PackedScene
-@export var CardPosition : Control
+@export var OffensiveCardPosition : Control
+@export var DeffencsiveCardPosition : Control
+@export var UtilityCardPosition : Control
 
 var CurrentlyShownCharacter : Captain
 
@@ -21,8 +23,15 @@ func SetDeck(Ch : Captain) -> void:
 		Inv.InventoryUpdated.connect(InventoryUpdated)
 	
 	var PooledCards : Array[Card]
-	for g in CardPosition.get_children():
+	for g in OffensiveCardPosition.get_children():
 		PooledCards.append(g)
+		OffensiveCardPosition.remove_child(g)
+	for g in DeffencsiveCardPosition.get_children():
+		PooledCards.append(g)
+		DeffencsiveCardPosition.remove_child(g)
+	for g in UtilityCardPosition.get_children():
+		PooledCards.append(g)
+		UtilityCardPosition.remove_child(g)
 		#g.queue_free()
 	
 	var deck = Inv.GetCardDictionary()
@@ -31,10 +40,9 @@ func SetDeck(Ch : Captain) -> void:
 		var c : Card
 		if (PooledCards.size() > 0):
 			c = PooledCards.pop_back()
-			
 		else:
 			c = CardScene.instantiate()
-			CardPosition.add_child(c)
+		GetParentForCard(card).add_child(c)
 		c.SetCardStats(card, deck[card])
 		
 		c.Dissable()
@@ -42,8 +50,22 @@ func SetDeck(Ch : Captain) -> void:
 	for g in PooledCards:
 		g.queue_free()
 
+func GetParentForCard(C : CardStats) -> Control:
+	match C.Type:
+		CardStats.CardType.OFFENSIVE:
+			return OffensiveCardPosition
+		CardStats.CardType.DEFFENSIVE:
+			return DeffencsiveCardPosition
+		CardStats.CardType.UTILITY:
+			return UtilityCardPosition
+	return null
+
 func Clear() -> void:
-	for g in CardPosition.get_children():
+	for g in OffensiveCardPosition.get_children():
+		g.queue_free()
+	for g in DeffencsiveCardPosition.get_children():
+		g.queue_free()
+	for g in UtilityCardPosition.get_children():
 		g.queue_free()
 
 func SetDeck2(Ch : Captain) -> void:
@@ -55,9 +77,13 @@ func SetDeck2(Ch : Captain) -> void:
 		#CurrentlyShownCharacter = Ch
 		#Inv.InventoryUpdated.connect(InventoryUpdated)
 	
-	for g in CardPosition.get_children():
+	for g in OffensiveCardPosition.get_children():
 		g.queue_free()
-	
+	for g in DeffencsiveCardPosition.get_children():
+		g.queue_free()
+	for g in UtilityCardPosition.get_children():
+		g.queue_free()
+		
 	var deck = Ch.GetCards()
 	
 	#if (CardPosition.Vertical):
@@ -69,6 +95,6 @@ func SetDeck2(Ch : Captain) -> void:
 	for card : CardStats in deck:
 		var c = CardScene.instantiate() as Card
 		c.SetCardStats(card, deck[card])
-		CardPosition.add_child(c)
+		GetParentForCard(card).add_child(c)
 		c.Dissable()
 	

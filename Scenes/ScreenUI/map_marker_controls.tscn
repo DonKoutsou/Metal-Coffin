@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bhijweehoxrmw" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_sg83c"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_67mm3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
-[ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="5_67mm3"]
-[ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="6_djntk"]
+[ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="5_67mm3"]
+[ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="6_djntk"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="7_67mm3"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="8_djntk"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="9_gq5gp"]
@@ -54,15 +54,16 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 83.0
-offset_top = -7.0
-offset_right = 152.0
-offset_bottom = 22.0
+offset_left = 105.0
+offset_top = -22.064072
+offset_right = 130.0
+offset_bottom = 37.06407
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/normal = ExtResource("5_67mm3")
 theme_override_styles/pressed = ExtResource("6_djntk")
 theme_override_styles/hover = ExtResource("5_67mm3")
+toggle_mode = true
 
 [node name="ClearLines" type="Button" parent="." unique_id=1847480924 groups=["Buttons"]]
 layout_mode = 1
@@ -117,7 +118,7 @@ theme_override_styles/hover = ExtResource("9_gq5gp")
 
 [connection signal="RangeChanged" from="YGas" to="." method="_on_y_gas_range_changed"]
 [connection signal="RangeChanged" from="XGas" to="." method="_on_x_gas_range_changed"]
-[connection signal="pressed" from="ExitMapMarker" to="." method="_on_exit_map_marker_pressed"]
+[connection signal="toggled" from="ExitMapMarker" to="." method="_on_exit_map_marker_toggled"]
 [connection signal="pressed" from="ClearLines" to="." method="_on_clear_lines_pressed"]
 [connection signal="pressed" from="DrawLine" to="." method="_on_draw_line_pressed"]
 [connection signal="pressed" from="DrawText" to="." method="_on_draw_text_pressed"]

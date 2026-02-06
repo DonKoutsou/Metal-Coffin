@@ -7,6 +7,7 @@ class_name Ingame_UIManager
 @export var EventHandler : UIEventHandler
 @export var UnderstatUI : Control
 @export var OverStatUI : Control
+@export var MousePointer : InScreenCursor
 
 @export var Screen : Control
 #@export var ZoomUI : ZoomLvevel
@@ -36,7 +37,7 @@ func _ready() -> void:
 	
 	
 	ToggleScreenGlitches(SettingsPanel.GetGlitch())
-
+	
 #func ToggleZoomUI(t : bool) -> void:
 	#ZoomUI.Toggle(t)
 

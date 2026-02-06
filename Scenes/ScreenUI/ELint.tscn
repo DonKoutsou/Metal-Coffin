@@ -54,6 +54,7 @@ expand_mode = 1
 [node name="RangeIndicator" type="PointLight2D" parent="." unique_id=504806615]
 position = Vector2(83.8, 83.8)
 color = Color(0.811384, 0.567062, 0.119301, 1)
+energy = 16.0
 range_layer_max = 2
 texture = ExtResource("6_xuume")
 texture_scale = 0.65

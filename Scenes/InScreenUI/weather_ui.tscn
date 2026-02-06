@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="1_fim28"]
 [ext_resource type="Script" uid="uid://dr3s8ms8g256f" path="res://Scripts/UI/WeatherUI.gd" id="2_s1gtg"]
 
-[node name="WeatherUI" type="Control" unique_id=1637731237 node_paths=PackedStringArray("VizText", "WindText", "DangerLabel")]
+[node name="WeatherUI" type="Control" unique_id=1637731237 node_paths=PackedStringArray("VizText", "WindText", "WindDirArrow", "DangerLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_s1gtg")
 VizText = NodePath("HBoxContainer/Visibility")
-WindText = NodePath("HBoxContainer/Wind Direction")
+WindText = NodePath("HBoxContainer/HBoxContainer/Wind Direction")
+WindDirArrow = NodePath("HBoxContainer/HBoxContainer/Control/Label")
 DangerLabel = NodePath("VisibilityText2")
 
 [node name="VisibilityText2" type="Label" parent="." unique_id=1088892575]
@@ -51,7 +52,11 @@ offset_right = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Wind Direction" type="Label" parent="HBoxContainer" unique_id=1914941164]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=2029136745]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Wind Direction" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1914941164]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
@@ -61,6 +66,23 @@ text = "Wind Dir : North"
 horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
+
+[node name="Control" type="Control" parent="HBoxContainer/HBoxContainer" unique_id=853007918]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer/Control" unique_id=1117271954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.6614798
+pivot_offset = Vector2(20, 25)
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Visibility" type="Label" parent="HBoxContainer" unique_id=124546585]
 layout_mode = 2

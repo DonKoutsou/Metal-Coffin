@@ -153,35 +153,35 @@ func RefreshInventory() -> void:
 		EngineInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
+		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
 	
 	for g in CharSensorSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		SensorInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
+		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
 	
 	for g in CharFuelTankSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		FuelTankInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
+		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
 	
 	for g in CharShieldSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		ShieldInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
+		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
 	
 	for g in CharWeaponSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		WeaponInventoryBoxParent.add_child(Box)
 		Box.connect("ItemSelected", ItemSelected)
 		Box.Enable()
-		WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
+		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 	
 	var inv = Cha.GetCharacterInventory()
 	var Contents = inv.GetInventoryContents()
@@ -324,7 +324,7 @@ func ItemToAddSelected(M : Merchandise) -> void:
 	M.Amm -= 1
 	
 	PLWallet.AddFunds(-Cost)
-	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Cost / 100.0))
+	Map.GetInstance().GetScreenUi().TownUi.DropCoins(roundi(Cost / 100.0))
 	
 	ItemCat.visible = false
 	for g in ItemParent.get_children():
@@ -390,7 +390,7 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 		return
 	
 	PLWallet.AddFunds(-Cost)
-	Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(Cost / 100))
+	Map.GetInstance().GetScreenUi().TownUi.DropCoins(roundi(Cost / 100))
 	
 	PopUpManager.GetInstance().DoFadeNotif("{0} upgrade initiated".format([OriginalItem.ItemName]))
 	

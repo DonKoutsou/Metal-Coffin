@@ -66,12 +66,14 @@ stretch_mode = 3
 layout_mode = 2
 StatsShown = Array[int]([4, 16, 15, 6, 7, 17, 3, 0, 1, 2, 9])
 
-[node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" unique_id=1467780086 node_paths=PackedStringArray("CharPortrait", "CardPosition")]
+[node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" unique_id=1467780086 node_paths=PackedStringArray("CharPortrait", "OffensiveCardPosition", "DeffencsiveCardPosition", "UtilityCardPosition")]
 layout_mode = 2
 script = ExtResource("4_7pj6b")
 CharPortrait = NodePath("../CaptainIcon")
 CardScene = ExtResource("5_gxgtf")
-CardPosition = NodePath("ScrollContainer/HFlowContainer")
+OffensiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer")
+DeffencsiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer2")
+UtilityCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer3")
 
 [node name="Label" type="Label" parent="PanelContainer/ShipDeck" unique_id=1390508395]
 layout_mode = 2
@@ -89,7 +91,53 @@ vertical_scroll_mode = 3
 script = ExtResource("6_uviis")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer" unique_id=784004703]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ShipDeck/ScrollContainer" unique_id=946857389]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=709745213]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "offensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=784004703]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/v_separation = -166
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="Label2" type="Label" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=696564241]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "deffensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=1780712111]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/v_separation = -166
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="Label3" type="Label" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=1242653377]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "utility"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer3" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=967366652]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

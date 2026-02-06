@@ -69,7 +69,7 @@ light_mode = 1
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine")]
+[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WeatherMan")]
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
@@ -81,6 +81,7 @@ MapSpots = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewp
 Region = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer")
 Road = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/RoadLineDrawer")
 MapLine = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer")
+WeatherMan = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WeatherManager")
 TownSpotScene = ExtResource("7_0ker0")
 EnemyScene = ExtResource("11_323je")
 TutorialTrigger = ExtResource("9_6an1p")
@@ -96,6 +97,7 @@ EnSpawner = ExtResource("12_m1k6s")
 ControllerEvH = ExtResource("22_n73so")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1709335464]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -115,12 +117,14 @@ disable_3d = true
 own_world_3d = true
 world_3d = ExtResource("10_28wu2")
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(595, 595)
 render_target_update_mode = 4
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/ViewPort" unique_id=177781806]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
