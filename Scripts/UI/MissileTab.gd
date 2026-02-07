@@ -36,7 +36,7 @@ func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
 	if (Ship == ConnectedShip):
 		return
 	if (ConnectedShip != null):
-		Ship.disconnect("OnShipDestroyed", OnShipDest)
+		ConnectedShip.disconnect("OnShipDestroyed", OnShipDest)
 	#if (!Missiles.has(Ship)):
 		#var MissileAr : Array[MissileItem] = []
 		#Missiles[Ship] = MissileAr
@@ -47,7 +47,6 @@ func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
 	UpdateAvailableMissiles()
 	call_deferred("UpdateMissileSelect")
 
-#HACK TO MAKE SURE UI IS INITIALISED IN TIME.
 func Initialise() -> void:
 	#for g : PlayerDrivenShip in get_tree().get_nodes_in_group("PlayerShips"):
 		#RegisterShip(g)

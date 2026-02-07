@@ -286,9 +286,9 @@ anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
 offset_left = 91.0
-offset_top = 78.0
+offset_top = 205.0
 offset_right = 131.0
-offset_bottom = 118.0
+offset_bottom = 245.0
 grow_horizontal = 1
 
 [node name="ControledShipSelector" parent="." unique_id=397832360 instance=ExtResource("28_hc833")]
@@ -298,10 +298,10 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = -208.0
-offset_right = 274.0
-offset_bottom = -80.0
+offset_left = -1.0
+offset_top = -372.0
+offset_right = 273.0
+offset_bottom = -244.0
 grow_horizontal = 1
 grow_vertical = 0
 

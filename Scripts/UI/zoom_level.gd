@@ -52,6 +52,9 @@ func _draw() -> void:
 	#Find the value of the middle step
 	var MidZoom = snapped(ZoomPerStep * (Steps / 2.0), 0.10)
 	
+	var Lines : PackedVector2Array
+	#var Lines2 : PackedVector2Array
+	
 	#Start from top and calculate the steps
 	for g in range(-Steps - 1, Steps + 1):
 		
@@ -77,12 +80,17 @@ func _draw() -> void:
 			TextPos += Vector2(0,6)
 			draw_string(get_theme_default_font(), TextPos, ZoomStr.replace(".0", ""),HORIZONTAL_ALIGNMENT_CENTER, -1, 12, TEXT_COLOR)
 			
-			draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 3)
-			
+			#draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 3)
+			Lines.append(LineStartPos)
+			Lines.append(LineEndPos)
 		else:
 			
 			TextPos += Vector2(0,3)
 			draw_string(get_theme_default_font(), TextPos, ZoomStr,HORIZONTAL_ALIGNMENT_CENTER, -1, 8, TEXT_COLOR)
 			
-			draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 1)
+			#draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 1)
+			Lines.append(LineStartPos)
+			Lines.append(LineEndPos)
 			
+	draw_multiline(Lines, TEXT_COLOR, 1, true)
+	#draw_multiline(Lines2, TEXT_COLOR, 1, true)

@@ -157,14 +157,20 @@ func DrawRuller() -> void:
 
 	var Next = rotation_degrees
 	var Num = 90
+	
+	var Lines : PackedVector2Array
+	
 	for g in 12:
-		draw_line(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + ControlledShipPos, Vector2(vizrange,0).rotated(deg_to_rad(Next)) + ControlledShipPos, Color(100, 100, 100, 0.3), LineW, true)
+		Lines.append(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + ControlledShipPos)
+		Lines.append(Vector2(vizrange,0).rotated(deg_to_rad(Next)) + ControlledShipPos)
+		#draw_line(, , Color(100, 100, 100, 0.3), LineW, true)
 		
 		Next -= 30
 		Num -= 30
 		if (Num == 0):
 			Num = 360
 	
+	draw_multiline(Lines, Color(100, 100, 100, 0.3), LineW, true)
 	#Num = 0
 	#
 	#for g in 4:

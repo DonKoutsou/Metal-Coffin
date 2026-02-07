@@ -83,9 +83,9 @@ func ReprocessLines() -> void:
 
 var Threads : int = 0
 
-var TLines : Array[Array]
-var TLines2 : Array[Array]
-var TLines3 : Array[Array]
+var TLines : PackedVector2Array
+var TLines2 : PackedVector2Array
+var TLines3 : PackedVector2Array
 var TStrings : Dictionary[String, Vector2]
 var TStrings2 : Dictionary[String, Vector2]
 var TStrings3 : Dictionary[String, Vector2]
@@ -94,9 +94,9 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 	M.lock()
 	Threads += 1
 	M.unlock()
-	var Lines : Array[Array]
-	var Lines2 : Array[Array]
-	var Lines3 : Array[Array]
+	var Lines : PackedVector2Array
+	var Lines2 : PackedVector2Array
+	var Lines3 : PackedVector2Array
 	var Strings : Dictionary[String, Vector2]
 	var Strings2 : Dictionary[String, Vector2]
 	var Strings3 : Dictionary[String, Vector2]
@@ -122,9 +122,10 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 		var DrawHundreadLine = ZoomLevel < 0.15 and Hundread > 0
 		
 		if (DrawHundreadLine):
-			Lines.append([Vector2(XPos, 0), Vector2(XPos, ContainerSize.y)])
-			Lines.append([Vector2(0, YPos), Vector2(ContainerSize.x, YPos)])
-
+			Lines.append(Vector2(XPos, 0))
+			Lines.append(Vector2(XPos, ContainerSize.y))
+			Lines.append(Vector2(0, YPos))
+			Lines.append(Vector2(ContainerSize.x, YPos))
 			var text_pos = Vector2(XPos + 30, YPos - 50)  # Slight offset for visibility relative to the grid square
 			var globpos = ContainerPos + Vector2(XPos, YPos)
 			var coordinate_text = "[color=#ffc315]X[/color]{0}[color=#ffc315]Y[/color]{1}".format([roundi(globpos.x/ 100.0) + 50, roundi(globpos.y / 100.0) + 50])
@@ -146,11 +147,11 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 
 			if (DrawTenLine):
 				if (drawx):
-					Lines2.append([Vector2(XPosT, 0), Vector2(XPosT, ContainerSize.y)])
-					
+					Lines2.append(Vector2(XPosT, 0))
+					Lines2.append(Vector2(XPosT, ContainerSize.y))
 				if (drawy):
-					Lines2.append([Vector2(0, YPosT), Vector2(ContainerSize.x, YPosT)])
-					
+					Lines2.append(Vector2(0, YPosT))
+					Lines2.append(Vector2(ContainerSize.x, YPosT))
 			if (ZoomLevel < 0.1):
 				continue
 				
@@ -194,11 +195,11 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 				
 				if (DrawOneLine):
 					if (drawxO):
-						Lines3.append([Vector2(XPosO, 0), Vector2(XPosO, ContainerSize.y)])
-
+						Lines3.append(Vector2(XPosO, 0))
+						Lines3.append(Vector2(XPosO, ContainerSize.y))
 					if (drawyO):
-						Lines3.append([Vector2(0, YPosO), Vector2(ContainerSize.x, YPosO)])
-
+						Lines3.append(Vector2(0, YPosO))
+						Lines3.append(Vector2(ContainerSize.x, YPosO))
 				if (ZoomLevel < 0.8):
 					continue
 				for g in range(-100,100):
@@ -300,12 +301,17 @@ func LinesUpdateFinished(T : Thread) -> void:
 
 func _draw() -> void:
 	M.lock()
-	for g in TLines:
-		draw_line(g[0], g[1], Col, max(16, 80 - (ZoomLevel * 160)), true)
-	for g in TLines2:
-		draw_line(g[0], g[1], Col, max(8, 40 - (ZoomLevel * 80)), true)
-	for g in TLines3:
-		draw_line(g[0], g[1], Col, max(2, 10 - (ZoomLevel * 20)), true)
+	#for g in TLines:
+	if (TLines.size() > 0):
+		draw_multiline(TLines, Col, max(16, 80 - (ZoomLevel * 160)), true)
+	#for g in TLines2:
+	if (TLines2.size() > 0):
+		draw_multiline(TLines2, Col, max(8, 40 - (ZoomLevel * 80)), true)
+		#draw_line(g[0], g[1], Col, max(8, 40 - (ZoomLevel * 80)), true)
+	#for g in TLines3:
+	if (TLines3.size() > 0):
+		draw_multiline(TLines3, Col, max(2, 10 - (ZoomLevel * 20)), true)
+		#draw_line(g[0], g[1], Col, max(2, 10 - (ZoomLevel * 20)), true)
 	M.unlock()
 	
 	#for g in TStrings:

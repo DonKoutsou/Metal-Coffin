@@ -55,3 +55,22 @@ func _on_drone_gas_range_snaped_chaned(Dir: bool) -> void:
 
 func _on_button_pressed() -> void:
 	ShipCamera.GetInstance().FrameCamToShip(currentShip)
+
+
+func _on_before_captain_pressed() -> void:
+	var Ships = get_tree().get_nodes_in_group("PlayerShips")
+	var currentindex = Ships.find(currentShip)
+
+	currentindex = wrap(currentindex - 1, 0, Ships.size())
+	
+	ShipChanged(Ships[currentindex])
+	Selected(currentShip)
+
+func _on_after_captain_pressed() -> void:
+	var Ships = get_tree().get_nodes_in_group("PlayerShips")
+	var currentindex = Ships.find(currentShip)
+
+	currentindex = wrap(currentindex + 1, 0, Ships.size())
+
+	ShipChanged(Ships[currentindex])
+	Selected(currentShip)

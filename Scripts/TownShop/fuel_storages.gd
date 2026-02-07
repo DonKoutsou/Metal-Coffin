@@ -24,12 +24,17 @@ var Rng = 0
 
 func _draw() -> void:
 	var font = load("res://Fonts/DOTMBold.TTF") as Font
+	
+	var Lines : PackedVector2Array
+	
 	for g in Spots:
 		if (!g.SpotType.VisibleOnStart and !g.Seen):
 			continue
 		for z in Spots:
 			if (g.NeighboringCities.has(z.GetSpotName())):
-				draw_line(Spots[g], Spots[z], Color(1, 1, 1, 0.1), 3)
+				Lines.append(Spots[g])
+				Lines.append(Spots[z])
+				#draw_line(Spots[g], Spots[z], Color(1, 1, 1, 0.1), 3)
 		draw_circle(Spots[g], 2, Color(1,1,1), true)
 		var textpos = Spots[g]
 		textpos.y -= 10
@@ -41,6 +46,7 @@ func _draw() -> void:
 			draw_texture_rect(load("res://Assets/Items/Fuel.png"), Rect2(Vector2(textpos.x - 20, textpos.y - 14), Vector2(16,16)), false, Color("a29752"))
 			#draw_string(font, Vector2(textpos.x - 18, textpos.y + 16), "Fuel Depot", HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
 	draw_circle(get_viewport_rect().size / 2.0, Rng / 15.0, Color(0.3, 0.7, 0.915), false, 4)
+	draw_multiline(Lines, Color(1, 1, 1, 0.1), 3, true)
 
 func RedrawThing() -> void:
 	Rng = 0
