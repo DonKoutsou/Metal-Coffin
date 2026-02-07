@@ -43,8 +43,6 @@ func Regroup(NewCommander : MapShip):
 	TargetLocations.clear()
 	#Docked = false
 
-func _physics_process(delta: float) -> void:
-	super(delta)
 
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == RegroupTarget and CommingBack):

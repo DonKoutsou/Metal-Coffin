@@ -7,7 +7,8 @@
 shader = ExtResource("1_u14xi")
 shader_parameter/levels = 8
 shader_parameter/threshold = 1.0
-shader_parameter/colors = 8
+shader_parameter/colors = 16
 shader_parameter/pixelate = 1
 shader_parameter/dither_texture = ExtResource("2_3waiy")
 shader_parameter/ScreenSize = Vector2(0, 0)
+shader_parameter/DitherRes = Vector2(720, 405)

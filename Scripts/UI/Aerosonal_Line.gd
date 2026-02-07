@@ -75,7 +75,7 @@ func _draw() -> void:
 		
 		if (!g % 25):
 			var v = wrap(roundi(rad_to_deg(CurrentA) - roundedmapped) + 25, 0, 360)
-			draw_string(get_theme_default_font(), Vector2(Step * g, 10), var_to_str(v), HORIZONTAL_ALIGNMENT_FILL, -1, 5, Color(1,0,0))
+			draw_string(get_theme_default_font(), Vector2(Step * g, 10), var_to_str(v), HORIZONTAL_ALIGNMENT_FILL, -1, 7, Color(1,0,0))
 	
 	if (BiggestFind > 3 and BiggestFind > OffsetAmmount):
 		Found.emit(BiggestFind)

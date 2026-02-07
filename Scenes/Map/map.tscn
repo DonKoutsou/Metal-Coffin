@@ -1,10 +1,17 @@
 [gd_scene format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
+[ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="3_lh5em"]
+[ext_resource type="PackedScene" uid="uid://b0gylky44tnsw" path="res://Scenes/Enemies/PatrolBT.tscn" id="4_7nfft"]
+[ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="5_wv6bp"]
+[ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="6_tk0jd"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
+[ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="7_2dvbi"]
+[ext_resource type="Texture2D" uid="uid://clst6a32c5mmn" path="res://Assets/ShipTextures/Scarab.png" id="8_usara"]
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/tutorial_trigger.tscn" id="9_6an1p"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="9_m188n"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="10_28wu2"]
-[ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/Enemies/HostileShip.tscn" id="11_323je"]
+[ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/Enemies/HostileDroneDock.tscn" id="10_gjdv7"]
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="11_a2ujk"]
 [ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/WeatherMan/weather_manager.gd" id="12_1lxys"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
@@ -29,6 +36,47 @@
 [ext_resource type="Script" uid="uid://uwtcmr8brr2" path="res://Scripts/UI/RegionLineDrawer.gd" id="27_445lv"]
 [ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Scenes/WeatherMan/weathernoise.tres" id="30_xwtib"]
 [ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Scenes/WeatherMan/testnoise.tres" id="31_xwtib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7v2kq"]
+resource_local_to_scene = true
+shader = ExtResource("7_2dvbi")
+shader_parameter/ShipSize = 0.08
+shader_parameter/shadow_parallax_amount = 0.5
+shader_parameter/sprite_rotation = -1.57
+
+[sub_resource type="Curve" id="Curve_mktum"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0388889, 0), 0.0, 0.0, 0, 0, Vector2(0.04, 0.95844), 0.0, 0.0, 0, 0, Vector2(0.0755556, 0), 0.0, 0.0, 0, 0, Vector2(0.0922222, 0.940153), 0.0, 0.0, 0, 0, Vector2(0.125556, 0), 0.0, 0.0, 0, 0, Vector2(0.154444, 0.941816), -0.304774, -0.304774, 0, 0, Vector2(0.195556, 0), 0.0, 0.0, 0, 0, Vector2(0.217778, 0.911893), 0.0, 0.0, 0, 0, Vector2(0.254444, 0), 0.0, 0.0, 0, 0, Vector2(0.276667, 0.893606), 0.0, 0.0, 0, 0, Vector2(0.32, 0), 0.0, 0.0, 0, 0, Vector2(0.326667, 0.842072), 0.0, 0.0, 0, 0, Vector2(0.358889, 0), 0.0, 0.0, 0, 0, Vector2(0.368889, 0.808824), 0.0, 0.0, 0, 0, Vector2(0.397778, 0), 0.0, 0.0, 0, 0, Vector2(0.413333, 0.772251), 0.0, 0.0, 0, 0, Vector2(0.437778, 0), 0.0, 0.0, 0, 0, Vector2(0.454444, 0.757289), 0.0, 0.0, 0, 0, Vector2(0.482222, 0), 0.0, 0.0, 0, 0, Vector2(0.524444, 0.740665), 0.0, -24.6888, 0, 1, Vector2(0.554444, 0), 0.0, 0.0, 0, 0, Vector2(0.577778, 0.73734), 0.0, 0.0, 0, 0, Vector2(0.622222, 0), 0.0, 0.0, 0, 0, Vector2(0.645556, 0.675831), 0.0, 0.0, 0, 0, Vector2(0.717778, 0), 0.0, 0.0, 0, 0, Vector2(0.738889, 0.66087), 0.0, 0.0, 0, 0, Vector2(0.792222, 0), 0.0, 0.0, 0, 0, Vector2(0.817778, 0.615985), 0.0, 0.0, 0, 0, Vector2(0.854445, 0), 0.0, 0.0, 0, 0, Vector2(0.923333, 0.592711), 0.0, 0.0, 0, 0, Vector2(0.944444, 0.012532), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
+point_count = 33
+
+[sub_resource type="Gradient" id="Gradient_hjoyl"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.715481, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jc744"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
+resource_local_to_scene = true
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
+radius = 1000.0
+
+[sub_resource type="PackedScene" id="PackedScene_dwcpd"]
+_bundled = {
+"conn_count": 4,
+"conns": PackedInt32Array(1073741835, 1073741834, 71, 70, 2, 0, 0, 1073741837, 1073741836, 73, 72, 2, 0, 0, 1073741839, 1073741838, 75, 74, 2, 0, 0, 1073741841, 1073741840, 77, 76, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("HostileShip", "Node2D", "Enemy", "Ships", "ZoomAffected", "process_mode", "z_index", "script", "Patrol", "BT", "AlarmVisual", "Cpt", "TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration", "Aceleration", "Node2D", "position", "ColorRect", "Sprite2D", "z_index", "material", "rotation", "scale", "texture", "TrailLine", "Line2D", "show_behind_parent", "position", "rotation", "points", "width", "width_curve", "gradient", "joint_mode", "begin_cap_mode", "end_cap_mode", "script", "trail_fade_speed", "min_distance", "metadata/_custom_type_script", "ShipBody", "Area2D", "collision_mask", "CollisionShape2D", "CollisionShape2D", "shape", "Radar", "Area2D", "collision_layer", "collision_mask", "CollisionShape2D", "CollisionShape2D", "visible", "shape", "Elint", "Area2D", "collision_layer", "collision_mask", "monitorable", "CollisionShape2D", "CollisionShape2D", "visible", "shape", "DroneDock", "collision_layer", "_on_area_entered", "area_entered", "_on_area_exited", "area_exited", "_on_radar_2_area_entered", "area_entered", "_on_radar_2_area_exited", "area_exited"),
+"node_count": 11,
+"node_ids": PackedInt32Array(974765209, 2079415444, 1708187202, 994780843, 1910492064, 243368945, 1177421846, 689109080, 268938013, 1911328555, 1435620375),
+"node_paths": [NodePath("."), NodePath("."), NodePath("./ColorRect"), NodePath("."), NodePath("./ShipBody"), NodePath("."), NodePath("./Radar"), NodePath("."), NodePath("./Elint"), NodePath("."), NodePath("."), NodePath("ShipBody"), NodePath("."), NodePath("ShipBody"), NodePath("."), NodePath("Radar"), NodePath("."), NodePath("Radar")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 14, 5, 0, 6, 1, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 1073741836, 7, 1073741837, 8, 1073741838, 9, 1073741839, 10, 1073741840, 11, 1073741841, 12, 1073741842, 13, 3, 2, 3, 4, 1073741824, 0, 20, 19, -1, 1, 21, 14, 0, 1073741825, 0, 23, 22, -1, 5, 24, 15, 25, 16, 26, 17, 27, 18, 28, 19, 0, 1073741826, 0, 30, 29, -1, 14, 31, 20, 32, 21, 33, 22, 34, 23, 35, 24, 36, 25, 37, 26, 38, 27, 39, 28, 40, 29, 41, 30, 42, 31, 43, 32, 44, 33, 0, 1073741827, 0, 46, 45, -1, 1, 47, 34, 0, 1073741828, 0, 49, 48, -1, 1, 50, 35, 0, 1073741829, 0, 52, 51, -1, 2, 53, 36, 54, 37, 0, 1073741830, 0, 56, 55, -1, 2, 57, 38, 58, 39, 0, 1073741831, 0, 60, 59, -1, 3, 61, 40, 62, 41, 63, 42, 0, 1073741832, 0, 65, 64, -1, 2, 66, 43, 67, 44, 0, 1073741833, 0, 2147483647, 68, 45, 1, 69, 46, 0),
+"variants": [1, 1, ExtResource("3_lh5em"), false, ExtResource("4_7nfft"), ExtResource("5_wv6bp"), ExtResource("6_tk0jd"), [NodePath("ColorRect/TrailLine")], NodePath("Radar"), NodePath("Elint"), NodePath("ShipBody"), NodePath("DroneDock"), NodePath("ColorRect"), NodePath("Aceleration"), Vector2(0.5, 0), -2, SubResource("ShaderMaterial_7v2kq"), -1.5708, Vector2(0.5, 0.5), ExtResource("8_usara"), true, Vector2(-3.233e-05, -2.77778), 1.57078, PackedVector2Array(0, 0), 2.0, SubResource("Curve_mktum"), SubResource("Gradient_hjoyl"), 2, 2, 2, ExtResource("9_m188n"), 0.1, 1.0, "uid://cmkc6lix20rjb", 5, SubResource("CircleShape2D_jc744"), 2, 5, false, SubResource("CircleShape2D_63pb3"), 0, 2, false, false, SubResource("CircleShape2D_t084r"), ExtResource("10_gjdv7"), 8],
+"version": 3
+}
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kgrij"]
 light_mode = 1
@@ -60,7 +108,7 @@ shader_parameter/GroundNormal2Texture = ExtResource("14_a2ujk")
 shader_parameter/NormalD = 1.0
 shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale1 = Vector2(40, 40)
+shader_parameter/Scale1 = Vector2(20, 20)
 shader_parameter/Scale2 = Vector2(40, 40)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28wu2"]
@@ -69,7 +117,7 @@ light_mode = 1
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WeatherMan")]
+[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WeatherMan", "WorldParent")]
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
@@ -82,8 +130,9 @@ Region = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewpor
 Road = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/RoadLineDrawer")
 MapLine = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer")
 WeatherMan = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WeatherManager")
+WorldParent = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport")
 TownSpotScene = ExtResource("7_0ker0")
-EnemyScene = ExtResource("11_323je")
+EnemyScene = SubResource("PackedScene_dwcpd")
 TutorialTrigger = ExtResource("9_6an1p")
 VillageType = "uid://df37gonu46vbl"
 CityType = "uid://du24ilvkea51x"

@@ -71,7 +71,7 @@ func UpdateConnectedShip(Sh : MapShip) -> void:
 		
 var d = 0.4
 func _physics_process(delta: float) -> void:
-
+	
 	d -= delta
 	if (d > 0):
 		return

@@ -9,7 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://qpvte6fabtg4" path="res://Theme/Monitor_Panel.tres" id="7_h1y7v"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="8_knyjj"]
 
-[node name="ControledShipSelector" type="Control" unique_id=397832360 node_paths=PackedStringArray("CurrentCaptainLabel")]
+[node name="ControledShipSelector" type="Control" unique_id=397832360 node_paths=PackedStringArray("CurrentCaptainLabel", "CurrentCaptainHullLabel", "CurrentCaptainFuelLabel")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -24,7 +24,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p1jf")
 ShipControllerEventH = ExtResource("2_7r4pq")
-CurrentCaptainLabel = NodePath("PanelContainer/PanelContainer/CaptainName")
+CurrentCaptainLabel = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/CaptainName")
+CurrentCaptainHullLabel = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainHull")
+CurrentCaptainFuelLabel = NodePath("PanelContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainFuel")
 
 [node name="PanelContainer" type="Panel" parent="." unique_id=1460591157]
 layout_mode = 1
@@ -53,10 +55,56 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_styles/panel = ExtResource("7_h1y7v")
 
-[node name="CaptainName" type="Label" parent="PanelContainer/PanelContainer" unique_id=1035186908]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer" unique_id=248542822]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer" unique_id=2102311220]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=8610857]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CaptainName" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1035186908]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("3_qsb3g")
+theme_override_font_sizes/font_size = 16
+text = "Craden"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer" unique_id=761251778]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CaptainHull" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2059426061]
+texture_filter = 6
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("3_qsb3g")
+theme_override_font_sizes/font_size = 16
+text = "Range : 1000km"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CaptainFuel" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=213874189]
+texture_filter = 6
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_constants/outline_size = 0

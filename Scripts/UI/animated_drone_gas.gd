@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 			DistanceTraveled = 0
 			
 			Sound.play()
-			Input.vibrate_handheld(30)
+			Input.vibrate_handheld(10)
 			if (accumulatedrel > 0):
 				RangeSnapedChaned.emit(true)
 				if (frame + 1 == framecount):
@@ -87,9 +87,9 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		accumulatedrel += rel.x
 		set_physics_process(true)
 	if (event.is_action_pressed("ZoomOut")):
-		accumulatedrel += 0.4
+		accumulatedrel += 0.2
 		set_physics_process(true)
 	if (event.is_action_pressed("ZoomIn")):
-		accumulatedrel -= 0.4
+		accumulatedrel -= 0.2
 		set_physics_process(true)
 		

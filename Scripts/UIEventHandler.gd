@@ -91,11 +91,12 @@ func OnRadarButtonPressed() -> void:
 func OnSteeringDirectionChanged(NewValue: float) -> void:
 	SteerDirChanged.emit(NewValue)
 	Shake.emit(0.5)
-
+	DissableShake.emit()
 
 func OnSteerOffseted(Offset: float) -> void:
 	SteerOffseted.emit(Offset)
 	Shake.emit(0.5)
+	DissableShake.emit()
 
 func OnShipSwitchPressed() -> void:
 	ShipSwitchPressed.emit()

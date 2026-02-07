@@ -13,6 +13,8 @@ var UsedLabels : Array[RichTextLabel]
 
 var M : Mutex
 var S : Semaphore
+
+var Dissabled : bool = false
 #func _physics_process(delta: float) -> void:
 	#queue_redraw()
 
@@ -59,7 +61,10 @@ func GetFreeLabel() -> RichTextLabel:
 	return L
 
 func ToggleGrid(t : bool) -> void:
+	Dissabled = !t
 	visible = t
+	if (t):
+		ReprocessLines()
 
 func UpdateOffset(NewOffset : Vector2) -> void:
 	Offset = NewOffset

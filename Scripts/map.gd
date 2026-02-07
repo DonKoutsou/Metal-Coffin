@@ -20,6 +20,7 @@ class_name Map
 @export var Road : MapLineDrawer
 @export var MapLine : MapLineDrawer
 @export var WeatherMan : WeatherManage
+@export var WorldParent : Node
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var TownSpotScene : PackedScene
@@ -126,7 +127,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
 	#TODO fix this
 	SimulationTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_SIMULATION_BUTTON)
-	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(SimulationTrigger)
+	WorldParent.add_child(SimulationTrigger)
 	var triggerpos = pos
 	triggerpos.y -= 100
 	SimulationTrigger.global_position = triggerpos
@@ -138,7 +139,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
 	#TODO fix this
 	MapMarkerTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE)
-	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(MapMarkerTrigger)
+	WorldParent.add_child(MapMarkerTrigger)
 	var MapMarkerTriggerpos = pos
 	MapMarkerTriggerpos.y -= 750
 	MapMarkerTrigger.global_position = MapMarkerTriggerpos
@@ -646,7 +647,9 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 		Ship.ShipName = TempEnemyNames.pop_back()
 		SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
-		EnemsToSpawn[Ship] = Pos
+		Ship.PosToSpawn = Pos
+		Ship.connect("OnPlayerShipMet", EnemyMet)
+		WorldParent.call_deferred("add_child", Ship)
 		#call_deferred("AddEnemyToHierarchy", Ship, Pos)
 		if (Fleet.find(f) != 0):
 			Ship.ToggleDocked(true)
@@ -654,14 +657,17 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 			SpawnedFleet[0].GetDroneDock().call_deferred("DockShip", Ship)
 	#print("A fleet consisting of {0} was spawned at the port of {1}. Patrol = {2}".format([var_to_str(SpawnedCallsigns), Spot.GetSpotName(), Patrol]))
 	#TempEnemyNames.clear()
-	
+
 func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 	var SpawnedEnems : Array[HostileShip] = []
 	for g in EnemyData:
 		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
 		ship.LoadSaveData(g)
 		SpawnedEnems.append(ship)
-		EnemsToSpawn[ship] = g.Position
+		ship.PosToSpawn = g.Position
+		ship.connect("OnPlayerShipMet", EnemyMet)
+		WorldParent.call_deferred("add_child", ship)
+
 		#call_deferred("AddEnemyToHierarchy", ship, g.Position)
 		if (g.CommandName != ""):
 			var com
@@ -674,24 +680,6 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 	
 	#call_deferred("FGenerationFinished")
 	call_deferred("EnemySpawnFinished")
-
-var EnemsToSpawn : Dictionary
-
-func _physics_process(_delta: float) -> void:
-	if (EnemsToSpawn.size() == 0):
-		set_physics_process(false)
-		call_deferred("FGenerationFinished")
-		return
-	var enem = EnemsToSpawn.keys()[0]
-	var pos = EnemsToSpawn[enem]
-	EnemsToSpawn.erase(enem)
-	AddEnemyToHierarchy(enem, pos)
-	
-
-func AddEnemyToHierarchy(en : HostileShip, pos : Vector2):
-	en.PosToSpawn = pos
-	$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(en)
-	en.connect("OnPlayerShipMet", EnemyMet)
 
 
 func FindEnemyByName(Name : String) -> HostileShip:
@@ -712,7 +700,7 @@ func RespawnMissiles(MissileData : Array[Resource]) -> void:
 		missile.Distance = dat.Distance
 		missile.MissileName = dat.MisName
 		missile.Speed = dat.MisSpeed
-		$SubViewportContainer/ViewPort.add_child(missile)
+		WorldParent.add_child(missile)
 		missile.global_position = dat.Pos
 		missile.global_rotation = dat.Rot
 		missile.DistanceTraveled = dat.DistanceTraveled
@@ -733,7 +721,7 @@ func GetMissileSaveData() -> SaveData:
 
 func EnemySpawnFinished() -> void:
 	EnemySpawnTh.wait_to_finish()
-	set_physics_process(true)
+	#set_physics_process(true)
 	
 	
 	
@@ -768,16 +756,16 @@ func GenerateRoads() -> void:
 		
 	Region._DrawBorders(Spots2)
 	
-	Mut = Mutex.new()
-	Maplt = Thread.new()
-	Maplt.start(_DrawMapLines.bind(cityloc, true))
-	Roadt = Thread.new()
-	Roadt.start(_DrawMapLines.bind(cityloc2, false, true))
+	Road.Generate(cityloc2)
+	MapLine.Generate(cityloc)
+	
+	MapLine.PathsGenerated.connect(GeneratePathsFromLines)
 	#Regiont = Thread.new()
 	#Regiont.start(_DrawBorders.bind(Spots2))
 	
 	
 func GeneratePathsFromLines(Lines : Array):
+	GenerationFinished.emit()
 	var time = Time.get_ticks_msec()
 	if (OS.is_debug_build()):
 		print("Connecting neighboring cities based on generated paths")
@@ -803,186 +791,11 @@ func GeneratePathsFromLines(Lines : Array):
 						break
 		g.SetNeighbord(Neighbors)
 	MAP_NeighborsSet.emit()
-	
+	GenerationFinished.emit()
 	if (OS.is_debug_build()):
 		print("Connection of neighboring cities finished in {0} ms".format([Time.get_ticks_msec() - time]))
 
 
-
-
-
-func _DrawMapLines(SpotLocs : Array, GenerateNeighbors : bool, RandomiseLines : bool = false) -> Array:
-	var time = Time.get_ticks_msec()
-	if (OS.is_debug_build()):
-		print("Started generating paths between cities")
-		
-	var lines = _prim_mst_optimized(SpotLocs)
-	lines = AddExtraLines(SpotLocs, lines.duplicate())
-	
-	if (GenerateNeighbors):
-		call_deferred("GeneratePathsFromLines", lines)
-	
-	if (RandomiseLines):
-		for l in lines:
-			var Line = l as Array
-			var point1 = Line[0]
-			var point2 = Line[1]
-			Line.remove_at(1)
-			#l.remove_point(1)
-			
-			var dir = point1.direction_to(point2)
-			
-			var dist = point1.distance_to(point2)
-			var pointamm = roundi(dist / 80)
-			var offsetperpoint = dist/pointamm
-			for g in pointamm:
-				var offs = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
-				#Mut.lock()
-				Line.append(point1 + offs)
-				#Mut.unlock()
-			Line.append(point2)
-			
-		call_deferred("RoadFinished")
-	else:
-		call_deferred("MapLineFinished")
-	
-	if (OS.is_debug_build()):
-		print("Generating paths finished in " + var_to_str(Time.get_ticks_msec() - time) + " ms")
-	
-	return lines
-	
-func AddPointsToLine(Lne : Line2D, Points : Array[Vector2]) -> void:
-	for g in Points:
-		Lne.add_point(g)
-		
-		
-#func RegionsFinished() -> void:
-	#var Lines = Regiont.wait_to_finish()
-	#for g : Array[Vector2] in Lines:
-		#var L = Line2D.new()
-		#for point in g:
-			#L.points.append(point)
-		#$SubViewportContainer/ViewPort/SubViewportContainer/SubViewport.add_child(L)
-
-func RoadFinished() -> void:
-	var Lines = Roadt.wait_to_finish()
-	for g in Lines:
-		var l = g as Array[Vector2]
-		g[0] += (l[0].direction_to(l[l.size() - 1]) * 42)
-		g[l.size() - 1] += (l[l.size() - 1].direction_to(l[0]) * 42)
-	Road.AddLines(Lines)
-	Roadt = null
-	GenerationFinished.emit()
-	
-	
-func MapLineFinished() -> void:
-	var Lines = Maplt.wait_to_finish()
-	#for g in Lines:
-		#var l = g as Array[Vector2]
-		#g[0] += (l[0].direction_to(l[1]) * 45)
-		#g[1] += (l[1].direction_to(l[0]) * 45)
-	MapLine.AddLines(Lines)
-	Maplt = null
-	GenerationFinished.emit()
-	
-#NEW MUCH SIMPLER ALGORITH FOR LINES
-func AddExtraLines(cities : Array, Lines : Array) -> Array:
-	for g in cities:
-		var ConnectionAmmount : int = 0
-		for z in cities:
-			if (Lines.has([g, z])):
-				ConnectionAmmount += 1
-		var Dist = 2000
-		while (ConnectionAmmount < 3):
-			Dist += 500
-			if (Dist >= 4000):
-				break
-			for z in cities:
-				if (ConnectionAmmount > 2):
-					break
-				if (Lines.has([g, z]) or Lines.has([z, g])):
-					continue
-				if (z.distance_to(g) < Dist):
-					Lines.append([g, z])
-					ConnectionAmmount += 1
-	return Lines
-#OLD ALGORITH FOR LINES
-# Helper function: Push an element to the heap
-func _heap_push(heap: Array, element: Array):
-	heap.append(element)
-	var i = heap.size() - 1
-	while i > 0:
-		var parent = (i - 1)
-		if heap[i][0] >= heap[parent][0]:
-			break
-		_swap(heap, i, parent)
-		i = parent
-		
-		
-func _swap(arr: Array, i: int, j: int):
-	var tmp = arr[i]
-	arr[i] = arr[j]
-	arr[j] = tmp
-	
-	
-# Helper function: Pop an element from the heap
-func _heap_pop(heap: Array) -> Array:
-	_swap(heap, 0, heap.size() - 1)
-	var result = heap.pop_back()
-	var i = 0
-	while i < heap.size():
-		var left_child = 2 * i + 1
-		var right_child = 2 * i + 2
-
-		var smallest = i
-		if left_child < heap.size() and heap[left_child][0] < heap[smallest][0]:
-			smallest = left_child
-		if right_child < heap.size() and heap[right_child][0] < heap[smallest][0]:
-			smallest = right_child
-		
-		if smallest == i:
-			break
-		_swap(heap, i, smallest)
-		i = smallest
-	
-	return result
-	
-
-func _prim_mst_optimized(cities: Array) -> Array:
-	var num_cities = cities.size()
-	if num_cities <= 1:
-		return []
-	
-	var connected = PackedInt32Array()
-	connected.append(0)  # Start with the first city connected
-	
-	var edge_min_heap = []
-	var mst_edges = []
-
-	# Add all edges from city 0 to the heap
-	for i in range(1, num_cities):
-		var distance = cities[0].distance_to(cities[i])
-		_heap_push(edge_min_heap, [distance, 0, i])
-
-	while connected.size() < num_cities:
-		# Pop the smallest edge from the heap
-		var min_edge = _heap_pop(edge_min_heap)
-		#var dist = min_edge[0]
-		var u = min_edge[1]
-		var v = min_edge[2]
-
-		if not connected.has(v):
-			connected.append(v)
-			mst_edges.append([cities[u], cities[v]])
-
-			# Add all edges from this newly connected city to the heap
-			for j in range(num_cities):
-				if not connected.has(j):
-					var new_distance = cities[v].distance_to(cities[j])
-					_heap_push(edge_min_heap, [new_distance, v, j])
-
-	return mst_edges
-	
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
 const ScreenPos = Vector2(67.0,62.0)

@@ -14,6 +14,7 @@ class_name  AeroSonar
 
 var Offset = 0.0
 var CurrentAngle : float
+var CurrentOffset : float
 var Controller : PlayerDrivenShip
 var Working : bool = false
 var Vol : float
@@ -39,9 +40,7 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 		#Implement deactivation of sonar collider
 	
 	Controller = NewController
-	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0 and Working):
-		PopUpManager.GetInstance().DoFadeNotif("Unable to locate sonar on ship.\nDissabling interface...")
-		ToggleSonar(false)
+	Working = Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0
 	Controller.ToggleSonarVisual(Working)
 
 
@@ -103,12 +102,22 @@ func _on_close_pressed() -> void:
 		return
 	ToggleSonar(!Working)
 
+func _on_close_toggled(toggled_on: bool) -> void:
+	ToggleSonar(toggled_on)
+	pass # Replace with function body.
+
 func ToggleSonar(t : bool) -> void:
 	LineContainer.visible = t
 	GainLabel.visible = t
 	set_physics_process(t)
-	Controller.ToggleSonarVisual(t)
-	Working = t
+	if (t):
+		Working = Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0
+		Controller.ToggleSonarVisual(Working)
+		if (!Working):
+			PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
+			LineContainer.OffsetAmmount = 0
+	else:
+		Controller.ToggleSonarVisual(false)
 
 
 func OnRadioClicked() -> void:
@@ -127,7 +136,11 @@ func OnRadioClicked() -> void:
 
 
 func _on_gein_control_range_changed(NewVal: float) -> void:
-	var newoffset = clamp(LineContainer.OffsetAmmount + (-NewVal / 2), 1 ,25)
+	var newoffset = clamp(CurrentOffset + (-NewVal / 2), 1 ,25)
 	Vol = newoffset
-	LineContainer.OffsetAmmount = newoffset
+	CurrentOffset = newoffset
 	GainLabel.text = "Gain:{0}".format([snapped(newoffset, 0.1)]).replace(".0", "")
+	if (!Working):
+		return
+	LineContainer.OffsetAmmount = newoffset
+	

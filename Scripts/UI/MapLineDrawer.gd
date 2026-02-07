@@ -8,11 +8,73 @@ var Lines : Array
 @export var ResizeLinesWithZoom : bool = false
 @export var PathTexture : Texture2D
 
-func AddLines(L : Array) -> void:
+var GenerationThread : Thread
+
+signal PathsGenerated()
+
+func _ready() -> void:
 	if (ResizeLinesWithZoom):
 		add_to_group("ZoomAffected")
-	Lines.append_array(L)
+
+
+func UpdateCameraZoom(NewZoom : float) -> void:
+	for g in get_children():
+		g.width =  1 / NewZoom
+		g.visible = NewZoom < 1.5
+
+func Generate(SpotLocs : Array) -> void:
+	GenerationThread = Thread.new()
+	GenerationThread.start(_DrawMapLines.bind(SpotLocs))
+
+func _DrawMapLines(SpotLocs : Array) -> void:
+	var time = Time.get_ticks_msec()
+	if (OS.is_debug_build()):
+		print("Started generating paths between cities")
+		
+	Lines = _prim_mst_optimized(SpotLocs)
+	Lines = AddExtraLines(SpotLocs, Lines.duplicate())
+	
+	#If road randomise them a bit to look more organic
+	if (RoadLines):
+		for l in Lines:
+			var Line = l as Array
+			var point1 = Line[0]
+			var point2 = Line[1]
+			Line.remove_at(1)
+			#l.remove_point(1)
+			
+			var dir = point1.direction_to(point2)
+			
+			var dist = point1.distance_to(point2)
+			var pointamm = roundi(dist / 80)
+			var offsetperpoint = dist/pointamm
+			for g in pointamm:
+				var offs = (dir * (offsetperpoint * g)) + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+				#Mut.lock()
+				Line.append(point1 + offs)
+				#Mut.unlock()
+			Line.append(point2)
+		
+		
+	call_deferred("GenerationFinished")
+	
+	if (OS.is_debug_build()):
+		print("Generating paths finished in " + var_to_str(Time.get_ticks_msec() - time) + " ms")
+
+func GenerationFinished() -> void:
+	GenerationThread.wait_to_finish()
+	
+	if (RoadLines):
+		pass
+		#for g in Lines:
+			#var l = g as Array[Vector2]
+			#g[0] += (l[0].direction_to(l[l.size() - 1]) * 42)
+			#g[l.size() - 1] += (l[l.size() - 1].direction_to(l[0]) * 42)
+	else:
+		PathsGenerated.emit(Lines)
+		
 	DrawLines()
+
 
 func DrawLines() -> void:
 	for g in get_children():
@@ -56,12 +118,101 @@ func DrawLines() -> void:
 		for z in smoothedline.size():
 			L.add_point(smoothedline[z] - L.global_position, z)
 
-func UpdateCameraZoom(NewZoom : float) -> void:
-	for g in get_children():
-		g.width =  1 / NewZoom
-		g.visible = NewZoom < 1.5
+#NEW MUCH SIMPLER ALGORITH FOR LINES
+func AddExtraLines(cities : Array, Lines : Array) -> Array:
+	for g in cities:
+		var ConnectionAmmount : int = 0
+		for z in cities:
+			if (Lines.has([g, z])):
+				ConnectionAmmount += 1
+		var Dist = 2000
+		while (ConnectionAmmount < 3):
+			Dist += 500
+			if (Dist >= 4000):
+				break
+			for z in cities:
+				if (ConnectionAmmount > 2):
+					break
+				if (Lines.has([g, z]) or Lines.has([z, g])):
+					continue
+				if (z.distance_to(g) < Dist):
+					Lines.append([g, z])
+					ConnectionAmmount += 1
+	return Lines
+	
+#OLD ALGORITH FOR LINES
+# Helper function: Push an element to the heap
+func _heap_push(heap: Array, element: Array):
+	heap.append(element)
+	var i = heap.size() - 1
+	while i > 0:
+		var parent = (i - 1)
+		if heap[i][0] >= heap[parent][0]:
+			break
+		_swap(heap, i, parent)
+		i = parent
+		
+		
+func _swap(arr: Array, i: int, j: int):
+	var tmp = arr[i]
+	arr[i] = arr[j]
+	arr[j] = tmp
+	
+	
+# Helper function: Pop an element from the heap
+func _heap_pop(heap: Array) -> Array:
+	_swap(heap, 0, heap.size() - 1)
+	var result = heap.pop_back()
+	var i = 0
+	while i < heap.size():
+		var left_child = 2 * i + 1
+		var right_child = 2 * i + 2
 
-#func _draw() -> void:
-	#
-	#for g in Lines:
-		#draw_polyline(g, Color(1,1,1,1), 10, true)
+		var smallest = i
+		if left_child < heap.size() and heap[left_child][0] < heap[smallest][0]:
+			smallest = left_child
+		if right_child < heap.size() and heap[right_child][0] < heap[smallest][0]:
+			smallest = right_child
+		
+		if smallest == i:
+			break
+		_swap(heap, i, smallest)
+		i = smallest
+	
+	return result
+	
+
+func _prim_mst_optimized(cities: Array) -> Array:
+	var num_cities = cities.size()
+	if num_cities <= 1:
+		return []
+	
+	var connected = PackedInt32Array()
+	connected.append(0)  # Start with the first city connected
+	
+	var edge_min_heap = []
+	var mst_edges = []
+
+	# Add all edges from city 0 to the heap
+	for i in range(1, num_cities):
+		var distance = cities[0].distance_to(cities[i])
+		_heap_push(edge_min_heap, [distance, 0, i])
+
+	while connected.size() < num_cities:
+		# Pop the smallest edge from the heap
+		var min_edge = _heap_pop(edge_min_heap)
+		#var dist = min_edge[0]
+		var u = min_edge[1]
+		var v = min_edge[2]
+
+		if not connected.has(v):
+			connected.append(v)
+			mst_edges.append([cities[u], cities[v]])
+
+			# Add all edges from this newly connected city to the heap
+			for j in range(num_cities):
+				if not connected.has(j):
+					var new_distance = cities[v].distance_to(cities[j])
+					_heap_push(edge_min_heap, [new_distance, v, j])
+
+	return mst_edges

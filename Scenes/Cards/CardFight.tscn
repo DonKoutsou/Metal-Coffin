@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_n2sfr"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
+[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_umcqi"]
 [ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
 [ext_resource type="Material" uid="uid://b6441eghjnus8" path="res://Shaders/CardfightGround.tres" id="14_l2i77"]
@@ -11,7 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://dgx7q2i37ubea" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Material" uid="uid://du775m4kpfmqe" path="res://Shaders/Clouds/CloudCagefight.tres" id="15_l2i77"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="23_d5rtw"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="24_d8sco"]
 [ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scripts/CardFight/action_declaration.gd" id="24_pw20f"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scripts/CardFight/CardFightTargetSelection.gd" id="26_712dp"]
@@ -132,7 +132,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("23_d5rtw")
+theme_override_styles/panel = ExtResource("9_umcqi")
 script = ExtResource("24_pw20f")
 UIInSound = ExtResource("13_boko4")
 UIOutSound = ExtResource("14_vn53x")
@@ -266,7 +266,7 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("23_d5rtw")
+theme_override_styles/panel = ExtResource("9_umcqi")
 script = ExtResource("26_712dp")
 ShipVizScene = ExtResource("3_n2sfr")
 ShipVizContainer = NodePath("VBoxContainer/HBoxContainer")
@@ -308,7 +308,7 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("23_d5rtw")
+theme_override_styles/panel = ExtResource("9_umcqi")
 script = ExtResource("27_rbthh")
 CardScene = ExtResource("2_yc7d8")
 Title = NodePath("VBoxContainer/Label")

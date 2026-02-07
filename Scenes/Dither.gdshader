@@ -6,6 +6,7 @@ uniform int colors : hint_range(1, 32);
 uniform int pixelate : hint_range(1, 10);
 uniform sampler2D dither_texture : filter_nearest;
 uniform vec2 ScreenSize;
+uniform vec2 DitherRes;
 
 float dither(float raw, float dither, int depth) {
 	
@@ -36,7 +37,7 @@ void fragment()
 
 	// Map the dither texture onto the screen pixels with tiling and repeating
 	vec2 dither_size = vec2(textureSize(dither_texture, 0));
-	vec2 dither_uv = mod(UV * (screen_size / 2.0), dither_size) / dither_size;
+	vec2 dither_uv = mod(UV * DitherRes, dither_size) / dither_size;
 	
 	// Sample the screen pixel
 	vec3 screen_col = texture(TEXTURE, screen_sample_uv).rgb;

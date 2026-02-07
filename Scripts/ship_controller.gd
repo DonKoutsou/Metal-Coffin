@@ -37,9 +37,9 @@ func _ready() -> void:
 	
 	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
-	set_physics_process(false)
+
 	
-func _physics_process(_delta: float) -> void:
+func Update(_delta: float) -> void:
 	if (ControlledShip.StormValue >= 0.9):
 		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
 	if (SimulationManager.IsPaused()):
@@ -60,7 +60,6 @@ func InitiateFleetSeparation() -> void:
 	FleetSeperationRequested.emit(Instigator)
 	
 func SetInitialShip() -> void:
-	
 	ControlledShip = get_tree().get_nodes_in_group("PlayerShips")[0]
 	
 	InventoryManager.GetInstance().AddCharacter(ControlledShip.Cpt)
@@ -79,8 +78,6 @@ func SetInitialShip() -> void:
 	UIEventH.OnShipUpdated(ControlledShip)
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
-	
-	set_physics_process(true)
 
 func RegisterSelf(D : MapShip) -> void:
 	AvailableShips.append(D)

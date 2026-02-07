@@ -17,12 +17,14 @@ tonemap_white = 16.0
 glow_enabled = true
 glow_levels/1 = 1.0
 glow_levels/2 = 2.0
-glow_strength = 0.6
+glow_normalized = true
+glow_intensity = 2.0
+glow_strength = 2.0
 glow_mix = 0.825
-glow_bloom = 0.1
 glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 1.0
-glow_map_strength = 1.0
+glow_map_strength = 0.0
+adjustment_enabled = true
 adjustment_color_correction = SubResource("GradientTexture1D_uk868")
 
 [resource]

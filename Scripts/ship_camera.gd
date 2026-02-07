@@ -140,9 +140,10 @@ func _UpdateMapGridVisibility():
 		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
 		WeatherTween = create_tween()
 		WeatherTween.tween_property(WeatherMan, "modulate", Color(1,1,1,1), 0.5)
-		GridTween = create_tween()
-		GridTween.tween_property(Grid, "modulate", Color(1,1,1,1), 0.5)
-		Grid.show()
+		if (!Grid.Dissabled):
+			GridTween = create_tween()
+			GridTween.tween_property(Grid, "modulate", Color(1,1,1,1), 0.5)
+			Grid.show()
 		MapGridTween.finished.connect(Cloud.hide)
 		MapGridTween.finished.connect(Ground.hide)
 		
@@ -166,9 +167,10 @@ func _UpdateMapGridVisibility():
 			MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
 			WeatherTween = create_tween()
 			WeatherTween.tween_property(WeatherMan, "modulate", Color(1,1,1,0), 0.5)
-			GridTween = create_tween()
-			GridTween.tween_property(Grid, "modulate", Color(1,1,1,0), 0.5)
-			GridTween.finished.connect(Grid.hide)
+			if (!Grid.Dissabled):
+				GridTween = create_tween()
+				GridTween.tween_property(Grid, "modulate", Color(1,1,1,0), 0.5)
+				GridTween.finished.connect(Grid.hide)
 			GridShowing = false
 
 func MoveCameraY(value : float) -> void:

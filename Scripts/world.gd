@@ -30,9 +30,10 @@ class_name World
 
 ################ WORLD STATE #################
 
-static var WORLDST : WORLDSTATE = WORLDSTATE.NORMAL
+static var WORLDST : WORLDSTATE = WORLDSTATE.INITIAL
 
 enum WORLDSTATE{
+	INITIAL,
 	NORMAL,
 	FIGHT,
 	TRADE,
@@ -59,7 +60,7 @@ static func GetInstance() -> World:
 	return Instance
 
 func _ready() -> void:
-	WORLDST = WORLDSTATE.NORMAL
+	WORLDST = WORLDSTATE.INITIAL
 	Instance = self
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
@@ -104,12 +105,10 @@ func _ready() -> void:
 		GetMap().EnemySpawnFinished()
 		Loadingscr.ProcessStarted("Placing Fleets In World")
 		Loadingscr.UpdateProgress(80)
-		await GetMap().GenerationFinished
+		#await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Placing Fleets In World")
 		await wait(1)
 	Loadingscr.UpdateProgress(100)
-	
-	
 	
 	Controller.SetInitialShip()
 	UISoundMan.GetInstance().Refresh()
@@ -160,8 +159,13 @@ func _ready() -> void:
 		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
+	WORLDST = WORLDSTATE.NORMAL
 		
-	
+func _physics_process(delta: float) -> void:
+	if (World.WORLDST != World.WORLDSTATE.NORMAL):
+		return
+	_Command.Update(delta)
+	Controller.Update(delta)
 	
 
 func wait(secs : float) -> Signal:

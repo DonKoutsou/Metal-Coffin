@@ -34,7 +34,7 @@ var SimPaused : bool = false
 func _ready() -> void:
 	Instance = self
 
-func _physics_process(delta: float) -> void:
+func Update(delta: float) -> void:
 	if (SimPaused):
 		return
 	
