@@ -76,12 +76,6 @@ func GetUIElement(Element : UI_ELEMENT) -> Control:
 	
 static var Instance : Map
 
-static func PixelDistanceToKm(Dist : float) -> float:
-	return Dist
-
-static func SpeedToKmH(Speed : float) -> float:
-	return Speed
-
 static func GetInstance() -> Map:
 	return Instance
 
@@ -89,7 +83,6 @@ func _enter_tree() -> void:
 	Instance = self
 
 func _ready() -> void:
-	
 	set_physics_process(false)
 	$SubViewportContainer.visible = false
 	_ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
@@ -285,8 +278,10 @@ func GetMapMarkerEditorSaveData() -> SaveData:
 	dat.Datas.append(EditorData)
 	return dat
 
+
 func LoadMapMarkerEditorSaveData(Data : SD_MapMarkerEditor) -> void:
 	GetMapMarkerEditor().LoadData(Data)
+
 
 func LoadSaveData(Data : Array[Resource]) -> void:
 	var WorldSize : float = 100000
@@ -364,9 +359,6 @@ func GenerateMap() -> void:
 func GenerateMapThreaded() -> void:
 	var time = Time.get_ticks_msec()
 	
-	var town_positions = poisson_disk_sampling(SpawningBounds, MinDistance, MapSize)
-	var sorted_positions = sort_positions_by_y(town_positions)
-	
 	var CapitalCitySpots : Array[int] = []
 	for z in CapitalAmm:
 		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - randi_range(2, 5)
@@ -391,6 +383,9 @@ func GenerateMapThreaded() -> void:
 	var CitySpotType = ResourceLoader.load(CityType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
 	var CityData = CitySpotType.GetData()
 	
+	var town_positions = poisson_disk_sampling(SpawningBounds, MinDistance, MapSize)
+	var sorted_positions = sort_positions_by_y(town_positions)
+	
 	var GeneratedSpots : Array[Town] = []
 	for g in sorted_positions.size() :
 
@@ -403,7 +398,6 @@ func GenerateMapThreaded() -> void:
 		#algorith gives values from 0 towards possetive y, we want the opposite
 		pos.y -= sorted_positions[0].y
 		
-		
 		if (g == sorted_positions.size() - 1):
 			sc.GenerateCity(FinalCitySpotType, FinalCityData)
 		else : if (CapitalCitySpots.has(g)):
@@ -413,8 +407,6 @@ func GenerateMapThreaded() -> void:
 		else:
 			sc.GenerateCity(CitySpotType, CityData)
 			
-		
-		
 		sc.connect("TownSpotAproached", Arrival)
 
 		sc.Pos = pos
@@ -440,8 +432,10 @@ func sort_positions_by_y(positions: Array) -> Array:
 	)
 	return sorted
 
-const K := 45 # samples per point
+
 func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: int = 0) -> Array:
+	const K := 45 # samples per point
+	
 	var cell_size = min_dist / sqrt(2)
 	var grid_size = Vector2(ceil(region_size.x / cell_size), ceil(region_size.y / cell_size))
 	var grid = []

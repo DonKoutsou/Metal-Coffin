@@ -27,16 +27,12 @@ var EnemyPositionsToInvestigate : Dictionary[MapShip, VisualLostInfo]
 var KnownEnemies : Dictionary
 
 var Alarmed : bool = false
-
-var SimPaused : bool = false
 #var SimSpeed : float = 1
 
 func _ready() -> void:
 	Instance = self
 
 func Update(delta: float) -> void:
-	if (SimPaused):
-		return
 	
 	CheckAlarm()
 	
@@ -68,9 +64,6 @@ func UnregisterSelf(Ship : HostileShip) -> void:
 	if (ShipLodCheckList.has(Ship)):
 		ShipLodCheckList.erase(Ship)
 
-func OnSimulationPaused(t : bool) -> void:
-	SimPaused = t
-	#$BeehaveTree.set_physics_process(!t)
 	
 #func OnSimulationSpeedChanged(i : float) -> void:
 	#SimSpeed = i
@@ -313,8 +306,7 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 var PrevAmm : float
 var AlarmCooldown : float
 func CheckAlarm() -> void:
-	if (SimPaused):
-		return
+
 	var Events = PursuitOrders.size() + InvestigationOrders.size() + EnemyPositionsToInvestigate.size() + KnownEnemies.size()
 	if (Events > 0):
 		if (!Alarmed and  KnownEnemies.size() > 0):

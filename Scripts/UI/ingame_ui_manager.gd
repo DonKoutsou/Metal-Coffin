@@ -20,6 +20,10 @@ class_name Ingame_UIManager
 var PauseContainer : PauseMenu
 
 static var Instance :Ingame_UIManager
+
+static func GetInstance() -> Ingame_UIManager:
+	return Instance
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
@@ -55,8 +59,6 @@ func ToggleScreenGlitches(t : bool) -> void:
 	mat.set_shader_parameter("image_flicker", ImageFlicker)
 	mat.set_shader_parameter("skip", Skip)
 
-static func GetInstance() -> Ingame_UIManager:
-	return Instance
 
 func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 	if (UnderUI):
@@ -66,6 +68,7 @@ func AddUI(Scene : Node, UnderUI : bool = true, OverUI : bool = false) -> void:
 	else:
 		add_child(Scene)
 
+
 func PlayDiag(Diags : Array[String], Avatar : Texture, TalkerName : String, StopInput : bool = false):
 	var DiagplScene = ResourceLoader.load(DialogueSceneFile)
 	var diag = DiagplScene.instantiate() as DialoguePlayer
@@ -73,6 +76,7 @@ func PlayDiag(Diags : Array[String], Avatar : Texture, TalkerName : String, Stop
 		diag.mouse_filter = Control.MOUSE_FILTER_STOP
 	AddUI(diag, true)
 	diag.PlayDialogue(Diags, Avatar, TalkerName)
+
 
 func CallbackDiag (Diags : Array[String], Avatar : Texture, TalkerName : String, Callback : Callable, StopInput : bool = false):
 	var DiagplScene = ResourceLoader.load(DialogueSceneFile)
@@ -83,11 +87,14 @@ func CallbackDiag (Diags : Array[String], Avatar : Texture, TalkerName : String,
 	diag.PlayDialogue(Diags, Avatar, TalkerName)
 	diag.Callback = Callback
 
+
 func GetInventory() -> InventoryManager:
 	return _Inventory
+
 	
 func GetMapMarkerEditor() -> MapMarkerEditor:
 	return _MapMarkerEditor
+
 
 func Pause() -> void:
 	var paused = get_tree().paused

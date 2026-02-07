@@ -1,32 +1,12 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://jnxte4c68wyq"]
 
 [ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/Clouds/clouds.gdshader" id="1_b1bi2"]
+[ext_resource type="Texture2D" uid="uid://bj3kjbbgtmxh8" path="res://Shaders/Clouds/CloudMaskTexture.tres" id="2_0wos0"]
 [ext_resource type="Texture2D" uid="uid://d1tknmqoiysie" path="res://Shaders/Clouds/CloudNormal.tres" id="2_ykjet"]
-
-[sub_resource type="Gradient" id="Gradient_l2i77"]
-offsets = PackedFloat32Array(0.168605, 0.565407, 0.75)
-colors = PackedColorArray(0, 0, 0, 1, 0.735, 0.735, 0.735, 1, 0.856354, 0.856354, 0.856354, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
-noise_type = 3
-seed = 4
-frequency = 0.0163
-fractal_octaves = 4
-fractal_lacunarity = 2.2
-fractal_gain = 0.57
-domain_warp_frequency = 0.095
-domain_warp_fractal_type = 0
-domain_warp_fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7x35f"]
-noise = SubResource("FastNoiseLite_n7y6y")
-color_ramp = SubResource("Gradient_l2i77")
-seamless = true
-seamless_blend_skirt = 1.0
 
 [resource]
 shader = ExtResource("1_b1bi2")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_7x35f")
+shader_parameter/noise_texture = ExtResource("2_0wos0")
 shader_parameter/noise_texturenormal = ExtResource("2_ykjet")
 shader_parameter/density = 2.2
 shader_parameter/Camera_Offset = Vector2(0, 0)

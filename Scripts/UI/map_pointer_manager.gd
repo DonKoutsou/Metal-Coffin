@@ -166,10 +166,10 @@ func FixLabelClipping() -> void:
 
 var Circles : Array[PackedVector2Array] = []
 
-var d = 0.6
+#var d = 0.6
 
 func _physics_process(_delta: float) -> void:
-	d -= _delta
+	#d -= _delta
 	
 	#CircleDr.queue_redraw()
 	FixLabelClipping()

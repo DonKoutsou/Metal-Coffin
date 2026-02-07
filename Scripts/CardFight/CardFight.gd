@@ -798,7 +798,7 @@ func StartCurrentShipsPerformTurn() -> void:
 	
 	CurrentTurn = 0
 	
-	DoCurrentShipFireDamage()
+	await DoCurrentShipFireDamage()
 
 
 func DoCurrentShipFireDamage() -> void:
@@ -830,7 +830,7 @@ func DoCurrentShipFireDamage() -> void:
 		
 		else:
 			CurrentTurn = CurrentTurn + 1
-			DoCurrentShipFireDamage()
+			await DoCurrentShipFireDamage()
 	else:
 		FireDamageFinished()
 

@@ -30,8 +30,7 @@ func SetData(Dat : MissileItem) -> void:
 	
 func TogglePause(t : bool):
 	Paused = t
-#func ChangeSimulationSpeed(i : float):
-	#SimulationSpeed = i
+
 
 func GetSpeed() -> float:
 	return Speed

@@ -164,9 +164,23 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if (World.WORLDST != World.WORLDSTATE.NORMAL):
 		return
-	_Command.Update(delta)
-	Controller.Update(delta)
+		
+	Controller.Update()
 	
+	var CurrentDelta = delta * SimulationManager.SimSpeed()
+
+	UpdatePlayerShips(CurrentDelta)
+	
+	if (!SimulationManager.Paused):
+		_Command.Update(CurrentDelta)
+		GetMap().WeatherMan.Update(CurrentDelta)
+		UpdateCities(CurrentDelta)
+
+func UpdatePlayerShips(delta : float) -> void:
+	get_tree().call_group("PlayerShips", "Update", delta)
+
+func UpdateCities(delta : float) -> void:
+	get_tree().call_group("City", "Update", delta)
 
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout

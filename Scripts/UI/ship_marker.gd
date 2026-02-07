@@ -376,7 +376,7 @@ func SetSpeedUnknown() -> void:
 
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
-	var spd = roundi(Map.SpeedToKmH(Spd))
+	var spd = roundi(Spd)
 	ShipSpeedText = "SPEED " + var_to_str(spd).replace(".0", "")
 
 func GetSaveData() -> SD_ShipMarker:

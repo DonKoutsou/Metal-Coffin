@@ -128,19 +128,18 @@ func _Update(delta: float) -> void:
 		
 	UpdateElint(delta)
 	
-	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
 	for g in TrailLines:
 		g.UpdateProjected(delta, 1)
 	
 	if (VisibleBy.size() > 0):
-		ExposedValue += delta * SimulationSpeed
+		ExposedValue += delta
 	
 	if (UseDefaultBehavior):
 		
 		if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):
-			VisualContactCountdown -= 0.1 * SimulationSpeed
+			VisualContactCountdown -= 0.05 * SimulationSpeed
 			if (VisualContactCountdown < 0):
 				for c in GarrissonVisualContacts:
 					OnPlayerVisualContact.emit(c, self)

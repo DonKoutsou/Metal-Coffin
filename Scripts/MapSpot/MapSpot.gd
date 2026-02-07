@@ -1,7 +1,6 @@
 extends Node2D
 class_name MapSpot
 
-
 #@export var CityFuelReserves : float = 1000
 @export var AlarmVisual : PackedScene
 
@@ -22,21 +21,28 @@ var PossibleDrops : Array[Item]
 var Merch : Array[Merchandise] = []
 var WorkShopMerch : Array[Merchandise] = []
 var Pos : Vector2
+
+#Current population of spot
 var Population : int
+# Is true if player has landed on the spot
 var Visited = false
+# Is true if player has arrived at location
 var Seen = false
+
+#Alarm
 var AlarmRaised = false
 var AlarmProgress = 0
+
 #bool to avoid sent drones colliding with current visited spot
 var NeighboringCities : Array[String]
-var Connected
 var Event : Happening
-var SimPaused = false
-#var SimSpeed : float = 1
+
+var VisitingShips : Array[MapShip] = []
+var VisitingHostiles : Array[MapShip] = []
+
 
 func _ready() -> void:
-	set_physics_process(false)
-	SimPaused = SimulationManager.IsPaused()
+	#set_physics_process(false)
 	#SimSpeed = SimulationManager.SimSpeed()
 	global_rotation = 0
 	if (Pos != Vector2.ZERO):
@@ -44,14 +50,17 @@ func _ready() -> void:
 	if (SpotType.VisibleOnStart):
 		OnSpotSeen(false)
 
+func Update(delta: float) -> void:
+	if (EnemyCity and !AlarmRaised and VisitingShips.size() > 0):
+		AlarmProgress += delta
+		
+		if (AlarmProgress > 300):
+			OnAlarmRaised(true)
+
 func _exit_tree() -> void:
 	if (Event != null):
 		Event.PickedBy.erase(self)
-#func SimulationSpeedChanged(i : float) -> void:
-	#SimSpeed = i
-	
-func ToggleSimulation(t : bool) -> void:
-	SimPaused = t
+
 
 func SetNeighbord(N : Array) -> void:
 	NeighboringCities = N
@@ -115,6 +124,7 @@ func GetSpotName() -> String:
 	return SpotName
 func GetPossibleDrops() -> Array:
 	return PossibleDrops
+	
 func HasFuel() -> bool:
 	var hasf = false
 	
@@ -124,6 +134,7 @@ func HasFuel() -> bool:
 			break
 	
 	return hasf
+	
 func HasRepair() -> bool:
 	var hasf = false
 	for g in PossibleDrops:
@@ -131,6 +142,7 @@ func HasRepair() -> bool:
 			hasf = true
 			break
 	return hasf
+	
 func HasUpgrade() -> bool:
 	var hasu = false
 	for g in PossibleDrops:
@@ -164,38 +176,34 @@ func PlaySound():
 	add_child(sound)
 	sound.play()
 
-func _physics_process(delta: float) -> void:
-	if (SimPaused):
-		return
-	
-	AlarmProgress += delta * SimulationManager.SimSpeed()
-	
-	if (AlarmProgress > 300):
-		set_physics_process(false)
-		OnAlarmRaised(true)
 
-var VisitingShips : Array[MapShip] = []
-var VisitingHostiles : Array[MapShip] = []
+
+
 func OnSpotAproached(AproachedBy : MapShip) -> void:
+	# if ship is hostile we return
 	if (AproachedBy is HostileShip):
 		VisitingHostiles.append(AproachedBy)
 		return
-		
+	#make sure to store all curreny visiting ships
 	VisitingShips.append(AproachedBy)
+	
+	# check if apreaching ship is commander of fleet, if ship has no commander it means they are a commander
 	if (AproachedBy.Command == null):
+		# stop simulation speeding and frame camera to player to let them know
 		SimulationManager.GetInstance().SpeedToggle(false)
 		Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
 		SpotAproached.emit(self)
 	else:
 		AproachedBy.GetDroneDock()
+	
+	#if haven't arrived before, mark as visited
 	if (!Seen):
 		OnSpotSeen()
 	
 	if (EnemyCity):
 		if (AlarmRaised):
 			Commander.GetInstance().OnEnemySeen(AproachedBy, null)
-		else:
-			set_physics_process(true)
+
 
 func OnSpotDeparture(DepartingShip : MapShip) -> void:
 	if (DepartingShip is HostileShip):
@@ -206,8 +214,6 @@ func OnSpotDeparture(DepartingShip : MapShip) -> void:
 	if (EnemyCity):
 		if (AlarmRaised):
 			Commander.GetInstance().OnEnemyVisualLost(DepartingShip)
-		else :if (VisitingShips.size() == 0):
-			set_physics_process(false)
 			
 func OnAlarmRaised(Notify : bool = false) -> void:
 	var AlarmViz = AlarmVisual.instantiate()

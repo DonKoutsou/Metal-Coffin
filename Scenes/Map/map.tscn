@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="19_x3wib"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
+[ext_resource type="Texture2D" uid="uid://bj3kjbbgtmxh8" path="res://Shaders/Clouds/CloudMaskTexture.tres" id="21_7nfft"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
 [ext_resource type="Script" uid="uid://c2ufjbkhk6v0q" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="22_n73so"]
@@ -105,7 +106,7 @@ shader_parameter/GroundTexture2 = ExtResource("17_445lv")
 shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_445lv")
 shader_parameter/GroundNormalTexture = ExtResource("15_x3wib")
 shader_parameter/GroundNormal2Texture = ExtResource("14_a2ujk")
-shader_parameter/NormalD = 1.0
+shader_parameter/NormalD = 2.0
 shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(20, 20)
@@ -232,6 +233,7 @@ Ground = NodePath("Ground")
 WeatherMan = NodePath("../WeatherManager")
 ClickSound = NodePath("AudioStreamPlayer")
 UIEventHandle = ExtResource("25_8mjbw")
+NoiseNormalTexture = ExtResource("21_7nfft")
 
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=2027882013]
 z_index = -3

@@ -39,7 +39,7 @@ func _ready() -> void:
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
 
 	
-func Update(_delta: float) -> void:
+func Update() -> void:
 	if (ControlledShip.StormValue >= 0.9):
 		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
 	if (SimulationManager.IsPaused()):

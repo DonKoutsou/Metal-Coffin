@@ -669,8 +669,6 @@ func IsFuelFull() -> bool:
 #     ██ ██ ██  ██  ██ ██    ██ ██      ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #███████ ██ ██      ██  ██████  ███████ ██   ██    ██    ██  ██████  ██   ████ 
 
-#func ChangeSimulationSpeed(i : float):
-	#SimulationSpeed = i
 
 func TogglePause(t : bool):
 	Paused = t

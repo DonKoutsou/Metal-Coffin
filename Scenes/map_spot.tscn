@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 radius = 40.0
 
-[node name="MapSpot" type="Node2D" unique_id=1034729285 groups=["City", "Clock", "Pausable"]]
+[node name="MapSpot" type="Node2D" unique_id=1034729285 groups=["City", "Clock"]]
 script = ExtResource("1_x7uyn")
 AlarmVisual = ExtResource("3_i2dyh")
 

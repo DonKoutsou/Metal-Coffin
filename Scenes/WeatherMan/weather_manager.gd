@@ -57,9 +57,7 @@ func UpdateData() -> void:
 	rect_size = get_rect().size
 
 var d = 0.2
-func _physics_process(delta: float) -> void:
-	if (SimulationManager.IsPaused()):
-		return
+func Update(delta: float) -> void:
 	d -= delta
 	if (d <= 0):
 		d = 0.2

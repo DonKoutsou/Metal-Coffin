@@ -155,19 +155,15 @@ func Steer(Rotation : float) -> void:
 		TargetLocations.clear()
 		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
 
-func _physics_process(delta: float) -> void:
+func Update(delta: float) -> void:
 	
 	UpdateElint(delta)
 	queue_redraw()
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
-	
-	var traildelta = delta
-	if (Paused): 
-		traildelta = 0
-	
+
 	for g in TrailLines:
-		g.UpdateProjected(traildelta * SimulationSpeed, Altitude / 10000.0)
+		g.UpdateProjected(delta, Altitude / 10000.0)
 	
 	if (CurrentPort != null):
 		_HandleRestock()
@@ -186,10 +182,10 @@ func _physics_process(delta: float) -> void:
 		
 		var directiontoDestination = (NextLoc - global_position).normalized().angle()
 		if (rotation != directiontoDestination):
-			ForceSteer(lerp_angle(rotation, directiontoDestination, delta * SimulationSpeed))
+			ForceSteer(lerp_angle(rotation, directiontoDestination, delta))
 	
 	if (StoredSteer != 0):
-		var SteertToAdd = min((delta * SimulationSpeed), abs(StoredSteer)) * sign(StoredSteer)
+		var SteertToAdd = min((delta), abs(StoredSteer)) * sign(StoredSteer)
 		StoredSteer -= SteertToAdd
 		ForceSteer(rotation + SteertToAdd)
 	#HandleAcceleration

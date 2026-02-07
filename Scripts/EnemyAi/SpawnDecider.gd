@@ -16,11 +16,7 @@ var sorted_captain_list
 var sorted_ground_captain_list
 var sorted_convoy_captain_list
 
-@export var Switch: bool:
-	set(Thing):
-		Switch = false
-		if (Thing):
-			RefrshExistingItems()
+@export_tool_button("Refresh") var RefreshAction = RefrshExistingItems 
 
 func RefrshExistingItems() -> void:
 	#WorkshopList.clear()
@@ -81,9 +77,10 @@ func Init() -> void:
 func GetMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
 	var points = GetMerchPointsForPosition(abs(YPos))
+	var stage = Happening.GetStageForYPos(YPos)
 	if (HasUp):
 		points *= 2
-	var stage = Happening.GetStageForYPos(YPos)
+		stage = min(stage + 1, Happening.GameStage.size() - 1)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
 		var m = MerchList.pick_random() as MerchandiseInfo

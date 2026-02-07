@@ -14,8 +14,6 @@ static var CurrentYear : int = 6129
 static var currentHour : int = 13
 static var currentMin : float = 0
 
-#var SimulationSpeed : float = 1
-var SimulationPaused : bool = false
 
 static var Instance : Clock
 
@@ -74,8 +72,9 @@ func _physics_process(delta: float) -> void:
 		$HBoxContainer/Label.text += " >"
 	$HBoxContainer/Label2.text = DayString
 	
-	if (SimulationPaused):
+	if (SimulationManager.IsPaused()):
 		return
+		
 	currentMin += (delta * 10) * SimulationManager.SimSpeed()
 	if (currentMin >= 60):
 		currentHour += 1
@@ -102,8 +101,7 @@ func CheckNumber(NumString : String) -> String:
 	if (NumString.length() == 1):
 		return "0" + NumString
 	return NumString
-func ToggleSimulation(t : bool) -> void:
-	SimulationPaused = t
+
 #func SimulationSpeedChanged(i : float) -> void:
 	#SimulationSpeed = i
 static func GetTimeInHours() -> float:

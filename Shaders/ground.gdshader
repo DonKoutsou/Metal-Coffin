@@ -6,7 +6,7 @@ uniform sampler2D GroundTexture: repeat_enable, filter_nearest_mipmap;
 uniform sampler2D GroundTexture2: repeat_enable, filter_nearest_mipmap;
 
 // Noise texture
-uniform sampler2D NoiseTexture: repeat_enable, filter_nearest_mipmap;  // Add noise texture
+uniform sampler2D NoiseTexture: repeat_enable, filter_linear_mipmap;  // Add noise texture
 
 // Normal texture
 uniform sampler2D GroundNormalTexture: hint_normal, filter_nearest_mipmap, repeat_enable;

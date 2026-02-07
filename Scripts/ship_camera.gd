@@ -9,6 +9,7 @@ class_name ShipCamera
 @export var WeatherMan : WeatherManage
 @export var ClickSound : AudioStreamPlayer
 @export var UIEventHandle : UIEventHandler
+@export var NoiseNormalTexture : NoiseTexture2D
 
 static var MinZoom = 0.08
 static var MaxZoom = 15.0
@@ -213,6 +214,8 @@ func _physics_process(_delta: float) -> void:
 		#CloudMat.set_shader_parameter("custom_time", CloudTime)
 		CloudOffset += WeatherMan.WindDirection * (SimulationManager.SimSpeed() / 10000)
 		CloudMat.set_shader_parameter("Offset", CloudOffset)
+		#NoiseNormalTexture.noise.fractal_lacunarity = clamp(NoiseNormalTexture.noise.fractal_lacunarity + (randf_range(-0.001,0.001) * SimulationManager.SimSpeed()), 1, 2)
+		#CloudMat.set_shader_parameter("fractal_lacunarity", clamp(l + randf_range(-0.01,0.01), 1,2))
 	
 	if (FocusedShip != null):
 		ForceCamPosition(FocusedShip.global_position)

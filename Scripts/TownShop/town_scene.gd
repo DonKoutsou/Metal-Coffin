@@ -42,6 +42,9 @@ func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
 
 func SetTownBuffs() -> void:
+	RepairButton.visible = TownSpot.HasRepair()
+	WorkshopButton.visible = TownSpot.HasUpgrade()
+	
 	var Text : String = ""
 	if (TownSpot.HasFuel()):
 		Text += "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
