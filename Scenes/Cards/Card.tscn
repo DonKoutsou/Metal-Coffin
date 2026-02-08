@@ -160,7 +160,7 @@ transparent_bg = true
 handle_input_locally = false
 oversampling = false
 size = Vector2i(186, 256)
-render_target_update_mode = 1
+render_target_update_mode = 0
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15

@@ -240,7 +240,7 @@ func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 	if (t):
 		ResuplyNotif = ResuplyNotificationScene.instantiate() as ResuplyNotification
 		ResuplyNotif.ToggleStat(Stats, t, timel)
-		connect("ShipDeparted", ResuplyNotif.OnShipDeparted)
+		#connect("ShipDeparted", ResuplyNotif.OnShipDeparted)
 		add_child(ResuplyNotif)
 
 func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):

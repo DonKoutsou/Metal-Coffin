@@ -232,7 +232,7 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 	TStrings2 = Strings2
 	TStrings3 = Strings3
 	ResetLabels()
-	UpdateStrings()
+	#UpdateStrings()
 	HideUnused()
 	Threads -= 1
 	M.unlock()

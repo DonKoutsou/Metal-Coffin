@@ -95,7 +95,9 @@ func _ready() -> void:
 		Lines.append(NewLine)
 	set_physics_process(TargetLocs.size() > 0)
 	Line.visible = TargetLocs.size() > 0
-	#$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
+
+func _enter_tree() -> void:
+	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
 
 func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
@@ -128,7 +130,7 @@ func UpdateBattleStats(User : BattleShipStats) -> void:
 	CardDesc.text = DescText
 	ShownCost = GetBattleCost(User, CStats)
 	CardCost.text = "{0}".format([ShownCost])
-
+	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 
 func Flip() -> void:
 	FrontSide.visible = false

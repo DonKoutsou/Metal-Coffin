@@ -4,6 +4,8 @@ class_name PilotScreenUI
 @export var Thrust : ThrustSlider
 @export var Steer : SteeringWheelUI
 @export var EventHandler : UIEventHandler
+@export var ControllerEventH : ShipControllerEventHandler
+@export var PilotScreenSet : PilotScreenSettings
 @export_group("Buttons")
 @export var SpeedSimulationButton : TextureButton
 @export var ZoomDial : Dial
@@ -28,13 +30,15 @@ func GetUIElement(Element : PILOT_UI_ELEMENTS) -> Control:
 	
 	
 func _ready() -> void:
-	EventHandler.ShipUpdated.connect(ControlledShipSwitched)
-	EventHandler.SpeedSet.connect(ShipSpeedSet)
+	ControllerEventH.OnControlledShipChanged.connect(ControlledShipSwitched)
+	ControlledShipSwitched(ControllerEventH.CurrentControlled)
 	EventHandler.SpeedForced.connect(ShipSpeedForced)
 	EventHandler.ZoomChangedFromScreen.connect(ZoomDial.AddCustomMovement)
 	EventHandler.YChangedFromScreen.connect(YDial.AddCustomMovement)
 	EventHandler.XChangedFromScreen.connect(XDial.AddCustomMovement)
 	UISoundMan.GetInstance().Refresh()
+	
+	_on_steer_button_toggled(PilotScreenSet.SteerState)
 
 func SpeedUpdated(t : bool) -> void:
 	SpeedSimulationButton.set_pressed_no_signal(t)
@@ -49,8 +53,6 @@ func ShipSpeedForced(NewSpeed : float) -> void:
 func ControlledShipSwitched(NewShip : MapShip) -> void:
 	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
 	Steer.ForceSteer(NewShip.rotation)
-
-
 
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)

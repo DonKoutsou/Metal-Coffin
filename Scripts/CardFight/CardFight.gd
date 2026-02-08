@@ -2298,6 +2298,7 @@ func UpdateCardDescriptions(User : BattleShipStats):
 	var Cards = get_tree().get_nodes_in_group("Card")
 	for g : Card in Cards:
 		g.UpdateBattleStats(User)
+		
 
 
 func UpdateShipStats(BattleS : BattleShipStats) -> void:

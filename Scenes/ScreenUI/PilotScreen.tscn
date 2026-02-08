@@ -4,10 +4,12 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_ecvfe"]
 [ext_resource type="Texture2D" uid="uid://s464nk64miu8" path="res://Assets/UIPiecies/Screen/ScreenFrames/Screen2_FullQuality.png" id="2_eeg0m"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="3_ecvfe"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_w258d"]
 [ext_resource type="Texture2D" uid="uid://bvk1d6i2dr1sf" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_hc833"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="5_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_bpouu"]
 [ext_resource type="Texture2D" uid="uid://bi5udi6g78ajr" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="6_gmup4"]
+[ext_resource type="Script" uid="uid://b8qcw65lt8fkh" path="res://Scenes/ScreenUI/PilotScreenSettings.gd" id="6_w258d"]
 [ext_resource type="FontFile" uid="uid://m8psk06kkwa4" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_yjfdw"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="7_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_yjfdw"]
@@ -32,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/ELint.tscn" id="27_uojtp"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/ControlledShipSelection.tscn" id="28_hc833"]
 
-[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("Thrust", "Steer", "SpeedSimulationButton", "ZoomDial", "YDial", "XDial")]
+[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("Thrust", "Steer", "PilotScreenSet", "SpeedSimulationButton", "ZoomDial", "YDial", "XDial")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +46,8 @@ script = ExtResource("1_fq67n")
 Thrust = NodePath("ThrustSlider")
 Steer = NodePath("SteeringWheel")
 EventHandler = ExtResource("2_ecvfe")
+ControllerEventH = ExtResource("3_w258d")
+PilotScreenSet = NodePath("PanelContainer")
 SpeedSimulationButton = NodePath("SpeedSimulation")
 ZoomDial = NodePath("ZoomDial")
 YDial = NodePath("YDial")
@@ -68,7 +72,7 @@ offset_top = -371.0
 offset_right = -13.0
 offset_bottom = -46.0
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1348607806]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1348607806 node_paths=PackedStringArray("ForecastButton", "GridButton", "SteerButton")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -78,6 +82,10 @@ offset_right = 274.0
 grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("5_ojc6g")
+script = ExtResource("6_w258d")
+ForecastButton = NodePath("HBoxContainer/VBoxContainer/ForecastButton")
+GridButton = NodePath("HBoxContainer/VBoxContainer2/GridButton")
+SteerButton = NodePath("HBoxContainer/VBoxContainer3/SteerButton")
 
 [node name="HBoxContainer" type="GridContainer" parent="PanelContainer" unique_id=1615443807]
 layout_mode = 2
@@ -593,8 +601,11 @@ scale = Vector2(0.8, 0.8)
 [connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
+[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="PanelContainer" method="_on_forecast_button_toggled"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="." method="_on_grid_button_toggled"]
+[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="PanelContainer" method="_on_grid_button_toggled"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
+[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="PanelContainer" method="_on_steer_button_toggled"]
 [connection signal="SteeringDitChanged" from="SteeringWheel" to="." method="Steering_Direction_Changed"]
 [connection signal="SteeringOffseted" from="SteeringWheel" to="." method="Steer_Offseted"]
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
