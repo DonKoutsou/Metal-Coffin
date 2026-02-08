@@ -38,8 +38,7 @@ var Docked = false
 var CamZoom = 1
 
 
-
-signal ShipDeparted()
+signal ShipDeparted(DepartedFrom : MapSpot)
 signal ShipDockActions(Stats : String, t : bool, timel : float)
 signal StatLow(StatName : String)
 signal OnShipDamaged(Amm : float, ShowVisuals : bool)
@@ -79,39 +78,50 @@ func _ready() -> void:
 	Cpt.connect("ShipPartChanged", PartChanged)
 	
 	MapPointerManager.GetInstance().AddShip(self, true)
-	#SimulationSpeed = SimulationManager.SimSpeed()
+
 	#TODO probably a better way to do this
 	Cpt.CaptainShip = self
-	###
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
 		
-func _draw() -> void:
-	if (ShowFuelRange):
-		var FRange = GetFuelRange()
-		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 1.0 / CamZoom, true)
-		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 1.0 / CamZoom, true)
 
+#Refuel logic
 func Refuel() -> void:
-	if (Altitude == 0 and !Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK) and CurrentPort.PlayerHasFuelReserves()):
-		var Simulationp = 0
-		if (!SimulationManager.IsPaused()):
-			Simulationp = 1
-		var SimulationSpeed = SimulationManager.SimSpeed() * Simulationp
-		var TimeMulti = 0.05
+	#Make sure that the ship is landed
+	#Make sure that fuel tanks are not full
+	#Make sure port has fuel
+	var IsLanded = Altitude == 0
+	var FuelIsFull = Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
+	var TownHasFuel = CurrentPort.PlayerHasFuelReserves()
+
+	if (IsLanded and !FuelIsFull and TownHasFuel):
+		var SimulationSpeed = SimulationManager.SimSpeed()
 		
+		if (SimulationManager.IsPaused()):
+			SimulationSpeed = 0
+
+		var FuelPerTic = 0.05
+		#Towns with fuel, refuel faster
 		if (CurrentPort.HasFuel()):
-			TimeMulti = 0.1
+			FuelPerTic = 0.1
+		#Ammount to refill on the current tic
+		var AmmountRefilled = FuelPerTic * SimulationSpeed
+		
 		var maxfuelcap = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 		var currentfuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		var timeleft = (min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel) / TimeMulti / 6
-		ShipDockActions.emit("Refueling", true, roundi(timeleft))
-		#ToggleShowRefuel("Refueling", true, roundi(timeleft))
-		Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, TimeMulti * SimulationSpeed)
+		var AmmountUntilFull = min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel
 		
-		CurrentPort.AddToFuelReserves(-(TimeMulti * SimulationSpeed))
+		var timeleft = AmmountUntilFull / FuelPerTic / 6
+		
+		ShipDockActions.emit("Refueling", true, roundi(timeleft))
+		
+		#Add fule to ship and remove from city
+		Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, AmmountRefilled)
+		CurrentPort.AddToFuelReserves(-AmmountRefilled)
+		
 	else:
+		
 		ShipDockActions.emit("Refueling", false, 0)
 
 func Repair() -> void:
@@ -154,8 +164,31 @@ func SetCurrentPort(Port : MapSpot):
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360
 
+func _HandleLanding(SimulationSpeed : float) -> void:
+	if (Landing):
+		UpdateAltitude(max(0, Altitude - (60 * SimulationSpeed)))
+		if (Altitude <= 0):
+			Altitude = 0
+			LandingEnded.emit(self)
+			Landing = false
+	else: if (TakingOff):
+		UpdateAltitude(min(10000, Altitude + (60 * SimulationSpeed)))
+		if (Altitude >= 10000):
+			Altitude = 10000
+			TakeoffEnded.emit(self)
+			TakingOff = false
+	else: if (MatchingAltitude):
+		UpdateAltitude(clamp(move_toward(Altitude, Command.Altitude, 60 * SimulationSpeed), 0, 10000))
+		if (Altitude == Command.Altitude):
+			MatchingAltitudeEnded.emit(self)
+			MatchingAltitude = false
+
+func InitialiseAltitudeMatching() -> void:
+	MatchingAltitude = true
+	MatchingAltitudeStarted.emit()
+
 func RemovePort():
-	ShipDeparted.emit()
+	ShipDeparted.emit(CurrentPort)
 	CurrentPort = null
 	InventoryManager.GetInstance().CancelUpgrades(Cpt)
 	Cpt.CurrentPort = ""

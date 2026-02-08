@@ -11,7 +11,7 @@ class_name TrailLine
 var last_position: Vector2
 var stationary_time: float = 0.0
 
-var  PointPos : Array[Vector2] = []
+var  PointPos : PackedVector2Array = []
 
 
 func _exit_tree() -> void:

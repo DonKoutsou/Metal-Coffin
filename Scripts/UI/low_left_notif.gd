@@ -39,7 +39,7 @@ func ToggleStat(Stat: String, t : bool, timel : float = 0):
 		
 	$Control/PanelContainer/Label.text = statstring
 	
-func OnShipDeparted():
+func OnShipDeparted(_DepartedFrom : MapSpot):
 	queue_free()
 
 func UpdateCameraZoom(NewZoom : float) -> void:

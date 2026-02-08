@@ -25,6 +25,113 @@ func  _ready() -> void:
 	WeatherManage.RegisterShip(self)
 	#call_deferred("_postready")
 
+func _exit_tree() -> void:
+	WeatherManage.UnregisterShip(self)
+
+func _draw() -> void:
+	if (ShowFuelRange):
+		var FRange = GetFuelRange()
+		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 1.0 / CamZoom, true)
+		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 1.0 / CamZoom, true)
+		
+
+func Update(delta: float) -> void:
+	
+	UpdateElint(delta)
+	queue_redraw()
+	
+	var SimulationSpeed = SimulationManager.SimSpeed()
+
+	for g in TrailLines:
+		g.UpdateProjected(delta, Altitude / 10000.0)
+	
+	if (CurrentPort != null):
+		_HandleRestock()
+	
+	if (Paused):
+		return
+
+	_HandleLanding(SimulationSpeed)
+	
+	if (TargetLocations.size() > 0):
+		var NextLoc = TargetLocations[0]
+		if (NextLoc.distance_to(global_position) < 5):
+			TargetLocations.remove_at(0)
+			if (TargetLocations.size() == 0):
+				HaltShip()
+		
+		var directiontoDestination = (NextLoc - global_position).normalized().angle()
+		if (rotation != directiontoDestination):
+			ForceSteer(lerp_angle(rotation, directiontoDestination, delta))
+	
+	if (StoredSteer != 0):
+		var SteertToAdd = min((delta), abs(StoredSteer)) * sign(StoredSteer)
+		StoredSteer -= SteertToAdd
+		ForceSteer(rotation + SteertToAdd)
+	#HandleAcceleration
+	if (AccelChanged):
+		_HandleAccelerationSound()
+
+	if (Docked):
+		return
+
+	if (GetShipSpeedVec() == Vector2.ZERO):
+		return
+	
+	if (CommingBack):
+		updatedronecourse()
+		
+	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
+	#var f = Acceleration.position.x / ShipEfficiency * SimulationSpeed
+	var FuelConsumtion = Acceleration.position.x / ShipEfficiency
+	
+	#Apply a small penalty durring storms
+	if (StormValue > 0.9):
+		FuelConsumtion *= 1 + (1 - StormValue) * 3
+	#Apply wind buff debuff
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection)
+	FuelConsumtion *= 1 - WindVel * 0.3
+	
+	FuelConsumtion *= SimulationSpeed
+	#Consume fuel on shif if enough
+	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
+		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
+	# If not enough on ship syphoon some from drones in dock
+	else: if (GetDroneDock().DronesHaveFuel(FuelConsumtion)):
+		GetDroneDock().SyphonFuelFromDrones(FuelConsumtion)
+		#SetFuelShaderRange(GetFuelRange())
+	else:
+		HaltShip()
+		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
+		return
+	
+	for g in GetDroneDock().GetDockedShips():
+		var Cap = g.Cpt as Captain
+		
+		var DroneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		var DroneEfficiency = (Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(DroneWeight, 0.5)) * 10
+		
+		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency
+		if (StormValue > 0.9):
+			DroneFuelConsumtion *= 1.3
+		DroneFuelConsumtion *= 1 - WindVel * 0.3
+		DroneFuelConsumtion *= SimulationSpeed
+		
+		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
+			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,DroneFuelConsumtion)
+		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= DroneFuelConsumtion):
+			Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, DroneFuelConsumtion)
+		else: if (GetDroneDock().DronesHaveFuel(DroneFuelConsumtion)):
+			GetDroneDock().SyphonFuelFromDrones(DroneFuelConsumtion)
+		else:
+			HaltShip()
+			PopUpManager.GetInstance().DoFadeNotif("Your ships have run out of fuel.")
+	
+	var offset = GetShipSpeedVec()
+	global_position += offset * SimulationSpeed
+
+
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:
 		if (g.UpgradeName == STAT_CONST.STATS.VISUAL_RANGE):
@@ -33,9 +140,10 @@ func PartChanged(It : ShipPart) -> void:
 			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
 			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE))
-			
+	
+	
 func UpdateELINTTRange(rang : float):
-	var SonarCollisionShape = SonarShape.get_node("CollisionShape2D")
+	var SonarCollisionShape : CollisionShape2D = SonarShape.get_child(0)
 	#scalling collision
 	(SonarCollisionShape.shape as CircleShape2D).radius = rang
 
@@ -54,29 +162,13 @@ func BodyEnteredSonar(Body : Area2D) -> void:
 func BodyLeftSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapShip or Parent is Missile):
-		#ShipLeftSonar.emit(Body.get_parent())
 		SonarTargets.erase(Parent)
 
-func _exit_tree() -> void:
-	WeatherManage.UnregisterShip(self)
-
-#func _postready() -> void:
-	#InventoryManager.GetInstance().AddCharacter(Cpt)
-
-func _draw() -> void:
-	super()
-	
-	#for g in TargetLocations.size():
-		#var pos = to_local(TargetLocations[g])
-		#if (g > 0):
-			#draw_line(to_local(TargetLocations[g - 1]), pos, Color("ffc315"), 1 / CamZoom)
-		#else:
-			#draw_line(Vector2.ZERO, pos, Color("ffc315"), 1 / CamZoom)
-		
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
 	queue_redraw()
+
 
 func updatedronecourse():
 	var plship = RegroupTarget
@@ -155,98 +247,7 @@ func Steer(Rotation : float) -> void:
 		TargetLocations.clear()
 		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
 
-func Update(delta: float) -> void:
-	
-	UpdateElint(delta)
-	queue_redraw()
-	
-	var SimulationSpeed = SimulationManager.SimSpeed()
 
-	for g in TrailLines:
-		g.UpdateProjected(delta, Altitude / 10000.0)
-	
-	if (CurrentPort != null):
-		_HandleRestock()
-	
-	if (Paused):
-		return
-
-	_HandleLanding(SimulationSpeed)
-	
-	if (TargetLocations.size() > 0):
-		var NextLoc = TargetLocations[0]
-		if (NextLoc.distance_to(global_position) < 5):
-			TargetLocations.remove_at(0)
-			if (TargetLocations.size() == 0):
-				HaltShip()
-		
-		var directiontoDestination = (NextLoc - global_position).normalized().angle()
-		if (rotation != directiontoDestination):
-			ForceSteer(lerp_angle(rotation, directiontoDestination, delta))
-	
-	if (StoredSteer != 0):
-		var SteertToAdd = min((delta), abs(StoredSteer)) * sign(StoredSteer)
-		StoredSteer -= SteertToAdd
-		ForceSteer(rotation + SteertToAdd)
-	#HandleAcceleration
-	if (AccelChanged):
-		_HandleAccelerationSound()
-
-	if (Docked):
-		return
-
-	if (GetShipSpeedVec() == Vector2.ZERO):
-		return
-	
-	if (CommingBack):
-		updatedronecourse()
-		
-	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
-	#var f = Acceleration.position.x / ShipEfficiency * SimulationSpeed
-	var FuelConsumtion = Acceleration.position.x / ShipEfficiency
-	
-	#Apply a small penalty durring storms
-	if (StormValue > 0.9):
-		FuelConsumtion *= 1.3
-	#Apply wind buff debuff
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection)
-	FuelConsumtion *= 1 - WindVel * 0.3
-	
-	FuelConsumtion *= SimulationSpeed
-	#Consume fuel on shif if enough
-	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
-		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
-	# If not enough on ship syphoon some from drones in dock
-	else: if (GetDroneDock().DronesHaveFuel(FuelConsumtion)):
-		GetDroneDock().SyphonFuelFromDrones(FuelConsumtion)
-		#SetFuelShaderRange(GetFuelRange())
-	else:
-		HaltShip()
-		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
-		return
-	
-	for g in GetDroneDock().GetDockedShips():
-		var Cap = g.Cpt as Captain
-		
-		var DroneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-		var DroneEfficiency = (Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(DroneWeight, 0.5)) * 10
-		
-		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency * SimulationSpeed
-		if (StormValue > 0.9):
-			DroneFuelConsumtion *= 1.05
-		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
-			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,DroneFuelConsumtion)
-		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= DroneFuelConsumtion):
-			Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, DroneFuelConsumtion)
-		else: if (GetDroneDock().DronesHaveFuel(DroneFuelConsumtion)):
-			GetDroneDock().SyphonFuelFromDrones(DroneFuelConsumtion)
-		else:
-			HaltShip()
-			PopUpManager.GetInstance().DoFadeNotif("Your drones have run out of fuel.")
-	
-	var offset = GetShipSpeedVec()
-	global_position += offset * SimulationSpeed
 
 func _HandleAccelerationSound() -> void:
 	var Audioween = create_tween()
@@ -259,6 +260,7 @@ func UpdateLight(LightAmm : float, Viz : float) -> void:
 	L.color = Color(1,1,1) * LightAmm
 	L.texture_scale = Viz
 
+
 func _HandleRestock() -> void:
 	Refuel()
 	Repair()
@@ -269,24 +271,6 @@ func _HandleRestock() -> void:
 	else:
 		ShipDockActions.emit("Upgrading", false, 0)
 
-func _HandleLanding(SimulationSpeed : float) -> void:
-	if (Landing):
-		UpdateAltitude(max(0, Altitude - (60 * SimulationSpeed)))
-		if (Altitude <= 0):
-			Altitude = 0
-			LandingEnded.emit(self)
-			Landing = false
-	if (TakingOff):
-		UpdateAltitude(min(10000, Altitude + (60 * SimulationSpeed)))
-		if (Altitude >= 10000):
-			Altitude = 10000
-			TakeoffEnded.emit(self)
-			TakingOff = false
-	if (MatchingAltitude):
-		UpdateAltitude(clamp(move_toward(Altitude, Command.Altitude, 60 * SimulationSpeed), 0, 10000))
-		if (Altitude == Command.Altitude):
-			MatchingAltitudeEnded.emit(self)
-			MatchingAltitude = false
 
 func _UpdateShipIcon(Tex : Texture2D) -> void:
 	super(Tex)
@@ -296,16 +280,21 @@ func BodyEnteredElint(Body: Area2D) -> void:
 	if (Body.get_parent() is PlayerDrivenShip):
 		return
 	super(Body)
+	
+	
 func BodyLeftElint(Body: Area2D) -> void:
 	if (Body.get_parent() is PlayerShip):
 		return
 	super(Body)
+	
+	
 func AccelerationChanged(value: float, forced : bool = false) -> void:
 	super(value, forced)
 	
 	for g in GetDroneDock().GetDockedShips():
 		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
 		g.AccelChanged = true
+		
 
 func ToggleLight(t : bool) -> void:
 	$PointLight2D.visible = t

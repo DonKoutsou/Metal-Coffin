@@ -73,16 +73,15 @@ func Update(delta: float) -> void:
 		var L = GetLightAmm()
 		
 		for g in ShipsToUpdate:
-			var viz = GetVisibilityInPosition(g.global_position)
+			var viz = GetVisibilityInPosition(g.global_position, L)
 			g.VisibilityValue = viz
 			g.StormValue = 1 - (viz - 0.5)
 			if (g is PlayerDrivenShip):
 				g.UpdateLight(L, viz)
 			g.RephreshVisRange(viz)
 
-static func GetVisibilityInPosition(pos : Vector2) -> float:
-	var Maxv = GetLightAmm()
-	var value = Helper.mapvalue(1 - get_color_at_global_position(pos).r, 0.5, Maxv)
+static func GetVisibilityInPosition(pos : Vector2, LightValue : float) -> float:
+	var value = Helper.mapvalue(1 - get_color_at_global_position(pos).r, 0.5, LightValue)
 	return value
 
 static func GetLightAmm() -> float:

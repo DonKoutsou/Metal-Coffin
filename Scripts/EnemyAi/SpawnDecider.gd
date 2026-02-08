@@ -23,7 +23,7 @@ func RefrshExistingItems() -> void:
 	#MerchList.clear()
 	if (!Engine.is_editor_hint()):
 		return
-	var DirsToExplore :Array[String] = ["res://Resources/Items"]
+	var DirsToExplore : PackedStringArray = ["res://Resources/Items"]
 	for g in DirsToExplore:
 		var dir = DirAccess.open(g)
 		if dir:

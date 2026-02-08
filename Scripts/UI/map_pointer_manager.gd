@@ -21,6 +21,9 @@ var _ShipMarkers : Array[ShipMarker] = []
 var Spots : Array[Node2D] = []
 var _SpotMarkers : Array[SpotMarker] = []
 
+static func GetInstance() -> MapPointerManager:
+	return Instance
+
 static var Instance : MapPointerManager
 
 var ControlledShip : PlayerDrivenShip
@@ -36,8 +39,6 @@ func _ready() -> void:
 func OnControlledShipChanged(Ship : PlayerDrivenShip) -> void:
 	ControlledShip = Ship
 
-static func GetInstance() -> MapPointerManager:
-	return Instance
 
 func ClearLines() -> void:
 	for g in $MapLines.get_children():
@@ -185,7 +186,7 @@ func _physics_process(_delta: float) -> void:
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]
 		if (Ship is PlayerDrivenShip):
-			var visibility = WeatherManage.GetVisibilityInPosition(Ship.global_position)
+			var visibility = WeatherManage.GetVisibilityInPosition(Ship.global_position, WeatherManage.GetLightAmm())
 			if (Ship.RadarWorking):
 				Circles.append(PackedVector2Array([Ship.global_position, Vector2(max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 110 * visibility), 0)]))
 			else:

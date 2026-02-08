@@ -76,9 +76,10 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		var CSpot = $CitySpot
 		CSpot.replace_by(sc)
 		Spot = sc
-		sc.position = CSpot.position
+		sc.position = spotdat.SpotLoc
 		sc.Population = spotdat.Population
-		sc.SpotInfo = spotdat.SpotInfo
+		sc.SpotType = spotdat.SpotType
+		#sc.SpotLoc = spotdat.position
 		sc.SpotName = spotdat.SpotName
 		sc.EnemyCity = spotdat.EnemyCity
 		sc.PossibleDrops = spotdat.PossibleDrops

@@ -22,7 +22,7 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneLaunched", LaunchDrone)
 	DroneDockEventH.connect("DroneRangeChanged", DroneRangeChanged)
 	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
-	
+
 func AnyDroneNeedsFuel() -> bool:
 	for g in DockedDrones:
 		if (g.Fuel < 50):
@@ -59,7 +59,7 @@ func RemoveCaptain(Cap : Captain) -> void:
 			UndockDrone(g)
 			g.Kill()
 			return
-		
+
 func ClearAllDrones() -> void:
 	var Drones = DockedDrones.duplicate()
 	for g in Drones:
@@ -68,7 +68,7 @@ func ClearAllDrones() -> void:
 	#for g in FlyingDrones:
 		#DroneDisharged(g)
 		#g.Kill()
-		
+
 func GetSaveData() -> Array[DroneSaveData]:
 	var saved : Array[DroneSaveData]
 	for g in DockedDrones:
@@ -76,7 +76,7 @@ func GetSaveData() -> Array[DroneSaveData]:
 	#for g in FlyingDrones:
 		#saved.append(g.GetSaveData())
 	return saved
-	
+
 func GetCaptains() -> Array[Captain]:
 	var cptns : Array[Captain]
 	for g in DockedDrones:
@@ -84,7 +84,7 @@ func GetCaptains() -> Array[Captain]:
 	#for g in FlyingDrones:
 		#cptns.append(g.Cpt)
 	return cptns
-	
+
 func DroneDisharged(Dr : MapShip):
 
 	DroneRemoved.emit()
@@ -111,16 +111,16 @@ func AddRecruit(Cpt : Captain, _Notify : bool = true) -> void:
 		AddDrone(NewShip, false)
 
 func AddCaptive(Captive : HostileShip) -> void:
-	
+
 	#var pl = get_parent() as MapShip
 	#if (pl.CurrentPort != null):
 		#World.GetInstance().PlayerWallet.AddFunds(Captive.Cpt.ProvidingFunds * 2)
 		#Captive.Evaporate()
 		#return
-		
+
 	#TODO new signal for captives
 	Captive.connect("OnShipDestroyed", CaptiveDischarged)
-	
+
 	call_deferred("DoCaptiveThing", Captive)
 	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
 	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
@@ -156,15 +156,15 @@ func AddDrone(Drne : Drone, Notify : bool = true) -> void:
 	#ShipData.GetInstance().ApplyCaptainStats([Drne.Cpt.GetStat(STAT_CONST.STATS.INVENTORY_SPACE)])
 	#Inventory.GetInstance().OnCharacterAdded(Drne.Cpt)
 	AddDroneToHierarchy(Drne)
-	
-	
+
+
 
 func SoundEnded() -> void:
 	for g in $Sounds.get_child_count():
 		if (!($Sounds.get_child(g) as AudioStreamPlayer).playing):
 			$Sounds.get_child(g).queue_free()
 			return
-		
+
 func DroneArmed(Target : MapShip) -> void:
 	if (Target == get_parent()):
 		$Line2D.visible = true
@@ -176,11 +176,11 @@ func DroneDissarmed(Target : MapShip) -> void:
 func DroneAimDirChanged(NewDir : float, Target : MapShip) -> void:
 	if (Target == get_parent()):
 		$Line2D.rotation = NewDir / 10
-	
+
 func DroneRangeChanged(NewRange : float, Target : MapShip) -> void:
 	if (Target == get_parent()):
 		$Line2D.set_point_position(1, Vector2(NewRange, 0))
-	
+
 func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 	if (Target == get_parent()):
 		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
@@ -211,18 +211,18 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	#FlyingDrones.erase(drone)
 	DockedDrones.append(drone)
 	#drone.DissableDrone()
-	
+
 	var Command = get_parent() as MapShip
 	drone.ToggleLight(false)
 	drone.Command = Command
 	DroneDockEventH.OnDroneDocked(drone, Command)
-	
+
 	var docks = $DroneSpots.get_children()
-	
+
 	var pos : Vector2
 	var Offset = 5
 	for g in docks.size() + 1:
-		if (is_even(g)):
+		if (Helper.is_even(g)):
 			pos = Vector2(-Offset, -Offset)
 		else:
 			pos = Vector2(-Offset, Offset)
@@ -235,37 +235,35 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	drone.ForceSteer(get_parent().rotation)
 	trans.remote_path = drone.get_path()
 	drone.Docked = true
-	
+
 	drone.SetShipPosition(trans.global_position)
-	
+
 	if (drone.Altitude != Command.Altitude):
-		drone.MatchingAltitudeStarted.emit()
-		drone.MatchingAltitude = true
-	
+		drone.InitialiseAltitudeMatching()
+
 	if (Command.GetShipSpeed() > 0):
 		Command.AccelerationChanged(Command.GetShipSpeed() / Command.GetShipMaxSpeed())
-	
+
 	if (Command.CurrentPort != null and Command.CurrentPort != drone.CurrentPort):
 		drone.SetCurrentPort(Command.CurrentPort)
 		Command.CurrentPort.OnSpotAproached(drone)
 	if (!Command.Detectable):
 		drone.ToggleRadar()
-		
+
 	DroneAdded.emit()
-		
-func is_even(number: int) -> bool:
-	return number % 2 == 0
-		
+
+
+
 func DockCaptive(Captive : HostileShip) -> void:
 	Captives.append(Captive)
 	Captive.Command = get_parent()
-	
+
 	var docks = $DroneSpots.get_children()
-	
+
 	var pos : Vector2
 	var Offset = 10
 	for g in docks.size() + 1:
-		if (is_even(g)):
+		if (Helper.is_even(g)):
 			pos = Vector2(-Offset, -Offset)
 		else:
 			pos = Vector2(-Offset, Offset)
@@ -279,7 +277,7 @@ func DockCaptive(Captive : HostileShip) -> void:
 	trans.remote_path = Captive.get_path()
 	Captive.Docked = true
 	Captive.SetShipPosition(trans.global_position)
-	
+
 func UndockCaptive(Captive : HostileShip):
 	Captives.erase(Captive)
 
@@ -293,7 +291,7 @@ func UndockCaptive(Captive : HostileShip):
 			Captive.Docked = false
 			break
 	RepositionDocks()
-	
+
 	DroneRemoved.emit()
 
 func UndockDrone(drone : Drone):
@@ -310,21 +308,21 @@ func UndockDrone(drone : Drone):
 			drone.Docked = false
 			break
 	RepositionDocks()
-	
+
 	DroneRemoved.emit()
-	
+
 func RepositionDocks() -> void:
-	
+
 	for DockSpot in $DroneSpots.get_children().size():
 		var pos : Vector2
 		var Offset = 5
 		for g in DockSpot + 1:
-			if (is_even(g)):
+			if (Helper.is_even(g)):
 				pos = Vector2(-Offset, -Offset)
 			else:
 				pos = Vector2(-Offset, Offset)
 				Offset += 5
-		
+
 		$DroneSpots.get_child(DockSpot).position = pos
 
 func UpdateCameraZoom(NewZoom : float) -> void:

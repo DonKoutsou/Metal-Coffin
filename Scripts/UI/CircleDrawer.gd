@@ -149,7 +149,7 @@ func DrawRuller() -> void:
 		vizrange = 110
 	
 	if (vizrange == 110):
-		vizrange *= WeatherManage.GetVisibilityInPosition(ControlledShipPos)
+		vizrange *= WeatherManage.GetVisibilityInPosition(ControlledShipPos, WeatherManage.GetLightAmm())
 	
 	
 	for g in 3:

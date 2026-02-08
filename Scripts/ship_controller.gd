@@ -14,6 +14,7 @@ var AvailableShips : Array[PlayerDrivenShip] = []
 
 static var ControlledShip : PlayerDrivenShip
 static var ControlledShipVisibilityValue : float = 1
+static var ControlledShipStormValue : float = 0
 static var ControlledShipPosition : Vector2
 
 signal FleetSeperationRequested(ControlledShip : PlayerDrivenShip)
@@ -46,6 +47,7 @@ func Update() -> void:
 		return
 	ControlledShipPosition = ControlledShip.global_position
 	ControlledShipVisibilityValue = ControlledShip.VisibilityValue
+	ControlledShipStormValue = ControlledShip.StormValue
 
 func SetCamera() -> void:
 	ship_camera = Map.GetInstance().GetCamera()

@@ -271,6 +271,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	if (CurrentFleet.size() == 1):
 		PopUpManager.GetInstance().DoFadeNotif("Cant separate current fleet")
 		return
+	GetMap().HideWorld(false)
 	var sc = load(FleetSeparationScene).instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
 	#GetMap().GetScreenUi().ToggleScreenUI(false)
@@ -289,7 +290,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 		
 func ShipSeparationFinished() -> void:
 	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
-	
+	GetMap().HideWorld(true)
 	WORLDST = WORLDSTATE.NORMAL
 
 #Dogfight-----------------------------------------------
@@ -303,6 +304,8 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	SimulationManager.GetInstance().TogglePause(true)
 
 	await GetMap().GetScreenUi().CloseScreen()
+	
+	GetMap().HideWorld(false)
 	
 	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
 	var CardF = FightScene.instantiate() as Card_Fight
@@ -367,11 +370,13 @@ func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 	if (WonFunds > 0):
 		PlayerWallet.AddFunds(WonFunds)
 		PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([WonFunds]))
+	GetMap().HideWorld(true)
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()
 
 func CardFightDestroyed() -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
+	GetMap().HideWorld(true)
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	#GetMap().GetScreenUi().ToggleScreenUI(true)
@@ -439,7 +444,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var PlayedEvent = await Land(spot, Ship)
 	if (PlayedEvent):
 		return
-	
+	GetMap().HideWorld(false)
 	var TownSc = await Helper.GetInstance().LoadThreaded(FuelTradeScene).Sign
 	var sc = TownSc as PackedScene
 	var fuel = sc.instantiate() as TownScene
@@ -488,7 +493,9 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 			#ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
 		#else:
 		#Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
-
+	
+	GetMap().HideWorld(true)
+	
 	spot.AddToFuelReserves(BFuel)
 	
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)

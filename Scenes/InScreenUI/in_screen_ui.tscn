@@ -4,9 +4,12 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_b4kau"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor.tscn" id="3_lbfwx"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
+[ext_resource type="Script" uid="uid://ddyh2ounnfapu" path="res://Scenes/InScreenUI/ScreenRainEffect.gd" id="5_adjny"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/simulation_notification.tscn" id="5_g51f2"]
+[ext_resource type="Material" uid="uid://dfyldqd1bqaq3" path="res://Shaders/RainMat.tres" id="6_adjny"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
+[ext_resource type="AudioStream" uid="uid://c2m2e867wt7jw" path="res://Assets/Sounds/RainSound.mp3" id="7_j7r7e"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
@@ -61,6 +64,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1452871244 node_paths=PackedStringArray("RainSound")]
+layer = 5
+script = ExtResource("5_adjny")
+RainMat = ExtResource("6_adjny")
+RainSound = NodePath("AudioStreamPlayer2D")
+
+[node name="RainEffect" type="ColorRect" parent="CanvasLayer2" unique_id=2068705343]
+z_index = 1
+material = ExtResource("6_adjny")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="CanvasLayer2" unique_id=1787532556]
+stream = ExtResource("7_j7r7e")
+autoplay = true
 
 [node name="ZoomUI" parent="." unique_id=1715592095 instance=ExtResource("21_u111i")]
 offset_left = 0.0

@@ -5,7 +5,7 @@ class_name ShipStat
 @export var StatName : STAT_CONST.STATS
 #@export var StatName : String
 @export var StatBase : float
-@export var StatShipPartBuff : Array[float]
+@export var StatShipPartBuff : PackedFloat32Array
 @export var StatShipPartPenalty : float
 @export var CurrentValue : float
 	

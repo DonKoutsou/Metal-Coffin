@@ -84,6 +84,9 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_t4r8q"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
 [sub_resource type="Curve" id="Curve_58ae4"]
 _data = [Vector2(0, 0.245536), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.708071), 0.0, 0.0, 0, 0, Vector2(1, 0.769793), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -131,14 +134,14 @@ CardTex = NodePath("SubViewportContainer/SubViewport/VBoxContainer/CardText")
 But = NodePath("SubViewportContainer/SubViewport/Button")
 Lines = [NodePath("Line2D")]
 CardTypeEmblem = NodePath("SubViewportContainer/SubViewport/Panel2")
-FrontSide = NodePath("SubViewportContainer")
+FrontSide = NodePath("TextureButton")
 BackSide = NodePath("TextureRect")
 Line = NodePath("Line2D")
 AmmountLabel = NodePath("Amm/Label")
 RealisticFont = ExtResource("6_t4r8q")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2087537965]
-material = ExtResource("2_3yyhe")
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,12 +155,12 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1413988983]
-disable_3d = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
+oversampling = false
 size = Vector2i(186, 256)
-render_target_update_mode = 4
+render_target_update_mode = 1
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
@@ -327,6 +330,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
+[node name="TextureButton" type="TextureButton" parent="." unique_id=2008636766]
+material = ExtResource("2_3yyhe")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -17.0
+offset_right = 174.0
+offset_bottom = 239.0
+mouse_filter = 1
+texture_normal = SubResource("ViewportTexture_t4r8q")
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1274712658]
 visible = false
 layout_mode = 0
@@ -373,3 +386,6 @@ vertical_alignment = 1
 [connection signal="mouse_entered" from="SubViewportContainer/SubViewport/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="SubViewportContainer/SubViewport/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/Button" to="." method="OnButtonPressed"]
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="OnButtonPressed"]

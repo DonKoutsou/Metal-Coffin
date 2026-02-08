@@ -41,6 +41,7 @@ class_name Map
 @export var SpawningBounds : Vector2
 @export var EnSpawner : SpawnDecider
 @export var ControllerEvH : ShipControllerEventHandler
+@export var UIEventH : UIEventHandler
 
 
 signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
@@ -48,7 +49,7 @@ signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapS
 signal MAP_NeighborsSet
 signal GenerationFinished
 
-var TempEnemyNames: Array[String]
+var TempEnemyNames: PackedStringArray
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
@@ -88,6 +89,10 @@ func _ready() -> void:
 	_ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
 	_Camera.connect("PositionChanged", CamPosChanged)
 	_Camera.connect("ZoomChanged", CamZoomChanged)
+	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
+
+func HideWorld(t : bool) -> void:
+	WorldParent.get_parent().visible = t
 
 func _exit_tree() -> void:
 	if (Roadt != null):
@@ -590,7 +595,7 @@ func SpawnTownEnemies() -> void:
 	EnSpawner.Init()
 	TempEnemyNames.clear()
 	var List : StringList = await Helper.GetInstance().LoadThreaded(EnemyShipNameList).Sign
-	TempEnemyNames.append_array(List.Strings)
+	TempEnemyNames.append_array(List.Texts)
 	EnemySpawnTh = Thread.new()
 	EnemySpawnTh.start(SpawnTownEnemiesThreaded.bind(SpotList))
 	
@@ -638,7 +643,8 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 		Ship.Patrol = Patrol
 		Ship.Convoy = Convoy
 		#if (TempEnemyNames.size() > 0):
-		Ship.ShipName = TempEnemyNames.pop_back()
+		Ship.ShipName = TempEnemyNames[TempEnemyNames.size() - 1]
+		TempEnemyNames.erase(Ship.ShipName)
 		SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
 		Ship.PosToSpawn = Pos
@@ -655,7 +661,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 	var SpawnedEnems : Array[HostileShip] = []
 	for g in EnemyData:
-		var ship = (load(g.Scene) as PackedScene).instantiate() as HostileShip
+		var ship = EnemyScene.instantiate() as HostileShip
 		ship.LoadSaveData(g)
 		SpawnedEnems.append(ship)
 		ship.PosToSpawn = g.Position
@@ -737,14 +743,14 @@ func GenerateRoads() -> void:
 	var Spots : Array
 	for g in CityGroups:
 		Spots.append_array(get_tree().get_nodes_in_group(g))
-	var cityloc : Array[Vector2]
+	var cityloc : PackedVector2Array
 	for g in Spots:
 		cityloc.append(g.global_position)
 		
 	var Spots2 : Array
 	for g in AllSpotGroups:
 		Spots2.append_array(get_tree().get_nodes_in_group(g))
-	var cityloc2 : Array[Vector2]
+	var cityloc2 : PackedVector2Array
 	for g in Spots2:
 		cityloc2.append(g.global_position)
 		
@@ -807,21 +813,21 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	if (NewState == ScreenUI.ScreenState.FULL_SCREEN):
 		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = FullSize
-		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
-		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(FullSize)
+		_InScreenUI.ToggleCrtEffect(true)
+		_InScreenUI.SetScreenRes(FullSize)
 	else: if (NewState == ScreenUI.ScreenState.HALF_SCREEN):
 		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize
-		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
-		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(OriginalSize)
+		_InScreenUI.ToggleCrtEffect(true)
+		_InScreenUI.SetScreenRes(OriginalSize)
 	else: if (NewState == ScreenUI.ScreenState.NORMAL_SCREEN):
 		$SubViewportContainer.position = NormalPos
 		$SubViewportContainer.size = NormalSize
-		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
-		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(NormalSize)
+		_InScreenUI.ToggleCrtEffect(true)
+		_InScreenUI.SetScreenRes(NormalSize)
 	else:
 		$SubViewportContainer.position = Vector2.ZERO
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size
-		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(false)
+		_InScreenUI.ToggleCrtEffect(false)
 	$SubViewportContainer.visible = true
 	WeatherMan.UpdateData()

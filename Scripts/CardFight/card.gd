@@ -30,7 +30,9 @@ var InterpolationValue : float
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta * 2, 1)
 	UpdateLine()
-
+	#$SubViewportContainer/SubViewport.visible = false
+	#$SubViewportContainer/SubViewport.render_target_update_mode =  SubViewport.UPDATE_ONCE
+	
 
 func UpdateLine() -> void:
 	for g in TargetLocs.size():
@@ -79,7 +81,7 @@ func TogglePerspective(t : bool, tOverride : float = 0.75) -> void:
 
 
 func UpdatePersp(v : float) -> void:
-	var mat = $SubViewportContainer.material as ShaderMaterial
+	var mat = FrontSide.material as ShaderMaterial
 	mat.set_shader_parameter("x_rot", v)
 
 
@@ -93,6 +95,7 @@ func _ready() -> void:
 		Lines.append(NewLine)
 	set_physics_process(TargetLocs.size() > 0)
 	Line.visible = TargetLocs.size() > 0
+	#$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
 
 func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
@@ -180,6 +183,7 @@ func SetRealistic() -> void:
 	$SubViewportContainer/SubViewport/TextureRect.visible = true
 	$SubViewportContainer/SubViewport/Panel.visible = false
 	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
+	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
 	CardName.add_theme_font_override("font", RealisticFont)
 	CardCost.add_theme_font_override("font", RealisticFont)
@@ -193,19 +197,19 @@ func OnButtonPressed() -> void:
 
 
 func Dissable(Filter : bool = false) -> void:
-	But.disabled = true
+	FrontSide.disabled = true
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
-		SoundMan.RemoveSelf(But)
+		SoundMan.RemoveSelf(FrontSide)
 	if (Filter):
-		But.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+		#But.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 		FrontSide.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 func Enable() -> void:
-	But.disabled = false
+	FrontSide.disabled = false
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
-		SoundMan.AddSelf(But)
-	But.set_mouse_filter(Control.MOUSE_FILTER_PASS)
+		SoundMan.AddSelf(FrontSide)
+	#But.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	FrontSide.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	
 	

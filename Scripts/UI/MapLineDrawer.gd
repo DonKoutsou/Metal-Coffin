@@ -22,11 +22,11 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 		g.width =  1 / NewZoom
 		g.visible = NewZoom < 1.5
 
-func Generate(SpotLocs : Array) -> void:
+func Generate(SpotLocs : PackedVector2Array) -> void:
 	GenerationThread = Thread.new()
 	GenerationThread.start(_DrawMapLines.bind(SpotLocs))
 
-func _DrawMapLines(SpotLocs : Array) -> void:
+func _DrawMapLines(SpotLocs : PackedVector2Array) -> void:
 	var time = Time.get_ticks_msec()
 	if (OS.is_debug_build()):
 		print("Started generating paths between cities")

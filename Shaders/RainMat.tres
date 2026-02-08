@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dfyldqd1bqaq3"]
+
+[ext_resource type="Shader" uid="uid://cr7k4smio7pte" path="res://Scenes/ScreenUI/Rain.gdshader" id="1_uj5q3"]
+
+[resource]
+shader = ExtResource("1_uj5q3")
+shader_parameter/frequency = -1.6999998763200406
+shader_parameter/size = 0.05000000074506

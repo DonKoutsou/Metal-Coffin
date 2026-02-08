@@ -215,9 +215,9 @@ func PlayHostileShipNotif(text : String) -> void:
 	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.RADAR_DETECTED)
 	add_child(notif)
 	
-func OnShipDeparted() -> void:
+func OnShipDeparted(DepartedFrom : MapSpot) -> void:
 	if (ResuplyNotif != null):
-		ResuplyNotif.OnShipDeparted()
+		ResuplyNotif.OnShipDeparted(DepartedFrom)
 	ToggleShowRefuel("Refueling", false, 0)
 	ToggleShowRefuel("Repairing", false, 0)
 	ToggleShowRefuel("Upgrading", false, 0)

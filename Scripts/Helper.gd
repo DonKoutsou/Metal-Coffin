@@ -70,6 +70,9 @@ static func AngleToDirectionShort(angle: float) -> String:
 	var index = int(fmod((angle + PI/8 + TAU), TAU) / (PI / 4)) % 8
 	return directions[index]
 
+static func is_even(number: int) -> bool:
+	return number % 2 == 0
+
 static func angle_difference_radians(angle1: float, angle2: float) -> float:
 
 	# Calculate the difference
