@@ -52,7 +52,8 @@ func is_even(number: int) -> bool:
 	return number % 2 == 0
 
 func TrySetDockPath(RemoteT : RemoteTransform2D, Ship : HostileShip):
-	await  Ship.ShipSpawned
+	if (!Ship.Spawned):
+		await  Ship.ShipSpawned
 	Ship.global_position = RemoteT.global_position
 	RemoteT.remote_path = Ship.get_path()
 

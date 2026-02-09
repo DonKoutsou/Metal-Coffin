@@ -92,7 +92,7 @@ func Refuel() -> void:
 	#Make sure that fuel tanks are not full
 	#Make sure port has fuel
 	var IsLanded = Altitude == 0
-	var FuelIsFull = Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
+	var FuelIsFull = IsFuelFull()
 	var TownHasFuel = CurrentPort.PlayerHasFuelReserves()
 
 	if (IsLanded and !FuelIsFull and TownHasFuel):
@@ -108,18 +108,28 @@ func Refuel() -> void:
 		#Ammount to refill on the current tic
 		var AmmountRefilled = FuelPerTic * SimulationSpeed
 		
-		var maxfuelcap = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-		var currentfuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		var AmmountUntilFull = min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel
+		var ShipsToRefuel : Array[MapShip] = [self]
+		ShipsToRefuel.append_array(GetDroneDock().GetDockedShips())
 		
-		var timeleft = AmmountUntilFull / FuelPerTic / 6
+		var BiggestTimeLeft : float
 		
-		ShipDockActions.emit("Refueling", true, roundi(timeleft))
+		for g in ShipsToRefuel:
+			var Capt = g.Cpt
 		
-		#Add fule to ship and remove from city
-		Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, AmmountRefilled)
-		CurrentPort.AddToFuelReserves(-AmmountRefilled)
+			var maxfuelcap = Capt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+			var currentfuel = Capt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+			var AmmountUntilFull = min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel
+			if (AmmountUntilFull == 0):
+				continue
+			var timeleft = AmmountUntilFull / FuelPerTic / 6
+			if (timeleft > BiggestTimeLeft):
+				BiggestTimeLeft = timeleft
+			
 		
+			#Add fule to ship and remove from city
+			Capt.RefillResource(STAT_CONST.STATS.FUEL_TANK, AmmountRefilled)
+			CurrentPort.AddToFuelReserves(-AmmountRefilled)
+		ShipDockActions.emit("Refueling", true, roundi(BiggestTimeLeft))
 	else:
 		
 		ShipDockActions.emit("Refueling", false, 0)

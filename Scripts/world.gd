@@ -297,6 +297,8 @@ func ShipSeparationFinished() -> void:
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
 func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
+	if (WORLDST == WORLDSTATE.FIGHT):
+		return
 	#Temp solution to stop fight starting twice
 	####
 	WORLDST = WORLDSTATE.FIGHT

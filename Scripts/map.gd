@@ -21,6 +21,7 @@ class_name Map
 @export var MapLine : MapLineDrawer
 @export var WeatherMan : WeatherManage
 @export var WorldParent : Node
+@export var MapPointerMan : MapPointerManager
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
 @export var TownSpotScene : PackedScene
@@ -90,6 +91,7 @@ func _ready() -> void:
 	_Camera.connect("PositionChanged", CamPosChanged)
 	_Camera.connect("ZoomChanged", CamZoomChanged)
 	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
+	MapPointerMan.TargetSelected.connect(MoveTargetSelected)
 
 func HideWorld(t : bool) -> void:
 	WorldParent.get_parent().visible = t
@@ -344,6 +346,11 @@ func _MAP_INPUT(event: InputEvent) -> void:
 			else:
 				ControllerEvH.OnTargetPositionPicked(pos)
 				PopUpManager.GetInstance().DoFadeNotif("Updating Course")
+
+
+func MoveTargetSelected(Target : MapShip) -> void:
+	ControllerEvH.OnTargetShipSelected(Target)
+	PopUpManager.GetInstance().DoFadeNotif("Updating Course")
 
 #/////////////////////////////////////////////////////////////
 #███    ███  █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 

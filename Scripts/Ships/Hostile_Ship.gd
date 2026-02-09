@@ -89,8 +89,9 @@ func _exit_tree() -> void:
 
 func InitialiseShip() -> void:
 	global_position = PosToSpawn
-	ShipSpawned.emit()
 	Spawned = true
+	ShipSpawned.emit()
+	
 	
 	if (!LoadingSave):
 		for g in Cpt.CaptainStats:

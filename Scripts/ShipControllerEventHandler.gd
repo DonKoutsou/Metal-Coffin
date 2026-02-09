@@ -11,9 +11,13 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	OnControlledShipChanged.emit(NewShip)
 
 signal TargetPositionPicked(pos : Vector2, Add : bool)
+signal TargetShipPicked(Target : MapShip)
 
 func OnTargetPositionPicked(pos : Vector2) -> void:
 	TargetPositionPicked.emit(pos, false)
 
 func OnTargetPositionAdded(pos : Vector2) -> void:
 	TargetPositionPicked.emit(pos, true)
+
+func OnTargetShipSelected(Target : MapShip) -> void:
+	TargetShipPicked.emit(Target)

@@ -118,7 +118,7 @@ light_mode = 1
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WeatherMan", "WorldParent")]
+[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WeatherMan", "WorldParent", "MapPointerMan")]
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
@@ -132,6 +132,7 @@ Road = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/
 MapLine = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer")
 WeatherMan = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WeatherManager")
 WorldParent = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport")
+MapPointerMan = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager")
 TownSpotScene = ExtResource("7_0ker0")
 EnemyScene = SubResource("PackedScene_dwcpd")
 TutorialTrigger = ExtResource("9_6an1p")

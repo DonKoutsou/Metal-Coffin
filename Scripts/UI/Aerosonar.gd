@@ -15,9 +15,10 @@ class_name  AeroSonar
 
 var Offset = 0.0
 var CurrentAngle : float
-var CurrentOffset : float
+var CurrentOffset : float = 1
 var Controller : PlayerDrivenShip
 var Working : bool = false
+var Enabled : bool = false
 var Vol : float
 
 func _ready() -> void:
@@ -36,7 +37,7 @@ func _ready() -> void:
 func DroneAdded(Dr : Drone, Target : MapShip) -> void:
 	if (Target == Controller):
 		Working = FleetHasAerosonar()
-		Controller.ToggleSonarVisual(Working)
+		Controller.ToggleSonarVisual(Enabled)
 		if (!Working):
 			LineContainer.OffsetAmmount = 0
 		else:
@@ -45,7 +46,7 @@ func DroneAdded(Dr : Drone, Target : MapShip) -> void:
 func DroneRemoved(Dr : Drone, Target : MapShip) -> void:
 	if (Target == Controller):
 		Working = FleetHasAerosonar()
-		Controller.ToggleSonarVisual(Working)
+		Controller.ToggleSonarVisual(Enabled)
 		if (!Working):
 			LineContainer.OffsetAmmount = 0
 		else:
@@ -62,7 +63,7 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 	Controller = NewController
 	
 	Working = FleetHasAerosonar()
-	Controller.ToggleSonarVisual(Working)
+	Controller.ToggleSonarVisual(Enabled)
 
 func FleetHasAerosonar() -> bool:
 	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0):
@@ -101,7 +102,7 @@ func UpdateContacts() -> void:
 	var ContactList : Dictionary[int, float]
 	for g in Controller.GetSonarTargets():
 		#if ship is controlled ship we continue
-		if (IsPartOfFleet(g)):
+		if (g is PlayerDrivenShip and IsPartOfFleet(g)):
 			continue
 		
 		#find the angle at wich the ship is at from us
@@ -150,6 +151,7 @@ func ToggleSonar(t : bool) -> void:
 	LineContainer.visible = t
 	GainLabel.visible = t
 	set_physics_process(t)
+	Enabled = t
 	if (t):
 		Working = FleetHasAerosonar()
 		Controller.ToggleSonarVisual(Working)

@@ -30,8 +30,8 @@ Line = NodePath("Line2D")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
 Icons = {
-"Missile": ExtResource("7_uwuwu"),
-"Ship": ExtResource("7_kn8g7"),
+"Missile": ExtResource("7_kn8g7"),
+"Ship": ExtResource("7_uwuwu"),
 "Wreck": ExtResource("8_143co")
 }
 

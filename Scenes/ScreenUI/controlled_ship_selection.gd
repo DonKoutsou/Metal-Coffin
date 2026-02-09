@@ -20,8 +20,10 @@ func _physics_process(delta: float) -> void:
 	if (d > 0):
 		return
 	d = 0.2
+	
+	var FuelStats = currentShip.GetFuelStats()
 
-	var f = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) / currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) * 100
+	var f = (FuelStats["CurrentFuel"] / FuelStats["MaxFuel"]) * 100
 	var h = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
 	
 	CurrentCaptainFuelLabel.text = "FUEL:{0}%".format([roundi(f)])
@@ -31,7 +33,10 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	currentShip = NewShip
 	
 	CurrentCaptainLabel.text = currentShip.Cpt.CaptainName
-	var f = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) / currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) * 100
+	var FuelStats = currentShip.GetFuelStats()
+
+	var f = (FuelStats["CurrentFuel"] / FuelStats["MaxFuel"]) * 100
+	
 	var h = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
 	
 	CurrentCaptainFuelLabel.text = "FUEL:{0}%".format([roundi(f)])

@@ -37,6 +37,7 @@ func _ready() -> void:
 	#UIEventH.ShipSwitchPressed.connect(ControlledShipSwitch)
 	
 	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
+	ShipControllerEventH.TargetShipPicked.connect(OnTargetShipPicked)
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
 
 	
@@ -185,6 +186,9 @@ func OnTargetPositionChanged(Pos : Vector2, Add : bool) -> void:
 			ControlledShip.AddTargetLocation(Pos)
 		else:
 			ControlledShip.SetTargetLocation(Pos)
+
+func OnTargetShipPicked(Target : MapShip) -> void:
+	ControlledShip.AddTargetShip(Target)
 
 func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip.ToggleFuelRangeVisibility(false)

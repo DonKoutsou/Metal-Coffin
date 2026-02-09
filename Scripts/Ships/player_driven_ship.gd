@@ -13,6 +13,8 @@ var RegroupTarget : MapShip
 var StoredSteer : float = 0.0
 
 var TargetLocations : Array[Vector2]
+var TargetShip : MapShip
+var TargetShipPos : Vector2
 
 var SonarTargets : Array[Node2D]
 
@@ -52,15 +54,23 @@ func Update(delta: float) -> void:
 	for g in TrailLines:
 		g.UpdateProjected(delta, Altitude / 10000.0)
 	
-	if (CurrentPort != null):
-		_HandleRestock()
+	
 	
 	if (Paused):
 		return
 
 	_HandleLanding(SimulationSpeed)
-	
-	if (TargetLocations.size() > 0):
+	if (TargetShip != null):
+		TargetShipPos = IntersectShip(TargetShip)
+		if (TargetShipPos.distance_to(global_position) < 5):
+			TargetShip = null
+			TargetShipPos = Vector2.ZERO
+			HaltShip()
+		var directiontoDestination = (TargetShipPos - global_position).normalized().angle()
+		if (rotation != directiontoDestination):
+			ForceSteer(lerp_angle(rotation, directiontoDestination, delta))
+			
+	else: if (TargetLocations.size() > 0):
 		var NextLoc = TargetLocations[0]
 		if (NextLoc.distance_to(global_position) < 5):
 			TargetLocations.remove_at(0)
@@ -81,6 +91,9 @@ func Update(delta: float) -> void:
 
 	if (Docked):
 		return
+
+	if (CurrentPort != null):
+		_HandleRestock()
 
 	if (GetShipSpeedVec() == Vector2.ZERO):
 		return
@@ -210,6 +223,25 @@ func updatedronecourse():
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	ShipLookAt(predicted_position)
 
+func IntersectShip(Target : MapShip) -> Vector2:
+	var plship = Target
+	# Get the current position and velocity of the ship
+	
+	var ship_position = plship.position
+	
+	var Distance = global_position.distance_to(ship_position)
+	
+	#NEEDS WIND
+	var ship_velocity = plship.GetShipSpeedVec()
+
+	# Predict where the ship will be in a future time `t`
+	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedShipSpeed() / 360)
+
+	# Calculate the predicted interception point
+	var predicted_position = ship_position + ship_velocity * time_to_interception
+
+	return predicted_position
+	
 func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight: float) -> float:
 	var eff_eff = FuelEff - (Weight / 40.0)
 	var A = pow(FuelNow * eff_eff, 0.55)
@@ -232,6 +264,8 @@ func GetShipSpeedVec() -> Vector2:
 func SetTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
 		return
+	TargetShip = null
+	TargetShipPos = Vector2.ZERO
 	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.clear()
 	TargetLocations.append(pos)
@@ -241,6 +275,13 @@ func AddTargetLocation(pos : Vector2) -> void:
 		return
 	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.append(pos)
+
+func AddTargetShip(Target : MapShip) -> void:
+	if (CommingBack):
+		return
+	AccelerationChanged(GetShipMaxSpeed(), true)
+	TargetLocations.clear()
+	TargetShip = Target
 
 func Steer(Rotation : float) -> void:
 	StoredSteer += Rotation / 50
@@ -253,8 +294,10 @@ func Steer(Rotation : float) -> void:
 	if (TargetLocations.size() > 0):
 		TargetLocations.clear()
 		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
-
-
+	if (TargetShip != null):
+		TargetShip = null
+		TargetShipPos = Vector2.ZERO
+		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
 
 func _HandleAccelerationSound() -> void:
 	var Audioween = create_tween()

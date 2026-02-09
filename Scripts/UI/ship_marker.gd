@@ -31,11 +31,14 @@ var ResuplyNotif : ResuplyNotification
 var CurrentZoom : float
 
 var TargetLocations : Array[Vector2]
+var TargetShip : MapShip
+var TargetShipPos : Vector2
 var Fuel_Range : float
 
 var CurrentShipLocation : Vector2
 
 signal ShipSelected
+signal ShipTargetSelected(Marker : ShipMarker)
 signal RemoveSelf
 
 func _ready() -> void:
@@ -59,16 +62,34 @@ func VisualCountountStarted(Value : float) -> void:
 	VisualContactCountdown.size.x = Value * 4
 
 func _draw() -> void:
-	if (TargetLocations.size() == 0):
-		return
-	
 	#var f = load("res://Fonts/Bank Gothic Light Regular.otf")
 	
 	var distancetotravel : float = 0.0
 	
 	var fontsize = 20.0 / CurrentZoom
-	
+	  
 	var LinesToDraw : Array[Array]
+	if (TargetShip != null):
+		var origin = to_local(CurrentShipLocation)
+		var topos = to_local(TargetShipPos)
+		
+		var disttopos = origin.distance_to(topos)
+		distancetotravel += disttopos
+		LinesToDraw.append([origin, topos])
+		
+		var Col = Color(1,1,1)
+		
+		if (distancetotravel > Fuel_Range):
+			Col = (Color(100,0,0))
+			
+		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
+		
+		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0))
+		var string = "{0} km".format([roundi(disttopos)])
+		
+		#pos.x -= string.length() / 2 * fontsize
+		
+		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
 
 	for g in TargetLocations.size():
 		var origin = to_local(CurrentShipLocation)
@@ -111,7 +132,11 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 	queue_redraw()
 	
 	if (ship is HostileShip):
-		
+		if (ship.Docked):
+			visible = false
+			return
+		else:
+			visible = true
 		ToggleShipDetails(!ship.Docked)
 		ToggleVisualContactProgress(ship.VisualContactCountdown < 20)
 		if (ship.VisualContactCountdown < 20):
@@ -161,8 +186,14 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 				UpdateTime(timepast)
 	else:
 		if (ship is PlayerDrivenShip):
-			visible = !ship.Docked
+			if (ship.Docked):
+				visible = false
+				return
+			else:
+				visible = true
 			TargetLocations = ship.TargetLocations
+			TargetShip = ship.TargetShip
+			TargetShipPos = ship.TargetShipPos
 			Fuel_Range = ship.GetFuelRange()
 
 			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
@@ -195,6 +226,8 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 				UpdateSpeed(ship.GetAffectedSpeed())
 			else :
 				visible = false
+	
+	
 	UpdateTexts()
 
 func UpdateTexts() -> void:
@@ -393,3 +426,6 @@ func GetSaveData() -> SD_ShipMarker:
 func _on_icon_gui_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Click")):
 		ShipSelected.emit()
+	else : if (event is InputEventMouseButton):
+		if (event.button_index == MOUSE_BUTTON_RIGHT and event.pressed):
+			ShipTargetSelected.emit(self)

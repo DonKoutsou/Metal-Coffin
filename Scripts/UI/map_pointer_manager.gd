@@ -28,6 +28,8 @@ static var Instance : MapPointerManager
 
 var ControlledShip : PlayerDrivenShip
 
+signal TargetSelected(Ship : MapShip)
+
 func _enter_tree() -> void:
 	Instance = self
 
@@ -39,6 +41,10 @@ func _ready() -> void:
 func OnControlledShipChanged(Ship : PlayerDrivenShip) -> void:
 	ControlledShip = Ship
 
+func OnShipTargetSelected(Marker : ShipMarker) -> void:
+	var index = _ShipMarkers.find(Marker)
+	var Ship = Ships[index]
+	TargetSelected.emit(Ship)
 
 func ClearLines() -> void:
 	for g in $MapLines.get_children():
@@ -101,6 +107,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 			Ship.DroneReturning.connect(marker.DroneReturning)
 		
 		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
+		marker.ShipTargetSelected.connect(OnShipTargetSelected)
 		marker.call_deferred("ToggleShipDetails", true)
 		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetAffectedShipSpeed())
 		marker.SetType("Ship")
