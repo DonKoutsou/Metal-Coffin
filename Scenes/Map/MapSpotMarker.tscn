@@ -284,7 +284,6 @@ offset_right = 56.0
 offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gjj15")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=880244481]
@@ -362,5 +361,6 @@ theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 uppercase = true
 
+[connection signal="gui_input" from="AnalyzeButton" to="." method="_on_analyze_button_gui_input"]
 [connection signal="screen_entered" from="VisibilityNotif" to="." method="EnteredScreen"]
 [connection signal="screen_exited" from="VisibilityNotif" to="." method="ExitedScreen"]

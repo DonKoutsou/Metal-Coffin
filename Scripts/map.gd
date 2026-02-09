@@ -92,6 +92,7 @@ func _ready() -> void:
 	_Camera.connect("ZoomChanged", CamZoomChanged)
 	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
 	MapPointerMan.TargetSelected.connect(MoveTargetSelected)
+	MapPointerMan.TargetSpotSelected.connect(MoveTargetSpotSelected)
 
 func HideWorld(t : bool) -> void:
 	WorldParent.get_parent().visible = t
@@ -347,6 +348,13 @@ func _MAP_INPUT(event: InputEvent) -> void:
 				ControllerEvH.OnTargetPositionPicked(pos)
 				PopUpManager.GetInstance().DoFadeNotif("Updating Course")
 
+func MoveTargetSpotSelected(Spot : SpotMarker) -> void:
+	if (Input.is_action_pressed("Cnt")):
+		ControllerEvH.OnTargetPositionAdded(Spot.global_position)
+		PopUpManager.GetInstance().DoFadeNotif("Updating Course Towards\n{0}".format([Spot.SpotNameLabel.text]))
+	else:
+		ControllerEvH.OnTargetPositionPicked(Spot.global_position)
+		PopUpManager.GetInstance().DoFadeNotif("Updating Course Towards\n{0}".format([Spot.SpotNameLabel.text]))
 
 func MoveTargetSelected(Target : MapShip) -> void:
 	ControllerEvH.OnTargetShipSelected(Target)

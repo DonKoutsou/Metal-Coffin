@@ -29,6 +29,7 @@ static var Instance : MapPointerManager
 var ControlledShip : PlayerDrivenShip
 
 signal TargetSelected(Ship : MapShip)
+signal TargetSpotSelected(Target : SpotMarker)
 
 func _enter_tree() -> void:
 	Instance = self
@@ -45,6 +46,9 @@ func OnShipTargetSelected(Marker : ShipMarker) -> void:
 	var index = _ShipMarkers.find(Marker)
 	var Ship = Ships[index]
 	TargetSelected.emit(Ship)
+
+func OnSpotTargetSelected(Marker : SpotMarker) -> void:
+	TargetSpotSelected.emit(Marker)
 
 func ClearLines() -> void:
 	for g in $MapLines.get_children():
@@ -128,7 +132,7 @@ func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 		return
 	Spots.append(Spot)
 	var marker = MapSpotMarkerScene.instantiate() as SpotMarker
-	
+	marker.TownTargetSelected.connect(OnSpotTargetSelected)
 	add_child(marker)
 	
 	_SpotMarkers.append(marker)

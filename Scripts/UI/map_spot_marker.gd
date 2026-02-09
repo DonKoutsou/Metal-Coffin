@@ -8,6 +8,7 @@ class_name SpotMarker
 
 @export var BeepSound : AudioStream
 
+signal TownTargetSelected(Marker : SpotMarker)
 
 var TimeLastSeen : float
 
@@ -96,3 +97,9 @@ func ExitedScreen() -> void:
 	$AnalyzeButton.remove_from_group("UnmovableMapInfo")
 	SpotNameLabel.get_parent().remove_from_group("UnmovableMapInfo")
 	remove_from_group("ZoomAffected")
+
+
+func _on_analyze_button_gui_input(event: InputEvent) -> void:
+	if (event is InputEventMouseButton):
+		if (event.button_index == MOUSE_BUTTON_RIGHT and event.pressed):
+			TownTargetSelected.emit(self)

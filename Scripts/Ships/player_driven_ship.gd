@@ -63,8 +63,7 @@ func Update(delta: float) -> void:
 	if (TargetShip != null):
 		TargetShipPos = IntersectShip(TargetShip)
 		if (TargetShipPos.distance_to(global_position) < 5):
-			TargetShip = null
-			TargetShipPos = Vector2.ZERO
+			ClearTargetShip()
 			HaltShip()
 		var directiontoDestination = (TargetShipPos - global_position).normalized().angle()
 		if (rotation != directiontoDestination):
@@ -264,8 +263,7 @@ func GetShipSpeedVec() -> Vector2:
 func SetTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
 		return
-	TargetShip = null
-	TargetShipPos = Vector2.ZERO
+	ClearTargetShip()
 	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.clear()
 	TargetLocations.append(pos)
@@ -282,6 +280,17 @@ func AddTargetShip(Target : MapShip) -> void:
 	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.clear()
 	TargetShip = Target
+	Target.OnShipDestroyed.connect(TargetShipDestroyed)
+
+func ClearTargetShip() -> void:
+	if (TargetShip != null):
+		TargetShip.OnShipDestroyed.disconnect(TargetShipDestroyed)
+	TargetShip = null
+	TargetShipPos = Vector2.ZERO
+
+func TargetShipDestroyed(Sh : MapShip) -> void:
+	TargetLocations.append(TargetShip.global_position)
+	ClearTargetShip()
 
 func Steer(Rotation : float) -> void:
 	StoredSteer += Rotation / 50
@@ -295,8 +304,7 @@ func Steer(Rotation : float) -> void:
 		TargetLocations.clear()
 		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
 	if (TargetShip != null):
-		TargetShip = null
-		TargetShipPos = Vector2.ZERO
+		ClearTargetShip()
 		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
 
 func _HandleAccelerationSound() -> void:

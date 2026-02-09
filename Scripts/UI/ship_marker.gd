@@ -118,6 +118,8 @@ func _draw() -> void:
 		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
 	
 	var canreach = distancetotravel < Fuel_Range
+	if (TargetLocations.size() == 0):
+		return
 	if (!canreach):
 		draw_string(ThemeDB.fallback_font, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
 	
