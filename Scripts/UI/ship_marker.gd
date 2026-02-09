@@ -212,7 +212,7 @@ func UpdateTexts() -> void:
 func PlayHostileShipNotif(text : String) -> void:
 	var notif = NotificationScene.instantiate() as ShipMarkerNotif
 	notif.SetText(text)
-	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.RADAR_DETECTED)
+	RadioSpeaker.AddSoundToQueue(RadioSpeaker.RadioSound.RADAR_DETECTED)
 	add_child(notif)
 	
 func OnShipDeparted(DepartedFrom : MapSpot) -> void:

@@ -98,23 +98,25 @@ angular_velocity_max = 499.99997
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_qa6vo")
 
-[node name="Control" type="Control" unique_id=1747163891 node_paths=PackedStringArray("PanelTexture", "Anim")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Control" type="CanvasLayer" unique_id=396224634 node_paths=PackedStringArray("PanelTexture", "Anim")]
+layer = 3
 script = ExtResource("1_h0tkp")
 DoorCloseSound = ExtResource("2_7bj5d")
 DoorOpenSound = ExtResource("3_u62qe")
 PanelTexture = NodePath("Panel")
 Anim = NodePath("AnimationPlayer")
 
+[node name="Control" type="Control" parent="." unique_id=1630413148]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Panel" type="TextureRect" parent="." unique_id=682446634]
 z_index = 1
 custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

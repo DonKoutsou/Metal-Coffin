@@ -33,6 +33,7 @@ func _ready() -> void:
 	ControllerEventH.OnControlledShipChanged.connect(ControlledShipSwitched)
 	ControlledShipSwitched(ControllerEventH.CurrentControlled)
 	EventHandler.SpeedForced.connect(ShipSpeedForced)
+	EventHandler.SpeedSet.connect(ShipSpeedSet)
 	EventHandler.ZoomChangedFromScreen.connect(ZoomDial.AddCustomMovement)
 	EventHandler.YChangedFromScreen.connect(YDial.AddCustomMovement)
 	EventHandler.XChangedFromScreen.connect(XDial.AddCustomMovement)

@@ -1,5 +1,5 @@
 @tool
-extends Control
+extends CanvasLayer
 
 class_name TransitionPanel
 

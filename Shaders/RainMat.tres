@@ -5,4 +5,4 @@
 [resource]
 shader = ExtResource("1_uj5q3")
 shader_parameter/frequency = -1.6999998763200406
-shader_parameter/size = 0.05000000074506
+shader_parameter/size = 0.020000000950000003

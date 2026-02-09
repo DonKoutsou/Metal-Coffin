@@ -315,11 +315,47 @@ func AddItem(Box : Inventory_Box) -> void:
 	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 func ItemToAddSelected(M : Merchandise) -> void:
+	var OriginalItem : ShipPart = M.It
+
+	
+	var OriginalCap = CurrentShip.Cpt
+	var OriginalInv = OriginalCap._CharInv
+
+
 	var Cost = M.It.Cost
+
 	var PLWallet = World.GetInstance().PlayerWallet
+	
 	if (PLWallet.Funds < Cost):
-		PopUpManager.GetInstance().DoFadeNotif("Cant pay for upgrade")
+		PopUpManager.GetInstance().DoFadeNotif("Cant pay for item")
 		return
+	
+	
+	var NewCap = OriginalCap.duplicate(true) as Captain
+	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
+	NewCap._CharInv = NewInv
+	var NewStats : Array[ShipStat]
+	for g :ShipStat in OriginalCap.CaptainStats:
+		NewStats.append(g.duplicate(true))
+	NewCap.CaptainStats = NewStats
+	NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
+	#NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
+
+	NewInv.AddItem(OriginalItem)
+	NewCap.OnShipPartAddedToInventory(OriginalItem)
+	
+	var StatC = StatComp.instantiate() as StatComperator
+	StatC.SetCaptainsToCompare(OriginalCap, NewCap)
+	add_child(StatC)
+	
+	var Resault = await StatC.TradeFinished
+	StatC.queue_free()
+	
+	if (!Resault):
+		
+		return
+			
+	
 	
 	M.Amm -= 1
 	
@@ -365,8 +401,8 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
 	NewCap._CharInv = NewInv
 	var NewStats : Array[ShipStat]
-	for g in OriginalCap.CaptainStats:
-		NewStats.append(g.duplicate())
+	for g :ShipStat in OriginalCap.CaptainStats:
+		NewStats.append(g.duplicate(true))
 	NewCap.CaptainStats = NewStats
 	NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
 	#NewInv._CardInventory = OriginalInv._CardInventory.duplicate()

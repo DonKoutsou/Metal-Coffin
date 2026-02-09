@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://brw73s3hpvdoh"]
+
+[ext_resource type="Shader" uid="uid://luuysqiab62e" path="res://Scenes/TownShop/Blur.gdshader" id="1_d7beh"]
+
+[resource]
+shader = ExtResource("1_d7beh")
+shader_parameter/offset = 14.000000665

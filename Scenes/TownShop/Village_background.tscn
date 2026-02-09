@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_vcb2a"]
 [ext_resource type="AudioStream" uid="uid://ufp2v886p70v" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_b7hnn"]
 [ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="2_n0jph"]
+[ext_resource type="Material" uid="uid://bsqawqp83u5sx" path="res://Shaders/Blur14.tres" id="3_2hqst"]
 [ext_resource type="Texture2D" uid="uid://bwhrn4wnfr4vs" path="res://Assets/TownBackgrounds/VillageLayer-1.png" id="3_vcb2a"]
 [ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="4_daw5n"]
 [ext_resource type="Texture2D" uid="uid://cn5amkftj7nwh" path="res://Assets/TownBackgrounds/VillageLayer0.png" id="4_vcb2a"]
 [ext_resource type="Texture2D" uid="uid://c2yrr7g6s64b" path="res://Assets/TownBackgrounds/VillageLayer1.png" id="5_vcb2a"]
+[ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur10.tres" id="6_hyy3i"]
 [ext_resource type="Texture2D" uid="uid://n0us6ah5crfx" path="res://Assets/TownBackgrounds/VillageLayer2.png" id="7_vcb2a"]
+[ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur8.tres" id="8_iem75"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -73,6 +76,7 @@ motion_scale = Vector2(0.5, 0.5)
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer" unique_id=141873960]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D" unique_id=303085301]
+material = ExtResource("3_2hqst")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("3_vcb2a")
@@ -96,6 +100,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D" unique_id=1297006715]
+material = ExtResource("6_hyy3i")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("4_vcb2a")
@@ -106,6 +111,7 @@ motion_scale = Vector2(1.5, 1.5)
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2" unique_id=1485653372]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D" unique_id=2090989880]
+material = ExtResource("8_iem75")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("5_vcb2a")

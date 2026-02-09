@@ -7,8 +7,8 @@ class_name RadioSpeaker
 @export var max_rotation: float = 0.1  # Maximum angle in radians for rotation
 @export var L : Light
 
-var SoundsOnCooldown : Dictionary[RadioSound, float]
-var CurrentlyPlayed : Dictionary[RadioSound, DeletableSound]
+static var SoundsOnCooldown : Dictionary[RadioSound, float]
+static var CurrentlyPlayed : Dictionary[RadioSound, DeletableSound]
 
 static var Instance : RadioSpeaker
 
@@ -20,6 +20,12 @@ func _ready() -> void:
 
 static func GetInstance() -> RadioSpeaker:
 	return Instance
+
+static func AddSoundToQueue(Sound : RadioSound) -> void:
+	if (CurrentlyPlayed.size() == 0 and Instance != null):
+		Instance.PlaySound(Sound)
+	else:
+		SoundsOnCooldown[Sound] = 1
 
 var PlayingSounds : int = 0
 func PlaySound(Sound : RadioSound, Volume : float = 0) -> void:

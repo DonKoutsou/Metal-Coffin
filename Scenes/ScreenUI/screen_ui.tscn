@@ -14,7 +14,7 @@ layer = 2
 follow_viewport_enabled = true
 script = ExtResource("2_spr1r")
 Cam = NodePath("ScreenCam")
-Cables = NodePath("Cables")
+Cables = NodePath("CanvasLayer/Cables")
 TransitionScreenScene = "uid://c3ev6wyyc7j75"
 CardFightUIScene = "uid://cjbda0fdx38c4"
 TownUIScene = "uid://bvduhiu1v7ywh"
@@ -32,7 +32,13 @@ volume_db = -6.0
 autoplay = true
 bus = &"Sounds"
 
-[node name="Cables" type="Control" parent="." unique_id=726149118]
+[node name="ScreenCam" parent="." unique_id=1291979417 instance=ExtResource("37_6aw6g")]
+position = Vector2(640, 360)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=652607718]
+layer = 4
+
+[node name="Cables" type="Control" parent="CanvasLayer" unique_id=726149118]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ScreenFrame4" type="TextureRect" parent="Cables" unique_id=562916491 groups=["Shakable"]]
+[node name="ScreenFrame4" type="TextureRect" parent="CanvasLayer/Cables" unique_id=562916491 groups=["Shakable"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +68,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame4" unique_id=678775481]
+[node name="ScreenFrame6" type="TextureRect" parent="CanvasLayer/Cables/ScreenFrame4" unique_id=678775481]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -79,7 +85,7 @@ mouse_filter = 2
 texture = ExtResource("30_c0ifk")
 expand_mode = 1
 
-[node name="ScreenFrame3" type="TextureRect" parent="Cables" unique_id=1737756607 groups=["Shakable"]]
+[node name="ScreenFrame3" type="TextureRect" parent="CanvasLayer/Cables" unique_id=1737756607 groups=["Shakable"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +106,7 @@ phase_offset = 1.265
 max_rotation = 0.0
 max_scale_x = 0.0
 
-[node name="ScreenFrame6" type="TextureRect" parent="Cables/ScreenFrame3" unique_id=1085101243]
+[node name="ScreenFrame6" type="TextureRect" parent="CanvasLayer/Cables/ScreenFrame3" unique_id=1085101243]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -116,6 +122,3 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
-
-[node name="ScreenCam" parent="." unique_id=1291979417 instance=ExtResource("37_6aw6g")]
-position = Vector2(640, 360)

@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://ufp2v886p70v" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_0rigd"]
 [ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="3_81jbw"]
 [ext_resource type="Texture2D" uid="uid://dxromrurusrnr" path="res://Assets/TownBackgrounds/TownLayer-1.png" id="3_ly0hr"]
+[ext_resource type="Material" uid="uid://bsqawqp83u5sx" path="res://Shaders/Blur14.tres" id="4_s8jj8"]
 [ext_resource type="Texture2D" uid="uid://bpiy4qlsidlxu" path="res://Assets/TownBackgrounds/TownLayer0.png" id="5_0rigd"]
 [ext_resource type="Texture2D" uid="uid://b2ueuob1cu4cd" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.5.png" id="5_7gruq"]
 [ext_resource type="Texture2D" uid="uid://c3f6vbaefuesr" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.png" id="5_23crs"]
@@ -18,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://brtwmug0fxgd3" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.png" id="9_gl47p"]
 [ext_resource type="Texture2D" uid="uid://b7rc0fafi1bsj" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.5.png" id="11_s8jj8"]
 [ext_resource type="Texture2D" uid="uid://q4id364s5cur" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.5.png" id="13_x3e2u"]
+[ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur10.tres" id="17_x3e2u"]
+[ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur8.tres" id="19_p78ya"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -178,6 +181,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D" unique_id=1020081051]
+material = ExtResource("4_s8jj8")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 sprite_frames = SubResource("SpriteFrames_7gruq")
@@ -202,6 +206,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D" unique_id=367474307]
+material = ExtResource("17_x3e2u")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("5_0rigd")
@@ -212,6 +217,7 @@ motion_scale = Vector2(1.5, 1.5)
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2" unique_id=1189764013]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D" unique_id=1226604672]
+material = ExtResource("19_p78ya")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("6_ly0hr")
