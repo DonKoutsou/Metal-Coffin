@@ -93,13 +93,6 @@ offset_bottom = 0.0
 
 [node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
 
-[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=562179179]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 40.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
-
 [node name="PanelContainer3" type="PanelContainer" parent="." unique_id=542795109]
 anchors_preset = 12
 anchor_top = 1.0
@@ -109,22 +102,6 @@ offset_top = -34.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
-
-[node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -92.0
-offset_bottom = -92.0
-grow_vertical = 0
-
-[node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
-offset_bottom = 80.0
-
-[node name="Clock" parent="." unique_id=104315517 instance=ExtResource("18_adjny")]
-offset_left = 20.0
-offset_right = -20.0
-offset_bottom = 60.0
 
 [node name="CursorPos" type="Label" parent="." unique_id=498847629]
 anchors_preset = 7
@@ -148,20 +125,44 @@ script = ExtResource("11_avpxw")
 
 [node name="WeatherUI" parent="." unique_id=1503390521 instance=ExtResource("11_j7r7e")]
 
+[node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -92.0
+offset_bottom = -92.0
+grow_vertical = 0
+
 [node name="UnderStatUI" type="Control" parent="." unique_id=154155135]
 process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 58.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
 [node name="Inventory" parent="UnderStatUI" unique_id=431787009 instance=ExtResource("6_u1p46")]
-visible = false
 layout_mode = 1
+offset_top = -20.0
 mouse_force_pass_scroll_events = false
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=562179179]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
+
+[node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
+offset_bottom = 80.0
+
+[node name="Clock" parent="." unique_id=104315517 instance=ExtResource("18_adjny")]
+offset_left = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
 
 [node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("17_aessx")]
 visible = false

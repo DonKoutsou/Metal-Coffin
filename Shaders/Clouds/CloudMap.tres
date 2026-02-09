@@ -17,4 +17,4 @@ shader_parameter/Light = 0.8
 shader_parameter/Alpha = 1.0
 shader_parameter/shadow_strength = 0.3
 shader_parameter/shadow_parallax_amount = -0.04
-shader_parameter/rotation_angle = 0.0
+shader_parameter/rotation_angle = -1.0

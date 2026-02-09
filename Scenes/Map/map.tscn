@@ -222,7 +222,7 @@ N = ExtResource("31_xwtib")
 EventHandler = ExtResource("25_8mjbw")
 
 [node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=2053726518 node_paths=PackedStringArray("Background", "Grid", "Cloud", "Ground", "WeatherMan", "ClickSound") groups=["Clock"]]
-position = Vector2(576, 324)
+position = Vector2(209, 197)
 process_callback = 0
 position_smoothing_speed = 20.0
 editor_draw_limits = true

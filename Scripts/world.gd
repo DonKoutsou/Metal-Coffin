@@ -597,8 +597,8 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
 #--------------------------------------------------------
 func GameLost(reason : String):
 	get_tree().paused = true
-	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer.visible = true
-	$Map/SubViewportContainer/ViewPort/InScreenUI/Control3/PanelContainer/VBoxContainer/Label.text = reason
+	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer.visible = true
+	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer/VBoxContainer/Label.text = reason
 
 func EndGame() -> void:
 	#GetMap().GetScreenUi().CloseScreen()

@@ -6,6 +6,7 @@ class_name ControlledShipUI
 @export var CurrentCaptainLabel : Label
 @export var CurrentCaptainHullLabel : Label
 @export var CurrentCaptainFuelLabel : Label
+@export var DroneLabel : Label
 
 var currentShip : PlayerDrivenShip
 var Working : bool = true
@@ -29,6 +30,13 @@ func _physics_process(delta: float) -> void:
 	CurrentCaptainFuelLabel.text = "FUEL:{0}%".format([roundi(f)])
 	CurrentCaptainHullLabel.text = "HULL:{0}%".format([roundi(h)])
 	
+	var DroneText : String = ""
+	for g : Captain in currentShip.GetDroneDock().GetCaptains():
+		
+		var Droneh = g.GetStatCurrentValue(STAT_CONST.STATS.HULL) / g.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
+		DroneText += "{0}\n{1}%\n".format([g.GetCaptainName(), Droneh])
+	DroneLabel.text = DroneText
+	
 func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	currentShip = NewShip
 	
@@ -42,6 +50,12 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	CurrentCaptainFuelLabel.text = "FUEL:{0}%".format([roundi(f)])
 	CurrentCaptainHullLabel.text = "HULL:{0}%".format([roundi(h)])
 
+	var DroneText : String = ""
+	for g : Captain in currentShip.GetDroneDock().GetCaptains():
+		
+		var Droneh = g.GetStatCurrentValue(STAT_CONST.STATS.HULL) / g.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
+		DroneText += "{0}\n{1}%\n".format([g.GetCaptainName(), Droneh])
+	DroneLabel.text = DroneText
 
 func Selected(Ship : PlayerDrivenShip) -> void:
 	ShipControllerEventH.ShipChanged(Ship)
