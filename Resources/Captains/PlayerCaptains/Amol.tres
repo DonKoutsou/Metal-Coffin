@@ -12,6 +12,8 @@
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="11_i43ge"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_cqbt2"]
 [ext_resource type="Resource" uid="uid://bja0tfjegmyxx" path="res://Resources/Items/ShipParts/Shield/SGP-1 Ship Barrier.tres" id="12_w5the"]
+[ext_resource type="Resource" uid="uid://cykf6xqhg77rm" path="res://Resources/Items/ShipParts/Sonar/ShortSonar.tres" id="13_w5the"]
+[ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="14_rqvt2"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_7h107")
@@ -25,7 +27,7 @@ StatBase = 90.0
 [sub_resource type="Resource" id="Resource_k3tdg"]
 script = ExtResource("2_7h107")
 StatName = 5
-StatBase = 8.0
+StatBase = 10.0
 
 [sub_resource type="Resource" id="Resource_mcdo0"]
 script = ExtResource("2_7h107")
@@ -75,12 +77,13 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 [sub_resource type="Resource" id="Resource_b5a3k"]
 script = ExtResource("2_7h107")
 StatName = 13
-StatBase = 2.0
+StatBase = 3.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
 [sub_resource type="Resource" id="Resource_kn8fl"]
 script = ExtResource("2_7h107")
 StatName = 14
+StatBase = 1.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
 [sub_resource type="Resource" id="Resource_sbjrh"]
@@ -107,5 +110,5 @@ CaptainName = "Amol"
 CaptainPortrait = ExtResource("1_jwmx4")
 ShipIcon = ExtResource("5_w5the")
 CaptainStats = Array[ExtResource("2_7h107")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k"), SubResource("Resource_w5the"), SubResource("Resource_cqbt2"), SubResource("Resource_rqvt2"), SubResource("Resource_hn7lv"), SubResource("Resource_b5a3k"), SubResource("Resource_kn8fl"), SubResource("Resource_sbjrh"), SubResource("Resource_a17r0"), SubResource("Resource_m2dsq"), SubResource("Resource_smyis")])
-StartingItems = Array[ExtResource("3_q3468")]([ExtResource("11_i43ge"), ExtResource("9_lcv25"), ExtResource("11_cqbt2"), ExtResource("11_cqbt2"), ExtResource("11_cqbt2"), ExtResource("12_cqbt2"), ExtResource("12_cqbt2"), ExtResource("12_cqbt2"), ExtResource("11_i43ge"), ExtResource("12_w5the"), ExtResource("8_0otar"), ExtResource("8_0otar")])
+StartingItems = Array[ExtResource("3_q3468")]([ExtResource("11_i43ge"), ExtResource("9_lcv25"), ExtResource("11_cqbt2"), ExtResource("11_cqbt2"), ExtResource("11_cqbt2"), ExtResource("12_cqbt2"), ExtResource("12_cqbt2"), ExtResource("12_cqbt2"), ExtResource("11_i43ge"), ExtResource("12_w5the"), ExtResource("8_0otar"), ExtResource("8_0otar"), ExtResource("13_w5the"), ExtResource("14_rqvt2")])
 CheckForErrors = true

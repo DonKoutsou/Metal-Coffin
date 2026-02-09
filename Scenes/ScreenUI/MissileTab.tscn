@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_2m6j3"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_uy6ab"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_fka4o"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="4_2m6j3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="4_fka4o"]
 [ext_resource type="Texture2D" uid="uid://dete7kwckvyap" path="res://Assets/UIPiecies/Screen/SidePanels/MissileTab_FullQuality.png" id="4_nth3v"]
 [ext_resource type="StyleBox" uid="uid://d0w8t1031og62" path="res://Theme/Buttons/ButtonGreen.tres" id="5_fka4o"]
@@ -34,6 +35,7 @@ mouse_filter = 2
 script = ExtResource("1_2m6j3")
 MissileDockEventH = ExtResource("2_uy6ab")
 ShipControllerEventH = ExtResource("3_fka4o")
+DockEventH = ExtResource("4_2m6j3")
 UIEventH = ExtResource("4_fka4o")
 MissileSelectLight = NodePath("MissileSelectLight")
 AngleSelectLight = NodePath("AngleSelectLight")

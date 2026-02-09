@@ -54,12 +54,28 @@ func _physics_process(_delta: float) -> void:
 		return
 	var midpoint = get_viewport().get_visible_rect().size / 2
 	var Mousepos = get_viewport().get_mouse_position()
-	var NewX = clamp(Mousepos.x, LimitSide, LimitSide + midpoint.x)
-	var NewY = clamp(Mousepos.y, -LimitTop + midpoint.y, midpoint.y + 50)
+	
+	var Dist = max(0, midpoint.distance_squared_to(Mousepos) - 50000)
+	var MovementMagnitude = midpoint.direction_to(Mousepos) * Dist
+
+	var NewX = clamp($Camera2D.position.x + MovementMagnitude.x / 10000, LimitSide, LimitSide + midpoint.x)
+	var NewY = clamp($Camera2D.position.y + MovementMagnitude.y / 10000, 0, midpoint.y + 50)
 	#if ($Camera2D.global_position != Vector2(NewX, NewY)):
 	PositionChanged.emit()
 		
 	$Camera2D.position = Vector2(NewX, NewY)
+
+#func _input(event: InputEvent) -> void:
+	#if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
+		#var rel = -event.relative
+		#var midpoint = get_viewport().get_visible_rect().size / 2
+		#var Mousepos = get_viewport().get_mouse_position()
+		#var NewX = clamp($Camera2D.position.x + rel.x, LimitSide, LimitSide + midpoint.x)
+		#var NewY = clamp($Camera2D.position.y + rel.y, -LimitTop + midpoint.y, midpoint.y + 50)
+		##if ($Camera2D.global_position != Vector2(NewX, NewY)):
+		#PositionChanged.emit()
+		#
+		#$Camera2D.position = Vector2(NewX, NewY)
 
 enum Location {
 	WORKSHOP,

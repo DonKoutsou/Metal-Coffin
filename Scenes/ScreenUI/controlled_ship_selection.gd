@@ -41,9 +41,17 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 func Selected(Ship : PlayerDrivenShip) -> void:
 	ShipControllerEventH.ShipChanged(Ship)
 
-
+func GetCommanders() -> Array[MapShip]:
+	var Commanders : Array[MapShip]
+	
+	for g : PlayerDrivenShip in get_tree().get_nodes_in_group("PlayerShips"):
+		if (!g.Docked):
+			Commanders.append(g)
+	
+	return Commanders
+	
 func _on_drone_gas_range_snaped_chaned(Dir: bool) -> void:
-	var Ships = get_tree().get_nodes_in_group("PlayerShips")
+	var Ships = GetCommanders()
 	var currentindex = Ships.find(currentShip)
 	if (Dir):
 		currentindex = wrap(currentindex + 1, 0, Ships.size())
@@ -58,7 +66,7 @@ func _on_button_pressed() -> void:
 
 
 func _on_before_captain_pressed() -> void:
-	var Ships = get_tree().get_nodes_in_group("PlayerShips")
+	var Ships = GetCommanders()
 	var currentindex = Ships.find(currentShip)
 
 	currentindex = wrap(currentindex - 1, 0, Ships.size())
@@ -67,7 +75,7 @@ func _on_before_captain_pressed() -> void:
 	Selected(currentShip)
 
 func _on_after_captain_pressed() -> void:
-	var Ships = get_tree().get_nodes_in_group("PlayerShips")
+	var Ships = GetCommanders()
 	var currentindex = Ships.find(currentShip)
 
 	currentindex = wrap(currentindex + 1, 0, Ships.size())

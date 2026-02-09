@@ -70,6 +70,7 @@ animations = [{
 }]
 
 [node name="q" type="AnimatedSprite2D" unique_id=159958918 groups=["Shakable"]]
+process_mode = 3
 position = Vector2(0, -792)
 scale = Vector2(7.1875, 7.1875)
 sprite_frames = ExtResource("1_gqt8n")

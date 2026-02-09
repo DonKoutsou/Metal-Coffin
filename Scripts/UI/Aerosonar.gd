@@ -6,6 +6,7 @@ extends Control
 class_name  AeroSonar
 
 @export var ControllerEventH : ShipControllerEventHandler
+@export var DroneDockEventH : DroneDockEventHandler
 @export var OffsetAmmount : float
 @export var LineContainer : AeroSonarLine
 @export var SonalVisual : TextureRect
@@ -20,6 +21,8 @@ var Working : bool = false
 var Vol : float
 
 func _ready() -> void:
+	DroneDockEventH.DroneDocked.connect(DroneAdded)
+	DroneDockEventH.DroneUndocked.connect(DroneRemoved)
 	#connect to be notified that the controlled ship has changed
 	ControllerEventH.OnControlledShipChanged.connect(ControlledShipUpdated)
 	Controller = ControllerEventH.CurrentControlled
@@ -30,6 +33,23 @@ func _ready() -> void:
 	LineContainer.visible = false
 	GainLabel.visible = false
 
+func DroneAdded(Dr : Drone, Target : MapShip) -> void:
+	if (Target == Controller):
+		Working = FleetHasAerosonar()
+		Controller.ToggleSonarVisual(Working)
+		if (!Working):
+			LineContainer.OffsetAmmount = 0
+		else:
+			LineContainer.OffsetAmmount = CurrentOffset
+
+func DroneRemoved(Dr : Drone, Target : MapShip) -> void:
+	if (Target == Controller):
+		Working = FleetHasAerosonar()
+		Controller.ToggleSonarVisual(Working)
+		if (!Working):
+			LineContainer.OffsetAmmount = 0
+		else:
+			LineContainer.OffsetAmmount = CurrentOffset
 
 func SignalFound(Str : float) -> void:
 	Spkr.PlaySound(RadioSpeaker.RadioSound.BEEP, Str - 35)
@@ -40,9 +60,26 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 		#Implement deactivation of sonar collider
 	
 	Controller = NewController
-	Working = Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0
+	
+	Working = FleetHasAerosonar()
 	Controller.ToggleSonarVisual(Working)
 
+func FleetHasAerosonar() -> bool:
+	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0):
+		return true
+	for g : Captain in Controller.GetDroneDock().GetCaptains():
+		var CaptainSonarRange = g.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
+		if (CaptainSonarRange > 0):
+			return true
+	return false
+
+func GetCurrentFleetAerosonarRange() -> float:
+	var BiggestAeroSonarInFleer : float = Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
+	for g : Captain in Controller.GetDroneDock().GetCaptains():
+		var CaptainSonarRange = g.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
+		if (CaptainSonarRange > BiggestAeroSonarInFleer):
+			BiggestAeroSonarInFleer = CaptainSonarRange
+	return BiggestAeroSonarInFleer
 
 func SonarRotationChanged(NewVal: float) -> void:
 	CurrentAngle = wrap(CurrentAngle + (NewVal / 20), -PI, PI)
@@ -55,13 +92,16 @@ func _physics_process(delta: float) -> void:
 	Spkr.PlaySound(RadioSpeaker.RadioSound.STATIC, Vol - 15)
 	#queue_redraw()
 
+func IsPartOfFleet(SonarTarget : Node2D) -> bool:
+	return SonarTarget == Controller or SonarTarget in Controller.GetDroneDock().GetDockedShips()
+
 func UpdateContacts() -> void:
 	#we itterate through the stored targets we currently have to find the ones we actually seeing
 	#based on their heat signature
 	var ContactList : Dictionary[int, float]
-	for g in Controller.SonarTargets:
+	for g in Controller.GetSonarTargets():
 		#if ship is controlled ship we continue
-		if (g == Controller):
+		if (IsPartOfFleet(g)):
 			continue
 		
 		#find the angle at wich the ship is at from us
@@ -97,7 +137,7 @@ func Toggle(t : bool) -> void:
 
 #var tw : Tween
 func _on_close_pressed() -> void:
-	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) == 0):
+	if (!FleetHasAerosonar):
 		PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
 		return
 	ToggleSonar(!Working)
@@ -111,11 +151,13 @@ func ToggleSonar(t : bool) -> void:
 	GainLabel.visible = t
 	set_physics_process(t)
 	if (t):
-		Working = Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0
+		Working = FleetHasAerosonar()
 		Controller.ToggleSonarVisual(Working)
 		if (!Working):
 			PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
 			LineContainer.OffsetAmmount = 0
+		else:
+			LineContainer.OffsetAmmount = CurrentOffset
 	else:
 		Controller.ToggleSonarVisual(false)
 

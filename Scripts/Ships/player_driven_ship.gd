@@ -35,6 +35,13 @@ func _draw() -> void:
 		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 1.0 / CamZoom, true)
 		
 
+func GetSonarTargets() -> Array[Node2D]:
+	var Targets : Array[Node2D]
+	Targets.append_array(SonarTargets)
+	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
+		Targets.append_array(g.SonarTargets)
+	return Targets
+
 func Update(delta: float) -> void:
 	
 	UpdateElint(delta)

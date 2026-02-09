@@ -39,6 +39,7 @@ position = Vector2(640, 360)
 layer = 4
 
 [node name="Cables" type="Control" parent="CanvasLayer" unique_id=726149118]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -122,3 +123,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer" unique_id=192523852]
+color = Color(0.36308, 0.36308, 0.36308, 1)

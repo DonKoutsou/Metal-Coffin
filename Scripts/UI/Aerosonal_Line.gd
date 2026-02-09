@@ -44,7 +44,7 @@ func _draw() -> void:
 		
 		var amm = 0
 		if (Contacts.has(roundedmapped)):
-			amm = Contacts[roundedmapped]
+			amm = max(0, Contacts[roundedmapped])
 			
 			#if (amm * 20 < OffsetAmmount):
 				#amm = 0

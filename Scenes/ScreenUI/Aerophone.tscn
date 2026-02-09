@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cvjx6yhssr224" path="res://Scripts/UI/Aerosonal_Line.gd" id="1_u0q8c"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_6guy7"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_fw736"]
 [ext_resource type="Texture2D" uid="uid://byfcxaxg7epni" path="res://Assets/UIPiecies/Screen/SidePanels/Sonar.png" id="3_mi4l8"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_4wgxe"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="6_jiwdy"]
@@ -22,6 +23,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_5vs2h")
 ControllerEventH = ExtResource("2_6e8xg")
+DroneDockEventH = ExtResource("3_fw736")
 OffsetAmmount = 10.0
 LineContainer = NodePath("TextureRect2/Control")
 SonalVisual = NodePath("TextureRect2")

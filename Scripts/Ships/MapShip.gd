@@ -648,28 +648,35 @@ func GetShipSpeedVec() -> Vector2:
 	
 func GetClosestElint() -> Vector2:
 	var closest : Vector2 = Vector2.ZERO
-	var closestdist : float = 999999999999
+	var closestdist : float = 999999999999999999
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g]
-		var dist = global_position.distance_to(ship.global_position)
+		var dist = global_position.distance_squared_to(ship.global_position)
 		if (closestdist > dist):
 			closest = ship.global_position
 			closestdist = dist
+	for g:MapShip in GetDroneDock().GetDockedShips():
+		var DroneClosest = g.GetClosestElint()
+		var dist = global_position.distance_squared_to(DroneClosest)
+		if(dist < closestdist):
+			closest = DroneClosest
 	return closest
 
 func GetClosestElintLevel() -> int:
 	if (ElintContacts.size() == 0):
 		return -1
 	var closest : MapShip
-	var closestdist : float = 999999999999
+	var closestdist : float = 9999999999999999
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g]
-		var dist = global_position.distance_to(ship.global_position)
+		var dist = global_position.distance_squared_to(ship.global_position)
 		if (closestdist > dist):
 			closest = ship
 			closestdist = dist
-
+	
 	var Newlvl = GetElintLevel(global_position.distance_squared_to(closest.global_position), closest.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+	for g:MapShip in GetDroneDock().GetDockedShips():
+		Newlvl = max(Newlvl, g.GetClosestElintLevel())
 	return Newlvl
 	
 func GetElintLevel(DistSq : float, RadarL : float) -> int:

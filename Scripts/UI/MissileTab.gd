@@ -4,6 +4,7 @@ class_name MissileTab
 var Armed = false
 @export var MissileDockEventH : MissileDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
+@export var DockEventH : DroneDockEventHandler
 @export var UIEventH : UIEventHandler
 
 @export_group("Nodes")
@@ -27,11 +28,28 @@ var AvailableMissiles : Array[MissileItem]
 
 var Showing = false
 
+
+
 func _ready() -> void:
 	Initialise()
 	MissileLaunched.connect(UIEventH.OnMissilgeLaunched)
+	DockEventH.DroneDocked.connect(DroneAdded)
+	DockEventH.DroneUndocked.connect(DroneRemoved)
 	#visible = false
-	
+
+func DroneRemoved(Dr : Drone, Target : MapShip) -> void:
+	if (Target == ConnectedShip):
+		if (Armed):
+			DissarmMiss()
+		UpdateAvailableMissiles()
+
+func DroneAdded(Dr : Drone, Target : MapShip) -> void:
+	if (Target == ConnectedShip):
+		if (Armed):
+			DissarmMiss()
+		UpdateAvailableMissiles()
+		
+
 func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
 	if (Ship == ConnectedShip):
 		return
@@ -90,6 +108,8 @@ func UpdateAvailableMissiles() -> void:
 	var sizeb = AvailableMissiles.size()
 	var Misses : Array[MissileItem] = []
 	Misses.append_array(ConnectedShip.Cpt.GetCharacterInventory().GetMissile())
+	for g :PlayerDrivenShip in ConnectedShip.GetDroneDock().GetDockedShips():
+		Misses.append_array(g.Cpt.GetCharacterInventory().GetMissile())
 	#for g in ConnectedShip.GetDroneDock().DockedDrones:
 		#Misses.append_array(Missiles[g])
 	AvailableMissiles =  Misses
@@ -111,8 +131,8 @@ func MissileAdded(_MIs : MissileItem, Target : Captain) -> void:
 		#UpdateMissileSelect()
 
 func MissileRemoved(_MIs : MissileItem, Target : Captain) -> void:
-	if (Target == ConnectedShip.Cpt):
-		UpdateAvailableMissiles()
+	#if (Target == ConnectedShip.Cpt):
+	UpdateAvailableMissiles()
 	#var Ship = FindShip(Target)
 	#if (MIs.Type == 1):
 		#return

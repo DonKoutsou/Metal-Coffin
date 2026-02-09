@@ -161,6 +161,7 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 				UpdateTime(timepast)
 	else:
 		if (ship is PlayerDrivenShip):
+			visible = !ship.Docked
 			TargetLocations = ship.TargetLocations
 			Fuel_Range = ship.GetFuelRange()
 

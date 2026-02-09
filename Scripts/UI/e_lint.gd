@@ -63,12 +63,21 @@ func ToggleElint(t : bool) -> void:
 		
 func UpdateConnectedShip(Sh : MapShip) -> void:
 	ConnectedShip = Sh
-	var HasElint = Sh.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0
+	var HasElint = FleetHasElint()
 	ToggleElint(HasElint)
 	if (!HasElint):
 		for g in Lights:
 			g.visible = false
-		
+
+func FleetHasElint() -> bool:
+	if (ConnectedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0):
+		return true
+	for g : Captain in ConnectedShip.GetDroneDock().GetCaptains():
+		var CaptainSonarRange = g.GetStatFinalValue(STAT_CONST.STATS.ELINT)
+		if (CaptainSonarRange > 0):
+			return true
+	return false
+
 var d = 0.4
 func _physics_process(delta: float) -> void:
 	

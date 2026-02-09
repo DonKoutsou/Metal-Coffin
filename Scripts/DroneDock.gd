@@ -220,13 +220,13 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	var docks = $DroneSpots.get_children()
 
 	var pos : Vector2
-	var Offset = 5
+	var Offset = 2
 	for g in docks.size() + 1:
 		if (Helper.is_even(g)):
 			pos = Vector2(-Offset, -Offset)
 		else:
 			pos = Vector2(-Offset, Offset)
-			Offset += 5
+			Offset += 2
 
 	var trans = RemoteTransform2D.new()
 	trans.update_rotation = false
