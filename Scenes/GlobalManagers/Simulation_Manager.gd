@@ -8,6 +8,7 @@ static var Paused : bool = false
 static var SimulationSpeed : float = 0.2
 
 signal SpeedChanged(t : bool)
+signal SimulationToggled(t : bool)
 
 static  var Instance : SimulationManager
 
@@ -40,7 +41,7 @@ func TogglePause(t : bool) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Simulation paused")
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Simulation unpaused")
-	
+	SimulationToggled.emit(t)
 	#get_child(0).TogglePause(t)
 
 func _input(event: InputEvent) -> void:

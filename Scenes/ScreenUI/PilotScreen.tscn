@@ -17,9 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="9_yjfdw"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/SteeringWheelUI.tscn" id="10_w258d"]
 [ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Aerophone.tscn" id="11_jqinv"]
-[ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="13_eeg0m"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_ce8jv"]
-[ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="14_ecvfe"]
 [ext_resource type="StyleBox" uid="uid://cpq6h2wwtgr07" path="res://Theme/Buttons/ButtonBlue.tres" id="18_eeg0m"]
 [ext_resource type="StyleBox" uid="uid://chq4sdt1mihdh" path="res://Theme/Buttons/ButtonBlue_Pressed.tres" id="19_ecvfe"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="20_eeg0m"]
@@ -34,7 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/ELint.tscn" id="27_uojtp"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/ControlledShipSelection.tscn" id="28_hc833"]
 
-[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("Thrust", "Steer", "PilotScreenSet", "SpeedSimulationButton", "ZoomDial", "YDial", "XDial")]
+[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("Thrust", "Steer", "PilotScreenSet", "SpeedSimulationButton", "PauseSimulationButton", "ZoomDial", "YDial", "XDial")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,6 +47,7 @@ EventHandler = ExtResource("2_ecvfe")
 ControllerEventH = ExtResource("3_w258d")
 PilotScreenSet = NodePath("PanelContainer")
 SpeedSimulationButton = NodePath("SpeedSimulation")
+PauseSimulationButton = NodePath("SimulationButton")
 ZoomDial = NodePath("ZoomDial")
 YDial = NodePath("YDial")
 XDial = NodePath("XDial")
@@ -362,16 +361,17 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -52.0
-offset_top = -530.0
-offset_right = -27.0
-offset_bottom = -479.0
+offset_left = -54.0
+offset_top = -538.72
+offset_right = -25.0
+offset_bottom = -470.27997
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = ExtResource("13_eeg0m")
-theme_override_styles/pressed = ExtResource("14_ecvfe")
-theme_override_styles/hover = ExtResource("13_eeg0m")
+theme_override_styles/normal = ExtResource("6_bpouu")
+theme_override_styles/pressed = ExtResource("7_yjfdw")
+theme_override_styles/hover = ExtResource("6_bpouu")
+toggle_mode = true
 
 [node name="InventoryButton" type="Button" parent="." unique_id=1655197087 groups=["Buttons"]]
 layout_mode = 1
@@ -609,7 +609,7 @@ scale = Vector2(0.8, 0.8)
 [connection signal="SteeringDitChanged" from="SteeringWheel" to="." method="Steering_Direction_Changed"]
 [connection signal="SteeringOffseted" from="SteeringWheel" to="." method="Steer_Offseted"]
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
-[connection signal="pressed" from="SimulationButton" to="." method="Sim_Pause_Pressed"]
+[connection signal="toggled" from="SimulationButton" to="." method="Sim_Pause_Toggled"]
 [connection signal="pressed" from="InventoryButton" to="." method="Inventory_Pressed"]
 [connection signal="pressed" from="Regroup" to="." method="Regroup_Pressed"]
 [connection signal="pressed" from="MarkerEditorButton" to="." method="Marker_Editor_Button_Pressed"]

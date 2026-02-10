@@ -8,6 +8,7 @@ class_name PilotScreenUI
 @export var PilotScreenSet : PilotScreenSettings
 @export_group("Buttons")
 @export var SpeedSimulationButton : TextureButton
+@export var PauseSimulationButton : Button
 @export var ZoomDial : Dial
 @export var YDial : Dial
 @export var XDial : Dial
@@ -34,17 +35,23 @@ func _ready() -> void:
 	ControlledShipSwitched(ControllerEventH.CurrentControlled)
 	EventHandler.SpeedForced.connect(ShipSpeedForced)
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
+
 	EventHandler.ZoomChangedFromScreen.connect(ZoomDial.AddCustomMovement)
 	EventHandler.YChangedFromScreen.connect(YDial.AddCustomMovement)
 	EventHandler.XChangedFromScreen.connect(XDial.AddCustomMovement)
 	UISoundMan.GetInstance().Refresh()
 	
 	SpeedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)
+	PauseSimulationButton.set_pressed_no_signal(!SimulationManager.IsPaused())
 	_on_steer_button_toggled(PilotScreenSet.SteerState)
 
 func SpeedUpdated(t : bool) -> void:
 	SpeedSimulationButton.set_pressed_no_signal(t)
 	SpeedSimulationButton.button_down.emit()
+
+func SimulationToggled(t : bool) -> void:
+	PauseSimulationButton.set_pressed_no_signal(!t)
+	PauseSimulationButton.button_down.emit()
 
 func ShipSpeedSet(NewSpeed : float) -> void:
 	Thrust.UpdateHandle(NewSpeed)
@@ -75,11 +82,10 @@ func _on_speed_simulation_toggled(toggled_on: bool) -> void:
 	SimulationManager.GetInstance().SpeedToggle(toggled_on)
 
 
-func Sim_Pause_Pressed() -> void:
+func Sim_Pause_Toggled(toggled_on: bool) -> void:
 	if (World.WORLDST != World.WORLDSTATE.NORMAL):
 		return
-	var simmulationPaused = !SimulationManager.GetInstance().Paused
-	SimulationManager.GetInstance().TogglePause(simmulationPaused)
+	SimulationManager.GetInstance().TogglePause(!toggled_on)
 
 
 func Inventory_Pressed() -> void:

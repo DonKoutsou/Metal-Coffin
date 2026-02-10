@@ -61,6 +61,7 @@ func ToggleForegroundUI(t : bool) -> void:
 		var SimulationMan = SimulationManager.GetInstance()
 		if (SimulationMan != null):
 			SimulationMan.SpeedChanged.connect(PilotScreen.SpeedUpdated)
+			SimulationMan.SimulationToggled.connect(PilotScreen.SimulationToggled)
 	else:
 		PilotScreen.queue_free()
 

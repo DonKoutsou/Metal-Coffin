@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_5ggyd"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="5_5ggyd"]
 [ext_resource type="AudioStream" uid="uid://c866lg2xo47bl" path="res://Assets/Sounds/workshop.mp3" id="5_ahaja"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="6_w8i83"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]
 content_margin_left = 5.0
@@ -76,6 +77,7 @@ alignment = 1
 [node name="ItemDesc" parent="VBoxContainer/HBoxContainer" unique_id=1476076330 instance=ExtResource("5_5ggyd")]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("6_w8i83")
 
 [node name="LeaveMerch" type="Button" parent="VBoxContainer" unique_id=1463405966]
 layout_mode = 2
