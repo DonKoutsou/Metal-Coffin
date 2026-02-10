@@ -39,6 +39,7 @@ func _ready() -> void:
 	EventHandler.XChangedFromScreen.connect(XDial.AddCustomMovement)
 	UISoundMan.GetInstance().Refresh()
 	
+	SpeedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)
 	_on_steer_button_toggled(PilotScreenSet.SteerState)
 
 func SpeedUpdated(t : bool) -> void:

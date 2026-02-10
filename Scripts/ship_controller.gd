@@ -171,9 +171,9 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 	
 	if (Sh == ControlledShip):
 		if (Sh.Command != null):
-			OnShipChanged(Sh.Command)
+			ShipControllerEventH.ShipChanged(Sh.Command)
 		else:
-			OnShipChanged(AvailableShips[0])
+			ShipControllerEventH.ShipChanged(AvailableShips[0])
 
 func OnTargetPositionChanged(Pos : Vector2, Add : bool) -> void:
 	if (ControlledShip.Command != null):
@@ -189,6 +189,7 @@ func OnTargetPositionChanged(Pos : Vector2, Add : bool) -> void:
 
 func OnTargetShipPicked(Target : MapShip) -> void:
 	ControlledShip.AddTargetShip(Target)
+	
 
 func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip.ToggleFuelRangeVisibility(false)
@@ -196,6 +197,7 @@ func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	UIEventH.OnShipUpdated(NewShip)
 	NewShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
+	#ShipControllerEventH.ShipChanged(ControlledShip)
 	#ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
 	
 

@@ -311,6 +311,10 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	
 	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
 	var CardF = FightScene.instantiate() as Card_Fight
+	#CardF.gui_input.connect(GetMap()._MAP_INPUT)
+	#CardF.mouse_entered.connect(GetMap().MouseIn)
+	#CardF.mouse_exited.connect(GetMap().MouseOut)
+	
 	CardF.CardFightEnded.connect(CardFightEnded)
 	CardF.CardFightDestroyed.connect(CardFightDestroyed)
 	

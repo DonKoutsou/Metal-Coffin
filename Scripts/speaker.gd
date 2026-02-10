@@ -43,7 +43,7 @@ func PlaySound(Sound : RadioSound, Volume : float = 0) -> void:
 	DelSound.bus = "MapSounds"
 	DelSound.volume_db = Volume
 	DelSound.autoplay = true
-	DelSound.finished.connect(Finished)
+	DelSound.Deleted.connect(RadioSpeaker.Finished.bind(Sound))
 	add_child(DelSound)
 	PlayingSounds += 1
 	L.Toggle(true, true)
@@ -54,7 +54,7 @@ func PlaySound(Sound : RadioSound, Volume : float = 0) -> void:
 		L.Toggle(false)
 	#CurrentlyPlayed.erase(Sound)
 
-func Finished(Sound : DeletableSound) -> void:
+static func Finished(Sound : RadioSound) -> void:
 	CurrentlyPlayed.erase(Sound)
 
 func ApplyShake(amm : float = 1) -> void:

@@ -112,7 +112,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CaptainFuel" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=213874189]
-visible = false
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2

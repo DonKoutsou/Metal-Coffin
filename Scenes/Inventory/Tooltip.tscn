@@ -3,6 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_y2t8f"]
 
 [node name="PanelContainer" type="PanelContainer" unique_id=861191945]
+z_index = 1
 offset_right = 318.0
 offset_bottom = 8.0
 size_flags_horizontal = 0

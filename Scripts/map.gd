@@ -348,6 +348,12 @@ func _MAP_INPUT(event: InputEvent) -> void:
 				ControllerEvH.OnTargetPositionPicked(pos)
 				PopUpManager.GetInstance().DoFadeNotif("Updating Course")
 
+func MouseIn() -> void:
+	_InScreenUI.MousePointer.MouseIn()
+
+func MouseOut() -> void:
+	_InScreenUI.MousePointer.MouseOut()
+
 func MoveTargetSpotSelected(Spot : SpotMarker) -> void:
 	if (Input.is_action_pressed("Cnt")):
 		ControllerEvH.OnTargetPositionAdded(Spot.global_position)

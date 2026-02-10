@@ -56,7 +56,7 @@ corner_detail = 1
 [node name="ShipStatContainer" type="VBoxContainer" unique_id=1703653256 node_paths=PackedStringArray("StatNameLabel", "StatValueLabel", "ShipStatBar", "ItemStatBar", "ItemNegativeBar")]
 custom_minimum_size = Vector2(200, 0)
 offset_right = 200.0
-offset_bottom = 23.0
+offset_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0

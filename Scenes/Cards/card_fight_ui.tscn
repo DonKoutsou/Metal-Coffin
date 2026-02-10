@@ -2,18 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scripts/CardFight/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scripts/CardFight/card_fight_ui.gd" id="1_u6pkr"]
-[ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="2_c6mlu"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Cards/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
-[ext_resource type="AudioStream" uid="uid://demm6a82oqqil" path="res://Assets/Sounds/cash2.mp3" id="5_anehw"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="5_lleca"]
-[ext_resource type="AudioStream" uid="uid://bp73cekansu4g" path="res://Assets/Sounds/BeepConfirm.mp3" id="6_anehw"]
-[ext_resource type="AudioStream" uid="uid://dsflespepg17h" path="res://Assets/Sounds/BeepReject.mp3" id="7_xj5gt"]
-[ext_resource type="AudioStream" uid="uid://qbcciug7j8jy" path="res://Assets/Sounds/BeepLong.mp3" id="8_xj5gt"]
 [ext_resource type="Texture2D" uid="uid://vejt8vmsfnfl" path="res://Assets/UIPiecies/Screen/ScreenFrames/CardFightScreen.png" id="9_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Cards/discard_pile.tscn" id="11_omcrt"]
-[ext_resource type="AudioStream" uid="uid://er1a6ts6crml" path="res://Assets/Sounds/CardIn.mp3" id="12_rpmjo"]
-[ext_resource type="AudioStream" uid="uid://bkvuy1fav1gyx" path="res://Assets/Sounds/CardOut2.mp3" id="13_w3ip8"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="14_80dwx"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="15_lf8xs"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="16_ksx0p"]
@@ -51,17 +44,17 @@ ReservesBar = NodePath("SegmentedHP2")
 PlayCardInsert = NodePath("PlayInsert/Control")
 DrawCardInsert = NodePath("DrawInsert/Control")
 DiscardInsert = NodePath("DiscardInsert/Control")
-CardInsertSound = ExtResource("13_w3ip8")
-CardOutSound = ExtResource("12_rpmjo")
-CardDiscardSound = ExtResource("5_anehw")
-CardSound = ExtResource("2_c6mlu")
-BeepSound = ExtResource("6_anehw")
-BeepNoSound = ExtResource("7_xj5gt")
-BeepLong = ExtResource("8_xj5gt")
 PlayerCardPlacementInputBlocker = NodePath("PlayerCardPlacementInputBlocker")
 HardCardLabel = NodePath("Label")
 DeckUI = NodePath("DeckButton")
 DiscardPile = NodePath("DiscardPile")
+CardInsertSound = "uid://bkvuy1fav1gyx"
+CardOutSound = "uid://demm6a82oqqil"
+CardDiscardSound = "uid://demm6a82oqqil"
+CardSound = "uid://bj4o8xjushlvn"
+BeepSound = "uid://bp73cekansu4g"
+BeepNoSound = "uid://dsflespepg17h"
+BeepLong = "uid://qbcciug7j8jy"
 
 [node name="ScreenFrame2" type="TextureRect" parent="." unique_id=1893763889]
 custom_minimum_size = Vector2(0, 38.045)
@@ -155,10 +148,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1067.0
-offset_top = 516.0
+offset_left = 1066.0
+offset_top = 514.0
 offset_right = 1106.0
-offset_bottom = 671.0
+offset_bottom = 670.0
 grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 4
@@ -173,9 +166,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1177.0
-offset_top = 516.0
-offset_right = 1215.0
+offset_left = 1175.0
+offset_top = 512.0
+offset_right = 1216.0
 offset_bottom = 607.0
 grow_horizontal = 1
 grow_vertical = 1
@@ -184,10 +177,10 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 
 [node name="PullReserves" type="Button" parent="." unique_id=2065884608 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1217.86
-offset_top = 641.43744
-offset_right = 1247.4225
-offset_bottom = 684.00006
+offset_left = 1217.2615
+offset_top = 642.0359
+offset_right = 1245.3876
+offset_bottom = 683.4015
 rotation = 1.57079
 theme_override_styles/normal = ExtResource("14_80dwx")
 theme_override_styles/pressed = ExtResource("15_lf8xs")
@@ -196,9 +189,9 @@ theme_override_styles/hover = ExtResource("14_80dwx")
 [node name="DrawCard" type="Button" parent="." unique_id=1230920392 groups=["Buttons"]]
 layout_mode = 0
 offset_left = 1034.0
-offset_top = 181.0
-offset_right = 1080.0
-offset_bottom = 205.0
+offset_top = 182.0
+offset_right = 1079.0
+offset_bottom = 204.0
 theme_override_styles/normal = ExtResource("16_ksx0p")
 theme_override_styles/pressed = ExtResource("17_w6rgp")
 theme_override_styles/hover = ExtResource("16_ksx0p")
@@ -321,6 +314,8 @@ text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="mouse_entered" from="PlayerCardPlacement" to="." method="MouseIn"]
+[connection signal="mouse_exited" from="PlayerCardPlacement" to="." method="MouseOut"]
 [connection signal="pressed" from="PullReserves" to="." method="_on_pull_reserves_pressed"]
 [connection signal="pressed" from="DrawCard" to="." method="_on_deck_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

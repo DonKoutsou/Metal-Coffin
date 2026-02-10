@@ -27,14 +27,15 @@ func _physics_process(delta: float) -> void:
 	var f = (FuelStats["CurrentFuel"] / FuelStats["MaxFuel"]) * 100
 	var h = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
 	
-	CurrentCaptainFuelLabel.text = "FUEL:{0}%".format([roundi(f)])
-	CurrentCaptainHullLabel.text = "HULL:{0}%".format([roundi(h)])
+	CurrentCaptainFuelLabel.text = "F:{0}%".format([roundi(f)])
+	CurrentCaptainHullLabel.text = "H:{0}%".format([roundi(h)])
 	
 	var DroneText : String = ""
 	for g : Captain in currentShip.GetDroneDock().GetCaptains():
 		
 		var Droneh = g.GetStatCurrentValue(STAT_CONST.STATS.HULL) / g.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-		DroneText += "{0}\n{1}%\n".format([g.GetCaptainName(), Droneh])
+		var Dronef = g.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) / g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) * 100
+		DroneText += "-----------------\n{0}\nH:{1}% | F:{2}%\n".format([g.GetCaptainName(), Droneh, roundi(Dronef)])
 	DroneLabel.text = DroneText
 	
 func ShipChanged(NewShip : PlayerDrivenShip) -> void:
@@ -54,7 +55,7 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	for g : Captain in currentShip.GetDroneDock().GetCaptains():
 		
 		var Droneh = g.GetStatCurrentValue(STAT_CONST.STATS.HULL) / g.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-		DroneText += "{0}\n{1}%\n".format([g.GetCaptainName(), Droneh])
+		DroneText += "-----------\n{0}\n{1}%\n".format([g.GetCaptainName(), Droneh])
 	DroneLabel.text = DroneText
 
 func Selected(Ship : PlayerDrivenShip) -> void:

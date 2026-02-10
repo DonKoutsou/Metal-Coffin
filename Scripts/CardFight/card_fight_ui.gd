@@ -10,17 +10,19 @@ class_name ExternalCardFightUI
 @export var PlayCardInsert : Control
 @export var DrawCardInsert : Control
 @export var DiscardInsert : Control
-@export var CardInsertSound : AudioStream
-@export var CardOutSound : AudioStream
-@export var CardDiscardSound : AudioStream
-@export var CardSound : AudioStream
-@export var BeepSound : AudioStream
-@export var BeepNoSound : AudioStream
-@export var BeepLong : AudioStream
 @export var PlayerCardPlacementInputBlocker : Control
 @export var HardCardLabel : Label
 @export var DeckUI : DeckPileUI
 @export var DiscardPile : DiscardPileUI
+@export_group("Sound Files")
+@export_file("*.mp3") var CardInsertSound : String
+@export_file("*.mp3") var CardOutSound : String
+@export_file("*.mp3") var CardDiscardSound : String
+@export_file("*.mp3") var CardSound : String
+@export_file("*.mp3") var BeepSound : String
+@export_file("*.mp3") var BeepNoSound : String
+@export_file("*.mp3") var BeepLong : String
+
 
 signal OnDeckPressed
 signal OnShipFallbackPressed
@@ -43,6 +45,7 @@ func HideInfo() -> void:
 	DiscardPile.HideAmm()
 
 func _ready() -> void:
+	set_physics_process(false)
 	Instance = self
 	PlayerCardPlecement.visible = true
 	PlayerCardPlacementInputBlocker.visible = false
@@ -252,7 +255,7 @@ func _on_button_pressed() -> void:
 
 func PlayCardSound() -> void:
 	var S = DeletableSoundGlobal.new()
-	S.stream = CardSound
+	S.stream = ResourceLoader.load(CardSound)
 	S.autoplay = true
 	S.pitch_scale = randf_range(0.8, 1.2)
 	#S.bus = "MapSounds"
@@ -271,18 +274,18 @@ func PlayCardInsertSound(type : CardSoundType) -> void:
 func GetSoundSample(type : CardSoundType) -> AudioStream:
 	var Sample : AudioStream
 	if (type == CardSoundType.DISCARD):
-		Sample = CardDiscardSound
+		Sample = ResourceLoader.load(CardDiscardSound)
 	else : if (type == CardSoundType.INSERT):
-		Sample = CardInsertSound
+		Sample = ResourceLoader.load(CardInsertSound)
 		
 	else : if (type == CardSoundType.EXIT):
-		Sample = CardOutSound
+		Sample = ResourceLoader.load(CardOutSound)
 	else : if (type == CardSoundType.BEEP):
-		Sample = BeepSound
+		Sample = ResourceLoader.load(BeepSound)
 	else : if (type == CardSoundType.BEEPNO):
-		Sample = BeepNoSound
+		Sample = ResourceLoader.load(BeepNoSound)
 	else : if (type == CardSoundType.BEEPLONG):
-		Sample = BeepLong
+		Sample = ResourceLoader.load(BeepLong)
 	return Sample
 	
 enum CardSoundType{
@@ -297,3 +300,15 @@ enum CardSoundType{
 
 func _on_pause_pressed() -> void:
 	EventH.OnPausePressed()
+
+func _physics_process(delta: float) -> void:
+	Input.set_deferred("mouse_mode", Input.MOUSE_MODE_VISIBLE)
+
+
+func MouseIn() -> void:
+	set_physics_process(true)
+
+
+
+func MouseOut() -> void:
+	set_physics_process(false)

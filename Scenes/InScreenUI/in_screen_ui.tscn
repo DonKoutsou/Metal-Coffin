@@ -22,17 +22,20 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbfwx"]
 bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
+shadow_size = 100
+anti_aliasing = false
 
 [node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "Screen")]
 process_mode = 3
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_3cf0e")
-_Inventory = NodePath("UnderStatUI/Inventory")
+_Inventory = NodePath("VBoxContainer/UnderStatUI/Inventory")
 _MapMarkerEditor = NodePath("MapMarkerEditor")
 PopupPlecement = NodePath("CanvasLayer/PopupPlecement")
 EventHandler = ExtResource("3_b4kau")
-UnderstatUI = NodePath("UnderStatUI")
+UnderstatUI = NodePath("VBoxContainer/UnderStatUI")
 OverStatUI = NodePath("OverStatUI")
 MousePointer = NodePath("CanvasLayer/InScreenMouse")
 Screen = NodePath("CanvasLayer/Screen")
@@ -93,15 +96,25 @@ offset_bottom = 0.0
 
 [node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
 
+[node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -92.0
+offset_bottom = -92.0
+grow_vertical = 0
+
 [node name="PanelContainer3" type="PanelContainer" parent="." unique_id=542795109]
+custom_minimum_size = Vector2(0, 40)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -34.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
+
+[node name="WeatherUI" parent="." unique_id=1503390521 instance=ExtResource("11_j7r7e")]
 
 [node name="CursorPos" type="Label" parent="." unique_id=498847629]
 anchors_preset = 7
@@ -110,8 +123,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -80.5
-offset_top = -50.0
+offset_top = -40.0
 offset_right = 80.5
+offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 1
@@ -123,43 +137,37 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("11_avpxw")
 
-[node name="WeatherUI" parent="." unique_id=1503390521 instance=ExtResource("11_j7r7e")]
-
-[node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -92.0
-offset_bottom = -92.0
-grow_vertical = 0
-
-[node name="UnderStatUI" type="Control" parent="." unique_id=154155135]
-process_mode = 1
-layout_mode = 3
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1840033001]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 58.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/separation = 0
 
-[node name="Inventory" parent="UnderStatUI" unique_id=431787009 instance=ExtResource("6_u1p46")]
-layout_mode = 1
-offset_top = -20.0
-mouse_force_pass_scroll_events = false
-
-[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=562179179]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 40.0
-grow_horizontal = 2
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=562179179]
+z_index = 1
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
 
+[node name="UnderStatUI" type="Control" parent="VBoxContainer" unique_id=154155135]
+process_mode = 1
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Inventory" parent="VBoxContainer/UnderStatUI" unique_id=431787009 instance=ExtResource("6_u1p46")]
+visible = false
+layout_mode = 1
+mouse_force_pass_scroll_events = false
+
 [node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
-offset_bottom = 80.0
+z_index = 1
 
 [node name="Clock" parent="." unique_id=104315517 instance=ExtResource("18_adjny")]
+z_index = 1
 offset_left = 20.0
 offset_right = -20.0
 offset_bottom = 60.0

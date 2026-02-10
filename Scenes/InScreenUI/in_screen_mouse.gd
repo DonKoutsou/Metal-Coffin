@@ -24,7 +24,7 @@ func SwitchMouse(Mode : MouseMode) -> void:
 			texture = ResourceLoader.load(DirectionalPointer)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 
 	var mousepos = get_global_mouse_position()
 	var Local = mousepos - get_viewport().global_canvas_transform.origin
@@ -32,5 +32,14 @@ func _process(_delta: float) -> void:
 	if (MouseInScreen):
 		position = mousepos
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		#print("mouse hidden " + var_to_str(Time.get_ticks_msec()))
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+#func MouseOut() -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	#
+	#
+#func MouseIn() -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	

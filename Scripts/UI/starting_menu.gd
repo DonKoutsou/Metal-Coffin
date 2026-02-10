@@ -185,3 +185,10 @@ func _on_command_line_start_prologue(SkipStory: bool) -> void:
 	if (!Run):
 		return
 	PrologueStart.emit(false, SkipStory)
+
+
+#func MouseIn() -> void:
+	#$SubViewportContainer/SubViewport/InScreenMouse.MouseIn()
+#
+#func MouseOut() -> void:
+	#$SubViewportContainer/SubViewport/InScreenMouse.MouseOut().

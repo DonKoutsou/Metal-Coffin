@@ -3,7 +3,7 @@ class_name PortNotification
 @export var PortAvailableCol: Color
 @export var PortUnAvailableCol: Color
 @export var ShipControllerEventH : ShipControllerEventHandler
-@export var BuffText : Label
+#@export var BuffText : Label
 @export var LandingText : Label
 
 var CurrentShip : PlayerDrivenShip
