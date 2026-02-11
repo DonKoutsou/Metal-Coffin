@@ -247,3 +247,13 @@ func ShipDestroyed() -> void:
 
 func _on_button_pressed() -> void:
 	OnFallbackPressed.emit()
+
+
+func _on_panel_container_2_mouse_entered() -> void:
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = true
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = true
+
+
+func _on_panel_container_2_mouse_exited() -> void:
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = false
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = false

@@ -302,7 +302,8 @@ func _on_pause_pressed() -> void:
 	EventH.OnPausePressed()
 
 func _physics_process(delta: float) -> void:
-	Input.set_deferred("mouse_mode", Input.MOUSE_MODE_VISIBLE)
+	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
+	#Input.set_deferred("mouse_mode", Input.MOUSE_MODE_VISIBLE)
 
 
 func MouseIn() -> void:

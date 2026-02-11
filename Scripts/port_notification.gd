@@ -15,8 +15,12 @@ func _ready() -> void:
 func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
 	if (CurrentShip != null):
 		CurrentShip.disconnect("PortChanged", PortUpdated)
+		CurrentShip.disconnect("LandingEnded", PortUpdated)
+		CurrentShip.disconnect("TakeoffStarted", PortUpdated)
 	CurrentShip = NewShip
 	NewShip.connect("PortChanged", PortUpdated)
+	NewShip.connect("LandingEnded", PortUpdated)
+	NewShip.connect("TakeoffStarted", PortUpdated)
 	PortUpdated(NewShip.CurrentPort)
 	
 func PortUpdated(NewPort : MapSpot) -> void:
@@ -24,6 +28,8 @@ func PortUpdated(NewPort : MapSpot) -> void:
 		#$PanelContainer4/VBoxContainer.modulate = PortUnAvailableCol
 		LandingText.text = "NO PORTS NEARBY\nLANDING DENIED"
 		#BuffText.text = ""
+	else: if (CurrentShip.Altitude == 0):
+		LandingText.text = "Landed on {0}".format([NewPort.GetSpotName()])
 	else:
 		#$PanelContainer4/VBoxContainer.modulate = PortAvailableCol
 		LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([NewPort.GetSpotName()])

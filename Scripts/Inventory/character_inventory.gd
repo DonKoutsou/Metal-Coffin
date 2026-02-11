@@ -105,7 +105,7 @@ func GetMissile() -> Array[Item]:
 	var Missiles : Array[Item]
 	
 	for g in _InventoryContents:
-		if (g is MissileItem):
+		if (g is MissileItem and g.Type == MissileItem.MissileType.BVR):
 			for Mis in _InventoryContents[g]:
 				Missiles.append(g)
 			

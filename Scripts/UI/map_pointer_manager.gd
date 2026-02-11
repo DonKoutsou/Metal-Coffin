@@ -153,43 +153,51 @@ func RemoveShip(Ship : Node2D) -> void:
 	_ShipMarkers.remove_at(index)
 	Ships.remove_at(index)
 
+func FixMarkerClipping() -> void:
+	var ShipMarkers = get_tree().get_nodes_in_group("MapShipVizualiser")
+	for Marker1 : TextureRect in ShipMarkers:
+		if (!Marker1.is_visible_in_tree()):
+			continue
+		var r1 = Marker1.get_global_rect()
+		for Marker2 : TextureRect in ShipMarkers:
+			if (Marker1 == Marker2):
+				continue
+			if (!Marker2.is_visible_in_tree()):
+				continue
+			var r2 = Marker2.get_global_rect()
+			if (r1.intersects(r2)):
+				var tries = 0
+				while (r1.intersects(r2) and tries < 10):
+					Marker1.owner.position.x += 4 * Marker1.scale.x
+					tries += 1
+
+			
+
 func FixLabelClipping() -> void:
 	var Mapinfos = get_tree().get_nodes_in_group("MapInfo")
 	var AllMapInfos = get_tree().get_nodes_in_group("UnmovableMapInfo")
 	AllMapInfos.append_array(Mapinfos)
-	for g in Mapinfos:
-		var control1 = g as Control
-		if (!control1.is_visible_in_tree()):
+	for Info1 : Control in Mapinfos:
+		if (!Info1.is_visible_in_tree()):
 			continue
-		var r1 = control1.get_global_rect()
-		for z in AllMapInfos:
-			if (g == z):
+		var r1 = Info1.get_global_rect()
+		for Info2 : Control in AllMapInfos:
+			if (Info1 == Info2):
 				continue
-			var control2 = z as Control
-			if (!control2.is_visible_in_tree()):
+			if (!Info2.is_visible_in_tree()):
 				continue
-			var r2 = control2.get_global_rect()
+			var r2 = Info2.get_global_rect()
 			var tries = 0
-			while (r1.intersects(r2)):
-				control1.owner.UpdateSignRotation()
+			while (r1.intersects(r2) and tries < 10):
+				Info1.owner.UpdateSignRotation()
 				tries += 1
-				if (tries > 10):
-					return
 
 var Circles : Array[PackedVector2Array] = []
 
-#var d = 0.6
-
 func _physics_process(_delta: float) -> void:
-	#d -= _delta
 	
-	#CircleDr.queue_redraw()
 	FixLabelClipping()
-	#if (d > 0):
-		#return
-	#d = 1.0
-	
-	
+
 	Circles.clear()
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()
@@ -205,6 +213,7 @@ func _physics_process(_delta: float) -> void:
 				
 		_ShipMarkers[g].Update(Ship, Ship == ControlledShip, CamPos)
 	CircleDr.UpdateCircles(Circles)
+	FixMarkerClipping()
 
 func GetSaveData() -> SaveData:
 	var Dat = SaveData.new()

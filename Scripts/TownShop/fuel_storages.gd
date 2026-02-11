@@ -77,6 +77,10 @@ func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], P
 	Ships = LandedShips
 	PlayerBoughtFuel = BoughtFuel
 	FuelPricePerTon = FuelPrice
+	
+	var WindAngle = WeatherManage.WindDirection.angle()
+	var wd = Helper.AngleToDirectionShort(WindAngle)
+	$Label.text = "Wind Dir = {0}".format([wd])
 
 	SetFuelData(LandedShips)
 	CurrentFuelLabel.text = var_to_str(roundi(PlFuel + BoughtFuel))

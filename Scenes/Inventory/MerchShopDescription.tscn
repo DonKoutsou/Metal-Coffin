@@ -70,7 +70,6 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("5_tvvk2")
 theme_override_font_sizes/font_size = 28
 text = "Item"
 horizontal_alignment = 1
@@ -87,7 +86,6 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("5_tvvk2")
 text = "Upgrade"
 
 [node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=465088175 groups=["DigitalBouncingButton"]]
@@ -118,7 +116,6 @@ text = "Remove Item"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("5_tvvk2")
 text = "Transfer"
 
 [node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=1951460165]
@@ -133,7 +130,6 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/normal_font = ExtResource("5_tvvk2")
 theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
@@ -149,7 +145,6 @@ size_flags_vertical = 0
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/normal_font = ExtResource("5_tvvk2")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
@@ -166,7 +161,6 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CardsSection" unique_id=2009566466]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_tvvk2")
 text = "Providing Cards"
 horizontal_alignment = 1
 uppercase = true

@@ -316,23 +316,28 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_r755l")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=2043588517]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="PanelContainer3" type="PanelContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=171717043]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0orxy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3" unique_id=2042759143]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=933571925]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=474614247]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=344741726]
 layout_mode = 2
@@ -356,6 +361,7 @@ uppercase = true
 [node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=2123951813]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_avrvh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_mg5jy")
 value = 24.37
@@ -368,6 +374,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_avrvh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wmwbv")
 value = 37.18
@@ -378,21 +385,25 @@ show_percentage = false
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1730153218]
 custom_minimum_size = Vector2(2.965, 0)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rmogf")
 
 [node name="PanelContainer" type="Container" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=913279673]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
+mouse_filter = 2
 script = ExtResource("4_cmntb")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1065534830]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="Label" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=1077168588]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 bbcode_enabled = true
 text = "[color=#f35033]FRPW[/color] 1.2"
 fit_content = true
@@ -403,6 +414,7 @@ vertical_alignment = 1
 [node name="Label2" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=747574443]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 bbcode_enabled = true
 text = "[color=#308a4d]SPD[/color] 123"
 fit_content = true
@@ -412,11 +424,13 @@ vertical_alignment = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1831587837]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="Label" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3" unique_id=1840260904]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 bbcode_enabled = true
 text = "[color=#6364ff]WGHT[/color] 300"
 fit_content = true
@@ -427,6 +441,7 @@ vertical_alignment = 1
 [node name="Label2" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3" unique_id=1702962901]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 bbcode_enabled = true
 text = "[color=#7bb0b4]DEF[/color] 123"
 fit_content = true
@@ -518,3 +533,6 @@ bus = &"Sounds"
 stream = ExtResource("8_r755l")
 pitch_scale = 0.3
 bus = &"MapSounds"
+
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_exited"]

@@ -60,7 +60,6 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=491419952]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 34
 text = "Cruise Missile"
 horizontal_alignment = 1
@@ -82,7 +81,6 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 14
 text = "Owned:"
 
