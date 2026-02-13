@@ -416,12 +416,12 @@ func UpdateVizRange(rang : float):
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 110)
 
-func RephreshVisRange(Visibility : float) -> void:
-	var VisualRange = Visibility
+func RephreshVisRange() -> void:
+	var VisualRange = VisibilityValue
 	if (RadarWorking):
 		VisualRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(VisualRange, Visibility)
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(VisualRange, VisibilityValue)
 
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 

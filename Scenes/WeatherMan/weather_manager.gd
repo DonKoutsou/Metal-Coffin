@@ -5,7 +5,7 @@ class_name WeatherManage
 @export var N : FastNoiseLite
 @export var EventHandler : UIEventHandler
 
-const MAX_WIND_SPEED : int = 400
+const MAX_WIND_SPEED : int = 200
 
 static var WorldBounds : Vector2
 static var Instance : WeatherManage
@@ -16,6 +16,8 @@ static var LighAmm : Curve = preload("res://Resources/LightCurve.tres")
 static var inverse_transform : Transform2D
 static var rect_size : Vector2
 static var ShipsToUpdate : Array[MapShip]
+
+static var CachedPixels : Dictionary[Vector2i, Color]
 
 static func RegisterShip(Ship : MapShip) -> void:
 	ShipsToUpdate.append(Ship)
@@ -63,6 +65,9 @@ var d = 0.2
 func Update(delta: float) -> void:
 	d -= delta
 	if (d <= 0):
+		#clead cache since we are changing the offset of the storms
+		CachedPixels.clear()
+		
 		d = 0.2
 		
 		var simspeed = SimulationManager.SimSpeed()
@@ -72,8 +77,6 @@ func Update(delta: float) -> void:
 		#Add the new offset of the weather to the noise and produce the new texture
 		N.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 30) * (WindSpeed * 0.01)
 		
-		
-		
 		N.fractal_gain = clamp(N.fractal_gain + randf_range(-0.02, 0.02) * simspeed, -10, 10)
 		tx = texture.get_image()
 		
@@ -82,10 +85,10 @@ func Update(delta: float) -> void:
 		for g in ShipsToUpdate:
 			var viz = GetVisibilityInPosition(g.global_position, L)
 			g.VisibilityValue = viz
-			g.StormValue = 1 - (viz - 0.5)
+			g.StormValue = StormValueInPosition(g.global_position)
 			if (g is PlayerDrivenShip):
 				g.UpdateLight(L, viz)
-			g.RephreshVisRange(viz)
+			g.RephreshVisRange()
 
 static func GetWindVelocity() -> Vector2:
 	return WindDirection * (WindSpeed / (MAX_WIND_SPEED / 2.0))
@@ -94,13 +97,20 @@ static func GetVisibilityInPosition(pos : Vector2, LightValue : float) -> float:
 	var value = Helper.mapvalue(1 - get_color_at_global_position(pos).r, 0.5, LightValue)
 	return value
 
+static func StormValueInPosition(pos : Vector2) -> float:
+	var value = get_color_at_global_position(pos).r
+	return value
+
 static func GetLightAmm() -> float:
 	var t = Clock.GetHours()
 	return LighAmm.sample(t)
 
 static func get_color_at_global_position(pos: Vector2) -> Color:
+	var RoundedPos = Vector2i(pos)
+	if (CachedPixels.has(RoundedPos)):
+		return CachedPixels[RoundedPos]
 	# Step 3: Use the inverse transform to get the local position
-	var local_position = (inverse_transform * Vector2(pos.x, pos.y))
+	var local_position = (inverse_transform * Vector2(RoundedPos.x, RoundedPos.y))
 	
 	# Step 3: Ensure the position is within the bounds of the TextureRect
 	if local_position.x < 0 or local_position.x > rect_size.x or local_position.y < 0 or local_position.y > rect_size.y:
@@ -132,7 +142,7 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 	#tx.lock()  # Lock the image for pixel access
 	var color = tx.get_pixel(clamp(uv.x * texture_size.x, 0, texture_size.x - 1), clamp(uv.y * texture_size.y, 0, texture_size.y - 1))
 	#tx.unlock()  # Unlock after accessing
-
+	CachedPixels[RoundedPos] = color
 	return color
 
 
