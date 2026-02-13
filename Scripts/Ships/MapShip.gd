@@ -653,7 +653,7 @@ func GetShipSpeed() -> float:
 func GetAffectedSpeed() -> float:
 	if (Command != null):
 		return Command.GetAffectedSpeed()
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
 	return (Acceleration.position.x * 360) * (1 + WindVel)
 	
 func GetShipThrust() -> float:

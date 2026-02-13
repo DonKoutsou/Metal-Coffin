@@ -62,9 +62,10 @@ size_flags_horizontal = 2
 size_flags_vertical = 1
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
-text = "Wind Dir : North"
+text = "Wind Dir : North | SPEED : 140 km/h
+dawdwadwa"
 horizontal_alignment = 2
-vertical_alignment = 1
+vertical_alignment = 2
 uppercase = true
 
 [node name="Control" type="Control" parent="HBoxContainer/HBoxContainer" unique_id=853007918]

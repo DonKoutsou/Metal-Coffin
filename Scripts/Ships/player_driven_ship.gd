@@ -109,7 +109,7 @@ func Update(delta: float) -> void:
 	if (StormValue > 0.9):
 		FuelConsumtion *= 1 + (1 - StormValue) * 3
 	#Apply wind buff debuff
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection)
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
 	FuelConsumtion *= 1 - WindVel * 0.3
 	
 	FuelConsumtion *= SimulationSpeed
@@ -253,7 +253,7 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 
 
 func GetShipSpeedVec() -> Vector2:
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
 	return (Acceleration.global_position - global_position) * (1 + WindVel)
 
 func SetTargetLocation(pos : Vector2) -> void:

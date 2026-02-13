@@ -11,7 +11,8 @@ var d = 0.2
 func _physics_process(delta: float) -> void:
 	var WindAngle = WeatherManage.WindDirection.angle()
 	var wd = Helper.AngleToDirectionShort(WindAngle)
-	WindText.text = "Wind Dir = {0}".format([wd])
+	var ws = roundi(WeatherManage.WindSpeed)
+	WindText.text = "Wind Dir = {0}\n SPD : {1}km/h".format([wd, ws])
 	WindDirArrow.rotation = WindAngle
 	var vis = ShipContoller.ControlledShipVisibilityValue
 	VizText.text = "Visibility = {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])

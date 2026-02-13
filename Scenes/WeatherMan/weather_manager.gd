@@ -5,9 +5,12 @@ class_name WeatherManage
 @export var N : FastNoiseLite
 @export var EventHandler : UIEventHandler
 
+const MAX_WIND_SPEED : int = 400
+
 static var WorldBounds : Vector2
 static var Instance : WeatherManage
 static var WindDirection : Vector2
+static var WindSpeed : float = 50
 static var tx : Image
 static var LighAmm : Curve = preload("res://Resources/LightCurve.tres")
 static var inverse_transform : Transform2D
@@ -26,7 +29,7 @@ static func GetInstance() -> WeatherManage:
 func _ready() -> void:
 	#Init wind direction, setting it to random dir
 	WindDirection = Vector2.RIGHT.rotated(randf_range(-2 * PI, 2 * PI))
-	
+	WindSpeed = randf_range(0, MAX_WIND_SPEED)
 	EventHandler.ForecastToggled.connect(ToggleWeatherMan)
 	Instance = self
 	
@@ -65,8 +68,12 @@ func Update(delta: float) -> void:
 		var simspeed = SimulationManager.SimSpeed()
 		#Update wind direction
 		WindDirection = WindDirection.rotated(randf_range(-0.001, 0.001) * simspeed)
+		WindSpeed = clamp(WindSpeed + randf_range(-0.2, 0.2), 0, MAX_WIND_SPEED)
 		#Add the new offset of the weather to the noise and produce the new texture
-		N.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 30)
+		N.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 30) * (WindSpeed * 0.01)
+		
+		
+		
 		N.fractal_gain = clamp(N.fractal_gain + randf_range(-0.02, 0.02) * simspeed, -10, 10)
 		tx = texture.get_image()
 		
@@ -79,6 +86,9 @@ func Update(delta: float) -> void:
 			if (g is PlayerDrivenShip):
 				g.UpdateLight(L, viz)
 			g.RephreshVisRange(viz)
+
+static func GetWindVelocity() -> Vector2:
+	return WindDirection * (WindSpeed / (MAX_WIND_SPEED / 2.0))
 
 static func GetVisibilityInPosition(pos : Vector2, LightValue : float) -> float:
 	var value = Helper.mapvalue(1 - get_color_at_global_position(pos).r, 0.5, LightValue)
@@ -132,6 +142,7 @@ func GetSaveData() -> SaveData:
 	
 	var Data = SD_WeatherMan.new()
 	Data.WindDirection = WindDirection
+	Data.WindSpeed = WindSpeed
 	Data.Offset = N.offset
 	
 	Sav.Datas.append(Data)
@@ -139,5 +150,6 @@ func GetSaveData() -> SaveData:
 
 func LoadSaveData(Data : SD_WeatherMan) -> void:
 	WindDirection = Data.WindDirection
+	WindSpeed = Data.WindSpeed
 	N.offset = Data.Offset
 	tx = texture.get_image()
