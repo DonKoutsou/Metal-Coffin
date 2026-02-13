@@ -109,8 +109,8 @@ func Update(delta: float) -> void:
 	if (StormValue > 0.9):
 		FuelConsumtion *= 1 + (1 - StormValue) * 3
 	#Apply wind buff debuff
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
-	FuelConsumtion *= 1 - WindVel * 0.3
+	var WindVel = GetShipWindManipulationModifier()
+	FuelConsumtion -= FuelConsumtion * WindVel
 	
 	FuelConsumtion *= SimulationSpeed
 	#Consume fuel on shif if enough
@@ -134,7 +134,7 @@ func Update(delta: float) -> void:
 		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency
 		if (StormValue > 0.9):
 			DroneFuelConsumtion *= 1.3
-		DroneFuelConsumtion *= 1 - WindVel * 0.3
+		DroneFuelConsumtion -= DroneFuelConsumtion * WindVel
 		DroneFuelConsumtion *= SimulationSpeed
 		
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
@@ -228,7 +228,7 @@ func IntersectShip(Target : MapShip) -> Vector2:
 	
 	var ship_position = plship.position
 	
-	var Distance = global_position.distance_to(ship_position)
+	#var Distance = global_position.distance_to(ship_position)
 	
 	#NEEDS WIND
 	var ship_velocity = plship.GetShipSpeedVec()
@@ -253,8 +253,10 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 
 
 func GetShipSpeedVec() -> Vector2:
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
-	return (Acceleration.global_position - global_position) * (1 + WindVel)
+	var WindVel = GetShipWindManipulationModifier()
+	var Spd = Acceleration.global_position - global_position
+	var AffectedSpeed = Spd + (Spd * WindVel )
+	return AffectedSpeed
 
 func SetTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):

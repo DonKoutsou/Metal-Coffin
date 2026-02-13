@@ -653,9 +653,16 @@ func GetShipSpeed() -> float:
 func GetAffectedSpeed() -> float:
 	if (Command != null):
 		return Command.GetAffectedSpeed()
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
-	return (Acceleration.position.x * 360) * (1 + WindVel)
-	
+	var WindVel = GetShipWindManipulationModifier()
+	var Spd = GetShipSpeed()
+	var AffectedSpeed = Spd + (Spd * WindVel)
+	return AffectedSpeed
+
+func GetShipWindManipulationModifier() -> float:
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+	var WeightModifier = 1 - Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT) / STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.WEIGHT)
+	return WindVel * WeightModifier
+
 func GetShipThrust() -> float:
 	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * (GetShipSpeed() / GetShipMaxSpeed())
 	

@@ -62,8 +62,8 @@ func _physics_process(delta: float) -> void:
 	if (DistanceTraveled > Distance):
 		Kill()
 	
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
-	var affectedoffset = (offset * (1 + WindVel)) * SimulationManager.SimSpeed()
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+	var affectedoffset = (offset + (offset * WindVel)) * SimulationManager.SimSpeed()
 	global_position += affectedoffset
 	
 	
@@ -171,9 +171,9 @@ func HoneAtEnemy():
 	var ship_position = Ship.global_position
 	var ship_velocity = Ship.GetShipSpeedVec()
 	
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (global_position.distance_to(ship_position) / ($AccelPosition.position.x * (1 + WindVel))) / 60
+	var time_to_interception = (global_position.distance_to(ship_position) / GetAffectedSpeed()) / 60
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -181,8 +181,10 @@ func HoneAtEnemy():
 	look_at(predicted_position)
 
 func GetAffectedSpeed() -> float:
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / (WeatherManage.MAX_WIND_SPEED / 2.0))
-	return ($AccelPosition.position.x * 360) * (1 + WindVel)
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+	var Spd = $AccelPosition.position.x * 360
+	var AffectedSpeed = Spd + (Spd * WindVel)
+	return AffectedSpeed
 
 func GetShipSpeedVec() -> Vector2:
 	return $AccelPosition.global_position - global_position
