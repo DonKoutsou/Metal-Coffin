@@ -51,6 +51,7 @@ var Landing : bool = false
 signal LandingStarted
 signal LandingCanceled(Ship : MapShip)
 signal LandingEnded(Ship : MapShip)
+signal LandingEnded2
 var TakingOff : bool = false
 signal TakeoffStarted
 signal TakeoffEnded(Ship : MapShip)
@@ -58,7 +59,7 @@ var MatchingAltitude : bool = false
 signal MatchingAltitudeStarted
 signal MatchingAltitudeEnded(Ship : MapShip)
 
-signal PortChanged(P : MapSpot)
+signal PortChanged()
 
 signal Elint(T : bool, Lvl : int, Dir : String)
 var ElintContacts : Dictionary
@@ -169,7 +170,7 @@ func SetCurrentPort(Port : MapSpot):
 	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
 		g.SetCurrentPort(Port)
-	PortChanged.emit(Port)
+	PortChanged.emit()
 		
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360
@@ -180,6 +181,7 @@ func _HandleLanding(SimulationSpeed : float) -> void:
 		if (Altitude <= 0):
 			Altitude = 0
 			LandingEnded.emit(self)
+			LandingEnded2.emit()
 			Landing = false
 	else: if (TakingOff):
 		UpdateAltitude(min(10000, Altitude + (60 * SimulationSpeed)))
@@ -206,12 +208,12 @@ func RemovePort():
 		LandingCanceled.emit(self)
 		Landing = false
 	if (Altitude != 10000 and !TakingOff):
-		TakeoffStarted.emit()
 		TakingOff = true
+		TakeoffStarted.emit()
 	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
 		g.RemovePort()
-	PortChanged.emit(null)
+	PortChanged.emit()
 
 func OnStatLow(StatName : String) -> void:
 	if (!LowStatsToNotifyAbout.has(StatName)):
@@ -243,8 +245,8 @@ func AccelerationChanged(value: float, forced : bool = false) -> void:
 		Landing = false
 
 	else : if (Altitude != 10000 and !TakingOff):
-		TakeoffStarted.emit()
 		TakingOff = true
+		TakeoffStarted.emit()
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LIFTOFF)
 
 	if (value > 0):
@@ -648,6 +650,12 @@ func GetShipSpeed() -> float:
 		return Command.GetShipSpeed()
 	return (Acceleration.position.x * 360)
 
+func GetAffectedSpeed() -> float:
+	if (Command != null):
+		return Command.GetAffectedSpeed()
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
+	return (Acceleration.position.x * 360) * (1 + WindVel)
+	
 func GetShipThrust() -> float:
 	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * (GetShipSpeed() / GetShipMaxSpeed())
 	

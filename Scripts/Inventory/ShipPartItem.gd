@@ -32,7 +32,9 @@ func GetItemDesc() -> String:
 			UpSymbol = "-"
 			Col = "db2c36"
 		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, STAT_CONST.GetStatMetric(Upgrades[g].UpgradeName), UpSymbol, Col])
-	return "{0} {1}".format([ItemDesc, UpNames])
+	var PartTypeString : String = ShipPartType.keys()[PartType]
+	PartTypeString = PartTypeString.replace("_", " ")
+	return "[color=#ffc315]Ship Part Type[/color] : {2}\n[color=#ffc315]-------------[/color]\n{0} {1}".format([ItemDesc, UpNames, PartTypeString])
 
 
 func GetWorkshopItemDesc() -> String:

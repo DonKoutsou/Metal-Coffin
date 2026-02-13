@@ -21,6 +21,9 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_qc4cv"]
 environment = SubResource("Environment_t244x")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qc4cv"]
+bg_color = Color(0, 0, 0, 0.5)
+
 [sub_resource type="Animation" id="Animation_n8xlk"]
 resource_name = "Logo"
 length = 2.5
@@ -91,7 +94,7 @@ _data = {
 &"Logo": SubResource("Animation_n8xlk")
 }
 
-[node name="LoadingScreen" type="Control" unique_id=780815916 node_paths=PackedStringArray("SkipButton", "TextLabel")]
+[node name="LoadingScreen" type="Control" unique_id=780815916 node_paths=PackedStringArray("SkipButton", "TextLabel", "TextPar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,7 +111,8 @@ However, their diverse cultures have become a heavy shackle, fostering perpetual
 
 Is this yet another cycle leading humanity toward its inevitable end?"
 SkipButton = NodePath("SkipButton")
-TextLabel = NodePath("Label2")
+TextLabel = NodePath("PanelContainer/Label2")
+TextPar = NodePath("PanelContainer")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1412306852]
 layout_mode = 1
@@ -146,18 +150,21 @@ size_flags_vertical = 6
 texture = ExtResource("4_nnckq")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="." unique_id=1609695849]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=912032770]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -378.0
-offset_right = 378.0
-offset_bottom = 417.0
+offset_left = 212.0
+offset_top = 259.0
+offset_right = -212.0
+offset_bottom = 335.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qc4cv")
+
+[node name="Label2" type="Label" parent="PanelContainer" unique_id=1609695849]
+layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "testes
 stestse

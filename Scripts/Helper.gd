@@ -32,6 +32,32 @@ func LoadThreaded(File : String) -> SignalObject:
 	
 	return Sign
 
+static func FromMinutesToString(Minutees : float) -> String:
+	var Str : String = ""
+	var Hours = 0
+	var Mins = Minutees
+	while Mins > 59:
+		Hours += 1
+		Mins -= 60
+	if (Hours > 0):
+		Str += "{0} hour(s) ".format([Hours])
+	if (Mins > 0):
+		Str += "{0} minute(s) ".format([roundi(Mins)])
+	return Str
+
+static func FromMinutesToStringShort(Minutees : float) -> String:
+	var Str : String = ""
+	var Hours = 0
+	var Mins = Minutees
+	while Mins > 59:
+		Hours += 1
+		Mins -= 60
+	if (Hours > 0):
+		Str += "{0} h(s) ".format([Hours])
+	if (Mins > 0):
+		Str += "{0} m(s) ".format([roundi(Mins)])
+	return Str
+	
 func _CheckForFinishedLoad(Sign : SignalObject, File : String) -> void:
 	var Status = ResourceLoader.load_threaded_get_status(File)
 	if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):

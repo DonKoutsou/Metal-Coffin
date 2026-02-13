@@ -9,6 +9,7 @@ class_name LoadingScreen
 @export_multiline var Text : String
 @export var SkipButton : Button
 @export var TextLabel : Label
+@export var TextPar : Control
 
 signal IntroFinished
 
@@ -26,15 +27,18 @@ func _ready() -> void:
 	$SubViewportContainer/SubViewport/TownBackground.set_physics_process(false)
 	$SubViewportContainer/SubViewport/TownBackground.Dissable()
 	TextLabel.text = Text
+	call_deferred("StartTextScroll")
+	#queue_free()
+
+func StartTextScroll() -> void:
 	Tw = create_tween()
-	Tw.tween_property(TextLabel, "position", Vector2(TextLabel.position.x,-TextLabel.size.y - get_viewport_rect().size.y), 4 * TextLabel.get_line_count())
+	Tw.tween_property(TextPar, "position", Vector2(TextPar.position.x,-TextPar.size.y - get_viewport_rect().size.y), 4 * TextLabel.get_line_count())
 	await Tw.finished
 	#Tw.kill()
 	IntroFinished.emit()
-	#queue_free()
 
 func DissableText() -> void:
-	TextLabel.visible = false
+	TextPar.visible = false
 
 func ProcessStarted(_ProcessName : String) -> void:
 	#var l = Label.new()

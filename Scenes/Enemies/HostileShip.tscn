@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="2_lpij7"]
-[ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="3_ty6mh"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="5_7v2kq"]
 [ext_resource type="Texture2D" uid="uid://clst6a32c5mmn" path="res://Assets/ShipTextures/Scarab.png" id="6_tlfh0"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/Enemies/HostileDroneDock.tscn" id="7_hahnw"]
@@ -41,7 +40,6 @@ z_index = 1
 script = ExtResource("1_dinuw")
 Patrol = false
 BT = ExtResource("8_w8ob0")
-AlarmVisual = ExtResource("3_ty6mh")
 Cpt = ExtResource("2_lpij7")
 TrailLines = [NodePath("ColorRect/TrailLine")]
 RadarShape = NodePath("Radar")

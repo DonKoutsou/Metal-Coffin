@@ -17,7 +17,6 @@ class_name HostileShip
 @export var Patrol : bool = true
 @export var Convoy : bool = false
 @export var BT : PackedScene
-@export var AlarmVisual : PackedScene
 
 #This array will be filled by commander when this ship is sent after another ship
 var PursuingShips : Array[PlayerDrivenShip]
@@ -53,6 +52,7 @@ signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
 signal ShipWrecked
+signal Alarmed
 
 
 #var SavedParent : Node
@@ -82,7 +82,8 @@ func  _ready() -> void:
 	call_deferred("InitialiseShip")
 	
 	#ENABLE FOR DEBUG PURPOSES
-	#MapPointerManager.GetInstance().AddShip(self, false)
+	if (Commander.ENEMY_DEBUG):
+		MapPointerManager.GetInstance().AddShip(self, false)
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
@@ -157,7 +158,7 @@ func _Update(delta: float) -> void:
 		
 
 func DoAlarmVisual() -> void:
-	add_child(AlarmVisual.instantiate())
+	Alarmed.emit()
 
 func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	var MissileScene : PackedScene = ResourceLoader.load(Mis.MissileFile)
@@ -367,7 +368,7 @@ func RemovePort():
 func IntersectPusruing() -> Vector2:
 	var pursuing_ship_position = PursuingShips[0].global_position
 	var pursuing_ship_velocity = PursuingShips[0].GetShipSpeedVec()
-	var pursuing_ship_speed = PursuingShips[0].GetAffectedShipSpeed() / 360
+	var pursuing_ship_speed = PursuingShips[0].GetAffectedSpeed() / 360
 	
 	if (pursuing_ship_speed == 0):
 		return pursuing_ship_position

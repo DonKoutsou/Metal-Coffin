@@ -17,6 +17,7 @@ class_name Commander
 @export_flags_2d_physics var layers_2d_physics
 
 static var Instance : Commander
+const ENEMY_DEBUG : bool = false
 
 var Fleet : Array[HostileShip] = []
 
@@ -261,7 +262,7 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 		if (!Ship.IsDead()):
 			var Info = VisualLostInfo.new()
 			Info.Position = Ship.global_position
-			Info.Speed = Ship.GetAffectedShipSpeed()
+			Info.Speed = Ship.GetAffectedSpeed()
 			Info.Direction = Ship.global_rotation
 			EnemyPositionsToInvestigate[Ship] = Info
 
@@ -291,7 +292,7 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 		print(Ship.GetShipName() + " has triggered an Elint sensor")
 		var Info = VisualLostInfo.new()
 		Info.Position = Ship.global_position
-		Info.Speed = Ship.GetAffectedShipSpeed()
+		Info.Speed = Ship.GetAffectedSpeed()
 		Info.Direction = Ship.global_rotation
 		EnemyPositionsToInvestigate[Ship] = Info
 		if (IsShipsPositionUnderInvestigation(Ship)):

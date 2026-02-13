@@ -11,9 +11,9 @@ class_name MapPointerManager
 @export var FriendlyColor : Color
 @export var EnemyColor : Color
 @export var ConvoyColor : Color
-@export var EnemyDebug : bool = false
 @export var UIEventH : UIEventHandler
 @export var ControllerEventHandler : ShipControllerEventHandler
+
 #@export var SpotColor : Color
 
 var Ships : Array[Node2D] = []
@@ -80,7 +80,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	if (Ship is HostileShip):
 		if (Ship.Convoy):
 			marker.modulate = ConvoyColor
-		#if (EnemyDebug):
+		#if (Commander.ENEMY_DEBUG):
 			#HOSTILE_SHIP_DEBUG
 			#marker.ToggleFriendlyShipDetails(true)
 			#////
@@ -113,7 +113,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
 		marker.ShipTargetSelected.connect(OnShipTargetSelected)
 		marker.call_deferred("ToggleShipDetails", true)
-		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetAffectedShipSpeed())
+		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetAffectedSpeed())
 		marker.SetType("Ship")
 		
 	else : if (Ship is Missile):
@@ -158,18 +158,21 @@ func FixMarkerClipping() -> void:
 	for Marker1 : TextureRect in ShipMarkers:
 		if (!Marker1.is_visible_in_tree()):
 			continue
-		var r1 = Marker1.get_global_rect()
+
 		for Marker2 : TextureRect in ShipMarkers:
 			if (Marker1 == Marker2):
 				continue
 			if (!Marker2.is_visible_in_tree()):
 				continue
-			var r2 = Marker2.get_global_rect()
-			if (r1.intersects(r2)):
-				var tries = 0
-				while (r1.intersects(r2) and tries < 10):
-					Marker1.owner.position.x += 4 * Marker1.scale.x
-					tries += 1
+
+			var OffsetToApply : float = 4 * Marker1.scale.x
+			if (Marker2.global_position.x < Marker1.global_position.x):
+				OffsetToApply *= -1
+			var tries = 0
+			while (Marker1.get_global_rect().intersects(Marker2.get_global_rect()) and tries < 10):
+				Marker2.owner.position.x += OffsetToApply
+				tries += 1
+
 
 			
 
@@ -180,15 +183,15 @@ func FixLabelClipping() -> void:
 	for Info1 : Control in Mapinfos:
 		if (!Info1.is_visible_in_tree()):
 			continue
-		var r1 = Info1.get_global_rect()
+
 		for Info2 : Control in AllMapInfos:
 			if (Info1 == Info2):
 				continue
 			if (!Info2.is_visible_in_tree()):
 				continue
-			var r2 = Info2.get_global_rect()
+
 			var tries = 0
-			while (r1.intersects(r2) and tries < 10):
+			while (Info1.get_global_rect().intersects(Info2.get_global_rect()) and tries < 10):
 				Info1.owner.UpdateSignRotation()
 				tries += 1
 
@@ -211,7 +214,7 @@ func _physics_process(_delta: float) -> void:
 			else:
 				Circles.append(PackedVector2Array([Ship.global_position, Vector2(110 * visibility, 0)]))
 				
-		_ShipMarkers[g].Update(Ship, Ship == ControlledShip, CamPos)
+		_ShipMarkers[g].Update(Ship == ControlledShip, CamPos)
 	CircleDr.UpdateCircles(Circles)
 	FixMarkerClipping()
 

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c54mqk4mcr360" path="res://Scenes/MapMarkers/LowLeftNotif.tscn" id="3_74srq"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="4_sgdeo"]
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="4_xcqif"]
+[ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="7_auelk"]
 [ext_resource type="Texture2D" uid="uid://bjesc4kqfeb2b" path="res://Assets/MapElements/Ship.png" id="7_kn8g7"]
 [ext_resource type="FontFile" uid="uid://dxpb6gd77jbk5" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
 [ext_resource type="Texture2D" uid="uid://3bd1jkpj1pod" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
@@ -34,6 +35,7 @@ Icons = {
 "Ship": ExtResource("7_uwuwu"),
 "Wreck": ExtResource("8_143co")
 }
+AlarmVisual = ExtResource("7_auelk")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1290798982]
 texture_filter = 3

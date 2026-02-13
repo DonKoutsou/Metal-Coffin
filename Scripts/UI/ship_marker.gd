@@ -14,6 +14,7 @@ class_name ShipMarker
 @export var ResuplyNotificationScene : PackedScene
 @export var NotificationScene : PackedScene
 @export var Icons : Dictionary
+@export var AlarmVisual : PackedScene
 
 var ShipNameText : String = ""
 var ShipSpeedText : String = ""
@@ -35,7 +36,7 @@ var TargetShip : MapShip
 var TargetShipPos : Vector2
 var Fuel_Range : float
 
-var CurrentShipLocation : Vector2
+var CurrentShip : Node2D
 
 signal ShipSelected
 signal ShipTargetSelected(Marker : ShipMarker)
@@ -53,10 +54,15 @@ func _ready() -> void:
 	add_to_group("ZoomAffected")
 
 func Init(Ship : Node2D) -> void:
+	CurrentShip = Ship
 	if (Ship is HostileShip):
 		Ship.VisualContactCountdownStarted.connect(VisualCountountStarted)
 		ToggleVisualContactProgress(true)
-	
+		Ship.Alarmed.connect(DoAlarm)
+
+func DoAlarm() -> void:
+	add_child(AlarmVisual.instantiate())
+
 func VisualCountountStarted(Value : float) -> void:
 	VisualContactCountdown.max_value = Value
 	VisualContactCountdown.size.x = Value * 4
@@ -66,11 +72,11 @@ func _draw() -> void:
 	
 	var distancetotravel : float = 0.0
 	
-	var fontsize = 20.0 / CurrentZoom
-	  
+	var fontsize = 15.0 / CurrentZoom
+	var f = load("res://Fonts/Bank Gothic Light Regular.otf")
 	var LinesToDraw : Array[Array]
 	if (TargetShip != null):
-		var origin = to_local(CurrentShipLocation)
+		var origin = to_local(CurrentShip.global_position)
 		var topos = to_local(TargetShipPos)
 		
 		var disttopos = origin.distance_to(topos)
@@ -84,15 +90,15 @@ func _draw() -> void:
 			
 		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
-		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0))
-		var string = "{0} km".format([roundi(disttopos)])
-		
+		var TimeToDest = Helper.FromMinutesToStringShort((disttopos / CurrentShip.GetAffectedSpeed()* 60))
+		var string = "{0} km\n{1}".format([roundi(disttopos), TimeToDest])
+		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0)) - Vector2((TimeToDest.length() / CurrentZoom * 5.0), 0)
 		#pos.x -= string.length() / 2 * fontsize
 		
-		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
+		draw_multiline_string(f, pos, string, HORIZONTAL_ALIGNMENT_CENTER, -1, fontsize, -1, Col)
 
 	for g in TargetLocations.size():
-		var origin = to_local(CurrentShipLocation)
+		var origin = to_local(CurrentShip.global_position)
 		var LineOrigin = Vector2.ZERO
 		var topos = to_local(TargetLocations[g])
 		if (g > 0):
@@ -110,18 +116,20 @@ func _draw() -> void:
 		
 		draw_dashed_line(LineOrigin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
-		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0))
-		var string = "{0} km".format([roundi(disttopos)])
-		
+		var TimeToDest = Helper.FromMinutesToStringShort((disttopos / CurrentShip.GetAffectedSpeed()* 60))
+		#var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0))
+		var string = "{0} km\n{1}".format([roundi(disttopos), TimeToDest])
+		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0)) - Vector2((TimeToDest.length() / CurrentZoom * 3.0), 0)
 		#pos.x -= string.length() / 2 * fontsize
 		
-		draw_string(ThemeDB.fallback_font, pos, string, HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Col)
+		draw_multiline_string(f, pos, string, HORIZONTAL_ALIGNMENT_CENTER, -1, fontsize, -1, Col)
 	
 	var canreach = distancetotravel < Fuel_Range
 	if (TargetLocations.size() == 0):
 		return
 	if (!canreach):
-		draw_string(ThemeDB.fallback_font, to_local(TargetLocations[TargetLocations.size() - 1]), "Can't reach", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
+		var DrawPos = to_local(TargetLocations[TargetLocations.size() - 1]) - Vector2(("Can't reach".length() / CurrentZoom * 5.0), 0)
+		draw_string(f, DrawPos, "Can't reach", HORIZONTAL_ALIGNMENT_FILL, -1, fontsize, Color(100,0,0))
 	
 	#for g in LinesToDraw:
 		#if (!canreach):
@@ -129,20 +137,19 @@ func _draw() -> void:
 		#else:
 			#draw_dashed_line(g[0], g[1], Color(1,1,1), 1 / CurrentZoom, 10 / CurrentZoom)
 
-func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
-	CurrentShipLocation = ship.global_position
+func Update(IsControlled : bool, CamPos : Vector2) -> void:
 	queue_redraw()
 	
-	if (ship is HostileShip):
-		if (ship.Docked):
+	if (CurrentShip is HostileShip):
+		if (CurrentShip.Docked):
 			visible = false
 			return
 		else:
 			visible = true
-		ToggleShipDetails(!ship.Docked)
-		ToggleVisualContactProgress(ship.VisualContactCountdown < 20)
-		if (ship.VisualContactCountdown < 20):
-			UpdateVisualContactProgress(ship.VisualContactCountdown)
+		ToggleShipDetails(!CurrentShip.Docked)
+		ToggleVisualContactProgress(CurrentShip.VisualContactCountdown < 20)
+		if (CurrentShip.VisualContactCountdown < 20):
+			UpdateVisualContactProgress(CurrentShip.VisualContactCountdown)
 		#if (EnemyDebug):
 			#global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
 			#UpdateSpeed(ship.GetShipSpeed())
@@ -158,23 +165,23 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 		#else:
 		ClearFuel()
 		modulate.a = 1
-		if (ship.Destroyed):
+		if (CurrentShip.Destroyed):
 			SetMarkerDetails("Ship Debris", "" ,0)
-		else: if (ship.VisibleBy.size() > 0):
+		else: if (CurrentShip.VisibleBy.size() > 0 or Commander.ENEMY_DEBUG):
 			#if (ship.StormValue > 0.9):
 				#var newpos = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
 				#newpos += Vector2(randf_range(20, -20), randf_range(20, -20))
 				#global_position = newpos
 				#UpdateTrajectory(randf_range(PI * 2, PI * -2))
 			#else:
-			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
+			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
 			
-			if (ship.ExposedValue > 2):
-				UpdateSpeed(ship.GetShipSpeed())
+			if (CurrentShip.ExposedValue > 2):
+				UpdateSpeed(CurrentShip.GetShipSpeed())
 			else:
 				SetSpeedUnknown()
-			if (ship.ExposedValue > 4):
-				UpdateTrajectory(ship.global_rotation)
+			if (CurrentShip.ExposedValue > 4):
+				UpdateTrajectory(CurrentShip.global_rotation)
 			else:
 				HideTrajectory()
 			ClearTime()
@@ -187,45 +194,45 @@ func Update(ship : Node2D, IsControlled : bool, CamPos : Vector2) -> void:
 			else:
 				UpdateTime(timepast)
 	else:
-		if (ship is PlayerDrivenShip):
-			if (ship.Docked):
+		if (CurrentShip is PlayerDrivenShip):
+			if (CurrentShip.Docked):
 				visible = false
 				return
 			else:
 				visible = true
-			TargetLocations = ship.TargetLocations
-			TargetShip = ship.TargetShip
-			TargetShipPos = ship.TargetShipPos
-			Fuel_Range = ship.GetFuelRange()
+			TargetLocations = CurrentShip.TargetLocations
+			TargetShip = CurrentShip.TargetShip
+			TargetShipPos = CurrentShip.TargetShipPos
+			Fuel_Range = CurrentShip.GetFuelRange()
 
-			global_position = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
-			UpdateTrajectory(ship.global_rotation + ship.StoredSteer)
+			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
+			UpdateTrajectory(CurrentShip.global_rotation + CurrentShip.StoredSteer)
 				
 			ToggleShipDetails(IsControlled)
-			UpdateSpeed(ship.GetAffectedShipSpeed())
+			UpdateSpeed(CurrentShip.GetAffectedSpeed())
 			
-			if (ship.Landing or ship.TakingOff or ship.MatchingAltitude):
+			if (CurrentShip.Landing or CurrentShip.TakingOff or CurrentShip.MatchingAltitude):
 				#TODO find proper fix
 				if (LandingNotif == null):
 					OnLandingStarted()
-				UpdateAltitude(ship.Altitude)
+				UpdateAltitude(CurrentShip.Altitude)
 			
 			if (!IsControlled):
 				return
 			var fuelstats
-			if (ship.Docked):
-				fuelstats = ship.Command.GetFuelStats()
+			if (CurrentShip.Docked):
+				fuelstats = CurrentShip.Command.GetFuelStats()
 			else:
-				fuelstats = ship.GetFuelStats()
+				fuelstats = CurrentShip.GetFuelStats()
 			UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 
-		else : if (ship is Missile):
-			if (ship.FiredBy is PlayerDrivenShip or ship.VisibleBy.size() > 0):
-				global_position = ship.global_position
+		else : if (CurrentShip is Missile):
+			if (CurrentShip.FiredBy is PlayerDrivenShip or CurrentShip.VisibleBy.size() > 0):
+				global_position = CurrentShip.global_position
 				visible = true
 				ClearTime()
-				UpdateTrajectory(ship.global_rotation)
-				UpdateSpeed(ship.GetAffectedSpeed())
+				UpdateTrajectory(CurrentShip.global_rotation)
+				UpdateSpeed(CurrentShip.GetAffectedSpeed())
 			else :
 				visible = false
 	
@@ -282,7 +289,7 @@ func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 	if ElintNotif != null:
 		if (t):
-			ElintNotif.SetText("ELINT : Lvl {0} \nDiretion : {1}".format([var_to_str(ElingLevel), ElintDirection]))
+			ElintNotif.SetText("ELINT : Lvl {0} \nDirection : {1}".format([var_to_str(ElingLevel), ElintDirection]))
 			return
 		else :
 			ElintNotif.queue_free()
@@ -290,7 +297,7 @@ func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 			return
 	if (t):
 		ElintNotif = NotificationScene.instantiate() as ShipMarkerNotif
-		ElintNotif.SetText("ELINT : {0} \nDiretion : {1}".format([var_to_str(ElingLevel), ElintDirection]))
+		ElintNotif.SetText("ELINT : {0} \nDirection : {1}".format([var_to_str(ElingLevel), ElintDirection]))
 		ElintNotif.Blink = true
 		ElintNotif.Fast = true
 		#connect("ShipDeparted", notif.OnShipDeparted)
@@ -344,7 +351,7 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 func UpdateLine(Zoom : float)-> void:
 	var locp = get_closest_point_on_rect(ShipDetailLabel.get_global_rect(), DetailPanel.global_position)
 	Line.set_point_position(1, locp - Line.global_position)
-	Line.set_point_position(0, global_position.direction_to(locp) * 30 / (Zoom))
+	Line.set_point_position(0, global_position.direction_to(locp) * 20 / (Zoom))
 	
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(roundi(Alt)))

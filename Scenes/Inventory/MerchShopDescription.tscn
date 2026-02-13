@@ -129,7 +129,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 6
 theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
@@ -144,7 +143,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 6
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"

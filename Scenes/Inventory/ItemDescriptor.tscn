@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="1_2v1h2"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="1_ytvfy"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_40o7a"]
-[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="4_fr5qk"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_ytvfy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="5_si1ht"]
 
@@ -81,7 +80,6 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Upgrade"
 
 [node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1141385224 groups=["DigitalBouncingButton"]]
@@ -89,7 +87,6 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Install Part"
 
 [node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=2070343834 groups=["DigitalBouncingButton"]]
@@ -97,7 +94,6 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Add More"
 
 [node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1922293720 groups=["DigitalBouncingButton"]]
@@ -105,14 +101,12 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Remove Item"
 
 [node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1150997006 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_fr5qk")
 text = "Transfer"
 
 [node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=569619456]
@@ -126,7 +120,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 6
 theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
@@ -141,7 +134,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 6
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"

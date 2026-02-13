@@ -15,24 +15,27 @@ func _ready() -> void:
 func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
 	if (CurrentShip != null):
 		CurrentShip.disconnect("PortChanged", PortUpdated)
-		CurrentShip.disconnect("LandingEnded", PortUpdated)
+		CurrentShip.disconnect("LandingEnded2", PortUpdated)
 		CurrentShip.disconnect("TakeoffStarted", PortUpdated)
 	CurrentShip = NewShip
 	NewShip.connect("PortChanged", PortUpdated)
-	NewShip.connect("LandingEnded", PortUpdated)
+	NewShip.connect("LandingEnded2", PortUpdated)
 	NewShip.connect("TakeoffStarted", PortUpdated)
-	PortUpdated(NewShip.CurrentPort)
-	
-func PortUpdated(NewPort : MapSpot) -> void:
-	if (NewPort == null):
+	PortUpdated()
+
+func PortUpdated() -> void:
+	if (CurrentShip.CurrentPort == null):
 		#$PanelContainer4/VBoxContainer.modulate = PortUnAvailableCol
 		LandingText.text = "NO PORTS NEARBY\nLANDING DENIED"
 		#BuffText.text = ""
+	else: if(CurrentShip.TakingOff):
+		LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([CurrentShip.CurrentPort.GetSpotName()])
+		
 	else: if (CurrentShip.Altitude == 0):
-		LandingText.text = "Landed on {0}".format([NewPort.GetSpotName()])
+		LandingText.text = "Landed on {0}".format([CurrentShip.CurrentPort.GetSpotName()])
 	else:
 		#$PanelContainer4/VBoxContainer.modulate = PortAvailableCol
-		LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([NewPort.GetSpotName()])
+		LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([CurrentShip.CurrentPort.GetSpotName()])
 		#var PortThings = ""
 		#if (NewPort.HasFuel()):
 			#PortThings += "REFUEL TIME/COST -\n"

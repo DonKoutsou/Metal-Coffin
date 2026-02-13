@@ -23,7 +23,6 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbfwx"]
 bg_color = Color(0, 0, 0, 1)
 corner_detail = 1
-shadow_size = 100
 anti_aliasing = false
 
 [node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "Screen")]

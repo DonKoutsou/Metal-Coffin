@@ -216,7 +216,7 @@ func updatedronecourse():
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedShipSpeed() / 360)
+	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedSpeed() / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -234,7 +234,7 @@ func IntersectShip(Target : MapShip) -> Vector2:
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedShipSpeed() / 360)
+	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedSpeed() / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -250,11 +250,7 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 	var FuelAfter = pow(arg, 1.0/0.55) / eff_eff
 	return FuelNow - FuelAfter
 
-func GetAffectedShipSpeed() -> float:
-	if (Command != null):
-		return Command.GetAffectedShipSpeed()
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
-	return (Acceleration.position.x * 360) * (1 + WindVel)
+
 
 func GetShipSpeedVec() -> Vector2:
 	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * 0.1
