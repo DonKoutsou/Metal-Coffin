@@ -130,7 +130,7 @@ func LoadMapDat(Data : SaveData) -> void:
 	W.LoadSaveData((Data.GetData("Wallet") as SaveData).Datas[0])
 	Mp.RespawnEnemies((Data.GetData("Enemies") as SaveData).Datas)
 	Mp.RespawnMissiles((Data.GetData("Missiles") as SaveData).Datas)
-	await Mp.GenerationFinished
+	#await Mp.GenerationFinished
 	Mp.LoadMapMarkerEditorSaveData((Data.GetData("MarkerEditor") as SaveData).Datas[0])
 	W.GetCommander().LoadSaveData(Data.GetData("PositionsToInvestigate") as SaveData)
 	Mp.GetInScreenUI().GetInventory().LoadSaveData(Data.GetData("InventoryContents") as SaveData)

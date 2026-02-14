@@ -59,6 +59,7 @@ offset_top = 276.0
 offset_right = 610.0
 offset_bottom = 305.0
 pivot_offset = Vector2(11, 11)
+mouse_filter = 2
 theme = ExtResource("6_i7jhj")
 theme_override_styles/panel = SubResource("StyleBoxFlat_aurdw")
 

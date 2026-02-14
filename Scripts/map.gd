@@ -50,6 +50,7 @@ signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapS
 signal MAP_NeighborsSet
 signal GenerationFinished
 
+var M : Mutex
 var TempEnemyNames: PackedStringArray
 var SpotList : Array[Town]
 var ShowingTutorial = false
@@ -613,6 +614,7 @@ func EventGenFinished() -> void:
 var EnemySpawnTh : Thread
 
 func SpawnTownEnemies() -> void:
+	M = Mutex.new()
 	EnSpawner.Init()
 	TempEnemyNames.clear()
 	var List : StringList = await Helper.GetInstance().LoadThreaded(EnemyShipNameList).Sign
@@ -622,6 +624,7 @@ func SpawnTownEnemies() -> void:
 	
 	
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
+	M = Mutex.new()
 	EnSpawner.Init()
 	#TempEnemyNames.append_array(EnemyShipNames)
 	EnemySpawnTh = Thread.new()
@@ -655,7 +658,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 	print("Spawning for {0}".format([Spot.GetSpotName()]))
 	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy)
 	var SpawnedFleet = []
-	var SpawnedCallsigns = []
+	#var SpawnedCallsigns = []
 	for f in Fleet:
 		var Ship = EnemyScene.instantiate() as HostileShip
 		Ship.Cpt = f
@@ -664,9 +667,12 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 		Ship.Patrol = Patrol
 		Ship.Convoy = Convoy
 		#if (TempEnemyNames.size() > 0):
-		Ship.ShipName = TempEnemyNames[TempEnemyNames.size() - 1]
-		TempEnemyNames.erase(Ship.ShipName)
-		SpawnedCallsigns.append(f.ShipCallsign)
+		M.lock()
+		var ShipName = TempEnemyNames[TempEnemyNames.size() - 1]
+		Ship.ShipName = ShipName
+		TempEnemyNames.remove_at(TempEnemyNames.size() - 1)
+		M.unlock()
+		#SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
 		Ship.PosToSpawn = Pos
 		Ship.connect("OnPlayerShipMet", EnemyMet)
@@ -698,7 +704,8 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 			ship.ToggleDocked(true)
 			ship.Command = com
 			com.GetDroneDock().call_deferred("DockShip", ship)
-	
+			
+		
 	#call_deferred("FGenerationFinished")
 	call_deferred("EnemySpawnFinished")
 

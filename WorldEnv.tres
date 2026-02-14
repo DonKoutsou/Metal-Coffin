@@ -1,7 +1,9 @@
 [gd_resource type="World3D" format=3 uid="uid://bt2lx0rufeimw"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
-offsets = PackedFloat32Array(0, 0.648915, 1)
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.62574255, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.509698, 0.524902, 0.54199, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7mma4"]
@@ -14,19 +16,12 @@ background_canvas_max_layer = 4
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 4
-tonemap_white = 16.0
-glow_enabled = true
-glow_levels/1 = 0.5
-glow_normalized = true
-glow_intensity = 0.0
+glow_intensity = 8.0
 glow_strength = 2.0
 glow_mix = 0.825
 glow_hdr_scale = 4.0
-glow_hdr_luminance_cap = 0.05
-glow_map_strength = 0.0
 adjustment_enabled = true
-adjustment_contrast = 1.3
-adjustment_saturation = 1.1
+adjustment_saturation = 0.9
 adjustment_color_correction = SubResource("GradientTexture1D_7mma4")
 
 [resource]

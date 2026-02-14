@@ -17,7 +17,7 @@ class_name Commander
 @export_flags_2d_physics var layers_2d_physics
 
 static var Instance : Commander
-const ENEMY_DEBUG : bool = false
+const ENEMY_DEBUG : bool = true
 
 var Fleet : Array[HostileShip] = []
 

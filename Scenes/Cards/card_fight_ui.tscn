@@ -185,6 +185,7 @@ rotation = 1.57079
 theme_override_styles/normal = ExtResource("14_80dwx")
 theme_override_styles/pressed = ExtResource("15_lf8xs")
 theme_override_styles/hover = ExtResource("14_80dwx")
+action_mode = 0
 
 [node name="DrawCard" type="Button" parent="." unique_id=1230920392 groups=["Buttons"]]
 layout_mode = 0
@@ -195,6 +196,7 @@ offset_bottom = 204.0
 theme_override_styles/normal = ExtResource("16_ksx0p")
 theme_override_styles/pressed = ExtResource("17_w6rgp")
 theme_override_styles/hover = ExtResource("16_ksx0p")
+action_mode = 0
 
 [node name="Button" type="Button" parent="." unique_id=565274018 groups=["Buttons"]]
 layout_mode = 0
@@ -207,6 +209,7 @@ theme = ExtResource("5_lleca")
 theme_override_styles/normal = ExtResource("19_ksx0p")
 theme_override_styles/pressed = ExtResource("20_w6rgp")
 theme_override_styles/hover = ExtResource("19_ksx0p")
+action_mode = 0
 
 [node name="SwitchShip" type="Button" parent="." unique_id=1588933994 groups=["Buttons"]]
 layout_mode = 1
@@ -224,6 +227,7 @@ grow_vertical = 0
 theme_override_styles/normal = ExtResource("16_ksx0p")
 theme_override_styles/pressed = ExtResource("17_w6rgp")
 theme_override_styles/hover = ExtResource("16_ksx0p")
+action_mode = 0
 
 [node name="DiscardInsert" type="PanelContainer" parent="." unique_id=1911246089]
 clip_contents = true
