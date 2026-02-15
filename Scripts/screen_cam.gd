@@ -148,7 +148,13 @@ func _physics_process(delta: float) -> void:
 		var of = RandomOffset()
 		offset += of
 
-
+#func _input(event: InputEvent) -> void:
+	#if (event is InputEventMouseMotion):
+		#var r = get_global_mouse_position()
+		#var newx = clamp(r.x, OriginalPos.x / zoom.x, OriginalPos.x * zoom.x)
+		#var newy = clamp(r.y, OriginalPos.y / zoom.y, OriginalPos.y * zoom.y)
+		#position = Vector2(newx, newy)
+		
 func RandomOffset2(Last : Vector2) -> Vector2:
 	var x = clamp(randf_range(Last.x - 0.1, Last.x + 0.1), -1, 1)
 	var y = get_breath_offset()

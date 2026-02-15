@@ -37,14 +37,14 @@ TextScene = ExtResource("3_ikfwh")
 
 [node name="YLine" type="Line2D" parent="." unique_id=1476715306]
 use_parent_material = true
-position = Vector2(0, 290)
+position = Vector2(-342, 324)
 points = PackedVector2Array(-1000, 0, 2000, 0)
 width = 2.0
 default_color = Color(0.483, 100, 0.381, 1)
 
 [node name="XLine" type="Line2D" parent="." unique_id=1222183998]
 use_parent_material = true
-position = Vector2(595, 0)
+position = Vector2(253, 34)
 points = PackedVector2Array(0, -2000, 0, 2000)
 width = 2.0
 default_color = Color(0.483, 100, 0.381, 1)
@@ -54,10 +54,10 @@ default_color = Color(0.483, 100, 0.381, 1)
 [node name="Panel" type="Panel" parent="." unique_id=2040984311]
 use_parent_material = true
 layout_mode = 0
-offset_left = 581.0
-offset_top = 276.0
-offset_right = 610.0
-offset_bottom = 305.0
+offset_left = 239.0
+offset_top = 310.0
+offset_right = 268.0
+offset_bottom = 339.0
 pivot_offset = Vector2(11, 11)
 mouse_filter = 2
 theme = ExtResource("6_i7jhj")

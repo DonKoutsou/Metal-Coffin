@@ -8,6 +8,8 @@ static var ForecastState : bool = false
 static var GridState : bool = true
 @export var SteerButton : Button
 static var SteerState : bool = true
+@export var ZoomButton : Button
+@export var ZoomState : bool = true
 
 func _ready() -> void:
 	ForecastButton.set_pressed_no_signal(ForecastState)

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
 [ext_resource type="AudioStream" uid="uid://c2m2e867wt7jw" path="res://Assets/Sounds/RainSound.mp3" id="7_j7r7e"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
+[ext_resource type="PackedScene" uid="uid://cba7o3slmlft0" path="res://Scenes/ScreenUI/AltitudeLevel.tscn" id="9_avpxw"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
 [ext_resource type="PackedScene" uid="uid://dncqbpsg58qgq" path="res://Scenes/InScreenUI/weather_ui.tscn" id="11_j7r7e"]
@@ -20,12 +21,25 @@
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
 [ext_resource type="PackedScene" uid="uid://dtym0y7dgx7iv" path="res://Scenes/ScreenUI/ZoomLevel.tscn" id="21_u111i"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avpxw"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.7647059, 0.08235294, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+corner_detail = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbfwx"]
 bg_color = Color(0, 0, 0, 1)
 corner_detail = 1
 anti_aliasing = false
 
-[node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "Screen")]
+[node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "Screen", "ZoomUI", "AltitudeUI")]
 process_mode = 3
 layer = 0
 follow_viewport_enabled = true
@@ -38,6 +52,8 @@ UnderstatUI = NodePath("VBoxContainer/UnderStatUI")
 OverStatUI = NodePath("OverStatUI")
 MousePointer = NodePath("CanvasLayer/InScreenMouse")
 Screen = NodePath("CanvasLayer/Screen")
+ZoomUI = NodePath("HBoxContainer/ZoomUI")
+AltitudeUI = NodePath("HBoxContainer/AltitudeUI")
 PauseMenuSceneFile = "uid://kealc8fl34qi"
 DialogueSceneFile = "uid://cq8y4l8uapojy"
 
@@ -87,11 +103,26 @@ mouse_filter = 2
 stream = ExtResource("7_j7r7e")
 autoplay = true
 
-[node name="ZoomUI" parent="." unique_id=1715592095 instance=ExtResource("21_u111i")]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 72.0
-offset_bottom = 0.0
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=384141535]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ZoomUI" parent="HBoxContainer" unique_id=1715592095 instance=ExtResource("21_u111i")]
+layout_mode = 2
+
+[node name="PanelContainer" type="Panel" parent="HBoxContainer" unique_id=1645514714]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_avpxw")
+
+[node name="AltitudeUI" parent="HBoxContainer" unique_id=3025055 instance=ExtResource("9_avpxw")]
+layout_mode = 2
 
 [node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
 
@@ -149,6 +180,7 @@ theme_override_constants/separation = 0
 z_index = 1
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbfwx")
 
 [node name="UnderStatUI" type="Control" parent="VBoxContainer" unique_id=154155135]

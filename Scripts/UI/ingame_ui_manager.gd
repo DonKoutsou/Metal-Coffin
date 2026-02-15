@@ -10,7 +10,8 @@ class_name Ingame_UIManager
 @export var MousePointer : InScreenCursor
 
 @export var Screen : Control
-#@export var ZoomUI : ZoomLvevel
+@export var ZoomUI : ZoomLvevel
+@export var AltitudeUI : AltitudeLvevel
 #@export var TUI : TeamUI
 
 @export_group("Scenes")
@@ -35,15 +36,21 @@ func _ready() -> void:
 	EventHandler.connect("MarkerEditorYRangeChanged", _MapMarkerEditor._on_y_gas_range_changed)
 	EventHandler.connect("MarkerEditorXRangeChanged", _MapMarkerEditor._on_x_gas_range_changed)
 	EventHandler.connect("MarkerEditorToggled", _MapMarkerEditor.ToggleVisibilidy)
-	#EventHandler.ZoomToggled.connect(ToggleZoomUI)
+	EventHandler.ZoomToggled.connect(ToggleZoomUI)
+	EventHandler.AltToggled.connect(ToggleAltitudeUI)
 	#EventHandler.TeamToggled.connect(ToggleTeamUI)
 	_MapMarkerEditor.visible = false
 	
 	
 	ToggleScreenGlitches(SettingsPanel.GetGlitch())
 	
-#func ToggleZoomUI(t : bool) -> void:
-	#ZoomUI.Toggle(t)
+func ToggleZoomUI(t : bool) -> void:
+	ZoomUI.Toggle(t)
+	AltitudeUI.Toggle(t)
+	ZoomUI.get_parent().visible = t
+
+func ToggleAltitudeUI(t : bool) -> void:
+	AltitudeUI.Toggle(t)
 
 #func ToggleTeamUI(t : bool) -> void:
 	#TUI.Toggle(t)

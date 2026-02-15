@@ -34,9 +34,11 @@ bus = &"Sounds"
 
 [node name="ScreenCam" parent="." unique_id=1291979417 instance=ExtResource("37_6aw6g")]
 position = Vector2(640, 360)
+position_smoothing_speed = 1.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=652607718]
 layer = 4
+follow_viewport_enabled = true
 
 [node name="Cables" type="Control" parent="CanvasLayer" unique_id=726149118]
 process_mode = 3

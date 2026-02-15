@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cgs0u1j4mhhx5"]
 
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="1_2v1h2"]
-[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="1_ytvfy"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_si1ht"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_40o7a"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_ytvfy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="5_si1ht"]
@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_ytvfy")
+theme_override_styles/panel = ExtResource("1_si1ht")
 script = ExtResource("1_2v1h2")
 CardScene = ExtResource("3_40o7a")
 ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")

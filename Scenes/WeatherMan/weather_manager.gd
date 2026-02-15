@@ -4,6 +4,7 @@ class_name WeatherManage
 
 @export var N : FastNoiseLite
 @export var EventHandler : UIEventHandler
+@export var WindChangeMinimumTime_Minutes : float = 20.0
 
 const MAX_WIND_SPEED : int = 200
 
@@ -18,6 +19,9 @@ static var rect_size : Vector2
 static var ShipsToUpdate : Array[MapShip]
 
 static var CachedPixels : Dictionary[Vector2i, Color]
+
+var LastTimeWindChanged : float
+var WindDirectionOffset : int = 1
 
 static func RegisterShip(Ship : MapShip) -> void:
 	ShipsToUpdate.append(Ship)
@@ -43,6 +47,9 @@ func _ready() -> void:
 	rect_size = get_rect().size
 	
 	SetWorldBounds(WorldBounds)
+	
+	LastTimeWindChanged = 0
+	WindDirectionOffset = 1
 
 func ToggleWeatherMan(t : bool) -> void:
 	visible = t
@@ -71,8 +78,17 @@ func Update(delta: float) -> void:
 		d = 0.2
 		
 		var simspeed = SimulationManager.SimSpeed()
-		#Update wind direction
-		WindDirection = WindDirection.rotated(randf_range(-0.001, 0.001) * simspeed)
+		
+		var TimePased = Clock.Instance.TimePassedInMinutes() - LastTimeWindChanged
+		if (TimePased > WindChangeMinimumTime_Minutes):
+			LastTimeWindChanged = Clock.Instance.TimePassedInMinutes()
+			if (randi_range(0, 1) > 0):
+				WindDirectionOffset = -1
+			else:
+				WindDirectionOffset = 1
+			#Update wind direction
+		var WindRotation = randf_range(0, 0.01) * WindDirectionOffset
+		WindDirection = WindDirection.rotated(WindRotation * simspeed)
 		WindSpeed = clamp(WindSpeed + randf_range(-0.2, 0.2), 0, MAX_WIND_SPEED)
 		#Add the new offset of the weather to the noise and produce the new texture
 		N.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 30) * (WindSpeed * 0.01)
@@ -89,6 +105,8 @@ func Update(delta: float) -> void:
 			if (g is PlayerDrivenShip):
 				g.UpdateLight(L, viz)
 			g.RephreshVisRange()
+
+
 
 static func GetWindVelocity() -> Vector2:
 	return WindDirection * (WindSpeed / (MAX_WIND_SPEED / 2.0))
@@ -154,12 +172,15 @@ func GetSaveData() -> SaveData:
 	Data.WindDirection = WindDirection
 	Data.WindSpeed = WindSpeed
 	Data.Offset = N.offset
-	
+	Data.WindDirectionOffset = WindDirectionOffset
+	Data.LastTimeWindChanged = LastTimeWindChanged
 	Sav.Datas.append(Data)
 	return Sav
 
 func LoadSaveData(Data : SD_WeatherMan) -> void:
 	WindDirection = Data.WindDirection
 	WindSpeed = Data.WindSpeed
+	WindDirectionOffset = Data.WindDirectionOffset
+	LastTimeWindChanged = Data.LastTimeWindChanged
 	N.offset = Data.Offset
 	tx = texture.get_image()

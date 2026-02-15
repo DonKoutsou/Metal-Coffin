@@ -1,37 +1,46 @@
 extends Control
 
-class_name ZoomLvevel
+class_name AltitudeLvevel
 
+@export var ControllerEventH : ShipControllerEventHandler
 @export var Steps : int = 20
 @export var Text : Label
 @export var MaxStep : float = 10.0
 
-const NUMBER_OFFSET : int = 10
+const NUMBER_OFFSET : int = 0
 const TEXT_COLOR : Color = Color(100, 0.764, 0.081)
 
-var CurrentZoom : float = 0.5
 var Working : bool = true
 
+var CurrentShip : PlayerDrivenShip
+var CurrentAltitude : float
 
-func UpdateCameraZoom(NewZoom : float) -> void:
-	if (Working):
-		CurrentZoom = NewZoom
-		queue_redraw()
+func _ready() -> void:
+	ControllerEventH.OnControlledShipChanged.connect(ShipChanged)
+
+func ShipChanged(NewShip : PlayerDrivenShip) -> void:
+	if (CurrentShip != null):
+		CurrentShip.AltitudeChanged.disconnect(AltitudeChanged)
+	
+	CurrentShip = NewShip
+	CurrentShip.AltitudeChanged.connect(AltitudeChanged)
+	CurrentAltitude = NewShip.Altitude
+	queue_redraw()
+
+func AltitudeChanged() -> void:
+	CurrentAltitude = CurrentShip.Altitude
+	queue_redraw()
 
 func Toggle(t) -> void:
 	Working = t
 	visible = t
-
-func zoom_to_ui(zoom_value: float) -> float:
-	var t = (log(zoom_value / ShipCamera.MinZoom) / log(ShipCamera.MaxZoom / ShipCamera.MinZoom))
-	return lerp(ShipCamera.MinZoom, ShipCamera.MaxZoom, t)
 
 func _draw() -> void:
 	#Size of UI element
 	var ContainerSize = size.y
 
 	#Normalised value of current zoom
-	var Z = Helper.normalize_value(zoom_to_ui(CurrentZoom), ShipCamera.MinZoom, ShipCamera.MaxZoom)
+	var Z = Helper.normalize_value(CurrentAltitude, 0, 10000)
 
 	#Text sting
 	var T = "{0}".format([snapped(Z * MaxStep, 0.1)])
@@ -69,9 +78,9 @@ func _draw() -> void:
 			continue
 			
 		#Calculate the positions of the line and the text
-		var LineStartPos = Vector2(30 + NUMBER_OFFSET, UpOffset)
-		var LineEndPos = Vector2(40 + NUMBER_OFFSET, UpOffset)
-		var TextPos = Vector2(15 + NUMBER_OFFSET, UpOffset)
+		var LineStartPos = Vector2(10 + NUMBER_OFFSET, UpOffset)
+		var LineEndPos = Vector2(20 + NUMBER_OFFSET, UpOffset)
+		var TextPos = Vector2(25 + NUMBER_OFFSET, UpOffset)
 		
 		#Figue out the  number and turn it into a string
 		var StepZoom = snapped(MidZoom - (ZoomPerStep * g), 0.1)
@@ -82,7 +91,7 @@ func _draw() -> void:
 			
 			TextPos += Vector2(0,6)
 			if (abs(TextPos.y - ContainerSize/2) > 15):
-				draw_string(get_theme_default_font(), TextPos, ZoomStr.replace(".0", ""),HORIZONTAL_ALIGNMENT_CENTER, -1, 12, TEXT_COLOR)
+				draw_string(get_theme_default_font(), TextPos, ZoomStr.replace(".0", ""),HORIZONTAL_ALIGNMENT_RIGHT, -1, 12, TEXT_COLOR)
 			
 			#draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 3)
 			Lines2.append(LineStartPos)
@@ -91,7 +100,7 @@ func _draw() -> void:
 			
 			TextPos += Vector2(0,3)
 			if (abs(TextPos.y - ContainerSize/2) > 15):
-				draw_string(get_theme_default_font(), TextPos, ZoomStr,HORIZONTAL_ALIGNMENT_CENTER, -1, 8, TEXT_COLOR)
+				draw_string(get_theme_default_font(), TextPos, ZoomStr, HORIZONTAL_ALIGNMENT_RIGHT, -1, 8, TEXT_COLOR)
 			
 			#draw_line(LineStartPos, LineEndPos, TEXT_COLOR, 1)
 			Lines.append(LineStartPos)
@@ -99,4 +108,3 @@ func _draw() -> void:
 			
 	draw_multiline(Lines, TEXT_COLOR, 1, true)
 	draw_multiline(Lines2, TEXT_COLOR, 3, true)
-	#draw_multiline(Lines2, TEXT_COLOR, 1, true)

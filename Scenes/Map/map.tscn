@@ -220,6 +220,7 @@ stretch_mode = 5
 script = ExtResource("12_1lxys")
 N = ExtResource("31_xwtib")
 EventHandler = ExtResource("25_8mjbw")
+WindChangeMinimumTime_Minutes = 120.0
 
 [node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=2053726518 node_paths=PackedStringArray("Background", "Grid", "Cloud", "Ground", "WeatherMan", "ClickSound") groups=["Clock"]]
 position = Vector2(209, 197)

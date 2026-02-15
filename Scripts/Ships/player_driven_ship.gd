@@ -18,6 +18,9 @@ var TargetShipPos : Vector2
 
 var SonarTargets : Array[Node2D]
 
+
+
+
 func  _ready() -> void:
 	super()
 	SonarShape.connect("area_entered", BodyEnteredSonar)

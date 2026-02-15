@@ -34,6 +34,7 @@ corner_detail = 1
 [node name="InventoryShipStats" type="VBoxContainer" unique_id=826388942]
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1
 script = ExtResource("1_oud7i")
 ShipStatScene = ExtResource("2_82v18")
 StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5])
@@ -79,5 +80,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
 
 [node name="Label" type="Label" parent="Legend/VBoxContainer/HBoxContainer2" unique_id=1978544067]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Ship Part Buffs"

@@ -47,6 +47,7 @@ signal ZoomChangedFromScreen(value : float)
 signal YChangedFromScreen(value : float)
 signal XChangedFromScreen(value : float)
 signal ZoomToggled(t : bool)
+signal AltToggled(t : bool)
 signal TeamToggled(t : bool)
 signal SonarToggled(t : bool)
 
@@ -170,6 +171,10 @@ func OnGridPressed(t : bool) -> void:
 
 func OnZoomTogglePressed(t : bool) -> void:
 	ZoomToggled.emit(t)
+
+func OnAltTogglePressed(t : bool) -> void:
+	AltToggled.emit(t)
+
 
 func OnTeamTogglePressed(t : bool) -> void:
 	TeamToggled.emit(t)

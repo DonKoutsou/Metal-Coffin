@@ -44,7 +44,7 @@ signal StatLow(StatName : String)
 signal OnShipDamaged(Amm : float, ShowVisuals : bool)
 signal OnShipDestroyed(Sh : MapShip)
 
-
+signal AltitudeChanged()
 signal AChanged(NewAccel : float)
 signal AForced(NewAccel : float)
 var Landing : bool = false
@@ -342,6 +342,7 @@ func Landed() -> bool:
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
+	AltitudeChanged.emit()
 	#var S = lerp(0.05, 0.1, Altitude / 10000.0)
 	#ShipSprite.scale = Vector2(lerp(0.05, 0.1, Altitude / 10000.0), lerp(0.05, 0.1, Altitude / 10000.0))
 	

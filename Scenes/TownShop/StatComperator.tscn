@@ -19,6 +19,7 @@ ContainerAfter = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/CaptainSta
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=932139957]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Are you sure you want to upgrade ?"
@@ -32,13 +33,13 @@ layout_mode = 2
 [node name="Accept" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=179605351]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 20
 text = "ACCEPT"
 
 [node name="Decline" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=83217091]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 20
 text = "DECLINE"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1761822800]

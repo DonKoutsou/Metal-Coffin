@@ -140,6 +140,9 @@ func _on_grid_button_toggled(toggled_on: bool) -> void:
 func _on_zoom_level_button_toggled(toggled_on: bool) -> void:
 	EventHandler.OnZoomTogglePressed(toggled_on)
 
+func _on_altitude_toggled(toggled_on: bool) -> void:
+	EventHandler.OnAltTogglePressed(toggled_on)
+
 func _on_team_button_toggled(toggled_on: bool) -> void:
 	EventHandler.OnTeamTogglePressed(toggled_on)
 

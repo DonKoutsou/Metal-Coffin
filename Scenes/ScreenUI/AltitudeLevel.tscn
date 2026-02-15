@@ -1,45 +1,48 @@
-[gd_scene format=3 uid="uid://dtym0y7dgx7iv"]
+[gd_scene format=3 uid="uid://cba7o3slmlft0"]
 
-[ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="1_a2q7o"]
+[ext_resource type="Script" uid="uid://bxodsfaf51bba" path="res://Scripts/UI/Altitude_Level.gd" id="1_cdu52"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_0wjrb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2q7o"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 10.0
-content_margin_bottom = 5.0
+content_margin_left = 10.0
 draw_center = false
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(100, 0.764, 0.081, 1)
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
 corner_detail = 1
 
-[node name="VBoxContainer" type="Control" unique_id=3025055 node_paths=PackedStringArray("Text") groups=["ZoomAffected"]]
+[node name="VBoxContainer" type="Control" unique_id=3025055 node_paths=PackedStringArray("Text")]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 3
-anchors_preset = 9
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 138.0
-offset_right = 60.0
-offset_bottom = -138.0
+offset_left = -60.0
+grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_a2q7o")
+script = ExtResource("1_cdu52")
+ControllerEventH = ExtResource("2_0wjrb")
 Steps = 30
 Text = NodePath("PanelContainer/Label")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=777832042]
 custom_minimum_size = Vector2(20, 25)
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -12.5
-offset_right = 20.0
-offset_bottom = 12.5
+offset_left = -20.0
+offset_top = -10.0
+offset_bottom = 10.0
+grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -48,28 +51,32 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_a2q7o")
 
 [node name="Label" type="Label" parent="PanelContainer" unique_id=1393173706]
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(100, 0.764, 0.081, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
-text = "4x"
+text = "ALT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="." unique_id=1064783160]
+[node name="Label" type="Label" parent="." unique_id=906432484]
 visible = false
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 72.0
-offset_top = -198.0
-offset_right = 89.0
-offset_bottom = 198.0
+offset_left = -88.0
+offset_top = -270.5
+offset_right = -71.0
+offset_bottom = 270.5
+grow_horizontal = 0
 grow_vertical = 2
-theme_override_constants/line_spacing = 59
+theme_override_constants/line_spacing = 30
 theme_override_font_sizes/font_size = 16
-text = "ZOOM"
+text = "ALTITUDE"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1

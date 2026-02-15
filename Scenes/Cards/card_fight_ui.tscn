@@ -76,28 +76,28 @@ anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 1233.0
-offset_top = -590.0
+offset_top = -591.0
 offset_right = 1233.0
-offset_bottom = -590.0
+offset_bottom = -591.0
 grow_horizontal = 1
 grow_vertical = 0
 
 [node name="DiscardPile" parent="." unique_id=521369081 instance=ExtResource("11_omcrt")]
 layout_mode = 1
 offset_left = 592.0
-offset_top = -86.0
+offset_top = -87.0
 offset_right = 592.0
-offset_bottom = -86.0
+offset_bottom = -87.0
 
 [node name="Label" type="Label" parent="." unique_id=955071202]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 574.0
-offset_top = 189.0
-offset_right = 611.0
-offset_bottom = 210.0
+offset_left = 573.0
+offset_top = 187.0
+offset_right = 610.0
+offset_bottom = 208.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 16
 text = "?"

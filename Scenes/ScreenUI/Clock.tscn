@@ -8,6 +8,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
+mouse_filter = 2
 script = ExtResource("1_1k7lr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1519941522]
@@ -17,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1929676687]
 layout_mode = 2
