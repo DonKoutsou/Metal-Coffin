@@ -23,7 +23,8 @@ const StatToolTips : Dictionary = {
 	STATS.REPAIR_PRICE : "The cost to repair one point of [color=#ffc315]HULL[/color] health. All ship parts contribute to this value—the lower it is, the cheaper your ship is to maintain.",
 	STATS.AEROSONAR_RANGE : "Aerosonar allows you to detect ship noise signatures in greater distances.",
 	STATS.SPEED : "Derived stat calculated from other attributes:[p][color=#ffc315]SPEED[/color] = ([color=#ffc315]THRUST[/color] × 1000) / [color=#ffc315]WEIGHT[/color]",
-	STATS.RANGE : "Derived stat calculated from other attributes:[p][color=#ffc315]RANGE[/color] = [color=#ffc315]FUEL TANK[/color] * (([color=#ffc315]FUEL EFFICIENCY[/color] / pow([color=#ffc315]WEIGHT[/color], 0.5)) * 10)"
+	STATS.RANGE : "Derived stat calculated from other attributes:[p][color=#ffc315]RANGE[/color] = [color=#ffc315]FUEL TANK[/color] * (([color=#ffc315]FUEL EFFICIENCY[/color] / pow([color=#ffc315]WEIGHT[/color], 0.5)) * 10)",
+	STATS.VALUE : "Value of ship derived from original ship price and all items on it."
 }
 
 const StatMaxValues : Dictionary = {
@@ -135,4 +136,5 @@ enum STATS{
 	AEROSONAR_RANGE,
 	SPEED,
 	RANGE,
+	VALUE,
 }

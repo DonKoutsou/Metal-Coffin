@@ -254,8 +254,16 @@ func GetCharacterInventory() -> CharacterInventory:
 
 func GetValue() -> int:
 	var Value : int = ProvidingFunds
-	for g : Item in StartingItems:
-		Value += g.Cost
+	if (_CharInv != null):
+		var InvContents : Dictionary[Item, int] = GetCharacterInventory().GetInventoryContents()
+		for g : Item in InvContents.keys():
+			for z in InvContents[g]:
+				Value += g.Cost
+	else:
+		for g : Item in StartingItems:
+			Value += g.Cost
+	
+	
 	return Value
 
 func LoadStats(Fuel : float, Hull : float) -> void:

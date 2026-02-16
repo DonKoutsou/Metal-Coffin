@@ -8,6 +8,7 @@ var CurrentShownCaptain : Captain
 var Stats : Array[ShipStatContainer]
 var SpeedStat : ShipStatContainer
 var Rangestat : ShipStatContainer
+var ValueStat : ShipStatContainer
 
 func _ready() -> void:
 	for g in StatsShown.size():
@@ -24,6 +25,10 @@ func _ready() -> void:
 	Rangestat = ShipStatScene.instantiate() as ShipStatContainer
 	Rangestat.SetDataCustom(10000, "km", "RANGE", STAT_CONST.STATS.RANGE)
 	add_child(Rangestat)
+	
+	ValueStat = ShipStatScene.instantiate() as ShipStatContainer
+	ValueStat.SetDataCustom(1000000, "₯", "VALUE", STAT_CONST.STATS.RANGE)
+	add_child(ValueStat)
 
 func UpdateValues() -> void:
 	var FuelCap
@@ -49,6 +54,10 @@ func UpdateValues() -> void:
 	var eff_eff = (FuelEf / pow(W, 0.5)) * 10
 	var ShipRange = roundi(FuelCap * eff_eff)
 	Rangestat.UpdateStatCustom(0, ShipRange, 0)
+	
+	var ChValue = CurrentShownCaptain.ProvidingFunds
+	var Itvalue = CurrentShownCaptain.GetValue() - ChValue
+	ValueStat.UpdateStatCustom(ChValue, Itvalue, 0)
 
 func SetCaptain(Cpt : Captain) -> void:
 	CurrentShownCaptain = Cpt
