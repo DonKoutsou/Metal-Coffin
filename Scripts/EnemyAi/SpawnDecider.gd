@@ -9,9 +9,11 @@ class_name SpawnDecider
 
 @export var MerchList : Array[MerchandiseInfo]
 @export var WorkshopList : Array[MerchandiseInfo]
+@export var RecruitList : Array[CaptainSpawnInfo]
 
 const LowestPrice : int = 50
 const MerchLowest : int = 2
+const RECRUIT_LOWEST : int = 25
 var sorted_captain_list
 var sorted_ground_captain_list
 var sorted_convoy_captain_list
@@ -104,6 +106,26 @@ func GetMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 			points -= m.Cost
 	return available_merch
 
+#TODO implement
+func GetRecruitsForPosition(YPos: float, HasRec : bool) -> Array[Captain]:
+	var available_Recruits : Array[Captain] = []
+	var points = GetRecruitPointsForPosition(abs(YPos))
+	if (HasRec):
+		points *= 2
+	print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
+	var stage = Happening.GetStageForYPos(YPos)
+	# Iterate through the MerchList to select merchandise based on points
+	while points > RECRUIT_LOWEST:
+		var RandomRec = RecruitList.pick_random() as CaptainSpawnInfo
+		if (RandomRec.DontGenerateBefore > stage):
+			continue
+
+		if (points > RandomRec.Cost):
+			available_Recruits.append(RandomRec.Cpt)
+			points -= RandomRec.Cost
+
+	return available_Recruits
+
 func GetWorkshopMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
 	var points = GetMerchPointsForPosition(abs(YPos))
@@ -148,10 +170,13 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool) -> Array[C
 	return Fleet
 
 func GetPointsForPosition(YPos : float) -> int:
-	return roundi(max(50, YPos / 100))
+	return roundi(max(50, YPos / 100.0))
 
 func GetMerchPointsForPosition(YPos : float) -> int:
-	return roundi(max(20, YPos / 500))
+	return roundi(max(20, YPos / 500.0))
+
+func GetRecruitPointsForPosition(YPos : float) -> int:
+	return roundi(max(50, YPos / 100.0))
 
 func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:
 	var fleet : Array[CaptainSpawnInfo] = []

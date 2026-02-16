@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_v417u"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_yny5t"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_dgcyb"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_y72bb"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_ayane"]
 
 [resource]
 script = ExtResource("3_t6vcc")
 SpotName = "Xenda"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_v417u")]([ExtResource("4_yny5t"), ExtResource("5_dgcyb"), ExtResource("6_ayane")])
+PossibleDrops = Array[ExtResource("3_v417u")]([ExtResource("4_yny5t"), ExtResource("5_dgcyb"), ExtResource("6_ayane"), ExtResource("5_y72bb")])

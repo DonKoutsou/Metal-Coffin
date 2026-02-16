@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_wykv5"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_xi5bn"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_33fax"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_lw67w"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_l7vk7"]
 
 [resource]
@@ -11,4 +12,4 @@ script = ExtResource("1_0i2ro")
 SpotName = "Krokaria"
 Region = 2
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_wykv5")]([ExtResource("4_xi5bn"), ExtResource("5_33fax"), ExtResource("6_l7vk7")])
+PossibleDrops = Array[ExtResource("3_wykv5")]([ExtResource("4_xi5bn"), ExtResource("5_33fax"), ExtResource("6_l7vk7"), ExtResource("5_lw67w")])

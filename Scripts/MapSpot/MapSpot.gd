@@ -155,7 +155,7 @@ func HasUpgrade() -> bool:
 func HasRecruit() -> bool:
 	var hasr = false
 	for g in PossibleDrops:
-		if g.ItemName == "Thing":
+		if g.ItemName == "Recruitment":
 			hasr = true
 			break
 	return hasr

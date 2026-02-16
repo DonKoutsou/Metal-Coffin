@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://cqig7ufwah6je"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_ukrk7"]
+[ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://Scripts/Inventory/character_inventory.gd" id="2_xxes0"]
+[ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="3_mw0ys"]
+[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_wi86h"]
+
+[node name="CharacterInventoryUI" type="PanelContainer" unique_id=1843118128 node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "CaptainNameLabel")]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -61.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_ukrk7")
+script = ExtResource("2_xxes0")
+InventoryBoxScene = ExtResource("3_mw0ys")
+EngineInventoryBoxParent = NodePath("HFlowContainer/PanelContainer/VBoxContainer/Engines")
+SensorInventoryBoxParent = NodePath("HFlowContainer/PanelContainer3/VBoxContainer3/Sensors")
+FuelTankInventoryBoxParent = NodePath("HFlowContainer/PanelContainer2/VBoxContainer2/Fuel Tanks")
+WeaponInventoryBoxParent = NodePath("HFlowContainer/PanelContainer5/VBoxContainer5/Weapons")
+ShieldInventoryBoxParent = NodePath("HFlowContainer/PanelContainer4/VBoxContainer4/Shields")
+InventoryBoxParent = NodePath("HFlowContainer/PanelContainer6/VBoxContainer6/Inventory")
+CaptainNameLabel = NodePath("")
+HideOnStart = false
+
+[node name="HFlowContainer" type="VBoxContainer" parent="." unique_id=429632373]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HFlowContainer" unique_id=2128131231]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_wi86h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HFlowContainer/PanelContainer" unique_id=1959035554]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/PanelContainer/VBoxContainer" unique_id=657880210]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Engines"
+uppercase = true
+
+[node name="Engines" type="VBoxContainer" parent="HFlowContainer/PanelContainer/VBoxContainer" unique_id=1110226895]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="HFlowContainer" unique_id=871123302]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_wi86h")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HFlowContainer/PanelContainer2" unique_id=1990982709]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/PanelContainer2/VBoxContainer2" unique_id=764125027]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Fuel Tanks"
+uppercase = true
+
+[node name="Fuel Tanks" type="VBoxContainer" parent="HFlowContainer/PanelContainer2/VBoxContainer2" unique_id=1766142018]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="HFlowContainer" unique_id=1202313804]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_wi86h")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HFlowContainer/PanelContainer3" unique_id=307309254]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/PanelContainer3/VBoxContainer3" unique_id=2023558435]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Sensors"
+uppercase = true
+
+[node name="Sensors" type="VBoxContainer" parent="HFlowContainer/PanelContainer3/VBoxContainer3" unique_id=65720169]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="PanelContainer4" type="PanelContainer" parent="HFlowContainer" unique_id=718294467]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_wi86h")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="HFlowContainer/PanelContainer4" unique_id=1501067862]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/PanelContainer4/VBoxContainer4" unique_id=1299575924]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Fortifications"
+uppercase = true
+
+[node name="Shields" type="VBoxContainer" parent="HFlowContainer/PanelContainer4/VBoxContainer4" unique_id=1898557495]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="PanelContainer5" type="PanelContainer" parent="HFlowContainer" unique_id=1926250309]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_wi86h")
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="HFlowContainer/PanelContainer5" unique_id=224854820]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/PanelContainer5/VBoxContainer5" unique_id=934015092]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Weapons"
+uppercase = true
+
+[node name="Weapons" type="VBoxContainer" parent="HFlowContainer/PanelContainer5/VBoxContainer5" unique_id=178553751]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="PanelContainer6" type="PanelContainer" parent="HFlowContainer" unique_id=1443407308]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_wi86h")
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="HFlowContainer/PanelContainer6" unique_id=1481423577]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/PanelContainer6/VBoxContainer6" unique_id=1343099106]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Cargo"
+uppercase = true
+
+[node name="Inventory" type="VBoxContainer" parent="HFlowContainer/PanelContainer6/VBoxContainer6" unique_id=2062436510]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2

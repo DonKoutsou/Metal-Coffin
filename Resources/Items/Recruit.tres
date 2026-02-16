@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dpab8g30sclyx"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_cfmlk"]
+[ext_resource type="Texture2D" uid="uid://djcepgpm5guep" path="res://Assets/Items/upgrade.png" id="2_cfmlk"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_wwf5p"]
+
+[resource]
+script = ExtResource("3_wwf5p")
+ItemIcon = ExtResource("2_cfmlk")
+ItemName = "Recruitment"
+MaxStackCount = 10

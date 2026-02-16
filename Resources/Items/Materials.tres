@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://clyeusyxaqgda"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_315qu"]
-[ext_resource type="Texture2D" uid="uid://djcepgpm5guep" path="res://Assets/Items/upgrade.png" id="2_kajc1"]
+[ext_resource type="Texture2D" uid="uid://bf4h8gwhkl2eb" path="res://Assets/Items/cubeforcesmol.png" id="2_kajc1"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_yyjv6"]
 
 [resource]

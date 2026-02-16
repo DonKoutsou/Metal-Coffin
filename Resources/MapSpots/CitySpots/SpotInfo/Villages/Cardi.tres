@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_7sxud"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_ycksc"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="3_7qb7y"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_vr4ve"]
 
 [resource]
 script = ExtResource("2_ycksc")
 SpotName = "Cardi"
-PossibleDrops = Array[ExtResource("2_7sxud")]([ExtResource("3_vr4ve")])
+PossibleDrops = Array[ExtResource("2_7sxud")]([ExtResource("3_vr4ve"), ExtResource("3_7qb7y")])

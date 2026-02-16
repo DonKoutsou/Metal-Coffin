@@ -59,6 +59,9 @@ func SetMerch(Merch : Array[Merchandise], WorkShopMerch : Array[Merchandise]) ->
 	GetSpot().Merch = Merch
 	GetSpot().WorkShopMerch = WorkShopMerch
 
+func SetRecruits(Recruits : Array[Captain]) -> void:
+	GetSpot().Recruits = Recruits
+
 func GetCityName() -> String:
 	return $CitySpot.SpotName
 	

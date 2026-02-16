@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_7vs1a"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_bufbe"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_3a3s3"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_r00xs"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_0xsjx"]
 
 [resource]
 script = ExtResource("3_7vs1a")
 SpotName = "Jud"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_1u48n")]([ExtResource("4_bufbe"), ExtResource("5_3a3s3"), ExtResource("6_0xsjx")])
+PossibleDrops = Array[ExtResource("3_1u48n")]([ExtResource("4_bufbe"), ExtResource("5_3a3s3"), ExtResource("6_0xsjx"), ExtResource("5_r00xs")])

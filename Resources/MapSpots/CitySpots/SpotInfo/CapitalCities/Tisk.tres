@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="3_ynv1t"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_sy2kx"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_62iae"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_d1f3k"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_es2sb"]
 
 [resource]
 script = ExtResource("3_ynv1t")
 SpotName = "Tisk"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_mnd7c")]([ExtResource("4_sy2kx"), ExtResource("5_62iae"), ExtResource("6_es2sb")])
+PossibleDrops = Array[ExtResource("3_mnd7c")]([ExtResource("4_sy2kx"), ExtResource("5_62iae"), ExtResource("6_es2sb"), ExtResource("5_d1f3k")])

@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_m5ofm"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_i6lxx"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_fu7s4"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_umcyn"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_6yd26"]
 
 [resource]
 script = ExtResource("3_7jdan")
 SpotName = "Zirmak"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_m5ofm")]([ExtResource("4_i6lxx"), ExtResource("5_fu7s4"), ExtResource("6_6yd26")])
+PossibleDrops = Array[ExtResource("3_m5ofm")]([ExtResource("4_i6lxx"), ExtResource("5_fu7s4"), ExtResource("6_6yd26"), ExtResource("5_umcyn")])

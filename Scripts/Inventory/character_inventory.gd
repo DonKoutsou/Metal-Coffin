@@ -11,6 +11,7 @@ class_name CharacterInventory
 @export var ShieldInventoryBoxParent : VBoxContainer
 @export var InventoryBoxParent : VBoxContainer
 @export var CaptainNameLabel : LineEdit
+@export var HideOnStart : bool = true
 
 signal InventoryUpdated
 signal OnItemAdded(it : Item)
@@ -38,8 +39,8 @@ var _EquipTime : float
 
 
 func _ready() -> void:
-
-	InventoryBoxParent.get_parent().get_parent().get_parent().visible = false
+	if (HideOnStart):
+		InventoryBoxParent.get_parent().get_parent().get_parent().visible = false
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
 
@@ -166,6 +167,105 @@ func InitialiseInventory(Cha : Captain) -> void:
 		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 		
 	CaptainNameLabel.text = CharName
+
+func InitialiseStarting(Cha : Captain) -> void:
+	for g in InventoryBoxParent.get_children():
+		g.queue_free()
+	for g in EngineInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in SensorInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in FuelTankInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in ShieldInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in WeaponInventoryBoxParent.get_children():
+		g.queue_free()
+	
+	
+	var CharInvSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.INVENTORY_SPACE)
+	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
+	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)
+	var CharFuelTankSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK_SLOTS)
+	var CharShieldSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SHIELD_SLOTS)
+	var CharWeaponSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.WEAPON_SLOTS)
+	
+	for g in CharInvSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		InventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		#InventoryBoxParent.columns = min(2, CharInvSpace)
+	
+	for g in CharEngineSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		EngineInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
+	
+	for g in CharSensorSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		SensorInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
+	
+	for g in CharFuelTankSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		FuelTankInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
+	
+	for g in CharShieldSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		ShieldInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
+	
+	for g in CharWeaponSpace:
+		var Box = InventoryBoxScene.instantiate() as Inventory_Box
+		Box.Initialise(self)
+		WeaponInventoryBoxParent.add_child(Box)
+		Box.connect("ItemSelected", ItemSelected)
+		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
+	
+	for It in Cha.StartingItems:
+		var boxes
+		if (It is ShipPart):
+			boxes = GetBoxParentForType(It.PartType).get_children()
+		else:
+			boxes = InventoryBoxParent.get_children()
+		var Empty : Inventory_Box = null
+		for g in boxes:
+			if (g.IsEmpty()):
+				if (Empty == null):
+					Empty = g
+				continue
+			if (g.GetContainedItemName() == It.ItemName and g.HasSpace()):
+				g.UpdateAmm(1)
+				_InventoryContents[It] += 1
+
+				break
+		#try to find empty box
+		if (Empty != null):
+			Empty.RegisterItem(It)
+			Empty.UpdateAmm(1)
+			if (_InventoryContents.has(It)):
+				_InventoryContents[It] += 1
+			else:
+				_InventoryContents[It] = 1
+
+				
+			if (It is not ShipPart):
+				var BoxParent = InventoryBoxParent
+				if (Empty.get_parent() != BoxParent):
+					Empty.get_parent().remove_child(Empty)
+					BoxParent.add_child(Empty)
+			
+			continue
 
 func ItemSelected(Box : Inventory_Box) -> void:
 	BoxSelected.emit(Box, self)

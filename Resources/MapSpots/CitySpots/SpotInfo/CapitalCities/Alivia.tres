@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_dvn88"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_rkon4"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_c76ag"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_r53si"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_pelbf"]
 
 [resource]
 script = ExtResource("2_1p1c1")
 SpotName = "Alivia"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_dvn88")]([ExtResource("4_rkon4"), ExtResource("5_c76ag"), ExtResource("6_pelbf")])
+PossibleDrops = Array[ExtResource("3_dvn88")]([ExtResource("4_rkon4"), ExtResource("5_c76ag"), ExtResource("6_pelbf"), ExtResource("5_r53si")])

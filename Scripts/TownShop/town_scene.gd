@@ -54,9 +54,9 @@ func SetTownBuffs() -> void:
 	if (TownSpot.HasRepair()):
 		Text += "[img={32}x{32}]res://Assets/Items/Wrench.png[/img] REPAIR TIME/COST -[p]"
 	if (TownSpot.HasUpgrade()):
-		Text += "[img={32}x{32}]res://Assets/Items/upgrade.png[/img] UPGRADE TIME/COST -[p][p]"
-	if (TownSpot.HasRecruit()):
 		Text += "[img={32}x{32}]res://Assets/Items/cubeforcesmol.png[/img] UPGRADE TIME/COST -[p][p]"
+	if (TownSpot.HasRecruit()):
+		Text += "[img={32}x{32}]res://Assets/Items/upgrade.png[/img] Available Recruits[p][p]"
 	PortBuffText.text = Text
 
 func On_MunitionShop_pressed() -> void:
@@ -130,11 +130,11 @@ func OnShipBought(Cap : Captain) -> void:
 			break
 			
 	NewCommander.GetDroneDock().AddRecruit(Cap)
-	
+	TownSpot.Recruits.erase(Cap)
 
 func OnShipSold(Ship : MapShip) -> void:
 	Ship.Kill()
-	
+	#TownSpot
 
 
 func OnItemSold(It : Item) -> void:

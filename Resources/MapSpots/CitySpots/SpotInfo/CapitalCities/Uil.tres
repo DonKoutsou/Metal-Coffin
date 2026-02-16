@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="4_2c4jn"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_lvenl"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_7edq8"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="5_oachf"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="6_jq03q"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="7_h3j08"]
@@ -10,4 +11,4 @@
 script = ExtResource("4_2c4jn")
 SpotName = "Uil"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("4_lvenl")]([ExtResource("5_oachf"), ExtResource("6_jq03q"), ExtResource("7_h3j08")])
+PossibleDrops = Array[ExtResource("4_lvenl")]([ExtResource("5_oachf"), ExtResource("6_jq03q"), ExtResource("7_h3j08"), ExtResource("5_7edq8")])

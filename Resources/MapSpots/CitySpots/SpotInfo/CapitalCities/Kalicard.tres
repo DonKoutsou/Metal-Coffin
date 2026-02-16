@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_h6c6e"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_3jnnw"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_0c6oi"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_woxkd"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_k2gyf"]
 
 [resource]
@@ -11,4 +12,4 @@ script = ExtResource("1_jmsga")
 SpotName = "Kalicard"
 Region = 2
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_h6c6e")]([ExtResource("4_3jnnw"), ExtResource("5_0c6oi"), ExtResource("6_k2gyf")])
+PossibleDrops = Array[ExtResource("3_h6c6e")]([ExtResource("4_3jnnw"), ExtResource("5_0c6oi"), ExtResource("6_k2gyf"), ExtResource("5_woxkd")])

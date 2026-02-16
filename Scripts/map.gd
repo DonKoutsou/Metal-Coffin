@@ -447,6 +447,8 @@ func GenerateMapThreaded() -> void:
 	
 	for g in GeneratedSpots:
 		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()))
+		g.call_deferred("SetRecruits", EnSpawner.GetRecruitsForPosition(g.Pos.y, g.GetSpot().HasRecruit()))
+	
 	
 	if (OS.is_debug_build()):
 		print("Generating map took " + var_to_str(Time.get_ticks_msec() - time) + " msec")

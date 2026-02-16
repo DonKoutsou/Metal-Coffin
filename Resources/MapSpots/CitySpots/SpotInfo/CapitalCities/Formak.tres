@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_h2dht"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="4_3b6jg"]
 [ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="5_8s42d"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="5_prblv"]
 [ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="6_o6i8e"]
 
 [resource]
 script = ExtResource("3_7xasi")
 SpotName = "Formak"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("3_h2dht")]([ExtResource("4_3b6jg"), ExtResource("5_8s42d"), ExtResource("6_o6i8e")])
+PossibleDrops = Array[ExtResource("3_h2dht")]([ExtResource("4_3b6jg"), ExtResource("5_8s42d"), ExtResource("6_o6i8e"), ExtResource("5_prblv")])
