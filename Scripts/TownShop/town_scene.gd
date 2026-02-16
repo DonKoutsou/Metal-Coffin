@@ -45,7 +45,7 @@ func _ready() -> void:
 
 func SetTownBuffs() -> void:
 	RepairButton.visible = TownSpot.HasRepair()
-	WorkshopButton.visible = TownSpot.HasUpgrade()
+	#WorkshopButton.visible = TownSpot.HasUpgrade()
 	RecruitButton.visible = TownSpot.HasRecruit()
 	
 	var Text : String = ""
@@ -106,6 +106,7 @@ func On_Recruit_Pressed() -> void:
 func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop
 	add_child(WShop)
+	WShop.ShipSold.connect(OnShipSold)
 	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.WorkShopMerch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.UPGRADE_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
@@ -129,11 +130,13 @@ func OnShipBought(Cap : Captain) -> void:
 			NewCommander = g
 			break
 			
-	NewCommander.GetDroneDock().AddRecruit(Cap)
+	var newship = NewCommander.GetDroneDock().AddRecruit(Cap)
 	TownSpot.Recruits.erase(Cap)
+	LandedShips.append(newship)
 
 func OnShipSold(Ship : MapShip) -> void:
 	Ship.Kill()
+	LandedShips.erase(Ship)
 	#TownSpot
 
 

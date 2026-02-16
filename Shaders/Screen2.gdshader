@@ -24,7 +24,7 @@ uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
 uniform float scanline_intensity : hint_range(0.0, 10.0) = 0;
-
+uniform float static_chromatic_aberration : hint_range(0.0, 1.0) = 0.1;
 //uniform float ColorAmm: hint_range(16, 256, 1.0) = 1.;
 
 float ToLinear1(float c){ return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
@@ -163,9 +163,9 @@ void fragment(){
 	vec2 red_offset = vec2(-aberration_amount, 0.0);
 	vec2 blue_offset = vec2(aberration_amount, 0.0);
 	COLOR.rgb += stripes(pos);
-	COLOR.r = mix(COLOR.r, texture(SCREEN_TEXTURE, look + red_offset).r, 0.5);
+	COLOR.r = mix(COLOR.r, texture(SCREEN_TEXTURE, look + red_offset - static_chromatic_aberration).r, 0.5);
 	COLOR.g = mix(COLOR.g, texture(SCREEN_TEXTURE, look).g, 0.5);
-	COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + blue_offset).b, 0.5);
+	COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + blue_offset + static_chromatic_aberration).b, 0.5);
 
 	float vigAmt = (3.3) * vignette_strength;
 	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 4.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 4.0));

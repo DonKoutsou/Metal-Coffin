@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
 [ext_resource type="Texture2D" uid="uid://cs1i38munqjqo" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
-[ext_resource type="World3D" uid="uid://dfavnsxfxt715" path="res://StartMenuEnv.tres" id="3_rh5bc"]
+[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="3_rh5bc"]
 [ext_resource type="Texture2D" uid="uid://k821yd6qs51r" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Texture2D" uid="uid://0o8p7b3b8vyl" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="5_23r0g"]
 [ext_resource type="Texture2D" uid="uid://bd38upwrq6cdy" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="6_t54ed"]

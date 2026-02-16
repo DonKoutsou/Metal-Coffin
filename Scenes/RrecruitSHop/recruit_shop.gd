@@ -51,7 +51,8 @@ func _on_buy_pressed() -> void:
 		PlWaller.AddFunds(-CurrentShip.GetValue())
 		OnCaptainBought.emit(CurrentShip)
 		RefreshCaptains()
-
+	else:
+		PopUpManager.GetInstance().DoFadeNotif("Not enough funds")
 
 func _on_close_pressed() -> void:
 	RecruitClosed.emit()

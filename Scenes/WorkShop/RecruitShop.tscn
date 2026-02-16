@@ -91,6 +91,7 @@ text = "Close"
 [node name="InputScroll" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1418851758]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("7_ensoj")
@@ -98,6 +99,7 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="CharacterInventoryUI" parent="PanelContainer/VBoxContainer/HBoxContainer/InputScroll" unique_id=1843118128 instance=ExtResource("5_jp411")]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=483839682]

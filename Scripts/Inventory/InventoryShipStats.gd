@@ -27,7 +27,7 @@ func _ready() -> void:
 	add_child(Rangestat)
 	
 	ValueStat = ShipStatScene.instantiate() as ShipStatContainer
-	ValueStat.SetDataCustom(1000000, "₯", "VALUE", STAT_CONST.STATS.RANGE)
+	ValueStat.SetDataCustom(1000000, "₯", "VALUE", STAT_CONST.STATS.VALUE)
 	add_child(ValueStat)
 
 func UpdateValues() -> void:

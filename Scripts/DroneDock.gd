@@ -96,7 +96,7 @@ func CaptiveDischarged(C : HostileShip) -> void:
 	DroneRemoved.emit()
 	UndockCaptive(C)
 
-func AddRecruit(Cpt : Captain, _Notify : bool = true) -> void:
+func AddRecruit(Cpt : Captain, _Notify : bool = true) -> MapShip:
 	#if (Notify):
 		#PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([Cpt.ProvidingFunds]))
 		#Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait, Cpt.CaptainName)
@@ -109,6 +109,7 @@ func AddRecruit(Cpt : Captain, _Notify : bool = true) -> void:
 		var NewShip = (load("res://Scenes/MapShips/drone.tscn") as PackedScene).instantiate() as Drone
 		NewShip.Cpt = Crew
 		AddDrone(NewShip, false)
+	return ship
 
 func AddCaptive(Captive : HostileShip) -> void:
 

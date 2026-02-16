@@ -128,9 +128,10 @@ func GetRecruitsForPosition(YPos: float, HasRec : bool) -> Array[Captain]:
 
 func GetWorkshopMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
-	var points = GetMerchPointsForPosition(abs(YPos))
-	if (HasUp):
-		points *= 2
+	if (!HasUp):
+		return available_merch
+	var points = GetWorkshopMerchPointsForPosition(abs(YPos))
+	
 	var stage = Happening.GetStageForYPos(YPos)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
@@ -174,6 +175,9 @@ func GetPointsForPosition(YPos : float) -> int:
 
 func GetMerchPointsForPosition(YPos : float) -> int:
 	return roundi(max(20, YPos / 500.0))
+
+func GetWorkshopMerchPointsForPosition(YPos : float) -> int:
+	return roundi(max(20, YPos / 250.0))
 
 func GetRecruitPointsForPosition(YPos : float) -> int:
 	return roundi(max(50, YPos / 100.0))

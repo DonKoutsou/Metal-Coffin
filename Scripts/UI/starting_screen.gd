@@ -22,11 +22,11 @@ const APPID = "3679120"
 
 
 func _ready() -> void:
-	var siz =  DisplayServer.screen_get_size()
+	#var siz =  DisplayServer.screen_get_size()
 	#siz.x = min(siz.x, 1920)
 	#siz.y = min(siz.y, 1080)
-	DitherShader.set_shader_parameter("ScreenSize",siz)
-	print("Screen Size = {0}".format([siz]))
+	#DitherShader.set_shader_parameter("ScreenSize",siz)
+	#print("Screen Size = {0}".format([siz]))
 	#if (OS.get_name() == "Windows"):
 		#Steam.steamInit()
 		#var IsRunning = Steam.isSteamRunning()

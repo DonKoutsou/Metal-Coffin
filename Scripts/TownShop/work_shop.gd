@@ -16,13 +16,18 @@ class_name WorkShop
 @export var StatComp : PackedScene
 @export var ItemParent : Control
 @export var ItemCat : Control
-@export var ShipIcons : TextureRect
+@export var ShipStats : CaptainStatContainer
 @export var Descr : ItemDescriptor
+
 var CurrentShip : MapShip
 var WorkShopMerch : Array[Merchandise]
 var WorkshopDescriptor : ItemDescriptor
 var HasUpgradeBuff : bool = false
+
 signal WorkshopClosed
+signal ShipSold(Ship : MapShip)
+
+var AvailableShips : Array[MapShip]
 
 func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
@@ -49,8 +54,20 @@ func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise])
 		ShipButtonsParent.add_child(b)
 		b.text = g.Cpt.GetCaptainName()
 		b.pressed.connect(OnShipSelected.bind(g))
-	
+	AvailableShips = Ships
 	OnShipSelected(Ships[0])
+
+func RefreshCaptains() -> void:
+	for g in ShipButtonsParent.get_children():
+		g.queue_free()
+		
+	for g in AvailableShips:
+		var b = Button.new()
+		ShipButtonsParent.add_child(b)
+		b.text = g.Cpt.GetCaptainName()
+		b.pressed.connect(OnShipSelected.bind(g))
+		
+	OnShipSelected(AvailableShips[0])
 
 func OnShipSelected(Ship : MapShip) -> void:
 	if (Ship == CurrentShip):
@@ -71,7 +88,9 @@ func OnShipSelected(Ship : MapShip) -> void:
 	for g in ShieldInventoryBoxParent.get_children():
 		g.free()
 	
-	ShipIcons.texture = Ship.Cpt.ShipIcon
+	ShipStats.SetCaptain(Ship.Cpt)
+	ShipStats.ShowStats()
+	#ShipIcons.texture = Ship.Cpt.ShipIcon
 	
 	var Cha = Ship.Cpt
 	
@@ -138,7 +157,9 @@ func RefreshInventory() -> void:
 	for g in ShieldInventoryBoxParent.get_children():
 		g.free()
 	
-	ShipIcons.texture = CurrentShip.Cpt.ShipIcon
+	ShipStats.SetCaptain(CurrentShip.Cpt)
+	ShipStats.ShowStats()
+	#ShipIcons.texture = CurrentShip.Cpt.ShipIcon
 	
 	var Cha = CurrentShip.Cpt
 	
@@ -229,13 +250,13 @@ func ItemSelected(Box : Inventory_Box) -> void:
 		DescriptorPlace.remove_child(WorkshopDescriptor)
 		WorkshopDescriptor.queue_free()
 		if (WorkshopDescriptor.DescribedContainer == Box):
-			ShipIcons.visible = true
+			ShipStats.visible = true
 			return
 	
 			
 	WorkshopDescriptor= ItemDescriptorScene.instantiate() as ItemDescriptor
 	WorkshopDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	ShipIcons.visible = false
+	ShipStats.visible = false
 	WorkshopDescriptor.DescribedContainer = Box
 	if (Box.IsEmpty()):
 		WorkshopDescriptor.SetEmptyShopData(GetTypeOfBox(Box))
@@ -260,7 +281,7 @@ func CloseDescriptor() -> void:
 	#var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (WorkshopDescriptor != null):
 		WorkshopDescriptor.queue_free()
-	ShipIcons.visible = true
+	ShipStats.visible = true
 
 func RemoveItem(Box : Inventory_Box) -> void:
 	var Cost = Box.GetContainedItem().Cost
@@ -446,3 +467,14 @@ func _on_cancel_button_pressed() -> void:
 	ItemCat.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
+
+func _on_sell_pressed() -> void:
+	if (CurrentShip is PlayerShip):
+		PopUpManager.GetInstance().DoFadeNotif("Flagship can't be sold")
+		return
+	var PLWallet = World.GetInstance().PlayerWallet
+	PLWallet.AddFunds(CurrentShip.GetValue())
+	ShipSold.emit(CurrentShip)
+	AvailableShips.erase(CurrentShip)
+	RefreshCaptains()
+	

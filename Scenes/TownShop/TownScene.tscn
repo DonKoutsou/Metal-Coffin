@@ -63,6 +63,25 @@ handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
+[node name="Button6" type="Button" parent="." unique_id=434348707 groups=["DigitalButtons"]]
+layout_mode = 0
+offset_left = 462.0
+offset_top = 585.0
+offset_right = 762.0
+offset_bottom = 618.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "RECRUIT OFFICE"
+
+[node name="Line2D" type="Line2D" parent="Button6" unique_id=2042780671]
+show_behind_parent = true
+position = Vector2(0, 15)
+points = PackedVector2Array(0, 0, 0, 45.15)
+width = 2.0
+default_color = Color(1, 0.763983, 0.0812772, 1)
+
 [node name="Button2" type="Button" parent="." unique_id=1637034197 groups=["DigitalButtons"]]
 layout_mode = 0
 offset_left = 462.0
@@ -133,25 +152,6 @@ theme_override_font_sizes/font_size = 16
 text = "REPAIR BAY"
 
 [node name="Line2D" type="Line2D" parent="Button5" unique_id=1134968368]
-show_behind_parent = true
-position = Vector2(0, 15)
-points = PackedVector2Array(0, 0, 0, 45.15)
-width = 2.0
-default_color = Color(1, 0.763983, 0.0812772, 1)
-
-[node name="Button6" type="Button" parent="." unique_id=434348707 groups=["DigitalButtons"]]
-layout_mode = 0
-offset_left = 462.0
-offset_top = 585.0
-offset_right = 762.0
-offset_bottom = 618.0
-size_flags_horizontal = 3
-size_flags_vertical = 2
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-text = "RECRUIT OFFICE"
-
-[node name="Line2D" type="Line2D" parent="Button6" unique_id=2042780671]
 show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
@@ -280,9 +280,9 @@ volume_db = -10.0
 pitch_scale = 4.0
 bus = &"MapSounds"
 
+[connection signal="pressed" from="Button6" to="." method="On_Recruit_Pressed"]
 [connection signal="pressed" from="Button2" to="." method="OnMunitionShopToggled"]
 [connection signal="pressed" from="Button3" to="." method="OnUpgradeShopPressed"]
 [connection signal="pressed" from="Button4" to="." method="OnRefuelShopPressed"]
 [connection signal="pressed" from="Button5" to="." method="OnRepairStationPressed"]
-[connection signal="pressed" from="Button6" to="." method="On_Recruit_Pressed"]
 [connection signal="pressed" from="HBoxContainer2/Button" to="." method="_on_button_pressed"]

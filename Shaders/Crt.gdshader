@@ -20,6 +20,7 @@ uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
 uniform float static_noise_intensity : hint_range(0.0, 1.0) = 0.06;
+uniform float static_chromatic_aberration : hint_range(0.0, 1.0) = 0.1;
 group_uniforms Noise;
 uniform sampler2D noise_texture: filter_linear_mipmap, repeat_enable;
 
@@ -62,9 +63,9 @@ vec3 getVideo(vec2 uv)
     vec2 blue_offset = vec2(aberration_amount, 0.0);
 
     vec3 video;
-    video.r = texture(screen_texture, look + red_offset).r ;
+    video.r = texture(screen_texture, look + red_offset + static_chromatic_aberration).r ;
     video.g = texture(screen_texture, look).g;
-    video.b = texture(screen_texture, look + blue_offset).b;
+    video.b = texture(screen_texture, look + blue_offset - static_chromatic_aberration).b;
 
     return video;
 }

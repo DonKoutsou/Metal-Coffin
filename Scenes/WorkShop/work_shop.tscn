@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dhbyfc1rfad2f"]
 
 [ext_resource type="Script" uid="uid://cl0fuirqabjb0" path="res://Scripts/TownShop/work_shop.gd" id="1_4uhfw"]
-[ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="1_6rtyi"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p28a8"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_bpcd3"]
 [ext_resource type="PackedScene" uid="uid://iv5o83jfm5t6" path="res://Scenes/TownShop/WorkShopItem.tscn" id="2_gy23n"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="3_4uhfw"]
 [ext_resource type="PackedScene" uid="uid://mcrp4chqoake" path="res://Scenes/TownShop/StatComperator.tscn" id="4_r5mim"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="7_itsvt"]
+[ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_gy23n"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="9_itsvt"]
 [ext_resource type="AudioStream" uid="uid://c866lg2xo47bl" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
 
@@ -32,7 +32,7 @@ content_margin_bottom = 5.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy23n"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 
-[node name="WorkShop" type="Control" unique_id=398074188 node_paths=PackedStringArray("ShipButtonsParent", "EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "DescriptorPlace", "ItemParent", "ItemCat", "ShipIcons", "Descr")]
+[node name="WorkShop" type="Control" unique_id=398074188 node_paths=PackedStringArray("ShipButtonsParent", "EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "DescriptorPlace", "ItemParent", "ItemCat", "ShipStats", "Descr")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,7 +55,7 @@ InventoryBoxScene = ExtResource("2_bpcd3")
 StatComp = ExtResource("4_r5mim")
 ItemParent = NodePath("PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer/Scroll/VBoxContainer")
 ItemCat = NodePath("PanelContainer/PanelContainer2")
-ShipIcons = NodePath("PanelContainer/VBoxContainer/HBoxContainer/TextureRect")
+ShipStats = NodePath("PanelContainer/VBoxContainer/HBoxContainer/CaptainStatContainer")
 Descr = NodePath("PanelContainer/PanelContainer2/VBoxContainer/HBoxContainer/ItemDesc")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1464941558]
@@ -75,6 +75,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1531908430]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1379977091]
@@ -106,6 +107,10 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Sell" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=789824842]
+layout_mode = 2
+text = "Sell Ship"
 
 [node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1965928851]
 layout_mode = 2
@@ -254,13 +259,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=924552109]
-custom_minimum_size = Vector2(180, 0)
+[node name="CaptainStatContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1727051882 instance=ExtResource("9_gy23n")]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_6rtyi")
-expand_mode = 5
-stretch_mode = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer" unique_id=339938003]
 visible = false
@@ -313,5 +314,6 @@ stream = ExtResource("10_itsvt")
 autoplay = true
 bus = &"Sounds"
 
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Sell" to="." method="_on_sell_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/PanelContainer2/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
