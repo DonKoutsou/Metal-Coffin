@@ -169,7 +169,7 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 				z.SetPositionToInvestigate(Vector2.ZERO)
 				#z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
-			EnemyPositionsToInvestigate.erase(g.ShipTrigger)
+			CancelInvestigation(g.ShipTrigger)
 			print("Position : " + var_to_str(Pos) + "has been investigated.")
 			return
 
@@ -235,7 +235,7 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			print(Ship.GetShipName() + "'s position was under investigation, investigation order has been canceled")
 			InvestigationOrderComplete(EnemyPositionsToInvestigate[Ship].Position)
-		EnemyPositionsToInvestigate.erase(Ship)
+		CancelInvestigation(Ship)
 	if (SeenBy != null):
 		print(Ship.GetShipName() + " has been located by ." + SeenBy.GetShipName())
 		if (SeenBy.Patrol):
@@ -260,14 +260,21 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 		if (IsShipBeingPursued(Ship)):
 			PursuitOrderCanceled(Ship)
 		if (!Ship.IsDead()):
-			var Info = VisualLostInfo.new()
-			Info.Position = Ship.global_position
-			Info.Speed = Ship.GetAffectedSpeed()
-			Info.Direction = Ship.global_rotation
-			EnemyPositionsToInvestigate[Ship] = Info
+			SetShipUnderInvestigation(Ship)
+
 			
 
-#func SetPositionUnderInvestigation()
+func SetShipUnderInvestigation(Ship : MapShip) -> void:
+	var Info = VisualLostInfo.new()
+	Info.Position = Ship.global_position
+	Info.Speed = Ship.GetAffectedSpeed()
+	Info.Direction = Ship.global_rotation
+	EnemyPositionsToInvestigate[Ship] = Info
+	Ship.OnShipDestroyed.connect(CancelInvestigation)
+
+func CancelInvestigation(Ship : MapShip) -> void:
+	Ship.OnShipDestroyed.disconnect(CancelInvestigation)
+	EnemyPositionsToInvestigate.erase(Ship)
 #/////////////////////////////////////////////////////////////
 
 func AproximatePositionOnIntercept(HunterPos : Vector2, HunsterSpeed : float, Pos : Vector2, Speed : float) -> Vector2:
@@ -292,11 +299,7 @@ func OnElintHit(Ship : MapShip ,t : bool) -> void:
 		if (KnownEnemies.keys().has(Ship) or Ship.IsDead()):
 			return
 		print(Ship.GetShipName() + " has triggered an Elint sensor")
-		var Info = VisualLostInfo.new()
-		Info.Position = Ship.global_position
-		Info.Speed = Ship.GetAffectedSpeed()
-		Info.Direction = Ship.global_rotation
-		EnemyPositionsToInvestigate[Ship] = Info
+		SetShipUnderInvestigation(Ship)
 		if (IsShipsPositionUnderInvestigation(Ship)):
 			UpdateInvestigationPos(Ship.global_position, Ship)
 #/////////////////////////////////////////////////////////////
