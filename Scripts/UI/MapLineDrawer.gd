@@ -88,7 +88,7 @@ func DrawLines() -> void:
 		
 		var smoothedline
 		if (RoadLines):
-			smoothedline = Helper.SmoothLine2(points, 5)
+			smoothedline = Helper.SmoothLine2(points, 20)
 		else:
 			smoothedline = points
 		var L = Line2D.new()
@@ -117,6 +117,61 @@ func DrawLines() -> void:
 		#L.add_point(Vector2.ZERO, 0)
 		for z in smoothedline.size():
 			L.add_point(smoothedline[z] - L.global_position, z)
+
+#func DrawLines() -> void:
+	#for g in get_children():
+		#g.queue_free()
+	#
+	#for points in Lines:
+		#
+		#if (points.size() == 0):
+			#continue
+		#
+		#
+		#var smoothedline
+		#if (RoadLines):
+			#smoothedline = Helper.SmoothLine2(points, 5)
+		#else:
+			#smoothedline = points
+		#var L
+		#
+		#if RoadLines:
+			#L = LinePath2D.new()
+			#add_child(L)
+			#L.global_position = points[0]
+			##L.cap_joint_mode = Line2D.LINE_JOINT_ROUND
+			##L.cap_begin_cap = Line2D.LINE_CAP_ROUND
+			##L.cap_end_cap = Line2D.LINE_CAP_ROUND
+			##L.border_round_precision = 4
+			#L.fill_texture = PathTexture
+			#L.fill_texture_mode = Line2D.LINE_TEXTURE_TILE
+			#L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+			#L.width = 5
+			#
+			#var LocalPoints : Array
+			#for g in smoothedline.size():
+				#LocalPoints.append(smoothedline[g] - L.global_position)
+				#
+			#var c = Helper.array_to_curve(LocalPoints, 10)
+				#
+			#L._curve = c
+			#L.width_profile = null
+		#else:
+			#L = Line2D.new()
+			#add_child(L)
+			#L.global_position = points[0]
+			#L.joint_mode = Line2D.LINE_JOINT_ROUND
+			#L.begin_cap_mode = Line2D.LINE_CAP_ROUND
+			#L.end_cap_mode = Line2D.LINE_CAP_ROUND
+			#L.round_precision = 4
+			#L.default_color = Color(1,1,1, 1)
+			#L.width = 20
+		#
+			#for z in smoothedline.size():
+				#L.add_point(smoothedline[z] - L.global_position, z)
+		#
+		#
+		#L.use_parent_material = true
 
 #NEW MUCH SIMPLER ALGORITH FOR LINES
 func AddExtraLines(cities : Array, Lines : Array) -> Array:

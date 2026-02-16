@@ -16,11 +16,19 @@ func InventoryUpdated() -> void:
 func SetDeck(Ch : Captain) -> void:
 	var Inv = Ch.GetCharacterInventory()
 	
-	if (CurrentlyShownCharacter != Ch):
-		if (CurrentlyShownCharacter != null):
-			CurrentlyShownCharacter.GetCharacterInventory().InventoryUpdated.disconnect(InventoryUpdated)
-		CurrentlyShownCharacter = Ch
-		Inv.InventoryUpdated.connect(InventoryUpdated)
+	
+	
+	var deck : Dictionary[CardStats, int]
+	
+	if (Inv != null):
+		if (CurrentlyShownCharacter != Ch):
+			if (CurrentlyShownCharacter != null):
+				CurrentlyShownCharacter.GetCharacterInventory().InventoryUpdated.disconnect(InventoryUpdated)
+			CurrentlyShownCharacter = Ch
+			Inv.InventoryUpdated.connect(InventoryUpdated)
+		deck = Inv.GetCardDictionary()
+	else:
+		deck = Ch.GetStartingDeck()
 	
 	var PooledCards : Array[Card]
 	for g in OffensiveCardPosition.get_children():
@@ -34,7 +42,7 @@ func SetDeck(Ch : Captain) -> void:
 		UtilityCardPosition.remove_child(g)
 		#g.queue_free()
 	
-	var deck = Inv.GetCardDictionary()
+	
 	
 	for card : CardStats in deck:
 		var c : Card

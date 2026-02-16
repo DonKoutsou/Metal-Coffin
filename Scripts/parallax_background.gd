@@ -82,4 +82,5 @@ enum Location {
 	FUEL,
 	MERCH,
 	REPAIR,
+	RECRUIT,
 }

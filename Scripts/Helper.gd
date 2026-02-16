@@ -57,7 +57,28 @@ static func FromMinutesToStringShort(Minutees : float) -> String:
 	if (Mins > 0):
 		Str += "{0} m(s) ".format([roundi(Mins)])
 	return Str
-	
+
+
+static func array_to_curve(input : Array, dist : float) -> Curve2D:
+	#dist determines length of controls, set dist = 0 for no smoothing
+	var curve = Curve2D.new()
+
+	#calculate first point
+	var start_dir = input[0].direction_to(input[1])
+	curve.add_point(input[0], - start_dir * dist, start_dir * dist)
+
+	#calculate middle points
+	for i in range(1, input.size() - 1):
+		var prev : Vector2 = input[i-1]
+		var dir = prev.direction_to(input[i+1])
+		curve.add_point(input[i], -dir * dist, dir * dist)
+
+	#calculate last point
+	var end_dir = input[-1].direction_to(input[-2])
+	curve.add_point(input[-1], - end_dir * dist, end_dir * dist)
+	curve.bake_interval = 1
+	return curve
+
 func _CheckForFinishedLoad(Sign : SignalObject, File : String) -> void:
 	var Status = ResourceLoader.load_threaded_get_status(File)
 	if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):

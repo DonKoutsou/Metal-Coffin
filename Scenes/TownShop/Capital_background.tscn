@@ -145,7 +145,8 @@ LocationPositions = Dictionary[int, NodePath]({
 0: NodePath("ParallaxLayer3/Parallax2D/WorkShop"),
 1: NodePath("ParallaxLayer3/Parallax2D/Fuel"),
 2: NodePath("ParallaxLayer3/Parallax2D/Merch"),
-3: NodePath("ParallaxLayer3/Parallax2D/Repair")
+3: NodePath("ParallaxLayer3/Parallax2D/Repair"),
+4: NodePath("ParallaxLayer3/Parallax2D/Recruit")
 })
 
 [node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=718927093]
@@ -350,6 +351,12 @@ position = Vector2(-102, 133)
 position = Vector2(1150, 378)
 
 [node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch" unique_id=215679661]
+position = Vector2(181, 238)
+
+[node name="Recruit" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=543202484]
+position = Vector2(252, 378)
+
+[node name="Recruit2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Recruit" unique_id=1445780423]
 position = Vector2(181, 238)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1898189999]

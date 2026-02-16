@@ -56,7 +56,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/CaptainCreatorPlugin/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/CaptainCreatorPlugin/plugin.cfg", "res://addons/linepath2d/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [global_group]
 

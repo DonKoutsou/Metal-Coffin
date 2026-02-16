@@ -11,4 +11,4 @@ shader_parameter/colors = 16
 shader_parameter/pixelate = 1
 shader_parameter/dither_texture = ExtResource("2_3waiy")
 shader_parameter/ScreenSize = Vector2(0, 0)
-shader_parameter/DitherRes = Vector2(720, 405)
+shader_parameter/DitherRes = Vector2(864, 486)

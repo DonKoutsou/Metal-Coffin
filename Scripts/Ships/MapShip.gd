@@ -152,6 +152,8 @@ func Repair() -> void:
 	else:
 		ShipDockActions.emit("Repairing", false, 0)
 
+
+
 #CALLED WHEN A SHIP PART IS REMOVED OR ADDED TO INVENTORY TO UPDATE VISUAL RANGE AND ELINT RANGE
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:
@@ -309,7 +311,7 @@ func Damage(amm : float, ShowVisuals : bool = true) -> void:
 	Cpt.ConsumeResource(STAT_CONST.STATS.HULL, amm)
 	if (IsDead()):
 		Kill()
-		
+
 func Kill() -> void:
 	InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
 	MapPointerManager.GetInstance().RemoveShip(self)
@@ -727,6 +729,14 @@ func IsFuelFull() -> bool:
 		if (!g.IsFuelFull()):
 			return false
 	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
+
+func GetValue() -> int:
+	var Value : int = Cpt.ProvidingFunds
+	var InvContents : Dictionary[Item, int] = Cpt.GetCharacterInventory().GetInventoryContents()
+	for g : Item in InvContents.keys():
+		for z in InvContents[g]:
+			Value += g.Cost
+	return Value
 
 #//////////////////////////////////////
 #███████ ██ ███    ███ ██    ██ ██       █████  ████████ ██  ██████  ███    ██ 

@@ -20,6 +20,7 @@ var EnemyCity : bool = false
 var PossibleDrops : Array[Item]
 var Merch : Array[Merchandise] = []
 var WorkShopMerch : Array[Merchandise] = []
+var Recruits : Array[Captain] = []
 var Pos : Vector2
 
 #Current population of spot
@@ -150,6 +151,14 @@ func HasUpgrade() -> bool:
 			hasu = true
 			break
 	return hasu
+
+func HasRecruit() -> bool:
+	var hasr = false
+	for g in PossibleDrops:
+		if g.ItemName == "Thing":
+			hasr = true
+			break
+	return hasr
 #//////////////////////////////////////////////////////////////////
 func OnSpotVisited(PlayAnim : bool = true) -> void:
 	#if (!Analyzed):

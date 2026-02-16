@@ -12,12 +12,14 @@ class_name TownScene
 @export var WorkshopButton : Button
 @export var FuelButton : Button
 @export var RepairButton : Button
+@export var RecruitButton : Button
 
 @export_group("Scenes")
 @export var MerchShopScene : PackedScene
 @export var FuelStorageScene : PackedScene
 @export var RepairStationScene : PackedScene
 @export var WorkshopScene : PackedScene
+@export var RecruitShopScene : PackedScene
 
 var BoughtFuel : float = 0
 
@@ -44,14 +46,17 @@ func _ready() -> void:
 func SetTownBuffs() -> void:
 	RepairButton.visible = TownSpot.HasRepair()
 	WorkshopButton.visible = TownSpot.HasUpgrade()
+	RecruitButton.visible = TownSpot.HasRecruit()
 	
 	var Text : String = ""
 	if (TownSpot.HasFuel()):
 		Text += "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
 	if (TownSpot.HasRepair()):
-		Text += "[img={32}x{32}]res://Assets/Items/cubeforce.png[/img] REPAIR TIME/COST -[p]"
+		Text += "[img={32}x{32}]res://Assets/Items/Wrench.png[/img] REPAIR TIME/COST -[p]"
 	if (TownSpot.HasUpgrade()):
-		Text += "[img={32}x{32}]res://Assets/Items/Wrench.png[/img] UPGRADE TIME/COST -[p][p]"
+		Text += "[img={32}x{32}]res://Assets/Items/upgrade.png[/img] UPGRADE TIME/COST -[p][p]"
+	if (TownSpot.HasRecruit()):
+		Text += "[img={32}x{32}]res://Assets/Items/cubeforcesmol.png[/img] UPGRADE TIME/COST -[p][p]"
 	PortBuffText.text = Text
 
 func On_MunitionShop_pressed() -> void:
@@ -91,7 +96,12 @@ func OnRepairStationPressed() -> void:
 
 func FuelExchangeFinished(Fuel : float) -> void:
 	BoughtFuel = Fuel
-	
+
+func On_Recruit_Pressed() -> void:
+	var RShop = RecruitShopScene.instantiate() as RecruitShop
+	add_child(RShop)
+	RShop.Init(TownSpot.Recruits)
+	RShop.OnCaptainBought.connect(OnShipBought)
 
 func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop
@@ -110,10 +120,26 @@ func OnMunitionShopToggled() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MERCH_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
 		ActionTracker.GetInstance().ShowTutorial("Munition Shop", "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color].\nSome of those [color=#ffc315]Items[/color] are ment to be used in the overworld while others will provide you with extra [color=#ffc315]Cards[/color] for your [color=#ffc315]Deck[/color].", [], true)
+
+func OnShipBought(Cap : Captain) -> void:
+	var NewCommander : MapShip
 	
+	for g in LandedShips:
+		if (g.Command == null):
+			NewCommander = g
+			break
+			
+	NewCommander.GetDroneDock().AddRecruit(Cap)
+	
+
+func OnShipSold(Ship : MapShip) -> void:
+	Ship.Kill()
+	
+
 
 func OnItemSold(It : Item) -> void:
 	PopupManager.GetInstance().DoFadeNotif("{0} has been sold".format([It.ItemName]))
+	
 	for g in LandedShips:
 		var inv = g.Cpt.GetCharacterInventory()
 		if (inv.HasItem(It)):
@@ -173,6 +199,12 @@ func _on_town_background_position_changed() -> void:
 	var RepairNode = TownBG.GetNodeForPosition(TownBackground.Location.REPAIR)
 	RepairButton.global_position = RepairNode.global_position
 	(RepairButton.get_child(0) as Line2D).set_point_position(1, (RepairButton.get_child(0) as Line2D).to_local(RepairNode.get_child(0).global_position))
+	
+	var RecruitNode = TownBG.GetNodeForPosition(TownBackground.Location.RECRUIT)
+	RecruitButton.global_position = RecruitNode.global_position
+	(RecruitButton.get_child(0) as Line2D).set_point_position(1, (RecruitButton.get_child(0) as Line2D).to_local(RecruitNode.get_child(0).global_position))
+
+	
 
 func _on_button_pressed() -> void:
 	TransactionFinished.emit(BoughtFuel, LandedShips, self)

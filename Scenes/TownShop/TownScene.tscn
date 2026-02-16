@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scripts/TownShop/town_scene.gd" id="2_epy1b"]
 [ext_resource type="PackedScene" uid="uid://d3irrnfaw10g4" path="res://Scenes/TownShop/RepairStation.tscn" id="5_otyss"]
+[ext_resource type="PackedScene" uid="uid://bhcsc4won0txa" path="res://Scenes/WorkShop/RecruitShop.tscn" id="7_3xe8e"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="8_2uwot"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
@@ -22,7 +23,7 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_oyy4e"]
 environment = SubResource("Environment_t244x")
 
-[node name="TownScene" type="Control" unique_id=1363066493 node_paths=PackedStringArray("PortName", "Population", "PortBuffText", "MerchendiseButton", "WorkshopButton", "FuelButton", "RepairButton")]
+[node name="TownScene" type="Control" unique_id=1363066493 node_paths=PackedStringArray("PortName", "Population", "PortBuffText", "MerchendiseButton", "WorkshopButton", "FuelButton", "RepairButton", "RecruitButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,10 +40,12 @@ MerchendiseButton = NodePath("Button2")
 WorkshopButton = NodePath("Button3")
 FuelButton = NodePath("Button4")
 RepairButton = NodePath("Button5")
+RecruitButton = NodePath("Button6")
 MerchShopScene = ExtResource("17_vaeb3")
 FuelStorageScene = ExtResource("18_u4st4")
 RepairStationScene = ExtResource("5_otyss")
 WorkshopScene = ExtResource("17_t244x")
+RecruitShopScene = ExtResource("7_3xe8e")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1803057310]
 layout_mode = 1
@@ -130,6 +133,25 @@ theme_override_font_sizes/font_size = 16
 text = "REPAIR BAY"
 
 [node name="Line2D" type="Line2D" parent="Button5" unique_id=1134968368]
+show_behind_parent = true
+position = Vector2(0, 15)
+points = PackedVector2Array(0, 0, 0, 45.15)
+width = 2.0
+default_color = Color(1, 0.763983, 0.0812772, 1)
+
+[node name="Button6" type="Button" parent="." unique_id=434348707 groups=["DigitalButtons"]]
+layout_mode = 0
+offset_left = 462.0
+offset_top = 585.0
+offset_right = 762.0
+offset_bottom = 618.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme = ExtResource("1_ca22g")
+theme_override_font_sizes/font_size = 16
+text = "RECRUIT OFFICE"
+
+[node name="Line2D" type="Line2D" parent="Button6" unique_id=2042780671]
 show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
@@ -262,4 +284,5 @@ bus = &"MapSounds"
 [connection signal="pressed" from="Button3" to="." method="OnUpgradeShopPressed"]
 [connection signal="pressed" from="Button4" to="." method="OnRefuelShopPressed"]
 [connection signal="pressed" from="Button5" to="." method="OnRepairStationPressed"]
+[connection signal="pressed" from="Button6" to="." method="On_Recruit_Pressed"]
 [connection signal="pressed" from="HBoxContainer2/Button" to="." method="_on_button_pressed"]

@@ -252,6 +252,31 @@ func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
 func GetCharacterInventory() -> CharacterInventory:
 	return _CharInv
 
+func GetValue() -> int:
+	var Value : int = ProvidingFunds
+	for g : Item in StartingItems:
+		Value += g.Cost
+	return Value
+
 func LoadStats(Fuel : float, Hull : float) -> void:
 	_GetStat(STAT_CONST.STATS.FUEL_TANK).CurrentValue = Fuel
 	_GetStat(STAT_CONST.STATS.HULL).CurrentValue = Hull
+
+func GetDuplicate() -> Captain:
+	var C = self.duplicate(true)
+	for g in StartingItems:
+		if (g is ShipPart):
+			C.OnShipPartAddedToInventory(g)
+	return C
+
+func GetStartingDeck() -> Dictionary[CardStats, int]:
+	var D : Dictionary[CardStats, int]
+	for g in StartingItems:
+		for c in g.CardProviding:
+			if (D.has(c)):
+				D[c] += 1
+			else:
+				D[c] = 1
+	return D
+ 	
+	

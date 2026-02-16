@@ -22,6 +22,10 @@ adjustment_enabled = true
 environment = SubResource("Environment_t244x")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qc4cv"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 0.5)
 
 [sub_resource type="Animation" id="Animation_n8xlk"]
@@ -149,6 +153,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 6
 texture = ExtResource("4_nnckq")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=912032770]
 layout_mode = 1
@@ -165,6 +170,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qc4cv")
 
 [node name="Label2" type="Label" parent="PanelContainer" unique_id=1609695849]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 24
 text = "testes
 stestse
