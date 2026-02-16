@@ -90,12 +90,12 @@ func _draw() -> void:
 			
 		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
-		var TimeToDest = Helper.FromMinutesToStringShort((disttopos / CurrentShip.GetAffectedSpeed()* 60))
-		var string = "{0} km\n{1}".format([roundi(disttopos), TimeToDest])
-		var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0)) - Vector2((TimeToDest.length() / CurrentZoom * 5.0), 0)
-		#pos.x -= string.length() / 2 * fontsize
-		
-		draw_multiline_string(f, pos, string, HORIZONTAL_ALIGNMENT_CENTER, -1, fontsize, -1, Col)
+		#var TimeToDest = Helper.FromMinutesToStringShort((disttopos / CurrentShip.GetAffectedSpeed()* 60))
+		#var string = "{0} km\n{1}".format([roundi(disttopos), TimeToDest])
+		#var pos = origin + (origin.direction_to(topos) * (disttopos / 2.0)) - Vector2((TimeToDest.length() / CurrentZoom * 5.0), 0)
+		##pos.x -= string.length() / 2 * fontsize
+		#
+		#draw_multiline_string(f, pos, string, HORIZONTAL_ALIGNMENT_CENTER, -1, fontsize, -1, Col)
 
 	for g in TargetLocations.size():
 		var origin = to_local(CurrentShip.global_position)

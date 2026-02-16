@@ -265,7 +265,9 @@ func OnEnemyVisualLost(Ship : MapShip) -> void:
 			Info.Speed = Ship.GetAffectedSpeed()
 			Info.Direction = Ship.global_rotation
 			EnemyPositionsToInvestigate[Ship] = Info
+			
 
+#func SetPositionUnderInvestigation()
 #/////////////////////////////////////////////////////////////
 
 func AproximatePositionOnIntercept(HunterPos : Vector2, HunsterSpeed : float, Pos : Vector2, Speed : float) -> Vector2:

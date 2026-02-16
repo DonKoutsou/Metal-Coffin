@@ -1,11 +1,61 @@
 [gd_scene format=3 uid="uid://tvbauwn0211y"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_jivx4"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="2_dr2e1"]
+[ext_resource type="Script" uid="uid://bptfjok68jwtc" path="res://Scenes/InScreenUI/custom_confirm.gd" id="2_jvodm"]
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" unique_id=57166641]
-oversampling_override = 1.0
-position = Vector2i(500, 272)
-size = Vector2i(200, 103)
-visible = true
-exclusive = false
+[node name="ConfirmationDialog" type="ColorRect" unique_id=1807152609 node_paths=PackedStringArray("ChoiceButton1", "ChoiceButton2", "OptionTextLabel")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_jivx4")
+color = Color(0, 0, 0, 0.8)
+script = ExtResource("2_jvodm")
+ChoiceButton1 = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Choice1")
+ChoiceButton2 = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Choice2")
+OptionTextLabel = NodePath("PanelContainer/VBoxContainer/Label")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=875252767]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -83.5
+offset_right = 163.0
+offset_bottom = 83.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_dr2e1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=817615889]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=347022041]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Thing"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=2060415543]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Choice1" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1715371974]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="Choice2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=255830806]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Choice1" to="." method="_on_choice_1_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Choice2" to="." method="_on_choice_2_pressed"]

@@ -19,15 +19,14 @@ func DoPopUp(Text : String, Parent : Node):
 	dig.dialog_text = Text
 	dig.popup_centered()
 	
-func DoConfirm(Title : String, Text : String, ConfirmText : String, Method : Callable, Parent : Node):
-	var dig = CustomConfirm.instantiate() as ConfirmationDialog
-	dig.connect("confirmed", Method)
-	dig.title = Title
-	#add_child(dig)
-	#dig.title = 
-	dig.dialog_text = Text
-	dig.ok_button_text = ConfirmText
-	dig.popup_exclusive_centered(Parent)
+func DoConfirm(Text : String, ConfirmText : String, Parent : Node) -> SignalObject:
+	var dig = CustomConfirm.instantiate() as CustomConfirm
+	var signa = dig.DoChoice(ConfirmText, "No", Text)
+	if (is_instance_valid(Parent)):
+		Parent.add_child(dig)
+	else:
+		Ingame_UIManager.GetInstance().PopupPlecement.add_child(dig)
+	return signa
 
 var CurrentlyShownFade : Array[String]
 

@@ -472,6 +472,12 @@ func _on_sell_pressed() -> void:
 	if (CurrentShip is PlayerShip):
 		PopUpManager.GetInstance().DoFadeNotif("Flagship can't be sold")
 		return
+	var s = PopUpManager.GetInstance().DoConfirm("Sell ship?", "Yes", null)
+	s.Sign.connect(SellConfirmed)
+
+func SellConfirmed(t : bool) -> void:
+	if (!t):
+		return
 	var PLWallet = World.GetInstance().PlayerWallet
 	PLWallet.AddFunds(CurrentShip.GetValue())
 	ShipSold.emit(CurrentShip)
