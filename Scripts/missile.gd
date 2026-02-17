@@ -9,6 +9,7 @@ var Distance : int = 1500
 var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
 @export var C : CardStats
+@export var MissileVisual : Node2D
 
 var FoundShips : Array[Node2D] = []
 var Paused = false
@@ -52,6 +53,8 @@ func _ready() -> void:
 		get_parent().add_child(s)
 	$AccelPosition.position.x = Speed / 360
 	
+	$Radar_Range.visible = Friendly
+	
 
 func _physics_process(delta: float) -> void:
 	if (Paused):
@@ -69,14 +72,16 @@ func _physics_process(delta: float) -> void:
 	global_position += affectedoffset
 	
 	
-	$TrailLine.Update(delta)
+	$ColorRect/TrailLine.Update(delta)
 	
 	activationdistance += offset.length() * SimulationManager.SimSpeed()
+	
+	
 	
 	if (activationdistance < 50):
 		return
 	
-	$Radar_Range.visible = Friendly
+	
 	
 	if (FoundShips.size() > 0):
 		HoneAtEnemy()
@@ -249,8 +254,8 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CurrentHull = 50
 	stats.Speed = Speed
 	stats.FirePower = Damage
-	#stats.ShipIcon = Cpt.ShipIcon
-	#stats.CaptainIcon = Cpt.CaptainPortrait
+	stats.ShipIcon = ResourceLoader.load("res://Assets/ShipTextures/Missile.png")
+	stats.CaptainIcon = ResourceLoader.load("res://Assets/ShipTextures/Missile.png")
 	stats.Name = GetShipName()
 	var cards : Array[CardStats] = [C]
 	stats.Cards = cards
@@ -260,3 +265,6 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Funds = 0
 	stats.Convoy = false
 	return stats
+
+func UpdateCameraZoom(NewZoom : float) -> void:
+	MissileVisual.visible = NewZoom > 1.5

@@ -493,18 +493,17 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : TownScene):
 	var spot = Ships[0].CurrentPort as MapSpot
 	if (BFuel < 0):
-		var FuelToRemove = BFuel
 		for ship : MapShip in Ships:
 			var CurrentValue = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 			
-			var CurrentFuelToRemove = min(CurrentValue, abs(FuelToRemove))
+			var CurrentFuelToRemove = min(CurrentValue, abs(BFuel))
 			
 			ship.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, CurrentFuelToRemove)
 			
 			#we add cause fuel to remove should be negative
-			FuelToRemove += CurrentFuelToRemove
+			BFuel += CurrentFuelToRemove
 			
-			if (FuelToRemove == 0):
+			if (BFuel == 0):
 				break
 
 		#if (Ship is PlayerShip):
@@ -514,7 +513,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 	
 	GetMap().HideWorld(true)
 	
-	spot.AddToFuelReserves(BFuel)
+	spot.SetFuelReserves(BFuel)
 	
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
@@ -563,11 +562,10 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	return PlayedEvent
 
 func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
-
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
-	#else:
-		#GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
+
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
 	#await GetMap().GetScreenUi().FullScreenToggleFinished
 	if (Recruited):

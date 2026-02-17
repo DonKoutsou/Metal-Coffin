@@ -13,6 +13,8 @@ class_name MapPointerManager
 @export var ConvoyColor : Color
 @export var UIEventH : UIEventHandler
 @export var ControllerEventHandler : ShipControllerEventHandler
+@export var MapSpotMarkerParent : Node2D
+@export var ShipMarkerParent : Node2D
 
 #@export var SpotColor : Color
 
@@ -67,7 +69,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	Ships.append(Ship)
 	var marker = MarkerScene.instantiate() as ShipMarker
 
-	add_child(marker)
+	ShipMarkerParent.add_child(marker)
 	_ShipMarkers.append(marker)
 	
 	marker.global_position = Ship.global_position
@@ -133,7 +135,7 @@ func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 	Spots.append(Spot)
 	var marker = MapSpotMarkerScene.instantiate() as SpotMarker
 	marker.TownTargetSelected.connect(OnSpotTargetSelected)
-	add_child(marker)
+	MapSpotMarkerParent.add_child(marker)
 	
 	_SpotMarkers.append(marker)
 	marker.SetMarkerDetails(Spot, PlayAnim)

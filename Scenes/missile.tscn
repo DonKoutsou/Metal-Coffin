@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="4_5epdn"]
 [ext_resource type="Resource" uid="uid://miwqhx371w2u" path="res://Resources/Cards/MissileBash.tres" id="4_brtn2"]
 [ext_resource type="AudioStream" uid="uid://cdltvihh7rmac" path="res://Assets/Sounds/missile_launch_02.mp3" id="4_d3kn2"]
+[ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="7_0pbpk"]
+[ext_resource type="Texture2D" uid="uid://i2b3j51ebdwu" path="res://Assets/ShipTextures/Missile.png" id="8_opb0f"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_brtn2"]
 streams_count = 2
@@ -24,6 +26,13 @@ shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahj0"]
 radius = 5.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_38xgp"]
+resource_local_to_scene = true
+shader = ExtResource("7_0pbpk")
+shader_parameter/ShipSize = 0.08
+shader_parameter/shadow_parallax_amount = 0.5
+shader_parameter/sprite_rotation = -1.57
+
 [sub_resource type="Curve" id="Curve_5epdn"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -33,11 +42,12 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.505804, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
-[node name="Missile" type="Node2D" unique_id=1696527019 groups=["Missiles", "Ships"]]
+[node name="Missile" type="Node2D" unique_id=1696527019 node_paths=PackedStringArray("MissileVisual") groups=["Missiles", "Ships", "ZoomAffected"]]
 z_index = 1
 script = ExtResource("1_dxfkf")
 MissileLaunchSound = SubResource("AudioStreamRandomizer_brtn2")
 C = ExtResource("4_brtn2")
+MissileVisual = NodePath("ColorRect")
 
 [node name="AccelPosition" type="Node2D" parent="." unique_id=1303542076]
 position = Vector2(29, 0)
@@ -71,8 +81,17 @@ polygon = PackedVector2Array(5.5, 0, 200, 100, 220, 0, 200, -100)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MissileBody" unique_id=2017869157]
 shape = SubResource("CircleShape2D_xahj0")
 
-[node name="TrailLine" type="Line2D" parent="." unique_id=2050878307]
+[node name="ColorRect" type="Sprite2D" parent="." unique_id=615541520]
+material = SubResource("ShaderMaterial_38xgp")
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_opb0f")
+
+[node name="TrailLine" type="Line2D" parent="ColorRect" unique_id=2050878307]
 z_index = -2
+position = Vector2(1.4479961e-05, -4)
+rotation = 1.5708
+scale = Vector2(2, 2)
 points = PackedVector2Array(0, 0)
 width = 1.0
 width_curve = SubResource("Curve_5epdn")

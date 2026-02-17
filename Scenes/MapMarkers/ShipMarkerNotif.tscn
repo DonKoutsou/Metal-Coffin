@@ -155,6 +155,7 @@ round_precision = 1
 z_index = 3
 use_parent_material = true
 anchors_preset = 0
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1574889798]
 z_index = 225
@@ -171,6 +172,7 @@ offset_right = 13.0
 offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_r74yg")
 
 [node name="Label" type="Label" parent="Control/PanelContainer" unique_id=1177534605 groups=["MapInfo"]]
