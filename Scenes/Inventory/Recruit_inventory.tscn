@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="3_mw0ys"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_wi86h"]
 
-[node name="CharacterInventoryUI" type="PanelContainer" unique_id=1843118128 node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent", "CaptainNameLabel")]
+[node name="CharacterInventoryUI" type="PanelContainer" unique_id=1843118128 node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent")]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -25,7 +25,6 @@ FuelTankInventoryBoxParent = NodePath("HFlowContainer/PanelContainer2/VBoxContai
 WeaponInventoryBoxParent = NodePath("HFlowContainer/PanelContainer5/VBoxContainer5/Weapons")
 ShieldInventoryBoxParent = NodePath("HFlowContainer/PanelContainer4/VBoxContainer4/Shields")
 InventoryBoxParent = NodePath("HFlowContainer/PanelContainer6/VBoxContainer6/Inventory")
-CaptainNameLabel = NodePath("")
 HideOnStart = false
 
 [node name="HFlowContainer" type="VBoxContainer" parent="." unique_id=429632373]

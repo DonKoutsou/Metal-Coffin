@@ -128,6 +128,7 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar" unique_id=1409079965]
+visible = false
 shape = SubResource("CircleShape2D_ogc8b")
 debug_color = Color(0, 0.650296, 0.101282, 0.42)
 
@@ -135,6 +136,7 @@ debug_color = Color(0, 0.650296, 0.101282, 0.42)
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody" unique_id=1165760597]
+visible = false
 shape = SubResource("CircleShape2D_rjoek")
 debug_color = Color(0.839233, 0.00116919, 0.924893, 0.42)
 
@@ -163,6 +165,7 @@ script = ExtResource("9_dl1n1")
 MissileDockEventH = ExtResource("9_jx5d0")
 
 [node name="MissileLine" type="Line2D" parent="MissileDock" unique_id=1835140514]
+visible = false
 z_index = 2
 material = SubResource("CanvasItemMaterial_vppi8")
 points = PackedVector2Array(0, 0, 10, 0)

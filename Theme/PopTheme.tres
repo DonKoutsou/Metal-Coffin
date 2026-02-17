@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://cjob57ldf08tq" path="res://Theme/HSlider_GrabberH.tres" id="8_xd0bq"]
 [ext_resource type="StyleBox" uid="uid://d2d2677f3j08f" path="res://Theme/HSlider_Slider.tres" id="9_hukj5"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_udhci"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="9_yv80o"]
 [ext_resource type="StyleBox" uid="uid://b55uyr0b56r5s" path="res://Theme/VSlider_Grabber.tres" id="14_v41hx"]
 [ext_resource type="FontFile" uid="uid://ci3bxu4ymkfll" path="res://Fonts/Perfect DOS VGA 437 Win.ttf" id="14_xwr5s"]
 [ext_resource type="StyleBox" uid="uid://cfiw4vt0vjqy4" path="res://Theme/VSlider_GrabberH.tres" id="15_v1byl"]
@@ -1502,8 +1503,8 @@ MenuButton/styles/focus = SubResource("StyleBoxFlat_xybg7")
 MenuButton/styles/hover = SubResource("StyleBoxFlat_ecge5")
 MenuButton/styles/normal = SubResource("StyleBoxFlat_sxi1e")
 MenuButton/styles/pressed = SubResource("StyleBoxFlat_wwfp1")
-Panel/styles/panel = ExtResource("4_apdyr")
-PanelContainer/styles/panel = ExtResource("4_apdyr")
+Panel/styles/panel = ExtResource("9_udhci")
+PanelContainer/styles/panel = ExtResource("9_yv80o")
 PopupMenu/colors/font_color = Color(1, 0.763983, 0.0812772, 1)
 PopupMenu/colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
 PopupMenu/constants/outline_size = 8

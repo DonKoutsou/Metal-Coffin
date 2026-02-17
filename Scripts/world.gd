@@ -62,6 +62,7 @@ static func GetInstance() -> World:
 
 func _ready() -> void:
 	WORLDST = WORLDSTATE.INITIAL
+	SimulationManager.GetInstance().TogglePause(true)
 	Instance = self
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
@@ -454,7 +455,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var Inventory = InventoryManager.GetInstance()
 	if (Inventory.visible):
 		Inventory.ToggleInventory()
-
+	GetMap().HideWorld(false)
 	SimulationManager.GetInstance().TogglePause(true)
 	WORLDST = WORLDSTATE.TOWN
 	
@@ -462,7 +463,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var PlayedEvent = await Land(spot, Ship)
 	if (PlayedEvent):
 		return
-	GetMap().HideWorld(false)
+	
 	var TownSc = await Helper.GetInstance().LoadThreaded(FuelTradeScene).Sign
 	var sc = TownSc as PackedScene
 	var fuel = sc.instantiate() as TownScene

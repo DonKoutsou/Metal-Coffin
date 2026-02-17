@@ -4,7 +4,7 @@ class_name SimulationManager
 
 @export var _Map : Map
 
-static var Paused : bool = false
+static var Paused : bool = true
 static var SimulationSpeed : float = 0.2
 
 signal SpeedChanged(t : bool)

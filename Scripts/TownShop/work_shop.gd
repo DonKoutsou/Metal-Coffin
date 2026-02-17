@@ -250,13 +250,13 @@ func ItemSelected(Box : Inventory_Box) -> void:
 		DescriptorPlace.remove_child(WorkshopDescriptor)
 		WorkshopDescriptor.queue_free()
 		if (WorkshopDescriptor.DescribedContainer == Box):
-			ShipStats.visible = true
+			ShipStats.get_parent().visible = true
 			return
 	
 			
 	WorkshopDescriptor= ItemDescriptorScene.instantiate() as ItemDescriptor
 	WorkshopDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	ShipStats.visible = false
+	ShipStats.get_parent().visible = false
 	WorkshopDescriptor.DescribedContainer = Box
 	if (Box.IsEmpty()):
 		WorkshopDescriptor.SetEmptyShopData(GetTypeOfBox(Box))
@@ -281,7 +281,7 @@ func CloseDescriptor() -> void:
 	#var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (WorkshopDescriptor != null):
 		WorkshopDescriptor.queue_free()
-	ShipStats.visible = true
+	ShipStats.get_parent().visible = true
 
 func RemoveItem(Box : Inventory_Box) -> void:
 	var Cost = Box.GetContainedItem().Cost
@@ -484,3 +484,11 @@ func SellConfirmed(t : bool) -> void:
 	AvailableShips.erase(CurrentShip)
 	RefreshCaptains()
 	
+
+
+func _on_stats_button_pressed() -> void:
+	ShipStats.ShowStats()
+
+
+func _on_deck_button_pressed() -> void:
+	ShipStats.ShowDeck()

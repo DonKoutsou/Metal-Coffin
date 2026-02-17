@@ -214,7 +214,7 @@ func FrameCamToShip():
 func RegroupPressed() -> void:
 	
 	if (ControlledShip is PlayerShip):
-		PopupManager.GetInstance().DoFadeNotif("Can't merge flagship with other fleets")
+		PopupManager.GetInstance().DoFadeNotif("Can't merge flagship\nwith other fleets")
 		return
 	
 	var ShipList = get_tree().get_nodes_in_group("PlayerShips")
@@ -226,7 +226,7 @@ func RegroupPressed() -> void:
 		CapList.append(Ship.Cpt)
 	
 	if (CapList.size() == 0):
-		PopupManager.GetInstance().DoFadeNotif("No available captains to regroup with")
+		PopupManager.GetInstance().DoFadeNotif("No available captains\nto regroup with")
 		return
 	
 	var CaptainSelectScreen : PackedScene = ResourceLoader.load(CptSelectSceneFile)
