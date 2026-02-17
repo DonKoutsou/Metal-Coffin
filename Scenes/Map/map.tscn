@@ -119,6 +119,7 @@ light_mode = 1
 light_mode = 1
 
 [node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WeatherMan", "WorldParent", "MapPointerMan")]
+process_mode = 1
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
@@ -163,7 +164,6 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="ViewPort" type="SubViewport" parent="SubViewportContainer" unique_id=580875506]
-process_mode = 1
 disable_3d = true
 own_world_3d = true
 world_3d = ExtResource("10_28wu2")

@@ -38,6 +38,7 @@ enum WORLDSTATE{
 	FIGHT,
 	TRADE,
 	TOWN,
+	FINISHED,
 }
 
 # array holding the strings of the stats that we have already notified the player that are getting low
@@ -164,7 +165,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if (World.WORLDST != World.WORLDSTATE.NORMAL):
 		return
-		
+	
+	if get_tree().paused:
+		return
 	Controller.Update()
 	
 	var CurrentDelta = delta * SimulationManager.SimSpeed()
@@ -296,7 +299,7 @@ func ShipSeparationFinished() -> void:
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
-func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
+func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[BattleShipStats]):
 	if (WORLDST == WORLDSTATE.FIGHT):
 		return
 	#Temp solution to stop fight starting twice
@@ -323,7 +326,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	for g in Friendlies:
 		FighingFriendlyUnits.append(g)
 		FBattleStats.append(g.GetBattleStats())
-		
+	
 	#Enemy battle stats
 	var EBattleStats : Array[BattleShipStats] = []
 	for g : HostileShip in Enemies:
@@ -332,6 +335,12 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 		FighingEnemyUnits.append(g)
 		EBattleStats.append(g.GetBattleStats())
 	
+	if (Enemies.size() > 0):
+		for g in Missiles:
+			FBattleStats.append(g)
+	else:
+		for g in Missiles:
+			EBattleStats.append(g)
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
 	
@@ -349,6 +358,9 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip]):
 	Ingame_UIManager.GetInstance().AddUI(CardF, true, false)
 	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	UISoundMan.GetInstance().Refresh()
+
+func StartMissileFight() -> void:
+	pass
 
 func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 	var AllUnits : Array[MapShip]
@@ -600,6 +612,7 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
 
 #--------------------------------------------------------
 func GameLost(reason : String):
+	World.WORLDST = World.WORLDSTATE.FINISHED
 	get_tree().paused = true
 	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer.visible = true
 	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer/VBoxContainer/Label.text = reason

@@ -8,6 +8,7 @@ var Distance : int = 1500
 @export var Speed : float = 1
 var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
+@export var C : CardStats
 
 var FoundShips : Array[Node2D] = []
 var Paused = false
@@ -18,6 +19,7 @@ var DistanceTraveled : float
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
 
+signal ShipMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[BattleShipStats])
 signal OnShipDestroyed(Mis : Missile)
 
 var activationdistance : float = 0
@@ -148,9 +150,30 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		area.get_parent().Kill()
 		Kill()
 		return
-	area.get_parent().Damage(Damage)
-	if (area.get_parent().IsDead()):
-		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.TARGET_DEST)
+	var s : MapShip = area.get_parent()
+	var Command : MapShip
+	if (s.Command == null):
+		Command = s
+	else:
+		Command = s.Command
+	
+	var Squad : Array[MapShip]
+	
+	Squad.append(Command)
+	Squad.append_array(Command.GetDroneDock().GetDockedShips())
+	
+	var PlSquad : Array[MapShip]
+	var HostileSquad : Array[MapShip]
+	if (Command is HostileShip):
+		HostileSquad = Squad
+	else:
+		PlSquad = Squad
+	var Mis : Array[BattleShipStats] = [GetBattleStats()]
+	ShipMet.emit(PlSquad, HostileSquad, Mis)
+	
+	#area.get_parent().Damage(Damage)
+	#if (area.get_parent().IsDead()):
+		#RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.TARGET_DEST)
 	call_deferred("Kill")
 		
 func _on_missile_body_area_exited(area: Area2D) -> void:
@@ -218,3 +241,22 @@ func Kill() -> void:
 	StopSeeing()
 	queue_free()
 	get_parent().remove_child(self)
+
+func GetBattleStats() -> BattleShipStats:
+	
+	var stats = BattleShipStats.new()
+	stats.Hull = 50
+	stats.CurrentHull = 50
+	stats.Speed = Speed
+	stats.FirePower = Damage
+	#stats.ShipIcon = Cpt.ShipIcon
+	#stats.CaptainIcon = Cpt.CaptainPortrait
+	stats.Name = GetShipName()
+	var cards : Array[CardStats] = [C]
+	stats.Cards = cards
+	stats.Weight = 1
+	stats.MaxShield =  50
+	#stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
+	stats.Funds = 0
+	stats.Convoy = false
+	return stats

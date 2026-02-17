@@ -386,7 +386,7 @@ func ToggleRadar():
 		g.ToggleRadar()
 		
 func ToggleElint():
-	$Elint/CollisionShape2D.disabled = !$Elint/CollisionShape2D.disabled
+	ElintShape.get_child(0).disabled = !ElintShape.get_child(0).disabled
 	
 var d = 0.4
 

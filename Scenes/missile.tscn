@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://coc3mor33lg72" path="res://Shaders/missileCone.gdshader" id="1_hg5k0"]
 [ext_resource type="AudioStream" uid="uid://bsmp34u1oty24" path="res://Assets/Sounds/missile_launch_01.mp3" id="2_d3kn2"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="4_5epdn"]
+[ext_resource type="Resource" uid="uid://miwqhx371w2u" path="res://Resources/Cards/MissileBash.tres" id="4_brtn2"]
 [ext_resource type="AudioStream" uid="uid://cdltvihh7rmac" path="res://Assets/Sounds/missile_launch_02.mp3" id="4_d3kn2"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_brtn2"]
@@ -33,8 +34,10 @@ offsets = PackedFloat32Array(0, 0.505804, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
 [node name="Missile" type="Node2D" unique_id=1696527019 groups=["Missiles", "Ships"]]
+z_index = 1
 script = ExtResource("1_dxfkf")
 MissileLaunchSound = SubResource("AudioStreamRandomizer_brtn2")
+C = ExtResource("4_brtn2")
 
 [node name="AccelPosition" type="Node2D" parent="." unique_id=1303542076]
 position = Vector2(29, 0)

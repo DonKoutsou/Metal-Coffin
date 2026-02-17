@@ -44,7 +44,9 @@ var Lodded : bool = true
 #Until this value reaches a certain threashold ships speed or trajectory are not known
 var ExposedValue : float = 0.0
 
-signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip])
+var Reloading : float = 0
+
+signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip], Mis : Array[BattleShipStats])
 signal OnDestinationReached(Ship : HostileShip)
 signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
 signal OnPlayerVisualLost(Ship : MapShip)
@@ -132,6 +134,10 @@ func _Update(delta: float) -> void:
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
+	if (Reloading > 0):
+		print("{0} is reloading a their missiles".format([Cpt.GetCaptainName()]))
+		Reloading = max(0, Reloading - (delta * SimulationSpeed))
+	
 	for g in TrailLines:
 		g.UpdateProjected(delta, 1)
 	
@@ -172,6 +178,9 @@ func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	get_parent().add_child(missile)
 	
 	missile.look_at(Pos)
+	missile.ShipMet.connect(Map.GetInstance().EnemyMet)
+	
+	Reloading = 2
 
 func Steer(Rotation : float) -> void:
 	while rotation_degrees > 180:
@@ -438,7 +447,7 @@ func OnReachedPursuing() -> void:
 			else:
 				plships.append(g)
 				
-	OnPlayerShipMet.emit(plships, hostships)
+	OnPlayerShipMet.emit(plships, hostships, [])
 
 func GetCurrentDestination() -> Vector2:
 	var destination
@@ -714,21 +723,30 @@ func Evaporate() -> void:
 	OnShipDestroyed.emit(self)
 	Destroyed = true
 	if (ElintShape != null):
-		ElintShape.queue_free()
+		ToggleElint()
 	if (CurrentPort != null):
 		CurrentPort.OnSpotDeparture(self)
-	RadarShape.queue_free()
+	ToggleRadar()
 	MapPointerManager.GetInstance().RemoveShip(self)
 	queue_free()
 	get_parent().remove_child(self)
+
+func RephreshVisRange() -> void:
+	if (Destroyed):
+		return
+	var VisualRange = VisibilityValue
+	if (RadarWorking):
+		VisualRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
+	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(VisualRange, VisibilityValue)
 
 func Kill() -> void:
 	OnShipDestroyed.emit(self)
 	Destroyed = true
 	if (ElintShape != null):
-		ElintShape.queue_free()
+		ToggleElint()
 		
-	RadarShape.queue_free()
+	ToggleRadar()
 	ShipWrecked.emit()
 	if (CurrentPort != null):
 		CurrentPort.OnSpotDeparture(self)

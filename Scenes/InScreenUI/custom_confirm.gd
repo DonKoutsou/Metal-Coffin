@@ -8,7 +8,7 @@ class_name CustomConfirm
 
 var AnswerSignal : SignalObject
 
-func DoChoice(Choice1 : String, Choice2 : String, Text : String) -> SignalObject:
+func DoChoice(Choice1 : String = "Yes", Choice2 : String = "No", Text : String = "") -> SignalObject:
 	ChoiceButton1.text = Choice1
 	ChoiceButton2.text = Choice2
 	OptionTextLabel.text = Text

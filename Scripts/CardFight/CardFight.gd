@@ -1749,8 +1749,12 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 	if (D.DeckPile.size() <= 0):
 		await HandleShuffleDiscardedIntoDeck(D)
 	
+	if (D.DeckPile.size() == 0):
+		return false
+		
 	if (ConsumeEnergy):
 		UpdateEnergy(Performer, Performer.Energy - 1, true)
+	
 	
 	var C = D.DeckPile.pop_front()
 	
@@ -1776,9 +1780,10 @@ func HandleDrawCardEnemy(Performer : BattleShipStats) -> void:
 	if (D.DeckPile.size() <= 0):
 		HandleShuffleDiscardedIntoDeck(D, false)
 	
-	var C = D.DeckPile.pop_front()
-	
-	PlaceCardInEnemyHand(Performer, C)
+	if (D.DeckPile.size() > 0):
+		var C = D.DeckPile.pop_front()
+		
+		PlaceCardInEnemyHand(Performer, C)
 	
 	await DoCardDrawAnimation(Performer.ShipViz)
 

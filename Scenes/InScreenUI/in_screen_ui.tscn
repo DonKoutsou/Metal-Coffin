@@ -40,7 +40,6 @@ corner_detail = 1
 anti_aliasing = false
 
 [node name="InScreenUI" type="CanvasLayer" unique_id=1660404704 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "Screen", "ZoomUI", "AltitudeUI")]
-process_mode = 3
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_3cf0e")

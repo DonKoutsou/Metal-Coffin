@@ -45,7 +45,7 @@ class_name Map
 @export var UIEventH : UIEventHandler
 
 
-signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip])
+signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[Missile])
 #Signal called when all cities have their neighbors configured
 signal MAP_NeighborsSet
 signal GenerationFinished
@@ -148,8 +148,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	
 
 #Called when enemy ship touches friendly one to strart a fight
-func EnemyMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip]):
-	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips)
+func EnemyMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[BattleShipStats]):
+	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips, Missiles)
 
 func ScreenControls(t : bool) -> void:
 	$OuterUI/ButtonCover.visible = !t
@@ -220,7 +220,7 @@ func Arrival(Spot : MapSpot) -> void:
 				break
 	
 	if (StartFight):
-		EnemyMet(PlayerShips, HostileShips)
+		EnemyMet(PlayerShips, HostileShips, [])
 	#else:
 		#for g in Convoys:
 			#g.Command.GetDroneDock().UndockCaptive(g)
@@ -734,6 +734,7 @@ func RespawnMissiles(MissileData : Array[Resource]) -> void:
 		missile.global_position = dat.Pos
 		missile.global_rotation = dat.Rot
 		missile.DistanceTraveled = dat.DistanceTraveled
+		missile.ShipMet.connect(EnemyMet)
 	for g in get_tree().get_nodes_in_group("Enemy"):
 		g.connect("OnShipMet", EnemyMet)
 

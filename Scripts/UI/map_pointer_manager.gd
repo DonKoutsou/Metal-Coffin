@@ -84,7 +84,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 			#HOSTILE_SHIP_DEBUG
 			#marker.ToggleFriendlyShipDetails(true)
 			#////
-		
+		marker.ShipTargetSelected.connect(OnShipTargetSelected)
 		marker.ToggleShipDetails(true)
 		if (Ship.Destroyed):
 			marker.OnHostileShipDestroyed()

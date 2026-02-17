@@ -423,8 +423,8 @@ func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : boo
 func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
 	var Carrier : HostileShip
 	for g in Fleet:
-		#if g.Reloading > 0:
-			#continue
+		if g.Reloading > 0:
+			continue
 		var dist = Pos.distance_squared_to(g.global_position)
 		var PossibleArmament = GetCheapestArmamentForDistance(dist)
 		if (PossibleArmament == null):
@@ -439,8 +439,8 @@ func FindMissileCarrierAbleToFireToPosition(Pos : Vector2) -> HostileShip:
 func FindMissileCarrierAbleToFireToShip(Ship : MapShip) -> HostileShip:
 	var Carrier : HostileShip
 	for g in Fleet:
-		#if g.Reloading > 0:
-			#continue
+		if g.Reloading > 0:
+			continue
 		var dist = Ship.global_position.distance_squared_to(g.global_position)
 		var PossibleArmament = GetCheapestArmamentForDistance(dist)
 		if (PossibleArmament == null):
@@ -538,3 +538,4 @@ func LoadSaveData(Save : SaveData) -> void:
 		var ShipName = ship.GetShipName()
 		if (Pos.has(ShipName)):
 			EnemyPositionsToInvestigate[ship] = Pos[ShipName]
+			ship.OnShipDestroyed.connect(CancelInvestigation)
