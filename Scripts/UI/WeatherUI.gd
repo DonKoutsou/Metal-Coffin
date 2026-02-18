@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	var vis = ShipContoller.ControlledShipVisibilityValue
 	VizText.text = "Visibility = {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])
 	
-	if (vis > 0.6):
+	if (ShipContoller.ControlledShipStormValue < 0.9):
 		DangerLabel.visible = false
 	else:
 		d -= delta

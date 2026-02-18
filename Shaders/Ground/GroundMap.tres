@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ylp0ab88vpy8"]
+
+[ext_resource type="Shader" uid="uid://dri1tg43herg" path="res://Scenes/Map/MapBG.gdshader" id="1_66mk7"]
+[ext_resource type="FastNoiseLite" uid="uid://f0bcp4v0xei2" path="res://Shaders/Ground/GroundNoise.tres" id="2_s0sa5"]
+
+[sub_resource type="Gradient" id="Gradient_4gecd"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0.017077798, 0.03213466, 0.044376433, 0.13083397, 0.14766641, 0.22570772, 0.2379495, 0.32453415, 0.34472048, 0.42922723, 0.44223413, 0.51415455, 0.5271614, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_66mk7"]
+width = 2048
+height = 2048
+noise = ExtResource("2_s0sa5")
+color_ramp = SubResource("Gradient_4gecd")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[resource]
+shader = ExtResource("1_66mk7")
+shader_parameter/NoiseTexture2 = SubResource("NoiseTexture2D_66mk7")
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/col = 0.2
+shader_parameter/z = 0.25

@@ -452,7 +452,7 @@ func ItemUpgradeFinished() -> void:
 		UpgradedItem.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
 	AddItem(UpgradedItem)
 	_ItemBeingUpgraded = null
-	PopUpManager.GetInstance().DoFadeNotif("{0}'s {1} has succsfully been upgraded to {2}".format([CaptainNameLabel.text, Part.ItemName, UpgradedItem.ItemName]), null, 8)
+	PopUpManager.GetInstance().DoFadeNotif("{0}'s {1}\nhas succsfully been upgraded to\n{2}".format([CaptainNameLabel.text, Part.ItemName, UpgradedItem.ItemName]), null, 8)
 
 func ItemEquipFinished() -> void:
 	AddItem(_ItemBeingEquipped)

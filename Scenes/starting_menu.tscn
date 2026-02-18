@@ -5,16 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://cs1i38munqjqo" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="3_rh5bc"]
 [ext_resource type="Texture2D" uid="uid://k821yd6qs51r" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
-[ext_resource type="Texture2D" uid="uid://0o8p7b3b8vyl" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="5_23r0g"]
-[ext_resource type="Texture2D" uid="uid://bd38upwrq6cdy" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="6_t54ed"]
+[ext_resource type="Material" uid="uid://cahnh8igxy48i" path="res://Shaders/Ground/ground.tres" id="4_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
-[ext_resource type="Texture2D" uid="uid://oviytxhbkdkv" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="7_qskuh"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
-[ext_resource type="Texture2D" uid="uid://dwkm7bjn0sv1p" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="8_xop3l"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
 [ext_resource type="Texture2D" uid="uid://qi37jxow82md" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
 [ext_resource type="Texture2D" uid="uid://dapth5q2elnm6" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
-[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="11_j424g"]
 [ext_resource type="Texture2D" uid="uid://clj76ltt2catq" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
 [ext_resource type="Texture2D" uid="uid://cdjyh4jw770am" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
 [ext_resource type="Texture2D" uid="uid://bn3s18w1rjx3d" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
@@ -42,37 +38,6 @@
 [ext_resource type="Texture2D" uid="uid://co2070b5ddh8o" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
 [ext_resource type="Texture2D" uid="uid://pbq8ib83s6uw" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
-
-[sub_resource type="Gradient" id="Gradient_eb1s8"]
-offsets = PackedFloat32Array(0.504407, 0.550725)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1p5b6"]
-noise_type = 3
-frequency = 0.0023
-offset = Vector3(7.99, 365.66, 0)
-cellular_distance_function = 2
-cellular_return_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_srpg8"]
-width = 2048
-height = 2048
-noise = SubResource("FastNoiseLite_1p5b6")
-color_ramp = SubResource("Gradient_eb1s8")
-seamless = true
-seamless_blend_skirt = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrlew"]
-shader = ExtResource("11_j424g")
-shader_parameter/GroundTexture = ExtResource("7_qskuh")
-shader_parameter/GroundTexture2 = ExtResource("8_xop3l")
-shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_srpg8")
-shader_parameter/GroundNormalTexture = ExtResource("6_t54ed")
-shader_parameter/GroundNormal2Texture = ExtResource("5_23r0g")
-shader_parameter/NormalD = 1.0
-shader_parameter/Light = 1.0
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale1 = Vector2(5, 5)
-shader_parameter/Scale2 = Vector2(10, 10)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
 light_mode = 1
@@ -126,7 +91,7 @@ render_target_update_mode = 4
 [node name="Ground" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=779152545]
 z_index = -1
 texture_filter = 1
-material = SubResource("ShaderMaterial_yrlew")
+material = ExtResource("4_t54ed")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -766,15 +731,6 @@ mouse_filter = 2
 texture = ExtResource("42_67h1o")
 expand_mode = 1
 
-[node name="Black" type="ColorRect" parent="." unique_id=1362917256]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=826289740]
 color = Color(0.5, 0.5, 0.5, 1)
 
@@ -784,6 +740,15 @@ position = Vector2(597, -710)
 texture = ExtResource("36_j43p8")
 offset = Vector2(0, 1000)
 texture_scale = 7.0
+
+[node name="Black" type="ColorRect" parent="." unique_id=1362917256]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="OnButtonPressed" from="SubViewportContainer/SubViewport/Credits" to="." method="_on_credits_on_button_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]

@@ -6,6 +6,7 @@ class_name ShipCamera
 @export var Grid : MapGrid
 @export var Cloud : Control
 @export var Ground : Control
+@export var GroundMap : Control
 @export var WeatherMan : WeatherManage
 @export var ClickSound : AudioStreamPlayer
 @export var UIEventHandle : UIEventHandler
@@ -22,6 +23,7 @@ signal PositionChanged(NewVal : Vector2)
 
 var CloudMat : ShaderMaterial
 var GroundMat : ShaderMaterial
+var GroundMapMat : ShaderMaterial
 
 var FocusedShip : PlayerDrivenShip
 # Called when the node enters the scene tree for the first time.
@@ -30,9 +32,11 @@ func _ready() -> void:
 	
 	CloudMat = Cloud.material
 	GroundMat = Ground.material
+	GroundMapMat = GroundMap.material
 	
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
+	GroundMapMat.set_shader_parameter("offset", global_position / 1500)
 	
 	UIEventHandle.ZoomDialMoved.connect(_HANDLE_ZOOM.bind(false))
 	UIEventHandle.YDialMoved.connect(MoveCameraY)
@@ -139,6 +143,8 @@ func _UpdateMapGridVisibility():
 			
 		MapGridTween = create_tween()
 		MapGridTween.tween_property(Background, "modulate", Color(1,1,1,1), 0.5)
+		MapGridTween.set_parallel(true)
+		MapGridTween.tween_property(GroundMap, "modulate", Color(1,1,1,1), 0.5)
 		WeatherTween = create_tween()
 		WeatherTween.tween_property(WeatherMan, "modulate", Color(1,1,1,1), 0.5)
 		if (!Grid.Dissabled):
@@ -166,6 +172,8 @@ func _UpdateMapGridVisibility():
 			Ground.show()
 			MapGridTween = create_tween()
 			MapGridTween.tween_property(Background, "modulate", Color(1,1,1,0), 0.5)
+			MapGridTween.set_parallel(true)
+			MapGridTween.tween_property(GroundMap, "modulate", Color(1,1,1,0), 0.5)
 			WeatherTween = create_tween()
 			WeatherTween.tween_property(WeatherMan, "modulate", Color(1,1,1,0), 0.5)
 			if (!Grid.Dissabled):
@@ -202,6 +210,7 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 	
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
+	GroundMapMat.set_shader_parameter("offset", global_position / 1500)
 	Grid.UpdateOffset(position)
 	PositionChanged.emit(position)
 
@@ -282,5 +291,6 @@ func ForceCamPosition(Pos : Vector2) -> void:
 	global_position = newpos
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
+	GroundMapMat.set_shader_parameter("offset", global_position / 1500)
 	PositionChanged.emit(position)
 	Grid.UpdateOffset(global_position)

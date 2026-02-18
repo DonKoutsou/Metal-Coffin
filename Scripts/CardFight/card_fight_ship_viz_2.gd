@@ -186,6 +186,7 @@ func ActionHovered(C : CardStats) -> void:
 	CurrentCardShown.Dissable(true)
 	Ingame_UIManager.GetInstance().add_child(CurrentCardShown)
 	set_physics_process(true)
+	PositionCard()
 	print("Action hovered")
 
 func ActionUnhovered(C : CardStats) -> void:

@@ -927,6 +927,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					ActionList.RemoveActionFromShip(g, Counter)
 					if (!Counter.ShouldConsume()):
 						var TargetDeck = GetShipDeck(g)
+						PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 						print("{0} has been added to {1}'s discard pile.".format([Counter.GetCardName(), g.Name]))
 						TargetDeck.DiscardPile.append(Counter)
 							
@@ -961,6 +962,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			AtackData.Callables = DamageCallables
 			
 			if (!Action.ShouldConsume()):
+				PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
 				Dec.DiscardPile.append(Action)
 			
@@ -1015,6 +1017,7 @@ func RefundUnusedCards() -> void:
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.GetCardName()]))
 	var deck = GetShipDeck(Ship)
+	PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 	print("{0} has been added to {1}'s discard pile.".format([C.GetCardName(), Ship.Name]))
 	deck.DiscardPile.append(C)
 
@@ -1209,6 +1212,7 @@ func HandleDrawDriscard(Performer : BattleShipStats, Action : CardStats, Mod : D
 		var Ca = CardsToDraw[ToDiscard]
 		CardsToDraw.erase(Ca)
 		CardsToDiscard.append(Ca)
+		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 		print("{0} has been added to {1}'s discard pile.".format([Ca.CStats.GetCardName(), Performer.Name]))
 		D.DiscardPile.append(Ca.CStats)
 		ExternalUI.DeckUI.OnCardDrawn()
@@ -2512,6 +2516,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		SelectingTarget = false
 
 		if (ToDiscard == MaxCardsInHand):
+			PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 			print("{0} has been added to {1}'s discard pile.".format([C.CStats.GetCardName(), Performer.Name]))
 			PlDeck.DiscardPile.append(C.CStats)
 			ExternalUI.DiscardPile.OnCardDiscarded(ExternalUI.DeckUI.global_position)
@@ -2523,6 +2528,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		#var Plecement = PlayerCardPlecement.get_child(ToDiscard)
 		var Discarded : Card = ExternalUI.GetPlayerCardPlecement().get_child(ToDiscard)
 		await ExternalUI.InsertCardToDiscard(Discarded)
+		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 		print("{0} has been added to {1}'s discard pile.".format([Discarded.CStats.GetCardName(), Performer.Name]))
 		PlDeck.DiscardPile.append(Discarded.CStats)
 		ExternalUI.DiscardPile.OnCardDiscarded(Discarded.global_position + (Discarded.size / 2))

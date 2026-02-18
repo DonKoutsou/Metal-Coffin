@@ -88,8 +88,9 @@ corner_radius_bottom_left = 10
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [sub_resource type="Curve" id="Curve_58ae4"]
-_data = [Vector2(0, 0.245536), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.708071), 0.0, 0.0, 0, 0, Vector2(1, 0.769793), 0.0, 0.0, 0, 0]
-point_count = 3
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.1, 2), 0.0, 0.0, 0, 0, Vector2(0.90000004, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_rd7hj"]
 colors = PackedColorArray(1, 1, 1, 1, 0.421311, 0.88706, 0.915024, 1)

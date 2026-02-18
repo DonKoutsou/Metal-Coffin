@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func StartTextScroll() -> void:
 	Tw = create_tween()
-	Tw.tween_property(TextPar, "position", Vector2(TextPar.position.x,-TextPar.size.y - get_viewport_rect().size.y), 4 * TextLabel.get_line_count())
+	Tw.tween_property(TextPar, "position", Vector2(TextPar.position.x,-TextPar.size.y - get_viewport_rect().size.y), 8 * TextLabel.get_line_count())
 	await Tw.finished
 	#Tw.kill()
 	IntroFinished.emit()

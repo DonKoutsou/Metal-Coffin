@@ -45,9 +45,10 @@ func _physics_process(_delta: float) -> void:
 	cloudmat.set_shader_parameter("Offset", CloudOffset)
 
 func DoLights() -> void:
-	LoadPrologueLight.ToggleNoAnim(true, SaveLoadManager.SaveExists("user://PrologueSavedGame.tres"))
-	
-	LoadLight.ToggleNoAnim(true, SaveLoadManager.SaveExists("user://SavedGame.tres"))
+	var HasPro = await SaveLoadManager.SaveExists("user://PrologueSavedGame.tres")
+	var HasCamp = await SaveLoadManager.SaveExists("user://SavedGame.tres")
+	LoadPrologueLight.ToggleNoAnim(true, HasPro)
+	LoadLight.ToggleNoAnim(true, HasCamp)
 
 func _on_play_pressed() -> void:
 	if (Selecting):

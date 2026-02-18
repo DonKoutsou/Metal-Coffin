@@ -53,13 +53,13 @@ func UpdateRepairBar(AddedRepair : float):
 	if (MoneySpent > 0):
 		SpentFunds += MoneySpent
 		if (roundi(SpentFunds/1000) > 1):
-			Map.GetInstance().GetScreenUi().TownUI.DropCoins(roundi(SpentFunds / 1000))
+			Map.GetInstance().GetScreenUi().TownUi.DropCoins(roundi(SpentFunds / 1000))
 			SpentFunds = 0
 	else:
 		SpentFunds += MoneySpent
 		var z = roundi(SpentFunds/1000)
 		if (z < -1):
-			Map.GetInstance().GetScreenUi().TownUI.CoinsReceived(abs(z))
+			Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(abs(z))
 			SpentFunds = 0
 			
 	if (MoneySpent > 0):
