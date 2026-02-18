@@ -2,6 +2,9 @@ extends Control
 
 class_name CardFightShipViz2
 
+@export_file_path(".tscn") var CardScene : String
+
+@export_group("Nodes")
 @export var ShipNameLabel : Label
 @export var ShipIcon : TextureRect
 @export var HullBar : ProgressBar
@@ -31,7 +34,10 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 
 signal OnFallbackPressed()
 
+var Ship : BattleShipStats
 var Fr : bool
+
+var CurrentCardShown : Card
 
 func Destroy() -> void:
 	var mat = ExplosionPart.process_material as ParticleProcessMaterial
@@ -90,7 +96,28 @@ func Destroy() -> void:
 func _ready() -> void:
 	#Destroy()
 	ToggleFire(false)
+	set_physics_process(false)
+
+func _physics_process(delta: float) -> void:
+	PositionCard()
+	#CurrentCardShown.global_position = get_global_mouse_position() - CurrentCardShown.size
+
+func PositionCard() -> void:
+	var Mpos = get_global_mouse_position() 
+	var VPRect =  get_viewport().get_visible_rect()
+	var DistanceFromDown = VPRect.size.y - get_global_mouse_position().y
+	var DistFromRight = VPRect.size.x - get_global_mouse_position().x
+	var Diff = CurrentCardShown.size.y - DistanceFromDown
+	var Diff2 = CurrentCardShown.size.x - DistFromRight
 	
+	var FinalPos = Mpos
+	if (Diff > 0):
+		FinalPos -= Vector2(0,Diff)
+	if (Diff2 > 0):
+		FinalPos -= Vector2(Diff2,0)
+	
+	CurrentCardShown.global_position = FinalPos
+
 func Pop(t : bool):
 	var PopTween = create_tween()
 	var FinalPos : Vector2 = Vector2(0, 50)
@@ -110,6 +137,7 @@ func Pop(t : bool):
 	await PopTween.finished
 	
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
+	Ship = S
 	Fr = Friendly
 	ShipNameLabel.text = S.Name
 	ShipIcon.texture = S.ShipIcon
@@ -142,12 +170,28 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 func GetShipPos() -> Vector2:
 	return ShipIcon.global_position
 
-func ActionPicked(Text : Texture) -> void:
+func ActionPicked(C : CardStats) -> void:
 	var TexNode = TextureRect.new()
-	TexNode.texture = Text
+	TexNode.texture = C.Icon
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	TexNode.custom_minimum_size = Vector2(38,22)
+	TexNode.mouse_filter = Control.MOUSE_FILTER_PASS
+	TexNode.mouse_entered.connect(ActionHovered.bind(C))
+	TexNode.mouse_exited.connect(ActionUnhovered.bind(C))
 	ActionParent.add_child(TexNode)
+
+func ActionHovered(C : CardStats) -> void:
+	CurrentCardShown = ResourceLoader.load(CardScene).instantiate()
+	CurrentCardShown.SetCardBattleStats(Ship ,C)
+	CurrentCardShown.Dissable(true)
+	Ingame_UIManager.GetInstance().add_child(CurrentCardShown)
+	set_physics_process(true)
+	print("Action hovered")
+
+func ActionUnhovered(C : CardStats) -> void:
+	CurrentCardShown.queue_free()
+	set_physics_process(false)
+	print("Action unhovered")
 
 func ActionRemoved(Tex : Texture) -> void:
 	for g : TextureRect in ActionParent.get_children():

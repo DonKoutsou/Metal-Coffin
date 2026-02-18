@@ -20,12 +20,13 @@ func Toggle(t : bool) -> void:
 	if (t):
 		Offset = 0
 	else:
-		Offset = 100
+		Offset = 150
 	_sort_children()
 
 var Tweens : Array[Tween]
 
 func _sort_children():
+	
 	# Gather only visible Control children
 	var visible_children = []
 	for child in get_children():
@@ -35,6 +36,13 @@ func _sort_children():
 	for g in Tweens:
 		g.kill()
 	Tweens.clear()
+	
+	if (position != Vector2(120, 492 + Offset)):
+		var tw = create_tween()
+		tw.set_ease(Tween.EASE_OUT)
+		tw.set_trans(Tween.TRANS_BACK)
+		tw.tween_property(self, "position", Vector2(120, 492 + Offset), 0.25)
+		Tweens.append(tw)
 	
 	var child_count: int = visible_children.size()
 	if child_count == 0:
@@ -75,7 +83,7 @@ func _sort_children():
 		var HaldChildVal : float = child_count as float / 2 
 		
 		var new_pos: Vector2 = Vector2(start_x + i * step, -((HaldChildVal - abs(i + 0.5 - HaldChildVal)) * 20) * (effective_rotation + abs(rotation_amount)) / 20)
-		new_pos.y += Offset
+		
 		
 		if (g.position != new_pos):
 			if Engine.is_editor_hint():

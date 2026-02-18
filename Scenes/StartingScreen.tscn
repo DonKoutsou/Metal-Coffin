@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="Material" uid="uid://ivgnk2dd66ef" path="res://Shaders/Dither.tres" id="2_7bhdu"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="3_vb6t2"]
+[ext_resource type="World3D" uid="uid://dq7c8xt1p3wb5" path="res://MainEnv.tres" id="4_62h02"]
 
 [node name="StartingScreen" type="Node" unique_id=64991473]
 process_mode = 3
@@ -21,6 +22,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2015624308]
 disable_3d = true
+world_3d = ExtResource("4_62h02")
 handle_input_locally = false
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true

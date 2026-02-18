@@ -488,7 +488,7 @@ func OnCardSelected(C : Card) -> bool:
 		
 		SelectedCardPlecement.add_child(c)
 
-		Ship.ShipViz.ActionPicked(Action.Icon)
+		Ship.ShipViz.ActionPicked(Action)
 		ActionList.AddAction(Ship, ShipAction)
 		
 		await DoCardPlecementAnimation(Ship, c, CardPosition)
@@ -702,7 +702,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				ShipAction.Action = SelectedAction
 
 				ShipAction.Targets = await HandleTargets(Action.OnPerformModule, Ship)
-				Ship.ShipViz.ActionPicked(SelectedAction.Icon)
+				Ship.ShipViz.ActionPicked(SelectedAction)
 				ActionList.AddAction(Ship, ShipAction)
 
 			AvailableActions = await t.call(AvailableActions)

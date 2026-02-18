@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dfh0dm1lwcumv"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_3smtw"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="3_3smtw"]
 [ext_resource type="Script" uid="uid://cyrbk02kbjv66" path="res://Scripts/CardFight/card_fight_end_scene.gd" id="3_6ni21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2u7gj"]
@@ -79,6 +80,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_3smtw")
 
 [node name="FriendlyCombatants" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/PanelContainer2" unique_id=965869961]
 layout_mode = 2
@@ -93,6 +95,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_3smtw")
 
 [node name="EnemyCombatants" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/PanelContainer3" unique_id=805497251]
 layout_mode = 2
@@ -113,6 +116,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_3smtw")
 
 [node name="FriendlyCasualties" type="RichTextLabel" parent="VBoxContainer/VBoxContainer2/PanelContainer2" unique_id=653519772]
 layout_mode = 2
@@ -127,6 +131,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_3smtw")
 
 [node name="EnemyCasualties" type="RichTextLabel" parent="VBoxContainer/VBoxContainer2/PanelContainer3" unique_id=1599593591]
 layout_mode = 2
@@ -146,6 +151,7 @@ alignment = 1
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=272510286]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("3_3smtw")
 
 [node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/PanelContainer" unique_id=1554673377]
 clip_contents = false

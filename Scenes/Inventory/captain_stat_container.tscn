@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bnonfp8ywr3vl"]
 
 [ext_resource type="Script" uid="uid://v1gumu5fm5sd" path="res://Scripts/Inventory/captain_stat_container.gd" id="1_gx6im"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_qyvw6"]
 [ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="2_uviis"]
 [ext_resource type="PackedScene" uid="uid://cr6qn30drails" path="res://Scenes/Inventory/inventory_ship_stats.tscn" id="3_qyvw6"]
 [ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="4_7pj6b"]
@@ -30,7 +29,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("1_qyvw6")
 script = ExtResource("1_gx6im")
 ShipStats = NodePath("PanelContainer/InventoryShipStats")
 ShipDeck = NodePath("PanelContainer/ShipDeck")
@@ -63,14 +61,8 @@ OffensiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer")
 DeffencsiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer2")
 UtilityCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer3")
 
-[node name="Label" type="Label" parent="PanelContainer/ShipDeck" unique_id=1390508395]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Deck"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/ShipDeck" unique_id=591578839]
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_uuft3")

@@ -202,6 +202,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_ydw5a")
 script = ExtResource("2_ydw5a")
+CardScene = "res://Scenes/Cards/Card.tscn"
 ShipNameLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/Label")
 ShipIcon = NodePath("HBoxContainer/Control/TextureRect")
 HullBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/ProgressBar")
