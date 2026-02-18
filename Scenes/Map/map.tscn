@@ -15,9 +15,14 @@
 [ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="11_a2ujk"]
 [ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/WeatherMan/weather_manager.gd" id="12_1lxys"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
+[ext_resource type="Texture2D" uid="uid://0o8p7b3b8vyl" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="14_a2ujk"]
+[ext_resource type="Texture2D" uid="uid://bd38upwrq6cdy" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="15_x3wib"]
+[ext_resource type="Texture2D" uid="uid://oviytxhbkdkv" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="16_28wu2"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
+[ext_resource type="Texture2D" uid="uid://dwkm7bjn0sv1p" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="17_445lv"]
 [ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="18_a2ujk"]
+[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="18_x3wib"]
 [ext_resource type="PackedScene" uid="uid://boe0re3ai5qdj" path="res://dark_blue_background.tscn" id="19_28wu2"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scripts/UI/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="19_x3wib"]
@@ -29,8 +34,9 @@
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="22_n73so"]
 [ext_resource type="PackedScene" uid="uid://buj48d65j7y07" path="res://Scenes/InScreenUI/in_screen_ui.tscn" id="23_53oad"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="24_e5um8"]
-[ext_resource type="Material" uid="uid://ylp0ab88vpy8" path="res://Shaders/Ground/GroundMap.tres" id="24_xwtib"]
+[ext_resource type="PackedScene" uid="uid://caawadxe1hjwo" path="res://Scenes/Map/topography_map.tscn" id="24_xwtib"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="25_8mjbw"]
+[ext_resource type="FastNoiseLite" uid="uid://f0bcp4v0xei2" path="res://Shaders/Ground/GroundNoise.tres" id="25_tr1ul"]
 [ext_resource type="Script" uid="uid://uwtcmr8brr2" path="res://Scripts/UI/RegionLineDrawer.gd" id="27_445lv"]
 [ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Scenes/WeatherMan/weathernoise.tres" id="30_xwtib"]
 [ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Scenes/WeatherMan/testnoise.tres" id="31_xwtib"]
@@ -78,6 +84,46 @@ _bundled = {
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kgrij"]
 light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_eb1s8"]
+offsets = PackedFloat32Array(0.52029, 0.550725)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_445lv"]
+width = 2048
+height = 2048
+noise = ExtResource("25_tr1ul")
+color_ramp = SubResource("Gradient_eb1s8")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="Gradient" id="Gradient_d5ydj"]
+offsets = PackedFloat32Array(0.44505495, 1)
+colors = PackedColorArray(0.09178746, 0.09178746, 0.09178746, 1, 1, 1, 1, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d5ydj"]
+width = 2048
+height = 2048
+noise = ExtResource("25_tr1ul")
+color_ramp = SubResource("Gradient_d5ydj")
+seamless = true
+invert = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dvbi"]
+resource_local_to_scene = true
+shader = ExtResource("18_x3wib")
+shader_parameter/GroundTexture = ExtResource("16_28wu2")
+shader_parameter/GroundTexture2 = ExtResource("17_445lv")
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_445lv")
+shader_parameter/NoiseTexture3 = SubResource("NoiseTexture2D_d5ydj")
+shader_parameter/GroundNormalTexture = ExtResource("15_x3wib")
+shader_parameter/GroundNormal2Texture = ExtResource("14_a2ujk")
+shader_parameter/NormalD = 1.0
+shader_parameter/Light = 1.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/Scale1 = Vector2(20, 20)
+shader_parameter/Scale2 = Vector2(40, 40)
+shader_parameter/z = 0.125
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tk0jd"]
 light_mode = 1
@@ -194,7 +240,7 @@ EventHandler = ExtResource("25_8mjbw")
 WindChangeMinimumTime_Minutes = 120.0
 
 [node name="ShipCamera" type="Camera2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=2053726518 node_paths=PackedStringArray("Background", "Grid", "Cloud", "Ground", "GroundMap", "WeatherMan", "ClickSound") groups=["Clock"]]
-position = Vector2(209, 197)
+position = Vector2(298, 257)
 process_callback = 0
 position_smoothing_speed = 20.0
 editor_draw_limits = true
@@ -203,27 +249,35 @@ Background = NodePath("DarkBlueBackground")
 Grid = NodePath("Grid")
 Cloud = NodePath("Clouds")
 Ground = NodePath("Ground")
-GroundMap = NodePath("Ground2")
+GroundMap = NodePath("TopographyMap")
 WeatherMan = NodePath("../WeatherManager")
 ClickSound = NodePath("AudioStreamPlayer")
 UIEventHandle = ExtResource("25_8mjbw")
 NoiseNormalTexture = ExtResource("21_7nfft")
 
 [node name="Ground" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=1453279039 instance=ExtResource("22_kgrij")]
-offset_left = -663.0
-offset_top = -690.0
-offset_right = 837.0
-offset_bottom = 810.0
+material = SubResource("ShaderMaterial_2dvbi")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -750.0
+offset_top = -750.0
+offset_right = 750.0
+offset_bottom = 750.0
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=156698642]
 material = ExtResource("18_a2ujk")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -663.0
-offset_top = -690.0
-offset_right = 837.0
-offset_bottom = 810.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -750.0
+offset_top = -750.0
+offset_right = 750.0
+offset_bottom = 750.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -243,19 +297,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.167403, 0.285599, 0.294053, 1)
 
-[node name="Ground2" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=299943689]
-texture_filter = 3
-material = ExtResource("24_xwtib")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -663.0
-offset_top = -690.0
-offset_right = 837.0
-offset_bottom = 810.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(750, 750)
+[node name="TopographyMap" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=472618370 instance=ExtResource("24_xwtib")]
 
 [node name="Grid" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=372542382 instance=ExtResource("19_28wu2")]
 z_index = 1

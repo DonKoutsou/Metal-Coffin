@@ -40,6 +40,7 @@ signal ScreenUIToggled(t : bool)
 signal Storm(value : float)
 signal ForecastToggled(t : bool)
 signal GridPressed(t : bool)
+signal TopoPressed(t : bool)
 signal ZoomDialMoved(value : float)
 signal YDialMoved(value : float)
 signal XDialMoved(value : float)
@@ -168,6 +169,9 @@ func OnForecastPressed(t : bool) -> void:
 
 func OnGridPressed(t : bool) -> void:
 	GridPressed.emit(t)
+
+func OnTopoPressed(t : bool) -> void:
+	TopoPressed.emit(t)
 
 func OnZoomTogglePressed(t : bool) -> void:
 	ZoomToggled.emit(t)

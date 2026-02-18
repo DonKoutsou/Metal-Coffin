@@ -10,11 +10,14 @@ static var GridState : bool = true
 static var SteerState : bool = true
 @export var ZoomButton : Button
 @export var ZoomState : bool = true
+@export var TopoButton : Button
+static var TopoState : bool = false
 
 func _ready() -> void:
 	ForecastButton.set_pressed_no_signal(ForecastState)
 	GridButton.set_pressed_no_signal(GridState)
 	SteerButton.set_pressed_no_signal(SteerState)
+	TopoButton.set_pressed_no_signal(TopoState)
 
 
 func _on_forecast_button_toggled(toggled_on: bool) -> void:
@@ -27,3 +30,7 @@ func _on_grid_button_toggled(toggled_on: bool) -> void:
 
 func _on_steer_button_toggled(toggled_on: bool) -> void:
 	SteerState = toggled_on
+
+
+func _on_topo_button_toggled(toggled_on: bool) -> void:
+	TopoState = toggled_on

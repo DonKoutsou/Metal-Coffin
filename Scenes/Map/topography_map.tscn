@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://caawadxe1hjwo"]
+
+[ext_resource type="Material" uid="uid://ylp0ab88vpy8" path="res://Shaders/Ground/GroundMap.tres" id="1_y6j18"]
+[ext_resource type="Script" uid="uid://cgli52vwau8wk" path="res://Scenes/Map/topography_map.gd" id="2_rs2j3"]
+[ext_resource type="Texture2D" uid="uid://c17sbm8pdhw2" path="res://Shaders/Ground/TopoggraphyNoiseBase.tres" id="3_rs2j3"]
+
+[node name="TopographyMap" type="ColorRect" unique_id=472618370]
+material = ExtResource("1_y6j18")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3000.0
+offset_top = -3000.0
+offset_right = 3000.0
+offset_bottom = 3000.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(750, 750)
+script = ExtResource("2_rs2j3")
+N = ExtResource("3_rs2j3")

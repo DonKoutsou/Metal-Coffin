@@ -32,6 +32,7 @@ invert = true
 seamless_blend_skirt = 1.0
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_bwem4")
 shader_parameter/GroundTexture = ExtResource("4_68rdk")
 shader_parameter/GroundTexture2 = ExtResource("5_6wk2i")
@@ -44,4 +45,4 @@ shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(20, 20)
 shader_parameter/Scale2 = Vector2(40, 40)
-shader_parameter/z = 0.25
+shader_parameter/z = 0.125

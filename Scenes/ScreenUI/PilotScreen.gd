@@ -157,3 +157,7 @@ func _on_y_dial_range_changed(NewVal: float) -> void:
 
 func _on_x_dial_range_changed(NewVal: float) -> void:
 	EventHandler.OnXDialMoved(-NewVal * 10)
+
+
+func _on_topo_button_toggled(toggled_on: bool) -> void:
+	EventHandler.OnTopoPressed(toggled_on)

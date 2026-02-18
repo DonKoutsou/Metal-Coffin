@@ -1,0 +1,16 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://wegfneoi242m"]
+
+[ext_resource type="FastNoiseLite" uid="uid://f0bcp4v0xei2" path="res://Shaders/Ground/GroundNoise.tres" id="1_wvgwg"]
+
+[sub_resource type="Gradient" id="Gradient_4gecd"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0.15, 0.151, 0.2, 0.201, 0.25, 0.251, 0.3, 0.301, 0.35, 0.351, 0.4, 0.401, 0.45, 0.451, 0.5, 0.501, 0.55, 0.551, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0.9063318, 0.9063318, 0.9063318, 1, 0, 0, 0, 1, 0.85430586, 0.85430586, 0.85430586, 1, 0, 0, 0, 1, 0.7977378, 0.7977378, 0.7977378, 1, 0, 0, 0, 1, 0.735357, 0.735357, 0.735357, 1, 0, 0, 0, 1, 0.6651851, 0.6651851, 0.6651851, 1, 0, 0, 0, 1, 0.58383155, 0.58383155, 0.58383155, 1, 0, 0, 0, 1, 0.48452926, 0.48452926, 0.48452926, 1, 0, 0, 0, 1, 0.3491902, 0.3491902, 0.3491902, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[resource]
+width = 2048
+height = 2048
+noise = ExtResource("1_wvgwg")
+color_ramp = SubResource("Gradient_4gecd")
+seamless = true
+seamless_blend_skirt = 1.0
