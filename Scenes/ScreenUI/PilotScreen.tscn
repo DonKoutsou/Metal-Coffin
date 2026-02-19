@@ -478,6 +478,7 @@ theme_override_styles/pressed = ExtResource("19_ecvfe")
 theme_override_styles/hover = ExtResource("18_eeg0m")
 
 [node name="MarkerEditorButton" type="Button" parent="." unique_id=1617237938 groups=["Buttons"]]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -490,6 +491,7 @@ offset_right = -222.0
 offset_bottom = 41.0
 grow_horizontal = 0
 grow_vertical = 2
+pivot_offset = Vector2(-696, -110)
 focus_mode = 0
 theme_override_styles/normal = ExtResource("20_uojtp")
 theme_override_styles/pressed = ExtResource("21_hc833")
@@ -514,6 +516,7 @@ theme_override_styles/pressed = ExtResource("21_hc833")
 theme_override_styles/hover = ExtResource("20_uojtp")
 
 [node name="MissileButton" type="Button" parent="." unique_id=657247067 groups=["Buttons"]]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -568,6 +571,7 @@ theme_override_styles/pressed = ExtResource("21_ecvfe")
 theme_override_styles/hover = ExtResource("20_eeg0m")
 
 [node name="LandButton" type="Button" parent="." unique_id=654026330 groups=["Buttons"]]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -650,14 +654,22 @@ grow_vertical = 1
 position = Vector2(304, 350.99997)
 rotation = 1.5707964
 scale = Vector2(0.8, 0.8)
+frame = 4
+frame_progress = 0.3159618
+
+[node name="AltitudeDial" parent="." unique_id=958549846 instance=ExtResource("26_ecvfe")]
+position = Vector2(983.99994, 350.99997)
+rotation = 1.5707964
+scale = Vector2(0.8, 0.8)
+frame_progress = 0.29425934
 
 [node name="YDial" parent="." unique_id=1133286453 instance=ExtResource("26_ecvfe")]
-position = Vector2(976, 351)
-rotation = -1.5707964
+position = Vector2(752.00006, 688)
+rotation = -3.1415927
 scale = Vector2(0.8, 0.8)
 
 [node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
-position = Vector2(639.99994, 688)
+position = Vector2(528.00006, 688)
 rotation = -3.1415927
 scale = Vector2(0.8, 0.8)
 
@@ -687,5 +699,6 @@ scale = Vector2(0.8, 0.8)
 [connection signal="pressed" from="LandButton" to="." method="Land_Pressed"]
 [connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
 [connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]
+[connection signal="RangeChanged" from="AltitudeDial" to="." method="_on_altitude_dial_range_changed"]
 [connection signal="RangeChanged" from="YDial" to="." method="_on_y_dial_range_changed"]
 [connection signal="RangeChanged" from="XDial" to="." method="_on_x_dial_range_changed"]

@@ -298,6 +298,7 @@ mouse_filter = 2
 color = Color(0.167403, 0.285599, 0.294053, 1)
 
 [node name="TopographyMap" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=472618370 instance=ExtResource("24_xwtib")]
+visible = false
 
 [node name="Grid" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=372542382 instance=ExtResource("19_28wu2")]
 z_index = 1

@@ -211,10 +211,10 @@ func Update(IsControlled : bool, CamPos : Vector2) -> void:
 			ToggleShipDetails(IsControlled)
 			UpdateSpeed(CurrentShip.GetAffectedSpeed())
 			
-			if (CurrentShip.Landing or CurrentShip.TakingOff or CurrentShip.MatchingAltitude):
+			#if (CurrentShip.Landing or CurrentShip.TakingOff or CurrentShip.MatchingAltitude):
 				#TODO find proper fix
-				if (LandingNotif == null):
-					OnLandingStarted()
+			if (LandingNotif != null):
+				#OnLandingStarted()
 				UpdateAltitude(CurrentShip.Altitude)
 			
 			if (!IsControlled):
@@ -316,8 +316,9 @@ func OnLandingStarted():
 	add_child(LandingNotif)
 	
 func OnLandingEnded(_Ship : MapShip):
-	LandingNotif.queue_free()
-	LandingNotif = null
+	if (LandingNotif != null):
+		LandingNotif.queue_free()
+		LandingNotif = null
 
 func ToggleShipDetails(T : bool):
 	DetailPanel.visible = T
@@ -379,7 +380,7 @@ func OnHostileShipDestroyed() -> void:
 	modulate = Color(1,1,1)
 	ShipCallsign.text = ""
 	UpdateSpeed(0)
-	SetType("Wreck")
+	SetType("Wreck") 
 
 func get_closest_point_on_rect(rect: Rect2, point: Vector2) -> Vector2:
 	var closest_x = clamp(point.x, rect.position.x, rect.position.x + rect.size.x)

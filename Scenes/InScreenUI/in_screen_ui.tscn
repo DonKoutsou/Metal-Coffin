@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://c2m2e867wt7jw" path="res://Assets/Sounds/RainSound.mp3" id="7_j7r7e"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="PackedScene" uid="uid://cba7o3slmlft0" path="res://Scenes/ScreenUI/AltitudeLevel.tscn" id="9_avpxw"]
+[ext_resource type="Script" uid="uid://r1gk8eplct22" path="res://Scenes/InScreenUI/altitude_text.gd" id="9_u111i"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
 [ext_resource type="PackedScene" uid="uid://dncqbpsg58qgq" path="res://Scenes/InScreenUI/weather_ui.tscn" id="11_j7r7e"]
@@ -115,11 +116,19 @@ theme_override_constants/separation = 0
 [node name="ZoomUI" parent="HBoxContainer" unique_id=1715592095 instance=ExtResource("21_u111i")]
 layout_mode = 2
 
-[node name="PanelContainer" type="Panel" parent="HBoxContainer" unique_id=1645514714]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1517696327]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_avpxw")
+
+[node name="AltitudeText" type="Label" parent="HBoxContainer/PanelContainer" unique_id=1510011798]
+layout_mode = 2
+text = "12km"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("9_u111i")
 
 [node name="AltitudeUI" parent="HBoxContainer" unique_id=3025055 instance=ExtResource("9_avpxw")]
 layout_mode = 2

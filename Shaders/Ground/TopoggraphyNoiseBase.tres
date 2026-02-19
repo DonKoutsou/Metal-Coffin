@@ -3,7 +3,7 @@
 [ext_resource type="FastNoiseLite" uid="uid://f0bcp4v0xei2" path="res://Shaders/Ground/GroundNoise.tres" id="1_bu10c"]
 
 [sub_resource type="Gradient" id="Gradient_bu10c"]
-offsets = PackedFloat32Array(0, 0.55)
+offsets = PackedFloat32Array(0.1, 0.55)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [resource]

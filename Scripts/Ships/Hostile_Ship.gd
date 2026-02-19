@@ -86,6 +86,9 @@ func  _ready() -> void:
 	#ENABLE FOR DEBUG PURPOSES
 	if (Commander.ENEMY_DEBUG):
 		MapPointerManager.GetInstance().AddShip(self, false)
+	
+	if (!Patrol and !Convoy):
+		Altitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(PosToSpawn)
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)

@@ -17,6 +17,5 @@ offset_right = 3000.0
 offset_bottom = 3000.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(750, 750)
 script = ExtResource("2_rs2j3")
 N = ExtResource("3_rs2j3")

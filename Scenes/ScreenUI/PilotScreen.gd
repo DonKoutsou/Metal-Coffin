@@ -152,6 +152,9 @@ func _on_sonar_button_toggled(toggled_on: bool) -> void:
 func _on_zoom_dial_range_changed(NewVal: float) -> void:
 	EventHandler.OnZoomDialMoved(-NewVal / 10)
 
+func _on_altitude_dial_range_changed(NewVal: float) -> void:
+	ControllerEventH.OnTargetAltitudeChanged(NewVal)
+	
 func _on_y_dial_range_changed(NewVal: float) -> void:
 	EventHandler.OnYDialMoved(-NewVal * 10)
 

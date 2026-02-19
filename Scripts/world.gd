@@ -433,7 +433,7 @@ func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
 	if (ControlledShip.Docked):
 		Instigator = ControlledShip.Command
 
-	if (Instigator.Altitude > 0):
+	if (!Instigator.Landed()):
 		PopUpManager.GetInstance().DoFadeNotif("Can't open hatch while ship is floating")
 		return
 	

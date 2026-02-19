@@ -20,7 +20,6 @@ var SonarTargets : Array[Node2D]
 
 
 
-
 func  _ready() -> void:
 	super()
 	SonarShape.connect("area_entered", BodyEnteredSonar)
@@ -57,12 +56,13 @@ func Update(delta: float) -> void:
 	for g in TrailLines:
 		g.UpdateProjected(delta, Altitude / 10000.0)
 	
-	
-	
 	if (Paused):
 		return
-
-	_HandleLanding(SimulationSpeed)
+		
+	EvaluateRadarTargets()
+	CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)
+	_HandleLanding(delta)
+	
 	if (TargetShip != null):
 		TargetShipPos = IntersectShip(TargetShip)
 		if (TargetShipPos.distance_to(global_position) < 5):

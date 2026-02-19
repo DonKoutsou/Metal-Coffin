@@ -14,7 +14,7 @@ var Labels : Array[Label]
 func UpdateCameraZoom(NewZoom : float) -> void:
 	visible = NewZoom < 1.5
 	for g in BLines:
-		g.width = 20 / NewZoom
+		g.width = 10 / NewZoom
 	#for g in Labels:
 		##g.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		#g.set("theme_override_font_sizes/font_size", 120 / NewZoom)

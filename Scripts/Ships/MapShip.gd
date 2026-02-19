@@ -30,7 +30,10 @@ var Paused = true
 var CurrentPort : MapSpot
 
 var RadarWorking = true
-var Altitude = 10000
+var Altitude : float = 10000
+var TargetAltitude : float = 10000
+
+var CurrentLandAltitude : float = 0
 var Command : MapShip
 
 var ShowFuelRange = true
@@ -47,6 +50,7 @@ signal OnShipDestroyed(Sh : MapShip)
 signal AltitudeChanged()
 signal AChanged(NewAccel : float)
 signal AForced(NewAccel : float)
+var IsLanded : bool = false
 var Landing : bool = false
 signal LandingStarted
 signal LandingCanceled(Ship : MapShip)
@@ -92,7 +96,7 @@ func Refuel() -> void:
 	#Make sure that the ship is landed
 	#Make sure that fuel tanks are not full
 	#Make sure port has fuel
-	var IsLanded = Altitude == 0
+	#IsLanded = Altitude == 0
 	var FuelIsFull = IsFuelFull()
 	var TownHasFuel = CurrentPort.PlayerHasFuelReserves()
 
@@ -177,25 +181,35 @@ func SetCurrentPort(Port : MapSpot):
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360
 
-func _HandleLanding(SimulationSpeed : float) -> void:
-	if (Landing):
-		UpdateAltitude(max(0, Altitude - (60 * SimulationSpeed)))
-		if (Altitude <= 0):
-			Altitude = 0
+func _HandleLanding(delta : float) -> void:
+	var NewAltitude = clamp(TargetAltitude, CurrentLandAltitude, 10000)
+	if (TargetAltitude != NewAltitude):
+		TargetAltitude = NewAltitude
+		LandingStarted.emit()
+	if (Altitude != TargetAltitude):
+		UpdateAltitude(move_toward(Altitude, TargetAltitude, delta * 1000))
+		if (Altitude == TargetAltitude):
 			LandingEnded.emit(self)
 			LandingEnded2.emit()
-			Landing = false
-	else: if (TakingOff):
-		UpdateAltitude(min(10000, Altitude + (60 * SimulationSpeed)))
-		if (Altitude >= 10000):
-			Altitude = 10000
-			TakeoffEnded.emit(self)
-			TakingOff = false
-	else: if (MatchingAltitude):
-		UpdateAltitude(clamp(move_toward(Altitude, Command.Altitude, 60 * SimulationSpeed), 0, 10000))
-		if (Altitude == Command.Altitude):
-			MatchingAltitudeEnded.emit(self)
-			MatchingAltitude = false
+	#if (Landing):
+		#UpdateAltitude(max(CurrentLandAltitude, Altitude - (60 * SimulationSpeed)))
+		#if (Altitude <= CurrentLandAltitude):
+			#Altitude = CurrentLandAltitude
+			#IsLanded = true
+			#LandingEnded.emit(self)
+			#LandingEnded2.emit()
+			#Landing = false
+	#else: if (TakingOff):
+		#UpdateAltitude(min(10000, Altitude + (60 * SimulationSpeed)))
+		#if (Altitude >= 10000):
+			#Altitude = 10000
+			#TakeoffEnded.emit(self)
+			#TakingOff = false
+	#else: if (MatchingAltitude):
+		#UpdateAltitude(clamp(move_toward(Altitude, Command.Altitude, 60 * SimulationSpeed), 0, 10000))
+		#if (Altitude == Command.Altitude):
+			#MatchingAltitudeEnded.emit(self)
+			#MatchingAltitude = false
 
 func InitialiseAltitudeMatching() -> void:
 	MatchingAltitude = true
@@ -211,6 +225,7 @@ func RemovePort():
 		Landing = false
 	if (Altitude != 10000 and !TakingOff):
 		TakingOff = true
+		IsLanded = false
 		TakeoffStarted.emit()
 	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
@@ -242,14 +257,15 @@ func HaltShip():
 var AccelChanged = false
 
 func AccelerationChanged(value: float, forced : bool = false) -> void:
-	if (Landing):
-		LandingCanceled.emit(self)
-		Landing = false
-
-	else : if (Altitude != 10000 and !TakingOff):
-		TakingOff = true
-		TakeoffStarted.emit()
-		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LIFTOFF)
+	#if (Landing):
+		#LandingCanceled.emit(self)
+		#Landing = false
+#
+	#else : if (Altitude != 10000 and !TakingOff):
+		#TakingOff = true
+		#IsLanded = false
+		#TakeoffStarted.emit()
+		#RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LIFTOFF)
 
 	if (value > 0):
 		if (GetFuelRange() <= 0):
@@ -339,8 +355,15 @@ func StartLanding() -> void:
 	LandingStarted.emit()
 	Landing = true
 	
+
+func UpdateTargetAltitude(NewTarget : float) -> void:
+	TargetAltitude = clamp(TargetAltitude - (NewTarget * 100), CurrentLandAltitude, 10000)
+	if (Altitude != TargetAltitude):
+		LandingStarted.emit()
+	#pass
+
 func Landed() -> bool:
-	return Altitude == 0
+	return Altitude == CurrentLandAltitude
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
@@ -353,6 +376,7 @@ func UpdateAltitude(NewAlt : float) -> void:
 	Mat.set_shader_parameter("ShipSize", lerp(0.001, 0.008, Altitude / 10000.0))
 
 	for g in GetDroneDock().GetDockedShips():
+		g.TargetAltitude = TargetAltitude
 		g.UpdateAltitude(NewAlt)
 
 func GetShipParalaxPosition(CamPos : Vector2, Zoom : float) -> Vector2:
@@ -445,17 +469,28 @@ func BodyLeftElint(Body: Area2D) -> void:
 	ElintContacts.erase(Body.get_parent())
 	#Elint.emit(false, 0)
 
+var InsideRadar : Array[Node2D]
+
+func EvaluateRadarTargets() -> void:
+	for g in InsideRadar:
+		if (TopographyMap.Instance.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
+			g.OnShipSeen(self)
+		else:
+			g.OnShipUnseen(self)
+
 func BodyEnteredRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
-		Parent.OnShipSeen(self)
-		if (Parent.Convoy and !ActionTracker.IsActionCompleted(ActionTracker.Action.CONVOY)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
-			ActionTracker.GetInstance().ShowTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
+		InsideRadar.append(Parent)
+		#Parent.OnShipSeen(self)
+		#if (Parent.Convoy and !ActionTracker.IsActionCompleted(ActionTracker.Action.CONVOY)):
+			#ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
+			#ActionTracker.GetInstance().ShowTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
 		
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
-			Parent.OnShipSeen(self)
+			InsideRadar.append(Parent)
+			#Parent.OnShipSeen(self)
 	else : if (Parent is MapSpot):
 		if (Parent.EnemyCity):
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
@@ -473,10 +508,14 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 func BodyLeftRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
+		InsideRadar.erase(Parent)
 		Parent.OnShipUnseen(self)
+		#Parent.OnShipUnseen(self)
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
+			InsideRadar.erase(Parent)
 			Parent.OnShipUnseen(self)
+			#Parent.OnShipUnseen(self)
 			
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Docked):
