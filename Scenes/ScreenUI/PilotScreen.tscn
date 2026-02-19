@@ -375,7 +375,6 @@ grow_horizontal = 1
 grow_vertical = 0
 
 [node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]
-visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_left = 0.0

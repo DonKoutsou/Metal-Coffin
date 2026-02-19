@@ -293,7 +293,7 @@ position = Vector2(422, 234)
 blend_mode = 2
 texture = ExtResource("15_7x35f")
 texture_scale = 5.0
-height = 150.0
+height = 600.0
 
 [node name="Credits" parent="SubViewportContainer/SubViewport" unique_id=1882358830 instance=ExtResource("2_0pu32")]
 visible = false
@@ -742,6 +742,7 @@ offset = Vector2(0, 1000)
 texture_scale = 7.0
 
 [node name="Black" type="ColorRect" parent="." unique_id=1362917256]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

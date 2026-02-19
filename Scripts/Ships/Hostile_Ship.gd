@@ -49,7 +49,7 @@ var Reloading : float = 0
 signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip], Mis : Array[BattleShipStats])
 signal OnDestinationReached(Ship : HostileShip)
 signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
-signal OnPlayerVisualLost(Ship : MapShip)
+signal OnPlayerVisualLost(Ship : MapShip, LostBy : HostileShip)
 signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
@@ -134,7 +134,7 @@ func InitialiseShip() -> void:
 func _Update(delta: float) -> void:
 		
 	UpdateElint(delta)
-	
+	EvaluateRadarTargets()
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
 	if (Reloading > 0):
@@ -530,16 +530,25 @@ func BodyLeftElint(area: Area2D) -> void:
 	ElintContacts.erase(area.get_parent())
 	ElintContact.emit(area.get_parent(), false)
 
-
+func EvaluateRadarTargets() -> void:
+	for g in InsideRadar:
+		if (TopographyMap.Instance.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
+			if (!Patrol and !Convoy):
+				GarissonVisualContact(g)
+			else:
+				OnPlayerVisualContact.emit(g, self)
+		else:
+			if (!Patrol and !Convoy):
+				GarissonLostVisualContact(g)
+			else:
+				OnPlayerVisualLost.emit(g, self)
 
 func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Captured):
 		return
 	if (Body.get_parent() is PlayerDrivenShip):
-		if (!Patrol and !Convoy):
-			GarissonVisualContact(Body.get_parent())
-		else:
-			OnPlayerVisualContact.emit(Body.get_parent(), self)
+		InsideRadar.append(Body.get_parent())
+		
 
 var GarrissonVisualContacts : Array[MapShip]
 var VisualContactCountdown = 20
@@ -549,7 +558,9 @@ func GarissonVisualContact(Ship : MapShip) -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.GARISSION_ALARM)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.GARISSION_ALARM)
 		ActionTracker.GetInstance().ShowTutorial("Surprise Atack", "When entering enemy cities you are given a small time frame where you can surprise the enemy\n That time is signified by the red bar bellow the enemie's ship marker.\nIf the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected", [], true)
-		
+	if (GarrissonVisualContacts.has(Ship)):
+		return
+	
 	if (GarrissonVisualContacts.size() == 0):
 		#if (Patrol):
 			#VisualContactCountdown = 5
@@ -565,7 +576,7 @@ func GarissonVisualContact(Ship : MapShip) -> void:
 
 func GarissonLostVisualContact(Ship : MapShip) -> void:
 	if (VisualContactCountdown <= 0):
-		OnPlayerVisualLost.emit(Ship)
+		OnPlayerVisualLost.emit(Ship, self)
 
 	GarrissonVisualContacts.erase(Ship)
 	if (GarrissonVisualContacts.size() == 0):
@@ -573,10 +584,11 @@ func GarissonLostVisualContact(Ship : MapShip) -> void:
 
 func BodyLeftRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerDrivenShip):
+		InsideRadar.erase(Body.get_parent())
 		if (!Patrol and !Convoy):
 			GarissonLostVisualContact(Body.get_parent())
 		else:
-			OnPlayerVisualLost.emit(Body.get_parent())
+			OnPlayerVisualLost.emit(Body.get_parent(), self)
 
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Captured):

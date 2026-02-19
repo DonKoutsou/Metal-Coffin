@@ -222,7 +222,7 @@ func OnSpotDeparture(DepartingShip : MapShip) -> void:
 	VisitingShips.erase(DepartingShip)
 	if (EnemyCity):
 		if (AlarmRaised):
-			Commander.GetInstance().OnEnemyVisualLost(DepartingShip)
+			Commander.GetInstance().OnEnemyVisualLost(DepartingShip, null)
 			
 func OnAlarmRaised(Notify : bool = false) -> void:
 	var AlarmViz = AlarmVisual.instantiate()

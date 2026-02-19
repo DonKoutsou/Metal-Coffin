@@ -25,7 +25,7 @@ var PursuitOrders : Array[PursuitOrder]
 var InvestigationOrders : Array[InvestigationOrder]
 
 var EnemyPositionsToInvestigate : Dictionary[MapShip, VisualLostInfo]
-var KnownEnemies : Dictionary
+var KnownEnemies : Dictionary[MapShip, Array]
 
 var Alarmed : bool = false
 #var SimSpeed : float = 1
@@ -245,21 +245,22 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 				OrderShipToPursue(SeenBy.Command, Ship)
 	else:
 		print(Ship.GetShipName() + " location has been exposed.")
+		
 	if (KnownEnemies.keys().has(Ship)):
-		KnownEnemies[Ship] += 1
+		KnownEnemies[Ship].append(SeenBy)
 	else :
 		if (SeenBy.VisibleBy.size() > 0):
 			SeenBy.DoAlarmVisual()
-		KnownEnemies[Ship] = 1
+		KnownEnemies[Ship] = [SeenBy]
 
-func OnEnemyVisualLost(Ship : MapShip) -> void:
-	if (KnownEnemies.has(Ship) and KnownEnemies[Ship] > 1):
-		KnownEnemies[Ship] -= 1
+func OnEnemyVisualLost(Ship : MapShip, LostBy : HostileShip) -> void:
+	if (KnownEnemies.has(Ship) and KnownEnemies[Ship].size() > 1):
+		KnownEnemies[Ship].erase(LostBy)
 	else :
 		KnownEnemies.erase(Ship)
 		if (IsShipBeingPursued(Ship)):
 			PursuitOrderCanceled(Ship)
-		if (!Ship.IsDead()):
+		if (!Ship.IsDead() and !IsShipsPositionUnderInvestigation(Ship)):
 			SetShipUnderInvestigation(Ship)
 
 			
@@ -401,7 +402,7 @@ func IsShipsPositionUnderInvestigation(Ship : MapShip) -> bool:
 		if (g.ShipTrigger == Ship):
 			return true
 	return false
-	
+
 func FindClosestFleetToPosition(Pos : Vector2, free : bool = false, patrol : bool = false) -> HostileShip:
 	var closestdistance : float = 999999999999999
 	var ClosestShip : HostileShip

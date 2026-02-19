@@ -197,28 +197,41 @@ func FixLabelClipping() -> void:
 				Info1.owner.UpdateSignRotation()
 				tries += 1
 
-var Circles : Array[PackedVector2Array] = []
+var hulls: Array[PackedVector2Array] = []
 
 func _physics_process(_delta: float) -> void:
 	
 	FixLabelClipping()
 
-	Circles.clear()
+	hulls.clear()
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()
-	var LightAmm = WeatherManage.GetLightAmm()
+	#var LightAmm = WeatherManage.GetLightAmm()
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]
 		if (Ship is PlayerDrivenShip):
-			var visibility = WeatherManage.GetVisibilityInPosition(Ship.global_position, LightAmm)
-			if (Ship.RadarWorking):
-				Circles.append(PackedVector2Array([Ship.global_position, Vector2(max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 110 * visibility), 0)]))
-			else:
-				Circles.append(PackedVector2Array([Ship.global_position, Vector2(110 * visibility, 0)]))
-				
+			if (Ship.Command == null):
+				hulls.append(Ship.GetBiggestRadarCicle())
+			#var visibility = WeatherManage.GetVisibilityInPosition(Ship.global_position, LightAmm)
+			#var Radius : float
+			#if (Ship.RadarWorking):
+				#Radius = max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 110 * visibility)
+			#else:
+				#Radius = 110 * visibility
+			
 		_ShipMarkers[g].Update(Ship == ControlledShip, CamPos)
-	CircleDr.UpdateCircles(Circles)
+	CircleDr.UpdatePolygons(hulls)
 	FixMarkerClipping()
+
+func get_circle_points(center: Vector2, radius: float, num_points: int = 10) -> PackedVector2Array:
+	var circle_points = PackedVector2Array()
+	for i in num_points:
+		var angle = float(i) / float(num_points) * PI * 2.0
+		var pt = center + Vector2(cos(angle), sin(angle)) * radius
+		circle_points.append(pt)
+	# Optionally close the loop:
+	circle_points.append(circle_points[0])
+	return circle_points
 
 func GetSaveData() -> SaveData:
 	var Dat = SaveData.new()

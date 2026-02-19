@@ -39,7 +39,7 @@ var Command : MapShip
 var ShowFuelRange = true
 var Docked = false
 var CamZoom = 1
-
+var CurrentVisualRange : float = 110
 
 signal ShipDeparted(DepartedFrom : MapSpot)
 signal ShipDockActions(Stats : String, t : bool, timel : float)
@@ -439,6 +439,7 @@ func UpdateElint(delta: float) -> void:
 		Elint.emit(false, -1, "")
 
 func UpdateVizRange(rang : float):
+	CurrentVisualRange = max(rang, 110)
 	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 110)
@@ -472,11 +473,7 @@ func BodyLeftElint(Body: Area2D) -> void:
 var InsideRadar : Array[Node2D]
 
 func EvaluateRadarTargets() -> void:
-	for g in InsideRadar:
-		if (TopographyMap.Instance.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
-			g.OnShipSeen(self)
-		else:
-			g.OnShipUnseen(self)
+	pass
 
 func BodyEnteredRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()

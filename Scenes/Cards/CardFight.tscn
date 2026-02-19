@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://b7igwmn46vbhn" path="res://Scripts/CardFight/CardFight.gd" id="1_kpwgu"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="2_yc7d8"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Cards/CardFightShipViz.tscn" id="3_n2sfr"]
+[ext_resource type="Material" uid="uid://cahnh8igxy48i" path="res://Shaders/Ground/ground.tres" id="7_nahi7"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_umcqi"]
 [ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
-[ext_resource type="Material" uid="uid://b6441eghjnus8" path="res://Shaders/CardfightGround.tres" id="14_l2i77"]
 [ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="14_vn53x"]
 [ext_resource type="AudioStream" uid="uid://dgx7q2i37ubea" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Material" uid="uid://du775m4kpfmqe" path="res://Shaders/Clouds/CloudCagefight.tres" id="15_l2i77"]
@@ -75,7 +75,7 @@ mouse_filter = 2
 [node name="Ground" type="ColorRect" parent="SubViewport/Control2" unique_id=1742857488]
 z_index = -3
 texture_filter = 1
-material = ExtResource("14_l2i77")
+material = ExtResource("7_nahi7")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -362,6 +362,6 @@ blend_mode = 2
 range_layer_max = 1
 texture = ExtResource("32_1im06")
 texture_scale = 30.0
-height = 237.0
+height = 600.0
 
 [connection signal="pressed" from="SubViewport/Control2/TargetSelect/VBoxContainer/Button" to="SubViewport/Control2/TargetSelect" method="_on_button_pressed"]
