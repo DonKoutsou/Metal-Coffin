@@ -309,7 +309,7 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 			WorldSize = dat.TownLoc.y
 			
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
-	WeatherManage.WorldBounds = Vector2(SpawningBounds.x, WorldSize)
+	#WeatherManage.WorldBounds = Vector2(SpawningBounds.x, WorldSize)
 	#WeatherManage.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
 	#call_deferred("GenerateRoads")
 	#_Camera.call_deferred("FrameCamToPlayer")
@@ -530,7 +530,6 @@ func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
-	WeatherManage.GetInstance().SetWorldBounds(Vector2(SpawningBounds.x, WorldSize))
 
 var EventThread : Thread
 
@@ -861,4 +860,3 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size
 		_InScreenUI.ToggleCrtEffect(false)
 	$SubViewportContainer.visible = true
-	WeatherMan.UpdateData()

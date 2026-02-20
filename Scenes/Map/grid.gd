@@ -152,7 +152,7 @@ func UpdateLines(ContainerPos : Vector2, ContainerSize : Vector2, VPSize : Vecto
 				if (drawy):
 					Lines2.append(Vector2(0, YPosT))
 					Lines2.append(Vector2(ContainerSize.x, YPosT))
-			if (ZoomLevel < 0.1):
+			if (ZoomLevel < 0.4):
 				continue
 				
 			if (DrawTenLine):

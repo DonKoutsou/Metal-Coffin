@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dncqbpsg58qgq"]
 
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="1_fim28"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_fim28"]
 [ext_resource type="Script" uid="uid://dr3s8ms8g256f" path="res://Scripts/UI/WeatherUI.gd" id="2_s1gtg"]
 
 [node name="WeatherUI" type="Control" unique_id=1637731237 node_paths=PackedStringArray("VizText", "WindText", "WindDirArrow", "DangerLabel")]
@@ -16,6 +17,7 @@ VizText = NodePath("HBoxContainer/Visibility")
 WindText = NodePath("HBoxContainer/HBoxContainer/Wind Direction")
 WindDirArrow = NodePath("HBoxContainer/HBoxContainer/Control/Label")
 DangerLabel = NodePath("VisibilityText2")
+ShipControllerEventH = ExtResource("2_fim28")
 
 [node name="VisibilityText2" type="Label" parent="." unique_id=1088892575]
 layout_mode = 1

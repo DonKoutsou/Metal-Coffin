@@ -99,7 +99,8 @@ func UpdateCameraZoom(NewVal : float) -> void:
 
 func _draw():
 	DrawRuller()
-
+	
+	var Lines : Array[PackedVector2Array]
 	var intersectingcircles = []
 	if (intersections.size() > 0):
 		for g in intersections.size():
@@ -109,18 +110,31 @@ func _draw():
 			var merged_polygons = merge_cluster_polygons(cluster)
 			for poly in merged_polygons:
 				if poly.size() > 1:
-					draw_polyline(poly, Col, 1 / CamZoom, true)
+					Lines.append(FromPolylineToLine(poly))
+					#draw_polyline(poly, Col, 1 / CamZoom, true)
 			# Keep note of drawn circle indices to avoid re-drawing
 			for circ in cluster:
 				intersectingcircles.append(circ)
-
+	
 	# Draw non-intersecting individual polygons
 	for g in circles.size():
 		if g in intersectingcircles:
 			continue
 		var poly = circles[g]
 		if poly.size() > 1:
-			draw_polyline(poly, Col, 1 / CamZoom, true)
+			Lines.append(FromPolylineToLine(poly))
+			#draw_polyline(poly, Col, 1 / CamZoom, true)
+	
+	for g in Lines:
+		draw_multiline(g, Col, 1 / CamZoom, true)
+	
+func FromPolylineToLine(Polyline : PackedVector2Array) -> PackedVector2Array:
+	var Line : PackedVector2Array
+	for PointIndex in Polyline.size():
+		var NextIndex = wrap(PointIndex + 1, 0, Polyline.size())
+		Line.append(Polyline[PointIndex])
+		Line.append(Polyline[NextIndex])
+	return Line
 
 func DrawRuller() -> void:
 	if ControlledShip == null or not ControlledShip.RadarWorking:
@@ -130,7 +144,7 @@ func DrawRuller() -> void:
 	if not ControlledShip.RadarWorking:
 		vizrange = 110
 	if vizrange == 110:
-		vizrange *= WeatherManage.GetVisibilityInPosition(ControlledShipPos, WeatherManage.GetLightAmm())
+		vizrange *= WeatherManage.GetInstance().GetVisibilityInPosition(ControlledShipPos, WeatherManage.GetLightAmm())
 
 	for g in 3:
 		draw_circle(ControlledShipPos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, true)

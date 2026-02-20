@@ -742,7 +742,6 @@ offset = Vector2(0, 1000)
 texture_scale = 7.0
 
 [node name="Black" type="ColorRect" parent="." unique_id=1362917256]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

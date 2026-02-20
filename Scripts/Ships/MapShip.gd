@@ -72,6 +72,8 @@ var Detectable = true
 
 var VisibilityValue : float = 0
 var StormValue : float = 0
+var WindEffect : float
+var FuelWindEffect : float
 
 func _ready() -> void:
 	ElintShape.connect("area_entered", BodyEnteredElint)
@@ -100,7 +102,7 @@ func Refuel() -> void:
 	var FuelIsFull = IsFuelFull()
 	var TownHasFuel = CurrentPort.PlayerHasFuelReserves()
 
-	if (IsLanded and !FuelIsFull and TownHasFuel):
+	if (!FuelIsFull and TownHasFuel):
 		var SimulationSpeed = SimulationManager.SimSpeed()
 		
 		if (SimulationManager.IsPaused()):
@@ -140,7 +142,7 @@ func Refuel() -> void:
 		ShipDockActions.emit("Refueling", false, 0)
 
 func Repair() -> void:
-	if (Altitude == 0 and !Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.Repair_Parts > 0):
+	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.Repair_Parts > 0):
 		var Simulationp = 0
 		if (!SimulationManager.IsPaused()):
 			Simulationp = 1
@@ -363,7 +365,10 @@ func UpdateTargetAltitude(NewTarget : float) -> void:
 	#pass
 
 func Landed() -> bool:
-	return Altitude == CurrentLandAltitude
+	return Altitude == CurrentLandAltitude and !Moving()
+
+func Moving() -> bool:
+	return Acceleration.position.x > 0
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
@@ -692,15 +697,17 @@ func GetShipSpeed() -> float:
 func GetAffectedSpeed() -> float:
 	if (Command != null):
 		return Command.GetAffectedSpeed()
-	var WindVel = GetShipWindManipulationModifier()
 	var Spd = GetShipSpeed()
-	var AffectedSpeed = Spd + (Spd * WindVel)
+	var AffectedSpeed = Spd + (Spd * WindEffect)
 	return AffectedSpeed
 
-func GetShipWindManipulationModifier() -> float:
+func UpdateShipWindManipulationModifier() -> void:
 	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+	var StormAffectedWind = WindVel + (WindVel * StormValue)
 	var WeightModifier = 1 - Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT) / STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.WEIGHT)
-	return WindVel * WeightModifier
+	var Height = 0.3 + 0.7 * (Altitude / 10000)
+	var WindProt = TopographyMap.Instance.GetWindProtection(global_position ,Altitude)
+	WindEffect = (StormAffectedWind * WeightModifier * Height) * WindProt
 
 func GetShipThrust() -> float:
 	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * (GetShipSpeed() / GetShipMaxSpeed())

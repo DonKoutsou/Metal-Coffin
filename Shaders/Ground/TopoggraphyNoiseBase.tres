@@ -3,12 +3,13 @@
 [ext_resource type="FastNoiseLite" uid="uid://f0bcp4v0xei2" path="res://Shaders/Ground/GroundNoise.tres" id="1_bu10c"]
 
 [sub_resource type="Gradient" id="Gradient_bu10c"]
-offsets = PackedFloat32Array(0.1, 0.55)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.1, 0.55, 0.6, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.46, 0.46, 0.46, 1, 0.46, 0.46, 0.46, 1)
 
 [resource]
 width = 2048
 height = 2048
+generate_mipmaps = false
 noise = ExtResource("1_bu10c")
 color_ramp = SubResource("Gradient_bu10c")
 seamless = true

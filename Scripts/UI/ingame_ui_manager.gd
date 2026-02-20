@@ -8,7 +8,7 @@ class_name Ingame_UIManager
 @export var UnderstatUI : Control
 @export var OverStatUI : Control
 @export var MousePointer : InScreenCursor
-
+@export var AltitudeLabel : AltitudeText
 @export var Screen : Control
 @export var ZoomUI : ZoomLvevel
 @export var AltitudeUI : AltitudeLvevel
@@ -36,6 +36,7 @@ func _ready() -> void:
 	EventHandler.connect("MarkerEditorYRangeChanged", _MapMarkerEditor._on_y_gas_range_changed)
 	EventHandler.connect("MarkerEditorXRangeChanged", _MapMarkerEditor._on_x_gas_range_changed)
 	EventHandler.connect("MarkerEditorToggled", _MapMarkerEditor.ToggleVisibilidy)
+	EventHandler.TopoPressed.connect(TopologyTriggered)
 	EventHandler.ZoomToggled.connect(ToggleZoomUI)
 	EventHandler.AltToggled.connect(ToggleAltitudeUI)
 	#EventHandler.TeamToggled.connect(ToggleTeamUI)
@@ -43,7 +44,10 @@ func _ready() -> void:
 	
 	
 	ToggleScreenGlitches(SettingsPanel.GetGlitch())
-	
+
+func TopologyTriggered(t : bool) -> void:
+	AltitudeLabel.get_parent().visible = t
+
 func ToggleZoomUI(t : bool) -> void:
 	ZoomUI.Toggle(t)
 	AltitudeUI.Toggle(t)

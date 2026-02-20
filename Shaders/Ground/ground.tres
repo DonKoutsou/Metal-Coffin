@@ -2,13 +2,16 @@
 
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="1_bwem4"]
 [ext_resource type="Texture2D" uid="uid://0o8p7b3b8vyl" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="2_2m2um"]
+[ext_resource type="Texture2D" uid="uid://bc5mvcfngqtha" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="3_68rdk"]
 [ext_resource type="Texture2D" uid="uid://bd38upwrq6cdy" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="3_qsscu"]
 [ext_resource type="Texture2D" uid="uid://oviytxhbkdkv" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="4_68rdk"]
 [ext_resource type="Texture2D" uid="uid://dwkm7bjn0sv1p" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="5_6wk2i"]
 [ext_resource type="FastNoiseLite" uid="uid://f0bcp4v0xei2" path="res://Shaders/Ground/GroundNoise.tres" id="6_udlro"]
+[ext_resource type="Texture2D" uid="uid://djfgqyck6mnie" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="7_6wk2i"]
 
 [sub_resource type="Gradient" id="Gradient_eb1s8"]
-offsets = PackedFloat32Array(0.52029, 0.550725)
+offsets = PackedFloat32Array(0.52029, 0.5496009, 0.7, 0.705)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_445lv"]
 width = 2048
@@ -32,14 +35,15 @@ invert = true
 seamless_blend_skirt = 1.0
 
 [resource]
-resource_local_to_scene = true
 shader = ExtResource("1_bwem4")
 shader_parameter/GroundTexture = ExtResource("4_68rdk")
 shader_parameter/GroundTexture2 = ExtResource("5_6wk2i")
+shader_parameter/GroundTexture3 = ExtResource("7_6wk2i")
 shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_445lv")
 shader_parameter/NoiseTexture3 = SubResource("NoiseTexture2D_d5ydj")
 shader_parameter/GroundNormalTexture = ExtResource("3_qsscu")
 shader_parameter/GroundNormal2Texture = ExtResource("2_2m2um")
+shader_parameter/GroundNormal3Texture = ExtResource("3_68rdk")
 shader_parameter/NormalD = 1.0
 shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(0, 0)

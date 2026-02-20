@@ -6,12 +6,24 @@ class_name WeatherUI
 @export var WindText : Label
 @export var WindDirArrow : Label
 @export var DangerLabel : Label
+@export var ShipControllerEventH : ShipControllerEventHandler
+
+var CurrentShip : PlayerDrivenShip
+
+func _ready() -> void:
+	ShipControllerEventH.OnControlledShipChanged.connect(ControlledShipChanged)
+	set_physics_process(false)
+
+func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
+	CurrentShip = NewShip
+	set_physics_process(true)
 
 var d = 0.2
 func _physics_process(delta: float) -> void:
 	var WindAngle = WeatherManage.WindDirection.angle()
 	var wd = Helper.AngleToDirectionShort(WindAngle)
-	var ws = roundi(WeatherManage.WindSpeed)
+	var ws = roundi(TopographyMap.Instance.GetWindAtPos(CurrentShip.global_position, CurrentShip.Altitude))
+	#var ws = roundi(WeatherManage.WindSpeed * CurrentShip.WindEffect)
 	WindText.text = "Wind Dir = {0}\n SPD : {1}km/h".format([wd, ws])
 	WindDirArrow.rotation = WindAngle
 	var vis = ShipContoller.ControlledShipVisibilityValue

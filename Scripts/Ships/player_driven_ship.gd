@@ -23,13 +23,13 @@ var CurrentRadarPointToEvaluate : int = 0
 
 func EvaluateRadarrPoint() -> void:
 	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]
-	for g in 2:
-		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 10.0)
-		var MaxPoint = Dir * CurrentVisualRange
-		var GlobalPoint = global_position + MaxPoint
-		var EvaluatedPoint = TopographyMap.Instance.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
-		RadarCircle[CurrentRadarPointToEvaluate] = EvaluatedPoint - global_position
-		CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate + 1, 0, RadarCircle.size())
+	#for g in 2:
+	var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 10.0)
+	var MaxPoint = Dir * CurrentVisualRange
+	var GlobalPoint = global_position + MaxPoint
+	var EvaluatedPoint = TopographyMap.Instance.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
+	RadarCircle[CurrentRadarPointToEvaluate] = EvaluatedPoint - global_position
+	CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate + 1, 0, RadarCircle.size())
 
 func UpdateVizRange(rang : float):
 	super(rang)
@@ -75,7 +75,8 @@ func  _ready() -> void:
 	WeatherManage.RegisterShip(self)
 	if (RadarCircle.size() == 0):
 		RadarCircle = get_circle_points(110)
-	#call_deferred("_postready")
+
+	call_deferred("UpdateShipWindManipulationModifier")
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
@@ -116,7 +117,10 @@ func Update(delta: float) -> void:
 	
 	EvaluateRadarrPoint()
 	EvaluateRadarTargets()
-	CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)
+	if (GetShipSpeed() > 0):
+		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)
+	else:
+		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position) + 100
 	_HandleLanding(delta)
 	
 	if (TargetShip != null):
@@ -152,7 +156,9 @@ func Update(delta: float) -> void:
 
 	if (CurrentPort != null):
 		_HandleRestock()
-
+	
+	UpdateShipWindManipulationModifier()
+	
 	if (GetShipSpeedVec() == Vector2.ZERO):
 		return
 	
@@ -165,11 +171,11 @@ func Update(delta: float) -> void:
 	var FuelConsumtion = Acceleration.position.x / ShipEfficiency
 	
 	#Apply a small penalty durring storms
-	if (StormValue > 0.9):
-		FuelConsumtion *= 1 + (1 - StormValue) * 3
+	#if (StormValue > 0.9):
+		#FuelConsumtion *= 1 + (1 - StormValue) * 3
 	#Apply wind buff debuff
-	var WindVel = GetShipWindManipulationModifier()
-	FuelConsumtion -= FuelConsumtion * WindVel
+	
+	FuelConsumtion -= FuelConsumtion * WindEffect
 	
 	FuelConsumtion *= SimulationSpeed
 	#Consume fuel on shif if enough
@@ -193,7 +199,7 @@ func Update(delta: float) -> void:
 		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency
 		if (StormValue > 0.9):
 			DroneFuelConsumtion *= 1.3
-		DroneFuelConsumtion -= DroneFuelConsumtion * WindVel
+		DroneFuelConsumtion -= DroneFuelConsumtion * WindEffect
 		DroneFuelConsumtion *= SimulationSpeed
 		
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
@@ -312,9 +318,8 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 
 
 func GetShipSpeedVec() -> Vector2:
-	var WindVel = GetShipWindManipulationModifier()
 	var Spd = Acceleration.global_position - global_position
-	var AffectedSpeed = Spd + (Spd * WindVel )
+	var AffectedSpeed = Spd + (Spd * WindEffect)
 	return AffectedSpeed
 
 func SetTargetLocation(pos : Vector2) -> void:
@@ -377,11 +382,16 @@ func UpdateLight(LightAmm : float, Viz : float) -> void:
 
 
 func _HandleRestock() -> void:
+	if(!Landed()):
+		ShipDockActions.emit("Refueling", false, 0)
+		ShipDockActions.emit("Repairing", false, 0)
+		ShipDockActions.emit("Upgrading", false, 0)
+		return
 	Refuel()
 	Repair()
 	
 	var inv = Cpt.GetCharacterInventory()
-	if (Altitude == 0 and inv != null and inv._ItemBeingUpgraded != null):
+	if (inv != null and inv._ItemBeingUpgraded != null):
 		ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
 	else:
 		ShipDockActions.emit("Upgrading", false, 0)
