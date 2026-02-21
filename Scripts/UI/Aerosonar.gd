@@ -105,6 +105,9 @@ func UpdateContacts() -> void:
 		if (g is PlayerDrivenShip and IsPartOfFleet(g)):
 			continue
 		
+		var LineOfSight = TopographyMap.Instance.WithinLineOfSight(Controller.global_position, Controller.Altitude, g.global_position, g.Altitude)
+		if (!LineOfSight):
+			continue
 		#find the angle at wich the ship is at from us
 		var dir = Controller.global_position.direction_to(g.global_position).angle()
 		#check if its within the current angle of the sonar

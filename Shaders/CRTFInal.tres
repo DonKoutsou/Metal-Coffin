@@ -9,6 +9,7 @@ shader_parameter/mask_type = 2
 shader_parameter/vignette_strength = 2.999999932944
 shader_parameter/image_flicker = 0.1499999966472
 shader_parameter/skip = 0.01
+shader_parameter/color_offset_multiplier = 0.0010000000475
 shader_parameter/hardScan = -1.0
 shader_parameter/hardPix = -4.0
 shader_parameter/warp = Vector2(15, 15)

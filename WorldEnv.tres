@@ -25,7 +25,7 @@ glow_strength = 2.0
 glow_mix = 0.825
 glow_hdr_threshold = 1.25
 adjustment_enabled = true
-adjustment_saturation = 0.9
+adjustment_saturation = 0.8
 adjustment_color_correction = SubResource("GradientTexture1D_7mma4")
 
 [resource]

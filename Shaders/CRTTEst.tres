@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://g0gu7s0ndcuo"]
+
+[ext_resource type="Shader" uid="uid://6a7co5k4xxp2" path="res://Shaders/crt6.gdshader" id="1_ayykf"]
+
+[resource]
+shader = ExtResource("1_ayykf")
+shader_parameter/color_offset_multiplier = 0.002000000095
+shader_parameter/black_offset_multiplier = 0.10000000149012
+shader_parameter/color_offset = 0.0020000033548800006
+shader_parameter/blur_amount = 0.80000001192096

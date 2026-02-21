@@ -19,6 +19,7 @@ var Friendly = false
 var Altitude : float
 var TargetAltitude : float
 var DistanceTraveled : float
+var WindEffect : float
 
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
@@ -65,6 +66,14 @@ func UpdateAltitude(NewAltitude) -> void:
 	Altitude = NewAltitude
 	AltitudeChanged.emit()
 
+func UpdateShipWindManipulationModifier() -> void:
+	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+	var StormValue = WeatherManage.Instance.StormValueInPosition(global_position)
+	var StormAffectedWind = WindVel + (WindVel * StormValue)
+	var Height = 0.3 + 0.7 * (Altitude / 10000)
+	var WindProt = TopographyMap.Instance.GetWindProtection(global_position ,Altitude)
+	WindEffect = (StormAffectedWind * Height) * WindProt
+
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
@@ -82,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	
 	if (Altitude != TargetAltitude):
 		UpdateAltitude(move_toward(Altitude, TargetAltitude, AltitudeChangeSpeed * SimulatedDelta))
-	
+	UpdateShipWindManipulationModifier()
 	var offset = GetShipSpeedVec()
 	
 	DistanceTraveled += offset.length() * SimulationManager.SimSpeed()
@@ -90,9 +99,9 @@ func _physics_process(delta: float) -> void:
 	if (DistanceTraveled > Distance):
 		Kill()
 	
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
-	var affectedoffset = (offset + (offset * WindVel)) * SimulationManager.SimSpeed()
-	global_position += affectedoffset
+	
+
+	global_position += offset * SimulationManager.SimSpeed()
 	
 	
 	$ColorRect/TrailLine.Update(SimulatedDelta)
@@ -242,7 +251,9 @@ func GetAffectedSpeed() -> float:
 	return AffectedSpeed
 
 func GetShipSpeedVec() -> Vector2:
-	return $AccelPosition.global_position - global_position
+	var Spd = $AccelPosition.global_position - global_position
+	var AffectedSpeed = Spd + (Spd * WindEffect)
+	return AffectedSpeed
 
 func GetSaveData() -> MissileSaveData:
 	var dat = MissileSaveData.new()

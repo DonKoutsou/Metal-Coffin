@@ -82,8 +82,8 @@ func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
 	var RoundedPos = Vector2i((pos - global_position) + (Offset * 6000))
 	
 		
-	var x = Helper.normalize_value(RoundedPos.x, 0, 12000)
-	var y = Helper.normalize_value(RoundedPos.y, 0, 12000)
+	var x = Helper.normalize_value(RoundedPos.x, 0, 24000)
+	var y = Helper.normalize_value(RoundedPos.y, 0, 24000)
 	var WrapedPos = Vector2i(wrap(x * 2048, 0, 2048), wrap(y * 2048, 0, 2048))
 	#if (CachedPixels.has(WrapedPos)):
 		#return CachedPixels[WrapedPos] * 10000
