@@ -135,6 +135,26 @@ func GetCollisionPoint(radar_pos: Vector2,       # Global position
 			return pos
 	return ship_pos
 
+func IncommingCollision(radar_pos: Vector2,       # Global position
+		radar_height: float,
+		ship_pos: Vector2,        # Global position
+		ship_height: float,
+	) -> bool:
+	#queue_redraw()
+	#DrawPos.clear()
+	var samples : int = roundi(Vector3(radar_pos.x, radar_pos.y, radar_height).distance_to(Vector3(ship_pos.x, ship_pos.y, ship_height)) / 50)
+	var HeightDif : float = ship_height - radar_height
+	#print(samples)
+	for i in range(samples + 1):
+		var t := float(i) / float(samples)
+		var pos := radar_pos.lerp(ship_pos, t)
+		#DrawPos.append(pos)
+		var terrain_height := GetAltitudeAtGlobalPosition(pos)  # Query your height function!
+		var expected_height : float = radar_height + (HeightDif / samples) * t
+		if terrain_height > expected_height:
+			return true
+	return false
+
 func GetCollisionPoint3(radar_pos: Vector2,       # Global position
 		radar_height: float,
 		ship_pos: Vector2,        # Global position

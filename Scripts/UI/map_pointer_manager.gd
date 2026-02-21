@@ -102,13 +102,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 		Ship.ShipDeparted.connect(marker.OnShipDeparted)
 		Ship.Elint.connect(marker.ToggleShowElint)
 		Ship.Cpt.OnNameChanged.connect(marker.OnCaptainNameChanged)
-		Ship.LandingStarted.connect(marker.OnLandingStarted)
-		Ship.LandingEnded.connect(marker.OnLandingEnded)
-		Ship.TakeoffStarted.connect(marker.OnLandingStarted)
-		Ship.TakeoffEnded.connect(marker.OnLandingEnded)
-		Ship.MatchingAltitudeStarted.connect(marker.OnLandingStarted)
-		Ship.MatchingAltitudeEnded.connect(marker.OnLandingEnded)
-		
+		Ship.AltitudeChanged.connect(marker.AltitudeChanged)
 		if (Ship is Drone):
 			Ship.DroneReturning.connect(marker.DroneReturning)
 		
@@ -123,6 +117,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 			marker.PlayHostileShipNotif("Hostile Missile Located")
 		marker.ToggleShipDetails(true)
 		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
+		Ship.AltitudeChanged.connect(marker.AltitudeChanged)
 		marker.SetType("Missile")
 	
 	marker.Init(Ship)
@@ -199,13 +194,16 @@ func FixLabelClipping() -> void:
 
 var hulls: Array[PackedVector2Array] = []
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	FixLabelClipping()
 
 	hulls.clear()
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()
+	var d = delta
+	if (SimulationManager.IsPaused()):
+		d = 0
 	#var LightAmm = WeatherManage.GetLightAmm()
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]
@@ -218,8 +216,9 @@ func _physics_process(_delta: float) -> void:
 				#Radius = max(Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE), 110 * visibility)
 			#else:
 				#Radius = 110 * visibility
-			
-		_ShipMarkers[g].Update(Ship == ControlledShip, CamPos)
+		
+		
+		_ShipMarkers[g].Update(Ship == ControlledShip, CamPos, d)
 	CircleDr.UpdatePolygons(hulls)
 	FixMarkerClipping()
 

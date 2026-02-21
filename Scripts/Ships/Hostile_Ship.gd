@@ -176,8 +176,10 @@ func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
 	missile.SetData(Mis)
 	if (Command != null):
 		missile.global_position = Command.global_position
+		missile.Altitude = Command.Altitude
 	else:
 		missile.global_position = global_position
+		missile.Altitude = Altitude
 	get_parent().add_child(missile)
 	
 	missile.look_at(Pos)

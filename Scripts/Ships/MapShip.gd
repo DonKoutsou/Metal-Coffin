@@ -50,18 +50,19 @@ signal OnShipDestroyed(Sh : MapShip)
 signal AltitudeChanged()
 signal AChanged(NewAccel : float)
 signal AForced(NewAccel : float)
-var IsLanded : bool = false
-var Landing : bool = false
-signal LandingStarted
-signal LandingCanceled(Ship : MapShip)
-signal LandingEnded(Ship : MapShip)
-signal LandingEnded2
-var TakingOff : bool = false
-signal TakeoffStarted
-signal TakeoffEnded(Ship : MapShip)
-var MatchingAltitude : bool = false
-signal MatchingAltitudeStarted
-signal MatchingAltitudeEnded(Ship : MapShip)
+
+#var IsLanded : bool = false
+#var Landing : bool = false
+#signal LandingStarted
+#signal LandingCanceled(Ship : MapShip)
+#signal LandingEnded(Ship : MapShip)
+#signal LandingEnded2
+#var TakingOff : bool = false
+#signal TakeoffStarted
+#signal TakeoffEnded(Ship : MapShip)
+#var MatchingAltitude : bool = false
+#signal MatchingAltitudeStarted
+#signal MatchingAltitudeEnded(Ship : MapShip)
 
 signal PortChanged()
 
@@ -187,12 +188,12 @@ func _HandleLanding(delta : float) -> void:
 	var NewAltitude = clamp(TargetAltitude, CurrentLandAltitude, 10000)
 	if (TargetAltitude != NewAltitude):
 		TargetAltitude = NewAltitude
-		LandingStarted.emit()
+		#LandingStarted.emit()
 	if (Altitude != TargetAltitude):
 		UpdateAltitude(move_toward(Altitude, TargetAltitude, delta * 1000))
-		if (Altitude == TargetAltitude):
-			LandingEnded.emit(self)
-			LandingEnded2.emit()
+		#if (Altitude == TargetAltitude):
+			#LandingEnded.emit(self)
+			#LandingEnded2.emit()
 	#if (Landing):
 		#UpdateAltitude(max(CurrentLandAltitude, Altitude - (60 * SimulationSpeed)))
 		#if (Altitude <= CurrentLandAltitude):
@@ -213,22 +214,22 @@ func _HandleLanding(delta : float) -> void:
 			#MatchingAltitudeEnded.emit(self)
 			#MatchingAltitude = false
 
-func InitialiseAltitudeMatching() -> void:
-	MatchingAltitude = true
-	MatchingAltitudeStarted.emit()
+#func InitialiseAltitudeMatching() -> void:
+	#MatchingAltitude = true
+	#MatchingAltitudeStarted.emit()
 
 func RemovePort():
 	ShipDeparted.emit(CurrentPort)
 	CurrentPort = null
 	InventoryManager.GetInstance().CancelUpgrades(Cpt)
 	Cpt.CurrentPort = ""
-	if (Landing):
-		LandingCanceled.emit(self)
-		Landing = false
-	if (Altitude != 10000 and !TakingOff):
-		TakingOff = true
-		IsLanded = false
-		TakeoffStarted.emit()
+	#if (Landing):
+		#LandingCanceled.emit(self)
+		#Landing = false
+	#if (Altitude != 10000 and !TakingOff):
+		#TakingOff = true
+		#IsLanded = false
+		#TakeoffStarted.emit()
 	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
 		g.RemovePort()
@@ -350,18 +351,18 @@ func IsDead() -> bool:
 #███████ ██   ██ ██   ████ ██████  ██ ██   ████  ██████  
 #Only used by player controlled ships
 
-func StartLanding() -> void:
-	if (TakingOff):
-		TakeoffEnded.emit(null)
-		TakingOff = false
-	LandingStarted.emit()
-	Landing = true
+#func StartLanding() -> void:
+	#if (TakingOff):
+		#TakeoffEnded.emit(null)
+		#TakingOff = false
+	#LandingStarted.emit()
+	#Landing = true
 	
 
 func UpdateTargetAltitude(NewTarget : float) -> void:
 	TargetAltitude = clamp(TargetAltitude - (NewTarget * 100), CurrentLandAltitude, 10000)
-	if (Altitude != TargetAltitude):
-		LandingStarted.emit()
+	#if (Altitude != TargetAltitude):
+		#LandingStarted.emit()
 	#pass
 
 func Landed() -> bool:

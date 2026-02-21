@@ -240,7 +240,8 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	drone.SetShipPosition(trans.global_position)
 
 	if (drone.Altitude != Command.Altitude):
-		drone.InitialiseAltitudeMatching()
+		drone.TargetAltitude = Command.Altitude
+		#drone.InitialiseAltitudeMatching()
 
 	if (Command.GetShipSpeed() > 0):
 		Command.AccelerationChanged(Command.GetShipSpeed() / Command.GetShipMaxSpeed())

@@ -137,8 +137,12 @@ func _draw() -> void:
 		#else:
 			#draw_dashed_line(g[0], g[1], Color(1,1,1), 1 / CurrentZoom, 10 / CurrentZoom)
 
-func Update(IsControlled : bool, CamPos : Vector2) -> void:
+func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 	queue_redraw()
+	
+	AltitudeChangeCooldown = max(0, AltitudeChangeCooldown - delta)
+	if (AltitudeChangeCooldown == 0 and LandingNotif != null):
+		LandingNotif.queue_free()
 	
 	if (CurrentShip is HostileShip):
 		if (CurrentShip.Docked):
@@ -228,7 +232,11 @@ func Update(IsControlled : bool, CamPos : Vector2) -> void:
 
 		else : if (CurrentShip is Missile):
 			if (CurrentShip.FiredBy is PlayerDrivenShip or CurrentShip.VisibleBy.size() > 0):
+				
 				global_position = CurrentShip.global_position
+				if (LandingNotif != null):
+					#OnLandingStarted()
+					UpdateAltitude(CurrentShip.Altitude)
 				visible = true
 				ClearTime()
 				UpdateTrajectory(CurrentShip.global_rotation)
@@ -306,19 +314,15 @@ func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 func OnCaptainNameChanged(NewName : String) -> void:
 	ShipNameText = NewName
 
-func OnLandingStarted():
+var AltitudeChangeCooldown : float = 0
+
+func AltitudeChanged() -> void:
+	AltitudeChangeCooldown = 1
 	if (is_instance_valid(LandingNotif)):
 		return
 	LandingNotif = NotificationScene.instantiate() as ShipMarkerNotif
-	#LandingNotif.SetText("ELINT : " + var_to_str(ElingLevel))
 	LandingNotif.Blink = false
-	#connect("ShipDeparted", notif.OnShipDeparted)
 	add_child(LandingNotif)
-	
-func OnLandingEnded(_Ship : MapShip):
-	if (LandingNotif != null):
-		LandingNotif.queue_free()
-		LandingNotif = null
 
 func ToggleShipDetails(T : bool):
 	DetailPanel.visible = T
@@ -356,6 +360,7 @@ func UpdateLine(Zoom : float)-> void:
 	
 func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(roundi(Alt)))
+
 
 #func EnteredScreen() -> void:
 	#ShipDetailLabel.add_to_group("MapInfo")

@@ -42,12 +42,14 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.505804, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
-[node name="Missile" type="Node2D" unique_id=1696527019 node_paths=PackedStringArray("MissileVisual") groups=["Missiles", "Ships", "ZoomAffected"]]
+[node name="Missile" type="Node2D" unique_id=1696527019 node_paths=PackedStringArray("MissileVisual", "CollisionDetector") groups=["Missiles", "Ships", "ZoomAffected"]]
 z_index = 1
 script = ExtResource("1_dxfkf")
 MissileLaunchSound = SubResource("AudioStreamRandomizer_brtn2")
 C = ExtResource("4_brtn2")
 MissileVisual = NodePath("ColorRect")
+CollisionDetector = NodePath("CollisionDetector")
+AltitudeChangeSpeed = 1000.0
 
 [node name="AccelPosition" type="Node2D" parent="." unique_id=1303542076]
 position = Vector2(29, 0)
@@ -98,6 +100,9 @@ width_curve = SubResource("Curve_5epdn")
 gradient = SubResource("Gradient_5epdn")
 script = ExtResource("4_5epdn")
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="CollisionDetector" type="Node2D" parent="." unique_id=700661494]
+position = Vector2(220, 0)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

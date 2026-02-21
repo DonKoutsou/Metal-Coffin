@@ -58,6 +58,7 @@ func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	missile.SetData(Mis)
 	missile.global_rotation = $MissileLine.global_rotation
 	missile.global_position = global_position
+	missile.Altitude = get_parent().Altitude
 	missile.Friendly = true
 	missile.ShipMet.connect(Map.GetInstance().EnemyMet)
 	get_parent().get_parent().add_child(missile)

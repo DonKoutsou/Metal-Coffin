@@ -10,11 +10,14 @@ var Damage : float = 20
 @export var MissileLaunchSound : AudioStream
 @export var C : CardStats
 @export var MissileVisual : Node2D
+@export var CollisionDetector : Node2D
+@export var AltitudeChangeSpeed : float = 1.0
 
 var FoundShips : Array[Node2D] = []
 var Paused = false
 var Friendly = false
-
+var Altitude : float
+var TargetAltitude : float
 var DistanceTraveled : float
 
 var FiredBy : MapShip
@@ -22,6 +25,7 @@ var VisibleBy : Array[MapShip]
 
 signal ShipMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[BattleShipStats])
 signal OnShipDestroyed(Mis : Missile)
+signal AltitudeChanged()
 
 var activationdistance : float = 0
 
@@ -35,6 +39,7 @@ func TogglePause(t : bool):
 	Paused = t
 
 
+
 func GetSpeed() -> float:
 	return Speed
 
@@ -42,6 +47,7 @@ func GetShipName() -> String:
 	return MissileName
 
 func _ready() -> void:
+	TargetAltitude = Altitude
 	Paused = SimulationManager.IsPaused()
 	if (FiredBy is not HostileShip):
 		var s = DeletableSound.new()
@@ -55,11 +61,28 @@ func _ready() -> void:
 	
 	$Radar_Range.visible = Friendly
 	
+func UpdateAltitude(NewAltitude) -> void:
+	Altitude = NewAltitude
+	AltitudeChanged.emit()
 
 func _physics_process(delta: float) -> void:
 	if (Paused):
 		return
-
+	
+	var SimulatedDelta = delta * SimulationManager.SimSpeed()
+	
+	var IncommingCollision = TopographyMap.Instance.GetCollisionPoint3(global_position, Altitude, CollisionDetector.global_position, Altitude)
+	
+	if (Vector2(IncommingCollision.x, IncommingCollision.y) == global_position):
+		Kill()
+	else: if (Vector2(IncommingCollision.x, IncommingCollision.y) != CollisionDetector.global_position):
+		var NewAlt = IncommingCollision.z + 200
+		if (NewAlt > TargetAltitude):
+			TargetAltitude = NewAlt
+	
+	if (Altitude != TargetAltitude):
+		UpdateAltitude(move_toward(Altitude, TargetAltitude, AltitudeChangeSpeed * SimulatedDelta))
+	
 	var offset = GetShipSpeedVec()
 	
 	DistanceTraveled += offset.length() * SimulationManager.SimSpeed()
@@ -72,7 +95,7 @@ func _physics_process(delta: float) -> void:
 	global_position += affectedoffset
 	
 	
-	$ColorRect/TrailLine.Update(delta)
+	$ColorRect/TrailLine.Update(SimulatedDelta)
 	
 	activationdistance += offset.length() * SimulationManager.SimSpeed()
 	
@@ -148,6 +171,10 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 	
 	if (FoundShips.size() == 0):
 		return
+		
+	if (abs(Altitude - Bod.Altitude) > 100):
+		return
+		
 	if (Bod is HostileShip):
 		if (Bod.Destroyed):
 			return
@@ -198,7 +225,7 @@ func HoneAtEnemy():
 	# Get the current position and velocity of the ship
 	var ship_position = Ship.global_position
 	var ship_velocity = Ship.GetShipSpeedVec()
-	
+	TargetAltitude = Ship.Altitude
 	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (global_position.distance_to(ship_position) / GetAffectedSpeed()) / 60
