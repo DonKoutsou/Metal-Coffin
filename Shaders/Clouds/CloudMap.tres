@@ -8,7 +8,7 @@
 shader = ExtResource("1_b1bi2")
 shader_parameter/noise_texture = ExtResource("2_0wos0")
 shader_parameter/noise_texturenormal = ExtResource("2_ykjet")
-shader_parameter/density = 2.2
+shader_parameter/density = 2.2000001045
 shader_parameter/Camera_Offset = Vector2(0, 0)
 shader_parameter/Offset = Vector2(0, 0)
 shader_parameter/WindDir = Vector2(0, 0)

@@ -4,6 +4,8 @@
 [ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Scenes/WeatherMan/StormNoise.tres" id="2_h5vfm"]
 
 [resource]
+width = 1024
+height = 1024
 noise = ExtResource("2_h5vfm")
 color_ramp = ExtResource("1_n0i4l")
 seamless = true

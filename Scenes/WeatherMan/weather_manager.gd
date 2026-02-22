@@ -43,8 +43,9 @@ func _ready() -> void:
 	Mat = material
 	#Mat.set_shader_parameter("offset", CurrentOffset)
 	tx = N.get_image()
-	await N.changed
-	tx = N.get_image()
+	N.changed.connect(NoiseChanged)
+	#await N.changed
+	#tx = N.get_image()
 	
 	LastTimeWindChanged = 0
 	WindDirectionOffset = 1
@@ -81,9 +82,9 @@ func Update(delta: float) -> void:
 		#Add the new offset of the weather to the noise and produce the new texture
 		#CurrentOffset -= Vector2(WindDirection.x, WindDirection.y) * (simspeed / 5000) * (WindSpeed * 0.01)
 		#Mat.set_shader_parameter("offset", CurrentOffset + CurrentCamOffset)
-		N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 10) * (WindSpeed * 0.01)
+		N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 50) * (WindSpeed * 0.01)
 		N.noise.fractal_gain = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * simspeed / 10, -10, 10)
-		tx = N.get_image()
+		#tx = N.get_image()
 		
 		var L = GetLightAmm()
 		
@@ -95,7 +96,8 @@ func Update(delta: float) -> void:
 				g.UpdateLight(L, viz)
 			g.RephreshVisRange()
 
-
+func NoiseChanged() -> void:
+	tx = N.get_image()
 
 static func GetWindVelocity() -> Vector2:
 	return WindDirection * (WindSpeed / (MAX_WIND_SPEED / 2.0))
@@ -117,7 +119,7 @@ func get_color_at_global_position(pos: Vector2) -> Color:
 
 	var x = Helper.normalize_value(RoundedPos.x, 0, 24000)
 	var y = Helper.normalize_value(RoundedPos.y, 0, 24000)
-	var WrapedPos = Vector2i(wrap(x * 512, 0, 512), wrap(y * 512, 0, 512))
+	var WrapedPos = Vector2i(wrap(x * 1024, 0, 1024), wrap(y * 1024, 0, 1024))
 		
 	var col = tx.get_pixel(WrapedPos.x, WrapedPos.y)
 

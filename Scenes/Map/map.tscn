@@ -23,7 +23,9 @@
 [ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="19_x3wib"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="Texture2D" uid="uid://bj3kjbbgtmxh8" path="res://Shaders/Clouds/CloudMaskTexture.tres" id="21_7nfft"]
+[ext_resource type="Script" uid="uid://cmiywlc06uva1" path="res://Scenes/Map/clouds.gd" id="21_lh5em"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
+[ext_resource type="Gradient" uid="uid://wj66sajtr3qj" path="res://Scenes/Map/CloudGradient.tres" id="22_7nfft"]
 [ext_resource type="Script" uid="uid://c2ufjbkhk6v0q" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
 [ext_resource type="PackedScene" uid="uid://delo4ch0hmnr6" path="res://Scenes/Map/ground.tscn" id="22_kgrij"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="22_n73so"]
@@ -80,7 +82,7 @@ _bundled = {
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tk0jd"]
 light_mode = 1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tr1ul"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nfft"]
 shader = ExtResource("22_xwtib")
 shader_parameter/NoiseTexture2 = ExtResource("30_xwtib")
 shader_parameter/offset = Vector2(0, 0)
@@ -218,6 +220,8 @@ offset_right = 750.0
 offset_bottom = 750.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("21_lh5em")
+CloudGradient = ExtResource("22_7nfft")
 
 [node name="DarkBlueBackground" type="ColorRect" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=61913385]
 material = SubResource("CanvasItemMaterial_tk0jd")
@@ -242,7 +246,7 @@ visible = false
 visible = false
 z_index = 1
 texture_filter = 3
-material = SubResource("ShaderMaterial_tr1ul")
+material = SubResource("ShaderMaterial_7nfft")
 custom_minimum_size = Vector2(41.6, 40.6)
 anchors_preset = 15
 anchor_right = 1.0

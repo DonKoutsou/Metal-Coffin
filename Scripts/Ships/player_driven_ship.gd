@@ -109,11 +109,13 @@ func Update(delta: float) -> void:
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 
-	for g in TrailLines:
-		g.UpdateProjected(delta, Altitude / 10000.0)
+	
 	
 	if (Paused):
 		return
+	
+	for g in TrailLines:
+		g.UpdateProjected(delta, Altitude / 10000.0)
 	
 	EvaluateRadarrPoint()
 	EvaluateRadarTargets()
