@@ -4,10 +4,10 @@ class_name MissileDock
 
 @export var MissileDockEventH : MissileDockEventHandler
 
-#var Missiles : Array[MissileItem]
+var ArmedMissile : MissileItem
+var AimRot : float
 
 func _ready() -> void:
-	$MissileLine.visible = false
 	MissileDockEventH.connect("OnMissileDirectionChanged", MissileAimDirChanged)
 	MissileDockEventH.connect("OnMissileArmed", MissileArmed)
 	MissileDockEventH.connect("OnMissileDissarmed", MissileDissarmed)
@@ -18,36 +18,25 @@ func _ready() -> void:
 func IsOwner(Owner : Captain) -> bool:
 	return Owner == get_parent().Cpt
 
-#func ClearAllMissiles() -> void:
-	#for g in Missiles:
-		#MissileRemoved(g, get_parent().Cpt)
-
-#func MissileRemoved(Mis : MissileItem, Owner : Captain):
-	#if (!IsOwner(Owner)):
-		#return
-	#if (Missiles.has(Mis)):
-		#Missiles.erase(Mis)
-#func AddMissile(Mis : MissileItem, Owner : Captain):
-	#if (!IsOwner(Owner)):
-		#return
-	#Missiles.append(Mis)
-
 func MissileArmed(Mis : MissileItem, Owner : Captain) -> void:
 	if (!IsOwner(Owner)):
 		return
-	$MissileLine.set_point_position(1, Vector2(Mis.Distance, 0))
-	$MissileLine.set_point_position(0, Vector2(50, 0))
-	$MissileLine.visible = true
+	ArmedMissile = Mis
+	#$MissileLine.set_point_position(1, Vector2(Mis.Distance, 0))
+	#$MissileLine.set_point_position(0, Vector2(50, 0))
+	#$MissileLine.visible = true
 
 func MissileDissarmed(Owner : Captain) -> void:
 	if (!IsOwner(Owner)):
 		return
-	$MissileLine.visible = false
+	ArmedMissile = null
+	#$MissileLine.visible = false
 
 func MissileAimDirChanged(NewDir : float, Owner : Captain) -> void:
 	if (!IsOwner(Owner)):
 		return
-	$MissileLine.rotation += NewDir
+	AimRot += NewDir
+	#$MissileLine.rotation += NewDir
 	
 func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	if (!IsOwner(User)):
@@ -56,7 +45,7 @@ func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	var missile = MissileScene.instantiate() as Missile
 	missile.FiredBy = get_parent()
 	missile.SetData(Mis)
-	missile.global_rotation = $MissileLine.global_rotation
+	missile.global_rotation = AimRot
 	missile.global_position = global_position
 	missile.Altitude = get_parent().Altitude
 	missile.Friendly = true
@@ -65,5 +54,5 @@ func LaunchMissile(Mis : MissileItem, _Owner : Captain, User : Captain) -> void:
 	
 	MapPointerManager.GetInstance().AddShip(missile, true)
 	#MissileDockEventH.MissileLaunched(Mis)
-func UpdateCameraZoom(NewZoom : float) -> void:
-	$MissileLine.width =  2 / NewZoom
+#func UpdateCameraZoom(NewZoom : float) -> void:
+	#$MissileLine.width =  2 / NewZoom

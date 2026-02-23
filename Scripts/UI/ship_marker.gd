@@ -10,11 +10,13 @@ class_name ShipMarker
 @export var ShipIcon : TextureRect
 @export var VisualContactCountdown : ProgressBar
 @export var Line : Line2D
+@export var RadarRange : ColorRect
 @export_group("Resources")
 @export var ResuplyNotificationScene : PackedScene
 @export var NotificationScene : PackedScene
 @export var Icons : Dictionary
 @export var AlarmVisual : PackedScene
+
 
 var ShipNameText : String = ""
 var ShipSpeedText : String = ""
@@ -55,10 +57,61 @@ func _ready() -> void:
 
 func Init(Ship : Node2D) -> void:
 	CurrentShip = Ship
+	
+	if (Ship is HostileShip):
+		#if (Commander.ENEMY_DEBUG):
+			#HOSTILE_SHIP_DEBUG
+			#marker.ToggleFriendlyShipDetails(true)
+			#////
+		
+		ToggleShipDetails(true)
+		if (Ship.Destroyed):
+			OnHostileShipDestroyed()
+		else:
+			SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
+
+			SetType("Ship")
+			Ship.connect("ShipWrecked", OnHostileShipDestroyed)
+		
+	else : if (Ship is PlayerDrivenShip):
+		Ship.ShipDockActions.connect(ToggleShowRefuel)
+		Ship.ShipDeparted.connect(OnShipDeparted)
+		Ship.Elint.connect(ToggleShowElint)
+		Ship.Cpt.OnNameChanged.connect(OnCaptainNameChanged)
+		Ship.AltitudeChanged.connect(AltitudeChanged)
+		Ship.SonarToggled.connect(ToggleRadarRange)
+		Ship.SonarDirectionChanged.connect(UpdateRadarDir)
+		
+		if (Ship is Drone):
+			Ship.DroneReturning.connect(DroneReturning)
+		
+		call_deferred("ToggleShipDetails", true)
+		SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetAffectedSpeed())
+		SetType("Ship")
+		
+	else : if (Ship is Missile):
+		if (!Ship.Friendly):
+			PlayHostileShipNotif("Hostile Missile Located")
+		ToggleShipDetails(true)
+		SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
+		Ship.AltitudeChanged.connect(AltitudeChanged)
+		SetType("Missile")
+	
 	if (Ship is HostileShip):
 		Ship.VisualContactCountdownStarted.connect(VisualCountountStarted)
 		ToggleVisualContactProgress(true)
 		Ship.Alarmed.connect(DoAlarm)
+	
+	if (Ship is Missile):
+		RadarRange.visible = Ship.Friendly
+	else:
+		RadarRange.visible = false
+
+func ToggleRadarRange(t : bool) -> void:
+	RadarRange.visible = t
+
+func UpdateRadarDir(NewDir : float) -> void:
+	RadarRange.rotation = NewDir
 
 func DoAlarm() -> void:
 	add_child(AlarmVisual.instantiate())
@@ -232,7 +285,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 
 		else : if (CurrentShip is Missile):
 			if (CurrentShip.FiredBy is PlayerDrivenShip or CurrentShip.VisibleBy.size() > 0):
-				
+				RadarRange.rotation = CurrentShip.rotation
 				global_position = CurrentShip.global_position
 				if (LandingNotif != null):
 					#OnLandingStarted()

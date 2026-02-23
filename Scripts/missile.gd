@@ -60,7 +60,7 @@ func _ready() -> void:
 		get_parent().add_child(s)
 	$AccelPosition.position.x = Speed / 360
 	
-	$Radar_Range.visible = Friendly
+	#$Radar_Range.visible = Friendly
 	
 func UpdateAltitude(NewAltitude) -> void:
 	Altitude = NewAltitude
@@ -181,7 +181,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 	if (FoundShips.size() == 0):
 		return
 		
-	if (abs(Altitude - Bod.Altitude) > 100):
+	if (abs(Altitude - Bod.Altitude) > 200):
 		return
 		
 	if (Bod is HostileShip):
@@ -234,7 +234,7 @@ func HoneAtEnemy():
 	# Get the current position and velocity of the ship
 	var ship_position = Ship.global_position
 	var ship_velocity = Ship.GetShipSpeedVec()
-	TargetAltitude = Ship.Altitude
+	TargetAltitude = Ship.Altitude + 100
 	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (global_position.distance_to(ship_position) / GetAffectedSpeed()) / 60

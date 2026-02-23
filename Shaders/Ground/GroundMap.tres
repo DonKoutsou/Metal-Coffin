@@ -2,10 +2,16 @@
 
 [ext_resource type="Shader" uid="uid://dri1tg43herg" path="res://Scenes/Map/MapBG.gdshader" id="1_66mk7"]
 [ext_resource type="Texture2D" uid="uid://wegfneoi242m" path="res://Shaders/Ground/TopoggraphyNoise.tres" id="2_66mk7"]
+[ext_resource type="Texture2D" uid="uid://chlkwju4hw0lw" path="res://Assets/DitherTexture.png" id="3_s0sa5"]
 
 [resource]
 shader = ExtResource("1_66mk7")
 shader_parameter/NoiseTexture2 = ExtResource("2_66mk7")
 shader_parameter/offset = Vector2(0.28, 0.265)
-shader_parameter/col = 0.5
-shader_parameter/z = 0.25
+shader_parameter/col = 0.15
+shader_parameter/z = 0.5
+shader_parameter/levels = 8
+shader_parameter/threshold = 1.0
+shader_parameter/colors = 8
+shader_parameter/dither_texture = ExtResource("3_s0sa5")
+shader_parameter/DitherRes = Vector2(1000, 1000)

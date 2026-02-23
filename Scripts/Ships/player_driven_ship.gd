@@ -4,9 +4,8 @@ class_name PlayerDrivenShip
 
 @export var AccelerationAudio : AudioStreamPlayer2D
 @export var L : PointLight2D
-@export var SonalVisual : ColorRect
 @export var SonarShape : Area2D
-
+@export var MissileD : MissileDock
 var CommingBack = false
 var RegroupTarget : MapShip
 
@@ -20,6 +19,18 @@ var SonarTargets : Array[Node2D]
 
 var RadarCircle : PackedVector2Array
 var CurrentRadarPointToEvaluate : int = 0
+
+signal SonarToggled(t : bool)
+signal SonarDirectionChanged(NewDir : float)
+
+func HasArmedMissile() -> bool:
+	return MissileD.ArmedMissile != null
+
+func GetArmedMissile() -> MissileItem:
+	return MissileD.ArmedMissile
+
+func GetMissileAimTrajectory() -> float:
+	return MissileD.AimRot
 
 func EvaluateRadarrPoint() -> void:
 	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]
@@ -43,8 +54,15 @@ func GetBiggestRadarCicle() -> PackedVector2Array:
 	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
 		if g.CurrentVisualRange > Biggest:
 			Biggest = g.CurrentVisualRange
-			Circle = GetShipRadarLine()
+			Circle = g.GetShipRadarLine()
 	return Circle
+
+func GetBiggestVisRange() -> float:
+	var Biggest : float = CurrentVisualRange
+	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
+		if g.CurrentVisualRange > Biggest:
+			Biggest = g.CurrentVisualRange
+	return Biggest
 
 func GetPointInCircle(Point : int, num_points : int = 20) -> Vector2:
 	var angle = float(Point) / float(num_points) * PI * 2.0
@@ -76,16 +94,8 @@ func  _ready() -> void:
 	if (RadarCircle.size() == 0):
 		RadarCircle = get_circle_points(110)
 
-	call_deferred("UpdateShipWindManipulationModifier")
-
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
-
-func _draw() -> void:
-	if (ShowFuelRange):
-		var FRange = GetFuelRange()
-		draw_circle(Vector2.ZERO, FRange, Color(0.3, 0.7, 0.915), false, 1.0 / CamZoom, true)
-		draw_line(Vector2(max(0, FRange - 50), 0), Vector2(FRange, 0), Color(0.3, 0.7, 0.915), 1.0 / CamZoom, true)
 		
 
 func GetSonarTargets() -> Array[Node2D]:
@@ -105,7 +115,6 @@ func EvaluateRadarTargets() -> void:
 func Update(delta: float) -> void:
 	
 	UpdateElint(delta)
-	queue_redraw()
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 
@@ -234,10 +243,10 @@ func UpdateELINTTRange(rang : float):
 	(SonarCollisionShape.shape as CircleShape2D).radius = rang
 
 func ToggleSonarVisual(t : bool) -> void:
-	SonalVisual.visible = t
+	SonarToggled.emit(t)
 
 func SetSonarDirection(Dir : float) -> void:
-	SonalVisual.rotation = Dir - global_rotation
+	SonarDirectionChanged.emit(Dir)
 
 func BodyEnteredSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
@@ -249,11 +258,6 @@ func BodyLeftSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapShip or Parent is Missile):
 		SonarTargets.erase(Parent)
-
-
-func UpdateCameraZoom(NewZoom : float) -> void:
-	CamZoom = NewZoom
-	queue_redraw()
 
 
 func updatedronecourse():

@@ -12,5 +12,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerDrivenShip):
 		if (!ActionTracker.IsActionCompleted(TutorialToShow)):
 			ActionTracker.OnActionCompleted(TutorialToShow)
-			ActionTracker.GetInstance().ShowTutorial(TutorialTitle, TutorialText, TutorialElement, Inscreen)
+			ActionTracker.GetInstance().QueueTutorial(TutorialTitle, TutorialText, TutorialElement)
 		queue_free()

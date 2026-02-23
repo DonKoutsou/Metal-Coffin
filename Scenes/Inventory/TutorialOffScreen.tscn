@@ -3,9 +3,19 @@
 [ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Inventory/tutorial.gd" id="1_oa3kc"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="2_75yjj"]
 [ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="3_r8gdu"]
+[ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/GlobalManagers/Tutorial/TutorialFocusArea.gdshader" id="4_dnq2d"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_pv2wc"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="5_75yjj"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="6_r8gdu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybrb6"]
+shader = ExtResource("4_dnq2d")
+shader_parameter/rect1_pos = Vector2(0.15, 0.25)
+shader_parameter/rect1_size = Vector2(0.25, 0.4)
+shader_parameter/rect2_pos = Vector2(0.645, 0.5)
+shader_parameter/rect2_size = Vector2(0.205, 0.3)
+shader_parameter/darkness = 0.6000000285
+shader_parameter/feather = 0.050000002375
 
 [node name="Tutorial" type="Control" unique_id=1937603570 node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]
 process_mode = 3
@@ -24,6 +34,16 @@ Line = NodePath("Control/Line2D")
 Line2 = NodePath("Control/Line2D2")
 InSound = ExtResource("2_75yjj")
 OutSound = ExtResource("3_r8gdu")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=547434568]
+material = SubResource("ShaderMaterial_ybrb6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="." unique_id=174366279]
 layout_mode = 1

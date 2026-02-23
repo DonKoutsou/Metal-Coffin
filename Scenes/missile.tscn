@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dvdaxeaw05g4k"]
 
 [ext_resource type="Script" uid="uid://hbnehjln8dhp" path="res://Scripts/missile.gd" id="1_dxfkf"]
-[ext_resource type="Shader" uid="uid://coc3mor33lg72" path="res://Shaders/missileCone.gdshader" id="1_hg5k0"]
 [ext_resource type="AudioStream" uid="uid://bsmp34u1oty24" path="res://Assets/Sounds/missile_launch_01.mp3" id="2_d3kn2"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="4_5epdn"]
 [ext_resource type="Resource" uid="uid://miwqhx371w2u" path="res://Resources/Cards/MissileBash.tres" id="4_brtn2"]
@@ -13,15 +12,6 @@
 streams_count = 2
 stream_0/stream = ExtResource("2_d3kn2")
 stream_1/stream = ExtResource("4_d3kn2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qemak"]
-shader = ExtResource("1_hg5k0")
-shader_parameter/angle = 57.518
-shader_parameter/range = 0.011
-shader_parameter/cone_origin = Vector2(0.501, 0.5)
-shader_parameter/edge_softness = 0.005
-shader_parameter/boundary_thickness = 0.9
-shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xahj0"]
 radius = 5.0
@@ -53,23 +43,6 @@ AltitudeChangeSpeed = 1000.0
 
 [node name="AccelPosition" type="Node2D" parent="." unique_id=1303542076]
 position = Vector2(29, 0)
-
-[node name="Radar_Range" type="ColorRect" parent="." unique_id=1466193830 groups=["MapLines"]]
-z_index = 2
-material = SubResource("ShaderMaterial_qemak")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
 
 [node name="Area2D" type="Area2D" parent="." unique_id=802498138]
 collision_layer = 0

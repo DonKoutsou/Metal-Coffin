@@ -7,8 +7,8 @@ offsets = PackedFloat32Array(0.1, 0.55, 0.6, 0.7, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.46, 0.46, 0.46, 1, 0.46, 0.46, 0.46, 1)
 
 [resource]
-width = 2048
-height = 2048
+width = 1024
+height = 1024
 generate_mipmaps = false
 noise = ExtResource("1_bu10c")
 color_ramp = SubResource("Gradient_bu10c")

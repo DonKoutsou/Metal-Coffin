@@ -26,12 +26,24 @@ func SetData(Title : String, Text : String, TutorialSubjects : Array[Map.UI_ELEM
 	TextLabel.text = Text
 	if (TutorialSubjects.size() > 0):
 		Target = Map.GetInstance().GetUIElement(TutorialSubjects[0])
+		
+		
+		
 	if (TutorialSubjects.size() > 1):
 		Target2 = Map.GetInstance().GetUIElement(TutorialSubjects[1])
 		
 func _ready() -> void:
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
 	call_deferred("DoFadeInAnim")
+	if (Target2 != null):
+		SetTargetRect(Target.get_global_rect(), Target2.get_global_rect())
+		
+	else: if (Target != null):
+		SetTargetRect(Target.get_global_rect())
+	
+	else:
+		SetTargetRect()
+	
 
 func DoFadeInAnim() -> void:
 	TextLabel.visible_ratio = 0
@@ -68,7 +80,13 @@ func DoFadeInAnim() -> void:
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = true
 	$VBoxContainer/Button.visible = true
 	
+func SetTargetRect(r : Rect2 = Rect2(0,0,0,0), r2 : Rect2 = Rect2(0,0,0,0)) -> void:
+	var mat =  $ColorRect.material as ShaderMaterial
+	mat.set_shader_parameter("rect1_pos", r.position / get_viewport_rect().size)
+	mat.set_shader_parameter("rect1_size", r.size / get_viewport_rect().size)
 	
+	mat.set_shader_parameter("rect2_pos", r2.position / get_viewport_rect().size)
+	mat.set_shader_parameter("rect2_size", r2.size / get_viewport_rect().size)
 
 func UpdateSize(NewSize : Vector2) -> void:
 	Pan.size = NewSize
@@ -77,18 +95,23 @@ func UpdateSize(NewSize : Vector2) -> void:
 	#size = lerp(Vector2.ZERO, OriginalSize, NewSize.x / OriginalSize.x)
 	#position = get_viewport_rect().size / 2 - size / 2
 	
-	if (Target != null):
-		Line1Target = lerp(Line.global_position, Target.global_position + Vector2( Target.size.x / 2, 0), NewSize.x / OriginalSize.x)
-		Line.set_point_position(1, Line.to_local(Line1Target))
-	if (Target2 != null):
-		Line2Target = lerp(Line2.global_position, Target2.global_position + Vector2( Target2.size.x / 2, 0), NewSize.x / OriginalSize.x)
-		Line2.set_point_position(1, Line2.to_local(Line2Target))
+	#if (Target != null):
+		#Line1Target = lerp(Line.global_position, Target.global_position + Vector2( Target.size.x / 2, 0), NewSize.x / OriginalSize.x)
+		#Line.set_point_position(1, Line.to_local(Line1Target))
+	#if (Target2 != null):
+		#Line2Target = lerp(Line2.global_position, Target2.global_position + Vector2( Target2.size.x / 2, 0), NewSize.x / OriginalSize.x)
+		#Line2.set_point_position(1, Line2.to_local(Line2Target))
+
+func _process(delta: float) -> void:
+	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
 
 func _physics_process(delta: float) -> void:
-	if (Target != null):
-		Line.set_point_position(1, Line.to_local(Line1Target))
-	if (Target2 != null):
-		Line2.set_point_position(1, Line2.to_local(Line2Target))
+	
+	
+	#if (Target != null):
+		#Line.set_point_position(1, Line.to_local(Line1Target))
+	#if (Target2 != null):
+		#Line2.set_point_position(1, Line2.to_local(Line2Target))
 	
 	if (TextLabel.is_visible_in_tree()):
 		TextLabel.visible_ratio += delta
@@ -106,7 +129,7 @@ func _on_button_pressed() -> void:
 	S.stream = OutSound
 	S.autoplay = true
 	add_child(S)
-	
+
 	await Tw.finished
 	Completed.emit()
 	

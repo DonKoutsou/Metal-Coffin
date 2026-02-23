@@ -4,10 +4,18 @@
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="2_k6wjy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_xacro"]
 [ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="3_xy5n5"]
+[ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/GlobalManagers/Tutorial/TutorialFocusArea.gdshader" id="4_0al8q"]
 [ext_resource type="FontFile" uid="uid://cbf5rlpa38bj3" path="res://Fonts/DINEngschriftStd.otf" id="5_xy5n5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k6wjy"]
 light_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygs4n"]
+shader = ExtResource("4_0al8q")
+shader_parameter/rect_pos = Vector2(0.475, 0.4)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/darkness = 0.50000002375
+shader_parameter/feather = 0.010000000475
 
 [sub_resource type="Curve" id="Curve_xy5n5"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -36,6 +44,16 @@ Line = NodePath("Control/Line2D")
 Line2 = NodePath("Control/Line2D2")
 InSound = ExtResource("2_k6wjy")
 OutSound = ExtResource("3_xy5n5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1846351667]
+material = SubResource("ShaderMaterial_ygs4n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="." unique_id=1139684181]
 use_parent_material = true

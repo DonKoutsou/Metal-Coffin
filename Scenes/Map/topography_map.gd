@@ -2,6 +2,7 @@ extends ColorRect
 
 class_name TopographyMap
 @export_file(".tres") var N : String
+const GROUND_TEXTURE_RESOLUTION : int = 256
 
 var Mat : ShaderMaterial
 
@@ -10,7 +11,6 @@ var tex : Image
 var Offset : Vector2
 
 static var Instance : TopographyMap
-
 
 func _ready() -> void:
 	Instance = self
@@ -59,6 +59,7 @@ func UpdateData() -> void:
 	var noi : NoiseTexture2D = ResourceLoader.load(N)
 	await noi.changed
 	tex = noi.get_image()
+	tex.resize(GROUND_TEXTURE_RESOLUTION, GROUND_TEXTURE_RESOLUTION, Image.INTERPOLATE_NEAREST)
 
 func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	var RoundedPos = Vector2((pos - global_position) + (Offset * 6000))
@@ -68,7 +69,7 @@ func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	for g in Offsets:
 		var x = Helper.normalize_value(RoundedPos.x, 0, 12000)
 		var y = Helper.normalize_value(RoundedPos.y, 0, 12000)
-		var WrapedPos = Vector2(wrap((x * 2048) + g.x, 0, 2048), wrap((y * 2048) + g.y, 0, 2048))
+		var WrapedPos = Vector2(wrap((x * GROUND_TEXTURE_RESOLUTION) + g.x, 0, GROUND_TEXTURE_RESOLUTION), wrap((y * GROUND_TEXTURE_RESOLUTION) + g.y, 0, GROUND_TEXTURE_RESOLUTION))
 		var Alt = tex.get_pixelv(WrapedPos).r
 		#Bring to -1/1 range
 		var RangedAlt = (Alt - 0.5) * 2.0
@@ -79,12 +80,12 @@ func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	return Grad
 
 func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
-	var RoundedPos = Vector2i((pos - global_position) + (Offset * 6000))
+	var RoundedPos = Vector2i(Vector2i(pos - global_position) + (Vector2i(Offset * 6000)))
 	
 		
-	var x = Helper.normalize_value(RoundedPos.x, 0, 24000)
-	var y = Helper.normalize_value(RoundedPos.y, 0, 24000)
-	var WrapedPos = Vector2i(wrap(x * 2048, 0, 2048), wrap(y * 2048, 0, 2048))
+	var x = Helper.normalize_value(RoundedPos.x, 0, 12000)
+	var y = Helper.normalize_value(RoundedPos.y, 0, 12000)
+	var WrapedPos = Vector2i(wrap(x * GROUND_TEXTURE_RESOLUTION, 0, GROUND_TEXTURE_RESOLUTION), wrap(y * GROUND_TEXTURE_RESOLUTION, 0, GROUND_TEXTURE_RESOLUTION))
 	#if (CachedPixels.has(WrapedPos)):
 		#return CachedPixels[WrapedPos] * 10000
 		

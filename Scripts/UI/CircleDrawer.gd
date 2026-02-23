@@ -137,10 +137,28 @@ func FromPolylineToLine(Polyline : PackedVector2Array) -> PackedVector2Array:
 	return Line
 
 func DrawRuller() -> void:
-	if ControlledShip == null or not ControlledShip.RadarWorking:
+	if ControlledShip == null:
 		return
+	if (ControlledShip.ShowFuelRange):
+		var FRange = ControlledShip.GetFuelRange()
+		var LineOrigin = ControlledShipPos + Vector2(max(0, FRange - 50), 0).rotated(ControlledShip.rotation)
+		var LineEnd = ControlledShipPos + Vector2(FRange, 0).rotated(ControlledShip.rotation)
+		draw_circle(ControlledShipPos, FRange, Color(0.3, 0.7, 0.915), false, 1.0 / CamZoom, true)
+		draw_line(LineOrigin, LineEnd, Color(0.3, 0.7, 0.915), 1.0 / CamZoom, true)
+	
+	if (ControlledShip.HasArmedMissile()):
+		var MisRange = ControlledShip.GetArmedMissile().Distance
+		var AimTrajectory = ControlledShip.GetMissileAimTrajectory()
+		var LineOrigin = ControlledShipPos + Vector2(50, 0).rotated(AimTrajectory)
+		var LineEnd = ControlledShipPos + Vector2(MisRange, 0).rotated(AimTrajectory)
+		draw_line(LineOrigin, LineEnd, Color("e8472a"), 2.0 / CamZoom)
+		
+		#$MissileLine.set_point_position(1, Vector2(Mis.Distance, 0))
+		#$MissileLine.set_point_position(0, Vector2(50, 0))
+		#$MissileLine.visible = true
+	
 	var LineW = 0.5 / CamZoom
-	var vizrange = ControlledShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+	var vizrange = ControlledShip.GetBiggestVisRange()
 	if not ControlledShip.RadarWorking:
 		vizrange = 110
 	if vizrange == 110:

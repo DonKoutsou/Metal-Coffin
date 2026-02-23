@@ -20,17 +20,17 @@ func Toggle(t : bool) -> void:
 		MoveTw = create_tween()
 		MoveTw.set_ease(Tween.EASE_IN)
 		MoveTw.set_trans(Tween.TRANS_BACK)
-		MoveTw.tween_property(self, "position", Vector2(-300, position.y), 0.5)
+		MoveTw.tween_property(self, "position", Vector2(-size.x, position.y), 0.5)
 	else:
 		MoveTw = create_tween()
 		MoveTw.set_ease(Tween.EASE_OUT)
 		MoveTw.set_trans(Tween.TRANS_BACK)
-		MoveTw.tween_property(self, "position", Vector2(0, position.y), 0.5)
+		MoveTw.tween_property(self, "position", Vector2(-size.x / 2, position.y), 0.5)
 
 func _ready() -> void:
 	set_physics_process(false)
-	if (PositionOnStart):
-		position = Vector2(-5 , get_viewport_rect().size.y + 8)
+	#if (PositionOnStart):
+		#position = Vector2(-5 , get_viewport_rect().size.y + 8)
 
 func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))

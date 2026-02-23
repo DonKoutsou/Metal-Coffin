@@ -4,7 +4,7 @@ class_name ShipCamera
 
 @export var Background : Control
 @export var Grid : MapGrid
-@export var Cloud : Control
+@export var C : Cloud
 @export var Ground : Control
 @export var GroundMap : TopographyMap
 @export var WeatherMan : WeatherManage
@@ -29,7 +29,7 @@ var FocusedShip : PlayerDrivenShip
 func _ready() -> void:
 	Instance = self
 	
-	CloudMat = Cloud.material
+	CloudMat = C.material
 	GroundMat = Ground.material
 
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
@@ -154,14 +154,14 @@ func _UpdateMapGridVisibility():
 			GridTween = create_tween()
 			GridTween.tween_property(Grid, "modulate", Color(1,1,1,1), 0.5)
 			Grid.show()
-		MapGridTween.finished.connect(Cloud.hide)
+		MapGridTween.finished.connect(C.hide)
 		MapGridTween.finished.connect(Ground.hide)
 		
 		
 		GridShowing = true
 	
 	else: if (zoom.x >= 1.5):
-		Cloud.visible = true
+		C.visible = true
 		var cloudv = clamp(zoom.x -2, 0, 5) / 5
 		CloudMat.set_shader_parameter("Alpha", 1 - cloudv)
 		if (GridShowing):
@@ -259,7 +259,7 @@ func _physics_process(_delta: float) -> void:
 var FrameTween : Tween
 
 func FrameCamToPlayer():
-	var plpos = $"../PlayerShip".global_position
+	var plpos = $"../WorldNodes/PlayerShip".global_position
 	FrameCamToPos(plpos, 6, false)
 
 func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true) -> void:

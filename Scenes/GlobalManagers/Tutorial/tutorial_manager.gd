@@ -11,6 +11,10 @@ static var Instance : ActionTracker
 
 static var ShowTutorials : bool = false
 
+var ShowingTutorial : bool = false
+
+var QueuedTutorials : Array[TutorialData]
+
 func _ready() -> void:
 	Instance = self
 	Load()
@@ -24,12 +28,28 @@ static func IsActionCompleted(Act : Action) -> bool:
 static func OnActionCompleted(Act : Action) -> void:
 	CompletedActions.append(Act)
 
+func _physics_process(delta: float) -> void:
+	if (World.WORLDST != World.WORLDSTATE.INITIAL and !ShowingTutorial and !TransitionPanel.Transitioning):
+		if QueuedTutorials.size() > 0:
+			var nexttut = QueuedTutorials[0]
+			if (TargetsExists(nexttut.Target)):
+				ShowTutorial(nexttut.TutorialTitle, nexttut.TutorialText, nexttut.Target)
+				QueuedTutorials.pop_front()
 
-func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT], _InScreen : bool) -> void:
+func QueueTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT]) -> void:
 	if (!ShowTutorials):
 		return
-	
+
+	var SavedData = TutorialData.new()
+	SavedData.TutorialTitle = TurotialTitle
+	SavedData.TutorialText = TutorialText
+	SavedData.Target = ElementsToFocusOn
+	QueuedTutorials.append(SavedData)
+
+func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT]) -> void:
 	get_tree().paused = true
+	
+	ShowingTutorial = true
 
 	var Tut : Tutorial
 	
@@ -48,6 +68,16 @@ func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocus
 	await Tut.Completed
 	
 	get_tree().paused = false
+	
+	ShowingTutorial = false
+	
+	
+
+func TargetsExists(Elements : Array[Map.UI_ELEMENT]) -> bool:
+	for g in Elements:
+		if (!Map.GetInstance().UIElementExists(g)):
+			return false
+	return true
 
 func DidPrologue() -> bool:
 	if (!FileAccess.file_exists("user://TutorialData.tres")):

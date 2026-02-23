@@ -4,4 +4,4 @@ class_name TutorialData
 
 var TutorialTitle : String 
 var TutorialText : String
-var Target : Control
+var Target : Array[Map.UI_ELEMENT]

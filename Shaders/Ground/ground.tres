@@ -14,8 +14,8 @@ offsets = PackedFloat32Array(0.52029, 0.5496009, 0.7, 0.705)
 colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_445lv"]
-width = 2048
-height = 2048
+width = 1024
+height = 1024
 noise = ExtResource("6_udlro")
 color_ramp = SubResource("Gradient_eb1s8")
 seamless = true
@@ -26,8 +26,8 @@ offsets = PackedFloat32Array(0.44505495, 1)
 colors = PackedColorArray(0.09178746, 0.09178746, 0.09178746, 1, 1, 1, 1, 1)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d5ydj"]
-width = 2048
-height = 2048
+width = 1024
+height = 1024
 noise = ExtResource("6_udlro")
 color_ramp = SubResource("Gradient_d5ydj")
 seamless = true
@@ -35,6 +35,7 @@ invert = true
 seamless_blend_skirt = 1.0
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_bwem4")
 shader_parameter/GroundTexture = ExtResource("4_68rdk")
 shader_parameter/GroundTexture2 = ExtResource("5_6wk2i")
@@ -49,4 +50,4 @@ shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(40, 40)
 shader_parameter/Scale2 = Vector2(160, 160)
-shader_parameter/z = 0.063
+shader_parameter/z = 0.125

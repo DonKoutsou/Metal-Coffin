@@ -82,44 +82,15 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	if (Ship is HostileShip):
 		if (Ship.Convoy):
 			marker.modulate = ConvoyColor
-		#if (Commander.ENEMY_DEBUG):
-			#HOSTILE_SHIP_DEBUG
-			#marker.ToggleFriendlyShipDetails(true)
-			#////
-		marker.ShipTargetSelected.connect(OnShipTargetSelected)
-		marker.ToggleShipDetails(true)
-		if (Ship.Destroyed):
-			marker.OnHostileShipDestroyed()
-		else:
-			marker.SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
-			if (notify):
-				marker.PlayHostileShipNotif("Hostile Ship\nLocated")
-			marker.SetType("Ship")
-			Ship.connect("ShipWrecked", marker.OnHostileShipDestroyed)
 		
+		marker.ShipTargetSelected.connect(OnShipTargetSelected)
+		
+		if (!Ship.Destroyed and notify):
+			marker.PlayHostileShipNotif("Hostile Ship\nLocated")
 	else : if (Ship is PlayerDrivenShip):
-		Ship.ShipDockActions.connect(marker.ToggleShowRefuel)
-		Ship.ShipDeparted.connect(marker.OnShipDeparted)
-		Ship.Elint.connect(marker.ToggleShowElint)
-		Ship.Cpt.OnNameChanged.connect(marker.OnCaptainNameChanged)
-		Ship.AltitudeChanged.connect(marker.AltitudeChanged)
-		if (Ship is Drone):
-			Ship.DroneReturning.connect(marker.DroneReturning)
-		
-		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
 		marker.ShipTargetSelected.connect(OnShipTargetSelected)
-		marker.call_deferred("ToggleShipDetails", true)
-		marker.SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetAffectedSpeed())
-		marker.SetType("Ship")
+		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
 		
-	else : if (Ship is Missile):
-		if (!Friend):
-			marker.PlayHostileShipNotif("Hostile Missile Located")
-		marker.ToggleShipDetails(true)
-		marker.SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
-		Ship.AltitudeChanged.connect(marker.AltitudeChanged)
-		marker.SetType("Missile")
-	
 	marker.Init(Ship)
 	
 	return marker
@@ -170,9 +141,6 @@ func FixMarkerClipping() -> void:
 				Marker2.owner.position.x += OffsetToApply
 				tries += 1
 
-
-			
-
 func FixLabelClipping() -> void:
 	var Mapinfos = get_tree().get_nodes_in_group("MapInfo")
 	var AllMapInfos = get_tree().get_nodes_in_group("UnmovableMapInfo")
@@ -202,8 +170,8 @@ func _physics_process(delta: float) -> void:
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()
 	var d = delta
-	if (SimulationManager.IsPaused()):
-		d = 0
+	#if (SimulationManager.IsPaused()):
+		#d = 0
 	#var LightAmm = WeatherManage.GetLightAmm()
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]

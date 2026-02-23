@@ -9,15 +9,25 @@
 [ext_resource type="FontFile" uid="uid://dxpb6gd77jbk5" path="res://Fonts/Monocraft.ttf" id="7_nvnv6"]
 [ext_resource type="Texture2D" uid="uid://3bd1jkpj1pod" path="res://Assets/MapElements/Missile.png" id="7_uwuwu"]
 [ext_resource type="Texture2D" uid="uid://drfh18glib4hb" path="res://Assets/MapElements/triangle-target.png" id="8_143co"]
+[ext_resource type="Shader" uid="uid://coc3mor33lg72" path="res://Shaders/missileCone.gdshader" id="10_jiuqu"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tc2tu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_24cpb"]
+shader = ExtResource("10_jiuqu")
+shader_parameter/angle = 57.518
+shader_parameter/range = 0.55
+shader_parameter/cone_origin = Vector2(0.5, 0.5)
+shader_parameter/edge_softness = 0.005
+shader_parameter/boundary_thickness = 0.9
+shader_parameter/cone_color = Color(0.983526, 0.0936426, 7.70092e-07, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jiuqu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_12u8d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6175k"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="ShipMarker" type="Node2D" unique_id=443548216 node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown", "Line")]
+[node name="ShipMarker" type="Node2D" unique_id=443548216 node_paths=PackedStringArray("Direction", "ShipCallsign", "ShipDetailLabel", "DetailPanel", "ShipIcon", "VisualContactCountdown", "Line", "RadarRange")]
 use_parent_material = true
 script = ExtResource("1_y30vi")
 Direction = NodePath("Icon/Direction")
@@ -27,6 +37,7 @@ DetailPanel = NodePath("Control")
 ShipIcon = NodePath("Icon")
 VisualContactCountdown = NodePath("Icon/VisualContactCountdown")
 Line = NodePath("Line2D")
+RadarRange = NodePath("Radar_Range")
 ResuplyNotificationScene = ExtResource("3_74srq")
 NotificationScene = ExtResource("4_xcqif")
 Icons = {
@@ -35,6 +46,24 @@ Icons = {
 "Wreck": ExtResource("8_143co")
 }
 AlarmVisual = ExtResource("7_auelk")
+
+[node name="Radar_Range" type="ColorRect" parent="." unique_id=631773626 groups=["MapLines"]]
+z_index = -1
+material = SubResource("ShaderMaterial_24cpb")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -225.0
+offset_right = 225.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(225, 225)
+size_flags_horizontal = 4
+mouse_filter = 2
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1290798982]
 texture_filter = 3
@@ -53,6 +82,7 @@ anchors_preset = 0
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=437351215]
+self_modulate = Color(1, 1, 1, 0.5)
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -60,13 +90,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1.0
-offset_top = -150.0
-offset_right = 1.0
-offset_bottom = -150.0
+offset_left = -131.0
+offset_top = -223.5
+offset_right = 133.0
+offset_bottom = -76.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_tc2tu")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jiuqu")
 
 [node name="ShipName" type="Label" parent="Control/PanelContainer" unique_id=1016113574]
 texture_filter = 1

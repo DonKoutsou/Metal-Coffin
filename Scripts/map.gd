@@ -20,7 +20,7 @@ class_name Map
 @export var Road : MapLineDrawer
 @export var MapLine : MapLineDrawer
 @export var WeatherMan : WeatherManage
-@export var WorldParent : Node
+@export var WorldParent : Node2D
 @export var MapPointerMan : MapPointerManager
 #@export var _StatPanel : StatPanel
 @export_group("Map Generation")
@@ -61,6 +61,8 @@ enum UI_ELEMENT{
 	PILOT_MAP_MARKER_TOGGLE,
 	CARD_FIGHT_ENERGY_BAR,
 	CARD_FIGHT_RESERVE_BAR,
+	STEER,
+	THRUST,
 }
 
 func GetUIElement(Element : UI_ELEMENT) -> Control:
@@ -75,8 +77,30 @@ func GetUIElement(Element : UI_ELEMENT) -> Control:
 			return _ScreenUI.CardFightUI.GetEnergyBar()
 		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
 			return _ScreenUI.CardFightUI.GetReserveBar()
+		UI_ELEMENT.STEER:
+			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.STEER)
+		UI_ELEMENT.THRUST:
+			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.THRUST)
 	return null
-	
+
+func UIElementExists(Element : UI_ELEMENT) -> bool:
+	match(Element):
+		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
+			return _ScreenUI.PilotScreen != null
+		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
+			return _ScreenUI.PilotScreen != null
+		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
+			return _ScreenUI.PilotScreen != null
+		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
+			return _ScreenUI.CardFightUI != null
+		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
+			return _ScreenUI.CardFightUI != null
+		UI_ELEMENT.STEER:
+			return _ScreenUI.PilotScreen != null
+		UI_ELEMENT.THRUST:
+			return _ScreenUI.PilotScreen != null
+	return false
+
 static var Instance : Map
 
 static func GetInstance() -> Map:
@@ -96,7 +120,7 @@ func _ready() -> void:
 	MapPointerMan.TargetSpotSelected.connect(MoveTargetSpotSelected)
 
 func HideWorld(t : bool) -> void:
-	WorldParent.get_parent().visible = t
+	WorldParent.get_parent().get_parent().visible = t
 
 func _exit_tree() -> void:
 	if (Roadt != null):
@@ -112,7 +136,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#place player close to first village
 	var pos = firstvilage.global_position
 	pos.y += 500
-	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/PlayerShip as MapShip
+	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes/PlayerShip as MapShip
 	PlShip.SetShipPosition(pos)
 	#_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
@@ -129,6 +153,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	SimulationTrigger.TutorialText = "A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
 	#TODO fix this
 	SimulationTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_SIMULATION_BUTTON)
+	SimulationTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON)
 	WorldParent.add_child(SimulationTrigger)
 	var triggerpos = pos
 	triggerpos.y -= 100
@@ -175,6 +200,7 @@ func CamPosChanged(NewPos : Vector2) -> void:
 
 func CamZoomChanged(NewZoom : float) -> void:
 	CamZoom = NewZoom
+	WorldParent.visible = NewZoom > 1.5
 
 static func GetCameraPosition() -> Vector2:
 	return CamPos

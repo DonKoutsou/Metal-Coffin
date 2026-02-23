@@ -17,6 +17,8 @@ enum PILOT_UI_ELEMENTS{
 	SIMULATION_BUTTON,
 	SPEED_SIMULATION_BUTTON,
 	MAP_MARKER_TOGGLE,
+	STEER,
+	THRUST
 }
 
 func GetUIElement(Element : PILOT_UI_ELEMENTS) -> Control:
@@ -27,6 +29,10 @@ func GetUIElement(Element : PILOT_UI_ELEMENTS) -> Control:
 			return $SpeedSimulation
 		PILOT_UI_ELEMENTS.MAP_MARKER_TOGGLE:
 			return $MapMarkerControls.ToggleButton
+		PILOT_UI_ELEMENTS.STEER:
+			return $SteeringWheel
+		PILOT_UI_ELEMENTS.THRUST:
+			return $ThrustSlider
 	return null
 	
 	

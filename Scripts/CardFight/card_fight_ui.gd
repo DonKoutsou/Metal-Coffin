@@ -118,12 +118,12 @@ func InserCardtoPlay(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -15), 0.35)
+	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -15), 0.25)
 	
 	var ScaleTw = create_tween()
 	#ScaleTw.set_ease(Tween.EASE_IN)
 	#ScaleTw.set_trans(Tween.TRANS_CUBIC)
-	ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.35)
+	ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.25)
 	
 	PlayCardSound()
 	PlayerCardPlecement.Blocked = false
@@ -141,7 +141,7 @@ func InserCardtoPlay(C : Card) -> void:
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(Cont, "size", Vector2(PlayCardInsert.size.x, 0), 0.75)
+	tw.tween_property(Cont, "size", Vector2(PlayCardInsert.size.x, 0), 0.55)
 	PlayCardInsertSound(CardSoundType.INSERT)
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
@@ -151,7 +151,7 @@ func InserCardtoPlay(C : Card) -> void:
 		var tw2 = create_tween()
 		tw.set_ease(Tween.EASE_OUT)
 		tw2.set_trans(Tween.TRANS_QUAD)
-		tw2.tween_property(Cont, "size", Vector2(PlayCardInsert.size), 0.75)
+		tw2.tween_property(Cont, "size", Vector2(PlayCardInsert.size), 0.55)
 		PlayCardInsertSound(CardSoundType.EXIT)
 		C.TogglePerspective(false, 1)
 		await tw2.finished
@@ -180,7 +180,7 @@ func InsertCardToDiscard(C : Card) -> void:
 	var Movetw = create_tween()
 	Movetw.set_ease(Tween.EASE_OUT)
 	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(15, 5), 0.5)
+	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(15, 5), 0.25)
 	
 	PlayCardSound()
 	await Movetw.finished
@@ -197,7 +197,7 @@ func InsertCardToDiscard(C : Card) -> void:
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(Cont, "size", Vector2(DiscardInsert.size.x, 0), 0.75)
+	tw.tween_property(Cont, "size", Vector2(DiscardInsert.size.x, 0), 0.55)
 	PlayCardInsertSound(CardSoundType.DISCARD)
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
@@ -229,7 +229,7 @@ func OnCardDrawn(C : Card) -> void:
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(Cont, "size", Vector2(DrawCardInsert.size), 0.75)
+	tw.tween_property(Cont, "size", Vector2(DrawCardInsert.size), 0.55)
 	
 	await tw.finished
 	#await Helper.GetInstance().wait(0.25)

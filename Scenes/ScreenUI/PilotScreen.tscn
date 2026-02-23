@@ -71,7 +71,7 @@ offset_top = -371.0
 offset_right = -13.0
 offset_bottom = -46.0
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1348607806 node_paths=PackedStringArray("ForecastButton", "GridButton", "SteerButton", "TopoButton")]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1348607806 node_paths=PackedStringArray("ForecastButton", "GridButton", "SteerButton", "ZoomButton", "TopoButton")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -85,6 +85,7 @@ script = ExtResource("6_w258d")
 ForecastButton = NodePath("HBoxContainer/VBoxContainer/ForecastButton")
 GridButton = NodePath("HBoxContainer/VBoxContainer2/GridButton")
 SteerButton = NodePath("HBoxContainer/VBoxContainer3/SteerButton")
+ZoomButton = NodePath("HBoxContainer/VBoxContainer4/ZoomLevelButton")
 TopoButton = NodePath("HBoxContainer/VBoxContainer8/TopoButton")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1802308366]
@@ -381,11 +382,12 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_right = 2.0
+offset_left = -247.99998
+offset_top = -252.00003
+offset_right = 252.00002
+offset_bottom = 248.0
 grow_horizontal = 1
 grow_vertical = 0
-scale = Vector2(0.8, 0.8)
 PositionOnStart = false
 
 [node name="Sonar" parent="." unique_id=1555836270 instance=ExtResource("11_jqinv")]
@@ -674,14 +676,15 @@ scale = Vector2(0.8, 0.8)
 
 [connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
 [connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]
-[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="." method="_on_forecast_button_toggled"]
+[connection signal="ForecastToggled" from="PanelContainer" to="." method="_on_forecast_button_toggled"]
+[connection signal="GridToggled" from="PanelContainer" to="." method="_on_grid_button_toggled"]
+[connection signal="SteerToggled" from="PanelContainer" to="." method="_on_steer_button_toggled"]
+[connection signal="TopologyTogled" from="PanelContainer" to="." method="_on_topo_button_toggled"]
+[connection signal="ZoomToggled" from="PanelContainer" to="." method="_on_zoom_level_button_toggled"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer/ForecastButton" to="PanelContainer" method="_on_forecast_button_toggled"]
-[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="." method="_on_grid_button_toggled"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer2/GridButton" to="PanelContainer" method="_on_grid_button_toggled"]
-[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer8/TopoButton" to="." method="_on_topo_button_toggled"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer8/TopoButton" to="PanelContainer" method="_on_topo_button_toggled"]
-[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer4/ZoomLevelButton" to="." method="_on_zoom_level_button_toggled"]
-[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="." method="_on_steer_button_toggled"]
+[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer4/ZoomLevelButton" to="PanelContainer" method="_on_zoom_level_button_toggled"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer3/SteerButton" to="PanelContainer" method="_on_steer_button_toggled"]
 [connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer7/Altitude" to="." method="_on_altitude_toggled"]
 [connection signal="SteeringDitChanged" from="SteeringWheel" to="." method="Steering_Direction_Changed"]

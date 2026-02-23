@@ -7,8 +7,6 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0.35, 1)
 
 [resource]
-width = 1024
-height = 1024
 noise = ExtResource("2_70fsy")
 color_ramp = SubResource("Gradient_7ayan")
 seamless = true

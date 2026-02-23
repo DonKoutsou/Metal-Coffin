@@ -22,8 +22,7 @@ class_name MapShip
 @export var BodyShape : Area2D
 @export var DroneDok : Node2D
 @export var ShipSprite : Sprite2D
-@export var Acceleration : Node2D
-
+@export var Acceleration : Node2D	
 
 var Paused = true
 #var SimulationSpeed : float = 1
@@ -38,7 +37,6 @@ var Command : MapShip
 
 var ShowFuelRange = true
 var Docked = false
-var CamZoom = 1
 var CurrentVisualRange : float = 110
 
 signal ShipDeparted(DepartedFrom : MapSpot)
@@ -93,6 +91,8 @@ func _ready() -> void:
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
 		
+
+
 
 #Refuel logic
 func Refuel() -> void:
@@ -439,7 +439,7 @@ func UpdateElint(delta: float) -> void:
 	if (BiggestLevel > -1):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
-			ActionTracker.GetInstance().ShowTutorial("Electronic Intelligence", "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.", [], true)
+			ActionTracker.GetInstance().QueueTutorial("Electronic Intelligence", "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.", [])
 		Elint.emit(true, BiggestLevel, Helper.AngleToDirection(Dir))
 	else:
 		Elint.emit(false, -1, "")
@@ -488,7 +488,7 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 		#Parent.OnShipSeen(self)
 		#if (Parent.Convoy and !ActionTracker.IsActionCompleted(ActionTracker.Action.CONVOY)):
 			#ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
-			#ActionTracker.GetInstance().ShowTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
+			#ActionTracker.GetInstance().QueueTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
 		
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
@@ -499,12 +499,12 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
 				var TutText = "You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
-				ActionTracker.GetInstance().ShowTutorial("Enemy Cities", TutText, [], true)
+				ActionTracker.GetInstance().QueueTutorial("Enemy Cities", TutText, [])
 		else:
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
 				var TutText = "You are reaching one of the many friendly [color=#ffc315]villages[/color] in the glacier. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[/color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered."
-				ActionTracker.GetInstance().ShowTutorial("Friendly Villages", TutText, [], true)
+				ActionTracker.GetInstance().QueueTutorial("Friendly Villages", TutText, [])
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()
 
@@ -528,7 +528,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.LANDING)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
 			#TODO fix this
-			#ActionTracker.GetInstance().ShowTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [World.GetInstance().GetMap().GetScreenUi().LandButton, World.GetInstance().GetMap().GetScreenUi().HatchButton], false)
+			#ActionTracker.GetInstance().QueueTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [World.GetInstance().GetMap().GetScreenUi().LandButton, World.GetInstance().GetMap().GetScreenUi().HatchButton], false)
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
 		for g in GetDroneDock().GetDockedShips():
@@ -795,5 +795,5 @@ func TogglePause(t : bool):
 	$AudioStreamPlayer2D.playing = !t
 #/////////////////////////////////////
 
-func UpdateCameraZoom(NewZoom : float) -> void:
-	visible = NewZoom > 1.5
+#func UpdateCameraZoom(NewZoom : float) -> void:
+	#visible = NewZoom > 1.5

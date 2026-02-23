@@ -3,7 +3,7 @@ extends Resource
 class_name BattleReportData
 
 @export var Won : bool
-@export var FundWon : bool
+@export var FundWon : int
 @export var DamageDone : float
 @export var DamageGot : float
 @export var DamageNegated : float
@@ -14,7 +14,9 @@ class_name BattleReportData
 @export var Location : String
 @export var Date : String
 
-func SetData(_Win : bool, DateString : String, Funds : int, DoneDmg : float, GotDmg : float, NegDmg : float, FRCombatants : Array[BattleShipStats], ENCombatants : Array[BattleShipStats],FRCasualties : Array[BattleShipStats], ENCasualties : Array[BattleShipStats], Loc : Vector2) -> void:
+func SetData(Win : bool, DateString : String, Funds : int, DoneDmg : float, GotDmg : float, NegDmg : float, FRCombatants : Array[BattleShipStats], ENCombatants : Array[BattleShipStats],FRCasualties : Array[BattleShipStats], ENCasualties : Array[BattleShipStats], Loc : Vector2) -> void:
+	Won = Win
+	
 	for g in FRCasualties:
 		FriendlyCasualties.append(g.Name)
 		

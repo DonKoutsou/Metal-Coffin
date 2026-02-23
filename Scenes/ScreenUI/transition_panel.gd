@@ -11,6 +11,8 @@ class_name TransitionPanel
 signal PanelClosed
 signal PanelOpened
 
+static var Transitioning : bool
+
 func Close() -> void:
 	Anim.play("Close")
 
@@ -18,6 +20,7 @@ func Open() -> void:
 	Anim.play("Open")
 
 func _Close() -> void:
+	Transitioning = true
 	PlaySound(DoorCloseSound)
 	await Helper.GetInstance().wait(0.5)
 	var CloseTw = create_tween()
@@ -38,6 +41,7 @@ func _Open() -> void:
 	OpenTw.tween_property(PanelTexture, "position", Vector2(0, -PanelTexture.size.y - 40), 1.6)
 	await OpenTw.finished
 	PanelOpened.emit()
+	Transitioning = false
 
 func PlaySound(Sound : AudioStream) -> void:
 	var Delsound = DeletableSoundGlobal.new()

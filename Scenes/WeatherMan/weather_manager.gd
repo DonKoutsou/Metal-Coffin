@@ -6,6 +6,8 @@ class_name WeatherManage
 @export var WindChangeMinimumTime_Minutes : float = 20.0
 @export var N : NoiseTexture2D
 
+const TEXTURE_SIZE : int = 256
+
 const MAX_WIND_SPEED : int = 200
 
 static var Instance : WeatherManage
@@ -14,8 +16,6 @@ static var WindSpeed : float = 50
 static var tx : Image
 static var LighAmm : Curve = preload("res://Resources/LightCurve.tres")
 static var ShipsToUpdate : Array[MapShip]
-
-static var CachedPixels : Dictionary[Vector2i, Color]
 
 var Mat : ShaderMaterial
 var CurrentCamOffset : Vector2
@@ -44,11 +44,14 @@ func _ready() -> void:
 	#Mat.set_shader_parameter("offset", CurrentOffset)
 	tx = N.get_image()
 	N.changed.connect(NoiseChanged)
-	#await N.changed
+	
 	#tx = N.get_image()
 	
 	LastTimeWindChanged = 0
 	WindDirectionOffset = 1
+	
+	await N.changed
+	Update(0)
 
 func UpdateCameraOffset(CamOffset : Vector2) -> void:
 	CurrentCamOffset = CamOffset
@@ -57,47 +60,39 @@ func UpdateCameraOffset(CamOffset : Vector2) -> void:
 func ToggleWeatherMan(t : bool) -> void:
 	visible = t
 
-var d = 0.2
 func Update(delta: float) -> void:
-	d -= delta
-	if (d <= 0):
-		#clead cache since we are changing the offset of the storms
-		CachedPixels.clear()
-		
-		d = 0.2
-		
-		var simspeed = SimulationManager.SimSpeed()
-		
-		var TimePased = Clock.Instance.TimePassedInMinutes() - LastTimeWindChanged
-		if (TimePased > WindChangeMinimumTime_Minutes):
-			LastTimeWindChanged = Clock.Instance.TimePassedInMinutes()
-			if (randi_range(0, 1) > 0):
-				WindDirectionOffset = -1
-			else:
-				WindDirectionOffset = 1
-			#Update wind direction
-		var WindRotation = randf_range(0, 0.01) * WindDirectionOffset
-		WindDirection = WindDirection.rotated(WindRotation * simspeed)
-		WindSpeed = clamp(WindSpeed + randf_range(-0.2, 0.2), 0, MAX_WIND_SPEED)
-		#Add the new offset of the weather to the noise and produce the new texture
-		#CurrentOffset -= Vector2(WindDirection.x, WindDirection.y) * (simspeed / 5000) * (WindSpeed * 0.01)
-		#Mat.set_shader_parameter("offset", CurrentOffset + CurrentCamOffset)
-		N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * (simspeed / 50) * (WindSpeed * 0.01)
-		N.noise.fractal_gain = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * simspeed / 10, -10, 10)
-		#tx = N.get_image()
-		
-		var L = GetLightAmm()
-		
-		for g in ShipsToUpdate:
-			var viz = GetVisibilityInPosition(g.global_position, L)
-			g.VisibilityValue = viz
-			g.StormValue = StormValueInPosition(g.global_position)
-			if (g is PlayerDrivenShip):
-				g.UpdateLight(L, viz)
-			g.RephreshVisRange()
+	
+	var TimePased = Clock.Instance.TimePassedInMinutes() - LastTimeWindChanged
+	if (TimePased > WindChangeMinimumTime_Minutes):
+		LastTimeWindChanged = Clock.Instance.TimePassedInMinutes()
+		if (randi_range(0, 1) > 0):
+			WindDirectionOffset = -1
+		else:
+			WindDirectionOffset = 1
+			
+	#Update wind direction and speed
+	var WindRotation = randf_range(0, 0.01) * WindDirectionOffset
+	WindDirection = WindDirection.rotated(WindRotation * (delta * 10))
+	WindSpeed = clamp(WindSpeed + randf_range(-0.2, 0.2), 0, MAX_WIND_SPEED)
+	
+	#Update noise
+	N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * delta * (WindSpeed * 0.01)
+	N.noise.fractal_gain = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * delta, -10, 10)
+	N.noise.fractal_lacunarity = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * delta, 2, 4)
+	
+	var L = GetLightAmm()
+	
+	for g in ShipsToUpdate:
+		var viz = GetVisibilityInPosition(g.global_position, L)
+		g.VisibilityValue = viz
+		g.StormValue = StormValueInPosition(g.global_position)
+		if (g is PlayerDrivenShip):
+			g.UpdateLight(L, viz)
+		g.RephreshVisRange()
 
 func NoiseChanged() -> void:
 	tx = N.get_image()
+	tx.resize(TEXTURE_SIZE, TEXTURE_SIZE, Image.INTERPOLATE_NEAREST)
 
 static func GetWindVelocity() -> Vector2:
 	return WindDirection * (WindSpeed / (MAX_WIND_SPEED / 2.0))
@@ -117,54 +112,13 @@ static func GetLightAmm() -> float:
 func get_color_at_global_position(pos: Vector2) -> Color:
 	var RoundedPos = Vector2i((pos - global_position) + ((CurrentCamOffset) * 6000))
 
-	var x = Helper.normalize_value(RoundedPos.x, 0, 24000)
-	var y = Helper.normalize_value(RoundedPos.y, 0, 24000)
-	var WrapedPos = Vector2i(wrap(x * 1024, 0, 1024), wrap(y * 1024, 0, 1024))
+	var x = Helper.normalize_value(RoundedPos.x, 0, 48000)
+	var y = Helper.normalize_value(RoundedPos.y, 0, 48000)
+	var WrapedPos = Vector2i(wrap(x * TEXTURE_SIZE, 0, TEXTURE_SIZE), wrap(y * TEXTURE_SIZE, 0, TEXTURE_SIZE))
 		
 	var col = tx.get_pixel(WrapedPos.x, WrapedPos.y)
 
 	return col
-#
-#static func get_color_at_global_position(pos: Vector2) -> Color:
-	#var RoundedPos = Vector2i(pos)
-	#if (CachedPixels.has(RoundedPos)):
-		#return CachedPixels[RoundedPos]
-	## Step 3: Use the inverse transform to get the local position
-	#var local_position = (inverse_transform * Vector2(RoundedPos.x, RoundedPos.y))
-	#
-	## Step 3: Ensure the position is within the bounds of the TextureRect
-	#if local_position.x < 0 or local_position.x > rect_size.x or local_position.y < 0 or local_position.y > rect_size.y:
-		#return Color(0, 0, 0, 0)  # Return transparent color if out of bounds
-#
-	 ## Step 5: Calculate UV coordinates based on Keep Aspect Covered
-	#var texture_size = tx.get_size()
-	#var rect_aspect_ratio = rect_size.x / rect_size.y
-	#var texture_aspect_ratio = texture_size.x / texture_size.y
-#
-	#var Scl = 1.0
-	#if texture_aspect_ratio > rect_aspect_ratio:
-		#Scl = rect_size.x / texture_size.x  # Scale by the width
-	#else:
-		#Scl = rect_size.y / texture_size.y  # Scale by the height
-#
-	## Scaled dimensions
-	#var scaled_width = texture_size.x * Scl
-	#var scaled_height = texture_size.y * Scl
-#
-	## Offsets to center the texture based on the clipping
-	#var offset_x = (rect_size.x - scaled_width) / 2.0
-	#var offset_y = (rect_size.y - scaled_height) / 2.0
-#
-	## Map local position to UV coordinates
-	#var uv = Vector2((local_position.x - offset_x) / scaled_width, 
-					 #(local_position.y - offset_y) / scaled_height)
-#
-	##tx.lock()  # Lock the image for pixel access
-	#var color = tx.get_pixel(clamp(uv.x * texture_size.x, 0, texture_size.x - 1), clamp(uv.y * texture_size.y, 0, texture_size.y - 1))
-	##tx.unlock()  # Unlock after accessing
-	#CachedPixels[RoundedPos] = color
-	#return color
-
 
 func GetSaveData() -> SaveData:
 	var Sav = SaveData.new()

@@ -1,6 +1,6 @@
 extends ColorRect
 
-class_name Clouds
+class_name Cloud
 
 @export var CloudGradient : Gradient
 var CloudMad : ShaderMaterial

@@ -34,7 +34,7 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
 radius = 1000.0
 
-[node name="HostileShip" type="Node2D" unique_id=974765209 node_paths=PackedStringArray("TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["Enemy", "Ships", "ZoomAffected"]]
+[node name="HostileShip" type="Node2D" unique_id=974765209 node_paths=PackedStringArray("TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["Enemy", "Ships"]]
 process_mode = 1
 z_index = 1
 script = ExtResource("1_dinuw")
