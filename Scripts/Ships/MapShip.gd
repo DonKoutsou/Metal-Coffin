@@ -45,7 +45,8 @@ signal StatLow(StatName : String)
 signal OnShipDamaged(Amm : float, ShowVisuals : bool)
 signal OnShipDestroyed(Sh : MapShip)
 
-signal AltitudeChanged()
+signal AltitudeChanged(NewAlt : float)
+signal TargetAltitudeChanged(NewAlt : float)
 signal AChanged(NewAccel : float)
 signal AForced(NewAccel : float)
 
@@ -186,11 +187,11 @@ func SetSpeed(Spd : float) -> void:
 
 func _HandleLanding(delta : float) -> void:
 	var NewAltitude = clamp(TargetAltitude, CurrentLandAltitude, 10000)
-	if (TargetAltitude != NewAltitude):
-		TargetAltitude = NewAltitude
-		#LandingStarted.emit()
-	if (Altitude != TargetAltitude):
-		UpdateAltitude(move_toward(Altitude, TargetAltitude, delta * 1000))
+	#if (TargetAltitude != NewAltitude):
+		#TargetAltitude = NewAltitude
+		#LandingStarted.emit(
+	if (Altitude != NewAltitude):
+		UpdateAltitude(move_toward(Altitude, NewAltitude, delta * 1000))
 		#if (Altitude == TargetAltitude):
 			#LandingEnded.emit(self)
 			#LandingEnded2.emit()
@@ -233,7 +234,7 @@ func RemovePort():
 	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
 		g.RemovePort()
-	PortChanged.emit()
+	PortChanged.emit(0)
 
 func OnStatLow(StatName : String) -> void:
 	if (!LowStatsToNotifyAbout.has(StatName)):
@@ -361,9 +362,10 @@ func IsDead() -> bool:
 
 func UpdateTargetAltitude(NewTarget : float) -> void:
 	TargetAltitude = clamp(TargetAltitude - (NewTarget * 100), CurrentLandAltitude, 10000)
-	#if (Altitude != TargetAltitude):
-		#LandingStarted.emit()
-	#pass
+	TargetAltitudeChanged.emit(TargetAltitude)
+
+func SetTargetAltitude(NewTarget : float) -> void:
+	TargetAltitude = NewTarget
 
 func Landed() -> bool:
 	return Altitude == CurrentLandAltitude and !Moving()
@@ -373,7 +375,7 @@ func Moving() -> bool:
 
 func UpdateAltitude(NewAlt : float) -> void:
 	Altitude = NewAlt
-	AltitudeChanged.emit()
+	AltitudeChanged.emit(NewAlt)
 	#var S = lerp(0.05, 0.1, Altitude / 10000.0)
 	#ShipSprite.scale = Vector2(lerp(0.05, 0.1, Altitude / 10000.0), lerp(0.05, 0.1, Altitude / 10000.0))
 	

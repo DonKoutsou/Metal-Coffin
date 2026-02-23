@@ -22,9 +22,9 @@ func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
 	NewShip.connect("PortChanged", PortUpdated)
 	#NewShip.connect("LandingEnded2", PortUpdated)
 	NewShip.connect("AltitudeChanged", PortUpdated)
-	PortUpdated()
+	PortUpdated(0)
 
-func PortUpdated() -> void:
+func PortUpdated(NewAlt : float) -> void:
 	if (CurrentShip.CurrentPort == null):
 		#$PanelContainer4/VBoxContainer.modulate = PortUnAvailableCol
 		LandingText.text = "NO PORTS NEARBY\nLANDING DENIED"

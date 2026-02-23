@@ -369,7 +369,7 @@ func OnCaptainNameChanged(NewName : String) -> void:
 
 var AltitudeChangeCooldown : float = 0
 
-func AltitudeChanged() -> void:
+func AltitudeChanged(NewAlt : float) -> void:
 	AltitudeChangeCooldown = 1
 	if (is_instance_valid(LandingNotif)):
 		return

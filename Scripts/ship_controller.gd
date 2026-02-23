@@ -33,6 +33,7 @@ func _ready() -> void:
 	UIEventH.FleetSeparationPressed.connect(InitiateFleetSeparation)
 	UIEventH.RegroupPressed.connect(RegroupPressed)
 	UIEventH.AccelerationChanged.connect(SetControlledShipSpeed)
+	UIEventH.ElevationChanged.connect(SetControlledShipElevation)
 	UIEventH.SteerOffseted.connect(SteerChanged)
 	#UIEventH.ShipSwitchPressed.connect(ControlledShipSwitch)
 	
@@ -78,6 +79,8 @@ func SetInitialShip() -> void:
 	AvailableShips.append(ControlledShip)
 	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
 	ControlledShip.AForced.connect(OnControlledShipSpeedForced)
+	ControlledShip.AltitudeChanged.connect(OnControlledShipElevationChanged)
+	ControlledShip.TargetAltitudeChanged.connect(OnControlledShipElevationForced)
 	UIEventH.OnShipUpdated(ControlledShip)
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
@@ -124,11 +127,24 @@ func SetControlledShipSpeed(value: float) -> void:
 	else:
 		ControlledShip.AccelerationChanged(value, false)
 
+func SetControlledShipElevation(value: float) -> void:
+	if (ControlledShip.Docked):
+		ControlledShip.Command.SetTargetAltitude(value * 10000)
+	else:
+		ControlledShip.SetTargetAltitude(value * 10000)
+	
+		
 func OnControlledShipSpeedChanged(NewSpeed : float) -> void:
 	UIEventH.OnSpeedSet(NewSpeed / ControlledShip.GetShipMaxSpeed())
 
 func OnControlledShipSpeedForced(NewSpeed : float) -> void:
 	UIEventH.OnSpeedForced(NewSpeed / ControlledShip.GetShipMaxSpeed())
+
+func OnControlledShipElevationChanged(NewElevation : float) -> void:
+	UIEventH.OnElevationSet(NewElevation / 10000)
+
+func OnControlledShipElevationForced(NewElevation : float) -> void:
+	UIEventH.OnElevationForced(NewElevation / 10000)
 
 #Called from steering wheel to change tragectory of currently controlled ship
 func SteerChanged(value: float) -> void:

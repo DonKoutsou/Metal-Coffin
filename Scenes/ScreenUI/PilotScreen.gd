@@ -2,6 +2,7 @@ extends Control
 
 class_name PilotScreenUI
 @export var Thrust : ThrustSlider
+@export var ElevationThrust : ThrustSlider
 @export var Steer : SteeringWheelUI
 @export var EventHandler : UIEventHandler
 @export var ControllerEventH : ShipControllerEventHandler
@@ -38,9 +39,13 @@ func GetUIElement(Element : PILOT_UI_ELEMENTS) -> Control:
 	
 func _ready() -> void:
 	ControllerEventH.OnControlledShipChanged.connect(ControlledShipSwitched)
+	
 	ControlledShipSwitched(ControllerEventH.CurrentControlled)
 	EventHandler.SpeedForced.connect(ShipSpeedForced)
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
+	
+	EventHandler.ElevationForced.connect(ShipElevationForced)
+	#EventHandler.ElevationSet.connect(ShipElevationSet)
 
 	EventHandler.ZoomChangedFromScreen.connect(ZoomDial.AddCustomMovement)
 	EventHandler.YChangedFromScreen.connect(YDial.AddCustomMovement)
@@ -64,9 +69,17 @@ func ShipSpeedSet(NewSpeed : float) -> void:
 
 func ShipSpeedForced(NewSpeed : float) -> void:
 	Thrust.ForceValue(NewSpeed)
+	
+func ShipElevationSet(NewSpeed : float) -> void:
+	ElevationThrust.UpdateHandle(NewSpeed)
+
+func ShipElevationForced(NewSpeed : float) -> void:
+	ElevationThrust.ForceValue(NewSpeed)
+
 
 func ControlledShipSwitched(NewShip : MapShip) -> void:
 	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
+	ElevationThrust.ForceValue(NewShip.TargetAltitude / 10000)
 	Steer.ForceSteer(NewShip.rotation)
 
 func Acceleration_Ended(value_changed: float) -> void:
@@ -75,6 +88,13 @@ func Acceleration_Ended(value_changed: float) -> void:
 func Acceleration_Changed(value: float) -> void:
 	EventHandler.OnAccelerationChanged(value)
 
+func Elevation_Ended(value_changed: float) -> void:
+	EventHandler.OnElevationEnded(value_changed)
+	#ElevationThrust.UpdateHandle(value_changed)
+
+func Elevation_Changed(value: float) -> void:
+	EventHandler.OnElevationChanged(value)
+	ElevationThrust.UpdateHandle(value)
 
 func Steering_Direction_Changed(NewValue: float) -> void:
 	EventHandler.OnSteeringDirectionChanged(NewValue)

@@ -27,8 +27,8 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	CurrentAltitude = NewShip.Altitude
 	queue_redraw()
 
-func AltitudeChanged() -> void:
-	CurrentAltitude = CurrentShip.Altitude
+func AltitudeChanged(NewAlt : float) -> void:
+	CurrentAltitude = NewAlt
 	queue_redraw()
 
 func Toggle(t) -> void:

@@ -125,6 +125,9 @@ func On_Game_Lost_Button_Pressed() -> void:
 func ToggleCrtEffect(T : bool) -> void:
 	Screen.visible = T
 
+const FullSize = Vector2(1148.0, 595.0)
 
 func SetScreenRes(Res : Vector2) -> void:
 	Screen.material.set_shader_parameter("res", Res)
+	var wrap = (Res / FullSize) * Vector2(25,25)
+	Screen.material.set_shader_parameter("warp", clamp(wrap, Vector2(15,15), Vector2(25,25)))

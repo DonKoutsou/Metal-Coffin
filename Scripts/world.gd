@@ -246,7 +246,7 @@ func _enter_tree() -> void:
 	
 	map.connect("MAP_EnemyArrival", StartDogFight)
 	Controller.connect("FleetSeperationRequested", StartShipTrade)
-	#Controller.connect("LandingRequested", OnLandRequested)
+	Controller.connect("LandingRequested", OnLandRequested)
 	Controller.OpenHatchRequested.connect(OnOpenHatchRequested)
 	#var statp = GetStatPanel()
 	##connect("WRLD_StatsUpdated", statp.StatsUp)
@@ -414,28 +414,10 @@ func CardFightDestroyed() -> void:
 	WORLDST = WORLDSTATE.NORMAL
 
 ##LANDING
-#func OnLandRequested(ControlledShip : MapShip) -> void:
-	#var Instigator = ControlledShip
-	#if (ControlledShip.Docked):
-		#Instigator = ControlledShip.Command
-		#
-	#var spot = Instigator.CurrentPort as MapSpot
-	#if (spot == null):
-		#PopUpManager.GetInstance().DoFadeNotif("No port to land to")
-		#return
-	#if (Instigator.Landing):
-		#return
-	#if (Instigator.Altitude == 0):
-		#PopUpManager.GetInstance().DoFadeNotif("Fleet already on the ground")
-		#return
-	#if (Instigator.GetShipSpeed() > 0):
-		#PopUpManager.GetInstance().DoFadeNotif("Fleet can't land while moving")
-		#return
-	#Instigator.StartLanding()
-	#RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
-	#PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
-	#Instigator.connect("LandingEnded", OnLandingFinished)
-	#Instigator.connect("LandingCanceled", OnLandingCanceled)
+func OnLandRequested(ControlledShip : MapShip) -> void:
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
+	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
+	ControlledShip.UpdateTargetAltitude(ControlledShip.CurrentLandAltitude)
 
 func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
 	var Instigator = ControlledShip
@@ -443,7 +425,7 @@ func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
 		Instigator = ControlledShip.Command
 
 	if (!Instigator.Landed()):
-		PopUpManager.GetInstance().DoFadeNotif("Can't open hatch while ship is floating")
+		PopUpManager.GetInstance().DoFadeNotif("Can't open hatch\nship is not landed")
 		return
 	
 	OnShipLanded(Instigator)

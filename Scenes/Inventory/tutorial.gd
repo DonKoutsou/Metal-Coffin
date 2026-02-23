@@ -33,6 +33,7 @@ func SetData(Title : String, Text : String, TutorialSubjects : Array[Map.UI_ELEM
 		Target2 = Map.GetInstance().GetUIElement(TutorialSubjects[1])
 		
 func _ready() -> void:
+	set_physics_process(false)
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
 	call_deferred("DoFadeInAnim")
 	if (Target2 != null):
@@ -64,19 +65,21 @@ func DoFadeInAnim() -> void:
 	Tw.set_ease(Tween.EASE_OUT)
 	Tw.set_trans(Tween.TRANS_BACK)
 	Tw.tween_method(UpdateSize, Vector2.ZERO, OriginalSize, 1)
+	Tw.set_parallel(true)
+	Tw.tween_method(UpdateDarkness, 0.0, 0.8, 1)
 	
 	var S = DeletableSoundGlobal.new()
 	S.stream = InSound
 	S.autoplay = true
 	add_child(S)
 	
-	if (Target != null):
-		Target.connect("tree_exited", queue_free)
-	else:
-		Line.visible = false
+	#if (Target != null):
+		#Target.connect("tree_exited", queue_free)
+	#else:
+		#Line.visible = false
 	
 	await Tw.finished
-	
+	set_physics_process(true)
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = true
 	$VBoxContainer/Button.visible = true
 	
@@ -91,7 +94,10 @@ func SetTargetRect(r : Rect2 = Rect2(0,0,0,0), r2 : Rect2 = Rect2(0,0,0,0)) -> v
 func UpdateSize(NewSize : Vector2) -> void:
 	Pan.size = NewSize
 	Pan.position = size/2 - Pan.size/2
-	
+
+func UpdateDarkness(Darkness : float) -> void:
+	var mat =  $ColorRect.material as ShaderMaterial
+	mat.set_shader_parameter("darkness", Darkness)
 	#size = lerp(Vector2.ZERO, OriginalSize, NewSize.x / OriginalSize.x)
 	#position = get_viewport_rect().size / 2 - size / 2
 	
@@ -117,11 +123,14 @@ func _physics_process(delta: float) -> void:
 		TextLabel.visible_ratio += delta
 
 func _on_button_pressed() -> void:
+	set_physics_process(false)
+	
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_IN)
 	Tw.set_trans(Tween.TRANS_QUAD)
 	Tw.tween_method(UpdateSize, OriginalSize, Vector2.ZERO, 1)
-	
+	Tw.set_parallel(true)
+	Tw.tween_method(UpdateDarkness, 0.8, 0.0, 1)
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = false
 	$VBoxContainer/Button.visible = false
 	

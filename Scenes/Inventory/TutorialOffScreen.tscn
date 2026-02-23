@@ -14,7 +14,7 @@ shader_parameter/rect1_pos = Vector2(0.15, 0.25)
 shader_parameter/rect1_size = Vector2(0.25, 0.4)
 shader_parameter/rect2_pos = Vector2(0.645, 0.5)
 shader_parameter/rect2_size = Vector2(0.205, 0.3)
-shader_parameter/darkness = 0.6000000285
+shader_parameter/darkness = 0.0
 shader_parameter/feather = 0.050000002375
 
 [node name="Tutorial" type="Control" unique_id=1937603570 node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel", "Line", "Line2")]

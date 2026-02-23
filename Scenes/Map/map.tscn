@@ -113,7 +113,7 @@ seamless = true
 invert = true
 seamless_blend_skirt = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwpve"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j370t"]
 resource_local_to_scene = true
 shader = ExtResource("21_j370t")
 shader_parameter/GroundTexture = ExtResource("25_cj57b")
@@ -260,7 +260,7 @@ UIEventHandle = ExtResource("25_8mjbw")
 NoiseNormalTexture = ExtResource("21_7nfft")
 
 [node name="Ground" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=1453279039 instance=ExtResource("22_kgrij")]
-material = SubResource("ShaderMaterial_pwpve")
+material = SubResource("ShaderMaterial_j370t")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -326,6 +326,7 @@ WindChangeMinimumTime_Minutes = 120.0
 N = ExtResource("25_tr1ul")
 
 [node name="Grid" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera" unique_id=372542382 instance=ExtResource("19_28wu2")]
+visible = false
 material = SubResource("CanvasItemMaterial_28wu2")
 anchors_preset = 8
 anchor_left = 0.5

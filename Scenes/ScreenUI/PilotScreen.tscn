@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="5_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_bpouu"]
 [ext_resource type="Texture2D" uid="uid://bi5udi6g78ajr" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="6_gmup4"]
+[ext_resource type="PackedScene" uid="uid://k7pqywm80h3m" path="res://Scenes/ScreenUI/Elevation_slider.tscn" id="6_jqinv"]
 [ext_resource type="Script" uid="uid://b8qcw65lt8fkh" path="res://Scenes/ScreenUI/PilotScreenSettings.gd" id="6_w258d"]
 [ext_resource type="FontFile" uid="uid://m8psk06kkwa4" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_yjfdw"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="7_ojc6g"]
@@ -32,7 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/ELint.tscn" id="27_uojtp"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/ControlledShipSelection.tscn" id="28_hc833"]
 
-[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("Thrust", "Steer", "PilotScreenSet", "SpeedSimulationButton", "PauseSimulationButton", "ZoomDial", "YDial", "XDial")]
+[node name="Foreground" type="Control" unique_id=1109053421 node_paths=PackedStringArray("Thrust", "ElevationThrust", "Steer", "PilotScreenSet", "SpeedSimulationButton", "PauseSimulationButton", "ZoomDial", "YDial", "XDial")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,6 +43,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fq67n")
 Thrust = NodePath("ThrustSlider")
+ElevationThrust = NodePath("ThrustSlider2")
 Steer = NodePath("SteeringWheel")
 EventHandler = ExtResource("2_ecvfe")
 ControllerEventH = ExtResource("3_w258d")
@@ -63,13 +65,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_eeg0m")
 expand_mode = 1
-
-[node name="ThrustSlider" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
-layout_mode = 1
-offset_left = -114.0
-offset_top = -371.0
-offset_right = -13.0
-offset_bottom = -46.0
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1348607806 node_paths=PackedStringArray("ForecastButton", "GridButton", "SteerButton", "ZoomButton", "TopoButton")]
 layout_mode = 1
@@ -560,10 +555,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -247.0
-offset_top = -298.0
-offset_right = -222.0
-offset_bottom = -247.0
+offset_left = -176.0
+offset_top = -370.0
+offset_right = -151.0
+offset_bottom = -319.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -572,7 +567,6 @@ theme_override_styles/pressed = ExtResource("21_ecvfe")
 theme_override_styles/hover = ExtResource("20_eeg0m")
 
 [node name="LandButton" type="Button" parent="." unique_id=654026330 groups=["Buttons"]]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -580,15 +574,29 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -247.0
-offset_top = -152.0
+offset_top = -368.0
 offset_right = -223.0
-offset_bottom = -104.0
+offset_bottom = -320.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
 theme_override_styles/normal = ExtResource("22_fq67n")
 theme_override_styles/pressed = ExtResource("23_eeg0m")
 theme_override_styles/hover = ExtResource("22_fq67n")
+
+[node name="ThrustSlider" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
+layout_mode = 1
+offset_left = -114.0
+offset_top = -371.0
+offset_right = -13.0
+offset_bottom = -46.0
+
+[node name="ThrustSlider2" parent="." unique_id=833959843 instance=ExtResource("6_jqinv")]
+layout_mode = 1
+offset_left = -240.0
+offset_top = -306.0
+offset_right = -139.0
+offset_bottom = -47.0
 
 [node name="Pause" type="Button" parent="." unique_id=12124813 groups=["Buttons"]]
 process_mode = 3
@@ -674,8 +682,6 @@ position = Vector2(528.00006, 688)
 rotation = -3.1415927
 scale = Vector2(0.8, 0.8)
 
-[connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
-[connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]
 [connection signal="ForecastToggled" from="PanelContainer" to="." method="_on_forecast_button_toggled"]
 [connection signal="GridToggled" from="PanelContainer" to="." method="_on_grid_button_toggled"]
 [connection signal="SteerToggled" from="PanelContainer" to="." method="_on_steer_button_toggled"]
@@ -699,6 +705,10 @@ scale = Vector2(0.8, 0.8)
 [connection signal="pressed" from="OpenHatchButton" to="." method="Open_Hatch_Button_Pressed"]
 [connection signal="pressed" from="RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="LandButton" to="." method="Land_Pressed"]
+[connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
+[connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]
+[connection signal="AccelerationChangeEnded" from="ThrustSlider2" to="." method="Elevation_Ended"]
+[connection signal="AccelerationChanged" from="ThrustSlider2" to="." method="Elevation_Changed"]
 [connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
 [connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]
 [connection signal="RangeChanged" from="AltitudeDial" to="." method="_on_altitude_dial_range_changed"]

@@ -4,8 +4,12 @@ class_name UIEventHandler
 
 signal AccelerationEnded(Value : float)
 signal AccelerationChanged(Value : float)
+signal ElevationEnded(Value : float)
+signal ElevationChanged(Value : float)
 signal SpeedSet(Value : float)
 signal SpeedForced(Value : float)
+signal ElevationSet(Value : float)
+signal ElevationForced(Value : float)
 #signal AccelerationForced(ForceVal : float)
 signal DroneButtonPressed()
 signal MissileButtonPressed()
@@ -66,6 +70,12 @@ func OnSpeedSet(Speed : float) -> void:
 func OnSpeedForced(Speed : float) -> void:
 	SpeedForced.emit(Speed)
 
+func OnElevationSet(Elevation : float) -> void:
+	ElevationSet.emit(Elevation)
+
+func OnElevationForced(Elevation : float) -> void:
+	ElevationForced.emit(Elevation)
+
 func OnScreenUIToggled(t : bool):
 	ScreenUIToggled.emit(t)
 
@@ -75,6 +85,14 @@ func OnAccelerationEnded(value_changed: float) -> void:
 
 func OnAccelerationChanged(value: float) -> void:
 	AccelerationChanged.emit(value)
+	Shake.emit(value * 1.5)
+
+func OnElevationEnded(value_changed: float) -> void:
+	ElevationEnded.emit(value_changed)
+	DissableShake.emit()
+
+func OnElevationChanged(value: float) -> void:
+	ElevationChanged.emit(value)
 	Shake.emit(value * 1.5)
 #func OnAccelerationForced(NewVal : float) -> void:
 	#AccelerationForced.emit(NewVal)
