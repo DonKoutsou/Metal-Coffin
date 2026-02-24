@@ -1,0 +1,15 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://mprovawuop45"]
+
+[ext_resource type="FastNoiseLite" uid="uid://f0bcp4v0xei2" path="res://Noises/Ground/GroundNoise.tres" id="1_oopbl"]
+
+[sub_resource type="Gradient" id="Gradient_eb1s8"]
+offsets = PackedFloat32Array(0.52029, 0.5496009, 0.7, 0.705)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1)
+
+[resource]
+width = 2048
+height = 2048
+noise = ExtResource("1_oopbl")
+color_ramp = SubResource("Gradient_eb1s8")
+seamless = true
+seamless_blend_skirt = 1.0

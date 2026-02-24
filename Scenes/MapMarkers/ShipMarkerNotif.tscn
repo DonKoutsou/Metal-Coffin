@@ -137,13 +137,18 @@ _data = {
 &"Show_2": SubResource("Animation_v18v5")
 }
 
-[node name="ShipMarkerNotification" type="Control" unique_id=1733105763 groups=["Pausable", "ZoomAffected"]]
+[node name="ShipMarkerNotification" type="Control" unique_id=1733105763 node_paths=PackedStringArray("anim", "blinkSound", "Line", "DetailPanel", "ShipDetailLabel") groups=["Pausable", "ZoomAffected"]]
 z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_yijdn")
+anim = NodePath("AnimationPlayer")
+blinkSound = NodePath("AudioStreamPlayer")
+Line = NodePath("Line2D")
+DetailPanel = NodePath("Control")
+ShipDetailLabel = NodePath("Control/PanelContainer/Label")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1849865018]
 use_parent_material = true

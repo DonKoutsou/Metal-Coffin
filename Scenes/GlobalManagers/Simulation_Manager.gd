@@ -2,7 +2,7 @@ extends Node
 
 class_name SimulationManager
 
-@export var _Map : Map
+var _Map : Map
 
 static var Paused : bool = true
 static var SimulationSpeed : float = 0.2

@@ -137,11 +137,11 @@ func _ready() -> void:
 		PlayerReserves.erase(NewCombatant)
 		CreateShipVisuals(NewCombatant, true)
 	#Add all ships to turn array and sort them
-	ShipTurns.append_array(PlayerCombatants)
-	ShipTurns.append_array(EnemyCombatants)
-
 	
-	ShipTurns.sort_custom(speed_comparator)
+	ShipTurns.append_array(EnemyCombatants)
+	ShipTurns.append_array(PlayerCombatants)
+	
+	#ShipTurns.sort_custom(speed_comparator)
 	
 	UpdateFleetSizeAmmount()
 	#Create the visualisation for each ship, basicly their stat holder
@@ -357,7 +357,7 @@ func PickPhaseStart() -> void:
 		return
 	CurrentTurn = 0
 	
-	ShipTurns.sort_custom(speed_comparator)
+	#ShipTurns.sort_custom(speed_comparator)
 	
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
@@ -452,7 +452,7 @@ func OnCardSelected(C : Card) -> bool:
 	print("{0} has been removed from {1}'s hand.".format([C.CStats.GetCardName(), Ship.Name]))
 	deck.Hand.erase(C.CStats)
 	
-	if (C.CStats.OnPerformModule != null):
+	if (!IsShipFriendly(Ship) and C.CStats.OnPerformModule != null):
 		var Action : CardStats
 
 		Action = C.CStats
@@ -522,8 +522,11 @@ func OnCardSelected(C : Card) -> bool:
 			if (g.IsSame(C.CStats)):
 				Ship.Cards.erase(g)
 				break
-				
-	await HandleModules(Ship, C.CStats)
+	
+	if (IsShipFriendly(Ship)):
+		await HandleModulesPl(Ship, C.CStats)
+	else:
+		await HandleModules(Ship, C.CStats)
 	
 	
 	PlayerPerformingMove = false
@@ -761,7 +764,7 @@ func StartActionPerform() -> void:
 	ClearCards()
 	
 	#Sort ships again to make sure speed buffs are taken into account
-	ShipTurns.sort_custom(speed_comparator)
+	#ShipTurns.sort_custom(speed_comparator)
 
 	ExternalUI.HideInfo()
 	CurrentPhase = CardFightPhase.ACTION_PERFORM
@@ -889,7 +892,6 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			var TargetList : Dictionary[BattleShipStats, Dictionary]
 			
 			for g in TargetShips:
-
 				for Act : CardFightAction in ActionList.GetShipsActions(g):
 					var mod = Act.Action.OnPerformModule
 					if (mod is CounterCardModule or mod is DamageReductionCardModule):
@@ -1113,6 +1115,121 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, Targets : Array[B
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
 
+func HandleModulesPl(Performer : BattleShipStats, C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
+	var AnimData : Array[AnimationData]
+	for Mod in C.OnUseModules.size():
+		var Data : AnimationData
+		
+		Data = await HandleModule(Performer, C ,C.OnUseModules[Mod], Targets)
+		
+		if (Mod < C.OnUseModules.size() - 1):
+			await Helper.GetInstance().wait(0.2)
+			
+		if (Data != null):
+			AnimData.append(Data)
+	if (C.OnPerformModule != null and C.OnPerformModule is OffensiveCardModule):
+	#for Mod in C.OnPerformModule.size():
+		#var Data : AnimationData
+		var targets = await HandleTargets(C.OnPerformModule, Performer)
+		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
+		
+		#if (Mod < C.OnUseModules.size() - 1):
+			#await Helper.GetInstance().wait(0.2)
+			
+		#if (Data != null):
+			#AnimData.append(Data)
+			
+	if (AnimData.size() > 0):
+		await DoCardAnim(C, AnimData, Performer, true)
+
+func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod : OffensiveCardModule, TargetShips : Array[BattleShipStats]) -> void:
+	var AtackType = Mod.AtackType
+	var Counter : CardStats
+	var Dec = GetShipDeck(Performer)
+	
+	var Friendly = IsShipFriendly(Performer)
+	#List containing targets and a bool saying if target has def
+	var TargetList : Dictionary[BattleShipStats, Dictionary]
+	
+	for g in TargetShips:
+		for Act : CardFightAction in ActionList.GetShipsActions(g):
+			var mod = Act.Action.OnPerformModule
+			if (mod is CounterCardModule or mod is DamageReductionCardModule):
+				if (mod.CounterType == AtackType or mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
+					Counter = Act.Action
+					break
+			
+		var Data : Dictionary
+		Data["Def"] = Counter
+		Data["Viz"] = g.ShipViz
+		TargetList[g] = Data
+
+	Performer.ShipViz.ActionRemoved(Action.Icon)
+	
+	var AtackData = OffensiveAnimationData.new()
+	
+	AtackData.Mod = Mod
+	AtackData.DeffenceList = TargetList
+	
+	var AnimData : Array[AnimationData]
+	AnimData.append(AtackData)
+	
+	var DamageCallables : Array[Callable]
+	
+	var AtackConnected = false
+	
+	for g in TargetList:
+		
+		var Def = TargetList[g]["Def"] as CardStats
+		
+		if (TargetList[g]["Def"] != null):
+			
+			var TargetViz = TargetList[g]["Viz"]
+			TargetViz.ActionRemoved(Counter.Icon)
+			ActionList.RemoveActionFromShip(g, Counter)
+			if (!Counter.ShouldConsume()):
+				var TargetDeck = GetShipDeck(g)
+				PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
+				print("{0} has been added to {1}'s discard pile.".format([Counter.GetCardName(), g.Name]))
+				TargetDeck.DiscardPile.append(Counter)
+					
+			if (!Friendly):
+				DamageNeg += Mod.GetFinalDamage(Performer, Action.Tier)
+				
+			var CounterMod = Def.OnPerformModule
+			
+			if (CounterMod is DamageReductionCardModule):
+				var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier), Mod.CauseFile, Mod.SkipShield)
+				DamageCallables.append(c)
+				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
+					AnimData.append(await HandleModule(Performer, Def, SDefMod))
+				AtackConnected = true
+				
+			if (CounterMod is CounterCardModule):
+				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
+					AnimData.append(await HandleModule(Performer, Def, SDefMod))
+		else:
+			AtackConnected = true
+		
+		if (AtackConnected):
+			for SAtMod in Mod.OnSuccesfullAtackModules:
+				AnimData.append(await HandleModule(Performer, Action, SAtMod, TargetList.keys()))
+				
+			var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
+			DamageCallables.append(c)
+	
+	for SAtMod in Mod.OnAtackModules:
+		AnimData.append(await HandleModule(Performer, Action, SAtMod, TargetList.keys()))
+
+	AtackData.Callables = DamageCallables
+	
+	if (!Action.ShouldConsume()):
+		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
+		print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Performer.Name]))
+		Dec.DiscardPile.append(Action)
+	
+	await DoCardAnim(Action, AnimData, Performer, Friendly)
+	#PerformAnimationFinished(Performer, ActionIndex)
 
 func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	var AnimData :AnimationData
@@ -1789,7 +1906,7 @@ func HandleDrawCardEnemy(Performer : BattleShipStats) -> void:
 		
 		PlaceCardInEnemyHand(Performer, C)
 	
-	await DoCardDrawAnimation(Performer.ShipViz)
+	#await DoCardDrawAnimation(Performer.ShipViz)
 
 
 func HandleDrawSpecificCard(Performer : BattleShipStats, Spawn : CardStats) -> void:

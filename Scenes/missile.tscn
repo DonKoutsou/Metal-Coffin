@@ -49,7 +49,7 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=49434935]
-polygon = PackedVector2Array(5.5, 0, 200, 100, 220, 0, 200, -100)
+polygon = PackedVector2Array(14, 0, 200, 100, 220, 0, 200, -100)
 
 [node name="MissileBody" type="Area2D" parent="." unique_id=879877514]
 

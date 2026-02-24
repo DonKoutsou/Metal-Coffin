@@ -2,6 +2,7 @@
 
 [ext_resource type="Material" uid="uid://ylp0ab88vpy8" path="res://Shaders/Ground/GroundMap.tres" id="1_y6j18"]
 [ext_resource type="Script" uid="uid://cgli52vwau8wk" path="res://Scenes/Map/topography_map.gd" id="2_rs2j3"]
+[ext_resource type="Image" uid="uid://b86vpnvr7ngan" path="res://Noises/Topography/TEX_Topo_Noise_Data.tres" id="3_rs2j3"]
 
 [node name="TopographyMap" type="ColorRect" unique_id=472618370]
 material = ExtResource("1_y6j18")
@@ -10,11 +11,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -3000.0
-offset_top = -3000.0
-offset_right = 3000.0
-offset_bottom = 3000.0
+offset_left = -3640.0
+offset_top = -3360.0
+offset_right = 2360.0
+offset_bottom = 2640.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_rs2j3")
-N = "uid://c17sbm8pdhw2"
+tex = ExtResource("3_rs2j3")

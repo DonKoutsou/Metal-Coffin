@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://tmpsb1647trv"]
+
+[ext_resource type="Script" uid="uid://dfwnfv4dc0ekm" path="res://Noises/noise_generators.gd" id="1_0kodu"]
+[ext_resource type="Texture2D" uid="uid://c1hllyiqimwyu" path="res://Noises/Ground/GroundVisualNoise.tres" id="2_lbgf0"]
+[ext_resource type="Texture2D" uid="uid://mprovawuop45" path="res://Noises/Ground/GroundNoiseMask.tres" id="3_iptyo"]
+[ext_resource type="Texture2D" uid="uid://wegfneoi242m" path="res://Noises/Topography/TopoggraphyNoise.tres" id="4_3xvvx"]
+[ext_resource type="Texture2D" uid="uid://c17sbm8pdhw2" path="res://Noises/Topography/TopoggraphyNoiseBase.tres" id="5_xqntd"]
+[ext_resource type="Texture2D" uid="uid://0k2jw1bl3ndm" path="res://Noises/Weather/weathernoise_base.tres" id="6_0m7in"]
+[ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Noises/Weather/weathernoise.tres" id="7_duapv"]
+
+[node name="NoiseGenerators" type="TextureRect" unique_id=1822932877]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 560.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0m7in")
+script = ExtResource("1_0kodu")
+GroundVisualNoise = ExtResource("2_lbgf0")
+GroundVisualNoiseMask = ExtResource("3_iptyo")
+TopographyVisualNoise = ExtResource("4_3xvvx")
+TopographyDataNoise = ExtResource("5_xqntd")
+WeatherDataNoise = ExtResource("6_0m7in")
+WeatherDataNoiseSize = 256
+WeatherVisualNoise = ExtResource("7_duapv")
+WeatherVisualNoiseSize = 256

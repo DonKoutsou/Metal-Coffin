@@ -19,7 +19,6 @@ class_name Map
 @export var Region : RegionLineDrawer
 @export var Road : MapLineDrawer
 @export var MapLine : MapLineDrawer
-@export var WeatherMan : WeatherManage
 @export var WorldParent : Node2D
 @export var MapPointerMan : MapPointerManager
 #@export var _StatPanel : StatPanel
@@ -335,8 +334,6 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 			WorldSize = dat.TownLoc.y
 			
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
-	#WeatherManage.WorldBounds = Vector2(SpawningBounds.x, WorldSize)
-	#WeatherManage.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
 	#call_deferred("GenerateRoads")
 	#_Camera.call_deferred("FrameCamToPlayer")
 

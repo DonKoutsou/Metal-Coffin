@@ -2,7 +2,9 @@ extends Control
 
 class_name ResuplyNotification
 
-@export var Rotate : bool = false
+@export var Line : Line2D
+@export var DetailPanel : Control
+@export var ShipDetailLabel : Label
 
 var ShowingStats : Dictionary
 
@@ -37,38 +39,30 @@ func ToggleStat(Stat: String, t : bool, timel : float = 0):
 		if (Mins > 0):
 			statstring += "{0} minute(s) ".format([roundi(Mins)])
 		
-	$Control/PanelContainer/Label.text = statstring
+	ShipDetailLabel.text = statstring
 	
 func OnShipDeparted(_DepartedFrom : MapSpot):
 	queue_free()
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	$Control.scale = Vector2(1,1) / NewZoom
+	DetailPanel.scale = Vector2(1,1) / NewZoom
 	UpdateLine(NewZoom)
-	$Line2D.width =  1.5 / NewZoom
+	Line.width =  1.5 / NewZoom
 	rotation = - get_parent().get_parent().rotation
 
-#func _physics_process(_delta: float) -> void:
-	#rotation = - get_parent().get_parent().rotation
-	#$Control.scale = Vector2(1,1) / camera.zoom
-	#UpdateLine()
-	#$Line2D.width =  2 / camera.zoom.x
-
 func UpdateLine(Zoom : float)-> void:
-	var c = $Control as Control
-	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)
-	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30 / Zoom)
+	var locp = get_closest_point_on_rect(ShipDetailLabel.get_global_rect(),DetailPanel.global_position)
+	Line.set_point_position(1, locp - Line.global_position)
+	Line.set_point_position(0, global_position.direction_to(locp) * 30 / Zoom)
 	
 func UpdateSignRotation() -> void:
-	var c = $Control as Control
-	c.rotation += 0.01
-	$Control/PanelContainer/Label.pivot_offset = $Control/PanelContainer/Label.size / 2
+	DetailPanel.rotation += 0.01
+	ShipDetailLabel.pivot_offset = ShipDetailLabel.size / 2
 	$Control/PanelContainer.rotation -= 0.01
 	#$Control/PanelContainer/VBoxContainer.pivot_offset = get_closest_point_on_rect($Control/PanelContainer/VBoxContainer.get_global_rect(), c.global_position) - $Control/PanelContainer/VBoxContainer.global_position
-	var locp = get_closest_point_on_rect($Control/PanelContainer/Label.get_global_rect(), c.global_position)
-	$Line2D.set_point_position(1, locp - $Line2D.global_position)
-	$Line2D.set_point_position(0, global_position.direction_to(locp) * 30)
+	var locp = get_closest_point_on_rect(ShipDetailLabel.get_global_rect(), DetailPanel.global_position)
+	Line.set_point_position(1, locp - Line.global_position)
+	Line.set_point_position(0, global_position.direction_to(locp) * 30)
 
 	
 func get_closest_point_on_rect(rect: Rect2, point: Vector2) -> Vector2:

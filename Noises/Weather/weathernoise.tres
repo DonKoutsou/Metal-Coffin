@@ -1,0 +1,11 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://bpghre0s4hi8"]
+
+[ext_resource type="Gradient" uid="uid://yscbyv660v33" path="res://Noises/Weather/new_gradient.tres" id="1_n0i4l"]
+[ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Noises/Weather/StormNoise.tres" id="2_h5vfm"]
+
+[resource]
+width = 2048
+height = 2048
+noise = ExtResource("2_h5vfm")
+color_ramp = ExtResource("1_n0i4l")
+seamless = true

@@ -1,26 +1,25 @@
 extends ColorRect
 
 class_name TopographyMap
-@export_file(".tres") var N : String
+
+	
 const GROUND_TEXTURE_RESOLUTION : int = 256
 
 var Mat : ShaderMaterial
 
 #var CachedPixels : Dictionary[Vector2i, float]
-var tex : Image
+@export var tex : Image
 var Offset : Vector2
 
 static var Instance : TopographyMap
 
 func _ready() -> void:
+
 	Instance = self
 	Mat = material
+
 	var newoffset = Mat.get_shader_parameter("offset")
 	Offset = newoffset
-	#var m : ShaderMaterial = material
-	#N = m.get_shader_parameter("NoiseTexture2")
-	#set_physics_process(false)
-	UpdateData()
 
 func ChangeOffset(NewOffset : Vector2) -> void:
 	Mat.set_shader_parameter("offset", NewOffset)
@@ -55,12 +54,6 @@ func GetTurbelance(Pos : Vector2) -> float:
 	#var InLineOfSight = radar_line_of_sight_with_height_func(plship.global_position, plship.Altitude, ShipCamera.GetInstance().get_screen_center_position(), 1)
 	#print(InLineOfSight)
 
-func UpdateData() -> void:
-	var noi : NoiseTexture2D = ResourceLoader.load(N)
-	await noi.changed
-	tex = noi.get_image()
-	tex.resize(GROUND_TEXTURE_RESOLUTION, GROUND_TEXTURE_RESOLUTION, Image.INTERPOLATE_NEAREST)
-
 func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	var RoundedPos = Vector2((pos - global_position) + (Offset * 6000))
 	
@@ -83,8 +76,8 @@ func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
 	var RoundedPos = Vector2i(Vector2i(pos - global_position) + (Vector2i(Offset * 6000)))
 	
 		
-	var x = Helper.normalize_value(RoundedPos.x, 0, 12000)
-	var y = Helper.normalize_value(RoundedPos.y, 0, 12000)
+	var x = Helper.normalize_value(RoundedPos.x, 0, 24000)
+	var y = Helper.normalize_value(RoundedPos.y, 0, 24000)
 	var WrapedPos = Vector2i(wrap(x * GROUND_TEXTURE_RESOLUTION, 0, GROUND_TEXTURE_RESOLUTION), wrap(y * GROUND_TEXTURE_RESOLUTION, 0, GROUND_TEXTURE_RESOLUTION))
 	#if (CachedPixels.has(WrapedPos)):
 		#return CachedPixels[WrapedPos] * 10000

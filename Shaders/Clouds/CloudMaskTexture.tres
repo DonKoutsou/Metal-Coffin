@@ -1,6 +1,6 @@
 [gd_resource type="NoiseTexture2D" format=3 uid="uid://bj3kjbbgtmxh8"]
 
-[ext_resource type="Gradient" uid="uid://wj66sajtr3qj" path="res://Scenes/Map/CloudGradient.tres" id="1_yvoto"]
+[ext_resource type="Gradient" uid="uid://bq6yjb35h1he3" path="res://Shaders/Clouds/CloudStartingMenuGradient.tres" id="1_yvoto"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
 noise_type = 3

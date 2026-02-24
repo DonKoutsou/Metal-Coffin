@@ -145,12 +145,12 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0310076, 1.39535, 1.46201, 1.76201, 2.02868, 2.7, 2.76667, 2.9, 2.96667, 3.09535, 4),
+"times": PackedFloat32Array(0, 0.0310076, 1.39535, 1.46201, 1.76201, 2.02868, 2.7, 2.76667, 2.9, 2.96667, 3.09535, 3.8666666),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true, false, true, false, true, false, true, false, true]

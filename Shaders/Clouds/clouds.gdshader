@@ -41,10 +41,10 @@ void fragment() {
     shadow_uv += (screen_uv - 0.5) * shadow_parallax_amount;
     shadow_uv = rotate(shadow_uv - center, rotation_angle) + center;
 
-    float main_noise = texture(noise_texture, shadow_uv).r * 2.0 - 1.0;
+    vec4 main_noise = texture(noise_texture, shadow_uv) * 2.0 - 1.0;
     vec3 normal_noise = texture(noise_texturenormal, shadow_uv).rgb;
-    float main_alpha = clamp(main_noise, 0.0, 1.0) * density;
-    vec4 cloud = vec4(vec3(1.0), main_alpha);
+    float main_alpha = clamp(main_noise.r, 0.0, 1.0) * density;
+    vec4 cloud = vec4(main_noise.rgb, main_alpha);
 
     // === SHADOW (SCREEN SPACE) ===
     vec2 cloud_uv = (UV + motion);

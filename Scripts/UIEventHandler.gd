@@ -93,7 +93,7 @@ func OnElevationEnded(value_changed: float) -> void:
 
 func OnElevationChanged(value: float) -> void:
 	ElevationChanged.emit(value)
-	Shake.emit(value * 1.5)
+	Shake.emit(value)
 #func OnAccelerationForced(NewVal : float) -> void:
 	#AccelerationForced.emit(NewVal)
 

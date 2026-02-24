@@ -35,7 +35,7 @@ func GetMissileAimTrajectory() -> float:
 func EvaluateRadarrPoint() -> void:
 	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]
 	#for g in 2:
-	var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 10.0)
+	var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 5.0)
 	var MaxPoint = Dir * CurrentVisualRange
 	var GlobalPoint = global_position + MaxPoint
 	var EvaluatedPoint = TopographyMap.Instance.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
@@ -45,7 +45,7 @@ func EvaluateRadarrPoint() -> void:
 func UpdateVizRange(rang : float):
 	super(rang)
 	var NewRange = max(rang, 110)
-	RadarCircle = get_circle_points(NewRange, NewRange / 10)
+	RadarCircle = get_circle_points(NewRange, NewRange / 5.0)
 	CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate, 0, RadarCircle.size())
 
 func GetBiggestRadarCicle() -> PackedVector2Array:
@@ -118,7 +118,7 @@ func Update(delta: float) -> void:
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
 
-	
+	EvaluateRadarrPoint()
 	
 	if (Paused):
 		return
@@ -126,7 +126,7 @@ func Update(delta: float) -> void:
 	for g in TrailLines:
 		g.UpdateProjected(delta, Altitude / 10000.0)
 	
-	EvaluateRadarrPoint()
+	
 	EvaluateRadarTargets()
 	if (GetShipSpeed() > 0):
 		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)

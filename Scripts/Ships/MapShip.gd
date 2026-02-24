@@ -180,7 +180,7 @@ func SetCurrentPort(Port : MapSpot):
 	var dr = GetDroneDock().GetDockedShips()
 	for g in dr:
 		g.SetCurrentPort(Port)
-	PortChanged.emit()
+	PortChanged.emit(0)
 		
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360

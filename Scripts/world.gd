@@ -184,7 +184,7 @@ func _physics_process(delta: float) -> void:
 		WeatherManagerUpdate -= CurrentDelta
 		if (WeatherManagerUpdate <= 0):
 			WeatherManagerUpdate = WeatherManagerUpdateRate
-			GetMap().WeatherMan.Update(WeatherManagerUpdateRate)
+			WeatherManage.Instance.Update(WeatherManagerUpdateRate)
 		
 		_Command.Update(CurrentDelta)
 		UpdateCities(CurrentDelta)

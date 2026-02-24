@@ -8,8 +8,6 @@ class_name ShipContoller
 @export_file("*.tscn") var CptSelectSceneFile : String
 @export_file("*.tscn") var DroneSceneFile : String
 
-var ship_camera: ShipCamera
-
 var AvailableShips : Array[PlayerDrivenShip] = []
 
 static var ControlledShip : PlayerDrivenShip
@@ -24,7 +22,7 @@ signal OpenHatchRequested(ControlledShip : PlayerDrivenShip)
 static var Instance : ShipContoller
 
 func _ready() -> void:
-	call_deferred("SetCamera")
+	#call_deferred("SetCamera")
 	
 	Instance = self
 	UIEventH.LandPressed.connect(_on_land_button_pressed)
@@ -51,8 +49,6 @@ func Update() -> void:
 	ControlledShipVisibilityValue = ControlledShip.VisibilityValue
 	ControlledShipStormValue = ControlledShip.StormValue
 
-func SetCamera() -> void:
-	ship_camera = Map.GetInstance().GetCamera()
 
 static func GetInstance() -> ShipContoller:
 	return Instance
@@ -225,7 +221,7 @@ func FrameCamToShip():
 	#var plpos = ControlledShip.global_position
 	#camtw.set_trans(Tween.TRANS_EXPO)
 	#camtw.tween_property(ship_camera, "global_position", plpos, plpos.distance_to(ship_camera.global_position) / 1000)
-	ship_camera.FrameCamToShip(ControlledShip, 1, false)
+	Map.GetInstance().GetCamera().FrameCamToShip(ControlledShip, 1, false)
 	
 func RegroupPressed() -> void:
 	

@@ -64,7 +64,7 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 	
 	Working = FleetHasAerosonar()
 	Controller.ToggleSonarVisual(Working and Enabled)
-	if (!Working):
+	if (!Working and Enabled):
 		PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
 		LineContainer.OffsetAmmount = 0
 	else:

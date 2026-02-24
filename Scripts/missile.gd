@@ -64,7 +64,7 @@ func _ready() -> void:
 	
 func UpdateAltitude(NewAltitude) -> void:
 	Altitude = NewAltitude
-	AltitudeChanged.emit()
+	AltitudeChanged.emit(NewAltitude)
 
 func UpdateShipWindManipulationModifier() -> void:
 	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
@@ -165,6 +165,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if (FoundShips.has(area.get_parent())):
 		FoundShips.erase(area.get_parent())
+		if (area.get_parent() is MapShip):
+			area.get_parent().disconnect("OnShipDestroyed" ,OnShipDest)
+		else : if (area.get_parent() is Missile):
+			area.get_parent().disconnect("OnShipDestroyed" ,OnMissDest)
 		if (FiredBy is PlayerDrivenShip):
 			if (area.get_parent() is HostileShip):
 				area.get_parent().OnShipUnseen(self)
