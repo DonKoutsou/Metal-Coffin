@@ -213,7 +213,7 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 	
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", global_position / 1500)
-	GroundMap.ChangeOffset((global_position / 6000) - Vector2(0.375, 0.375))
+	GroundMap.ChangeOffset((global_position / 6000))
 	WeatherMan.UpdateCameraOffset((global_position / 6000) - Vector2(0.375, 0.375))
 	Grid.UpdateOffset(position)
 	PositionChanged.emit(position)

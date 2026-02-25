@@ -45,9 +45,7 @@ func Update() -> void:
 		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
 	if (SimulationManager.IsPaused()):
 		return
-	ControlledShipPosition = ControlledShip.global_position
-	ControlledShipVisibilityValue = ControlledShip.VisibilityValue
-	ControlledShipStormValue = ControlledShip.StormValue
+	UpdatePlayerInfo()
 
 
 static func GetInstance() -> ShipContoller:
@@ -61,7 +59,7 @@ func InitiateFleetSeparation() -> void:
 	
 func SetInitialShip() -> void:
 	ControlledShip = get_tree().get_nodes_in_group("PlayerShips")[0]
-	
+	ControlledShip.Teleported.connect(UpdatePlayerInfo)
 	InventoryManager.GetInstance().AddCharacter(ControlledShip.Cpt)
 	
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
@@ -77,7 +75,6 @@ func SetInitialShip() -> void:
 	ControlledShip.AForced.connect(OnControlledShipSpeedForced)
 	ControlledShip.AltitudeChanged.connect(OnControlledShipElevationChanged)
 	ControlledShip.TargetAltitudeChanged.connect(OnControlledShipElevationForced)
-	UIEventH.OnShipUpdated(ControlledShip)
 
 	ShipControllerEventH.ShipChanged(ControlledShip)
 
@@ -206,13 +203,20 @@ func OnTargetShipPicked(Target : MapShip) -> void:
 
 func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip.ToggleFuelRangeVisibility(false)
+	ControlledShip.Teleported.disconnect(UpdatePlayerInfo)
+	
 	ControlledShip = NewShip
 	UIEventH.OnShipUpdated(NewShip)
 	NewShip.ToggleFuelRangeVisibility(true)
 	FrameCamToShip()
+	ControlledShip.Teleported.connect(UpdatePlayerInfo)
 	#ShipControllerEventH.ShipChanged(ControlledShip)
 	#ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
-	
+
+func UpdatePlayerInfo() -> void:
+	ControlledShipPosition = ControlledShip.global_position
+	ControlledShipVisibilityValue = ControlledShip.VisibilityValue
+	ControlledShipStormValue = ControlledShip.StormValue
 
 var camtw : Tween
 func FrameCamToShip():

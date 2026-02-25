@@ -117,6 +117,7 @@ func Update(delta: float) -> void:
 	UpdateElint(delta)
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
+	
 
 	EvaluateRadarrPoint()
 	

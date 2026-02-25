@@ -178,44 +178,29 @@ func IntroDeclarationFinished() -> void:
 	call_deferred("RunTurn")
 
 
-func ReplaceShip(Ship : BattleShipStats) -> void:
+func ReplaceShip(Ship : BattleShipStats, TurnPosition : int) -> void:
 	ActionList.RemoveShip(Ship)
 	#Save the ships index in the turns array so that we can add this ship on same position
-	var TurnPosition = ShipTurns.find(Ship)
-	
 	var Position = ShipTurns.find(Ship)
-	
-	ShipTurns.erase(Ship)
 	
 	var NewCombatant : BattleShipStats
 	var Friendly = IsShipFriendly(Ship)
 	
-	if (Friendly):
-		#save index so we can add any replacement on that position
-		#var Index = PlayerCombatants.find(Ship)
-		PlayerCombatants.erase(Ship)
-		PlayerCasualties.append(Ship)
-		if (PlayerReserves.size() > 0):
-			NewCombatant = PlayerReserves.pop_front()
-			PlayerCombatants.append(NewCombatant)
-			PlayerReserves.erase(NewCombatant)
-			
-			ShipTurns.insert(TurnPosition, NewCombatant)
-			#ShipTurns.sort_custom(speed_comparator)
-		#else:
-			#PlayerReserves.insert(Index, null)
-	else:
-		#save index so we can add any replacement on that position
-		#var Index = EnemyCombatants.find(Ship)
-		EnemyCombatants.erase(Ship)
-		EnemyCasualties.append(Ship)
+	if (Friendly and PlayerReserves.size() > 0):
+		NewCombatant = PlayerReserves.pop_front()
+		PlayerCombatants.append(NewCombatant)
+		PlayerReserves.erase(NewCombatant)
 		
-		if (EnemyReserves.size() > 0):
-			NewCombatant = EnemyReserves.pop_front()
-			EnemyCombatants.append(NewCombatant)
-			EnemyReserves.erase(NewCombatant)
-			
-			ShipTurns.insert(TurnPosition, NewCombatant)
+		ShipTurns.insert(TurnPosition, NewCombatant)
+		#ShipTurns.sort_custom(speed_comparator)
+
+	else: if (EnemyReserves.size() > 0):
+		
+		NewCombatant = EnemyReserves.pop_front()
+		EnemyCombatants.append(NewCombatant)
+		EnemyReserves.erase(NewCombatant)
+		
+		ShipTurns.insert(TurnPosition, NewCombatant)
 
 	var NewVisuals 
 	if (NewCombatant != null):
@@ -423,6 +408,8 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	
 	
 func OnCardSelected(C : Card) -> bool:
+	if (GameOver):
+		return false
 	if (SelectingTarget):
 		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return false
@@ -560,17 +547,19 @@ func RemoveCard(C : Card) -> void:
 	
 	C.queue_free()
 
-
+#Function used by enemies to pick moves
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
+	#Add the energy to the current ship
+	#TODO maybe find a better way to use reserves for enemies instead of using them at the start
 	Ship.Energy = TurnEnergy + Ship.EnergyReserves
 	Ship.EnergyReserves = 0
-	
+
 	var EnemyDeck = EnemyDecks[Ship]
-	var TeamSize = EnemyCombatants.size()
-	
+	#Store the fire extinguish to always use it at the end. We want to avoid having enemy extinguish fires and then start them again
 	var FireExtinguishToUse : CardStats
 	
 	var AvailableActions = EnemyDeck.Hand.duplicate()
+	#Print ships actions
 	var Actions = ""
 	for g : CardStats in AvailableActions:
 		Actions += g.GetCardName() + ", "
@@ -613,7 +602,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
 			
-		else: if (Action.UseConditions.has(CardStats.CardUseCondition.NO_SOLO) and TeamSize == 1):
+		else: if (Action.UseConditions.has(CardStats.CardUseCondition.NO_SOLO) and EnemyCombatants.size() == 1):
 			print("{0} cant use {1}, team too small".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
@@ -692,9 +681,12 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		
 	print("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
 	EnemyActionPickedEnded.emit()
-	
+
+
 
 func PlayerActionSelectionEnded() -> void:
+	if (GameOver):
+		return
 	if (SelectingTarget):
 		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return
@@ -766,12 +758,18 @@ func ActionPerformPhase() -> void:
 func StartCurrentShipsPerformTurn() -> void:
 	if (GameOver):
 		return
-		
+	
+	
+	
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = GetCurrentShip()
-		CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
+		if (!IsShipFriendly(Ship)):
+			CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
 
-		PerformActions(Ship)
+			PerformActions(Ship)
+		else:
+			CurrentTurn = CurrentTurn + 1
+			StartCurrentShipsPerformTurn()
 		return
 		
 	CurrentPlayerLabel.visible = false
@@ -891,6 +889,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 			var DamageCallables : Array[Callable]
 			
 			var AtackConnected = false
+			var AtackReduction : float = 1
 			
 			for g in TargetList:
 				
@@ -913,8 +912,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					var CounterMod = Def.OnPerformModule
 					
 					if (CounterMod is DamageReductionCardModule):
-						var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier), Mod.CauseFile, Mod.SkipShield)
-						DamageCallables.append(c)
+						AtackReduction = CounterMod.GetReductionPercent(Def.Tier)
 						for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
 							AnimData.append(await HandleModule(Ship, Def, SDefMod))
 						AtackConnected = true
@@ -929,7 +927,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					for SAtMod in Mod.OnSuccesfullAtackModules:
 						AnimData.append(await HandleModule(Ship, Action, SAtMod, TargetList.keys()))
 						
-					var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier), Mod.CauseFile, Mod.SkipShield)
+					var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier) * AtackReduction, Mod.CauseFile, Mod.SkipShield)
 					DamageCallables.append(c)
 			
 			for SAtMod in Mod.OnAtackModules:
@@ -2312,15 +2310,26 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	if (EnemyCombatants.has(Ship)):
 		FundsToWin += Ship.Funds
 	
-	await ReplaceShip(Ship)
-	#RemoveShip(Ship)
+	var TurnPosition = ShipTurns.find(Ship)
+	ShipTurns.erase(Ship)
+	
+	var Friendly = IsShipFriendly(Ship)
+	
+	if (Friendly):
+		PlayerCombatants.erase(Ship)
+		PlayerCasualties.append(Ship)
+	else:
+		EnemyCombatants.erase(Ship)
+		EnemyCasualties.append(Ship)
 	
 	var EnemiesDead = GetFightingUnitAmmount(EnemyCombatants) == 0 and GetFightingUnitAmmount(EnemyReserves) == 0
 	var PlayerDead = GetFightingUnitAmmount(PlayerCombatants) == 0 and GetFightingUnitAmmount(PlayerReserves) == 0
 	
-	if (EnemiesDead or PlayerDead):
-		
-		GameOver = true
+	GameOver = EnemiesDead or PlayerDead
+
+	await ReplaceShip(Ship, TurnPosition)
+	
+	if (GameOver):
 		await Helper.GetInstance().wait(3)
 		call_deferred("OnFightEnded", EnemiesDead)
 		return true
@@ -2475,6 +2484,9 @@ func NotifyFullHandStage2() -> void:
 
 
 func _on_deck_button_pressed() -> void:
+	if (GameOver):
+		ExternalUI.CardDrawFail()
+		return
 	if (SelectingTarget):
 		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		ExternalUI.CardDrawFail()
@@ -2506,6 +2518,8 @@ func _on_deck_button_pressed() -> void:
 
 
 func _on_pull_reserves_pressed() -> void:
+	if (GameOver):
+		return
 	if (SelectingTarget):
 		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return
@@ -2526,6 +2540,8 @@ func _on_pull_reserves_pressed() -> void:
 	
 
 func _on_switch_ship_pressed() -> void:
+	if (GameOver):
+		return
 	if (SelectingTarget):
 		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
 		return

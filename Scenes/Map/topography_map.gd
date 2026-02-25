@@ -55,15 +55,17 @@ func GetTurbelance(Pos : Vector2) -> float:
 	#print(InLineOfSight)
 
 func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
-	var RoundedPos = Vector2((pos - global_position) + (Offset * 6000))
+	var RoundedPos = Vector2i(pos + Vector2(3000, 3000))
 	
 	var Offsets : PackedVector2Array = [Vector2(-2, 0), Vector2(2, 0), Vector2(0, -2), Vector2(0,2)]
 	var Altitudes : PackedFloat64Array
 	for g in Offsets:
-		var x = Helper.normalize_value(RoundedPos.x, 0, 12000)
-		var y = Helper.normalize_value(RoundedPos.y, 0, 12000)
-		var WrapedPos = Vector2(wrap((x * GROUND_TEXTURE_RESOLUTION) + g.x, 0, GROUND_TEXTURE_RESOLUTION), wrap((y * GROUND_TEXTURE_RESOLUTION) + g.y, 0, GROUND_TEXTURE_RESOLUTION))
-		var Alt = tex.get_pixelv(WrapedPos).r
+		var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 24000), 0, 24000)
+		var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 24000), 0, 24000)
+		var WrapedX = wrap((Normalisedx * GROUND_TEXTURE_RESOLUTION) + g.x, 0, GROUND_TEXTURE_RESOLUTION)
+		var WrapedY = wrap((Normalisedy * GROUND_TEXTURE_RESOLUTION) + g.y, 0, GROUND_TEXTURE_RESOLUTION)
+		var PixelCoords = Vector2i(WrapedX, WrapedY)
+		var Alt = tex.get_pixelv(PixelCoords).r
 		#Bring to -1/1 range
 		var RangedAlt = (Alt - 0.5) * 2.0
 		Altitudes.append(RangedAlt)
@@ -73,15 +75,14 @@ func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	return Grad
 
 func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
-	var RoundedPos = Vector2i((pos - global_position) + (Offset * 6000))
+	var RoundedPos = Vector2i(pos + Vector2(3000, 3000))
+
+	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 24000), 0, 24000)
+	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 24000), 0, 24000)
+
+	var PixelCoords = Vector2i(Normalisedx * GROUND_TEXTURE_RESOLUTION, Normalisedy * GROUND_TEXTURE_RESOLUTION)
 		
-	var x = Helper.normalize_value(RoundedPos.x, 0, 24000)
-	var y = Helper.normalize_value(RoundedPos.y, 0, 24000)
-	var WrapedPos = Vector2i(wrap(x * GROUND_TEXTURE_RESOLUTION, 0, GROUND_TEXTURE_RESOLUTION), wrap(y * GROUND_TEXTURE_RESOLUTION, 0, GROUND_TEXTURE_RESOLUTION))
-	#if (CachedPixels.has(WrapedPos)):
-		#return CachedPixels[WrapedPos] * 10000
-		
-	var Alt = snappedf(tex.get_pixelv(WrapedPos).r, 0.01)
+	var Alt = snappedf(tex.get_pixelv(PixelCoords).r, 0.01)
 	#Bring to -1/1 range
 	var RangedAlt = (Alt - 0.5) * 2.0
 	#CachedPixels[WrapedPos] = Alt

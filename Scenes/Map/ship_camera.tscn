@@ -71,7 +71,6 @@ mouse_filter = 2
 color = Color(0.167403, 0.285599, 0.294053, 1)
 
 [node name="TopographyMap" parent="." unique_id=472618370 instance=ExtResource("16_w5jc1")]
-visible = false
 offset_left = -3000.0
 offset_top = -3000.0
 offset_right = 3000.0
@@ -100,3 +99,6 @@ stream = ExtResource("23_aktxw")
 volume_db = -5.0
 pitch_scale = 1.7
 bus = &"MapSounds"
+
+[node name="Node2D" type="Node2D" parent="." unique_id=2023470538]
+position = Vector2(743, 960)

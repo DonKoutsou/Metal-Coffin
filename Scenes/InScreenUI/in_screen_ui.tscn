@@ -9,7 +9,7 @@
 [ext_resource type="Material" uid="uid://dfyldqd1bqaq3" path="res://Shaders/RainMat.tres" id="6_adjny"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
 [ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
-[ext_resource type="AudioStream" uid="uid://c2m2e867wt7jw" path="res://Assets/Sounds/RainSound.mp3" id="7_j7r7e"]
+[ext_resource type="AudioStream" uid="uid://bwci15q31ick8" path="res://Assets/Sounds/RainSound2.mp3" id="7_u111i"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
 [ext_resource type="PackedScene" uid="uid://cba7o3slmlft0" path="res://Scenes/ScreenUI/AltitudeLevel.tscn" id="9_avpxw"]
 [ext_resource type="Script" uid="uid://r1gk8eplct22" path="res://Scenes/InScreenUI/altitude_text.gd" id="9_u111i"]
@@ -102,8 +102,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="CanvasLayer2" unique_id=1787532556]
-stream = ExtResource("7_j7r7e")
+stream = ExtResource("7_u111i")
+volume_db = -80.0
 autoplay = true
+bus = &"MapSounds"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=384141535]
 anchors_preset = 15

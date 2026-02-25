@@ -49,6 +49,7 @@ signal AltitudeChanged(NewAlt : float)
 signal TargetAltitudeChanged(NewAlt : float)
 signal AChanged(NewAccel : float)
 signal AForced(NewAccel : float)
+signal Teleported
 
 #var IsLanded : bool = false
 #var Landing : bool = false
@@ -318,7 +319,7 @@ func SetShipPosition(pos : Vector2) -> void:
 	global_position = pos
 	for g in TrailLines:
 		g.Init()
-
+	Teleported.emit()
 #///////////////////////////////////////////////////
 #██████   █████  ███    ███  █████   ██████  ██ ███    ██  ██████  
 #██   ██ ██   ██ ████  ████ ██   ██ ██       ██ ████   ██ ██       

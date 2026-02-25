@@ -42,7 +42,7 @@ void fragment() {
 
 	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
 	vec3 n = texture(NoiseTexture3, uvnoise).rgb;
-	texNormal1 /= vec3(1, 1, n.b * 10.0);
+	//texNormal1 /= vec3(1, 1, n.b * 10.0);
 	vec3 texNormal2 = texture(GroundNormal2Texture, uv2).rgb;
 	vec3 texNormal3 = texture(GroundNormal3Texture, uv2).rgb;
 	//texNormal1.b = clamp(texNormal1.b + patternNoise, 0, 1);
@@ -54,7 +54,7 @@ void fragment() {
 	vec3 finNorm = mix(texNormal1, texNormal2, patternNoise.g);
 	finNorm = mix(finNorm, texNormal3, patternNoise.b);
 	
-    COLOR = fincol;
+    COLOR.rgb = mix(fincol.rgb, fincol.rgb * n, 0.7);
 	COLOR.rgb *= Light;
 	//COLOR = t;
 	NORMAL_MAP = finNorm;
