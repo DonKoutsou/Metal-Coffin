@@ -292,6 +292,7 @@ layout_mode = 2
 text = "Cancel"
 
 [node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" unique_id=647099741 node_paths=PackedStringArray("Title", "CardContainer")]
+visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 8

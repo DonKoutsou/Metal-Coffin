@@ -329,13 +329,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_p5w00")
 
-[node name="ShipDeck" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer" unique_id=774086024 node_paths=PackedStringArray("CardPosition")]
+[node name="ShipDeck" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer" unique_id=774086024 node_paths=PackedStringArray("OffensiveCardPosition", "DeffencsiveCardPosition", "UtilityCardPosition")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_72sdo")
 CardScene = ExtResource("4_ngrgh")
-CardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer")
+OffensiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer/HFlowContainer")
+DeffencsiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer/HFlowContainer2")
+UtilityCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer/HFlowContainer3")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck" unique_id=1898938744]
 layout_mode = 2
@@ -357,14 +359,63 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=494256797]
+[node name="HFlowContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=973824606]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/h_separation = -50
-theme_override_constants/v_separation = -151
 alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer/HFlowContainer" unique_id=1369168320]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "offensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer/HFlowContainer" unique_id=1683967609]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -45
+theme_override_constants/v_separation = -166
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer/HFlowContainer" unique_id=198926862]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "deffensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer/HFlowContainer" unique_id=2424754]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -45
+theme_override_constants/v_separation = -166
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer/HFlowContainer" unique_id=1704007078]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "utility"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer3" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer/HFlowContainer" unique_id=509326739]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -45
+theme_override_constants/v_separation = -166
+alignment = 1
+last_wrap_alignment = 1
 
 [node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=951361398]
 custom_minimum_size = Vector2(0, 20)

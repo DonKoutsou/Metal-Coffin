@@ -173,7 +173,7 @@ func IntroDeclarationFinished() -> void:
 	ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
-		await ActionTracker.GetInstance().QueueTutorial("Dog Fight", "Close quarters combat is conducted in two distinct phases: the [color=#ffc315]Action Picking Phase[/color] and the [color=#ffc315]Action Performing Phase[/color]. Each ship has their [color=#ffc315]deck[/color] composed out of the parts that exist on the ship. At any given time, a maximum of three ships from each side can engage in combat.\n\nWhen a ship is destroyed, it is immediately replaced by another from the fleet. [color=#ffc315]Victory[/color] is achieved when one side eliminates all enemy ships.\n\nHave faith in your crew captains and good luck!", [])
+		ActionTracker.GetInstance().QueueTutorial("Dog Fight", "Close quarters combat is conducted in two distinct phases: the [color=#ffc315]Action Picking Phase[/color] and the [color=#ffc315]Action Performing Phase[/color]. Each ship has their [color=#ffc315]deck[/color] composed out of the parts that exist on the ship. At any given time, a maximum of three ships from each side can engage in combat.\n\nWhen a ship is destroyed, it is immediately replaced by another from the fleet. [color=#ffc315]Victory[/color] is achieved when one side eliminates all enemy ships.\n\nHave faith in your crew captains and good luck!", [])
 	
 	call_deferred("RunTurn")
 
@@ -184,8 +184,7 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 	var TurnPosition = ShipTurns.find(Ship)
 	
 	var Position = ShipTurns.find(Ship)
-	if (CurrentTurn > Position):
-		CurrentTurn -= 1
+	
 	ShipTurns.erase(Ship)
 	
 	var NewCombatant : BattleShipStats
@@ -222,6 +221,8 @@ func ReplaceShip(Ship : BattleShipStats) -> void:
 	if (NewCombatant != null):
 		NewVisuals = CreateShipVisuals(NewCombatant, Friendly)
 		NewVisuals.visible = false
+	else: if (CurrentTurn > Position):
+		CurrentTurn -= 1
 	#Play the dead animation on the ShipViz
 	
 	var Viz = Ship.ShipViz
@@ -361,7 +362,7 @@ func PickPhaseStart() -> void:
 	
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
-		await ActionTracker.GetInstance().QueueTutorial("Action Picking Phase", "During the Action Picking Phase, each ship selects its moves for the upcoming Action Performing Phase. Ships with higher speed have the advantage of choosing and executing their moves first.\nRemember that every offensive action has a corresponding defensive option, so it’s crucial to protect your ship while maintaining a strong offensive stance.", [])
+		ActionTracker.GetInstance().QueueTutorial("Action Picking Phase", "During the Action Picking Phase, each ship selects its moves for the upcoming Action Performing Phase. Ships with higher speed have the advantage of choosing and executing their moves first.\nRemember that every offensive action has a corresponding defensive option, so it’s crucial to protect your ship while maintaining a strong offensive stance.", [])
 
 	CurrentPlayerLabel.visible = true
 	
@@ -391,7 +392,7 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	viz.Enable()
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
-		await ActionTracker.GetInstance().QueueTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [viz],)
+		ActionTracker.GetInstance().QueueTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [viz],)
 	
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):
@@ -402,11 +403,11 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		#ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
-			await ActionTracker.GetInstance().QueueTutorial("Energy", "Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
+			ActionTracker.GetInstance().QueueTutorial("Energy", "Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
 
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
-			await ActionTracker.GetInstance().QueueTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [Map.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR])
+			ActionTracker.GetInstance().QueueTutorial("Energy Reserves", "Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.", [Map.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR])
 		
 		RestartCards()
 		
@@ -417,12 +418,10 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 			EnemyActionPickedEnded.emit()
 			return
 		EnemyPickingMove = true
-		await HandleDrawCardEnemy(Ship)
+		HandleDrawCardEnemy(Ship)
 		EnemyActionSelection(Ship)
 	
 	
-
-
 func OnCardSelected(C : Card) -> bool:
 	if (SelectingTarget):
 		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
@@ -581,7 +580,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		if (Acts.size() == 0 and Ship.Energy > 0 and EnemyDeck.Hand.size() < MaxCardsInHand):
 			print("{0} draws a card".format([Ship.Name]))
 			Ship.Energy -= 1
-			await HandleDrawCardEnemy(Ship)
+			HandleDrawCardEnemy(Ship)
 			Acts.clear()
 			return EnemyDeck.Hand.duplicate()
 		return Acts
@@ -779,41 +778,38 @@ func StartCurrentShipsPerformTurn() -> void:
 	
 	CurrentTurn = 0
 	
-	await DoCurrentShipFireDamage()
+	DoShipFireDamage()
 
 
-func DoCurrentShipFireDamage() -> void:
-	if (CurrentTurn < ShipTurns.size()):
-		var CurrentShip = GetCurrentShip()
-
-		var viz = CurrentShip.ShipViz
-		if (CurrentShip.IsOnFire):
+func DoShipFireDamage() -> void:
+	#Itterate through all ships
+	for Ship in ShipTurns:
+		var viz = Ship.ShipViz
+		#If ship is on file do damage
+		if (Ship.IsOnFire):
 			
+			#Do damage floater
 			var d = DamageFloater.instantiate() as Floater
-			if (CurrentShip.IsSeverelyBurnt()):
+			if (Ship.IsSeverelyBurnt()):
 				d.text = "Severe\nFire Damage"
 			else:
 				d.text = "Fire Damage"
 			d.modulate = Color(1,0,0,1)
 			viz.add_child(d)
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
-			d.Ended.connect(DoCurrentShipFireDamage)
-			var GameEnded = await DamageShip(CurrentShip, CurrentShip.GetFireDamage(), false, true)
 			
-			CurrentShip.TurnsOnFire += 1
+			#Make sure that the game is not over, if it is, break out of the loop
+			if (await DamageShip(Ship, Ship.GetFireDamage(), false, true)):
+				break
 			
-			if (GameEnded):
-				return
+			#Wait for damage floaer if not finished
+			if (d != null):
+				await d.Ended
 			
-			CurrentTurn = CurrentTurn + 1
+			#Store this turn's fire damage
+			Ship.TurnsOnFire += 1
 
-			return
-		
-		else:
-			CurrentTurn = CurrentTurn + 1
-			await DoCurrentShipFireDamage()
-	else:
-		FireDamageFinished()
+	FireDamageFinished()
 
 
 func FireDamageFinished() -> void:

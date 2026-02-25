@@ -51,6 +51,11 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.719685, 1)
 colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.313, 0.313, 0.313, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t54ed"]
+bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
+anti_aliasing = false
+
 [node name="StartingMenu" type="CanvasLayer" unique_id=2007448128 node_paths=PackedStringArray("Black", "LoadPrologueLight", "LoadLight", "HintDialogue", "Credits", "NormalUI", "VersionLabel")]
 process_mode = 3
 layer = 0
@@ -285,6 +290,14 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PanelContainer3" type="PanelContainer" parent="SubViewportContainer/SubViewport" unique_id=1403655150]
+custom_minimum_size = Vector2(0, 40)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t54ed")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport" unique_id=1434908220]
 color = Color(0, 0, 0, 1)
 
@@ -418,9 +431,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -107.0
-offset_top = 24.0
+offset_top = 18.0
 offset_right = 107.0
-offset_bottom = 45.0
+offset_bottom = 39.0
 grow_horizontal = 2
 text = "Demo Version 0.61"
 horizontal_alignment = 1
@@ -742,6 +755,7 @@ offset = Vector2(0, 1000)
 texture_scale = 7.0
 
 [node name="Black" type="ColorRect" parent="." unique_id=1362917256]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
