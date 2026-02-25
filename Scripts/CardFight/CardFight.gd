@@ -494,7 +494,9 @@ func OnCardSelected(C : Card) -> bool:
 	await HandleModulesPl(Ship, C.CStats)
 	
 	PlayerPerformingMove = false
-
+	if (deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
+		PlayerActionSelectionEnded()
+	
 	return true
 
 
@@ -2306,14 +2308,15 @@ func DeBuffShipDefence(Ship : BattleShipStats, Amm : float, Turns : int = 2) -> 
 
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
-	
+	var Friendly = IsShipFriendly(Ship)
+		
 	if (EnemyCombatants.has(Ship)):
 		FundsToWin += Ship.Funds
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	ShipTurns.erase(Ship)
 	
-	var Friendly = IsShipFriendly(Ship)
+	
 	
 	if (Friendly):
 		PlayerCombatants.erase(Ship)
@@ -2322,16 +2325,16 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 		EnemyCombatants.erase(Ship)
 		EnemyCasualties.append(Ship)
 	
-	var EnemiesDead = GetFightingUnitAmmount(EnemyCombatants) == 0 and GetFightingUnitAmmount(EnemyReserves) == 0
-	var PlayerDead = GetFightingUnitAmmount(PlayerCombatants) == 0 and GetFightingUnitAmmount(PlayerReserves) == 0
+	var EnemiesAlive = GetFightingUnitAmmount(EnemyCombatants) > 0 or GetFightingUnitAmmount(EnemyReserves) > 0
+	var PlayerAlive = GetFightingUnitAmmount(PlayerCombatants) > 0 or GetFightingUnitAmmount(PlayerReserves) > 0
 	
-	GameOver = EnemiesDead or PlayerDead
-
+	GameOver = !EnemiesAlive or !PlayerAlive
+	
 	await ReplaceShip(Ship, TurnPosition)
 	
 	if (GameOver):
 		await Helper.GetInstance().wait(3)
-		call_deferred("OnFightEnded", EnemiesDead)
+		call_deferred("OnFightEnded", PlayerAlive)
 		return true
 		
 	return false

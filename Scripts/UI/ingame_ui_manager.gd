@@ -115,7 +115,7 @@ func Pause() -> void:
 	else:
 		var PauseMenuScene = ResourceLoader.load(PauseMenuSceneFile)
 		PauseContainer = PauseMenuScene.instantiate()
-		add_child(PauseContainer)
+		UnderstatUI.add_child(PauseContainer)
 
 
 func On_Game_Lost_Button_Pressed() -> void:

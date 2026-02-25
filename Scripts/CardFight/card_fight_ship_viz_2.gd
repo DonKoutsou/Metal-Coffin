@@ -84,6 +84,8 @@ func Destroy() -> void:
 	
 	
 	EnableSmoke()
+	if (ModulateTween != null):
+		ModulateTween.kill()
 	$HBoxContainer/VBoxContainer/PanelContainer2.queue_free()
 	
 	await MoveTw.finished

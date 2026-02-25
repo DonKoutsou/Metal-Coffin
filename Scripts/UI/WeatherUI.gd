@@ -22,9 +22,9 @@ var d = 0.2
 func _physics_process(delta: float) -> void:
 	var WindAngle = WeatherManage.WindDirection.angle()
 	var wd = Helper.AngleToDirectionShort(WindAngle)
-	#var ws = roundi(TopographyMap.Instance.GetWindAtPos(CurrentShip.global_position, CurrentShip.Altitude))
+	var ws = roundi(TopographyMap.Instance.GetWindAtPos(CurrentShip.global_position, CurrentShip.Altitude))
 	#var ws = roundi(WeatherManage.WindSpeed * CurrentShip.WindEffect)
-	#WindText.text = "Wind Dir = {0}\n SPD : {1}km/h".format([wd, ws])
+	WindText.text = "Wind Dir = {0}\nSPD : {1}km/h".format([wd, ws])
 	WindDirArrow.rotation = WindAngle
 	var vis = ShipContoller.ControlledShipVisibilityValue
 	VizText.text = "Visibility = {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])

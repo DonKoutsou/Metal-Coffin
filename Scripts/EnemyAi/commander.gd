@@ -101,9 +101,10 @@ func ProcessLODList() -> void:
  #██████  ██   ██ ██████  ███████ ██   ██     ██      ██ ██   ██ ██   ████ ██   ██  ██████  ███████ ██      ██ ███████ ██   ████    ██    
 
 func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
-	var Armament = GetCheapestArmamentForDistance(Ship.global_position.distance_squared_to(Target.global_position))
-	Ship.Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, Armaments[Armament])
-	Ship.LaunchMissile(Armament, Target.global_position)
+	var ArmamentsToUse : Array[MissileItem]
+	ArmamentsToUse.append(GetCheapestArmamentForDistance(Ship.global_position.distance_squared_to(Target.global_position))) 
+	Ship.Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, Armaments[ArmamentsToUse[0]])
+	Ship.LaunchMissile(ArmamentsToUse, Target.global_position)
 	
 func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
 	Ship.SetPursuitTarget(Target)

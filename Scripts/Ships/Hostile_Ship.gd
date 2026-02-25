@@ -169,8 +169,8 @@ func _Update(delta: float) -> void:
 func DoAlarmVisual() -> void:
 	Alarmed.emit()
 
-func LaunchMissile(Mis : MissileItem, Pos : Vector2) -> void:
-	var MissileScene : PackedScene = ResourceLoader.load(Mis.MissileFile)
+func LaunchMissile(Mis : Array[MissileItem], Pos : Vector2) -> void:
+	var MissileScene : PackedScene = ResourceLoader.load(Mis[0].MissileFile)
 	var missile = MissileScene.instantiate() as Missile
 	missile.FiredBy = self
 	missile.SetData(Mis)

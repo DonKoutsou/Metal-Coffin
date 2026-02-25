@@ -49,8 +49,9 @@ func GetCharacterByName(CharName : String) -> Captain:
 			return g
 	return null
 	
-func OnMissileLaunched(Mis : MissileItem, Target : Captain, _User : Captain):
-	RemoveItemFromFleet(Mis, _User.CaptainShip)
+func OnMissileLaunched(Mis : Array[MissileItem], Target : Captain, _User : Captain):
+	for g in Mis:
+		RemoveItemFromFleet(g, _User.CaptainShip)
 	#var CharacterInv = _CharacterInventories[Target] as CharacterInventory
 	#CharacterInv.RemoveItem(Mis)
 

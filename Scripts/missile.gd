@@ -7,6 +7,7 @@ var MissileName : String
 var Distance : int = 1500
 @export var Speed : float = 1
 var Damage : float = 20
+var Amm : int
 @export var MissileLaunchSound : AudioStream
 @export var C : CardStats
 @export var MissileVisual : Node2D
@@ -24,17 +25,20 @@ var WindEffect : float
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
 
+var CurrentLandAltitude : float
+
 signal ShipMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[BattleShipStats])
 signal OnShipDestroyed(Mis : Missile)
 signal AltitudeChanged()
 
 var activationdistance : float = 0
 
-func SetData(Dat : MissileItem) -> void:
-	Speed = Dat.Speed
-	MissileName = Dat.ItemName
-	Damage = Dat.Damage
-	Distance = Dat.Distance
+func SetData(Dat :Array[MissileItem]) -> void:
+	Speed = Dat[0].Speed
+	MissileName = Dat[0].ItemName
+	Damage = Dat[0].Damage
+	Distance = Dat[0].Distance
+	Amm = Dat.size()
 	
 func TogglePause(t : bool):
 	Paused = t
@@ -80,14 +84,32 @@ func _physics_process(delta: float) -> void:
 	
 	var SimulatedDelta = delta * SimulationManager.SimSpeed()
 	
-	var IncommingCollision = TopographyMap.Instance.GetCollisionPoint3(global_position, Altitude, CollisionDetector.global_position, Altitude)
+	var CurrentTarget : Node2D
+	for g in FoundShips:
+		if (g != null):
+			CurrentTarget = g
+			break
+	
+	CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)
+	
+	var IncommingCollision : Vector3
+	var Collided : bool = false
+	if (CurrentTarget != null):
+		IncommingCollision = TopographyMap.Instance.GetCollisionPoint3(global_position, Altitude, CurrentTarget.global_position, CurrentTarget.Altitude)
+		Collided = Vector2(IncommingCollision.x, IncommingCollision.y) != CurrentTarget.global_position
+	else:
+		IncommingCollision = TopographyMap.Instance.GetCollisionPoint3(global_position, Altitude, CollisionDetector.global_position, Altitude)
+		Collided = Vector2(IncommingCollision.x, IncommingCollision.y) != CollisionDetector.global_position
 	
 	if (Vector2(IncommingCollision.x, IncommingCollision.y) == global_position):
 		Kill()
-	else: if (Vector2(IncommingCollision.x, IncommingCollision.y) != CollisionDetector.global_position):
-		var NewAlt = IncommingCollision.z + 200
+	else: if (Collided):
+		var NewAlt = max(IncommingCollision.z + 100, CurrentLandAltitude + 100)
 		if (NewAlt > TargetAltitude):
 			TargetAltitude = NewAlt
+	else:
+		if (CurrentLandAltitude + 100 > TargetAltitude):
+			TargetAltitude = CurrentLandAltitude + 100
 	
 	if (Altitude != TargetAltitude):
 		UpdateAltitude(move_toward(Altitude, TargetAltitude, AltitudeChangeSpeed * SimulatedDelta))
@@ -115,8 +137,8 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if (FoundShips.size() > 0):
-		HoneAtEnemy()
+	if (CurrentTarget != null):
+		HoneAtEnemy(CurrentTarget)
 	
 func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
 	var Body : Node2D
@@ -213,7 +235,9 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		HostileSquad = Squad
 	else:
 		PlSquad = Squad
-	var Mis : Array[BattleShipStats] = [GetBattleStats()]
+	var Mis : Array[BattleShipStats]
+	for g in Amm:
+		Mis.append(GetBattleStats())
 	ShipMet.emit(PlSquad, HostileSquad, Mis)
 	
 	#area.get_parent().Damage(Damage)
@@ -229,17 +253,13 @@ func _on_missile_body_area_exited(area: Area2D) -> void:
 func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 
-func HoneAtEnemy():
-	var Ship
-	for g in FoundShips:
-		if (g != null):
-			Ship = g
-			break
+func HoneAtEnemy(Ship : Node2D):
+	
 	# Get the current position and velocity of the ship
 	var ship_position = Ship.global_position
 	var ship_velocity = Ship.GetShipSpeedVec()
 	TargetAltitude = Ship.Altitude + 100
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+	#var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
 	# Predict where the ship will be in a future time `t`
 	var time_to_interception = (global_position.distance_to(ship_position) / GetAffectedSpeed()) / 60
 

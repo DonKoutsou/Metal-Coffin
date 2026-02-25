@@ -68,7 +68,7 @@ offset_bottom = 15000.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.167403, 0.285599, 0.294053, 1)
+color = Color(0.16862746, 0.28627452, 0.29411766, 1)
 
 [node name="TopographyMap" parent="." unique_id=472618370 instance=ExtResource("16_w5jc1")]
 offset_left = -3000.0

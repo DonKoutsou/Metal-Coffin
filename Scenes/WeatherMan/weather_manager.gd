@@ -124,13 +124,14 @@ static func GetLightAmm() -> float:
 	return LighAmm.sample(t)
 
 func get_color_at_global_position(pos: Vector2) -> Color:
-	var RoundedPos = Vector2i((pos - global_position) + ((CurrentCamOffset) * 6000))
+	var RoundedPos = Vector2i(pos + (size / 2))
 
-	var x = Helper.normalize_value(RoundedPos.x, 0, 48000)
-	var y = Helper.normalize_value(RoundedPos.y, 0, 48000)
-	var WrapedPos = Vector2i(wrap(x * TEXTURE_SIZE, 0, TEXTURE_SIZE), wrap(y * TEXTURE_SIZE, 0, TEXTURE_SIZE))
+	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 48000), 0, 48000)
+	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 48000), 0, 48000)
+	
+	var PixelCoords = Vector2i(Normalisedx * TEXTURE_SIZE, Normalisedy * TEXTURE_SIZE)
 		
-	var col = tx.get_pixel(WrapedPos.x, WrapedPos.y)
+	var col = tx.get_pixelv(PixelCoords)
 	
 	return col
 

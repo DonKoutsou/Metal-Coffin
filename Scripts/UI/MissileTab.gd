@@ -1,7 +1,7 @@
 extends Control
 class_name MissileTab
 
-var Armed = false
+
 @export var MissileDockEventH : MissileDockEventHandler
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var DockEventH : DroneDockEventHandler
@@ -27,7 +27,9 @@ var ConnectedShip : PlayerDrivenShip
 var AvailableMissiles : Array[MissileItem]
 
 var Showing = false
-
+var Armed = false
+var AmmountArmed = false
+var Ammount : int = 0
 
 
 func _ready() -> void:
@@ -151,8 +153,16 @@ func OnLaunchPressed() -> void:
 	if (!Armed):
 		PopUpManager.GetInstance().DoFadeNotif("No missile is Armed. Launch canceled.")
 		return
+	if (!AmmountArmed):
+		PopUpManager.GetInstance().DoFadeNotif("Missile Ammount hasn't been chosen.")
+		return
 	PopUpManager.GetInstance().DoFadeNotif("{0} Launched".format([CurrentlySelectedMissile.ItemName]))
-	MissileDockEventH.OnMissileLaunched(CurrentlySelectedMissile, ConnectedShip.Cpt,ConnectedShip.Cpt)
+	
+	var MissilesToLaunch : Array[MissileItem]
+	for g in Ammount:
+		MissilesToLaunch.append(CurrentlySelectedMissile)
+		
+	MissileDockEventH.OnMissileLaunched(MissilesToLaunch, ConnectedShip.Cpt,ConnectedShip.Cpt)
 	AchievementManager.GetInstance().UlockAchievement("MC_MISSILEFIRE")
 	MissileLaunched.emit()
 	DissarmMiss()
@@ -165,15 +175,23 @@ func OnArmPressed() -> void:
 		DissarmMiss()
 		return
 	if (Armed):
-		PopUpManager.GetInstance().DoFadeNotif("A missile is already armed")
+		AmmountArmed = true
+		PopUpManager.GetInstance().DoFadeNotif("Ammount Picked")
+		MissileSelectLight.Toggle(false, false)
+		AngleSelectLight.Toggle(true, true)
+		MissileDockEventH.MissileArmed(CurrentlySelectedMissile, ConnectedShip.Cpt)
 		return
-
+	if (AmmountArmed):
+		PopUpManager.GetInstance().DoFadeNotif("A missile is already armed")
+		return 
+		
 	Armed = true
-	MissileSelectLight.Toggle(false, false)
-	AngleSelectLight.Toggle(true, true)
+	Ammount = 1
+	RangeText.text = "Ammount : " + var_to_str(Ammount)
+	
 	PopUpManager.GetInstance().DoFadeNotif("{0} Armed".format([CurrentlySelectedMissile.ItemName]))
 
-	MissileDockEventH.MissileArmed(CurrentlySelectedMissile, ConnectedShip.Cpt)
+	
 
 
 func OnDissarmPressed() -> void:
@@ -185,6 +203,7 @@ func OnDissarmPressed() -> void:
 
 func DissarmMiss() -> void:
 	Armed = false
+	AmmountArmed = false
 	MissileSelectLight.Toggle(true, true)
 	AngleSelectLight.Toggle(false, false)
 	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
@@ -194,7 +213,8 @@ var SteeringDir : float = 0.0
 func UpdateSteer(RelativeRot : float):
 	if (!Showing):
 		return
-	if (Armed):
+	
+	if (Armed and AmmountArmed):
 		SteeringDir = RelativeRot
 		MissileDockEventH.MissileDirectionChanged(SteeringDir / 50, ConnectedShip.Cpt)
 
@@ -203,6 +223,12 @@ func UpdateSelected(Dir : bool) -> void:
 		return
 	if (!Armed):
 		ProgressMissileSelect(Dir)
+	else: if (!AmmountArmed):
+		if (!Dir):
+			Ammount = min(Ammount + 1, AvailableMissiles.count(CurrentlySelectedMissile))
+		else:
+			Ammount = max(Ammount - 1, 1)
+		RangeText.text = "Ammount : " + var_to_str(Ammount)
 
 func UpdateMissileSelect(Select : int = 0):
 	if (AvailableMissiles.size() > Select):

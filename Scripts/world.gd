@@ -372,7 +372,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 func StartMissileFight() -> void:
 	pass
 
-func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
+func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 	var AllUnits : Array[MapShip]
 	AllUnits.append_array(FighingFriendlyUnits)
 	AllUnits.append_array(FighingEnemyUnits)
@@ -395,9 +395,10 @@ func CardFightEnded(Survivors : Array[BattleShipStats], _won : bool) -> void:
 			if (Unit is HostileShip):
 				Unit.DestroyEnemyDebry()
 				WonFunds += Unit.Cpt.ProvidingFunds
-	if (WonFunds > 0):
-		PlayerWallet.AddFunds(WonFunds)
-		PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([WonFunds]))
+	if (won):
+		if (WonFunds > 0):
+			PlayerWallet.AddFunds(WonFunds)
+			PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([WonFunds]))
 	GetMap().HideWorld(true)
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()

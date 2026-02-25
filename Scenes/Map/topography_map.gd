@@ -75,14 +75,14 @@ func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	return Grad
 
 func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
-	var RoundedPos = Vector2i(pos + Vector2(3000, 3000))
+	var RoundedPos = Vector2i(pos + (size / 2))
 
 	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 24000), 0, 24000)
 	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 24000), 0, 24000)
 
 	var PixelCoords = Vector2i(Normalisedx * GROUND_TEXTURE_RESOLUTION, Normalisedy * GROUND_TEXTURE_RESOLUTION)
 		
-	var Alt = snappedf(tex.get_pixelv(PixelCoords).r, 0.01)
+	var Alt = tex.get_pixelv(PixelCoords).r
 	#Bring to -1/1 range
 	var RangedAlt = (Alt - 0.5) * 2.0
 	#CachedPixels[WrapedPos] = Alt
@@ -96,7 +96,7 @@ func WithinLineOfSight(
 	) -> bool:
 	#queue_redraw()
 	#DrawPos.clear()
-	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 40)
+	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 20)
 	var HeightDif : float = ship_height - radar_height
 	#print(samples)
 	for i in range(samples + 1):
@@ -116,7 +116,7 @@ func GetCollisionPoint(radar_pos: Vector2,       # Global position
 	) -> Vector2:
 	#queue_redraw()
 	#DrawPos.clear()
-	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 40)
+	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 20)
 	var HeightDif : float = ship_height - radar_height
 	#print(samples)
 	for i in range(samples + 1):
@@ -136,7 +136,7 @@ func IncommingCollision(radar_pos: Vector2,       # Global position
 	) -> bool:
 	#queue_redraw()
 	#DrawPos.clear()
-	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 40)
+	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 20)
 	var HeightDif : float = ship_height - radar_height
 	#print(samples)
 	for i in range(samples + 1):
@@ -156,7 +156,7 @@ func GetCollisionPoint3(radar_pos: Vector2,       # Global position
 	) -> Vector3:
 	#queue_redraw()
 	#DrawPos.clear()
-	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 40)
+	var samples : int = roundi(Vector2(radar_pos.x, radar_pos.y).distance_to(Vector2(ship_pos.x, ship_pos.y)) / 20)
 	var HeightDif : float = ship_height - radar_height
 	#print(samples)
 	for i in range(samples + 1):

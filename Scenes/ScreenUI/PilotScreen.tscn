@@ -666,19 +666,13 @@ scale = Vector2(0.8, 0.8)
 frame = 4
 frame_progress = 0.3159618
 
-[node name="AltitudeDial" parent="." unique_id=958549846 instance=ExtResource("26_ecvfe")]
-position = Vector2(983.99994, 350.99997)
-rotation = 1.5707964
-scale = Vector2(0.8, 0.8)
-frame_progress = 0.29425934
-
 [node name="YDial" parent="." unique_id=1133286453 instance=ExtResource("26_ecvfe")]
-position = Vector2(752.00006, 688)
-rotation = -3.1415927
+position = Vector2(976, 348.00003)
+rotation = -1.5707964
 scale = Vector2(0.8, 0.8)
 
 [node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
-position = Vector2(528.00006, 688)
+position = Vector2(640, 688)
 rotation = -3.1415927
 scale = Vector2(0.8, 0.8)
 
@@ -711,6 +705,5 @@ scale = Vector2(0.8, 0.8)
 [connection signal="AccelerationChanged" from="ThrustSlider2" to="." method="Elevation_Changed"]
 [connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
 [connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]
-[connection signal="RangeChanged" from="AltitudeDial" to="." method="_on_altitude_dial_range_changed"]
 [connection signal="RangeChanged" from="YDial" to="." method="_on_y_dial_range_changed"]
 [connection signal="RangeChanged" from="XDial" to="." method="_on_x_dial_range_changed"]
