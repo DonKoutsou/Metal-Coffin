@@ -24,4 +24,4 @@ TopographyDataNoise = ExtResource("5_xqntd")
 WeatherDataNoise = ExtResource("6_0m7in")
 WeatherDataNoiseSize = 256
 WeatherVisualNoise = ExtResource("7_duapv")
-WeatherVisualNoiseSize = 256
+WeatherVisualNoiseSize = 512

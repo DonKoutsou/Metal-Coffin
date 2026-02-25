@@ -136,7 +136,7 @@ var WeatherTween : Tween
 var GridTween : Tween
 
 func _UpdateMapGridVisibility():
-	if (zoom.x < 1.5 and !GridShowing):
+	if (zoom.x < 0.5 and !GridShowing):
 		if (is_instance_valid(MapGridTween)):
 			MapGridTween.kill()
 		if (is_instance_valid(WeatherTween)):
@@ -160,7 +160,7 @@ func _UpdateMapGridVisibility():
 		
 		GridShowing = true
 	
-	else: if (zoom.x >= 1.5):
+	else: if (zoom.x >= 0.5):
 		C.visible = true
 		var cloudv = clamp(zoom.x -2, 0, 5) / 5
 		CloudMat.set_shader_parameter("Alpha", 1 - cloudv)

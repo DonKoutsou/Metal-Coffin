@@ -5,11 +5,11 @@ class_name WeatherManage
 @export var EventHandler : UIEventHandler
 @export var WindChangeMinimumTime_Minutes : float = 20.0
 #@export var N : Image
-#@export_file(".tres") var NoiseFile : String
+@export_file(".tres") var NoiseFile : String
 
-@export var G : Gradient
-@export var tx : Image
-#var N : NoiseTexture2D
+#@export var G : Gradient
+var tx : Image
+var N : NoiseTexture2D
 
 const TEXTURE_SIZE : int = 256
 
@@ -49,20 +49,20 @@ func _ready() -> void:
 	WindDirectionOffset = 1
 	
 	#Prepare noise
-	#N = ResourceLoader.load(NoiseFile)
+	N = ResourceLoader.load(NoiseFile)
 
-	CurrentOffset = Vector2(randf_range(-10000, 10000), randf_range(-10000, 10000))
-	#N.noise.offset = Vector3(randf_range(-10000, 10000), randf_range(-10000, 10000), 0)
+	#CurrentOffset = Vector2(randf_range(-10000, 10000), randf_range(-10000, 10000))
+	N.noise.offset = Vector3(randf_range(-10000, 10000), randf_range(-10000, 10000), 0)
 	
-	Mat.set_shader_parameter("offset", CurrentOffset)
+	#Mat.set_shader_parameter("offset", CurrentOffset)
+	tx = N.get_image()
+	N.changed.connect(NoiseChanged)
+	
 	#tx = N.get_image()
-	#N.changed.connect(NoiseChanged)
-	
-	#tx = N.get_image()
 	
 	
 	
-	#await N.changed
+	await N.changed
 	#Update(0)
 
 func UpdateCameraOffset(CamOffset : Vector2) -> void:
@@ -88,11 +88,11 @@ func Update(delta: float) -> void:
 	WindSpeed = clamp(WindSpeed + randf_range(-0.2, 0.2), 0, MAX_WIND_SPEED)
 	
 	#Update noise
-	CurrentOffset -= Vector2(WindDirection.x, WindDirection.y) * (delta * 0.01) * (WindSpeed * 0.005)
-	Mat.set_shader_parameter("offset", CurrentOffset + CurrentCamOffset)
-	#N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * delta * (WindSpeed * 0.005)
-	#N.noise.fractal_gain = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * (delta * 0.1), -10, 10)
-	#N.noise.fractal_lacunarity = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * (delta * 0.1), 2, 4)
+	#CurrentOffset -= Vector2(WindDirection.x, WindDirection.y) * (delta * 0.01) * (WindSpeed * 0.005)
+	#Mat.set_shader_parameter("offset", CurrentOffset + CurrentCamOffset)
+	N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * delta * (WindSpeed * 0.005)
+	N.noise.fractal_gain = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * (delta * 0.1), -10, 10)
+	N.noise.fractal_lacunarity = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * (delta * 0.1), 2, 4)
 	
 	var L = GetLightAmm()
 	
@@ -104,9 +104,9 @@ func Update(delta: float) -> void:
 			g.UpdateLight(L, viz)
 		g.RephreshVisRange()
 
-#func NoiseChanged() -> void:
-	#tx = N.get_image()
-	#tx.resize(TEXTURE_SIZE, TEXTURE_SIZE, Image.INTERPOLATE_NEAREST)
+func NoiseChanged() -> void:
+	tx = N.get_image()
+	tx.resize(TEXTURE_SIZE, TEXTURE_SIZE, Image.INTERPOLATE_NEAREST)
 
 static func GetWindVelocity() -> Vector2:
 	return WindDirection * (WindSpeed / (MAX_WIND_SPEED / 2.0))
@@ -124,7 +124,7 @@ static func GetLightAmm() -> float:
 	return LighAmm.sample(t)
 
 func get_color_at_global_position(pos: Vector2) -> Color:
-	var RoundedPos = Vector2i((pos - global_position) + ((CurrentCamOffset + CurrentOffset) * 6000))
+	var RoundedPos = Vector2i((pos - global_position) + ((CurrentCamOffset) * 6000))
 
 	var x = Helper.normalize_value(RoundedPos.x, 0, 48000)
 	var y = Helper.normalize_value(RoundedPos.y, 0, 48000)
@@ -132,7 +132,7 @@ func get_color_at_global_position(pos: Vector2) -> Color:
 		
 	var col = tx.get_pixel(WrapedPos.x, WrapedPos.y)
 	
-	return col * G.sample(col.r)
+	return col
 
 func GetSaveData() -> SaveData:
 	var Sav = SaveData.new()

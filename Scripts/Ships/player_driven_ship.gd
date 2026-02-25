@@ -34,13 +34,13 @@ func GetMissileAimTrajectory() -> float:
 
 func EvaluateRadarrPoint() -> void:
 	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]
-	#for g in 2:
-	var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 5.0)
-	var MaxPoint = Dir * CurrentVisualRange
-	var GlobalPoint = global_position + MaxPoint
-	var EvaluatedPoint = TopographyMap.Instance.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
-	RadarCircle[CurrentRadarPointToEvaluate] = EvaluatedPoint - global_position
-	CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate + 1, 0, RadarCircle.size())
+	for g in 2:
+		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 5.0)
+		var MaxPoint = Dir * CurrentVisualRange
+		var GlobalPoint = global_position + MaxPoint
+		var EvaluatedPoint = TopographyMap.Instance.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
+		RadarCircle[CurrentRadarPointToEvaluate] = EvaluatedPoint - global_position
+		CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate + 1, 0, RadarCircle.size())
 
 func UpdateVizRange(rang : float):
 	super(rang)
@@ -128,10 +128,10 @@ func Update(delta: float) -> void:
 	
 	
 	EvaluateRadarTargets()
-	if (GetShipSpeed() > 0):
+	if (GetShipSpeed() == 0):
 		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)
 	else:
-		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position) + 100
+		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position) + 200
 	_HandleLanding(delta)
 	
 	if (TargetShip != null):

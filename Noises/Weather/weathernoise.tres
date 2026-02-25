@@ -4,8 +4,7 @@
 [ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Noises/Weather/StormNoise.tres" id="2_h5vfm"]
 
 [resource]
-width = 2048
-height = 2048
+generate_mipmaps = false
 noise = ExtResource("2_h5vfm")
 color_ramp = ExtResource("1_n0i4l")
 seamless = true

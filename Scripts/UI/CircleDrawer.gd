@@ -126,7 +126,7 @@ func _draw():
 			#draw_polyline(poly, Col, 1 / CamZoom, true)
 	
 	for g in Lines:
-		draw_multiline(g, Col, 1 / CamZoom, true)
+		draw_multiline(g, Col, 1 / CamZoom, false)
 	
 func FromPolylineToLine(Polyline : PackedVector2Array) -> PackedVector2Array:
 	var Line : PackedVector2Array
@@ -139,25 +139,28 @@ func FromPolylineToLine(Polyline : PackedVector2Array) -> PackedVector2Array:
 func DrawRuller() -> void:
 	if ControlledShip == null:
 		return
+	
+	var LineW = 2 / CamZoom
+	
 	if (ControlledShip.ShowFuelRange):
 		var FRange = ControlledShip.GetFuelRange()
 		var LineOrigin = ControlledShipPos + Vector2(max(0, FRange - 50), 0).rotated(ControlledShip.rotation)
 		var LineEnd = ControlledShipPos + Vector2(FRange, 0).rotated(ControlledShip.rotation)
-		draw_circle(ControlledShipPos, FRange, Color(0.3, 0.7, 0.915), false, 1.0 / CamZoom, true)
-		draw_line(LineOrigin, LineEnd, Color(0.3, 0.7, 0.915), 1.0 / CamZoom, true)
+		draw_circle(ControlledShipPos, FRange, Color(0.3, 0.7, 0.915), false, LineW, false)
+		draw_line(LineOrigin, LineEnd, Color(0.3, 0.7, 0.915), LineW, false)
 	
 	if (ControlledShip.HasArmedMissile()):
 		var MisRange = ControlledShip.GetArmedMissile().Distance
 		var AimTrajectory = ControlledShip.GetMissileAimTrajectory()
 		var LineOrigin = ControlledShipPos + Vector2(50, 0).rotated(AimTrajectory)
 		var LineEnd = ControlledShipPos + Vector2(MisRange, 0).rotated(AimTrajectory)
-		draw_line(LineOrigin, LineEnd, Color("e8472a"), 2.0 / CamZoom)
+		draw_line(LineOrigin, LineEnd, Color("e8472a"), LineW, false)
 		
 		#$MissileLine.set_point_position(1, Vector2(Mis.Distance, 0))
 		#$MissileLine.set_point_position(0, Vector2(50, 0))
 		#$MissileLine.visible = true
 	
-	var LineW = 0.5 / CamZoom
+	
 	var vizrange = ControlledShip.GetBiggestVisRange()
 	if not ControlledShip.RadarWorking:
 		vizrange = 110
@@ -165,7 +168,7 @@ func DrawRuller() -> void:
 		vizrange *= WeatherManage.GetInstance().GetVisibilityInPosition(ControlledShipPos, WeatherManage.GetLightAmm())
 
 	for g in 3:
-		draw_circle(ControlledShipPos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, true)
+		draw_circle(ControlledShipPos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, false)
 
 	var Next = rotation_degrees
 	var Num = 90
@@ -180,7 +183,7 @@ func DrawRuller() -> void:
 		if Num == 0:
 			Num = 360
 
-	draw_multiline(Lines, Color(100, 100, 100, 0.3), LineW, true)
+	draw_multiline(Lines, Color(100, 100, 100, 0.3), LineW, false)
 
 # Optionally: provide a helper to generate circle polygon points
 func get_circle_polygon(center: Vector2, rad : float, samples:int = 100) -> PackedVector2Array:

@@ -199,7 +199,7 @@ func CamPosChanged(NewPos : Vector2) -> void:
 
 func CamZoomChanged(NewZoom : float) -> void:
 	CamZoom = NewZoom
-	WorldParent.visible = NewZoom > 1.5
+	WorldParent.visible = NewZoom > 0.5
 
 static func GetCameraPosition() -> Vector2:
 	return CamPos

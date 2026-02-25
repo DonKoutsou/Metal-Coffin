@@ -452,7 +452,7 @@ func OnCardSelected(C : Card) -> bool:
 	print("{0} has been removed from {1}'s hand.".format([C.CStats.GetCardName(), Ship.Name]))
 	deck.Hand.erase(C.CStats)
 	
-	if (!IsShipFriendly(Ship) and C.CStats.OnPerformModule != null):
+	if (C.CStats.OnPerformModule != null and C.CStats.OnPerformModule is not OffensiveCardModule):
 		var Action : CardStats
 
 		Action = C.CStats
@@ -699,8 +699,8 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 					UpdateEnergy(Ship, 0, false)
 					SelectedAction.OnPerformModule = NewMod
 					
-				await DoCardSelectAnimation(SelectedAction, Ship, Ship.ShipViz)
-				
+				DoCardSelectAnimation(SelectedAction, Ship, Ship.ShipViz)
+				await Helper.Instance.wait(0.4)
 				var ShipAction = CardFightAction.new()
 				ShipAction.Action = SelectedAction
 
@@ -1130,6 +1130,12 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, Targets : Array
 	if (C.OnPerformModule != null and C.OnPerformModule is OffensiveCardModule):
 	#for Mod in C.OnPerformModule.size():
 		#var Data : AnimationData
+		if (C.OnPerformModule is EnergyOffensiveCardModule):
+			var NewMod = C.OnPerformModule.duplicate()
+			NewMod.StoredEnergy = Performer.Energy
+			UpdateEnergy(Performer, 0, true)
+			C.OnPerformModule = NewMod
+
 		var targets = await HandleTargets(C.OnPerformModule, Performer)
 		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
 		

@@ -42,7 +42,7 @@ void fragment()
 	//vec2 screenuv = (SCREEN_UV  + offset) * z;
 	// Map the dither texture onto the screen pixels with tiling and repeating
 	vec2 dither_size = vec2(textureSize(dither_texture, 0));
-	vec2 dither_uv = mod(uv * DitherRes, dither_size) / dither_size;
+	vec2 dither_uv = mod((SCREEN_UV + offset) * DitherRes, dither_size) / dither_size;
 	
 	// Sample the screen pixel
 	vec4 n = texture(NoiseTexture2, uv);

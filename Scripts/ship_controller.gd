@@ -124,10 +124,11 @@ func SetControlledShipSpeed(value: float) -> void:
 		ControlledShip.AccelerationChanged(value, false)
 
 func SetControlledShipElevation(value: float) -> void:
+	var newalt = Helper.mapvalue(value, -640, 10000)
 	if (ControlledShip.Docked):
-		ControlledShip.Command.SetTargetAltitude(value * 10000)
+		ControlledShip.Command.SetTargetAltitude(newalt)
 	else:
-		ControlledShip.SetTargetAltitude(value * 10000)
+		ControlledShip.SetTargetAltitude(newalt)
 	
 		
 func OnControlledShipSpeedChanged(NewSpeed : float) -> void:

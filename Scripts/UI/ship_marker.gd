@@ -197,6 +197,8 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 	if (AltitudeChangeCooldown == 0 and LandingNotif != null):
 		LandingNotif.queue_free()
 	
+	
+	
 	if (CurrentShip is HostileShip):
 		if (CurrentShip.Docked):
 			visible = false

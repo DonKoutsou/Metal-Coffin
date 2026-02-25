@@ -4,8 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="2_75yjj"]
 [ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="3_r8gdu"]
 [ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/GlobalManagers/Tutorial/TutorialFocusArea.gdshader" id="4_dnq2d"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_pv2wc"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="5_75yjj"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="5_pv2wc"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="6_r8gdu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ybrb6"]
@@ -91,7 +91,7 @@ alignment = 1
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=952852243]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_pv2wc")
+theme_override_styles/panel = ExtResource("5_pv2wc")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1455678652]
 layout_mode = 2

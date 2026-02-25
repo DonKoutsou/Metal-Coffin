@@ -4,21 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
 [ext_resource type="AudioStream" uid="uid://cnetiaqcwgcdv" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="3_625fb"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjj15"]
-bg_color = Color(0, 0, 0, 1)
-draw_center = false
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 150
-corner_radius_top_right = 150
-corner_radius_bottom_right = 150
-corner_radius_bottom_left = 150
-corner_detail = 4
-anti_aliasing = false
-
 [sub_resource type="Animation" id="Animation_pxthd"]
 length = 0.001
 tracks/0/type = "value"
@@ -246,7 +231,7 @@ corner_radius_bottom_left = 1024
 corner_detail = 20
 anti_aliasing = false
 
-[node name="SpotMarker" type="Control" unique_id=1554798351 node_paths=PackedStringArray("SpotNameLabel", "SpotDropPosition")]
+[node name="SpotMarker" type="Control" unique_id=1554798351 node_paths=PackedStringArray("SpotDropPosition", "Spacer", "DetailContainer", "SpotNameLabel", "FuelLabel", "Anim")]
 use_parent_material = true
 layout_mode = 3
 anchors_preset = 8
@@ -254,38 +239,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = -20.0
-offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_5x46s")
-SpotNameLabel = NodePath("VBoxContainer/TextureRect2")
-SpotDropPosition = NodePath("VBoxContainer/HBoxContainer")
+SpotDropPosition = NodePath("DetailContainer/HBoxContainer")
 NofiticationScene = ExtResource("2_b0564")
+Spacer = NodePath("")
 BeepSound = ExtResource("3_625fb")
-
-[node name="AnalyzeButton" type="Panel" parent="." unique_id=347315360]
-modulate = Color(1, 1, 1, 0.3)
-show_behind_parent = true
-texture_filter = 4
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = -56.0
-offset_right = 56.0
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_gjj15")
+DetailContainer = NodePath("DetailContainer")
+SpotNameLabel = NodePath("DetailContainer/SotNameLabel")
+FuelLabel = NodePath("Label")
+Anim = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=880244481]
 libraries/ = SubResource("AnimationLibrary_4iew2")
@@ -310,26 +275,36 @@ pivot_offset = Vector2(20, 20)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ey58")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=226659585]
+[node name="DetailContainer" type="VBoxContainer" parent="." unique_id=226659585]
 use_parent_material = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -31.5
-offset_top = -115.0
+offset_top = -21.0
 offset_right = 31.5
-offset_bottom = -82.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 1)
 mouse_filter = 2
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1105010127]
+[node name="HBoxContainer" type="HBoxContainer" parent="DetailContainer" unique_id=1105010127]
 use_parent_material = true
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="TextureRect2" type="Label" parent="VBoxContainer" unique_id=1665220381]
+[node name="SotNameLabel" type="Label" parent="DetailContainer" unique_id=1665220381]
 modulate = Color(1, 1, 1, 0.3)
 use_parent_material = true
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
@@ -340,28 +315,50 @@ vertical_alignment = 1
 justification_flags = 227
 uppercase = true
 
-[node name="VisibilityNotif" type="VisibleOnScreenNotifier2D" parent="." unique_id=1569909601]
-position = Vector2(0, -16.5)
-scale = Vector2(7, 8.65)
-
 [node name="Label" type="Label" parent="." unique_id=2031343539]
 use_parent_material = true
+custom_minimum_size = Vector2(0, 38)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_top = 76.0
-offset_right = 20.0
-offset_bottom = 97.0
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = 28.0
+offset_right = 31.5
+offset_bottom = 66.0
 grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.051, 0.051, 0.051, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 uppercase = true
 
-[connection signal="gui_input" from="AnalyzeButton" to="." method="_on_analyze_button_gui_input"]
+[node name="VisibilityNotif" type="VisibleOnScreenNotifier2D" parent="." unique_id=1569909601]
+scale = Vector2(7, 8.65)
+rect = Rect2(-10, -10, 20, 22.947975)
+
+[node name="Control" type="Control" parent="." unique_id=226844935]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
 [connection signal="screen_entered" from="VisibilityNotif" to="." method="EnteredScreen"]
 [connection signal="screen_exited" from="VisibilityNotif" to="." method="ExitedScreen"]
+[connection signal="gui_input" from="Control" to="." method="_on_analyze_button_gui_input"]

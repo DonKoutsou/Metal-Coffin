@@ -1,10 +1,10 @@
 [gd_resource type="NoiseTexture2D" format=3 uid="uid://0k2jw1bl3ndm"]
 
+[ext_resource type="Gradient" uid="uid://dk2pbuydxbbg5" path="res://Noises/Weather/Weather_Data_Gradient.tres" id="1_x8r8r"]
 [ext_resource type="FastNoiseLite" uid="uid://rctm40njxk5b" path="res://Noises/Weather/StormNoise.tres" id="2_70fsy"]
 
 [resource]
-width = 2048
-height = 2048
 generate_mipmaps = false
 noise = ExtResource("2_70fsy")
+color_ramp = ExtResource("1_x8r8r")
 seamless = true

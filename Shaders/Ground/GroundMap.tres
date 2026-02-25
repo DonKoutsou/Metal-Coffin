@@ -14,4 +14,4 @@ shader_parameter/levels = 8
 shader_parameter/threshold = 1.0
 shader_parameter/colors = 8
 shader_parameter/dither_texture = ExtResource("3_s0sa5")
-shader_parameter/DitherRes = Vector2(1000, 1000)
+shader_parameter/DitherRes = Vector2(100, 100)
