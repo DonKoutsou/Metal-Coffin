@@ -433,7 +433,6 @@ func OnCardSelected(C : Card) -> bool:
 	if (Shuffling):
 		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
 		return false
-
 	
 	var Ship = GetCurrentShip()
 	
@@ -441,9 +440,7 @@ func OnCardSelected(C : Card) -> bool:
 		ExternalUI.GetEnergyBar().NotifyNotEnough()
 		PopUpManager.GetInstance().DoFadeNotif("Not enough energy")
 		return false
-	
-	
-	
+
 	PlayerPerformingMove = true
 	
 	var deck = GetShipDeck(Ship)
@@ -451,51 +448,36 @@ func OnCardSelected(C : Card) -> bool:
 	UpdateEnergy(Ship, Ship.Energy - C.GetCost(), true)
 	print("{0} has been removed from {1}'s hand.".format([C.CStats.GetCardName(), Ship.Name]))
 	deck.Hand.erase(C.CStats)
-	
-	if (C.CStats.OnPerformModule != null and C.CStats.OnPerformModule is not OffensiveCardModule):
-		var Action : CardStats
 
-		Action = C.CStats
-		
-		var c = CardScene.instantiate() as Card
-		
-		var ShipAction = CardFightAction.new()
-		ShipAction.Action = Action
-		
-		var Mod = Action.OnPerformModule
-		
-		var CardPosition = C.global_position
-		
-		if (Mod is OffensiveCardModule):
-			if (Mod is EnergyOffensiveCardModule):
-				var NewMod = Mod.duplicate()
-				NewMod.StoredEnergy = Ship.Energy
-				UpdateEnergy(Ship, 0, true)
-				Action.OnPerformModule = NewMod
+	if (C.CStats.OnPerformModule != null):
+		if (C.CStats.OnPerformModule is not OffensiveCardModule):
+			var Action : CardStats
+
+			Action = C.CStats
 			
-			var targets = await HandleTargets(Mod, Ship)
-			for g in targets:
-				var TargetViz = g.ShipViz
-				if (TargetViz == null):
-					continue
-				c.TargetLocs.append(TargetViz.GetShipPos())
-			ShipAction.Targets.append_array(targets)
-		
-		
-		c.SetCardBattleStats(Ship, Action)
-		
-		c.connect("OnCardPressed", RemoveCard)
-		
-		SelectedCardPlecement.add_child(c)
+			var c = CardScene.instantiate() as Card
+			
+			var ShipAction = CardFightAction.new()
+			ShipAction.Action = Action
+			
+			#var Mod = Action.OnPerformModule
+			
+			var CardPosition = C.global_position
+			
+			c.SetCardBattleStats(Ship, Action)
+			
+			c.connect("OnCardPressed", RemoveCard)
+			
+			SelectedCardPlecement.add_child(c)
 
-		Ship.ShipViz.ActionPicked(Action)
-		ActionList.AddAction(Ship, ShipAction)
-		
-		await DoCardPlecementAnimation(Ship, c, CardPosition)
+			Ship.ShipViz.ActionPicked(Action)
+			ActionList.AddAction(Ship, ShipAction)
+			
+			await DoCardPlecementAnimation(Ship, c, CardPosition)
 		#call_deferred("DoCardPlecementAnimation", Ship, c, CardPosition)
 		C.get_parent().queue_free()
 
-	else:
+	if (C.CStats.OnUseModules.size() > 0):
 		var pos = C.global_position
 		var parent = C.get_parent()
 		parent.remove_child(C)
@@ -522,12 +504,8 @@ func OnCardSelected(C : Card) -> bool:
 			if (g.IsSame(C.CStats)):
 				Ship.Cards.erase(g)
 				break
-	
-	if (IsShipFriendly(Ship)):
-		await HandleModulesPl(Ship, C.CStats)
-	else:
-		await HandleModules(Ship, C.CStats)
-	
+
+	await HandleModulesPl(Ship, C.CStats)
 	
 	PlayerPerformingMove = false
 
